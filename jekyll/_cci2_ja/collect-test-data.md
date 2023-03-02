@@ -80,7 +80,9 @@ steps:
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
 
-For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-usage) guide.
+
+ストレージの使用量の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)に関するガイドを参照してください。
+
 
 ## テストインサイト
 {: #test-insights }

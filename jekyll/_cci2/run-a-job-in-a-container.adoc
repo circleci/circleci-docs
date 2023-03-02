@@ -26,14 +26,14 @@ You will need to have link:https://www.docker.com/products/docker-desktop[Docker
 The CLI allows you to run a single job from CircleCI on your desktop using Docker with the following command:
 
 ```shell
-$ circleci local execute --job JOB_NAME
+$ circleci local execute JOB_NAME
 ```
 
 If your CircleCI configuration is set to version 2.1 or greater, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
 
 ```shell
 circleci config process .circleci/config.yml > process.yml
-circleci local execute -c process.yml --job JOB_NAME
+circleci local execute -c process.yml JOB_NAME
 ```
 
 The following commands will run an example build on your local machine on one of CircleCI's demo applications:
@@ -41,7 +41,7 @@ The following commands will run an example build on your local machine on one of
 ```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
 cd circleci-demo-go
-circleci local execute --job build
+circleci local execute build
 ```
 
 The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and Postgres Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.

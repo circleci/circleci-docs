@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -100,8 +100,6 @@ The following AWS instructions are for:
 
 You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an Identity and Access Management (IAM) identity provider, and an IAM role in AWS (this is a one-time configuration).
 
-NOTE: At this time, CircleCI's built-in AWS Elastic Container Registry (ECR) authentication for pulling images does not support OIDC.
-
 Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. You will need your CircleCI Organization ID, which you can find by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app]. Copy your Organization ID for the next step.
 
 When asked for the **Provider URL**, enter: `\https://oidc.circleci.com/org/ORGANIZATION_ID`, where `ORGANIZATION_ID` is the ID of your CircleCI organization. Provide the same CircleCI Organization ID for the **Audience**.
@@ -115,44 +113,48 @@ For the trusted entity, select **Web Identity**, then choose the identity provid
 [#adding-aws-to-the-circleci-configuration-file]
 ==== Adding AWS to the CircleCI configuration file
 
-Now you are ready to choose the CircleCI jobs in your workflow that you want to receive an OpenID Connect token. Since the OpenID Connect token is only available to jobs that use at least one <<contexts#,context>>, make sure each of the jobs you want to receive an OIDC token uses a context (the context may have no environment variables). 
+Now that you have set up an IAM role, you are ready to write a CircleCI job that authenticates with AWS using OIDC. This is accomplished by using CircleCI’s link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC. Orbs are reusable packages of YAML configuration that condense repeated pieces of configuration into a single line of code. In this case, the AWS CLI orb enables you to generate a temporary session token, AWS Access Key ID, and AWS secret access key with a single command in your configuration.
 
-In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html[AssumeRoleWithWebIdentity]. Have the following information ready:
+First, choose the CircleCI jobs in your workflow where you want to use OIDC. Make sure each of these jobs use a valid CircleCI context. The OpenID Connect token is available only to jobs that use at least one context. The context may contain no environment variables.
 
-* AWS region that you want to operate in
-* ARN of the IAM role that you created earlier
+In your `.circleci/config`, be sure to import the `aws-cli` orb. Next, run the `aws-cli/setup` command in your job before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you have created in the step above along with your `aws-region`. 
 
-Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws --no-cli-pager sts get-caller-identity`) with AWS, demonstrating that authentication works. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
+You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
+
+Additionally, if you do not provide a `role-session-name` or `session-duration`, their default values are `${CIRCLE_JOB}` (your job’s name) and 3600 seconds respectively.
+
+Below is an example of a complete configuration with a job that configures a profile with OIDC and uses it to log into AWS ECR. The same profile can be used to run other AWS commands, such as S3, EKS, ECS, and more, as long as the `role-arn` has been configured with appropriate permissions.
 
 ```yaml
-version: 2.1
-
+version: '2.1'
+orbs:
+  # import CircleCI's aws-cli orb
+  aws-cli: circleci/aws-cli@3.1
 jobs:
-  deploy:
+  aws-example:
     docker:
-      - image: amazon/aws-cli
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    environment:
-      AWS_DEFAULT_REGION: YOUR_AWS_REGION
-      AWS_ROLE_ARN: YOUR_ROLE_ARN
+      - image: cimg/aws:2022.06
     steps:
+      - checkout
+      # run the aws-cli/setup command from the orb
+      - aws-cli/setup:
+          role-arn: 'arn:aws:iam::123456789012:role/OIDC-ROLE'
+          aws-region: "us-west-1"
+          # optional parameters
+          profile-name: "OIDC-PROFILE"
+          role-session-name: "example-session"
+          session-duration: 1800
       - run:
-          name: authenticate-and-interact
-          command: |
-            # use the OpenID Connect token to obtain AWS credentials
-            read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN \<<< \
-              $(aws sts assume-role-with-web-identity \
-               --role-arn ${AWS_ROLE_ARN} \
-               --role-session-name "CircleCI-${CIRCLE_WORKFLOW_ID}-${CIRCLE_JOB}" \
-               --web-identity-token $CIRCLE_OIDC_TOKEN \
-               --duration-seconds 3600 \
-               --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
-               --output text)
-            export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
-            # interact with AWS
-            aws --no-cli-pager sts get-caller-identity
+        name: Log-into-AWS-ECR
+        command: |
+          # must use same profile specified in the step above
+          aws ecr get-login-password --profile "OIDC-PROFILE"
+workflows:
+  OIDC-with-AWS:
+    jobs:
+      - aws-example:
+          # must use a valid CircleCI context
+          context: aws
 ```
 
 [#advanced-usage]
@@ -305,7 +307,7 @@ You will also need to add the following environment variables to a <<contexts#,c
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
 
 ```yaml
 version: 2.1
@@ -317,22 +319,22 @@ commands:
   gcp-oidc-generate-cred-config-file:
     description: "Authenticate with GCP using a CircleCI OIDC token."
     parameters:
-      project_id: 
+      project_id:
         type: env_var_name
         default: GCP_PROJECT_ID
-      workload_identity_pool_id: 
+      workload_identity_pool_id:
         type: env_var_name
         default: GCP_WIP_ID
-      workload_identity_pool_provider_id: 
+      workload_identity_pool_provider_id:
         type: env_var_name
         default: GCP_WIP_PROVIDER_ID
-      service_account_email: 
+      service_account_email:
         type: env_var_name
         default: GCP_SERVICE_ACCOUNT_EMAIL
-      gcp_cred_config_file_path: 
+      gcp_cred_config_file_path:
         type: string
         default: /home/circleci/gcp_cred_config.json
-      oidc_token_file_path: 
+      oidc_token_file_path:
         type: string
         default: /home/circleci/oidc_token.json
     steps:
@@ -350,7 +352,7 @@ commands:
   gcp-oidc-authenticate:
     description: "Authenticate with GCP using a GCP credentials file."
     parameters:
-      gcp_cred_config_file_path: 
+      gcp_cred_config_file_path:
         type: string
         default: /home/circleci/gcp_cred_config.json
     steps:
@@ -376,10 +378,10 @@ jobs:
 
 workflows:
   main:
-    jobs: 
+    jobs:
       - gcp-oidc-defaults:
           name: Generate Creds File and Authenticate
-          context: 
+          context:
           - gcp-oidc-dev
 ```
 

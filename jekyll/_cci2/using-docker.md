@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Using the Docker execution environment"
 description: "Learn how to configure a your jobs to run in the Docker execution environment"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -137,7 +137,7 @@ Capability | `docker` | `machine`
 
 <sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
 
-<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
+<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
 
 For more information on `machine`, see the next section below.
 

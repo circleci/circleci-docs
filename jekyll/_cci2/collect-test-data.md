@@ -80,7 +80,7 @@ Make sure that your `path` value is not a hidden folder. For example, `.my_hidde
 ## Viewing storage usage
 {: #viewing-storage-usage }
 
-For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-use) guide.
+For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-usage) guide.
 
 ## Test Insights
 {: #test-insights }
@@ -622,10 +622,30 @@ workflows:
           path: ./src/tests
 ```
 
+### GoogleTest
+{: #googletest }
+
+[GoogleTest](https://github.com/google/googletest) provides an XML option for its output flag, which will generate a JUnit XML report that can be used to upload and view test results on CircleCI.
+
+```yml
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Execute Tests
+          command: |
+            cd build
+            ./tests --gtest_output=XML
+      - store_test_results:
+          path: build
+```
+You can see a full example on this [third party resource](https://levelup.gitconnected.com/how-to-combine-c-cmake-googletest-circleci-docker-and-why-e02d76c060a3).
+
 ### Xcode
 {: #xcode }
 
 Xcode generates test results in a plist (property list) file format. It is possible to convert a plist file format into an XML format that can be uploaded to CircleCI using the `xsltproc` command. Follow the steps in this [third party resource](https://medium.com/@warchimede/convert-xcode-plist-test-reports-to-junit-xml-6f0aa8c3fa58) to convert the file and then use `store_test_results` to upload the results to CircleCI.
+
 
 ## API
 {: #api }
