@@ -127,33 +127,33 @@ Below is an example of a complete configuration with a job that configures a pro
 ```yaml
 version: '2.1'
 orbs:
- # import CircleCI's aws-cli orb
- aws-cli: circleci/aws-cli@3.1
+  # import CircleCI's aws-cli orb
+  aws-cli: circleci/aws-cli@3.1
 jobs:
- aws-example:
-   docker:
-     - image: cimg/aws:2022.06
-   steps:
-     - checkout
-     # run the aws-cli/setup command from the orb
-     - aws-cli/setup:
-         role-arn: 'arn:aws:iam::123456789012:role/OIDC-ROLE'
-         aws-region: "us-west-1"
-         # optional parameters
-         profile-name: "OIDC-PROFILE"
-         role-session-name: “example-session”
-         session-duration: 1800
-     - run:
-       name: Log-into-AWS-ECR
-       command: |
-         # must use same profile specified in the step above
-         aws ecr get-login-password --profile "OIDC-PROFILE"
+  aws-example:
+    docker:
+      - image: cimg/aws:2022.06
+    steps:
+      - checkout
+      # run the aws-cli/setup command from the orb
+      - aws-cli/setup:
+          role-arn: 'arn:aws:iam::123456789012:role/OIDC-ROLE'
+          aws-region: "us-west-1"
+          # optional parameters
+          profile-name: "OIDC-PROFILE"
+          role-session-name: "example-session"
+          session-duration: 1800
+      - run:
+        name: Log-into-AWS-ECR
+        command: |
+          # must use same profile specified in the step above
+          aws ecr get-login-password --profile "OIDC-PROFILE"
 workflows:
- OIDC-with-AWS:
-   jobs:
-     - aws-example:
-         # must use a valid CircleCI context
-         context: aws
+  OIDC-with-AWS:
+    jobs:
+      - aws-example:
+          # must use a valid CircleCI context
+          context: aws
 ```
 
 [#advanced-usage]
