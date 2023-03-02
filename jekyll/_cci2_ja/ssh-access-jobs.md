@@ -82,7 +82,9 @@ $ logged in as :username.
 ### 正しいユーザーで認証を行っているかの確認
 {: #ensure-authenticating-as-the-correct-user }
 
-アカウントを複数持っている場合は、正しいアカウントで認証を行っているか、再度確認してください。 In order to SSH into a CircleCI job, the username must be one which has access to the project being built.
+The user that triggered the rerun is the user that is required to authenticate. You will need to make sure that your username is in the 'Enable SSH' step.
+
+アカウントを複数持っている場合は、正しいアカウントで認証を行っているか、再度確認してください。 CircleCI ビルドに SSH 接続するには、ビルドするプロジェクトにアクセスできるユーザー名を使用しなければなりません。
 
 If you are authenticating as the wrong user, you can try to resolve this by offering a different SSH key with `ssh -i`. See the next section for guidance on confirming which key is being offered.
 
