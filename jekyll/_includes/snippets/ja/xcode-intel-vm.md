@@ -12,5 +12,5 @@
  | `11.7.0` | Xcode 11.7 (11E801a)  | 10.15.5      | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html)    | [○](https://discuss.circleci.com/t/xcode-11-7-released/37312)                     |
  {: class="table table-striped"}
 
- The `medium` and `large` resource classes are being deprecated on October 2, 2023. Xcode v14.2 is the latest version that will be supported by these macOS resources. See our [announcement](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891) for more details.
+ `medium`および`large`リソースクラスは、2023年10月2日に非推奨になります。 Xcode v14.2は、macOSリソースでサポートされる最新バージョンです。 詳しくは[お知らせ](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891)をご覧ください。
  {: class="alert alert-warning"}
