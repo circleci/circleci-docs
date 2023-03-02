@@ -384,7 +384,7 @@ The first resource class has a node selector to ensure it is scheduled to nodes 
 [#cost-and-availability]
 == Cost and availability
 
-Container runner jobs are eligible for <<persist-data#managing-network-and-storage-use,Runner Network Egress>>. This is in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
+Container runner jobs are eligible for <<persist-data#managing-network-and-storage-usage,Runner Network Egress>>. This is in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
 
 The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. Final pricing and plan availability will be announced closer to the general availability of the offering.
 

@@ -24,7 +24,7 @@ This can be done by passing a `parameters` key in the JSON packet of the `POST` 
 
 The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`. 
 
-NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.
+NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be xref:reusing-config#using-the-parameters-declaration[declared in the configuration file].
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -37,7 +37,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 
 IMPORTANT: Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets).
 
-Read more about pipeline parameters on the <<pipeline-variables#,Pipeline values and parameters>> page.
+Read more about pipeline parameters on the xref:pipeline-variables#[Pipeline values and parameters] page.
 
 [#api-v1]
 == API v1
@@ -55,7 +55,7 @@ It is possible to include `build_parameters` by sending a JSON body with `Conten
 }
 ```
 
-Using `curl` (`$CIRCLE_TOKEN` is a <<managing-api-tokens#creating-a-personal-api-token,personal API token>>):
+Using `curl` (`$CIRCLE_TOKEN` is a xref:managing-api-tokens#creating-a-personal-api-token[personal API token]):
 
 ```shell
 curl \
@@ -116,6 +116,6 @@ IMPORTANT: Build parameters are not treated as sensitive data and must not be us
 
 == See also
 
-- <<env-vars,Introduction to environment variables>>
-- <<set-environment-variable,How to set environment variables>>
-- <<variables#built-in-environment-variables,Project values and variables>>
+- xref:env-vars[Introduction to environment variables]
+- xref:set-environment-variable[How to set environment variables]
+- xref:variables#built-in-environment-variables[Project values and variables]
