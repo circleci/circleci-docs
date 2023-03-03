@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: Add additional SSH keys to CircleCI
-short-title: Add an SSH Key
-description: How to add additional SSH keys to CircleCI
+title: CircleCI に SSH キーを登録する
+short-title: CircleCI に SSH キーを登録する
+description: CircleCI に SSH キーを登録する方法
 order: 20
 contentTags:
   platform:
@@ -17,26 +17,26 @@ contentTags:
 ## 概要
 {: #overview }
 
-If you are looking to set up an SSH key in order to check out code from GitHub or Bitbucket, refer to the [GitHub](/docs/github-integration/#enable-your-project-to-check-out-additional-private-repositories) or [Bitbucket](/docs/bitbucket-integration/#enable-your-project-to-check-out-additional-private-repositories) integration pages.
+GitHubやBitbucketからコードをチェックアウトするためにSSHキーを設定したい場合は、[GitHub](/docs/github-integration/#enable-your-project-to-check-out-additional-private-repositories)または[Bitbucket](/docs/bitbucket-integration/#enable-your-project-to-check-out-additional-private-repositories)の連携ページを参照してください。
 
-If you are using GitLab as your VCS, or if you need additional SSH keys to access other services, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
+GitLabを使用している場合、または他のサービスにアクセスするために追加のSSHキーが必要な場合は、使用しているCircleCIのバージョンに応じて以下の手順に従って、プロジェクトにSSHキーを追加してください。
 
-You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
+**注:** SSH キーを登録するにはパブリックキーを`~/.ssh/authorized_keys` に登録する必要がある場合があります・
 {: class="alert alert-info" }
 
-## Steps to add additional SSH keys
+## SSHキーを追加する手順
 {: #steps-to-add-additional-ssh-keys }
 
-Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase. The below examples are for macOS. See [GitHub](https://help.github.com/articlesgenerating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) or [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/) documentation for additional details on creating SSH keys.
+注: CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。 以下の例はmacOSの場合です。 SSHキーの作成に関する詳細は、[GitHub](https://help.github.com/articlesgenerating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) または [Bitbucket](https://support.atlassian.com/ja/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/) のドキュメントを参照してください。
 
-### CircleCI cloud or server 3.x / server 4.x
+### CircleCI Cloud または Server 3.x / Server 4.x
 {: #circleci-cloud-or-server-3-x-4-x }
 
 1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳細については、[安全なシェルスクリプト (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
+2. CircleCI アプリケーションで、 **[Project Settings (プロジェクトの設定)]** ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
 
-3. On the **Project Settings** page, click on **SSH Keys**.
+3. **[Project Settings (プロジェクトの設定)]** で、 **[SSH Keys (SSH キー)]** をクリックします (画面左側のメニュー)。
 
 4. スクロールし、 **[Additional SSH Keys (追加 SSH キー)]** のセクションに移動します。
 
@@ -65,12 +65,12 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 
 6. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-## Add SSH Keys to a Job
+## ジョブに SSH キーを登録する
 {: #add-ssh-keys-to-a-job }
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH キーに自動的に署名します。 ただし、コンテナに実際にキーを登録するには、`add_ssh_keys` キーを**必ず使用してください**。
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` [special step](/docs/configuration-reference/#add_ssh_keys) within the appropriate [job](/docs/jobs-steps/) in your configuration file.
+SSH キーをコンテナに登録するには、 [特別なステップ](/docs/configuration-reference/#add_ssh_keys) である `add_ssh_keys` を設定ファイルの適切な [ジョブ]({}/ja/jobs-steps/) の中で使用します。
 
 セルフホストランナーの場合、システムに `ssh-agent`  があり`add_ssh_keys` ステップが正常に使用できることを確認して下さい。 SSH キーは、`$HOME/.ssh/id_rsa_<fingerprint>`に記述されます。`$HOME`は、ジョブを実行するように設定されたユーザーのホームディレクトリで、`<fingerprint>` はこのキーのフィンガープリントです。 ホストエントリーは、キーを使用するための関連する `IdentityFile` オプションと一緒に `$HOME/.ssh/config` にも追加されます。
 {: class="alert alert-info"}
@@ -85,7 +85,7 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
+**注:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録されたキーと一致している必要があります。 CircleCI環境変数にある Fingerprints は失敗します。
 {: class="alert alert-info" }
 
 ## ホスト名を指定せずに複数のキーを登録する
