@@ -95,24 +95,24 @@ link:https://app.circleci.com/[CircleCI Web アプリ]で、Bitbucket に接続�
 1. ブラウザーの検証ツールで、**Network** タブを選択し、コンソールをクリアします。
 1. **Add User Key** をクリックし、**Confirm User** をクリックして、このモーダルでユーザーがマシンユーザーであることを確認します。 _必須ではありませんが、マシンユーザーを作成することを強く推奨します_。
 1. フィルターボックスで、checkout と入力します。 こうすることで、`checkout-key` を見つけやすくなります。 201 ステータスの `checkout-key` をクリックして **Preview** タブを選択します。 `public_key` を引用符を含めずにクリップボードにコピーします。
-1. Add the key to Bitbucket by following Bitbucket's guide on link:https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
+1. Bitbucket の link:https://support.atlassian.com/ja/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[SSH キーの設定方法] の説明に従って、Bitbucket にキーを追加します。
 
 この SSH ユーザーキーには "PREFERRED" のラベルが表示されます。 プロジェクトにデプロイキーも付与されている場合は、SSH ユーザーキーが優先的に使用されます。
 
 [#create-additional-bitbucket-ssh-keys]
-=== Create additional Bitbucket SSH keys
+=== Bitbucket SSHキーの追加作成
 
-If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
+他のサービスにアクセスするために追加のSSHキーが必要な場合は、以下の手順で追加のキーを作成することができます。
 
-In this example, the Bitbucket repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
+この例では、GitHub リポジトリは `https://bitbucket.org/you/test-repo/src/main` で、CircleCI プロジェクトは `https://app.circleci.com/pipelines/bitbucket/you/test-repo` です。
 
-. Create an SSH key-pair by following the link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
+. link:https://support.atlassian.com/ja/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket の説明] に従って、SSH キーペアを作成します。 パスワードを入力するよう求められた場合、**入力しないでください**（以下はmacOSでキーを生成するコマンドの一例です）。
 +
 ```shell
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-. Go to `https://bitbucket.org/you/test-repo/admin/access-keys/`, and click **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Click **Add SSH key**.
-. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 In the "Hostname" field, enter `bitbucket.com` and add the private key you created in step 1. 次に **Add SSH Key** をクリックします。
+. `https://bitbucket.org/you/test-repo/admin/access-keys` に移動して **Add Deploy Key** をクリックします。 Label フィールドに label を入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 次に **Add SSH Key** をクリックします。
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 Hostname のフィールドには、`bitbucket.com` を入力し、手順 1 で作成したプライベートキーを追加します。 次に **Add SSH Key** をクリックします。
 . `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
 +
 ```yaml
@@ -126,7 +126,7 @@ In this example, the Bitbucket repository is `https://bitbucket.org/you/test-rep
               - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-When you push to your Bitbucket repository from a job, CircleCI will use the SSH key you added.
+ジョブから BitBucket リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
 
 [#how-are-private-keys-used]
 === プライベートキーの使用方法
@@ -138,7 +138,7 @@ CircleCI がプロジェクトをビルドするときには、プライベー�
 - Bitbucket でホスティングされるプライベートな依存関係のチェックアウト
 - Git の自動マージ、タグ付けなど
 
-Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+プライベートキーは、 <<#enable-your-project-to-check-out-additional-private-repositories,追加のプライベートリポジトリをプロジェクトでチェックアウトできるようにするため>> にも使用されます。
 
 [#user-key-security]
 === ユーザーキーのセキュリティ
@@ -173,9 +173,9 @@ Permission denied (publickey).
 
 `.circleci/config.yml` ファイルを作成し、Bitbucket のリポジトリに対してコミットすると、CircleCI は直ちにそのコードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。
 
-CircleCI は、毎回クリーンなコンテナでテストを実行します。これにより、コードをプッシュするたびにテストが新たに実行され、他のユーザーはコードにアクセスできません。 Watch your tests update in real-time on link:https://circleci.com/dashboard[your dashboard]. ステータス更新をメール通知で受け取ったり、Bitbucket に表示されるステータスバッジを確認したりできます。 また、プルリクエスト画面にもすべてのテストが合格したことを示す総合的なステータスが表示されます。
+CircleCI は、毎回クリーンなコンテナでテストを実行します。これにより、コードをプッシュするたびにテストが新たに実行され、他のユーザーはコードにアクセスできません。 テストの更新を link:https://circleci.com/dashboard[お客様のダッシュボード] でリアルタイムに確認します。 ステータス更新をメール通知で受け取ったり、Bitbucket に表示されるステータスバッジを確認したりできます。 また、プルリクエスト画面にもすべてのテストが合格したことを示す総合的なステータスが表示されます。
 
-See the xref:config-intro#[Configuration tutorial] for a configuration walkthrough.
+順を追って設定を確認するには、 xref:config-intro#[設定ファイルのチュートリアル] を参照してください。
 
 [#enable-your-project-to-check-out-additional-private-repositories]
 == プロジェクトでの追加のプライベートリポジトリのチェックアウトの有効化
@@ -226,10 +226,10 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 [#rename-organizations-and-repositories]
 == 組織名とリポジトリ名の変更
 
-If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+組織名やリポジトリ名を変更したい場合は、xref:rename-organizations-and-repositories#[組織名およびリポジトリ名の変更]ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
 
 [#next-steps]
 == 次のステップ
 
-- xref:config-intro#[Configuration tutorial]
+- xref:config-intro#[設定ファイルのチュートリアル]
 - xref:hello-world#[Hello world]
