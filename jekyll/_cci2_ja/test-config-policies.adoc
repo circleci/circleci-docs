@@ -13,9 +13,7 @@ contentTags:
 
 :toc-title:
 
-
-NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階であり、 すべての側面において、今後変更される可能性があります。
-
+NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
 CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
