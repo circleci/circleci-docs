@@ -51,7 +51,7 @@ include::backup.adoc[]
 
 include::security-server.adoc[]
 
-include::troubleshooting-server-2.adoc[]
+include::troubleshoot-server-2.adoc[]
 
 include::admin-faq.adoc[]
 
