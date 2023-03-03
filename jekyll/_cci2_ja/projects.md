@@ -24,9 +24,9 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 ![プロジェクトダッシュボード]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-Following a project enables a user to subscribe to [email notifications](/docs/notifications/) for the project build status and adds the project to their CircleCI dashboard.
+ユーザーは、プロジェクトをフォローすることで、プロジェクトのビルドステータスに関する[メール通知](/docs/notifications/)を受け取り、プロジェクトを自分の CircleCI ダッシュボードに追加できます。
 
-プロジェクト管理者とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/ja/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+プロジェクト管理者とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
 ### 組織の切り替え
 {: #organization-switching }
@@ -46,7 +46,7 @@ Following a project enables a user to subscribe to [email notifications](/docs/n
 ## 組織名とリポジトリ名の変更
 {: #rename-organizations-and-repositories }
 
-組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
+組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
 
 ## 次のステップ
 {: #next-steps }
