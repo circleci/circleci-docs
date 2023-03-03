@@ -8,7 +8,7 @@ _Secrets masking is not available on version 2.x of self-hosted installations of
 
 シークレットのマスキングは、**Project Settings** や Web アプリの **Contexts** で設定される環境変数に適用されます。
 
-以下の場合、環境変数やコンテキストの値はジョブの出力でマスキング _されません_。
+以下の場合、環境変数やコンテキストの値はジョブの出力でマスキング_されません_。
 
 - 環境変数の値が 4 文字未満
 - 環境変数の値が `true`、`True`、`false`、`False` のいずれか
