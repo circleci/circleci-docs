@@ -39,6 +39,8 @@ CircleCI automatically creates a new branch and commits a basic configuration fi
 +
 You can choose a sample `.circleci/config.yml` from a variety of templates that best fits your project (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is commited on a new branch.
 
+The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
+
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
 When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
@@ -55,13 +57,13 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 
 When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
-If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button.
+If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
 
 Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
-At this time, editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo.
+Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo. Committing further changes in your repo will automatically trigger a pipeline, but manually triggering a pipeline is also not available at this time. 
 
 [#project-settings]
 == Project settings
