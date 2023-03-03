@@ -35,9 +35,9 @@ You can select _another_ repository in your account that has previously been set
 +
 CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
 
-* **Fast**: Use a config.yml template that you can edit and save.
+* **Fast**: Use a `config.yml` template that you can edit and save.
 +
-You can choose a sample `.circleci/config.yml` from a variety of templates that best fits your project (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is commited on a new branch.
+You can choose a sample `.circleci/config.yml` to best fit your project from a variety of templates (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is committed on a new branch.
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
 
