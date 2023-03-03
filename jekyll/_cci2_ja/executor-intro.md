@@ -22,7 +22,7 @@ CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、mac
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。<!---!\[Executor Overview\]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->## Docker
 {: #docker }
 
-**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
 {: class="alert alert-warning"}
 
 Docker 実行環境を使用するには、`docker` Executor を使ってイメージを指定します。 CircleCI がビルドした CircleCI イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=docker) を参照してください。
@@ -40,7 +40,7 @@ jobs:
         # Commands run in the primary container
 ```
 
-Docker 実行環境に関する詳細は、[Docker の使用]({}/ja/using-docker)のページを参照してください。
+Docker 実行環境に関する詳細は、[Docker の使用](/ja/using-docker)のページを参照してください。
 
 ## Linux VM
 {: #linux-vm }
@@ -77,7 +77,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({}/ja/using-linuxvm)のページを参照してください。
+Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用](/ja/using-linuxvm)のページを参照してください。
 
 ## macOS
 {: #macos }
@@ -98,7 +98,7 @@ jobs:
       # with Xcode 14.2.0 installed
 ```
 
-macOS 実行環境に関する詳細は、[macOS の使用]({}/using-macos)のページを参照してください。
+macOS 実行環境に関する詳細は、[macOS の使用](/using-macos)のページを参照してください。
 
 ## Windows
 {: #windows }
@@ -168,7 +168,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({}/ja/using-windows)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
+Windows 実行環境に関する詳細は、[Windows 実行環境の使用](/ja/using-windows)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
 
 ## GPU
 {: #gpu }
@@ -219,7 +219,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({}/ja/using-gpu/)のページを参照してください。
+GPU 実行環境に関する詳細は、[GPU 実行環境の使用](/ja/using-gpu/)のページを参照してください。
 
 ## Arm
 {: #arm }
@@ -285,12 +285,12 @@ workflows:
       - build-large
 ```
 
-Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({}/ja/using-arm/)のページを参照してください。
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用](/ja/using-arm/)のページを参照してください。
 
 ## セルフホストランナー
 {: #self-hosted-runner }
 
-Kubernetes を使用する[コンテナランナー]({}/ja/container-runner/)、および Linux、Windows、macOS で[マシンランナー]({}/ja/runner-overview/#machine-runner-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
+Kubernetes を使用する[コンテナランナー](/ja/container-runner/)、および Linux、Windows、macOS で[マシンランナー](/ja/runner-overview/#machine-runner-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
 
 ## ポート範囲
 {: #port-ranges }
