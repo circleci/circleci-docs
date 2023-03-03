@@ -22,8 +22,7 @@ contentTags:
 
 Retaining caches for a long period of time will have storage cost implications. It is best to determine why you are retaining caches, and how long caches need to be retained for your use case. ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)のページを参照してください。
-
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 For information on managing network and storage usage, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-usage) page.
 
 ## キャッシュの最適化
 {: #cache-optimization }
