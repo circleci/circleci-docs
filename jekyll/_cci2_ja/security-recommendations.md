@@ -65,7 +65,7 @@ export MY_VAR
 ### CircleCI CLI の使用
 {: #use-the-circleci-cli }
 
-可能な場合は `curl` コマンドの代わりに [CircleCI ローカル CLI]({{site.baseurl}}/ja/local-cli) を使用します。 CLI では、機密性の高い操作を実行するときにシークレットが漏洩するのを防ぐために特別な注意を払っています。 たとえば、  [環境変数を作成する]({{site.baseurl}}/ja/contexts#creating-environment-variables)場合、CLI はコマンドライン引数として受け入れるのではなく、シークレットを入力するように要求します。
+可能な場合は `curl` コマンドの代わりに [CircleCI ローカル CLI]({{site.baseurl}}/local-cli) を使用します。 CLI では、機密性の高い操作を実行するときにシークレットが漏洩するのを防ぐために特別な注意を払っています。 たとえば、  [環境変数を作成する]({{site.baseurl}}/contexts#creating-environment-variables)場合、CLI はコマンドライン引数として受け入れるのではなく、シークレットを入力するように要求します。
 
 CircleCI CLI を使用するシェルスクリプトを記述する場合、Bash では `<<<` コンストラクトを使用すると環境変数やテキストに保存されているシークレットが表示されないようにすることが可能です。このコンストラクトは、値のパイピング中に新しいプロセスを生成しません。
 ```bash
@@ -108,4 +108,4 @@ EOF
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/github-integration/)
