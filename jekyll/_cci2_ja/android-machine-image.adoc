@@ -18,22 +18,23 @@ contentTags:
 [#overview]
 == 概要
 
-The Android machine image is accessed through the xref:configuration-reference#available-linux-machine-images-cloud[Linux machine executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. また、イメージには Android SDK がプリインストールされています。
+Android マシンイメージには、CircleCI で Linux マシンイメージにアクセスする場合と同様に、xref:configuration-reference#available-linux-machine-images-cloud[Linux
+machine Executor] を通じてアクセスできます。 Android マシンイメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 [#using-the-android-machine-image]
 == Android マシンイメージの使用
 
-It is possible to configure the use of the Android image in your configuration with xref:orb-intro#[orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Please view the <<#examples,examples>> section below for more details.
+設定ファイルに Android イメージを使用するには、xref:orb-intro#[Orb] を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、 複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「<<#examples,例>>」セクションを参照してください。
 
 [#pre-installed-software]
 == プリインストールされたソフトウェア
 
-Please view the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
+現在プリインストールされているソフトウェアのリストについては、 link:https://discuss.circleci.com/t/android-2023-2/47194[Discuss] ページで四半期ごとの更新のお知らせを参照してください。
 
 [#examples]
-== サンプル集
+== 例
 
-Below you will find several examples demonstrating the use of the Android machine image both with and without orbs.
+以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
 
 [#simple-orb-usage]
 === Orb を使用するシンプルな例
@@ -61,7 +62,7 @@ workflows:
 [#more-complex-orb-usage]
 === Orb を使用する複雑な例
 
-This example shows how you can use more granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
+この例では、より細かな Orb コマンドを使用して、link:https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-test[start-emulator-and-run-tests] コマンドの処理を実現する方法を示しています。
 
 {% include snippets/ja/add-version-number.adoc %}
 
@@ -107,7 +108,7 @@ workflows:
 [#no-orb-example]
 === Orb を使用しない例
 
-The following is an example of using the Android machine image, _without_ using the circleci/android link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps are similar to what is run when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[run-ui-tests] job of the orb.
+以下の例では、circleci/android link:https://circleci.com/developer/ja/orbs/orb/circleci/android[Orb] なしで Android マシン イメージを使用しています。  以下のステップは、Orb の link:https://circleci.com/developer/ja/orbs/orb/circleci/android#jobs-run-ui-tests[run-ui-tests] ジョブを使用して実行する処理に類似しています。
 
 {% raw %}
 
@@ -190,9 +191,9 @@ workflows:
 [#using-the-android-image-on-server-v3x]
 === CircleCI Server v3.x での Android イメージの使用
 
-**Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
+注: Android マシンイメージは、現在は Google Cloud Platform (GCP) 上でのサーバー環境でのみご使用いただけます。
 
-CircleCI Server 3.4 以降では、GCP へのインストールでは Android マシンイメージがサポートされています。 To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+CircleCI Server 3.4 以降では、GCP へのインストールでは Android マシンイメージがサポートされています。 プロジェクトで Android イメージを使用するには、ジョブで `image`キーを `android-default` に設定します。
 
 ```yaml
 version: 2.1
@@ -205,9 +206,9 @@ jobs:
     # job steps here
 ```
 
-クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server/operator/managing-orbs#[CircleCI server orbs] page for instructions on importing orbs.
+クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 また、Orb にビルドされているデフォルトの Executor を使用するのではなく、下記の例のように Machine Executor の `android-default` イメージを定義する必要があります。 Orb をインポートする方法については、xref:server/operator/managing-orbs#[CircleCI Server Orb] についてのページを参照してください。
 
-This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
+この例では、きめ細かな Orb コマンドを使用して、link:https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] コマンドの機能を実現する方法を示しています。
 
 {% include snippets/ja/add-version-number.adoc %}
 
