@@ -59,7 +59,7 @@ API トークンの追加は、以下の手順で行います。
 
     ```
 
-All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
+注: すべての API 呼び出しは、同じように JSON コンテントタイプの API トークンを使用して標準的な HTTP 呼び出しにより行われます。 このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
 
 ### 承認ヘッダー
 {: #accept-header }
@@ -129,7 +129,7 @@ GitLab プロジェクトのスラグは、ランダムな文字列として扱�
 ## レート制限
 {: #rate-limits }
 
-CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 CircleCI reserves the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 弊社は、すべてのユーザーに公平なサービスを提供するために、個々のユーザーによるリクエストや個々のリソースに対するリクエストを制限する権利を有しています。
 
 CircleCI 上での API 統合の作成者として、統合が抑制されることを想定し、失敗に対して安全な対応をする必要があります。 API の各部分に様々な保護機能や制限が設けられています。 特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
 
@@ -154,7 +154,7 @@ As we transition some APIs from one rate limit system to another, a different li
 
 このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world" というデモ用リポジトリを作成しますが、既存のリポジトリを使用しても構いません。
 
-Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
+**注:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを使用しています。
 
 ### 前提条件
 {: #prerequisites }
@@ -486,7 +486,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
     ```
 
-    `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
+    **注:** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
     {: class="alert alert-info" }
 
 ### インサイトの収集
