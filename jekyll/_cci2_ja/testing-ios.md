@@ -17,7 +17,7 @@ contentTags:
 
 CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの[ソフトウェアマニフェスト](#supported-xcode-versions)を参照してください。
 
-[iOS サンプルプロジェクト]({}/ja/ios-tutorial/)と[ MacOS での入門]({}/ja/hello-world-macos/)に関するドキュメントをご覧ください。
+[iOS サンプルプロジェクト](/ja/ios-tutorial/)と[ MacOS での入門](/ja/hello-world-macos/)に関するドキュメントをご覧ください。
 
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
@@ -32,7 +32,7 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/xcode-silicon-vm.md %}
 
-専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({}/ja/dedicated-hosts-macos/)内の表を参照してください
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト](/ja/dedicated-hosts-macos/)内の表を参照してください
 
 ## はじめよう
 {: #getting-started }
@@ -175,7 +175,7 @@ workflows:
 
 ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化できるため、iOS アプリケーションの署名には Fastlane Match のご使用をお勧めします。
 
-fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({}/ja/ios-codesigning/) をご覧ください
+fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント](/ja/ios-codesigning/) をご覧ください
 
 ## Ruby の使用
 {: #using-ruby }
@@ -366,7 +366,7 @@ steps:
 ## デプロイの設定
 {: #configuring-deployment }
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({}/ja/deploy-ios-applications/)をご覧ください。
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド](/ja/deploy-ios-applications/)をご覧ください。
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -377,4 +377,4 @@ steps:
 {: #next-steps }
 
 - CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
-- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({}/ja/ios-codesigning/)を参照してください。
+- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント](/ja/ios-codesigning/)を参照してください。
