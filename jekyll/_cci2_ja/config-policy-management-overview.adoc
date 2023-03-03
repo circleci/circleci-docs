@@ -285,7 +285,40 @@ sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
-hard_fail["custom_rule"] { data.meta.branch == "main" }
+hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
+----
+
+以下は、信頼できないオリジンからのプルリクエストビルドをブロックするポリシーの例です。
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["forked_pull_requests"]
+
+# this rule is enabled only if the body evaluates to true (origin_repository_url and target_repository_url will be different in case of a forked pull request)
+enable_rule["check_forked_builds"] {
+	data.meta.vcs.origin_repository_url != data.meta.vcs.target_repository_url
+}
+
+# enable hard failure
+hard_fail["check_forked_builds"]
+
+check_forked_builds = reason {
+	not from_trusted_origin(data.meta.vcs.origin_repository_url)
+	reason := sprintf("pipeline triggered from untrusted origin: %s", [data.meta.vcs.origin_repository_url])
+}
+
+from_trusted_origin(origin) {
+	some trusted_origin in {
+		"https://github.com/trusted_org/",
+		"https://bitbucket.org/trusted_org/",
+	}
+
+	startswith(origin, trusted_origin)
+}
 ----
 
 [#testing-policies]
