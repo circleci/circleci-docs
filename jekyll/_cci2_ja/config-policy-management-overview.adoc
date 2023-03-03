@@ -13,30 +13,31 @@ contentTags:
 
 :toc-title:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
 
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
+CAUTION: コンフィグファイルのポリシー管理機能が**オープンプレビュー段階**の間は、**コンプライアンスの用途には使用しないでください&+**。 オープンプレビューの間は本機能を使用できない期間が発生する可能性があります。 その間、構築したコンフィグファイルのポリシーに対する評価が行われない場合があります。
 
-Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
+コンフィグファイルのポリシー管理機能を使って組織レベルのポリシーを作成し、設定要素が必須なのか、許可する、許可しないなどのルールとスコープを指定することができます。
 
 [#introduction]
 == はじめに
 
-Config policies allow you to create policies for governing CircleCI project configurations. プロジェクトの設定ファイルが関連付けられたポリシーに定められたルールを遵守していない場合、最も厳しいケースでは、遵守するまでそのプロジェクトのパイプラインはトリガーできません。
+コンフィグファイルのポリシー管理機能により、CircleCI プロジェクトの設定ファイルを管理するポリシーを作成できます。 プロジェクトのコンフィグファイルが関連付けられたポリシーに定められたルールを遵守していない場合、最も厳しいケースでは、遵守するまでそのプロジェクトのパイプラインはトリガーできません。
 
-CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。 この方法ではプロジェクトの拡大に伴い変化するニーズに合うように各パイプラインを作成できるため、開発や反復を迅速に行う際に便利です。 しかし、組織全体の規則やセキュリティポリシーを管理および制定することが困難な場合があります。 Config policies adds in this layer of control.
+CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。 この方法ではプロジェクトの拡大に伴い変化するニーズに合うように各パイプラインを作成できるため、開発や反復を迅速に行う際に便利です。 しかし、組織全体の規則やセキュリティポリシーを管理および制定することが困難な場合があります。 そんな場合に、設定ファイルのポリシー管理機能が役立ちます。
 
-設定ファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
+コンフィグファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
 
 [#quickstart]
 == クイックスタート
 
-If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide.
+VCS に接続した link:/docs/first-steps[CircleCI アカウント]を既にお持ちで、いますぐコンフィグファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy#[ポリシーの作成ガイド]をお読みください。
 
 [#how-config-policy-work]
-== How config policies work
+== コンフィグファイルのポリシー管理機能の仕組み
 
-Config policies use a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
+
+設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づく意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
 
 ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは、ご自身の VCS 内のリポジトリに保存できます。 詳細については、link:/docs/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]のページを参照してください。
 
@@ -53,11 +54,12 @@ hard_failures:    Array<{ rule: string, reason: string }>
 意思決定の結果には、意思決定に使用されたルールと、検出されたルール違反 (soft_fail と hard_fail) の一覧が表示されます。
 
 [#use-the-cli-with-config-policies]
-== Use the CLI with config policies
+== CLI を使用したコンフィグファイルのポリシー管理
 
-CircleCI CLI を使って、プログラム上で組織のポリシーを管理することができます。 Config policies sub-commands are grouped under the `circleci policy` command.
 
-The following config policies sub-commands are currently supported within the CLI:
+CircleCI CLI を使って、プログラム上で組織のポリシーを管理することができます。  ポリシーの管理機能を実行するためのサブコマンドは、`circleci policy` コマンドにまとめられています。
+
+設定ポリシーの管理において、CLI では現在以下のサブコマンドをサポートしています。
 
 * `diff`: ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
 * `fetch`: ポリシーバンドルを (または 1 つのポリシーを名前に基づき) リモートからフェッチします。
@@ -69,7 +71,7 @@ The following config policies sub-commands are currently supported within the CL
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
-* `settings` - used to modify config policies settings as required.
+* `settings`- 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。 
 +
 `settings` サブコマンドをフラグなしで呼び出した場合、現在の設定がフェッチされコンソールに出力されます。
 +
@@ -256,7 +258,7 @@ enable_rule["use_official_docker_image"]
 
 CircleCI 設定ファイルのポリシーを記述する場合、多くの場合プロジェクトやブランチごとに動作が若干異なるポリシーにすることが推奨されます。 それには `data.meta` Rego プロパティーを使用します。
 
-When a policy is evaluated in the context of a triggered pipeline the following properties will be available on `data.meta`:
+ポリシーがトリガーされたパイプラインのコンテキストで評価されると、`data.meta` において以下の 3 つのプロパティーが使用できるようになります。
 
 * `project_id` (CircleCI Project UUID)
 * `build_number` (number)
@@ -265,7 +267,7 @@ When a policy is evaluated in the context of a triggered pipeline the following 
 * `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
 * `vcs.target_repository_url` (string) - URL to the repository building the commit
 
-This metadata can be used to activate/deactivate rules, modify enforcement statuses, and be part of the rule definitions themselves.
+このメタデータは、ルールのアクティブ化/非アクティブ化、評価結果の変更、およびルール定義自体の一部として使用できます。
 
 以下は 1 つのプロジェクトに対してのみルールを制定し、main ブランチ上でのみ `hard_fail` とするポリシーのサンプルです。
 
