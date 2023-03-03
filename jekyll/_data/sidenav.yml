@@ -106,6 +106,8 @@ en:
           link: schedule-pipelines-with-multiple-workflows
         - name: Set a nightly scheduled pipeline
           link: set-a-nightly-scheduled-pipeline
+        - name: Migrate from deploy to run
+          link: migrate-from-deploy-to-run
     - name: Reference
       children:
         - name: Project values and variables
@@ -140,6 +142,8 @@ en:
           link: building-docker-images
         - name: Run a job in a container
           link: run-a-job-in-a-container
+        - name: Installing and using docker-compose
+          link: docker-compose
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -211,29 +215,6 @@ en:
         - name: Machine runner configuration reference
           link: runner-config-reference
 
-- name: Configuration
-  icon: icons/sidebar/cogs.svg
-  children:
-    - name: Overview
-      children:
-        - name: Configuration introduction
-          link: config-intro
-        - name: Using the CircleCI configuration editor
-          link: config-editor
-    - name: Reference
-      children:
-        - name: Sample configuration
-          link: sample-config
-    - name: How-To Guides
-      children:
-        - name: Using branch filters
-          link: using-branch-filters
-        - name: Selecting a workflow to run
-          link: selecting-a-workflow-to-run-using-pipeline-parameters
-        - name: Installing and using docker-compose
-          link: docker-compose
-        - name: Rename organizations and repositories
-          link: rename-organizations-and-repositories
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
@@ -388,6 +369,8 @@ en:
           link: use-the-cli-for-config-and-policy-development
         - name: Stop building a project on CircleCI
           link: stop-building-a-project-on-circleci
+        - name: Rename organizations and repositories
+          link: rename-organizations-and-repositories
     - name: Reference
       children:
         - name: Config policy reference (Open preview)
