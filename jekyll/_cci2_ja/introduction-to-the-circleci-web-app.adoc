@@ -13,7 +13,7 @@ contentTags:
 
 :toc-title:
 
-CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能の多くの機能のグラフィックユーザーインターフェースです。 The application can be found at link:https://app.circleci.com[https://app.circleci.com].
+CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能の多くの機能のグラフィックユーザーインターフェースです。 CircleCI Web アプリは、link:https://app.circleci.com[https://app.circleci.com/] からご利用いただけます。
 
 このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 ここでは、Web アプリの詳細な説明ではなく、ご利用いただける情報やオプション、および設定の一部を紹介します。
 
@@ -70,7 +70,7 @@ image::web_ui_projects.png[Projects page]
 
 image::web_ui_text_editor.png[Text editor in the web app]
 
-**Insights**: This is a link to the <<#insights,Insights>> page.
+**Insights**: インサイトのページへのリンクです。詳細は <<#insights,下記>>をご覧ください。
 
 [#project-settings]
 === プロジェクト設定
@@ -119,7 +119,7 @@ image::web_ui_runner.png[Runner inventory]
 
 新しいリソースクラスに既存の名前空間を指定するか、組織の名前空間がまだ作成されていない場合は 、新しい名前空間と CircleCI ジョブとランナーのタイプを一致させるラベルを作成します (組織は一つの名前空間しか作成できません)。
 
-このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web アプリにセルフホストランナーのソフトウェアをインストールする方法が表示されます。 This process is also laid out on the xref:runner-installation#[self-hosted runner] page.
+このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web アプリにセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、 xref:runner-installation#[セルフホストランナーに関するドキュメント] にも記載されています。
 
 image::runnerui_step_four.png[Runner setup]
 
@@ -141,7 +141,7 @@ image::runnerui_step_four.png[Runner setup]
 [#plan]
 == Plan
 
-管理者の権限をお持ちの場合、プランの概要とアップグレードのページに、現在のプランでご利用いただける機能と使用量のスナップショットが表示されます。 次のティアのプランへのアップグレードに関する詳細も表示されます。 You can read more about plans in CircleCI's xref:plan-overview#[Plan] section.
+管理者の権限をお持ちの場合、プランの概要とアップグレードのページに、現在のプランでご利用いただける機能と使用量のスナップショットが表示されます。 次のティアのプランへのアップグレードに関する詳細も表示されます。 詳細は、CircleCI の xref:plan-overview#[プランに関するドキュメント]を参照して下さい。
 
 プランによっては、プランの共有を選択することもできます。それにより、お客様が所属するすべての組織が、お客様の現在のプランでビルドを共有し実行できるようになります。また、プランを別の組織に譲渡することもできます。
 
@@ -152,11 +152,11 @@ image::runnerui_step_four.png[Runner setup]
 
 image::web_ui_plan_usage.png[Plan usage]
 
-ネットワークやストレージに関しては、使用量の把握が難しいため、これらのページとクレジットの仕組みをよく理解することをお勧めします。 You can learn more about network and storage usage on the xref:persist-data#managing-network-and-storage-usage[Persisting data] page.
+ネットワークやストレージに関しては、使用量の把握が難しいため、これらのページとクレジットの仕組みをよく理解することをお勧めします。 ネットワークとネットワークとストレージの使用量の詳細は、 xref:persist-data#managing-network-and-storage-usage[データの永続化] のページを参照して下さい。
 
 image::web_ui_plan_network.png[Network usage]
 
-You can learn more about billing in the billing section of the xref:faq#billing[FAQ] page.
+請求に関しては、xref:faq#billing[よくあるご質問]のページの請求のセクションをご覧ください。
 
 [#usage-controls]
 === Usage controls (使用量のコントロール)
@@ -184,4 +184,4 @@ image::web_ui_plan_controls.png[Usage controls]
 
 == 次のステップ
 
-- xref:config-editor#[Using the CircleCI in-app configuration editor]
+- xref:config-editor#[CircleCI アプリ内の設定ファイルエディターの使用]
