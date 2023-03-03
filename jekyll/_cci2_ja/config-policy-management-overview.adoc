@@ -288,7 +288,7 @@ enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
 ----
 
-The following is an example of a policy that blocks pull request builds from untrusted origins.
+以下は、信頼できないオリジンからのプルリクエストビルドをブロックするポリシーの例です。
 
 [source,rego]
 ----
