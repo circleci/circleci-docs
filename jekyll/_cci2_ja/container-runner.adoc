@@ -385,9 +385,7 @@ agent:
 [#cost-and-availability]
 == 料金と提供プラン
 
-
-コンテナランナーのジョブは <<persist-data#managing-network-and-storage-usage,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
-
+Container runner jobs are eligible for <<persist-data#managing-network-and-storage-usage,Runner Network Egress>>. これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
 各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
