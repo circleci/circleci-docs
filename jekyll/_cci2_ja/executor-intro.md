@@ -17,8 +17,8 @@ CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、mac
 
 [.circleci/config.yml](/docs/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば、下記のようにします。
 
-- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済みの CircleCI Docker イメージ]({}/ja/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
-- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト]({}/ja/configuration-reference/#available-machine-images)に記載されている Ubuntu バージョンを使用します。
+- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済みの CircleCI Docker イメージ](/ja/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
+- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト](/ja/configuration-reference/#available-machine-images)に記載されている Ubuntu バージョンを使用します。
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。<!---!\[Executor Overview\]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->## Docker
 {: #docker }
 
@@ -84,7 +84,7 @@ Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用](/j
 
 macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) をご覧ください。
 
-サーバーインスタンスで macOS ビルドを実行するには、[セルフホストランナー]({}/runner-overview)を使う必要があります。
+サーバーインスタンスで macOS ビルドを実行するには、[セルフホストランナー](/runner-overview)を使う必要があります。
 {: class="alert alert-info"}
 
 ```yml
