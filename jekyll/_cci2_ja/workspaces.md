@@ -213,9 +213,7 @@ For a live example of using workspaces to pass data between build and deploy job
 
 ワークスペースを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 多くのプロジェクトでは、ワークスペースを保存する利点は、失敗したビルドの再実行ができることです。 ビルドが成功したら、そのワークスペースは不要になります。 ニーズに合う場合は、ワークスペースのストレージ保存期間を短く設定することを推奨します。
 
-
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)のページを参照してください。
-
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 For information on managing network and storage usage, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-use) page.
 
 ## ワークスペースの最適化
 {: #workspace-usage-optimization }
