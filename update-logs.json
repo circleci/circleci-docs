@@ -1,0 +1,50 @@
+  proxy | time="2023-03-05T21:44:31Z" level=info msg="proxy starting" commit=a70cda06add871b91a3f6a8d40365a448de324f9
+  proxy | 2023/03/05 21:44:31 Listening (:1080)
+updater | 2023-03-05T21:44:32.064038907 [619496082:main:WARN:src/devices/src/legacy/serial.rs:222] Detached the serial input due to peer close/error.
+updater | time="2023-03-05T21:44:34Z" level=info msg="guest starting" commit=baf3a29f3c3dbc33b728e42ad995e09072864326
+updater | time="2023-03-05T21:44:34Z" level=info msg="starting job..." fetcher_timeout=10m0s job_id=619496082 updater_timeout=45m0s updater_version=83ac499984f0e2e17133a5c9088ac91e11e99e10-npm
+updater | I, [2023-03-05T21:44:36.062842 #8]  INFO -- sentry: ** [Raven] Raven 3.1.2 ready to catch errors
+updater | INFO <job_619496082> Starting job processing
+  proxy | 2023/03/05 21:44:37 [002] GET https://github.com:443/doomroep5/circleci-docs/info/refs?service=git-upload-pack
+  proxy | 2023/03/05 21:44:37 [002] * authenticating git server request (host: github.com)
+  proxy | 2023/03/05 21:44:37 [002] 200 https://github.com:443/doomroep5/circleci-docs/info/refs?service=git-upload-pack
+  proxy | 2023/03/05 21:44:37 [004] POST https://github.com:443/doomroep5/circleci-docs/git-upload-pack
+  proxy | 2023/03/05 21:44:37 [004] * authenticating git server request (host: github.com)
+  proxy | 2023/03/05 21:44:37 [004] 200 https://github.com:443/doomroep5/circleci-docs/git-upload-pack
+  proxy | 2023/03/05 21:44:37 [006] POST https://github.com:443/doomroep5/circleci-docs/git-upload-pack
+  proxy | 2023/03/05 21:44:37 [006] * authenticating git server request (host: github.com)
+  proxy | 2023/03/05 21:44:37 [006] 200 https://github.com:443/doomroep5/circleci-docs/git-upload-pack
+updater | INFO <job_619496082> Finished job processing
+updater | time="2023-03-05T21:44:44Z" level=info msg="task complete" container_id=job-619496082-file-fetcher exit_code=0 job_id=619496082 step=fetcher
+updater | I, [2023-03-05T21:44:46.452846 #8]  INFO -- sentry: ** [Raven] Raven 3.1.2 ready to catch errors
+updater | INFO <job_619496082> Starting job processing
+updater | INFO <job_619496082> Starting update job for doomroep5/circleci-docs
+updater | INFO <job_619496082> Checking if minimatch 3.0.4 needs updating
+  proxy | 2023/03/05 21:44:48 [012] GET https://registry.npmjs.org:443/minimatch
+  proxy | 2023/03/05 21:44:48 [012] 200 https://registry.npmjs.org:443/minimatch
+  proxy | 2023/03/05 21:44:48 [014] GET https://registry.npmjs.org:443/minimatch/7.4.2
+  proxy | 2023/03/05 21:44:49 [014] 200 https://registry.npmjs.org:443/minimatch/7.4.2
+updater | INFO <job_619496082> Latest version is 7.4.2
+  proxy | 2023/03/05 21:44:51 [016] GET https://registry.yarnpkg.com:443/minimatch
+  proxy | 2023/03/05 21:44:51 [016] 200 https://registry.yarnpkg.com:443/minimatch
+updater | INFO VulnerabilityAuditor: starting audit
+updater | INFO VulnerabilityAuditor: missing lockfile
+updater | INFO <job_619496082> Requirements to unlock update_not_possible
+  proxy | 2023/03/05 21:44:52 [018] GET https://registry.npmjs.org:443/circleci-docs
+  proxy | 2023/03/05 21:44:52 [018] 404 https://registry.npmjs.org:443/circleci-docs
+updater | INFO <job_619496082> Requirements update strategy bump_versions
+  proxy | 2023/03/05 21:44:52 [020] GET https://registry.npmjs.org:443/minimatch/3.0.5
+  proxy | 2023/03/05 21:44:52 [020] 200 https://registry.npmjs.org:443/minimatch/3.0.5
+updater | INFO <job_619496082> The latest possible version that can be installed is 3.0.4 because of the following conflicting dependency:
+updater | <job_619496082> 
+updater | <job_619496082>   serve@13.0.2 requires minimatch@3.0.4 via a transitive dependency on serve-handler@6.1.3
+updater | INFO <job_619496082> The earliest fixed version is 3.0.5.
+updater | INFO <job_619496082> Finished job processing
+updater | INFO Results:
+updater | Dependabot encountered '1' error(s) during execution, please check the logs for more details.
+updater | +------------------------------+
+updater | |            Errors            |
+updater | +------------------------------+
+updater | | security_update_not_possible |
+updater | +------------------------------+
+updater | time="2023-03-05T21:44:54Z" level=info msg="task complete" container_id=job-619496082-updater exit_code=0 job_id=619496082 step=updater
