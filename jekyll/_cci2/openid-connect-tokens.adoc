@@ -58,7 +58,7 @@ a| The subject. This identifies who is running the CircleCI job and where. `$CIR
 
 For `$CIRCLE_OIDC_TOKEN` its value is: `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. 
 
-For `$CIRCLE_OIDC_TOKEN_2` its value is: `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID/vcs-origin/VCS_ORIGIN/vcs-ref/VCS_REF"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `VCS_ORIGIN` and `VCS_REF` are strings that identify the repo URL and reference to the change that caused the job to run.
+For `$CIRCLE_OIDC_TOKEN_V2` its value is: `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID/vcs-origin/VCS_ORIGIN/vcs-ref/VCS_REF"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `VCS_ORIGIN` and `VCS_REF` are strings that identify the repo URL and reference to the change that caused the job to run.
 
 | `aud`
 | The audience. Currently, this is a fixed value `"ORGANIZATION_ID"`, a string containing a UUID that identifies the job's project's organization.
