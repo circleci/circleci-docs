@@ -7,20 +7,6 @@ For example, the 25,000 credit package would provide 2,500 build minutes when us
 
 When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
 
-[#share-plans-across-organizations-billed-centrally]
-=== Is there a way to share plans across organizations and have them billed centrally?
-
-Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
-
-On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
-
-On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
-
-[#container-used-for-under-one-minute-pay-for-a-full-minute]
-=== If a container is used for under one minute, do I have to pay for a full minute?
-
-You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
-
 [#buy-credits-in-any-increments]
 === How do I buy credits? Can I buy in any increments?
 
@@ -37,6 +23,91 @@ You can choose to pay for premium features per active user, compute, and optiona
  ** Credits rollover each month and expire after one year.
 * Docker Layer Caching (DLC) is paid for with credits per usage, similar to
 compute credits.
+
+[#run-out-of-credits]
+=== What happens when I run out of credits?
+
+On the *Performance plan*, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
+
+If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
+
+On the *Free plan*, jobs will fail to run once you have run out of credits.
+
+[#do-credits-expire]
+=== Do credits expire?
+
+*Performance plan*: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+
+[#how-do-i-pay]
+=== How do I pay?
+
+You can pay from inside the CircleCI app for monthly pricing.
+
+[#when-do-i-pay]
+=== When do I pay?
+
+On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+
+[#what-is-prepaid-billing]
+=== What is Prepaid Billing?
+
+Prepaid Billing is a payment option for customers on Performance plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and, based on volume purchased, be able to get discounted prices for credits.
+
+[#how-can-i-get-on-prepaid-billing]
+=== How can I get on Prepaid Billing?
+
+All Performance plan customers can choose to get on Prepaid Billing through the CircleCI web app. To access this option, follow these steps:
+
+. Select **Plans > Manage Subscription** in the web app
+. Select to **Edit** your subscription
+. Select **Prepaid Billing** and set up your bulk credit purchase
+
+[#i-still-have-credits-from-my-monthly-subscription]
+=== I still have credits from my Monthly subscription, what happens if I get on Prepaid Billing now?
+
+You will still have access to any balance credits that were previously purchased, and the 12 month expiry date will remain.
+
+[#i-selected-prepaid-billing-but-i-didnt-receive-a-discount]
+=== I selected Prepaid Billing but I didn’t receive a discount. Why?
+
+Discounting for prepaid billing starts at a purchase volume of 5 Million credits onwards.
+
+[#what-happens-when-i-run-out-of-all-my-prepaid-billing-credits]
+=== What happens when I run out of all my Prepaid Billing credits?
+
+Similar to what happens today on Performance plans, when you run out of credits your credit package will be automatically renewed at the purchase level you have selected.
+
+[#when-will-i-be-charged-for-my-prepaid-billing-purchase]
+=== When will I be charged for my Prepaid Billing purchase?
+
+Upon selecting Prepaid Billing, your credit card will be charged immediately. Subsequently, when you run out of credits, your credit card will be charged again to provide you with a refill.
+
+[#i-want-to-change-my-upcoming-prepaid-billing-refill]
+=== I want to change my upcoming Prepaid Billing refill, how do I do that?
+
+You can follow these steps:
+
+. Select **Plans > Manage Subscription** in the web app
+. Select to **Edit** your subscription Prepaid Billing level
+
+[#do-i-still-get-bonus-credits-and-5-free-seats]
+=== Do I still get 30,000 bonus credits and 5 free seats on Prepaid Billing?
+
+Yes, all Prepaid Billing customers still receive the benefit of 30,000 credits and 5 free user seats every month.
+
+[#share-plans-across-organizations-billed-centrally]
+=== Is there a way to share plans across organizations and have them billed centrally?
+
+Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+
+On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+
+On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
+
+[#container-used-for-under-one-minute-pay-for-a-full-minute]
+=== If a container is used for under one minute, do I have to pay for a full minute?
+
+You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
 
 [#calculate-monthly-storage-and-network-costs]
 === How do I calculate my monthly storage and network costs?
@@ -90,30 +161,6 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 NOTE: If your project is xref:oss#[open-source] you will *not* be considered an active user.
 
 To find a list of your Active Users, log in to the CircleCI web app, click menu:Plan[Plan Usage > Users].
-
-[#un-out-of-credits]
-=== What happens when I run out of credits?
-
-On the *Performance plan*, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
-
-If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
-
-On the *Free plan*, jobs will fail to run once you have run out of credits.
-
-[#do-credits-expire]
-=== Do credits expire?
-
-*Performance plan*: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
-
-[#how-do-i-pay]
-=== How do I pay?
-
-You can pay from inside the CircleCI app for monthly pricing.
-
-[#when-do-i-pay]
-=== When do I pay?
-
-On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
 
 [#charged-job-is-queued-or-preparing]
 === Am I charged if my job is "Queued" or "Preparing"?
