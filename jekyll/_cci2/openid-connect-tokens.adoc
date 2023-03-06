@@ -16,7 +16,7 @@ In jobs using a xref:contexts#[context], CircleCI provides OpenID Connect ID (OI
 [#openid-connect-id-token-availability]
 == OpenID Connect ID token availability
 
-In CircleCI jobs that use at least one context, the OpenID Connect ID tokens are available in the environment variables: `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_2`. The `$CIRCLE_OIDC_TOKEN_2` token includes a different format for the `sub` claim, which is highlighted in the table below.
+In CircleCI jobs that use at least one context, the OpenID Connect ID tokens are available in the environment variables: `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2`. The `$CIRCLE_OIDC_TOKEN_V2` token includes a different format for the `sub` claim, which is highlighted in the table below.
 
 Add a <<contexts#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference#workflows,workflows>> section of your `circleci/config.yml` file:
 
