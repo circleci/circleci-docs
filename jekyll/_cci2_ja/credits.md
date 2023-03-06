@@ -9,7 +9,7 @@ contentTags:
     - クラウド
 ---
 
-このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。 If you are on the legacy CircleCI Container-based plan, you may want to consider consulting the document on [using containers](/docs/containers). コンテナベースからクレジットベースへの切り替えをご希望のお客様は、[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)お問い合わせください。
+このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。 CircleCI の従来のコンテナベースプランを利用している場合は、[コンテナを使用する](docs/plan-overview/)をご覧ください。コンテナベースからクレジットベースへの切り替えをご希望のお客様は、[サポートチケットを作成して](https://support.circleci.com/hc/ja/requests/new))お問い合わせください。
 
 ## 概要
 {: #overview }
