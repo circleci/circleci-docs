@@ -83,7 +83,7 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repo that triggered the pipeline. Its value is a string similar to `github.com/orgnanization-123/repo-1`.
+| The URL of the repo that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`.
 
 | `oidc.circleci.com/vcs-ref`
 | The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`.
