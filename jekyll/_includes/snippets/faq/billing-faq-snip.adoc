@@ -49,51 +49,52 @@ You can pay from inside the CircleCI app for monthly pricing.
 On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
 
 [#what-is-prepaid-billing]
-=== What is Prepaid Billing?
+=== What is prepaid billing?
 
-Prepaid Billing is a payment option for customers on the Performance plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and be able to get discounted prices for credits based on volume purchased.
+Prepaid billing is a payment option for customers on Performance plan. Prepaid billing allows you to purchase credits in bulk, pay upfront, and, based on volume purchased, be able to get discounted prices for credits.
 
 [#how-can-i-get-on-prepaid-billing]
-=== How can I get on Prepaid Billing?
+=== How can I get on prepaid billing?
 
-All Performance plan customers can choose to get on Prepaid Billing through the CircleCI web app. To access this option, follow these steps:
+All Performance plan customers can choose to get on prepaid billing through the CircleCI web app. To access this option, follow these steps:
 
-. Select **Plans > Manage Subscription** in the web app
-. Select to **Edit** your subscription
-. Select **Prepaid Billing** and set up your bulk credit purchase
+. Select **Plan** in the web app
+. Select the **Manage** tab
+. Select to **Set up and switch** to get started switching to prepaid billing
 
 [#i-still-have-credits-from-my-monthly-subscription]
-=== I still have credits from my Monthly subscription, what happens if I get on Prepaid Billing now?
+=== I still have credits from my Monthly subscription, what happens if I get on prepaid billing now?
 
 You will still have access to any balance credits that were previously purchased, and the 12 month expiry date will remain.
 
 [#i-selected-prepaid-billing-but-i-didnt-receive-a-discount]
-=== I selected Prepaid Billing but I didn’t receive a discount. Why?
+=== I selected prepaid billing but I didn’t receive a discount. Why?
 
 Discounting for prepaid billing starts at a purchase volume of 5 Million credits onwards.
 
 [#what-happens-when-i-run-out-of-all-my-prepaid-billing-credits]
-=== What happens when I run out of all my Prepaid Billing credits?
+=== What happens when I run out of all my prepaid billing credits?
 
 Similar to what happens today on Performance plans, when you run out of credits your credit package will be automatically renewed at the purchase level you have selected.
 
 [#when-will-i-be-charged-for-my-prepaid-billing-purchase]
-=== When will I be charged for my Prepaid Billing purchase?
+=== When will I be charged for my prepaid billing purchase?
 
-Upon selecting Prepaid Billing, your credit card will be charged immediately. Subsequently, when you run out of credits, your credit card will be charged again to provide you with a refill.
+Upon selecting prepaid billing, your credit card will be charged immediately. Subsequently, when you run out of credits, your credit card will be charged again to provide you with a refill.
 
 [#i-want-to-change-my-upcoming-prepaid-billing-refill]
-=== I want to change my upcoming Prepaid Billing refill, how do I do that?
+=== I want to change my upcoming prepaid billing refill, how do I do that?
 
 You can follow these steps:
 
-. Select **Plans > Manage Subscription** in the web app
-. Select to **Edit** your subscription Prepaid Billing level
+. Select **Plan* in the web app
+. Select the **Manage** tab
+. Click the pencil icon in the **Credits** section to edit your auto refill rate
 
 [#do-i-still-get-bonus-credits-and-5-free-seats]
-=== Do I still get 30,000 bonus credits and 5 free seats on Prepaid Billing?
+=== Do I still get 30,000 bonus credits and 5 free seats on prepaid billing?
 
-Yes, all Prepaid Billing customers still receive the benefit of 30,000 credits and 5 free user seats every month.
+Yes, all prepaid billing customers still receive the benefit of 30,000 credits and 5 free user seats every month.
 
 [#share-plans-across-organizations-billed-centrally]
 === Is there a way to share plans across organizations and have them billed centrally?
