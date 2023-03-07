@@ -51,7 +51,7 @@ On the *Performance plan*, at the beginning of your billing cycle, you will be c
 [#what-is-prepaid-billing]
 === What is prepaid billing?
 
-Prepaid billing is a payment option for customers on Performance plan. Prepaid billing allows you to purchase credits in bulk, pay upfront, and, based on volume purchased, be able to get discounted prices for credits.
+Prepaid billing is a payment option for customers on the Performance plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and be able to get discounted prices for credits based on volume purchased.
 
 [#how-can-i-get-on-prepaid-billing]
 === How can I get on prepaid billing?
