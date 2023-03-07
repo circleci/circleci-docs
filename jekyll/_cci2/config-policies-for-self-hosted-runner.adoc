@@ -20,7 +20,7 @@ Follow this how-to guide to learn how to create a config policy to restrict whic
 [#prerequisites]
 == Prerequisites
 
-* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
 * Set up a self-hosted runner. See the xref:runner-installation#[Installing self-hosted runners] guide.
 
