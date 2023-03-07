@@ -140,4 +140,4 @@ resource_class_check = config.resource_class_by_project({
 
 * xref:create-and-manage-config-policies#[Create and manage config policies]
 * link:/docs/test-config-policies/[Test config policies]
-* link:/docs/config-policy-reference[Config policy reference]
+* xref:config-policy-reference#[Config policy reference]
