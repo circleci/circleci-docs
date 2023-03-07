@@ -24,7 +24,7 @@ Follow this how-to guide to learn how to create a config policy to restrict whic
 
 * Set up a self-hosted runner. See the xref:runner-installation#[Installing self-hosted runners] guide.
 
-* Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered.:
+* Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +
 [source,shell]
 ----
