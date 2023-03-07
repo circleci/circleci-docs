@@ -102,7 +102,7 @@ If the upload was successful, you will see something like the following:
 }
 ----
 
-NOTE: If you would like to write tests for your policy, check out the link:/docs/test-config-policies/[Test config policies] guide.
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.
 
 [#a-more-complex-example]
 == A more complex example
