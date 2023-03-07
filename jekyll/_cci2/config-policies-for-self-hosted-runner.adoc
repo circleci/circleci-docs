@@ -52,7 +52,7 @@ Example output:
 mkdir ./config-policies
 ----
 
-. Create a new file in this directory for your new policy. Name the file `runner.rego`
+. Create a new file in this directory for your new policy. Name the file `runner.rego`.
 
 . Copy the following snippet into the `runner.rego` file you just made:
 +
