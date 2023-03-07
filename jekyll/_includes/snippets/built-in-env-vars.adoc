@@ -1,5 +1,5 @@
 [.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=4*, options="header", stripes=even]
 |===
 | Variable
 | VCS
@@ -136,3 +136,18 @@
 | String
 | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
 |===
+
+If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can do so by using the xref:env-vars#environment-variable-usage-options[`environment` key] in your configuration and providing your own mappings with suitable pipeline values:
+
+```yaml
+build:
+  docker:
+    - image: cimg/node:17.0
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  environment:
+    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
+  steps:
+    - run: echo $CIRCLE_PROJECT_REPONAME
+```
