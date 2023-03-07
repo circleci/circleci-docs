@@ -14,8 +14,6 @@ en:
           link: glossary
         - name: Web app introduction
           link: introduction-to-the-circleci-web-app
-        - name: FAQ
-          link: faq
 
 - name: Getting started
   icon: icons/sidebar/continue.svg
@@ -66,6 +64,12 @@ en:
           link: hello-world
         - name: Set up the Slack orb
           link: slack-orb-tutorial
+    - name: Reference
+      children:
+        - name: Configuration reference
+          link: configuration-reference
+        - name: FAQ
+          link: faq
 
 - name: Orchestrate and trigger
   icon: icons/sidebar/pipeline.svg
@@ -106,6 +110,8 @@ en:
           link: schedule-pipelines-with-multiple-workflows
         - name: Set a nightly scheduled pipeline
           link: set-a-nightly-scheduled-pipeline
+        - name: Migrate from deploy to run
+          link: migrate-from-deploy-to-run
     - name: Reference
       children:
         - name: Project values and variables
@@ -140,6 +146,8 @@ en:
           link: building-docker-images
         - name: Run a job in a container
           link: run-a-job-in-a-container
+        - name: Installing and using docker-compose
+          link: docker-compose
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -211,29 +219,6 @@ en:
         - name: Machine runner configuration reference
           link: runner-config-reference
 
-- name: Configuration
-  icon: icons/sidebar/cogs.svg
-  children:
-    - name: Overview
-      children:
-        - name: Configuration introduction
-          link: config-intro
-        - name: Using the CircleCI configuration editor
-          link: config-editor
-    - name: Reference
-      children:
-        - name: Sample configuration
-          link: sample-config
-    - name: How-To Guides
-      children:
-        - name: Using branch filters
-          link: using-branch-filters
-        - name: Selecting a workflow to run
-          link: selecting-a-workflow-to-run-using-pipeline-parameters
-        - name: Installing and using docker-compose
-          link: docker-compose
-        - name: Rename organizations and repositories
-          link: rename-organizations-and-repositories
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
@@ -388,6 +373,8 @@ en:
           link: use-the-cli-for-config-and-policy-development
         - name: Stop building a project on CircleCI
           link: stop-building-a-project-on-circleci
+        - name: Rename organizations and repositories
+          link: rename-organizations-and-repositories
     - name: Reference
       children:
         - name: Config policy reference (Open preview)
@@ -480,8 +467,6 @@ en:
           link: how-to-use-the-circleci-local-cli
     - name: Reference
       children:
-        - name: Configuration reference
-          link: configuration-reference
         - name: API v2 reference
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
@@ -1010,6 +995,15 @@ ja:
         - name: Set up the Slack orb
           link: ja/slack-orb-tutorial
           i18n_name: Slack Orbを使う
+        - name: Installing the CircleCI CLI
+          link: ja/local-cli
+          i18n_name: CircleCI CLIのインストール
+    - name: Reference
+      i18n_name: リファレンス
+      children:
+        - name: Configuration reference
+          link: ja/configuration-reference
+          i18n_name: 設定ファイルリファレンス
 
 - name: Pipelines
   i18n_name: パイプライン
@@ -1069,6 +1063,15 @@ ja:
       - name: Schedule pipelines with multiple workflows
         link: ja/schedule-pipelines-with-multiple-workflows
         i18n_name: 複数のワークフローを使ったパイプラインのスケジュール実行
+      - name: Using branch filters
+        link: ja/using-branch-filters
+        i18n_name: ブランチフィルター
+      - name: Selecting a workflow to run
+        link: ja/selecting-a-workflow-to-run-using-pipeline-parameters
+        i18n_name: 実行するワークフローの指定
+      - name: Installing and using docker-compose
+        link: ja/docker-compose
+        i18n_name: docker-composeの使用
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
@@ -1207,56 +1210,6 @@ ja:
           link: ja/runner-config-reference
           i18n_name: マシンランナーの設定リファレンス
 
-- name: Configuration
-  icon: icons/sidebar/cogs.svg
-  i18n_name: 設定ファイル
-  children:
-    - name: Overview
-      i18n_name: 概要
-      children:
-        - name: Configuration introduction
-          link: ja/config-intro
-          i18n_name: 設定概要
-        - name: Using the CircleCI configuration editor
-          link: ja/config-editor
-          i18n_name: 設定ファイルエディター
-    - name: Reference
-      i18n_name: リファレンス
-      children:
-        - name: Configuration reference
-          link: ja/configuration-reference
-          i18n_name: 設定ファイルリファレンス
-        - name: Reusing configuration
-          link: ja/reusing-config
-          i18n_name: 設定ファイル再利用(Orb)
-        - name: Advanced configuration
-          link: ja/adv-config
-          i18n_name: 高度な設定
-        - name: Sample configuration
-          link: ja/sample-config
-          i18n_name: 設定ファイルサンプル
-        - name: Installing the CircleCI CLI
-          link: ja/local-cli
-          i18n_name: CircleCI CLIのインストール
-    - name: How-To Guides
-      i18n_name: ガイド
-      children:
-        - name: Using branch filters
-          link: ja/using-branch-filters
-          i18n_name: ブランチフィルター
-        - name: Selecting a workflow to run
-          link: ja/selecting-a-workflow-to-run-using-pipeline-parameters
-          i18n_name: 実行するワークフローの指定
-        - name: Installing and using docker-compose
-          link: ja/docker-compose
-          i18n_name: docker-composeの使用
-        - name: Rename organizations and repositories
-          link: ja/rename-organizations-and-repositories
-          i18n_name: 組織名とリポジトリ名の変更
-        - name: Migrate from deploy to run
-          link: ja/migrate-from-deploy-to-run
-          i18n_name: deployからrunへの移行
-
 - name: Optimizations
   icon: icons/sidebar/sparkle.svg
   i18n_name: 最適化
@@ -1297,6 +1250,9 @@ ja:
     - name: Avoid and debug Java memory errors
       link: ja/java-oom
       i18n_name: Java メモリ エラーの回避とデバッグ
+    - name: Reusing configuration
+      link: ja/reusing-config
+      i18n_name: 設定ファイル再利用(Orb)
 
 - name: Insights
   icon: icons/sidebar/insights-new.svg
@@ -1423,7 +1379,6 @@ ja:
       link: ja/config-policy-reference
       i18n_name: リファレンス
 
-
 - name: Projects
   i18n_name: プロジェクト
   icon: icons/sidebar/project-new.svg
@@ -1482,7 +1437,9 @@ ja:
         - name: Managing API tokens
           link: ja/managing-api-tokens
           i18n_name: APIトークン
-
+        - name: Rename organizations and repositories
+          link: ja/rename-organizations-and-repositories
+          i18n_name: 組織名とリポジトリ名の変更
 
 - name: Examples and guides
   i18n_name: サンプル
@@ -1507,6 +1464,9 @@ ja:
         - name: Database examples
           link: ja/postgres-config
           i18n_name: 設定例
+        - name: Sample configuration
+          link: ja/sample-config
+          i18n_name: 設定ファイルサンプル
 
 - name: Test
   i18n_name: テスト
@@ -1589,6 +1549,9 @@ ja:
     - name: Publish packages to Packagecloud
       link: ja/publish-packages-to-packagecloud
       i18n_name: Packagecloudへのデプロイ
+    - name: Migrate from deploy to run
+      link: ja/migrate-from-deploy-to-run
+      i18n_name: deployからrunへの移行
 
 - name: Reference
   icon: icons/sidebar/folder-open.svg
@@ -1883,6 +1846,7 @@ ja:
         - name: v3.0 Operations Guide
           i18n_name: v3.0 管理者ガイド
           link: ja/CircleCI-Server-3.0.1-Operations-Guide.pdf
+
 - name: Server administration v2.x
   i18n_name: Server v2.x 管理
   icon: icons/sidebar/admin-new.svg
