@@ -822,7 +822,7 @@ en:
     - name: Server v2.19 PDFs
       children:
         - name: What's New in v2.19
-          link: server-pdfs/v.2.19-overview
+          link: v.2.19-overview
         - name: v2.19 Installation Guide
           link: server-pdfs/CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.19 Operations Guide
@@ -830,7 +830,7 @@ en:
     - name: Server v2.18 PDFs
       children:
         - name: What's New in v2.18
-          link: server-pdfs/v.2.18-overview
+          link: v.2.18-overview
         - name: v2.18.3 Installation Guide
           link: server-pdfs/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
         - name: v2.18.3 Operations Guide
@@ -838,7 +838,7 @@ en:
     - name: Server v2.17.3 PDFs
       children:
         - name: What's New in v2.17
-          link: server-pdfs/v.2.17-overview
+          link: v.2.17-overview
         - name: v2.17.3 Installation Guide
           link: server-pdfs/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
@@ -846,7 +846,7 @@ en:
     - name: Server v2.16 PDFs
       children:
         - name: What's New in v2.16
-          link: server-pdfs/v.2.16-overview
+          link: v.2.16-overview
         - name: v2.16 Installation Guide
           link: server-pdfs/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
