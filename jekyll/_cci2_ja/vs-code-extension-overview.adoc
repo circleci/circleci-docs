@@ -4,43 +4,42 @@ contentTags:
   platform:
   - Cloud
 ---
-= VS Code extension overview
+= VS Code 拡張機能の概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about how the CircleCI VS Code extension can help you manage your pipelines, workflows and jobs.
+:page-description: パイプライン、ワークフロー、ジョブの管理に役立つ CircleCI 用 VS Code 拡張機能を紹介します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
-The CircleCI VS Code extension helps you avoid context-switching between VS Code and your browser.
+CircleCI 用の VS Code 拡張機能を使用すると、VS Code とブラウザを行き来するコンテキストスイッチの手間を解消できます。
 
 [#introduction]
 == はじめに
 
-The CircleCI VS Code extension lets you visualize and manage CircleCI pipelines directly from your IDE, as well as providing contextual help when creating, modifying and editing CircleCI YAML config files.
+CircleCI 用 VS Code 拡張機能では、CircleCI パイプラインを IDE から直接表示、管理できるほか、CircleCI の YAML 設定ファイルの作成、変更、編集に役立つコンテキストヘルプも利用できます。
 
-The extension allows you to:
+この拡張機能の主な機能は次のとおりです。
 
-* Authenticate and connect VS Code to CircleCI.
-* Browse and interact with your pipelines.
+* CircleCI に VS Code を認証して接続する
+* パイプラインを閲覧して操作する
 
-Available actions include:
+可能な操作は次のとおりです。
 
-* View pipelines, workflows, jobs statuses
-* View test outputs
+* パイプライン、ワークフロー、ジョブのステータスの表示
+* テスト出力の表示
 * アーティファクトのダウンロード
-* Approve jobs
-* Re-run builds
-* Be alerted through notifications when your workflows change status or need your attention
-* Access in-file support when editing CircleCI YAML configuration files, including:
-** Syntax validation
-** Syntax highlighting
-** Go-to-definition and go-to-reference
-** On-hover documentation and usage hints
-** Autocompletion
+* ジョブの承認
+* ビルドの再実行
+* ワークフローのステータス変更や注意が必要な状況を知らせるアラート
+* CircleCI の YAML 設定ファイル編集用のファイル内支援機能: 
+** 構文検証
+** 構文ハイライト
+** 宣言へ移動および参照へ移動
+** ホバーテキストと使い方のヒント
+** オートコンプリート
 
 [#install-the-vs-code-extension]
-== Install the VS Code extension
+== VS Code 拡張機能をインストールする
 
-For installation and setup instructions, see the VS Code link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[marketplace page], or search for the extensions tab in the VS Code app.
+この拡張機能のインストールとセットアップ手順については、VS Code の link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[Marketplace ページ]を参照するか、VS Code の [Extensions (拡張機能)] タブで検索してください。
