@@ -145,14 +145,14 @@ go list ./... | circleci tests run
 * CircleCI will run the command `gotestsum` on the supplied tests.
 * `--batch-count=2` & `--fail-fast` is enabled. If any of the test packages from batch 1 fail, batch 2 will not be executed.
 
-Run link:https://github.com/lambdaisland/kaocha[Kaocha] (Clojure) tests in five batches and fail as soon as one of the batches fails:
+Run link:https://github.com/lambdaisland/kaocha[Kaocha] (Clojure) tests in six batches and fail as soon as one of the batches fails:
 
 ```yaml
-circleci tests run
-  --command='./bin/kaocha $(xargs -I {} echo " --focus {} --only-load-ns {}")'
-  --batch-count=5
-  --fail-fast
-  --test-results-path="test/reports" < test.namespaces
+circleci tests run \
+ --command='lein kaocha $(cat test.namespaces.split | xargs -I {} echo "  --focus {}")' \
+ --batch-count=6\
+ --fail-fast \
+ --test-results-path="test/reports" < test.namespaces
 ```
 
 [#known-limitations]
