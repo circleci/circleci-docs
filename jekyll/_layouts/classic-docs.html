@@ -11,12 +11,7 @@ layout: compress
 
 <div class="outer">
   {% assign lang = page.lang %}
-  {% if page.collection == "style" %}
-    {% assign sidenav = site.data.sidenavstyle[lang] %}
-  {% else %}
-    {% assign sidenav = site.data.sidenav[lang] %}
-  {% endif %}
-
+  {% assign sidenav = site.data.sidenav[lang] %}
   {% include_cached global-nav.html site=site page=page sidenav=sidenav current_url=current_url %}
 
   <div id="progress-bar-container">
