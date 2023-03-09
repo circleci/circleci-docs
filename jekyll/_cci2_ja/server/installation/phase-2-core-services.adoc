@@ -538,7 +538,7 @@ GitHub を CircleCI で設定する場合、デプロイに認証情報を提供
 [#github]
 ==== GitHub
 
-下記は GitHub Enterprise **ではなく** GitHub.com の場合の説明です。 Use the client ID and secret you created with your GitHub OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
+下記は GitHub Enterprise **ではなく** GitHub.com の場合の説明です。 link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[前提条件のステップ] で Github OAuth アプリケーションを使って作成したクライアント ID とシークレットを使用します。
 
 [.tab.github.You_create_Secret]
 --
