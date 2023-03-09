@@ -443,22 +443,22 @@ endif::env-aws[]
 [#tls]
 === j. TLS
 
-For TLS, you have the following options:
+TLS では以下のオプションがあります。
 
 [.tab.tls.Do_nothing]
 --
 *何もしない* 
 
-何もしません。 Self-signed certificates will automatically be generated for you.  このオプションは試用版には適していますが、本番環境では推奨されません。
+何もしません。 自己署名証明書は、自動的に生成されます。  このオプションは試用版には適していますが、本番環境では推奨されません。
 
-NOTE: These self-signed certificates will not be trusted by your browser.  You will need to add an exception to your browser to access the application. Additionally, the certificates will be updated with new self-signed certificates when an update is pushed.
+NOTE: また、これらの自己署名証明書は、ブラウザによって信頼されません。  アプリケーションにアクセスするには、ブラウザに例外を追加する必要があります。 アップデートがプッシュされると、証明書は新しい自己署名証明書に更新されます。
 --
 
 [.tab.tls.Lets_Encrypt]
 --
 *Let's Encrypt*
 
-https://letsencrypt.org/[Let's Encrypt] will request and manage certificates for you.  This is a good option when the load balancer is publicly accessible. The following snippet (using your own email) can be added to `values.yaml`:
+https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  ロードバランサーが一般に公開されている場合に有効なオプションです。 以下のスニペット（自分のメールを使用）を `values.yaml` に追加することができます。
 
 [source,yaml]
 ----
@@ -468,7 +468,7 @@ kong:
     email: contact@example.com
 ----
 
-NOTE: Let's Encrypt may take up to 30 minutes to be reflected in your browser.
+NOTE: Let's Encryptは、ブラウザに反映されるまでに最大30分程度かかる場合があります。
 --
 
 [.tab.tls.Supply_private_key_and_certificate]
