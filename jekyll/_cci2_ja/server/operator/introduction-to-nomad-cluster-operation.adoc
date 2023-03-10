@@ -135,6 +135,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* Read the link:/docs/server/operator/managing-user-accounts#,Managing user accounts>> guide.
+* link:/docs/server/operator/managing-user-accounts#,[ユーザーアカウントの管理ガイド]をお読みください。
 +
 endif::[]
