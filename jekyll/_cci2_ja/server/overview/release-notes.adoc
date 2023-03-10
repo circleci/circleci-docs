@@ -37,7 +37,7 @@ Server v4.x では:
 [#changelog-4-0-2]
 === 更新履歴
 
-For full details of this release see the https://circleci.com/server/changelog/#release-4-0-2[changelog].
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#リリース-4-0-2[更新履歴] を参照して下さい。
 
 [#release-4-0-1]
 == リリース 4.0.1
