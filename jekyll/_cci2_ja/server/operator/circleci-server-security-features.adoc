@@ -46,7 +46,7 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 [#audit-logs]
 == 監査ログ
 
-The audit log feature is available for CircleCI installed on your servers or private cloud.
+監査ログ機能は、独自のサーバーまたはプライベートクラウド上にインストールした CircleCI でのみ使用できます。
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
@@ -106,7 +106,7 @@ CircleCI を使用を開始する際は、チームが CircleCI の _ユーザ�
 ** `echo` を使用し、コードベースまたはシェル内のシークレットを出力する場合
 ** プログラムやデバッグツールがエラー時にシークレットを出力する場合
 * VCS プロバイダーから付与された組織の権限を確認し、 https://en.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] に従うよう努めます (組織に属している場合)。
-* チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 Read through the https://circleci.com/docs/contexts/#restrict-a-context[contexts] document to learn more.
+* チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 詳細については、 https://circleci.com/docs/contexts/#restrict-a-context[コンテキスト] をお読みください。
 * 組織で SSH キーへのアクセス権を持つユーザーは、必ず監査を行ってください。
 * VCS で必ず2 要素認証 (2FA) を使用します　(https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA] 、　https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket] )。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
-* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡すかどうかを制御できます。 これはデフォルトでは **有効化** されていません。 You can read more about these settings and open source security in our https://circleci.com/docs/oss/#security[Open Source Projects Document].
+* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡すかどうかを制御できます。 これはデフォルトでは **有効化** されていません。 これらの設定やオープンソースセキュリティーに関する詳細は、 https://circleci.com/docs/oss/#security[オープンソースプロジェクトのドキュメント] をお読みください。
