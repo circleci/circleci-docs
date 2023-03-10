@@ -15,7 +15,8 @@ version:
 
 ここでは Server v4.x. で Orb を管理する方法を説明します。 CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照された Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 具体的には、パブリックレジストリからの Orb のコピー、以前コピーした Orb の更新、会社のプライベート Orb の登録 (存在する場合) を行います。
 
-For information on orbs and related use cases, see the link:/docs/orb-intro/[orbs docs].
+Orb と 関連するユースケースについては、 link:/docs/orb-intro[Orb に関するドキュメント] を参照してください。
+
 
 Orb の作成に関する情報は、 https://circleci.com/docs/ja/orb-author-intro/[Orb の作成概要] を参照してください。
 
