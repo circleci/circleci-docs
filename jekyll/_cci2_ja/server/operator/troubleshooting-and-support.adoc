@@ -112,5 +112,4 @@ kubectl delete pod <pod-name> -n <name-space> --now
 [#debug-queuing-builds]
 == キューに入れられたビルドのデバッグ
 
-For troubleshooting information on debugging queued builds, see the Server 2.x
-https://circleci.com/docs/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
+キューに入れられたビルドのデバッグに関する問題を解決するには、CircleCI Server 2.x の https://circleci.com/docs/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング] ガイドを参照してください。
