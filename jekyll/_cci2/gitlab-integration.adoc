@@ -120,7 +120,11 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 [#configuration]
 === Configuration
 
-Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
+Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. 
+
+For GitLab Self-managed, if you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will need to set the instance URL and enter your personal access token again to authorize this connection.
+
+Once you define a configuration source, you can set up a trigger that points to that configuration.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
@@ -141,11 +145,15 @@ In addition to a configuration source, each trigger includes the webhook URL, an
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
-**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the customer filter option. For example, a custom filter would allow you to only build on a specific branch or user.
+The ability to edit a trigger is currently available only for GitLab.com projects.
+
+//TODO: Verify whether self-managed can create custom trigger filter
+//TODO: Verify whether self-managed custom filter has Edit tab enabled
+**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Also note the differences in functionality with the project settings below for GitLab support.
+NOTE: Also note the differences in functionality below with project settings for GitLab support.
 
 [#project-settings-advanced]
 === Advanced
@@ -222,6 +230,8 @@ Organization administrator as well as organization contributor roles are current
 . An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 +
 If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
+
+
 
 [#roles-and-permissions]
 == Roles and permissions
