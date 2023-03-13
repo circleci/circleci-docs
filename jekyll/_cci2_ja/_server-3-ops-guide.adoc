@@ -20,8 +20,6 @@ docs@circleci.com
 
 include::server-3-operator-overview.adoc[]
 
-include::server-3-operator-metrics-and-monitoring.adoc[]
-
 include::server-3-operator-nomad.adoc[]
 
 include::server-3-operator-proxy.adoc[]
