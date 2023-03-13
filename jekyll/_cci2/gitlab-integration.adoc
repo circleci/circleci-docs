@@ -24,7 +24,9 @@ GitLab support is open to both new and existing users of CircleCI. Follow the st
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
-When you create a new organization and connect your GitLab account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory. 
+[.tab.signup.GitLab.com]
+--
+When you create a new organization and connect your GitLab.com account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory. 
 
 If your selected repo does _not_ already have a `.circleci/config.yml`, you will be presented with the following options to set up a CircleCI configuration for your project:
 
@@ -40,6 +42,22 @@ CircleCI automatically creates a new branch and commits a basic configuration fi
 You can choose a sample `.circleci/config.yml` to best fit your project from a variety of templates (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is committed on a new branch.
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
+--
+
+[.tab.signup.GitLab_Self_Managed]
+--
+When you create a new organization and connect your GitLab Self-managed account, you will first need to enter your self-managed instance URL, e.g. `https://example.circleci.com`. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks like `https://example.circleci.com/api/v4`.
+
+You also need to enter a link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.
+
+Ensure that your GitLab self-managed instance already contains at least one project. The authorization attempt will be unsuccessful if your instance does not have any projects.
+
+Once your account is authorized, select the repository for your CircleCI project, and enter a project name. 
+
+Finally, click **Create Project**. You will then be redirected to the CircleCI projects dashboard. 
+
+The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. If the repository you selected already has a `.circleci/config.yml`, you will need to save a commit in the repo to see your pipeline running in the dashboard.
+--
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
