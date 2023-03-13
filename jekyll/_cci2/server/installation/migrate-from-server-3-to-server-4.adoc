@@ -161,7 +161,7 @@ Below are the changes you should expect to see in `helm-diff` output:
 * Environment variables for RabbitMQ and MongoDB URIs change
 * Environment variables for VM, OUTPUT and NOMAD service uri now reference `<domain_name>:<service_port>`
 * Annotations from VM, OUTPUT and NOMAD service resources are deleted
-* Github checksum is added as annotation
+* GitHub checksum is added as annotation
 * Secret and annotation for `distributor-*` deployments are deleted
 * Upstream chart `postgresql` is updated
 * Upsteam charts will be recreated (delete and create):

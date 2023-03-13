@@ -13,28 +13,29 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになりました。この機能は現在**オープンプレビュー**段階であり、 すべての側面において、今後変更される可能性があります。
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
 
-CAUTION: 設定ファイルのポリシー管理機能がオープンプレビュー段階の間は、コンプライアンスの用途には**使用しないでください**。 **オープンプレビュー**の間は本機能を使用できない期間が発生する可能性があります。その間、構築した設定ファイルのポリシーに対する評価が**行われない**場合があります。
+CAUTION: コンフィグファイルのポリシー管理機能が**オープンプレビュー段階**の間は、**コンプライアンスの用途には使用しないでください&+**。 オープンプレビューの間は本機能を使用できない期間が発生する可能性があります。 その間、構築したコンフィグファイルのポリシーに対する評価が行われない場合があります。
 
-設定ファイルのポリシー管理機能を使って組織レベルのポリシーを作成し、設定要素が必須なのか、許可する、許可しないなどのルールとスコープを指定することができます。
+コンフィグファイルのポリシー管理機能を使って組織レベルのポリシーを作成し、設定要素が必須なのか、許可する、許可しないなどのルールとスコープを指定することができます。
 
 [#introduction]
 == はじめに
 
-設定ファイルのポリシー管理機能により、CircleCI プロジェクトの設定ファイルを管理するポリシーを作成できます。 プロジェクトの設定ファイルが関連付けられたポリシーに定められたルールを遵守していない場合、最も厳しいケースでは、遵守するまでそのプロジェクトのパイプラインはトリガーできません。
+コンフィグファイルのポリシー管理機能により、CircleCI プロジェクトの設定ファイルを管理するポリシーを作成できます。 プロジェクトのコンフィグファイルが関連付けられたポリシーに定められたルールを遵守していない場合、最も厳しいケースでは、遵守するまでそのプロジェクトのパイプラインはトリガーできません。
 
 CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。 この方法ではプロジェクトの拡大に伴い変化するニーズに合うように各パイプラインを作成できるため、開発や反復を迅速に行う際に便利です。 しかし、組織全体の規則やセキュリティポリシーを管理および制定することが困難な場合があります。 そんな場合に、設定ファイルのポリシー管理機能が役立ちます。
 
-設定ファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
+コンフィグファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
 
 [#quickstart]
 == クイックスタート
 
-VCS に接続した link:/docs/ja/first-steps[CircleCI アカウント]を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy#[ポリシーの作成ガイド]をお読みください。
+VCS に接続した link:/docs/first-steps[CircleCI アカウント]を既にお持ちで、いますぐコンフィグファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy#[ポリシーの作成ガイド]をお読みください。
 
-[#how-config-policy-management-works]
-== 設定ファイルのポリシー管理機能の仕組み
+[#how-config-policy-work]
+== コンフィグファイルのポリシー管理機能の仕組み
+
 
 設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づく意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
 
@@ -52,10 +53,11 @@ hard_failures:    Array<{ rule: string, reason: string }>
 
 意思決定の結果には、意思決定に使用されたルールと、検出されたルール違反 (soft_fail と hard_fail) の一覧が表示されます。
 
-[#use-the-cli-for-config-policy-management]
-== CLI を使用した設定ファイルのポリシー管理
+[#use-the-cli-with-config-policies]
+== CLI を使用したコンフィグファイルのポリシー管理
 
-CircleCI CLI を使って、プログラム上で組織のポリシーを管理することができます。 ポリシーの管理機能を実行するためのサブコマンドは、`circleci policy` コマンドにまとめられています。
+
+CircleCI CLI を使って、プログラム上で組織のポリシーを管理することができます。  ポリシーの管理機能を実行するためのサブコマンドは、`circleci policy` コマンドにまとめられています。
 
 設定ポリシーの管理において、CLI では現在以下のサブコマンドをサポートしています。
 
@@ -69,7 +71,7 @@ CircleCI CLI を使って、プログラム上で組織のポリシーを管理�
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
-* `settings`: 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。
+* `settings`- 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。 
 +
 `settings` サブコマンドをフラグなしで呼び出した場合、現在の設定がフェッチされコンソールに出力されます。
 +
@@ -283,7 +285,40 @@ sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
-hard_fail["custom_rule"] { data.meta.branch == "main" }
+hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
+----
+
+以下は、信頼できないオリジンからのプルリクエストビルドをブロックするポリシーの例です。
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["forked_pull_requests"]
+
+# this rule is enabled only if the body evaluates to true (origin_repository_url and target_repository_url will be different in case of a forked pull request)
+enable_rule["check_forked_builds"] {
+	data.meta.vcs.origin_repository_url != data.meta.vcs.target_repository_url
+}
+
+# enable hard failure
+hard_fail["check_forked_builds"]
+
+check_forked_builds = reason {
+	not from_trusted_origin(data.meta.vcs.origin_repository_url)
+	reason := sprintf("pipeline triggered from untrusted origin: %s", [data.meta.vcs.origin_repository_url])
+}
+
+from_trusted_origin(origin) {
+	some trusted_origin in {
+		"https://github.com/trusted_org/",
+		"https://bitbucket.org/trusted_org/",
+	}
+
+	startswith(origin, trusted_origin)
+}
 ----
 
 [#testing-policies]

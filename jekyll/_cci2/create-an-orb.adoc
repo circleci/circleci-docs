@@ -111,7 +111,7 @@ link:/docs/contexts/#restricting-a-context[Contexts] can be located by navigatin
 .Secure contexts
 video::ImPE969yv08[youtube]
 
-=== 6. Push changes to Github
+=== 6. Push changes to GitHub
 
 During the setup process, the `orb init` command prepares your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on CircleCI.
 

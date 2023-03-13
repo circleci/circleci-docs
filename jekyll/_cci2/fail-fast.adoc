@@ -121,14 +121,14 @@ After each batch within a task finishes executing its tests, the task checks wit
 Run link:https://jestjs.io/[jest] (JavaScript/TypeScript) tests in three batches with fail-fast enabled:
 
 ```yaml
-npx jest --listTests | circleci tests run
-  --command="xarg yarn tests"
-  --batch-count=3
-  --fail-fast
+npx jest --listTests | circleci tests run \ 
+  --command="xargs yarn tests" \
+  --batch-count=3 \
+  --fail-fast \
   --test-results-path="test-results"
 ```
 
-* `--listTests` grabs all tests which get fed into `stdin` for `xarg yarn tests`.
+* `--listTests` grabs all tests that get fed into `stdin` for `xargs yarn tests`. `--listTests` can sometimes be too aggressive depending on your setup. You may need to be more specific, with a regex and a glob command, to only get the intended tests.
 * CircleCI will run the command `yarn tests` on the tests fed into `stdin` via `--listTests`.
 * `--batch-count=3` & `--fail-fast` is enabled. For example, if any of the tests from batch 1 fail, batch 2 will not be executed.
 
@@ -145,14 +145,14 @@ go list ./... | circleci tests run
 * CircleCI will run the command `gotestsum` on the supplied tests.
 * `--batch-count=2` & `--fail-fast` is enabled. If any of the test packages from batch 1 fail, batch 2 will not be executed.
 
-Run link:https://github.com/lambdaisland/kaocha[Kaocha] (Clojure) tests in five batches and fail as soon as one of the batches fails:
+Run link:https://github.com/lambdaisland/kaocha[Kaocha] (Clojure) tests in six batches and fail as soon as one of the batches fails:
 
 ```yaml
-circleci tests run
-  --command='./bin/kaocha $(xargs -I {} echo " --focus {} --only-load-ns {}")'
-  --batch-count=5
-  --fail-fast
-  --test-results-path="test/reports" < test.namespaces
+circleci tests run \
+ --command='lein kaocha $(cat test.namespaces.split | xargs -I {} echo "  --focus {}")' \
+ --batch-count=6\
+ --fail-fast \
+ --test-results-path="test/reports" < test.namespaces
 ```
 
 [#known-limitations]
@@ -184,4 +184,4 @@ circleci tests run
 
 **Question:** How do I use the fail-fast functionality with CircleCI's intelligent test splitting?
 
-**Answer:** Follow the same instructions as the <<#batching,example above>>, and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename, _OR_  `--split-by=timing` to split by timing. See the <<#known-limitations,Known limitations>> section for constraints at this time with splitting by timing. If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (for example, using `circleci tests run` instead of `circleci tests split`).
+**Answer:** Follow the same instructions as the <<#batching,example above>>, and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename, _OR_  `--split-by=timings` to split by timing. See the <<#known-limitations,Known limitations>> section for constraints at this time with splitting by timing. If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (for example, using `circleci tests run` instead of `circleci tests split`).

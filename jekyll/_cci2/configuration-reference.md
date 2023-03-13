@@ -15,7 +15,7 @@ contentTags:
 sectionTags:
   config-version-2:
     - "#version"
-    - "#jobs"  
+    - "#jobs"
     - "#job-name"
     - "#environment"
     - "#parallelism"
@@ -802,7 +802,7 @@ jobs:
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
 * [ubuntu-2004](https://circleci.com/developer/machine/image/ubuntu-2004)
-* [ubuntu-2204](https://circleci.com/developer/machine/image/ubuntu-2204) 
+* [ubuntu-2204](https://circleci.com/developer/machine/image/ubuntu-2204)
 
 More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
@@ -834,7 +834,7 @@ When using the Linux [GPU executor]({{ site.baseurl }}/using-gpu), the available
 ##### Available Android `machine` images
 {: #available-android-machine-images }
 
-CircleCI supports running jobs on Android for testing and deploying Android applications. 
+CircleCI supports running jobs on Android for testing and deploying Android applications.
 
 To use the [Android image](https://circleci.com/developer/machine/image/android) directly with the machine executor, add the following to your job:
 
@@ -856,7 +856,7 @@ For examples, refer to the [Using Android Images with the Machine Executor](/doc
 ##### Available Windows `machine` images
 {: #available-windows-machine-images-cloud }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field. 
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field.
 
 For a full list of supported images, refer to one of the following:
 
@@ -906,14 +906,14 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-Example: Use a macOS virtual machine with Xcode version 12.5.1:
+Example: Use a macOS virtual machine with Xcode version 14.2.0:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
+      xcode: "14.2.0"
 ```
 
 ---
@@ -1033,8 +1033,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
     steps:
       ... // other config
 ```
@@ -1064,7 +1064,7 @@ orbs:
 
 jobs:
   build: # name of your job
-    executor: 
+    executor:
       name: win/default # executor type
       size: medium # can be medium, large, xlarge, 2xlarge
 
@@ -1829,6 +1829,8 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 {% include snippets/pipeline-values.md %}
 
+For a list of pipeline values compatible with GitLab, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
+
 For example:
 
 ```yaml
@@ -2465,7 +2467,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
 
 jobs:
   test:

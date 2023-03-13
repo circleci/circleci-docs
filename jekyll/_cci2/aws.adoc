@@ -1,6 +1,6 @@
 ---
 description: "This is document provides a step by step guide to installing CircleCI Server v2.x with Terraform"
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
 ---
@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 Following is a step by step guide to installing CircleCI server v2.x with Terraform.
 
@@ -214,13 +214,13 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 
 .. Copy the Client ID and Secret from GitHub and paste it into the relevant fields, then click Test Authentication.
 
-.. If you are using GitHub.com, move on to step 6. If using Github Enterprise, you will also need to follow some supplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
+.. If you are using GitHub.com, move on to step 6. If using GitHub Enterprise, you will also need to follow some supplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
 ... Navigate to Personal Settings (top right) > Developer Settings > Personal Access Tokens.
 ... Click “generate new token”. Name the token appropriately to prevent accidental deletion. Do not tick any of the checkboxes, we only require the default public read-level access so no extra permissions are required. We recommend this token should be shared across your organization rather than being owned by a single user.
 ... Copy the new token and paste it into the GitHub Enterprise Default API Token field.
 +
-.Enter Github Enterprise Token
-image::ghe_token.png[Github Integration]
+.Enter GitHub Enterprise Token
+image::ghe_token.png[GitHub Integration]
 
 . **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed run-through of LDAP settings, read our https://circleci.com/docs/authentication/#ldap[LDAP authentication guide]
 

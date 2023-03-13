@@ -15,19 +15,19 @@ CircleCI pipelines are the highest-level unit of work, encompassing a project's 
 
 When visiting your CircleCI dashboard, you are shown a list of recently triggered pipelines for your organization/account.
 
-![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
+![Screenshot of the pipelines dashboard in the CircleCI app](/docs/assets/img/docs/pipelines-dashboard.png)
 
 ## Pipeline architecture
 {: #pipeline-architecture }
 
-A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
+A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results, and artifacts through several tabs.
 
-![Job tab options in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
+![Job tab options in the CircleCI web app](/docs/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-Further, the output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
+The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members.
 
-![Download and share job step output]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+![Download and share job step output](/docs/assets/img/docs/pipelines-job-output.png)
 
 ## Next steps
 {: #next-steps}
-Find out more about triggering pipelines in the [Triggers Overview]({{site.baseurl}}/triggers-overview).
+Find out more about triggering pipelines in the [Triggers Overview](/docs/triggers-overview/).

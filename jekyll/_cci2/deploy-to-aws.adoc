@@ -1,6 +1,6 @@
 ---
-description: "This is document provides examples of deploying to Amazon Web Services"
-contentTags: 
+description: This is document provides examples of deploying to Amazon Web Services.
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -13,6 +13,8 @@ contentTags:
 :icons: font
 :toc: macro
 :toc-title:
+
+In this how-to guide, you will learn how to configure CircleCI to deploy to Amazon Web Services.
 
 [#introduction]
 == Introduction
@@ -33,12 +35,23 @@ In addition to the orb described below, CircleCI has created an AWS convenience 
 
 For detailed information about the AWS S3 orb, refer to the link:https://circleci.com/developer/orbs/orb/circleci/aws-s3[CircleCI AWS S3 Orb Reference] page. This section details the use of the AWS S3 orb and `version: 2.1` configuration for simple deployment, below we will look at the same example without orbs and using using `version: 2` configuration.
 
-1. For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
-2. Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
-3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
-+
+[#create-iam-user]
+=== 1. Create IAM user
+
+For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
+
+[#add-aws-access-keys]
+=== 2. Add AWS access keys
+
+Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+
+[#deploy-using-orb]
+=== 3. Deploy using orb
+
+Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
+
 {% include snippets/add-version-number.adoc %}
-+
+
 ```yaml
 version: 2.1
 
@@ -83,16 +96,35 @@ jobs: # Define the build and deploy jobs
 ```
 
 [#deploy-to-aws-s3-with-2-configuration]
-=== Deploy to AWS S3 with 2.0 configuration
+== Deploy to S3 with 2.0 configuration
 
-1. For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
-2. Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. 
-3. In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
-4. Install `awscli` in your primary container by following the link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI documentation].
-5. link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[Use the AWS CLI] to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `main`.
-+
+[#create-iam-user-2]
+=== 1. Create IAM user
+
+For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
+
+[#add-aws-access-keys-2]
+=== 2. Add AWS access keys
+
+Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+
+[#create-deploy-job]
+=== 3. Create deploy job
+
+In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
+
+[#install-awscli]
+=== 4. Install the AWS CLI
+
+Install `awscli` in your primary container by following the link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI documentation].
+
+[#deploy-awscli]
+=== 5. Deploy with the AWS CLI
+
+link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[Use the AWS CLI] to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `main`.
+
 {% include snippets/add-version-number.adoc %}
-+
+
 ```yaml
 version: 2.1
 
@@ -137,7 +169,7 @@ For a complete list of AWS CLI commands and options, see the link:https://docs.a
 
 The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[orb registry page] for a full list of parameters, jobs, commands and options.
 
-Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. 
+Using the `build-and-push-image` job (shown below) requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
 
 {% include snippets/add-version-number.adoc %}
 
@@ -163,7 +195,7 @@ workflows:
 
 Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] orbs to easily update an existing AWS ECS instance.
 
-Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
+Using the `build-and-push-image` job (shown below) requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
 
 {% include snippets/add-version-number.adoc %}
 

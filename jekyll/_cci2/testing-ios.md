@@ -21,7 +21,15 @@ There is documentation for [iOS code signing projects](/docs/ios-codesigning/) a
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
+### Supported Xcode versions for Intel
+{: #supported-xcode-versions-intel}
+
 {% include snippets/xcode-intel-vm.md %}
+
+### Supported Xcode versions for Apple silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
 
 For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
 
@@ -173,9 +181,7 @@ For more information on how to get started with Fastlane Match, visit the [iOS c
 ## Using Ruby
 {: #using-ruby }
 
-Our macOS images contain multiple versions of Ruby. The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The versions of Ruby that are installed in each image are listed in the software manifests of each container (see [supported Xcode versions](#supported-xcode-versions)).
-
-If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
+Our Xcode images ship with multiple versions of Ruby installed. The versions we install are the latest stable versions of Ruby, according to [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/), at the time the image is built. The versions of Ruby that are installed in each image, along with the default Ruby selected for that image, are listed in the software manifests of each container (see [supported Xcode versions](#supported-xcode-versions)).
 
 Installing gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, CircleCI advises using one of the alternative Rubies provided by Chruby (as configured by default in all images) for jobs.
 {: class="alert alert-info" }
@@ -199,10 +205,10 @@ Then, call the `switch-ruby` command with the version number required. For examp
 steps:
   # ...
   - macos/switch-ruby:
-      version: "3.0"
+      version: "3.1"
 ```
 
-Replace `3.0` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
+Replace `3.1` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.1.3` for example, just the major version. This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
 
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
@@ -216,27 +222,33 @@ steps:
 ### Switching Rubies manually
 {: #switching-rubies-manually }
 
-To switch to another Ruby version, add the following to the beginning of your job.
+For Xcode version `14.2` and higher, add the following to the beginning of your job.
 
 ```yaml
 steps:
   # ...
   - run:
       name: Set Ruby Version
-      command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+      command: rbenv global 3.1.3 && rbenv rehash
 ```
 
-Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
+Replace `3.1.3` with the version of Ruby required.
 
-To revert back to the system Ruby, add the following to the beginning of your job:
+To revert back to the system Ruby, specify `system` as the Ruby version.
+
+For Xcode versions `14.1` and lower, add the following to the beginning of your job.
 
 ```yaml
 steps:
   # ...
   - run:
       name: Set Ruby Version
-      command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
+      command: sed -i '' 's/^chruby.*/chruby ruby-3.1.3/g' ~/.bash_profile
 ```
+
+Replace `3.1.3` with the version of Ruby required.
+
+To revert back to the system Ruby, specify `system` as the Ruby version.
 
 ### Installing additional Ruby versions
 {: #installing-additional-ruby-versions }
@@ -244,7 +256,11 @@ steps:
 Installing additional Ruby versions consumes a lot of job time. We only recommend doing this if you must use a specific version that is not installed in the image by default.
 {: class="alert alert-info" }
 
-To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
+To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby.
+
+For Xcode versions `14.2` and higher, this can be done with the `rbenv install` command, ensuring you pass the version of Ruby required. If a newer version of Ruby is not available, you will need to update the `ruby-build` package (`brew upgrade ruby-build`) to ensure the latest Ruby version definitions are available.
+
+For Xcode versions `14.1` and lower, we use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
 ### Using custom versions of CocoaPods and other Ruby gems
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }

@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -20,7 +20,7 @@ This page describes how to install CircleCI's machine runner on Linux.
 [#download-the-launch-agent-script]
 == Download the machine runner launch-agent script
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, or ARM64:
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, ARM64, s390x or ppc64le:
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -38,6 +38,16 @@ export platform=linux/amd64 && sh ./download-launch-agent.sh
 ```shell
 # For Linux ARM64:
 export platform=linux/arm64 && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux s390x:
+export platform=linux/s390x && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux ppc64le:
+export platform=linux/ppc64le && sh ./download-launch-agent.sh
 ```
 
 After successful installation, the download-launch-agent.sh file can be deleted.
@@ -73,7 +83,7 @@ sudo chmod 0750 /var/opt/circleci
 ```
 
 ```shell
-sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
+sudo chown -R circleci /var/opt/circleci /opt/circleci
 ```
 
 Consider running the following additional command if you would like to use certified orbs, without errors, that work on Cloud on your self-hosted runner. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
@@ -92,7 +102,7 @@ sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-con
 ```
 
 ```shell
-sudo chown circleci: /etc/opt/circleci/launch-agent-config.yaml
+sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
@@ -114,7 +124,7 @@ runner:
 ```
 
 - Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#configure-selinux-policy]
 == Configure SELinux policy (RHEL 8)

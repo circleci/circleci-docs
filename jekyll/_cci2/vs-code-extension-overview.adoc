@@ -1,0 +1,44 @@
+---
+contentTags: 
+  platform:
+  - Cloud
+---
+= VS Code extension overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn about how the CircleCI VS Code extension can help you manage your pipelines, workflows and jobs.
+:icons: font
+:toc: macro
+:toc-title:
+
+The CircleCI VS Code extension helps you avoid context-switching between VS Code and your browser.
+
+[#introduction]
+== Introduction
+
+The CircleCI VS Code extension lets you visualize and manage CircleCI pipelines directly from your IDE, as well as providing contextual help when creating, modifying and editing CircleCI YAML config files. 
+
+The extension allows you to:
+
+* Authenticate and connect VS Code to CircleCI.
+* Browse and interact with your pipelines. 
+
+Available actions include:
+
+* View pipelines, workflows, jobs statuses
+* View test outputs
+* Download artifacts
+* Approve jobs
+* Re-run builds
+* Be alerted through notifications when your workflows change status or need your attention
+* Access in-file support when editing CircleCI YAML configuration files, including:
+** Syntax validation
+** Syntax highlighting
+** Go-to-definition and go-to-reference
+** On-hover documentation and usage hints
+** Autocompletion
+
+[#install-the-vs-code-extension]
+== Install the VS Code extension
+
+For installation and setup instructions, see the VS Code link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[marketplace page], or search for the extensions tab in the VS Code app. 
