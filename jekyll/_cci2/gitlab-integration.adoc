@@ -44,7 +44,7 @@ You can choose a sample `.circleci/config.yml` to best fit your project from a v
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
 --
 
-[.tab.signup.GitLab_Self_Managed]
+[.tab.signup.GitLab_Self-Managed]
 --
 When you create a new organization and connect your GitLab Self-managed account, you will first need to enter your self-managed instance URL, e.g. `https://example.circleci.com`. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks like `https://example.circleci.com/api/v4`.
 
@@ -73,9 +73,19 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
+[.tab.pipeline.GitLab.com]
+--
 When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
 If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
+--
+
+[.tab.pipeline.GitLab_Self-Managed]
+--
+If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
+
+When you commit this change in your repository, you should see the pipeline run for the first time on the CircleCI dashboard.
+--
 
 Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
