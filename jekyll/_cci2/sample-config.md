@@ -33,7 +33,7 @@ The CircleCI VS Code extension is available to download on the [VS Code marketpl
 The configuration example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
 * Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [developer hub convenience images](/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example:
 
@@ -154,7 +154,7 @@ workflows:
 The configuration example below shows a sequential workflow where the `build` job runs, and then the `test` job runs once `build` has completed. This is achieved by using the [`requires` key](/docs/configuration-reference/#requires), and specifying the `test` job "requires" the `build` job in order to run. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
 * Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [developer hub convenience images](/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
 
@@ -282,7 +282,7 @@ workflows:
 The example below shows a sequential workflow with an [approval step](/docs/configuration-reference/#type). The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app before the `deploy` job can run. All jobs run in Docker containers using the base image provided by CircleCI.
 
 * Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [developer hub convenience images](/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
 
