@@ -15,13 +15,11 @@ Migrating from server v3.x to v4.x is an _in-place_ migration. You will generate
 
 We recommend using a staging environment before completing this process in a production environment. This will allow you to gain a better understanding of the migration process, and give you an idea of how long the migration will take to complete.
 
-toc::[]
-
 [#prerequisites]
 == Prerequisites
 
 * Your current CircleCI server installation is v3.x.
-* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide.
+* You have taken a backup of the v3.x instance, following the instructions at the xref:/docs/server/v4.1/operator/backup-and-restore#[Backup and Restore] guide.
 ** If you are using external datastores, they need to be backed up separately.
 ** If you are using internal datastores they are backed up using the backup process described in the link above.
 * The migration script must be run from a machine with following tools installed:
@@ -214,7 +212,7 @@ The following Kubernetes service object is added:
 
 [#execute-nomad-terraform]
 === 9. Execute Nomad Terraform
-Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
+Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned xref:/docs/server/v4.1/installation/phase-3-execution-environments#nomad-clients[here].
 Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication.
 
 [#validate-your-migration-to-server-4]
@@ -231,6 +229,6 @@ ifndef::pdf[]
 
 [#next-steps]
 == Next steps
-* link:/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
-* link:/docs/server/operator/operator-overview[Server 4.x Operator Overview]
+* xref:/docs/server/v4.1/installation/hardening-your-cluster#[Hardening Your Cluster]
+* xref:/docs/server/v4.1/operator/operator-overview#[Server 4.x Operator Overview]
 endif::[]

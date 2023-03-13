@@ -13,8 +13,6 @@ version:
 
 This section provides supplemental information on hardening your Kubernetes cluster.
 
-toc::[]
-
 [#network-topology]
 == Network topology
 A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
@@ -341,6 +339,6 @@ When hardening an installation where the VM service uses public IPs, the followi
 
 ifndef::pdf[]
 ## Next steps
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
-* link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
+* xref:/docs/server/v4.1/installation/migrate-from-server-3-to-server-4#[Migrate from Server v3.x to v4.x]
+* xref:/docs/server/v4.1/operator/operator-overview#[Server 4.x Operators Overview]
 endif::[]

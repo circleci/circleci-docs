@@ -278,7 +278,7 @@ a| Client Secret for OAuth Login via Github:
 |`github.defaultToken`
 |string
 |`""`
-a| link:/docs/server/installation/phase-2-core-services/#github-enterprise-integration[Personal access token for your GitHub Enterprise instance]:
+a| xref:/docs/server/v4.1/installation/phase-2-core-services/#github-enterprise-integration[Personal access token for your GitHub Enterprise instance]:
 
 **Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically.
 
