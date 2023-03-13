@@ -1,22 +1,76 @@
 ---
-layout: classic-docs
-title: "Quickstart Guide"
-short-title: "Quickstart Guide"
-description: "A tutorial for getting your first green CircleCI build"
-categories: [getting-started]
-order: 41
-toc: false
+contentTags: 
+  platform:
+  - Cloud
 ---
+= Quickstart guide
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A tutorial for getting your first successful CircleCI build
+:icons: font
+:toc: macro
+:toc-title:
 
-{% capture content %}
 Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
-{% endcapture %}
 
-{% include getting-started-section-header.html content=content %}
+This quickstart guide shows you the fastest route from sign up, to connecting an existing project, and getting a first passing pipeline.
 
+[#prerequisites]
+== Prerequisites
+
+* Choose a project you would like to connect to CircleCI. This will be an existing repo in GitHub, Bitbucket or GitLab. If you don't have a project you would like to use, create a new repo so you can follow along, and call it "hello-circleci".
+
+== Quickstart steps
+
+Choose your VCS and follow the steps
+
+[.tab.quickstart.GitHub]
+--
+. Sign up
++
+* Sign up for a link:https://circleci.com/signup[free CircleCI account]
+
+. Next
++
+some github steps
+
+. Next
++
+Some github steps
+--
+
+[.tab.quickstart.Bitbucket]
+--
+. Sign up
++
+* Sign up for a link:https://circleci.com/signup[free CircleCI account]
+
+. Next
++
+some bitbucket steps
+
+. Next
++
+Some bitbucket  steps
+--
+
+[.tab.quickstart.GitLab]
+--
+. Sign up
++
+* Sign up for a link:https://circleci.com/signup[free CircleCI account]
+
+. Next
++
+some gitlab steps
+
+. Next
++
+Some gitlab steps
+--
 
 {% capture content1 %}
-Sign up for a free CircleCI
+Sign up for a free CircleCI account
 {% endcapture %}
 
 {% capture content2 %}
