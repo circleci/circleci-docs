@@ -15,7 +15,7 @@ CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:using-arm#[
 [#ipv6-in-tests]
 === Can I use IPv6 in my tests?
 
-You can use the xref:configuration-reference/#machine[Machine executor] for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+You can use the xref:configuration-reference#machine[Machine executor] for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
 Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 

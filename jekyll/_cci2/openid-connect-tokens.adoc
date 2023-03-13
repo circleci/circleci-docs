@@ -11,12 +11,12 @@ contentTags:
 :toc: macro
 :toc-title:
 
-In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (OIDC) token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
+In jobs using a xref:contexts#[context], CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
 
 [#openid-connect-id-token-availability]
 == OpenID Connect ID token availability
 
-In CircleCI jobs that use at least one context, the OpenID Connect ID token is available in the environment variable `$CIRCLE_OIDC_TOKEN`.
+In CircleCI jobs that use at least one context, the OpenID Connect ID tokens are available in the environment variables: `$CIRCLE_OIDC_TOKEN` and `$CIRCLE_OIDC_TOKEN_V2`. The `$CIRCLE_OIDC_TOKEN_V2` token includes a different format for the `sub` claim, which is highlighted in the table below.
 
 Add a <<contexts#creating-and-using-a-context,context to a job>> by adding the `context` key to the <<configuration-reference#workflows,workflows>> section of your `circleci/config.yml` file:
 
@@ -32,16 +32,16 @@ workflows:
 [#setting-up-your-cloud-service]
 == Setting up your cloud service
 
-Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
+Consult your cloud service's documentation for steps to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
 
-The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/ORGANIZATION_ID`, where `ORGANIZATION_ID` is the organization ID (a universally unique identifier) that represents your organization. You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app].
+The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `https://oidc.circleci.com/org/ORGANIZATION_ID`, where `ORGANIZATION_ID` is the organization ID (a universally unique identifier) that represents your organization. You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** in the https://app.circleci.com/[CircleCI web app].
 
 The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
 
 [#format-of-the-openid-connect-id-token]
 == Format of the OpenID Connect ID token
 
-The OpenID Connect ID token contains the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
+The OIDC tokens contain the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
 
 [%autowidth]
 [.table.table-striped]
@@ -54,7 +54,11 @@ The OpenID Connect ID token contains the following standard https://openid.net/s
 | The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/ORGANIZATION_ID"`, a string, where `ORGANIZATION_ID` is a UUID identifying the current job's project's organization.
 
 | `sub`
-| The subject. This identifies who is running the CircleCI job and where. Its value is `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+a| The subject. This identifies who is running the CircleCI job and where. `$CIRCLE_OIDC_TOKEN_V2` also includes information about the source of change.
+
+For `$CIRCLE_OIDC_TOKEN` its value is: `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. 
+
+For `$CIRCLE_OIDC_TOKEN_V2` its value is: `"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID/vcs-origin/VCS_ORIGIN/vcs-ref/VCS_REF"`, a string, where `ORGANIZATION_ID`, `PROJECT_ID`, and `USER_ID` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `VCS_ORIGIN` and `VCS_REF` are strings that identify the repo URL and reference to the change that caused the job to run.
 
 | `aud`
 | The audience. Currently, this is a fixed value `"ORGANIZATION_ID"`, a string containing a UUID that identifies the job's project's organization.
@@ -67,7 +71,7 @@ The OpenID Connect ID token contains the following standard https://openid.net/s
 |===
 
 
-The OpenID Connect ID token also contains some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job:
+The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -77,6 +81,12 @@ The OpenID Connect ID token also contains some https://openid.net/specs/openid-c
 
 | `oidc.circleci.com/project-id`
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
+
+| `oidc.circleci.com/vcs-origin`
+| The URL of the repo that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`.
+
+| `oidc.circleci.com/vcs-ref`
+| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`.
 
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.

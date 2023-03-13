@@ -145,14 +145,14 @@ go list ./... | circleci tests run
 * CircleCI will run the command `gotestsum` on the supplied tests.
 * `--batch-count=2` & `--fail-fast` is enabled. If any of the test packages from batch 1 fail, batch 2 will not be executed.
 
-Run link:https://github.com/lambdaisland/kaocha[Kaocha] (Clojure) tests in five batches and fail as soon as one of the batches fails:
+Run link:https://github.com/lambdaisland/kaocha[Kaocha] (Clojure) tests in six batches and fail as soon as one of the batches fails:
 
 ```yaml
-circleci tests run
-  --command='./bin/kaocha $(xargs -I {} echo " --focus {} --only-load-ns {}")'
-  --batch-count=5
-  --fail-fast
-  --test-results-path="test/reports" < test.namespaces
+circleci tests run \
+ --command='lein kaocha $(cat test.namespaces.split | xargs -I {} echo "  --focus {}")' \
+ --batch-count=6\
+ --fail-fast \
+ --test-results-path="test/reports" < test.namespaces
 ```
 
 [#known-limitations]
@@ -184,4 +184,4 @@ circleci tests run
 
 **Question:** How do I use the fail-fast functionality with CircleCI's intelligent test splitting?
 
-**Answer:** Follow the same instructions as the <<#batching,example above>>, and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename, _OR_  `--split-by=timing` to split by timing. See the <<#known-limitations,Known limitations>> section for constraints at this time with splitting by timing. If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (for example, using `circleci tests run` instead of `circleci tests split`).
+**Answer:** Follow the same instructions as the <<#batching,example above>>, and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename, _OR_  `--split-by=timings` to split by timing. See the <<#known-limitations,Known limitations>> section for constraints at this time with splitting by timing. If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (for example, using `circleci tests run` instead of `circleci tests split`).
