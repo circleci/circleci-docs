@@ -69,7 +69,9 @@ additional context to Insights metrics by presenting a relative benchmark
 against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
-Trends are calculated as `100 * (current value - previous value) / prior-value`.
+Trends displayed in the CircleCI UI are calculated as `100 * (current value - previous value) / prior-value`.
+
+Trends received from the [CircleCI API](https://circleci.com/docs/api/v2/index.html#operation/getProjectWorkflowsPageData) are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`.  A ratio of 1.0 indicates *no change*.  A value less than 1.0 indicates a negative trend and a value greater than 1.0 indicates a positive trend. A value of -1.0 is an infinite trend.  This also applies to the following API endpoints: [getOrgSummaryData](https://circleci.com/docs/api/v2/index.html#operation/getOrgSummaryData) and [getWorkflowSummary](https://circleci.com/docs/api/v2/index.html#operation/getWorkflowSummary).  Despite the trend being reported as a ratio via the API, the result returned is still effectively equivalent to the percentage that is shown in the UI (ie. a ratio of 2.33 will be shown as +233% in the UI and vice versa).
 
 Trends are available only for 24-hour, 7-day, and 30-day time windows.
 {: class="alert alert-info"}
