@@ -166,4 +166,4 @@ Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-2-configure-object-storage/[Phase 2 - Configure object storage] guide.
+Once the steps on this page are complete, go to the xref:/server/v4.1/air-gapped-installation/phase-2-configure-object-storage#[Phase 2 - Configure object storage] guide.

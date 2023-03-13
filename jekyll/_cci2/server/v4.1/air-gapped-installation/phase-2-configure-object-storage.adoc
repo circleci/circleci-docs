@@ -119,4 +119,4 @@ image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-3-install-circleci-server/[Phase 3 - Install CircleCI server] guide.
+Once the steps on this page are complete, go to the xref:/server/v4.1/air-gapped-installation/phase-3-install-circleci-server#[Phase 3 - Install CircleCI server] guide.

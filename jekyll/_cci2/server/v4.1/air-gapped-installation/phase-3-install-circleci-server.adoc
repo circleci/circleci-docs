@@ -15,7 +15,7 @@ With prerequisites installed, and object storage configured, you can now copy ov
 
 [#prepare-values-yaml]
 == Prepare values.yaml
-The `values.yaml` file for installing CircleCI should be prepared according to the link:/docs/server/installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+The `values.yaml` file for installing CircleCI should be prepared according to the xref:/server/v4.1/installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
 
 
 === 1. Configure global values
@@ -161,4 +161,4 @@ After the helm deployment, depending on your installation, it may be necessary t
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients/[Phase 4 - Configure Nomad clients] guide.
+Once the steps on this page are complete, go to the xref:/server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients#[Phase 4 - Configure Nomad clients] guide.
