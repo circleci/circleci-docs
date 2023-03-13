@@ -137,7 +137,7 @@
 | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
 |===
 
-If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can do so by using the xref:env-vars#environment-variable-usage-options[`environment` key] in your configuration and providing your own mappings with suitable pipeline values:
+If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can recreate this functionality using pipeline values in your configuration file. The following example shows how to set an environment variable `CIRCLE_PROJECT_REPONAME` using the xref:env-vars#environment-variable-usage-options[`environment` key] and populating it with the `pipeline.trigger_parameters.gitlab.repo_name` value:
 
 ```yaml
 build:

@@ -623,7 +623,7 @@ The ability to connect to multiple account integrations on CircleCI allows you t
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-There are a number of xref:variables#built-in-environment-variables[built-in environment variables] that are not available in GitLab-based projects. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
+There are a number of built-in environment variables that are not available in GitLab-based projects. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
 [#coming-soon]
 == Coming soon
