@@ -371,6 +371,8 @@ en:
           link: test-config-policies
         - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
+        - name: Config policies for self-hosted runner (Open preview)
+          link: config-policies-for-self-hosted-runner
         - name: Stop building a project on CircleCI
           link: stop-building-a-project-on-circleci
         - name: Rename organizations and repositories
