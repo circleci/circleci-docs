@@ -17,6 +17,7 @@ This document provides sample `.circleci/config.yml` files that you can use as a
 
 ## Tools for editing configuration files
 {: tools-for-editing-configuration-files }
+
 CircleCI has created an [extension for Visual Studio Code](/docs/vs-code-extension-overview/) that reduces context switching between the web app and VS Code through a set of helpful features.
 
 The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
