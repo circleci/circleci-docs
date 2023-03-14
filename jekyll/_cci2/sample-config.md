@@ -30,7 +30,7 @@ The CircleCI VS Code extension is available to download on the [VS Code marketpl
 ### Concurrent workflow
 {: #concurrent-workflow }
 
-The configuration example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
+The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
 * Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
