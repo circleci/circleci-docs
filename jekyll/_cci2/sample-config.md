@@ -279,7 +279,7 @@ workflows:
 ### Approval job
 {: #approval-job }
 
-The example below shows a sequential workflow with an [approval step](/docs/configuration-reference/#type). The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app before the `deploy` job can run. All jobs run in Docker containers using the base image provided by CircleCI.
+The example below shows a sequential workflow with an [approval step](/docs/configuration-reference/#type). The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensuring the workflow waits for manual approval in the CircleCI web app before the `deploy` job can run. All jobs run in Docker containers using the base image provided by CircleCI.
 
 * Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
