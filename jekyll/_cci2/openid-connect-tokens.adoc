@@ -38,6 +38,8 @@ The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Pro
 
 The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
 
+NOTE: It is possible to use CircleCI's OIDC tokens with multiple cloud services.
+
 [#format-of-the-openid-connect-id-token]
 == Format of the OpenID Connect ID token
 
