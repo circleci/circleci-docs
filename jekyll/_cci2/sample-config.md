@@ -13,7 +13,7 @@ contentTags:
   - Server v2.x
 ---
 
-This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or as a way to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
+This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
 
 ## Tools for editing configuration files
 {: tools-for-editing-configuration-files }
