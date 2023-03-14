@@ -19,7 +19,7 @@ Use parallelism and test splitting to:
 ## Introduction
 {: #introduction }
 
-Pipelines are often configured so that each time code is committed a set of tests are run. The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Test splitting is a great way to speed up the testing portion of your CI/CD pipeline.
+Pipelines are often configured so that each time code is committed, a set of tests are run. The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Test splitting is a great way to speed up the testing portion of your CI/CD pipeline.
 
 CircleCI test splitting lets you intelligently define where splits happen across a test suite:
 
