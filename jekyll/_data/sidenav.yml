@@ -62,7 +62,7 @@ en:
           link: config-intro
         - name: Set up the Slack orb
           link: slack-orb-tutorial
-    - name: How To
+    - name: How To guides
       children:
         - name: Create a project
           link: create-project
