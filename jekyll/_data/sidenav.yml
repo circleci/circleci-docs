@@ -60,10 +60,14 @@ en:
           link: getting-started
         - name: Configuration tutorial
           link: config-intro
-        - name: Hello world
-          link: hello-world
         - name: Set up the Slack orb
           link: slack-orb-tutorial
+    - name: How To
+      children:
+        - name: Create a project
+          link: create-project
+        - name: Hello world
+          link: hello-world
     - name: Reference
       children:
         - name: Configuration reference
@@ -421,16 +425,6 @@ en:
       children:
         - name: Webhooks reference
           link: webhooks-reference
-
-- name: Projects
-  icon: icons/sidebar/project-new.svg
-  children:
-    - name: overview
-      children:
-        - name: Projects overview
-          link: projects
-        - name: Creating a project
-          link: create-project
 
 - name: Developer toolkit
   icon: icons/sidebar/code.svg
@@ -991,15 +985,21 @@ ja:
         - name: Configuration tutorial
           link: ja/config-intro
           i18n_name: 設定ファイル概要
-        - name: Hello World
-          link: ja/hello-world
-          i18n_name: Hello World
         - name: Set up the Slack orb
           link: ja/slack-orb-tutorial
           i18n_name: Slack Orbを使う
         - name: Installing the CircleCI CLI
           link: ja/local-cli
           i18n_name: CircleCI CLIのインストール
+    - name: How To guides
+      i18n_name: ガイド
+      children:
+        - name: Create a project
+          link: ja/create-project
+          i18n_name: プロジェクトの作成
+        - name: Hello World
+          link: ja/hello-world
+          i18n_name: Hello World
     - name: Reference
       i18n_name: リファレンス
       children:
@@ -1391,9 +1391,6 @@ ja:
         - name: Projects overview
           link: ja/projects
           i18n_name: プロジェクトの概要
-        - name: Creating a project
-          link: ja/create-project
-          i18n_name: プロジェクトの作成
     - name: settings
       i18n_name: 設定
       children:

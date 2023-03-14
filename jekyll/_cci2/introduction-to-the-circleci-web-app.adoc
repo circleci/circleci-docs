@@ -46,6 +46,15 @@ At the very bottom of the side navigation (you may have to scroll down), you wil
 
 The sections below describe some of the pages of the web application in more detail.
 
+[#view-and-navigate-pipelines]
+== View and navigate pipelines
+
+Your pipelines appears on the **Dashboard** of the CircleCI web app when they are triggered. You can view workflows or single jobs by expanding the pipeline and clicking in on any workflow or job descriptors.
+
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
+
+image:pipeline-breadcrumbs.png[Pipelines Breadcrumbs]
+
 [#organization-switching]
 == Organization switching
 
@@ -58,9 +67,16 @@ If you do not see your project and it is not currently building on CircleCI, che
 [#projects]
 == Projects
 
-Projects associated with your organization will appear on the **Projects** page. You have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
+Projects associated with your organization will appear on the **Projects** page. You have the option to:
 
-Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on the dashboard of individual projects, which you can view by clicking on a project's name in the main dashboard.
+On the Projects Dashboard, you have the option to:
+
+* _Set Up_ any project that you are the owner of in your VCS.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/notifications/) for the project's status. 
+
+Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
+
+Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
 
 image::web_ui_projects.png[Projects page]
 

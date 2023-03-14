@@ -598,7 +598,14 @@ See the [Pipelines overview](/docs/pipelines) page for more information.
 ## Projects
 {: #projects }
 
-A CircleCI project shares the name of the associated code repository in your VCS. Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow the projects you have access to. There are two options:
+For GitHub and Bitbucket accounts, a CircleCI project is tied to and shares the name of the associated code repository in your VCS. 
+
+For GitLab users a _project_ in CircleCI is standalone. You name your project and then connect your code (GitLab repository) to that project. A standalone project can have:
+
+* One or more configurations which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
+* One or more triggers, which are events from a source of change, including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
+
+Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow the projects you have access to. There are two options:
 
 * _Set Up_ any project that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications](/docs/notifications/) for the project's status.
