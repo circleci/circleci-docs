@@ -612,8 +612,6 @@ Select **Projects** in the CircleCI web app sidebar to enter the projects dashbo
 
 ![Project dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-See the [Projects overview](/docs/projects) page for more information.
-
 ## Resource class
 {: #resource-class}
 
