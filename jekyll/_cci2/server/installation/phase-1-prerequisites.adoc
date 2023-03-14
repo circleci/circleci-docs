@@ -473,7 +473,7 @@ Server v4.x hosts build artifacts, test results, and other state object storage.
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. For object storage providers that do not support the S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
+While any S3 compatible object storage may work, we test and support AWS S3 and MinIO.
 
 Follow the instructions below to create a bucket and access method for S3 or GCS.
 

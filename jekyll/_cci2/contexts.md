@@ -279,9 +279,9 @@ In this example, the jobs `test` and `deploy` are restricted, and `deploy` will 
 ## Project restrictions
 {: #project-restrictions }
 
-CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Currently, **this feature is only enabled for standalone projects that are not tied to a VCS. Standalone projects are only available at this time with a [GitLab integration]({{site.baseurl}}/gitlab-integration) with CircleCI.** A standalone organization allows for managing users and projects independent of the VCS.
+CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
-Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
+NOTE: API support for project restricted contexts is coming soon. 
 
 Organization Admins have read/write access to all projects, and have unrestricted access to all contexts.
 
@@ -295,7 +295,7 @@ To invoke a workflow that uses a restricted context, the workflow must be part o
 
 You must be an **organization admin** to restrict a context though the method detailed below.
 
-. Navigate to the **Organization Settings > Contexts** page of your GitLab organization in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
+. Navigate to the **Organization Settings > Contexts** page of your organization in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
 
 1. Select the name of an existing context, or click the **Create Context** button if you want to use a new context.
 

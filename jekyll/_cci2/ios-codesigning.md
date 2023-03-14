@@ -5,7 +5,7 @@ short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS app"
 categories: [platforms]
 order: 40
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -105,7 +105,7 @@ project repo and the certificates / keys repo to the CircleCI project.
 
 To add a user key:
 
-* In the CircleCI application, go to your project’s settings by clicking the the Project Settings button (top-right on the Pipelines page of the project).
+* In the CircleCI application, go to your project’s settings by clicking the Project Settings button (top-right on the Pipelines page of the project).
 * On the Project Settings page, click on SSH Keys (vertical menu on the left).
 * Click the *Add User Key* button and follow the steps to authorize CircleCI
 
@@ -154,14 +154,14 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       # ...
       - run: bundle exec fastlane test
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       # ...
       - run: bundle exec fastlane adhoc
@@ -212,7 +212,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -229,7 +229,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc

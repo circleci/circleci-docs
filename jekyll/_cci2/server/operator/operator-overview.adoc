@@ -35,8 +35,6 @@ CircleCI Nomad clients automatically provision compute resources according to th
 === Nomad clients
 Nomad Clients run without storing state, allowing you to increase or decrease the number of containers as needed.
 
-To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the <<using-metrics#,Using Metrics>> section.
-
 If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/configuration-reference#resourceclass[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
 
 See the https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options for optimizing the resource usage of Nomad clients.

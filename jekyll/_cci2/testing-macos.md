@@ -1,22 +1,22 @@
 ---
 layout: classic-docs
-title: Testing macOS Applications
-short-title: Testing macOS Applications
+title: Testing macOS applications
+short-title: Testing macOS applications
 categories: [platforms]
-description: Testing macOS Applications
+description: Testing macOS applications.
 order:
 ---
 
 This document describes how to configure CircleCI for macOS app UI testing.
 
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
-{:.no_toc}
 
-CircleCI supports testing macOS apps on the macOS executor and by utilising Fastlane, and the macOS permissions orb, this can be set up quickly and easily.
+CircleCI supports testing macOS apps on the following:
+
+- macOS executor
+- Fastlane
+- macOS permissions orb
 
 By setting up automated macOS app testing on CircleCI, you can easily test your app against different versions of macOS and add automation to your development pipeline.
 
@@ -31,28 +31,28 @@ There are two unique `TCC.db` files in use. The first copy resides in the home d
 
 While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
-While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
+While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
 
 ## Supported Xcode and macOS Versions
 {: #supported-xcode-and-macos-versions }
 
 Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/using-macos/#supported-xcode-versions) list.
+For more information, please see the [Supported Xcode versions](/docs/using-macos/#supported-xcode-versions) list.
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/using-macos/#xcode-cross-compilation).
+If you are interested in Xcode Cross Compilation, visit the [Using macOS](/docs/using-macos/#xcode-cross-compilation) page.
 
 ## Setting up a macOS UI Test Project
 {: #setting-up-a-macos-ui-test-project }
 
-Configuring CircleCI to run UI tests on a macOS app happens in two parts. Firstly, the CircleCI config needs to add the correct permissions and set up the environment to run the tests. Secondly, Fastlane needs to be configured to execute the tests.
+Configuring CircleCI to run UI tests on a macOS app happens in two parts. Firstly, the CircleCI configuration needs to add the correct permissions and set up the environment to run the tests. Secondly, Fastlane needs to be configured to execute the tests.
 
 ### Configuring CircleCI
 {: #configuring-circleci }
 
 In the CircleCI `config.yml` we need to include the `circleci/macos` [orb](https://circleci.com/developer/orbs/orb/circleci/macos) and call the `macos/add-mac-uitest-permissions` step. This step ensures that the correct permissions are added to run Xcode UI tests on a macOS app.
 
-If additional permissions are required, you can find out how to set these up in the [macOS permission orb documentation](https://circleci.com/developer/orbs/orb/circleci/macos).
+If additional permissions are required, you can find out how to set these up in the [macOS permission orb](https://circleci.com/developer/orbs/orb/circleci/macos) document.
 
 Sample `config.yml` for testing a macOS app:
 
@@ -65,7 +65,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -82,18 +82,11 @@ workflows:
 ### Configuring Fastlane
 {: #configuring-fastlane }
 
-Fastlane allows you to avoid calling lengthy Xcode commands manually and instead
-write a simple configuration file to initiate the macOS app tests. With Fastlane
-you can build, sign (for testing) and test a macOS app. Please note that when
-using Fastlane, depending on the actions in your configuration, you may need to
-setup a 2-factor Authentication (2FA).
-See the [Fastlane Docs for more information](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication).
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Please note that when using Fastlane, depending on the actions in your configuration, you may need to setup a 2-factor Authentication (2FA).
 
-A simple config can be found below. Note that this config relies on the project
-being configured as "Sign to Run Locally" and therefore you do not need to set
-up Fastlane Match. If your app requires signing to test, follow the [code
-signing documentation]({{ site.baseurl }}/ios-codesigning/) (the code
-signing documentation talks about iOS but it is also applicable to macOS).
+See the [Fastlane docs](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) for more information.
+
+A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the [Code signing](/docs/ios-codesigning/) guide (the code signing documentation talks about iOS but it is also applicable to macOS).
 
 ```ruby
 # fastlane/Fastfile
@@ -134,7 +127,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -168,7 +161,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -198,7 +191,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -218,7 +211,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -240,10 +233,15 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/delete-permission:
             bundle-id: "com.apple.Terminal"
             permission-type: "kTCCServiceScreenCapture"
 ```
+
+## See also
+{: #see-also }
+
+- [iOS code signing](/docs/ios-codesigning/)

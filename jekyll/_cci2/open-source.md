@@ -6,7 +6,7 @@ order: 70
 description: "List and acknowledgements for open-source projects and libraries that are used in a CircleCI installation."
 ---
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
 
 A CircleCI installation includes the following 3rd-party open source components.
 

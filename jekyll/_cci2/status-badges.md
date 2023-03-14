@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Adding Status Badges
 description: How to embed a CircleCI status badge in any web page or document
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -140,8 +140,3 @@ If you find the default status badge too minimal, you can use the [shield style]
 ![Passing shield version]({{site.baseurl}}/assets/img/docs/shield-passing.png)
 
 ![Failing shield version]({{site.baseurl}}/assets/img/docs/shield-failing.png)
-
-## See also
-{: #see-also }
-
-* [Status]({{site.baseurl}}/status/)

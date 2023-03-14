@@ -15,20 +15,28 @@ You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/
 jobs:
   build:
     macos:
-      xcode: 13.4.1
+      xcode: 14.2.0
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 12.5.1 installed
+      # with Xcode 14.2.0 installed
       - run: xcodebuild -version
 ```
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
+### Supported Xcode versions for Intel
+{: #supported-xcode-versions-intel}
+
 {% include snippets/xcode-intel-vm.md %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
+### Supported Xcode versions for Apple silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
+
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
 
 ## Available resource classes
 {: #available-resource-classes }
@@ -39,29 +47,9 @@ For supported Xcode versions on the Dedicated Hosts resource class, please see t
 jobs:
   build:
     macos:
-      xcode: 13.4.1
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
 ```
-
-## macOS VM storage
-{: #macos-vm-storage }
-
-The amount of available storage on CircleCI macOS virtual machines depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed. The table below indicates how much storage will be available with various Xcode/resource class combinations. Also note the exceptions to this noted below.
-
-Xcode Version | Class                 | Minimum Available Storage
---------------|-----------------------|--------------------------
-10.3.0        | medium, large         | 36GB
-10.3.0        | macos.x86.medium.gen2 | 36GB
-11.*          | medium, large         | 23GB
-11.*          | macos.x86.medium.gen2 | 23GB
-12.*          | medium, large         | 30GB
-12.*          | macos.x86.medium.gen2 | 30GB
-13.*          | medium, large         | 23GB
-13.*          | macos.x86.medium.gen2 | 89GB
-{: class="table table-striped"}
-
-If you specify Xcode 12.0.1, 12.4.0, or 12.5.1, you have a minimum 100GB of available storage.
-{: class="alert alert-info"}
 
 ## Image update cycle for the macOS executor
 {: #using-the-macos-executor }
@@ -86,9 +74,9 @@ To read about CircleCI's customer support policy regarding beta images, please c
 ### Apple silicon support
 {: #apple-silicon-support }
 
-It is possible to build Apple Silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
+Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using [CircleCI runner]({{site.baseurl}}/runner-overview/#available-self-hosted-runner-platforms).
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts]({{site.baseurl}}/artifacts/) for testing apps locally. Alternatively, [CircleCI runner]({{site.baseurl}}/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
+It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
 ## Xcode Cross Compilation
 {: #xcode-cross-compilation }
@@ -226,7 +214,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -264,7 +252,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 13.4.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
 

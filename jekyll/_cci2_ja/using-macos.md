@@ -15,11 +15,11 @@ macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境�
 jobs:
   build:
     macos:
-      xcode: 13.4.1
+      xcode: 14.2.0
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 12.5.1 installed
+      # with Xcode 14.2.0 installed
       - run: xcodebuild -version
 ```
 
@@ -39,29 +39,9 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: 13.4.1
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
 ```
-
-## macOS VM のストレージ
-{: #macos-vm-storage }
-
-CircleCI macOS 仮想マシンで使用できるストレージの量は、リソースクラスや使用される Xcode イメージによって異なります。 Xcode イメージのサイズは、プリインストールされているツールによって異なります。 以下の表で、Xcode とリソースクラスの各組み合わせにおける使用可能なストレージ量をご確認ください。 また、表の下に記載されている例外もご確認ください。
-
-| Xcode のバージョン | クラス                   | 最小ストレージ容量 |
-| ------------ | --------------------- | --------- |
-| 10.3.0       | Medium、Large          | 36GB      |
-| 10.3.0       | macos.x86.medium.gen2 | 36GB      |
-| 11.*         | Medium、Large          | 23GB      |
-| 11.*         | macos.x86.medium.gen2 | 23GB      |
-| 12.*         | Medium、Large          | 30GB      |
-| 12.*         | macos.x86.medium.gen2 | 30GB      |
-| 13.*         | Medium、Large          | 23GB      |
-| 13.*         | macos.x86.medium.gen2 | 89GB      |
-{: class="table table-striped"}
-
-Xcode 12.0.1、12.4.0、12.5.1 を指定する場合、最小ストレージ容量は 100GB です。
-{: class="alert alert-info"}
 
 ## macOS Executor のイメージ更新サイクル
 {: #using-the-macos-executor }
@@ -293,7 +273,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -346,7 +326,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 13.4.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
 

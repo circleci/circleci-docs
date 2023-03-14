@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
 
 This document provides a summary of features and product notes for the release of CircleCI server v2.16.
 

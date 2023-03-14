@@ -4,7 +4,7 @@ title: "IP ranges"
 short-title: "IP ranges"
 description: "Enable CircleCI jobs to go through a set of well-defined IP address ranges"
 categories: []
-contentTags: 
+contentTags:
   platform:
    - Cloud
 ---
@@ -16,7 +16,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 
 IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments using existing wokflows and platforms. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
-The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing is calculated based on data usage of jobs that have opted-in to using the IP ranges feature. Details on the pricing model can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
+The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled. If you are looking to predict the cost, see CircleCI's [blog post](https://circleci.com/blog/network-transfer-ip-ranges/) for futher information.
 
 ## IP ranges use cases
 {: #use-cases }
@@ -87,7 +87,7 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 ## List of IP address ranges for core services
 {: #list-of-ip-address-ranges-for-core-services }
 
-These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
+These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and GitHub etc):
 
 - 18.214.70.5
 - 52.20.166.242
@@ -95,7 +95,7 @@ These are the IP address ranges for core services (used to trigger jobs, exchang
 - 54.236.156.101
 - 52.22.215.219
 - 52.206.105.184
-- 52.6.77.249 
+- 52.6.77.249
 - 34.197.216.176
 - 35.174.249.131
 - 3.210.128.175
@@ -134,13 +134,13 @@ Notifications of a change to this list will be sent out by email to all customer
 
 Pricing is calculated based on the data usage of jobs opted into the IP ranges feature. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline. Data used to pull in the Docker image to the container before the job starts executing does _not incur usage costs_ for jobs with IP ranges enabled.
 
-Specific rates and details can be found in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464).
+This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 IP ranges usage is visible in the **Plan Usage** section of the CircleCI app:
 
 ![Screenshot showing the location of the IP ranges feature]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
 
-On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. See more details on [Discuss](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068). You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
+On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. See more details on the CircleCI [blog](https://circleci.com/blog/network-transfer-ip-ranges/). You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
 
 ![Screenshot showing the approximate network transfer]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
@@ -153,7 +153,7 @@ The machines that execute *all jobs* on CircleCI’s platform, not just jobs opt
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
 
 CircleCI *does not recommend* configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
- 
+
 ## CircleCI macOS Cloud
 {: #circleci-macos-cloud }
 
@@ -179,6 +179,10 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 - 38.23.42.0/24
 - 38.23.43.0/24
 - 198.206.135.0/24
+- 207.254.116.0/24
+- 207.254.117.0/24
+- 207.254.118.0/24
+- 207.254.119.0/24
 
 **IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
 
