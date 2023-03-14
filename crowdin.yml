@@ -16,8 +16,6 @@ files:
     translation: /jekyll/_cci2_%two_letters_code%/server/overview/%original_file_name%
   - source: /jekyll/_data/sidenav.yml
     translation: /jekyll/_data/%two_letters_code%/sidenav.yml
-  - source: /jekyll/_data/sidenavstyle.yml
-    translation: /jekyll/_data/%two_letters_code%/sidenavstyle.yml
   - source: /jekyll/_includes/snippets/*.md
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
   - source: /jekyll/_includes/snippets/*.adoc
