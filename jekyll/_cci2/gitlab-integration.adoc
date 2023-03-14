@@ -238,6 +238,8 @@ For GitLab Self-managed organizations, you may connect additional self-managed i
 
 NOTE: The ability to edit or delete existing integrations is not currently enabled.
 
+For GitLab.com, account integrations can be managed under your #user-account-integrations[user settings].
+
 [#roles-and-permissions]
 == Roles and permissions
 
