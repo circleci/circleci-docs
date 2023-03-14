@@ -21,13 +21,8 @@ exclude:
   - .jekyll-cache
 
 plugins:
-  - jekyll-include-cache
   - jekyll-sitemap
   - jekyll-asciidoc
-  - jekyll-target-blank
-  - jekyll-toc
-  - jekyll-last-modified-at
-  - jekyll-timeago
   - jekyll-redirect-from
 
 # Approximate distance, with customizable threshold,
@@ -46,20 +41,12 @@ algolia:
     - md
     - adoc
   max_record_size: 20000
-  nodes_to_index: 'p,h1'
+  nodes_to_index: "p,h1"
   settings:
-    highlightPreTag: '<strong>'
-    highlightPostTag: '</strong>'
-    attributesToSnippet: [
-      'content:80',
-      'headings',
-      'title'
-    ]
-    attributesToHighlight: [
-      'content:80',
-      'headings',
-      'title'
-    ]
+    highlightPreTag: "<strong>"
+    highlightPostTag: "</strong>"
+    attributesToSnippet: ["content:80", "headings", "title"]
+    attributesToHighlight: ["content:80", "headings", "title"]
     minProximity: 3
 
 toc:
@@ -158,10 +145,10 @@ defaults:
       contentTags: null
 
 t:
-    translation_in_progress:
-        ja: "このページはただいま翻訳中です"
+  translation_in_progress:
+    ja: "このページはただいま翻訳中です"
 
-segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
+segment: "mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ"
 
 analytics:
   events:
@@ -170,5 +157,4 @@ rollbar_env: development
 
 # Optimizely SDK key for dev env
 optimizely: "GfYszBpMkefBSwiiEkH3b3"
-
 # server_version: "2.18.4"
