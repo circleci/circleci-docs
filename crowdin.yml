@@ -18,10 +18,6 @@ files:
     translation: /jekyll/_data/%two_letters_code%/sidenav.yml
   - source: /jekyll/_data/sidenavstyle.yml
     translation: /jekyll/_data/%two_letters_code%/sidenavstyle.yml
-  - source: /jekyll/_includes/edit-on-github.html
-    translation: /jekyll/_includes/%two_letters_code%/edit-on-github.html
-  - source: /jekyll/_includes/license-notice.html
-    translation: /jekyll/_includes/%two_letters_code%/license-notice.html
   - source: /jekyll/_includes/snippets/*.md
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
   - source: /jekyll/_includes/snippets/*.adoc

@@ -92,7 +92,7 @@ When calling the CircleCI API with `curl` commands, you need to provide an API t
 ### Protect your secrets
 {: #protect-your-secrets }
 
-Some API endpoints, such as [addEnvironmentVariableToContext]({{site.baseurl}}/api/v2/#operation/addEnvironmentVariableToContext), may require secrets to be sent in the body of `PUT` or `POST` requests. There are several options to help conceal these secrets:
+Some API endpoints, such as [addEnvironmentVariableToContext](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext), may require secrets to be sent in the body of `PUT` or `POST` requests. There are several options to help conceal these secrets:
 
 * Use a file to compose and store the request body. Be sure to `chmod 0600` this file before adding the secret value to prevent other users from viewing its contents.
   - Point `curl` to this file by using the `@` directive: `curl --data @myfile`
