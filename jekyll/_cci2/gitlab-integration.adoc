@@ -231,7 +231,12 @@ Organization administrator as well as organization contributor roles are current
 +
 If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
 
+[#organization-settings-integrations]
+=== Integrations (GitLab Self-managed only)
 
+For GitLab Self-managed organizations, you may connect additional self-managed instances to be integrated with your organization. Navigate to **Integrations** section within **Organization Settings** to add a new instance.
+
+NOTE: The ability to edit or delete existing integrations is not currently enabled.
 
 [#roles-and-permissions]
 == Roles and permissions
