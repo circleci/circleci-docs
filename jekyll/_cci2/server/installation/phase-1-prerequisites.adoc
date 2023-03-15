@@ -291,7 +291,7 @@ It is recommended to provision a static IP address to assign to the load balance
 ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
 === GCP - Reserve a static external IP address
-link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provides information on how reserve an IP.
+The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
 
 Make note of the returned IPv4 address for use later in the values.yaml file.
 
