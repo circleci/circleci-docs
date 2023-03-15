@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
-title: Configuring CircleCI
-short-title: Configuring CircleCI
+title: Configuration reference
 description: Reference for .circleci/config.yml
-order: 20
 redirect_from: /configuration/
 readtime: false
 contentTags:
