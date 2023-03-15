@@ -723,8 +723,6 @@ en:
         children:
           - name: Overview
             link: server-3-operator-overview
-          - name: Metrics and monitoring
-            link: server-3-operator-metrics-and-monitoring
           - name: Introduction to Nomad
             link: server-3-operator-nomad
           - name: Configuring a proxy
@@ -921,16 +919,16 @@ en:
             link: plan-free
       - name: Performance
         children:
-        - name: Performance plan overview
-          link: plan-performance
+          - name: Performance plan overview
+            link: plan-performance
       - name: Scale
         children:
-        - name: Scale plan overview
-          link: plan-scale
+          - name: Scale plan overview
+            link: plan-scale
       - name: Server
         children:
-        - name: Server plan overview
-          link: plan-server
+          - name: Server plan overview
+            link: plan-server
 
   - name: Contributing to CircleCI docs
     icon: icons/sidebar/changelog.svg
