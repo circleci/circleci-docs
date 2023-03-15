@@ -30,9 +30,9 @@ The following is an overview of the prerequisites required to run an air-gapped 
 
 | A Kubernetes cluster
 | Running CircleCI Server
-|
+| 
 
-| An object storage system (minIO)
+| An object storage system (MinIO)
 | Object and artifact storage
 |
 
@@ -40,9 +40,10 @@ The following is an overview of the prerequisites required to run an air-gapped 
 | Source of code for CircleCI Server to build
 |
 
-| Virtual Machines
-| Machines for running Nomad and the CircleCI runner
+| Nomad Virtual Machines
+| Machines for running Nomad
 |
+
 |===
 
 [#copy-images]

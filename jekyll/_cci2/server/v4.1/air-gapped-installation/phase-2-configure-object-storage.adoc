@@ -13,6 +13,7 @@ version:
 
 [#create-buckets-in-minio]
 == Create buckets in MinIO
+As an air-gapped object storage solution, CircleCI Server supports MinIO. With an air-gapped MinIO instance installed, complete the following steps.
 
 [#create-airgap-data-bucket]
 === 1. Create an airgap-data bucket.
@@ -20,15 +21,15 @@ Create a new bucket in MinIO named `airgap-data`. This bucket will be for your `
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
-[#create-circle-data-bucket]
-=== 2. Create a circle-data bucket.
-Create a new bucket in MinIO named `circle-data`.
+[#create-circleci-data-bucket]
+=== 2. Create a circleci-data bucket.
+Create a new bucket in MinIO named `circleci-data`. This bucket can be named differently, but references to it will need to be updated in the Helm values.yaml file.
 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
-[#configure-circle-data-bucket]
-=== 3. Configure the circle-data bucket.
-In the settings for the `circle-data` bucket, change the access policy to `public`.
+[#configure-circleci-data-bucket]
+=== 3. Configure the circleci-data bucket.
+In the settings for the `circleci-data` bucket, change the access policy to `public`.
 
 image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
@@ -51,23 +52,23 @@ Copy the `release.txt` file to your air-gapped environment and place it in the r
 
 [#retrieve-latest-release-bin]
 === 3. Retrieve the latest release binary
-Using the `release.txt` file, retrieve and download the latest `circleci-agent` release and checksum from the CircleCI binary releases public bucket.
+Using the `release.txt` file, retrieve and download the latest `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
 
 [source, bash]
 ----
-LATEST_RELEASE=`cat release.txt`
+LATEST_RELEASE=$(cat release.txt)
 
 # Download circleci-agent
 wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/linux/amd64/circleci-agent
 
-# Download checksum
+# Download checksums
 wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/checksums.txt
 ----
 
 
 [#create-release-dir]
 === 4. Create a release directory in the circleci-data bucket
-Using the version specified in `release.txt`, create a new directory in the root of the `circle-data` bucket with the name of that release.
+Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release.
 
 ```
 # In this example, we are creating a directory at the root of circleci-data in MinIO with the following name:

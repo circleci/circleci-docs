@@ -30,6 +30,8 @@ sudo mkdir /etc/nomad/
 sudo mkdir /etc/nomad/ssl/
 ----
 
+Note: It is recommended to use CircleCI's Nomad installation script to install Nomad and all required prerequisite configurations. INSERTLINKHERE
+
 
 [#retrieve-mtls-certificates]
 == 2. (Optional) Retrieve mTLS certificates
@@ -126,4 +128,4 @@ sudo nomad agent -config /etc/nomad/conf.hcl
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-5-configure-circleci-runner/[Phase 5 - Configure CircleCI runner] guide.
+Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-6-test-your-installation/[Phase 6 - Test your installation] guide.
