@@ -18,7 +18,7 @@ can review metrics in the Insights dashboard as well as the Insights API.
 {: #general-metrics }
 
 General metrics appear across the Insights experience and can refer to different
-entities, depending on the context. For example, the `Runs` metric may refer to a
+entities, depending on the context.  For example, the `Runs` metric may refer to a
 count of workflow executions or jobs, depending on the context.
 
 | Term                                                 | Definition                                                                                                                                                                                                                                                                                                             |
