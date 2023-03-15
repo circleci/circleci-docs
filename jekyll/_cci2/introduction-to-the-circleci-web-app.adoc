@@ -18,7 +18,7 @@ Inside the application, you will find the status of builds, workflows and jobs, 
 [#dashboard-and-side-navigation]
 == Dashboard and side navigation
 
-Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
+Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdown menus at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
 
 image::web_ui_dashboard.png[Dashboard page]
 
@@ -49,7 +49,7 @@ The sections below describe some of the pages of the web application in more det
 [#view-and-navigate-pipelines]
 == View and navigate pipelines
 
-Your pipelines appears on the **Dashboard** of the CircleCI web app when they are triggered. You can view workflows or single jobs by expanding the pipeline and clicking in on any workflow or job descriptors.
+Your pipelines appear on the **Dashboard** of the CircleCI web app as they are triggered. You can view workflows or single jobs by expanding a pipeline and clicking in on any workflow or job descriptor.
 
 When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
 
@@ -69,10 +69,8 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 Projects associated with your organization will appear on the **Projects** page. You have the option to:
 
-On the Projects Dashboard, you have the option to:
-
 * _Set Up_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/notifications/) for the project's status. 
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/notifications/) for the project's status.
 
 Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
 
