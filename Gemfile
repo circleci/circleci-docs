@@ -17,7 +17,6 @@ gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'jekyll-asciidoc', github: "asciidoctor/jekyll-asciidoc"
-  gem 'jekyll-redirect-from'  # TODO(romain): remove maybe?
 end
 
 group :test, :development do
