@@ -4,7 +4,6 @@ title: packagecloud へのパッケージのパブリッシュ
 categories:
   - how-to
 description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
-redirect_from: /ja/packageCloud
 contentTags:
   platform:
     - クラウド

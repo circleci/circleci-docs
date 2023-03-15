@@ -1,5 +1,4 @@
 ---
-redirect_from: /configuration-cookbook/
 contentTags:
   platform:
   - Cloud

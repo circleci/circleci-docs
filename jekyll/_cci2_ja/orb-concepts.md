@@ -5,7 +5,6 @@ short-title: "Orb のコンセプト"
 description: "Orb のコンセプトの概要"
 categories:
   - はじめよう
-redirect_from: /ja/using-orbs/
 verison:
   - クラウド
   - Server v4.x

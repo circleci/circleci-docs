@@ -2,7 +2,6 @@
 contentTags:
   platform:
   - クラウド
-redirect_from: /ja/gitlab-vcs-support
 ---
 = GitLab.com との連携
 :page-layout: classic-docs
@@ -578,7 +577,7 @@ CircleCI で複数のアカウント連携ができることにより、以下�
 [#pipeline-values]
 == パイプライン値
 
-GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用について詳しくは、 
+GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用について詳しくは、
 <<pipeline-variables#,パイプライン値とパラメーター>> を参照して下さい。
 
 [.table.table-striped]

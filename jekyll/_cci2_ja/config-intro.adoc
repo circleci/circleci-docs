@@ -1,6 +1,4 @@
 ---
-
-redirect_from: /ja/configuration-cookbook/
 contentTags:
   platform:
   - クラウド

@@ -3,7 +3,6 @@ layout: classic-docs
 title: "CircleCI ドキュメントへようこそ"
 description: "CircleCI ドキュメントへようこそ"
 permalink: /ja/
-redirect_from: /ja/
 toc: false
 page-type: index
 ---

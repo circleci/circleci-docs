@@ -4,7 +4,6 @@ title: Jenkins からの移行
 categories:
   - migration
 description: このページは、CircleCI と Jenkins の違いを説明する移行ガイドです。
-redirect_from: /ja/jenkins-converter
 contentTags:
   platform:
     - クラウド

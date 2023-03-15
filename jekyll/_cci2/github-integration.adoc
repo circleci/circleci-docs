@@ -2,7 +2,6 @@
 contentTags:
   platform:
   - Cloud
-redirect_from: /gh-bb-integration/
 ---
 = GitHub integration
 :page-layout: classic-docs

@@ -4,7 +4,6 @@ title: Google Cloud SDK の承認
 description: Google Cloud SDK を承認する方法
 categories:
   - deploying
-redirect_from: /ja/google-auth
 contentTags:
   platform:
     - クラウド

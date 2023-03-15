@@ -4,7 +4,6 @@ title: Artifactory へのデプロイ
 categories:
   - how-to
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
-redirect_from: /ja/artifactory
 contentTags:
   platform:
     - クラウド

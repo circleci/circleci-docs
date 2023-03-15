@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "Execution environments overview"
 description: "An overview of all CircleCI execution environments."
-redirect_from: /executor-types/
 contentTags:
   platform:
   - Cloud
