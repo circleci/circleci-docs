@@ -107,4 +107,4 @@ EOF
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/github-integration/)

@@ -23,7 +23,7 @@ Sign up for a free CircleCI
 Sign in and connect a VCS 👋
 {% endcapture %}
 
-{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/gh-bb-integration"  content1=content1 content2=content2 %}
+{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/first-steps"  content1=content1 content2=content2 %}
 
 {% capture content %}
 Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
