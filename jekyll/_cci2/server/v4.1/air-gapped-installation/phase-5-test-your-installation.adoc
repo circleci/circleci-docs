@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Phase 6 - Test your installation
+= Phase 5 - Test your installation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to test your CircleCI Server installation in an air-gapped environment.

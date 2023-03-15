@@ -13,22 +13,19 @@ version:
 
 [#create-buckets-in-minio]
 == Create buckets in MinIO
-As an air-gapped object storage solution, CircleCI Server supports MinIO. With an air-gapped MinIO instance installed, complete the following steps.
+As an air-gapped object storage solution, CircleCI Server supports MinIO. It is used in an air-gapped environment as a replacement for a Cloud-based object storage solution such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the following steps.
 
-[#create-airgap-data-bucket]
-=== 1. Create an airgap-data bucket.
-Create a new bucket in MinIO named `airgap-data`. This bucket will be for your `values.yaml` file.
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
-=== 2. Create a circleci-data bucket.
+=== 1. Create a circleci-data bucket.
 Create a new bucket in MinIO named `circleci-data`. This bucket can be named differently, but references to it will need to be updated in the Helm values.yaml file.
 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
 [#configure-circleci-data-bucket]
-=== 3. Configure the circleci-data bucket.
+=== 2. Configure the circleci-data bucket.
 In the settings for the `circleci-data` bucket, change the access policy to `public`.
 
 image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
