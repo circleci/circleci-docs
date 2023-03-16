@@ -35,7 +35,7 @@ For each object, you can trigger certain events on hover.
 [#pipeline]
 === Pipeline
 link:https://circleci.com/docs/pipelines/[Pipelines] are the top level tree item, and they contain your workflows. Hovering over a Pipeline lets you:
-* Open in browser, to view pipeline details in the CircleCI app on your default web browser
+- Open in browser, to view pipeline details in the CircleCI app on your default web browser
 
 [#workflow]
 === Workflow
@@ -46,22 +46,22 @@ link:https://circleci.com/docs/workflows/[Workflows] are nested under each Pipel
 [#job]
 === Job
 link:https://circleci.com/docs/jobs-steps/[Jobs] are nested under each Workflow, and can contain Tests and Artifacts. Hovering over a Job lets you:
-* Approve the job (only if the job is on hold)
-* Cancel the job (only if the job is running)
-* Rerun job with SSH (you can read more about this in a later section)
-* View job details
+- Approve the job (only if the job is on hold)
+- Cancel the job (only if the job is running)
+- Rerun job with SSH (you can read more about this in a later section)
+- View job details
 
 image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side Panel with job details]
 By expanding a Job, you can also:
-* Load tests, if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication [FLAKY].
-* Load artifacts, to load any artifacts created by the Job. Once the artifacts are loaded, you can download them by clicking on them.
+- Load tests, if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication [FLAKY].
+- Load artifacts, to load any artifacts created by the Job. Once the artifacts are loaded, you can download them by clicking on them.
 
 [#re-run-with-ssh]
 === Re-run with SSH
 You can re-run jobs with SSH directly from VS Code, either:
-* through the Job Detail page, by clicking on the green button on the top right:
+- through the Job Detail page, by clicking on the green button on the top right:
 ![Screenshot of side Panel with job details]({{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png)
-* or by clicking on the action icon next to the job name in the Pipelines Panel.
+- or by clicking on the action icon next to the job name in the Pipelines Panel.
 ![Screenshot of side Panel with rerun otpions]({{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png)
 In both cases, you will be presented with two options:
 1. Open SSH session in terminal
@@ -84,9 +84,9 @@ We recommend not enabling notifications for status changing to “running”.
 The Status Bar provides synthetic information about the state of the CircleCI extension, your project and your most recent workflow.
 ![Screenshot of the status bar]({{site.baseurl}}/assets/img/docs/vs_code_extension_status-bar.png)
 Specifically, you might see the following statuses:
-* **Not logged in** - when clicking on the status bar, the login page will open
-* **No project** - when clicking on the status bar, the settings page will open so you can select a project manually
-* **Success / On hold / Failed**, and similar workflow statuses - it refers to the status of the top pipeline in your panel. When clicking on the status bar, the relative workflow will come into focus on the CircleCI Pipelines Panel.
+- **Not logged in** - when clicking on the status bar, the login page will open
+- **No project** - when clicking on the status bar, the settings page will open so you can select a project manually
+- **Success / On hold / Failed**, and similar workflow statuses - it refers to the status of the top pipeline in your panel. When clicking on the status bar, the relative workflow will come into focus on the CircleCI Pipelines Panel.
 
 [#the-config-helper]
 == The Config Helper
@@ -94,29 +94,29 @@ Specifically, you might see the following statuses:
 This extension provides in-file assistance to writing, editing and navigating CircleCI Configuration files.
 It is based on a CircleCI-specific Language Server, and offers:
 
-* **Rich code navigation through “go-to-definition” and “go-to-reference” commands.** This is especially convenient when working on large configuration files, to verify the definition of custom jobs, executors parameters, or in turn view where any of them are referenced in the file. Assisted code navigation also works for Orbs, allowing to explore their definition directly in the IDE when using the go-to-definition feature on an orb-defined command or parameter.
+- **Rich code navigation through “go-to-definition” and “go-to-reference” commands.** This is especially convenient when working on large configuration files, to verify the definition of custom jobs, executors parameters, or in turn view where any of them are referenced in the file. Assisted code navigation also works for Orbs, allowing to explore their definition directly in the IDE when using the go-to-definition feature on an orb-defined command or parameter.
 +
 ![Screenshot showing the definition available on hover]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif)
 
-* **Contextual documentation and usage hints when hovering on specific keys**, so to avoid you having to continuously switch to your browser to check the docs whenever you are editing your configuration. That said, links to the official CircleCI documentation are also provided on hover - for easier navigation.
+- **Contextual documentation and usage hints when hovering on specific keys**, so to avoid you having to continuously switch to your browser to check the docs whenever you are editing your configuration. That said, links to the official CircleCI documentation are also provided on hover - for easier navigation.
 +
 ![Screenshot showing the contextual information on hover]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_on-hover-documentation.png)
 
-* **Syntax validation** - which makes it much easier to identify typos, incorrect use of parameters, incomplete definitions, wrong types, invalid or deprecated machine versions, etc.
+- **Syntax validation** - which makes it much easier to identify typos, incorrect use of parameters, incomplete definitions, wrong types, invalid or deprecated machine versions, etc.
 +
 ![Screenshot showing the synthax highlightning when an error is identified]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_syntax-validation.gif)
 
-* **Usage warnings** - which can help identify deprecated parameters, unused jobs or executors, or missing keys that prevent you from taking advantage of CircleCI’s full capabilities
+- **Usage warnings** - which can help identify deprecated parameters, unused jobs or executors, or missing keys that prevent you from taking advantage of CircleCI’s full capabilities
 +
 ![Screenshot showing code highlightning to warn on an unused job]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_usage-warning.png)
 
-* **Auto completion**, available both on built-in keys and parameters and on user-defined variables
+- **Auto completion**, available both on built-in keys and parameters and on user-defined variables
 +
 ![Screenshot showing two suggestions to autocomplete the line of code]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_autocomplete.png)
 
 The Config Helper is based on a dedicated Language Server for CircleCI YAML files, which is Open Source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
 
-[# config-validation-commands]
+[#config-validation-commands]
 === Config validation commands
 The extension also provides two commands that help you statically validate your YAML config files without having to run a pipeline.
 1. Validate current configuration file
@@ -128,13 +128,13 @@ Both of these commands can also be invoked:
 * by right clicking on a CircleCI YAML file:
 * by clicking on the CircleCI button on the top right corner of the page, when focusing on a CircleCI YAML file. Please note that the button will not be visible if you are editing a different file.
 
-[# open-source-language-server]
+[#open-source-language-server]
 ==== Open source language server
 
 The capabilities of the VS Code extension are open to all editors
 link:https://github.com/CircleCI-Public/circleci-yaml-language-server[Visit our GitHub repository] and support the CircleCI community by taking the power of our extension to your favorite editor.
 
-[# how-to-contribute]
+[#how-to-contribute]
 == How to contribute
 The Language Server upon which the Conifg Helper is based is Open Source. If you would like to contribute to the project, feel free to open a PR or get in touch with us through the link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server repository].
 
