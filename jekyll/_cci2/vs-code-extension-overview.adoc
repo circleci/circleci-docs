@@ -32,20 +32,20 @@ The Pipelines Panel lists your most recent pipelines, jobs and workflows, and le
 ![Screenshot of side Panel with pipeline information]({{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png)
 For each object, you can trigger certain events on hover.
 
-[##pipeline]
-== Pipeline
-[Pipelines](https://circleci.com/docs/pipelines/) are the top level tree item, and they contain your workflows. Hovering over a Pipeline lets you:
+[#pipeline]
+=== Pipeline
+link:https://circleci.com/docs/pipelines/[Pipelines] are the top level tree item, and they contain your workflows. Hovering over a Pipeline lets you:
 * Open in browser, to view pipeline details in the CircleCI app on your default web browser
 
-[**workflow]
-== Workflow
-[Workflows](https://circleci.com/docs/workflows/) are nested under each Pipeline, and contain Jobs. Hovering over a Workflow lets you:
+[*workflow]
+=== Workflow
+link:https://circleci.com/docs/workflows/[Workflows] are nested under each Pipeline, and contain Jobs. Hovering over a Workflow lets you:
 * Open in browser, to view workflow details in the CircleCI app, on your default web browser
 * Rerun workflow from start, to re-triggered the entire workflow
 
-[##job]
-== Job
-[Jobs](https://circleci.com/docs/jobs-steps/) are nested under each Workflow, and can contain Tests and Artifacts. Hovering over a Job lets you:
+[#job]
+=== Job
+link:https://circleci.com/docs/jobs-steps/[Jobs] are nested under each Workflow, and can contain Tests and Artifacts. Hovering over a Job lets you:
 * Approve the job (only if the job is on hold)
 * Cancel the job (only if the job is running)
 * Rerun job with SSH (you can read more about this in a later section)
@@ -56,8 +56,8 @@ By expanding a Job, you can also:
 * Load tests, if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication [FLAKY].
 * Load artifacts, to load any artifacts created by the Job. Once the artifacts are loaded, you can download them by clicking on them.
 
-[##re-run-with-ssh]
-== Re-run with SSH
+[#re-run-with-ssh]
+=== Re-run with SSH
 You can re-run jobs with SSH directly from VS Code, either:
 * through the Job Detail page, by clicking on the green button on the top right:
 ![Screenshot of side Panel with job details]({{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png)
@@ -66,19 +66,19 @@ You can re-run jobs with SSH directly from VS Code, either:
 In both cases, you will be presented with two options:
 1. Open SSH session in terminal
 2. Open SSH session in remote VS Code window
-This feature requires the official VS Code extension [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh). You can find more information on Remote Development using SSH in VS Code directly in the [VS Code docs](https://code.visualstudio.com/docs/remote/ssh).
+This feature requires the official VS Code extension link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH]. You can find more information on Remote Development using SSH in VS Code directly in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
 To rerun your job with SSH, you will first have to set the path to your Github or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. However, if you miss this step of want to modify it at a later time, you can do so from the dedicated section of the settings page.
 Of course if the job you want to rerun uses parallelism, you will be able to select which job you want to SSH into.
 
-[##notifications]
-== Notifications
+[#notifications]
+=== Notifications
 You can set up notifications to warn you when a workflow in your Pipelines Panel has changed status.
 ![Screenshot of a notification pop-up for a failed workflow]({{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png)
 If you are not following a workflow in the Pipelines Panel, you will never be notified about a status change. For instance, if you have set in your configuration to follow only the “current branch”, you cannot be notified of status changes relative to other branches.
 We recommend not enabling notifications for status changing to “running”.
 
-[##status-bar]
-== Status Bar
+[#status-bar]
+=== Status Bar
 The Status Bar provides synthetic information about the state of the CircleCI extension, your project and your most recent workflow.
 ![Screenshot of the status bar]({{site.baseurl}}/assets/img/docs/vs_code_extension_status-bar.png)
 Specifically, you might see the following statuses:
@@ -112,10 +112,10 @@ It is based on a CircleCI-specific Language Server, and offers:
 +
 ![Screenshot showing two suggestions to autocomplete the line of code]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_autocomplete.png)
 
-The Config Helper is based on a dedicated Language Server for CircleCI YAML files, which is Open Source. You can view its source code, contribute and add issues directly on the project repository: [circleci-yaml-language-server](https://github.com/CircleCI-Public/circleci-yaml-language-server).
+The Config Helper is based on a dedicated Language Server for CircleCI YAML files, which is Open Source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
 
-[## config-validation-commands]
-== Config validation commands
+[# config-validation-commands]
+=== Config validation commands
 The extension also provides two commands that help you statically validate your YAML config files without having to run a pipeline.
 1. Validate current configuration file
 Corresponds to the CLI command circleci config validate, and verifies statically that the config file is well formed. Please note that this command only validates this file for structure and syntax errors, but not for semantic error (e.g. this job does not exist).
@@ -126,15 +126,15 @@ Both of these commands can also be invoked:
 * by right clicking on a CircleCI YAML file:
 * by clicking on the CircleCI button on the top right corner of the page, when focusing on a CircleCI YAML file. Please note that the button will not be visible if you are editing a different file.
 
-[### open-source-language-server]
-== Open source language server
+[# open-source-language-server]
+==== Open source language server
 
 The capabilities of the VS Code extension are open to all editors
-[Visit our GitHub repository](https://github.com/CircleCI-Public/circleci-yaml-language-server) and support the CircleCI community by taking the power of our extension to your favorite editor.
+link:https://github.com/CircleCI-Public/circleci-yaml-language-server[Visit our GitHub repository] and support the CircleCI community by taking the power of our extension to your favorite editor.
 
 [# how-to-contribute]
 == How to contribute
-The Language Server upon which the Conifg Helper is based is Open Source. If you would like to contribute to the project, feel free to open a PR or get in touch with us through the [circleci-yaml-language-server repository](https://github.com/CircleCI-Public/circleci-yaml-language-server).
+The Language Server upon which the Conifg Helper is based is Open Source. If you would like to contribute to the project, feel free to open a PR or get in touch with us through the link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server repository].
 
 If you find any bugs with this extension or want to provide feedback, you can contact us at **cci-vscode-feedback@circleci.com**.
 
