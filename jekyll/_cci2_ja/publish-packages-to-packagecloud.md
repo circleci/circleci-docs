@@ -1,8 +1,6 @@
 ---
 layout: classic-docs
 title: packagecloud へのパッケージのパブリッシュ
-categories:
-  - how-to
 description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
 contentTags:
   platform:
