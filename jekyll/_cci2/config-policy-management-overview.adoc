@@ -250,7 +250,7 @@ To enable a rule, add the rule as a key in the `enable_rule` object. For example
 enable_rule["use_official_docker_image"]
 ----
 
-Additionally, `enable_hard` is a shorthand to enable a rule and set its enforcement level to `hard` in single statement.
+Use `enable_hard` to enable a rule and set its enforcement level to `hard` in a single statement.
 
 Therefore, following statements are equivalent
 [source,rego]
