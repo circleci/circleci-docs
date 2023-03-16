@@ -3,8 +3,6 @@ layout: classic-docs
 title: "Orb のコンセプト"
 short-title: "Orb のコンセプト"
 description: "Orb のコンセプトの概要"
-categories:
-  - はじめよう
 verison:
   - クラウド
   - Server v4.x
