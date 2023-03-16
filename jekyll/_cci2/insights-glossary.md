@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Insights metrics glossary
 description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v3.x
@@ -73,14 +73,14 @@ Trends displayed in the CircleCI UI are calculated as `100 * (current value - pr
 
 Trends received from the [CircleCI API](https://circleci.com/docs/api/v2/index.html#operation/getProjectWorkflowsPageData) are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`. These trends are 1-based and not 0-based.
 
-* A ratio of 1.0 indicates *no change*.  
-* A value less than 1.0 indicates a negative trend, and a value greater than 1.0 indicates a positive trend. 
-* A value of -1.0 is an infinite trend.  
+* A ratio of 1.0 indicates *no change*.
+* A value less than 1.0 indicates a negative trend, and a value greater than 1.0 indicates a positive trend.
+* A value of -1.0 is an infinite trend.
 
-This also applies to the following API endpoints: 
+This also applies to the following API endpoints:
 
-* [getOrgSummaryData](https://circleci.com/docs/api/v2/index.html#operation/getOrgSummaryData) 
-* [getWorkflowSummary](https://circleci.com/docs/api/v2/index.html#operation/getWorkflowSummary). 
+* [getOrgSummaryData](https://circleci.com/docs/api/v2/index.html#operation/getOrgSummaryData)
+* [getWorkflowSummary](https://circleci.com/docs/api/v2/index.html#operation/getWorkflowSummary).
 
 Despite the trend being reported as a ratio via the API, the result returned is still effectively equivalent to the percentage that is shown in the UI. To compare the ratio from the API with the percentage reported in the UI, you can compute `| trend-value - 1|` (vertical line indicates absolute value). For example, if the API returns a ratio of 3.33, in the UI it will be shown as `| 3.33 - 1 | = 2.33` which is equivalent to +233%.
 
