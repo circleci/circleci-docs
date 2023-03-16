@@ -1,6 +1,5 @@
 ---
 
-categories: [configuration]
 contentTags:
   platform:
   - クラウド
