@@ -103,9 +103,3 @@ curl --data @- <<EOF
 {"value":"some-secret-value"}
 EOF
 ```
-
-## 関連項目
-{: #see-also }
-{:.no_toc}
-
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/github-integration/)

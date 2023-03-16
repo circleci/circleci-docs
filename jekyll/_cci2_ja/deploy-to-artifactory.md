@@ -1,8 +1,6 @@
 ---
 layout: classic-docs
 title: Artifactory へのデプロイ
-categories:
-  - how-to
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
 contentTags:
   platform:

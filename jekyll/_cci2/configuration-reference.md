@@ -2,7 +2,6 @@
 layout: classic-docs
 title: Configuration reference
 description: Reference for .circleci/config.yml
-order: 20
 readtime: false
 contentTags:
   platform:

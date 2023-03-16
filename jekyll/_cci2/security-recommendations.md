@@ -102,9 +102,3 @@ curl --data @- <<EOF
 {"value":"some-secret-value"}
 EOF
 ```
-
-## See also
-{: #see-also }
-{:.no_toc}
-
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/github-integration/)
