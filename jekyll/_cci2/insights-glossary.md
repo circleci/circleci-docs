@@ -71,7 +71,7 @@ display the change in value or delta compared to the prior 7-day window.
 
 Trends displayed in the CircleCI UI are calculated as `100 * (current value - previous value) / prior-value`.
 
-Trends received from the [CircleCI API](https://circleci.com/docs/api/v2/index.html#operation/getProjectWorkflowsPageData) are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`.  These trends are 1-based and not 0-based.
+Trends received from the [CircleCI API](https://circleci.com/docs/api/v2/index.html#operation/getProjectWorkflowsPageData) are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`. These trends are 1-based and not 0-based.
 
 * A ratio of 1.0 indicates *no change*.  
 * A value less than 1.0 indicates a negative trend, and a value greater than 1.0 indicates a positive trend. 
