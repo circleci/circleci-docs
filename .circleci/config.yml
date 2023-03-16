@@ -22,10 +22,12 @@ parameters:
 # build artifacts and files across jobs. For example, we build our Javascript
 # persist it to a workspace to be made available when the Jekyll site builds.
 references:
-  workspace_root: &workspace_root /tmp/workspace
+  workspace_root: &workspace_root
+    /tmp/workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
+
 
 # Several steps in this config use the same, specialized ruby-caching steps.
 # Commands can be used to extract a common set of steps into a reusable-block.
@@ -46,7 +48,8 @@ commands:
           key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
-          command: |
+          command:
+            |
             if [[ "<< parameters.dir >>" != "" ]]; then
               cd << parameters.dir >>
             fi
@@ -85,8 +88,9 @@ commands:
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
+
   build-deploy:
-    when:
+    when: 
       not: << pipeline.parameters.run-schedule >>
     jobs:
       - build_server_pdfs:
@@ -98,17 +102,17 @@ workflows:
           requires:
             - build_server_pdfs
             - build_api_docs
-      - reindex-search
-      # - reindex-search:
-      #     filters:
-      #       branches:
-      #         only: master
+      - reindex-search:
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - build
           filters:
             branches:
               only: master
+
 
   # We run a nightly build to refresh content and build docs-platform
   # at least once every day. Triggered every day at 08:00 AM on master branch
@@ -118,6 +122,7 @@ workflows:
       - trigger-deploy
 
 jobs:
+
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
       - image: asciidoctor/docker-asciidoctor
@@ -136,7 +141,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
-      tag: "2.7.4-browsers"
+      tag: '2.7.4-browsers'
     steps:
       - checkout
       - *attach_workspace
@@ -172,7 +177,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: "2.7.4-browsers"
+      tag: '2.7.4-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -194,9 +199,7 @@ jobs:
       - ruby-deps
       - node/install-packages:
           pkg-manager: yarn
-          cache-version:
-            &npm-cache-version # Gets cache version from project environment variable (E.g v1)
-
+          cache-version: &npm-cache-version # Gets cache version from project environment variable (E.g v1)
       - run:
           name: Run markdownlint with pronto
           command: bundle exec pronto run -f github_pr -c origin/master
@@ -250,11 +253,11 @@ jobs:
           root: ~/circleci-docs/jekyll/
           paths:
             - _site/*
-
+  
   reindex-search:
     executor:
       name: ruby/default
-      tag: "2.7.4-browsers"
+      tag: '2.7.4-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -283,3 +286,4 @@ jobs:
       - image: cibuilds/aws:1.16.185
     steps:
       - trigger-docs-platform-build
+      
