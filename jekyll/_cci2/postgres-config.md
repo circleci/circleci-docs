@@ -145,7 +145,7 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 ## Example go app with postgresql
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Demo App](https://github.com/CircleCI-Public/circleci-demo-go) for a walkthrough of this example configuration and a link to the public code repository for the app.
+The following configuration example is taken from the CircleCI [Go demo app](https://github.com/CircleCI-Public/circleci-demo-go).
 
 ```yaml
 version: 2
