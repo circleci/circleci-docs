@@ -252,7 +252,7 @@ enable_rule["use_official_docker_image"]
 
 Use `enable_hard` to enable a rule and set its enforcement level to `hard` in a single statement.
 
-Therefore, following statements are equivalent
+The following statements are equivalent:
 [source,rego]
 ----
 enable_hard["use_official_docker_image"]
