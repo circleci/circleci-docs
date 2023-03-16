@@ -75,24 +75,24 @@ The VS Code extension makes it easier to write, edit, navigate and troubleshoot 
 
 
 * **Rich code navigation through “go-to-definition” and “go-to-reference” commands.** This is especially convenient when working on large configuration files, to verify the definition of custom jobs, executors parameters, or in turn view where any of them are referenced in the file. Assisted code navigation also works for Orbs, allowing to explore their definition directly in the IDE when using the go-to-definition feature on an orb-defined command or parameter.
-+
-image:vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+![Screenshot showing the definition available on hover]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif)
 
 * **Contextual documentation and usage hints when hovering on specific keys**, so to avoid you having to continuously switch to your browser to check the docs whenever you are editing your configuration. That said, links to the official CircleCI documentation are also provided on hover - for easier navigation.
-+
-image:vs_code_extension_config_helper_on-hover-documentation.png[Screenshot showing the contextual information on hover]
+
+![Screenshot showing the contextual information on hover]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_on-hover-documentation.png)
 
 * **Syntax validation** - which makes it much easier to identify typos, incorrect use of parameters, incomplete definitions, wrong types, invalid or deprecated machine versions, etc.
-+
-image:vs_code_extension_config_helper_syntax-validation.gif[Screenshot showing the synthax highlightning when an error is identified]
+
+![Screenshot showing the synthax highlightning when an error is identified]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_syntax-validation.gif)
 
 * **Usage warnings** - which can help identify deprecated parameters, unused jobs or executors, or missing keys that prevent you from taking advantage of CircleCI’s full capabilities
-+
-image:vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlightning to warn on an unused job]
+
+![Screenshot showing code highlightning to warn on an unused job]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_usage-warning.png)
 
 * **Auto completion**, available both on built-in keys and parameters and on user-defined variables
-+
-image:vs_code_extension_config_helper_autocomplete.png[Screenshot showing two suggestions to autocomplete the line of code]
+
+![Screenshot showing two suggestions to autocomplete the line of code]({{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_autocomplete.png)
 
 Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from VS Code, and be notified of workflow status changes.
 The CircleCI VS Code extension is available to download on the [VS Code marketplace.](https://marketplace.visualstudio.com/items?itemName=circleci.circleci) 
