@@ -1,7 +1,6 @@
 ---
 layout: classic-docs
 title: "最適化の概要"
-short-title: "最適化の概要"
 description: "CircleCI ビルドの最適化"
 contentTags:
   platform:
