@@ -49,7 +49,7 @@ The following illustration uses an [example Java application](https://github.com
 
 ![configuration elements]({{site.baseurl}}/assets/img/docs/config-elements.png)
 
-CircleCI configurations use YAML. See the [Writing YAML](/docs/writing-yaml) page for basic guidance. For a full overview of what is possible in a configuration file, see the [Configuration reference](/docs/configuration-reference) page.
+CircleCI configurations use YAML. See the [Introduction to YAML configurations](/docs/introduction-to-yaml-configurations) page for basic guidance. For a full overview of what is possible in a configuration file, see the [Configuration reference](/docs/configuration-reference) page.
 
 ## Contexts
 {: #contexts }

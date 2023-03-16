@@ -4,7 +4,7 @@ title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
 description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 order: 35
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -145,7 +145,7 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 ## Example go app with postgresql
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+The following configuration example is taken from the CircleCI [Go demo app](https://github.com/CircleCI-Public/circleci-demo-go).
 
 ```yaml
 version: 2
@@ -165,35 +165,35 @@ jobs:
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
- 
+
     environment:
       TEST_RESULTS: /tmp/test-results
- 
+
     steps:
       - checkout
       - run: mkdir -p $TEST_RESULTS
- 
+
       - restore_cache:
           keys:
             - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
- 
+
       - run:
           name: Get dependencies
           command: |
             go get -v
- 
+
       - run:
           name: Get go-junit-report for setting up test timings on CircleCI
           command: |
             go get github.com/jstemmer/go-junit-report
             # Remove go-junit-report from go.mod
             go mod tidy
- 
+
       #  Wait for Postgres to be ready before proceeding
       - run:
           name: Waiting for Postgres to be ready
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
- 
+
       - run:
           name: Run unit tests
           environment: # environment variables for the database url and path to migration files
@@ -203,12 +203,12 @@ jobs:
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
       - run: make
- 
+
       - save_cache:
           key: go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
           paths:
             - "/go/pkg/mod"
- 
+
       - run:
           name: Start service
           environment:
@@ -216,7 +216,7 @@ jobs:
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: ./workdir/contacts
           background: true
- 
+
       - run:
           name: Validate service is working
           command: |
@@ -225,7 +225,7 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
- 
+
       - store_test_results:
           path: /tmp/test-results
 ```
@@ -334,8 +334,8 @@ workflows:
 {:.tab.mysql_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:

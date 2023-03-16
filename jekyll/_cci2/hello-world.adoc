@@ -1,5 +1,4 @@
 ---
-redirect_from: /examples-intro/
 contentTags:
   platform:
     - Cloud

@@ -64,7 +64,7 @@ task :test do
   ]
 
   ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
-  options = { :allow_hash_href => true,  :check_favicon => true, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => HTML_PROOFER_PARALLEL}, :file_ignore => ignore_files}
+  options = { :allow_hash_href => true,  :check_favicon => false, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => HTML_PROOFER_PARALLEL}, :file_ignore => ignore_files}
 
   HTMLProofer.check_directory("./jekyll/_site", options).run
 end

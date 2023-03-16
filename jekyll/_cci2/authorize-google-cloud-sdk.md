@@ -3,7 +3,6 @@ layout: classic-docs
 title: Authorize Google Cloud SDK
 description: How to authorize the Google Cloud SDK
 categories: [deploying]
-redirect_from: /google-auth
 contentTags:
   platform:
   - Cloud
