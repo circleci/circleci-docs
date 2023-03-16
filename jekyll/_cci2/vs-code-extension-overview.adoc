@@ -37,7 +37,7 @@ For each object, you can trigger certain events on hover.
 link:https://circleci.com/docs/pipelines/[Pipelines] are the top level tree item, and they contain your workflows. Hovering over a Pipeline lets you:
 * Open in browser, to view pipeline details in the CircleCI app on your default web browser
 
-[*workflow]
+[#workflow]
 === Workflow
 link:https://circleci.com/docs/workflows/[Workflows] are nested under each Pipeline, and contain Jobs. Hovering over a Workflow lets you:
 * Open in browser, to view workflow details in the CircleCI app, on your default web browser
@@ -51,7 +51,7 @@ link:https://circleci.com/docs/jobs-steps/[Jobs] are nested under each Workflow,
 * Rerun job with SSH (you can read more about this in a later section)
 * View job details
 
-![Screenshot of side Panel with job details]({{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif)
+image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side Panel with job details]
 By expanding a Job, you can also:
 * Load tests, if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication [FLAKY].
 * Load artifacts, to load any artifacts created by the Job. Once the artifacts are loaded, you can download them by clicking on them.
