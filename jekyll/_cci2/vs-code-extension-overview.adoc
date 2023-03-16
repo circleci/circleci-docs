@@ -73,7 +73,9 @@ Of course if the job you want to rerun uses parallelism, you will be able to sel
 [#notifications]
 === Notifications
 You can set up notifications to warn you when a workflow in your Pipelines Panel has changed status.
+
 ![Screenshot of a notification pop-up for a failed workflow]({{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png)
+
 If you are not following a workflow in the Pipelines Panel, you will never be notified about a status change. For instance, if you have set in your configuration to follow only the “current branch”, you cannot be notified of status changes relative to other branches.
 We recommend not enabling notifications for status changing to “running”.
 
