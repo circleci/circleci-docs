@@ -199,7 +199,7 @@ policy_name["docker"]
 minimum_remote_docker_version := "20.10.11"
 
 # Mark the rule as enabled. This causes circleci to take this rule into account when making decisions.
-# Also, mark this rule as a hard violation level rule. This will stop offending builds from running in production.
+# Also mark this rule as a hard violation level rule. This will stop offending builds from running in production.
 enable_hard["check_min_remote_docker_version"]
 
 check_min_remote_docker_version[reason] {
