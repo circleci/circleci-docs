@@ -15,8 +15,8 @@ contentTags:
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
 
-* [API v1.1 Reference]({{site.baseurl}}/api/v1/)
-* [API v2 Reference]({{site.baseurl}}/api/v2/)
+* [API v1.1 Reference](https://circleci.com/docs/api/v1/)
+* [API v2 Reference](https://circleci.com/docs/api/v2/)
 
 API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI cloud users migrate their scripts to API v2 stable endpoints as soon as possible.
 
@@ -80,7 +80,7 @@ In the above example the `project_slug` would take the form `:vcs/:org/:project`
 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide]({{site.baseurl}}/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 ### New endpoints
 {: #new-endpoints }

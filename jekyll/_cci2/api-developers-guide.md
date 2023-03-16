@@ -4,12 +4,12 @@ title: "CircleCI API Developer's Guide"
 short-title: "Developer's Guide"
 description: "API guide for internal and external CircleCI developers"
 categories: [getting-started]
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
 
-This API Developer's Guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the [Reference documentation]({{site.baseurl}}/api/v2).
+This API Developer's Guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the [Reference documentation](https://circleci.com/docs/api/v2/).
 
 ## API categories
 {: #api-categories }
@@ -107,15 +107,15 @@ For GitHub and Bitbucket projects, `project_slug` is currently usable as a human
 ### GitLab SaaS Support projects
 {: #gitlab-saas-support-projects }
 
-For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:  
+For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:
 
-`circleci/:slug-remainder`  
+`circleci/:slug-remainder`
 
-The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the "triplet" string from the browser address bar. 
+The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the "triplet" string from the browser address bar.
 
 ![GitLab project slug available in address in the web app]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
 
-In API requests, the project slug must be passed as a whole. For example: 
+In API requests, the project slug must be passed as a whole. For example:
 
 ```shell
 curl --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -263,7 +263,7 @@ Many of the API calls make use of the `{project-slug}` triplet, described [above
     -d '{ "branch": "my-branch" }'
     ```
 
-6. Let us move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key. 
+6. Let us move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key.
     <br>
     First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
@@ -300,7 +300,7 @@ Many of the API calls make use of the `{project-slug}` triplet, described [above
 
 This concludes the end-to-end example of using the v2 API. For more detailed
 information about other endpoints you may wish to call, please refer to the
-[CircleCI API v2 Documentation]({{site.baseurl}}/api/v2) for an overview of all
+[CircleCI API v2 Documentation](https://circleci.com/docs/api/v2/) for an overview of all
 endpoints currently available.
 
 ## Additional API use cases
@@ -357,7 +357,7 @@ Notice in the example above that you will receive very specific information abou
 ### Get job details
 {: #get-job-details }
 
-Much like the Get a project API request described in the previous example, the [Get job details](https://circleci.com/docs/api/v2/index.html#operation/getJobDetails) API request enables you to return specific job information from the CircleCI API by making a single API request. 
+Much like the Get a project API request described in the previous example, the [Get job details](https://circleci.com/docs/api/v2/index.html#operation/getJobDetails) API request enables you to return specific job information from the CircleCI API by making a single API request.
 
 Retrieving job information can be very useful when you want information about how your job performed, what resources were used (e.g. pipeline, executor type, etc.), and the time it took for the job to finish.
 
@@ -496,7 +496,7 @@ The following section details the steps you need to follow to download artifacts
 ### Gather insights
 {: #gather-insights }
 
-The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the [Using Insights]({{site.baseurl}}/insights) page to learn more about insights data. 
+The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the [Using Insights]({{site.baseurl}}/insights) page to learn more about insights data.
 
 The example below describes how you can return information about a single workflow containing information about metrics and credit usage.
 
@@ -685,4 +685,4 @@ When reviewing each individual review job, please note that the following inform
 {: #reference }
 
 - Refer to [API V2 Introduction]({{site.baseurl}}/api-intro/) for high-level information about the CircleCI V2 API.
-- Refer to [API V2 Reference Guide]({{site.baseurl}}/api/v2/) for a detailed list of all endpoints that make up the CircleCI V2 API.
+- Refer to [API V2 Reference Guide](https://circleci.com/docs/api/v2/) for a detailed list of all endpoints that make up the CircleCI V2 API.

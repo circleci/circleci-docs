@@ -10,7 +10,7 @@ order: 2
 
 CircleCIドキュメントのこの設定セクションに含まれるガイドでは、CircleCI アプリケーションのプロジェクト設定と組織設定のページからアクセスできる機能とタスクについて説明します。 以下のトピックが含まれています。
 
-* [VCS integration]({{ site.baseurl }}/ja/gh-bb-integration/) (GitHub/Bitbucket): アクセス許可とキーに関する情報
+* [VCS integration]({{ site.baseurl }}/ja/github-integration/) (GitHub/Bitbucket): アクセス許可とキーに関する情報
 * [GitHub Check の有効化と使用]({{ site.baseurl }}/ja/enable-checks/): GitHub アプリによるワークフローの表示と操作
 * [オープンソースプロジェクトのビルド]({{ site.baseurl }}/ja/oss/)
 * [Slack とメール通知の設定]({{ site.baseurl }}/ja/notifications/)

@@ -39,7 +39,7 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 このチュートリアルに沿って実行するには、以下を準備する必要があります。
 
 * CircleCI のアカウント: アカウントをお持ちでない場合は、 <<first-steps#,無料で登録していただけます。>>
-* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や Bitbucket) : まだお済みでない場合は、<<gh-bb-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
+* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や Bitbucket) : まだお済みでない場合は、<<github-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
 
 [#about-the-sample-app]
 == サンプルアプリについて
@@ -167,7 +167,7 @@ parallelism: 5
 +
 NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 +
-実際には、これらの CircleCI CLI コマンドにより、まだテストは実行されません。そのためには `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数 
+実際には、これらの CircleCI CLI コマンドにより、まだテストは実行されません。そのためには `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数
  `$TEST` に保存されます。
 .. `Test application` コマンドの後に、新しく以下のように `run` コマンドを追加します。
 +

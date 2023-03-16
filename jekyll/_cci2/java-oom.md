@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Avoiding and Debugging Java Memory Errors"
 description: "How to avoid and debug Java memory errors on CircleCI."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -180,9 +180,3 @@ Even if the JVM's maximum heap size is larger than the job's limit, the garbage 
 
 If you are still consistently hitting memory limits,
 consider [increasing your jobs's RAM allocation]({{site.baseurl}}/configuration-reference/#resource_class).
-
-## See also
-{: #see-also }
-
-[Java Language Guide]({{ site.baseurl }}/language-java/)
-[Android Tutorial]({{ site.baseurl }}/language-android/)

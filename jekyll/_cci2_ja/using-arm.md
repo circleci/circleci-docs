@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "Arm 実行環境の使用"
 description: "Arm 実行環境で実行するジョブの設定方法を説明します。"
-redirect_from: /ja/arm-resources/
 contentTags:
   platform:
     - クラウド
