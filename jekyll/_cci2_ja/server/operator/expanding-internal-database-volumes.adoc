@@ -192,8 +192,9 @@ helm-value ファイルの PVC サイズを変更してインストールした�
 [source,yaml]
 ----
 postgresql:
-  persistence:
-    size: 10Gi
+  primary:
+    persistence:
+      size: 10Gi
 ----
 * **MongoDB**
 +
