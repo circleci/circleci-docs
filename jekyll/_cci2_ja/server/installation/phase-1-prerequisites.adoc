@@ -302,12 +302,7 @@ ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
 === GCP - Reserve a static external IP address
 
-GCPで新しい静的 IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。 詳細については、link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address[Google Cloud のドキュメント] を参照してください。
-
-[source,shell]
-----
-gcloud compute addresses create circleci-server --global --ip-version IPV4
-----
+GCPで新しい静的 IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
 
 返された IPv4 アドレスは後で values.yaml ファイルで使用するので控えておいてください。
 
