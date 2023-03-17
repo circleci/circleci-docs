@@ -339,6 +339,6 @@ When hardening an installation where the VM service uses public IPs, the followi
 
 ifndef::pdf[]
 ## Next steps
-* xref:server/v4.1/installation/migrate-from-server-3-to-server-4#[Migrate from Server v3.x to v4.x]
-* xref:server/v4.1/operator/operator-overview#[Server 4.x Operators Overview]
+* xref:migrate-from-server-3-to-server-4#[Migrate from Server v3.x to v4.x]
+* xref:../operator/operator-overview#[Server 4.x Operators Overview]
 endif::[]
