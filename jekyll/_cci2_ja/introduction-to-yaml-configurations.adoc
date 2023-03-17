@@ -1,9 +1,5 @@
 ---
 
-categories: [configuration]
-redirect_from:
-  - /ja/config-overview/
-  - /ja/writing-yaml/
 contentTags:
   platform:
   - クラウド

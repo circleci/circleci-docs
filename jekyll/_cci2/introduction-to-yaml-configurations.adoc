@@ -1,9 +1,6 @@
 ---
 categories: [configuration]
-redirect_from: 
-  - /config-overview/
-  - /writing-yaml/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
