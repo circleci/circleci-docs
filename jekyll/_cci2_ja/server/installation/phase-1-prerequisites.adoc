@@ -15,7 +15,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI Server v4.x は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/server/overview/overview/[CircleCI Server v4.x の概要] を先に読んでいることを前提としています。
+CircleCI Server v4.x は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/server/overview/circleci-server-v4-overview/[CircleCI Server v4.x の概要] を先に読んでいることを前提としています。
 
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
@@ -490,7 +490,7 @@ CircleCI Server v4.x では、ビルドしたアーティファクト、テス�
 * link:https://min.io/[MinIO]
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。 Azure Blob Strage などの S3 API をサポートしていないオブジェクトストレージプロバイダーを利用する場合は、MinIO Gateway の利用をお勧めします。
+S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。
 
 S3 または GCS のバケットとアクセス方法を作成するには、次の手順に従います。
 

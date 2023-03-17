@@ -11,7 +11,7 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-パイプラインのスケジュール実行機能により、スケジュールに沿って定期的にパイプラインをトリガーすることができます。 パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
+**パイプラインのスケジュール実行機能は現時点では GitHub VCS ユーザーと Bitbucket VCS ユーザーにご利用いただけます。**パイプラインのスケジュール実行機能を使うと、スケジュールに基づき定期的にパイプラインをトリガーすることができます。 パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
 
 - パイプラインに関連付けるユーザーの管理: これにより、[制限付きコンテキスト](/docs/contexts/#project-restrictions)の使用が可能になります。
 - セットアップ ワークフロー経由の[ダイナミックコンフィグ](/docs/dynamic-config)の使用
@@ -39,6 +39,8 @@ contentTags:
 4. フォームに入力して新しいスケジュールを定義し、**Save Trigger** をクリックします。
 
 このフォームには、[パイプラインパラメーター](/docs/pipeline-variables/)を追加するオプションもあります。これは、設定ファイルで最初に宣言した型指定されたパイプライン変数です。
+
+複数のワークフローで共通のスケジュールを管理するには、`.circleci/config.yml` ファイルで手動で設定する必要があります。 コード例については [複数のワークフローを使ったパイプラインのスケジュール実行](/docs/schedule-pipelines-with-multiple-workflows)のページを参照してください。
 
 ### API を使用する場合
 {: #use-the-api }
@@ -107,8 +109,6 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 
 GitHub および Bitbucket ユーザーの場合: `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-type/org-name/repo-name` の形式を取ります。
 
-GitLab.com ユーザーの場合: `project-slug`  は `circleci/:slug-remainder` の形式を取ります。 プロジェクトスラグの形式に関する詳細は、API 開発者向けガイドの[入門ガイドのセクション](/docs/api-developers-guide/#getting-started-with-the-api)を参照してください。
-
 ---
 
 **質問:** スケジュール化したパイプラインが実行されないのはなぜですか？
@@ -116,7 +116,7 @@ GitLab.com ユーザーの場合: `project-slug`  は `circleci/:slug-remainder`
 **回答:** 考えられる理由は複数あります。
 * スケジュール化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？
 * スケジュールに設定されたブランチが削除されていませんか？
-* お客様の GitHub 組織では SAML 保護を使用していませんか？ SAML トークンは頻繁に失有効期限が切れます。失効していると GiHub へのリクエストが失敗します。
+* お客様の GitHub 組織では SAML 保護を使用していませんか？ SAML トークンは頻繁に有効期限が切れます。失効していると GiHub へのリクエストが失敗します。
 
 ---
 
@@ -137,6 +137,6 @@ GitLab.com ユーザーの場合: `project-slug`  は `circleci/:slug-remainder`
 ## 次のステップ
 {: #next-steps }
 
-- [スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)
+- [ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)
 - [複数のワークフローを使ったパイプラインのスケジュール実行](/docs/schedule-pipelines-with-multiple-workflows)
 - [パイプラインのスケジュール実行を夜間に設定する](/docs/set-a-nightly-scheduled-pipeline)

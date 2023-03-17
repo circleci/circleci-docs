@@ -30,6 +30,10 @@ CircleCI のデフォルトでは、プッシュフックでビルドが行わ�
 
 これらの設定は、CircleCI Web アプリの各プロジェクトの **Project Settings** セクションでご確認いただけます。
 
+**Only Build Pull Requests** 設定をオーバーライドする機能もサポートされています。 具体的には、CircleCI は正規表現 (例: `release.\*`) で指定されたデフォルト以外のブランチからのすべてのコミットに対して検証を実行します。
+
+現時点では、 **Only Build Pull Requests** 設定をオーバーライドする唯一の方法は、 link:https://support.circleci.com/hc/ja/[https://support.circleci.com/]  でサポートリクエストをオープンすることです。 このリクエストには、CircleCI がすべてのコミットを検証するブランチの  `許可リスト` に追加したい正規表現を記載してください。 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 詳細については、link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests[Ideas] を参照してください。
+
 GitHub で Webhook を編集して、ビルドをトリガーするイベントを制限できます。 Webhook の設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュフックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Webhook の設定からプッシュフックを削除すると、ビルドを行いません。
 
 詳しくは、 https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub のフックの編集ドキュメント] を参照してください。

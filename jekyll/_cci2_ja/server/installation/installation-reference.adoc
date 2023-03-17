@@ -723,7 +723,7 @@ a|GCP 認証設定を指定します。
 |`nomad.server.gossip.encryption.key`
 |文字列
 |`""`
-|
+|デフォルトでは、特に指定がない限り、Dockerhub がイメージレジストリとして想定されています。例えば、`registry.example.com/organization/repository` のように指定します。
 
 |`nomad.server.replicas`
 |整数
