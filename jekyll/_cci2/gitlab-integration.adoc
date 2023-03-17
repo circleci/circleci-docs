@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= GitLab SaaS integration
+= GitLab integration overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI.
