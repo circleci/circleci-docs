@@ -144,7 +144,7 @@ commands:
             - run: npm install
 ```
 
-ブール値型パラメーターの評価は、[YAML 1.1 で指定されている値](http://yaml.org/type/bool.html)に基づいています。
+ブール値型パラメーターの評価は、[YAML 1.1 で指定されている値](https://yaml.org/type/bool.html)に基づいています。
 
 * true と評価されるもの: `y`、`yes`、`true`、`on`
 * false と評価されるもの: `n`、`no`、`false`、`off`
@@ -471,7 +471,7 @@ jobs:
 ### 特別なキー
 {: #special-keys }
 
-CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
+CircleCI では、すべての [circleci.com](https://circleci.com/ja/) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
 
   * `checkout`
   * `setup_remote_docker`

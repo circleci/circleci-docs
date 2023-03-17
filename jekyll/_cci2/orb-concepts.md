@@ -4,7 +4,6 @@ title: "Orbs Concepts"
 short-title: "Orbs Concepts"
 description: "Conceptual Overview for Orbs"
 categories: [getting-started]
-redirect_from: /using-orbs/
 verison:
 - Cloud
 - Server v4.x

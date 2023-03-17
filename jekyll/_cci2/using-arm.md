@@ -2,8 +2,7 @@
 layout: classic-docs
 title: "Using the Arm execution environment"
 description: "Learn how to configure a your jobs to run in the Arm execution environment."
-redirect_from: /arm-resources/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x

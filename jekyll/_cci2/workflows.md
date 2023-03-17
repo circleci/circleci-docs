@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "Using Workflows to Orchestrate Jobs"
 description: "Learn about using CircleCI workflows to orchestrate jobs"
-redirect_from: /defining-multiple-jobs/
 contentTags:
   platform:
   - Cloud
@@ -58,7 +57,7 @@ Workflows may appear with one of the following states:
 
 _For a full specification of the_ `workflows` _key, see the [Workflows](/docs/configuration-reference/#workflows) section of the Configuration Reference._
 
-To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. 
+To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow.
 
 The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows` key named `build_and_test`, and by nesting the `jobs` key with a list of job names. The jobs have no dependencies defined, so they will run concurrently.
 
@@ -172,7 +171,7 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 Workflows can be configured to wait for manual approval of a job before
 continuing to the next job. Anyone who has push access to the repository can click the **Approval** button to continue the workflow.
 To do this, add a job to the `jobs` list with the
-key `type: approval`. 
+key `type: approval`.
 
 The following is a config example, with comments:
 
@@ -290,9 +289,9 @@ A valid `schedule` requires a `cron` key and a `filters` key.
 The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
 
 The following are **not** supported:
-- Cron step syntax (for example, `*/1`, `*/20`).  
-- Range elements within comma-separated lists of elements.  
-- Range elements for days (for example, `Tue-Sat`).  
+- Cron step syntax (for example, `*/1`, `*/20`).
+- Range elements within comma-separated lists of elements.
+- Range elements for days (for example, `Tue-Sat`).
 Use comma-separated digits instead.
 {: class="alert alert-info" }
 

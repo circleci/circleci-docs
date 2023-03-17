@@ -91,9 +91,7 @@ policy_name["example"]
 
 ban_orbs = config.ban_orbs(["evilcorp/evil"])
 
-enable_rule["ban_orbs"]
-
-hard_fail["ban_orbs"]
+enable_hard["ban_orbs"]
 ----
 
 [#ban-orbs-version]
@@ -123,9 +121,7 @@ policy_name["example"]
 
 ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.5.6"])
 
-enable_rule["ban_orbs_versioned"]
-
-hard_fail["ban_orbs_versioned"]
+enable_hard["ban_orbs_versioned"]
 ----
 
 [#resource-class-by-project]
@@ -162,9 +158,7 @@ check_resource_class = config.resource_class_by_project({
   "large": {"$PROJECT_UUID_A","$PROJECT_UUID_B"},
 })
 
-enable_rule["check_resource_class"]
-
-hard_fail["check_resource_class"]
+enable_hard["check_resource_class"]
 ----
 
 [#contexts-allowed-by-project-ids]
@@ -208,9 +202,7 @@ rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
   ["${ALLOWED_CONTEXT_NAME_1}","${ALLOWED_CONTEXT_NAME_2}"]
 )
 
-enable_rule["rule_contexts_allowed_by_project_ids"]
-
-hard_fail["rule_contexts_allowed_by_project_ids"]
+enable_hard["rule_contexts_allowed_by_project_ids"]
 ----
 
 [#contexts-blocked-by-project-ids]
@@ -254,9 +246,7 @@ rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
   ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
 )
 
-enable_rule["rule_contexts_blocked_by_project_ids"]
-
-hard_fail["rule_contexts_blocked_by_project_ids"]
+enable_hard["rule_contexts_blocked_by_project_ids"]
 ----
 
 
@@ -301,9 +291,7 @@ rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
   ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
 )
 
-enable_rule["rule_contexts_reserved_by_project_ids"]
-
-hard_fail["rule_contexts_reserved_by_project_ids"]
+enable_hard["rule_contexts_reserved_by_project_ids"]
 ----
 
 
@@ -348,7 +336,5 @@ rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
   ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
 )
 
-enable_rule["rule_contexts_reserved_by_branches"]
-
-hard_fail["rule_contexts_reserved_by_branches"]
+enable_hard["rule_contexts_reserved_by_branches"]
 ----

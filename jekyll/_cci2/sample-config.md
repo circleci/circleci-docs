@@ -13,9 +13,12 @@ contentTags:
   - Server v2.x
 ---
 
-This document provides sample [`.circleci/config.yml`]({{site.baseurl}}/configuration-reference/) files, as follows:
+This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
 
-CircleCI has created an **extension for Visual Studio Code** that reduces context switching for developers between the web app and VS Code through a set of helpful features.
+## Tools for editing configuration files
+{: tools-for-editing-configuration-files }
+
+CircleCI has created an [extension for Visual Studio Code](/docs/vs-code-extension-overview/) that reduces context switching between the web app and VS Code through a set of helpful features.
 
 The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
 
@@ -27,9 +30,13 @@ The CircleCI VS Code extension is available to download on the [VS Code marketpl
 ### Concurrent workflow
 {: #concurrent-workflow }
 
-The configuration example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Refer to the [Workflows]({{ site.baseurl }}/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
+
+* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the [Developer Hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example:
+
 ![Concurrent Workflow Graph]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 {:.tab.basic-concurrent.Cloud}
@@ -40,19 +47,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -73,19 +74,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -106,19 +101,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -139,19 +128,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -168,9 +151,13 @@ workflows:
 ### Sequential workflow
 {: #sequential-workflow }
 
-The configuration example below shows a sequential job workflow where the `build` job runs and then the `test` job runs once `build` has completed. Refer to the [Workflows]({{ site.baseurl }}/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The configuration example below shows a sequential workflow where the `build` job runs, and then the `test` job runs once `build` has completed. This is achieved by using the [`requires` key](/docs/configuration-reference/#requires), and specifying the `test` job "requires" the `build` job in order to run. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
-This image shows the workflow view for the following configuration example, in which jobs run sequentially; one after the other:
+* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+
+This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
+
 ![Sequential Workflow Graph]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
 {:.tab.basic-sequential.Cloud}
@@ -181,19 +168,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -216,19 +197,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -251,19 +226,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      -- image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -285,19 +254,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
       - run: echo "this is the test job"
@@ -316,7 +279,10 @@ workflows:
 ### Approval job
 {: #approval-job }
 
-The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the `deploy` job can run. Refer to the [Workflows]({{ site.baseurl }}/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The example below shows a sequential workflow with an [approval step](/docs/configuration-reference/#type). The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensuring the workflow waits for manual approval in the CircleCI web app before the `deploy` job can run. All jobs run in Docker containers using the base image provided by CircleCI.
+
+* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
 
@@ -330,31 +296,22 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-build-commands
+      - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-test-commands
+      - run: echo "this is the test job"
   deploy:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-deploy-commands
+      - run: echo "this is the deploy job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -382,31 +339,22 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-build-commands
+      - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-test-commands
+      - run: echo "this is the test job"
   deploy:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-deploy-commands
+      - run: echo "this is the deploy job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -434,31 +382,22 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-build-commands
+      - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-test-commands
+      - run: echo "this is the test job"
   deploy:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-deploy-commands
+      - run: echo "this is the deploy job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -486,31 +425,22 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-build-commands
+      - run: echo "this is the build job"
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-test-commands
+      - run: echo "this is the test job"
   deploy:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.03
     steps:
       - checkout
-      - run: my-deploy-commands
+      - run: echo "this is the deploy job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -531,7 +461,7 @@ workflows:
             - hold
 ```
 
-## Sample configuration with sequential workflow
+## Sample configuration with sequential workflow and secondary Docker container
 {: #sample-configuration-with-sequential-workflow }
 
 Following is a sample `.circleci/config.yml` file using the following configuration features:

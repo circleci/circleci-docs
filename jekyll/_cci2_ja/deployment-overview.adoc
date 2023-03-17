@@ -1,10 +1,4 @@
 ---
-
-redirect_from:
-  - /ja/deployment/
-  - /ja/deployments/
-  - /ja/deployment-examples/
-  - /ja/deployment-integrations/
 contentTags:
   platform:
   - クラウド
