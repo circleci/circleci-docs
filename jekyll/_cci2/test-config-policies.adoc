@@ -199,10 +199,8 @@ policy_name["docker"]
 minimum_remote_docker_version := "20.10.11"
 
 # Mark the rule as enabled. This causes circleci to take this rule into account when making decisions.
-enable_rule["check_min_remote_docker_version"]
-
-# Mark this rule as a hard violation level rule. This will stop offending builds from running in production.
-hard_fail["check_min_remote_docker_version"]
+# Also mark this rule as a hard violation level rule. This will stop offending builds from running in production.
+enable_hard["check_min_remote_docker_version"]
 
 check_min_remote_docker_version[reason] {
 	some job_name, job_info in input.jobs
@@ -377,10 +375,10 @@ It is best-practice to use a file structure that allows you to write stable test
 │   ├── policy_test.yaml
 │   ├── policy1/
 │   │   ├── policy1.rego
-│   │   ├── policy1_test.rego
+│   │   ├── policy1_test.yaml
 │   ├── policy2/
 │   │   ├── policy2.rego
-│   │   ├── policy2_test.rego
+│   │   ├── policy2_test.yaml
 ----
 
 It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subfolder with its tests. This way each subfolder will run with a sub-bundle and the tests defined within it.
@@ -392,10 +390,10 @@ It is a good idea to have tests that run against the entire bundle that will be 
 ├── config-policies/
 │   ├── docker/
 │   │   ├── docker.rego
-│   │   ├── docker_test.rego
+│   │   ├── docker_test.yaml
 │   ├──version/
 │   │   ├── version.rego
-│   │   ├── version_test.rego
+│   │   ├── version_test.yaml
 ----
 
 . Run all all tests including those in subfolders by appending `/...` to the test path:

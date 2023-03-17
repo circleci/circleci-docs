@@ -4,7 +4,6 @@ title: "Configuration Overview"
 description: "Overview of CircleCI configuration"
 categories: [configuration]
 order: 2
-redirect_from: /2.0/config-start/
 version:
 - Cloud
 - Server v3.x

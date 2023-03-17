@@ -1,6 +1,4 @@
 ---
-
-redirect_from: /ja/configuration-cookbook/
 contentTags:
   platform:
   - クラウド
@@ -33,7 +31,7 @@ toc::[]
 * ワークフローを使用して、ビルドをオーケストレーションする方法
 * ワークフローに承認ステップを追加する方法
 
-CircleCI は *Configuration as Code* を貫いています。 その結果として、ビルドからデプロイまでのデリバリープロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 `config.yml` ファイルは、リポジトリプロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 その基本的な内容については、 <<writing-yaml#,YAML の記述>> を参照してください。
+CircleCI は *Configuration as Code* を貫いています。 その結果として、ビルドからデプロイまでのデリバリープロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 `config.yml` ファイルは、リポジトリプロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 その基本的な内容については、 <<introduction-to-yaml-configurations#,YAML の記述>> を参照してください。
 
 [#part-1-using-the-shell]
 == パート 1: シェルの使用

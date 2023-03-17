@@ -2,9 +2,8 @@
 contentTags:
   platform:
   - Cloud
-redirect_from: /gh-bb-integration/
 ---
-= GitHub integration
+= GitHub integration overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of using GitHub and GitHub Enterprise with CircleCI.

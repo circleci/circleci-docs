@@ -71,7 +71,7 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 - [Environment variables](#private-environment-variables) set through the application.
 
-- [Deployment keys and user keys]({{site.baseurl}}/gh-bb-integration/#deployment-keys-and-user-keys).
+- [Deployment keys and user keys]({{site.baseurl}}/github-integration/#deploy-keys-and-user-keys).
 
 - Passphraseless private SSH keys you have [added to CircleCI]({{site.baseurl}}/add-ssh-key) to access arbitrary hosts during a build.
 

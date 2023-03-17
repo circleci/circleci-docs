@@ -4,7 +4,7 @@ en:
     children:
       - name: Overview
         children:
-          - name: What is continuous integration?
+          - name: CircleCI overview
             link: about-circleci
           - name: Benefits of CircleCI
             link: benefits-of-circleci
@@ -28,11 +28,11 @@ en:
             link: config-editor
       - name: VCS integration
         children:
-          - name: GitHub
+          - name: GitHub integration overview
             link: github-integration
-          - name: Bitbucket
+          - name: Bitbucket integration overview
             link: bitbucket-integration
-          - name: GitLab
+          - name: GitLab integration overview
             link: gitlab-integration
       - name: Migration
         children:
