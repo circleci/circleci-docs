@@ -2,9 +2,7 @@
 layout: classic-docs
 title: "Pipelines Overview"
 description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
-redirect_from: /project-build/
-redirect_from: /api-job-trigger/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x

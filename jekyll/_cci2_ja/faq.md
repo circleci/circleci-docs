@@ -236,7 +236,7 @@ jobs:
 {: #what-operating-systems-does-circleci-20-support }
 
 - [Linux]({{site.baseurl}}/ja/using-linuxvm/)
-- [Android]({{site.baseurl}}/ja/language-android/)
+- [Android]({{site.baseurl}}/ja/android-machine-image/)
 - [macOS]({{site.baseurl}}/ja/using-macos/)
 - [iOS]({{site.baseurl}}/testing-ios/)
 - [Windows]({{site.baseurl}}/ja/using-windows/)

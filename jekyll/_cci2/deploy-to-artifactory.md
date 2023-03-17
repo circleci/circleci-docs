@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
 title: Deploy to Artifactory
-categories: [how-to]
 description: How to upload artifacts to Artifactory in CircleCI
-redirect_from: /artifactory
 contentTags:
   platform:
   - Cloud

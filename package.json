@@ -7,8 +7,7 @@
     "json": "bundle exec rake build",
     "dev-clean": "bundle exec jekyll clean && rm jekyll/.jekyll-metadata && rm -rf jekyll_json/",
     "clean": "docker exec -it jekyll bundle exec jekyll clean",
-    "stop": "docker-compose down",
-    "minimize-img": "bash ./scripts/process-images.sh _site/${JEKYLL_BASENAME}/assets/img"
+    "stop": "docker-compose down"
   },
   "repository": {
     "type": "git",
@@ -16,8 +15,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "imagemin-cli": "7.0.0",
-    "imagemin-pngquant": "9.0.2",
     "markdownlint-cli2": "0.0.15",
     "markdownlint-cli2-formatter-json": "0.0.4",
     "markdownlint-rule-header-id": "0.0.3",

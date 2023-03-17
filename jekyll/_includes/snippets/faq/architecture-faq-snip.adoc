@@ -2,7 +2,7 @@
 === What operating systems does CircleCI support?
 
 - xref:using-linuxvm#[Linux]
-- xref:language-android#[Android]
+- xref:android-machine-image#[Android]
 - xref:using-macos#[macOS]
 - xref:testing-ios#[iOS]
 - xref:using-windows#[Windows]

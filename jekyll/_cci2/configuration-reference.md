@@ -2,7 +2,6 @@
 layout: classic-docs
 title: Configuration reference
 description: Reference for .circleci/config.yml
-redirect_from: /configuration/
 readtime: false
 contentTags:
   platform:
@@ -1801,7 +1800,7 @@ The lifetime of artifacts, workspaces, and caches can be customized on the [Circ
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/gh-bb-integration/#deployment-keys-and-user-keys) page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [Create additional GitHub SSH keys]({{site.baseurl}}/github-integration/#create-additional-github-ssh-keys) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------

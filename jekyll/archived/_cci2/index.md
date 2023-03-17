@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Welcome to CircleCI Documentation"
 description: "Welcome to CircleCI Documentation"
 permalink: /
-redirect_from: /
 toc: false
 page-type: index
 ---
