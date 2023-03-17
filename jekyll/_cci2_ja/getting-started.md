@@ -24,7 +24,7 @@ CircleCI に無料でユーザー登録する
 サインインし、バージョン管理システム (VCS) に接続する
 {% endcapture %}
 
-{% include getting-started-links.html title="前提条件" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/ja/gh-bb-integration"  content1=content1 content2=content2 %}
+{% include getting-started-links.html title="前提条件" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/ja/first-steps/"  content1=content1 content2=content2 %}
 
 {% capture content %}
 継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
