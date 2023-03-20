@@ -168,7 +168,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 * RabbitMQ  と MongoDB の URI の環境変数の変更
 * VM、OUTPUT、NOMAD サービスの URI の環境変数が `<domain_name>:<service_port>` を参照するように変更
 * VM、OUTPUT、NOMAD サービスリソースから注釈の削除
-* Github のチェックサムが注釈として追加
+* GitHub のチェックサムが注釈として追加
 * `distributor-*` のデプロイのシークレットや注釈の削除
 * アップストリームチャートの `postgresql` の更新
 * アップストリームチャートの再作成 (削除と作成)
@@ -182,7 +182,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 
 helm-value ファイルの検証が完了したら、以下のコマンドを実行し、CircleCI Server を v4.x にアップグレードします。
 
-Helm レジストリは Azure プライベートレジストリに保存されます。 そのレジストリにアクセスするためのユーザー名とトークンが提供されます。
+Helm レジストリは Azure プライベートレジストリに保存されています。 そのレジストリにアクセスするためのユーザー名とトークンが提供されます。
 
 [source,shell]
 ----

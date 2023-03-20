@@ -3,8 +3,7 @@ layout: classic-docs
 title: Installing the CircleCI local CLI
 description: How to install the CircleCI local CLI
 categories: [troubleshooting]
-redirect_from: local-cli-getting-started
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -171,7 +170,7 @@ circleci config validate
 
 The commands for uninstalling the CircleCI CLI will vary depending on your original installation method.
 
-**Linux uninstall with Snap**: 
+**Linux uninstall with Snap**:
 ```shell
 sudo snap remove circleci
 ```

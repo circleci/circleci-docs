@@ -138,7 +138,7 @@ jobs:
       - store_artifacts:
           path: release/tmp/
 
-  build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
+  build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
       tag: '2.7.4-browsers'

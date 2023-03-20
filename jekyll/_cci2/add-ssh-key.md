@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: "Adding an SSH Key to CircleCI"
-short-title: "Adding an SSH Key"
-description: "How to Add an SSH Key to CircleCI"
+title: Add additional SSH keys to CircleCI
+short-title: Add an SSH Key
+description: How to add additional SSH keys to CircleCI
 order: 20
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -17,30 +17,26 @@ If deploying to your servers requires SSH access, you will need to add SSH keys 
 ## Overview
 {: #overview }
 
-There are two reasons to add SSH keys to CircleCI:
+If you are looking to set up an SSH key in order to check out code from GitHub or Bitbucket, refer to the [GitHub](/docs/github-integration/#enable-your-project-to-check-out-additional-private-repositories) or [Bitbucket](/docs/bitbucket-integration/#enable-your-project-to-check-out-additional-private-repositories) integration pages.
 
-1. To check out code from version control systems.
-2. To enable running processes to access other services.
+If you are using GitLab as your VCS, or if you need additional SSH keys to access other services, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
 
-If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
+{: class="alert alert-info" }
 
-Otherwise, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
+## Steps to add additional SSH keys
+{: #steps-to-add-additional-ssh-keys }
 
-**Note:** You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
+Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase. The below examples are for macOS. See [GitHub](https://help.github.com/articlesgenerating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) or [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/) documentation for additional details on creating SSH keys.
 
-## Steps
-{: #steps }
-
-**Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
-
-### CircleCI cloud or server 3.x
-{: #circleci-cloud-or-server-3-x }
+### CircleCI cloud or server 3.x / server 4.x
+{: #circleci-cloud-or-server-3-x-4-x }
 
 1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
-2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+2. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
-3. On the **Project Settings** page, click on **SSH Keys** (vertical menu on the left).
+3. On the **Project Settings** page, click on **SSH Keys**.
 
 4. Scroll down to the **Additional SSH Keys** section.
 
@@ -69,18 +65,18 @@ Otherwise, follow the steps below for the version of CircleCI you are using to a
 
 6. Click the **Add SSH Key** button.
 
-## Adding SSH Keys to a Job
-{: #adding-ssh-keys-to-a-job }
+## Add SSH Keys to a Job
+{: #add-ssh-keys-to-a-job }
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{site.baseurl}}/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/jobs-steps/) in your configuration file.
+To add a set of SSH keys to a container, use the `add_ssh_keys` [special step](/docs/configuration-reference/#add_ssh_keys) within the appropriate [job](/docs/jobs-steps/) in your configuration file.
 
 For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 {: class="alert alert-info"}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   deploy-job:
     steps:
@@ -89,7 +85,8 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-**Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application.
+All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
+{: class="alert alert-info" }
 
 ## Adding multiple keys with blank hostnames
 {: #adding-multiple-keys-with-blank-hostnames }

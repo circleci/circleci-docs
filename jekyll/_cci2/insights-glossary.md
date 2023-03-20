@@ -2,7 +2,7 @@
 layout: classic-docs
 title: Insights metrics glossary
 description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v3.x
@@ -13,10 +13,6 @@ contentTags:
 
 This document provides definitions for all the metrics in CircleCI Insights. You
 can review metrics in the Insights dashboard as well as the Insights API.
-
-* TOC
-{:toc}
-
 
 ## General metrics
 {: #general-metrics }
@@ -73,9 +69,23 @@ additional context to Insights metrics by presenting a relative benchmark
 against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
-**Please note that trends are available only for 24-hour, 7-day, and 30-day time windows.**
+Trends displayed in the CircleCI UI are calculated as `100 * (current value - previous value) / prior-value`.
 
-Trends are calculated as `100 * (current value - previous value) / prior-value`.
+Trends received from the [CircleCI API](https://circleci.com/docs/api/v2/index.html#operation/getProjectWorkflowsPageData) are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`. These trends are 1-based and not 0-based.
+
+* A ratio of 1.0 indicates *no change*.
+* A value less than 1.0 indicates a negative trend, and a value greater than 1.0 indicates a positive trend.
+* A value of -1.0 is an infinite trend.
+
+This also applies to the following API endpoints:
+
+* [getOrgSummaryData](https://circleci.com/docs/api/v2/index.html#operation/getOrgSummaryData)
+* [getWorkflowSummary](https://circleci.com/docs/api/v2/index.html#operation/getWorkflowSummary).
+
+Despite the trend being reported as a ratio via the API, the result returned is still effectively equivalent to the percentage that is shown in the UI. To compare the ratio from the API with the percentage reported in the UI, you can compute `| trend-value - 1|` (vertical line indicates absolute value). For example, if the API returns a ratio of 3.33, in the UI it will be shown as `| 3.33 - 1 | = 2.33` which is equivalent to +233%.
+
+Trends are available only for 24-hour, 7-day, and 30-day time windows.
+{: class="alert alert-info"}
 
 ### Approximate Trends
 {: #approximate-trends }
@@ -84,7 +94,6 @@ For percentile metrics like duration, approximation methods are used to find the
 
 #### Duration
 {: #duration }
-{:.no_toc}
 
 **P95 Duration**
 
@@ -119,7 +128,7 @@ Red and Green are used when describing the `Success Rate`, `Throughput` and `MTT
 
 **Percentages**
 
-Percentages are used to indicates the relative percentage change for a metric in
+Percentages indicate the relative percentage change for a metric in
 the selected time window compared to the prior window. For instance, if the
 success rate of a workflow in the last 7 days has increased to 60% from 40% in
 the prior 7 days, Trends displays the +50% change in the current time window.

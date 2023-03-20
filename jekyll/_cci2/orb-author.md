@@ -5,7 +5,7 @@ short-title: "Authoring Orbs"
 description: "Starting point for authoring CircleCI orbs"
 categories: [getting-started]
 order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x

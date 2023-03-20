@@ -13,7 +13,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed as a helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/server/overview/circleci-server-v4-overview/[CircleCI Server v4.x Overview].
+CircleCI server v4.x is installed as a helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server/v4.1/overview/circleci-server-v4-overview#[CircleCI Server v4.x Overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -252,9 +252,9 @@ Follow these steps if you already have a GKE cluster and need to enable Workload
 
 You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts:
 
-* link:/docs/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
-* link:/docs/server/installation/phase-3-execution-environments/#gcp-3[VM]
-* link:/docs/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
+* xref:server/v4.1/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
+* xref:server/v4.1/installation/phase-3-execution-environments/#gcp-3[VM]
+* xref:server/v4.1/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
 
 [#create-a-new-github-oauth-app]
 == 3. Create a new GitHub OAuth app
@@ -291,12 +291,7 @@ It is recommended to provision a static IP address to assign to the load balance
 ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
 === GCP - Reserve a static external IP address
-To reserve a new static IP address in GCP, run the following gcloud command in your desired environment. More information is available on the link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address[Google Cloud docs].
-
-[source,shell]
-----
-gcloud compute addresses create circleci-server --global --ip-version IPV4
-----
+The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
 
 Make note of the returned IPv4 address for use later in the values.yaml file.
 
@@ -473,11 +468,11 @@ Server v4.x hosts build artifacts, test results, and other state object storage.
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. For object storage providers that do not support the S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
+While any S3 compatible object storage may work, we test and support AWS S3 and MinIO.
 
 Follow the instructions below to create a bucket and access method for S3 or GCS.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the link:/docs/server/installation/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server/v4.1/installation/installing-server-behind-a-proxy#[Installing Server Behind a Proxy] guide.
 
 ifndef::env-gcp[]
 
@@ -885,5 +880,5 @@ endif::env-aws[]
 ifndef::pdf[]
 [#next-steps]
 == Next steps
-* link:/docs/server/installation/phase-2-core-services[Phase 2: Core Services Installation].
+* xref:server/v4.1/installation/phase-2-core-services#[Phase 2: Core Services Installation].
 endif::[]

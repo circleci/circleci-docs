@@ -12,11 +12,9 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution environment installation phase, ensure you have run through link:/docs/server/installation/phase-1-prerequisites[Phase 1 – Prerequisites] and link:/docs/server/installation/phase-2-core-services[Phase 2 - Core Services Installation].
+Before you begin with the CircleCI server v4.x execution environment installation phase, ensure you have run through xref:server/v4.1/installation/phase-1-prerequisites#[Phase 1 – Prerequisites] and xref:server/v4.1/installation/phase-2-core-services#[Phase 2 - Core Services Installation].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
-
-toc::[]
 
 [#nomad-clients]
 == 1. Nomad clients
@@ -57,7 +55,7 @@ This returns something similar to the following:
 vpc-02fdfff4ca
 
 # Subnet Ids
-subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488 
+subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488
 ----
 +
 Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
@@ -172,7 +170,7 @@ nomad:
 --
 **Option 2:** Create the Kubernetes Secret yourself
 
-Instead of storing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself. 
+Instead of storing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 
 NOTE: When using this method, an additional field is required for this secret, as outlined below.
 
@@ -251,7 +249,7 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using xref:server/v4.1/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
@@ -423,7 +421,7 @@ kubectl -n <namespace> exec -it $(kubectl -n <namespace> get pods -l app=nomad-s
 ----
 
 You should be able to see output like this:
- 
+
 [source,shell]
 ----
 ID        DC       Name              Class        Drain  Eligibility  Status
@@ -493,9 +491,9 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM service
 
-VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm execution environments, and those that are configured to use link:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm execution environments, and those that are configured to use xref:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
-NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
+NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:server/v4.1/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
 
 ifndef::env-gcp[]
 
@@ -1004,24 +1002,7 @@ databaseEncryption:
 
 . *Create firewall rules*
 +
-Run the following commands to create a firewall rule for VM service in GKE:
-+
-NOTE: If you have used auto-mode, you can find the Nomad clients CIDR based on the region by referring to the https://cloud.google.com/vpc/docs/vpc#ip-ranges[table here].
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
-----
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
-----
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
-----
+External VMs need the networking rules described in xref:server/v4.1/installation/hardening-your-cluster/#external-vms[Hardening your Cluster]
 
 . *Create user*
 +
@@ -1093,7 +1074,7 @@ When using service account keys for configuring access for the VM service, there
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
-Add the VM Service configuration to values.yaml. 
+Add the VM Service configuration to values.yaml.
 
 [source,yaml]
 ----
@@ -1152,7 +1133,7 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the link:/docs/runner-overview[runner documentation].
+CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:/docs/runner-overview#[runner documentation].
 
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
@@ -1161,5 +1142,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* link:/docs/server/installation/phase-4-post-installation[Phase 4: Post Installation]
+* xref:server/v4.1/installation/phase-4-post-installation#[Phase 4: Post Installation]
 endif::pdf[]

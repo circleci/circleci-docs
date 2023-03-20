@@ -1,6 +1,6 @@
 ---
 description: "Server 3.x is now generally available. Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more."
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
   - Server Admin
@@ -17,6 +17,19 @@ Server 3.x is now generally available. The newest version of server offers the a
 Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more. For existing customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.x will receive monthly patch releases and quarterly feature releases.
 
 toc::[]
+
+== Release 3.4.5
+
+=== Upgrade notes
+
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
+
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-5[changelog].
 
 == Release 3.4.4
 
@@ -227,7 +240,6 @@ Next, from the KOTS Admin Console, select *Version History* from the menu bar an
 
 === New features
 
-* Telegraf plugins can now be added to server and customized to use third-party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information, see the https://circleci.com/docs/server-3-operator-load-balancers/[Load Balancers] guide.
 * Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/server-3-install/[Installation guide].
 * Dynamic config via setup workflows is now available on server installations. For more information, see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/dynamic-config/[Dynamic Configuration docs page].
@@ -238,7 +250,6 @@ Next, from the KOTS Admin Console, select *Version History* from the menu bar an
 ** MongoDB
 ** Vault
 * Backup and restore functionality is now available. For more information see the https://circleci.com/docs/server-3-operator-backup-and-restore/[Backup and Restore] guide.
-* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS Admin Console. For further information, see the https://circleci.com/docs/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * Server now supports the 2XL resource class. The Nomad cluster needs to be large enough to account for larger resource classes.
 * The lifecycle of build artifacts and test results can now be configured from the KOTS Admin Console under **Storage Object Expiry**, including the option to disable the expiration and retain artifacts and test results indefinitely.
 

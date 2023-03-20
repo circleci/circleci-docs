@@ -14,7 +14,7 @@ You can run your jobs in the linux VM (virtual machine) execution environment by
 
 Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack; for example, to listen on a network interface, or to modify the system with `sysctl` commands.
 
-To use the machine executor, use the [`machine` key]({{ site.baseurl }}/configuration-reference/#machine) in your job configuration and specify an image:
+To use the machine executor, use the [`machine` key]({{site.baseurl}}/configuration-reference/#machine) in your job configuration and specify an image:
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -35,7 +35,7 @@ jobs:
     resource_class: large
 ```
 
-You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
+You can view the list of available images [in the docs Configuration Reference]({{site.baseurl}}/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 ## Available LinuxVM resource classes
 {: #available-linuxvm-resource-classes } 
@@ -45,7 +45,21 @@ You can view the list of available images [in the docs Configuration Reference](
 ## Pre-installed software
 {: #pre-installed-software }
 
-The most up to date list of pre-installed software can be found on the [image builder](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) page. You can also visit the [Discuss](https://discuss.circleci.com/tag/machine-images) page for more information.
+The most up to date list of pre-installed software can be found on the [Discuss](https://discuss.circleci.com/tag/machine-images) page.
+
+If you are already using an image and would like to verify the all the packages that come pre-installed, you can run the `apt list --installed` command as a step, like in the example below:
+
+```yaml
+version: 2.1
+...
+jobs:
+  whats-installed:
+    machine: # executor type
+      image: ubuntu-2004:2022.07.1
+    steps:
+      - run: apt list --installed
+...
+```
 
 Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 

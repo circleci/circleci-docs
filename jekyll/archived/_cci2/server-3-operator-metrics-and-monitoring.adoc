@@ -1,0 +1,39 @@
+---
+contentTags:
+  platform:
+  - Server v3.x
+  - Server Admin
+---
+= CircleCI Server v3.x Metrics and Monitoring
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn about CircleCI server installation metrics collection and monitoring.
+:icons: font
+:toc: macro
+:toc-title:
+
+Metrics such as CPU or memory usage and internal metrics are useful in:
+
+* Quickly detecting incidents and abnormal behavior.
+* Dynamically scaling compute resources.
+* Retroactively understanding infrastructure-wide issues.
+
+toc::[]
+
+== Metrics Collection
+
+NOTE: Data is retained for a maximum of 15 days.
+
+NOTE: Prometheus Server is not limited to scraping metrics from your CircleCI server install. By default, it scrapes metrics from your entire cluster. You may disable Prometheus from within the KOTS Admin Console config if needed.
+
+=== Prometheus
+https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with a basic implementation of monitoring common performance metrics.
+
+WARNING: The Prometheus feature is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, we recommend that you do not upgrade your KOTS version until this has been resolved.
+
+=== KOTS Admin - Metrics Graphs
+By default, an instance of Prometheus is deployed with your CircleCI server install. Once deployed, you may provide the address for your Prometheus instance to the KOTS Admin Console. KOTS uses this address to generate graph data for the CPU and memory usage of containers in your cluster.
+
+The default Prometheus address is `\http://prometheus-server`
+
+From the KOTS dashboard, select "configure graphs". Then enter `\http://prometheus-server` and KOTS generates resource usage graphs.

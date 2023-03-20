@@ -5,7 +5,7 @@ short-title: "API v2 Introduction"
 description: "Introduction to the CircleCI API"
 categories: [getting-started]
 order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -15,8 +15,8 @@ contentTags:
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
 
-* [API v1.1 Reference]({{site.baseurl}}/api/v1/)
-* [API v2 Reference]({{site.baseurl}}/api/v2/)
+* [API v1.1 Reference](https://circleci.com/docs/api/v1/)
+* [API v2 Reference](https://circleci.com/docs/api/v2/)
 
 API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI cloud users migrate their scripts to API v2 stable endpoints as soon as possible.
 
@@ -37,9 +37,9 @@ Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-
 ## Getting started with the API v2
 {: #getting-started-with-the-api-v2 }
 
-**GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:  
+**GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:
 <br>
-`circleci/:slug-remainder`  
+`circleci/:slug-remainder`
 <br>
 The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the [API Developer's Guide]({{site.baseurl}}/api-developers-guide) for more details.
 {: class="alert alert-info"}
@@ -73,14 +73,14 @@ curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $
 
 In the above example the `project_slug` would take the form `:vcs/:org/:project`. For example, the project slug `gh/CircleCI-Public/circleci-cli` tells `CircleCI` to use the project found in the GitHub organization CircleCI-Public in the repository named `circleci-cli`.
 
-**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used for sensitive values (secrets). You can find information on using sensitive data correctly in the [Project Settings]({{site.baseurl}}/settings/) and [Contexts]({{site.baseurl}}/glossary/#context) guides.
+**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used for sensitive values (secrets). You can find information on using sensitive data correctly in the [Security overview](/docs/security-overview/) and [Contexts]({{site.baseurl}}/glossary/#context) guides.
 
 ## Changes in endpoints
 {: #changes-in-endpoints }
 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide]({{site.baseurl}}/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 ### New endpoints
 {: #new-endpoints }

@@ -3,11 +3,12 @@ layout: classic-docs
 title: Introduction to environment variables
 short-title: Environment variables
 description: Introduction to environment variables in CircleCI
-contentTags: 
+contentTags:
   platform:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -20,7 +21,7 @@ suggested:
 ## Introduction
 {: #introduction }
 
-Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
+Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration. See the [Set an environment variable](/docs/set-environment-variable/) page for guidance on the different ways to set an environment variable.
 
 If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
@@ -76,7 +77,7 @@ jobs: # basic units of work in a run
       - image: cimg/node:18.11.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -156,7 +157,7 @@ jobs:
       - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
@@ -170,7 +171,6 @@ workflows:
       - build:
           org_name: my_organization
           repo_name: project2
-
 ```
 
 For more information, read the documentation on [using the parameters declaration]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration).
@@ -222,7 +222,7 @@ You can further restrict access to environment variables using [contexts]({{site
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
-- [Security recommendations]({{site.baseurl}}/security-recommendations)
-- [Inject variables using the CircleCI API]({{site.baseurl}}/inject-environment-variables-with-api/)
+- [Security recommendations](/docs/security-recommendations)
+- [Set an environment variable](/docs/set-environment-variable/)
+- [Inject variables using the CircleCI API](/docs/inject-environment-variables-with-api/)

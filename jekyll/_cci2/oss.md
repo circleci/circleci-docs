@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
-title: "Building Open Source Projects"
-short-title: "Building Open Source Projects"
+title: "Build open source projects"
 description: "Best practices for building open source projects"
-categories: [getting-started]
-order: 1
 ---
 
 ## Introduction
@@ -12,7 +9,7 @@ order: 1
 
 This document provides tips and best practices for building your open source project on CircleCI.
 
-To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
+To support the open source community, organizations on GitHub or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
 
 **Notes:**
 * If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
@@ -74,7 +71,7 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 - [Environment variables](#private-environment-variables) set through the application.
 
-- [Deployment keys and user keys]({{site.baseurl}}/gh-bb-integration/#deployment-keys-and-user-keys).
+- [Deployment keys and user keys]({{site.baseurl}}/github-integration/#deploy-keys-and-user-keys).
 
 - Passphraseless private SSH keys you have [added to CircleCI]({{site.baseurl}}/add-ssh-key) to access arbitrary hosts during a build.
 

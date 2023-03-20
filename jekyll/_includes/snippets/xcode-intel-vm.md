@@ -1,6 +1,7 @@
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|--------------
- `14.2.0` | Xcode 14.2 RC (14C18) | 12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v10821/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-2-rc-released-breaking-changes/46303)
+`14.3.0` | Xcode 14.3 Beta 3 (14E5215g) | 13.2 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11502/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-3-beta-3-released-macos-ventura/47481)
+ `14.2.0` | Xcode 14.2 (14C18) | 12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v10821/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-2-rc-released-breaking-changes/46303)
  `14.1.0` | Xcode 14.1 (14B47b) | 12.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v9002/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-1-rc-2-released/45890)
  `14.0.1` | Xcode 14.0.1 (14A400) | 12.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8824/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-0-1-rc-released/45424)
  `13.4.1` | Xcode 13.4 (13F17a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8094/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-4-1-released/44328)
@@ -11,3 +12,6 @@
  `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)
  `11.7.0` | Xcode 11.7 (11E801a) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-7-released/37312)
  {: class="table table-striped"}
+
+ The `medium` and `large` resource classes are being deprecated on October 2, 2023. Xcode v14.2 is the latest version that will be supported by these macOS resources. See our [announcement](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891) for more details.
+ {: class="alert alert-warning"}

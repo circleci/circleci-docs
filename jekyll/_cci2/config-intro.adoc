@@ -1,6 +1,5 @@
 ---
-redirect_from: /configuration-cookbook/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -32,7 +31,7 @@ This guide covers the following topics:
 * How to use workflows to orchestrate your build.
 * How to add approval steps to your workflow.
 
-CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the <<writing-yaml#,Writing YAML>> document for guidance on the basics.
+CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for guidance on the basics.
 
 [#part-1-using-the-shell]
 == Part 1: Using the shell
@@ -40,7 +39,7 @@ CircleCI believes in *configuration as code*. Consequently, the entire delivery 
 CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
 
 . If you have not done so already, <<first-steps#,sign up with CircleCI>> and select your Version Control System (VCS). You can also sign up with email.
-. Create a `.circleci` folder at the root of your project. Make sure the folder starts with a period so that CircleCI can identify it.  
+. Create a `.circleci` folder at the root of your project. Make sure the folder starts with a period so that CircleCI can identify it.
 . Create a `config.yml` file inside the `.circleci` folder and paste the following code:
 +
 [source,yaml]
@@ -86,12 +85,12 @@ TIP: In your Version Control System (VCS), make sure you have authorized access 
 . In the pop-up window, choose the default *Fastest* option for selecting your `config.yml` file. Then type the name of the branch on which you committed it. If you followed steps 2 and 3, you will see a green tick to confirm that CircleCI has located a `config.yml` file in the `.circleci` directory of your project. Now click the blue *Set Up Project* button.
 +
 image::config-select-config-file.png[Select config file]
-+ 
++
 . CircleCI uses your `config.yml` file to run the pipeline. You can see the output in the CircleCI dashboard. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details.
 +
 image::config-intro-part1-job.png[Successful build job]
 +
-You should see your step - The First Step - with the the output of the commands:
+You should see your step - The First Step - with the output of the commands:
 +
 image:config-first-step.png[Successful step within job]
 
@@ -236,7 +235,7 @@ The following commentary describes what occurs in each line of the sample code:
 
 As before, commit and push your updated `config.yml` file.
 
-In CircleCI, your pipeline will look different. Your workflow is now called _Example-Workflow_ and you have three jobs, rather than just one. 
+In CircleCI, your pipeline will look different. Your workflow is now called _Example-Workflow_ and you have three jobs, rather than just one.
 
 image::config-intro-part3.png[Running multiple jobs]
 
@@ -318,7 +317,7 @@ jobs:
           name: Approval Complete
           command: |
             echo 'The work is now complete.'
-       
+
 workflows:
   Example-Workflow:
     jobs:
@@ -346,7 +345,7 @@ Most of this code will look familiar to you. There are a couple of important add
 
 As before, commit and push your updated `config.yml` file.
 
-If you look at your pipeline in CircleCI, you will see the a purple status badge of *On Hold*. 
+If you look at your pipeline in CircleCI, you will see the a purple status badge of *On Hold*.
 
 image::config-on-hold.png[Job requires approval]
 

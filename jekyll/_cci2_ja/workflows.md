@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "ワークフローを使ったジョブのオーケストレーション"
 description: "CircleCI ワークフローを使ったジョブのオーケストレーションについて学びます。"
-redirect_from: /ja/defining-multiple-jobs/
 contentTags:
   platform:
     - クラウド
@@ -10,16 +9,16 @@ contentTags:
     - Server v3.x
     - Server v2.x
 suggested:
-  - 
+  -
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
-  - 
+  -
     title: ブランチ毎のワークフローのフィルタリング
     link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  - 
+  -
     title: ワークフローをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
-  - 
+  -
     title: 条件付きワークフロー
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
@@ -99,7 +98,7 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前よりも先に実行することをお勧めします。
 - ワークフローの _先頭_ に setup ジョブを実行すると、事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備にも役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/optimizations)」を参照してください。
 
 ### 順次ジョブ実行の例
 {: #sequential-job-execution-example }
@@ -231,7 +230,7 @@ workflows:
 ## ワークフローのスケジュール実行
 {: #scheduling-a-workflow }
 
-**ワークフローのスケジュール実行機能は、今後廃止予定です。** パイプラインのスケジュール実行には、ワークフローのスケジュール実行に比べていくつかの利点があります。既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行の[移行ガイド]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines)を参照してください。 はじめからパイプラインのスケジュール実行をセットアップする場合は、[パイプラインのスケジュール実行]({{site.baseurl}}/scheduled-pipelines)のページを参照してください。
+ワークフローのスケジュール実行機能は廃止される予定です。 ワークフローのスケジュール実行ではなく**パイプラインのスケジュール実行**を使用することで多くのメリットが得られます。 既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行の[移行ガイド]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines)を参照してください。 はじめからパイプラインのスケジュール実行をセットアップする場合は、[パイプラインのスケジュール実行]({{site.baseurl}}/scheduled-pipelines)のページを参照してください。
 {: class="alert alert-warning"}
 
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。

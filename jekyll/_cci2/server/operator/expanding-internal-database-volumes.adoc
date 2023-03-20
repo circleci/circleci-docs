@@ -192,8 +192,9 @@ Now you need to upgrade the server installation by modifying the PVC size in the
 [source,yaml]
 ----
 postgresql:
-  persistence:
-    size: 10Gi
+  primary:
+    persistence:
+      size: 10Gi
 ----
 
 * **MongoDB**
