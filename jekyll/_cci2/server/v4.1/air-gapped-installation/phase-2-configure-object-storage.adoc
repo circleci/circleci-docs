@@ -12,30 +12,30 @@ version:
 :toc-title:
 
 [#create-buckets-in-minio]
-== Create buckets in MinIO
+== 1. Create buckets in MinIO
 As an air-gapped object storage solution, CircleCI Server supports MinIO. It is used in an air-gapped environment as a replacement for a Cloud-based object storage solution such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the following steps.
 
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
-=== 1. Create a circleci-data bucket.
+=== a. Create a circleci-data bucket.
 Create a new bucket in MinIO named `circleci-data`. This bucket can be named differently, but references to it will need to be updated in the Helm values.yaml file.
 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
 [#configure-circleci-data-bucket]
-=== 2. Configure the circleci-data bucket.
+=== b. Configure the circleci-data bucket.
 In the settings for the `circleci-data` bucket, change the access policy to `public`.
 
 image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
 [#copy-circleci-build-agent]
-== Copy the CircleCI build agent
+== 2. Copy the CircleCI build agent
 Copy the latest CircleCI build agent into MinIO within your air-gapped environment.
 
 [#download-latest-release-txt]
-=== 1. Download the latest release.txt file
+=== a. Download the latest release.txt file
 Download the latest https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
 
 [source, bash]
@@ -44,11 +44,11 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.tx
 ----
 
 [#copy-release-txt]
-=== 2. Copy the release.txt file to MinIO
+=== b. Copy the release.txt file to MinIO
 Copy the `release.txt` file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
 
 [#retrieve-latest-release-bin]
-=== 3. Retrieve the latest release binary
+=== c. Retrieve the latest release binary
 Using the `release.txt` file, retrieve and download the latest `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
 
 [source, bash]
@@ -63,7 +63,7 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RE
 ----
 
 [#create-release-dir]
-=== 4. Create a release directory in the circleci-data bucket
+=== d. Create a release directory in the circleci-data bucket
 Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release.
 
 ```
@@ -74,7 +74,7 @@ Using the version specified in `release.txt`, create a new directory in the root
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
 [#upload-checksums-file]
-=== 5. Upload the checksums.txt file to the newly created directory.
+=== e. Upload the checksums.txt file to the newly created directory.
 Copy the downloaded `checksums.txt` file from step 3 to your virtual environment, and place it in MinIO nested under the newly created release directory in step 4.
 
 ```
@@ -86,7 +86,7 @@ Copy the downloaded `checksums.txt` file from step 3 to your virtual environment
 image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
 
 [#create-new-subdirs]
-=== 6. Create two new subdirectories in the release directory
+=== f. Create two new subdirectories in the release directory
 Within the release directory created in step 4, create two new nested subdirectories, first `linux`, and then within it, `amd64`.
 
 ```
@@ -102,7 +102,7 @@ image::./minio/minio_create_linux_dir.png[Creating a linux dir]
 image::./minio/minio_create_amd_dir.png[Creating an amd dir]
 
 [#copy-build-agent-bin]
-=== 6. Copy the downloaded circleci-agent file
+=== g. Copy the downloaded circleci-agent file
 Copy the downloaded `circleci-agent` file from step 3 to your virtual environment, and place it in the amd64 directory created in step 6.
 
 ```

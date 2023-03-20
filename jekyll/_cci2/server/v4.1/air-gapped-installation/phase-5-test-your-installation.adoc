@@ -11,6 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
+Test your air-gapped installation using CircleCI's Reality Check project.
 
 [#copy-reality-check]
 == 1. Copy CircleCI server Reality Check
@@ -22,9 +23,8 @@ Set up CircleCI server Reality Check using the https://github.com/circleci/reali
 
 CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
 
-
-[#setup-reality-check]
-== 3. Modify reality check source code
+[#modify-reality-check]
+== 3. Modify Reality Check source code
 Replace any references to docker images in .circleci/config.yml with your internal docker registry.
 
 For example, in your GitHub enterprise instance, change the following:
@@ -43,14 +43,14 @@ For example, in your GitHub enterprise instance, change the following:
   ...
   artifacts_test_results:
     docker:
-      - image: <<your-internal-registry-hostname-and-port>>/python:3.6.0
+      - image: <your-internal-registry-hostname-and-port>/python:3.6.0
 ----
 
 NOTE: Leave image values nested under "machine" as is. Only modify docker image values.
 
 
 [#run-reality-check]
-== 4. Run CircleCI Server Reality Check
-Run reality check by pushing a commit to it in your GitHub Enterprise installation.
+== 4. Run Reality Check
+Run Reality Check by pushing a commit to it in your GitHub Enterprise installation.
 
-NOTE: the aws_jobs and gcp_jobs workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.
+NOTE: the `aws_jobs` and `gcp_jobs` workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.

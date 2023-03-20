@@ -47,12 +47,12 @@ The following is an overview of the prerequisites required to run an air-gapped 
 |===
 
 [#copy-images]
-== Copy images
+== 1. Copy images
 
 CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You will need to copy the latest images and charts from CircleCI into your virtual environment. All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
 
 [#login-to-acr]
-=== 1. Log in to CircleCI server container registry
+=== a. Log in to CircleCI server container registry
 Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Please contact support@circleci.com for more information.
 
 [source, bash]
@@ -60,7 +60,7 @@ Access to the images you need for your installation requires you to use a userna
 docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
 ----
 
-=== 2. Download all images required for this release
+=== b. Download all images required for this release
 Download all images required for the release of CircleCI server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
 
 [source, bash]
@@ -142,15 +142,15 @@ echo $SERVER_4_1_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]
-=== 3. Copy all images to your air-gapped environment
+=== c. Copy all images to your air-gapped environment
 Copy all downloaded images to the container registry in your air-gapped environment.
 
 [#copy-charts]
-== Copy charts
+== 2. Copy charts
 Copy the CircleCI server Helm chart to your air-gapped environment.
 
 [#download-helm-chart]
-=== 1. Download the latest CircleCI server Helm chart
+=== a. Download the latest CircleCI server Helm chart
 Download the latest CircleCI Server Helm chart to the current directory.
 
 [source, bash]
@@ -160,7 +160,7 @@ helm pull oci://cciserver.azurecr.io/circleci-server -d ./
 ----
 
 [#upload-helm-chart]
-=== 2. Copy the Helm chart to your air-gapped environment
+=== b. Copy the Helm chart to your air-gapped environment
 Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
 
 [#next-steps]

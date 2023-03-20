@@ -14,11 +14,13 @@ version:
 With prerequisites installed, and object storage configured, you can now copy over and install the CircleCI Helm deployment to the Kubernetes cluster in your air-gapped environment.
 
 [#prepare-values-yaml]
-== Prepare values.yaml
+== 1. Prepare values.yaml
 The `values.yaml` file for installing CircleCI should be prepared according to the xref:/server/v4.1/installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
 
+=== a. Configure global values
 
-=== 1. Configure global values
+NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:/example-values.yaml[Example `values.yaml`] page.
+
 In the global.container section of your values.yaml file, set the domainName value to the internal domain name of the installation. Set container.org to "circleci" and container.registry to the internal registry hostname (and port - if using a non-standard port) of your instance.
 
 [source, yaml]
@@ -31,9 +33,9 @@ global:
     org: "circleci"
 ----
 
-Note: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
+NOTE: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
 
-=== 2. Configure GitHub Enterprise
+=== b. Configure GitHub Enterprise
 In the github section of your values.yaml file, configure settings for your GitHub Enterprise installation.
 
 The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
@@ -56,9 +58,8 @@ github:
   defaultToken: "<<github-enterprise-personal-application-token>>"
 ----
 
-
 [#configure-minio-storage]
-=== 3. Configure MinIO Object Storage
+=== c. Configure MinIO Object Storage
 In the `object_storage` section of the `values.yaml` file, add the following configuration, modifying ports as necessary.
 
 [source, yaml]
@@ -78,7 +79,7 @@ Notes:
 - Update the endpoint protocol to http or https depending on your MinIO installation.
 
 
-=== 4. Configure Min.IO Build Agent
+=== d. Configure Min.IO Build Agent
 In the distributor section of the `values.yaml` file, point `agent_base_url` and `launch_agent_base_url` to your MinIO installation, and the created `circleci-data` bucket you created in phase 2 of the installation.
 
 [source, yaml]
@@ -95,7 +96,7 @@ Notes:
 
 
 [#configure-build-agent-image]
-=== 5. Configure the Nomad build agent image
+=== e. Configure the Nomad build agent image
 Specify the location of the Nomad build agent image within your registry, copied during phase 1, modifying the port as necessary.
 
 [source, yaml]
@@ -112,7 +113,7 @@ Notes:
 
 
 [#configure-vm-service]
-=== 5. Disable VM Service
+=== f. Disable VM Service
 In the vm_service section of values.yaml, set `enabled` to `false` to disable it, as it requires cloud connectivity.
 
 [source, yaml]
@@ -122,9 +123,8 @@ vm_service:
   enabled: false
 ----
 
-
 [#add-additional-nginx-annotations]
-=== 6. Add Additional Nginx Annotations
+=== g. Add Additional Nginx Annotations
 Add any additional Nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:/additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [source, yaml]
@@ -136,13 +136,8 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 ----
 
-[#add-additional-nginx-annotations]
-=== Full values.yaml Example
-For a full example of a `values.yaml` file for an air-gapped environment, see the xref:/example-values.yaml[Example `values.yaml`] page.
-
-
 [#install-circleci-server-helm-airgap]
-== Install CircleCI server
+== 2. Install CircleCI server
 
 With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI server.
 
@@ -154,7 +149,7 @@ helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --vers
 ----
 
 [#post-install-circleci-server-helm-airgap]
-== Post Installation Steps
+== 3. Post Installation Steps
 After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:/additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [#next-steps]
