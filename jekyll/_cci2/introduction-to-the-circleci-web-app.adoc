@@ -74,7 +74,7 @@ Projects associated with your organization will appear on the **Projects** page.
 
 Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
 
-Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
+Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, Insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
 
 image::web_ui_projects.png[Projects page]
 
