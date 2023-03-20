@@ -1,89 +1,20 @@
 ---
-contentTags: 
-  platform:
-  - Cloud
+layout: classic-docs
+title: "Quickstart Guide"
+short-title: "Quickstart Guide"
+description: "A quickstart guide for adding a project to CircleCI and exploring some features"
 ---
-= Quickstart guide
-:page-layout: classic-docs
-:page-liquid:
-:page-description: A tutorial for getting your first successful CircleCI build
-:icons: font
-:toc: macro
-:toc-title:
 
 This quickstart guide shows you the fastest route from sign up, through connecting an existing project, and getting a first passing pipeline. Then you discover the in-app config editor to make changes to your pipeline and invite your team members to collaborate on your new project.
 
-If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
+If you would rather jump to a full list of CircleCI `config.yml` options, see the [Configuration reference](/docs/configuration-reference).
 
-[#prerequisites]
-== Prerequisites
+## Prerequisites
+{: #prerequisites }
 
-* Choose a project you would like to connect to CircleCI. This will be an existing repo in GitHub, Bitbucket or GitLab. If you do not have a project to use, create a new repo so you can follow along. Call it "hello-circleci".
+* Sign up for a CircleCI account
+* Choose a project you would like to connect to CircleCI. This will be an existing repo in GitHub, Bitbucket or GitLab. If you do not have a project to use, create a new repo (name it `hello-circleci`) so you can follow along.
 
-== GitHub
-
-=== Sign up
-
-Sign up for a link:https://circleci.com/signup[free CircleCI account]. You can sign up by either using your email address, and then connecting your GitHub account, or just connect your GitHub account right away
-
-. Next
-+
-some github steps
-
-. Next
-+
-Some github steps
---
-
-[.tab.quickstart.Bitbucket]
---
-. Sign up
-+
-* Sign up for a link:https://circleci.com/signup[free CircleCI account]
-
-. Next
-+
-some bitbucket steps
-
-. Next
-+
-Some bitbucket  steps
---
-
-[.tab.quickstart.GitLab]
---
-. Sign up
-+
-* Sign up for a link:https://circleci.com/signup[free CircleCI account]
-
-. Next
-+
-some gitlab steps
-
-. Next
-+
-Some gitlab steps
---
-
-{% capture content1 %}
-Sign up for a free CircleCI account
-{% endcapture %}
-
-{% capture content2 %}
-Sign in and connect a VCS 👋
-{% endcapture %}
-
-{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/gh-bb-integration"  content1=content1 content2=content2 %}
-
-{% capture content %}
-Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
-{% endcapture %}
-
-{%- capture header-banner-1 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
-{%- endcapture -%}
-
-{% include getting-started-section-header.html title="01 Connect to your code" id="connect-code" content=content imagePath=header-banner-1 %}
 
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
@@ -93,7 +24,11 @@ Continuous integration is a practice that helps developers integrate their code 
   {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
 {%- endcapture -%}
 
-{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
+{%- capture bitbucket-icon -%}
+  {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
+{%- endcapture -%}
+
+{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 
 {% capture content %}
 Create a repository called “hello-world” in GitHub or Bitbucket. Then in the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click Set Up Project. Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
@@ -228,20 +163,14 @@ On a failed pipeline, you can <a class="no-external-icon" href="https://circleci
 
 {% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
 
-{% capture content %}
-That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
-{% endcapture %}
 
-{% include getting-started-section-header.html title="04 Recommended learning" id="recommended-learning" content=content %}
+That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or [ask for help](https://support.circleci.com/hc/en-us/).
 
-{% capture content3 %}On-demand free developer training{% endcapture %}
+## Next steps
+{: #next-steps }
 
-{% capture content4 %}CircleCI foundation videos{% endcapture %}
-
-{% capture content5 %}Introduction to configuration{% endcapture %}
-
-{% capture content6 %}CircleCI concepts{% endcapture %}
-
-{% capture content7 %}Benefits of CircleCI free plan{% endcapture %}
-
-{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/config-intro/" href6="https://circleci.com/docs/concepts/" href7="https://circleci.com/docs/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
+* [On-demand free developer training](https://circleci.com/training/)
+* [CircleCI foundation videos](https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r)
+* [Introduction to configuration](/docs/config-intro/)
+* [CircleCI concepts](https://circleci.com/docs/concepts/)
+* [Benefits of CircleCI free plan](https://circleci.com/docs/plan-free/)
