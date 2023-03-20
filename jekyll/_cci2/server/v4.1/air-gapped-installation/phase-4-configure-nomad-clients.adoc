@@ -15,14 +15,17 @@ CircleCI server uses Nomad clients to perform container-based build actions. The
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
-[#configure-prerequisites]
-== 1. Configure Nomad client machines
+[#install-docker-and-nomad]
+== 1. Install Docker and Nomad
 Install the following two prerequisites on each instance designated as a Nomad client:
 
 - https://docs.docker.com/get-docker/[An installation of Docker]
 - https://developer.hashicorp.com/nomad/docs/install[An installation of Nomad]
 
-Each of these machines also needs a Nomad config directory, and optionally, a nested SSL directory:
+
+[#create-nomad-directories]
+== 2. Create nomad directories
+On each machine, create a config directory, and optionally a nested SSL directory if your installation uses mTLS:
 
 [source, bash]
 ----
@@ -30,11 +33,19 @@ sudo mkdir /etc/nomad/
 sudo mkdir /etc/nomad/ssl/
 ----
 
-Note: It is recommended to use CircleCI's Nomad installation script to install Nomad and all required prerequisite configurations. INSERTLINKHERE
+[#create-ci-docker-network]
+== 3. Create the docker ci-privileged network
+Create a docker network named "ci-privileged" with the following command. Once complete, restart the Nomad service.
 
+[source, bash]
+----
+sudo docker network create --label keep --driver=bridge --opt com.docker.network.bridge.name=ci-privileged ci-privileged
+
+sudo service nomad restart
+----
 
 [#retrieve-mtls-certificates]
-== 2. (Optional) Retrieve mTLS certificates
+== 4. (Optional) Retrieve mTLS certificates
 
 If Nomad mTLS is configured on your installation, you will need to provide three files to each Nomad client. If mTLS is not configured, you can skip this step.
 
@@ -59,7 +70,7 @@ echo -n "cert.pem-base64-encoded-string" | base64 --decode > cert.pem
 echo -n "key.pem-base64-encoded-string" | base64 --decode > key.pem
 ----
 
-== 3. (Optional) Copy mTLS keys to each Nomad client
+== 5. (Optional) Copy mTLS keys to each Nomad client
 If using mTLS, the ca.pem, key.pem, and cert.pem keys must be copied to each client and placed in the locations listed below. If mTLS is not configured, you can skip this step.
 
 [source, text]
@@ -69,7 +80,7 @@ If using mTLS, the ca.pem, key.pem, and cert.pem keys must be copied to each cli
 /etc/nomad/ssl/key.pem
 ----
 
-== 4. Configure the Nomad conf.hcl file on each machine
+== 6. Configure the Nomad conf.hcl file on each machine
 For each Nomad client, configure the following `conf.hcl` file at `/etc/nomad/conf.hcl`. Remember to replace all items displayed between `< >`.
 
 [source, hcl]
@@ -117,7 +128,7 @@ tls {
 }
 ----
 
-== 5. Test connectivity
+== 7. Test connectivity
 Test connectivity between your clients and cluster by starting the Nomad agent and observing logs.
 
 [source, bash]
