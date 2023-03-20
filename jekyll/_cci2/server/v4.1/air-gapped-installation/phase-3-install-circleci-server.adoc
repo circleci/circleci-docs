@@ -31,17 +31,16 @@ global:
     org: "circleci"
 ----
 
-Notes:
-- If using a non-tls installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
+Note: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
 
 === 2. Configure GitHub Enterprise
 In the github section of your values.yaml file, configure settings for your GitHub Enterprise installation.
 
-The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true. 
+The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
 
 If this instance is not using TLS or self-signed certificates, make sure to set the `unsafeDisableWebhookSSLVerification: true` and `selfSignedCert: true` values.
 
-Additionally, an OAuth application and a personal access token should be set in GitHub enterprise and values provided as shown below. For more information about this process, see the documentation for creating a GitHub OAuth application. INSERTLINKHERE
+Additionally, an OAuth application and a personal access token should be set in GitHub enterprise and values provided as shown below. For more information about this process, see the documentation for creating a xref:../installation/phase-1-prerequisites/#create-a-new-github-oauth-app[GitHub OAuth application].
 
 [source, yaml]
 ----
@@ -126,7 +125,7 @@ vm_service:
 
 [#add-additional-nginx-annotations]
 === 6. Add Additional Nginx Annotations
-Add any additional Nginx annotations as necessary depending on your installation to provision a Load Balancer. In our example, we are using MetalLB. For more information, see the [#service-type-load-balancers-k3s] section in the additional considerations documentation. INSERTLINKHERE
+Add any additional Nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:/additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [source, yaml]
 ----
@@ -139,7 +138,7 @@ nginx:
 
 [#add-additional-nginx-annotations]
 === Full values.yaml Example
-For a full example of a values.yaml file for an air-gapped environment, see this link. INSERTLINKHERE
+For a full example of a `values.yaml` file for an air-gapped environment, see the xref:/example-values.yaml[Example `values.yaml`] page.
 
 
 [#install-circleci-server-helm-airgap]
@@ -156,7 +155,7 @@ helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --vers
 
 [#post-install-circleci-server-helm-airgap]
 == Post Installation Steps
-After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see this link [#service-type-load-balancers-k3s]. INSERTLINKHERE.
+After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:/additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [#next-steps]
 == Next steps
