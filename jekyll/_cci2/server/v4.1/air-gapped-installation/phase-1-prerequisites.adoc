@@ -1,6 +1,6 @@
 ---
 version:
-- Server v4.x
+- Server v4.1
 - Server Admin
 ---
 = Phase 1 - Prerequisites
@@ -30,7 +30,7 @@ The following is an overview of the prerequisites required to run an air-gapped 
 
 | A Kubernetes cluster
 | Running CircleCI Server
-| 
+|
 
 | An object storage system (MinIO)
 | Object and artifact storage

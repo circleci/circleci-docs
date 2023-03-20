@@ -1,8 +1,18 @@
-
 ---
+version:
+- Server v4.1
+- Server Admin
+---
+= Additional considerations
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server
+:icons: font
+:toc: macro
+:toc-title:
 
 [#non-tls-docker-registry-installations]
-=== Non-TLS Docker Registry Installations
+== Non-TLS Docker Registry Installations
 
 When configuring your air-gapped docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-tls, or self-signed installation, the following steps additional steps will need to be taken.
 
@@ -41,7 +51,7 @@ configs:
 
 
 [#service-type-load-balancers-k3s]
-=== Service Type Load Balancers in K3s
+== Service Type Load Balancers in K3s
 
 CircleCI Server makes use of Service Type: Load Balancer kubernetes resources to listen to traffic on multiple ports. In order to function, the cluster needs to.
 

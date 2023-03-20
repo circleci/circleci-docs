@@ -1,7 +1,20 @@
-[#example-values-yaml]
-=== Example Values.yaml file - Air-Gapped Installation
-The following is an example values.yaml file for the Helm installation of CircleCI server in an air-gapped environment.
+---
+version:
+- Server v4.1
+- Server Admin
+---
+= Example values.yaml
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server
+:icons: font
+:toc: macro
+:toc-title:
 
+The following snippet shows an example `values.yaml` file for a Helm installation of CircleCI server in an air-gapped environment.
+
+[#resources]
+== Resources
 The chart assumes an environment with the following resources:
 
 - A K3s cluster for the installation of the Helm chart
@@ -11,7 +24,10 @@ The chart assumes an environment with the following resources:
 - A MinIO instance running at minio.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
 
-For more information about specific values, see the standard installation documentation.
+For more information about specific values, see the standard installation documentation, starting with xref:../installation/phase-2-core-services#[Phase 2 - Core services].
+
+[#values]
+== Values.yaml
 
 [source, yaml]
 ----

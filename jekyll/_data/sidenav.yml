@@ -607,6 +607,10 @@ en:
             link: server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients
           - name: Phase 5 - Test installation
             link: server/v4.1/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.1/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.1/air-gapped-installation/example-values.yaml
       - name: Server v4.1 operations
         children:
           - name: Operator overview
