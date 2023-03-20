@@ -70,7 +70,7 @@ If you do not see your project and it is not currently building on CircleCI, che
 Projects associated with your organization will appear on the **Projects** page. You have the option to:
 
 * _Set Up_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/notifications/) for the project's status.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:notifications#[email notifications] for the project's status.
 
 Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
 
