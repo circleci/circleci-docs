@@ -1,20 +1,35 @@
 ---
 layout: classic-docs
-title: "Quickstart Guide"
-short-title: "Quickstart Guide"
+title: "Quickstart guide"
 description: "A quickstart guide for adding a project to CircleCI and exploring some features"
+contentTags:
+  platform:
+  - Cloud
 ---
 
 This quickstart guide shows you the fastest route from sign up, through connecting an existing project, and getting a first passing pipeline. Then you discover the in-app config editor to make changes to your pipeline and invite your team members to collaborate on your new project.
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the [Configuration reference](/docs/configuration-reference).
 
-## Prerequisites
-{: #prerequisites }
+<!--> set up prerequisites <!-->
 
-* Sign up for a CircleCI account
-* Choose a project you would like to connect to CircleCI. This will be an existing repo in GitHub, Bitbucket or GitLab. If you do not have a project to use, create a new repo (name it `hello-circleci`) so you can follow along.
+{% capture content1 %} Sign up for a free CircleCI {% endcapture %}
 
+{% capture content2 %} Sign in and connect a VCS 👋 {% endcapture %}
+
+{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/first-steps" content1=content1 content2=content2 %}
+
+<!--> set up section one heading banner stc. <!-->
+
+{%- capture header-banner-1 -%}
+{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
+{%- endcapture -%}
+
+{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeiline and see it pass. {% endcapture %}
+
+{% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
+
+<!--> Set up banner for VCS prereq <!-->
 
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
@@ -24,21 +39,42 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
   {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
 {%- endcapture -%}
 
-{%- capture bitbucket-icon -%}
+{%- capture gitlab-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
 {%- endcapture -%}
 
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 
+<!--> Step 1 (two versions for different VCS) <!-->
+
 {% capture content %}
-Create a repository called “hello-world” in GitHub or Bitbucket. Then in the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click Set Up Project. Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
+In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click <strong>Set Up Project</strong>.
+Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
 {% endcapture %}
 
 {%- capture select-project -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+{% include two-up.html title="1. Select a project (GitHub/Bitbucket)" content=content imageURL=select-project imageAlt="Select Projects" %}
+
+<!--> Step 2 <!-->
+
+{% capture content %}
+ In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>.
+</br>
+GitHub / Bitbucket: Find the repository, and click <strong>Set Up Project</strong>.
+</br>
+GitLab: Click **Create Project**, then select your repository and name your project. Choose "Faster: Commit a starter CI pipeline to a new branch" and Click **Create Project** to save. A started configuration file has been added on a new branch called `update-circleci-config`.
+</br>
+Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
+{% endcapture %}
+
+{%- capture select-project -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
+{%- endcapture -%}
+
+{% include two-up.html title="1. Select a project (GitLab)" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
