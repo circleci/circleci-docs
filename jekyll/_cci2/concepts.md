@@ -600,7 +600,7 @@ See the [Pipelines overview](/docs/pipelines) page for more information.
 
 For GitHub and Bitbucket accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
-For GitLab users a _project_ in CircleCI is standalone. You name your project and then connect your code (GitLab repository) to that project. A standalone project can have:
+For GitLab users, a _project_ in CircleCI is standalone. You name your project and then connect your code (GitLab repository) to that project. A standalone project can have:
 
 * One or more configurations (pipeline definitions), including, but not limited to, a `.circleci/config.yml` file in the repo associated with the project.
 * One or more triggers (events from a source of change), including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
