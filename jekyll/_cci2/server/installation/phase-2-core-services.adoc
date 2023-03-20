@@ -167,8 +167,11 @@ keyset:
 ----
 --
 
+[#postgres]
 === d. Postgres
-==== Credentials
+
+[#postgres-credentials]
+==== i. Credentials
 The application requires a Kubernetes Secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
 [.tab.postgres.You_create_Secret]
@@ -205,7 +208,8 @@ postgresql:
 ----
 --
 
-==== TLS
+[#postgres-tls]
+==== ii. TLS
 Postgres may be extended to use TLS encrpted traffic. When deployed internally, this option is disabled by default but may be enabled by adding the following to your postgresql block of your `values.yaml`
 
 [source,yaml]

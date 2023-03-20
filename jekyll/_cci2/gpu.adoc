@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-2-eol-banner.adoc[]
+{% include snippets/server-2-eol-banner.adoc %}
 
 This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
 
