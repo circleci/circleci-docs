@@ -138,7 +138,7 @@ nginx:
 ----
 
 [#add-additional-nginx-annotations]
-=== Full Values.yaml Example
+=== Full values.yaml Example
 For a full example of a values.yaml file for an air-gapped environment, see this link. INSERTLINKHERE
 
 
