@@ -21,7 +21,7 @@ The `values.yaml` file for installing CircleCI should be prepared according to t
 
 NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:/example-values.yaml[Example `values.yaml`] page.
 
-In the global.container section of your values.yaml file, set the domainName value to the internal domain name of the installation. Set container.org to "circleci" and container.registry to the internal registry hostname (and port - if using a non-standard port) of your instance.
+In the `global.container` section of your `values.yaml` file, set the domainName value to the internal domain name of the installation. Set container.org to `circleci` and `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance.
 
 [source, yaml]
 ----
@@ -36,7 +36,7 @@ global:
 NOTE: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
 
 === b. Configure GitHub Enterprise
-In the github section of your values.yaml file, configure settings for your GitHub Enterprise installation.
+In the github section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
 
 The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
 
@@ -74,9 +74,7 @@ object_storage:
     secretKey: <minio-root-password>
 ----
 
-Notes:
-
-- Update the endpoint protocol to http or https depending on your MinIO installation.
+NOTE: Update the endpoint protocol to http or https depending on your MinIO installation.
 
 
 === d. Configure Min.IO Build Agent
@@ -89,10 +87,9 @@ distributor:
   launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
 ----
 
-Notes:
+NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
 
-- We have referenced port 9000 here as that is a default for MinIO. If your MinIO instance is configured differently this will need to be updated.
-- Update the protocol to http or https depending on your MinIO installation.
+NOTE: Update the protocol to http or https depending on your MinIO installation.
 
 
 [#configure-build-agent-image]
@@ -106,15 +103,14 @@ nomad:
   buildAgentImage: "<your-internal-registry-hostname>:5000/circleci/picard"
 ----
 
-Notes:
+NOTE: Update the port on your Docker registry hostname as necessary
 
-- Update the port on your docker registry hostname as necessary
-- If using a non-tls installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
+NOTE: If using a non-tls installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
 
 
 [#configure-vm-service]
 === f. Disable VM Service
-In the vm_service section of values.yaml, set `enabled` to `false` to disable it, as it requires cloud connectivity.
+In the `vm_service` section of `values.yaml`, set `enabled` to `false` to disable it, as it requires cloud connectivity.
 
 [source, yaml]
 ----

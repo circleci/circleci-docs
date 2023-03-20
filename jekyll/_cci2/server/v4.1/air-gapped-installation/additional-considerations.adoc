@@ -32,7 +32,7 @@ This file will need to be configured on the following machines:
 - All Nomad nodes in the air-gapped environment
 - Potentially all K3s nodes in the air-gapped environment, if using docker-backed K3s
 
-In addition, on each K3s node, the following file must be configured at /etc/rancher/k3s/registries.yaml. Take note to include the protocol where referenced.
+In addition, on each K3s node, the following file must be configured at `/etc/rancher/k3s/registries.yaml`. Take note to include the protocol where referenced.
 
 [source, yaml]
 ----
@@ -79,10 +79,10 @@ data:
       - <<k3s_internal_ip_range_start>>-<<k3s_internal_ip_range_end>>
 ----
 
-The address pool can be named something other than "default", but the annotations in values.yaml will need to be updated. If there is only one k3s node, the address range should have the same IP repeated (example: 10.0.0.5-10.0.0.5).
+The address pool can be named something other than "default", but the annotations in `values.yaml` will need to be updated. If there is only one k3s node, the address range should have the same IP repeated (example: 10.0.0.5-10.0.0.5).
 
 
-Once this configmap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), the address pool name can be updated in the values.yaml for the Helm installation.
+Once this configmap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), the address pool name can be updated in the `values.yaml` for the Helm installation.
 
 [source, yaml]
 ----

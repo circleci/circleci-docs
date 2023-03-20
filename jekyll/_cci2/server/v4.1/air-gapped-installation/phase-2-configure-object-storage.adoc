@@ -20,7 +20,7 @@ image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
 === a. Create a circleci-data bucket.
-Create a new bucket in MinIO named `circleci-data`. This bucket can be named differently, but references to it will need to be updated in the Helm values.yaml file.
+Create a new bucket in MinIO named `circleci-data`. This bucket can be named differently, but references to it will need to be updated in the Helm `values.yaml` file.
 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
