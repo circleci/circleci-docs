@@ -74,7 +74,7 @@ cciserver.azurecr.io/branch-service-migrator:0.1.4205-f54b104
 cciserver.azurecr.io/branch-service:0.1.4206-f54b104
 cciserver.azurecr.io/builds-service-migrator:1.0.2954-dbc4487
 cciserver.azurecr.io/builds-service:1.0.2954-dbc4487
-cciserver.azurecr.io/circle-migrator:0.1.571179-381a846dc9
+cciserver.azurecr.io/circle-migrator:0.1.580305-e9d88a9834
 cciserver.azurecr.io/contexts-service-migrator:0.1.18751-df77431
 cciserver.azurecr.io/contexts-service:0.1.18752-df77431
 cciserver.azurecr.io/cron-service-migrator:0.1.3889-3c348df
@@ -83,7 +83,7 @@ cciserver.azurecr.io/distributor-migrator:1.0.93790-1c54ce3f
 cciserver.azurecr.io/distributor:1.0.93790-1c54ce3f
 cciserver.azurecr.io/domain-service-migrator:0.1.15701-ddd2312
 cciserver.azurecr.io/domain-service:0.1.15700-ddd2312
-cciserver.azurecr.io/frontend:0.2.29368-381a846
+cciserver.azurecr.io/frontend:0.2.30085-e9d88a9
 cciserver.azurecr.io/init-known-hosts:0.1.26-9f89d4e
 cciserver.azurecr.io/insights-service-migrator:0.1.73818-7d0fb8dc
 cciserver.azurecr.io/insights-service:0.1.73817-7d0fb8dc
@@ -126,7 +126,6 @@ mongo:3.6
 nginx:1.21.6
 quay.io/soketi/soketi:0.19-16-distroless
 telegraf:1.24-alpine
-
 cimg/base:2021.02-20.04
 docker:17.06-git
 alpine:latest
