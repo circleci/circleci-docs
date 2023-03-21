@@ -15,11 +15,11 @@ With prerequisites installed, and object storage configured, you can now copy ov
 
 [#prepare-values-yaml]
 == 1. Prepare values.yaml
-The `values.yaml` file for installing CircleCI should be prepared according to the xref:/server/v4.1/installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+The `values.yaml` file for installing CircleCI should be prepared according to the xref:../installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
 
 === a. Configure global values
 
-NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:/example-values.yaml[Example `values.yaml`] page.
+NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.yaml[Example `values.yaml`] page.
 
 In the `global.container` section of your `values.yaml` file, set the domainName value to the internal domain name of the installation. Set container.org to `circleci` and `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance.
 
@@ -33,7 +33,7 @@ global:
     org: "circleci"
 ----
 
-NOTE: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
+NOTE: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. #INSERTLINKHERE#
 
 === b. Configure GitHub Enterprise
 In the github section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
@@ -121,7 +121,7 @@ vm_service:
 
 [#add-additional-nginx-annotations]
 === g. Add Additional Nginx Annotations
-Add any additional Nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:/additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+Add any additional Nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [source, yaml]
 ----
@@ -146,9 +146,9 @@ helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --vers
 
 [#post-install-circleci-server-helm-airgap]
 == 3. Post Installation Steps
-After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:/additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:/server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients#[Phase 4 - Configure Nomad clients] guide.
+Once the steps on this page are complete, go to the xref:phase-4-configure-nomad-clients#[Phase 4 - Configure Nomad clients] guide.
