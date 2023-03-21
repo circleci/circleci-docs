@@ -122,7 +122,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 
 Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. 
 
-For GitLab Self-managed, if you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will need to set the instance URL and enter your personal access token again to authorize this connection.
+For GitLab Self-managed, you are able to select any instance that you have previously added as a configuration source. if you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will first need to add a new connection via your xref:#organization-settings-integrations[**Organization Settings**]. In either case, you will also need to enter your personal access token again to authorize this connection.
 
 Once you define a configuration source, you can set up a trigger that points to that configuration.
 
@@ -145,15 +145,11 @@ In addition to a configuration source, each trigger includes the webhook URL, an
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
-The ability to edit a trigger is currently available only for GitLab.com projects.
-
-//TODO: Verify whether self-managed can create custom trigger filter
-//TODO: Verify whether self-managed custom filter has Edit tab enabled
 **Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Also note the differences in functionality below with project settings for GitLab support.
+NOTE: Currently, the only fields that can be edited for existing filters are **Trigger Name** and the **Filters** radio buttons.
 
 [#project-settings-advanced]
 === Advanced
@@ -238,7 +234,7 @@ For GitLab Self-managed organizations, you may connect additional self-managed i
 
 NOTE: The ability to edit or delete existing integrations is not currently enabled.
 
-For GitLab.com, account integrations can be managed under your #user-account-integrations[user settings].
+For GitLab.com, account integrations can be managed under your xref:#user-account-integrations[user settings].
 
 [#roles-and-permissions]
 == Roles and permissions
