@@ -81,7 +81,7 @@ test_version_check:
         status: HARD_FAIL
         hard_failures:
           - rule: check_version
-            reason: version must be at least 2.0 but got 1
+            reason: version must be at least 2.1 but got 1
 ----
 
 . Run the `test` command against your `config-policies` directory:
