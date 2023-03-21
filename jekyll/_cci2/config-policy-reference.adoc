@@ -22,8 +22,10 @@ use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or 
 will be able to access these functions. This also means the package names `circleci.config` and `circleci.utils` are
 reserved.
 
-[#circleci-rego-helpers]
-== CircleCI rego helpers
+[#circleci-config-helpers]
+== CircleCI config helpers
+
+The following helpers are imported using `import data.circleci.config`
 
 [#orbs]
 === `orbs`
@@ -339,6 +341,11 @@ rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
 enable_hard["rule_contexts_reserved_by_branches"]
 ----
 
+[#circleci-utility-helpers]
+== CircleCI Utility helpers
+
+The following helpers are imported using `import data.circleci.utils`
+
 [#get_element_name]
 === `get_element_name`
 
@@ -381,8 +388,6 @@ workflows:
 ----
 In the policy example above, `job_name1` would equal `lint` and `job_name2` would equal `test`.
 
-----
-
 [#to_array]
 === `to_array`
 
@@ -410,8 +415,6 @@ policy_name["example"]
 
 a = utils.to_array("element")   # a is ["element"]
 b = utils.to_array(["element"]) # b is ["element"]
-----
-
 ----
 
 [#to-set]
