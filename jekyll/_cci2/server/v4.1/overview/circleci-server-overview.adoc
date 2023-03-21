@@ -1,7 +1,7 @@
 ---
 description: "CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster."
 version:
-- Server v4.x
+- Server v4.1
 - Server Admin
 ---
 = CircleCI server v{serverversion41} overview

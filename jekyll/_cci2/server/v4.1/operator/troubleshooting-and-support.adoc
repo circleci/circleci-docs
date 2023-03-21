@@ -1,6 +1,6 @@
 ---
 version:
-- Server v4.x
+- Server v4.1
 - Server Admin
 ---
 = Troubleshooting and support
@@ -26,7 +26,7 @@ To generate a support bundle, follow the steps below.
 
 [source,bash]
 ----
-# To check if you have access to cluster/namespace 
+# To check if you have access to cluster/namespace
 kubectl -n <namespace> get pods
 ----
 
@@ -107,7 +107,7 @@ kubectl delete pod <pod-name> -n <namespace> --now
 
 [#air-gap-repl]
 === Utilizing REPL in an air-gapped environment
-If you are in an air-gapped environment, you will first need to download the `lein` REPL dependencies, commit them, and upload it to your private Docker registry. 
+If you are in an air-gapped environment, you will first need to download the `lein` REPL dependencies, commit them, and upload it to your private Docker registry.
 
 [source,bash]
 ----

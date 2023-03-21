@@ -1,7 +1,7 @@
 ---
 description: "CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
 version:
-- Server v4.x
+- Server v4.1
 - Server Admin
 ---
 = Manage virtual machines with VM Service

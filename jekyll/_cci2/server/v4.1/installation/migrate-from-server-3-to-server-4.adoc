@@ -1,6 +1,6 @@
 ---
 version:
-- Server v4.x
+- Server v4.1
 - Server Admin
 ---
 = Migrate from server v3.x to v4.x

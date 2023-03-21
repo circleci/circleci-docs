@@ -1,6 +1,6 @@
 ---
 version:
-- Server v4.x
+- Server v4.1
 - Server Admin
 ---
 = Phase 1 - Prerequisites
