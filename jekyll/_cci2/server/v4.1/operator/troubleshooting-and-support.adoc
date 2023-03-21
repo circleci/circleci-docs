@@ -102,7 +102,34 @@ To restart specific pods, the easiest way is remove the pod. Kubernetes automati
 
 [source,bash]
 ----
-kubectl delete pod <pod-name> -n <name-space> --now
+kubectl delete pod <pod-name> -n <namespace> --now
+----
+
+[#air-gap-repl]
+=== Utilizing REPL in an air-gapped environment
+If you are in an air-gapped environment, you will first need to download the `lein` REPL dependencies, commit them, and upload it to your private Docker registry. 
+
+[source,bash]
+----
+docker run -it clojure lein repl :connect 6005
+docker commit $(docker ps -aq | head -1) <your-private-registry>/clojure
+----
+
+Now you are ready to access the REPL. From a system with access to the private Docker registry and `kubectl` access to the cluster, run the script below. Be sure to modify it to match your namespace if it is not `circleci-server`.
+
+[source,bash]
+----
+SVC_NAME=frontend
+INET_ADDR="$(ip -4 route get 192.0.2.1 | grep -o 'src [0-9.]\{1,\}' | awk '{ print $2 }')"
+
+# Start port-forwarding in background
+kubectl port-forward "$(kubectl get po -l app="${SVC_NAME}" -n circleci-server -o jsonpath='{.items[0].metadata.name}')" --address "${INET_ADDR}" 6005 -n circleci-server &
+
+# Start nREPL
+sudo docker run --rm -it clojure lein repl :connect "${INET_ADDR}":6005
+
+# End port-forwarding
+kill $!
 ----
 
 [#debug-queuing-builds]

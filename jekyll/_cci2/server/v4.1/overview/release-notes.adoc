@@ -26,7 +26,7 @@ Find information about migration in the xref:../installation/migrate-from-server
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:../installation/upgrade-server-4#[Upgrade Server v4 Guide].
+For upgrade steps see the xref:../installation/upgrade-server#[Upgrade Server v4 Guide].
 
 [#release-4-0-1]
 == Release 4.0.1
