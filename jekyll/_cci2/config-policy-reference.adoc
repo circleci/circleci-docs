@@ -380,3 +380,67 @@ workflows:
           context: test-vars
 ----
 In the policy example above, `job_name1` would equal `lint` and `job_name2` would equal `test`.
+
+----
+
+[#to_array]
+=== `to_array`
+
+This function casts a value to an array. Array values are left as is and are **not** cast to Array<Array>.
+
+[#definition-to-array]
+==== Definition
+
+[source,rego]
+----
+to_array(value)
+returns array
+----
+
+[#usage-to-array]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+a = utils.to_array("element")   # a is ["element"]
+b = utils.to_array(["element"]) # b is ["element"]
+----
+
+----
+
+[#to-set]
+=== `to_set`
+
+This function casts a value to a set. Array values are cast to a set and deduplicated. Set values are left as is and are **not** cast to Set<Set>.
+
+[#definition-to-set]
+==== Definition
+
+[source,rego]
+----
+to_set(value)
+returns set
+----
+
+[#usage-to-set]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+a = utils.to_set("element")                      # a is {"element"}
+b = utils.to_set(["one", "one", "two", "three"]) # b is {"one", "two", "three"}
+c = utils.to_set({"element"})                    # c is {"element"}
+----
+
