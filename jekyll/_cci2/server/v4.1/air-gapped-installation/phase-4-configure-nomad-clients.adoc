@@ -25,7 +25,7 @@ Install the following two prerequisites on each instance designated as a Nomad c
 
 [#create-nomad-directories]
 == 2. Create nomad directories
-On each machine, create a config directory, and optionally a nested SSL directory if your installation uses mTLS:
+On each machine, create a config directory. If your installation uses mTLS, also create a nested SSL directory:
 
 [source, bash]
 ----
@@ -34,8 +34,8 @@ sudo mkdir /etc/nomad/ssl/
 ----
 
 [#create-ci-docker-network]
-== 3. Create the docker ci-privileged network
-Create a docker network named "ci-privileged" with the following command. Once complete, restart the Nomad service.
+== 3. Create the Docker ci-privileged network
+Create a Docker network named `ci-privileged` with the following command. Once complete, restart the Nomad service.
 
 [source, bash]
 ----
@@ -71,7 +71,7 @@ echo -n "key.pem-base64-encoded-string" | base64 --decode > key.pem
 ----
 
 == 5. (Optional) Copy mTLS keys to each Nomad client
-If using mTLS, the ca.pem, key.pem, and cert.pem keys must be copied to each client and placed in the locations listed below. If mTLS is not configured, you can skip this step.
+If using mTLS, the `ca.pem`, `key.pem`, and `cert.pem` keys must be copied to each client and placed in the locations listed below. If mTLS is not configured, you can skip this step.
 
 [source, text]
 ----

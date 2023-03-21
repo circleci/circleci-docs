@@ -13,14 +13,15 @@ version:
 
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO
-As an air-gapped object storage solution, CircleCI server supports MinIO. It is used in an air-gapped environment as a replacement for a Cloud-based object storage solution such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the following steps.
-
+CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for Cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlines in the next sections.
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
 === a. Create a circleci-data bucket.
-Create a new bucket in MinIO named `circleci-data`. This bucket can be named differently, but references to it will need to be updated in the Helm `values.yaml` file.
+Create a new bucket in MinIO named `circleci-data`.
+
+NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
@@ -75,7 +76,7 @@ image::./minio/minio_create_release_dir.png[Creating a directory in the circleci
 
 [#upload-checksums-file]
 === e. Upload the checksums.txt file to the newly created directory.
-Copy the downloaded `checksums.txt` file from step 3 to your virtual environment, and place it in MinIO nested under the newly created release directory in step 4.
+Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in MinIO nested under the newly created release directory (step d).
 
 ```
 # The structure of the directory should now look like this
@@ -87,7 +88,7 @@ image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the relea
 
 [#create-new-subdirs]
 === f. Create two new subdirectories in the release directory
-Within the release directory created in step 4, create two new nested subdirectories, first `linux`, and then within it, `amd64`.
+Within the release directory (step d), create two new nested subdirectories, first `linux`, and then within it, `amd64`.
 
 ```
 # The structure of the directory of the bucket should look like this:
@@ -103,7 +104,7 @@ image::./minio/minio_create_amd_dir.png[Creating an amd dir]
 
 [#copy-build-agent-bin]
 === g. Copy the downloaded circleci-agent file
-Copy the downloaded `circleci-agent` file from step 3 to your virtual environment, and place it in the amd64 directory created in step 6.
+Copy the downloaded `circleci-agent` file (step c) to your virtual environment, and place it in the amd64 directory you just created.
 
 ```
 # The final structure of the bucket should look similar to this:
