@@ -132,7 +132,3 @@ sudo docker run --rm -it clojure lein repl :connect "${INET_ADDR}":6005
 kill $!
 ----
 
-[#debug-queuing-builds]
-== Debug queuing builds
-For troubleshooting information on debugging queued builds, see the Server 2.x
-https://circleci.com/docs/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
