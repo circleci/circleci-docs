@@ -56,17 +56,13 @@ Don’t see your repository? Use the org selector in the top left corner to find
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. Select a project (GitHub/Bitbucket)" content=content imageURL=select-project imageAlt="Select Projects" %}
+{% include two-up.html title="1a. Select a project (GitHub/Bitbucket)" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 <!--> Step 2 <!-->
 
 {% capture content %}
- In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>.
-</br>
-GitHub / Bitbucket: Find the repository, and click <strong>Set Up Project</strong>.
-</br>
-GitLab: Click **Create Project**, then select your repository and name your project. Choose "Faster: Commit a starter CI pipeline to a new branch" and Click **Create Project** to save. A started configuration file has been added on a new branch called `update-circleci-config`.
-</br>
+In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>.
+Click <strong>Create Project</strong>, then select your repository and name your project. Choose "Faster: Commit a starter CI pipeline to a new branch" and Click <strong>Create Project</strong> to save. A started configuration file has been added on a new branch called <code>update-circleci-config</code>.
 Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
 {% endcapture %}
 
@@ -74,7 +70,7 @@ Don’t see your repository? Use the org selector in the top left corner to find
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. Select a project (GitLab)" content=content imageURL=select-project imageAlt="Select Projects" %}
+{% include two-up.html title="1b. Select a project (GitLab)" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
