@@ -3,10 +3,10 @@ version:
 - Server v4.1
 - Server Admin
 ---
-= Phase 3 - Install CircleCI Server
+= Phase 3 - Install CircleCI server
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to install the CircleCI Server Helm deployment to an air-gapped environment.
+:page-description: How to install the CircleCI server Helm deployment to an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:

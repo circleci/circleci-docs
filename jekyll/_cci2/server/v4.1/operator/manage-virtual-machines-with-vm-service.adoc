@@ -1,5 +1,5 @@
 ---
-description: "CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
+description: "CircleCI server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
 version:
 - Server v4.1
 - Server Admin
@@ -30,7 +30,7 @@ The informaiton in this section describes post-installation configuration option
 [#windows-image-aws]
 ==== Windows image
 
-If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI server Windows image builder].
 
 [source,yaml]
 ----
@@ -44,7 +44,7 @@ vm_service:
 [#linux-image-aws]
 ==== Alternative Linux VM image
 
-If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI server Linux image builder].
 
 [source,yaml]
 ----
@@ -188,7 +188,7 @@ The information in this section describes post-installation configuration option
 [#windows-image-gcp]
 ==== Windows image
 
-If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI server Windows image builder].
 
 [source,yaml]
 ----
@@ -202,7 +202,7 @@ vm_service:
 [#linux-image-gcp]
 ==== Alternative Linux VM image
 
-If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI server Linux image builder].
 
 [source,yaml]
 ----

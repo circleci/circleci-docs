@@ -6,14 +6,14 @@ version:
 = Phase 2 - Configure object storage
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to configure object storage through MinIO to run CircleCI Server in an air-gapped environment.
+:page-description: How to configure object storage through MinIO to run CircleCI server in an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:
 
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO
-As an air-gapped object storage solution, CircleCI Server supports MinIO. It is used in an air-gapped environment as a replacement for a Cloud-based object storage solution such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the following steps.
+As an air-gapped object storage solution, CircleCI server supports MinIO. It is used in an air-gapped environment as a replacement for a Cloud-based object storage solution such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the following steps.
 
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]

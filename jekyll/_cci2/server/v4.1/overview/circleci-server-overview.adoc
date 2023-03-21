@@ -21,7 +21,7 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 NOTE: For installation instructions, you have the option of either the xref:../installation/phase-1-prerequisites#[regular] or xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] installation guide.
 
 .CircleCI Server v4.x Architecture
-image::server-4-architecture-diagram.png[Server v4.xservices architecture]
+image::server-4-architecture-diagram.png[Server v4.x services architecture]
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
@@ -382,7 +382,7 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:release-notes#[CircleCI Server v4.x Release Notes]
+* xref:release-notes#[CircleCI server v4.1 release notes]
 * xref:../installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
-* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from Server v3 to Server v4]
+* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]

@@ -58,7 +58,7 @@ vpc-02fdfff4ca
 subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488
 ----
 +
-Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
+Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
 +
 [source,shell]
 ----
@@ -1066,7 +1066,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 ----
 --
 
-. *Configure Server*
+. *Configure CircleCI server*
 +
 When using service account keys for configuring access for the VM service, there are two options.
 +
@@ -1133,9 +1133,9 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:../../../runner-overview#[runner documentation].
+CircleCI runner does not require any additional server configuration. CircleCI server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:../../../runner-overview#[runner documentation].
 
-NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
+NOTE: Runner requires a namespace per organization. CircleCI server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
 ifndef::pdf[]
 

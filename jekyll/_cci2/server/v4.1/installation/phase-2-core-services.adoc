@@ -743,7 +743,7 @@ kubectl create secret generic object-storage-secret \
 endif::env-aws[]
 
 === m. Installing behind a proxy
-Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the xref:installing-server-behind-a-proxy#[Installing Server Behind a Proxy] guide.
+Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the xref:installing-server-behind-a-proxy#[Installing server behind a proxy] guide.
 
 The following fields need to be configured in your `values.yaml`:
 

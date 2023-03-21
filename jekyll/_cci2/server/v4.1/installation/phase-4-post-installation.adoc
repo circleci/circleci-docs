@@ -376,7 +376,7 @@ You can verify your client is correctly configured by running `mc ls my-provider
 +
 Create a bucket for your backups. It is important that a new bucket is used, as Velero cannot use a preexisting bucket that contains other content.
 +
-[source, bash]
+[source,bash]
 ----
 mc mb ${ALIAS}/<YOUR_BUCKET>
 ----
@@ -387,7 +387,7 @@ Create a user and policy for Velero to access your bucket.
 +
 NOTE: In the following snippet `<YOUR_MINIO_ACCESS_KEY_ID>` and `<YOUR_MINIO_SECRET_ACCESS_KEY>` refer to the credentials used by Velero to access MinIO.
 +
-[source, bash]
+[source,bash]
 ----
 # Create user
 mc admin user add $ALIAS <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
@@ -510,7 +510,7 @@ smtp:
 [#managing-orbs]
 == Managing orbs
 
-Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
+CircleCI server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
 
 * Copying orbs from the public registry.
 * Updating orbs that may have been copied previously.

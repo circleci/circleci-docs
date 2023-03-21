@@ -25,12 +25,12 @@ For existing customers interested in migrating from v3.x or v2.x to v4.x, contac
 
 Find information about migration in the following guides:
 
-* xref:../installation/migrate-from-server-3-to-server-4#[Migrate From Server v3 to v4 Guide]
-* xref:../installation/migrate-from-server-2-to-server-4#[Migrate From Server v2 to v4 Guide]
+* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
+* xref:../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:../installation/upgrade-server#[Upgrade Server v4 Guide].
+For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4 guide].
 
 [#release-4-1-0]
 == Release 4.1.0
