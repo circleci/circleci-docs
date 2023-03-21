@@ -382,7 +382,7 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:server/v4.1/overview/release-notes#[CircleCI Server v4.x Release Notes]
-* xref:server/v4.1/installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
-* xref:server/v4.1/installation/migrate-from-server-3-to-server-4#[Migrate from Server v3 to Server v4]
+* xref:release-notes#[CircleCI Server v4.x Release Notes]
+* xref:../installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
+* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from Server v3 to Server v4]
 endif::pdf[]
