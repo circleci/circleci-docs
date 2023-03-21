@@ -12,7 +12,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution environment installation phase, ensure you have run through xref:server/v4.1/installation/phase-1-prerequisites#[Phase 1 – Prerequisites] and xref:server/v4.1/installation/phase-2-core-services#[Phase 2 - Core Services Installation].
+Before you begin with the CircleCI server v4.x execution environment installation phase, ensure you have run through xref:phase-1-prerequisites#[Phase 1 – Prerequisites] and xref:phase-2-core-services#[Phase 2 - Core Services Installation].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -249,7 +249,7 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using xref:server/v4.1/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using xref:phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
@@ -491,9 +491,9 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM service
 
-VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm execution environments, and those that are configured to use xref:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm execution environments, and those that are configured to use xref:../../../configuration-reference#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
-NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:server/v4.1/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
+NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:../operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
 
 ifndef::env-gcp[]
 
@@ -1002,7 +1002,7 @@ databaseEncryption:
 
 . *Create firewall rules*
 +
-External VMs need the networking rules described in xref:server/v4.1/installation/hardening-your-cluster/#external-vms[Hardening your Cluster]
+External VMs need the networking rules described in xref:hardening-your-cluster/#external-vms[Hardening your Cluster]
 
 . *Create user*
 +
@@ -1133,7 +1133,7 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:/docs/runner-overview#[runner documentation].
+CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:../../../runner-overview#[runner documentation].
 
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
@@ -1142,5 +1142,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:server/v4.1/installation/phase-4-post-installation#[Phase 4: Post Installation]
+* xref:phase-4-post-installation#[Phase 4: Post Installation]
 endif::pdf[]
