@@ -14,7 +14,7 @@ contentTags:
 
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO
-CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for Cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlines in the next sections.
+CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
