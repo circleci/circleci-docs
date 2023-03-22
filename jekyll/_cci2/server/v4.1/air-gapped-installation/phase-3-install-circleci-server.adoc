@@ -35,7 +35,7 @@ global:
   domainName: "server.internal.example.com"
   container:
     registry: "docker.internal.example.com:5000"
-    org: "circleci"
+    org: "<image-registry-org>"
 ----
 
 NOTE: If you are using a non-TLS installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
