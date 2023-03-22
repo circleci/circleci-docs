@@ -39,7 +39,7 @@ global:
   license: '<<your-server-license-here>>'
   container:
     registry: "docker.internal.example.com:5000"
-    org: "circleci"
+    org: "<image-registry-org>"
 
 # GitHub Enterprise
 github:
