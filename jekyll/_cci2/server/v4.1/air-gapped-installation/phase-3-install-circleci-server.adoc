@@ -41,7 +41,7 @@ global:
 NOTE: If you are using a non-TLS installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
 
 === b. Configure GitHub Enterprise
-In the github section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
+In the `github` section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
 
 The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
 
