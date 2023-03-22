@@ -406,7 +406,7 @@ Apply the changes made to your `values.yaml` file:
 [source,shell]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.1.0 -f <path-to-values.yaml>
 ----
 
 [#nomad-clients-validation]
@@ -1118,12 +1118,12 @@ endif::env-aws[]
 [#vm-service-validation]
 === VM Service Validation
 
-Apply they changes made to your values.yaml file.
+Apply they changes made to your `values.yaml` file.
 
 [source,shell]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.1.0 -f <path-to-values.yaml>
 ----
 
 Once you have configured and deployed CircleCI server, you should validate that VM Service is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the VM Service Jobs complete. At this point, all tests should pass.

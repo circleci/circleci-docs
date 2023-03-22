@@ -19,31 +19,25 @@ The guides in this section walk you through the steps required to install Circle
 The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forwards with the installation.
 
 [.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=2*, options="header", stripes=even]
 |===
 | Component
 | Used for
-| Notes
 
 | Container registry
 | Hosting CircleCI server images for Kubernetes
-|
 
 | A Kubernetes cluster
 | Running CircleCI server
-|
 
 | An object storage system (MinIO)
 | Object and artifact storage
-|
 
 | GitHub Enterprise
 | Source of code for CircleCI server to build
-|
 
 | Nomad Virtual Machines
 | Machines for running Nomad
-|
 
 |===
 
