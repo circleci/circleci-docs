@@ -11,7 +11,7 @@ This quickstart guides you through sign up, connecting an existing project to Ci
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the [Configuration reference](/docs/configuration-reference).
 
-<!--> set up prerequisites <!-->
+<!-- set up prerequisites -->
 
 {% capture content1 %} Sign up for a free CircleCI {% endcapture %}
 
@@ -19,7 +19,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 {% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/first-steps" content1=content1 content2=content2 %}
 
-<!--> set up section one heading banner stc. <!-->
+<!-- set up section one heading banner stc. -->
 
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
@@ -29,7 +29,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
 
-<!--> Set up banner for VCS prereq <!-->
+<!-- Set up banner for VCS prereq -->
 
 {%- capture gitlab-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
@@ -37,7 +37,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 {% include gitlab-banner.html gitlabPath=gitlab-icon %}
 
-<!--> Step 1 (two versions for different VCS) <!-->
+<!-- Step 1 (two versions for different VCS) -->
 
 {% capture content %}
 In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click <strong>Set Up Project</strong>.
@@ -64,7 +64,7 @@ Don’t see your repository? Use the org selector in the top left corner to find
 
 {% include two-up.html title="1b. Select a project (GitLab)" content=content imageURL=select-project imageAlt="Select Projects" %}
 
-<!--> Step 2 <!-->
+<!-- Step 2 -->
 
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
