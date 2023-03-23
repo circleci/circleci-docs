@@ -560,16 +560,96 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
-  - name: Server administration v4.x
+  - name: Server administration v4.1
     icon: icons/sidebar/admin-new.svg
     children:
-      - name: Server v4.x overview
+      - name: Server v4.1 overview
+        children:
+          - name: CircleCI server v4.1 overview
+            link: server/v4.1/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.1/overview/release-notes
+      - name: Server v4.1 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.1/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.1/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.1/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.1/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.1/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.1/installation/installing-server-behind-a-proxy
+          - name: Migrate from server v3 to v4
+            link: server/v4.1/installation/migrate-from-server-3-to-server-4
+          - name: Upgrade server v4.x
+            link: server/v4.1/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.1/installation/installation-reference
+      - name: Air-gapped installation v4.1
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.1/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.1/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.1/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.1/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.1/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.1/air-gapped-installation/example-values.yaml
+      - name: Server v4.1 operations
+        children:
+          - name: Operator overview
+            link: server/v4.1/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.1/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.1/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.1/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.1/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.1/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.1/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.1/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.1/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.1/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.1/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.1/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.1/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.1/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.1/operator/backup-and-restore
+          - name: FAQs
+            link: server/v4.1/operator/faq
+
+  - name: Server administration v4.0
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.0 overview
         children:
           - name: CircleCI server v4.x overview
             link: server/overview/circleci-server-v4-overview
           - name: Release notes
             link: server/overview/release-notes
-      - name: Server v4.x installation
+      - name: Server v4.0 installation
         children:
           - name: Phase 1 - Prerequisites
             link: server/installation/phase-1-prerequisites
@@ -591,7 +671,7 @@ en:
             link: server/installation/upgrade-server-4
           - name: Installation reference
             link: server/installation/installation-reference
-      - name: Server v4.x operations
+      - name: Server v4.0 operations
         children:
           - name: Operator overview
             link: server/operator/operator-overview
@@ -623,16 +703,6 @@ en:
             link: server/operator/troubleshooting-and-support
           - name: Backup and restore
             link: server/operator/backup-and-restore
-      - name: Server v4.0.0 PDFs
-        children:
-          - name: v4.0.0 Overview
-            link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
-          - name: v4.0.0 Installation Guide for AWS
-            link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
-          - name: v4.0.0 Installation Guide for GCP
-            link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
-          - name: v4.0.0 Operations Guide
-            link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
   - name: Server administration v3.x
     icon: icons/sidebar/admin-new.svg

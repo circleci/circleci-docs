@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v4.1
+  - Server Admin
 ---
 = Hardening your cluster
 :page-layout: classic-docs
@@ -12,8 +13,6 @@ version:
 :toc-title:
 
 This section provides supplemental information on hardening your Kubernetes cluster.
-
-toc::[]
 
 [#network-topology]
 == Network topology
@@ -341,6 +340,6 @@ When hardening an installation where the VM service uses public IPs, the followi
 
 ifndef::pdf[]
 ## Next steps
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
-* link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
+* xref:migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
+* xref:../operator/operator-overview#[Server 4.1 Operator Overview]
 endif::[]
