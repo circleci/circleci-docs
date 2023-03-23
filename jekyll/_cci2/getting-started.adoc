@@ -1,11 +1,12 @@
 ---
 layout: classic-docs
-title: "Quickstart guide"
 description: "A quickstart guide for adding a project to CircleCI and exploring some features"
 contentTags:
   platform:
   - Cloud
 ---
+= Quickstart guide
+:page-liquid:
 
 This quickstart guides you through connecting an existing project to CircleCI, highlighting various features, including the in-app config editor. You will finish by inviting team members to collaborate on your new project.
 
@@ -13,14 +14,17 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 <!-- set up prerequisites -->
 
+[.tab.gettingstarted.step_1]
+--
 {% capture content1 %} Sign up for a free CircleCI {% endcapture %}
 
 {% capture content2 %} Sign in and connect a VCS 👋 {% endcapture %}
 
 {% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/first-steps" content1=content1 content2=content2 %}
+--
 
-<!-- set up section one heading banner stc. -->
-
+[.tab.gettingstarted.step_2]
+--
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
@@ -28,6 +32,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 {% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
+--
 
 <!-- Set up banner for VCS prereq -->
 
