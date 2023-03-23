@@ -695,7 +695,7 @@ Configured by `docker` key which takes a list of maps:
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The name of a custom docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
-name | N | String | `name` defines the the hostname for the container (default: localhost), used for reaching secondary, service containers. By default, all services are exposed directly on `localhost`. This field is appropriate if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
+name | N | String | `name` defines the the hostname for the container (the default is `localhost`), used for reaching secondary, service containers. By default, all services are exposed directly on `localhost`. This field is appropriate if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
 entrypoint | N | String or List | The command used as executable when launching the container. `entrypoint` overrides the image's [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint).
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container. `command` overrides the image's `COMMAND`. It will be used as arguments to the image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
 user | N | String | Which user to run commands as within the Docker container
