@@ -161,7 +161,7 @@ More details on the Docker executor are available in the [Configuring CircleCI](
 ## Using multiple Docker images
 {: #using-multiple-docker-images }
 
-It is possible to specify multiple images for your job. Each image will be used to spin up a separate container for your job.
+It is possible to specify multiple images for your job. Each image will be used to spin up a separate container.
 
 Using multiple containers for a job will be useful if you need to use a database for your tests, or for some other required service.
 
