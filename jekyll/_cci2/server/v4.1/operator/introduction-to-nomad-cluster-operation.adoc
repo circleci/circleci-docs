@@ -42,7 +42,7 @@ The get a list of statuses for all jobs in your cluster, run the following comma
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad status
+kubectl exec -it <nomad-server-pod-ID> -- nomad status
 ----
 
 The `Status` is the most important field in the output, with the following status type definitions:
