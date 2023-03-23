@@ -165,7 +165,7 @@ It is possible to specify multiple images for your job. Each image will be used 
 
 Using multiple containers for a job will be useful if you need to use a database for your tests, or for some other required service.
 
-When using a multi-container job setup, all containers run in a common network and every exposed port will be available on `localhost`. All containers can communicate with one another. It is also possible to change this hostname using the `name` key. For a full list of options, see the [Configuration reference](configuration-reference/#docker).
+When using a multi-container job setup, all containers run in a common network and every exposed port will be available on `localhost`. All containers can communicate with one another. It is also possible to change this hostname using the `name` key. For a full list of options, see the [Configuration reference](/configuration-reference/#docker).
 
 **In a multi-image configuration job, all steps are executed in the container created by the first image listed**.
 
