@@ -571,7 +571,7 @@ en:
     children:
       - name: Server v4.1 overview
         children:
-          - name: CircleCI server v4.x overview
+          - name: CircleCI server v4.1 overview
             link: server/v4.1/overview/circleci-server-overview
           - name: Release notes
             link: server/v4.1/overview/release-notes
