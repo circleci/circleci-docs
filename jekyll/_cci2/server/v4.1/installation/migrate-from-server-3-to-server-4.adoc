@@ -100,7 +100,6 @@ helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-v
 ----
 
 NOTE: After server 3.x to 4.x migration, you must rerun the Nomad terraform with the modified value of the `server_endpoint` variable. It should be - `<domain-name>:4647`.
-It should be - <domain-name>:4647
 
 IMPORTANT: When upgrading to CircleCI server v4.0, if your Postgres instance is **not** externalized, the Postgres chart is also upgraded.
 
