@@ -81,7 +81,7 @@ A Nomad job corresponds to an execution of a CircleCI job. Therefore, Nomad job 
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
+kubectl exec -it <nomad-server-pod-ID> -- nomad logs -job -stderr <nomad-job-id>
 ----
 
 NOTE: Be sure to specify the `-stderr` flag, as this is where most Build Agent logs appear.
