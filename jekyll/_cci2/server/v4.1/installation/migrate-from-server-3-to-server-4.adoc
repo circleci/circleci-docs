@@ -176,7 +176,7 @@ Once your helm-value file is verified, run the following commands to upgrade the
 Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
 [source,shell]
 ----
-helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.1 --force
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.2 --force
 ----
 
 [#check-upgrade-status]
