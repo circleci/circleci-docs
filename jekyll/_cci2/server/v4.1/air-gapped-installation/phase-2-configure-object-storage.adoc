@@ -66,7 +66,7 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RE
 
 [#create-release-dir]
 === d. Create a release directory in the circleci-data bucket
-Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In this example, a directory is created at the root of `circleci-data` in MinIO with the following name: `1.0.137184-db08738f`
+Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In this example, a directory is created at the root of `circleci-data` in MinIO with the following name: `1.0.164633-f867f14f`
 
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
@@ -77,7 +77,7 @@ Copy the downloaded `checksums.txt` file (step c) to your virtual environment, a
 [source,shell]
 ----
 # The structure of the directory should now look like this
-1.0.137184-db08738f
+1.0.164633-f867f14f/
 └── checksums.txt
 ----
 
@@ -90,7 +90,7 @@ Within the release directory (step d), create two new nested subdirectories, fir
 [source,shell]
 ----
 # The structure of the directory of the bucket should look like this:
-1.0.137184-db08738f/
+1.0.164633-f867f14f/
 ├── checksums.txt
 └── linux/
     └── amd64/
