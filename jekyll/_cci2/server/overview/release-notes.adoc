@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-Server v4.1 offers the following:
+Server v4.0 offers the following:
 
 * Greatly improved security handling, installation, and update processes.
 * Installed using Helm charts and images that can be pulled ahead of time to comply with your security processes.
