@@ -1,0 +1,90 @@
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|変数
+|VCS
+|タイプ
+|値
+
+|`pipeline.id` |GitHub, Bitbucket |文字列 |A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+
+|`pipeline.number` |GitHub, Bitbucket |整数 |パイプラインを表す、プロジェクトで一意の整数の ID.
+
+|`pipeline.project.git_url` |GitHub, Bitbucket |文字列 |現在のプロジェクトがホストされている URL 。 For example, `https://github.com/circleci/circleci-docs`.
+
+|`pipeline.project.type` |GitHub, Bitbucket |文字列 |The lower-case name of the VCS provider, for example, “github”, “bitbucket”.
+
+|`pipeline.git.tag` |GitHub, Bitbucket |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。
+
+|`pipeline.git.branch` |GitHub, Bitbucket |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。
+
+|`pipeline.git.revision` |GitHub, Bitbucket |文字列 |現在ビルドしている長い git SHA（４０文字）
+
+|`pipeline.git.base_revision` |GitHub, Bitbucket |文字列 |現在ビルドしているものより前のビルドの長い git SHA (40 文字) **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
+
+|`pipeline.in_setup` |GitHub, Bitbucket |ブール値 |True if the pipeline is in the setup phase, for example, running a xref:dynamic-config#[setup workflow].
+
+|`pipeline.trigger_source` |GitHub, Bitbucket |文字列 |The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+
+|`pipeline.schedule.name` |GitHub, Bitbucket |文字列 |パイプラインのスケジュール実行の場合はスケジュール名です。 Value will be empty string if the pipeline is triggered by other sources.
+
+|`pipeline.schedule.id` |GitHub, Bitbucket |文字列 |パイプラインのスケジュール実行の場合は当該スケジュールの一意の ID です。 Value will be empty string if the pipeline is triggered by other sources.
+
+|`pipeline.trigger_parameters.circleci.trigger_id` |GitLab | |イベントを受信したトリガーの ID
+
+|`pipeline.trigger_parameters.circleci.config_source_id` |GitLab | |設定ソースの ID
+
+|`pipeline.trigger_parameters.circleci.trigger_type` |GitLab | |GitLab
+
+|`pipeline.trigger_parameters.circleci.event_time` |GitLab | |CircleCI のイベント受信のタイムスタンプ
+
+|`pipeline.trigger_parameters.circleci.event_type` |GitLab | |push、pull request、manual など
+
+|`pipeline.trigger_parameters.circleci.project_id` |GitLab | |CircleCI のプロジェクト ID
+
+|`pipeline.trigger_parameters.circleci.actor_id` |GitLab | |CircleCI のユーザー ID
+
+|`pipeline.trigger_parameters.gitlab.type` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.project_id` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.ref` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.checkout_sha` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_id` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_name` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_username` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_avatar` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.repo_name` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.repo_url` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.web_url` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_sha` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_title` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_message` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_timestamp` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_author_name` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_author_email` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.total_commits_count` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.branch` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.default_branch` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.x_gitlab_event_id` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.is_fork_merge_request` |GitLab | |See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|===
