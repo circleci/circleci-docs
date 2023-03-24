@@ -20,11 +20,14 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 * xref:first-steps#[Sign in and connect a VCS 👋]
 * Create a repository for link:https://github.com/new[GitHub], link:https://github.com/new[Bitbucket], or link:https://gitlab.com/projects/new[GitLab]
 
+== 1. Connect your code
+
 // step 1
 
 // GitHub
 
 [.tab.quickstart1.GitHub]
+--
 ++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
@@ -32,19 +35,13 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 {% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
 
-{% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
-
+{% include getting-started-section-header.html content=content imagePath=header-banner-1 %}
 
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
 {%- endcapture -%}
 
-{%- capture bitbucket-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
-{%- endcapture -%}
-
-{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
-
+{% include github-banner.html githubPath=github-icon %}
 
 {% capture content %}
 In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click <strong>Set Up Project</strong>.
@@ -57,7 +54,6 @@ Don’t see your repository? Use the org selector in the top left corner to find
 
 {% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
 
-
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
 {% endcapture %}
@@ -67,7 +63,6 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {%- endcapture -%}
 
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
-
 
 {% capture content %}
 You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
@@ -91,9 +86,13 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
 ++++
+--
 
 // Step 1 Bitbucket
+
+
 [.tab.quickstart1.Bitbucket]
+--
 ++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
@@ -101,19 +100,13 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
 
-{% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
-
-
-{%- capture github-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
-{%- endcapture -%}
+{% include getting-started-section-header.html content=content imagePath=header-banner-1 %}
 
 {%- capture bitbucket-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
 {%- endcapture -%}
 
-{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
-
+{% include bitbucket-banner.html bitbucketPath=bitbucket-icon %}
 
 {% capture content %}
 In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click <strong>Set Up Project</strong>.
@@ -126,7 +119,6 @@ Don’t see your repository? Use the org selector in the top left corner to find
 
 {% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
 
-
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
 {% endcapture %}
@@ -136,7 +128,6 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {%- endcapture -%}
 
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
-
 
 {% capture content %}
 You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
@@ -160,9 +151,12 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
 ++++
+--
 
 // Step 1 Gitlab
+
 [.tab.quickstart1.GitLab]
+--
 ++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
@@ -170,19 +164,13 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
 
-{% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
+{% include getting-started-section-header.html content=content imagePath=header-banner-1 %}
 
-
-{%- capture github-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
+{%- capture gitlab-icon -%}
+  {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
 {%- endcapture -%}
 
-{%- capture bitbucket-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
-{%- endcapture -%}
-
-{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
-
+{% include gitlab-banner.html gitlabPath=gitlab-icon %}
 
 {% capture content %}
 In the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click <strong>Set Up Project</strong>.
@@ -195,7 +183,6 @@ Don’t see your repository? Use the org selector in the top left corner to find
 
 {% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
 
-
 {% capture content %}
 In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
 {% endcapture %}
@@ -205,7 +192,6 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {%- endcapture -%}
 
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
-
 
 {% capture content %}
 You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
@@ -229,10 +215,9 @@ You should soon have your first green pipeline. If you are happy with this confi
 
 {% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
 ++++
+--
 
-
-
-// step 2
+// step 2 GitHub
 
 ++++
 {% capture content %} You should see your pipeline start to run automatically—and pass! {% endcapture %}
