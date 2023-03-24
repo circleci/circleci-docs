@@ -215,7 +215,7 @@ postgresql:
 --
 
 [#postgres-tls]
-==== TLS TLS
+==== ii. TLS
 
 Postgres は TLS 暗号化トラフィックを使用するように拡張できます。 内部でデプロイした場合、このオプションはデフォルトでは無効になっていますが、`values.yaml` の postgresql のブロックに以下を追加することにより有効化できます。
 
