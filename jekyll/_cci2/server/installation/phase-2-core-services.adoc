@@ -818,7 +818,7 @@ CircleCI Server will store your generated keyset in a Kubernetes secret. You may
 --
 **Option 1:** Create the Kubernetes Secret yourself
 
-Following the example below, create a kubernetes secret with the name `tink` and a key `keyset`. Apply this secret to the namespace of your CircleCI Server installation.
+Following the example below, create a Kubernetes secret with the name `tink` and a key `keyset`. Apply this secret to the namespace of your CircleCI server installation.
 
 [source,yaml]
 ----
