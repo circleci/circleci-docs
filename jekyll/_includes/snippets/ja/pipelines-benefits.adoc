@@ -1,7 +1,7 @@
-* Trigger a pipeline through the API with the [trigger a pipeline](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint.
-* Use pipeline parameters to trigger [conditional workflows](/docs/pipeline-variables#conditional-workflows).
-* Use `version 2.1` configuration, which provides access to:
-* [Reusable configuration](/docs/reusing-config) elements, including executors, commands and jobs.
+* [パイプラインのトリガー](https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline) エンドポイントを使って API 経由でパイプラインをトリガーする
+* パイプラインのパラメーターを使って [条件付きワークフロー](/docs/pipeline-variables#conditional-workflows) をトリガーする
+* `version 2.1` を使うことで、下記が利用できます。
+* Executor、コマンド、ジョブなどの [再利用可能な設定ファイル](/docs/reusing-config) エレメント
 * Packaged reusable configuration, known as [orbs](/docs/orb-intro).
 * Improved configuration validation error messages.
 * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when new pipelines are triggered on non-default branches (auto-cancel is available for GitHub and Bitbuket users).
