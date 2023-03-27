@@ -801,7 +801,7 @@ tink:
   keyset: ""
 ----
 
-Tink is given precedence over vault. If `tink.enabled` is true, Vault will not be deployed.
+Tink is given precedence over Vault. If `tink.enabled` is true, Vault will not be deployed.
 
 WARNING: Tink or Vault must be set once at install and cannot be changed after deployment.
 
