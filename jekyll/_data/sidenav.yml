@@ -977,9 +977,9 @@ ja:
           - name: CircleCI overview
             i18n_name: CircleCIの概要
             link: ja/about-circleci
-          - name: Benefits of CircleCI
-            link: ja/benefits-of-circleci
-            # i18n_name:
+          # - name: Benefits of CircleCI
+          #   link: ja/benefits-of-circleci
+          #   i18n_name:
           - name: Concepts
             link: ja/concepts
             i18n_name: コンセプト
@@ -1402,9 +1402,9 @@ ja:
       - name: Tutorials
         i18n_name: チュートリアル
         children:
-          - name: Create an orb
-            link: ja/create-an-orb
-            # i18n_name:
+          # - name: Create an orb
+          #   link: ja/create-an-orb
+          #   i18n_name:
           - name: Manually author an orb
             link: ja/orb-author-validate-publish
             i18n_name: Orb を手作業で作成する
@@ -1506,12 +1506,12 @@ ja:
           - name: Use the CLI for config and policy development (Open preview)
             link: ja/use-the-cli-for-config-and-policy-development
             i18n_name: CLIを使用したポリシー作成
-          - name: Config policies for self-hosted runner (Open preview)
-            link: ja/config-policies-for-self-hosted-runner
-            # i18n_name: 
-          - name: Stop building a project on CircleCI
-            link: ja/stop-building-a-project-on-circleci
-            # i18n_name:
+          # - name: Config policies for self-hosted runner (Open preview)
+          #   link: ja/config-policies-for-self-hosted-runner
+          #   i18n_name: 
+          # - name: Stop building a project on CircleCI
+          #   link: ja/stop-building-a-project-on-circleci
+          #   i18n_name:
           - name: Rename organizations and repositories
             link: ja/rename-organizations-and-repositories
             i18n_name: 組織名とリポジトリ名の変更
