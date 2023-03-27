@@ -1347,7 +1347,7 @@ ja:
         i18n_name: インサイトでプロジェクトを監視
         children:
           - name: Use Insights
-            # i18n_name: 概要
+            i18n_name: インサイトの使用
             link: ja/insights
       - name: How-to guides
         i18n_name: ガイド
@@ -1502,7 +1502,7 @@ ja:
             i18n_name: 設定ファイルのポリシーの作成と管理
           - name: Test config policies (Open preview)
             link: ja/test-config-policies
-            # i18n_name:
+            i18n_name: 設定ファイルのポリシーのテスト - オープンプレビュー
           - name: Use the CLI for config and policy development (Open preview)
             link: ja/use-the-cli-for-config-and-policy-development
             i18n_name: CLIを使用したポリシー作成
@@ -1632,7 +1632,7 @@ ja:
         children:
           - name: How to use the CircleCI local CLI
             link: ja/how-to-use-the-circleci-local-cli
-            # i18n_name:
+            i18n_name: CircleCI ローカル CLI の使用方法
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1673,9 +1673,9 @@ ja:
       - name: Run tests
         i18n_name: テストの実行
         children: 
-          - name: Overview
+          - name: Automated testing
             link: ja/test
-            i18n_name: テストの概要
+            i18n_name: テストの自動化
           - name: Collect test data
             link: ja/collect-test-data
             i18n_name: テストデータの収集
