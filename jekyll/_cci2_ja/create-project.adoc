@@ -53,7 +53,7 @@ image::cci-organizations.png[Select Organization]
 +
 CI スターターパイプラインを選択すると、 `config.yml` のサンプルファイルが作成され、リポジトリの `circleci-project-setup` ブランチにコミットされます。
 +
-`config.yml` ファイルの作成については、 <<config-intro#,設定ふファイルの概要>> を参照してください。
+`config.yml` ファイルの作成については、 <<config-intro#,設定ファイルの概要>> を参照してください。
 . 青色の **Set Up Project** ボタンをクリックします。
 
 これで CircleCI は指定された `config.yml` ファイルを使ってパイプラインを実行するようになりました。 その出力は、CircleCI ダッシュボードで確認できます。
