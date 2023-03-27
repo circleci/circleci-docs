@@ -26,12 +26,6 @@ en:
             link: introduction-to-yaml-configurations
           - name: In-app configuration editor
             link: config-editor
-      - name: Languages
-        children:
-          - name: Node quickstart
-            link: language-javascript
-          - name: Python quickstart
-            link: language-python
       - name: VCS integration
         children:
           - name: GitHub integration overview
@@ -64,6 +58,10 @@ en:
         children:
           - name: Quickstart guide
             link: getting-started
+          - name: Node quickstart
+            link: language-javascript
+          - name: Python quickstart
+            link: language-python
           - name: Configuration tutorial
             link: config-intro
           - name: Set up the Slack orb
