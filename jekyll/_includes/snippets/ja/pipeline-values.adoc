@@ -6,13 +6,13 @@
 |タイプ
 |値
 
-|`pipeline.id` |GitHub, Bitbucket |文字列 |A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+|`pipeline.id` |GitHub, Bitbucket |文字列 |パイプラインを表す、link:https://en.wikipedia.org/wiki/Universally_unique_identifier[グローバルに一意のID]。
 
 |`pipeline.number` |GitHub, Bitbucket |整数 |パイプラインを表す、プロジェクトで一意の整数の ID.
 
-|`pipeline.project.git_url` |GitHub, Bitbucket |文字列 |現在のプロジェクトがホストされている URL 。 For example, `https://github.com/circleci/circleci-docs`.
+|`pipeline.project.git_url` |GitHub, Bitbucket |文字列 |現在のプロジェクトがホストされている URL 。 例: `https://github.com/circleci/circleci-docs`
 
-|`pipeline.project.type` |GitHub, Bitbucket |文字列 |The lower-case name of the VCS provider, for example, “github”, “bitbucket”.
+|`pipeline.project.type` |GitHub, Bitbucket |文字列 |VCSプロバイダーの小文字の名前。例："github"、"bitbucket " 
 
 |`pipeline.git.tag` |GitHub, Bitbucket |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。
 
@@ -20,7 +20,7 @@
 
 |`pipeline.git.revision` |GitHub, Bitbucket |文字列 |現在ビルドしている長い git SHA（４０文字）
 
-|`pipeline.git.base_revision` |GitHub, Bitbucket |文字列 |現在ビルドしているものより前のビルドの長い git SHA (40 文字) **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
+|`pipeline.git.base_revision` |GitHub, Bitbucket |文字列 |現在ビルドしているものより前のビルドの長い git SHA (40 文字) 注:  多くの場合、`pipeline.git.base_revision` は、現在実行しているパイプラインより前のパイプラインを実行する SHA ですが、いくつか注意事項があります。 ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
 
 |`pipeline.in_setup` |GitHub, Bitbucket |ブール値 |True if the pipeline is in the setup phase, for example, running a xref:dynamic-config#[setup workflow].
 
