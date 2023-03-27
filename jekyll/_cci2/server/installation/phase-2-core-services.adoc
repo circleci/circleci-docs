@@ -835,7 +835,7 @@ data:
 --
 **Option 2:** CircleCI Server will create the Kubernetes Secret
 
-You may add the keyset to your `values.yaml` under tink as in the example below. CircleCI will generate the needed secret to store your keyset.
+You may add the keyset to your `values.yaml` under `tink` as in the example below. CircleCI will generate the needed secret to store your keyset.
 
 [source,yaml]
 ----
