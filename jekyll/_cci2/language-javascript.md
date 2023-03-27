@@ -1,11 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuring a Node.js Application on CircleCI"
-short-title: "JavaScript"
+title: "Configure a Node.js application on CircleCI"
 description: "Building and Testing with JavaScript and Node.js on CircleCI"
-categories: [language-guides]
-order: 5
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
