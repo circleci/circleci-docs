@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Phase 4 - Post installation
 :page-layout: classic-docs
@@ -329,7 +330,7 @@ velero install \
 +
 For more options on customizing your installation, refer to the https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero documentation].
 
-. **Verify Velero** 
+. **Verify Velero**
 +
 Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, for example:
 +

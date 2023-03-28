@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Managing load balancers
 :page-layout: classic-docs
@@ -19,10 +20,10 @@ The load balancer manages all traffic coming into the application. The load bala
 == Make the frontend load balancer private
 
 [WARNING]
-==== 
-**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, depending on your VCS, for webhooks to work: 
+====
+**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, depending on your VCS, for webhooks to work:
 
-* **GitHub Enterprise** – your CircleCI server installation must be in the same internal network as GHE. 
+* **GitHub Enterprise** – your CircleCI server installation must be in the same internal network as GHE.
 * **GitHub.com** – set up a proxy for incoming webhooks and set it as override for the webhook host URL. This setting can be found in the CircleCI app UI under **Admin Settings** > **System Settings** > **Override webhook host URL**.
 ====
 

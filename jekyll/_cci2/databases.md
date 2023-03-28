@@ -1,10 +1,8 @@
 ---
 layout: classic-docs
-title: "Configuring Databases"
-short-title: "Configuring Databases"
+title: "Configure Databases"
 description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
-order: 35
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
