@@ -1,12 +1,13 @@
 ---
-description: "CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Manage virtual machines with VM Service
 :page-layout: classic-docs
-:page-liquid:
+:page-liquid: CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-description:
 :icons: font
 :toc: macro
 :toc-title:
