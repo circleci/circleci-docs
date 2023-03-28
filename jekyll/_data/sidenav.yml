@@ -58,6 +58,10 @@ en:
             link: migrating-from-travis
       - name: Tutorials
         children:
+          - name: Node quickstart
+            link: language-javascript
+          - name: Python quickstart
+            link: language-python
           - name: Configuration tutorial
             link: config-intro
           - name: Set up the Slack orb
@@ -114,6 +118,8 @@ en:
             link: schedule-pipelines-with-multiple-workflows
           - name: Set a nightly scheduled pipeline
             link: set-a-nightly-scheduled-pipeline
+          - name: Configure databases
+            link: databases
           - name: Migrate from deploy to run
             link: migrate-from-deploy-to-run
       - name: Reference
@@ -457,6 +463,8 @@ en:
             link: examples-and-guides-overview
           - name: Sample config.yml files
             link: sample-config
+          - name: Database examples
+            link: postgres-config
       - name: How-to guides
         children:
           - name: How to use the CircleCI local CLI
@@ -467,22 +475,6 @@ en:
             link: https://circleci.com/docs/api/v2
           - name: API v1 reference
             link: https://circleci.com/docs/api/v1
-
-  - name: Examples and guides
-    icon: icons/sidebar/config.svg
-    children:
-      - name: Languages
-        children:
-          - name: Node
-            link: language-javascript
-          - name: Python
-            link: language-python
-      - name: Databases
-        children:
-          - name: Configuring databases
-            link: databases
-          - name: Database examples
-            link: postgres-config
 
   - name: Test
     icon: icons/sidebar/passed.svg

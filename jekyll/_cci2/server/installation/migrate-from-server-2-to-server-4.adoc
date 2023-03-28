@@ -1,9 +1,9 @@
 ---
 contentTags:
   platform:
-  - Server v2.x
-  - Server v4.x
-  - Server Admin
+    - Server v2.x
+    - Server v4.x
+    - Server Admin
 ---
 = CircleCI Server v2.19 to v4.0 Migration
 :page-layout: classic-docs
