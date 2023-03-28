@@ -1043,6 +1043,12 @@ ja:
           - name: Quickstart guide
             link: ja/getting-started
             i18n_name: スタートガイド
+          - name: Node quickstart
+            link: ja/language-javascript
+            i18n_name: Node クイックスタート
+          - name: Python quickstart
+            link: ja/language-python
+            i18n_name: Python クイックスタート
           - name: Configuration tutorial
             link: ja/config-intro
             i18n_name: 設定ファイル概要
@@ -1125,6 +1131,9 @@ ja:
           - name: Set a nightly scheduled pipeline
             link: ja/set-a-nightly-scheduled-pipeline
             i18n_name: パイプラインのスケジュール実行を夜間に設定する
+          - name: Configure databases
+            link: ja/databases 
+            i18n_name: データベースの設定
           - name: Migrate from deploy to run
             link: ja/migrate-from-deploy-to-run
             i18n_name: deployからrunへの移行
@@ -1619,6 +1628,9 @@ ja:
           - name: Sample config.yml files
             link: ja/sample-config
             i18n_name: 設定ファイルサンプル
+          - name: Database examples
+            link: ja/postgres-cofig
+            i18n_name: データベースの設定例
       - name: How-to guides
         i18n_name: ガイド
         children:
@@ -1634,29 +1646,6 @@ ja:
           - name: API v1.1 Reference
             link: https://circleci.com/docs/api/v1
             i18n_name: API v1.1リファレンス
-
-
-  - name: Examples and guides
-    i18n_name: サンプル
-    icon: icons/sidebar/config.svg
-    children:
-      - name: Languages
-        i18n_name: 言語
-        children:
-          - name: Node
-            link: ja/language-javascript
-          - name: Python
-            link: ja/language-python
-      - name: Databases
-        i18n_name: データベース
-        children:
-          - name: Configuring databases
-            link: ja/databases
-            i18n_name: 設定方法
-          - name: Database examples
-            link: ja/postgres-config
-            i18n_name: 設定例
-
 
   - name: Test
     i18n_name: テスト
