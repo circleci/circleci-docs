@@ -20,7 +20,14 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 * xref:first-steps#[Sign in and connect a VCS 👋]
 * Create a repository for link:https://github.com/new[GitHub], link:https://github.com/new[Bitbucket], or link:https://gitlab.com/projects/new[GitLab]
 
-== 1. Connect your code
+
+{%- capture header-banner-1 -%}
+{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
+{%- endcapture -%}
+
+{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
+
+{% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
 
 // step 1
 
@@ -29,14 +36,6 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 [.tab.quickstart1.GitHub]
 --
 ++++
-{%- capture header-banner-1 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
-{%- endcapture -%}
-
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
-
-{% include getting-started-section-header.html content=content imagePath=header-banner-1 %}
-
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
 {%- endcapture -%}

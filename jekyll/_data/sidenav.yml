@@ -22,10 +22,8 @@ en:
         children:
           - name: Sign up and try
             link: first-steps
-          - name: Quickstart guide (GitHub/Bitbucket)
+          - name: Quickstart guide
             link: getting-started
-          - name: Quickstart guide (GitLab)
-            link: getting-started-gitlab
           - name: YAML configuration intro
             link: introduction-to-yaml-configurations
           - name: In-app configuration editor
