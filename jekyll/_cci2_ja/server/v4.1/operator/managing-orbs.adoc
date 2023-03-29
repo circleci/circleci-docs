@@ -19,7 +19,7 @@ Orb と 関連するユースケースについては、 xref:../../../orb-intro
 
 Orb の作成に関する情報は、 xref:../../../orb-author-intro#[Orb の作成概要] を参照してください。
 
-Orb には、 xref:../../local-cli#[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 また、 xref:../../managing-api-tokens#[パーソナル API トークン] が必要です。
+Orb には、 xref:../../../local-cli#[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 また、 xref:../../../managing-api-tokens#[パーソナル API トークン] が必要です。
 
 必ずユーザーアカウントが管理者になった _後で_ 生成されたパーソナル API トークンを使用してください。
 
