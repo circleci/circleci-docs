@@ -11,16 +11,15 @@ contentTags:
 :toc: macro
 :toc-title:
 
-The CircleCI VS Code extension helps you avoid context-switching between VS Code and your browser.
+The CircleCI VS Code extension enables users to manage their CircleCI pipelines directly from VS Code. 
 
 [#introduction]
 == Introduction
 
-The extension enables users to identify and address issues that require immediate attention by bringing key pipeline status information to VS Code.
+The VS Code extension includes:
 
-- Save time when writing your config file thanks to **the Config Helper**
-
-- Take important actions on your pipelines and get live updates on your pipelines thanks to **the Pipeline Manager**
+- The **Pipeline Manager**, which displays pipeline status live within the IDE. The pipeline manager allows you to identify issues and take immediate action on your pipelines without context-switching between VS Code and your browser.
+- The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
 
 [#install-the-vs-code-extension]
 == Install the VS Code extension
