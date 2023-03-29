@@ -20,7 +20,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 * xref:first-steps#[Sign in and connect a VCS 👋]
 * Create a repository for link:https://github.com/new[GitHub], link:https://github.com/new[Bitbucket], or link:https://gitlab.com/projects/new[GitLab]
 
-
+++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
@@ -28,6 +28,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 {% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
+++++
 
 // step 1
 
@@ -36,6 +37,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 [.tab.quickstart1.GitHub]
 --
 ++++
+
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
 {%- endcapture -%}
@@ -64,7 +66,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
+You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
 <br>
 <br>
 This will create a .circleci/config.yml file at the root of your repository on a new branch called “circleci-project-setup”.
@@ -93,14 +95,6 @@ You should soon have your first green pipeline. If you are happy with this confi
 [.tab.quickstart1.Bitbucket]
 --
 ++++
-{%- capture header-banner-1 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
-{%- endcapture -%}
-
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, and view the pipeline and see it pass. {% endcapture %}
-
-{% include getting-started-section-header.html content=content imagePath=header-banner-1 %}
-
 {%- capture bitbucket-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
 {%- endcapture -%}
@@ -157,14 +151,6 @@ You should soon have your first green pipeline. If you are happy with this confi
 [.tab.quickstart1.GitLab]
 --
 ++++
-{%- capture header-banner-1 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
-{%- endcapture -%}
-
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, view the pipeline and see it pass. {% endcapture %}
-
-{% include getting-started-section-header.html content=content imagePath=header-banner-1 %}
-
 {%- capture gitlab-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
 {%- endcapture -%}
@@ -278,10 +264,6 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 {%- endcapture -%}
 
 {% include two-up.html title="3. Collaborate with teammates" content=content imageURL=collab-with-team imageAlt="Add Team Members" %}
-
-++++
-
-++++
 
 {% capture content %} We recommend inviting your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster. You can also: {% endcapture %}
 
