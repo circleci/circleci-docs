@@ -1,10 +1,11 @@
 ---
 
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
-= オペレーターの概要
+= Operator overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI Server のインストールの管理における様々なタスクとツールについて説明します。
