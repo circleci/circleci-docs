@@ -79,7 +79,7 @@ object_storage:
     secretKey: <minio-root-password>
 ----
 
-NOTE: Update the endpoint protocol to http or https depending on your MinIO installation.
+NOTE: Update the endpoint protocol to `http` or `https` depending on your MinIO installation.
 
 
 === d. Configure MinIO Build Agent
@@ -94,7 +94,7 @@ distributor:
 
 NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
 
-NOTE: Update the protocol to http or https depending on your MinIO installation.
+NOTE: Update the protocol to `http` or `https` depending on your MinIO installation.
 
 
 [#configure-build-agent-image]

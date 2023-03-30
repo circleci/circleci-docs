@@ -38,7 +38,7 @@ Copy the latest CircleCI build agent into MinIO within your air-gapped environme
 
 [#download-latest-release-txt]
 === a. Download the latest release.txt file
-Download the latest https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
+Download the latest link:https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
 
 [source, bash]
 ----
