@@ -218,11 +218,11 @@ Update the helm value file with generated Certificates and Keys (base64 encoded)
 [#validate-your-migration-to-server-4]
 === 10. Validate your migration to server v4.x
 
-Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
+Re-run link:https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
 
 [#update-your-team]
 === 11. Update your team
-Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
+Once you have successfully run link:https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
 notify your team about the upgrade.
 
 ifndef::pdf[]

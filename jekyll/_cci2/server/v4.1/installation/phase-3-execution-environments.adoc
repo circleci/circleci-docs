@@ -146,7 +146,7 @@ Create an IAM user or role and policy for Nomad Autoscaler. You may take **one**
 
 * The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access and secret key will be available in Terraform's output.
 * Create a Nomad Autoscaler IAM user manually with the <<iam-policy-for-nomad-autoscaler,IAM policy below>>. Then, generate an access and secret key for this user.
-* You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
+* You may create a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
 
 When using access and secret keys, you have two options for configuration:
 
@@ -412,7 +412,7 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 [#nomad-clients-validation]
 === 3. Nomad Clients Validation
 
-CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red (fail) to green (pass).
+CircleCI has created a project called link:https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red (fail) to green (pass).
 
 Before running realitycheck, check if the Nomad servers can communicate with the Nomad clients by executing the below command.
 
@@ -449,7 +449,7 @@ git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions please see the https://github.com/circleci/realitycheck#prerequisites-1[repository readme].
+Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions please see the link:https://github.com/circleci/realitycheck#prerequisites-1[repository readme].
 
 .Environmental Variables
 [.table.table-striped]
@@ -542,7 +542,7 @@ Use the security group you just created, and your CIDR block values, to apply th
 aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
 ----
 +
-For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the Nomad clients, find the subnet cidr block and add two rules with the following commands.
+For each link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the Nomad clients, find the subnet cidr block and add two rules with the following commands.
 +
 [source,shell]
 ----
@@ -578,7 +578,7 @@ There are two ways to authenticate CircleCI with your cloud provider: IAM Roles 
 
 [.tab.vmauthaws.IRSA]
 --
-The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
+The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
 
 . *Create indentity provider*
 +
@@ -799,7 +799,7 @@ Create a new user with programmatic access:
 aws iam create-user --user-name circleci-vm-service
 ----
 +
-Optionally, vm-service does support the use of a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
+Optionally, vm-service does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
 Once done, you may skip to step 9, enabling vm-service.
 +
 . *Create policy*
@@ -1045,7 +1045,7 @@ Choose one of the following options, depending on whether your are using Workloa
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identities-in-gke-optional[Phase 1 - Prerequisites].
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:../../../server-3-install-prerequisites/index.html#enabling-workload-identities-in-gke-optional[Phase 1 - Prerequisites].
 
 [source,shell]
 ----
