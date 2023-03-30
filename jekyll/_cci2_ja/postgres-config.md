@@ -140,7 +140,7 @@ jobs:
 ## Go アプリケーションと PostgreSQL の設定例
 {: #example-go-app-with-postgresql }
 
-以下の設定例に関する詳しい説明や、アプリケーションのパブリックコードリポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/language-go/)を参照してください。
+以下の設定例に関する詳しい説明や、アプリケーションのパブリックコードリポジトリについては、[Go 言語ガイド](https://github.com/CircleCI-Public/circleci-demo-go)を参照してください。
 
 ```yaml
 version: 2
@@ -329,8 +329,8 @@ workflows:
 {:.tab.mysql_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:

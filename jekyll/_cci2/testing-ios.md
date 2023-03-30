@@ -26,7 +26,7 @@ There is documentation for [iOS code signing projects](/docs/ios-codesigning/) a
 
 {% include snippets/xcode-intel-vm.md %}
 
-### Supported Xcode versions for Apple Silicon
+### Supported Xcode versions for Apple silicon
 {: #supported-xcode-versions-silicon}
 
 {% include snippets/xcode-silicon-vm.md %}

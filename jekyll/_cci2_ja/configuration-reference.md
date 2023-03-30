@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
 title: CircleCI の設定
-short-title: CircleCI の設定
 description: .circleci/config.yml に関するリファレンス
-order: 20
-redirect_from: /ja/configuration/
 readtime: false
 contentTags:
   platform:
@@ -415,19 +412,19 @@ sectionTags:
     - "#tags"
     - "#example-full-configuration"
 suggested:
-  - 
+  -
     title: 最適化するための 6 つのヒント
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
-  - 
+  -
     title: ダイナミックコンフィグの紹介
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - 
+  -
     title: ダイナミックコンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: ローカル CLI を使用した設定の確認
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: ジョブをトリガーする方法
     link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
@@ -908,14 +905,14 @@ CircleCI は [macOS](https://developer.apple.com/jp/macos/) 上でのジョブ�
 | xcode | ○  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。全リストは、 [iOS のテストのサポートされている Xcode のバージョン]({{ site.baseurl }}/ja/using-macos/#supported-xcode-versions)でご確認ください。 |
 {: class="table table-striped"}
 
-例: macOS 仮想マシンを Xcode バージョン 12.5.1 で使用する場合
+例: macOS 仮想マシンを Xcode バージョン 14.2.0 で使用する場合
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
+      xcode: "14.2.0"
 ```
 
 ---
@@ -1035,10 +1032,10 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
     steps:
-      ... // その他の設定
+      ... // other config
 ```
 
 ---
@@ -1066,7 +1063,7 @@ orbs:
 
 jobs:
   build: # name of your job
-    executor: 
+    executor:
       name: win/default # executor type
       size: medium # can be medium, large, xlarge, 2xlarge
 
@@ -2449,7 +2446,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
 
 jobs:
   test:

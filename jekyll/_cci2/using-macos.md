@@ -26,9 +26,17 @@ jobs:
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
+### Supported Xcode versions for Intel
+{: #supported-xcode-versions-intel}
+
 {% include snippets/xcode-intel-vm.md %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
+### Supported Xcode versions for Apple silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
+
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
 
 ## Available resource classes
 {: #available-resource-classes }
@@ -66,9 +74,9 @@ To read about CircleCI's customer support policy regarding beta images, please c
 ### Apple silicon support
 {: #apple-silicon-support }
 
-It is possible to build Apple Silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
+Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using [CircleCI runner]({{site.baseurl}}/runner-overview/#available-self-hosted-runner-platforms).
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts]({{site.baseurl}}/artifacts/) for testing apps locally. Alternatively, [CircleCI runner]({{site.baseurl}}/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
+It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
 ## Xcode Cross Compilation
 {: #xcode-cross-compilation }

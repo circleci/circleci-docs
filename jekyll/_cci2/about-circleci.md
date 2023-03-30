@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
-title: What is continuous integration?
-description: What is continuous integration and continuous delivery?
-categories: [getting-started]
+title: CircleCI overview
+description: An overview of CircleCI, continuous integration and continuous delivery
 contentTags:
   platform:
   - Cloud

@@ -250,6 +250,21 @@ To enable a rule, add the rule as a key in the `enable_rule` object. For example
 enable_rule["use_official_docker_image"]
 ----
 
+Use `enable_hard` to enable a rule and set its enforcement level to `hard` in a single statement.
+
+The following statements are equivalent:
+[source,rego]
+----
+enable_hard["use_official_docker_image"]
+----
+
+[source,rego]
+----
+enable_rule["use_official_docker_image"]
+
+hard_fail["use_official_docker_image"]
+----
+
 [#using-pipeline-metadata]
 === Using pipeline metadata
 
@@ -353,9 +368,7 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
                           path[_] == "docker"         # find any settings that match 'docker'
                           image := value[_].image}    # grab the images from that section
 
-hard_fail["use_official_docker_image"]
-
-enable_rule["use_official_docker_image"]
+enable_hard["use_official_docker_image"]
 ----
 
 [#next-steps]

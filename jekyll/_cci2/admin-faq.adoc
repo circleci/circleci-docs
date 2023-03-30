@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-2-eol-banner.adoc[]
+{% include snippets/server-2-eol-banner.adoc %}
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 

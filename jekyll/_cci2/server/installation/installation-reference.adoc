@@ -846,12 +846,12 @@ a|AWS Authentication Config.
 |`true`
 |
 
-|`postgresql.persistence.existingClaim`
+|`postgresql.primary.persistence.existingClaim`
 |string
 |`""`
 |
 
-|`postgresql.persistence.size`
+|`postgresql.primary.persistence.size`
 |string
 |`"8Gi"`
 |

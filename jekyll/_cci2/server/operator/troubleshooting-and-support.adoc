@@ -26,7 +26,7 @@ To generate a support bundle, follow the steps below.
 
 [source,bash]
 ----
-# To check if you have access to cluster/namespace 
+# To check if you have access to cluster/namespace
 kubectl -n <namespace> get pods
 ----
 
@@ -104,8 +104,3 @@ To restart specific pods, the easiest way is remove the pod. Kubernetes automati
 ----
 kubectl delete pod <pod-name> -n <name-space> --now
 ----
-
-[#debug-queuing-builds]
-== Debug queuing builds
-For troubleshooting information on debugging queued builds, see the Server 2.x
-https://circleci.com/docs/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
