@@ -1,13 +1,14 @@
 ---
 
-description: "CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。"
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
-= CircleCI Server v4.x の概要
+= CircleCI server v4.x overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
 :toc: macro
 
@@ -73,13 +74,6 @@ CircleCI Server アプリケーションは、1 つのロードバランサー�
 |インバウンド
 |エンドユーザー
 |HTTP Web アプリケーショントラフィック
-|
-
-|8800
-|TCP
-|インバウンド
-|管理者
-|管理者コンソール
 |
 
 |22
@@ -218,7 +212,7 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 |
 |
 
-|kong
+|Kong
 |アプリコア
 |API の管理
 |
@@ -230,7 +224,7 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 |
 |
 
-|nginx
+|NGINX
 |アプリコア/ フロントエンド
 |トラフィックのリダレクトと受信を処理します。
 |
@@ -351,11 +345,11 @@ CircleCI では、インストールするプラットフォームを幅広く�
 |備考
 
 |EKS
-|テスト済み
+|Tested
 |
 
 |GKE
-|テスト済み
+|Tested
 |
 
 |Azure
