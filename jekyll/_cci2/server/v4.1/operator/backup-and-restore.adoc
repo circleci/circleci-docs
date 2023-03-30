@@ -19,7 +19,7 @@ While operating and administering CircleCI server, you will need to consider how
 
 This document outlines recommendations for how to back up and restore your CircleCI server instance data and state. For setup instructions see xref:../installation/phase-4-post-installation#backup-and-restore[Phase 4 – Post installation].
 
-CircleCI recommends https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
+CircleCI recommends link:https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
 but it also restores the state of the Kubernetes cluster and its resources at the time of the backup. Setup and install of Velero is covered in the xref:../installation/phase-4-post-installation#backup-and-restore[server v4.x installation guide].
 
 NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
@@ -53,7 +53,7 @@ velero restore create --include-namespaces <circleci-namespace> --from-backup <b
 [#scheduling-backups]
 == Scheduling backups
 
-See https://velero.io/docs/main/backup-reference/[Velero's documentation] on creating scheduled backups.
+See link:https://velero.io/docs/main/backup-reference/[Velero's documentation] on creating scheduled backups.
 
 [#troubleshooting-backup]
 == Troubleshooting

@@ -22,7 +22,7 @@ Best practice is to make as many of the resources as private as possible. If you
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
 
-NOTE: An NGINX reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
+NOTE: An NGINX reverse proxy is placed infront of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
 
 CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
 
@@ -120,9 +120,9 @@ By default, the traffic within your Kuberntes cluster is regulated by networking
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 
-* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
-* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
-* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
+* link:https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
+* link:https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
+* link:https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
 
 [#ingress-kubernetes]
 === Ingress
@@ -264,7 +264,7 @@ Communication to start a virtual machine (VM), and run a job, occurs in two stag
 
 [#private-ips-only]
 === Private IPs only
-When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
+When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
 
 Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
 

@@ -20,8 +20,8 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 == 1. Install Docker and Nomad
 Install the following two prerequisites on each instance designated as a Nomad client:
 
-- https://docs.docker.com/get-docker/[An installation of Docker]
-- https://developer.hashicorp.com/nomad/docs/install[An installation of Nomad]
+- link:https://docs.docker.com/get-docker/[An installation of Docker]
+- link:https://developer.hashicorp.com/nomad/docs/install[An installation of Nomad]
 
 
 [#create-nomad-directories]

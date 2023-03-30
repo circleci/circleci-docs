@@ -119,7 +119,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 
 [#backing-up-postgresql]
 === Backing Up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
+PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found link:https://www.postgresql.org/docs/12/backup.html[here].
 
 We strongly recommend the following:
 
