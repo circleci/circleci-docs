@@ -1,14 +1,14 @@
 ---
-layout: classic-docs
-title: "スタートガイド"
-short-title: "スタートガイド"
-description: "CircleCI を使用してはじめてビルドを成功させるためのチュートリアル"
-categories:
-  - はじめよう
-order: 41
-toc: false
+contentTags:
+  platform:
+  - Cloud
 ---
+= スタートガイド
+:page-layout: classic-docs
+:page-description: CircleCI を使用してはじめてビルドを成功させるためのチュートリアル
+:page-liquid:
 
+++++
 {% capture content %}
 継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
 {% endcapture %}
@@ -199,3 +199,4 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 {% capture content7 %}CircleCI Free プランのメリット{% endcapture %}
 
 {% include getting-started-links.html title="開発者向け資料" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/ja/config-intro/" href6="https://circleci.com/docs/ja/concepts/" href7="https://circleci.com/docs/ja/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
+++++

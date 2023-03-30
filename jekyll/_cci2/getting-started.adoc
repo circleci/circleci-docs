@@ -33,20 +33,15 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
 {%- endcapture -%}
 
-{% include github-banner.html githubPath=github-icon %}
-
 {%- capture bitbucket-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
 {%- endcapture -%}
-
-{% include bitbucket-banner.html bitbucketPath=bitbucket-icon %}
 
 {%- capture gitlab-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
 {%- endcapture -%}
 
-{% include gitlab-banner.html gitlabPath=gitlab-icon %}
-
+{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 ++++
 
 // step 1
@@ -81,11 +76,11 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
 <br>
 <br>
-This will create a .circleci/config.yml file at the root of your repository on a new branch called “circleci-project-setup”.
+This will create a .circleci/config.yml file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor.png
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor-2.png
 {%- endcapture -%}
 
 {% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
@@ -129,11 +124,11 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b> This will create a .circleci/config.yml file at the root of your repository on a new branch called “circle-ci-setup”.
+You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b> This will create a .circleci/config.yml file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor.png
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor-2.png
 {%- endcapture -%}
 
 {% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
