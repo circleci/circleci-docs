@@ -31,6 +31,14 @@ Server v4.x では:
 
 アップグレード手順については、 link:/docs/server/installation/upgrade-server-4[Server v4 へのアップグレードガイド] を参照してください。
 
+[#release-4-0-2]
+== リリース 4.0.2
+
+[#changelog-4-0-2]
+=== 更新履歴
+
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#リリース-4-0-2[更新履歴] を参照して下さい。
+
 [#release-4-0-1]
 == リリース 4.0.1
 

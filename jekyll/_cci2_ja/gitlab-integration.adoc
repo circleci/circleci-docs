@@ -1,4 +1,5 @@
 ---
+
 contentTags:
   platform:
   - クラウド
@@ -9,6 +10,7 @@ contentTags:
 :page-description: GitHub と CircleCI の連携方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 [#overview]
@@ -36,7 +38,6 @@ NOTE: 設定するレポジトリへの API アクセスと書き込みアクセ
 - Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
 
 組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/ja/requests/new[サポートチーム] にお問い合わせください。
-
 ====
 
 [#step-two-trigger-pipeline]
@@ -47,7 +48,6 @@ NOTE: 設定するレポジトリへの API アクセスと書き込みアクセ
 . まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
 +
 NOTE: CircleCI を初めて利用される方は、最初は <<hello-world#echo-hello-world-on-linux#,Hello World>> サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
-
 . GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されます。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
@@ -86,6 +86,8 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configu
 [#triggers]
 === トリガー
 
+**現時点ではパイプラインのスケジュール実行機能は、GitLab では使用できません。** GitLab のトリガーについては以下をお読みください。フィルタリング機能を使って特定の条件に基づいてパイプラインをトリガーする方法も紹介します。
+
 パイプラインを開始する設定ソースを指定するトリガーを追加します。 上記の手順で GitLab を接続したお客様は、GitLab を設定ソースとして設定されたトリガーが自動的に追加されています。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
@@ -97,6 +99,8 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-trigger
 設定ソースに加えて、各トリガーには Webhook の URL や、このシナリオでは、CircleCI が作成した GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するには、GitLab 内で Webhook URLと GitLab トークンを使用して、Webhook をセキュアに登録します。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
+
+
 
 **トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
 
@@ -140,11 +144,9 @@ NOTE: 少なくとも１名の組織管理者が必要です。 最後の組織�
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-people.png[People section under Organization Settings]
 
 . **Invite** ボタンをクリックします。
-
 . 招待したいユーザーのメールアドレスを入力し、適切なロールを選択します。 複数のユーザーに同じロールをアサインする場合は、複数のアドレスを同時に入力できます。
 +
 現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 ロールや権限の詳細については、<<#about-roles-and-permissions,次のセクション>> を参照してください。
-
 . 招待されたユーザーは、招待を受けるためのリンクが含まれたメール通知 (`noreply@circleci.com` から送信) を受け取ります。
 +
 ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
@@ -165,8 +167,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 [cols=4*, options="header"]
 |===
 |アクション
-
-3+^|組織のロール
+|組織のロール
 
 |
 |*Admin*
@@ -179,82 +180,82 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|名前空間の作成
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|名前空間の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織設定の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織設定の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織のアクセス権の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織のアクセス権の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織の認証情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織のポリシーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織のポリシーの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織の連携情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織の連携情報の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織のリリース情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|組織の認証情報の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織の監査ログの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プランの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プランの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -264,7 +265,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|組織の Insights の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
@@ -274,12 +275,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|ランナーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|ランナーの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -289,30 +290,29 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|プロジェクトの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトの作成
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクト設定の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プロジェクトのバージョンの復元
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プロジェクトのカナリアの削除
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
-
 
 |*コンテキスト*
 |
@@ -320,22 +320,22 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|コンテキストの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|コンテキストの使用
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|コンテキストの変数の編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|コンテキストの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -345,22 +345,22 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|Orb の作成/更新
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プライベート Orb の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|開発版 Orb のパブリッシュ
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|Orb のパブリッシュ
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -370,22 +370,22 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|組織の Webhook の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|組織の Webhook の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プロジェクトの Webhook の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクトの Webhook の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -395,12 +395,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|スケジュールの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|スケジュールの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -410,17 +410,17 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|トリガーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|ビルドのトリガー
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|トリガーの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -430,17 +430,15 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|設定ファイルソースの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|設定ファイルソースの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
-
 |===
-
 
 [#project-role-permissions-matrix]
 === プロジェクトのロールと権限のマトリックス
@@ -449,8 +447,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 [cols=4*, options="header"]
 |===
 |アクション
-
-3+^|プロジェクトのロール
+|プロジェクトのロール
 
 |
 |*Admin*
@@ -463,32 +460,32 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|プロジェクトの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトのアクセス権の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトの認証情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトのバージョンの復元
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクトのカナリアの削除
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクトの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -498,12 +495,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|プロジェクトの Webhook の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトの Webhook の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -513,12 +510,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|スケジュールの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|スケジュールの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -528,17 +525,17 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|トリガーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|ビルドのトリガー
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|トリガーの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -548,15 +545,14 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|設定ファイルソースの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|設定ファイルソースの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
-
 |===
 
 [#user-settings]
@@ -577,8 +573,8 @@ CircleCI で複数のアカウント連携ができることにより、以下�
 [#pipeline-values]
 == パイプライン値
 
-GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用について詳しくは、
-<<pipeline-variables#,パイプライン値とパラメーター>> を参照して下さい。
+GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用に関する詳細は、
+<<pipeline-variables#,パイプラインの値とパラメーター>> を参照して下さい。 **パイプラインのスケジュール実行機能は現時点では GitLab ユーザーはご利用いただけません。**
 
 [.table.table-striped]
 [cols=2*, options="header"]

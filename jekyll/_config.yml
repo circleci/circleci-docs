@@ -23,6 +23,7 @@ exclude:
 plugins:
   - jekyll-sitemap
   - jekyll-asciidoc
+  - jekyll-last-modified-at
 
 # Approximate distance, with customizable threshold,
 # ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
@@ -65,6 +66,7 @@ server-attributes: &server
   relfilesuffix: /
   outfilesuffix: /index.html
   serverversion4: 4.0.1
+  serverversion41: 4.1.0
   serverversion: 3.4.5
   terraformversion: 0.15.4
   kubectlversion: 1.19
