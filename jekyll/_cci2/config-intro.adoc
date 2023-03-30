@@ -366,7 +366,7 @@ In this example, you have:
 
 Using what you have learned above, you are ready to create some powerful pipelines.
 
-[#vs-code-extension]
+[#visual-studio-code-extension]
 ## VS Code extension
 
 If you are a VS Code user, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
