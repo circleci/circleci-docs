@@ -511,6 +511,6 @@ ifndef::pdf[]
 
 * xref:hardening-your-cluster#[クラスタのハードニング]
 * xref:migrate-from-server-3-to-server-4#[Server v4.x への移行]
-* xref:backup-and-restore#[バックアップと復元]
+* xref:../operator/backup-and-restore#[バックアップと復元]
 +
 endif::[]
