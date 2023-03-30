@@ -146,7 +146,7 @@ We recommend first creating a namespace (`circleci-server`) and deploying the ch
 
 [source,bash,subs=attributes+]
 ----
-helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version 4.1.0 -f <path-to-values.yaml>
+helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version 4.1.1 -f <path-to-values.yaml>
 ----
 
 [#post-install-circleci-server-helm-airgap]

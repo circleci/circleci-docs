@@ -33,6 +33,14 @@ Find information about migration in the following guides:
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4 guide].
 
+[#release-4-1-1]
+== Release 4.1.1
+
+[#changelog-4-1-1]
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-4-1-1[changelog].
+
 [#release-4-1-0]
 == Release 4.1.0
 
