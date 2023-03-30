@@ -92,7 +92,7 @@ In both cases, you will be presented with two options:
 
 This feature requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on Remote Development using SSH in VS Code directly in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
 
-To rerun your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the extension settings.
+To re-run your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the extension settings.
 
 If the job you want to re-run uses parallelism, you will be able to select which parallel run you want to SSH into.
 
@@ -104,7 +104,7 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png[Scree
 
 If you are not following a workflow in the pipelines panel, you cannot be notified about a status change event. For instance, if you have set the extension to follow only the current branch, you cannot be notified of status changes for other branches.
 
-NOTE: We do not recommend enabling notifications for a status change event to “Running”.
+NOTE: We do not recommend enabling notifications for a status change event of “Running”.
 
 [#status-bar]
 === Status Bar
@@ -134,7 +134,7 @@ The VS Code extension also provides in-file contextual help for your CircleCI co
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
 
-- **Contextual documentation and usage hints when hovering on specific keys.** This helps you avoid you having to frequently switch to your browser to check the documentation when editing your configuration. Links to the official CircleCI docs are also provided on hover, for easier navigation.
+- **Contextual documentation and usage hints when hovering on specific keys.** This helps you avoid having to frequently switch to your browser to check the documentation when editing your configuration. Links to the official CircleCI docs are also provided on hover, for easier navigation.
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_on-hover-documentation.png[Screenshot showing the contextual information on hover]
 
@@ -175,7 +175,7 @@ Both of these commands can be invoked by:
 //TODO: Verify we need an additional section for the language server or if 
 //the banner earlier in the config helper section is sufficient
 [#open-source-language-server]
-==== Open source language server
+=== Open source language server
 
 The capabilities of the VS Code extension are open to all code editors. You can fork the 
 link:https://github.com/CircleCI-Public/circleci-yaml-language-server[GitHub repository] if you wish to build an extension for your favorite editor.
