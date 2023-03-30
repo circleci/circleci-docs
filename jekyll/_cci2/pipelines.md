@@ -29,7 +29,7 @@ The output of each job can be opened in a new tab (in either raw or formatted st
 ## VS Code extension
 {: #visual-studio-code-extension }
 
-If you use Visual Studio Code, you can also monitor and interact with your pipelines directly from VS Code with [official CircleCI extension](/vs-code-extension-overview/). The extension allows you to customize which projects and pipelines you want to follow, as well as view job logs and test results, download artifacts, approve jobs, re-run builds, and get notified when your workflows fail or need approval.
+If you use Visual Studio Code, you can also monitor and interact with your pipelines directly from VS Code with [official CircleCI extension](/docs/vs-code-extension-overview/). The extension allows you to customize which projects and pipelines you want to follow, as well as view job logs and test results, download artifacts, approve jobs, re-run builds, and get notified when your workflows fail or need approval.
 
 ![Screenshot showing the detailed view of a failed test](/docs/assets/img/docs/vs_code_extension_job-details.png)
 
