@@ -129,7 +129,9 @@ en:
           - name: Troubleshoot
             link: troubleshoot
 
-  - name: Execution environments
+
+
+  - name: Execute jobs on managed compute resources
     icon: icons/sidebar/builds.svg
     children:
       - name: Overview
@@ -164,7 +166,6 @@ en:
             link: using-linuxvm
           - name: Android machine image
             link: android-machine-image
-
       - name: macOS
         children:
           - name: Using macOS
@@ -183,16 +184,20 @@ en:
             link: using-windows
           - name: Hello world
             link: hello-world-windows
-      - name: GPU
-        children:
-          - name: Using GPUs
-            link: using-gpu
       - name: Arm
         children:
           - name: Using Arm
             link: using-arm
+      - name: GPU
+        children:
+          - name: Using GPUs
+            link: using-gpu
 
-      - name: Self-hosted runner
+
+  - name: Execute job on self-hosted runners
+    icon: icons/sidebar/build-agent.svg
+    children:
+      - name: Overview
         children:
           - name: Self-hosted runner overview
             link: runner-overview
@@ -228,9 +233,6 @@ en:
             link: runner-upgrading-on-server
           - name: Machine runner configuration reference
             link: runner-config-reference
-
-          - name: Migrate from deploy to run
-            link: migrate-from-deploy-to-run
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
