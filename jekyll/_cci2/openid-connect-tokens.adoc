@@ -176,31 +176,39 @@ You can take advantage of the format of the claims in CircleCI's <<format-of-the
 
 To do this, edit your IAM role's trust policy so that only an OIDC token from your chosen project can assume that role. The trust policy determines under what conditions the role can be assumed.
 
-To do this, go to an individual project's page on https://app.circleci.com/[CircleCI web app] and navigate to **Project Settings > Overview** to find your Project ID.
+. Go to an individual project's page on https://app.circleci.com/[CircleCI web app] and navigate to **Project Settings > Overview** to find your Project ID.
 
-Next, add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `ORGANIZATION_ID` and your Project ID for `PROJECT_ID`.
-
+. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `ORGANIZATION_ID` and your Project ID for `PROJECT_ID`.
++
 ```yaml
 "StringLike": {
   "oidc.circleci.com/org/ORGANIZATION_ID:sub": "org/ORGANIZATION_ID/project/PROJECT_ID/user/*"
 }
 ```
-
++
 This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the sub claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
 
-If you want to restrict multiple IAM roles to jobs in a specific project, you could also add another value to the condition block in each role's trust policy. 
+You can also restrict access to specific branches. The following is an example that restricts the `AssumeRoleWithWebIdentity` action to any project pipelines running only on the `main` branch in the `my-org` GitHub organization and `6b376885-8f20-45b2-ba2f-c27c0919bc6d` CircleCI organization. 
 
 ```json
-"Action": "sts:AssumeRoleWithWebIdentity",
-"Condition": {
-    "StringLike": {
-        "oidc.circleci.com:aud": "5fad0abe-723c-11ed-a1eb-0242ac120002",
-        "oidc.circleci.com:sub": "org/5fad0abe-723c-11ed-a1eb-0242ac120002/project/6b28c478-723c-11ed-a1eb-0242ac120013/user/*"
-    }
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::269508603282:oidc-provider/oidc.circleci.com/org/6b376885-8f20-45b2-ba2f-c27c0919bc6d"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringLike": {
+                    "oidc.circleci.com/org/6b376885-8f20-45b2-ba2f-c27c0919bc6d:sub": "org/6b376885-8f20-45b2-ba2f-c27c0919bc6d/project/*/user/*/vcs-origin/github.com/my-org/*/vcs-ref/refs/heads/main"
+                }
+            }
+        }
+    ]
 }
 ```
-
-In this snippet, the `AssumeRoleWithWebIdentity` action can only be called by jobs in the project `6b28c478-723c-11ed-a1eb-0242ac120013` in the `5fad0abe-723c-11ed-a1eb-0242ac120002` org.
 
 [#google-cloud-platform]
 === Google Cloud Platform
