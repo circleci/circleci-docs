@@ -44,7 +44,11 @@ CircleCI に無料でユーザー登録する
   {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
 {%- endcapture -%}
 
-{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
+{%- capture gitlab-icon -%}
+  {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
+{%- endcapture -%}
+
+{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 
 {% capture content %}
 GitHub または Bitbucket で “hello-world” というリポジトリを作成します。 次に左側のメニューで、<a  href="https://app.circleci.com/projects">Projects</a>を選択します。 リポジトリを探し、Set Up Project をクリックします。 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
