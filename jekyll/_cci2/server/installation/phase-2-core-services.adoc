@@ -841,7 +841,7 @@ You may add the keyset to your `values.yaml` under `tink` as in the example belo
 ----
 tink:
   enabled: false
-  keyset: "<your-keyset"
+  keyset: "<your-keyset>"
 ----
 --
 
