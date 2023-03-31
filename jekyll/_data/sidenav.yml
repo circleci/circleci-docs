@@ -1275,6 +1275,9 @@ ja:
           - name: CLI installation
             link: ja/runner-installation-cli
             i18n_name: CLIでのインストール
+          - name: Machine runner installation with Docker
+            link: ja/runner-installation-docker
+            i18n_name: Docker での CircleCI のマシンランナーのインストール
           - name: Upgrading machine runner on server
             link: ja/runner-upgrading-on-server
             i18n_name: Serverマシンランナーのアップグレード
