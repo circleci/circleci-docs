@@ -4,7 +4,7 @@ en:
     children:
       - name: Overview
         children:
-          - name: What is continuous integration?
+          - name: CircleCI overview
             link: about-circleci
           - name: Benefits of CircleCI
             link: benefits-of-circleci
@@ -28,11 +28,11 @@ en:
             link: config-editor
       - name: VCS integration
         children:
-          - name: GitHub
+          - name: GitHub integration overview
             link: github-integration
-          - name: Bitbucket
+          - name: Bitbucket integration overview
             link: bitbucket-integration
-          - name: GitLab
+          - name: GitLab integration overview
             link: gitlab-integration
       - name: Migration
         children:
@@ -58,12 +58,20 @@ en:
         children:
           - name: Quickstart guide
             link: getting-started
+          - name: Node quickstart
+            link: language-javascript
+          - name: Python quickstart
+            link: language-python
           - name: Configuration tutorial
             link: config-intro
-          - name: Hello world
-            link: hello-world
           - name: Set up the Slack orb
             link: slack-orb-tutorial
+      - name: How To guides
+        children:
+          - name: Create a project
+            link: create-project
+          - name: Hello world
+            link: hello-world
       - name: Reference
         children:
           - name: Configuration reference
@@ -110,6 +118,8 @@ en:
             link: schedule-pipelines-with-multiple-workflows
           - name: Set a nightly scheduled pipeline
             link: set-a-nightly-scheduled-pipeline
+          - name: Configure databases
+            link: databases
           - name: Migrate from deploy to run
             link: migrate-from-deploy-to-run
       - name: Reference
@@ -422,16 +432,6 @@ en:
           - name: Webhooks reference
             link: webhooks-reference
 
-  - name: Projects
-    icon: icons/sidebar/project-new.svg
-    children:
-      - name: overview
-        children:
-          - name: Projects overview
-            link: projects
-          - name: Creating a project
-            link: create-project
-
   - name: Developer toolkit
     icon: icons/sidebar/code.svg
     children:
@@ -463,6 +463,8 @@ en:
             link: examples-and-guides-overview
           - name: Sample config.yml files
             link: sample-config
+          - name: Database examples
+            link: postgres-config
       - name: How-to guides
         children:
           - name: How to use the CircleCI local CLI
@@ -473,22 +475,6 @@ en:
             link: https://circleci.com/docs/api/v2
           - name: API v1 reference
             link: https://circleci.com/docs/api/v1
-
-  - name: Examples and guides
-    icon: icons/sidebar/config.svg
-    children:
-      - name: Languages
-        children:
-          - name: Node
-            link: language-javascript
-          - name: Python
-            link: language-python
-      - name: Databases
-        children:
-          - name: Configuring databases
-            link: databases
-          - name: Database examples
-            link: postgres-config
 
   - name: Test
     icon: icons/sidebar/passed.svg
@@ -566,16 +552,96 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
-  - name: Server administration v4.x
+  - name: Server administration v4.1
     icon: icons/sidebar/admin-new.svg
     children:
-      - name: Server v4.x overview
+      - name: Server v4.1 overview
+        children:
+          - name: CircleCI server v4.1 overview
+            link: server/v4.1/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.1/overview/release-notes
+      - name: Server v4.1 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.1/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.1/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.1/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.1/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.1/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.1/installation/installing-server-behind-a-proxy
+          - name: Migrate from server v3 to v4
+            link: server/v4.1/installation/migrate-from-server-3-to-server-4
+          - name: Upgrade server v4.x
+            link: server/v4.1/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.1/installation/installation-reference
+      - name: Air-gapped installation v4.1
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.1/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.1/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.1/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.1/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.1/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.1/air-gapped-installation/example-values.yaml
+      - name: Server v4.1 operations
+        children:
+          - name: Operator overview
+            link: server/v4.1/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.1/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.1/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.1/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.1/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.1/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.1/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.1/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.1/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.1/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.1/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.1/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.1/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.1/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.1/operator/backup-and-restore
+          - name: FAQs
+            link: server/v4.1/operator/faq
+
+  - name: Server administration v4.0
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.0 overview
         children:
           - name: CircleCI server v4.x overview
             link: server/overview/circleci-server-v4-overview
           - name: Release notes
             link: server/overview/release-notes
-      - name: Server v4.x installation
+      - name: Server v4.0 installation
         children:
           - name: Phase 1 - Prerequisites
             link: server/installation/phase-1-prerequisites
@@ -597,7 +663,7 @@ en:
             link: server/installation/upgrade-server-4
           - name: Installation reference
             link: server/installation/installation-reference
-      - name: Server v4.x operations
+      - name: Server v4.0 operations
         children:
           - name: Operator overview
             link: server/operator/operator-overview
@@ -629,16 +695,6 @@ en:
             link: server/operator/troubleshooting-and-support
           - name: Backup and restore
             link: server/operator/backup-and-restore
-      - name: Server v4.0.0 PDFs
-        children:
-          - name: v4.0.0 Overview
-            link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
-          - name: v4.0.0 Installation Guide for AWS
-            link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
-          - name: v4.0.0 Installation Guide for GCP
-            link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
-          - name: v4.0.0 Operations Guide
-            link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
   - name: Server administration v3.x
     icon: icons/sidebar/admin-new.svg
@@ -989,15 +1045,21 @@ ja:
           - name: Configuration tutorial
             link: ja/config-intro
             i18n_name: 設定ファイル概要
-          - name: Hello World
-            link: ja/hello-world
-            i18n_name: Hello World
           - name: Set up the Slack orb
             link: ja/slack-orb-tutorial
             i18n_name: Slack Orbを使う
           - name: Installing the CircleCI CLI
             link: ja/local-cli
             i18n_name: CircleCI CLIのインストール
+      - name: How To guides
+        i18n_name: ガイド
+        children:
+          - name: Create a project
+            link: ja/create-project
+            i18n_name: プロジェクトの作成
+          - name: Hello World
+            link: ja/hello-world
+            i18n_name: Hello World
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1389,9 +1451,6 @@ ja:
           - name: Projects overview
             link: ja/projects
             i18n_name: プロジェクトの概要
-          - name: Creating a project
-            link: ja/create-project
-            i18n_name: プロジェクトの作成
       - name: settings
         i18n_name: 設定
         children:
@@ -1557,28 +1616,27 @@ ja:
     icon: icons/sidebar/folder-open.svg
     i18n_name: リファレンス
     children:
-      - children:
-          - name: API v2 Reference
-            link: https://circleci.com/docs/api/v2
-            i18n_name: API v2リファレンス
-          - name: API v2 Introduction
-            link: ja/api-intro
-            i18n_name: API v2概要
-          - name: API v2 Developer's guide
-            link: ja/api-developers-guide
-            i18n_name: API v2開発ガイド
-          - name: API v1.1 Reference
-            link: https://circleci.com/docs/api/v1
-            i18n_name: API v1.1リファレンス
-          - name: CircleCI config SDK
-            link: ja/circleci-config-sdk
-            i18n_name: CircleCIコンフィグSDK
-          - name: Project values and variables
-            link: ja/variables
-            i18n_name: プロジェクトの値と変数
-          - name: Help and support
-            link: ja/help-and-support
-            i18n_name: ヘルプとサポート
+      - name: API v2 Reference
+        link: https://circleci.com/docs/api/v2
+        i18n_name: API v2リファレンス
+      - name: API v2 Introduction
+        link: ja/api-intro
+        i18n_name: API v2概要
+      - name: API v2 Developer's guide
+        link: ja/api-developers-guide
+        i18n_name: API v2開発ガイド
+      - name: API v1.1 Reference
+        link: https://circleci.com/docs/api/v1
+        i18n_name: API v1.1リファレンス
+      - name: CircleCI config SDK
+        link: ja/circleci-config-sdk
+        i18n_name: CircleCIコンフィグSDK
+      - name: Project values and variables
+        link: ja/variables
+        i18n_name: プロジェクトの値と変数
+      - name: Help and support
+        link: ja/help-and-support
+        i18n_name: ヘルプとサポート
 
   - name: Server Administration v4.x
     i18n_name: Server v4.x 管理

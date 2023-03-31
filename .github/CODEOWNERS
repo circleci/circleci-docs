@@ -5,10 +5,4 @@
 # See GitHub docs for more:
 # https://help.github.com/articles/about-codeowners/
 
-*.md @circleci/docs
-*.adoc @circleci/docs
-*.pdf @circleci/docs
-
-/jekyll/_cci2/ @circleci/docs
-/jekyll/_data/ @circleci/docs
-/jekyll/_includes/ @circleci/docs
+* @circleci/docs

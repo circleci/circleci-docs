@@ -63,9 +63,7 @@ import data.circleci.config
 
 policy_name["runner_policies"]
 
-enable_rule["resource_class_check"]
-
-hard_fail["resource_class_check"]
+enable_hard["resource_class_check"]
 
 resource_class_check = config.resource_class_by_project({ "namespace/resource_class": {"project_UUIDs"}})
 ----
@@ -119,9 +117,7 @@ import data.circleci.config
 
 policy_name["runner_policies"]
 
-enable_rule["resource_class_check"]
-
-hard_fail["resource_class_check"]
+enable_hard["resource_class_check"]
 
 resource_class_check = config.resource_class_by_project({ 
   "my-namespace/runner-test1": {

@@ -3,8 +3,7 @@ layout: classic-docs
 title: Migrate from Jenkins
 categories: [migration]
 description: Differences between CircleCI and Jenkins, with migration guide.
-redirect_from: /jenkins-converter
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---

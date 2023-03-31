@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Supported Languages Guide"
 short-title: "Supported Languages"
 description: "A list of sample CircleCI applications for several popular languages"
-redirect_from: /2.0/tutorials/
 categories: [language-guides]
 order: 0
 version:

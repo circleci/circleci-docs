@@ -2,9 +2,8 @@
 contentTags:
   platform:
   - Cloud
-redirect_from: /gitlab-vcs-support
 ---
-= GitLab SaaS integration
+= GitLab integration overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI.
@@ -32,7 +31,7 @@ If your selected repo does _not_ already have a `.circleci/config.yml`, you will
 
 * **Fastest**: Use an existing `config.yml` in one of your repos.
 +
-You can select _another_ repository in your account that has previously been set up with a CircleCI configuration. The `.circleci/config.yml` file may be in the main branch, or a feature branch. The config is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you. 
+You can select _another_ repository in your account that has previously been set up with a CircleCI configuration. The `.circleci/config.yml` file may be in the main branch, or a feature branch. The config is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you.
 * **Faster**: Commit a starter CI pipeline to a new branch.
 +
 CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
@@ -105,7 +104,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[
 
 Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo. 
 
-Committing further changes in your repo will automatically trigger a pipeline, but manually triggering a pipeline is also not available at this time. 
+Committing further changes in your repo will automatically trigger a pipeline. However, manually triggering a pipeline from the CircleCI web app is also not available at this time. 
 
 [#project-settings]
 == Project settings

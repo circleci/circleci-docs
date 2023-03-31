@@ -49,7 +49,7 @@ The following illustration uses an [example Java application](https://github.com
 
 ![configuration elements]({{site.baseurl}}/assets/img/docs/config-elements.png)
 
-CircleCI configurations use YAML. See the [Writing YAML](/docs/writing-yaml) page for basic guidance. For a full overview of what is possible in a configuration file, see the [Configuration reference](/docs/configuration-reference) page.
+CircleCI configurations use YAML. See the [Introduction to YAML configurations](/docs/introduction-to-yaml-configurations) page for basic guidance. For a full overview of what is possible in a configuration file, see the [Configuration reference](/docs/configuration-reference) page.
 
 ## Contexts
 {: #contexts }
@@ -598,14 +598,19 @@ See the [Pipelines overview](/docs/pipelines) page for more information.
 ## Projects
 {: #projects }
 
-A CircleCI project shares the name of the associated code repository in your VCS. Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow the projects you have access to. There are two options:
+For GitHub and Bitbucket accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
+
+For GitLab users, a _project_ in CircleCI is standalone. You name your project and then connect your code (GitLab repository) to that project. A standalone project can have:
+
+* One or more configurations (pipeline definitions), including, but not limited to, a `.circleci/config.yml` file in the repo associated with the project.
+* One or more triggers (events from a source of change), including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
+
+Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow any project you have access to. There are two options:
 
 * _Set Up_ any project that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications](/docs/notifications/) for the project's status.
 
 ![Project dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
-
-See the [Projects overview](/docs/projects) page for more information.
 
 ## Resource class
 {: #resource-class}

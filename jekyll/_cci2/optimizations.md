@@ -3,8 +3,7 @@ layout: classic-docs
 title: "Optimizations Overview"
 short-title: "Optimizations Overview"
 description: "CircleCI build optimizations"
-redirect_from: /optimization-cookbook/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x

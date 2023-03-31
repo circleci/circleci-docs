@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Bitbucket Integration
+= Bitbucket integration overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of using Bitbucket with CircleCI.

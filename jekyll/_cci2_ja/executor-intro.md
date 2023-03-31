@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
-redirect_from: /ja/executor-types/
 contentTags:
   platform:
     - クラウド
@@ -124,13 +123,13 @@ jobs:
 
 {:.tab.windowsblock.Cloud_with_machine}
 ```yml
-version: 2.1 
+version: 2.1
 
 jobs:
   build: # name of your job
     resource_class: 'windows.medium'
     machine:
-      image: 'windows-server-2022-gui:current'   
+      image: 'windows-server-2022-gui:current'
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
