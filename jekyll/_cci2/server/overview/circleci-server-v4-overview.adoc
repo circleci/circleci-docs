@@ -74,13 +74,6 @@ The application exposes a number of external ports. These ports are used for var
 | HTTP web app traffic
 |
 
-| 8800
-| TCP
-| Inbound
-| Administrators
-| Admin console
-|
-
 | 22
 | TCP
 | Inbound

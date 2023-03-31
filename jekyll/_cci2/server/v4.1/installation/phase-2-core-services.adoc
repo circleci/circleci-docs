@@ -484,7 +484,7 @@ tls:
 --
 *Use ACM*
 
-Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+Have link:https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the link:https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
 Enable `aws_acm` and add the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation to point at the ACM ARN:
 
@@ -616,7 +616,7 @@ ifndef::env-gcp[]
 
 [#s3-compatible]
 ==== S3 compatible
-Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint fo your object storage server.
+Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the link:https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint fo your object storage server.
 
 [source,yaml]
 ----

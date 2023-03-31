@@ -3,6 +3,7 @@
 | medium                | 4 @ 2.7 GHz  | 8 GB  |
 | macos.x86.medium.gen2 | 4 @ 3.2 GHz  | 8 GB  |
 | large                 | 8 @ 2.7 GHz  | 16 GB |
+| macos.m1.large.gen1   | 8 @ 3.2 GHz  | 12GB  |
 | macos.x86.metal.gen1  | 12 @ 3.2 GHz | 32 GB |
 | macos.m1.large.gen1   | 8            | 12GB  |
 {: class="table table-striped"}
