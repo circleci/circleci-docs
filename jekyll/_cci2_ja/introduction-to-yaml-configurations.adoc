@@ -31,8 +31,6 @@ CircleCI とプロジェクトを接続する上で重要なのは、`.circleci`
 version: 2.1
 ```
 
-CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧バージョンの CircleCI Server、<<install-overview#,Server v2>> でのみ使用されています。
-
 [#execution-environment]
 == 実行環境
 

@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Using Workspaces to Share Data between Jobs"
 description: "This document describes how to use workspaces to share data to downstream jobs in your workflows."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Workflows each have an associated `workspace`. Workspaces are used to transfer data to downstream jobs as the workflow progresses.
@@ -19,7 +18,7 @@ For example, a project with a `build` job that builds a `.jar` file and saves it
 ## Overview
 {: #overview }
 
-Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. 
+Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem.
 
 Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
@@ -27,9 +26,9 @@ Some notes about workspaces:
 
 * Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 * Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
-* The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace. 
+* The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace.
 * Each job can only see content added to the workspace by the jobs that are upstream of it.
-* When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined. 
+* When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined.
 * If multiple concurrent jobs persist, the same filename then attaching the workspace will error.
 * If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 

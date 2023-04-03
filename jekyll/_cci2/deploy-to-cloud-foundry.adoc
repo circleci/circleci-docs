@@ -5,7 +5,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Deploy to Cloud Foundry
 :page-layout: classic-docs

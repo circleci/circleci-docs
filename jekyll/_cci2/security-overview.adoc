@@ -3,7 +3,6 @@ version:
 - Cloud
 - Server v4.x
 - Server v3.x
-- Server v2.x
 - Server Admin
 ---
 = Security overview

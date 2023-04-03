@@ -2,7 +2,6 @@
 
 contentTags:
   platform:
-  - Server v2.x
   - Server v4.x
   - Server Admin
 ---
