@@ -22,16 +22,16 @@ contentTags:
 
 下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 環境変数は 1 つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
 
-**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
+**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくはxref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで環境変数を設定する]をご覧ください。
 
-{% include snippets/ja/built-in-env-vars.md %}
+{% include snippets/ja/built-in-env-vars.adoc %}
 
+[#pipeline-values]
 ## パイプライン値
-{: #pipeline-values }
 
 パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
 
-{% include snippets/ja/pipeline-values.md %}
+{% include snippets/ja/pipeline-values.adoc %}
 
 例えば下記のようにします。
 
@@ -53,6 +53,4 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
-{: class="alert alert-info"}
-
+NOTE: 上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定する]をご覧ください。
