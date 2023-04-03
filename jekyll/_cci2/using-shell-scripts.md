@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "Using Shell Scripts"
-short-title: "Using Shell Scripts"
 description: "Best practices for using shell scripts for use in CircleCI configuration"
-categories: [getting-started]
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 ## Overview

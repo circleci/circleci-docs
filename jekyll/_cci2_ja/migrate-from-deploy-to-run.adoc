@@ -3,9 +3,8 @@
 contentTags:
   platform:
   - クラウド
-  - Server v2.x
-  - Server v3.x
   - Server v4.x
+  - Server v3.x
 ---
 = deploy から run への移行
 :page-layout: classic-docs

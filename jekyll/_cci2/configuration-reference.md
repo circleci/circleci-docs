@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 sectionTags:
   config-version-2:
     - "#version"
@@ -771,7 +770,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/server-3-operator-vm-service).
+image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation](/docs/server/v4.1/operator/manage-virtual-machines-with-vm-service/).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching).
 {: class="table table-striped"}
 

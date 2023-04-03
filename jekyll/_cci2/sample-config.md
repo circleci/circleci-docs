@@ -1,16 +1,12 @@
 ---
 layout: classic-docs
 title: "Sample config.yml Files"
-short-title: "Sample config.yml File"
 description: "Sample config.yml File"
-categories: [migration]
-order: 2
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.

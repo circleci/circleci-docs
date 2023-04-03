@@ -5,12 +5,11 @@ short-title: "Using Custom-Built Docker Images"
 description: "Why and how to create custom Docker images"
 categories: [containerization]
 order: 30
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to create and use custom Docker images with CircleCI.

@@ -1,16 +1,12 @@
 ---
 layout: classic-docs
 title: "Debug with SSH"
-short-title: "Debug with SSH"
 description: "How to access a build container using SSH on CircleCI"
-categories: [troubleshooting]
-order: 20
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 ## Overview
@@ -30,7 +26,7 @@ Please note that a _default_ CircleCI pipeline executes steps in a non-interacti
 2. To start a job with SSH enabled, select the **Rerun job with SSH** option from the **Rerun Workflow** dropdown menu.
 
      The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
-     {: class="alert alert-info" } 
+     {: class="alert alert-info" }
 
 3. To see the connection details, expand the **Enable SSH** section in the job output where you will see the SSH command needed to connect.
 
@@ -52,7 +48,7 @@ If you run into permission issues trying to SSH to your job, try the following i
 ### Ensure authentication with GitHub/Bitbucket
 {: #ensure-authentication-with-githubbitbucket }
 
-A single command can be used to test that your keys are set up as expected. 
+A single command can be used to test that your keys are set up as expected.
 
 For GitHub, run:
 ```bash

@@ -5,7 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = CircleCI でのプロジェクトの作成
 :page-layout: classic-docs
