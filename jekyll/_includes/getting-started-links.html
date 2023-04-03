@@ -1,21 +1,11 @@
 <br>
 <div class="prereq-wrapper">
-  <h3 id="{{include.id}}">{{include.title}}</h3>
-  {% if include.title == "Prerequisites"%}
-  <div>Create a repository for <a href="https://github.com/new">GitHub</a> or <a
-      href="https://github.com/new">Bitbucket</a>
-  </div>
+  <h2 id="{{include.id}}">{{include.title}}</h2>
+
   <div><a class="no-external-icon" href="{{include.href1}}">{{include.content1}}</a></div>
   <div><a class="no-external-icon" href="{{include.href2}}">{{include.content2}}</a></div>
-  {% endif %}
-
-  {% if include.title == "Developer resources"%}
-  <div><a class="no-external-icon" href="{{include.href3}}">{{include.content3}}</a></div>
-  <div><a class="no-external-icon" href="{{include.href4}}">{{include.content4}}</a></div>
-  <div><a class="no-external-icon" href="{{include.href5}}">{{include.content5}}</a></div>
-  <div><a class="no-external-icon" href="{{include.href6}}">{{include.content6}}</a></div>
-  <div><a class="no-external-icon" href="{{include.href7}}">{{include.content7}}</a></div>
-  {% endif %}
+  <div>Create a repository for <a href="https://github.com/new">GitHub</a>, <a
+    href="https://github.com/new">Bitbucket</a> or <a href="https://gitlab.com/projects/new">GitLab</a></div>
 </div>
 <br>
 <br>
