@@ -1,0 +1,36 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= <<Page title here>>
+:page-layout: classic-docs
+:page-liquid:
+:page-description: <<Brief description here>>
+:icons: font
+:toc: macro
+:toc-title:
+
+[#introduction]
+== Introduction
+
+Short intro paragraph 
+
+[#prerequisites]
+== Prerequisites
+
+* List item 1
+* List item 2
+
+[#another-section]
+== Another section
+
+More content
+
+[#see-also]
+== See also
+
+Other recommended pages for reading
+
