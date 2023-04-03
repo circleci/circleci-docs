@@ -4,12 +4,11 @@ title: "Caching Dependencies"
 description: "This document is a guide to caching dependencies in CircleCI pipelines."
 categories: [optimization]
 order: 50
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations. After an initial job run, subsequent instances of the job run faster, as you are not redoing work.

@@ -9,7 +9,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
