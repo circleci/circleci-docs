@@ -22,6 +22,8 @@ en:
         children:
           - name: Sign up and try
             link: first-steps
+          - name: Quickstart guide
+            link: getting-started
           - name: YAML configuration intro
             link: introduction-to-yaml-configurations
           - name: In-app configuration editor
@@ -56,8 +58,6 @@ en:
             link: migrating-from-travis
       - name: Tutorials
         children:
-          - name: Quickstart guide
-            link: getting-started
           - name: Node quickstart
             link: language-javascript
           - name: Python quickstart
