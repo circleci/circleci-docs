@@ -191,16 +191,13 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 {% endcapture %}
 
 {% include getting-started-section-header.html title="04 おすすめの学習素材" id="recommended-learning" content=content %}
-
-{% capture content3 %}オンデマンドの開発者無料トレーニング{% endcapture %}
-
-{% capture content4 %}CircleCI 基礎ビデオ{% endcapture %}
-
-{% capture content5 %}設定ファイルの概要{% endcapture %}
-
-{% capture content6 %}CircleCI の概要{% endcapture %}
-
-{% capture content7 %}CircleCI Free プランのメリット{% endcapture %}
-
-{% include getting-started-links.html title="開発者向け資料" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/ja/config-intro/" href6="https://circleci.com/docs/ja/concepts/" href7="https://circleci.com/docs/ja/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
 ++++
+
+[#next-steps]
+== Next steps
+
+* link:https://circleci.com/training/[オンデマンドの開発者無料トレーニング]
+* link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI 基礎ビデオ]
+* xref:config-intro#[設定ファイルの概要]
+* xref:concepts#[CircleCI の概要]
+* xref:plan-free#[CircleCI Free プランのメリット]
