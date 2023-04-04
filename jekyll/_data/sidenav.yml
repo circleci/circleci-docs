@@ -229,9 +229,6 @@ en:
           - name: Machine runner configuration reference
             link: runner-config-reference
 
-          - name: Migrate from deploy to run
-            link: migrate-from-deploy-to-run
-
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
     children:
@@ -1030,7 +1027,7 @@ ja:
             link: ja/set-a-nightly-scheduled-pipeline
             i18n_name: パイプラインのスケジュール実行を夜間に設定する
           - name: Configure databases
-            link: ja/databases 
+            link: ja/databases
             i18n_name: データベースの設定
           - name: Migrate from deploy to run
             link: ja/migrate-from-deploy-to-run
@@ -1041,7 +1038,7 @@ ja:
           - name: Project values and variables
             link: ja/variables
             i18n_name: プロジェクトの値と変数
-          
+
   - name: Execution environments
     icon: icons/sidebar/builds.svg
     i18n_name: 実行環境
@@ -1407,7 +1404,7 @@ ja:
             i18n_name: CLIを使用したポリシー作成
           # - name: Config policies for self-hosted runner (Open preview)
           #   link: ja/config-policies-for-self-hosted-runner
-          #   i18n_name: 
+          #   i18n_name:
           # - name: Stop building a project on CircleCI
           #   link: ja/stop-building-a-project-on-circleci
           #   i18n_name:
@@ -1478,8 +1475,8 @@ ja:
         children:
           - name: Webhooks reference
             link: ja/webhooks-reference
-            i18n_name: Webhook リファレンス 
-        
+            i18n_name: Webhook リファレンス
+
   - name: Developer toolkit
     i18n_name: 開発者ツール
     icon: icons/sidebar/code.svg
@@ -1551,7 +1548,7 @@ ja:
     children:
       - name: Run tests
         i18n_name: テストの実行
-        children: 
+        children:
           - name: Automated testing
             link: ja/test
             i18n_name: テストの自動化
@@ -1572,13 +1569,13 @@ ja:
             i18n_name: フェイルファスト
       - name: Monitor tests
         i18n_name: テストの管理
-        children:    
+        children:
           - name: Test Insights
             i18n_name: テストインサイト
             link: ja/insights-tests
       - name: Tutorials
         i18n_name: チュートリアル
-        children: 
+        children:
           - name: Speed up pipelines with test splitting
             link: ja/test-splitting-tutorial
             i18n_name: テスト分割によるパイプラインの高速化
@@ -1605,9 +1602,9 @@ ja:
     icon: icons/sidebar/getting-started-new.svg
     i18n_name: デプロイ
     children:
-      - name: Deployment 
+      - name: Deployment
         i18n_name: デプロイメント
-        children: 
+        children:
           - name: Deployment overview
             link: ja/deployment-overview
             i18n_name: デプロイの概要
