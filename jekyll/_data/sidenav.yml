@@ -1367,7 +1367,7 @@ ja:
             link: https://circleci.com/docs/api/v2#tag/Insights
 
   - name: Package and re-use config with orbs
-    i18n_name: Orb
+    i18n_name: Orb を使った再利用可能な設定のパッケージ化
     icon: icons/sidebar/orb.svg
     children:
       - name: Use orbs
