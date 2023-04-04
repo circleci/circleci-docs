@@ -181,7 +181,7 @@ If certain projects should only be able to access certain AWS resources, you can
 
 To do this, edit your IAM role's trust policy so that only an OIDC token from your chosen project can assume that role. The trust policy determines under what conditions the role can be assumed.
 
-. Go to an individual project's page on https://app.circleci.com/[CircleCI web app] and navigate to **Project Settings > Overview** to find your Project ID.
+. Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to **Project Settings > Overview** to find your Project ID.
 
 . Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project_id`.
 +
