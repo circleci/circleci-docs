@@ -216,19 +216,19 @@ After navigating to the **Grant Access** section of the GCP web UI, follow these
   * The issuer is `\https://oidc.circleci.com/org/ORG_ID`, where `ORG_ID` is your CircleCI organization ID.
 . Click **Continue** to configure provider attributes.
 +
-Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding." For example:
+Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
 +
 [.table.table-striped]
 [cols=2*, stripes=even]
 
 |===
 | google.subject
-| attribute.project_id
+| assertion.sub
 
-| attribute.org_id
+| attribute.aud
 | assertion.aud
 
-| assertion.sub
+| attribute.project
 | assertion['oidc.circleci.com/project-id']
 |===
 +
