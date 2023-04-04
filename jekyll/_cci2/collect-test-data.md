@@ -196,11 +196,10 @@ A working `.circleci/config.yml` section for testing might look like this:
 ### Mocha with nyc
 {: #mocha-with-nyc }
 
-Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
+Following is an example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
 ```yml
-version: 2
 jobs:
     build:
         environment:

@@ -55,14 +55,7 @@ CircleCI configurations use YAML. See the [Introduction to YAML configurations](
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
 
-{:.tab.contextsimage.Cloud}
 ![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
-
-{:.tab.contextsimage.Server_3}
-![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
-
-{:.tab.contextsimage.Server_2}
-![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_server.png)
 
 See the [Using contexts]({{site.baseurl}}/contexts/) page for more information.
 
@@ -89,78 +82,9 @@ See [Persisting data in workflows: When to use caching, artifacts, and workspace
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
-{:.tab.workspace.Cloud}
 {% raw %}
 ```yaml
 version: 2.1
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
-          root: workspace
-            # Must be relative path from root
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-{% endraw %}
-
-{:.tab.workspace.Server_3}
-{% raw %}
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
-          root: workspace
-            # Must be relative path from root
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-{% endraw %}
-
-{:.tab.workspace.Server_2}
-{% raw %}
-```yaml
-version: 2
 
 jobs:
   build1:
@@ -200,98 +124,9 @@ A cache stores a file or directory of files such as dependencies or source code 
 
 If you need to clear your cache, refer to the [Caching dependencies](/docs/caching/#clearing-cache) page for more information.
 
-{:.tab.cache.Cloud}
 {% raw %}
 ```yaml
 version: 2.1
-
-jobs:
-  build1:
-    docker: # Each job requires specifying an executor
-    # (either docker, macos, or machine), see
-    # circleci.com/docs/executor-intro/ for a comparison
-    # and more examples.
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - save_cache: # Caches dependencies with a cache key
-      # template for an environment variable,
-      # see circleci.com/docs/caching/
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
-
-  build2:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-```
-{% endraw %}
-
-{:.tab.cache.Server_3}
-{% raw %}
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-    docker: # Each job requires specifying an executor
-    # (either docker, macos, or machine), see
-    # circleci.com/docs/executor-intro/ for a comparison
-    # and more examples.
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - save_cache: # Caches dependencies with a cache key
-      # template for an environment variable,
-      # see circleci.com/docs/caching/
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
-
-  build2:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-```
-{% endraw %}
-
-{:.tab.cache.Server_2}
-{% raw %}
-```yaml
-version: 2
 
 jobs:
   build1:
@@ -445,35 +280,6 @@ jobs:
 #...
  build2:
    machine: true
-   # Contact your system administrator for details of the image.
-#...
-```
-
-{:.tab.executors.Server_2}
-```yaml
-version: 2
-
-jobs:
- build1: # job name
-   docker: # Specifies the primary container image,
-     - image: cimg/base:2022.04-20.04
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-     - image: postgres:14.2 # Specifies the database image
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # for the secondary or service container run in a common
-      # network where ports exposed on the primary container are
-      # available on localhost.
-       environment: # Specifies the POSTGRES_USER authentication
-        # environment variable, see circleci.com/docs/env-vars/
-        # for instructions about using environment variables.
-         POSTGRES_USER: user
-#...
- build2:
-   machine: true # Specifies a machine image.
    # Contact your system administrator for details of the image.
 #...
 ```
@@ -690,18 +496,10 @@ CircleCI has various user types with permissions inherited from VCS accounts.
 
 Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
-{:.tab.workflows.Cloud}
 ![Workflows illustration cloud](/docs/assets/img/docs/workflow_detail_newui.png)
-
-{:.tab.workflows.Server_3}
-![Workflows illustration server 3](/docs/assets/img/docs/workflow_detail_newui.png)
-
-{:.tab.workflows.Server_2}
-![Workflows illustration server 2](/docs/assets/img/docs/workflow_detail.png)
 
 The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
-{:.tab.workflows-example.Cloud}
 {% raw %}
 ```yaml
 version: 2.1
@@ -758,149 +556,6 @@ jobs:
           command: bundle exec rake assets:precompile
 #...
 workflows:
-  build_and_test: # name of your workflow
-    jobs:
-      - build1
-      - build2:
-          requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # see circleci.com/docs/workflows/ for more examples.
-      - build3:
-          requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 concurrently to save time.
-```
-{% endraw %}
-
-{:.tab.workflows-example.Server_3}
-{% raw %}
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - save_cache: # Caches dependencies with a cache key
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
-
-  build2:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Running tests
-          command: make test
-  build3:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Precompile assets
-          command: bundle exec rake assets:precompile
-#...
-workflows:
-  build_and_test: # name of your workflow
-    jobs:
-      - build1
-      - build2:
-          requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # see circleci.com/docs/workflows/ for more examples.
-      - build3:
-          requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 concurrently to save time.
-```
-{% endraw %}
-
-{:.tab.workflows-example.Server_2}
-{% raw %}
-```yaml
-version: 2
-
-jobs:
-  build1:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - save_cache: # Caches dependencies with a cache key
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
-
-  build2:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Running tests
-          command: make test
-  build3:
-    docker:
-      - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: Precompile assets
-          command: bundle exec rake assets:precompile
-#...
-workflows:
-  version: 2.1
   build_and_test: # name of your workflow
     jobs:
       - build1

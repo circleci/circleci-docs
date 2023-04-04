@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "SSH を使用したデバッグ"
-description: "CircleCI で SSH を使用してビルドコンテナにアクセスする方法"0
+description: "CircleCI で SSH を使用してビルドコンテナにアクセスする方法"
 contentTags:
   platform:
     - クラウド

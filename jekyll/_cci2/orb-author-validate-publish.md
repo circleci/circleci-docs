@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Manual Orb Authoring Process"
 description: "Authoring simple orbs manually without the orb development kit."
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -135,7 +135,6 @@ orbs:
   node: circleci/node@4.7.0
 
 workflows:
-  version: 2
   example-workflow:
       jobs:
         - node/test

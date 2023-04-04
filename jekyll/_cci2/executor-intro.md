@@ -155,21 +155,6 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server_2}
-```yaml
-version: 2
-
-jobs:
-  build: # name of your job
-    machine: # executor type
-      image: windows-default
-    resource_class: windows.medium
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-```
-
 Find out more about the Windows execution environment in the [Using the Windows Execution Environment](/docs/using-windows/) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## GPU

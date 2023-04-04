@@ -3,7 +3,7 @@ layout: classic-docs
 title: Migrate From Travis CI
 categories: [migration]
 description: An overview of how to migrate from Travis CI to CircleCI.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -95,7 +95,6 @@ The following CircleCI configuration to achieve the same results is excerpted fr
 version: 2.1
 
 workflows:
-  version: 2
   build:
     jobs:
       - build
