@@ -1673,7 +1673,7 @@ ja:
             link: ja/fail-fast
             i18n_name: フェイルファスト
       - name: Monitor tests
-        i18n_name: モニターテスト
+        i18n_name: テストの管理
         children:    
           - name: Test Insights
             i18n_name: テストインサイト
