@@ -196,7 +196,7 @@ This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_el
 [#limit-role-access-based-on-branch]
 ===== Limit role access based on branch
 
-You can also restrict access to specific branches. The following is an example of a trust policy that restricts the `AssumeRoleWithWebIdentity` action to any project pipelines running only on the `main` branch in the `my-org` GitHub organization and `6b376885-8f20-45b2-ba2f-c27c0919bc6d` CircleCI organization. 
+You can also restrict access to specific branches. The following is an example of a trust policy that restricts the `AssumeRoleWithWebIdentity` action to any project pipelines running only on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID: `ORGANIZATION_ID`. Note that the `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
 
 ```json
 {
@@ -205,12 +205,12 @@ You can also restrict access to specific branches. The following is an example o
         {
             "Effect": "Allow",
             "Principal": {
-                "Federated": "arn:aws:iam::269508603282:oidc-provider/oidc.circleci.com/org/6b376885-8f20-45b2-ba2f-c27c0919bc6d"
+                "Federated": "arn:aws:iam::123456789012:oidc-provider/oidc.circleci.com/org/ORGANIZATION_ID"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
                 "StringLike": {
-                    "oidc.circleci.com/org/6b376885-8f20-45b2-ba2f-c27c0919bc6d:sub": "org/6b376885-8f20-45b2-ba2f-c27c0919bc6d/project/*/user/*/vcs-origin/github.com/my-org/*/vcs-ref/refs/heads/main"
+                    "oidc.circleci.com/org/ORGANIZATION_ID:sub": "org/ORGANIZATION_ID/project/*/user/*/vcs-origin/github.com/my-org/*/vcs-ref/refs/heads/main"
                 }
             }
         }
