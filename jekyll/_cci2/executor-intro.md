@@ -60,21 +60,11 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ```
 
-{:.tab.machine.Server_3}
+{:.tab.machine.Server}
 ```yml
 jobs:
   build: # name of your job
     machine: true # executor type
-    steps:
-      # Commands run in a Linux virtual machine environment
-```
-
-{:.tab.machine.Server_2}
-```yml
-jobs:
-  build: # name of your job
-    machine: true # executor type
-
     steps:
       # Commands run in a Linux virtual machine environment
 ```

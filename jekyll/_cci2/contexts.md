@@ -97,7 +97,7 @@ You can combine several contexts for a single job by adding them to the context 
 ## Restrict a context
 {: #restrict-a-context }
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's VCS teams. If you are using CircleCI server v2.x with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 

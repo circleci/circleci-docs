@@ -161,7 +161,7 @@ workflows:
 Following is a sample `.circleci/config.yml` file using the following configuration features:
 
 * A sequential workflow
-* An orb (`version: 2.1` config only, and server 3 users will need to ensure the orb has been imported) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server v2 example
+* An orb
 * A secondary services container
 * Workspaces
 * Storing artifacts

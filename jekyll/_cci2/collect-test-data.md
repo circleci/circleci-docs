@@ -88,16 +88,6 @@ This includes flaky test detection, viewing tests that failed most often, slowes
 
 Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/index.html#tag/Insights) to find test failure information.
 
-## Test Insights for server v2.x
-{: #test-insights-for-server-v2x }
-**If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
-
-![Insights for failed tests]({{site.baseurl}}/assets/img/docs/insights.png)
-
-The above screenshot applies to CircleCI server v2.x only.
-{: class="alert alert-info" }
-
-
 ## Enabling formatters
 {: #enabling-formatters }
 

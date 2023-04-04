@@ -39,7 +39,7 @@ Example of a directory setup using CircleCI:
 
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
-- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. (not available for server v2.x)
+- **[Pipeline](#pipelines)**: Represents the entirety of your configuration.
 - **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
 - **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project.
@@ -288,9 +288,6 @@ The primary container is defined by the first image listed in `.circleci/config.
 
 For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the [Running Docker commands](/docs/building-docker-images/#accessing-the-remote-docker-environment) page.
 
-macOS is not available on installations of CircleCI server v2.x.
-{: class="alert alert-info"}
-
 For more information, see the [Execution environments overview](/docs/executor-intro) page.
 
 ## Images
@@ -392,7 +389,7 @@ See [Running tests in parallel](/docs/parallelism-faster-jobs) page for more inf
 ## Pipelines
 {: #pipelines }
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). **Pipelines are not available on CircleCI server v2.x.**
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration).
 
 Pipelines represent methods for interacting with your configuration:
 

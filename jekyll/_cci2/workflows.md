@@ -214,15 +214,7 @@ Some things to keep in mind when using manual approval in a workflow:
 
 The following screenshot demonstrates a workflow on hold.
 
-{:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow](/docs/assets/img/docs/approval_job_cloud.png)
-
-{:.tab.switcher.Server_3}
-![Approved Jobs in On Hold Workflow](/docs/assets/img/docs/approval_job_cloud.png)
-
-{:.tab.switcher.Server_2}
-![Switch Organization Menu](/docs/assets/img/docs/approval_job.png)
-
 
 By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
 

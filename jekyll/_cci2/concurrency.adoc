@@ -104,8 +104,6 @@ workflows:
 ...
 ```
 
-Please note, if you are still using CircleCI Server 2 with `version: 2`, you will need to specify the version in the `workflows` section, as mentioned in the xref:#concurrency-in-workflows[Concurrency in workflows] section.
-
 [#see-also]
 == See also
 - xref:workflows#[Workflows]
