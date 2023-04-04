@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.

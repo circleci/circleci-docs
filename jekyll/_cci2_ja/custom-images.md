@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "カスタムビルドの Docker イメージの使用"
-short-title: "カスタムビルドの Docker イメージの使用"
 description: "カスタム Docker イメージを作成する理由とその方法"
-categories:
-  - コンテナ化
-order: 30
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このページでは、CircleCI でカスタム Docker イメージを作成および使用する方法について説明します。

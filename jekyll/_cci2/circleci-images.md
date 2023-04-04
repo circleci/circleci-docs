@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Convenience images"
 description: "Listing of available Docker images maintained by CircleCI"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 
@@ -168,9 +167,9 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 ## Image types
 {: #image-types }
 
-CircleCI's convenience images fall into two categories: 
+CircleCI's convenience images fall into two categories:
 * **language** images
-* **service** images 
+* **service** images
 
 All images add a `circleci` user as a system user. The sections below walk through the available next-generation and legacy images.
 

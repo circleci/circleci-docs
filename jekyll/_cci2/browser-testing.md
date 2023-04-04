@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes common methods for running and debugging browser testing in your CircleCI config.

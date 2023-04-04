@@ -1,9 +1,9 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server 3
-  - Server 2
+  - Server v4.x
+  - Server v3.x
 ---
 = Concurrency
 :page-layout: classic-docs

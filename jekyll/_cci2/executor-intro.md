@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.

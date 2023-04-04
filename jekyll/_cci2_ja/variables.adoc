@@ -5,7 +5,6 @@ contentTags:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 = プロジェクトの値と変数
 :page-description: CircleCI プロジェクトで使用する定義済みの値のリスト

@@ -1,16 +1,15 @@
 ---
 
-description: "このドキュメントでは、SSH 経由でデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = SSH 経由でのデプロイ
 :page-layout: classic-docs
 :page-liquid:
+:page-description: このドキュメントでは、SSH 経由でデプロイするためのコード例を紹介します。
 :icons: font
 :toc: macro
 :toc-title:

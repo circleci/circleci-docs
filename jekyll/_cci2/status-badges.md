@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.

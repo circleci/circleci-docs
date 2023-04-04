@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document provides an overview of ways to optimize your CircleCI configuration. Each optimization method will be described briefly, and present possible use cases for speeding up your jobs.

@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "次世代   CircleCI イメージへの移行"
-short-title: "次世代 CircleCI イメージへの移行"
 description: "従来のイメージから次世代イメージへの移行ガイド"
-order: 30
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 * 目次

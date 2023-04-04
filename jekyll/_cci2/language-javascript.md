@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_slug="javascript" demo_branch="master" guide_completion_time="15" sample_completion_time="10" %}

@@ -1,16 +1,16 @@
 ---
 
-description: "このドキュメントでは、Google Cloud Platform へのデプロイの例を説明します。"
+description: ""
 contentTags:
   platform:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Google Cloud Platform へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
+:page-description: このドキュメントでは、Google Cloud Platform へのデプロイの例を説明します。
 :icons: font
 :toc: macro
 :toc-title:
