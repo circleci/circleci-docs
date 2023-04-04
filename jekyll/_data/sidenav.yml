@@ -1423,7 +1423,7 @@ ja:
         children:
           - name: Orbs concepts
             link: ja/orb-concepts
-            i18n_name: Orbコンセプト
+            i18n_name: Orb のコンセプト
           - name: Orbs FAQ
             link: ja/orbs-faq
             i18n_name: Orb FAQ
