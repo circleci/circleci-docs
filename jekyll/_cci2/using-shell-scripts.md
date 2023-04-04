@@ -49,7 +49,7 @@ jobs:
 Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   shellcheck:
     docker:
@@ -68,7 +68,6 @@ jobs:
     ...
 
 workflows:
-  version: 2
   check-build:
     jobs:
       - shellcheck
