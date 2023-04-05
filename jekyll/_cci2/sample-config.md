@@ -245,10 +245,6 @@ This example shows a sequential workflow with the `test` job configured to run o
 {: #sample-configuration-with-fan-infan-out-workflow }
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
-For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
-
-For the Cloud/`2.1` example, see the following workflow graph:
-
 ![Fan-in-out]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
 
 {:.tab.fan-in-out.Cloud}
