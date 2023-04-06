@@ -3,12 +3,12 @@
 contentTags:
   platform:
     - Server v4.x
-    - サーバー管理者
+    - Server Admin
 ---
-= ユーザーアカウントの管理
+= Managing user accounts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このセクションでは、CircleCI Server v4.x のオペレーターがユーザーアカウントを管理する方法を説明します。s.
+:page-description: This section provides information to help CircleCI server v4.x  operators manage user accounts.
 :icons: font
 :toc: macro
 
@@ -81,6 +81,6 @@ GitHub.com を使用している場合は、お客様の CircleCI Server への�
 . Admin Settings メニューから *System Settings* を選択します。
 . Required Org Membership List (必要な組織メンバーシップのリスト) が表示されるまで下へスクロールします。
 . 1.CircleCI の Admin Settings ページに移動します。
-. Admin Settings メニューから System Settings を選択します。
-. Required Org Membership List (必要な組織メンバーシップのリスト) が表示されるまで下へスクロールします。
-. 承認する組織を入力します。 複数の組織を入力する場合は、カンマで区切って入力します。
+2.Admin Settings メニューから System Settings を選択します。
+3.Required Org Membership List (必要な組織メンバーシップのリスト) が表示されるまで下へスクロールします。
+4.承認する組織を入力します。 複数の組織を入力する場合は、カンマで区切って入力します。
