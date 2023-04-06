@@ -3,8 +3,8 @@
 contentTags:
   platform:
   - クラウド
-  - Server 3
-  - Server 2
+  - Server v4.x
+  - Server v3.x
 ---
 = 同時実行
 :page-layout: classic-docs

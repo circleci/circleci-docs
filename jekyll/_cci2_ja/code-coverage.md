@@ -1,16 +1,12 @@
 ---
 layout: classic-docs
 title: コードカバレッジメトリクスの生成
-short-title: コードカバレッジメトリクスの生成
-categories:
-  - configuration-tasks
 description: コードカバレッジメトリクスの生成
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 ## 概要

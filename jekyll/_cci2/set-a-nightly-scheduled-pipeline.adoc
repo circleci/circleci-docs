@@ -1,10 +1,9 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Set a nightly scheduled pipeline
 :page-layout: classic-docs

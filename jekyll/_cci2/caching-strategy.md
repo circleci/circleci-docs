@@ -4,12 +4,11 @@ title: "Caching Strategies"
 description: "This document is a guide to the various caching strategies available for managing dependency caches in CircleCI."
 categories: [optimization]
 order: 50
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations. Caching is project-specific, and there are a number of strategies to help optimize caches for effectiveness and storage optimization.

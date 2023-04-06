@@ -46,7 +46,7 @@ version: 2.1
 
 jobs:
   build:
-    machine: 
+    machine:
       image: windows-server-2019-nvidia:stable
     steps:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
@@ -80,6 +80,3 @@ jobs:
 Windows の場合、現在 1 つのリソースクラスのオプションがあります。 これはデフォルトで使用されるため、お客様の設定で指定する必要はありません。
 
 {% include snippets/ja/gpu-windows-resource-table.md %}
-
-## CircleCI Server v2.x の GPU
-CircleCI Server v2.x をお使いの場合、GPU 対応マシンを使うように VM サービスを設定できます。 詳細は、[サーバー GPU Executor]({{ site.baseurl }}/ja/gpu/) をご確認ください。

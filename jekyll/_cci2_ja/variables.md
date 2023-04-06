@@ -7,7 +7,6 @@ contentTags:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このページでは、CircleCI プロジェクトで使用できる定義済みの値について説明します。

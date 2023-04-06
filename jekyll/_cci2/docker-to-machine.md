@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Migrating from Docker to Machine"
 description: "Best practices and considerations when migrating your executor from Docker to machine"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document contains some general guidelines and considerations to
