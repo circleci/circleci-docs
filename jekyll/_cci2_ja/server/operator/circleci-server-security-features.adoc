@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= CircleCI server security features
+= CircleCI Server のセキュリティ機能
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI に組み込まれているセキュリティ機能と、関連するインテグレーションの概要について説明します。

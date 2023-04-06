@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Introduction to Nomad cluster operation
+= Nomad クラスタの操作ガイド
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI 4.0 のインストール環境での Nomad クラスタの操作方法を説明します。

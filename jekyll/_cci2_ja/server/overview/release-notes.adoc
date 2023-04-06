@@ -3,12 +3,12 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= CircleCI server v4.x release notes
+= CircleCI Server v4.x のリリースノート
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Details of the new features included in each CircleCI server 4.x release.
+:page-description: CircleCI Server 4.x の各リリースに含まれる新機能の詳細
 :icons: font
 :toc: macro
 
@@ -38,7 +38,7 @@ Server v4.0 offers the following:
 [#changelog-4-0-3]
 === 更新履歴
 
-For full details of this release see the https://circleci.com/server/changelog/#release-4-0-3[changelog].
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#リリース-4-0-3[更新履歴] を参照して下さい。
 
 [#release-4-0-2]
 == リリース 4.0.2

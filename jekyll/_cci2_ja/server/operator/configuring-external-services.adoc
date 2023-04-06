@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Configuring External Services
+= 外部サービスの設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。

@@ -3,11 +3,11 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Manage virtual machines with VM Service
+= VM サービスを使った仮想マシンの管理
 :page-layout: classic-docs
-:page-liquid: CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-liquid: CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。
 :page-description:
 :icons: font
 :toc: macro

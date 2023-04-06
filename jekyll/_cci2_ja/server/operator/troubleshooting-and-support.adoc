@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Troubleshooting and support
+= トラブルシューティングとサポート
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。

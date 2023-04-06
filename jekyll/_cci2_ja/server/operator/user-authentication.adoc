@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= User authentication
+= ユーザー認証
 :page-layout: classic-docs
 :page-liquid:
 :page-description: 現在、CircleCI Server では、GitHub または GitHub Enterprise による OAuth 認証を使用できます。
