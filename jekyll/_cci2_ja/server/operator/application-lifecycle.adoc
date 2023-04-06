@@ -5,7 +5,7 @@ contentTags:
     - Server v4.x
     - Server Admin
 ---
-= Application lifecycle
+= アプリケーションのライフサイクル
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI Server v4.x のセマンティック バージョニングとリリーススケジュールについて説明します。
