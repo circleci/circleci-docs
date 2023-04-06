@@ -49,7 +49,7 @@ You need:
 
 * Your GitLab self-managed instance URL, e.g. `https://example.circleci.com``.
 +
-Your self-managed instance must already contain at least one project. The authorization attempt will be unsuccessful if your instance does not have any projects.
+Your self-managed instance must already contain at least one project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
 
 * A link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.  
 
