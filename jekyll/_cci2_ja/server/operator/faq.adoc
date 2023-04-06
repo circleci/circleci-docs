@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - サーバー管理者
+    - Server Admin
 ---
-= CircleCI Server v4.x よくあるご質問
+= CircleCI Server v4.x FAQ
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI Server v4.x のデータ保持ポリシーや Nomad 証明書により付与される権限について説明します。
