@@ -1233,7 +1233,7 @@ a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
 |`tink.enabled`
 |bool
 |`false`
-|When enabled, Tink will be used instead of vault for contexts encryption
+|When enabled, Tink will be used instead of Vault for contexts encryption.
 
 |`tink.keyset`
 |string
