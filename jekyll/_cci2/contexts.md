@@ -3,12 +3,11 @@ layout: classic-docs
 title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
@@ -281,7 +280,7 @@ In this example, the jobs `test` and `deploy` are restricted, and `deploy` will 
 
 CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
-NOTE: API support for project restricted contexts is coming soon. 
+NOTE: API support for project restricted contexts is coming soon.
 
 Organization Admins have read/write access to all projects, and have unrestricted access to all contexts.
 

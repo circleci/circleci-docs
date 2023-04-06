@@ -2,12 +2,11 @@
 layout: classic-docs
 title: Skip or cancel jobs and workflows
 description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
@@ -93,7 +92,7 @@ It is important to carefully consider the impact of enabling the auto-cancel fea
 
 Projects which have auto-cancel enabled will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 
-* Scheduled workflows 
+* Scheduled workflows
 * Re-run workflows
 
 ## Auto cancel for CircleCI server installations

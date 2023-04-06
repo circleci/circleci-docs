@@ -42,14 +42,13 @@ ifndef::env-gcp[]
 
 Terraform モジュールに必要な変数を入力するにはクラスタおよびサーバのインストール環境に関する情報が必要です。 変数の完全な例と完全なリストについては、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[AWS Terraform の設定例] を参照してください。
 
-* *Server_endpoint*: ポート番号 `4647` を付加した CircleCI アプリケーションのドメイン名です。
-* クラスタの *サブネット ID (subnet)* 、 *VPC ID (vpc_id)* 、 *DNS サーバー (dns_server)*:
-次のコマンドを実行して、クラスタの VPC ID (vpcId) とサブネット (subnetIds) を入手します。
+* *Server_endpoint*: ポート番号 `4647` を付加した CircleCI アプリケーションのドメイン名です。  (例: server.example.com:4647)。
+* クラスタの *サブネット ID (subnet)* 、 *VPC ID (vpc_id)* 、 *DNS サーバー (dns_server)*: 次のコマンドを実行して、クラスタの VPC ID (vpcId) とサブネット (subnetIds) を入手します。
 +
 [source,shell]
 ----
 # Fetch VPC ID
-aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.vpcId" --region=<region> -output text | xargs
+aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.vpcId" --region=<region> --output text | xargs
 
 # Fetch Subnet IDs
 aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.subnetIds" --region=<region> --output text | xargs
@@ -483,6 +482,9 @@ git push
 |CIRCLE_TOKEN
 
 |<YOUR_CIRCLECI_API_TOKEN>
+
+|CIRCLE_CLOUD_PROVIDER
+|< `aws`, `gcp`, or `other` >
 |===
 
 .コンテキスト
@@ -1010,23 +1012,6 @@ databaseEncryption:
 . *ファイアウォール ルールを作成します。*
 +
 以下のコマンドを実行して、GKE の VM サービス用のファイヤーウォール ルールを作成します。
-+
-NOTE: 自動モードを使用した場合は、 https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づいて Nomad クライアントの CIDR を見つけることができます。
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
-----
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
-----
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
-----
 . *ユーザーを作成します。*
 +
 VM サービス専用の一意のサービスアカウントを作成することをお勧めします。 コンピューティングインスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス許可をより詳細に設定する場合は、コンピューティングインスタンス管理者 (ベータ版) ロール link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[ドキュメント] を参照として使用できます。
@@ -1065,7 +1050,7 @@ Workload Identity を使用しているかどうかにより、以下のいず�
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
-この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/ja/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[ステップ 1: 前提条件] を参照してください。
+この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identities-in-gke-optional[ステップ 1: 前提条件] を参照してください。
 
 [source,shell]
 ----

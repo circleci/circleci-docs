@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: Deploy to Artifactory
-categories: [how-to]
 description: How to upload artifacts to Artifactory in CircleCI
-redirect_from: /artifactory
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 In this how-to guide, you will learn how to upload artifacts to Artifactory in CircleCI.

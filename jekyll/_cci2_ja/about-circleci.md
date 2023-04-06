@@ -2,15 +2,11 @@
 layout: classic-docs
 title: "CircleCI について"
 description: "このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明します。 CircleCI は、ソフトウェアのビルド、テスト、デプロイを自動化します。"
-categories:
-  - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 ソフトウェアチームは高速化を求めていますが、多くの場合、迅速な高速化に不安があります。 CircleCI の使命は、ソフトウェアチームがより迅速にイノベーションを実現できるよう、変更を管理することです。 私たちは、テクノロジー主導型の組織が最高の成果を挙げられるようにサポートし、変更を管理することでエンジニアリングチームの生産性と革新性を高めたいと考えています。 インテリジェントな自動化により、ビルド、テスト、デプロイを行うことができます。
@@ -61,7 +57,7 @@ CircleCI を使用すると、開発者として以下のことが可能です�
 - [.circleci/config.yml]({{site.baseurl}}/ja/configuration-reference/) ファイルに[並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
 - 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/ja/caching/)を設定し、[ワークフロー]({{site.baseurl}}/ja/workflows/)内で以前のジョブのデータを再利用する。
 - セルフホスト型の [ランナー]({{site.baseurl}}/ja/runner-overview/) を設定し、独自のプラットフォームをサポートする。
-- Machine Executor の [Arm リソース]({{site.baseurl}}/ja/arm-resources/)にアクセスする。
+- Machine Executor の [Arm リソース]({{site.baseurl}}/ja/using-arm/)にアクセスする。
 - 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/ja/orb-intro/) を使って、サードパーティツールと連携する。
 - さまざまな言語であらかじめビルドされた Docker [イメージ]({{site.baseurl}}/ja/circleci-images/) を使用する。
 - [API](https://circleci.com/docs/api/v2/) を使ってジョブやワークフローの情報を取得する。

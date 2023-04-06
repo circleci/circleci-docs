@@ -1,11 +1,9 @@
 ---
-redirect_from: /examples-intro/
 contentTags:
   platform:
     - Cloud
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 sectionTags:
   cloud:
     - "#echo-hello-world-cloud"

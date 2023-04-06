@@ -1,16 +1,12 @@
 ---
 layout: classic-docs
 title: Artifactory へのデプロイ
-categories:
-  - how-to
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
-redirect_from: /ja/artifactory
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 CircleCI では Artifactory への直接アップロードがサポートされています。

@@ -4,7 +4,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Benefits of CircleCI
 :page-layout: classic-docs
@@ -26,7 +25,7 @@ As a developer using CircleCI you can:
 - Set up xref:parallelism-faster-jobs#[parallelism] in your `.circleci/config.yml` file to run jobs faster.
 - Configure xref:caching#[caching] with two simple keys to reuse data from previous jobs in your xref:workflows#[workflow].
 - Configure self-hosted xref:runner-overview#[runners] for unique platform support.
-- Access xref:arm-resources#[Arm resources] for the machine executor.
+- Access xref:using-arm#[Arm resources] for the machine executor.
 - Use xref:orb-intro#[orbs], reusable packages of configuration, to integrate with third parties.
 - Use pre-built Docker xref:circleci-images#[images] in a variety of languages.
 - Use the link:https://www.circleci.com/docs/api/v2[API] to retrieve information about jobs and workflows.

@@ -135,6 +135,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* <<using-metrics#,メトリクスの使用>> ガイドを読む
+* link:/docs/server/operator/managing-user-accounts#,[ユーザーアカウントの管理ガイド]をお読みください。
 +
 endif::[]

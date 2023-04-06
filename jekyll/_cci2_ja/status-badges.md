@@ -7,7 +7,6 @@ contentTags:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 プロジェクトのビルドステータス (成功または失敗) を表示するバッジを README または他のドキュメントに作成する方法について説明します。

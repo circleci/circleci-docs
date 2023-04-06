@@ -1,10 +1,9 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Resource class overview
 :page-layout: classic-docs
@@ -21,9 +20,9 @@ Use resource classes to:
 * Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 
 [#introduction]
-== Introduction 
+== Introduction
 
-The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor. 
+The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 
 [source,yaml]
 ----

@@ -2,13 +2,11 @@
 layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
-redirect_from: /ja/executor-types/
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、macOS、Windows、GPU、Arm) を提供しています。 プロジェクトの設定ファイルで定義されたジョブはそれぞれ、Docker コンテナまたは仮想マシンのいずれかの隔離された実行環境で実行されます。
@@ -124,13 +122,13 @@ jobs:
 
 {:.tab.windowsblock.Cloud_with_machine}
 ```yml
-version: 2.1 
+version: 2.1
 
 jobs:
   build: # name of your job
     resource_class: 'windows.medium'
     machine:
-      image: 'windows-server-2022-gui:current'   
+      image: 'windows-server-2022-gui:current'
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment

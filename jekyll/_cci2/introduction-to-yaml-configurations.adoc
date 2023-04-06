@@ -1,14 +1,10 @@
 ---
 categories: [configuration]
-redirect_from: 
-  - /config-overview/
-  - /writing-yaml/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Introduction to YAML Configurations
 :page-layout: classic-docs
@@ -32,8 +28,6 @@ Your `.circleci/config.yml` will start off with the version of CircleCI you wish
 
 version: 2.1
 ```
-
-CAUTION: You might see examples using `version: 2.0`. CircleCI `2.0` is no longer supported, and is only used with <<install-overview#,server v2>>, an old version of CircleCI server.
 
 [#execution-environment]
 == Execution environment

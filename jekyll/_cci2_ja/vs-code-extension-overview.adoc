@@ -2,7 +2,7 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
 = VS Code 拡張機能の概要
 :page-layout: classic-docs

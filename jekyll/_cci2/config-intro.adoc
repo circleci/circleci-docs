@@ -1,11 +1,9 @@
 ---
-redirect_from: /configuration-cookbook/
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Configuration Introduction
 :page-layout: classic-docs
@@ -32,7 +30,7 @@ This guide covers the following topics:
 * How to use workflows to orchestrate your build.
 * How to add approval steps to your workflow.
 
-CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the <<writing-yaml#,Writing YAML>> document for guidance on the basics.
+CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for guidance on the basics.
 
 [#part-1-using-the-shell]
 == Part 1: Using the shell

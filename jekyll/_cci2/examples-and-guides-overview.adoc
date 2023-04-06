@@ -4,21 +4,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
-redirect_from:
-  - /tutorials/
-  - /demo-apps/
-  - /language-android/
-  - /language-clojure/
-  - /language-crystal/
-  - /language-dart/
-  - /language-elixir/
-  - /language-go/
-  - /language-haskell/
-  - /language-java/
-  - /language-php/
-  - /language-ruby/
-  - /language-scala/
 ---
 = Examples and Guides Overview
 :page-layout: classic-docs

@@ -1,17 +1,13 @@
 ---
 layout: classic-docs
-title: Configuring CircleCI
-short-title: Configuring CircleCI
+title: Configuration reference
 description: Reference for .circleci/config.yml
-order: 20
-redirect_from: /configuration/
 readtime: false
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 sectionTags:
   config-version-2:
     - "#version"
@@ -698,7 +694,7 @@ Configured by `docker` key which takes a list of maps:
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The name of a custom docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
-name | N | String | `name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
+name | N | String | `name` defines the the hostname for the container (the default is `localhost`), which is used for reaching secondary (service) containers. By default, all services are exposed directly on `localhost`. This field is useful if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
 entrypoint | N | String or List | The command used as executable when launching the container. `entrypoint` overrides the image's [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint).
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container. `command` overrides the image's `COMMAND`. It will be used as arguments to the image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
 user | N | String | Which user to run commands as within the Docker container
@@ -774,7 +770,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/server-3-operator-vm-service).
+image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation](/docs/server/v4.1/operator/manage-virtual-machines-with-vm-service/).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching).
 {: class="table table-striped"}
 
@@ -1803,7 +1799,7 @@ The lifetime of artifacts, workspaces, and caches can be customized on the [Circ
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/gh-bb-integration/#deployment-keys-and-user-keys) page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [Create additional GitHub SSH keys]({{site.baseurl}}/github-integration/#create-additional-github-ssh-keys) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------

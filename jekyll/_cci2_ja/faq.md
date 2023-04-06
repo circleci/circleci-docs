@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "よくあるご質問"
-short-title: "よくあるご質問"
 description: "CircleCI に関してよく寄せられるご質問"
-categories:
-  - 移行
-order: 1
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 * 目次
@@ -236,7 +231,7 @@ jobs:
 {: #what-operating-systems-does-circleci-20-support }
 
 - [Linux]({{site.baseurl}}/ja/using-linuxvm/)
-- [Android]({{site.baseurl}}/ja/language-android/)
+- [Android]({{site.baseurl}}/ja/android-machine-image/)
 - [macOS]({{site.baseurl}}/ja/using-macos/)
 - [iOS]({{site.baseurl}}/testing-ios/)
 - [Windows]({{site.baseurl}}/ja/using-windows/)
