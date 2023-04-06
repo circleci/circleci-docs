@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Configure a Python application on CircleCI"
-description: "Continuous integration with Python on CircleCI"
+title: "Configure a Go application on CircleCI"
+description: "Continuous integration with Go on CircleCI"
 contentTags:
   platform:
   - Cloud
@@ -9,22 +9,22 @@ contentTags:
   - Server v3.x
 ---
 
-{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
+{% include snippets/language-guided-tour-cards.md lang="go" demo_url_slug="go" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
 
 ## Overview
 {: #overview-new }
 
-This is a quickstart guide for integrating a Python project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Python project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
+This is a quickstart guide for integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
 
 ## Prerequisites
 {: #prerequisites}
 
 * [A CircleCI account]({{site.baseurl}}/first-steps/)
-* A Python project located in a supported VCS
+* A Go project located in a supported VCS
 
-If you do not have a Python project, but would like to follow this guide, you can use our sample project which is [hosted on GitHub](https://github.com/CircleCI-Public/sample-python-cfd)
-and is [building on CircleCI]({{site.cci_public_org_url}}/sample-python-cfd){:rel="nofollow"}. Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
-and rewriting [the configuration file]({{site.gh_public_org_url}}/sample-python-cfd/blob/main/.circleci/config.yml)
+If you do not have a Go project, but would like to follow this guide, you can use our sample project which is [hosted on GitHub](https://github.com/CircleCI-Public/sample-go-cfd)
+and is [building on CircleCI]({{site.cci_public_org_url}}/sample-go-cfd){:rel="nofollow"}. Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
+and rewriting [the configuration file]({{site.gh_public_org_url}}/sample-go-cfd/blob/main/.circleci/config.yml)
 as you follow this guide.
 
 ## Configuration walkthrough
@@ -42,15 +42,15 @@ version: 2.1
 
 `2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
 
-### 2. Use the Python orb
-{: #use-the-python-orb }
+### 2. Use the Go orb
+{: #use-the-go-orb }
 
-The Python [orb]({{site.devhub_base_url}}/orbs/orb/circleci/python) contains a set of prepackaged CircleCI configurations you can use to do common CircleCI tasks for the Python programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about [orbs]({{site.baseurl}}/orb-intro/).
+The Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go) contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about [orbs]({{site.baseurl}}/orb-intro/).
 
 To add the orb to your config, insert:
 ```yaml
 orbs:
-  python: circleci/python@2.0.3
+  python: circleci/go@1.7.3
 ```
 
 **Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
@@ -60,7 +60,7 @@ orbs:
 
 Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or virtual machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/jobs-steps/) page.
 
-A common ask from developers who are getting started with CircleCI is to perform three basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Python orb, we can use commands that are built into the orb to keep our config simple and succinct:
+A common ask from developers who are getting started with CircleCI is to perform three basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Go orb, we can use commands that are built into the orb to keep our config simple and succinct.
 
 #### a. Build and test the app
 {: #build-and-test-the-app }
