@@ -64,7 +64,7 @@ xref:jobs-steps#[Jobs] are nested under each workflow, and can contain tests and
 
 image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
 
-Expand a job also lets you:
+Expanding a job also lets you:
 
 - Load tests, if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication `[FLAKY]`.
 
