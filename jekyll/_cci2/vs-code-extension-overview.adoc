@@ -18,7 +18,7 @@ The CircleCI Visual Studio Code extension enables users to manage their CircleCI
 
 The VS Code extension includes:
 
-- The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without context-switching between VS Code and your browser.
+- The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
 - The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
 
 [#install-the-vs-code-extension]
