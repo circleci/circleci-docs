@@ -7,7 +7,6 @@ contentTags:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 並列実行とテスト分割機能を使用すると以下を実現できます。
@@ -151,7 +150,7 @@ CircleCI には並列の Executor 間でのテスト分割処理を完全に制�
     executor: pw-focal-development
     parallelism: 4
     steps:
-      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL} 
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
 
 ## 既知の制限

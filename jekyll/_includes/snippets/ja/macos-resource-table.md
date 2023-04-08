@@ -3,8 +3,8 @@
 | medium                | 4 @ 2.7 GHz  | 8 GB  |
 | macos.x86.medium.gen2 | 4 @ 3.2 GHz  | 8 GB  |
 | large                 | 8 @ 2.7 GHz  | 16 GB |
+| macos.m1.large.gen1   | 8 @ 3.2 GHz  | 12GB  |
 | macos.x86.metal.gen1  | 12 @ 3.2 GHz | 32 GB |
-| macos.m1.large.gen1   | 8            | 12GB  |
 {: class="table table-striped"}
 
  `medium`および`large`リソースクラスは、2023年10月2日に非推奨になります。 Xcode v14.2は、macOSリソースでサポートされる最新バージョンです。 詳しくは[お知らせ](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891)をご覧ください。

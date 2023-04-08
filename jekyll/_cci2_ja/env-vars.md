@@ -7,15 +7,14 @@ contentTags:
   platform:
     - クラウド
     - Server v3.x
-    - Server v2.x
 suggested:
-  - 
+  -
     title: 環境変数を非公開のままにする
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
-  - 
+  -
     title: 環境変数の設定のトラブルシューティング
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
-  - 
+  -
     title: 環境変数としてファイルを挿入する
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
 ---

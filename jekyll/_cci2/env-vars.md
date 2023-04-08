@@ -8,7 +8,6 @@ contentTags:
     - Cloud
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/

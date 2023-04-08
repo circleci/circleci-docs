@@ -16,11 +16,11 @@ Test your air-gapped installation using CircleCI's Reality Check project.
 
 [#copy-reality-check]
 == 1. Copy CircleCI server Reality Check
-Copy the https://github.com/circleci/realitycheck[CircleCI server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
+Copy the link:https://github.com/circleci/realitycheck[CircleCI server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
 
 [#setup-reality-check]
 == 2. Set up CircleCI server Reality Check
-Set up CircleCI server Reality Check using the https://github.com/circleci/realitycheck#installation[instructions in the readme].
+Set up CircleCI server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the readme].
 
 CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
 

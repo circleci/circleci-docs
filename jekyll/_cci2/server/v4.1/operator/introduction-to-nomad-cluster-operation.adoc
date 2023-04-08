@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI uses https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
 
 [#basic-terminology-and-architecture]
 == Basic terminology and architecture
@@ -86,7 +86,7 @@ kubectl exec -it <nomad-server-pod-ID> -- nomad logs -job -stderr <nomad-job-id>
 
 NOTE: Be sure to specify the `-stderr` flag, as this is where most Build Agent logs appear.
 
-While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see link:https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
 
 Complete the following steps to get logs from the allocation of the specified job:
 
@@ -122,7 +122,7 @@ nomad node-drain -enable -yes <node-id>
 [#scaling-down-the-client-cluster]
 === Scaling down the client cluster
 
-To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
+To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an link:https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
 
 The script should use the commands in the section above to do the following:
 

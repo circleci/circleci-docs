@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 suggested:
   - title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/

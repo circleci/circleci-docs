@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "SSH を使用したデバッグ"
-short-title: "SSH を使用したデバッグ"
 description: "CircleCI で SSH を使用してビルドコンテナにアクセスする方法"
-categories:
-  - トラブルシューティング
-order: 20
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 ## 概要

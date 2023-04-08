@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "CircleCI に SSH キーを登録する"
-short-title: "CircleCI に SSH キーを登録する"
 description: "CircleCI に SSH キーを登録する方法"
-order: 20
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH キーを登録する必要があります。

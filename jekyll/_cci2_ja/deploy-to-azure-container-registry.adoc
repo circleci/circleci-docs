@@ -6,7 +6,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Azure Container Registry へのデプロイ
 :page-layout: classic-docs

@@ -4,12 +4,11 @@ title: "Using Insights"
 short-title: "Using Insights"
 description: "Viewing the status of repos and test performance"
 order: 41
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 ## Overview

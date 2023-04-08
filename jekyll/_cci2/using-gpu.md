@@ -2,14 +2,14 @@
 layout: classic-docs
 title: "Using the GPU execution environment"
 description: "Learn how to configure a your jobs to run in the GPU execution environment."
-contentTags: 
+contentTags:
   platform:
   - Cloud
 plan:
 - Scale
 ---
 
-You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to Nvidia GPUs for specialized workloads. 
+You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to Nvidia GPUs for specialized workloads.
 
 To use the Linux GPU execution environment, use the machine executor and specify a GPU-enabled image. For a full list of machine executor images see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) or the [Configuration Reference]({{site.baseurl}}/configuration-reference#available-linux-gpu-images).
 
@@ -46,7 +46,7 @@ version: 2.1
 
 jobs:
   build:
-    machine: 
+    machine:
       image: windows-server-2019-nvidia:stable
     steps:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
@@ -80,6 +80,3 @@ jobs:
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
 {% include snippets/gpu-windows-resource-table.md %}
-
-## GPUs on server v2.x
-If you are using CircleCI server v2.x, you can configure your VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server]({{ site.baseurl }}/gpu/).

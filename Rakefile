@@ -13,13 +13,11 @@ end
 
 desc 'Build Jekyll site'
 task :build do
-  # Create jekyll config file to override things
-  sh "echo 'baseurl: \"\/#{JEKYLL_BASENAME}\"' > jekyll/_config_override.yml"
   # Build the Jekyll site
   config = Jekyll.configuration({
     'source' => './jekyll',
     'destination' => "./jekyll/_site/#{JEKYLL_BASENAME}",
-    'config' => ['./jekyll/_config.yml','./jekyll/_config_production.yml','./jekyll/_config_override.yml']
+    'config' => ['./jekyll/_config.yml']
   })
   site = Jekyll::Site.new(config)
   Jekyll::Commands::Build.build site, config

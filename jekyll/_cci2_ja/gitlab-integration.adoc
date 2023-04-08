@@ -120,6 +120,37 @@ NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違い�
 
 プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。 SSH キーに関する詳細は、<<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
 
+[#create-gitlab-ssh-key]
+==== GitLab SSH キーを作成
+
+. link:https://docs.gitlab.com/ee/user/ssh.html[GitLab の説明] に従って、SSH キーペアを作成します。パスワードを入力するよう求められた場合、入力しないでください（以下はmacOSでキーを生成するコマンドの一例です）。
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+. link:https://gitlab.com/[GitLab]のプロジェクトにアクセスし、**Settings > Repository**に移動し、**Deploy keys**セクションを展開してください。Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。**Grant write permissions to this key**にチェックを入れ、**キーを追加(Add Key)**をクリックします。
+
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。Hostname のフィールドには、`gitlab.com` を入力し、手順 1 で作成したプライベートキーを追加します。
+
+. `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
+
+
+SSH キーに関する詳細は、 xref:add-ssh-key#[CircleCI への SSH キーの追加] をご覧ください。
+
 [#organization-settings]
 == 組織設定
 

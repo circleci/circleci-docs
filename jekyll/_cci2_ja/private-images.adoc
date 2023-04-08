@@ -2,9 +2,6 @@
 contentTags:
   platform:
   - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
 ---
 = Docker の認証付きプルの使用
 :page-layout: classic-docs
@@ -25,9 +22,6 @@ toc::[]
 ## Docker Executor
 
 https://circleci.com/docs/ja/using-docker[Docker Executor] を使用する場合は、 https://circleci.com/docs/ja/configuration-reference[config.yml ファイル] の `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、 https://circleci.com/docs/ja/contexts/[コンテキスト] を作成するか、プロジェクトごとの環境変数を使用します。
-
-NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
-Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
 
 NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが_必要_なものだけにアクセスできるようにしたりするのにとても便利です。
 
