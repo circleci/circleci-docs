@@ -11,7 +11,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-The CircleCI Visual Studio Code extension enables users to manage their CircleCI pipelines directly from VS Code. 
+The CircleCI Visual Studio Code extension enables you to manage your CircleCI pipelines directly from VS Code. 
 
 [#introduction]
 == Introduction
