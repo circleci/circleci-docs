@@ -225,6 +225,10 @@ en:
             link: runner-installation-cli
           - name: Machine runner installation with Docker
             link: runner-installation-docker
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
+          - name: Upgrading machine runner on server
+            link: runner-upgrading-on-server
           - name: Machine runner configuration reference
             link: runner-config-reference
       - name: How-to Guides
