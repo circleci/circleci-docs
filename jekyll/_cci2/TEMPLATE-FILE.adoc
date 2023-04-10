@@ -108,7 +108,9 @@ The job should only re-run tests that are from a `classname` of `filename` that 
 
 First, add the following gem to your Gemfile:
 
-`gem 'rspec_junit_formatter'`
+```bash
+gem 'rspec_junit_formatter'
+```
 
 Then, modify your test command to use `circleci tests run`:
 
@@ -225,7 +227,3 @@ When can I click the option to "Re-run failed tests only?"
 I don't see my test framework on this page, can I still use the functionality
 
 *Answer*: Yes, as long as your job meets the prerequisites enumerated at the top of this document the functionality is test runner and test framework agnostic.  You can use xref:collect-test-data/#[Collect test data] to ensure that the job is uploading test results.  Note that `classname` and `filename` is not always present by default, it may require additional configuration.  From there, follow the "Quick-start" section to modify your test command to use `circleci tests run`.  If you run into issues, comment on this Discuss post (needs link).
-
-
-
-
