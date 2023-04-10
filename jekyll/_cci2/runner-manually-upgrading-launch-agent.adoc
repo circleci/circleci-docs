@@ -18,7 +18,10 @@ toc::[]
 [#check-current-version]
 == Checking current machine runner version
 
-The machine runner version can be checked by using the `--version` flag with the  binary. The default installation directory for the CircleCI machine runner binary is `/opt/circleci/circleci-launch-agent` on Linux as well as macOS, and `C:\Program Files\CircleCI\circleci-launch-agent.exe` on Windows.
+You can check the machine runner version by using the `--version` flag with the binary. The following are the default installation directories for the CircleCI machine runner binary:
+
+ * Linux and macOS: `/opt/circleci/circleci-launch-agent` 
+ * Windows: `C:\Program Files\CircleCI\circleci-launch-agent.exe`
 
 [#enable-auto-update]
 == Enabling auto update
