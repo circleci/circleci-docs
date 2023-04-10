@@ -119,7 +119,7 @@ if ($Env:expectedHash -ne $Env:fileHash) { Write-Output "CircleCI machine runner
 ```
 
 == Manually replacing the machine runner binary
-Once the new binary has been successfully downloaded, the machine runner instance will need to be stopped, have the currently installed binary overwritten with the newly downloaded binary, and then be started again.
+Once the new binary has been successfully downloaded, you will need to stop the current machine runner instance, overwrite the currently installed binary with the newly downloaded binary, and then restart the machine runner instance.
 
 [#manually-replace-linux-binary]
 === Linux 
