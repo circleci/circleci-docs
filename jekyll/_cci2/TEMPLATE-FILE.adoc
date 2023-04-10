@@ -8,30 +8,145 @@ contentTags:
 = <<Page title here>>
 :page-layout: classic-docs
 :page-liquid:
-:page-description: <<Brief description here>>
+:page-description: <<Functionality to optimize running tests on CircleCI>>
 :icons: font
 :toc: macro
 :toc-title:
 
-[#introduction]
-== Introduction
-test
+[#motivation-and-introduction]
+== Motivation and Introduction
+Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to re-run your workflow from failed.  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
 
-Short intro paragraph 
+CircleCI is releasing new preview functionality to **re-run failed tests only** instead of the entire test suite when a transient test failure arises.
 
 [#prerequisites]
 == Prerequisites
 
+* Testing job uploads test results to CircleCI.  `filename` or `classname` attributes **must be present** in the JUnit XML output
+* Testing job uses `circleci tests run` (see below for details) to execute tests
+
+[#quick-start]
+== Quick-start
+
+[#example-config-file-before]
+=== Before: Example .circleci/config.yml file
+
+```yaml
+ - run:
+    name: Run tests
+    command: |
+      mkdir test-results
+      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings) \
+      pytest --junitxml=test-results/junit.xml $TEST_FILES
+      
+- store_test_results
+    path: test-results
+```
+
+A snippet of a basic CircleCI configuration file that splits tests by previous timing results (xref:test-splitting-tutorial#[Intelligent test splitting]), executes Python tests, stores the test results in a new directory called `test-results`, and uploads those test results to CircleCI.  **Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute.  Not present in this snippet is the key to set `parallelism`(xref:parallelism-faster-jobs#[tutorial]).
+
+[#example-config-file-after]
+=== After: Example .circleci/config.yml file
+
+```yaml
+ - run:
+    name: Run tests
+    command: |
+      mkdir test-results
+      TEST_FILES=$(circleci tests glob "**/test_*.py")
+      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" \
+      --verbose \
+      --split-by=timings
+
+ - store_test_results
+    path: test-results
+```
+
+[#breakdown-the-configuration]
+==== Breakdown of the configuration
+
+* `TEST_FILES=$(circleci tests glob "**/test_*.py")`
+  ** This command uses CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to provide a list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]).  In this case, we're looking for any test file that starts with "test_" and ends with ".py".
+  
+* `echo $TEST_FILES |`
+  ** Pass the list of test files to the `circleci tests run` command via stdin.
+
+* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
+  ** Invoke `circleci tests run` and specify the original command used to run tests as part of the `--command=` parameter
+  ** `--verbose` is an optional parameter but enables debugging messages
+  ** `--split-by-timings` is an optional parameter that accomplishes intelligent test splitting by timing 
+  
+[#verify-the-configuration]
+==== Verify the configuration
+
+After set-up, the next time that you encounter a transient test failure, click the "Re-run failed tests only" button shown below.  
+
+If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
+
+```bash
+Installing circleci-tests-plugin-cli plugin.
+circleci-tests-plugin-cli plugin Installed. Version: 1.0.3349-470dac4
+DEBU[2023-04-10T22:36:53Z] Attempting to read from stdin. This will hang if no input is provided. 
+INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_count=1 batches_processed=0 total_batches_for_job=3
+DEBU[2023-04-10T22:36:53Z] received test names: test_api.py```
+
+The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure.  
+
+[#use-cases]
+== Use Cases
+
 * List item 1
 * List item 2
 
-[#another-section]
-== Another section
+[#additional-examples]
+== Additional examples
 
-More content
+**Configure a job running Ruby (rspec) tests to use "Re-run failed tests only"**:
 
-[#see-also]
-== See also
+First, add the following gem to your Gemfile:
 
-Other recommended pages for reading
+```bash
+gem 'rspec_junit_formatter'
+```
+
+Then, modify your test command:
+
+```yaml
+- run: mkdir ~/rspec
+- run:
+    command: |
+    circleci tests glob spec/**/*_spec.rb | --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml"
+ ```
+
+Update the glob command to match your use case.  See xref:collect-test-data/#rspec#[rspec] for details on how to output test results in an acceptable format for `rspec`.
+
+**Configure a job running Ruby (Cucumber) tests to use "Re-run failed tests only"**:
+
+Modify your test command to look like something similar to:
+
+```yaml
+- run: mkdir -p ~/cucumber
+- run:
+    command: |
+    circleci tests glob features/**/*.feature | --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml"
+ ```
+
+Update the glob command to match your use case.  See xref:collect-test-data/#cucumber#[cucumber] for details on how to output test results in an acceptable format for `Cucumber`.
+
+**Configure a job running Cypress tests to use "Re-run failed tests only"**:
+
+1. Install dependencies `cypress-multi-reportersFollow the steps outlined (https://github.com/michaelleeallen/mocha-junit-reporter/issues/132)[here] to 
+```yaml
+- run: mkdir -p ~/cucumber
+- run:
+    command: |
+    circleci tests glob features/**/*.feature | --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml"
+ ```
+
+Update the glob command to match your use case.  See xref:collect-test-data/#cucumber#[cucumber] for details on how to output test results in an acceptable format for `Cucumber`.
+
+
+[#FAQs]
+== FAQs
+
 
