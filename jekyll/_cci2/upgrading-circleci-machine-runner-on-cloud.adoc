@@ -20,13 +20,14 @@ toc::[]
 
 You can check the machine runner version by using the `--version` flag with the binary. The following are the default installation directories for the CircleCI machine runner binary:
 
- * Linux and macOS: `/opt/circleci/circleci-launch-agent` 
- * Windows: `C:\Program Files\CircleCI\circleci-launch-agent.exe`
+* Linux and macOS: `/opt/circleci/circleci-launch-agent` 
+* Windows: `C:\Program Files\CircleCI\circleci-launch-agent.exe`
 
 [#enable-auto-update]
 == Enabling auto update
 
 The most straightforward way to upgrade an existing CircleCI machine runner is to enable auto update in the configuration file and restart the runner instance. To enable auto update:
+
 . Remove the `disable_auto_update` option from the machine runner configuration file, **or** set `runner.disable_auto_update` to `false`.
 . Restart the machine runner instance either manually, or by the process management used to manage the CircleCI machine runner agent. 
 
