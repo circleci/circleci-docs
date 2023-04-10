@@ -17,7 +17,7 @@ contentTags:
 == Motivation and Introduction
 Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to re-run your workflow from failed.  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
 
-CircleCI is releasing new preview functionality to **re-run failed tests only** instead of the entire test suite when a transient test failure arises.
+CircleCI is releasing new preview functionality to **re-run failed tests only** instead of the entire test suite when a transient test failure arises.  This re-runs failed tests from the same commit, not new ones.
 
 [#prerequisites]
 == Prerequisites
@@ -196,11 +196,37 @@ Modify your test command to look like something similar to:
 
 Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.
 
+[#known-limitations]
+== Known limitations
+
+* When re-running only the failed tests, the next time that job runs, test splitting by timing may not be as efficient as it was before as the test results being stored are only from the subset of failed tests that were run
+* Orbs that run tests *may* not work with this new fucntionality to start
+* If a shell script is invoked to run tests, `circleci tests run` should be placed in the *shell script* itself, not `.circleci/config.yml`
+* Jobs that are older than the xref:persist-data/#custom-storage-usage[retention period] for Workspaces for the organization cannot be re-run with "Re-run failed tests only"
+
 [#FAQs]
 == FAQs
 
 I have a question or issue, where do I go?
 
 *Answer*: Insert Discuss post.
+
+Will this functionality re-run individual tests?
+
+*Answer*: No, it will re-run failed test `classnames` or `filenames` that had at least 1 individual test failure
+
+What happens if I try to use the functionality and it hasn't been set-up in my `.circleci/config.yml` file?
+
+*Answer*: The job will fail.
+
+When can I click the option to "Re-run failed tests only?"
+
+*Answer*: Right now, the option will be present anytime "Re-run workflow from failed" option is present and vice versa.
+
+I don't see my test framework on this page, can I still use the functionality
+
+*Answer*: Yes, as long as your job meets the prerequisites enumerated at the top of this document the functionality is test runner and test framework agnostic.  You can use xref:collect-test-data/#[Collect test data] to ensure that the job is uploading test results.  Note that `classname` and `filename` is not always present by default, it may require additional configuration.  From there, follow the "Quick-start" section to modify your test command to use `circleci tests run`.  If you run into issues, comment on this Discuss post (needs link).
+
+
 
 
