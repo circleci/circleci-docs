@@ -91,6 +91,7 @@ circleci-tests-plugin-cli plugin Installed. Version: 1.0.3349-470dac4
 DEBU[2023-04-10T22:36:53Z] Attempting to read from stdin. This will hang if no input is provided. 
 INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_count=1 batches_processed=0 total_batches_for_job=3
 DEBU[2023-04-10T22:36:53Z] received test names: test_api.py```
+```
 
 The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure.  
 
