@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= <<Page title here>>
+= <<Re-run failed tests only>>
 :page-layout: classic-docs
 :page-liquid:
 :page-description: <<Functionality to optimize running tests on CircleCI>>
