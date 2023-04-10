@@ -108,9 +108,7 @@ The job should only re-run tests that are from a `classname` of `filename` that 
 
 First, add the following gem to your Gemfile:
 
-```bash
-gem 'rspec_junit_formatter'
-```
+`gem 'rspec_junit_formatter'`
 
 Then, modify your test command to use `circleci tests run`:
 
