@@ -91,7 +91,6 @@ jobs: # Define the build and deploy jobs
             arguments: | # Optional arguments
             --acl public-read \
             --cache-control "max-age=86400"
-            overwrite: true # default is false
 ```
 
 [#deploy-to-aws-s3-with-2-configuration]
