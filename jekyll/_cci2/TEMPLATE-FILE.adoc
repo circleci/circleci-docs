@@ -111,7 +111,7 @@ First, add the following gem to your Gemfile:
 gem 'rspec_junit_formatter'
 ```
 
-Then, modify your test command:
+Then, modify your test command to use `circleci tests run`:
 
 ```yaml
 - run: mkdir ~/rspec
