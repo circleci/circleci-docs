@@ -47,7 +47,7 @@ The first two options (**Fastest** and **Faster**) automatically trigger a pipel
 --
 You need:
 
-* Your GitLab self-managed instance URL, e.g. `https://example.circleci.com``.
+* Your GitLab self-managed instance URL, e.g. `https://test-gitlab.circleci.com``.
 +
 Your self-managed instance must already contain at least one project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
 
@@ -56,8 +56,8 @@ Your self-managed instance must already contain at least one project. The author
 * Your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
 +
 The output should look something like:
-  
-```
++  
+```shell
 ➜  ~ ssh-keyscan test-gitlab.circleci.com
 
 # gitlab.com:22 SSH-2.0-GitLab-SSHD
@@ -72,7 +72,7 @@ gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nO
 
 To create a new project:
 
-. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://example.circleci.com/api/v4`.
+. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`.
 
 . Enter your personal access token. Click **Connect**.
 
@@ -262,7 +262,7 @@ For GitLab Self-managed organizations, you may connect additional self-managed i
 
 . Navigate to the **Integrations** section within **Organization Settings** to add a new instance. 
 
-. You will need to enter the instance URL and the SSH host keys as described in the xref:#sign-up[Sign up] section earlier in this document. The new instance is successfully integrated when you see a "Known hosts file verified" message.
+. You will need to enter the instance URL and the SSH host keys as described in the xref:#sign-up[Sign up] section earlier in this document. You have successfully set up the integration when you see a "Known hosts file verified" message.
 +
 More details on verifying self-managed instances are available in the <<#establish-the-authenticity-of-an-ssh-host,Establish the authenticity of an SSH host>> section below.
 
@@ -275,9 +275,9 @@ For GitLab.com, account integrations can be managed under your xref:#user-accoun
 
 For GitLab self-managed instances, it is necessary to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic. The **Known hosts file** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
 
-SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for example, `ssh-keyscan example.circleci.com`. 
+SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for example, `ssh-keyscan test-gitlab.circleci.com`. 
 
-When retrieving the host keys, you can confirm that you have the correct key by checking its fingerprints. You can check the fingerprints found in the **Instance Configuration** section of your self-managed instance's Help pages (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints shows an example).
+When retrieving the host keys, you can confirm that you have the correct key by checking its fingerprints. You can check the fingerprints found in the **Instance Configuration** section of your self-managed instance's Help pages (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[this Instance Configuration page] shows an example).
 
 [#roles-and-permissions]
 == Roles and permissions
