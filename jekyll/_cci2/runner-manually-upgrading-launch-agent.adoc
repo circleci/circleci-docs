@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Upgrading the CircleCI Machine Runner on Cloud
+= Upgrading the CircleCI machine runner on cloud
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Find resources to manually upgrade an already installed CircleCI Machine Runner on linux, windows, or macOS.
