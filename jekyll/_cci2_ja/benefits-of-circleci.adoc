@@ -25,7 +25,7 @@ CircleCI の開発者向け機能の一例を以下に示します。
 - `.circleci/config.yml` ファイルでxref:parallelism-faster-jobs#[並列実行]を設定し、ジョブの実行スピードを高める
 - 簡単な 2 つのキーでxref:caching#[キャッシュ]を設定し、xref:workflows#[ワークフロー]の既存ジョブのデータを再利用する
 - セルフホストxref:runner-overview#[ランナー]を設定して、独自のプラットフォームをサポートする
-- Machine Executor で xref:arm-resources#[Arm リソース]を利用する
+- Machine Executor で xref:using-arm#[Arm リソース]を利用する
 - xref:orb-intro#[CircleCI Orb] (再利用可能な設定パッケージ) を使用して、サードパーティツールと連携する
 - 各種言語でビルド済みの Docker xref:circleci-images#[イメージ]を利用する
 - link:https://www.circleci.com/docs/api/v2[API] を使用してジョブやワークフローの情報を取得する
