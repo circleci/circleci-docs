@@ -59,7 +59,7 @@ For machine runners where auto update is unable to be used, the machine runner b
 [#manually-download-mac-or-linux-binary]
 === Manually downloading the Linux or macOS machine runner agent
 
-As with the xref:runner-installation-linux.adoc[Linux] and xref:runner-installation-mac.adoc[macOS] installation process, the environment variable `platform` will need to be set to an appropriate value for the target installation system. 
+As with the xref:runner-installation-linux#[Linux] and xref:runner-installation-mac#[macOS] installation process, first you need to set the environment variable `platform` to the correct value for the target installation system. 
 
 ```shell
 # for Linux x86_64
