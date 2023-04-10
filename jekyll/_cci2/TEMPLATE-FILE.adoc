@@ -15,7 +15,7 @@ contentTags:
 
 [#motivation-and-introduction]
 == Motivation and Introduction
-Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to re-run your workflow from failed.  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
+Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to [re-run your workflow from failed](https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow).  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
 
 CircleCI is releasing new preview functionality to **re-run failed tests only** instead of the entire test suite when a transient test failure arises.  This re-runs failed tests from the same commit, not new ones.
 
