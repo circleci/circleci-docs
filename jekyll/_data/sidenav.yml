@@ -224,6 +224,8 @@ en:
             link: runner-installation-mac
           - name: CLI installation
             link: runner-installation-cli
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
           - name: Upgrading machine runner on server
             link: runner-upgrading-on-server
           - name: Machine runner configuration reference
