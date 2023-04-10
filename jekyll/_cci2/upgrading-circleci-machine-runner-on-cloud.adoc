@@ -56,8 +56,15 @@ Start ScheduledTask -TaskName "CircleCI Launch Agent"
 
 For machine runners where auto update is unable to be used, the machine runner binary, also sometimes known as the launch-agent binary,  can be manually downloaded and used to replace the existing version.
 
-[#manually-download-mac-or-linux-binary]
-=== Manually downloading the Linux or macOS machine runner agent
+NOTE: If process management is not being used to manage the machine runner, the process will need to be manually stopped using `kill -9` on macOS and Linux systems, or the Task Manager on Windows systems, and then manually restarted.  
+
+The process to download the binary can be broken into three steps: downloading the binary, replacing the binary, and restarting the CircleCI machine runner service. These steps are expanded upon in the section below.
+
+=== 1. Download a new version of the binary
+
+==== Download the binary on Linux or macOS
+
+===== Set the platform environment variable
 
 As with the xref:runner-installation-linux#[Linux] and xref:runner-installation-mac#[macOS] installation process, first you need to set the environment variable `platform` to the correct value for the target installation system. 
 
@@ -86,9 +93,10 @@ export platform=darwin/arm64
 export platform=darwin/amd64
 ```
 
+===== Download the new agent binary
+
 ```shell
 # Download the new version of the CircleCI Agent manually on macOS, and Linux with bash
-
 base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 agent_version=$(curl "${base_url}/release.txt")
 curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
@@ -99,8 +107,7 @@ grep "${file}" checksums.txt | sha256sum --check || echo "Failed to download the
 chmod +x $file
 ```
 
-[#manually-download-windows-binary]
-=== Manually downloading the windows machine runner
+==== Download the binary on Windows
 
 ```shell
 # Download the new version of the CircleCI Agent manually on Windows with PowerShell
@@ -118,31 +125,44 @@ $Env:expectedHash = "$(grep $Env:filename checksums.txt)".Split(" ")[0]
 if ($Env:expectedHash -ne $Env:fileHash) { Write-Output "CircleCI machine runner binary download failed, please try again"}else{Write-Output "CircleCI machine runner binary successfully downloaded to $CWD/$Env:fileName"}
 ```
 
-== Manually replacing the machine runner binary
-Once the new binary has been successfully downloaded, you will need to stop the current machine runner instance, overwrite the currently installed binary with the newly downloaded binary, and then restart the machine runner instance.
+=== 2. Replace the existing binary with the new version
 
-[#manually-replace-linux-binary]
-=== Linux 
+==== Replace the existing binary on Linux
+
 ```shell
 sudo systemctl stop circleci.service
 # Replace the current binary with the newly downloaded binary, by default the machine runner binary is installed to `/opt/circleci/circleci-launch-agent`
-sudo systemctl start circleci.service
 ```
 
-[#manually-replace=macos-binary]
-=== macOS
+==== Replace the existing binary on macOS
+
 ```shell
 sudo launchctl stop '/Library/LaunchDaemons/com.circleci.runner.plist'
 # Replace the current binary with the newly downloaded binary, by default the machine runner binary is installed to `/opt/circleci/circleci-launch-agent`
-sudo launchctl start '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-[#manually-replace-windows-binary]
-=== Windows
+==== Replace the existing binary on Windows 
+
 ```shell
 Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 # Replace the current binary with the newly downloaded binary, this will require renaming or deleting the existing binary
-Start-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+=== 3. Restart the machine runner service
+
+==== Restart the machine runner service on Linux
+
+```shell
+sudo systemctl start circleci.service
 ```
 
-If process management is not being used to manage the machine runner, the process will need to be manually stopped using `kill -9` on macOS and Linux systems, or the Task Manager on Windows systems, and then manually restarted.  
+==== Restart the machine runner service on macOS
+
+```shell
+sudo launchctl start '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+==== Restart the machine runner service on Windows
+
+```shell
+Start-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
