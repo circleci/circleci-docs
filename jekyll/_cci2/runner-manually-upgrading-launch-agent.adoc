@@ -11,7 +11,7 @@ contentTags:
 :toc: macro:
 :toc-tittle:
 
-This page describes how to update the CircleCI **machine runner** on CircleCI cloud
+This page describes how to update the CircleCI **machine runner** on CircleCI cloud.
 
 toc::[]
 
