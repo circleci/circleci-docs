@@ -81,6 +81,8 @@ A snippet of a basic CircleCI configuration file that splits tests by previous t
 
 After set-up, the next time that you encounter a transient test failure, click the "Re-run failed tests only" button shown below.  
 
+**Insert screenshot**
+
 If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
 
 ```bash
@@ -135,18 +137,70 @@ Update the glob command to match your use case.  See xref:collect-test-data/#cuc
 
 **Configure a job running Cypress tests to use "Re-run failed tests only"**:
 
-1. Install dependencies `cypress-multi-reportersFollow the steps outlined (https://github.com/michaelleeallen/mocha-junit-reporter/issues/132)[here] to 
+1. Install dependencies `cypress-multi-reporters` and `mocha-junit-reporter`. If using `npm`:
+
+```bash
+npm install --save-dev cypress-multi-reporters mocha-junit-reporter
+```
+
+2. Create and setup reporter config file if it doesn't already exist, this example will call it `reporter-config.json`.
+
+```bash
+{
+  "reporterEnabled": "spec, mocha-junit-reporter", // set the reporters
+  "reporterOptions": {
+    "mochaFile": "results/junit/junit-[hash].xml", // each suite produces its own junit :(, save them with unique hash
+   }
+}
+```
+
+
+3. Modify your test command to use the two reporter flags and `circleci tests run`:
+
 ```yaml
-- run: mkdir -p ~/cucumber
-- run:
-    command: |
-    circleci tests glob features/**/*.feature | --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml"
+     -run:
+        name: run tests
+        command: | 
+          cd ./cypress 
+          npm ci 
+          npm run start &
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --spec"
  ```
 
-Update the glob command to match your use case.  See xref:collect-test-data/#cucumber#[cucumber] for details on how to output test results in an acceptable format for `Cucumber`.
+4. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined (https://github.com/michaelleeallen/mocha-junit-reporter/issues/132)[here] to massage the test results into the proper format.  In this case, we've saved a copy of the script to a file called `fix-junit.js`. You can then invoke this script by adding a new command (in addition to the command that uploads test results, `store_test_results`):
 
+```yaml
+    - run:
+       when: always
+       name: process test results (add in file path in junit)
+       command: |
+          cd ./cypress
+          node ./scripts/fix-junit.js
+     - store_test_results: 
+       path: ./cypress/results
+```  
+
+**Configure a job running Javascript/Typescript (Jest) tests to use "Re-run failed tests only"**:
+
+Modify your test command to look like something similar to:
+
+```yaml
+- run:
+    command: |
+    npx jest --listTests | circleci tests run --command="JEST_UNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --"
+    environment:
+        JEST_JUNIT_OUTPUT_DIR: ./reports/
+  - store_test_results:
+      path: ./reports/
+ ```
+
+Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.
 
 [#FAQs]
 == FAQs
+
+I have a question or issue, where do I go?
+
+*Answer*: Insert Discuss post.
 
 
