@@ -141,3 +141,18 @@
 |文字列
 |**内部**. ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。
 |===
+
+GitLab SaaS で非推奨となった環境変数を GitLab パイプラインで使用する必要がある場合は、設定ファイル内のパイプライン値を使用してこの機能を再作成できます。 次の例は、xref:env-vars#environment-variable-usage-options[environment key] を使用して環境変数 `CIRCLE_PROJECT_REPONAME` を設定し、`pipeline.trigger_parameters.gitlab.repo_name` の値でそれを補完する方法を示しています：
+
+```yaml
+build:
+  docker:
+    - image: cimg/node:17.0
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  environment:
+    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
+  steps:
+    - run: echo $CIRCLE_PROJECT_REPONAME
+```
