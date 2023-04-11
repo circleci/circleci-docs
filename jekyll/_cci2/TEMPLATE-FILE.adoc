@@ -13,7 +13,7 @@ contentTags:
 
 [#motivation-and-introduction]
 == Motivation and Introduction
-Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to [https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow](re-run your workflow from failed).  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
+Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed].  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
 
 CircleCI is releasing new preview functionality to **re-run failed tests only** instead of the entire test suite when a transient test failure arises.  This re-runs failed tests from the same commit, not new ones.
 
@@ -22,6 +22,7 @@ CircleCI is releasing new preview functionality to **re-run failed tests only** 
 
 * Testing job uploads test results to CircleCI.  `filename` or `classname` attributes **must be present** in the JUnit XML output
 * Testing job uses `circleci tests run` (see below for details) to execute tests
+  ** Note: If your current job is using test splitting, you must switch your `.circleci/config.yml` definition from `circleci tests split` to `circleci tests run`
 
 [#quick-start]
 == Quick-start
@@ -119,7 +120,7 @@ Update the glob command to match your use case.  See xref:collect-test-data/#rsp
 
 Modify your test command to look like something similar to:
 
-```bash
+```yaml
 - run: mkdir -p ~/cucumber
 - run:
     command: |
