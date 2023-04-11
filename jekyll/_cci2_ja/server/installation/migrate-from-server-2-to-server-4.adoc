@@ -2,8 +2,9 @@
 
 contentTags:
   platform:
+  - Server v2.x
   - Server v4.x
-  - Server Admin
+  - サーバー管理者
 ---
 = CircleCI Server v2.19 から v4.0 への移行
 :page-layout: classic-docs
