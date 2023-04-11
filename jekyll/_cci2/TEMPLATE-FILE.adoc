@@ -13,16 +13,19 @@ contentTags:
 
 [#motivation-and-introduction]
 == Motivation and Introduction
-Historically, when your workflow has flaky tests, the only option to get to a passing workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed].  This re-run executes *all tests*, including the tests that passed which prolongs time-to-feedback and wastes credits.
+Historically, when your testing job has flaky tests, the only option to get to a passing workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed].  This type of re-run executes *all tests* from your testing job, including the tests that passed which prolongs time-to-feedback and burns credits unneccessarily.
 
-CircleCI is releasing new preview functionality to **re-run failed tests only** instead of the entire test suite when a transient test failure arises.  This re-runs failed tests from the same commit, not new ones.
+CircleCI is releasing new preview functionality to **re-run failed tests only**.  When selecting this option (see image below), instead of re-running the *entire test suite* when a transient test failure arises, only a subset of tests are re-run.  This option re-runs failed tests from the same commit, not new ones.
+
+**Insert screenshot**
+
 
 [#prerequisites]
 == Prerequisites
 
-* Testing job uploads test results to CircleCI.  `filename` or `classname` attributes **must be present** in the JUnit XML output
+* Testing job uploads xref:collect-test-data/#[test results] to CircleCI.  `filename` or `classname` attributes **must be present** in the JUnit XML output
 * Testing job uses `circleci tests run` (see below for details) to execute tests
-  ** Note: If your current job is using test splitting, you must switch your `.circleci/config.yml` definition from `circleci tests split` to `circleci tests run`
+  ** Note: If your current job is using test splitting, you must switch your `.circleci/config.yml` definition from `circleci tests split` to `circleci tests run` (see below for instructions)
 
 [#quick-start]
 == Quick-start
@@ -79,8 +82,6 @@ A snippet of a basic CircleCI configuration file that splits tests by previous t
 ==== Verify the configuration
 
 After set-up, the next time that you encounter a transient test failure, click the "Re-run failed tests only" button shown below.  
-
-**Insert screenshot**
 
 If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
 
