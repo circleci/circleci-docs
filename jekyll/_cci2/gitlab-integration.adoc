@@ -49,10 +49,11 @@ You need:
 
 * Your GitLab self-managed instance URL, e.g. `https://test-gitlab.circleci.com``.
 +
-Your self-managed instance must already contain at least one project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
+Your self-managed instance must already contain at least one GitLab project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
 
 * A link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.  
 
+[#known-hosts-input]
 * Your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
 +
 The output should look something like:
@@ -76,7 +77,7 @@ To create a new project:
 
 . Enter your personal access token. Click **Connect**.
 
-. Copy and paste the SSH host key from your self-managed instance into **Known hosts file**. Click **Connect**.  
+. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Click **Connect**.  
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name. 
 
@@ -273,7 +274,7 @@ For GitLab.com, account integrations can be managed under your xref:#user-accoun
 [#establish the authenticity of an SSH host]
 ==== Establish the authenticity of an SSH host
 
-For GitLab self-managed instances, it is necessary to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic. The **Known hosts file** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
+For GitLab self-managed instances, it is necessary to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic. The **known_hosts** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
 
 SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for example, `ssh-keyscan test-gitlab.circleci.com`. 
 
