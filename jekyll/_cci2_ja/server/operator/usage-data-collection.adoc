@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Usage data collection
+= 使用状況データの収集
 :page-layout: classic-docs
 :page-liquid:
 :page-description: プロダクトとサービスの向上のための使用状況データの収集について説明します。
