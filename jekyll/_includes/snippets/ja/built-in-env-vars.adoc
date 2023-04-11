@@ -142,7 +142,7 @@
 |**内部**. ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。
 |===
 
-If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can recreate this functionality using pipeline values in your configuration file. The following example shows how to set an environment variable `CIRCLE_PROJECT_REPONAME` using the xref:env-vars#environment-variable-usage-options[`environment` key] and populating it with the `pipeline.trigger_parameters.gitlab.repo_name` value:
+GitLab SaaS で非推奨となった環境変数を GitLab パイプラインで使用する必要がある場合は、設定ファイル内のパイプライン値を使用してこの機能を再作成できます。 次の例は、xref:env-vars#environment-variable-usage-options[environment key] を使用して環境変数 `CIRCLE_PROJECT_REPONAME` を設定し、`pipeline.trigger_parameters.gitlab.repo_name` の値でそれを補完する方法を示しています：
 
 ```yaml
 build:
