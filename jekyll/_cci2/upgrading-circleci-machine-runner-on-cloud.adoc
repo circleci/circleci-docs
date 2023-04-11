@@ -33,7 +33,7 @@ The most straightforward way to upgrade an existing CircleCI machine runner is t
 
 More details on configuring machine runner can be found in the xref:runner-config-reference#[machine runner configuration reference].
 
-In some cases an environment variable may have been used to disable the auto update functionality. If the machine runner installation is not updated after enabling the auto update functionality in the configuration file, the environment variable `LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE` should be set to have a value of `false`, or unset entirely, and the machine runner instance restarted again. 
+In some cases, an environment variable may have been used to disable the auto update functionality. If the machine runner installation is not updated after enabling auto update in the configuration file, set the value of the environment variable `LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE` to `false`, **or** unset the variable entirely. Then, restart the machine runner instance again.
 
 === Linux 
 ```shell
@@ -52,10 +52,10 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 Start ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
-[#manually-download-updated-binary]
-== Manually download the updated machine runner binary
+[#manually-update-by-downloading-a-new-version-of-the-machine-runner-binary]
+== Manually update by downloading a new version of the machine runner binary
 
-For machine runners where auto update is unable to be used, the machine runner binary, also sometimes known as the launch-agent binary,  can be manually downloaded and used to replace the existing version.
+For machine runners where auto update cannot be used, the machine runner binary, also known as the launch-agent binary, can be manually downloaded and used to replace the existing version.
 
 NOTE: If process management is not being used to manage the machine runner, the process will need to be manually stopped using `kill -9` on macOS and Linux systems, or the Task Manager on Windows systems, and then manually restarted.  
 
