@@ -132,11 +132,13 @@ Update the glob command to match your use case.  See xref:collect-test-data/#cuc
 
 **Configure a job running Cypress tests to use "Re-run failed tests only"**:
 
-1. Install dependencies `cypress-multi-reporters` and `mocha-junit-reporter`. If using `npm`, add to the file where dependencies are installed (ie. `package.json` or `reporter-config.json`:
+1. Install dependencies `cypress-multi-reporters` and `mocha-junit-reporter`. If using `npm`, run the following on your local machine:
 
 ```bash
 npm install --save-dev cypress-multi-reporters mocha-junit-reporter
 ```
+
+Your `package.json` / `package-lock.json` will be updated and committed on your next push from that branch. 
 
 2. Create and setup reporter config file if it doesn't already exist, this example will call it `reporter-config.json`.
 
@@ -161,7 +163,9 @@ npm install --save-dev cypress-multi-reporters mocha-junit-reporter
           circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --spec" --verbose
  ```
 
-4. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[here] to massage the test results into the proper format.  In this case, we've saved a copy of the script to a file called `fix-junit.js`. You can then invoke this script by adding a new command (in addition to the command that uploads test results, `store_test_results`):
+Modify your glob command for your specific use case.
+
+4. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[here] to massage the test results into the proper format.  In this case, we've saved a copy of the linked script to a file called `fix-junit.js`. You can then invoke this script by adding a new step in your `.circleci/config.yml` file (in addition to the command that uploads test results, `store_test_results`):
 
 ```yaml
     - run:
@@ -173,6 +177,8 @@ npm install --save-dev cypress-multi-reporters mocha-junit-reporter
      - store_test_results: 
        path: ./cypress/results
 ```  
+
+Your new testing job's `.circleci/config.yml` definition will have both snippets from steps 3 and 4 above, one right after the other.
 
 **Configure a job running Javascript/Typescript (Jest) tests to use "Re-run failed tests only"**:
 
