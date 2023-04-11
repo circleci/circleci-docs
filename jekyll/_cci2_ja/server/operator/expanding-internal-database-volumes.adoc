@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Expanding Internal Database Volumes
+= 内部データベースのボリューム拡張
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
