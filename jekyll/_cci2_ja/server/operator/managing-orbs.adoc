@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Managing Orbs
+= Orb の管理
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは Orb の概要と CircleCI Server v4.x. で Orb を管理する方法について学べます。
