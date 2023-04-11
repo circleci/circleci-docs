@@ -318,8 +318,8 @@ en:
             link: slack-orb-tutorial
       - name: How-to guides
         children:
-          - name: Deploy service update to EC2
-            link: deploy-service-update-to-aws-ec2
+          - name: Deploy service update to ECS
+            link: deploy-service-update-to-aws-ecs
       - name: Reference
         children:
           - name: Orbs concepts
@@ -526,8 +526,8 @@ en:
             link: deploy-to-artifactory
           - name: Deploy to AWS
             link: deploy-to-aws
-          - name: Deploy Service Update to AWS EC2
-            link: deploy-service-update-to-aws-ec2
+          - name: Deploy service update to AWS ECS
+            link: deploy-service-update-to-aws-ecs
           - name: Deploy to Azure Container Registry
             link: deploy-to-azure-container-registry
           - name: Deploy to Capistrano
@@ -1310,9 +1310,9 @@ ja:
       - name: How-To Guides
         i18n_name: ガイド
         children:
-          - name: Deploy service update to EC2
-            link: ja/deploy-service-update-to-aws-ec2
-            i18n_name: 変更のEC2へのデプロイ
+          - name: Deploy service update to ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1620,9 +1620,9 @@ ja:
           - name: Deploy to AWS
             link: ja/deploy-to-aws
             i18n_name: AWSへのデプロイ
-          - name: Deploy Service Update to AWS EC2
-            link: ja/deploy-service-update-to-aws-ec2
-            i18n_name: 変更のEC2へのデプロイ
+          - name: Deploy service update to AWS ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
           - name: Deploy to Azure Container Registry
             link: ja/deploy-to-azure-container-registry
             i18n_name: Azure Container Registryへのデプロイ
