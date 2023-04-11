@@ -113,10 +113,10 @@ gem 'rspec_junit_formatter'
 Then, modify your test command to use `circleci tests run`:
 
 ```yaml
-    - run: mkdir ~/rspec
-    - run:
-      command: |
-        circleci tests glob spec/**/*_spec.rb | --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml"
+ - run: mkdir ~/rspec
+ - run:
+    command: |
+      circleci tests glob spec/**/*_spec.rb | --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml"
  ```
 
 Update the glob command to match your use case.  See xref:collect-test-data/#rspec#[rspec] for details on how to output test results in an acceptable format for `rspec`.
