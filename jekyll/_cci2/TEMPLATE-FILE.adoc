@@ -132,7 +132,7 @@ Update the glob command to match your use case.  See xref:collect-test-data/#cuc
 
 **Configure a job running Cypress tests to use "Re-run failed tests only"**:
 
-1. Install dependencies `cypress-multi-reporters` and `mocha-junit-reporter`. If using `npm`:
+1. Install dependencies `cypress-multi-reporters` and `mocha-junit-reporter`. If using `npm`, add to the file where dependencies are installed (ie. `package.json` or `reporter-config.json`:
 
 ```bash
 npm install --save-dev cypress-multi-reporters mocha-junit-reporter
@@ -148,7 +148,6 @@ npm install --save-dev cypress-multi-reporters mocha-junit-reporter
    }
 }
 ```
-
 
 3. Modify your test command to use the two reporter flags and `circleci tests run`:
 
