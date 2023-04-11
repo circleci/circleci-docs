@@ -93,12 +93,6 @@ DEBU[2023-04-10T22:36:53Z] received test names: test_api.py```
 
 The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure.  
 
-[#use-cases]
-== Use Cases
-
-* List item 1
-* List item 2
-
 [#additional-examples]
 == Additional examples
 
@@ -125,7 +119,7 @@ Update the glob command to match your use case.  See xref:collect-test-data/#rsp
 
 Modify your test command to look like something similar to:
 
-```yaml
+```bash
 - run: mkdir -p ~/cucumber
 - run:
     command: |
