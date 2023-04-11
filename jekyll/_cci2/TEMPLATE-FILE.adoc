@@ -75,13 +75,13 @@ A snippet of a basic CircleCI configuration file that splits tests by previous t
 
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
   ** Invoke `circleci tests run` and specify the original command used to run tests as part of the `--command=` parameter.  **This is required**.  `xargs` must be present as well.
-  ** `--verbose` is an optional parameter which enables more verbose debugging messages
-  ** `--split-by-timings` accomplishes intelligent test splitting by timing. Note that this is not required in order to use `circleci tests run`.  If your testing job is not using CircleCI's test splitting, omit this parameter.
+  ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages
+  ** `--split-by-timings` accomplishes intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`.  If your testing job is not using CircleCI's test splitting, omit this parameter.
   
 [#verify-the-configuration]
 ==== Verify the configuration
 
-After set-up, the next time that you encounter a transient test failure, click the "Re-run failed tests only" button shown below.  
+After set-up, the next time that you encounter a test failure, click the "Re-run failed tests only" button. 
 
 If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
 
@@ -93,7 +93,7 @@ INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_c
 DEBU[2023-04-10T22:36:53Z] received test names: test_api.py```
 ```
 
-The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked going forward.  
+The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked going forward.  If you're seeing different behavior, comment on this https://discuss.circleci.com/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
@@ -112,7 +112,7 @@ Then, modify your test command to use `circleci tests run`:
  - run: mkdir ~/rspec
  - run:
     command: |
-      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml"
+      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose
  ```
 
 Update the glob command to match your use case.  See xref:collect-test-data/#rspec#[rspec] for details on how to output test results in an acceptable format for `rspec`.
@@ -125,7 +125,7 @@ Modify your test command to look like something similar to:
 - run: mkdir -p ~/cucumber
 - run:
     command: |
-    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml"
+    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose
  ```
 
 Update the glob command to match your use case.  See xref:collect-test-data/#cucumber#[cucumber] for details on how to output test results in an acceptable format for `Cucumber`.
@@ -159,10 +159,10 @@ npm install --save-dev cypress-multi-reporters mocha-junit-reporter
           cd ./cypress 
           npm ci 
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --spec"
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --spec" --verbose
  ```
 
-4. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined (https://github.com/michaelleeallen/mocha-junit-reporter/issues/132)[here] to massage the test results into the proper format.  In this case, we've saved a copy of the script to a file called `fix-junit.js`. You can then invoke this script by adding a new command (in addition to the command that uploads test results, `store_test_results`):
+4. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[here] to massage the test results into the proper format.  In this case, we've saved a copy of the script to a file called `fix-junit.js`. You can then invoke this script by adding a new command (in addition to the command that uploads test results, `store_test_results`):
 
 ```yaml
     - run:
@@ -189,13 +189,13 @@ Modify your test command to look like something similar to:
       path: ./reports/
  ```
 
-Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.
+Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.  `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `filename` attribute is present.
 
 [#known-limitations]
 == Known limitations
 
-* When re-running only the failed tests, the next time that job runs, test splitting by timing may not be as efficient as it was before as the test results being stored are only from the subset of failed tests that were run
-* Orbs that run tests *may* not work with this new fucntionality to start
+* When re-running only the failed tests, the next time that job runs, test splitting by timing may not be as efficient as expected as the test results being stored are only from the subset of failed tests that were run
+* Orbs that run tests *may* not work with this new fucntionality at this time
 * If a shell script is invoked to run tests, `circleci tests run` should be placed in the *shell script* itself, not `.circleci/config.yml`
 * Jobs that are older than the xref:persist-data/#custom-storage-usage[retention period] for Workspaces for the organization cannot be re-run with "Re-run failed tests only"
 
@@ -221,3 +221,7 @@ When can I click the option to "Re-run failed tests only?"
 I don't see my test framework on this page, can I still use the functionality
 
 *Answer*: Yes, as long as your job meets the prerequisites enumerated at the top of this document the functionality is test runner and test framework agnostic.  You can use xref:collect-test-data/#[Collect test data] to ensure that the job is uploading test results.  Note that `classname` and `filename` is not always present by default, it may require additional configuration.  From there, follow the "Quick-start" section to modify your test command to use `circleci tests run`.  If you run into issues, comment on this Discuss post (needs link).
+
+Can I see in the UI whether a job was re-run using "Re-run failed tests only"
+
+*Answer* Not at this time
