@@ -263,7 +263,7 @@ For GitLab Self-managed organizations, you may connect additional self-managed i
 
 . Navigate to the **Integrations** within **Organization Settings** to add a new instance. 
 
-. You will need to enter the instance URL and the SSH host keys as described in the xref:#sign-up[Sign up] section above. You have successfully set up the integration when you see a "Known hosts file verified" message.
+. You will need to enter the instance URL, and the SSH host keys if you have not already done so, as described in the xref:#sign-up[Sign up] section above. You have successfully set up the integration when you see a "Known hosts file verified" message.
 +
 More details on verifying self-managed instances are available in the <<#establish-the-authenticity-of-an-ssh-host,Establish the authenticity of an SSH host>> section below.
 
