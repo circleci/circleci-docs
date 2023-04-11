@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Managing load balancers
+= ロードバランサーの管理
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このガイドではフロントエンド ロードバランサーを非公開にする方法を説明します。
