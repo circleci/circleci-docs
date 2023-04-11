@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.x
-    - Server Admin
+    - サーバー管理者
 ---
-= Backup and restore
+= バックアップと復元
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、推奨される CircleCI Server のインスタンスデータと状態のバックアップと復元方法を説明します。
