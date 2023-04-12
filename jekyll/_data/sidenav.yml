@@ -223,8 +223,6 @@ en:
             link: runner-installation-mac
           - name: CLI installation
             link: runner-installation-cli
-          - name: Machine runner installation with Docker
-            link: runner-installation-docker
           - name: Upgrading machine runner on cloud
             link: upgrading-circleci-machine-runner-on-cloud
           - name: Upgrading machine runner on server
