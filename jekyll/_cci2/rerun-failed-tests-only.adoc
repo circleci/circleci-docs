@@ -182,6 +182,16 @@ Your new testing job's `.circleci/config.yml` definition will have both snippets
 
 **Configure a job running Javascript/Typescript (Jest) tests to use "Re-run failed tests only"**:
 
+Install the `jest-junit` dependency.  It can be done in `.circleci/config.yml`:
+
+```yaml
+  - run:
+      name: Install JUnit coverage reporter
+      command: yarn add --dev jest-junit
+```
+
+You can also add it to your `jest.config.js` file by following the link:https://www.npmjs.com/package/jest-junit[usage instructions].  
+
 Modify your test command to look like something similar to:
 
 ```yaml
@@ -194,7 +204,7 @@ Modify your test command to look like something similar to:
       path: ./reports/
  ```
 
-Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.  `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `filename` attribute is present.
+Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.  `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `filename` attribute is present.  `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml` with the following attribute: `addFileAttribute= "true"`.  
 
 [#known-limitations]
 == Known limitations
