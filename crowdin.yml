@@ -18,9 +18,9 @@ files:
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
 
-  # - source: /jekyll/_cci2/*.md
-  #   translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
-  #   update_option: update_as_unapproved
+  - source: /jekyll/_cci2/*.md
+    translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
+    update_option: update_as_unapproved
   # - source: /jekyll/_cci2/*.adoc
   #   translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
   #   update_option: update_as_unapproved
