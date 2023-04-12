@@ -102,7 +102,7 @@ NOTE: link:https://github.com/CircleCI-Public/Orb-Template[Orb のテンプレ�
 
 link:https://github.com/CircleCI-Public/Orb-Template[Orb のテンプレート]には、Orb のlink:/docs/orb-concepts/#orb-packing[パッケージ化]、link:/docs/testing-orbs/[テスト]、link:/docs/creating-orbs/[パブリッシュ]を自動で行う CI/CD パイプラインが含まれています (詳細は「link:/docs/creating-orbs/[Orb のパブリッシュ]」を参照)。
 
-セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/contexts/)に格納するかどうかを尋ねられます。Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
+セットアッププロセスでは、link:/docs/managing-api-tokens/[パーソナル API トークン]を `orb-publishing` link:/docs/contexts/[コンテキスト]に格納するかどうかを尋ねられます。Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
 
 === 5. Orb のジョブをトリガーできるユーザーを制限する
 
