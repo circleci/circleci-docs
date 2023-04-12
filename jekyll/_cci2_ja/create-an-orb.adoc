@@ -32,7 +32,7 @@ video::5ta4RUwqOBI[youtube]
 == 前提条件
 
 * CircleCI アカウントに GitHub アカウントを連携する:  手順については、「link:/docs/first-steps/[CircleCI のユーザー登録]」を参照してください。
-* 手順については、「link:/docs/first-steps/[CircleCI のユーザー登録]」を参照してください。必ず最新バージョンの CircleCI CLI を使用してください。CLI のバージョンは `v0.1.17087` 以降である必要があります。
+* ローカルマシンに link:/docs/local-cli/#installation[CircleCI CLI をインストール]して、link:https://app.circleci.com/settings/user/tokens[パーソナルアクセストークン]を設定する: 必ず最新バージョンの CircleCI CLI を使用してください。CLI のバージョンは `v0.1.17087` 以降である必要があります。
 +
 ```shell
 $ circleci update
@@ -44,7 +44,7 @@ $ circleci version
 [#create-your-orb]
 == Orb を作成する
 
-WARNING: Once an orb is created it cannot be deleted. Orbs are link:https://semver.org/[semver compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+WARNING: 作成した Orb を削除することはできません。また、Orb は link:https://semver.org/[セマンティックバージョニング]に準拠しており、パブリッシュ後に変更を加えることもできません。パブリッシュされた Orb は別のプロジェクトで必須とされる可能性があります。そのため、いずれかのプロジェクトが突然機能しなくなる事態を防ぐために、Orb の削除は禁止されています。
 
 [#create-a-new-repo]
 === 1. 新しいリポジトリを作成する
