@@ -32,7 +32,7 @@ video::5ta4RUwqOBI[youtube]
 == 前提条件
 
 * CircleCI アカウントに GitHub アカウントを連携する:  手順については、「link:/docs/first-steps/[CircleCI のユーザー登録]」を参照してください。
-* 手順については、「link:/docs/first-steps/[CircleCI のユーザー登録]」を参照してください。必ず最新バージョンの CircleCI CLI を使用してください。CLI のバージョンは `v0.1.17087` 以降である必要があります。
+* ローカルマシンに link:/docs/local-cli/#installation[CircleCI CLI をインストール]して、link:https://app.circleci.com/settings/user/tokens[パーソナルアクセストークン]を設定する: 必ず最新バージョンの CircleCI CLI を使用してください。CLI のバージョンは `v0.1.17087` 以降である必要があります。
 +
 ```shell
 $ circleci update
@@ -44,7 +44,7 @@ $ circleci version
 [#create-your-orb]
 == Orb を作成する
 
-WARNING: Once an orb is created it cannot be deleted. Orbs are link:https://semver.org/[semver compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+WARNING: 作成した Orb を削除することはできません。また、Orb は link:https://semver.org/[セマンティックバージョニング]に準拠しており、パブリッシュ後に変更を加えることもできません。パブリッシュされた Orb は別のプロジェクトで必須とされる可能性があります。そのため、いずれかのプロジェクトが突然機能しなくなる事態を防ぐために、Orb の削除は禁止されています。
 
 [#create-a-new-repo]
 === 1. 新しいリポジトリを作成する
@@ -102,7 +102,7 @@ NOTE: link:https://github.com/CircleCI-Public/Orb-Template[Orb のテンプレ�
 
 link:https://github.com/CircleCI-Public/Orb-Template[Orb のテンプレート]には、Orb のlink:/docs/orb-concepts/#orb-packing[パッケージ化]、link:/docs/testing-orbs/[テスト]、link:/docs/creating-orbs/[パブリッシュ]を自動で行う CI/CD パイプラインが含まれています (詳細は「link:/docs/creating-orbs/[Orb のパブリッシュ]」を参照)。
 
-セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/contexts/)に格納するかどうかを尋ねられます。Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
+セットアッププロセスでは、link:/docs/managing-api-tokens/[パーソナル API トークン]を `orb-publishing` link:/docs/contexts/[コンテキスト]に格納するかどうかを尋ねられます。Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
 
 === 5. Orb のジョブをトリガーできるユーザーを制限する
 
