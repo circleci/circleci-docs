@@ -38,17 +38,15 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png[Sc
 === Pipeline
 xref:pipelines#[Pipelines] are the top-level tree item in the panel, and they contain your workflows. Hovering over a pipeline lets you:
 
-// TODO: Check hover option to open in browser
 - Open in browser, to view pipeline details in the CircleCI app on your default web browser
 
 [#workflow]
 === Workflow
 xref:workflows#[Workflows] are nested under each pipeline, and contain jobs. Hovering over a workflow lets you:
 
-// TODO: Check hover option to open in browser
 - Open in browser, to view workflow details in the CircleCI app, on your default web browser
-
 - Rerun the workflow from start, to re-trigger the entire workflow
+- Rerun the workflow from failed, to rerun only the workflow's failed jobs
 
 [#job]
 === Job
@@ -168,7 +166,7 @@ Both of these commands can be invoked by:
 [#open-source-language-server]
 === Open source language server
 
-The config helper is based on a dedicated language server specific for CircleCI YAML files, and is open source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
+The config helper is based on a dedicated language server specific for CircleCI YAML files, which is open source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
 
 You can also integrate the language server into any editor which supports the Language Server Protocol, and build your own plugin to benefit from config helper capabilities in your favourite editor.
 
