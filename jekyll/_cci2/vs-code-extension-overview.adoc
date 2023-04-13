@@ -116,8 +116,7 @@ The status bar can display the following statuses:
 
 - **No project**: Upon clicking on the status bar, the settings page will open so you can select a project.
 
-//TODO: Check what other workflow statuses are available
-- **Success / On hold / Failed**, and similar workflow statuses: this refers to the status of the top (that is, the most recent) pipeline in your panel. Upon clicking on the status bar, the associated workflow will come into focus on the pipelines panel.
+- **Success / On hold / Failed**, and other workflow statuses: this refers to the status of the top (that is, the most recent) pipeline in your panel. Upon clicking on the status bar, the associated workflow will come into focus on the pipelines panel.
 
 [#config-helper]
 == Config helper
