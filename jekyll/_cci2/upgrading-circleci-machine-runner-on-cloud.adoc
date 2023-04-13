@@ -29,11 +29,9 @@ You can check the machine runner version by using the `--version` flag with the 
 The most straightforward way to upgrade an existing CircleCI machine runner is to enable auto update in the configuration file and restart the runner instance. To enable auto update:
 
 . Remove the `disable_auto_update` option from the machine runner configuration file, **or** set `runner.disable_auto_update` to `false`.
-. Restart the machine runner instance either manually, or by the process management used to manage the CircleCI machine runner agent. 
+. Restart the machine runner instance with the process management used to manage the CircleCI machine runner agent. If process management is not being used to manage the machine runner, the instance will need to be manually stopped using `kill -9` on macOS and Linux systems, or the Task Manager on Windows systems, and then manually restarted.  
 
 More details on configuring machine runner can be found in the xref:runner-config-reference#[machine runner configuration reference].
-
-In some cases, an environment variable may have been used to disable the auto update functionality. If the machine runner installation is not updated after enabling auto update in the configuration file, set the value of the environment variable `LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE` to `false`, **or** unset the variable entirely. Then, restart the machine runner instance again.
 
 === Linux 
 ```shell
@@ -51,6 +49,8 @@ sudo launchctl start '/Library/LaunchDaemons/com.circleci.runner.plist'
 Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 Start ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
+
+NOTE: In some cases, an environment variable may have been used to disable the auto update functionality. If the machine runner installation is not updated after enabling auto update in the configuration file, set the value of the environment variable `LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE` to `false`, **or** unset the variable entirely. Then, restart the machine runner instance again.
 
 [#manually-update-by-downloading-a-new-version-of-the-machine-runner-binary]
 == Manually update by downloading a new version of the machine runner binary
