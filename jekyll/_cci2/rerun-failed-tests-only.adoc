@@ -12,23 +12,25 @@ contentTags:
 :toc-title:
 
 [#motivation-and-introduction]
-== Motivation and Introduction
-Historically, when your testing job has flaky tests, the only option to get to a passing workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed].  This type of re-run executes *all tests* from your testing job, including the tests that passed which prolongs time-to-feedback and burns credits unneccessarily.
+== Motivation and introduction
 
-CircleCI is releasing new preview functionality to **re-run failed tests only**.  When selecting this option (see image below), instead of re-running the *entire test suite* when a transient test failure arises, only a subset of tests are re-run.  This option re-runs failed tests from the same commit, not new ones.
+CircleCI is releasing new preview functionality to **re-run failed tests only**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
 
-**Insert screenshot**
+Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unneccessarily.
 
+This re-run failed tests only re-runs failed tests from the _same_ commit, not new ones.
+
+image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
 [#prerequisites]
 == Prerequisites
 
-* Testing job uploads xref:collect-test-data/#[test results] to CircleCI.  `filename` or `classname` attributes **must be present** in the JUnit XML output
+* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `filename` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests/#junit-xml-reports[JUnit XML output].
 * Testing job uses `circleci tests run` (see below for details) to execute tests
-  ** Note: If your current job is using xref:test-splitting-tutorial#[Intelligent test splitting], you must switch your `.circleci/config.yml` definition from `circleci tests split` to `circleci tests run` (see below for instructions)
+  ** Note: If your current job is using xref:test-splitting-tutorial#[Intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
 
-[#quick-start]
-== Quick-start
+[#quickstart]
+== Quickstart
 
 [#example-config-file-before]
 === Before: Example `.circleci/config.yml` file
@@ -45,7 +47,14 @@ CircleCI is releasing new preview functionality to **re-run failed tests only**.
     path: test-results
 ```
 
-A snippet of a basic CircleCI configuration file that splits tests by previous timing results (xref:test-splitting-tutorial#[Intelligent test splitting]), executes Python test files that end in `.py`, stores the test results in a new directory called `test-results`, and uploads those test results to CircleCI.  **Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute.  Not present in this snippet is the key to set `parallelism`(xref:parallelism-faster-jobs#[tutorial]).
+This example snippet is from a CircleCI configuration file that:
+
+. Splits tests by previous timing results (xref:test-splitting-tutorial#[Intelligent test splitting]), 
+. Executes Python test files that end in `.py`, 
+. Stores the test results in a new directory called `test-results`, and 
+. Uploads those test results to CircleCI.  
+
+**Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute. Not present in this snippet is the key to set `parallelism`(xref:parallelism-faster-jobs#[tutorial]).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
