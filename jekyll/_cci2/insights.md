@@ -52,9 +52,8 @@ The Insights workflow overview provides metrics plotted over time for all branch
 Data is not real-time and there may be up to a 24 hour delay.
 {: class="alert alert-info"}
 
-The Insights dashboard is not a real time financial reporting tool and should
-not be used for credit reporting. The most up-to-date credit information can be
-found in your organization's Plan Overview.
+Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting. Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI. This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI. For precise credit reporting, always use the Plan Overview page in the CircleCI UI
+
 {: class="alert alert-info"}
 
 ### Job overview
