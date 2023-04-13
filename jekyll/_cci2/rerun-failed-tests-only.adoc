@@ -25,9 +25,10 @@ image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to 
 [#prerequisites]
 == Prerequisites
 
-* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `filename` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests/#junit-xml-reports[JUnit XML output].
-* Testing job uses `circleci tests run` (see below for details) to execute tests
-  ** Note: If your current job is using xref:test-splitting-tutorial#[Intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
+* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `filename` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
+* The testing job uses `circleci tests run` (see below for details) to execute tests.
++
+NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
 
 [#quickstart]
 == Quickstart
@@ -49,15 +50,17 @@ image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to 
 
 This example snippet is from a CircleCI configuration file that:
 
-. Splits tests by previous timing results (xref:test-splitting-tutorial#[Intelligent test splitting]), 
 . Executes Python test files that end in `.py`, 
+. Splits tests by previous timing results (you can follow xref:test-splitting-tutorial#[this tutorial] on intelligent test splitting), 
 . Stores the test results in a new directory called `test-results`, and 
 . Uploads those test results to CircleCI.  
 
-**Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute. Not present in this snippet is the key to set `parallelism`(xref:parallelism-faster-jobs#[tutorial]).
+**Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
+
+In the snippet below, the example has been updated to use the `circleci tests run` command to allow for re-running only failed tests.
 
 ```yaml
  - run:
@@ -73,95 +76,97 @@ This example snippet is from a CircleCI configuration file that:
     path: test-results
 ```
 
-[#breakdown-the-configuration]
-==== Breakdown of the configuration
-
 * `TEST_FILES=$(circleci tests glob "**/test_*.py")`
-  ** This command uses CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to provide a list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]).  In this case, we're looking for any test file that starts with "test_" and ends with ".py".
++
+Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`.
   
 * `echo $TEST_FILES |`
-  ** Pass the list of test files to the `circleci tests run` command via `stdin`.
++
+Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
-  ** Invoke `circleci tests run` and specify the original command used to run tests as part of the `--command=` parameter.  **This is required**.  `xargs` must be present as well.
-  ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages
-  ** `--split-by-timings` accomplishes intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`.  If your testing job is not using CircleCI's test splitting, omit this parameter.
+  ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
+  ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
+  ** `--split-by-timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
   
 [#verify-the-configuration]
 ==== Verify the configuration
 
-After set-up, the next time that you encounter a test failure, click the "Re-run failed tests only" button. 
+After updating your configuration, click the "Re-run failed tests only" button the next time you encounter a test failure.
 
 If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
 
-```bash
+```sh
 Installing circleci-tests-plugin-cli plugin.
 circleci-tests-plugin-cli plugin Installed. Version: 1.0.3349-470dac4
 DEBU[2023-04-10T22:36:53Z] Attempting to read from stdin. This will hang if no input is provided. 
 INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_count=1 batches_processed=0 total_batches_for_job=3
-DEBU[2023-04-10T22:36:53Z] received test names: test_api.py```
+DEBU[2023-04-10T22:36:53Z] received test names: test_api.py
 ```
 
-The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked going forward.  If you're seeing different behavior, comment on this https://discuss.circleci.com/[Discuss post] for support.
+NOTE: The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
 
-**Configure a job running Ruby (rspec) tests to use "Re-run failed tests only"**:
+[#configure-a-job-running-ruby-rspec-tests]
+=== Configure a job running Ruby (rspec) tests
 
-First, add the following gem to your Gemfile:
-
+. Add the following gem to your Gemfile:
++
 ```bash
 gem 'rspec_junit_formatter'
 ```
 
-Then, modify your test command to use `circleci tests run`:
-
+. Modify your test command to use `circleci tests run`:
++
 ```yaml
  - run: mkdir ~/rspec
  - run:
     command: |
       circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose
- ```
+```
 
-Update the glob command to match your use case.  See xref:collect-test-data/#rspec#[rspec] for details on how to output test results in an acceptable format for `rspec`.
+. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
 
-**Configure a job running Ruby (Cucumber) tests to use "Re-run failed tests only"**:
+[#configure-a-job-running-ruby-cucumber-tests]
+=== Configure a job running Ruby (Cucumber) tests
 
-Modify your test command to look like something similar to:
-
+. Modify your test command to look something similar to:
++
 ```yaml
 - run: mkdir -p ~/cucumber
 - run:
     command: |
     circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose
- ```
+```
 
-Update the glob command to match your use case.  See xref:collect-test-data/#cucumber#[cucumber] for details on how to output test results in an acceptable format for `Cucumber`.
+. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`.
 
-**Configure a job running Cypress tests to use "Re-run failed tests only"**:
+[#configure-a-job-running-cypress-tests]
+=== Configure a job running Cypress tests
 
-1. Install dependencies `cypress-multi-reporters` and `mocha-junit-reporter`. If using `npm`, run the following on your local machine:
-
+. Install the `cypress-multi-reporters` and `mocha-junit-reporter` dependencies. If using `npm`, run the following on your local machine:
++
 ```bash
 npm install --save-dev cypress-multi-reporters mocha-junit-reporter
 ```
-
++
 Your `package.json` / `package-lock.json` will be updated and committed on your next push from that branch. 
 
-2. Create and setup reporter config file if it doesn't already exist, this example will call it `reporter-config.json`.
-
-```bash
+. Create and set up the reporter config file, if it does not already exist. In this example, the file is named `reporter-config.json`.
++
+```json
 {
   "reporterEnabled": "spec, mocha-junit-reporter", // set the reporters
   "reporterOptions": {
     "mochaFile": "results/junit/junit-[hash].xml", // each suite produces its own junit :(, save them with unique hash
-   }
+  }
 }
 ```
 
-3. Modify your test command to use the two reporter flags and `circleci tests run`:
-
+. Modify your test command to use the two reporter flags and `circleci tests run`:
++
 ```yaml
      -run:
         name: run tests
@@ -170,12 +175,14 @@ Your `package.json` / `package-lock.json` will be updated and committed on your 
           npm ci 
           npm run start &
           circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --spec" --verbose
- ```
+```
++
+Remember to modify the `glob` command for your specific use case.
 
-Modify your glob command for your specific use case.
-
-4. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[here] to massage the test results into the proper format.  In this case, we've saved a copy of the linked script to a file called `fix-junit.js`. You can then invoke this script by adding a new step in your `.circleci/config.yml` file (in addition to the command that uploads test results, `store_test_results`):
-
+. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[in this issue] to massage the test results into the proper format. In this example, we have saved a copy of the script to a file named `fix-junit.js`. 
++
+You can then invoke this script by adding a new `run` step in your `.circleci/config.yml` file. The snippet below also includes the `store_test_results` step to upload test results:
++
 ```yaml
     - run:
        when: always
@@ -186,13 +193,14 @@ Modify your glob command for your specific use case.
      - store_test_results: 
        path: ./cypress/results
 ```  
-
++
 Your new testing job's `.circleci/config.yml` definition will have both snippets from steps 3 and 4 above, one right after the other.
 
-**Configure a job running Javascript/Typescript (Jest) tests to use "Re-run failed tests only"**:
+[#configure-a-job-running-javascript-typescript-jest-tests]
+=== Configure a job running Javascript/Typescript (Jest) tests
 
-Modify your test command to look like something similar to:
-
+. Modify your test command to look something similar to:
++
 ```yaml
 - run:
     command: |
@@ -201,41 +209,57 @@ Modify your test command to look like something similar to:
         JEST_JUNIT_OUTPUT_DIR: ./reports/
   - store_test_results:
       path: ./reports/
- ```
+```
 
-Update the `npx jest --listTests` command to match your use case.  See xref:collect-test-data/#jest#[jest] for details on how to output test results in an acceptable format for `jest`.  `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `filename` attribute is present.
+. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`.
++
+`JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `filename` attribute is present.
 
 [#known-limitations]
 == Known limitations
 
-* When re-running only the failed tests, the next time that job runs, test splitting by timing may not be as efficient as expected as the test results being stored are only from the subset of failed tests that were run
-* Orbs that run tests *may* not work with this new fucntionality at this time
-* If a shell script is invoked to run tests, `circleci tests run` should be placed in the *shell script* itself, not `.circleci/config.yml`
-* Jobs that are older than the xref:persist-data/#custom-storage-usage[retention period] for Workspaces for the organization cannot be re-run with "Re-run failed tests only"
+* When re-running only the failed tests, test splitting by timing may not be as efficient as expected the next time that job runs, as the test results being stored are only from the subset of failed tests that were run.
+* Orbs that run tests may not work with this new fucntionality at this time.
+* If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
+* Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests only".
 
 [#FAQs]
 == FAQs
 
-I have a question or issue, where do I go?
+**Question:** I have a question or issue, where do I go?
 
-*Answer*: Insert Discuss post.
+**Answer:** Leave a comment on the https://discuss.circleci.com/[Discuss post].
 
-Will this functionality re-run individual tests?
+---
 
-*Answer*: No, it will re-run failed test `classnames` or `filenames` that had at least 1 individual test failure
+**Question:** Will this functionality re-run individual tests?
 
-What happens if I try to use the functionality and it hasn't been set-up in my `.circleci/config.yml` file?
+**Answer:** No, it will re-run failed test `classnames` or `filenames` that had at least one individual test failure.
 
-*Answer*: The job will fail.
+---
 
-When can I click the option to "Re-run failed tests only?"
+**Question:** What happens if I try to use the functionality and it hasn't been set-up in my `.circleci/config.yml` file?
 
-*Answer*: Right now, the option will be present anytime "Re-run workflow from failed" option is present and vice versa.
+**Answer:** The job will fail.
 
-I don't see my test framework on this page, can I still use the functionality
+---
 
-*Answer*: Yes, as long as your job meets the prerequisites enumerated at the top of this document the functionality is test runner and test framework agnostic.  You can use xref:collect-test-data/#[Collect test data] to ensure that the job is uploading test results.  Note that `classname` and `filename` is not always present by default, it may require additional configuration.  From there, follow the "Quick-start" section to modify your test command to use `circleci tests run`.  If you run into issues, comment on this Discuss post (needs link).
+**Question:** When can I click the option to "Re-run failed tests only?"
 
-Can I see in the UI whether a job was re-run using "Re-run failed tests only"
+**Answer:** Currently, it will be present any time the "Re-run workflow from failed" option is present, and vice versa.
 
-*Answer* Not at this time
+---
+
+**Question:** I don't see my test framework on this page, can I still use the functionality?
+
+**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests only functionality is test runner- and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `filename` is not always present by default, so your job may require additional configuration.  
+
+From there, follow the xref:#quickstart[Quickstart] section to modify your test command to use `circleci tests run`. 
+
+If you run into issues, comment on the https://discuss.circleci.com/[Discuss post].
+
+---
+
+**Question:** Can I see in the web UI whether a job was re-run using "Re-run failed tests only"?
+
+**Answer:** Not at this time.
