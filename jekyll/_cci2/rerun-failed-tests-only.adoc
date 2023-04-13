@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= <<Re-run failed tests only>>
+= Re-run failed tests only
 :page-layout: classic-docs
 :page-liquid:
 :page-description: <<Functionality to optimize running tests on CircleCI>>
