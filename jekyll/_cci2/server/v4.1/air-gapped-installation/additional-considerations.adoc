@@ -101,3 +101,35 @@ kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externa
 ----
 
 Once complete, DNS records can be created for your server installation (server.internal.example.com) and (*.server.internal.example.com) for 10.0.0.5.
+
+[#tls-importing]
+== Importing Trusted TLS Certificates
+
+When using a GitHub Enterprise instance with self-signed or custom authority certificates, CircleCI Server can be configured to trust these certificates with two methods as described below.
+
+*Note*: Values provided for either of these methods are supported for GitHub enterprise certificates only - no other application is currently supported at this time.
+
+=== Configuring the TLS Imports Value
+In the values.yaml file, the `tls.imports` values.yaml value can be configured to include a list of `hostname:port` combinations from which to retrieve and trust TLS certificates.
+
+[source, yaml]
+----
+tls:
+  ...
+  import:
+    - github.airgap.example.com:443
+----
+
+For each `hostname:port` combination, CircleCI server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
+
+
+=== Configuring the TLS Certificates Array
+Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `tls.certificates` values.yaml value as a list of base64 encoded certificates strings.
+
+[source, yaml]
+----
+tls:
+  ...
+  certificates:
+    - <<base64-encoded-public-tls-certificate-chain>>
+----
