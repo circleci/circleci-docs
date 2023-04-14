@@ -94,7 +94,7 @@ Pass the list of test files to the `circleci tests run` command as standard inpu
 [#verify-the-configuration]
 ==== Verify the configuration
 
-After updating your configuration, click the "Re-run failed tests only" button the next time you encounter a test failure.
+After updating your configuration, click the "Re-run failed tests only" button the next time you encounter a test failure on that job.
 
 If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
 
@@ -181,9 +181,9 @@ Your `package.json` / `package-lock.json` will be updated and committed on your 
 +
 Remember to modify the `glob` command for your specific use case.
 
-. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[in this issue] to massage the test results into the proper format. In this example, we have saved a copy of the script to a file named `fix-junit.js`. 
+. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[in this issue] to massage the test results into the proper format. In this example, we have saved a copy of link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132#issuecomment-721943600[this script] to a file named `fix-junit.js`. 
 +
-You can then invoke this script by adding a new `run` step in your `.circleci/config.yml` file. The snippet below also includes the `store_test_results` step to upload test results:
+Invoke this script by adding a new `run` step in your `.circleci/config.yml` file in the same job where you are running your tests. The snippet below also includes the `store_test_results` step to upload test results:
 +
 ```yaml
     - run:
@@ -196,7 +196,7 @@ You can then invoke this script by adding a new `run` step in your `.circleci/co
        path: ./cypress/results
 ```  
 
-Your new testing job's `.circleci/config.yml` definition should have both snippets from steps 3 and 4 above, one right after the other.
+Your new testing job's `.circleci/config.yml` definition should have both snippets from steps 3 and 4 above, one right after the other.  
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
