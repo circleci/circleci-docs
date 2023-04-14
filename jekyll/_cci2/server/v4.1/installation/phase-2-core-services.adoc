@@ -807,7 +807,7 @@ Next you will need to generate a https://developers.google.com/tink/design/keyse
 tinkey create-keyset --key-template XCHACHA20_POLY1305
 ----
 
-CircleCI server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
+CircleCI Server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
 
 [.tab.gcs.create_secret]
 --
