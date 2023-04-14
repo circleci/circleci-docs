@@ -18,7 +18,7 @@ WARNING: This feature is in **preview**, use at your own risk. This feature is n
 
 CircleCI is releasing new preview functionality to **re-run failed tests only**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
 
-Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unneccessarily.
+Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
 This re-run failed tests only re-runs failed tests from the _same_ commit, not new ones.
 
@@ -231,7 +231,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 == Known limitations
 
 * When re-running only the failed tests, test splitting by timing may not be as efficient as expected the next time that job runs, as the test results being stored are only from the subset of failed tests that were run.
-* Orbs that run tests may not work with this new fucntionality at this time.
+* Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests only".
 
