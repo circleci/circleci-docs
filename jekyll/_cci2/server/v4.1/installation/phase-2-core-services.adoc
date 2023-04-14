@@ -840,7 +840,7 @@ tink:
 ----
 --
 
-WARNING: If your Tink keyset is somehow lost, you will need to generate a new keyset and then recreate your contexts and their associated secrets
+WARNING: If your Tink keyset is somehow lost, you will need to generate a new keyset and then recreate your contexts and their associated secrets.
 
 [#deploy]
 == 4. Deploy
