@@ -43,8 +43,8 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
     name: Run tests
     command: |
       mkdir test-results
-      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings) \
-      pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
+      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings) 
+      pytest -o --junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
       
 - store_test_results
     path: test-results
@@ -57,7 +57,7 @@ This example snippet is from a CircleCI configuration file that:
 . Stores the test results in a new directory called `test-results`, and 
 . Uploads those test results to CircleCI.  
 
-**Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+**Note:** `-o --junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
@@ -70,9 +70,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" \
-      --verbose \
-      --split-by=timings
+      echo $TEST_FILES | circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings
 
  - store_test_results
     path: test-results
@@ -86,7 +84,7 @@ Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[g
 +
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
-* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
+* `circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
   ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
   ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
   ** `--split-by-timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
