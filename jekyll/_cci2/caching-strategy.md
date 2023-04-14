@@ -214,6 +214,7 @@ steps:
   - save_cache:
       paths:
         - ~/.gradle/caches
+        - ~/.gradle/wrapper
       key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
 ```
 {% endraw %}
