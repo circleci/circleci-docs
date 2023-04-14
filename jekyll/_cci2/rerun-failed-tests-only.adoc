@@ -3,13 +3,15 @@ contentTags:
   platform:
   - Cloud
 ---
-= Re-run failed tests only
+= Re-run failed tests only (preview)
 :page-layout: classic-docs
 :page-liquid:
-:page-description: <<Functionality to optimize running tests on CircleCI>>
+:page-description: How to re-run only failed tests in a job and optimize credit usage.
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: This feature is in **preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:https://discuss.circleci.com/[Community forum].
 
 [#motivation-and-introduction]
 == Motivation and introduction
@@ -42,7 +44,7 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings) \
-      pytest --junitxml=test-results/junit.xml $TEST_FILES
+      pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
       
 - store_test_results
     path: test-results
@@ -160,12 +162,12 @@ Your `package.json` / `package-lock.json` will be updated and committed on your 
 {
   "reporterEnabled": "spec, mocha-junit-reporter", // set the reporters
   "reporterOptions": {
-    "mochaFile": "results/junit/junit-[hash].xml", // each suite produces its own junit :(, save them with unique hash
+    "mochaFile": "results/junit/junit-[hash].xml", // each suite produces its own junit, save them with unique hash
   }
 }
 ```
 
-. Modify your test command to use the two reporter flags and `circleci tests run`:
+. Modify your test command to use the two `--reporter` flags and `circleci tests run`:
 +
 ```yaml
      -run:
@@ -193,8 +195,8 @@ You can then invoke this script by adding a new `run` step in your `.circleci/co
      - store_test_results: 
        path: ./cypress/results
 ```  
-+
-Your new testing job's `.circleci/config.yml` definition will have both snippets from steps 3 and 4 above, one right after the other.
+
+Your new testing job's `.circleci/config.yml` definition should have both snippets from steps 3 and 4 above, one right after the other.
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
