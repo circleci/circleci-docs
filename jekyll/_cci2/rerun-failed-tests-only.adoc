@@ -46,7 +46,7 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
       TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings) 
       pytest -o --junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
       
-- store_test_results
+- store_test_results:
     path: test-results
 ```
 
@@ -72,7 +72,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
       TEST_FILES=$(circleci tests glob "**/test_*.py")
       echo $TEST_FILES | circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings
 
- - store_test_results
+ - store_test_results:
     path: test-results
 ```
 
@@ -190,7 +190,7 @@ Invoke this script by adding a new `run` step in your `.circleci/config.yml` fil
        command: |
           cd ./cypress
           node ./scripts/fix-junit.js
-     - store_test_results: 
+    - store_test_results: 
        path: ./cypress/results
 ```  
 
@@ -214,9 +214,11 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-    npx jest --listTests | circleci tests run --command="JEST_UNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --"
+      npx jest --listTests | circleci tests run --command="JEST_UNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --"
+    
     environment:
-        JEST_JUNIT_OUTPUT_DIR: ./reports/
+      JEST_JUNIT_OUTPUT_DIR: ./reports/
+  
   - store_test_results:
       path: ./reports/
 ```
