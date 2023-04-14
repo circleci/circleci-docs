@@ -213,7 +213,7 @@ steps:
         - gradle-repo-v1-
   - save_cache:
       paths:
-        - ~/.gradle
+        - ~/.gradle/caches
       key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
 ```
 {% endraw %}
@@ -239,7 +239,7 @@ steps:
         - maven-repo-v1-
   - save_cache:
       paths:
-        - ~/.m2
+        - ~/.m2/repository
       key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
 ```
 {% endraw %}
