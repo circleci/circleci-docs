@@ -11,7 +11,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: This feature is in **preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:https://discuss.circleci.com/[Community forum].
+WARNING: This feature is in **preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Community forum].
 
 [#motivation-and-introduction]
 == Motivation and introduction
@@ -106,7 +106,7 @@ INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_c
 DEBU[2023-04-10T22:36:53Z] received test names: test_api.py
 ```
 
-NOTE: The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/[Discuss post] for support.
+NOTE: The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
@@ -240,7 +240,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 **Question:** I have a question or issue, where do I go?
 
-**Answer:** Leave a comment on the https://discuss.circleci.com/[Discuss post].
+**Answer:** Leave a comment on the https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post].
 
 ---
 
@@ -268,7 +268,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 From there, follow the xref:#quickstart[Quickstart] section to modify your test command to use `circleci tests run`. 
 
-If you run into issues, comment on the https://discuss.circleci.com/[Discuss post].
+If you run into issues, comment on the https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post].
 
 ---
 
