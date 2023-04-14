@@ -783,7 +783,7 @@ proxy:
 
 === n. Encrypting Environment Variables
 
-All environment variables stored in contexts are encrypted using either Hashicorp https://www.vaultproject.io/[Vault] or Google https://developers.google.com/tink[Tink]. By Default, CircleCI Server 4.x will use Vault to generate and store encryption keys.
+All environment variables stored in contexts are encrypted using either Hashicorp https://www.vaultproject.io/[Vault] or Google https://developers.google.com/tink[Tink]. By Default, CircleCI server 4.x will use Vault to generate and store encryption keys.
 
 ==== Using Tink
 
