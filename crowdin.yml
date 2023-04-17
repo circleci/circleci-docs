@@ -21,9 +21,9 @@ files:
   - source: /jekyll/_cci2/*.md
     translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
-  # - source: /jekyll/_cci2/*.adoc
-  #   translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
-  #   update_option: update_as_unapproved
+  - source: /jekyll/_cci2/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
+    update_option: update_as_unapproved
 
   - source: /jekyll/_cci2/server/*.adoc
     translation: /jekyll/_cci2_%two_letters_code%/server/%original_file_name%
