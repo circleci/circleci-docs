@@ -107,7 +107,7 @@ Once complete, DNS records can be created for your server installation (server.i
 
 When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates with two methods as described below.
 
-*Note*: Values provided for either of these methods are supported for GitHub enterprise certificates only - no other application is currently supported at this time.
+*Note*: Values provided for either of these methods are supported for GitHub Enterprise certificates only - no other application is supported at this time.
 
 === Configuring the TLS Imports Value
 In the values.yaml file, the `tls.imports` values.yaml value can be configured to include a list of `hostname:port` combinations from which to retrieve and trust TLS certificates.
