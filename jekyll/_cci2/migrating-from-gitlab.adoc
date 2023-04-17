@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -112,7 +112,7 @@ stages:
 a|
 [source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -129,7 +129,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2
