@@ -23,7 +23,9 @@ GitLab support is open to both new and existing users of CircleCI. Follow the st
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
-When you create a new organization and connect your GitLab account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory.
+[.tab.signup.GitLab_SaaS]
+--
+When you create a new organization and connect your GitLab.com account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory. 
 
 If your selected repo does _not_ already have a `.circleci/config.yml`, you will be presented with the following options to set up a CircleCI configuration for your project:
 
@@ -39,6 +41,52 @@ CircleCI automatically creates a new branch and commits a basic configuration fi
 You can choose a sample `.circleci/config.yml` to best fit your project from a variety of templates (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is committed on a new branch.
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
+--
+
+[.tab.signup.GitLab_Self-Managed]
+--
+You need:
+
+* Your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
++
+Your self-managed instance must already contain at least one GitLab project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
+
+* A link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.  
+
+[#known-hosts-input]
+* Your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
++
+The output should look something like:
++  
+```shell
+➜  ~ ssh-keyscan test-gitlab.circleci.com
+
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+```
+
+Follow the steps on the **Create New Project** page:
+
+image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
+
+. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Click **Verify**.
+
+. Enter your personal access token. Click **Connect**.
+
+. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Click **Connect**.  
+
+. Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name. 
+
+. Finally, click **Create Project**. You will then be redirected to the newly-created project's Pipelines page. 
+
+The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repo to see your pipeline on the dashboard.
+--
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
@@ -54,15 +102,27 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
+[.tab.pipeline.GitLab.com]
+--
 When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
 If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
+--
+
+[.tab.pipeline.GitLab_Self-Managed]
+--
+If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
+
+When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
+--
 
 Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
-Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo. Committing further changes in your repo will automatically trigger a pipeline, but manually triggering a pipeline is also not available at this time.
+Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo. 
+
+Committing further changes in your repo will automatically trigger a pipeline. However, manually triggering a pipeline from the CircleCI web app is also not available at this time. 
 
 [#project-settings]
 == Project settings
@@ -91,7 +151,11 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 [#configuration]
 === Configuration
 
-Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
+Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. 
+
+For GitLab Self-managed, you are able to select any instance that you have previously added as a configuration source. If you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will first need to add a new connection via your xref:#organization-settings-integrations[**Organization Settings**]. In either case, you will also need to enter your personal access token again to authorize this connection.
+
+Once you define a configuration source, you can set up a trigger that points to that configuration.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
@@ -112,11 +176,11 @@ In addition to a configuration source, each trigger includes the webhook URL, an
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
-**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the customer filter option. For example, a custom filter would allow you to only build on a specific branch or user.
+**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Also note the differences in functionality with the project settings below for GitLab support.
+NOTE: Currently, the only fields that can be edited for existing filters are **Trigger Name** and the **Filters** radio buttons.
 
 [#project-settings-advanced]
 === Advanced
@@ -193,6 +257,30 @@ Organization administrator as well as organization contributor roles are current
 . An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 +
 If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
+
+[#organization-settings-integrations]
+=== Integrations (GitLab Self-managed only)
+
+For GitLab Self-managed organizations, you may connect additional self-managed instances to be integrated with your organization. 
+
+. Navigate to **Integrations** within **Organization Settings** to add a new instance. 
++
+image::{{site.baseurl}}/assets/img/docs/gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
+
+. You will need to enter the instance URL, as described in the xref:#sign-up[Sign up] section above.
+
+NOTE: The ability to edit or delete existing integrations is not currently supported.
+
+For GitLab.com, account integrations can be managed under your xref:#user-account-integrations[user settings].
+
+[#establish the authenticity of an SSH host]
+==== Establish the authenticity of an SSH host
+
+For GitLab self-managed instances, it is necessary to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic. The **known_hosts** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
+
+SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for example, `ssh-keyscan test-gitlab.circleci.com`. 
+
+When retrieving the host keys, you can confirm that you have the correct key by checking its fingerprints. You can check the fingerprints found in the **Instance Configuration** section of your self-managed instance's Help pages (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[this Instance Configuration page] shows an example).
 
 [#roles-and-permissions]
 == Roles and permissions
