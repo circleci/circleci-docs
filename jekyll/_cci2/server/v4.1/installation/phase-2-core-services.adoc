@@ -781,6 +781,69 @@ proxy:
     - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
+=== n. Encrypting Environment Variables
+
+All environment variables stored in contexts are encrypted using either https://www.vaultproject.io/[Hashicorp Vault] or  https://developers.google.com/tink[Google Tink]. By Default, CircleCI server 4.x will use Vault to generate and store encryption keys.
+
+==== Use Tink (optional)
+
+The following steps cover using Tink as an alternative to Vault:
+
+. Enable Tink in your `values.yaml`:
++
+[source,yaml]
+----
+tink:
+  enabled: false
+  keyset: ""
+----
++
+When `tink.enabled` is true, Vault will not be deployed.
++
+WARNING: Tink or Vault must be set once during installation, and cannot be changed after deployment.
+
+. Generate a link:https://developers.google.com/tink/design/keysets[keyset], which Tink uses to manage key rotation. The easiest way to do this is to use Google's link:https://developers.google.com/tink/tinkey-overview[Tinkey] CLI utility. Once https://developers.google.com/tink/install-tinkey[installed], use the following command:
++
+[source,shell]
+----
+tinkey create-keyset --key-template XCHACHA20_POLY1305
+----
+
+. CircleCI server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
++
+[.tab.tink.you_create_secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself
+
+Following the example below, create a Kubernetes secret with the name `tink` and a key `keyset`. Apply this secret to the namespace of your CircleCI server installation.
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tink
+data:
+  keyset: <your-keyset>
+----
+--
++
+[.tab.tink.circleci_creates_secret]
+--
+**Option 2:** CircleCI Server will create the Kubernetes Secret
+
+You may add the keyset to your `values.yaml` under `tink` as in the example below. CircleCI will generate the required secret to store your keyset.
+
+[source,yaml]
+----
+tink:
+  enabled: false
+  keyset: "<your-keyset>"
+----
+--
+
+WARNING: If your Tink keyset is somehow lost, you will need to generate a new keyset and then recreate your contexts and their associated secrets.
+
 [#deploy]
 == 4. Deploy
 
