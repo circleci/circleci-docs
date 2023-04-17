@@ -51,7 +51,7 @@ NOTE: If you are using GitHub, you have the option to limit CircleCI, preventing
 The new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own Free plan to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account.
 --
 
-NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab SaaS integration page].
+NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab integration page].
 
 [#email-signup]
 == Sign up with email

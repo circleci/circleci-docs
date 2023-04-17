@@ -23,7 +23,7 @@ GitLab support is open to both new and existing users of CircleCI. Follow the st
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
-[.tab.signup.GitLab.com]
+[.tab.signup.GitLab SaaS]
 --
 When you create a new organization and connect your GitLab.com account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory. 
 
