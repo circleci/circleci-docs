@@ -787,7 +787,7 @@ All environment variables stored in contexts are encrypted using either https://
 
 ==== Using Tink
 
-If you wish to use Tink instead of Vault you will need to first enable it in your `values.yaml`. 
+If you wish to use Tink instead of Vault you will need to first enable it in your `values.yaml`.
 
 [source,yaml]
 ----
@@ -807,9 +807,9 @@ Next you will need to generate a https://developers.google.com/tink/design/keyse
 tinkey create-keyset --key-template XCHACHA20_POLY1305
 ----
 
-CircleCI Server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
+CircleCI server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
 
-[.tab.gcs.create_secret]
+[.tab.tink.you_create_secret]
 --
 **Option 1:** Create the Kubernetes Secret yourself
 
@@ -826,7 +826,7 @@ data:
 ----
 --
 
-[.tab.gcs.add_secret_to_values_yaml]
+[.tab.tink.circleci_creates_secret]
 --
 **Option 2:** CircleCI Server will create the Kubernetes Secret
 
