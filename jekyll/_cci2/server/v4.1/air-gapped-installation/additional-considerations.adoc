@@ -105,7 +105,7 @@ Once complete, DNS records can be created for your server installation (server.i
 [#tls-importing]
 == Importing Trusted TLS Certificates
 
-When using a GitHub Enterprise instance with self-signed or custom authority certificates, CircleCI Server can be configured to trust these certificates with two methods as described below.
+When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates with two methods as described below.
 
 *Note*: Values provided for either of these methods are supported for GitHub enterprise certificates only - no other application is currently supported at this time.
 
