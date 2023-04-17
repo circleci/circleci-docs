@@ -38,6 +38,7 @@ Server v4.0 は、以下の機能を提供しています：
 [#changelog-4-0-3]
 === 更新履歴
 
+
 このリリースの詳細については、 https://circleci.com/ja/server/changelog/#リリース-4-0-3[更新履歴] を参照して下さい。
 
 [#release-4-0-2]

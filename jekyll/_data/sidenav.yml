@@ -129,7 +129,9 @@ en:
           - name: Troubleshoot
             link: troubleshoot
 
-  - name: Execution environments
+
+
+  - name: Execute jobs on managed compute resources
     icon: icons/sidebar/builds.svg
     children:
       - name: Overview
@@ -138,36 +140,31 @@ en:
             link: executor-intro
           - name: Resource class overview
             link: resource-class-overview
-          - name: Migrating Docker to machine
+          - name: Migrate from Docker to machine
             link: docker-to-machine
       - name: Docker
         children:
-          - name: Using Docker
+          - name: Using the Docker execution environment
             link: using-docker
           - name: Convenience images
             link: circleci-images
           - name: Migrating to next-gen images
             link: next-gen-migration-guide
-          - name: Using custom images
+          - name: Using custom-built Docker images
             link: custom-images
           - name: Docker authenticated pulls
             link: private-images
           - name: Running Docker commands
             link: building-docker-images
-          - name: Run a job in a container
-            link: run-a-job-in-a-container
-          - name: Installing and using docker-compose
-            link: docker-compose
       - name: Linux VM
         children:
-          - name: Using Linux VM
+          - name: Using the Linux VM execution environment
             link: using-linuxvm
-          - name: Android machine image
+          - name: Using Android images with the machine executor
             link: android-machine-image
-
       - name: macOS
         children:
-          - name: Using macOS
+          - name: Using the macOS execution environment
             link: using-macos
           - name: Configuring a macOS app
             link: hello-world-macos
@@ -179,35 +176,37 @@ en:
             link: dedicated-hosts-macos
       - name: Windows
         children:
-          - name: Using Windows
+          - name: Using the Windows execution environment
             link: using-windows
           - name: Hello world
             link: hello-world-windows
-      - name: GPU
-        children:
-          - name: Using GPUs
-            link: using-gpu
       - name: Arm
         children:
-          - name: Using Arm
+          - name: Using the Arm execution environment
             link: using-arm
+      - name: GPU
+        children:
+          - name: Using the GPU execution environment
+            link: using-gpu
+      - name: How-to Guides
+        children:
+          - name: Run a job in a container on your machine with Docker
+            link: run-a-job-in-a-container
+          - name: Installing and using docker-compose
+            link: docker-compose
 
-      - name: Self-hosted runner
+
+  - name: Execute job on self-hosted runners
+    icon: icons/sidebar/build-agent.svg
+    children:
+      - name: Overview
         children:
           - name: Self-hosted runner overview
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
           - name: Web app installation
-            link: runner-installation
-          - name: Scaling self-hosted runner
-            link: runner-scaling
-          - name: Self-hosted runner API
-            link: runner-api
-          - name: Self-hosted runner FAQ
-            link: runner-faqs
-          - name: Troubleshoot self-hosted runner
-            link: troubleshoot-self-hosted-runner
+            link: runner-installation  
       - name: Container runner
         children:
           - name: Container runner installation
@@ -224,10 +223,26 @@ en:
             link: runner-installation-mac
           - name: CLI installation
             link: runner-installation-cli
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
           - name: Upgrading machine runner on server
             link: runner-upgrading-on-server
           - name: Machine runner configuration reference
             link: runner-config-reference
+      - name: How-to Guides
+        children:
+          - name: Upgrade CircleCI's self-hosted runner on server
+            link: runner-upgrading-on-server
+      - name: Reference
+        children:
+          - name: Self-hosted runner API
+            link: runner-api
+          - name: Self-hosted runner FAQ
+            link: runner-faqs
+          - name: Troubleshoot self-hosted runner
+            link: troubleshoot-self-hosted-runner
+          - name: Scaling self-hosted runner
+            link: runner-scaling
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
@@ -1172,6 +1187,9 @@ ja:
           - name: CLI installation
             link: ja/runner-installation-cli
             i18n_name: CLIでのインストール
+          - name: Machine runner installation with Docker
+            link: ja/runner-installation-docker
+            i18n_name: Docker での CircleCI のマシンランナーのインストール
           - name: Upgrading machine runner on server
             link: ja/runner-upgrading-on-server
             i18n_name: Serverマシンランナーのアップグレード
