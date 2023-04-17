@@ -23,7 +23,7 @@ GitLab support is open to both new and existing users of CircleCI. Follow the st
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
-[.tab.signup.GitLab SaaS]
+[.tab.signup.GitLab_SaaS]
 --
 When you create a new organization and connect your GitLab.com account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory. 
 
@@ -71,9 +71,11 @@ gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nO
 # gitlab.com:22 SSH-2.0-GitLab-SSHD
 ```
 
-To create a new project:
+Follow the steps on the **Create New Project** page:
 
-. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`.
+image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
+
+. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Click **Verify**.
 
 . Enter your personal access token. Click **Connect**.
 
@@ -81,7 +83,7 @@ To create a new project:
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name. 
 
-. Finally, click **Create Project**. You will then be redirected to the CircleCI projects dashboard. 
+. Finally, click **Create Project**. You will then be redirected to the newly-created project's Pipelines page. 
 
 The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repo to see your pipeline on the dashboard.
 --
@@ -262,10 +264,10 @@ If they do not currently have a CircleCI account, they will need to sign up. If 
 For GitLab Self-managed organizations, you may connect additional self-managed instances to be integrated with your organization. 
 
 . Navigate to **Integrations** within **Organization Settings** to add a new instance. 
-
-. You will need to enter the instance URL, and the SSH host keys if you have not already done so, as described in the xref:#sign-up[Sign up] section above. You have successfully set up the integration when you see a "Known hosts file verified" message.
 +
-More details on verifying self-managed instances are available in the <<#establish-the-authenticity-of-an-ssh-host,Establish the authenticity of an SSH host>> section below.
+image::{{site.baseurl}}/assets/img/docs/gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
+
+. You will need to enter the instance URL, as described in the xref:#sign-up[Sign up] section above.
 
 NOTE: The ability to edit or delete existing integrations is not currently supported.
 
