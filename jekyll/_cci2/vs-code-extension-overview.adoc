@@ -30,21 +30,21 @@ For installation and setup instructions, visit the VS Code link:https://marketpl
 == Pipelines panel
 The pipelines panel provides a visual interface for managing your pipelines. The panel lists your most recent pipelines, workflows, and jobs in a project, and lets you monitor their status as well as interact with them.
 
-For each object, you can trigger certain events on hover.
-
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png[Screenshot of side panel with pipeline information]
+
+For each object, you can trigger certain events on hover.
 
 [#pipeline]
 === Pipeline
 xref:pipelines#[Pipelines] are the top-level tree item in the panel, and they contain your workflows. Hovering over a pipeline lets you:
 
-- Open in browser, to view pipeline details in the CircleCI app on your default web browser
+- Open in browser, to view pipeline details in the CircleCI app in your default web browser
 
 [#workflow]
 === Workflow
 xref:workflows#[Workflows] are nested under each pipeline, and contain jobs. Hovering over a workflow lets you:
 
-- Open in browser, to view workflow details in the CircleCI app, on your default web browser
+- Open in browser, to view workflow details in the CircleCI app, in your default web browser
 - Rerun the workflow from start, to re-trigger the entire workflow
 - Rerun the workflow from failed, to rerun only the workflow's failed jobs
 
@@ -64,9 +64,9 @@ image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Scr
 
 Expanding a job also lets you:
 
-- Load tests, if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication `[FLAKY]`.
+- Load xref:test#[tests], if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication `[FLAKY]`.
 
-- Load artifacts, if any are created by the job. Once the artifacts are loaded, you can download them by clicking on them.
+- Load xref:artifacts#[artifacts], if any are created by the job. Once the artifacts are loaded, you can download them by clicking on them.
 
 [#re-run-with-ssh]
 === Re-run with SSH
@@ -87,9 +87,9 @@ In both cases, you will be presented with two options:
 
 - Open SSH session in a remote VS Code window
 
-This feature requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on Remote Development using SSH in VS Code directly in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
+This feature requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on remote development using SSH in VS Code directly in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
 
-To re-run your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the extension settings.
+To re-run your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the CircleCI VS Code extension settings.
 
 If the job you want to re-run uses parallelism, you will be able to select which parallel run you want to SSH into.
 
@@ -101,7 +101,7 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png[Scree
 
 If you are not following a workflow in the pipelines panel, you cannot be notified about a status change event. For instance, if you have set the extension to follow only the current branch, you cannot be notified of status changes for other branches.
 
-NOTE: We do not recommend enabling notifications for status change into “Running”.
+NOTE: We do not recommend enabling notifications for when a status changes to “Running,” which may result in too many notifications to be useful.
 
 [#status-bar]
 === Status Bar
@@ -156,11 +156,11 @@ Corresponds to the CLI command `circleci config validate`, and verifies statical
 +
 Corresponds to the CLI command `circleci policy decide`, and verifies that the configuration file complies with your organisation policies (if any are set).
 
-Both of these commands can be invoked by:
+Both of these commands can be run by:
 
-- Right-clicking on a CircleCI YAML file.
+- Right-clicking anywhere within an opened `.circleci/config.yml` file.
 
-- Clicking on the CircleCI button on the top-right corner of a tab in which a `.circleci/config.yml` is open. Note that the button will not be visible if you are editing any other file.
+- Clicking on the CircleCI button on the top right of the editor when you have a `.circleci/config.yml`open. Note that the button will not be visible if you are editing any other file.
 
 [#open-source-language-server]
 === Open source language server
