@@ -47,7 +47,7 @@ The first two options (**Fastest** and **Faster**) automatically trigger a pipel
 --
 You need:
 
-* Your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com``.
+* Your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
 +
 Your self-managed instance must already contain at least one GitLab project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
 
@@ -261,7 +261,7 @@ If they do not currently have a CircleCI account, they will need to sign up. If 
 
 For GitLab Self-managed organizations, you may connect additional self-managed instances to be integrated with your organization. 
 
-. Navigate to the **Integrations** within **Organization Settings** to add a new instance. 
+. Navigate to **Integrations** within **Organization Settings** to add a new instance. 
 
 . You will need to enter the instance URL, and the SSH host keys if you have not already done so, as described in the xref:#sign-up[Sign up] section above. You have successfully set up the integration when you see a "Known hosts file verified" message.
 +
