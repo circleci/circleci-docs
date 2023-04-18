@@ -5,6 +5,7 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
+  - Server v2.x
 ---
 = Slack Orb を使用した Slack の通知設定
 :page-layout: classic-docs
@@ -98,7 +99,7 @@ workflows:
 IMPORTANT: この時点でお客様の `config.yml` をコミットし、パイプラインをトリガーすると、ビルドが失敗します。 これは次のステップで Slack 認証情報を追加する必要があるためです。
 
 [#step-two-connect-circleci-with-slack]
-== ステップ 2: CircleCI と Slack を接続する
+== ステップ 2: CircleCI と Slack を接続する 
 
 ここでは以下の手順を行います。
 
@@ -343,4 +344,4 @@ image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
 このチュートリアルでは、CircleCI の通知を Slack のチャンネルに送信できるように Slack Orb を設定しました。 基本的な通知を作成し、Slack アプリを作成・認証し、テンプレートを使用しました。
 
-その他の設定オプションについては、 https://circleci.com/ja/developer/orbs/orb/circleci/slack[Slack Orb のドキュメント] を参照してください。 また、 https://circleci.com/ja/developer/orbs[Orb レジストリ]でもその他のたくさんの Orb を参照していただけます。
+その他の設定オプションについては、 https://circleci.com/ja/developer/orbs/orb/circleci/slack[Slack Orb のドキュメント] を参照してください。 また、 https://circleci.com/ja/developer/orbs[Orb レジストリ]でもその他のたくさんの Orb を参照していただけます。 
