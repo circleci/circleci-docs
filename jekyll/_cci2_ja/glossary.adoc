@@ -5,6 +5,7 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
+  - Server v2.x
 ---
 = 用語集
 :page-layout: classic-docs
@@ -72,7 +73,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 [#pipeline]
 == パイプライン
 
-<<pipelines#,CircleCI パイプライン>> とは、プロジェクトで作業をトリガーする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 パイプラインはプロジェクトの '.circleci/config.yml.'  ファイルで定義されます。 CircleCI Server v2.x ではパイプラインは使用できません。
+<<pipelines#,CircleCI パイプライン>> とは、プロジェクトで作業をトリガーする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 パイプラインはプロジェクトの '.circleci/config.yml.'  ファイルで定義されます。
 
 [#primary-container]
 == プライマリコンテナ
