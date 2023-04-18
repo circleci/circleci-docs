@@ -4,6 +4,7 @@ contentTags:
   platform:
   - Server v4.x
   - Server v3.x
+  - Server v2.x
 ---
 = CircleCI Server プラン
 :page-layout: classic-docs
@@ -20,7 +21,7 @@ contentTags:
 [#server-plan]
 == Server  プラン
 
-CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 詳細については <<server-3-overview#,Server documentation>>をご覧ください。
+CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 Please see the xref:server/overview/circleci-server-v4-overview#[Server documentation] for more information.
 
 Server プランにはカスタムクレジットオプションがあり、CircleCI のすべてのリソースクラスでお客様のビルド設定や実行環境に応じて1ヶ月単位でご利用いただけます。
 
@@ -34,17 +35,16 @@ Server プランでは、他のプランに加えて下記のようなアップ�
 [#custom-storage-retention]
 === ストレージ保存期間のカスタマイズ
 
-https://app.circleci.com/[CircleCI Web アプリ]では、アーティファクト、ワークスペース、キャッシュプロジェクトのストレージ保存期間のカスタマイズが可能です。 これにより、それぞれのオブジェクトタイプの保存方法をお客様のプロジェクトに最適な方法に設定することができます。 ストレージ保存期間を短くすると、月々のコストを下げることができます。
+The link:https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. これにより、それぞれのオブジェクトタイプの保存方法をお客様のプロジェクトに最適な方法に設定することができます。 ストレージ保存期間を短くすると、月々のコストを下げることができます。
 
 [#additional-support-options]
 === サポートオプションの追加
 
-拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Server プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および
- https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
+拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 The Server plan also has access to the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
 
 [#circleci-features]
 == CircleCI の機能
 
-上記のアップグレード機能に加え、Server プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、 https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能] のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
+上記のアップグレード機能に加え、Server プランでは下記の機能もご利用いただけます。 Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. 以下の機能はすべてのプランでご利用いただけます。
 
 {% include snippets/ja/features-of-circleci.adoc %}
