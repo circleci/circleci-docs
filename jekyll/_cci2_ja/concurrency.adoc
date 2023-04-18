@@ -16,9 +16,9 @@ contentTags:
 
 ここでは同時実行について概説し、活用する方法を紹介します。
 
-CircleCI では、**同時実行**とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 これは、複数のコンテナにテストを分割する **並列実行**とは異なります。 If you would like information on parallelism, visit the xref:parallelism-faster-jobs#[Running Tests in Parallel] page.
+CircleCI では、**同時実行**とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 これは、複数のコンテナにテストを分割する **並列実行**とは異なります。 並列実行については、 xref:parallelism-faster-jobs#[テストの並列実行]のページをご覧ください。
 
-CircleCI のすべてのプランにジョブの同時実行機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 Please refer to the link:https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
+CircleCI のすべてのプランにジョブの同時実行機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 お客様のプランに含まれる同時実行が可能なジョブの数に関する最新情報は、 link:https://circleci.com/ja/pricing/[料金プランのページ] を参照してください。
 
 [#concurrency]
 == 同時実行
@@ -30,11 +30,11 @@ CircleCI では、ジョブの同時実行は下記の 2 つの状況に分ら�
 
 ここでは 1 つ目の状況について説明し、1 つのワークフロー内に複数のジョブを設定する方法の例を紹介します。 ワークフロー内で同時実行を設定すると、単一のワークフロー内で複数のコンテナを使用して複数のジョブを同時に実行することができます。
 
-To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[resource classes] for different executors.
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、各 Executor の xref:configuration-reference#resourceclass[リソースクラス]ごとに同時実行数のソフト制限が設けられています。
 
 ジョブがキューに入る場合、この制限に達している可能性が考えられます。 制限に達する理由は、組織内で同時にジョブを実行しているユーザーの数や、ワークフローが重複しているなど、複数の要因があります。
 
-Customers on annual plans can request an increase to those limits at no extra charge by contacting link:https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。 link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] にご連絡ください。
 
 [#concurrency-in-workflows]
 === ワークフロー内での同時実行
@@ -111,5 +111,5 @@ workflows:
 [#see-also]
 == 関連項目
 
-- xref:workflows#[Workflows]
-- xref:sample-config#[Sample config.yml Files]
+- xref:workflows#[ワークフロー]
+- xref:sample-config#[サンプル config.yml ファイル]
