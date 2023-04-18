@@ -3,9 +3,9 @@
 description: Open preview of config policies for CircleCI. Learn about testing your policies.
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Test config policies - Open preview
+= 設定ファイルのポリシーのテスト - オープンプレビュー
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
