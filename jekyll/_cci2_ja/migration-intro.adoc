@@ -14,19 +14,21 @@ contentTags:
 
 :toc-title:
 
-移行プロセスを開始する前に、CircleCI の基本的な仕組みをご理解ください。
+[#why-migrate-to-circleci]
+== CircleCI に移行する理由
 
-以下の資料を参照してください。
+CircleCI は、大変優れた CI ツールです。 CI/CD has been CircleCI's specialization since the company's founding over a decade ago. On top of the features you would expect from any CI/CD tool, what sets CircleCI apart are the following productivity-boosting features:
 
-- https://circleci.com/continuous-integration/[継続的インテグレーションの基礎]
-- <<concepts#,CircleCI のコンセプト>>
-- <<hello-world#,CircleCI の Hello World>>
-- <<getting-started#,各手順のチュートリアル>>
-- <<about-circleci#,CircleCI について>>
+1. **Advanced Caching** - On top of xref:caching#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:docker-layer-caching#[Docker image layers]. これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
+1. **SSH Into Builds** - CircleCI offers the ability to xref:ssh-access-jobs#[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. これは、失敗したビルドのデバッグに非常に役立ちます。
+1. **Resource Classes** - You can use various different xref:optimizations#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
+1. **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[splitting workloads] between different containers.
+
+https://circleci.com/signup/[Sign up for a free account today], or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
 
 CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-2021[移行コース]を受講すると、CircleCI への移行についてさらに詳しく学ぶことができます。
 
-NOTE: Premium サポートや Advanced サポートをご利用のお客様は、customersuccess@circleci.com にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
+NOTE: If you have Premium or Advanced Support, please reach out to mailto:customersuccess@circleci.com[customersuccess@circleci.com] for a more tailored migration plan with Gantt charts, custom trainings etc.
 
 [#project-migration-methodology]
 == プロジェクトの移行方法
@@ -140,7 +142,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 * <<migrating-from-azuredevops#,Azure DevOps からの移行>>
 * <<migrating-from-buildkite#,Buildkite からの移行>>
 * <<migrating-from-gitlab#,GitLab からの移行>>
-* <<migrating-from-github#,GitHub Actions からの移行>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
 * <<migrating-from-jenkins#,Jenkinsからの移行>>
 * <<migrating-from-teamcity#,TeamCity からの移行>>
 * <<migrating-from-travis#,Travis CI からの移行>>
