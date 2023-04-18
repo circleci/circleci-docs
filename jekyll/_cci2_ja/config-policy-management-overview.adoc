@@ -1,11 +1,11 @@
 ---
 
-description: Config policies for CircleCI project configurations.
+description: CircleCI プロジェクト設定の設定ファイルのポリシー管理
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Config policies overview - Open preview
+= 設定ファイルのポリシー管理機能の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -253,9 +253,9 @@ enable_rule["RULE_NAME"]
 enable_rule["use_official_docker_image"]
 ----
 
-Use `enable_hard` to enable a rule and set its enforcement level to `hard` in a single statement.
+`enable_hard` を使用すると、1つのステートメントでルールを有効にし、その実施レベルを `hard` に設定することができます。
 
-The following statements are equivalent:
+以下の記述は等価です：
 
 [source,rego]
 ----
