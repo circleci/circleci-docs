@@ -1,11 +1,11 @@
 ---
 
-description: Open preview of config policies for CircleCI. Reference page for function helpers.
+description: CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー 設定ファイルのポリシーに関するリファレンス
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Config policy reference
+= 設定ファイルのポリシーに関するリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -24,7 +24,7 @@ CAUTION: コンフィグファイルのポリシー管理機能が**オープン
 [#circleci-config-helpers]
 == CircleCI Rego のヘルパー
 
-The following helpers are imported using `import data.circleci.config`
+以下のヘルパーは `import data.circleci.config`を使用してインポートされます。
 
 [#orbs]
 === `ban_orbs`
