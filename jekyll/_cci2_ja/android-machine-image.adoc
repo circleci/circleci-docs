@@ -2,14 +2,14 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Android images with the machine executor
+= Machine executor による Android イメージ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Using the Android image on the machine executor
+:page-description: Machine Executor での Android イメージの使用
 :icons: font
 :toc: macro
 
