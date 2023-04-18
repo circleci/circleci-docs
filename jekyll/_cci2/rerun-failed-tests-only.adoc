@@ -256,7 +256,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 ---
 
-**Question:** What happens if I try to use the functionality, `circleci tests run` is being used, but I have not configured my `.circleci/config.yml` file to upload test results to CircleCI?
+**Question:** What happens if I try to use the functionality and `circleci tests run` is used in my `.circleci/config.yml` file, but I have not configured my job to upload test results to CircleCI?
 
 **Answer:** The job will fail.
 
