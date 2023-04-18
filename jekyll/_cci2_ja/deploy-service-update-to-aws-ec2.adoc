@@ -1,15 +1,15 @@
 ---
 
-description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
+description: CircleCI Orb を使って変更を AWS ECS にデプロイする方法
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 document-type:
 - How-to
 ---
-= Deploy service update to AWS ECS
+= サービスの更新を AWS ECS にデプロイする方法
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -17,7 +17,7 @@ document-type:
 
 :toc-title:
 
-In this how-to guide, you will learn how to to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
+このノウハウガイドでは、CircleCI Orb を使用してCircleCIをAWS ECSにデプロイする方法を説明しています。
 
 [#introduction]
 == はじめに
@@ -27,7 +27,7 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 [#set-environment-variables]
 == 1.  環境変数の設定
 
-下記の環境変数を設定する必要があります。 For more information on how to set environment variables, refer to the xref:set-environment-variable#[Set an environment variable] page. You can also use a xref:contexts#[context]:
+下記の環境変数を設定する必要があります。 環境変数の設定に関する詳細は、 xref:set-environment-variable#[環境変数の設定] を参照して下さい。 xref:contexts#[コンテキスト] も使用できます。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
@@ -61,12 +61,12 @@ orbs:
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
-TIP: When using orbs, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your project.
+TIP: Orb を使用する際は、 link:https://circleci.com/developer/ja/orbs[Orb レジストリ] をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
 
 [#create-workflow]
 == 4. ワークフローの作成
 
-ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 Learn more about xref:configuration-reference#workflows[workflow configuration].
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、 xref:configuration-reference#workflows#[ワークフローの設定] を参照して下さい。
 
 [source,yaml]
 ----
