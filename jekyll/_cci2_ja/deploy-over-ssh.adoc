@@ -1,20 +1,20 @@
 ---
 
-description: This is document provides examples of deploying over SSH.
+description: このドキュメントでは、SSH 経由でデプロイするためのコード例を紹介します。
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Deploy over SSH
+= SSH 経由でのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
+このノウハウガイドでは、SSH経由でアプリケーションをデプロイするためのCircleCIの設定方法について説明します。
 
 [# add-ssh-key-target]
 == 1.  Add SSH key for target
