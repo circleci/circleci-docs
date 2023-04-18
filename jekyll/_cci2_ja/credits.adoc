@@ -3,13 +3,13 @@
 categories: [how-to]
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Using credits
+= クレジットの使用
 :description: CircleCI クレジットベースプランシステムについて.
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
+:page-description: CircleCI クレジットベースプランシステムについて
 :icons: font
 :toc: macro
 
@@ -61,7 +61,7 @@ Free プランで macOS でビルドを行っている組織にも、毎月 25,0
 [#questions-and-comments]
 == ご意見・ご質問
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「<<#billing-faqs,料金・支払>>」セクションをご確認ください。 解決しない場合は、お気軽にlink:"https://support.circleci.com/hc/ja/requests/new">[サポート チケット]を作成してお問い合わせください。
+ご不明な点がございましたら、まずは「よくあるご質問」の「<<#billing-faqs,料金・支払>>」セクションをご確認ください。 解決しない場合は、お気軽にlink:https://support.circleci.com/hc/ja/requests/new[サポート チケット]を作成してお問い合わせください。
 
 [#billing-faqs]
 == FAQ
