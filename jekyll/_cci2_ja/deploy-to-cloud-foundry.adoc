@@ -1,20 +1,20 @@
 ---
 
-description: This is document provides examples of deploying to Cloud Foundry.
+description: このドキュメントでは、Cloud Foundry へのデプロイ例を紹介します
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Deploy to Cloud Foundry
+= Cloud Foundry へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to configure CircleCI to deploy to Cloud Foundry.
+このノウハウガイドでは、Cloud FoundryにデプロイするためのCircleCIの設定方法について説明します。
 
 [#introduction]
 == はじめに
@@ -119,7 +119,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 ```
 
 [#manual-approval]
-=== 4. Manual approval (optional)
+=== 4. 手動による承認
 
 さらなる制御と検証を行うには、以下のサンプルワークフローに示すように、dark のステップと live のステップの間に手動の "hold" ステップを追加します。
 
