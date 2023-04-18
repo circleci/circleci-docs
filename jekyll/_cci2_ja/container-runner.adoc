@@ -341,7 +341,7 @@ NOTE: コンテナランナーは、クラスタ全体の権限を使って、�
 
 コンテナのロギングには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
 
-Container runner currently sets default resource limits and requests on the logging container, they are:
+コンテナランナーは現在、ロギングコンテナに対してデフォルトのリソース制限とリクエストを設定しています、これらは以下の通りです：
 
 ```yaml
 requests:
@@ -385,7 +385,7 @@ agent:
 [#cost-and-availability]
 == 料金と提供プラン
 
-Container runner jobs are eligible for <<persist-data#managing-network-and-storage-usage,Runner Network Egress>>. これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
+コンテナランナーのジョブは <<persist-data#managing-network-and-storage-usage,Runner Network Egress>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
 各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
