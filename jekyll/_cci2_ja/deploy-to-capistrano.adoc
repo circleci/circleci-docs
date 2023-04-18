@@ -1,23 +1,25 @@
 ---
 
-description: "このドキュメントでは、Capistrano にデプロイするためのコード例を紹介します。"
+description: This is document provides examples of deploying to Capistrano.
 contentTags:
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
-= Capistrano へのデプロイ
+= Deploy to Capistrano
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
+In this how-to guide, you will be provided with an example CircleCI configuration to deploy to Capistrano.
+
 [#introduction]
 == はじめに
 
-このページでは、Capistrano にデプロイするための設定ファイルを紹介します。 Capistrano を使用するようにプロジェクトをセットアップしたら、CircleCI のジョブステップで、必要に応じて link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[デプロイコマンド] を実行できます。
+This page provides a configuration example for deployment to Capistrano. Capistrano を使用するようにプロジェクトをセットアップしたら、CircleCI のジョブステップで、必要に応じて link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[デプロイコマンド] を実行できます。
 
 [#configuration-example]
 == 設定ファイル例
