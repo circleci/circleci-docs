@@ -1,20 +1,20 @@
 ---
 
-description: This document provides examples of publishing to the NPM registry.
+description: このドキュメントでは、npm レジストリにデプロイするためのコード例を紹介します。
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Publish to NPM registry
+= npm レジストリへのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to configure CircleCI to publish to the NPM registry.
+このノウハウガイドでは、CircleCI を npm レジストリに公開する設定方法を説明しています。
 
 [#introduction]
 == はじめに
@@ -22,7 +22,7 @@ In this how-to guide, you will learn how to configure CircleCI to publish to the
 パッケージを npm レジストリにパブリッシュするように CircleCI をセットアップすると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
 
 [#obtain-the-npm-authToken]
-== 1.  Obtain the npm authToken
+== 1.  npm authToken を取得
 
 パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 そのためには、まず npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 以下の行を探します。
 
@@ -33,9 +33,9 @@ In this how-to guide, you will learn how to configure CircleCI to publish to the
 この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
 
 [#set-npm-token]
-== 2.  Set NPM token
+== 2.  npm トークンの設定
 
-Go to your xref:environment-variables#setting-environment-variables-for-all-commands-without-adding-them-to-git[project settings], and set the `NPM_TOKEN` variable to the obtained authToken.
+xref:environment-variables#setting-environment-variables-for-all-commands-without-adding-them-to-git[プロジェクト設定] に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
 
 [#configure-circleci]
 == 3.  CircleCI を構成する
@@ -70,7 +70,7 @@ workflows:
 ```
 
 [#create-new-version]
-== 4. Create a new version
+== 4. 新しいバージョンの作成
 
 新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
 
@@ -85,6 +85,6 @@ git push --follow-tags
 ```
 
 [#publish]
-== 5. Publish
+== 5. パブリッシュ
 
 テストが完了すると、パッケージが npm に自動的にパブリッシュされます。
