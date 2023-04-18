@@ -2,16 +2,17 @@
 
 contentTags:
   platform:
-    - クラウド
-    - Server v4.x
-    - Server v3.x
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= プロジェクトの値と変数
-:page-description: CircleCI プロジェクトで使用する定義済みの値のリスト
+= Project values and variables
+:description: CircleCI プロジェクトで使用する定義済みの値のリスト
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI プロジェクトで使用できる定義済みの値について説明します。
@@ -19,20 +20,22 @@ contentTags:
 [#built-in-environment-variables]
 == 定義済み環境変数
 
-下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 環境変数は 1 つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
+下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 一つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
 
-**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくはxref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで環境変数を設定する]をご覧ください。
+環境変数はジョブレベルで設定されます。 一つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
 
-{% include snippets/ja/built-in-env-vars.adoc %}
+NOTE: **注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run`ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 For more details, see xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
+
+include::../_includes/snippets/built-in-env-vars.adoc[]
 
 [#pipeline-values]
 == パイプライン値
 
 パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
 
-{% include snippets/ja/pipeline-values.adoc %}
+include::../_includes/snippets/pipeline-values.adoc[]
 
-例えば下記のようにします。
+たとえば以下のようになります。
 
 ```yaml
 version: 2.1
@@ -52,4 +55,4 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-NOTE: 上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定する]をご覧ください。
+上記の方法で environment キーの変数を設定する際にパイプラインの変数が空の場合、変数は <nil> が設定されます。 文字列を空にする必要がある場合は、link:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定]するをご覧ください。
