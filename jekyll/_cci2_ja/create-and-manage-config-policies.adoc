@@ -1,6 +1,6 @@
 ---
 
-description: Learn how to write and manage config policies for CircleCI project configurations.
+description: CircleCIプロジェクト構成のコンフィグポリシーの書き方、管理方法についてご紹介します。
 contentTags:
   platform:
   - クラウド
