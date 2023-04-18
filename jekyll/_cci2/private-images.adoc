@@ -105,7 +105,7 @@ Or with the CLI:
 
 [source,yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   build:
     machine: true
@@ -134,7 +134,7 @@ You can start using private images from ECR in one of two ways:
 
 [source,yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -148,7 +148,7 @@ Both options are virtually the same. However, the second option enables you to s
 
 [source,yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -178,7 +178,6 @@ jobs:
           command: "something something darkside.... cli"
 
 workflows:
-  version: 2
   main:
     jobs:
       - build:

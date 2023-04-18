@@ -1930,7 +1930,6 @@ A workflow may have a `schedule` indicating it runs at a certain time, for examp
 
 ```yml
 workflows:
-   version: 2
    nightly:
      triggers:
        - schedule:
@@ -2607,7 +2606,6 @@ jobs:
           command: ansible-playbook site.yml -i production
 
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build:

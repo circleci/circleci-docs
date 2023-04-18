@@ -35,7 +35,7 @@ NOTE: If you are using GitHub, you have the option to limit CircleCI, preventing
 
 . Enter your email address, and then set a secure password for your CircleCI account. A verification email is sent to the email address provided.
 
-. You will be taken to a screen with the option to create a new project from your GitLab repository. Follow the prompts to connect to your GitLab account. Once you have selected a repository and created a new project, you will be redirected to the CircleCI web app dashboard.
+. You will be taken to a screen where you can connect your code from either a GitLab.com or GitLab Self-managed account. Follow the prompts to connect to your GitLab account. Once you have selected a repository and created a new project, you will be redirected to the CircleCI web app dashboard.
 --
 
 [.tab.signup.Existing_CircleCI_users]
@@ -46,12 +46,12 @@ NOTE: If you are using GitHub, you have the option to limit CircleCI, preventing
 
 . Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
 
-. Click **Connect** next to the GitLab.com option. You will be guided through authorising your GitLab account, connecting a repository, and creating a project. You will then be taken to the organization dashboard in CircleCI.
+. You will be taken to a screen where you can connect your code from either a GitLab.com or GitLab Self-managed account. You will be guided through authorising your GitLab account, connecting a repository, and creating a project. You will then be taken to the organization dashboard in CircleCI.
 
 The new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own Free plan to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account.
 --
 
-NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab SaaS integration page].
+NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab integration page].
 
 [#email-signup]
 == Sign up with email

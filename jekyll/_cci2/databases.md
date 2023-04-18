@@ -116,7 +116,7 @@ Using multiple Docker containers for your jobs may cause race conditions if the 
 Following is an example of how to do this in your CircleCI `config.yml` file:
 
 ```yml
-version: 2.0
+version: 2.1
 jobs:
   build:
     working_directory: /your/workdir
