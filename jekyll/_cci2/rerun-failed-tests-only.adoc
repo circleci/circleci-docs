@@ -252,7 +252,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 **Question:** What happens if I try to use the functionality but `circleci tests run` is not used in the `.circleci/config.yml` file?
 
-**Answer:** The workflow will re-run from failed as if "Rerun workflow from failed" was pressed.  All tests will be executed including failed tests.  
+**Answer:** All tests will be executed when the workflow runs again, including failed tests. This is equivalent to selecting "Rerun workflow from failed".  
 
 ---
 
