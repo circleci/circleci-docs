@@ -3,6 +3,7 @@
 contentTags:
   platform:
   - クラウド
+redirect_from: /ja/gitlab-vcs-support
 ---
 = GitLab.com との連携
 :page-layout: classic-docs
@@ -18,39 +19,107 @@ contentTags:
 
 このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、リリース予定の機能の概要もご紹介します。
 
-[#step-one-sign-up]
-== 1. ユーザー登録
+[#sign-up]
+== ユーザー登録
 
-GitLab との連携は、新規および既存の CircleCI ユーザーに行っていただけます。 link:/docs/first-steps#gitlab-signup[CircleCI のユーザー登録] のページに記載されている手順に従ってください。
-
-* GitLab アカウントを紐付けて組織を作成します。
-* プロジェクトを作成し、GitLab アカウントからリポジトリに接続します。
-
-リポジトリと CircleCI プロジェクトを接続すると、裏では CircleCI がお客様の GitLab リポジトリ内で Webhook を登録します。 これは、プロジェクトの作成に成功後、リポジトリの **Settings > Webhooks** のページに移動して確認することができます。
+GitLab との連携は、新規および既存の CircleCI ユーザーに行っていただけます。 xref:first-steps#gitlab-signup[CircleCI のユーザー登録] のページに記載されている手順に従ってください。
 
 NOTE: 設定するレポジトリへの API アクセスと書き込みアクセス権が必要です。 GitLab では、これは "maintainer" 以上のロールです。
 
-[NOTE]
-====
-現在下記の制限があります。
+[.tab.signup.GitLab_SaaS]
+--
+When you create a new organization and connect your GitLab.com account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory.
+
+If your selected repo does _not_ already have a `.circleci/config.yml`, you will be presented with the following options to set up a CircleCI configuration for your project:
+
+* **Fastest**: Use an existing `config.yml` in one of your repos.
++
+You can select _another_ repository in your account that has previously been set up with a CircleCI configuration. The `.circleci/config.yml` file may be in the main branch, or a feature branch. The config is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you.
+* **Faster**: Commit a starter CI pipeline to a new branch.
++
+CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
+* **Fast**: Use a `config.yml` template that you can edit and save.
++
+You can choose a sample `.circleci/config.yml` to best fit your project from a variety of templates (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is committed on a new branch.
+
+The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
+--
+
+[.tab.signup.GitLab_Self-Managed]
+--
+You need:
+
+* Your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
++
+Your self-managed instance must already contain at least one GitLab project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet, **it cannot be behind a firewall**.
+* A link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.
+
+[#known-hosts-input]
+* Your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
++
+The output should look something like:
++
+```shell
+➜  ~ ssh-keyscan test-gitlab.circleci.com
+
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+```
+
+Follow the steps on the **Create New Project** page:
+
+image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
+
+. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Click **Verify**.
+. Enter your personal access token. Click **Connect**.
+. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Click **Connect**.
+. Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name.
+. Finally, click **Create Project**. You will then be redirected to the newly-created project's Pipelines page.
+
+The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repo to see your pipeline on the dashboard.
+--
+
+NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. xref:configuration-reference#[CircleCI の設定] では、`.circleci/config.yml` で使われるキーをすべて参照できます。
+
+リポジトリと CircleCI プロジェクトを接続すると、裏では CircleCI がお客様の GitLab リポジトリ内で Webhook を登録します。 これは、プロジェクトの作成に成功後、リポジトリの **Settings > Webhooks** のページに移動して確認することができます。
+
+The following limits are currently in place for GitLab integrations:
 
 - 各ユーザーが作成できる組織は最大 3 つです。
 - Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
 
 組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/ja/requests/new[サポートチーム] にお問い合わせください。
-====
 
-[#step-two-trigger-pipeline]
-== 2. CircleCI でパイプラインをトリガーする
+[#trigger-pipeline]
+== CircleCI でパイプラインをトリガーする
 
-現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
+[.tab.pipeline.GitLab.com]
+--
+When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
-. まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
-+
-NOTE: CircleCI を初めて利用される方は、最初は <<hello-world#echo-hello-world-on-linux#,Hello World>> サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
-. GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されます。
-+
+If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
+--
+
+[.tab.pipeline.GitLab_Self-Managed]
+--
+If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
+
+When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
+--
+
+Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
+
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+
+Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo.
+
+Committing further changes in your repo will automatically trigger a pipeline. However, manually triggering a pipeline from the CircleCI web app is also not available at this time.
 
 [#project-settings]
 == プロジェクト設定
@@ -61,7 +130,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 
 プロジェクトには 1 つまたは複数の **トリガー** を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
 
-プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
+プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。
 
 [#people]
 === People
@@ -72,14 +141,18 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 * Contributor: プロジェクトや一部の設定の読み取りと書き込みアクセス権
 * Viewer: プロジェクトや一部の設定の読み取りアクセス権のみ
 
-すべての権限のリストは、 <<roles-and-permissions>> のセクションをご確認ください。
+すべての権限のリストは、 <<roles-and-permissions,Roles and permissions>> のセクションをご確認ください。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
 [#configuration]
 === 設定
 
-この時点で、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
+この時点で、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。
+
+For GitLab Self-managed, you are able to select any instance that you have previously added as a configuration source. If you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will first need to add a new connection via your xref:#organization-settings-integrations[**Organization Settings**]. In either case, you will also need to enter your personal access token again to authorize this connection.
+
+設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
@@ -109,30 +182,27 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違いにも注意してください。
 
 [#project-settings-advanced]
-=== **高度な設定**
+=== 高度な設定
 
-- CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、<<dynamic-config#,ダイナミックコンフィグ>> ガイドをお読みください。
+- CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、xref:dynamic-config#[ダイナミックコンフィグ]ガイドをお読みください。
 - 現時点では、**Free and Open Source** 設定はサポートされていませんが、今後提供予定です。
-- 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+- 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの xref:skip-build#auto-cancelling[自動キャンセルのセクション]  を参照してください。
 
 [#project-settings-ssh-keys]
-=== **SSH キー**
+=== SSH キー
 
-プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。 SSH キーに関する詳細は、<<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
+プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。
 
 [#create-gitlab-ssh-key]
 ==== GitLab SSH キーを作成
 
-. link:https://docs.gitlab.com/ee/user/ssh.html[GitLab の説明] に従って、SSH キーペアを作成します。パスワードを入力するよう求められた場合、入力しないでください（以下はmacOSでキーを生成するコマンドの一例です）。
+. link:https://docs.gitlab.com/ee/user/ssh.html[GitLab の説明] に従って、SSH キーペアを作成します。 パスワードを入力するよう求められた場合、**入力しないでください**（以下はmacOSでキーを生成するコマンドの一例です）。
 +
 ```shell
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-
-. link:https://gitlab.com/[GitLab]のプロジェクトにアクセスし、**Settings > Repository**に移動し、**Deploy keys**セクションを展開してください。Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。**Grant write permissions to this key**にチェックを入れ、**キーを追加(Add Key)**をクリックします。
-
-. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。Hostname のフィールドには、`gitlab.com` を入力し、手順 1 で作成したプライベートキーを追加します。
-
+. link:https://gitlab.com/[GitLab]のプロジェクトにアクセスし、**Settings > Repository**に移動し、**Deploy keys**セクションを展開してください。 Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 **Grant write permissions to this key**にチェックを入れ、**キーを追加(Add Key)**をクリックします。
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 Hostname のフィールドには、`gitlab.com` を入力し、手順 1 で作成したプライベートキーを追加します。 次に **Add SSH Key** をクリックします。
 . `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
 +
 ```yaml
@@ -148,7 +218,6 @@ NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違い�
 
 ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
 
-
 SSH キーに関する詳細は、 xref:add-ssh-key#[CircleCI への SSH キーの追加] をご覧ください。
 
 [#organization-settings]
@@ -158,7 +227,7 @@ GitLab の連携では、特定の VCS に関連づけられない「スタン�
 
 スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
-組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。 CircleCI の組織設定に関する一般的な情報は、<<settings#,設定>> を参照してください。
+組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。
 
 [#organization-settings-people]
 === People
@@ -177,10 +246,33 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 . **Invite** ボタンをクリックします。
 . 招待したいユーザーのメールアドレスを入力し、適切なロールを選択します。 複数のユーザーに同じロールをアサインする場合は、複数のアドレスを同時に入力できます。
 +
-現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 ロールや権限の詳細については、<<#about-roles-and-permissions,次のセクション>> を参照してください。
+現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 For more information, refer to the <<#about-roles-and-permissions,Roles and permissions>> section.
 . 招待されたユーザーは、招待を受けるためのリンクが含まれたメール通知 (`noreply@circleci.com` から送信) を受け取ります。
 +
 ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
+
+[#organization-settings-integrations]
+=== Integrations (GitLab Self-managed only)
+
+For GitLab Self-managed organizations, you may connect additional self-managed instances to be integrated with your organization.
+
+. Navigate to **Integrations** within **Organization Settings** to add a new instance.
++
+image::{{site.baseurl}}/assets/img/docs/gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
+. You will need to enter the instance URL, as described in the xref:#sign-up[Sign up] section above.
+
+NOTE: The ability to edit or delete existing integrations is not currently supported.
+
+For GitLab.com, account integrations can be managed under your xref:#user-account-integrations[user settings].
+
+[#establish the authenticity of an SSH host]
+==== SSH ホストの信頼性の確立
+
+For GitLab self-managed instances, it is necessary to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic. The **known_hosts** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
+
+SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for example, `ssh-keyscan test-gitlab.circleci.com`.
+
+When retrieving the host keys, you can confirm that you have the correct key by checking its fingerprints. You can check the fingerprints found in the **Instance Configuration** section of your self-managed instance's Help pages (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[this Instance Configuration page] shows an example).
 
 [#roles-and-permissions]
 == ロールと権限
@@ -601,162 +693,10 @@ CircleCI で複数のアカウント連携ができることにより、以下�
 - アカウントの全てのソースコントロールに容易にアクセスする
 - CircleCI で利用可能な全ての認証方法を使用する
 
-[#pipeline-values]
-== パイプライン値
-
-GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用に関する詳細は、
-<<pipeline-variables#,パイプラインの値とパラメーター>> を参照して下さい。 **パイプラインのスケジュール実行機能は現時点では GitLab ユーザーはご利用いただけません。**
-
-[.table.table-striped]
-[cols=2*, options="header"]
-|===
-|名前
-|説明
-
-|`pipeline.trigger_parameters.circleci.trigger_id`
-|イベントを受信したトリガーの ID
-
-|`pipeline.trigger_parameters.circleci.config_source_id`
-|設定ソースの ID
-
-|`pipeline.trigger_parameters.circleci.trigger_type`
-|GitLab
-
-|`pipeline.trigger_parameters.circleci.event_time`
-|CircleCI のイベント受信のタイムスタンプ
-
-|`pipeline.trigger_parameters.circleci.event_type`
-|push、pull request、manual など
-
-|`pipeline.trigger_parameters.circleci.project_id`
-|CircleCI のプロジェクト ID
-
-|`pipeline.trigger_parameters.circleci.actor_id`
-|CircleCI のユーザー ID
-
-|`pipeline.trigger_parameters.gitlab.type`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.project_id`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.ref`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.checkout_sha`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_id`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_name`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_username`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_avatar`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.repo_name`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.repo_url`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.web_url`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_sha`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_title`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_message`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_timestamp`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_author_name`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_author_email`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.total_commits_count`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.branch`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.default_branch`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.is_fork_merge_request`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-|===
-
 [#deprecated-system-environment-variables]
 == 非推奨のシステム環境変数
 
-GitLab ベースのプロジェクトでは以下のシステム環境変数が使用できません。 パイプラインでこれらの環境変数が必要な場合は、利用可能な <<#pipeline-values,パイプライン値>> の中の適切な値との置き換えを推奨します。
-
-[.table.table-striped]
-[cols=2*, options="header"]
-|===
-|名前
-|説明
-
-|`CI_PULL_REQUESTS`
-|現在のビルドに関連付けられたプルリクエストの URL の一覧 (カンマ区切り)。
-
-|`CI_PULL_REQUEST`
-|関連付けられたプルリクエストの URL。 複数のプル リクエストが関連付けられている場合は、いずれか 1 つの URL がランダムに選択されます。
-
-|`CIRCLE_PR_NUMBER`
-|関連付けられた GitHub または Bitbucket プルリクエストの番号。 フォークしたプルリクエストのみで使用可能です。
-
-|`CIRCLE_PR_USERNAME`
-|プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。
-
-|`CIRCLE_PR_REPONAME`
-|プルリクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。
-
-|`CIRCLE_PROJECT_USERNAME`
-|現在のプロジェクトの GitHub または Bitbucket ユーザー名
-
-|`CIRCLE_PROJECT_REPONAME`
-|現在のプロジェクトのリポジトリの名前
-
-|`CIRCLE_REPOSITORY_URL`
-|GitHub または Bitbucket リポジトリ URL
-
-|`CIRLCE_SHA1`
-|現在のビルドの前回のコミットの SHA1 ハッシュ
-
-|`CIRCLE_TAG`
-|Git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「ワークフローを使用したジョブのオーケストレーション」の <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するジョブの実行のセクション>>を参照してください。
-|===
-
-パイプラインで上記の環境変数を使用する必要がある場合は、設定ファイルで <<env-vars#environment-variable-usage-options,`environment` キー>> を使用し独自のマッピングを行います。
-
-```yaml
-build:
-  docker:
-    - image: cimg/node:17.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  environment:
-    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
-  steps:
-    - run: echo $CIRCLE_PROJECT_REPONAME
-```
+GitLab ベースのプロジェクトでは以下のシステム環境変数が使用できません。 VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
 [#coming-soon]
 == 近日公開予定
@@ -771,7 +711,7 @@ build:
 [#auto-cancel-redundant-workflows]
 === 冗長ワークフローの自動キャンセル
 
-Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル) は、現在サポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 詳細は、 xref:/skip-build#auto-cancelling[ジョブとワークフローのスキップとキャンセル] を参照して下さい。
+冗長ワークフローの自動キャンセルは、現時点ではサポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
 
 [#passing-secrets-to-forked-pull-requests]
 === フォークしたプルリクエストにシークレットを渡す
@@ -791,9 +731,15 @@ SSH での再実行は、ユーザーのアカウントが GitLab に加えて B
 [#additional-ssh-keys-only]
 === 追加 SSH キーのみ
 
-GitLab 連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
+GitLab の連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
 
 [#free-and-open-source-setting]
 === Free とオープンソースの設定
 
 現在、GitLab のお客様には、オープンソースプランはご利用いただけません。 CircleCI ではオープンソースコミュニティを最新の状態に保ち、将来的にはサポートを提供予定です。
+
+[#next-steps]
+== 次のステップ
+
+- xref:config-intro#[設定ファイルのチュートリアル]
+- xref:hello-world#[Hello world]
