@@ -1,20 +1,20 @@
 ---
 
-description: This is document provides examples of deploying to Firebase.
+description: このドキュメントでは、Firebase にデプロイするためのコード例を紹介します。
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Deploy to Firebase
+= Firebase へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.
+このノウハウガイドでは、CircleCI を Firebase にデプロイするための設定方法について説明します。
 
 [#introduction]
 == はじめに
