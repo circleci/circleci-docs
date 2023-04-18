@@ -45,7 +45,7 @@ $ circleci version
 [#create-your-orb]
 == Orb を作成する
 
-WARNING: Once an orb is created it cannot be deleted. Orbs are link:https://semver.org/[semver compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+WARNING: 作成した Orb を削除することはできません。 また、Orb は link:https://semver.org/[セマンティックバージョニング]に準拠しており、パブリッシュ後に変更を加えることもできません。 パブリッシュされた Orb は別のプロジェクトで必須とされる可能性があります。 そのため、いずれかのプロジェクトが突然機能しなくなる事態を防ぐために、Orb の削除は禁止されています。
 
 [#create-a-new-repo]
 === 2. Orb を初期化する
@@ -101,7 +101,7 @@ link:/docs/contexts/#restrict-a-context-to-a-security-group-or-groups[セキュ�
 
 CircleCI Web アプリで **[Organization Settings (組織の設定)] > [Contexts (コンテキスト)]** の順に移動して、link:/docs/contexts/#restricting-a-context[コンテキスト]を確認します。
 
-In the setup process you will be asked if you would like to save your xref:managing-api-tokens#[personal API Token] into an `orb-publishing` xref:contexts#[context]. Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。 これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
+セットアッププロセスでは、xref:managing-api-tokens#[パーソナル API トークン]を `orb-publishing` xref:contexts#[コンテキスト]に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。 これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
 
 === 6. GitHub に変更内容をプッシュする
 
