@@ -1,31 +1,47 @@
 ---
 
+description: This is document provides examples of deploying over SSH.
 contentTags:
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
-= SSH 経由でのデプロイ
+= Deploy over SSH
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、SSH 経由でデプロイするためのコード例を紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
-[#introduction]
-== はじめに
+In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
 
-SSH 経由でアプリをデプロイするように CircleCI を設定するには、以下の手順に従ってください。
+[# add-ssh-key-target]
+== 1.  Add SSH key for target
 
-[#deploy-instructions]
-== デプロイの手順
+Add the SSH key for the target to which you are deploying (these instructions are for cloud, server v3.x, and server v4.x).
 
-1. デプロイ先のサーバー用の SSH キーを追加します。 この手順については、 <<add-ssh-key#,CircleCI に SSH キーを登録する>> をご覧ください。
-1. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 この手順については、 <<set-environment-variable#set-an-environment-variable-in-a-project,プロジェクトでの環境変数の設定>> をご覧ください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
-1. `.circleci/config.yml` で `deploy` ジョブを作成し、main ブランチをデプロイするためのコマンドを追加します。
-+
+. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
+. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+. On the **Project Settings** page, click on **SSH Keys**.
+. Scroll down to the **Additional SSH Keys** section.
+. Click the **Add SSH Key** button.
+. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
+. In the **Private Key** field, paste the SSH key you are adding.
+. Click the **Add SSH Key** button.
+
+For additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
+
+[#ssh-username-and-hostname]
+== 2.  Add the SSH username and hostname
+
+ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 For instructions, see the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+
+[#create-deploy-job]
+== 3.  Create a deploy job
+
+`.circleci/config.yml` で `deploy` ジョブを作成し、main ブランチをデプロイするためのコマンドを追加します。
+
 ```yaml
 version: 2.1
 
