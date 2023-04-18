@@ -1,0 +1,168 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Config policies for self-hosted runner (Open-preview)
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to manage the use of contexts with config policies.
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+
+Follow this how-to guide to learn how to create config policies to manage the use of contexts in your projects. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
+
+[#introduction]
+== Introduction
+
+Config policies use a decision engine leveraging OPA (link:https://www.openpolicyagent.org/[Open Policy Agent]) to allow you to specify policies, and return a decision about whether a pipeline's config complies with those policies. In the strictest case, if a pipeline configuration does not comply with the organisation's policies, that pipeline will be blocked from triggering until it does comply.
+
+Well-designed secrets management is a delicate balancing act between security and usability. To help with this balance, you can lock down contexts at different levels using config policies.
+
+This how-to guide presents a selection of _helpers_ (CircleCI-specific rego functions) that are likely to be useful for you when writing policies around the use of contexts in your organization.
+
+The contexts helpers covered are as follows:
+
+* xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`]
+
+* xref:config-policy-reference#contexts-blocked-by-project-ids[`contexts_blocked_by_project_ids`]
+
+* xref:config-policy-reference#contexts-reserved-by-project-ids[`contexts_reserved_by_project_ids`]
+
+* xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`]
+
+[#prerequisites]
+== Prerequisites
+
+* A xref:first-steps#[CircleCI account] connected to a supported VCS
+
+* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
+
+* Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
++
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+Example output:
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
++
+{% include snippets/find-organization-id.adoc %}
+
+* It is recommended to run through the xref:create-and-manage-config-policies#create-a-policy[Create a policy] and xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS] guides first.
+
+[#define-the-contexts-allowed-for-a-project]
+== Define the contexts allowed for a project
+
+There are many reasons why an organization may want to allow the use of certain contexts to specific projects. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys. To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] config policies helper.
+
+This helper function accepts project ids (`PROJECTS`) and context names (`ALLOWED_CONTEXTS`) as one of the following types, and prevents the usage of any context not in `ALLOWED_CONTEXTS` for all projects that are in `PROJECTS`:
+
+* String
+
+* Set of strings
+
+* Array of strings
+
+[#create-your-policy]
+=== 1. Create your policy
+
+. If you have not already done so, create an empty directory to store your policies. For example:
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+
+. Create a new file in this directory for your new policy. Name the file `allow_contexts.rego`.
+
+. Copy the following snippet into the `allow_contexts.rego` file you just made:
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper funcitons
+import data.circleci.config
+
+# Declare a policy name
+policy_name["contexts_allowed_by_sample_project"]
+
+# Declare a rule
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+    ["<project-ID>"],
+    ["<context-1>","<context-2>"]
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_contexts_allowed_by_project_ids"]
+----
++
+NOTE: Access the `contexts_allowed_by_project_ids` helper using the `config` keyword.
++
+In the following steps you will replace `<project-ID>` and `<context-1>` (and `<context-2>` if you choose to use more than one) with your existing project and contexts. The `allow_contexts.rego` policy, once uploaded, will then restrict your specified project to only only have access to your specified contexts.
+
+[#update-with-your-details]
+=== 2. Update policy with your details
+
+. Replace `<project-ID>` with the ID for the project you want to allow the use of your contexts:
+** In the CIrcleCI web select **Projects** from the sidebar, and click the elipsis (`...`) next to the project you want to specify,a dn select **Project Settings** to locate the Project ID.
+
+. Replace `<context-1>` with the name of context you want to all the use of. You can add multiple contexts as an array, or stick with one for now.
+
+[#push-up-your-policy-bundle]
+=== 3. Push up your policy bundle
+
+You can now push your new policy to your organization for it to take affect. You have two options, either push the policy manually using the CLI from your local environment, or push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+
+[tab.push.manual]
+--
+Create and upload the policy bundle using CircleCI CLI:
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+If the upload was successful, you will see something like the following:
+
+[source,shell]
+----
+{
+  “Created”: [“contexts_allowed_by_sample_project”]
+}
+----
+--
+
+[tab.push.push_to_vcs]
+--
+If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+
+You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+--
+
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.
+
+[#conclusion-1]
+=== Conclusion
+Once your have pushed this new policy, if you try to trigger a pipeline in which your specified project has access to contexts outside of those allowed in your policy, the pipeline will fail to trigger, and you will be notified on your dashboard as shown below.
+
+image::config-policies/context-fail.png[Dashboard page]
+
+[#next-steps]
+== Next steps
+
+* xref:create-and-manage-config-policies#[Create and manage config policies]
+* xref:test-config-policies#[Test config policies]
+* xref:config-policy-reference#[Config policy reference]

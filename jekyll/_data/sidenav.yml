@@ -129,8 +129,6 @@ en:
           - name: Troubleshoot
             link: troubleshoot
 
-
-
   - name: Execute jobs on managed compute resources
     icon: icons/sidebar/builds.svg
     children:
@@ -195,7 +193,6 @@ en:
           - name: Installing and using docker-compose
             link: docker-compose
 
-
   - name: Execute job on self-hosted runners
     icon: icons/sidebar/build-agent.svg
     children:
@@ -206,7 +203,7 @@ en:
           - name: Self-hosted runner concepts
             link: runner-concepts
           - name: Web app installation
-            link: runner-installation  
+            link: runner-installation
       - name: Container runner
         children:
           - name: Container runner installation
@@ -395,6 +392,8 @@ en:
             link: use-the-cli-for-config-and-policy-development
           - name: Config policies for self-hosted runner (Open preview)
             link: config-policies-for-self-hosted-runner
+          - name: Manage contexts with config policies (Open preview)
+            link: manage-contexts-with-config-policies
           - name: Stop building a project on CircleCI
             link: stop-building-a-project-on-circleci
           - name: Rename organizations and repositories
