@@ -1,4 +1,5 @@
 ---
+
 contentTags:
   platform:
   - クラウド
@@ -31,7 +32,7 @@ link:https://docs.datadoghq.com/ja/integrations/circleci/[Datadog と CircleCI �
 . **[Add Webhook (Webhook の追加)]** をクリックします。
 . 以下の項目を入力します。
 ** **Webhook name (Webhook 名)**: `Datadog CI Visibility` などの識別しやすい名前を入力します。
-** **Receiver URL (レシーバーの URL)**: `\https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>`。`<API_KEY>` をお使いの link:https://app.datadoghq.com/account/login[Datadog API キー]に置き換えてください。
+** **Receiver URL (レシーバーの URL)**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>`。`<API_KEY>` をお使いの link:https://app.datadoghq.com/account/login[Datadog API キー]に置き換えてください。
 ** **Events (イベント)**: **[Workflow Completed (ワークフロー完了)]** と **[Job Completed (ジョブ完了)]** を選択します。
 ** **[Certificate verification (証明書の検証)]** を有効にします。
 . **[Add Webhook (Webhook の追加)]** をクリックして、新しい Webhook を保存します。
