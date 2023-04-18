@@ -1,20 +1,20 @@
 ---
 
-description: This is document provides examples of deploying to Azure Container Registry.
+description: このドキュメントでは、Azure Container Registry へのデプロイの例を説明します。
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Deploy to Azure Container Registry
+= Azure Container Registry へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to to configure CircleCI to deploy to Azure Container Registry.
+このノウハウガイドでは、CircleCIを設定してAzure Container Registryにデプロイする方法を学びます。
 
 [#introduction]
 == はじめに
@@ -28,12 +28,12 @@ In this how-to guide, you will learn how to to configure CircleCI to deploy to A
 Azure ACR Orb とすべてのオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr[CircleCI ACR Orb] のページを参照してください。
 
 [#provide-env-vars]
-== 1.  Provide environment variables to CircleCI
+== 1.  CircleCIに環境変数を提供する
 
 ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。 サービスプリンシパルのログインの場合は、`AZURE_SP`、`AZURE_SP_PASSWORD`、`AZURE_SP_TENANT` を使用します。
 
 [#deploy-to-acr]
-== 2.  Deploy to ACR
+== 2.  ACR へのデプロイ
 
 Orb の `build-and-push-image` ジョブを使ってイメージをビルドし、ACR にデプロイします。 現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
 
@@ -59,4 +59,4 @@ workflows:
                 only: main # Only deploys when the commit is on the Main branch
 ```
 
-If pushing to your repository is required, see the "Deployment Keys" section of the xref:github-integration#user-keys-and-deploy-keys[GitHub] or xref:bitbucket-integration#deploy-keys-and-user-keys[Bitbucket] instructions. 次に、本番ブランチを使用するように Azure Web App を設定します。
+リポジトリにプッシュする必要がある場合は、 xref:github-integration#user-keys-and-deploy-keys[GitHub] または xref:bitbucket-integration#deploy-keys-and-user-keys[Bitbucket]の説明でデプロイキーに関するセクションをご確認ください。 次に、本番ブランチを使用するように Azure Web App を設定します。
