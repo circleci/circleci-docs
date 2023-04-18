@@ -1231,6 +1231,16 @@ a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
 |`1`
 |Number of replicas to deploy for the test-results-service deployment.
 
+|`tink.enabled`
+|bool
+|`false`
+|When enabled, Tink will be used instead of Vault for contexts encryption.
+
+|`tink.keyset`
+|string
+|`""`
+|The keyset generated the Tink CLI to be used for contexts encryption
+
 |`tls.certificate`
 |string
 |`""`

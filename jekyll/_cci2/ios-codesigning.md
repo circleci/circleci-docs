@@ -150,7 +150,7 @@ create an Ad-hoc build every time you push to the `development` branch:
 
 ```yaml
 # .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
@@ -167,7 +167,6 @@ jobs:
       - run: bundle exec fastlane adhoc
 
 workflows:
-  version: 2
   build-test-adhoc:
     jobs:
       - build-and-test

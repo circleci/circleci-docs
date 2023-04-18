@@ -33,7 +33,7 @@ NOTE: GitHub を使用している場合、CircleCI を制限するオプショ�
 . link:https://circleci.com/signup/[**GitLab で登録**] をクリックします。
 . メールアドレスを入力し、CircleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 . GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。
- 画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
+ 画面の指示に従って GitLab.com または GitLab Self-managed のアカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
 --
 
 [.tab.signup.Existing_CircleCI_users]
@@ -42,7 +42,7 @@ NOTE: GitHub を使用している場合、CircleCI を制限するオプショ�
 
 .  link:https://app.circleci.com/[CircleCI Web アプリ] にログインします。
 . ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
-. GitLab.com オプションの隣にある **Connect** をクリックします。 GitLab アカウントの承認、プロジェクトの作成、および GitLab アカウントからのリポジトリの接続についての説明が表示されます。 その後、組織のダッシュボードに自動的に移動します。
+. GitLab.com オプションの隣にある **Connect** をクリックします。 GitLab アカウントの承認、プロジェクトの作成、および GitLab.com または GitLab Self-managed アカウントからのリポジトリの接続についての説明が表示されます。 その後、組織のダッシュボードに自動的に移動します。
 
 この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 組織のプランは、最初は Free プランになります。 後で他のプランにアップグレードできます。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
 --

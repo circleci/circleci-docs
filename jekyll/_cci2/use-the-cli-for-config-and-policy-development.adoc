@@ -13,8 +13,6 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
-
 CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
 [#develop-configs]
