@@ -66,7 +66,7 @@ CircleCI では、セルフホストランナー用に複数の実行環境 (コ
 
 Kubernetes を使用しておらず、CI ジョブをセルフホストランナー上のコンテナ内で実行したい場合は、マシンランナーを Docker にインストールします。
 
-マシンランナーには、CircleCI イメージまたはカスタム Docker イメージとの互換性はありません。
+Machine runner is not compatible with CircleCI's convenience images or custom Docker images.
 
 [#getting-started]
 == はじめよう
@@ -106,7 +106,7 @@ CircleCI のセルフホストランナーのインストール後、セルフ�
 
 * macOS 11.2 以降 (Intel、Apple M1)
 * Windows Server 2019, 2016 (x86_64)
-* Linux ディストリビューション - RHEL8、SUSE、Debian など (x86_64、ARM64)
+* Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64, s390x, ppc64le)
 
 CircleCI では、セルフホストランナー用の新しいプラットフォームの開発が活発に行われている際に、**プレビュー** 段階のプラットフォームをご提供する場合があります。 プレビュー段階のプラットフォームがある場合は、このセクションを更新し、そのプラットフォームの情報と制限事項を通知します。
 
