@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI プロジェクト設定における設定ファイルのポリシー管理
+description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= 設定ファイルのポリシー管理機能の概要
+= Config policies overview - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -39,13 +39,13 @@ VCS に接続した link:/docs/first-steps[CircleCI アカウント]を既にお
 
 設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づく意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
 
-ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは、ご自身の VCS 内のリポジトリに保存できます。 詳細については、link:/docs/ja/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]のページを参照してください。
+ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは、ご自身の VCS 内のリポジトリに保存できます。 詳細については、link:/docs/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]のページを参照してください。
 
 CircleCI では、OPA の出力結果に基づいてポリシーの適用に関する__意思決定結果__を生成します。 この結果は以下のようになります。
 
 ```
 status:           PASS | SOFT_FAIL | HARD_FAIL | ERROR
-reason:           string                                      (ステータスが ERROR の場合のみ表示)
+reason:           string                                      (optional, only present when status is ERROR)
 enabled_rules:    Array<string>
 soft_failures:    Array<{ rule: string, reason: string }>
 hard_failures:    Array<{ rule: string, reason: string }>
@@ -141,7 +141,7 @@ policy_name["unique_policy_name"]
 * 措置: 違反している場合の措置
 * 有効化: 措置を有効にするかどうかを決定
 
-ポリシーを作成する場合には、このフォーマットに従っていれば、CircleCI でのポリシー評価出力の解析に影響を与えることなくカスタムヘルパー関数を作成できます。 ただし、カスタムヘルパー関数を作成する代わりに、ポリシーに `data.circleci.config` をインポートして CircleCI 製のヘルパーを利用することも可能です。 詳細については、link:/docs/ja/config-policy-reference[設定ファイルのポリシーのリファレンス]を参照してください。
+ポリシーを作成する場合には、このフォーマットに従っていれば、CircleCI でのポリシー評価出力の解析に影響を与えることなくカスタムヘルパー関数を作成できます。 ただし、カスタムヘルパー関数を作成する代わりに、ポリシーに `data.circleci.config` をインポートして CircleCI 製のヘルパーを利用することも可能です。 詳細については、link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]を参照してください。
 
 NOTE: 設定ファイルのポリシーの**ヘルパー**とは、通常のルールとほとんど同じですが、ポリシー違反の検出プロセスで個別に__有効化__されないルールを指します。 ヘルパーはポリシーのビルディングブロックとして記述、利用できます。
 
@@ -253,6 +253,22 @@ enable_rule["RULE_NAME"]
 enable_rule["use_official_docker_image"]
 ----
 
+Use `enable_hard` to enable a rule and set its enforcement level to `hard` in a single statement.
+
+The following statements are equivalent:
+
+[source,rego]
+----
+enable_hard["use_official_docker_image"]
+----
+
+[source,rego]
+----
+enable_rule["use_official_docker_image"]
+
+hard_fail["use_official_docker_image"]
+----
+
 [#using-pipeline-metadata]
 === パイプラインのメタデータの使用
 
@@ -260,12 +276,12 @@ CircleCI 設定ファイルのポリシーを記述する場合、多くの場�
 
 ポリシーがトリガーされたパイプラインのコンテキストで評価されると、`data.meta` において以下の 3 つのプロパティーが使用できるようになります。
 
-[source,shell]
-----
-project_id    (CircleCI Project UUID)
-branch        (string)
-build_number  (number)
-----
+* `project_id` (CircleCI Project UUID)
+* `build_number` (number)
+* `vcs.branch` (string)
+* `vcs.release_tag` (string)
+* `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
+* `vcs.target_repository_url` (string) - URL to the repository building the commit
 
 このメタデータは、ルールのアクティブ化/非アクティブ化、評価結果の変更、およびルール定義自体の一部として使用できます。
 
@@ -281,7 +297,7 @@ policy_name["example"]
 # use care to avoid naming collisions as assignments are global across the entire policy bundle
 sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 
-# this rule is enabled only if the body is evaluates to true
+# this rule is enabled only if the body evaluates to true
 enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
@@ -353,14 +369,12 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
                           path[_] == "docker"         # find any settings that match 'docker'
                           image := value[_].image}    # grab the images from that section
 
-hard_fail["use_official_docker_image"]
-
-enable_rule["use_official_docker_image"]
+enable_hard["use_official_docker_image"]
 ----
 
 [#next-steps]
 == 次のステップ
 
-* link:/docs/ja/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]
-* link:/docs/ja/use-the-cli-for-config-and-policy-development[CLI を使った設定ファイルとポリシーの作成]
-* link:/docs/ja/config-policy-reference[設定ファイルのポリシーのリファレンス]
+* link:/docs/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]
+* link:/docs/use-the-cli-for-config-and-policy-development[CLI を使った設定ファイルとポリシーの作成]
+* link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]
