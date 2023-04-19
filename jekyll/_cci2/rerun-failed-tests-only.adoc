@@ -153,7 +153,7 @@ gem 'rspec_junit_formatter'
   -run:
     name: Install coverage reporter
     command: |
-      npm install --save-dev circleci-cypress-reporter
+      npm install --save-dev cypress-circleci-reporter
 ```
 +
 . Use the `cypress-circleci-reporter`, `circleci tests run`, and upload test results to CircleCI:
@@ -162,10 +162,11 @@ gem 'rspec_junit_formatter'
      -run:
         name: run tests
         command: | 
+          mkdir test_results
           cd ./cypress 
           npm ci 
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter circleci-cypress-reporter --spec" --verbose --test-results-path="test_results" --split-by=timings" 
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings" 
      
      - store_test_results
         path: test_results
