@@ -25,7 +25,7 @@ link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById
 
 以下の例では、`workingdir` と `image-tag` のパラメーター値を使ってパイプラインをトリガーしています。
 
-NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be xref:reusing-config#using-the-parameters-declaration[declared in the configuration file].
+NOTE: API を使ってパイプラインをトリガーする際にパラメーターを渡すには、そのパラメーターが xref:reusing-config#using-the-parameters-declaration[設定ファイル内で宣言されている] 必要があります。
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -38,7 +38,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 
 IMPORTANT: パイプラインパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
 
-Read more about pipeline parameters on the xref:pipeline-variables#[Pipeline values and parameters] page.
+パイプラインパラメーターの詳細については、xref:pipeline-variables#[パイプラインの値とパラメーター]のページをお読みください。
 
 [#api-v1]
 == API v1
@@ -57,7 +57,7 @@ Read more about pipeline parameters on the xref:pipeline-variables#[Pipeline val
 }
 ```
 
-Using `curl` (`$CIRCLE_TOKEN` is a xref:managing-api-tokens#creating-a-personal-api-token[personal API token]):
+`curl` を使用します (`$CIRCLE_TOKEN` は、xref:managing-api-tokens#creating-a-personal-api-token[パーソナル API トークン] です)。
 
 ```shell
 curl \
@@ -119,6 +119,6 @@ IMPORTANT: ビルドパラメーターは機密データとして扱われない
 
 == 関連項目
 
-- xref:env-vars[Introduction to environment variables]
-- xref:set-environment-variable[How to set environment variables]
-- xref:variables#built-in-environment-variables[Project values and variables]
+- xref:env-vars[環境変数の概要]
+- xref:set-environment-variable[環境変数の設定方法]
+- xref:variables#built-in-environment-variables[プロジェクトの値と変数]
