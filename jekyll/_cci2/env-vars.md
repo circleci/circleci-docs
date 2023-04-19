@@ -195,7 +195,7 @@ The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to
 
 The CircleCI CLI offers a wrapper around the [`envsubst`](https://github.com/a8m/envsubst) tool, both locally and available in all jobs running on CircleCI. `envsubst` is a command-line utility used to replace environment variables in text strings.
 
-CLI command: 
+CLI command:
 
 ```sh
 circleci env subst
