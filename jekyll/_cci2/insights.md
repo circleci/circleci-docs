@@ -18,6 +18,11 @@ The CircleCI Insights dashboard provides an overview of the health and usage of
 your projects' build processes, including time-series and aggregated data on credit usage,
 success rates, and pipeline duration.
 
+Insights is not a financial reporting tool, and should not be used for precise credit reporting. Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI web app, nor does the underlying data have the same data accuracy guarantees as the billing information. This may lead to discrepancies between credits reported from Insights, and the billing information in the Plan Overview page. For precise credit reporting, always use the Plan Overview page in the CircleCI web app.
+
+Data is not real-time and there may be up to a 24 hour delay.
+{: class="alert alert-info"}
+
 This document describes how to access and use the Insights dashboard on CircleCI cloud and server.
 
 ## Usage
@@ -48,14 +53,6 @@ The Insights workflow overview provides metrics plotted over time for all branch
 - Workflow success rate
 - Workflow duration (50th versus 95th percentile)
 - Workflow credit usage
-
-Data is not real-time and there may be up to a 24 hour delay.
-{: class="alert alert-info"}
-
-The Insights dashboard is not a real time financial reporting tool and should
-not be used for credit reporting. The most up-to-date credit information can be
-found in your organization's Plan Overview.
-{: class="alert alert-info"}
 
 ### Job overview
 {: #job-overview }
