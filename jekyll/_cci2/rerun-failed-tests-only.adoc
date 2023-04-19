@@ -275,3 +275,9 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 **Question:** Can I see in the web UI whether a job was re-run using "Re-run failed tests only"?
 
 **Answer:** Not at this time.
+
+---
+
+**Question:** What happens when a job is re-run and it is using parallelism & CircleCI's test splitting?
+
+**Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified in the `parallelism` key.  However, the step that is running tests for each of those parallel containers/VMs will only run a subset of tests or no tests after the test splitting splits tests across the total parallel containers/VMs.  For example, if `parallelism` is set to 8, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers. The remaining 6 containers/VMs will still start up, but they will not run any tests when they get to the step that is executing tests.
