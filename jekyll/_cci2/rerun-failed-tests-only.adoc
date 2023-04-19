@@ -27,7 +27,7 @@ image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to 
 [#prerequisites]
 == Prerequisites
 
-* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `filename` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
+* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
 * The testing job uses `circleci tests run` (see below for details) to execute tests.
 +
 NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
@@ -57,7 +57,7 @@ This example snippet is from a CircleCI configuration file that:
 . Stores the test results in a new directory called `test-results`, and 
 . Uploads those test results to CircleCI.  
 
-**Note:** `-o --junit_family=legacy` is present to ensure that the test results being generated contain the `filename` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+**Note:** `-o --junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
@@ -104,7 +104,7 @@ INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_c
 DEBU[2023-04-10T22:36:53Z] received test names: test_api.py
 ```
 
-The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+The job should only re-run tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
@@ -179,7 +179,7 @@ Your `package.json` / `package-lock.json` will be updated and committed on your 
 +
 Remember to modify the `glob` command for your specific use case.
 
-. Because Cypress does not output the expected `filename` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[in this issue] to massage the test results into the proper format. In this example, we have saved a copy of link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132#issuecomment-721943600[this script] to a file named `fix-junit.js`. 
+. Because Cypress does not output the expected `file` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[in this issue] to massage the test results into the proper format. In this example, we have saved a copy of link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132#issuecomment-721943600[this script] to a file named `fix-junit.js`. 
 +
 Invoke this script by adding a new `run` step in your `.circleci/config.yml` file in the same job where you are running your tests. The snippet below also includes the `store_test_results` step to upload test results:
 +
@@ -225,7 +225,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`.
 +
-`JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `filename` attribute is present. `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
+`JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
 
 [#known-limitations]
 == Known limitations
@@ -246,7 +246,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 **Question:** Will this functionality re-run individual tests?
 
-**Answer:** No, it will re-run failed test `classnames` or `filenames` that had at least one individual test failure.
+**Answer:** No, it will re-run failed test `classnames` or `file` that had at least one individual test failure.
 
 ---
 
@@ -264,7 +264,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 **Question:** I don't see my test framework on this page, can I still use the functionality?
 
-**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests only functionality is test runner- and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `filename` is not always present by default, so your job may require additional configuration.  
+**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests only functionality is test runner- and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.  
 
 From there, follow the xref:#quickstart[Quickstart] section to modify your test command to use `circleci tests run`. 
 
