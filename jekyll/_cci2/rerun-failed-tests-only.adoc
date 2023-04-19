@@ -146,7 +146,7 @@ gem 'rspec_junit_formatter'
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
 
-. Two custom reporters are required: `cypress-multi-reporters` and `mocha-junit-reporter`. You can add them to your `package.json` file or add a step to install in your `.circleci/config.yml`. Example for adding to `.circleci/config.yml`:
+. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter].  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
 +
 ```yaml
   #add required reporters (or add to package.json)
