@@ -213,7 +213,7 @@ Within your repository create a file such as `template.json`, with value replace
 }
 ```
 
-In the CircleCI app, create the corrisponding environment variables either in the project or as a [context]({{site.baseurl/contexts}}). In this config example we will show the environment variables as if they were defined directly in the config.
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating, creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts). 
 
 ```yaml
 version: 2.1
