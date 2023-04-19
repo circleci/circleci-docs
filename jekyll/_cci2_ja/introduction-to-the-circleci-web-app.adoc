@@ -51,7 +51,7 @@ image::web_ui_dashboard.png[Dashboard page]
 [#view-and-navigate-pipelines]
 == 組織の切り替え
 
-Web アプリの左上に、組織の切り替えメニューがあります。 You can view workflows or single jobs by expanding a pipeline and clicking in on any workflow or job descriptor.
+Web アプリの左上に、組織の切り替えメニューがあります。 パイプラインを拡大し、任意のワークフローやジョブをクリックすると、ワークフローや単一のジョブを表示することができます。
 
 image:org-centric-ui_newui.png[Web アプリの組織切り替えメニュー]
 
@@ -71,12 +71,12 @@ Projects のページには、組織に関連づけらているプロジェク�
 
 Insights のページでは、ワークフローの実行、ワークフローの実行時間、消費したクレジットに関する具体的な数字や、選択した時間枠における組織の全プロジェクトの全体的な成功率が表示されます。 現時点で選択できる時間枠は、24時間、7日、30日、60日、90日です。
 
-* _Set Up_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:notifications#[email notifications] for the project's status.
+* VCS で所有者になっているプロジェクトを セットアップする。
+* 組織内のプロジェクトを フォロー して、パイプラインにアクセスし、プロジェクトのステータスに関するxref:notifications#[メール通知]を受け取る
 
 Insights のメインページでは、プロジェクトの概要が表示され、各プロジェクトをクリックすると、そのプロジェクトのワークフローのさらに詳細なインサイトが表示されます。 また、各ワークフローをクリックすると、ワークフローの実行に関するインサイトを確認できます。
 
-Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, Insights, and settings. フォローしているプロジェクトに対しては、このメニューにフォローを解除するオプションも表示されます。 There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
+プロジェクトの列の 3 点リーダー (ミートボールメニュー) をクリックすると、個々のプロジェクトの設定ファイル、Insights、設定を開けます。 フォローしているプロジェクトに対しては、このメニューにフォローを解除するオプションも表示されます。 また、個々のプロジェクトのダッシュボードには **Project Settings** ボタンがあり、メインダッシュボードのプロジェクト名をクリックすると表示されます。
 
 image::web_ui_projects.png[Projects page]
 
