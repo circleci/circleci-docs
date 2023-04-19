@@ -149,7 +149,7 @@ YAML は、インデントについてかなり厳しいです。 http://yaml-on
 [#visual-studio-code-extension]
 == Visual Studio Code の拡張機能
 
-CircleCI では VS Code 拡張機能を作成しました。これにより、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。 For more information see the xref:/vs-code-extension-overview#[VS Code extension overview].
+CircleCI では VS Code 拡張機能を作成しました。これにより、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。 詳細は、xref:/vs-code-extension-overview#[VS Code 拡張機能の概要]をご覧ください。
 
 CircleCI VS Code の拡張機能は、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS コードマーケットプレース] からダウンロードできます。
 
