@@ -146,24 +146,15 @@ gem 'rspec_junit_formatter'
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
 
-. Install the `cypress-multi-reporters` and `mocha-junit-reporter` dependencies. If using `npm`, run the following on your local machine:
+. Two custom reporters are required: `cypress-multi-reporters` and `mocha-junit-reporter`. You can add them to your `package.json` file or add a step to install in your `.circleci/config.yml`. Example for adding to `.circleci/config.yml`:
 +
-```bash
-npm install --save-dev cypress-multi-reporters mocha-junit-reporter
-```
-+
-Your `package.json` / `package-lock.json` will be updated and committed on your next push from that branch. 
-
-. Create and set up the reporter config file, if it does not already exist. In this example, the file is named `reporter-config.json`.
-+
-```json
-{
-  "reporterEnabled": "spec, mocha-junit-reporter", // set the reporters
-  "reporterOptions": {
-    "mochaFile": "results/junit/junit-[hash].xml", // each suite produces its own junit, save them with unique hash
-  }
-}
-```
+```yaml
+  #add required reporters (or add to package.json)
+  -run:
+    name: Install coverage reporters
+    command: |
+      npm install --save-dev circleci-cypress-reporter
+ ```
 
 . Modify your test command to use the two `--reporter` flags and `circleci tests run`:
 +
@@ -174,27 +165,14 @@ Your `package.json` / `package-lock.json` will be updated and committed on your 
           cd ./cypress 
           npm ci 
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json --spec" --verbose
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter circleci-cypress-reporters --spec" --verbose
+     
+     - store_test_results
+        path: test-results
 ```
 +
-Remember to modify the `glob` command for your specific use case.
 
-. Because Cypress does not output the expected `file` attribute on its JUnit XML files, follow the steps outlined link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132[in this issue] to massage the test results into the proper format. In this example, we have saved a copy of link:https://github.com/michaelleeallen/mocha-junit-reporter/issues/132#issuecomment-721943600[this script] to a file named `fix-junit.js`. 
-+
-Invoke this script by adding a new `run` step in your `.circleci/config.yml` file in the same job where you are running your tests. The snippet below also includes the `store_test_results` step to upload test results:
-+
-```yaml
-    - run:
-       when: always
-       name: process test results (add in file path in junit)
-       command: |
-          cd ./cypress
-          node ./scripts/fix-junit.js
-    - store_test_results: 
-       path: ./cypress/results
-```  
-
-Your new testing job's `.circleci/config.yml` definition should have both snippets from steps 3 and 4 above, one right after the other.  
+Remember to modify the `glob` command for your specific use case.  
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
