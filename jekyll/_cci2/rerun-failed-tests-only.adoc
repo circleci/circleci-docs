@@ -151,12 +151,12 @@ gem 'rspec_junit_formatter'
 ```yaml
   #add required reporters (or add to package.json)
   -run:
-    name: Install coverage reporters
+    name: Install coverage reporter
     command: |
       npm install --save-dev circleci-cypress-reporter
 ```
 +
-. Modify your test command to use the two `--reporter` flags and `circleci tests run`:
+. Use the `cypress-circleci-reporter`, `circleci tests run`, and upload test results to CircleCI:
 +
 ```yaml
      -run:
