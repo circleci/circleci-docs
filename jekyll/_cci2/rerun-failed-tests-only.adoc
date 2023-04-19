@@ -257,6 +257,6 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
-**Question:** What happens when a job is re-run and it is using parallelism & CircleCI's test splitting?
+**Question:** What happens when a job is re-run and it is using parallelism and test splitting?
 
-**Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified in the `parallelism` key.  However, the step that is running tests for each of those parallel containers/VMs will only run a subset of tests or no tests after the test splitting splits tests across the total parallel containers/VMs.  For example, if `parallelism` is set to 8, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers. The remaining 6 containers/VMs will still start up, but they will not run any tests when they get to the step that is executing tests.
+**Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key.  However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.  For example, if `parallelism` is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers/VMs. The remaining six containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
