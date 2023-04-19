@@ -22,23 +22,23 @@ contentTags:
 まずは、デプロイ先のSSHキーを追加します（この手順は、クラウド、Server v3.x、Server v4.x の場合です）。
 
 . ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` でキーを生成します。 詳しくは、link:https://www.ssh.com/ssh/keygen/[Secure Shell ドキュメント]を参照してください。
-. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
-. On the **Project Settings** page, click on **SSH Keys**.
-. Scroll down to the **Additional SSH Keys** section.
-. Click the **Add SSH Key** button.
-. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
-. In the **Private Key** field, paste the SSH key you are adding.
-. Click the **Add SSH Key** button.
+. CircleCI アプリケーションで、 [**Project Settings (プロジェクトの設定)**] ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
+. [**Project Settings (プロジェクトの設定)**] で、 [**SSH Keys (SSH キー)**] をクリックします (画面左側のメニュー)。
+. スクロールし、 [**Additional SSH Keys (追加 SSH キー)**] のセクションに移動します。
+. **Add SSH Key** ボタンをクリックします
+. [**Hostname (ホスト名)**] フィールドにキーに関連付けるホスト名を入力します (例: `git.heroku.com`)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
+. [**Private Key (プライベート キー)**] フィールドに登録する SSH キーを貼り付けます。
+. **Add SSH Key** ボタンをクリックします
 
-For additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
+詳しくは、xref:add-ssh-key#[CircleCI に SSH キーを登録] ガイドをご覧ください。
 
 [#ssh-username-and-hostname]
-== 2.  Add the SSH username and hostname
+== 2.  SSHのユーザー名とホスト名を追加
 
-ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 For instructions, see the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、 xref:set-environment-variable#set-an-environment-variable-in-a-project[プロジェクトでの環境変数の設定]をご確認ください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
 
 [#create-deploy-job]
-== 3.  Create a deploy job
+== 3.  デプロイジョブの作成
 
 `.circleci/config.yml` で `deploy` ジョブを作成し、main ブランチをデプロイするためのコマンドを追加します。
 
