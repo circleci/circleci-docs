@@ -204,6 +204,8 @@ circleci env subst
 #### Usage
 {: #env-subst-usage }
 
+The `circleci env subst` command can accept text input from `stdin` or as an argument.
+
 Within your repository create a file such as `template.json`, with value replaced by environment variable strings
 
 ```json
@@ -213,7 +215,9 @@ Within your repository create a file such as `template.json`, with value replace
 }
 ```
 
-The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating, creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts). 
+`envsubst` can convert all types of environment variable strings, including those encased in curly braces (`{}`).
+
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating, creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts).
 
 ```yaml
 version: 2.1
@@ -238,6 +242,10 @@ workflows:
       - process-template
 ```
 
+In this example, the `<` symbol is used to redirect the contents of the `template.json` file as _input_ to the `env subst` command, while the `>` symbol is used to redirect the output of the env subst command to the `deploy.json`.
+
+We could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
+
 Output:
 
 ```sh
@@ -247,7 +255,7 @@ Output:
 }
 ```
 
-The `circleci env subst` command can accept text input from `stdin` or as an argument.
+For instructions on installing the CircleCI CLI locally, read the [Installing the CircleCI local CLI](docs/local-cli/) guide.
 
 ### Alpine Linux
 {: #alpine-linux }
