@@ -17,11 +17,11 @@ contentTags:
 このノウハウガイドでは、SSH経由でアプリケーションをデプロイするためのCircleCIの設定方法について説明します。
 
 [# add-ssh-key-target]
-== 1.  Add SSH key for target
+== 1.  ターゲットのSSHキーを追加
 
-Add the SSH key for the target to which you are deploying (these instructions are for cloud, server v3.x, and server v4.x).
+まずは、デプロイ先のSSHキーを追加します（この手順は、クラウド、Server v3.x、Server v4.x の場合です）。
 
-. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
+. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` でキーを生成します。 詳しくは、link:https://www.ssh.com/ssh/keygen/[Secure Shell ドキュメント]を参照してください。
 . In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
 . On the **Project Settings** page, click on **SSH Keys**.
 . Scroll down to the **Additional SSH Keys** section.
