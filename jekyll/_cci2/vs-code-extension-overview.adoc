@@ -73,7 +73,7 @@ Expanding a job also lets you:
 
 There are two ways to re-run jobs with SSH directly from VS Code:
 
-- Open the job detail page, then click green **SSH** button on the top right.
+- Open the job detail page, then click the green **SSH** button on the top right.
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screenshot of side Panel with job details]
 

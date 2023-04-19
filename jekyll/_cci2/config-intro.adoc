@@ -368,7 +368,7 @@ Using what you have learned above, you are ready to create some powerful pipelin
 [#visual-studio-code-extension]
 ## VS Code extension
 
-If you are a VS Code user, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
 
 The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
 

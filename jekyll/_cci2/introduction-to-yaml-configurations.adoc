@@ -143,7 +143,7 @@ If you would like a more complex configuration tutorial, visit the <<config-intr
 [#visual-studio-code-extension]
 ## VS Code extension
 
-If you are a VS Code user, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
 
 The extension provides real-time syntax highlighting and validation, improved navigation through go-to-definition and go-to-reference commands, usage hints and autocomplete suggestions.
 

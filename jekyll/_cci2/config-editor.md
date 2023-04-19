@@ -70,7 +70,7 @@ If you are not making changes on your main branch, you will need to open a pull 
 ## VS Code extension
 {: #visual-studio-code-extension }
 
-Similar features to the in-app configuration editor can be found in the official [CircleCI VS Code extension](https://marketplace.visualstudio.com/items?itemName=circleci.circleci) if you would prefer to stay in your local environment. The VS Code extension makes it easier to write, edit, troubleshoot configuration files through real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
+Similar features to the in-app configuration editor can be found in the official [CircleCI VS Code extension](https://marketplace.visualstudio.com/items?itemName=circleci.circleci) if you would prefer to stay in your local environment. The VS Code extension makes it easier to write, edit, and troubleshoot configuration files through real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
 
 Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from VS Code, and be notified of workflow status changes.
 
