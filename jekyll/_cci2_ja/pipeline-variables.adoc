@@ -3,15 +3,15 @@
 categories: [getting-started]
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Pipeline values and parameters
+= パイプラインの値とパラメーター
 :experimental:
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the Free plan available to developers on CircleCI.
+:page-description: このドキュメントでは、パイプラインの値とパラメーターを使用して、再利用可能なパイプラインの設定方法をご紹介します。
 :icons: font
 :toc: macro
 
@@ -22,15 +22,15 @@ contentTags:
 
 パイプラインの値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
 
-- *Pipeline values* represent pipeline metadata that can be used throughout the configuration.
-- *Pipeline parameters* are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API or web app.
+- *パイプライン値:* 設定ファイル全体で使用できるメタデータ。
+- *パイプラインパラメーター:* 型指定されたパイプライン変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
 
 [#pipeline-values]
 == パイプライン値
 
 パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。
 
-For a full list of values and built-in environment variables, see the xref:variables#pipeline-values[Project values and variables] guide.
+値や定義済みの環境変数の全リストは、xref:variables#pipeline-values[プロジェクトの値と変数]に関するガイドを参照して下さい。
 
 include::../_includes/snippets/pipeline-values.adoc[]
 
@@ -54,12 +54,12 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[set the variable in a shell command].
+上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>`が設定されます。 文字列を空にする必要がある場合は、xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定]するをご覧ください。
 
 [#pipeline-parameters-in-configuration]
 == 設定ファイルにおけるパイプラインパラメーター
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
+パイプラインパラメーターは、`.circleci/config.yml` の一番上で  `parameters` キーを使って宣言します。 パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
 
 パイプラインパラメーターでは以下のタイプのデータをサポートしています。
 
@@ -68,9 +68,9 @@ Pipeline parameters are declared using the `parameters` key at the top level of 
 - integer
 - enum
 
-See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
+詳細については「xref:reusing-config#parameter-syntax[パラメーターの構文]」セクションを参照してください。
 
-The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
+以下の例では、2 つのパイプラインパラメーター (`image-tag`、`workingdir`) が設定ファイルの一番上で定義され、後続の `build` ジョブで参照されています。
 
 ```yml
 version: 2.1
