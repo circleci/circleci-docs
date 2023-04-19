@@ -190,6 +190,64 @@ In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_
 The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
 {: class="alert alert-info"}
 
+### Environment Variable Substitution
+{: #environment-variable-substitution }
+
+The CircleCI CLI offers a wrapper around the [`envsubst`](https://github.com/a8m/envsubst) tool, both locally and available in all jobs running on CircleCI. `envsubst` is a command-line utility used to replace environment variables in text strings.
+
+CLI command: 
+
+```sh
+circleci env subst
+```
+
+#### Usage
+
+Within your repository create a file such as `template.json`, with value replaced by environment variable strings
+
+```json
+{
+  "foo": "$FOO",
+  "provider": "${PROVIDER}"
+}
+```
+
+In the CircleCI app, create the corrisponding environment variables either in the project or as a [context]({{site.baseurl/contexts}}). In this config example we will show the environment variables as if they were defined directly in the config.
+
+```yaml
+version: 2.1
+jobs:
+  process-template:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: 
+          name: Process template file
+          environment:
+            # Environment variables would typically be served via a context
+            FOO: bar
+            PROVIDER: circleci
+          command: |
+            circleci env subst < template.json > deploy.json
+            cat deploy.json
+workflows:
+  env-subst-workflow:
+    jobs:
+      - process-template
+```
+
+Output:
+
+```sh
+{
+  "foo": "bar",
+  "provider": "circleci"
+}
+```
+
+The `circleci env subst` command can accept text input from `stdin` or as an argument.
+
 ### Alpine Linux
 {: #alpine-linux }
 
