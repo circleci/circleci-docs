@@ -158,6 +158,8 @@ Corresponds to the CLI command `circleci policy decide`, and verifies that the c
 
 Both of these commands can be run by:
 
+- Opening the VS Code Command Palette.
+
 - Right-clicking anywhere within an opened `.circleci/config.yml` file.
 
 - Clicking on the CircleCI button on the top right of the editor when you have a `.circleci/config.yml`open. Note that the button will not be visible if you are editing any other file.
