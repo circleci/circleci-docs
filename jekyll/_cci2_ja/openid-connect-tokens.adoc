@@ -17,7 +17,7 @@ CircleCI は、 <<contexts#,コンテキスト>> を使用するジョブの環�
 [#openid-connect-id-token-availability]
 == OpenID Connect ID トークンの使用
 
-1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` で OpenID Connect ID トークンを使用することができます。 The `$CIRCLE_OIDC_TOKEN_V2` token includes a different format for the `sub` claim, which is highlighted in the table below.
+1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` で OpenID Connect ID トークンを使用することができます。 `$CIRCLE_OIDC_TOKEN_V2` トークンには、`sub` クレームに異なるフォーマットが含まれており、以下の表で示されています。
 
 `context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,ワークフロー>> セクションに追加して、 <<contexts#creating-and-using-a-context,ジョブにコンテキスト>> を追加します。
 
@@ -39,7 +39,7 @@ https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロ�
 
 CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
-NOTE: It is possible to use CircleCI's OIDC tokens with multiple cloud services.
+NOTE: 複数のクラウドサービスで CircleCI の OIDC トークンを使用することができます。
 
 [#format-of-the-openid-connect-id-token]
 == OpenID Connect ID トークンの形式
@@ -88,7 +88,7 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |ジョブで使用されるコンテキストを表す UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
 
 |`oidc.circleci.com/vcs-ref`
-|The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`.
+|パイプラインをトリガーした変更に言及するものであり、 その値は `refs/heads/main` に似た文字列です。
 
 |`oidc.circleci.com/context-ids`
 |ジョブで使用されるコンテキストを表す UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
@@ -176,9 +176,9 @@ workflows:
 CircleCI の <<format-of-the-openid-connect-id-token,OIDC トークン>> のクレーム形式を使って、AWS で CircleCI ジョブができることを制限することができます。
 
 [#limit-role-access-based-on-project]
-===== Limit role access based on project
+===== プロジェクトに応じたロールアクセスの制限
 
-If certain projects should only be able to access certain AWS resources, you can restrict your IAM role so that only CircleCI jobs in a specific project can assume that role.
+たとえば、特定のプロジェクトが特定の AWS リソースにのみアクセスできるようにする場合、特定のプロジェクトの CircleCI ジョブのみがそのロールを担えるように IAM ロールを制限できます。
 
 これを行うには、IAM ロールの信頼ポリシーを編集して、選択したプロジェクトの OIDC トークンのみがその役割を担うようにします。 信頼ポリシーにより、どのような条件下でロールを担えるのかが決定します。
 
@@ -350,7 +350,7 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 |https://cloud.google.com/iam/docs/service-accounts#user-managed[ユーザー管理サービスアカウント]
 |===
 
-次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。
 
 ```yaml
 version: 2.1
