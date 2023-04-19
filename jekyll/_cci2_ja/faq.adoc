@@ -2,7 +2,7 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
@@ -96,7 +96,7 @@ include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
 include::../_includes/snippets/faq/workflows-faq-snip.adoc[]
 
 [#dynamic-configuration]
-== Dynamic configuration
+== ダイナミックコンフィグ
 
 include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
 
