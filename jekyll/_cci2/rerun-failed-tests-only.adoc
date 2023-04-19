@@ -165,7 +165,7 @@ gem 'rspec_junit_formatter'
           cd ./cypress 
           npm ci 
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter circleci-cypress-reporters --spec" --verbose
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter circleci-cypress-reporter --spec" --verbose
      
      - store_test_results
         path: test-results
