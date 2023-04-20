@@ -237,6 +237,6 @@ CircleCI Server のマイナーバージョンはそれぞれ、特定バージ�
 == 関連リソース
 
 - https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナーイメージ (英語)]
-- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on GitHub]
+- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナーイメージ (英語)]
 - https://circleci.com/docs/ja/[CircleCI ドキュメント - CircleCI ドキュメントの公式 Web サイト]
 - https://docs.docker.com/[Docker ドキュメント (英語)]
