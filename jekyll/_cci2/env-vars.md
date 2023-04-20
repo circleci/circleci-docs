@@ -217,7 +217,7 @@ Within your repository create a file such as `template.json`, with value replace
 
 `envsubst` can convert all types of environment variable strings, including those encased in curly braces (`{}`).
 
-The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating, creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts).
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts).
 
 ```yaml
 version: 2.1
