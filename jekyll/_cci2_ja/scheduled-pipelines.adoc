@@ -21,7 +21,7 @@ contentTags:
 - セットアップ ワークフロー経由のxref:dynamic-config#[ダイナミックコンフィグ]の使用
 - `.circleci/config.yml`. の編集が不要なスケジュール変更
 - xref:skip-build#auto-cancelling[自動キャンセル機能]の利用.
-- Specify xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline parameters] associated with a schedule.
+- スケジュールに関連付ける xref:pipeline-variables#pipeline-parameters-in-configuration[パイプライン パラメーター]の指定。
 - ワークフロー間などで共通するスケジュールの管理.
 
 パイプラインのスケジュール実行は、API を使って、または CircleCI Web アプリのプロジェクト設定から設定します。
@@ -52,9 +52,9 @@ You can find a basic how-to guide on the xref:set-a-nightly-scheduled-pipeline#[
 1. 新しいスケジュールを作成するには、**Add Trigger** をクリックします。
 1. フォームに入力して新しいスケジュールを定義し、**Save Trigger** をクリックします。
 
-The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables that you declare at the top level of a configuration.
+このフォームでは、xref:pipeline-variables#[パイプラインパラメーター] を追加するオプションも指定します。これは、設定ファイルで最初に宣言した型指定されたパイプライン変数です。
 
-If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows] page for examples.
+複数のワークフローで共通のスケジュールを管理するには、`.circleci/config.yml` ファイルで手動で設定する必要があります。 コード例については xref:schedule-pipelines-with-multiple-workflows#[複数のワークフロー]を使ったパイプラインのスケジュール実行のページを参照してください。
 
 [#use-the-api]
 === API を使用する場合
@@ -89,7 +89,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 [#migrate-scheduled-workflows-to-scheduled-pipelines]
 == ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
 
-If you have existing scheduled workflows you need to migrate to scheduled pipelines, use the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Scheduled pipelines migration] guide.
+パイプラインのスケジュール実行に移行する必要がある既存のワークフローがある場合は、xref:migrate-scheduled-workflows-to-scheduled-pipelines#[パイプラインのスケジュール実行への移行ガイド]をご覧ください。
 
 [#scheduled-pipelines-video-tutorial]
 == パイプラインのスケジュール実行のビデオチュートリアル
@@ -116,6 +116,6 @@ include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
 [#next-steps]
 == 次のステップ
 
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migrate scheduled workflows to scheduled pipelines]
-- xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows]
-- xref:set-a-nightly-scheduled-pipeline#[Set a nightly scheduled pipeline]
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]
+- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインのスケジュール実行を夜間に設定する]
