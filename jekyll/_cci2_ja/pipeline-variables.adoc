@@ -127,7 +127,7 @@ CLI や API の使用に加えて、CircleCI Web アプリからパラメータ�
 . *Add Parameters* ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
 . *Trigger Pipeline* をクリックします。
 
-Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
+Web アプリでスケジュールされたパイプラインを設定する際にも、パラメーターを呼び出すことができます。 The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
 
 [#configuration-processing-stages]
 == Configuration processing stages
