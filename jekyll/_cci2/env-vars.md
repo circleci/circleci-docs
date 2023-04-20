@@ -255,7 +255,7 @@ Output:
 }
 ```
 
-For instructions on installing the CircleCI CLI locally, read the [Installing the CircleCI local CLI](docs/local-cli/) guide.
+For instructions on installing the CircleCI CLI locally, read the [Installing the CircleCI local CLI](/docs/local-cli/) guide.
 
 ### Alpine Linux
 {: #alpine-linux }
