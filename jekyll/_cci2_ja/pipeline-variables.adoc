@@ -101,11 +101,11 @@ jobs:
 [#passing-parameters-when-triggering-pipelines-via-the-api]
 === API からパイプラインをトリガーするときにパラメーターを渡す
 
-A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to link:https://circleci.com/docs/api/v2/#trigger-a-new-pipeline[trigger a pipeline]. これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
+link:https://circleci.com/docs/api/v2/#trigger-a-new-pipeline[パイプラインをトリガーする] API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-The `parameters` key passed in this `POST` request is *NOT* secret.
+*注:* この `POST` で   `parameters` キーを渡すリクエストは、シークレットではありませんのでご注意ください。
 
-The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: パイプラインをトリガーするコマンドを実行したときに、設定ファイルでパラメータが宣言されていない場合、`Project not found` などのエラー応答メッセージが表示されます)。
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -119,13 +119,13 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 [#passing-parameters-when-triggering-pipelines-using-the-circleci-web-app]
 === CiecleCI Web アプリを使ってパイプラインをトリガーするときにパラメーターを渡す
 
-In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
+CLI や API の使用に加えて、CircleCI Web アプリからパラメーターを使ってパイプラインをトリガーすることもできます。 (*注*: Web アプリからパイプラインをトリガーする時に、設定ファイルで宣言していないパラメーターを渡すと、そのパイプラインは失敗し、`Unexpected argument(s)`というエラーが表示されます)。
 
 . プロジェクトのフィルタリング機能を使ってプロジェクトを選択します。
 . ブランチのフィルタリング機能を使って新しいパイプラインを実行するブランチを選択します。
-. Click the *Trigger Pipeline* button (towards the top right corner of the page).
-. Use the *Add Parameters* dropdown to specify the type, name, and value of your desired parameters.
-. Click *Trigger Pipeline*.
+. *Trigger Pipeline* ボタンをクリックします (ページの右上隅)。
+. *Add Parameters* ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
+. *Trigger Pipeline* をクリックします。
 
 Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
 
