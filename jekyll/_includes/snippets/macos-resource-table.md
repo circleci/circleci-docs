@@ -12,5 +12,5 @@ macos.x86.metal.gen1 | 12 @ 3.2 GHz | 32GB
 The `macos.x86.metal.gen1` resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/dedicated-hosts-macos) page to learn more about this resource class.
 <br />
 <br />
-The `large` and `macos.m1.large.gen1` resource classes are only available for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans.
+The `large` resource class is only available for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans.
 {: class="alert alert-info"}
