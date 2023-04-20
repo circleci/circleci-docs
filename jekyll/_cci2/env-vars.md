@@ -244,7 +244,7 @@ workflows:
 
 In this example, the `<` symbol is used to redirect the contents of the `template.json` file as _input_ to the `env subst` command, while the `>` symbol is used to redirect the output of the env subst command to the `deploy.json`.
 
-We could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
+You could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
 
 Output:
 
