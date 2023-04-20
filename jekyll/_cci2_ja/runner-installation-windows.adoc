@@ -30,7 +30,7 @@ toc::[]
 [#installation-steps]
 == インストール手順
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
