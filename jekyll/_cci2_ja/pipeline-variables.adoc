@@ -127,10 +127,10 @@ CLI や API の使用に加えて、CircleCI Web アプリからパラメータ�
 . *Add Parameters* ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
 . *Trigger Pipeline* をクリックします。
 
-Web アプリでスケジュールされたパイプラインを設定する際にも、パラメーターを呼び出すことができます。 The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
+Web アプリでスケジュールされたパイプラインを設定する際にも、パラメーターを呼び出すことができます。 パラメータは、メニューの「Project Settingsプロジェクト設定」[トリガー]内のトリガーフォームの一部です。 スケジュールされたパイプラインの一部として設定されたパラメータは、設定ファイルにも宣言する必要があります。そうでない場合、パイプラインは「`Unexpected argument(s)`」というエラーで失敗します。
 
 [#configuration-processing-stages]
-== Configuration processing stages
+== 構成処理のステージ
 
 設定プロセスは次の段階を経て進みます。
 
@@ -143,12 +143,12 @@ Web アプリでスケジュールされたパイプラインを設定する際�
 [#the-scope-of-pipeline-parameters]
 == パイプラインパラメーターのスコープ
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
+パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 `.circleci/config.yml`  でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。 これは、パイプラインのスコープを Orb 内で使用するとカプセル化が崩れ、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が損なわれ 脆弱性が攻撃される領域が作られてしまう可能性があるためです。
 
 [#element-parameter-scope]
 === 要素パラメーターのスコープ
 
-Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, for example, a job, a command, or an executor. 下の例のように、パラメーターを持つ要素がパラメーターを持つ別の要素を呼び出す場合、内側の要素は呼び出し元の要素のスコープを継承しません。
+要素パラメーターは字句スコープをとるため、ジョブ、コマンド、Executor などで定義されている要素の範囲内に収まります。 下の例のように、パラメーターを持つ要素がパラメーターを持つ別の要素を呼び出す場合、内側の要素は呼び出し元の要素のスコープを継承しません。
 
 ```yaml
 version: 2.1
@@ -178,12 +178,12 @@ workflows:
          message: echo << parameters.message >>
 ```
 
-Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. これにより、すべてのパラメーターが常に有効な値にバインドされ、使用可能なパラメーターが常に認識されます。 Running this would throw a pipeline error of `Arguments referenced without declared parameters: message`.
+`cat-file` ジョブから  `print`  コマンドを呼び出しても、file パラメーターのスコープは print コマンド内には及びません。 これにより、すべてのパラメーターが常に有効な値にバインドされ、使用可能なパラメーターが常に認識されます。 これを実行すると、`Arguments referenced without declared parameters: message` というパイプラインエラーが発生します。
 
 [#pipeline-value-scope]
 === パイプライン値のスコープ
 
-Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
+パイプライン値、つまり CircleCI が提供するパイプライン内で使用できる値 (例: `<< pipeline.number >>` ) は、常にスコープ内で有効です。
 
 [#pipeline-parameter-scope]
 === パイプラインパラメーターのスコープ
@@ -196,9 +196,9 @@ Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<
 [#conditional-workflows]
 == 条件付きワークフロー
 
-Use the xref:configuration-reference#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:configuration-reference#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+ワークフロー宣言の下で xref:configuration-reference#[ロジックステートメント]と一緒に xref:configuration-reference#using-when-in-workflows[`when` clause ]句（または逆の `unless` 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  when や unless のロジックステートメントにより値の真偽を評価します。
 
-The most common use of this construct is to use a pipeline parameter as the value, allowing a trigger to pass that parameter to determine which workflows to run. Below is an example configuration using the pipeline parameter `run_integration_tests` to set whether the workflow `integration_tests` will run.
+この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。 以下の設定例では、パイプラインパラメーター  `run_integration_tests` を使用して  `integration_tests`  ワークフローの実行を制御しています。
 
 ```yaml
 version: 2.1
@@ -221,7 +221,7 @@ jobs:
       - ... # job steps
 ```
 
-In this example, the workflow `integration_tests` is not triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
+上記の例では、以下のように POST 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
 
 ```json
 {
@@ -231,4 +231,4 @@ In this example, the workflow `integration_tests` is not triggered unless it is 
 }
 ```
 
-The `when` key accepts any truthy or falsy value, not just pipeline parameters, though pipeline parameters will be the primary use of this feature until more are implemented. `when` also has an inverse clause `unless`, which inverts truthiness of the condition.
+ `when` キーは、パイプライン パラメーターだけでなくすべての真偽値を受け入れますが、この機能が強化されるまでは、パイプライン パラメーターを使用する方法が主流となるでしょう。 また、`when` 句の逆の  `unless` 句もあり、条件の真偽を逆に指定できます。
