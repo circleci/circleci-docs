@@ -31,7 +31,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-For full details of this release see the https://circleci.com/server/changelog/#release-3-4-6[changelog].
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-6[changelog] を参照して下さい。
 
 == リリース 3.4.4
 
@@ -44,7 +44,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-For full details of this release see the https://circleci.com/server/changelog/#release-3-4-5[changelog].
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-5[changelog] を参照して下さい。
 
 == リリース 3.4.3
 
