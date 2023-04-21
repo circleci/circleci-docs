@@ -20,7 +20,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 [#set-an-environment-variable-in-a-shell-command]
 == シェルコマンドでの環境変数の設定
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars#parameters-and-bash-environment[using `BASH_ENV`]. これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
+CircleCI では環境変数の設定時の挿入はサポートしていませんが、xref:env-vars#parameters-and-bash-environment[`BASH_ENV` を使用して] 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
 version: 2.1
@@ -72,13 +72,12 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。 If you need an environment variable
-to be accessible in more than one step, export the value xref:env-vars#parameters-and-bash-environment[using `BASH_ENV`].
+NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、xref:env-vars#parameters-and-bash-environment[`BASH_ENV` を使用して] 値をエクスポートします。
 
 [#set-an-environment-variable-in-a-job]
 == ジョブでの環境変数の設定
 
-To set an environment variable in a job, use the xref:configuration-reference#job_name[`environment` key].
+ジョブで環境変数を設定するには、 xref:configuration-reference#job_name[`environment` キー] を使用します。
 
 ```yaml
 version: 2.1
