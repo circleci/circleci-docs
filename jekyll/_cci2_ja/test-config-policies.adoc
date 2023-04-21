@@ -1,6 +1,6 @@
 ---
 
-description: Open preview of config policies for CircleCI. Learn about testing your policies.
+description: このページでは、CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー、ポリシーのテストの詳細をご紹介しています。 設定ファイルのポリシーに関して学びましょう。
 contentTags:
   platform:
   - クラウド
@@ -19,14 +19,14 @@ CAUTION: コンフィグファイルのポリシー管理機能が**オープン
 
 このページでは、設定ファイルのポリシーに関するテストを作成、セットアップする方法をガイド形式で説明します。
 
-このガイドでは、設定ファイルのポリシーの作成に関する知識があることを前提としています。 If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policies overview] and xref:create-and-manage-config-policies#[Create and manage config policies] pages.
+このガイドでは、設定ファイルのポリシーの作成に関する知識があることを前提としています。 設定ファイルのポリシーの詳細およびポリシーの作成方法については、xref:config-policy-management-overview.adoc[設定ファイルのポリシー管理機能の概要]および xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]を参照してください。
 
 [#prerequisites]
 == 前提条件
 
 このページの手順では、xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[ポリシーの作成ガイド]に従い、以下の手順が完了済みであることを前提としています。
 
-* Enabled config policies for your organization
+* 組織の設定ファイルのポリシー管理機能を有効にします。
 * 組織内に CircleCI 設定ファイルのバージョンをチェックする簡単なポリシーを作成する。 ポリシーのファイル構造は `./config-policies/version.rego` である必要があります。
 
 [#write-a-policy-test]
@@ -173,7 +173,7 @@ ok    config-policies    0.000s
 
 1/1 tests passed (0.000s)
 ----
-. To get the test output in JSON format, use the `--format` flag, as follows:
+. テスト出力をJSON形式で取得するには、以下のように `--format` フラグを使用します
 +
 [source,shell]
 ----
