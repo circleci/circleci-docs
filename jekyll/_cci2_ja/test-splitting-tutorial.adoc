@@ -10,7 +10,7 @@ contentTags:
 = テスト分割によるパイプラインの高速化
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn to split and run tests in parallel in CircleCI.
+:page-description: CircleCI でテストを分割し、実行する方法について説明します。
 :icons: font
 :toc: macro
 
@@ -21,7 +21,7 @@ contentTags:
 [#introduction]
 == 概要
 
-テスト分割は、複数の実行環境でテストを同時に実行する手法です。 Test splitting takes advantage of a feature called xref:parallelism-faster-jobs#[_parallelism_], which allows you to run a job in CircleCI on different nodes at the same time.
+テスト分割は、複数の実行環境でテストを同時に実行する手法です。 テスト分割は、CircleCI のジョブを異なる Node で同時に実行できる xref:parallelism-faster-jobs#[_並列実行_] という機能を使います。
 
 何十個または何百個のテストで構成されたテストスイートがある場合、それを一つずつ実行するにはかなり時間かかり、大量のクレジットを消費します。 テストを分割すると、待機時間が大幅に減り、より迅速にフィードバックを得ることができ、プランの使用状況を最適化できます。
 
@@ -36,13 +36,13 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 
 このチュートリアルに沿って実行するには、以下を準備する必要があります。
 
-* A CircleCI account - if you do not have an account, xref:first-steps#[you can sign up for free].
-* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や Bitbucket) If you have not already done so, follow the steps in the xref:github-integration#[GitHub] and xref:bitbucket-integration#[Bitbucket] integration pages to connect your VCS provider.
+* CircleCI のアカウント: アカウントをお持ちでない場合は、 xref:first-steps#[無料で登録していただけます。]
+* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や Bitbucket) : まだお済みでない場合は、xref:github-integration#[GitHub] と xref:bitbucket-integration#[Bitbucket の連携] のページの手順に従って VCS プロバイダーの関連付けをしてください。
 
 [#about-the-sample-app]
 == サンプルアプリについて
 
-このチュートリアルでは基本的な React アプリを使用します。 The project repository is available on link:https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub]. The app was created using link:https://create-react-app.dev/[Create React App], and is set up to use the link:https://jestjs.io/[Jest] testing framework. It uses the link:https://github.com/jest-community/jest-junit[jest-junit] reporter to export test results as JUnit XML files.
+このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、 link:https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub] でご確認ください。 このアプリは、 link:https://create-react-app.dev/[React アプリの作成] を使って作成され、 link:https://jestjs.io/[Jest] のテストフレームワークを使用するように設定されています。 link:https://github.com/jest-community/jest-junit[jest-junit] Reporter を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
 
 このチュートリアルの後半で CircleCI のプロジェクトをセットアップする場合は、編集が可能な config.yml テンプレートを使用するオプションを選択します。 このチュートリアルで使用するテンプレートは、Node プロジェクトで使用可能なスターター設定です。 下記セクションで設定についての簡単な説明をお読みください。CircleCI での Node プロジェクトの設定に既に慣れている方は、先に進んでプロジェクトの設定を行なってください。
 
@@ -79,8 +79,8 @@ workflows:
       - build-and-test
 ----
 
-* **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 More information on config version 2.1 can be found in the xref:configuration-reference#[Configuration reference] page.
-* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
+* **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント xref:configuration-reference#[CircleCI の設定] を参照してください。
+* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、 link:https://circleci.com/developer/ja/orbs/orb/circleci/node[Developer Hub] を参照してください。
 * **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは `build-and-test` という名前の一つのジョブで構成され、このジョブは、プロジェクトコードのチェックアウト、Node パッケージのインストール、デフォルトパッケージマネージャーの設定、テストの実行を行う複数のステップで構成されています。
 
 テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
@@ -90,7 +90,7 @@ workflows:
 
 まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
 
-. link:https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[Fork the repository] on GitHub, or download the repository then push the project code to your desired VCS provider.
+. GitHub で link:https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシュします。
 . Open the link:https://app.circleci.com[CircleCI web app]. お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
 . プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
 . config.yml ファイルを選択するよに求められます。 そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。 **Set Up Project** をクリックします。
@@ -161,7 +161,7 @@ parallelism: 5
 このステップでは CircleCI CLI を使ってテストスイートの場所に渡し、テストをどのように分割するかを設定します。 `circleci tests glob` コマンドを使ってテストファイルを選択できます。
 * まず、 `+src/_tests__/*.js+` のグロブパターンに合うファイル、つまり、 `+src/_tests__+ ` とそのサブディレクトリにあるすべての `.js` ファイルを指定します。
 * すると、それらのファイルは `circleci tests split` に渡され、テスト分割グループが作成されます。
-* `--split-by=timings` フラグは、タイミングデータに基づいてテストを分割する必要があることを示します。 For other test splitting options, consult the xref:parallelism-faster-jobs#splitting-test-files[Splitting test files section] of the Running rests in parallel page.
+* `--split-by=timings` フラグは、タイミングデータに基づいてテストを分割する必要があることを示します。 他の分割オプションについては、xref:parallelism-faster-jobs#splitting-test-files[テストの並列実行のテストファイルの分割セクション] を参照してください。
 +
 NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 +
@@ -186,7 +186,7 @@ NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コ�
     path: ~/junit
 ----
 +
-このステップによりテストデータが CircleCI にアップロードされ、テストをタイミングデータで分割することが  **必要になります**。 このステップにより、CircleCI Web アプリのジョブの Tests タブよりテストデータにアクセスできるようになり、テストが失敗した場合のデバグに役立ちます。 To read more about the Tests tab and test insights in CircleCI, visit the xref:collect-test-data#[Collect test data] page.
+このステップによりテストデータが CircleCI にアップロードされ、テストをタイミングデータで分割することが  **必要になります**。 このステップにより、CircleCI Web アプリのジョブの Tests タブよりテストデータにアクセスできるようになり、テストが失敗した場合のデバグに役立ちます。 CircleCI の Tests タブやテストインサイトの詳細については、xref:collect-test-data#[テストデータの収集] を参照してください。
 
 最新の設定ファイルの全コピーを下記に記載します。
 
@@ -277,5 +277,5 @@ image::test-splitting-by-timing.png[Testing step showing split by timing]
 [#next-steps]
 == 次のステップ
 
-* For a more in-depth discussion of the demo used in this tutorial, read our link:https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
-* Learn about xref:insights-tests#[Test insights] available in CircleCI.
+* このチュートリアルで使用されているデモの詳細については、ブログ記事link:https://circleci.com/blog/a-guide-to-test-splitting/[テスト分割ガイド (英語)] をお読みください。
+* CircleCI の xref:insights-tests#[テストインサイト]について
