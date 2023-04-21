@@ -6,12 +6,12 @@ contentTags:
 ---
 = スタートガイド
 :page-layout: classic-docs
-:page-description: A quickstart guide for adding a project to CircleCI and exploring some features
+:page-description: CircleCI を使用してはじめてビルドを成功させるためのチュートリアル
 :page-liquid:
 
-This quickstart guide takes you through connecting an existing project to CircleCI, using the in-app config editor, and inviting team members to collaborate on your new project.
+このスタートガイドのチュートリアルでは、既存のプロジェクトをCircleCIに接続し、アプリ内の設定エディタを使用し、新しいプロジェクトにチームメンバーを招待して共同作業を行う方法を説明します。
 
-If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
+CircleCI の `config.yml` オプションの全リストを確認したい場合は、xref:config-reference#[Configuration reference] を参照してください。
 
 // set up prerequisites
 
