@@ -171,7 +171,7 @@ jobs:
 
 環境変数は Docker コンテナにも設定することができます。 To do this, use the xref:configuration-reference#docker[`environment` key].
 
-NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 For more information, see the xref:custom-images#adding-an-entrypoint[Adding an entrypoint] section of the Custom images guide.
+NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、カスタムイメージのガイドの xref:custom-images#adding-an-entrypoint[エントリポイントの追加]セクションを参照してください。
 
 ```yaml
 version: 2.1
