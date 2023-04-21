@@ -1,13 +1,13 @@
 ---
 
-description: Reference page for webhooks payloads
+description: このページでは、Webhookの参考情報やリファレンスをご紹介しています。
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Webhooks reference
+= Webhook のリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -40,19 +40,19 @@ contentTags:
 |マップ
 |===
 
-NOTE: The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
+NOTE: 注:  イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずに Webhook のペイロードのマップに追加される可能性があります。
 
 [#common-sub-entities]
 == Webhook の共通のサブエンティティ
 
-The following sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks. These common maps of data are referred to as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
+ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらのWebhookイベントのスキーマは、しばしば他のWebhookとデータを共有します。 これらのデータの共通マップは、"サブエンティティ"（sub-entities）として参照されます。 例えば、`job-completed` 状態の Webhook のイベントペイロードを受信した場合、それにはご自身のプロジェクト、組織、ジョブ、ワークフロー、およびパイプライン のデータマップが含まれます。
 
-Some common sub-entities that will appear across various webhooks are described in the following sections:
+様々な Webhook にまたがって現れる、いくつかの共通のサブエンティティについて、以下のセクションで説明します：
 
 [#project]
 === プロジェクト
 
-The following data about the project associated with the webhook event is provided:
+Webhook イベントに関連するプロジェクトに関する以下のデータが提供されます：
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -67,17 +67,17 @@ The following data about the project associated with the webhook event is provid
 
 |slug
 |○
-|String that can be used to refer to a specific project in many of CircleCI's APIs (for example, `gh/circleci/web-ui`)
+|多くの CircleCI の API の中で特定のプロジェクト（例えば、`gh/circleci/web-ui`）を参照するために使用する文字列
 
 |name
 |○
-|Name of the project (for example, `web-ui`)
+|プロジェクトの名前（例：`web-ui`）
 |===
 
 [#organization]
 === 組織
 
-The following data about the organization associated with the webhook event is provided:
+webhook イベントに関連する組織に関する以下のデータが提供されます：
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -98,9 +98,9 @@ The following data about the organization associated with the webhook event is p
 [#job]
 === ジョブ
 
-A link:/docs/jobs-steps/[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
+通常、CircleCI のワークロードにおけるある期間を表し（例：「ビルド」、「テスト」、または「デプロイ」）、一連のステップを含むlink:/docs/jobs-steps/[ジョブ]。
 
-The following data about the job associated with the webhook event is provided:
+Webhook イベントに関連するジョブに関する以下のデータが提供されます：
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -137,7 +137,7 @@ The following data about the job associated with the webhook event is provided:
 [#workflow]
 === ワークフロー
 
-link:/docs/workflows[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
+link:/docs/workflows[ワークフロー]はジョブをオーケストレーションします。 Webhookイベントに関連するワークフローについて、以下のデータが提供されます：
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -176,7 +176,7 @@ link:/docs/workflows[Workflows] orchestrate jobs. The following data about the w
 
 パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
 
-The following Data about the pipeline associated with the webhook event is provided:
+Webhook イベントに関連するパイプラインに関する以下のデータが提供されます：
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -214,7 +214,7 @@ The following Data about the pipeline associated with the webhook event is provi
 [#trigger]
 === トリガー
 
-The following data about the trigger associated with the webhook event is provided:
+Webhook イベントに関連するトリガーについて、以下のデータを提供します：
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -225,13 +225,13 @@ The following data about the trigger associated with the webhook event is provid
 
 |タイプ
 |○
-|How this pipeline was triggered (for example, "webhook", "api", "schedule")
+|このパイプラインがどのようにトリガーされたか（例：「Webhook」、「API」、「スケジュール」）
 |===
 
 [#trigger-parameters]
 === トリガーパラメーター
 
-パイプラインに関連付けられたデータ。 GitHub や Bitbucket 以外のプロバイダーに関連付けられたパイプラインに存在します。 See <<#vcs>> below for GitHub and Bitbucket.
+パイプラインに関連付けられたデータ。 GitHub や Bitbucket 以外のプロバイダーに関連付けられたパイプラインに存在します。 GitHub と Bitbucket については、下記の <<#VCS>> を参照してください。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -242,7 +242,7 @@ The following data about the trigger associated with the webhook event is provid
 
 |circleci
 |○
-|A map containing trigger information -- see <<#circleci>>
+|トリガー情報を含むマップ (下記参照)
 
 |git
 |×
@@ -269,11 +269,11 @@ The following data about the trigger associated with the webhook event is provid
 
 |event_type
 |○
-|Provider event type that triggered the pipeline (for example, `push`)
+|パイプラインをトリガーしたプロバイダーのイベントタイプ (`push` など)
 
 |trigger_type
 |○
-|Trigger provider (for example, `gitlab`)
+|トリガープロバイダー（例：`gitlab`）
 
 |actor_id
 |×
@@ -284,7 +284,7 @@ The following data about the trigger associated with the webhook event is provid
 [#vcs]
 === VCS
 
-NOTE: VCS マップやそのコンテンツは常に提供されるわけではありません。 GitHub と Bitbucket に関連付けられたパイプラインに存在します。 See <<#trigger-parameters,trigger parameters>> above for other providers.
+NOTE: VCS マップやそのコンテンツは常に提供されるわけではありません。 GitHub と Bitbucket に関連付けられたパイプラインに存在します。 その他のプロバイダーについては、上記の<<#trigger-parameters,トリガーパラメーター>>を参照してください。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -635,4 +635,4 @@ NOTE: VCS マップやそのコンテンツは常に提供されるわけでは�
 [#next-steps]
 == 次のステップ
 
-* Follow the link:/docs/webhooks-airtable/[Using webhooks with third party tools] tutorial.
+* link:/docs/webhooks-airtable/[サードパーティツールでwebhooksを使う]チュートリアルを参照してください。
