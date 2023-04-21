@@ -15,8 +15,8 @@ document-type:
 
 :toc-title:
 
-This section assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page and
-have followed the steps outlined in the xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[Getting Started with Dynamic Configuration] section.
+このセクションでは、xref:dynamic-config#[ダイナミックコンフィグ] を既にお読みになっていること、
+入門ガイド xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[ダイナミックコンフィグをはじめる] に記載されている手順が実行済みであることを前提としています。
 
 下記では、ダイナミックコンフィグの使用方法を説明します。
 
@@ -31,7 +31,7 @@ have followed the steps outlined in the xref:dynamic-config#getting-started-with
 
 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。
 
-It could potentially inspect `git` history, pipeline values that get passed to it, or anything else you might do from inside a xref:configuration-reference#jobs[`job`].
+この過程で、`git`  履歴、パイプラインに渡される値、 xref:configuration-reference#jobs[`ジョブ`] 内で行われる処理などの確認を行うことができます。
 
 [source,yaml]
 ----
@@ -68,16 +68,16 @@ workflows:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
 - ダイナミックコンフィグ機能を使用するために `continuation` Orb を呼び出します。
-- Define a job called `setup` that uses the `continuation` orb as an xref:executor-intro#[`executor`]. このジョブでは、下記の処理を行います。
-- Calls the xref:configuration-reference#checkout[`checkout`] step to checkout code from the configured repository.
-- Calls the xref:configuration-reference#run[`run`] step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+- `continuation` Orb を xref:executor-intro#[`executor`] として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
+- xref:configuration-reference#checkout[`checkout`]ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
+- xref:configuration-reference#run[`run`] ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
 - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflow` において、上記で定義された `setup` ジョブを呼び出します。
 
 CAUTION: ダイナミックコンフィグ機能を使用する場合、各 `config.yml` ごとに使用できるワークフローは 1 つのみです。
 パイプラインのセットアップステージの一部として実行できるのは、1 つのワークフローのみです。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイムトークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] or review the xref:dynamic-config#dynamic-config-faqs[Dynamic configuration FAQ].
+`continuation` Orb の内容の詳細については、当該 Orb のソースコードを link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] で閲覧することや、xref:dynamic-config#dynamic-config-faqs[ダイナミックコンフィグの FAQ] を参照することで確認できます。
 
 [#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
 == 変更されたファイルに基づいて特定の `workflows` または `steps` を実行する
