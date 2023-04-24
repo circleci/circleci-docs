@@ -260,7 +260,7 @@ Each usage example must present a full example including showing the orb being i
 
 Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information. The `env_var_name` parameter type will fail validation if the parameter value is not a POSIX-compliant environment variable name. This is designed to assist in preventing users from accidentally entering the secret value directly as a string.
 
-If your orb requires an "API key", you should create a parameter named `api_key` of type `env_var_name`. The user of your orb would then pass the name of the environment variable containing the API key as the value of the `api_key` parameter.
+If your orb requires an "API key", you should create a parameter named `api_key` of type `env_var_name`. The developer using of your orb would then pass the name of the environment variable containing the API key as the value of the `api_key` parameter.
 
 ```yaml
 parameters:
