@@ -289,7 +289,7 @@ steps:
 {: #accepting-parameters-as-strings-or-environment-variables }
 {:.no_toc}
 
-When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually entire a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, such as if you were using a [context](/contexts) to store your AWS metadata for multiple projects.
+When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually entire a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, such as if you were using a [context](/docs/contexts) to store your AWS metadata for multiple projects.
 
 CircleCI ships with the [envsubt](/env-vars/#environment-variable-substitution) CLI built in, which allows us to evaluate environment variables in strings.
 
@@ -306,7 +306,7 @@ steps:
       command: <<include(script/your_script.sh)>>
 ```
 
-When building orbs, it is typical to [write your code in a separate file](/orb-concepts/#file-include-syntax) to avoid some of the pitfalls of YAML. In this example, we are including a script named `your_script.sh` which contains the following code:
+When building orbs, it is typical to [write your code in a separate file](/docs/orb-concepts/#file-include-syntax) to avoid some of the pitfalls of YAML. In this example, we are including a script named `your_script.sh` which contains the following code:
 
 ```bash
 REGION_VALUE=$(circleci env subst <<< "$PARAM_REGION")
