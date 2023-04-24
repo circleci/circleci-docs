@@ -258,7 +258,32 @@ Each usage example must present a full example including showing the orb being i
 {: #secrets-should-never-be-directly-entered }
 {:.no_toc}
 
-Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information.
+Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information. The `env_var_name` parameter type will fail validation if the parameter value is not a POSIX-compliant environment variable name. This is designed to assist in preventing users from accidentally entering the secret value directly as a string.
+
+If your orb requires an "API key", you should create a parameter named `api_key` of type `env_var_name`. The user of your orb would then pass the name of the environment variable containing the API key as the value of the `api_key` parameter.
+
+```yaml
+parameters:
+  api_key:
+    type: env_var_name
+    default: API_KEY # An environment variable named API_KEY contains the API key
+steps:
+  - run:
+      environment:
+        PARAM_API_KEY: << parameters.api_key >>
+      command: |
+        # Use the API key
+```
+In this example, the string value of `API_KEY` has been saved in the environment variable `PARAM_API_KEY`. In order to get the value of the environment variable with the name `API_KEY`, we must evaluate with [BASH parameter expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html).
+
+```yaml
+steps:
+  - run:
+      environment:
+        PARAM_API_KEY: << parameters.api_key >>
+      command: |
+        API_KEY_VALUE=${!PARAM_API_KEY}
+```
 
 #### Parameterize the installation path
 {: #parameterize-the-installation-path }
