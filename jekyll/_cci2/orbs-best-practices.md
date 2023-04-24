@@ -287,7 +287,6 @@ steps:
 
 #### Accepting parameters as strings or environment variables
 {: #accepting-parameters-as-strings-or-environment-variables }
-{:.no_toc}
 
 When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually entire a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, such as if you were using a [context](/docs/contexts) to store your AWS metadata for multiple projects.
 
