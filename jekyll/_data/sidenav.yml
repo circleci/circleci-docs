@@ -387,6 +387,10 @@ en:
             link: ssh-access-jobs
           - name: Rotate project SSH keys
             link: rotate-project-ssh-keys
+          - name: Stop building a project on CircleCI
+            link: stop-building-a-project-on-circleci
+          - name: Rename organizations and repositories
+            link: rename-organizations-and-repositories
           - name: Create and manage config policies (Open preview)
             link: create-and-manage-config-policies
           - name: Test config policies (Open preview)
@@ -395,10 +399,6 @@ en:
             link: use-the-cli-for-config-and-policy-development
           - name: Config policies for self-hosted runner (Open preview)
             link: config-policies-for-self-hosted-runner
-          - name: Stop building a project on CircleCI
-            link: stop-building-a-project-on-circleci
-          - name: Rename organizations and repositories
-            link: rename-organizations-and-repositories
       - name: Reference
         children:
           - name: Config policy reference (Open preview)
