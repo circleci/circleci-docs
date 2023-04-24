@@ -31,13 +31,13 @@ NOTE: パイプラインのスケジュール実行は、1 つのブランチに
 [#introduction]
 == はじめに
 
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
+パイプラインのスケジュール実行は、CircleCI Web アプリまたは API から、スケジュールに基づいて定期的にパイプラインを起動することができます。 スケジュールは、毎日、毎週、毎月、または非常に特定のタイムテーブルの範囲にすることができます 基本的なスケジュールされたパイプラインを設定するには、`.circleci/config.yml` ファイルに追加の設定は必要ありませんが、この機能をより高度に使用するには、追加の `.circleci/config.yml` 設定が必要になります（例、ワークフローのフィルタリング、またはパラメータの使用など）。
 
-Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. Adding a parameter to a scheduled pipeline can be done in the web app in the triggers form while setting up a schedule. Any parameters set up in this manner must be added to your configuration file using the `parameters` key.
+パイプラインパラメータは、文字列、整数、またはブール値の形で型付けされたパイプライン変数です。 スケジュールされたパイプラインにパラメータを追加するには、Web アプリでスケジュールを設定する際に、トリガーフォームから行います。 この方法で設定されたパラメータは、パラメータキー（`parameters` ）を使用して設定ファイルに追加する必要があります。
 
-Scheduled pipelines are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+スケジューリングされたパイプラインは、CircleCI スケジューリングシステム、または特定のユーザー（例えば、自身）である "actor" によって実行するように設定されています。 ワークフローで制限されたコンテキストを利用する場合、スケジューリングアクターは重要な考慮事項です。 ワークフローを実行するユーザー（actor）がコンテキストへのアクセス権を持っていない場合、ワークフローは `Unauthorized` ステータスで失敗します。
 
-You can find a basic how-to guide on the xref:set-a-nightly-scheduled-pipeline#[Set a nightly scheduled pipeline] page, and more advanced examples on the xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows] pages.
+基本的な使い方は xref:set-a-nightly-scheduled-pipeline#[パイプラインのスケジュール実行を夜間に設定する]ページで、より高度な例は xref:schedule-pipelines-with-multiple-workflows#[複数のワークフローを使ったパイプラインのスケジュール実行] ページをご覧ください。
 
 [#get-started-with-scheduled-pipelines]
 == パイプラインのスケジュール実行機能の使い方
@@ -104,9 +104,9 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
   <iframe width="560" height="315" src="https://www.youtube.com/embed/x3ruGpx6SEI" title="Scheduled pipelines tutorial" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
-For the documentation for these scenarios, visit the following pages:
-- xref:set-a-nightly-scheduled-pipeline#[Set a nightly scheduled pipeline]
-- xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows]
+これらのシナリオに関するドキュメントは、以下のページを参照してください：
+- xref:set-a-nightly-scheduled-pipeline#[パイプラインのスケジュール実行を夜間に設定する]
+- xref:schedule-pipelines-with-multiple-workflows#[複数のワークフローを使ったパイプラインのスケジュール実行]
 
 [#scheduled-pipelines-faqs]
 == FAQ
