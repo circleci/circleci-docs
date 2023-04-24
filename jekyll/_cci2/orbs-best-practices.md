@@ -285,6 +285,36 @@ steps:
         API_KEY_VALUE=${!PARAM_API_KEY}
 ```
 
+#### Accepting parameters as strings or environment variables
+{: #accepting-parameters-as-strings-or-environment-variables }
+{:.no_toc}
+
+When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually entire a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, such as if you were using a [context](/contexts) to store your AWS metadata for multiple projects.
+
+CircleCI ships with the [envsubt](/env-vars/#environment-variable-substitution) CLI built in, which allows us to evaluate environment variables in strings.
+
+```yaml
+parameters:
+  region:
+    type: string
+    default: $REGION # This value is expected to be a string, but may evaluate to an environment variable
+steps:
+  - run:
+      environment:
+        REGION: 'us-west-2'
+        PARAM_REGION: << parameters.region >>
+      command: <<include(script/your_script.sh)>>
+```
+
+When building orbs, it is typical to [write your code in a separate file](/orb-concepts/#file-include-syntax) to avoid some of the pitfalls of YAML. In this example, we are including a script named `your_script.sh` which contains the following code:
+
+```bash
+REGION_VALUE=$(circleci env subst <<< "$PARAM_REGION")
+echo "Expect REGION_VALUE to be us-west-2: $REGION_VALUE"
+```
+
+Going through this substitution process allows us to accept a string value, or an environment variable, and use it in our script. Keep in mind, it is recommended to [use the `env_var_name` parameter type for secrets](#secrets-should-never-be-directly-entered) which should never be entered directly.
+
 #### Parameterize the installation path
 {: #parameterize-the-installation-path }
 {:.no_toc}
