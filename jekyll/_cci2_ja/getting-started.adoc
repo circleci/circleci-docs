@@ -11,7 +11,7 @@ contentTags:
 
 このスタートガイドのチュートリアルでは、既存のプロジェクトをCircleCIに接続し、アプリ内の設定エディタを使用し、新しいプロジェクトにチームメンバーを招待して共同作業を行う方法を説明します。
 
-CircleCI の `config.yml` オプションの全リストを確認したい場合は、xref:config-reference#[Configuration reference] を参照してください。
+CircleCI の `config.yml` オプションの全リストを確認したい場合は、xref:configuration-reference#[CircleCI の設定] を参照してください。
 
 // set up prerequisites
 
