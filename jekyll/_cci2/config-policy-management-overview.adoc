@@ -381,6 +381,7 @@ enable_hard["use_official_docker_image"]
 [#next-steps]
 == Next steps
 
-* link:/docs/create-and-manage-config-policies[Create and manage config policies]
-* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
-* link:/docs/config-policy-reference[Config policy reference]
+* xref:create-and-manage-config-policies#[Create and manage config policies]
+* xref:test-config-policies#[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CircleCI CLI for config and policy development]
+* xref:config-policy-reference#[Config policy reference]
