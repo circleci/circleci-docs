@@ -13,7 +13,6 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-
 Follow the how-to guides on this page to learn how to create and use config policies.
 
 [#config-policy-management-enablement]

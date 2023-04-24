@@ -104,7 +104,7 @@ INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_c
 DEBU[2023-04-10T22:36:53Z] received test names: test_api.py
 ```
 
-The job should only re-run tests that are from a `classname` of `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+The job should only re-run tests that are from a `classname` or `filename` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
@@ -250,7 +250,13 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 ---
 
-**Question:** What happens if I try to use the functionality and it hasn't been set-up in my `.circleci/config.yml` file?
+**Question:** What happens if I try to use the functionality but `circleci tests run` is not used in the `.circleci/config.yml` file?
+
+**Answer:** All tests will be executed when the workflow runs again, including failed tests. This is equivalent to selecting "Rerun workflow from failed".  
+
+---
+
+**Question:** What happens if I try to use the functionality and `circleci tests run` is used in my `.circleci/config.yml` file, but I have not configured my job to upload test results to CircleCI?
 
 **Answer:** The job will fail.
 

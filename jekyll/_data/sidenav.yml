@@ -193,7 +193,7 @@ en:
           - name: Installing and using docker-compose
             link: docker-compose
 
-  - name: Execute job on self-hosted runners
+  - name: Execute jobs on self-hosted runners
     icon: icons/sidebar/build-agent.svg
     children:
       - name: Overview
