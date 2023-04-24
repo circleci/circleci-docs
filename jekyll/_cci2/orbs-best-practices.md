@@ -306,10 +306,10 @@ steps:
       command: <<include(script/your_script.sh)>>
 ```
 
-When building orbs, it is typical to [write your code in a separate file](/docs/orb-concepts/#file-include-syntax) to avoid some of the pitfalls of YAML. In this example, we are including a script named `your_script.sh` which contains the following code:
+When building orbs, it is typical to [write your code in a separate file](/docs/orb-concepts/#file-include-syntax) to avoid some of the pitfalls of YAML, as well as gaining access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
 
 ```bash
-REGION_VALUE=$(circleci env subst <<< "$PARAM_REGION")
+REGION_VALUE=$(circleci env subst "$PARAM_REGION")
 echo "Expect REGION_VALUE to be us-west-2: $REGION_VALUE"
 ```
 
