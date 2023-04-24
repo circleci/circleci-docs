@@ -274,7 +274,8 @@ steps:
       command: |
         # Use the API key
 ```
-In this example, the string value of `API_KEY` has been saved in the environment variable `PARAM_API_KEY`. In order to get the value of the environment variable with the name `API_KEY`, we must evaluate with [BASH parameter expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html).
+
+In this example, the string value of `API_KEY` is saved in the environment variable `PARAM_API_KEY`. In order to get the value of the environment variable with the name `API_KEY`, you must evaluate with [BASH parameter expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html).
 
 ```yaml
 steps:
