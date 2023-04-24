@@ -229,7 +229,13 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 ---
 
-**Question:** What happens if I try to use the functionality and it hasn't been set-up in my `.circleci/config.yml` file?
+**Question:** What happens if I try to use the functionality but `circleci tests run` is not used in the `.circleci/config.yml` file?
+
+**Answer:** All tests will be executed when the workflow runs again, including failed tests. This is equivalent to selecting "Rerun workflow from failed".  
+
+---
+
+**Question:** What happens if I try to use the functionality and `circleci tests run` is used in my `.circleci/config.yml` file, but I have not configured my job to upload test results to CircleCI?
 
 **Answer:** The job will fail.
 
