@@ -1,15 +1,10 @@
 ---
 
-categories: [configuration]
-redirect_from:
-  - /ja/config-overview/
-  - /ja/writing-yaml/
 contentTags:
   platform:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = YAML 設定ファイルの概要
 :page-layout: classic-docs
