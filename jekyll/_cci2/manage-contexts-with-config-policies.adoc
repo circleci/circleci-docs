@@ -34,6 +34,14 @@ The contexts helpers covered are as follows:
 
 * xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`]
 
+In the examples on this page, project IDs, branch names, and context names can be supplied using the following types:
+
+* String
+
+* Set of strings
+
+* Array of strings
+
 [#prerequisites]
 == Prerequisites
 
@@ -68,13 +76,7 @@ Example output:
 
 There are many reasons why you may want to only allow the use of certain contexts to specific projects. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys. To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction.
 
-This helper function accepts project ids (`PROJECTS`) and context names (`ALLOWED_CONTEXTS`), and prevents the usage of **any** context **not in** `ALLOWED_CONTEXTS` for **all** projects that are **in** `PROJECTS`. `PROJECTS` and `ALLOWED_CONTEXTS` can be supplied as one of the following types:
-
-* String
-
-* Set of strings
-
-* Array of strings
+This helper function accepts project ids and context names, and prevents the usage of **any** context **not** in the contexts allow-list, for **all** projects that are **in** the projects allow-list.
 
 [#create-your-policy-1]
 === 1. Create your policy
@@ -168,13 +170,7 @@ image::config-policies/context-fail.png[Dashboard page]
 
 To add an extra layer of security to secrets management, you may wish to block access to certain contexts for projects that should not have access to their secrets for security or compliance reasons. Use the `contexts_blocked_by_project_ids` helper to create a policy to apply this restriction.
 
-This helper function accepts project ids (`PROJECTS`) and context names (`BLOCKED_CONTEXTS`), and prevents the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects that are **in** `PROJECTS`. `PROJECTS` and `BLOCKED_CONTEXTS` can be supplied as one of the following types:
-
-* String
-
-* Set of strings
-
-* Array of strings
+This helper function accepts project ids (`PROJECTS`) and context names (`BLOCKED_CONTEXTS`), and prevents the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects that are **in** `PROJECTS`.
 
 [#create-your-policy-2]
 === 1. Create your policy
@@ -268,13 +264,7 @@ image::config-policies/context-fail-2.png[Dashboard page showing fail]
 
 You may want to reserve contexts for use by a defined list of projects, blocking the use of those contexts by any project not in the allow-list. One possible use case for this would be locking contexts related to OIDC access to those applications (projects) that need it, Any app npt needing this OIDC access will not be able to access those contexts, developers will receive a hard fail, and pipelines will fail to trigger.
 
-This helper function accepts project ids (`PROJECTS`) and context names (`RESERVED_CONTEXTS`), and prevents the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects that are **not in** `PROJECTS`. `PROJECTS` and `RESERVED_CONTEXTS` can be supplied as one of the following types:
-
-* String
-
-* Set of strings
-
-* Array of strings
+This helper function accepts project ids (`PROJECTS`) and context names (`RESERVED_CONTEXTS`), and prevents the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects that are **not in** `PROJECTS`.
 
 [#create-your-policy-3]
 === 1. Create your policy
@@ -360,6 +350,96 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 [#conclusion-3]
 === Conclusion
 Once your have pushed your new `reserve_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts in the allow-list, but the project is not included in the reserve list configured in your policy, the pipeline will fail to trigger, and developers will be notified on the dashboard.
+
+[#define-the-contexts-reserved-by-branch]
+== Define the contexts reserved by a branch
+
+You may want to restrict which contexts (and therefore secrets) are available depending on which branch is being built. Using this paradigm, you can manage your application environment in one repository, and lock down the use of secrets to individual branches, for example splitting up production secrets and development secrets. This allows you to ensure that production secrets cannot be accessed byt a build on a development branch. Use the xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`] helper to define a policy for this use case.
+
+This helper function accepts project ids (`BRANCHES`) and context names (`RESERVED_CONTEXTS`). Branches **not in** `BRANCHES` are prevented from using **any** context **in** `RESERVED_CONTEXTS`.
+
+[#create-your-policy-4]
+=== 1. Create your policy
+
+. If you have not already done so, create an empty directory to store your policies. For example:
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+
+. Create a new file in this directory for your new policy. Name the file `context_protection.rego`.
+
+. Copy the following snippet into the `context_protection.rego` file you just made:
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["prod_context_protection"]
+
+# Declare a rule
+use_prod_context_on_main = config.contexts_reserved_by_branches{["main"],
+    ["<context-1>","<context-2>"]
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_rule["use_prod_context_on_main"]{
+    allow-uri-read
+    }
+----
++
+NOTE: Notice the `contexts_reserved_by_branches` helper is accessed using the `config` keyword.
++
+In the following steps you will replace `<project-ID-1>` and `<context-1>` (and `<project-ID-2>` and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `reserve_contexts.rego` policy, once uploaded, will restrict your specified project so that it will not have access to your specified context(s).
+
+[#update-with-your-details-4]
+=== 2. Update policy with your details
+
+. Replace `<context-1>` with the name of context you want to all the use of. You can add multiple contexts as an array, or stick with one for now.
+** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
+
+[#push-up-your-policy-bundle-4]
+=== 3. Push up your policy bundle
+
+You can now push your new policy to your organization for it to take affect. You have two options, either push the policy manually using the CLI from your local environment, or push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+
+[tab.branch.manual]
+--
+Create and upload the policy bundle using CircleCI CLI:
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+If the upload was successful, you will see something like the following:
+
+[source,shell]
+----
+{
+  “Created”: [“prod_context_protection”]
+}
+----
+--
+
+[tab.branch.push_to_vcs]
+--
+If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+
+You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+--
+
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.
+
+[#conclusion-4]
+=== Conclusion
+Once your have pushed your new `context_protection.rego` policy, if an attempt to trigger a pipeline on a branch other than `main` is made, in which production contexts are used, the pipeline will fail to trigger, and developers will be notified on the dashboard.
 
 [#next-steps]
 == Next steps
