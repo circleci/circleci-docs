@@ -61,6 +61,8 @@ Example output:
 
 * It is recommended to run through the xref:create-and-manage-config-policies#create-a-policy[Create a policy] and xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS] guides first. Best practice is to use a repository within your organization to store and develop your policies. The xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS] guide walks through setting this up and setting up a pipeline for policy development.
 
+* To use the examples set out on this page, you will need to be using contexts to store secrets. For more information, see the xref:contexts#[Using contexts] page.
+
 [#define-the-contexts-allowed-for-a-project]
 == Define the contexts allowed for a project
 
@@ -241,7 +243,7 @@ If the upload was successful, you will see something like the following:
 [source,shell]
 ----
 {
-  “Created”: [“contexts_allowed_by_sample_project”]
+  “Created”: [“contexts_blocked_by_sample_project”]
 }
 ----
 --
@@ -260,6 +262,104 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 Once your have pushed your new `allow_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts in the block-list configured in your policy, the pipeline will fail to trigger, and developers will be notified on the dashboard as shown below.
 
 image::config-policies/context-fail-2.png[Dashboard page showing fail]
+
+[#define-the-contexts-reserved-by-a-project]
+== Define the contexts reserved by a project
+
+You may want to reserve contexts for use by a defined list of projects, blocking the use of those contexts by any project not in the allow-list. One possible use case for this would be locking contexts related to OIDC access to those applications (projects) that need it, Any app npt needing this OIDC access will not be able to access those contexts, developers will receive a hard fail, and pipelines will fail to trigger.
+
+This helper function accepts project ids (`PROJECTS`) and context names (`RESERVED_CONTEXTS`), and prevents the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects that are **not in** `PROJECTS`. `PROJECTS` and `RESERVED_CONTEXTS` can be supplied as one of the following types:
+
+* String
+
+* Set of strings
+
+* Array of strings
+
+[#create-your-policy-3]
+=== 1. Create your policy
+
+. If you have not already done so, create an empty directory to store your policies. For example:
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+
+. Create a new file in this directory for your new policy. Name the file `reserve_contexts.rego`.
+
+. Copy the following snippet into the `reserve_contexts.rego` file you just made:
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["reserved_contexts"]
+
+# Declare a rule
+rule_reserve_contexts = config.contexts_reserved_by_project_ids{
+    ["<project-ID-1>","<project-ID-1>"],
+    ["<context-1>","<context-2>"]
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_reserve_contexts"]
+----
++
+NOTE: Notice the `contexts_reserved_by_project_ids` helper is accessed using the `config` keyword.
++
+In the following steps you will replace `<project-ID-1>` and `<context-1>` (and `<project-ID-2>` and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `reserve_contexts.rego` policy, once uploaded, will restrict your specified project so that it will not have access to your specified context(s).
+
+[#update-with-your-details-3]
+=== 2. Update policy with your details
+
+. Replace `<project-ID-1>` with the ID for the project you want to restrict. You can add multiple project IDs as an array, or stick with one for now:
+** In the CIrcleCI web select **Projects** from the sidebar, and click the elipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
+
+. Replace `<context-1>` with the name of context you want to all the use of. You can add multiple contexts as an array, or stick with one for now.
+** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
+
+[#push-up-your-policy-bundle-3]
+=== 3. Push up your policy bundle
+
+You can now push your new policy to your organization for it to take affect. You have two options, either push the policy manually using the CLI from your local environment, or push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+
+[tab.reserve.manual]
+--
+Create and upload the policy bundle using CircleCI CLI:
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+If the upload was successful, you will see something like the following:
+
+[source,shell]
+----
+{
+  “Created”: [“reserved_contexts”]
+}
+----
+--
+
+[tab.reserve.push_to_vcs]
+--
+If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+
+You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+--
+
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.
+
+[#conclusion-3]
+=== Conclusion
+Once your have pushed your new `reserve_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts in the allow-list, but the project is not included in the reserve list configured in your policy, the pipeline will fail to trigger, and developers will be notified on the dashboard.
 
 [#next-steps]
 == Next steps
