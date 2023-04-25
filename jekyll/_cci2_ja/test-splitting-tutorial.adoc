@@ -5,7 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = テスト分割によるパイプラインの高速化
 :page-layout: classic-docs
