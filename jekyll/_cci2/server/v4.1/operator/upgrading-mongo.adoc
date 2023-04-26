@@ -27,6 +27,8 @@ The version of Mongo shipped with CircleCI server 4.1 is `3.6.22`.
 [#upgrade]
 == Upgrade
 
+=== Upgrading from Mongo 3.6 to 4.0
+
 Our `values.yaml` contains the following snippet:
 
 ```yaml
@@ -54,6 +56,8 @@ db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )
 
 You should get a `{ "ok" : 1 }` response from Mongo. Exit out of the Mongo shell and pod.
 
+=== Upgrading from Mongo 4.0 to 4.2
+
 Now change the tag to `4.2.17-debian-10-r99`:
 
 ```yaml
@@ -70,6 +74,8 @@ db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } )
 ```
 
 You should get `{ "ok" : 1 }` again. Exit out of the shell and pod.
+
+=== Upgrading from Mongo 4.2 to 4.4
 
 Change the tag one more time to `4.4.15-debian-10-r8`:
 
