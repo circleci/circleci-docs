@@ -5,21 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
-redirect_from:
-  - /ja/tutorials/
-  - /ja/demo-apps/
-  - /ja/language-android/
-  - /ja/language-clojure/
-  - /ja/language-crystal/
-  - /ja/language-dart/
-  - /ja/language-elixir/
-  - /ja/language-go/
-  - /ja/language-haskell/
-  - /ja/language-java/
-  - /ja/language-php/
-  - /ja/language-ruby/
-  - /ja/language-scala/
 ---
 = サンプルとガイドの概要
 :page-layout: classic-docs
