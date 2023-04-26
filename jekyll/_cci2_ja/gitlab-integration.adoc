@@ -3,9 +3,8 @@
 contentTags:
   platform:
   - クラウド
-redirect_from: /ja/GitLab-vcs-support
 ---
-= GitLab.com との連携
+= GitLab との連携
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、GitLab と CircleCI の連携方法についてわかりやすく説明します。
