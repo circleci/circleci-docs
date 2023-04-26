@@ -451,7 +451,7 @@ use_prod_context_on_main = config.contexts_reserved_by_branches{["main"],
     ["<context-1>","<context-2>"]
 }
 
-# This rule will apply to all projects subscribed in project_groups.rego under
+# This rule will apply to all projects subscribed in project_groups.rego under policy_restrict_context_access
 enable_rule["use_prod_context_on_main"]{
     policy_restrict_context_access[data.meta.project_id]
 }
