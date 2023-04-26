@@ -451,10 +451,11 @@ use_prod_context_on_main = config.contexts_reserved_by_branches{["main"],
     ["<context-1>","<context-2>"]
 }
 
-# Enable the rule and choose the hard_fail enforcement level
+# This rule will apply to all projects subscribed in project_groups.rego under
 enable_rule["use_prod_context_on_main"]{
-    allow-uri-read
-    }
+    policy_restrict_context_access[data.meta.project_id]
+}
+hard_fail["use_prod_context_on_main"]
 ----
 +
 NOTE: Notice the `contexts_reserved_by_branches` helper is accessed using the `config` keyword.
