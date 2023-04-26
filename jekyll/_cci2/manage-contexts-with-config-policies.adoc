@@ -459,8 +459,18 @@ hard_fail["use_prod_context_on_main"]
 ----
 +
 NOTE: Notice the `contexts_reserved_by_branches` helper is accessed using the `config` keyword.
+
+. Create a second rego file, names `project_groups.rego` to specify an additional restriction on which projects are affected by this rule. Replace `<project-ID>` with one of your project IDs
 +
-In the following steps you will replace `<project-ID-1>` and `<context-1>` (and `<project-ID-2>` and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `reserve_contexts.rego` policy, once uploaded, will restrict your specified project so that it will not have access to your specified context(s).
+`project_groups.rego`
++
+[source,rego]
+----
+# sets can be used to group variables
+policy_restrict_context_access := <project-ID>
+----
+
+In the following steps you will replace `<context-1>` (and `<context-2>` if you choose to use more than one) with _your_ context name. The `context_protection.rego` policy, once uploaded, will restrict use of your specified context(s) to builds on the `main` branch, for projects specified in `project_groups.rego`.
 
 [#update-with-your-details-4]
 === 2. Update policy with your details
