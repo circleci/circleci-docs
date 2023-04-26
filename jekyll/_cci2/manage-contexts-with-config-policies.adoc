@@ -74,9 +74,9 @@ Example output:
 [#define-the-contexts-allowed-for-a-project]
 == Define the contexts allowed for a project
 
-There are many reasons why you may want to only allow the use of certain contexts to specific projects. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys. To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction.
+There are many reasons why you may want to allow specific projects the use of only certain contexts. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys. To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction.
 
-This helper function accepts project ids and context names, and prevents the usage of **any** context **not** in the contexts allow-list, for **all** projects that are **in** the projects allow-list.
+This helper function accepts project ids and context names, and prevents the usage of context that are **not** specified for all specified projects.
 
 [#create-your-policy-1]
 === 1. Create your policy
@@ -101,7 +101,7 @@ package org
 import data.circleci.config
 
 # Declare a policy name
-policy_name["contexts_allowed_by_sample_project"]
+policy_name["contexts_allowed_by_project"]
 
 # Declare a rule
 rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
@@ -121,7 +121,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 === 2. Update policy with your details
 
 . Replace `<project-ID>` with the ID for the project you want to restrict:
-** In the CIrcleCI web select **Projects** from the sidebar, and click the elipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
+** In the CIrcleCI web select **Projects** from the sidebar, and click the ellipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
 
 . Replace `<context-1>` with the name of context you want to all the use of. You can add multiple contexts as an array, or stick with one for now.
 ** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
@@ -165,12 +165,75 @@ Once your have pushed your new `allow_contexts.rego` policy, if an attempt to tr
 
 image::config-policies/context-fail.png[Dashboard page]
 
+[#use-sets-and-variables]
+=== Use sets and variables
+
+In this example you have hard coded your project IDs and context names into your policy. This hard coding is not ideal as it makes the policies hard read and understand. A better way is to xref:config-policy-management-overview#use-sets-and-variables[use sets and variables] defined in separate `.rego` files. To illustrate this method, follow these steps:
+
+. Create three files for your contexts and IDs: `project_ids.rego`, `project_groups.rego` and `context_groups.rego` so you end up with the following file structure:
++
+[source,shell]
+----
+├── config-policies/
+│   ├── allow_contexts.rego
+│   ├── project_ids.rego
+│   ├── project_groups.rego
+│   ├── context_groups.rego
+----
+
+. Add the following to your new `.rego` files, and replace IDs and context names shown between `< >` with your data as shown in the previous section:
++
+** `project_id.rego`
++
+[source,rego]
+----
+# Single application project IDs. Can be automated.
+my_project_id := “<project-ID>”
+----
+** `project_groups.rego`
++
+[source,rego]
+----
+# sets can be used to group variables
+Front_end_applications := {my_project_id}
+----
+** `context_groups.rego`
++
+[source,rego]
+----
+# sets can be used to group variables
+Front_end_application_contexts := {"<context-1>","<context-2>"}
+----
+
+. You can now rewrite your `allow_policy.rego` policy as follows:
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["contexts_allowed_by_sample_project"]
+
+# Declare a rule
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+    Front_end_applications,
+    Front_end_application_contexts
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_contexts_allowed_by_project_ids"]
+----
+
 [#define-the-contexts-blocked-for-a-project]
 == Define the contexts blocked for a project
 
 To add an extra layer of security to secrets management, you may wish to block access to certain contexts for projects that should not have access to their secrets for security or compliance reasons. Use the `contexts_blocked_by_project_ids` helper to create a policy to apply this restriction.
 
-This helper function accepts project ids (`PROJECTS`) and context names (`BLOCKED_CONTEXTS`), and prevents the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects that are **in** `PROJECTS`.
+This helper function accepts project ids and context names, and prevents the usage of any specified contexts for all specified projects.
 
 [#create-your-policy-2]
 === 1. Create your policy
@@ -264,7 +327,7 @@ image::config-policies/context-fail-2.png[Dashboard page showing fail]
 
 You may want to reserve contexts for use by a defined list of projects, blocking the use of those contexts by any project not in the allow-list. One possible use case for this would be locking contexts related to OIDC access to those applications (projects) that need it, Any app npt needing this OIDC access will not be able to access those contexts, developers will receive a hard fail, and pipelines will fail to trigger.
 
-This helper function accepts project ids (`PROJECTS`) and context names (`RESERVED_CONTEXTS`), and prevents the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects that are **not in** `PROJECTS`.
+This helper function accepts project ids and context names. It prevents the usage of any specified context for projects that are not specified.
 
 [#create-your-policy-3]
 === 1. Create your policy
@@ -356,7 +419,7 @@ Once your have pushed your new `reserve_contexts.rego` policy, if an attempt to 
 
 You may want to restrict which contexts (and therefore secrets) are available depending on which branch is being built. Using this paradigm, you can manage your application environment in one repository, and lock down the use of secrets to individual branches, for example splitting up production secrets and development secrets. This allows you to ensure that production secrets cannot be accessed byt a build on a development branch. Use the xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`] helper to define a policy for this use case.
 
-This helper function accepts project ids (`BRANCHES`) and context names (`RESERVED_CONTEXTS`). Branches **not in** `BRANCHES` are prevented from using **any** context **in** `RESERVED_CONTEXTS`.
+This helper function accepts project ids and context names. Any unspecified branches are prevented from using **any** specified contexts.
 
 [#create-your-policy-4]
 === 1. Create your policy
