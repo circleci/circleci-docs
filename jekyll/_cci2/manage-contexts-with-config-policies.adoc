@@ -13,7 +13,7 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-Follow this how-to guide to learn how to create config policies to manage the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
+Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
 
 [#introduction]
 == Introduction
@@ -74,9 +74,9 @@ Example output:
 [#define-the-contexts-allowed-for-a-project]
 == Define the contexts allowed for a project
 
-There are many reasons why you may want to allow specific projects the use of only certain contexts. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys. To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction.
+There are many reasons why you may want to allow specific projects the use of only certain contexts. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys.
 
-This helper function accepts project IDs and context names, and prevents the usage of context that are **not** specified for all specified projects.
+To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction. This helper function accepts project IDs and context names, and prevents the usage of contexts that are **not** in the allow-list for all specified projects.
 
 [#create-your-policy-1]
 === 1. Create your policy
@@ -115,7 +115,7 @@ enable_hard["rule_contexts_allowed_by_project_ids"]
 +
 NOTE: Notice the `contexts_allowed_by_project_ids` helper is accessed using the `config` keyword.
 +
-In the following steps you will replace `<project-ID>` and `<context-1>` (and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `allow_contexts.rego` policy, once uploaded, will restrict your specified project to only only have access to your specified context(s).
+In the following steps you will replace `<project-ID>` and `<context-1>` (and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `allow_contexts.rego` policy, once uploaded, will restrict your specified project to only have access to the context(s) in your allow-list.
 
 [#update-with-your-details-1]
 === 2. Update policy with your details
@@ -234,9 +234,9 @@ enable_hard["rule_contexts_allowed_by_project_ids"]
 [#define-the-contexts-blocked-for-a-project]
 == Define the contexts blocked for a project
 
-To add an extra layer of security to secrets management, you may wish to block access to certain contexts for projects that should not have access to their secrets for security or compliance reasons. Use the `contexts_blocked_by_project_ids` helper to create a policy to apply this restriction.
+To add an extra layer of security to secrets management, you may wish to block access to certain contexts for projects that should not have access to their secrets for security or compliance reasons.
 
-This helper function accepts project IDs and context names, and prevents the usage of any specified contexts for all specified projects.
+Use the `contexts_blocked_by_project_ids` helper to create a policy to apply this restriction. This helper function accepts project IDs and context names, and prevents the usage of any contexts in the block-list for all specified projects.
 
 [#create-your-policy-2]
 === 1. Create your policy
@@ -275,7 +275,7 @@ enable_hard["rule_contexts_blocked_by_project_ids"]
 +
 NOTE: Notice the `contexts_blocked_by_project_ids` helper is accessed using the `config` keyword.
 +
-In the following steps you will replace `<project-ID>` and `<context-1>` (and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `block_contexts.rego` policy, once uploaded, will restrict your specified project so that it will not have access to your specified context(s).
+In the following steps you will replace `<project-ID>` and `<context-1>` (and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `block_contexts.rego` policy, once uploaded, will restrict your specified project so that it will not have access to the context(s) in your block-list.
 
 [#update-with-your-details-2]
 === 2. Update policy with your details
@@ -333,7 +333,7 @@ image::config-policies/context-fail-2.png[Dashboard page showing fail]
 
 You may want to reserve contexts for use by a defined list of projects, blocking the use of those contexts by any project not in the allow-list. One possible use case for this would be locking contexts related to OIDC access to only those applications (projects) that need it. Any app that does not need this OIDC access will not be able to access those contexts. Developers will receive a hard fail, and pipelines will fail to trigger.
 
-This helper function accepts project IDs and context names. It prevents the usage of any specified context for projects that are not in the allow-list.
+Use the `contexts_reserved_by_project_ids` helper to create a policy to apply this restriction. This helper function accepts project IDs and context names. It prevents the usage of any reserved contexts for projects that are not in the allow-list.
 
 [#create-your-policy-3]
 === 1. Create your policy
@@ -426,9 +426,9 @@ Once you have pushed your new `reserve_contexts.rego` policy, if an attempt to t
 [#define-the-contexts-reserved-by-branch]
 == Define the contexts reserved by a branch
 
-You may want to restrict which contexts (and therefore secrets) are available depending on which branch is being built. Using branch-based restrictions, you can manage your application environment in one repository, and lock down the use of secrets to individual branches. For example, you could split up production secrets and development secrets. This allows you to ensure that production secrets cannot be accessed by a build on a development branch. Use the xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`] helper to define a policy for this use case.
+You may want to restrict which contexts (and therefore secrets) are available depending on which branch is being built. Using branch-based restrictions, you can manage your application environment in one repository, and lock down the use of secrets to individual branches. For example, you could split up production secrets and development secrets. This allows you to ensure that production secrets cannot be accessed by a build on a development branch.
 
-This helper function accepts branch names and context names. Only specified branches are allowed to use contexts in the allow-list.
+Use the xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`] helper to define a policy for this use case. This helper function accepts branch names and context names. Only pipelines running on specified branches are allowed access to contexts in the allow-list.
 
 [#create-your-policy-4]
 === 1. Create your policy
