@@ -331,7 +331,7 @@ image::config-policies/context-fail-2.png[Dashboard page showing fail]
 [#define-the-contexts-reserved-by-a-project]
 == Define the contexts reserved by a project
 
-You may want to reserve contexts for use by a defined list of projects, blocking the use of those contexts by any project not in the allow-list. One possible use case for this would be locking contexts related to OIDC access to those applications (projects) that need it, Any app npt needing this OIDC access will not be able to access those contexts, developers will receive a hard fail, and pipelines will fail to trigger.
+You may want to reserve contexts for use by a defined list of projects, blocking the use of those contexts by any project not in the allow-list. One possible use case for this would be locking contexts related to OIDC access to only those applications (projects) that need it. Any app that does not need this OIDC access will not be able to access those contexts. Developers will receive a hard fail, and pipelines will fail to trigger.
 
 This helper function accepts project ids and context names. It prevents the usage of any specified context for projects that are not specified.
 
