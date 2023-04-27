@@ -236,7 +236,7 @@ enable_hard["rule_contexts_allowed_by_project_ids"]
 
 To add an extra layer of security to secrets management, you may wish to block access to certain contexts for projects that should not have access to their secrets for security or compliance reasons. Use the `contexts_blocked_by_project_ids` helper to create a policy to apply this restriction.
 
-This helper function accepts project ids and context names, and prevents the usage of any specified contexts for all specified projects.
+This helper function accepts project IDs and context names, and prevents the usage of any specified contexts for all specified projects.
 
 [#create-your-policy-2]
 === 1. Create your policy
