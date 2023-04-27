@@ -76,7 +76,7 @@ Example output:
 
 There are many reasons why you may want to allow specific projects the use of only certain contexts. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys. To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction.
 
-This helper function accepts project ids and context names, and prevents the usage of context that are **not** specified for all specified projects.
+This helper function accepts project IDs and context names, and prevents the usage of context that are **not** specified for all specified projects.
 
 [#create-your-policy-1]
 === 1. Create your policy
