@@ -171,7 +171,7 @@ image::config-policies/context-fail.png[Dashboard page]
 [#use-sets-and-variables]
 === Use sets and variables
 
-In this example you have hard coded your project IDs and context names into your policy. This hard coding is not ideal as it makes the policies hard read and understand. A better way is to xref:config-policy-management-overview#use-sets-and-variables[use sets and variables] defined in separate `.rego` files. To illustrate this method, follow these steps:
+In this example, you have hard coded your project IDs and context names into your policy. This hard coding is not ideal as it makes the policies hard to read and understand. A better way is to xref:config-policy-management-overview#use-sets-and-variables[use sets and variables] defined in separate `.rego` files. To use this method, follow these steps:
 
 . Create three files for your contexts and IDs: `project_ids.rego`, `project_groups.rego` and `context_groups.rego` so you end up with the following file structure:
 +
