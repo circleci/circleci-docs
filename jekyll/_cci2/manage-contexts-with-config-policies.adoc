@@ -421,7 +421,7 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 
 [#conclusion-3]
 === Conclusion
-Once your have pushed your new `reserve_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts in the allow-list, but the project is not included in the reserve list configured in your policy, the pipeline will fail to trigger, and developers will be notified on the dashboard.
+Once you have pushed your new `allow_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts in the block-list configured in your policy, the pipeline will fail to trigger. Developers will be notified on the dashboard as shown below.
 
 [#define-the-contexts-reserved-by-branch]
 == Define the contexts reserved by a branch
