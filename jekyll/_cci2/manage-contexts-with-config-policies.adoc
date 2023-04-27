@@ -372,7 +372,7 @@ enable_hard["rule_reserve_contexts"]
 +
 NOTE: Notice the `contexts_reserved_by_project_ids` helper is accessed using the `config` keyword.
 +
-In the following steps you will replace `<project-ID-1>` and `<context-1>` (and `<project-ID-2>` and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `reserve_contexts.rego` policy, once uploaded, will restrict your specified project so that it will not have access to your specified context(s).
+In the following steps you will replace `<project-ID-1>` and `<context-1>` (and `<project-ID-2>` and `<context-2>` if you choose to use more than one) with _your_ projects and contexts. The `reserve_contexts.rego` policy, once uploaded, will restrict your specified context(s) so that they can only be used by the project you have allowed.
 
 [#update-with-your-details-3]
 === 2. Update policy with your details
