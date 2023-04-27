@@ -164,7 +164,7 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 
 [#conclusion-1]
 === Conclusion
-Once your have pushed your new `allow_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts outside of those allowed in your policy, the pipeline will fail to trigger, and developers will be notified on the dashboard as shown below.
+Once you have pushed your new `allow_contexts.rego` policy, if an attempt to trigger a pipeline is made, in which the specified project has access to contexts in the block-list configured in your policy, the pipeline will fail to trigger. Developers will be notified on the dashboard as shown below.
 
 image::config-policies/context-fail.png[Dashboard page]
 
