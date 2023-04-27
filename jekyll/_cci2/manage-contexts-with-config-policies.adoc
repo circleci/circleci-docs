@@ -428,7 +428,7 @@ Once you have pushed your new `allow_contexts.rego` policy, if an attempt to tri
 
 You may want to restrict which contexts (and therefore secrets) are available depending on which branch is being built. Using this paradigm, you can manage your application environment in one repository, and lock down the use of secrets to individual branches, for example splitting up production secrets and development secrets. This allows you to ensure that production secrets cannot be accessed byt a build on a development branch. Use the xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`] helper to define a policy for this use case.
 
-This helper function accepts project ids and context names. Any unspecified branches are prevented from using **any** specified contexts.
+This helper function accepts project IDs and context names. Any unspecified branches are prevented from using **any** specified contexts.
 
 [#create-your-policy-4]
 === 1. Create your policy
