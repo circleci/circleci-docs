@@ -289,7 +289,10 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 [#push-up-your-policy-bundle-2]
 === 3. Push up your policy bundle
 
-You can now push your new policy to your organization for it to take affect. You have two options, either push the policy manually using the CLI from your local environment, or push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+You can now push your new policy to your organization for it to take effect. You have two options: 
+
+* Push the policy manually using the CLI from your local environment, or;
+* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.block.manual]
 --
