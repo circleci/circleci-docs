@@ -140,7 +140,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 * Contributor (コントリビューター): プロジェクトや一部の設定の読み取りと書き込みアクセス権
 * Viewer (閲覧者): プロジェクトや一部の設定の読み取りアクセス権のみ
 
-すべての権限のリストは、「<<roles-and-permissions,Roles and permissions>>」セクションをご確認ください。
+すべての権限のリストは、「<<roles-and-permissions,ロールと権限>>」セクションをご確認ください。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
