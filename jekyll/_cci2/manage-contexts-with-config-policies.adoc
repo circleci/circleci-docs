@@ -525,7 +525,7 @@ NOTE: If you would like to write tests for your policy, check out the xref:test-
 
 [#conclusion-4]
 === Conclusion
-Once your have pushed your new `context_protection.rego` policy, if an attempt to trigger a pipeline on a branch other than `main` is made, in which production contexts are used, the pipeline will fail to trigger, and developers will be notified on the dashboard.
+Once you have pushed your new `context_protection.rego` policy, if an attempt to trigger a pipeline on a branch other than `main` is made, in which production contexts are used, the pipeline will fail to trigger. Developers will also be notified on the dashboard.
 
 [#next-steps]
 == Next steps
