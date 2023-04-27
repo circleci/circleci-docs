@@ -1,11 +1,11 @@
 ---
 
-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
+description: セルフホストランナーでジョブを実行可能なプロジェクトを制限するポリシーを作成する方法について解説します。
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Config policies for self-hosted runner (Open-preview)
+= 設定ファイルのポリシーをセルフホストランナーに適用する (オープンプレビュー)
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,16 +13,16 @@ contentTags:
 
 :toc-title:
 
-NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
+NOTE: 設定ファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
 
-Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
+このガイドでは、セルフホストランナーのリソースクラス上でジョブを実行可能なプロジェクトを制限する設定ファイルポリシーの作成方法について説明します。 設定ファイルのポリシーの詳細については、「xref:config-policy-management-overview#[設定ファイルのポリシー管理機能の概要]」を参照してください。
 
 [#prerequisites]
 == 前提条件
 
-* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
-* Set up a self-hosted runner. See the xref:runner-installation#[Installing self-hosted runners] guide.
-* Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
+* CircleCI CLI をインストールまたは更新する。CLI で設定ファイルのポリシーを利用する前に、トークンで認証を行ってください。 詳細については、「xref:local-cli#[CircleCI のローカル CLI のインストール]」をご覧ください。
+* セルフホストランナーをセットアップする。 xref:runner-installation#[セルフホストランナーのインストールガイド]をご覧ください。
+* 以下のように、組織で設定ファイルポリシーの評価を **enabled** に設定する。この設定により、パイプラインのトリガー時に、組織のポリシーに対するプロジェクト設定の評価が**行われます**。
 +
 [source,shell]
 ----
@@ -41,16 +41,16 @@ circleci policy settings --enabled=true --owner-id <your-organization-ID>
 {% include snippets/find-organization-id.adoc %}
 
 [#create-your-policy]
-== 1.  Create your policy
+== 1.  ポリシーを作成する
 
-. If you have not already done so, create an empty directory to store your policies. たとえば以下のようになります。
+. まだ作成していない場合は、まずポリシー保存用の空のディレクトリを作成します。 以下に例を示します。
 +
 [source,shell]
 ----
 mkdir ./config-policies
 ----
-. Create a new file in this directory for your new policy. Name the file `runner.rego`.
-. Copy the following snippet into the `runner.rego` file you just made:
+. 保存用のディレクトリ内に、新しいポリシーのファイルを作成します。 名前は `runner.rego` とします。
+. 作成した `runner.rego` ファイルに、以下のスニペットを貼り付けます。
 +
 [source,rego]
 ----
@@ -64,29 +64,29 @@ enable_hard["resource_class_check"]
 resource_class_check = config.resource_class_by_project({ "namespace/resource_class": {"project_UUIDs"}})
 ----
 +
-In the following steps you will replace `namespace/resource_class` and `project_UUIDs` with one of your self-hosted runner resource classes, and one of your existing projects. The `runner.rego` policy, once uploaded, will then restrict your specified self-hosted runner to only run jobs from your specified project.
+以降の手順では、`namespace/resource_class` と `project_UUIDs` を、実際のセルフホストランナーのリソースクラスと既存のプロジェクトに置き換えます。 置き換え後の `runner.rego` ポリシーをアップロードすると、指定したセルフホストランナーで、指定したプロジェクトのジョブ以外を実行できなくなります。
 
 [#update-with-your-details]
-== 2. Update policy with your details
+== 2. ポリシーに実際の情報を入力する
 
-. Replace `namespace/resource_class` with one of your runner resource classes:
-.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have followed the xref:runner-installation#[Installing self-hosted runners] guide. Here you will see all your available self-hosted runner resource classes.
-.. Replace `namespace/resource_class` in the `runner.rego` file with the name of the resource class that you would like to restrict.
-. Replace `project_UUIDs` with a project ID:
-.. In the CircleCI web app, navigate to your projects dashboard by selecting **Projects** in the sidebar. Find the project you want to allow to build on your self-hosted runner, and then click the ellipsis (`...`) next to that project and select **Project Settings**.
-.. Copy the Project ID from the overview page and replace `project_UUIDs` with this project ID.
+. `namespace/resource_class` を、対象のランナーのリソースクラスで置き換えます。
+.. CircleCI Web アプリのサイドバーで **[Self-Hosted Runners (セルフホストランナー)]** を選択して、セルフホストランナーのインベントリに移動します。 このオプションが表示されない場合は、xref:runner-installation#[セルフホストランナーのインストール]を完了しているか確認してください。 このページに、利用可能なセルフホストランナーのリソースクラスがすべて表示されます。
+.. `runner.rego` ファイルの `namespace/resource_class` を、制限の対象にするリソースクラスの名前で置き換えます。
+. `project_UUIDs` をプロジェクトの ID で置き換えます。
+.. CircleCI Web アプリのサイドバーで **[Projects (プロジェクト)]** を選択して、プロジェクトダッシュボードに移動します。 セルフホストランナーでのビルドを許可するプロジェクトを見つけて、プロジェクトの隣に表示される省略記号 (`...`) をクリックし、**[Project Settings (プロジェクト設定)]** を選択します。
+.. 概要ページでプロジェクト ID をコピーして、`project_UUIDs` と置き換えます。
 
 [#push-up-your-policy-bundle]
-== 3. Push up your policy bundle
+== 3. ポリシーバンドルをプッシュする
 
-Create and upload the policy bundle using CircleCI CLI:
+CircleCI CLI を使用して、ポリシーバンドルを作成しアップロードします。
 
 [source,shell]
 ----
 circleci policy push ./config-policies –owner-id <your-organization-ID>
 ----
 
-If the upload was successful, you will see something like the following:
+アップロードに成功すると、以下のようなメッセージが表示されます。
 
 [source,shell]
 ----
@@ -95,14 +95,14 @@ If the upload was successful, you will see something like the following:
 }
 ----
 
-NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.
+NOTE: ポリシーのテストの作成方法については、「xref:test-config-policies#[設定ファイルのポリシーのテスト]」を参照してください。
 
 [#a-more-complex-example]
-== A more complex example
+== 応用例
 
-Once you have this runner restriction policy up and running, you can quickly add more runner resource class/project pairings, and allow multiple projects per runner. To do this you will expand the `resource_class_check` rule.
+このランナー制限ポリシーを基にして、ランナーリソースクラスとプロジェクトのペアをさらに追加したり、ランナー 1 つに複数のプロジェクトを許可したりできます。 そのためには、`resource_class_check` ルールを拡張します。
 
-The following snippet shows two separate runner resource classes (`my-namespace/runner-test1` and `my-namespace/runner-test2`) with allowed projects, the first has two projects in its allowed list.
+以下のスニペットでは、ランナーリソースクラスを 2 つ (`my-namespace/runner-test1` と `my-namespace/runner-test2`) 指定し、それぞれに実行を許可するプロジェクトを設定しています。また、最初のリソースクラスでは、実行許可リストにプロジェクトを 2 つ設定しています。
 
 [source,rego]
 ----
@@ -129,6 +129,6 @@ resource_class_check = config.resource_class_by_project({
 [#next-steps]
 == 次のステップ
 
-* xref:create-and-manage-config-policies#[Create and manage config policies]
-* xref:test-config-policies#[Test config policies]
-* xref:config-policy-reference#[Config policy reference]
+* xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]
+* xref:test-config-policies#[設定ファイルのポリシーのテスト]
+* xref:config-policy-reference#[設定ファイルのポリシーに関するリファレンス]
