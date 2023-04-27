@@ -13,9 +13,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
+{% include snippets/runner-1.0-deprecation-first.adoc %}
 
-toc::[]
+This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 
 [#authentication-methods]
 == Authentication methods
