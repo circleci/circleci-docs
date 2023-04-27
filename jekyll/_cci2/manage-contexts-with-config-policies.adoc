@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Manage contexts with config policies (Open-preview)
+= Manage contexts with config policies (Open preview)
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to manage the use of contexts with config policies.
