@@ -1,1 +1,0 @@
-If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
