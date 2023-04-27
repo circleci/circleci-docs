@@ -45,7 +45,7 @@ In the examples on this page, project IDs, branch names, and context names can b
 [#prerequisites]
 == Prerequisites
 
-* A xref:first-steps#[CircleCI account] connected to a supported VCS
+* A xref:first-steps#[CircleCI account] connected to a supported VCS.
 
 * Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
