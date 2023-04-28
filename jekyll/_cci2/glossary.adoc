@@ -30,7 +30,7 @@ A container is a running instance of an image.
 [#docker-layer-caching]
 == Docker layer caching
 
-The CircleCI Docker Layer Caching feature allows builds to reuse Docker image layers from previous builds. Layers may only be used by builds from the same project. For additional information about how the secure environment is created, see the <<docker-layer-caching#,Docker Layer Caching>> and <<building-docker-images#,Running Docker Commands>> documents.
+The CircleCI Docker Layer Caching (DLC) feature allows builds to reuse Docker image layers from previous builds. Use DLC to speed up workflows. Jobs that are configured to build docker images run in a shorter time on subsequent runs. Layers may only be used by builds from the same project. For more information and usage examples, see the xref:docker-layer-caching#[Docker Layer Caching] and xref:building-docker-images#[Running Docker Commands] pages.
 
 [#environment-variables]
 == Environment variables
