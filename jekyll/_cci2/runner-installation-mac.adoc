@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-first.adoc %}
+
 This page describes how to install CircleCI's machine runner on macOS.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
