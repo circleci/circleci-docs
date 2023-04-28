@@ -21,6 +21,7 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 Docker layer caching can be used with both the `machine` executor and in the [remote Docker environment](/docs/building-docker-images/) (`setup_remote_docker`).
 
 ## Quickstart
+{: #quickstart }
 
 ### Remote Docker environment
 {: #remote-docker-environment }
