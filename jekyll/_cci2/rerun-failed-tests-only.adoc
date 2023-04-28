@@ -20,7 +20,7 @@ CircleCI is releasing new preview functionality to **re-run failed tests only**.
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This re-run failed tests only re-runs failed tests from the _same_ commit, not new ones.
+This re-run failed tests only option re-runs failed tests from the _same_ commit, not new ones.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
