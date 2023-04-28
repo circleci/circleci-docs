@@ -16,7 +16,7 @@ Use Docker layer caching (DLC) to reduce Docker image build times on CircleCI. D
 
 Docker layer caching (DLC) is beneficial if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, using a [_sparse file_](https://en.wikipedia.org/wiki/Sparse_file).
 
-DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building jobs will run.
+DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent job runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the less time your image-building jobs will take to run.
 
 Docker layer caching can be used with both the `machine` executor and in the [remote Docker environment](/docs/building-docker-images/) (`setup_remote_docker`).
 
@@ -25,11 +25,20 @@ Docker layer caching can be used with both the `machine` executor and in the [re
 ### Remote Docker environment
 {: #remote-docker-environment }
 
-To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [`.circleci/config.yml`](/docs/configuration-reference/) file:
+To use DLC with the Docker execution environment, you will need to configure your job to run in the Remote Docker Environment. To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [`.circleci/config.yml`](/docs/configuration-reference/) file:
 
-```yml
-- setup_remote_docker:
-    docker_layer_caching: true  # default - false
+```yaml
+version: 2.1
+
+jobs:
+ build:
+    docker:
+      - image: cimg/base:2023.04
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
 ```
 
 Every layer built in a previous job will be accessible in the Remote Docker Environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
@@ -42,9 +51,16 @@ If you run many concurrent jobs for the same project that depend on the same env
 DLC can be used when building Docker images using the [`machine` executor](/docs/configuration-reference/#machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key:
 
 ```yml
-machine:
-  image: ubuntu-2004:202104-01  # any available image
-  docker_layer_caching: true    # default - false
+version: 2.1
+
+jobs:
+ build:
+    machine:
+      image: ubuntu-2004:202104-01  # any available image
+      docker_layer_caching: true    # default - false
+
+    steps:
+      - checkout
 ```
 
 ## Limitations
