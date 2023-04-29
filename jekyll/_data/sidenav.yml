@@ -608,7 +608,7 @@ en:
           - name: Additional considerations
             link: server/v4.1/air-gapped-installation/additional-considerations
           - name: Example values.yaml
-            link: server/v4.1/air-gapped-installation/example-values.yaml
+            link: server/v4.1/air-gapped-installation/example-values
       - name: Server v4.1 operations
         children:
           - name: Operator overview
