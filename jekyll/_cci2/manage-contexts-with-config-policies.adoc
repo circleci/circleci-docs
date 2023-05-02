@@ -484,7 +484,7 @@ In the following steps you will replace `<context-1>` (and `<context-2>` if you 
 [#update-with-your-details-4]
 === 2. Update policy with your details
 
-. Replace `<context-1>` with the name of context you want to all the use of. You can add multiple contexts as an array, or stick with one for now.
+. Replace `<context-1>` with the name of the context you want to allow the use of. You can add multiple contexts as an array, or stick with one for now.
 ** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
 
 [#push-up-your-policy-bundle-4]
