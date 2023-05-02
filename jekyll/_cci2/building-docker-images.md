@@ -16,30 +16,21 @@ This page explains how to build Docker images for deployment and further testing
 ## Overview
 {: #overview }
 
-The underlying implementation for remote Docker is in the process of being updated. **There is no action required.** All content on this page refers to the existing implementation of remote Docker that is being phased out. When all jobs have been migrated to the new implementation, the content on this page will be updated to reflect the new architecture.
-<br>
-Visit the [Discuss post](https://discuss.circleci.com/t/setup-remote-docker-architecture-change/45303) to learn more about the new architecture, and to follow updates regarding the rollout.
-{: class="alert alert-info"}
-
-To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which allows Docker commands to be run locally, similarly to the [Linux VM execution environment](/docs/using-linux/). If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```yaml
 jobs:
   build:
     docker:
       - image: cimg/base:2022.06
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
           version: 20.10.14
 ```
 
-When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
-
-**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
+The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If you are using an execution environment **other** than Docker, and you want to use docker commands in your config, you do **not** need to use the `setup_remote_docker` key.
+{: class="alert alert-info"}
 
 ## Specifications
 {: #specifications }
@@ -150,10 +141,12 @@ CircleCI supports multiple versions of Docker. The following are the available v
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+{: class="alert alert-info"}
 
 ## Separation of environments
 {: #separation-of-environments }
+
 The job and [remote docker]({{ site.baseurl }}/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
 
 ### Accessing services
@@ -280,10 +273,10 @@ Thanks to ryansch for contributing this example.
 ## See also
 {: #see-also }
 
-[Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/)
+* [Docker Layer Caching](/docs/docker-layer-caching/)
 
-[job-space]({{ site.baseurl }}/glossary/#job-space)
+* [job-space](/docs/glossary/#job-space)
 
-[primary-container]({{ site.baseurl }}/glossary/#primary-container)
+* [primary-container](/docs/glossary/#primary-container)
 
-[docker-layer-caching]({{ site.baseurl }}/glossary/#docker-layer-caching)
+* [docker-layer-caching](/docs/glossary/#docker-layer-caching)
