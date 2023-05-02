@@ -1,7 +1,7 @@
 //[#machine-runner-prerequisites]
 //== Machine runner prerequisites
 
-To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
 
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
 * https://curl.se/[curl] (installed by default on macOS)
@@ -13,3 +13,4 @@ To install and run jobs, you will need to have root access, and have the followi
 * https://www.gnu.org/software/gzip/[gzip]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
