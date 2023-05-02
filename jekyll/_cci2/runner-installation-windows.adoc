@@ -49,7 +49,7 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 --
 
 [#installation-steps]
-== 2. Installation steps
+== 2. Machine runner installation on Windows
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 
