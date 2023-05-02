@@ -12,6 +12,7 @@ contentTags:
 :icons: font
 :toc: macro
 :toc-title:
+:machine:
 
 This page describes how to install CircleCI's machine runner on Linux.
 

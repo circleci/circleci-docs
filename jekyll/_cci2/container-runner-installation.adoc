@@ -12,6 +12,7 @@ contentTags:
 :icons: font
 :toc: macro
 :toc-title:
+:container:
 
 This page describes how to install CircleCI's container runner.
 

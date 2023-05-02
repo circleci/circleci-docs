@@ -26,20 +26,19 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, s
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
 . You will need to follow the platform-specific installation instructions to continue. There is a **Container** tab for setting up container runner, as well as a **Machine** tab for setting up self-hosted runners in Linux, macOS, and Windows. Click the tab in the UI that is relevant to your environment.
+ifdef::container[]
 +
-[.tab.runner.Container_runner_UI]
---
 .Install container runner through the web app
 image::runnerui_step_four_cr.png[Container runner in the web app]
---
 +
-[.tab.runner.Machine_runner_UI]
---
+endif::[]
+ifdef::machine[]
++
 .Install machine runner through the web app
 image::runnerui_step_four.png[Machine runner in the web app]
---
 +
-The instructions for specific platforms can be found in the web app, but also in our documentation. See the <<#platform-specific-instructions,Platform-specific instructions>> section for a list of platform-specific pages.
+endif::[]
+The instructions for specific platforms can be found in the web app, but are also included in a later section in this installation guide.
 
 . You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if one doesn't exist in your config. If you don't have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
 +
