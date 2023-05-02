@@ -100,7 +100,7 @@ If part of the Dockerfile changes (which changes part of the image), a subsequen
 If you change something in your Dockerfile, all of the later steps (from the point that the change was made) are invalidated and the layers have to be rebuilt. When some of the steps remain the same (the steps before the one you removed), those steps can be reused. So, it is still faster than rebuilding the entire image.
 
 ### Parallelism and DLC
-{: parallelism-and-dlc }
+{: #parallelism-and-dlc }
 
 DLC operates in the same way for jobs that use parallelism. If a `machine` job using DLC is configured with `parallelism: 2`, two jobs run in parallel. Each virtual machine in this case will have a separate DLC cache, and whichever is saved last will be used for the next build.
 
