@@ -99,6 +99,8 @@ If part of the Dockerfile changes (which changes part of the image), a subsequen
 
 If you change something in your Dockerfile, all of the later steps (from the point that the change was made) are invalidated and the layers have to be rebuilt. When some of the steps remain the same (the steps before the one you removed), those steps can be reused. So, it is still faster than rebuilding the entire image.
 
+There is a “DLC set-up” step at the beginning of each job that uses DLC. You are not charged for this step. At the end of each job that uses DLC, the cache upload is done asynchronously, and does not prevent the workflow from continuing to progress. This means that jobs within the same workflow are unlikely to access a cache uploaded from an upstream job. You are not charged for this “DLC teardown” step.
+
 ### Parallelism and DLC
 {: #parallelism-and-dlc }
 
