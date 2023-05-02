@@ -31,9 +31,16 @@ This page describes how to install CircleCI's container runner.
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class 
 
-{% include snippets/runner/install-pre-steps.adoc %}
+[.tab.container-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.container-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+--
 
-[#installation-instructions]
+[#container-runner-installation]
 == 2. Container runner installation
 
 . Add the container runner Helm repo by running `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`

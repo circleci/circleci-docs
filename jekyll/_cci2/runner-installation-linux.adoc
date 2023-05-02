@@ -31,7 +31,15 @@ This page describes how to install CircleCI's machine runner on Linux.
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class 
 
-{% include snippets/runner/install-pre-steps.adoc %}
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
 
 [#download-the-launch-agent-script]
 == 2. Download the machine runner launch-agent script

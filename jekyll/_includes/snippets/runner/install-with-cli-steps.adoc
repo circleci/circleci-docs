@@ -1,6 +1,4 @@
-//[#command-line-installation]
-//== Command line installation
-
+//== Command line installation: pre-steps
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 
 In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
@@ -27,15 +25,9 @@ circleci runner resource-class create <namespace>/<resource-class> <description>
 *Your namespace is required in the command to create your resource class.*
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
-
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
-
-*If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#platform-specific-instructions, Platform-specific installation>> instructions.
-
-[#continued-for-linux-macos-and-server]
-== Continued for Linux, macOS, and Server
-
-Be sure to complete the steps in the <<#command-line-installation, Command line installation>> section before moving on to the steps below.
++
+NOTE: *If you are installing self-hosted runners on server, continue with the directions below.* Otherwise, skip to the next section.
 
 . Save the script below as `download-launch-agent.sh` in the root of your project. When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the `circleci-launch-agent` version.
 +
@@ -72,7 +64,7 @@ echo "Verifying CircleCI Launch Agent download"
 grep "${file}" checksums.txt | sha256sum --check && chmod +x "${file}"
 sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
-+
+
 . Set your platform and run the `download-launch-agent.sh` script to download, verify, and install the binary. If you are using **cloud**, use the table below to find your platform variable:
 +
 [.table.table-striped]
@@ -140,5 +132,3 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 +
 **Note:** Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
-+
-. Continue with the platform-specific instructions in the next section.
