@@ -752,6 +752,11 @@ Deploy keys and user keys are not used by GitLab integrations. GitLab keys are s
 
 Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
 
+[#test-insights]
+=== Test Insights
+
+Test Insights is currently not supported for GitLab customers.  
+
 [#next-steps]
 == Next Steps
 - xref:config-intro#[Configuration tutorial]
