@@ -16,7 +16,7 @@ This page explains how to build Docker images for deployment and further testing
 ## Overview
 {: #overview }
 
-To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which allows Docker commands to be run locally, similarly to the [Linux VM execution environment](/docs/using-linux/). If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which allows Docker commands to be run locally, similarly to the [Linux VM execution environment](/docs/using-linuxvm/). If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```yaml
 jobs:
