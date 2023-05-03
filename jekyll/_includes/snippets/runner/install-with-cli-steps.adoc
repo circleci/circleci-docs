@@ -1,5 +1,7 @@
 //== Command line installation: pre-steps
+ifdef::machine[]
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
+endif::[]
 
 In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 

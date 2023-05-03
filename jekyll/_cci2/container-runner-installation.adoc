@@ -2,8 +2,6 @@
 contentTags: 
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
 ---
 = Container runner installation (Kubernetes)
 :page-layout: classic-docs
@@ -39,17 +37,6 @@ This page describes how to install CircleCI's container runner.
 --
 {% include snippets/runner/install-with-cli-steps.adoc %}
 --
-
-
-
-[#download-launch-agent script and install binary]
-== Download launch-agent script and install binary
-
-NOTE: *If you are installing container runners on server, continue with the steps in the following section.* Otherwise, skip ahead to the xref:#container-runner-installation[next section].
-
-{% include snippets/runner/launch-agent-download.adoc %}
-
-
 
 [#container-runner-installation]
 == 2. Container runner installation
