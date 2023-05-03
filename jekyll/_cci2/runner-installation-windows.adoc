@@ -49,16 +49,6 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 
 --
 
-
-[#download-launch-agent script and install binary]
-== Download launch-agent script and install binary
-
-NOTE: *If you are installing Windows machine runners on server, continue with the steps in this section.* Otherwise, skip ahead to the xref:#installation-steps[next section].
-
-{% include snippets/runner/launch-agent-download.adoc %}
-
-
-
 [#installation-steps]
 == 2. Machine runner installation on Windows
 
