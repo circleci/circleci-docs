@@ -60,7 +60,7 @@ To fix this error,
 you must update the files' UID/GID
 and re-create the image.
 
-If you are not the image maintainer, congratulations:
+If you are not the image maintainer, 
 it is not your responsibility.
 Contact the image maintainer
 and report the error.
