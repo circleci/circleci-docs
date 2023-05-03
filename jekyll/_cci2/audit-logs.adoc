@@ -88,7 +88,7 @@ In the UI, a status request will show the following information:
 - Expiry date of the request
 - Request status (success, failed, requested)
 
-Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 10 days.
+Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 30 days.
 
 image::audit-log-request.png[Audit log requests]
 
