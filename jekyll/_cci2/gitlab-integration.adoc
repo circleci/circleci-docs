@@ -755,7 +755,7 @@ Open source plans are not currently available to GitLab customers. CircleCI will
 [#test-insights]
 === Test Insights
 
-Test Insights is currently not supported for GitLab customers.  
+xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.  
 
 [#next-steps]
 == Next Steps
