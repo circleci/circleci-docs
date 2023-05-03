@@ -13,6 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 :machine:
+:linux:
 
 This page describes how to install CircleCI's machine runner on Linux.
 
@@ -42,7 +43,11 @@ This page describes how to install CircleCI's machine runner on Linux.
 --
 
 [#download-the-launch-agent-script]
-== 2. Download the machine runner launch-agent script
+== 2. Download launch-agent script and install binary
+
+{% include snippets/runner/launch-agent-download.adoc %}
+
+////
 
 Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, ARM64, s390x or ppc64le:
 
@@ -76,8 +81,10 @@ export platform=linux/ppc64le && sh ./download-launch-agent.sh
 
 After successful installation, the download-launch-agent.sh file can be deleted.
 
+////
+
 [#create-the-circleci-user-and-working-directory]
-== 3. Create the `circleci` user and working directory
+== 3. Create `circleci` user and working directory
 
 These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
@@ -117,7 +124,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 ```
 
 [#create-the-circleci-self-hosted-runner-configuration]
-== 4. Create the CircleCI's self-hosted runner configuration
+== 4. Create self-hosted runner configuration
 
 Create a `launch-agent-config.yaml` file with a path of `/etc/opt/circleci/launch-agent-config.yaml`, owned by `circleci`, with permissions `600`. Use the following commands:
 

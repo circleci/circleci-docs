@@ -40,6 +40,17 @@ This page describes how to install CircleCI's container runner.
 {% include snippets/runner/install-with-cli-steps.adoc %}
 --
 
+
+
+[#download-launch-agent script and install binary]
+== Download launch-agent script and install binary
+
+NOTE: *If you are installing container runners on server, continue with the steps in the following section.* Otherwise, skip ahead to the xref:#container-runner-installation[next section].
+
+{% include snippets/runner/launch-agent-download.adoc %}
+
+
+
 [#container-runner-installation]
 == 2. Container runner installation
 
@@ -63,12 +74,12 @@ agent:
 [#container-runner-configuration-example]
 == Container runner configuration example
 
-Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation. The fields you must set for a specific job to run using your self-hosted runners are:
+Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation. The fields you must set for a specific job to run using your container runners are:
 
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CircleCI Docker image):
 
 ```yaml
 version: 2.1
