@@ -32,18 +32,17 @@ jobs:
 
 When `setup_remote_docker` executes, any Docker-related commands you use will be executed locally on the virtual machine used to spin up containers for your job.
 
+In the CircleCI web app, you can see which jobs are using the remote Docker environment, they are labelled "Remote Docker".
+
+![Remote Docker label]({{ site.baseurl }}/assets/img/docs/remote-docker-label.png)
+
 The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a Docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key. For an example, see [Run Docker commands using the `machine` executor](#run-docker-commands-using-the-machine-executor).
 {: class="alert alert-info"}
 
 ## Specifications
 {: #specifications }
 
-The remote Docker environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
-
-CPUs | Processor                 | RAM | HD
------|---------------------------|-----|------
-2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
-{: class="table table-striped"}
+For technical specifications and pricing information for the remote Docker environment, see [Discuss](https://discuss.circleci.com/t/changes-to-remote-docker-reporting-pricing/47759). For CircleCI server installations, contact the systems administrator for specifications.
 
 ## Run Docker commands using the Docker executor
 {: #run-docker-commands-using-the-docker-executor }
