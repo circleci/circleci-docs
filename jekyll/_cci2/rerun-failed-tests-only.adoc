@@ -124,10 +124,10 @@ gem 'rspec_junit_formatter'
  - run: mkdir ~/rspec
  - run:
     command: |
-      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose
+      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
 ```
 
-. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
+. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
@@ -138,10 +138,10 @@ gem 'rspec_junit_formatter'
 - run: mkdir -p ~/cucumber
 - run:
     command: |
-    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose
+    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
 ```
 
-. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`.
+. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
@@ -173,7 +173,7 @@ gem 'rspec_junit_formatter'
 ```
 +
 
-Remember to modify the `glob` command for your specific use case.  
+Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
@@ -193,7 +193,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --”
+      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
       JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
@@ -202,7 +202,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
       path: ./reports/
 ```
 
-. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`.
+. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 +
 `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
 
