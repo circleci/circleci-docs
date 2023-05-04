@@ -14,7 +14,7 @@ Use Docker layer caching (DLC) to reduce Docker image build times on CircleCI. D
 ## Introduction
 {: #introduction }
 
-Docker layer caching (DLC) is beneficial if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, using a [_sparse file_](https://en.wikipedia.org/wiki/Sparse_file).
+Docker layer caching (DLC) is beneficial if building Docker images is a regular part of your CI/CD process. DLC saves Docker image layers created within your jobs, and caches them to be reused during future builds.
 
 DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent job runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the less time your image-building jobs will take to run.
 
@@ -89,7 +89,7 @@ DLC has **no** effect on Docker images used as build containers. That is, contai
 ## How DLC works
 {: #how-dlc-works }
 
-DLC caches your Docker image layers using a sparse file within the container/virtual machine used to run your job.
+DLC caches your Docker image layers within the container/virtual machine used to run your job.
 
 If, for example, the first run of your job takes over two minutes to build a Docker image, and nothing changes in the Dockerfile before the second run, the Dockerfile build steps happen instantly, in zero seconds.
 
