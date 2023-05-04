@@ -173,7 +173,7 @@ gem 'rspec_junit_formatter'
 ```
 +
 
-Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must replace the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
+Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
