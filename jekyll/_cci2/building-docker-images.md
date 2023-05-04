@@ -14,7 +14,7 @@ This page explains how to build Docker images for deployment and further testing
 ## Introduction
 {: #introduction }
 
-To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```yaml
 jobs:
@@ -78,7 +78,10 @@ Below is a break down of what is happening during this build’s execution:
 * All commands are executed in the [primary-container](docs/glossary/#primary-container). (line 5)
 * Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 11)
 * [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 13)
-* We use project environment variables to store credentials for Docker Hub. (line 19)
+* We use [project environment variables](/docs/set-environment-variable/#set-an-environment-variable-in-a-project) to store credentials for Docker Hub. (line 19)
+
+## Install the Docker CLI
+{: #install-the-docker-cli}
 
 The [CircleCI convenience images]({{site.baseurl}}/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
@@ -148,10 +151,7 @@ jobs:
 ## See also
 {: #see-also }
 
-[Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/)
-
-[job-space]({{ site.baseurl }}/glossary/#job-space)
-
-[primary-container]({{ site.baseurl }}/glossary/#primary-container)
-
-[docker-layer-caching]({{ site.baseurl }}/glossary/#docker-layer-caching)
+* [Docker Layer Caching](/docs/docker-layer-caching/)
+* [job-space](/docs/glossary/#job-space)
+* [primary-container](/docs/glossary/#primary-container)
+* [docker-layer-caching](/docs/glossary/#docker-layer-caching)
