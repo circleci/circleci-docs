@@ -129,8 +129,6 @@ en:
           - name: Troubleshoot
             link: troubleshoot
 
-
-
   - name: Execute jobs on managed compute resources
     icon: icons/sidebar/builds.svg
     children:
@@ -194,7 +192,8 @@ en:
             link: run-a-job-in-a-container
           - name: Installing and using docker-compose
             link: docker-compose
-
+          - name: Debugging container ID cannot be mapped to host ID error
+            link: high-uid-error
 
   - name: Execute jobs on self-hosted runners
     icon: icons/sidebar/build-agent.svg
