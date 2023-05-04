@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
-title: "Running Docker Commands"
-short-title: "Running Docker Commands"
-description: "How to build Docker images and access remote services"
-order: 55
+title: "Run Docker commands"
+description: "How to build Docker images using the Docker execution environment"
 contentTags:
   platform:
   - Cloud
@@ -11,63 +9,41 @@ contentTags:
   - Server v3.x
 ---
 
-This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
+This page explains how to build Docker images for deployment and further testing when using the Docker execution environment. This is achieved using the remote Docker environment (`setup_remote_docker`). When you use the remote Docker environment for a job, any Docker commands you run in your job will be executed locally on the virtual machine used to spin up your primary Docker container. The term _remote_ used here is left over from when remote Docker usage would spin up a separate, remote environment for running Docker commands.
 
-## Overview
-{: #overview }
+## Introduction
+{: #introduction }
 
-To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which allows Docker commands to be run locally, similarly to the [Linux VM execution environment](/docs/using-linuxvm/). If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```yaml
 jobs:
   build:
     docker:
       - image: cimg/base:2022.06
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
           version: 20.10.14
 ```
 
-The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If you are using an execution environment **other** than Docker, and you want to use docker commands in your config, you do **not** need to use the `setup_remote_docker` key.
+When `setup_remote_docker` executes, any Docker-related commands you use will be executed locally on the virtual machine used to spin up containers for your job.
+
+The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a Docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key. For an example, see [Run Docker commands using the `machine` executor](#run-docker-commands-using-the-machine-executor).
 {: class="alert alert-info"}
 
 ## Specifications
 {: #specifications }
 
-The Remote Docker Environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
+The remote Docker environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
 
 CPUs | Processor                 | RAM | HD
 -----|---------------------------|-----|------
 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
-
-## Run Docker commands using the machine executor
-{: #run-docker-commands-using-the-machine-executor }
-
-The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
-
-```yaml
-version: 2.1
-
-jobs:
- build:
-   machine:
-    image: ubuntu-2204:2022.04.2
-   steps:
-     - checkout
-     # start proprietary DB using private Docker image
-     # with credentials stored in the UI
-     - run: |
-         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-         docker run -d --name db company/proprietary-db:1.2.3
-
-     # build the application image
-     - run: docker build -t company/app:$CIRCLE_BRANCH .
-
-     # deploy the image
-     - run: docker push company/app:$CIRCLE_BRANCH
-```
 
 ## Run Docker commands using the Docker executor
 {: #run-docker-commands-using-the-docker-executor }
@@ -76,13 +52,11 @@ The example below shows how you can build and deploy a Docker image for our [dem
 
 ```yml
 version: 2.1
+
 jobs:
   build:
     docker:
       - image: cimg/go:1.17
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       # ... steps for building/testing app ...
@@ -101,12 +75,12 @@ jobs:
 
 Below is a break down of what is happening during this build’s execution:
 
-1. All commands are executed in the [primary-container]({{ site.baseurl }}/glossary/#primary-container). (line 5)
-2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/glossary/#docker-layer-caching) (DLC) here to speed up image building.
-4. We use project environment variables to store credentials for Docker Hub. (line 17)
+* All commands are executed in the [primary-container](docs/glossary/#primary-container). (line 5)
+* Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 11)
+* [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 13)
+* We use project environment variables to store credentials for Docker Hub. (line 19)
 
-**Note:** The [CircleCI convenience images]({{site.baseurl}}/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
+The [CircleCI convenience images]({{site.baseurl}}/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
 ```yml
       # Install via apk on alpine based images
@@ -144,139 +118,40 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 {: class="alert alert-info"}
 
-## Separation of environments
-{: #separation-of-environments }
+## Run Docker commands using the machine executor
+{: #run-docker-commands-using-the-machine-executor }
 
-The job and [remote docker]({{ site.baseurl }}/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
+The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
 
-### Accessing services
-{: #accessing-services }
+```yaml
+version: 2.1
 
-It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
+jobs:
+ build:
+   machine:
+    image: ubuntu-2204:2022.04.2
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: |
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+         docker run -d --name db company/proprietary-db:1.2.3
 
-```yml
-# ...
-      - run:
-          name: "Start Service and Check That it’s Running"
-          command: |
-            docker run -d --name my-app my-app
-            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
-# ...
+     # build the application image
+     - run: docker build -t company/app:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push company/app:$CIRCLE_BRANCH
 ```
-
-A different way to do this is to use another container running in the same network as the target container:
-
-```yml
-# ...
-      - run: |
-          docker run -d --name my-app my-app
-          docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
-# ...
-```
-
-### Mounting folders
-{: #mounting-folders }
-
-It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
-
-```yml
-- run: |
-    # create a dummy container which will hold a volume with config
-    docker create -v /cfg --name configs alpine:3.4 /bin/true
-    # copy a config file into this volume
-    docker cp path/in/your/source/code/app_config.yml configs:/cfg
-    # start an application container using this volume
-    docker run --volumes-from configs app-image:1.2.3
-```
-
-In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
-
-```yml
-- run: |
-    # start container with the application
-    # make sure you're not using `--rm` option otherwise the container will be killed after finish
-    docker run --name app app-image:1.2.3
-
-- run: |
-    # after application container finishes, copy artifacts directly from it
-    docker cp app:/output /path/in/your/job/space
-```
-
-It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
-
-```yml
-version: '2'
-services:
- bundler-cache:
-   image: outstand/dockup:latest
-   command: restore
-   container_name: bundler-cache
-   tty: true
-   environment:
-     COMPRESS: 'false'
-   volumes:
-     - bundler-data:/source/bundler-data
-```
-
-Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
-
-{% raw %}
-```yml
-# Populate bundler-data container from circleci cache
-- restore_cache:
-    keys:
-      - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      - v4-bundler-cache-{{ arch }}-{{ .Branch }}
-      - v4-bundler-cache-{{ arch }}
-- run:
-    name: Restoring bundler cache into docker volumes
-    command: |
-      NAME=bundler-cache
-      CACHE_PATH=~/bundler-cache
-      set -x
-      mkdir -p $CACHE_PATH
-      docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-start $NAME
-      docker cp $CACHE_PATH/. $NAME:/backup
-      docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
-      docker rm -f $NAME
-
-# Back up the same volume to circle cache
-- run:
-    name: Backing up bundler cache from docker volumes
-    command: |
-      NAME=bundler-cache
-      CACHE_PATH=~/bundler-cache
-      set -x
-      docker-compose -f docker-compose.yml -f docker/circle-dockup.yml run --name $NAME $NAME backup
-      docker cp $NAME:/backup/. $CACHE_PATH
-      docker rm -f $NAME
-- save_cache:
-    key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-    paths:
-      - ~/bundler-cache
-```
-{% endraw %}
-
-### Accessing the remote docker environment
-{: #accessing-the-remote-docker-environment }
-
-When a remote Docker environment is spun up, an SSH alias is created for you so you can SSH into the remote Docker virtual machine. This may be helpful for debugging your builds, or modifying the Docker or VM filesystem configuration. To SSH into the remote Docker VM, run the following within your project configuration job steps, or during a SSH rerun:
-
-```shell
-ssh remote-docker
-```
-
-**Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work.
-
-Thanks to ryansch for contributing this example.
 
 ## See also
 {: #see-also }
 
-* [Docker Layer Caching](/docs/docker-layer-caching/)
+[Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/)
 
-* [job-space](/docs/glossary/#job-space)
+[job-space]({{ site.baseurl }}/glossary/#job-space)
 
-* [primary-container](/docs/glossary/#primary-container)
+[primary-container]({{ site.baseurl }}/glossary/#primary-container)
 
-* [docker-layer-caching](/docs/glossary/#docker-layer-caching)
+[docker-layer-caching]({{ site.baseurl }}/glossary/#docker-layer-caching)
