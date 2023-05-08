@@ -15,7 +15,7 @@ contentTags:
 
 このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 
-toc::[]
+このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 
 [#authentication-methods]
 == 認証方法
@@ -23,9 +23,9 @@ toc::[]
 CircleCI セルフホストランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
 [#circle-token-personal-authentication]
-=== Circle-Token (個人認証)
+=== circle-token (個人認証)
 
-この認証方法はパーソナルトークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
+指定したリソース クラスで未処理のタスクの数を取得します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -36,14 +36,14 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | Circle-Token header
 | Header that contains the `<circle-token>` used to authenticate the user.
 
-| http basic auth username
+| ユーザー名による HTTP Basic 認証
 | The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
 === ブラウザーセッション認証
 
-リクエストに含まれる Cookie を使用して Ring セッションが送信されます。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
+リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
 [#resource-class-authentication-token]
 === リソースクラストークン認証
@@ -59,8 +59,8 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | 名前
 | 説明
 
-| http bearer auth
-| このトークンは Bearer スキームを使って提供されます。
+| HTTP Bearer 認証
+| Bearer スキームを使用してトークンを送信します。
 |===
 
 [#endpo整数s]
@@ -74,7 +74,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 [#authentication-methods]
 ==== 認証方法
 
-* Circle-Token (個人認証)
+* circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 * リソースクラストークン (リソースクラス作成時に生成されます)
@@ -86,7 +86,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 [cols=5*, options="header", stripes=even]
 |===
 | 名前
-| 型
+| タイプ
 | 入力
 | 必須
 | 説明
@@ -98,14 +98,14 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | 指定したリソース クラスでセルフホストランナーの一覧を絞り込みます。
 
 | namespace
-| 文字列
+| string
 | クエリ
 | 省略可
 | 指定した名前空間でセルフホストランナーの一覧を絞り込みます。
 |===
 
 [#examples]
-==== サンプル
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
@@ -123,7 +123,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| ステータス
+| Status
 | 説明
 | 形式
 
@@ -138,7 +138,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| 名前
+| Name
 | タイプ
 | 必須
 | 説明
@@ -154,12 +154,12 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |セルフホストランナーのリソースクラス
 
 |hostname
-|文字列
+|string
 |true
 |セルフホストランナーのホスト名
 
 |name
-|文字列
+|string
 |true
 |セルフホストランナー名
 
@@ -221,21 +221,21 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| 名前
+| Name
 | タイプ
 | 入力
 | 必須
-| 説明
+| 意味
 
 | resource-class
-| string
+| 文字列
 | クエリ
 | true
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
 [#examples]
-==== サンプル
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
@@ -248,7 +248,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| ステータス
+| Status
 | 説明
 | 形式
 
@@ -263,7 +263,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| 名前
+| Name
 | タイプ
 | 必須
 | 説明
@@ -301,7 +301,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| 名前
+| Name
 | タイプ
 | 入力
 | 必須
@@ -315,7 +315,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |===
 
 [#examples]
-==== サンプル
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
@@ -328,8 +328,8 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| ステータス
-| 説明
+| Status
+| 意味
 | 形式
 
 |200
@@ -343,10 +343,10 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| 名前
+| Name
 | タイプ
 | 必須
-| 説明
+| 意味
 
 |running_runner_tasks
 |int
