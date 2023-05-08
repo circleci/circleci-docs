@@ -20,7 +20,7 @@ contentTags:
 [#download-the-launch-agent-script]
 == マシンランナーローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または ARM64) 向けのローンチエージェントバイナリをインストールします。
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_6、ARM64、s390x または ppc64le) 向けのローンチエージェントバイナリをインストールします。
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -38,6 +38,16 @@ export platform=linux/amd64 && sh ./download-launch-agent.sh
 ```shell
 # For Linux ARM64:
 export platform=linux/arm64 && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux s390x:
+export platform=linux/s390x && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux ppc64le:
+export platform=linux/ppc64le && sh ./download-launch-agent.sh
 ```
 
 正常にインストールしたら、download-launch-agent.sh ファイルは削除できます。
@@ -73,7 +83,7 @@ sudo chmod 0750 /var/opt/circleci
 ```
 
 ```shell
-sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
+sudo chown -R circleci /var/opt/circleci /opt/circleci
 ```
 
 セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があるのでご注意ください。
@@ -92,7 +102,7 @@ sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-con
 ```
 
 ```shell
-sudo chown circleci: /etc/opt/circleci/launch-agent-config.yaml
+sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
@@ -250,4 +260,4 @@ journalctl -u circleci
 [#troubleshooting]
 == トラブルシューティング
 
-Linux へのマシンランナーのインストールや実行において問題が生じた場合は、セルフホストランナーのトラブルシューティングガイドの <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner, マシンランナーのトラブルシューティングのセクション>> を参照してください。
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner, Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.

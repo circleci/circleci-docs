@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、Capistrano にデプロイするためのコード例を紹介します。"
+description: このドキュメントでは、Capistrano にデプロイするためのコード例を紹介します。
 contentTags:
   platform:
   - クラウド
@@ -13,6 +13,8 @@ contentTags:
 :icons: font
 :toc: macro
 :toc-title:
+
+このノウハウガイドでは、CapistranoにデプロイするためのCircleCIの設定例を紹介します。
 
 [#introduction]
 == はじめに
