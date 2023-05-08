@@ -205,8 +205,6 @@ en:
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
-          - name: Web app installation
-            link: runner-installation
       - name: Container runner
         children:
           - name: Container runner installation
@@ -221,17 +219,13 @@ en:
             link: runner-installation-windows
           - name: macOS installation
             link: runner-installation-mac
-          - name: CLI installation
-            link: runner-installation-cli
-          - name: Upgrading machine runner on cloud
-            link: upgrading-circleci-machine-runner-on-cloud
-          - name: Upgrading machine runner on server
-            link: runner-upgrading-on-server
           - name: Machine runner configuration reference
             link: runner-config-reference
       - name: How-to Guides
         children:
-          - name: Upgrade CircleCI's self-hosted runner on server
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
+          - name: Upgrade machine runner on server
             link: runner-upgrading-on-server
       - name: Reference
         children:
