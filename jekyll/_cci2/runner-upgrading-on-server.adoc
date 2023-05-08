@@ -164,7 +164,7 @@ Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 - xref:runner-installation-linux#[Linux machine runner installation instructions]
 - xref:runner-installation-mac#[macOS machine runner installation instructions]
 - xref:runner-installation-windows#[Windows machine runner installation instructions]
-- xref:runner-installation-kubernetes#[Runner on Kubernetes installation instructions]
+- xref:runner-on-kubernetes#[Runner on Kubernetes installation instructions]
 - xref:runner-installation-docker#[Machine runner installation instructions with the Docker executor]
 
 
