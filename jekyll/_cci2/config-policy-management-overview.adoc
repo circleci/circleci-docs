@@ -335,7 +335,7 @@ from_trusted_origin(origin) {
 }
 ----
 
-The following is an example of a policy that blocks SSH reruns for production branch.
+The following is an example of a policy that blocks SSH reruns on sensitive branches.
 
 [source,rego]
 ----
