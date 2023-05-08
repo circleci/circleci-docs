@@ -25,7 +25,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 [#circle-token-personal-authentication]
 === circle-token (個人認証)
 
-指定したリソース クラスで未処理のタスクの数を取得します。
+この認証方法はパーソナル トークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -98,14 +98,14 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | 指定したリソース クラスでセルフホストランナーの一覧を絞り込みます。
 
 | namespace
-| string
+| 文字列
 | クエリ
 | 省略可
 | 指定した名前空間でセルフホストランナーの一覧を絞り込みます。
 |===
 
 [#examples]
-==== 例
+==== サンプル
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
@@ -123,7 +123,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
+| ステータス
 | 説明
 | 形式
 
@@ -138,7 +138,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
+| 名前
 | タイプ
 | 必須
 | 説明
@@ -154,12 +154,12 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |セルフホストランナーのリソースクラス
 
 |hostname
-|string
+|文字列
 |true
 |セルフホストランナーのホスト名
 
 |name
-|string
+|文字列
 |true
 |セルフホストランナー名
 
@@ -221,7 +221,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
+| 名前
 | タイプ
 | 入力
 | 必須
@@ -248,7 +248,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
+| ステータス
 | 説明
 | 形式
 
@@ -263,7 +263,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
+| 名前
 | タイプ
 | 必須
 | 説明
@@ -301,14 +301,14 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
+| 名前
 | タイプ
 | 入力
 | 必須
 | 説明
 
 | resource-class
-| string
+| 文字列
 | クエリ
 | true
 | 指定したリソース クラスでタスクを絞り込みます。
@@ -328,7 +328,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
+| ステータス
 | 意味
 | 形式
 
@@ -343,7 +343,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
+| 名前
 | タイプ
 | 必須
 | 意味
