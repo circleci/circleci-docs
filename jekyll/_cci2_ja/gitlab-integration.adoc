@@ -738,7 +738,7 @@ GitLab の連携では、デプロイキーとユーザーキーは使用され�
 [#test-insights]
 === テストインサイト
 
-xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.
+xref:insights-tests#[テスト インサイト機能]は現在、GitLab のお客様には対応しておりません。
 
 [#next-steps]
 == 次のステップ
