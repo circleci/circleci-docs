@@ -15,16 +15,16 @@ contentTags:
 
 :toc-title:
 
-ここでは、CLI を使って **マシンセルフホストランナー** をインストールする方法を説明します。
+{% include snippets/runner-1.0-deprecation-first.adoc %}
 
 ここでは、CLI を使って **マシンセルフホストランナー** をインストールする方法を説明します。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 
 NOTE: Linux、macOS、Docker、Windows へのセルフホストランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションをこの UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 [#prerequisites]
-== セルフホストランナー規約への同意
+== 前提条件
 
-CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意したものとみなされます。
+ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
 * <<local-cli#,CircleCI CLI>>:   **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
@@ -39,16 +39,16 @@ CLI でセルフホストランナーをインストールし、利用する場�
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
 [self-hosted-runner-terms-agreement]
-== コマンドラインのインストール
+== セルフホストランナー規約への同意
 
 CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意したものとみなされます。
 
 [#command-line-installation]
-== ジョブでセルフホストランナーを参照する
+== コマンドラインのインストール
 
 NOTE: **サーバー用のセルフホストランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 
-{% include snippets/ja/runner-config-reference.adoc %} リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。
+セルフホストランナーをインストールするには、下記手順を実行し、名前空間と認証トークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。
 
 お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
@@ -197,14 +197,14 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 プラットフォームの互換性仕様については、 <<<runner-overview#available-self-hosted-runner-platforms,ランナーの概要>> で詳細をご覧ください。
 
 [#referencing-your-self-hosted-runner-on-a-job]
-== セルフホストランナーのサーバーとの互換性
+== ジョブでセルフホストランナーを参照する
 
-_CircleCI ランナーは CircleCI Server v3.1.0 以降で使用できます。_ セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
+セルフホストランナーのセットアップが完了したら、 `.circleci/config.yml` ファイルのフィールドを設定してジョブでセルフホストランナーを参照する必要があります。 セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
 CircleCI Server のマイナーバージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。
 
 [#self-hosted-runners-for-server-compatibility]
-== 関連リソース
+== セルフホストランナーのサーバーとの互換性
 
 _CircleCI ランナーは CircleCI Server v3.1.0 以降で使用できます。_
 
