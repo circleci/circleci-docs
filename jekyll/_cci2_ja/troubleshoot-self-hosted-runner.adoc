@@ -15,4 +15,6 @@ contentTags:
 
 このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 
+このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
+
 include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
