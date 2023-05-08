@@ -20,7 +20,7 @@ Follow this how-to guide to learn how to create a config policy to restrict whic
 
 * Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
-* Set up a self-hosted runner. See the xref:runner-installation#[Installing self-hosted runners] guide.
+* Set up a self-hosted runner. See the xref:runner-overview/#getting-started[Getting started] section of the Self-hosted runners overview.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +

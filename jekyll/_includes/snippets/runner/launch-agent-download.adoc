@@ -1,3 +1,4 @@
+ifndef::windows[]
 . Save the script below as `download-launch-agent.sh` in the root of your project. When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the `circleci-launch-agent` version.
 +
 Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
@@ -80,9 +81,11 @@ For example, on **cloud**, to set your platform for macOS M1 and run the `downlo
 ```shell
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
 ```
-endif::[]
 +
-For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
+endif::[]
+endif::[]
+
+. For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -111,8 +114,15 @@ For *server v3.1.0 and up*, use the table below to find the compatible machine r
 +
 Substitute `<launch-agent-version>` with your launch-agent version for server and run the following:
 +
+ifndef::windows[]
 ```shell
 export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 +
 **Note:** Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
+endif::[]
+ifdef::windows[]
+```powershell
+$Env:agentVer = "<launch-agent-version>"
+```
+endif::[]

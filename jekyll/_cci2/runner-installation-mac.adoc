@@ -49,22 +49,6 @@ This page describes how to install CircleCI's machine runner on macOS.
 
 {% include snippets/runner/launch-agent-download.adoc %}
 
-////
-
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the `launch-agent` binary for your target platform, either x86_64, or M1 (Apple silicon):
-
-```shell
-# For macOS x86_64:
-export platform=darwin/amd64 && sh ./download-launch-agent.sh
-
-# For macOS M1:
-export platform=darwin/arm64 && sh ./download-launch-agent.sh
-```
-
-After successful installation, the launch-agent.sh file can be deleted.
-
-////
-
 [#create-a-circleci-self-hosted-runner-configuration]
 == 3. Create self-hosted runner configuration
 

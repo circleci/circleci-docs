@@ -37,7 +37,7 @@ jobs:
 
 Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements. For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
 
-When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the link:/docs/runner-installation/[installation process].
+When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:runner-overview/#getting-started[installation process].
 
 [source,yaml]
 ----

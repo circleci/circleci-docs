@@ -132,6 +132,7 @@ Take the https://academy.circleci.com/runner-course?access_code=public-2021[runn
 
 [#see-also]
 == See also
-- <<runner-concepts#,Runner Concepts>>
-- <<runner-installation#,Self-Hosted Runner Web App Installation>>
+- xref:runner-concepts#[Runner Concepts]
+- xref:container-runner#[Container runner reference guide]
+- xref:runner-config-reference#[Machine runner reference guide]
 - link:https://circleci.com/changelog/self-hosted-runner/[Self-hosted runner change log]
