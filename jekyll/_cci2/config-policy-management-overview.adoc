@@ -274,6 +274,7 @@ When a policy is evaluated in the context of a triggered pipeline the following 
 
 * `project_id` (CircleCI Project UUID)
 * `build_number` (number)
+* `ssh_rerun` (boolean) - indicates if CI job is started using the SSH rerun feature
 
 * `vcs.branch` (string)
 * `vcs.release_tag` (string)
@@ -331,6 +332,30 @@ from_trusted_origin(origin) {
 	}
 
 	startswith(origin, trusted_origin)
+}
+----
+
+The following is an example of a policy that blocks SSH reruns for production branch.
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["ssh_rerun"]
+
+enable_hard["disallow_ssh_rerun"]
+
+disallow_ssh_rerun = "SSH rerun is disallowed" {
+  some data.meta.vcs.branch in {
+        "prod",
+        "production",
+        "master",
+        "main",
+        "release"
+    }
+	data.meta.ssh_rerun
 }
 ----
 
