@@ -12,9 +12,9 @@ contentTags:
 :toc: macro:
 :toc-tittle:
 
-ここでは、CircleCI クラウド 上で CircleCI マシンランナーを更新する方法を説明します。
+CAUTION: **Self-hosted runner version 1.0 will sunset on July 27, 2023,** and will be temporarily unavailable on June 28, 2023. **Update to 1.1.**
 
-toc::[]
+ここでは、CircleCI クラウド 上で CircleCI マシンランナーを更新する方法を説明します。
 
 [#check-current-version]
 == 現在のマシンランナーバージョンの確認
