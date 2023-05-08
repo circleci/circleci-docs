@@ -18,7 +18,7 @@ files:
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
   - source: /jekyll/_includes/snippets/faq/*.adoc
-    translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
+    translation: /jekyll/_includes/snippets/faq/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
   - source: /jekyll/_includes/snippets/troubleshoot/*.adoc
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
