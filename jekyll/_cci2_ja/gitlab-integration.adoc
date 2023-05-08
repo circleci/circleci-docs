@@ -735,6 +735,11 @@ GitLab の連携では、デプロイキーとユーザーキーは使用され�
 
 現在、GitLab のお客様は、オープンソースプランをご利用いただけません。 CircleCI では、このプランの対象 VCS の拡大を進めており、最新情報についてはオープンソースコミュニティにお知らせします。
 
+[#test-insights]
+=== テストインサイト
+
+xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.
+
 [#next-steps]
 == 次のステップ
 
