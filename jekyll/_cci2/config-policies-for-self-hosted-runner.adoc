@@ -72,7 +72,7 @@ In the following steps you will replace `namespace/resource_class` and `project_
 == 2. Update policy with your details
 
 . Replace `namespace/resource_class` with one of your runner resource classes:
-.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have followed the xref:runner-installation#[Installing self-hosted runners] guide. Here you will see all your available self-hosted runner resource classes.
+.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have accepted the CircleCI Runner Terms and created a namespace and resource class, as outlined in the runner installation guides. Here you will see all your available self-hosted runner resource classes.
 .. Replace `namespace/resource_class` in the `runner.rego` file with the name of the resource class that you would like to restrict.
 
 . Replace `project_UUIDs` with a project ID:

@@ -6,38 +6,6 @@ ifndef::windows[]
 . Save the https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[download-launch-agent script] in the root of your project. When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the launch agent version.
 +
 Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
-+
-```shell
-#!/usr/bin/env sh
-
-set -eu pipefail
-
-echo "Installing CircleCI Runner for ${platform}"
-
-base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-if [ -z ${agent_version+x} ]; then
-  agent_version=$(curl "${base_url}/release.txt")
-fi
-
-# Set up runner directory
-echo "Setting up CircleCI Runner directory"
-prefix=/var/opt/circleci
-sudo mkdir -p "${prefix}/workdir"
-
-# Downloading launch-agent (machine runner)
-echo "Using CircleCI Launch Agent version ${agent_version}"
-echo "Downloading and verifying CircleCI Launch Agent Binary"
-curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
-file="$(grep -F "${platform}" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
-mkdir -p "${platform}"
-echo "Downloading CircleCI Launch Agent: ${file}"
-curl --compressed -L "${base_url}/${agent_version}/${file}" -o "${file}"
-
-# Verifying download
-echo "Verifying CircleCI Launch Agent download"
-grep "${file}" checksums.txt | sha256sum --check && chmod +x "${file}"
-sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
-```
 
 . Set your target platform and run the `download-launch-agent.sh` script to download, verify, and install the binary. If you are using **cloud**, use the table below to find your platform variable:
 +

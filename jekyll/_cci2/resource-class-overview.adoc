@@ -75,7 +75,7 @@ For config examples showing how to use the `resource_class` key to **specify CPU
 * GPU resource classes: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] and link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
 * link:/docs/configuration-reference/#arm-execution-environment-linux[Arm resource classes]
 
-To get started setting up a **self-hosted runner**, see the link:/docs/runner-installation[Installing self-hosted runners with the web app] page.
+To get started setting up a **self-hosted runner**, see the xref:runner-overview/#getting-started[Getting started] section of the Self-hosted runners overview.
 
 [#default-resource-class]
 == Default resource class
