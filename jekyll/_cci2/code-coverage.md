@@ -16,7 +16,19 @@ contentTags:
 
 CircleCI provides different options for code coverage reporting using built-in CircleCI features combined with open source libraries, or using partners. Below are a few examples that demonstrate configuring coverage libraries for different languages, as well as how to [view your code coverage](#view-coverage-on-circleci) on the CircleCI web app.
 
-## Ruby
+## View coverage on CircleCI
+{: #view-coverage-on-circleci }
+
+You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports will then be stored as build artifacts where they can be viewed or downloaded. See our [build artifacts](/docs/artifacts/) guide for more information on downloading coverage reports stored in your artifacts.
+
+![Artifacts tab in the web app]({{site.baseurl}}/assets/img/docs/artifacts.png)
+
+Code coverage reports are saved as [build artifacts](/docs/artifacts/). If you wish to take advantage of CircleCI test splitting and parallelism, you will also need to save your test results using the [`store_test_results` key](/docs/configuration-reference/#storetestresults). For more information on test splitting and parallelism, see the [Test splitting and parallelism overview](/docs/parallelism-faster-jobs/) and the [Test splitting tutorial](/docs/test-splitting-tutorial/).
+
+## Language-specific code coverage options
+{: #language-specific-code-coverage-options}
+
+### Ruby
 {: #ruby }
 
 [SimpleCov](https://github.com/colszowka/simplecov) is a popular Ruby code coverage library. To get started, add the `simplecov` gem to your `Gemfile`.
@@ -86,7 +98,7 @@ jobs:
 
 See the [SimpleCov README](https://github.com/colszowka/simplecov/#getting-started) for more detail.
 
-## Python
+### Python
 {: #python }
 
 [Coverage.py](https://coverage.readthedocs.io/en/6.6.0b1/) is a popular library for generating code coverage reports in Python. To get started, install Coverage.py:
@@ -146,7 +158,7 @@ workflows:
     - build
 ```
 
-## Java
+### Java
 {: #java }
 
 [JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code coverage. Below is an example `pom.xml` file that includes JUnit and JaCoCo as part of the build system:
@@ -249,7 +261,7 @@ jobs:
           path:  target
 ```
 
-## JavaScript
+### JavaScript
 {: #javascript }
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for JavaScript projects. Another popular testing tool, Jest, uses Istanbul to generate reports. See the example below:
@@ -276,7 +288,7 @@ jobs:
           path: coverage
 ```
 
-## PHP
+### PHP
 {: #php }
 
 PHPUnit is a popular testing framework for PHP. With PHP, you should have access to a tool called [phpdbg](https://www.php.net/manual/en/book.phpdbg.php). You can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`.
@@ -306,7 +318,7 @@ jobs:
           path:  build/coverage-report
 ```
 
-## Golang
+### Golang
 {: #golang }
 
 Go has built-in functionality for generating code coverage reports. To generate reports, add the flag `-coverprofile=c.out`. This will generate a coverage report which can be converted to html via `go tool`.
@@ -373,10 +385,3 @@ Read more about Codecov's orb in their [guest blog post](https://circleci.com/bl
 If you are a Coveralls customer, follow their [guide to set up your coverage stats](https://docs.coveralls.io/). You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI [environment variables](/docs/env-vars/).
 
 Coveralls will automatically handle the merging of coverage stats in concurrent jobs.
-
-## View coverage on CircleCI
-{: #view-coverage-on-circleci }
-
-You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports will then be stored as build artifacts where they can be viewed or downloaded. See our [build artifacts](/docs/artifacts/) guide for more information on downloading coverage reports stored in your artifacts.
-
-![Artifacts tab in the web app]({{site.baseurl}}/assets/img/docs/artifacts.png)
