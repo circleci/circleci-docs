@@ -49,9 +49,9 @@ PowerShell インターフェイスにインストール結果が出力されま
 {% include snippets/ja/machine-runner-example.adoc %}
 
 [#uninstall-reinstall-steps]
-== Windows セルフホストランナーの Continuous モードと Single task モード
+== アンインストール・再インストール手順
 
-Windows マシンランナーは、デフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。
+マシンランナーをアンインストールすると、システムの再インストールの準備をします。
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
