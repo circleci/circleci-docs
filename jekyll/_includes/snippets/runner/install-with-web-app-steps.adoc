@@ -21,16 +21,19 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, s
 +
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
-ifdef::container[]
+ifdef::container[] 
 +
+// Display the following step for container runner installation only
 . Select the **Container** tab for installation instructions specific to container runner. These instructions are also included in the next section of this installation guide.
 +
 .Install container runner through the web app
 image::runnerui_step_four_cr.png[Container runner in the web app]
 +
 endif::[]
+
 ifdef::machine[]
 +
+// Display the following step for machine runner installation only
 . Select the **Machine** tab for installation instructions specific to setting up self-hosted runners on Linux, macOS, or Windows. These platform-specific instructions are also included in the next section of this installation guide.
 +
 .Install machine runner through the web app
