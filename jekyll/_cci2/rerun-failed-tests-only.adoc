@@ -288,6 +288,10 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module. 
 
+**Question:** Can I specify timing type for test splitting using `circleci tests run`?
+
+**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
+
 ---
 
 
