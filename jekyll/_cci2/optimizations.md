@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Optimizations Overview"
+title: "Optimization reference"
 description: "Learn about ways to optimize your CircleCI pipelines"
 contentTags:
   platform:
