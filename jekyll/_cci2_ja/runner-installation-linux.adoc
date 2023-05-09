@@ -108,8 +108,7 @@ sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
-# Install sepolicy and rpmbuild if you haven't already
-sudo yum install -y policycoreutils-devel rpm-build
+sudo chmod 600 /etc/opt/circleci/launch-agent-config.yaml
 ```
 
 新しく作成した `/etc/opt/circleci/launch-agent-config.yaml` ファイルに次の内容をコピーします。
