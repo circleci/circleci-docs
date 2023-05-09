@@ -197,13 +197,13 @@ en:
       - name: Reference
         children:
           - name: Convenience images support policy
-            link: convenience-image-support-policy
+            link: convenience-images-support-policy
           - name: Linux VM images support policy
-            link: linux-vm-image-support-policy
+            link: linux-vm-images-support-policy
           - name: Android images support policy
-            link: android-image-support-policy
+            link: android-images-support-policy
           - name: Windows images support policy
-            link: windows-image-support-policy
+            link: windows-images-support-policy
 
   - name: Execute jobs on self-hosted runners
     icon: icons/sidebar/build-agent.svg
