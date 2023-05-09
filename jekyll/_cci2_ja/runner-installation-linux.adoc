@@ -13,16 +13,16 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このページでは、Linux に CircleCI のマシンランナーをインストールする方法を説明します。
+{% include snippets/runner-1.0-deprecation-first.adoc %}
 
-{% include snippets/ja/runner-platform-prerequisites.adoc %}
+このページでは、Linux に CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 [#download-the-launch-agent-script]
 == マシンランナーローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_6、ARM64、s390x または ppc64le) 向けのローンチエージェントバイナリをインストールします。
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -57,7 +57,7 @@ export platform=linux/ppc64le && sh ./download-launch-agent.sh
 [#create-the-circleci-user-and-working-directory]
 == `circleci` ユーザーと作業ディレクトリを作成する
 
-`launch-agent-config.yaml` ファイルを、パス `/etc/opt/circleci/launch-agent-config.yaml`、所有者 `circleci`、アクセス許可 `600` で作成します。 次のコマンドを使用します。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
+これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
 [#ubuntu-debian]
 === Ubuntu/Debian
@@ -97,14 +97,14 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 [#create-the-circleci-self-hosted-runner-configuration]
 == CircleCI のセルフホストランナー設定ファイルを作成する
 
-RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーインストール環境で実行される個々のジョブで必要となる可能性のある権限を追加するものではないのでご注意ください。
+`launch-agent-config.yaml` ファイルを、パス `/etc/opt/circleci/launch-agent-config.yaml`、所有者 `circleci`、アクセス許可 `600` で作成します。 次のコマンドを使用します。
 
 ```shell
 sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-config.yaml
 ```
 
 ```shell
-sudo mkdir -p /etc/opt/circleci/policy
+sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
