@@ -1,0 +1,92 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI Windows images support policy
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Windows Images release, update, and deprecation policy
+:icons: font
+:toc: macro
+:toc-title:
+
+[#overview]
+== Overview
+
+This document outlines the xref:using-windows#[CircleCI Windows image] release, update, and deprecation policy.
+
+This policy applies to all CircleCI Windows images built for the Windows executor.
+
+[#releaes-policy]
+== Release policy
+
+The Windows images are based on Windows Server. We aim to maintain and release two versions of Windows Server at all times. This consists of the current version of Windows Server and the previous version.
+
+The current version of Windows Server will receive monthly releases.
+
+The previous version of Windows Server will receive quarterly updates.
+
+In both cases, we will build and release these images after “Patch Tuesday”, the second Tuesday of the month. This allows our releases to incorporate the latest security updates and fixes from Microsoft.
+
+We generally install the latest version of Visual Studio Community Edition that coincides with the Windows Server version in the image when it is built. For example, Windows Server 2022 images come installed with Visual Studio 2022. Depending on the release cadence of Visual Studio from Microsoft, we may produce extra variants of the images to ensure we obtain support for new Visual Studio, while also maintaining support for existing versions. These decisions will be made on a case-by-case basis and we will communicate this ahead of time.
+
+For the previous versions of Windows Server, we will freeze the version of Visual Studio installed in these images and only include minor/patch version updates.
+
+[#tagging]
+== Tagging
+
+The variant of Windows Server can be specified by choosing the `name` parameter in the https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb]. The most recent version of Windows Server will always be accessible via the `win/default` name, but previous versions require explicit definition, such as `win/server-2019`.
+
+Each image version is released to a date-based tag, such as `2023.04.1`, which can be explicitly defined in the `version` parameter of the orb.
+
+Once we publish a monthly/quarterly image, we will also update the `edge` version tag to point to the new image.
+
+After a few days, we will update the `current` tag to point to the new image. This allows time for the image to be tested before the image is changed for jobs that only specify the `current` or default image.
+
+[#critical-cve-patches]
+== Critical CVE patches
+
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in our Windows images, we will investigate the impact that this has on our images being used within the CircleCI execution environment. 
+
+In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our https://discuss.circleci.com/[Discuss Forum].
+
+[#bug-reports-and-issues]
+== Bug reports and issues
+
+Please file a https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the Windows images. Our Support Team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+
+[#image-lifespan-eol]
+== Image lifespan / EOL
+
+Once the next version of Windows Server is released by Microsoft, we will deprecate the oldest version of Windows Server that we support and schedule it to be removed.
+
+After the new version of Windows Server has been released, we will then move the current Windows Server version into an extended support phase. This means we will only build and retain quarterly image releases (January, April, July, October).
+
+Example: When Windows Server 2025 is released:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Version
+| Support
+
+| Windows Server 2019
+| Deprecated and removed entirely
+
+| Windows Server 2022
+| Quarterly images built and retained. Other monthly releases deprecated and removed
+
+| Windows Server 2025
+| Monthly images built and retained
+|===
+
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. 
+
+[#exceptions]
+== Exceptions
+
+​​At any time, we reserve the right to work outside of the information in this document if the circumstances require. In the event that we are required to make an exception to the policy, we will aim to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our Discuss Forum, along with additional outreach, such as an email notice, where possible.
+
