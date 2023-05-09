@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
+{% include snippets/runner-1.0-deprecation-first.adoc %}
 
 このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 
@@ -225,7 +225,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | タイプ
 | 入力
 | 必須
-| 意味
+| 説明
 
 | resource-class
 | 文字列
