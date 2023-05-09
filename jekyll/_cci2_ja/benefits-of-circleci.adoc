@@ -1,4 +1,5 @@
 ---
+
 contentTags:
   platform:
   - クラウド
@@ -11,13 +12,13 @@ contentTags:
 :page-description: CI/CD 用に CircleCI を導入するメリット
 :icons: font
 :toc: macro
-:toc-title:
 
+:toc-title:
 
 [#benefits-of-circleci]
 == CircleCI のメリット
 
-CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。CircleCI では、高度なxref:caching#[キャッシュ]、xref:docker-layer-caching#[Docker レイヤーキャッシュ]、実行マシンのスピードを高めるxref:optimizations#resource-class[リソースクラス]などの設定により、きわめて複雑なパイプラインでも効率的に実行できます。
+CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI では、高度なxref:caching#[キャッシュ]、xref:docker-layer-caching#[Docker レイヤーキャッシュ]、実行マシンのスピードを高めるxref:optimizations#resource-class[リソースクラス]などの設定により、きわめて複雑なパイプラインでも効率的に実行できます。
 
 CircleCI の開発者向け機能の一例を以下に示します。
 
@@ -43,7 +44,7 @@ CircleCI の無料オプションと有料オプションについては、link:
 
 CircleCI でホストされるクラウド版プラットフォームは、無料でlink:https://circleci.com/ja/signup[サインアップ]して利用でき、プロジェクト数の制限もありません。
 
-Free プランをご利用のお客様には、オープンソースプロジェクトに使用できる無料のクレジットが付与されます。パブリックのオープンソースプロジェクトでは、無料のコンテナも利用できます。詳しくは、「xref:oss#[オープンソースプロジェクトのビルド]」を参照してください。
+Free プランをご利用のお客様には、オープンソースプロジェクトに使用できる無料のクレジットが付与されます。 パブリックのオープンソースプロジェクトでは、無料のコンテナも利用できます。詳しくは、「xref:oss#[オープンソースプロジェクトのビルド]」を参照してください。
 
 [#next-steps]
 == 次のステップ

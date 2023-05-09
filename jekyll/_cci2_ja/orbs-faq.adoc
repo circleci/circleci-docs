@@ -1,0 +1,30 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= Orb に関するよくあるご質問
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、Orb に関するよくあるご質問をご紹介しています。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+よく寄せられるご質問や技術的な問題など、Orb の使用時に役立つ情報をまとめました。
+
+[#orb-faqs]
+== よくあるご質問一覧
+
+include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+
+[#see-also]
+== 関連項目
+
+- xref:orb-concepts#[Orb のコンセプト]: CircleCI Orb のハイレベルな情報
+- xref:creating-orbs#[Orb のパブリッシュ プロセス]: ワークフローやジョブで使用する Orb に関する情報
+- xref:reusing-config#[Orb リファレンスガイド]: 再利用可能な Orb、コマンド、パラメーター、および Executor の例

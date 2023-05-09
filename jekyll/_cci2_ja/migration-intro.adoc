@@ -14,19 +14,21 @@ contentTags:
 
 :toc-title:
 
-移行プロセスを開始する前に、CircleCI の基本的な仕組みをご理解ください。
+[#why-migrate-to-circleci]
+== CircleCI に移行する理由
 
-以下の資料を参照してください。
+CircleCI は、大変優れた CI ツールです。 CI/CD は CircleCI が設立されてから10年以上にわたって専門としてきたものです。 CircleCI が他の CI/CD ツールと異なる点は、通常の機能に加えて以下の生産性向上機能があることです。
 
-- https://circleci.com/continuous-integration/[継続的インテグレーションの基礎]
-- <<concepts#,CircleCI のコンセプト>>
-- <<hello-world#,CircleCI の Hello World>>
-- <<getting-started#,各手順のチュートリアル>>
-- <<about-circleci#,CircleCI について>>
+1. **高度なキャッシュ** - xref:caching#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ] に加えて、CircleCI では xref:docker-layer-caching#[Docker イメージレイヤー] に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
+1. **ビルドへの SSH 接続** - CircleCI は、 xref:ssh-access-jobs#[実行環境への安全な SSH 接続] 機能を提供しており、ログの監視、ファイルの操作、および各環境と直接やり取りすることが可能です。 これは、失敗したビルドのデバッグに非常に役立ちます。
+1. **リソースクラス** - プラットフォーム上でさまざまなサイズの xref:optimizations#resource-class[Executor] を使用することができ、ノード上のワークロードの大きさに応じた調整に最適です。
+1. **テストの並列実行** - CircleCI のプラットフォームは、 ジョブの同時実行だけでなく、並行環境間でテストを分割する機能も備えています。 xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで] 、ビルド時間を大幅に短縮することができます。
+
+lhttps://circleci.com/ja/signup/[今すぐ無料アカウントを作成し] 、CircleCI をお試しください。チームでのご利用をお考えでしたら、 https://circleci.com/ja/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[セールスチームにご連絡をいただければ] 、トライアルを設定させていただきます。
 
 CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-2021[移行コース]を受講すると、CircleCI への移行についてさらに詳しく学ぶことができます。
 
-NOTE: Premium サポートや Advanced サポートをご利用のお客様は、customersuccess@circleci.com にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
+NOTE: Premium サポートや Advanced サポートをご利用のお客様は、mailto:customersuccess@circleci.com[customersuccess@circleci.com] にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
 
 [#project-migration-methodology]
 == プロジェクトの移行方法
@@ -140,7 +142,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 * <<migrating-from-azuredevops#,Azure DevOps からの移行>>
 * <<migrating-from-buildkite#,Buildkite からの移行>>
 * <<migrating-from-gitlab#,GitLab からの移行>>
-* <<migrating-from-github#,GitHub Actions からの移行>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
 * <<migrating-from-jenkins#,Jenkinsからの移行>>
 * <<migrating-from-teamcity#,TeamCity からの移行>>
 * <<migrating-from-travis#,Travis CI からの移行>>
