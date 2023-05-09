@@ -9,28 +9,28 @@ contentTags:
 = マシンランナーの Windows へのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーの Windows へのインストール手順
+:page-description: このドキュメントでは、CircleCI セルフホストランナーの Windows へのインストール手順をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-このページでは、CircleCI のマシンランナーを Windows にインストールする方法を説明します。
+{% include snippets/runner-1.0-deprecation-first.adoc %}
 
-{% include snippets/ja/runner-platform-prerequisites.adoc %} 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
+このページでは、CircleCI のマシンランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
+以下のページでは、マシンランナーと、その依存関係 (Chocolatey、Git、Gzip など) を Windows サーバーにインストールする手順を説明します。
 
-*また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
 [#installation-steps]
-== アンインストール・再インストール手順
+== インストール手順
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
