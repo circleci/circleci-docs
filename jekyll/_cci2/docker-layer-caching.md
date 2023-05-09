@@ -5,12 +5,11 @@ short-title: "Enabling Docker Layer Caching"
 description: "How to reuse unchanged cache layers in images you build to reduce overall run time"
 categories: [optimization]
 order: 70
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Docker layer caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
@@ -43,7 +42,6 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 DLC is only useful when creating your own Docker image with docker build, docker compose, or similar docker commands.It does not decrease the wall clock time that all builds take to spin up the initial environment.
 
-{:.tab.switcher.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -52,44 +50,6 @@ jobs:
  build:
     docker:
       - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
-      - run: docker build .
-```
-
-{:.tab.switcher.Server_3}
-```yaml
-version: 2.1
-jobs:
- build:
-    docker:
-      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
-      - run: docker build .
-```
-
-{:.tab.switcher.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
-# with config version 2.1.
-version: 2
-jobs:
- build:
-    docker:
-      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -263,7 +223,7 @@ In the `.circleci/config.yml` snippet below, let's assume the `build_elixir` job
 By adding `docker_layer_caching: true` underneath our `machine` executor key, we ensure that CircleCI will save each Docker image layer as this Elixir image is built.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build_elixir:
     machine:
@@ -302,7 +262,7 @@ In the video example, the job runs all of the steps in a Dockerfile with the `do
 The first run takes over two minutes to build the Docker image. If nothing changes in the Dockerfile before the second run, those steps happen instantly: in zero seconds.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:

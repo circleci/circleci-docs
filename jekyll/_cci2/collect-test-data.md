@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 sectionTags:
   javascript:
     - "#jest"
@@ -88,16 +87,6 @@ See the [Test Insights](/docs/insights-tests/) page for information on using the
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
 
 Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/index.html#tag/Insights) to find test failure information.
-
-## Test Insights for server v2.x
-{: #test-insights-for-server-v2x }
-**If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
-
-![Insights for failed tests]({{site.baseurl}}/assets/img/docs/insights.png)
-
-The above screenshot applies to CircleCI server v2.x only.
-{: class="alert alert-info" }
-
 
 ## Enabling formatters
 {: #enabling-formatters }
@@ -197,11 +186,10 @@ A working `.circleci/config.yml` section for testing might look like this:
 ### Mocha with nyc
 {: #mocha-with-nyc }
 
-Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
+Following is an example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
 ```yml
-version: 2
 jobs:
     build:
         environment:

@@ -4,7 +4,6 @@ contentTags:
     - Cloud
     - Server v4.x
     - Server v3.x
-    - Server v2.x
   vcs:
     - github
     - bitbucket
@@ -59,7 +58,7 @@ If you have set up user keys for your project, follow these steps:
 . Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
 . Delete the user key by clicking the **X**.
 . Add a new user key by clicking **Add User Key**.
-. Go to GitHub’s User settings to delete the matching public key. The GitHub URL is typically `https://github.com/settings/keys`or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled `CircleCI` created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+. Go to GitHub’s User settings to delete the matching public key. The GitHub URL is typically `https://github.com/settings/keys` or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled `CircleCI` created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
 
 CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
 

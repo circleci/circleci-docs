@@ -8,7 +8,6 @@ contentTags:
     - Cloud
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -190,6 +189,73 @@ In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_
 
 The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
 {: class="alert alert-info"}
+
+### Environment variable substitution
+{: #environment-variable-substitution }
+
+The CircleCI CLI offers a wrapper around the [`envsubst`](https://github.com/a8m/envsubst) tool, available both locally as well as in all jobs running on CircleCI. `envsubst` is a command-line utility used to replace environment variables in text strings.
+
+CLI command:
+
+```sh
+circleci env subst
+```
+
+#### Usage
+{: #env-subst-usage }
+
+The `circleci env subst` command can accept text input from `stdin` or as an argument.
+
+Within your repository create a file such as `template.json`, with value replaced by environment variable strings
+
+```json
+{
+  "foo": "$FOO",
+  "provider": "${PROVIDER}"
+}
+```
+
+`envsubst` can convert all types of environment variable strings, including those encased in curly braces (`{}`).
+
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts).
+
+```yaml
+version: 2.1
+jobs:
+  process-template:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run: 
+          name: Process template file
+          environment:
+            # Environment variables would typically be served via a context
+            FOO: bar
+            PROVIDER: circleci
+          command: |
+            circleci env subst < template.json > deploy.json
+            cat deploy.json
+workflows:
+  env-subst-workflow:
+    jobs:
+      - process-template
+```
+
+In this example, the `<` symbol is used to redirect the contents of the `template.json` file as _input_ to the `env subst` command, while the `>` symbol is used to redirect the output of the env subst command to the `deploy.json`.
+
+You could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
+
+Output:
+
+```sh
+{
+  "foo": "bar",
+  "provider": "circleci"
+}
+```
+
+For instructions on installing the CircleCI CLI locally, read the [Installing the CircleCI local CLI](/docs/local-cli/) guide.
 
 ### Alpine Linux
 {: #alpine-linux }

@@ -2,12 +2,11 @@
 layout: classic-docs
 title: Skip or cancel jobs and workflows
 description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
@@ -16,9 +15,6 @@ This document describes how to skip or cancel work when triggering pipelines. Th
 {: #skip-jobs }
 
 By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. This not only skips the marked commit, but also **all other commits** in the push.
-
-If you are using **CircleCI server v2.x**, you can still use the method for skipping workflows described here, even though you are not using the pipelines feature.
-{: class="alert alert-info"}
 
 ### Scope
 {: #scope }
@@ -93,13 +89,8 @@ It is important to carefully consider the impact of enabling the auto-cancel fea
 
 Projects which have auto-cancel enabled will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 
-* Scheduled workflows 
+* Scheduled workflows
 * Re-run workflows
-
-## Auto cancel for CircleCI server installations
-{: #auto-cancel-for-circleci-server-installations }
-
-CircleCI server v2.x only supports the auto-cancel builds feature for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
 
 ### Steps to enable auto-cancel for CircleCI server installations
 {: #steps-to-enable-auto-cancel-for-circleci-server-installations }

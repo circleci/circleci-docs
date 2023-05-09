@@ -35,11 +35,11 @@ CircleCI Server 3.x では、プライマリジョブ スケジューラとし�
 ### Nomad クライアント
 Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
 
-ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference/#docker-executor[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。 デフォルトのインスタンスタイプでは、最大で `xlarge` リソースクラスを実行できます。
+すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューに入っているビルドを追跡し、必要に応じて Nomad クライアントマシンの数を増やして負荷を分散させます。 Nomad クライアントのインスタンスタイプを小さいものにするとコストを削減できますが、使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference/#docker-executor[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。 デフォルトのインスタンスタイプでは、最大で `xlarge` リソースクラスを実行できます。
 
 Nomad クライアントのリソースを最適に使用するためのオプションについては、 https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント] を参照してください。
 
-NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPU です。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
+NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
 
 Nomad のポート要件の詳細については、 https://circleci.com/docs/ja/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[クラスタのハードニング] をご覧ください。
 

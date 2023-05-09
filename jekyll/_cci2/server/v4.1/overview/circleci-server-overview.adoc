@@ -1,12 +1,13 @@
 ---
-description: "CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster."
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.1
+    - Server Admin
 ---
-= CircleCI server v{serverversion41} overview
+= CircleCI server v4.1 overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
 :toc: macro
 :toc-title:
@@ -21,7 +22,7 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 NOTE: For installation instructions, you have the option of either the xref:../installation/phase-1-prerequisites#[regular] or xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] installation guide.
 
 .CircleCI Server v4.x Architecture
-image::server-4-architecture-diagram.png[Server v4.xservices architecture]
+image::server-4-architecture-diagram.png[Server v4.x services architecture]
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
@@ -75,13 +76,6 @@ The application exposes a number of external ports. These ports are used for var
 | HTTP web app traffic
 |
 
-| 8800
-| TCP
-| Inbound
-| Administrators
-| Admin console
-|
-
 | 22
 | TCP
 | Inbound
@@ -97,7 +91,7 @@ The application exposes a number of external ports. These ports are used for var
 | Only required for the Nomad clients.
 |===
 
-CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
+CircleCI server schedules CI jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
 server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, Google Cloud Storage, or other supported options). Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
@@ -382,7 +376,7 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:release-notes#[CircleCI Server v4.x Release Notes]
+* xref:release-notes#[CircleCI server v4.1 release notes]
 * xref:../installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
-* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from Server v3 to Server v4]
+* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]

@@ -1,12 +1,13 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v4.1
+  - Server Admin
 ---
-= Phase 3 - Install CircleCI Server
+= Phase 3 - Install CircleCI server
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to install the CircleCI Server Helm deployment to an air-gapped environment.
+:page-description: How to install the CircleCI server Helm deployment to an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:
@@ -19,9 +20,13 @@ The `values.yaml` file for installing CircleCI should be prepared according to t
 
 === a. Configure global values
 
-NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.yaml[Example `values.yaml`] page.
+NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values[Example `values.yaml`] page.
 
-In the `global.container` section of your `values.yaml` file, set the domainName value to the internal domain name of the installation. Set container.org to `circleci` and `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance.
+In the `global.container` section of your `values.yaml` file:
+
+* Set the `domainName` value to the internal domain name of the installation
+* Set `container.org` to `circleci`
+* Set `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance
 
 [source, yaml]
 ----
@@ -30,13 +35,13 @@ global:
   domainName: "server.internal.example.com"
   container:
     registry: "docker.internal.example.com:5000"
-    org: "circleci"
+    org: "<image-registry-org>"
 ----
 
-NOTE: If you are using a non-TLS installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. #INSERTLINKHERE#
+NOTE: If you are using a non-TLS installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
 
 === b. Configure GitHub Enterprise
-In the github section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
+In the `github` section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
 
 The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
 
@@ -74,11 +79,11 @@ object_storage:
     secretKey: <minio-root-password>
 ----
 
-NOTE: Update the endpoint protocol to http or https depending on your MinIO installation.
+NOTE: Update the endpoint protocol to `http` or `https` depending on your MinIO installation.
 
 
-=== d. Configure Min.IO Build Agent
-In the distributor section of the `values.yaml` file, point `agent_base_url` and `launch_agent_base_url` to your MinIO installation, and the created `circleci-data` bucket you created in phase 2 of the installation.
+=== d. Configure MinIO Build Agent
+In the distributor section of the `values.yaml` file, point `agent_base_url` and `launch_agent_base_url` to the `circleci-data` bucket you created in your MinIO installation.
 
 [source, yaml]
 ----
@@ -89,7 +94,7 @@ distributor:
 
 NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
 
-NOTE: Update the protocol to http or https depending on your MinIO installation.
+NOTE: Update the protocol to `http` or `https` depending on your MinIO installation.
 
 
 [#configure-build-agent-image]
@@ -105,12 +110,12 @@ nomad:
 
 NOTE: Update the port on your Docker registry hostname as necessary
 
-NOTE: If using a non-tls installation for your docker registry, visit the Non-TLS Docker Installation section for consideration. INSERTLINKHERE
+NOTE: If using a non-tls installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
 
 
 [#configure-vm-service]
 === f. Disable VM Service
-In the `vm_service` section of `values.yaml`, set `enabled` to `false` to disable it, as it requires cloud connectivity.
+In the `vm_service` section of `values.yaml`, set `enabled` to `false` to disable it. This feature requires cloud connectivity.
 
 [source, yaml]
 ----
@@ -137,11 +142,11 @@ nginx:
 
 With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI server.
 
-We recommend first creating a namespace (circleci-server) and deploying the chart into that namespace.
+We recommend first creating a namespace (`circleci-server`) and deploying the chart into that namespace.
 
 [source,bash,subs=attributes+]
 ----
-helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version {serverversion41} -f <path-to-values.yaml>
+helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version 4.1.1 -f <path-to-values.yaml>
 ----
 
 [#post-install-circleci-server-helm-airgap]

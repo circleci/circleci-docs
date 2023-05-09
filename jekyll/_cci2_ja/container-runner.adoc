@@ -341,6 +341,17 @@ NOTE: コンテナランナーは、クラスタ全体の権限を使って、�
 
 コンテナのロギングには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
 
+コンテナランナーは現在、ロギングコンテナに対してデフォルトのリソース制限とリクエストを設定しています、これらは以下の通りです：
+
+```yaml
+requests:
+  cpu: 50m
+  memory: 64Mi
+limits:
+  cpu: 100m
+  memory: 128Mi
+```
+
 [#constraint-validation]
 == 制約の確認
 
@@ -374,7 +385,7 @@ agent:
 [#cost-and-availability]
 == 料金と提供プラン
 
-コンテナランナーのジョブは <<persist-data#managing-network-and-storage-usage,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
+コンテナランナーのジョブは <<persist-data#managing-network-and-storage-usage,Runner Network Egress>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
 各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
@@ -487,8 +498,6 @@ ENV BUILDAH_ISOLATION=chroot
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 * コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
-* link:https://hub.docker.com/_/alpine[Alpine ベースのイメージ] を link:https://microk8s.io/[microk8s]link:https://microk8s.io/[microk8s] で使用すると、エラーコード 139 が返されるという既知の制限があります。
- 現時点では、CircleCI の link:https://circleci.com/developer/images/image/cimg/base[ベースイメージ] を使って独自のイメージをビルドし、Alpine ベースのイメージに含まれていた必要なカスタマイズを手動で追加することを推奨します。 詳細については、 link:https://discuss.circleci.com/t/container-agent-fails-to-start-task-agent-exit-code-139-segmentation-fault/45232[Discuss の投稿 (英語)] を参照してください。
 
 [#faqs]
 == FAQ

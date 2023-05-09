@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 suggested:
   - title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
@@ -21,7 +20,7 @@ suggested:
 ## Overview
 {: #overview }
 
-The [CircleCI command line interface (CLI)](https://circleci-public.github.io/circleci-cli/) brings CircleCI's advanced and powerful tools to your terminal. The CLI is supported on cloud and server v3.x+ installations. If you are using server v2.x, please see the [legacy CLI installation](#using-the-cli-on-circleci-server-v2-x) section.
+The [CircleCI command line interface (CLI)](https://circleci-public.github.io/circleci-cli/) brings CircleCI's advanced and powerful tools to your terminal.
 
 Some of the things you can do with the CLI include:
 
@@ -183,20 +182,6 @@ brew uninstall circleci
 choco uninstall circleci-cli -y --remove dependencies
 ```
 **Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
-
-## Using the CLI on CircleCI server v2.x
-{: #using-the-cli-on-circleci-server-v2-x }
-
-Currently, only the legacy CircleCI CLI is available to run on server v2.x installations of CircleCI on macOS and Linux distributions. To install the legacy CLI:
-
-1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
-2. To install the CLI, run the following command:
-
-```shell
-$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
-```
-
-The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
 ## Next steps
 {: #next-steps }

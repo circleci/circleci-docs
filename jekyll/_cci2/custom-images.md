@@ -5,12 +5,11 @@ short-title: "Using Custom-Built Docker Images"
 description: "Why and how to create custom Docker images"
 categories: [containerization]
 order: 30
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to create and use custom Docker images with CircleCI.
@@ -231,7 +230,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 
 ```yml
-version: 2.0
+version: 2.1
 jobs:
   build:
     docker:

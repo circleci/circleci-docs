@@ -4,7 +4,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Configuration Introduction
 :page-layout: classic-docs
@@ -365,6 +364,17 @@ In this example, you have:
 * Implemented the `approval` job type to require a manual approval within your workflow.
 
 Using what you have learned above, you are ready to create some powerful pipelines.
+
+[#visual-studio-code-extension]
+## VS Code extension
+
+If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+
+The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
 
 [#see-also]
 == See also

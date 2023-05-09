@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
@@ -82,7 +81,6 @@ jobs:
       - checkout
       - run: <command>
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build
@@ -108,7 +106,6 @@ The following `config.yml` snippet is an example of a workflow configured for se
 
 ```yaml
 workflows:
-  version: 2
   build-test-and-deploy:
     jobs:
       - build
@@ -138,7 +135,6 @@ The following `config.yml` snippet is an example of a workflow configured for fa
 
 ```yaml
 workflows:
-  version: 2
   build_accept_deploy:
     jobs:
       - build
@@ -181,7 +177,6 @@ The following is a config example, with comments:
 # ...
 
 workflows:
-  version: 2
   build-test-and-approval-deploy:
     jobs:
       - build  # your custom job from your config, that builds your code
@@ -219,15 +214,7 @@ Some things to keep in mind when using manual approval in a workflow:
 
 The following screenshot demonstrates a workflow on hold.
 
-{:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow](/docs/assets/img/docs/approval_job_cloud.png)
-
-{:.tab.switcher.Server_3}
-![Approved Jobs in On Hold Workflow](/docs/assets/img/docs/approval_job_cloud.png)
-
-{:.tab.switcher.Server_2}
-![Switch Organization Menu](/docs/assets/img/docs/approval_job.png)
-
 
 By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
 
@@ -261,7 +248,6 @@ Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain
 
 ```yaml
 workflows:
-  version: 2
   commit:
     jobs:
       - test
@@ -331,7 +317,6 @@ The following `config.yml` snippet is an example of a sequential job workflow co
 
 ```yaml
 workflows:
-  version: 2
   build-test-and-deploy:
     jobs:
       - build
@@ -361,7 +346,6 @@ The following `.circleci/config.yml` snippet is an example of a workflow configu
 
 ```yaml
 workflows:
-  version: 2
   dev_stage_pre-prod:
     jobs:
       - test_dev:
@@ -397,7 +381,6 @@ In the example below, two workflows are defined:
 
 ```yaml
 workflows:
-  version: 2
   untagged-build:
     jobs:
       - build
@@ -416,7 +399,6 @@ In the example below, two jobs are defined within the `build-n-deploy` workflow:
 
 ```yaml
 workflows:
-  version: 2
   build-n-deploy:
     jobs:
       - build:
@@ -441,7 +423,6 @@ In the example below, three jobs are defined with the `build-test-deploy` workfl
 
 ```yaml
 workflows:
-  version: 2
   build-test-deploy:
     jobs:
       - build:

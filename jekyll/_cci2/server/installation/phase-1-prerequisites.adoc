@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
@@ -121,7 +122,7 @@ There are no requirements regarding VPC setup or disk size for your cluster. It 
 | CircleCI Version
 | Kubernetes Version
 
-| 4.0.0
+| 4.0.x
 | 1.22 - 1.23
 |===
 

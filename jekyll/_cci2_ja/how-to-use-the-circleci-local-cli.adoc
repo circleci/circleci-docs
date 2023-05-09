@@ -8,7 +8,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 このページでは、CircleCI CLI の機能の使用方法を説明します。

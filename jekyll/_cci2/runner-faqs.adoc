@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-first.adoc %}
+
 This page answers frequently asked questions for CircleCI's self-hosted container and machine runners.
 
 [#self-hosted-runner-faqs]

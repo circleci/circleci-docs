@@ -1,0 +1,201 @@
+[#what-are-credits]
+=== クレジットとは何ですか？
+
+クレジットは、マシンのタイプとサイズに基づく使用料の支払いに充てられます。 また、Docker レイヤー キャッシュなどの有料機能を使用したときにも消費されます。
+
+たとえば、毎分 10 クレジットのレートで Docker または Linux の Medium コンピューティングオプションを利用する場合、25,000 クレジットのパッケージでは 2,500 分のビルドが可能です。 CircleCI ではパフォーマンス (開発者の生産性の向上) と価値を備えた最適なビルドを行なっていただけるよう複数のコンピューティングサイズを提供しています。
+
+必要に応じて、並列実行を使用するとビルド時間をさらに短縮できます。並列実行により、ジョブを複数のテストに分割し、同時に実行できます。 2 倍の並列実行により、通常 2,500 分で実行されるビルドが 1,250 分で実行できるため、開発者の生産性がさらに向上します。 2つの Executor がそれぞれ 1,250 分間並行して実行している場合、合計ビルド時間は 2,500 分になります。
+
+[#buy-credits-in-any-increments]
+=== クレジットを購入するには？ 必要な分だけ購入することは可能ですか?
+
+選択したクレジットパッケージの料金が、毎月初めに請求されます。
+
+[#what-do-i-pay-for]
+=== 支払う料金の内訳はどのようになっていますか?
+
+プレミアム機能を利用するアクティブユーザーの人数分の料金、コンピューティングに対する料金のほか、Premium サポートを利用している場合はその料金も含まれます。
+
+* マシンサイズを選べる機能などを利用するには、１アクティブ ユーザーあたり月額 25,000 クレジット (税抜) が必要です。
+* コンピューティングの月額料金は、マシンのサイズと使用時間に基づいて、クレジットで支払われます。
+** 25,000 クレジットで 1 パッケージとなっており、1 パッケージは 15 ドル (税抜) です。
+** クレジットは毎月持ち越され、1 年後に失効します。
+* Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
+
+[#run-out-of-credits]
+=== クレジットを使い切るとどうなりますか?
+
+On the *Performance plan*, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
+
+If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. 多くの場合、クレジットパッケージを増やすことにより補充の繰り返しを最小限に抑えることができます。 You can manage your plan by clicking `Plan Overview`.
+
+On the *Free plan*, jobs will fail to run once you have run out of credits.
+
+[#do-credits-expire]
+=== クレジットに有効期限はありますか？
+
+*Performance plan*: Credits expire one year after purchase. アカウントのサブスクリプションを停止した場合も、未使用のクレジットは失効します。
+
+[#how-do-i-pay]
+=== 支払い方法は？
+
+毎月の料金は CircleCI アプリ内で支払えます。
+
+[#when-do-i-pay]
+=== 支払いのスケジュールについて教えてください。
+
+On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+
+[#what-is-prepaid-billing]
+=== What is prepaid billing?
+
+Prepaid billing is a payment option for customers on the Performance plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and be able to get discounted prices for credits based on volume purchased.
+
+[#how-can-i-get-on-prepaid-billing]
+=== How can I get on prepaid billing?
+
+All Performance plan customers can choose to get on prepaid billing through the CircleCI web app. To access this option, follow these steps:
+
+. Select **Plan** in the web app
+. Select the **Manage** tab
+. Select to **Set up and switch** to get started switching to prepaid billing
+
+[#i-still-have-credits-from-my-monthly-subscription]
+=== I still have credits from my Monthly subscription, what happens if I get on prepaid billing now?
+
+You will still have access to any balance credits that were previously purchased, and the 12 month expiry date will remain.
+
+[#i-selected-prepaid-billing-but-i-didnt-receive-a-discount]
+=== I selected prepaid billing but I didn’t receive a discount. このような状況に至った理由として、
+
+Discounting for prepaid billing starts at a purchase volume of 5 Million credits onwards.
+
+[#what-happens-when-i-run-out-of-all-my-prepaid-billing-credits]
+=== What happens when I run out of all my prepaid billing credits?
+
+Similar to what happens today on Performance plans, when you run out of credits your credit package will be automatically renewed at the purchase level you have selected.
+
+[#when-will-i-be-charged-for-my-prepaid-billing-purchase]
+=== When will I be charged for my prepaid billing purchase?
+
+Upon selecting prepaid billing, your credit card will be charged immediately. Subsequently, when you run out of credits, your credit card will be charged again to provide you with a refill.
+
+[#i-want-to-change-my-upcoming-prepaid-billing-refill]
+=== I want to change my upcoming prepaid billing refill, how do I do that?
+
+You can follow these steps:
+
+. Select **Plan* in the web app
+. Select the **Manage** tab
+. Click the pencil icon in the **Credits** section to edit your auto refill rate
+
+[#do-i-still-get-bonus-credits-and-5-free-seats]
+=== Do I still get 30,000 bonus credits and 5 free seats on prepaid billing?
+
+Yes, all prepaid billing customers still receive the benefit of 30,000 credits and 5 free user seats every month.
+
+[#share-plans-across-organizations-billed-centrally]
+=== 複数の組織で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
+
+Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+
+On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+
+On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. 有料プランを別の組織に譲渡した場合、お客様の組織は Free プランにダウングレードされます。
+
+[#container-used-for-under-one-minute-pay-for-a-full-minute]
+=== コンテナの使用時間が 1 分未満でも、1 分間分の料金が計上されますか?
+
+はい、その場合でも 1 分間分の料金をお支払いいただく必要があります。 1 分未満の秒単位は切り上げてクレジットを計算します。
+
+[#calculate-monthly-storage-and-network-costs]
+=== 1ヶ月のストレージ使用料金とネットワーク料金の計算方法は？
+
+Calculate your monthly storage and network costs by finding your storage and network usage on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Plan] Usage.
+
+[#storage]
+==== ストレージ
+
+To calculate monthly storage costs from your daily usage, click on the *Storage* tab to see if your organization has accrued any overages beyond the GB-monthly allotment. 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、1ヶ月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
+
+[#network]
+==== ネットワーク
+
+ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 Read more on the xref:persist-data#overview-of-network-and-storage-transfer[Persisting data] page.
+
+超過分（GB/TB）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
+
+[#calculate-monthly-IP-ranges-costs]
+=== 1ヶ月の IP アドレスの範囲機能料金の計算方法は？
+
+Calculate your monthly IP ranges costs by finding your IP ranges usage on the link:https://app.circleci.com/[CircleCI app] by navigating to Plan > Plan Usage.
+
+In addition to the *IP Ranges Usage* summary, you can navigate to the *IP Ranges* tab to find more details about your data usage. このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲機能が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
+
+This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+この機能は、IP アドレスの範囲機能が有効なジョブで使用されるデータ 1 GB ごとに、お客様のアカウントから 450 クレジットを消費します。 You can also view job-specific details of IP ranges usage in the *Resources* tab on the *Job Details* UI page. See xref:ip-ranges#pricing[IP ranges pricing] for more information.
+
+[#predict-monthly-IP-ranges-cost-without-enabling-feature-first]
+=== 有効化する前に 1ヶ月の IP アドレスの範囲機能の料金を見積もるにはどうすれば良いですか？
+
+You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the **Resources** tab on the Job Details UI page. GB になっていない場合は GB に変換し、450 クレジットを乗じて Docker ジョブで IP アドレスの範囲機能を有効にする場合の概算コストをお見積もりください。
+
+[#per-active-user-pricing]
+=== アクティブユーザー単位の料金が設定されているのはなぜですか?
+
+クレジットは、コンピューティングの利用に対して消費されます。 CircleCI は、できるだけコストを抑えながら、CI の基本的な推奨事項である「頻繁なジョブ実行」を行っていただくことを目指しています。 アクティブユーザー単位で設定しているのは、プラットフォーム機能とジョブオーケストレーションの利用に対する料金です。 たとえば、依存関係のキャッシュ、アーティファクトのキャッシュ、ワークスペースなどがあり、いずれの機能も追加のコンピューティングコストをかけずにビルド時間を短縮するのに役立ちます。
+
+[#what-constitutes-an-active-user]
+=== What constitutes an _Active User_?
+
+An `active user` is any user who triggers the use of compute resources on non-OSS projects. 次のようなアクティビティが含まれます。
+
+- Commits from users that trigger builds, including PR Merge commits
+- Re-running jobs in the CircleCI web application, including xref:ssh-access-jobs#[SSH debug]
+- Approving xref:workflows#holding-a-workflow-for-a-manual-approval[manual jobs] (approver will be considered the actor of all downstream jobs).
+- スケジュールされたワークフローの使用
+- マシンユーザー
+
+NOTE: If your project is xref:oss#[open-source] you will *not* be considered an active user.
+
+To find a list of your Active Users, log in to the CircleCI web app, click menu:Plan[Plan Usage > Users].
+
+[#charged-job-is-queued-or-preparing]
+=== ジョブが「Queued」または「Preparing」の場合、課金されますか？
+
+いいえ。 If you are notified that a job is "queued", it indicates that your job is waiting due to a *plan* or *concurrency* limit. ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を 開始 しようとしているため間もなく実行される可能性があります。
+
+[#other-renewal-dates]
+=== 有料プランの更新日はいつですか?
+
+CircleCI からの請求が発生する以下の日付に加え、有料プランへのアップグレードや別の有料プランへの変更をして初めてクレジットカードで決済した日付が、更新日として設定されます。
+
+- 月間プランでは、毎月の月額料金の請求日が更新日になります。
+- 年間プランでは、年に一度の年額料金の請求日が更新日になります。
+- 年間プランをご利用中でも、ユーザーの追加やクレジットの補充によって未払い残高が発生した場合は、その月の最終日が更新日になります。
+- If you are on the Performance plan, anytime your team's credit balance drops below your preset limit, another credit purchase will be processed.
+
+[#credit-plans-for-open-source-projects]
+=== オープンソースプロジェクト向けのクレジットベースプランはありますか?
+
+Open source organizations on our *Free plan* receive 400,000 free credits per month that can be spent on Linux open source projects.  使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
+
+CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソースプロジェクトのビルドに利用できます。 希望される場合は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド用の無料クレジットは、1 組織あたり最大 2 件のジョブの同時実行に使用できます。
+
+[#discounts-for-open-source-performance-plan]
+=== Can I get discounts for open source on the Performance plan?
+
+現在、Performance プランでオープンソースをご利用のお客様への割引は行っていません。
+
+[#charge-for-docker-layer-caching]
+=== コンテナベースの macOS プランに割り当てられたビルド時間を超えるとどうなりますか?
+
+Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:docker-layer-caching#[Docker Layer Caching] page). DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
+
+お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時実行の要求に対応しながら、DLC をジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティングプロバイダーにより CircleCI に追加コストが発生し、そのコストはお客様が DLC を使用する際に引き継がれます。
+
+DLC のご利用金額を見積もるには、設定ファイル内の Docker レイヤーキャッシュが有効になっているジョブと、それらのジョブでビルドしている Docker イメージの数を確認してください。 設定ファイルにジョブが 1 度だけ記述されている場合でも、たとえば並列実行を有効にした場合は、そのジョブがパイプラインで複数回実行される場合もあります。
+
+Docker レイヤーキャッシュの効果は、Docker イメージをビルドしているパイプラインでのみはっきりと現れ、ジョブ中にビルドされるアプリケーションイメージに変更がない場合にそのレイヤーが再利用されることで、イメージのビルド時間が短縮されます。 パイプラインに Docker イメージがビルドされたジョブが含まれていない場合、Docker レイヤーキャッシュのメリットは得られません。

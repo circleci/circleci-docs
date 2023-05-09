@@ -26,6 +26,15 @@ The output of each job can be opened in a new tab (in either raw or formatted st
 
 ![Download and share job step output](/docs/assets/img/docs/pipelines-job-output.png)
 
+## VS Code extension
+{: #visual-studio-code-extension }
+
+If you use Visual Studio Code, you can also monitor and interact with your pipelines directly from VS Code with the [official CircleCI extension](/docs/vs-code-extension-overview/). The extension allows you to customize which projects and pipelines you want to follow, as well as view job logs and test results, download artifacts, approve, re-run, and debug jobs with SSH, and get notified when your workflows fail or need approval.
+
+![Screenshot showing the detailed view of a failed test](/docs/assets/img/docs/vs_code_extension_job-details.png)
+
+The CircleCI VS Code extension is available to download on the [VS Code marketplace.](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)
+
 ## Next steps
 {: #next-steps}
 Find out more about triggering pipelines in the [Triggers Overview](/docs/triggers-overview/).

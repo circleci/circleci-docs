@@ -5,7 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = YAML 設定ファイルの概要
 :page-layout: classic-docs
@@ -30,8 +29,6 @@ CircleCI とプロジェクトを接続する上で重要なのは、`.circleci`
 
 version: 2.1
 ```
-
-CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧バージョンの CircleCI Server、<<install-overview#,Server v2>> でのみ使用されています。
 
 [#execution-environment]
 == 実行環境
@@ -147,8 +144,13 @@ YAML は、インデントについてかなり厳しいです。 http://yaml-on
 [#visual-studio-code-extension]
 == Visual Studio Code の拡張機能
 
-CircleCI では VS Code 拡張機能を作成しました。これにより、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
+CircleCI では VS Code 拡張機能を作成しました。これにより、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。
 
+CircleCI VS Code の拡張機能は、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS コードマーケットプレース] からダウンロードできます。
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
 CircleCI VS Code の拡張機能は、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS コードマーケットプレース] からダウンロードできます。
 
 [#fun-with-yaml]

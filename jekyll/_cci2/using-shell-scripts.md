@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "Using Shell Scripts"
-short-title: "Using Shell Scripts"
 description: "Best practices for using shell scripts for use in CircleCI configuration"
-categories: [getting-started]
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 ## Overview
@@ -52,7 +49,7 @@ jobs:
 Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   shellcheck:
     docker:
@@ -71,7 +68,6 @@ jobs:
     ...
 
 workflows:
-  version: 2
   check-build:
     jobs:
       - shellcheck

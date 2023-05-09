@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.1
+    - Server Admin
 ---
 = Introduction to Nomad cluster operation
 :page-layout: classic-docs
@@ -11,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI uses https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
 
 [#basic-terminology-and-architecture]
 == Basic terminology and architecture
@@ -41,7 +42,7 @@ The get a list of statuses for all jobs in your cluster, run the following comma
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad status
+kubectl exec -it <nomad-server-pod-ID> -- nomad status
 ----
 
 The `Status` is the most important field in the output, with the following status type definitions:
@@ -59,7 +60,7 @@ To get a list of your Nomad clients, run the following command:
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad node-status
+kubectl exec -it <nomad-server-pod-ID> -- nomad node-status
 ----
 
 NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
@@ -68,7 +69,7 @@ To get more information about a specific client, run the following command from 
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
+kubectl exec -it <nomad-server-pod-ID> -- nomad node-status -self
 ----
 
 This gives information such as how many jobs are running on the client and the resource utilization of the client.
@@ -80,12 +81,12 @@ A Nomad job corresponds to an execution of a CircleCI job. Therefore, Nomad job 
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
+kubectl exec -it <nomad-server-pod-ID> -- nomad logs -job -stderr <nomad-job-id>
 ----
 
 NOTE: Be sure to specify the `-stderr` flag, as this is where most Build Agent logs appear.
 
-While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see link:https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
 
 Complete the following steps to get logs from the allocation of the specified job:
 
@@ -121,7 +122,7 @@ nomad node-drain -enable -yes <node-id>
 [#scaling-down-the-client-cluster]
 === Scaling down the client cluster
 
-To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
+To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an link:https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
 
 The script should use the commands in the section above to do the following:
 

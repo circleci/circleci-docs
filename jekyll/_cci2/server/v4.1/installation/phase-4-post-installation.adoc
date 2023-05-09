@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v4.1
+  - Server Admin
 ---
 = Phase 4 - Post installation
 :page-layout: classic-docs
@@ -18,7 +19,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 [#backup-and-restore]
 == Backup and restore
 
-Backups of CircleCI server can be created through https://velero.io/[Velero]. You installed Velero in your cluster during the prerequisites installation phase.
+Backups of CircleCI server can be created through link:https://velero.io/[Velero]. You installed Velero in your cluster during the prerequisites installation phase.
 
 // Don't include this section in the GCP PDF:
 
@@ -27,7 +28,7 @@ ifndef::env-gcp[]
 [#set-up-backup-and-restore-on-aws]
 === Set up backup and restore on AWS
 
-These instructions were sourced from the https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero docs].
+These instructions were sourced from the link:https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero docs].
 
 . **Create an AWS S3 bucket**
 +
@@ -41,7 +42,7 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
 +
-NOTE: `us-east-1` does not support a https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint]. If your region is `us-east-1`, omit the bucket configuration.
+NOTE: `us-east-1` does not support a link:https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint]. If your region is `us-east-1`, omit the bucket configuration.
 
 . **Set up permissions for Velero**
 +
@@ -145,7 +146,7 @@ TIP: the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are values
 Run the following `velero install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you created in step two.
 +
-NOTE: Backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+NOTE: Backups require link:https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 +
 [source, bash]
 ----
@@ -188,10 +189,10 @@ ifndef::env-aws[]
 [#set-up-backup-and-restore-on-gcp]
 === Set up backup and restore on GCP
 
-These instructions were sourced from the documentation for the https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[Velero GCP plugin].
+These instructions were sourced from the documentation for the link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[Velero GCP plugin].
 
 . **Create a GCP bucket**
-
++
 To reduce the risk of typos, you can set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, you can define a variable for your bucket name. Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
 +
 [source,bash]
@@ -203,7 +204,7 @@ gsutil mb gs://$BUCKET/
 
 . **Set up permissions for Velero**
 +
-CAUTION: If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+CAUTION: If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. More information can be found in the link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
 
 .. Set a shell variable for your project ID. Make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
 +
@@ -288,14 +289,14 @@ After running this command, you should see a file named `credentials-velero` in 
 
 ** **Option 2: Workload Identities**
 +
-If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account needs the
+If you are already using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. In this case, the GCP Service Account needs the
 `iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
 
 . **Install and start Velero**
 +
 Run one of the following `velero install` commands, depending on how you authorized the service account. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 +
-NOTE: Backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
+NOTE: Backups require link:https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
 
 ** **using a JSON key file**
 +
@@ -325,7 +326,7 @@ velero install \
     --wait
 ----
 +
-For more options on customizing your installation, refer to the https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero documentation].
+For more options on customizing your installation, refer to the link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero documentation].
 
 . **Verify Velero**
 +
@@ -357,11 +358,11 @@ endif::env-aws[]
 
 The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 
-These instructions were sourced from the https://velero.io/docs/v1.6/contributions/minio/[Velero docs].
+These instructions were sourced from the link:https://velero.io/docs/v1.6/contributions/minio/[Velero docs].
 
 . **Configure `mc` client**
 +
-To start, https://docs.min.io/minio/baremetal/reference/minio-mc.html[configure `mc`] to connect to your storage provider:
+To start, link:https://docs.min.io/minio/baremetal/reference/minio-mc.html[configure `mc`] to connect to your storage provider:
 +
 [source,bash]
 ----
@@ -376,7 +377,7 @@ You can verify your client is correctly configured by running `mc ls my-provider
 +
 Create a bucket for your backups. It is important that a new bucket is used, as Velero cannot use a preexisting bucket that contains other content.
 +
-[source, bash]
+[source,bash]
 ----
 mc mb ${ALIAS}/<YOUR_BUCKET>
 ----
@@ -387,7 +388,7 @@ Create a user and policy for Velero to access your bucket.
 +
 NOTE: In the following snippet `<YOUR_MINIO_ACCESS_KEY_ID>` and `<YOUR_MINIO_SECRET_ACCESS_KEY>` refer to the credentials used by Velero to access MinIO.
 +
-[source, bash]
+[source,bash]
 ----
 # Create user
 mc admin user add $ALIAS <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
@@ -431,7 +432,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 +
 Run the following `velero install` command. This creates a namespace called `velero` and installs all the necessary resources to run Velero.
 +
-NOTE: Backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+NOTE: Backups require link:https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
 +
 [source, bash]
 ----
@@ -491,7 +492,7 @@ velero backup get --show-labels
 velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
 ----
 
-See the https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more details.
+See the link:https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more details.
 
 [#email-notifications]
 == Email Notifications
@@ -510,7 +511,7 @@ smtp:
 [#managing-orbs]
 == Managing orbs
 
-Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
+CircleCI server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
 
 * Copying orbs from the public registry.
 * Updating orbs that may have been copied previously.

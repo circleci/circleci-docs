@@ -1,10 +1,10 @@
 ---
+
 contentTags:
   platform:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = デプロイの概要
 :page-layout: classic-docs
@@ -69,7 +69,7 @@ CircleCI では Docker で使用できる一般的なデプロイシナリオで
 * <<deploy-android-applications#,Android アプリケーションのデプロイ>>
 * <<deploy-to-artifactory#,Artifactory へのデプロイ>>
 * <<deploy-to-aws#,AWS へのデプロイ>>
-* <<deploy-service-update-to-aws-ec2#,AWS EC2 へのデプロイ>>
+* <<deploy-service-update-to-aws-ecs#,AWS ECS へのデプロイ>>
 * <<ecs-ecr#,AWS ECR/ECS へのデプロイ>>
 * <<deploy-to-azure-container-registry#,Azure Container Registry へのデプロイ>>
 * <<deploy-to-capistrano#,Capistrano へのデプロイ>>

@@ -10,7 +10,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
@@ -111,11 +110,6 @@ Endpoint       | Description
 `POST /project/:vcs-type/:username/:project`  | This endpoint allowed users to trigger a new build.
 `POST /project/:vcs-type/:username/:project/build` | This endpoint enabled users to trigger a new build by project.
 `GET /recent-builds` | This endpoint enabled users to retrieve an array of recent builds.
-
-## API v2 and server customers
-{: #api-v2-and-server-customers }
-
-API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
 
 ## Next steps
 

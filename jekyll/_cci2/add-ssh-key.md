@@ -9,7 +9,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
@@ -29,9 +28,6 @@ You may need to add the public key to `~/.ssh/authorized_keys` in order to add S
 
 Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase. The below examples are for macOS. See [GitHub](https://help.github.com/articlesgenerating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) or [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/) documentation for additional details on creating SSH keys.
 
-### CircleCI cloud or server 3.x / server 4.x
-{: #circleci-cloud-or-server-3-x-4-x }
-
 1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
 2. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
@@ -47,23 +43,6 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 7. In the **Private Key** field, paste the SSH key you are adding.
 
 8. Click the **Add SSH Key** button.
-
-### CircleCI server 2.19.x
-{: #circleci-server-2-19-x }
-
-1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
-
-2. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
-
-2. In the **Permissions** section, click on **SSH Permissions**.
-
-3. Click the **Add SSH Key** button.
-
-4. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you do not specify a hostname, the key will be used for all hosts.
-
-5. In the **Private Key** field, paste the SSH key you are adding.
-
-6. Click the **Add SSH Key** button.
 
 ## Add SSH Keys to a Job
 {: #add-ssh-keys-to-a-job }

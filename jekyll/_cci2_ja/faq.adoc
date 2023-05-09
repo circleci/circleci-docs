@@ -1,0 +1,108 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= FAQ
+:categories: ["migration"]
+:description: CircleCI に関してよく寄せられるご質問
+:experimental:
+:page-layout: classic-docs
+:short-title: よくあるご質問
+
+This page answers frequently asked questions about the following CircleCI topics:
+
+[.table]
+[cols=2*]
+|===
+|<<#general,General>>
+|<<#self-hosted-runner,Self-hosted runner>>
+
+|<<#migration,Migration>>
+|<<#pipelines,Pipelines>>
+
+|<<#host-circleci,Host CircleCI>>
+|<<#scheduled-pipelines,Scheduled pipelines>>
+
+|<<#architecture,Architecture>>
+|<<#workflows,Workflows>>
+
+|<<#dedicated-hosts-macos,Dedicated hosts for macOS>>
+|<<#dynamic-configuration,Dynamic configuration>>
+
+|<<#orbs,Orbs>>
+|<<#billing,Billing>>
+
+|<<#author-orbs,Author orbs>>
+|
+|===
+
+[#general]
+== 概要
+
+include::../_includes/snippets/faq/general-faq-snip.adoc[]
+
+[#migration]
+== Nomad Metrics
+
+include::../_includes/snippets/faq/migration-faq-snip.adoc[]
+
+[#host-circleci]
+== Host CircleCI
+
+include::../_includes/snippets/faq/host-faq-snip.adoc[]
+
+[#architecture]
+== アーキテクチャ
+
+include::../_includes/snippets/faq/architecture-faq-snip.adoc[]
+
+[#dedicated-hosts-macos]
+== macOS の専有ホスト
+
+include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
+
+[#orbs]
+== Orb
+
+include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+
+[#author-orbs]
+== Author orbs
+
+include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+
+[#self-hosted-runner]
+== セルフホストランナー
+
+include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]
+
+[#pipelines]
+== パイプライン
+
+include::../_includes/snippets/faq/pipelines-faq-snip.adoc[]
+
+[#scheduled-pipelines]
+== パイプラインのスケジューリング
+
+include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
+
+[#workflows]
+== ワークフロー機能
+
+include::../_includes/snippets/faq/workflows-faq-snip.adoc[]
+
+[#dynamic-configuration]
+== ダイナミックコンフィグ
+
+include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
+
+[#billing]
+== 料金・支払い
+
+Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
+
+include::../_includes/snippets/faq/billing-faq-snip.adoc[]

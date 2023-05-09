@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
-title: "Configuring Databases"
-short-title: "Configuring Databases"
+title: "Configure Databases"
 description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
-order: 35
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
@@ -119,7 +116,7 @@ Using multiple Docker containers for your jobs may cause race conditions if the 
 Following is an example of how to do this in your CircleCI `config.yml` file:
 
 ```yml
-version: 2.0
+version: 2.1
 jobs:
   build:
     working_directory: /your/workdir

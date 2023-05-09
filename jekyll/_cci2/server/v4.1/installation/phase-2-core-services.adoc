@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v4.1
+  - Server Admin
 ---
 = Phase 2 - Core services
 :page-layout: classic-docs
@@ -165,7 +166,10 @@ keyset:
 ----
 --
 
+[#postgres]
 === d. Postgres
+
+[#postgres-credentials]
 ==== Credentials
 The application requires a Kubernetes Secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
@@ -203,6 +207,7 @@ postgresql:
 ----
 --
 
+[#postgres-tls]
 ==== TLS
 Postgres may be extended to use TLS encrpted traffic. When deployed internally, this option is disabled by default but may be enabled by adding the following to your postgresql block of your `values.yaml`
 
@@ -483,7 +488,7 @@ tls:
 --
 *Use ACM*
 
-Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+Have link:https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the link:https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
 Enable `aws_acm` and add the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation to point at the ACM ARN:
 
@@ -615,7 +620,7 @@ ifndef::env-gcp[]
 
 [#s3-compatible]
 ==== S3 compatible
-Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint fo your object storage server.
+Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the link:https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint fo your object storage server.
 
 [source,yaml]
 ----
@@ -743,7 +748,7 @@ kubectl create secret generic object-storage-secret \
 endif::env-aws[]
 
 === m. Installing behind a proxy
-Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the xref:installing-server-behind-a-proxy#[Installing Server Behind a Proxy] guide.
+Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the xref:installing-server-behind-a-proxy#[Installing server behind a proxy] guide.
 
 The following fields need to be configured in your `values.yaml`:
 
@@ -780,6 +785,69 @@ proxy:
     - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
+=== n. Encrypting Environment Variables
+
+All environment variables stored in contexts are encrypted using either https://www.vaultproject.io/[Hashicorp Vault] or  https://developers.google.com/tink[Google Tink]. By Default, CircleCI server 4.x will use Vault to generate and store encryption keys.
+
+==== Use Tink (optional)
+
+The following steps cover using Tink as an alternative to Vault:
+
+. Enable Tink in your `values.yaml`:
++
+[source,yaml]
+----
+tink:
+  enabled: false
+  keyset: ""
+----
++
+When `tink.enabled` is true, Vault will not be deployed.
++
+WARNING: Tink or Vault must be set once during installation, and cannot be changed after deployment.
+
+. Generate a link:https://developers.google.com/tink/design/keysets[keyset], which Tink uses to manage key rotation. The easiest way to do this is to use Google's link:https://developers.google.com/tink/tinkey-overview[Tinkey] CLI utility. Once https://developers.google.com/tink/install-tinkey[installed], use the following command:
++
+[source,shell]
+----
+tinkey create-keyset --key-template XCHACHA20_POLY1305
+----
+
+. CircleCI server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
++
+[.tab.tink.you_create_secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself
+
+Following the example below, create a Kubernetes secret with the name `tink` and a key `keyset`. Apply this secret to the namespace of your CircleCI server installation.
+
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tink
+data:
+  keyset: <your-keyset>
+----
+--
++
+[.tab.tink.circleci_creates_secret]
+--
+**Option 2:** CircleCI Server will create the Kubernetes Secret
+
+You may add the keyset to your `values.yaml` under `tink` as in the example below. CircleCI will generate the required secret to store your keyset.
+
+[source,yaml]
+----
+tink:
+  enabled: false
+  keyset: "<your-keyset>"
+----
+--
+
+WARNING: If your Tink keyset is somehow lost, you will need to generate a new keyset and then recreate your contexts and their associated secrets.
+
 [#deploy]
 == 4. Deploy
 
@@ -791,7 +859,7 @@ USERNAME=<provided-username>
 PASSWORD=<token>
 namespace=<your-namespace>
 helm registry login cciserver.azurecr.io/circleci-server -u $USERNAME -p $PASSWORD
-helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
+helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.1.1 -f <path-to-values.yaml>
 ----
 
 [#create-dns-entry]

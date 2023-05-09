@@ -5,7 +5,7 @@ short-title: "Authoring Orbs Introduction"
 description: "Starting point for how to author an orb"
 categories: [getting-started]
 order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -32,6 +32,9 @@ Practice with [inline orbs]({{site.baseurl}}/reusing-config/#writing-inline-orbs
 
 Orb authors automatically agree to the CircleCI [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All publicly published orbs are made available on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT). For more information, see [Orb Licensing](https://circleci.com/developer/orbs/licensing).
 {: class="alert alert-success"}
+
+Once an orb is created it cannot be deleted. Orbs are [semver compliant](https://semver.org/), and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+{: class="alert alert-warning"}
 
 ## Getting started
 {: #getting-started }

@@ -5,7 +5,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Use the CircleCI CLI to split tests
 :page-layout: classic-docs
@@ -43,7 +42,7 @@ To check the results of pattern-matching, use the `echo` command.
 
 ```yaml
 # ~/.circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   test:
     docker:

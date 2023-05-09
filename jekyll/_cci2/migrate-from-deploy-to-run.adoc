@@ -1,10 +1,9 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server v2.x
-  - Server v3.x
   - Server v4.x
+  - Server v3.x
 ---
 = Migrate from deploy to run
 :page-layout: classic-docs
@@ -106,7 +105,7 @@ workflows:
   deploy-step-workflow:
     jobs:
       - doing-things-job
-      # add your new job and make it depend on the 
+      # add your new job and make it depend on the
       # "doing-things-job"
       - deploy-job:
           requires:
@@ -171,6 +170,6 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on the xref:workflows#fan-outfan-in-workflow-example[workflows] page. 
+This is effectively using a "fan-in" workflow which is described in detail on the xref:workflows#fan-outfan-in-workflow-example[workflows] page.
 
 WARNING: Support for the deprecated `deploy` step will eventually be removed. Ample time will be given for customers to migrate their configuration.
