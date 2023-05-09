@@ -17,12 +17,14 @@ contentTags:
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
+{% include snippets/ja/runner-platform-prerequisites.adoc %}
+
 toc::[]
 
 [#download-the-launch-agent-script]
 == macOS ローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または Apple シリコンの M1) 向けの `launch-agent` バイナリをインストールします。
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. 以下の手順では、選択するユーザーを `USERNAME` としています。
 
 ```shell
 # For macOS x86_64:
@@ -37,7 +39,7 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 [#create-a-circleci-self-hosted-runner-configuration]
 == CircleCI のセルフホストランナー設定ファイルを作成する
 
-CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
+CircleCI エージェントに、作業ディレクトリが格納されているディレクトリへの書き込みアクセス許可を付与する必要があります。 そのディレクトリの所有権を `USERNAME` に変更します。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
 大文字で記載されたさまざまなパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
@@ -66,7 +68,7 @@ logging:
 CircleCI エージェントに、作業ディレクトリが格納されているディレクトリへの書き込みアクセス許可を付与する必要があります。 そのディレクトリの所有権を `USERNAME` に変更します。
 
 ```shell
-sudo chown USERNAME /var/opt/circleci
+sudo mkdir -p '/Library/Preferences/com.circleci.runner'
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
@@ -75,13 +77,13 @@ sudo chown USERNAME /var/opt/circleci
 CircleCI のセルフホストランナー設定ファイルの保存ディレクトリを `root` として作成します。
 
 ```shell
-sudo mkdir -p '/Library/Preferences/com.circleci.runner'
+sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
 ```
 
 先程作成した `launch-agent-config.yaml` をディレクトリにコピーし、権限を`600` に変更します。
 
 ```shell
-sudo cp "launch-agent-config.yaml" "/Library/Preferences/com.circleci.runner/launch-agent-config.yaml"
+sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 ```
 
 ```shell
@@ -94,7 +96,7 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 `com.circleci.runner.plist` ファイルを、パス `/Library/LaunchDaemons/com.circleci.runner.plist`、所有者 `root`、アクセス許可 `644` で作成します。 次のコマンドを使用します。
 
 ```shell
-sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
+sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 ```shell
@@ -102,7 +104,7 @@ sudo chown root: /Library/LaunchDaemons/com.circleci.runner.plist
 ```
 
 ```shell
-sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 下記を新しく作成した `/Library/LaunchDaemons/com.circleci.runner.plist` ファイルにコピーします。
@@ -153,7 +155,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 </plist>
 ```
 
-{% include snippets/ja/machine-runner-example.adoc %}
+{% include snippets/machine-runner-example.adoc %}
 
 [#enable-the-launchd-service]
 == `launchd` サービスを有効にする

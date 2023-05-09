@@ -366,13 +366,13 @@ TIP: エラーの場合、問題は誤ったインデントにより引き起こ
 [#visual-studio-code-extension]
 == 関連項目
 
-If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+VS コード を使用している場合、YAML Config ファイルの記述、編集、ナビゲーション、トラブルシューティングを行う際に、公式の xref:vs-code-extension-overview#[CircleCI extension ガイド] をご覧ください。
 
-The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
+この拡張機能は、リアルタイムのシンタックスハイライトと検証、go-to定義とgo-to参照コマンドによるナビゲーション支援、使用ヒント、オートコンプリート候補を提供します。
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
 
-The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
+CircleCI VS Code の拡張機能は、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS コードマーケットプレース] からダウンロードできます。
 
 [#see-also]
 == 関連項目

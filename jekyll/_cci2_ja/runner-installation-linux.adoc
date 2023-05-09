@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-first.adoc %}
+
 このページでは、Linux に CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
@@ -55,7 +57,7 @@ export platform=linux/ppc64le && sh ./download-launch-agent.sh
 [#create-the-circleci-user-and-working-directory]
 == `circleci` ユーザーと作業ディレクトリを作成する
 
-これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、 https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
+これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
 [#ubuntu-debian]
 === Ubuntu/Debian
@@ -106,7 +108,8 @@ sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
-sudo chmod 600 /etc/opt/circleci/launch-agent-config.yaml
+# Install sepolicy and rpmbuild if you haven't already
+sudo yum install -y policycoreutils-devel rpm-build
 ```
 
 新しく作成した `/etc/opt/circleci/launch-agent-config.yaml` ファイルに次の内容をコピーします。
@@ -124,7 +127,7 @@ runner:
 ```
 
 - Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 しかし、CircleCI Web アプリでステータスやジョブ結果を確認する際にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。 The only special characters accepted in RUNNER_NAME are `. () - _`.
+- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 CircleCI Web アプリでステータスやジョブ結果を確認する際にエージェントを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。 The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#configure-selinux-policy]
 == SELinux ポリシーを設定する (RHEL 8)

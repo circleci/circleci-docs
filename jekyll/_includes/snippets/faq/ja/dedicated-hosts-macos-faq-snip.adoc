@@ -1,0 +1,11 @@
+[#how-does-a-dedicated-host-differ]
+=== How does a dedicated host differ from the other macOS resources on CircleCI?
+
+CircleCI's other macOS resources are run on isolated virtual machines, which means that multiple customers can be using VMs on the same host. 専有ホストでは、ホスト全体に排他的なアクセスが可能で、他のユーザーとリソースを共有することはありません。
+
+[#why-is-there-a-minimum]
+=== Why is there a 24-hour minimum?
+
+Apple released an link:https://www.apple.com/legal/sla/docs/macOSBigSur.pdf[updated end-user license agreement (EULA)] along with the release of Big Sur in November 2020, which requires cloud providers to lease Apple hardware to no more than one customer for a minimum of 24 hours.
+
+NOTE: 本サービスを利用することにより、お客様は、Apple ソフトウェア使用許諾契約の条項および Apple ソフトウェアにプレインストールされているソフトウェア (Apple の Xcode 開発者向けソフトウェア、およびその他の Apple または他社ソフトウェアを含むがこれに限定されない) に適用される条件を確認し、これに拘束されることに同意したことを表明し、保証するものとします
