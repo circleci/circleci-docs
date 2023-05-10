@@ -20,7 +20,20 @@ CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュー
 
 toc::[]
 
-== リリース 3.4.5
+== リリース 3.4.7
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/[changelog] を参照して下さい。
+
+== リリース 3.4.6
 
 === アップグレードに関する注意事項
 
@@ -33,7 +46,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-6[changelog] を参照して下さい。
 
-== リリース 3.4.4
+== リリース 3.4.5
 
 === アップグレードに関する注意事項
 
@@ -45,6 +58,19 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 === 更新履歴
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-5[changelog] を参照して下さい。
+
+== リリース 3.4.4
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-4[changelog] を参照して下さい。
 
 == リリース 3.4.3
 
@@ -71,32 +97,6 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 === 更新履歴
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-2[changelog] を参照して下さい。
-
-== リリース 3.4.1
-
-=== アップグレードに関する注意事項
-
-v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
-
-. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
-. KOTS 管理者コンソールからアプリをデプロイします。
-
-=== 更新履歴
-
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-1[changelog] を参照して下さい。
-
-== リリース 3.4.0
-
-=== アップグレードに関する注意事項
-
-v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
-
-. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
-. KOTS 管理者コンソールからアプリをデプロイします。
-
-=== 新機能
-
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-1[changelog] を参照して下さい。
 
 == リリース 3.3.1
 
