@@ -349,11 +349,10 @@ enable_hard["disallow_ssh_rerun"]
 
 sensitive_contexts := { "secops", "deploy_keys", "access_tokens", "security" }
 
-disallow_ssh_rerun = "SSH rerun is disallowed if any job is accessing sensitive contexts" {
+disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
     data.meta.ssh_rerun
-    some wf_name, workflow in input.workflows
-    some job_name, job_info in workflow.jobs[_]
-    count(utils.to_set(job_info.context) & sensitive_contexts) > 0
+    some _, job in input.workflows[_].jobs[_]
+    count(utils.to_set(job.context) & sensitive_contexts) > 0
 }
 ----
 
