@@ -20,7 +20,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 [#set-an-environment-variable-in-a-shell-command]
 == シェルコマンドでの環境変数の設定
 
-CircleCI では環境変数の設定時の挿入はサポートしていませんが、 <<env-vars#using-parameters-and-bash-environment,`BASH_ENV` を使用して>> 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
+CircleCI では環境変数の設定時の挿入はサポートしていませんが、xref:env-vars#parameters-and-bash-environment[`BASH_ENV` を使用して] 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
 version: 2.1
@@ -50,7 +50,7 @@ NOTE: シェルによっては、`~/.tcshrc` や `~/.zshrc` などのシェル�
 [#set-an-environment-variable-in-a-step]
 == ステップでの環境変数の設定
 
-ステップで環境変数を設定するには、 <<configuration-reference#run,`environment` キー>> を使用します。
+ステップで環境変数を設定するには、 xref:configuration-reference#run[`environment` キー] を使用します。
 
 ```yaml
 version: 2.1
@@ -72,12 +72,12 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、<<env-vars#using-parameters-and-bash-environment,`BASH_ENV`を使用して>> 値をエクスポートします。
+NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、xref:env-vars#parameters-and-bash-environment[`BASH_ENV` を使用して] 値をエクスポートします。
 
 [#set-an-environment-variable-in-a-job]
 == ジョブでの環境変数の設定
 
-ジョブで環境変数を設定するには、 <<configuration-reference#job_name,`environment` キー>> を使用します。
+ジョブで環境変数を設定するには、 xref:configuration-reference#job_name[`environment` キー] を使用します。
 
 ```yaml
 version: 2.1
@@ -129,7 +129,7 @@ jobs:
             echo $MY_ENV_VAR
 ```
 
-コンテキストを作成すると、複数のプロジェクト間で環境変数を共有すると共に、アクセス可能なユーザーを制御できるようになります。 コンテキストを使用して環境変数へのアクセスを制御する方法の詳細は、 <<contexts#restricting-a-context,コンテキストの制限>> を参照してください。
+コンテキストを作成すると、複数のプロジェクト間で環境変数を共有すると共に、アクセス可能なユーザーを制御できるようになります。 コンテキストを使用して環境変数へのアクセスを制御する方法の詳細は、xref:contexts#restricting-a-context[コンテキストの制限]を参照してください。
 
 [#set-an-environment-variable-in-a-project]
 == プロジェクトでの環境変数の設定
@@ -169,9 +169,9 @@ jobs:
 [#set-an-environment-variable-in-a-container]
 == コンテナでの環境変数の設定
 
-環境変数は Docker コンテナにも設定することができます。 設定するには、 <<configuration-reference#docker,`environment` キー>> を使用します。
+環境変数は Docker コンテナにも設定することができます。 設定するには、 xref:configuration-reference#docker[`environment` キー] を使用します。
 
-NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、カスタムイメージのガイドの <<custom-images#adding-an-entrypoint,エントリポイントの追加>> セクションを参照してください。
+NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、カスタムイメージのガイドの xref:custom-images#adding-an-entrypoint[エントリポイントの追加]セクションを参照してください。
 
 ```yaml
 version: 2.1

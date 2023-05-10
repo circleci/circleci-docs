@@ -341,6 +341,13 @@ from_trusted_origin(origin) {
 }
 ----
 
+[#use-sets-and-variables]
+== Use sets and variables
+
+It is best practice to avoid hard coding values in code, and the same goes for your config policies. Hard coding data, such as project IDs, makes it difficult to read code, and can be confusing when collaborating with wider team members ("what is `99ada477-7029-44bb-b675-5b2d6448d1ab`?"). Because using rego means your policies are defined in code, you can define sets and variables in rego files external to your individual policies, and reference these sets and variables across multiple policies. For an example of this in practice, see the xref:manage-contexts-with-config-policies#use-sets-and-variables[Manage contexts with config policies] page.
+
+For further reading, see the link:https://circleci.com/blog/compliance-with-config-policies/[Config policies blog post].
+
 [#testing-policies]
 == Testing policies
 

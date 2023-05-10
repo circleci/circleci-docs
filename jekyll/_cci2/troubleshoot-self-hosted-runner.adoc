@@ -11,6 +11,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-first.adoc %}
+
 This page describes errors and troubleshooting methods for container and machine runners.
 
 include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]

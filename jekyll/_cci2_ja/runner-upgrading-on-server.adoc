@@ -19,7 +19,7 @@ toc::[]
 [#self-hosted-runner-for-server-compatibility]
 == マシンランナーのサーバーとの互換性
 
-xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの互換性リスト]を参照して、お客様のインストール環境に必要なランナーのバージョンを確認してください。
+Refer to the xref:runner-installation-cli#self-hosted-runners-for-server-compatibility[server compatibility chart] to find the runner version you need for your installation.
 
 [#upgrading-self-hosted-runner-on-server]
 == サーバー上のマシンランナーのアップグレード

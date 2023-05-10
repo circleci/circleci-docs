@@ -11,11 +11,11 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-first.adoc %}
+
 This page describes how to install self-hosted through the CircleCI web app. If you are interested in self-hosted runner on server, see the <<runner-installation-cli#,Self-hosted runners with the CLI>> page.
 
 NOTE: Installing runners is available directly in the https://app.circleci.com/[CircleCI web app] for container runner, Linux, macOS, and Windows. You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
-
-toc::[]
 
 [#container-runner-prerequisites]
 == Container runner prerequisites

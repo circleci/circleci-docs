@@ -223,7 +223,7 @@ CircleCI Server 3.0 は、以下のサービスで構成されています。 �
 
 | kotsadm-kots
 | ライセンス
-| メインの KOTS アプリケーション。 CircleCI Server のアップグレードと設定を行う KOTS 管理者コンソールを実行します。
+| メインの KOTS アプリケーション。 CircleCI Server のアップグレードと設定を行う KOTS 管理者コンソールを実行します。 
 | CircleCI Server のアップグレードと設定が行えなくなります。
 管理者コンソールは使用できません。
 |

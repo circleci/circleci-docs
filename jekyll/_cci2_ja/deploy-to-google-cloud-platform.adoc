@@ -1,24 +1,25 @@
 ---
 
-description: ""
+description: このドキュメントでは、Google Cloud Platform へのデプロイの例を説明します。
 contentTags:
   platform:
   - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Google Cloud Platform へのデプロイ
+=  Google Cloud Platform へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、Google Cloud Platform へのデプロイの例を説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
+このノウハウガイドでは、CircleCIをGoogle Cloud Platformにデプロイするための設定方法について説明します。
+
 [#introduction]
 == はじめに
 
-Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> に関するドキュメントを参照してください。
+Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 xref:authorize-google-cloud-sdk#[Google Cloud SDK の承認] に関するドキュメントを参照してください。
 
 上記の Orb に加えて、デプロイに焦点をあてた GCP CircleCI イメージ link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp] を作成しました。
 
@@ -72,8 +73,8 @@ jobs:
           # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
           sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
           # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image.
-          # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
-          kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
+            # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
+            kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
 
 workflows:
   version: 2
@@ -86,7 +87,6 @@ workflows:
           filters:
             branches:
               only: main # Only deploy on the main branch
-
 ```
 
 他の例は、 link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud デプロイサンプルプロジェクト] を参照してください。

@@ -126,6 +126,12 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 |Linux ARM64
 |`platform=linux/arm64`
 
+|For Linux s390x
+|`platform=linux/s390x`
+
+|For Linux ppc64le
+|`platform=linux/ppc64le`
+
 |macOS x86_64
 |`platform=darwin/amd64`
 
@@ -160,7 +166,10 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 |1.0.29477-605777e
 
 |3.4
-|1.0.33818-051c2fc
+|1.0.48283-583799b
+
+|4.0
+|1.0.48283-583799b
 |===
 +
 `<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、以下を実行します。
@@ -218,10 +227,10 @@ CircleCI Server のマイナーバージョンはそれぞれ、特定バージ�
 |1.0.29477-605777e
 
 |3.4
-|1.0.33818-051c2fc
+|1.0.48283-583799b
 
 |4.0
-|1.0.33818-051c2fc
+|1.0.48283-583799b
 |===
 
 [#additional-resources]
