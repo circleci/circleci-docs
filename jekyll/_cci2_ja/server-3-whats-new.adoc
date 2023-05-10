@@ -98,24 +98,24 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-2[changelog] を参照して下さい。
 
-== リリース 3.3.1
+== リリース 3.4.1
 
-=== 更新履歴
+=== アップグレードに関する注意事項
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-1[changelog] を参照して下さい。
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
 
 . `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
 . KOTS 管理者コンソールからアプリをデプロイします。
 
-=== 新機能
+=== 更新履歴
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-1[changelog] を参照して下さい。
 
-== リリース 3.3.0
+== リリース 3.4.0
 
-=== 新機能
+=== アップグレードに関する注意事項
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-1[changelog] を参照して下さい。
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
 
 . `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
 . KOTS 管理者コンソールからアプリをデプロイします。
@@ -132,9 +132,9 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-0[changelog] を参照して下さい。
 
-== リリース 3.2.2
+== リリース 3.3.1
 
-=== アップグレードに関する注意事項
+=== 更新履歴
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-1[changelog] を参照して下さい。
 
@@ -142,7 +142,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === アップグレードに関する注意事項
 
-* https://circleci.com/docs/api/v2/#operation/rerunWorkflow[ワークフローの再実行] のエンドポイントは、`accepted` メッセージではなくワークフロー ID を返すようになりました。 詳細については、 https://circleci.com/docs/ja/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール] を参照してください。
+* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、 https://circleci.com/docs/ja/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール] を参照してください。
 * https://circleci.com/docs/ja/webhooks/[Webhooks] が利用できるようになりました。
 * インサイトダッシュボードが利用できるようになりました。
 * IRSA (AWS) をオブジェクトストレージの認証キーの代わりに使用できるようになりました。
@@ -151,33 +151,33 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-0[changelog] を参照して下さい。
 
-== リリース 3.2.0
+== リリース 3.2.2
 
 === アップグレードに関する注意事項
 
 * https://circleci.com/docs/api/v2/#operation/rerunWorkflow[ワークフローの再実行] のエンドポイントは、`accepted` メッセージではなくワークフロー ID を返すようになりました。
 
-=== 新機能
+=== 更新履歴
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-2[changelog] を参照して下さい。
 
-== リリース 3.1.0
+== リリース 3.2.1
 
 === アップグレードに関する注意事項
 
 KOTS 管理者コンソールのメニューバーで *Version History* を選択し、CircleCI Server v3.2.0 の **Deploy** をクリックします。
 
-DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。
+v3.1.x から v3.2.x. にアップグレードする前に、まず <<Upgrade notes>> を参照して下さい。
 
-=== 新機能
+=== 更新履歴
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-1[changelog] を参照して下さい。
 
-== リリース 3.0.2
+== リリース 3.2.0
 
-=== 更新履歴
+=== アップグレードに関する注意事項
 
 KOTS 管理者コンソールのメニューバーで *Version History* を選択し、CircleCI Server v3.2.0 の **Deploy** をクリックします。
 
@@ -255,9 +255,9 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-1-0[changelog] を参照して下さい。
 
-== リリース 3.0.1
+== リリース 3.1.0
 
-=== 更新履歴
+=== アップグレードに関する注意事項
 
 IMPORTANT: 本リリースでは、`frontend-external` ロードバランサーが廃止されました。 今後、受信トラフィックはすべて、`traefik` ロードバランサーにより処理されます。 以前の 3.x バージョンからアップデートする場合、`frontend-external` ロードバランサーを参照する DNS レコードを、`circleci-server-traefik` ロードバランサーを参照するように更新する必要があります。 Traefik ロードバランサーの外部 IP アドレスまたは DNS 名は、クラスタにアクセス可能なターミナルで `kubectl get svc/circleci-server-traefik` を実行することで取得できます。
 
@@ -288,13 +288,13 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-1-0[changelog] を参照して下さい。
 
-== 次に読む
+== リリース 3.0.2
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-0-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-0-2[changelog] を参照して下さい。
 
-== 次に読む
+== リリース 3.0.1
 
 === 更新履歴
 
