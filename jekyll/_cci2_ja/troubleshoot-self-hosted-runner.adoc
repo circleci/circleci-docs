@@ -13,8 +13,8 @@ contentTags:
 
 :toc-title:
 
-このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 
-include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-troubleshoot-snip.adoc[]
