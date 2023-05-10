@@ -14,7 +14,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 [#introduction]
 == はじめに
@@ -131,4 +131,4 @@ CircleCI Academy の https://academy.circleci.com/runner-course?access_code=publ
 
 - <<runner-concepts#,ランナーのコンセプト>>
 - <<runner-installation#,Web アプリからのセルフホストランナーのインストール>>
-- link:https://circleci.com/changelog/self-hosted-runner/[セルフホストランナーの更新履歴 (英語)]
+- link:https://circleci.com/ja/changelog/self-hosted-runner/[セルフホストランナーの更新履歴 ]
