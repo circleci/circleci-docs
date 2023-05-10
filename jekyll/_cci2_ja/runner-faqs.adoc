@@ -21,4 +21,4 @@ contentTags:
 [#self-hosted-runner-faqs]
 == FAQ
 
-include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/self-hosted-runner-faq-snip.adoc[]
