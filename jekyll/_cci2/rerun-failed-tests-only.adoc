@@ -30,7 +30,7 @@ image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to 
 * Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
 * The testing job uses `circleci tests run` (see below for details) to execute tests.
 +
-NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
+NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag  (see below for instructions).
 
 [#quickstart]
 == Quickstart
@@ -146,7 +146,7 @@ gem 'rspec_junit_formatter'
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
 
-. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter].  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
+. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter] (note this is a 3rd party tool that is not maintained by CircleCI).  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
 +
 ```yaml
   #add required reporters (or add to package.json)
@@ -205,6 +205,22 @@ You can also add it to your `jest.config.js` file by following these link:https:
 . Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 +
 `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
+
+[#configure-a-job-running-playwright-tests]
+=== Configure a job running Playwright tests
+
+. Modify your test command to use `circleci tests run`:
++
+```yaml
+ - run:
+    command: |
+      mkdir test-results
+      pnpm run serve &
+      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
+```
+
+. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#known-limitations]
 == Known limitations
@@ -267,3 +283,15 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 **Question:** What happens when a job is re-run and it is using parallelism and test splitting?
 
 **Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key.  However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.  For example, if `parallelism` is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers/VMs. The remaining six containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
+
+**Question:** My maven surefire tests are failing when I try to set this feature up?
+
+**Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module. 
+
+**Question:** Can I specify timing type for test splitting using `circleci tests run`?
+
+**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
+
+---
+
+
