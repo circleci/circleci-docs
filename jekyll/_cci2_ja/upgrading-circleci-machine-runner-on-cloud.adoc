@@ -12,7 +12,7 @@ contentTags:
 :toc: macro:
 :toc-tittle:
 
-CAUTION: **Self-hosted runner version 1.0 will sunset on July 27, 2023,** and will be temporarily unavailable on June 28, 2023. **Update to 1.1.**
+CAUTION: **セルフホストランナー バージョン 1.0 は、2023年 7月 23日**にサポートを終了し、2023年 6月28日に一時的利用できなくなります。 **1.1 に更新してください。**
 
 ここでは、CircleCI クラウド 上で CircleCI マシンランナーを更新する方法を説明します。
 
@@ -21,7 +21,7 @@ CAUTION: **Self-hosted runner version 1.0 will sunset on July 27, 2023,** and wi
 
 マシンランナーのバージョンは、バイナリに `--version` フラグを付けることで確認することができます。 CircleCI マシンランナー バイナリのデフォルトのインストールディレクトリは以下の通りです：
 
-* Linux、macOS: `/opt/circleci/circleci-launch-agent`
+* Linux と macOS: `/opt/circleci/circleci-launch-agent`
 * Windows: `C:\Program Files\CircleCI\circleci-launch-agent.exe`
 
 [#enable-auto-update]
