@@ -74,7 +74,7 @@ jobs:
 
 Below is a break down of what is happening during this build’s execution:
 
-* All commands are executed in the [primary-container](docs/glossary/#primary-container). (line 5)
+* All commands are executed in the [primary-container](/docs/glossary/#primary-container). (line 5)
 * Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 11)
 * [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 13)
 * We use [project environment variables](/docs/set-environment-variable/#set-an-environment-variable-in-a-project) to store credentials for Docker Hub. (line 19)
