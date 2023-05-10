@@ -4,17 +4,17 @@
 以前は、パイプラインパラメーターは API でしか使用できませんでしたが、 今では、ダイナミックコンフィグ機能を使用すると、パイプラインが実行される (API または Webhook のいずれかからトリガーされる、つまり VCS へのプッシュイベント) 前に、パイプラインパラメーターを動的に設定できるようになりました。
 
 [#can-i-use-a-custom-executor]
-=== Can I use a custom executor?
+=== カスタム Executor を使用できますか？
 
-Custom executors can be used, but require certain dependencies to be installed for the continuation step to work (currently: `curl`, `jq`).
+カスタム Executor は使用できますが、continuation ステップが機能するように、特定の依存関係をインストールする必要があります (現時点: `curl`、`jq`)。
 
 [#what-is-the-continuation-orb]
-=== What is the continuation orb?
+=== continuation orb とは？
 
-The `continuation` orb assists you in managing the pipeline continuation process. The
-`continuation` orb wraps an API call to link:https://circleci.com/docs/api/v2/#operation/continuePipeline[`continuePipeline`]. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation`] orb documentation for more information.
+`continuation` Orb は、パイプラインの続行プロセスを管理できるようにユーザーを支援します。 `continuation` Orb は、
+link:https://circleci.com/docs/api/v2/#operation/continuePipeline[`continuePipeline`] に対する API 呼び出しをラップします。 詳細については、link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation`] Orb のドキュメントを参照してください。
 
 [#possible-to-not-use-continuation-orb]
-=== Is it possible to not use the continuation orb?
+=== continuation orb を使用しないことは可能ですか？
 
-If you have special requirements not covered by the continuation orb, you can implement the same functionality in other ways. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source[orb source code] to learn how the continuation functionality is implemented with the orb.
+continuation Orb でカバーされない特別な要件がある場合は、他の方法で同じ機能を実装することができます。 Orb を使って続行機能がどのように実装されているかを学習するには、link:https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source[Orb Source] を参照してください。
