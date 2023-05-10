@@ -82,7 +82,7 @@ Using `resource_class`, it is possible to specify CPU and RAM resources for each
 {: #configuraiton }
 
 ### Dynamic configuration
-{: dynamic-configuration}
+{: #dynamic-configuration}
 
 Use dynamic configuration to generate CircleCI config files dynamically, depending on specific pipeline values or file paths. Dynamic config allows you to:
 
