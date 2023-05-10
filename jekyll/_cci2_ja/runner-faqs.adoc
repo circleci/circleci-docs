@@ -14,11 +14,11 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI のセルフホストコンテナとマシンランナーに関してよく寄せられるご質問にお答えします。
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 このページでは、CircleCI のセルフホストコンテナとマシンランナーに関してよく寄せられるご質問にお答えします。
 
 [#self-hosted-runner-faqs]
 == FAQ
 
-include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-faq-snip.adoc[]
