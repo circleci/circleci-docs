@@ -1,0 +1,47 @@
+[#can-i-migrate-existing-scheduled-workflows]
+=== Can I migrate existing scheduled workflows to scheduled pipelines?
+
+Yes, visit the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Scheduled pipelines migration] guide for more information.
+
+[#find-schedules-that-i-have-created]
+=== How do I find the schedules that I have created?
+
+As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
+
+```shell
+curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>"
+```
+
+For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
+
+[#what-time-zone-is-used-for-scheduled-pipelines]
+=== パイプラインのスケジュール実行の際に使われるタイムゾーンは？
+
+スケジュールの指定は、UTC 協定世界時のタイムゾーンに基づきます。
+
+[#pipelines-scheduled-to-run-specific-time-of-day]
+=== パイプラインを指定した日時にスケジュール実行することは可能ですか？
+
+Yes, you can xref:scheduled-pipelines#[Scheduled pipelines]. You can set up scheduled pipelines through the xref:scheduled-pipelines#use-project-settings[CircleCI web app], or with xref:scheduled-pipelines#use-the-api[CircleCI API v2].
+
+If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], please see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
+
+[#scheduled-pipelines-guaranteed-to-run-time-scheduled]
+=== スケジュールを設定したパイプラインは、指定した時間どおりに正確に実行されますか?
+
+スケジュールの正確性については保証できません。 スケジュールは、設定した時間にコミットがプッシュされたとして実行されます。
+
+[#scheduled-pipeline-run-later]
+=== Why did my scheduled pipeline run later than expected?
+
+There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to link:https://en.wikipedia.org/wiki/Cron#CRON_expression[the Cron expression].
+
+たとえば、08:00 (協定世界時) のスケジュールを 1 時間に 1 回と指定すると、このスケジュールされたパイプラインは 08:00 ～ 09:00 (協定世界時) の間に 1 回実行されます。 これは 08:00 (協定世界時) ちょうどに実行されるという意味ではないのでご注意ください。
+
+このパイプラインのスケジュール実行は、その後は常に最初の実行と同じ時間に実行されます。 つまり、最初にスケジュールされたパイプラインが 08:11 (協定世界時) に実行された場合、その次も 08:11 (協定世界時) に実行されます。
+
+[#do-you-support-regex]
+=== Do you support regex?
+
+Not currently. パイプラインのスケジュール実行には、Webhook、API 呼び出し、スケジュールに含まれるコミット SHA、ブランチ、タグ (完全認証、正規表現なし) などの高度に決定論的な入力が必要です。
