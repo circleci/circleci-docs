@@ -133,14 +133,14 @@ link:https://app.circleci.com/[CircleCI アプリ]で Plan &#062; Plan Usage に
 
 IP アドレスの範囲機能の使用状況 のサマリーに加えて、 IP Ranges タブに移動するとお客様のデータ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲機能が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
-This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+このバイト数には、ジョブの全体のネットワーク通信および Docker コンテナの送受信に使われるバイトも含まれます。 IP アドレスの範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータに対しては料金は発生しません 。
 
-この機能は、IP アドレスの範囲機能が有効なジョブで使用されるデータ 1 GB ごとに、お客様のアカウントから 450 クレジットを消費します。 You can also view job-specific details of IP ranges usage in the *Resources* tab on the *Job Details* UI page. See xref:ip-ranges#pricing[IP ranges pricing] for more information.
+この機能は、IP アドレスの範囲機能が有効なジョブで使用されるデータ 1 GB ごとに、お客様のアカウントから 450 クレジットを消費します。 *Job Details* UI ページの *Resources* タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳しくは、xref:ip-ranges#pricing[IP アドレスの範囲機能]のページをご覧ください。
 
 [#predict-monthly-IP-ranges-cost-without-enabling-feature-first]
 === 有効化する前に 1ヶ月の IP アドレスの範囲機能の料金を見積もるにはどうすれば良いですか？
 
-You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the **Resources** tab on the Job Details UI page. GB になっていない場合は GB に変換し、450 クレジットを乗じて Docker ジョブで IP アドレスの範囲機能を有効にする場合の概算コストをお見積もりください。
+Job Details の UI ページの **Resources** タブから、すべての Docker ジョブ (リモート Docker を除く) の概算ネットワーク通信量を確認できます。 GB になっていない場合は GB に変換し、450 クレジットを乗じて Docker ジョブで IP アドレスの範囲機能を有効にする場合の概算コストをお見積もりください。
 
 [#per-active-user-pricing]
 === アクティブユーザー単位の料金が設定されているのはなぜですか?
@@ -148,24 +148,24 @@ You can view an approximation of network transfer for any Docker job (excluding 
 クレジットは、コンピューティングの利用に対して消費されます。 CircleCI は、できるだけコストを抑えながら、CI の基本的な推奨事項である「頻繁なジョブ実行」を行っていただくことを目指しています。 アクティブユーザー単位で設定しているのは、プラットフォーム機能とジョブオーケストレーションの利用に対する料金です。 たとえば、依存関係のキャッシュ、アーティファクトのキャッシュ、ワークスペースなどがあり、いずれの機能も追加のコンピューティングコストをかけずにビルド時間を短縮するのに役立ちます。
 
 [#what-constitutes-an-active-user]
-=== What constitutes an _Active User_?
+=== アクティブユーザーの定義を教えてください。
 
-An `active user` is any user who triggers the use of compute resources on non-OSS projects. 次のようなアクティビティが含まれます。
+アクティブユーザー（`active user`）とは、非 OSS プロジェクトでコンピューティングリソースの使用をトリガーするユーザーのことです。 次のようなアクティビティが含まれます。
 
-- Commits from users that trigger builds, including PR Merge commits
-- Re-running jobs in the CircleCI web application, including xref:ssh-access-jobs#[SSH debug]
-- Approving xref:workflows#holding-a-workflow-for-a-manual-approval[manual jobs] (approver will be considered the actor of all downstream jobs).
+- ビルドをトリガーするユーザーからのコミット (PR マージ コミットを含む)
+- CircleCI の Web アプリケーションでのジョブの再実行 (xref:ssh-access-jobs#[SSH デバッグ]を含む)
+- xref:workflows#holding-a-workflow-for-a-manual-approval[手動承認後に処理を続行するワークフロー]ジョブの手動承認 (承認者はすべてのダウンストリームジョブの実行者と見なされる)
 - スケジュールされたワークフローの使用
 - マシンユーザー
 
-NOTE: If your project is xref:oss#[open-source] you will *not* be considered an active user.
+NOTE: プロジェクトが xref:oss#[オープンソース]の場合は、アクティブ ユーザーとは見なされません。
 
-To find a list of your Active Users, log in to the CircleCI web app, click menu:Plan[Plan Usage > Users].
+アクティブ ユーザーの一覧は、CircleCI の Web アプリケーションにログインし、[Settings (設定)] > [Plan Usage (プランの使用状況)] の順に移動して、[Users (ユーザー)] タブで確認できます。
 
 [#charged-job-is-queued-or-preparing]
 === ジョブが「Queued」または「Preparing」の場合、課金されますか？
 
-いいえ。 If you are notified that a job is "queued", it indicates that your job is waiting due to a *plan* or *concurrency* limit. ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を 開始 しようとしているため間もなく実行される可能性があります。
+いいえ。 ジョブが "queued (キューイング中)"と通知された場合、ジョブがプランや同時実行の制限により待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を 開始 しようとしているため間もなく実行される可能性があります。
 
 [#other-renewal-dates]
 === 有料プランの更新日はいつですか?
@@ -175,24 +175,24 @@ CircleCI からの請求が発生する以下の日付に加え、有料プラ�
 - 月間プランでは、毎月の月額料金の請求日が更新日になります。
 - 年間プランでは、年に一度の年額料金の請求日が更新日になります。
 - 年間プランをご利用中でも、ユーザーの追加やクレジットの補充によって未払い残高が発生した場合は、その月の最終日が更新日になります。
-- If you are on the Performance plan, anytime your team's credit balance drops below your preset limit, another credit purchase will be processed.
+- Performance プランでは、クレジットの残りが設定された最小値を下回った場合、自動的にクレジットが購入されます。
 
 [#credit-plans-for-open-source-projects]
 === オープンソースプロジェクト向けのクレジットベースプランはありますか?
 
-Open source organizations on our *Free plan* receive 400,000 free credits per month that can be spent on Linux open source projects.  使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
+Free プランを利用されているオープンソースの組織には、Linux オープンソースプロジェクトに使用できる 400,000 クレジットが毎月無料で付与されます。  使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソースプロジェクトのビルドに利用できます。 希望される場合は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド用の無料クレジットは、1 組織あたり最大 2 件のジョブの同時実行に使用できます。
 
 [#discounts-for-open-source-performance-plan]
-=== Can I get discounts for open source on the Performance plan?
+=== Performance プランのオープンソースプロジェクトで割引を受けるにはどうすればよいですか?
 
 現在、Performance プランでオープンソースをご利用のお客様への割引は行っていません。
 
 [#charge-for-docker-layer-caching]
-=== コンテナベースの macOS プランに割り当てられたビルド時間を超えるとどうなりますか?
+=== Docker レイヤー キャッシュの利用に料金が発生するのはなぜですか?
 
-Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:docker-layer-caching#[Docker Layer Caching] page). DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
+Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細はxref:docker-layer-caching#[こちら])。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
 お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時実行の要求に対応しながら、DLC をジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティングプロバイダーにより CircleCI に追加コストが発生し、そのコストはお客様が DLC を使用する際に引き継がれます。
 
