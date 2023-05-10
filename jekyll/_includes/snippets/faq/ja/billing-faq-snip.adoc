@@ -26,16 +26,16 @@
 [#run-out-of-credits]
 === クレジットを使い切るとどうなりますか?
 
-On the *Performance plan*, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
+Performance プランでは、0 クレジットになると、25% のクレジットサブスクリプション (最低 25,000 クレジット) が補充されます。 たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
 
-If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. 多くの場合、クレジットパッケージを増やすことにより補充の繰り返しを最小限に抑えることができます。 You can manage your plan by clicking `Plan Overview`.
+アカウントで補充が繰り返し行われている場合は、 CircleCI ウェブアプリにログインし、`Plan` > `Plan Usage` をクリックしクレジットの使用量を確認してください。 多くの場合、クレジットパッケージを増やすことにより補充の繰り返しを最小限に抑えることができます。 プランを管理するには、 `Plan Overview` をクリックしてください。
 
-On the *Free plan*, jobs will fail to run once you have run out of credits.
+Free プランでは、クレジットがなくなるとジョブの実行に失敗します。
 
 [#do-credits-expire]
 === クレジットに有効期限はありますか？
 
-*Performance plan*: Credits expire one year after purchase. アカウントのサブスクリプションを停止した場合も、未使用のクレジットは失効します。
+Performance プランのクレジットは、購入後 1 年で失効します。 アカウントのサブスクリプションを停止した場合も、未使用のクレジットは失効します。
 
 [#how-do-i-pay]
 === 支払い方法は？
@@ -43,66 +43,66 @@ On the *Free plan*, jobs will fail to run once you have run out of credits.
 毎月の料金は CircleCI アプリ内で支払えます。
 
 [#when-do-i-pay]
-=== 支払いのスケジュールについて教えてください。
+=== 支払いのスケジュールは？
 
-On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+Performance プランでは、請求サイクルの初日に、Premium サポートの料金と毎月のクレジットパッケージの料金が請求されます。 その月の間にクレジットが補充された場合 (利用可能なクレジットが 2% に達し 25% が自動補充された場合など) は、補充時に支払いが行われます。
 
 [#what-is-prepaid-billing]
-=== What is prepaid billing?
+=== プリペイド課金とは何ですか？
 
-Prepaid billing is a payment option for customers on the Performance plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and be able to get discounted prices for credits based on volume purchased.
+プリペイド課金は、Performance プランのお客様向けの支払いオプションです。 プリペイド課金では、クレジットを一括購入し、前払いすることができ、購入量に応じたクレジットの割引価格を得ることができます。
 
 [#how-can-i-get-on-prepaid-billing]
-=== How can I get on prepaid billing?
+=== プリペイド課金にするにはどうしたらいいのですか？
 
-All Performance plan customers can choose to get on prepaid billing through the CircleCI web app. To access this option, follow these steps:
+すべての Performance プランをご利用のお客様の皆様には、CircleCIウェブアプリからプリペイド課金にすることを選択できます。 このオプションにアクセスするには、次の手順に従います：
 
-. Select **Plan** in the web app
-. Select the **Manage** tab
-. Select to **Set up and switch** to get started switching to prepaid billing
+. CircleCI の Web アプリで **Plan** を選択する
+. **Manage** タブを選択します
+. プリペイド課金への切り替えを開始するには、**Set up and switch**を選択します
 
 [#i-still-have-credits-from-my-monthly-subscription]
-=== I still have credits from my Monthly subscription, what happens if I get on prepaid billing now?
+=== 月額課金のクレジットが残っていますが、今からプリペイド課金にするとどうなりますか？
 
-You will still have access to any balance credits that were previously purchased, and the 12 month expiry date will remain.
+以前に購入されたクレジットは引き続き利用でき、12ヶ月の有効期限も残ります。
 
 [#i-selected-prepaid-billing-but-i-didnt-receive-a-discount]
-=== I selected prepaid billing but I didn’t receive a discount. このような状況に至った理由として、
+=== プリペイド課金を選択したが、割引が適応されていません。 どうしてでしょうか？
 
-Discounting for prepaid billing starts at a purchase volume of 5 Million credits onwards.
+プリペイド課金の割引は、購入数量が500万クレジットから開始されます。
 
 [#what-happens-when-i-run-out-of-all-my-prepaid-billing-credits]
-=== What happens when I run out of all my prepaid billing credits?
+=== プリペイドクレジットを使い切った場合はどうなりますか？
 
-Similar to what happens today on Performance plans, when you run out of credits your credit package will be automatically renewed at the purchase level you have selected.
+現在の Performance プランと同様に、クレジットが不足すると、クレジットパッケージは選択した購入レベルで自動的に更新されます。
 
 [#when-will-i-be-charged-for-my-prepaid-billing-purchase]
-=== When will I be charged for my prepaid billing purchase?
+=== プリペイド課金の購入代金はいつ請求されますか？
 
-Upon selecting prepaid billing, your credit card will be charged immediately. Subsequently, when you run out of credits, your credit card will be charged again to provide you with a refill.
+プリペイド方式を選択した場合、クレジットカードに即時課金され、その後、 クレジットが不足した場合、再度クレジットカードに課金され、補充されます。
 
 [#i-want-to-change-my-upcoming-prepaid-billing-refill]
-=== I want to change my upcoming prepaid billing refill, how do I do that?
+=== 今後予定しているプリペイド課金リフィルを変更したいのですが、どうすればよいですか？
 
-You can follow these steps:
+適用するには以下の手順を実行します。
 
-. Select **Plan* in the web app
-. Select the **Manage** tab
-. Click the pencil icon in the **Credits** section to edit your auto refill rate
+. CircleCI の Web アプリで **Plan** を選択する
+. **Manage** タブを選択します
+. 自動リフィルレートを編集するには、**Credits**セクションの鉛筆アイコンをクリックします。
 
 [#do-i-still-get-bonus-credits-and-5-free-seats]
-=== Do I still get 30,000 bonus credits and 5 free seats on prepaid billing?
+=== プリペイド課金でもボーナス 30,000 クレジットと無料の5のユーザーシートはもらえるのでしょうか？
 
-Yes, all prepaid billing customers still receive the benefit of 30,000 credits and 5 free user seats every month.
+はい、プリペイド課金のお客様には、毎月30,000クレジットと5つの無料ユーザーシートの特典を引き続きご提供いたします。
 
 [#share-plans-across-organizations-billed-centrally]
 === 複数の組織で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 
-Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+もちろん可能です。CircleCI アプリのサイドバーから `Plan` を選択し、`Share & Transfer` をクリックします。
 
-On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+Free プラン以外のプランでは、`Add Shared Organization` (共有組織の追加オプション) を使用して、管理者アクセス権を持つフリープランの組織とプランを共有することができます。 プランを共有するすべての組織が「Share & Transfer」のページに記載され、子組織のすべてのクレジットとその他の利用料金が親組織に請求されます。
 
-On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. 有料プランを別の組織に譲渡した場合、お客様の組織は Free プランにダウングレードされます。
+Free プラン以外のプランでは、`Transfer Plan` オプションによりお客様が管理者としてのアクセス権を持つ他の Free プランの組織にお客様のプランを譲渡することができます。 有料プランを別の組織に譲渡した場合、お客様の組織は Free プランにダウングレードされます。
 
 [#container-used-for-under-one-minute-pay-for-a-full-minute]
 === コンテナの使用時間が 1 分未満でも、1 分間分の料金が計上されますか?
@@ -112,26 +112,26 @@ On non-free plans, you can transfer your plan to another free organization for w
 [#calculate-monthly-storage-and-network-costs]
 === 1ヶ月のストレージ使用料金とネットワーク料金の計算方法は？
 
-Calculate your monthly storage and network costs by finding your storage and network usage on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Plan] Usage.
+link:https://app.circleci.com/[CircleCI アプリ]で Plan &#062; Plan Usage に移動して、お客様のストレージとネットワークの使用状況を確認し、毎月のストレージとネットワークの料金を計算します。
 
 [#storage]
 ==== ストレージ
 
-To calculate monthly storage costs from your daily usage, click on the *Storage* tab to see if your organization has accrued any overages beyond the GB-monthly allotment. 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、1ヶ月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
+日々の使用量から 1ヶ月のストレージ料金を計算するには、 *Storage* タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、1ヶ月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
 
 [#network]
 ==== ネットワーク
 
-ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 Read more on the xref:persist-data#overview-of-network-and-storage-transfer[Persisting data] page.
+ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 詳しくは、xref:persist-data#overview-of-network and-storage-transfer[データの永続化の概要]のページをご覧ください。
 
 超過分（GB/TB）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
 
 [#calculate-monthly-IP-ranges-costs]
 === 1ヶ月の IP アドレスの範囲機能料金の計算方法は？
 
-Calculate your monthly IP ranges costs by finding your IP ranges usage on the link:https://app.circleci.com/[CircleCI app] by navigating to Plan > Plan Usage.
+1ヶ月の IP アドレスの範囲機能の料金は、link:https://app.circleci.com/[CircleCI アプリ]で Plan &#062; Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
 
-In addition to the *IP Ranges Usage* summary, you can navigate to the *IP Ranges* tab to find more details about your data usage. このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲機能が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
+IP アドレスの範囲機能の使用状況 のサマリーに加えて、 IP Ranges タブに移動するとお客様のデータ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲機能が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
 This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
