@@ -1,7 +1,7 @@
 [#pipeline-parameters-api]
-=== I thought pipeline parameters could only be used with the API?
+=== パイプラインパラメーターは API でしか使用できないのではありませんか？
 
-Previously, this was true. 今では、ダイナミックコンフィグ機能を使用すると、パイプラインが実行される (API または Webhook のいずれかからトリガーされる、つまり VCS へのプッシュイベント) 前に、パイプラインパラメーターを動的に設定できるようになりました。
+以前は、パイプラインパラメーターは API でしか使用できませんでしたが、 今では、ダイナミックコンフィグ機能を使用すると、パイプラインが実行される (API または Webhook のいずれかからトリガーされる、つまり VCS へのプッシュイベント) 前に、パイプラインパラメーターを動的に設定できるようになりました。
 
 [#can-i-use-a-custom-executor]
 === Can I use a custom executor?
