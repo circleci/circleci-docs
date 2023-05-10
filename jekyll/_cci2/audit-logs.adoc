@@ -16,7 +16,12 @@ version:
 == Overview
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics. 
 
-CircleCI customers can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]. Go to the **Audit Log** page within the **Admin** section of the application to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
+If you have administrator permissions for your organization, you can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]: 
+
+. Select to the **Organization Settings** in the web app sidebar 
+. Select **Security** from the menu
+. Scroll down to the **Audit Log** section and specify a date range
+. Click **Request audit logs** to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
 
 NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
