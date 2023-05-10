@@ -15,7 +15,7 @@ contentTags:
 
 :toc-title:
 
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 ここでは、CLI を使って **マシンセルフホストランナー** をインストールする方法を説明します。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 
@@ -128,10 +128,10 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 |Linux ARM64
 |`platform=linux/arm64`
 
-|For Linux s390x
+|Linux s390x
 |`platform=linux/s390x`
 
-|For Linux ppc64le
+|Linux ppc64le
 |`platform=linux/ppc64le`
 
 |macOS x86_64
@@ -201,7 +201,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 
 セルフホストランナーのセットアップが完了したら、 `.circleci/config.yml` ファイルのフィールドを設定してジョブでセルフホストランナーを参照する必要があります。 セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
-CircleCI Server のマイナーバージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。
+{% include snippets/ja/runner-config-reference.adoc %}
 
 [#self-hosted-runners-for-server-compatibility]
 == セルフホストランナーのサーバーとの互換性
