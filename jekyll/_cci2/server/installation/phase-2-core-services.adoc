@@ -792,13 +792,13 @@ proxy:
 
 Once you have completed the fields detailed above, you can deploy CircleCI's core services:
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 USERNAME=<provided-username>
 PASSWORD=<token>
 namespace=<your-namespace>
 helm registry login cciserver.azurecr.io/circleci-server -u $USERNAME -p $PASSWORD
-helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
+helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4}} -f <path-to-values.yaml>
 ----
 
 [#create-dns-entry]
