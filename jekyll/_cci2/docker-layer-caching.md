@@ -74,7 +74,7 @@ orbs:
 jobs:
  build:
     docker:
-      - image: cimg/node:17.2-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: cimg/node:17.2-browsers
 
     steps:
       - checkout
@@ -105,11 +105,6 @@ There is a “DLC set-up” step at the beginning of each job that uses DLC. You
 {: #parallelism-and-dlc }
 
 DLC operates in the same way for jobs that use parallelism. If a `machine` job using DLC is configured with `parallelism: 2`, two jobs run in parallel. Each virtual machine in this case will have a separate DLC cache, and whichever is saved last will be used for the next build.
-
-### Scope of cache
-{: #scope-of-cache }
-
-With DLC enabled, the entirety of `/var/lib/docker` is cached.
 
 ## Deprecated keys
 {: #deprecated-keys }
