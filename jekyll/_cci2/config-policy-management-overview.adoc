@@ -274,6 +274,7 @@ When a policy is evaluated in the context of a triggered pipeline the following 
 
 * `project_id` (CircleCI Project UUID)
 * `build_number` (number)
+* `ssh_rerun` (boolean) - indicates if CI job is started using the SSH rerun feature
 
 * `vcs.branch` (string)
 * `vcs.release_tag` (string)
@@ -331,6 +332,27 @@ from_trusted_origin(origin) {
 	}
 
 	startswith(origin, trusted_origin)
+}
+----
+
+The following is an example of a policy that blocks SSH reruns on configs where a job uses sensitive contexts.
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["ssh_rerun"]
+
+enable_hard["disallow_ssh_rerun"]
+
+sensitive_contexts := { "secops", "deploy_keys", "access_tokens", "security" }
+
+disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
+    data.meta.ssh_rerun
+    some _, job in input.workflows[_].jobs[_]
+    count(utils.to_set(job.context) & sensitive_contexts) > 0
 }
 ----
 
