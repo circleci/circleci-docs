@@ -9,7 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-Use Docker layer caching (DLC) to reduce Docker image build times on CircleCI. DLC is available on all CircleCI plans, and link:https://circleci.com/pricing/[credits] are charged per job run.
+Use Docker layer caching (DLC) to reduce Docker image build times on CircleCI. DLC is available on all CircleCI plans, and [credits](https://circleci.com/pricing/) are charged per job run.
 
 ## Introduction
 {: #introduction }
@@ -26,7 +26,7 @@ Docker layer caching can be used with both the `machine` executor and in a [remo
 ### Remote Docker environment
 {: #remote-docker-environment }
 
-To use DLC with the Docker execution environment, you will need to configure your job to run in a Remote Docker Environment. To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [`.circleci/config.yml`](/docs/configuration-reference/) file:
+To use DLC with the Docker execution environment, you will need to configure your job to run in a [Remote Docker Environment](/docs/building-docker-images/). To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [`.circleci/config.yml`](/docs/configuration-reference/) file:
 
 ```yaml
 version: 2.1
@@ -63,6 +63,9 @@ jobs:
 ## Limitations
 {: #limitations }
 
+### Building Docker images
+{: #building-docker-images }
+
 DLC is only useful when creating your own Docker image with `docker build`, `docker compose`, or similar Docker commands. It does not decrease the wall clock time that all builds take to spin up the initial environment.
 
 ```yaml
@@ -85,6 +88,12 @@ jobs:
 
 DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor](/docs/using-docker/) and appear in the **Spin up Environment** step on your jobs pages.
 {: class="alert alert-info"}
+
+### Buildx builder instances
+
+When using buildx builder instances with DLC it is important to [name your builders](https://docs.docker.com/engine/reference/commandline/buildx_create/#name). Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you no not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
+
+If you store Docker build artifacts in a Docker volume, managed by the buildkit inside buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/buildcache, but buildx builders do have some in-built pruning. For more information, see the [Docker docs](https://docs.docker.com/build/cache/garbage-collection/#default-policies).
 
 ## How DLC works
 {: #how-dlc-works }
