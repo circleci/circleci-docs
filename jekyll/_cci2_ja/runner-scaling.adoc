@@ -16,6 +16,8 @@ contentTags:
 
 toc::[]
 
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
+
 [#introduction]
 == はじめに
 

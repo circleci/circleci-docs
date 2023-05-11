@@ -1,5 +1,5 @@
 [#migrate-existing-solution-to-circleci]
-=== 現在の CI/CD ソリューションから CircleCI に移行できますか？
+=== 現在使用している他社の CI/CD ツール から CircleCI に移行できますか？
 
 はい、CircleCI では下記からの移行ガイドを提供しています。
 
@@ -12,4 +12,4 @@
 - xref:migrating-from-teamcity#[TeamCity]
 - xref:migrating-from-travis#[Travis CI]
 
-You can also visit the xref:migration-intro#[Migration introduction] page for more information.
+詳細は、xref:migration-intro#[移行の概要のガイド]でもご確認いただけます。

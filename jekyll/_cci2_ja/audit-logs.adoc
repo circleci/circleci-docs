@@ -50,6 +50,7 @@ link:https://circleci.com/privacy/#information[データ保持ポリシー] に�
 - workflow.job.finish
 - workflow.job.scheduled
 - workflow.job.start
+- org.workflows.deleted
 
 [#audit-log-fields]
 == 監査ログのフィールド
