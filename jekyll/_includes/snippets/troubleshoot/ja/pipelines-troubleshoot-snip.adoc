@@ -3,16 +3,16 @@
 
 パイプラインのスケジュール実行が実行されない場合、以下を確認してください。
 
-- スケジュール化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？ You can find this setting is under **Attribution** in the **Triggers** section of the web app.
-- スケジュールに設定されたブランチが削除されていませんか？
+- スケジュール化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？ この設定を確認するには、Webアプリの**トリガー（Triggers）**セクションの**アトリビューション （Attribution）** を選択します。
+- スケジュールに設定されたブランチが削除されていないかを確認する
 - お客様の VCS 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効している場合、リクエストが失敗します。
 
 [#jobs-not-running-when-push-commits]
 === コミットをプッシュしてもジョブが実行されません。
 
-CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 More often than not, the error is because of formatting errors in your `.circleci/config.yml` file.
+CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 多くの場合、`.circleci/config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-See the xref:introduction-to-yaml-configurations#[YAML Introduction] page for more details.
+詳細については、xref:introduction-to-yaml-configurations#[YAML に関するページ]を参照してください。
 
 After checking your `.circleci/config.yml` for formatting errors, search for your issue in the link:https://support.circleci.com/hc/en-us[CircleCI support center].
 
