@@ -10,18 +10,18 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 
 はい、CircleCI では Docker Executor で使用する多数の「CircleCI イメージ」を提供しています。 イメージの使用方法および全リストは、link:https://circleci.com/ja/developer/images[CircleCI Developer Hub] および xref:circleci-images#[CircleCI イメージのガイド]をご覧ください。
 
-For the `machine` executor, see the xref:configuration-reference#available-linux-machine-images[available machine images] list.
+`machine` Executor については、xref:configuration-reference#available-linux-machine-images[利用可能なマシンイメージ]をご覧ください。
 
-For an introduction to execution environments and images, see the xref:executor-intro#[Introduction to execution environments].
+実行環境やイメージに関する概要は、xref:executor-intro#[実行環境]をご覧ください。
 
 [#request-new-features]
 === 新機能のリクエストは可能ですか？
 
-Yes, you can visit CircleCI's link:https://circleci.canny.io/[Ideas] page to request new features, or view features that have already been requested. To request a new feature, you will first need to select a category from the *Give Feedback* section.
+はい、link:https://circleci.canny.io/[Ideas] のページから新機能のリクエストや、これまでにリクエストされた機能の閲覧が可能です。 新機能をリクエストするには、まず *Give Feedback* セクションでカテゴリーを選択します。
 
-When viewing requested features, you can sort by *Trending*, *Top*, and *New*, as well as filter by the following:
+これまでにリクエストされた機能を閲覧する際は、*Trending*、*Top*、*New* で並び替えたり、下記によりフィルタリングできます。
 
-- *Under Review*: CirlceCI is considering these feature requests.
-- *Planned*: CircleCI has planned to work on these feature requests in the future.
-- *In Progress*: CircleCI is currently working on these feature requests.
-- *Complete*: CircleCI has added these feature requests to its current offerings.
+- *Under Review*: CircleCI で検討中の機能リクエスト
+- *Planned*: 今後取り組む予定の機能リクエスト
+- *In Progress*: 現在取り組んでいる機能
+- *Complete*: 現在のサービスに追加済みの機能リクエスト
