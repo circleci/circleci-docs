@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-first.adoc %}
+
 This page describes how to install **machine self-hosted runners** through the CLI. If you are interested in container runner on Kubernetes, please see the <<container-runner#,Container runner>> page.
 
 NOTE: Installing self-hosted runners is available directly in the https://app.circleci.com/[CircleCI web app] for Linux, macOS, Docker, and Windows. You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.

@@ -20,7 +20,7 @@ CircleCI is releasing new preview functionality to **re-run failed tests only**.
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This re-run failed tests only re-runs failed tests from the _same_ commit, not new ones.
+This re-run failed tests only option re-runs failed tests from the _same_ commit, not new ones.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
@@ -30,7 +30,7 @@ image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to 
 * Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
 * The testing job uses `circleci tests run` (see below for details) to execute tests.
 +
-NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
+NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag  (see below for instructions).
 
 [#quickstart]
 == Quickstart
@@ -44,7 +44,7 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings) 
-      pytest -o --junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
+      pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
       
 - store_test_results:
     path: test-results
@@ -57,7 +57,7 @@ This example snippet is from a CircleCI configuration file that:
 . Stores the test results in a new directory called `test-results`, and 
 . Uploads those test results to CircleCI.  
 
-**Note:** `-o --junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+**Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
@@ -70,7 +70,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo $TEST_FILES | circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings
+      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings
 
  - store_test_results:
     path: test-results
@@ -84,7 +84,7 @@ Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[g
 +
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
-* `circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
+* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
   ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
   ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
   ** `--split-by-timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
@@ -124,10 +124,10 @@ gem 'rspec_junit_formatter'
  - run: mkdir ~/rspec
  - run:
     command: |
-      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose
+      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
 ```
 
-. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
+. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
@@ -138,15 +138,15 @@ gem 'rspec_junit_formatter'
 - run: mkdir -p ~/cucumber
 - run:
     command: |
-    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose
+    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
 ```
 
-. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`.
+. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
 
-. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter].  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
+. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter] (note this is a 3rd party tool that is not maintained by CircleCI).  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
 +
 ```yaml
   #add required reporters (or add to package.json)
@@ -173,7 +173,7 @@ gem 'rspec_junit_formatter'
 ```
 +
 
-Remember to modify the `glob` command for your specific use case.  
+Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
@@ -193,7 +193,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --”
+      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
       JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
@@ -202,9 +202,25 @@ You can also add it to your `jest.config.js` file by following these link:https:
       path: ./reports/
 ```
 
-. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`.
+. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 +
-`JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
+`JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
+
+[#configure-a-job-running-playwright-tests]
+=== Configure a job running Playwright tests
+
+. Modify your test command to use `circleci tests run`:
++
+```yaml
+ - run:
+    command: |
+      mkdir test-results
+      pnpm run serve &
+      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
+```
+
+. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**
 
 [#known-limitations]
 == Known limitations
@@ -213,6 +229,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests only".
+* Jobs that upload code coverage reports link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[may see issues during a re-run].
 
 [#FAQs]
 == FAQs
@@ -266,3 +283,15 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 **Question:** What happens when a job is re-run and it is using parallelism and test splitting?
 
 **Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key.  However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.  For example, if `parallelism` is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers/VMs. The remaining six containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
+
+**Question:** My maven surefire tests are failing when I try to set this feature up?
+
+**Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module. 
+
+**Question:** Can I specify timing type for test splitting using `circleci tests run`?
+
+**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
+
+---
+
+
