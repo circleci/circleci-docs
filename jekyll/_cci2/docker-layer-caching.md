@@ -94,7 +94,7 @@ DLC has **no** effect on Docker images used as build containers. That is, contai
 
 When using buildx builder instances with DLC, it is important to [name your builders](https://docs.docker.com/engine/reference/commandline/buildx_create/#name). Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you do not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
 
-If you store Docker build artifacts in a Docker volume, managed by the buildkit inside buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/buildcache, but buildx builders do have some in-built pruning. For more information, see the [Docker docs](https://docs.docker.com/build/cache/garbage-collection/#default-policies).
+If you store Docker build artifacts in a Docker volume, managed by the buildkit inside buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/build cache, but buildx builders do have some in-built pruning. For more information, see the [Docker docs](https://docs.docker.com/build/cache/garbage-collection/#default-policies).
 
 ## How DLC works
 {: #how-dlc-works }
