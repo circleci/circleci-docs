@@ -14,22 +14,23 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 
 詳細については、xref:introduction-to-yaml-configurations#[YAML に関するページ]を参照してください。
 
-After checking your `.circleci/config.yml` for formatting errors, search for your issue in the link:https://support.circleci.com/hc/en-us[CircleCI support center].
+`.circleci/config.yml` のフォーマットミスを確認し、それでも解決しない場合は、 
+ CircleCI サポートセンターで検索してみてください。
 
 [#why-is-my-job-queued]
 === ジョブがキューイングするのはなぜですか？
 
-お客様の組織のプランによっては同時実行に制限があり、ジョブがキューイングする場合があります。 If your jobs are queuing often, you can consider link:https://circleci.com/pricing/[upgrading your plan].
+お客様の組織のプランによっては同時実行に制限があり、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、link:https://circleci.com/ja/pricing/[ご利用プランのアップグレード]をご検討ください。
 
 [#why-are-my-jobs-queuing-performance-plan]
 === Performance プランを利用しているのに、ジョブがキューイングするのはなぜですか?
 
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[Resource classes]. ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 Please link:https://support.circleci.com/hc/en-us/requests/new[contact CircleCI support] to request raises on these limits.
+CircleCI のすべてのお客様にシステムを安定した状態で利用していただけるよう、xref:configuration-reference#resourceclass[リソースクラス]ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポート]に制限値の引き上げを依頼してください。
 
 [#find-project-projects-dashboard]
 === プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 
-ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under *Projects*.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
+ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 左上にユーザー `my-user` が表示されている場合、`my-user` に属するプロジェクトだけが  *Projects* の下に表示されます。  `your-org/project` というプロジェクトをビルドする場合は、アプリケーションの組織切替メニューの組織を `your-org` に切り替える必要があります。
 
 [#how-do-docker-image-names-work]
 === Docker イメージの名前はどのように機能していますか？ どこからプルされていますか？
