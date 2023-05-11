@@ -33,7 +33,7 @@ CAUTION: ジョブに Docker デーモンへのアクセスを許可すること
 この方法は最も安全な方法ですが、ジョブの依存関係が変わった場合、セルフホストランナーマシンの再設定が必要になります。
 
 [#what-connectivity-is-required]
-=== どのような接続が必要ですか。
+=== どのような接続が必要ですか?
 
 ジョブの取得と実行の際に CircleCI に接続するために、`runner.circleci.com` と `circleci-binary-releases.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要です。
 
@@ -42,17 +42,17 @@ NOTE: セルフホストランナーにインバウンド接続は必要あり�
 CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
-=== CircleCI のセルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
+=== CircleCI のセルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか?
 
 キャッシュ、ワークスペース、アーティファクトは、ジョブ間でデータを永続化し、ビルドを迅速化するために導入できる方法です。 これらの 3 つの機能はすべて、セルフホストランナーとの互換性があります。
 
 これらの概念の詳細については、下記をご覧ください。
 
 * xref:caching#[Caching]
-* xref:workspaces#[Workspaces]
-* xref:artifacts#[Artifacts]
+* xref:workspaces#[ワークスペース]
+* xref:artifacts#[アーティファクト]
 
-You can also find out more on the xref:persist-data#[Persisting data] page.
+xref:persist-data#[データの永続化] のページでも、詳細をご確認いただけます。
 
 アーティファクトのストレージを自社で完全に管理したい場合は、組み込みのステップを使用せず、ご希望のストレージバックエンドに直接アーティファクトをアップロードすることをお勧めします。
 
@@ -68,12 +68,12 @@ CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用�
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 === 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the link:https://app.circleci.com/[CircleCI web app].
+CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ] のインベントリのページに表示されなくなります。
 
 [#can-i-delete-self-hosted-runner-resource-classes]
 === セルフホストランナーのリソースクラスは削除できますか？
 
-Yes, self-hosted runner resource classes can be deleted through the xref:local-cli#[CLI]. このアクションは取り消すことができないため、そのリソースクラスとそれに紐づくトークンを永遠に削除して良いか確認してください。
+はい、できます。セルフホストランナーのリソースクラスは、 xref:local-cli#[CLI] より削除できます。 このアクションは取り消すことができないため、そのリソースクラスとそれに紐づくトークンを永遠に削除して良いか確認してください。
 
 ```bash
 circleci runner resource-class delete <resource-class> --force
@@ -87,7 +87,7 @@ circleci runner resource-class delete <resource-class> --force
 [#can-i-delete-runner-resource-class-tokens]
 === ランナーリソースクラストークンは削除できますか？
 
-Yes, runner resource class tokens can be deleted through the xref:local-cli#[CLI]. このアクションは取り消すことができないため、そのトークンを永遠に削除して良いか確認してください。 削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
+はい、できます。ランナーリソースクラストークンは、 xref:local-cli#[CLI] より削除することができます。 このアクションは取り消すことができないため、そのトークンを永遠に削除して良いか確認してください。 削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
 
 トークンと識別子のリストを取得するには以下を実行します。
 
@@ -104,7 +104,7 @@ circleci runner token delete <token identifier>
 [#can-i-create-additional-runner-resource-class-tokens]
 === ランナーリソースクラストークンは追加で作成できますか？
 
-Yes, additional runner resource class tokens for a specific runner resource class can be created through the xref:local-cli#[CLI].
+はい、できます、特定のランナーリソースクラスの追加ランナーリソースクラストークンは xref:local-cli#[CLI] から作成できます。
 
 トークンを作成するには以下を実行します。
 
@@ -120,9 +120,9 @@ circleci runner token create <resource-class-name> <nickname>
 [#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found]
 === テスト分割ジョブのステップが `circleci: command not found` でエラーになった理由は？
 
-セルフホストランナーでは、すべてのコマンドで `circleci-agent` を使用しますが、クラウド版 CircleCI では、テスト分割やステップ停止などのコマンドで `circleci-agent` または `circleci` のいずれかを使用します。 Please note, `circleci` is not to be confused with the xref:local-cli#[local CircleCI CLI], and is simply an alias of `circleci-agent`.
+セルフホストランナーでは、すべてのコマンドで `circleci-agent` を使用しますが、クラウド版 CircleCI では、テスト分割やステップ停止などのコマンドで `circleci-agent` または `circleci` のいずれかを使用します。 `circleci` を xref:local-cli#[CircleCI のローカル CLI] と混同しないようご注意ください。`circleci` は、単に `circleci-agent` の別名です。
 
-テストコマンドを `circleci-agent` にプロキシできるようにするためにセルフホストランナージョブで CircleCI のローカル CLI を使用したい場合は、ジョブのステップから CLI をインストールしてください。 Install the CLI as a <<#how-do-i-install-dependencies-needed-for-my-jobs,dependency>> on your machine for machine runner, or include it in a Docker image for container runner.
+テストコマンドを `circleci-agent` にプロキシできるようにするためにセルフホストランナージョブで CircleCI のローカル CLI を使用したい場合は、ジョブのステップから CLI をインストールしてください。 マシンランナー用のマシンに CLI を <<how-do-i-install-dependencies-needed-for-my-jobs,依存関係>> としてインストールするか、コンテナランナーの Docker イメージに含めます。
 
 [#container-runner-specific-faqs]
 === コンテナランナーに関してよく寄せられるご質問
@@ -130,46 +130,46 @@ circleci runner token create <resource-class-name> <nickname>
 ここでは、CircleCI のコンテナランナーに関してよく寄せられるご質問にお答えします。
 
 [#only-one-resource-class-allowed-per-container-agent-deployment]
-==== 1 つのコンテナランナーのデプロイで使用できるリソースクラスは 1 つだけですか。
+==== 1 つのコンテナランナーのデプロイで使用できるリソースクラスは 1 つだけですか?
 
 いいえ。コンテナランナーのデプロイにはリソースクラスをいくつでも使用できます。 コンテナランナーでジョブを正常に実行するには、少なくとも 1 つのリソースクラスが必要です。
 
 [#does-container-runner-use-a pull-model]
-==== コンテナランナーで使用されるのは、プッシュベースモデルとプルベースモデルのどちらですか。
+==== コンテナランナーで使用されるのは、プッシュベースモデルとプルベースモデルのどちらですか?
 
 コンテナランナーはプルベースモデルを使用します。
 
 [#does-container-runner-scale-my-kubernetes-cluster]
-==== コンテナランナーを使って、現在使用中の Kubernetes クラスタをスケーリングできますか。
+==== コンテナランナーを使って、現在使用中の Kubernetes クラスタをスケーリングできますか?
 
 コンテナランナー自体が単一のレプリカセットを独自にデプロイし、スケーリングは今のところ必要ありません。 コンテナランナーが Kubernetes クラスタ自体をスケーリングすることはありません。 ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
 
-You can use the xref:runner-scaling#[queue depth API] as a signal for cluster scaling.
+クラスタスケーリングのシグナルとして xref:runner-scaling#[queue depth API] の使用をご検討ください。
 
 [#limit-for-the-number-of-concurrent-tasks]
-==== コンテナランナーが扱える同時実行タスクの数に上限はありますか。
+==== コンテナランナーが扱える同時実行タスクの数に上限はありますか?
 
-コンテナランナーは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナランナーは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。 ご利用のランナーで 20 個を上回る同時実行数が許可されている場合は、Helm を使用して別の値に設定できます。 See the `agent.maxConcurrentTasks` parameter on the xref:container-runner#parameters[Container runner] page.
+コンテナランナーは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナランナーは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。 ご利用のランナーで 20 個を上回る同時実行数が許可されている場合は、Helm を使用して別の値に設定できます。 xref:container-runner#parameters[コンテナランナー]ページの `agent.maxConcurrentTasks` パラメータを参照してください。
 
 組織でのランナーの同時実行制限数は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限数がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
 
 [#build-docker-images-with-container-agent]
-==== リモート Docker または Docker in Docker (DIND) を介してコンテナランナーで Docker イメージをビルドすることは可能ですか。
+==== リモート Docker または Docker in Docker (DIND) を介してコンテナランナーで Docker イメージをビルドすることは可能ですか？
 
-See xref:container-runner#building-container-images[building container images] for details.
+詳細については、 xref:container-runner#building-container-images[コンテナイメージのビルド] をお読みください。
 
 [#can-i-use-something-other-than-kubernetes]
-==== Kubernetes 以外をコンテナランナーで使用できますか。
+==== Kubernetes 以外をコンテナランナーで使用できますか？
 
 現時点では使用できません。 Kubernetes と Helm をご使用いただく必要があります。
 
 [#require-specific-kubernetes-providers]
-==== コンテナランナーでは特定の Kubernetes プロバイダーを使用する必要がありますか。
+==== コンテナランナーでは特定の Kubernetes プロバイダーを使用する必要がありますか？
 
 いいえ、どの Kubernetes プロバイダーもご利用いただけます。
 
 [#need-to-sit-within-the-cluster]
-==== コンテナランナーは、Pod をデプロイしたクラスタに置く必要がありますか。
+==== コンテナランナーは、Pod をデプロイしたクラスタに置く必要がありますか？
 
 現時点ではその必要があります。
 
@@ -182,7 +182,7 @@ See xref:container-runner#building-container-images[building container images] f
 [#arm64-container-jobs]
 ==== コンテナランナーは arm64 Docker イメージをサポートしていますか？
 
-はい、コンテナランナーは amd64 イメージか arm64 Docker イメージのいずれかを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスの Pod の仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes documentation].
+はい、コンテナランナーは amd64 イメージか arm64 Docker イメージのいずれかを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスの Pod の仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
 
 ```yaml
 agent:
@@ -257,7 +257,7 @@ $ helm upgrade container-agent
 [#iam-ecr-authorization]
 ==== IAM ロールを使って ECR からのイメージのプルを承認するにはどうすればよいですか？
 
-IAM ロールは、link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS ドキュメント] に従って、コンテナランナーで使用するサービスアカウントに関連付けることができます。 ジョブの設定ファイルのイメージで AWS 認証情報が指定されている場合、コンテナランナーのサービスアカウントに付与されている IAM ロールの代わりに AWS 認証情報が使用されます。 See the xref:container-runner#[Container runner] documentation for more details about the container runner service account.
+IAM ロールは、link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS ドキュメント] に従って、コンテナランナーで使用するサービスアカウントに関連付けることができます。 ジョブの設定ファイルのイメージで AWS 認証情報が指定されている場合、コンテナランナーのサービスアカウントに付与されている IAM ロールの代わりに AWS 認証情報が使用されます。 コンテナランナーのサービスアカウントの詳細については、xref:container-runner#[コンテナランナー] を参照してください。
 
 [#sample-configuration-container-agent]
 ==== コンテナランナーを使った設定ファイルのフルサンプルはありますか？
@@ -285,7 +285,7 @@ workflows:
 
 ==== CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合はどうすればよいですか？
 
-If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a xref:runner-installation-docker#[machine runner] with Docker installed.
+CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合は、Docker がインストールされた xref:runner-installation-docker#[マシンランナー] を使用できます。
 
 [#machine-runner-specific-faqs]
 === マシンランナーに関してよく寄せられるご質問
@@ -303,4 +303,4 @@ ps aux | pgrep -f circleci-launch-agent
 
 上記コマンドの結果、3 つ以上のプロセスが返された場合、セルフホストランナーがタスクを実行していると想定できます。
 
-Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the xref:runner-concepts#launch-agent[launch-agent] process will count as a separate process.
+`grep` プロセス自体も 1 つのプロセスとしてカウントされ、 xref:runner-concepts#launch-agent[ローンチエージェント] プロセスは別のプロセスとしてカウントされるため、必ず 2 つを超える数のプロセスがあることを確認してください。
