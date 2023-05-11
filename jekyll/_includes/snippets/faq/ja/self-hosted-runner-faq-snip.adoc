@@ -1,10 +1,10 @@
 [#what-is-a-CircleCI-task-vs-a-job]
 === CircleCI でのタスクとジョブの違いを教えてください。
 
-タスクは CircleCI での作業の最小単位です。 If a job has xref:parallelism-faster-jobs#[parallelism] of one, it is one task. ジョブに並列実行が n 個あり、n が 1 より大きい場合、そのジョブは n 個のタスクを作成して実行します。
+タスクは CircleCI での作業の最小単位です。 あるジョブに xref:parallelism-faster-jobs#[並列実行] が 1 つある場合、それは 1 つのタスクと見なされます。 ジョブに並列実行が n 個あり、n が 1 より大きい場合、そのジョブは n 個のタスクを作成して実行します。
 
 [#what-is-a-runner-resource-class]
-=== ランナーのリソースクラスとは何ですか。 リソースクラストークンとは何ですか。
+=== ランナーのリソースクラスとは何ですか？ また、リソースクラストークンとは何ですか？
 
 リソースクラスは、CircleCI ジョブとそのジョブを処理するために識別されたランナー (またはコンテナランナー) のタイプを一致させるためのラベルです。 リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation` などです。
 
@@ -15,7 +15,7 @@
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 === CircleCI のセルフホストランナーのセキュリティモデルは、どのようになっていますか。
 
-マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 The xref:container-runner#[container runner] installation page describes the security model for container runners.
+マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 コンテナランナーのセキュリティーモデルの詳細については、xref:container-runner#[コンテナランナー] のインストールのページをご覧ください。
 
 CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可するのと同じことです。
 
