@@ -1,12 +1,12 @@
 [#error-message-uncertified-orbs]
-=== Why do I receive an error message when trying to use an uncertified orb?
+=== 未承認 Orb を使用しようとするとエラーメッセージが出るのはなぜですか？
 
-To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
+未承認 Orb の使用を有効にするには、お客様の**組織の設定ページ**から **Security タブ**をクリックします。 その後、**yes** をクリックして未承認 Orb を許可するを有効にします。
 
-NOTE: Uncertified orbs are not tested or verified by CircleCI. 現在、CircleCI が作成した Orb のみが承認されています。 Any other orbs, including partner orbs, are not certified.
+NOTE: 未認証のオーブは、CircleCIによるテストや検証は行っていません。 現在、CircleCI が作成した Orb のみが承認されています。 それ以外の Orb (パートナーの Orb を含む) は、未承認です。
 
 [#build-error-when-testing-locally]
-=== Why do I get the following error when testing locally?
+=== ローカルでのテストで以下のエラーが表示されるのはなぜですか？
 
 コマンド:
 
@@ -21,12 +21,12 @@ Error:
 You attempted to run a local build with version 2.1 of configuration.
 ```
 
-To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
+このエラーを解決するには、設定で `circleci config process` を実行し、その設定をディスクに保存します。 次に、処理された設定に対して `circleci local execute` を実行します。
 
 [#errors-claiming-namespace-or-publishing-orbs]
-=== I receive an error when attempting to claim a namespace or publish a production orb.
+=== 名前空間を要求または安定版（Production）Orb をパブリッシュしようとするとエラーが発生します。
 
-You may not be an organization owner/admin.
+お客様は組織オーナーまたは管理者でない可能性があります。
 
 組織が要求できる名前空間は 1 つだけです。 組織の名前空間を要求するには、認証を行うユーザーがその組織内でオーナーまたは管理者の権限を持っている必要があります。
 
@@ -36,4 +36,4 @@ You may not be an organization owner/admin.
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-Read more in the xref:orb-author-intro#permissions-matrix[Orb CLI permissions matrix].
+詳細については、xref:orb-author-intro#permissions-matrix[Orb CLI の権限リスト]を参照してください。
