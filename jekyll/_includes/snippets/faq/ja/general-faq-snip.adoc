@@ -1,14 +1,14 @@
 [#does-circleci-look-at-my-code]
-=== CircleCI のスタッフにプログラムコードを見られる心配はありませんか?
+=== CircleCI のスタッフにプログラムコードを見られる可能性はありますか？
 
 CircleCI のスタッフがお客様の許可を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望される際は、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
 
-See the CircleCI xref:security#[Security policy] for more details.
+詳しくは CircleCI の xref:security#[セキュリティポリシー]をご覧ください。
 
 [#use-circleci-without-creating-base-images]
 === 基本イメージを作成していなくても、CircleCI  を使用できますか?
 
-はい、CircleCI では Docker Executor で使用する多数の「CircleCI イメージ」を提供しています。 For a full list, along with usage instructions, visit the link:https://circleci.com/developer/images[CircleCI Developer Hub] and the xref:circleci-images#[CircleCI images guide].
+はい、CircleCI では Docker Executor で使用する多数の「CircleCI イメージ」を提供しています。 イメージの使用方法および全リストは、link:https://circleci.com/ja/developer/images[CircleCI Developer Hub] および xref:circleci-images#[CircleCI イメージのガイド]をご覧ください。
 
 For the `machine` executor, see the xref:configuration-reference#available-linux-machine-images[available machine images] list.
 
