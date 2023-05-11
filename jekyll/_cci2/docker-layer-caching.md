@@ -90,6 +90,7 @@ DLC has **no** effect on Docker images used as build containers. That is, contai
 {: class="alert alert-info"}
 
 ### Buildx builder instances
+{: #buildx-builder-instances }
 
 When using buildx builder instances with DLC it is important to [name your builders](https://docs.docker.com/engine/reference/commandline/buildx_create/#name). Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you no not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
 
