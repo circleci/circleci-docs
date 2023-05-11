@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-toc::[]
+{% include snippets/runner-1.0-deprecation-first.adoc %}
 
 [#namespaces-and-resource-classes]
 == Namespaces and resource classes
