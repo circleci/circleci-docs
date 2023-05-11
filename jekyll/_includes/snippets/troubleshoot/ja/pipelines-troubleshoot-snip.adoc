@@ -35,7 +35,7 @@ CircleCI のすべてのお客様にシステムを安定した状態で利用�
 [#how-do-docker-image-names-work]
 === Docker イメージの名前はどのように機能していますか？ どこからプルされていますか？
 
-CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from link:https://hub.docker.com/[Docker Hub]. For link:https://hub.docker.com/explore/[official images], you can pull by simply specifying the name of the image and a tag:
+CircleCI  では、現在 link:https://hub.docker.com/[Docker Hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 link:https://hub.docker.com/explore/[公式の Docker イメージ]の場合、単純にイメージ名やタグを指定してプルできます。
 
 ----
 golang:1.7.1-jessie
@@ -51,12 +51,12 @@ my-user/couchdb:1.6.1
 [#best-practice-for-specifying-image-versions]
 === Docker イメージのバージョンを指定するときのベストプラクティスは？
 
-It is best practice *not* to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `cimg/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `cimg/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to xref:using-docker#docker-image-best-practices[Docker image best practices], and xref:circleci-images#best-practices[CircleCI image best practices].
+`latest` タグを付けずにイメージのバージョンを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、xref:using-docker#docker-image-best-practices[Docker イメージのベストプラクティス]や xref:circleci-images#best-practices[CircleCI イメージのベストプラクティス]を参照してください。
 
 [#set-the-timezone-in-docker-images]
 === イメージのバージョン指定に関するベスト プラクティスを教えてください。
 
-You can set the timezone in Docker images with the `TZ` environment variable. A sample `.circleci/config.yml` with a defined `TZ` variable would look like the following:
+Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 定義された変数 `TZ` を使った `.circleci/config.yml` の設定例は以下のようになります。
 
 [source,yaml]
 ----
@@ -81,4 +81,4 @@ jobs:
 
 この例では、プライマリ イメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
-A full list of available timezone options is link:https://en.wikipedia.org/wiki/List_of_tz_database_time_zones[available on Wikipedia].
+設定できるタイムゾーンの一覧は、link:https://en.wikipedia.org/wiki/List_of_tz_database_time_zones[Wikipedia] でご確認ください。
