@@ -1,19 +1,19 @@
 [#can-i-migrate-existing-scheduled-workflows]
-=== Can I migrate existing scheduled workflows to scheduled pipelines?
+=== 既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行することはできますか？
 
-Yes, visit the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Scheduled pipelines migration] guide for more information.
+はい、できます。詳細については、xref:migrate-scheduled-workflows-to-scheduled-pipelines#[パイプラインのスケジュール実行への移行] を参照してください。
 
 [#find-schedules-that-i-have-created]
-=== How do I find the schedules that I have created?
+=== 作成したスケジュールはどうやって探せば良いですか？
 
-As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
+スケジュール化されたパイプラインは CircleCI に直接保存されるため、スケジュール毎に関連付けされた UUID があります。 作成したスケジュールは、プロジェクト設定の**トリガー（Triggers）**のページで閲覧できます。 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
 
 ```shell
 curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
+GitHub および Bitbucket ユーザーの場合: `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-type/org-name/repo-name` の形式を取ります。
 
 [#what-time-zone-is-used-for-scheduled-pipelines]
 === パイプラインのスケジュール実行の際に使われるタイムゾーンは？
@@ -23,9 +23,9 @@ For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-n
 [#pipelines-scheduled-to-run-specific-time-of-day]
 === パイプラインを指定した日時にスケジュール実行することは可能ですか？
 
-Yes, you can xref:scheduled-pipelines#[Scheduled pipelines]. You can set up scheduled pipelines through the xref:scheduled-pipelines#use-project-settings[CircleCI web app], or with xref:scheduled-pipelines#use-the-api[CircleCI API v2].
+はい、できます。 スケジュールされたパイプラインは、xref:scheduled-pipelines#use-project-settings[CircleCIウェブアプリ]、または xref:scheduled-pipelines#use-the-api[CircleCI API v2]を使って設定できます。
 
-If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], please see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
+現在xref:workflows#scheduling-a-workflow[ワークフローのスケジュール実行]機能を使用されている場合は、xref:migrate-scheduled-workflows-to-scheduled-pipelines#[移行ガイド]を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
 
 [#scheduled-pipelines-guaranteed-to-run-time-scheduled]
 === スケジュールを設定したパイプラインは、指定した時間どおりに正確に実行されますか?
@@ -33,15 +33,15 @@ If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workfl
 スケジュールの正確性については保証できません。 スケジュールは、設定した時間にコミットがプッシュされたとして実行されます。
 
 [#scheduled-pipeline-run-later]
-=== Why did my scheduled pipeline run later than expected?
+=== パイプラインのスケジュール実行が思っていたより遅いのはなぜですか？
 
-There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to link:https://en.wikipedia.org/wiki/Cron#CRON_expression[the Cron expression].
+link:https://en.wikipedia.org/wiki/Cron#CRON_expression[Cron 式]と比較して、パイプラインのスケージュール実行にはスケジュール方法に微妙な違いがあります。
 
 たとえば、08:00 (協定世界時) のスケジュールを 1 時間に 1 回と指定すると、このスケジュールされたパイプラインは 08:00 ～ 09:00 (協定世界時) の間に 1 回実行されます。 これは 08:00 (協定世界時) ちょうどに実行されるという意味ではないのでご注意ください。
 
 このパイプラインのスケジュール実行は、その後は常に最初の実行と同じ時間に実行されます。 つまり、最初にスケジュールされたパイプラインが 08:11 (協定世界時) に実行された場合、その次も 08:11 (協定世界時) に実行されます。
 
 [#do-you-support-regex]
-=== Do you support regex?
+=== 正規表現に対応していますか？
 
-Not currently. パイプラインのスケジュール実行には、Webhook、API 呼び出し、スケジュールに含まれるコミット SHA、ブランチ、タグ (完全認証、正規表現なし) などの高度に決定論的な入力が必要です。
+現在対応していません。 パイプラインのスケジュール実行には、Webhook、API 呼び出し、スケジュールに含まれるコミット SHA、ブランチ、タグ (完全認証、正規表現なし) などの高度に決定論的な入力が必要です。
