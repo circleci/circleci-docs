@@ -187,7 +187,6 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 [#discounts-for-open-source-performance-plan]
 === Performance プランのオープンソースプロジェクトで割引を受けるにはどうすればよいですか?
 
-
 現在、Performance プランでオープンソースをご利用のお客様への割引は行っていません。
 
 [#charge-for-docker-layer-caching]
