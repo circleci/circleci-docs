@@ -76,7 +76,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 [#migrating-from-internal-postgres]
 === Migrating from an Internal Postgres to an Externalized Source
 
-NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to (link)[Connecting Your External Postgres Instance to CircleCI Server]
+NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-postgres>>
 
 When a CircleCI Server instance deployed, Postgres is deployed internally by default via its helm chart. However as an operator, you may wish to externalize this database to have better control over it's scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
 
@@ -157,7 +157,7 @@ Now your external Postgres will have your CircleCI Server data. In the next sect
 
 
 [#connecting-your-external-postgres]
-=== Connecting Your External Postgres Instance to CircleCI Server
+=== Connecting Your External Postgres Instance to CircleCI Server [[connecting-your-external-postgres]]
 
 Once you have set up your external PostgreSQL instance, add the following to your `values.yaml` file for your CircleCI server instance to access it.
 
@@ -228,7 +228,7 @@ NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 [#migrating-from-internal-mongodb]
 === Migrating from an Internal MongoDB to an Externalized Source
 
-NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to (link)[Connecting Your External MongoDB Instance to CircleCI Server]
+NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-mongodb>>
 
 When a CircleCI Server instance deployed, MongoDB is deployed internally by default via its helm chart. However as an operator, you may wish to externalize this database to have better control over it's scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
 
@@ -297,7 +297,7 @@ Now your external MongoDB will have your CircleCI Server data. In the next secti
 
 
 [#connecting-your-external-mongodb]
-=== Connecting Your External MongoDB Instance to CircleCI Server
+=== Connecting Your External MongoDB Instance to CircleCI Server [[connecting-your-external-mongodb]]
 
 Once you have configured your external MongoDB instance, add the following to your `values.yaml` file to connect your CircleCI Server instance.
 
