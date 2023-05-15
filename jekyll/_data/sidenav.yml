@@ -280,6 +280,8 @@ en:
         children:
           - name: Reusable configuration reference
             link: reusing-config
+          - name: Optimizations reference
+            link: optimizations
 
   - name: Project Insights
     icon: icons/sidebar/insights-new.svg
