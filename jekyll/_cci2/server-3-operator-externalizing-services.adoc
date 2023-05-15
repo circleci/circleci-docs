@@ -18,22 +18,9 @@ toc::[]
 
 == PostgreSQL
 
-NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
-
-.External PostgreSQL
-image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
-
-If you choose to use an external PostgreSQL instance, complete the following fields: 
-
-* *PostgreSQL Service Domain (required)* - The domain or IP address of your PostgreSQL instance. 
-
-* *PostgreSQL Service Port (required)* - The port of your PostgreSQL instance. 
-
-* *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance. 
-
-* *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance. 
-
 === Best Practices for your PostgreSQL
+
+NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
@@ -93,11 +80,181 @@ We strongly recommend the following:
 * Using encrypted storage for backups as databases might contain sensitive information.
 * Performing a backup before each upgrade of CircleCI server.
 
+[#migrating-from-internal-postgres]
+=== Migrating from an Internal Postgres to an Externalized Source
+
+NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-postgres>>
+
+When a CircleCI Server instance deployed, Postgres is deployed internally by default via its helm chart. However as an operator, you may wish to externalize this database to have better control over it's scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
+
+NOTE: This process requires downtime.
+
+==== 1. Disable the application
+We disable the CircleCI Server application by scaling down the application layer pods using the following command. No Data is lost in this process, but the application will be unreachable.
+Scale down your application layer pods:
+
+[source,shell]
+----
+namespace=<your-server-namespace>
+kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
+----
+
+Running `kubectl -n "$namespace" get pods` should show most of your pods scaling to down, leaving your database pods running including postgres.
+
+==== 2. Validate access to your External Postgres from within the Cluster (Optional)
+Here we will confrim that pods within your CircleCI Server cluster can access your external Postgres. We will do this from within your internal Postgres.
+
+[source,shell]
+----
+PG_POD=$(kubectl -n "$namespace" get pods | grep postgresql | tail -1 | awk '{print $1}')
+kubectl exec -it -n "$namespace" "$PG_POD" -- bash
+----
+
+Then while still connected to the pod run:
+[source,shell]
+----
+psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port>
+----
+
+You should be able to connect to your external Postgres at this point. If not then please resolve any issues before proceeding. 
+You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+
+==== 3. Generate export of your Internal Postgres
+Retrieve your internal Postgres credentials:
+
+[source,shell]
+----
+PG_PASSWORD=$(kubectl -n "$namespace" get secrets postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+----
+
+NOTE: The username for your internal Postgres is `postgres`. The password is randomly generated unless directly set at installation.
+
+Connect to Postgres pod and perform postgres dump
+[source,shell]
+----
+kubectl -n "$namespace" exec -it "$PG_POD" -- bash -c "export PGPASSWORD='$PG_PASSWORD' && pg_dumpall -U postgres -c" > circle.sql
+----
+
+NOTE: This backup is created in the filesystem used by the postgres pod. If you wish to store it locally, you may use `kubectl cp -n "$namespace" "$PG_POD":circle.sql /local/dir/circle.sql`
+
+Clean up the Postgres Dump:
+Your internally deployed Postgres uses the username `postgres`, however during the restore, the postgres dump will drop all resources before trying to create new ones, including the `postgres` user.
+We will access the postgres pod where the dump is stored and run the following commands on the postgres dump file to remove the lines that would delete the postgres user.
+
+[source,shell]
+----
+PG_POD=$(kubectl -n "$namespace" get pods | grep postgresql | tail -1 | awk '{print $1}')
+kubectl exec -it -n "$namespace" "$PG_POD" -- bash
+
+sed -i".bak" '/DROP ROLE postgres/d' circle.sql
+sed -i".bak" '/CREATE ROLE postgres/d' circle.sql
+sed -i".bak" '/ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD/d' circle.sql
+----
+
+
+==== 4. Restore your data in your External Postgres
+While still connected to your the internally deployed Postgres, we will restore the dumped data to your external postgres
+
+[source,shell]
+----
+psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port> < circle.sql
+----
+
+Now your external Postgres will have your CircleCI Server data. In the next section we will update CircleCI server to Point to your external Postgres.
+
+[#connecting-your-external-postgres]
+=== Connecting Your External Postgres Instance to CircleCI Server [[connecting-your-external-postgres]]
+image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
+
+If you choose to use an external PostgreSQL instance, complete the following fields: 
+
+* *PostgreSQL Service Domain (required)* - The domain or IP address of your PostgreSQL instance. 
+
+* *PostgreSQL Service Port (required)* - The port of your PostgreSQL instance. 
+
+* *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance. 
+
+* *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance.
+
+Once you apply your changes in KOTS admin, your CircleCI Server instance will be restored with pods running as before.
+
+
 == MongoDB
 
 NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher. 
 
-.External MongoDB
+[#migrating-from-internal-mongodb]
+=== Migrating from an Internal MongoDB to an Externalized Source
+
+NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-mongodb>>
+
+When a CircleCI Server instance deployed, MongoDB is deployed internally by default via its helm chart. However as an operator, you may wish to externalize this database to have better control over it's scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
+
+NOTE: This process requires downtime.
+
+==== 1. Disable the application
+We disable the CircleCI Server application by scaling down the application layer pods using the following command. No Data is lost in this process, but the application will be unreachable.
+Scale down your application layer pods:
+
+[source,shell]
+----
+namespace=<your-server-namespace>
+kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
+----
+
+Running `kubectl -n "$namespace" get pods` should show most of your pods scaling to down, leaving your database pods running including mongo.
+
+==== 2. Validate access to your External MongoDB from within the Cluster (Optional)
+Here we will confrim that pods within your CircleCI Server cluster can access your external MongoDB. We will do this from within your internal MongoDB's pod.
+
+[source,shell]
+----
+MONGO_POD="mongodb-0"
+kubectl exec -it -n "$namespace" "$MONGO_POD" -- bash
+----
+
+Then while still connected to the pod run:
+[source,shell]
+----
+mongo --username <username> --password --authenticationDatabase admin --host <external-mongodb-host> --port <external-mongodb-port>
+----
+
+You should be able to connect to your external MongoDB at this point. If not then please resolve any issues before proceeding. 
+You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+
+==== 3. Generate export of your Internal MongoDB
+Retrieve your internal MongoDB credentials:
+
+[source,shell]
+----
+MONGO_POD="mongodb-0"
+MONGODB_USERNAME="root"
+MONGODB_PASSWORD=$(kubectl -n "$namespace" get secrets mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
+----
+
+Then create a backup directory in your MongoDB pod:
+[source,shell]
+----
+kubectl -n "$namespace" exec "$MONGO_POD" -- mkdir -p /tmp/backups/
+----
+
+Generate a MongoDB database dump to the backup directory you just created:
+[source,shell]
+----
+kubectl -n "$namespace" exec -it "$MONGO_POD" -- bash -c "mongodump -u '$MONGODB_USERNAME' -p '$MONGODB_PASSWORD' --authenticationDatabase admin --db=circle_ghe --out=/tmp/backups/"
+----
+
+==== 4. Restore your data in your External MongoDB
+We can now use the generated MongoDB backup to restore the data to your external MongoDB:
+[source,shell]
+----
+kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --authenticationDatabase admin /tmp/backups/circle_ghe;
+----
+
+Now your external MongoDB will have your CircleCI Server data. In the next section we will update CircleCI server to Point to your external MongoDB.
+
+[#connecting-your-external-mongodb]
+=== Connecting Your External MongoDB Instance to CircleCI Server [[connecting-your-external-mongodb]]
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
 
 If you choose to use an external MongoDB instance, complete the following fields: 
@@ -125,6 +282,8 @@ The authentication mechanism to use, usually SCRAM-SHA-1.
 
 * *Additional connection options (optional)* - 
 Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&`. Special characters must be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+
+Once you apply your changes in KOTS admin, your CircleCI Server instance will be restored with pods running as before.
 
 == Vault
 
