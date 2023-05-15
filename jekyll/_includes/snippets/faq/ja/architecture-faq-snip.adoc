@@ -8,16 +8,16 @@
 - xref:using-windows#[Windows]
 
 [#cpu-architecture-circleci-support]
-=== CircleCI 2.0 ではどの OS をサポートしていますか?
+=== CircleCI ではどの CPU アーキテクチャをサポートしていますか?
 
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:using-arm#[Arm resources] for machine jobs.
+Docker ジョブでは amd64を、マシンジョブでは amd64 と xref:using-arm#[ARM リソース] をサポートしています。
 
 [#ipv6-in-tests]
-=== コンテナベース プラン
+=== テストで IPv6 を利用できますか?
 
-You can use the xref:configuration-reference#machine[Machine executor] for testing local IPv6 traffic. 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+IPv6 によるローカル通信のテストでは、xref:configuration-reference#machine [Machine Executor] を利用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
-Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
+Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスが割り当てられます。
 
 IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を構成することも可能です。  下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
@@ -44,4 +44,4 @@ jobs:
             sudo service docker restart
 ----
 
-Docker allows enabling IPv6 at different levels: link:https://docs.docker.com/engine/userguide/networking/default_network/ipv6/[globally via daemon config like above], with link:https://docs.docker.com/engine/reference/commandline/network_create/[`docker network create` command], and with link:https://docs.docker.com/compose/compose-file/#enable_ipv6[`docker-compose`].
+Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように link:https://docs.docker.com/config/daemon/ipv6/[デーモンを設定する方法]、2 つ目は link:https://docs.docker.com/engine/reference/commandline/network_create/[`docker network create` command] コマンドを用いる方法、そして link:https://docs.docker.com/compose/compose-file/#enable_ipv6[`docker-compose`] を利用する方法です。

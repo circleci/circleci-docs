@@ -13,9 +13,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
-toc::[]
+このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 
 [#authentication-methods]
 == 認証方法
@@ -23,9 +23,9 @@ toc::[]
 CircleCI セルフホストランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
 [#circle-token-personal-authentication]
-=== Circle-Token (個人認証)
+=== circle-token (個人認証)
 
-この認証方法はパーソナルトークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
+この認証方法はパーソナル トークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -36,14 +36,14 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | Circle-Token header
 | Header that contains the `<circle-token>` used to authenticate the user.
 
-| http basic auth username
+| ユーザー名による HTTP Basic 認証
 | The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
 === ブラウザーセッション認証
 
-リクエストに含まれる Cookie を使用して Ring セッションが送信されます。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
+リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
 [#resource-class-authentication-token]
 === リソースクラストークン認証
@@ -59,8 +59,8 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | 名前
 | 説明
 
-| http bearer auth
-| このトークンは Bearer スキームを使って提供されます。
+| HTTP Bearer 認証
+| Bearer スキームを使用してトークンを送信します。
 |===
 
 [#endpo整数s]
@@ -74,7 +74,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 [#authentication-methods]
 ==== 認証方法
 
-* Circle-Token (個人認証)
+* circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 * リソースクラストークン (リソースクラス作成時に生成されます)
@@ -86,7 +86,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 [cols=5*, options="header", stripes=even]
 |===
 | 名前
-| 型
+| タイプ
 | 入力
 | 必須
 | 説明
@@ -228,14 +228,14 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | 説明
 
 | resource-class
-| string
+| 文字列
 | クエリ
 | true
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
 [#examples]
-==== サンプル
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
@@ -308,14 +308,14 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 | 説明
 
 | resource-class
-| string
+| 文字列
 | クエリ
 | true
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
 [#examples]
-==== サンプル
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
@@ -329,7 +329,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 [cols=3*, options="header", stripes=even]
 |===
 | ステータス
-| 説明
+| 意味
 | 形式
 
 |200
@@ -346,7 +346,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 | 名前
 | タイプ
 | 必須
-| 説明
+| 意味
 
 |running_runner_tasks
 |int
