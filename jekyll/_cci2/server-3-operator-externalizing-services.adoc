@@ -83,7 +83,7 @@ We strongly recommend the following:
 [#migrating-from-internal-postgres]
 === Migrating from an Internal Postgres to an Externalized Source
 
-NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-postgres>>
+NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-postgres>>
 
 When a CircleCI Server instance deployed, Postgres is deployed internally by default via its helm chart. However as an operator, you may wish to externalize this database to have better control over it's scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
 
