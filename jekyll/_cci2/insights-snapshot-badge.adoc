@@ -65,7 +65,7 @@ In the templates below, replace `< >` items with your own details. Some options 
 --
 [source,asciidoc]
 ----
-image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>["CircleCI", link="https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true"]
+image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>["CircleCI", link="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"]
 ----
 --
 
@@ -73,7 +73,7 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/
 --
 [source,markdown]
 ----
-[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>)](https://app.circleci.com/insights/github/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true)
+[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/github/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
 ----
 --
 
@@ -81,7 +81,7 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/
 --
 [source,pod]
 ----
-=for HTML <a href="https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true"><img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>"></a>
+=for HTML <a href="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"><img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>"></a>
 ----
 --
 
@@ -89,7 +89,7 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/
 --
 [source,rdoc]
 ----
-{<img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>" alt="CircleCI" />}[https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true]
+{<img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>" alt="CircleCI" />}[https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true]
 ----
 --
 
@@ -97,8 +97,8 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/
 --
 [source,reStructuredText]
 ----
-.. image:: https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>
-        :target: https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true
+.. image:: https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>
+        :target: https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true
 ----
 --
 
