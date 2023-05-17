@@ -78,7 +78,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
 
 * `TEST_FILES=$(circleci tests glob "**/test_*.py")`
 +
-Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`.
+Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`.  Ensure that the glob string has quotes.
   
 * `echo $TEST_FILES |`
 +
@@ -128,7 +128,7 @@ gem 'rspec_junit_formatter'
       circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 ```
 
-. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case (ensure that the glob string has quotes). See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
@@ -142,7 +142,7 @@ gem 'rspec_junit_formatter'
     circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 ```
 
-. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case (ensure that the glob string has quotes). See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
@@ -174,7 +174,7 @@ gem 'rspec_junit_formatter'
 ```
 +
 
-Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
+Remember to modify the `glob` command for your specific use case (ensure that the glob string has quotes).  **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
@@ -221,7 +221,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
       echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 ```
 
-. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**.  If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.  Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.  
+. Update the `glob` command to match your use case (ensure that the glob string has quotes). **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**.  If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.  Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.  
 
 [#known-limitations]
 == Known limitations
