@@ -194,7 +194,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
+      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
       JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
