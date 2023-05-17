@@ -38,7 +38,7 @@ The CLI supports globbing test files using the following patterns:
 - `[abc]` matches any character (excluding path separators) against characters in brackets
 - `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
 
-To check the results of pattern-matching, use the `echo` command.
+**Ensure that the glob string has quotes.**  To check the results of pattern-matching, use the `echo` command.
 
 ```yaml
 # ~/.circleci/config.yml
