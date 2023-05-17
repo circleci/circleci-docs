@@ -254,7 +254,7 @@ kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_US
 Now your external MongoDB will have your CircleCI Server data. In the next section we will update CircleCI server to Point to your external MongoDB.
 
 [#connecting-your-external-mongodb]
-=== Connecting Your External MongoDB Instance to CircleCI Server [[connecting-your-external-mongodb]]
+=== Connecting your external MongoDB instance to CircleCI server [[connecting-your-external-mongodb]]
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
 
 If you choose to use an external MongoDB instance, complete the following fields: 
