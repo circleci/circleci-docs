@@ -163,7 +163,7 @@ psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-por
 Now your external Postgres will have your CircleCI server data. In the next section we will update CircleCI server to Point to your external Postgres.
 
 [#connecting-your-external-postgres]
-=== Connecting Your External Postgres Instance to CircleCI Server [[connecting-your-external-postgres]]
+=== Connecting your external Postgres instance to CircleCI server [[connecting-your-external-postgres]]
 image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
 
 If you choose to use an external PostgreSQL instance, complete the following fields: 
