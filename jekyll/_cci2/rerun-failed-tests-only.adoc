@@ -78,7 +78,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
 
 * `TEST_FILES=$(circleci tests glob "**/test_*.py")`
 +
-Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`.  Ensure that the glob string has quotes.
+Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`. Ensure that the glob string is enclosed in quotes.
   
 * `echo $TEST_FILES |`
 +
