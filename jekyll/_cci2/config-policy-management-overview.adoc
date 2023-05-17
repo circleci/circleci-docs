@@ -29,7 +29,14 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide.
+If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide to get started.
+
+The following how-to guides are available for config policies:
+
+* xref:create-and-manage-config-policies#[Create and manage config policies]
+* xref:test-config-policies#[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CLI for config and policy development]
+* xref:config-policies-for-self-hosted-runner#[Config policies for self-hosted runner]
 
 [#how-config-policy-work]
 == How config policies work
@@ -403,6 +410,7 @@ enable_hard["use_official_docker_image"]
 [#next-steps]
 == Next steps
 
-* link:/docs/create-and-manage-config-policies[Create and manage config policies]
-* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
-* link:/docs/config-policy-reference[Config policy reference]
+* xref:create-and-manage-config-policies#[Create and manage config policies]
+* xref:test-config-policies#[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CircleCI CLI for config and policy development]
+* xref:config-policy-reference#[Config policy reference]
