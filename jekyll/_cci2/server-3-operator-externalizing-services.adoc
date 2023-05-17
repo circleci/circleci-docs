@@ -186,7 +186,7 @@ NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 [#migrating-from-internal-mongodb]
 === Migrating from an Internal MongoDB to an Externalized Source
 
-NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-mongodb>>
+NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-mongodb>>
 
 When a CircleCI Server instance deployed, MongoDB is deployed internally by default via its helm chart. However as an operator, you may wish to externalize this database to have better control over it's scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
 
