@@ -142,7 +142,7 @@ gem 'rspec_junit_formatter'
     circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
 ```
 
-. Update the `glob` command to match your use case (ensure that the glob string has quotes). See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
