@@ -176,7 +176,7 @@ If you choose to use an external PostgreSQL instance, complete the following fie
 
 * *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance.
 
-Once you apply your changes in KOTS admin, your CircleCI Server instance will be restored with pods running as before.
+Once you apply your changes in KOTS admin, your CircleCI server instance will be restored with pods running as before.
 
 
 == MongoDB
