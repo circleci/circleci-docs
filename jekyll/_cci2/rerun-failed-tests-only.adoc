@@ -221,7 +221,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
       echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 ```
 
-. Update the `glob` command to match your use case (ensure that the glob string has quotes). **If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**.  If you are not using CircleCi's intelligent test splitting, `--split-by=timings` can be omitted.  Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.  
+. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.  
 
 [#known-limitations]
 == Known limitations
