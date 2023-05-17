@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Container runner reference guide
+= Container runner reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
