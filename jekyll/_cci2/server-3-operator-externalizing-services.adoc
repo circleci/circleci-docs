@@ -283,7 +283,7 @@ The authentication mechanism to use, usually SCRAM-SHA-1.
 * *Additional connection options (optional)* - 
 Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&`. Special characters must be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
 
-Once you apply your changes in KOTS admin, your CircleCI Server instance will be restored with pods running as before.
+Once you apply your changes in KOTS admin, your CircleCI server instance will be restored with pods running as before.
 
 == Vault
 
