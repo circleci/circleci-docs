@@ -160,7 +160,7 @@ While still connected to your the internally deployed Postgres, we will restore 
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port> < circle.sql
 ----
 
-Now your external Postgres will have your CircleCI Server data. In the next section we will update CircleCI server to Point to your external Postgres.
+Now your external Postgres will have your CircleCI server data. In the next section we will update CircleCI server to Point to your external Postgres.
 
 [#connecting-your-external-postgres]
 === Connecting Your External Postgres Instance to CircleCI Server [[connecting-your-external-postgres]]
