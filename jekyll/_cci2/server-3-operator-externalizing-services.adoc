@@ -251,7 +251,7 @@ We can now use the generated MongoDB backup to restore the data to your external
 kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --authenticationDatabase admin /tmp/backups/circle_ghe;
 ----
 
-Now your external MongoDB will have your CircleCI Server data. In the next section we will update CircleCI server to Point to your external MongoDB.
+Now your external MongoDB will have your CircleCI Server data. In the next section we will update CircleCI server to point to your external MongoDB.
 
 [#connecting-your-external-mongodb]
 === Connecting your external MongoDB instance to CircleCI server [[connecting-your-external-mongodb]]
