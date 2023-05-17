@@ -193,7 +193,7 @@ When a CircleCI server instance deployed, MongoDB is deployed internally by defa
 NOTE: This process requires downtime.
 
 ==== 1. Disable the application
-We disable the CircleCI Server application by scaling down the application layer pods using the following command. No Data is lost in this process, but the application will be unreachable.
+We disable the CircleCI server application by scaling down the application layer pods using the following command. No Data is lost in this process, but the application will be unreachable.
 Scale down your application layer pods:
 
 [source,shell]
