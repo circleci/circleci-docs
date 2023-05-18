@@ -69,7 +69,7 @@ CircleCI では Docker で使用できる一般的なデプロイシナリオで
 * <<deploy-android-applications#,Android アプリケーションのデプロイ>>
 * <<deploy-to-artifactory#,Artifactory へのデプロイ>>
 * <<deploy-to-aws#,AWS へのデプロイ>>
-* <<deploy-service-update-to-aws-ecs#,AWS ECS へのデプロイ>>
+* <<deploy-service-update-to-aws-ec2#,AWS EC2 へのデプロイ>>
 * <<ecs-ecr#,AWS ECR/ECS へのデプロイ>>
 * <<deploy-to-azure-container-registry#,Azure Container Registry へのデプロイ>>
 * <<deploy-to-capistrano#,Capistrano へのデプロイ>>
