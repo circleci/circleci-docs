@@ -92,15 +92,17 @@ Pass the list of test files to the `circleci tests run` command as standard inpu
 [#verify-the-configuration]
 ==== Verify the configuration
 
-After updating your configuration, click the "Re-run failed tests only" button the next time you encounter a test failure on that job.
+After updating your configuration, run the job that runs tests again and make sure that the same number of tests are being executed as before the config.yml change.  
 
-If the `--verbose` setting is enabled, you should see output similar to the following the next time you click "Rerun failed tests only" with this job on CircleCI:
+Then, the next time you encounter a test failure on that job, click the "Re-run failed tests only" button.  If the `--verbose` setting is enabled, you should see output similar to the following the next time you click "Rerun failed tests only" with this job on CircleCI:
 
 ```sh
-circleci-tests-plugin-cli plugin Installed. Version: 1.0.5909-ca27755
-DEBU[2023-05-14T17:53:44Z] Attempting to read from stdin. This will hang if no input is provided. 
-DEBU[2023-05-14T17:53:44Z] rerunning failed tests                       
-INFO[2023-05-14T17:53:44Z] starting execution
+Installing circleci-tests-plugin-cli plugin.
+circleci-tests-plugin-cli plugin Installed. Version: 1.0.5976-439c1fc
+DEBU[2023-05-18T22:09:08Z] Attempting to read from stdin. This will hang if no input is provided. 
+DEBU[2023-05-18T22:09:08Z] rerunning failed tests                       
+INFO[2023-05-18T22:09:08Z] starting execution                           
+DEBU[2023-05-18T22:09:08Z] received test names: ****
 ```
 
 If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.
