@@ -178,7 +178,9 @@ gcloud config set compute/region <REGION>
 ----
 . Create your cluster
 +
-TIP: CircleCI recommends using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
+TIP: CircleCI recommends using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services.
++
+Use the following command to provision a simple cluster:
 +
 [source,shell]
 ----
@@ -188,9 +190,7 @@ gcloud container clusters create circleci-server \
   --workload-pool=<PROJECT_ID>.svc.id.goog
 ----
 +
-NOTE: Your kube-context should get updated with the new cluster credentials automatically.
-+
-If you need to update your kube-context manually, you can by running the following:
+Your kube-context should get updated with the new cluster credentials automatically. If you need to update your kube-context manually, you can by running the following:
 +
 [source,shell]
 ----
@@ -208,14 +208,14 @@ gcloud components install gke-gcloud-auth-plugin
 ----
 kubectl cluster-info
 ----
-. Create a service account:
+. Create a service account to be used for authentication with Workload Identity:
 +
 [source,shell]
 ----
 gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
   --display-name="<DISPLAY_NAME>"
 ----
-. Retrieve credentials for the service account:
+. Create a private key for your service account:
 +
 [source,shell]
 ----
@@ -234,6 +234,20 @@ Follow these steps if you already have a GKE cluster and need to enable Workload
 ----
   gcloud container clusters update "<CLUSTER_NAME>" \
     --workload-pool="<PROJECT_ID>.svc.id.goog"
+----
+. Create a service account to be used for authentication with Workload Identity:
++
+[source,shell]
+----
+gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
+  --display-name="<DISPLAY_NAME>"
+----
+. Create a private key for your service account:
++
+[source,shell]
+----
+gcloud iam service-accounts keys create <KEY_FILE> \
+  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
 ----
 . Get node pools of existing GKE cluster:
 +
