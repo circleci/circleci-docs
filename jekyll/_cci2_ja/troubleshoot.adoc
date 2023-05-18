@@ -29,12 +29,12 @@ This page offers troubleshooting suggestions for the following aspects of Circle
 
 == Orb
 
-include::../_includes/snippets/troubleshoot/orb-troubleshoot-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/orb-troubleshoot-snip.adoc[]
 
 == パイプライン
 
-include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/pipelines-troubleshoot-snip.adoc[]
 
 // Self-hosted runner (H2s need to be in the snippet for now)
 
-include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-troubleshoot-snip.adoc[]
