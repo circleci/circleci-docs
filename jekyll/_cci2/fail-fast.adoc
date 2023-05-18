@@ -90,7 +90,7 @@ jobs:
     **** Else: use a higher number, 5-7
   ** `--verbose`
    *** Optional, adds verbosity in output. Recommended.
-  ** `–-test-results-path-”test-results”`
+  ** `–-test-results-path=”test-results”`
    *** Optional, but xref:collect-test-data#[best practices for running tests on CircleCI]. Needed in conjunction with the `store_test_results` command below to enable view rich test results.
 
 Putting all the pieces together results in a job that executes the `pytest` tests and will terminate and provide feedback shortly after finding the first test failure.
