@@ -15,14 +15,14 @@ contentTags:
 [#overview]
 == Overview
 
-Server v4.2 introduces an air-gapped installation option. For more information see the xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped installation guide].
+Server v4.2 introduces #TBC#
 
 [#migraiton]
 == Migrate
 
 NOTE: The migration process requires that you install v4.0.x first before moving to subsequent releases.
 
-For existing customers interested in migrating from v3.x or v2.x to v4.x, contact your customer success manager.
+For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
 
 Find information about migration in the following guides:
 
@@ -33,18 +33,10 @@ Find information about migration in the following guides:
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4 guide].
 
-[#release-4-1-1]
-== Release 4.1.1
+[#release-4-2-0]
+== Release 4.2.0
 
-[#changelog-4-1-1]
+[#changelog-4-2-0]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-1-1[changelog].
-
-[#release-4-1-0]
-== Release 4.1.0
-
-[#changelog-4-1-0]
-=== Changelog
-
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-1-0[changelog].
+For full details of this release see the link:https://circleci.com/server/changelog/#release-4-2-0[changelog].
