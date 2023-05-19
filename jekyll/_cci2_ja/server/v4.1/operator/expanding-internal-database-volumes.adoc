@@ -2,20 +2,22 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - Server Admin
 ---
-= 内部データベースのボリューム拡張
+= Expanding Internal Database Volumes
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
 :icons: font
 :toc: macro
 
+:toc-title:
+
 [#overview]
 == 概要
 
-CircleCI データベース（MongoDB または PostgreSQL）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Kubernetes クラスタの内部データベースでは、永続的なストレージとして link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム]を使用しています。 ボリュームのサイズは、PVC (永続ボリューム要求) によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
+CircleCI データベース（MongoDB または PostgreSQL）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Internal databases in your Kubernetes cluster make use of link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. ボリュームのサイズは、PVC (永続ボリューム要求) によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
 
 ここでは、内部でデプロイしたデータベース用のスペースを増やすために PVC を増やす手順を説明します。 この操作には、データベースポッドを再起動する必要がない限り、ダウンタイムは生じません。
 
@@ -26,7 +28,7 @@ NOTE: 永続ボリュームを拡張しても、Node に接続されているス
 
 ここでは PostgreSQL と MongoDB の永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
 
-NOTE: 万一に備えて、まずxref:backup-and-restore#[クラスタのバックアップを作成する]ことをお勧めします。
+NOTE: As a precaution, it is always a good idea to xref:backup-and-restore#[create a backup of your cluster] first.
 
 [#confirm-current-volume-size]
 === 1.  現在のボリュームサイズの確認
