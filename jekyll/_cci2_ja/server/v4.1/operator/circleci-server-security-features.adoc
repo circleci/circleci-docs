@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - Server Admin
 ---
-= CircleCI Server のセキュリティ機能
+= CircleCI server security features
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI に組み込まれているセキュリティ機能と、関連するインテグレーションの概要について説明します。
@@ -26,7 +26,7 @@ CircleCI では、セキュリティを最優先時事項に位置付けてい�
 
 CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 設定を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
 
-CircleCI のソフトウェアは性質上、ユーザーのコードやそのコードが操作するあらゆるデータにアクセスできます。 CircleCI 上のすべてのジョブは、他のあらゆるビルドから独立し、インターネットやユーザー自身のネットワークからアクセスできないサンドボックス (具体的には、Docker コンテナまたはエフェメラル VM) 内で実行されます。 ビルド エージェントは、SSH によって Git からコードをプルします。 特定のテストスイートまたはジョブ設定は、外部サービスまたはネットワーク内のインテグレーションポイントに対して呼び出しを行うことができます。 そうした呼び出しからの応答は、ジョブにプルされ、ユーザー自身の判断でコードに使用されます。 1 つのジョブが完了すると、ジョブを実行したコンテナは廃棄され、リビルドされます。 すべての環境変数は、link:https://www.vaultproject.io/[Hashicorp の Vault] を使用して暗号化されます。 環境変数は、AES256-GCM96 を使用して暗号化され、CircleCI の従業員には使用できません。
+CircleCI のソフトウェアは性質上、ユーザーのコードやそのコードが操作するあらゆるデータにアクセスできます。 CircleCI 上のすべてのジョブは、他のあらゆるビルドから独立し、インターネットやユーザー自身のネットワークからアクセスできないサンドボックス (具体的には、Docker コンテナまたはエフェメラル VM) 内で実行されます。 ビルド エージェントは、SSH によって Git からコードをプルします。 特定のテストスイートまたはジョブ設定は、外部サービスまたはネットワーク内のインテグレーションポイントに対して呼び出しを行うことができます。 そうした呼び出しからの応答は、ジョブにプルされ、ユーザー自身の判断でコードに使用されます。 1 つのジョブが完了すると、ジョブを実行したコンテナは廃棄され、リビルドされます。 All environment variables are encrypted using link:https://www.vaultproject.io/[Hashicorp Vault]. 環境変数は、AES256-GCM96 を使用して暗号化され、CircleCI の従業員には使用できません。
 
 [#sandboxing]
 == サンドボックス化
@@ -38,10 +38,10 @@ CircleCI では、コードのビルドを実行するために割り当てら�
 
 CircleCI には、関連する外部のサービスやテクノロジーとのインテグレーションポイントがいくつかあります。 インテグレーションポイントの詳細は、以下をご覧ください。
 
-- **WebSocket**: CircleCI では、サーバーとブラウザー間の WebSocket 通信に link:https://pusher.com/[Pusher] クライアントライブラリを使用しています。 しかし、インストールには Slanger という内部サーバーを使用しています。そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうした仕組みにより、たとえば、ビルドリストが動的に更新されたり、ビルドの出力が発生と同時に 1 行ずつ表示されたりします。 ビルドステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を設定しない限り、SSL 上で同じ証明書を使用して行われます)。したがって、転送時には暗号化されます。
+- **Web Sockets** CircleCI uses link:https://pusher.com/[Pusher] client libraries for WebSocket communication between the server and the browser. しかし、インストールには Slanger という内部サーバーを使用しています。そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうした仕組みにより、たとえば、ビルドリストが動的に更新されたり、ビルドの出力が発生と同時に 1 行ずつ表示されたりします。 ビルドステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を設定しない限り、SSL 上で同じ証明書を使用して行われます)。したがって、転送時には暗号化されます。
 - **ソース管理システム**: CircleCI を使用するには、GitHub Enterprise や GitHub.com のインスタンスとの直接接続をセットアップします。 CircleCI のセットアップ時に、プライベートリポジトリのチェックアウトをシステムに許可します。 この権限は、GitHub アプリケーションの設定ページで、リポジトリの管理者ページから CircleCI のデプロイキーとサービスフックを削除して、いつでも取り消すことができます。 CircleCI ではプロジェクトを選択してビルドできますが、GitHub の権限モデルは極端なものであるため、CircleCI にはすべてのリポジトリへのアクセスが許可されるか、一切許可されないかのどちらかになります。 CircleCI のインスタンスは、Git リポジトリにホスティングされているすべてにアクセスすることができ、様々なイベントの Webhook を作成します(コードのプッシュ時やユーザー追加時など)。 これが CircleCI にコールバックして、1 つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプルダウンされます。
 - **依存関係とソースのキャッシュ**: ほとんどの CircleCI ユーザーは、Amazon VPC などのプライベートクラウド インフラストラクチャ内で S3 または同等のクラウドベースのストレージを使用して、依存関係やソースのキャッシュを格納しています。 これらのストレージ サーバーは、このようなサービス上に格納されるすべての項目の標準的なセキュリティパラメーターの対象となります。 つまり、ほとんどの場合、ユーザーは外部からのアクセスを阻止できます。
--
+- 
 **アーティファクト**: アーティファクトには、S3 などのホスティングされたストレージを使用するのが一般的です。 これらのリソースが、標準的なポリシーに従ってセキュリティ保護されているなら、共に保存されている他のデータと同様、アーティファクトも外部からの侵入に対して安全と言えます。
 
 [#audit-logs]
@@ -101,13 +101,13 @@ CircleCI を使用を開始する際は、チームが CircleCI の _ユーザ�
 * ビルドに必要なシークレット (プライベートキー、環境変数) の数を最小限に抑え、定期的にシークレットのローテーションを行ってください。
 ** 組織のシークレットを定期的に (チームメンバーが変わるときは特に) ローテーションすることが重要です。
 ** シークレットを定期的にローテーションすることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。
-** _必ず_ ビルドの目的に十分なアクセス許可のみを持つ、限定された範囲のシークレットを使用してください。 AWS 上での IAM 権限や GitHub の link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User]  機能など、CircleCI の外部で使用する他のプラットフォームのロールおよび権限システムについては、慎重に判断していただくようお願いします。
+** _必ず_ ビルドの目的に十分なアクセス許可のみを持つ、限定された範囲のシークレットを使用してください。 Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
 * ユーザーが何らかのツールを誤用することで、標準出力にシークレットが誤って出力され、ログに記録されてしまう可能性があります。 以下の場合には注意してください。
 ** シークレットを含むすべての環境変数の値を出力する `env` または `printenv` の実行
 ** `echo` を使用し、コードベースまたはシェル内のシークレットを出力する場合
 ** プログラムやデバッグツールがエラー時にシークレットを出力する場合
-* VCS プロバイダーから付与された組織の権限を確認し、 link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] に従うよう努めます (組織に属している場合)。
-* チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 詳細については、 xref:../../../contexts#restrict-a-context[コンテキスト] をお読みください。
+* Consult your VCS provider's permissions for your organization (if you are in an organization) and try to follow the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of Least Privilege].
+* チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 Read through the xref:../../../contexts/#restrict-a-context[contexts] document to learn more.
 * 組織で SSH キーへのアクセス権を持つユーザーは、必ず監査を行ってください。
-* VCS で必ず2 要素認証 (2FA) を使用します　(https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA] 、　https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket] )。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
-* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡すかどうかを制御できます。 これはデフォルトでは **有効化** されていません。 これらの設定やオープンソースセキュリティーに関する詳細は、 xref:../../../oss#security[オープンソースプロジェクトのドキュメント] をお読みください。
+* Ensure that your team is using Two-Factor Authentication (2FA) with your VCS (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA], link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket]). ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
+* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡すかどうかを制御できます。 これはデフォルトでは **有効化** されていません。 You can read more about these settings and open source security in our xref:../../../oss/#security[Open Source Projects Document].
