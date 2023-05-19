@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - Server Admin
 ---
-= インストールのリファレンスガイド
+= Installation reference
 :page-layout: classic-docs
 :icons: font
 :toc: macro
@@ -166,7 +166,7 @@ nomad:
 |===
 |キー
 |タイプ
-|デフォルト値
+|デフォルト
 |説明
 
 |`apiToken`
@@ -176,7 +176,7 @@ a|API トークンです。
 
 **オプション 1: ** ここに値を設定し、CircleCI が自動的にシークレットを作成します。
 
-**オプション 2: **値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |`api_service.replicas`
 |整数
@@ -282,7 +282,7 @@ a|Github 経由の OAuth ログイン用のクライアントシークレット�
 |`github.defaultToken`
 |文字列
 |`""`
-a|xref:phase-2-core-services#github-enterprise-integration[GitHub Enterprise のインスタンス用のパーソナルアクセストークン] です。
+a|xref:phase-2-core-services/#github-enterprise-integration[Personal access token for your GitHub Enterprise instance]:
 
 **オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
@@ -331,7 +331,7 @@ a|xref:phase-2-core-services#github-enterprise-integration[GitHub Enterprise の
 |`global.domainName`
 |文字列
 |`""`
-|お客様の CircleCI のドメイン名です。
+|お客様の CircleCI のドメイン名です。  
 
 |`global.imagePullSecrets[0].name`
 |文字列
@@ -341,12 +341,12 @@ a|xref:phase-2-core-services#github-enterprise-integration[GitHub Enterprise の
 |`global.license`
 |文字列
 |`""`
-|お客様の CircleCI のライセンスです。
+|お客様の CircleCI のライセンスです。  
 
 |`global.scheme`
 |文字列
 |`"https"`
-|お客様の CircleCI のスキーマです。
+|お客様の CircleCI のスキーマです。  
 
 |`global.tracing.collector_host`
 |文字列
@@ -421,7 +421,7 @@ a|CircleCI で生成されるアーティファクトの暗号化と署名に使
 |`kong.debug_level`
 |文字列
 |`"notice"`
-|Kong のデバッグレベルを指定します。 設定できるレベルは、 `debug` 、 `info` 、 `warn` 、`error` 、 `crit` です。 デフォルトの設定は "notice" です。
+|Kong のデバッグレベルを指定します。 設定できるレベルは、 `debug` 、 `info` 、 `warn` 、`error` 、 `crit` です。 デフォルトの設定は "notice" です。 
 
 |`kong.replicas`
 |整数
@@ -566,7 +566,7 @@ a|CircleCI で生成されるアーティファクトの暗号化と署名に使
 |`nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"`
 |文字列
 |`"nlb"`
-|ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ を参照して違いをご確認ください。
+|Use "nlb" for Network Load Balancer and "clb" for Classic Load Balancer see link:https://aws.amazon.com/elasticloadbalancing/features[this AWS page] for a feature comparison.
 
 |`nginx.aws_acm.enabled`
 |ブール値
@@ -612,7 +612,7 @@ a|CircleCI で生成されるアーティファクトの暗号化と署名に使
 |`nomad.auto_scaler.aws.accessKey`
 |文字列
 |`""`
-a|AWS 認証設定を指定します。
+a|AWS 認証設定を指定します。 
 
 **オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
 
@@ -724,7 +724,7 @@ a|GCP 認証設定を指定します。
 |`nomad.server.gossip.encryption.key`
 |文字列
 |`""`
-|デフォルトでは、特に指定がない限り、Dockerhub がイメージレジストリとして想定されています。例えば、`registry.example.com/organization/repository` のように指定します。
+|
 
 |`nomad.server.replicas`
 |整数
@@ -772,7 +772,7 @@ a|[source,yaml]
 |`object_storage.gcs.service_account`
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-a|GCP ストレージ (GCS) の認証設定を指定します。
+a|GCP ストレージ (GCS) の認証設定を指定します。 
 
 **オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
 
@@ -789,7 +789,7 @@ a|GCP ストレージ (GCS) の認証設定を指定します。
 |`object_storage.s3.accessKey`
 |文字列
 |`""`
-a|AWS 認証設定を指定します。
+a|AWS 認証設定を指定します。 
 
 **オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
 
@@ -800,7 +800,7 @@ a|AWS 認証設定を指定します。
 |`object_storage.s3.endpoint`
 |文字列
 |`"https://s3.us-east-1.amazonaws.com"`
-|S3 用 API エンドポイントです。 たとえば AWS `us-west-2` の場合は、リージョンのエンドポイント (http://s3.us-west-2.amazonaws.com)  になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
+|S3 用 API エンドポイントです。 If in AWS `us-west-2`, for example, this would be the regional endpoint `\http://s3.us-west-2.amazonaws.com`. S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
 
 |`orb_service.replicas`
 |整数
@@ -852,12 +852,12 @@ a|AWS 認証設定を指定します。
 |`true`
 |
 
-|`postgresql.persistence.existingClaim`
+|`postgresql.primary.persistence.existingClaim`
 |文字列
 |`""`
 |
 
-|`postgresql.persistence.size`
+|`postgresql.primary.persistence.size`
 |文字列
 |`"8Gi"`
 |
@@ -1235,6 +1235,16 @@ a|セッション Cookie キーです。 注: 16 バイトである必要があ�
 |整数
 |`1`
 | test-results-service のデプロイ用にデプロイするレプリカの数です。
+
+|`tink.enabled`
+|ブール値
+|`false`
+|When enabled, Tink will be used instead of Vault for contexts encryption.
+
+|`tink.keyset`
+|文字列
+|`""`
+|The keyset generated the Tink CLI to be used for contexts encryption
 
 |`tls.certificate`
 |文字列
