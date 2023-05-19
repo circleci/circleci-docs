@@ -19,9 +19,12 @@ version:
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
-CircleCI **serverのお客様**、および**パフォーマンス、スケールとクラウドのお客様**は、link:https://app.circleci.com/[Webアプリ]のUIから監査ログ機能にアクセスすることが可能です。 完全な監査ログは、アプリの **Admin** セクションにある **Audit Log** のページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
+CircleCI **serverのお客様**、および**パフォーマンス、スケールとクラウドのお客様**は、link:https://app.circleci.com/[Webアプリ]のUIから監査ログ機能にアクセスすることが可能です。
 
-その他のクラウドのお客様は、link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポートにて]で監査ログをリクエストすることができます 監査ログを依頼できるのは、組織の管理者のみです。
+. Select **Organization Settings** in the web app sidebar.
+. Select **Security** from the menu.
+. Scroll down to the **Audit Log** section and specify a date range.
+. Click **Request audit logs** to download audit logs as a CSV file. ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
 
 NOTE: 内部挙動により、監査ログに重複するイベントが生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
