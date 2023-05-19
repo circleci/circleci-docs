@@ -25,7 +25,7 @@ CircleCI Server システムでは主に、Kubernetes ノード、Nomad クラ�
 
 ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
 
-NOTE: An NGINX reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
+NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
 
 CAUTION: Amazon Certificate Manager (ACM) をご使用の場合は、NGINX のサービスは `circleci-proxy` ではなく `circleci-proxy-acm` になります。 TLS 証明書の処理を他の方法から ACM に変更した場合、ロードバランサーが再作成され、お客様の <domain> とアプリの <domain> の関連付けられている DNS レコードを再ルーティングする必要があります。
 
@@ -361,7 +361,7 @@ ifndef::pdf[]
 
 == 次のステップ
 
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
-* xref:../operator/operator-overview#[Server 4.1 Operator Overview]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server v3.x から Server v4.x への移行]
+* xref:../operator/operator-overview#[Server 4.1x オペレーターの概要]
 +
 endif::[]
