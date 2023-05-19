@@ -176,7 +176,7 @@ gcloud config set project <PROJECT_ID>
 gcloud config set compute/zone <ZONE>
 gcloud config set compute/region <REGION>
 ----
-. Create your cluster
+. Create your cluster.
 +
 TIP: CircleCI recommends using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services.
 +
