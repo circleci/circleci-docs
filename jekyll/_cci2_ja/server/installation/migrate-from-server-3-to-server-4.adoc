@@ -7,7 +7,7 @@ version:
 = CircleCI Server v3 から v4.x への移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Server v3.x から v4.x. に移行する方法をご確認ください。
+:page-description: このドキュメントでは、CircleCI Server v3.x から v4.x. に移行する方法を詳しくご紹介しています。
 :icons: font
 :toc: macro
 
