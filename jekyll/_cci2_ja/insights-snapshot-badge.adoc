@@ -59,6 +59,78 @@ Markdown 形式で生成されたインサイト スナップショットバッ�
 
 Insights Snapshot Badge ページで *Add API Token* をクリックすると、直接 API トークンを追加することができます。 これにより、"Status" のスコープを持つ API トークンと "insights-snapshot" ラベルが作成されます。 (プロジェクトの *API Permissions* でも新しいトークンが表示されます)。 コードスニペットは、API の作成後に表示されます。
 
+If you would like to reuse an API token with the scope of "Status", which you have already created for your project status badge, you can use one of the following templates as an alternative to the badge generator in the CircleCI web app described above.
+
+In the templates below, replace `< >` items with your own details. Some options are shown in the table below.
+
+[.tab.badge.Asciidoc]
+--
+[source,asciidoc]
+----
+image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>["CircleCI", link="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"]
+----
+--
+
+[.tab.badge.Markdown]
+--
+[source,markdown]
+----
+[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/github/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
+----
+--
+
+[.tab.badge.Pod]
+--
+[source,pod]
+----
+=for HTML <a href="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"><img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>"></a>
+----
+--
+
+[.tab.badge.Rdoc]
+--
+[source,rdoc]
+----
+{<img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>" alt="CircleCI" />}[https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true]
+----
+--
+
+[.tab.badge.reStructuredText]
+--
+[source,reStructuredText]
+----
+.. image:: https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>
+        :target: https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true
+----
+--
+
+[.tab.badge.Textile]
+--
+[source,textile]
+----
+!https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>!:https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true
+----
+--
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Item
+|Options
+
+|`TIME-WINDOW`
+|`24h`, `7d`, `30d`, `60d`, `90d`
+
+|`TIME-WINDOW-VERBOSE`
+|`last-24-hours`, `last-7-days`, `last-30-days`, `last-60-days`, `last-90-days`
+
+|`VCS`
+|`gh`, `bb`
+
+|`VCS-FULL`
+|`github`, `bitbucket`
+|===
+
 [#see-also]
 == 関連項目
 
