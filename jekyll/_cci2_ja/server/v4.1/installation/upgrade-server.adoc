@@ -1,0 +1,42 @@
+---
+
+contentTags:
+  platform:
+    - Server v4.1
+    - Server Admin
+---
+= Upgrade server v4.x
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは CircleCI Server v4.x のアップグレードに必要な手順を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このドキュメントでは CircleCI Server v4.x のインストールに必要な手順を説明します。
+
+デプロイが成功すると Web アプリが更新されます。 リリースノートに記載されていない限り、アップデートはローリングアップデートでありダウンタイムはありません。
+
+NOTE: アップグレード時にリリースをスキップしないことをお勧めします。
+
+[#prerequisites]
+== 前提条件
+
+* サーバーがインストールされている Kubernetes クラスタにアクセスできる。
+* Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
+* 最近のバックアップがある。 For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+
+[#upgrade-steps]
+== アップグレード手順
+
+. Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
+. Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
++
+[source,shell]
+helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+. アップグレードを実行します。
++
+[source,shell]
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+. Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
