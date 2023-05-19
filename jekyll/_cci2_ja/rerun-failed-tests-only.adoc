@@ -201,7 +201,7 @@ gem 'rspec_junit_formatter'
 `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` は、`file` 属性の存在を確認するために設定しています。 `.circleci/config.yml` で設定する代わりに、`addFileAttribute= "true"` 属性を利用して `jest.config.js` ファイルに `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` を追加することもできます。
 
 [#configure-a-job-running-playwright-tests]
-=== Configure a job running Playwright tests
+=== Playwright のテストを実行するジョブの設定
 
 . `circleci tests run` を使うようにテストコマンドを更新します。
 +
@@ -213,7 +213,7 @@ gem 'rspec_junit_formatter'
       TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
       echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
 ```
-. `glob` コマンドは、必要に応じて調整してください。 **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
+. `glob` コマンドは、必要に応じて調整してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。** テスト分割を使用しない場合は、`--split-by=timings` を省略できます。 注：link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwrightの既にビルドインされている flag]（`PLAYWRIGHT_JUNIT_OUTPUT_NAME`）を使用して、JUnit XML 出力ディレクトリを指定することも可能です。
 
 [#known-limitations]
 == 既知の制限
@@ -277,11 +277,11 @@ gem 'rspec_junit_formatter'
 
 **回答:** ジョブの `parallelism` キーで指定された数のコンテナまたは仮想マシン (VM) がスピンアップします。  ただし、これらの並列コンテナ/VM 全体でテストが分割されるので、各並列コンテナ/VM のテスト実行ステップではテストの一部のみが実行されるか、テストの実行自体が行われません。  たとえば、`parallelism` を 8 に設定しても、テスト数によっては、テスト分割で 2 つの並列コンテナ/VM にしかテストが "割り当てられない" 可能性があります。 こうした場合、他 6 つの並列コンテナ/VM も起動されますが、テスト実行ステップでテストを実行することはありません。
 
-**Question:** My maven surefire tests are failing when I try to set this feature up?
+**Question:** この機能を設定しようとすると、maven の surefire テストが失敗することはありますか？
 
-**Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module.
+**Answer:** 依存モジュールでテストがスキップされたのを見たときに失敗を報告する代わりに、テストフレームワークがスキップされたテストを無視するように、`-DfailIfNoTests=false` フラッグを追加する必要がある場合もあります。
 
-**Question:** Can I specify timing type for test splitting using `circleci tests run`?
+**Question:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
 
 **Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
 
