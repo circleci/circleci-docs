@@ -33,6 +33,13 @@ CircleCI では、`config.yml` ファイルを使って CI/CD パイプライン
 
 VCS に接続した link:/docs/first-steps[CircleCI アカウント]を既にお持ちで、いますぐコンフィグファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy#[ポリシーの作成ガイド]をお読みください。
 
+The following how-to guides are available for config policies:
+
+* xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]
+* xref:test-config-policies#[設定ファイルのポリシーのテスト]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CLI for config and policy development]
+* xref:config-policies-for-self-hosted-runner#[Config policies for self-hosted runner]
+
 [#how-config-policy-work]
 == コンフィグファイルのポリシー管理機能の仕組み
 
@@ -278,6 +285,7 @@ CircleCI 設定ファイルのポリシーを記述する場合、多くの場�
 
 * `project_id` (CircleCI Project UUID)
 * `build_number` (number)
+* `ssh_rerun` (boolean) - indicates if CI job is started using the SSH rerun feature
 * `vcs.branch` (string)
 * `vcs.release_tag` (string)
 * `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
@@ -337,13 +345,41 @@ from_trusted_origin(origin) {
 }
 ----
 
-[#testing-policies]
+The following is an example of a policy that blocks SSH reruns on configs where a job uses sensitive contexts.
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["ssh_rerun"]
+
+enable_hard["disallow_ssh_rerun"]
+
+sensitive_contexts := { "secops", "deploy_keys", "access_tokens", "security" }
+
+disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
+    data.meta.ssh_rerun
+    some _, job in input.workflows[_].jobs[_]
+    count(utils.to_set(job.context) & sensitive_contexts) > 0
+}
+----
+
+[#use-sets-and-variables]
 == ポリシーのテスト
 
 新しいポリシーを使用する場合、そのポリシーがどのように適用され、どのような意思決定結果が生成されるのかを事前に把握して、不安なくデプロイできなくてはなりません。 そのためのコマンドとして、`circleci policy test` を利用できます。 この `test` サブコマンドは、golang や opa のテストコマンドを参考にしています。 テストの準備の詳細については、xref:test-config-policies#[設定ファイルのポリシーのテスト]を参照してください。
 
-[#example-policy]
+For further reading, see the link:https://circleci.com/blog/compliance-with-config-policies/[Config policies blog post].
+
+[#testing-policies]
 == サンプルポリシー
+
+以下に、`use_official_docker_image` という 1 つのルールが設定されたサンプルポリシーの全体像を示します。このルールは、設定ファイル内に含まれる全 Docker イメージの接頭辞が `circleci` または `cimg` であるかをチェックします。 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。 `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。 テストの準備の詳細については、xref:test-config-policies#[設定ファイルのポリシーのテスト]を参照してください。
+
+[#example-policy]
+== 次のステップ
 
 以下に、`use_official_docker_image` という 1 つのルールが設定されたサンプルポリシーの全体像を示します。このルールは、設定ファイル内に含まれる全 Docker イメージの接頭辞が `circleci` または `cimg` であるかをチェックします。 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。 `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。
 
@@ -375,6 +411,7 @@ enable_hard["use_official_docker_image"]
 [#next-steps]
 == 次のステップ
 
-* link:/docs/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]
-* link:/docs/use-the-cli-for-config-and-policy-development[CLI を使った設定ファイルとポリシーの作成]
-* link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]
+* xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]
+* xref:test-config-policies#[設定ファイルのポリシーのテスト]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CircleCI CLI for config and policy development]
+* xref:config-policy-reference#[設定ファイルのポリシーに関するリファレンス]
