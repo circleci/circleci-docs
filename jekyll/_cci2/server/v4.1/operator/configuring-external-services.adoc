@@ -4,7 +4,7 @@ contentTags:
     - Server v4.1
     - Server Admin
 ---
-= Configuring External Services
+= Configuring external services
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes how to configure the following external services for use with a CircleCI server 4.x installation
@@ -74,14 +74,14 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 
 
 [#migrating-from-internal-postgres]
-=== Migrating from an Internal Postgres to an Externalized Source
+=== Migrating from an internal PostgreSQL to an externalized source
 
 {% include snippets/server/migrate-internal-postgres-to-external.adoc %}
 
 [#connecting-your-external-postgres]
-=== Connecting Your External Postgres Instance to CircleCI Server [[connecting-your-external-postgres]]
+=== Connecting your external PostgreSQL instance to CircleCI server
 
-Once you have set up your external PostgreSQL instance, add the following to your `values.yaml` file for your CircleCI server instance to access it.
+Once you have set up your external PostgreSQL instance, add the following to your `values.yaml` file so that your CircleCI server instance can access it.
 
 [source,yaml]
 ----
@@ -132,15 +132,15 @@ The changes will take effect upon running `helm install/upgrade`. If you are com
 
 
 [#backing-up-postgresql]
-=== Backing Up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
+=== Back up PostgreSQL
+PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found link:https://www.postgresql.org/docs/12/backup.html[here].
 
 We strongly recommend the following:
 
-* Taking daily backups.
-* Keeping at least 30 days of backups.
-* Using encrypted storage for backups as databases might contain sensitive information.
-* Performing a backup before each upgrade of CircleCI server.
+* Take daily backups
+* Keep at least 30 days of backups
+* Use encrypted storage for backups as databases might contain sensitive information
+* Perform a backup before each upgrade of CircleCI server
 
 [#mongodb]
 == MongoDB
@@ -148,14 +148,14 @@ We strongly recommend the following:
 NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 
 [#migrating-from-internal-mongodb]
-=== Migrating from an Internal MongoDB to an Externalized Source
+=== Migrating from an internal MongoDB to an externalized source
 
 {% include snippets/server/migrate-internal-mongo-to-external.adoc %}
 
 [#connecting-your-external-mongodb]
-=== Connecting Your External MongoDB Instance to CircleCI Server [[connecting-your-external-mongodb]]
+=== Connecting your external MongoDB instance to CircleCI server
 
-Once you have configured your external MongoDB instance, add the following to your `values.yaml` file to connect your CircleCI Server instance.
+Once you have configured your external MongoDB instance, add the following to your `values.yaml` file to connect your CircleCI server instance.
 
 [source,yaml]
 ----
