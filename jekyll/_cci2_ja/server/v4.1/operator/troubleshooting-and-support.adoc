@@ -3,16 +3,20 @@
 contentTags:
   platform:
     - Server v4.1
-    - サーバー管理者
+    - Server Admin
 ---
-= トラブルシューティングとサポート
+= Troubleshooting and support
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、CircleCI Server v4.1 で問題が発生した場合のトラブルシューティング手順について説明します。
+:page-description: ここでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
 :icons: font
 :toc: macro
 
-ここでは、CircleCI Server v1 で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポートバンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
+:toc-title:
+
+ここでは、CircleCI Server v4.x で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポートバンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
+
+toc::[]
 
 [#generate-support-bundle]
 == サポートバンドルの生成
@@ -66,6 +70,7 @@ audit-log-service-77c478f9d5-5dfzv 1/1 Running 0 6d20h
 builds-service-v1-5f8568c7f5-62h8n 1/1 Running 0 6d20h
 circleci-mongodb-0 1/1 Running 0 6d20h
 circleci-nomad-0 1/1 Running 6 6d20h
+…
 ----
 
 ステータスが `Running` 以外の Pod だけを表示するには、`--field-selector` オプションを使用します。
@@ -104,5 +109,33 @@ kubectl logs <pod-name> -n <namespace>
 
 [source,bash]
 ----
-kubectl delete pod <pod-name> -n <name-space> --now
+kubectl delete pod <pod-name> -n <namespace> --now
+----
+
+[#air-gap-repl]
+=== Utilizing REPL in an air-gapped environment
+
+If you are in an air-gapped environment, you will first need to download the `lein` REPL dependencies, commit them, and upload it to your private Docker registry.
+
+[source,bash]
+----
+docker run -it clojure lein repl :connect 6005
+docker commit $(docker ps -aq | head -1) <your-private-registry>/clojure
+----
+
+Now you are ready to access the REPL. From a system with access to the private Docker registry and `kubectl` access to the cluster, run the script below. Be sure to modify it to match your namespace if it is not `circleci-server`.
+
+[source,bash]
+----
+SVC_NAME=frontend
+INET_ADDR="$(ip -4 route get 192.0.2.1 | grep -o 'src [0-9.]\{1,\}' | awk '{ print $2 }')"
+
+# Start port-forwarding in background
+kubectl port-forward "$(kubectl get po -l app="${SVC_NAME}" -n circleci-server -o jsonpath='{.items[0].metadata.name}')" --address "${INET_ADDR}" 6005 -n circleci-server &
+
+# Start nREPL
+sudo docker run --rm -it clojure lein repl :connect "${INET_ADDR}":6005
+
+# End port-forwarding
+kill $!
 ----
