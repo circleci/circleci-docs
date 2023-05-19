@@ -283,6 +283,6 @@ gem 'rspec_junit_formatter'
 
 **Question:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
 
-**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
+**Answer:** はい、`circleci tests split --split-by=timings --timings-type=` と同様に、`test-selector` フラグを使用してタイミングタイプを指定することができます。  ファイル名、クラス名、テスト名のいずれかを渡すことができます。
 
 ---
