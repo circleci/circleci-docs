@@ -40,7 +40,7 @@ Insights Snapshot Badge のページでは、プロジェクトのメトリク�
 * 画像 URL
 * Markdown
 * Textile
-* Rdoc
+* RDoc
 * AsciiDoc
 * reStructuredText
 * Pod
@@ -59,9 +59,9 @@ Markdown 形式で生成されたインサイト スナップショットバッ�
 
 Insights Snapshot Badge ページで *Add API Token* をクリックすると、直接 API トークンを追加することができます。 これにより、"Status" のスコープを持つ API トークンと "insights-snapshot" ラベルが作成されます。 (プロジェクトの *API Permissions* でも新しいトークンが表示されます)。 コードスニペットは、API の作成後に表示されます。
 
-If you would like to reuse an API token with the scope of "Status", which you have already created for your project status badge, you can use one of the following templates as an alternative to the badge generator in the CircleCI web app described above.
+プロジェクトのステータスバッジ用に既に作成したスコープが「Status」のAPIトークンを再利用したい場合は、上記の CircleCI ウェブアプリのバッジジェネレータの代わりに、以下のテンプレートのいずれかを使用することができます。
 
-In the templates below, replace `< >` items with your own details. Some options are shown in the table below.
+以下のテンプレートでは、`< >` の項目をご自身の詳細情報に置き換えてください。 一部のオプションは下表のとおりです。
 
 [.tab.badge.Asciidoc]
 --
@@ -116,7 +116,7 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/
 [cols=2*, options="header", stripes=even]
 |===
 |Item
-|Options
+|オプション
 
 |`TIME-WINDOW`
 |`24h`, `7d`, `30d`, `60d`, `90d`
