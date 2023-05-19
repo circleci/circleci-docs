@@ -262,7 +262,7 @@ en:
             link: concurrency
           - name: Test splitting and parallelism
             link: parallelism-faster-jobs
-          - name: Enable Docker layer caching
+          - name: Docker layer caching overview
             link: docker-layer-caching
       - name: Configuration
         children:
@@ -280,6 +280,8 @@ en:
         children:
           - name: Reusable configuration reference
             link: reusing-config
+          - name: Optimizations reference
+            link: optimizations
 
   - name: Project Insights
     icon: icons/sidebar/insights-new.svg
@@ -332,8 +334,8 @@ en:
             link: slack-orb-tutorial
       - name: How-to guides
         children:
-          - name: Deploy service update to EC2
-            link: deploy-service-update-to-aws-ec2
+          - name: Deploy service update to ECS
+            link: deploy-service-update-to-aws-ecs
       - name: Reference
         children:
           - name: Orbs concepts
@@ -386,6 +388,10 @@ en:
             link: ssh-access-jobs
           - name: Rotate project SSH keys
             link: rotate-project-ssh-keys
+          - name: Stop building a project on CircleCI
+            link: stop-building-a-project-on-circleci
+          - name: Rename organizations and repositories
+            link: rename-organizations-and-repositories
           - name: Create and manage config policies (Open preview)
             link: create-and-manage-config-policies
           - name: Test config policies (Open preview)
@@ -394,10 +400,8 @@ en:
             link: use-the-cli-for-config-and-policy-development
           - name: Config policies for self-hosted runner (Open preview)
             link: config-policies-for-self-hosted-runner
-          - name: Stop building a project on CircleCI
-            link: stop-building-a-project-on-circleci
-          - name: Rename organizations and repositories
-            link: rename-organizations-and-repositories
+          - name: Manage contexts with config policies (Open preview)
+            link: manage-contexts-with-config-policies
       - name: Reference
         children:
           - name: Config policy reference (Open preview)
@@ -540,8 +544,8 @@ en:
             link: deploy-to-artifactory
           - name: Deploy to AWS
             link: deploy-to-aws
-          - name: Deploy Service Update to AWS EC2
-            link: deploy-service-update-to-aws-ec2
+          - name: Deploy service update to AWS ECS
+            link: deploy-service-update-to-aws-ecs
           - name: Deploy to Azure Container Registry
             link: deploy-to-azure-container-registry
           - name: Deploy to Capistrano
@@ -586,8 +590,6 @@ en:
             link: server/v4.1/installation/hardening-your-cluster
           - name: Installing server behind a proxy
             link: server/v4.1/installation/installing-server-behind-a-proxy
-          - name: Migrate from server v3 to v4
-            link: server/v4.1/installation/migrate-from-server-3-to-server-4
           - name: Upgrade server v4.x
             link: server/v4.1/installation/upgrade-server
           - name: Installation reference
@@ -1329,9 +1331,9 @@ ja:
       - name: How-To Guides
         i18n_name: ガイド
         children:
-          - name: Deploy service update to EC2
-            link: ja/deploy-service-update-to-aws-ec2
-            i18n_name: 変更のEC2へのデプロイ
+          - name: Deploy service update to ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1639,9 +1641,9 @@ ja:
           - name: Deploy to AWS
             link: ja/deploy-to-aws
             i18n_name: AWSへのデプロイ
-          - name: Deploy Service Update to AWS EC2
-            link: ja/deploy-service-update-to-aws-ec2
-            i18n_name: 変更のEC2へのデプロイ
+          - name: Deploy service update to AWS ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
           - name: Deploy to Azure Container Registry
             link: ja/deploy-to-azure-container-registry
             i18n_name: Azure Container Registryへのデプロイ

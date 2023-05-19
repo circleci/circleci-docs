@@ -126,7 +126,7 @@ Capability | `docker` | `machine`
  Full root access | No | Yes
  Run multiple databases | Yes <sup>(3)</sup> | Yes
  Run multiple versions of the same software | No | Yes
- [Docker layer caching]({{ site.baseurl }}/docker-layer-caching/) | Yes | Yes
+ [Docker layer caching](/docs/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/configuration-reference/#resource_class) | Yes | Yes
