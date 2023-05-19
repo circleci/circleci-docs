@@ -1,6 +1,6 @@
 ---
 
-description: CircleCI Orb を使って変更を AWS ECS にデプロイする方法
+description: このドキュメントでは、CircleCI Orb を使って変更を AWS ECS にデプロイする方法をわかりやすくご紹介しています。
 contentTags:
   platform:
   - クラウド
@@ -20,7 +20,7 @@ document-type:
 このノウハウガイドでは、CircleCI Orb を使用してCircleCIをAWS ECSにデプロイする方法を説明しています。
 
 [#introduction]
-== コンテナランナー
+== はじめに
 
 Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することにより、独自のコンテナ オーケストレーション ソフトウェアをインストール・設定せずに済むため、デプロイの複雑さが解消され、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このガイドでは、CircleCI Orb を使ってソフトウェアの変更を Amazon ECS にデプロイする方法を説明します。
 
