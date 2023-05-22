@@ -1,11 +1,10 @@
 ---
 
-contentTags:
-  platform:
-  - Server v4.1
-  - Server Admin
+version:
+- Server v4.1
+- サーバー管理者
 ---
-= Hardening your cluster
+= クラスタのセキュリティー強化
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
@@ -286,7 +285,7 @@ vm_service:
 [#private-ips-only]
 === プライベート IP のみ
 
-When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
+`assignPublicIP` オプションを false に設定すると、link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
 VM セキュリティグループの受信ルールでは、インストール環境のセキュリティーを強化するために以下のルールを作成できます。
 
