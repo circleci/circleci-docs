@@ -1,13 +1,12 @@
 ---
 
-contentTags:
-  platform:
-  - Server v4.1
-  - Server Admin
+version:
+- Server v4.1
+- サーバー管理者
 ---
-= Installing server behind a proxy
+= サーバーのプロキシ経由でのインストール
 :page-layout: classic-docs
-:page-description: CircleCI Serverをプロキシ経由でインストールする方法について説明します。
+:page-description: CircleCI Server v4.x をプロキシ経由でインストールする方法について説明します。
 :page-liquid:
 :icons: font
 :toc: macro
