@@ -3,9 +3,9 @@
 contentTags:
   platform:
   - Server v4.1
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 3 - Execution environments
+= ステップ 3 - 実行環境
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,7 +15,7 @@ contentTags:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution environment installation phase, ensure you have run through xref:phase-1-prerequisites#[Phase 1 – Prerequisites] and xref:phase-2-core-services#[Phase 2 - Core Services Installation].
+CircleCI Server v4.x 実行環境のインストールステップを開始する前に、 xref:phase-1-prerequisites#[ステップ 1: 前提条件] と xref:phase-2-core-services#[ステップ 2: コアサービスのインストール] が実行済みであることを確認してください。
 
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
@@ -41,7 +41,7 @@ ifndef::env-gcp[]
 
 Terraform モジュールに必要な変数を入力するにはクラスタおよびサーバのインストール環境に関する情報が必要です。 変数の完全な例と完全なリストについては、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[AWS Terraform の設定例] を参照してください。
 
-* *Server_endpoint* - This is the domain name of the CircleCI application.
+* *Server_endpoint* - CircleCI アプリケーションのドメイン名です。
 * クラスタの *サブネット ID (subnet)* 、 *VPC ID (vpc_id)* 、 *DNS サーバー (dns_server)*: 次のコマンドを実行して、クラスタの VPC ID (vpcId) とサブネット (subnetIds) を入手します。
 +
 [source,shell]
@@ -64,7 +64,7 @@ vpc-02fdfff4ca
 subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488
 ----
 +
-次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 For AWS, the DNS server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
+次に、見つけた VPCID を使用して次のコマンドを実行し、クラスタの CIDR ブロックを取得します。 AWS の場合、 DNS サーバーは CIDR Block (`CidrBlock`) の３番目の IP です。たとえば、CIDR ブロックが `10.100.0.0/16` の場合、 3 番目の IP は `10.100.0.2` になります。
 +
 [source,shell]
 ----
@@ -156,7 +156,7 @@ IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成�
 * 変数 `nomad_auto_scaler = true` を設定すると、link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[Nomad モジュール] が IAM ユーザーを作成し、キーを出力します。
  詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数を更新して `terraform apply` を実行します。 作成されたユーザーアクセスキーとシークレットキーは Terraform の出力で使用できます。
 * <<iam-policy-for-nomad-autoscaler,下記の IAM ポリシー>> を使って Nomad Autoscaler IAM ユーザーを手動で作成します。 次に、このユーザー用のアクセスキーとシークレットキーを生成します。
-* You may create a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
+* Nomad Autoscalerの link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts]を作成し、<<iam-policy-for-nomad-autoscaler,IAM policy below>>を添付することができます：
 
 アクセスキーとシークレットキーを使用する場合、2 つの設定オプションが あります。
 
@@ -260,7 +260,7 @@ CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/noma
 --
 **オプション 2:** Workload Identity を使用する
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using xref:phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. 変数 `nomad_auto_scaler = true` と `enable_workload_identity = true` を設定します。
+CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール] により、 xref:phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] を使ってサービスアカウントを作成し、メールを送信できます。 変数 `nomad_auto_scaler = true` と `enable_workload_identity = true` を設定します。
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
@@ -429,7 +429,7 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 [#nomad-clients-validation]
 === 3. Normad クライアントの確認
 
-CircleCI has created a project called link:https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. 今後このプロジェクトを監視し、システムが期待どおりに動作しているかを確認します。 引き続き次のステップを実行すると、 realitycheck のセクションが赤から緑に変わります。
+CircleCI では、CircleCI Server のインストールをテストできる link:https://github.com/circleci/realitycheck[realitycheck] というプロジェクトを作成しました。 今後このプロジェクトを監視し、システムが期待どおりに動作しているかを確認します。 引き続き次のステップを実行すると、 realitycheck のセクションが赤から緑に変わります。
 
 realitycheck を実行する前に、次のコマンドを実行して Nomad サーバーが Nomad クライアントと通信できるか確認して下さい。
 
@@ -466,7 +466,7 @@ git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-レポジトリのクローンに成功したら、CircleCI Server 内からフォローすることができます。 以下の変数を設定する必要があります。 For full instructions please see the link:https://github.com/circleci/realitycheck#prerequisites-1[repository readme].
+レポジトリのクローンに成功したら、CircleCI Server 内からフォローすることができます。 以下の変数を設定する必要があります。 詳細は、 link:https://github.com/circleci/realitycheck#prerequisites-1[リポジトリ README] を参照してください。
 
 .環境変数
 [.table.table-striped]
@@ -483,7 +483,7 @@ git push
 |<YOUR_CIRCLECI_API_TOKEN>
 
 |CIRCLE_CLOUD_PROVIDER
-|< `aws`, `gcp`, or `other` >
+|< `aws`, `gcp`, または `other` >
 |===
 
 .コンテキスト
@@ -511,10 +511,10 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM サービス
 
-VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm execution environments, and those that are configured to use xref:../../../configuration-reference#setupremotedocker[remote Docker]. スケーリングルールなど、さまざまなオプションの設定が可能です。 VM サービスは、 AWS および GCP インストール環境に固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの特定の機能に依存しているためです。
+VM サービスにより、Linux VM、Windows、Arm の各実行環境で実行されるジョブや xref:../../../configuration-reference#setupremotedocker[リモート Docker] を使用するように設定されたジョブの仮想マシンを設定できます。 スケーリングルールなど、さまざまなオプションの設定が可能です。 VM サービスは、 AWS および GCP インストール環境に固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの特定の機能に依存しているためです。
 
 NOTE: サーバーのインストールプロセスが完了したら、VM サービスの詳細設定が行えます。これには、開発者が Windows 実行環境にアクセスできるように Windows イメージをビルドおよび指定したり、代替の Linux マシンイメージを指定したり、スピンアップ状態を常に維持するための事前割り当てインスタンスの数の指定などが含まれます。
- For more information, see the xref:../operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
+ 詳細については、 xref:../operator/manage-virtual-machines-with-vm-service[VM サービスを使った仮想マシンの管理] を参照してください。
 
 ifndef::env-gcp[]
 
@@ -560,7 +560,7 @@ aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI VM Ser
 aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
 ----
 +
-For each link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the Nomad clients, find the subnet cidr block and add two rules with the following commands.
+Nomad クライアントが使用する各 link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[サブネット] のサブネット cidr ブロックを見つけ、次のコマンドを使って 2 つのルールを追加します。 
 +
 [source,shell]
 ----
@@ -595,7 +595,7 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 
 [.tab.vmauthaws.IRSA]
 --
-The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
+以下は link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA についての AWS のドキュメント] の概要です。CircleCI での VM サービスの設定には十分です。
 
 . *ID プロバイダーを作成します。*
 +
@@ -810,7 +810,7 @@ vm_service:
 aws iam create-user --user-name circleci-vm-service
 ----
 +
-Optionally, vm-service does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
+vm-service では、オプションで AWS キーの代わりに link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下の link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
 完了したら、手順 9 に進みます。手順 9 では、VM サービスを有効化します。
 . *ポリシーを作成します。*
 +
@@ -1068,7 +1068,7 @@ GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-ide
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
 --
-. *Configure CircleCI server*
+. *CircleC server を設定する*
 +
 サービスアカウントキーを使って VM サービスのアクセス許可を設定する場合、2 つのオプションがあります。
 +
@@ -1118,7 +1118,7 @@ endif::env-aws[]
 [#vm-service-validation]
 === VM サービスの検証
 
-Apply they changes made to your `values.yaml` file.
+`values.yaml` ファイルへの変更を適用します。
 
 [source,shell,subs=attributes+]
 ----
@@ -1134,9 +1134,9 @@ CircleCI Server の設定とデプロイが完了したら、VM サービスが�
 [#overview]
 === 概要
 
-CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI server ships ready to work with runner. ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 For complete instructions for setting up runner, see the xref:../../../runner-overview#[runner documentation].
+CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 ランナーの設定についての詳細は、xref:../../../runner-overview#[ランナーに関するドキュメント] をご覧ください。
 
-NOTE: ランナーには組織ごとに１つ名前空間が必要です。 CircleCI server can have many organizations. CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
+NOTE: ランナーには組織ごとに１つ名前空間が必要です。 CircleCI Server には複数の組織が存在する場合があります。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
 
 ifndef::pdf[]
 
