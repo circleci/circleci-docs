@@ -1,11 +1,10 @@
 ---
 
-contentTags:
-  platform:
-  - Server v4.1
-  - Server Admin
+version:
+- Server v4.1
+- サーバー管理者
 ---
-= Installation reference
+= インストールのリファレンスガイド
 :page-layout: classic-docs
 :icons: font
 :toc: macro
