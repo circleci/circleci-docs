@@ -3,12 +3,12 @@
 contentTags:
   platform:
     - Server v4.1
-    - Server Admin
+    - サーバー管理者
 ---
-= Upgrade server v4.x
+= Server v4.x のアップグレード
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは CircleCI Server v4.x のアップグレードに必要な手順を説明します。
+:page-description: このドキュメントでは CircleCI Server v4.x のインストールをアップグレードに必要な手順を説明します。
 :icons: font
 :toc: macro
 
@@ -24,14 +24,14 @@ NOTE: アップグレード時にリリースをスキップしないことを�
 == 前提条件
 
 * サーバーがインストールされている Kubernetes クラスタにアクセスできる。
-* Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
-* 最近のバックアップがある。 For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* xref:../operator/backup-and-restore#[バックアップと復元] の設定が完了している。 
+* 最近のバックアップがある。 詳細については、 xref:../opertor/backup-and-restore#creating-backups[バックアップと復元] に関するガイドをご覧ください。
 
 [#upgrade-steps]
 == アップグレード手順
 
-. Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
-. Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
+. https://circleci.com/ja/server/changelog/[サーバー更新履歴] をチェックし、新しいバージョンをデプロイする前に実行しなければならないアクションがないことを確認します。
+. 必要に応じて、 https://github.com/databus23/helm-diff[Helm Diff] で更新の処理内容を確認してください。
 +
 [source,shell]
 helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
@@ -39,4 +39,4 @@ helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n 
 +
 [source,shell]
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
-. Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
+. テスト環境で link:https://github.com/circleci/realitycheck[`reality check`] をデプロイして実行し、インストールした CircleCI Server が完全に動作していることを確認します。
