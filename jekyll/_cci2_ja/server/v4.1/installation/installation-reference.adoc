@@ -282,7 +282,7 @@ a|Github 経由の OAuth ログイン用のクライアントシークレット�
 |`github.defaultToken`
 |文字列
 |`""`
-a|xref:phase-2-core-services/#github-enterprise-integration[Personal access token for your GitHub Enterprise instance]:
+a|xref:phase-2-core-services/#github-enterprise-integration[GitHub Enterprise のインスタンス用のパーソナルアクセストークン] です。
 
 **オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
@@ -566,7 +566,7 @@ a|CircleCI で生成されるアーティファクトの暗号化と署名に使
 |`nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"`
 |文字列
 |`"nlb"`
-|Use "nlb" for Network Load Balancer and "clb" for Classic Load Balancer see link:https://aws.amazon.com/elasticloadbalancing/features[this AWS page] for a feature comparison.
+|ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features[this/ を参照して違いをご確認ください。
 
 |`nginx.aws_acm.enabled`
 |ブール値
@@ -800,7 +800,7 @@ a|AWS 認証設定を指定します。
 |`object_storage.s3.endpoint`
 |文字列
 |`"https://s3.us-east-1.amazonaws.com"`
-|S3 用 API エンドポイントです。 If in AWS `us-west-2`, for example, this would be the regional endpoint `\http://s3.us-west-2.amazonaws.com`. S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
+|S3 用 API エンドポイントです。 たとえば AWS `us-west-2` の場合は、リージョンのエンドポイント (`\http://s3.us-west-2.amazonaws.com`)  になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
 
 |`orb_service.replicas`
 |整数
@@ -1239,12 +1239,12 @@ a|セッション Cookie キーです。 注: 16 バイトである必要があ�
 |`tink.enabled`
 |ブール値
 |`false`
-|When enabled, Tink will be used instead of Vault for contexts encryption.
+|有効にすると、コンテキストの暗号化に Vault の代わりに Tink が使用されるようになります。
 
 |`tink.keyset`
 |文字列
 |`""`
-|The keyset generated the Tink CLI to be used for contexts encryption
+|コンテキストの暗号化に使用するTink CLI を生成したキーセットです。
 
 |`tls.certificate`
 |文字列
