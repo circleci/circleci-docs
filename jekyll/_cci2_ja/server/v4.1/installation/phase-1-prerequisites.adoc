@@ -3,9 +3,9 @@
 contentTags:
   platform:
   - Server v4.1
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 1 - Prerequisites
+= フェイズ1 - 前提条件
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
@@ -16,7 +16,7 @@ contentTags:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI Server v4.x は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.1 overview].
+CircleCI Server v4.x は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 このインストールガイドは、 xref:../overview/circleci-server-overview#[CircleCI Server v4.1 の概要] を先に読んでいることを前提としています。
 
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
@@ -56,7 +56,7 @@ NOTE: 以下のセクションでは、 `< >` で示されている箇所にご�
 |link:https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 |最新バージョン
 |バックアップおよびリストア機能
-|See Velero's link:https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
+|詳細については、Velero の link:https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページを参照してください。
 |===
 
 // Don't include this section in the GCP PDF.
@@ -79,14 +79,14 @@ ifndef::env-aws[]
 [#gcp-required-software]
 === GCP で必要なソフトウェア
 
-- `gcloud` と `gsutil`。 Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 For further information refer to the link:https://cloud.google.com/sdk/docs/[Google Cloud SDK docs].
+- `gcloud` と `gsutil`。 Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 link:https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
 
 endif::env-aws[]
 
 [#s3-compatible-storage-required-software]
 === S3 互換ストレージで必要なソフトウェア
 
-- Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
+- ご自身のストレージプロバイダーの link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 [#create-a-kubernetes-cluster]
 == 2. Kubernetes クラスタを作成します
@@ -140,10 +140,11 @@ ifndef::env-gcp[]
 [#eks]
 === EKS
 
-You can learn more about creating an Amazon EKS cluster in the link:https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS docs]. We recommend using link:https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which creates a VPC and selects the proper security groups for you.
+Amazon EKS クラスタの作成に関する詳細は、 
+ link:https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
-. link:https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[Install] and link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configure] the AWS CLI for your AWS account.
-. Install link:https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`].
+. AWS CLI を link:https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-configure.html[設定] します。
+. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
 . 以下を実行してクラスタを作成します (`eksctl` and EKS を使った CloudFormation には 20 分以上かかる場合があります。)
 +
 [source,shell]
@@ -157,7 +158,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --cluster circleci-server
 ----
 
-NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 See the AWS documentation on link:https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 link:https://aws.amazon.com/jp/iam/features/manage-permissions/?nc1=h_ls[IAM 権限] に関しては AWS のドキュメントをご覧ください。
 
 endif::env-gcp[]
 
@@ -166,11 +167,11 @@ ifndef::env-aws[]
 [#gke]
 === GKE
 
-You can learn more about creating a GKE cluster in the link:https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE docs].
+GKE クラスタ の作成に関する詳細は、 link:https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE ドキュメント] をご覧ください。
 
 CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server では、GKE Autopilot ではサポートされていない機能が必要です。
 
-. link:https://cloud.google.com/sdk/gcloud[Install] and link:https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
+. GCP CLI を link:https://cloud.google.com/sdk/gcloud?hl=ja[インストール] し、お使いの GCP アカウント用に link:https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
 +
 NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
 +
@@ -184,7 +185,7 @@ gcloud config set compute/region <REGION>
 ----
 . クラスタの作成
 +
-TIP: CircleCI recommends using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. 以下のコマンドでシンプルなクラスタをプロビジョニングします。
+TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。 以下のコマンドでシンプルなクラスタをプロビジョニングします。
 +
 [source,shell]
 ----
@@ -262,7 +263,7 @@ GKE クラスタを既にお持ちで Workload Identity をクラスタとノー
 
 * xref:phase-3-execution-environments#nomad-autoscaler-gcp[Nomad Autoscaler]
 * xref:phase-3-execution-environments#gcp-3[VM]
-* xref:phase-1-prerequisites#configuring-google-cloud-storage[Object-Storage]
+* xref:phase-1-prerequisites#configuring-google-cloud-storage[オブジェクトストレージ]
 
 [#create-a-new-github-oauth-app]
 == 3. 新しい GitHub OAuth アプリを作成します
@@ -301,7 +302,7 @@ ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
 === GCP - Reserve a static external IP address
 
-The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
+GCPで新しい静的 IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
 
 返された IPv4 アドレスは後で values.yaml ファイルで使用するので控えておいてください。
 
@@ -417,7 +418,7 @@ certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_
 [#aws-certmanager]
 === AWS Certificate Manager
 
-Instead of provisioning your own TLS certificates, if you are setting up CircleCI server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
+ご自身の TLS 証明書をプロビジョニングする代わりに、AWS 環境で CircleCI Server を設定する場合は、Certificate Manager を使用して AWS が TLS 証明書をプロビジョニングするように設定できます。
 
 [source,shell]
 ----
@@ -478,7 +479,7 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 [#object-storage-and-permissions]
 == 7. オブジェクトストレージとアクセス許可
 
-CircleCI server v4.x hosts build artifacts, test results, and other state object storage. 以下のストレージオプションがサポートされています。
+CircleCI Server v4.x では、ビルドしたアーティファクト、テスト結果、その他の状態のオブジェクトストレージをホストします。 以下のストレージオプションがサポートされています。
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 * link:https://min.io/[MinIO]
@@ -829,7 +830,7 @@ gsutil mb gs://circleci-server-bucket
 [#set-up-authentication-gcp]
 ==== b.  認証を設定します
 
-The recommended method for workload/pod authentication is to use link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
+ワークロードとポッドの認証で推奨される方法は、 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
 
 . サービスアカウントを作成します。
 +
