@@ -5,7 +5,7 @@ contentTags:
   - Server v4.1
   - サーバー管理者
 ---
-= フェイズ1 - 前提条件
+= ステップ1 - 前提条件
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
@@ -203,7 +203,7 @@ NOTE: kube コンテキストが新しいクラスタの認証情報で自動的
 ----
 gcloud container clusters get-credentials circleci-server
 ----
-. Install the link:https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke[GKE authentication plugin] for `kubectl`:
+. `kubectl` 用に link:https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke[GKE 認証プラグイン] をインストールします。
 +
 [source,shell]
 ----
@@ -489,7 +489,7 @@ S3 互換のオブジェクトストレージであればどれでも動作す�
 
 S3 または GCS のバケットとアクセス方法を作成するには、次の手順に従います。
 
-NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 同じプロキシ経由にしないと、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースを機能させるために各プロジェクトの `.circleci/config.yml` のジョブレベルでプロキシの詳細を記載しなければならなくなります。 For more information see the xref:installing-server-behind-a-proxy#[Installing server behind a proxy] guide.
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 同じプロキシ経由にしないと、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースを機能させるために各プロジェクトの `.circleci/config.yml` のジョブレベルでプロキシの詳細を記載しなければならなくなります。 詳細については、xref:installing-server-behind-a-proxy#[プロキシ経由でのサーバーのインストール] ガイドを参照して下さい。
 
 ifndef::env-gcp[]
 
