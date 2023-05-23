@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.1
-    - Server Admin
+    - サーバー管理者
 ---
-= Operator overview
+= オペレーターの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI Server のインストールの管理における様々なタスクとツールについて説明します。
@@ -14,11 +14,11 @@ contentTags:
 
 :toc-title:
 
-このガイドでは、CircleCI Server x の保守や監視を行う CircleCI Server のオペレーターの皆さんに役立つ情報を紹介します。 Before reading this operator guide, ensure you have read the xref:../overview/circleci-server-overview#[CircleCI server v4.1 overview].
+このガイドでは、CircleCI Server x の保守や監視を行う CircleCI Server のオペレーターの皆さんに役立つ情報を紹介します。 このオペレーター向けガイドを読む前に、必ず xref:../overview/circleci-server-overview#[CircleCI Server v4.x の概要]をお読みください。
 
-CircleCI server schedules CI/CD jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. Nomad サーバー (コントロールプレーン) が Kubernetes クラスタ内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 The Nomad clients need access to the Nomad control plane, output processor, and VM service.
+CircleCI Server では、 link:https://www.nomadproject.io/[Nomad] スケジューラを使用して CI/CD ジョブのスケジュールを設定します。 Nomad サーバー (コントロールプレーン) が Kubernetes クラスタ内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 Nomad クライアントが、Nomad コントロールプレーン、出力プロセッサ、VM サービスにアクセスできる必要があります。
 
-CircleCI Server では、Nomad クライアントまたは専用の仮想マシンで Docker ジョブを実行できます。 These VM jobs are controlled by the Nomad clients, therefore the Nomad clients must be able to access the VMs on port 22 for SSH and port 2376 for xref:../../../configuration-reference#setupremotedocker[remote Docker jobs].
+CircleCI Server では、Nomad クライアントまたは専用の仮想マシンで Docker ジョブを実行できます。 これらの VM ジョブは Nomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、xref:../../../configuration-reference#setupremotedocker[リモート Docker ジョブ]用にポート 2376 で VM にアクセスできる必要があります。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
 
@@ -27,7 +27,7 @@ CircleCI Server では、Nomad クライアントまたは専用の仮想マシ�
 [#execution-environment]
 == 実行環境
 
-CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 Refer to our xref:introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、xref:introduction-to-nomad-cluster-operation#[Nomad クラスタの操作ガイド] を参照してください。
 
 CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに設定されている Executor に従って、コンピューティングリソースを自動的にプロビジョニングします。
 
@@ -36,9 +36,9 @@ CircleCI の Nomad クライアントは、プロジェクトの `.circleci/conf
 
 Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
 
-ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにするとコストを削減できますが、使用できる Docker リソースクラスが制限されます。 Review the xref:../../../configuration-reference#resourceclass[available resource classes] to decide what is best for you. デフォルトのインスタンスタイプでは、最大で `xlarge` のリソースクラスを実行できます。
+ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにするとコストを削減できますが、使用できる Docker リソースクラスが制限されます。 xref:../../../configuration-reference#resourceclass[利用可能なリソースクラス]を参照して、最適なものをお選びください。 デフォルトのインスタンスタイプでは、最大で `xlarge` のリソースクラスを実行できます。
 
-See the link:https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options for optimizing the resource usage of Nomad clients.
+Nomad クライアントのリソースを最適に使用するためのオプションについては、 link:https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
 
 NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
 
