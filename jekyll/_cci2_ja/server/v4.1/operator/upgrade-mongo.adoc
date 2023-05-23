@@ -3,35 +3,35 @@
 contentTags:
   platform:
     - Server v4.1
-    - Server Admin
+    - サーバー管理者
 ---
-= Upgrade MongoDB
+= MongoDB のアップグレード
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server.
+:page-description: このドキュメントでは、CircleCI Server のインストールで、MongoDB を v4.4.15 にアップグレードする方法をわかりやすく説明しています。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-MongoDB is a database service used by CircleCI server. This page describes how to upgrade MongoDB to version `4.4.15`.
+MongoDB は、CircleCI Server で利用されているデータベースサービスです。 このドキュメントでは、MongoDB をバージョン4.4.15 にアップグレードする方法について説明します。
 
-MongoDB `3.6.22` is shipped with CircleCI server 4.1.
+MongoDB  `3.6.22` は CircleCI Server 4.1 と共に出荷されます。
 
 [#prerequisites]
 == 前提条件
 
-* Ensure backups have been taken. You will need a backup of MongoDB to restore to in case anything goes wrong during the upgrade progress
-* You are prepared to modify the `values.yaml`
-* `helm upgrade` will work from your system to upgrade the cluster
-* MongoDB root password is available
+* まずは、バックアップが取られていることを確認する。 アップグレードの進行中に何か問題が発生した場合に備えて、MongoDB のバックアップを復元する必要がある
+* `values.yaml` を修正する準備が完了している
+* `helm upgrade`  は、自身のシステムからクラスタをアップグレードするために動作する
+* MongoDB root パスワードが使用可能
 
 [#upgrade]
 == アップグレード
 
-=== 1.  Upgrade from MongoDB 3.6 to 4.0
+=== 1.  MongoDB 3.6 から 4.0 へのアップグレード
 
-. Your `values.yaml` should contain the following snippet:
+. `values.yaml` には、以下のスニペットが含まれているはずです：
 +
 ```yaml
 mongodb:
@@ -39,54 +39,54 @@ mongodb:
     tag: 3.6.22-debian-9-r38
 ```
 +
-To begin the upgrade process, change the tag to `4.0.27-debian-9-r118`:
+アップグレード処理を開始するには、タグを `4.0.27-debian-9-r118` に変更します：
 +
 ```yaml
 mongodb:
   image:
     tag: 4.0.27-debian-9-r118
 ```
-. Run `helm upgrade` to update your installation.
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. `helm upgrade` を実行して、インストールを更新してください。
+. `helm upgrade` が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、ポッドに `exec` する必要があります (root パスワードがあれば便利です)。 (必ず `<password>` をMongoDBルートのパスワードに置き換えてください)。
 +
 ```bash
 kubectl exec -it mongodb-0 -- mongo -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )
 ```
-. You should get a `{ "ok" : 1 }` response from Mongo. Exit out of the MongoDB shell and pod.
+. Mongoから `{ "ok" : 1 }` というレスポンスが返ってくるはずです。 MongoDBのシェルとPodを終了します。
 
-=== 2. Upgrade from MongoDB 4.0 to 4.2
+=== 2. MongoDB 4.0から4.2へのアップグレード
 
-. Change the tag to `4.2.17-debian-10-r99`:
+. タグを `4.2.17-debian-10-r99` に変更してください：
 +
 ```yaml
 mongodb:
   image:
     tag: 4.2.17-debian-10-r99
 ```
-. Run `helm upgrade` to update your installation.
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. `helm upgrade` を実行して、インストールを更新します。
+. `helm upgrade`  が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、ポッドに `exec` する必要があります (root パスワードがあれば便利です)。 (必ず `<password>` をMongoDBルートのパスワードに置き換えてください)。
 +
 ```bash
 kubectl exec -it mongodb-0 -- mongo -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } )
 ```
-. You should get `{ "ok" : 1 }` again. Exit out of the shell and pod.
+. 再び `{ "ok" : 1 }` が表示されるはずです。 これで、シェルとPodを終了します。
 
-=== 3. Upgrade from MongoDB 4.2 to 4.4
+=== 3. MongoDB 4.2から4.4へのアップグレード
 
-. Change the tag one more time to `4.4.15-debian-10-r8`:
+. もう一回タグを `4.4.15-debian-10-r8` に変更します：
 +
 ```yaml
 mongodb:
   image:
     tag: 4.4.15-debian-10-r8
 ```
-. Run `helm upgrade` to update your installation.
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. `helm upgrade` を実行して、インストールを更新します。
+. `helm upgrade`  が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、Pod に `exec` する必要があります (root パスワードがあれば便利です)。 (必ず  `<password>`  をMongoDBルートのパスワードに置き換えてください)。
 +
 ```bash
 kubectl exec -it mongodb-0 -- mongo -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
 ```
-. Once you receive `{ "ok" : 1 }`, you have successfully upgraded your MongoDB to 4.4.15.
+. `{ "ok" : 1 }` が表示されたら、MongoDB の 4.4.15 へのアップグレードは完了です。
