@@ -130,7 +130,7 @@ In your terminal, navigate to the folder/location of the script you want to run.
 sh <name-of-file>.sh
 ```
 
-Occassionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform. 
+Occasionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform.
 
 For example, you can try to right-click on the script file and see if there is an option to make it executable. If you are on macOS or Linux, you can also look up how to use `chmod` commands to make a script file executable with different permissions.
 
