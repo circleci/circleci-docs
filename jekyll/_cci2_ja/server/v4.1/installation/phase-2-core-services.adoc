@@ -3,12 +3,12 @@
 contentTags:
   platform:
   - Server v4.1
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 2 - Core services
+= ステップ 2 - コアサービス
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Server v4.x のインストール手順と前提条件をご確認ください。
+:page-description: このドキュメントにて、CircleCI Server v4.x のインストール手順と前提条件をご確認ください。
 :icons: font
 :toc: macro
 
@@ -16,7 +16,7 @@ contentTags:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x core services installation phase, ensure all xref:phase-1-prerequisites#[prerequisites] are met.
+CircleCI Server v4.x のコアサービスのインストールステップを開始する前に、xref:phase-1-prerequisites#[必要条件] をすべて満たしていることをご確認ください。
 
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
@@ -72,7 +72,7 @@ kubectl create secret docker-registry regcred \
 [#create-helm-values]
 == 3. Helm 値を作成します
 
-CircleCI をインストールする前に、インストール専用の `values.yaml` ファイルを新たに作成することをお勧めします。 xref:installation-reference#example-manifests[The Installation Reference section] contains some example `values.yaml` files that are a good place to start. 以下は、`values.yaml` に含める必要がある最小限の値です。 更にカスタマイズすることも可能です。利用できるオプションについては提供されている `values.yaml` を参照してください。
+CircleCI をインストールする前に、インストール専用の `values.yaml` ファイルを新たに作成することをお勧めします。 xref:installation-reference#example-manifests[インストールのリファレンスセクション] には `values.yaml` のサンプルファイルが複数含まれており、第一歩としてお勧めです。 以下は、`values.yaml` に含める必要がある最小限の値です。 更にカスタマイズすることも可能です。利用できるオプションについては提供されている `values.yaml` を参照してください。
 
 シークレットについては 2 つのオプションがあります。
 
@@ -142,7 +142,7 @@ sessionCookieKey: "<your-secret-key-16-chars>"
 [#encryption]
 === c.  暗号化
 
-このアプリケーションでは、署名と暗号化のキーセットを含む Kubernetes シークレットが必要です。 CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用します。 These keys were created during the xref:phase-1-prerequisites#encryption-signing-keys[prerequisites phase]. 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
+このアプリケーションでは、署名と暗号化のキーセットを含む Kubernetes シークレットが必要です。 CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用します。 これらのキーは、xref:phase-1-prerequisites#encryption-signing-keys[前提条件のステップ] で作成されています。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.encryption.You_create_Secret]
 --
@@ -498,7 +498,7 @@ tls:
 --
 *ACM を使用する*
 
-Have link:https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the link:https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+link:https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] により自動的に証明書のリクエストと管理を行います。 link:https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] の ACM 証明書の生成方法に従ってください。
 
 `aws_acm` を有効にし、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert` 注釈が ACM ARN を参照するように追加します。
 
@@ -539,7 +539,7 @@ GitHub を CircleCI で設定する場合、デプロイに認証情報を提供
 [#github]
 ==== GitHub
 
-下記は GitHub Enterprise **ではなく** GitHub.com の場合の説明です。 Use the client ID and secret you created with your Github OAuth application in the xref:phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
+下記は GitHub Enterprise **ではなく** GitHub.com の場合の説明です。 xref:phase-1-prerequisites#create-a-new-github-oauth-app[前提条件のステップ] で Github OAuth アプリケーションを使って作成したクライアント ID とシークレットを使用します。
 
 [.tab.github.You_create_Secret]
 --
@@ -572,7 +572,7 @@ github:
 
 GitHub Enterprise の場合も同様の手順ですが、Enterprise を有効化し、必要なデフォルトのトークンを作成するための追加手順がいくつかあります。
 
-In the case of GitHub Enterprise add the `defaultToken` created in the xref:phase-1-prerequisites#create-a-new-github-oauth-app[prerequisite phase] to the `GitHub` section. ホスト名には、`github.exampleorg.com` などのプロトコルを含めないでください。
+GitHub Enterprise の場合は、 xref:phase-1-prerequisites#create-a-new-github-oauth-app[前提条件のステップ] で作成した `defaultToken` を `GitHub` のセクションに追加します。 ホスト名には、`github.exampleorg.com` などのプロトコルを含めないでください。
 
 
 [.tab.ghe.You_create_Secret]
@@ -618,7 +618,7 @@ github:
 [#object-storage]
 === l. オブジェクトストレージ
 
-Regardless of your storage provider, the bucket name you created during the xref:phase-1-prerequisites#object-storage-and-permissions[prerequisites phase] will need to be included.
+ストレージプロバイダーに関わらず、 xref:phase-1-prerequisites#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
 
 [source,yaml]
 ----
@@ -633,7 +633,7 @@ ifndef::env-gcp[]
 [#s3-compatible]
 ==== S3 互換
 
-`s3` のセクションを `object_storage` の子として追加します。 The `endpoint` in the case of AWS S3 is the link:https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. それ以外の場合は、オブジェクトストレージサーバーの API エンドポイントです。
+`s3` のセクションを `object_storage` の子として追加します。 AWS S3 の場合の `endpoint` は、 link:https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint] で、`https://s3.<region>.amazonaws.com` の形式です。 それ以外の場合は、オブジェクトストレージサーバーの API エンドポイントです。
 
 [source,yaml]
 ----
@@ -764,14 +764,14 @@ endif::env-aws[]
 
 === m. プロキシ経由でのインストール
 
-セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。 For further information including limitations of installation behind a proxy, see the xref:installing-server-behind-a-proxy#[Installing server behind a proxy] guide.
+セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。 プロキシ経由でのインストールの制限事項などの詳細については、 xref:installing-server-behind-a-proxy#[プロキシ経由でのサーバーのインストールガイド] を参照してください。 
 
 以下のフィールドを `values.yaml` に設定する必要があります。
 
 * `proxy.enabled` を `"1"` に切り替えます。
 * `proxy.http.host` と `proxy.https.host` の詳細を関連付けられているポートと共に入力します。 これらの値は同じでも構いませんが、両方とも設定する必要があります。
 * 認証用に `proxy.http.auth.enabled` と `proxy.https.auth.enabled` を `"1"` に設定する必要があります。 HTTP と HTTPS の両方にそれぞれユーザー名とパスワードを設定する必要があります。
-* `no_proxy` ホストとサブネットを設定します。 This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see xref:installing-server-behind-a-proxy#known-limitations[Known Limitations] for an explanation), and the CIDRs of both vm-service and Nomad.
+* `no_proxy` ホストとサブネットを設定します。 ローカルホスト、GitHub Enterprise (オプション) 、インストールした CircleCI のホスト名 ( xref:installing-server-behind-a-proxy#known-limitations[既知の制限事項] で詳細を参照) および vm-service と Nomad の両方の CIDR を含む必要があります。
 
 [source,yaml]
 ----
@@ -801,15 +801,15 @@ proxy:
     - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
-=== n. Encrypting Environment Variables
+=== n. 環境変数の暗号化
 
-All environment variables stored in contexts are encrypted using either https://www.vaultproject.io/[Hashicorp Vault] or  https://developers.google.com/tink[Google Tink]. By Default, CircleCI server 4.x will use Vault to generate and store encryption keys.
+コンテキストに格納された環境変数はすべて、 https://www.vaultproject.io/[Hashicorp Vault] または https://developers.google.com/tink[Google Tink] のいずれかを使用して暗号化されます。 CircleCI server 4.xのデフォルトでは、暗号化キーの生成と保存に Vault が使用されます。
 
-==== Use Tink (optional)
+==== Tinkを使用する（オプション）
 
-The following steps cover using Tink as an alternative to Vault:
+以下のステップでは、Vaultの代替としてTinkを使用する方法を説明します:
 
-. Enable Tink in your `values.yaml`:
+. `values.yaml` で Tink を有効にする：
 +
 [source,yaml]
 ----
@@ -818,22 +818,22 @@ tink:
   keyset: ""
 ----
 +
-When `tink.enabled` is true, Vault will not be deployed.
+`tink.enabled` が true の場合、Vault はデプロイされません。
 +
-WARNING: Tink or Vault must be set once during installation, and cannot be changed after deployment.
-. Generate a link:https://developers.google.com/tink/design/keysets[keyset], which Tink uses to manage key rotation. The easiest way to do this is to use Google's link:https://developers.google.com/tink/tinkey-overview[Tinkey] CLI utility. Once https://developers.google.com/tink/install-tinkey[installed], use the following command:
+WARNING: TinkまたはVaultは、インストール時に一度設定する必要があり、展開後に変更することはできません。
+. link:https://developers.google.com/tink/design/keysets[キーセット]を生成し、Tinkがキーローテーションを管理するために使用します。 最も簡単な方法は、Google のlink:https://developers.google.com/tink/tinkey-overview[Tinkey] CLIユーティリティを使用することです。 インストールしたら、以下のコマンドを使用します:
 +
 [source,shell]
 ----
 tinkey create-keyset --key-template XCHACHA20_POLY1305
 ----
-. CircleCI server will store your generated keyset in a Kubernetes secret. You may generate this secret in either of the following ways:
+. CircleCIサーバーは、生成されたキーセットを Kubernetes のシークレットに保存します。 このシークレットは、以下のいずれかの方法で生成することができます：
 +
 [.tab.tink.you_create_secret]
 --
 **オプション 1:** ご自身で Kubernetes シークレットを作成する
 
-Following the example below, create a Kubernetes secret with the name `tink` and a key `keyset`. Apply this secret to the namespace of your CircleCI server installation.
+以下の例に従って、`tink` という名前と `keyset` というキーを持つ Kubernetes シークレットを作成します。 このシークレットを CircleCI Server のインストール先のネームスペースに適用します。
 
 [source,yaml]
 ----
@@ -848,9 +848,9 @@ data:
 +
 [.tab.tink.circleci_creates_secret]
 --
-**Option 2:** CircleCI Server will create the Kubernetes Secret
+**オプション 2:** CircleCI Server が Kubernetes シークレットを作成する
 
-You may add the keyset to your `values.yaml` under `tink` as in the example below. CircleCI will generate the required secret to store your keyset.
+以下の例のように、`tink` の `values.yaml` にキーセットを追加することができます CircleCIは、キーセットを保存するために必要な秘密を生成します。
 
 [source,yaml]
 ----
@@ -860,7 +860,7 @@ tink:
 ----
 --
 
-WARNING: If your Tink keyset is somehow lost, you will need to generate a new keyset and then recreate your contexts and their associated secrets.
+WARNING: Tinkのキーセットを紛失した場合、新しいキーセットを生成し、コンテキストとそれに関連する秘密を再作成する必要があります。
 
 [#deploy]
 == 4. デプロイ
