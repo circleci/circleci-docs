@@ -194,7 +194,6 @@ workflows:
   OIDC-with-AWS:
     jobs:
       - aws-example:
-          # must use a valid CircleCI context
           context: aws
 ```
 
