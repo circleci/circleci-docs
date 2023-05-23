@@ -17,7 +17,7 @@ contentTags:
 [#overview]
 == 概要
 
-Server v4.1では、エアギャップ（air-gapped）インストールオプションが導入されました。 詳細は、xref:./air-gapped-installation/phase-1-prerequisites#[Air-gappedインストールガイド]をご参照ください。
+Server v4.1では、エアギャップ（air-gapped）インストールオプションが導入されました。 詳細は、xref:../air-gapped-installation/phase-1-prerequisites#[Air-gappedインストールガイド]をご参照ください。
 
 [#migraiton]
 == 移行
