@@ -2,21 +2,23 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - サーバー管理者
 ---
 = VM サービスを使った仮想マシンの管理
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。"
+:page-description: CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。
 :icons: font
 :toc: macro
 
-VM サービスにより、 xref:../../../configuration-reference#machine[`Machine`] Executor と xref:../../../building-docker-images#[リモート Docker] ジョブの実行方法を制御できます。
+:toc-title:
+
+VM サービスにより、 xref:../../../configuration-reference/#machine[`Machine`] Executor と xref:../../../building-docker-imagess[リモート Docker] ジョブの実行方法を制御できます。
 
 このセクションでは、VM サービスで設定可能なオプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
-CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、xref:../installation/phase-3-execution-environments#aws-vm-service[AWS]と xref:../installation/phase-3-execution-environments#gcp-authentication[GCP] のインストールガイドに記載されています。
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 xref:../installation/phase-3-execution-environments/#aws-vm-service[AWS]と xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP] のインストールガイドに記載されています。
 
 [#vm-provider]
 == VM プロバイダー
@@ -26,7 +28,7 @@ CAUTION: CircleCI Server のコアサービスとビルドサービスの設定�
 [#aws]
 === AWS
 
-`values.yaml` ファイルに、AWS EC2 と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、xref:../installation/phase-3-execution-environments#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
+`values.yaml` ファイルに、AWS EC2 と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、xref:../installation/phase-3-execution-environments/#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
 
 ここではインストール後の VM サービスの設定オプションについて説明します。
 
@@ -61,7 +63,7 @@ vm_service:
 [#default-aws-ami-lists]
 ==== デフォルトの AWS AMI リスト
 
-デフォルトの Server v4.1 用の AMI は Ubuntu 22.04 に基づいています。
+デフォルトの Server v4.x 用の AMI は Ubuntu 22.04 に基づいています。
 
 [#x86-ami-list]
 ===== x86 AMI リスト
@@ -69,7 +71,7 @@ vm_service:
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|リージョン
+|地域
 |AMI
 
 |`us-east-1`
@@ -130,7 +132,7 @@ vm_service:
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|リージョン
+|地域
 |AMI
 
 |`us-east-1`
@@ -185,7 +187,7 @@ vm_service:
 [#gcp]
 === GCP
 
-`values.yaml` ファイルに、GCP と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、xref:../installation/phase-3-execution-environments#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
+`values.yaml` ファイルに、GCP と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、xref:../installation/phase-3-execution-environments/#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
 
 ここではインストール後の VM サービスの設定オプションについて説明します。
 
@@ -220,13 +222,13 @@ vm_service:
 [#instance-preallocation]
 == インスタンスの事前割り当て
 
-WARNING: xref:../../../docker-layer-caching#[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
+WARNING: xref:../../../docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
 
 CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
 常にインスタンスが事前に割り当てられるようにサーバーを設定するには、以下の `values.yaml` サンプルに示されているキーを使用します。
 
-NOTE: オプションの全リストは、xref:../installation/installation-reference#all-values-yaml-options[インストールのリファレンス] のページをご覧ください。
+NOTE: オプションの全リストは、xref:../installation/installation-reference/#all-values-yaml-options[インストールのリファレンス] のページをご覧ください。
 
 [source,yaml]
 ----
@@ -264,5 +266,5 @@ vm_scaler:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion41} -f <path-to-values.yaml>
 ----

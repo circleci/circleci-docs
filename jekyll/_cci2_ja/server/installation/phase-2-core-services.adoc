@@ -808,7 +808,7 @@ proxy:
 
 上記項目の設定が完了したら、いよいよ CircleCI のコアサービスのデプロイです。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 USERNAME=<provided-username>
 PASSWORD=<token>
