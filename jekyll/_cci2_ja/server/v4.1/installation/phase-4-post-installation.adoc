@@ -3,9 +3,9 @@
 contentTags:
   platform:
   - Server v4.1
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 4 - Post installation
+= ステップ 4 - ポストインストール
 :page-layout: classic-docs
 :icons: font
 :toc: macro
@@ -14,14 +14,14 @@ contentTags:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x post installation phase, ensure you have run through xref:phase-1-prerequisites#[Phase 1 – Prerequisites], xref:phase-2-core-services#[Phase 2 - Core Services Installation] and xref:phase-3-execution-environments#[Phase 3 - Execution Environments Installation].
+CircleCI Server v4.x のポストインストールステップを開始する前に、xref:phase-1-prerequisites#[ステップ 1 - 前提条件] 、xref:phase-2-core-services#[ステップ 2 - コアサービスのインストール] 、xref:phase-3-execution-environments#[ステップ 3 - ビルドサービスのインストール] が実行済みであることを確認してください。
 
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 [#backup-and-restore]
 == バックアップと復元
 
-Backups of CircleCI server can be created through link:https://velero.io/[Velero]. Velero はインストールステップの前提条件でクラスタにインストールしています。
+CircleCI Server のバックアップは、 link:https://velero.io/[Velero] を介して作成できます。 Velero はインストールステップの前提条件でクラスタにインストールしています。
 
 // Don't include this section in the GCP PDF:
 
@@ -30,7 +30,7 @@ ifndef::env-gcp[]
 [#set-up-backup-and-restore-on-aws]
 === AWS でのバックアップと復元の設定
 
-These instructions were sourced from the link:https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero docs].
+これらの手順は、 link:https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero ドキュメント] を元にしています。
 
 . **AWS S3 バケットを作成します**
 +
@@ -44,7 +44,7 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
 +
-NOTE: `us-east-1` does not support a link:https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint]. `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+NOTE: `us-east-1` では、 link:https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 . **Velero の権限を設定します**
 +
 IAM ユーザーを作成します。
@@ -146,7 +146,7 @@ TIP: `AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プ
 以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 必ず手順 2 で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 +
-NOTE: Backups require link:https://restic.net/[restic] to operate. Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: バックアップには、 link:https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 +
 [source, bash]
 ----
@@ -188,7 +188,7 @@ ifndef::env-aws[]
 [#set-up-backup-and-restore-on-gcp]
 === GCP でのバックアップと復元の設定
 
-These instructions were sourced from the documentation for the link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[Velero GCP plugin].
+これらの手順は、link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[Velero GCP プラグイン] を元にしています。
 
 . **GCP バケットを作成します**
 +
@@ -202,7 +202,7 @@ gsutil mb gs://$BUCKET/
 ----
 . **Velero の権限を設定します**
 +
-CAUTION: CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 More information can be found in the link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+CAUTION: CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE のドキュメント] を参照してください。
 .. プロジェクト ID に対応するシェル変数を設定します。 現在の設定を確かめ、`gcloud` CLI が正しいプロジェクトを参照していることを確認します。
 +
 [source,shell]
@@ -281,12 +281,12 @@ gcloud iam service-accounts keys create credentials-velero \
 このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
 ** **オプション 2: Workload Identity を使用する場合**
 +
-If you are already using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+クラスタで既に link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 . **Velero をインストールし、起動します**
 +
 サービスアカウントの認証方法に応じて、以下の `velero install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 +
-NOTE: Backups require link:https://restic.net/[restic] to operate. Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: バックアップには、 link:https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
 ** **JSON キー ファイルを使用する場合**
 +
 [source, bash]
@@ -314,7 +314,7 @@ velero install \
     --wait
 ----
 +
-For more options on customizing your installation, refer to the link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero documentation].
+システムをカスタマイズする他のオプションについては、 link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero のドキュメント] を参照してください。
 . **Velero を検証します**
 +
 Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
@@ -345,11 +345,11 @@ endif::env-aws[]
 
 以下の手順では、S3 互換オブジェクトストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
 
-These instructions were sourced from the link:https://velero.io/docs/v1.6/contributions/minio/[Velero docs].
+これらの手順は、 link:https://velero.io/docs/v1.6/contributions/minio/[Velero ドキュメント] を元にしています。
 
 . **`mc` クライアントを設定します**
 +
-To start, link:https://docs.min.io/minio/baremetal/reference/minio-mc.html[configure `mc`] to connect to your storage provider:
+最初に、ストレージプロバイダーに接続できるよう link:https://docs.min.io/minio/baremetal/reference/minio-mc.html[ `mc` を設定] します。
 +
 [source,bash]
 ----
@@ -415,7 +415,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 +
 以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 +
-NOTE: Backups require link:https://restic.net/[restic] to operate. Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: バックアップを行うには、link:https://restic.net/[restic]が動作する必要があります。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 +
 [source, bash]
 ----
@@ -448,8 +448,7 @@ TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノ
 [#take-backup]
 === バックアップを作成します
 
-Velero がクラスタにインストールされ、最初のバックアップを作成する準備ができました。 If you encounter problems, please refer to the
-xref:backup-and-restore/#troubleshooting[troubleshooting] section.
+Velero がクラスタにインストールされ、最初のバックアップを作成する準備ができました。 問題が生じた場合は、 xref:backup-and-restore/#troubleshooting[トラブルシューティング] を参照してください。
 
 * バックアップを作成するには、以下のコマンドを実行します。
 +
@@ -473,7 +472,7 @@ velero backup get --show-labels
 velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
 ----
 
-See the link:https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more details.
+詳細については、 link:https://velero.io/docs/v1.6/disaster-case/[Velero] を参照してください。
 
 [#email-notifications]
 == メール通知
@@ -492,21 +491,21 @@ smtp:
 [#managing-orbs]
 == Orb の管理
 
-CircleCI server installations include their own local orb registry. このレジストリは、CircleCI Server からのみアクセスできます。 プロジェクトの設定ファイルリファレンスで参照された Orb はすべて、 _サーバー_ の Orb レジストリ内の Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 メンテナンス作業には以下が含まれます。
+CircleCI Server をインストールした場合、独自のローカル Orb レジストリが含まれます。 このレジストリは、CircleCI Server からのみアクセスできます。 プロジェクトの設定ファイルリファレンスで参照された Orb はすべて、 _サーバー_ の Orb レジストリ内の Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 メンテナンス作業には以下が含まれます。
 
 * パブリックレジストリから Orb をコピーする
 * 以前コピーした Orb を更新する
-* 会社のプライベート Orb を登録する (存在する場合)
+* 自社のプライベート Orb を登録する (存在する場合)
 
-For more information and steps to complete these tasks, see the xref:../operator/managing-orbs#[Orbs on server guide].
+詳細およびこれらのタスクを完了するための手順については、 xref:../operator/managing-orbs#[サーバーでの Orbガイド] を参照してください。
 
 ifndef::pdf[]
 
 [#next-steps]
 == 次のステップ
 
-* xref:hardening-your-cluster#[Hardening Your Cluster]
-* xref:../../installation/migrate-from-server-3-to-server-4#[Server 4.x Migration]
-* xref:../operator/backup-and-restore#[Backup & Restore]
+* xref:hardening-your-cluster#[クラスタのハード化]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server v4.x への移行]
+* xref:../operator/backup-and-restore#[バックアップと復元]
 +
 endif::[]
