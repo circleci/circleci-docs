@@ -72,7 +72,7 @@ NOTE: 現在のジョブでxref:test-splitting-tutorial#[インテリジェン�
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings
+      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
  - store_test_results:
     path: test-results
@@ -80,7 +80,7 @@ NOTE: 現在のジョブでxref:test-splitting-tutorial#[インテリジェン�
 
 * `TEST_FILES=$(circleci tests glob "**/test**.py")`
 +
-CircleCI の xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob コマンド]を使用して、テストファイルのリストを作成しています。 今回は、名前の先頭が `test_` で末尾が `.py` のテストファイルを探しました。
+CircleCI の xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob コマンド]を使用して、テストファイルのリストを作成しています。 今回は、名前の先頭が `test_` で末尾が `.py` のテストファイルを探しました。 Ensure that the glob string is enclosed in quotes.
 * `echo $TEST_FILES |`
 +
 `circleci tests run` コマンドにテストのリストを標準入力 (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]) として渡します。
@@ -97,12 +97,13 @@ CircleCI の xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glo
 `--verbose` 設定を有効にすると、次回の CircleCI でのジョブ実行時に以下のような出力が表示されるようになります。
 
 ```sh
-Installing circleci-tests-plugin-cli plugin.
-circleci-tests-plugin-cli plugin Installed. Version: 1.0.3349-470dac4
-DEBU[2023-04-10T22:36:53Z] Attempting to read from stdin. This will hang if no input is provided.
-INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_count=1 batches_processed=0 total_batches_for_job=3
-DEBU[2023-04-10T22:36:53Z] received test names: test_api.py
+circleci-tests-plugin-cli plugin Installed. Version: 1.0.5909-ca27755
+DEBU[2023-05-14T17:53:44Z] Attempting to read from stdin. This will hang if no input is provided.
+DEBU[2023-05-14T17:53:44Z] rerunning failed tests
+INFO[2023-05-14T17:53:44Z] starting execution
 ```
+
+[Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックした場合、テスト失敗が 1 回以上発生した `file` の `classname` に含まれているテストのみが再実行されます。
 
 [Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックした場合、テスト失敗が 1 回以上発生した `file` の `classname` に含まれているテストのみが再実行されます。 本記事の説明と異なる挙動が見られた場合には、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[こちらの Discuss の投稿 (英語)] にてお問い合わせください。
 
@@ -123,7 +124,7 @@ gem 'rspec_junit_formatter'
  - run: mkdir ~/rspec
  - run:
     command: |
-      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
+      circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
 ```
 . `glob` コマンドは、必要に応じて調整してください。 テスト結果を `rspec` に対応した形式で出力する方法については、「xref:collect-test-data#rspec[テストデータの収集]」の RSpec に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
@@ -136,7 +137,7 @@ gem 'rspec_junit_formatter'
 - run: mkdir -p ~/cucumber
 - run:
     command: |
-    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
+    circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
 ```
 . `glob` コマンドは、必要に応じて調整してください。 テスト結果を `Cucumber` に対応した形式で出力する方法については、「xref:collect-test-data#cucumber[テストデータの収集]」の Cucumber に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
@@ -162,7 +163,7 @@ gem 'rspec_junit_formatter'
           cd ./cypress
           npm ci
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings"
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings" #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
      - store_test_results
         path: test_results
@@ -198,6 +199,21 @@ gem 'rspec_junit_formatter'
 . `npx jest --listTests` コマンドは、必要に応じて調整してください。 テスト結果を `jest` に対応した形式で出力する方法については、「xref:collect-test-data#jest[テストデータの収集]」の Jest に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 +
 `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` は、`file` 属性の存在を確認するために設定しています。 `.circleci/config.yml` で設定する代わりに、`addFileAttribute= "true"` 属性を利用して `jest.config.js` ファイルに `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` を追加することもできます。
+
+[#configure-a-job-running-playwright-tests]
+=== Playwright のテストを実行するジョブの設定
+
+. `circleci tests run` を使うようにテストコマンドを更新します。
++
+```yaml
+ - run:
+    command: |
+      mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
+      pnpm run serve &
+      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
+```
+. `glob` コマンドは、必要に応じて調整してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。** テスト分割を使用しない場合は、`--split-by=timings` を省略できます。 注：link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwrightの既にビルドインされている flag]（`PLAYWRIGHT_JUNIT_OUTPUT_NAME`）を使用して、JUnit XML 出力ディレクトリを指定することも可能です。
 
 [#known-limitations]
 == 既知の制限
@@ -260,3 +276,13 @@ gem 'rspec_junit_formatter'
 **質問:** ジョブを再実行するときに、並列実行とテスト分割を使用するとどうなりますか？
 
 **回答:** ジョブの `parallelism` キーで指定された数のコンテナまたは仮想マシン (VM) がスピンアップします。  ただし、これらの並列コンテナ/VM 全体でテストが分割されるので、各並列コンテナ/VM のテスト実行ステップではテストの一部のみが実行されるか、テストの実行自体が行われません。  たとえば、`parallelism` を 8 に設定しても、テスト数によっては、テスト分割で 2 つの並列コンテナ/VM にしかテストが "割り当てられない" 可能性があります。 こうした場合、他 6 つの並列コンテナ/VM も起動されますが、テスト実行ステップでテストを実行することはありません。
+
+**Question:** この機能を設定しようとすると、maven の surefire テストが失敗することはありますか？
+
+**Answer:** 依存モジュールでテストがスキップされたのを見たときに失敗を報告する代わりに、テストフレームワークがスキップされたテストを無視するように、`-DfailIfNoTests=false` フラッグを追加する必要がある場合もあります。
+
+**Question:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
+
+**Answer:** はい、`circleci tests split --split-by=timings --timings-type=` と同様に、`test-selector` フラグを使用してタイミングタイプを指定することができます。  ファイル名、クラス名、テスト名のいずれかを渡すことができます。
+
+---
