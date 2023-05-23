@@ -1,10 +1,11 @@
 ---
 
-version:
-- Server v4.1
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v4.1
+  - サーバー管理者
 ---
-= クラスタのセキュリティー強化
+= クラスタのハード化
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
