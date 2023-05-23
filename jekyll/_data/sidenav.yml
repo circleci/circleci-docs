@@ -210,7 +210,7 @@ en:
         children:
           - name: Container runner installation
             link: container-runner-installation
-          - name: Container runner reference guide
+          - name: Container runner reference
             link: container-runner
       - name: Machine runner
         children:

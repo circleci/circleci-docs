@@ -45,7 +45,7 @@ Once you have installed the container runner within your cluster, create and tri
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CircleCI Docker image):
 
 ```yaml
 version: 2.1
