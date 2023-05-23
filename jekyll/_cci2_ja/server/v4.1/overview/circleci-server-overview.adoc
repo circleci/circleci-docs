@@ -21,7 +21,7 @@ CircleCI Server は、コンプライアンスやセキュリティ上のニー�
 
 CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提供しますが、お客様の Kubernetes クラスタ内で動作します。
 
-NOTE: インストール方法については、xref:./installation/phase-1-prerequisites#[regular] または xref:./air-gapped-installation/phase-1-prerequisites#[air-gapped] インストールガイドのいずれかを選択することができます。
+NOTE: インストール方法については、xref:../installation/phase-1-prerequisites#[regular] または xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] インストールガイドのいずれかを選択することができます。
 
 .CircleCI Server v4.x のアーキテクチャ
 image::server-4-architecture-diagram.png[Server v4.x services architecture]
