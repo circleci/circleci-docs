@@ -2,8 +2,8 @@
 
 contentTags:
   platform:
-- Server v4.1
-- サーバー管理者
+  - Server v4.1
+  - サーバー管理者
 ---
 = サーバーのプロキシ経由でのインストール
 :page-layout: classic-docs
