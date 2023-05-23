@@ -3,9 +3,9 @@
 contentTags:
   platform:
     - Server v4.1
-    - Server Admin
+    - サーバー管理者
 ---
-= Usage data collection
+= 使用状況データの収集
 :page-layout: classic-docs
 :page-liquid:
 :page-description: プロダクトとサービスの向上に向けた使用状況データの収集について説明します。
@@ -19,6 +19,6 @@ CircleCI では通常、ログなどの使用状況データやその他の集�
 [#current-data-collected]
 == 現在のデータ収集状況
 
-Currently, server v4.x does not include the data collection service. このサービスは、今後のリリースで追加される予定です。
+現時点で、CircleCI Server v4.x にはデータ収集サービスは含まれていません。 このサービスは、今後のリリースで追加される予定です。
 
 すべてのリリースにおいて、追加でデータを収集する場合は、どのようなデータを収集するのかをお知らせします。
