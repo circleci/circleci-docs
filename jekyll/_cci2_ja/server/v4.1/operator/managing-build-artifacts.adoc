@@ -3,12 +3,12 @@
 contentTags:
   platform:
     - Server v4.1
-    - Server Admin
+    - サーバー管理者
 ---
-= Managing build artifacts
+= ビルドアーティファクトの管理
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ビルドアーティファクトがジョブの完了後にデータを保持する方法と、ビルドプロセスの出力を長期保存に使用する方法について説明します。
+:page-description: このドキュメントでは、ビルドアーティファクトがジョブの完了後にデータを保持する方法と、ビルドプロセスの出力を長期保存に使用する方法についてわかりやすく説明しています。
 :icons: font
 :toc: macro
 
