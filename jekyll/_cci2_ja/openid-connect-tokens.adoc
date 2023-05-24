@@ -19,7 +19,7 @@ CircleCI では、xref:contexts#[コンテキスト]を使用するジョブの�
 
 1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` および `$CIRCLE_OIDC_TOKEN_V2` で OpenID Connect ID トークンを使用することができます。 `$CIRCLE_OIDC_TOKEN_V2` トークンの `sub` クレームの形式は、以下の表に示すとおりこれまでと異なります。
 
-`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,workflows>> セクションに追加して、<<contexts#creating-and-using-a-context,context to a job>> を追加します。
+`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,workflows>> セクションに追加して、<<contexts#creating-and-using-a-context,ジョブにコンテキスト>>を追加します。
 
 ```yaml
 workflows:
