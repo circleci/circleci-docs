@@ -19,7 +19,7 @@ CircleCI では、xref:contexts#[コンテキスト]を使用するジョブの�
 
 1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` および `$CIRCLE_OIDC_TOKEN_V2` で OpenID Connect ID トークンを使用することができます。 `$CIRCLE_OIDC_TOKEN_V2` トークンの `sub` クレームの形式は、以下の表に示すとおりこれまでと異なります。
 
-`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,workflows>> セクションに追加して、<<contexts#creating-and-using-a-context,context to a job>> を追加します。
+`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,workflows>> セクションに追加して、<<contexts#creating-and-using-a-context,ジョブにコンテキスト>>を追加します。
 
 ```yaml
 workflows:
@@ -33,7 +33,7 @@ workflows:
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
 
-クラウドサービスのドキュメントで、ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は「https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」、Google Cloud Platform の場合は「https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Workload Identity 連携の構成]」を参照してください。
+クラウドサービスのドキュメントで、ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」、Google Cloud Platform の場合は「link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Workload Identity 連携の構成]」を参照してください。
 
 https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー]は、組織に一意のものです。 URL は `\https://oidc.circleci.com/org/<organization_id>` で、`organization_id` は、組織を表す組織 ID (UUID) です。 CircleCI の組織 ID は、link:https://app.circleci.com/[CircleCI Web アプリ] の **[Organization Settings (組織設定)] > [Overview (概要)]** で確認できます。
 
@@ -111,11 +111,11 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 
 AWS アカウントが CircleCI の OpenID Connect トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダーと AWS の IAM ロール (ワンタイム設定) を作成します。
 
-AWS ドキュメントの「https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」を参照し、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、https://app.circleci.com/[CircleCI Web アプリ]で **[Organization Settings (組織設定)] > [Overview (概要)]** に移動します。 次のステップで使用するために組織 ID をコピーします。
+AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」を参照し、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、https://app.circleci.com/[CircleCI Web アプリ]で **[Organization Settings (組織設定)] > [Overview (概要)]** に移動します。 次のステップで使用するために組織 ID をコピーします。
 
 **Provider URL** を求められたら、`\https://oidc.circleci.com/org/<organization_id>` と入力します。`organization_id` には、CircleCI の組織 ID を入力します。 **[Audience]** にも同じ CircleCI 組織 ID を入力します。
 
-次に、IAM ロールを作成します。 AWS ドキュメントの「https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OIDC 用のロールの作成]」を開きます。
+次に、IAM ロールを作成します。 AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OIDC 用のロールの作成]」を開きます。
 
 信頼済みエンティティには **[Web Identity]** を選択し、先ほど作成した ID プロバイダーを選択します。 **[Audience]** には、唯一のオプションを選択します。 次に **[NEXT]** をクリックします。**[Add Permissions]** ページに移動します。 ここでは、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス]に従い、ジョブに必要なアクセス許可だけを選択するようにしてください。
 
