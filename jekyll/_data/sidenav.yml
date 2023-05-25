@@ -188,6 +188,8 @@ en:
             link: using-gpu
       - name: How-to Guides
         children:
+          - name: Pull an image from AWS ECR with OIDC
+            link: pull-an-image-from-aws-ecr-with-oidc
           - name: Run a job in a container on your machine with Docker
             link: run-a-job-in-a-container
           - name: Installing and using docker-compose

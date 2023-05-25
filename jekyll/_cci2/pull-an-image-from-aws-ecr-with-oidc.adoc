@@ -1,0 +1,30 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Pull and image from AWS ECR with OIDC
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to pull an image from AWS ECR using OIDC authentication
+:icons: font
+:toc: macro
+:toc-title:
+
+Follow this how-to guide to configure a job to pull an image for use with the Docker execution environment from AWS ECR using OIDC authentication.
+
+== Introduction
+
+== Prerequisites
+
+* A xref:first-steps#[CircleCI account] integrated with a supported VCS.
+* A config with a job that uses the xref:using-docker#[Docker execution environment], for which you want to use a Docker image stored in AWS ECR.
+* Set up CircleCI as a trusted identity provider in AWS. Follow the xref:openid-connect-tokens#set-up-aws[Set up AWS instructions].
+
+== 1. Set up IAM role
+
+If you followed the xref:openid-connect-tokens#set-up-aws[Set up AWS instructions] you will have created an IAM role associated with your CircleCI identity provider. You can now use that role, and update the
+
+== 2. Update `.circleci/config.yml` to pull image
+
+
