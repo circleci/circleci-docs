@@ -134,6 +134,14 @@ You can pull images from ECR for your jobs using a few different methods.
 
 The best practice approach is to pull from ECR using OpenID Connect (OIDC). See the how-to guide xref:pull-an-image-from-aws-ecr-with-oidc#[Pull an image from AWS ECR with OIDC] for full details.
 
+Some advantages to using OIDC over using AWS credentials to pull images from ECR:
+
+* **Improved security**: By using OIDC authentication, storing AWS credentials directly in your CircleCI configuration or environment variables is avoided, reducing the risk of exposure.
+
+* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate AWS credentials.
+
+* **Fine-grained access control**: By associating an IAM role with the OIDC authentication, exact permissions granted to CircleCI for pulling ECR images can be controlled, ensuring a least-privilege approach.
+
 Alternatively, you can start use one of the following methods:
 
 . Set your AWS credentials using standard CircleCI private environment variables.
