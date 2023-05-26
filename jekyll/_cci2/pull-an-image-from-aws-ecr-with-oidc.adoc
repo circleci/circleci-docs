@@ -13,6 +13,7 @@ contentTags:
 
 Follow this how-to guide to configure a `docker` job to pull an image from AWS ECR using OIDC authentication.
 
+[#introduction]
 == Introduction
 
 When you want to run jobs in the Docker execution environment, you have access to CircleCI convenience images for those containers. Alternatively, you can specify the use of other Docker images. One option is to pull an image from AWS ECR.
