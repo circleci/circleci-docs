@@ -111,6 +111,7 @@ agent:
           custom.io: <my-annotation>
     
     circleci-runner/resourceClass2:
+  customSecret: <name_of_secret>
 ```
 
 The corresponding custom secret would have 2 fields:
@@ -123,6 +124,8 @@ circleci-runner.resourceClass2: <my-token-2>
 Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
 
 Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
+
+Additional instructions can be found in our link:https://support.circleci.com/hc/en-us/articles/15773444776731-How-to-use-customSecret-on-Container-Runner[Support Center].
 
 [#parameters]
 === Helm Chart Parameters
