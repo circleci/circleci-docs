@@ -30,6 +30,7 @@ Some advantages to using OIDC over using AWS credentials to pull images from ECR
 
 * **Fine-grained access control**: By associating an IAM role with the OIDC authentication, exact permissions granted to CircleCI for pulling ECR images can be controlled, ensuring a least-privilege approach.
 
+[#prerequisites]
 == Prerequisites
 
 * A xref:first-steps#[CircleCI account] integrated with a supported VCS.
