@@ -3,7 +3,7 @@
 
 You must have admin access in your CircleCI organization to cancel your xref:plan-performance#[Performance plan] subscription.
 
-. In the link:https://app.circleci.com/[CircleCI web app], navigate to the **Plan** section and then open the **Billing** tab.
+. In the link:https://app.circleci.com/[CircleCI web app], click **Plan** on the left sidebar and then open the **Billing** tab.
 
 . At the bottom of the page, click "Looking to cancel your plan?" 
 
