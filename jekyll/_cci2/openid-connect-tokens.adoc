@@ -101,6 +101,8 @@ The following AWS instructions cover the following:
 * A one-time configuration of your AWS account to trust CircleCI's OIDC tokens
 * Running a job that uses the OIDC token to interact with AWS
 
+Also see the xref:pull-an-image-from-aws-ecr-with-oidc#[Pull an image from AWS ECR with OIDC] how-to guide, which follows on from this setup section.
+
 [#set-up-aws]
 ==== Set up AWS
 
