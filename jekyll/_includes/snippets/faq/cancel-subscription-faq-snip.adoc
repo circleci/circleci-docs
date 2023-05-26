@@ -16,7 +16,7 @@ For GitHub users, your account has the "Owner" role in your GitHub organization.
 
 For Bitbucket users, your account has "Admin" permissions in your Bitbucket repository.
 
-For GitLab users, your account is listed with the "Org Admin" in xref:gitlab-integration#organization-settings-people[**Organization Settings > People**] in the CircleCI web app.
+For GitLab users, your account is listed as "Org Admin" in the CircleCI web app under xref:gitlab-integration#organization-settings-people[**Organization Settings > People**].
 
 [#what-happens-upon-cancelling-a-performance-plan-subscription]
 === What happens upon cancelling a Performance plan subscription?
@@ -28,7 +28,7 @@ Note that you will no longer have access to the billing statements after the end
 [#what-happens-to-unused-credits-if-a-plan-is-cancelled]
 === What happens to unused credits if a plan is cancelled?
 
-Credits that are unused at the end of the billing cycle will be forfeted and are not eligible for refunds.
+Credits that are unused at the end of the billing cycle will be forfeited and are not eligible for refunds.
 
 [#is-it-possible-to-reactivate-the-performance-plan-after-cancelling-the-subscription]
 === Is it possible to reactivate the Performance plan after cancelling the subscription?
