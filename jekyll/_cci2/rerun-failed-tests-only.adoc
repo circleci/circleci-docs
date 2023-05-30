@@ -297,7 +297,9 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
 
-**Question:** The re-run appears to be running all tests instead of only failed tests?
+---
+
+**Question:** Why does the re-run appear to be running all tests instead of only failed tests?
 
 **Answer:** The most common case where this occurs is when the JUnit XML is not outputting a "file" attribute.  If you upload your test results XML to an artifact, you can inspect whether or not it has the "file" attribute.  
 
