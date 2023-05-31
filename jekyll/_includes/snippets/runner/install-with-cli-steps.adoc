@@ -17,7 +17,7 @@ Use the following command to create a namespace:
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 +
-TIP: If your organization already has a namespace, you will receive an error if you run the above command. The error message returns the name of the existing namespace. In this case, move on to step 2 below, using your existing namespace.
+TIP: If your organization already has a namespace, you will receive an error if you run the above command to create a _different_ namespace. The error message returns the name of the existing namespace. In this case, move on to step 2 below, using your existing namespace.
 
 . Create a resource class for your self-hosted runner's namespace using the following command:
 +
