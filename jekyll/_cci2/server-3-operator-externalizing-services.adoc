@@ -1,10 +1,10 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
   - Server Admin
 ---
-= CircleCI Server v3.x Configuring External Services
+= CircleCI server v3.x configuring external services
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
@@ -18,22 +18,9 @@ toc::[]
 
 == PostgreSQL
 
-NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
+=== Best practices for your PostgreSQL
 
-.External PostgreSQL
-image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
-
-If you choose to use an external PostgreSQL instance, complete the following fields: 
-
-* *PostgreSQL Service Domain (required)* - The domain or IP address of your PostgreSQL instance. 
-
-* *PostgreSQL Service Port (required)* - The port of your PostgreSQL instance. 
-
-* *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance. 
-
-* *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance. 
-
-=== Best Practices for your PostgreSQL
+NOTE: If using your own PostgreSQL instance, it needs to be version 12.1 or higher.
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
@@ -41,97 +28,128 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 [cols=6*, options="header", stripes=even]
 |===
 |# of Daily Active Users
-|# of PostgreSQL Replicas 
-|CPU   
-|RAM  
-|Disk  
-|NIC Speed 
+|# of PostgreSQL Replicas
+|CPU
+|RAM
+|Disk
+|NIC Speed
 
-|<50                    
-|2                         
+|<50
+|2
 |8 Cores
-|16 GB 
-|100 GB 
+|16 GB
+|100 GB
 | 1 Gbps
 
-|50 - 250               
-|2                         
+|50 - 250
+|2
 |8 Cores
-|16 GB 
-|200 GB 
+|16 GB
+|200 GB
 |1 Gbps
 
-|250 - 1000             
-|3                         
+|250 - 1000
+|3
 |8 Cores
-|32 GB 
-|500 GB 
+|32 GB
+|500 GB
 |10 Gbps
 
-|1000 - 5000            
-|3                         
+|1000 - 5000
+|3
 |8 Cores
-|32 GB 
-|1 TB   
+|32 GB
+|1 TB
 |10 Gbps
 
-|5000+                  
-|3                         
+|5000+
+|3
 |8 Cores
-|32 GB 
-|1 TB   
+|32 GB
+|1 TB
 |10 Gbps
 |===
 
-=== Backing Up PostgreSQL
+=== Back up PostgreSQL
 PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
 
 We strongly recommend the following:
 
-* Taking daily backups.
-* Keeping at least 30 days of backups.
-* Using encrypted storage for backups as databases might contain sensitive information.
-* Performing a backup before each upgrade of CircleCI server.
+* Take daily backups
+* Keep at least 30 days of backups
+* Use encrypted storage for backups as databases might contain sensitive information
+* Perform a backup before each upgrade of CircleCI server
+
+[#migrating-from-internal-postgres]
+=== Migrating from an internal PostgreSQL to an externalized source
+
+{% include snippets/server/migrate-internal-postgres-to-external.adoc %}
+
+[#connecting-your-external-postgres]
+=== Connecting your external Postgres instance to CircleCI server
+
+image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
+
+If you choose to use an external PostgreSQL instance, complete the following fields:
+
+* *PostgreSQL Service Domain (required)* - The domain or IP address of your PostgreSQL instance.
+
+* *PostgreSQL Service Port (required)* - The port of your PostgreSQL instance.
+
+* *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance.
+
+* *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance.
+
+Once you apply your changes in KOTS admin, your CircleCI server instance will be restored with pods running as before.
 
 == MongoDB
 
-NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher. 
+NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 
-.External MongoDB
+[#migrating-from-internal-mongodb]
+=== Migrating from an internal MongoDB to an externalized Source
+
+{% include snippets/server/migrate-internal-mongo-to-external.adoc %}
+
+[#connecting-your-external-mongodb]
+=== Connecting your external MongoDB instance to CircleCI server
+
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
 
-If you choose to use an external MongoDB instance, complete the following fields: 
+If you choose to use an external MongoDB instance, complete the following fields:
 
-* *MongoDB connection host(s) or IP(s) (required)* - 
+* *MongoDB connection host(s) or IP(s) (required)* -
 The hostname or IP of your MongoDB instance. Specifying a port using a colon and multiple hosts for sharded instances are both supported.
 
-* *Use SSL for connection to MongoDB (required)* - 
+* *Use SSL for connection to MongoDB (required)* -
 Whether to use SSL when connecting to your external MongoDB instance.
 
-* *Allow insecure TLS connections (required)* - 
-If you use a self-signed certificate or one signed by a custom CA, you will need to enable this setting. However, this is an insecure setting and you should use a TLS certificate signed by a valid CA, if you can.
+* *Allow insecure TLS connections (required)* -
+If you use a self-signed certificate, or one signed by a custom CA, you will need to enable this setting. However, this is an insecure setting and you should use a TLS certificate signed by a valid CA, if you can.
 
-* *MongoDB user (required)* - 
+* *MongoDB user (required)* -
 The username for the account to use. This account should have the dbAdmin role.
 
-* *MongoDB password (required)* - 
+* *MongoDB password (required)* -
 The password for the account to use.
 
-* *MongoDB authentication source database (required)* - 
+* *MongoDB authentication source database (required)* -
 The database that holds the account information, usually admin.
 
-* *MongoDB authentication mechanism (required)* - 
+* *MongoDB authentication mechanism (required)* -
 The authentication mechanism to use, usually SCRAM-SHA-1.
 
-* *Additional connection options (optional)* - 
+* *Additional connection options (optional)* -
 Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&`. Special characters must be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+
+Once you apply your changes in KOTS admin, your CircleCI Server instance will be restored with pods running as before.
 
 == Vault
 
 .External Vault
 image::server-3-external-vault.png[Screenshot of KOTS Admin Console config showing settings for using an external Vault instance]
 
-If you choose to use an external Vault instance, complete the following fields:  
+If you choose to use an external Vault instance, complete the following fields:
 
 * *URL* - The URL to your Vault service.
 
