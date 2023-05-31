@@ -66,8 +66,8 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 [#endpo整数s]
 == エンドポイント
 
-[#get-api-v2-runner]
-=== GET /api/v2/runner
+[#get-api-v3-runner]
+=== GET /api/v3/runner
 
 指定したパラメーターに基づいて使用可能なセルフホストランナーの一覧を取得します。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
@@ -76,7 +76,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v3/runner でエンドポイントにアクセスできるようになります。
 * リソースクラストークン (リソースクラス作成時に生成されます)
 
 [#request]
@@ -108,12 +108,12 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 ==== サンプル
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/runner?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
+curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
     -H "Circle-Token: secret-token"
 ```
 
@@ -203,8 +203,8 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 }
 ```
 
-[#get-api-v2-tasks]
-=== GET /api/v2/tasks
+[#get-api-v3-tasks]
+=== GET /api/v3/tasks
 
 指定したリソース クラスで未処理のタスクの数を取得します。
 
@@ -213,7 +213,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v3/runner でエンドポイントにアクセスできるようになります。
 
 [#request]
 ==== リクエスト
@@ -238,7 +238,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 ==== 例
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
@@ -283,8 +283,8 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 }
 ```
 
-[#get-api-v2-tasks-running]
-=== GET /api/v2/tasks/running
+[#get-api-v3-tasks-running]
+=== GET /api/v3/tasks/running
 
 指定したリソースクラスで実行中のタスクの数を取得します。
 
@@ -293,7 +293,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v3/runner でエンドポイントにアクセスできるようになります。
 
 [#request]
 ==== リクエスト
@@ -318,7 +318,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 ==== 例
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/tasks/running?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
