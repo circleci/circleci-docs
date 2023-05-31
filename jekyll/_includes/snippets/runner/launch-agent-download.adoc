@@ -98,7 +98,7 @@ ifndef::windows[]
 export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 +
-**Note:** Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
+NOTE: Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
 endif::[]
 // Display code example for Windows only
 ifdef::windows[]
