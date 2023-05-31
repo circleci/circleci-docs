@@ -45,15 +45,14 @@ Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs
 
 To upload artifacts created during builds, use the following example:
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
@@ -111,9 +110,6 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout
