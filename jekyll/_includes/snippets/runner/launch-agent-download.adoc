@@ -58,12 +58,12 @@ For example, on **cloud**, to set your platform for macOS M1 and run the `downlo
 ```shell
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
 ```
-+
 endif::[]
++
 // The following closes the ifndef on line 4
 endif::[]
-
-. For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
++
+For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -102,7 +102,6 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 endif::[]
 // Display code example for Windows only
 ifdef::windows[]
-+
 ```powershell
 $Env:agentVer = "<launch-agent-version>"
 ```

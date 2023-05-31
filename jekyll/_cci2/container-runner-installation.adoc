@@ -41,11 +41,26 @@ This page describes how to install CircleCI's container runner.
 [#container-runner-installation]
 == 2. Container runner installation
 
-. Add the container runner Helm repo by running `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
+. Add the container runner Helm repo by running the following command:
++
+[source,shell]
+----
+helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm
+----
 
-. Run `helm repo update`
+. Next, run the following:
++
+[source,shell]
+----
+helm repo update
+----
 
-. Run `kubectl create namespace circleci` to create the `circleci` Kubernetes namespace
+. Then, run the following command to create the `circleci` Kubernetes namespace:
++
+[source,shell]
+----
+kubectl create namespace circleci
+----
 
 . Create a file called `values.yaml` file containing the following:
 +
@@ -56,7 +71,12 @@ agent:
       token: <resource_class_token>
 ```
 
-. Run `helm install container-agent container-agent/container-agent -n circleci -f values.yaml`
+. Finally, run the following command:
++
+[source,shell]
+----
+helm install container-agent container-agent/container-agent -n circleci -f values.yaml
+----
 
 [#container-runner-configuration-example]
 == Container runner configuration example
