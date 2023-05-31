@@ -295,7 +295,7 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Question:** Can I specify timing type for test splitting using `circleci tests run`?
 
-**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `filename`, `classname`, or `testname`.
+**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name).
 
 ---
 
