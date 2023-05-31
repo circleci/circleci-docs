@@ -170,8 +170,6 @@ en:
             link: hello-world-macos
           - name: iOS code signing
             link: ios-codesigning
-          - name: Xcode image policy
-            link: xcode-policy
           - name: Dedicated host resources
             link: dedicated-hosts-macos
       - name: Windows
@@ -202,6 +200,8 @@ en:
         children:
           - name: Convenience images support policy
             link: convenience-images-support-policy
+          - name: Xcode image policy
+            link: xcode-policy
 
   - name: Execute jobs on self-hosted runners
     icon: icons/sidebar/build-agent.svg
