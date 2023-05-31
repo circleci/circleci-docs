@@ -100,9 +100,9 @@ Kuberenetes クラスタで Pod が一つも作成されていない タスク P
 コンテナランナーで実行されるジョブで使用するカスタムイメージには <<custom-images#required-tools-for-primary-containers,Bash>> が必要です。
 
 [#oops-there-was-an-issue-with-your-infrastructure]
-=== Oops, there was an issue with your infrastructure
+=== インフラに問題があった場合
 
-If you see the message "Oops, there was an issue with your infrastructure. Verify your self-hosted runner infrastructure is operating and try re-running the job. If the issue persist, see our troubleshooting guide" on the job’s page, or if there is no content in the task lifecycle step (as shown), you should consider the potential causes described below:
+もし、「Oops, there was an issue with your infrastructure」というメッセージが表示された場合。 セルフホストランナーのインフラストラクチャが動作していることを確認し、ジョブを再実行してみてください。 それでも問題が解決しない場合は、ジョブのページにある「トラブルシューティングガイド」を参照するか、タスクのライフサイクルステップにコンテンツがない場合（図のような場合）、以下に説明する潜在的な原因を検討する必要があります：
 
 .タスクのライフサイクルにコンテンツがない
 image::task-lifecycle.png[Image showing the task lifecycle with no content message]

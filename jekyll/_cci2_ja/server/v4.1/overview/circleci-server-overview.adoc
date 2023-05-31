@@ -5,24 +5,26 @@ contentTags:
     - Server v4.1
     - サーバー管理者
 ---
-= CircleCI Server v4.x の概要
+= CircleCI Server v4.1 の概要
 :page-layout: classic-docs
-:page-liquid: CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。
-:page-description:
+:page-liquid:
+:page-description: CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。
 :icons: font
 :toc: macro
 
 :toc-title:
 
 [#introduction]
-== はじめに
+== コンテナランナー
 
 CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。
 
 CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提供しますが、お客様の Kubernetes クラスタ内で動作します。
 
+NOTE: インストール方法については、xref:../installation/phase-1-prerequisites#[regular] または xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] インストールガイドのいずれかを選択することができます。
+
 .CircleCI Server v4.x のアーキテクチャ
-image::server-4-architecture-diagram.png[Server v4.xservices architecture]
+image::server-4-architecture-diagram.png[Server v4.x services architecture]
 
 CircleCI Server アプリケーションは、1 つのロードバランサーを使って 4 つのサービスを公開しています。 必要に応じて、ロードバランサーを非公開にし、パブリックインターネットからのアクセスを遮断することも可能です。
 
@@ -76,13 +78,6 @@ CircleCI Server アプリケーションは、1 つのロードバランサー�
 |HTTP Web アプリケーショントラフィック
 |
 
-|8800
-|TCP
-|インバウンド
-|管理者
-|管理者コンソール
-|
-
 |22
 |TCP
 |インバウンド
@@ -98,7 +93,7 @@ CircleCI Server アプリケーションは、1 つのロードバランサー�
 |Nomad クライアントでのみ必要
 |===
 
-CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロールプレーンは Kubernetes 内で動作します。一方、スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+CircleCI server schedules CI jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. Nomad コントロールプレーンは Kubernetes 内で動作します。一方、スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。 オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
 
@@ -219,7 +214,7 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 |
 |
 
-|kong
+|Kong
 |アプリコア
 |API の管理
 |
@@ -231,7 +226,7 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 |
 |
 
-|nginx
+|NGINX
 |アプリコア/ フロントエンド
 |トラフィックのリダレクトと受信を処理します。
 |
@@ -352,11 +347,11 @@ CircleCI では、インストールするプラットフォームを幅広く�
 |備考
 
 |EKS
-|テスト済み
+|Tested
 |
 
 |GKE
-|テスト済み
+|Tested
 |
 
 |Azure
@@ -381,8 +376,8 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* xref:../overview/release-notes[CircleCI Server v4.x のリリースノート]
-* xref:../installation/phase-1-prerequisites[Server 4.x のインストールの前提条件]
-* xref:../installation/migrate-from-server-3-to-server-4[Server v3 から Server v4 への移行]
+* xref:release-notes#[CircleCI server v4.1 リリースノート]
+* xref:../installation/phase-1-prerequisites#[Server 4.x のインストールの前提条件]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server v3.x から Server v4.x への移行]
 +
 endif::pdf[]

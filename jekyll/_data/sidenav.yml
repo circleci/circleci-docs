@@ -122,6 +122,8 @@ en:
             link: databases
           - name: Migrate from deploy to run
             link: migrate-from-deploy-to-run
+          - name: Using shell scripts
+            link: using-shell-scripts
       - name: Reference
         children:
           - name: Project values and variables
@@ -188,6 +190,8 @@ en:
             link: using-gpu
       - name: How-to Guides
         children:
+          - name: Pull an image from AWS ECR with OIDC
+            link: pull-an-image-from-aws-ecr-with-oidc
           - name: Run a job in a container on your machine with Docker
             link: run-a-job-in-a-container
           - name: Installing and using docker-compose
@@ -220,7 +224,7 @@ en:
         children:
           - name: Container runner installation
             link: container-runner-installation
-          - name: Container runner reference guide
+          - name: Container runner reference
             link: container-runner
       - name: Machine runner
         children:
@@ -272,7 +276,7 @@ en:
             link: concurrency
           - name: Test splitting and parallelism
             link: parallelism-faster-jobs
-          - name: Enable Docker layer caching
+          - name: Docker layer caching overview
             link: docker-layer-caching
       - name: Configuration
         children:
@@ -290,6 +294,8 @@ en:
         children:
           - name: Reusable configuration reference
             link: reusing-config
+          - name: Optimizations reference
+            link: optimizations
 
   - name: Project Insights
     icon: icons/sidebar/insights-new.svg
@@ -396,6 +402,10 @@ en:
             link: ssh-access-jobs
           - name: Rotate project SSH keys
             link: rotate-project-ssh-keys
+          - name: Stop building a project on CircleCI
+            link: stop-building-a-project-on-circleci
+          - name: Rename organizations and repositories
+            link: rename-organizations-and-repositories
           - name: Create and manage config policies (Open preview)
             link: create-and-manage-config-policies
           - name: Test config policies (Open preview)
@@ -404,10 +414,8 @@ en:
             link: use-the-cli-for-config-and-policy-development
           - name: Config policies for self-hosted runner (Open preview)
             link: config-policies-for-self-hosted-runner
-          - name: Stop building a project on CircleCI
-            link: stop-building-a-project-on-circleci
-          - name: Rename organizations and repositories
-            link: rename-organizations-and-repositories
+          - name: Manage contexts with config policies (Open preview)
+            link: manage-contexts-with-config-policies
       - name: Reference
         children:
           - name: Config policy reference (Open preview)
@@ -596,8 +604,6 @@ en:
             link: server/v4.1/installation/hardening-your-cluster
           - name: Installing server behind a proxy
             link: server/v4.1/installation/installing-server-behind-a-proxy
-          - name: Migrate from server v3 to v4
-            link: server/v4.1/installation/migrate-from-server-3-to-server-4
           - name: Upgrade server v4.x
             link: server/v4.1/installation/upgrade-server
           - name: Installation reference
@@ -1058,6 +1064,9 @@ ja:
           - name: Migrate from deploy to run
             link: ja/migrate-from-deploy-to-run
             i18n_name: deployからrunへの移行
+          - name: Using shell scripts
+            link: ja/using-shell-scripts
+            i18n_name: シェルスクリプトの使用
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1392,9 +1401,6 @@ ja:
           - name: Secure secrets handling
             link: ja/security-recommendations
             i18n_name: シークレットの安全な取り扱い
-          - name: Using shell scripts
-            link: ja/using-shell-scripts
-            i18n_name: シェルスクリプトの使用
       - name: Config policy management
         i18n_name: 設定ファイルのポリシー管理
         children:

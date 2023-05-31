@@ -1,49 +1,50 @@
 [#possible-to-delete-orb]
-=== Is it possible to delete an orb I've created?
+=== 作成した Orb を削除できますか？
 
 いいえ。 Orb はデフォルトで公開されており、１つのバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において同じ動作をすると想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
 
-Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs[Orb registry]. 除外した Orb は、API または CLI からは見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば現在はメンテナンスを行っていない Orb などに適しています。
+ただし、Orb を link:https://circleci.com/developer/orbs[Orb レジストリ]から除外することは可能です。 除外した Orb は、API または CLI からは見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば現在はメンテナンスを行っていない Orb などに適しています。
 
 ```shell
 circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
 
-WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. そのため、プライベート Orb 名が除外前にどこにも記載されていない場合、その Orb を Orb レジストリや CircleCI CLI で見つけることはできません。 If you believe this happened to you, please create a link:https://support.circleci.com/hc/en-us[support ticket].
+WARNING: 現在、CircleCI CLI コマンド `orb source` は、リストされているかいないかにかかわらず、プライベート Orb
+ に対して機能しません。 そのため、プライベート Orb 名が除外前にどこにも記載されていない場合、その Orb を Orb レジストリや CircleCI CLI で見つけることはできません。 この問題が発生したと思われる場合は、 link:https://support.circleci.com/hc/ja[サポートチケット]を作成してください。
 
 [#protect-users-api-tokens]
-=== How do I protect a user's API tokens and other sensitive information?
+=== ユーザーの API トークンなどの機密情報を保護するにはどうしたらよいですか？
 
-Use the `env_var_name` parameter type for the API key parameter. このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
+API キーのパラメーターとして env_var_name パラメーター型を使用してください。 このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
 
-If you are interested in reading more on this topic, visit the xref:reusing-config#environment-variable-name[Environment variable name] and xref:orbs-best-practices#[Best practices] pages.
+このトピックについてもっと読みたい方は、xref:reusing-config#environment-variable-name[環境変数名]と xref:orbs-best-practices#[ベストプラクティス] のページを参照してください。
 
 [#require-user-to-add-an-environment-variable]
-=== How can I require a user to add an environment variable?
+=== ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
 
-Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
+環境変数名のパラメーターを作成してください。 変更できない静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
 
-必須の環境変数はバリデーションすることをお勧めします。 See more in the xref:orbs-best-practices#commands[Orb author best practices] guide.
+必須の環境変数はバリデーションすることをお勧めします。 詳しくは、xref:orbs-best-practices#commands[Orb author ガイド]をご覧ください。
 
-If you are interested in reading more on this topic, visit the xref:reusing-config#environment-variable-name[Environment variable name] and xref:orbs-best-practices#[Best practices] pages.
+このトピックについてもっと読みたい方は、xref:reusing-config#environment-variable-name[環境変数名]と xref:orbs-best-practices#[ベストプラクティス] のページを参照してください。
 
 [#what-language-to-write-orb]
-=== What language do I use to write an orb?
+=== Orb の記述にはどの言語を使用できますか。
 
-Orbs are packages of xref:introduction-to-yaml-configurations#[CircleCI YAML configuration].
+Orbsは、xref:introduction-to-yaml-configurations#[CircleCI YAML コンフィグ]のパッケージです。
 
-CircleCI orbs package xref:reusing-config#[CircleCI reusable config], such as xref:reusing-config#authoring-reusable-commands[commands], which can execute within a given xref:executor-intro#[executor] defined by either, the user if using a _command_ within a custom job, or by the orb author if using a xref:orb-concepts#jobs[reusable job]. ロジックが実行される環境に応じて、使用する言語を決定してください。
+CircleCI Orb では、xref:reusing-config#[再利用可能な CircleCI コンフィグファイル]をパッケージ化しています。 例えば、xref:reusing-config#authoring-reusable-commands[コマンド は特定の] xref:executor-intro#[Executor]ジョブ 内で実行できますが、その Executor は、カスタムジョブでコマンドを使用する場合はユーザーによって、xref:orb-concepts#jobs[再利用可能なジョブ]を使用する場合は Orb 作成者によって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
 
 [#what-programming-languages-command-logic]
-=== What programming languages can I write my Command logic in?
+=== コマンド ロジックの記述にはどのプログラミング言語を使用できますか？
 
-POSIX compliant bash is the most portable and universal language. Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールも自由に実行できます。
+ 移植性と汎用性に最も優れているのは、POSIX 準拠の Bash です。 Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールも自由に実行できます。
 
 ---
 
-**Bash**
+**Bash とは？**
 
-Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash can (and should) be easily written directly using the native xref:configuration-reference#run[run] command. MacOS と Linux のデフォルトのシェルは Bash になります。
+Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash は、ネイティブの xref:configuration-reference#run[run] コマンドを使用して直接、簡単に記述できます。 MacOS と Linux のデフォルトのシェルは Bash になります。
 
 **Ruby**
 
@@ -75,9 +76,9 @@ steps:
     command: print('python')
 ```
 
-**Binary**
+**バイナリ**
 
-このオプションは、可能な限り使用しないことを強くお勧めします。 時に、CLI ツールなどのリモート バイナリ ファイルをフェッチしなければならない場合があります。 これらのバイナリは、パッケージ マネージャーからフェッチするか、可能な場合は GitHub リリースなどの VCS でホスティングする必要があります。 For example, installing Homebrew as a part of the link:https://circleci.com/developer/orbs/orb/circleci/aws-serverless#commands-install[AWS Serverless orb].
+このオプションは、可能な限り使用しないことを強くお勧めします。 時に、CLI ツールなどのリモート バイナリ ファイルをフェッチしなければならない場合があります。 これらのバイナリは、パッケージ マネージャーからフェッチするか、可能な場合は GitHub リリースなどの VCS でホスティングする必要があります。 Homebrew を link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-serverless#commands-install[AWS Serverless Orb] の一部としてインストールする例を以下に示します。
 
 ```yaml
 steps:
@@ -90,10 +91,10 @@ steps:
 ```
 
 [#should-i-create-a-command-or-a-job]
-=== Should I create a command or a job?
+=== コマンドとジョブのどちらを作成するべきですか？
 
-The answer might be both, but it will heavily depend on the task you want to accomplish.
+どちらでもかまいませんが、実行したいタスクによります。
 
-An orb xref:orb-concepts#commands[command] can be utilized by the user, or even the orb developer, to perform some action within a job. コマンド自体は、自身が含まれているジョブを認識しませんが、ユーザーは自由自在にコマンドを使用できます。 コマンドは、CLI アプリケーションを自動的にインストールしたり、インストールと認証を実行したりする場合などに便利です。
+Orb のxref:orb-concepts#commands[コマンド]は、ユーザーか Orb 開発者がジョブ内で何らかのアクションを実行するために使用します。 コマンド自体は、自身が含まれているジョブを認識しませんが、ユーザーは自由自在にコマンドを使用できます。 コマンドは、CLI アプリケーションを自動的にインストールしたり、インストールと認証を実行したりする場合などに便利です。
 
-A xref:orb-concepts#jobs[job] defines a collection of steps and commands within a specific execution environment. ジョブでは通常、実行環境と実行対象のステップを指定するので、自由度はあまりありません。 ジョブは、デプロイなどのタスクを自動化する場合に便利です。 A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
+xref:orb-concepts#[ジョブ]は、特定の実行環境内のステップやジョブの集まりを定義したものです。 ジョブでは通常、実行環境と実行対象のステップを指定するので、自由度はあまりありません。 ジョブは、デプロイなどのタスクを自動化する場合に便利です。 デプロイ ジョブでは、_Python_ などの一般的な実行プラットフォームを選択するだけで、ユーザー コードのチェックアウト、CLI のインストール、デプロイ コマンドの実行を自動的に完了できます。ユーザーが追加の設定を行う必要はほとんど、あるいはまったくありません。

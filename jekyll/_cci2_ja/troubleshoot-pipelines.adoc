@@ -4,17 +4,17 @@ layout: classic-docs
 short-title: Troubleshoot pipelines
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Troubleshoot pipelines
+= パイプラインのトラブル対応
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Troubleshooting guide for pipelines and scheduled pipelines.
+:page-description: このドキュメントでは、パイプラインとすケージュルされたパイプラインのトラブルシューティングガイドをわかりやすくご紹介します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-This page describes errors and troubleshooting methods for pipelines and scheduled pipelines.
+このページでは、パイプラインやスケジュールされたパイプラインに関するエラーやトラブルシューティングの方法について説明します。
 
-include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/pipelines-troubleshoot-snip.adoc[]

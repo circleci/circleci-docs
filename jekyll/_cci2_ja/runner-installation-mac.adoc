@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
+
 このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
@@ -37,7 +39,7 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 [#create-a-circleci-self-hosted-runner-configuration]
 == CircleCI のセルフホストランナー設定ファイルを作成する
 
-CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
+CircleCI エージェントを実行するユーザーを選択します。 そのディレクトリの所有権を `USERNAME` に変更します。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
 大文字で記載されたさまざまなパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
@@ -153,7 +155,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 </plist>
 ```
 
-{% include snippets/ja/machine-runner-example.adoc %}
+{% include snippets/machine-runner-example.adoc %}
 
 [#enable-the-launchd-service]
 == `launchd` サービスを有効にする

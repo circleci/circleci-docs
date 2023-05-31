@@ -98,9 +98,11 @@ The video offers a short tutorial for the following scenarios:
 - Set a schedule with the API
 - Migrate from scheduled workflows to scheduled pipelines
 
+++++
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/x3ruGpx6SEI" title="Scheduled pipelines tutorial" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+++++
 
 For the documentation for these scenarios, visit the following pages:
 - xref:set-a-nightly-scheduled-pipeline#[Set a nightly scheduled pipeline]

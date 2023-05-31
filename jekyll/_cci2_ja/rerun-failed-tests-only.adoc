@@ -2,43 +2,43 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Re-run failed tests only (preview)
+= 失敗したテストのみを再実行する (プレビュー)
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to re-run only failed tests in a job and optimize credit usage.
+:page-description: ジョブで失敗したテストのみを再実行し、クレジットの使用量を最適化する方法について解説します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-WARNING: This feature is in **preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Community forum].
+WARNING: この機能は**プレビュー段階**です。お客様ご自身の責任においてご利用ください。 本機能は一般公開されない可能性があります。 ご質問がある場合や問題が発生した際には、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[コミュニティフォーラム]にコメントをお寄せください。
 
 [#motivation-and-introduction]
-== Motivation and introduction
+== 背景および概要
 
-CircleCI is releasing new preview functionality to **re-run failed tests only**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
+CircleCI では、この度、**失敗したテストのみを再実行できる機能**をプレビュー公開しました。 このオプションを選択すると (下図参照)、テストが一時的に失敗した際に、テストスイート全体ではなく一部のテストのみを再実行できます。
 
-Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+これまで、ワークフロー内のテストジョブのテスト結果が不安定である場合にワークフローの実行を完了するには、link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[失敗状態からワークフローを再実行]するしかありませんでした。 この方法では、成功したものも含めてテストジョブの*すべてのテスト*を再実行するため、フィードバックの獲得が遅れ、不要なクレジットを使うことにもなります。
 
-This re-run failed tests only re-runs failed tests from the _same_ commit, not new ones.
+"Re-run failed tests only (失敗したテストのみの再実行)" オプションでは、新しいコミットではなく__同じ__コミットで失敗したテストを再実行できます。
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
 [#prerequisites]
 == 前提条件
 
-* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
-* The testing job uses `circleci tests run` (see below for details) to execute tests.
+* ワークフローのテストジョブについて、CircleCI にxref:collect-test-data/#[テスト結果をアップロード]するよう設定する。 xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML 出力]に `file` 属性または `classname` 属性を**含める必要があります**。
+* テストジョブで、テストの実行に `circleci tests run` を使用する (下記参照)。
 +
-NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` (see below for instructions).
+NOTE: 現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更してください (手順については下記を参照)。
 
 [#quickstart]
 == クイックスタート
 
 [#example-config-file-before]
-=== Before: Example `.circleci/config.yml` file
+=== 実装前: サンプルの `.circleci/config.yml` ファイル
 
 ```yaml
  - run:
@@ -46,25 +46,25 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings)
-      pytest -o --junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
+      pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
 
 - store_test_results:
     path: test-results
 ```
 
-This example snippet is from a CircleCI configuration file that:
+上記のサンプル CircleCI コンフィグファイルの中身は以下のとおりです。
 
-. Executes Python test files that end in `.py`,
-. Splits tests by previous timing results (you can follow xref:test-splitting-tutorial#[this tutorial] on intelligent test splitting),
-. Stores the test results in a new directory called `test-results`, and
-. Uploads those test results to CircleCI.
+. 名前の末尾が `.py` の Python テストファイルを実行する
+. 過去のタイミング結果に基づいてテストを分割する (インテリジェントテスト分割に関するxref:test-splitting-tutorial#[こちらのチュートリアル]を参照)
+. テスト結果を新規ディレクトリ `test-results` に保存する
+. テスト結果を CircleCI にアップロードする
 
-**Note:** `-o --junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+**注:** `-o junit_family=legacy` は、生成するテスト結果に `file` 属性を含めるために使用しています。 このサンプルで使用していないものは、並列実行を設定するキーだけです (詳細については「xref:parallelism-faster-jobs#[テスト分割と並列実行]」を参照)。
 
 [#example-config-file-after]
-=== After: Example `.circleci/config.yml` file
+=== 実装後: サンプルの `.circleci/config.yml` ファイル
 
-In the snippet below, the example has been updated to use the `circleci tests run` command to allow for re-running only failed tests.
+以下では、前述のサンプルを編集し、失敗したテストのみを再実行できるように `circleci tests run` コマンドを使用するように更新しました。
 
 ```yaml
  - run:
@@ -72,78 +72,79 @@ In the snippet below, the example has been updated to use the `circleci tests ru
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo $TEST_FILES | circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings
+      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
  - store_test_results:
     path: test-results
 ```
 
-* `TEST_FILES=$(circleci tests glob "**/test_*.py")`
+* `TEST_FILES=$(circleci tests glob "**/test**.py")`
 +
-Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`.
+CircleCI の xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob コマンド]を使用して、テストファイルのリストを作成しています。 今回は、名前の先頭が `test_` で末尾が `.py` のテストファイルを探しました。 Ensure that the glob string is enclosed in quotes.
 * `echo $TEST_FILES |`
 +
-Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
-* `circleci tests run --command="xargs pytest -o --junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
-** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
-** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
-** `--split-by-timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
+`circleci tests run` コマンドにテストのリストを標準入力 (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]) として渡します。
+* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
+** `circleci tests run` を呼び出し、`--command=` パラメーターに元のテスト実行コマンド (`pytest`) を指定しています。 **このパラメーターは必須です**。 同じく、`xargs` も必須です。
+** `--verbose` は `circleci tests run` 用のオプションパラメーターであり、詳細なデバッグメッセージを出力します。
+** `--split-by-timings` は、`circleci tests run` でタイミングに基づくインテリジェントテスト分割を利用するためのパラメーターです。 `circleci tests run` を使う場合、このパラメーターは必須ではありません。 テストジョブで CircleCI のテスト分割機能を使わないのであれば、省略してください。
 
 [#verify-the-configuration]
-==== Verify the configuration
+==== 設定の検証
 
-After updating your configuration, click the "Re-run failed tests only" button the next time you encounter a test failure on that job.
+コンフィグファイルの更新が完了したら、次回にジョブのテストが失敗した場合に [Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックしてください。
 
-If the `--verbose` setting is enabled, you should see output similar to the following the next time you run this job on CircleCI:
+`--verbose` 設定を有効にすると、次回の CircleCI でのジョブ実行時に以下のような出力が表示されるようになります。
 
 ```sh
-Installing circleci-tests-plugin-cli plugin.
-circleci-tests-plugin-cli plugin Installed. Version: 1.0.3349-470dac4
-DEBU[2023-04-10T22:36:53Z] Attempting to read from stdin. This will hang if no input is provided.
-INFO[2023-04-10T22:36:53Z] starting batch execution                      batch_count=1 batches_processed=0 total_batches_for_job=3
-DEBU[2023-04-10T22:36:53Z] received test names: test_api.py
+circleci-tests-plugin-cli plugin Installed. Version: 1.0.5909-ca27755
+DEBU[2023-05-14T17:53:44Z] Attempting to read from stdin. This will hang if no input is provided.
+DEBU[2023-05-14T17:53:44Z] rerunning failed tests
+INFO[2023-05-14T17:53:44Z] starting execution
 ```
 
-The job should only re-run tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+[Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックした場合、テスト失敗が 1 回以上発生した `file` の `classname` に含まれているテストのみが再実行されます。
+
+[Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックした場合、テスト失敗が 1 回以上発生した `file` の `classname` に含まれているテストのみが再実行されます。 本記事の説明と異なる挙動が見られた場合には、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[こちらの Discuss の投稿 (英語)] にてお問い合わせください。
 
 [#additional-examples]
-== Additional examples
+== 他のサンプル
 
 [#configure-a-job-running-ruby-rspec-tests]
-=== Configure a job running Ruby (rspec) tests
+=== Ruby (RSpec) テストを実行するジョブの設定
 
-. Add the following gem to your Gemfile:
+. Gemfile に以下の gem を追加します。
 +
 ```bash
 gem 'rspec_junit_formatter'
 ```
-. Modify your test command to use `circleci tests run`:
+. `circleci tests run` を使うようにテストコマンドを更新します。
 +
 ```yaml
  - run: mkdir ~/rspec
  - run:
     command: |
-      circleci tests glob spec/**/*_spec.rb | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose
+      circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
 ```
-. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
+. `glob` コマンドは、必要に応じて調整してください。 テスト結果を `rspec` に対応した形式で出力する方法については、「xref:collect-test-data#rspec[テストデータの収集]」の RSpec に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
 [#configure-a-job-running-ruby-cucumber-tests]
-=== Configure a job running Ruby (Cucumber) tests
+=== Ruby (Cucumber) テストを実行するジョブの設定
 
-. Modify your test command to look something similar to:
+. 以下のようにテストコマンドを更新します。
 +
 ```yaml
 - run: mkdir -p ~/cucumber
 - run:
     command: |
-    circleci tests glob features/**/*.feature | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose
+    circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
 ```
-. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`.
+. `glob` コマンドは、必要に応じて調整してください。 テスト結果を `Cucumber` に対応した形式で出力する方法については、「xref:collect-test-data#cucumber[テストデータの収集]」の Cucumber に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
 [#configure-a-job-running-cypress-tests]
-=== Configure a job running Cypress tests
+=== Cypress テストを実行するジョブの設定
 
-. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter].  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
+. link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter] を使用します。  これを `.circleci/config.yml` でインストールするか、`package.json` に追加してください。 `.circleci/config.yml` でインストールする場合は次のように指定します。
 +
 ```yaml
   #add required reporters (or add to package.json)
@@ -152,7 +153,7 @@ gem 'rspec_junit_formatter'
     command: |
       npm install --save-dev cypress-circleci-reporter
 ```
-. Use the `cypress-circleci-reporter`, `circleci tests run`, and upload test results to CircleCI:
+. `cypress-circleci-reporter` と `circleci tests run` を組み合わせて実行し、CircleCI にテスト結果をアップロードします。
 +
 ```yaml
      -run:
@@ -162,18 +163,18 @@ gem 'rspec_junit_formatter'
           cd ./cypress
           npm ci
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings"
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings" #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
      - store_test_results
         path: test_results
 ```
 +
-Remember to modify the `glob` command for your specific use case.
+`glob` コマンドの部分は、ニーズにあわせて調整してください。  **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
-=== Configure a job running Javascript/Typescript (Jest) tests
+=== Javascript/Typescript (Jest) テストを実行するジョブの設定
 
-. Install the `jest-junit` dependency. You can add this step in your `.circleci/config.yml`:
+. `jest-junit` 依存関係をインストールします。 この処理は `.circleci/config.yml` に以下のように追加します。
 +
 ```yaml
   - run:
@@ -181,13 +182,13 @@ Remember to modify the `glob` command for your specific use case.
       command: yarn add --dev jest-junit
 ```
 +
-You can also add it to your `jest.config.js` file by following these link:https://www.npmjs.com/package/jest-junit[usage instructions].
-. Modify your test command to look something similar to:
+または、link:https://www.npmjs.com/package/jest-junit[こちらの使用手順 (英語)] に従い、`jest.config.js` ファイルに依存関係を追加します。
+. 以下のようにテストコマンドを更新します。
 +
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --”
+      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
       JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
@@ -195,67 +196,93 @@ You can also add it to your `jest.config.js` file by following these link:https:
   - store_test_results:
       path: ./reports/
 ```
-. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`.
+. `npx jest --listTests` コマンドは、必要に応じて調整してください。 テスト結果を `jest` に対応した形式で出力する方法については、「xref:collect-test-data#jest[テストデータの収集]」の Jest に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 +
-`JEST_UNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_UNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
+`JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` は、`file` 属性の存在を確認するために設定しています。 `.circleci/config.yml` で設定する代わりに、`addFileAttribute= "true"` 属性を利用して `jest.config.js` ファイルに `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` を追加することもできます。
+
+[#configure-a-job-running-playwright-tests]
+=== Playwright のテストを実行するジョブの設定
+
+. `circleci tests run` を使うようにテストコマンドを更新します。
++
+```yaml
+ - run:
+    command: |
+      mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
+      pnpm run serve &
+      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
+```
+. `glob` コマンドは、必要に応じて調整してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。** テスト分割を使用しない場合は、`--split-by=timings` を省略できます。 注：link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwrightの既にビルドインされている flag]（`PLAYWRIGHT_JUNIT_OUTPUT_NAME`）を使用して、JUnit XML 出力ディレクトリを指定することも可能です。
 
 [#known-limitations]
 == 既知の制限
 
-* When re-running only the failed tests, test splitting by timing may not be as efficient as expected the next time that job runs, as the test results being stored are only from the subset of failed tests that were run.
-* Orbs that run tests may not work with this new functionality at this time.
-* If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
-* Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests only".
+* 失敗したテストのみを再実行する場合、再実行後のジョブの実行時にタイミングに基づくテスト分割の効率が想定より低くなることがあります。これは、テストのうち、失敗して再実行されたものの結果だけが保存されるためです。
+* 現時点では、テストを実行する Orb とこの新機能を組み合わせることはできません。
+* シェルスクリプトを呼び出してテストを実行する場合、`circleci tests run` は `circleci/config.yml` ではなく**シェルスクリプト内**に記載してください。
+* "Re-run failed tests only (失敗したテストのみを再実行)" 機能では、組織のワークスペースのxref:persist-data#custom-storage-usage[保持期間]を超えたジョブを再実行することはできません。
+* ジョブでコードカバレッジレポートのアップロードを行う場合、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[再実行中に問題が発生することがあります]。
 
 [#FAQs]
 == FAQ
 
-**Question:** I have a question or issue, where do I go?
+**質問:** 不明点や問題がある場合の問い合わせ先はどこですか？
 
-**Answer:** Leave a comment on the https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post].
-
----
-
-**Question:** Will this functionality re-run individual tests?
-
-**Answer:** No, it will re-run failed test `classnames` or `file` that had at least one individual test failure.
+**回答:** link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[こちらの Discuss の投稿]にコメントとしてお問い合わせください。
 
 ---
 
-**Question:** What happens if I try to use the functionality but `circleci tests run` is not used in the `.circleci/config.yml` file?
+**質問:** この機能では、テストが個別に再実行されますか？
 
-**Answer:** All tests will be executed when the workflow runs again, including failed tests. This is equivalent to selecting "Rerun workflow from failed".
-
----
-
-**Question:** What happens if I try to use the functionality and `circleci tests run` is used in my `.circleci/config.yml` file, but I have not configured my job to upload test results to CircleCI?
-
-**Answer:** The job will fail.
+**回答:** いいえ。本機能では、テスト失敗が 1 回以上発生した `classnames` または `file` を再実行します。
 
 ---
 
-**Question:** When can I click the option to "Re-run failed tests only?"
+**質問:** `.circleci/config.yml` ファイルで `circleci tests run` を設定していない場合、この機能を使うとどうなりますか？
 
-**Answer:** Currently, it will be present any time the "Re-run workflow from failed" option is present, and vice versa.
-
----
-
-**Question:** I don't see my test framework on this page, can I still use the functionality?
-
-**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests only functionality is test runner- and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
-
-From there, follow the xref:#quickstart[Quickstart] section to modify your test command to use `circleci tests run`.
-
-If you run into issues, comment on the https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post].
+**回答:** ワークフローの再実行時に、失敗したテストも含むすべてのテストが実行されます。 実質的に、"Rerun workflow from failed (失敗状態からワークフローを再実行)" と同じ効果です。
 
 ---
 
-**Question:** Can I see in the web UI whether a job was re-run using "Re-run failed tests only"?
+**質問:** `.circleci/config.yml` ファイルで `circleci tests run` を使用し、CircleCI へのテスト結果のアップロードはジョブに設定していない場合、この機能を使うとどうなりますか？
 
-**Answer:** Not at this time.
+**回答:** ジョブが失敗します。
 
 ---
 
-**Question:** What happens when a job is re-run and it is using parallelism and test splitting?
+**質問:** "Re-run failed tests only (失敗したテストのみを再実行)" オプションはいつ使用できますか？
 
-**Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key.  However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.  For example, if `parallelism` is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers/VMs. The remaining six containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
+**回答:** 現時点では、このオプションは "Re-run workflow from failed (失敗したワークフローを再実行)" オプションと同時に表示されます。
+
+---
+
+**質問:** このページに示されていないテストフレームワークでも、この機能を使用できますか？
+
+**回答:** はい。前述のxref:#prerequisites[前提条件]を満たしているジョブであれば、本機能は利用可能です。 この "Re-run failed tests only (失敗したテストのみを再実行)" 機能は、テストランナーおよびテストフレームワークに依存しません。 「xref:collect-test-data#[テストデータの収集]」の手順に従って、ジョブでテスト結果をアップロードしてください。 一部のデフォルト設定では `classname` と `file` が結果に含まれないため、ジョブの調整が必要になります。
+
+「xref:#quickstart[クイックスタート]」セクションを参考に、テストコマンドで `circleci tests run` を使うように編集してください。
+
+問題が発生した場合は、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[こちらの Discuss の投稿]にコメントをお寄せください。
+
+---
+
+**質問:** CircleCI Web アプリでは、"Re-run failed tests only (失敗したテストのみを再実行)" でジョブを再実行したかどうかを確認できますか？
+
+**回答:** 現時点ではできません。
+
+---
+
+**質問:** ジョブを再実行するときに、並列実行とテスト分割を使用するとどうなりますか？
+
+**回答:** ジョブの `parallelism` キーで指定された数のコンテナまたは仮想マシン (VM) がスピンアップします。  ただし、これらの並列コンテナ/VM 全体でテストが分割されるので、各並列コンテナ/VM のテスト実行ステップではテストの一部のみが実行されるか、テストの実行自体が行われません。  たとえば、`parallelism` を 8 に設定しても、テスト数によっては、テスト分割で 2 つの並列コンテナ/VM にしかテストが "割り当てられない" 可能性があります。 こうした場合、他 6 つの並列コンテナ/VM も起動されますが、テスト実行ステップでテストを実行することはありません。
+
+**Question:** この機能を設定しようとすると、maven の surefire テストが失敗することはありますか？
+
+**Answer:** 依存モジュールでテストがスキップされたのを見たときに失敗を報告する代わりに、テストフレームワークがスキップされたテストを無視するように、`-DfailIfNoTests=false` フラッグを追加する必要がある場合もあります。
+
+**Question:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
+
+**Answer:** はい、`circleci tests split --split-by=timings --timings-type=` と同様に、`test-selector` フラグを使用してタイミングタイプを指定することができます。  ファイル名、クラス名、テスト名のいずれかを渡すことができます。
+
+---

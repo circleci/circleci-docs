@@ -9,18 +9,20 @@ contentTags:
 = Docker での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーの Docker へのインストール手順
+:page-description: このドキュメントでは、CircleCI セルフホストランナーの Docker へのインストール手順をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
 
 :toc-title:
+
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 このページでは、CircleCI のマシンランナーを Docker Executor を使用してインストールする方法を説明します。 プライベート Kubernetes クラスタでのセルフホストランナーのセットアップをお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 
 [#new-recommended-method-container-runner]
 == 新しい推奨される方法 (コンテナランナー)
 
-<<container-runner#,コンテナランナー>> は、セルフホストランナーでコンテナ化されたジョブを実行する方法として推奨されるアプローチです。 コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
+上記リンクのコンテナランナーを使用できない場合は、マシンランナーを使って下記の方法で Docker をインストールできます。 コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
 
 [#machine-approach-with-docker]
 == Docker を使うマシンベースのアプローチ

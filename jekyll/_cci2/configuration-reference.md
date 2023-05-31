@@ -1478,7 +1478,18 @@ The `checkout` step will configure Git to skip automatic garbage collection. If 
 ##### **`setup_remote_docker`**
 {: #setupremotedocker }
 
-Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for details.
+Allows Docker commands to be run locally. See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for details.
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      # ... steps for building/testing app ...
+      - setup_remote_docker:
+          version: 20.10.14
+```
 
 Key | Required | Type | Description
 ----|-----------|------|------------
