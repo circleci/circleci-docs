@@ -101,11 +101,12 @@ Installing circleci-tests-plugin-cli plugin.
 circleci-tests-plugin-cli plugin Installed. Version: 1.0.5976-439c1fc
 DEBU[2023-05-18T22:09:08Z] Attempting to read from stdin. This will hang if no input is provided. 
 DEBU[2023-05-18T22:09:08Z] rerunning failed tests                       
+DEBU[2023-05-18T22:09:08Z] 2 test(s) failed out of 56 total test(s). Rerunning 1 test file(s)
 INFO[2023-05-18T22:09:08Z] starting execution                           
 DEBU[2023-05-18T22:09:08Z] received test names: ****
 ```
 
-If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.
+If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.  You'll also see output that shows the total number of failed tests from the original job run, the total number of 
 
 The job should only re-run tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
