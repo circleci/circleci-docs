@@ -87,7 +87,7 @@ Pass the list of test files to the `circleci tests run` command as standard inpu
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
   ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
   ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
-  ** *Optional*: `--split-by-timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
+  ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
   
 [#verify-the-configuration]
 ==== Verify the configuration
@@ -101,11 +101,12 @@ Installing circleci-tests-plugin-cli plugin.
 circleci-tests-plugin-cli plugin Installed. Version: 1.0.5976-439c1fc
 DEBU[2023-05-18T22:09:08Z] Attempting to read from stdin. This will hang if no input is provided. 
 DEBU[2023-05-18T22:09:08Z] rerunning failed tests                       
+DEBU[2023-05-18T22:09:08Z] 2 test(s) failed out of 56 total test(s). Rerunning 1 test file(s)
 INFO[2023-05-18T22:09:08Z] starting execution                           
 DEBU[2023-05-18T22:09:08Z] received test names: ****
 ```
 
-If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.
+If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.  You'll also see output that shows the total number of failed tests from the original job run, the total number of 
 
 The job should only re-run tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
@@ -237,7 +238,7 @@ Example:
 ```yaml
  - run:
     command: |
-      circleci tests glob "src/**/*js" | circleci tests run --command "xargs echo" --verbose --split-by=timings > files.txt #split-by=timings is optional
+      circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings > files.txt #split-by=timings is optional
 ```
 
 The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "re-run", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
@@ -304,9 +305,13 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key.  However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.  For example, if `parallelism` is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers/VMs. The remaining six containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 
+---
+
 **Question:** My maven surefire tests are failing when I try to set this feature up?
 
 **Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module. 
+
+---
 
 **Question:** Can I specify timing type for test splitting using `circleci tests run`?
 
@@ -318,7 +323,10 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Answer:** The most common case where this occurs is when the JUnit XML is not outputting a "file" attribute.  If you upload your test results XML to an artifact, you can inspect whether or not it has the "file" attribute.  
 
-
 ---
 
+**Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" re-run when I click "Rerun failed tests only"?
+
+**Answer:** No, only test files that have at least one test case reported as "Failed" will be re-run.  
+---
 
