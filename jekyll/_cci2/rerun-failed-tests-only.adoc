@@ -304,9 +304,13 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Answer:** The job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key.  However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.  For example, if `parallelism` is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first two parallel containers/VMs. The remaining six containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 
+---
+
 **Question:** My maven surefire tests are failing when I try to set this feature up?
 
 **Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module. 
+
+---
 
 **Question:** Can I specify timing type for test splitting using `circleci tests run`?
 
@@ -318,7 +322,10 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Answer:** The most common case where this occurs is when the JUnit XML is not outputting a "file" attribute.  If you upload your test results XML to an artifact, you can inspect whether or not it has the "file" attribute.  
 
-
 ---
 
+**Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" re-run when I click "Rerun failed tests only"?
+
+**Answer:** No, only test files that have at least one test case reported as "Failed" will be re-run.  
+---
 
