@@ -238,7 +238,7 @@ Example:
 ```yaml
  - run:
     command: |
-      circleci tests glob "src/**/*js" | circleci tests run --command "xargs echo" --verbose --split-by=timings > files.txt #split-by=timings is optional
+      circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings > files.txt #split-by=timings is optional
 ```
 
 The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "re-run", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
