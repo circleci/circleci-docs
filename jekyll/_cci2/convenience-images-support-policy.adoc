@@ -47,23 +47,23 @@ We do not provide new image releases for alpha, beta, preview or release candida
 [#tagging]
 == Tagging
 
-Each image is tagged with the specific `major.minor.patch` version of the language it contains. We also provide `major.minor` tags which always point to the latest patch release of the image.
+Each image is tagged with the specific `major.minor.patch` version of the language it contains. We also provide `major.minor` tags, which always point to the latest patch release of the image.
 
 In special cases, we also provide additional tags, such as `lts` or `current`, which track releases as per the tagging scheme of the parent project.
 
-We do not provide a `latest`, or `current`, tag for any convenience images, other than special cases as mentioned above. This is by design and is not something we have plans to implement in the future. We do this to ensure that jobs based on our images are more deterministic in nature, with minimal changes due to us pushing new tags that switch `current` to a new major version, for example. This helps lower the risk of breaking changes occurring when customers have not explicitly updated their configurations.
+We do not provide a `latest`, or `current`, tag for any convenience images, other than special cases as mentioned above. This is by design, and is not something we have plans to implement in the future. We do this to ensure that jobs based on our images are more deterministic in nature, with minimal changes due to us pushing new tags that switch `current` to a new major version, for example. This helps lower the risk of breaking changes occurring when customers have not explicitly updated their configurations.
 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact that this has on our images being used within the CircleCI execution environment. 
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact that this has on our images being used within CircleCI execution environments. 
 
-In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our https://discuss.circleci.com/[Discuss Forum].
+In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures on our link:https://discuss.circleci.com/[Discuss Forum].
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
 
-We welcome bug reports and PRs from our community via GitHub for each image. The GitHub repository for each image can be found via the https://circleci.com/developer/images[Developer Hub].
+We welcome bug reports and PRs from our community via GitHub for each image. The GitHub repository for each image can be found by visiting the link:https://circleci.com/developer/images[Developer Hub].
 
 As a general rule, minor, non-blocking bugs will be fixed in the next release of the image. For major/blocking changes, we will patch the existing live image, depending on how old the image is.
 
