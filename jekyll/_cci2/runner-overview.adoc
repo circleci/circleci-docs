@@ -93,6 +93,7 @@ To get started with CircleCI's self-hosted runners:
 ** xref:runner-installation-linux#[Linux]
 ** xref:runner-installation-mac#[macOS]
 ** xref:runner-installation-windows#[Windows]
+** xref:runner-installation-docker#[Docker]
 
 [#available-self-hosted-runner-platforms]
 == Available self-hosted runner platforms
