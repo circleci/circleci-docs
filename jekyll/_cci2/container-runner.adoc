@@ -16,7 +16,7 @@ This document is a comprehensive guide to operating and configuring jobs with th
 [#running-your-first-job]
 == Running your first job with container runner
 
-Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+Follow the instructions outlined on the xref:container-runner-installation#[Container runner installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
 
 [#sample-configuration-container-agent]
 == Container runner sample configuration
