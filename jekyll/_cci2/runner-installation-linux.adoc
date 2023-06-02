@@ -19,8 +19,6 @@ contentTags:
 
 This page describes how to install CircleCI's machine runner on Linux.
 
-// {% include snippets/runner-platform-prerequisites.adoc %}
-
 [#prerequisites]
 == Prerequisites
 
