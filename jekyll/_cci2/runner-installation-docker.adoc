@@ -28,10 +28,9 @@ The <<container-runner#,container runner>> is the recommended approach for runni
 
 If you cannot use the container runner linked above, you can use Docker and install machine runners with the instructions below.
 
-////
-
 [#runner-terms]
 === Runner terms
+
 {% include snippets/runner/terms.adoc %}
 
 [#machine-runner-prerequsites]
@@ -47,7 +46,7 @@ The host needs to have Docker installed. Once the `runner` container is started,
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
 [#create-namespace-and-resource-class]
-=== Create namespace and resource class 
+=== 1. Create namespace and resource class 
 
 [.tab.machine-runner.Web_app_installation]
 --
@@ -59,15 +58,8 @@ The number of containers running in parallel on the host is constrained by the h
 
 --
 
-[#download-the-launch-agent-script]
-=== Download launch-agent script and install binary
-
-{% include snippets/runner/launch-agent-download.adoc %}
-
-////
-
 [#create-a-dockerfile-that-extends-the-machine-runner-image]
-=== Create a Dockerfile that extends the machine runner image
+=== 2. Create a Dockerfile that extends the machine runner image
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
@@ -79,14 +71,14 @@ RUN sudo apt-get update; \
 ```
 
 [#build-the-docker-image]
-=== 4. Build the Docker image
+=== 3. Build the Docker image
 
 ```shell
 docker build --file ./Dockerfile.runner.extended .
 ```
 
 [#start-the-docker-container]
-=== 5. Start the Docker container
+=== 4. Start the Docker container
 
 NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
 
