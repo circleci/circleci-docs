@@ -710,6 +710,11 @@ A [custom image]({{ site.baseurl
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/using-docker) page.
 
+---
+
+##### Docker registry authentication
+{: #docker-auth }
+
 Some registries, Docker Hub, for example, may rate limit anonymous docker pulls. It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for details.
 
 Example:
@@ -749,7 +754,33 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
+---
+
+##### AWS authentication
+{: #aws-authentication}
+
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials.
+
+###### Use OIDC
+{: #oidc }
+
+Authenticate using OpenID Connect (OIDC) using the `oidc_role_arn` field, as follows:
+
+```yaml
+jobs:
+  job_name:
+    docker:
+      - image: <your-image-arn>
+        aws_auth:
+          oidc_role_arn: <your-iam-role-arn>
+```
+
+For steps to get set up with OIDC to pull images from AWS ECR, see the [Pull and image from AWS ECR with OIDC](/docs/pull-an-image-from-aws-ecr-with-oidc/) page.
+
+###### Use environment variables
+{: #env-vars}
+
+By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
 
 ```yaml
 jobs:
