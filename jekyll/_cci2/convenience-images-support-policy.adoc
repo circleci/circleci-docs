@@ -38,7 +38,7 @@ We encourage users who are building their own images for use on CircleCI to use 
 [#release-policy]
 == Release policy
 
-We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. Please note that this is not an SLA. We can not, and do not, provide an official SLA turnaround time for new convenience images.
+We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. Please note that this is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new convenience images.
 
 For our deployment focused images, we provide a new image once per month.
 
@@ -74,7 +74,7 @@ While we make every effort to respond to issues and PRs in a timely manner, we d
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-We generally do not remove images from Docker Hub once published, however we encourage customers to follow the projects for the languages they use and update the images in their jobs once the project declares a version as EOL.
+We generally do not remove images from Docker Hub once published, however we encourage customers to follow the projects for the languages they use and update the images in their jobs once the project declares a version as EOL (end-of-life).
 
 For versions that are EOL, we do not issue bug fixes or patches.
 
