@@ -328,5 +328,12 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 **Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" re-run when I click "Rerun failed tests only"?
 
 **Answer:** No, only test files that have at least one test case reported as "Failed" will be re-run.  
+
+---
+
+**Question:** What is the oldest job that can use "rerun failed tests only"
+
+**Answer:** Rerunning failed tests only is currently available only for workflows that are less than 15 days old.
+
 ---
 
