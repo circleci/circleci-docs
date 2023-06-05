@@ -58,6 +58,9 @@ _For a full specification of the_ `workflows` _key, see the [Workflows](/docs/co
 
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow.
 
+### Concurrent job execution
+{: concurrent-job-execution }
+
 The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows` key named `build_and_test`, and by nesting the `jobs` key with a list of job names. The jobs have no dependencies defined, so they will run concurrently.
 
 ```yaml
@@ -86,7 +89,7 @@ workflows:
       - build
       - test
 ```
-See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
+See the [Sample concurrent workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
 When using workflows, try to do the following:
 
@@ -95,8 +98,8 @@ When using workflows, try to do the following:
 
 Consider reading the [Optimization overview](/docs/optimizations/) for more tips related to improving your configuration.
 
-### Sequential job execution example
-{: #sequential-job-execution-example }
+### Sequential job execution
+{: #sequential-job-execution }
 
 The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram.
 
@@ -124,8 +127,8 @@ The dependencies are defined by setting the `requires` key as shown. The `deploy
 
 See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
-### Fan-out/fan-in workflow example
-{: #fan-outfan-in-workflow-example }
+### Fan-out/fan-in workflow
+{: #fan-outfan-in-workflow }
 
 The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs concurrently, and finally fans-in to run a common deploy job.
 
