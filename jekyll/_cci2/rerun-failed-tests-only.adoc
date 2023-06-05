@@ -248,7 +248,7 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 
 * When re-running only the failed tests, test splitting by timing may not be as efficient as expected the next time that job runs, as the test results being stored are only from the subset of failed tests that were run.
 * Orbs that run tests may not work with this new functionality at this time.
-* If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
+* If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the xref:#output-test-files-only[section above] to pipe the list of test files to be run to a txt file and then pass the list of test file names to your shell script.
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests only".
 * Jobs that upload code coverage reports link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[may see issues during a re-run].
 
