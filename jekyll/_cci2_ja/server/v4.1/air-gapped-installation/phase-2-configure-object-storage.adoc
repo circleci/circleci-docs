@@ -3,49 +3,48 @@
 contentTags:
   platform:
   - Server v4.1
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 2 - Configure object storage
+= フェーズ 2 - オブジェクトストレージの構成
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to configure object storage through MinIO to run CircleCI server in an air-gapped environment.
+:page-description: エアギャップ環境で CircleCI Server を実行できるように、MinIO でオブジェクトストレージを構成する方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 [#create-buckets-in-minio]
-== 1.  Create buckets in MinIO
+== 1.  MinIO でバケットを作成する
 
-CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
+CircleCI Server では、エアギャップ環境用のオブジェクトストレージとして link:https://min.io/[MinIO] をサポートしています。 エアギャップ環境では、クラウドベースのオブジェクトストレージ (GCP GCS や AWS S3 など) の代わりに MinIO を使用します。 エアギャップ環境にインストールした MinIO インスタンスで、以下に説明する手順を実行してください。
 
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
-=== a.  Create a circleci-data bucket.
+=== a.  circleci-data バケットを作成する
 
-Create a new bucket in MinIO named `circleci-data`.
+MinIO で `circleci-data` という名前のバケットを新しく作成します。
 
-NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
+NOTE: バケットの名前は自由ですが、指定した名前に応じて Helm の `values.yaml` ファイルの参照名を更新してください。
 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
 [#configure-circleci-data-bucket]
-=== b.  Configure the circleci-data bucket.
+=== b.  circleci-data バケットを構成する
 
-In the settings for the `circleci-data` bucket, change the access policy to `public`.
+`circleci-data` バケットの設定で、アクセスポリシーを `public` に変更します。
 
 image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
 [#copy-circleci-build-agent]
-== 2. Copy the CircleCI build agent
+== 2.  CircleCI ビルドエージェントをコピーする
 
-Copy the latest CircleCI build agent into MinIO within your air-gapped environment.
+最新の CircleCI ビルドエージェントをエアギャップ環境内の MinIO にコピーします。
 
 [#download-latest-release-txt]
-=== a.  Download the latest release.txt file
+=== a.  最新の release.txt ファイルをダウンロードする
 
-Download the latest link:https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
+CircleCI のパブリック S3 バケットから最新の link:https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt ファイル]をダウンロードします。
 
 [source, bash]
 ----
@@ -53,14 +52,14 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.tx
 ----
 
 [#copy-release-txt]
-=== b.  Copy the release.txt file to MinIO
+=== b.  MinIO に release.txt ファイルをコピーする
 
-Copy the `release.txt` file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
+`release.txt` ファイルをエアギャップ環境にコピーして、MinIO の `circleci-data` バケットのルートに配置します。
 
 [#retrieve-latest-release-bin]
-=== c.  Retrieve the latest release binary
+=== c.  最新リリースのバイナリを取得する
 
-Using the `release.txt` file, retrieve and download the latest `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
+`release.txt` ファイルを使用して、CircleCI のバイナリリリース用パブリックバケットから最新リリースの `circleci-agent` とチェックサムをダウンロードします。
 
 [source, bash]
 ----
@@ -74,16 +73,16 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RE
 ----
 
 [#create-release-dir]
-=== d. Create a release directory in the circleci-data bucket
+=== d.  circleci-data バケット内にリリース用ディレクトリを作成する
 
-Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In this example, a directory is created at the root of `circleci-data` in MinIO with the following name: `1.0.164633-f867f14f`
+`circleci-data` バケットのルートに新しいディレクトリを作成し、`release.txt` で指定されているバージョン番号に応じた名前を付けます。 今回の例では、MinIO の `circleci-data` のルートに `1.0.164633-f867f14f` という名前のディレクトリを作成します。
 
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
 [#upload-checksums-file]
-=== e. Upload the checksums.txt file to the newly created directory.
+=== e.  新しく作成したディレクトリに checksums.txt ファイルをアップロードする
 
-Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in MinIO nested under the newly created release directory (step d).
+手順 c でダウンロードした `checksums.txt` ファイルをエアギャップ環境にコピーし、手順 d で MinIO に新しく作成したリリース用ディレクトリの中に配置します。
 
 [source,shell]
 ----
@@ -95,9 +94,9 @@ Copy the downloaded `checksums.txt` file (step c) to your virtual environment, a
 image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
 
 [#create-new-subdirs]
-=== f. Create two new subdirectories in the release directory
+=== f.  リリース用ディレクトリ内に新規サブディレクトリを 2 つ作成する
 
-Within the release directory (step d), create two new nested subdirectories, first `linux`, and then within it, `amd64`.
+手順 d のリリース用ディレクトリ内に `linux` という名前のサブディレクトリを作成し、さらにその中に `amd64` という名前のサブディレクトリを作成します。
 
 [source,shell]
 ----
@@ -113,9 +112,9 @@ image::./minio/minio_create_linux_dir.png[Creating a linux dir]
 image::./minio/minio_create_amd_dir.png[Creating an amd dir]
 
 [#copy-build-agent-bin]
-=== g. Copy the downloaded circleci-agent file
+=== g.  ダウンロードした circleci-agent ファイルをコピーする
 
-Copy the downloaded `circleci-agent` file (step c) to your virtual environment, and place it in the amd64 directory you just created.
+手順 c でダウンロードした `circleci-agent` ファイルをエアギャップ環境にコピーし、手順 f で作成した amd64 ディレクトリ内に配置します。
 
 [source,shell]
 ----
@@ -132,4 +131,4 @@ image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 [#next-steps]
 == 次のステップ
 
-Once the steps on this page are complete, go to the xref:phase-3-install-circleci-server#[Phase 3 - Install CircleCI server] guide.
+本ページの手順を完了したら、「xref:phase-3-install-circleci-server#[フェーズ 3 - CircleCI Server のインストール]」に進んでください。
