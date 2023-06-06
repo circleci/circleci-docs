@@ -375,6 +375,20 @@ For further reading, see the link:https://circleci.com/blog/compliance-with-conf
 
 It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
 
+[#dynamic-config]
+== Writing policies for projects that use dynamic configuration
+
+Config policies are evaluated at every stage, including:
+
+* Against the setup config
+against continuation configs
+against normal configs
+IF you want a rule that is only for setup configs or only for non-setup configs, you need to encode that when you enable the rule:
+enable_hard["setup_rule"] { input.setup } # only applied to configs with `setup: true`
+enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that do not have `setup: true`
+enable_hard["some_rule"] # rule applied to all configs
+
+
 [#example-policy]
 == Example policy
 
