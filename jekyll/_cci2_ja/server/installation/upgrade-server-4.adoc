@@ -7,7 +7,7 @@ version:
 = CircleCI Server v4.x のアップグレード
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは CircleCI Server v4.x のアップグレードに必要な手順を説明します。
+:page-description: このドキュメントでは CircleCI Server v4.x のアップグレードに必要な手順をわかりやすく説明します。
 :icons: font
 :toc: macro
 

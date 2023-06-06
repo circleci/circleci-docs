@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - サーバー管理者
 ---
-= クラスタのセキュリティー強化
+= クラスタのハード化
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
@@ -16,22 +16,16 @@ contentTags:
 
 このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
 
-toc::[]
-
 [#network-topology]
 == ネットワークトポロジ
 
 CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティングインスタンスを実行します。
 
-これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
-
 リソースはできる限り非公開にすることがベストプラクティスです。 CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 そうでない場合は、少なくとも `circleci-proxy` ロード バランサー用にパブリックサブネットを 1 つ用意する必要があります。
 
 ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
 
-現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
-
-NOTE: NGINX リバースプロキシは、 link:https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
+NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
 
 CAUTION: Amazon Certificate Manager (ACM) をご使用の場合は、NGINX のサービスは `circleci-proxy` ではなく `circleci-proxy-acm` になります。 TLS 証明書の処理を他の方法から ACM に変更した場合、ロードバランサーが再作成され、お客様の <domain> とアプリの <domain> の関連付けられている DNS レコードを再ルーティングする必要があります。
 
@@ -138,9 +132,9 @@ CircleCI Server でサービスのルーティングトラフィックステー�
 
 クラスタ内でネットワーク ポリシーを使用するには、クラウド プロバイダーや環境設定にもよりますが、追加の手順を実行する必要があります。 以下の資料を参考にしてください。
 
-* link:https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes ネットワークポリシーの概要]
-* link:https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Google Cloud でのクラスタネットワークポリシーの作成]
-* link:https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Amazon EKS への Calico のインストール]
+* link:https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
+* link:https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
+* link:https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
 
 [#ingress-kubernetes]
 === 受信
@@ -171,7 +165,7 @@ CircleCI Server でサービスのルーティングトラフィックステー�
 |===
 
 [#nomad-clients-ingress-egress]
-== Nomad クライアント
+== Nomad Clients
 
 Nomad クライアント同士は、通信する必要はありません。 Nomad クライアントインスタンス間のトラフィックを完全にブロックできます。
 
@@ -226,7 +220,7 @@ Nomad クライアント同士は、通信する必要はありません。 Noma
 |===
 
 [#external-vms]
-== 外部ポート
+== 外部 VM
 
 Nomad クライアントと同じく、外部 VM 同士も通信する必要はありません。
 
@@ -292,7 +286,7 @@ vm_service:
 [#private-ips-only]
 === プライベート IP のみ
 
-`assignPublicIP` オプションを false に設定すると、https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
+`assignPublicIP` オプションを false に設定すると、link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
 VM セキュリティグループの受信ルールでは、インストール環境のセキュリティーを強化するために以下のルールを作成できます。
 
@@ -352,7 +346,7 @@ VM サービスがパブリック IP を使用するインストール環境の�
 
 |22
 |クラスタの NAT ゲートウェイの IPv4 範囲
-|`VM サービス` Pod から VM へのトラフィック
+| `vm-service` Pod から VM へのトラフィック
 
 |2376
 |クラスタの NAT ゲートウェイの IPv4 範囲
@@ -367,7 +361,7 @@ ifndef::pdf[]
 
 == 次のステップ
 
-* xref:migrate-from-server-3-to-server-4#[Server v3.x から Server v4.x への移行]
-* xref:../operator/operator-overview#[Server 4.1 オペレーターの概要]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server v3.x から Server v4.x への移行]
+* xref:../operator/operator-overview#[Server 4.1x オペレーターの概要]
 +
 endif::[]

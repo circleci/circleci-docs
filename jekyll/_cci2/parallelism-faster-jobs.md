@@ -15,6 +15,8 @@ Use parallelism and test splitting to:
 * Specify a number of [executors](/docs/executor-intro/) across which to split your tests.
 * Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
+If you are interested to read about concurrent job runs, see the [Concurrency overview](/docs/concurrency) page.
+
 ## Introduction
 {: #introduction }
 
