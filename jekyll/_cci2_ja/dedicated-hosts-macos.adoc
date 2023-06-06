@@ -83,4 +83,4 @@ workflows:
 [#dedicated-hosts-macos-faqs]
 == FAQ
 
-include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/dedicated-hosts-macos-faq-snip.adoc[]

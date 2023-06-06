@@ -122,6 +122,8 @@ en:
             link: databases
           - name: Migrate from deploy to run
             link: migrate-from-deploy-to-run
+          - name: Using shell scripts
+            link: using-shell-scripts
       - name: Reference
         children:
           - name: Project values and variables
@@ -188,6 +190,8 @@ en:
             link: using-gpu
       - name: How-to Guides
         children:
+          - name: Pull an image from AWS ECR with OIDC
+            link: pull-an-image-from-aws-ecr-with-oidc
           - name: Run a job in a container on your machine with Docker
             link: run-a-job-in-a-container
           - name: Installing and using docker-compose
@@ -204,13 +208,11 @@ en:
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
-          - name: Web app installation
-            link: runner-installation
       - name: Container runner
         children:
           - name: Container runner installation
             link: container-runner-installation
-          - name: Container runner reference guide
+          - name: Container runner reference
             link: container-runner
       - name: Machine runner
         children:
@@ -220,17 +222,15 @@ en:
             link: runner-installation-windows
           - name: macOS installation
             link: runner-installation-mac
-          - name: CLI installation
-            link: runner-installation-cli
-          - name: Upgrading machine runner on cloud
-            link: upgrading-circleci-machine-runner-on-cloud
-          - name: Upgrading machine runner on server
-            link: runner-upgrading-on-server
+          - name: Docker installation
+            link: runner-installation-docker
           - name: Machine runner configuration reference
             link: runner-config-reference
       - name: How-to Guides
         children:
-          - name: Upgrade CircleCI's self-hosted runner on server
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
+          - name: Upgrade machine runner on server
             link: runner-upgrading-on-server
       - name: Reference
         children:
@@ -1130,6 +1130,9 @@ ja:
           - name: Migrate from deploy to run
             link: ja/migrate-from-deploy-to-run
             i18n_name: deployからrunへの移行
+          - name: Using shell scripts
+            link: ja/using-shell-scripts
+            i18n_name: シェルスクリプトの使用
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1464,9 +1467,6 @@ ja:
           - name: Secure secrets handling
             link: ja/security-recommendations
             i18n_name: シークレットの安全な取り扱い
-          - name: Using shell scripts
-            link: ja/using-shell-scripts
-            i18n_name: シェルスクリプトの使用
       - name: Config policy management
         i18n_name: 設定ファイルのポリシー管理
         children:

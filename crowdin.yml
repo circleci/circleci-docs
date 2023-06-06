@@ -50,3 +50,28 @@ files:
   - source: /jekyll/_cci2/images/linux-vm/*.md
     translation: /jekyll/_cci2_%two_letters_code%/images/linux-vm/%original_file_name%
     update_option: update_as_unapproved
+    
+  - source: /jekyll/_cci2/server/v4.1/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/v4.1/%original_file_name%
+    update_option: update_as_unapproved
+    export_only_approved: true
+
+  - source: /jekyll/_cci2/server/v4.1/air-gapped-installation/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/v4.1/air-gapped-installation/%original_file_name%
+    update_option: update_as_unapproved
+    export_only_approved: true
+  
+  - source: /jekyll/_cci2/server/v4.1/installation/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/v4.1/installation/%original_file_name%
+    update_option: update_as_unapproved
+    export_only_approved: true
+    
+  - source: /jekyll/_cci2/server/v4.1/overview/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/v4.1/overview/%original_file_name%
+    update_option: update_as_unapproved
+    export_only_approved: true
+    
+  - source: /jekyll/_cci2/server/v4.1/operator/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/v4.1/operator/%original_file_name%
+    update_option: update_as_unapproved
+    export_only_approved: true
