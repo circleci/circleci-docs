@@ -86,6 +86,9 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
+
+| `oidc.circleci.com/ssh-rerun`
+| A boolean indicating if the CI job is started using the SSH rerun feature.
 |===
 
 
