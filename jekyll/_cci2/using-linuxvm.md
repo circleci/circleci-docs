@@ -39,7 +39,7 @@ You can view the list of available images [in the docs Configuration Reference](
 ## Available LinuxVM resource classes
 {: #available-linuxvm-resource-classes }
 
-{% include snippets/machine-resource-table.md %}
+{% include snippets/machine-resource-table.md %} #i need to update this to include 2xlarge+
 
 ## Pre-installed software
 {: #pre-installed-software }
