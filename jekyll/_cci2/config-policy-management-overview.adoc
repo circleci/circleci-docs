@@ -401,7 +401,7 @@ enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that
 enable_hard["some_rule"] # rule applied to all configs
 ----
 
-For more information about dynamic configuration, see the xref:dynamic-config#[Dynamic configuration overview]
+For more information about dynamic configuration, see the xref:dynamic-config#[Dynamic configuration overview].
 
 [#example-policy]
 == Example policy
