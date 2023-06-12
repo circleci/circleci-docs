@@ -22,7 +22,7 @@ contentTags:
 
 === a.  グローバル値を設定する
 
-NOTE: エアギャップ環境用の `values.yaml` ファイルのサンプルについては、「xref:example-values[`values.yaml` のサンプル]」をご覧ください。
+NOTE: エアギャップ環境用の `values.yaml` ファイルのサンプルについては、xref:example-values[「`values.yaml` のサンプル」]をご覧ください。
 
 `values.yaml` ファイルの `global.container` セクションを以下のように変更します。
 
