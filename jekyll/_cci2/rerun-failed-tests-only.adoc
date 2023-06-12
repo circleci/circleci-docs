@@ -89,6 +89,8 @@ Pass the list of test files to the `circleci tests run` command as standard inpu
   ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
   ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
   
+NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--test-selector=`.
+  
 [#verify-the-configuration]
 ==== Verify the configuration
 
