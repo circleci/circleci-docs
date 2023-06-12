@@ -197,18 +197,16 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
+      npx jest --listTests | circleci tests run --command=“JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
-      JEST_JUNIT_OUTPUT_DIR: ./reports/
-      JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
-     
+      JEST_JUNIT_OUTPUT_DIR: ./reports/     
   - store_test_results:
       path: ./reports/
 ```
 
 . Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 +
-`JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute= "true"`.
+`JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute="true"`.
 
 [#configure-a-job-running-playwright-tests]
 === Configure a job running Playwright tests
