@@ -52,9 +52,6 @@ The following example shows how you can add a Firebase deploy job to your projec
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:

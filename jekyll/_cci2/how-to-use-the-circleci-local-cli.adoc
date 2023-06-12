@@ -131,16 +131,13 @@ Running the following command will output a YAML file like the example below (wh
 circleci config process .circleci/config.yml
 ```
 
-```yml
+```yaml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
   node/test:
     docker:
     - image: cimg/node:13.11.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:

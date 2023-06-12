@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Using the macOS execution environment"
 description: "Learn how to configure a your jobs to run in the macOS execution environment."
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -65,7 +65,7 @@ CircleCI will announce the availability of new macOS containers, including Xcode
 
 CircleCI aims to make beta Xcode versions available on the macOS executor as soon as possible to allow developers to test their apps ahead of the next stable Xcode release.
 
-Unlike CircleCI's stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. 
+Unlike CircleCI's stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated.
 
 If you are requesting an image using an Xcode version that is currently in beta, you should expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling, which are beyond CircleCI's control.
 
@@ -247,6 +247,8 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 
 It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 jobs:
@@ -277,9 +279,6 @@ jobs:
   deploy-snapshot:
     docker:
       - image: cimg/deploy:2022.08
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "Do the things"

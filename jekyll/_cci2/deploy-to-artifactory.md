@@ -74,15 +74,14 @@ If you would like to upload WAR files use the following example:
 
 The full `.circleci/config.yml` file would look something like the following:
 
+{% include snippets/docker-auth.md %}
+
 ```yml
 version: 2.1
 jobs:
   upload-artifact:
     docker:
       - image: cimg/openjdk:19.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout
