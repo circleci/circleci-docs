@@ -10,6 +10,7 @@ macos.x86.metal.gen1 | 12 @ 3.2 GHz | 32GB
 
  The `medium` and `large` resource classes are being deprecated on October 2, 2023. Xcode v14.2 is the latest version that will be supported by these macOS resources. See our [announcement](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891) for more details.
 {: class="alert alert-warning"}
+
 The `macos.x86.metal.gen1` resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/dedicated-hosts-macos) page to learn more about this resource class.
 <br />
 <br />
