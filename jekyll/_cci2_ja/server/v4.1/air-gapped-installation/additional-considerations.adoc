@@ -54,7 +54,7 @@ configs:
 [#service-type-load-balancers-k3s]
 == K3s の LoadBalancer タイプの Service
 
-CircleCI Server では、複数ポートのトラフィックをリッスンするために、Kubernetes の LoadBalancer タイプの Service リソースを使用します。 In order to function, the cluster needs to.
+CircleCI Server では、複数ポートのトラフィックをリッスンするために、Kubernetes の LoadBalancer タイプの Service リソースを使用します。  
 
 K3s 環境を使用する場合は、K3s ノードで link:https://metallb.universe.tf/installation/[MetalLB] を利用し、CircleCI Server に対する受信トラフィックを許可する仮想ロードバランサーを作成します。
 
