@@ -134,8 +134,8 @@ NOTE: 以下のビデオで使われているコマンドを実際に使用す�
 * **link:https://knapsackpro.com[Knapsack Pro]:** 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI のビルド時間のサンプルグラフ] もご覧ください。
 * **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]:** `phpunit.xml` ファイルに対してクエリを行い、テストファイル名の一覧を取得して出力するヘルパー CLI ツールです。 テストを分割して CI ツールのタイミングに基づいて並列に実行する場合に、このツールを使用すると便利です。
 * **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]:** Golang パッケージをグロブするには、組み込まれている Go コマンド `go list ./...` を使用します。 これにより、パッケージ テストを複数のコンテナに分割できます。
-+
-[souce,shell]
+
+[source,shell]
 ----
 go test -v $(go list ./... | circleci tests split)
 ----
