@@ -3,8 +3,6 @@
 contentTags:
   platform:
   - クラウド
-  - Server v4.x
-  - Server v3.x
 ---
 = コンテナランナーのインストール (Kubernetes)
 :page-layout: classic-docs
