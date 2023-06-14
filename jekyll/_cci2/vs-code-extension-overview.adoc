@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -11,7 +11,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-The CircleCI Visual Studio Code extension enables you to manage your CircleCI pipelines directly from VS Code. 
+The CircleCI Visual Studio Code extension enables you to manage your CircleCI pipelines directly from VS Code.
 
 [#introduction]
 == Introduction
@@ -24,7 +24,7 @@ The VS Code extension includes:
 [#install-the-vs-code-extension]
 == Install the VS Code extension
 
-For installation and setup instructions, visit the VS Code link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[Marketplace page], or search for the official CircleCI extension on the Extensions tab in the VS Code. 
+For installation and setup instructions, visit the VS Code link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[Marketplace page], or search for the official CircleCI extension on the Extensions tab in the VS Code.
 
 [#pipelines-panel]
 == Pipelines panel
@@ -59,7 +59,7 @@ xref:jobs-steps#[Jobs] are nested under each workflow, and can contain tests and
 - Re-run the job with SSH (refer to the xref:#re-run-with-ssh[Re-run with SSH] section below for more information)
 
 - View job details
-
++
 image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
 
 Expanding a job also lets you:
