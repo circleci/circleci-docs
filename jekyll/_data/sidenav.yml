@@ -470,6 +470,8 @@ en:
         children:
           - name: VS Code extension overview
             link: vs-code-extension-overview
+          - name: Get started with the VS Code extension
+            link: get-started-with-the-vs-code-extension
       - name: Config tools
         children:
           - name: CircleCI config SDK
