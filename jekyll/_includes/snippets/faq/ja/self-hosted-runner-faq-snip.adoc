@@ -259,31 +259,7 @@ $ helm upgrade container-agent
 
 IAM ロールは、link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS ドキュメント] に従って、コンテナランナーで使用するサービスアカウントに関連付けることができます。 ジョブの設定ファイルのイメージで AWS 認証情報が指定されている場合、コンテナランナーのサービスアカウントに付与されている IAM ロールの代わりに AWS 認証情報が使用されます。 コンテナランナーのサービスアカウントの詳細については、xref:container-runner#[コンテナランナー] を参照してください。
 
-[#sample-configuration-container-agent]
 ==== コンテナランナーを使った設定ファイルのフルサンプルはありますか？
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    resource_class: <namespace>/<resource-class>
-    steps:
-      - checkout
-      - ...
-
-workflows:
-  build-workflow:
-    jobs:
-      - build
-```
-
-==== CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合はどうすればよいですか？
 
 CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合は、Docker がインストールされた xref:runner-installation-docker#[マシンランナー] を使用できます。
 
