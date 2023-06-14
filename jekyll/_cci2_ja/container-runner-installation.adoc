@@ -80,12 +80,12 @@ helm install container-agent container-agent/container-agent -n circleci -f valu
 [#container-runner-configuration-example]
 == コンテナランナーの設定例
 
-クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。 The fields you must set for a specific job to run using your container runners are:
+クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。 コンテナランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CircleCI Docker image):
+以下は、ジョブ設定のシンプルなコード例です (`cimg/base:2021.11` は、よく使用される CircleCI の Docker イメージです)。
 
 ```yaml
 version: 2.1
