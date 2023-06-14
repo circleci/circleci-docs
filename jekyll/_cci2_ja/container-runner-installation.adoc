@@ -21,7 +21,7 @@ CircleCI のコンテナランナーをインストールする方法につい�
 [#prerequisites]
 == 前提条件
 
-{% include snippets/ja/runner/container-runner-prereq.adoc %}
+{% include snippets/runner/container-runner-prereq.adoc %}
 
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
