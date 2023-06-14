@@ -49,6 +49,8 @@ contentTags:
 
 Free プランまたは Performance プランの設定を行うには、link:https://app.circleci.com/[CircleCI Web アプリケーション]から、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は link:https://circleci.com/ja/talk-to-us/[お問い合わせください]。
 
+For details on cancelling a Performance plan, refer to the xref:faq#cancel-performance-plan[Cancel Performance plan FAQ].
+
 [#managing-credit-usage]
 == クレジット使用量の管理
 
