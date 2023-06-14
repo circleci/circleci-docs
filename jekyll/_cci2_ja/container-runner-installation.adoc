@@ -14,49 +14,49 @@ contentTags:
 :toc-title:
 :container:
 
-{% include snippets/ja/runner-platform-prerequisites.adoc %}
+CircleCI のコンテナランナーをインストールする方法についてこのドキュメントでわかりやすく説明します。
 
 // {% include snippets/runner-platform-prerequisites.adoc %}
 
 [#prerequisites]
-== コンテナランナーの設定例
+== 前提条件
 
-クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。
+{% include snippets/ja/runner/container-runner-prereq.adoc %}
 
 [#self-hosted-runner-terms-agreement]
-== トラブルシューティング
+== セルフホストランナーの利用条件
 
-セルフホストランナーのトラブルシューティングガイドの <<troubleshoot-self-hosted-runner#troubleshoot-container-runner,コンテナランナーのトラブルシューティングのセクション>> を参照してください。
+{% include snippets/ja/runner-terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 関連リソース Create namespace and resource class
+== 1. ネームスペースとリソースクラスの作成
 
 [.tab.container-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
 --
 
 [.tab.container-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+{% include snippets/ja/runner/install-with-cli-steps.adoc %}
 --
 
 [#container-runner-installation]
-== 2. Container runner installation
+== 2. コンテナランナー インストール
 
-. Add the container runner Helm repo by running the following command:
+. 以下のコマンドを実行して、コンテナランナー Helm のレポジトリを追加します：
 +
 [source,shell]
 ----
 helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm
 ----
-. Next, run the following:
+. 次に以下を実行します：
 +
 [source,shell]
 ----
 helm repo update
 ----
-. Then, run the following command to create the `circleci` Kubernetes namespace:
+. 次に、以下のコマンドを実行し、`circleci` Kubernetes namespaceを作成します：
 +
 [source,shell]
 ----
@@ -70,7 +70,7 @@ agent:
     namespace/my-rc:
       token: <resource_class_token>
 ```
-. Finally, run the following command:
+. 最後に、以下のコマンドを実行します：
 +
 [source,shell]
 ----
