@@ -21,7 +21,7 @@ CircleCI OpenID Connect ID tokens are available in the following environment var
 * `$CIRCLE_OIDC_TOKEN`
 * `$CIRCLE_OIDC_TOKEN_V2` - Includes a different format for the `sub` claim, See <<format-of-the-openid-connect-id-token>> for full details.
 
-CAUTION: **What about forks?** OIDC tokens will **only** be generated for **forked** builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings > Advanced**.
+CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**.
 
 [#setting-up-your-cloud-service]
 == Setting up your cloud service
