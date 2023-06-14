@@ -72,7 +72,7 @@ NOTE: 現在のジョブでxref:test-splitting-tutorial#[インテリジェン�
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo $TEST_FILES | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
+      echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
  - store_test_results:
     path: test-results
@@ -89,21 +89,26 @@ CircleCI の xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glo
 ** `--verbose` は `circleci tests run` 用のオプションパラメーターであり、詳細なデバッグメッセージを出力します。
 ** `--split-by-timings` は、`circleci tests run` でタイミングに基づくインテリジェントテスト分割を利用するためのパラメーターです。 `circleci tests run` を使う場合、このパラメーターは必須ではありません。 テストジョブで CircleCI のテスト分割機能を使わないのであれば、省略してください。
 
+NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--test-selector=`.
+
 [#verify-the-configuration]
 ==== 設定の検証
 
-コンフィグファイルの更新が完了したら、次回にジョブのテストが失敗した場合に [Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックしてください。
+After updating your configuration, run the job that runs tests again and make sure that the same number of tests are being executed as before the config.yml change.
 
-`--verbose` 設定を有効にすると、次回の CircleCI でのジョブ実行時に以下のような出力が表示されるようになります。
+Then, the next time you encounter a test failure on that job, click the "Re-run failed tests only" button.  If the `--verbose` setting is enabled, you should see output similar to the following the next time you click "Rerun failed tests only" with this job on CircleCI:
 
 ```sh
-circleci-tests-plugin-cli plugin Installed. Version: 1.0.5909-ca27755
-DEBU[2023-05-14T17:53:44Z] Attempting to read from stdin. This will hang if no input is provided.
-DEBU[2023-05-14T17:53:44Z] rerunning failed tests
-INFO[2023-05-14T17:53:44Z] starting execution
+Installing circleci-tests-plugin-cli plugin.
+circleci-tests-plugin-cli plugin Installed. Version: 1.0.5976-439c1fc
+DEBU[2023-05-18T22:09:08Z] Attempting to read from stdin. This will hang if no input is provided.
+DEBU[2023-05-18T22:09:08Z] rerunning failed tests
+DEBU[2023-05-18T22:09:08Z] 2 test(s) failed out of 56 total test(s). Rerunning 1 test file(s)
+INFO[2023-05-18T22:09:08Z] starting execution
+DEBU[2023-05-18T22:09:08Z] received test names: ****
 ```
 
-[Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックした場合、テスト失敗が 1 回以上発生した `file` の `classname` に含まれているテストのみが再実行されます。
+If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.  You'll also see output that shows the total number of failed tests from the original job run, the total number of
 
 [Re-run failed tests only (失敗したテストのみを再実行)] ボタンをクリックした場合、テスト失敗が 1 回以上発生した `file` の `classname` に含まれているテストのみが再実行されます。 本記事の説明と異なる挙動が見られた場合には、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[こちらの Discuss の投稿 (英語)] にてお問い合わせください。
 
@@ -163,7 +168,7 @@ gem 'rspec_junit_formatter'
           cd ./cypress
           npm ci
           npm run start &
-          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings" #--split-by=timings is optional, only use if you are using CircleCI's test splitting
+          circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
      - store_test_results
         path: test_results
@@ -188,11 +193,9 @@ gem 'rspec_junit_formatter'
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
+      npx jest --listTests | circleci tests run --command=“JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
-      JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
-
   - store_test_results:
       path: ./reports/
 ```
@@ -211,9 +214,26 @@ gem 'rspec_junit_formatter'
       mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
       pnpm run serve &
       TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
-      echo $TESTFILES | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
+      echo "$TESTFILES" | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
 ```
 . `glob` コマンドは、必要に応じて調整してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。** テスト分割を使用しない場合は、`--split-by=timings` を省略できます。 注：link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwrightの既にビルドインされている flag]（`PLAYWRIGHT_JUNIT_OUTPUT_NAME`）を使用して、JUnit XML 出力ディレクトリを指定することも可能です。
++
+NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with this feature.
+
+[#output-test-files-only]
+=== Output test files only
+
+If your testing set-up on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to receive the file names, output the file names, and save the file names to a temporary location.  You can then subsequently invoke your test runner using the outputted file names.
+
+コード例
+
+```yaml
+ - run:
+    command: |
+      circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings > files.txt #split-by=timings is optional
+```
+
+The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "re-run", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
 
 [#known-limitations]
 == 既知の制限
@@ -277,12 +297,27 @@ gem 'rspec_junit_formatter'
 
 **回答:** ジョブの `parallelism` キーで指定された数のコンテナまたは仮想マシン (VM) がスピンアップします。  ただし、これらの並列コンテナ/VM 全体でテストが分割されるので、各並列コンテナ/VM のテスト実行ステップではテストの一部のみが実行されるか、テストの実行自体が行われません。  たとえば、`parallelism` を 8 に設定しても、テスト数によっては、テスト分割で 2 つの並列コンテナ/VM にしかテストが "割り当てられない" 可能性があります。 こうした場合、他 6 つの並列コンテナ/VM も起動されますが、テスト実行ステップでテストを実行することはありません。
 
-**Question:** この機能を設定しようとすると、maven の surefire テストが失敗することはありますか？
+---
 
 **Answer:** 依存モジュールでテストがスキップされたのを見たときに失敗を報告する代わりに、テストフレームワークがスキップされたテストを無視するように、`-DfailIfNoTests=false` フラッグを追加する必要がある場合もあります。
 
 **Question:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
 
-**Answer:** はい、`circleci tests split --split-by=timings --timings-type=` と同様に、`test-selector` フラグを使用してタイミングタイプを指定することができます。  ファイル名、クラス名、テスト名のいずれかを渡すことができます。
+---
 
+**Question:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
+
+**Answer:** はい、`circleci tests split --split-by=timings --timings-type=` と同様に、`test-selector` フラグを使用してタイミングタイプを指定することができます。  You can pass `file`, `classname`, or `name` (`name` splits by test name).
+
+---
+
+**Question:** Why does the re-run appear to be running all tests instead of only failed tests?
+
+**Answer:** The most common case where this occurs is when the JUnit XML is not outputting a "file" attribute.  If you upload your test results XML to an artifact, you can inspect whether or not it has the "file" attribute.
+
+---
+
+**Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" re-run when I click "Rerun failed tests only"?
+
+**Answer:** No, only test files that have at least one test case reported as "Failed" will be re-run.
 ---
