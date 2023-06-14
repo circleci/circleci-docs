@@ -17,18 +17,12 @@ CircleCI では、xref:contexts#[コンテキスト]を使用するジョブの�
 [#openid-connect-id-token-availability]
 == OpenID Connect ID トークンの使用方法
 
-1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` および `$CIRCLE_OIDC_TOKEN_V2` で OpenID Connect ID トークンを使用することができます。 `$CIRCLE_OIDC_TOKEN_V2` トークンの `sub` クレームの形式は、以下の表に示すとおりこれまでと異なります。
+1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` および `$CIRCLE_OIDC_TOKEN_V2` で OpenID Connect ID トークンを使用することができます。
 
-`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,workflows>> セクションに追加して、<<contexts#creating-and-using-a-context,ジョブにコンテキスト>>を追加します。
+* `$CIRCLE_OIDC_TOKEN`
+* `$CIRCLE_OIDC_TOKEN_V2`
 
-```yaml
-workflows:
-  my-workflow:
-    jobs:
-      - run-tests:
-          context:
-            - my-context
-```
+`$CIRCLE_OIDC_TOKEN_V2` トークンの `sub` クレームの形式は、以下の表に示すとおりこれまでと異なります。
 
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
@@ -92,6 +86,9 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 
 |`oidc.circleci.com/context-ids`
 |ジョブで使用されるコンテキストを表す UUID を要素として持つ文字列の配列です。 現在サポートされているコンテキストは一つのみです。
+
+|`oidc.circleci.com/ssh-rerun`
+|A boolean indicating if the CI job is started using the SSH rerun feature.
 |===
 
 [#authenticate-jobs-with-cloud-providers]
@@ -106,41 +103,73 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 * CircleCI の OIDC トークンを信頼するよう AWS アカウントのワンタイム設定を行う方法
 * AWS との連携に OIDC トークンを使用するジョブを実行する方法
 
-[#setting-up-aws]
-==== AWS の設定
+Also see the xref:pull-an-image-from-aws-ecr-with-oidc#[Pull an image from AWS ECR with OIDC] how-to guide, which follows on from this setup section.
 
-AWS アカウントが CircleCI の OpenID Connect トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダーと AWS の IAM ロール (ワンタイム設定) を作成します。
-
-AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」を参照し、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、https://app.circleci.com/[CircleCI Web アプリ]で **[Organization Settings (組織設定)] > [Overview (概要)]** に移動します。 次のステップで使用するために組織 ID をコピーします。
-
-**Provider URL** を求められたら、`\https://oidc.circleci.com/org/<organization_id>` と入力します。`organization_id` には、CircleCI の組織 ID を入力します。 **[Audience]** にも同じ CircleCI 組織 ID を入力します。
-
-次に、IAM ロールを作成します。 AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OIDC 用のロールの作成]」を開きます。
-
-信頼済みエンティティには **[Web Identity]** を選択し、先ほど作成した ID プロバイダーを選択します。 **[Audience]** には、唯一のオプションを選択します。 次に **[NEXT]** をクリックします。**[Add Permissions]** ページに移動します。 ここでは、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス]に従い、ジョブに必要なアクセス許可だけを選択するようにしてください。
-
-**注:** 独自のポリシーを作成すると便利な場合があります。
-
-[#adding-aws-to-the-circleci-configuration-file]
+[#set-up-aws]
 ==== CircleCI コンフィグファイルへの AWS の追加
 
 IAM ロールのセットアップが完了したので、OIDC により AWS との認証を行う CircleCI ジョブを作成しましょう。 具体的には、CircleCI の link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI Orb] を使用して、一時キーの生成および OIDC を利用するプロファイルの設定を行います。 Orb とは、繰り返し利用する構成内容を 1 行のコードにまとめて再利用可能にした、YAML コンフィグファイルのパッケージです。 今回使用する AWS CLI Orb では、コンフィグファイルに 1 コマンドを記述するだけで、一時セッショントークン、AWS アクセスキー ID、AWS シークレットアクセスキーを生成できます。
 
-まず、ワークフローの CircleCI ジョブのうち、OIDC を使用するものを選択します。 OIDC を使用するジョブには、有効なコンテキストを用意してください。 OpenID Connect トークンを使用できるのは、少なくとも 1 つのコンテキストを使用するジョブだけだからです。 この場合のコンテキストは、環境変数を設定しなくてもかまいません。
+. AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」を参照し、指示に従います。 There are multiple setup options covered on this page, including using the management console, or CLI. You will need to provide the following:
+** **Provider URL**: Enter `\https://oidc.circleci.com/org/<your-organization-id>`, where `your-organization-id` is the ID of your CircleCI organization.
+** **Audience**: Enter your organization ID
++
+{% include snippets/find-organization-id.adoc %}
+. Once your have created your identity provider, a banner will appear at the top of the ADW console with the options to **Assign role**. Click this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
+** The **Identity Provider** that you just created.
+** For **Audience**, choose the only option, which is your organization ID that you entered earlier.
+** On the **Add Permissions** page you can specify what your CircleCI jobs _can_ and _cannot_ do. Choose only permissions that your job will need. This is an https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice]. You can also write your own policies to lock down permissions to exactly what you need for a specific use case.
 
-`.circleci/config` で、`aws-cli` Orb をインポートします。 次に、ジョブ内でいずれかの AWS サービスを利用する前に `aws-cli/setup` コマンドを実行します。 `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role-arn` と `aws-region` を指定する必要があります。
+[#adding-aws-to-the-circleci-configuration-file]
+==== 高度な設定
 
+CircleCI の <<format-of-the-openid-connect-id-token,OIDC token>> のクレーム形式を使って、AWS で CircleCI ジョブができることを制限することができます。 This is accomplished using CircleCI’s link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC.
+
+TIP: Orb とは、繰り返し利用する構成内容を 1 行のコードにまとめて再利用可能にした、YAML コンフィグファイルのパッケージです。 今回使用する AWS CLI Orb では、コンフィグファイルに 1 コマンドを記述するだけで、一時セッショントークン、AWS アクセスキー ID、AWS シークレットアクセスキーを生成できます。
+
+. In your `.circleci/config`, import the `aws-cli` orb.
++
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@3.1.5
+----
+. Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role-arn` と `aws-region` を指定する必要があります。
++
+[source,yaml]
+----
+jobs:
+  aws-example:
+   environment:
+      AWS_REGION: us-west-1
+    docker:
+      - image: cimg/aws:2022.06
+    steps:
+      - checkout
+      # run the aws-cli/setup command from the orb
+      - aws-cli/setup:
+          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
+          aws-region: AWS_REGION
+          # optional parameters
+          profile-name: "OIDC-PROFILE"
+          role-session-name: "example-session"
+          session-duration: "1800"
+----
++
 また、任意で、`profile-name`、`role-session-name`、`session-duration` を指定します。 `profile-name` を指定すると、指定したプロファイルに応じて一時キーとトークンが設定されます。 指定する `profile-name` は、他の AWS コマンドと揃える必要があります。 `profile-name` を指定しない場合、キーとトークンはデフォルトプロファイルにあわせてされます。
-
++
 さらに、`role-session-name` または `session-duration` を指定しない場合、それぞれデフォルト値の `${CIRCLE_JOB}` (ジョブ名) と 3600 秒に設定されます。
 
 以下に示すコンフィグファイルのサンプルでは、OIDC を使用するプロファイルを構成してからそのプロファイルで AWS ECR にログインするジョブを設定しています。 `role-arn` に適切な権限を設定していれば、このプロファイルを使用して S3 や EKS、ECS などの他の AWS コマンドも実行できます。
 
 ```yaml
-version: '2.1'
+version: 2.1
+
 orbs:
-  # import CircleCI's aws-cli orb
-  aws-cli: circleci/aws-cli@3.1
+  aws-cli: circleci/aws-cli@3.1.5
+
 jobs:
   aws-example:
    environment:
@@ -166,7 +195,6 @@ workflows:
   OIDC-with-AWS:
     jobs:
       - aws-example:
-          # must use a valid CircleCI context
           context: aws
 ```
 
