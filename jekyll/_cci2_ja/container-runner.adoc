@@ -12,15 +12,15 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This document is a comprehensive guide to operating and configuring jobs with the CircleCI container runner.
+このページでは、CircleCI コンテナランナーを用いたジョブの運用・設定に関する総合ガイドです。
 
 [#running-your-first-job]
 == コンテナランナーで最初のジョブを実行する
 
-<<runner-installation#,self-hosted runner installation>> のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
+xref:container-runner-installation#[コンテナランナーのインストール] のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
 
 [#sample-configuration-container-agent]
-== リソースクラスの設定とカスタマイズされたタスク Pod の設定
+== コンテナランナーのサンプル設定
 
 ```yaml
 version: 2.1
@@ -41,18 +41,18 @@ workflows:
 ```
 
 [#resource-class-configuration-custom-pod]
-== カスタムトークンのシークレット
+== リソースクラスの設定とカスタマイズされたタスク Pod の設定
 
-上記の設定ファイルを使うと、リソースクラストークンを含む Kubernetes シークレットがプロビジョニングされます。 状況によっては、ご自身のシークレットをプロビジョニングしたい場合や、単に Helm でトークンを指定したくない場合もあります。
+コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトが提供します。
 
-シークレットには各リソースクラス用のフィールドが含まれ、リソースクラス名をキーとしてトークンを値として使用する必要があります。
+各リソースクラスは、次のパラメーターをサポートしています。
 
 - `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
 - CircleCI ジョブの実行に使用するポッド用のカスタマイズされた Kubernetes Pod 設定
 
-対応するカスタムシークレットにはフィールドが 2 つあります。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスク Pod 内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
+この Pod の設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes Pod] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスク Pod 内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
 
-以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナランナーによって上書きされるフィールドです。
+以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
 
 - `spec.containers[0].name`
 - `spec.containers[0].container.image`
@@ -63,7 +63,7 @@ workflows:
 - `metadata.name`
 - `metadata.namespace`
 
-Pod の設定がこれ以上ない場合でも、上記の設定ファイル例の `circleci-runner/resourceClass2` が示すように、`resourceClasses` にリソースクラスを空のマップとして入力する必要があります。
+以下は、2 つのリソースクラスを使用した設定ファイルのフルサンプルです。
 
 ```yaml
 agent:
@@ -97,7 +97,7 @@ agent:
 ```
 
 [#custom-secret]
-== ガベージコレクション
+== カスタムトークンのシークレット
 
 各コンテナランナーは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いた Pod やシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。
 
