@@ -2,7 +2,9 @@
 layout: classic-docs
 contentTags:
   platform:
-  - Cloud
+    - Cloud
+    - Server v4.x
+    - Server v3.x
 ---
 = Dynamic Configuration
 :description: Docs page on using Setup Workflows for Dynamic Configuration
