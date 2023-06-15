@@ -82,7 +82,7 @@ CircleCI では、開発者の皆様が Xcode の次の安定版がリリース�
 [#apple-silicon-support]
 === Apple シリコンのサポート
 
-Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:runner-overview#available-self-hosted-runner-platforms[CircleCI runner].
+Apple Silicon (シリコン）アプリケーションのネイティブな実行やテストは、Silicon ベースの Ma cや xref:runner-overview#available-self-hosted-runner-platforms[CircleCI runner]を使用して行うことができます。
 
 Apple は、今回のリリースで Intel (`x86_64`) と Apple シリコン (`arm64`) の両方のツールチェーンを提供しているため、Xcode `12.0.0` 以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコンバイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
@@ -213,18 +213,18 @@ CocoaPods を最新の安定版に更新するには、以下のコマンドで 
 sudo gem install cocoapods
 ----
 
-A further recommendation is to check your link:http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. そうすることで、決定論的で再現可能なビルドを実現できます。
+さらに、link:https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods ディレクトリをソース管理に]チェックインすることをお勧めします。 そうすることで、決定論的で再現可能なビルドを実現できます。
 
 WARNING: CocoaPods 1.8 のリリース以降、CocoaPods Spec リポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することをお勧めします。
 
 [#optimizing-homebrew]
 === Homebrew の最適化
 
-デフォルトでは、Homebrew はすべての操作の開始時に更新の有無を確認します。 As Homebrew has a fairly frequent release cycle, this means that any step which calls `brew` can take some extra time to complete.
+デフォルトでは、Homebrew はすべての操作の開始時に更新の有無を確認します。 Homebrew のリリースサイクルはかなり頻繁なため、`brew` を呼び出すステップはどれも完了するまでに時間がかかります。
 
 ビルドのスピード、または Homebrew の新たな更新によるバグが問題であれば、自動更新を無効にすることができます。 それにより、1 つのジョブにつき最大で平均 2-5 分短縮することができます。
 
-To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
+自動更新を無効にするには、ジョブ内で `HOMEBREW_NO_AUTO_UPDATE` 環境変数を定義します。
 
 [source,yaml]
 ----
@@ -258,12 +258,12 @@ CircleCI では、macOS Executor を使って iOS のビルドやテストに関
 [#react-native-projects]
 === React Native プロジェクト
 
-React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, please see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application]
+React Native プロジェクトは、CircleCI 上で `macos` および `docker` Executor タイプを使用してビルドできます。 React Native プロジェクトの設定例は、link:https://github.com/CircleCI-Public/circleci-demo-react-native[React Native のデモアプリケーション]を参照してください。
 
 [#using-multiple-executor-types-macos-docker]
 == 複数の Executor タイプ (macOS + Docker) の使用
 
-It is possible to use multiple xref:executor-intro#[executor types] in the same workflow. 下記の例では、iOS プロジェクトの各プッシュは macOS でビルドされ、デプロイイメージは Docker で実行されます。
+同じワークフロー内で、複数の xref:executor-intro#[Executor タイプ]を使用することができます。 下記の例では、iOS プロジェクトの各プッシュは macOS でビルドされ、デプロイイメージは Docker で実行されます。
 
 [source,yaml]
 ----
@@ -313,4 +313,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-Get started with xref:hello-world-macos#[Configuring a Simple macOS Application on CircleCI].
+xref:hello-world-macos#[CircleCI でシンプルな macOS アプリケーションの設定]を始めましょう。
