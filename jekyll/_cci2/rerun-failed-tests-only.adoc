@@ -260,7 +260,7 @@ After configuring `circleci tests run`, if you see *all tests* are re-run after 
 
 1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "re-run".
 2. Use `store_artifacts` to upload to CircleCI the JUnit XML that contains test results.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
-3. Manually inspect the newly uplaoded JUnit XML via the Artifacts tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither of those are present, you will see unexpected behavior when trying to re-run.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
+3. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to re-run.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
 
 [#FAQs]
 == FAQs
