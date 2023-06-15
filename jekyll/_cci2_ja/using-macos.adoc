@@ -82,7 +82,7 @@ CircleCI では、開発者の皆様が Xcode の次の安定版がリリース�
 [#apple-silicon-support]
 === Apple シリコンのサポート
 
-Apple Silicon (シリコン）アプリケーションのネイティブな実行やテストは、Silicon ベースの Ma cや xref:runner-overview#available-self-hosted-runner-platforms[CircleCI runner]を使用して行うことができます。
+Apple Silicon (シリコン）アプリケーションのネイティブな実行やテストは、Silicon ベースの Mac や xref:runner-overview#available-self-hosted-runner-platforms[CircleCI runner]を使用して行うことができます。
 
 Apple は、今回のリリースで Intel (`x86_64`) と Apple シリコン (`arm64`) の両方のツールチェーンを提供しているため、Xcode `12.0.0` 以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコンバイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
