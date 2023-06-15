@@ -256,7 +256,7 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 [#troubleshooting]
 == Troubleshooting
 
-If after configuring `circleci tests run`, you are seeing *all tests* be re-run after clicking "Rerun failed tests only":
+After configuring `circleci tests run`, if you see *all tests* are re-run after clicking "Rerun failed tests only":
 
 1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "re-run".
 2. Use `store_artifacts` to upload to CircleCI the JUnit XML that contains test results.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
