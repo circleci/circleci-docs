@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Using the macOS execution environment
+= macOS 実行環境の利用ガイド
 :page-layout: classic-docs
-:page-description: "Learn how to configure a your jobs to run in the macOS execution environment."
+:page-description: このページでは、macOS 実行環境で実行するジョブの設定方法についてわかりやすく解説しています。
 :page-liquid:
 :icons: font
 :toc: macro
@@ -15,7 +15,7 @@ contentTags:
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-You can use the macOS execution environment to run your xref:jobs-steps#[jobs] in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
+macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境でxref:jobs-steps#[ジョブ]を実行できます。 macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
 
 [source,yaml]
 ----
@@ -36,14 +36,14 @@ jobs:
 [#supported-xcode-versions-intel]
 === IntelでサポートされているXcodeのバージョン
 
-{% include snippets/xcode-intel-vm.adoc %}
+{% include snippets/ja/xcode-intel-vm.adoc %}
 
 [#supported-xcode-versions-silicon]
-=== Supported Xcode versions for Apple silicon
+=== Apple Silicon の Xcode 対応バージョン
 
-{% include snippets/xcode-silicon-vm.adoc %}
+{% include snippets/ja/xcode-silicon-vm.adoc %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト](/docs/ja/dedicated-hosts-macos) 内の表を参照してください
 
 [#available-resource-classes]
 == 利用可能なリソースクラス
@@ -62,11 +62,11 @@ jobs:
 [#using-the-macos-executor]
 == macOS Executor のイメージ更新サイクル
 
-Each `macos` job is run in a fresh virtual machine, using a specified version of macOS. CircleCI では、Apple から新しい安定版 (またはベータ版) バージョンの Xcode がリリースされるたびに、新しいイメージをビルドしてデプロイします。 ほとんどの場合、ビルドイメージの内容は変更されません。 しかし、例外的に、CircleCI でコンテナの再ビルドが必要になる場合があります。 CircleCI's goal is to keep your execution environment stable, and to allow you to opt-in to newer macOS environments by setting the `xcode` key in your `.circleci/config.yml` file.
+各 `macos` ジョブは、特定のバージョンの macOS を実行する新しい仮想マシン上で実行されます。 CircleCI では、Apple から新しい安定版 (またはベータ版) バージョンの Xcode がリリースされるたびに、新しいイメージをビルドしてデプロイします。 ほとんどの場合、ビルドイメージの内容は変更されません。 しかし、例外的に、CircleCI でコンテナの再ビルドが必要になる場合があります。 CircleCI では、安定した実行環境を維持し、`.circleci/config.yml` ファイルに `xcode` キーを設定し、お客様が最新の macOS 環境にオプトインできる状態にすることを目標としています。
 
-弊社では、実行環境を可能な限り最新の状態に保つために、各イメージに含まれる macOS のバージョンを定期的に更新しています。 When a new major version of macOS is released, CircleCI will update once the new major version of Xcode reaches the `xx.2` release. これにより、実行環境の安定性が保たれます。
+弊社では、実行環境を可能な限り最新の状態に保つために、各イメージに含まれる macOS のバージョンを定期的に更新しています。 macOS の新しいメジャーバージョンがリリースされると、Xcode の新しいメジャーバージョンが `xx.2` リリースに達した時点で更新を行います。 これにより、実行環境の安定性が保たれます。
 
-CircleCI will announce the availability of new macOS containers, including Xcode betas, in the announcements section of our link:https://discuss.circleci.com/c/announcements[Discuss site].
+Xcode のベータ版を含む、新しい macOS コンテナに関する情報は、link:https://discuss.circleci.com/tag/ja-%E6%97%A5%E6%9C%AC%E8%AA%9E[Discuss サイト]の Announcements (お知らせ) で確認できます。
 
 [#beta-image-support]
 === ベータ版イメージのサポート
@@ -77,14 +77,14 @@ CircleCI では、開発者の皆様が Xcode の次の安定版がリリース�
 
 現在ベータ版となっているバージョンの Xcode イメージを使用している場合、Apple が新しい Xcode ベータ版をリリースした際に、最小限の通知によりそのイメージに変更が加えられる場合があります。 これには、CircleCI では制御できない Xcode および関連ツールに互換性を損なう変更が含まれる場合があります。
 
-To read about CircleCI's customer support policy regarding beta images, please check out the following link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
+ベータ版イメージに関する CircleCI のカスタマーサポートポリシーについては、link:https://support.circleci.com/hc/ja/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Polic[サポートセンター]に関するこちらの記事をご覧ください。
 
 [#apple-silicon-support]
 === Apple シリコンのサポート
 
 Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:runner-overview#available-self-hosted-runner-platforms[CircleCI runner].
 
-It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
+Apple は、今回のリリースで Intel (`x86_64`) と Apple シリコン (`arm64`) の両方のツールチェーンを提供しているため、Xcode `12.0.0` 以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコンバイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
 [#xcode-cross-compilation]
 == Xcode のクロスコンパイル
@@ -92,14 +92,14 @@ It is also possible to build Apple silicon/universal binaries using Xcode `12.0.
 [#universal-binaries]
 === ユニバーサルバイナリ
 
-Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
+Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 この機能は Xcode `12.2 以降` でのみサポートされていますが、古い Xcode バージョンを使用して、それぞれの `x86_64` と `ARM64` 実行可能ファイルをコンパイルすることもできます。
 
 [#extract-unwanted-architectures]
 === 不要なアーキテクチャの抽出
 
-By default, Xcode `12.2`+ will create universal binaries, compiling to a single executable that supports both `x86_64` and `ARM64` based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
+デフォルトで、Xcode `12.2 以降` ではユニバーサルバイナリが作成され、`x86_64` および `ARM64` ベースの両方の CPU をサポートする単一の実行可能ファイルにコンパイルされます。 一連の説明を削除する必要がある場合は、`lipo` ユーティリティを使って削除できます。
 
-Assuming that you want to create a standalone `x86_64` binary from a universal binary called `circleci-demo-macos`, you can do so by running the command:
+`circleci-demo-macos` というユニバーサルバイナリからスタンドアロンの `x86_64` バイナリを作成する場合は、次のコマンドを実行します。
 
 [source,shell]
 ----
@@ -123,7 +123,8 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 [#cross-compiled-binaries]
 === バイナリのクロスコンパイル
 
-While universal binaries are only supported under Xcode `12.2`+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For `xcodebuild` the process is relatively straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to `x86_64`.
+ユニバーサルバイナリは、Xcode `12.2 以降` でのみサポートされていますが、バイナリのビルドに使用されるマシンのアーキテクチャ以外のアーキテクチャ用にバイナリをクロスコンパイルすることが可能です。 `xcodebuild` の場合、プロセスは比較的簡単です。 `ARM64` バイナリをビルドするには、`xcodebuild` コマンドの先頭に `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` を追加して、`xcodebuild ARCHS=ARM64
+ONLY_ACTIVE_ARCH=NO ...` となるようにします。 `x86_64` アーキテクチャの場合、`ARCHS` を `x86_64` に変更します。
 
 [#optimization-and-best-practices]
 == 最適化とベストプラクティス
@@ -133,7 +134,7 @@ While universal binaries are only supported under Xcode `12.2`+, you can still c
 
 アプリケーションをビルドする前に iOS シミュレーターをあらかじめ起動して、シミュレーターの稼働が遅れないようにします。 こうすることで、ビルド中にシミュレーターのタイムアウトが発生する回数を全般的に減らすことができます。
 
-To pre-start the simulator, add the macOS orb (version `2.0.0` or higher) to your config:
+シミュレーターを事前に起動するには、macOS Orb (バージョン `2.0.0` 以降) を設定ファイルに追加します。
 
 [source,yaml]
 ----
@@ -141,7 +142,7 @@ orbs:
   macos: circleci/macos@2
 ----
 
-Then call the `preboot-simulator` command, as shown in the example below:
+次に、`preboot-simulator` コマンドを以下の例のように呼び出します。
 
 [source,yaml]
 ----
@@ -154,7 +155,7 @@ steps:
 
 シミュレータがバックグラウンドで起動するまでの最大時間を確保するために、このコマンドをジョブの初期段階に配置することをお勧めします。
 
-If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS orb:
+Apple Watch シミュレータとペアリングされた iPhone シミュレータが必要な場合は、macOS Orb で `preboot-paired-simulator` コマンドを使用します。
 
 [source,yaml]
 ----
@@ -166,12 +167,12 @@ steps:
       watch-version: "8.0"
 ----
 
-NOTE: シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
+NOTE: シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 この間、`xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。
 
 [#collecting-ios-simulator-crash-reports]
 === iOS シミュレーターのクラッシュレポートの収集
 
-Often if your `scan` step fails, for example, due to a test runner timeout, it is likely that your app has crashed during the test run. このような場合、クラッシュレポートを収集することでクラッシュの正確な原因を診断することができます。 クラッシュレポートをアーティファクトとしてアップロードする方法は以下の通りです。
+テストランナーのタイムアウトなどの理由で `scan` ステップが失敗する場合、多くの場合テストの実行中にアプリケーションがクラッシュした可能性があります。 このような場合、クラッシュレポートを収集することでクラッシュの正確な原因を診断することができます。 クラッシュレポートをアーティファクトとしてアップロードする方法は以下の通りです。
 
 [source,yaml]
 ----
@@ -182,14 +183,14 @@ steps:
 ----
 
 [#optimizing-fastlane]
-=== fastlane の最適化
+=== Fastlane の最適化
 
-By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the link:https://docs.fastlane.tools/actions/run_tests/#parameters[fastlane docs].
+デフォルトでは、fastlane scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、link:https://docs.fastlane.tools/actions/run_tests/#parameters[fastlane のドキュメント]で説明されているように、パラメーター  `output_type` を変更して、これらの形式を無効化することを検討してください。
 
 [#optimizing-cocoapods]
 === CocoaPods の最適化
 
-基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降のバージョンを使用することをお勧めします。 そうすることで、ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
+基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降のバージョンを使用することをお勧めします。 そうすることで、ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降のバージョンでは `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前のバージョンを使用している場合はアップグレードを検討してください。
 
 実行するには Podfile ファイルの先頭行を次のように記述します。
 
@@ -198,7 +199,7 @@ By default, Fastlane Scan generates test output reports in `html` and `junit` fo
 source 'https://cdn.cocoapods.org/'
 ----
 
-If upgrading from Cocoapods 1.7 or older, ensure the **Fetch CocoaPods Specs** step is removed from your CircleCI configuration, and ensure the following line is removed from your Podfile:
+1.7 以前のバージョンからアップグレードする場合は必ず、CircleCI 設定ファイルの **Fetch CocoaPods Specs** ステップと Podfile から以下の行を削除します。
 
 [source,shell]
 ----
