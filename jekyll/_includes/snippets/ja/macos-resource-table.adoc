@@ -34,7 +34,7 @@ WARNING: `medium` および `large` リソースクラスは、2023年10月2日�
 
 [NOTE]
 ====
-`macos.x86.metal.gen1` リソースは、最低 24 時間の利用が必要です。 See the link:{{ site.baseurl }}/dedicated-hosts-macos[Dedicated Host for macOS] page to learn more about this resource class.
+`macos.x86.metal.gen1` リソースは、最低 24 時間の利用が必要です。 このリソースクラスの詳細については、link:https://circleci.com/docs/ja/dedicated-hosts-macos/[macOS の専有ホスト]を参照して下さい。
 
-The `large` resource class is only available for customers with an annual contract. https://support.circleci.com/hc/en-us/requests/new[Open a support ticket] if you would like to learn more about our annual plans.
+`large` リソースクラスは、年間契約のお客様のみご利用いただけます。 年間契約プランの詳細については、link:https://support.circleci.com/hc/ja/requests/new[サポートチケット]をオープンしお問い合わせください。 
 ====
