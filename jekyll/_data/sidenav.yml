@@ -170,8 +170,6 @@ en:
             link: hello-world-macos
           - name: iOS code signing
             link: ios-codesigning
-          - name: Xcode image policy
-            link: xcode-policy
           - name: Dedicated host resources
             link: dedicated-hosts-macos
       - name: Windows
@@ -198,6 +196,12 @@ en:
             link: docker-compose
           - name: Debugging container ID cannot be mapped to host ID error
             link: high-uid-error
+      - name: Reference
+        children:
+          - name: Convenience images support policy
+            link: convenience-images-support-policy
+          - name: Xcode image policy
+            link: xcode-policy
 
   - name: Execute jobs on self-hosted runners
     icon: icons/sidebar/build-agent.svg
@@ -208,8 +212,6 @@ en:
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
-          - name: Web app installation
-            link: runner-installation
       - name: Container runner
         children:
           - name: Container runner installation
@@ -224,17 +226,15 @@ en:
             link: runner-installation-windows
           - name: macOS installation
             link: runner-installation-mac
-          - name: CLI installation
-            link: runner-installation-cli
-          - name: Upgrading machine runner on cloud
-            link: upgrading-circleci-machine-runner-on-cloud
-          - name: Upgrading machine runner on server
-            link: runner-upgrading-on-server
+          - name: Docker installation
+            link: runner-installation-docker
           - name: Machine runner configuration reference
             link: runner-config-reference
       - name: How-to Guides
         children:
-          - name: Upgrade CircleCI's self-hosted runner on server
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
+          - name: Upgrade machine runner on server
             link: runner-upgrading-on-server
       - name: Reference
         children:

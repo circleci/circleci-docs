@@ -3,33 +3,32 @@
 contentTags:
   platform:
   - Server v4.1
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 3 - Install CircleCI server
+= フェーズ 3 - CircleCI Server のインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to install the CircleCI server Helm deployment to an air-gapped environment.
+:page-description: Helm デプロイ版の CircleCI Server をエアギャップ環境にインストールする方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
-With prerequisites installed, and object storage configured, you can now copy over and install the CircleCI Helm deployment to the Kubernetes cluster in your air-gapped environment.
+前提条件のインストールとオブジェクトストレージの構成が完了したら、エアギャップ環境内の Kubernetes クラスタに Helm デプロイ版の CircleCI Server をインストールできます。
 
 [#prepare-values-yaml]
-== 1.  Prepare values.yaml
+== 1.  values.yaml の用意
 
-The `values.yaml` file for installing CircleCI should be prepared according to the xref:../installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+通常版インストールガイドの「xref:../installation/phase-2-core-services/#create-helm-values[Helm 値を作成します]」に従って、CircleCI Server をインストールするための `values.yaml` を用意する必要があります。 このファイルを用意できたら、以下の手順に従ってエアギャップ環境へのインストール用にフィールドを変更してください。
 
-=== a.  Configure global values
+=== a.  グローバル値を設定する
 
-NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values[Example `values.yaml`] page.
+NOTE: エアギャップ環境用の `values.yaml` ファイルのサンプルについては、xref:example-values[「`values.yaml` のサンプル」]をご覧ください。
 
-In the `global.container` section of your `values.yaml` file:
+`values.yaml` ファイルの `global.container` セクションを以下のように変更します。
 
-* Set the `domainName` value to the internal domain name of the installation
-* Set `container.org` to `circleci`
-* Set `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance
+* `domainName` の値をインストール環境の内部ドメイン名に設定する
+* `container.org` の値を `circleci` に設定する
+* `container.registry` の値をインスタンスの内部レジストリのホスト名に設定する (デフォルトと異なるポートを使用する場合はポートも設定する)
 
 [source, yaml]
 ----
@@ -41,17 +40,17 @@ global:
     org: "<image-registry-org>"
 ----
 
-NOTE: If you are using a non-TLS installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
+NOTE: TLS なしでローカル Docker レジストリを構成する場合は、xref:additional-considerations#non-tls-docker-registry-installations[TLS なしで Docker を構成する場合の注意事項]を参照してください。
 
-=== b.  Configure GitHub Enterprise
+=== b.  GitHub Enterprise を設定する
 
-In the `github` section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
+`values.yaml` ファイルの `github` セクションで、使用する GitHub Enterprise インスタンスにあわせて設定を変更します。
 
-The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
+`hostname` 値は GitHub Enterprise インスタンスの内部ホスト名に設定します。 `enterprise` 値は true に設定します。
 
-If this instance is not using TLS or self-signed certificates, make sure to set the `unsafeDisableWebhookSSLVerification: true` and `selfSignedCert: true` values.
+GitHub Enterprise インスタンスで TLS および自己署名証明書を使用しない場合は、`unsafeDisableWebhookSSLVerification: true` と `selfSignedCert: true` を設定してください。
 
-Additionally, an OAuth application and a personal access token should be set in GitHub enterprise and values provided as shown below. For more information about this process, see the documentation for creating a xref:../installation/phase-1-prerequisites/#create-a-new-github-oauth-app[GitHub OAuth application].
+また、GitHub Enterprise で OAuth アプリケーションとパーソナルアクセストークンを設定し、下図で示した値を変更してください。 このプロセスの詳細については、xref:../installation/phase-1-prerequisites/#create-a-new-github-oauth-app[GitHub OAuth アプリケーションの作成手順]に関するページを参照してください。
 
 [source, yaml]
 ----
@@ -68,9 +67,9 @@ github:
 ----
 
 [#configure-minio-storage]
-=== c.  Configure MinIO Object Storage
+=== c.  MinIO のオブジェクトストレージを設定する
 
-In the `object_storage` section of the `values.yaml` file, add the following configuration, modifying ports as necessary.
+`values.yaml` ファイルの `object_storage` セクションに以下の設定を追加し、必要に応じてポート番号を変更します。
 
 [source, yaml]
 ----
@@ -84,11 +83,11 @@ object_storage:
     secretKey: <minio-root-password>
 ----
 
-NOTE: Update the endpoint protocol to `http` or `https` depending on your MinIO installation.
+NOTE: エンドポイントのプロトコルには、お使いの MinIO に応じて `http` または `https` を設定してください。
 
-=== d. Configure MinIO Build Agent
+=== d.  MinIO のビルドエージェントを設定する
 
-In the distributor section of the `values.yaml` file, point `agent_base_url` and `launch_agent_base_url` to the `circleci-data` bucket you created in your MinIO installation.
+`values.yaml` ファイルの distributor セクションで、`agent_base_url` と `launch_agent_base_url` の値を、MinIO 内で作成した `circleci-data` バケットに設定します。
 
 [source, yaml]
 ----
@@ -97,14 +96,14 @@ distributor:
   launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
 ----
 
-NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
+NOTE: ここでは、MinIO のデフォルトであるポート 9000 を使用しています。 お使いの MinIO インスタンスの設定が異なる場合は、ポート番号を適宜変更してください。
 
-NOTE: Update the protocol to `http` or `https` depending on your MinIO installation.
+NOTE: プロトコルには、お使いの MinIO に応じて `http` または `https` を設定してください。
 
 [#configure-build-agent-image]
-=== e. Configure the Nomad build agent image
+=== e.  Nomad ビルドエージェントイメージを設定する
 
-Specify the location of the Nomad build agent image within your registry, copied during phase 1, modifying the port as necessary.
+フェーズ 1 でコピーしたレジストリ内の Nomad ビルドエージェントイメージの場所を指定し、必要に応じてポート番号を変更します。
 
 [source, yaml]
 ----
@@ -113,14 +112,14 @@ nomad:
   buildAgentImage: "<your-internal-registry-hostname>:5000/circleci/picard"
 ----
 
-NOTE: Update the port on your Docker registry hostname as necessary
+NOTE: 必要に応じて Docker レジストリのホスト名のポートを変更してください。
 
-NOTE: If using a non-tls installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
+NOTE: TLS なしでローカル Docker レジストリを構成する場合は、xref:additional-considerations#non-tls-docker-registry-installations[TLS なしで Docker を構成する場合の注意事項]を参照してください。
 
 [#configure-vm-service]
-=== f. Disable VM Service
+=== f.  VM サービスを無効化する
 
-In the `vm_service` section of `values.yaml`, set `enabled` to `false` to disable it. This feature requires cloud connectivity.
+`values.yaml` ファイルの `vm_service` セクションで、`enabled` の値を `false` に設定してこのサービスを無効化します。 この機能を使用するには、クラウドへの接続が必要です。
 
 [source, yaml]
 ----
@@ -130,9 +129,9 @@ vm_service:
 ----
 
 [#add-additional-nginx-annotations]
-=== g. Add Additional Nginx Annotations
+=== g.  NGINX のアノテーションを追加する
 
-Add any additional Nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+インストール環境に応じて、ロードバランサーをプロビジョニングするための NGINX アノテーションを追加します。 この例では、MetalLB を使用します。 詳細については、「その他の検討事項」の「xref:additional-considerations/#service-type-load-balancers-k3s[K3s の LoadBalancer タイプの Service]」セクションを参照してください。
 
 [source, yaml]
 ----
@@ -144,11 +143,11 @@ nginx:
 ----
 
 [#install-circleci-server-helm-airgap]
-== 2. Install CircleCI server
+== 2.  CircleCI Server のインストール
 
-With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI server.
+`values.yaml` ファイルと Helm チャートの用意が完了したら、エアギャップ環境で Helm の install コマンドを実行して CircleCI Server をインストールします。
 
-We recommend first creating a namespace (`circleci-server`) and deploying the chart into that namespace.
+推奨手順は、初めに名前空間 (`circleci-server`) を作成してから、この名前空間にチャートをデプロイすることです。
 
 [source,bash,subs=attributes+]
 ----
@@ -156,11 +155,11 @@ helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --vers
 ----
 
 [#post-install-circleci-server-helm-airgap]
-== 3. Post Installation Steps
+== 3.  インストール後の手順
 
-After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+Helm によるデプロイ後、環境によっては (MetalLB を使用する場合など)、LoadBalancer タイプの circleci-proxy Service に手動でパッチを適用する必要があります。 詳細については、「その他の検討事項」の「xref:additional-considerations/#service-type-load-balancers-k3s[K3s の LoadBalancer タイプの Service]」セクションを参照してください。
 
 [#next-steps]
 == 次のステップ
 
-Once the steps on this page are complete, go to the xref:phase-4-configure-nomad-clients#[Phase 4 - Configure Nomad clients] guide.
+本ページの手順を完了したら、「xref:phase-4-configure-nomad-clients#[フェーズ 4 - Nomad クライアントの構成]」に進んでください。

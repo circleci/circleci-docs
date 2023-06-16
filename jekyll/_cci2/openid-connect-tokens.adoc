@@ -19,9 +19,9 @@ CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A jo
 CircleCI OpenID Connect ID tokens are available in the following environment variables:
 
 * `$CIRCLE_OIDC_TOKEN`
-* `$CIRCLE_OIDC_TOKEN_V2`
+* `$CIRCLE_OIDC_TOKEN_V2` - Includes a different format for the `sub` claim, See <<format-of-the-openid-connect-id-token>> for full details.
 
-The `$CIRCLE_OIDC_TOKEN_V2` token includes a different format for the `sub` claim, which is highlighted in the table below.
+CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**.
 
 [#setting-up-your-cloud-service]
 == Setting up your cloud service
@@ -86,6 +86,9 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
+
+| `oidc.circleci.com/ssh-rerun`
+| A boolean indicating if the CI job is started using the SSH rerun feature.
 |===
 
 

@@ -34,6 +34,11 @@ image::container-runner-model.png[CircleCI's container runner architecture]
 image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
 
+[#circleci-self-hosted-runner-operation]
+== CircleCI's self-hosted runner operation
+
+Once a CircleCI's self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. 
+
 [#circleci-runner-use-cases]
 == CircleCI runner use cases
 
@@ -82,14 +87,13 @@ Machine runner is not compatible with CircleCI's convenience images or custom Do
 
 To get started with CircleCI's self-hosted runners:
 
-* Provide your own platform to deploy your CircleCI's self-hosted runners (see the <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms)
-* For container runner installation, visit the <<container-runner#, Container runner>> page.
-* For machine runner, installation visit the xref:runner-installation.adoc[Web app installation] page.
-
-[#circleci-self-hosted-runner-operation]
-== CircleCI's self-hosted runner operation
-
-Once a CircleCI's self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. 
+* Provide your own platform to deploy your CircleCI's self-hosted runners (see the following <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms).
+* For container runner installation, visit the xref:container-runner#[Container runner] page.
+* For machine runner, visit the installation guide for your desired platform:
+** xref:runner-installation-linux#[Linux]
+** xref:runner-installation-mac#[macOS]
+** xref:runner-installation-windows#[Windows]
+** xref:runner-installation-docker#[Docker]
 
 [#available-self-hosted-runner-platforms]
 == Available self-hosted runner platforms
@@ -138,6 +142,7 @@ Take the https://academy.circleci.com/runner-course?access_code=public-2021[runn
 
 [#see-also]
 == See also
-- <<runner-concepts#,Runner Concepts>>
-- <<runner-installation#,Self-Hosted Runner Web App Installation>>
+- xref:runner-concepts#[Runner Concepts]
+- xref:container-runner#[Container runner reference guide]
+- xref:runner-config-reference#[Machine runner reference guide]
 - link:https://circleci.com/changelog/self-hosted-runner/[Self-hosted runner change log]

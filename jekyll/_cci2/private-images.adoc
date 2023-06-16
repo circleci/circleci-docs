@@ -209,6 +209,32 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
+The minimum permissions required for your AWS account are as follows (you will need to substitute `YOUR_ECR_REPO_ARN`):
+
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer"
+            ],
+            "Effect": "Allow",
+            "Resource": "<your-ECR-repo-ARN>"
+        },
+        {
+            "Action": [
+                "ecr:GetAuthorizationToken"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+----
+
 ifndef::pdf[]
 ## See also
 
