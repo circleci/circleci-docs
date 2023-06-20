@@ -8,7 +8,7 @@ contentTags:
 = マシンランナーの macOS へのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーを macOS にインストールする方法を説明します。
+:page-description: このドキュメントでは、CircleCI セルフホストランナーを macOS にインストールする方法を説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -18,40 +18,40 @@ contentTags:
 このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
 
 [#prerequisites]
-== Prerequisites
+== 前提条件
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+{% include snippets/ja/runner/machine-runner-prereq.adoc %}
 
 [#self-hosted-runner-terms-agreement]
-== Self-hosted runner terms agreement
+== セルフホストランナーの利用条件
 
-{% include snippets/runner/terms.adoc %}
+{% include snippets/ja/runner-terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. Create namespace and resource class 
+== 1. ネームスペースとリソースクラスの作成 
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+{% include snippets/ja/runner/install-with-cli-steps.adoc %}
 
 --
 
 
 [#download-the-launch-agent-script]
-== 2. Download launch-agent script and install binary
+== 2. launch-agent スクリプトをダウンロードし、バイナリをインストールする。
 
-{% include snippets/runner/launch-agent-download.adoc %}
+{% include snippets/ja/runner/launch-agent-download.adoc %}
 
 [#create-a-circleci-self-hosted-runner-configuration]
-== 3. Create self-hosted runner configuration
+== 3. CircleCI セルフホストランナー設定ファイルを作成する
 
-You will need to choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
+CircleCI エージェントを実行するユーザーを選択します。 そのディレクトリの所有権を `USERNAME` に変更します。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
-Complete the template shown below, with the various capitalized parameters filled in. When complete, save the template as `launch-agent-config.yaml`.
+大文字で記載されたさまざまなパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
 ```yaml
 api:
@@ -70,30 +70,30 @@ logging:
 ```
 
 - Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
+- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 CircleCI Web アプリでステータスやジョブ結果を確認する際にエージェントを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。 The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#update-workdir-ownership]
-== 4. Update working directory permission
+== 4. 作業ディレクトリのアクセス許可を更新する
 
-`com.circleci.runner.plist` ファイルを、パス `/Library/LaunchDaemons/com.circleci.runner.plist`、所有者 `root`、アクセス許可 `644` で作成します。 次のコマンドを使用します。
+CircleCI エージェントに、作業ディレクトリが格納されているディレクトリへの書き込みアクセス許可を付与する必要があります。 そのディレクトリの所有権を `USERNAME` に変更します。
 
 ```shell
-sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
+sudo chown USERNAME /var/opt/circleci
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
-== 5. Install the self-hosted runner configuration
+== 5. セルフホストランナー設定ファイルをインストールする
 
-これで、サービスをロードできます。
+CircleCI のセルフホストランナー設定ファイルの保存ディレクトリを `root` として作成します。
 
 ```shell
-sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
+sudo mkdir -p '/Library/Preferences/com.circleci.runner'
 ```
 
-Copy the previously created `launch-agent-config.yaml` into the directory and change its permissions to `600`:
+先程作成した `launch-agent-config.yaml` をディレクトリにコピーし、権限を`600` に変更します。
 
 ```shell
-sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+sudo cp "launch-agent-config.yaml" "/Library/Preferences/com.circleci.runner/launch-agent-config.yaml"
 ```
 
 ```shell
@@ -101,9 +101,9 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 ```
 
 [#create-and-install-the-launchd-plist]
-== 6. Create and install `launchd .plist`
+== 6. `launchd .plist` を作成しインストールする
 
-プリインストールされている macOS アプリケーション、 *コンソール* を開きます。 このアプリケーションでは、 *ログレポート* で CircleCI エージェントのログを閲覧することができます。
+`com.circleci.runner.plist` ファイルを、パス `/Library/LaunchDaemons/com.circleci.runner.plist`、所有者 `root`、アクセス許可 `644` で作成します。 次のコマンドを使用します。
 
 ```shell
 sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
@@ -117,7 +117,7 @@ sudo chown root: /Library/LaunchDaemons/com.circleci.runner.plist
 sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 ```
 
-Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist` file:
+下記を新しく作成した `/Library/LaunchDaemons/com.circleci.runner.plist` ファイルにコピーします。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -166,28 +166,28 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
 ```
 
 [#enable-the-launchd-service]
-== 7. Enable `launchd` service
+== 7. `launchd` サービスを有効にする
 
-macOS へのマシンランナーのインストールや実行において問題が生じた場合は、セルフホストランナーのトラブルシューティングガイドの xref:troubleshoot-self-hosted-runner.adoc#troubleshoot-machine-runner[マシンランナーのトラブルシューティングのセクション] を参照してください。
+これで、サービスをロードできます。
 
 ```shell
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-NOTE: If you are following these instructions for a second time, use the command below to unload the existing service. Once the existing service is unloaded, you can load the new service with the command above.
+NOTE: これまでに有効化手順を実行したことがある場合は、下記コマンドで既存サービスをアンロードしてください。 アンロード後、上記コマンドにより新しいサービスをロードできます。
 
 ```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 [#verify-the-service-is-running]
-== 8. Verify the service is running
+== 8. サービスの実行状態を確認する
 
-Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.
+プリインストールされている macOS アプリケーション、 *コンソール* を開きます。 このアプリケーションでは、 *ログレポート* で CircleCI エージェントのログを閲覧することができます。 リストから `com.circleci.runner.log` というログを探します。 このファイルは、 *Library > Logs* に移動しても見つけられます。
 
-{% include snippets/machine-runner-example.adoc %}
+{% include snippets/ja/machine-runner-example.adoc %}
 
 [#troubleshooting]
-== Troubleshooting
+== トラブルシューティング
 
 Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner, Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.
