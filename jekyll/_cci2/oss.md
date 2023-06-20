@@ -83,7 +83,7 @@ If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ b
 
 If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option:
 
-1. Navigate to the **Project Settings > Advanced** page in the CircleCI web app for your project
+1. Navigate to the **Project Settings > Advanced** page in the CircleCI web app for your project.
 1. Set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ### Caching
