@@ -76,8 +76,7 @@ jobs:
 workflows:
   send-notification:
     jobs:
-      - notify:
-          context: slack-secrets
+      - notify
 ----
 
 The following commentary describes what occurs in the main elements of the sample code:
@@ -171,11 +170,11 @@ In CircleCI:
 . Click the **Organization Settings** page.
 +
 image::slack-orb-organization-settings.png[Organization Settings]
-+
+
 . Under Context, click the blue *Create Context* button and add a unique name, such as `slack-secrets` (that is the name specified in the `config.yml` file above).
 +
 image::slack-orb-create-context.png[Create Context]
-+
+
 . Click the blue **Create Context** button.
 . Click the name of the context you just created.
 . Click the blue *Add Environment Variable* button and enter your first key value pair.
@@ -188,13 +187,13 @@ image::slack-orb-environment-variable.png[Add Environment Variable]
 . Click the blue **Add Environment Variable** button again.
 * The Environment Variable Name is `SLACK_DEFAULT_CHANNEL`.
 * The value is the ID of the default Slack channel for posting your notifications. You can override this setting in your individual jobs.
-
++
 TIP: To get the ID for your Slack channel, right-click the channel in Slack and choose **Copy Link**. The ID will be visible at the end of the URL and will be in this format: C034R26AM36.
-
++
 image::slack-orb-copy-link.png[Copy Slack channel link]
 
-Make sure you have included the `slack-secrets` context in your `notify` job and that the name matches what you created:
-
+. Include the `slack-secrets` context in your `notify` job as follows:
++
 [source,yaml]
 ----
 workflows:
@@ -204,7 +203,7 @@ workflows:
           context: slack-secrets
 ----
 
-You can now reuse this context in other jobs and projects.
+NOTE: You can reuse this context in other jobs and projects.
 
 [#trigger-an-alert]
 === c. Trigger an alert
