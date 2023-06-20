@@ -49,12 +49,12 @@
 | `CIRCLE_OIDC_TOKEN`
 | GitHub, Bitbucket, GitLab
 | String
-| An OpenID Connect token signed by CircleCI which includes details about the current job. Available in jobs that use a context.
+| An OpenID Connect token signed by CircleCI which includes details about the current job.
 
 | `CIRCLE_OIDC_TOKEN_V2`
 | GitHub, Bitbucket, GitLab
 | String
-| An OpenID Connect token signed by CircleCI which includes details about the current job. Available in jobs that use a context.
+| An OpenID Connect token signed by CircleCI which includes details about the current job.
 
 | `CIRCLE_PR_NUMBER`
 | GitHub, Bitbucket
