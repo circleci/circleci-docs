@@ -89,7 +89,7 @@ CircleCI の xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glo
 ** `--verbose` は `circleci tests run` 用のオプションパラメーターであり、詳細なデバッグメッセージを出力します。
 ** `--split-by-timings` は、`circleci tests run` でタイミングに基づくインテリジェントテスト分割を利用するためのパラメーターです。 `circleci tests run` を使う場合、このパラメーターは必須ではありません。 テストジョブで CircleCI のテスト分割機能を使わないのであれば、省略してください。
 
-NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `test-selector=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--test-selector=`.
+NOTE: また、`circleci tests split --split-by=timings --timings-type=` と同様に `test-selector=` フラグを使用してタイミングタイプを指定することができます．  `test-selector=` には、`file`, `classname`, `name` (`name` はテスト名で分割する)を渡すことができます。
 
 [#verify-the-configuration]
 ==== 設定の検証
