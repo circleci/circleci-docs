@@ -1,6 +1,6 @@
 ---
 description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -22,6 +22,8 @@ Matrix jobs provide a way to run a job multiple times with arguments. Arguments 
 
 In the following example, the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job, different parameters are passed to set both the OS and the Node.js version:
 
+{% include snippets/docker-auth.adoc %}
+
 [source,yaml]
 ----
 version: 2.1
@@ -33,9 +35,6 @@ executors:
   docker: # Docker using the Base Convenience Image
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   linux: # a Linux VM running Ubuntu 20.04
     machine:
       image: ubuntu-2004:202107-02

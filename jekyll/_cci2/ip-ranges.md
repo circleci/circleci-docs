@@ -40,10 +40,7 @@ jobs:
   build:
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
-      - image: curlimages/curl
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/ruby:3.2.2
     steps:
       - run: echo “Hello World”
 workflows:

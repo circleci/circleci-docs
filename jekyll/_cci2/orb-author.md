@@ -182,9 +182,6 @@ description: >
 
 docker:
   - image: cimg/base:current
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   greeting:
     type: string

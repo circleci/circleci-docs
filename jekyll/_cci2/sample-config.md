@@ -11,6 +11,8 @@ contentTags:
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
 
+{% include snippets/docker-auth.md %}
+
 ## Tools for editing configuration files
 {: tools-for-editing-configuration-files }
 
@@ -196,14 +198,8 @@ jobs:
     docker:
       # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: cimg/node:current
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:4.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # Reuse the workspace from the build job
       - attach_workspace:
@@ -259,9 +255,6 @@ jobs:
     prepare-dependencies:
         docker:
             - image: node:current-alpine
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
             - checkout
             - run:
@@ -288,9 +281,6 @@ jobs:
     build-production:
         docker:
             - image: node:current-alpine
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
             - attach_workspace:
                   at: .
@@ -333,9 +323,6 @@ jobs:
     test:
         docker:
             - image: node:current-alpine
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
@@ -427,9 +414,6 @@ jobs:
   build-linux:
     docker:
       - image: archlinux/base
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       label:
         type: string
@@ -555,9 +539,6 @@ jobs:
   test-linux:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       label:
         type: string
@@ -706,9 +687,6 @@ jobs:
   swiftlint:
     docker:
       - image: dantoml/swiftlint:latest
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: swiftlint lint --reporter junit | tee result.xml
@@ -720,9 +698,6 @@ jobs:
   danger:
     docker:
       - image: dantoml/danger:latest
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: danger

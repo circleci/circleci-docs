@@ -90,6 +90,8 @@ root of their repository.
 
 The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
+{% include snippets/docker-auth.md %}
+
 {% raw %}
 ```yaml
 version: 2.1
@@ -104,13 +106,7 @@ jobs:
     working_directory: ~/mern-starter
     docker:
       - image: cimg/node:17.2.0 # Primary execution image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mongo:3.4.4         # Service/dependency image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:

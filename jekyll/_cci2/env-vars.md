@@ -74,9 +74,6 @@ jobs: # basic units of work in a run
     docker: # use the Docker executor
       # CircleCI Node images available at: https://circleci.com/developer/images/image/cimg/node
       - image: cimg/node:18.11.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -154,9 +151,6 @@ jobs:
         default: my_repo
     docker:
       - image: cimg/go:1.17.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
@@ -227,7 +221,7 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
-      - run: 
+      - run:
           name: Process template file
           environment:
             # Environment variables would typically be served via a context
