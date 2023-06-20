@@ -15,7 +15,7 @@ contentTags:
 
 {% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
-This document contains all the external facing endpoints for the CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`
+このドキュメントには、CircleCI のセルフホストランナーAPIのすべての外部向けエンドポイントが含まれています。 このAPIは、メインの CircleCI v2 API とは別に、セルフホストランナージョブの管理および実行に使用されます。 これは、`runner.circleci.com`でホストされています。
 
 [#authentication-methods]
 == 認証方法
@@ -72,7 +72,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 指定したパラメーターに基づいて使用可能なセルフホストランナーの一覧を取得します。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
 [#get-api-v3-runner-authentication-methods]
-==== Authentication methods
+==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
@@ -80,7 +80,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 * リソースクラストークン (リソースクラス作成時に生成されます)
 
 [#get-api-v3-runner-request]
-===== Request
+===== リクエスト
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -118,7 +118,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 ```
 
 [#get-api-v3-runner-response]
-==== Response
+==== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -133,7 +133,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |===
 
 [#get-api-v3-runner-response-schema]
-==== Response schema
+==== 応答スキーマ
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -185,7 +185,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |===
 
 [#get-api-v3-runner-example]
-==== Example
+==== サンプル
 
 ```json
 {
@@ -209,14 +209,14 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 指定したリソース クラスで未処理のタスクの数を取得します。
 
 [#get-api-v3-tasks-authentication-methods]
-==== Authentication methods
+==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 
 [#get-api-v3-tasks-request]
-==== Request
+==== リクエスト
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -235,7 +235,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |===
 
 [#get-api-v3-tasks-examples]
-==== Examples
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
@@ -243,7 +243,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 ```
 
 [#get-api-v3-tasks-response]
-==== Response
+==== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -258,7 +258,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |===
 
 [#get-api-v3-tasks-response-schema]
-==== Response schema
+==== 応答スキーマ
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -275,7 +275,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |===
 
 [#get-api-v3-tasks-example]
-==== Example
+==== 例
 
 ```json
 {
@@ -289,14 +289,14 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 指定したリソースクラスで実行中のタスクの数を取得します。
 
 [#get-api-v3-tasks-running-authentication-methods]
-==== Authentication methods
+==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 
 [#get-api-v3-tasks-running-request]
-==== Request
+==== リクエスト
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -315,7 +315,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |===
 
 [#get-api-v3-tasks-running-examples]
-==== Examples
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
@@ -323,7 +323,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 ```
 
 [#get-api-v3-tasks-running-response]
-==== Response
+==== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -338,7 +338,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |===
 
 [#get-api-v3-tasks-running-response-schema]
-==== Response schema
+==== 応答スキーマ
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -355,7 +355,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |===
 
 [#get-api-v3-tasks-running-example]
-==== Example
+==== 例
 
 ```json
 {
