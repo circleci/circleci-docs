@@ -2,13 +2,11 @@
 contentTags:
   platform:
   - クラウド
-  - Server v4.x
-  - Server v3.x
 ---
 = Docker の認証付きプルの使用
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
+:page-description: ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法についてわかりやすく皆様に説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -143,35 +141,35 @@ jobs:
 
 TIP: 任意のリージョンの ECR リポジトリから、プライベート イメージをプルできます。 ただし、最高のエクスペリエンスを得るために、`us-east-1` リージョンにイメージのコピーを作成し、その `us-east-1` のイメージを Docker Executor に指定することを強くお勧めします。
 CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあります。
-CircleCI job execution infrastructure is in the `us-east-1` region, so using `us-east-1` images accelerates the process of spinning up your environment.
+そのため、`us-east-1` のイメージを使用すると、環境のスピンアップ プロセスにかかる時間が短縮されます。
 
-You can pull images from ECR for your jobs using a few different methods.
+ECR からジョブ用のイメージをプルには、いくつかの方法があります。
 
-The best practice approach is to pull from ECR using OpenID Connect (OIDC). See the xref:pull-an-image-from-aws-ecr-with-oidc#[Pull an image from AWS ECR with OIDC] how-to guide for full details.
+お勧めするのアプローチは、OpenID Connect（OIDC）を使用して ECR からプルすることです。 See the xref:pull-an-image-from-aws-ecr-with-oidc#[Pull an image from AWS ECR with OIDC] how-to guide for full details.
 
-Some advantages to using OIDC over using AWS credentials to pull images from ECR:
+ECR からイメージをプルために、AWS の認証情報を使用するよりも OIDC を使用することの利点がいくつかあります：
 
-* **Improved security**: By using OIDC authentication, storing AWS credentials directly in your CircleCI configuration or environment variables is avoided, reducing the risk of exposure.
+* *セキュリティの向上*：OIDC 認証を利用することで、CircleCI の設定や環境変数に直接 AWS の認証情報を保存することが避けられ、漏洩のリスクを低減できます。
 
-* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate AWS credentials.
+* *クレデンシャル管理の簡素化*： OIDC により、CircleCI は認証プロセスを自動的に管理し、AWS のクレデンシャルを手動で管理しローテーションする必要がなくなります。
 
-* **Fine-grained access control**: By associating an IAM role with the OIDC authentication, exact permissions granted to CircleCI for pulling ECR images can be controlled, ensuring a least-privilege approach.
+* *きめ細かなアクセスコントロール*：OIDC 認証に IAM ロールを関連付けることで、CircleCI がECR イメージを取り込む際に付与する権限を厳密にコントロールし、最小特権を確保することが可能です。
 
-Alternatively, you can use one of the following methods:
+または、以下のいずれかの方法を使用することもできます：
 
 . CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
 . `aws_auth` を使用して、`.circleci/config.yml` に AWS 認証情報を指定する
 
 [source,yaml]
 ----
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
       - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
         aws_auth:
-          aws_access_key_id: AKIAQWERVA  # can specify string literal values
-          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
+          aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定します
+          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
 ----
 
 いずれの方法もほぼ同じです。 2 番目の方法では認証情報に対して任意の変数名を指定できます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番にデプロイする前には本格的なテスト スイートを実行します。
@@ -225,7 +223,7 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
-The minimum permissions required for your AWS account are as follows (you will need to substitute `YOUR_ECR_REPO_ARN`):
+AWSアカウントに必要な最低限の権限は以下の通りです（`YOUR_ECR_REPO_ARN`を代入する必要があります）：
 
 [source,json]
 ----
