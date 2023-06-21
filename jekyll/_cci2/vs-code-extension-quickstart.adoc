@@ -40,9 +40,9 @@ There are two ways to install the CircleCI extension:
 [#authenticate-into-circleci]
 == 2. Authenticate into CircleCI
 
-. In VS Code, open the CircleCI panel by clicking on the CircleCI icon on the activity bar, then click “Log in”.
+. In VS Code, open the CircleCI panel by clicking on the CircleCI icon on the activity bar, then click **Log in**.
 
-. You will be prompted to enter a xref:managing-api-tokens#overview[personal API token]. You may create one in your CircleCI link:https://app.circleci.com/settings/user/tokens[**User Settings > Personal API Tokens**.]
+. You will be prompted to enter a xref:managing-api-tokens#overview[personal API token]. You may create a personal API token in the CircleCI web app by navigating to link:https://app.circleci.com/settings/user/tokens[**User Settings > Personal API Tokens**].
 +
 **CircleCI server**: Make sure to check the "I'm a CircleCI Server customer," then enter your self-hosted server URL.
 +
@@ -55,7 +55,7 @@ NOTE: The pipelines manager does not yet support GitLab projects.
 
 If the root of your workspace is a CircleCI project or contains a project that you follow, your project will be detected automatically, and the pipelines panel will be populated with your most recent pipelines.
 
-Otherwise, you may manually select a project by opening the extension's settings either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (⚙️) at the top of the pipelines panel.
+Otherwise, you may manually select a project by opening the extension's settings either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (icon:cog[]) at the top of the pipelines panel.
 
 NOTE: Support for link:https://code.visualstudio.com/docs/editor/multi-root-workspaces[multi-root workspaces] will be available soon.
 
