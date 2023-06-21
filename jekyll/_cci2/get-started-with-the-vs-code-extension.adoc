@@ -62,7 +62,7 @@ NOTE: Your manual selection will only persist if no projects are detected automa
 [#configure-the-pipelines-panel-in-vs-code]
 == 4. Configure the pipelines panel in VS Code
 
-By default, the pipelines panel displays all the latest pipelines run on your project. However, you can also configure it to show only the pipelines you are interested in. You can do so in the extension's settings page (run `CircleCI: Open Settings` from the Command Palette, or click on the settings icon (⚙️) at the top of the pipelines panel).
+By default, the pipelines panel displays all the latest pipelines run on your project. However, you can also configure it to show only the pipelines you are interested in. You can do so in the extension's settings page (run `CircleCI: Open Settings` from the Command Palette, or click on the settings icon (icon:cog[]) at the top of the pipelines panel).
 
 Specifically, you can choose to display:
 
