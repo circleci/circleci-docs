@@ -13,8 +13,6 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
-
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
 [#introduction]
