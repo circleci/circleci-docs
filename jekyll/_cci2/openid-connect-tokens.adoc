@@ -145,7 +145,7 @@ TIP: Orbs are reusable packages of YAML configuration that condense repeated pie
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.5
+  aws-cli: circleci/aws-cli@4.0.0
 ----
 
 . Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you have created in the step above along with your `aws-region`.
@@ -154,16 +154,16 @@ orbs:
 ----
 jobs:
   aws-example:
-   environment:
+    environment:
       AWS_REGION: us-west-1
     docker:
-      - image: cimg/aws:2022.06
+      - image: cimg/aws:2023.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
           role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          aws-region: ${AWS_REGION}
           # optional parameters
           profile-name: "OIDC-PROFILE"
           role-session-name: "example-session"
