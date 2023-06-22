@@ -19,7 +19,7 @@ toc::[]
 [#self-hosted-runner-for-server-compatibility]
 == マシンランナーのサーバーとの互換性
 
-xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[サーバーとの互換性リスト]を参照して、お客様のインストール環境に必要なランナーのバージョンを確認してください。
+ご使用のプラットフォームに必要なランナーのバージョンは、マシンランナーの各インストールページを参照してください：
 
 - xref:runner-installation-linux#download-the-launch-agent-script[Linux]
 - xref:runner-installation-mac#download-the-launch-agent-script[macOS]
@@ -164,8 +164,8 @@ Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 - xref:runner-installation-linux#[CircleCI ランナーのインストール]
 - xref:runner-installation-mac#[Kubernetes のインストール手順]
-- xref:runner-installation-windows#[Windows machine runner installation instructions]
-- xref:runner-on-kubernetes#[Runner on Kubernetes installation instructions]
-- xref:runner-installation-docker#[Machine runner installation instructions with the Docker executor]
+- xref:runner-installation-windows#[Windows マシンランナーのインストール手順]
+- xref:runner-on-kubernetes#[Kubernetes上のランナーのインストール手順]
+- xref:runner-installation-docker#[Docker Executor によるマシンランナーのインストール手順]
 
 
