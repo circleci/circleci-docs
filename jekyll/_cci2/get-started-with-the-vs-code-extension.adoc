@@ -13,7 +13,7 @@ contentTags:
 
 This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview#[overview]. 
 
-[#prerequisits]
+[#prerequisites]
 == Prerequisites
 
 Before starting this tutorial, make sure you have:
@@ -53,7 +53,7 @@ NOTE: **GitLab user?** The pipelines manager does not yet support GitLab project
 
 If your VS Code workspace contains one or more CircleCI projects, the extension will detect them automatically, and the pipelines panel will be populated with your most recent pipelines.
 
-If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (⚙️) at the top of the pipelines panel), and select your projects manually.
+If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (icon:cog[]) at the top of the pipelines panel), and select your projects manually.
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
 
