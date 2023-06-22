@@ -36,34 +36,34 @@ image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
 
 [#circleci-self-hosted-runner-operation]
+== CircleCI のセルフホストランナーの操作
+
+CircleCI のセルフホストランナーのインストール後、セルフホストランナーは `circleci.com` をポーリングして稼働し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。
+
+[#circleci-runner-use-cases]
 == CircleCI ランナーのユースケース
 
 CircleCI では、セルフホストランナーにより主に下記の 2 つのユースケースの実現を目指しています。
 
-[#circleci-runner-use-cases]
-== ランナーの実行環境の選択
-
-CircleCI では、セルフホストランナー用に複数の実行環境 (コンテナとマシン) を提供しています。
-
-* Privileged access and controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things the self-hosted runner enables are:
-** IP restrictions - Self-hosted runners can have static IP addresses that you can control
-** Identity Access Management (IAM) permissions - If you set up self-hosted runners in AWS, they can be assigned IAM permissions
-** Monitor the operating system
-** Connect to private networks
-* Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the self-hosted runner to fill that need.
+* 特権アクセスと制御の提供 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行する必要がある場合があります。 セルフホストランナーを使用することで、以下が可能になります。
+** IP アドレスの制限: セルフホストランナーには、お客様による制御が可能な静的 IP アドレスを使用できます。
+** ID とアクセス管理 (IAM) 権限 の付与: AWS にセットアップしたセルフホストランナーに、IAM の権限を割り当てることができます。
+** オペレーティングシステムの監視
+** プライベートネットワークへの接続
+* 企業独自のコンピューティング要件: CircleCI のリソースクラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、セルフホストランナーを使用してニーズを満たすことができます。
 
 [#choosing-a-runner-execution-environment]
-== はじめよう
+== ランナーの実行環境の選択
 
-CircleCI のセルフホストランナーの使用を開始するには、次の手順を実行します。
+CircleCIは、コンテナとマシンの2種類のセルフホストランナーを提供しています。
 
 [#container-runner-use-case]
-=== Container runner
+=== コンテナランナー
 
-CircleCI's self-hosted runner has historically executed each job using a one-to-one mapping between the CI job and a <<configuration-reference#machine,machine>> environment (virtual or physical) that has the self-hosted runner binary installed on it. Exclusively running jobs in this manner sacrifices several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
+CircleCI  はこれまで、CI ジョブとセルフホストランナーのバイナリがインストールされた <<configuration-reference#machine,マシン>> 環境 (仮想または物理的な) を 1 対 1 でマッピングして各ジョブを実行していました。 この方法でジョブを排他的に実行すると、<<using-docker#,Docker Executor>> の使用時に CircleCI のクラウドで提供されている次のようなコンテナベースソリューションのメリットが失われます。
 
-* The ability to seamlessly use custom Docker images during job execution
-* Access to a consistent, clean containerized build environment with every job
+* ジョブ実行時に、カスタム Docker イメージをシームレスに使用する機能
+* 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
 Container runner is installed in a Kubernetes (k8s) cluster which enables you to run containerized jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
 
