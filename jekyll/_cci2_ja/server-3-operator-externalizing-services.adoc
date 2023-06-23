@@ -78,18 +78,18 @@ PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に�
 
 CircleCI では、以下を行っていただくよう強くお勧めしています。
 
-* Take daily backups
-* Keep at least 30 days of backups
-* Use encrypted storage for backups as databases might contain sensitive information
-* Perform a backup before each upgrade of CircleCI server
+* 毎日バックアップを行う
+* バックアップを少なくとも 30 日間保持する
+* データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
+* CircleCI Server のアップグレードを行う前には毎回バックアップを行う
 
 [#migrating-from-internal-postgres]
-=== Migrating from an internal PostgreSQL to an externalized source
+=== 内部 PostgreSQL から外部ソースへの移行
 
-{% include snippets/server/migrate-internal-postgres-to-external.adoc %}
+{% include snippets/ja/server/migrate-internal-postgres-to-external.adoc %}
 
 [#connecting-your-external-postgres]
-=== Connecting your external Postgres instance to CircleCI server
+=== 外部の Postgres インスタンスを CircleCI サーバーに接続する
 
 image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
 
@@ -100,19 +100,19 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 * *PostgreSQL Service Username (PostgreSQL サービスユーザーネーム)(必須):* PostgreSQL インスタンスへのアクセス権を持つユーザー
 * *PostgreSQL Service Password (PostgreSQL サービスパスワード) (必須):* PostgreSQL インスタンスへのアクセスに使用されるユーザーアカウントのパスワード
 
-Once you apply your changes in KOTS admin, your CircleCI server instance will be restored with pods running as before.
+KOTS admin で変更を適用すると、CircleCI サーバーインスタンスが復元され、以前と同じようにPodが実行されます。
 
 == MongoDB
 
 NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。
 
 [#migrating-from-internal-mongodb]
-=== Migrating from an internal MongoDB to an externalized Source
+=== 内部 MongoDB から外部化ソースへの移行
 
-{% include snippets/server/migrate-internal-mongo-to-external.adoc %}
+{% include snippets/ja/server/migrate-internal-mongo-to-external.adoc %}
 
 [#connecting-your-external-mongodb]
-=== Connecting your external MongoDB instance to CircleCI server
+=== 外部の MongoDB インスタンスを CircleCI サーバーに接続する
 
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
 
@@ -120,15 +120,14 @@ image::server-3-external-mongo.png[Screenshot of KOTS admin console config showi
 
 * *MongoDB connection host(s) or Ip(s) (MongoDB 接続ホストまたは IP (必須):* MongoDB インスタンスのホスト名または IP。 コロンによるポートの指定と、シャードインスタンスに対する複数のホストの両方がサポートされています。
 * *Use SSL for connection to MongoDB (MongoDB への接続に SSL を使用)](必須):* 外部 MongoDB インスタンスへの接続に SSL を使用するかどうかを指定します。
-* *Allow insecure TLS connections (required)* -
-If you use a self-signed certificate, or one signed by a custom CA, you will need to enable this setting. ただし、この設定はセキュアではありません。 可能な限り、有効な CA によって署名された TLS 証明書を使用することをお勧めします。
+* *Allow insecure TLS connections (セキュアでない TLS 接続を許可)](必須):* 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 ただし、この設定はセキュアではありません。 可能な限り、有効な CA によって署名された TLS 証明書を使用することをお勧めします。
 * *MongoDB  user (MongoDB ユーザー)] (必須):* 使用するアカウントのユーザー名。 このアカウントには dbAdmin ロールが指定されている必要があります。
 * *MongoDB  password (MongoDB パスワード)] (必須):* 使用するアカウントのパスワード。
 * *MongoDB authentication source database (MongoDB 認証元データベース) (必須)]:* アカウント情報を保持するデータベース (通常は管理)。
 * *MongoDB authentication mechanism (MongoDB 認証メカニズム)] (必須):* 使用する認証メカニズム  (通常は SCRAM-SHA-1)。
 * *Additional connection options (追加の接続オプション)](オプション):* 使用する他の接続オプションを指定します。 これはクエリ文字列の形式で指定する必要があります (`key=value` のペア、`&` で区切る。 特殊文字は URL エンコードが必要です。) 利用可能なオプションについては、link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB のドキュメント] を参照してください。
 
-Once you apply your changes in KOTS admin, your CircleCI Server instance will be restored with pods running as before.
+KOTS adminで変更を適用すると、CircleCI Serverインスタンスが復元され、以前と同じように Pod が実行されます。
 
 == Vault
 
