@@ -20,7 +20,7 @@ toc::[]
 
 == PostgreSQL
 
-=== Best practices for your PostgreSQL
+=== PostgreSQL のベストプラクティス
 
 NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。
 
@@ -39,7 +39,7 @@ NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バー
 |50 名未満
 |2
 |8 コア
-|1Gbps
+|16 GB
 |100 GB
 |1 Gbps
 
@@ -72,7 +72,7 @@ NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バー
 |10 Gbps
 |===
 
-=== Back up PostgreSQL
+=== PostgreSQL のバックアップ
 
 PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント ( https://www.postgresql.org/docs/12/backup.html[こちら] ) が提供されています。
 
