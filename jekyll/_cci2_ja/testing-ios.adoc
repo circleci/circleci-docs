@@ -218,9 +218,9 @@ steps:
       version: "3.1"
 ----
 
-Replace `3.1` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.1.3` for example, just the major version. そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`3.1` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.1.3` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
-To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
+デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version`  を `system` として定義します。
 
 [source,yaml]
 ----
@@ -233,7 +233,7 @@ steps:
 [#switching-rubies-manually]
 === 手動での Ruby の切り替え
 
-For Xcode version `14.2` and higher, add the following to the beginning of your job.
+Xcodeのバージョン `14.2` 以上の場合、ジョブの冒頭に以下を追加してください。
 
 [source,yaml]
 ----
@@ -244,11 +244,11 @@ steps:
       command: rbenv global 3.1.3 && rbenv rehash
 ----
 
-Replace `3.1.3` with the version of Ruby required.
+`3.1.3` は、必要なRubyのバージョンに置き換えてください。
 
-To revert back to the system Ruby, specify `system` as the Ruby version.
+システム Ruby に戻す場合は、Rubyのバージョンに `system` を指定してください。
 
-For Xcode versions `14.1` and lower, add the following to the beginning of your job.
+Xcode のバージョン `14.1` 以上の場合、ジョブの冒頭に以下を追加してください。
 
 [source,yaml]
 ----
@@ -259,9 +259,9 @@ steps:
       command: sed -i '' 's/^chruby.*/chruby ruby-3.1.3/g' ~/.bash_profile
 ----
 
-Replace `3.1.3` with the version of Ruby required.
+`3.1.3` は、必要なRubyのバージョンに置き換えてください。
 
-To revert back to the system Ruby, specify `system` as the Ruby version.
+システム Ruby に戻す場合は、Ruby のバージョンに `system` を指定してください。
 
 [#installing-additional-ruby-versions]
 === Ruby バージョンの追加インストール
@@ -270,9 +270,9 @@ To revert back to the system Ruby, specify `system` as the Ruby version.
 
 プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。
 
-For Xcode versions `14.2` and higher, this can be done with the `rbenv install` command, ensuring you pass the version of Ruby required. If a newer version of Ruby is not available, you will need to update the `ruby-build` package (`brew upgrade ruby-build`) to ensure the latest Ruby version definitions are available.
+Xcodeのバージョン `14.2` 以上の場合、rbenv installコマンドで実行でき、必要なRubyのバージョンをパスしていることを確認することができます。 新しいバージョンの Ruby が利用できない場合は、`ruby-build` パッケージの更新 (`brew upgrade ruby-build`) により、最新の Ruby のバージョン定義が利用できるようにする必要があります。
 
-For Xcode versions `14.1` and lower, we use the link:https://github.com/postmodern/ruby-install[ruby-install] tool to install the required version. インストールが完了したら、上記の方法でバージョンを選択することができます。
+Xcode のバージョン `14.1` 以下の場合は、link:https://github.com/postmodern/ruby-install[ruby-install]ツールを使って必要なバージョンをインストールします。 インストールが完了したら、上記の方法でバージョンを選択することができます。
 
 [#using-custom-versions-of-cocoapods-and-other-ruby-gems]
 === カスタムバージョンの CocoaPods と他の Ruby gem の使用
@@ -304,7 +304,7 @@ steps:
 
 {% endraw %}
 
-You can then ensure you are using those, by prefixing commands with `bundle exec`:
+また、コマンドにプレフィックス `bundle exec` を付加しておくと、確実に使用できるようになります。
 
 [source,yaml]
 ----
@@ -321,11 +321,12 @@ Xcode イメージには少なくとも一つのバージョンの NodeJS が使
 [#images-using-xcode-13-and-later]
 === Xcode 13 以降を使用したイメージ
 
-These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built Additionally, `lts` is set as the default NodeJS version.
+Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。
 
-Version information for the installed NodeJS versions can be found in <<supported-xcode-versions,the software manifests for the image>>], or by running `nvm ls` during a job.
 
-To set the `current` version as the default:
+インストールされている NodeJS のバージョン情報は、 <<#supported-xcode-versions,イメージのソフトウェアマニフェスト>> を参照するか、ジョブの中で `nvm ls` を実行してご確認いただけます。
+
+以下のコマンドで `current` バージョンをデフォルトに設定します。
 
 [source,yaml]
 ----
@@ -334,7 +335,7 @@ steps:
   - run: nvm alias default node
 ----
 
-To revert to the `lts` release:
+`lts` リリースに戻すには、以下を実行します。
 
 [source,yaml]
 ----
@@ -352,7 +353,7 @@ steps:
   - run: nvm install 12.22.3 && nvm alias default 12.22.3
 ----
 
-These images are also compatible with the official https://circleci.com/developer/orbs/orb/circleci/node[CircleCI Node orb], which helps to manage your NodeJS installation along with caching packages.
+これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の https://circleci.com/developer/ja/orbs/orb/circleci/node[CircleCI Node Orb] とも互換性があります。
 
 [#images-using-xcode-125-and-earlier]
 === Xcode 12.5 以前を使用したイメージ
