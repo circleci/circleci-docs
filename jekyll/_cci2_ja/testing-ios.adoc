@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Testing iOS applications on macOS
+= iOS アプリケーションを macOS上でテストする
 :page-layout: classic-docs
-:page-description: macOS 上の iOS アプリケーションのテスト.
+:page-description: macOS 上の iOS アプリケーションのテスト
 :page-liquid:
 :icons: font
 :toc: macro
@@ -16,9 +16,9 @@ contentTags:
 このドキュメントでは、CircleCI を使用して iOS アプリケーションのテストをセットアップおよびカスタマイズする方法について説明します。
 
 [#overview]
-== インサイト スナップショットバッジの概要
+== 概要
 
-CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 For more information about supplied images, refer to the <<supported-xcode-versions,software manifest>> for each Xcode image.
+CircleCI では、 macOS 仮想マシン（VM）での iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 For more information about supplied images, refer to the <<supported-xcode-versions,software manifest>> for each Xcode image.
 
 There is documentation for xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-macos#[getting started on MacOS].
 
