@@ -18,9 +18,9 @@ contentTags:
 [#overview]
 == 概要
 
-CircleCI では、 macOS 仮想マシン（VM）での iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 For more information about supplied images, refer to the <<supported-xcode-versions,software manifest>> for each Xcode image.
+CircleCI では、 macOS 仮想マシン（VM）での iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの <<supported-xcode-versions,ソフトウェアマニフェスト>> を参照してください。
 
-There is documentation for xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-macos#[getting started on MacOS].
+xref:docs/ios-codesigning/#[iOSコード署名プロジェクトと] xref:/docs/hello-world-macos/[MacOS での入門]に関するドキュメントをご覧ください。
 
 [#supported-xcode-versions]
 == サポートされている Xcode のバージョン
@@ -28,43 +28,43 @@ There is documentation for xref:ios-codesigning#[iOS code signing projects] and 
 [#supported-xcode-versions-intel]
 === IntelでサポートされているXcodeのバージョン
 
-{% include snippets/xcode-intel-vm.adoc %}
+{% include snippets/ja/xcode-intel-vm.adoc %}
 
 [#supported-xcode-versions-silicon]
-=== Supported Xcode versions for Apple silicon
+=== Apple Silicon の Xcode 対応バージョン
 
-{% include snippets/xcode-silicon-vm.adoc %}
+{% include snippets/ja/xcode-silicon-vm.adoc %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the xref:dedicated-hosts-macos#[Dedicated hosts] documentation.
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、xref:dedicated-hosts-macos#[専有ホスト]内の表を参照してください
 
 [#getting-started]
 == はじめよう
 
-Select a macOS project repository you would like to build from the *Projects* page of the https://app.circleci.com/[CircleCI web app].
+CircleCI Web アプリ の *Projects* ページで、ビルドしたい macOS プロジェクトのレポジトリを選択します。
 
-We highly recommend using link:https://fastlane.tools[Fastlane] to build and sign your apps in CircleCI. fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
+CircleCI でのアプリケーションのビルドと署名には link:https://fastlane.tools[fastlane] を使用することを強くお勧めします。 fastlaneを使うと、多くの場合が最小限の設定で簡単にビルド、テスト、デプロイプロセスを実行することができます。
 
 [#setting-up-your-xcode-project]
 === Xcode プロジェクトの設定
 
-CircleCI でプロジェクトを設定した後、 fastlane でビルドするスキームが Xcode プロジェクトで「共有」としてマークされていることを確認する必要があります。 Xcode で作成されるほとんどの新規プロジェクトでは、デフォルトのスキームはすでに「共有」としてマークされています。
+CircleCI でプロジェクトを設定した後、 fastlane でビルドするスキームが Xcode プロジェクトで「 "shared"」としてマークされていることを確認する必要があります。 Xcode で作成されるほとんどの新規プロジェクトでは、デフォルトのスキームはすでに「shared」としてマークされています。
  これを確認する、または既存のスキームを共有するには、次の手順を実行します。
 
-. In Xcode, choose Product \-> Scheme \-> Manage Schemes
+. Xcode で、「Product (プロダクト)」 -> 「Scheme (スキーム)」-> 「Manage Schemes (スキーム管理)」 の順に選択します。
 . 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
-. Ensure the `myproject.xcodeproj/xcshareddata/xcschemes` directory is checked into your Git repository and push the changes
+. `myproject.xcodeproj/xcshareddata/xcschemes` ディレクトリが Git リポジトリに組み込まれていることを確認し、変更をプッシュします
 
 単純なプロジェクトであれば、最小限の設定で実行できます。
 
 [#using-fastlane]
 == fastlane の使用
 
-link:https://fastlane.tools/[Fastlane] is a set of tools for automating the build and deploy process of mobile apps. CicleCI上で fastlane を使用すると、ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ぜひご使用ください。 また、fastlane の使用によりビルドをローカルでも CircleCI 上でも同等に実行することができます。
+link:https://fastlane.tools/[fastlane] は、モバイルアプリのビルドとデプロイのプロセスを自動化するためのツールセットです。 CicleCI上で fastlane を使用すると、ビルド、テスト、デプロイプロセスの設定や自動化が簡単に行えるため、ぜひご使用ください。 また、fastlane の使用によりビルドをローカルでも CircleCI 上でも同等に実行することができます。
 
 [#adding-a-gemfile]
 === Gemfile の追加
 
-It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI and that all dependencies are installed. Below is a sample of a simple `Gemfile`:
+ローカルでも依存関係がすべてインストールされた CircleCI 上でも同じバージョンの fastlane が使用できるよう、 `Gemfile` をリポジトリに追加することをお勧めします。 以下に `Gemfile` の簡単なサンプル例を示します。
 
 [source,ruby]
 ----
@@ -73,12 +73,12 @@ source "https://rubygems.org"
 gem 'fastlane'
 ----
 
-After you have created a `Gemfile` locally, you will need to run `bundle install` and check both `Gemfile` and `Gemfile.lock` into your project repository.
+`Gemfile` をローカルで作成したら、`bundle install` を実行し、`Gemfile` と  `Gemfile.lock`  の両方をリポジトリにチェックインする必要があります。
 
 [#setting-up-fastlane-for-use-on-circleci]
 === CircleCI 上で使用する場合の fastlane のセットアップ
 
-When using Fastlane in your CircleCI project, we recommend adding the following to beginning of your `Fastfile`:
+Fastlane を CircleCI プロジェクトで使用する場合は、以下の行を `Fastfile` の始めに追加することをお勧めします。
 
 [source,ruby]
 ----
@@ -93,10 +93,10 @@ platform :ios do
 end
 ----
 
-The `setup_circle_ci` Fastlane action must be in the `before_all` block to perform the following actions:
+以下のアクションを実行するには、`setup_circle_ci`  fastlane アクションを `before_all`  ブロック内に置く必要があります。
 
-* fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
-* Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
+* Fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
+* fastlane match を `readonly` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
 * ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
 [#example-configuration-for-using-fastlane-on-circleci]
@@ -178,26 +178,26 @@ workflows:
             - build-and-test
 ----
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
+環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 
 [#code-signing-with-fastlane-match]
 === Fastlane Match によるコード署名
 
 ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化できるため、iOS アプリケーションの署名には Fastlane Match のご使用をお勧めします。
 
-For more information on how to get started with Fastlane Match, visit the xref:ios-codesigning#[iOS code signing] page.
+Fastlane match の使用に関する詳細は、xref:ios-codesigning#[iOS コード署名]に関するドキュメントをご覧ください
 
 [#using-ruby]
 == Ruby の使用
 
-当社のXcodeイメージは、複数のバージョンのRubyがインストールされた状態で出荷されています。 The versions we install are the latest stable versions of Ruby, according to link:https://www.ruby-lang.org/en/downloads/[Ruby-Lang.org downloads page], at the time the image is built. The versions of Ruby that are installed in each image, along with the default Ruby selected for that image, are listed in the software manifests of each container (see <<supported-xcode-versions,supported Xcode versions>>).
+当社のXcodeイメージは、複数のバージョンの Ruby がインストールされた状態で出荷されています。 インストールするバージョンは、link:https://www.ruby-lang.org/en/downloads/[Ruby-Lang.org downloads page] によると、イメージを構築した時点でのRubyの最新安定版です。 各イメージにインストールされる Ruby のバージョンは、そのイメージで選択されたデフォルトの Ruby と共に、各コンテナのソフトウェアマニフェストに記載されています（<<#supported-xcode-versions,対応 Xcodeバージョン>> を参照）。
 
 システムディレクトリに適用されるアクセス許可が制限されるため、Ruby システムを使って Gems をインストールすることは推奨しません。 一般的なルールとして、ジョブには Chruby (すべてのイメージでデフォルトとして設定) が提供する代替の Ruby を使用することを推奨します。
 
 [#switching-rubies-with-the-macos-orb]
 === macOS Orb を使った Ruby の切り替え
 
-Using the official macOS orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
+公式の macOS Orb (バージョン `2.0.0` 以降)  を使用すると、ジョブ内で Ruby を簡単に切り替えることができます。 どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
 
 まずは、Orb を設定の一番最初に含めます。
 
@@ -208,7 +208,7 @@ orbs:
   macos: circleci/macos@2
 ----
 
-Then, call the `switch-ruby` command with the version number required. たとえば、Ruby 2.6 に切り替える場合は、
+次に、必要なバージョン番号と共に `switch-ruby` コマンドを定義します。 たとえば、Ruby 2.6 に切り替える場合は、
 
 [source,yaml]
 ----
