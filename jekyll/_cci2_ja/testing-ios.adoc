@@ -358,16 +358,16 @@ steps:
 [#images-using-xcode-125-and-earlier]
 === Xcode 12.5 以前を使用したイメージ
 
-These images come with at least one version of NodeJS installed directly using `brew`.
+これらのイメージには、少なくとも1つのバージョンのNodeJSが  `brew` を使って直接インストールされている。
 
-Version information for the installed NodeJS versions can be found in the software manifests for the image (see <<supported-xcode-versions,supported Xcode versions>>).
+インストールされている NodeJS のバージョン情報は、イメージのソフトウェアマニフェストに記載されています（<<supported-xcode-versions,対応Xcodeバージョン>>をご参照ください）。
 
-These images are also compatible with the official link:https://circleci.com/developer/orbs/orb/circleci/node[CircleCI Node orb] which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
+これらのイメージは、公式 link:https://circleci.com/developer/orbs/orb/circleci/node[CircleCI Node Orb] にも対応しています。これは、キャッシュパッケージと一緒に `nvm` をインストールすることで、NodeJS のインストールを管理するのに役立ちます。
 
 [#using-homebrew]
 == Homebrew の使用
 
-link:http://brew.sh/[Homebrew] is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency you require to complete your build. 例えば下記のようにします。
+link:http://brew.sh/[Homebrew] は CircleCI にプリインストールされているので、`brew install` を使うだけで、ビルドに必要な依存関係をほとんど追加することができる。 例えば下記のようにします。
 
 [source,yaml]
 ----
@@ -381,20 +381,20 @@ steps:
       command: cowsay Hi!
 ----
 
-It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
+必要な場合は、`sudo` コマンドを使用して、Homebrew 以外のカスタマイズも実行できます。
 
 [#configuring-deployment]
 == デプロイの設定
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 For more information on how to deploy to various services, including example Fastlane configurations, check out the link:/docs/deploy-ios-applications/[deploying iOS apps guide].
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 Fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、 link:/docs/deploy-ios-applications/[iOS アプリケーション デプロイガイド]をご覧ください。
 
 [#troubleshooting]
 == トラブルシューティング
 
-If you are facing build failures while executing your jobs, check out our link:https://support.circleci.com/hc/en-us/categories/115001914008-Mobile[support center knowledge base] for answers to common issues.
+ジョブの実行中にビルドが失敗した場合は、 link:https://support.circleci.com/hc/en-us/categories/115001914008-Mobile[サポートセンターのナレッジベース]で一般的な問題の解決方法を確認してください。
 
 [#next-steps]
 == 次のステップ
 
-* See the link:https://github.com/CircleCI-Public/circleci-demo-ios[`circleci-demo-ios` GitHub repository] for a full example of how to build, test, sign and deploy an iOS  project using Fastlane on CircleCI.
-* See the xref:ios-codesigning#[iOS code signing] page to learn how to configure Fastlane Match for your project.
+* CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、link:https://github.com/CircleCI-Public/circleci-demo-ios[`circleci-demo-ios` の GitHub リポジトリ] を参照してください。
+* Fastlane match をプロジェクトに設定する方法は xref:ios-codesigning#[iOS コード署名に関するドキュメント]を参照してください。
