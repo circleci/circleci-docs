@@ -169,7 +169,18 @@ choco uninstall circleci-cli -y --remove dependencies
 ```
 **Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
 
-## Useful links
+## Next steps
+{: #next-steps }
+
+- [How to validate your CircleCI configuration](/docs/how-to-use-the-circleci-local-cli/#validate-a-circleci-config)
+- [How to run a job in a container on your local machine](/docs/how-to-use-the-circleci-local-cli/#run-a-job-in-a-container-on-your-machine)
+- [How to create, publish, view, and manage orbs](/docs/how-to-use-the-circleci-local-cli/#orb-development-kit)
+- [How to manage contexts](/docs/how-to-use-the-circleci-local-cli/#context-management)
+- [How to split your tests](/docs/how-to-use-the-circleci-local-cli/#test-splitting) to run across [parallel environments](/docs/parallelism-faster-jobs/) to reduce pipeline duration
+
+---
+
+## CLI articles in the support centre
 {: #useful-links }
 
 If you wish to suggest ways we could improve the CLI please [share your suggestion on the GitHub repo](https://github.com/CircleCI-Public/circleci-cli)
@@ -199,7 +210,7 @@ If you wish to suggest ways we could improve the CLI please [share your suggesti
 - [How to use realitycheck to validate your CircleCI Server installation for GitHub Enterprise via the CLI?](https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation)
 
 
-## Troubleshooting
+### Troubleshooting
 {: #troubleshooting }
 
 - [What if the CLI context commands error with "Must have admin permission"?](https://support.circleci.com/hc/en-us/articles/360047644153-CircleCI-CLI-Context-Command-errors-with-Must-have-admin-permission-)
@@ -209,8 +220,3 @@ If you wish to suggest ways we could improve the CLI please [share your suggesti
 - [What if the CLI command “circleci local execute” fails with "--storage-opt is supported only for overlay over xfs with 'pquota' mount option"?](https://support.circleci.com/hc/en-us/articles/7060937560859-How-to-resolve-error-storage-opt-is-supported-only-for-overlay-over-xfs-with-pquota-mount-option-when-running-jobs-locally-with-the-cli)
 
 - [What if the CLI command “circleci local execute” fails with “not implemented for cgroup v2 unified hierarchy“?](https://support.circleci.com/hc/en-us/articles/4413013337371-CircleCI-CLI-Running-circleci-local-execute-Results-in-not-implemented-for-cgroup-v2-unified-hierarchy-Error)
-
-## Next steps
-{: #next-steps }
-
-- [Introduction to execution environments]({{site.baseurl}}/executor-intro)
