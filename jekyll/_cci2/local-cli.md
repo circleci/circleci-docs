@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Installing the CircleCI local CLI
+title: Install and configure the CircleCI local CLI
 description: How to install the CircleCI local CLI
 categories: [troubleshooting]
 contentTags:
@@ -24,16 +24,14 @@ The [CircleCI command line interface (CLI)](https://circleci-public.github.io/ci
 
 Some of the things you can do with the CLI include:
 
-- Debug and validate your CI config
-- Run jobs locally
+- [Debug and validate your CircleCI configuration](/docs/how-to-use-the-circleci-local-cli/#validate-a-circleci-config)
+- [Run jobs locally](/docs/how-to-use-the-circleci-local-cli/#run-a-job-in-a-container-on-your-machine)
 - Query CircleCI's API
-- Create, publish, view, and manage orbs
-- Manage contexts
+- [Create, publish, view, and manage orbs](/docs/how-to-use-the-circleci-local-cli/#orb-development-kit)
+- [Manage contexts](/docs/how-to-use-the-circleci-local-cli/#context-management)
+- [Split your tests](/docs/how-to-use-the-circleci-local-cli/#test-splitting) to run across [parallel environments](/docs/parallelism-faster-jobs/) to reduce pipeline duration
 
 This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
-
-* TOC
-{:toc}
 
 ## Installation
 {: #installation }
@@ -141,8 +139,8 @@ circleci switch
 
 This command may prompt you for `sudo` if your user does not have write permissions to the install directory, `/usr/local/bin`.
 
-## Configuring the CLI
-{: #configuring-the-cli }
+## Configure the CLI
+{: #configure-the-cli }
 
 Before using the CLI, you need to generate a CircleCI API token from the [Personal API Token tab](https://app.circleci.com/settings/user/tokens). After you get your token, configure the CLI by running:
 
@@ -151,18 +149,6 @@ circleci setup
 ```
 
 The set up process will prompt you for configuration settings. If you are using the CLI with CircleCI cloud, use the default CircleCI host. If you are using CircleCI server, change the value to your installation address (for example, circleci.your-org.com).
-
-## Validate a CircleCI config
-{: #validate-a-circleci-config }
-
-You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally.
-
-To validate your configuration, navigate to a directory with a `.circleci/config.yml` file and run:
-
-```shell
-circleci config validate
-# Config file at .circleci/config.yml is valid
-```
 
 ## Uninstallation
 {: #uninstallation }
@@ -189,8 +175,6 @@ choco uninstall circleci-cli -y --remove dependencies
 If you wish to suggest ways we could improve the CLI please [share your suggestion on the GitHub repo](https://github.com/CircleCI-Public/circleci-cli)
 
 - [How to check private repositories with local jobs using the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/360033753374-Checkout-private-repositories-with-local-jobs-run-through-circleci-cli)
-
-- [How to validate your CircleCI configuration with the CLI?](https://support.circleci.com/hc/en-us/articles/360006735753-How-to-validate-your-CircleCI-configuration)
 
 - [How to know if your project is using deprecated Machine images with the CLI?](https://support.circleci.com/hc/en-us/articles/4421154407195-Deprecating-Ubuntu-14-04-and-16-04-images-EOL-5-31-22)
 
