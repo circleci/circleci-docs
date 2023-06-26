@@ -64,7 +64,7 @@ en:
             link: language-python
           - name: Configuration tutorial
             link: config-intro
-          - name: Set up the Slack orb
+          - name: Use the Slack orb to set up notifications
             link: slack-orb-tutorial
       - name: How-To guides
         children:
@@ -334,8 +334,6 @@ en:
             link: create-an-orb
           - name: Manually author an orb
             link: orb-author-validate-publish
-          - name: Using the Slack orb
-            link: slack-orb-tutorial
       - name: How-to guides
         children:
           - name: Deploy service update to ECS
