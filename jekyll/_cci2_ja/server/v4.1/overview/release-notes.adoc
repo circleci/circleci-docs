@@ -50,7 +50,7 @@ NOTE: 移行プロセスでは、後続のリリースに移行する前に、�
 [#changelog-4-1-2]
 === 更新履歴
 
-このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/[更新履歴] を参照して下さい。
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#リリース-4-1-2[更新履歴] を参照して下さい。
 
 [#release-4-1-1]
 == リリース 4.1.1
