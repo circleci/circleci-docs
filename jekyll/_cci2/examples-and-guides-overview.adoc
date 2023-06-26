@@ -50,4 +50,4 @@ Use the tutorial associated with your platform to learn about the customization 
 [#next-steps]
 == Next steps
 - Read the <<sample-config#,Sample config.yml Files>> document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
-- Refer to the reference guide https://circleci.com/docs/configuration-reference/ for detailed syntax.
+- Refer to the xref:configuration-reference#[Configuration reference page] for detailed syntax.
