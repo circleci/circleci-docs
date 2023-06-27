@@ -27,7 +27,7 @@ The first step is to uninstall launch agent. The exact process depends on the pl
 [#uninstalling-launch-agent-linux]
 === Linux
 
-If the agent has been installed as a `systemd`` service, run the following commands the stop and uninstall the service unit, and delete the service file (The new agent will install a new service unit):
+If the agent has been installed as a `systemd` service, run the following commands the stop and uninstall the service unit, and delete the service file (The new agent will install a new service unit):
 
 ```shell
 sudo systemctl stop circleci.service
@@ -36,7 +36,7 @@ sudo systemctl disable circleci.service
 sudo rm /usr/lib/systemd/system/circleci.service
 ```
 
-Now the Launch Agent binary can be removed from the machine. The default install location is `/opt/circleci/circleci-launch-agent`` but this may differ on your machine if the agent was installed somewhere else. The entire `/opt/circleci` subdirectory can be removed at this point.
+Now the Launch Agent binary can be removed from the machine. The default install location is `/opt/circleci/circleci-launch-agent` but this may differ on your machine if the agent was installed somewhere else. The entire `/opt/circleci` subdirectory can be removed at this point.
 
 The final step is to move the agent configuration file. The default location for this is `/etc/opt/circleci/launch-agent-config.yaml`. The file should be moved to `/etc/circleci-runner/circleci-runner-config.yaml` using the following command
 
@@ -94,7 +94,7 @@ The new agent has a streamlined installation experience on Linux/MacOS thanks to
 
 At present deb and rpm packages are available for linux. Use the following commands to install them
 
-NOTE: These commands should be run with `bash``. The packagecloud script has issues when run with `zsh`
+NOTE: These commands should be run with `bash`. The packagecloud script has issues when run with `zsh`
 
 ```shell
 # DEB Commands
