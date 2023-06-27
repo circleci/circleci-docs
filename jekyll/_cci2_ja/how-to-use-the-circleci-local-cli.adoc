@@ -12,12 +12,32 @@ contentTags:
 
 このページでは、CircleCI CLI の機能の使用方法を説明します。
 
-[#orb-development-kit]
 == Orb 開発キット
+
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが容易になります。
+
+* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free])
+* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli#[Installing the local CLI] page.
+* xref:local-cli#configure-the-cli[Set up and configure] the CircleCI CLI.
+
+[#validate-a-circleci-config]
+== 設定ファイルの Orb のバリデーション
+
+以下のコマンドで Orb をバリデーションできます。
+
+To validate your configuration, navigate to a directory with a `.circleci/config.yml` file and run:
+
+```shell
+circleci config validate
+# Config file at .circleci/config.yml is valid
+```
+
+[#orb-development-kit]
+== 設定ファイルのパッケージ化
 
 <<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが容易になります。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
-次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
+この CLI パッケージ化コマンド (前述の `circleci orb pack` とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。
 
 ```shell
 circleci orb init
@@ -29,21 +49,21 @@ circleci orb init
 circleci orb pack
 ```
 
-Orb のパッケージ化について詳しくは、 <<orb-concepts#orb-packing,Orb のコンセプト>> ページを参照してください。
+次のコマンドは、前述のフォルダー例を `pack` します。
 
 [#validate-an-orb-in-your-configuration-file]
-== 設定ファイルの Orb のバリデーション
+== 設定ファイルの処理
 
-以下のコマンドで Orb をバリデーションできます。
+次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定ファイルが元の設定ファイルと一緒に表示されます (Orb を使用している場合に便利です)。
 
 ```shell
-circleci orb validate /tmp/my_orb.yml
+circleci config process
 ```
 
-このコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
+link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] Orb を使用する次の設定を例に考えます。
 
 [#packing-a-config]
-== 設定ファイルのパッケージ化
+== マシン上のコンテナ内でのジョブの実行
 
 ```shell
 circleci config pack
@@ -98,7 +118,7 @@ $ cat foo/bar/@baz.yml
 {baz: qux}
 ```
 
-以下のようにマップされます。
+このファイルは、次のようにマップされます。
 
 ```yaml
 bar:
@@ -106,9 +126,9 @@ bar:
 ```
 
 [#processing-a-config]
-== 設定ファイルの処理
+== テストの分割
 
-次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定ファイルが元の設定ファイルと一緒に表示されます (Orb を使用している場合に便利です)。
+CircleCI CLI は、ジョブ実行中の高度な機能、たとえばビルド時間を最適化するための <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,テストの分割>> にも使用できます。
 
 ```shell
 circleci config process
@@ -123,7 +143,6 @@ orbs:
   node: circleci/node@4.7.0
 
 workflows:
-  version: 2
   example-workflow:
       jobs:
         - node/test
@@ -135,16 +154,13 @@ workflows:
 circleci config process .circleci/config.yml
 ```
 
-```yml
+```yaml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
   node/test:
     docker:
     - image: cimg/node:13.11.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:
@@ -217,9 +233,9 @@ workflows:
 ```
 
 [#run-a-job-in-a-container-on-your-machine]
-== マシン上のコンテナ内でのジョブの実行
+== コンテキストの管理
 
-CLI を使用すると、Docker を使用して設定ファイル内のジョブを実行できます。 こうすることで、テストを実行してから設定ファイルの変更をプッシュしたり、ビルドキューに影響を与えずにビルドプロセスをデバッグできます。
+<<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。
 
 [#prerequisites]
 === 前提条件
@@ -229,20 +245,20 @@ CLI を使用すると、Docker を使用して設定ファイル内のジョブ
 [#running-a-job]
 === ジョブの実行
 
-CLI では、次のコマンドで Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行できます。
+CLI により、以下のコマンドを使って Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行することができます。
 
 ```shell
 $ circleci local execute JOB_NAME
 ```
 
-CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合、まず設定ファイルを `process.yml` にエクスポートし、次のコマンドを使用して実行するときにそのファイルを指定する必要があります。
+CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合は、まず設定ファイルを `process.yml` にエクスポートし、以下のコマンドで実行する際にそのファイルを指定する必要があります。
 
 ```shell
 circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml JOB_NAME
 ```
 
-次のコマンドは、CircleCI のデモアプリケーションのいずれかを使って、ローカルのマシン上でビルドのサンプルを実行します。
+以下のコマンドにより、CircleCI のデモアプリケーションのいずれかを使って、ローカルマシン上でサンプルビルドを実行します。
 
 ```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
@@ -250,7 +266,7 @@ cd circleci-demo-go
 circleci local execute build
 ```
 
-上記のコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
+これらのコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
 
 [#limitations-of-running-jobs-locally]
 === ローカルでのジョブ実行時の制限事項
@@ -259,25 +275,25 @@ circleci local execute build
 
 **Machine Executor**
 
-ローカルジョブでは Machine Executor を使用できません。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
+ローカルジョブでは Machine Executor は使用できません。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
 
 **SSH キーの追加**
 
-現時点では、`add_ssh_keys` CLI コマンドを使用して SSH キーを追加することはできません。
+現時点では、`add_ssh_keys` CLI コマンドにより SSH キーを追加することはできません。
 
 **ワークフロー**
 
-CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一のジョブ (ワークフローを構成する一要素) しか実行できません。
+CLI ツールでは、ワークフローの実行がサポートされていません。 ワークフローは本来、複数のマシンでジョブを同時実行することで、より高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一のジョブ (ワークフローを構成する一要素) しか実行できません。
 
 **キャッシュとオンライン限定コマンド**
 
-現在、ローカルジョブではキャッシュがサポートされていません。 設定ファイルに <<configuration-reference#savecache,`save_cache`>> または <</configuration-reference#restorecache,`restore_cache`>> のステップがある場合、`circleci` ではそれらをスキップして警告を表示します。
+現在、ローカルジョブではキャッシュはサポートされていません。 設定ファイルに <<configuration-reference#savecache,`save_cache`>> または <</configuration-reference#restorecache,`restore_cache`>> のステップがあると、`circleci` ではそれらをスキップし、警告が表示されます。
 
-また、オンラインでは機能しても、ローカルマシンでは機能しないコマンドもあります。 たとえば、上記の Golang ビルドの例では <<configuration-reference#storeartifacts,`store_artifacts`>> ステップを実行していますが、ローカルでビルドした場合、アーティファクトはアップロードされません。 ローカルのビルドで利用できないステップがあった場合は、コンソールにエラーが表示されます。
+また、オンラインでは機能しても、ローカルマシンでは機能しないコマンドもあります。 たとえば、上記の Golang ビルドの例では <<configuration-reference#storeartifacts,`store_artifacts`>> ステップを実行していますが、ローカルでビルドした場合、アーティファクトはアップロードされません。 ローカルのビルドで利用できないステップがあると、コンソールにエラーが表示されます。
 
 **環境変数**
 
-セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で設定した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、次のコマンドの出力を参照してください。
+セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で設定した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、以下のコマンドの出力を参照してください。
 
 ```shell
 circleci help build
@@ -290,14 +306,14 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 ```
 
 [#test-splitting]
-== テストの分割
+== 次のステップ
 
 CircleCI CLI は、ジョブ実行中の高度な機能、たとえばビルド時間を最適化するための <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,テストの分割>> にも使用できます。
 
 [#context-management]
 == コンテキストの管理
 
-<<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
+ <<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
 
 - `create` - 新規コンテキストの作成
 - `delete` - 指定したコンテキストの削除
