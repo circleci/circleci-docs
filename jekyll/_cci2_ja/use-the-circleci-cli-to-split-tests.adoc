@@ -47,10 +47,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/node:20.3.0
     parallelism: 4
     steps:
       - run:
