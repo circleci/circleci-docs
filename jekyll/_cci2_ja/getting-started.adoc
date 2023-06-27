@@ -11,15 +11,17 @@ contentTags:
 
 このスタートガイドのチュートリアルでは、既存のプロジェクトをCircleCIに接続し、アプリ内の設定エディタを使用し、新しいプロジェクトにチームメンバーを招待して共同作業を行う方法を説明します。
 
+NOTE: Starting June 14, 2023, you may see a simplified experience when setting up a project on CircleCI.  See our link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[community forum] for more details.
+
 CircleCI の `config.yml` オプションの全リストを確認したい場合は、xref:configuration-reference#[CircleCI の設定] を参照してください。
 
 // set up prerequisites
 
-== 前提条件
+== 次のステップ
 
-* link:https://circleci.com/ja/signup[CircleCI無料アカウントに登録]
-* xref:first-steps#[サインインしてVCSを接続する👋]
-* link:https://github.com/new[GitHub], link:https://github.com/new[Bitbucket], link:https://gitlab.com/projects/new[GitLab] のいずれかのリポジトリを作成する。
+* link:https://circleci.com/training/[オンデマンドの開発者無料トレーニング]
+* link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI 基礎ビデオ]
+* xref:config-intro#[設定ファイルの概要]
 
 ++++
 {%- capture header-banner-1 -%}
