@@ -148,7 +148,7 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 ```
 
 ```shell
-sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
+sudo /etc/opt/circleci/policy/circleci_launch_agent.te
 ```
 
 [#start-machine-runner]
