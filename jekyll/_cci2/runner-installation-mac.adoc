@@ -15,7 +15,7 @@ contentTags:
 :machine:
 :macos:
 
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+{% include snippets/runner-1.0-deprecation-brownout.adoc %}
 
 This page describes how to install CircleCI's machine runner on macOS.
 
