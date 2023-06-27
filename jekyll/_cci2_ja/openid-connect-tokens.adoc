@@ -22,7 +22,7 @@ CircleCI OpenID Connect の IDトークンは、以下の環境変数で利用�
 * `$CIRCLE_OIDC_TOKEN`
 * `$CIRCLE_OIDC_TOKEN_V2`
 
-`$CIRCLE_OIDC_TOKEN_V2` トークンの `sub` クレームの形式は、以下の表に示すとおりこれまでと異なります。
+CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**. See <<oidc-in-open-source-projects>>.
 
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
@@ -91,6 +91,15 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |CI ジョブが SSH 再実行機能を使用して開始されるかどうかを示す booleanです。
 |===
 
+[#oidc-in-open-source-projects]
+== クラウドプロバイダーを使ったジョブの認証
+
+次のセクションでは、Amazon Web Services (AWS) と Google Cloud Platform (GCP) を使用して CircleCI でジョブを認証する方法を説明します。 Find this option at **Project settings** > **Advanced**.
+
+If you do allow OIDC tokens to be generated for forks, you **must** check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require.
+
+For more information about building open source projects on CircleCI, see the xref:oss#[Build open source projects] page.
+
 [#authenticate-jobs-with-cloud-providers]
 == クラウドプロバイダーを使ったジョブの認証
 
@@ -115,7 +124,7 @@ AWS アカウントが CircleCI の OpenID Connect トークンを信頼する�
 ** **Audience**： 組織 ID を入力してください
 +
 {% include snippets/ja/find-organization-id.adoc %}
-. IDプロバイダを作成すると、ADWコンソールの上部にバナーが表示され、**Assign role** というオプションが表示されます。 このボタンをクリックして新しいロールを作成するか、AWSドキュメントの https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OpenID Connect フェデレーション用のロールの作成]セクションを参照して、 その手順に従ってください：
+. IDプロバイダを作成すると、ADWコンソールの上部にバナーが表示され、**Assign role** というオプションが表示されます。 このボタンをクリックして新しいロールを作成するか、AWSドキュメントの https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OpenID Connect フェデレーション用のロールの作成]セクションを参照して、 また、以下のものが必要になります：
 ** 先ほど作成した **Identity Provider**。
 ** **Audience** は、先ほど入力した「組織 ID」のみを選択します。
 ** **Add Permissions** ページでは、CircleCIジョブができること、できないことを指定できます。 これは https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス]です。 また、 特定のユースケースに必要なものにパーミッションをロックダウンするために独自のポリシーを書くことができます。
@@ -274,7 +283,7 @@ GCP Web UI の **Grant Access** セクションに移動したら、次の手順
 * issuer は `\https://oidc.circleci.com/org/<organization_id>` です。`organization_id` には CircleCI 組織 ID を入力します。
 . **[Continue]** をクリックしてプロバイダー属性を設定します。
 +
-プロバイダー属性を設定すると、CircleCI のトークンに含まれるクレームを Google の "解釈" にマッピングできます。 たとえば以下のようになります。
+プロバイダー属性を設定すると、CircleCI のトークンに含まれるクレームを Google の "解釈" にマッピングできます。 例えば下記のようにします。
 +
 [.table.table-striped]
 [cols=2*, stripes=even]
