@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-brownout.adoc %}
 
 このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
 
