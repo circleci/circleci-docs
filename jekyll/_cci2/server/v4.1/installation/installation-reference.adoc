@@ -218,6 +218,11 @@ a| API token:
 | `1`
 | Number of replicas to deploy for the `distributor-dispatcher` deployment.
 
+| `distributor_dispatcher.disable_concurrency`
+| bool
+| `False`
+| Disable concurrency limits
+
 | `distributor_external.replicas`
 | int
 | `1`

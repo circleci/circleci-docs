@@ -574,9 +574,6 @@ executors:
   my-executor:
     docker:
       - image: cimg/ruby:3.0.3-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   my-job:
@@ -641,9 +638,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.09
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 3
@@ -1010,9 +1004,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.09
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: xlarge
     steps:
       ... // other config
@@ -1877,9 +1868,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.2.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: latest
     working_directory: ~/main
@@ -1904,9 +1892,6 @@ jobs:
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo “Hello World”
 workflows:
@@ -2499,9 +2484,6 @@ executors:
   linux-13:
     docker:
       - image: cimg/node:13.13
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
       xcode: 14.2.0
@@ -2536,6 +2518,8 @@ workflows:
 ## Example full configuration
 {: #example-full-configuration }
 
+{% include snippets/docker-auth.md %}
+
 {% raw %}
 ```yaml
 version: 2.1
@@ -2543,33 +2527,18 @@ jobs:
   build:
     docker:
       - image: ubuntu:14.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: mongo:2.6.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [mongod, --smallfiles]
 
       - image: postgres:14.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: rabbitmq:3.5.4
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -2626,9 +2595,6 @@ jobs:
   deploy-stage:
     docker:
       - image: ubuntu:14.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -2638,9 +2604,6 @@ jobs:
   deploy-prod:
     docker:
       - image: ubuntu:14.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:

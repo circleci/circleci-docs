@@ -29,11 +29,10 @@ In the primary image, the config defines an environment variable with the `envir
 
 Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
+{% include snippets/docker-auth.md %}
+
 ```yml
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
 ```
@@ -51,17 +50,11 @@ jobs:
       - image: cimg/python:3.10
         environment:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Service container image
       - image: cimg/postgres:14.0
         environment:
           POSTGRES_USER: postgres
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
@@ -122,13 +115,7 @@ jobs:
     working_directory: /your/workdir
     docker:
       - image: your/image_for_primary_container
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: your_postgres_user
           POSTGRES_DB: your_postgres_test

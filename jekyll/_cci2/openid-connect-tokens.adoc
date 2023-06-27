@@ -19,9 +19,9 @@ CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A jo
 CircleCI OpenID Connect ID tokens are available in the following environment variables:
 
 * `$CIRCLE_OIDC_TOKEN`
-* `$CIRCLE_OIDC_TOKEN_V2`
+* `$CIRCLE_OIDC_TOKEN_V2` - Includes a different format for the `sub` claim, See <<format-of-the-openid-connect-id-token>> for full details.
 
-The `$CIRCLE_OIDC_TOKEN_V2` token includes a different format for the `sub` claim, which is highlighted in the table below.
+CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**. See <<oidc-in-open-source-projects>>.
 
 [#setting-up-your-cloud-service]
 == Setting up your cloud service
@@ -91,6 +91,14 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | A boolean indicating if the CI job is started using the SSH rerun feature.
 |===
 
+[#oidc-in-open-source-projects]
+== OIDC in open source projects
+
+OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**.
+
+If you do allow OIDC tokens to be generated for forks, you **must** check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require.
+
+For more information about building open source projects on CircleCI, see the xref:oss#[Build open source projects] page.
 
 [#authenticate-jobs-with-cloud-providers]
 ==  Authenticate jobs with cloud providers

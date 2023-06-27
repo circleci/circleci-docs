@@ -63,23 +63,19 @@ To run a set of concurrent jobs, add a new `workflows:` section to the end of yo
 
 The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows` key named `build_and_test`, and by nesting the `jobs` key with a list of job names. The jobs have no dependencies defined, so they will run concurrently.
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run: <command>
@@ -490,7 +486,7 @@ workflows:
             <<: *filters-production # this is calling the previously set yaml anchor
 ```
 
-Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
+Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
 {: class="alert alert-info" }
 
 ### Using regular expressions to filter tags and branches

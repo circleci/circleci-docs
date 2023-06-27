@@ -135,16 +135,10 @@ jobs:
     build:
     docker: # Specify executor for running build job - this example uses a Docker container
         - image: <docker-image-name-tag> # Specify docker image to use
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     ... # build job steps omitted for brevity
     deploy:
     docker: # Specify executor for running deploy job
         - image: <docker-image-name-tag> # Specify docker image to use
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: # Install the AWS CLI if it is not already included in the docker image
             name: Install awscli

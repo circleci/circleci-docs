@@ -45,9 +45,6 @@ jobs:
   test:
     docker:
       - image: cimg/base:2022.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 4
 ```
 
