@@ -101,11 +101,12 @@ NOTE: また、`circleci tests split --split-by=timings --timings-type=` と同�
 ```sh
 Installing circleci-tests-plugin-cli plugin.
 circleci-tests-plugin-cli plugin Installed. Version: 1.0.5976-439c1fc
-DEBU[2023-05-18T22:09:08Z] Attempting to read from stdin. This will hang if no input is provided.
-DEBU[2023-05-18T22:09:08Z] rerunning failed tests
-DEBU[2023-05-18T22:09:08Z] 2 test(s) failed out of 56 total test(s). Rerunning 1 test file(s)
+DEBUG[2023-05-18T22:09:08Z] Attempting to read from stdin. This will hang if no input is provided.
+INFO[2023-06-14T23:52:50Z] received failed tests from workflow *****
+DEBUG[2023-05-18T22:09:08Z] 2 test(s) failed out of 56 total test(s). Rerunning 1 test file(s)
+DEBUG[2023-06-14T23:52:50Z] if all tests are being run instead of only failed tests, ensure your JUnit XML has a file or classname attribute.
 INFO[2023-05-18T22:09:08Z] starting execution
-DEBU[2023-05-18T22:09:08Z] received test names: ****
+DEBUG[2023-05-18T22:09:08Z] Received: ****
 ```
 
 ステップの出力に  `rerunning failed tests` が表示されていれば、機能は正しく構成されています。  また、元のジョブの実行で失敗したテストの総数や、再実行したテストの総数、再実行したテストの総数を示す出力も表示されます。
@@ -230,7 +231,7 @@ CircleCIのテストセットアップが   `circleci tests run`  コマンド�
 ```yaml
  - run:
     command: |
-      circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings > files.txt #split-by=timings is optional
+      circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
 ```
 
 上記のスニペットは、テストファイル名のリストを `files.txt` に書き出します。  再実行しない場合、このリストはすべてのテストファイル名となります。  再実行の場合、このリストはファイル名のサブセット（前回の実行で少なくとも1回のテスト失敗があったテストファイル名）になります。  `files.txt` からテストファイル名のリストを、例えばカスタムの `makefile` に渡すことができます。
@@ -243,6 +244,15 @@ CircleCIのテストセットアップが   `circleci tests run`  コマンド�
 * シェルスクリプトを呼び出してテストを実行する場合、`circleci tests run` は `circleci/config.yml` ではなく**シェルスクリプト内**に記載してください。
 * "Re-run failed tests only (失敗したテストのみを再実行)" 機能では、組織のワークスペースのxref:persist-data#custom-storage-usage[保持期間]を超えたジョブを再実行することはできません。
 * ジョブでコードカバレッジレポートのアップロードを行う場合、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[再実行中に問題が発生することがあります]。
+
+[#troubleshooting]
+== FAQ
+
+**質問:** 不明点や問題がある場合の問い合わせ先はどこですか？
+
+1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "re-run".
+1. Use xref:configuration-reference#storeartifacts[`store_artifacts`] to upload  the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
+1. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to re-run.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
 
 [#FAQs]
 == FAQ
@@ -307,7 +317,7 @@ CircleCIのテストセットアップが   `circleci tests run`  コマンド�
 
 **質問:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
 
-**回答:** はい、`circleci tests split --split-by=timings --timings-type=` と同様に、`test-selector` フラグを使用してタイミングタイプを指定することができます。  `file`、`classname`、`name` を渡すことができます（ `name` はテスト名で分割されます）。
+**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) as a flag to `circleci tests run`.
 
 ---
 
