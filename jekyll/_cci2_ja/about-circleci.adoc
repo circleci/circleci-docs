@@ -25,9 +25,9 @@ CircleCI の使命は、ソフトウェアチームがより迅速にイノベ�
 image::{{site.baseurl}}/assets/img/docs/arch.png[CircleCI process diagram]
 
 [#what-is-ci-cd]
-== What is CI/CD?
+== CI/CD の基本
 
-*Continuous integration (CI)* is a practice that integrates code into a chosen branch of a shared repository, early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by developers multiple times throughout the day by committing daily to a shared mainline. 各コミットにより自動テストとビルドがトリガーされます。 If these fail, they can be repaired quickly.
+link:https://circleci.com/ja/continuous-integration/[CI・継続的インテグレーション]は、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。  別の場所で機能追加などを行い、開発サイクルの終了間際にマージする方法とは違って、継続的インテグレーションでは、開発メンバーそれぞれが随時、自身のコードを共有リポジトリ上でマージしていく形になります。 各コミットにより自動テストとビルドがトリガーされます。 失敗しても、数分以内に素早く修復することができます。
 
 *Continuous delivery (CD)* is a practice that produces reliable releases to a chosen development environment, like a staging or production branch.
 
