@@ -2,23 +2,23 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI overview
+= CircleCI について
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of CircleCI, continuous integration and continuous delivery
+:page-description: このページでは、CircleCI を利用してソフトウェアやアプリケーション開発の自動化実現方法のご紹介に関して詳しく説明しています。CircleCI は、ソフトウェア開発のビルド、テスト、デプロイを全て自動化します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
 [#introduction]
-== コンテナランナー
+== 概要
 
-CircleCI's mission is to manage change so software teams can innovate faster. CircleCI empowers technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. CircleCI provides enterprise-class support and services, and works where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers.
+CircleCI の使命は、ソフトウェアチームがより迅速にイノベーションを実現できるよう、変更を管理することです。 私たちは、テクノロジー主導の組織が最高の仕事を遂行できるよう支援し、変更を管理することでエンジニアリングチームの生産性と革新性を高めたいと考えています。 CircleCIは、企業向け（エンタープライズ）のサポートとサービスを提供し、お客様の作業場所で動作します： Linux、macOS、Android、Windowsをクラウドまたはお客様のサーバーでご利用いただけます。
 
 インテリジェントな自動化により、ビルド、テスト、デプロイを行うことができます。
 
