@@ -14,7 +14,7 @@ contentTags:
 
 :toc-title:
 
-このページでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
+このページでは、CircleCI Server 4.x を新規にインストールする場合、および既存の CircleCI Server 4.x から内部の Postgres および MongoDB のデータを外部データストアに移行する場合に使用する以下の外部サービスの設定方法について説明します。
 
 toc::[]
 
@@ -24,14 +24,14 @@ toc::[]
 [#best-practices-for-your-postgresql]
 === PostgreSQL のベストプラクティス
 
-NOTE: 外部化されたPostgreSQLインスタンスはバージョン12.1以上である必要があります。
+NOTE: 外部化する PostgreSQL インスタンスはバージョン 12.1 以上である必要があります。
 
 プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-|1 日のアクティブ ユーザー数
+|1 日のアクティブユーザー数
 |PostgreSQL レプリカ数
 |CPU
 |RAM
@@ -41,14 +41,14 @@ NOTE: 外部化されたPostgreSQLインスタンスはバージョン12.1以上
 |50 名未満
 |2
 |8 コア
-|16GB
+|16 GB
 |100 GB
 |1 Gbps
 
 |50 ～ 250 名
 |2
 |8 コア
-|1Gbps
+|16 GB
 |200 GB
 |1 Gbps
 
@@ -66,7 +66,7 @@ NOTE: 外部化されたPostgreSQLインスタンスはバージョン12.1以上
 |1 TB
 |10 Gbps
 
-|5000名以上
+|5000 名以上
 |3
 |8 コア
 |32 GB
@@ -80,9 +80,9 @@ NOTE: 外部化されたPostgreSQLインスタンスはバージョン12.1以上
 {% include snippets/ja/server/migrate-internal-postgres-to-external.adoc %}
 
 [#connecting-your-external-postgres]
-=== 外部の PostgreSQL インスタンスを CircleCI サーバーに接続する
+=== 外部の PostgreSQL インスタンスを CircleCI Server に接続する
 
-外部の PostgreSQL インスタンスをセットアップしたら、CircleCI サーバインスタンスがアクセスできるように、`values.yaml` ファイルに以下を追加します。
+外部の PostgreSQL インスタンスをセットアップしたら、CircleCI Server インスタンスがアクセスできるように、`values.yaml` ファイルに以下を追加します。
 
 [source,yaml]
 ----
@@ -92,7 +92,7 @@ postgresql:
   postgresqlPort: <port> # The port of your PostgreSQL instance
 ----
 
-NOTE: `postgresql.internal: false` は、内部的にデプロイされた Postgres インスタンスを削除します。
+NOTE: `postgresql.internal: false` は、内部にデプロイ済みの Postgres インスタンスを削除します。
 
 [tab.postgres.Create_secret_yourself]
 --
@@ -129,7 +129,7 @@ postgresql:
 ----
 --
 
-この変更は、`helm install/upgrade` を実行したときに有効になります。 外部化されたPostgresインスタンスへの移行を完了している場合、helm upgrade を実行すると、スケールダウンされたポッドは `values.yaml` で定義されたレプリカ番号にスケールバックされます。
+この変更は、`helm install/upgrade` を実行したときに有効になります。 外部化した Postgres インスタンスへの移行を完了している場合、`helm upgrade` を実行すると、スケールダウンされたポッドが `values.yaml` で定義されたレプリカ番号にスケールバックされます。
 
 [#backing-up-postgresql]
 === PostgreSQL のバックアップ
@@ -139,14 +139,14 @@ PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に�
 CircleCI では、以下を行っていただくよう強くお勧めしています。
 
 * 毎日バックアップを行う
-* バックアップを少なくとも 30 日間保持する
+* 少なくとも 30 日分のバックアップを保持する
 * データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
 * CircleCI Server のアップグレードを行う前には毎回バックアップを行う
 
 [#mongodb]
 == MongoDB
 
-NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。
+NOTE: ご自身の MongoDB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。
 
 [#migrating-from-internal-mongodb]
 === 内部 MongoDB から外部化ソースへの移行
@@ -154,9 +154,9 @@ NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バー�
 {% include snippets/ja/server/migrate-internal-mongo-to-external.adoc %}
 
 [#connecting-your-external-mongodb]
-=== 外部の MongoDB インスタンスを CircleCI サーバーに接続する
+=== 外部の MongoDB インスタンスを CircleCI Server に接続する
 
-外部の MongoDB インスタンスを設定したら、`values.yaml` ファイルに以下を追加して、CircleCI サーバーインスタンスに接続します。
+外部の MongoDB インスタンスを設定したら、`values.yaml` ファイルに以下を追加して、CircleCI Server インスタンスに接続します。
 
 [source,yaml]
 ----
@@ -214,4 +214,4 @@ mongodb:
 ----
 --
 
-この変更は、`helm install/upgrade` を実行したときに有効になります。 外部化された MongoDB インスタンスへの移行を完了している場合、helm upgrade を実行すると、スケールダウンされたポッドは `values.yaml` で定義されたレプリカ番号にスケールバックされます。
+この変更は、`helm install/upgrade` を実行したときに有効になります。 外部化した MongoDB インスタンスへの移行を完了している場合、`helm upgrade` を実行すると、スケールダウンされたポッドが `values.yaml` で定義されたレプリカ番号にスケールバックされます。
