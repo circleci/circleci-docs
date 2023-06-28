@@ -113,7 +113,7 @@ ok    policies    0.001s
 3/3 tests passed (0.001s)
 ----
 
-{% include snippets/find-organization-id.adoc %}
+{% include snippets/ja/find-organization-id.adoc %}
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == CircleCI ドメイン固有の言語を使った Rego ポリシーの記述
