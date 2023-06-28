@@ -36,22 +36,22 @@ CI/CDを活用することによって、開発者がより高品質で安定し
 [#circleci-in-your-workflow]
 == CircleCI のワークフロー
 
-サポートされているバージョンコントロールシステム上  (VCS) のソフトウェアリポジトリは、 link:https://circleci.com[circleci.com] のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI runs each link:/docs/glossary/#job[job] in a separate xref:glossary#container[container] or link:https://circleci.com/developer/images?imageType=machine[virtual machine].
+サポートされているバージョンコントロールシステム上  (VCS) のソフトウェアリポジトリは、 link:https://circleci.com[circleci.com] のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI はそれぞれの link:/docs/glossary/#job[ジョブ]を別々のxref:glossary#container[コンテナ]またはlink:https://circleci.com/developer/images?imageType=machine[仮想マシン]で実行します。
 
-CircleCI sends an email notification of success or failure after the tests complete. CircleCI also includes integrated xref:notifications#[Slack and IRC notifications]. テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
+その後 CircleCI は、テストが完了すると、成功または失敗のメール通知を送信します。 CircleCI には xref:notifications#[Slack 通知と IRC 通知]も統合されています。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
 
-CircleCI may be configured to deploy code to various environments, including (but not limited to):
+CircleCI は、（これらに限定されないが）様々な環境にコードをデプロイするように構成することができます：
 
 * AWS S3
 * AWS EC2 Container Service（ECS）
 * Google Cloud Platform (GCP)
-* CircleCI CLI
-* Cypress
+* Azure Container Registry
+* Heroku
 * Firebase
 * Android
 * iOS
 
-The link:https://circleci.com/developer/orbs[orbs registry] contains packages of reusable configuration that can be used for common deployment targets. Orb を使うと、設定を簡略化し効率化することができます。
+link:https://circleci.com/developer/ja/orbs[Orb レジストリ] には、一般的なデプロイターゲットに使用できる、再利用可能な設定のパッケージが含まれています。 Orb を使うと、設定を簡略化し効率化することができます。
 
 その他のクラウド型デプロイサービスを使っている場合は、 SSH を使うか、ジョブ設定において各サービスの API クライアントを導入することで、スクリプト化することができます。
 
@@ -59,20 +59,20 @@ The link:https://circleci.com/developer/orbs[orbs registry] contains packages of
 == 詳しくはこちら
 
 [#on-circleci-academy]
-=== On CircleCI Academy
+=== CircleCI Academy
 
-* link:https://academy.circleci.com/cicd-basics?access_code=public-2021[CI/CD 101 workshop]
-* link:https://academy.circleci.com/general-developer-training?access_code=public-2021[General developer training]
+* link:https://academy.circleci.com/cicd-basics?access_code=public-2021[CI/CD 101 ワークショップ（英語）]
+* link:https://academy.circleci.com/general-developer-training?access_code=public-2021[開発者向けトレーニング（英語）]
 
 [#on-our-blog]
-=== On our blog
+=== ブログ
 
 * link:https://circleci.com/blog/config-best-practices-dependency-caching/[Config best practices: dependency caching]
-* link:https://circleci.com/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/[Automate and scale your CI/CD with CircleCI orbs]
+* link:https://circleci.com/ja/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/[CircleCI Orb で拡張性に優れた自動 CI/CD を実現する方法]
 * link:https://circleci.com/blog/secure-ci-pipeline/[How to secure your CI pipeline]
 
 [#next-steps]
 == 次のステップ
 
-* xref:benefits-of-circleci#[Benefits of CircleCI]
-* xref:concepts#[CirceCI concepts]
+* xref:benefits-of-circleci#[CircleCI のメリット]
+* xref:concepts#[CircleCI の概要]
