@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+{% include snippets/runner-1.0-deprecation-brownout.adoc %}
 
 [#self-hosted-runner-configuration-reference]
 == Machine runner configuration reference

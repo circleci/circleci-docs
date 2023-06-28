@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/runner-1.0-deprecation-brownout.adoc %}
+
 [#strongly-recommended-method]
 == Strongly recommended method
 
