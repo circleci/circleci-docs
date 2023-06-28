@@ -675,6 +675,31 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
+| *Contexts*
+|
+|
+|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit context variables
+^|
+^|
+^|
+
+^| Manage contexts
+^|
+^|
+^|
+
 | *Config sources*
 |
 |
