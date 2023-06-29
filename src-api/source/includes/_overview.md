@@ -1,4 +1,4 @@
-# CircleCI V1 API Overview 
+# CircleCI V1 API Overview
 
 The CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. RESTful APIs enable you to call individual API endpoints to perform the following actions:
 
@@ -76,18 +76,19 @@ All API calls are made in the same way, by making standard HTTP calls, using JSO
 ## Get Authenticated
 
 
-```sh 
+```sh
 curl -H "Circle-Token: <circle-token>" "https://circleci.com/api/..."
 ```
 
-```sh 
+```sh
 curl -u <circle-token>: "https://circleci.com/api/..."
 ```
 
 ```sh
 curl "https://circleci.com/api/v1.1/me?circle-token=<circle-token>"
 ```
-You can add the API token using your [account dashboard](https://circleci.com/account/api).
+
+You can add the API token using your [account dashboard](https://circleci.com/account/api). Both personal and project API tokens are supported for API v1, however, we recommend using personal API tokens at this time as project API tokens are **not** supported for API v2.
 
 To be authenticated by the API server, use this as the value of the Circle-Token header:
 
