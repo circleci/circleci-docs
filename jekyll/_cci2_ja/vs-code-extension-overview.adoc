@@ -62,7 +62,7 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png[Sc
 - SSH 接続でジョブを再実行する (詳しくは「xref:#re-run-with-ssh[SSH での再実行]」セクションを参照)
 - ジョブの詳細を確認する
 +
-image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
+image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[ジョブの詳細が表示されたサイドパネルのスクリーンショット]
 
 また、ジョブを展開すると以下の操作を行えます。
 
@@ -74,23 +74,23 @@ image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Scr
 
 以下の 2 通りの方法で、VS Code から直接 SSH 接続してジョブを再実行できます。
 
-* ジョブの詳細ページを開き、右上にある緑色の **[SSH]** ボタンをクリックする
+* ジョブの詳細ページを開き、右上にある **SSH** ボタンをクリックする
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screenshot of side Panel with job details]
-* Or, hover over the job in the pipelines panel, and click the SSH action button next to the job name.
+* パイプラインパネルのジョブにカーソルを合わせ、ジョブ名の隣に表示される [SSH] ボタンをクリックする
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun otpions]
 
-In both cases, you will be presented with two options:
-
-* パイプラインパネルのジョブにカーソルを合わせ、ジョブ名の隣に表示される [SSH] ボタンをクリックする
-* Open an SSH session in a remote VS Code window.
-+
-Using a remote development window requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on remote development in VS Code using SSH in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
-
-To re-run your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the CircleCI VS Code extension settings.
-
 どちらの操作でも、以下の 2 つのオプションが表示されます。
+
+* ターミナルで SSH セッションを開始する
+* VS Code のリモートウィンドウで SSH セッションを開始する
++
+VS Code のリモートウィンドウを使用するには、VS Code 公式の link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] 拡張機能が必要です。 VS Code 内でリモート環境に SSH 接続する方法については、link:https://code.visualstudio.com/docs/remote/ssh[VS Code のドキュメント (英語)] をご覧ください。
+
+SSH でジョブを再実行するには、初めにお使いの GitHub または Bitbucket の SSH キーへのパスを設定する必要があります。 初めて SSH で再実行しようとすると、必要な SSH キーへのパスを選択するよう求められます。 この手順をスキップした場合、または設定した SSH キーへのパスを変更する場合は、CircleCI VS Code 拡張機能の設定の **[SSH]** セクションで設定できます。
+
+また、再実行対象のジョブで並列実行機能を使用している場合は、SSH 接続する並列実行を選択できます。
 
 [#notifications]
 === 通知
@@ -153,7 +153,7 @@ CircleCI CLI の `circleci policy decide` コマンドに相当し、設定済�
 
 - VS Code のコマンドパレットを開く
 - 開いている `.circleci/config.yml` ファイル内の任意の場所を右クリックする。
-- `.circleci/config.yml` を開いた状態で、エディター右上にある [CircleCI] ボタンをクリックする。 このボタンは、他に編集しているファイルがある場合は表示されません。
+- `.circleci/config.yml` を開いた状態で、エディター右上にある [CircleCI] ボタンをクリックする。 他に編集しているファイルがある場合、このボタンは表示されません。
 
 [#open-source-language-server]
 === オープンソースの言語サーバー
