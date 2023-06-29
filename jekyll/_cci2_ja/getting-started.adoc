@@ -28,7 +28,7 @@ CircleCI の `config.yml` オプションの全リストを確認したい場合
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
 
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, view the pipeline, and see it pass. {% endcapture %}
+{% capture content %}  新しいコードリポジトリに接続し、CircleCI設定ファイルを新しいブランチにコミットし、パイプラインを表示し、それがパスするのを確認する。 {% endcapture %}
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
 
