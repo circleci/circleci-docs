@@ -11,8 +11,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: This feature is in **preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Community forum].
-
 [#motivation-and-introduction]
 == Motivation and introduction
 
