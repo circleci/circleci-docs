@@ -14,7 +14,7 @@ contentTags:
 :toc-title:
 toc::[]
 
-{% include snippets/runner-1.0-deprecation-brownout.adoc %}
+{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
 
 [#introduction]
 == Introduction
