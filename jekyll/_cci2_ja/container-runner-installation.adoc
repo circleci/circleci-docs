@@ -33,12 +33,12 @@ CircleCI のコンテナランナーをインストールする方法につい�
 
 [.tab.container-runner.Web_app_installation]
 --
-{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
+{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
 --
 
 [.tab.container-runner.CLI_installation]
 --
-{% include snippets/ja/runner/install-with-cli-steps.adoc %}
+{% include snippets/runner/ja/install-with-cli-steps.adoc %}
 --
 
 [#container-runner-installation]
