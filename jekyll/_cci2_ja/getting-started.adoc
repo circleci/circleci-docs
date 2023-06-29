@@ -11,7 +11,7 @@ contentTags:
 
 このスタートガイドのチュートリアルでは、既存のプロジェクトをCircleCIに接続し、アプリ内の設定エディタを使用し、新しいプロジェクトにチームメンバーを招待して共同作業を行う方法を説明します。
 
-NOTE: Starting June 14, 2023, you may see a simplified experience when setting up a project on CircleCI.  See our link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[community forum] for more details.
+NOTE: 2023年6月14日より、CircleCIでプロジェクトを設定する際の体験が簡素化される可能性があります。  See our link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[community forum] for more details.
 
 CircleCI の `config.yml` オプションの全リストを確認したい場合は、xref:configuration-reference#[CircleCI の設定] を参照してください。
 
