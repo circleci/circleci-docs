@@ -125,7 +125,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. <b>Click Commit and Run.</b> This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
+<a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCIコンフィグエディタ</a>に、サンプルの<code>config.yml</code>ファイルがあらかじめ入力されています。 <b>コミットして実行をクリックする</b> これにより、<code>.circleci/config.yml</code> ファイルが <code>circleci-project-setup</code> という新しいブランチのリポジトリのルートに作成されます。
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
