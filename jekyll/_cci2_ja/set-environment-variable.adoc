@@ -89,7 +89,7 @@ jobs:
       FOO: bar
 ```
 
-NOTE: 7 桁以上の整数は指数表記に変換されます。 これを回避するには、整数を一つの文字列として格納してください (例: "1234567")。
+NOTE: 6 桁以上の整数は指数表記に変換されます。 これを回避するには、整数を一つの文字列として格納してください (例: "1234567")。
 
 [#set-an-environment-variable-in-a-context]
 == プロジェクトでの環境変数の設定
@@ -97,9 +97,9 @@ NOTE: 7 桁以上の整数は指数表記に変換されます。 これを回�
 . CircleCI Web アプリで、プロジェクトの設定に移動します。
 +
 image::org-settings-contexts-v2.png[Contexts]
-. サイドナビゲーションの **Environment Variables** をクリックします。
-. **Add Variable** をクリックして新しい環境変数の名前と値を入力します。
-. `.circleci/config.yml` で、以下のように新しい環境変数を使用します。
+. 環境変数を関連付けるコンテキストを選択するか、**Create Context** ボタンをクリックして新しいコンテキストを作成します。
+. **Add Environment Variable** をクリックし、名前と値を入力します。
+. コンテキストが workflows キーの下に追加されたら、`.circleci/config.yml` で新しい環境変数を以下のように使用します。
 +
 ```yaml
 ersion: 2.1
@@ -124,7 +124,7 @@ jobs:
             echo $MY_ENV_VAR # this env var must be set within the project
 ```
 
-作成された環境変数は、アプリケーションでは表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
+コンテキストを作成すると、複数のプロジェクト間で環境変数を共有すると共に、アクセス可能なユーザーを制御できるようになります。 コンテキストを使用して環境変数へのアクセスを制御する方法の詳細は、xref:contexts#restricting-a-context[コンテキストの制限]を参照してください。
 
 [#set-an-environment-variable-in-a-project]
 == コンテナでの環境変数の設定
