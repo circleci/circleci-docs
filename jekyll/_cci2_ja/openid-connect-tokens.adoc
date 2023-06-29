@@ -22,7 +22,7 @@ CircleCI OpenID Connect の IDトークンは、以下の環境変数で利用�
 * `$CIRCLE_OIDC_TOKEN`
 * `$CIRCLE_OIDC_TOKEN_V2`
 
-CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**. See <<oidc-in-open-source-projects>>.
+CAUTION: **フォークについてはどうですか？** OIDC トークンは、フォークされたビルドに対してのみ生成されます。これは、フォークされたプルリクエストからのビルドにシークレットを渡す設定が有効になっている場合に限ります。 このオプションは **Project settings**  > **Advanced** にあります。 詳しくはこちらを<<oidc-in-open-source-projects>>ご覧下さい。
 
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
@@ -92,13 +92,13 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |===
 
 [#oidc-in-open-source-projects]
-== クラウドプロバイダーを使ったジョブの認証
+== オープンソースプロジェクトでの OIDC
 
-次のセクションでは、Amazon Web Services (AWS) と Google Cloud Platform (GCP) を使用して CircleCI でジョブを認証する方法を説明します。 Find this option at **Project settings** > **Advanced**.
+OIDCトークンは、**Pull Request をフォークしたビルドにシークレットを渡す**設定が有効な場合にのみ、フォークされたビルドに対して生成されます。 このオプションは **Project settings**  > **Advanced** にあります。
 
-If you do allow OIDC tokens to be generated for forks, you **must** check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require.
+もしOIDCトークンがフォーク用に生成されることを許可するのであれば、フォークされたビルドが必要とするリソース以外のリソースにアクセスすることを避けるために、ポリシーで `oidc.circleci.com/vcs-origin` クレームをチェックしなければなりません。
 
-For more information about building open source projects on CircleCI, see the xref:oss#[Build open source projects] page.
+CircleCIでのオープンソースプロジェクトのビルドについての詳細は、xref:oss#[オープンソースプロジェクトのビルド] ページを参照してください。
 
 [#authenticate-jobs-with-cloud-providers]
 == クラウドプロバイダーを使ったジョブの認証
