@@ -32,7 +32,7 @@ contentTags:
 
 値や定義済みの環境変数の全リストは、xref:variables#pipeline-values[プロジェクトの値と変数]に関するガイドを参照して下さい。
 
-include::../_includes/snippets/pipeline-values.adoc[]
+include::../_includes/snippets/ja/pipeline-values.adoc[]
 
 使用例:
 
