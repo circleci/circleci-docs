@@ -9,7 +9,7 @@ contentTags:
 = 環境変数の設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI パイプラインで使用するための環境変数の設定方法
+:page-description: このドキュメントでは、CircleCI パイプラインで使用するための環境変数の設定方法を詳しく皆様にご紹介しています。
 :icons: font
 :toc: macro
 
@@ -17,12 +17,12 @@ contentTags:
 
 CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。
 
-{% include snippets/docker-auth.adoc %}
+{% include snippets/ja/docker-auth.adoc %}
 
 [#set-an-environment-variable-in-a-shell-command]
-== ステップでの環境変数の設定
+== シェルコマンドでの環境変数の設定
 
-ステップで環境変数を設定するには、 xref:configuration-reference#run[`environment` キー] を使用します。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
+CircleCI では環境変数の設定時の挿入はサポートしていませんが、xref:env-vars#parameters-and-bash-environment[`BASH_ENV` を使用して] 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
 version: 2.1
@@ -48,14 +48,14 @@ jobs:
             source "$BASH_ENV"
 ```
 
-NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。
+NOTE: シェルによっては、`~/.tcshrc` や `~/.zshrc` などのシェルスタートアップファイルに新しい変数を付加しなければならない場合があります。
 
 環境変数の設定についての詳細は、ご使用のシェルのドキュメントを確認してください。
 
 [#set-an-environment-variable-in-a-step]
-== ジョブでの環境変数の設定
+== ステップでの環境変数の設定
 
-ジョブで環境変数を設定するには、 xref:configuration-reference#job_name[`environment` キー] を使用します。
+ジョブで環境変数を設定するには、 xref:configuration-reference#run[`environment` キー] を使用します。
 
 ```yaml
 version: 2.1
@@ -71,10 +71,10 @@ jobs:
       FOO: bar
 ```
 
-NOTE: 7 桁以上の整数は指数表記に変換されます。 これを回避するには、整数を一つの文字列として格納してください (例: "1234567")。
+NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、xref:env-vars#parameters-and-bash-environment[`BASH_ENV` を使用して] 値をエクスポートします。
 
 [#set-an-environment-variable-in-a-job]
-== コンテキストでの環境変数の設定
+== ジョブでの環境変数の設定
 
 ジョブで環境変数を設定するには、 xref:configuration-reference#job_name[`environment` キー] を使用します。
 
