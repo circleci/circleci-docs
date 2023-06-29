@@ -246,13 +246,13 @@ CircleCIのテストセットアップが   `circleci tests run`  コマンド�
 * ジョブでコードカバレッジレポートのアップロードを行う場合、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[再実行中に問題が発生することがあります]。
 
 [#troubleshooting]
-== FAQ
+== トラブルシューティング
 
-**質問:** 不明点や問題がある場合の問い合わせ先はどこですか？
+`circleci tests run` を設定した後、"Rerun failed tests only "をクリックすると、*すべてのテスト* が再実行されます：
 
-1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "re-run".
-1. Use xref:configuration-reference#storeartifacts[`store_artifacts`] to upload  the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
-1. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to re-run.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
+1. `circleci tests run` を起動するときに `--verbose` 設定が有効になっていることを確認します。 これは、`circleci tests run` が  "re-run " 時にどのような "テスト "を受けているかを表示します。
+1. テスト結果を含むJUnit XMLをCircleCIにアップロードするには、xref:configuration-reference#storeartifacts[`store_artifacts`]を使用します。  これは `store_test_results` で CircleCI にアップロードされるファイルと同じものです。
+1. 新しくアップロードされた JUnit XML を [**Artifacts**] タブで手動で検査し、`file=` 属性または `classname` 属性があることを確認します。  どちらも存在しない場合、再実行（re-run）しようとすると予期しない動作が発生します。  このページの指示に従って、使用しているテストランナーが JUnit XML のテスト結果を `file`（推奨）または `classname` 属性で出力していることを確認してください。  それでも問題が解決しない場合は、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[コミュニティフォーラム]にコメントしてください。
 
 [#FAQs]
 == FAQ
@@ -317,7 +317,7 @@ CircleCIのテストセットアップが   `circleci tests run`  コマンド�
 
 **質問:** `circleci tests run` でテスト分割のタイミングタイプを指定することは可能ですか？
 
-**Answer:** Yes, you can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) as a flag to `circleci tests run`.
+**回答:** はい、`--timings-type=` フラグを使用して、`circleci tests split --split-by=timings --timings-type=` と同様にタイミングタイプを指定できます。   ` circleci tests run` のフラグとして、`file`, `classname`, `name` (`name` はテスト名で分割される) を渡すことが可能です。
 
 ---
 
