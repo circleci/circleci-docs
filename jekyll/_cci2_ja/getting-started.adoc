@@ -65,7 +65,7 @@ CircleCIウェブアプリで、サイドバーから<a  href="https://app.circl
 {% include two-up.html title="1. プロジェクトを選択する" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. サンプル設定ファイルの Hello World を選択します。
+Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file" モーダルで、<b>Fast</b>を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
 {% endcapture %}
 
 {%- capture select-config -%}
@@ -75,10 +75,10 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 {% capture content %}
-You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. <b>Click Commit and Run.</b>
+<a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCIコンフィグエディタ</a>に、サンプルの<code>config.yml</code>ファイルがあらかじめ入力されています。 <b>コミットして実行をクリックする。</b>
 <br>
 <br>
-This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
+これは <code>.circleci/config.yml</code> という名前の新しいブランチで、リポジトリのルートにある <code>circleci-project-setup</code>.
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
@@ -88,7 +88,7 @@ This will create a <code>.circleci/config.yml</code> file at the root of your re
 {% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
 
 {% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
+すぐに合格のパイプラインができるはずだ。 If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
 
 {%- capture congrats-first-green-pipeline -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
@@ -104,7 +104,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 --
 ++++
 {% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Find your repository, and click <strong>Set Up Project</strong>.
+CircleCIウェブアプリで、サイドバーから<a  href="https://app.circleci.com/projects">Projects</a>を選択する。 リポジトリを探し、<strong>Set Up Project</strong>をクリックします。
 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
 {% endcapture %}
 
