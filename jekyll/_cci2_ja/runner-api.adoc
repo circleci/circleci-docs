@@ -105,7 +105,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 |===
 
 [#get-api-v3-runner-examples]
-==== Examples
+==== 例
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
