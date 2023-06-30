@@ -14,18 +14,18 @@ contentTags:
 
 == Orb 開発キット
 
-<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが容易になります。
+このページのガイドに従うには、以下のものが必要です：
 
-* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free])
-* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli#[Installing the local CLI] page.
-* xref:local-cli#configure-the-cli[Set up and configure] the CircleCI CLI.
+* CircleCI のアカウント：アカウントをお持ちでない方は、link:https://circleci.com/ja/signup/[こちらよりサインアップ]して下さい。
+* CircleCI CLIのローカルインストール。 ステップとオプションは、xref:local-cli#[ローカルCLIのインストールページ]でご覧いただけます。
+* xref:local-cli#configure-the-cli[CircleCI CLIを設定]する。
 
 [#validate-a-circleci-config]
-== 設定ファイルの Orb のバリデーション
+== CircleCI の設定（コンフィグ）ファイルのバリデーション
 
-以下のコマンドで Orb をバリデーションできます。
+CLI を使用して設定をローカルでバリデーションすると、`.circleci/config.yml` をテストするために追加のコミットをプッシュする必要がなくなります。
 
-To validate your configuration, navigate to a directory with a `.circleci/config.yml` file and run:
+設定をバリデーションするには、`.circleci/config.yml` ファイルがあるディレクトリに移動し、以下を実行します。
 
 ```shell
 circleci config validate
@@ -33,11 +33,11 @@ circleci config validate
 ```
 
 [#orb-development-kit]
-== 設定ファイルのパッケージ化
+== Orb 開発キット
 
 <<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが容易になります。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
-この CLI パッケージ化コマンド (前述の `circleci orb pack` とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。
+次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
 
 ```shell
 circleci orb init
@@ -49,21 +49,21 @@ circleci orb init
 circleci orb pack
 ```
 
-次のコマンドは、前述のフォルダー例を `pack` します。
+Orb のパッケージ化について詳しくは、 <<orb-concepts#orb-packing,Orb のコンセプト>> ページを参照してください。
 
 [#validate-an-orb-in-your-configuration-file]
-== 設定ファイルの処理
+== 設定ファイルの Orb を検証する
 
-次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定ファイルが元の設定ファイルと一緒に表示されます (Orb を使用している場合に便利です)。
+ご自身の Orb を検証するには、以下の方法があります:
 
 ```shell
-circleci config process
+circleci orb validate /tmp/my_orb.yml
 ```
 
-link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] Orb を使用する次の設定を例に考えます。
+このコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
 
 [#packing-a-config]
-== マシン上のコンテナ内でのジョブの実行
+== コンフィグのパッケージ化
 
 ```shell
 circleci config pack
