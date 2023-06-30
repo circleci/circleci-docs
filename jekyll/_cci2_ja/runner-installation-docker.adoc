@@ -38,7 +38,7 @@ contentTags:
 [#machine-runner-prerequsites]
 === 前提条件
 
-{% include snippets/ja/runner/machine-runner-prereq.adoc %}
+{% include snippets/runner/ja/machine-runner-prereq.adoc %}
 
 [#additional-prerequisites]
 ==== Docker による追加前提条件
@@ -52,12 +52,12 @@ Docker をホストにインストールしておく必要があります。 `ru
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
+{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
 --
 
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/ja/runner/install-with-cli-steps.adoc %}
+{% include snippets/runner/ja/install-with-cli-steps.adoc %}
 --
 
 [#create-a-dockerfile-that-extends-the-machine-runner-image]
