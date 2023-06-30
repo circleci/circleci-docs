@@ -32,18 +32,18 @@ contentTags:
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
+{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/ja/runner/install-with-cli-steps.adoc %}
+{% include snippets/runner/ja/install-with-cli-steps.adoc %}
 
 --
 
 [#download-the-launch-agent-script]
 == 2. launch-agent スクリプトをダウンロードし、バイナリをインストールする。
 
-{% include snippets/ja/runner/launch-agent-download.adoc %}
+{% include snippets/runner/ja/launch-agent-download.adoc %}
 
 [#create-the-circleci-user-and-working-directory]
 == 3. `circleci` ユーザーと作業ディレクトリを作成する
