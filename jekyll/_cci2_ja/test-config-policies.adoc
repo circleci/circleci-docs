@@ -22,7 +22,7 @@ NOTE: コンフィグファイルのポリシー管理機能は **Scale** プラ
 [#prerequisites]
 == 前提条件
 
-The instructions on this page assume you have followed and completed the xref:create-and-manage-config-policies#create-a-policy[Create a policy] guide, through which you will have done the following:
+このページの説明は、あなたが xref:create-and-manage-config-policies#create-a-policy[ポリシーの作成]ガイドに従って、以下を完了したことを前提としています：
 
 * 組織の設定ファイルのポリシー管理機能を有効にします。
 * 組織内に CircleCI 設定ファイルのバージョンをチェックする簡単なポリシーを作成する。 ポリシーのファイル構造は `./config-policies/version.rego` である必要があります。
@@ -214,7 +214,7 @@ circleci policy test ./config-policies --format=json
   }
 ]
 ----
-. To get the test output in JUnit XML format, use the `--format` flag, as follows:
+. JUnit XML 形式のテスト出力を得るには、以下のように `--format` フラグを使用します：
 +
 [source,shell]
 ----
@@ -274,8 +274,8 @@ check_min_remote_docker_version[reason] {
 	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
 }
 ----
-. `config-policies` ディレクトリに対して `test` コマンドを実行します。 今回のファイルは `./config-policies/docker_test.yaml` とします。
-. 各テストの実行結果を確認するには、以下のように `--verbose` または `-v` フラグを付けて実行します。
+. ポリシーのテストファイルを作成します。 今回のファイルは `./config-policies/docker_test.yaml` とします。
+. 先ほど作成した新しい`docker_test.yaml`ファイルに以下をコピーする：
 +
 [source,yaml]
 ----
@@ -326,7 +326,7 @@ test_minimum_remote_docker_version:
           - rule: check_min_remote_docker_version
             reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
 ----
-. 指定したテストのみを実行するには、以下のように `--run` フラグに正規表現を指定して実行します。
+. つのポリシーとテストを含む `config-policies` ディレクトリに対して `test` コマンドを実行する：
 +
 [source,shell]
 ----
@@ -422,9 +422,9 @@ Error: unsuccessful run
 このような問題の解決策として、ポリシーの管理に適したポリシーファイル構造のベストプラクティスを次のセクションで説明します。
 
 [#manage-policy-test-file-structure]
-== ポリシーとテストを追加する
+== ポリシーテストのファイル構造を管理します
 
-次は、`./config-policies` ディレクトリに 2 つ目のポリシーとテストを追加しましょう。
+circleci policy test` コマンドがあるフォルダ、例えば `./config-policies` を指すと、そのフォルダにあるすべての `*_test.yaml` ファイルをピックアップし、そのフォルダにある **root** ポリシーに対してテストを実行します。
 
 そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。
 
