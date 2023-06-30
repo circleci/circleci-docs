@@ -2,7 +2,7 @@
 
 //== Machine runner prerequisites
 
-To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+マシンランナーをインストールし、ジョブを実行するには、root 権限があり、以下のユーティリティとツールがシステムにインストールされている必要があります：
 
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
 * https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
@@ -14,4 +14,4 @@ To install machine runners and run jobs, you will need to have root access, and 
 * https://www.gnu.org/software/gzip/[gzip]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
-* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+* コマンドラインからランナーをインストールする場合は、xref:local-cli#[CircleCI CLI]を使用します。
