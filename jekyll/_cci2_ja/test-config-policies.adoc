@@ -28,9 +28,9 @@ The instructions on this page assume you have followed and completed the xref:cr
 * 組織内に CircleCI 設定ファイルのバージョンをチェックする簡単なポリシーを作成する。 ポリシーのファイル構造は `./config-policies/version.rego` である必要があります。
 
 [#write-a-policy-test]
-== 前提条件
+== ポリシーテストを作成する
 
-このページの手順では、xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[ポリシーの作成ガイド]に従い、以下の手順が完了済みであることを前提としています。
+このセクションでは、既存のポリシー `version.rego` について、ポリシーの実際の動作と、生成される__決定の結果__が適切であるかを確認するテストを作成します。
 
 . `./config-policies` ディレクトリにポリシーのテストファイルを作成します。 このテストファイルに、ポリシーの__期待される動作__一式を記載します。 今回のテストファイルは `./config-policies/version_test.yaml` とします。
 . 作成した `version_test.yaml` ファイルに、下記をコピーします。
