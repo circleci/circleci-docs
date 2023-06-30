@@ -43,14 +43,14 @@ The following are the types of tags available for the CircleCI Linux CUDA images
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in either Linux or Windows images, we will investigate the impact that this has on our images being used within the CircleCI execution environment. 
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in either Linux or Windows images, we will investigate the impact that this has on our images being used across CircleCI execution environments. 
 
 In most cases, due to the ephemeral and isolated nature of the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our link:https://discuss.circleci.com/[Discuss Forum].
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
 
-Please file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the Linux CUDA images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+Please file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the CircleCI Linux CUDA images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
 
 [#image-lifespan-eol]
 == Image lifespan / EOL
@@ -100,7 +100,7 @@ Example: When CUDA 11.8 is released:
 
 Once a new even numbered minor version is released, that version will be added and the oldest existing version will be removed, provided that more than 3 minor versions exist.
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images.
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will also plan brownouts to help ensure you are aware of the approaching removal of deprecated images.
 
 [#exceptions]
 == Exceptions
