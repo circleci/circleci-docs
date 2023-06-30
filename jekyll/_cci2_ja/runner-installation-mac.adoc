@@ -20,7 +20,7 @@ contentTags:
 [#prerequisites]
 == 前提条件
 
-{% include snippets/ja/runner/machine-runner-prereq.adoc %}
+{% include snippets/runner/ja/machine-runner-prereq.adoc %}
 
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
@@ -32,11 +32,11 @@ contentTags:
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
+{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/ja/runner/install-with-cli-steps.adoc %}
+{% include snippets/runner/ja/install-with-cli-steps.adoc %}
 
 --
 
@@ -44,7 +44,7 @@ contentTags:
 [#download-the-launch-agent-script]
 == 2. launch-agent スクリプトをダウンロードし、バイナリをインストールする。
 
-{% include snippets/ja/runner/launch-agent-download.adoc %}
+{% include snippets/runner/ja/launch-agent-download.adoc %}
 
 [#create-a-circleci-self-hosted-runner-configuration]
 == 3. CircleCI セルフホストランナー設定ファイルを作成する
