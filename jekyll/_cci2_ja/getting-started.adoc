@@ -54,6 +54,7 @@ CircleCI の `config.yml` オプションの全リストを確認したい場合
 [.tab.quickstart1.GitHub]
 --
 ++++
+{% capture content %}
 CircleCIウェブアプリで、サイドバーから<a  href="https://app.circleci.com/projects">Projects</a>を選択する。 リポジトリを探し、<strong>Set Up Project</strong>をクリックします。
 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
 {% endcapture %}
