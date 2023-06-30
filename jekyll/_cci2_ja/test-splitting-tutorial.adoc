@@ -50,7 +50,7 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 
 下記は、後で編集を行う `.circleci/config.yml` テンプレートのコピーです。
 
-{% include snippets/docker-auth.adoc %}
+{% include snippets/ja/docker-auth.adoc %}
 
 [source,yaml]
 ----
@@ -89,7 +89,7 @@ workflows:
 まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
 
 . GitHub で link:https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシュします。
-. Open the link:https://app.circleci.com[CircleCI web app]. お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
+. https://app.circleci.com[CircleCI Web アプリ] を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
 . プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
 . config.yml ファイルを選択するよに求められます。 そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。 **Set Up Project** をクリックします。
 . サンプルの設定ファイルの一覧が表示されます。 ウィンドウ内でスクロールダウンすると、**Node (Advanced)** が表示されるので、**Select** をクリックします。
