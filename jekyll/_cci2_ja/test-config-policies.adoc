@@ -1,6 +1,6 @@
 ---
 
-description: このページでは、CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー、ポリシーのテストの詳細をご紹介しています。 設定ファイルのポリシーに関して学びましょう。
+説明を参照してください： CircleCI の設定ポリシーのオープンプレビュー。 設定ファイルのポリシーに関して学びましょう。
 contentTags:
   platform:
   - クラウド
@@ -461,7 +461,7 @@ circleci policy test` コマンドがあるフォルダ、例えば `./config-po
 circleci policy test ./config-policies/...
 ----
 +
-期待される出力. これで、テストが再び成功するようになります。
+以下のような結果が出力されます。 これで、テストが再び成功するようになります。
 +
 [source,shell]
 ----
@@ -532,14 +532,14 @@ test_break_all_rules:
       - rule: check_version
         reason: version must be at least 2.1 but got 1
 ----
-. もう一度、テスト全体を詳細モードで実行します。
+. verboseモードでテストの全セットを再度実行する：
 +
 [source,shell]
 ----
 circleci policy test ./config-policies/...
 ----
 +
-期待される出力
+以下のような結果が出力されます。
 +
 [source,shell]
 ----
@@ -551,9 +551,9 @@ ok    config-policies/version    0.001s
 ----
 
 [#use-metadata-with-tests]
-== ポリシーのテストファイル構造を管理する
+== テストにメタデータを使用します
 
-`circleci policy test` コマンドでフォルダーを対象とした場合 (`./config-policies` など)、そのフォルダー内に含まれるすべての `*_test.yaml` ファイルが読み込まれ、そのフォルダー**以下にある**すべてのポリシーに対してテストが実行されます。
+メタデータは `input` と同様に、テストを書くときに `meta` キーを使って指定することができる。
 
 そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。
 
@@ -615,9 +615,9 @@ ok    config-policies/version                  0.000s
 NOTE: バージョンに関するポリシーを変更すると、最上位のテストにも影響が生じます。そのため、`policy_test.yaml` にも `meta` 要素を追加する必要があります。
 
 [#opa-tests]
-== メタデータをテストに活用する
+== OPAテスト
 
-テストの作成時には、`input` と同じように、`meta` キーでメタデータを指定することもできます。 詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA のドキュメント (英語)] を参照してください。
+OPAには、レゴ・ドキュメントの中でテストを直接指定する方法もあります 詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA のドキュメント (英語)] を参照してください。
 
 例として、上記のバージョンに関するルールの対象から、特定のプロジェクトを除外してみましょう。 `circleci policy test` コマンドを使用すると、OPA のテストを実行して結果を `<opa.tests>` として出力できます。
 
