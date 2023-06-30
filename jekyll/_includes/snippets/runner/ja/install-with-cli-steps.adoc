@@ -21,17 +21,17 @@ circleci namespace create <name> --org-id <your-organization-id>
 ```
 +
 TIP: 
-組織に既にネームスペースがある場合、上記のコマンドを実行して別のネームスペースを作成すると、エ ラーが表示されます。 The error message returns the name of the existing namespace. In this case, move on to step 2 below, using your existing namespace.
+組織に既にネームスペースがある場合、上記のコマンドを実行して別のネームスペースを作成すると、エ ラーが表示されます。 エラーメッセージは既存のネームスペースの名前を返します。 この場合、既存のネームスペースを使用して、以下の手順 2 に進みます。
 . 次のコマンドを実行して、セルフホストランナーの名前空間用のリソースクラスを作成します。
 +
 ```
 circleci runner resource-class create <namespace>/<resource-class> <description> --generate-token
 ```
 +
-Make sure to replace `<namespace>` and `<resource-class>` with your org namespace and desired resource class name, respectively. You may optionally add a description.
+`<namespace>` と  `<resource-class>` は、それぞれお客様の orgネームスペースと希望するリソースクラス名に置き換えてください。 オプションで説明を追加することもできます。
 +
-Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
+例: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
-The resource class token is returned after the runner resource class is successfully created.
+リソースクラス トークンは、ランナーリソースクラスが正常に作成された後に返されます。
 +
 CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
