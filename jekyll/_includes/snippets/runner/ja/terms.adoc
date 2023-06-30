@@ -4,16 +4,16 @@
 
 [.tab.runner-terms.Web_app_installation]
 --
-Before you can install self-hosted runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app], an admin in your organization needs to navigate to *Organization Settings > Self-Hosted Runners*, and agree to the terms.
+Web アプリを介してマシンランナーをインストールする前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
-Once the terms have been accepted, **Self-Hosted Runners** will appear permanently in the side navigation.
+規約に同意すると、**Self-Hosted Runners** はサイドナビゲーションバーに常に表示されるようになります。
 
-CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
+CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS の https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
 --
 
 [.tab.runner-terms.CLI_installation]
 --
-If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
+CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意したものとみなされます。
 --
