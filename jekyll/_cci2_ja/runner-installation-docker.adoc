@@ -33,7 +33,7 @@ contentTags:
 [#runner-terms]
 === ランナー条件
 
-{% include snippets/ja/runner-terms.adoc %}
+{% include snippets/runner/ja/terms.adoc %}
 
 [#machine-runner-prerequsites]
 === 前提条件
