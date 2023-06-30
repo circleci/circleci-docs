@@ -461,7 +461,7 @@ circleci policy test` コマンドがあるフォルダ、例えば `./config-po
 circleci policy test ./config-policies/...
 ----
 +
-以下のような結果が出力されます。 これで、テストが再び成功するようになります。
+期待される出力. これで、テストが再び成功するようになります。
 +
 [source,shell]
 ----
@@ -539,7 +539,7 @@ test_break_all_rules:
 circleci policy test ./config-policies/...
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
