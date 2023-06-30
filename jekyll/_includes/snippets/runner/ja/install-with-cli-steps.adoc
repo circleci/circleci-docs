@@ -10,7 +10,7 @@ endif::[]
 
 セルフホストランナーをインストールするには、下記手順を実行し、名前空間と認証トークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。
 
-You can view your installed runners on the inventory page in the https://app.circleci.com/[web app], by clicking *Self-Hosted Runners* on the left navigation.
+お客様のランナーは、link:https://app.circleci.com/[Web アプリ内] のインベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
 . 組織のセルフホストランナーの名前空間を作成します。 *作成できる名前空間は、各組織につき 1 つのみです。* CircleCI の組織のアカウント名を小文字で使用することを推奨します。 既に Orb を使用している場合は、Orb で使用しているのと同じ名前空間にします。
 +
@@ -20,7 +20,8 @@ You can view your installed runners on the inventory page in the https://app.cir
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 +
-TIP: If your organization already has a namespace, you will receive an error if you run the above command to create a _different_ namespace. The error message returns the name of the existing namespace. In this case, move on to step 2 below, using your existing namespace.
+TIP: 
+組織に既にネームスペースがある場合、上記のコマンドを実行して別のネームスペースを作成すると、エ ラーが表示されます。 The error message returns the name of the existing namespace. In this case, move on to step 2 below, using your existing namespace.
 . 次のコマンドを実行して、セルフホストランナーの名前空間用のリソースクラスを作成します。
 +
 ```
