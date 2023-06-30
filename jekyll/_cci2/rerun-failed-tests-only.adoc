@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Re-run failed tests only (preview)
+= Re-run failed tests (preview)
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to re-run only failed tests in a job and optimize credit usage.
@@ -11,16 +11,14 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: This feature is in **preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Community forum].
-
 [#motivation-and-introduction]
 == Motivation and introduction
 
-CircleCI is releasing new preview functionality to **re-run failed tests only**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
+CircleCI is releasing new preview functionality to **re-run failed tests**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This re-run failed tests only option re-runs failed tests from the _same_ commit, not new ones.
+This re-run failed tests option re-runs failed tests from the _same_ commit, not new ones.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
@@ -250,7 +248,7 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 * If your testing job is using parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs. For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.  **The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.  
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
-* Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests only".
+* Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests".
 * Jobs that upload code coverage reports link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[may see issues during a re-run].
 
 [#troubleshooting]
@@ -298,7 +296,7 @@ After configuring `circleci tests run`, if you see *all tests* are re-run after 
 
 **Question:** I don't see my test framework on this page, can I still use the functionality?
 
-**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests only functionality is test runner- and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.  
+**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests functionality is test runner and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.  
 
 From there, follow the xref:#quickstart[Quickstart] section to modify your test command to use `circleci tests run`. 
 
@@ -306,7 +304,7 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
-**Question:** Can I see in the web UI whether a job was re-run using "Re-run failed tests only"?
+**Question:** Can I see in the web UI whether a job was re-run using "Re-run failed tests"?
 
 **Answer:** Not at this time.
 
