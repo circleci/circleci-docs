@@ -1,16 +1,16 @@
 //== CircleCI web app installation: pre-steps
 
-セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 To create resource classes and tokens, you need to be an organization admin in the VCS provider. 名前空間やリソースクラスについては、<<runner-concepts#namespaces-and-resource-classes,コンセプト>> のページを参照してください。
+セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。 名前空間やリソースクラスについては、<<runner-concepts#namespaces-and-resource-classes,コンセプト>> のページを参照してください。
 
-You can view your installed runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
+お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
 . https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
-. If this is your organization's first time using self-hosted runners, you will need to create a namespace as the first part of this step. *作成できる名前空間は、各組織につき 1 つのみです。* 必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
+. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。 *作成できる名前空間は、各組織につき 1 つのみです。* 必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
 +
-If your organization already uses orbs, do not create a new namespace. Instead, enter the namespace your organization uses for orbs.
-. The second input field is to name your self-hosted runner resource class.
+もし、お客様の組織が既に Orb を使用しているのであれば、新しい名前空間を作らないでください。 その代わりに、お客様の組織が Orb に使用している名前空間を入力してください。
+. 2つ目の入力フィールドには、セルフホスト・ランナー・リソース・クラスの名前を入力します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
 . リソースクラストークンをコピーし保存します。 セルフホストランナーはこのトークンを使って関連するリソースクラスの作業を要求します。
@@ -38,12 +38,12 @@ ifdef::machine[]
 
 // Display the following step for machine runner installation only
 
-. Select the **Machine** tab for installation instructions specific to setting up self-hosted runners on Linux, macOS, or Windows. These platform-specific instructions are also included in the next section of this installation guide.
+. Linux、macOS、または Windows 上でのセルフホスト型ランナーのセットアップに特化したインストール手順については、「**Machine**」タブを選択してください。 これらのプラットフォーム固有の手順は、このインストールガイドの次のセクションにも含まれています。
 +
 .Web アプリによるマシンランナーのインストール
 image::runnerui_step_four.png[Machine runner in the web app]
 +
 endif::[]
-. 新しいリソースクラスの設定コードが提供されます。 If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if you do not yet have any configured. If you do not have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
+. 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
