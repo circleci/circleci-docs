@@ -25,7 +25,7 @@ contentTags:
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
 
-{% include snippets/ja/runner-terms.adoc %}
+{% include snippets/runner/ja/terms.adoc %}
 
 [#create-namespace-and-resource-class]
 == 1. ネームスペースとリソースクラスの作成 
