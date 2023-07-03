@@ -11,6 +11,7 @@ contentTags:
 :page-liquid:
 :toc: macro
 :toc-title:
+:experimental:
 
 This page provides an overview of the various ways you can optimize your CircleCI configuration. Each optimization method is described briefly, along with possible use cases.
 
