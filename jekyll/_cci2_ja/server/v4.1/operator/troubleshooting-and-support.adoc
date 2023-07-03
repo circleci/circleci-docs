@@ -141,9 +141,9 @@ kill $!
 ----
 
 [#disable-concurrency-limits]
-== Disable concurrency limits
+== 同時実行の制限を無効にします
 
-If your org is hitting the hard-coded concurrency limits, you can disable these limits by setting the following in your `values.yaml`:
+もしあなたの組織がハードコードされた同時実行数の制限にぶつかっているのであれば、`values.yaml`で以下のように設定することで、この制限を無効にすることができます。
 
 [source,yaml]
 ----
