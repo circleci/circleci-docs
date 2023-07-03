@@ -96,7 +96,6 @@ workflows:
 +
 image::test-splitting-sample-configs.png[Sample config for Node]
 . すると、設定ファイルに移動します。 プロジェクトでは実際には Yarn を使うため、`npm` の代わりに `yarn` を使うように下記ステップを編集する必要があります。
-
 +
 [source,yaml]
 ----
@@ -112,7 +111,7 @@ steps:
     name: Run tests
     command: yarn test
 ----
-. 変更が完了したら、 **Commit and Run** ボタンをクリックします。  `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
+. 変更が完了したら、 **Commit and Run** ボタンをクリックします。 `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
 +
 image::test-splitting-first-pipeline.png[Successful pipeline run]
 +
