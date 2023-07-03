@@ -245,7 +245,11 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 [#known-limitations]
 == Known limitations
 
-* If your testing job is using parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs. For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.  **The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.  
+* If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.
++
+For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step. 
++
+**The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.  
 
 If you'd like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job and if there are no tests to run, terminate execution.  An example:
 
