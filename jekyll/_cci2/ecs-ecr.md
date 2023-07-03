@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Deploy to AWS ECR/ECS
+title: Push image to ECR and deploy to ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
 contentTags:
   platform:

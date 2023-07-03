@@ -244,7 +244,28 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 [#known-limitations]
 == Known limitations
 
-* If your testing job is using parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs. For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.  **The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.
+* If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.
++
+For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step. 
++
+**The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.  
+
+If you would like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job, and if there are no tests to run, terminate job execution. For example:
+
+```yml
+steps:
+  - checkout
+  - run: |
+    mkdir -p ./tmp && \
+    >./tmp/tests.txt && \
+    circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command ">./tmp/tests.txt xargs echo" --split-by=timings #Get the list of filenames for this container/VM
+
+    [ -s tmp/tests.txt ] || circleci-agent step halt #if there are no filenames, terminate execution
+
+  - node/install
+  # Proceed with the rest of the job
+```
+
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests".
