@@ -251,7 +251,7 @@ For example, if parallelism is set to eight, there may only be enough tests afte
 +
 **The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.  
 
-If you'd like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job and if there are no tests to run, terminate execution.  An example:
+If you would like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job, and if there are no tests to run, terminate job execution. For example:
 
 ```yml
 steps:
