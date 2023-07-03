@@ -7,7 +7,7 @@ contentTags:
 = Installation reference
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Raference page from all values.yaml options available for installations of CircleCI server v4.1.x
+:page-description: Reference page for all values options available for installations of CircleCI server v4
 :icons: font
 :experimental:
 
