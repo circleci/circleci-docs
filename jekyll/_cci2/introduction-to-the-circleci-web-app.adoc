@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the basic features and settings of the CircleCI web app.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
 

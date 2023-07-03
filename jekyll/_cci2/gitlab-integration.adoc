@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#overview]
 == Overview

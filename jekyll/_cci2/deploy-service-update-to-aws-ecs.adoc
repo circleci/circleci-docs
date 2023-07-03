@@ -12,8 +12,7 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
 

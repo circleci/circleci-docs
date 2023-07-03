@@ -9,8 +9,7 @@ contentTags:
 :imagesdir: ../assets/img/docs/
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#overview]
 == Overview

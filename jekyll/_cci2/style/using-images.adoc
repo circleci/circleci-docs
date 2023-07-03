@@ -1,8 +1,7 @@
 = Using images
 :page-layout: classic-docs
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 == Guidelines for all images
 * Ensure all images have descriptive alternative text. For example, in asciidoc:
@@ -17,7 +16,7 @@ image::name-of-image.png[Alternative text to describe the image, including, if p
 
 == Remove or change information in images
 
-All personally identifiable information should be removed from images included in CircleCI's documentation. 
+All personally identifiable information should be removed from images included in CircleCI's documentation.
 
 There are a few places in the web app where personal information appears. Most personally identifiable information can be updated by opening the developer console in the browser and inspecting the web app (`command + option + I` on Mac, `control + shift + J` on Windows). Inside the console you can edit the text elements in the HTML of the web app. Once all elements have been inspected and updated, a screenshot can be taken.
 

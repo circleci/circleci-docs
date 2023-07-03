@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#circleci-administrator]
 == CircleCI administrator

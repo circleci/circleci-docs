@@ -6,9 +6,10 @@ contentTags:
 ---
 = Installation reference
 :page-layout: classic-docs
+:page-liquid:
+:page-description: Raference page from all values.yaml options available for installations of CircleCI server v4.1.x
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#example-manifests]
 == Example Manifests

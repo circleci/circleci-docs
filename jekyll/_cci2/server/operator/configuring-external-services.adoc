@@ -9,12 +9,9 @@ contentTags:
 :page-liquid:
 :page-description: This document describes how to configure the following external services for use with a CircleCI server 4.x installation
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page describes how to configure external services for use with either a new CircleCI server v4.x installation or migrating internal Postgres and MongoDB data from existing CircleCI server v4.x installation to your externalized datastores.
-
-toc::[]
 
 [#postgresql]
 == PostgreSQL

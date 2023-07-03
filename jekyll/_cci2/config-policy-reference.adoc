@@ -8,8 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 

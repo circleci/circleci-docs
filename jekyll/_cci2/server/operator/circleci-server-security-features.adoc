@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document outlines security features built into CircleCI and related integrations.
 

@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#common-top-level-keys]
 == Common top level keys of webhooks

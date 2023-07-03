@@ -9,8 +9,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This page answers the most frequently asked questions by orb authors.
-:toc: macro
-:toc-title:
+:experimental:
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.
 
