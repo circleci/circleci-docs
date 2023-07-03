@@ -1,8 +1,7 @@
 = Formatting
 :page-layout: classic-docs
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#styling-text]
 == Styling text
@@ -20,12 +19,12 @@
 [#using-notes-tips-cautions-warnings]
 == Using notes, tips, cautions, and warnings
 
-When writing in asciidoc the following _admonitions_ are available: note, tip, important, caution, warning. 
+When writing in asciidoc the following _admonitions_ are available: note, tip, important, caution, warning.
 
 [#when-to-use-each-type]
 === When to use each type
 
-* `note`: Use to add some supplementary information to a section or point that could benefit from some highlighting to draw the reader's attention. 
+* `note`: Use to add some supplementary information to a section or point that could benefit from some highlighting to draw the reader's attention.
 * `tip`: Use to add some guidance on how to carry out a step or how to act on some advice contained within the section.
 * `important`: This admonition type is not used often in CircleCI docs. Consider whether one of the ofther options is a better fit before using.
 * `caution`: Use to make the reader aware they need to be careful when acting on some advice.
@@ -74,8 +73,8 @@ You can also make a longer admonition block for any of the types listed above:
 
 [source,adoc]
 ----
-[CAUTION] 
-==== 
+[CAUTION]
+====
 This is a longer admonition with an ordered list:
 
 . Step 1
@@ -84,8 +83,8 @@ This is a longer admonition with an ordered list:
 ====
 ----
 
-[CAUTION] 
-====  
+[CAUTION]
+====
 This is a longer admonition with an ordered list:
 
 . Step 1

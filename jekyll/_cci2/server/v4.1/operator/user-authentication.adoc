@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI server currently supports OAuth through GitHub or GitHub Enterprise.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI server currently supports OAuth through GitHub or GitHub Enterprise.
 

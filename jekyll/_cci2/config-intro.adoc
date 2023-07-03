@@ -10,12 +10,11 @@ contentTags:
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI config.yml file."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide gets you started with the CircleCI `config.yml` file.
 
-toc::[]
+
 
 [#getting-started-with-circleci-config]
 == Getting started with CircleCI config

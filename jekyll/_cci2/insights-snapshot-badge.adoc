@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Generate a badge that displays Insights metrics for a project.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CAUTION: Insights snapshot badges are not currently supported for GitLab projects.
 

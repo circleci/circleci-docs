@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The guides in this section walk you through the steps required to install CircleCI server in an air-gapped environment.
 
