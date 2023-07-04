@@ -506,8 +506,8 @@ en:
             link: browser-testing
           - name: Generate code coverage metrics
             link: code-coverage
-          - name: Fail fast (Open preview)
-            link: fail-fast
+          - name: Re-run failed tests only (Open preview)
+            link: rerun-failed-tests-only
       - name: Monitor tests
         children:
           - name: Test Insights

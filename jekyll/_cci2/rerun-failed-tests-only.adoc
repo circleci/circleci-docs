@@ -3,21 +3,25 @@ contentTags:
   platform:
   - Cloud
 ---
-= Re-run failed tests (preview)
+= Re-run failed tests - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to re-run only failed tests in a job and optimize credit usage.
 :icons: font
 :experimental:
 
-[#motivation-and-introduction]
-== Motivation and introduction
+NOTE: The re-run failed tests only feature is in **open preview**, and is available on **all plans**.
 
-CircleCI is releasing new preview functionality to **re-run failed tests**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
+Use the re-run failed tests only feature to only re-run a subset of tests instead of re-running the entire test suite when a transient test failure arises.
 
-Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+[#introduction]
+== Introduction
 
-This re-run failed tests option re-runs failed tests from the _same_ commit, not new ones.
+When you select **re-run failed tests** (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
+
+Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+
+This re-run failed tests option re-runs failed tests from the _same_ commit, not from subsequent commits.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
@@ -54,7 +58,7 @@ This example snippet is from a CircleCI configuration file that:
 . Stores the test results in a new directory called `test-results`, and
 . Uploads those test results to CircleCI.
 
-**Note:** `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+NOTE: `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
@@ -246,9 +250,9 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 
 * If your testing job uses parallelism and test splitting, the job will spin up the number of containers/virtual machines (VMs) that are specified with the `parallelism` key. However, the step that runs tests for each of those parallel containers/VMs will only run a subset of tests, or no tests, after the tests are split across the total number of parallel containers/VMs.
 +
-For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step. 
+For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 +
-**The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.  
+**The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.
 
 If you would like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job, and if there are no tests to run, terminate job execution. For example:
 
