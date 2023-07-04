@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= CircleCI Xcode Image Release, Update and Deprecation Policy
+= CircleCI Xcode image release, update, and deprecation policy
 :page-layout: classic-docs
 :page-description: CircleCI Xcode Image Release, Update and Deprecation Policy
 :page-liquid:
