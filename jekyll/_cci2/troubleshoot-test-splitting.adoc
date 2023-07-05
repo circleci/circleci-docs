@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#using-test-splitting-with-python-django-tests]
 ## Using test splitting with Python Django tests

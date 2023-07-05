@@ -9,14 +9,10 @@ contentTags:
 :page-liquid: CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :page-description:
 :icons: font
-:toc: macro
-:toc-title:
 
 VM service controls how https://circleci.com/docs/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/building-docker-images[Remote Docker] jobs are run.
 
 This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
-
-toc::[]
 
 CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS] and link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP].
 

@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: "Learn how to create scheduled pipelines on a specific timetable."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction

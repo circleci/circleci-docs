@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI for your GitLab CI/CD projects with our GitLab step-by-step tutorial.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page walks you through integrating a GitLab project with CircleCI. The sections below introduce you to concepts and ways to manage your GitLab CI/CD pipelines. CircleCI features that are in development for GitLab projects are detailed in the <<coming-soon>> section.
 
@@ -675,6 +674,31 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
+| *Contexts*
+|
+|
+|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit context variables
+^|
+^|
+^|
+
+^| Manage contexts
+^|
+^|
+^|
+
 | *Config sources*
 |
 |
@@ -756,6 +780,11 @@ Open source plans are not currently available to GitLab customers. CircleCI will
 === Test Insights
 
 xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.
+
+[#badges]
+=== Badges
+
+The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights snapshot badge] features are not currently supported for GitLab projects.
 
 [#next-steps]
 == Next Steps

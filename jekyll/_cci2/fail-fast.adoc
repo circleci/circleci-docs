@@ -8,7 +8,6 @@ version:
 :page-liquid:
 :page-description: A new way to tighten your feedback loop when running tests on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 WARNING: This preview feature will not be moved to general availability and is deprecated. For questions and/or issues, please comment on our link:https://discuss.circleci.com/t/product-launch-preview-fail-tests-faster/46785[Community forum].

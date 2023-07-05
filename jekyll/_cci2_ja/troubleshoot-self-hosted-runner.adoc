@@ -13,7 +13,7 @@ contentTags:
 
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 

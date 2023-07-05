@@ -486,7 +486,7 @@ workflows:
             <<: *filters-production # this is calling the previously set yaml anchor
 ```
 
-Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
+Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
 {: class="alert alert-info" }
 
 ### Using regular expressions to filter tags and branches

@@ -14,21 +14,33 @@ files:
   - source: /jekyll/_includes/snippets/*.md
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
+    export_only_approved: true
+    
   - source: /jekyll/_includes/snippets/*.adoc
     translation: /jekyll/_includes/snippets/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
+    export_only_approved: true
+    
   - source: /jekyll/_includes/snippets/faq/*.adoc
     translation: /jekyll/_includes/snippets/faq/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
+    export_only_approved: true
+    
   - source: /jekyll/_includes/snippets/troubleshoot/*.adoc
     translation: /jekyll/_includes/snippets/troubleshoot/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
+    export_only_approved: true
+    
   - source: /jekyll/_includes/snippets/runner/*.adoc
     translation: /jekyll/_includes/snippets/runner/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
+    export_only_approved: true
+    
   - source: /jekyll/_includes/snippets/server/*.adoc
     translation: /jekyll/_includes/snippets/server/%two_letters_code%/%original_file_name%
     update_option: update_as_unapproved
+    export_only_approved: true
+    
   # - source: /jekyll/_cci2/*.md
   #   translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
   #   update_option: update_as_unapproved
