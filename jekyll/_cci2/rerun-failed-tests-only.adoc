@@ -3,14 +3,13 @@ contentTags:
   platform:
   - Cloud
 ---
-= Re-run failed tests - Open preview
+= Re-run failed tests only overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to re-run only failed tests in a job and optimize credit usage.
 :icons: font
 :experimental:
 
-NOTE: The re-run failed tests only feature is in **open preview**, and is available on **all plans**.
 
 Use the re-run failed tests only feature to only re-run a subset of tests instead of re-running the entire test suite when a transient test failure arises.
 
