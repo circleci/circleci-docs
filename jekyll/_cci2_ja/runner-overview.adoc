@@ -14,7 +14,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-brownout.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 [#introduction]
 == はじめに
