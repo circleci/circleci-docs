@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Re-run failed tests (preview)
+= Re-run failed tests
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to re-run only failed tests in a job and optimize credit usage.
@@ -13,7 +13,7 @@ contentTags:
 [#motivation-and-introduction]
 == Motivation and introduction
 
-CircleCI is releasing new preview functionality to **re-run failed tests**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
+CircleCI has functionality to **re-run failed tests**. When selecting this option (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
