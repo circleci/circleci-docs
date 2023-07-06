@@ -291,7 +291,7 @@ steps:
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests".
 * Jobs that upload code coverage reports link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[may see issues during a re-run].
-* This feature is currently not supported for the Windows execution environment
+* This feature is not currently supported for the Windows execution environment.
 
 [#troubleshooting]
 == Troubleshooting
