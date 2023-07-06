@@ -3,24 +3,24 @@ contentTags:
   platform:
   - Cloud
 ---
-= Re-run failed tests only overview
+= Rerun failed tests
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to re-run only failed tests in a job and optimize credit usage.
+:page-description: How to rerun only failed tests in a job and optimize credit usage.
 :icons: font
 :experimental:
 
 
-Use the re-run failed tests only feature to only re-run a subset of tests instead of re-running the entire test suite when a transient test failure arises.
+Use the rerun failed tests only feature to only rerun a subset of tests instead of rerunning the entire test suite when a transient test failure arises.
 
 [#introduction]
 == Introduction
 
-When you select **re-run failed tests** (see image below), only a subset of tests are re-run, instead of re-running the entire test suite when a transient test failure arises.
+When you select **rerun failed tests** (see image below), only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.
 
-Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[re-run your workflow from failed]. This type of re-run executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
+Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[rerun your workflow from failed]. This type of rerun executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This re-run failed tests option re-runs failed tests from the _same_ commit, not from subsequent commits.
+This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
@@ -62,7 +62,7 @@ NOTE: `-o junit_family=legacy` is present to ensure that the test results being 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
 
-In the snippet below, the example has been updated to use the `circleci tests run` command to allow for re-running only failed tests.
+In the snippet below, the example has been updated to use the `circleci tests run` command to allow for rerunning only failed tests.
 
 ```yaml
  - run:
@@ -96,7 +96,7 @@ NOTE: You can specify the timing type similar to `circleci tests split --split-b
 
 After updating your configuration, run the job that runs tests again and make sure that the same number of tests are being executed as before the config.yml change.
 
-Then, the next time you encounter a test failure on that job, click the "Re-run failed tests only" button.  If the `--verbose` setting is enabled, you should see output similar to the following the next time you click "Rerun failed tests only" with this job on CircleCI:
+Then, the next time you encounter a test failure on that job, click the "Rerun failed tests only" button.  If the `--verbose` setting is enabled, you should see output similar to the following the next time you click "Rerun failed tests only" with this job on CircleCI:
 
 ```sh
 Installing circleci-tests-plugin-cli plugin.
@@ -111,7 +111,7 @@ DEBUG[2023-05-18T22:09:08Z] Received: ****
 
 If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.  You'll also see output that shows the total number of failed tests from the original job run, the total number of
 
-The job should only re-run tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+The job should only rerun tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
