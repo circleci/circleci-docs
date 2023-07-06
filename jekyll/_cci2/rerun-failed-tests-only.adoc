@@ -403,3 +403,9 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
+**Question:** Can I use the `circleci tests run` functionality locally with the CircleCI CLI? 
+
+**Answer:** No, this is not supported.
+
+---
+
