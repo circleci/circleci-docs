@@ -15,7 +15,17 @@ This page walks you through integrating a GitLab project with CircleCI. The sect
 [#overview]
 == What is GitLab CI/CD?
 
-Integrate your code from GitLab SaaS, and GitLab self-managed projects with CircleCI to manage your CI/CD pipelines.
+If you use GitLab (SaaS or Self-managed) to and manage version control store your code, you can integrate with CircleCI to manage your CI/CD (continuous integration and continuous delivery). Configure CI/CD pipelines to build, test, and deploy your projects each time a developer pushes a change to the code.
+
+Integrate with CircleCI to access features for every aspect of your CI/CD pipelines:
+
+* xref:workflows#workflows-configuration-examples[Workflow orchestration]
+* xref:optimizations#[Data, compute, and time optimization]
+* Control over xref:security#[security] and xref:contexts#[permissions], and org-level control with xref:config-policy-management-overview#[config policies]
+* xref:executor-intro#[Managed execution environments] (Docker, Linux VM, macOS, Windows, Arm VM, GPU), plus xref:runner-overview#[self-hosted runners]
+* xref:test#[Test integrations], and xref:parallelism-faster-jobs#[test-splitting] to reduce length of the testing phase of your pipelines
+* xref:orb-intro#[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
+* Dev tools: xref:local-cli#[CircleCI CLI], xref:api-intro#[APIs], and xref:vs-code-extension-overview#[VSCode extension], xref:circleci-config-sdk#[config SDK]
 
 GitLab CI/CD integration with CircleCI introduces the concept of "standalone" projects that are not specific to a VCS. This is a change from the way GitHub and Bitbucket projects are currently integrated.
 
