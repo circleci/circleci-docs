@@ -506,8 +506,8 @@ en:
             link: browser-testing
           - name: Generate code coverage metrics
             link: code-coverage
-          - name: Re-run failed tests only overview
-            link: rerun-failed-tests-only
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
       - name: Monitor tests
         children:
           - name: Test Insights
