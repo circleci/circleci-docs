@@ -15,7 +15,7 @@ This page walks you through integrating a GitLab project with CircleCI. The sect
 [#overview]
 == What is GitLab CI/CD?
 
-If you use GitLab (SaaS or Self-managed) to and manage version control store your code, you can integrate with CircleCI to manage your CI/CD (continuous integration and continuous delivery). Configure CI/CD pipelines to build, test, and deploy your projects each time a developer pushes a change to the code.
+If you use GitLab (SaaS or Self-managed) to and manage version control and store your code, GitLab CI/CD (continuous integration and continuous delivery) is enabled for your project by default. As an alternative, you can integrate with CircleCI to manage your pipelines. Configure CI/CD pipelines to build, test, and deploy your projects each time a developer pushes a change to the codebase, and/or when a merge request is created.
 
 Integrate with CircleCI to access features for every aspect of your CI/CD pipelines:
 
