@@ -86,7 +86,7 @@ CircleCI では、以下を行っていただくよう強くお勧めしてい�
 [#migrating-from-internal-postgres]
 === 内部 PostgreSQL から外部ソースへの移行
 
-{% include snippets/ja/server/migrate-internal-postgres-to-external.adoc %}
+{% include snippets/server/ja/migrate-internal-postgres-to-external.adoc %}
 
 [#connecting-your-external-postgres]
 === 外部の Postgres インスタンスを CircleCI サーバーに接続する
@@ -109,7 +109,7 @@ NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バー�
 [#migrating-from-internal-mongodb]
 === 内部 MongoDB から外部化ソースへの移行
 
-{% include snippets/ja/server/migrate-internal-mongo-to-external.adoc %}
+{% include snippets/server/ja/migrate-internal-mongo-to-external.adoc %}
 
 [#connecting-your-external-mongodb]
 === 外部の MongoDB インスタンスを CircleCI サーバーに接続する
