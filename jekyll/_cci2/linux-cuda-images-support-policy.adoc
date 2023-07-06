@@ -35,7 +35,7 @@ The following are the types of tags available for the CircleCI Linux CUDA images
 * Date-based: `linux-cuda-<CUDA-version>:<year.month.patch>`
 ** For example, `linux-cuda-11:2023.02.1`
 ** The “default” slugs point to the latest version of the image, on a rolling basis.
-*** For example, `linux-cuda-11` or `linux-cuda-12`
+*** For example, `linux-cuda-11:default` or `linux-cuda-12:default`
 * Edge: `linux-cuda-<CUDA-version>:edge`
 ** `edge` images incorporate any new changes, if you want the latest version as fast as possible. The `edge` tag becomes available a week prior to general releases. 
 
