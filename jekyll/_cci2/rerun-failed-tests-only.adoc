@@ -244,7 +244,7 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 [#configure-a-job-running-playwright-tests]
 === Configure a job running Django tests
 
-Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this: get the list of test filenames first, massage the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
+Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this, get the list of test filenames first, change the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
 
 ```yaml
 # Get the test file names, write them to files.txt, and split them by historical timing data
