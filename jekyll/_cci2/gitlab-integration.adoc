@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This page walks you through integrating a GitLab project with CircleCI. The sections below introduce you to concepts and ways to manage your GitLab CI/CD pipelines. CircleCI features that are in development for GitLab projects are detailed in the <<coming-soon>> section.
+This page walks you through integrating a GitLab CI project with CircleCI. The sections below introduce you to concepts and ways to manage your GitLab CI/CD pipelines. CircleCI features that are in development for GitLab CI projects are detailed in the <<coming-soon>> section.
 
 [#overview]
 == What is GitLab CI/CD?
