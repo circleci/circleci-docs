@@ -40,7 +40,7 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
     name: Run tests
     command: |
       mkdir test-results
-      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings)
+      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings --timings-type=name)
       pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
 
 - store_test_results:
@@ -67,7 +67,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
+      echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings --timings-type=name #--split-by=timings & --timings-type=name are optional, only use if you are using CircleCI's test splitting
 
  - store_test_results:
     path: test-results
@@ -81,10 +81,10 @@ Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[g
 +
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
-* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
+* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings --timings-type=name`
   ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
   ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
-  ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
+  ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box. 
 
 NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--timings-type=` as a flag to `circleci tests run`.
 
