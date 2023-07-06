@@ -309,6 +309,8 @@ Ensure that you are passing a list of test filenames (or classnames) *via stdin*
 
 ---
 
+`circleci tests run` expects input to be space or newline delimited.  If your test file names have spaces in them, this may pose a problem, especially if you are using `pytest` which may generate names with whitespace.  One possible workaround is to use specific IDs for the tests with whitespace in their names using the instructions link:https://docs.pytest.org/en/7.1.x/example/parametrize.html#set-marks-or-test-id-for-individual-parametrized-test[here].  
+
 If your job runs tests in parallel and persists files to a workspace, you may see a parallel run on a re-run that fails because the `persist_to_workspace` step could not find any contents in the directory that was specified. This may happen because the parallel run will not always execute tests on a re-run if there are not enough tests to be distributed across all parallel runs.
 
 To avoid such a failure, add a `mkdir` command before you run any tests to set up the directory (or directories) that will eventually be persisted to a workspace.  
