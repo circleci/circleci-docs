@@ -10,12 +10,11 @@ contentTags:
 :page-liquid:
 :page-description: "Learn how to create a project in CircleCI."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide gets you started with creating a project in CircleCI.
 
-toc::[]
+
 
 [#step-one-link-your-vcs-with-circleci]
 == Step One: Link your VCS with CircleCI

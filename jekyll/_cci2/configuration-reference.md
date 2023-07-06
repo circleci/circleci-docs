@@ -629,7 +629,9 @@ A map of environment variable names and values. For more information on defining
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
+This feature is used to optimize test steps. If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel.
+
+You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the [Test splitting and parallelism]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
 Example:
 

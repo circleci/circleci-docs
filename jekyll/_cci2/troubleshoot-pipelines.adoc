@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Troubleshooting guide for pipelines and scheduled pipelines.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page describes errors and troubleshooting methods for pipelines and scheduled pipelines.
 

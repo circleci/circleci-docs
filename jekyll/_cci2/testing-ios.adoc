@@ -8,8 +8,7 @@ contentTags:
 :page-description: Testing iOS applications on macOS.
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document describes how to set up and customize testing for an iOS application with CircleCI.
 

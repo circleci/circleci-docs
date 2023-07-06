@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,10 +10,9 @@ contentTags:
 :page-liquid:
 :page-description: Conceptual Overview for CircleCI's self-hosted runner.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
 
 [#namespaces-and-resource-classes]
 == Namespaces and resource classes

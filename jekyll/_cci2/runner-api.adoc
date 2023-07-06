@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,10 +10,9 @@ contentTags:
 :page-liquid:
 :page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
 
 This document contains all the external facing endpoints for the CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`
 

@@ -64,7 +64,7 @@ en:
             link: language-python
           - name: Configuration tutorial
             link: config-intro
-          - name: Set up the Slack orb
+          - name: Use the Slack orb to set up notifications
             link: slack-orb-tutorial
       - name: How-To guides
         children:
@@ -334,8 +334,6 @@ en:
             link: create-an-orb
           - name: Manually author an orb
             link: orb-author-validate-publish
-          - name: Using the Slack orb
-            link: slack-orb-tutorial
       - name: How-to guides
         children:
           - name: Deploy service update to ECS
@@ -456,8 +454,10 @@ en:
     children:
       - name: CLI
         children:
-          - name: Installing the CircleCI local CLI
+          - name: Install and configure the CircleCI local CLI
             link: local-cli
+          - name: How to use the CircleCI local CLI
+            link: how-to-use-the-circleci-local-cli
       - name: APIs
         children:
           - name: API v2 introduction
@@ -466,10 +466,16 @@ en:
             link: api-developers-guide
           - name: Managing API tokens
             link: managing-api-tokens
+          - name: API v2 reference
+            link: https://circleci.com/docs/api/v2
+          - name: API v1 reference
+            link: https://circleci.com/docs/api/v1
       - name: IDE TOOLS
         children:
           - name: VS Code extension overview
             link: vs-code-extension-overview
+          - name: Get started with the VS Code extension
+            link: get-started-with-the-vs-code-extension
       - name: Config tools
         children:
           - name: CircleCI config SDK
@@ -484,16 +490,6 @@ en:
             link: sample-config
           - name: Database examples
             link: postgres-config
-      - name: How-to guides
-        children:
-          - name: How to use the CircleCI local CLI
-            link: how-to-use-the-circleci-local-cli
-      - name: Reference
-        children:
-          - name: API v2 reference
-            link: https://circleci.com/docs/api/v2
-          - name: API v1 reference
-            link: https://circleci.com/docs/api/v1
 
   - name: Test
     icon: icons/sidebar/passed.svg
@@ -548,8 +544,8 @@ en:
             link: deploy-to-artifactory
           - name: Deploy to AWS
             link: deploy-to-aws
-          - name: Deploy service update to AWS ECS
-            link: deploy-service-update-to-aws-ecs
+          - name: Push image to ECR and deploy to ECS
+            link: ecr-ecs
           - name: Deploy to Azure Container Registry
             link: deploy-to-azure-container-registry
           - name: Deploy to Capistrano

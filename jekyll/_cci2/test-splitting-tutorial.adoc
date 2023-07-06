@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn to split and run tests in parallel in CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide walks you through a basic example of test splitting in CircleCI. Test splitting helps speed up your pipelines.
 

@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Using the Android image on the machine executor
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#overview]
 == Overview

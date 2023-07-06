@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 

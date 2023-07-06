@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI Convenience Images release, update, and deprecation policy
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#overview]
 == Overview
@@ -23,7 +22,7 @@ This policy applies to all CircleCI convenience images we publish to the `cimg` 
 [#base-images]
 == Base images
 
-Our Docker convenience images are all built upon our base image, `cimg/base`. This image is in turn built upon the official Ubuntu docker image. 
+Our Docker convenience images are all built upon our base image, `cimg/base`. This image is in turn built upon the official Ubuntu docker image.
 
 We aim to build variants of this image for all LTS versions of Ubuntu that are being maintained in “Standard Support” status. We will stop building variants of `cimg/base` with Ubuntu LTS versions that drop out of support.
 
@@ -56,7 +55,7 @@ We do not provide a `latest`, or `current`, tag for any convenience images, othe
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact that this has on our images being used within CircleCI execution environments. 
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact that this has on our images being used within CircleCI execution environments.
 
 In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures on our link:https://discuss.circleci.com/[Discuss Forum].
 
