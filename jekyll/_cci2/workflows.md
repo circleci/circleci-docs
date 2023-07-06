@@ -222,7 +222,8 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
-NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
+**The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on [CircleCI Discuss](https://discuss.circleci.com/).
+{: class="alert alert-note"}
 
 Runing a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
