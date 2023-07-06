@@ -43,7 +43,7 @@ NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent tes
     name: Run tests
     command: |
       mkdir test-results
-      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings)
+      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings --timings-type=name)
       pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
 
 - store_test_results:
@@ -70,7 +70,7 @@ In the snippet below, the example has been updated to use the `circleci tests ru
     command: |
       mkdir test-results
       TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
+      echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings --timings-type=name #--split-by=timings & --timings-type=name are optional, only use if you are using CircleCI's test splitting
 
  - store_test_results:
     path: test-results
@@ -84,10 +84,10 @@ Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[g
 +
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
-* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
+* `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings --timings-type=name`
   ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
   ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
-  ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.
+  ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
 
 NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--timings-type=` as a flag to `circleci tests run`.
 
@@ -282,6 +282,37 @@ After configuring `circleci tests run`, if you see *all tests* are re-run after 
 1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "re-run".
 2. Use xref:configuration-reference#storeartifacts[`store_artifacts`] to upload  the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
 3. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to re-run.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
+
+---
+
+If you are seeing the following message: `WARN[TIMESTAMP] No test names found in input source. If you were expecting test names, please check your input source.`
+
+Ensure that you are passing a list of test filenames (or classnames) *via stdin* to `circleci tests run`.  The most common approach to do this is to use a glob command: `circleci tests glob "glob pattern" | circleci tests run --command="xargs test command" --verbose
+
+---
+
+`circleci tests run` expects input to be space or newline delimited.  If your test file names have spaces in them, this may pose a problem, especially if you are using `pytest` which may generate names with whitespace.  One possible workaround is to use specific IDs for the tests with whitespace in their names using the instructions link:https://docs.pytest.org/en/7.1.x/example/parametrize.html#set-marks-or-test-id-for-individual-parametrized-test[here].
+
+If your job runs tests in parallel and persists files to a workspace, you may see a parallel run on a re-run that fails because the `persist_to_workspace` step could not find any contents in the directory that was specified. This may happen because the parallel run will not always execute tests on a re-run if there are not enough tests to be distributed across all parallel runs.
+
+To avoid such a failure, add a `mkdir` command before you run any tests to set up the directory (or directories) that will eventually be persisted to a workspace.
+
+```yaml
+steps:
+      - checkout
+      - run: mkdir no_files_here
+      - run: #test command with circleci tests run that populates no_files_here if tests are run
+      - store_test_results:
+          path: ./test-results
+      - store_artifacts:
+          path: ./test-results
+      - persist_to_workspace:
+          root: .
+          paths:
+            - no_files_here
+```
+
+On a re-run, if the parallel run is running tests, `no_files_here` will be populated. If it is not running any tests, the `persist_to_workspace` step will not fail because the `no_files_here` directory exists.
 
 [#FAQs]
 == FAQs
