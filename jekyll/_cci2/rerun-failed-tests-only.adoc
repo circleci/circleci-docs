@@ -257,6 +257,7 @@ TESTFILES=$(cat circleci_test_files.txt)
 
 # Run the tests (TESTFILES) with the reformatted test file names
 pipenv run coverage run manage.py test --parallel=8 --verbosity=2 $TESTFILES
+----
 
 [#known-limitations]
 == Known limitations
