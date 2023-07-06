@@ -11,7 +11,7 @@ contentTags:
 :experimental:
 
 
-Use the rerun failed tests only feature to only rerun a subset of tests instead of rerunning the entire test suite when a transient test failure arises.
+Use the rerun failed tests feature to only rerun a subset of tests instead of rerunning the entire test suite when a transient test failure arises.
 
 [#introduction]
 == Introduction
@@ -96,7 +96,7 @@ NOTE: You can specify the timing type similar to `circleci tests split --split-b
 
 After updating your configuration, run the job that runs tests again and make sure that the same number of tests are being executed as before the config.yml change.
 
-Then, the next time you encounter a test failure on that job, click the "Rerun failed tests only" button.  If the `--verbose` setting is enabled, you should see output similar to the following the next time you click "Rerun failed tests only" with this job on CircleCI:
+Then, the next time you encounter a test failure on that job, click the "Rerun failed tests" button.  If the `--verbose` setting is enabled, you should see output similar to the following the next time you click btn:[Rerun failed tests] with this job on CircleCI:
 
 ```sh
 Installing circleci-tests-plugin-cli plugin.
@@ -111,7 +111,7 @@ DEBUG[2023-05-18T22:09:08Z] Received: ****
 
 If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.  You'll also see output that shows the total number of failed tests from the original job run, the total number of
 
-The job should only rerun tests that are from a `classname` of `file` that had at least one test failure when the "Re-run failed tests only" button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+The job should only rerun tests that are from a `classname` of `file` that had at least one test failure when the btn:[Rerun failed tests] button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
@@ -242,7 +242,7 @@ Example:
       circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
 ```
 
-The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "re-run", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
+The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "rerun", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
 
 [#known-limitations]
 == Known limitations
@@ -271,17 +271,17 @@ steps:
 
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
-* Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be re-run with "Re-run failed tests".
-* Jobs that upload code coverage reports link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[may see issues during a re-run].
+* Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
+* Jobs that upload code coverage reports link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/3?u=sebastian-lerner[may see issues during a rerun].
 
 [#troubleshooting]
 == Troubleshooting
 
-After configuring `circleci tests run`, if you see *all tests* are re-run after clicking "Rerun failed tests only":
+After configuring `circleci tests run`, if you see *all tests* are rerun after clicking btn:[Rerun failed tests]:
 
-1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "re-run".
+1. Ensure that the `--verbose` setting is enabled when invoking `circleci tests run`. This will display what "tests" `circleci tests run` is receiving on a "rerun".
 2. Use xref:configuration-reference#storeartifacts[`store_artifacts`] to upload  the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
-3. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to re-run.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
+3. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to rerun.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
 
 ---
 
@@ -293,7 +293,7 @@ Ensure that you are passing a list of test filenames (or classnames) *via stdin*
 
 `circleci tests run` expects input to be space or newline delimited.  If your test file names have spaces in them, this may pose a problem, especially if you are using `pytest` which may generate names with whitespace.  One possible workaround is to use specific IDs for the tests with whitespace in their names using the instructions link:https://docs.pytest.org/en/7.1.x/example/parametrize.html#set-marks-or-test-id-for-individual-parametrized-test[here].
 
-If your job runs tests in parallel and persists files to a workspace, you may see a parallel run on a re-run that fails because the `persist_to_workspace` step could not find any contents in the directory that was specified. This may happen because the parallel run will not always execute tests on a re-run if there are not enough tests to be distributed across all parallel runs.
+If your job runs tests in parallel and persists files to a workspace, you may see a parallel run on a rerun that fails because the `persist_to_workspace` step could not find any contents in the directory that was specified. This may happen because the parallel run will not always execute tests on a rerun if there are not enough tests to be distributed across all parallel runs.
 
 To avoid such a failure, add a `mkdir` command before you run any tests to set up the directory (or directories) that will eventually be persisted to a workspace.
 
@@ -312,7 +312,7 @@ steps:
             - no_files_here
 ```
 
-On a re-run, if the parallel run is running tests, `no_files_here` will be populated. If it is not running any tests, the `persist_to_workspace` step will not fail because the `no_files_here` directory exists.
+On a rerun, if the parallel run is running tests, `no_files_here` will be populated. If it is not running any tests, the `persist_to_workspace` step will not fail because the `no_files_here` directory exists.
 
 [#FAQs]
 == FAQs
@@ -324,9 +324,9 @@ On a re-run, if the parallel run is running tests, `no_files_here` will be popul
 
 ---
 
-**Question:** Will this functionality re-run individual tests?
+**Question:** Will this functionality rerun individual tests?
 
-**Answer:** No, it will re-run failed test `classnames` or `file` that had at least one individual test failure.
+**Answer:** No, it will rerun failed test `classnames` or `file` that had at least one individual test failure.
 
 ---
 
@@ -342,15 +342,15 @@ On a re-run, if the parallel run is running tests, `no_files_here` will be popul
 
 ---
 
-**Question:** When can I click the option to "Re-run failed tests only?"
+**Question:** When can I click the option to btn:[Rerun failed tests]?
 
-**Answer:** Currently, it will be present any time the "Re-run workflow from failed" option is present, and vice versa.
+**Answer:** Currently, it will be present any time the "Rerun workflow from failed" option is present, and vice versa.
 
 ---
 
 **Question:** I don't see my test framework on this page, can I still use the functionality?
 
-**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The re-run failed tests functionality is test runner and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
+**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The rerun failed tests functionality is test runner and test framework-agnostic. You can use the methods described in the xref:collect-test-data#[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
 
 From there, follow the xref:#quickstart[Quickstart] section to modify your test command to use `circleci tests run`.
 
@@ -358,7 +358,7 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
-**Question:** Can I see in the web UI whether a job was re-run using "Re-run failed tests"?
+**Question:** Can I see in the web UI whether a job was rerun using "Rerun failed tests"?
 
 **Answer:** Not at this time.
 
@@ -376,15 +376,15 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
-**Question:** Why does the re-run appear to be running all tests instead of only failed tests?
+**Question:** Why does the rerun appear to be running all tests instead of only failed tests?
 
 **Answer:** The most common case where this occurs is when the JUnit XML is not outputting a "file" attribute.  If you upload your test results XML to an artifact, you can inspect whether or not it has the "file" attribute.
 
 ---
 
-**Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" re-run when I click "Rerun failed tests only"?
+**Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" rerun when I click btn:[Rerun failed tests]?
 
-**Answer:** No, only test files that have at least one test case reported as "Failed" will be re-run.
+**Answer:** No, only test files that have at least one test case reported as "Failed" will be rerun.
 
 ---
 
