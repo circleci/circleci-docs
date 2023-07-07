@@ -9,25 +9,23 @@ version:
 :page-liquid:
 :page-description: このドキュメントでは CircleCI Server v4.x のアップグレードに必要な手順をわかりやすく説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 このドキュメントでは CircleCI Server v4.x のインストールに必要な手順を説明します。
 
-デプロイが成功すると Web アプリが更新されます。 リリースノートに記載されていない限り、アップデートはローリングアップデートでありダウンタイムはありません。
+このドキュメントでは CircleCI Server v4.x のインストールに必要な手順を説明します。 リリースノートに記載されていない限り、アップデートはローリングアップデートでありダウンタイムはありません。
 
 NOTE: アップグレード時にリリースをスキップしないことをお勧めします。
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 * サーバーがインストールされている Kubernetes クラスタにアクセスできる。
 * link:/docs/ja/server/operator/backup-and-restore[バックアップと復元] の設定が完了している。 
 * 最近のバックアップがある。 詳細については、 link:/docs/ja/server/opertor/backup-and-restore#creating-backups[バックアップと復元] に関するガイドをご覧ください。
 
 [#upgrade-steps]
-== アップグレード手順
+== 前提条件
 
 . https://circleci.com/ja/server/changelog/[更新履歴] をチェックし、新しいバージョンをデプロイする前に実行しなければならないアクションがないことを確認します。
 . 必要に応じて、 https://github.com/databus23/helm-diff[Helm Diff] で更新の処理内容を確認してください。
