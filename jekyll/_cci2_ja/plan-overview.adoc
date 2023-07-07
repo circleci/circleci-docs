@@ -11,13 +11,12 @@ contentTags:
 :page-liquid:
 :page-description: This document is an introduction to the plans CircleCI offers to developers.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 このドキュメントでは、開発者の皆様に向けた CircleCI の料金プランについてご案内します。
 
 [#overview]
-== 概要
+== インサイト スナップショットバッジの概要
 
 クレジットベースの従量課金制プランでは、使用量に応じた料金のみが請求されます。また、チームの link:https://circleci.com/ja/continuous-integration/[CI/CD] ソリューションの柔軟なカスタマイズや拡張が可能です。 クレジットは、秒単位で消費され、分単位のレートは選択したビルドの設定によって異なります。
 
@@ -35,9 +34,9 @@ contentTags:
 このセクションでは、開発者の皆様のCI/CD のニーズに対して各プランで提供される内容を説明します。 マシンタイプ別の消費クレジットについては link:https://circleci.com/ja/pricing/[料金プラン] のページもご確認ください。
 
 [#our-plans]
-== 料金プラン
+== 概要
 
-下記ページから各料金プランの内容をご覧ください。
+クレジットベースの従量課金制プランでは、使用量に応じた料金のみが請求されます。また、チームの link:https://circleci.com/ja/continuous-integration/[CI/CD] ソリューションの柔軟なカスタマイズや拡張が可能です。
 
 - xref:plan-free#[Free プラン]
 - xref:plan-performance#[Performance プラン]
@@ -45,13 +44,13 @@ contentTags:
 - xref:plan-server#[Server プラン]
 
 [#configuring-your-credit-plan]
-== クレジットベースプランの設定
+== 料金プラン
 
-Free プランまたは Performance プランの設定を行うには、link:https://app.circleci.com/[CircleCI Web アプリケーション]から、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は link:https://circleci.com/ja/talk-to-us/[お問い合わせください]。
+下記ページから各料金プランの内容をご覧ください。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は link:https://circleci.com/ja/talk-to-us/[お問い合わせください]。
 
 Performance プランの解約については、xref:faq#cancel-performance-plan[Performance プランの解約に関するFAQ]をご参照ください。
 
 [#managing-credit-usage]
-== クレジット使用量の管理
+== クレジットベースプランの設定
 
-重複するアーティファクトのアップロードの排除などにより最適化し、クレジット消費を抑えることが可能です。 また、ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、 xref:persist-data#[データの永続化]のページを参照してください。
+Free プランまたは Performance プランの設定を行うには、link:https://app.circleci.com/[CircleCI Web アプリケーション]から、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は link:https://circleci.com/ja/talk-to-us/[お問い合わせください]。
