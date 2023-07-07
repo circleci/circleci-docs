@@ -10,15 +10,10 @@ contentTags:
 :page-liquid: CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。
 :page-description:
 :icons: font
-:toc: macro
-
-:toc-title:
 
 VM サービスにより、 https://circleci.com/docs/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
 このセクションでは、VM サービスで設定可能なオプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
-
-toc::[]
 
 CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS]と link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP] のインストールガイドに記載されています。
 
@@ -268,5 +263,5 @@ vm_scaler:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
 ----
