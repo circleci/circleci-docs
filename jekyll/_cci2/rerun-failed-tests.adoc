@@ -85,9 +85,9 @@ Use CircleCI's xref:troubleshoot-test-splitting#video-troubleshooting-globbing[g
 Pass the list of test files to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[`stdin`]).
 
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings --timings-type=name`
-  ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
-  ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
-  ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
+** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
+** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
+** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
 
 NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--timings-type=` as a flag to `circleci tests run`.
 
@@ -162,7 +162,7 @@ gem 'rspec_junit_formatter'
     command: |
       npm install --save-dev cypress-circleci-reporter
 ```
-+
+
 . Use the `cypress-circleci-reporter`, `circleci tests run`, and upload test results to CircleCI:
 +
 ```yaml
@@ -179,7 +179,6 @@ gem 'rspec_junit_formatter'
         path: test_results
 ```
 +
-
 Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
@@ -252,9 +251,9 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 +
 **In most cases, you can still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.
-
++
 If you would like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job, and if there are no tests to run, terminate job execution. For example:
-
++
 ```yml
 steps:
   - checkout
