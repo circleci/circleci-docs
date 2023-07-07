@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: エアギャップ環境の CircleCI Server で実行する Nomad クライアントを構成する方法について説明します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI Server では、コンテナベースのビルド操作を実行するために Nomad クライアントを使用します。 このクライアントは、Helm でデプロイされた CircleCI Server と通信できるように、エアギャップ環境内に配置する必要があります。
 
@@ -26,9 +25,9 @@ NOTE: 以下のセクションでは、`< >` で示されている箇所にご�
 - link:https://developer.hashicorp.com/nomad/docs/install[Nomad のインストール]
 
 [#create-nomad-directories]
-== 2.  Nomad 用ディレクトリを作成する
+== 1.  Docker と Nomad をインストールする
 
-各クライアントで、設定用のディレクトリを作成します。 インストール環境で mTLS を使用する場合は、SSL 用のサブディレクトリも作成します。
+以下の 2 つの必須コンポーネントを、Nomad クライアント用の各インスタンスにインストールします。 インストール環境で mTLS を使用する場合は、SSL 用のサブディレクトリも作成します。
 
 [source, bash]
 ----
@@ -37,9 +36,9 @@ sudo mkdir /etc/nomad/ssl/
 ----
 
 [#create-ci-docker-network]
-== 3.  Docker ネットワーク ci-privileged を作成する
+== 2.  Nomad 用ディレクトリを作成する
 
-以下のコマンドを実行して、`ci-privileged` という名前の Docker ネットワークを作成します。 作成が完了したら、Nomad サービスを再起動します。
+各クライアントで、設定用のディレクトリを作成します。 インストール環境で mTLS を使用する場合は、SSL 用のサブディレクトリも作成します。
 
 [source, bash]
 ----
@@ -49,9 +48,9 @@ sudo service nomad restart
 ----
 
 [#retrieve-mtls-certificates]
-== 4.  (オプション) mTLS 証明書を取得する
+== 3.  Docker ネットワーク ci-privileged を作成する
 
-Nomad クライアントに mTLS を設定している場合は、Nomad クライアントごとに以下の 3 つのファイルを用意する必要があります。 mTLS を設定しない場合は、次の手順に進んでください。
+以下のコマンドを実行して、`ci-privileged` という名前の Docker ネットワークを作成します。 作成が完了したら、Nomad サービスを再起動します。
 
 - `ca.pem`
 - `key.pem`
@@ -74,9 +73,9 @@ echo -n "cert.pem-base64-encoded-string" | base64 --decode > cert.pem
 echo -n "key.pem-base64-encoded-string" | base64 --decode > key.pem
 ----
 
-== 5.  (オプション) mTLS キーを各 Nomad クライアントにコピーする
+== 4.  (オプション) mTLS 証明書を取得する
 
-mTLS を使用する場合、各クライアントに `ca.pem`、`key.pem`、`cert.pem` の各キーをコピーし、下記の場所に配置する必要があります。 mTLS を設定しない場合は、次の手順に進んでください。
+Nomad クライアントに mTLS を設定している場合は、Nomad クライアントごとに以下の 3 つのファイルを用意する必要があります。 mTLS を設定しない場合は、次の手順に進んでください。
 
 [source, text]
 ----
@@ -85,9 +84,9 @@ mTLS を使用する場合、各クライアントに `ca.pem`、`key.pem`、`ce
 /etc/nomad/ssl/key.pem
 ----
 
-== 6.  クライアントごとに Nomad conf.hcl ファイルを設定する
+== 5.  (オプション) mTLS キーを各 Nomad クライアントにコピーする
 
-Nomad クライアントごとに、`/etc/nomad/conf.hcl` に以下の `conf.hcl` ファイルを作成します。 `< >` で囲まれた項目はすべて適切に変更してください。
+mTLS を使用する場合、各クライアントに `ca.pem`、`key.pem`、`cert.pem` の各キーをコピーし、下記の場所に配置する必要があります。 mTLS を設定しない場合は、次の手順に進んでください。
 
 [source, hcl]
 ----
@@ -134,9 +133,9 @@ tls {
 }
 ----
 
-== 7.  接続をテストする
+== 6.  クライアントごとに Nomad conf.hcl ファイルを設定する
 
-Nomad エージェントを起動してログを確認し、クライアントとクラスタが接続されているかテストします。
+Nomad クライアントごとに、`/etc/nomad/conf.hcl` に以下の `conf.hcl` ファイルを作成します。
 
 [source, bash]
 ----
@@ -144,6 +143,6 @@ sudo nomad agent -config /etc/nomad/conf.hcl
 ----
 
 [#next-steps]
-== 次のステップ
+== 7. 
 
-本ページの手順を完了したら、「xref:phase-5-test-your-installation#[フェーズ 5 - インストールのテスト]」に進んでください。
+Nomad エージェントを起動してログを確認し、クライアントとクラスタが接続されているかテストします。
