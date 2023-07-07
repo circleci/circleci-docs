@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: エアギャップ環境で CircleCI Server を実行できるように、MinIO でオブジェクトストレージを構成する方法について説明します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#create-buckets-in-minio]
 == 1.  MinIO でバケットを作成する
@@ -37,9 +36,9 @@ image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
 [#copy-circleci-build-agent]
-== 2.  CircleCI ビルドエージェントをコピーする
+== 1.  MinIO でバケットを作成する
 
-最新の CircleCI ビルドエージェントをエアギャップ環境内の MinIO にコピーします。
+CircleCI Server では、エアギャップ環境用のオブジェクトストレージとして link:https://min.io/[MinIO] をサポートしています。
 
 [#download-latest-release-txt]
 === a.  最新の release.txt ファイルをダウンロードする
@@ -52,14 +51,14 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.tx
 ----
 
 [#copy-release-txt]
-=== b.  MinIO に release.txt ファイルをコピーする
+=== a.  circleci-data バケットを作成する
 
-`release.txt` ファイルをエアギャップ環境にコピーして、MinIO の `circleci-data` バケットのルートに配置します。
+MinIO で `circleci-data` という名前のバケットを新しく作成します。
 
 [#retrieve-latest-release-bin]
-=== c.  最新リリースのバイナリを取得する
+=== b.  circleci-data バケットを構成する
 
-`release.txt` ファイルを使用して、CircleCI のバイナリリリース用パブリックバケットから最新リリースの `circleci-agent` とチェックサムをダウンロードします。
+`circleci-data` バケットの設定で、アクセスポリシーを `public` に変更します。
 
 [source, bash]
 ----
@@ -129,6 +128,6 @@ image::./minio/minio_create_amd_dir.png[Creating an amd dir]
 image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 
 [#next-steps]
-== 次のステップ
+== 2. 
 
-本ページの手順を完了したら、「xref:phase-3-install-circleci-server#[フェーズ 3 - CircleCI Server のインストール]」に進んでください。
+最新の CircleCI ビルドエージェントをエアギャップ環境内の MinIO にコピーします。
