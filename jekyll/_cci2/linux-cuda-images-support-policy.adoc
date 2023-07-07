@@ -16,7 +16,7 @@ contentTags:
 [#overview]
 == Overview
 
-This document outlines the xref:using-gpu#linux-gpu[CircleCI Linux CUDA image] release, update, and deprecation policy and applies to our Linux CUDA Images.
+This document outlines the xref:using-gpu#linux-gpu[CircleCI Linux CUDA image] release, update, and deprecation policy and applies to our Linux CUDA images.
 
 [#release-policy]
 == Release policy
