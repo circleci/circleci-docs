@@ -7,10 +7,9 @@ contentTags:
 ---
 = インストールのリファレンスガイド
 :page-layout: classic-docs
+:page-description: Reference page for all values options available for installations of CircleCI server v4
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#example-manifests]
 == マニフェストの例:
@@ -858,7 +857,7 @@ a|AWS 認証設定を指定します。
 |`true`
 |
 
-|`postgresql.primary.persistence.existingClaim`
+|`postgresql.persistence.existingClaim`
 |文字列
 |`"8Gi"`
 |
