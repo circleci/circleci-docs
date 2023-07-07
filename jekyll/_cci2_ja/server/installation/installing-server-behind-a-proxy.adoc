@@ -9,15 +9,11 @@ version:
 :page-description: このドキュメントでは、CircleCI Server v4.x をプロキシ経由でインストールする方法についてわかりやすく説明します。
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。
 
-プロキシの設定は、 link:/docs/ja/server/installation/phase-2-core-services#l-installing-behind-a-proxy[ステップ 2: コアサービス] において行われます。
-
-toc::[]
+セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。
 
 [#known-limitations]
 == 既知の制限
