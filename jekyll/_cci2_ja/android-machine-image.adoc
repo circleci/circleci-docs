@@ -11,30 +11,29 @@ contentTags:
 :page-liquid:
 :page-description: Machine Executor での Android イメージの使用
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#overview]
-== 概要
+== インサイト スナップショットバッジの概要
 
 Android マシンイメージには、CircleCI で Linux マシンイメージにアクセスする場合と同様に、xref:configuration-reference#available-linux-machine-images-cloud[Linux
 machine Executor] を通じてアクセスできます。 Android マシンイメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 [#using-the-android-machine-image]
-== Android マシンイメージの使用
+== 概要
 
-設定ファイルに Android イメージを使用するには、xref:orb-intro#[Orb] を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、 複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「<<#examples,例>>」セクションを参照してください。
+Android マシンイメージには、CircleCI で Linux マシンイメージにアクセスする場合と同様に、xref:configuration-reference#available-linux-machine-images-cloud[Linux
+machine Executor] を通じてアクセスできます。 Android マシンイメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「<<#examples,例>>」セクションを参照してください。
 
 [#pre-installed-software]
+== Android マシンイメージの使用
+
+設定ファイルに Android イメージを使用するには、xref:orb-intro#[Orb] を使用して、または、手動で設定することができます。
+
+[#examples]
 == プリインストールされたソフトウェア
 
 現在プリインストールされているソフトウェアのリストについては、 link:https://discuss.circleci.com/t/android-2023-2/47194[Discuss] ページで四半期ごとの更新のお知らせを参照してください。
-
-[#examples]
-== 例
-
-以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
 
 [#simple-orb-usage]
 === Orb を使用するシンプルな例
