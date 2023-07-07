@@ -10,12 +10,9 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 ここでは、CircleCI Server v4.x で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポートバンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
-
-toc::[]
 
 [#generate-support-bundle]
 == サポートバンドルの生成
@@ -24,7 +21,7 @@ toc::[]
 
 サポート バンドルを生成するには、以下の手順に従います。
 
-=== 前提条件
+=== Orb 開発キット
 
 . まず、circleci-server がデプロイされており、kubectl によりクラスタ/名前空間にアクセスできることを確認します。
 
