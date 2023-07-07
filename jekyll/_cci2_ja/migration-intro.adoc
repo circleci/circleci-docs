@@ -10,9 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、CI/CD パイプラインを CircleCI に移行するために必要な手順を概説します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#why-migrate-to-circleci]
 == CircleCI に移行する理由
@@ -31,9 +29,9 @@ CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-
 NOTE: Premium サポートや Advanced サポートをご利用のお客様は、mailto:customersuccess@circleci.com[customersuccess@circleci.com] にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
 
 [#project-migration-methodology]
-== プロジェクトの移行方法
+== CircleCI に移行する理由
 
-プロジェクトの CircleCI への移行は、以下のように段階的に実行できます。これについては下記で詳しく説明します。
+CircleCI は、大変優れた CI ツールです。
 
 - <<assessment-phase>>
 - <<planning-phase>>
@@ -58,9 +56,9 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 - プロジェクト 10 個: 〜 9 ヶ月以上
 
 [#assessment-phase]
-== 評価段階
+== プロジェクトの移行方法
 
-現状を把握し、CircleCI の機能と現在の CI ツールの機能の違いを理解します。
+プロジェクトの CircleCI への移行は、以下のように段階的に実行できます。これについては下記で詳しく説明します。
 
 この段階の検討事項:
 
@@ -70,14 +68,14 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 - <<collect-test-data#,テスト>>
 
 [#planning-phase]
-== 計画段階
+== 評価段階
 
-バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている VCS 認証情報を使ってログインします。
+現状を把握し、CircleCI の機能と現在の CI ツールの機能の違いを理解します。 <<first-steps#,CircleCI への登録と使用>> に記載されている VCS 認証情報を使ってログインします。
 
-サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
+この段階の検討事項:
 
 [#preparation-phase]
-== 準備段階
+== 計画段階
 
 [#prep-your-team]
 === チームの準備
@@ -97,7 +95,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 どの手順が互いに依存し、どの手順がブロッカーになる可能性があるかを文書化します。 実行手順の最後に、ロールバックが必要な場合に備えて、オーナーと一緒にリスク低減プランも記載します。
 
 [#testing-phase]
-== テスト段階
+== 準備段階
 
 この段階では以下を行います。
 
@@ -129,14 +127,14 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 移行中にトラブルシューティングが必要な問題が発生する可能性があることにご注意ください。そのため、エンドユーザーに調整期間を通知し、すべての問題を解決して計画通りに作業できるようにしてください。
 
 [#migration-phase]
-== 移行段階
+== テスト段階
 
-この段階では、最後の問題を解決し、プロジェクトの移行を実行し、ユーザーとデータを CircleCI に移します。 この段階を開始する前に、必ず計画段階、準備段階、テスト段階を完了して下さい。
+この段階では以下を行います。 この段階を開始する前に、必ず計画段階、準備段階、テスト段階を完了して下さい。
 
 [#next-steps]
-== 次のステップ
+== 移行段階
 
-以下の各ドキュメントでは、CI/CD パイプラインの CircleCI への移行で役立つガイドやヒントを紹介しています。
+この段階では、最後の問題を解決し、プロジェクトの移行を実行し、ユーザーとデータを CircleCI に移します。
 
 * <<migrating-from-aws#,AWS からの移行>>
 * <<migrating-from-azuredevops#,Azure DevOps からの移行>>
