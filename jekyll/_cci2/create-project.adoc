@@ -12,12 +12,10 @@ contentTags:
 :icons: font
 :experimental:
 
-This guide gets you started with creating a project in CircleCI.
+This guide gets you started with creating or setting up a project in CircleCI.
 
-
-
-[#step-one-link-your-vcs-with-circleci]
-== Step One: Link your VCS with CircleCI
+[#link-your-vcs-with-circleci]
+== 1. Link your VCS with CircleCI
 
 If you have not done so already, <<first-steps#,sign up with CircleCI>> and select your Version Control System (VCS). You can also sign up with email.
 
