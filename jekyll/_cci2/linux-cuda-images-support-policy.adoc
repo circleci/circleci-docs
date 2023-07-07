@@ -30,7 +30,7 @@ Please note that this is not an SLA (service level agreement). We can not, and d
 [#tagging]
 == Tagging
 
-The following are the types of tags available for the CircleCI Linux CUDA images: 
+The following tags are available for the CircleCI Linux CUDA images: 
 
 * Date-based: `linux-cuda-<CUDA-version>:<year.month.patch>`
 ** For example, `linux-cuda-11:2023.02.1`
