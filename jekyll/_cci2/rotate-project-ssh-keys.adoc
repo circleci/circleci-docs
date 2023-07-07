@@ -29,8 +29,7 @@ sectionTags:
 :page-liquid:
 :page-description: How to guide detailing how to rotate your project SSH keys.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).

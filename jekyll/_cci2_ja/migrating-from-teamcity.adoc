@@ -296,6 +296,8 @@ TeamCity では、定義されたランナータイプ (Visual Studio、Maven、
 
 また、この柔軟性により、ステップをあらゆる言語、フレームワーク、ツールに適用できます。 たとえば、 https://circleci.com/docs/ja/language-ruby/[Rails プロジェクト] で Ruby コンテナを使用して `bundler` コマンドを実行できます。 https://circleci.com/docs/ja/language-javascript/[Node.js プロジェクト] で Node コンテナと `npm` コマンドを実行することも可能です。 様々な言語やフレームワークの例については、 <<examples-and-guides-overview#,サンプルとガイドの概要>> をご覧ください。
 
+{% include snippets/ja/docker-auth.md %}
+
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
@@ -344,9 +346,6 @@ jobs:
   Gradle:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -356,9 +355,6 @@ jobs:
   Maven:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -371,46 +367,9 @@ jobs:
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-|TeamCity のステップ
-
-a|[source, kotlin]
-----
-project {
-  parallel {
-    build(Gradle) # Assume agent configured
-    build(Maven)  # Assume agent configured
-  }
-}
-
-object Gradle: BuildType({
-  name = "Gradle"
-
-  steps {
-    gradle {
-      tasks = "clean build"
-    }
-  }
-})
-
-object Maven: BuildType({
-  name = "Maven"
-
-  steps {
-    maven {
-      goals = "clean package"
-    }
-  }
-})
-----
-|===
-
-[.table.table-striped.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
 |同等の CircleCI のステップ
 
-a|[source, yaml]
+a|[source, kotlin]
 ----
 version: 2.1
 workflows:
@@ -438,6 +397,42 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Package
+          command: mvn clean package
+----
+|===
+
+[.table.table-striped.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+|同等の CircleCI のステップ
+
+a|[source, yaml]
+----
+version: 2.1
+workflows:
+  parallel-workflow:
+    jobs:
+      - Gradle
+      - Maven
+
+jobs:
+  Gradle:
+    docker:
+      - image: cimg/openjdk:17.0.1
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Build
+          command: ./gradlew clean build
+
+  Maven:
+    docker:
+      - image: cimg/openjdk:17.0.1
     steps:
       - checkout # Checks out source code
       - run:

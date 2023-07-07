@@ -11,8 +11,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific xref:pipeline-variables#[Pipeline values] or file paths.
 

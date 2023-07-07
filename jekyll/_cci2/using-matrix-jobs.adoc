@@ -12,8 +12,7 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Matrix jobs provide a way to run a job multiple times with arguments. Arguments are supplied using parameters. There are many uses for this feature, including testing on multiple operating systems and against different language or library versions.
 

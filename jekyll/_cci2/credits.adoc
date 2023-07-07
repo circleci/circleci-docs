@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document describes how to find the available resources regarding credits with CircleCI.
 

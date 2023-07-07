@@ -24,6 +24,8 @@ document-type:
 
 以下の例では、 <<pipeline-variables#pipeline-values,パイプラインの値>> `pipeline.git.branch` を使って `when` (いつ) ステップを実行するかを制御する方法を紹介します。 この例では、メインブランチにコミットされた場合のみ `run: echo "I am on main"` ステップを実行します。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 ```yaml
 version: 2.1
 
@@ -31,9 +33,6 @@ jobs:
   my-job:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - when:

@@ -7,6 +7,12 @@
 | VM Software Manifest
 | Release Notes
 
+| `15.0.0`
+| Xcode 15 Beta 2 (15A5161b)
+| 13.4
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12543/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-beta-2-released-includes-visionos-sdk/48452[Release Notes]
+
 |`14.3.1`
 | Xcode 14.3.1 (14E300b)
 | 13.2.1

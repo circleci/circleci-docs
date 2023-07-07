@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: How to add additional SSH keys to CircleCI
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
 

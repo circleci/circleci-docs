@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: How to test your CircleCI server installation in an air-gapped environment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Test your air-gapped installation using CircleCI's Reality Check project.
 

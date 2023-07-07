@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
 title: "Managing API Tokens"
-short-title: "Managing API Tokens"
 description: "How to assign scoped tokens for using the CircleCI API"
-order: 20
 contentTags:
   platform:
   - Cloud
@@ -21,15 +19,15 @@ tokens available, as well as how to create and delete them.
 There are two types of API token you can create within CircleCI.
 
   1. **Personal**:
-  These tokens are used to interact with the CircleCI API
+  These tokens are used to interact with the CircleCI APIs (v1 and v2),
   and grant full read and write permissions.
   2. **Project**:
   These tokens allow you to read/write information for specific projects.
   Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
     - _Status_ tokens grant read access to the project's build statuses.
-    Useful for [embedding status badges]({{ site.baseurl }}/status-badges/).
-    - _Read Only_ tokens grant read only access to the project's API.
-    - _Admin_ tokens grant read and write access for the project's API.
+    Used for [embedding status badges]({{ site.baseurl }}/status-badges/).
+    - _Read Only_ tokens grant read only access to the project's API (v1 only).
+    - _Admin_ tokens grant read and write access for the project's API (v1 only).
 
 **Note**: API tokens cannot be modified after they have been created. The only
 way to change existing tokens is to delete and recreate them, also known as "token rotation".

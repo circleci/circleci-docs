@@ -46,6 +46,8 @@ version: 2.1
 
 下記の `.circleci/config.yml` では、Docker 実行環境をジョブ `build` に追加します。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 ```yaml
 # CircleCI configuration file
 version: 2.1
@@ -55,12 +57,9 @@ jobs:
     docker:
     # Primary container image where all steps run
      - image: cimg/base:2022.05
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-`jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。Docker コンテナは、ネストされたキーペアを使って設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
+Docker または Machine Executor がイメージを使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに **マシンイメージ** を使用できます。これにより、下記サンプルのように Xcode がプリインストールされた専用の仮想マシンがスピンアップされます。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
 
 Docker または Machine Executor がイメージを使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに **マシンイメージ** を使用できます。これにより、下記サンプルのように Xcode がプリインストールされた専用の仮想マシンがスピンアップされます。
 
@@ -74,7 +73,7 @@ jobs:
       xcode: 13.3.0
 ```
 
-キーと値のペアが同じ構文に従っていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ] およびその構文をご確認ください。
+Developer Hub には、ご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も人気の Orb を設定する方法をご確認下さい。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ] およびその構文をご確認ください。
 
 Developer Hub には、ご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も人気の Orb を設定する方法をご確認下さい。
 

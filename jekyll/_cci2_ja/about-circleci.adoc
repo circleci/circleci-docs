@@ -1,0 +1,78 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI について
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、CircleCI を利用してソフトウェアやアプリケーション開発の自動化実現方法のご紹介に関して詳しく説明しています。CircleCI は、ソフトウェア開発のビルド、テスト、デプロイを全て自動化します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#introduction]
+== 概要
+
+CircleCI の使命は、ソフトウェアチームがより迅速にイノベーションを実現できるよう、変更を管理することです。 私たちは、テクノロジー主導の組織が最高の仕事を遂行できるよう支援し、変更を管理することでエンジニアリングチームの生産性と革新性を高めたいと考えています。 CircleCIは、企業向け（エンタープライズ）のサポートとサービスを提供し、お客様の作業場所で動作します： Linux、macOS、Android、Windowsをクラウドまたはお客様のサーバーでご利用いただけます。
+
+インテリジェントな自動化により、ビルド、テスト、デプロイを行うことができます。
+
+image::{{site.baseurl}}/assets/img/docs/arch.png[CircleCI process diagram]
+
+[#what-is-ci-cd]
+== CI/CD の基本
+
+link:https://circleci.com/ja/continuous-integration/[CI・継続的インテグレーション]は、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。  別の場所で機能追加などを行い、開発サイクルの終了間際にマージする方法とは違って、継続的インテグレーションでは、開発メンバーそれぞれが随時、自身のコードを共有リポジトリ上でマージしていく形になります。 各コミットにより自動テストとビルドがトリガーされます。 失敗しても、数分以内に素早く修復することができます。
+
+CD（継続的デリバリー）とは、ステージング・ブランチやプロダクション・ブランチのような、選ばれた開発環境に対して信頼性の高いリリースを行う手法です。
+
+CI/CDを活用することによって、開発者がより高品質で安定した製品やソフトウェアをリリースすることが実現します。
+
+[#circleci-in-your-workflow]
+== CircleCI のワークフロー
+
+サポートされているバージョンコントロールシステム上  (VCS) のソフトウェアリポジトリは、 link:https://circleci.com[circleci.com] のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI はそれぞれの link:/docs/glossary/#job[ジョブ]を別々のxref:glossary#container[コンテナ]またはlink:https://circleci.com/developer/images?imageType=machine[仮想マシン]で実行します。
+
+その後 CircleCI は、テストが完了すると、成功または失敗のメール通知を送信します。 CircleCI には xref:notifications#[Slack 通知と IRC 通知]も統合されています。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
+
+CircleCI は、（これらに限定されないが）様々な環境にコードをデプロイするように構成することができます：
+
+* AWS S3
+* AWS EC2 Container Service（ECS）
+* Google Cloud Platform (GCP)
+* Azure Container Registry
+* Heroku
+* Firebase
+* Android
+* iOS
+
+link:https://circleci.com/developer/ja/orbs[Orb レジストリ] には、一般的なデプロイターゲットに使用できる、再利用可能な設定のパッケージが含まれています。 Orb を使うと、設定を簡略化し効率化することができます。
+
+その他のクラウド型デプロイサービスを使っている場合は、 SSH を使うか、ジョブ設定において各サービスの API クライアントを導入することで、スクリプト化することができます。
+
+[#learn-more]
+== 詳しくはこちら
+
+[#on-circleci-academy]
+=== CircleCI Academy
+
+* link:https://academy.circleci.com/cicd-basics?access_code=public-2021[CI/CD 101 ワークショップ（英語）]
+* link:https://academy.circleci.com/general-developer-training?access_code=public-2021[開発者向けトレーニング（英語）]
+
+[#on-our-blog]
+=== ブログ
+
+* link:https://circleci.com/blog/config-best-practices-dependency-caching/[Config best practices: dependency caching]
+* link:https://circleci.com/ja/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/[CircleCI Orb で拡張性に優れた自動 CI/CD を実現する方法]
+* link:https://circleci.com/blog/secure-ci-pipeline/[How to secure your CI pipeline]
+
+[#next-steps]
+== 次のステップ
+
+* xref:benefits-of-circleci#[CircleCI のメリット]
+* xref:concepts#[CircleCI の概要]
