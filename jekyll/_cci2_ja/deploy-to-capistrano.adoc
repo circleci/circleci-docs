@@ -11,18 +11,17 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 このノウハウガイドでは、CapistranoにデプロイするためのCircleCIの設定例を紹介します。
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 このページでは、Capistrano にデプロイするための設定ファイルを紹介します。 Capistrano を使用するようにプロジェクトをセットアップしたら、CircleCI のジョブステップで、必要に応じて link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[デプロイコマンド] を実行できます。
 
 [#configuration-example]
-== 設定ファイル例
+== はじめに
 
 ```yaml
 version: 2.1
@@ -43,9 +42,6 @@ jobs:
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout
