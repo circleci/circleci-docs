@@ -11,9 +11,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 このページでは、CircleCI プロジェクトで使用できる定義済みの値について説明します。
 
@@ -29,13 +27,13 @@ NOTE: **注:** 定義済み環境変数を使用して別の環境変数を定�
 include::../_includes/snippets/built-in-env-vars.adoc[]
 
 [#pipeline-values]
-== パイプライン値
+== 定義済み環境変数
 
-パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
+下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 一つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
 
 include::../_includes/snippets/pipeline-values.adoc[]
 
-たとえば以下のようになります。
+例えば下記のようにします。
 
 ```yaml
 version: 2.1
