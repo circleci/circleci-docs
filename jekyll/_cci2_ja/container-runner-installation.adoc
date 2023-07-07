@@ -9,9 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI コンテナランナーのインストール手順
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 :container:
 
 CircleCI のコンテナランナーをインストールする方法についてこのドキュメントでわかりやすく説明します。
@@ -19,30 +17,30 @@ CircleCI のコンテナランナーをインストールする方法につい�
 // {% include snippets/runner-platform-prerequisites.adoc %}
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 {% include snippets/runner/ja/container-runner-prereq.adoc %}
 
 [#self-hosted-runner-terms-agreement]
-== セルフホストランナーの利用条件
+== 前提条件
 
-{% include snippets/runner/ja/terms.adoc %}
+{% include snippets/runner/ja/container-runner-prereq.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. ネームスペースとリソースクラスの作成
+== セルフホストランナーの利用条件 ネームスペースとリソースクラスの作成
 
 [.tab.container-runner.Web_app_installation]
 --
-{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
+{% include snippets/ja/runner/install-with-web-app-steps.adoc %}
 --
 
 [.tab.container-runner.CLI_installation]
 --
-{% include snippets/runner/ja/install-with-cli-steps.adoc %}
+{% include snippets/ja/runner/install-with-cli-steps.adoc %}
 --
 
 [#container-runner-installation]
-== 2. コンテナランナー インストール
+== 1. ネームスペースとリソースクラスの作成
 
 . 以下のコマンドを実行して、コンテナランナー Helm のレポジトリを追加します：
 +
@@ -78,7 +76,7 @@ helm install container-agent container-agent/container-agent -n circleci -f valu
 ----
 
 [#container-runner-configuration-example]
-== コンテナランナーの設定例
+== 2.
 
 クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。 コンテナランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
@@ -108,12 +106,12 @@ workflows:
 CAUTION: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは **使用しないでください** (詳細は以下の <<container-runner#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
 [#troubleshooting]
-== トラブルシューティング
+== コンテナランナーの設定例
 
-セルフホストランナーのトラブルシューティングガイドの <<troubleshoot-self-hosted-runner#troubleshoot-container-runner,コンテナランナーのトラブルシューティングのセクション>> を参照してください。
+クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。
 
 [#additional-resources]
-== 関連リソース
+== トラブルシューティング
 
 - xref:container-runner.adoc[コンテナランナーのリファレンスガイド]
 - xref:runner-concepts.adoc[セルフホストランナーのコンセプト]
