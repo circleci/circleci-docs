@@ -11,15 +11,14 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI Server 2.19.x から 4.0 に移行する方法を解説します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI Server v2.19.x から v4.0 に移行する際は、v2.19 インスタンスのデータ (Mongo、Postgres、Vault) をバックアップしてから、待機中の CircleCI Server v4.0 インスタンスにそのデータを復元する必要があります。 問題が発生した場合は、v2.19 インスタンスにフォールバックできます。 移行する場合、先に CircleCI Server v4.0 システムのインストールを完了している必要があります。
 
-移行には、データストアのサイズにより数分～数時間かかります。 移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を先に試すことで、移行プロセスに対する理解を深められるだけでなく、移行完了にかかる時間を確認することもできます。
+CircleCI Server v2.19.x から v4.0 に移行する際は、v2.19 インスタンスのデータ (Mongo、Postgres、Vault) をバックアップしてから、待機中の CircleCI Server v4.0 インスタンスにそのデータを復元する必要があります。 問題が発生した場合は、v2.19 インスタンスにフォールバックできます。 移行する場合、先に CircleCI Server v4.0 システムのインストールを完了している必要があります。
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 . 現在インストールされている CircleCI Server が v2.19x である。
 . v2.19 インスタンスのバックアップが完了している。 外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
@@ -34,7 +33,7 @@ CircleCI Server v2.19.x から v4.0 に移行する際は、v2.19 インスタ�
 - CircleCI Server v2.19 サービスマシンへの `ssh` アクセス
 
 [#migration]
-== 移行
+== 前提条件
 
 WARNING: CircleCI Server v4.0 に移行すると、v2.19 アプリケーションはシャットダウンされます。 v2.19 アプリケーションは自動では再起動されませんが、Replicated の管理コンソールを使用して手動で再起動することはできます。 CircleCI Server v2.19 と CircleCI Server v4.0 を同時に実行すると、v2.19 のビルドデータに問題が発生するおそれがあります。 CircleCI Server v4.0 を実行している間、CircleCI Server v2.19 は再起動しないでください。
 
@@ -84,7 +83,7 @@ NOTE: 4.0 の環境で使用するホスト名が 2.19 とは異なる場合、G
 https://github.com/circleci/realitycheck[realitycheck] の実行が正常に完了したら、新しい CircleCI UI と URL (変化した場合) をチームに連絡します。
 
 [#frequently-asked-questions]
-== よく寄せられるご質問
+== 移行
 
 [#where-did-all-my-job-and-build-history-go?]
 === 過去のジョブとビルドの履歴がありません。どこに移動されたのですか？
@@ -105,12 +104,12 @@ https://github.com/circleci/realitycheck[realitycheck] の実行が正常に完�
 * 移行スクリプトでは、Postgres および MongoDB の命名規則が特定のパターンに従っているものと想定しています。 このエラーが表示される場合、インストール環境が標準と異なっているか、DB が移行されていないなどの問題があります。 このエラーが表示された場合は、サポートバンドルと、移行スクリプトの出力を添えてサポートにお問い合わせ下さい。
 
 [#transitioning-to-pipelines]
-== トラブルシューティング
+== よく寄せられるご質問
 
 Server v2.x から v4.0 に移行する場合、パイプラインを導入する前にプロジェクトの設定を行います。 CircleCI Server v4.0 では、パイプラインが自動的に有効化されるため、プロジェクトの設定 (`.circleci/_config.yml`) を `version: 2.1` に変更するだけで、Server v4.0 で利用可能なすべての機能にアクセスすることができます。
 
 [#what-to-read-next]
-== 次に読む
+== トラブルシューティング
 
 * https://circleci.com/docs/ja/server/installation/hardening-your-cluster[クラスタのハードニング]
 * https://circleci.com/docs/ja/server/operator/operator-overview[CircleCI Server 4.0 運用ガイド]
