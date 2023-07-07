@@ -10,16 +10,14 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Server のインストールで、MongoDB を v4.4.15 にアップグレードする方法をわかりやすく説明しています。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 MongoDB は、CircleCI Server で利用されているデータベースサービスです。 このドキュメントでは、MongoDB をバージョン4.4.15 にアップグレードする方法について説明します。
 
-MongoDB  `3.6.22` は CircleCI Server 4.1 と共に出荷されます。
+MongoDB は、CircleCI Server で利用されているデータベースサービスです。
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 * まずは、バックアップが取られていることを確認する。 アップグレードの進行中に何か問題が発生した場合に備えて、MongoDB のバックアップを復元する必要がある
 * `values.yaml` を修正する準備が完了している
@@ -27,7 +25,7 @@ MongoDB  `3.6.22` は CircleCI Server 4.1 と共に出荷されます。
 * MongoDB root パスワードが使用可能
 
 [#upgrade]
-== アップグレード
+== 前提条件
 
 === 1.  MongoDB 3.6 から 4.0 へのアップグレード
 
@@ -46,8 +44,8 @@ mongodb:
   image:
     tag: 4.0.27-debian-9-r118
 ```
-. `helm upgrade` を実行して、インストールを更新してください。
-. `helm upgrade` が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、ポッドに `exec` する必要があります (root パスワードがあれば便利です)。 (必ず `<password>` をMongoDBルートのパスワードに置き換えてください)。
+. `helm upgrade` を実行して、インストールを更新します。
+. `helm upgrade`  が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、Pod に `exec` する必要があります (root パスワードがあれば便利です)。 (必ず  `<password>`  をMongoDBルートのパスワードに置き換えてください)。
 +
 ```bash
 kubectl exec -it mongodb-0 -- mongo -u root -p <password>
@@ -65,7 +63,7 @@ mongodb:
     tag: 4.2.17-debian-10-r99
 ```
 . `helm upgrade` を実行して、インストールを更新します。
-. `helm upgrade`  が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、ポッドに `exec` する必要があります (root パスワードがあれば便利です)。 (必ず `<password>` をMongoDBルートのパスワードに置き換えてください)。
+. `helm upgrade`  が完了し、MongoDB がロールアップされたら、互換性バージョンを変更するために、Pod に `exec` する必要があります (root パスワードがあれば便利です)。 (必ず  `<password>`  をMongoDBルートのパスワードに置き換えてください)。
 +
 ```bash
 kubectl exec -it mongodb-0 -- mongo -u root -p <password>
