@@ -11,9 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: Troubleshoot CircleCI and various setups and integrations.
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 This page offers troubleshooting suggestions for the following aspects of CircleCI:
 
@@ -31,9 +29,9 @@ This page offers troubleshooting suggestions for the following aspects of Circle
 
 include::../_includes/snippets/troubleshoot/ja/orb-troubleshoot-snip.adoc[]
 
-== パイプライン
+== Orb
 
-include::../_includes/snippets/troubleshoot/ja/pipelines-troubleshoot-snip.adoc[]
+include::../_includes/snippets/troubleshoot/ja/orb-troubleshoot-snip.adoc[]
 
 // Self-hosted runner (H2s need to be in the snippet for now)
 
