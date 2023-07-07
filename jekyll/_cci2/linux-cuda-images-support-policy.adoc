@@ -21,29 +21,29 @@ This document outlines the xref:using-gpu#linux-gpu[CircleCI Linux CUDA image] r
 [#release-policy]
 == Release policy
 
-The CircleCI CUDA images are based on our Linux VM machine images for the purpose of providing an image that can leverage the additional processing capabilities of CircleCI’s GPU executor. 
+The CircleCI CUDA images are based on our Linux VM machine images for the purpose of providing an image that can leverage the additional processing capabilities of CircleCI’s GPU executor.
 
-We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release. 
+We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release.
 
 Please note that this is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
 
 [#tagging]
 == Tagging
 
-The following tags are available for the CircleCI Linux CUDA images: 
+The following tags are available for the CircleCI Linux CUDA images:
 
 * Date-based: `linux-cuda-<CUDA-version>:<year.month.patch>`
 ** For example, `linux-cuda-11:2023.02.1`
 ** The “default” slugs point to the latest version of the image, on a rolling basis.
 *** For example, `linux-cuda-11:default` or `linux-cuda-12:default`
 * Edge: `linux-cuda-<CUDA-version>:edge`
-** `edge` images incorporate any new changes, if you want the latest version as fast as possible. The `edge` tag becomes available a week prior to general releases. 
+** `edge` images incorporate any new changes, if you want the latest version as fast as possible. The `edge` tag becomes available a week prior to general releases.
 
 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in either Linux or Windows images, we will investigate the impact that this has on our images being used across CircleCI execution environments. 
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in either Linux or Windows images, we will investigate the impact that this has on our images being used across CircleCI execution environments.
 
 In most cases, due to the ephemeral and isolated nature of the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our link:https://discuss.circleci.com/[Discuss Forum].
 
@@ -55,11 +55,13 @@ Please file a link:https://support.circleci.com/hc/en-us/requests/new[support ti
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-Image lifespan will generally follow Nvidia’s CUDA release cycle. 
+Image lifespan will generally follow Nvidia’s CUDA release cycle.
 
 Once a new major version of CUDA is released, we will begin the deprecation process of the oldest major version that we support and schedule it to be removed. This allows us to maintain two major versions of CUDA effectively.
 
-Example: When CUDA 12.0 is released:
+## Examples
+
+A major version release -- CUDA 12.0:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -77,7 +79,7 @@ Example: When CUDA 12.0 is released:
 | `linux-cuda-10` image deprecated
 |===
 
-Example: When CUDA 11.8 is released:
+A minor version release -- CUDA 11.8:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
