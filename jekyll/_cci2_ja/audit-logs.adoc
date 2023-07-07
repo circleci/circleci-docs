@@ -10,12 +10,10 @@ version:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#overview]
-== 監視ログの概要
+== インサイト スナップショットバッジの概要
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
@@ -32,9 +30,9 @@ NOTE: 内部挙動により、監査ログに重複するイベントが生成�
 link:https://circleci.com/privacy/#information[データ保持ポリシー] に基づき、監査ログは最大で 12 ヵ月分取得できます。
 
 [#audit-log-events]
-== 監査ログのイベント
+== 監視ログの概要
 
-ログには以下のシステムイベントが記録されます。 定義と形式については、下記の「監査ログフィールド」セクションの `action` を参照してください。
+CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
 - context.create
 - context.delete
@@ -57,7 +55,7 @@ link:https://circleci.com/privacy/#information[データ保持ポリシー] に�
 - org.workflows.deleted
 
 [#audit-log-fields]
-== 監査ログのフィールド
+== 監査ログのイベント
 
 - **action**: 実行され、イベントを生成したアクション。 ドット区切りの小文字 ASCII ワードの形式が使用され、影響を受けたエンティティが先頭、実行されたアクションが末尾に含まれます。 エンティティは、たとえば `workflow.job.start` のようにネストされる場合があります。
 - **actor:**: 対象のイベントを実行したアクター。 ほとんどの場合は CircleCI ユーザーです。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
@@ -71,7 +69,7 @@ link:https://circleci.com/privacy/#information[データ保持ポリシー] に�
 - **success:** アクションが成功したかどうかを示すフラグ。
 - **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
 
-== Webアプリから監視ログをリクエスト
+== 監査ログのフィールド
 
 CircleCI をご利用者のお客様は、Webアプリから監視ログをリクエストしていただくことが可能です。 この機能を利用するには、組織管理者（organization admins）である必要があります。
 
