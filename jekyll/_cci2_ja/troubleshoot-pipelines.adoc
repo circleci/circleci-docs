@@ -11,9 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、パイプラインとすケージュルされたパイプラインのトラブルシューティングガイドをわかりやすくご紹介します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 このページでは、パイプラインやスケジュールされたパイプラインに関するエラーやトラブルシューティングの方法について説明します。
 
