@@ -9,15 +9,13 @@ version:
 :page-liquid:
 :page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 CircleCI Server v4.x は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/server/overview/circleci-server-v4-overview/[CircleCI Server v4.x の概要] を先に読んでいることを前提としています。
 
-NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
+NOTE: 以下のセクションでは、`< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 [#install-required-software]
 == 1.  必要なソフトウェアをインストールします
@@ -89,28 +87,29 @@ endif::env-aws[]
 - ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 [#create-a-kubernetes-cluster]
-== 2.  Kubernetes クラスタを作成します
+== 1.  必要なソフトウェアをインストールします
 
-CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
+以下のソフトウェアをダンロードし、インストールします。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-|1 日の CircleCI アクティブ ユーザー数
-|最小ノード数
-|合計 CPU
-|合計 RAM
+|ツール
+|バージョン
+|用途
+|備考
 |NIC 速度
 
-|500 名未満
-|3
-|12 コア
+|https://www.terraform.io/downloads.html[Terraform]
+|{terraformversion} 以上
+|インフラストラクチャの管理
 |32 GB
 |1 Gbps
 
-|500 名以上
-|3
-|48 コア
+|https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
+
+|{kubectlversion} 以上
+|Kubernetes CLI
 |240 GB
 |10 Gbps
 |===
@@ -131,14 +130,14 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |===
 
 [#minimum-permissions-requirments]
-=== 最低限必要な権限
+=== AWS で必要なソフトウェア
 
 インストールするユーザーには、CiecleCI をインストールする名前空間に対する管理者の権限が **最低限** 必要です。
 
 ifndef::env-gcp[]
 
 [#eks]
-=== EKS
+=== GCP で必要なソフトウェア
 
 Amazon EKS クラスタの作成に関する詳細は、 
  https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
@@ -165,7 +164,7 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#gke]
-=== GKE
+=== S3 互換ストレージで必要なソフトウェア
 
 GKE クラスタ の作成に関する詳細は、 https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE ドキュメント] をご覧ください。
 
@@ -215,19 +214,19 @@ gcloud components install gke-gcloud-auth-plugin
 ----
 kubectl cluster-info
 ----
-. サービスアカウントを作成します。
+. 既存の GKE クラスタのノードプールを取得します。
 +
 [source,shell]
 ----
-gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
-  --display-name="<DISPLAY_NAME>"
+gcloud container node-pools list --cluster "<CLUSTER_NAME>"
 ----
-. サービスアカウントの認証情報を取得します。
+. 既存のノードプールを更新します。
 +
 [source,shell]
 ----
-gcloud iam service-accounts keys create <KEY_FILE> \
-  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
+gcloud container node-pools update "<NODEPOOL_NAME>" \
+    --cluster="<CLUSTER_NAME>" \
+    --workload-metadata="GKE_METADATA"
 ----
 +
 endif::env-aws[]
@@ -280,7 +279,7 @@ gcloud container node-pools update "<NODEPOOL_NAME>" \
 * link:/docs/ja/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[オブジェクトストレージ]
 
 [#create-a-new-github-oauth-app]
-== 3.  新しい GitHub OAuth アプリを作成します
+== 2.  Kubernetes クラスタを作成します
 
 CAUTION: GitHub Enterprise と CircleCI Server が同一のドメインにない場合、GHE からイメージやアイコンの CircleCI Web アプリへのロードに失敗します。
 
@@ -300,14 +299,14 @@ image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 image::github-clientid.png[Screenshot showing GitHub Client ID]
 
 [#github-enterprise]
-=== GitHub Enterprise
+=== サポートされている Kubernetes のバージョン
 
 GitHub Enterprise を使用する場合は、パーソナルアクセストークンと GitHub Enterprise インスタンスのドメイン名も必要です。
 
 **User Settings > Developer Settings > Personal access tokens** に移動し、`defaultToken` を作成します。 このトークンにはスコープは必要ありません。 この値は CircleCI Server の設定の際に必要になります。
 
 [#static-ip-address]
-== 4.  静的 IP アドレス
+== 3.  新しい GitHub OAuth アプリを作成します
 
 クラスタが作成したロードバランサーには、静的 IP アドレスをプロビジョニングすることを推奨します。 これは必須ではありませんが、これによりサービスが作成したロードバランサが再プロビジョニングされる場合に、DNS レコードの更新が不要になります。
 
@@ -325,11 +324,11 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#aws-reserve-an-elastic-ip-address]
-=== AWS - Reserve an elastic IP address
+=== GitHub Enterprise
 
-AWS で Elastic IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
+GitHub Enterprise を使用する場合は、パーソナルアクセストークンと GitHub Enterprise インスタンスのドメイン名も必要です。
 
-このコマンドは、ロードバランサーが展開する各サブネット（デフォルト3）のアドレスを生成するために実行する必要があります。
+**User Settings > Developer Settings > Personal access tokens** に移動し、`defaultToken` を作成します。
 
 [source,shell]
 ----
@@ -350,9 +349,9 @@ CLI から返された `AllocationId` の各値は values.yaml ファイルで�
 endif::env-aws[]
 
 [#frontend-tls-certificates]
-== 5. フロントエンド TLS 証明書
+== 4.  静的 IP アドレス
 
-デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 例えば、 link:https://letsencrypt.org/[Let's Encrypt] 認証局は link:https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。 ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
+クラスタが作成したロードバランサーには、静的 IP アドレスをプロビジョニングすることを推奨します。 これは必須ではありませんが、これによりサービスが作成したロードバランサが再プロビジョニングされる場合に、DNS レコードの更新が不要になります。 例えば、 link:https://letsencrypt.org/[Let's Encrypt] 認証局は link:https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。 ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
 
 CAUTION: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
 
@@ -464,11 +463,11 @@ NOTE: Output Processor サービスは gRPC を使って通信し、HTTP/2 を�
 endif::env-aws[]
 
 [#encryption-signing-keys]
-== 6. 暗号化/署名キー
+== 5. フロントエンド TLS 証明書
 
-CircleCI で生成されるアーティファクトの暗号化と署名には、このセクションで生成したキーセットを使用します。 CircleCI Server の設定にはこれらが必要な場合があります。
+デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。
 
-CAUTION: これらの値をセキュアな状態で保存します。 紛失すると、ジョブの履歴やアーティファクトの復元ができなくなります。
+CAUTION: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
 
 [#artifact-signing-key]
 === a.  アーティファクト署名キー
@@ -491,9 +490,9 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 ----
 
 [#object-storage-and-permissions]
-== 7. オブジェクトストレージとアクセス許可
+== 6. 暗号化/署名キー
 
-CircleCI Server v4.x では、ビルドしたアーティファクト、テスト結果、その他の状態のオブジェクトストレージをホストします。 以下のストレージオプションがサポートされています。
+CircleCI で生成されるアーティファクトの暗号化と署名には、このセクションで生成したキーセットを使用します。 CircleCI Server の設定にはこれらが必要な場合があります。
 
 * link:https://aws.amazon.com/jp/s3/[AWS S3]
 * link:https://min.io/[MinIO]
@@ -904,7 +903,7 @@ endif::env-aws[]
 ifndef::pdf[]
 
 [#next-steps]
-== 次のステップ
+== 7.
 
 * link:/docs/ja/server/installation/phase-2-core-services[ステップ 2: コアサービスのインストール].
 +
