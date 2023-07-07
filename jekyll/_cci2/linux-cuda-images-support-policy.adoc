@@ -23,7 +23,7 @@ This document outlines the xref:using-gpu#linux-gpu[CircleCI Linux CUDA image] r
 
 The CircleCI CUDA images are based on our Linux VM machine images for the purpose of providing an image that can leverage the additional processing capabilities of CircleCI’s GPU executor. 
 
-We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle for our releases and aim to release these within a week of the CUDA release. 
+We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release. 
 
 Please note that this is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
 
