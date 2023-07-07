@@ -9,18 +9,14 @@ version:
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Server v3.x から v4.x. に移行する方法を詳しくご紹介しています。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 CircleCI Server v3.x から v4.x への移行は _インプレース_ 移行です。 helm-value ファイルを生成し、そのファイルを helm コマンドで使用して CircleCI Server v3.x から v4.x へのアップグレードを行います。
 
-移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を挟むことで、移行プロセスに対する理解を深められ、また移行完了にかかる時間を確認できます。
-
-toc::[]
+CircleCI Server v3.x から v4.x への移行は _インプレース_ 移行です。 helm-value ファイルを生成し、そのファイルを helm コマンドで使用して CircleCI Server v3.x から v4.x へのアップグレードを行います。
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 * 現在インストールされている CircleCI Server が v3.x である。
 * link:/docs/ja/server/operator/backup-and-restore[バックアップと復元] ガイドの手順に従って v3.x のインスタンスのバックアップが作成してある。
@@ -54,7 +50,7 @@ kots-exporter スクリプトでは必要に応じて以下の機能を実行で
 * PostgreSQL データーベースの移行の再実行 (`-f flyway`)
 
 [#create-docker-secret-for-circleci-image-registry]
-=== 1. CircleCI イメージのレジストリ用 Docker シークレットを作成する
+=== 1.  CircleCI イメージのレジストリ用 Docker シークレットを作成する
 
 この移行スクリプトには、移行機能を実行するために CircleCI イメージレジストリへのアクセス権が必要です。 このイメージのレジストリは、CircleCI Server v4.x のインストール環境でも使用されます。 CircleCI Server がインストールされている同じ名前空間に `docker-registry` シークレットを作成します。 イメージレジストリの認証情報が CircleCI の担当者から提供されます。
 
@@ -140,12 +136,12 @@ DEBUG: Memory usage: 12 of 15M
 ----
 
 [#validate-your-helm-value-file]
-=== 4. helm-value ファイルを検証する
+=== 4.  helm-value ファイルを検証する
 
 移行スクリプトが完了したら、既存の CircleCI Server 3.x の設定ファイルに `helm-values.yaml` が生成されます。 このファイルにはお客様が以前 KOTS で入力した設定データが格納されています。 今後はこのファイルを標準の Helm プラクティスとして使用し、CircleCI Server の更新および設定を行います。
 
 [#generate-helm-diff-output]
-=== 5. helm-diff 出力を生成する
+=== 5.  helm-diff 出力を生成する
 
 次に、helm-diff コマンドを作成し、出力をレビューします。
 
@@ -153,7 +149,7 @@ DEBUG: Memory usage: 12 of 15M
 ----
 helm registry login cciserver.azurecr.io -u <image-registry-username>
 
-helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.1
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version {serverversion4}
 ----
 
 `helm-diff` コマンドにより生成された出力を以下を参考にレビューします。
@@ -180,7 +176,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 ** Redis (redis-master、redis-slave)
 
 [#upgrading-circleci-server-3]
-=== 6. CircleCI Server 3.x をアップグレードする
+=== 6.  CircleCI Server 3.x をアップグレードする
 
 helm-value ファイルの検証が完了したら、以下のコマンドを実行し、CircleCI Server を v4.x にアップグレードします。
 
@@ -192,7 +188,7 @@ helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-
 ----
 
 [#check-upgrade-status]
-=== 7. アップグレードステータスを確認する
+=== 7.  アップグレードステータスを確認する
 
 以下のコマンドを実行し、すべてのポッドが起動し実行されていることをことを確認します。
 
@@ -244,9 +240,9 @@ https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-t
 ifndef::pdf[]
 
 [#next-steps]
-== 次のステップ
+== 前提条件
 
-* link:/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング]
-* link:/docs/ja/server/operator/operator-overview[Server 4.x オペレーターの概要]
+* 現在インストールされている CircleCI Server が v3.x である。
+* link:/docs/ja/server/operator/backup-and-restore[バックアップと復元] ガイドの手順に従って v3.x のインスタンスのバックアップが作成してある。
 +
 endif::[]
