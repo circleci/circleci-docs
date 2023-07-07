@@ -10,19 +10,17 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI Server のインストールの管理における様々なタスクとツールについて説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 このガイドでは、CircleCI Server x の保守や監視を行う CircleCI Server のオペレーターの皆さんに役立つ情報を紹介します。 このオペレーター向けガイドを読む前に、必ず xref:../overview/circleci-server-overview#[CircleCI Server v4.x の概要]をお読みください。
 
-CircleCI Server では、 link:https://www.nomadproject.io/[Nomad] スケジューラを使用して CI/CD ジョブのスケジュールを設定します。 Nomad サーバー (コントロールプレーン) が Kubernetes クラスタ内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 Nomad クライアントが、Nomad コントロールプレーン、出力プロセッサ、VM サービスにアクセスできる必要があります。
+このガイドでは、CircleCI Server x の保守や監視を行う CircleCI Server のオペレーターの皆さんに役立つ情報を紹介します。 このオペレーター向けガイドを読む前に、必ず xref:../overview/circleci-server-overview#[CircleCI Server v4.x の概要]をお読みください。 Nomad クライアントが、Nomad コントロールプレーン、出力プロセッサ、VM サービスにアクセスできる必要があります。
 
-CircleCI Server では、Nomad クライアントまたは専用の仮想マシンで Docker ジョブを実行できます。 これらの VM ジョブは Nomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、xref:../../../configuration-reference#setupremotedocker[リモート Docker ジョブ]用にポート 2376 で VM にアクセスできる必要があります。
+CircleCI Server では、 link:https://www.nomadproject.io/[Nomad] スケジューラを使用して CI/CD ジョブのスケジュールを設定します。 Nomad サーバー (コントロールプレーン) が Kubernetes クラスタ内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。
+
+CircleCI Server では、Nomad クライアントまたは専用の仮想マシンで Docker ジョブを実行できます。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
-
-オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
 
 [#execution-environment]
 == 実行環境
@@ -80,7 +78,7 @@ NOTE: CircleCI では、セットアップ後の URL やバックエンドの Gi
 ifndef::pdf[]
 
 [#next-steps]
-== 次のステップ
+== 実行環境
 
 * <<introduction-to-nomad-cluster-operation#,Nomad クラスタの運用ガイド>> をお読みください。
 +
