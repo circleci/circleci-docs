@@ -11,27 +11,25 @@ contentTags:
 :page-liquid:
 :page-description: サンプルを使った CircleCI 学習リソース
 :icons: font
-:toc: macro
+:experimental:
 
-:toc-title:
+ここでは、CircleCI で最も頻繁に使われいてるプログラミング言語、フレームワーク、およびプラットフォームで記述されたアプリをビルド、テスト、デプロイする方法を学ぶために一連のサンプルを紹介します。
 
 ここでは、CircleCI で最も頻繁に使われいてるプログラミング言語、フレームワーク、およびプラットフォームで記述されたアプリをビルド、テスト、デプロイする方法を学ぶために一連のサンプルを紹介します。
 
 CircleCI の利用が初めてのお客様は、最初のパイプラインを成功させるための <<getting-started#,クイックスタートガイド>> を参照してください。
-
-Docker コンテナや Linux VM のような特定の実行環境でパイプラインジョブを追加するためのベーシックなサンプルは、<<hello-world#,Hello World>> ドキュメントを参照して下さい。
 
 [#languages]
 == 言語ガイド
 
 さまざまな言語でデモアプリケーションを作成しているので、サンプルを使って学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリックリポジトリを公開しています。
 
-{% include snippets/ja/language-guides.adoc %}
+{% include snippets/language-guides.adoc %}
 
 [#platforms]
-== プラットフォームガイド
+== 言語ガイド
 
-お使いのプラットフォームに対応するチュートリアルで、<<configuration-reference#,`.circleci/config.yml`>> でどのようなカスタマイズが可能かをご確認ください。
+さまざまな言語でデモアプリケーションを作成しているので、サンプルを使って学習していただけます。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -50,6 +48,6 @@ Docker コンテナや Linux VM のような特定の実行環境でパイプラ
 |===
 
 [#next-steps]
-== 次のステップ
+== プラットフォームガイド
 
 - 同時実行ワークフロー、順次実行ワークフロー、ファンイン/ ファンアウトワークフロー、および 1 つの設定ファイルで Linux と iOS をビルドするためのサンプルについては、<<sample-config#,config.yml のサンプルファイル>> をお読み下さい。
