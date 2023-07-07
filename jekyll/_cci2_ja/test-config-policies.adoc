@@ -9,18 +9,16 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
+:experimental:
 
-:toc-title:
-
-NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
+NOTE: コンフィグファイルポリシーの管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
 
 このページでは、設定ファイルのポリシーに関するテストを作成、セットアップする方法をガイド形式で説明します。
 
 このページでは、設定ファイルのポリシーに関するテストを作成、セットアップする方法をガイド形式で説明します。 設定ファイルのポリシーの詳細およびポリシーの作成方法については、xref:config-policy-management-overview.adoc[設定ファイルのポリシー管理機能の概要]および xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]を参照してください。
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 このページの説明は、あなたが xref:create-and-manage-config-policies#create-a-policy[ポリシーの作成]ガイドに従って、以下を完了したことを前提としています：
 
@@ -28,9 +26,9 @@ NOTE: コンフィグファイルのポリシー管理機能は **Scale** プラ
 * 組織内に CircleCI 設定ファイルのバージョンをチェックする簡単なポリシーを作成する。 ポリシーのファイル構造は `./config-policies/version.rego` である必要があります。
 
 [#write-a-policy-test]
-== ポリシーテストを作成する
+== 前提条件
 
-このセクションでは、既存のポリシー `version.rego` について、ポリシーの実際の動作と、生成される__決定の結果__が適切であるかを確認するテストを作成します。
+このページの説明は、あなたが xref:create-and-manage-config-policies#create-a-policy[ポリシーの作成]ガイドに従って、以下を完了したことを前提としています：
 
 . `./config-policies` ディレクトリにポリシーのテストファイルを作成します。 このテストファイルに、ポリシーの__期待される動作__一式を記載します。 今回のテストファイルは `./config-policies/version_test.yaml` とします。
 . 作成した `version_test.yaml` ファイルに、下記をコピーします。
@@ -89,7 +87,7 @@ test_version_check:
 circleci policy test ./config-policies
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -106,7 +104,7 @@ NOTE: `./config-policies` ディレクトリ内に `version.rego` ファイル�
 circleci policy test ./config-policies --verbose
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -125,7 +123,7 @@ ok    config-policies                          0.001s
 circleci policy test ./config-policies --verbose --run "absent_version$"
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -141,7 +139,7 @@ ok    config-policies                      0.000s
 circleci policy test ./config-policies --verbose --run "absent_version$" --debug
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -178,7 +176,7 @@ ok    config-policies    0.000s
 circleci policy test ./config-policies --format=json
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,json]
 ----
@@ -221,7 +219,7 @@ circleci policy test ./config-policies --format=json
 circleci policy test ./config-policies --format=junit
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,xml]
 ----
@@ -274,8 +272,8 @@ check_min_remote_docker_version[reason] {
 	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
 }
 ----
-. ポリシーのテストファイルを作成します。 今回のファイルは `./config-policies/docker_test.yaml` とします。
-. 先ほど作成した新しい`docker_test.yaml`ファイルに以下をコピーする：
+. `config-policies` ディレクトリに対して `test` コマンドを実行します。 今回のファイルは `./config-policies/docker_test.yaml` とします。
+. 各テストの実行結果を確認するには、以下のように `--verbose` または `-v` フラグを付けて実行します。
 +
 [source,yaml]
 ----
@@ -326,7 +324,7 @@ test_minimum_remote_docker_version:
           - rule: check_min_remote_docker_version
             reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
 ----
-. つのポリシーとテストを含む `config-policies` ディレクトリに対して `test` コマンドを実行する：
+. 指定したテストのみを実行するには、以下のように `--run` フラグに正規表現を指定して実行します。
 +
 [source,shell]
 ----
@@ -422,9 +420,9 @@ Error: unsuccessful run
 このような問題の解決策として、ポリシーの管理に適したポリシーファイル構造のベストプラクティスを次のセクションで説明します。
 
 [#manage-policy-test-file-structure]
-== ポリシーテストのファイル構造を管理します
+== ポリシーテストを作成する
 
-circleci policy test` コマンドがあるフォルダ、例えば `./config-policies` を指すと、そのフォルダにあるすべての `*_test.yaml` ファイルをピックアップし、そのフォルダにある **root** ポリシーに対してテストを実行します。
+このセクションでは、既存のポリシー `version.rego` について、ポリシーの実際の動作と、生成される__決定の結果__が適切であるかを確認するテストを作成します。
 
 そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。
 
@@ -461,7 +459,7 @@ circleci policy test` コマンドがあるフォルダ、例えば `./config-po
 circleci policy test ./config-policies/...
 ----
 +
-以下のような結果が出力されます。 これで、テストが再び成功するようになります。
+期待される出力. これで、テストが再び成功するようになります。
 +
 [source,shell]
 ----
@@ -539,7 +537,7 @@ test_break_all_rules:
 circleci policy test ./config-policies/...
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -551,9 +549,9 @@ ok    config-policies/version    0.001s
 ----
 
 [#use-metadata-with-tests]
-== テストにメタデータを使用します
+== ポリシーテストのファイル構造を管理します
 
-メタデータは `input` と同様に、テストを書くときに `meta` キーを使って指定することができる。
+circleci policy test` コマンドがあるフォルダ、例えば `./config-policies` を指すと、そのフォルダにあるすべての `*_test.yaml` ファイルをピックアップし、そのフォルダにある **root** ポリシーに対してテストを実行します。
 
 そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。
 
@@ -598,7 +596,7 @@ test_version_check:
 circleci policy test ./config-policies/version -v
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -615,11 +613,11 @@ ok    config-policies/version                  0.000s
 NOTE: バージョンに関するポリシーを変更すると、最上位のテストにも影響が生じます。そのため、`policy_test.yaml` にも `meta` 要素を追加する必要があります。
 
 [#opa-tests]
-== OPAテスト
+== テストにメタデータを使用します
 
-OPAには、レゴ・ドキュメントの中でテストを直接指定する方法もあります 詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA のドキュメント (英語)] を参照してください。
+メタデータは `input` と同様に、テストを書くときに `meta` キーを使って指定することができる。 詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA のドキュメント (英語)] を参照してください。
 
-例として、上記のバージョンに関するルールの対象から、特定のプロジェクトを除外してみましょう。 `circleci policy test` コマンドを使用すると、OPA のテストを実行して結果を `<opa.tests>` として出力できます。
+そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。 `circleci policy test` コマンドを使用すると、OPA のテストを実行して結果を `<opa.tests>` として出力できます。
 
 実際の例として、以下の手順に、OPA テストを定義した __ヘルパー__ 関数を作成し、`circleci tests` コマンドを実行してこれらのテストの結果を確認する方法を示します。
 
@@ -676,7 +674,7 @@ workflows:
 circleci policy test ./config-policies/helpers
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
@@ -692,7 +690,7 @@ ok    <opa.tests>         0.001s
 circleci policy test ./config-policies/helpers -v
 ----
 +
-以下のような結果が出力されます。
+期待される出力
 +
 [source,shell]
 ----
