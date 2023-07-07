@@ -11,9 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: API を使って環境変数の値を挿入する方法
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#api-v2]
 == API v2
@@ -41,12 +39,11 @@ IMPORTANT: パイプラインパラメーターは機密データとして扱わ
 パイプラインパラメーターの詳細については、xref:pipeline-variables#[パイプラインの値とパラメーター]のページをお読みください。
 
 [#api-v1]
-== API v1
+== API v2
 
-`build_parameters` キーを使って環境変数を挿入すると、実行のたびに異なるターゲットに対して機能テストをビルドできます (別々のホストに対して機能テストが必要なステージング環境へのデプロイステップを使った実行など)。
+CircleCI API v2 を使用すると、パイプラインパラメーターから変数を渡すことができます。
 
-`build_parameters` を含めるには、`bash` と `curl` を使用する以下の例のように
-`Content-type: application/json` を含む JSON 本文を送信します。 お好きな言語で HTTP ライブラリを使用することもできます。
+link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[パイプラインのトリガー] に API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
 ```json
 {
@@ -60,12 +57,12 @@ IMPORTANT: パイプラインパラメーターは機密データとして扱わ
 `curl` を使用します (`$CIRCLE_TOKEN` は、xref:managing-api-tokens#creating-a-personal-api-token[パーソナル API トークン] です)。
 
 ```shell
-curl \
-  --header "Content-Type: application/json" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
-  --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
-  --request POST \
-  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {
+    "workingdir": "./myspecialdir",
+    "image-tag": "4.8.2"
+  }
+}' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
 このビルドは、以下の環境変数を受け取ります。
@@ -117,7 +114,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 
 IMPORTANT: ビルドパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
 
-== 関連項目
+== API v1
 
 - xref:env-vars[環境変数の概要]
 - xref:set-environment-variable[環境変数の設定方法]
