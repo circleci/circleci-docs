@@ -13,12 +13,10 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、パイプラインの値とパラメーターを使用して、再利用可能なパイプラインの設定方法をご紹介します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 パイプラインの値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
 
@@ -26,13 +24,13 @@ contentTags:
 - *パイプラインパラメーター:* 型指定されたパイプライン変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
 
 [#pipeline-values]
-== パイプライン値
+== はじめに
 
-パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。
+パイプラインの値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
 
 値や定義済みの環境変数の全リストは、xref:variables#pipeline-values[プロジェクトの値と変数]に関するガイドを参照して下さい。
 
-include::../_includes/snippets/ja/pipeline-values.adoc[]
+include::../_includes/snippets/pipeline-values.adoc[]
 
 使用例:
 
@@ -51,21 +49,21 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>`が設定されます。 文字列を空にする必要がある場合は、xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定]するをご覧ください。
+上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>`が設定されます。 文字列を空にする必要がある場合は、link:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定]するをご覧ください。
 
 [#pipeline-parameters-in-configuration]
-== 設定ファイルにおけるパイプラインパラメーター
+== パイプライン値
 
-パイプラインパラメーターは、`.circleci/config.yml` の一番上で  `parameters` キーを使って宣言します。 パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
+パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
 
-パイプラインパラメーターでは以下のタイプのデータをサポートしています。
+値や定義済みの環境変数の全リストは、xref:variables#pipeline-values[プロジェクトの値と変数]に関するガイドを参照して下さい。
 
 - 文字列
 - boolean
 - integer
 - enum
 
-詳細については「xref:reusing-config#parameter-syntax[パラメーターの構文]」セクションを参照してください。
+使用例:
 
 以下の例では、2 つのパイプラインパラメーター (`image-tag`、`workingdir`) が設定ファイルの一番上で定義され、後続の `build` ジョブで参照されています。
 
@@ -124,9 +122,9 @@ CLI や API の使用に加えて、CircleCI Web アプリからパラメータ�
 Web アプリでスケジュールされたパイプラインを設定する際にも、パラメーターを呼び出すことができます。 パラメータは、メニューの「Project Settingsプロジェクト設定」[トリガー]内のトリガーフォームの一部です。 スケジュールされたパイプラインの一部として設定されたパラメータは、設定ファイルにも宣言する必要があります。そうでない場合、パイプラインは「`Unexpected argument(s)`」というエラーで失敗します。
 
 [#configuration-processing-stages]
-== 構成処理のステージ
+== 設定ファイルにおけるパイプラインパラメーター
 
-設定プロセスは次の段階を経て進みます。
+パイプラインパラメーターは、`.circleci/config.yml` の一番上で  `parameters` キーを使って宣言します。
 
 - パイプラインパラメーターが解決され、型チェックされる
 - パイプライン パラメーターが Orb ステートメントに置き換えられる
@@ -135,9 +133,9 @@ Web アプリでスケジュールされたパイプラインを設定する際�
 残りの設定プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
 
 [#the-scope-of-pipeline-parameters]
-== パイプラインパラメーターのスコープ
+== 構成処理のステージ
 
-パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 `.circleci/config.yml`  でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。 これは、パイプラインのスコープを Orb 内で使用するとカプセル化が崩れ、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が損なわれ 脆弱性が攻撃される領域が作られてしまう可能性があるためです。
+設定プロセスは次の段階を経て進みます。 `.circleci/config.yml`  でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。 これは、パイプラインのスコープを Orb 内で使用するとカプセル化が崩れ、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が損なわれ 脆弱性が攻撃される領域が作られてしまう可能性があるためです。
 
 [#element-parameter-scope]
 === 要素パラメーターのスコープ
@@ -188,9 +186,9 @@ workflows:
 - データ漏えいを防ぐために、パイプラインパラメーターは Orb 本体、Orb のインラインの範囲内では有効ではありません。
 
 [#conditional-workflows]
-== 条件付きワークフロー
+== パイプラインパラメーターのスコープ
 
-ワークフロー宣言の下で xref:configuration-reference#[ロジックステートメント]と一緒に xref:configuration-reference#using-when-in-workflows[`when` clause ]句（または逆の `unless` 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  when や unless のロジックステートメントにより値の真偽を評価します。
+パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 `.circleci/config.yml`  でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。
 
 この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。 以下の設定例では、パイプラインパラメーター  `run_integration_tests` を使用して  `integration_tests`  ワークフローの実行を制御しています。
 
