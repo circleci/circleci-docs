@@ -11,9 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI のリソースクラスの概要
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 リソースクラス機能を使用すると、以下が可能です。
 
@@ -22,7 +20,7 @@ contentTags:
 * `.circleci/config.yml` ファイルで使用する link:/docs/runner-concepts/#namespaces-and-resource-classes[セルフホストランナー] の設定
 
 [#introduction]
-== 概要
+== Slack Orb の概要
 
 `resource_class` の設定オプションには複数の用途があります。 最も一般的な用途は、Executor に `resource_class` キーを設定して、各ジョブに必要な CPU と RAM を指定することです。
 
@@ -39,8 +37,7 @@ jobs:
 
 Executor のリソースクラスは、`small` や `medium` などのサイズにより指定します。 各サイズごとに、特定の CPU と RAM が割り当てられています。 使用可能なリソースクラスの全オプションリストは、link:/docs/configuration-reference/#resourceclass[設定ファイルのリファレンス] でご確認ください。 link:https://circleci.com/ja/product/features/resource-classes[リソースクラスの製品概要のページ] では、各リソースクラスのクレジットの使用量や各プランで使用できるリソースクラスに関する情報をご確認いただけます。
 
-CIrcleCI のセルフホストランナーを使用する際は、プロジェクト設定で `resource_class` キーを使って各ジョブで使用するランナーを指定します。 セルフホストランナーのリソースクラスは xref:runner-installation#[インストールプロセス] で割り当てられ、設定されます。
-
+CIrcleCI のセルフホストランナーを使用する際は、プロジェクト設定で `resource_class` キーを使って各ジョブで使用するランナーを指定します。 Self-hosted runner resource classes are assigned and configured during the xref:runner-overview/#getting-started[installation process].
 
 [source,yaml]
 ----
@@ -67,9 +64,9 @@ jobs:
 ----
 
 [#quickstart]
-== クイックスタート
+== 概要
 
-各実行環境の **CPU と RAM のサイズを指定する** ための `resource_class` キーの使い方が分かる設定ファイル例は、設定ファイルのリファレンスのページの以下のセクションでご確認ください。
+`resource_class` の設定オプションには複数の用途があります。
 
 * link:/docs/configuration-reference/#docker-execution-environment[Docker リソースクラス]
 * link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM リソースクラス]
@@ -78,17 +75,17 @@ jobs:
 * GPU リソースクラス: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] および link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
 * link:/docs/configuration-reference/#arm-execution-environment-linux[Arm リソースクラス]
 
-**セルフホストランナー** のセットアップを開始する場合は、xref:runner-installation#[Web アプリでのセルフホストランナーのインストール] を参照してください。
+Executor のリソースクラスは、`small` や `medium` などのサイズにより指定します。
 
 [#default-resource-class]
-== デフォルトのリソースクラス
+== クイックスタート
 
-各ジョブの `resource_class` が明示的に宣言されていない場合、CircleCI はデフォルトのリソースクラスサイズを使用します。 デフォルトは変更される場合があります。 デフォルトにしておくよりも、リソースクラスを指定することをお勧めします。
+各実行環境の **CPU と RAM のサイズを指定する** ための `resource_class` キーの使い方が分かる設定ファイル例は、設定ファイルのリファレンスのページの以下のセクションでご確認ください。 デフォルトは変更される場合があります。 デフォルトにしておくよりも、リソースクラスを指定することをお勧めします。
 
 [#resource-class-usage-tools]
-== リソースクラスの使用状況ツール
+== デフォルトのリソースクラス
 
-ジョブにおけるリソースクラスの使用状況に関する情報は Web アプリで、または API を使ってご確認いただけます。 詳細については以下のセクションをお読みください。
+各ジョブの `resource_class` が明示的に宣言されていない場合、CircleCI はデフォルトのリソースクラスサイズを使用します。 デフォルトは変更される場合があります。
 
 [#find-the-resource-class-used-for-a-job]
 === ジョブに使用されているリソースクラスを確認する
@@ -117,7 +114,7 @@ image::resource-class-job.png[Screenshot showing how to view the resource class 
 image::resource-class-insights.png[Screenshot showing resource class Insights]
 
 [#see-also]
-== 関連項目
+== リソースクラスの使用状況ツール
 
 * 使用可能なリソースクラスの全オプションリストは、link:/docs/configuration-reference/#resourceclass[設定ファイルのリファレンス] でご確認ください。
 * 各リソースクラスのクレジット使用量に関する情報や各プランでご利用いただけるリソースクラスに関する情報は、link:https://circleci.com/product/features/resource-classes[リソースクラスの製品概要のページ] をご覧ください。
