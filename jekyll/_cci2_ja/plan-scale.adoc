@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the Scale plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 このドキュメントでは、開発者の皆様にご利用いただいける Scale プランについてご案内します。
 
@@ -61,9 +60,8 @@ link:https://app.circleci.com/[CircleCI Web アプリ]では、アーティフ�
 拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Scale プランでは、 link:https://discuss.circleci.com/[コミュニティフォーラム]、 link:https://support.circleci.com/hc/ja[サポートポータル]、および link:https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
 [#circleci-features]
-== CircleCI の機能
+== Scale プラン
 
-上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
-link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
+Scale プランでは、お客様のチームやビジネスに合わせた拡張や幅広いカスタマイズが可能です。 Scale プランにはカスタムクレジットオプションがあり、 CircleCI のすべてのリソースクラスでお客様のビルド設定や実行環境に応じて 1ヶ月単位でご利用いただけます。 このプランでは CircleCI が提供する最大量のネットワークおよびストレージをご利用いただけます。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/ja/features-of-circleci.adoc %}
+Scaleプランでは、Free プランや Performanceプランに加えて以下の様々な機能をご利用いただけます。
