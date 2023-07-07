@@ -10,9 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI 4.0 のインストール環境での Nomad クラスタの操作方法をわかりやすく説明しています。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 CircleCI では、プライマリジョブスケジューラとして link:https://www.nomadproject.io/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
 
@@ -30,7 +28,7 @@ image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 - **ビルドエージェント:** ビルドエージェントは、CircleCI 製の Go プログラムです。ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内でメインプロセスとして実行されます。
 
 [#basic-operations]
-== 基本的な操作
+== 基本的な用語とアーキテクチャ
 
 ここでは、CircleCI での Nomad クラスタの基本的な操作について説明します。
 
@@ -132,7 +130,7 @@ nomad node-drain -enable -yes <node-id>
 ifndef::pdf[]
 
 [#next-steps]
-== 次のステップ
+== 基本的な操作
 
 * xref:managing-user-accounts#[ユーザーアカウントの管理] ガイドをお読みください。
 +
