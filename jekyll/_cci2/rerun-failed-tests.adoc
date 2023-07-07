@@ -251,7 +251,7 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 +
 For example, if parallelism is set to eight, there may only be enough tests after the test splitting occurs to "fill" the first parallel container/VM. The remaining seven containers/VMs will still start up, but they will not run any tests when they get to the test execution step.
 +
-**The vast majority of customers still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.
+**In most cases, you can still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.
 
 If you would like to maximize credit savings, you can immediately check for whether the parallel container/VM will execute tests as the first step in a job, and if there are no tests to run, terminate job execution. For example:
 
