@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI では、コンテキストを使用するジョブの環境変数で OpenID Connect ID (OIDC) トークンを利用できます。 ジョブは、CircleCI に永続的な認証情報を保存することなく、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
 
@@ -25,9 +24,9 @@ CircleCI OpenID Connect の IDトークンは、以下の環境変数で利用�
 CAUTION: **フォークについてはどうですか？** OIDC トークンは、フォークされたビルドに対してのみ生成されます。これは、フォークされたプルリクエストからのビルドにシークレットを渡す設定が有効になっている場合に限ります。 このオプションは **Project settings**  > **Advanced** にあります。 詳しくはこちらを<<oidc-in-open-source-projects>>ご覧下さい。
 
 [#setting-up-your-cloud-service]
-== クラウドサービスの設定
+== OpenID Connect の IDトークン利用可能
 
-クラウドサービスのドキュメントで、ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」、Google Cloud Platform の場合は「link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Workload Identity 連携の構成]」を参照してください。
+CircleCI OpenID Connect の IDトークンは、以下の環境変数で利用できます： たとえば、AWS の場合は「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」、Google Cloud Platform の場合は「link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Workload Identity 連携の構成]」を参照してください。
 
 https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー]は、組織に一意のものです。 URL は `\https://oidc.circleci.com/org/<organization_id>` で、`organization_id` は、組織を表す組織 ID (UUID) です。 CircleCI の組織 ID は、link:https://app.circleci.com/[CircleCI Web アプリ] の **[Organization Settings (組織設定)] > [Overview (概要)]** で確認できます。
 
@@ -36,9 +35,9 @@ CircleCI が発行した OpenID Connect ID トークンには、固定の audien
 NOTE: 複数のクラウドサービスで CircleCI の OIDC トークンを使用することができます。
 
 [#format-of-the-openid-connect-id-token]
-== OpenID Connect ID トークンの形式
+== クラウドサービスの設定
 
-OpenID Connect ID トークンには、下記の標準link:https://openid.net/specs/openid-connect-core-1_0.html#IDToken[クレーム]が含まれています。
+クラウドサービスのドキュメントで、ID プロバイダーの追加方法を確認してください。
 
 [%autowidth]
 [.table.table-striped]
@@ -67,7 +66,7 @@ OpenID Connect ID トークンには、下記の標準link:https://openid.net/sp
 |expiration time:  iat から 1 時間後の値です。
 |===
 
-OpenID Connect ID トークンには、ジョブに関する追加のメタデータを含むlink:https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[追加クレーム]も含まれています。
+CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -92,18 +91,18 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |===
 
 [#oidc-in-open-source-projects]
-== オープンソースプロジェクトでの OIDC
+== OpenID Connect ID トークンの形式
 
-OIDCトークンは、**Pull Request をフォークしたビルドにシークレットを渡す**設定が有効な場合にのみ、フォークされたビルドに対して生成されます。 このオプションは **Project settings**  > **Advanced** にあります。
+OpenID Connect ID トークンには、下記の標準link:https://openid.net/specs/openid-connect-core-1_0.html#IDToken[クレーム]が含まれています。 このオプションは **Project settings**  > **Advanced** にあります。
 
 もしOIDCトークンがフォーク用に生成されることを許可するのであれば、フォークされたビルドが必要とするリソース以外のリソースにアクセスすることを避けるために、ポリシーで `oidc.circleci.com/vcs-origin` クレームをチェックしなければなりません。
 
-CircleCIでのオープンソースプロジェクトのビルドについての詳細は、xref:oss#[オープンソースプロジェクトのビルド] ページを参照してください。
+OpenID Connect ID トークンには、ジョブに関する追加のメタデータを含むlink:https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[追加クレーム]も含まれています。
 
 [#authenticate-jobs-with-cloud-providers]
-== クラウドプロバイダーを使ったジョブの認証
+== オープンソースプロジェクトでの OIDC
 
-次のセクションでは、Amazon Web Services (AWS) と Google Cloud Platform (GCP) を使用して CircleCI でジョブを認証する方法を説明します。
+OIDCトークンは、**Pull Request をフォークしたビルドにシークレットを渡す**設定が有効な場合にのみ、フォークされたビルドに対して生成されます。
 
 === AWS
 
@@ -151,16 +150,16 @@ orbs:
 ----
 jobs:
   aws-example:
-   environment:
+    environment:
       AWS_REGION: us-west-1
     docker:
-      - image: cimg/aws:2022.06
+      - image: cimg/aws:2023.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
           role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          aws-region: ${AWS_REGION}
           # optional parameters
           profile-name: "OIDC-PROFILE"
           role-session-name: "example-session"
@@ -283,19 +282,19 @@ GCP Web UI の **Grant Access** セクションに移動したら、次の手順
 * issuer は `\https://oidc.circleci.com/org/<organization_id>` です。`organization_id` には CircleCI 組織 ID を入力します。
 . **[Continue]** をクリックしてプロバイダー属性を設定します。
 +
-プロバイダー属性を設定すると、CircleCI のトークンに含まれるクレームを Google の "解釈" にマッピングできます。 例えば下記のようにします。
+Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
 +
 [.table.table-striped]
 [cols=2*, stripes=even]
 
 |===
 |google.subject
-|attribute.project_id
+|assertion.sub
 
-|attribute.org_id
+|attribute.aud
 |assertion.aud
 
-|assertion.sub
+|attribute.project
 |assertion['oidc.circleci.com/project-id']
 |===
 . IAM & Admin Panel の **[Service Account]** に移動して、サービスアカウントを作成して適切なアクセス許可を付与します。
@@ -328,7 +327,7 @@ GCP Web UI の **Grant Access** セクションに移動したら、次の手順
 }
 ```
 
-この設定で、`credential_source` は `CIRCLE_OIDC_TOKEN_FILE` ファイル内で ID トークンの検出を試みます。
+In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE`, as noted in the (<<#openid-connect-id-token-availability,token availability>> section).
 
 トークンが API レスポンスに基づいている場合、JSON ファイルを読み取るように設定をセットアップすると便利です。 この場合、`type` は `json` に設定し、有効な `path` を指定する必要があります (例: `response.id_token`)。
 
@@ -387,7 +386,7 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 |https://cloud.google.com/iam/docs/service-accounts#user-managed[ユーザー管理サービスアカウント]
 |===
 
-次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。
+次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。 Note that you can enable the use of OIDC token when using circleci/gcp-cli orb version 3.0.0 or later.
 
 ```yaml
 version: 2.1
