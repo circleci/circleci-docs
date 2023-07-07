@@ -620,7 +620,7 @@ github:
 [#object-storage]
 === l. オブジェクトストレージ
 
-ストレージプロバイダーに関わらず、 link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
+ストレージプロバイダーに関わらず、 link:https://circleci.com/docs/ja/server/installation/phase-1-prerequisites/#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
 
 [source,yaml]
 ----

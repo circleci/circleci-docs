@@ -1,0 +1,49 @@
+//== CircleCI web app installation: pre-steps
+
+セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。 名前空間やリソースクラスについては、<<runner-concepts#namespaces-and-resource-classes,コンセプト>> のページを参照してください。
+
+お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
+
+. https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
+. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。 *作成できる名前空間は、各組織につき 1 つのみです。* 必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
++
+もし、お客様の組織が既に Orb を使用しているのであれば、新しい名前空間を作らないでください。 その代わりに、お客様の組織が Orb に使用している名前空間を入力してください。
+. 2つ目の入力フィールドには、セルフホスト・ランナー・リソース・クラスの名前を入力します。
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
+. リソースクラストークンをコピーし保存します。 セルフホストランナーはこのトークンを使って関連するリソースクラスの作業を要求します。
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
++
+CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
+
+ifdef::container[]
+
++
+
+// Display the following step for container runner installation only
+
+. Select the **Container** tab for installation instructions specific to container runner. These instructions are also included in the next section of this installation guide.
++
+.Web アプリによるコンテナランナーのインストール
+image::runnerui_step_four_cr.png[Container runner in the web app]
++
+endif::[]
+
+ifdef::machine[]
+
++
+
+// Display the following step for machine runner installation only
+
+. Linux、macOS、または Windows 上でのセルフホスト型ランナーのセットアップに特化したインストール手順については、「**Machine**」タブを選択してください。 これらのプラットフォーム固有の手順は、このインストールガイドの次のセクションにも含まれています。
++
+.Web アプリによるマシンランナーのインストール
+image::runnerui_step_four.png[Machine runner in the web app]
++
+endif::[]
+. 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]

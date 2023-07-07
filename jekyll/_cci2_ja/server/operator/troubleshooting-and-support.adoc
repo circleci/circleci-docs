@@ -8,7 +8,7 @@ contentTags:
 = トラブルシューティングとサポート
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
+:page-description: このドキュメントでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
 :icons: font
 :toc: macro
 :toc-title:

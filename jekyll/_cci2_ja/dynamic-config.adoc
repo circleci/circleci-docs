@@ -3,7 +3,9 @@
 layout: classic-docs
 contentTags:
   platform:
-  - クラウド
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 = ダイナミックコンフィグ
 :description: セットアップワークフローによるダイナミックコンフィグの使用方法に関する開発者向けページ
@@ -40,7 +42,7 @@ CircleCI でダイナミックコンフィグの使用を開始するには、�
 image:{{site.baseurl}}/assets/img/docs/dynamic-config-enable.png[Enable dynamic config in the UI]
 . 上記のステップにより、ダイナミックコンフィグ機能が使用できるようになりますが、静的な `config.yml` はこれまでどおり動作します。 この機能は、`config.yml` に `setup` キーと `true` 値を追加しないと使用できません。
 `setup: true` キーを (`.circleci/`  ディレクトリ内の) 親設定ファイルの最上部に追加すると、その config.yml` は設定ファイルとして指定されます。
-. ワークフローの最後で、link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation` orb]  からジョブを呼び出す必要があります。 注: xref:using-dynamic-configuration#[ダイナミックコンフィグの使用] で説明されているように、 指定されたファイルの更新 に基づいてワークフローまたはステップを条件付きで実行する場合 ("パスフィルタリング")、これは適用 されません 。
+. ワークフローの最後で、link:https://circleci.com/developer/ja/orbs/orb/circleci/continuation[`continuation` orb]  からジョブを呼び出す必要があります。 注: xref:using-dynamic-configuration#[ダイナミックコンフィグの使用] で説明されているように、 指定されたファイルの更新 に基づいてワークフローまたはステップを条件付きで実行する場合 ("パスフィルタリング")、これは適用 されません 。
 
 [#how-dynamic-config-works]
 == ダイナミックコンフィグが機能するしくみ
@@ -63,7 +65,7 @@ CircleCI のダイナミックコンフィグ機能では、セットアップ�
 [#dynamic-config-faqs]
 == FAQ
 
-include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/dynamic-configuration-faq-snip.adoc[]
 
 [#what-to-read-next]
 == 次のステップ

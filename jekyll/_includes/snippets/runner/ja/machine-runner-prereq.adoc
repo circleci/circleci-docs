@@ -1,0 +1,17 @@
+//[#machine-runner-prerequisites]
+
+//== Machine runner prerequisites
+
+マシンランナーをインストールし、ジョブを実行するには、root 権限があり、以下のユーティリティとツールがシステムにインストールされている必要があります：
+
+* https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
+* https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
+* sha256sum (プリインストールされていない場合):
+- macOS の場合は、`brew install coreutils` (https://brew.sh/[Homebrew] が必要)
+- `Ubuntu/Debain の場合は、`sudo apt install coreutils`
+- Red Hat の場合は、`sudo yum install coreutils`
+* https://www.gnu.org/software/tar/[tar]
+* https://www.gnu.org/software/gzip/[gzip]
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
+* コマンドラインからランナーをインストールする場合は、xref:local-cli#[CircleCI CLI]を使用します。
