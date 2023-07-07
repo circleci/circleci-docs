@@ -10,12 +10,10 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、推奨される CircleCI Server のインスタンスデータと状態のバックアップと復元方法を説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#overview-backup]
-== 概要
+== インサイト スナップショットバッジの概要
 
 CircleCI Server の運用と管理においては、別のクラスタへの移行や深刻な事象からの復元が必要な事態を想定して、バックアップを維持し、システムを復元する方法を検討する必要があります。
 
@@ -26,7 +24,7 @@ CircleCI Server の運用と管理においては、別のクラスタへの移�
 NOTE: CircleCI サービスのバックアップと復元は、Velero に依存しています。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
 
 [#creating-backups]
-== バックアップの作成
+== 概要
 
 ----
 K8S_NS=<your_server_namespace>
@@ -38,7 +36,7 @@ velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" 
 ----
 
 [#restoring-backups]
-== バックアップの復元
+== バックアップの作成
 
 [source,bash]
 ----
@@ -50,12 +48,12 @@ velero restore create --include-namespaces <circleci-namespace> --from-backup <b
 ----
 
 [#scheduling-backups]
-== バックアップのスケジュール化
+== バックアップの復元
 
 バックアップスケジュールの作成については、 link:https://velero.io/docs/main/backup-reference[Velero のドキュメント] を参照してください。
 
 [#troubleshooting-backup]
-== トラブルシューティング
+== バックアップのスケジュール化
 
 [#errors-occur-during-backup-or-restore-process]
 === バックアッププロセスや復元プロセスでエラーが発生した場合
