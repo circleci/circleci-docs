@@ -11,13 +11,12 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 このノウハウガイドでは、CircleCIを設定してAzure Container Registryにデプロイする方法を学びます。
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 このページでは、CircleCI ACR Orb と `version 2.1` の設定を使った Azure Container Registry (ACR) への簡単なデプロイについて説明します。
 
@@ -28,14 +27,14 @@ contentTags:
 Azure ACR Orb とすべてのオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr[CircleCI ACR Orb] のページを参照してください。
 
 [#provide-env-vars]
-== 1.  CircleCIに環境変数を提供する
+== はじめに CircleCIに環境変数を提供する
 
-ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。 サービスプリンシパルのログインの場合は、`AZURE_SP`、`AZURE_SP_PASSWORD`、`AZURE_SP_TENANT` を使用します。
+このページでは、CircleCI ACR Orb と `version 2.1` の設定を使った Azure Container Registry (ACR) への簡単なデプロイについて説明します。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。 サービスプリンシパルのログインの場合は、`AZURE_SP`、`AZURE_SP_PASSWORD`、`AZURE_SP_TENANT` を使用します。
 
 [#deploy-to-acr]
-== 2.  ACR へのデプロイ
+== 1.  CircleCIに環境変数を提供する
 
-Orb の `build-and-push-image` ジョブを使ってイメージをビルドし、ACR にデプロイします。 現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
+ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。
 
 {% include snippets/ja/add-version-number.adoc %}
 
