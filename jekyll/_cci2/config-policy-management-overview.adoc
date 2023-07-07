@@ -346,6 +346,7 @@ The following is an example of a policy that blocks SSH reruns on configs where 
 package org
 
 import future.keywords
+import data.circleci.utils
 
 policy_name["ssh_rerun"]
 
