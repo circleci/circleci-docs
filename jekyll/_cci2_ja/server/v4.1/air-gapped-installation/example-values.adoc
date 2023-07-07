@@ -10,28 +10,26 @@ contentTags:
 :page-liquid:
 :page-description: エアギャップ環境への CircleCI Server をインストールする際の参考として、values.yaml ファイルのサンプルを紹介します。
 :icons: font
-:toc: macro
+:experimental:
 
-:toc-title:
-
-以下のスニペットに、Helm で CircleCI Server をエアギャップ環境にインストールする場合の `values.yaml` ファイルのサンプルを示します。
+次のスニペットは、CircleCIサーバーをエアギャップ環境でHelmインストールした場合の`values.yaml`ファイルの例である。
 
 [#resources]
-== リソース
+== リソース:
 
-ここで使用するチャートでは、環境に以下のリソースがあることを前提としています。
+この図は、以下のリソースがある環境を想定しています：
 
-- Helm チャートのインストールに使用する K3s クラスタ
-- K3s クラスタで受信用に設定した MetalLB
-- docker.internal.example.com のポート 5000 で実行されるプライベート Docker レジストリ (TLS 暗号化なし)
-- mTLS を無効化した Nomad インスタンス
-- minio.internal.example.com で実行される MinIO インスタンス (API でポート 9000 をリッスン。TLS なし)
-- `server.internal.example.com` と `*.server.internal.example.com` の両ドメイン用に発行された TLS 証明書
+- ヘルムチャート設置用のK3sクラスター
+- イングレス用にK3sクラスタ上で事前に設定されたMetalLB
+- docker.internal.example.comのプライベートdockerレジストリがポート5000でTLS暗号化なしで動作しています。
+- mTLSを無効にしたNomadインスタンス
+- minio.internal.example.comで実行されているMinIOインスタンスで、そのAPIはポート9000でリッスンしており、TLSは使用していません。
+- server.internal.example.com`と`*.server.internal.example.com``の両方のドメインに対して発行されたTLS証明書。
 
-各値の詳細については、標準のインストールガイド (「xref:../installation/phase-2-core-services#[ステップ 2 - コアサービス]」以降) を参照してください。
+特定の値の詳細については、xref:../installation/phase-2-core-services#[フェーズ 2 - コアサービス] で始まる標準インストール文書を参照してください。
 
 [#values]
-== Values.yaml
+== リソース
 
 [source, yaml]
 ----
