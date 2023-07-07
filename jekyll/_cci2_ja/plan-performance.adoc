@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the Performance plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :orbs:
 
 このドキュメントでは、開発者の皆様にご利用いただいける Performance プランについてご案内します。
@@ -65,9 +64,9 @@ SLA を介した追加サポート(利用時間と日数の制限あり) の利�
 NOTE: Performance プランの解約については、xref:faq#cancel-performance-plan[Performance プランの解約に関するFAQ]をご参照ください。
 
 [#circleci-features]
-== CircleCI の機能
+== Performance プラン
 
-上記のアップグレード機能に加え、Performance プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
+Performance プランでは、さまざまなリソースクラスに対して毎月一定のクレジットが提供され、ビルドの設定や実行環境に基づきご自身でカスタマイズしていただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
 link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/ja/features-of-circleci.adoc %}
+ご利用いただけるネットワーク使用量が増えるだけでなく、Free プランに加えて下記のような様々な機能をご利用いただけます。
