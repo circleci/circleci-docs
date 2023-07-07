@@ -10,13 +10,11 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 VM サービスにより、 xref:../../../configuration-reference/#machine[`Machine`] Executor と xref:../../../building-docker-imagess[リモート Docker] ジョブの実行方法を制御できます。
 
-このセクションでは、VM サービスで設定可能なオプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
+VM サービスにより、 xref:../../../configuration-reference/#machine[`Machine`] Executor と xref:../../../building-docker-imagess[リモート Docker] ジョブの実行方法を制御できます。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
 CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 xref:../installation/phase-3-execution-environments/#aws-vm-service[AWS]と xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP] のインストールガイドに記載されています。
 
@@ -220,7 +218,7 @@ vm_service:
 ----
 
 [#instance-preallocation]
-== インスタンスの事前割り当て
+== VM プロバイダー
 
 WARNING: xref:../../../docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
 
@@ -259,7 +257,7 @@ vm_scaler:
 ----
 
 [#apply-changes]
-== 変更の適用
+== インスタンスの事前割り当て
 
 `values.yaml` ファイルへの変更を適用します。
 
