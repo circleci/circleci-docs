@@ -10,12 +10,10 @@ contentTags:
 :imagesdir: ../assets/img/docs/
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#overview]
-== 概要
+== インサイト スナップショットバッジの概要
 
 CircleCI データベース（MongoDB または PostgreSQL）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Kubernetes クラスタの内部データベースでは、永続的なストレージとして link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム]を使用しています。 ボリュームのサイズは、PVC (永続ボリューム要求) によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
 
@@ -24,9 +22,9 @@ CircleCI データベース（MongoDB または PostgreSQL）を外部からプ�
 NOTE: 永続ボリュームを拡張しても、Node に接続されているストレージのサイズには影響しません。 Node ストレージの拡張は、ご使用のクラウドプロバイダーの制限範囲内で可能です。 クラスタの Node に接続されたストレージを拡張する方法の詳細については、ご使用のクラウドプロバイダーのドキュメントを参照してください。
 
 [#resizing-persistent-volume-claims]
-== 永続ボリューム要求のサイズ変更
+== 概要
 
-ここでは PostgreSQL と MongoDB の永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
+CircleCI データベース（MongoDB または PostgreSQL）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Kubernetes クラスタの内部データベースでは、永続的なストレージとして link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム]を使用しています。
 
 NOTE: 万一に備えて、まずxref:backup-and-restore#[クラスタのバックアップを作成する]ことをお勧めします。
 
@@ -157,7 +155,7 @@ kubectl delete sts redis-master redis-slave --cascade=orphan
 ----
 
 [#update-the-size-of-the-databases-pvc]
-=== 4. データベースの PVC サイズを更新する
+=== 4.  データベースの PVC サイズを更新する
 
 ステートフルセットが削除されたので、永続ボリューム要求のサイズを 10Gi に増やすことができます。
 
@@ -182,7 +180,7 @@ kubectl patch pvc redis-data-redis-slave-0 -p '{"spec": {"resources": {"requests
 ----
 
 [#update-kots-admin-console-with-the-new-pvc-size]
-=== 5. helm-value ファイルを新しい PVC サイズに更新する
+=== 5.  helm-value ファイルを新しい PVC サイズに更新する
 
 helm-value ファイルの PVC サイズを変更してインストールしたサーバーを更新し、変更内容を永続化する必要があります。 helm-value ファイルでは、以下のように PVC サイズの値を 10Gi に更新します。
 
@@ -224,7 +222,7 @@ helm upgrade <release-name> -n <namespace> -f < helm-value-file> <chart-dictecto
 ----
 
 [#validate-new-volume-size]
-=== 6. 新しいボリュームサイズを検証する
+=== 6.  新しいボリュームサイズを検証する
 
 デプロイ後にデータベースに割り当てられたデータディレクトリのサイズを検証することができます。
 
@@ -301,9 +299,9 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 ----
 
 [#troubleshoot]
-== トラブルシューティング
+== 永続ボリューム要求のサイズ変更
 
-これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動できます。
+ここでは PostgreSQL と MongoDB の永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。 以下のコマンドでデータベースを再起動できます。
 
 * **PostgreSQL**
 +
