@@ -11,14 +11,13 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 このセクションでは、xref:dynamic-config#[ダイナミックコンフィグ] を既にお読みになっていること、
 入門ガイド xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[ダイナミックコンフィグをはじめる] に記載されている手順が実行済みであることを前提としています。
 
-下記では、ダイナミックコンフィグの使用方法を説明します。
+このセクションでは、xref:dynamic-config#[ダイナミックコンフィグ] を既にお読みになっていること、
+入門ガイド xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[ダイナミックコンフィグをはじめる] に記載されている手順が実行済みであることを前提としています。
 
 - <<a-basic-example>>
 - <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>
@@ -80,17 +79,43 @@ CAUTION: ダイナミックコンフィグ機能を使用する場合、各 `con
 `continuation` Orb の内容の詳細については、当該 Orb のソースコードを link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] で閲覧することや、xref:dynamic-config#dynamic-config-faqs[ダイナミックコンフィグの FAQ] を参照することで確認できます。
 
 [#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
-== 変更されたファイルに基づいて特定の `workflows` または `steps` を実行する
+== 基本的な例
 
-`workflow` や `step` を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したい場合があります。 条件に応じた実行は、コードやマイクロサービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
+以下は、CircleCI のダイナミックコンフィグ機能を使用した基本的な例です。 条件に応じた実行は、コードやマイクロ サービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
-これを可能にするために、CircleCI には link:https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering[`path-filtering`] Orb が用意されています。この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
+この例では、`generate-config` スクリプトが既に存在することを前提としています。
 
-たとえば、以下のようなモノレポ構造を考えてみましょう。
+この過程で、`git`  履歴、パイプラインに渡される値、 xref:configuration-reference#jobs[`ジョブ`] 内で行われる処理などの確認を行うことができます。
 
 [source,shell]
 ----
-　
+version: 2.1
+
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the continuation orb is required in order to use dynamic configuration
+orbs:
+  continuation: circleci/continuation@0.1.2
+
+# our defined job, and its steps
+jobs:
+  setup:
+    executor: continuation/default
+    steps:
+      - checkout # checkout code
+      - run: # run a command
+          name: Generate config
+          command: |
+            ./generate-config > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml # use newly generated config to continue
+
+# our single workflow, that triggers the setup job defined above
+workflows:
+  setup:
+    jobs:
+      - setup
 ├── .circleci
 │   ├── config.yml
 │   └── continue_config.yml
@@ -102,7 +127,7 @@ CAUTION: ダイナミックコンフィグ機能を使用する場合、各 `con
 │   ├── IntegrationTests.java
 ----
 
-上記のような状況におけるダイナミック コンフィグの実装例が、以下の `config.yml` および `continue_config.yml` です`:
+上記の設定ファイルは、以下のように設定されています。
 
 [#config]
 === config.yml
@@ -198,7 +223,7 @@ workflows:
           app_src_directory: 'tests'
 ----
 
-上記の例では、以下のような要素が実装されています:
+上記の設定ファイルは、以下のように設定されています。
 
 * 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
 * `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
