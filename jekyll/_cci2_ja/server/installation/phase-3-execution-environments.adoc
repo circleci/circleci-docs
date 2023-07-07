@@ -8,20 +8,16 @@ version:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 CircleCI Server v4.x 実行環境のインストールステップを開始する前に、 link:/docs/ja/server/installation/phase-1-prerequisites[ステップ 1: 前提条件] と link:/docs/ja/server/installation/phase-2-core-services[ステップ 2: コアサービスのインストール] が実行済みであることを確認してください。
 
-NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
-
-toc::[]
+NOTE: 以下のセクションでは、`< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 [#nomad-clients]
-== 1. Nomad クライアント
+== 1.  Nomad クライアント
 
 Nomad は、CircleCI が CircleCI ジョブのスケジュール設定 (Nomad サーバー経由) と実行 (Nomad クライアント経由) に使用するワークロードオーケストレーションツールです。
 
@@ -42,7 +38,7 @@ ifndef::env-gcp[]
 
 Terraform モジュールに必要な変数を入力するにはクラスタおよびサーバのインストール環境に関する情報が必要です。 変数の完全な例と完全なリストについては、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[AWS Terraform の設定例] を参照してください。
 
-* *Server_endpoint*: ポート番号 `4647` を付加した CircleCI アプリケーションのドメイン名です。
+* *Server_endpoint* - CircleCI アプリケーションのドメイン名です。
 * クラスタの *サブネット ID (subnet)* 、 *VPC ID (vpc_id)* 、 *DNS サーバー (dns_server)*: 次のコマンドを実行して、クラスタの VPC ID (vpcId) とサブネット (subnetIds) を入手します。
 +
 [source,shell]
@@ -292,7 +288,7 @@ Nomad クライアントを正常にデプロイし、権限リソースを取�
 [#nomad-gossip-encryption-key]
 === a.  Nomad ゴシップ暗号化キー
 
-Nomad では通信を暗号化するためのキーが必要です。 このキーは 32 バイトの長さである必要があります。 値を紛失した場合、CircleCI が復元することはできません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
+Nomad では通信を暗号化するためのキーが必要です。 このキーは 32 バイトの長さである必要があります。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.encryption.You_create_Secret]
 --
@@ -342,7 +338,7 @@ nomad:
 ----
 
 [#nomad-autoscaler]
-=== c. Nomad Autoscaler
+=== c.  Nomad Autoscaler
 
 Nomad Autoscaler を有効にした場合は、 `nomad` の下に以下のセクションも含めます。
 
@@ -417,7 +413,7 @@ nomad:
 
 endif::env-aws[]
 
-=== d. Helm のアップグレード
+=== d.  Helm のアップグレード
 
 `values.yaml` ファイルへの変更を適用します。
 
@@ -484,7 +480,7 @@ git push
 |<YOUR_CIRCLECI_API_TOKEN>
 
 |CIRCLE_CLOUD_PROVIDER
-|< `aws`, `gcp`, or `other` >
+|< `aws`, `gcp`, または `other` >
 |===
 
 .コンテキスト
@@ -510,9 +506,9 @@ git push
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
 [#vm-service]
-== 3. VM サービス
+== 1. Nomad クライアント
 
-VM サービスにより、Linux VM、Windows、Arm の各実行環境で実行されるジョブや link:/docs/configuration-reference/#setupremotedocker[リモート Docker] を使用するように設定されたジョブの仮想マシンを設定できます。 スケーリングルールなど、さまざまなオプションの設定が可能です。 VM サービスは、 AWS および GCP インストール環境に固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの特定の機能に依存しているためです。
+Nomad は、CircleCI が CircleCI ジョブのスケジュール設定 (Nomad サーバー経由) と実行 (Nomad クライアント経由) に使用するワークロードオーケストレーションツールです。 スケーリングルールなど、さまざまなオプションの設定が可能です。 VM サービスは、 AWS および GCP インストール環境に固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの特定の機能に依存しているためです。
 
 NOTE: サーバーのインストールプロセスが完了したら、VM サービスの詳細設定が行えます。これには、開発者が Windows 実行環境にアクセスできるように Windows イメージをビルドおよび指定したり、代替の Linux マシンイメージを指定したり、スピンアップ状態を常に維持するための事前割り当てインスタンスの数の指定などが含まれます。
  詳細については、 link:/docs/ja/server/operator/manage-virtual-machines-with-vm-service[VM サービスを使った仮想マシンの管理] を参照してください。
@@ -520,7 +516,7 @@ NOTE: サーバーのインストールプロセスが完了したら、VM サ�
 ifndef::env-gcp[]
 
 [#aws-vm-service]
-=== AWS
+=== b. 
 
 [#set-up-security-group]
 ==== セキュリティーグループを作成します
@@ -1011,7 +1007,7 @@ databaseEncryption:
 
 . *ファイアウォール ルールを作成します。*
 +
-以下のコマンドを実行して、GKE の VM サービス用のファイヤーウォール ルールを作成します。
+External VMs need the networking rules described in link:/docs/server/installation/hardening-your-cluster/#external-vms[Hardening your Cluster]
 . *ユーザーを作成します。*
 +
 VM サービス専用の一意のサービスアカウントを作成することをお勧めします。 コンピューティングインスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス許可をより詳細に設定する場合は、コンピューティングインスタンス管理者 (ベータ版) ロール link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[ドキュメント] を参照として使用できます。
@@ -1132,10 +1128,10 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 CircleCI Server の設定とデプロイが完了したら、VM サービスが適切に動作しているか確認する必要がありあます。 CircleCI Server 内で、realitycheck プロジェクトを再実行できます。 VM サービスジョブは完了しているはずです。 この時点で、すべてのテストが合格しているはずです。
 
 [#runner]
-== 4.  ランナー
+== 2. Nomad サーバー
 
 [#overview]
-=== 概要
+=== インサイト スナップショットバッジの概要
 
 CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 ランナーの設定についての詳細は、 link:/docs/ja/runner-overview[ランナーに関するドキュメント] をご覧ください。
 
@@ -1144,7 +1140,7 @@ NOTE: ランナーには組織ごとに１つ名前空間が必要です。 Circ
 ifndef::pdf[]
 
 [#next-steps]
-== 次のステップ
+== 3.
 
 * link:/docs/ja/server/installation/phase-4-post-installation[ステップ 4: ポストインストール]
 +
