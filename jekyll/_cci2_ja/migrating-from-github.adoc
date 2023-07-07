@@ -10,13 +10,12 @@ contentTags:
 :page-liquid:
 :page-description: GitHub Actions から CircleCI に移行する方法を概説します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 このドキュメントでは、GitHub Actions から CircleCI に移行する方法を概説します。
 
 [#concepts]
-== 概念
+== コンセプト
 
 [#jobs-and-workflows]
 === ジョブとワークフロー
@@ -91,7 +90,7 @@ CircleCI では、同じように環境 (Executor と呼ばれる) を選択で�
 以下の表を参照して設定を比較してください。
 
 [#configuration-comparison]
-== 設定の比較
+== 概念
 
 {% include snippets/ja/docker-auth.adoc %}
 
