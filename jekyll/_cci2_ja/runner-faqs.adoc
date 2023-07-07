@@ -11,12 +11,11 @@ contentTags:
 :page-liquid:
 :page-description: このページでは、CircleCI のセルフホストランナーに関してよく寄せられるご質問にお答えします。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 {% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
-このページでは、CircleCI のセルフホストコンテナとマシンランナーに関してよく寄せられるご質問にお答えします。
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 [#self-hosted-runner-faqs]
 == FAQ
