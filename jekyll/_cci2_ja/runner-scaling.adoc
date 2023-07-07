@@ -11,15 +11,12 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
-
-toc::[]
+:experimental:
 
 {% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 CircleCI セルフホストランナーの固定のコンピューティングフリートを保持するには、ジョブがキューに入る率に応じてワークロードが変動するため、不要なコストが発生する可能性があります。 このコストを削減するために、必要に応じてコンピューティングフリートをスケーリングできます。
 
@@ -31,12 +28,12 @@ link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI ブ�
 Kubernetes でコンテナランナーを使用している場合、キューに入る作業量が増えると、Pod が自動的にスピンアップします。  これらの Pod は一時的な Pod であり、ジョブの実行が完了すると破棄されます。  Pod は作業に合わせて自動的にスケーリングされますが、Kubernetes クラスタの基盤となるコンピューティングはスケーリングされません。
 
 [#scaling-data]
-== データのスケーリング
+== はじめに
 
-マシンランナーやコンテナランナー用の Kubernetes クラスタをスケールするためのソリューションをセットアップする際に役立つ API エンドポイントが複数あります。
+CircleCI セルフホストランナーの固定のコンピューティングフリートを保持するには、ジョブがキューに入る率に応じてワークロードが変動するため、不要なコストが発生する可能性があります。
 
 * <<runner-api#get-apiv2runnertasks, 未処理のタスク>>
-* <<runner-api#get-apiv2runnertasksrunning, 実行中のタスク>>
+* <<runner-config-reference#runner-idle_timeout,ランナーのアイドル状態のタイムアウト>>
 * <<runner-api#get-apiv2runner,リソースクラスのリスト>>
 
 スケーリングソリューションにより、上記のエンドポイントを使って実行可能な待機タスクの合計数を計算することができます。 タスクデータエンドポイントのスコープは 1 つのリソースクラスにスコープされるため、使用可能なすべてのリソースクラスを照会し、実行中のタスクの合計数を取得することが重要です。
@@ -46,9 +43,9 @@ Kubernetes でコンテナランナーを使用している場合、キューに
 NOTE: 同時実行数の制限を超えるコンピューティングを開始してしまわないよう、プランの同時実行制限にも注意する必要があります。 これは CircleCI の link:https://circleci.com/ja/pricing/[料金プランのページ] でご確認いただけます。
 
 [#agent-configuration]
-== マシンランナーのエージェントの設定
+== コンテナランナー
 
-スケーリングソリューションで使用できるマシンランナーの設定がいくつかあります。特に、需要が減少した場合にリソースのクリーンアップをサポートできます。
+Kubernetes でコンテナランナーを使用している場合、キューに入る作業量が増えると、Pod が自動的にスピンアップします。
 
 * <<runner-config-reference#runner-mode,ランナーモード>>
 ** `single-task` モードを選択すると、マシンランナーは 1 つのタスクが終わるとシャットダウンします。 このモードは、マシンランナーの終了時にリソースが自動的にリサイクルされるので、完全に一時的なコンピューティングを使用する場合に便利です。
