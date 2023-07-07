@@ -11,13 +11,9 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI でプロジェクトを作成する方法
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 このガイドでは、CircleCI でプロジェクトを作成する方法を紹介します。
-
-toc::[]
 
 [#step-one-link-your-vcs-with-circleci]
 == ステップ 1: バージョン管理システム (VCS) と CircleCI をリンクさせる
@@ -41,9 +37,9 @@ image::config-set-up-project.png[Set up Project]
 image::cci-organizations.png[Select Organization]
 
 [#step-three-specify-a-config-file]
-== ステップ 3: 設定ファイルを指定する
+== ステップ 1: バージョン管理システム (VCS) と CircleCI をリンクさせる
 
-プロジェクトのセットアップが完了すると、`config.yml` ファイルを提供するよう求められます。
+ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、バージョン管理システム (VCS) を選択します。
 
 NOTE: 2023年6月14日より、CircleCIでプロジェクトを設定する際の体験が簡素化される可能性があります。  詳細は link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[コミュニティフォーラム]をご覧ください。
 
@@ -66,7 +62,7 @@ image::edit-config-file.png[Edit Configuration File]
 これにより、CircleCI の設定ファイルエディターが開き、 `config.yml` を編修し、コミットすることができます。
 
 [#see-also]
-== 関連項目
+== ステップ 2: CircleCI でプロジェクトを作成する
 
 * <<config-intro#,設定ファイルの概要>>
 * <<config-editor#,設定ファイルエディターの使用>>
