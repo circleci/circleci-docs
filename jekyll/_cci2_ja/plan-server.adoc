@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the Server plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :concurrency:
 :orbs:
 
@@ -43,9 +42,8 @@ link:https://app.circleci.com/[CircleCI Web アプリ]では、アーティフ�
  link:https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
 [#circleci-features]
-== CircleCI の機能
+== Server  プラン
 
-上記のアップグレード機能に加え、Server プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
-link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
+CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 詳細については xref:server/overview/circleci-server-v4-overview#[Server documentation]をご覧ください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/ja/features-of-circleci.adoc %}
+Server プランにはカスタムクレジットオプションがあり、CircleCI のすべてのリソースクラスでお客様のビルド設定や実行環境に応じて1ヶ月単位でご利用いただけます。
