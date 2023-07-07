@@ -57,7 +57,7 @@ This example snippet is from a CircleCI configuration file that:
 . Stores the test results in a new directory called `test-results`, and
 . Uploads those test results to CircleCI.
 
-NOTE: `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+NOTE: `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the config key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
 
 [#example-config-file-after]
 === After: Example `.circleci/config.yml` file
