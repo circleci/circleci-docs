@@ -9,13 +9,12 @@ contentTags:
 :page-liquid:
 :page-description: パイプライン、ワークフロー、ジョブの管理に役立つ CircleCI 用 VS Code 拡張機能を紹介します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI の VS Code 拡張機能を使用すると、VS Code から直接 CircleCI パイプラインを管理できます。
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 この VS Code 拡張機能には以下が含まれています。
 
@@ -23,14 +22,14 @@ CircleCI の VS Code 拡張機能を使用すると、VS Code から直接 Circl
 - **コンフィグヘルパー**: コンフィグファイルの操作、作成、編集に役立つ支援機能を IDE 上で利用できます。
 
 [#install-the-vs-code-extension]
-== VS Code 拡張機能をインストールする
+== はじめに
 
-この拡張機能のインストールとセットアップ手順については、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code Marketplace のページ]を参照するか、VS Code の [Extensions (拡張機能)] タブで CircleCI 拡張機能を検索してください。
+この VS Code 拡張機能には以下が含まれています。
 
 [#pipelines-panel]
-== パイプラインパネル
+== VS Code 拡張機能をインストールする
 
-パイプラインパネルでは、見やすいインターフェースでパイプラインを管理できます。 このパネルには、プロジェクトで最近実行されたパイプライン、ワークフロー、ジョブが一覧表示されます。それぞれの状態を確認するだけでなく、操作することも可能です。
+この拡張機能のインストールとセットアップ手順については、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code Marketplace のページ]を参照するか、VS Code の [Extensions (拡張機能)] タブで CircleCI 拡張機能を検索してください。 このパネルには、プロジェクトで最近実行されたパイプライン、ワークフロー、ジョブが一覧表示されます。それぞれの状態を確認するだけでなく、操作することも可能です。
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png[Screenshot of side panel with pipeline information]
 
@@ -117,9 +116,9 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_status-bar.png[Screens
 - **[Success (成功)]/[On hold (保留)]/[Failed (失敗)]** (およびその他のワークフローの状態): パイプラインパネルの一番上にある (直近に実行された) パイプラインの状態を示します。 ステータスバーをクリックすると、パイプラインパネルの対応するワークフローがハイライトされます。
 
 [#config-helper]
-== コンフィグヘルパー
+== パイプラインパネル
 
-VS Code 拡張機能には、CircleCI コンフィグファイルの編集を状況に応じて支援する以下の機能も用意されています。
+パイプラインパネルでは、見やすいインターフェースでパイプラインを管理できます。
 
 - **"宣言へ移動" と "参照へ移動" コマンドによるファイル内ナビゲーション**: ジョブ名または Executor のパラメーターにカーソルを合わせると、それらの宣言内容やファイル内での参照箇所を確認できます。 また、Orb に宣言されているコマンドやパラメーターの内容も確認可能です。
 +
@@ -156,8 +155,8 @@ CircleCI CLI の `circleci policy decide` コマンドに相当し、設定済�
 - `.circleci/config.yml` を開いた状態で、エディター右上にある [CircleCI] ボタンをクリックする。 他に編集しているファイルがある場合、このボタンは表示されません。
 
 [#open-source-language-server]
-=== オープンソースの言語サーバー
+=== パイプライン
 
-コンフィグヘルパーは CircleCI YAML ファイル専用の言語サーバーをベースとしており、この言語サーバーはオープンソースです。 プロジェクトのリポジトリ (link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server]) にて言語サーバーのソースコードを公開しており、投稿やイシューも受け付けています。
+パイプラインパネルのツリーの最上位にはxref:pipelines#[パイプライン]が表示されており、展開するとワークフローが表示されます。 パイプラインにカーソルを合わせると、以下の操作を行えます。
 
 また、Language Server Protocol に対応したエディターであれば、この言語サーバーを統合可能です。プラグインを作成することで、お気に入りのエディターでコンフィグヘルパーを利用できます。
