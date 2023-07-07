@@ -10,13 +10,11 @@ contentTags:
 :page-liquid:
 :page-description: このガイドではフロントエンド ロードバランサーを非公開にする方法を説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 CircleCI Server では、ロードバランサーを使用して Kubernetes クラスタで送受信されるネットワークトラフィックを管理しています。
 
-ロードバランサーはアプリケーションへのすべてのトラフィックを管理しています。 ロードバランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
+CircleCI Server では、ロードバランサーを使用して Kubernetes クラスタで送受信されるネットワークトラフィックを管理しています。 ロードバランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
 
 [#make-the-frontend-load-balancer-private]
 == フロントエンド ロードバランサーを非公開にする
@@ -39,4 +37,4 @@ nginx:
     private_load_balancers: false
 ----
 
-NOTE: CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロードバランサーに送信されるよう古いパブリックロードバランサーの削除が必要な場合があります。
+NOTE: CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロードバランサーに送信されるよう公開されている古いロードバランサーの削除が必要な場合があります。
