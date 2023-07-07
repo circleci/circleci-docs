@@ -11,17 +11,16 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 このノウハウガイドでは、HerokuにデプロイするためのCircleCIの設定方法を学びます。
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 link:https://www.heroku.com/[Heroku] は、クラウドでアプリケーションをホスティングするための一般的なプラットフォームです。 アプリケーションを Heroku にデプロイするように CircleCI を設定するには、以下の手順を行います。
 
-== Heroku Orb を使用したデプロイ
+== はじめに
 
 [#create-account]
 === 1.  アカウントの作成
@@ -29,12 +28,12 @@ link:https://www.heroku.com/[Heroku] は、クラウドでアプリケーショ�
 Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[Heroku の Web ページ] に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
 
 [#create-env-vars]
-=== 2.  環境変数の作成
+=== 2. 環境変数の作成
 
 Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
 
 [#deploy-with-orb]
-=== 3.  Heroku Orb を使用したデプロイ
+=== 3. Heroku Orb を使用したデプロイ
 
 link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。 `deploy-via-git` により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Orb レジストリ] の Heroku Orb ページを参照してください。
 
@@ -57,7 +56,7 @@ workflows:
 
 Heroku Orb の詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[CircleCI Heroku Orb] を参照してください。
 
-== 2.0 設定を使った Heroku のデプロイ
+== Heroku Orb を使用したデプロイ
 
 [#create-account-2]
 === 1.  アカウントの作成
@@ -70,21 +69,45 @@ Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[He
 Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
 
 [#create-deploy-job]
-=== 3.  デプロイジョブの作成
+=== 3.  Heroku Orb を使用したデプロイ
 
-`.circleci/config.yml` で、デプロイジョブを作成して xref:executor-intro#[Executor タイプ] を追加します。
+link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。
 
 [#add-steps-deploy-job]
-=== 4. デプロイジョブに手順を追加
+=== 4.  デプロイジョブに手順を追加
 
 デプロイジョブに `steps` を追加し、コードをチェックアウトし `deploy` します。 デプロイしたいブランチを指定します。 この例では、main ブランチを指定し、`git push` コマンドを使ってデプロイします。
 
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
-    build:
-    ...
+  build:
+    docker:
+      - image: <docker-image-name-tag>
+    steps:
+      - checkout
+    # build job ommitted for brevity
+  deploy:
+    docker:
+      - image: <docker-image-name-tag>
+    steps:
+      - checkout
+      - run:
+          name: Deploy Main to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
+
+workflows:
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+            branches:
+              only: main # only run deploy-via-git job on main branch
 ```
 
 NOTE: Heroku では、デプロイまたは自動デプロイで、デプロイの前に渡す CI を待機するオプションが提供されます。 詳細については、 link:https://devcenter.heroku.com/articles/github-integration#automatic-deploys[Heroku のドキュメント] を参照してください。
