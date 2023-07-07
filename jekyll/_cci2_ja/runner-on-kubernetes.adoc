@@ -11,8 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: このインストールガイドに沿って Kubernetes クラスタに CircleCI セルフホストランナーを設定してください。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 {% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
