@@ -13,9 +13,7 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 マトリックスジョブにより、引数を使って 1 つのジョブを複数回実行することができます。 引数はパラメーターを使って提供されます。 この機能は、複数のオペレーティングシステムでのテストや、異なる言語 / ライブラリバージョンに対するテストなど、多くの用途に役立ちます。
 
@@ -85,6 +83,6 @@ workflows:
 ----
 
 [#next-steps]
-== 次のステップ
+== マトリックスジョブを使用して、複数の OS テストを実行する
 
-マトリックスジョブに関する詳細は、<<configuration-reference#matrix-requires-version-21,設定ファイルのリファレンス>>を参照してください。
+以下の例では、2 つのバージョンの Node.js. を使って Linux Docker コンテナ、Linux VM、macOS 環境で `test` ジョブが 実行されます。
