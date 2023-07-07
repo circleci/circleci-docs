@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn to deploy Android apps through CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane].
 
@@ -289,9 +288,6 @@ jobs:
   test-fastlane:
       docker:
         - image: cimg/android:2022.07
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       resource_class: large
       steps:
         - checkout

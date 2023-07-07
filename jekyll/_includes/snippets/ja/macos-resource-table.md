@@ -8,11 +8,11 @@
 | macos.x86.metal.gen1  | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
- `medium`および`large`リソースクラスは、2023年10月2日に非推奨になります。 Xcode v14.2は、macOSリソースでサポートされる最新バージョンです。 詳しくは[お知らせ](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891)をご覧ください。
-{: class="alert alert-warning"}
+WARNING: `medium` および `large` リソースクラスは、2023年10月2日に非推奨になります。 Xcode v14.2は、macOSリソースでサポートされる最新バージョンです。 詳しくは https://discuss.circleci.com/t/m1-medium-m1-large/48290[お知らせ]をご覧ください。
 
-`macos.x86.metal.gen1` リソースは、最低 24 時間の利用が必要です。 このリソースクラスの詳細については、[macOS の専有ホスト]({{ site.baseurl }}/ja/dedicated-hosts-macos)を参照して下さい。
-<br />
-<br />
-`注:` `large` リソースクラスは、年間契約のお客様のみご利用いただけます。 年間契約プランの詳細については、[サポートチケットをオープン](https://support.circleci.com/hc/ja/requests/new)しお問い合わせください。
-{: class="alert alert-info"}
+[NOTE]
+====
+`macos.x86.metal.gen1` リソースは、最低 24 時間の利用が必要です。 このリソースクラスの詳細については、link:https://circleci.com/docs/ja/dedicated-hosts-macos/[macOS の専有ホスト]を参照して下さい。
+
+`large` リソースクラスは、年間契約のお客様のみご利用いただけます。 年間契約プランの詳細については、link:https://support.circleci.com/hc/ja/requests/new[サポートチケット]をオープンしお問い合わせください。 
+====

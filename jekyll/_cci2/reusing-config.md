@@ -5,7 +5,7 @@ short-title: "Reusable Config Reference"
 description: "Reference guide for CircleCI 2.1 Configuration"
 categories: [configuration]
 order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -13,6 +13,8 @@ contentTags:
 ---
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
+
+{% include snippets/docker-auth.md %}
 
 ## Notes on reusable configuration
 {: #notes-on-reusable-configuration }
@@ -46,9 +48,6 @@ jobs:
   my-job:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - greeting:
           to: "My-Name"
@@ -232,15 +231,9 @@ executors:
       SOME_VAR: << parameters.some-value >>
     docker:
       - image: ubuntu:xenial
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   bionic:
     docker:
       - image: ubuntu:bionic
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   test:
@@ -345,9 +338,6 @@ jobs:
   build:
     docker:
     - image: ubuntu:latest
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - run:
         command: |
@@ -378,9 +368,6 @@ jobs:
          type: string
      docker:
        - image: ubuntu:latest
-         auth:
-           username: mydockerhub-user
-           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      steps:
        - run: |
            s3cmd --access_key ${<< parameters.access-key >>} \\
@@ -452,9 +439,6 @@ jobs:
   myjob:
     docker:
       - image: "cimg/base:stable"
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - sayhello: # invoke command "sayhello"
           to: "Lev"
@@ -537,10 +521,7 @@ orbs:
 jobs:
   deploy2s3:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - aws-s3/sync:
           from: .
@@ -601,9 +582,6 @@ executors:
   my-executor:
     docker:
       - image: cimg/ruby:2.5.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   my-job:
     executor: my-executor
@@ -635,10 +613,6 @@ executors:
   my-executor:
     docker:
       - image: cimg/ruby:2.5.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
 jobs:
   my-job:
     executor: my-executor
@@ -658,11 +632,7 @@ version: 2.1
 executors:
   my-executor:
     docker:
-      - image: cimg/ruby:2.5.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
+      - image: cimg/ruby:3.2.2
 jobs:
   my-job:
     executor:
@@ -693,9 +663,6 @@ executors:
         type: string
     docker:
       - image: cimg/node:<<parameters.version>>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   test:
@@ -747,9 +714,6 @@ executors:
   bar:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 You may use either executor from your configuration file with:
@@ -784,9 +748,6 @@ executors:
   node:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
      ENV: ci
 
@@ -794,9 +755,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     # The test executor below will be overwritten by the more explicit "docker" executor. Any env vars will be added.
     executor: node
     steps:
@@ -811,9 +769,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
      ENV: ci       # From executor.
     steps:
@@ -934,9 +889,6 @@ executors:
         type: string
     docker:
       - image: cimg/python:<< parameters.tag >>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       MYPRECIOUS: << parameters.myspecialvar >>
 jobs:
@@ -956,9 +908,6 @@ jobs:
     steps: []
     docker:
       - image: cimg/python:2.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       MYPRECIOUS: "myspecialvalue"
 ```

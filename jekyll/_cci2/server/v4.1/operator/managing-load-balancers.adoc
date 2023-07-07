@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: Use this guide to make the frontend load balancer private.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI server uses a load balancer to manage network traffic entering and leaving the Kubernetes cluster.
 

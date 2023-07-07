@@ -197,15 +197,9 @@ jobs:
             NODE_ENV: development
         docker:
             - image: cimg/node:16.10
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
             - image: mongo:4.0
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGO_INITDB_ROOT_USERNAME: admin
                 MONGO_INITDB_ROOT_PASSWORD: password
@@ -559,9 +553,6 @@ jobs:
   build:
     docker:
       - image: circleci/clojure:tools-deps-1.9.0.394
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: bin/kaocha

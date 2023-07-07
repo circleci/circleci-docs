@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Amazon Web Services.
 
@@ -87,8 +86,8 @@ jobs: # Define the build and deploy jobs
             --cache-control "max-age=86400"
 ```
 
-[#deploy-to-aws-s3-with-2-configuration]
-== Deploy to S3 with 2.0 configuration
+[#deploy-to-aws-s3-without orbs]
+== Deploy to S3 without orbs
 
 [#create-iam-user-2]
 === 1. Create IAM user
@@ -135,16 +134,10 @@ jobs:
     build:
     docker: # Specify executor for running build job - this example uses a Docker container
         - image: <docker-image-name-tag> # Specify docker image to use
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     ... # build job steps omitted for brevity
     deploy:
     docker: # Specify executor for running deploy job
         - image: <docker-image-name-tag> # Specify docker image to use
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: # Install the AWS CLI if it is not already included in the docker image
             name: Install awscli

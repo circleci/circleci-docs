@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -8,12 +8,13 @@ contentTags:
 = Set an environment variable
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to set environment variables for use in your CircleCI pipelines. 
+:page-description: How to set environment variables for use in your CircleCI pipelines.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level.
+
+{% include snippets/docker-auth.adoc %}
 
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command
@@ -26,14 +27,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
-          # Add source command to execute code and make variables 
+          # Add source command to execute code and make variables
           # available in current step.
           command: |
             echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
@@ -56,10 +54,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run:
@@ -85,9 +80,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.04-20.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
 ```
@@ -119,10 +111,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run:
@@ -157,10 +146,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run:
@@ -184,10 +170,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: <image>:<tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
         # environment variables available for entrypoint/command run by docker container
         environment:
           MY_ENV_VAR_1: my-value-1
@@ -204,17 +187,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: <image>:<tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
         environment:
           MY_ENV_VAR_1: my-value-1
           MY_ENV_VAR_2: my-value-2
-      - image: <image>:<tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/postgres:15.3.0
         environment:
           MY_ENV_VAR_3: my-value-3
           MY_ENV_VAR_4: my-value-4

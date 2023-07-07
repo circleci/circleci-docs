@@ -10,12 +10,11 @@ contentTags:
 :page-liquid:
 :page-description: "Learn how to create a project in CircleCI."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide gets you started with creating a project in CircleCI.
 
-toc::[]
+
 
 [#step-one-link-your-vcs-with-circleci]
 == Step One: Link your VCS with CircleCI
@@ -41,7 +40,11 @@ image::cci-organizations.png[Select Organization]
 [#step-three-specify-a-config-file]
 == Step Three: Specify a config file
 
+
+
 Once you have set up your project, you will be prompted to provide a `config.yml` file.
+
+NOTE: Starting June 14, 2023, you may see a simplified experience when setting up a project on CircleCI.  See our link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[community forum] for more details.
 
 . From the pop-up window, select your preferred option. You can either:
 +

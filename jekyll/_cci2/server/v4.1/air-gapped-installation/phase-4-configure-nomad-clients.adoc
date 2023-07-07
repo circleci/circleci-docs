@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: How to configure Nomad clients to run with CircleCI server in an air-gapped environment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment.
 

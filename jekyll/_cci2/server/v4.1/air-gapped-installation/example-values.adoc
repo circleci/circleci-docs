@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The following snippet shows an example `values.yaml` file for a Helm installation of CircleCI server in an air-gapped environment.
 

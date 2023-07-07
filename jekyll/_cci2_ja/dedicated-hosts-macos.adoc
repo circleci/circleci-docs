@@ -44,7 +44,7 @@ contentTags:
 [#support-xcode-versions]
 == サポートされている Xcode のバージョン
 
-include::../_includes/snippets/xcode-metal.adoc[]
+include::../_includes/ja/snippets/xcode-metal.adoc[]
 
 [#known-limitations]
 == 既知の制限

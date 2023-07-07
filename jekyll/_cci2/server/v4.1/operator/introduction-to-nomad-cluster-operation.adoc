@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
 

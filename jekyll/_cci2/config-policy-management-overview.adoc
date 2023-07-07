@@ -8,12 +8,9 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
-
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
@@ -349,6 +346,7 @@ The following is an example of a policy that blocks SSH reruns on configs where 
 package org
 
 import future.keywords
+import data.circleci.utils
 
 policy_name["ssh_rerun"]
 
@@ -374,6 +372,34 @@ For further reading, see the link:https://circleci.com/blog/compliance-with-conf
 == Testing policies
 
 It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
+
+[#dynamic-config]
+== Config policies and dynamic configuration
+
+You can write config policies to govern projects that use dynamic configuration too. Policies are evaluated against:
+
+* _Setup_ configurations
+* _Continuation_ configurations
+* Standard configurations
+
+If required for your project, you can encode rules to apply only to setup configs, or only to non-setup configs, as follows:
+
+[source,rego]
+----
+enable_hard["setup_rule"] { input.setup } # only applied to configs with `setup: true`
+----
+
+[source,rego]
+----
+enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that do not have `setup: true`
+----
+
+[source,rego]
+----
+enable_hard["some_rule"] # rule applied to all configs
+----
+
+For more information about dynamic configuration, see the xref:dynamic-config#[Dynamic configuration overview].
 
 [#example-policy]
 == Example policy

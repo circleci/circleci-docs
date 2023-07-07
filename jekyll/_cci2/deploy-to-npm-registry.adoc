@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to publish to the NPM registry.
 
@@ -44,28 +43,26 @@ Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and onl
 version: 2.1
 
 jobs:
-    publish:
+  publish:
     docker:
-        - image: <docker-image-name-tag>
-            auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: <docker-image-name-tag>
     steps:
-        - checkout
-        - run:
-            name: Publish to NPM
-            command: |
+      - checkout
+      - run:
+          name: Publish to NPM
+          command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
 
 workflows:
-    tagged-build:
+  tagged-build:
     jobs:
-        - publish:
-            filters:
+      - publish:
+          filters:
             tags:
-                only: /v[0-9]+(\.[0-9]+)*/
+              only: /v[0-9]+(\.[0-9]+)*/
 ```
+
 [#create-new-version]
 == 4. Create a new version
 

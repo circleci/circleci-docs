@@ -1,4 +1,7 @@
 ---
+layout: classic-docs
+title: "Using the macOS execution environment"
+description: "Learn how to configure a your jobs to run in the macOS execution environment."
 contentTags:
   platform:
   - Cloud
@@ -251,6 +254,8 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 
 It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 jobs:
@@ -281,9 +286,6 @@ jobs:
   deploy-snapshot:
     docker:
       - image: cimg/deploy:2022.08
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "Do the things"

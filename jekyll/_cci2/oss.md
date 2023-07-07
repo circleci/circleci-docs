@@ -79,7 +79,12 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
-If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Project Settings>Advanced** of your project, set the **Pass secrets to builds from forked pull requests** option to _On_.
+If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ be generated if you have this setting turned on. This prevents your token data being shared with forked builds unless you require it. If you do choose to use OIDC with open source projects by enabling the **Pass secrets to builds from forked pull requests** option, you **must** check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require. For more information on OIDC, see the [Using OpenID Connect tokens in jobs](/docs/openid-connect-tokens/) page.
+
+If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option:
+
+1. Navigate to the **Project Settings > Advanced** page in the CircleCI web app for your project.
+1. Set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ### Caching
 {: #caching }
