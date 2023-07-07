@@ -9,19 +9,17 @@ contentTags:
 :page-liquid:
 :page-description: このドキュメントでは、GitLab CI と CircleCI の連携方法についてわかりやすく説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#overview]
-== 概要
+== インサイト スナップショットバッジの概要
 
 このドキュメントでは、GitLab プロジェクトと CircleCI の連携方法について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、リリース予定の機能の概要もご紹介します。
 
 [#sign-up]
-== ユーザー登録
+== 概要
 
-GitLab との連携は、新規および既存の CircleCI ユーザーに行っていただけます。 「xref:first-steps#gitlab-signup[CircleCI のユーザー登録]」に記載されている手順に従い、GitLab アカウントを連携し組織を作成してください。
+このドキュメントでは、GitLab プロジェクトと CircleCI の連携方法について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。
 
 NOTE: 設定するレポジトリへの API アクセスと書き込みアクセス権が必要です。 GitLab の場合は、"maintainer" 以上のロールに相当します。
 
@@ -96,7 +94,7 @@ NOTE: CircleCI を初めて利用される方は、最初は xref:hello-world#[H
 組織やプロジェクトを追加する必要がある場合は、xref:plan-overview#[有料プラン]へのアップグレードをご検討いただくか、またはlink:https://support.circleci.com/hc/ja/requests/new[サポートチーム]にお問い合わせください。
 
 [#trigger-pipeline]
-== CircleCI でパイプラインをトリガーする
+== ユーザー登録
 
 [.tab.pipeline.GitLab.com]
 --
@@ -118,16 +116,16 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[
 
 現在、Web アプリ内で既存の CircleCI 設定ファイルを編集することはできません。 設定ファイルに変更を加える場合は、GitLab リポジトリで行ってください。
 
-セットアップ後、リポジトリに変更をコミットすると、パイプラインが自動的にトリガーされます。 ただし、現時点では、CircleCI Web アプリからパイプラインを手動でトリガーすることはできません。
+リポジトリと CircleCI プロジェクトを連携すると、CircleCI により GitLab リポジトリ内に Webhook が登録されます。 これは、プロジェクトの作成に成功後、リポジトリの **[Settings (設定)] > Webhooks** のページに移動して確認することができます。
 
 [#project-settings]
-== プロジェクト設定
+== CircleCI でパイプラインをトリガーする
 
 GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab の連携では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
 プロジェクトには 1 つ以上の**設定ファイル**を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
 
-プロジェクトには 1 つ以上の**トリガー**を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
+GitLab リポジトリに変更をプッシュするたびに、新しいパイプラインがトリガーされ、CircleCI Web アプリ内の該当するプロジェクトでそのパイプラインが実行中になります。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
 
 プロジェクト内で **[Project Settings (プロジェクト設定)]** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。
 
@@ -218,13 +216,13 @@ NOTE: ただし、現時点では、**[Trigger Name (トリガー名)]** フィ�
 SSH キーに関する詳細は、「xref:add-ssh-key#[CircleCI に SSH キーを登録する]」をご覧ください。
 
 [#organization-settings]
-== 組織設定
+== プロジェクト設定
 
-GitLab の連携では、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
+GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab の連携では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
-スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
+プロジェクトには 1 つ以上の**設定ファイル**を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
-組織レベルで設定を管理するには、CircleCI Web アプリの **[Organization Settings (組織設定)]** ボタンをクリックします。
+プロジェクトには 1 つ以上の**トリガー**を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。
 
 [#organization-settings-people]
 === People (メンバー)
@@ -249,9 +247,9 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 招待したユーザーが CircleCI アカウントをお持ちでない場合は、ユーザー登録を行う必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
 
 [#organization-settings-integrations]
-=== [Integrations (連携)] (GitLab self-managed のみ)
+=== People (メンバー)
 
-GitLab self-managed の組織の場合、別の self-managed インスタンスを追加して組織に連携することができます。
+プロジェクトのロールにより、組織内でどのユーザーがどのプロジェクトにアクセスできるかを細かく制御できます。
 
 . **[Organization Settings (組織設定)]** の **[Integrations (連携)]** に移動して、新しいインスタンスを追加します。
 +
@@ -272,16 +270,16 @@ GitLab self-managed インスタンスの場合、CircleCI が接続先のホス
 ホストキーの取得時には、フィンガーブリントを調べることでキーが適切かどうかを検証できます。 フィンガーブリントは、self-managed インスタンスの [Help (ヘルプ)] ページの **[Instance Configuration (インスタンス設定)]** セクションで確認できます (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[インスタンス設定に関するこちらのページ (英語)] を参照)。
 
 [#roles-and-permissions]
-== ロールと権限
+== 組織設定
 
-CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
+GitLab の連携では、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
 
-CircleCI ユーザーのロールと権限は、VCS の権限から派生するものではありません。また、VCS の権限を無視することもできません。 たとえば、CircleCI の __Organization Administrator (組織管理者)__ である場合、CircleCI 組織内の組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス権が付与されている必要があります。 CircleCI ユーザーの VCS における権限は、関連づけられた GitLab のアイデンティティによって決まります。
+スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス権が付与されている必要があります。 CircleCI ユーザーの VCS における権限は、関連づけられた GitLab のアイデンティティによって決まります。
 
-現時点では、トリガーや設定ファイルを管理する際に CircleCI と連携することにより GitLab のアイデンティティを管理できます。
+組織レベルで設定を管理するには、CircleCI Web アプリの **[Organization Settings (組織設定)]** ボタンをクリックします。
 
 [#organization-role-permissions-matrix]
-=== 組織のロールと権限のマトリックス
+=== People (メンバー)
 
 [.table.table-striped]
 [cols=4*, options="header"]
@@ -561,7 +559,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |===
 
 [#project-role-permissions-matrix]
-=== プロジェクトのロールと権限のマトリックス
+=== [Integrations (連携)] (GitLab self-managed のみ)
 
 [.table.table-striped]
 [cols=4*, options="header"]
@@ -659,6 +657,31 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|
 ^|
 
+|*コンテキスト*
+|
+|
+|
+
+^|コンテキストの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|コンテキストの使用
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|コンテキストの変数の編集
+|
+^|
+^|
+
+^|コンテキストの管理
+|
+^|
+^|
+
 |*設定ファイルソース*
 |
 |
@@ -676,7 +699,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |===
 
 [#user-settings]
-== ユーザー設定
+== ロールと権限
 
 [#user-account-integrations]
 === アカウントの連携
@@ -691,14 +714,14 @@ CircleCI で複数のアカウントと連携すると、以下のメリット�
 - CircleCI で利用可能な全ての認証方法を使用できる
 
 [#deprecated-system-environment-variables]
-== 非推奨のシステム環境変数
+== ユーザー設定
 
 GitLab ベースのプロジェクトでは、一部の定義済み環境変数を使用できません。 「プロジェクトの値と変数」のxref:variables#built-in-environment-variables[定義済み環境変数]の表で、環境変数ごとの VCS 対応状況を参照してください。 パイプラインでこれらの環境変数が必要な場合は、xref:pipeline-variables#[パイプライン値]の表に記載されている適切な値との置き換えを推奨します。
 
 [#coming-soon]
-== 近日公開予定の機能
+== 非推奨のシステム環境変数
 
-下記のセクションでは、現段階の GitLab 連携ではまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースされる予定です。
+GitLab ベースのプロジェクトでは、一部の定義済み環境変数を使用できません。 「プロジェクトの値と変数」のxref:variables#built-in-environment-variables[定義済み環境変数]の表で、環境変数ごとの VCS 対応状況を参照してください。
 
 [#account-integrations]
 === アカウントの連携
@@ -740,8 +763,13 @@ GitLab の連携では、デプロイキーとユーザーキーは使用され�
 
 xref:insights-tests#[テスト インサイト機能]は現在、GitLab のお客様には対応しておりません。
 
+[#badges]
+=== バッジ
+
+The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights snapshot badge] features are not currently supported for GitLab projects.
+
 [#next-steps]
-== 次のステップ
+== 近日公開予定の機能
 
 - xref:config-intro#[設定ファイルのチュートリアル]
 - xref:hello-world#[Hello world]
