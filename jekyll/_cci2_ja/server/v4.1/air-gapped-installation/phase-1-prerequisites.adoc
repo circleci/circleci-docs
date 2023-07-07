@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: エアギャップ環境に CircleCI Server をインストールする方法について解説します。 要件、イメージ、Helm チャートについて説明しています。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 ここでは、エアギャップ環境への CircleCI Server のインストールの前に実施す必要がある手順について説明します。
 
@@ -43,14 +42,14 @@ contentTags:
 |===
 
 [#copy-images]
-== 1.  イメージをコピーする
+== エアギャップ環境へのインストールのコンポーネント要件 イメージをコピーする
 
-CircleCI Server は、Helm チャートを使用して Kubernetes クラスタにデプロイします。 CircleCI 製の最新のイメージとチャートを仮想環境にコピーしてください。 CircleCI の Helm チャートで参照されているイメージはすべて、エアギャップ環境内でアクセス可能である必要があります。
+以下の表に、エアギャップ環境に CircleCI Server をインストールする際の前提条件を示します。 インストールを行うには、これらのコンポーネントをエアギャップ環境に用意する必要があります。 CircleCI の Helm チャートで参照されているイメージはすべて、エアギャップ環境内でアクセス可能である必要があります。
 
 [#login-to-acr]
 === a.  CircleCI Server のコンテナレジストリにログインする
 
-インストール用のイメージにアクセスするには、CircleCI から提供されるユーザー名とトークンが必要です。 詳細については、support@circleci.com にお問い合わせください。
+インストール用のイメージにアクセスするには、CircleCI から提供されるユーザー名とトークンが必要です。 Please visit https://support.circleci.com/[support.circleci.com] for more information.
 
 [source, bash]
 ----
@@ -145,14 +144,14 @@ echo $SERVER_4_1_IMAGE_LIST | while read -r image; do docker pull $image; done
 ダウンロードしたすべてのイメージを、エアギャップ環境内のコンテナレジストリにコピーします。
 
 [#copy-charts]
-== 2.  チャートをコピーする
+== 1.  イメージをコピーする
 
-CircleCI Server 用 Helm チャートをエアギャップ環境にコピーします。
+CircleCI Server は、Helm チャートを使用して Kubernetes クラスタにデプロイします。
 
 [#download-helm-chart]
-=== a.  最新の CircleCI Server 用 Helm チャートをダウンロードする
+=== a.  CircleCI Server のコンテナレジストリにログインする
 
-最新の CircleCI Server 用 Helm チャートをカレントディレクトリにダウンロードします。
+インストール用のイメージにアクセスするには、CircleCI から提供されるユーザー名とトークンが必要です。
 
 [source, bash]
 ----
@@ -161,11 +160,11 @@ helm pull oci://cciserver.azurecr.io/circleci-server -d ./
 ----
 
 [#upload-helm-chart]
-=== b.  Helm チャートをエアギャップ環境にコピーする
+=== b.  本リリースに必要なすべてのイメージをダウンロードする
 
-ダウンロードした Helm チャート (`.tgz` 形式) をエアギャップ環境にコピーします。
+本リリースの CircleCI Server に必要なすべてのイメージをローカルマシンにダウンロードします。
 
 [#next-steps]
-== 次のステップ
+== 2. 
 
-本ページの手順を完了したら、「xref:phase-2-configure-object-storage#[フェーズ 2 - オブジェクトストレージの構成]」に進んでください。
+CircleCI Server 用 Helm チャートをエアギャップ環境にコピーします。
