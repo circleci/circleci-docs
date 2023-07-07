@@ -1,33 +1,47 @@
 [.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=5*, options="header", stripes=even]
 |===
 |クラス
 |vCPU
 |RAM
+|クラウド
+|Server
 
 |medium
 |4 @ 2.7 GHz
 |8GB
+|icon:check[]
+|icon:times[]
 
 |macos.x86.medium.gen2
 |4 @ 3.2 GHz
 |8GB
+|icon:check[]
+|icon:times[]
 
 |large
 |8 @ 2.7 GHz
 |16GB
+|icon:check[]
+|icon:times[]
 
 |macos.m1.medium.gen1
 |4 @ 3.2 GHz
 |6GB
+|icon:check[]
+|icon:times[]
 
 |macos.m1.large.gen1
 |8 @ 3.2 GHz
 |12GB
+|icon:check[]
+|icon:times[]
 
 |macos.x86.metal.gen1
 |12 @ 3.2 GHz
 |32 GB
+|icon:check[]
+|icon:times[]
 |===
 
 WARNING: `medium` および `large` リソースクラスは、2023年10月2日に非推奨になります。 Xcode v14.2は、macOSリソースでサポートされる最新バージョンです。 詳しくは https://discuss.circleci.com/t/m1-medium-m1-large/48290[お知らせ]をご覧ください。
