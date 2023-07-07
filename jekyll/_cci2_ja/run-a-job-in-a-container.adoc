@@ -11,21 +11,19 @@ contentTags:
 :page-liquid:
 :page-description: Docker を使ってマシン上のコンテナのジョブを実行する方法を紹介します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 link:https://circleci-public.github.io/circleci-cli/[CLI] により、Docker を使ってローカルマシンでそれぞれのジョブを実行することができます。 設定ファイルの変更をプッシュする前にテストを実行したり、ビルドキューに影響を与えずにビルドプロセスをデバッグする際に便利です。
 
 [#prerequisites]
-== 前提条件
+== Orb 開発キット
 
 システムに link:https://www.docker.com/products/docker-desktop[Docker] と CLI の最新バージョンをインストールしている必要があります。 また、有効な `.circleci/config.yml` ファイルを含むプロジェクトが必要です。
 
 [#running-a-job]
-== ジョブの実行
+== 前提条件
 
-CLI により、以下のコマンドを使って Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行することができます。
+システムに link:https://www.docker.com/products/docker-desktop[Docker] と CLI の最新バージョンをインストールしている必要があります。
 
 ```shell
 $ circleci local execute JOB_NAME
@@ -49,21 +47,21 @@ circleci local execute build
 これらのコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
 
 [#limitations-of-running-jobs-locally]
-== ローカルでのジョブ実行時の制限事項
+== ジョブの実行
 
-`circleci` を使用してジョブをローカルで実行できるのは非常に便利ですが、いくつかの制限事項があります。
+CLI により、以下のコマンドを使って Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行することができます。
 
 **Machine Executor**
 
-ローカルジョブでは Machine Executor は使用できません。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
+CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合は、まず設定ファイルを `process.yml` にエクスポートし、以下のコマンドで実行する際にそのファイルを指定する必要があります。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
 
 **SSH キーの追加**
 
-現時点では、`add_ssh_keys` CLI コマンドにより SSH キーを追加することはできません。
+以下のコマンドにより、CircleCI のデモアプリケーションのいずれかを使って、ローカルマシン上でサンプルビルドを実行します。
 
 **ワークフロー**
 
-CLI ツールでは、ワークフローの実行がサポートされていません。 ワークフローは本来、複数のマシンでジョブを同時実行することで、より高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一のジョブ (ワークフローを構成する一要素) しか実行できません。
+これらのコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
 
 **キャッシュとオンライン限定コマンド**
 
