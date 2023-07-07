@@ -11,9 +11,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#common-top-level-keys]
 == Webhook の共通のトップレベルキー
@@ -43,9 +41,9 @@ contentTags:
 NOTE: 注:  イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずに Webhook のペイロードのマップに追加される可能性があります。
 
 [#common-sub-entities]
-== Webhook の共通のサブエンティティ
+== Webhook の共通のトップレベルキー
 
-ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらのWebhookイベントのスキーマは、しばしば他のWebhookとデータを共有します。 これらのデータの共通マップは、"サブエンティティ"（sub-entities）として参照されます。 例えば、`job-completed` 状態の Webhook のイベントペイロードを受信した場合、それにはご自身のプロジェクト、組織、ジョブ、ワークフロー、およびパイプライン のデータマップが含まれます。
+イベントの一部として、各Webhook に共通するデータがあります。 これらのWebhookイベントのスキーマは、しばしば他のWebhookとデータを共有します。 これらのデータの共通マップは、"サブエンティティ"（sub-entities）として参照されます。 例えば、`job-completed` 状態の Webhook のイベントペイロードを受信した場合、それにはご自身のプロジェクト、組織、ジョブ、ワークフロー、およびパイプライン のデータマップが含まれます。
 
 様々な Webhook にまたがって現れる、いくつかの共通のサブエンティティについて、以下のセクションで説明します：
 
@@ -144,7 +142,7 @@ link:/docs/workflows[ワークフロー]はジョブをオーケストレーシ�
 |===
 |フィールド
 |常に表示
-|説明
+|意味
 
 |id
 |はい
@@ -183,7 +181,7 @@ Webhook イベントに関連するパイプラインに関する以下のデー
 |===
 |フィールド
 |常に表示
-|説明
+|意味
 
 |id
 |はい
@@ -231,7 +229,7 @@ Webhook イベントに関連するトリガーについて、以下のデータ
 [#trigger-parameters]
 === トリガーパラメーター
 
-パイプラインに関連付けられたデータ。 GitHub や Bitbucket 以外のプロバイダーに関連付けられたパイプラインに存在します。 GitHub と Bitbucket については、下記の <<#VCS>> を参照してください。
+パイプラインに関連付けられたデータ。 Present for pipelines associated with GitLab. GitHub と Bitbucket については、下記の <<#VCS>> を参照してください。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -250,7 +248,7 @@ Webhook イベントに関連するトリガーについて、以下のデータ
 
 |gitlab
 |×
-|パイプラインが Gitlab トリガーに関連付けられている場合に存在するマップ
+|A map present when the pipeline is associated with a GitLab trigger
 |===
 
 [#circleci]
@@ -284,7 +282,7 @@ Webhook イベントに関連するトリガーについて、以下のデータ
 [#vcs]
 === VCS
 
-NOTE: VCS マップやそのコンテンツは常に提供されるわけではありません。 GitHub と Bitbucket に関連付けられたパイプラインに存在します。 その他のプロバイダーについては、上記の<<#trigger-parameters,トリガーパラメーター>>を参照してください。
+NOTE: The VCS map and its contents are always present for GitHub and Bitbucket projects, but not for GitLab projects. See <<#trigger-parameters,trigger parameters>> above for GitLab parameters.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -347,7 +345,7 @@ NOTE: VCS マップやそのコンテンツは常に提供されるわけでは�
 |===
 
 [#sample-webhook-payloads]
-== Webhook ペイロードのサンプル
+== Webhook の共通のサブエンティティ
 
 [#workflow-completed-for-github-and-bitbucket]
 === workflow-completed (GitHub/Bitbucket)
@@ -479,8 +477,7 @@ NOTE: VCS マップやそのコンテンツは常に提供されるわけでは�
 ```
 
 [#workflow-completed-gitlab]
-=== workflow-completed (Gitlab)
-
+=== プロジェクト
 
 ```json
 {
@@ -556,8 +553,7 @@ NOTE: VCS マップやそのコンテンツは常に提供されるわけでは�
 ```
 
 [#job-completed-gitlab]
-=== job-completed (Gitlab)
-
+=== 組織
 
 ```json
 {
@@ -633,6 +629,6 @@ NOTE: VCS マップやそのコンテンツは常に提供されるわけでは�
 ```
 
 [#next-steps]
-== 次のステップ
+== Webhook ペイロードのサンプル
 
 * link:/docs/webhooks-airtable/[サードパーティツールでwebhooksを使う]チュートリアルを参照してください。
