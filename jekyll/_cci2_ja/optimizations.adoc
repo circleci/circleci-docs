@@ -1,0 +1,207 @@
+---
+
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Optimization reference
+:page-layout: classic-docs
+:page-description: Learn about ways to optimize your CircleCI pipelines
+:page-liquid:
+:toc: macro
+
+:toc-title:
+:experimental:
+
+This page provides an overview of the various ways you can optimize your CircleCI configuration. Each optimization method is described briefly, along with possible use cases.
+
+[#data]
+== Optimize your data usage
+
+[#custom-storage-controls]
+=== ストレージコントロールのカスタマイズ
+
+The https://app.circleci.com/[CircleCI web app] provides controls to customize the storage retention period for workspaces, caches, and artifacts. You can find these settings by navigating to menu:Plan[Usage Controls]. By default, the storage periods are set to the maximum: 30 days for artifacts, and 15 days for caches and workspaces.
+
+See the xref:persist-data#custom-storage-usage[Persisting Data] page for more information on custom storage settings.
+
+[#workspaces]
+=== ワークスペース
+
+Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
+
+To persist data from a job and make it available to downstream jobs via the xref:configuration-reference#attachworkspace[`attach_workspace`] key, configure the job to use the xref:configuration-reference#persisttoworkspace[`persist_to_workspace`] key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the root key. その後、ファイルとディレクトリはアップロードされ、続くジョブで (および Workflow の再実行時に) 利用できるようにします。
+
+* Read more on the xref:workspaces[Workspaces] page.
+
+[#speed]
+== Speed up pipelines
+
+[#docker-image-choice]
+=== Docker イメージの選択
+
+プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを設定し、イメージを指定するときには、以下の点を考慮してください。
+
+* CircleCI provides a range of xref:circleci-images#[convenience images], typically based on official Docker images, but with a range of useful language tools pre-installed.
+* You can create xref:custom-images#[custom images], maximizing specificity for your projects. To help with this we provide xref:custom-images#creating-a-custom-image-manually[guidance for building images manually].
+
+[#docker-layer-caching]
+=== Docker レイヤーキャッシュ
+
+Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. 日常的な CI/CD プロセスの中で頻繁に Docker イメージをビルドする場合、DLC は大変便利です。
+
+DLC is similar to _caching dependencies_, in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
+
+* Read more on the xref:docker-layer-caching#[Docker Layer Caching] page.
+
+[#caching-dependencies]
+=== 依存関係のキャッシュ
+
+ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを活用できる場合があります。 よく用いられているのが、パッケージ/依存関係マネージャーです。 たとえば、プロジェクトで Yarn、Bundler、Pip を利用すると、ジョブ中にダウンロードする依存関係は、ビルドごとに再ダウンロードされるのではなく、後で使用するためにキャッシュされます。
+
+* Read more on the xref:caching#[Caching Dependencies] page.
+
+[#workflows]
+=== ワークフロー機能
+
+ワークフローは、一連のジョブとその実行順序を定義する機能です。 設定の任意の時点で 2 つのジョブを互いに独立して実行しても問題のないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、CI/CD を強化するための機能もいくつか用意されています。 Read more about workflows on the xref:workflows#[Workflow] page.
+
+* You can view examples of workflows in the link:https://github.com/CircleCI-Public/circleci-demo-workflows/[CircleCI demo workflows repo].
+
+[#parallelism]
+=== 並列実行
+
+If your project has a large test suite, you can configure your build to use xref:configuration-reference#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+
+* Read more about splitting tests on the xref:parallelism-faster-jobs#[Parallelism] page.
+
+[#resource-class]
+=== リソースクラス
+
+Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI cloud see the xref:configuration-reference#resourceclass[configuration reference]. CircleCI Server 用の同リストについては、システム管理者にお問合せください。
+
+Examples of how to set a resource class:
+
+[.tab.resource-class.Docker]
+--
+[source,yaml]
+----
+jobs:
+  my-build:
+    docker:
+      - image: cimg/base:current
+    resource_class: xlarge
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.Linux_VM]
+--
+[source,yaml]
+----
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:current
+    resource_class: large
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.macOS]
+--
+[source,yaml]
+----
+jobs:
+  build:
+    macos:
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.Windows]
+--
+[source,yaml]
+----
+jobs:
+  build: # name of your job
+    machine:
+      image: 'windows-server-2022-gui:current'
+    resource_class: windows.medium
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.Arm]
+--
+[source,yaml]
+----
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.GPU]
+--
+[source,yaml]
+----
+jobs:
+  build:
+    machine:
+      image: ubuntu-2004-cuda-11.4:202110-01
+    resource_class: gpu.nvidia.small
+    steps:
+    #  ...  other config
+----
+
+NOTE: Open a link:https://support.circleci.com/hc/en-us/requests/new[Support ticket] if you would like access to the GPU execution environment.
+--
+
+* Read more about resource classes on the link:/docs/resource-class-overview/[resource class overview] page.
+
+[#configuraiton]
+== Optimize your configuration files
+
+[#dynamic-configuration]
+=== ダイナミックコンフィグ
+
+Use dynamic configuration to generate CircleCI config files dynamically, depending on specific pipeline values or file paths. Dynamic config allows you to:
+
+* 条件付きでワークフローやコマンドを実行する。
+* パイプライン パラメーターの値を渡す/ 別の設定ファイルを生成する。
+* デフォルトの親 .circleci/ ディレクトリの外部に存在する別の config.yml をトリガーする。
+
+Read more about dynamic configuration on the link:/docs/dynamic-config/[Dynamic configuration] overview page.
+
+[#orbs]
+=== Orb
+
+Orb は、パラメーター化が可能な設定要素をまとめた再利用可能なパッケージであり、あらゆるプロジェクトで使用できます。 Orb を使用すると以下が可能です。
+
+* Simplify configuration (`.circleci/_config.yml`)
+* 繰り返しのプロセスの自動化
+* プロジェクトの設定の迅速化
+* サードパーティー製ツールとの連携の簡素化
+
+Read more about orbs on the link:/docs/orb-intro/[Orbs overview] page.
+
+[#see-also]
+== 関連項目
+
+* link:{{site.baseurl}}/persist-data[Persisting Data]
+* For a complete list of customizations, view the link:{{site.baseurl}}/configuration-reference/[Configuration Reference] page.
+* For information about how Yarn can potentially speed up builds and reduce errors, view the link:{{site.baseurl}}/caching/#basic-example-of-package-manager-caching[Caching Dependencies] page.
+* Coinbase published an article titled https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%].
