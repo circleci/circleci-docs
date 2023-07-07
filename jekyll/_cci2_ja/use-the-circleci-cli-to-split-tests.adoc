@@ -11,16 +11,15 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI では、並列実行するコンピューティング環境に対してテストを自動的に割り当てることができます。 CircleCI の設定ファイルで、`parallelism` キーを `1` より大きい値に設定すると、ジョブの実行環境について、同一の環境が複数スピンアップされます。
 
-テスト分割機能を使用するには、parallelism キーに加えて、CircleCI CLI も必要です。 CLI の `circleci tests glob` コマンドと `circleci tests split` コマンドを使用して、テストスイートの定義と、複数の環境に対するテストの割り当てを行います。 実行時には CLI がジョブに自動で挿入されるので、これらの `circleci tests` コマンドは、特別な設定をすることなく利用できます。
+CircleCI では、並列実行するコンピューティング環境に対してテストを自動的に割り当てることができます。 CircleCI の設定ファイルで、`parallelism` キーを `1` より大きい値に設定すると、ジョブの実行環境について、同一の環境が複数スピンアップされます。 実行時には CLI がジョブに自動で挿入されるので、これらの `circleci tests` コマンドは、特別な設定をすることなく利用できます。
 
 WARNING: `circleci tests` コマンドは、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 
-NOTE: xref:runner-overview.adoc[セルフホストランナー]では、CLI でテストを分割する代わりに、`circleci-agent` を直接呼び出すことができます。 これは、xref:runner-overview#circleci-self-hosted-runner-operation[タスクエージェント]が既に `$PATH` 上に存在しているので、テストの分割にかかわる追加の依存関係が不要であるからです。
+NOTE: `circleci tests` コマンドは、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。 これは、xref:runner-overview#circleci-self-hosted-runner-operation[タスクエージェント]が既に `$PATH` 上に存在しているので、テストの分割にかかわる追加の依存関係が不要であるからです。
 
 [#glob-test-files]
 == 1.  テストファイルのグロブ
@@ -57,9 +56,9 @@ jobs:
 ```
 
 [#split-tests]
-== 2. テストの分割
+== 1.  テストファイルのグロブ
 
-テストを分割するには、`circleci tests split` コマンドにテストのリストを渡します。
+`circleci tests glob` を使用して、テストスイートを定義します。
 
 次のテスト分割用のオプションを使用できます。
 
@@ -170,9 +169,9 @@ circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 ```
 
 [#running-split-tests]
-== 3. 分割テストの実行
+== 2. テストの分割
 
-テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテストランナーに渡します。
+テストを分割するには、`circleci tests split` コマンドにテストのリストを渡します。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテストランナーに渡します。
 
 ```shell
 circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
@@ -182,7 +181,7 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 ファイル `/tmp/tests-to-run` の内容は、`$CIRCLE_NODE_INDEX` と `$CIRCLE_NODE_TOTAL` に応じて、コンテナごとに異なります。
 
 [#see-also]
-== 関連項目
+== 3.
 
 * xref:parallelism-faster-jobs#[テスト分割と並列実行]
 * xref:test-splitting-tutorial#[テスト分割のチュートリアル]
