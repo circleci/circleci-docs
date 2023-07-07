@@ -10,12 +10,10 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#introduction]
-== はじめに
+== Slack Orb の概要
 
 CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。
 
@@ -96,9 +94,9 @@ CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラ
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。 オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
 
 [#services]
-== サービス
+== はじめに
 
-CircleCI Server v4.x は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
+CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -329,9 +327,9 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 |===
 
 [#platforms]
-== プラットフォーム
+== サービス
 
-CircleCI Server は、Kubernetes クラスタ内でのデプロイを想定しています。 仮想マシンサービス（VMサービス）により、独自の EKS や GKE を活用して VM イメージを動的に作成することができます。
+CircleCI Server v4.x は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
 
 EKS または GKE 以外でインストールする場合は、一部のマシンビルドと同じ機能を利用するために追加作業が必要です。 CircleCI ランナーを設定することで、VM サービスと同じ機能を、より幅広い OS およびマシンタイプ (MacOS など) で利用できるようになります。
 
@@ -345,11 +343,11 @@ CircleCI では、インストールするプラットフォームを幅広く�
 |備考
 
 |EKS
-|テスト済み
+|Tested
 |
 
 |GKE
-|テスト済み
+|Tested
 |
 
 |Azure
@@ -372,7 +370,7 @@ CircleCI では、インストールするプラットフォームを幅広く�
 ifndef::pdf[]
 
 [#next-steps]
-== 次のステップ
+== プラットフォーム
 
 * link:/docs/ja/server/overview/release-notes[CircleCI Server v4.x のリリースノート]
 * link:/docs/ja/server/installation/phase-1-prerequisites[Server 4.x のインストールの前提条件]
