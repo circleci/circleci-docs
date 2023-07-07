@@ -14,7 +14,7 @@ contentTags:
 
 ここでは、CircleCI Server 上で CircleCI *マシンランナー*を更新する方法を説明します。
 
-toc::[]
+
 
 [#self-hosted-runner-for-server-compatibility]
 == マシンランナーのサーバーとの互換性
