@@ -6,81 +6,79 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI convenience images support policy
+= CircleCI イメージのサポートポリシー
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Convenience Images release, update, and deprecation policy
+:page-description: CircleCI イメージのリリース、更新、サポート終了に関するポリシーについて説明します
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#overview]
 == インサイト スナップショットバッジの概要
 
-This document outlines the xref:circleci-images#[CircleCI Docker convenience images] release, update, and deprecation policy.
+ここでは、xref:circleci-images#[CircleCI の Docker イメージ]のリリース、更新、サポート終了に関する CircleCI のポリシーについて説明します。
 
-This policy applies to all CircleCI convenience images we publish to the `cimg` namespace on Docker Hub.
+このポリシーの対象は、Docker Hub の `cimg` 名前空間に CircleCI が公開しているすべての CircleCI イメージです。
 
 [#base-images]
-== Base images
+== インサイト スナップショットバッジの概要
 
-Our Docker convenience images are all built upon our base image, `cimg/base`. This image is in turn built upon the official Ubuntu docker image.
+CircleCI の Docker イメージはすべて、ベースイメージである `cimg/base` に基づいています。 このベースイメージは、Ubuntu 公式の Docker イメージに基づいています。
 
-We aim to build variants of this image for all LTS versions of Ubuntu that are being maintained in “Standard Support” status. We will stop building variants of `cimg/base` with Ubuntu LTS versions that drop out of support.
+CircleCI では、Ubuntu の全 LTS バージョンのうち "Standard Support (標準サポート)" 状態であるものについて、ベースイメージからバリアントを開発しています。 標準サポートが終了した Ubuntu の LTS バージョンについては、`cimg/base` バリアントの開発を中止します。
 
-When a new Ubuntu LTS version is released, the child CircleCI convenience images will have the underlying base image switched to this version around 6 months after the first release of the `cimg/base` variant.
+Ubuntu の新しい LTS バージョンがリリースされた場合、`cimg/base` バリアントの初回リリースから約 6 か月後に、派生版の CircleCI イメージの基本ベースイメージをそのバージョンに変更します。
 
-By building all of our convenience images on top of a common image, we increase the chance of the underlying base layers being cached by the execution environment, therefore increasing the spin up speed for the job.
+1 つの共通イメージからすべての CircleCI イメージを開発することで、実行環境で基本ベースレイヤーがキャッシュされる可能性を高め、ジョブのスピンアップを高速化しています。
 
-We build a new base image each month. However, we only update the base image used in child convenience images once per quarter. These updates are not retroactively applied to existing images, but will apply to new releases of the image after the change has been made.
+CircleCI では、新しいベースイメージを 1 か月ごとに 1 つビルドしています。 ただし、派生版の CircleCI イメージで使用されているベースイメージの更新頻度は、四半期に 1 回です。 これらの更新は、更新後に新しくリリースされたイメージにのみ適用され、更新前から存在するイメージは対象外となります。
 
-We encourage users who are building their own images for use on CircleCI to use our `cimg/base` image as a starting point.
+CircleCI 用に独自のイメージをビルドする場合は、`cimg/base` をベースにすることをお勧めします。
 
 [#release-policy]
-== Release policy
+== リリースポリシー
 
-We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. Please note that this is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new convenience images.
+CircleCI では各言語の新リリースを追跡しており、新リリースに対応する新しい CircleCI イメージを 48 時間以内に提供することを目指しています。 ただし、これはサービスレベルアグリーメント (SLA) ではありません。 新しい CircleCI イメージの SLA として所要時間を公式に定めることはいたしません。
 
-For our deployment focused images, we provide a new image once per month.
+デプロイ用イメージについては、1 か月に 1 つ提供します。
 
-We do not provide new image releases for alpha, beta, preview or release candidates of languages.
+各言語のアルファ版、ベータ版、プレビュー版、リリース候補版について、対応する新しいイメージを提供することはありません。
 
 [#tagging]
-== Tagging
+== タグ
 
-Each image is tagged with the specific `major.minor.patch` version of the language it contains. We also provide `major.minor` tags, which always point to the latest patch release of the image.
+各イメージには、対象の言語のバージョンを示す `major.minor.patch` タグが付けられます。 また、`major.minor` というタグもあり、こちらは常に各イメージの最新パッチリリースを示します。
 
-In special cases, we also provide additional tags, such as `lts` or `current`, which track releases as per the tagging scheme of the parent project.
+特別な場合には、親プロジェクトのタグ付けスキームに従いリリースを管理する追加のタグ (`lts` や `current` など) も使用されます。
 
-We do not provide a `latest`, or `current`, tag for any convenience images, other than special cases as mentioned above. This is by design, and is not something we have plans to implement in the future. We do this to ensure that jobs based on our images are more deterministic in nature, with minimal changes due to us pushing new tags that switch `current` to a new major version, for example. This helps lower the risk of breaking changes occurring when customers have not explicitly updated their configurations.
+上記の特別な場合を除き、CircleCI イメージに `latest` タグおよび `current` タグが付けられることはありません。 この措置は意図的なものであり、将来的にこれらのタグを導入する予定はありません。 このようにする目的は、タグの更新による変化 (`current` タグから新しいメジャーバージョンのタグへの切り替えなど) を最小限に抑え、CircleCI イメージを利用するジョブの決定論的性質を高めることです。 これにより、お客様がコンフィグファイルを明示的に更新していないのに破壊的変更が生じてしまう可能性を低減しています。
 
 [#critical-cve-patches]
-== Critical CVE patches
+== 重大な CVE に関するパッチ
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact that this has on our images being used within CircleCI execution environments.
+CircleCI イメージで使用されているバージョンのオペレーティングシステムまたはソフトウェアスタックに影響する重大な CVE が開示された場合、CircleCI は、CircleCI の実行環境内で使用される CircleCI イメージに対するその CVE の影響を調査します。
 
-In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures on our link:https://discuss.circleci.com/[Discuss Forum].
+実行環境内のコンテナは一時的かつ隔離されたものであるため、ほとんどの場合、これらのイメージへのパッチ適用が必要になることはありません。 CVE の開示に対する CircleCI の対応については、常時 link:https://discuss.circleci.com/[CircleCI Discuss フォーラム]でお知らせします。
 
 [#bug-reports-issues-and-prs]
-== Bug reports, issues, and PRs
+== バグの報告、イシュー、プルリクエスト (PR)
 
-We welcome bug reports and PRs from our community via GitHub for each image. The GitHub repository for each image can be found by visiting the link:https://circleci.com/developer/images[Developer Hub].
+GitHub にて、各イメージに関するみなさまからのバグ報告とプルリクエスト (PR) を受け付けています。 イメージごとの GitHub リポジトリについては、link:https://circleci.com/developer/ja/images[Developer Hub] をご覧ください。
 
-As a general rule, minor, non-blocking bugs will be fixed in the next release of the image. For major/blocking changes, we will patch the existing live image, depending on how old the image is.
+通常、動作に支障のない軽微なバグについては、イメージの次回リリース時に修正します。 重大であるか動作に支障を来すバグについては、イメージの提供開始時期に応じて、現行版のイメージにパッチを適用します。
 
-For issues and PRs that are requesting new features in the image, we ask that justification and scope is provided. Keeping the images small in size and simple to build, whilst providing the most functionality is our main aim.
+イシューや PR でイメージへの新機能追加の要望をいただいた場合は、その理由と対象範囲をお伺いします。 CircleCI では、最大限の機能を提供すると同時に、イメージをビルドしやすいサイズに抑えることを第一目標としています。
 
-While we make every effort to respond to issues and PRs in a timely manner, we do not provide an official SLA for this.
+お寄せいただいたイシューおよび PR に速やかに対応できるようあらゆる努力を講じていますが、公式の SLA は定めておりません。
 
 [#image-lifespan-eol]
-== Image lifespan / EOL
+== イメージの有効期間およびサポート終了 (EOL)
 
-We generally do not remove images from Docker Hub once published, however we encourage customers to follow the projects for the languages they use and update the images in their jobs once the project declares a version as EOL (end-of-life).
+通常、Docker Hub に公開された CircleCI イメージが削除されることはありません。ただし、使用する言語のプロジェクトの最新状況をチェックし、プロジェクトでサポート終了 (EOL) が宣言されたバージョンについてはジョブ内のイメージを更新するようにお勧めします。
 
-For versions that are EOL, we do not issue bug fixes or patches.
+バージョンが EOL となった場合、バグ修正およびパッチの提供は行われなくなります。
 
 [#exceptions]
 == 例外
 
-​​At any time, we reserve the right to work outside of the information in this document if the circumstances require. 本ポリシーの例外を適用する必要がある場合、可能な限り十分な告知を行い、透明性を維持するよう努めます。 In these cases, an announcement will be posted on our Discuss Forum, along with additional outreach, such as an email notice, where possible.
+CircleCI は、どのような場合でも、状況に応じて本記事の説明内容とは異なる措置を講じる権利を保有しています。 本ポリシーの例外を適用する必要がある場合、可能な限り十分な告知を行い、透明性を維持するよう努めます。 こうした場合、CircleCI Discuss フォーラムに告知を掲載するとともに、可能であればメールなどでの通知も行います。
