@@ -11,9 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: CI/CD 用に CircleCI を導入するメリット
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#benefits-of-circleci]
 == CircleCI のメリット
@@ -38,15 +36,15 @@ CircleCI の開発者向け機能の一例を以下に示します。
 CircleCI Server について詳しくは、xref:server/overview/circleci-server-v4-overview#[CircleCI Server の概要]を参照してください。
 
 [#pricing-options]
-== 料金オプション
+== CircleCI のメリット
 
-CircleCI の無料オプションと有料オプションについては、link:https://circleci.com/ja/pricing[料金プランのページ]をご覧ください。
+CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。
 
-CircleCI でホストされるクラウド版プラットフォームは、無料でlink:https://circleci.com/ja/signup[サインアップ]して利用でき、プロジェクト数の制限もありません。
+CircleCI の開発者向け機能の一例を以下に示します。
 
 Free プランをご利用のお客様には、オープンソースプロジェクトに使用できる無料のクレジットが付与されます。 パブリックのオープンソースプロジェクトでは、無料のコンテナも利用できます。詳しくは、「xref:oss#[オープンソースプロジェクトのビルド]」を参照してください。
 
 [#next-steps]
-== 次のステップ
+== 料金オプション
 
 - xref:first-steps#[CircleCI のユーザー登録]
