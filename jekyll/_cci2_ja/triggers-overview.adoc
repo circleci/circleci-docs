@@ -13,8 +13,7 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 パイプラインは、アクションに応答してトリガーされるか、特定の時間と頻度で実行するようにスケジュール実行されます。 ここでは、パイプラインをトリガーする方法について説明します。
 
@@ -27,7 +26,7 @@ document-type:
 image::pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
 
 [#run-a-pipeline-from-the-circleci-web-app]
-== CircleCI Web アプリからパイプラインをトリガーする
+== コードリポジトリへのプッシュ時にパイプラインをトリガーする
 
 NOTE: 現在この機能は GitLab アカウントではご利用いただけません。
 
@@ -42,7 +41,7 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 . 再度 **Trigger Pipeline** (または **Cancel**) をクリックすると新しいパイプラインが開始されます。
 
 [#run-a-pipeline-using-the-api]
-== API を使ってパイプラインをトリガーする
+== CircleCI Web アプリからパイプラインをトリガーする
 
 https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[新しいパイプラインをトリガーする] ためのエンドポイントを使って、特定のプロジェクト用のパイプラインをトリガーすることができます。
 
@@ -61,11 +60,11 @@ curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username
 TIP: API を使用してパイプラインをトリガーした場合は、パイプラインのパラメーターを指定することもできます。 詳細は、 https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 のドキュメント] を参照してください。
 
 [#schedule-a-pipeline]
-== パイプラインのスケジュール実行
+== API を使ってパイプラインをトリガーする
 
-パイプラインのスケジュール実行により、スケージュールに沿って定期的にパイプラインをトリガーすることができます。 これをプロジェクトで設定するには、CircleCI Web アプリを使用するか https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2] を使用します。 両方の方法の詳細は、 <<scheduled-pipelines#,パイプラインのスケジュール実行>> のドキュメントを参照してください。
+https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[新しいパイプラインをトリガーする] ためのエンドポイントを使って、特定のプロジェクト用のパイプラインをトリガーすることができます。 これをプロジェクトで設定するには、CircleCI Web アプリを使用するか https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2] を使用します。 両方の方法の詳細は、 <<scheduled-pipelines#,パイプラインのスケジュール実行>> のドキュメントを参照してください。
 
 [#next-steps]
-== 次のステップ
+== パイプラインのスケジュール実行
 
-<<workflows#,ワークフローを使ったジョブのオーケストレーション>> のページで、パイプラインに含まれる作業要素のオーケストレーションについてお読みください。
+パイプラインのスケジュール実行により、スケージュールに沿って定期的にパイプラインをトリガーすることができます。
