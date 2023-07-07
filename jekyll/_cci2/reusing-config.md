@@ -213,7 +213,6 @@ commands:
 
 #### Executor
 {: #executor }
-{:.no_toc}
 
 Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
