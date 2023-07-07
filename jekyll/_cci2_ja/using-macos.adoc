@@ -9,13 +9,11 @@ contentTags:
 :page-description: このページでは、macOS 実行環境で実行するジョブの設定方法についてわかりやすく解説しています。
 :page-liquid:
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境でxref:jobs-steps#[ジョブ]を実行できます。 macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
+macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
 [source,yaml]
 ----
@@ -43,10 +41,10 @@ jobs:
 
 {% include snippets/ja/xcode-silicon-vm.adoc %}
 
-専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト](/docs/ja/dedicated-hosts-macos) 内の表を参照してください
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、xref:dedicated-hosts-macos#[専有ホスト]内の表を参照してください
 
 [#available-resource-classes]
-== 利用可能なリソースクラス
+== サポートされている Xcode のバージョン
 
 {% include snippets/ja/macos-resource-table.adoc %}
 
@@ -60,9 +58,9 @@ jobs:
 ----
 
 [#using-the-macos-executor]
-== macOS Executor のイメージ更新サイクル
+== 利用可能なリソースクラス
 
-各 `macos` ジョブは、特定のバージョンの macOS を実行する新しい仮想マシン上で実行されます。 CircleCI では、Apple から新しい安定版 (またはベータ版) バージョンの Xcode がリリースされるたびに、新しいイメージをビルドしてデプロイします。 ほとんどの場合、ビルドイメージの内容は変更されません。 しかし、例外的に、CircleCI でコンテナの再ビルドが必要になる場合があります。 CircleCI では、安定した実行環境を維持し、`.circleci/config.yml` ファイルに `xcode` キーを設定し、お客様が最新の macOS 環境にオプトインできる状態にすることを目標としています。
+{% include snippets/ja/macos-resource-table.adoc %} CircleCI では、Apple から新しい安定版 (またはベータ版) バージョンの Xcode がリリースされるたびに、新しいイメージをビルドしてデプロイします。 ほとんどの場合、ビルドイメージの内容は変更されません。 しかし、例外的に、CircleCI でコンテナの再ビルドが必要になる場合があります。 CircleCI では、安定した実行環境を維持し、`.circleci/config.yml` ファイルに `xcode` キーを設定し、お客様が最新の macOS 環境にオプトインできる状態にすることを目標としています。
 
 弊社では、実行環境を可能な限り最新の状態に保つために、各イメージに含まれる macOS のバージョンを定期的に更新しています。 macOS の新しいメジャーバージョンがリリースされると、Xcode の新しいメジャーバージョンが `xx.2` リリースに達した時点で更新を行います。 これにより、実行環境の安定性が保たれます。
 
@@ -87,7 +85,7 @@ Apple Silicon (シリコン）アプリケーションのネイティブな実�
 Apple は、今回のリリースで Intel (`x86_64`) と Apple シリコン (`arm64`) の両方のツールチェーンを提供しているため、Xcode `12.0.0` 以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコンバイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
 [#xcode-cross-compilation]
-== Xcode のクロスコンパイル
+== macOS Executor のイメージ更新サイクル
 
 [#universal-binaries]
 === ユニバーサルバイナリ
@@ -127,12 +125,12 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ONLY_ACTIVE_ARCH=NO ...` となるようにします。 `x86_64` アーキテクチャの場合、`ARCHS` を `x86_64` に変更します。
 
 [#optimization-and-best-practices]
-== 最適化とベストプラクティス
+== Xcode のクロスコンパイル
 
 [#pre-start-the-simulator]
-=== シミュレーターの事前起動
+=== ユニバーサルバイナリ
 
-アプリケーションをビルドする前に iOS シミュレーターをあらかじめ起動して、シミュレーターの稼働が遅れないようにします。 こうすることで、ビルド中にシミュレーターのタイムアウトが発生する回数を全般的に減らすことができます。
+Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 この機能は Xcode `12.2 以降` でのみサポートされていますが、古い Xcode バージョンを使用して、それぞれの `x86_64` と `ARM64` 実行可能ファイルをコンパイルすることもできます。
 
 シミュレーターを事前に起動するには、macOS Orb (バージョン `2.0.0` 以降) を設定ファイルに追加します。
 
@@ -170,9 +168,9 @@ steps:
 NOTE: シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 この間、`xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。
 
 [#collecting-ios-simulator-crash-reports]
-=== iOS シミュレーターのクラッシュレポートの収集
+=== 不要なアーキテクチャの抽出
 
-テストランナーのタイムアウトなどの理由で `scan` ステップが失敗する場合、多くの場合テストの実行中にアプリケーションがクラッシュした可能性があります。 このような場合、クラッシュレポートを収集することでクラッシュの正確な原因を診断することができます。 クラッシュレポートをアーティファクトとしてアップロードする方法は以下の通りです。
+デフォルトで、Xcode `12.2 以降` ではユニバーサルバイナリが作成され、`x86_64` および `ARM64` ベースの両方の CPU をサポートする単一の実行可能ファイルにコンパイルされます。 一連の説明を削除する必要がある場合は、`lipo` ユーティリティを使って削除できます。 クラッシュレポートをアーティファクトとしてアップロードする方法は以下の通りです。
 
 [source,yaml]
 ----
@@ -183,9 +181,9 @@ steps:
 ----
 
 [#optimizing-fastlane]
-=== Fastlane の最適化
+=== バイナリのクロスコンパイル
 
-デフォルトでは、fastlane scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、link:https://docs.fastlane.tools/actions/run_tests/#parameters[fastlane のドキュメント]で説明されているように、パラメーター  `output_type` を変更して、これらの形式を無効化することを検討してください。
+ユニバーサルバイナリは、Xcode `12.2 以降` でのみサポートされていますが、バイナリのビルドに使用されるマシンのアーキテクチャ以外のアーキテクチャ用にバイナリをクロスコンパイルすることが可能です。 `xcodebuild` の場合、プロセスは比較的簡単です。
 
 [#optimizing-cocoapods]
 === CocoaPods の最適化
@@ -241,14 +239,14 @@ jobs:
 ----
 
 [#supported-build-and-test-tools]
-== サポートされているビルドおよびテストのツール
+== 最適化とベストプラクティス
 
 CircleCI では、macOS Executor を使って iOS のビルドやテストに関するほぼすべての戦略に合わせてビルドをカスタマイズできます。
 
 [#common-test-tools]
-=== 一般的なテストツール
+=== iOS シミュレーターのクラッシュレポートの収集
 
-以下のテストツールは、CircleCI で有効に機能することが確認されています。
+テストランナーのタイムアウトなどの理由で `scan` ステップが失敗する場合、多くの場合テストの実行中にアプリケーションがクラッシュした可能性があります。
 
 * link:https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/01-introduction.html[XCTest]
 * link:https://github.com/kiwi-bdd/Kiwi[Kiwi]
@@ -256,14 +254,14 @@ CircleCI では、macOS Executor を使って iOS のビルドやテストに関
 * link:http://appium.io/[Appium]
 
 [#react-native-projects]
-=== React Native プロジェクト
+=== Fastlane の最適化
 
-React Native プロジェクトは、CircleCI 上で `macos` および `docker` Executor タイプを使用してビルドできます。 React Native プロジェクトの設定例は、link:https://github.com/CircleCI-Public/circleci-demo-react-native[React Native のデモアプリケーション]を参照してください。
+デフォルトでは、fastlane scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、link:https://docs.fastlane.tools/actions/run_tests/#parameters[fastlane のドキュメント]で説明されているように、パラメーター  `output_type` を変更して、これらの形式を無効化することを検討してください。
 
 [#using-multiple-executor-types-macos-docker]
-== 複数の Executor タイプ (macOS + Docker) の使用
+== サポートされているビルドおよびテストのツール
 
-同じワークフロー内で、複数の xref:executor-intro#[Executor タイプ]を使用することができます。 下記の例では、iOS プロジェクトの各プッシュは macOS でビルドされ、デプロイイメージは Docker で実行されます。
+CircleCI では、macOS Executor を使って iOS のビルドやテストに関するほぼすべての戦略に合わせてビルドをカスタマイズできます。 下記の例では、iOS プロジェクトの各プッシュは macOS でビルドされ、デプロイイメージは Docker で実行されます。
 
 [source,yaml]
 ----
@@ -311,6 +309,6 @@ workflows:
 ----
 
 [#next-steps]
-== 次のステップ
+== 複数の Executor タイプ (macOS + Docker) の使用
 
-xref:hello-world-macos#[CircleCI でシンプルな macOS アプリケーションの設定]を始めましょう。
+同じワークフロー内で、複数の xref:executor-intro#[Executor タイプ]を使用することができます。
