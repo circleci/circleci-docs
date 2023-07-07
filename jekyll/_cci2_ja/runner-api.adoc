@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 このドキュメントには、CircleCI のセルフホストランナーAPIのすべての外部向けエンドポイントが含まれています。 このAPIは、メインの CircleCI v2 API とは別に、セルフホストランナージョブの管理および実行に使用されます。 これは、`runner.circleci.com`でホストされています。
 
