@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 このページでは、Linux に CircleCI のマシンランナーをインストールする方法を説明します。
 
@@ -28,7 +28,7 @@ contentTags:
 {% include snippets/runner/ja/terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. ネームスペースとリソースクラスの作成 
+== 1. ネームスペースとリソースクラスの作成
 
 [.tab.machine-runner.Web_app_installation]
 --
