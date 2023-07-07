@@ -10,9 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: エアギャップ環境に CircleCI Server をインストールする際に検討すべき事項について説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 [#non-tls-docker-registry-installations]
 == TLS を使用しない Docker レジストリの構成
@@ -52,13 +50,13 @@ configs:
 ---
 
 [#service-type-load-balancers-k3s]
-== K3s の LoadBalancer タイプの Service
+== TLS を使用しない Docker レジストリの構成
 
-CircleCI Server では、複数ポートのトラフィックをリッスンするために、Kubernetes の LoadBalancer タイプの Service リソースを使用します。  
+エアギャップ環境用の Docker レジストリを構成する場合、TLS 証明書を使用してトラフィックを暗号化することが推奨されます。 TLS なしの構成 (つまり自己署名証明書を使用する構成) にする場合は、以下の追加手順を実行する必要があります。
 
-K3s 環境を使用する場合は、K3s ノードで link:https://metallb.universe.tf/installation/[MetalLB] を利用し、CircleCI Server に対する受信トラフィックを許可する仮想ロードバランサーを作成します。
+Docker を使用して Docker レジストリにアクセスするマシンで、Docker デーモンの設定ファイル (Linux では `/etc/docker/daemon.json`) を更新してください。
 
-インストール後、以下の手順を実行する必要があります。
+このファイルが既に存在する場合は、ファイルに insecure-registries セクションを追加します。存在しない場合は、この名前のファイルを作成して以下のコードを入力します。
 
 MetalLB 用のアドレスプールを作成するために、ConfigMap リソースを作成します。
 
@@ -80,7 +78,7 @@ data:
 
 アドレスプールの名前を "default" 以外にしてもかまいませんが、`values.yaml` の annotations の値を適宜更新してください。 K3s ノードが 1 つだけの場合、アドレス範囲の始点と終点は同じ値にします (`10.0.0.5-10.0.0.5` など)。
 
-この ConfigMap リソースをクラスタに適用した後で (`kubectl apply -f metallb-configmap.yaml`)、Helm インストール用の `values.yaml` でアドレスプールの名前を更新します。
+また、各 K3s ノードについては、`/etc/rancher/k3s/registries.yaml` ファイルを以下のように構成する必要もあります。
 
 [source, yaml]
 ----
@@ -101,9 +99,9 @@ kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externa
 更新が完了したら、CircleCI Server 環境用の DNS レコード (server.internal.example.com) と IP アドレス 10.0.0.5 用の DNS レコード (*.server.internal.example.com) を作成します。
 
 [#tls-importing]
-== 信頼済みの TLS 証明書のインポート
+== K3s の LoadBalancer タイプの Service
 
-GitHub Enterprise インスタンスで自己署名証明書または独自の証明機関の証明書を使用する場合は、以下の 2 つの方法のいずれかに従って、これらの証明書を信頼するように CircleCI Server を構成します。
+CircleCI Server では、複数ポートのトラフィックをリッスンするために、Kubernetes の LoadBalancer タイプの Service リソースを使用します。
 
 NOTE: 各方法で示されている値は、GitHub Enterprise 証明書でのみサポートされます。 現時点では、他の VCS アプリケーションはサポートされません。
 
