@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Helm デプロイ版の CircleCI Server をエアギャップ環境にインストールする方法について説明します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 前提条件のインストールとオブジェクトストレージの構成が完了したら、エアギャップ環境内の Kubernetes クラスタに Helm デプロイ版の CircleCI Server をインストールできます。
 
@@ -143,9 +142,9 @@ nginx:
 ----
 
 [#install-circleci-server-helm-airgap]
-== 2.  CircleCI Server のインストール
+== 1.  values.yaml の用意
 
-`values.yaml` ファイルと Helm チャートの用意が完了したら、エアギャップ環境で Helm の install コマンドを実行して CircleCI Server をインストールします。
+通常版インストールガイドの「xref:../installation/phase-2-core-services/#create-helm-values[Helm 値を作成します]」に従って、CircleCI Server をインストールするための `values.yaml` を用意する必要があります。
 
 推奨手順は、初めに名前空間 (`circleci-server`) を作成してから、この名前空間にチャートをデプロイすることです。
 
@@ -155,11 +154,11 @@ helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --vers
 ----
 
 [#post-install-circleci-server-helm-airgap]
-== 3.  インストール後の手順
+== 2.  CircleCI Server のインストール
 
-Helm によるデプロイ後、環境によっては (MetalLB を使用する場合など)、LoadBalancer タイプの circleci-proxy Service に手動でパッチを適用する必要があります。 詳細については、「その他の検討事項」の「xref:additional-considerations/#service-type-load-balancers-k3s[K3s の LoadBalancer タイプの Service]」セクションを参照してください。
+`values.yaml` ファイルと Helm チャートの用意が完了したら、エアギャップ環境で Helm の install コマンドを実行して CircleCI Server をインストールします。 詳細については、「その他の検討事項」の「xref:additional-considerations/#service-type-load-balancers-k3s[K3s の LoadBalancer タイプの Service]」セクションを参照してください。
 
 [#next-steps]
-== 次のステップ
+== 3. 
 
-本ページの手順を完了したら、「xref:phase-4-configure-nomad-clients#[フェーズ 4 - Nomad クライアントの構成]」に進んでください。
+Helm によるデプロイ後、環境によっては (MetalLB を使用する場合など)、LoadBalancer タイプの circleci-proxy Service に手動でパッチを適用する必要があります。
