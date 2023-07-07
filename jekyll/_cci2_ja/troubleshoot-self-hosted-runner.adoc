@@ -9,12 +9,10 @@ contentTags:
 :page-liquid:
 :page-description: このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 {% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
-このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
+{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-troubleshoot-snip.adoc[]
