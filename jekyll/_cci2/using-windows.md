@@ -306,7 +306,7 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 
 ### Steps
 {: #steps }
-{:.no_toc}
+
 
 1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
