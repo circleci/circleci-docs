@@ -1,7 +1,7 @@
 ---
-version:
-- Cloud
-- Server
+contentTags:
+  platform:
+  - Cloud
 ---
 = Rename organizations and repositories
 :page-layout: classic-docs
@@ -10,7 +10,9 @@ version:
 :icons: font
 :experimental:
 
-If you need to rename an organization or repository that you have previously connected to CircleCI, best practice is to follow the steps listed below. If you do not follow this process, it is possible you may lose access to your organization or repository settings, including **environment variables** and **contexts**.
+NOTE: The content on this page is only relevant to GitHub and Bitbucket. Due to the standalone nature of GitLab accounts in CircleCI, no changes are required when orgs or repos are renamed.
+
+If you need to rename a **GitHub** or **Bitbucket** organization or repository that you have previously connected to CircleCI, best practice is to follow the steps listed below. If you do not follow this process, it is possible you may lose access to your organization or repository settings, including **environment variables** and **contexts**.
 
 [#rename-organizations-and-repositories]
 == Steps to rename organizations and repositories
