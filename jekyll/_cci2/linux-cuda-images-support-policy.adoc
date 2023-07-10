@@ -59,7 +59,7 @@ Image lifespan will generally follow Nvidia’s CUDA release cycle.
 
 Once a new major version of CUDA is released, we will begin the deprecation process of the oldest major version that we support and schedule it to be removed. This allows us to maintain two major versions of CUDA effectively.
 
-## Examples
+=== Examples
 
 A major version release -- CUDA 12.0:
 
