@@ -1,19 +1,13 @@
 ---
 layout: classic-docs
 title: "Introduction to Authoring Orbs"
-short-title: "Authoring Orbs Introduction"
 description: "Starting point for how to author an orb"
-categories: [getting-started]
-order: 1
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
 ---
-
-* TOC
-{:toc}
 
 ## Quick start
 {: #quick-start }
@@ -24,9 +18,9 @@ Before authoring an orb, it is recommended that you become familiar with the [Ci
 
 Orbs consist of three main elements:
 
-* [Commands]({{site.baseurl}}/orb-concepts/#commands)
-* [Jobs]({{site.baseurl}}/orb-concepts/#executors)
-* [Executors]({{site.baseurl}}/orb-concepts/#jobs)
+* [Commands](/docs/orb-concepts/#commands)
+* [Jobs](/docs/orb-concepts/#jobs)
+* [Executors](/docs/orb-concepts/#executors)
 
 Practice with [inline orbs]({{site.baseurl}}/reusing-config/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
 
