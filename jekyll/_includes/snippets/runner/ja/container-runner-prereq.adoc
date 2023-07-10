@@ -1,0 +1,11 @@
+//[#container-runner-prerequisites]
+
+//== Container runner prerequisites
+
+コンテナランナーをインストールしてジョブを実行するには、ルートアクセスおよび以下の設定とインストールが必要です。
+
+* link:https://kubernetes.io/[Kubernetes] 1.12+
+* link:https://helm.sh/[Helm] 3.x
+* 他のワークロードがない状態の Kubernetes 名前空間
+* checkout ステップで、SSH でチェックアウトするように Git が設定されていること。使用する場合は、 `port 22` からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
+* コマンドラインからランナーをインストールする場合は、xref:local-cli#[CircleCI CLI]を使用します。

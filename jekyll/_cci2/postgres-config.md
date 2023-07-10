@@ -86,7 +86,7 @@ registry of your choosing.
 
 ### Example environment setup
 {: #example-environment-setup }
-{:.no_toc}
+
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 

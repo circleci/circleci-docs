@@ -12,30 +12,33 @@ contentTags:
 :toc: macro
 :toc-title:
 
-[#introduction-and-motivation]
-== 概要と経緯
-
-CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで、CI ジョブとセルフホストランナーのバイナリがインストールされた <<configuration-reference#machine,マシン>> 環境 (仮想または物理的な) を 1 対 1 でマッピングして各ジョブを実行していました。 この方法でジョブを排他的に実行すると、<<using-docker#,Docker Executor>> の使用時に CircleCI のクラウドで提供されている次のようなコンテナベースソリューションのメリットが失われます。
-
-* ジョブ実行時に、カスタム Docker イメージをシームレスに使用する機能
-* 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
-
-コンテナランナーは、セルフホストランナーの一つです。 Kubernetes (k8s) クラスタにインストールするとネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
-
-コンテナランナーはマシンランナーの補完機能であり、代替機能ではありません。
-
-コンテナエージェントをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらを一時的な Pod 内でスケジュール化し、コンテナベースの実行環境で処理を実行します。
-
-.コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
-image::container-runner-model.png[Container-agent model]
-
-コンテナランナーの全サンプルコード例は、
- xref:runner-faqs#sample-configuration-container-agent[ランナーについてよく寄せられるご質問] を参照してください。
+このページでは、CircleCI コンテナランナーを用いたジョブの運用・設定に関する総合ガイドです。
 
 [#running-your-first-job]
 == コンテナランナーで最初のジョブを実行する
 
-<<runner-installation#,self-hosted runner installation>> のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
+xref:container-runner-installation#[コンテナランナーのインストール] のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
+
+[#sample-configuration-container-agent]
+== コンテナランナーのサンプル設定
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
 
 [#resource-class-configuration-custom-pod]
 == リソースクラスの設定とカスタマイズされたタスク Pod の設定
@@ -49,7 +52,7 @@ image::container-runner-model.png[Container-agent model]
 
 この Pod の設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes Pod] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスク Pod 内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
 
-以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナランナーによって上書きされるフィールドです。
+以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
 
 - `spec.containers[0].name`
 - `spec.containers[0].container.image`
@@ -303,14 +306,14 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 ** List
 ** Create
 ** Delete
-* シークレット
+* Secret
 ** Get
 ** List
 ** Create
 ** Delete
-* イベント
+* Events
 ** Watch
-* ノード
+* Node
 ** Get
 ** List
 
@@ -326,13 +329,13 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 NOTE: コンテナランナーは、クラスタ全体の権限を使って、タスク Pod が実行されている Node の OS と CPU アーキテクチャを自動検出します。 コンテナランナーにこの権限を付与したくない場合は、`agent.autodetectPlatform` を `false` に設定します。すると、その Node の OS と アーキテクチャはコンテナランナーの Pod を実行する Node と一致するものとみなされます。
 
 [#garbage-collection]
-== ガベージコレクション
+== コンテナのロギング
 
-各コンテナランナーは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いた Pod やシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスク Pod が GC によって削除されてしまう場合があります。
+コンテナエージェントは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いたポッドやシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスク Pod が GC によって削除されてしまう場合があります。
 
 コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 コンテナランナーが、起動に失敗したタスクを自動的にローンチしようとすることはありません。 これは、CircleCI Web アプリで行えます。
 
-コンテナランナーがクラッシュした場合、処理中またはキューで待機中のタスクが安全に処理されることはありません。
+現時点では、コンテナランナーがクラッシュすると、処理中またはキューで待機中のタスクが安全に処理されることは期待できません。
 
 [#logging-containers]
 == コンテナのロギング
@@ -353,7 +356,7 @@ limits:
 ```
 
 [#constraint-validation]
-== 制約の確認
+== 制約条件の検証
 
 コンテナランナーを使用すると、Kubernetes の設定がすべて行われたタスク Pod を設定できます。 つまり、Pod が制約によりスケジュールできないように設定されている場合があります。 この解決策として、コンテナランナーには、Pod をスケジュールできるようクラスタの現在の状態と各リソースクラスの設定を定期的に確認する制約チェッカーが備わっています。 これにより、コンテナランナーがスケジュールできないジョブを要求し、失敗するのを防ぐことができます。
 
@@ -383,14 +386,14 @@ agent:
 1 つ目のリソースクラスには 、SSD を持つ Node にスケジュールされるようにする Node Selector が含まれています。 運用中に何らかの理由で、クラスタにそのラベルの Node がなくなったとします。 すると制約チェッカーは `circleci-runner/resourceClass` のチェックに失敗し、再び正しいラベルの Node が見つかるまでジョブの要求を無効にします。 各リソースクラスのチェックは互いに独立しているため、`circleci-runner/resourceClass2` の要求への影響はありません。
 
 [#cost-and-availability]
-== 料金と提供プラン
+== コンテナイメージのビルド
 
-コンテナランナーのジョブは <<persist-data#managing-network-and-storage-usage,Runner Network Egress>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
+link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
+コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
 [#building-container-images]
-== コンテナイメージのビルド
+== 制限事項
 
 link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。
 
@@ -491,7 +494,7 @@ ENV BUILDAH_ISOLATION=chroot
 次に、 上記の <<#using-the-buildah-image,Buildah イメージの使用>> と同じ手順でヒューズディバイスプラグインをコンテナエージェントのデプロイに追加し、これらのジョブでカスタムイメージを使用してコンテナイメージをビルドするよう `.circleci/config.yml` ファイルを更新します。
 
 [#limitations]
-== 制限事項
+== FAQ
 
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。

@@ -13,96 +13,101 @@ contentTags:
 :page-layout: classic-docs
 :short-title: よくあるご質問
 
-This page answers frequently asked questions about the following CircleCI topics:
+このページでは、以下の CircleCI に関してよく寄せられるご質問にお答えします：
 
 [.table]
 [cols=2*]
 |===
-|<<#general,General>>
-|<<#self-hosted-runner,Self-hosted runner>>
+|<<#general,一般>>
+|<<#self-hosted-runner,セルフホストランナー>>
 
-|<<#migration,Migration>>
-|<<#pipelines,Pipelines>>
+|<<#migration,移行>>
+|<<#pipelines,パイプライン>>
 
 |<<#host-circleci,Host CircleCI>>
-|<<#scheduled-pipelines,Scheduled pipelines>>
+|<<#scheduled-pipelines,パイプラインのスケジューリング>>
 
-|<<#architecture,Architecture>>
-|<<#workflows,Workflows>>
+|<<#architecture,アーキテクチャ>>
+|<<#workflows,ワークフロー機能>>
 
-|<<#dedicated-hosts-macos,Dedicated hosts for macOS>>
-|<<#dynamic-configuration,Dynamic configuration>>
+|<<#dedicated-hosts-macos,macOS の専有ホスト>>
+|<<#dynamic-configuration,ダイナミックコンフィグ>>
 
-|<<#orbs,Orbs>>
-|<<#billing,Billing>>
+|<<#orbs,Orb>>
+|<<#billing,料金・支払い>>
 
 |<<#author-orbs,Author orbs>>
-|
+|<<#cancel-performance-plan,Performance プランのキャンセル>>
 |===
 
 [#general]
-== 概要
+== 一般
 
-include::../_includes/snippets/faq/general-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/general-faq-snip.adoc[]
 
 [#migration]
-== Nomad Metrics
+== 移行
 
-include::../_includes/snippets/faq/migration-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/migration-faq-snip.adoc[]
 
 [#host-circleci]
 == Host CircleCI
 
-include::../_includes/snippets/faq/host-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/host-faq-snip.adoc[]
 
 [#architecture]
 == アーキテクチャ
 
-include::../_includes/snippets/faq/architecture-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/architecture-faq-snip.adoc[]
 
 [#dedicated-hosts-macos]
 == macOS の専有ホスト
 
-include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/dedicated-hosts-macos-faq-snip.adoc[]
 
 [#orbs]
 == Orb
 
-include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/orb-faq-snip.adoc[]
 
 [#author-orbs]
 == Author orbs
 
-include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/orb-author-faq-snip.adoc[]
 
 [#self-hosted-runner]
 == セルフホストランナー
 
-include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/self-hosted-runner-faq-snip.adoc[]
 
 [#pipelines]
 == パイプライン
 
-include::../_includes/snippets/faq/pipelines-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/pipelines-faq-snip.adoc[]
 
 [#scheduled-pipelines]
 == パイプラインのスケジューリング
 
-include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/scheduled-pipelines-faq-snip.adoc[]
 
 [#workflows]
 == ワークフロー機能
 
-include::../_includes/snippets/faq/workflows-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/workflows-faq-snip.adoc[]
 
 [#dynamic-configuration]
 == ダイナミックコンフィグ
 
-include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/dynamic-configuration-faq-snip.adoc[]
 
 [#billing]
 == 料金・支払い
 
-Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
+CircleCI のご利用プランの詳細については、link:https://circleci.com/pricing/[料金ページ]をご覧ください。
 
-include::../_includes/snippets/faq/billing-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/billing-faq-snip.adoc[]
+
+[#cancel-performance-plan]
+== Performance プランのキャンセル
+
+include::../_includes/snippets/faq/ja/cancel-subscription-faq-snip.adoc[]

@@ -12,23 +12,17 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI では、xref:contexts#[コンテキスト]を使用するジョブの環境変数で OpenID Connect ID (OIDC) トークンを利用できます。 ジョブは、CircleCI に永続的な認証情報を保存することなく、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
+CircleCI では、コンテキストを使用するジョブの環境変数で OpenID Connect ID (OIDC) トークンを利用できます。 ジョブは、CircleCI に永続的な認証情報を保存することなく、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
 
 [#openid-connect-id-token-availability]
-== OpenID Connect ID トークンの使用方法
+== OpenID Connect の IDトークン利用可能
 
-1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `$CIRCLE_OIDC_TOKEN` および `$CIRCLE_OIDC_TOKEN_V2` で OpenID Connect ID トークンを使用することができます。 `$CIRCLE_OIDC_TOKEN_V2` トークンの `sub` クレームの形式は、以下の表に示すとおりこれまでと異なります。
+CircleCI OpenID Connect の IDトークンは、以下の環境変数で利用できます：
 
-`context` キーを `circleci/config.yml` ファイルの <<configuration-reference#workflows,workflows>> セクションに追加して、<<contexts#creating-and-using-a-context,ジョブにコンテキスト>>を追加します。
+* `$CIRCLE_OIDC_TOKEN`
+* `$CIRCLE_OIDC_TOKEN_V2`
 
-```yaml
-workflows:
-  my-workflow:
-    jobs:
-      - run-tests:
-          context:
-            - my-context
-```
+CAUTION: **フォークについてはどうですか？** OIDC トークンは、フォークされたビルドに対してのみ生成されます。これは、フォークされたプルリクエストからのビルドにシークレットを渡す設定が有効になっている場合に限ります。 このオプションは **Project settings**  > **Advanced** にあります。 詳しくはこちらを<<oidc-in-open-source-projects>>ご覧下さい。
 
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
@@ -92,7 +86,19 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 
 |`oidc.circleci.com/context-ids`
 |ジョブで使用されるコンテキストを表す UUID を要素として持つ文字列の配列です。 現在サポートされているコンテキストは一つのみです。
+
+|`oidc.circleci.com/ssh-rerun`
+|CI ジョブが SSH 再実行機能を使用して開始されるかどうかを示す booleanです。
 |===
+
+[#oidc-in-open-source-projects]
+== オープンソースプロジェクトでの OIDC
+
+OIDCトークンは、**Pull Request をフォークしたビルドにシークレットを渡す**設定が有効な場合にのみ、フォークされたビルドに対して生成されます。 このオプションは **Project settings**  > **Advanced** にあります。
+
+もしOIDCトークンがフォーク用に生成されることを許可するのであれば、フォークされたビルドが必要とするリソース以外のリソースにアクセスすることを避けるために、ポリシーで `oidc.circleci.com/vcs-origin` クレームをチェックしなければなりません。
+
+CircleCIでのオープンソースプロジェクトのビルドについての詳細は、xref:oss#[オープンソースプロジェクトのビルド] ページを参照してください。
 
 [#authenticate-jobs-with-cloud-providers]
 == クラウドプロバイダーを使ったジョブの認証
@@ -106,41 +112,73 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 * CircleCI の OIDC トークンを信頼するよう AWS アカウントのワンタイム設定を行う方法
 * AWS との連携に OIDC トークンを使用するジョブを実行する方法
 
-[#setting-up-aws]
-==== AWS の設定
+また、この設定編に続く、xref:pull-an-image-from-aws-ecr-with-oidc# [AWS ECRからOIDCでイメージを取り込む] ノウハウもご覧ください。
 
-AWS アカウントが CircleCI の OpenID Connect トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダーと AWS の IAM ロール (ワンタイム設定) を作成します。
+[#set-up-aws]
+==== CircleCI コンフィグファイルへの AWS の追加
 
-AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」を参照し、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、https://app.circleci.com/[CircleCI Web アプリ]で **[Organization Settings (組織設定)] > [Overview (概要)]** に移動します。 次のステップで使用するために組織 ID をコピーします。
+AWS アカウントが CircleCI の OpenID Connect トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダーと AWS の IAM ロールを作成します。 IDプロバイダーの作成は、1回で設定が完了し、その後、関連するロールの管理方法を決定することができます。 ユースケースに合わせて、ポリシーを使ってロールの権限を更新したり、それぞれの用途に特化したロールを作成したりすることが可能です。
 
-**Provider URL** を求められたら、`\https://oidc.circleci.com/org/<organization_id>` と入力します。`organization_id` には、CircleCI の組織 ID を入力します。 **[Audience]** にも同じ CircleCI 組織 ID を入力します。
-
-次に、IAM ロールを作成します。 AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OIDC 用のロールの作成]」を開きます。
-
-信頼済みエンティティには **[Web Identity]** を選択し、先ほど作成した ID プロバイダーを選択します。 **[Audience]** には、唯一のオプションを選択します。 次に **[NEXT]** をクリックします。**[Add Permissions]** ページに移動します。 ここでは、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス]に従い、ジョブに必要なアクセス許可だけを選択するようにしてください。
-
-**注:** 独自のポリシーを作成すると便利な場合があります。
+. AWS ドキュメントの「link:https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[OpenID Connect (OIDC) ID プロバイダーの作成]」を参照し、指示に従います。 このページでは、管理コンソール（CLI）を使用した設定など、複数のオプションを紹介しています。　 また、以下のものが必要になります：
+** **Provider URL** を求められたら、`\https://oidc.circleci.com/org/<your-organization-id>` と入力します。`organization_id` には、CircleCI の組織 ID を入力します。
+** **Audience**： 組織 ID を入力してください
++
+{% include snippets/ja/find-organization-id.adoc %}
+. IDプロバイダを作成すると、ADWコンソールの上部にバナーが表示され、**Assign role** というオプションが表示されます。 このボタンをクリックして新しいロールを作成するか、AWSドキュメントの https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OpenID Connect フェデレーション用のロールの作成]セクションを参照して、 また、以下のものが必要になります：
+** 先ほど作成した **Identity Provider**。
+** **Audience** は、先ほど入力した「組織 ID」のみを選択します。
+** **Add Permissions** ページでは、CircleCIジョブができること、できないことを指定できます。 これは https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス]です。 また、 特定のユースケースに必要なものにパーミッションをロックダウンするために独自のポリシーを書くことができます。
 
 [#adding-aws-to-the-circleci-configuration-file]
 ==== CircleCI コンフィグファイルへの AWS の追加
 
-IAM ロールのセットアップが完了したので、OIDC により AWS との認証を行う CircleCI ジョブを作成しましょう。 具体的には、CircleCI の link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI Orb] を使用して、一時キーの生成および OIDC を利用するプロファイルの設定を行います。 Orb とは、繰り返し利用する構成内容を 1 行のコードにまとめて再利用可能にした、YAML コンフィグファイルのパッケージです。 今回使用する AWS CLI Orb では、コンフィグファイルに 1 コマンドを記述するだけで、一時セッショントークン、AWS アクセスキー ID、AWS シークレットアクセスキーを生成できます。
+IAM ロールのセットアップが完了したので、OIDC により AWS との認証を行う CircleCI ジョブを作成しましょう。 具体的には、CircleCI の link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-cli[AWS CLI Orb] を使用して、一時キーの生成および OIDC を利用するプロファイルの設定を行います。
 
-まず、ワークフローの CircleCI ジョブのうち、OIDC を使用するものを選択します。 OIDC を使用するジョブには、有効なコンテキストを用意してください。 OpenID Connect トークンを使用できるのは、少なくとも 1 つのコンテキストを使用するジョブだけだからです。 この場合のコンテキストは、環境変数を設定しなくてもかまいません。
+TIP: Orb とは、繰り返し利用する構成内容を 1 行のコードにまとめて再利用可能にした、YAML コンフィグファイルのパッケージです。 今回使用する AWS CLI Orb では、コンフィグファイルに 1 コマンドを記述するだけで、一時セッショントークン、AWS アクセスキー ID、AWS シークレットアクセスキーを生成できます。
 
-`.circleci/config` で、`aws-cli` Orb をインポートします。 次に、ジョブ内でいずれかの AWS サービスを利用する前に `aws-cli/setup` コマンドを実行します。 `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role-arn` と `aws-region` を指定する必要があります。
+. `.circleci/config` で、`aws-cli` Orb をインポートします。
++
+[source,yaml]
+----
+version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@3.1.5
+----
+. AWSサービスと対話する前に、`aws-cli/setup` コマンドを実行するようにジョブを構成します。 `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role-arn` と `aws-region` を指定する必要があります。
++
+[source,yaml]
+----
+jobs:
+  aws-example:
+   environment:
+      AWS_REGION: us-west-1
+    docker:
+      - image: cimg/aws:2022.06
+    steps:
+      - checkout
+      # run the aws-cli/setup command from the orb
+      - aws-cli/setup:
+          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
+          aws-region: AWS_REGION
+          # optional parameters
+          profile-name: "OIDC-PROFILE"
+          role-session-name: "example-session"
+          session-duration: "1800"
+----
++
 また、任意で、`profile-name`、`role-session-name`、`session-duration` を指定します。 `profile-name` を指定すると、指定したプロファイルに応じて一時キーとトークンが設定されます。 指定する `profile-name` は、他の AWS コマンドと揃える必要があります。 `profile-name` を指定しない場合、キーとトークンはデフォルトプロファイルにあわせてされます。
-
++
 さらに、`role-session-name` または `session-duration` を指定しない場合、それぞれデフォルト値の `${CIRCLE_JOB}` (ジョブ名) と 3600 秒に設定されます。
 
 以下に示すコンフィグファイルのサンプルでは、OIDC を使用するプロファイルを構成してからそのプロファイルで AWS ECR にログインするジョブを設定しています。 `role-arn` に適切な権限を設定していれば、このプロファイルを使用して S3 や EKS、ECS などの他の AWS コマンドも実行できます。
 
 ```yaml
-version: '2.1'
+version: 2.1
+
 orbs:
-  # import CircleCI's aws-cli orb
-  aws-cli: circleci/aws-cli@3.1
+  aws-cli: circleci/aws-cli@3.1.5
+
 jobs:
   aws-example:
    environment:
@@ -166,7 +204,6 @@ workflows:
   OIDC-with-AWS:
     jobs:
       - aws-example:
-          # must use a valid CircleCI context
           context: aws
 ```
 
@@ -246,7 +283,7 @@ GCP Web UI の **Grant Access** セクションに移動したら、次の手順
 * issuer は `\https://oidc.circleci.com/org/<organization_id>` です。`organization_id` には CircleCI 組織 ID を入力します。
 . **[Continue]** をクリックしてプロバイダー属性を設定します。
 +
-プロバイダー属性を設定すると、CircleCI のトークンに含まれるクレームを Google の "解釈" にマッピングできます。 たとえば以下のようになります。
+プロバイダー属性を設定すると、CircleCI のトークンに含まれるクレームを Google の "解釈" にマッピングできます。 例えば下記のようにします。
 +
 [.table.table-striped]
 [cols=2*, stripes=even]
