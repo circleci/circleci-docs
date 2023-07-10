@@ -6,16 +6,16 @@ contentTags:
 = GitLab CI/CD integration overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to integrate GitLab with CircleCI for your GitLab CI/CD projects with our GitLab step-by-step tutorial.
+:page-description: Learn how to integrate GitLab with CircleCI to manage your GitLab CI/CD pipelines with our GitLab step-by-step tutorial.
 :icons: font
 :experimental:
 
-This page walks you through integrating a GitLab CI project with CircleCI. The sections below introduce you to concepts and ways to manage your GitLab CI/CD pipelines. CircleCI features that are in development for GitLab CI projects are detailed in the <<coming-soon>> section.
+This page walks you through integrating a GitLab project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitLab project. CircleCI features that are in development for GitLab projects are detailed in the <<coming-soon>> section.
 
 [#overview]
 == What is GitLab CI/CD?
 
-GitLab CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your projects each time a developer pushes a change to the codebase, and/or when a merge request is created. As an alternative, you can integrate with CircleCI to manage your CI/CD pipelines. If you use GitLab (SaaS or Self-managed) to and manage version control and store your code, GitLab CI/CD (continuous integration and continuous delivery) is enabled for your project by default.
+GitLab CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your projects each time a developer pushes a change to the codebase, and/or when a merge request is created. As an alternative, you can integrate with CircleCI to manage your CI/CD pipelines. If you use GitLab (SaaS or Self-managed) to and manage version control and store your code, GitLab CI/CD is enabled for your project by default.
 
 Integrate with CircleCI to access features for automating software delivery:
 
@@ -30,9 +30,9 @@ Integrate with CircleCI to access features for automating software delivery:
 GitLab CI/CD integration with CircleCI introduces the concept of "standalone" projects that are not specific to a VCS. This is a change from the way GitHub and Bitbucket projects are currently integrated.
 
 [#sign-up]
-== GitLab CI/CD integration steps
+== Steps to integrate GitLab projects with CircleCI
 
-GitLab CI/CD support is open to both new and existing users of CircleCI. Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to connect your GitLab account to create your organization.
+Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
@@ -138,13 +138,13 @@ Editing an existing CircleCI configuration within the web app is not currently a
 Committing further changes in your repo will automatically trigger a pipeline. However, manually triggering a pipeline from the CircleCI web app is also not available at this time.
 
 [#project-settings]
-== GitLab CI/CD project settings
+== Project settings - GitLab
 
-A project can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repo.
+Within CircleCI, a project integrated from GitLab can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repo.
 
 A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a VCS. A trigger determines which configuration should be used to start a pipeline.
 
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab.
+The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab integrations.
 
 [#people]
 === People
@@ -203,7 +203,7 @@ NOTE: Currently, the only fields that can be edited for existing filters are **T
 [#project-settings-ssh-keys]
 === GitLab project SSH keys
 
-When creating a GitLab CI/CD project in CircleCI, an SSH key is created, which is used to check out code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects.
+When creating a GitLab-based project in CircleCI, an SSH key is created, which is used to check out code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects.
 
 [#create-gitlab-ssh-key]
 ==== Create GitLab SSH key
@@ -237,9 +237,9 @@ When you push to your GitLab repository from a job, CircleCI will use the SSH ke
 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
-== GitLab CI/CD organization settings
+== Organization settings - GitLab
 
-For GitLab CI/CD projects, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
+For GitLab integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
 To manage settings at the organization level, click btn:[Organization Settings] in the CircleCI web app sidebar.
 
