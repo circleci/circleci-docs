@@ -323,6 +323,11 @@ steps:
 
 On a rerun, if the parallel run is running tests, `no_files_here` will be populated. If it is not running any tests, the `persist_to_workspace` step will not fail because the `no_files_here` directory exists.
 
+[#approval-jobs]
+=== Approval jobs
+
+If your workflow has an approval job, and a failed job containing failed tests that you wish to rerun, you will not be able to click btn:[Rerun failed tests] until the workflow has terminated.  This means that you must cancel the approval job before you can click btn:[Rerun failed tests].
+
 [#FAQs]
 == FAQs
 
