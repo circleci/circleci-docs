@@ -621,7 +621,7 @@ jobs:
 
 ### Invoking reusable executors
 {: #invoking-reusable-executors }
-{:.no_toc}
+
 
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 

@@ -128,7 +128,7 @@ For **macOS** installations with Homebrew, you will need to run the following co
 
 ### Updating the legacy CLI
 {: #updating-the-legacy-cli }
-{:.no_toc}
+
 
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
 
