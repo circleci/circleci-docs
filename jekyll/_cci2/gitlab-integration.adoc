@@ -24,6 +24,8 @@ NOTE: You will need API access and write permissions on the repository you want 
 
 [.tab.signup.GitLab_SaaS]
 --
+NOTE: **Disable GitLab CI/CD** You should disable GitLab CI/CD for projects you integrate with CircleCI. See the link:https://docs.gitlab.com/ee/ci/enable_or_disable_ci.html[GitLab docs] for steps.
+
 When you create a new organization and connect your GitLab.com account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory.
 
 If your selected repo does _not_ already have a `.circleci/config.yml`, you will be presented with the following options to set up a CircleCI configuration for your project:
@@ -44,6 +46,8 @@ The first two options (**Fastest** and **Faster**) automatically trigger a pipel
 
 [.tab.signup.GitLab_Self-Managed]
 --
+NOTE: **Disable GitLab CI/CD** You should disable GitLab CI/CD for projects you integrate with CircleCI. See the link:https://docs.gitlab.com/ee/ci/enable_or_disable_ci.html[GitLab docs] for steps.
+
 You need:
 
 * Your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
