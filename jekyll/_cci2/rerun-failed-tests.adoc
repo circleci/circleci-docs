@@ -313,7 +313,7 @@ To ensure that code coverage reports from the original job run are persisted to 
 ----
 {% endraw %}
 
-The snippet above uses the built-in xref:caching[`.Revision`] key to store a coverage report for the current vcs revision.  On a successful rerun, the original job run's coverage report will be restored to include the coverage from the skipped (passed) tests. It can then be used in a downstream job for aggregation or analysis.
+The snippet above uses the built-in xref:caching#[`.Revision`] key to store a coverage report for the current VCS revision.  On a successful rerun, the original job run's coverage report will be restored to include the coverage from the skipped (passed) tests. It can then be used in a downstream job for aggregation or analysis.
 
 * Rerun failed tests is not currently supported for the Windows execution environment.
 
