@@ -287,7 +287,7 @@ steps:
   # Proceed with the rest of the job
 ```
 
-Note that the `halt` command will execute the rest of the step.  Therefore, the command to execute tests should be placed in a new step after the evaluation of whether tests.txt has content or not.
+Note: The `halt` command will execute the rest of the step.  Therefore, the command to execute tests should be placed in a new step after the evaluation of whether `tests.txt` has content or not.
 
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
