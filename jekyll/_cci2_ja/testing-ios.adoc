@@ -20,7 +20,7 @@ contentTags:
 
 CircleCI では、 macOS 仮想マシン（VM）での iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの <<supported-xcode-versions,ソフトウェアマニフェスト>> を参照してください。
 
-xref:docs/ios-codesigning/#[iOSコード署名プロジェクトと] xref:/docs/hello-world-macos/[MacOS での入門]に関するドキュメントをご覧ください。
+xref:ios-codesigning#[iOSコード署名プロジェクトと] xref:hello-world-macos#[MacOS での入門]に関するドキュメントをご覧ください。
 
 [#supported-xcode-versions]
 == サポートされている Xcode のバージョン
