@@ -257,6 +257,10 @@ steps:
   - node/install
   # Proceed with the rest of the job
 ```
++
+`persist_to_workspace`を使用している場合の失敗を回避する方法については<<parallel-rerun-failure>>を参照してください。
+
+注意: `halt` コマンドは `tests.txt` に内容があるかどうかに関係なく、_current_ step の残りの部分を実行する。テストを実行するコマンドは必ず _following_ ステップに記述してください。
 
 * 現時点では、テストを実行する Orb とこの新機能を組み合わせることはできません。
 * シェルスクリプトを呼び出してテストを実行する場合、`circleci tests run` は `circleci/config.yml` ではなく**シェルスクリプト内**に記載してください。
@@ -267,19 +271,34 @@ steps:
 [#troubleshooting]
 == トラブルシューティング
 
+[#all-tests-rerun]
+=== すべてのテストはまだ再試行中
+
 `circleci tests run` を設定した後、"Rerun failed tests only "をクリックすると、*すべてのテスト* が再実行されます：
 
 1. `circleci tests run` を起動するときに `--verbose` 設定が有効になっていることを確認します。 これは、`circleci tests run` が  "re-run " 時にどのような "テスト "を受けているかを表示します。
 2. テスト結果を含むJUnit XMLをCircleCIにアップロードするには、xref:configuration-reference#storeartifacts[`store_artifacts`]を使用します。  これは `store_test_results` で CircleCI にアップロードされるファイルと同じものです。
 3. 新しくアップロードされた JUnit XML を [**Artifacts**] タブで手動で検査し、`file=` 属性または `classname` 属性があることを確認します。  どちらも存在しない場合、再実行（re-run）しようとすると予期しない動作が発生します。  このページの指示に従って、使用しているテストランナーが JUnit XML のテスト結果を `file`（推奨）または `classname` 属性で出力していることを確認してください。  それでも問題が解決しない場合は、link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[コミュニティフォーラム]にコメントしてください。
 
----
+[#no-test-names]
+=== 入力ソースにテスト名がない場合
 
-`circleci tests run` は入力がスペースまたは改行で区切られていることを期待します。 テストファイル名にスペースが含まれている場合、特に `pytest` を使用している場合は問題が発生する可能性があります。 回避策としては、link:https://docs.pytest.org/en/7.1.x/example/parametrize.html#set-marks-or-test-id-for-individual-parametrized-test[公式 Pytest ドキュメント] の説明に従って、名前に空白を含むテストに特定の ID を使用する方法があります。
+以下のメッセージが表示されている場合： `WARN[TIMESTAMP] 入力ソースにテスト名が見つかりません。テスト名を期待していた場合は、入力ソースを確認してください。`
 
-ジョブを並列実行してファイルをワークスペースに永続化する場合、再実行時に `persist_to_workspace` ステップが指定されたディレクトリにコンテンツを見つけられなかったために並列実行が失敗することがあります。 これは、すべての並列実行に分散させるのに十分なテストがない場合、再実行で並列実行が常にテストを実行するとは限らないために起こる可能性があります。
+テストファイル名（またはクラス名）のリストを *標準入力* 経由で `circleci tests run` に渡していることを確認してください。 これを行う最も一般的な方法は、グロブコマンドを使用することです： `circleci tests glob "glob pattern" | circleci tests run --command="xargs test command" --verbose` です。
 
-このような失敗を避けるには、テストを実行する前に `mkdir` コマンドを追加して、最終的にワークスペースに永続化されるディレクトリを設定します。
+[#test-filenames-include-sapces]
+=== テストファイル名にはスペースを含む
+
+`circleci tests run` は入力がスペースまたは改行で区切られていることを期待します。 テストファイル名にスペースが含まれている場合、特に `pytest` を使用している場合、空白を含む名前が生成される可能性があり、問題になるかもしれません。 回避策としては、https://docs.pytest.org/en/7.1.x/example/parametrize.html#set-marks-or-test-id-for-individual-parametrized-test[公式 Pytest ドキュメント] の説明に従って、名前に空白を含むテストに特定の ID を使用する方法があります。
+
+[#parallel-rerun-failure]
+=== Parallel rerun failure
+
+ジョブを並行してテスト実行し、ファイルをワークスペースに永続化する場合、再実行時に `persist_to_workspace` ステップで指定されたディレクトリにコンテンツが見つからず、並行実行が失敗することがあります。これは、すべての並列実行に分散させるのに十分なテストがない場合、再実行で並列実行が常にテストを実行するとは限らないために起こる可能性があります。
+
+
+このような失敗を回避するには、テストを実行する前に `mkdir` コマンドを追加して、最終的にワークスペースに永続化されるディレクトリを設定します。
 
 ```yaml
 steps:
@@ -297,6 +316,11 @@ steps:
 ```
 
 再実行時に、並列実行がテストを実行している場合は `no_files_here` が入力されます。 テストを実行していない場合は、`persist_to_workspace` ディレクトリが存在するので、`no_files_here` ステップは失敗しません。
+
+[#approval-jobs]
+=== 承認ジョブ
+
+ワークフローに承認ジョブがあり、失敗したテストを含む失敗したジョブを再実行する場 合、ワークフローが終了するまで btn:[失敗したテストの再実行] をクリックできません。 つまり、btn:[Rerun failed tests] をクリックする前に承認ジョブをキャンセルする必要があります。
 
 [#FAQs] 
 == FAQ
@@ -374,4 +398,10 @@ steps:
 **質問:** テストランナーで「Skipped」または「Ignored」と報告されたテストは、「Rerun failed tests only」をクリックすると、再実行されますか？
 
 **回答:** いいえ、少なくとも1つのテストケースが「Failed」と報告されたテストファイルのみが再実行されます。
+---
+
+**Question:** 「失敗したテストの再実行」を使用できる最も古いジョブは何ですか？
+
+**Answer:** 失敗したテストの再実行は、現在、15日未満のワークフローで利用可能です。
+
 ---
