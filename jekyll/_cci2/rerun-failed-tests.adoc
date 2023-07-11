@@ -278,7 +278,7 @@ NOTE: The `halt` command will execute the rest of the _current_ step, regardless
 * Jobs that upload code coverage reports:
 +
 To ensure that code coverage reports from the original job run are persisted to an artifact in addition to the report that is generated on a re-run, see the following example for a sample Go project:
-
++
 {% raw %}
 [source,yaml]
 ----
