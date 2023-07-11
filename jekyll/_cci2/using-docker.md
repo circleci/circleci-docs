@@ -76,18 +76,7 @@ The following examples show how you can use public images from various sources:
 The [`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
 job. In Docker, the following resources classes are available:
 
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge               | 16    | 32GB
-2xlarge+              | 20    | 40GB
-{: class="table table-striped"}
-
-**Note**: `2xlarge` and `2xlarge+` require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.
+{% include snippets/docker-resource-table.md %}
 
 Specify a resource class using the `resource_class` key, as follows:
 

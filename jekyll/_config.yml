@@ -144,6 +144,7 @@ defaults:
       sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
       contentTags: null
+      sectionTags: null
 
 t:
   translation_in_progress:

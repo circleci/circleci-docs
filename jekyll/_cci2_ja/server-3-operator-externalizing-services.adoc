@@ -20,19 +20,9 @@ toc::[]
 
 == PostgreSQL
 
-NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。
-
-.外部 PostgreSQL
-image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
-
-外部 PostgreSQL インスタンスの使用を選択した場合は、以下のフィールドに入力してください。
-
-* *PostgreSQL Service Domain (PostgreSQL サービスドメイン)(必須):* PostgreSQL インスタンスのドメインまたは IP アドレス
-* *PostgreSQL Service Port (PostgreSQL サービスポート)] (必須):* PostgreSQL インスタンスのポート
-* *PostgreSQL Service Username (PostgreSQL サービスユーザーネーム)(必須):* PostgreSQL インスタンスへのアクセス権を持つユーザー
-* *PostgreSQL Service Password (PostgreSQL サービスパスワード) (必須):* PostgreSQL インスタンスへのアクセスに使用されるユーザーアカウントのパスワード
-
 === PostgreSQL のベストプラクティス
+
+NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。
 
 プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
@@ -65,39 +55,65 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 |8 コア
 |32 GB
 |500 GB
-|10Gbps
+|10 Gbps
 
 |1000 ～ 5000 名
 |3
 |8 コア
 |32 GB
 |1 TB
-|10Gbps
+|10 Gbps
 
-|5000 名超
+|5000名以上
 |3
 |8 コア
 |32 GB
 |1 TB
-|10Gbps
+|10 Gbps
 |===
 
 === PostgreSQL のバックアップ
 
 PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント ( https://www.postgresql.org/docs/12/backup.html[こちら] ) が提供されています。
 
-CircleCI では、以下を行うことを強くお勧めしています。
+CircleCI では、以下を行っていただくよう強くお勧めしています。
 
 * 毎日バックアップを行う
 * バックアップを少なくとも 30 日間保持する
 * データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
 * CircleCI Server のアップグレードを行う前には毎回バックアップを行う
 
+[#migrating-from-internal-postgres]
+=== 内部 PostgreSQL から外部ソースへの移行
+
+{% include snippets/server/ja/migrate-internal-postgres-to-external.adoc %}
+
+[#connecting-your-external-postgres]
+=== 外部の Postgres インスタンスを CircleCI サーバーに接続する
+
+image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
+
+外部 PostgreSQL インスタンスの使用を選択した場合は、以下のフィールドに入力してください。
+
+* *PostgreSQL Service Domain (PostgreSQL サービスドメイン)(必須):* PostgreSQL インスタンスのドメインまたは IP アドレス
+* *PostgreSQL Service Port (PostgreSQL サービスポート)] (必須):* PostgreSQL インスタンスのポート
+* *PostgreSQL Service Username (PostgreSQL サービスユーザーネーム)(必須):* PostgreSQL インスタンスへのアクセス権を持つユーザー
+* *PostgreSQL Service Password (PostgreSQL サービスパスワード) (必須):* PostgreSQL インスタンスへのアクセスに使用されるユーザーアカウントのパスワード
+
+KOTS admin で変更を適用すると、CircleCI サーバーインスタンスが復元され、以前と同じようにPodが実行されます。
+
 == MongoDB
 
 NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。
 
-.外部 MongoDB
+[#migrating-from-internal-mongodb]
+=== 内部 MongoDB から外部化ソースへの移行
+
+{% include snippets/server/ja/migrate-internal-mongo-to-external.adoc %}
+
+[#connecting-your-external-mongodb]
+=== 外部の MongoDB インスタンスを CircleCI サーバーに接続する
+
 image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
 
 外部 MongoDB インスタンスの使用を選択した場合は、以下のフィールドに入力してください。
@@ -110,6 +126,8 @@ image::server-3-external-mongo.png[Screenshot of KOTS admin console config showi
 * *MongoDB authentication source database (MongoDB 認証元データベース) (必須)]:* アカウント情報を保持するデータベース (通常は管理)。
 * *MongoDB authentication mechanism (MongoDB 認証メカニズム)] (必須):* 使用する認証メカニズム  (通常は SCRAM-SHA-1)。
 * *Additional connection options (追加の接続オプション)](オプション):* 使用する他の接続オプションを指定します。 これはクエリ文字列の形式で指定する必要があります (`key=value` のペア、`&` で区切る。 特殊文字は URL エンコードが必要です。) 利用可能なオプションについては、link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB のドキュメント] を参照してください。
+
+KOTS adminで変更を適用すると、CircleCI Serverインスタンスが復元され、以前と同じように Pod が実行されます。
 
 == Vault
 

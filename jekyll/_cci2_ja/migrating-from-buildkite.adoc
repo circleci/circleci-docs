@@ -8,7 +8,7 @@ contentTags:
 = Buildkite からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Buildkite から CircleCI に移行する方法を解説します。
+:page-description: このドキュメントでは、Buildkite から CircleCI に移行する方法をわかりやすく解説します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -65,6 +65,8 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 [#configuration-comparison]
 == 設定の比較
 
+{% include snippets/ja/docker-auth.adoc %}
+
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
@@ -104,9 +106,6 @@ jobs:
   job1:
     docker:
       - image: node:10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 ----
 
@@ -133,7 +132,7 @@ steps:
 ----
 |[source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -150,7 +149,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2
@@ -202,9 +200,9 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトや Docker-compose ファイルの実行
+. シェルスクリプトや Docker Compose ファイルの実行
 . https://circleci.com/docs/ja/workflows/[ワークフロー]
 . https://circleci.com/docs/ja/artifacts/[アーティファクト]
 . https://circleci.com/docs/ja/caching/[キャッシュ]
 . https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
+. https://circleci.com/docs/ja/optimizations/#section=projects[最適化の概要]

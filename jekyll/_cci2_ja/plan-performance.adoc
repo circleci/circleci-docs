@@ -62,6 +62,8 @@ link:https://app.circleci.com/[CircleCI Web アプリ]では、アーティフ�
 SLA を介した追加サポート(利用時間と日数の制限あり) の利用やサポートパッケージのアドオンが可能です。 Performance プランでは、 link:https://discuss.circleci.com/[コミュニティフォーラム]、 link:https://support.circleci.com/hc/ja[サポートポータル]、および 
  link:https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
+NOTE: Performance プランの解約については、xref:faq#cancel-performance-plan[Performance プランの解約に関するFAQ]をご参照ください。
+
 [#circleci-features]
 == CircleCI の機能
 

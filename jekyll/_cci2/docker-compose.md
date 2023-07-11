@@ -105,6 +105,6 @@ See [our support article for more information](https://support.circleci.com/hc/e
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/building-docker-images/#mounting-folders) for examples and details.
