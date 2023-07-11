@@ -276,7 +276,7 @@ NOTE: The `halt` command will execute the rest of the _current_ step, regardless
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to be run to a `.txt` file and then pass the list of test file names to your shell script.
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
 * Jobs that upload code coverage reports:
-
++
 To ensure that code coverage reports from the original job run are persisted to an artifact in addition to the report that is generated on a re-run, see the following example for a sample Go project:
 
 {% raw %}
