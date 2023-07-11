@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,8 +10,9 @@ contentTags:
 :page-liquid:
 :page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+
+{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
 
 [#strongly-recommended-method]
 == Strongly recommended method

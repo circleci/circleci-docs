@@ -8,12 +8,9 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
-
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
 Follow the how-to guides on this page to learn how to create and use config policies.
 
@@ -186,11 +183,9 @@ package org
 policy_name["example"]
 
 # signal to circleci that check_version is enabled and must be included when making a decision
-enable_rule["check_version"]
-
-# signal to circleci that check_version is a hard_failure condition and that builds should be
+# Also, signal to circleci that check_version is a hard_failure condition and that builds should be
 # stopped if this rule is not satisfied.
-hard_fail["check_version"]
+enable_hard["check_version"]
 
 # define check version
 check_version = reason {

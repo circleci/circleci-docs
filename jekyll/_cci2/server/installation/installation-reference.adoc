@@ -1,13 +1,14 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.0
+    - Server Admin
 ---
 = Installation reference
 :page-layout: classic-docs
+:page-description: Reference page for all values options available for installations of CircleCI server v4
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#example-manifests]
 == Example Manifests
@@ -846,12 +847,12 @@ a|AWS Authentication Config.
 |`true`
 |
 
-|`postgresql.persistence.existingClaim`
+|`postgresql.primary.persistence.existingClaim`
 |string
 |`""`
 |
 
-|`postgresql.persistence.size`
+|`postgresql.primary.persistence.size`
 |string
 |`"8Gi"`
 |

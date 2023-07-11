@@ -8,9 +8,10 @@ contentTags:
 = Azure DevOps からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Azure DevOps から CircleCI に移行する方法について解説します。
+:page-description: このドキュメントでは、Azure DevOps から CircleCI に移行する方法についてわかりやすくご紹介しています。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このドキュメントでは、Azure DevOps から CircleCI に移行する方法を概説します。
@@ -19,6 +20,7 @@ NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
+
 Azure DevOps のGit レポジトリや TFVC レポジトリを使用している場合は、まずソースコードを GitHub または Bitbucket に移行する必要があります。 Azure DevOps の Git リポジトリについては、下記のリンクより GitHub や Bitbucket にインポートする方法をご確認ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
@@ -66,11 +68,12 @@ Azure DevOps Pipelines や TFS Build and Release を使用している場合は�
 Azure DevOps Pipelines と CircleCI の設定は異なります。 ビルドステップを変換する際は、Azure DevOps と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
-
 * https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
 == 設定の比較
+
+{% include snippets/ja/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -80,8 +83,7 @@ Azure DevOps Pipelines と CircleCI の設定は異なります。 ビルドス�
 
 2+|1つのビルドステップを実行するジョブの定義
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   - job: job1
@@ -89,9 +91,7 @@ jobs:
       - script: chmod +x ./script.sh
       - script: ./script.sh
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
@@ -102,31 +102,24 @@ jobs:
 
 2+|ジョブに使用する Docker イメージの指定
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   - job: job1
     container:
       image: node:10
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
     docker:
       - image: node:10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 ----
 
 2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 stages:
   - stage: build
@@ -148,11 +141,9 @@ stages:
       steps:
         - script: make deploy
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -169,7 +160,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2
@@ -184,8 +174,7 @@ workflows:
 
 2+|マルチプラットフォームでのジョブの実行:  Azure DevOps では、プールと要求によりビルドランナーを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   - job: ubuntuJob
@@ -201,9 +190,7 @@ jobs:
 
 
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   ubuntuJob:
@@ -217,7 +204,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -226,9 +213,9 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトや Docker-compose ファイルの実行
+. シェルスクリプトや Docker Compose ファイルの実行
 . https://circleci.com/docs/ja/workflows/[ワークフロー]
 . https://circleci.com/docs/ja/artifacts/[アーティファクト]
 . https://circleci.com/docs/ja/caching/[キャッシュ]
 . https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
+. https://circleci.com/docs/ja/optimizations/#section=projects[最適化の概要]

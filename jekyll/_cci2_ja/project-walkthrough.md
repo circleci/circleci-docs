@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "2.0 プロジェクトのチュートリアル"
-short-title: "プロジェクトのチュートリアル"
 description: "CircleCI  での Flask プロジェクトのチュートリアルと設定例"
-categories:
-  - 移行
-order: 3
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このチュートリアルのデモ アプリケーションでは、バックエンド用に Python と Flask を使用し、 データベース用に PostgreSQL を使用します。 データベース用に PostgreSQL を使用します。

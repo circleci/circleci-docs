@@ -1,18 +1,14 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
 ---
 = Schedule pipelines with multiple workflows
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to set conditionals for scheduled pipelines in multiple workflows."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction
@@ -58,7 +54,7 @@ You may also add filtering for workflows that should *not* run when a schedule i
 version: 2.1
 ...
 daily-run-workflow:
-# run workflow only when the daily_build pipeline is triggered 
+# run workflow only when the daily_build pipeline is triggered
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
@@ -123,23 +119,23 @@ The example below demonstrates three workflows scheduled with pipeline values. T
 version: 2.1
 ...
 workflows:
-# run workflow only when the daily_build pipeline is triggered 
+# run workflow only when the daily_build pipeline is triggered
   daily-run-workflow:
-    when: 
+    when:
       equal: [ daily_build, << pipeline.schedule.name >> ]
     jobs:
       - job-one
 
   nightly-run-workflow:
   # run workflow only when the daily_build pipeline is triggered
-    when: 
+    when:
       equal: [ daily_build, << pipeline.schedule.name >> ]
     jobs:
       - job-two
 
   weekly-run-workflow:
   # run workflow only when the weekly_build pipeline is triggered
-    when: 
+    when:
       equal: [ weekly_build, << pipeline.schedule.name >> ]
     jobs:
       - job-three

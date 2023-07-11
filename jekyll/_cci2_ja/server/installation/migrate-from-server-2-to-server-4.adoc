@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Server v2.x
   - Server v4.x
-  - Server Admin
+  - サーバー管理者
 ---
 = CircleCI Server v2.19 から v4.0 への移行
 :page-layout: classic-docs
@@ -23,11 +23,12 @@ CircleCI Server v2.19.x から v4.0 に移行する際は、v2.19 インスタ�
 
 . 現在インストールされている CircleCI Server が v2.19x である。
 . v2.19 インスタンスのバックアップが完了している。 外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
-. データストアが以下の条件を満たしている。
+. データストアが以下の条件を満たしている。 これはinitコンテナのボリュームマウントの制限によるものです。 AWS環境ではそのような制限はない。
+. 新規 CircleCI Server v4.0 をlink:/docs/server/installation/phase-1-prerequisites[インストール済み]である。
 .. データストアを**外部化**している場合: Postgres をバージョン 12 に更新している。
 .. **内部**データストアを使用している場合: v4.0 のインストール環境で MongoDB、Postgres、Redis に割り当てるボリュームのサイズを、v2.19 のインストール環境でこれらに割り当てているボリュームのサイズ以上に設定する。 4.x のデータストアのボリュームは、link:/docs/server/operator/expanding-internal-database-volumes/[こちらの手順]で変更可能です。
-. 新規 CircleCI Server v4.0 をlink:/docs/server/installation/phase-1-prerequisites[インストール済み]である。
 . コンテキストを使用した link:https://github.com/circleci/realitycheck[realitycheck] の実行が正常に完了している。
+. 移行スクリプトを実行するマシンに以下を準備する。
 . 移行スクリプトを実行するマシンに以下を準備する。
 - CircleCI Server v4.0 インスタンスに合わせて構成した `kubectl`
 - CircleCI Server v2.19 サービスマシンへの `ssh` アクセス

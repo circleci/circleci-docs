@@ -1,0 +1,27 @@
+[#does-circleci-look-at-my-code]
+=== CircleCI のスタッフにプログラムコードを見られる可能性はありますか？
+
+CircleCI のスタッフがお客様の許可を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望される際は、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
+
+詳しくは CircleCI の xref:security#[セキュリティポリシー]をご覧ください。
+
+[#use-circleci-without-creating-base-images]
+=== 基本イメージを作成していなくても、CircleCI  を使用できますか?
+
+はい、CircleCI では Docker Executor で使用する多数の「CircleCI イメージ」を提供しています。 イメージの使用方法および全リストは、link:https://circleci.com/ja/developer/images[CircleCI Developer Hub] および xref:circleci-images#[CircleCI イメージのガイド]をご覧ください。
+
+`machine` Executor については、xref:configuration-reference#available-linux-machine-images[利用可能なマシンイメージ]をご覧ください。
+
+実行環境やイメージに関する概要は、xref:executor-intro#[実行環境]をご覧ください。
+
+[#request-new-features]
+=== 新機能のリクエストは可能ですか？
+
+はい、link:https://circleci.canny.io/[Ideas] のページから新機能のリクエストや、これまでにリクエストされた機能の閲覧が可能です。 新機能をリクエストするには、まず *Give Feedback* セクションでカテゴリーを選択します。
+
+これまでにリクエストされた機能を閲覧する際は、*Trending*、*Top*、*New* で並び替えたり、下記によりフィルタリングできます。
+
+- *Under Review*: CircleCI で検討中の機能リクエスト
+- *Planned*: 今後取り組む予定の機能リクエスト
+- *In Progress*: 現在取り組んでいる機能
+- *Complete*: 現在のサービスに追加済みの機能リクエスト

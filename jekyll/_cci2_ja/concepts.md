@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "コンセプト"
-short-title: "コンセプト"
 description: "CircleCI  のコンセプト"
-categories:
-  - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このガイドでは、CircleCI がお客様の [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) パイプラインを管理する方法の基本概念について説明します。
@@ -29,7 +24,7 @@ CircleCI では、*同時実行*とは複数のコンテナを使用して、複
 ## 設定
 {: #configuration }
 
-CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 この `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 詳しくは「[YAML の記述]({{ site.baseurl }}/ja/writing-yaml/)」をご確認ください。
+CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 この `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 詳しくは「[YAML の記述]({{ site.baseurl }}/ja/introduction-to-yaml-configurations/)」をご確認ください。
 
 ```shell
 ├── .circleci
@@ -687,7 +682,7 @@ CircleCI パイプラインとは、プロジェクトで作業をトリガす�
 
 {: #projects }
 
-CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/ja/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
+CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/ja/github-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
 
 プロジェクトダッシュボードで、以下のいずれかを実行します。
 
@@ -772,14 +767,14 @@ jobs:
 
 ここでは CircleCI プロジェクトに関連するユーザータイプを紹介します。 多くのユーザーは、 VCS アカウントから継承された権限を持っています。
 
-* *組織の管理者*とは、 VCS から継承された権限レベルのことです。 
+* *組織の管理者*とは、 VCS から継承された権限レベルのことです。
     * GitHub: **オーナー** であり、CircleCI 上の少なくとも 1 つのプロジェクトビルドをフォローしています。
   * Bitbucket: **管理者**であり、CircleCI の少なくとも 1 つのプロジェクトのビルドをフォローしています。
 * *プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。
 
 * *ユーザー*とは、組織内の個々のユーザーを指します。
 
-* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/ja/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/ja/github-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
 
 

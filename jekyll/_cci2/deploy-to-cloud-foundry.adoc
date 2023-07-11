@@ -5,14 +5,12 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Deploy to Cloud Foundry
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Cloud Foundry.
 

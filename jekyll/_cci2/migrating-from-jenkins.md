@@ -3,8 +3,7 @@ layout: classic-docs
 title: Migrate from Jenkins
 categories: [migration]
 description: Differences between CircleCI and Jenkins, with migration guide.
-redirect_from: /jenkins-converter
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -59,90 +58,6 @@ You have to use plugins to do almost anything with Jenkins, including checking o
 
 All core CI functionality is built into CircleCI. Features such as checking out source from a VCS, running builds and tests with your favorite tools, parsing test output, and storing artifacts are plugin-free. When you do need to add custom functionality to your builds and deployments, you can do so with a couple snippets of bash in appropriate places.
 
-Below is a table of supported plugins that you can convert using the [CircleCI Jenkins converter tool](https://circleci.com/developer/tools/jenkins-converter) ([see Jenkins converter section](#jenkinsfile-converter)).
-
-**Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise you will see an error message saying something is `Unknown` or `Invalid`. Please [submit a ticket](https://support.circleci.com/hc/en-us/requests/new) with our support center if you have a request to add a plugin to the list.
-{: class="alert alert-info" }
-
-- Ant Plugin (`ant`)
-- Authentication Tokens API Plugin (`authentication-tokens`)
-- Bouncy Castle API Plugin (`bouncycastle-api`)
-- Branch API Plugin (`branch-api`)
-- Build Timeout (`build-timeout`)
-- Command Agent Launcher Plugin (`command-launcher`)
-- Config File Provider Plugin (`config-file-provider`)
-- Credentials Binding Plugin (`credentials-binding`)
-- Credentials Plugin (`credentials`)
-- Display URL API (`display-url-api`)
-- Docker Commons Plugin (`docker-commons`)
-- Docker Pipeline (`docker-workflow`)
-- Durable Task Plugin (`durable-task`)
-- Email Extension Plugin (`email-ext`)
-- Folders Plugin (`cloudbees-folder`)
-- GitHub API Plugin (`github-api`)
-- GitHub Branch Source Plugin (`github-branch-source`)
-- GitHub plugin (`github`)
-- Gradle Plugin (`gradle`)
-- H2 API Plugin (`h2-api`)
-- JUnit Plugin (`junit`)
-- Jackson 2 API Plugin (`jackson2-api`)
-- JavaScript GUI Lib: ACE Editor bundle plugin (`ace-editor`)
-- JavaScript GUI Lib: Handlebars bundle plugin (`handlebars`)
-- JavaScript GUI Lib: Moment.js bundle plugin (`momentjs`)
-- JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI) plugin (`jquery-detached`)
-- Jenkins Apache HttpComponents Client 4.x API Plugin (`apache-httpcomponents-client-4-api`)
-- Jenkins GIT server Plugin (`git-server`)
-- Jenkins Git client plugin (`git-client`)
-- Jenkins Git plugin (`git`)
-- Jenkins JSch dependency plugin (`jsch`)
-- Jenkins Mailer Plugin (`mailer`)
-- Jenkins Subversion Plug-in (`subversion`)
-- Jenkins Workspace Cleanup Plugin (`ws-cleanup`)
-- LDAP Plugin (`ldap`)
-- Lockable Resources plugin (`lockable-resources`)
-- MapDB API Plugin (`mapdb-api`)
-- Matrix Authorization Strategy Plugin (`matrix-auth`)
-- Matrix Project Plugin (`matrix-project`)
-- OWASP Markup Formatter Plugin (`antisamy-markup-formatter`)
-- Oracle Java SE Development Kit Installer Plugin (`jdk-tool`)
-- PAM Authentication plugin (`pam-auth`)
-- Pipeline (`workflow-aggregator`)
-- Pipeline Graph Analysis Plugin (`pipeline-graph-analysis`)
-- Pipeline Maven Integration Plugin (`pipeline-maven`)
-- Pipeline Utility Steps (`pipeline-utility-steps`)
-- Pipeline: API (`workflow-api`)
-- Pipeline: Basic Steps (`workflow-basic-steps`)
-- Pipeline: Build Step (`pipeline-build-step`)
-- Pipeline: Declarative (`pipeline-model-definition`)
-- Pipeline: Declarative Agent API (`pipeline-model-declarative-agent`)
-- Pipeline: Declarative Extension Points API (`pipeline-model-extensions`)
-- Pipeline: GitHub Groovy Libraries (`pipeline-github-lib`)
-- Pipeline: Groovy (`workflow-cps`)
-- Pipeline: Input Step (`pipeline-input-step`)
-- Pipeline: Job (`workflow-job`)
-- Pipeline: Milestone Step (`pipeline-milestone-step`)
-- Pipeline: Model API (`pipeline-model-api`)
-- Pipeline: Multibranch (`workflow-multibranch`)
-- Pipeline: Nodes and Processes (`workflow-durable-task-step`)
-- Pipeline: REST API Plugin (`pipeline-rest-api`)
-- Pipeline: SCM Step (`workflow-scm-step`)
-- Pipeline: Shared Groovy Libraries (`workflow-cps-global-lib`)
-- Pipeline: Stage Step (`pipeline-stage-step`)
-- Pipeline: Stage Tags Metadata (`pipeline-stage-tags-metadata`)
-- Pipeline: Stage View Plugin (`pipeline-stage-view`)
-- Pipeline: Step API (`workflow-step-api`)
-- Pipeline: Supporting APIs (`workflow-support`)
-- Plain Credentials Plugin (`plain-credentials`)
-- Resource Disposer Plugin (`resource-disposer`)
-- SCM API Plugin (`scm-api`)
-- SSH Build Agents plugin (`ssh-slaves`)
-- SSH Credentials Plugin (`ssh-credentials`)
-- Script Security Plugin (`script-security`)
-- Structs Plugin (`structs`)
-- Timestamper (`timestamper`)
-- Token Macro Plugin (`token-macro`)
-- Trilead API Plugin (`trilead-api`)
-
 ## Distributed builds
 {: #distributed-builds }
 
@@ -177,90 +92,6 @@ If you run builds on your own hardware with [CircleCI](https://circleci.com/ente
 It is possible to run multiple tests in parallel on a Jenkins build using techniques like multithreading, but this can cause subtle issues related to shared resources like databases and filesystems.
 
 CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]({{site.baseurl}}/parallelism-faster-jobs/) document.
-
-## Jenkinsfile converter
-{: #jenkinsfile-converter }
-
-The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter) is a web tool that allows you to easily convert a Jenkinsfile to a `.circleci/config.yml` file, helping you to get started building on CircleCI quickly and easily.
-
-**The converter only supports declarative Jenkinsfiles**. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started building on CircleCI.
-
-### Supported syntax
-{: #supported-syntax }
-
-Only declarative (pipeline) `Jenkinsfile`s are currently supported.
-
-Jenkinsfile Syntax | Approx. CircleCI Syntax | Status
---- | --- | ---
-agent | [executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) | Static
-post | [when attribute]({{site.baseurl}}/configuration-reference/#the-when-attribute) | See [when]({{site.baseurl}}/configuration-reference/#the-when-attribute)
-stages | [workflows]({{site.baseurl}}/workflows/) | Supported |
-steps | [step]({{site.baseurl}}/jobs-steps/#steps-overview) | Limited
-environment | [environment]({{site.baseurl}}/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)
-options | N/A | See [Supported Jenkins Plugins](#supported-jenkins-plugins)
-parameters | [parameters]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration) | Unsupported
-triggers | [cron]({{site.baseurl}}/workflows/#scheduling-a-workflow) | Unsupported
-stage | [job]({{site.baseurl}}/configuration-reference/#jobs) | Supported
-{: class="table table-striped"}
-
-### Limitations
-{: #limitations }
-
-* A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
-
-* Only a single Jenkinsfile is accepted per request. Namely, [Shared Libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/) will not be resolved, and the resulting `config.yml` may be incomplete. Note that under certain cases the converter does not raise errors even if there are unresolvable Shared Libraries.
-
-* Only `Default` is supported as a tool name for `maven`, `jdk` and `gradle` in the [`tools` block](https://www.jenkins.io/doc/book/pipeline/syntax/#tools), and other names will cause conversion failures. Please configure them as follows or remove them manually.
-
-  For example, the following stanza:
-  ```groovy
-  tools {
-    maven 'Maven 3.6.3'
-    jdk 'Corretto 8.232'
-  }
-  ```
-  should be changed to:
-  ```groovy
-  tools {
-    maven 'Default'
-    jdk 'Default'
-  }
-  ```
-
-### Next steps after conversion
-{: #next-steps-after-conversion }
-
-The following sections describe next steps with various aspects of the CircleCI pipeline.
-
-#### Executors
-{: #executors }
-
-A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
-
-Given that `cimg/base` is a very lean image, it is highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/custom-images/) for advanced steps to create your own custom image.
-
-Depending on the use case, you might require the [machine executor]({{site.baseurl}}/configuration-reference/#machine) if your application requires full access to OS resources and the job environment, or the [macOS executor]({{site.baseurl}}/using-macos).
-
-#### Workflows
-{: #workflows }
-
-[CircleCI Workflows]({{site.baseurl}}/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the `.circleci/config.yml`, including branch filters. The converter will not transfer any [scheduled builds]({{site.baseurl}}/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
-
-#### Jobs
-{: #jobs }
-
-Many of the configuration options within CircleCI jobs do not have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
-
-- [Checkout code]({{site.baseurl}}/configuration-reference/#checkout)
-- [Resource class]({{site.baseurl}}/configuration-reference/#resource_class)
-- [Parallelism]({{site.baseurl}}/configuration-reference/#parallelism)
-- Caches, [saving]({{site.baseurl}}/configuration-reference/#save_cache) and [restoring]({{site.baseurl}}/configuration-reference/#restore_cache)
-- [Store Artifacts]({{site.baseurl}}/configuration-reference/#store_artifacts)
-
-#### Steps
-{: #steps }
-
-While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
 
 ## Next steps
 {: #next-steps }

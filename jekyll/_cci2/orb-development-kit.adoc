@@ -2,8 +2,7 @@
 layout: classic-docs
 title: Orb development kit
 description: How to use CircleCI's orb development kit
-redirect_from: local-jobs
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x

@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes common methods for running and debugging browser testing in your CircleCI config.
@@ -34,15 +33,14 @@ WebDriver can operate in two modes: local or remote. When run locally, your test
 
 If Selenium is not included in your primary Docker image, install and run Selenium as shown below:
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 jobs:
   build:
     docker:
       - image: cimg/node:16.13.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
@@ -102,9 +100,6 @@ jobs:
   test-cypress:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:

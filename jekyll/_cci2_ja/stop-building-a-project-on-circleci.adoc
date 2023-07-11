@@ -1,0 +1,37 @@
+---
+
+contentTags:
+  platform:
+    - クラウド
+  doc-type:
+    - how-to
+---
+= CircleCI 上のプロジェクトのビルドを停止する
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI アカウントからプロジェクトを削除する方法
+:icons: font
+:toc: macro
+:toc-title:
+
+[#introduction]
+== はじめに
+
+このページでは、CircleCI 上のプロジェクトのビルドを停止する方法、および必要に応じてプロジェクトの全データを削除する方法について説明します。
+
+[#stop-building-a-project]
+== プロジェクトのビルドを停止する
+
+CAUTION: **[Stop Building (ビルドの停止)]** オプションを使用しても、プロジェクトのデータが自動的に CircleCI データベースから削除されることはありません。 CircleCI からプロジェクトの全データを削除するには、「<<remove-a-project-from-circleci>>」セクションに従って CircleCI サポートチームにお問い合わせください。
+
+CircleCI 上にあるプロジェクトのビルドを停止するには、以下の手順を行います。
+
+. CircleCI Web アプリで、停止するプロジェクトの **[Project Settings (プロジェクト設定)]** ページに移動します。
+. [Overview (概要)] ページを下にスクロールして、**[Stop Building (ビルドの停止)]** をクリックします。 確認のポップアップが表示されるので、停止操作を確定します。
+
+NOTE: 停止したプロジェクトのビルドを再開する場合は、Web アプリで **[Projects (プロジェクト)]** ページに移動し、**[Set Up Project (プロジェクトをセットアップ)]** をクリックしてセットアップ手順を完了します。
+
+[#remove-a-project-from-circleci]
+== CircleCI からプロジェクトを削除する
+
+CircleCI アカウントからプロジェクトを削除する必要がある場合は、link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポートチーム]に対象のプロジェクトの情報を添えてお問い合わせください。

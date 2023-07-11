@@ -16,6 +16,8 @@ contentTags:
 
 toc::[]
 
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
+
 [#introduction]
 == はじめに
 

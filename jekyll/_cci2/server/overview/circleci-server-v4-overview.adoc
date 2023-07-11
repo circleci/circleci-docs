@@ -1,22 +1,22 @@
 ---
-description: "CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster."
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = CircleCI server v4.x overview
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction
 
-CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. 
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center.
 
-CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
+CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster.
 
 .CircleCI Server v4.x Architecture
 image::server-4-architecture-diagram.png[Server v4.xservices architecture]
@@ -47,7 +47,7 @@ The CircleCI server application exposes four services, using a single load balan
 | Provisions virtual machines.
 |===
 
-The application exposes a number of external ports. These ports are used for various functions as defined in the table below. 
+The application exposes a number of external ports. These ports are used for various functions as defined in the table below.
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -71,13 +71,6 @@ The application exposes a number of external ports. These ports are used for var
 | Inbound
 | End users
 | HTTP web app traffic
-|
-
-| 8800
-| TCP
-| Inbound
-| Administrators
-| Admin console
 |
 
 | 22
@@ -209,18 +202,18 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Frontend
 | CircleCI web app and www-api proxy.
 | The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK, but no updates will be seen.
-| Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests. 
+| Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests.
 
 | insights-service
 | Metrics
 | A service to aggregate build and usage metrics for exporting and analysis.
-| 
+|
 |
 
 | kong
 | App Core
 | API management.
-| 
+|
 |
 
 
@@ -233,19 +226,19 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | nginx
 | App Core / Frontend
 | Handles traffic redirection and ingress.
-| 
+|
 |
 
 | nomad-autoscaler
 | Nomad
 | Manages scaling of Nomad clusters in AWS and GCP environments.
-| 
+|
 |
 
 | nomad-server
 | Nomad
 | Responsible for managing nomad clients.
-| 
+|
 |
 
 | orb-service
@@ -275,13 +268,13 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | socketi
 | Frontend
 | Websockets server.
-| 
+|
 |
 
 | telegraf
 | Metrics
 | Collection of metrics.
-| 
+|
 |
 
 | test-results-service
@@ -317,7 +310,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | webhook-service
 | App Core
 | Service reponsible for all webhooks, including management of state and handling events.
-| 
+|
 |
 
 | workflows-conductor-event-consumer
@@ -336,10 +329,10 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |===
 
 [#platforms]
-== Platforms 
-CircleCI server is designed to deploy within a Kubernetes cluster. The virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images. 
+== Platforms
+CircleCI server is designed to deploy within a Kubernetes cluster. The virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images.
 
-If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as VM service across a much wider range of operating systems and machine types (for example, macOS). 
+If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as VM service across a much wider range of operating systems and machine types (for example, macOS).
 
 We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand.
 
@@ -350,11 +343,11 @@ We do our best to support a wide range of platforms for installation. We use env
 | Status
 | Notes
 
-| EKS 
+| EKS
 | Tested
 |
 
-| GKE 
+| GKE
 | Tested
 |
 
@@ -363,7 +356,7 @@ We do our best to support a wide range of platforms for installation. We use env
 | Should work with Minio Azure gateway and Runner.
 
 | Digital Ocean
-| Untested 
+| Untested
 | Should work with Minio Digital Ocean gateway and Runner.
 
 | OpenShift
@@ -371,7 +364,7 @@ We do our best to support a wide range of platforms for installation. We use env
 | Known not to work.
 
 | Rancher
-| Untested 
+| Untested
 | Should work with Minio and Runner.
 |===
 

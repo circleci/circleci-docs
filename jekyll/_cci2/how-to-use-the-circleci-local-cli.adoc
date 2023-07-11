@@ -2,16 +2,34 @@
 layout: classic-docs
 title: How to use the CircleCI local CLI
 description: How to use the CircleCI local CLI
-redirect_from: local-jobs
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This page describes how to use some features of the CircleCI CLI.
+
+== Prerequisites
+
+To follow the guides on this page you will need the following:
+
+* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free])
+* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli#[Installing the local CLI] page.
+* xref:local-cli#configure-the-cli[Set up and configure] the CircleCI CLI.
+
+[#validate-a-circleci-config]
+== Validate a CircleCI config
+
+You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally.
+
+To validate your configuration, navigate to a directory with a `.circleci/config.yml` file and run:
+
+```shell
+circleci config validate
+# Config file at .circleci/config.yml is valid
+```
 
 [#orb-development-kit]
 == Orb development kit
@@ -65,7 +83,7 @@ $ tree
 3 directories, 3 files
 ```
 
-The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys. 
+The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys.
 
 The following command will `pack` up the example folder from above:
 
@@ -122,7 +140,6 @@ orbs:
   node: circleci/node@4.7.0
 
 workflows:
-  version: 2
   example-workflow:
       jobs:
         - node/test
@@ -134,16 +151,13 @@ Running the following command will output a YAML file like the example below (wh
 circleci config process .circleci/config.yml
 ```
 
-```yml
+```yaml
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
   node/test:
     docker:
     - image: cimg/node:13.11.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:

@@ -1,0 +1,171 @@
+---
+
+contentTags:
+  platform:
+    - Server v4.1
+    - サーバー管理者
+---
+= フェーズ 1 - 前提条件
+:page-layout: classic-docs
+:page-liquid:
+:page-description: エアギャップ環境に CircleCI Server をインストールする方法について解説します。 要件、イメージ、Helm チャートについて説明しています。
+:icons: font
+:toc: macro
+:toc-title:
+
+ここでは、エアギャップ環境への CircleCI Server のインストールの前に実施す必要がある手順について説明します。
+
+[#required-components]
+== エアギャップ環境へのインストールのコンポーネント要件
+
+以下の表に、エアギャップ環境に CircleCI Server をインストールする際の前提条件を示します。 インストールを行うには、これらのコンポーネントをエアギャップ環境に用意する必要があります。
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|コンポーネント
+|用途
+
+|コンテナレジストリ
+|Kubernetes 用の CircleCI Server イメージをホストする
+
+|Kubernetes クラスタ
+|CircleCI Server を実行する
+
+|オブジェクトストレージシステム (MinIO)
+|オブジェクトとアーティファクトを保存する
+
+|GitHub Enterprise
+|CircleCI Server のビルド用コードを保存する
+
+|Nomad 仮想マシン
+|Nomad を実行するマシン
+|===
+
+[#copy-images]
+== 1.  イメージをコピーする
+
+CircleCI Server は、Helm チャートを使用して Kubernetes クラスタにデプロイします。 CircleCI 製の最新のイメージとチャートを仮想環境にコピーしてください。 CircleCI の Helm チャートで参照されているイメージはすべて、エアギャップ環境内でアクセス可能である必要があります。
+
+[#login-to-acr]
+=== a.  CircleCI Server のコンテナレジストリにログインする
+
+インストール用のイメージにアクセスするには、CircleCI から提供されるユーザー名とトークンが必要です。 詳細については、support@circleci.com にお問い合わせください。
+
+[source, bash]
+----
+docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
+----
+
+=== b.  本リリースに必要なすべてのイメージをダウンロードする
+
+本リリースの CircleCI Server に必要なすべてのイメージをローカルマシンにダウンロードします。 イメージリストに、Helm のインストール、CircleCI エージェント、Reality Check テストツールに必要なイメージがすべて含まれています。
+
+[source, bash]
+----
+SERVER_4_1_IMAGE_LIST=`cat <<EOF
+bitnami/postgresql:12
+cciserver.azurecr.io/api-gateway:0.1.27056-791021f
+cciserver.azurecr.io/api-service:0.1.13307-ac5e1215
+cciserver.azurecr.io/audit-log-service:0.1.994-cc7f017
+cciserver.azurecr.io/branch-service-migrator:0.1.4205-f54b104
+cciserver.azurecr.io/branch-service:0.1.4206-f54b104
+cciserver.azurecr.io/builds-service-migrator:1.0.2954-dbc4487
+cciserver.azurecr.io/builds-service:1.0.2954-dbc4487
+cciserver.azurecr.io/circle-migrator:0.1.580305-e9d88a9834
+cciserver.azurecr.io/contexts-service-migrator:0.1.18751-df77431
+cciserver.azurecr.io/contexts-service:0.1.18752-df77431
+cciserver.azurecr.io/cron-service-migrator:0.1.3889-3c348df
+cciserver.azurecr.io/cron-service:0.1.3890-3c348df
+cciserver.azurecr.io/distributor-migrator:1.0.93790-1c54ce3f
+cciserver.azurecr.io/distributor:1.0.93790-1c54ce3f
+cciserver.azurecr.io/domain-service-migrator:0.1.15701-ddd2312
+cciserver.azurecr.io/domain-service:0.1.15700-ddd2312
+cciserver.azurecr.io/frontend:0.2.30085-e9d88a9
+cciserver.azurecr.io/init-known-hosts:0.1.26-9f89d4e
+cciserver.azurecr.io/insights-service-migrator:0.1.73818-7d0fb8dc
+cciserver.azurecr.io/insights-service:0.1.73817-7d0fb8dc
+cciserver.azurecr.io/nomad:1.1.2-74-7552671
+cciserver.azurecr.io/orb-service-analytics-migrator:0.1.57046-2560e791
+cciserver.azurecr.io/orb-service-migrator:0.1.57047-2560e791
+cciserver.azurecr.io/orb-service:0.1.57044-2560e791
+cciserver.azurecr.io/output-processing:0.1.66391-202888aa
+cciserver.azurecr.io/permissions-service-migrator:0.1.12572-4b05edc
+cciserver.azurecr.io/permissions-service:0.1.12571-4b05edc
+cciserver.azurecr.io/picard-dispatcher:0.1.65675-630fe5d4
+cciserver.azurecr.io/schedulerer:0.1.65674-630fe5d4
+cciserver.azurecr.io/server-license:0.1.95-157a965
+cciserver.azurecr.io/test-results:0.1.3402-e561bf7
+cciserver.azurecr.io/vault-cci:0.4.196-1af3417
+cciserver.azurecr.io/vm-gc:0.1.114020-e01a8b25
+cciserver.azurecr.io/vm-scaler:0.1.114020-e01a8b25
+cciserver.azurecr.io/vm-service-db-migrator:0.1.114020-e01a8b25
+cciserver.azurecr.io/vm-service:0.1.114020-e01a8b25
+cciserver.azurecr.io/web-ui-404:0.1.9529-970af08
+cciserver.azurecr.io/web-ui-insights:0.1.108760-b138c234
+cciserver.azurecr.io/web-ui-onboarding:0.1.117606-4a3d0ba8
+cciserver.azurecr.io/web-ui-org-settings:0.1.19935-d372381
+cciserver.azurecr.io/web-ui-project-settings:0.1.37243-f36511fa
+cciserver.azurecr.io/web-ui-server-admin:0.1.2823-6a139c7
+cciserver.azurecr.io/web-ui-user-settings:0.1.32852-6335f1b
+cciserver.azurecr.io/web-ui:0.1.243845-214e7f96a
+cciserver.azurecr.io/webhook-service-migrator:0.1.8118-61d0143
+cciserver.azurecr.io/webhook-service:0.1.8119-61d0143
+cciserver.azurecr.io/workflows-conductor-migrator:1.0.16104-a0e7a1f
+cciserver.azurecr.io/workflows-conductor:1.0.16104-a0e7a1f
+circleci/picard:1.0.151412-85da0b64
+docker.io/bitnami/mongodb:3.6.22-debian-9-r38
+docker.io/bitnami/postgresql:12.6.0
+docker.io/bitnami/rabbitmq:3.8.14-debian-10-r10
+docker.io/bitnami/redis:6.2.1-debian-10-r13
+hashicorp/nomad-autoscaler:0.3.6
+kong:2.7.0
+mongo:3.6
+nginx:1.21.6
+quay.io/soketi/soketi:0.19-16-distroless
+telegraf:1.24-alpine
+cimg/base:2021.02-20.04
+docker:17.06-git
+alpine:latest
+circleci/node:latest
+circleci/python
+python:3.6.0
+EOF
+`
+----
+
+[source, bash]
+----
+echo $SERVER_4_1_IMAGE_LIST | while read -r image; do docker pull $image; done
+----
+
+[#copy-all-images]
+=== c.  すべてのイメージをエアギャップ環境にコピーする
+
+ダウンロードしたすべてのイメージを、エアギャップ環境内のコンテナレジストリにコピーします。
+
+[#copy-charts]
+== 2.  チャートをコピーする
+
+CircleCI Server 用 Helm チャートをエアギャップ環境にコピーします。
+
+[#download-helm-chart]
+=== a.  最新の CircleCI Server 用 Helm チャートをダウンロードする
+
+最新の CircleCI Server 用 Helm チャートをカレントディレクトリにダウンロードします。
+
+[source, bash]
+----
+helm registry login cciserver.azurecr.io
+helm pull oci://cciserver.azurecr.io/circleci-server -d ./
+----
+
+[#upload-helm-chart]
+=== b.  Helm チャートをエアギャップ環境にコピーする
+
+ダウンロードした Helm チャート (`.tgz` 形式) をエアギャップ環境にコピーします。
+
+[#next-steps]
+== 次のステップ
+
+本ページの手順を完了したら、「xref:phase-2-configure-object-storage#[フェーズ 2 - オブジェクトストレージの構成]」に進んでください。

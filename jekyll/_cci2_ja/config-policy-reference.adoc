@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー
+description: CircleCI コンフィグファイルのポリシー管理機能のオープンプレビュー コンフィグファイルポリシーのヘルパー関数に関するリファレンス
 contentTags:
   platform:
   - クラウド
 ---
-= 設定ファイルのポリシーに関するリファレンス
+= コンフィグファイルポリシーに関するリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,92 +13,21 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
 
-CAUTION: 設定ファイルのポリシー管理機能がオープンプレビュー段階の間は、コンプライアンスの用途には **使用しないでください**。 **オープンプレビュー** の間は本機能を使用できない期間が発生する可能性があります。その間、構築した設定ファイルのポリシーに対する評価が **行われない** 場合があります。
+このリファレンスのページでは、ポリシー作成に役立つ CircleCI 専用関数である__ヘルパー__を紹介します。 これらのヘルパーを使用すると、より定型句の少ないすっきりとしたポリシーを作成できます。
 
-このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
+このリファレンスのページでは、ポリシー作成に役立つ CircleCI 専用関数である__ヘルパー__を紹介します。 これらのヘルパーを使用すると、より定型句の少ないすっきりとしたポリシーを作成できます。 つまり、`circleci.config` および `circleci.utils` というパッケージ名は予約されているということです。
 
-`circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 `policy-service` 、 `circle-cli` 、または `circle-policy-agent` により評価されたポリシーはすべて、これらの関数にアクセスできます。 これはつまり、`circleci.config` というパッケージ名は予約されているということです。
+[#circleci-config-helpers]
+== CircleCI コンフィグヘルパー
 
-[#circleci-rego-helpers]
-== CircleCI Rego のヘルパー
-
-[#jobs]
-=== `jobs`
-
-`jobs` は、指定された CircleCI 設定ファイル内のジョブを含む Rego オブジェクトです。 ジョブに関連付けられているポリシーで使用できます。
-
-[#definition-jobs]
-==== 定義
-
-[source,rego]
-----
-jobs = []string
-----
-
-`jobs` オブジェクトの例
-
-[source,json]
-----
-[
-    "job-a",
-    "job-b",
-    "job-c"
-]
-----
-
-[#usage-jobs]
-==== 使用法
-
-[source,rego]
-----
-package org
-
-policy_name["example"]
-
-import future.keywords
-import data.circleci.config
-
-jobs := config.jobs
-----
-
-[#require-jobs]
-=== `require_jobs`
-
-この関数を使用する場合、設定ファイルにジョブ名に基づくジョブを含める必要があります。 必要なジョブリストにある各ジョブは、設定ファイル内の少なくとも 1 つのワークフローに含まれていなければなりません。
-
-[#definition-require-jobs]
-==== 定義
-
-[source,rego]
-----
-require_jobs([string])
-returns { string }
-----
-
-[#usage-require-jobs]
-==== 使用法
-
-[source,rego]
-----
-package org
-
-import data.circleci.config
-
-policy_name["example"]
-
-require_security_jobs = config.require_jobs(["security-check", "vulnerability-scan"])
-
-enable_rule["require_security_jobs"]
-
-hard_fail["require_security_jobs"]
-----
+以下のヘルパーは、`import data.circleci.config` でインポートします。
 
 [#orbs]
 === `orbs`
 
-`orbs` は、指定された設定ファイル内の Orb やバージョンを含んだ Rego オブジェクトです。 Orb に関連付けられているポリシーで使用できます。
+`orbs` は、指定したコンフィグファイル内の Orb とバージョンを要素に持つ Rego オブジェクトです。 Orb に関連付けられているポリシーで使用できます。
 
 [#definition-orbs]
 ==== 定義
@@ -108,7 +37,7 @@ hard_fail["require_security_jobs"]
 orbs[string] = string
 ----
 
-`orbs` オブジェクトの例
+`orbs` オブジェクトの例:
 
 [source,json]
 ----
@@ -132,82 +61,17 @@ policy_name["example"]
 my_orbs := config.orbs
 ----
 
-[#require-orbs]
-=== `require_orbs`
-
-この関数を使用する場合、設定ファイルに Orb 名に基づく Orb を含める必要があります。
- Orb リストにはバージョンは含めないでください。
-
-[#definition-require-orbs]
-==== 定義
-
-[source,rego]
-----
-require_orbs([string])
-returns { string: string }
-----
-
-[#usage-require-orbs]
-==== 使用法
-
-[source,rego]
-----
-package org
-
-import data.circleci.config
-
-policy_name["example"]
-
-require_security_orbs = config.require_orbs(["circleci/security", "foo/bar"])
-
-enable_rule["require_security_orbs"]
-
-hard_fail["require_security_orbs"]
-----
-
-[#require-orbs-version]
-=== `require_orbs_version`
-
-この関数を使用する場合、ポリシーに Orb 名とバージョンに基づく Orb を含める必要があります。
-
-[#definition-require-orbs-version]
-==== 定義
-
-[source,rego]
-----
-require_orbs_version([string])
-returns { string: string }
-----
-
-[#usage-require-orbs-version]
-==== 使用法
-
-[source,rego]
-----
-package org
-
-import data.circleci.config
-
-policy_name["example"]
-
-require_orbs_versioned = config.require_orbs_version(["circleci/security@1.2.3", "foo/bar@4.5.6"])
-
-enable_rule["require_orbs_versioned"]
-
-hard_fail["require_orbs_versioned"]
-----
-
 [#ban-orbs]
 === `ban_orbs`
 
-この関数を使用する場合、設定ファイルに Orb 名に基づく Orb が含まれていると、ポリシー違反になります。 Orb リストにはバージョンは含めないでください。
+この関数では、指定した Orb 名に該当する Orb が含まれるコンフィグファイルをポリシー違反とみなします。 Orb リストにはバージョンは含めないでください。
 
 [#definition-ban-orbs]
 ==== 定義
 
 [source,rego]
 ----
-ban_orbs_version([string])
+ban_orbs([string])
 returns { string: string }
 ----
 
@@ -224,15 +88,13 @@ policy_name["example"]
 
 ban_orbs = config.ban_orbs(["evilcorp/evil"])
 
-enable_rule["ban_orbs"]
-
-hard_fail["ban_orbs"]
+enable_hard["ban_orbs"]
 ----
 
 [#ban-orbs-version]
 === `ban_orbs_version`
 
-この関数を使用する場合、設定に Orb 名とバージョンに基づく Orb が含まれていると、ポリシー違反になります。
+この関数では、指定した Orb 名とバージョンに該当する Orb が含まれるコンフィグファイルをポリシー違反とみなします。
 
 [#definition-ban-orbs-version]
 ==== 定義
@@ -256,15 +118,13 @@ policy_name["example"]
 
 ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.5.6"])
 
-enable_rule["ban_orbs_versioned"]
-
-hard_fail["ban_orbs_versioned"]
+enable_hard["ban_orbs_versioned"]
 ----
 
 [#resource-class-by-project]
 === `resource_class_by_project`
 
-この関数はリソースクラスからプロジェクト ID セットへのマッピングを受け入れます。 マッピングで定義されたリソースクラスは、関連付けられたプロジェクト用に予約されます。 マッピングに含まれていないリソースクラスはすべてのプロジェクトで使用できます。
+この関数は、リソースクラスからプロジェクト ID セットへのマッピングを取ります。 マッピングで定義されたリソースクラスは、関連付けられたプロジェクト用に予約されます。 マッピングに含まれていないリソースクラスはすべてのプロジェクトで使用できます。
 
 [#definition-resource-class-by-project]
 ==== 定義
@@ -293,7 +153,283 @@ check_resource_class = config.resource_class_by_project({
   "large": {"$PROJECT_UUID_A","$PROJECT_UUID_B"},
 })
 
-enable_rule["check_resource_class"]
+enable_hard["check_resource_class"]
+----
 
-hard_fail["check_resource_class"]
+[#contexts-allowed-by-project-ids]
+=== `contexts_allowed_by_project_ids`
+
+この関数は、プロジェクト ID (`PROJECTS`) とコンテキスト名 (`ALLOWED_CONTEXTS`) を以下のいずれかの形式で受け取ります。
+
+* 文字列
+* 文字列のセット
+* 文字列の配列
+
+`PROJECTS` で**指定された**プロジェクト**すべて**において、`ALLOWED_CONTEXTS` に**指定されていない**コンテキスト**すべて**を使用できなくなります。
+
+[#definition-contexts-allowed-by-project-ids]
+==== 定義
+
+[source,rego]
+----
+contexts_allowed_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  ALLOWED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-allowed-by-project-ids]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${ALLOWED_CONTEXT_NAME_1}","${ALLOWED_CONTEXT_NAME_2}"]
+)
+
+enable_hard["rule_contexts_allowed_by_project_ids"]
+----
+
+[#contexts-blocked-by-project-ids]
+=== `contexts_blocked_by_project_ids`
+
+この関数は、プロジェクト ID (`PROJECTS`) とコンテキスト名 (`BLOCKED_CONTEXTS`) を以下のいずれかの形式で受け取ります。
+
+* 文字列
+* 文字列のセット
+* 文字列の配列
+
+`PROJECTS` で**指定された**プロジェクト**すべて**において、`BLOCKED_CONTEXTS` に**指定された**コンテキスト**すべて**を使用できなくなります。
+
+[#definition-contexts-blocked-by-project-ids]
+==== 定義
+
+[source,rego]
+----
+contexts_blocked_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  BLOCKED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-blocked-by-project-ids]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
+)
+
+enable_hard["rule_contexts_blocked_by_project_ids"]
+----
+
+[#contexts-reserved-by-project-ids]
+=== `contexts_reserved_by_project_ids`
+
+この関数は、プロジェクト ID (`PROJECTS`) とコンテキスト名 (`RESERVED_CONTEXTS`) を以下のいずれかの形式で受け取ります。
+
+* 文字列
+* 文字列のセット
+* 文字列の配列
+
+`PROJECTS` で**指定されていない**プロジェクト**すべて**において、`RESERVED_CONTEXTS` に**指定された**コンテキスト**すべて**を使用できなくなります。
+
+[#definition-contexts-reserved-by-project-ids]
+==== 定義
+
+[source,rego]
+----
+contexts_reserved_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  RESERVED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-project-ids]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_hard["rule_contexts_reserved_by_project_ids"]
+----
+
+[#contexts-reserved-by-branches]
+=== `contexts_reserved_by_branches`
+
+この関数は、VCS のブランチ名 (`BRANCHES`) とコンテキスト名 (`RESERVED_CONTEXTS`) を以下のいずれかの形式で受け取ります。
+
+* 文字列
+* 文字列のセット
+* 文字列の配列
+
+`BRANCHES` で**指定されていない**ブランチにおいて、`RESERVED_CONTEXTS` に**指定された**コンテキストすべてを使用**できなくなります**。ただし、他のコンテキストは使用可能です。
+
+[#definition-contexts-reserved-by-branches]
+==== 定義
+
+[source,rego]
+----
+contexts_reserved_by_branches(
+  BRANCHES: string | Array<string> | Set<string>
+  CONTEXT_LIST: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-branches]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
+   ["${BRANCH_1}, "${BRANCH_2}", "${BRANCH_3}"]",
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_hard["rule_contexts_reserved_by_branches"]
+----
+
+[#circleci-utility-helpers]
+== CircleCI コンフィグヘルパー
+
+以下のヘルパーは、`import data.circleci.config` でインポートします。
+
+[#get_element_name]
+=== `orbs`
+
+`orbs` は、指定したコンフィグファイル内の Orb とバージョンを要素に持つ Rego オブジェクトです。 Orb に関連付けられているポリシーで使用できます。 取得対象の要素がオブジェクトの場合、オブジェクトのキーが返されます。
+
+[#definition-get-element-name]
+==== 定義
+
+[source,rego]
+----
+orbs[string] = string
+----
+
+[#usage-get-element-name]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import data.circleci.config
+
+policy_name["example"]
+
+my_orbs := config.orbs
+----
+
+以下の config.yml を例に考えてみましょう。
+
+[source,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - lint
+      - test:
+          context: test-vars
+----
+
+上記のポリシーでは、`job_name1` が `lint` に、`job_name2` が `test` になります。
+
+[#to_array]
+=== `ban_orbs`
+
+この関数では、指定した Orb 名に該当する Orb が含まれるコンフィグファイルをポリシー違反とみなします。 Orb リストにはバージョンは含めないでください。
+
+[#definition-to-array]
+==== 定義
+
+[source,rego]
+----
+ban_orbs([string])
+returns { string: string }
+----
+
+[#usage-to-array]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import data.circleci.config
+
+policy_name["example"]
+
+ban_orbs = config.ban_orbs(["evilcorp/evil"])
+
+enable_hard["ban_orbs"]
+----
+
+[#to-set]
+=== `ban_orbs_version`
+
+この関数では、指定した Orb 名とバージョンに該当する Orb が含まれるコンフィグファイルをポリシー違反とみなします。 配列の値はセットにキャストされ、重複が排除されます。 セットの値は変化せず、セット <Set> にキャスト**されません**。
+
+[#definition-to-set]
+==== 定義
+
+[source,rego]
+----
+ban_orbs_version([string])
+returns { string: string }
+----
+
+[#usage-to-set]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import data.circleci.config
+
+policy_name["example"]
+
+ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.5.6"])
+
+enable_hard["ban_orbs_versioned"]
 ----

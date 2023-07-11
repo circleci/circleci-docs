@@ -4,21 +4,19 @@ title: CircleCI のローカル CLI のインストール
 description: CircleCI のローカル CLI のインストール方法
 categories:
   - troubleshooting
-redirect_from: /ja/local-cli-getting-started
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 suggested:
-  - 
+  -
     title: CircleCI CLI チュートリアル (英語)
     link: https://circleci.com/blog/local-pipeline-development/
-  - 
+  -
     title: CircleCI インストールの確認 (英語)
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
-  - 
+  -
     title: CLI エラーのトラブルシューティング (英語)
     link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---

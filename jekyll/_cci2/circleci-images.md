@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Convenience images"
 description: "Listing of available Docker images maintained by CircleCI"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 
@@ -66,10 +65,9 @@ Using the `base` image in your config looks like the example shown below:
   myjob:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
+
+{% include snippets/docker-auth.md %}
 
 This is a brand new Ubuntu-based image designed to install the bare minimum. The
 next-generation convenience images are based on this image.
@@ -90,8 +88,6 @@ The example below demonstrates how to use the next-gen Go image, which is based 
     docker:
       - image:  cimg/go:1.16
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`. You can view other next generation images for other languages [below](#next-gen-language-images).
@@ -136,9 +132,6 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.7.1-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -168,9 +161,9 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 ## Image types
 {: #image-types }
 
-CircleCI's convenience images fall into two categories: 
+CircleCI's convenience images fall into two categories:
 * **language** images
-* **service** images 
+* **service** images
 
 All images add a `circleci` user as a system user. The sections below walk through the available next-generation and legacy images.
 

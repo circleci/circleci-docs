@@ -1,0 +1,189 @@
+---
+
+description: CLI を使って、パイプラインの並列コンピューティング環境に対してテストを分割する手順について解説します。
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI CLI を使用したテスト分割
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI では、並列実行するコンピューティング環境に対してテストを自動的に割り当てることができます。 CircleCI の設定ファイルで、`parallelism` キーを `1` より大きい値に設定すると、ジョブの実行環境について、同一の環境が複数スピンアップされます。
+
+テスト分割機能を使用するには、parallelism キーに加えて、CircleCI CLI も必要です。 CLI の `circleci tests glob` コマンドと `circleci tests split` コマンドを使用して、テストスイートの定義と、複数の環境に対するテストの割り当てを行います。 実行時には CLI がジョブに自動で挿入されるので、これらの `circleci tests` コマンドは、特別な設定をすることなく利用できます。
+
+WARNING: `circleci tests` コマンドは、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
+
+NOTE: xref:runner-overview.adoc[セルフホストランナー]では、CLI でテストを分割する代わりに、`circleci-agent` を直接呼び出すことができます。 これは、xref:runner-overview#circleci-self-hosted-runner-operation[タスクエージェント]が既に `$PATH` 上に存在しているので、テストの分割にかかわる追加の依存関係が不要であるからです。
+
+[#glob-test-files]
+== 1.  テストファイルのグロブ
+
+`circleci tests glob` を使用して、テストスイートを定義します。 テストファイルをグロブするには、以下のように `glob` コマンドに 1 つ以上のパターンを渡します。
+
+```shell
+circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
+```
+
+CLI では、以下のパターンを使用したテストファイルのグロブをサポートしています。
+
+- `*` は、任意の文字シーケンスに一致します (パス区切り文字を除く)。
+- `**` は、任意の文字シーケンスに一致します (パス区切り文字を含む)。
+- `?` は、任意の文字シーケンスに一致します (パス区切り文字を除く)。
+- `[abc]` は、角かっこ内の任意の文字に一致します (パス区切り文字を除く)。
+- `{foo,bar,...}` は、中かっこ内のいずれかの文字シーケンスに一致します。
+
+**パターンマッチング（pattern-matching）の結果を確認するには、`echo` コマンドを使用します。
+
+```yaml
+# ~/.circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/node:20.3.0
+    parallelism: 4
+    steps:
+      - run:
+          command: |
+            echo $(circleci tests glob "foo/**/*" "bar/**/*")
+            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
+```
+
+[#split-tests]
+== 2. テストの分割
+
+テストを分割するには、`circleci tests split` コマンドにテストのリストを渡します。
+
+次のテスト分割用のオプションを使用できます。
+
+* オプション指定なし: 名前に基づいてアルファベット順に分割 (デフォルト)
+* `--split-by=timings`: タイミングデータに基づいて分割 (推奨)
+* `--split-by=filesize`: ファイルサイズに基づいて分割
+
+[#split-by-name]
+=== a.  名前に基づいた分割 (デフォルト)
+
+`circleci tests split` のデフォルトでは、`--split-by` フラグを使用しない場合、ファイル名またはクラス名のリストが渡されることを想定しており、テスト名に基づいてアルファベット順にテストを分割します。 ファイル名のリストは、以下に挙げる複数の方法で用意できます。
+
+* テストファイルのグロブをパイプする (前セクションのサンプルの方法)
+
+```shell
+circleci tests glob "test/**/*.java" | circleci tests split
+```
+
+* テストファイル名を含むテキストファイルを作成する
+
+```shell
+circleci tests split test_filenames.txt
+```
+
+* テストファイルへのパスを指定する
+
+```shell
+circleci tests split < /path/to/items/to/split
+```
+
+[#split-by-timing-data]
+=== b.  タイミングデータに基づいた分割
+
+並列実行する Executor 全体でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 この方法では、テストが最も均等に分割されるので、テストの所要時間が短くなります。
+
+タイミングで分割するには、分割タイプ `timings` を `split-by` フラグに付けて使用します。
+
+```shell
+circleci tests glob "**/*.go" | circleci tests split --split-by=timings
+```
+
+WARNING: テスト分割用のタイミングデータは、`store_test_results` を使用しないと取得できません。
+
+CircleCI では、テストスイートの実行が成功するたびに、xref:configuration-reference#storetestresults[`store_test_results` ステップ]で指定されたパスのディレクトリからタイミングデータを保存します。 このタイミングデータには、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間が含まれます。
+
+タイミングデータがある場合には、その分析結果に基づき、テストが可能な限り均等に並列コンテナに分割されます。
+
+NOTE: タイミングデータが見つからない場合、`Error autodetecting timing type, falling back to weighting by name` というメッセージが出力されます。 この場合、テストはテスト名に基づきアルファベット順に分割されます。
+
+[#junit-xml-reports]
+==== JUnit の XML レポート
+
+CircleCI にアップロードするテスト結果は、JUnit XML レポートにする必要があります。 以下のフォーマットのレポートであれば、CircleCI でテスト結果を解析してタイミングデータを取得し、自動テスト分割を実行できます。
+
+* `file` 属性が `<testsuite>` タグまたは `<testcase>` タグで設定されている
+* `time` 属性が `<testcase>` タグで設定されている
+
+以下のサンプルスニペットに、CircleCI で解析可能な XML ファイルのフォーマットを示します。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" tests="3" failures="1">
+  <testsuite tests="3">
+    <testcase classname="foo1" name="ASuccessfulTest" time="10" file="src/__tests__/App.test.js" />
+    <testcase classname="foo2" name="AnotherSuccessfulTest" time="5" file="src/__tests__/App.test.js" />
+    <testcase classname="foo3" name="AFailingTest" time="1.1050" file="src/__tests__/App.test.js">
+        <failure type="NotEnoughFoo"> details about failure </failure>
+    </testcase>
+  </testsuite>
+</testsuites>
+```
+
+[#set-the-timing-type]
+==== タイミングタイプの設定
+
+CLI では、`split` コマンドの入力オプションに応じて、テスト分割の粒度 (分割基準をファイル名とクラス名のどちらにするかなど) を自動的に検出します。 ただし、テストカバレッジ出力のフォーマットによっては、`--timings-type` オプションを使用して、異なるタイミングタイプを選択する必要があります。 有効なタイミングタイプは以下のとおりです。
+
+* `filename`
+* `classname`
+* `testname`
+* `autodetect`
+
+```shell
+cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
+```
+
+[#set-the-default-value-for-missing-timing-data]
+==== タイミングデータが見つからない場合のデフォルト値の設定
+
+見つかったテスト結果が部分的なものである場合、データ不足のテストにはランダムな小さい値が割り当てられます。 このデフォルトの値は、`--time-default` フラグで上書きできます。
+
+```shell
+circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
+```
+
+[#download-timing-data]
+==== タイミングデータのダウンロード
+
+タイミングデータを手動で保存および取得するには、ジョブに xref:configuration-reference#storeartifacts[`store_artifacts` ステップ]を追加します。
+
+[#splitting-by-filesize]
+=== c.  ファイルサイズに基づいた分割
+
+CLI にファイルパスを指定すれば、ファイルサイズで分割することもできます。 分割タイプ `filesize` を `split-by` フラグに付けて使用します。
+
+```shell
+circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
+```
+
+[#running-split-tests]
+== 3. 分割テストの実行
+
+テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテストランナーに渡します。
+
+```shell
+circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
+bundle exec rspec $(cat /tmp/tests-to-run)
+```
+
+ファイル `/tmp/tests-to-run` の内容は、`$CIRCLE_NODE_INDEX` と `$CIRCLE_NODE_TOTAL` に応じて、コンテナごとに異なります。
+
+[#see-also]
+== 関連項目
+
+* xref:parallelism-faster-jobs#[テスト分割と並列実行]
+* xref:test-splitting-tutorial#[テスト分割のチュートリアル]
+* xref:configuration-reference#parallelism[CircleCI 設定ファイルのリファレンス: parallelism]

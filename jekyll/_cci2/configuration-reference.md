@@ -1,17 +1,13 @@
 ---
 layout: classic-docs
-title: Configuring CircleCI
-short-title: Configuring CircleCI
+title: Configuration reference
 description: Reference for .circleci/config.yml
-order: 20
-redirect_from: /configuration/
 readtime: false
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 sectionTags:
   config-version-2:
     - "#version"
@@ -578,9 +574,6 @@ executors:
   my-executor:
     docker:
       - image: cimg/ruby:3.0.3-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   my-job:
@@ -636,7 +629,9 @@ A map of environment variable names and values. For more information on defining
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
+This feature is used to optimize test steps. If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel.
+
+You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the [Test splitting and parallelism]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
 Example:
 
@@ -645,9 +640,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.09
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 3
@@ -698,7 +690,7 @@ Configured by `docker` key which takes a list of maps:
 Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The name of a custom docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
-name | N | String | `name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
+name | N | String | `name` defines the the hostname for the container (the default is `localhost`), which is used for reaching secondary (service) containers. By default, all services are exposed directly on `localhost`. This field is useful if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
 entrypoint | N | String or List | The command used as executable when launching the container. `entrypoint` overrides the image's [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint).
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container. `command` overrides the image's `COMMAND`. It will be used as arguments to the image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
 user | N | String | Which user to run commands as within the Docker container
@@ -713,6 +705,11 @@ A [custom image]({{ site.baseurl
 }}/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/using-docker) page.
+
+---
+
+##### Docker registry authentication
+{: #docker-auth }
 
 Some registries, Docker Hub, for example, may rate limit anonymous docker pulls. It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for details.
 
@@ -753,7 +750,33 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
+---
+
+##### AWS authentication
+{: #aws-authentication}
+
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials.
+
+###### Use OIDC
+{: #oidc }
+
+Authenticate using OpenID Connect (OIDC) using the `oidc_role_arn` field, as follows:
+
+```yaml
+jobs:
+  job_name:
+    docker:
+      - image: <your-image-arn>
+        aws_auth:
+          oidc_role_arn: <your-iam-role-arn>
+```
+
+For steps to get set up with OIDC to pull images from AWS ECR, see the [Pull and image from AWS ECR with OIDC](/docs/pull-an-image-from-aws-ecr-with-oidc/) page.
+
+###### Use environment variables
+{: #env-vars}
+
+By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
 
 ```yaml
 jobs:
@@ -774,7 +797,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/server-3-operator-vm-service).
+image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation](/docs/server/v4.1/operator/manage-virtual-machines-with-vm-service/).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching).
 {: class="table table-striped"}
 
@@ -906,14 +929,14 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-Example: Use a macOS virtual machine with Xcode version 12.5.1:
+Example: Use a macOS virtual machine with Xcode version 14.2.0:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
+      xcode: "14.2.0"
 ```
 
 ---
@@ -928,20 +951,16 @@ jobs:
 #### **`resource_class`**
 {: #resourceclass }
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
+The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
 
-We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it is possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
 If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
-{: class="alert alert-warning"}
 
 Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 {: class="alert alert-warning"}
 
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
-{: class="alert alert-note"}
-
-If you are using CircleCI server, contact your system administrator for a list of available resource classes.
 {: class="alert alert-note"}
 
 ---
@@ -965,16 +984,7 @@ jobs:
 ##### Docker execution environment
 {: #docker-execution-environment }
 
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge<sup>(2)</sup> | 16    | 32GB
-2xlarge+<sup>(2)</sup>| 20    | 40GB
-{: class="table table-striped"}
+{% include snippets/docker-resource-table.md %}
 
 Example:
 
@@ -983,9 +993,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.09
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: xlarge
     steps:
       ... // other config
@@ -1033,8 +1040,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
     steps:
       ... // other config
 ```
@@ -1482,7 +1489,18 @@ The `checkout` step will configure Git to skip automatic garbage collection. If 
 ##### **`setup_remote_docker`**
 {: #setupremotedocker }
 
-Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for details.
+Allows Docker commands to be run locally. See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for details.
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      # ... steps for building/testing app ...
+      - setup_remote_docker:
+          version: 20.10.14
+```
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1803,7 +1821,7 @@ The lifetime of artifacts, workspaces, and caches can be customized on the [Circ
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/gh-bb-integration/#deployment-keys-and-user-keys) page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [Create additional GitHub SSH keys]({{site.baseurl}}/github-integration/#create-additional-github-ssh-keys) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1839,9 +1857,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.2.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: latest
     working_directory: ~/main
@@ -1866,9 +1881,6 @@ jobs:
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo “Hello World”
 workflows:
@@ -1934,7 +1946,6 @@ A workflow may have a `schedule` indicating it runs at a certain time, for examp
 
 ```yml
 workflows:
-   version: 2
    nightly:
      triggers:
        - schedule:
@@ -2462,12 +2473,9 @@ executors:
   linux-13:
     docker:
       - image: cimg/node:13.13
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
 
 jobs:
   test:
@@ -2499,6 +2507,8 @@ workflows:
 ## Example full configuration
 {: #example-full-configuration }
 
+{% include snippets/docker-auth.md %}
+
 {% raw %}
 ```yaml
 version: 2.1
@@ -2506,33 +2516,18 @@ jobs:
   build:
     docker:
       - image: ubuntu:14.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: mongo:2.6.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [mongod, --smallfiles]
 
       - image: postgres:14.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: rabbitmq:3.5.4
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -2589,9 +2584,6 @@ jobs:
   deploy-stage:
     docker:
       - image: ubuntu:14.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -2601,9 +2593,6 @@ jobs:
   deploy-prod:
     docker:
       - image: ubuntu:14.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -2611,7 +2600,6 @@ jobs:
           command: ansible-playbook site.yml -i production
 
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build:

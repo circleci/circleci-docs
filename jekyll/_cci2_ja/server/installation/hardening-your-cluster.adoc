@@ -22,13 +22,9 @@ toc::[]
 
 CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティングインスタンスを実行します。
 
-これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
+これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。 そうでない場合は、少なくとも `circleci-proxy` ロード バランサー用にパブリックサブネットを 1 つ用意する必要があります。
 
-リソースはできる限り非公開にすることがベストプラクティスです。 CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 そうでない場合は、少なくとも `circleci-proxy` ロード バランサー用にパブリックサブネットを 1 つ用意する必要があります。
-
-ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
-
-現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
+リソースはできる限り非公開にすることがベストプラクティスです。
 
 NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
 
@@ -291,7 +287,7 @@ vm_service:
 [#private-ips-only]
 === プライベート IP のみ
 
-`assignPublicIP` オプションを false に設定すると、https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
+`assignPublicIP` オプションを false に設定すると、link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
 VM セキュリティグループの受信ルールでは、インストール環境のセキュリティーを強化するために以下のルールを作成できます。
 

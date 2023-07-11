@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: An overview of how to migrate from GitLab to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from GitLab to CircleCI.
 
@@ -36,6 +35,8 @@ The GitLab and CircleCI configurations will be different. It may be helpful to h
 
 [#configuration-comparison]
 == Configuration comparison
+
+{% include snippets/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -77,9 +78,6 @@ jobs:
   job1:
     docker:
       - image: node:10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ----
 
 2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
@@ -112,7 +110,7 @@ stages:
 a|
 [source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -129,7 +127,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2
@@ -177,7 +174,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osx-job:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"

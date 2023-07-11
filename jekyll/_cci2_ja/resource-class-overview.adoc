@@ -1,0 +1,123 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= リソースクラスの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI のリソースクラスの概要
+:icons: font
+:toc: macro
+
+:toc-title:
+
+リソースクラス機能を使用すると、以下が可能です。
+
+* 各 link:/docs/concepts/#jobs[job] のコンピューティングリソースのサイズ (CPU および RAM) を指定
+* リソースクラスのインサイト機能を使用してこれまでの傾向に基づき Executor を最適化
+* `.circleci/config.yml` ファイルで使用する link:/docs/runner-concepts/#namespaces-and-resource-classes[セルフホストランナー] の設定
+
+[#introduction]
+== 概要
+
+`resource_class` の設定オプションには複数の用途があります。 最も一般的な用途は、Executor に `resource_class` キーを設定して、各ジョブに必要な CPU と RAM を指定することです。
+
+[source,yaml]
+----
+jobs:
+  my-job:
+    docker: # use the Docker executor
+      - image: cimg/base:2022.09 # specify a Docker image
+    resource_class: xlarge # specify a resource class
+    steps:
+      - run: echo "Hello World"
+----
+
+Executor のリソースクラスは、`small` や `medium` などのサイズにより指定します。 各サイズごとに、特定の CPU と RAM が割り当てられています。 使用可能なリソースクラスの全オプションリストは、link:/docs/configuration-reference/#resourceclass[設定ファイルのリファレンス] でご確認ください。 link:https://circleci.com/ja/product/features/resource-classes[リソースクラスの製品概要のページ] では、各リソースクラスのクレジットの使用量や各プランで使用できるリソースクラスに関する情報をご確認いただけます。
+
+CIrcleCI のセルフホストランナーを使用する際は、プロジェクト設定で `resource_class` キーを使って各ジョブで使用するランナーを指定します。 セルフホストランナーのリソースクラスは xref:runner-installation#[インストールプロセス] で割り当てられ、設定されます。
+
+
+[source,yaml]
+----
+jobs:
+  my-job:
+    machine: true
+    resource_class: <my-namespace>/<my-runner>
+    steps:
+      - run: echo "Hello runner"
+----
+
+もう一つの `resource_class` キーの用途は、実行環境の指定です。 たとえば、link:/docs/using-arm[Arm] は `machine` Executor を使用する場合のリソースクラスのオプションです。
+
+[source,yaml]
+----
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+----
+
+[#quickstart]
+== クイックスタート
+
+各実行環境の **CPU と RAM のサイズを指定する** ための `resource_class` キーの使い方が分かる設定ファイル例は、設定ファイルのリファレンスのページの以下のセクションでご確認ください。
+
+* link:/docs/configuration-reference/#docker-execution-environment[Docker リソースクラス]
+* link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM リソースクラス]
+* link:/docs/configuration-reference/#macos-execution-environment[macOS リソースクラス]
+* link:/docs/configuration-reference/#windows-execution-environmen[Windows リソースクラス]
+* GPU リソースクラス: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] および link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
+* link:/docs/configuration-reference/#arm-execution-environment-linux[Arm リソースクラス]
+
+**セルフホストランナー** のセットアップを開始する場合は、xref:runner-installation#[Web アプリでのセルフホストランナーのインストール] を参照してください。
+
+[#default-resource-class]
+== デフォルトのリソースクラス
+
+各ジョブの `resource_class` が明示的に宣言されていない場合、CircleCI はデフォルトのリソースクラスサイズを使用します。 デフォルトは変更される場合があります。 デフォルトにしておくよりも、リソースクラスを指定することをお勧めします。
+
+[#resource-class-usage-tools]
+== リソースクラスの使用状況ツール
+
+ジョブにおけるリソースクラスの使用状況に関する情報は Web アプリで、または API を使ってご確認いただけます。 詳細については以下のセクションをお読みください。
+
+[#find-the-resource-class-used-for-a-job]
+=== ジョブに使用されているリソースクラスを確認する
+
+各ジョブに使用されているリソースクラスは、Web アプリのジョブの詳細のページで確認できます。
+
+.Web アプリでのリソースクラスの識別子
+image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
+
+または "Get job details" エンドポイントを使うと、使用されているリソースクラスを含むジョブの情報を返すことができます。 使用手順については、link:/docs/api-developers-guide/#get-job-details[ジョブの詳細情報の取得方法] を参照してください。
+
+=== リソースクラスのインサイト機能
+
+リソースクラスのインサイト機能により、ジョブのリソースの使用状況を把握することができます。 この情報を検証および使用して、過去の傾向やジョブのニーズに基づき Executor を更新することができます。
+
+リソースクラスのインサイトを確認するには:
+
+. Web アプリのサイドバーから **Insights** を選択します。
+. ダッシュボードにプロジェクトレベルのインサイトが表示されます。 ジョブレベルでの詳細なリソースクラスのインサイトを見つけるには:
+.. ドロップダウンからプロジェクトを選択します
+.. リストからワークフローを選択します
+.. **Jobs** タブを選択します
+.. ジョブを開いてリソースクラスのインサイトを表示します
++
+.リソースクラスのインサイト機能
+image::resource-class-insights.png[Screenshot showing resource class Insights]
+
+[#see-also]
+== 関連項目
+
+* 使用可能なリソースクラスの全オプションリストは、link:/docs/configuration-reference/#resourceclass[設定ファイルのリファレンス] でご確認ください。
+* 各リソースクラスのクレジット使用量に関する情報や各プランでご利用いただけるリソースクラスに関する情報は、link:https://circleci.com/product/features/resource-classes[リソースクラスの製品概要のページ] をご覧ください。

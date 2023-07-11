@@ -9,20 +9,22 @@ version:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#overview]
 == Overview
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics. 
+CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
-CircleCI **server customers**, as well as **Performance and Scale cloud customers**, can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]. Complete audit logs may be downloaded from the **Audit Log** page within the **Admin** section of the application as a CSV file. Audit log fields with nested data contain JSON blobs.
+If you have administrator permissions for your organization, you can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]:
 
-All other cloud customers can link:https://support.circleci.com/hc/en-us/requests/new[contact CircleCI support] to request an audit log. Only organization admin users can make an audit log request.
+. Select **Organization Settings** in the web app sidebar.
+. Select **Security** from the menu.
+. Scroll down to the **Audit Log** section and specify a date range.
+. Click **Request audit logs** to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
 
 NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-Per link:https://circleci.com/privacy/#information[our data retention policy], audit logs can be retrieved for up to 12 months. 
+Per link:https://circleci.com/privacy/#information[our data retention policy], audit logs can be retrieved for up to 12 months.
 
 [#audit-log-events]
 == Audit log events
@@ -46,6 +48,7 @@ The following are the system events that are logged. See `action` in the Field s
 - workflow.job.finish
 - workflow.job.scheduled
 - workflow.job.start
+- org.workflows.deleted
 
 [#audit-log-fields]
 == Audit log fields
@@ -90,7 +93,7 @@ In the UI, a status request will show the following information:
 - Expiry date of the request
 - Request status (success, failed, requested)
 
-Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 10 days.
+Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 30 days.
 
 image::audit-log-request.png[Audit log requests]
 

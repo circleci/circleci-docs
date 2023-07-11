@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "データベースの設定例"
-short-title: "データベースの設定例"
 description: "structure.sql を使用した Rails アプリ、PostgreSQL を使用した Go アプリ、MySQL プロジェクト用の PostgreSQL/Rails や MySQL/Ruby を使ったデータベースの config.yml ファイルの設定例を紹介します。"
-order: 35
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このドキュメントでは、PostgreSQL/Rails および MySQL/Ruby を使用したデータベースの [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの設定例を紹介します。
@@ -140,7 +137,7 @@ jobs:
 ## Go アプリケーションと PostgreSQL の設定例
 {: #example-go-app-with-postgresql }
 
-以下の設定例に関する詳しい説明や、アプリケーションのパブリックコードリポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/language-go/)を参照してください。
+以下の設定例に関する詳しい説明や、アプリケーションのパブリックコードリポジトリについては、[Go 言語ガイド](https://github.com/CircleCI-Public/circleci-demo-go)を参照してください。
 
 ```yaml
 version: 2
@@ -329,8 +326,8 @@ workflows:
 {:.tab.mysql_example.Server_2}
 ```yaml
 # Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with 
-# browser testing require the use of the CircleCI browser-tools orb, available 
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
 # with config version 2.1.
 version: 2
 jobs:

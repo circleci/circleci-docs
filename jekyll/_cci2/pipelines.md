@@ -2,9 +2,7 @@
 layout: classic-docs
 title: "Pipelines Overview"
 description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
-redirect_from: /project-build/
-redirect_from: /api-job-trigger/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -27,6 +25,15 @@ A pipeline is composed of workflows, which are composed of jobs. By navigating f
 The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members.
 
 ![Download and share job step output](/docs/assets/img/docs/pipelines-job-output.png)
+
+## VS Code extension
+{: #visual-studio-code-extension }
+
+If you use Visual Studio Code, you can also monitor and interact with your pipelines directly from VS Code with the [official CircleCI extension](/docs/vs-code-extension-overview/). The extension allows you to customize which projects and pipelines you want to follow, as well as view job logs and test results, download artifacts, approve, re-run, and debug jobs with SSH, and get notified when your workflows fail or need approval.
+
+![Screenshot showing the detailed view of a failed test](/docs/assets/img/docs/vs_code_extension_job-details.png)
+
+The CircleCI VS Code extension is available to download on the [VS Code marketplace.](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)
 
 ## Next steps
 {: #next-steps}

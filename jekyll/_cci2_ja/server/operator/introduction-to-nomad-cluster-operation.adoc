@@ -1,8 +1,9 @@
 ---
 
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - サーバー管理者
 ---
 = Nomad クラスタの操作ガイド
 :page-layout: classic-docs
@@ -135,6 +136,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* <<using-metrics#,メトリクスの使用>> ガイドを読む
+* link:/docs/server/operator/managing-user-accounts#,[ユーザーアカウントの管理ガイド]をお読みください。
 +
 endif::[]

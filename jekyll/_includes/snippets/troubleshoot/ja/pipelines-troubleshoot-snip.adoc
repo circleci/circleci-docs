@@ -1,0 +1,84 @@
+[#why-is-my-scheduled-pipeline-not-running]
+=== パイプラインのスケジュール実行が実行されないのはなぜですか？
+
+パイプラインのスケジュール実行が実行されない場合、以下を確認してください。
+
+- スケジュール化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？ この設定を確認するには、Webアプリの**トリガー（Triggers）**セクションの**アトリビューション （Attribution）** を選択します。
+- スケジュールに設定されたブランチが削除されていないかを確認する
+- お客様の VCS 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効している場合、リクエストが失敗します。
+
+[#jobs-not-running-when-push-commits]
+=== コミットをプッシュしてもジョブが実行されません。
+
+CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 多くの場合、`.circleci/config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
+
+詳細については、xref:introduction-to-yaml-configurations#[YAML に関するページ]を参照してください。
+
+`.circleci/config.yml` のフォーマットミスを確認し、それでも解決しない場合は、 
+ CircleCI サポートセンターで検索してみてください。
+
+[#why-is-my-job-queued]
+=== ジョブがキューイングするのはなぜですか？
+
+お客様の組織のプランによっては同時実行に制限があり、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、link:https://circleci.com/ja/pricing/[ご利用プランのアップグレード]をご検討ください。
+
+[#why-are-my-jobs-queuing-performance-plan]
+=== Performance プランを利用しているのに、ジョブがキューイングするのはなぜですか?
+
+CircleCI のすべてのお客様にシステムを安定した状態で利用していただけるよう、xref:configuration-reference#resourceclass[リソースクラス]ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポート]に制限値の引き上げを依頼してください。
+
+[#find-project-projects-dashboard]
+=== プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
+
+ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 左上にユーザー `my-user` が表示されている場合、`my-user` に属するプロジェクトだけが  *Projects* の下に表示されます。  `your-org/project` というプロジェクトをビルドする場合は、アプリケーションの組織切替メニューの組織を `your-org` に切り替える必要があります。
+
+[#how-do-docker-image-names-work]
+=== Docker イメージの名前はどのように機能していますか？ どこからプルされていますか？
+
+CircleCI  では、現在 link:https://hub.docker.com/[Docker Hub] からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 link:https://hub.docker.com/explore/[公式の Docker イメージ]の場合、単純にイメージ名やタグを指定してプルできます。
+
+----
+golang:1.7.1-jessie
+redis:3.0.7-jessie
+----
+
+Docker Hub のパブリックイメージの場合は、下記のようにアカウント名やチームのユーザー名を付加してプルすることも可能です。
+
+----
+my-user/couchdb:1.6.1
+----
+
+[#best-practice-for-specifying-image-versions]
+=== Docker イメージのバージョンを指定するときのベストプラクティスは？
+
+`latest` タグを付けずにイメージのバージョンを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、xref:using-docker#docker-image-best-practices[Docker イメージのベストプラクティス]や xref:circleci-images#best-practices[CircleCI イメージのベストプラクティス]を参照してください。
+
+[#set-the-timezone-in-docker-images]
+=== イメージのバージョン指定に関するベスト プラクティスを教えてください。
+
+Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 定義された変数 `TZ` を使った `.circleci/config.yml` の設定例は以下のようになります。
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: your/primary-image:version-tag
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: mysql:5.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+           TZ: "America/Los_Angeles"
+    working_directory: ~/your-dir
+    environment:
+      TZ: "America/Los_Angeles"
+----
+
+この例では、プライマリ イメージと mySQL イメージの両方にタイムゾーンを設定しています。
+
+設定できるタイムゾーンの一覧は、link:https://en.wikipedia.org/wiki/List_of_tz_database_time_zones[Wikipedia] でご確認ください。

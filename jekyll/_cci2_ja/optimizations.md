@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "最適化の概要"
-short-title: "最適化の概要"
 description: "CircleCI ビルドの最適化"
-redirect_from: /ja/optimization-cookbook/
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 各方法について簡単に説明し、ジョブを高速化するためのユースケースを紹介します。
@@ -74,11 +71,9 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 ## リソースクラス
 {: #resource-class }
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/ja/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
+`resource_class` を使用すると、CPU と RAM のリソース量をジョブごとに指定できます。 クラウド版 CircleCI でご利用いただけるリソースクラスの全オプションリストは、[設定ファイルのリファレンス](/docs/configuration-reference/#resourceclass)でご確認ください。 CircleCI Server 用の同リストについては、システム管理者にお問合せください。
 
-`resource_class` が明示的に宣言されていない場合、CircleCI は組織に最適なデフォルトのリソースを探します。
-
-* 詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/#resourceclass)の `resource_class` を参照してください。
+* リソースクラスの詳細については、[リソースクラスの概要](/docs/resource-class-overview/)のページをお読みください。
 
 ## 関連項目
 {: #see-also }

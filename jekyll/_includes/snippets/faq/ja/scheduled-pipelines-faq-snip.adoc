@@ -1,0 +1,47 @@
+[#can-i-migrate-existing-scheduled-workflows]
+=== 既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行することはできますか？
+
+はい、できます。詳細については、xref:migrate-scheduled-workflows-to-scheduled-pipelines#[パイプラインのスケジュール実行への移行] を参照してください。
+
+[#find-schedules-that-i-have-created]
+=== 作成したスケジュールはどうやって探せば良いですか？
+
+スケジュール化されたパイプラインは CircleCI に直接保存されるため、スケジュール毎に関連付けされた UUID があります。 作成したスケジュールは、プロジェクト設定の**トリガー（Triggers）**のページで閲覧できます。 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
+
+```shell
+curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>"
+```
+
+GitHub および Bitbucket ユーザーの場合: `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-type/org-name/repo-name` の形式を取ります。
+
+[#what-time-zone-is-used-for-scheduled-pipelines]
+=== パイプラインのスケジュール実行の際に使われるタイムゾーンは？
+
+スケジュールの指定は、UTC 協定世界時のタイムゾーンに基づきます。
+
+[#pipelines-scheduled-to-run-specific-time-of-day]
+=== パイプラインを指定した日時にスケジュール実行することは可能ですか？
+
+はい、できます。 スケジュールされたパイプラインは、xref:scheduled-pipelines#use-project-settings[CircleCIウェブアプリ]、または xref:scheduled-pipelines#use-the-api[CircleCI API v2]を使って設定できます。
+
+現在xref:workflows#scheduling-a-workflow[ワークフローのスケジュール実行]機能を使用されている場合は、xref:migrate-scheduled-workflows-to-scheduled-pipelines#[移行ガイド]を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
+
+[#scheduled-pipelines-guaranteed-to-run-time-scheduled]
+=== スケジュールを設定したパイプラインは、指定した時間どおりに正確に実行されますか?
+
+スケジュールの正確性については保証できません。 スケジュールは、設定した時間にコミットがプッシュされたとして実行されます。
+
+[#scheduled-pipeline-run-later]
+=== パイプラインのスケジュール実行が思っていたより遅いのはなぜですか？
+
+link:https://en.wikipedia.org/wiki/Cron#CRON_expression[Cron 式]と比較して、パイプラインのスケージュール実行にはスケジュール方法に微妙な違いがあります。
+
+たとえば、08:00 (協定世界時) のスケジュールを 1 時間に 1 回と指定すると、このスケジュールされたパイプラインは 08:00 ～ 09:00 (協定世界時) の間に 1 回実行されます。 これは 08:00 (協定世界時) ちょうどに実行されるという意味ではないのでご注意ください。
+
+このパイプラインのスケジュール実行は、その後は常に最初の実行と同じ時間に実行されます。 つまり、最初にスケジュールされたパイプラインが 08:11 (協定世界時) に実行された場合、その次も 08:11 (協定世界時) に実行されます。
+
+[#do-you-support-regex]
+=== 正規表現に対応していますか？
+
+現在対応していません。 パイプラインのスケジュール実行には、Webhook、API 呼び出し、スケジュールに含まれるコミット SHA、ブランチ、タグ (完全認証、正規表現なし) などの高度に決定論的な入力が必要です。

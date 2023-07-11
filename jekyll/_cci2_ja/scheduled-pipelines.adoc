@@ -1,0 +1,123 @@
+---
+
+layout: classic-docs
+short-title: Scheduled Pipelines
+contentTags:
+  platform:
+  - クラウド
+---
+= パイプラインのスケジュール実行
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI プロジェクトでパイプラインをスケジュール実行する方法を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+*パイプラインのスケジュール実行機能は現時点では GitHub VCS ユーザーと Bitbucket VCS ユーザーにご利用いただけます。* パイプラインのスケジュール実行機能を使うと、スケジュールに基づき定期的にパイプラインをトリガーすることができます。 パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
+
+- パイプラインに関連付けるユーザーの管理: これにより、xref:contexts#project-restrictions[制限付きコンテキスト]の使用が可能になります。
+- セットアップ ワークフロー経由のxref:dynamic-config#[ダイナミックコンフィグ]の使用
+- `.circleci/config.yml`. の編集が不要なスケジュール変更
+- xref:skip-build#auto-cancelling[自動キャンセル機能]の利用.
+- スケジュールに関連付ける xref:pipeline-variables#pipeline-parameters-in-configuration[パイプライン パラメーター]の指定。
+- ワークフロー間などで共通するスケジュールの管理.
+
+パイプラインのスケジュール実行は、API を使って、または CircleCI Web アプリのプロジェクト設定から設定します。
+
+NOTE: パイプラインのスケジュール実行は、1 つのブランチに対してのみ設定できます。 2 つのブランチに対してスケジュール実行をしたい場合、2 つのスケジュールを設定する必要があります。
+
+[#introduction]
+== はじめに
+
+パイプラインのスケジュール実行は、CircleCI Web アプリまたは API から、スケジュールに基づいて定期的にパイプラインを起動することができます。 スケジュールは、毎日、毎週、毎月、または非常に特定のタイムテーブルの範囲にすることができます 基本的なスケジュールされたパイプラインを設定するには、`.circleci/config.yml` ファイルに追加の設定は必要ありませんが、この機能をより高度に使用するには、追加の `.circleci/config.yml` 設定が必要になります（例、ワークフローのフィルタリング、またはパラメータの使用など）。
+
+パイプラインパラメータは、文字列、整数、またはブール値の形で型付けされたパイプライン変数です。 スケジュールされたパイプラインにパラメータを追加するには、Web アプリでスケジュールを設定する際に、トリガーフォームから行います。 この方法で設定されたパラメータは、パラメータキー（`parameters` ）を使用して設定ファイルに追加する必要があります。
+
+スケジューリングされたパイプラインは、CircleCI スケジューリングシステム、または特定のユーザー（例えば、自身）である "actor" によって実行するように設定されています。 ワークフローで制限されたコンテキストを利用する場合、スケジューリングアクターは重要な考慮事項です。 ワークフローを実行するユーザー（actor）がコンテキストへのアクセス権を持っていない場合、ワークフローは `Unauthorized` ステータスで失敗します。
+
+基本的な使い方は xref:set-a-nightly-scheduled-pipeline#[パイプラインのスケジュール実行を夜間に設定する]ページで、より高度な例は xref:schedule-pipelines-with-multiple-workflows#[複数のワークフローを使ったパイプラインのスケジュール実行] ページをご覧ください。
+
+[#get-started-with-scheduled-pipelines]
+== パイプラインのスケジュール実行機能の使い方
+
+パイプラインのスケジュール実行機能を使うには、API を使用する方法と、CircleCI Web アプリを使用する方法があります。 それぞれの方法を下記でご紹介します。
+
+[#use-project-settings]
+=== Web アプリのプロジェクト設定を使用する
+
+1. CircleCI Web アプリで、サイドバーにある **Projects** に移動し、プロジェクトの隣にある 省略記号 (…) をクリックします。 **Project Settings** ボタンは各プロジェクトのランディングページにもあります。
+1. **Triggers** に移動します。
+1. 新しいスケジュールを作成するには、**Add Trigger** をクリックします。
+1. フォームに入力して新しいスケジュールを定義し、**Save Trigger** をクリックします。
+
+このフォームでは、xref:pipeline-variables#[パイプラインパラメーター] を追加するオプションも指定します。これは、設定ファイルで最初に宣言した型指定されたパイプライン変数です。
+
+複数のワークフローで共通のスケジュールを管理するには、`.circleci/config.yml` ファイルで手動で設定する必要があります。 コード例については xref:schedule-pipelines-with-multiple-workflows#[複数のワークフロー]を使ったパイプラインのスケジュール実行のページを参照してください。
+
+[#use-the-api]
+=== API を使用する場合
+
+プロジェクトにスケジュール化したワークフローがなく、パイプラインのスケジュール実行を試してみたい場合：
+
+1. CCI トークンを準備します、または xref:managing-api-tokens#[API トークンの管理] のページに記載されている手順に従って新しいトークンを作成します。
+1. link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API を使用] して新しいスケジュールを作成します。 たとえば以下のようになります。
+
+```shell
+curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>" \
+--header "Content-Type: application/json" \
+--data-raw '{
+    "name": "my schedule name",
+    "description": "some description",
+    "attribution-actor": "system",
+    "parameters": {
+      "branch": "main"
+      <additional pipeline parameters can be added here>
+    },
+    "timetable": {
+        "per-hour": 3,
+        "hours-of-day": [1,15],
+        "days-of-week": ["MON", "WED"]
+    }
+}'
+```
+
+詳細については、link:https://circleci.com/docs/api/v2[API v2 に関するドキュメント]の **スケジュール** のセクションを参照してください。
+
+[#migrate-scheduled-workflows-to-scheduled-pipelines]
+== ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
+
+パイプラインのスケジュール実行に移行する必要がある既存のワークフローがある場合は、xref:migrate-scheduled-workflows-to-scheduled-pipelines#[パイプラインのスケジュール実行への移行ガイド]をご覧ください。
+
+[#scheduled-pipelines-video-tutorial]
+== パイプラインのスケジュール実行のビデオチュートリアル
+
+このビデオでは以下のシナリオに対する短いチュートリアルをご覧いただけます。
+
+- Web アプリでスケジュールを設定する
+- API を使ってスケジュールを設定する
+- ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行する
+
+++++
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/x3ruGpx6SEI" title="Scheduled pipelines tutorial" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+++++
+
+これらのシナリオに関するドキュメントは、以下のページを参照してください：
+- xref:set-a-nightly-scheduled-pipeline#[パイプラインのスケジュール実行を夜間に設定する]
+- xref:schedule-pipelines-with-multiple-workflows#[複数のワークフローを使ったパイプラインのスケジュール実行]
+
+[#scheduled-pipelines-faqs]
+== FAQ
+
+include::../_includes/snippets/faq/ja/scheduled-pipelines-faq-snip.adoc[]
+
+[#next-steps]
+== 次のステップ
+
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]
+- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインのスケジュール実行を夜間に設定する]

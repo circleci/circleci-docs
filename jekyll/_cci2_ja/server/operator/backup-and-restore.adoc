@@ -1,7 +1,9 @@
 ---
-version:
-- Server v4.x
-- サーバー管理者
+
+contentTags:
+  platform:
+    - Server v4.x
+    - サーバー管理者
 ---
 = バックアップと復元
 :page-layout: classic-docs
@@ -27,8 +29,6 @@ NOTE: CircleCI サービスのバックアップと復元は、Velero に依存�
 
 [#creating-backups]
 == バックアップの作成
-
-[source,bash]
 
 ----
 K8S_NS=$(helm list -o yaml  | yq '.[].namespace')

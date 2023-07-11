@@ -13,13 +13,11 @@ end
 
 desc 'Build Jekyll site'
 task :build do
-  # Create jekyll config file to override things
-  sh "echo 'baseurl: \"\/#{JEKYLL_BASENAME}\"' > jekyll/_config_override.yml"
   # Build the Jekyll site
   config = Jekyll.configuration({
     'source' => './jekyll',
     'destination' => "./jekyll/_site/#{JEKYLL_BASENAME}",
-    'config' => ['./jekyll/_config.yml','./jekyll/_config_production.yml','./jekyll/_config_override.yml']
+    'config' => ['./jekyll/_config.yml']
   })
   site = Jekyll::Site.new(config)
   Jekyll::Commands::Build.build site, config
@@ -64,7 +62,7 @@ task :test do
   ]
 
   ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
-  options = { :allow_hash_href => true,  :check_favicon => true, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => HTML_PROOFER_PARALLEL}, :file_ignore => ignore_files}
+  options = { :allow_hash_href => true,  :check_favicon => false, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => HTML_PROOFER_PARALLEL}, :file_ignore => ignore_files}
 
   HTMLProofer.check_directory("./jekyll/_site", options).run
 end

@@ -5,14 +5,12 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Use the CircleCI CLI to split tests
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up identical execution environments in which your job is run.
 
@@ -39,18 +37,15 @@ The CLI supports globbing test files using the following patterns:
 - `[abc]` matches any character (excluding path separators) against characters in brackets
 - `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
 
-To check the results of pattern-matching, use the `echo` command.
+**Ensure that the glob string has quotes.**  To check the results of pattern-matching, use the `echo` command.
 
 ```yaml
 # ~/.circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/node:20.3.0
     parallelism: 4
     steps:
       - run:

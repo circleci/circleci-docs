@@ -1,0 +1,55 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= プロジェクトの値と変数
+:description: CircleCI プロジェクトで使用する定義済みの値のリスト
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このページでは、CircleCI プロジェクトで使用できる定義済みの値について説明します。
+
+[#built-in-environment-variables]
+== 定義済み環境変数
+
+下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 一つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
+
+環境変数はジョブレベルで設定されます。 一つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
+
+NOTE: **注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run`ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくは xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで環境変数]を設定するをご覧ください。
+
+include::../_includes/snippets/built-in-env-vars.adoc[]
+
+[#pipeline-values]
+== パイプライン値
+
+パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
+
+include::../_includes/snippets/pipeline-values.adoc[]
+
+たとえば以下のようになります。
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:20.3.0
+    environment:
+      CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
+    working_directory: ~/main
+    steps:
+      - run: echo "This is pipeline ID << pipeline.id >>"
+      - run: echo $CIRCLE_COMPARE_URL
+```
+
+上記の方法で environment キーの変数を設定する際にパイプラインの変数が空の場合、変数は <nil> が設定されます。 文字列を空にする必要がある場合は、link:set-environment-variable#set-an-environment-variable-in-a-shell-command[シェルコマンドで変数を設定]するをご覧ください。

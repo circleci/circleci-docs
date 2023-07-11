@@ -1,21 +1,21 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Installing server behind a proxy
 :page-layout: classic-docs
 :page-description: Learn how to install CircleCI server v4.x behind a proxy.
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
 
 Configuring a proxy happens during link:/docs/server/installation/phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
 
-toc::[]
+
 
 [#known-limitations]
 == Known limitations
@@ -39,9 +39,6 @@ jobs:
   my-job:
     docker:
       - image: cimg/node:17.2.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           HTTP_PROXY: http://proxy.example.com:3128
           HTTPS_PROXY: http://proxy.example.com:3128

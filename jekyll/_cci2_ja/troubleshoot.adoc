@@ -1,0 +1,40 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= トラブルシューティング
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Troubleshoot CircleCI and various setups and integrations.
+:icons: font
+:toc: macro
+
+:toc-title:
+
+This page offers troubleshooting suggestions for the following aspects of CircleCI:
+
+[.table]
+[cols=2*]
+|===
+|<<#orbs,Orbs>>
+|<<#container-runner,Container runner>>
+
+|<<#pipelines,Pipelines>>
+|<<#machine-runner,Machine runner>>
+|===
+
+== Orb
+
+include::../_includes/snippets/troubleshoot/ja/orb-troubleshoot-snip.adoc[]
+
+== パイプライン
+
+include::../_includes/snippets/troubleshoot/ja/pipelines-troubleshoot-snip.adoc[]
+
+// Self-hosted runner (H2s need to be in the snippet for now)
+
+include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-troubleshoot-snip.adoc[]

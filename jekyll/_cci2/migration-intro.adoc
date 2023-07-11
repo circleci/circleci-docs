@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?

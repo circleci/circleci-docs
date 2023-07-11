@@ -1,6 +1,6 @@
 [NOTE]
 ====
-組織 ID が要求されます。組織 ID には `--owner-id` フラグがついています。 組織/ユーザー ID を見つけるには、CircleCI Web アプリのサイドバーで **Organization Settings** を選択します。
+組織 ID を `--owner-id` フラグで指定する必要があります。
 
 image:org-id.png[screenshot showing where to find your organization ID]
 ====

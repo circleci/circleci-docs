@@ -15,13 +15,13 @@ contentTags:
 toc::[]
 
 ## CircleCI Server 3.0 に、データ保持ポリシーは定められていますか？
-現在、CircleCI ではデータ保持ポリシーは定めていません。 データは CircleCI Server 上に無期限に保存されます。
+Data used to power <<insights#, Insights>> and data returned by the link:https://circleci.com/docs/api/v2/index.html#tag/Insights[Insights APIs] when using Server 3.0 are subject to the retention policy stated on the API's documentation. CircleCI Server 3.0 で使用する他すべてのデータについては、保持ポリシーは定められておらず、無期限に保存されます。  
 
-## Nomad の証明書にはどのような権限がありますか?
-Nomad の mTLS を含めた、 Nomad 関連のすべての証明書に関するすべての操作を可能にする権限があります。
+## Nomad の証明書にはどのような権限がありますか？
+Nomad の mTLS を含めた、Nomad 関連のすべての証明書に関するすべての操作を可能にする権限があります。
 
 ## ヘルスチェックを行うポーリングの時間を変更したり無効にしたりすることはできますか？
-いいえ。 ポーリングのカスタマイズはできません。
+いいえ。ポーリングのカスタマイズはできません。
 
 ## KOTS のアプリケーション状態のオプションとはどのようなものですか？
 https://kots.io/vendor/config/application-status/#resource-statuses[KOTS のドキュメント]を参照してください。

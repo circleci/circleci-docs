@@ -1,0 +1,153 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI Orb の作成
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Orb 開発キットで Orb を作成する方法をチュートリアル形式で説明します。
+:icons: font
+:toc: macro
+:toc-title:
+
+このチュートリアルでは、Orb 開発キットを使用して新しい Orb を作成する方法について説明します。 最初に行うのは、link:https://github.com[GitHub.com] でのリポジトリの新規作成です。
+
+このチュートリアルの内容は次のとおりです。
+
+* Orb 用の GitHub リポジトリを作成する
+* Orb の設定ファイルテンプレートをニーズに応じてカスタマイズし、追加する
+* Orb 開発用の CI/CD パイプラインをセットアップし、Orb の開発に参加できるユーザーを制限する
+
+チュートリアルを最後まで進めれば、独自の Orb を開発する準備は完了です。
+
+本ページの手順は、以下の動画でも説明しています。
+
+.CircleCI Orb の作成と初期化
+video::5ta4RUwqOBI[youtube]
+
+[#prerequisites]
+== 前提条件
+
+* CircleCI アカウントに GitHub アカウントを連携する:  手順については、「link:/docs/first-steps/[CircleCI のユーザー登録]」を参照してください。
+* ローカルマシンに link:/docs/local-cli/#installation[CircleCI CLI をインストール]して、link:https://app.circleci.com/settings/user/tokens[パーソナルアクセストークン]を設定する:  必ず最新バージョンの CircleCI CLI を使用してください。 CLI のバージョンは `v0.1.17087` 以降である必要があります。
++
+```shell
+$ circleci update
+
+$ circleci version
+```
+* GitHub の組織 (Organization) 用のlink:/docs/orb-author-intro/#register-a-namespace[名前空間を登録する]:  GitHub 上の組織が、Orb の作成先となる CircleCI 名前空間のオーナーとなります (個人用の組織と名前空間を使用している場合は、自動で適切に設定されます)。
+
+[#create-your-orb]
+== Orb を作成する
+
+WARNING: 作成した Orb を削除することはできません。 また、Orb は link:https://semver.org/[セマンティックバージョニング]に準拠しており、パブリッシュ後に変更を加えることもできません。 パブリッシュされた Orb は別のプロジェクトで必須とされる可能性があります。 そのため、いずれかのプロジェクトが突然機能しなくなる事態を防ぐために、Orb の削除は禁止されています。
+
+[#create-a-new-repo]
+=== 2. Orb を初期化する
+
+ターミナルを開き、以下に示す CLI の `orb init` コマンドを使用して新しい Orb プロジェクトを初期化します。 `circleci orb init` コマンドには、Orb プロジェクトを作成および初期化するためのディレクトリを指定します。
+
+NOTE: CircleCI Server をご利用の場合は、Orb をプライベートのインストール環境に保持するために、`--private` フラグを使用してください。 "README.md を追加する"、"ライセンスを選ぶ" といったオプションのチェックはすべて外してください。
+
+image::{{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png[New GitHub Repo]
+
+完了すると、GitHub の URL が表示されます。 手順 4 で必要になるので、メモしておいてください。 URL は SSH か HTTPS を選択できます。どちらでも認証は可能です。
+
+image::{{site.baseurl}}/assets/img/docs/github_new_quick_setup.png[Orb Registry]
+
+CAUTION: この段階で Orb リポジトリをプルする必要はありません。 プルは、次の手順で `orb init` を実行する際に行います。 このコマンドの前にリポジトリをプルすると、問題が発生します。
+
+=== 3. Orb の全自動セットアップオプションを選択する
+
+ターミナルを開き、以下に示す CLI の `orb init` コマンドを使用して新しい Orb プロジェクトを初期化します。 `circleci orb init` コマンドには、Orb プロジェクトを作成および初期化するためのディレクトリを指定します。 このディレクトリと GitHub のプロジェクトリポジトリには、同じ名前を使用することをお勧めします。
+
+CAUTION: CircleCI Server をご利用の場合は、Orb をプライベートのインストール環境に保持するために、`--private` フラグを使用してください。
+
+WARNING: 一旦初期化した Orb を**パブリックからプライベート、またはその逆に変えることはできません**。 プライベート Orb を作成する場合は、必ず `--private` フラグを指定してください。
+
+* link:/docs/orb-intro/#public-orbs[パブリック] Orb を初期化する場合:
++
+```shell
+circleci orb init </path/to/myProject-orb>
+```
+* link:/docs/orb-intro/#private-orbs[プライベート] Orb を初期化する場合:
++
+```shell
+circleci orb init </path/to/myProject-orb> --private
+```
+
+=== 4. 画面の指示に従って Orb のセットアップを完了する
+
+```shell
+? Would you like to perform an automated setup of this orb?:
+   ▸  Yes, walk me through the process.
+      No, I will handle everything myself.
+```
+
+link:https://github.com/CircleCI-Public/Orb-Template[Orb のテンプレート]には、Orb のlink:/docs/orb-concepts/#orb-packing[パッケージ化]、link:/docs/testing-orbs/[テスト]、link:/docs/creating-orbs/[パブリッシュ]を自動で行う CI/CD パイプラインが含まれています (詳細は「link:/docs/creating-orbs/[Orb のパブリッシュ]」を参照)。 Orb のプロジェクトが CircleCI でフォローされ、自動化済みの CI/CD パイプラインが追加されます。
+
+セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/contexts/)に格納するかどうかを尋ねられます。
+
+NOTE: link:https://github.com/CircleCI-Public/Orb-Template[Orb のテンプレート]をダウンロードするだけに留める場合は、「No, I will handle everything myself (いいえ。すべて手動で行う)」を選択します。 手動オプションを選択した場合は、「link:/docs/orb-author-validate-publish/[Orb の手動作成プロセス]」に従って Orb の作成とパブリッシュを行ってください。
+
+=== 5. Orb のジョブをトリガーできるユーザーを制限する
+
+link:/docs/contexts/#restrict-a-context-to-a-security-group-or-groups[セキュリティ グループ]を使用すると、ジョブのトリガーを許可したユーザーだけにアクセスを制限できます。 プライベートのlink:/docs/managing-api-tokens/[パーソナル API トークン]へのアクセスも、これらのユーザーだけに制限されます。 このプロセスでは、手順 1 で取得したリモート GitHub リポジトリの URL の入力も求められます。
+
+CircleCI Web アプリで **[Organization Settings (組織の設定)] > [Contexts (コンテキスト)]** の順に移動して、link:/docs/contexts/#restricting-a-context[コンテキスト]を確認します。
+
+セットアッププロセスでは、xref:managing-api-tokens#[パーソナル API トークン]を `orb-publishing` xref:contexts#[コンテキスト]に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。 これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
+
+=== 6. GitHub に変更内容をプッシュする
+
+Orb のセットアッププロセスでは、`orb init` コマンドにより、Orb 自動開発パイプラインの準備が整えられます。 CLI で CircleCI 上のプロジェクトのフォローまで自動的に進めるには、CLI で生成されたカスタマイズ済みの Orb テンプレートをリポジトリにプッシュする必要があります。
+
+これを実行するよう要求されたら、別のターミナルから以下のコマンドを実行します。「default-branch」は、実際のデフォルトブランチの名前に置き換えてください。 Orb の作成が完了していれば、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、**セキュリティ グループ**を追加します。
+
+.コンテキストの保護
+video::ImPE969yv08[youtube]
+
+=== 7. セットアップを完了する
+
+変更がプッシュされたら、ターミナルに戻り、セットアッププロセスを続けます。 CLI により、CircleCI 上で Orb プロジェクトが自動的にフォローされ、サンプルコードで Orb をビルドしテストするパイプラインがトリガーされます。
+
+CircleCI でビルド中のプロジェクトへのリンクが表示され、パイプライン全体を見ることができます。
+
+```shell
+git push origin <default-branch>
+```
+
+完了したら、元のターミナルに戻って、変更がプッシュされたことを確認します。
+
+=== 8. ダイナミックコンフィグを有効にする
+
+Orb 開発キットではlink:/docs/dynamic-config/[ダイナミックコンフィグ]を利用しているため、この機能を有効にする必要があります。 最初のパイプラインでは、この機能が有効になっていないことを知らせるエラーメッセージが表示されます。
+
+link:/docs/dynamic-config/#getting-started-with-dynamic-config-in-circleci[CircleCI のダイナミックコンフィグの入門ガイド]に示されているように、CircleCI で Orb の **[Project Settings (プロジェクト設定)]** ページを開き、**[Advanced (詳細設定)]** タブにある **[Enable dynamic config using setup workflows (セットアップワークフローによるダイナミックコンフィグを有効にする)]** をオンにします。 また、CLI によって新しい開発ブランチ `alpha` に自動的に移行されたことも確認できます。 ブランチの名前は自由であり、`alpha` ブランチ以外で Orb の作成を進めてもかまいません。
+
+=== 9. 独自の Orb を作成する
+
+デフォルト以外のブランチで (セットアップ時には `alpha` ブランチに自動的に移動します)、サンプルの Orb コードをニーズに合わせて変更します。 変更を__プッシュする__たびに、Orb が自動的にビルドおよびテストされます。
+
+また、link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml[.circleci/test-deploy] ファイルで Orb コンポーネントのテスト方法を確認し、Orb の変更内容に応じてテストを調整してください。
+
+最初の安定版 Orb をデプロイする準備ができたら、「link:/docs/creating-orbs/[Orb のパブリッシュ]」で変更した Orb のデプロイに関する情報を参照してください。 この時点で、パイプラインを手動で実行できるようになります。ただし、現時点で使用しているのはサンプルコードのみであるため、実行する必要はありません。
+
+=== 9. 独自の Orb を作成する
+
+デフォルト以外のブランチで (セットアップ時には `alpha` ブランチに自動的に移動します)、サンプルの Orb コードをニーズに合わせて変更します。 変更を__プッシュする__たびに、Orb が自動的にビルドおよびテストされます。 Orb の作成方法の詳細については、link:/docs/orb-author/#writing-your-orb[Orb の作成プロセス]を参照してください。
+
+また、link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml[.circleci/test-deploy] ファイルで Orb コンポーネントのテスト方法を確認し、Orb の変更内容に応じてテストを調整してください。 Orb のテストの詳細については、「link:/docs/testing-orbs/[Orb のテスト手法]」を参照してください。
+
+最初の安定版 Orb をデプロイする準備ができたら、「link:/docs/creating-orbs/[Orb のパブリッシュ]」で変更した Orb のデプロイに関する情報を参照してください。
+
+.Orb のビルドとテスト
+video::kTeRJrwxShI[youtube]
+
+[#next-steps]
+== 次のステップ

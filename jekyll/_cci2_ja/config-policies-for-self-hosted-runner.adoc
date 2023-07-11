@@ -1,0 +1,134 @@
+---
+
+description: セルフホストランナーでジョブを実行可能なプロジェクトを制限するポリシーを作成する方法について解説します。
+contentTags:
+  platform:
+  - クラウド
+---
+= 設定ファイルのポリシーをセルフホストランナーに適用する (オープンプレビュー)
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+NOTE: 設定ファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
+
+このガイドでは、セルフホストランナーのリソースクラス上でジョブを実行可能なプロジェクトを制限する設定ファイルポリシーの作成方法について説明します。 設定ファイルのポリシーの詳細については、「xref:config-policy-management-overview#[設定ファイルのポリシー管理機能の概要]」を参照してください。
+
+[#prerequisites]
+== 前提条件
+
+* CircleCI CLI をインストールまたは更新する。CLI で設定ファイルのポリシーを利用する前に、トークンで認証を行ってください。 詳細については、「xref:local-cli#[CircleCI のローカル CLI のインストール]」をご覧ください。
+* セルフホストランナーをセットアップする。 xref:runner-installation#[セルフホストランナーのインストールガイド]をご覧ください。
+* 以下のように、組織で設定ファイルポリシーの評価を **enabled** に設定する。この設定により、パイプラインのトリガー時に、組織のポリシーに対するプロジェクト設定の評価が**行われます**。
++
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
++
+{% include snippets/ja/find-organization-id.adoc %}
+
+[#create-your-policy]
+== 1.  ポリシーを作成する
+
+. まだ作成していない場合は、まずポリシー保存用の空のディレクトリを作成します。 以下に例を示します。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 保存用のディレクトリ内に、新しいポリシーのファイルを作成します。 名前は `runner.rego` とします。
+. 作成した `runner.rego` ファイルに、以下のスニペットを貼り付けます。
++
+[source,rego]
+----
+package org
+import data.circleci.config
+
+policy_name["runner_policies"]
+
+enable_hard["resource_class_check"]
+
+resource_class_check = config.resource_class_by_project({ "namespace/resource_class": {"project_UUIDs"}})
+----
++
+以降の手順では、`namespace/resource_class` と `project_UUIDs` を、実際のセルフホストランナーのリソースクラスと既存のプロジェクトに置き換えます。 置き換え後の `runner.rego` ポリシーをアップロードすると、指定したセルフホストランナーで、指定したプロジェクトのジョブ以外を実行できなくなります。
+
+[#update-with-your-details]
+== 2. ポリシーに実際の情報を入力する
+
+. `namespace/resource_class` を、対象のランナーのリソースクラスで置き換えます。
+.. CircleCI Web アプリのサイドバーで **[Self-Hosted Runners (セルフホストランナー)]** を選択して、セルフホストランナーのインベントリに移動します。 このオプションが表示されない場合は、xref:runner-installation#[セルフホストランナーのインストール]を完了しているか確認してください。 このページに、利用可能なセルフホストランナーのリソースクラスがすべて表示されます。
+.. `runner.rego` ファイルの `namespace/resource_class` を、制限の対象にするリソースクラスの名前で置き換えます。
+. `project_UUIDs` をプロジェクトの ID で置き換えます。
+.. CircleCI Web アプリのサイドバーで **[Projects (プロジェクト)]** を選択して、プロジェクトダッシュボードに移動します。 セルフホストランナーでのビルドを許可するプロジェクトを見つけて、プロジェクトの隣に表示される省略記号 (`...`) をクリックし、**[Project Settings (プロジェクト設定)]** を選択します。
+.. 概要ページでプロジェクト ID をコピーして、`project_UUIDs` と置き換えます。
+
+[#push-up-your-policy-bundle]
+== 3. ポリシーバンドルをプッシュする
+
+CircleCI CLI を使用して、ポリシーバンドルを作成しアップロードします。
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+アップロードに成功すると、以下のようなメッセージが表示されます。
+
+[source,shell]
+----
+{
+  “Created”: [“runner_policies”]
+}
+----
+
+NOTE: ポリシーのテストの作成方法については、「xref:test-config-policies#[設定ファイルのポリシーのテスト]」を参照してください。
+
+[#a-more-complex-example]
+== 応用例
+
+このランナー制限ポリシーを基にして、ランナーリソースクラスとプロジェクトのペアをさらに追加したり、ランナー 1 つに複数のプロジェクトを許可したりできます。 そのためには、`resource_class_check` ルールを拡張します。
+
+以下のスニペットでは、ランナーリソースクラスを 2 つ (`my-namespace/runner-test1` と `my-namespace/runner-test2`) 指定し、それぞれに実行を許可するプロジェクトを設定しています。また、最初のリソースクラスでは、実行許可リストにプロジェクトを 2 つ設定しています。
+
+[source,rego]
+----
+
+package org
+import data.circleci.config
+
+policy_name["runner_policies"]
+
+enable_hard["resource_class_check"]
+
+resource_class_check = config.resource_class_by_project({
+  "my-namespace/runner-test1": {
+    "a20ae1c6-d723-4c03-9bb6-01d5b3594e02",
+    "2accadd0-c832-489e-b837-4de03def0d35"
+  },
+  "my-namespace/runner-test2": {
+    "637f9136-694e-4105-bb43-1028ffb9043e"
+  }
+})
+
+----
+
+[#next-steps]
+== 次のステップ
+
+* xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]
+* xref:test-config-policies#[設定ファイルのポリシーのテスト]
+* xref:config-policy-reference#[設定ファイルのポリシーに関するリファレンス]

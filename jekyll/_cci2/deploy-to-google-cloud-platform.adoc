@@ -5,14 +5,12 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 =  Deploy to Google Cloud Platform
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Google Cloud Platform.
 
@@ -53,31 +51,27 @@ workflows:
 In the following example, if the `build-job` passes and the current branch is `main`, CircleCI runs the deployment job.
 
 ```yml
-version: 2
+version: 2.1
 
 jobs:
   # build job ommitted for brevity
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
           name: Deploy Main to GKE
           command: |
-          # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
-          sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
-          # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
-          sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-          # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image.
-          # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
-          kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
+            # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
+            sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
+            # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+            # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image.
+            # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
+            kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
 
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build-job
@@ -87,7 +81,6 @@ workflows:
           filters:
             branches:
               only: main # Only deploy on the main branch
-
 ```
 
 For another example, see our link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud deployment example project].

@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
-title: "Configuring a Python Application on CircleCI"
-short-title: "Python"
+title: "Configure a Python application on CircleCI"
 description: "Continuous integration with Python on CircleCI"
-categories: [language-guides]
-order: 7
-contentTags: 
+contentTags:
   platform:
   - Cloud
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}

@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the basic features and settings of the CircleCI web app.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
 
@@ -18,7 +17,7 @@ Inside the application, you will find the status of builds, workflows and jobs, 
 [#dashboard-and-side-navigation]
 == Dashboard and side navigation
 
-Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
+Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdown menus at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
 
 image::web_ui_dashboard.png[Dashboard page]
 
@@ -46,6 +45,15 @@ At the very bottom of the side navigation (you may have to scroll down), you wil
 
 The sections below describe some of the pages of the web application in more detail.
 
+[#view-and-navigate-pipelines]
+== View and navigate pipelines
+
+Your pipelines appear on the **Dashboard** of the CircleCI web app as they are triggered. You can view workflows or single jobs by expanding a pipeline and clicking in on any workflow or job descriptor.
+
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
+
+image:pipeline-breadcrumbs.png[Pipelines Breadcrumbs]
+
 [#organization-switching]
 == Organization switching
 
@@ -58,9 +66,14 @@ If you do not see your project and it is not currently building on CircleCI, che
 [#projects]
 == Projects
 
-Projects associated with your organization will appear on the **Projects** page. You have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
+Projects associated with your organization will appear on the **Projects** page. You have the option to:
 
-Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on the dashboard of individual projects, which you can view by clicking on a project's name in the main dashboard.
+* _Set Up_ any project that you are the owner of in your VCS.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:notifications#[email notifications] for the project's status.
+
+Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
+
+Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, Insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
 
 image::web_ui_projects.png[Projects page]
 
@@ -115,7 +128,7 @@ image::web_ui_runner.png[Runner inventory]
 
 New resource classes will require an existing namespace, or creation of a new namespace if no namespace for the organization has been created yet (organizations can only create a single namespace), as well as a label to match your CircleCI job with a type of runner.
 
-In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. This process is also laid out on the xref:runner-installation#[self-hosted runner] page.
+In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. Learn more and get started with self-hosted runners on the xref:runner-overview#[CircleCI self-hosted runners overview].
 
 image::runnerui_step_four.png[Runner setup]
 

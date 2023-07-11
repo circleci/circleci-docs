@@ -10,50 +10,44 @@ contentTags:
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Linux.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+:machine:
+:linux:
+
+{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
 
 This page describes how to install CircleCI's machine runner on Linux.
 
-{% include snippets/runner-platform-prerequisites.adoc %}
+[#prerequisites]
+== Prerequisites
+
+{% include snippets/runner/machine-runner-prereq.adoc %}
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
 
 [#download-the-launch-agent-script]
-== Download the machine runner launch-agent script
+== 2. Download launch-agent script and install binary
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, ARM64, s390x or ppc64le:
-
-```shell
-curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
-```
-
-```shell
-chmod +x ./download-launch-agent.sh
-```
-
-```shell
-# For Linux x86_64:
-export platform=linux/amd64 && sh ./download-launch-agent.sh
-```
-
-```shell
-# For Linux ARM64:
-export platform=linux/arm64 && sh ./download-launch-agent.sh
-```
-
-```shell
-# For Linux s390x:
-export platform=linux/s390x && sh ./download-launch-agent.sh
-```
-
-```shell
-# For Linux ppc64le:
-export platform=linux/ppc64le && sh ./download-launch-agent.sh
-```
-
-After successful installation, the download-launch-agent.sh file can be deleted.
+{% include snippets/runner/launch-agent-download.adoc %}
 
 [#create-the-circleci-user-and-working-directory]
-== Create the `circleci` user and working directory
+== 3. Create `circleci` user and working directory
 
 These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
@@ -93,7 +87,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 ```
 
 [#create-the-circleci-self-hosted-runner-configuration]
-== Create the CircleCI's self-hosted runner configuration
+== 4. Create self-hosted runner configuration
 
 Create a `launch-agent-config.yaml` file with a path of `/etc/opt/circleci/launch-agent-config.yaml`, owned by `circleci`, with permissions `600`. Use the following commands:
 
@@ -127,7 +121,7 @@ runner:
 - Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#configure-selinux-policy]
-== Configure SELinux policy (RHEL 8)
+=== Configure SELinux policy (RHEL 8)
 
 An SELinux policy is required for self-hosted runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this self-hosted runner install.
 
@@ -157,7 +151,7 @@ sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 [#start-machine-runner]
-== Start machine runner
+== 5. Start machine runner
 
 You can now start machine runner as follows:
 

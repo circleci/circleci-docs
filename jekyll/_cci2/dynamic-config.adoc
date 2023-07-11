@@ -2,15 +2,16 @@
 layout: classic-docs
 contentTags:
   platform:
-  - Cloud
+    - Cloud
+    - Server v4.x
+    - Server v3.x
 ---
 = Dynamic Configuration
 :description: Docs page on using Setup Workflows for Dynamic Configuration
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific xref:pipeline-variables#[Pipeline values] or file paths.
 

@@ -1,34 +1,29 @@
 ---
 layout: classic-docs
 title: "config.yml のサンプルファイル"
-short-title: "config.yml のサンプルファイル"
 description: "config.yml のサンプルファイル"
-categories:
-  - 移行
-order: 2
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 suggested:
-  - 
+  -
     title: ダイナミックコンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
+  -
     title: Webhook の作成方法
     link: https://circleci.com/ja/blog/create-customizable-experiences-with-circleci-webhooks/
-  - 
+  -
     title: リリースの自動化
     link: https://circleci.com/blog/automating-your-releases-with-circleci-and-the-github-cli-orb/
-  - 
+  -
     title: Slack 通知のカスタマイズ
     link: https://support.circleci.com/hc/en-us/articles/360052728991-How-to-customize-your-Slack-messages-when-using-CircleCI-s-Slack-Orb
-  - 
+  -
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
-  - 
+  -
     title: 承認ベースのワークフローを使ったデプロイ
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
@@ -1215,7 +1210,7 @@ jobs:
 
   build-macos:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     parameters:
       label:
         type: string
@@ -1317,7 +1312,7 @@ jobs:
 
   test-macos:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     parameters:
       label:
         type: string
@@ -1391,7 +1386,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run:
