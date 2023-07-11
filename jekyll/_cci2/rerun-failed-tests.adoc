@@ -312,7 +312,7 @@ One way to ensure that code coverage reports from the original job run are persi
           when: always
 ```
 
-The snippet above uses the built-in xref:caching[`.Revision`] key to keep all coverage reports from the same git commit (sha1) together.  On a rerun, both the original job run's coverage report and the rerun's coverage report will be uploaded as an artifact to `cover.html`. It can then be used in a downstream job for aggregation or analysis.
+The snippet above uses the built-in xref:caching[`.Revision`] key to store a coverage report for the current vcs revision.  On a successful rerun, the original job run's coverage report will be restored to include the coverage from the skipped (passed) tests. It can then be used in a downstream job for aggregation or analysis.
 
 * This feature is not currently supported for the Windows execution environment.
 
