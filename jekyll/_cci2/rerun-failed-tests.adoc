@@ -277,8 +277,6 @@ NOTE: The `halt` command will execute the rest of the _current_ step, regardless
 * Jobs that are older than the xref:persist-data#custom-storage-usage[retention period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
 * Jobs that upload code coverage reports:
 
-* Jobs that upload code coverage reports:
-
 One way to ensure that code coverage reports from the original job run are persisted to an artifact in addition to the report that is generated on a re-run, see the following example for a sample Go project:
 
 ```yml
