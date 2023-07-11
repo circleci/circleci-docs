@@ -281,11 +281,13 @@ steps:
     >./tmp/tests.txt && \
     circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command ">./tmp/tests.txt xargs echo" --split-by=timings #Get the list of filenames for this container/VM
 
-    [ -s tmp/tests.txt ] || circleci-agent step halt #if there are no filenames, terminate execution
+    [ -s tmp/tests.txt ] || circleci-agent step halt #if there are no filenames, terminate execution after this step
 
   - node/install
   # Proceed with the rest of the job
 ```
+
+NOTE: The `halt` command will execute the rest of the _current_ step, regardless of whether `tests.txt` has content or not. Make sure to place the command to execute tests in the _following_ step. 
 
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`.
