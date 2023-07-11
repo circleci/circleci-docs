@@ -508,8 +508,8 @@ en:
             link: browser-testing
           - name: Generate code coverage metrics
             link: code-coverage
-          - name: Fail fast (Open preview)
-            link: fail-fast
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
       - name: Monitor tests
         children:
           - name: Test Insights
@@ -1587,9 +1587,9 @@ ja:
           - name: Code coverage
             link: ja/code-coverage
             i18n_name: コードカバレッジ
-          - name: Fail fast (Open preview)
-            link: ja/fail-fast
-            i18n_name: フェイルファスト
+          - name: Rerun failed tests overview
+            link: ja/rerun-failed-tests
+            i18n_name: 失敗したテストのみを再実行
       - name: Monitor tests
         i18n_name: テストの管理
         children:

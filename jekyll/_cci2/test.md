@@ -109,7 +109,7 @@ More information is available on the [Test Insights](/docs/insights-tests) page.
 
 You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
 
-More information on how to use this option is available on the [Rerun failed tests only](/docs/rerun-failed-tests-only/) page.  This functionality uses a command called `circleci tests run`.
+More information on how to use this option is available on the [Rerun failed tests overview](/docs/rerun-failed-tests/) page.  This functionality uses a command called `circleci tests run`.
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
