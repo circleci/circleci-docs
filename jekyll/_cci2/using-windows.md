@@ -143,6 +143,11 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
+
 ## Windows machine executor images
 {: #windows-machine-executor-images }
 

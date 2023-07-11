@@ -96,6 +96,11 @@ image::resource-class-job.png[Screenshot showing how to view the resource class 
 
 Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
 
+[#view-resource-usage-per-job]
+=== View resource usage per job
+
+{% include snippets/resource-class-view.adoc %}
+
 === Resource class Insights
 
 Resource class Insights let you track resource utilization for your jobs. You can inspect and use this information to update your executors based on historical trends and job requirements.
