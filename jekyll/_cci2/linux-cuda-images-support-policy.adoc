@@ -13,6 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+{% include snippets/linux-cuda-brownout.adoc %}
+
 [#overview]
 == Overview
 
