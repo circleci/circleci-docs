@@ -282,27 +282,41 @@ To ensure that code coverage reports from the original job run are persisted to 
 {% raw %}
 [source,yaml]
 ----
-  - run:
+jobs:
+  test-go:
+    # Install go modules and run tests
+    docker:
+      - image: cimg/go:1.20
+    parallelism: 2
+    steps:
+      - checkout
+      # Cache dependencies
+      - restore_cache:
+          key: go-mod-{{ checksum "go.mod" }}
+      - run:
+          name: Download Go modules
+          command: go mod download
+      - save_cache:
+          key: go-mod-{{ checksum "go.mod" }}
+          paths:
+            - /home/circleci/go/pkg/mod
+      - run:
           name: Run tests with coverage being saved
           command: go list ./... | circleci tests run --timings-type "name" --command "xargs gotestsum --junitfile junit.xml --format testname -- -coverprofile=cover.out"
-
-      # For a rerun that succeeds, restore the coverage files from the failed run
+      # For a rerun that succeeds, restore the coverage files from the failed run 
       - restore_cache:
-          key: coverage-{{.Revision}}
-
-      # For a failed run, save the coverage for rerunning failed tests. CircleCI will skip saving if this revision key has already been saved.
+          key: coverage-{{.Revision}}-{{.Environment.CIRCLE_NODE_INDEX}}
+      # Save the coverage for rerunning failed tests. CircleCI will skip saving if this revision key has already been saved.
       - save_cache:
-          key: coverage-{{.Revision}}
+          key: coverage-{{.Revision}}-{{.Environment.CIRCLE_NODE_INDEX}}
           paths:
             - cover.out
-          when: on_fail
-
-      # Needed in order to enable rerun failed tests
+          when: always
+      # Needed for to rerun failed tests
       - store_test_results:
           path: junit.xml
           when: always
-
-      # Upload coverage file html which includes all of the tests (not just the rerun)
+      # Upload coverage file html so we can show it includes all the tests (not just rerun)
       - run:
           name: Save html coverage
           command: go tool cover -html=cover.out -o cover.html
@@ -310,6 +324,10 @@ To ensure that code coverage reports from the original job run are persisted to 
       - store_artifacts:
           path: cover.html
           when: always
+workflows:
+  test:
+    jobs:
+      - test-go
 ----
 {% endraw %}
 +
