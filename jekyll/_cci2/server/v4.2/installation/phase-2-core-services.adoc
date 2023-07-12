@@ -42,7 +42,7 @@ This example creates a Kubernetes Secret to enable deployments to pull images fr
 
 [source,shell]
 ----
-kubectl create secret docker-registry regcred \
+kubectl -n <namespace> create secret docker-registry regcred \
   --docker-server=cciserver.azurecr.io \
   --docker-username=<your-username> \
   --docker-password="<provided-token>" \
@@ -58,7 +58,7 @@ The credentials provided to you allow you to pull and store copies of our images
 
 [source,shell]
 ----
-kubectl create secret docker-registry regcred \
+kubectl -n <namespace> create secret docker-registry regcred \
   --docker-server=<your-docker-image-repo> \
   --docker-username=<your-username> \
   --docker-password=<your-access-token> \
@@ -93,6 +93,11 @@ The application requires a Kubernetes Secret containing an API token. This API t
 ----
 kubectl create secret generic api-token \
   --from-literal=api-token=<your-super-secret-random-value>
+
+kubectl -n <namespace> annotate secret/api-token \
+  meta.helm.sh/release-name=<helm-release-name> \
+  meta.helm.sh/release-namespace=<namespace> \
+  helm.sh/resource-policy=keep --overwrite
 ----
 --
 
@@ -100,12 +105,8 @@ kubectl create secret generic api-token \
 --
 **Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-Add the value to `values.yaml`. CircleCI will create the Kubernetes Secret automatically.
+CircleCI will create the Kubernetes Secret "api-token" automatically.
 
-[source,yaml]
-----
-apiToken: "<your-super-secret-random-value>"
-----
 --
 
 [#session-cookie]
@@ -119,8 +120,13 @@ The application requires a session cookie key Kubernetes Secret, which CircleCI 
 
 [source,shell]
 ----
-kubectl create secret generic session-cookie \
+kubectl -n <namespace> create secret generic session-cookie \
 --from-literal=session-cookie-key=<your-secret-key-16-chars>
+
+kubectl -n <namespace> annotate secret/session-cookie \
+  meta.helm.sh/release-name=<helm-release-name> \
+  meta.helm.sh/release-namespace=<namespace> \
+  helm.sh/resource-policy=keep --overwrite
 ----
 --
 
@@ -128,11 +134,8 @@ kubectl create secret generic session-cookie \
 --
 **Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-Add the value to `values.yaml`.  CircleCI will create the Secret automatically.
-[source,yaml]
-----
-sessionCookieKey: "<your-secret-key-16-chars>"
-----
+CircleCI will create the Kubernetes Secret "session-cookie" automatically.
+
 --
 
 [#encryption]
@@ -146,7 +149,7 @@ The application requires a Kubernetes Secret containing signing and encrpytion k
 
 [source,shell]
 ----
-kubectl create secret generic signing-keys \
+kubectl -n <namespace> create secret generic signing-keys \
   --from-literal=signing-key=<your-generated-signing-key> \
   --from-literal=encryption-key=<your-generated-encryption-key>
 ----
@@ -179,7 +182,7 @@ The application requires a Kubernetes Secret containing Postgres credentials.  T
 
 [source,shell]
 ----
-kubectl create secret generic postgresql \
+kubectl -n <namespace> create secret generic postgresql \
   --from-literal=postgres-password=<postgres-password>
 ----
 
@@ -251,7 +254,7 @@ The application requires a Kubernetes Secret containing MongoDB credentials. Thi
 
 [source,shell]
 ----
-kubectl create secret generic mongodb-credentials \
+kubectl -n <namespace> create secret generic mongodb-credentials \
   --from-literal=mongodb-root-password=<root-password> \
   --from-literal=mongodb-password=<user-password>
 ----
@@ -292,7 +295,7 @@ The RabbitMQ installation requires two random alphanumeric strings. CircleCI wil
 
 [source,shell]
 ----
-kubectl create secret generic rabbitmq-key \
+kubectl -n <namespace> create secret generic rabbitmq-key \
 --from-literal=rabbitmq-password=<secret-alphanumeric-password> \
 --from-literal=rabbitmq-erlang-cookie=<secret-alphanumeric-key>
 ----
@@ -333,8 +336,13 @@ The application requires a Kubernetes Secret for Pusher. CircleCI will not be ab
 
 [source,shell]
 ----
-kubectl create secret generic pusher \
+kubectl -n <namespace> create secret generic pusher \
 --from-literal=secret=<pusher-secret>
+
+kubectl -n <namespace> annotate secret/pusher \
+  meta.helm.sh/release-name=<helm-release-name> \
+  meta.helm.sh/release-namespace=<namespace> \
+  helm.sh/resource-policy=keep --overwrite
 ----
 --
 
@@ -342,13 +350,8 @@ kubectl create secret generic pusher \
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
+CircleCI will create the Kubernetes Secret "pusher" automatically.
 
-[source,yaml]
-----
-pusher:
-  secret: "<pusher-secret>"
-----
 --
 
 [#global]

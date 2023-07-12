@@ -289,8 +289,13 @@ Nomad requires a key to encrypt communications. This key must be exactly 32 byte
 
 [source,shell]
 ----
-kubectl create secret generic nomad-gossip-encryption-key \
+kubectl -n <namespace> create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
+
+kubectl -n <namespace> annotate secret/nomad-gossip-encryption-key \
+  meta.helm.sh/release-name=<helm-release-name> \
+  meta.helm.sh/release-namespace=<namespace> \
+  helm.sh/resource-policy=keep --overwrite
 ----
 
 Once the Kubernetes Secret exists, no change to `values.yaml` is required. The Kubernetes Secret will be referenced by default.
@@ -300,16 +305,8 @@ Once the Kubernetes Secret exists, no change to `values.yaml` is required. The K
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the value to `values.yaml`. CircleCI will create the Kubernetes Secret automatically.
+CircleCI will create the Kubernetes Secret "nomad-gossip-encryption-key" automatically.
 
-[source,yaml]
-----
-nomad:
-  server:
-    gossip:
-      encryption:
-        key: "<secret-key-32-chars>"
-----
 --
 
 [#nomad-mtls]
