@@ -228,6 +228,20 @@ You can also add it to your `jest.config.js` file by following these link:https:
 +
 NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with this feature.
 
+[#configure-a-job-running-go-tests]
+=== Configure a job running Go tests
+
+. Modify your test command to use `circleci tests run`:
+
+```yaml
+- run:
+    command: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name 
+
+- store_test_results:
+    path: junit.xml
+
+. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+
 [#output-test-files-only]
 === Output test files only
 
@@ -302,7 +316,7 @@ jobs:
             - /home/circleci/go/pkg/mod
       - run:
           name: Run tests with coverage being saved
-          command: go list ./... | circleci tests run --timings-type "name" --command "xargs gotestsum --junitfile junit.xml --format testname -- -coverprofile=cover.out"
+          command: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname -- -coverprofile=cover.out" --split-by=timings --timings-type=name
       # For a rerun that succeeds, restore the coverage files from the failed run 
       - restore_cache:
           key: coverage-{{.Revision}}-{{.Environment.CIRCLE_NODE_INDEX}}
