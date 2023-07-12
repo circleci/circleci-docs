@@ -1,0 +1,2 @@
+Deprecated Linux CUDA images are undergoing planned brownouts today, and will be permanently unavailable as of September 30, 2023. To see if you are affected, please refer to our [Discuss post](https://discuss.circleci.com/t/linux-cuda-deprecation-and-image-policy/48568) for the list of affected images, full brownout schedule, and migration steps.
+{: class="alert alert-warning"}
