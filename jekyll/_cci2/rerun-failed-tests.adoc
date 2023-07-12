@@ -400,7 +400,7 @@ If your workflow has an approval job, and a failed job containing failed tests t
 
 **Question:** When can I click the option to btn:[Rerun failed tests]?
 
-**Answer:** Currently, it will be present any time the "Rerun workflow from failed" option is present, and vice versa.
+**Answer:** When both prerequisites are met: a job is uploading test results to CircleCI & `circleci tests run` is called.
 
 ---
 
