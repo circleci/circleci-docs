@@ -82,3 +82,8 @@ jobs:
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
 {% include snippets/gpu-windows-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}

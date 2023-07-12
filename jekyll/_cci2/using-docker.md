@@ -90,6 +90,11 @@ jobs:
     #  ...  other config
 ```
 
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
+
 ## Docker benefits and limitations
 {: #docker-benefits-and-limitations }
 

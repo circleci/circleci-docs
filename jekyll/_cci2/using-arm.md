@@ -46,6 +46,11 @@ The following Arm resources are available part of the [`machine` executor]({{sit
 
 For pricing and plans information, see the [resource class pricing overview](https://circleci.com/product/features/resource-classes/).
 
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
+
 ## Images with Arm support
 
 Arm resources are accessible by using the machine executor when using one of the following images:

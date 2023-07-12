@@ -41,6 +41,11 @@ You can view the list of available images [in the docs Configuration Reference](
 
 {% include snippets/machine-resource-table.md %}
 
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
+
 ## Pre-installed software
 {: #pre-installed-software }
 
