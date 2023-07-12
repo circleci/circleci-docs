@@ -175,7 +175,7 @@ gem 'rspec_junit_formatter'
           npm run start &
           circleci tests glob "cypress/**/*.cy.js" | circleci tests run --command="xargs npx cypress run --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings #--split-by=timings is optional, only use if you are using CircleCI's test splitting
 
-     - store_test_results
+     - store_test_results:
         path: test_results
 ```
 +
