@@ -768,7 +768,9 @@ GitLab integrations do not currently support the **Stop Building** option that c
 [#ssh-rerun]
 === SSH rerun
 
-Support for SSH rerun will only work if your user account has a Bitbucket or GitHub integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will be adding functionality to allow users to manage SSH keys so SSH reruns are possible. SSH reruns do not get passed context secrets. CircleCI is working on providing administrators with greater control over the use of secrets and SSH reruns.
+SSH reruns will only work for GitLab-based projects if your CircleCI user account also has an associated GitHub or Bitbucket integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will add functionality to allow you to manage SSH keys for your GitLab account to enable SSH rerun functionality without a GitHub or Bitbucket account.
+
+SSH reruns do not get passed secrets stored in contexts. CircleCI is working on providing administrators with greater control over the use of secrets and SSH reruns.
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only

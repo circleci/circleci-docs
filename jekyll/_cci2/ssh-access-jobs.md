@@ -9,10 +9,15 @@ contentTags:
   - Server v3.x
 ---
 
-## Overview
-{: #overview }
+Troubleshoot problems in a job using **Rerun job with SSH**. Using this feature you can inspect log files, running processes, and directory paths.
 
-Often the best way to troubleshoot problems is to SSH into a job and inspect log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
+## Introduction
+{: #introduction }
+
+**Using GitLab?** SSH reruns will only work for GitLab-based projects if your CircleCI user account also has an associated GitHub or Bitbucket integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will add functionality to allow you to manage SSH keys for your GitLab account to enable SSH rerun functionality without a GitHub or Bitbucket account.
+{: class="alert alert-info" }
+
+CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
 When you log in with SSH, you are running an **interactive** login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
