@@ -361,6 +361,161 @@ disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
 }
 ----
 
+[#policies-and-parameterization]
+== Policies and Config 2.1 Parameterization
+
+Writing policies for circleci config version 2.1 configuration can be tricky because config 2.1 is meant to be parameterizable and reusable. 
+(ADD LINK TO REUSABLE CONFIGS)
+
+Before running any pipelines config 2.1 is compiled down into config 2.0 that have all parameters and reusable config blocks (executors and commands) expanded into workflows and jobs.
+In order to be able to write highly effective policies, this compiled version of the config is made referencable in policy as `input._compiled_`.
+
+Let's look at an example policy and config:
+
+Policy:
+
+[source,rego]
+----
+import future.keywords
+
+policy["name"] = "example_mistake"
+
+enable_hard["enforce_not_large_resource"]
+
+enforce_not_large_resource[reason] {
+  some job_name, job in input.jobs
+  job.resource_class == "large"
+  reason = sprintf("job %s using banned large resource class", [job_name])
+}
+----
+
+Config:
+
+[source,yaml]
+----
+version: 2.1
+
+executors:
+  lg-executor:
+    docker:
+      - image: my-image
+    resource_class: large
+
+jobs:
+  test:
+    executor: lg-executor
+----
+
+In the above example, the policy would not be triggered because the policy inspects the jobs and does not find a `resource_class == "large"`.
+However, the config once compiled will have job `test` with a `resource_class` of large.
+
+Another way of side stepping the policy, is by using parameters:
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    parameters:
+      size:
+        type: string
+    resource_class: << parameters.size >>
+
+workflows:
+  main:
+    jobs:
+      - test:
+          size: large
+----
+
+The same thing happens with the above config. The policy inspects the jobs and does not find a `resource_class` with a value of `large` but instead finds the value `<< parameters.size >>` which is ok.
+However, the config once compiled will have a job `test` with a `resource_class` of large.
+
+The solution is to recognize that we want to apply a policy to all our jobs which is a config 2.0 construct, and to write the policy to apply to the compiled version instead.
+
+If we modify the rule, we now get:
+
+[source,rego]
+----
+enforce_not_large_resource[reason] {
+  some job_name, job in input._compiled_.jobs
+  job.resource_class == "large"
+  reason = sprintf("job %s using banned large resource class", [job_name])
+}
+----
+
+Notice that we are now validating the `input._compiled_.jobs` and regardless of parameters or reusable blocks (executors), the policy will be applied to all compiled jobs and work as intended.
+
+
+[##policing-2.1-constructs]
+== Policing Config 2.1 Constructs
+
+Often we will want to write policies against 2.1 level constructs such as `orbs`, `executors`, and `commands`. Writing policies against these constructs run into the same parameterization problems as in the previous section.
+However we cannot depend on the compiled input because these constructs do not exist in config version `2.0`.
+
+Let's use another example to illustrate this.
+
+Policy:
+
+[source,rego]
+----
+import future.keywords
+
+policy_name["example"]
+
+enable_hard["ban_bad_orb_namespace"]
+
+ban_bad_orb_namespace[reason] {
+  some key, orb_ref in input.orbs
+  startswith(orb_ref, "bad/")
+  reason := sprintf("orb %s is defined with a banned namespace: bad", [key])
+}
+----
+
+Config:
+
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  evil_orb:
+    type: string
+    default: bad/orb
+
+orbs:
+  security: << pipeline.parameters.evil_orb >>
+----
+
+In the above example the rule doesn't raise a violation because the string `<< pipeline.parameters.evil_orb >>` does not have the `bad/` prefix the policy is trying to detect.
+To make matters worse, we cannot depend on `input._compiled_` because orbs are compiled away at that stage.
+
+The best we can do is detect if an orb reference is a parameterized expression, and raise a violation if that is the case.
+
+[source,rego]
+----
+import future.keywords
+import data.circleci.config
+
+policy_name["example"]
+
+enable_hard["ban_bad_orb_namespace"]
+
+ban_bad_orb_namespace = { reason |
+  some key, orb_ref in input.orbs
+  startswith(orb_ref, "bad/")
+  reason := sprintf("orb %s is defined with a banned namespace: bad", [key])
+} | { reason |
+  some key, orb_ref in input.orbs
+  config.is_parameterized_expression(orb_ref)
+  reason := sprintf("orb %s is not allowed to contain a parameterized expression", ["key"])
+}
+----
+
+
+
+
 [#use-sets-and-variables]
 == Use sets and variables
 
