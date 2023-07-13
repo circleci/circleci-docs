@@ -364,15 +364,13 @@ disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
 [#policies-and-parameterization]
 == Policies and Config 2.1 Parameterization
 
-Writing policies for circleci config version 2.1 configuration can be tricky because config 2.1 is meant to be parameterizable and reusable. 
-(ADD LINK TO REUSABLE CONFIGS)
+Writing policies for CircleCI Config version 2.1 configuration can be challenging because Config 2.1 is designed to be parameterizable and reusable.
+(Refer to the link for reusable configs.)
 
-Before running any pipelines config 2.1 is compiled down into config 2.0 that have all parameters and reusable config blocks (executors and commands) expanded into workflows and jobs.
-In order to be able to write highly effective policies, this compiled version of the config is made referencable in policy as `input._compiled_`.
+Before executing any pipelines, Config 2.1 is compiled into Config 2.0, which expands all parameters and reusable config blocks (executors and commands) into workflows and jobs.
+To write highly effective policies, it is essential to reference the compiled version of the config as input._compiled_ in the policy.
 
-Let's look at an example policy and config:
-
-Policy:
+Let's examine an example policy and config:
 
 [source,rego]
 ----
@@ -406,10 +404,10 @@ jobs:
     executor: lg-executor
 ----
 
-In the above example, the policy would not be triggered because the policy inspects the jobs and does not find a `resource_class == "large"`.
-However, the config once compiled will have job `test` with a `resource_class` of large.
+In the above example, the policy would not trigger because it inspects the jobs and does not find a resource_class == "large".
+However, once the config is compiled, the job test will have a resource_class of large.
 
-Another way of side stepping the policy, is by using parameters:
+Another way to bypass the policy is by using parameters:
 
 [source,yaml]
 ----
@@ -429,12 +427,12 @@ workflows:
           size: large
 ----
 
-The same thing happens with the above config. The policy inspects the jobs and does not find a `resource_class` with a value of `large` but instead finds the value `<< parameters.size >>` which is ok.
-However, the config once compiled will have a job `test` with a `resource_class` of large.
+The same situation applies to the above config. The policy inspects the jobs and does not find a resource_class value of large, but instead finds << parameters.size >>, which is acceptable.
+However, once the config is compiled, the job test will have a resource_class of large.
 
-The solution is to recognize that we want to apply a policy to all our jobs which is a config 2.0 construct, and to write the policy to apply to the compiled version instead.
+To resolve this issue, it is important to acknowledge that we want to apply the policy to all jobs, which is a Config 2.0 construct, and write the policy to target the compiled version accordingly.
 
-If we modify the rule, we now get:
+If we modify the rule, we get the following:
 
 [source,rego]
 ----
@@ -445,16 +443,15 @@ enforce_not_large_resource[reason] {
 }
 ----
 
-Notice that we are now validating the `input._compiled_.jobs` and regardless of parameters or reusable blocks (executors), the policy will be applied to all compiled jobs and work as intended.
-
+Notice that we are now validating input._compiled_.jobs. Regardless of parameters or reusable blocks (executors), the policy will be applied to all compiled jobs and function as intended.
 
 [##policing-2.1-constructs]
 == Policing Config 2.1 Constructs
 
-Often we will want to write policies against 2.1 level constructs such as `orbs`, `executors`, and `commands`. Writing policies against these constructs run into the same parameterization problems as in the previous section.
-However we cannot depend on the compiled input because these constructs do not exist in config version `2.0`.
+Often, we need to write policies against Config 2.1 level constructs such as orbs, executors, and commands. Writing policies against these constructs encounters the same parameterization challenges as described in the previous section.
+However, we cannot rely on the compiled input because these constructs do not exist in Config version 2.0.
 
-Let's use another example to illustrate this.
+Let's consider another example to illustrate this.
 
 Policy:
 
@@ -488,10 +485,10 @@ orbs:
   security: << pipeline.parameters.evil_orb >>
 ----
 
-In the above example the rule doesn't raise a violation because the string `<< pipeline.parameters.evil_orb >>` does not have the `bad/` prefix the policy is trying to detect.
-To make matters worse, we cannot depend on `input._compiled_` because orbs are compiled away at that stage.
+In the above example, the rule does not raise a violation because the string << pipeline.parameters.evil_orb >> does not have the `bad/` prefix that the policy aims to detect.
+Furthermore, we cannot rely on `input._compiled_` because orbs are compiled away at that stage.
 
-The best we can do is detect if an orb reference is a parameterized expression, and raise a violation if that is the case.
+The best approach is to detect if an orb reference is a parameterized expression and raise a violation accordingly.
 
 [source,rego]
 ----
@@ -512,9 +509,6 @@ ban_bad_orb_namespace = { reason |
   reason := sprintf("orb %s is not allowed to contain a parameterized expression", ["key"])
 }
 ----
-
-
-
 
 [#use-sets-and-variables]
 == Use sets and variables
