@@ -243,6 +243,24 @@ Example:
 
 The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "rerun", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
 
+[#configure-a-job-running-playwright-tests]
+=== Configure a job running Django tests
+
+Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this, get the list of test filenames first, change the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
+
+[source,yaml]
+----
+# Get the test file names, write them to files.txt, and split them by historical timing data
+circleci tests glob "**/test*.py" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
+# Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
+cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
+cat circleci_test_files.txt
+TESTFILES=$(cat circleci_test_files.txt)
+# Run the tests (TESTFILES) with the reformatted test file names
+pipenv run coverage run manage.py test --parallel=8 --verbosity=2 $TESTFILES
+sebastian-lerner marked this conversation as resolved.
+----
+
 [#known-limitations]
 == Known limitations
 
@@ -303,7 +321,7 @@ jobs:
       - run:
           name: Run tests with coverage being saved
           command: go list ./... | circleci tests run --timings-type "name" --command "xargs gotestsum --junitfile junit.xml --format testname -- -coverprofile=cover.out"
-      # For a rerun that succeeds, restore the coverage files from the failed run 
+      # For a rerun that succeeds, restore the coverage files from the failed run
       - restore_cache:
           key: coverage-{{.Revision}}-{{.Environment.CIRCLE_NODE_INDEX}}
       # Save the coverage for rerunning failed tests. CircleCI will skip saving if this revision key has already been saved.
