@@ -181,6 +181,8 @@ gem 'rspec_junit_formatter'
 +
 Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
+Cypress may output a warning saying `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
+
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
 
