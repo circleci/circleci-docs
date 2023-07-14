@@ -510,6 +510,60 @@ ban_bad_orb_namespace = { reason |
 }
 ----
 
+[##allowlists-vs-banlists-with-parameterization]
+== Allowlists vs Banlists with Parameterization
+
+Policies and their rules can be categorized into two main types: allowlists and banlists.
+
+Allowlist rules assert that the input must match a specific value or fall within a defined set of values. On the other hand, banlist rules assert that the input must not match a particular value or be within a set of prohibited values.
+
+When working with Config 2.1 constructs and parameterization, it is crucial to understand how these two rule types interact with your policies.
+
+Banlist rules are more susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during Config compilation, the values intended to be banned can be reintroduced. It's worth noting that all the parameterization examples provided earlier fall into this category. To address this, you can either utilize input._compiled_ or detect parameterization and handle it appropriately.
+
+Allowlist rules, on the other hand, are incompatible with parameterization. They reject configurations that could otherwise be considered valid but do not cause invalid configurations to pass.
+
+Let's explore an example to illustrate this:
+
+[source,rego]
+----
+import future.keywords
+
+policy_name["allowlist"]
+
+enable_hard["restrict_resource_classes"]
+
+restrict_resource_classes[reason] {
+  some job_name, job in input.jobs
+  not job.resource_class in {"small", "large"}
+  reason := sprintf("job %s must have resource class of small or large but has: %s", [job_name, job.resource_class])
+}
+----
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  parameters:
+    size:
+      type: string
+  resource_class: << parameters.size >>
+  steps: [...]
+
+workflows:
+  main:
+    jobs:
+      - test:
+          size: small
+----
+
+In the provided example, the rule raises a violation because << parameters.size >> does not conform to the allowlist values of small or large. It is worth noting that even if this configuration would compile to a job that uses the correct small resource class, the violation is still triggered.
+
+When working with allowlist-type rules, it is essential to recognize how they can restrict parameterization and strike the right balance between configurational reusability and rule enforcement.
+
+Please note that this example is somewhat artificial, as the appropriate policy for enforcing job resource classes should target the compiled input: input._compiled_. This ensures proper validation against the resolved values.
+
 [#use-sets-and-variables]
 == Use sets and variables
 
