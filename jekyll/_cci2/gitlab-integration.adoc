@@ -6,7 +6,7 @@ contentTags:
 = GitLab CI/CD integration overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to integrate GitLab with CircleCI to manage your GitLab CI/CD pipelines with our GitLab step-by-step tutorial.
+:page-description: Learn how to integrate GitLab with CircleCI to manage your GitLab CI/CD pipelines with our GitLab CI step-by-step tutorial.
 :icons: font
 :experimental:
 
