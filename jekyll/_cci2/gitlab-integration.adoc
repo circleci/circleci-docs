@@ -3,22 +3,36 @@ contentTags:
   platform:
   - Cloud
 ---
-= GitLab integration overview
+= GitLab CI/CD integration overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to integrate GitLab with CircleCI.
+:page-description: Learn how to integrate GitLab with CircleCI to manage your GitLab CI/CD pipelines with our GitLab CI step-by-step tutorial.
 :icons: font
 :experimental:
 
-[#overview]
-== Overview
+This page walks you through integrating a GitLab project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitLab project. CircleCI features that are in development for GitLab projects are detailed in the <<coming-soon>> section.
 
-This document walks you through integrating a GitLab project with CircleCI. The sections below will introduce you to new concepts and ways to manage your CI/CD pipelines. We also outline what we are working on for future releases.
+[#overview]
+== What is GitLab CI/CD?
+
+GitLab CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your projects each time a developer pushes a change to the codebase, and/or when a merge request is created. As an alternative, you can integrate with CircleCI to manage your CI/CD pipelines. If you use GitLab (SaaS or Self-managed) for version control and code storage, GitLab CI/CD is enabled for your project by default.
+
+Integrate with CircleCI to access features for automated software delivery:
+
+* xref:workflows#workflows-configuration-examples[Workflow orchestration]
+* xref:optimizations#[Data, compute, and time optimization]
+* Control over xref:security#[security] and xref:contexts#[permissions], and org-level control with xref:config-policy-management-overview#[config policies]
+* xref:executor-intro#[Managed execution environments] (Docker, Linux VM, macOS, Windows, Arm VM, GPU), plus xref:runner-overview#[self-hosted runners]
+* xref:test#[Test integrations], and xref:parallelism-faster-jobs#[test-splitting] to reduce length of the testing phase of your pipelines
+* xref:orb-intro#[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
+* Dev tools: xref:local-cli#[CircleCI CLI], xref:api-intro#[APIs], and xref:vs-code-extension-overview#[VSCode extension], xref:circleci-config-sdk#[config SDK]
+
+GitLab CI/CD integration with CircleCI introduces the concept of "standalone" projects that are not specific to a VCS. This is a change from the way GitHub and Bitbucket projects are currently integrated.
 
 [#sign-up]
-== Sign up
+== Steps to integrate GitLab projects with CircleCI
 
-GitLab support is open to both new and existing users of CircleCI. Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to connect your GitLab account to create your organization.
+Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
@@ -128,15 +142,13 @@ Editing an existing CircleCI configuration within the web app is not currently a
 Committing further changes in your repo will automatically trigger a pipeline. However, manually triggering a pipeline from the CircleCI web app is also not available at this time.
 
 [#project-settings]
-== Project settings
+== Project settings - GitLab
 
-Unlike GitHub or Bitbucket projects, the GitLab integration introduces the concept of "standalone" projects that are not specific to a VCS.
+Within CircleCI, a project integrated from GitLab can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repo.
 
-A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
+A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a VCS. A trigger determines which configuration should be used to start a pipeline.
 
-A project can have one or more **triggers**, which are events from a source of change, including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
-
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab.
+The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab integrations.
 
 [#people]
 === People
@@ -193,9 +205,9 @@ NOTE: Currently, the only fields that can be edited for existing filters are **T
 - At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#project-settings-ssh-keys]
-=== Project SSH keys
+=== GitLab project SSH keys
 
-When creating a project, an SSH key is created which is used to checkout code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects.
+When creating a GitLab-based project in CircleCI, an SSH key is created, which is used to check out code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects.
 
 [#create-gitlab-ssh-key]
 ==== Create GitLab SSH key
@@ -229,13 +241,11 @@ When you push to your GitLab repository from a job, CircleCI will use the SSH ke
 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
-== Organization settings
+== Organization settings - GitLab
 
-The GitLab integration also introduces the concept of "standalone" organizations, which are not tied to a VCS.
+For GitLab integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS.
-
-To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app.
+To manage settings at the organization level, click btn:[Organization Settings] in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People
@@ -794,3 +804,10 @@ The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights
 == Next Steps
 - xref:config-intro#[Configuration tutorial]
 - xref:hello-world#[Hello world]
+
+[#relevant-gitlab-articles]
+== Relevant GitLab articles
+* link:https://circleci.com/integrations/gitlab/[GitLab integration on circleci.com]
+* link:https://circleci.com/blog/announcing-gitlab-support/[Announcing GitLab support on CircleCI] (blog post)
+* link:https://circleci.com/blog/setting-up-continuous-integration-with-gitlab/[Setting up continuous integration with CircleCI and GitLab] (blog post)
+* link:https://circleci.com/blog/developing-support-for-gitlab-teams/[What I learned from developing a GitLab support feature for CircleCI] (blog post)
