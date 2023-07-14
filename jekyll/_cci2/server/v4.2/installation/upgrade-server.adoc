@@ -24,6 +24,8 @@ NOTE: We recommend that you do not skip releases when upgrading.
 * Ensure you have access to the Kubernetes cluster in which server is installed.
 * Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
 * Ensure there is a recent backup. For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* If you are upgrading from Server 4.1.x to Server 4.2.0, follow the xref:../operator/user-managed-secrets-migration[steps] for migrating user managed secrets.
+* Update the CircleCI Server Helm chart to the latest version:
 
 [#upgrade-steps]
 == Upgrade steps
