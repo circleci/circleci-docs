@@ -45,9 +45,6 @@ jobs:
   test:
     docker:
       - image: cimg/base:2022.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 4
 ```
 
@@ -109,27 +106,20 @@ The first time the tests are run there will be no timing data for the command to
 ## Manual allocation
 {: #manual-allocation }
 
-The CLI looks up the number of available execution environments, along with the current container index (`$CIRCLE_NODE_INDEX`). Then, it uses deterministic splitting algorithms to split the test files across all available containers.
-
-By default, the number of containers is specified by the `parallelism` key in the project configuration file. You can also manually set the number by using the `--total` flag.
-
-```shell
-circleci tests split --total=4 test_filenames.txt
-```
-
-Similarly, the current container index is automatically picked up from the `$CIRCLE_NODE_INDEX` environment variable, but can be manually set by using the `--index` flag.
-
-```shell
-circleci tests split --index=0 test_filenames.txt
-```
-
-## Use environment variables to split tests
-{: #using-environment-variables-to-split-tests }
-
 For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 
 * `$CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job.
 * `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
+
+The CLI looks up the number of available execution environments (`$CIRCLE_NODE_TOTAL`), along with the current container index (`$CIRCLE_NODE_INDEX`). Then, it uses deterministic splitting algorithms to split the test files across all available containers.
+
+The number of containers is specified by the [`parallelism` key](/docs/configuration-reference/#parallelism) in the project configuration file.
+
+The current container index is automatically picked up from the `$CIRCLE_NODE_INDEX` environment variable, but can be manually set by using the `--index` flag.
+
+```shell
+circleci tests split --index=0 test_filenames.txt
+```
 
 Refer to the [Project values and variables](/docs/variables#built-in-environment-variables) page for more details.
 

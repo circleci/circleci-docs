@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: An overview of resource classes in CircleCI
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Use resource classes to:
 
@@ -96,6 +95,11 @@ The job details page in the web app shows the resource class used for a job.
 image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
 
 Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
+
+[#view-resource-usage-per-job]
+=== View resource usage per job
+
+{% include snippets/resource-class-view.adoc %}
 
 === Resource class Insights
 

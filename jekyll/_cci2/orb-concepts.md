@@ -37,9 +37,6 @@ jobs:
   build:
     docker:
       - image: 'cimg/python:3.6'
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
@@ -67,7 +64,7 @@ Executors defined within orbs can be used to run jobs within your project config
 
 #### Executor definition example
 {: #executor-definition-example }
-{:.no_toc}
+
 
 {:.tab.executor.Node-Docker}
 ```yaml
@@ -76,9 +73,6 @@ description: >
   images built for CI.
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '13.11'
@@ -99,9 +93,6 @@ description: >
   https://hub.docker.com/r/cimg/ruby/tags
 docker:
   - image: 'cimg/ruby:<< parameters.tag >>'
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '2.7'
@@ -206,7 +197,7 @@ To avoid negatively impacting a user's CI process, orb authors should strictly a
 
 ### Production orbs
 {: #production-orbs }
-{:.no_toc}
+
 
 Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/developer/orbs).
 
@@ -219,7 +210,7 @@ Production orbs are immutable and can be found on the [Orb Registry](https://cir
 
 ### Development orbs
 {: #development-orbs }
-{:.no_toc}
+
 
 Development orbs are temporary overwrite-able orb tag versions, useful for rapid development and testing prior to deploying a semver deployed production change.
 
@@ -232,7 +223,7 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 
 ### Inline orbs
 {: #inline-orbs }
-{:.no_toc}
+
 
 Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
 
@@ -384,7 +375,7 @@ jobs:
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 - Refer to [Orb Introduction]({{site.baseurl}}/orb-intro/) for a high-level overview of CircleCI orbs.
 - Refer to [Orbs Reference]({{site.baseurl}}/reusing-config/) for detailed reference information about Orbs, including descriptions of commands, jobs and executors.

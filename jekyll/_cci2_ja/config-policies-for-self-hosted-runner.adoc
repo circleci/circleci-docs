@@ -38,7 +38,7 @@ circleci policy settings --enabled=true --owner-id <your-organization-ID>
 }
 ----
 +
-{% include snippets/find-organization-id.adoc %}
+{% include snippets/ja/find-organization-id.adoc %}
 
 [#create-your-policy]
 == 1.  ポリシーを作成する

@@ -31,6 +31,8 @@ Code coverage reports are saved as [build artifacts](/docs/artifacts/). If you w
 ## Language-specific code coverage options
 {: #language-specific-code-coverage-options}
 
+{% include snippets/docker-auth.md %}
+
 ### Ruby
 {: #ruby }
 
@@ -67,15 +69,9 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:3.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
@@ -136,9 +132,6 @@ jobs:
   build:
     docker:
     - image: cimg/python:3.10-browsers
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - browser-tools/install-browser-tools
@@ -253,9 +246,6 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:17.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -277,9 +267,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.2-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -306,9 +293,6 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -339,9 +323,6 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.16
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: go build

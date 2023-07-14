@@ -135,13 +135,7 @@ jobs:
     # circleci.com/docs/executor-intro/ for a comparison
     # and more examples.
       - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -154,13 +148,7 @@ jobs:
   build2:
     docker:
       - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -219,6 +207,8 @@ Each separate job defined within your configuration runs in a unique execution e
 
 An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the [images](#images) section).
 
+{% include snippets/docker-auth.md %}
+
 {:.tab.executors.Cloud}
 ```yaml
 version: 2.1
@@ -227,13 +217,7 @@ jobs:
  build1: # job name
    docker: # Specifies the primary container image,
      - image: cimg/base:2022.04-20.04
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      - image: postgres:14.2 # Specifies the database image
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # for the secondary or service container run in a common
       # network where ports exposed on the primary container are
       # available on localhost.
@@ -263,13 +247,7 @@ jobs:
  build1: # job name
    docker: # Specifies the primary container image,
      - image: cimg/base:2022.04-20.04
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      - image: postgres:14.2 # Specifies the database image
-       auth:
-         username: mydockerhub-user
-         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # for the secondary or service container run in a common
       # network where ports exposed on the primary container are
       # available on localhost.
@@ -297,6 +275,8 @@ An image is a packaged system that includes instructions for creating a running 
 
 The **Docker executor** spins up a container with a Docker image. CircleCI maintains [convenience images](/docs/circleci-images) for popular languages on Docker Hub.
 
+{% include snippets/docker-auth.md %}
+
 The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine](/docs/configuration-reference#machine) page.
 
  ```yaml
@@ -307,14 +287,7 @@ The **machine executor** spins up a complete Ubuntu virtual machine image, givin
      # see circleci.com/docs/circleci-images/ for
      # the list of pre-built CircleCI images on dockerhub.
        - image: cimg/base:2022.04-20.04
-         auth:
-           username: mydockerhub-user
-           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
        - image: postgres:14.2 # Specifies the database image
-         auth:
-           username: mydockerhub-user
-           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # for the secondary or service container run in a common
         # network where ports exposed on the primary container are
         # available on localhost.
@@ -376,9 +349,6 @@ jobs:
   test:
     docker:
       - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 4
 ```
 
@@ -428,9 +398,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:current
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     # resource class declaration
     resource_class: large
 ```
@@ -460,9 +427,6 @@ jobs:
   build:
     docker:
       - image: <image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Special step to checkout your source code
       - run: # Run step to execute commands, see
@@ -497,6 +461,8 @@ Workflows orchestrate jobs. A workflow defines a list of jobs and their run orde
 
 The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
+{% include snippets/docker-auth.md %}
+
 {% raw %}
 ```yaml
 version: 2.1
@@ -505,13 +471,7 @@ jobs:
   build1:
     docker:
       - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -522,13 +482,7 @@ jobs:
   build2:
     docker:
       - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -538,13 +492,7 @@ jobs:
   build3:
     docker:
       - image: cimg/ruby:2.4-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:9.4.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}

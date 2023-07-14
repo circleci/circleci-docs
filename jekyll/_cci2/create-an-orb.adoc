@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Tutorial showing how to create an orb using the orb development kit.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This tutorial guides you through creating a new orb using the orb development kit. The starting point is creating a new repository on link:https://github.com[GitHub.com].
 

@@ -3,23 +3,22 @@
 contentTags:
   platform:
     - Server v4.1
-    - Server Admin
+    - サーバー管理者
 ---
-= Phase 1 - Prerequisites
+= フェーズ 1 - 前提条件
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
+:page-description: エアギャップ環境に CircleCI Server をインストールする方法について解説します。 要件、イメージ、Helm チャートについて説明しています。
 :icons: font
 :toc: macro
-
 :toc-title:
 
-The guides in this section walk you through the steps required to install CircleCI server in an air-gapped environment.
+ここでは、エアギャップ環境への CircleCI Server のインストールの前に実施す必要がある手順について説明します。
 
 [#required-components]
-== Required components for air-gapped installation
+== エアギャップ環境へのインストールのコンポーネント要件
 
-The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forwards with the installation.
+以下の表に、エアギャップ環境に CircleCI Server をインストールする際の前提条件を示します。 インストールを行うには、これらのコンポーネントをエアギャップ環境に用意する必要があります。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -27,40 +26,40 @@ The following table shows an overview of the prerequisites required to run an ai
 |コンポーネント
 |用途
 
-|Container registry
-|Hosting CircleCI server images for Kubernetes
+|コンテナレジストリ
+|Kubernetes 用の CircleCI Server イメージをホストする
 
-|A Kubernetes cluster
-|Running CircleCI server
+|Kubernetes クラスタ
+|CircleCI Server を実行する
 
-|An object storage system (MinIO)
-|Object and artifact storage
+|オブジェクトストレージシステム (MinIO)
+|オブジェクトとアーティファクトを保存する
 
 |GitHub Enterprise
-|Source of code for CircleCI server to build
+|CircleCI Server のビルド用コードを保存する
 
-|Nomad Virtual Machines
-|Machines for running Nomad
+|Nomad 仮想マシン
+|Nomad を実行するマシン
 |===
 
 [#copy-images]
-== 1.  Copy images
+== 1.  イメージをコピーする
 
-CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You will need to copy the latest images and charts from CircleCI into your virtual environment. All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
+CircleCI Server は、Helm チャートを使用して Kubernetes クラスタにデプロイします。 CircleCI 製の最新のイメージとチャートを仮想環境にコピーしてください。 CircleCI の Helm チャートで参照されているイメージはすべて、エアギャップ環境内でアクセス可能である必要があります。
 
 [#login-to-acr]
-=== a.  Log in to CircleCI server container registry
+=== a.  CircleCI Server のコンテナレジストリにログインする
 
-Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Please contact support@circleci.com for more information.
+インストール用のイメージにアクセスするには、CircleCI から提供されるユーザー名とトークンが必要です。 詳細については、support@circleci.com にお問い合わせください。
 
 [source, bash]
 ----
 docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
 ----
 
-=== b.  Download all images required for this release
+=== b.  本リリースに必要なすべてのイメージをダウンロードする
 
-Download all images required for the release of CircleCI server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
+本リリースの CircleCI Server に必要なすべてのイメージをローカルマシンにダウンロードします。 イメージリストに、Helm のインストール、CircleCI エージェント、Reality Check テストツールに必要なイメージがすべて含まれています。
 
 [source, bash]
 ----
@@ -141,19 +140,19 @@ echo $SERVER_4_1_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]
-=== c.  Copy all images to your air-gapped environment
+=== c.  すべてのイメージをエアギャップ環境にコピーする
 
-Copy all downloaded images to the container registry in your air-gapped environment.
+ダウンロードしたすべてのイメージを、エアギャップ環境内のコンテナレジストリにコピーします。
 
 [#copy-charts]
-== 2. Copy charts
+== 2.  チャートをコピーする
 
-Copy the CircleCI server Helm chart to your air-gapped environment.
+CircleCI Server 用 Helm チャートをエアギャップ環境にコピーします。
 
 [#download-helm-chart]
-=== a.  Download the latest CircleCI server Helm chart
+=== a.  最新の CircleCI Server 用 Helm チャートをダウンロードする
 
-Download the latest CircleCI server Helm chart to the current directory.
+最新の CircleCI Server 用 Helm チャートをカレントディレクトリにダウンロードします。
 
 [source, bash]
 ----
@@ -162,11 +161,11 @@ helm pull oci://cciserver.azurecr.io/circleci-server -d ./
 ----
 
 [#upload-helm-chart]
-=== b.  Copy the Helm chart to your air-gapped environment
+=== b.  Helm チャートをエアギャップ環境にコピーする
 
-Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
+ダウンロードした Helm チャート (`.tgz` 形式) をエアギャップ環境にコピーします。
 
 [#next-steps]
 == 次のステップ
 
-Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage#[Phase 2 - Configure object storage] guide.
+本ページの手順を完了したら、「xref:phase-2-configure-object-storage#[フェーズ 2 - オブジェクトストレージの構成]」に進んでください。

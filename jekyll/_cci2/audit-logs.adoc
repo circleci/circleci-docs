@@ -9,14 +9,13 @@ version:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#overview]
 == Overview
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics. 
+CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
-If you have administrator permissions for your organization, you can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]: 
+If you have administrator permissions for your organization, you can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]:
 
 . Select **Organization Settings** in the web app sidebar.
 . Select **Security** from the menu.
@@ -25,7 +24,7 @@ If you have administrator permissions for your organization, you can access the 
 
 NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-Per link:https://circleci.com/privacy/#information[our data retention policy], audit logs can be retrieved for up to 12 months. 
+Per link:https://circleci.com/privacy/#information[our data retention policy], audit logs can be retrieved for up to 12 months.
 
 [#audit-log-events]
 == Audit log events

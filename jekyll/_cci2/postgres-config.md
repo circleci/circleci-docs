@@ -11,6 +11,8 @@ contentTags:
 
 This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
 
+{% include snippets/docker-auth.md %}
+
 ## Example CircleCI configuration for a rails app with structure.sql
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
@@ -29,9 +31,6 @@ jobs:
 
     docker:
       - image: cimg/ruby:2.6-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -40,9 +39,6 @@ jobs:
     # Service container image available at `host: localhost`
 
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
@@ -90,7 +86,7 @@ registry of your choosing.
 
 ### Example environment setup
 {: #example-environment-setup }
-{:.no_toc}
+
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
@@ -106,9 +102,6 @@ jobs:
     working_directory: ~/appName
     docker:
       - image: cimg/ruby:2.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -117,9 +110,6 @@ jobs:
       # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
@@ -151,14 +141,8 @@ jobs:
     docker:
       # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
       - image: cimg/go:1.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -240,13 +224,7 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1-browsers # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db

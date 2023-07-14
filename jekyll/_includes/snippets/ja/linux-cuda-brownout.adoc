@@ -1,0 +1,1 @@
+WARNING: 本日、非推奨の Linux CUDA イメージが計画停電の対象となり、2023 年 9 月 30 日をもって永久に利用できなくなります。影響を受けるかどうかを確認するには、link:https://discuss.circleci.com/t/linux-cuda-deprecation-and-image-policy/48568[Discuss post] のリンクから、影響を受けるイメージのリスト、ブラウンアウトの全スケジュール、および移行手順を参照してください。

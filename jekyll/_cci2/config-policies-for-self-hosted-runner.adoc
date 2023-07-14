@@ -8,8 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
@@ -36,7 +35,7 @@ Example output:
 {
   "enabled": true
 }
----- 
+----
 +
 {% include snippets/find-organization-id.adoc %}
 
@@ -76,7 +75,7 @@ In the following steps you will replace `namespace/resource_class` and `project_
 .. Replace `namespace/resource_class` in the `runner.rego` file with the name of the resource class that you would like to restrict.
 
 . Replace `project_UUIDs` with a project ID:
-.. In the CircleCI web app, navigate to your projects dashboard by selecting **Projects** in the sidebar. Find the project you want to allow to build on your self-hosted runner, and then click the ellipsis (`...`) next to that project and select **Project Settings**. 
+.. In the CircleCI web app, navigate to your projects dashboard by selecting **Projects** in the sidebar. Find the project you want to allow to build on your self-hosted runner, and then click the ellipsis (`...`) next to that project and select **Project Settings**.
 .. Copy the Project ID from the overview page and replace `project_UUIDs` with this project ID.
 
 [#push-up-your-policy-bundle]
@@ -117,7 +116,7 @@ policy_name["runner_policies"]
 
 enable_hard["resource_class_check"]
 
-resource_class_check = config.resource_class_by_project({ 
+resource_class_check = config.resource_class_by_project({
   "my-namespace/runner-test1": {
     "a20ae1c6-d723-4c03-9bb6-01d5b3594e02",
     "2accadd0-c832-489e-b837-4de03def0d35"

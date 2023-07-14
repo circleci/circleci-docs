@@ -273,9 +273,6 @@ Many of the API calls make use of the `{project-slug}` triplet, described [above
         build:
           docker:
             - image: "circleci/node:<< pipeline.parameters.image-tag >>"
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
           environment:
             IMAGETAG: "<< pipeline.parameters.image-tag >>"
           steps:

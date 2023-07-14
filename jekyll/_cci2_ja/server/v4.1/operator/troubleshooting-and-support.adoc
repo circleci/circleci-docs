@@ -139,3 +139,15 @@ sudo docker run --rm -it clojure lein repl :connect "${INET_ADDR}":6005
 # End port-forwarding
 kill $!
 ----
+
+[#disable-concurrency-limits]
+== 同時実行の制限を無効にします
+
+もしあなたの組織がハードコードされた同時実行数の制限にぶつかっているのであれば、`values.yaml`で以下のように設定することで、この制限を無効にすることができます。
+
+[source,yaml]
+----
+distributor_dispatcher:
+  ...
+  disable_concurrency: false
+----

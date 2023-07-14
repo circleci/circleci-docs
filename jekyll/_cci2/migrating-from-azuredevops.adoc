@@ -2,15 +2,15 @@
 contentTags:
   platform:
   - Cloud
-  - Server 3.x
+  - Server v4.x
+  - Server v3.x
 ---
 = Migrate from Azure DevOps
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Azure DevOps to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from Azure DevOps to CircleCI.
 
@@ -18,15 +18,16 @@ NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == Source Control Setup
-If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or Bitbucket. For Azure DevOps Git repos, here are links on how to import into GitHub or Bitbucket:
+If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub, Bitbucket or GitLab. For Azure DevOps Git repos, here are links on how to import:
 
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
+* link:https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
+* link:https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository[Bitbucket]
+* link:https://docs.gitlab.com/ee/user/project/import/repo_by_url.html[GitLab]
 
 For TFVC repositories, we recommend using the git-tfs tool. Here is a link to the tool and steps for using it:
 
-* https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
-* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
+* link:https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
+* link:https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -51,9 +52,9 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
+If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on link:https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
-Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started#[Getting Started guide].
 
 [#build-configuration]
 == Build Configuration
@@ -64,12 +65,14 @@ First, create a CircleCI build configuration file. In the root directory of your
 
 The Azure DevOps Pipelines and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
-* https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
+* link:https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
 
-* https://circleci.com/docs/configuration-reference/[CircleCI YML Reference]
+* xref:configuration-reference#[CircleCI YML Reference]
 
 [#configuration-comparison]
 == Configuration comparison
+
+{% include snippets/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -117,9 +120,6 @@ jobs:
   job1:
     docker:
       - image: node:10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ----
 
 2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.

@@ -15,11 +15,9 @@ contentTags:
 
 NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
 
-CAUTION: コンフィグファイルのポリシー管理機能が**オープンプレビュー段階**の間は、**コンプライアンスの用途には使用しないでください**。オープンプレビュー中は、本機能を使用できない期間が発生する可能性があります。 その間は、構築したコンフィグファイルのポリシーに対する評価が行われません。
-
 このリファレンスのページでは、ポリシー作成に役立つ CircleCI 専用関数である__ヘルパー__を紹介します。 これらのヘルパーを使用すると、より定型句の少ないすっきりとしたポリシーを作成できます。
 
-`circle-policy-agent` パッケージには、コンフィグファイルポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 これらの関数は、`policy-service`、`circle-cli`、または `circle-policy-agent` の評価対象となるすべてのポリシーからアクセスできます。 つまり、`circleci.config` および `circleci.utils` というパッケージ名は予約されているということです。
+このリファレンスのページでは、ポリシー作成に役立つ CircleCI 専用関数である__ヘルパー__を紹介します。 これらのヘルパーを使用すると、より定型句の少ないすっきりとしたポリシーを作成できます。 つまり、`circleci.config` および `circleci.utils` というパッケージ名は予約されているということです。
 
 [#circleci-config-helpers]
 == CircleCI コンフィグヘルパー
@@ -331,22 +329,21 @@ enable_hard["rule_contexts_reserved_by_branches"]
 ----
 
 [#circleci-utility-helpers]
-== CircleCI ユーティリティヘルパー
+== CircleCI コンフィグヘルパー
 
-以下のヘルパーは、`import data.circleci.utils` でインポートします。
+以下のヘルパーは、`import data.circleci.config` でインポートします。
 
 [#get_element_name]
-=== `get_element_name`
+=== `orbs`
 
-この関数は、コンフィグファイル内の要素の名前を取得します。 これにより、ワークフロー内のジョブ名や、ジョブ内のステップ名などを取得できます。 取得対象の要素がオブジェクトの場合、オブジェクトのキーが返されます。
+`orbs` は、指定したコンフィグファイル内の Orb とバージョンを要素に持つ Rego オブジェクトです。 Orb に関連付けられているポリシーで使用できます。 取得対象の要素がオブジェクトの場合、オブジェクトのキーが返されます。
 
 [#definition-get-element-name]
 ==== 定義
 
 [source,rego]
 ----
-get_element_name(input.<config_key>)
-returns string
+orbs[string] = string
 ----
 
 [#usage-get-element-name]
@@ -356,12 +353,11 @@ returns string
 ----
 package org
 
-import data.circleci.utils
+import data.circleci.config
 
 policy_name["example"]
 
-job_name1 = utils.get_element_name(input.jobs[0])
-job_name2 = utils.get_element_name(input.jobs[1])
+my_orbs := config.orbs
 ----
 
 以下の config.yml を例に考えてみましょう。
@@ -379,17 +375,17 @@ workflows:
 上記のポリシーでは、`job_name1` が `lint` に、`job_name2` が `test` になります。
 
 [#to_array]
-=== `to_array`
+=== `ban_orbs`
 
-この関数は、値を配列にキャストします。 配列の値は変化せず、配列 <Array> にキャスト**されません**。
+この関数では、指定した Orb 名に該当する Orb が含まれるコンフィグファイルをポリシー違反とみなします。 Orb リストにはバージョンは含めないでください。
 
 [#definition-to-array]
 ==== 定義
 
 [source,rego]
 ----
-to_array(value)
-returns array
+ban_orbs([string])
+returns { string: string }
 ----
 
 [#usage-to-array]
@@ -399,26 +395,27 @@ returns array
 ----
 package org
 
-import data.circleci.utils
+import data.circleci.config
 
 policy_name["example"]
 
-a = utils.to_array("element")   # a is ["element"]
-b = utils.to_array(["element"]) # b is ["element"]
+ban_orbs = config.ban_orbs(["evilcorp/evil"])
+
+enable_hard["ban_orbs"]
 ----
 
 [#to-set]
-=== `to_set`
+=== `ban_orbs_version`
 
-この関数は、値をセットにキャストします。 配列の値はセットにキャストされ、重複が排除されます。 セットの値は変化せず、セット <Set> にキャスト**されません**。
+この関数では、指定した Orb 名とバージョンに該当する Orb が含まれるコンフィグファイルをポリシー違反とみなします。 配列の値はセットにキャストされ、重複が排除されます。 セットの値は変化せず、セット <Set> にキャスト**されません**。
 
 [#definition-to-set]
 ==== 定義
 
 [source,rego]
 ----
-to_set(value)
-returns set
+ban_orbs_version([string])
+returns { string: string }
 ----
 
 [#usage-to-set]
@@ -428,11 +425,11 @@ returns set
 ----
 package org
 
-import data.circleci.utils
+import data.circleci.config
 
 policy_name["example"]
 
-a = utils.to_set("element")                      # a is {"element"}
-b = utils.to_set(["one", "one", "two", "three"]) # b is {"one", "two", "three"}
-c = utils.to_set({"element"})                    # c is {"element"}
+ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.5.6"])
+
+enable_hard["ban_orbs_versioned"]
 ----

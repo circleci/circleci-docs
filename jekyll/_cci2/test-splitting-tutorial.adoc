@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn to split and run tests in parallel in CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide walks you through a basic example of test splitting in CircleCI. Test splitting helps speed up your pipelines.
 
@@ -48,6 +47,8 @@ When you set up the project in CircleCI later in this tutorial, you'll select th
 
 The following is a copy of the `.circleci/config.yml` template that you will edit later.
 
+{% include snippets/docker-auth.adoc %}
+
 [source,yaml]
 ----
 version: 2.1
@@ -59,9 +60,6 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/node:16.10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages:
@@ -206,9 +204,6 @@ jobs:
     build-and-test:
         docker:
             - image: cimg/node:16.10
-                auth:
-                    username: mydockerhub-user
-                    password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 5
         steps:
             - checkout

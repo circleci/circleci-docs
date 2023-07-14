@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Benefits of choosing CircleCI for CI/CD
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 
 [#benefits-of-circleci]

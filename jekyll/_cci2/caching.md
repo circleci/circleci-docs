@@ -361,16 +361,10 @@ This example is only a _potential_ solution and might be unsuitable for your spe
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: cimg/mysql:5.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
@@ -419,6 +413,8 @@ This example is only a _potential_ solution and might be unsuitable for your spe
       - run: bundle exec cucumber
 ```
 {% endraw %}
+
+{% include snippets/docker-auth.md %}
 
 ## Source caching
 {: #source-caching }

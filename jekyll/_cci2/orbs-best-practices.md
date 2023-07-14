@@ -169,9 +169,6 @@ description: >
   https://circleci.com/developer/images/image/cimg/node
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '13.11'

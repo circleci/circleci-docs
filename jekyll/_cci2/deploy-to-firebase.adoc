@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.
 
@@ -52,9 +51,6 @@ The following example shows how you can add a Firebase deploy job to your projec
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:

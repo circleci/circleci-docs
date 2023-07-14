@@ -121,15 +121,19 @@ JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-
 JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example](/docs/collect-test-data/#karma)
 JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example](/docs/collect-test-data/#ava-for-node)
 JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example](/docs/collect-test-data/#eslint)
+JavaScript | Playwright | built-in | [example](https://playwright.dev/docs/test-reporters#junit-reporter)
+JavaScript | Cypress | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example](https://docs.cypress.io/guides/tooling/reporters#Reporter-Options)
+JavaScript | WebdriverIO | [@wdio/junit-reporter](https://www.npmjs.com/package/@wdio/junit-reporter) | [example](https://webdriver.io/docs/junit-reporter/)
 Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example](/docs/collect-test-data/#rspec)
 Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example](/docs/collect-test-data/#minitest)
 --- | Cucumber | built-in | [example](/docs/collect-test-data/#cucumber)
-Python | pytest | built in | [example](/docs/collect-test-data/#pytest)
+Python | pytest | built-in | [example](/docs/collect-test-data/#pytest)
 Python | unittest | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests | [example](/docs/collect-test-data/#unittest)
 Java | Maven | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/) | [example](/docs/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
 Java | Gradle | built-in | [example](/docs/collect-test-data/#gradle-junit-test-results)
-PHP | PHPUnit | built in | [example](/docs/collect-test-data/#phpunit)
+PHP | PHPUnit | built-in | [example](/docs/collect-test-data/#phpunit)
 .NET | --- | [trx2junit](https://github.com/gfoidl/trx2junit) | [example](/docs/collect-test-data/#dot-net)
+.NET | NUnit | [nunit-transforms](https://github.com/nunit/nunit-transforms/tree/master/nunit3-junit) | [example](https://github.com/nunit/nunit-transforms/tree/master/nunit3-junit)
 Clojure | Kaocha | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml) | [example](/docs/collect-test-data/#kaocha)
 Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit) | [example](/docs/collect-test-data/#test2junit-for-clojure-tests)
 C, C++ | CTest | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [example](/docs/collect-test-data/#ctest-for-c-cxx-tests)
@@ -197,15 +201,9 @@ jobs:
             NODE_ENV: development
         docker:
             - image: cimg/node:16.10
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
             - image: mongo:4.0
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGO_INITDB_ROOT_USERNAME: admin
                 MONGO_INITDB_ROOT_PASSWORD: password
@@ -559,9 +557,6 @@ jobs:
   build:
     docker:
       - image: circleci/clojure:tools-deps-1.9.0.394
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: bin/kaocha

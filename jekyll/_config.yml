@@ -66,7 +66,7 @@ server-attributes: &server
   relfilesuffix: /
   outfilesuffix: /index.html
   serverversion4: 4.0.4
-  serverversion41: 4.1.3
+  serverversion41: 4.1.4
   serverversion42: 4.2.0
   serverversion: 3.4.6
   terraformversion: 0.15.4
@@ -145,6 +145,7 @@ defaults:
       sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
       contentTags: null
+      sectionTags: null
 
 t:
   translation_in_progress:

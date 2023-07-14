@@ -32,7 +32,7 @@ contentTags:
 
 値や定義済みの環境変数の全リストは、xref:variables#pipeline-values[プロジェクトの値と変数]に関するガイドを参照して下さい。
 
-include::../_includes/snippets/pipeline-values.adoc[]
+include::../_includes/snippets/ja/pipeline-values.adoc[]
 
 使用例:
 
@@ -43,9 +43,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
@@ -87,9 +84,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:<< pipeline.parameters.image-tag >>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>

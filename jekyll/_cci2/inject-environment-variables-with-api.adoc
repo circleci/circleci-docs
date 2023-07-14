@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -8,10 +8,9 @@ contentTags:
 = Inject environment variables with the CircleCI API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to inject env var values using the API. 
+:page-description: How to inject env var values using the API.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#api-v2]
 == API v2
@@ -22,7 +21,7 @@ A pipeline can be triggered with specific parameter values using the API v2
 endpoint to link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[trigger a pipeline].
 This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
-The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`. 
+The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`.
 
 NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be xref:reusing-config#using-the-parameters-declaration[declared in the configuration file].
 
@@ -42,7 +41,7 @@ Read more about pipeline parameters on the xref:pipeline-variables#[Pipeline val
 [#api-v1]
 == API v1
 
-You can inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run (for example, a run with a deploy step to a staging environment that requires functional testing against different hosts). 
+You can inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run (for example, a run with a deploy step to a staging environment that requires functional testing against different hosts).
 
 It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl`. You may also use an HTTP library in your language of choice.
 
@@ -84,7 +83,7 @@ Build parameters are environment variables, therefore their names have to meet t
 - They must not begin with a number.
 - They must contain at least one character.
 
-Aside from the usual constraints for environment variables, there are no restrictions on the values themselves and are treated as simple strings. 
+Aside from the usual constraints for environment variables, there are no restrictions on the values themselves and are treated as simple strings.
 
 Build parameters are exported as environment variables inside each job's containers and can be used by scripts/programs and commands in `.circleci/config.yml`. The injected environment variables may be used to influence the steps that are run during the job. It is important to note that injected environment variables will not override values defined in `.circleci/config.yml` nor in the project settings.
 

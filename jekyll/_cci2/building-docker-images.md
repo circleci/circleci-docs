@@ -16,14 +16,13 @@ This page explains how to build Docker images for deployment and further testing
 
 To build Docker images for deployment using the Docker execution environment, you must use the `setup_remote_docker` key. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 jobs:
   build:
     docker:
       - image: cimg/base:2022.06
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
@@ -103,7 +102,9 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
-- `20.10.18` (default)
+- `20.10.24`
+- `20.10.23` (default)
+- `20.10.18`
 - `20.10.17`
 - `20.10.14`
 - `20.10.12`
