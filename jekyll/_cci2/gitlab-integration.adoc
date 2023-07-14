@@ -801,8 +801,8 @@ The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights
 - xref:config-intro#[Configuration tutorial]
 - xref:hello-world#[Hello world]
 
-[#further-reading]
-== Further reading
+[#relevant-gitlab-articles]
+== Relevant GitLab articles
 * link:https://circleci.com/integrations/gitlab/[GitLab integration on circleci.com]
 * link:https://circleci.com/blog/announcing-gitlab-support/[Announcing GitLab support on CircleCI] (blog post)
 * link:https://circleci.com/blog/setting-up-continuous-integration-with-gitlab/[Setting up continuous integration with CircleCI and GitLab] (blog post)
