@@ -400,7 +400,7 @@ If your workflow has an approval job, and a failed job containing failed tests t
 
 **Question:** When can I click the option to btn:[Rerun failed tests]?
 
-**Answer:** When both prerequisites are met: a job is uploading test results to CircleCI & `circleci tests run` is called.
+**Answer:** When both prerequisites are met: A job is uploading test results to CircleCI, and `circleci tests run` is called.
 
 ---
 
