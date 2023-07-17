@@ -31,6 +31,8 @@ sectionTags:
   clojure:
     - "#kaocha"
     - "#test2junit-for-clojure-tests"
+  playwright:
+    - "#playwright"
 ---
 
 ## Introduction
@@ -628,6 +630,20 @@ You can see a full example on this [third party resource](https://levelup.gitcon
 {: #xcode }
 
 Xcode generates test results in a plist (property list) file format. It is possible to convert a plist file format into an XML format that can be uploaded to CircleCI using the `xsltproc` command. Follow the steps in this [third party resource](https://medium.com/@warchimede/convert-xcode-plist-test-reports-to-junit-xml-6f0aa8c3fa58) to convert the file and then use `store_test_results` to upload the results to CircleCI.
+
+### Playwright
+{: #playwright }
+
+ - run:
+    command: |
+      mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
+      pnpm run serve &
+      pnpm playwright test --config=playwright.config.ci.ts --reporter=junit
+
+- store_test_results:
+    path: results.xml
+
+NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with some of CircleCI's testing features.
 
 
 ## API
