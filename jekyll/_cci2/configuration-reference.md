@@ -845,12 +845,8 @@ If you are using CircleCI server, contact your system administrator for details 
 
 When using the Linux [GPU executor]({{ site.baseurl }}/using-gpu), the available images are:
 
-* `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
-* `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
-* `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1, Docker v19.03.13, nvidia-container-toolkit v1.4.0-1
-* `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
-* `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1, Docker v19.03.0-ce, nvidia-docker v2.2.2
-* `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
+* `linux-cuda-11:default` v11.4, v11.6, v11.8 (default), Docker v20.10.24
+* `linux-cuda-12:default` v12.0, v12.1 (default), Docker v20.10.24
 
 ---
 
@@ -1123,8 +1119,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604-cuda-10.1:201909-23
-    resource_class: gpu.nvidia.small
+      image: linux-cuda-12:default
+      resource_class: gpu.nvidia.medium
     steps:
       - run: nvidia-smi
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
@@ -2622,4 +2618,3 @@ workflows:
               only: main
 ```
 {% endraw %}
-
