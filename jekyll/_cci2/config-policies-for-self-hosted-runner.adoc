@@ -107,7 +107,7 @@ If the upload was successful, you will see something like the following:
 
 [tab.allow.push_to_vcs]
 --
-If you have set up your config policies repository with the sample configuration shown xref:create-and-manage-config-policies#manage-policies-with-your-vcs[here], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Create and manage config policies guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
