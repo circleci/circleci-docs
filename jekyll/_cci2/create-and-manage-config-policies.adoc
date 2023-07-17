@@ -64,6 +64,7 @@ CircleCI policies are managed by pushing directories of policies to CircleCI via
 
 The rest on the steps in this section show how to set up a CI/CD pipeline to manage your policies.
 
+[#prerequisites]
 === Prerequisites
 
 For the config policies pipeline recommended in this guide you will need to securely manage some environment variables:
