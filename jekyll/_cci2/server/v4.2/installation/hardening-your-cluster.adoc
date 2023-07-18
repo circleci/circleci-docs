@@ -305,7 +305,7 @@ When the `assignPublicIP` option is set to true, all EC2 instances created by VM
 
 SSH traffic from the `vm-service` pod will flow through the NAT gateway of the subnet of the cluster. Since traffic moves outside the VPC it is not possible to restrict traffic by security group origin. It is instead necessary to add the IPs of the NAT gateway(s) used by the cluster to your safelist.
 
-If both nomad clients and VM service VMs have been assigned public IPs, SSH and docker traffic will route through the subnets' internet gateways. Since traffic moves through the public internet, security groups are no longer an option for restricting traffic. In order to restrict access on these ports, the public IPv4 addresses of the nomad-clients must be added to the safelist in the VM service security group ingress rules. Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
+If both Nomad clients and VM service VMs have been assigned public IPs, SSH and Docker traffic will route through the subnets' internet gateways. Since traffic moves through the public internet, security groups are no longer an option for restricting traffic. In order to restrict access on these ports, the public IPv4 addresses of the nomad-clients must be added to the safelist in the VM service security group ingress rules. Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
 
 When hardening an installation where the VM service uses public IPs, the following rules can be created.
 
