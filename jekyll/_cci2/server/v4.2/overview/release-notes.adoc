@@ -15,7 +15,7 @@ contentTags:
 [#overview]
 == Overview
 
-Server v4.2 introduces #TBC#
+Server v4.2 introduces the config policies feature. Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
 [#migration]
 == Migrate
