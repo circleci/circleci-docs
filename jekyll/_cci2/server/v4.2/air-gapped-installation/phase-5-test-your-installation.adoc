@@ -28,7 +28,7 @@ CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `o
 == 3. Modify Reality Check source code
 Replace any references to docker images in .circleci/config.yml with your internal docker registry.
 
-For example, in your GitHub enterprise instance, change the following:
+For example, in your GitHub Enterprise instance, change the following:
 
 [source, yaml]
 ----
