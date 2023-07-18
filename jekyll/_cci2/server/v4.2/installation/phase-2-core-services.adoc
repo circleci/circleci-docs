@@ -83,7 +83,7 @@ NOTE: During the installation process, you may use the following command to gene
 [#api-token]
 === a. API token
 
-The application requires a Kubernetes Secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
+The application requires a Kubernetes Secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely. CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
 
 [.tab.apitoken.You_create_Secret]
 --
