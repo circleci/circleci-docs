@@ -17,7 +17,7 @@ contentTags:
 
 Server v4.2 introduces #TBC#
 
-[#migraiton]
+[#migration]
 == Migrate
 
 NOTE: The migration process requires that you install v4.0.x first before moving to subsequent releases.
