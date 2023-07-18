@@ -48,7 +48,7 @@ CircleCI logs important events in the system for audit and forensic analysis pur
 
 Complete audit logs may be downloaded as a CSV file from the audit log page within the admin section of the application. Audit log fields with nested data contain JSON blobs. Please note the audit log download can take a very long time to start; we recommend clicking the **Download** button once and leaving it to run.
 
-**Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
+NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
 [#audit-log-events]
 === Audit log events
