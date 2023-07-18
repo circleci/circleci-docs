@@ -100,7 +100,7 @@ If you are getting started with CircleCI, there are some points you can ask your
 * Sometimes user misuse of certain tools might accidentally print secrets to stdout which will appear in your logs. Please be aware of:
   ** Running `env` or `printenv` which will print all your environment variables to stdout.
   ** Literally printing secrets in your codebase or in your shell with `echo`.
-  ** programs or debugging tools that print secrets on error.
+  ** Programs or debugging tools that print secrets on error.
 * Consult your VCS provider's permissions for your organization (if you are in an organization) and try to follow the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of Least Privilege].
 * Use Restricted Contexts with teams to share environment variables with a select security group. Read through the xref:../../../contexts/#restrict-a-context[contexts] document to learn more.
 * Ensure you audit who has access to SSH keys in your organization.
