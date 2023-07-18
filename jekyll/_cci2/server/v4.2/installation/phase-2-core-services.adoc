@@ -74,7 +74,7 @@ Before installing CircleCI, it is recommended to create a new `values.yaml` file
 For sensitive data there are two options:
 
 * Add into the `values.yaml` file
-* add them as Kubernetes Secrets directly
+* Add them as Kubernetes Secrets directly
 
 This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer. Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
 
