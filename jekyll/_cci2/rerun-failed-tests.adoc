@@ -246,6 +246,15 @@ cd src/test/java
     
     # Get list of classnames of tests that should run on this node.  
     circleci tests glob "**/*.java" | cut -c 1- | sed 's@/@.@g' | sed 's/.\{5\}$//' | circleci tests run --command ">classnames.txt xargs echo" --verbose --split-by=timings --timings-type=classname     
+
+    #if this is a re-run and it is a parallel run that does not have tests to run, halt execution of this parallel run
+    [ -s classnames.txt ] || circleci-agent step halt
+
+```
+
+```yaml
+-run:
+  command: |
     
     # Format the arguments to "./gradlew test"
     cd ../../..
@@ -452,25 +461,13 @@ If your workflow has an approval job, and a failed job containing failed tests t
 
 **Question:** Will this functionality rerun individual tests?
 
-**Answer:** No, it will rerun failed test `classnames` or `file` that had at least one individual test failure.
+**Answer:** No, it will rerun failed test `classnames` or test filenames (`file`) that had at least one individual test failure.
 
 ---
 
-**Question:** What happens if I try to use the functionality but `circleci tests run` is not used in the `.circleci/config.yml` file?
+**Question:** When can I use the option to btn:[Rerun failed tests]?
 
-**Answer:** All tests will be executed when the workflow runs again, including failed tests. This is equivalent to selecting "Rerun workflow from failed".
-
----
-
-**Question:** What happens if I try to use the functionality and `circleci tests run` is used in my `.circleci/config.yml` file, but I have not configured my job to upload test results to CircleCI?
-
-**Answer:** The job will fail.
-
----
-
-**Question:** When can I click the option to btn:[Rerun failed tests]?
-
-**Answer:** Currently, it will be present any time the "Rerun workflow from failed" option is present, and vice versa.
+**Answer:** The job must be uploading tets results to CircleCI and using `circleci tests run`.
 
 ---
 
