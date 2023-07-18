@@ -20,7 +20,7 @@ The chart assumes an environment with the following resources:
 
 - A K3s cluster for the installation of the Helm chart
 - MetalLB pre-configued on the K3s cluster for ingress
-- A private docker registry at docker.internal.example.com running on port 5000 with no TLS encryption
+- A private Docker registry at docker.internal.example.com running on port 5000 with no TLS encryption
 - A Nomad instance with mTLS disabled
 - A MinIO instance running at minio.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
