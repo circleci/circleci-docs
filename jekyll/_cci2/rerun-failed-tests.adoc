@@ -235,11 +235,9 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 
 . Modify your test command to use `circleci tests run`:
 
-cd src/test/java
 # Get list of classnames of tests that should run on this node
             
 ```yaml
-
 -run:
   command: |
     cd src/test/java
@@ -249,7 +247,6 @@ cd src/test/java
 
     #if this is a re-run and it is a parallel run that does not have tests to run, halt execution of this parallel run
     [ -s classnames.txt ] || circleci-agent step halt
-
 ```
 
 ```yaml
