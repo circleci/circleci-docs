@@ -12,7 +12,7 @@ contentTags:
 
 [#example-manifests]
 == Example Manifests
-The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server helm installation.
+The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server Helm installation.
 
 [#aws]
 === AWS
