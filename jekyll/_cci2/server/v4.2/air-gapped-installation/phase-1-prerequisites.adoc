@@ -60,60 +60,61 @@ Download all images required for the release of CircleCI server to your local ma
 
 [source, bash]
 ----
-SERVER_4_1_IMAGE_LIST=`cat <<EOF
-bitnami/postgresql:12
-cciserver.azurecr.io/api-gateway:0.1.27056-791021f
-cciserver.azurecr.io/api-service:0.1.13307-ac5e1215
-cciserver.azurecr.io/audit-log-service:0.1.994-cc7f017
-cciserver.azurecr.io/branch-service-migrator:0.1.4205-f54b104
-cciserver.azurecr.io/branch-service:0.1.4206-f54b104
-cciserver.azurecr.io/builds-service-migrator:1.0.2954-dbc4487
-cciserver.azurecr.io/builds-service:1.0.2954-dbc4487
-cciserver.azurecr.io/circle-migrator:0.1.580305-e9d88a9834
+SERVER_4_2_IMAGE_LIST=`cat <<EOF
+bitnami/postgresql:12.6.0
+cciserver.azurecr.io/api-gateway:0.1.31061-3f64088
+cciserver.azurecr.io/api-service:0.1.14854-4511416d
+cciserver.azurecr.io/audit-log-service:0.1.998-89eb4f7
+cciserver.azurecr.io/branch-service-migrator:0.1.4402-22a3075
+cciserver.azurecr.io/branch-service:0.1.4401-22a3075
+cciserver.azurecr.io/builds-service-migrator:1.0.3936-0a6e946
+cciserver.azurecr.io/builds-service:1.0.3936-0a6e946
+cciserver.azurecr.io/circle-migrator:0.1.608150-61594abcce
 cciserver.azurecr.io/contexts-service-migrator:0.1.18751-df77431
 cciserver.azurecr.io/contexts-service:0.1.18752-df77431
-cciserver.azurecr.io/cron-service-migrator:0.1.3889-3c348df
-cciserver.azurecr.io/cron-service:0.1.3890-3c348df
+cciserver.azurecr.io/cron-service-migrator:0.1.3996-a877941
+cciserver.azurecr.io/cron-service:0.1.3997-a877941
 cciserver.azurecr.io/distributor-migrator:1.0.93790-1c54ce3f
-cciserver.azurecr.io/distributor:1.0.93790-1c54ce3f
-cciserver.azurecr.io/domain-service-migrator:0.1.15701-ddd2312
-cciserver.azurecr.io/domain-service:0.1.15700-ddd2312
-cciserver.azurecr.io/frontend:0.2.30085-e9d88a9
-cciserver.azurecr.io/init-known-hosts:0.1.26-9f89d4e
-cciserver.azurecr.io/insights-service-migrator:0.1.73818-7d0fb8dc
-cciserver.azurecr.io/insights-service:0.1.73817-7d0fb8dc
+cciserver.azurecr.io/distributor:1.0.118147-82612764
+cciserver.azurecr.io/domain-service-migrator:0.1.16299-0ae3a97
+cciserver.azurecr.io/domain-service:0.1.16298-0ae3a97
+cciserver.azurecr.io/frontend:0.2.32025-61594ab
+cciserver.azurecr.io/init-known-hosts:0.1.43-c73c028
+cciserver.azurecr.io/insights-service-migrator:0.1.78685-a5529e4e
+cciserver.azurecr.io/insights-service:0.1.78686-a5529e4e
 cciserver.azurecr.io/nomad:1.1.2-74-7552671
-cciserver.azurecr.io/orb-service-analytics-migrator:0.1.57046-2560e791
-cciserver.azurecr.io/orb-service-migrator:0.1.57047-2560e791
-cciserver.azurecr.io/orb-service:0.1.57044-2560e791
-cciserver.azurecr.io/output-processing:0.1.66391-202888aa
-cciserver.azurecr.io/permissions-service-migrator:0.1.12572-4b05edc
-cciserver.azurecr.io/permissions-service:0.1.12571-4b05edc
+cciserver.azurecr.io/orb-service-analytics-migrator:0.1.64074-785435a1
+cciserver.azurecr.io/orb-service-migrator:0.1.64070-785435a1
+cciserver.azurecr.io/orb-service:0.1.64072-785435a1
+cciserver.azurecr.io/output-processing:0.1.66937-9609a831
+cciserver.azurecr.io/permissions-service-migrator:0.1.13413-18c6091
+cciserver.azurecr.io/permissions-service:0.1.13412-18c6091
 cciserver.azurecr.io/picard-dispatcher:0.1.65675-630fe5d4
+cciserver.azurecr.io/policy-service:0.1.5903-bf94009
 cciserver.azurecr.io/schedulerer:0.1.65674-630fe5d4
-cciserver.azurecr.io/server-license:0.1.95-157a965
+cciserver.azurecr.io/server-license:0.1.113-be11908
 cciserver.azurecr.io/test-results:0.1.3402-e561bf7
 cciserver.azurecr.io/vault-cci:0.4.196-1af3417
-cciserver.azurecr.io/vm-gc:0.1.114020-e01a8b25
-cciserver.azurecr.io/vm-scaler:0.1.114020-e01a8b25
-cciserver.azurecr.io/vm-service-db-migrator:0.1.114020-e01a8b25
-cciserver.azurecr.io/vm-service:0.1.114020-e01a8b25
+cciserver.azurecr.io/vm-gc:0.1.116274-09867360
+cciserver.azurecr.io/vm-scaler:0.1.116274-09867360
+cciserver.azurecr.io/vm-service-db-migrator:0.1.116274-09867360
+cciserver.azurecr.io/vm-service:0.1.116274-09867360
 cciserver.azurecr.io/web-ui-404:0.1.9529-970af08
-cciserver.azurecr.io/web-ui-insights:0.1.108760-b138c234
-cciserver.azurecr.io/web-ui-onboarding:0.1.117606-4a3d0ba8
-cciserver.azurecr.io/web-ui-org-settings:0.1.19935-d372381
-cciserver.azurecr.io/web-ui-project-settings:0.1.37243-f36511fa
-cciserver.azurecr.io/web-ui-server-admin:0.1.2823-6a139c7
-cciserver.azurecr.io/web-ui-user-settings:0.1.32852-6335f1b
+cciserver.azurecr.io/web-ui-insights:0.1.112357-ef9cd7a2
+cciserver.azurecr.io/web-ui-onboarding:0.1.122920-771e5aa3
+cciserver.azurecr.io/web-ui-org-settings:0.1.20726-659414c
+cciserver.azurecr.io/web-ui-project-settings:0.1.38325-1f12a5dc
+cciserver.azurecr.io/web-ui-server-admin:0.1.3424-9c4b737
+cciserver.azurecr.io/web-ui-user-settings:0.1.33337-96cebbc
 cciserver.azurecr.io/web-ui:0.1.243845-214e7f96a
-cciserver.azurecr.io/webhook-service-migrator:0.1.8118-61d0143
-cciserver.azurecr.io/webhook-service:0.1.8119-61d0143
-cciserver.azurecr.io/workflows-conductor-migrator:1.0.16104-a0e7a1f
-cciserver.azurecr.io/workflows-conductor:1.0.16104-a0e7a1f
+cciserver.azurecr.io/webhook-service-migrator:0.1.8515-28c3b65
+cciserver.azurecr.io/webhook-service:0.1.8516-28c3b65
+cciserver.azurecr.io/workflows-conductor-migrator:1.0.17596-e89bfdb
+cciserver.azurecr.io/workflows-conductor:1.0.17596-e89bfdb
 circleci/picard:1.0.151412-85da0b64
 docker.io/bitnami/mongodb:3.6.22-debian-9-r38
 docker.io/bitnami/postgresql:12.6.0
-docker.io/bitnami/rabbitmq:3.8.14-debian-10-r10
+docker.io/bitnami/rabbitmq:3.11.16-debian-11-r0
 docker.io/bitnami/redis:6.2.1-debian-10-r13
 hashicorp/nomad-autoscaler:0.3.6
 kong:2.7.0
@@ -133,7 +134,7 @@ EOF
 
 [source, bash]
 ----
-echo $SERVER_4_1_IMAGE_LIST | while read -r image; do docker pull $image; done
+echo $SERVER_4_2_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]
