@@ -15,7 +15,7 @@ contentTags:
 [#non-tls-docker-registry-installations]
 == Non-TLS Docker Registry Installations
 
-When configuring your air-gapped docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-tls, or self-signed installation, the following additional steps will need to be taken.
+When configuring your air-gapped docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-TLS, or self-signed installation, the following additional steps will need to be taken.
 
 On machines that access the Docker registry using Docker, the Docker daemon config must be updated (located on linux at `/etc/docker/daemon.json`).
 
