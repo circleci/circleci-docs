@@ -272,7 +272,7 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 **Executors**
 
-The CLI does not support running jobs that use a <</executor-intro#linux-vm,Machine>> (`machine`) or <</executor-intro#macos,macOS>> (`macos`) executor locally. This is because these executors require running an additional Virtual Machine. Only jobs that use a <</executor-intro#docker,Docker>> (`docker`) executor can be run locally.
+The CLI does not support running jobs that use a <<executor-intro#linux-vm,machine>> (`machine`) or <<executor-intro#macos,macOS>> (`macos`) executor locally. This is because these executors require running an additional virtual machine. Only jobs that use a <<executor-intro#docker,Docker>> (`docker`) executor can be run locally.
 
 **Add SSH keys**
 
