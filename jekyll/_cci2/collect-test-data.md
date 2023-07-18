@@ -33,6 +33,10 @@ sectionTags:
     - "#test2junit-for-clojure-tests"
   playwright:
     - "#playwright"
+  cypress:
+    - "#cypress"
+  webdriverio:
+    - "#webdriverio"
 ---
 
 ## Introduction
@@ -634,6 +638,7 @@ Xcode generates test results in a plist (property list) file format. It is possi
 ### Playwright
 {: #playwright }
 
+```yml
  - run:
     command: |
       mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
@@ -642,10 +647,57 @@ Xcode generates test results in a plist (property list) file format. It is possi
 
 - store_test_results:
     path: results.xml
+```
 
 NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with some of CircleCI's testing features.
 
+### Cypress
+{: #cypress }
 
+```yml
+ - run:
+    command: |
+      npm install --save-dev cypress-multi-reporters mocha-junit-reporter
+      cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json ...<other options>
+
+- store_test_results:
+    path: results.xml
+```
+
+### WebdriverIO
+{: #webdriverio }
+
+Update your wdio.conf.js to use the link:https://webdriver.io/docs/junit-reporter/#configuration[junit reporter]:
+
+```
+// wdio.conf.js
+module.exports = {
+    // ...
+    reporters: [
+        'dot',
+        ['junit', {
+            outputDir: './test-results',
+            outputFileFormat: function(options) { // optional
+                return `results-${options.cid}.${options.capabilities}.xml`
+            }
+        }]
+    ],
+    // ...
+};
+```
+
+Update your `.circleci/config.yml` to upload the test results to CircleCI.
+
+```yml
+ - run:
+    command: |
+      npm install @wdio/junit-reporter --save-dev
+      wdio wdio.test.conf.js
+   
+- store_test_results:
+    path: ./test-results
+```
+  
 ## API
 {: #api }
 
