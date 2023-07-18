@@ -123,7 +123,7 @@ For each `hostname:port` combination, CircleCI server will, during installation,
 
 
 [#configuring-the-tls-certificates-array]
-=== Configuring the TLS Certificates Array
+=== Configuring the TLS certificates array
 Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file, in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
 
 [source, yaml]
