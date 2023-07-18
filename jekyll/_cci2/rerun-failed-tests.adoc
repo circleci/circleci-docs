@@ -463,7 +463,7 @@ If your workflow has an approval job, and a failed job containing failed tests t
 
 **Question:** When can I use the option to btn:[Rerun failed tests]?
 
-**Answer:** The job must be uploading tets results to CircleCI and using `circleci tests run`.
+**Answer:** The job must be uploading test results to CircleCI and using `circleci tests run`.
 
 ---
 
@@ -495,15 +495,9 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
-**Question:** Why does the rerun appear to be running all tests instead of only failed tests?
-
-**Answer:** The most common case where this occurs is when the JUnit XML is not outputting a "file" attribute.  If you upload your test results XML to an artifact, you can inspect whether or not it has the "file" attribute.
-
----
-
 **Question:** Are tests that were reported by my test runner as "Skipped" or "Ignored" rerun when I click btn:[Rerun failed tests]?
 
-**Answer:** No, only test files that have at least one test case reported as "Failed" will be rerun.
+**Answer:** No, only test files/classnames that have at least one test case reported as "Failed" will be rerun.
 
 ---
 
