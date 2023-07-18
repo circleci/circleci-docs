@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This page describes the steps needed to upgrade you CircleCI server v4.x installation.
+This page describes the steps needed to upgrade your CircleCI server v4.x installation.
 
 A successful deployment will update the web app. Unless noted in the release notes, updates are rolling updates and there is no downtime.
 
