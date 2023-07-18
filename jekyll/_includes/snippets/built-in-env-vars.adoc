@@ -94,8 +94,7 @@
 | `CIRCLE_PULL_REQUESTS`
 | GitHub, Bitbucket
 | List or String
-| Comma-separated list of URLs of the current build's associated pull requests. If there is only one associated pull request, returns the URL of 
-| the associated pull request as a string.
+| Comma-separated list of URLs of the current build's associated pull requests. If there is only one associated pull request, returns the URL of the associated pull request as a string.
 
 | `CIRCLE_REPOSITORY_URL`
 | GitHub, Bitbucket
