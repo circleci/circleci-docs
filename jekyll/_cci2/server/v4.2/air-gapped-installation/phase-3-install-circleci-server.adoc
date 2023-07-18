@@ -151,7 +151,7 @@ helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --vers
 
 [#post-install-circleci-server-helm-airgap]
 == 3. Post Installation Steps
-After the helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+After the Helm deployment, depending on your installation, it may be necessary to manually patch the circleci-proxy Load Balancer service (such as when using MetalLB). For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [#next-steps]
 == Next steps
