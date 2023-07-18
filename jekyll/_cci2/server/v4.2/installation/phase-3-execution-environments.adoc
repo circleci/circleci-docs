@@ -1041,7 +1041,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *Enable Workload Identity for Service Account or get JSON key file*
 +
-Choose one of the following options, depending on whether your are using Workload Identity.
+Choose one of the following options, depending on whether you are using Workload Identity.
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
