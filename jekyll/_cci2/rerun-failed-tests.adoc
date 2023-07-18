@@ -181,6 +181,8 @@ gem 'rspec_junit_formatter'
 +
 Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
+Cypress may output a warning saying `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
+
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running Javascript/Typescript (Jest) tests
 
@@ -257,6 +259,24 @@ Example:
 ```
 
 The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "rerun", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
+
+[#configure-a-job-running-playwright-tests]
+=== Configure a job running Django tests
+
+Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this, get the list of test filenames first, change the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
+
+[source,yaml]
+----
+# Get the test file names, write them to files.txt, and split them by historical timing data
+circleci tests glob "**/test*.py" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
+# Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
+cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
+cat circleci_test_files.txt
+TESTFILES=$(cat circleci_test_files.txt)
+# Run the tests (TESTFILES) with the reformatted test file names
+pipenv run coverage run manage.py test --parallel=8 --verbosity=2 $TESTFILES
+sebastian-lerner marked this conversation as resolved.
+----
 
 [#known-limitations]
 == Known limitations
@@ -433,7 +453,7 @@ If your workflow has an approval job, and a failed job containing failed tests t
 
 **Question:** When can I click the option to btn:[Rerun failed tests]?
 
-**Answer:** Currently, it will be present any time the "Rerun workflow from failed" option is present, and vice versa.
+**Answer:** When both prerequisites are met: A job is uploading test results to CircleCI, and `circleci tests run` is called.
 
 ---
 
