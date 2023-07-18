@@ -243,7 +243,7 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
     cd src/test/java
     
     # Get list of classnames of tests that should run on this node.  
-    circleci tests glob "**/*.java" | cut -c 1- | sed 's@/@.@g' | sed 's/.\{5\}$//' | circleci tests run --command ">classnames.txt xargs echo" --verbose --split-by=timings --timings-type=classname     
+    circleci tests glob "**/*.java" | cut -c 1- | sed 's@/@.@g' | sed 's/.\{5\}$//' | circleci tests run --command=">classnames.txt xargs echo" --verbose --split-by=timings --timings-type=classname     
 
     #if this is a re-run and it is a parallel run that does not have tests to run, halt execution of this parallel run
     [ -s classnames.txt ] || circleci-agent step halt
@@ -273,7 +273,7 @@ Example:
 ```yaml
  - run:
     command: |
-      circleci tests glob "src/**/*js" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
+      circleci tests glob "src/**/*js" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
 ```
 
 The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "rerun", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
@@ -286,7 +286,7 @@ Django takes as input test filenames with a format that uses dots ("."), however
 [source,yaml]
 ----
 # Get the test file names, write them to files.txt, and split them by historical timing data
-circleci tests glob "**/test*.py" | circleci tests run --command ">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
+circleci tests glob "**/test*.py" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
 # Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
 cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
 cat circleci_test_files.txt
@@ -312,7 +312,7 @@ steps:
   - run: |
     mkdir -p ./tmp && \
     >./tmp/tests.txt && \
-    circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command ">./tmp/tests.txt xargs echo" --split-by=timings #Get the list of filenames for this container/VM
+    circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command=">./tmp/tests.txt xargs echo" --split-by=timings #Get the list of filenames for this container/VM
 
     [ -s tmp/tests.txt ] || circleci-agent step halt #if there are no filenames, terminate execution after this step
 
@@ -354,7 +354,7 @@ jobs:
             - /home/circleci/go/pkg/mod
       - run:
           name: Run tests with coverage being saved
-          command: go list ./... | circleci tests run --timings-type "name" --command "xargs gotestsum --junitfile junit.xml --format testname -- -coverprofile=cover.out"
+          command: go list ./... | circleci tests run --timings-type "name" --command="xargs gotestsum --junitfile junit.xml --format testname -- -coverprofile=cover.out"
       # For a rerun that succeeds, restore the coverage files from the failed run
       - restore_cache:
           key: coverage-{{.Revision}}-{{.Environment.CIRCLE_NODE_INDEX}}
@@ -402,7 +402,7 @@ After configuring `circleci tests run`, if you see *all tests* are rerun after c
 2. Use xref:configuration-reference#storeartifacts[`store_artifacts`] to upload  the JUnit XML that contains test results to CircleCI.  This is the same file(s) that is being uploaded to CircleCI with `store_test_results`
 3. Manually inspect the newly uplaoded JUnit XML via the **Artifacts** tab and ensure that there is a `file=` attribute or a `classname` attribute.  If neither are present, you will see unexpected behavior when trying to rerun.  Follow the instructions on this page to ensure that the test runner you are using is outputting its JUnit XML test results with a `file` (preferred) or `classname` attribute.  Comment in our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/48[community forum] if you are still stuck.
 
-Additionally, ensure that `xargs` is present in the `--command` argument.
+Additionally, ensure that `xargs` is present in the `--command=` argument.
 
 [#no-test-names]
 === No test names found in input source
