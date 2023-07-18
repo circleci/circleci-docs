@@ -487,3 +487,9 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 **Answer:** Rerunning failed tests is currently available for workflows that are less than 15 days old.
 
 ---
+
+**Question:** Can I use the `--record` functionality with Cypress and "rerun failed tests"?
+
+**Answer:** Yes, you can pass the `--group` flag to Cypress and the `--ci-build-id` flag to group the results of CircleCi's parallelization.  Because the name passed to `--group` must be unique within the run, you can use CircleCI's built-in environment vairiables: `circleci tests glob ".cypress/**/*.spec.js" | circleci tests run --command="xargs npx cypress run --record --group "$CIRCLE_BUILD_NUM-$CIRCLE_NODE_INDEX" --ci-build-id $CIRCLE_BUILD_NUM --reporter cypress-circleci-reporter --spec" --verbose --split-by=timings`
+
+---
