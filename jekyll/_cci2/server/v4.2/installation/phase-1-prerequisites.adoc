@@ -821,7 +821,7 @@ gsutil mb gs://circleci-server-bucket
 
 [#set-up-authentication-gcp]
 ==== b. Set up authentication
-The recommended method for workload/pod authentication is to use link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
+The recommended method for workload/pod authentication is to use link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (JSON key file).
 
 . Create a Service Account.
 +
