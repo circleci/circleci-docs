@@ -101,7 +101,7 @@ kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externa
 Once complete, DNS records can be created for your server installation (server.internal.example.com) and (*.server.internal.example.com) for 10.0.0.5.
 
 [#tls-importing]
-== Importing Trusted TLS Certificates
+== Importing trusted TLS certificates
 
 When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates using two methods, as described below.
 
