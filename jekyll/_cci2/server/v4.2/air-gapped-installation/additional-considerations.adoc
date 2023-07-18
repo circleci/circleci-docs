@@ -54,7 +54,7 @@ configs:
 [#service-type-load-balancers-k3s]
 == Service Type Load Balancers in K3s
 
-CircleCI server makes use of Service Type: Load Balancer kubernetes resources to listen to traffic on multiple ports. In order to function, the cluster needs to.
+CircleCI server makes use of Service Type: Load Balancer kubernetes resources to listen to traffic on multiple ports.
 
 If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
 
