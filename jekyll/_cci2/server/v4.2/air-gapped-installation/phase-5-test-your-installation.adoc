@@ -47,7 +47,7 @@ For example, in your GitHub Enterprise instance, change the following:
       - image: <your-internal-registry-hostname-and-port>/python:3.6.0
 ----
 
-NOTE: Leave image values nested under "machine" as is. Only modify docker image values.
+NOTE: Leave image values nested under "machine" as is. Only modify Docker image values.
 
 
 [#run-reality-check]
