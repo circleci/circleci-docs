@@ -16,7 +16,7 @@ The guides in this section walk you through the steps required to install Circle
 
 [#required-components]
 == Required components for air-gapped installation
-The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forwards with the installation.
+The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forward with the installation.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
