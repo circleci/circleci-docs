@@ -141,7 +141,7 @@ Some CircleCI APIs may emit a `Cache-Control` header to indicate that the respon
 
 ## Getting Started
 
-CircleCI 1.0 and 2.0 are supported by API version 1.1 as documented in the following sections:
+CircleCI supports API version 1.1 as documented in the following sections:
 
 * Summary of API Endpoints
 * User
