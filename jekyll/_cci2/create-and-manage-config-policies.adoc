@@ -3,6 +3,7 @@ description: Learn how to write and manage config policies for CircleCI project 
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Create and manage config policies
 :page-layout: classic-docs

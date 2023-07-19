@@ -3,6 +3,7 @@ description: Open preview of config policies for CircleCI. Learn about testing y
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Test config policies - Open preview
 :page-layout: classic-docs

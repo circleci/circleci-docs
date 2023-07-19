@@ -3,6 +3,7 @@ description: Learn how to write a policy to restrict which projects can run jobs
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Config policies for self-hosted runner (Open-preview)
 :page-layout: classic-docs
