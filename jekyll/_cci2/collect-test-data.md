@@ -127,9 +127,9 @@ JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-
 JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example](/docs/collect-test-data/#karma)
 JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example](/docs/collect-test-data/#ava-for-node)
 JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example](/docs/collect-test-data/#eslint)
-JavaScript | Playwright | built-in | [example](https://playwright.dev/docs/test-reporters#junit-reporter)
-JavaScript | Cypress | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example](https://docs.cypress.io/guides/tooling/reporters#Reporter-Options)
-JavaScript | WebdriverIO | [@wdio/junit-reporter](https://www.npmjs.com/package/@wdio/junit-reporter) | [example](https://webdriver.io/docs/junit-reporter/)
+JavaScript | Playwright | built-in | [example](/docs/collect-test-data/#playwright)
+JavaScript | Cypress | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example](/docs/collect-test-data/#cypress)
+JavaScript | WebdriverIO | [@wdio/junit-reporter](https://www.npmjs.com/package/@wdio/junit-reporter) | [example](/docs/collect-test-data/#webdriverio)
 Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example](/docs/collect-test-data/#rspec)
 Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example](/docs/collect-test-data/#minitest)
 --- | Cucumber | built-in | [example](/docs/collect-test-data/#cucumber)
@@ -649,7 +649,8 @@ Xcode generates test results in a plist (property list) file format. It is possi
     path: results.xml
 ```
 
-NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with some of CircleCI's testing features.
+Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with some of CircleCI's testing features.
+{: class="alert alert-note" }
 
 ### Cypress
 {: #cypress }
@@ -693,11 +694,11 @@ Update your `.circleci/config.yml` to upload the test results to CircleCI.
     command: |
       npm install @wdio/junit-reporter --save-dev
       wdio wdio.test.conf.js
-   
+
 - store_test_results:
     path: ./test-results
 ```
-  
+
 ## API
 {: #api }
 
