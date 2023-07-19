@@ -15,7 +15,7 @@ contentTags:
 [#overview]
 == Overview
 
-The v4.2 release introduces the config policies feature to CircleCI server. Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc. For more information see the xref:../../config-policy-managment-overview#[Config policies overview]. To use config policies CLI commands with server, append all commands shown in the docs with `--policy-base-url https://<CIRCLECI-SERVER-DOMAIN>.com`
+The v4.2 release introduces the config policies feature to CircleCI server. Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc. For more information see the xref:../../../config-policy-managment-overview#[Config policies overview]. To use config policies CLI commands with server, append all commands shown in the docs with `--policy-base-url https://<CIRCLECI-SERVER-DOMAIN>.com`
 
 [#migration]
 == Migrate
