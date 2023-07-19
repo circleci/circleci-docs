@@ -389,6 +389,8 @@ A similar method can be used to ensure that the job immediately following a re-r
 
 * Rerun failed tests is not currently supported for the Windows execution environment.
 
+* If your job runs two different types of tests in the same job, the feature will likely not work as expected.  In this scenario, it is recommended that the job is split into two jobs, each running a different set of tests with `circleci tests run`. 
+
 
 [#troubleshooting]
 == Troubleshooting
