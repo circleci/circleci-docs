@@ -180,7 +180,7 @@ en:
             link: hello-world-windows
       - name: Arm
         children:
-          - name: Using the Arm execution environment
+          - name: Using the Arm VM execution environment
             link: using-arm
       - name: GPU
         children:
@@ -1223,7 +1223,7 @@ ja:
             i18n_name: GPUの使用
       - name: Arm
         children:
-          - name: Using Arm
+          - name: Using the Arm VM execution environment
             link: ja/using-arm
             i18n_name: Armの使用
 

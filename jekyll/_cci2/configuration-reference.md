@@ -984,8 +984,6 @@ jobs:
 ##### Docker execution environment
 {: #docker-execution-environment }
 
-{% include snippets/docker-resource-table.md %}
-
 Example:
 
 ```yaml
@@ -997,6 +995,19 @@ jobs:
     steps:
       ... // other config
 ```
+
+###### x86
+{: x86 }
+
+{% include snippets/docker-resource-table.md %}
+
+###### Arm
+{: arm }
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
 
 ---
 
