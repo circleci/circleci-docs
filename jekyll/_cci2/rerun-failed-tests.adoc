@@ -319,7 +319,7 @@ steps:
 ```
 +
 See <<parallel-rerun-failure>> for a workaround to avoid failures if you are also using `persist_to_workspace`.
-
++
 NOTE: The `halt` command will execute the rest of the _current_ step, regardless of whether `tests.txt` has content or not. Make sure to place the command to execute tests in the _following_ step.
 
 * Orbs that run tests may not work with this new functionality at this time.
@@ -382,7 +382,7 @@ workflows:
 {% endraw %}
 +
 The snippet above uses the built-in xref:caching#[`.Revision`] key to store a coverage report for the current VCS revision.  On a successful rerun, the original job run's coverage report will be restored to include the coverage from the skipped (passed) tests. It can then be used in a downstream job for aggregation or analysis.
-
++
 A similar method can be used to ensure that the job immediately following a re-run uses timing for test splitting from both the original job run & the re-run.  Instead of storing and restoring `cover.out` in the cache, store and restore the test results XML.  If a similar method is not used, the job immediately following a re-run maybe slightly less efficient if using test splitting by timing.
 
 * Rerun failed tests is not currently supported for the Windows execution environment.
