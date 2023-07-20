@@ -96,6 +96,14 @@ WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong a
 
 If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
 
+## Arm on Docker
+{: #arm-on-docker }
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
+{: class="alert alert-caution"}
+
+For further information on using Arm with the Docker execution environment, see the [Using the Docker execution enviornment](docs/using-docker/#arm) page.
+
 
 ## Learn More
 {: #learn-more }
