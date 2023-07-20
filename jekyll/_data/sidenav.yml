@@ -1225,7 +1225,7 @@ ja:
         children:
           - name: Using the Arm VM execution environment
             link: ja/using-arm
-            i18n_name: Armの使用
+            i18n_name: Arm VM 実行環境の使用
 
       - name: Self-hosted runner
         i18n_name: セルフホストランナー

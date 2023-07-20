@@ -55,6 +55,7 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.17
+    resource_class: xlarge
     steps:
       - checkout
       # ... steps for building/testing app ...
@@ -74,9 +75,17 @@ jobs:
 Below is a break down of what is happening during this build’s execution:
 
 * All commands are executed in the [primary-container](/docs/glossary/#primary-container). (line 5)
-* Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 11)
-* [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 13)
+* Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 12)
+* [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 14)
 * We use [project environment variables](/docs/set-environment-variable/#set-an-environment-variable-in-a-project) to store credentials for Docker Hub. (line 19)
+
+### Resource classes
+{: resource-classes}
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
+{: class="alert alert-caution"}
+
+The resource class specified for the primary container also applies to the remote Docker environment. Both x86 and Arm resource classes are available. For a full list of available resource classes see the [Configuration Reference](/docs/configuration-reference/#docker-execution-environment).
 
 ## Install the Docker CLI
 {: #install-the-docker-cli}
