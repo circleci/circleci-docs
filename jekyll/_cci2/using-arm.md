@@ -102,7 +102,7 @@ If you build an image on an M1 you need to specify `docker build --platform linu
 **Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
 {: class="alert alert-caution"}
 
-For further information on using Arm with the Docker execution environment, see the [Using the Docker execution enviornment](docs/using-docker/#arm) page.
+For further information on using Arm with the Docker execution environment, see the [Using the Docker execution enviornment](/docs/using-docker/#arm) page.
 
 
 ## Learn More
