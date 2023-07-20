@@ -89,14 +89,14 @@ jobs:
 ```
 
 ### x86
-{: x86 }
+{: #x86 }
 
 For the Docker execution environment, the following resources classes are available for the x86 architecture:
 
 {% include snippets/docker-resource-table.md %}
 
 ### Arm
-{: arm }
+{: #arm }
 
 The following resource classes are available for Arm with Docker:
 

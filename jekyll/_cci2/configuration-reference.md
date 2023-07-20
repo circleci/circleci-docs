@@ -997,12 +997,12 @@ jobs:
 ```
 
 ###### x86
-{: x86 }
+{: #x86 }
 
 {% include snippets/docker-resource-table.md %}
 
 ###### Arm
-{: arm }
+{: #arm }
 
 **Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
 {: class="alert alert-caution"}

@@ -80,7 +80,7 @@ Below is a break down of what is happening during this build’s execution:
 * We use [project environment variables](/docs/set-environment-variable/#set-an-environment-variable-in-a-project) to store credentials for Docker Hub. (line 19)
 
 ### Resource classes
-{: resource-classes}
+{: #resource-classes}
 
 **Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
 {: class="alert alert-caution"}
