@@ -65,22 +65,26 @@ A common ask from developers who are getting started with CircleCI is to perform
 #### a. Build and test the app
 {: #build-and-test-the-app }
 
-For this step, we are using the `python/install-packages` command that comes from the Python [orb]({{site.devhub_base_url}}/orbs/orb/circleci/python). This command automatically sets up a python environment and installs the packages for your project either globally with `pip` or in a `virtualenv` with `poetry` or `pipenv`.
+For this step, we use commands that come preconfigured in the Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go). Go modules are downloaded and cached and tests are run.
+
 ```yaml
 jobs:
   build_and_test: # this can be any name you choose
-    executor: python/default # use the default executor defined within the orb
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.19.2' # Specify a version tag
     steps:
       - checkout # checkout source code
-      - python/install-packages:
-          pkg-manager: pip
-      - run:
-          name: Run tests
-          command: python -m pytest
+      - go/load-cache # Load cached Go modules.
+      - go/mod-download # Run 'go mod download'.
+      - go/save-cache # Save Go modules to cache.
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
       - persist_to_workspace:
           root: ~/project
-          paths:
-            - .
+          paths: .
 ```
 
 #### b. Deploy the app
