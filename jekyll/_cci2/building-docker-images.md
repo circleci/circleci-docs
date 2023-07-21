@@ -85,7 +85,13 @@ Below is a break down of what is happening during this build’s execution:
 **Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**. For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
 {: class="alert alert-caution"}
 
-The resource class specified for the primary container also applies to the remote Docker environment. Both x86 and Arm resource classes are available. For a full list of available resource classes see the [Configuration Reference](/docs/configuration-reference/#docker-execution-environment).
+The resource class for the remote Docker environment is determined by the configuration of the primary container.
+
+For **x86** architecture the equivalent Linux VM resource class is used for remote Docker, relative to how the primary container is configured, apart from if you are using `small` or `medium+`, in which case `medium` and `large` are used, respectively. For a full list of available Linux VM resource classes see the [Configuration Reference](/docs/configuration-reference/#linuxvm-execution-environment).
+
+For **Arm**, the equivalent Arm VM resource class will be used. For a full list of available Arm VM resource classes see the [Configuration Reference](/docs/configuration-reference/#arm-execution-environment).
+
+For credit/pricing information, see the [Resource class product page](https://circleci.com/product/features/resource-classes/).
 
 ## Install the Docker CLI
 {: #install-the-docker-cli}
