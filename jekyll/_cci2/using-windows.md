@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Using the Windows execution environment"
 description: "Learn how to configure a your jobs to run in the Windows execution environment."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -16,7 +16,7 @@ The Windows execution environment provides the tools to build Windows projects, 
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 
-You can access the Windows execution environment by using the machine executor and specifying a Windows image. 
+You can access the Windows execution environment by using the machine executor and specifying a Windows image.
 
 To keep your configuration simple and to ensure you are using the most up-to-date image, you can instead use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows), and then specify the default executor from the orb in your job configuration. CircleCI strongly encourages using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
 
@@ -41,7 +41,7 @@ jobs:
 
 {:.tab.windowsblock.Cloud_with_machine}
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build: # name of your job
@@ -55,7 +55,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server_v3.x}
+{:.tab.windowsblock.Server}
 ```yaml
 version: 2.1
 
@@ -103,7 +103,7 @@ orbs:
 
 jobs:
   build: # name of your job
-    executor: 
+    executor:
       name: win/default # executor type
       size: medium # can be medium, large, xlarge, 2xlarge
 
@@ -115,7 +115,7 @@ jobs:
 
 {:.tab.windowsresourceblock.Cloud_with_machine}
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
   build: # name of your job
@@ -128,7 +128,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsresourceblock.Server_v3.x}
+{:.tab.windowsresourceblock.Server}
 ```yaml
 version: 2.1
 
@@ -143,20 +143,10 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsresourceblock.Server_v2.x}
-```yaml
-version: 2
+### View resource usage
+{: #view-resource-usage }
 
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default
-    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
+{% include snippets/resource-class-view.md %}
 
 ## Windows machine executor images
 {: #windows-machine-executor-images }
@@ -211,30 +201,9 @@ jobs:
          shell: cmd.exe
 ```
 
-{:.tab.windowsblockthree.Server_3}
+{:.tab.windowsblockthree.Server}
 ```yaml
 version: 2.1
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-server-2019-vs2019:current # Windows machine image
-    resource_class: windows.medium
-    steps:
-      # default shell is Powershell
-      - run:
-         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-         shell: powershell.exe
-      - run:
-         command: echo hello && echo world
-         shell: bash.exe
-      - run:
-         command: echo hello & echo world
-         shell: cmd.exe
-```
-
-{:.tab.windowsblockthree.Server_2}
-```yaml
-version: 2
 jobs:
   build: # name of your job
     machine:
@@ -273,23 +242,9 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Server_3}
+{:.tab.windowsblockfour.Server}
 ```yaml
 version: 2.1
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: dotnet tool install --global PowerShell
-      - run: pwsh ./<my-script>.ps1
-```
-
-{:.tab.windowsblockfour.Server_2}
-```yaml
-version: 2
 jobs:
   build: # name of your job
     machine:
@@ -330,28 +285,9 @@ jobs:
             docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
 ```
 
-{:.tab.windowsblockone.Server_3}
+{:.tab.windowsblockone.Server}
 ```yaml
 version: 2.1
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default # Windows machine image
-    resource_class: windows.medium
-    steps:
-      - checkout
-      - run: systeminfo
-      - run:
-          name: "Check docker"
-          shell: powershell.exe
-          command: |
-            docker info
-            docker run hello-world:nanoserver-1809
-```
-
-{:.tab.windowsblockone.Server_2}
-```yaml
-version: 2
 jobs:
   build: # name of your job
     machine:
@@ -375,7 +311,7 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 
 ### Steps
 {: #steps }
-{:.no_toc}
+
 
 1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 

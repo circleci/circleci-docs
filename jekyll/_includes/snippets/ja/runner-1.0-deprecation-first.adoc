@@ -1,0 +1,1 @@
+CAUTION: **セルフホストランナー バージョン 1.0 は、2023年 7月 23日**にサポートを終了し、2023年 6月28日に一時的利用できなくなります。 xref:upgrading-circleci-machine-runner-on-cloud#[さらに詳しく]

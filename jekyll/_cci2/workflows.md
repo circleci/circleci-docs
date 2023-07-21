@@ -58,36 +58,34 @@ _For a full specification of the_ `workflows` _key, see the [Workflows](/docs/co
 
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow.
 
+### Concurrent job execution
+{: #concurrent-job-execution }
+
 The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows` key named `build_and_test`, and by nesting the `jobs` key with a list of job names. The jobs have no dependencies defined, so they will run concurrently.
+
+{% include snippets/docker-auth.md %}
 
 ```yaml
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run: <command>
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build
       - test
 ```
-See the [Sample Parallel Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
+See the [Sample concurrent workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml) for a full example.
 
 When using workflows, try to do the following:
 
@@ -96,8 +94,8 @@ When using workflows, try to do the following:
 
 Consider reading the [Optimization overview](/docs/optimizations/) for more tips related to improving your configuration.
 
-### Sequential job execution example
-{: #sequential-job-execution-example }
+### Sequential job execution
+{: #sequential-job-execution }
 
 The following example shows a workflow with four sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully as illustrated in the diagram.
 
@@ -107,7 +105,6 @@ The following `config.yml` snippet is an example of a workflow configured for se
 
 ```yaml
 workflows:
-  version: 2
   build-test-and-deploy:
     jobs:
       - build
@@ -126,8 +123,8 @@ The dependencies are defined by setting the `requires` key as shown. The `deploy
 
 See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for a full example.
 
-### Fan-out/fan-in workflow example
-{: #fan-outfan-in-workflow-example }
+### Fan-out/fan-in workflow
+{: #fan-outfan-in-workflow }
 
 The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs concurrently, and finally fans-in to run a common deploy job.
 
@@ -137,7 +134,6 @@ The following `config.yml` snippet is an example of a workflow configured for fa
 
 ```yaml
 workflows:
-  version: 2
   build_accept_deploy:
     jobs:
       - build
@@ -180,7 +176,6 @@ The following is a config example, with comments:
 # ...
 
 workflows:
-  version: 2
   build-test-and-approval-deploy:
     jobs:
       - build  # your custom job from your config, that builds your code
@@ -218,15 +213,7 @@ Some things to keep in mind when using manual approval in a workflow:
 
 The following screenshot demonstrates a workflow on hold.
 
-{:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow](/docs/assets/img/docs/approval_job_cloud.png)
-
-{:.tab.switcher.Server_3}
-![Approved Jobs in On Hold Workflow](/docs/assets/img/docs/approval_job_cloud.png)
-
-{:.tab.switcher.Server_2}
-![Switch Organization Menu](/docs/assets/img/docs/approval_job.png)
-
 
 By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
 
@@ -235,8 +222,8 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
-The scheduled workflows feature is set to be deprecated. Using **scheduled pipelines** rather than scheduled workflows offers several benefits. Visit the scheduled pipelines [migration guide]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the [Scheduled pipelines]({{site.baseurl}}/scheduled-pipelines) page.
-{: class="alert alert-warning"}
+**The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on [CircleCI Discuss](https://discuss.circleci.com/).
+{: class="alert alert-note"}
 
 Runing a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
@@ -260,7 +247,6 @@ Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain
 
 ```yaml
 workflows:
-  version: 2
   commit:
     jobs:
       - test
@@ -330,7 +316,6 @@ The following `config.yml` snippet is an example of a sequential job workflow co
 
 ```yaml
 workflows:
-  version: 2
   build-test-and-deploy:
     jobs:
       - build
@@ -360,7 +345,6 @@ The following `.circleci/config.yml` snippet is an example of a workflow configu
 
 ```yaml
 workflows:
-  version: 2
   dev_stage_pre-prod:
     jobs:
       - test_dev:
@@ -396,7 +380,6 @@ In the example below, two workflows are defined:
 
 ```yaml
 workflows:
-  version: 2
   untagged-build:
     jobs:
       - build
@@ -415,7 +398,6 @@ In the example below, two jobs are defined within the `build-n-deploy` workflow:
 
 ```yaml
 workflows:
-  version: 2
   build-n-deploy:
     jobs:
       - build:
@@ -440,7 +422,6 @@ In the example below, three jobs are defined with the `build-test-deploy` workfl
 
 ```yaml
 workflows:
-  version: 2
   build-test-deploy:
     jobs:
       - build:
@@ -505,7 +486,7 @@ workflows:
             <<: *filters-production # this is calling the previously set yaml anchor
 ```
 
-Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
+Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
 {: class="alert alert-info" }
 
 ### Using regular expressions to filter tags and branches

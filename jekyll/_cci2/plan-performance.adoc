@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the Performance plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :orbs:
 
 This document describes the Performance plan available to developers.
@@ -51,6 +50,8 @@ The link:https://app.circleci.com/[CircleCI web app] allows for the customizatio
 [#additional-support-options]
 === Additional support options
 Additional support through SLAs (limited hours and days), and support package add-ons. The Performance plan also has access to the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+
+NOTE: For details on cancelling a Performance plan, refer to the xref:faq#cancel-performance-plan[Cancel Performance plan FAQ].
 
 [#circleci-features]
 == CircleCI features

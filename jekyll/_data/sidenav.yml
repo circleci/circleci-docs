@@ -66,7 +66,7 @@ en:
             link: language-go
           - name: Configuration tutorial
             link: config-intro
-          - name: Set up the Slack orb
+          - name: Use the Slack orb to set up notifications
             link: slack-orb-tutorial
       - name: How-To guides
         children:
@@ -124,6 +124,8 @@ en:
             link: databases
           - name: Migrate from deploy to run
             link: migrate-from-deploy-to-run
+          - name: Using shell scripts
+            link: using-shell-scripts
       - name: Reference
         children:
           - name: Project values and variables
@@ -131,7 +133,7 @@ en:
           - name: Troubleshoot
             link: troubleshoot
 
-  - name: Execution environments
+  - name: Execute jobs on managed compute resources
     icon: icons/sidebar/builds.svg
     children:
       - name: Overview
@@ -140,81 +142,85 @@ en:
             link: executor-intro
           - name: Resource class overview
             link: resource-class-overview
-          - name: Migrating Docker to machine
+          - name: Migrate from Docker to machine
             link: docker-to-machine
       - name: Docker
         children:
-          - name: Using Docker
+          - name: Using the Docker execution environment
             link: using-docker
           - name: Convenience images
             link: circleci-images
           - name: Migrating to next-gen images
             link: next-gen-migration-guide
-          - name: Using custom images
+          - name: Using custom-built Docker images
             link: custom-images
           - name: Docker authenticated pulls
             link: private-images
           - name: Running Docker commands
             link: building-docker-images
-          - name: Run a job in a container
-            link: run-a-job-in-a-container
-          - name: Installing and using docker-compose
-            link: docker-compose
       - name: Linux VM
         children:
-          - name: Using Linux VM
+          - name: Using the Linux VM execution environment
             link: using-linuxvm
-          - name: Android machine image
+          - name: Using Android images with the machine executor
             link: android-machine-image
-
       - name: macOS
         children:
-          - name: Using macOS
+          - name: Using the macOS execution environment
             link: using-macos
           - name: Configuring a macOS app
             link: hello-world-macos
           - name: iOS code signing
             link: ios-codesigning
-          - name: Xcode image policy
-            link: xcode-policy
           - name: Dedicated host resources
             link: dedicated-hosts-macos
       - name: Windows
         children:
-          - name: Using Windows
+          - name: Using the Windows execution environment
             link: using-windows
           - name: Hello world
             link: hello-world-windows
-      - name: GPU
-        children:
-          - name: Using GPUs
-            link: using-gpu
       - name: Arm
         children:
-          - name: Using Arm
+          - name: Using the Arm execution environment
             link: using-arm
+      - name: GPU
+        children:
+          - name: Using the GPU execution environment
+            link: using-gpu
+      - name: How-to Guides
+        children:
+          - name: Pull an image from AWS ECR with OIDC
+            link: pull-an-image-from-aws-ecr-with-oidc
+          - name: Run a job in a container on your machine with Docker
+            link: run-a-job-in-a-container
+          - name: Installing and using docker-compose
+            link: docker-compose
+          - name: Debugging container ID cannot be mapped to host ID error
+            link: high-uid-error
+      - name: Reference
+        children:
+          - name: Convenience images support policy
+            link: convenience-images-support-policy
+          - name: Linux CUDA images support policy
+            link: linux-cuda-images-support-policy
+          - name: Xcode image policy
+            link: xcode-policy
 
-      - name: Self-hosted runner
+  - name: Execute jobs on self-hosted runners
+    icon: icons/sidebar/build-agent.svg
+    children:
+      - name: Overview
         children:
           - name: Self-hosted runner overview
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
-          - name: Web app installation
-            link: runner-installation
-          - name: Scaling self-hosted runner
-            link: runner-scaling
-          - name: Self-hosted runner API
-            link: runner-api
-          - name: Self-hosted runner FAQ
-            link: runner-faqs
-          - name: Troubleshoot self-hosted runner
-            link: troubleshoot-self-hosted-runner
       - name: Container runner
         children:
           - name: Container runner installation
             link: container-runner-installation
-          - name: Container runner reference guide
+          - name: Container runner reference
             link: container-runner
       - name: Machine runner
         children:
@@ -224,12 +230,26 @@ en:
             link: runner-installation-windows
           - name: macOS installation
             link: runner-installation-mac
-          - name: CLI installation
-            link: runner-installation-cli
-          - name: Upgrading machine runner on server
-            link: runner-upgrading-on-server
+          - name: Docker installation
+            link: runner-installation-docker
           - name: Machine runner configuration reference
             link: runner-config-reference
+      - name: How-to Guides
+        children:
+          - name: Upgrading machine runner on cloud
+            link: upgrading-circleci-machine-runner-on-cloud
+          - name: Upgrade machine runner on server
+            link: runner-upgrading-on-server
+      - name: Reference
+        children:
+          - name: Self-hosted runner API
+            link: runner-api
+          - name: Self-hosted runner FAQ
+            link: runner-faqs
+          - name: Troubleshoot self-hosted runner
+            link: troubleshoot-self-hosted-runner
+          - name: Scaling self-hosted runner
+            link: runner-scaling
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
@@ -250,7 +270,7 @@ en:
             link: concurrency
           - name: Test splitting and parallelism
             link: parallelism-faster-jobs
-          - name: Enable Docker layer caching
+          - name: Docker layer caching overview
             link: docker-layer-caching
       - name: Configuration
         children:
@@ -268,6 +288,8 @@ en:
         children:
           - name: Reusable configuration reference
             link: reusing-config
+          - name: Optimizations reference
+            link: optimizations
 
   - name: Project Insights
     icon: icons/sidebar/insights-new.svg
@@ -316,12 +338,10 @@ en:
             link: create-an-orb
           - name: Manually author an orb
             link: orb-author-validate-publish
-          - name: Using the Slack orb
-            link: slack-orb-tutorial
       - name: How-to guides
         children:
-          - name: Deploy service update to EC2
-            link: deploy-service-update-to-aws-ec2
+          - name: Deploy service update to ECS
+            link: deploy-service-update-to-aws-ecs
       - name: Reference
         children:
           - name: Orbs concepts
@@ -374,6 +394,10 @@ en:
             link: ssh-access-jobs
           - name: Rotate project SSH keys
             link: rotate-project-ssh-keys
+          - name: Stop building a project on CircleCI
+            link: stop-building-a-project-on-circleci
+          - name: Rename organizations and repositories
+            link: rename-organizations-and-repositories
           - name: Create and manage config policies (Open preview)
             link: create-and-manage-config-policies
           - name: Test config policies (Open preview)
@@ -382,10 +406,8 @@ en:
             link: use-the-cli-for-config-and-policy-development
           - name: Config policies for self-hosted runner (Open preview)
             link: config-policies-for-self-hosted-runner
-          - name: Stop building a project on CircleCI
-            link: stop-building-a-project-on-circleci
-          - name: Rename organizations and repositories
-            link: rename-organizations-and-repositories
+          - name: Manage contexts with config policies (Open preview)
+            link: manage-contexts-with-config-policies
       - name: Reference
         children:
           - name: Config policy reference (Open preview)
@@ -436,8 +458,10 @@ en:
     children:
       - name: CLI
         children:
-          - name: Installing the CircleCI local CLI
+          - name: Install and configure the CircleCI local CLI
             link: local-cli
+          - name: How to use the CircleCI local CLI
+            link: how-to-use-the-circleci-local-cli
       - name: APIs
         children:
           - name: API v2 introduction
@@ -446,10 +470,16 @@ en:
             link: api-developers-guide
           - name: Managing API tokens
             link: managing-api-tokens
+          - name: API v2 reference
+            link: https://circleci.com/docs/api/v2
+          - name: API v1 reference
+            link: https://circleci.com/docs/api/v1
       - name: IDE TOOLS
         children:
           - name: VS Code extension overview
             link: vs-code-extension-overview
+          - name: Get started with the VS Code extension
+            link: get-started-with-the-vs-code-extension
       - name: Config tools
         children:
           - name: CircleCI config SDK
@@ -464,16 +494,6 @@ en:
             link: sample-config
           - name: Database examples
             link: postgres-config
-      - name: How-to guides
-        children:
-          - name: How to use the CircleCI local CLI
-            link: how-to-use-the-circleci-local-cli
-      - name: Reference
-        children:
-          - name: API v2 reference
-            link: https://circleci.com/docs/api/v2
-          - name: API v1 reference
-            link: https://circleci.com/docs/api/v1
 
   - name: Test
     icon: icons/sidebar/passed.svg
@@ -490,8 +510,8 @@ en:
             link: browser-testing
           - name: Generate code coverage metrics
             link: code-coverage
-          - name: Fail fast (Open preview)
-            link: fail-fast
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
       - name: Monitor tests
         children:
           - name: Test Insights
@@ -528,8 +548,8 @@ en:
             link: deploy-to-artifactory
           - name: Deploy to AWS
             link: deploy-to-aws
-          - name: Deploy Service Update to AWS EC2
-            link: deploy-service-update-to-aws-ec2
+          - name: Push image to ECR and deploy to ECS
+            link: ecr-ecs
           - name: Deploy to Azure Container Registry
             link: deploy-to-azure-container-registry
           - name: Deploy to Capistrano
@@ -550,6 +570,86 @@ en:
             link: publish-packages-to-packagecloud
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
+
+  - name: Server administration v4.2
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.2 overview
+        children:
+          - name: CircleCI server v4.2 overview
+            link: server/v4.2/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.2/overview/release-notes
+      - name: Server v4.2 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.2/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.2/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.2/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.2/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.2/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.2
+            link: server/v4.2/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.2/installation/installation-reference
+      - name: Air-gapped installation v4.2
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.2/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.2/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.2/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.2/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.2/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.2/air-gapped-installation/example-values
+      - name: Server v4.2 operations
+        children:
+          - name: Operator overview
+            link: server/v4.2/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.2/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.2/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.2/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.2/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.2/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.2/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.2/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.2/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.2/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.2/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.2/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.2/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.2/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.2/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.2/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.2/operator/faq
 
   - name: Server administration v4.1
     icon: icons/sidebar/admin-new.svg
@@ -574,8 +674,6 @@ en:
             link: server/v4.1/installation/hardening-your-cluster
           - name: Installing server behind a proxy
             link: server/v4.1/installation/installing-server-behind-a-proxy
-          - name: Migrate from server v3 to v4
-            link: server/v4.1/installation/migrate-from-server-3-to-server-4
           - name: Upgrade server v4.x
             link: server/v4.1/installation/upgrade-server
           - name: Installation reference
@@ -595,7 +693,7 @@ en:
           - name: Additional considerations
             link: server/v4.1/air-gapped-installation/additional-considerations
           - name: Example values.yaml
-            link: server/v4.1/air-gapped-installation/example-values.yaml
+            link: server/v4.1/air-gapped-installation/example-values
       - name: Server v4.1 operations
         children:
           - name: Operator overview
@@ -628,6 +726,8 @@ en:
             link: server/v4.1/operator/troubleshooting-and-support
           - name: Backup and restore
             link: server/v4.1/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.1/operator/upgrade-mongo
           - name: FAQs
             link: server/v4.1/operator/faq
 
@@ -1034,6 +1134,9 @@ ja:
           - name: Migrate from deploy to run
             link: ja/migrate-from-deploy-to-run
             i18n_name: deployからrunへの移行
+          - name: Using shell scripts
+            link: ja/using-shell-scripts
+            i18n_name: シェルスクリプトの使用
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1174,6 +1277,9 @@ ja:
           - name: CLI installation
             link: ja/runner-installation-cli
             i18n_name: CLIでのインストール
+          - name: Machine runner installation with Docker
+            link: ja/runner-installation-docker
+            i18n_name: Docker での CircleCI のマシンランナーのインストール
           - name: Upgrading machine runner on server
             link: ja/runner-upgrading-on-server
             i18n_name: Serverマシンランナーのアップグレード
@@ -1312,9 +1418,9 @@ ja:
       - name: How-To Guides
         i18n_name: ガイド
         children:
-          - name: Deploy service update to EC2
-            link: ja/deploy-service-update-to-aws-ec2
-            i18n_name: 変更のEC2へのデプロイ
+          - name: Deploy service update to ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
       - name: Reference
         i18n_name: リファレンス
         children:
@@ -1365,9 +1471,6 @@ ja:
           - name: Secure secrets handling
             link: ja/security-recommendations
             i18n_name: シークレットの安全な取り扱い
-          - name: Using shell scripts
-            link: ja/using-shell-scripts
-            i18n_name: シェルスクリプトの使用
       - name: Config policy management
         i18n_name: 設定ファイルのポリシー管理
         children:
@@ -1566,9 +1669,9 @@ ja:
           - name: Code coverage
             link: ja/code-coverage
             i18n_name: コードカバレッジ
-          - name: Fail fast (Open preview)
-            link: ja/fail-fast
-            i18n_name: フェイルファスト
+          - name: Rerun failed tests overview
+            link: ja/rerun-failed-tests
+            i18n_name: 失敗したテストのみを再実行
       - name: Monitor tests
         i18n_name: テストの管理
         children:
@@ -1622,9 +1725,9 @@ ja:
           - name: Deploy to AWS
             link: ja/deploy-to-aws
             i18n_name: AWSへのデプロイ
-          - name: Deploy Service Update to AWS EC2
-            link: ja/deploy-service-update-to-aws-ec2
-            i18n_name: 変更のEC2へのデプロイ
+          - name: Deploy service update to AWS ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
           - name: Deploy to Azure Container Registry
             link: ja/deploy-to-azure-container-registry
             i18n_name: Azure Container Registryへのデプロイ

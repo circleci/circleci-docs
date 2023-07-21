@@ -5,31 +5,68 @@ contentTags:
     - Server v4.1
     - サーバー管理者
 ---
-= CircleCI Server v4.x のリリースノート
+= CircleCI server v4.1 リリースノート
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI Server 4.x の各リリースに含まれる新機能の詳細
 :icons: font
 :toc: macro
 
-== v3.x から v4.x への移行
+:toc-title:
 
-既存の CircleCI Server v3.x から v4.x への移行、または v2.x から v4.x への移行をご希望のお客様は、担当のカスタマーサクセスマネージャーにお問い合わせください。 CircleCI Server 4.x では、毎月のパッチリリースと四半期ごとの機能リリースを予定しています。
+[#overview]
+== 概要
 
-移行については、 xref:../installation/migrate-from-server-3-to-server-4[Server v3 から v4 への移行ガイド] を参照してください。
+Server v4.1では、エアギャップ（air-gapped）インストールオプションが導入されました。 詳細は、xref:../air-gapped-installation/phase-1-prerequisites#[Air-gappedインストールガイド]をご参照ください。
+
+[#migraiton]
+== 移行
+
+NOTE: 移行プロセスでは、後続のリリースに移行する前に、まず v4.0.x をインストールする必要があります。
+
+既存の CircleCI Server v3.x から v4.x への移行、または v2.x から v4.x への移行をご希望のお客様は、担当のカスタマーサクセスマネージャーにお問い合わせください。
+
+移行に関する情報は、以下のガイドでご確認ください：
+
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server v3.x から Server v4.x への移行]
+* xref:../../installation/migrate-from-server-2-to-server-4#[Server v2.x から Server v4.x への移行]
 
 [#upgrade]
 == アップグレード
 
-アップグレード手順については、 xref:../installation/upgrade-server-4[Server v4 へのアップグレードガイド] を参照してください。
+アップグレード手順については、 xref:../installation/upgrade-server#[Server v4 へのアップグレードガイド] を参照してください。
+
+[#release-4-1-4]
+== リリース 4.1.3
+
+[#changelog-4-1-4]
+=== 更新履歴
+
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#リリース-4-1-3[更新履歴] を参照して下さい。
+
+[#release-4-1-3]
+== リリース 4.1.2
+
+[#changelog-4-1-3]
+=== 更新履歴
+
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#リリース-4-1-2[更新履歴] を参照して下さい。
+
+[#release-4-1-2]
+== リリース 4.1.1
+
+[#changelog-4-1-2]
+=== 更新履歴
+
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9-4-1-1[更新履歴] を参照して下さい。
 
 [#release-4-1-1]
-== リリース 4.1.1
+== リリース 4.1.0
 
 [#changelog-4-1-1]
 === 更新履歴
 
-このリリースの詳細については、 https://circleci.com/ja/server/changelog/#release-4-1-1[更新履歴] を参照して下さい。
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/[更新履歴] を参照して下さい。
 
 [#release-4-1-0]
 == リリース 4.1.0
@@ -37,4 +74,4 @@ contentTags:
 [#changelog-4-1-0]
 === 更新履歴
 
-このリリースの詳細については、 https://circleci.com/ja/server/changelog/#release-4-1-0[更新履歴] を参照して下さい。
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/[更新履歴] を参照して下さい。

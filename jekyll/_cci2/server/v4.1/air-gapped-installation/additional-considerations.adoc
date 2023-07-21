@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#non-tls-docker-registry-installations]
 == Non-TLS Docker Registry Installations
@@ -98,4 +97,38 @@ After installing the Helm chart, the circleci-proxy service must be patched to u
 kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externalIPs":["10.0.0.5"]}}'
 ----
 
-Once complete, DNS records can be created for your server installation (`server.internal.example.com`) and (`*.server.internal.example.com`) for `10.0.0`.5.
+Once complete, DNS records can be created for your server installation (server.internal.example.com) and (*.server.internal.example.com) for 10.0.0.5.
+
+[#tls-importing]
+== Importing Trusted TLS Certificates
+
+When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates using two methods, as described below.
+
+NOTE: Values provided for either of these methods are supported for GitHub Enterprise certificates only. No other VCS application is supported at this time.
+
+[#configuring-the-tls-imports-value]
+=== Configuring the TLS imports value
+In the `values.yaml` file, the `tls.imports` value can be configured to include a list of `hostname:port` combinations from which to retrieve and trust TLS certificates.
+
+[source, yaml]
+----
+tls:
+  ...
+  import:
+    - github.airgap.example.com:443
+----
+
+For each `hostname:port` combination, CircleCI server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
+
+
+[#configuring-the-tls-certificates-array]
+=== Configuring the TLS Certificates Array
+Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file, in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
+
+[source, yaml]
+----
+tls:
+  ...
+  certificates:
+    - <<base64-encoded-public-tls-certificate-chain>>
+----

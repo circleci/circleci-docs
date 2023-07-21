@@ -1,13 +1,14 @@
 ---
 
-description: "CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。"
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - サーバー管理者
 ---
 = VM サービスを使った仮想マシンの管理
 :page-layout: classic-docs
-:page-liquid:
+:page-liquid: CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。
+:page-description:
 :icons: font
 :toc: macro
 
@@ -72,7 +73,7 @@ vm_service:
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|リージョン
+|地域
 |AMI
 
 |`us-east-1`
@@ -133,7 +134,7 @@ vm_service:
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|リージョン
+|地域
 |AMI
 
 |`us-east-1`

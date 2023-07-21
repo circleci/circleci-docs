@@ -1,14 +1,14 @@
 ---
 contentTags:
   platform:
-  - Server v4.1
-  - Server Admin
+    - Server v4.1
+    - Server Admin
 ---
 = Installation reference
 :page-layout: classic-docs
+:page-description: Reference page for all values options available for installations of CircleCI server v4
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#example-manifests]
 == Example Manifests
@@ -218,6 +218,11 @@ a| API token:
 | `1`
 | Number of replicas to deploy for the `distributor-dispatcher` deployment.
 
+| `distributor_dispatcher.disable_concurrency`
+| bool
+| `False`
+| Disable concurrency limits
+
 | `distributor_external.replicas`
 | int
 | `1`
@@ -261,7 +266,7 @@ a|
 | `github.clientId`
 | string
 | `""`
-a| Client ID for OAuth Login via Github:
+a| Client ID for OAuth Login via GitHub:
 
 **Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically.
 
@@ -1230,6 +1235,16 @@ a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
 |int
 |`1`
 |Number of replicas to deploy for the test-results-service deployment.
+
+|`tink.enabled`
+|bool
+|`false`
+|When enabled, Tink will be used instead of Vault for contexts encryption.
+
+|`tink.keyset`
+|string
+|`""`
+|The keyset generated the Tink CLI to be used for contexts encryption
 
 |`tls.certificate`
 |string

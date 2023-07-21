@@ -1,6 +1,6 @@
 ---
 description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -12,15 +12,16 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#branch-filtering-for-job-steps]
-## Branch-filtering to control when job steps will run
+== Branch-filtering to control when job steps will run
 
 Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
 
 The following example shows using the <<pipeline-variables#pipeline-values,pipeline value>> `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
+
+{% include snippets/docker-auth.adoc %}
 
 ```yaml
 version: 2.1
@@ -29,9 +30,6 @@ jobs:
   my-job:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - when:

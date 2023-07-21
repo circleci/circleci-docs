@@ -16,9 +16,6 @@ This document describes how to skip or cancel work when triggering pipelines. Th
 
 By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. This not only skips the marked commit, but also **all other commits** in the push.
 
-If you are using **CircleCI server v2.x**, you can still use the method for skipping workflows described here, even though you are not using the pipelines feature.
-{: class="alert alert-info"}
-
 ### Scope
 {: #scope }
 
@@ -94,11 +91,6 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 
 * Scheduled workflows
 * Re-run workflows
-
-## Auto cancel for CircleCI server installations
-{: #auto-cancel-for-circleci-server-installations }
-
-CircleCI server v2.x only supports the auto-cancel builds feature for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
 
 ### Steps to enable auto-cancel for CircleCI server installations
 {: #steps-to-enable-auto-cancel-for-circleci-server-installations }

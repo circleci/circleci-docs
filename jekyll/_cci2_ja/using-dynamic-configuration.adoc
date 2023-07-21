@@ -15,8 +15,8 @@ document-type:
 
 :toc-title:
 
-このセクションでは、 <<dynamic-config#,ダイナミックコンフィグ>> を既にお読みになっていること、
-入門ガイド <<dynamic-config#getting-started-with-dynamic-config-in-circleci,ダイナミックコンフィグをはじめる>> に記載されている手順が実行済みであることを前提としています。
+このセクションでは、xref:dynamic-config#[ダイナミックコンフィグ] を既にお読みになっていること、
+入門ガイド xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[ダイナミックコンフィグをはじめる] に記載されている手順が実行済みであることを前提としています。
 
 下記では、ダイナミックコンフィグの使用方法を説明します。
 
@@ -28,8 +28,10 @@ document-type:
 == 基本的な例
 
 以下は、CircleCI のダイナミックコンフィグ機能を使用した基本的な例です。
+
 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。
-この過程で、`Git` 履歴、パイプラインに渡される値、 <<configuration-reference#jobs,`ジョブ`>> 内で行われる処理などの確認を行うことができます。
+
+この過程で、`git`  履歴、パイプラインに渡される値、 xref:configuration-reference#jobs[`ジョブ`] 内で行われる処理などの確認を行うことができます。
 
 [source,yaml]
 ----
@@ -66,22 +68,21 @@ workflows:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
 - ダイナミックコンフィグ機能を使用するために `continuation` Orb を呼び出します。
-- `continuation` Orb を <<executor-intro#,`executor`>> として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
-- <<configuration-reference#checkout,`checkout`>> ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
-- <<configuration-reference#run,`run`>> ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
+- `continuation` Orb を xref:executor-intro#[`executor`] として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
+- xref:configuration-reference#checkout[`checkout`]ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
+- xref:configuration-reference#run[`run`] ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
 - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflow` において、上記で定義された `setup` ジョブを呼び出します。
 
 CAUTION: ダイナミックコンフィグ機能を使用する場合、各 `config.yml` ごとに使用できるワークフローは 1 つのみです。
 パイプラインのセットアップステージの一部として実行できるのは、1 つのワークフローのみです。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイムトークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-`continuation` Orb の内容の詳細については、当該 Orb のソースコードを https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] で閲覧することや、<<dynamic-config#dynamic-config-faqs,ダイナミックコンフィグの FAQ>> を参照することで確認できます。
+`continuation` Orb の内容の詳細については、当該 Orb のソースコードを link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] で閲覧することや、xref:dynamic-config#dynamic-config-faqs[ダイナミックコンフィグの FAQ] を参照することで確認できます。
 
 [#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
 == 変更されたファイルに基づいて特定の `workflows` または `steps` を実行する
 
-`workflow` や `step` を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したい場合があります。
-条件に応じた実行は、コードやマイクロサービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
+`workflow` や `step` を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したい場合があります。 条件に応じた実行は、コードやマイクロサービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
 これを可能にするために、CircleCI には link:https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering[`path-filtering`] Orb が用意されています。この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
 
@@ -199,18 +200,18 @@ workflows:
 
 上記の例では、以下のような要素が実装されています:
 
-- 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
-- `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
-- `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプラインパラメーターを定義します。
-- `check-updated-files` 、`build-service-1` 、`build-service-2` 、`run-integration-tests` という 4 つのジョブを定義します。
-- `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプラインパラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
-- `build-service-1` ジョブ: `maven` Orb を使用して service1 コードのコンパイルとインストールを行います。 テストはスキップします。
-- `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
-- `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
-- 以下の 4 つのワークフローを定義します。 そのうち、3 つのワークフローは条件に従って実行されます。
-- `service-1` ワークフロー: run-build-service-1-job にマッピングされたパイプラインパラメータの値が `true` の場合に `build-service-1` ジョブをトリガーします。
-- `service-2` ワークフロー: run-build-service-2-job にマッピングされたパイプラインパラメータの値が `true` の場合に `build-service-2` ジョブをトリガーします。
-- `run-integration-tests` ワークフロー: path-filtering` Orb の実行結果に基づいて `run-build-service-1-job` または `run-build-service-2-job` パイプラインパラメータの値が `true` に更新された場合に実行されます。
-- `check-updated-files` ワークフロー: このパイプラインがトリガーされた場合に必ず実行されます。
+* 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
+* `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
+* `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプラインパラメーターを定義します。
+* `check-updated-files` 、`build-service-1` 、`build-service-2` 、`run-integration-tests` という 4 つのジョブを定義します。
+** `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプラインパラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
+** `build-service-1` ジョブ: `maven` Orb を使用して service1 コードのコンパイルとインストールを行います。 テストはスキップします。
+** `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
+** `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
+* 以下の 4 つのワークフローを定義します。 そのうち、3 つのワークフローは条件に従って実行されます。
+** `service-1` ワークフロー: run-build-service-1-job にマッピングされたパイプラインパラメータの値が `true` の場合に `build-service-1` ジョブをトリガーします。
+** `service-2` ワークフロー: run-build-service-2-job にマッピングされたパイプラインパラメータの値が `true` の場合に `build-service-2` ジョブをトリガーします。
+** `run-integration-tests` ワークフロー: path-filtering` Orb の実行結果に基づいて `run-build-service-1-job` または `run-build-service-2-job` パイプラインパラメータの値が `true` に更新された場合に実行されます。
+** `check-updated-files` ワークフロー: このパイプラインがトリガーされた場合に必ず実行されます。
 
 利用可能な要素と必須パラメーターの詳細については、`path-filtering` link:https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering[Orb のドキュメント] を参照してください。

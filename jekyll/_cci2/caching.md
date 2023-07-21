@@ -169,7 +169,6 @@ We recommend that you verify that the dependencies installation step succeeds be
 
 Example of caching `pip` dependencies:
 
-{:.tab.dependencies.Cloud}
 {% raw %}
 ```yaml
 version: 2.1
@@ -191,49 +190,6 @@ jobs:
 ```
 {% endraw %}
 
-{:.tab.dependencies.Server_3}
-{% raw %}
-```yaml
-version: 2.1
-jobs:
-  build:
-    steps: # a collection of executable commands making up the 'build' job
-      - checkout # pulls source code to the working directory
-      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # install and activate virtual environment with pip
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - save_cache: # ** special step to save dependency cache **
-          key: *deps1-cache
-          paths:
-            - "venv"
-```
-{% endraw %}
-
-{:.tab.dependencies.Server_2}
-{% raw %}
-```yaml
-version: 2
-jobs:
-  build:
-    steps: # a collection of executable commands making up the 'build' job
-      - checkout # pulls source code to the working directory
-      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # install and activate virtual environment with pip
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - save_cache: # ** special step to save dependency cache **
-          key: *deps1-cache
-          paths:
-            - "venv"
-```
-{% endraw %}
 
 Make note of the use of a `checksum` in the cache `key`. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache will be updated accordingly. In the above example, the
 [`restore_cache`](/docs/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
@@ -405,16 +361,10 @@ This example is only a _potential_ solution and might be unsuitable for your spe
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: cimg/mysql:5.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
@@ -463,6 +413,8 @@ This example is only a _potential_ solution and might be unsuitable for your spe
       - run: bundle exec cucumber
 ```
 {% endraw %}
+
+{% include snippets/docker-auth.md %}
 
 ## Source caching
 {: #source-caching }

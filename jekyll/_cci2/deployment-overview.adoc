@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn the basics of CircleCI deployment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction
@@ -70,7 +69,7 @@ CircleCI offers convenience images for use with Docker that contain tools requir
 * <<deploy-android-applications#,Deploy Android applications>>
 * <<deploy-to-artifactory#,Deploy to Artifactory>>
 * <<deploy-to-aws#,Deploy to AWS>>
-* <<deploy-service-update-to-aws-ec2#,Deploy to AWS EC2>>
+* <<deploy-service-update-to-aws-ecs#,Deploy to AWS ECS>>
 * <<ecs-ecr#,Deploy to AWS ECR/ECS>>
 * <<deploy-to-azure-container-registry#,Deploy to Azure Container Registry>>
 * <<deploy-to-capistrano#,Deploy to Capistrano>>

@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the basic features and settings of the CircleCI web app.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
 
@@ -129,7 +128,7 @@ image::web_ui_runner.png[Runner inventory]
 
 New resource classes will require an existing namespace, or creation of a new namespace if no namespace for the organization has been created yet (organizations can only create a single namespace), as well as a label to match your CircleCI job with a type of runner.
 
-In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. This process is also laid out on the xref:runner-installation#[self-hosted runner] page.
+In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. Learn more and get started with self-hosted runners on the xref:runner-overview#[CircleCI self-hosted runners overview].
 
 image::runnerui_step_four.png[Runner setup]
 

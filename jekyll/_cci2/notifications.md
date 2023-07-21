@@ -15,18 +15,12 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
@@ -95,9 +89,6 @@ jobs:
   notify:
     docker:
       - image: cimg/base:2021.04
-        auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD
     steps:
       - slack/notify:
           custom: |
@@ -140,9 +131,6 @@ jobs:
   build:
     docker:
       - image: <Docker image>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - irc/notify:

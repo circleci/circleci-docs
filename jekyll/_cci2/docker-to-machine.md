@@ -17,7 +17,7 @@ make when moving from the Docker executor to machine, or vice versa.
 
 ## Overview
 {: #overview }
-{:.no_toc}
+
 
 Occasionally, the Docker executor isn't quite the right fit for your
 builds. This can include a lack of memory or requiring more dedicated

@@ -16,11 +16,9 @@ contentTags:
 
 ここでは同時実行について概説し、活用する方法を紹介します。
 
-CircleCI では、**同時実行**とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 これは、複数のコンテナにテストを分割する **並列実行**とは異なります。 並列実行については、 <<parallelism-faster-jobs#, テストの並列実行>> のページをご覧ください。
+CircleCI では、**同時実行**とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 これは、複数のコンテナにテストを分割する **並列実行**とは異なります。 並列実行については、 xref:parallelism-faster-jobs#[テストの並列実行]のページをご覧ください。
 
-CircleCI のすべてのプランにジョブの同時実行機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 お客様のプランに含まれる同時実行が可能なジョブの数に関する最新情報は、 https://circleci.com/ja/pricing/[料金プランのページ] を参照してください。
-
-toc::[]
+CircleCI のすべてのプランにジョブの同時実行機能が含まれています。 しかし、同時に実行できるジョブの数はプランによって異なります。 お客様のプランに含まれる同時実行が可能なジョブの数に関する最新情報は、 link:https://circleci.com/ja/pricing/[料金プランのページ] を参照してください。
 
 [#concurrency]
 == 同時実行
@@ -32,11 +30,11 @@ CircleCI では、ジョブの同時実行は下記の 2 つの状況に分ら�
 
 ここでは 1 つ目の状況について説明し、1 つのワークフロー内に複数のジョブを設定する方法の例を紹介します。 ワークフロー内で同時実行を設定すると、単一のワークフロー内で複数のコンテナを使用して複数のジョブを同時に実行することができます。
 
-CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、各 Executor の <<configuration-reference#resourceclass, リソースクラス>> ごとに同時実行数のソフト制限が設けられています。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、各 Executor の xref:configuration-reference#resourceclass[リソースクラス]ごとに同時実行数のソフト制限が設けられています。
 
 ジョブがキューに入る場合、この制限に達している可能性が考えられます。 制限に達する理由は、組織内で同時にジョブを実行しているユーザーの数や、ワークフローが重複しているなど、複数の要因があります。
 
-年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。 https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] にご連絡ください。
+年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。 link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] にご連絡ください。
 
 [#concurrency-in-workflows]
 === ワークフロー内での同時実行
@@ -45,6 +43,8 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 
 以下は、2 つの同時実行ジョブから成るデフォルトのワークフローオーケストレーションのシンプルな例です。 この `workflows` キーには一意の名前を指定する必要があります。 この例では、一意の名前は `build_and_test` です。 `jobs` キーは一意の名前のワークフローの下にネストされ、ジョブ名のリストが含まれます。 ジョブには依存関係が定義されていないため、同時に実行されます。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 ```yaml
 version: 2.1
 
@@ -52,18 +52,12 @@ jobs:
   build:
     docker:
       - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -72,19 +66,6 @@ workflows:
     jobs:
       - build
       - test
-```
-
-Server 2 で `version: 2` をご使用の場合は、 `workflows` のセクションで再びバージョンを下記のスニペットのように指定する必要があるのでご注意ください。
-
-```yaml
-...
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test
-...
 ```
 
 [#fan-out-fan-in-workflow-example]
@@ -123,10 +104,8 @@ workflows:
 ...
 ```
 
-<<#concurrency-in-workflows, ワークフロー内での同時実行>> で述べたように、Server 2 で `version: 2` をご使用の場合は、 `workflows` のセクションでバージョンを指定する必要があるのでご注意ください。
-
 [#see-also]
 == 関連項目
 
-- <<workflows#, ワークフロー>>
-- <<sample-config#,Sample config.yml Files>>
+- xref:workflows#[ワークフロー]
+- xref:sample-config#[サンプル config.yml ファイル]

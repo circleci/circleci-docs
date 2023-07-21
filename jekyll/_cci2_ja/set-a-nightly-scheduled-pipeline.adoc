@@ -45,7 +45,7 @@ const API_BASE_URL = "https://circleci.com/api/v2/project"
 const vcs = process.env.VCS_TYPE
 const org = process.env.ORG_NAME
 const project = process.env.PROJECT_ID
-const token = process.env.CIRCLECI_TOKEN
+const token = process.env.CIRCLE_TOKEN
 
 const postScheduleEndpoint = `${API_BASE_URL}/${vcs}/${org}/${project}/schedule`
 

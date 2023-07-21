@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: "This document lists the steps required to upgrade a CircleCI server v4.x installation."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page describes the steps needed to upgrade you CircleCI server v4.x installation.
 
@@ -23,7 +22,7 @@ NOTE: We recommend that you do not skip releases when upgrading.
 
 * Ensure you have access to the Kubernetes cluster in which server is installed.
 * Ensure you have set up link:/docs/server/operator/backup-and-restore[Backup and Restore].
-* Ensure there is a recent backup. For more information, see the link:/docs/server/opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* Ensure there is a recent backup. For more information, see the link:/docs/server/operator/backup-and-restore#creating-backups[Backup and Restore] guide.
 
 [#upgrade-steps]
 == Upgrade steps

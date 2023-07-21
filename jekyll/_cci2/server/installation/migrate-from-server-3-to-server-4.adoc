@@ -9,14 +9,13 @@ contentTags:
 :page-liquid:
 :page-description: Learn now to migrate from CircleCI server v3.x to v4.x.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-Migrating from server v3.x to v4.x is an _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade the CircleCI server from v3.x to v4.x.
+Migrating from server v3.x to v4.0.x is an _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade CircleCI server from v3.x to v4.0.x.
 
 We recommend using a staging environment before completing this process in a production environment. This will allow you to gain a better understanding of the migration process, and give you an idea of how long the migration will take to complete.
 
-toc::[]
+
 
 [#prerequisites]
 == Prerequisites
@@ -80,7 +79,7 @@ The instructions below guide you through cloning the repository containing the K
 ** License String for Server 4.x, which will be provided by your CircleCI point of contact.
 . After the script has completed, you will get a message detailing the next steps to perform, for example:
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 ############ Upgrade Commands ################
 Before upgrading to 4.x, follow the steps below:
@@ -95,14 +94,14 @@ helm registry login cciserver.azurecr.io --username <image-registry-username>
 The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected.
 
 # diff command
-helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.3
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version {serverversion4}
 -------------------------------------------------------------------------
 ## Helm Upgrade CircleCI Server
-helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version <version-to-upgrade-to> --force
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version {serverversion4} --force
+----
 
 NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
 It should be - <domain-name>:4647
-----
 
 IMPORTANT: When upgrading to CircleCI Server v4.0, if your Postgres instance is **not** externalized, the Postgres chart is also upgraded.
 
@@ -140,11 +139,11 @@ Once the migration script has completed, a `helm-values.yaml` file will be gener
 === 5. Generate helm-diff output
 Next, execute the helm-diff command and review the output.
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 helm registry login cciserver.azurecr.io -u <image-registry-username>
 
-helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.3
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version {serverversion4}
 ----
 
 Review the output generated from the `helm-diff` command using the following to help:
@@ -176,9 +175,10 @@ Below are the changes you should expect to see in `helm-diff` output:
 Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
 
 Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
-[source,shell]
+
+[source,shell,subs=attributes+]
 ----
-helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.3 --force
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version {serverversion4} --force
 ----
 
 [#check-upgrade-status]

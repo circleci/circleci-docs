@@ -41,6 +41,11 @@ You can view the list of available images [in the docs Configuration Reference](
 
 {% include snippets/machine-resource-table.md %}
 
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
+
 ## Pre-installed software
 {: #pre-installed-software }
 
@@ -67,7 +72,7 @@ Additional packages can be installed with `sudo apt-get install <package>`. If t
 
 Using the machine executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
+The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/docker-layer-caching) (DLC) which is useful when you are building Docker images during your jobs.
 
 ```yaml
 machine:

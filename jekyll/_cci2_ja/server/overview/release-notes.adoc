@@ -1,19 +1,20 @@
 ---
 
-description: CircleCI Server 4.x の各リリースに含まれる新機能の詳細
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - サーバー管理者
 ---
 = CircleCI Server v4.x のリリースノート
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI Server 4.x の各リリースに含まれる新機能の詳細
 :icons: font
 :toc: macro
 
 :toc-title:
 
-Server v4.x では:
+Server v4.0 は、以下の機能を提供しています：
 
 * セキュリティ処理、インストール、アップデートの各プロセスが大幅に改善されています。
 * お客様のセキュリティプロセスに準拠するよう、インストールは事前にプルできる Helm チャートとイメージを使って行われます。
@@ -30,6 +31,15 @@ Server v4.x では:
 == アップグレード
 
 アップグレード手順については、 link:/docs/server/installation/upgrade-server-4[Server v4 へのアップグレードガイド] を参照してください。
+
+[#release-4-0-3]
+== リリース 4.0.3
+
+[#changelog-4-0-3]
+=== 更新履歴
+
+
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#リリース-4-0-3[更新履歴] を参照して下さい。
 
 [#release-4-0-2]
 == リリース 4.0.2

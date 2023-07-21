@@ -1,0 +1,10 @@
+[#differences-between-circleci-hosting-options]
+=== CircleCI のホスティングオプションにはどのような違いがあるのでしょうか？
+
+- *クラウド*: CircleCI がサーバーの初期設定、インフラストラクチャ、セキュリティ対策を管理し、サービスのメンテナンスを担当します。 クラウドなら最新機能や自動アップグレードをすぐに利用できるため、お客様の内部システムの管理にかかる負担が軽減されます。
+- *サーバー*: AWS や GCP などのサービスを介してご自身で CircleCI のインストールや管理を行います。 サーバーのインストールは、お客様のチームがデータセンターのポリシーに従って設定し保守を行うファイアウォールの内側にあます。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限がお客様にあります。
+
+[#circleci-20-available-to-enterprise-customers]
+=== CircleCI は企業（エンタープライズ）でも利用できますか？
+
+はい、CircleCI Server は AWS または GCP 上にインストールできます。 インストールの詳細やガイドへのリンクは、xref:server/overview/circleci-server-v4-overview#[CircleCI Server v4.x] の概要をご覧ください。 ご要望がございましたら link:https://circleci.com/ja/pricing/server/[お問い合わせ]ください。

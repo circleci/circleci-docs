@@ -2,71 +2,29 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - サーバー管理者
 ---
 = 外部サービスの設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI Server 4.1 で使用する以下の外部サービスの設定方法について説明します。
+:page-description: このドキュメントでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
 :icons: font
 :toc: macro
 
-このページでは、CircleCI Server 4.1 で使用する以下の外部サービスの設定方法について説明します。
+:toc-title:
+
+このページでは、CircleCI サーバー v4.x の新規インストール、または既存の CircleCI サーバー v4.xの内部 Postgres および MongoDB データを外部データストアに移行する場合の外部サービスの設定方法について説明します。
+
+toc::[]
 
 [#postgresql]
 == PostgreSQL
 
-NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。
-
-外部 PostgreSQL インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
-
-
-[source,yaml]
-----
-postgresql:
-  internal: false
-  postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
-  postgresqlPort: <port> # The port of your PostgreSQL instance
-----
-
-[tab.postgres.Create_secret_yourself]
---
-シークレットを作成し、`values.yaml` に以下の値を追加します。
-
-[source,shell]
-----
-kubectl create secret generic postgresql \
-  --from-literal=postgres-password=<postgres-password>
-----
-
-[source,yaml]
-----
-postgresql:
-  ...
-  auth:
-    username: <username>
-    existingSecret: postgresql
-----
---
-
-[tab.postgres.CircleCI_creates_secret]
---
-以下の内容を `values.yaml` ファイルに追加します。 CircleCI が自動的にシークレットを作成します。
-
-[source,yaml]
-----
-postgresql:
-  ...
-  auth:
-    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
-
-    password: <password> # The password of the user account used to access your PostgreSQL instance.
-----
---
-
 [#best-practices-for-your-postgresql]
 === PostgreSQL のベストプラクティス
+
+NOTE: 外部化された PostgreSQL インスタンスはバージョン12.1以上である必要があります。
 
 プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
@@ -99,29 +57,85 @@ postgresql:
 |8 コア
 |32 GB
 |500 GB
-|10Gbps
+|10 Gbps
 
 |1000 ～ 5000 名
 |3
 |8 コア
 |32 GB
 |1 TB
-|10Gbps
+|10 Gbps
 
-|5000 名超
+|5000名以上
 |3
 |8 コア
 |32 GB
 |1 TB
-|10Gbps
+|10 Gbps
 |===
+
+[#migrating-from-internal-postgres]
+=== 内部 PostgreSQL から外部ソースへの移行
+
+{% include snippets/server/ja/migrate-internal-postgres-to-external.adoc %}
+
+[#connecting-your-external-postgres]
+=== 外部の PostgreSQL インスタンスを CircleCI サーバーに接続する
+
+外部の PostgreSQL インスタンスをセットアップしたら、CircleCI サーバインスタンスがアクセスできるように、`values.yaml` ファイルに以下を追加します。
+
+[source,yaml]
+----
+postgresql:
+  internal: false
+  postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
+  postgresqlPort: <port> # The port of your PostgreSQL instance
+----
+
+NOTE: `postgresql.internal: false` は、内部的にデプロイされた Postgres インスタンスを削除します。
+
+[tab.postgres.Create_secret_yourself]
+--
+シークレットを作成し、`values.yaml` に以下の値を追加します。
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<postgres-password>
+----
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username>
+    existingSecret: postgresql
+----
+--
+
+[tab.postgres.CircleCI_creates_secret]
+--
+以下の内容を `values.yaml` ファイルに追加します。 CircleCI が自動的にシークレットを作成します。
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
+    password: <password> # The password of the user account used to access your PostgreSQL instance.
+----
+--
+
+この変更は、`helm install/upgrade` を実行したときに有効になります。 外部化されたPostgresインスタンスへの移行を完了している場合、`helm upgrade` を実行すると、スケールダウンされたポッドは `values.yaml` で定義されたレプリカ番号にスケールバックされます。
 
 [#backing-up-postgresql]
 === PostgreSQL のバックアップ
 
-PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント ( link:https://www.postgresql.org/docs/12/backup.html[こちら] ) が提供されています。
+PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント  link:https://www.postgresql.org/docs/12/backup.html[こちら] が提供されています。
 
-CircleCI では、以下を行うことを強くお勧めしています。
+CircleCI では、以下を行っていただくよう強くお勧めしています。
 
 * 毎日バックアップを行う
 * バックアップを少なくとも 30 日間保持する
@@ -133,8 +147,15 @@ CircleCI では、以下を行うことを強くお勧めしています。
 
 NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。
 
-外部 MongoDB インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
+[#migrating-from-internal-mongodb]
+=== 内部 MongoDB から外部化ソースへの移行
 
+{% include snippets/server/ja/migrate-internal-mongo-to-external.adoc %}
+
+[#connecting-your-external-mongodb]
+=== 外部の MongoDB インスタンスを CircleCI サーバーに接続する
+
+外部の MongoDB インスタンスを設定したら、`values.yaml` ファイルに以下を追加して、CircleCI サーバーインスタンスに接続します。
 
 [source,yaml]
 ----
@@ -191,3 +212,5 @@ mongodb:
     password: <password>
 ----
 --
+
+この変更は、`helm install/upgrade` を実行したときに有効になります。 外部化された MongoDB インスタンスへの移行を完了している場合、helm upgrade を実行すると、スケールダウンされたポッドは `values.yaml` で定義されたレプリカ番号にスケールバックされます。

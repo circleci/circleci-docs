@@ -1,0 +1,15 @@
+[#migrate-existing-solution-to-circleci]
+=== 現在使用している他社の CI/CD ツール から CircleCI に移行できますか？
+
+はい、CircleCI では下記からの移行ガイドを提供しています。
+
+- xref:migrating-from-aws#[AWS]
+- xref:migrating-from-azuredevops#[Azure]
+- xref:migrating-from-buildkite#[Buildkite]
+- xref:migrating-from-github#[GitHub]
+- xref:migrating-from-gitlab#[GitLab]
+- xref:migrating-from-jenkins#[Jenkins]
+- xref:migrating-from-teamcity#[TeamCity]
+- xref:migrating-from-travis#[Travis CI]
+
+詳細は、xref:migration-intro#[移行の概要のガイド]でもご確認いただけます。

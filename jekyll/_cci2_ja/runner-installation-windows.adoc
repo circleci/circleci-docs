@@ -9,17 +9,17 @@ contentTags:
 = マシンランナーの Windows へのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーの Windows へのインストール手順
+:page-description: このドキュメントでは、CircleCI セルフホストランナーの Windows へのインストール手順をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
 
 :toc-title:
+:machine:
+:windows:
+
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 このページでは、CircleCI のマシンランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
-
-{% include snippets/ja/runner-platform-prerequisites.adoc %}
-
-toc::[]
 
 以下のページでは、マシンランナーと、その依存関係 (Chocolatey、Git、Gzip など) を Windows サーバーにインストールする手順を説明します。
 
@@ -27,8 +27,38 @@ toc::[]
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
+[#prerequisites]
+== 前提条件
+
+{% include snippets/runner/ja/machine-runner-prereq.adoc %}
+
+[#self-hosted-runner-terms-agreement]
+== セルフホストランナーの利用条件
+
+{% include snippets/runner/ja/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. ネームスペースとリソースクラスの作成
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
+--
+
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/ja/install-with-cli-steps.adoc %}
+--
+
+[#set-launch-agent-version]
+== 2. 起動エージェントのバージョンを設定する（サーバーのみ）
+
+NOTE: CircleCI クラウド用の Windows マシンランナーをインストールする場合は、xref:#installation-steps[次のステップ]に進んでください。
+
+{% include snippets/runner/ja/launch-agent-download.adoc %}
+
 [#installation-steps]
-== インストール手順
+== 3. Windows におけるマシンランナーのインストール
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
@@ -40,7 +70,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 +
 PowerShell インターフェイスにインストール結果が出力されます。
-. インストール中、マシンランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください (xref:runner-config-reference.adoc[セルフホストランナーの設定ファイルのリファレンス]を参照)。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
+. インストール中、マシンランナー (`launch-agent-config.yaml`) の設定ファイルが Notepad で開かれます。 必要な情報をファイルに記入してください (xref:runner-config-reference.adoc[セルフホストランナーの設定ファイルのリファレンス]を参照)。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
 
 セットアップが完了すると、マシンランナーが自動的に起動し、処理対象のジョブの検索を開始します。
 

@@ -7,8 +7,7 @@ contentTags:
 = Phase 4 - Post installation
 :page-layout: classic-docs
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
@@ -16,7 +15,7 @@ Before you begin with the CircleCI server v4.x post installation phase, ensure y
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
-toc::[]
+
 
 [#backup-and-restore]
 == Backup and restore
@@ -525,7 +524,7 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* link:/docs/server/installation/hardening-your-cluster[Hardening Your Cluster]
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Server 4.x Migration]
-* link:/docs/server/operator/backup-and-restore[Backup & Restore]
+* link:/docs/server/installation/hardening-your-cluster[Hardening your cluster]
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Server 3.x to 4.0.x migration]
+* link:/docs/server/operator/backup-and-restore[Backup and restore]
 endif::[]

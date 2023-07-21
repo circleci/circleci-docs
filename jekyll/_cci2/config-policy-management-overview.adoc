@@ -3,17 +3,15 @@ description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Config policies overview - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
-
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
@@ -29,7 +27,14 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide.
+If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide to get started.
+
+The following how-to guides are available for config policies:
+
+* xref:create-and-manage-config-policies#[Create and manage config policies]
+* xref:test-config-policies#[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CLI for config and policy development]
+* xref:config-policies-for-self-hosted-runner#[Config policies for self-hosted runner]
 
 [#how-config-policy-work]
 == How config policies work
@@ -274,6 +279,7 @@ When a policy is evaluated in the context of a triggered pipeline the following 
 
 * `project_id` (CircleCI Project UUID)
 * `build_number` (number)
+* `ssh_rerun` (boolean) - indicates if CI job is started using the SSH rerun feature
 
 * `vcs.branch` (string)
 * `vcs.release_tag` (string)
@@ -334,10 +340,67 @@ from_trusted_origin(origin) {
 }
 ----
 
+The following is an example of a policy that blocks SSH reruns on configs where a job uses sensitive contexts.
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.utils
+
+policy_name["ssh_rerun"]
+
+enable_hard["disallow_ssh_rerun"]
+
+sensitive_contexts := { "secops", "deploy_keys", "access_tokens", "security" }
+
+disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
+    data.meta.ssh_rerun
+    some _, job in input.workflows[_].jobs[_]
+    count(utils.to_set(job.context) & sensitive_contexts) > 0
+}
+----
+
+[#use-sets-and-variables]
+== Use sets and variables
+
+It is best practice to avoid hard coding values in code, and the same goes for your config policies. Hard coding data, such as project IDs, makes it difficult to read code, and can be confusing when collaborating with wider team members ("what is `99ada477-7029-44bb-b675-5b2d6448d1ab`?"). Because using rego means your policies are defined in code, you can define sets and variables in rego files external to your individual policies, and reference these sets and variables across multiple policies. For an example of this in practice, see the xref:manage-contexts-with-config-policies#use-sets-and-variables[Manage contexts with config policies] page.
+
+For further reading, see the link:https://circleci.com/blog/compliance-with-config-policies/[Config policies blog post].
+
 [#testing-policies]
 == Testing policies
 
 It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
+
+[#dynamic-config]
+== Config policies and dynamic configuration
+
+You can write config policies to govern projects that use dynamic configuration too. Policies are evaluated against:
+
+* _Setup_ configurations
+* _Continuation_ configurations
+* Standard configurations
+
+If required for your project, you can encode rules to apply only to setup configs, or only to non-setup configs, as follows:
+
+[source,rego]
+----
+enable_hard["setup_rule"] { input.setup } # only applied to configs with `setup: true`
+----
+
+[source,rego]
+----
+enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that do not have `setup: true`
+----
+
+[source,rego]
+----
+enable_hard["some_rule"] # rule applied to all configs
+----
+
+For more information about dynamic configuration, see the xref:dynamic-config#[Dynamic configuration overview].
 
 [#example-policy]
 == Example policy
@@ -374,6 +437,7 @@ enable_hard["use_official_docker_image"]
 [#next-steps]
 == Next steps
 
-* link:/docs/create-and-manage-config-policies[Create and manage config policies]
-* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
-* link:/docs/config-policy-reference[Config policy reference]
+* xref:create-and-manage-config-policies#[Create and manage config policies]
+* xref:test-config-policies#[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development#[Use the CircleCI CLI for config and policy development]
+* xref:config-policy-reference#[Config policy reference]

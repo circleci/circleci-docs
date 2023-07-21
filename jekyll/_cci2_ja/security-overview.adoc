@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-    - Cloud
-    - Server v4.x
-    - Server v3.x
-    - サーバー管理者
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - サーバー管理者
 ---
 = セキュリティの概要
 :page-layout: classic-docs
@@ -46,7 +46,7 @@ VCS プロバイダーから付与された組織の権限を確認し、 link:h
 
 VCS では必ず 2 要素認証 (2FA) を使用してください。
 
-- link:https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]
+- link:https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA]
 - link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket 2FA]
 - link:https://docs.gitlab.com/ee/user/profile/account/two_factor_authentication.html[GitLab 2FA]
 

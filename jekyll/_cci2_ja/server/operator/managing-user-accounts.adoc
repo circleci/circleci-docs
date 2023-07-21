@@ -1,13 +1,14 @@
 ---
 
-description: "このセクションでは、CircleCI Server v4.x のオペレーターがユーザーアカウントを管理する方法を説明します。"
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - サーバー管理者
 ---
 = ユーザーアカウントの管理
 :page-layout: classic-docs
 :page-liquid:
+:page-description: このセクションでは、CircleCI Server v4.x のオペレーターがユーザーアカウントを管理する方法を説明します。
 :icons: font
 :toc: macro
 
@@ -25,16 +26,16 @@ toc::[]
 [#new-accounts]
 === 新規アカウント
 
-お客様の GitHub の組織に関連付けられているユーザーならだれでも、お客様の CircleCI Server のユーザーアカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
+お客様の GitHub の組織に関連付けられているユーザーならだれでも、お客様の CircleCI Server のユーザーアカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を実施します。
 
 . CircleCI の Admin Settings に移動します。
 . Admin Settings メニューから *System Settings* を選択します。
-. *Suspend New Users* を True に設定します。
+. *Suspend New Users* を *True* に設定します。
 
 [#active-accounts]
 === アクティブなアカウント
 
-アカウントが不要になった場合は、そのアカウントを停止することができます。 停止されたアカウントはアクティブではなくなり、ライセンス数にもカウントされません。 アカウントを停止するには、以下の手順を行います。
+アカウントが不要になった場合は、そのアカウントを停止することができます。 停止されたアカウントはアクティブではなくなり、お客様のライセンス数にカウントされません。 アカウントを停止するには、以下の手順を実施します。
 
 . CircleCI の Admin Settings に移動します。
 . Admin Settings メニューから *Users* を選択します。
@@ -69,12 +70,12 @@ toc::[]
 . CircleCI の Admin Settings に移動します。
 . Admin Settings メニューから *Users* を選択します。
 . Suspended ウィンドウを表示します。
-. アクセス権を付与するユーザー名の横にある *Activate* をクリックします。 そのアカウントが *Active* ウィンドウに表示されるようになります。
+. アクセス権を付与するユーザー名の横にある *Activate* をクリックします。 そのアカウントが Active ウィンドウに表示されるようになります。
 
 [#limiting-registration-by-github-organization]
 == GitHub 組織ごとのユーザー登録の制限
 
-GitHub.com を使用している場合は、お客様の CircleCI Server への登録を、承認済みの組織リストで組織のメンバーシップを持つユーザーのみに制限することが可能です。 この機能を使用するには、以下の手順を行います。
+GitHub.com を使用している場合は、お客様の CircleCI Server への登録を、承認済みの組織リストで組織のメンバーシップを持つユーザーのみに制限することが可能です。 この機能を使用するには、以下の手順を実施します。
 
 . CircleCI の Admin Settings ページに移動します。
 . Admin Settings メニューから *System Settings* を選択します。

@@ -39,7 +39,7 @@ jobs:
 
 Executor のリソースクラスは、`small` や `medium` などのサイズにより指定します。 各サイズごとに、特定の CPU と RAM が割り当てられています。 使用可能なリソースクラスの全オプションリストは、link:/docs/configuration-reference/#resourceclass[設定ファイルのリファレンス] でご確認ください。 link:https://circleci.com/ja/product/features/resource-classes[リソースクラスの製品概要のページ] では、各リソースクラスのクレジットの使用量や各プランで使用できるリソースクラスに関する情報をご確認いただけます。
 
-CIrcleCI のセルフホストランナーを使用する際は、プロジェクト設定で `resource_class` キーを使って各ジョブで使用するランナーを指定します。 セルフホストランナーのリソースクラスは link:/docs/runner-installation/[インストールプロセス] で割り当てられ、設定されます。
+CIrcleCI のセルフホストランナーを使用する際は、プロジェクト設定で `resource_class` キーを使って各ジョブで使用するランナーを指定します。 セルフホストランナーのリソースクラスは xref:runner-installation#[インストールプロセス] で割り当てられ、設定されます。
 
 
 [source,yaml]
@@ -78,7 +78,7 @@ jobs:
 * GPU リソースクラス: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] および link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
 * link:/docs/configuration-reference/#arm-execution-environment-linux[Arm リソースクラス]
 
-**セルフホストランナー** のセットアップを開始する場合は、link:/docs/runner-installation[Web アプリでのセルフホストランナーのインストール] を参照してください。
+**セルフホストランナー** のセットアップを開始する場合は、xref:runner-installation#[Web アプリでのセルフホストランナーのインストール] を参照してください。
 
 [#default-resource-class]
 == デフォルトのリソースクラス

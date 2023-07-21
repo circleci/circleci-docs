@@ -45,72 +45,14 @@ Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs
 
 To upload artifacts created during builds, use the following example:
 
-{:.tab.artifacts.Cloud}
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
-    working_directory: /tmp
-    steps:
-      - run:
-          name: Creating Dummy Artifacts
-          command: |
-            echo "my artifact file" > /tmp/artifact-1;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-
-      - store_artifacts:
-          path: /tmp/artifact-1
-          destination: artifact-file
-
-      - store_artifacts:
-          path: /tmp/artifacts
-```
-
-{:.tab.artifacts.Server_3}
-```yaml
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: python:3.6.3-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
-    working_directory: /tmp
-    steps:
-      - run:
-          name: Creating Dummy Artifacts
-          command: |
-            echo "my artifact file" > /tmp/artifact-1;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-
-      - store_artifacts:
-          path: /tmp/artifact-1
-          destination: artifact-file
-
-      - store_artifacts:
-          path: /tmp/artifacts
-```
-
-{:.tab.artifacts.Server_2}
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: python:3.6.3-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
@@ -162,70 +104,12 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 Following is a full `config.yml` that compiles the example C abort program, and collects the core dumps as artifacts.
 
-{:.tab.artifacts2.Cloud}
 ```yaml
 version: 2.1
 jobs:
   build:
     docker:
       - image: gcc:8.1.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: ~/work
-    steps:
-      - checkout
-      - run: make
-      - run: |
-          # tell the operating system to remove the file size limit on core dump files
-          ulimit -c unlimited
-          ./dump
-      - run:
-          command: |
-            mkdir -p /tmp/core_dumps
-            cp core.* /tmp/core_dumps
-          when: on_fail
-      - store_artifacts:
-          path: /tmp/core_dumps
-```
-
-{:.tab.artifacts2.Server_3}
-```yaml
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: gcc:8.1.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: ~/work
-    steps:
-      - checkout
-      - run: make
-      - run: |
-          # tell the operating system to remove the file size limit on core dump files
-          ulimit -c unlimited
-          ./dump
-      - run:
-          command: |
-            mkdir -p /tmp/core_dumps
-            cp core.* /tmp/core_dumps
-          when: on_fail
-      - store_artifacts:
-          path: /tmp/core_dumps
-```
-
-{:.tab.artifacts2.Server_2}
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: gcc:8.1.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout

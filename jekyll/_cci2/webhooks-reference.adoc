@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#common-top-level-keys]
 == Common top level keys of webhooks
@@ -228,7 +227,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See <<#vcs>> below for GitHub and Bitbucket.
+Data associated to the pipeline. Present for pipelines associated with GitLab. See <<#vcs>> below for GitHub and Bitbucket.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -247,7 +246,7 @@ Data associated to the pipeline. Present for pipelines associated with providers
 
 | gitlab
 | no
-| A map present when the pipeline is associated with a Gitlab trigger
+| A map present when the pipeline is associated with a GitLab trigger
 |===
 
 [#circleci]
@@ -280,7 +279,7 @@ Data associated to the pipeline. Present for pipelines associated with providers
 [#vcs]
 === VCS
 
-NOTE: The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See <<#trigger-parameters,trigger parameters>> above for other providers.
+NOTE: The VCS map and its contents are always present for GitHub and Bitbucket projects, but not for GitLab projects. See <<#trigger-parameters,trigger parameters>> above for GitLab parameters.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -475,7 +474,7 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
 ```
 
 [#workflow-completed-gitlab]
-=== workflow-completed for Gitlab
+=== workflow-completed for GitLab
 
 ```json
 {
@@ -551,7 +550,7 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
 ```
 
 [#job-completed-gitlab]
-=== job-completed for Gitlab
+=== job-completed for GitLab
 
 ```json
 {

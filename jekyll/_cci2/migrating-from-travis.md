@@ -3,7 +3,7 @@ layout: classic-docs
 title: Migrate From Travis CI
 categories: [migration]
 description: An overview of how to migrate from Travis CI to CircleCI.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -90,12 +90,13 @@ root of their repository.
 
 The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
+{% include snippets/docker-auth.md %}
+
 {% raw %}
 ```yaml
 version: 2.1
 
 workflows:
-  version: 2
   build:
     jobs:
       - build
@@ -105,13 +106,7 @@ jobs:
     working_directory: ~/mern-starter
     docker:
       - image: cimg/node:17.2.0 # Primary execution image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mongo:3.4.4         # Service/dependency image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:

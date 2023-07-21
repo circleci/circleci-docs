@@ -3,17 +3,15 @@ description: Learn how to write a policy to restrict which projects can run jobs
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Config policies for self-hosted runner (Open-preview)
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
-
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
 Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
 
@@ -22,7 +20,7 @@ Follow this how-to guide to learn how to create a config policy to restrict whic
 
 * Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
-* Set up a self-hosted runner. See the xref:runner-installation#[Installing self-hosted runners] guide.
+* Set up a self-hosted runner. See the xref:runner-overview/#getting-started[Getting started] section of the Self-hosted runners overview.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +
@@ -38,7 +36,7 @@ Example output:
 {
   "enabled": true
 }
----- 
+----
 +
 {% include snippets/find-organization-id.adoc %}
 
@@ -74,16 +72,23 @@ In the following steps you will replace `namespace/resource_class` and `project_
 == 2. Update policy with your details
 
 . Replace `namespace/resource_class` with one of your runner resource classes:
-.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have followed the xref:runner-installation#[Installing self-hosted runners] guide. Here you will see all your available self-hosted runner resource classes.
+.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have accepted the CircleCI Runner Terms and created a namespace and resource class, as outlined in the runner installation guides. Here you will see all your available self-hosted runner resource classes.
 .. Replace `namespace/resource_class` in the `runner.rego` file with the name of the resource class that you would like to restrict.
 
 . Replace `project_UUIDs` with a project ID:
-.. In the CircleCI web app, navigate to your projects dashboard by selecting **Projects** in the sidebar. Find the project you want to allow to build on your self-hosted runner, and then click the ellipsis (`...`) next to that project and select **Project Settings**. 
+.. In the CircleCI web app, navigate to your projects dashboard by selecting **Projects** in the sidebar. Find the project you want to allow to build on your self-hosted runner, and then click the ellipsis (`...`) next to that project and select **Project Settings**.
 .. Copy the Project ID from the overview page and replace `project_UUIDs` with this project ID.
 
 [#push-up-your-policy-bundle]
 == 3. Push up your policy bundle
 
+You can now push your new policy to your organization for it to take effect. You have two options:
+
+* Push the policy manually using the CLI from your local environment
+* Push your changes to your config policy repo if you are xref:create-and-manage-config-policies#manage-policies-with-your-vcs[managing policies via your VCS].
+
+[tab.allow.manual]
+--
 Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
@@ -99,6 +104,14 @@ If the upload was successful, you will see something like the following:
   “Created”: [“runner_policies”]
 }
 ----
+--
+
+[tab.allow.push_to_vcs]
+--
+If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Create and manage config policies guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+
+You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+--
 
 NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.
 
@@ -119,7 +132,7 @@ policy_name["runner_policies"]
 
 enable_hard["resource_class_check"]
 
-resource_class_check = config.resource_class_by_project({ 
+resource_class_check = config.resource_class_by_project({
   "my-namespace/runner-test1": {
     "a20ae1c6-d723-4c03-9bb6-01d5b3594e02",
     "2accadd0-c832-489e-b837-4de03def0d35"

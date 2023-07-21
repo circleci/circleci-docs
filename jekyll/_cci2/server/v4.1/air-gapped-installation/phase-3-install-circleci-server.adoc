@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: How to install the CircleCI server Helm deployment to an air-gapped environment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 With prerequisites installed, and object storage configured, you can now copy over and install the CircleCI Helm deployment to the Kubernetes cluster in your air-gapped environment.
 
@@ -20,7 +19,7 @@ The `values.yaml` file for installing CircleCI should be prepared according to t
 
 === a. Configure global values
 
-NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.yaml[Example `values.yaml`] page.
+NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values[Example `values.yaml`] page.
 
 In the `global.container` section of your `values.yaml` file:
 

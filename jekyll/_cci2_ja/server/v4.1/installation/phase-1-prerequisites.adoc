@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-    - Server v4.1
-    - サーバー管理者
+  - Server v4.1
+  - サーバー管理者
 ---
-= ステップ 1 - 前提条件
+= ステップ1 - 前提条件
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
@@ -33,28 +33,27 @@ NOTE: 以下のセクションでは、 `< >` で示されている箇所にご�
 |用途
 |備考
 
-|https://www.terraform.io/downloads.html[Terraform]
+|link:https://www.terraform.io/downloads.html[Terraform]
 |{terraformversion} 以上
 |インフラストラクチャの管理
 |
 
-|https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
-
+|link:https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
 |{kubectlversion} 以上
 |Kubernetes CLI
 |
 
-|https://helm.sh/[Helm]
+|link:https://helm.sh/[Helm]
 |{helmversion} 以上
 |Kubernetes パッケージ管理
 |
 
-|https://github.com/databus23/helm-diff[Helm Diff]
+|link:https://github.com/databus23/helm-diff[Helm Diff]
 |{helmdiffversion} 以上
 |`values.yaml` の変更と更新の支援
 |オプションですが、リリース間のトラブルシューティングを支援します。
 
-|https://github.com/vmware-tanzu/velero/releases[Velero CLI]
+|link:https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 |最新バージョン
 |バックアップおよびリストア機能
 |詳細については、Velero の link:https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページを参照してください。
@@ -90,7 +89,7 @@ endif::env-aws[]
 - ご自身のストレージプロバイダーの link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 [#create-a-kubernetes-cluster]
-== 2.  Kubernetes クラスタを作成します
+== 2. Kubernetes クラスタを作成します
 
 CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
 
@@ -127,7 +126,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |CircleCI のバージョン
 |Kubernetes のバージョン
 
-|4.0.0
+|4.1.x
 |1.22 - 1.23
 |===
 
@@ -141,11 +140,11 @@ ifndef::env-gcp[]
 [#eks]
 === EKS
 
-Amazon EKS クラスタの作成に関する詳細は、
-https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には link:https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+Amazon EKS クラスタの作成に関する詳細は、 
+ link:https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
-. AWS CLI を link:https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定] します。
-. link:https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
+. AWS CLI を link:https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-configure.html[設定] します。
+. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
 . 以下を実行してクラスタを作成します (`eksctl` and EKS を使った CloudFormation には 20 分以上かかる場合があります。)
 +
 [source,shell]
@@ -159,7 +158,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --cluster circleci-server
 ----
 
-NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 link:https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限] に関しては AWS のドキュメントをご覧ください。
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 link:https://aws.amazon.com/jp/iam/features/manage-permissions/?nc1=h_ls[IAM 権限] に関しては AWS のドキュメントをご覧ください。
 
 endif::env-gcp[]
 
@@ -172,7 +171,7 @@ GKE クラスタ の作成に関する詳細は、 link:https://cloud.google.com
 
 CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server では、GKE Autopilot ではサポートされていない機能が必要です。
 
-. GCP CLI を link:https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に link:https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
+. GCP CLI を link:https://cloud.google.com/sdk/gcloud?hl=ja[インストール] し、お使いの GCP アカウント用に link:https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
 +
 NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
 +
@@ -186,7 +185,9 @@ gcloud config set compute/region <REGION>
 ----
 . クラスタの作成
 +
-TIP: link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。 以下のコマンドでシンプルなクラスタをプロビジョニングします。
+TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。
++
+以下のコマンドでシンプルなクラスタをプロビジョニングします。
 +
 [source,shell]
 ----
@@ -196,9 +197,7 @@ gcloud container clusters create circleci-server \
   --workload-pool=<PROJECT_ID>.svc.id.goog
 ----
 +
-NOTE: kube コンテキストが新しいクラスタの認証情報で自動的にアップデートされます。
-+
-手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
+手動で kube コンテキストを更新する必要がある場合は、以下を実行します。 手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
 +
 [source,shell]
 ----
@@ -249,6 +248,20 @@ GKE クラスタを既にお持ちで Workload Identity をクラスタとノー
 +
 [source,shell]
 ----
+gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
+  --display-name="<DISPLAY_NAME>"
+----
+. 既存のノードプールを更新します。
++
+[source,shell]
+----
+gcloud iam service-accounts keys create <KEY_FILE> \
+  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
+----
+. 既存の GKE クラスタのノードプールを取得します。
++
+[source,shell]
+----
   gcloud container node-pools list --cluster "<CLUSTER_NAME>"
 ----
 . 既存のノードプールを更新します。
@@ -267,7 +280,7 @@ GKE クラスタを既にお持ちで Workload Identity をクラスタとノー
 * xref:phase-1-prerequisites#configuring-google-cloud-storage[オブジェクトストレージ]
 
 [#create-a-new-github-oauth-app]
-== 3.  新しい GitHub OAuth アプリを作成します
+== 3. 新しい GitHub OAuth アプリを作成します
 
 CAUTION: GitHub Enterprise と CircleCI Server が同一のドメインにない場合、GHE からイメージやアイコンの CircleCI Web アプリへのロードに失敗します。
 
@@ -294,7 +307,7 @@ GitHub Enterprise を使用する場合は、パーソナルアクセストー�
 **User Settings > Developer Settings > Personal access tokens** に移動し、`defaultToken` を作成します。 このトークンにはスコープは必要ありません。 この値は CircleCI Server の設定の際に必要になります。
 
 [#static-ip-address]
-== 4.  静的 IP アドレス
+== 4. 静的 IP アドレス
 
 クラスタが作成したロードバランサーには、静的 IP アドレスをプロビジョニングすることを推奨します。 これは必須ではありませんが、これによりサービスが作成したロードバランサが再プロビジョニングされる場合に、DNS レコードの更新が不要になります。
 
@@ -433,7 +446,7 @@ aws acm request-certificate \
 このコマンドを実行したら、Certificate Manager AWS コンソールに移動して、ウィザードに従って Route53 で必要な DNS 検証レコードをプロビジョニングします。 この証明書が発行されたら、ARN をメモします。
 
 [#upstream-tls]
-=== アップストリーム TLS の終了
+=== アップストリーム TLS の終了  
 
 アプリケーションの外側で CircleCI Server の TLS を終了する必要がある場合があります。 これは、ACM を使用したり、Helm のデプロイ中に証明書チェーンを提供する代わりの方法です。 たとえば、プロキシがドメイン名に TLS の終了を提供している CircleCI Server の前で実行されているとします。 この場合、CircleCI アプリケーションはロードバランサーやプロキシのバックエンドとして動作します。
 
@@ -511,13 +524,13 @@ aws s3api create-bucket \
 [#set-up-authentication-aws]
 ==== b.  認証を設定します
 
-S3 で CircleCI を認証するには、サービスアカウントの IAM ロール (IRSA) または IAM アクセスキーを使用する 2 つの方法があります。 IRSA の使用を推奨します。
+S3 で CircleCI を認証するには、サービスアカウントの IAM ロール (IRSA) または IAM アクセスキーを使用する 2 つの方法があります。 IRSA の使用を推奨します。 
 
 [.tab.authentication.IRSA]
 --
 **オプション 1:** IRSA を使用する場合
 
-以下は link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA についての AWS のドキュメント] の概要であり、CircleCI のインストールには十分です。
+以下は link:https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA についての AWS のドキュメント] の概要であり、CircleCI のインストールには十分です。
 
 . EKS クラスタの IAM OIDC ID プロバイダーを作成します。
 +
@@ -776,7 +789,6 @@ aws iam create-user --user-name circleci-server
     }
   ]
 }
-
 ----
 . ポリシーをユーザーにアタッチします。
 +
@@ -822,7 +834,7 @@ ifndef::env-aws[]
 [#create-a-gcp-bucket]
 ==== a.  GCP バケットを作成します。
 
-CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE のドキュメント] を参照してください。
+CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control?hl=ja[GKE のドキュメント] を参照してください。
 
 [source,shell]
 ----
@@ -832,7 +844,7 @@ gsutil mb gs://circleci-server-bucket
 [#set-up-authentication-gcp]
 ==== b.  認証を設定します
 
-ワークロードとポッドの認証で推奨される方法は、 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
+ワークロードとポッドの認証で推奨される方法は、 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
 
 . サービスアカウントを作成します。
 +
@@ -893,6 +905,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* xref:phase-2-core-services#[ステップ 2: コアサービスのインストール].
-
+* xref:phase-2-core-services#[Phase 2: Core Services Installation].
++
 endif::[]

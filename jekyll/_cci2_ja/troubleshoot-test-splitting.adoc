@@ -9,7 +9,7 @@ contentTags:
 = テスト分割のトラブルシューティング
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI テスト分割の実行におけるトラブルシューティングに役立つヒントと一般的なエラー
+:page-description: CircleCI テスト分割の実行におけるトラブルシューティングに役立つヒントと一般的なエラーをこのドキュメントでわかりやすく説明します。
 :icons: font
 :toc: macro
 
@@ -20,7 +20,7 @@ contentTags:
 
 CircleCI でテスト分割を活用するには、実行するテストの一覧を渡す必要があります。 しかし、Django を使用する場合、テストの実行方法によっては、テストをグロブして渡すことができません。
 
-独自のユースケースに合わせたテスト分割では、問題が発生することがあります。 Python Django でテスト分割を行えない問題については、 link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[こちらの投稿] に解決例が示されています。
+独自のユースケースに合わせたテスト分割では、問題が発生することがあります。 Python Django でテスト分割を行えない問題については、 link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[Discuss[こちらの投稿] に解決例が示されています。
 
 この例を使用してテスト分割を実行する簡単な例を以下に示します。
 
@@ -73,7 +73,7 @@ cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 [#are-you-setting-the-junit-family-in-your-pytest-ini]
 === pytest.ini に junit_family を設定している場合
 
-pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、 link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[こちら] のページを参照してください。 上記ページの該当箇所は、"families" で検索すると確認できます。
+pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、 link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[pytestこちら] のページを参照してください。 上記ページの該当箇所は、"families" で検索すると確認できます。
 
 CAUTION:  pytest 6.1 では互換性を損なう変更が行われ、`junit_family` xml 形式がファイル名を含まない `xunit2` に変更されました。 つまり、`--split-by=timings` は `xunit1` を指定しないと動作しません。 詳細については、 link:https://docs.pytest.org/en/stable/changelog.html#id137[pytest changelog] を参照してください。
 
@@ -91,9 +91,6 @@ jobs:
     parallelism: 2
     docker:
       - image: cimg/python:3.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - python/install-packages:
@@ -118,7 +115,7 @@ workflows:
 [#video-troubleshooting-globbing]
 === ビデオ: グロブのトラブルシューティング
 
-NOTE: 以下のビデオで使われているコマンドを実際に使用するには、 <<ssh-access-jobs#,`ジョブに SSH で接続`>> する必要があります。
+NOTE: 以下のビデオで使われているコマンドを実際に使用するには、 xref:ssh-access-jobs#[`ジョブに SSH で接続`] する必要があります。
 
 ++++
 <div class="video-wrapper">
@@ -129,13 +126,13 @@ NOTE: 以下のビデオで使われているコマンドを実際に使用す�
 [#other-ways-to-split-tests]
 == その他のテスト分割方法
 
-一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされています。 これらのアプリケーションは、CircleCI では開発およびサポートが行われていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、CircleCI のフォーラム、 link:https://discuss.circleci.com/[Discuss] で対処方法を検索するか、質問してみてください。
+一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされていますが、 これらのアプリケーションは、CircleCI では開発およびサポートが行われていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、CircleCI のフォーラム、 link:https://discuss.circleci.com/[Discuss] で対処方法を検索するか、質問してみてください。
 
 * **link:https://knapsackpro.com[Knapsack Pro]:** 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI のビルド時間のサンプルグラフ] もご覧ください。
 * **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]:** `phpunit.xml` ファイルに対してクエリを行い、テストファイル名の一覧を取得して出力するヘルパー CLI ツールです。 テストを分割して CI ツールのタイミングに基づいて並列に実行する場合に、このツールを使用すると便利です。
 * **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]:** Golang パッケージをグロブするには、組み込まれている Go コマンド `go list ./...` を使用します。 これにより、パッケージ テストを複数のコンテナに分割できます。
-+
-[souce,shell]
+
+[source,shell]
 ----
 go test -v $(go list ./... | circleci tests split)
 ----
@@ -143,5 +140,5 @@ go test -v $(go list ./... | circleci tests split)
 [#next-steps]
 == 次のステップ
 
-* <<collect-test-data#,テストデータの収集>>
-* <<insights-tests#,テストインサイト>>
+* xref:collect-test-data#[テストデータの収集]
+* xref:insights-tests#[テストインサイト]

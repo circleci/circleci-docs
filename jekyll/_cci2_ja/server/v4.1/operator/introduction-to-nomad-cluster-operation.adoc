@@ -8,7 +8,7 @@ contentTags:
 = Nomad クラスタの操作ガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI 4.1 のインストール環境での Nomad クラスタの操作方法を説明します。
+:page-description: このドキュメントでは、CircleCI 4.0 のインストール環境での Nomad クラスタの操作方法をわかりやすく説明しています。
 :icons: font
 :toc: macro
 
@@ -43,12 +43,12 @@ Nomad Pod には `nomad` CLI がインストールされています。 Nomad �
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad status
+kubectl exec -it <nomad-server-pod-ID> -- nomad status
 ----
 
 `Status` は、出力内容のうち最も重要なフィールドで、以下のステータスが表示されます。
 
-- `running`: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
+- `running`: Nomad でジョブの実行が開始されています。 通常、CircleCI 内のジョブが開始されていることを意味します。
 - `pending`: クラスタ内でジョブを実行するためのリソースが不足している状態です。
 - `dead`: Nomad によるジョブの実行が終了しています。 対応する CircleCI ジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは dead になります。
 
@@ -59,7 +59,7 @@ Nomad クライアントのリストを取得するには、以下のコマン�
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad node-status
+kubectl exec -it <nomad-server-pod-ID> -- nomad node-status
 ----
 
 NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
@@ -68,7 +68,7 @@ NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の No
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
+kubectl exec -it <nomad-server-pod-ID> -- nomad node-status -self
 ----
 
 これにより、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
@@ -80,14 +80,14 @@ Nomad ジョブは、CircleCI ジョブの実行に対応しています。 そ�
 
 [source,shell]
 ----
-kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
+kubectl exec -it <nomad-server-pod-ID> -- nomad logs -job -stderr <nomad-job-id>
 ----
 
 NOTE: `-stderr` フラグは必ず指定してください。 これにより、ほとんどのビルドエージェントのログが表示されます。
 
 `nomad logs -job` コマンドは便利ですが、`-job` フラグは指定されたジョブのランダム割り当てを使用するため、必ずしも正確とは限りません。 `allocation` は Nomad ジョブ内のさらに小さい単位で、このドキュメントでは取り上げていません。 詳細については、 link:https://www.nomadproject.io/docs/internals/scheduling.html[公式ドキュメント] を参照してください。
 
-指定されたジョブの割り当てからログを取得するには、以下の手順に従います。
+指定したジョブの割り当て(allocation)からログを取得するには、以下の手順を行います。
 
 . `nomad status` コマンドで、ジョブ ID を取得します。
 . `nomad status <job-id>` コマンドで、ジョブの割り当て ID を取得します。
@@ -121,7 +121,7 @@ nomad node-drain -enable -yes <node-id>
 [#scaling-down-the-client-cluster]
 === クライアントクラスタのスケールダウン
 
-クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain`  モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。link:https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック] を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
+クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain`  モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 link:https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック] を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
 
 このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
 
@@ -134,6 +134,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* xref:managing-user-accounts#[ユーザーアカウントの管理ガイド]をお読みください。
-
+* xref:managing-user-accounts#[ユーザーアカウントの管理] ガイドをお読みください。
++
 endif::[]

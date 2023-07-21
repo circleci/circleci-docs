@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
 
@@ -36,7 +35,7 @@ Add the SSH key for the target to which you are deploying (these instructions ar
 
 . Click the **Add SSH Key** button.
 
-For instructions for server 2.x, or additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
+For additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
 
 [#ssh-username-and-hostname]
 == 2. Add the SSH username and hostname

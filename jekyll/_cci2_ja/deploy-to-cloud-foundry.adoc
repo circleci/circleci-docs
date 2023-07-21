@@ -1,5 +1,6 @@
 ---
 
+description: このドキュメントでは、Cloud Foundry へのデプロイ例を紹介します
 contentTags:
   platform:
   - クラウド
@@ -9,10 +10,14 @@ contentTags:
 = Cloud Foundry へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、Cloud Foundry へのデプロイ例を紹介します
 :icons: font
 :toc: macro
 :toc-title:
+
+このノウハウガイドでは、Cloud FoundryにデプロイするためのCircleCIの設定方法について説明します。
+
+[#introduction]
+== はじめに
 
 このページでは、Cloud Foundry にデプロイするための設定について説明します。 CircleCI では、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 link:https://circleci.com/developer/ja/orbs/orb/circleci/cloudfoundry[Orb レジストリ] の Cloud Foundry のページには、Cloud Foundry を使ったタスクの実行方法が分かるサンプルが含まれています。この中には、単一のジョブでブルーグリーンデプロイをビルドして実行する方法を示した以下のサンプルも含まれています。 このサンプルでは、指定する 2 つのサブドメインの `domain` に `dark` と `live` のプレフィックスが自動的に付けられます。 live デプロイを実行するには確認ステップも指定する必要があります。
 
@@ -55,7 +60,7 @@ workflows:
 Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 アーキテクチャは必ず Docker イメージに一致させてください。以下のコマンドは、Debian ベースのイメージが使用されていることを前提としています。 この例では、Cloud Foundry の map-route/unmap-route コマンドを使用して、"Blue-Green" デプロイを実装しています。これは、基本の `cf push` にはないオプションの機能です。
 
 [#install-the-cli]
-=== CLI のインストール
+=== 1.  CLI のインストール
 
 ```yaml
       - run:
@@ -70,7 +75,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 ```
 
 [#dark-deployment]
-=== dark デプロイ
+=== 2.  dark デプロイ
 
 これは、 link:https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html[Blue-Green] デプロイにおける最初のステップです。アプリケーションを非本番ルートにプッシュします。
 
@@ -93,9 +98,9 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 ```
 
 [#live-deployment]
-=== live デプロイ
+=== 3.  live デプロイ
 
-ここまで、前にプッシュした "app-name" は変更されていません。  最後に、本番 URL を dark アプリケーションにルーティングし、それまでのバージョンへのトラフィックを停止し、アプリケーションの名前を変更します。
+ここまで、前項でプッシュした "app-name" は変更されていません。  最後に、本番 URL を dark アプリケーションにルーティングし、それまでのバージョンへのトラフィックを停止し、アプリケーションの名前を変更します。
 
 ```yaml
       - run:
@@ -114,7 +119,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 ```
 
 [#manual-approval]
-=== 手動による承認
+=== 4. 手動による承認
 
 さらなる制御と検証を行うには、以下のサンプルワークフローに示すように、dark のステップと live のステップの間に手動の "hold" ステップを追加します。
 

@@ -46,6 +46,8 @@ In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_art
 
 Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs](/docs/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
 
+{% include snippets/docker-auth.md %}
+
 ```yml
 version: 2.1
 ​
@@ -53,9 +55,6 @@ jobs:
   print-a-message:
     docker:
       - image: cimg/base:2022.03
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       message:
         type: string

@@ -11,6 +11,8 @@ contentTags:
 
 This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
 
+{% include snippets/docker-auth.md %}
+
 ## Example CircleCI configuration for a rails app with structure.sql
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
@@ -20,7 +22,7 @@ follows, because the cimg/ruby:3.0-node image does not have psql installed
 by default and uses `pg` gem for database access.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
@@ -29,9 +31,6 @@ jobs:
 
     docker:
       - image: cimg/ruby:2.6-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -40,9 +39,6 @@ jobs:
     # Service container image available at `host: localhost`
 
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
@@ -90,7 +86,7 @@ registry of your choosing.
 
 ### Example environment setup
 {: #example-environment-setup }
-{:.no_toc}
+
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
@@ -100,15 +96,12 @@ You must declare your database configuration explicitly because multiple pre-bui
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/appName
     docker:
       - image: cimg/ruby:2.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -117,9 +110,6 @@ jobs:
       # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
@@ -145,20 +135,14 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 The following configuration example is taken from the CircleCI [Go demo app](https://github.com/CircleCI-Public/circleci-demo-go).
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
       # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
       - image: cimg/go:1.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -232,7 +216,6 @@ jobs:
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
-{:.tab.mysql_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -241,13 +224,7 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1-browsers # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -274,105 +251,6 @@ jobs:
             mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
             mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
 workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-```
-
-{:.tab.mysql_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-      - image: cimg/php:8.1-browsers # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
-
-    steps:
-      - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-```
-
-{:.tab.mysql_example.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-      - image: cimg/php:7.1 # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
-
-    steps:
-      - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
-workflows:
-  version: 2
   build-deploy:
     jobs:
       - build

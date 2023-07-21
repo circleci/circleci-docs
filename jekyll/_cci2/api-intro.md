@@ -111,11 +111,6 @@ Endpoint       | Description
 `POST /project/:vcs-type/:username/:project/build` | This endpoint enabled users to trigger a new build by project.
 `GET /recent-builds` | This endpoint enabled users to retrieve an array of recent builds.
 
-## API v2 and server customers
-{: #api-v2-and-server-customers }
-
-API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
-
 ## Next steps
 
 - Review the [API Developer's Guide]({{site.baseurl}}/api-developers-guide) for a detailed walkthrough on authenticating as well as example API requests.

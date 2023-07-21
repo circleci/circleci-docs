@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This section provides supplemental information on hardening your Kubernetes cluster.
 
@@ -340,6 +339,6 @@ When hardening an installation where the VM service uses public IPs, the followi
 
 ifndef::pdf[]
 ## Next steps
-* xref:migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
 * xref:../operator/operator-overview#[Server 4.1 Operator Overview]
 endif::[]

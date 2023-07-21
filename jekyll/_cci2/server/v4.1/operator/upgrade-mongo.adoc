@@ -1,0 +1,98 @@
+---
+contentTags:
+  platform:
+    - Server v4.1
+    - Server Admin
+---
+= Upgrade MongoDB
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server.
+:icons: font
+:experimental:
+
+MongoDB is a database service used by CircleCI server. This page describes how to upgrade MongoDB to version `4.4.15`.
+
+MongoDB `3.6.22` is shipped with CircleCI server 4.1.
+
+[#prerequisites]
+== Prerequisites
+
+* Ensure backups have been taken. You will need a backup of MongoDB to restore to in case anything goes wrong during the upgrade progress
+* You are prepared to modify the `values.yaml`
+* `helm upgrade` will work from your system to upgrade the cluster
+* MongoDB root password is available
+
+[#upgrade]
+== Upgrade
+
+=== 1. Upgrade from MongoDB 3.6 to 4.0
+
+. Your `values.yaml` should contain the following snippet:
++
+```yaml
+mongodb:
+  image:
+    tag: 3.6.22-debian-9-r38
+```
++
+To begin the upgrade process, change the tag to `4.0.27-debian-9-r118`:
++
+```yaml
+mongodb:
+  image:
+    tag: 4.0.27-debian-9-r118
+```
+
+. Run `helm upgrade` to update your installation.
+
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
++
+```bash
+kubectl exec -it mongodb-0 -- mongo -u root -p <password>
+db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )
+```
+
+. You should get a `{ "ok" : 1 }` response from Mongo. Exit out of the MongoDB shell and pod.
+
+=== 2. Upgrade from MongoDB 4.0 to 4.2
+
+. Change the tag to `4.2.17-debian-10-r99`:
++
+```yaml
+mongodb:
+  image:
+    tag: 4.2.17-debian-10-r99
+```
+
+. Run `helm upgrade` to update your installation.
+
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
++
+```bash
+kubectl exec -it mongodb-0 -- mongo -u root -p <password>
+db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } )
+```
+
+. You should get `{ "ok" : 1 }` again. Exit out of the shell and pod.
+
+=== 3. Upgrade from MongoDB 4.2 to 4.4
+
+. Change the tag one more time to `4.4.15-debian-10-r8`:
++
+```yaml
+mongodb:
+  image:
+    tag: 4.4.15-debian-10-r8
+```
+
+. Run `helm upgrade` to update your installation.
+
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
++
+```bash
+kubectl exec -it mongodb-0 -- mongo -u root -p <password>
+db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
+```
+
+. Once you receive `{ "ok" : 1 }`, you have successfully upgraded your MongoDB to 4.4.15.

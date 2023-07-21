@@ -1,32 +1,67 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
 ---
 = Container runner installation (Kubernetes)
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's container runner.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+:container:
 
 This page describes how to install CircleCI's container runner.
 
-{% include snippets/runner-platform-prerequisites.adoc %}
+// {% include snippets/runner-platform-prerequisites.adoc %}
 
-[#installation-instructions]
-== Installation instructions
+[#prerequisites]
+== Prerequisites
 
-1. Add the container runner Helm repo by running `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
+{% include snippets/runner/container-runner-prereq.adoc %}
 
-2. Run `helm repo update`
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
 
-3. Run `kubectl create namespace circleci` to create the `circleci` Kubernetes namespace
+{% include snippets/runner/terms.adoc %}
 
-4. Create a file called `values.yaml` file containing the following:
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[.tab.container-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.container-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+--
+
+[#container-runner-installation]
+== 2. Container runner installation
+
+. Add the container runner Helm repo by running the following command:
++
+[source,shell]
+----
+helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm
+----
+
+. Next, run the following:
++
+[source,shell]
+----
+helm repo update
+----
+
+. Then, run the following command to create the `circleci` Kubernetes namespace:
++
+[source,shell]
+----
+kubectl create namespace circleci
+----
+
+. Create a file called `values.yaml` file containing the following:
 +
 ```yaml
 agent:
@@ -34,18 +69,23 @@ agent:
     namespace/my-rc:
       token: <resource_class_token>
 ```
+
+. Finally, run the following command:
 +
-5. Run `helm install container-agent container-agent/container-agent -n circleci -f values.yaml`
+[source,shell]
+----
+helm install container-agent container-agent/container-agent -n circleci -f values.yaml
+----
 
 [#container-runner-configuration-example]
 == Container runner configuration example
 
-Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation. The fields you must set for a specific job to run using your self-hosted runners are:
+Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation. The fields you must set for a specific job to run using your container runners are:
 
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CircleCI Docker image):
 
 ```yaml
 version: 2.1

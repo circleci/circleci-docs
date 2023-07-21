@@ -5,7 +5,7 @@ category: [administration]
 description: "An overview of security measures taken at CircleCI."
 --- 
 
-This document outlines security initiatives talken by CircleCI.
+This document outlines security initiatives taken by CircleCI.
 
 ## Overview
 {: #overview }

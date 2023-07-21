@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction
@@ -378,5 +377,5 @@ ifndef::pdf[]
 
 * xref:release-notes#[CircleCI server v4.1 release notes]
 * xref:../installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
-* xref:../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]

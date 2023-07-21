@@ -141,10 +141,10 @@ ifndef::env-gcp[]
 === EKS
 
 Amazon EKS クラスタの作成に関する詳細は、 
- https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+ https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
-. AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定] します。
-. https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
+. AWS CLI を https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-configure.html[設定] します。
+. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
 . 以下を実行してクラスタを作成します (`eksctl` and EKS を使った CloudFormation には 20 分以上かかる場合があります。)
 +
 [source,shell]
@@ -158,7 +158,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --cluster circleci-server
 ----
 
-NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限] に関しては AWS のドキュメントをご覧ください。
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/jp/iam/features/manage-permissions/?nc1=h_ls[IAM 権限] に関しては AWS のドキュメントをご覧ください。
 
 endif::env-gcp[]
 
@@ -171,7 +171,7 @@ GKE クラスタ の作成に関する詳細は、 https://cloud.google.com/kube
 
 CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server では、GKE Autopilot ではサポートされていない機能が必要です。
 
-. GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
+. GCP CLI を https://cloud.google.com/sdk/gcloud?hl=ja[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/deploy-app-cluster?hl=ja#defaults[設定] します。 これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
 +
 NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
 +
@@ -185,7 +185,9 @@ gcloud config set compute/region <REGION>
 ----
 . クラスタの作成
 +
-TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。 以下のコマンドでシンプルなクラスタをプロビジョニングします。
+TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。
++
+以下のコマンドでシンプルなクラスタをプロビジョニングします。
 +
 [source,shell]
 ----
@@ -195,9 +197,7 @@ gcloud container clusters create circleci-server \
   --workload-pool=<PROJECT_ID>.svc.id.goog
 ----
 +
-NOTE: kube コンテキストが新しいクラスタの認証情報で自動的にアップデートされます。
-+
-手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
+手動で kube コンテキストを更新する必要がある場合は、以下を実行します。 手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
 +
 [source,shell]
 ----
@@ -243,6 +243,20 @@ GKE クラスタを既にお持ちで Workload Identity をクラスタとノー
 ----
   gcloud container clusters update "<CLUSTER_NAME>" \
     --workload-pool="<PROJECT_ID>.svc.id.goog"
+----
+. 既存の GKE クラスタのノードプールを取得します。
++
+[source,shell]
+----
+gcloud container node-pools list --cluster "<CLUSTER_NAME>"
+----
+. 既存のノードプールを更新します。
++
+[source,shell]
+----
+gcloud container node-pools update "<NODEPOOL_NAME>" \
+    --cluster="<CLUSTER_NAME>" \
+    --workload-metadata="GKE_METADATA"
 ----
 . 既存の GKE クラスタのノードプールを取得します。
 +
@@ -315,7 +329,7 @@ ifndef::env-aws[]
 
 AWS で Elastic IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
 
-このコマンドを実行して、ロードバランサーがデプロイするすべてのサブネットのアドレスを生成する必要があります (デフォルト設定は 3)。
+このコマンドは、ロードバランサーが展開する各サブネット（デフォルト3）のアドレスを生成するために実行する必要があります。
 
 [source,shell]
 ----
@@ -481,9 +495,9 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 
 CircleCI Server v4.x では、ビルドしたアーティファクト、テスト結果、その他の状態のオブジェクトストレージをホストします。 以下のストレージオプションがサポートされています。
 
-* link:https://aws.amazon.com/s3/[AWS S3]
+* link:https://aws.amazon.com/jp/s3/[AWS S3]
 * link:https://min.io/[MinIO]
-* link:https://cloud.google.com/storage/[Google Cloud Storage]
+* link:https://cloud.google.com/storage?hl=ja[Google Cloud Storage]
 
 S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。
 
@@ -516,7 +530,7 @@ S3 で CircleCI を認証するには、サービスアカウントの IAM ロ�
 --
 **オプション 1:** IRSA を使用する場合
 
-以下は https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA についての AWS のドキュメント] の概要であり、CircleCI のインストールには十分です。
+以下は https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA についての AWS のドキュメント] の概要であり、CircleCI のインストールには十分です。
 
 . EKS クラスタの IAM OIDC ID プロバイダーを作成します。
 +
@@ -821,7 +835,7 @@ ifndef::env-aws[]
 [#create-a-gcp-bucket]
 ==== a.  GCP バケットを作成します。
 
-CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE のドキュメント] を参照してください。
+CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control?hl=ja[GKE のドキュメント] を参照してください。
 
 [source,shell]
 ----
@@ -831,7 +845,7 @@ gsutil mb gs://circleci-server-bucket
 [#set-up-authentication-gcp]
 ==== b.  認証を設定します
 
-ワークロードとポッドの認証で推奨される方法は、 https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
+ワークロードとポッドの認証で推奨される方法は、 https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
 
 . サービスアカウントを作成します。
 +

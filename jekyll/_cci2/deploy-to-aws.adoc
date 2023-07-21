@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Amazon Web Services.
 
@@ -55,47 +54,40 @@ Use the orb's `sync` command to deploy. Note the use of workflows to deploy only
 version: 2.1
 
 orbs:
-    aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your configuration
+  aws-s3: circleci/aws-s3@3.1.1 # use the AWS S3 orb in your configuration
 
 workflows: # Define a Workflow running the build job, then the deploy job
-    version: 2
-    build-deploy: # Make a workflow to build and deploy your project
+  build-deploy: # Make a workflow to build and deploy your project
     jobs:
-        - build
-        - deploy:
-            requires:
+      - build
+      - deploy:
+          requires:
             - build # Only run deploy job once the build job has completed
-            filters:
+          filters:
             branches:
-                only: main # Only deploy when the commit is on the Main branch
+              only: main # Only deploy when the commit is on the Main branch
 
 jobs: # Define the build and deploy jobs
-    build:
+  build:
     docker: # Use the Docker executor for the build job
-        - image: <image-name-and-tag> # Specify the Docker image to use for the build job
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    ... # build job steps omitted for brevity
-    deploy:
-    docker: # Use the Docker executor for the deploy job
-        - image: <image-name-and-tag>  # Specify the Docker image to use for the deploy job
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: <image-name-and-tag> # Specify the Docker image to use for the build job
     steps:
-        - checkout
-        - aws-s3/sync:
-            from: bucket
-            to: 's3://my-s3-bucket-name/prefix'
-            arguments: | # Optional arguments
+      - checkout # build job steps omitted for brevity
+  deploy:
+    docker: # Use the Docker executor for the deploy job
+      - image: <image-name-and-tag>  # Specify the Docker image to use for the deploy job
+    steps:
+      - checkout
+      - aws-s3/sync:
+          from: bucket
+          to: 's3://my-s3-bucket-name/prefix'
+          arguments: | # Optional arguments
             --acl public-read \
             --cache-control "max-age=86400"
-            overwrite: true # default is false
 ```
 
-[#deploy-to-aws-s3-with-2-configuration]
-== Deploy to S3 with 2.0 configuration
+[#deploy-to-aws-s3-without orbs]
+== Deploy to S3 without orbs
 
 [#create-iam-user-2]
 === 1. Create IAM user
@@ -142,16 +134,10 @@ jobs:
     build:
     docker: # Specify executor for running build job - this example uses a Docker container
         - image: <docker-image-name-tag> # Specify docker image to use
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     ... # build job steps omitted for brevity
     deploy:
     docker: # Specify executor for running deploy job
         - image: <docker-image-name-tag> # Specify docker image to use
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: # Install the AWS CLI if it is not already included in the docker image
             name: Install awscli

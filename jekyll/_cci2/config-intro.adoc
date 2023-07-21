@@ -10,12 +10,11 @@ contentTags:
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI config.yml file."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide gets you started with the CircleCI `config.yml` file.
 
-toc::[]
+
 
 [#getting-started-with-circleci-config]
 == Getting started with CircleCI config
@@ -41,6 +40,8 @@ CircleCI provides an on-demand shell to run commands. In this first example, you
 . Create a `.circleci` folder at the root of your project. Make sure the folder starts with a period so that CircleCI can identify it.
 . Create a `config.yml` file inside the `.circleci` folder and paste the following code:
 +
+{% include snippets/docker-auth.adoc %}
++
 [source,yaml]
 ----
 version: 2.1
@@ -48,9 +49,6 @@ jobs:
   build:
     docker:
       - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step
@@ -117,9 +115,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -168,9 +163,6 @@ jobs:
   Hello-World:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Saying Hello
@@ -181,9 +173,6 @@ jobs:
   Fetch-Code:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -195,9 +184,6 @@ jobs:
   Using-Node:
     docker:
       - image: cimg/node:17.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running the Node Container
@@ -270,9 +256,6 @@ jobs:
   Hello-World:
     docker:
       - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Saying Hello
@@ -283,9 +266,6 @@ jobs:
   Fetch-Code:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -297,9 +277,6 @@ jobs:
   Using-Node:
     docker:
       - image: cimg/node:17.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running the Node Container
@@ -308,9 +285,6 @@ jobs:
   Now-Complete:
     docker:
       - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Approval Complete
@@ -364,6 +338,17 @@ In this example, you have:
 * Implemented the `approval` job type to require a manual approval within your workflow.
 
 Using what you have learned above, you are ready to create some powerful pipelines.
+
+[#visual-studio-code-extension]
+## VS Code extension
+
+If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+
+The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
 
 [#see-also]
 == See also

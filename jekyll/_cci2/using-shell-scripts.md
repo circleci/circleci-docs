@@ -12,7 +12,7 @@ contentTags:
 ## Overview
 {: #overview }
 
-Configuring CircleCI often requires writing shell scripts. While shell scripting can give you finer control over your build, it is possible you will come across a few errors. You can avoid many of these errors by reviewing the best practices explained below.
+Configuring CircleCI often requires writing shell scripts. While shell scripting can give you finer control over your pipelines, it is possible you will come across a few errors. You can avoid many of these errors by reviewing the best practices explained below.
 
 ## Shell script best practices
 {: #shell-script-best-practices }
@@ -22,7 +22,7 @@ Configuring CircleCI often requires writing shell scripts. While shell scripting
 
 [ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
 
-Use the [Shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for the simplest way to add shellcheck to your `version: 2.1` configuration (remember to replace `x.y.z` with a valid version):
+Use the [ShellCheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for the simplest way to add ShellCheck to your configuration (remember to replace `x.y.z` with a valid version):
 
 ```yaml
 version: 2.1
@@ -46,17 +46,14 @@ jobs:
     ...
 ```
 
-Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
+Alternatively, ShellCheck can be configured without using the orb:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -68,7 +65,6 @@ jobs:
     ...
 
 workflows:
-  version: 2
   check-build:
     jobs:
       - shellcheck
@@ -80,7 +76,7 @@ workflows:
               only: main # only run build-job on main branch
 ```
 
-Take caution when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way, as in the example below.
+Take caution when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they can be exposed, as in the example below.
 {: class="alert alert-info" }
 
 As cautioned above, observe how the `tmp.sh` script file reveals too much.
@@ -104,7 +100,7 @@ You must set SECRET_ENV_VAR!
 + '[' -z 's3cr3t!' ']'
 ```
 
-### Set Error Flags
+### Set error flags
 {: #set-error-flags }
 
 There are several error flags you can set to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
@@ -131,10 +127,11 @@ In your terminal, navigate to the folder/location of the script you want to run.
 sh <name-of-file>.sh
 ```
 
-Occassionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform. For example, you can try to right-click on the script file and see if there is an option to make it executable. If you are on macOS or Linux, you can also look up how to use `chmod` commands to make a script file executable with different permissions.
+Occasionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform.
+
+For example, you can try to right-click on the script file and see if there is an option to make it executable. If you are on macOS or Linux, you can also look up how to use `chmod` commands to make a script file executable with different permissions.
 
 ## Additional resources
 {: #additional-resources }
-{:.no_toc}
 
 For more detailed explanations and additional techniques, see this [Writing Robust Bash Shell Scripts](https://www.davidpashley.com/articles/writing-robust-shell-scripts) blog post on writing robust shell scripts.

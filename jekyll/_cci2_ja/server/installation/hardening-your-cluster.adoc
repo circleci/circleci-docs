@@ -287,7 +287,7 @@ vm_service:
 [#private-ips-only]
 === プライベート IP のみ
 
-`assignPublicIP` オプションを false に設定すると、https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
+`assignPublicIP` オプションを false に設定すると、link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
 VM セキュリティグループの受信ルールでは、インストール環境のセキュリティーを強化するために以下のルールを作成できます。
 

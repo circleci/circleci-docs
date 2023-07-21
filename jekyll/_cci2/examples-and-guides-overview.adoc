@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Resources for learning CircleCI using examples.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
 
@@ -49,5 +48,5 @@ Use the tutorial associated with your platform to learn about the customization 
 
 [#next-steps]
 == Next steps
-
 - Read the <<sample-config#,Sample config.yml Files>> document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
+- Refer to the xref:configuration-reference#[Configuration reference page] for detailed syntax.

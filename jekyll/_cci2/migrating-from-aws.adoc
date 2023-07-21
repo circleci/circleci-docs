@@ -1,16 +1,16 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server 3.x
+  - Server v4.x
+  - Server v3.x
 ---
 = Migrate from AWS
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from AWS CodeCommit to CircleCI.
 
@@ -18,10 +18,11 @@ NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == Source control setup
-If you are using AWS Code Commit, you will first need to migrate your source code to GitHub or Bitbucket. See the following for details on how to import your code:
+If you are using AWS CodeCommit, you will first need to migrate your source code to GitHub, Bitbucket or GitLab. See the following for details on how to import your code:
 
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
+* link:https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
+* link:https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository[Bitbucket]
+* link:https://docs.gitlab.com/ee/user/project/import/repo_by_url.html[GitLab]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -46,7 +47,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub, Bitbucket or GitLab, you can start creating a project in CircleCI using the xref:getting-started#[Getting Started guide].
 
 [#build-configuration]
 == Build configuration
@@ -63,6 +64,8 @@ The AWS CodeBuild and CircleCI configurations will be different. It may be helpf
 
 [#configuration-comparison]
 == Configuration comparison
+
+{% include snippets/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -109,9 +112,6 @@ jobs:
   job1:
     docker:
       - image: node:10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ----
 
 2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially. If you are running concurrent commands, you are probably using CodePipeline and multiple CodeBuild projects.
@@ -147,7 +147,7 @@ phases:
 a|
 [source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -164,7 +164,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2

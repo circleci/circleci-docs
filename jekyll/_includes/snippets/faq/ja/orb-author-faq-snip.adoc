@@ -1,0 +1,100 @@
+[#possible-to-delete-orb]
+=== 作成した Orb を削除できますか？
+
+いいえ。 Orb はデフォルトで公開されており、１つのバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において同じ動作をすると想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
+
+ただし、Orb を link:https://circleci.com/developer/orbs[Orb レジストリ]から除外することは可能です。 除外した Orb は、API または CLI からは見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば現在はメンテナンスを行っていない Orb などに適しています。
+
+```shell
+circleci orb unlist <namespace>/<orb> <true|false> [flags]
+```
+
+WARNING: 現在、CircleCI CLI コマンド `orb source` は、リストされているかいないかにかかわらず、プライベート Orb
+ に対して機能しません。 そのため、プライベート Orb 名が除外前にどこにも記載されていない場合、その Orb を Orb レジストリや CircleCI CLI で見つけることはできません。 この問題が発生したと思われる場合は、 link:https://support.circleci.com/hc/ja[サポートチケット]を作成してください。
+
+[#protect-users-api-tokens]
+=== ユーザーの API トークンなどの機密情報を保護するにはどうしたらよいですか？
+
+API キーのパラメーターとして env_var_name パラメーター型を使用してください。 このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
+
+このトピックについてもっと読みたい方は、xref:reusing-config#environment-variable-name[環境変数名]と xref:orbs-best-practices#[ベストプラクティス] のページを参照してください。
+
+[#require-user-to-add-an-environment-variable]
+=== ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
+
+環境変数名のパラメーターを作成してください。 変更できない静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
+
+必須の環境変数はバリデーションすることをお勧めします。 詳しくは、xref:orbs-best-practices#commands[Orb author ガイド]をご覧ください。
+
+このトピックについてもっと読みたい方は、xref:reusing-config#environment-variable-name[環境変数名]と xref:orbs-best-practices#[ベストプラクティス] のページを参照してください。
+
+[#what-language-to-write-orb]
+=== Orb の記述にはどの言語を使用できますか。
+
+Orbsは、xref:introduction-to-yaml-configurations#[CircleCI YAML コンフィグ]のパッケージです。
+
+CircleCI Orb では、xref:reusing-config#[再利用可能な CircleCI コンフィグファイル]をパッケージ化しています。 例えば、xref:reusing-config#authoring-reusable-commands[コマンド は特定の] xref:executor-intro#[Executor]ジョブ 内で実行できますが、その Executor は、カスタムジョブでコマンドを使用する場合はユーザーによって、xref:orb-concepts#jobs[再利用可能なジョブ]を使用する場合は Orb 作成者によって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
+
+[#what-programming-languages-command-logic]
+=== コマンド ロジックの記述にはどのプログラミング言語を使用できますか？
+
+ 移植性と汎用性に最も優れているのは、POSIX 準拠の Bash です。 Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールも自由に実行できます。
+
+---
+
+**Bash とは？**
+
+Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash は、ネイティブの xref:configuration-reference#run[run] コマンドを使用して直接、簡単に記述できます。 MacOS と Linux のデフォルトのシェルは Bash になります。
+
+**Ruby**
+
+```yaml
+steps:
+  - run:
+    name: Check Ruby shell
+    shell: ruby
+    command: puts 'hi'
+```
+
+**Node**
+
+```yaml
+steps:
+  - run:
+    name: Check Node shell
+    shell: node
+    command: console.log('node')
+```
+
+**Python**
+
+```yaml
+steps:
+  - run:
+    name: Check Python shell
+    shell: python3
+    command: print('python')
+```
+
+**バイナリ**
+
+このオプションは、可能な限り使用しないことを強くお勧めします。 時に、CLI ツールなどのリモート バイナリ ファイルをフェッチしなければならない場合があります。 これらのバイナリは、パッケージ マネージャーからフェッチするか、可能な場合は GitHub リリースなどの VCS でホスティングする必要があります。 Homebrew を link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-serverless#commands-install[AWS Serverless Orb] の一部としてインストールする例を以下に示します。
+
+```yaml
+steps:
+  - run:
+    command: >
+      curl -fsSL
+      "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
+      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> "$BASH_ENV"
+    name: Install Homebrew (for Linux)
+```
+
+[#should-i-create-a-command-or-a-job]
+=== コマンドとジョブのどちらを作成するべきですか？
+
+どちらでもかまいませんが、実行したいタスクによります。
+
+Orb のxref:orb-concepts#commands[コマンド]は、ユーザーか Orb 開発者がジョブ内で何らかのアクションを実行するために使用します。 コマンド自体は、自身が含まれているジョブを認識しませんが、ユーザーは自由自在にコマンドを使用できます。 コマンドは、CLI アプリケーションを自動的にインストールしたり、インストールと認証を実行したりする場合などに便利です。
+
+xref:orb-concepts#[ジョブ]は、特定の実行環境内のステップやジョブの集まりを定義したものです。 ジョブでは通常、実行環境と実行対象のステップを指定するので、自由度はあまりありません。 ジョブは、デプロイなどのタスクを自動化する場合に便利です。 デプロイ ジョブでは、_Python_ などの一般的な実行プラットフォームを選択するだけで、ユーザー コードのチェックアウト、CLI のインストール、デプロイ コマンドの実行を自動的に完了できます。ユーザーが追加の設定を行う必要はほとんど、あるいはまったくありません。
