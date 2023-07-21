@@ -109,7 +109,9 @@ To specify the Docker version, you can set it as a `version` attribute:
           version: 20.10.11
 ```
 
-CircleCI supports multiple versions of Docker. The following are the available versions:
+CircleCI supports multiple versions of Docker.
+
+For **x86** architecture, the following versions are available:
 
 - `20.10.24`
 - `20.10.23` (default)
@@ -122,6 +124,11 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `20.10.6`
 - `20.10.2`
 - `19.03.13`
+
+For **Arm**, the following versions are supported:
+
+- `default`
+- `edge`
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
