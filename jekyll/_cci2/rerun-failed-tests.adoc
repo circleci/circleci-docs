@@ -132,6 +132,9 @@ gem 'rspec_junit_formatter'
  - run:
     command: |
       circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
+
+ - store_test_results:
+    ...
 ```
 
 . Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
@@ -146,6 +149,9 @@ gem 'rspec_junit_formatter'
 - run:
     command: |
     circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out ~/cucumber/junit.xml" --verbose --split-by=timings
+
+- store_test_results:
+    ...
 ```
 
 . Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
@@ -204,8 +210,8 @@ You can also add it to your `jest.config.js` file by following these link:https:
       npx jest --listTests | circleci tests run --command=“JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
-  - store_test_results:
-      path: ./reports/
+- store_test_results:
+    path: ./reports/
 ```
 
 . Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
@@ -224,6 +230,9 @@ You can also add it to your `jest.config.js` file by following these link:https:
       pnpm run serve &
       TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
       echo "$TESTFILES" | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
+
+ - store_test_results:
+    ...
 ```
 
 . Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
@@ -257,6 +266,9 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
     echo "Prepared arguments for Gradle: $GRADLE_ARGS"
 
     ./gradlew test $GRADLE_ARGS
+
+- store_test_results:
+    ...
 ```
 
 . Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
@@ -306,17 +318,22 @@ The snippet above will write the list of test file names to `files.txt`.  On a n
 
 Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this, get the list of test filenames first, change the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
 
-[source,yaml]
-----
-# Get the test file names, write them to files.txt, and split them by historical timing data
-circleci tests glob "**/test*.py" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
-# Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
-cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
-cat circleci_test_files.txt
-TESTFILES=$(cat circleci_test_files.txt)
-# Run the tests (TESTFILES) with the reformatted test file names
-pipenv run coverage run manage.py test --parallel=8 --verbosity=2 $TESTFILES
-----
+```
+- run:
+    name: Run tests
+    command: |
+      # Get the test file names, write them to files.txt, and split them by historical timing data
+      circleci tests glob "**/test*.py" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
+      # Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
+      cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
+      cat circleci_test_files.txt
+      TESTFILES=$(cat circleci_test_files.txt)
+      # Run the tests (TESTFILES) with the reformatted test file names
+      pipenv run coverage run manage.py test --parallel=8 --verbosity=2 $TESTFILES
+
+- store_test_results:
+    ...
+```
 
 [#known-limitations]
 == Known limitations
