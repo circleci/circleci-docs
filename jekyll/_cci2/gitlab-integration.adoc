@@ -449,16 +449,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-^| Restore project version
-^| icon:check-circle[]
-^|
-^|
-
-^| Delete project canary
-^| icon:check-circle[]
-^|
-^|
-
 
 | *Contexts*
 |
@@ -622,16 +612,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
-
-^| Restore project version
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
-
-^| Delete project canary
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
 
 ^| Manage project
 ^| icon:check-circle[]
