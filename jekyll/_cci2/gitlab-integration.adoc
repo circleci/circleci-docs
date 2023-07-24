@@ -449,7 +449,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-
 | *Contexts*
 |
 |
