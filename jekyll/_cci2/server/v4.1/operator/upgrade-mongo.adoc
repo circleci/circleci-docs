@@ -23,8 +23,13 @@ MongoDB `3.6.22` is shipped with CircleCI server 4.1.
 * `helm upgrade` will work from your system to upgrade the cluster
 * MongoDB root password is available
 
-[#upgrade]
-== Upgrade
+[#script-upgrade]
+== Scripted Upgrade
+We have created a shell script which may be used to upgrade your cluster's MongoDB instance link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-4.4[here].
+If you wish, you may use the following instructions to manually upgrade your cluster's MongoDB
+
+[#manual-upgrade]
+== Manual Upgrade
 
 === 1. Upgrade from MongoDB 3.6 to 4.0
 
