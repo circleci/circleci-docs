@@ -268,7 +268,7 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
     ./gradlew test $GRADLE_ARGS
 
 - store_test_results:
-    ...
+    path: build/test-results/test
 ```
 
 . Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
@@ -332,7 +332,7 @@ Django takes as input test filenames with a format that uses dots ("."), however
       pipenv run coverage run manage.py test --parallel=8 --verbosity=2 $TESTFILES
 
 - store_test_results:
-    ...
+    path: test-results
 ```
 
 [#known-limitations]
