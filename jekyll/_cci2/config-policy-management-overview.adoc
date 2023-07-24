@@ -383,6 +383,7 @@ policy["name"] = "example_mistake"
 
 enable_hard["enforce_not_large_resource"]
 
+# check every job in input config, and if any job has resource_class equal to "large" set a violation message.
 enforce_not_large_resource[reason] {
   some job_name, job in input.jobs
   job.resource_class == "large"
@@ -421,12 +422,12 @@ jobs:
     parameters:
       size:
         type: string
-    resource_class: << parameters.size >>
+    resource_class: << parameters.size >> # parameterized definition of resource_class
 
 workflows:
   main:
     jobs:
-      - test:
+      - test: # invokation of parameterized job "test" with a size equal to "large". 
           size: large
 ----
 
@@ -440,6 +441,7 @@ The rule can be modified as follows:
 
 [source,rego]
 ----
+# check all jobs in the compiled config and if any use a resource_class equal to "large" return a violation message.
 enforce_not_large_resource[reason] {
   some job_name, job in input._compiled_.jobs
   job.resource_class == "large"
@@ -463,10 +465,11 @@ Consider another example to illustrate this.
 ----
 import future.keywords
 
-policy_name["example"]
+policy_name["example_mistake"]
 
 enable_hard["ban_bad_orb_namespace"]
 
+# check if any orb is namespaced with `bad`. If so, set a violation message for each of those orbs.
 ban_bad_orb_namespace[reason] {
   some key, orb_ref in input.orbs
   startswith(orb_ref, "bad/")
@@ -479,13 +482,14 @@ ban_bad_orb_namespace[reason] {
 ----
 version: 2.1
 
+# top level pipeline parameters that can have a default set, or be modified by API based pipeline triggers.
 parameters:
   evil_orb:
     type: string
     default: bad/orb
 
 orbs:
-  security: << pipeline.parameters.evil_orb >>
+  security: << pipeline.parameters.evil_orb >> # parameterized orb definition
 ----
 
 In the above example, the rule does not raise a violation because the string `<< pipeline.parameters.evil_orb >>` does not have the `bad/` prefix that the policy aims to detect.
@@ -503,13 +507,15 @@ policy_name["example"]
 
 enable_hard["ban_bad_orb_namespace"]
 
+# checks for orbs that are namespaced in "bad/" and set a violation for each orb.
+# also detects and raises a violation for any orb defined with a parameter.
 ban_bad_orb_namespace = { reason |
   some key, orb_ref in input.orbs
   startswith(orb_ref, "bad/")
   reason := sprintf("orb %s is defined with a banned namespace: bad", [key])
 } | { reason |
   some key, orb_ref in input.orbs
-  config.is_parameterized_expression(orb_ref)
+  config.is_parameterized_expression(orb_ref) # helper for detecting parameterized expressions.
   reason := sprintf("orb %s is not allowed to contain a parameterized expression", ["key"])
 }
 ----
@@ -539,6 +545,7 @@ policy_name["allowlist"]
 
 enable_hard["restrict_resource_classes"]
 
+# check all jobs in config input and if the job is not "small" or "large" set a violation message.
 restrict_resource_classes[reason] {
   some job_name, job in input.jobs
   not job.resource_class in {"small", "large"}
