@@ -4,6 +4,7 @@ description: CircleCI プロジェクト設定の設定ファイルのポリシ�
 contentTags:
   platform:
   - クラウド
+  - Server v4.x
 ---
 = 設定ファイルのポリシー管理機能の概要
 :page-layout: classic-docs
