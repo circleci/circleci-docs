@@ -50,7 +50,7 @@ The Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go) contains a set of pr
 To add the orb to your config, insert:
 ```yaml
 orbs:
-  python: circleci/go@1.7.3
+  go: circleci/go@1.7.3
 ```
 
 **Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
