@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Using the Arm execution environment"
+title: "Using the Arm VM execution environment"
 description: "Learn how to configure a your jobs to run in the Arm execution environment."
 contentTags:
   platform:
@@ -9,7 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-You can access the Arm execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.
+You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -95,6 +95,14 @@ WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong a
 ```
 
 If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
+
+## Arm on Docker
+{: #arm-on-docker }
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
+{: class="alert alert-caution"}
+
+For further information on using Arm with the Docker execution environment, see the [Using the Docker execution enviornment](/docs/using-docker/#arm) page.
 
 
 ## Learn More

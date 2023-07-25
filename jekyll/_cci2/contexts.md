@@ -240,6 +240,9 @@ If a deleted context was being used by a job in a workflow, the job will start t
 ## Context management with the CLI
 {: #context-management-with-the-cli}
 
+**Using GitLab?** Managing Contexts via the CircleCI CLI is not currently supported for GitLab projects.
+{: class="alert alert-info"}
+
 While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several [context-oriented commands](https://circleci-public.github.io/circleci-cli/circleci_context.html).
 
 - `create` - Create a new context
