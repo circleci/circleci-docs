@@ -394,7 +394,7 @@ en:
             link: rename-organizations-and-repositories
 
   - name: Manage config policies
-    icon: icons/sidebar/key.svg
+    icon: icons/sidebar/lock.svg
     children:
       - name: Overview
         children:
@@ -1529,7 +1529,7 @@ ja:
 
   - name: Manage config policies
     i18n_name: 設定ファイルのポリシー管理
-    icon: icons/sidebar/key.svg
+    icon: icons/sidebar/lock.svg
     children:
       - name: Overview
         i18n_name: 設定ファイルのポリシー管理
