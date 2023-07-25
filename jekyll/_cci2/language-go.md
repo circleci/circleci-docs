@@ -94,7 +94,7 @@ In this quickstart guide, we will deploy to [Heroku](https://www.heroku.com/). W
 
 ```yaml
 orbs:
-  python: circleci/python@2.0.3
+  go: circleci/go@1.7.3
   heroku: circleci/heroku@1.2.6
 ```
 
@@ -146,7 +146,7 @@ workflows:
 ### 6. Conclusion
 {: #conclusion }
 
-You just set up a Python app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
+You just set up a Go app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
 
 ## Full configuration file
 {: #full-configuration-file-new }
@@ -154,26 +154,29 @@ You just set up a Python app to build on CircleCI. Check out your project’s [p
 ```yaml
 version: 2.1
 orbs:
-  python: circleci/python@2.0.3
+  go: circleci/go@1.7.3
   heroku: circleci/heroku@1.2.6
 
 jobs:
   build_and_test: # this can be any name you choose
-    executor: python/default
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.19.2' # Specify a version tag
     steps:
-      - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      - run:
-          name: Run tests
-          command: python -m pytest
+      - checkout # checkout source code
+      - go/load-cache # Load cached Go modules.
+      - go/mod-download # Run 'go mod download'.
+      - go/save-cache # Save Go modules to cache.
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
       - persist_to_workspace:
           root: ~/project
-          paths:
-            - .
+          paths: .
 
   deploy: # this can be any name you choose
-    executor: python/default
+    executor: heroku/default
     steps:
       - attach_workspace:
           at: ~/project
