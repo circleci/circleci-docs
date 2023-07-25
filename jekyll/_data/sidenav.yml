@@ -1525,7 +1525,7 @@ ja:
           - name: Use the CLI for config and policy development
             link: ja/use-the-cli-for-config-and-policy-development
             i18n_name: CLIを使用したポリシー作成
-          - name: Config policies for self-hosted runner (Open preview)
+          - name: Config policies for self-hosted runner
             link: ja/config-policies-for-self-hosted-runner
             i18n_name: 設定ファイルのポリシーをセルフホストランナーに適用する
           - name: Manage contexts with config policies
@@ -1534,7 +1534,7 @@ ja:
       - name: Reference
         i18n_name: リファレンス
         children:
-          - name: Config policy reference (Open preview)
+          - name: Config policy reference
             link: ja/config-policy-reference
             i18n_name: リファレンス
 
