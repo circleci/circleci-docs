@@ -349,13 +349,16 @@ The following helpers are imported using `import data.circleci.utils`
 This function checks any value and returns true if it is a string that contains a parameter expression, otherwise it returns false.
 
 [#definition-is-parameterized-expression]
-=== Definition
+==== Definition
 
 [source,rego]
 ----
 is_parameterized_expression(value)
 return boolean
 ----
+
+[#usage-is-parameterized-expression]
+==== Usage
 
 [source,rego]
 ----

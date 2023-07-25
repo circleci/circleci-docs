@@ -374,7 +374,7 @@ To write highly effective policies, it is essential to reference the _compiled_ 
 === Example
 Consider the following example policy and configuration:
 
-.Policy:
+**Policy**
 [source,rego]
 ----
 import future.keywords
@@ -391,7 +391,7 @@ enforce_not_large_resource[reason] {
 }
 ----
 
-.Configuration with reusable executor:
+**Configuration with reusable executor**
 [source,yaml]
 ----
 version: 2.1
@@ -407,12 +407,13 @@ jobs:
     executor: lg-executor
 ----
 
-In the above example, the policy would **not trigger**. The policy inspects `jobs` and does not find a `resource_class == "large"`. The policy, in this case, is bypassed.
+In the above example, the policy is bypassed and will **not trigger**. The policy inspects `jobs` and does not find a `resource_class == "large"`.
 
-However, once the config is compiled, the job test will have a resource_class of large.
+This is problematic becaise once the configuration is compiled, the job `test` will have a `resource_class == "large"`.
 
-Another way this policy could be unintentionally bypassed is by using parameters. Consider the following `config.yml`, which uses a parameter to set the resource class for an executor:
+Another way this policy could be unintentionally bypassed is by using parameters. Consider the following configuration, which uses a parameter to set the resource class for an executor:
 
+**Configuration using a parameter**
 [source,yaml]
 ----
 version: 2.1
@@ -427,18 +428,17 @@ jobs:
 workflows:
   main:
     jobs:
-      - test: # invokation of parameterized job "test" with a size equal to "large". 
+      - test: # invokation of parameterized job "test" with a size equal to "large".
           size: large
 ----
 
-The same situation applies as for the first configuration presented above. The policy inspects the jobs and does not find a `resource_class == "large"`, but instead finds << parameters.size >>, which is acceptable for the policy.
+The same situation applies as for the first configuration presented above. The policy inspects the jobs and does not find a `resource_class == "large"`, but instead finds `<< parameters.size >>`, which is acceptable for the policy.
 
 However, once the config is compiled, the job test will have a `resource_class == "large"`.
 
-To resolve both of these issues, it is important to acknowledge that we want to apply the policy to all jobs, which is a configuration `version: 2.0` construct, and write the policy to target the compiled version accordingly.
+To resolve both of these issues, it is important to acknowledge that we want to apply the policy to all jobs, which is a configuration `version: 2.0` construct, and write the policy to target the compiled version accordingly, as follows:
 
-The rule can be modified as follows:
-
+**Policy rule that inspects compiled configuration**
 [source,rego]
 ----
 # check all jobs in the compiled config and if any use a resource_class equal to "large" return a violation message.
@@ -449,18 +449,16 @@ enforce_not_large_resource[reason] {
 }
 ----
 
-Notice that we are now validating `input._compiled_.jobs`. Regardless of parameters or reusable blocks (executors in this example), the policy is applied to all compiled jobs, and functions as intended.
+Notice the rule now validates `input._compiled_.jobs`. Regardless of parameters or reusable blocks (executors in this example), the policy is applied to all compiled jobs and functions as intended.
 
-[#policing-2.1-constructs]
+[#policing-config-constructs]
 === Policing config 2.1 constructs
 
-Often, we need to write policies . Writing policies against config version 2.1 constructs (orbs, executors, and commands) introduces the same parameterization challenges as described in the previous section.
+Writing policies against config version 2.1 constructs (orbs, executors, jobs, commands) introduces the same parameterization challenges as described in the previous section. However, we cannot rely on writing policies against the compiled input because these constructs _do not exist_ in configuration `version 2.0`.
 
-However, we cannot rely on writing policies against the compiled input because these constructs _do not exist_ in configuration version 2.0.
+Consider another example to illustrate this:
 
-Consider another example to illustrate this.
-
-.Policy to ban orbs from a specific namespace:
+**Policy to ban orbs from a specific namespace**
 [source,rego]
 ----
 import future.keywords
@@ -477,7 +475,7 @@ ban_bad_orb_namespace[reason] {
 }
 ----
 
-.Configuration:
+**Configuration**
 [source,yaml]
 ----
 version: 2.1
@@ -496,8 +494,9 @@ In the above example, the rule does not raise a violation because the string `<<
 
 We cannot rely on `input._compiled_` because orbs are compiled away at that stage.
 
-The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly.
+The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:config-policy-reference#is_parameterized_expression[helper].
 
+**Policy to ban orbs from a specific namespace and detect parameterized orb references**
 [source,rego]
 ----
 import future.keywords
@@ -526,9 +525,9 @@ ban_bad_orb_namespace = { reason |
 Policies and their rules can be categorized into two main types:
 
 * **Allowlists**: Assert that the input must match a specific value, or fall within a defined set of values
-* **Banlists**: Assert that the input must not match a particular value or be within a set of prohibited values
+* **Banlists**: Assert that the input must not match a particular value nor be within a set of prohibited values
 
-When working with configuration version 2.1 constructs and parameterization, it is crucial to understand how these two rule types interact with your policies.
+When working with configuration `version 2.1` constructs and parameterization, it is crucial to understand how these two rule types interact with your policies.
 
 * **Banlist** rules are susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during config compilation, the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `input._compiled_` or detect parameterization and handle it appropriately.
 
@@ -536,7 +535,9 @@ When working with configuration version 2.1 constructs and parameterization, it 
 
 Consider an example to illustrate this:
 
-.Policy:
+NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes should target the compiled input (`input._compiled_`). This ensures proper validation against the resolved values.
+
+**Policy using an allow list to restrict resource classes**
 [source,rego]
 ----
 import future.keywords
@@ -553,7 +554,7 @@ restrict_resource_classes[reason] {
 }
 ----
 
-.Configuration:
+**Configuration**
 [source,yaml]
 ----
 version: 2.1
@@ -572,11 +573,9 @@ workflows:
           size: small
 ----
 
-The rule (`restrict_resource_classes`) raises a violation because `<< parameters.size >>` does not conform to the allowlist values of small or large. It is worth noting that even if this configuration would compile to a job that uses the correct `small` resource class, the violation is still triggered.
+The rule (`restrict_resource_classes`) raises a violation because `<< parameters.size >>` does not conform to the allowlist values of `small` or `large`. Even if this configuration would compile to a job that uses the correct `small` resource class, the violation is still triggered.
 
-When working with allowlist-type rules, it is essential to recognize how they can restrict parameterization, and strike the right balance between configurational reusability and rule enforcement.
-
-Please note that this example is somewhat artificial, as the appropriate policy for enforcing job resource classes should target the compiled input (`input._compiled_`). This ensures proper validation against the resolved values.
+When working with allowlist-type rules, it is essential to recognize how they can restrict parameterization, so you can strike the right balance between configurational reusability and rule enforcement.
 
 [#use-sets-and-variables]
 == Use sets and variables
