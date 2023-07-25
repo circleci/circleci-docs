@@ -5,13 +5,13 @@ contentTags:
   - Cloud
   - Server v4.x
 ---
-= Config policies for self-hosted runner (Open-preview)
+= Config policies for self-hosted runner
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan.
 
 Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
 

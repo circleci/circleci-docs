@@ -5,13 +5,13 @@ contentTags:
   - Cloud
   - Server v4.x
 ---
-= Use the CircleCI CLI for config and policy development - Open preview
+= Use the CircleCI CLI for config and policy development
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan.
 
 CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 

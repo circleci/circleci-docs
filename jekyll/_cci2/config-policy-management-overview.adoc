@@ -5,13 +5,13 @@ contentTags:
   - Cloud
   - Server v4.x
 ---
-= Config policies overview - Open preview
+= Config policies overview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan.
 
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
