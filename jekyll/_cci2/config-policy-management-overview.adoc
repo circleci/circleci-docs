@@ -364,6 +364,8 @@ disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
 [#policies-and-parameterization]
 == Config policies with parameterization and reusable config
 
+CAUTION: **Using server?** The ability to write policies that inspect compiles config (`input._compiled_`) discussed in this section is currently unsupported on CircleCI server
+
 Writing policies for CircleCI `version 2.1` configuration introduces some challenges due to the parameterization and reusable configuration options. To read more about these options, see the xref:reusing-config#[Reusable config reference guide].
 
 Before executing any pipelines, config `version 2.1` is compiled into config `version 2.0`. This compilation expands all parameters and reusable config blocks (jobs, executors, commands, orbs) into workflows and jobs.
