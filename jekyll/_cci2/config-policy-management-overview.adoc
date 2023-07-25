@@ -364,7 +364,7 @@ disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
 [#policies-and-parameterization]
 == Config policies with parameterization and reusable config
 
-CAUTION: **Using server?** The ability to write policies that inspect compiles config (`input._compiled_`) discussed in this section is currently unsupported on CircleCI server
+CAUTION: **Using server?** The ability to write policies that inspect compiled config (`input._compiled_`) discussed in this section is currently unsupported on CircleCI server
 
 Writing policies for CircleCI `version 2.1` configuration introduces some challenges due to the parameterization and reusable configuration options. To read more about these options, see the xref:reusing-config#[Reusable config reference guide].
 
@@ -411,7 +411,7 @@ jobs:
 
 In the above example, the policy is bypassed and will **not trigger**. The policy inspects `jobs` and does not find a `resource_class == "large"`.
 
-This is problematic becaise once the configuration is compiled, the job `test` will have a `resource_class == "large"`.
+This is problematic because once the configuration is compiled, the job `test` will have a `resource_class == "large"`.
 
 Another way this policy could be unintentionally bypassed is by using parameters. Consider the following configuration, which uses a parameter to set the resource class for an executor:
 
