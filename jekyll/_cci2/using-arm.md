@@ -55,7 +55,7 @@ For pricing and plans information, see the [resource class pricing overview](htt
 
 Arm resources are accessible by using the machine executor when using one of the following images:
 
-#### Ubuntu 20.04 - Focal
+#### Ubuntu 20.04 - focal
 * `ubuntu-2004:current` - most recent, recommended for all users
 * `ubuntu-2004:2023.07.1`
 * `ubuntu-2004:2023.04.2`
@@ -72,7 +72,7 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
 
-#### Ubuntu 22.04 - Jammy
+#### Ubuntu 22.04 - jammy
 * `ubuntu-2204:current` - most recent, recommended for all users
 * `ubuntu-2204:2023.07.1`
 * `ubuntu-2204:2023.04.2`
