@@ -498,7 +498,7 @@ If your workflow has an approval job, and a failed job containing failed tests t
 [#Error-can-not-rerun-failed-tests-no-failed-tests-could-be-found]
 === Error: can not rerun failed tests: no failed tests could be found
 
-If your job that has failed uploads test results but there are no failed tests and `circleci tests run` was used, the "rerun failed tests" button will be clickable.  However, upon clicking, the new workflow will fail with the following message: `Error: can not rerun failed tests: no failed tests could be found"`.
+If your job that has failed uploads test results but there are no failed tests and `circleci tests run` was used, the "rerun failed tests" button will be clickable.  However, upon clicking, the new workflow will fail with the following message: `Error: can not rerun failed tests: no failed tests could be found`.
 
 To resolve this error, use "Rerun workflow from failed" to rerun all tests.  "Rerun failed tests" will only work if there are failed tests being reported in the "Tests" tab.
 
