@@ -539,7 +539,7 @@ Consider an example to illustrate this:
 
 NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes should target the compiled input (`input._compiled_`). This ensures proper validation against the resolved values.
 
-**Policy using an allow list to restrict resource classes**
+**Policy using an allowlist to restrict resource classes**
 [source,rego]
 ----
 import future.keywords
