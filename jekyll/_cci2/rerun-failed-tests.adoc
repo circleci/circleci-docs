@@ -16,11 +16,11 @@ Use the rerun failed tests feature to only rerun a subset of tests instead of re
 [#introduction]
 == Introduction
 
-When you select **rerun failed tests** (see image below), only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.
+When you select **rerun failed tests** (see image below), a new workflow is triggered where only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.  
 
 Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[rerun your workflow from failed]. This type of rerun executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.
+This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.  
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
