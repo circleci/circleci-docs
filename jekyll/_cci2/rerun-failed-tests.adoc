@@ -430,7 +430,7 @@ jobs:
           paths:
             - cover.out
           when: always
-      # Needed for to rerun failed tests
+      # Needed to rerun failed tests
       - store_test_results:
           path: junit.xml
           when: always
