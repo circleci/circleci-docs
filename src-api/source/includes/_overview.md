@@ -128,13 +128,13 @@ Where:
 * api - the class being called.
 * v1.1 - the API version.
 
-## Version Control Systems
+### Version Control Systems
 
 ```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 ```
 
-New with v1.1 of the API, for endpoints under /project you will now need to tell CircleCI what version control system type your project uses. You may currently select either ‘github’ or ‘bitbucket’. The command for recent builds for a project would be formatted like the example shown in the right pane.
+New with v1.1 of the API, for endpoints under `/project`` you will now need to tell CircleCI what version control system type your project uses. You may currently select either ‘github’ or ‘bitbucket’. The command for recent builds for a project would be formatted like the example shown in the right pane.
 
 ## Rate Limiting
 
