@@ -228,7 +228,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
     command: |
       mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
       pnpm run serve &
-      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      TESTFILES=$(circleci tests glob "specs/e2e/**/*.spec.ts")
       echo "$TESTFILES" | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
 
  - store_test_results:
