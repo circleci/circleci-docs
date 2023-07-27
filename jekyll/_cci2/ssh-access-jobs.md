@@ -14,7 +14,7 @@ Troubleshoot problems in a job using **Rerun job with SSH**. Using this feature 
 ## Introduction
 {: #introduction }
 
-**Using GitLab?** SSH reruns will only work for GitLab-based projects if your CircleCI user account also has an associated GitHub or Bitbucket integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will add functionality to allow you to manage SSH keys for your GitLab account to enable SSH rerun functionality without a GitHub or Bitbucket account.
+**Using GitLab?** SSH reruns are not currently supported for GitLab projects.
 {: class="alert alert-info" }
 
 CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.

@@ -307,7 +307,7 @@ jobs:
 ## SSH into your Windows build
 {: #ssh-into-your-windows-build }
 
-**Using GitLab?** SSH reruns will only work for GitLab-based projects if your CircleCI user account also has an associated GitHub or Bitbucket integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will add functionality to allow you to manage SSH keys for your GitLab account to enable SSH rerun functionality without a GitHub or Bitbucket account.
+**Using GitLab?** SSH reruns are not currently supported for GitLab projects.
 {: class="alert alert-info" }
 
 It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:
