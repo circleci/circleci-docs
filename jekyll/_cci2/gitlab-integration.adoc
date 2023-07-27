@@ -757,7 +757,7 @@ GitLab integrations do not currently support the **Stop Building** option that c
 [#ssh-rerun]
 === SSH rerun
 
-SSH reruns are not currently supported for GitLab projects.
+SSH reruns are not currently supported for GitLab projects. This feature in in development and will be available soon.
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only

@@ -307,7 +307,7 @@ jobs:
 ## SSH into your Windows build
 {: #ssh-into-your-windows-build }
 
-**Using GitLab?** SSH reruns are not currently supported for GitLab projects.
+**Using GitLab?** SSH reruns are not currently supported for GitLab projects. This feature in in development and will be available soon.
 {: class="alert alert-info" }
 
 It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:

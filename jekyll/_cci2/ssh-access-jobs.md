@@ -14,7 +14,7 @@ Troubleshoot problems in a job using **Rerun job with SSH**. Using this feature 
 ## Introduction
 {: #introduction }
 
-**Using GitLab?** SSH reruns are not currently supported for GitLab projects.
+**Using GitLab?** SSH reruns are not currently supported for GitLab projects. This feature in in development and will be available soon.
 {: class="alert alert-info" }
 
 CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
