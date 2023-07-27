@@ -2,15 +2,16 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
-= Manage contexts with config policies (Open preview)
+= Manage contexts with config policies
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to manage the use of contexts with config policies.
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
 Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
 
@@ -130,7 +131,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
-* Push the policy manually using the CLI from your local environment, or;
+* Push the policy manually using the CLI from your local environment
 * Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.allow.manual]

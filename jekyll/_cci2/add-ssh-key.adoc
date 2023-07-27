@@ -69,4 +69,4 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 
 * xref:github-integration#[GitHub Integration]
 * xref:bitbucket-integration#[Bitbucket Integration]
-* xref:gitlab-integration#[GitLab Integration]
+* xref:gitlab-integration#[GitLab CI Integration]
