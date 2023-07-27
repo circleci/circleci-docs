@@ -203,7 +203,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 ```
 
 [#get-api-v3-tasks]
-=== GET /api/v3/tasks
+=== GET /api/v3/runner/tasks
 
 Get the number of unclaimed tasks for a given resource class.
 
@@ -237,7 +237,7 @@ Get the number of unclaimed tasks for a given resource class.
 ==== Examples
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
@@ -283,7 +283,7 @@ curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespa
 ```
 
 [#get-api-v3-tasks-running]
-=== GET /api/v3/tasks/running
+=== GET /api/v3/runner/tasks/running
 
 Get the number of running tasks for a given resource class.
 
@@ -317,7 +317,7 @@ Get the number of running tasks for a given resource class.
 ==== Examples
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/tasks/running?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
