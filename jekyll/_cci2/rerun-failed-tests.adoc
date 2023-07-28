@@ -287,6 +287,8 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
     path: junit.xml
 ```
 
+. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+
 [#configure-a-job-running-elixir-tests]
 === Configure a job running Elixir tests
 
@@ -307,6 +309,29 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
     when: always
 ```
 
+. Update the `glob` command to match your use case. 
+
+[#configure-a-job-running-phpunit-tests]
+=== Configure a job running PHPUnit tests
+
+. Modify your test command to use `circleci tests run`:
++
+```yaml
+
+# Use phpunit-finder to output list of tests to stdout for a test suite named functional 
+# Pass those tests as stdin to circleci tests run
+
+- run:
+    name: Run functional tests
+    command: |
+      TESTS_TO_RUN=$(/data/vendor/bin/phpunit-finder -- functional)
+      echo "$TESTS_TO_RUN" | circleci tests run --command="xargs -I{} -d\" \" /data/vendor/bin/phpunit {} --log-junit /data/artifacts/phpunit/phpunit-functional-$(basename {}).xml" --verbose --split-by=timings
+
+- store_test_results:
+    path: artifacts/phpunit
+    when: always
+```
+. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[phpunit-finder] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#output-test-files-only]
 === Output test files only
