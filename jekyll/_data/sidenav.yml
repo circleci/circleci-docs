@@ -62,6 +62,8 @@ en:
             link: language-javascript
           - name: Python quickstart
             link: language-python
+          - name: Go quickstart
+            link: language-go
           - name: Configuration tutorial
             link: config-intro
           - name: Use the Slack orb to set up notifications

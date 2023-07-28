@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Configure a Node.js application on CircleCI"
-description: "Building and Testing with JavaScript and Node.js on CircleCI"
+title: "Configure a Go application on CircleCI"
+description: "Set up CI/CD for a Go project on CircleCI using orbs"
 contentTags:
   platform:
   - Cloud
@@ -9,31 +9,31 @@ contentTags:
   - Server v3.x
 ---
 
-{% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_slug="javascript" demo_branch="master" guide_completion_time="15" sample_completion_time="10" %}
+{% include snippets/language-guided-tour-cards.md lang="go" demo_url_slug="go" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
 
 ## Overview
-{: #overview }
+{: #overview-new }
 
-This is a quickstart guide for integrating a Node.JS project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.JS project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
+This is a quickstart guide for integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
 
 ## Prerequisites
 {: #prerequisites}
 
 * [A CircleCI account]({{site.baseurl}}/first-steps/)
-* A Node.JS project located in a supported VCS
+* A Go project located in a supported VCS
 
-If you do not have a Node.JS project, but would like to follow this guide, you can use our sample project, which is [hosted on GitHub]({{site.gh_public_org_url}}/sample-javascript-cfd)
-and is [building on CircleCI]({{site.cci_public_org_url}}/sample-javascript-cfd). Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
-and rewriting [the configuration file]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)
+If you do not have a Go project, but would like to follow this guide, you can use our sample project which is [hosted on GitHub](https://github.com/CircleCI-Public/sample-go-cfd)
+and is [building on CircleCI]({{site.cci_public_org_url}}/sample-go-cfd){:rel="nofollow"}. Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
+and rewriting [the configuration file]({{site.gh_public_org_url}}/sample-go-cfd/blob/main/.circleci/config.yml)
 as you follow this guide.
 
 ## Configuration walkthrough
-{: #configuration-walkthrough }
+{: #configuration-walkthrough-new }
 
-Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
+Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/). Follow the steps below to create a working `config.yml` file.
 
 ### 1. Specify a version
-{: #specify-a-version }
+{: #specify-a-version-new }
 
 Every CircleCI config.yml starts with the version key. This key is used to issue warnings about breaking changes.
 ```yaml
@@ -42,15 +42,15 @@ version: 2.1
 
 `2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
 
-### 2. Use the Node orb
-{: #use-the-node-orb }
+### 2. Use the Go orb
+{: #use-the-go-orb }
 
-The Node.js [orb]({{site.devhub_base_url}}/orbs/orb/circleci/node) contains a set of prepackaged CircleCI configurations you can use to easily install Node.js and its package managers (npm, yarn). Best of all, packages are installed with caching by default, and support for Linux x86_64, macOS x86_64, and Arm64 is automatically included. Learn more about [orbs]({{site.baseurl}}/orb-intro/).
+The Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go) contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about [orbs]({{site.baseurl}}/orb-intro/).
 
 To add the orb to your config, insert:
 ```yaml
 orbs:
-  node: circleci/node@5.0.2
+  go: circleci/go@1.7.3
 ```
 
 **Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
@@ -58,57 +58,34 @@ orbs:
 ### 3. Create jobs
 {: #create-jobs }
 
-Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/jobs-steps/) page.
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or virtual machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/jobs-steps/) page.
 
-A common ask from developers who are getting started with CircleCI is to perform 3 basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Node orb, we can use commands that are built into the orb to keep our config simple and succinct:
+A common ask from developers who are getting started with CircleCI is to perform three basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Go orb, we can use commands that are built into the orb to keep our config simple and succinct.
 
 #### a. Build and test the app
 {: #build-and-test-the-app }
 
-If you are using yarn:
+For this step, we use commands that come preconfigured in the Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go). Go modules are downloaded and cached and tests are run.
 
 ```yaml
 jobs:
   build_and_test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.19.2' # Specify a version tag
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - run:
-          command: yarn test
-          name: Run tests
-      - run:
-          command: yarn build
-          name: Build app
+      - checkout # checkout source code
+      - go/load-cache # Load cached Go modules.
+      - go/mod-download # Run 'go mod download'.
+      - go/save-cache # Save Go modules to cache.
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
       - persist_to_workspace:
           root: ~/project
           paths: .
 ```
-
-Similarly, if you are using npm:
-
-```yaml
-jobs:
-  build_and_test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          command: npm run test
-          name: Run tests
-      - run:
-          command: npm run build
-          name: Build app
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
-```
-
-Because we are using the Node orb, this job will install your Node packages with automated caching and best practices applied. Note that it requires a lock file.
 
 #### b. Deploy the app
 {: #deploy-the-app }
@@ -117,7 +94,7 @@ In this quickstart guide, we will deploy to [Heroku](https://www.heroku.com/). W
 
 ```yaml
 orbs:
-  node: circleci/node@4.7.0
+  go: circleci/go@1.7.3
   heroku: circleci/heroku@1.2.6
 ```
 
@@ -127,7 +104,7 @@ We then need to add a job to our list to take care of the deploy step:
 jobs:
   # ...previous job(s)...
   deploy: # this can be any name you choose
-    executor: heroku/default
+    executor: heroku/default # use the default executor defined within the orb
     steps:
       - attach_workspace:
           at: ~/project
@@ -138,7 +115,7 @@ jobs:
 Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project).
 {: class="alert alert-info" }
 
-### 3. Create a workflow
+### 4. Create a workflow
 {: #create-a-workflow }
 
 A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about [workflow configuration]({{ site.baseurl }}/configuration-reference/#workflows).
@@ -148,14 +125,14 @@ workflows:
   build_test_deploy: # this can be any name you choose
 ```
 
-### 4. Add jobs to the workflow
+### 5. Add jobs to the workflow
 {: #add-jobs-to-the-workflow }
 
 Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 ```yaml
 workflows:
-  build_test_deploy: # this can be any name you choose
+  build_test_deploy:
     jobs:
       - build_and_test
       - deploy:
@@ -166,40 +143,40 @@ workflows:
               only: main # only deploy when on main
 ```
 
-### 5. Conclusion
+### 6. Conclusion
 {: #conclusion }
 
-You just set up a Node.js app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
+You just set up a Go app to build on CircleCI, and deploy to Heroku. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
 
 **Deploy options?** For alternative deployment targets, search the [orb registry](https://circleci.com/developer/orbs), where you will find integrations such as [Kubernetes](https://circleci.com/developer/orbs/orb/circleci/kubernetes), [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs), [GCP GKE](https://circleci.com/developer/orbs/orb/circleci/gcp-gke), and more.
 {: class="alert alert-info"}
 
 ## Full configuration file
-{: #full-configuration-file }
+{: #full-configuration-file-new }
 
 ```yaml
 version: 2.1
 orbs:
-  node: circleci/node@5.0.2
+  go: circleci/go@1.7.3
   heroku: circleci/heroku@1.2.6
 
 jobs:
-  build_and_test:
-    executor: node/default
+  build_and_test: # this can be any name you choose
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.19.2' # Specify a version tag
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - run:
-          command: yarn test
-          name: Run tests
-      - run:
-          command: yarn build
-          name: Build app
+      - checkout # checkout source code
+      - go/load-cache # Load cached Go modules.
+      - go/mod-download # Run 'go mod download'.
+      - go/save-cache # Save Go modules to cache.
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
       - persist_to_workspace:
           root: ~/project
-          paths:
-            - .
+          paths: .
 
   deploy: # this can be any name you choose
     executor: heroku/default
@@ -224,7 +201,7 @@ workflows:
 ## See also
 {: #see-also-new }
 
-- [Continuous deployment of Node apps to Heroku]({{site.blog_base_url}}/continuous-deployment-to-heroku/)
-- [Continuous deployment of Node.js to Azure VM]({{site.blog_base_url}}/cd-azure-vm/)
-- [Troubleshoot Node.js build and test suite timeouts]({{site.support_base_url}}/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout)
+- [Use test splitting with Python Django tests]({{site.support_base_url}}/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests)
+- [Testing Flask framework with Pytest]({{site.blog_base_url}}/testing-flask-framework-with-pytest/)
+- [How do I use Django on CircleCI?]({{site.support_base_url}}/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-)
 - Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
