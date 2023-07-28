@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Server v4.2
-  - Server Admin
+  - サーバー管理者
 ---
 = Phase 4 - Configure Nomad clients
 :page-layout: classic-docs

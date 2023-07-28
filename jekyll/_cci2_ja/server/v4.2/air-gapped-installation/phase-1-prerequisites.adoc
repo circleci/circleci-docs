@@ -2,21 +2,21 @@
 contentTags:
   platform:
     - Server v4.2
-    - Server Admin
+    - サーバー管理者
 ---
-= Phase 1 - Prerequisites
+= ステップ 1 - 前提条件（V4.2)
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
+:page-description: このチュートリアルでは、エアギャップ 環境に CircleCI　Server をインストール方法をご初回しています。また、要件、イメージ、Helmチャート等の説明もこちらのチュートリアルでご紹介しています。
 :icons: font
 :toc: macro
 :toc-title:
 
-The guides in this section walk you through the steps required to install CircleCI server in an air-gapped environment.
+このチュートリアルガイドでは、air-gapped 環境に CircleCI Server をインストールするために必要な手順を説明します。
 
 [#required-components]
-== Required components for air-gapped installation
-The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forward with the installation.
+== Air-gapped の設置に必要なコンポーネント
+以下の表は、エアギャップ CircleCI サーバーのインストールを実行するために必要な前提条件の概要を示しています。インストールを進めるには、エアギャップ環境にこれらの項目が存在する必要があります。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -42,21 +42,21 @@ The following table shows an overview of the prerequisites required to run an ai
 |===
 
 [#copy-images]
-== 1. Copy images
+== 1. イメージをコピーする
 
-CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You will need to copy the latest images and charts from CircleCI into your virtual environment. All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
+CircleCI サーバー は Helmチャート を使って Kubernetes クラスターにデプロイされます。CircleCI から最新のイメージとチャートを仮想環境にコピーする必要があります。CircleCI Helm チャートで参照されるすべてのイメージは、エアギャップ環境内でアクセス可能である必要があります。
 
 [#login-to-acr]
-=== a. Log in to CircleCI server container registry
-Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Please contact support@circleci.com for more information.
+=== a. CircleCI サーバー コンテナレジストリにログインする
+インストールに必要なイメージへのアクセスには、CircleCI が提供するユーザー名とトークンが必要です。詳しくは、support@circleci.com までお問い合わせください。
 
 [source, bash]
 ----
 docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
 ----
 
-=== b. Download all images required for this release
-Download all images required for the release of CircleCI server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
+=== b. このリリースに必要なすべてのイメージをダウンロードする
+CircleCI サーバーのリリースに必要なすべてのイメージをローカルマシンにダウンロードします。このリストには、Helm のインストール、CircleCI エージェント、および Reality Check テストツールに必要なすべてのイメージが含まれています。
 
 [source, bash]
 ----
@@ -138,16 +138,16 @@ echo $SERVER_4_2_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]
-=== c. Copy all images to your air-gapped environment
-Copy all downloaded images to the container registry in your air-gapped environment.
+=== c. すべてのイメージをエアギャップ環境にコピーする
+ダウンロードしたイメージをすべて、エアギャップ環境のコンテナレジストリにコピーする。
 
 [#copy-charts]
-== 2. Copy charts
-Copy the CircleCI server Helm chart to your air-gapped environment.
+== 2. チャートをコピーする
+CircleCI サーバーの Helm チャートをエアギャップ環境にコピーします。
 
 [#download-helm-chart]
-=== a. Download the latest CircleCI server Helm chart
-Download the latest CircleCI server Helm chart to the current directory.
+=== a. 最新の CircleCI サーバー Helm チャートをダウンロードする。
+最新の CircleCI サーバー Helm チャートをカレントディレクトリにダウンロードします。
 
 [source, bash]
 ----
@@ -156,10 +156,10 @@ helm pull oci://cciserver.azurecr.io/circleci-server -d ./
 ----
 
 [#upload-helm-chart]
-=== b. Copy the Helm chart to your air-gapped environment
-Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
+=== b. Helm のチャートをエアギャップ環境にコピーする
+ダウンロードした `.tgz` Helm チャートを air-gapped 環境にコピーする。
 
 [#next-steps]
-== Next steps
+== 次のステップ
 
-Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage#[Phase 2 - Configure object storage] guide.
+このページの手順が完了したら、xref:phase-2-configure-object-storage#[フェーズ 2 - オブジェクトストレージの構成] ガイドに進みます。

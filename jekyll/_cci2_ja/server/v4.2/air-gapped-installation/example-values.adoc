@@ -4,28 +4,28 @@ contentTags:
   - Server v4.2
   - サーバー管理者
 ---
-= Example values.yaml
+= values.yaml のサンプル V4.2
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server
+:page-description: このドキュメントでは、CircleCI Server のエアギャップインストールの設定に役立つ values.yaml ファイルの例をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
 :toc-title:
 
-The following snippet shows an example `values.yaml` file for a Helm installation of CircleCI server in an air-gapped environment.
+以下のスニペットは、air-gapped 環境で CircleCI Server を Helm インストールした場合の `values.yaml` ファイルの例です。
 
 [#resources]
-== Resources
-The chart assumes an environment with the following resources:
+== リソース
+ここで使用するチャートでは、環境に以下のリソースがあることを前提としています。
 
-- A K3s cluster for the installation of the Helm chart
-- MetalLB pre-configued on the K3s cluster for ingress
-- A private Docker registry at docker.internal.example.com running on port 5000 with no TLS encryption
-- A Nomad instance with mTLS disabled
-- A MinIO instance running at minio.internal.example.com, with its API listening on port 9000, and no TLS
-- A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
+- Helm チャートのインストールに使用する K3s クラスタ
+- K3s クラスタで受信用に設定した MetalLB
+- docker.internal.example.com のポート 5000 で実行されるプライベート Docker レジストリ (TLS 暗号化なし)
+- mTLS を無効化した Nomad インスタンス
+- minio.internal.example.com で実行される MinIO インスタンス (API でポート 9000 をリッスン。TLS なし)
+- `server.internal.example.com` と `*.server.internal.example.com` の両ドメイン用に発行された TLS 証明書
 
-For more information about specific values, see the standard installation documentation, starting with xref:../installation/phase-2-core-services#[Phase 2 - Core services].
+各値の詳細については、標準のインストールガイド (「xref:../installation/phase-2-core-services#[ステップ 2 - コアサービス]」以降) を参照してください。
 
 [#values]
 == Values.yaml

@@ -4,22 +4,22 @@ contentTags:
   - Server v4.2
   - サーバー管理者
 ---
-= Additional considerations
+= その他の検討事項
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server
+:page-description: このドキュメントページでは、CircleCI Server のエアギャップインストールを開始する際に考慮すべき項目をわかりやすくご紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
 [#non-tls-docker-registry-installations]
-== Non-TLS Docker Registry installations
+== TLS 以外の Docker レジストリのインストール
 
-When configuring your air-gapped docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-TLS, or self-signed installation, the following additional steps will need to be taken.
+Air-gapped Docker レジストリを設定する際には、TLS 証明書を使用してトラフィックを暗号化することを推奨します。非 TLS、または自己署名のインストールを使用する場合は、以下の追加手順を実行する必要があります。
 
-On machines that access the Docker registry using Docker, the Docker daemon config must be updated (located on Linux at `/etc/docker/daemon.json`).
+Dockerを使用してDockerレジストリにアクセスするマシンでは、Dockerデーモンの設定を更新する必要があります（Linuxでは `/etc/docker/daemon.json` にあります）。
 
-The insecure-registries section must be added to the file (if it exists), or the file must be created with the following if it does not. Make sure to include the full hostname and port of your registry, but do not include the protocol (`http://` or `https://`).
+insecure-registries セクションは（存在する場合は）ファイルに追加する必要があり、存在しない場合は以下のようにしてファイルを作成する必要がある。レジストリの完全なホスト名とポートを必ず含めてください。ただし、プロトコル（`http://` または `https://`）は含めないでください。
 
 [source, json]
 ----
@@ -28,12 +28,12 @@ The insecure-registries section must be added to the file (if it exists), or the
 }
 ----
 
-This file will need to be configured on the following machines:
+このファイルは以下のマシンで設定する必要があります：
 
-- All Nomad nodes in the air-gapped environment
-- Potentially all K3s nodes in the air-gapped environment, if using docker-backed K3s
+- エアギャップ環境の全 Nomad ノード
+- Docker バックアップされた K3s を使用している場合、エアギャップ環境内のすべての K3s ノードの可能性があります
 
-In addition, on each K3s node, the following file must be configured at `/etc/rancher/k3s/registries.yaml`. Take note to include the protocol where referenced.
+また、各 K3s ノードでは、`/etc/rancher/k3s/registries.yaml` に以下のファイルを設定する必要がある。参照するプロトコルを含めるように注意してください。
 
 [source, yaml]
 ----
@@ -52,15 +52,15 @@ configs:
 
 
 [#service-type-load-balancers-k3s]
-== Service Type Load Balancers in K3s
+== K3 におけるサービスタイプのロードバランサー
 
-CircleCI server makes use of Service Type: Load Balancer kubernetes resources to listen to traffic on multiple ports.
+CircleCI サーバーは Service Type を利用する： ロードバランサーの kubernetes リソースを利用し、複数のポートでトラフィックをリッスンします。
 
-If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
+K3s を使用している場合、link:https://metallb.universe.tf/installation/[MetalLB] を使用してK3sノード上に仮想ロードバランサーを作成し、CircleCIサーバーへのイングレストラフィックを許可することができます。
 
-Once installed, the following steps need to be followed:
+インストールが完了したら、以下の手順に従ってください：
 
-A configmap resource needs to be created to create an address pool for MetalLB.
+MetalLB 用のアドレスプールを作成するには、configmap リソースを作成する必要があります。
 
 [source, yaml]
 ----
@@ -78,9 +78,9 @@ data:
       - <<k3s_internal_ip_range_start>>-<<k3s_internal_ip_range_end>>
 ----
 
-The address pool can be named something other than "default", but the annotations in `values.yaml` will need to be updated. If there is only one k3s node, the address range should have the same IP repeated (for example, `10.0.0.5-10.0.0.5`).
+アドレスプールには "default "以外の名前を付けることもできるが、`values.yaml` のアノテーションを更新する必要がある。k3sノードが1つしかない場合、アドレス範囲は同じIPを繰り返す必要があります（例えば、`10.0.0.5-10.0.0.5`）。
 
-Once this configmap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), the address pool name can be updated in the `values.yaml` for the Helm installation.
+この configmap リソースをクラスタに適用すると (`kubectl apply -f metallb-configmap.yaml`)、Helm インストール用の `values.yaml` でアドレスプール名を更新できるようになります。
 
 [source, yaml]
 ----
@@ -91,25 +91,25 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 ----
 
-After installing the Helm chart, the circleci-proxy service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the configmap above). The example below uses the IP address `10.0.0.5`.
+Helm チャートをインストールした後、circleci-proxyサービスはロードバランサーとして動作するk3sノードの内部IPを使用するようにパッチを適用する必要があります（このIPは上記のconfigmapに入力された範囲である必要があります）。以下の例では、IPアドレス`10.0.0.5`を使用しています。
 
 [source, bash]
 ----
 kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externalIPs":["10.0.0.5"]}}'
 ----
 
-Once complete, DNS records can be created for your server installation (server.internal.example.com) and (*.server.internal.example.com) for 10.0.0.5.
+完了したら、DNS レコードをサーバーのインストール（server.internal.example.com）と10.0.0.5の（*.server.internal.example.com）用に作成できます。
 
 [#tls-importing]
-== Importing trusted TLS certificates
+== 信頼された TLS 証明書をインポートする
 
-When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates using two methods, as described below.
+GitHub Enterpriseインスタンスで自己署名証明書またはカスタム認証局証明書を使用する場合、CircleCIサーバーは以下の2つの方法でこれらの証明書を信頼するように設定できます。
 
-NOTE: Values provided for either of these methods are supported for GitHub Enterprise certificates only. No other VCS application is supported at this time.
+NOTE: いずれかの方法で提供される値は、GitHub Enterprise 証明書でのみサポートされます。現時点では、他の VCS アプリケーションには対応していません。
 
 [#configuring-the-tls-imports-value]
-=== Configuring the TLS imports value
-In the `values.yaml` file, the `tls.imports` value can be configured to include a list of `hostname:port` combinations from which to retrieve and trust TLS certificates.
+=== TLS インポート値を設定する
+`values.yaml`ファイルの `tls.imports` の値には、TLS証明書を取得して信頼するための `hostname:port` の組み合わせのリストを含めることができます。
 
 [source, yaml]
 ----
@@ -119,12 +119,12 @@ tls:
     - github.airgap.example.com:443
 ----
 
-For each `hostname:port` combination, CircleCI server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
+それぞれの `hostname:port` の組み合わせに対して、CircleCI Server はインストール中に特定の GitHub Enterprise インスタンスのパブリック証明書を取得し、そのインスタンスとの接続を確立するためにそれを信頼します。
 
 
 [#configuring-the-tls-certificates-array]
-=== Configuring the TLS certificates array
-Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file, in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
+=== TLS 証明書配列の設定
+インポートする証明書の `hostname:port` の組み合わせのリストを提供する代わりに、`values.yaml`ファイルの `tls.certificates` 値に、信頼する対応するTLS証明書の公開証明書チェーンを、base64エンコードされた証明書文字列のリストとして提供することができます。
 
 [source, yaml]
 ----
