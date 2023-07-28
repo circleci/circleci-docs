@@ -2,33 +2,33 @@
 contentTags:
   platform:
   - Server v4.2
-  - Server Admin
+  - サーバー管理者
 ---
-= Phase 5 - Test your installation
+= フェーズ 5 - インストールのテスト
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to test your CircleCI server installation in an air-gapped environment.
+:page-description: このv4.2 ドキュメントでは、エアギャップ環境にインストールした CircleCI Server をテストする方法についてわかりやすく説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-Test your air-gapped installation using CircleCI's Reality Check project.
+CircleCI の Reality Check プロジェクトを使用して、エアギャップ環境にインストールした CircleCI Server をテストします。
 
 [#copy-reality-check]
-== 1. Copy CircleCI server Reality Check
-Copy the link:https://github.com/circleci/realitycheck[CircleCI server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
+== 1. CircleCI Server Reality Check をコピーする
+link:https://github.com/circleci/realitycheck[CircleCI Server Reality Check リポジトリ] を、エアギャップ環境の GitHub Enterprise インスタンスにコピーします。
 
 [#setup-reality-check]
-== 2. Set up CircleCI server Reality Check
-Set up CircleCI server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the readme].
+== 2. CircleCI Server Reality Check を設定する
+link:https://github.com/circleci/realitycheck#installation[README の説明] に従って CircleCI Server Reality Check を設定します。
 
-CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
+CAUTION: `CIRCLE_CLOUD_PROVIDER` 環境変数は `other`に設定してください。
 
 [#modify-reality-check]
-== 3. Modify Reality Check source code
-Replace any references to docker images in .circleci/config.yml with your internal docker registry.
+== 3. Reality Check のソースコードを編集する
+circleci/config.yml で参照されている Docker イメージを、内部 Docker レジストリに変更します。
 
-For example, in your GitHub Enterprise instance, change the following:
+たとえば、このレジストリが GitHub Enterprise インスタンス内にある場合は、以下のように変更します。
 
 [source, yaml]
 ----
@@ -47,11 +47,12 @@ For example, in your GitHub Enterprise instance, change the following:
       - image: <your-internal-registry-hostname-and-port>/python:3.6.0
 ----
 
-NOTE: Leave image values nested under "machine" as is. Only modify Docker image values.
+NOTE: "machine" キーの image 値は変更しないでください。 変更するのは docker キーの image 値のみです。
+
 
 
 [#run-reality-check]
-== 4. Run Reality Check
-Run Reality Check by pushing a commit to it in your GitHub Enterprise installation.
+== 4. Reality Check を実行する
+GitHub Enterprise インスタンスに変更内容をプッシュして、Reality Check を実行します。
 
-NOTE: the `aws_jobs` and `gcp_jobs` workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.
+NOTE: `CIRCLE_CLOUD_PROVIDER` 環境変数を `other` に設定しているため、 `aws_jobs` と `gcp_jobs` の各ワークフローは自動的にキャンセルされます。
