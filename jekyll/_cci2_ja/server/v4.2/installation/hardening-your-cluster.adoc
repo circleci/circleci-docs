@@ -2,47 +2,47 @@
 contentTags:
   platform:
   - Server v4.2
-  - Server Admin
+  - サーバー管理者
 ---
-= Hardening your cluster
+= クラスタのハード化
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides supplemental information on hardening your Kubernetes cluster.
+:page-description: このv4.2ドキュメントページでは、Kubernetes クラスタのセキュリティー強化に関する補足情報をわかりやすく皆様にご紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This section provides supplemental information on hardening your Kubernetes cluster.
+このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
 
 [#network-topology]
-== Network topology
-A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
+== ネットワークトポロジ
+CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティングインスタンスを実行します。
 
-Best practice is to make as many of the resources as private as possible. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+リソースはできる限り非公開にすることがベストプラクティスです。 CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 そうでない場合は、少なくとも `circleci-proxy` ロード バランサー用にパブリックサブネットを 1 つ用意する必要があります。
 
-However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
+ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
 
-NOTE: An NGINX reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
+NOTE: NGINX リバースプロキシは、link:https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。NGINX はトラフィックを `kong`、`vm-service`、`output-processor`、`nomad` にルーティングします。
 
-CAUTION: When using Amazon Certificate Manager (ACM), the name of NGINX's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+CAUTION: Amazon Certificate Manager (ACM) をご使用の場合は、NGINX のサービスは `circleci-proxy-acm` ではなく `circleci-proxy` になります。 TLS 証明書の処理を他の方法から ACM に変更した場合、ロードバランサーが再作成され、お客様の <domain> とアプリの <domain> の関連付けられている DNS レコードを再ルーティングする必要があります。
 
 [#network-traffic]
-== Network traffic
-This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
+== ネットワークトラフィック
+このセクションでは、CircleCI Server システムの稼働に必要な最小要件について説明します。ワークロードによっては、Nomad クライアントと VM の送信にルールを追加する必要があります。クラウドプロバイダーごとに名称は異なります。 そのため、ファイアウォール ルールやセキュリティグループなどを使用した実装が必要になる可能性があります。
 
-Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might be able to be more specific (for example, if you are using a proxy for all external traffic).
+表中の "外部" は、特に断りがない限り、すべての外部 IPv4 アドレスを意味します。 ただし、外部トラフィックすべてにプロキシを使用している場合など、お使いの環境によっては、より具体的に指定することができます。
 
-The rules explained here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you need to create matching ingress or egress rules for the ones listed here.
+また、下記のルールは、特別な記載のない限り、TCP 接続に対してステートフルで設定するものとします。 ステートレスルールを使用する場合には、下表の各項目に該当する送受信ルールをそれぞれ作成してください。
 
 [#reverse-proxy-status]
-=== Reverse proxy status
-You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
+=== リバースプロキシのステータス
+CircleCI Server でサービスのルーティングトラフィックステータスを確認し、問題がある場合は警告したい場合があります。 CircleCI Server では NGINX と Kong の両方を使用しているため、両方のステータスページをポート 80 経由で公開しています。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Service
-| Endpoint
+| サービス
+| エンドポイント
 
 | nginx
 | `/nginx_status`
@@ -52,198 +52,198 @@ You may wish to check the status of the services routing traffic in your CircleC
 |===
 
 [#kubernetes-load-balancers]
-## Kubernetes load balancers
-Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing you are using with your installation.
+## Kubernetes ロードバランサー
+お使いの環境によっては、ロードバランサーが透過的である (つまり、ネットワークトポロジの個別のレイヤーとしては扱われない) ことがあります。 この場合には、ロードバランサーの背後にあるネットワークトラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 CircleCI Server システムで使用している負荷分散の種類に応じたネットワークセキュリティルールの適切な適用方法については、ご利用のクラウドプロバイダーのドキュメントをご覧ください。
 
 [#ingress-load-balancers]
-=== Ingress
-If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
+=== 受信
+ロードバランサーのトラフィックルールが自動的に作成されていない場合は、次の各ポートを設定してください。
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Port
-| Source
-| Purpose
+| 名前
+| ポート
+| ソース
+| 用途
 
 | circleci-proxy/-acm
 | 80
-| External
-| User Interface & Frontend API
+| 外部
+| ユーザーインターフェースとフロントエンド API
 
 | circleci-proxy/-acm
 | 443
-| External
-| User Interface & Frontend API
+| 外部
+| ユーザーインターフェースとフロントエンド API
 
 | circleci-proxy/-acm
 | 3000
-| Nomad clients
-| Communication with Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 
 | circleci-proxy/-acm
 | 4647
-| Nomad clients
-| Communication with Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 
 | circleci-proxy/-acm
 | 8585
-| Nomad clients
-| Communication with Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 |===
 
 [#egress-load-balancers]
-=== Egress
-The only type of egress needed is TCP traffic to the Kubernetes nodes on the Kubernetes load balancer ports (30000-32767). This is not needed if your load balancers are transparent.
+=== 送信
+必要な送信は、Kubernetes ロードバランサーのポート (30000 ～ 32767) 上にある Kubernetes ノードへの TCP トラフィックのみです。 ただし、ロードバランサーが透過的であればこの送信は必要ありません。
 
 [#common-rules-for-compute-instances]
-== Common rules for compute instances
-These rules apply to all compute instances, but not to the load balancers.
+== コンピューティングインスタンスの共通ルール
+以下のルールは、ロードバランサーを除くすべてのコンピューティングインスタンスに適用されます。
 
 [#ingress-common]
-=== Ingress
-If you want to access your instances using SSH, you will need to open port 22 for TCP connections for the instances in question.
-It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule when needed.
+=== 受信
+インスタンスに SSH でアクセスする必要がある場合は、該当するインスタンスへの TCP 接続用にポート 22 を開放してください。
+ルールの範囲は、許可されたソースIPにできるだけ近いものにすること、または、必要な場合にのみそのようなルールを追加することをお勧めします。
 
 [#egress-common]
-=== Egress
-You most likely want all of your instances to access internet resources. This requires you to allow egress for UDP and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
-Instances building jobs (that is, the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with the destination of the VM subnet and your VCS, at the very least.
+=== 送信
+ほとんどの環境では、インスタンスすべてに対してインターネットリソースへのアクセスを許可することになります。 これを行うには、VPC 内にある DNS サーバーへのポート 53 からの UDP と TCP の送信を許可する必要があります。また、HTTP と HTTPS それぞれのトラフィックについて、ポート 80 と 443 からの TCP の送信を許可する必要もあります。
+ジョブのビルドを行うインスタンス (Nomad クライアントや外部 VM) では、多くの場合、SSH 経由でご利用中の VCS からコードをプルする必要があります (TCP ポート 22)。 SSH は、外部 VM との通信にも使用されます。 そのため、少なくとも送信先が VM サブネットおよび VCS であるインスタンスすべてについて、SSH を許可する必要があります。
 
 [#kubernetes-nodes]
-== Kubernetes nodes
+== Kubernetes ノード
 
 [#intra-node-traffic]
-=== Intra-node traffic
-By default, the traffic within your Kubernetes cluster is regulated by networking policies. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
+=== ノード間のトラフィック
+デフォルトでは、Kubernetes クラスタ内のトラフィックはネットワークポリシーにより規定されています。 つまり、Kubernetes ノード間のトラフィックを特別に制限する必要はなく、Kubernetes ノード間のトラフィックはすべて許可してかまいません。
 
-To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
+クラスタ内でネットワーク ポリシーを使用するには、クラウド プロバイダーや環境設定にもよりますが、追加の手順を実行する必要があります。 以下の資料を参考にしてください。
 
-* link:https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
-* link:https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
-* link:https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
+* link:https://kubernetes.io/ja/docs/concepts/services-networking/network-policies/[Kuberenetes ネットワークポリシー]
+* link:https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy?hl=ja[Google Cloudでのクラスタネットワークポリシーの作成]
+* link:https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/calico.html[Amazon EKSへのCalicoのインストール]
 
 [#ingress-kubernetes]
-=== Ingress
-If you are using a managed service, you can check the rules created for the traffic coming from the load balancers and the allowed port range. The standard port range for Kubernetes load balancers (30000-32767) should be all that is needed here for ingress. If you are using transparent load balancers, you need to apply the ingress rules listed for load balancers above.
+=== 受信
+マネージドサービスを使用している場合は、ロードバランサーおよび許可済みのポート範囲からの送信トラフィックに対して作成されているルールを確認できます。 受信側の設定では、Kubernetes ロードバランサーの標準のポート範囲 (30000 ～ 32767) を許可するだけで十分です。 ただし、透過的なロードバランサーを使用している場合は、上記のロードバランサー用受信ルールを適用する必要があります。
 
 [#egress-kubernetes]
-=== Egress
+=== 送信
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Destination
-| Purpose
+| ポート
+| 送信先
+| 用途
 
 | 2376
 | VMs
-| Communication with VMs
+| VM との通信
 
 | 4647
-| Nomad clients
-| Communication with the Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 
-| all traffic
-| other nodes
-| Allow intra-cluster traffic
+| すべてのトラフィック
+| その他のノード
+| クラスタ内トラフィックの許可
 |===
 
 [#nomad-clients-ingress-egress]
 == Nomad Clients
-Nomad clients do not need to communicate with each other. You can block traffic between Nomad client instances completely.
+Nomad クライアント同士は、通信する必要はありません。 Nomad クライアントインスタンス間のトラフィックを完全にブロックできます。
 
 [#ingress-nomad]
-=== Ingress
+=== 受信
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Source
-| Purpose
+| ポート
+| ソース
+| 用途
 
 | 4647
-| K8s nodes
-| Communication with Nomad server
+| K8s ノード
+| Nomad サーバーとの通信
 
 | 64535-65535
-| External
-| Rerun jobs with SSH functionality
+| 外部
+| SSH でのジョブ再実行機能
 |===
 
 [#egress-nomad]
-=== Egress
+=== 送信
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Destination
-| Purpose
+| ポート
+| 送信先
+| 用途
 
 | 22
-| VMs
-| SSH communication with VMs
+| VM
+| VM との SSH 通信
 
 | 2376
-| VMs
-| Docker communication with VMs
+| VM
+| Docker と VM の 通信
 
 | 3000
-| VM Service load balancers
-| Internal communication
+| VM サービスのロード バランサー
+| 内部通信
 
 | 4647
-| Nomad Load Balancer
-| Internal communication
+| Nomad のロード バランサー
+| 内部通信
 
 | 8585
-| Output Processor Load Balancer
-| Internal communication
+| 出力プロセッサのロード バランサー
+| 内部通信
 |===
 
 [#external-vms]
-== External VMs
-Similar to Nomad clients, there is no need for external VMs to communicate with each other.
+== 外部 VM
+Nomad クライアントと同じく、外部 VM 同士も通信する必要はありません。
 
 [#ingress-external]
-=== Ingress
+=== 受信
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Source
-| Purpose
+| ポート
+| ソース
+| 用途
 
 | 22
-| Kubernetes nodes
-| Internal communication
+| Kubernetes ノード
+| 内部通信
 
 | 22
-| Nomad clients
-| Internal communication
+| Nomad クライアント
+| 内部通信
 
 | 2376
-| Kubernetes nodes
-| Internal communication
+| Kubernetes ノード
+| 内部通信
 
 | 2376
-| Nomad clients
-| Internal communication
+| Nomad クライアント
+| 内部通信
 
 | 54782
-| External
-| Rerun jobs with SSH functionality
+| 外部
+| SSH でのジョブ再実行機能
 |===
 
 [#egress-external]
-=== Egress
-You will only need the egress rules for internet access and SSH for your VCS.
+=== 送信
+設定が必要な送信ルールは、VCS へのインターネットアクセスと SSH 接続のみです。
 
 [#notes-on-aws-networkingl]
-== Notes on AWS networking with VM service
-When using the EC2 provider for VM service, there is an `assignPublicIP` option available in the `values.yaml` file.
+== VM サービスを使った AWS ネットワーキングにおける注意点
+VM サービスで EC2 プロバイダーを使う場合、`values.yaml` ファイルには `assignPublicIP` オプションがあります。
 
 [source,yaml]
 ----
@@ -255,91 +255,91 @@ vm_service:
       assignPublicIP: false
 ----
 
-By default this option is set to false, meaning any instance created by VM service will only be assigned a private IP address.
+デフォルトではこのオプションは false に設定されており、VM サービスにより作成されたインスタンスにはプライベート IP アドレスのみが割り当てられます。
 
-Communication to start a virtual machine (VM), and run a job, occurs in two stages:
+仮想マシン (VM) を起動し、ジョブを実行するための通信は、次の 2 つの段階で行われます。
 
-. The `vm-service` pod establishes a connection to the newly created VM via ports `22` and `2376`.
-. The nomad client running the job establishes a connection to the newly created VM via ports `22` and `2376`.
+. `vm-service` Pod が、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
+. ジョブを実行する Nomad クライアントが、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
 
 [#private-ips-only]
-=== Private IPs only
-When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
+=== プライベート IP のみ
+`assignPublicIP` オプションを false に設定すると、link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
-Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
+VM セキュリティグループの受信ルールでは、インストール環境のセキュリティーを強化するために以下のルールを作成できます。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Origin
-| Purpose
+| ポート
+| 送信元
+| 用途
 
 | 22
-| Nomad clients' security group
-| Allows nomad clients to SSH into VM
+| Nomad クライアントのセキュリティグループ
+| Nomad クライアントによる VM への SSH
 
 | 2376
-| Nomad clients' security group
-| Allows nomad clients to connect to docker on VM
+| Nomad クライアントのセキュリティグループ
+| Nomad クライアントによる VM での Docker への接続
 
 
 | 22
-| EKS cluster security group
-| Allows vm-service pods to SSH into VM
+| EKS クラスタのセキュリティグループ
+| vm-service Pod の VM への SSH
 
 | 2376
-| EKS cluster security group
-| Allows vm-service pods to connect to docker on VM
+| EKS クラスタのセキュリティグループ
+| vm-service Pod の VM での Docker への接続の許可
 
 | 54782
-| CIDR range of your choice
-| Allows users to SSH into failed vm-based jobs and to retry and debug
+| 任意の CIDR 範囲
+| 再試行およびデバッグのために失敗した VM ベースのジョブへの SSH 接続
 
 |===
 
 [#using-public-ips]
-=== Using Public IPs
+=== パブリック IP の使用
 
-When the `assignPublicIP` option is set to true, all EC2 instances created by VM service are assigned **public** IPv4 addresses, and, as such, all services communicating with them do so via their public addresses.
+`assignPublicIP` オプションを true に設定すると、VM サービスにより作成されたすべての EC2 インスタンスに パブリック IPv4 アドレスが割り当てられます。従って、これらのインスタンスと通信するすべてのサービスがパブリックアドレスを介するようになります。
 
-SSH traffic from the `vm-service` pod will flow through the NAT gateway of the subnet of the cluster. Since traffic moves outside the VPC it is not possible to restrict traffic by security group origin. It is instead necessary to add the IPs of the NAT gateway(s) used by the cluster to your safelist.
+`vm-service` Pod からの SSH トラフィックは、 クラスタのサブネットの NAT ゲートウェイを通過します。 トラフィックは VPC の外部に移動するため、セキュリティグループの送信元ごとにトラフィックを制限することはできません。 代わりに、クラスタが使用する NAT ゲートウェイの IP をセーフリストに追加する必要があります。
 
-If both Nomad clients and VM service VMs have been assigned public IPs, SSH and Docker traffic will route through the subnets' internet gateways. Since traffic moves through the public internet, security groups are no longer an option for restricting traffic. In order to restrict access on these ports, the public IPv4 addresses of the nomad-clients must be added to the safelist in the VM service security group ingress rules. Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
+Nomad クライアントと VM サービスの両方の VM にパブリック IP が割り当てられている場合、SSH と Docker のトラフィックは、サブネットのインターネットゲートウェイ経由でルーティングされます。 トラフィックはパブリックインターネットを通過するため、セキュリティグループはトラフィックを制限するためのオプションではなくなります。 これらのポートへのアクセスを制限するには、Nomad クライアントのパブリック IPv4 アドレスを VM サービスセキュリティグループの受信ルールのセーフリストに追加する必要があります。 これらの IP とマシンは一時的なものであり、変更時には VM サービスセキュリティグループを更新するメカニズムが必要になります。
 
-When hardening an installation where the VM service uses public IPs, the following rules can be created.
+VM サービスがパブリック IP を使用するインストール環境のセキュリティー強化では、以下のルールを作成できます。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Origin
-| Purpose
+| ポート
+| 送信元
+| 用途
 
 | 22
-| Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned IP).
-| Allows nomad clients to SSH into VM.
+| すべての Nomad クライアントの各 IPv4 アドレス (または割り当てられる可能性のある IP 用に 0.0.0.0/0)
+| Nomad クライアントによる VM への SSH
 
 | 2376
-| Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned IP).
-| Allows nomad clients to connect to docker on VM.
+| すべての Nomad クライアントの各 IPv4 アドレス (または割り当てられる可能性のある IP 用に 0.0.0.0/0)
+| Nomad クライアントによる VM での Docker への接続
 
 | 22
-| Cluster NAT gateway ipv4 ranges
-| Allows traffic to the VM from the `vm-service` pods.
+| クラスタの NAT ゲートウェイの IPv4 範囲
+| `vm-service` Pod から VM へのトラフィック
 
 | 2376
-| Cluster NAT gateway ipv4 ranges
-| Allows traffic to the VM from the `vm-service` pods.
+| クラスタの NAT ゲートウェイの IPv4 範囲
+| `vm-service` Pod から VM へのトラフィック
 
 | 54782
-| CIDR range of your choice
-| Allows users to SSH into failed vm-based jobs to retry and debug.
+| 任意の CIDR 範囲
+| 再試行およびデバッグのために失敗した VM ベースのジョブへの SSH 接続
 
 |===
 
 ifndef::pdf[]
-## Next steps
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
-* xref:../operator/operator-overview#[Server 4.2 Operator Overview]
+## 次のステップ
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server v3.x から Server v4.x への移行]
+* xref:../operator/operator-overview#[Server 4.2x オペレーターの概要]
 endif::[]
