@@ -248,7 +248,7 @@ To manage settings at the organization level, click btn:[Organization Settings] 
 [#organization-settings-people]
 === People
 
-Add or remove users, and manage user roles for the organization as well as user invites. See the xref:roles-an-permissions-overview#[Roles and permissions overview] page for full details.
+Add or remove users, and manage user roles for the organization as well as user invites. See the xref:roles-and-permissions-overview#[Roles and permissions overview] page for full details.
 
 [#organization-settings-integrations]
 === Integrations (GitLab Self-managed only)
