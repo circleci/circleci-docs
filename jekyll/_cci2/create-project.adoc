@@ -79,7 +79,7 @@ image::create-project-button.png[Create a project]
 
 . In the Create New Project window, use the options to:
 +
-** Show CircleCI where your code is stored
+** Tell CircleCI where your code is stored
 ** Choose an option for managing your `.circleci/config.yml` file. You can either choose to let CircleCI pick a configuration file for you, and commit this to a new branch in you repo, or you can edit a starter config file in the CircleCI web app and commit that to your repo yourself.
 ** If you authenticated through xref:github-apps-integration#[GitHub apps], also follow the instructions to setup SSH access.
 ** For guidance on creating a `config.yml` file, see the following pages:
