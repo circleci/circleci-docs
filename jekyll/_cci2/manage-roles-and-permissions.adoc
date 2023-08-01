@@ -15,7 +15,7 @@ NOTE: If you authenticated your CircleCI account with xref:gitlab-integration#[G
 Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
 [#prerequisites]
-== Prerquisites
+== Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * At least one project created in your organization. See the xref:create-project#[Create a project] page for instructions.
