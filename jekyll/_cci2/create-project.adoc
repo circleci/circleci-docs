@@ -68,7 +68,7 @@ image::edit-config-file.png[Edit Configuration File]
 [#create-a-project]
 === Create a project
 
-NOTE: If you authenitcated CircleCI with either xref:gitlab-integration#[GitLab], or xref:github-apps-integration#[GitHub apps], the steps in this section apply to you.
+NOTE: If you authenticated CircleCI with either xref:gitlab-integration#[GitLab], or xref:github-apps-integration#[GitHub apps], the steps in this section apply to you.
 
 Follow these steps to create a new project in CircleCI:
 
