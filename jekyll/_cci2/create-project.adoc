@@ -25,7 +25,7 @@ This guide gets you started with creating a new project in CircleCI.
 The authentication method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
 * If you authenticated using **GitHub OAuth**, or **Bitbucket**, a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to <<set-up-a-project>> below.
-* If you authenticated through **GitLab**, a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to <<create-a-project>> below.
+* If you authenticated through **GitLab** or **GitHub apps**, a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to <<create-a-project>> below.
 
 [#set-up-a-project]
 === Set up a project
