@@ -68,7 +68,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 . Click btn:[Project Settings]
 . Click **People** in the sidebar menu
 . Click btn:[Assign Project Roles]
-. Select the username of the Person you want to assign a role to
+. Select the username of the person you want to assign a role to
 . Use the **Project Role** dropdown menu to select the role you want to assign
 . Click btn:[Assign Role]
 
