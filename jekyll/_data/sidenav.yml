@@ -376,12 +376,18 @@ en:
             link: security-supply-chain
           - name: Secure secrets handling
             link: security-recommendations
+      - name: CircleCI account roles and permissions
+        children:
+          - name: Roles and permissions overview
+            link: roles-and-permissions-overview
       - name: Authentication
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
       - name: How-to guides
         children:
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
           - name: Set an environment variable
             link: set-environment-variable
           - name: Inject environment variables with the API
