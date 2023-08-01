@@ -30,7 +30,7 @@ The authentication method used to set up your CircleCI account determines the de
 [#set-up-a-project]
 === Set up a project
 
-NOTE: If you authenitcated CircleCI with either xref:github-integration#[GitHub OAuth], or xref:bitbucket-integration#[Bitbucket], the steps in this section apply to you.
+NOTE: If you authenticated CircleCI with either xref:github-integration#[GitHub OAuth], or xref:bitbucket-integration#[Bitbucket], the steps in this section apply to you.
 
 CAUTION: Starting June 14, 2023, you may see a simplified experience when setting up a project on CircleCI.  See our link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[community forum] for more details.
 
