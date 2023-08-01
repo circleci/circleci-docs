@@ -29,7 +29,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 . Click on **People**
 . Click btn:[Invite]
 . Enter the person's email address. You can add multiple people separated by a space too
-. Select a role from the dropdown menu to be applied to the people you're inviting
+. Select a role from the dropdown menu to be applied to the people you are inviting
 . Click btn:[Send Invite(s)]
 
 An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
