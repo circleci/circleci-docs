@@ -435,8 +435,6 @@ Your CircleCI roles and associated permissions are **not** derived from the perm
 
 For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated VCS identity.
 
-At this time, your VCS identity can be managed through your CircleCI connection when managing triggers and configurations.
-
 [#next-steps]
 == Next steps
 
