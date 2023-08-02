@@ -212,7 +212,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
+      npx jest --listTests | circleci tests run --command="JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --" --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
 - store_test_results:
