@@ -1,1 +1,1 @@
-CAUTION: セルフホストランナーバージョン 1.0 は 2023年7月27日に終了します。 xref:upgrading-circleci-machine-runner-on-cloud#[今すぐ 1.1 にアップデートしてください。]
+CAUTION: セルフホストランナーバージョン 1.0 は 2023年8月3日に終了します。 xref:upgrading-circleci-machine-runner-on-cloud#[今すぐ 1.1 にアップデートしてください。]

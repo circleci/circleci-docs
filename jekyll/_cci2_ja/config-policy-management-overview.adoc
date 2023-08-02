@@ -13,7 +13,7 @@ contentTags:
 
 :toc-title:
 
-NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。この機能は現在**オープンプレビュー**段階です。
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。
 
 コンフィグファイルのポリシー管理機能を使って組織レベルのポリシーを作成し、設定要素が必須なのか、許可する、許可しないなどのルールとスコープを指定することができます。
 
@@ -75,7 +75,7 @@ hard_failures:    Array<{ rule: string, reason: string }>
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
-* `settings`- 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。 
+* `settings`- 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。
 +
 `settings` サブコマンドをフラグなしで呼び出した場合、現在の設定がフェッチされコンソールに出力されます。
 +

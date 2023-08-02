@@ -44,7 +44,7 @@ In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_art
 ## Passing parameters to jobs
 {: #passing-parameters-to-jobs }
 
-Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs](/docs/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs](/docs/configuration-reference/#matrix). Below is a basic example of passing a parameter to a job when it is run.
 
 {% include snippets/docker-auth.md %}
 
