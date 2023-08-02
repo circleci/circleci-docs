@@ -418,7 +418,7 @@ The `resource_class` key is also used to configure a [self-hosted runner instanc
 ## Steps
 {: #steps }
 
- Steps are a collection of the executable commands required to complete your job. For example, the [`checkout`](/docs/configuration-reference#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration](/docs/configuration-reference#commands-requires-version-21), making them reusable across your configuration.
+ Steps are a collection of the executable commands required to complete your job. For example, the [`checkout`](/docs/configuration-reference#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration](/docs/configuration-reference#commands), making them reusable across your configuration.
 
 ```yaml
 version: 2.1
