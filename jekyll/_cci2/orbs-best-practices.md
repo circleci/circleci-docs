@@ -191,7 +191,7 @@ Does your orb have multiple jobs which require a specific execution environment?
 Jobs on CircleCI can have steps injected into them, either before or after the job, or somewhere in-between with the use of parameters. Jobs are often easier to set up for users than assembling commands into a custom job (where applicable). Injectable steps allow for more flexibility in jobs and may allow new functionalities in your orb.
 
 See the following:
-* [Pre and Post Steps]({{site.baseurl}}/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [Pre and Post Steps]({{site.baseurl}}/configuration-reference/#pre-steps-and-post-steps)
 * [Step Parameter]({{site.baseurl}}/reusing-config/#steps)
 
 ### Executors
