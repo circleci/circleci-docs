@@ -6,7 +6,7 @@ contentTags:
 = GitHub App integration overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to integrate GitLab with CircleCI to manage your GitLab CI/CD pipelines with our GitLab CI step-by-step tutorial.
+:page-description: Learn how to integrate GitHub with CircleCI to manage your GitHub CI/CD pipelines.
 :icons: font
 :experimental:
 
@@ -24,16 +24,23 @@ If your CircleCI account is authenticated through the **GitHub App**, the conten
 
 This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub projects are detailed in the <<coming-soon>> section.
 
+The following limits are currently in place for GitHub App integrations:
+
+- Each user can create up to three organizations.
+- Each organization under a Free plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+
 [#sign-up]
 == Steps to integrate GitHub projects with CircleCI
 
-Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
+Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to connect your GitHub account, which creates your CircleCI organization.
 
 When you create a new organization and connect your GitHub account, you will be prompted to create a new project from a repository. You will be presented with the following options to set up a CircleCI configuration for your project:
 
 * **Faster**: Commit a starter CI pipeline to a new branch.
 +
-CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
+CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitHub repo.
 
 * **Fast**: Use a `config.yml` template that you can edit and save.
 +
@@ -42,15 +49,6 @@ You can choose a sample `.circleci/config.yml` to best fit your project from a v
 Choosing **Faster** automatically triggers a pipeline once you create the project.
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
-
-When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitHub repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
-
-The following limits are currently in place for GitLab integrations:
-
-- Each user can create up to three organizations.
-- Each organization under a Free plan can have up to 10 projects.
-
-If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
 
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
@@ -74,7 +72,7 @@ Within CircleCI, a project can have one or more **configurations**, which are pi
 
 A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a VCS. A trigger determines which configuration should be used to start a pipeline.
 
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab integrations.
+The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab and GitHub App integrations.
 
 [#people]
 === People
@@ -90,9 +88,7 @@ For a complete list of permissions, see the xref:roles-and-permissions-overview#
 [#configuration]
 === Configuration
 
-Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you.
-
-For GitLab Self-managed, you are able to select any instance that you have previously added as a configuration source. If you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will first need to add a new connection via your xref:#organization-settings-integrations[**Organization Settings**]. In either case, you will also need to enter your personal access token again to authorize this connection.
+You can add or delete a configuration source for your project. If you followed the steps above to connect GitHub, a GitHub configuration source has been automatically added for you.
 
 Once you define a configuration source, you can set up a trigger that points to that configuration.
 
@@ -101,13 +97,13 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configu
 [#triggers]
 === Triggers
 
-**The scheduled pipelines feature is not currently available for use with GitLab.** GitLab triggers are described below, including how to use filters to trigger pipelines based on certain conditions.
+**The scheduled pipelines feature is not currently available for use with GitHub App integrations.** Triggers are described below, including how to use filters to trigger pipelines based on certain conditions.
 
-Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
+Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitHub, a trigger set with GitHub as the configuration source has been automatically added for you.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
 
-Triggers and trigger rules determine how CircleCI handles events from the source of change, in this case, GitLab.
+Triggers and trigger rules determine how CircleCI handles events from the source of change, in this case, GitHub.
 
 When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
 
@@ -129,14 +125,16 @@ NOTE: Currently, the only fields that can be edited for existing filters are **T
 - At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#project-settings-ssh-keys]
-=== GitLab project SSH keys
+=== GitHub project SSH keys
 
-When creating a project in CircleCI, you will create and add SSH keys, which are used to check out code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects.
+When creating a project in CircleCI, you will create and add SSH keys, which are used to check out code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitHub App integrations.
 
 [#create-ssh-key]
 ==== Create an SSH key
 
-. Create an SSH key-pair by following the link:https://docs.gitlab.com/ee/user/ssh.html[GitLab instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
+You will be guided through the SSH key generation processing in the CircleCI web app. The steps are as follows:
+
+. Create an SSH key-pair by using the following command. When prompted to enter a passphrase, do **not** enter one:
 +
 ```shell
   ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -151,7 +149,7 @@ When you push to your GitLab repository from a job, CircleCI will use the SSH ke
 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
-== Organization settings - GitLab
+== Organization settings
 
 For GitHub Apps integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
@@ -192,6 +190,14 @@ There are a number of built-in environment variables that are not available in G
 
 The following sections are features of CircleCI which are not currently fully supported. These features are planned for future releases.
 
+[#manual-trigger-pipeline-option]
+== Manual trigger pipeline option
+The ability to manually trigger a pipeline from the web app is not currently supported for GitHub Apps projects.
+
+[#in-app-config-editor]
+== In-app config editor
+The in-app config editor is currently **only** available for GitHub App accounts during project creation.
+
 [#account-integrations]
 === Account integrations
 
@@ -210,12 +216,17 @@ Passing secrets to forked pull requests is not currently supported.
 [#stop-building]
 === Stop building
 
-GitLab integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
+GitHub App integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**.
+
+The recommendation is to either:
+
+* Suspend your installation. This would stop sending all events to CircleCI, so all builds will stop. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option.
+* Stop a single project from sending events to CircleCI. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option. Under **Repository access**, select **Only select repositories** and deselect the repository you want to stop building.
 
 [#ssh-rerun]
 === SSH rerun
 
-SSH reruns are not currently supported for GitLab projects. This feature is in development and will be available soon.
+SSH reruns are not currently supported for GitHub App projects. This feature is in development and will be available soon.
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
@@ -225,7 +236,7 @@ Deploy keys and user keys are not used by GitHub Apps integrations. All keys are
 [#free-and-open-source-setting]
 === Free and open source setting
 
-Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
+Open source plans are not currently available to GitHub App customers. CircleCI will keep the open source community up to date as work continues to support this.
 
 [#test-insights]
 === Test Insights
