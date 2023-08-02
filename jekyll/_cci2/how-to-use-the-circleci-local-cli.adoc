@@ -270,9 +270,9 @@ The commands above will run the entire `build` job (only jobs, not workflows, ca
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
 
-**Machine executor**
+**Executors**
 
-You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
+The CLI does not support running jobs that use a <<executor-intro#linux-vm,machine>> (`machine`) or <<executor-intro#macos,macOS>> (`macos`) executor locally. This is because these executors require running an additional virtual machine. Only jobs that use a <<executor-intro#docker,Docker>> (`docker`) executor can be run locally.
 
 **Add SSH keys**
 

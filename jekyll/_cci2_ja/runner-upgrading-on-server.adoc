@@ -19,7 +19,11 @@ toc::[]
 [#self-hosted-runner-for-server-compatibility]
 == マシンランナーのサーバーとの互換性
 
-Refer to the xref:runner-installation-cli#self-hosted-runners-for-server-compatibility[server compatibility chart] to find the runner version you need for your installation.
+ご使用のプラットフォームに必要なランナーのバージョンは、マシンランナーの各インストールページを参照してください：
+
+- xref:runner-installation-linux#download-the-launch-agent-script[Linux]
+- xref:runner-installation-mac#download-the-launch-agent-script[macOS]
+- xref:runner-installation-windows##set-launch-agent-version[Windows]
 
 [#upgrading-self-hosted-runner-on-server]
 == サーバー上のマシンランナーのアップグレード
@@ -71,11 +75,21 @@ NOTE: サーバー上で Docker コンテナを起動する場合、 `--env` フ
 
 xref:runner-installation-cli.adoc#continued-for-linux-macos-and-server[ローンチエージェントバイナリのダウンロード] と同じ手順で、`agent_version` の環境変数を xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[CircleCI Server 用のセルフホストランナーの互換性リスト] に記載されている正しいバージョンに更新します。
 
+- xref:runner-installation-linux#download-the-launch-agent-script[Linux]
+- xref:runner-installation-mac#download-the-launch-agent-script[macOS]
+
 ```shell
-export agent_version="<launch-agent-version>"
+export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 
-その後、 xref:runner-installation.adoc#platform-specific-instructions[プラットフォーム別のインストール手順]に従って、古いバイナリをダウンロードした新しいバージョンに置き換えます。
+- xref:runner-installation-windows#installation-steps[Windows]
+```powershell
+$Env:agentVer = "<launch-agent-version>"
+```
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+./Install-CircleCIRunner.ps1
+```
 
 [#stop-the-currently-running-machine-runner]
 ==== 2. 現在実行中のマシンランナーを停止する
@@ -147,7 +161,11 @@ Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 [#additional-resources]
 === 関連リソース
-- xref:runner-installation.adoc[CircleCI ランナーのインストール]
-- xref:runner-on-kubernetes.adoc[Kubernetes のインストール手順]
+
+- xref:runner-installation-linux#[CircleCI ランナーのインストール]
+- xref:runner-installation-mac#[Kubernetes のインストール手順]
+- xref:runner-installation-windows#[Windows マシンランナーのインストール手順]
+- xref:runner-on-kubernetes#[Kubernetes上のランナーのインストール手順]
+- xref:runner-installation-docker#[Docker Executor によるマシンランナーのインストール手順]
 
 

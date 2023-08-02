@@ -62,6 +62,8 @@ en:
             link: language-javascript
           - name: Python quickstart
             link: language-python
+          - name: Go quickstart
+            link: language-go
           - name: Configuration tutorial
             link: config-intro
           - name: Use the Slack orb to set up notifications
@@ -180,7 +182,7 @@ en:
             link: hello-world-windows
       - name: Arm
         children:
-          - name: Using the Arm execution environment
+          - name: Using the Arm VM execution environment
             link: using-arm
       - name: GPU
         children:
@@ -200,6 +202,8 @@ en:
         children:
           - name: Convenience images support policy
             link: convenience-images-support-policy
+          - name: Linux CUDA images support policy
+            link: linux-cuda-images-support-policy
           - name: Xcode image policy
             link: xcode-policy
 
@@ -372,16 +376,18 @@ en:
             link: security-supply-chain
           - name: Secure secrets handling
             link: security-recommendations
-      - name: Config policy management
+      - name: CircleCI account roles and permissions
         children:
-          - name: Config policies overview (Open preview)
-            link: config-policy-management-overview
+          - name: Roles and permissions overview
+            link: roles-and-permissions-overview
       - name: Authentication
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
       - name: How-to guides
         children:
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
           - name: Set an environment variable
             link: set-environment-variable
           - name: Inject environment variables with the API
@@ -394,19 +400,29 @@ en:
             link: stop-building-a-project-on-circleci
           - name: Rename organizations and repositories
             link: rename-organizations-and-repositories
-          - name: Create and manage config policies (Open preview)
+
+  - name: Manage config policies
+    icon: icons/sidebar/lock.svg
+    children:
+      - name: Overview
+        children:
+          - name: Config policies overview
+            link: config-policy-management-overview
+      - name: How-to guides
+        children:
+          - name: Create and manage config policies
             link: create-and-manage-config-policies
-          - name: Test config policies (Open preview)
+          - name: Test config policies
             link: test-config-policies
-          - name: Use the CLI for config and policy development (Open preview)
+          - name: Use the CLI for config and policy development
             link: use-the-cli-for-config-and-policy-development
-          - name: Config policies for self-hosted runner (Open preview)
+          - name: Config policies for self-hosted runner
             link: config-policies-for-self-hosted-runner
-          - name: Manage contexts with config policies (Open preview)
+          - name: Manage contexts with config policies
             link: manage-contexts-with-config-policies
       - name: Reference
         children:
-          - name: Config policy reference (Open preview)
+          - name: Config policy reference
             link: config-policy-reference
 
   - name: Integration
@@ -506,8 +522,8 @@ en:
             link: browser-testing
           - name: Generate code coverage metrics
             link: code-coverage
-          - name: Fail fast (Open preview)
-            link: fail-fast
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
       - name: Monitor tests
         children:
           - name: Test Insights
@@ -566,6 +582,86 @@ en:
             link: publish-packages-to-packagecloud
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
+
+  - name: Server administration v4.2
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.2 overview
+        children:
+          - name: CircleCI server v4.2 overview
+            link: server/v4.2/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.2/overview/release-notes
+      - name: Server v4.2 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.2/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.2/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.2/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.2/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.2/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.2
+            link: server/v4.2/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.2/installation/installation-reference
+      - name: Air-gapped installation v4.2
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.2/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.2/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.2/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.2/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.2/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.2/air-gapped-installation/example-values
+      - name: Server v4.2 operations
+        children:
+          - name: Operator overview
+            link: server/v4.2/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.2/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.2/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.2/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.2/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.2/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.2/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.2/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.2/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.2/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.2/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.2/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.2/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.2/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.2/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.2/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.2/operator/faq
 
   - name: Server administration v4.1
     icon: icons/sidebar/admin-new.svg
@@ -1141,9 +1237,9 @@ ja:
             i18n_name: GPUの使用
       - name: Arm
         children:
-          - name: Using Arm
+          - name: Using the Arm VM execution environment
             link: ja/using-arm
-            i18n_name: Armの使用
+            i18n_name: Arm VM 実行環境の使用
 
       - name: Self-hosted runner
         i18n_name: セルフホストランナー
@@ -1387,12 +1483,6 @@ ja:
           - name: Secure secrets handling
             link: ja/security-recommendations
             i18n_name: シークレットの安全な取り扱い
-      - name: Config policy management
-        i18n_name: 設定ファイルのポリシー管理
-        children:
-          - name: Config policies overview (Open preview)
-            link: ja/config-policy-management-overview
-            i18n_name: コンフィグポリシーの概要
       - name: Authentication
         i18n_name: 認証
         children:
@@ -1414,28 +1504,45 @@ ja:
           - name: Rotate project SSH keys
             link: ja/rotate-project-ssh-keys
             i18n_name: プロジェクトの SSH キーをローテーションする
-          - name: Create and manage config policies (Open preview)
-            link: ja/create-and-manage-config-policies
-            i18n_name: 設定ファイルのポリシーの作成と管理
-          - name: Test config policies (Open preview)
-            link: ja/test-config-policies
-            i18n_name: 設定ファイルのポリシーのテスト - オープンプレビュー
-          - name: Use the CLI for config and policy development (Open preview)
-            link: ja/use-the-cli-for-config-and-policy-development
-            i18n_name: CLIを使用したポリシー作成
-          # - name: Config policies for self-hosted runner (Open preview)
-          #   link: ja/config-policies-for-self-hosted-runner
-          #   i18n_name:
           # - name: Stop building a project on CircleCI
           #   link: ja/stop-building-a-project-on-circleci
           #   i18n_name:
           - name: Rename organizations and repositories
             link: ja/rename-organizations-and-repositories
             i18n_name: 組織名とリポジトリ名の変更
+
+  - name: Manage config policies
+    i18n_name: 設定ファイルのポリシー管理
+    icon: icons/sidebar/lock.svg
+    children:
+      - name: Overview
+        i18n_name: 設定ファイルのポリシー管理
+        children:
+          - name: Config policies overview
+            link: ja/config-policy-management-overview
+            i18n_name: コンフィグポリシーの概要
+      - name: How-to guides
+        i18n_name: ガイド
+        children:
+          - name: Create and manage config policies
+            link: ja/create-and-manage-config-policies
+            i18n_name: 設定ファイルのポリシーの作成と管理
+          - name: Test config policies
+            link: ja/test-config-policies
+            i18n_name: 設定ファイルのポリシーのテスト - オープンプレビュー
+          - name: Use the CLI for config and policy development
+            link: ja/use-the-cli-for-config-and-policy-development
+            i18n_name: CLIを使用したポリシー作成
+          - name: Config policies for self-hosted runner
+            link: ja/config-policies-for-self-hosted-runner
+            i18n_name: 設定ファイルのポリシーをセルフホストランナーに適用する
+          - name: Manage contexts with config policies
+            link: manage-contexts-with-config-policies
+            i18n_name: コンフィグファイルポリシーを使ったコンテキストの管理
       - name: Reference
         i18n_name: リファレンス
         children:
-          - name: Config policy reference (Open preview)
+          - name: Config policy reference
             link: ja/config-policy-reference
             i18n_name: リファレンス
 
@@ -1585,9 +1692,9 @@ ja:
           - name: Code coverage
             link: ja/code-coverage
             i18n_name: コードカバレッジ
-          - name: Fail fast (Open preview)
-            link: ja/fail-fast
-            i18n_name: フェイルファスト
+          - name: Rerun failed tests overview
+            link: ja/rerun-failed-tests
+            i18n_name: 失敗したテストのみを再実行
       - name: Monitor tests
         i18n_name: テストの管理
         children:

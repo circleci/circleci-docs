@@ -185,7 +185,9 @@ gcloud config set compute/region <REGION>
 ----
 . クラスタの作成
 +
-TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。 以下のコマンドでシンプルなクラスタをプロビジョニングします。
+TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity?hl=ja[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。
++
+以下のコマンドでシンプルなクラスタをプロビジョニングします。
 +
 [source,shell]
 ----
@@ -195,9 +197,7 @@ gcloud container clusters create circleci-server \
   --workload-pool=<PROJECT_ID>.svc.id.goog
 ----
 +
-NOTE: kube コンテキストが新しいクラスタの認証情報で自動的にアップデートされます。
-+
-手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
+手動で kube コンテキストを更新する必要がある場合は、以下を実行します。 手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
 +
 [source,shell]
 ----
@@ -243,6 +243,20 @@ GKE クラスタを既にお持ちで Workload Identity をクラスタとノー
 ----
   gcloud container clusters update "<CLUSTER_NAME>" \
     --workload-pool="<PROJECT_ID>.svc.id.goog"
+----
+. 既存の GKE クラスタのノードプールを取得します。
++
+[source,shell]
+----
+gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
+  --display-name="<DISPLAY_NAME>"
+----
+. 既存のノードプールを更新します。
++
+[source,shell]
+----
+gcloud iam service-accounts keys create <KEY_FILE> \
+  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
 ----
 . 既存の GKE クラスタのノードプールを取得します。
 +

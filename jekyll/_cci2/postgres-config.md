@@ -86,7 +86,7 @@ registry of your choosing.
 
 ### Example environment setup
 {: #example-environment-setup }
-{:.no_toc}
+
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
@@ -284,6 +284,70 @@ VALUES (
 );
 ```
 
+## Example project with Java and Microsoft SQL Server
+
+{: #example-mssql-project }
+
+The following example runs a maven build in the primary container and spins up a Microsoft SQL Server in a secondary container.
+It waits for the database to start up with the `nc` shell command and then runs `sqlcmd` to create a test database.
+Finally it runs the maven build and tests against the database `circle_test` on `localhost:1433`
+The test user is `sa` to keep it simple (the database is temporary just to run the tests, so security is not really an issue).
+
+{% raw %}
+
+```yaml
+version: 2.1
+
+var:
+  job:
+    - &jdkJobWithMssql
+      docker:
+        - image: cimg/openjdk:11.0
+        - image: mcr.microsoft.com/mssql/server:2019-latest
+          environment:
+            ACCEPT_EULA: y
+            SA_PASSWORD: YourStrongDbPassword
+
+jobs:
+  build:
+    <<: *jdkJobWithMssql
+    steps:
+      # See documentation at: https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver15#ubuntu
+      - checkout
+      - run:
+          name: Add Microsoft repo keys
+          command: curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+      - run:
+          name: Add Microsoft Ubuntu repository
+          command: curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+      - run:
+          name: Install packages
+          command: sudo apt-get update -qq && sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+      - run:
+          name: Wait for MS SQL Server
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 1433 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MS SQL Server && exit 1
+      - run:
+          name: Create test database
+          command: /opt/mssql-tools/bin/sqlcmd -U sa -P YourStrongDbPassword -Q "CREATE DATABASE circle_test"
+      - run:
+          name: Compile package and run tests
+          command: mvn package
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+```
+
+{% endraw %}
 
 ## See also
 {: #see-also }
