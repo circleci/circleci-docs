@@ -2,35 +2,35 @@
 contentTags:
   platform:
   - Server v4.2
-  - Server Admin
+  - サーバー管理者
 ---
-= Installing server behind a proxy
+= サーバーのプロキシ経由でのインストール
 :page-layout: classic-docs
-:page-description: Learn how to install CircleCI server v4.x behind a proxy.
+:page-description: このv4.2 ドキュメントページでは、CircleCI Server v4.2 をプロキシ経由でインストールする方法について詳しく説明します。
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
+セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。
 
-Configuring a proxy happens during xref:phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
+プロキシの設定は xref:phase-2-core-services#l-installing-behind-a-proxy[インストール手順 ステップ 2 - コアサービス ]で行います。
 
 [#known-limitations]
-== Known limitations
+== 既知の制限
 
-* The CircleCI hostname must be added to the no-proxy list because the following services: `output processor` and `vm-service`. The application and build-agent share a no-proxy list and are assumed to be behind the same firewall and therefore cannot have a proxy between them.
-* Some additional configuration is required to import orbs when installed behind a proxy. See xref:../operator/managing-orbs/#using-orbs-behind-a-proxy[Orbs on server] docs for more information.
-* The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
-* If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from CircleCI (inside the Kubernetes cluster) and from our Nomad node can reach your instance. Please note the default `checkout` step in a CircleCI job will fail to clone code and our `ssh-keyscan` of GitHub Enterprise will not work. While you may configure an SSH proxy, `ssh-keyscan` can NOT be proxied and instead will require you provide `github.fingerprint` when using GHE.
-* If you install server behind a proxy, you may need to provide a custom image for VM service. Visit the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder repo] for further information.
-* If object storage is outside the proxy, no job features that use object storage will work. This includes:
-** Artifacts
-** Test results
-** Cache save and restore
-** Workspaces
+* CircleCI のホスト名を、`output processor` と `vm-service` 非プロキシリストに追加する必要があります。アプリケーションとビルドエージェントは同じ非プロキシリストを共有し、同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
+* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要です。詳しくは、xref:../operator/managing-orbs/#using-orbs-behind-a-proxy[サーバーの Orb] ドキュメントをご覧ください。
+* JVM は、HTTPS ではなく、HTTP で実行されるプロキシのみを受け入れます。そのため、プロキシの URI は、`\http://user:password@host:port` ではなく、`\https://user:password@host:port` という形式でなければなりません。
+* GitHub インスタンスがプロキシ環境 (GitHub.com または GitHub Enteriprise) の外で動作している場合は、CircleCI アプリケーション (Kubernetes クラスタ内) と Nomad ノードからの SSH トラフィックがインスタンスにアクセスできるようにしなければなりません。CircleCI ジョブのデフォルトの `checkout` ステップはコードのクローンに失敗し、GitHub の `ssh-keyscan` は動作しないのでご注意ください。 SSH プロキシは設定できますが、`ssh-keyscan` はプロキシできません。代わりに GHE を使用する際に `github.fingerprint` を指定する必要があります。
+* プロキシを設定した VM サービスでは、カスタムイメージが必要になることがよくあります。詳しくは link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder リポジトリ] をご覧ください。
+* オブジェクトストレージがプロキシの外にある場合、オブジェクトストレージを使用するジョブ機能は動作しません。作業には以下が含まれます。
+** アーティファクト
+** テスト結果
+** キャッシュの保存と復元
+** ワークスペース
 +
-Users can get around this restriction by setting environment variables on their jobs. For example:
+以下のようにジョブに環境変数を設定することで、この問題を回避することができます。 以下に例を示します。
 +
 [source,yaml]
 ----
@@ -47,4 +47,4 @@ jobs:
           NO_PROXY: whatever.internal,10.0.1.2
 ----
 +
-WARNING: It is crucial that these environment variables are set in this specific location because it is the only location that propagates them to the correct service.
+WARNING: 環境変数を適切なサービスに伝播できるのはこの場所のみであるため、環境変数の設定をこの特定の場所で行うことが大変重要です。
