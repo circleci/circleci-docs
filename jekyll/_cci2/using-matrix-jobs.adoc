@@ -83,4 +83,4 @@ The expanded version of this matrix runs the following list of jobs under the `a
 [#next-steps]
 == Next steps
 
-For full details of the matrix jobs specification, see the xref:configuration-reference#matrix-requires-version-21[Configuration Reference].
+For full details of the matrix jobs specification, see the xref:configuration-reference#matrix[Configuration Reference].

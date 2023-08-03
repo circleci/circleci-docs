@@ -8,8 +8,6 @@ contentTags:
   - Server v4.x
   - Server v3.x
 suggested:
-  - title: Manual job approval and scheduled workflow runs
-    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
   - title: Filter workflows by branch
     link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   - title: How to trigger a workflow
