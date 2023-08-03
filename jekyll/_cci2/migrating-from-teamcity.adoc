@@ -10,8 +10,7 @@ contentTags:
 :description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from TeamCity to CircleCI.
 
@@ -92,9 +91,6 @@ jobs:
     # Define environment
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Define steps for job
     steps:
@@ -153,9 +149,6 @@ jobs:
     # Define environment
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Define steps for job
     steps:
@@ -304,6 +297,8 @@ In TeamCity, build steps are chosen from a list of defined Runner Types (e.g. Vi
 
 Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our <<examples-and-guides-overview#,Examples and Guides Overview>> for various language and framework examples.
 
+{% include snippets/docker-auth.md %}
+
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
@@ -355,9 +350,6 @@ jobs:
   Gradle:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -367,9 +359,6 @@ jobs:
   Maven:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -436,9 +425,6 @@ jobs:
   Gradle:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -448,9 +434,6 @@ jobs:
   Maven:
     docker:
       - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:

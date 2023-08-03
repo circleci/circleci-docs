@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes common methods for running and debugging browser testing in your CircleCI config.
@@ -34,15 +33,14 @@ WebDriver can operate in two modes: local or remote. When run locally, your test
 
 If Selenium is not included in your primary Docker image, install and run Selenium as shown below:
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 jobs:
   build:
     docker:
       - image: cimg/node:16.13.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
@@ -102,9 +100,6 @@ jobs:
   test-cypress:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
@@ -246,6 +241,9 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 ## X11 forwarding over SSH
 {: #x11-forwarding-over-ssh }
+
+SSH reruns are not currently supported for GitLab or GitHub apps projects. This feature is in development and will be available soon. To find out if you authenticated through GitHub OAuth or GitHub apps, see the [GitHub apps integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 

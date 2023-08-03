@@ -1,17 +1,15 @@
 ---
 contentTags:
   platform:
-  - Server v2.x
-  - Server v4.x
-  - Server Admin
+    - Server v4.x
+    - Server Admin
 ---
 = CircleCI Server v2.19 to v4.0 Migration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn now to migrate from CircleCI server 2.19.x to 4.0.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Migrating from v2.19.x to v4.0 requires you to back up your v2.19 instance data (including Mongo, Postgres, and Vault), and then restore that data in a waiting server v4.0 instance. If you experience problems, you can fall back to your v2.19 instance. Migration requires an operational server v4.0 installation.
 
@@ -20,12 +18,13 @@ Depending on the size of your data stores, the migration can take anywhere from 
 [#prerequisites]
 == Prerequisites
 
-. Your current CircleCI server installation is v2.19x
+. Your current CircleCI server installation is v2.19.x
 . You have taken a backup of your v2.19 instance. If you are using external datastores, they need to be backed up separately.
+. If your installation is in a Google Cloud Platform (GCP) environment, you must use Workload Identities, not Service Account credentials. This is due to a limitation in init container volume mounting. No such limitation exists in AWS environments.
 . Datastores:
 .. If using **externalized** datastores, Postgres must be updated to version 12.
 .. If your datastores are **internal**, ensure that the volume sizes allocated to Mongodb, Postgres, and Redis in your v4.0 installation are at least the same or greater than the volumes allocated to the Mongodb, Postgres, and Redis instances in your v2.19 install. You may resize your 4.x datastore volumes following link:/docs/server/operator/expanding-internal-database-volumes/[these instructions].
-. You have a new CircleCI server v4.0 link:/docs/server/installation/phase-1-prerequisites[installation].
+. You have a new CircleCI server v4.0.x link:/docs/server/installation/phase-1-prerequisites[installation].
 . You have successfully run link:https://github.com/circleci/realitycheck[realitycheck] with contexts before starting.
 . The migration script must be run from a machine with:
 - `kubectl` configured for the server v4.0 instance

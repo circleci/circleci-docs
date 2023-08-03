@@ -6,7 +6,7 @@ version:
 ---
 = サーバーのプロキシ経由でのインストール
 :page-layout: classic-docs
-:page-description: CircleCI Serverをプロキシ経由でインストールする方法について説明します。
+:page-description: このドキュメントでは、CircleCI Server v4.x をプロキシ経由でインストールする方法についてわかりやすく説明します。
 :page-liquid:
 :icons: font
 :toc: macro

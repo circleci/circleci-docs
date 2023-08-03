@@ -46,7 +46,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 [#when-do-i-pay]
 === When do I pay?
 
-On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% when there are 0 credits remaining) will be paid _at the time of the refill_.
 
 [#what-is-prepaid-billing]
 === What is prepaid billing?
@@ -194,8 +194,6 @@ CircleCI no longer offers discounts for open source customers on the Performance
 === Why does CircleCI charge for Docker layer caching?
 
 Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:docker-layer-caching#[Docker Layer Caching] page). DLC costs 200 credits per job run.
-
-There are a few things that CircleCI does to ensure DLC is available to customers. We use solid-state drives and replicate the cache across zones to make sure DLC is available. We will also increase the cache as needed in order to manage concurrent requests and make DLC available for your jobs. All of these optimizations incur additional cost for CircleCI with our compute providers, which pass along to customers when they use DLC.
 
 To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
 

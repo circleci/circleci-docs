@@ -1,39 +1,42 @@
 ---
 description: Details of CircleCI's container runner
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
-= Container runner reference guide
+= Container runner reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-[#introduction-and-motivation]
-== Introduction and motivation
-
-CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the CI job and a <<configuration-reference#machine,machine>> environment (virtual or physical) that has the self-hosted runner binary installed on it. By exclusively running jobs in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
-
-* The ability to seamlessly use custom Docker images during job execution.
-* Access to a consistent, clean containerized build environment with every job 
-
-Container runner is a type of self-hosted runner a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
-
-Container runner is a complement to the machine runner, not a replacement.
-
-After installation of the container-agent, the container runner will claim your containerized jobs, schedule them within an ephemeral pod, and execute the work within a container-based execution environment.
-
-.Container-agent model - Many container-agent : task-agents
-image::container-runner-model.png[Container-agent model]
-
-View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] for a full sample configuration of container runner.
+This document is a comprehensive guide to operating and configuring jobs with the CircleCI container runner.
 
 [#running-your-first-job]
 == Running your first job with container runner
 
-Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+Follow the instructions outlined on the xref:container-runner-installation#[Container runner installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+
+[#sample-configuration-container-agent]
+== Container runner sample configuration
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
 
 [#resource-class-configuration-custom-pod]
 == Resource class configuration and custom task pod configuration
@@ -45,7 +48,7 @@ Each resource class supports the following parameters:
 - `token`: The runner resource class token used to claim tasks (**required**).
 - Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
 
-The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container. 
+The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container.
 
 The following fields will be overwritten by container runner to ensure correct task function, and expected CircleCI configuration behavior:
 
@@ -62,7 +65,7 @@ Below is a full configuration example, containing two resource classes:
 
 ```yaml
 agent:
-  resourceClasses:  
+  resourceClasses:
     circleci-runner/resourceClass:
       token: TOKEN1
       metadata:
@@ -83,10 +86,10 @@ agent:
         volumes:
           - name: xyz
             emptyDir: {}
-    
+
     circleci-runner/resourceClass2:
       token: TOKEN2
-      spec: 
+      spec:
         imagePullSecrets:
           - name: "other"
 ```
@@ -100,13 +103,14 @@ The secret should contain a field for each resource class, using the resource cl
 
 ```yaml
 agent:
-  resourceClasses:  
+  resourceClasses:
     circleci-runner/resourceClass:
       metadata:
         annotations:
           custom.io: <my-annotation>
-    
+
     circleci-runner/resourceClass2:
+  customSecret: <name_of_secret>
 ```
 
 The corresponding custom secret would have 2 fields:
@@ -120,9 +124,11 @@ Due to Kubernetes secret key character constraints, the `/` separating the names
 
 Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
+Additional instructions can be found in our link:https://support.circleci.com/hc/en-us/articles/15773444776731-How-to-use-customSecret-on-Container-Runner[Support Center].
+
 [#parameters]
 === Helm Chart Parameters
- 
+
 The following are **CircleCI specific settings**:
 
 [.table.table-striped]
@@ -160,12 +166,12 @@ The following are **CircleCI specific settings**:
 | Maximum number of tasks claimed/run concurrently
 | 20
 
-| agent.kubeGCEnabled 
-| Option to enabled/disable garbage collection 
+| agent.kubeGCEnabled
+| Option to enabled/disable garbage collection
 | true
 
-| agent.kubeGCThreshold  
-| Length of time pods can run before deleted by GC 
+| agent.kubeGCThreshold
+| Length of time pods can run before deleted by GC
 | 5h5m
 
 | agent.constraintChecker.enable
@@ -246,7 +252,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | {}
 
 | agent.nodeSelector
-| Node selector for agent pods 
+| Node selector for agent pods
 | {}
 
 | agent.tolerations
@@ -354,7 +360,7 @@ limits:
 [#constraint-validation]
 == Constraint Validation
 
-Container runner allows you to configure task pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container runner has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container runner claiming jobs which it cannot schedule which would then fail. 
+Container runner allows you to configure task pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container runner has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container runner claiming jobs which it cannot schedule which would then fail.
 
 If the constraint checker fails too many checks, it will disable claiming for that resource class until the checks start to pass again.
 
@@ -368,13 +374,13 @@ As an example of how this works, consider the following resource class configura
 
 ```yaml
 agent:
-  resourceClasses:  
+  resourceClasses:
     circleci-runner/resourceClass:
       token: TOKEN1
       spec:
         nodeSelector:
           disktype: ssd
-    
+
     circleci-runner/resourceClass2:
       token: TOKEN2
 ```
@@ -428,7 +434,7 @@ You can confirm that this has been configured correctly by running `kubectl get 
 Once this device has been added, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>>:
 
 ```yaml
-resourceClasses: 
+resourceClasses:
  <namespace>/<resourceClass>:
   token: <token>
    spec:

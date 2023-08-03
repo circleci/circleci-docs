@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 ## Introduction
@@ -24,14 +23,13 @@ To automatically run your test suites in a project pipeline, you will add config
 
 A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 jobs:
   build-and-test:
     docker:
       - image: cimg/node:16.10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages:
@@ -105,6 +103,15 @@ The Timing tab lets you identify which steps are taking the longest amount of ti
 When test results are stored, test analytics also become available on the **Tests** tab of the **Insights** page in the web app. Metrics for flaky tests, tests with the lowest success rates, and slow tests help you identify opportunities to optimize pipelines as well as further improve your testing strategy.
 
 More information is available on the [Test Insights](/docs/insights-tests) page.
+
+## Re-run failed tests only (circleci tests run)
+{: #rerun-failed-tests-only }
+
+You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
+
+More information on how to use this option is available on the [Rerun failed tests overview](/docs/rerun-failed-tests/) page.  This functionality uses a command called `circleci tests run`.
+
+Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
 ## Next steps
 {: #next-steps }

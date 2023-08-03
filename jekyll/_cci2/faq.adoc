@@ -4,7 +4,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = FAQ
 :categories: ["migration"]
@@ -37,7 +36,7 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<#billing,Billing>>
 
 | <<#author-orbs,Author orbs>>
-|
+| <<#cancel-performance-plan,Cancel Performance plan>>
 |===
 
 [#general]
@@ -106,3 +105,8 @@ include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
 Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
 
 include::../_includes/snippets/faq/billing-faq-snip.adoc[]
+
+[#cancel-performance-plan]
+== Cancel Performance plan
+
+include::../_includes/snippets/faq/cancel-subscription-faq-snip.adoc[]

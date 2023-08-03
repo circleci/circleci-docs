@@ -4,15 +4,13 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Troubleshoot test splitting
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#using-test-splitting-with-python-django-tests]
 ## Using test splitting with Python Django tests
@@ -90,9 +88,6 @@ jobs:
     parallelism: 2
     docker:
       - image: cimg/python:3.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - python/install-packages:
@@ -135,13 +130,14 @@ Some third party applications and libraries might help you to split your test su
   dynamically across parallel CI nodes, allowing your test suite execution to run
   faster. See link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI build time graph examples].
 
-* **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]** - This is
+* **link:https://github.com/previousnext/phpunit-finder[phpunit-finder]** - This is
   a helper CLI tool that queries `phpunit.xml` files to get a list of test
   filenames and print them. This is useful if you want to split tests to run
   them in parallel based on timings on CI tools.
+
 * **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
-+
-[souce,shell]
+
+[source,shell]
 ----
 go test -v $(go list ./... | circleci tests split)
 ----

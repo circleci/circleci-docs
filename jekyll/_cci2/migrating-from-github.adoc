@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: An overview of how to migrate from GitHub Actions to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from GitHub Actions to CircleCI.
 
@@ -93,6 +92,8 @@ See the table in the next section to compare configuration.
 [#configuration-comparison]
 == Configuration comparison
 
+{% include snippets/docker-auth.adoc %}
+
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
@@ -119,9 +120,6 @@ a|
 # Docker (container) Executor
 docker:
   - image: cimg/openjdk:17.0
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 # Linux Ubuntu Executor
 machine: true
@@ -166,15 +164,8 @@ jobs:
     docker:
       # Primary Executor
       - image: cimg/openjdk:17.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
       # Dependency Service(s)
       - image: postgres:10.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -209,7 +200,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for GitHub, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/configuration-reference/#orbs[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]
@@ -249,7 +240,7 @@ jobs:
 ----
 
 2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
-on_success, on_failure) as well as https://circleci.com/docs/configuration-reference/#the-when-step-requires-version-21[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
+on_success, on_failure) as well as https://circleci.com/docs/configuration-reference/#the-when-step[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
 currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
 
 a|

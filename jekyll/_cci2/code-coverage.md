@@ -9,7 +9,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 ## Introduction
@@ -17,7 +16,24 @@ contentTags:
 
 CircleCI provides different options for code coverage reporting using built-in CircleCI features combined with open source libraries, or using partners. Below are a few examples that demonstrate configuring coverage libraries for different languages, as well as how to [view your code coverage](#view-coverage-on-circleci) on the CircleCI web app.
 
-## Ruby
+## View coverage on CircleCI
+{: #view-coverage-on-circleci }
+
+You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports will then be stored as build artifacts where they can be viewed or downloaded. See our [build artifacts](/docs/artifacts/) guide for more information on downloading coverage reports stored in your artifacts.
+
+![Artifacts tab in the web app]({{site.baseurl}}/assets/img/docs/artifacts.png)
+
+## Code coverage and parallelism
+{: #code-coverage-and-parallelism }
+
+Code coverage reports are saved as [build artifacts](/docs/artifacts/). If you wish to take advantage of CircleCI test splitting and parallelism, you will also need to save your test results using the [`store_test_results` key](/docs/configuration-reference/#storetestresults). For more information on test splitting and parallelism, see the [Test splitting and parallelism overview](/docs/parallelism-faster-jobs/) and the [Test splitting tutorial](/docs/test-splitting-tutorial/).
+
+## Language-specific code coverage options
+{: #language-specific-code-coverage-options}
+
+{% include snippets/docker-auth.md %}
+
+### Ruby
 {: #ruby }
 
 [SimpleCov](https://github.com/colszowka/simplecov) is a popular Ruby code coverage library. To get started, add the `simplecov` gem to your `Gemfile`.
@@ -45,7 +61,6 @@ end
 
 Now configure your `.circleci/config.yml` file for uploading your coverage report.
 
-{:.tab.ruby_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -54,15 +69,9 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:3.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
@@ -70,89 +79,6 @@ jobs:
     steps:
       - checkout
       - browser-tools/install-browser-tools
-      - run:
-          name: Bundle Install
-          command: bundle check || bundle install
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Database setup
-          command: bin/rails db:schema:load --trace
-      - run:
-          name: Run Tests
-          command: bin/rails test
-      - store_artifacts:
-          path: coverage
-```
-
-{:.tab.ruby_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-      - image: cimg/ruby:3.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          RAILS_ENV: test
-      - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog
-          POSTGRES_PASSWORD: ""
-    steps:
-      - checkout
-      - browser-tools/install-browser-tools
-      - run:
-          name: Bundle Install
-          command: bundle check || bundle install
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Database setup
-          command: bin/rails db:schema:load --trace
-      - run:
-          name: Run Tests
-          command: bin/rails test
-      - store_artifacts:
-          path: coverage
-```
-
-{:.tab.ruby_example.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.5.3-node-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          RAILS_ENV: test
-      - image: cimg/postgres:9.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog
-          POSTGRES_PASSWORD: ""
-    steps:
-      - checkout
       - run:
           name: Bundle Install
           command: bundle check || bundle install
@@ -171,7 +97,7 @@ jobs:
 
 See the [SimpleCov README](https://github.com/colszowka/simplecov/#getting-started) for more detail.
 
-## Python
+### Python
 {: #python }
 
 [Coverage.py](https://coverage.readthedocs.io/en/6.6.0b1/) is a popular library for generating code coverage reports in Python. To get started, install Coverage.py:
@@ -198,7 +124,6 @@ coverage html  # open htmlcov/index.html in a browser
 
 The generated files will be found under `htmlcov/`, which can be uploaded in a `store_artifacts` step in your configuration:
 
-{:.tab.python_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -207,9 +132,6 @@ jobs:
   build:
     docker:
     - image: cimg/python:3.10-browsers
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - browser-tools/install-browser-tools
@@ -232,77 +154,7 @@ workflows:
     - build
 ```
 
-{:.tab.python_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-    - image: cimg/python:3.10-browsers
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-    - checkout
-    - browser-tools/install-browser-tools
-    - run:
-        name: Setup testing environment
-        command: |
-          pip install '.[test]' --user
-          echo $HOME
-    - run:
-        name: Run Tests
-        command: |
-          $HOME/.local/bin/coverage run -m pytest
-          $HOME/.local/bin/coverage report
-          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
-    - store_artifacts:
-        path: htmlcov
-workflows:
-  test-workflow:
-    jobs:
-    - build
-```
-
-{:.tab.python_example.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-    - image: circleci/python:3.7-node-browsers-legacy
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-    - checkout
-    - run:
-        name: Setup testing environment
-        command: |
-          pip install '.[test]' --user
-          echo $HOME
-    - run:
-        name: Run Tests
-        command: |
-          $HOME/.local/bin/coverage run -m pytest
-          $HOME/.local/bin/coverage report
-          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
-    - store_artifacts:
-        path: htmlcov
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-```
-
-## Java
+### Java
 {: #java }
 
 [JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code coverage. Below is an example `pom.xml` file that includes JUnit and JaCoCo as part of the build system:
@@ -386,7 +238,6 @@ Running `mvn test` will include a code coverage report (an `exec`) file that is 
 
 Below is a minimal CI configuration to correspond with the above example:
 
-{:.tab.java_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -395,9 +246,6 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:17.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -406,53 +254,11 @@ jobs:
           path:  target
 ```
 
-{:.tab.java_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-      - image: cimg/openjdk:17.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - browser-tools/install-browser-tools
-      - run : mvn test
-      - store_artifacts:
-          path:  target
-```
-
-{:.tab.java_example.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run : mvn test
-      - store_artifacts:
-          path:  target
-```
-
-## JavaScript
+### JavaScript
 {: #javascript }
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for JavaScript projects. Another popular testing tool, Jest, uses Istanbul to generate reports. See the example below:
 
-{:.tab.js_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -461,9 +267,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:17.2-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -475,62 +278,13 @@ jobs:
           path: coverage
 ```
 
-{:.tab.js_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-      - image: cimg/node:17.2-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - browser-tools/install-browser-tools
-      - run: npm install
-      - run:
-          name: "Run Jest and Collect Coverage Reports"
-          command: jest --collectCoverage=true
-      - store_artifacts:
-          path: coverage
-```
-
-{:.tab.js_example.Server_2}
-
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:14.17-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: npm install
-      - run:
-          name: "Run Jest and Collect Coverage Reports"
-          command: jest --collectCoverage=true
-      - store_artifacts:
-          path: coverage
-```
-
-## PHP
+### PHP
 {: #php }
 
 PHPUnit is a popular testing framework for PHP. With PHP, you should have access to a tool called [phpdbg](https://www.php.net/manual/en/book.phpdbg.php). You can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`.
 
 In the following basic `.circleci/config.yml`, we upload the coverage reports in the `store_artifacts` step at the end of the configuration.
 
-{:.tab.php_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -539,9 +293,6 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -554,56 +305,7 @@ jobs:
           path:  build/coverage-report
 ```
 
-{:.tab.php_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-      - image: cimg/php:8.1-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - browser-tools/install-browser-tools
-      - run:
-          name: "Run tests"
-          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
-          environment:
-            XDEBUG_MODE: coverage
-      - store_artifacts:
-          path:  build/coverage-report
-```
-
-{:.tab.php_example.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/php:7-fpm-browsers-legacy
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: "Run tests"
-          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
-          environment:
-            XDEBUG_MODE: coverage
-      - store_artifacts:
-          path:  build/coverage-report
-```
-
-## Golang
+### Golang
 {: #golang }
 
 Go has built-in functionality for generating code coverage reports. To generate reports, add the flag `-coverprofile=c.out`. This will generate a coverage report which can be converted to html via `go tool`.
@@ -621,9 +323,6 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.16
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: go build
@@ -670,10 +369,3 @@ Read more about Codecov's orb in their [guest blog post](https://circleci.com/bl
 If you are a Coveralls customer, follow their [guide to set up your coverage stats](https://docs.coveralls.io/). You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI [environment variables](/docs/env-vars/).
 
 Coveralls will automatically handle the merging of coverage stats in concurrent jobs.
-
-## View coverage on CircleCI
-{: #view-coverage-on-circleci }
-
-You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports will then be stored as build artifacts where they can be viewed or downloaded. See our [build artifacts](/docs/artifacts/) guide for more information on downloading coverage reports stored in your artifacts.
-
-![Artifacts tab in the web app]({{site.baseurl}}/assets/img/docs/artifacts.png)

@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "Windows での Hello World"
-short-title: "Windows での Hello World"
 description: "CircleCI での最初の Windows プロジェクト"
-categories:
-  - はじめよう
-order: 4
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このドキュメントでは、CircleCI の **Windows 実行環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/getting-started)をご覧になることをお勧めします。

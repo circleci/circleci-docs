@@ -5,15 +5,13 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Introduction to YAML Configurations
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Overview of CircleCI configuration written in YAML"
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The crux of connecting CircleCI to your project is a `config.yml`, which is held in a `.circleci` directory. CircleCI configuration files are written in https://yaml.org/[YAML], a more human-friendly data serialization format for programming languages. YAML is a strict superset of JSON, so anything you can do in JSON, you can also do in YAML. CircleCI YAML configurations will largely consist of key-value pairs, and nested key-value pairs.
 
@@ -29,8 +27,6 @@ Your `.circleci/config.yml` will start off with the version of CircleCI you wish
 
 version: 2.1
 ```
-
-CAUTION: You might see examples using `version: 2.0`. CircleCI `2.0` is no longer supported, and is only used with <<install-overview#,server v2>>, an old version of CircleCI server.
 
 [#execution-environment]
 == Execution environment
@@ -48,6 +44,8 @@ There are some limitations depending on the execution environment in your config
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 
+{% include snippets/docker-auth.adoc %}
+
 ```yaml
 # CircleCI configuration file
 version: 2.1
@@ -57,9 +55,6 @@ jobs:
     docker:
     # Primary container image where all steps run
      - image: cimg/base:2022.05
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 `jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
@@ -93,9 +88,6 @@ jobs:
   build:
     docker:
      - image: cimg/base:2022.05
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: echo "Say hello to YAML!"
 ```
@@ -113,18 +105,12 @@ jobs:
   say_hello:
     docker:
      - image: cimg/base:2022.05
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say hello to YAML!"
   # Job two with a unique name
   say_goodbye:
     docker:
      - image: cimg/base:2022.05
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say goodbye to YAML!"
 
@@ -144,11 +130,16 @@ YAML can be quite picky about indentations. You can use a http://yaml-online-par
 If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
 
 [#visual-studio-code-extension]
-## Visual Studio Code extension
+## VS Code extension
 
-CircleCI has created a VS Code extension that reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualise and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes. For more information see the xref:/vs-code-extension-overview#[VS Code extension overview].
+If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
 
-The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace].
+The extension provides real-time syntax highlighting and validation, improved navigation through go-to-definition and go-to-reference commands, usage hints and autocomplete suggestions.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from VS Code, and be notified of workflow status changes.
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
 
 [#fun-with-yaml]
 == Fun with YAML

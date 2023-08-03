@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Using the Linux VM execution environment"
 description: "Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 You can run your jobs in the linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
@@ -38,9 +37,14 @@ jobs:
 You can view the list of available images [in the docs Configuration Reference]({{site.baseurl}}/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 ## Available LinuxVM resource classes
-{: #available-linuxvm-resource-classes } 
+{: #available-linuxvm-resource-classes }
 
 {% include snippets/machine-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
 
 ## Pre-installed software
 {: #pre-installed-software }
@@ -68,7 +72,7 @@ Additional packages can be installed with `sudo apt-get install <package>`. If t
 
 Using the machine executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
+The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/docker-layer-caching) (DLC) which is useful when you are building Docker images during your jobs.
 
 ```yaml
 machine:

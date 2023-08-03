@@ -1,17 +1,15 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = CircleCI Server Plan
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Server plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :concurrency:
 :orbs:
 

@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "コンセプト"
-short-title: "コンセプト"
 description: "CircleCI  のコンセプト"
-categories:
-  - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このガイドでは、CircleCI がお客様の [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) パイプラインを管理する方法の基本概念について説明します。

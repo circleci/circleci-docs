@@ -172,9 +172,11 @@ keyset:
 ----
 --
 
+[#postgres]
 === d. Postgres
 
-==== 認証情報
+[#postgres-credentials]
+==== 認証情報 認証情報
 
 このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。  これは、Postgres の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
@@ -212,7 +214,8 @@ postgresql:
 ----
 --
 
-==== TLS
+[#postgres-tls]
+==== ii. TLS
 
 Postgres は TLS 暗号化トラフィックを使用するように拡張できます。 内部でデプロイした場合、このオプションはデフォルトでは無効になっていますが、`values.yaml` の postgresql のブロックに以下を追加することにより有効化できます。
 
@@ -617,7 +620,7 @@ github:
 [#object-storage]
 === l. オブジェクトストレージ
 
-ストレージプロバイダーに関わらず、 link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
+ストレージプロバイダーに関わらず、 link:https://circleci.com/docs/ja/server/installation/phase-1-prerequisites/#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
 
 [source,yaml]
 ----
@@ -805,7 +808,7 @@ proxy:
 
 上記項目の設定が完了したら、いよいよ CircleCI のコアサービスのデプロイです。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 USERNAME=<provided-username>
 PASSWORD=<token>

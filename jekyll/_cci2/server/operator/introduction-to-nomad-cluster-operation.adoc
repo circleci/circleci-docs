@@ -1,19 +1,16 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Introduction to Nomad cluster operation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 :icons: font
-:toc: macro
-:toc-title:
 
 CircleCI uses https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
-
-toc::[]
 
 [#basic-terminology-and-architecture]
 == Basic terminology and architecture

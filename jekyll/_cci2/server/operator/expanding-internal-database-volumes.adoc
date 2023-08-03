@@ -1,22 +1,20 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Expanding Internal Database Volumes
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
-
-toc::[]
+:experimental:
 
 [#overview]
 == Overview
 
-If you have chosen to deploy either of the CircleCI databases (MongoDB or PostgreSQL) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster. 
+If you have chosen to deploy either of the CircleCI databases (MongoDB or PostgreSQL) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster.
 
 This document runs through the steps required to increase PVCs to expand the space available to your internally deployed databases. This operation should not require any downtime, unless you need to restart your database pods.
 

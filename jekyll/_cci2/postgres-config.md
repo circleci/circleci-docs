@@ -1,18 +1,17 @@
 ---
 layout: classic-docs
 title: "Database Configuration Examples"
-short-title: "Database Configuration Examples"
 description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
-order: 35
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
+
+{% include snippets/docker-auth.md %}
 
 ## Example CircleCI configuration for a rails app with structure.sql
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
@@ -23,7 +22,7 @@ follows, because the cimg/ruby:3.0-node image does not have psql installed
 by default and uses `pg` gem for database access.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
@@ -32,9 +31,6 @@ jobs:
 
     docker:
       - image: cimg/ruby:2.6-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -43,9 +39,6 @@ jobs:
     # Service container image available at `host: localhost`
 
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
@@ -93,7 +86,7 @@ registry of your choosing.
 
 ### Example environment setup
 {: #example-environment-setup }
-{:.no_toc}
+
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
@@ -103,15 +96,12 @@ You must declare your database configuration explicitly because multiple pre-bui
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/appName
     docker:
       - image: cimg/ruby:2.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -120,9 +110,6 @@ jobs:
       # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
@@ -148,20 +135,14 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 The following configuration example is taken from the CircleCI [Go demo app](https://github.com/CircleCI-Public/circleci-demo-go).
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
       # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
       - image: cimg/go:1.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -235,7 +216,6 @@ jobs:
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
-{:.tab.mysql_example.Cloud}
 ```yaml
 version: 2.1
 orbs:
@@ -244,13 +224,7 @@ jobs:
   build:
     docker:
       - image: cimg/php:8.1-browsers # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -277,105 +251,6 @@ jobs:
             mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
             mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
 workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-```
-
-{:.tab.mysql_example.Server_3}
-```yaml
-version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.2.3
-jobs:
-  build:
-    docker:
-      - image: cimg/php:8.1-browsers # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
-
-    steps:
-      - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-```
-
-{:.tab.mysql_example.Server_2}
-```yaml
-# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
-# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
-# browser testing require the use of the CircleCI browser-tools orb, available
-# with config version 2.1.
-version: 2
-jobs:
-  build:
-    docker:
-      - image: cimg/php:7.1 # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: cimg/mysql:8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
-
-    steps:
-      - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
-workflows:
-  version: 2
   build-deploy:
     jobs:
       - build
@@ -409,6 +284,70 @@ VALUES (
 );
 ```
 
+## Example project with Java and Microsoft SQL Server
+
+{: #example-mssql-project }
+
+The following example runs a maven build in the primary container and spins up a Microsoft SQL Server in a secondary container.
+It waits for the database to start up with the `nc` shell command and then runs `sqlcmd` to create a test database.
+Finally it runs the maven build and tests against the database `circle_test` on `localhost:1433`
+The test user is `sa` to keep it simple (the database is temporary just to run the tests, so security is not really an issue).
+
+{% raw %}
+
+```yaml
+version: 2.1
+
+var:
+  job:
+    - &jdkJobWithMssql
+      docker:
+        - image: cimg/openjdk:11.0
+        - image: mcr.microsoft.com/mssql/server:2019-latest
+          environment:
+            ACCEPT_EULA: y
+            SA_PASSWORD: YourStrongDbPassword
+
+jobs:
+  build:
+    <<: *jdkJobWithMssql
+    steps:
+      # See documentation at: https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools?view=sql-server-ver15#ubuntu
+      - checkout
+      - run:
+          name: Add Microsoft repo keys
+          command: curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+      - run:
+          name: Add Microsoft Ubuntu repository
+          command: curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+      - run:
+          name: Install packages
+          command: sudo apt-get update -qq && sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+      - run:
+          name: Wait for MS SQL Server
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 1433 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MS SQL Server && exit 1
+      - run:
+          name: Create test database
+          command: /opt/mssql-tools/bin/sqlcmd -U sa -P YourStrongDbPassword -Q "CREATE DATABASE circle_test"
+      - run:
+          name: Compile package and run tests
+          command: mvn package
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+```
+
+{% endraw %}
 
 ## See also
 {: #see-also }

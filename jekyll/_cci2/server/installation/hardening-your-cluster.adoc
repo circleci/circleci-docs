@@ -1,31 +1,27 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Hardening your cluster
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This section provides supplemental information on hardening your Kubernetes cluster.
 
-toc::[]
+
 
 [#network-topology]
 == Network topology
 A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
 
-It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you to control traffic between the different components of the system and isolate them from each other.
-
 Best practice is to make as many of the resources as private as possible. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
-
-Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
 
 NOTE: An NGINX reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
 
@@ -345,6 +341,6 @@ When hardening an installation where the VM service uses public IPs, the followi
 
 ifndef::pdf[]
 ## Next steps
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.0.x]
 * link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
 endif::[]

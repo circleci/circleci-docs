@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
@@ -35,9 +34,6 @@ jobs:
   build: # name of your job
     docker: # executor type
       - image: cimg/base:stable # primary container will run the latest, production-ready base image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
         # Commands run in the primary container
@@ -61,21 +57,11 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ```
 
-{:.tab.machine.Server_3}
+{:.tab.machine.Server}
 ```yml
 jobs:
   build: # name of your job
     machine: true # executor type
-    steps:
-      # Commands run in a Linux virtual machine environment
-```
-
-{:.tab.machine.Server_2}
-```yml
-jobs:
-  build: # name of your job
-    machine: true # executor type
-
     steps:
       # Commands run in a Linux virtual machine environment
 ```
@@ -144,21 +130,6 @@ jobs:
 {:.tab.windowsblock.Server_3}
 ```yml
 version: 2.1
-
-jobs:
-  build: # name of your job
-    machine: # executor type
-      image: windows-default
-    resource_class: windows.medium
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblock.Server_2}
-```yaml
-version: 2
 
 jobs:
   build: # name of your job

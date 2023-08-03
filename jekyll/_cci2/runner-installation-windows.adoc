@@ -10,14 +10,13 @@ contentTags:
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Windows.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+:machine:
+:windows:
+
+{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
 
 This page describes how to install CircleCI's machine runner on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
-
-{% include snippets/runner-platform-prerequisites.adoc %}
-
-toc::[]
 
 The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
@@ -25,8 +24,39 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 
 *The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.*
 
+
+[#prerequisites]
+== Prerequisites
+
+{% include snippets/runner/machine-runner-prereq.adoc %}
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
+
+[#set-launch-agent-version]
+== 2. Set launch agent version (server only)
+
+NOTE: If you are installing the Windows machine runner for CircleCI cloud, skip ahead to the xref:#installation-steps[next step].
+
+{% include snippets/runner/launch-agent-download.adoc %}
+
 [#installation-steps]
-== Installation steps
+== 3. Machine runner installation on Windows
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 

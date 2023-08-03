@@ -6,8 +6,8 @@ categories: [deploying]
 contentTags:
   platform:
   - Cloud
+  - Server 4.x
   - Server 3.x
-  - Server 2.x
 ---
 
 This tutorial explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.

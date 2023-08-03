@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 In this how-to guide, you will learn how to configure CircleCI to publish packages to Packagecloud.
@@ -60,15 +59,14 @@ The build processes for package types will vary, but pushing them into a package
 
 The following is a full example `.circleci/config.yml` that will checkout a git repository, run a `make` task (this command can be anything configured to build your package), then deploy the package to a packagecloud repo.
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: cimg/ruby:3.1.2
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   build:
     <<: *defaults
@@ -180,9 +178,6 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: cimg/node:19.0.1
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   test:
     <<: *defaults

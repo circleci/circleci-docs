@@ -5,12 +5,11 @@ short-title: "Using Custom-Built Docker Images"
 description: "Why and how to create custom Docker images"
 categories: [containerization]
 order: 30
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to create and use custom Docker images with CircleCI.
@@ -48,7 +47,7 @@ The following sections provide a walkthrough of how to create a custom image man
 
 ### Prerequisite
 {: #prerequisite }
-{:.no_toc}
+
 
 - A working [Docker installation](https://docs.docker.com/install/).
 For more details,
@@ -56,7 +55,7 @@ see Docker's [Getting Started documentation](https://docs.docker.com/get-started
 
 ### Creating a `Dockerfile`
 {: #creating-a-dockerfile }
-{:.no_toc}
+
 
 To create a custom image,
 you must [create a `Dockerfile`](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile).
@@ -68,7 +67,7 @@ as shown in [this Docker demo project](https://github.com/CircleCI-Public/circle
 
 ### Choosing and setting a base image
 {: #choosing-and-setting-a-base-image }
-{:.no_toc}
+
 
 Before you create a custom image,
 you must choose another image from which to extend the custom image.
@@ -92,7 +91,7 @@ FROM golang:1.8.0
 
 ### Installing additional tools
 {: #installing-additional-tools }
-{:.no_toc}
+
 
 To install any additional tools
 or execute other commands,
@@ -105,7 +104,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 #### Required tools for primary containers
 {: #required-tools-for-primary-containers }
-{:.no_toc}
+
 
 In order to be used as a primary container on CircleCI,
 a custom Docker image must have the following tools installed:
@@ -126,7 +125,7 @@ you must use the `ADD` instruction instead of `RUN` (see below).
 
 ### Adding other files and directories
 {: #adding-other-files-and-directories }
-{:.no_toc}
+
 
 To add files and directories
 that are not present in package managers,
@@ -139,7 +138,7 @@ ADD ./db/migrations /migrations
 
 ### Adding an entrypoint
 {: #adding-an-entrypoint }
-{:.no_toc}
+
 
 To run the container as an executable,
 use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint).
@@ -164,7 +163,7 @@ consider using a background step instead of an entrypoint.
 
 ### Building the image
 {: #building-the-image }
-{:.no_toc}
+
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
 
@@ -185,7 +184,7 @@ Congratulations, you've just built your first image! Now we need to store it som
 
 ### Storing images in a Docker registry
 {: #storing-images-in-a-docker-registry }
-{:.no_toc}
+
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
 
@@ -195,7 +194,7 @@ The example uses Docker Hub, but it is possible to use different registries if y
 
 ### Preparing the image for the registry
 {: #preparing-the-image-for-the-registry }
-{:.no_toc}
+
 
 Log in to Docker Hub with your account and create a new repository on the [add repository](https://hub.docker.com/add/repository/) page. It is best practice to use a pattern similar to `<project-name>-<container-name>` for a repository name (for example, `cci-demo-docker-primary`).
 
@@ -213,7 +212,7 @@ The `-t` key specifies the name and tag of the new image:
 
 ### Pushing the image to the registry
 {: #pushing-the-image-to-the-registry }
-{:.no_toc}
+
 
 Push the image to Docker Hub:
 
@@ -226,20 +225,19 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 ### Using your image on CircleCI
 {: #using-your-image-on-circleci }
-{:.no_toc}
+
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
 
 ```yml
-version: 2.0
+version: 2.1
 jobs:
   build:
     docker:
       - image: circleci/cci-demo-docker-primary:0.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
+
+{% include snippets/docker-auth.md %}
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 

@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Tutorial showing how to create an orb using the orb development kit.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This tutorial guides you through creating a new orb using the orb development kit. The starting point is creating a new repository on link:https://github.com[GitHub.com].
 
@@ -43,6 +42,8 @@ $ circleci version
 
 [#create-your-orb]
 == Create your orb
+
+WARNING: Once an orb is created it cannot be deleted. Orbs are link:https://semver.org/[semver compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
 
 [#create-a-new-repo]
 === 1. Create a new repo
@@ -100,7 +101,7 @@ In the background, the `orb init` command copies and customizes the link:https:/
 
 The link:https://github.com/CircleCI-Public/Orb-Template[orb template] contains a full CI/CD pipeline (described in link:/docs/creating-orbs/[orb publishing process]), which automatically link:/docs/orb-concepts/#orb-packing[packs], link:/docs/testing-orbs/[tests], and link:/docs/creating-orbs/[publishes] your orb.
 
-In the setup process you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/contexts/). Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
+In the setup process you will be asked if you would like to save your xref:managing-api-tokens#[personal API Token] into an `orb-publishing` xref:contexts#[context]. Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
 
 === 5. Restrict who can trigger jobs for the orb
 

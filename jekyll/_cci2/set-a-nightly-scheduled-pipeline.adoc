@@ -1,18 +1,16 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Set a nightly scheduled pipeline
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to create scheduled pipelines on a specific timetable."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction

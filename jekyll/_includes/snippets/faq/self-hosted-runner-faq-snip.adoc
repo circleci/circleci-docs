@@ -10,7 +10,7 @@ A resource class is a label to match your CircleCI job with a type of runner (or
 
 Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
 
-Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid.
+Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid. The resource class token only has access to claim tasks.
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 === What is the security model for CircleCI's self-hosted runners?
@@ -256,30 +256,6 @@ Just like a machine runner, a container runner allows users to run arbitrary cod
 ==== How can an IAM role be used to authorize pulling images from ECR?
 
 An IAM role can be associated with the service account used for the container runner by following the link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS documentation]. If an image in a job configuration specifies AWS credentials, those credentials will be used instead of the IAM role attached to the container runner service account. See the xref:container-runner#[Container runner] documentation for more details about the container runner service account.
-
-[#sample-configuration-container-agent]
-==== What does a full sample configuration look like that uses container runner?
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    resource_class: <namespace>/<resource-class>
-    steps:
-      - checkout
-      - ...
-
-workflows:
-  build-workflow:
-    jobs:
-      - build
-```
 
 ==== What if I want to run my CI job within a container, but do not want to use Kubernetes?
 

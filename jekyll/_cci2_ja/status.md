@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "ステータス"
-short-title: "ステータス"
 description: "ステータス ダッシュボード"
-categories:
-  - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 <hr />

@@ -4,7 +4,6 @@ contentTags:
     - Cloud
     - Server v4.x
     - Server v3.x
-    - Server v2.x
   vcs:
     - github
     - bitbucket
@@ -30,8 +29,7 @@ sectionTags:
 :page-liquid:
 :page-description: How to guide detailing how to rotate your project SSH keys.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
@@ -59,7 +57,7 @@ If you have set up user keys for your project, follow these steps:
 . Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
 . Delete the user key by clicking the **X**.
 . Add a new user key by clicking **Add User Key**.
-. Go to GitHub’s User settings to delete the matching public key. The GitHub URL is typically `https://github.com/settings/keys`or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled `CircleCI` created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+. Go to GitHub’s User settings to delete the matching public key. The GitHub URL is typically `https://github.com/settings/keys` or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled `CircleCI` created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
 
 CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
 
@@ -112,7 +110,7 @@ Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
 [#gitlab-projects]
 == GitLab projects
 
-Go to **Project Settings > SSH Keys** to view SSH keys set up for your project. The GitLab integration with CircleCI does not use deploy keys or user keys.
+Go to **Project Settings > SSH Keys** to view SSH keys set up for your project. The link:/docs/gitlab-integration/[GitLab CI integration] with CircleCI does not use deploy keys or user keys.
 
 [#rotate-an-SSH-key-gitlab]
 === Rotate an SSH key

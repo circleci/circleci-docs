@@ -42,7 +42,7 @@ ifndef::env-gcp[]
 
 Terraform モジュールに必要な変数を入力するにはクラスタおよびサーバのインストール環境に関する情報が必要です。 変数の完全な例と完全なリストについては、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[AWS Terraform の設定例] を参照してください。
 
-* *Server_endpoint*: ポート番号 `4647` を付加した CircleCI アプリケーションのドメイン名です。  (例: server.example.com:4647)。
+* *Server_endpoint*: ポート番号 `4647` を付加した CircleCI アプリケーションのドメイン名です。
 * クラスタの *サブネット ID (subnet)* 、 *VPC ID (vpc_id)* 、 *DNS サーバー (dns_server)*: 次のコマンドを実行して、クラスタの VPC ID (vpcId) とサブネット (subnetIds) を入手します。
 +
 [source,shell]
@@ -421,7 +421,7 @@ endif::env-aws[]
 
 `values.yaml` ファイルへの変更を適用します。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
@@ -1012,23 +1012,6 @@ databaseEncryption:
 . *ファイアウォール ルールを作成します。*
 +
 以下のコマンドを実行して、GKE の VM サービス用のファイヤーウォール ルールを作成します。
-+
-NOTE: 自動モードを使用した場合は、 https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づいて Nomad クライアントの CIDR を見つけることができます。
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
-----
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
-----
-+
-[source,shell]
-----
-gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
-----
 . *ユーザーを作成します。*
 +
 VM サービス専用の一意のサービスアカウントを作成することをお勧めします。 コンピューティングインスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス許可をより詳細に設定する場合は、コンピューティングインスタンス管理者 (ベータ版) ロール link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[ドキュメント] を参照として使用できます。
@@ -1140,7 +1123,7 @@ endif::env-aws[]
 
 values.yaml ファイルへの変更を適用します。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>

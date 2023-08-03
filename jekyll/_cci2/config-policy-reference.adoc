@@ -3,27 +3,27 @@ description: Open preview of config policies for CircleCI. Reference page for fu
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Config policy reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
-
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
+NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
 This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
 The `circle-policy-agent` package includes built-in functions for common config policy
 use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
-will be able to access these functions. This also means the package name `circleci.config` is
+will be able to access these functions. This also means the package names `circleci.config` and `circleci.utils` are
 reserved.
 
-[#circleci-rego-helpers]
-== CircleCI rego helpers
+[#circleci-config-helpers]
+== CircleCI config helpers
+
+The following helpers are imported using `import data.circleci.config`
 
 [#orbs]
 === `orbs`
@@ -74,7 +74,7 @@ be included in the provided list of orbs.
 
 [source,rego]
 ----
-ban_orbs_version([string])
+ban_orbs([string])
 returns { string: string }
 ----
 
@@ -338,3 +338,137 @@ rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
 
 enable_hard["rule_contexts_reserved_by_branches"]
 ----
+
+[#circleci-utility-helpers]
+== CircleCI Utility helpers
+
+The following helpers are imported using `import data.circleci.utils`
+
+[#is_parameterized_expression]
+=== `is_parameterized_expression`
+
+CAUTION: **Using server?** The `is_parameterized_expression` helper is currently unavailable on CircleCI server.
+
+This function checks any value and returns true if it is a string that contains a parameter expression, otherwise it returns false.
+
+[#definition-is-parameterized-expression]
+==== Definition
+
+[source,rego]
+----
+is_parameterized_expression(value)
+return boolean
+----
+
+[#usage-is-parameterized-expression]
+==== Usage
+
+[source,rego]
+----
+is_parameterized_expression("hello world")                      # false
+is_parameterized_expression(42)                                 # false
+is_parameterized_expression("release-<<parameters.version>>")   # true
+----
+
+
+[#get_element_name]
+=== `get_element_name`
+
+This function retrieves the name of an element in a config file. You can use it to retrieve the name of jobs in workflows, steps in jobs, etc. If the element is an object, this function will return the object's key.
+
+
+[#definition-get-element-name]
+==== Definition
+
+[source,rego]
+----
+get_element_name(input.<config_key>)
+returns string
+----
+
+[#usage-get-element-name]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+job_name1 = utils.get_element_name(input.jobs[0])
+job_name2 = utils.get_element_name(input.jobs[1])
+----
+
+Consider the following config.yml:
+[source,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - lint
+      - test:
+          context: test-vars
+----
+In the policy example above, `job_name1` would equal `lint` and `job_name2` would equal `test`.
+
+[#to_array]
+=== `to_array`
+
+This function casts a value to an array. Array values are left as is and are **not** cast to Array<Array>.
+
+[#definition-to-array]
+==== Definition
+
+[source,rego]
+----
+to_array(value)
+returns array
+----
+
+[#usage-to-array]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+a = utils.to_array("element")   # a is ["element"]
+b = utils.to_array(["element"]) # b is ["element"]
+----
+
+[#to-set]
+=== `to_set`
+
+This function casts a value to a set. Array values are cast to a set and deduplicated. Set values are left as is and are **not** cast to Set<Set>.
+
+[#definition-to-set]
+==== Definition
+
+[source,rego]
+----
+to_set(value)
+returns set
+----
+
+[#usage-to-set]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+a = utils.to_set("element")                      # a is {"element"}
+b = utils.to_set(["one", "one", "two", "three"]) # b is {"one", "two", "three"}
+c = utils.to_set({"element"})                    # c is {"element"}
+----
+

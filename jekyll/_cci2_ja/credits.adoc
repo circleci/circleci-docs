@@ -1,60 +1,69 @@
 ---
 
+categories: [how-to]
 contentTags:
   platform:
   - クラウド
 ---
 = クレジットの使用
+:description: CircleCI クレジットベースプランシステムについて.
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI クレジットベースプランシステムについて
 :icons: font
 :toc: macro
+
 :toc-title:
 
-このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。 CircleCI の従来のコンテナベースプランを利用している場合は、[コンテナを使用する]({{site.baseurl}}/ja/plan-overview/)をご覧ください。 コンテナベースからクレジットベースへの切り替えをご希望のお客様は、link:https://support.circleci.com/hc/ja/requests/new[サポートチケットを作成して] お問い合わせください。
+このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。
 
 [#overview]
 == 概要
 
 クレジットは CircleCI の Free プラン、Performance プラン、Scale プラン、Server プランで使用されます。 各プランで主要な CI/CD 機能を提供しており、一部のプランではニーズに応じたカスタマイズオプションもご利用いただけます。
 
-チームに最適なプランを検討する際は、以下のような要素を考慮してください。
 
-* チームのユーザー数
-* 必要なサポートのレベル (無料の Community サポート、Standard サポート、Premium サポート)
-* 複数のマシンタイプやリソースクラスの利用の要否
-* セルフホストランナー数の制限の有無
+チームに最適なプランを検討する際は、以下のような要素を考慮する必要があります。
 
-詳細は、[料金プランの概要]({{site.baseurl}}/ja/plan-overview)のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
+- チームのユーザー数
+- 必要なサポートのレベル (無料の Community サポート、Standard サポート、Premium サポート)
+- 複数のマシンタイプやリソースクラスの利用の要否
+- セルフホストランナー数の制限の有無
+
+詳細は、xref:plan-overview#[料金プラン]の概要のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
 
 - xref:plan-free#[Free プラン]
 - xref:plan-performance#[Performance プラン]
 - xref:plan-scale#[Scale プラン]
 - xref:plan-server#[Server プラン]
 
-マシンタイプ別、リソースクラス別の消費クレジットについては、link:https://circleci.com/pricing/[料金プラン] のページもご確認ください。
+マシンタイプ別、リソースクラス別の消費クレジットについては、link:https://circleci.com/ja/pricing/[料金プラン] のページもご確認ください。
 
 [#managing-credit-usage]
-== クレジット使用状況の管理
+== クレジット使用量の管理
 
-ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、xref:persist-data#[データの永続化] のページを参照してください。
+また、ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、 xref:persist-data#[データの永続化]のページを参照してください。
 
 [#open-source-credit-usage]
 == オープンソースプロジェクトでのクレジット使用
 
-Free プランをご利用の組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソースプロジェクトのビルドに利用できます。 この特典を受けるには、Free プランを利用し、リポジトリをパブリックにする必要があります。  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
+Free プランをご利用の組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソースプロジェクトのビルドに利用できます。 この特典を受けるには、Free プランを利用し、リポジトリをパブリックにする必要があります。  使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
 
-Free プランで macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
+Free プランで macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、mailto:billing@circleci.com[billing@circleci.com]までお問い合わせください。
 
 [#troubleshooting-job-is-queued]
 == ジョブが「Queued」または「Preparing」の場合、料金は請求されますか？
 
-請求されません。 ジョブが  "queued(キューに入っている)" と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
+いいえ。 ジョブが "queued (キューイング中)"と通知された場合、ジョブがプランや同時実行の制限により待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を 開始 しようとしているため間もなく実行される可能性があります。
 
-ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、xref:building-docker-images#[Docker イメージのビルド] を参照してください。
+ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、xref:building-docker-images#[Docker イメージ]のビルドを参照してください。
 
 [#questions-and-comments]
 == ご意見・ご質問
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「 xref:faq/#billing[料金・支払]」セクションをご確認ください。 解決しない場合は、お気軽に link:https://support.circleci.com/hc/ja/requests/new[サポート チケットを作成] してお問い合わせください。
+ご不明な点がございましたら、まずは「よくあるご質問」の「<<#billing-faqs,料金・支払>>」セクションをご確認ください。 解決しない場合は、お気軽にlink:https://support.circleci.com/hc/ja/requests/new[サポート チケット]を作成してお問い合わせください。
+
+[#billing-faqs]
+== FAQ
+
+include::../_includes/snippets/ja/faq/billing-faq-snip.adoc[]

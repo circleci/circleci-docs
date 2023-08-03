@@ -1,16 +1,12 @@
 ---
 layout: classic-docs
 title: "シェル スクリプトの使用"
-short-title: "シェル スクリプトの使用"
 description: "CircleCI 設定ファイルでのシェルスクリプト使用に関するベストプラクティス"
-categories:
-  - はじめよう
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 ## 概要

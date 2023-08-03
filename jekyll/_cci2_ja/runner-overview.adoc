@@ -14,7 +14,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-toc::[]
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 [#introduction]
 == はじめに
@@ -35,6 +35,11 @@ image::container-runner-model.png[CircleCI's container runner architecture]
 image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
 
+[#circleci-self-hosted-runner-operation]
+== CircleCI のセルフホストランナーの操作
+
+CircleCI のセルフホストランナーのインストール後、セルフホストランナーは `circleci.com` をポーリングして稼働し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。
+
 [#circleci-runner-use-cases]
 == CircleCI ランナーのユースケース
 
@@ -50,14 +55,23 @@ CircleCI では、セルフホストランナーにより主に下記の 2 つ�
 [#choosing-a-runner-execution-environment]
 == ランナーの実行環境の選択
 
-CircleCI では、セルフホストランナー用に複数の実行環境 (コンテナとマシン) を提供しています。
+CircleCIは、コンテナとマシンの2種類のセルフホストランナーを提供しています。
 
 [#container-runner-use-case]
 === コンテナランナー
 
+CircleCI  はこれまで、CI ジョブとセルフホストランナーのバイナリがインストールされた <<configuration-reference#machine,マシン>> 環境 (仮想または物理的な) を 1 対 1 でマッピングして各ジョブを実行していました。 この方法でジョブを排他的に実行すると、<<using-docker#,Docker Executor>> の使用時に CircleCI のクラウドで提供されている次のようなコンテナベースソリューションのメリットが失われます。
+
+* ジョブ実行時に、カスタム Docker イメージをシームレスに使用する機能
+* 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
+
 コンテナランナーは Kubernetes (k8s) クラスタにインストールされ、ネイティブな Docker Executor を使ってジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化したジョブをセルフホストコンピューティング環境で実行できます。 このソリューションでは、数百のジョブを同時に実行でき、Pod をコンピューティングの要求に合わせて効果的にスケーリングできます。
 
+コンテナエージェントをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらを一時的な Pod 内でスケジュール化し、コンテナベースの実行環境で処理を実行します。
+
 コンテナランナーでは、 CircleCI の <<circleci-images#,CircleCI イメージ>> とカスタム Docker イメージを使用できます。
+
+コンテナランナーはマシンランナーの補完機能であり、代替機能ではありません。
 
 [#machine-runner-use-case]
 === マシンランナー
@@ -74,13 +88,12 @@ Kubernetes を使用しておらず、CI ジョブをセルフホストランナ
 CircleCI のセルフホストランナーの使用を開始するには、次の手順を実行します。
 
 * CircleCI のセルフホストランナーをデプロイするご自身のプラットフォームを準備します ( <<#available-self-hosted-runner-platforms,利用可能な CircleCI セルフホストランナープラットフォーム>> にアクセスし、サポートされているプラットフォームをご確認ください)。
-* コンテナランナーをインストールする場合は、 <<container-runner#, コンテナランナー>> のページをご覧ください。
-* マシンランナーをインストールする場合は、 xref:runner-installation.adoc[Web アプリでのインストール] のページをご覧ください。
-
-[#circleci-self-hosted-runner-operation]
-== CircleCI のセルフホストランナーの操作
-
-CircleCI のセルフホストランナーのインストール後、セルフホストランナーは `circleci.com` をポーリングして稼働し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。
+* コンテナランナーをインストールする場合は、 xref:container-runner#[コンテナランナー] のページをご覧ください。
+* マシンランナーについては、ご希望のプラットフォームのインストールガイドをご覧ください：
+** xref:runner-installation-linux#[Linux]
+** xref:runner-installation-mac#[macOS]
+** xref:runner-installation-windows#[Windows]
+** xref:runner-installation-docker#[Docker]
 
 [#available-self-hosted-runner-platforms]
 == 利用可能なセルフホストランナープラットフォーム
@@ -106,7 +119,7 @@ CircleCI のセルフホストランナーのインストール後、セルフ�
 
 * macOS 11.2 以降 (Intel、Apple M1)
 * Windows Server 2019, 2016 (x86_64)
-* Linux ディストリビューション - RHEL8、SUSE、Debian など (x86_64、ARM64)
+* Linux ディストリビューション - RHEL8、SUSE、Debian など (x86_64、ARM64、s390x、ppc64le)
 
 CircleCI では、セルフホストランナー用の新しいプラットフォームの開発が活発に行われている際に、**プレビュー** 段階のプラットフォームをご提供する場合があります。 プレビュー段階のプラットフォームがある場合は、このセクションを更新し、そのプラットフォームの情報と制限事項を通知します。
 
@@ -129,6 +142,8 @@ CircleCI Academy の https://academy.circleci.com/runner-course?access_code=publ
 [#see-also]
 == 関連項目
 
-- <<runner-concepts#,ランナーのコンセプト>>
-- <<runner-installation#,Web アプリからのセルフホストランナーのインストール>>
-- link:https://circleci.com/changelog/self-hosted-runner/[セルフホストランナーの更新履歴 (英語)]
+- xref:runner-concepts#[ランナーのコンセプト]
+- xref:container-runner#[Web アプリからのセルフホストランナーのインストール]
+- xref:runner-config-reference#[マシンランナーレファレンスガイド]
+
+- link:https://circleci.com/ja/changelog/self-hosted-runner/[セルフホストランナーの更新履歴 ]

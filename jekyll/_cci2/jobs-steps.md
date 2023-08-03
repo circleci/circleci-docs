@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Jobs and Steps"
 description: "Description of CircleCI jobs and steps."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 The document provides an overview of CircleCI jobs and steps.
@@ -25,7 +24,7 @@ The following diagram illustrates how data flows between jobs:
 ![Jobs overview](/docs/assets/img/docs/jobs-overview.png)
 
 The job names shown in this diagram are just examples. You can name your jobs whatever you want.
-{: class="alert alert-info" } 
+{: class="alert alert-info" }
 
 Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux, macOS, or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
 
@@ -36,16 +35,18 @@ See the [Introduction to Execution Environments](/docs/executor-intro/) document
 ## Steps overview
 {: #steps-overview }
 
-Steps are collections of executable commands, which are run during a job. 
+Steps are collections of executable commands, which are run during a job.
 
-The `checkout` key is required under `steps` to checkout your code. The `run` key enables addition of arbitrary, multi-line shell command scripting.  
+The `checkout` key is required under `steps` to checkout your code. The `run` key enables addition of arbitrary, multi-line shell command scripting.
 
 In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Steps key](/docs/configuration-reference/#steps) section of the Configuration Reference.
 
 ## Passing parameters to jobs
 {: #passing-parameters-to-jobs }
 
-Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs](/docs/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs](/docs/configuration-reference/#matrix). Below is a basic example of passing a parameter to a job when it is run.
+
+{% include snippets/docker-auth.md %}
 
 ```yml
 version: 2.1
@@ -54,9 +55,6 @@ jobs:
   print-a-message:
     docker:
       - image: cimg/base:2022.03
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       message:
         type: string
@@ -73,7 +71,7 @@ workflows:
 ## Using a job from an orb
 {: #using-a-job-from-an-orb }
 
-Orbs are packages or reusable configuration that you can use in your projects. Orbs usually contain commands that you can use in your jobs, as well as whole jobs that you can schedule in your workflows. 
+Orbs are packages or reusable configuration that you can use in your projects. Orbs usually contain commands that you can use in your jobs, as well as whole jobs that you can schedule in your workflows.
 
 Take the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example. This orb provides a job called [`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification), which you can use in your workflows. This job pauses the workflow to require manual approval, and sends a slack notification. To use this job, reference it in your workflow (see line 10):
 

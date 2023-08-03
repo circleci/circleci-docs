@@ -20,8 +20,6 @@ include::operator/operator-overview.adoc[]
 
 include::operator/introduction-to-nomad-cluster-operation.adoc[]
 
-include::operator/using-metrics.adoc[]
-
 include::operator/managing-user-accounts.adoc[]
 
 include::operator/managing-orbs.adoc[]

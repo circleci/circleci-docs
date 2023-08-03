@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Installing and Using Docker Compose"
 description: "How to enable Docker Compose in your primary container"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to install and use Docker Compose, and assumes the reader has some experience using the `docker-compose` utility.
@@ -18,7 +17,7 @@ If you are new to Docker Compose, do consider reviewing the [official Docker Com
 {:toc}
 
 The `docker-compose` utility is [pre-installed in the CircleCI convenience
-images]({{ site.baseurl }}/circleci-images/#pre-installed-tools) and machine executor images. 
+images]({{ site.baseurl }}/circleci-images/#pre-installed-tools) and machine executor images.
 
 If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file:
 
@@ -106,6 +105,6 @@ See [our support article for more information](https://support.circleci.com/hc/e
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/building-docker-images/#mounting-folders) for examples and details.

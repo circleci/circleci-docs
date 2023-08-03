@@ -1,22 +1,23 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
 = Insights Snapshot Badge
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Generate a badge that displays Insights metrics for a project. 
+:page-description: Generate a badge that displays Insights metrics for a project.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-[#overview]
-== Overview
+CAUTION: Insights snapshot badges are not currently supported for GitLab projects.
 
-The Insights snapshot badge, similar to a xref:status-badges#[status badge] that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.   
+The Insights snapshot badge, similar to a xref:status-badges#[status badge] that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.
 
 image::insights-snapshot-badge-example.png[Insights snapshot badge embedded on README]
+
+[#introduction]
+== Introduction
 
 The most common use case for the Insights snapshot badge is to display xref:insights#[Insights] metrics for the deployment workflow on the project’s main branch in the README. With that said, the badge can be configured to display Insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
 
@@ -28,9 +29,9 @@ While commonly placed in a project README, Insights snapshot badges can be embed
 * *Success Rate* - The percentage of successful builds for the selected workflow, over the specified time window.
 
 [#generating-an-insights-snapshot-badge]
-== Generating an Insights snapshot badge
+== Generate an Insights snapshot badge
 
-To generate an insights snapshot badge code snippet for a public repository, go to the link:https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page. 
+To generate an insights snapshot badge code snippet for a public repository, go to the link:https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page.
 
 On the Insights Snapshot Badge page, you can select the branch, workflow, and time window for which you want to display project metrics for, as well as the desired format for the code snippet.
 
@@ -51,11 +52,83 @@ The following is an example of a Insights snapshot badge generated for our Circl
 ```
 
 [#creating-badges-for-private-repositories]
-== Creating badges for private repositories
+== Create badges for private repositories
 
 To create an Insights snapshot badge for a private project, you will need to create an API token with a scope of “Status” and include that token in the image source URL. If you already have a status badge generated for the same project, you may reuse the same API token for the Insights snapshot badge.
 
 You can add an API token directly from the Insights Snapshot Badge page by clicking on the *Add API Token* button. This creates an API token with a scope of "Status" and the label "insights-snapshot". (You will also see the new token in your project's *API Permissions* settings page.) Your code snippet is displayed after the API token is created.
+
+If you would like to reuse an API token with the scope of "Status", which you have already created for your project status badge, you can use one of the following templates as an alternative to the badge generator in the CircleCI web app described above.
+
+In the templates below, replace `< >` items with your own details. Some options are shown in the table below.
+
+[.tab.badge.Asciidoc]
+--
+[source,asciidoc]
+----
+image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>["CircleCI", link="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"]
+----
+--
+
+[.tab.badge.Markdown]
+--
+[source,markdown]
+----
+[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
+----
+--
+
+[.tab.badge.Pod]
+--
+[source,pod]
+----
+=for HTML <a href="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"><img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>"></a>
+----
+--
+
+[.tab.badge.Rdoc]
+--
+[source,rdoc]
+----
+{<img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>" alt="CircleCI" />}[https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true]
+----
+--
+
+[.tab.badge.reStructuredText]
+--
+[source,reStructuredText]
+----
+.. image:: https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>
+        :target: https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true
+----
+--
+
+[.tab.badge.Textile]
+--
+[source,textile]
+----
+!https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>!:https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true
+----
+--
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Item
+| Options
+
+| `TIME-WINDOW`
+| `24h`, `7d`, `30d`, `60d`, `90d`
+
+| `TIME-WINDOW-VERBOSE`
+| `last-24-hours`, `last-7-days`, `last-30-days`, `last-60-days`, `last-90-days`
+
+| `VCS`
+| `gh`, `bb`
+
+| `VCS-FULL`
+| `github`, `bitbucket`
+|===
 
 [#see-also]
 == See also

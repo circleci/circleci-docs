@@ -1,22 +1,21 @@
 ---
+
 contentTags:
   platform:
   - クラウド
 ---
-= GitHub との連携
+= GitHub との連携ガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、CircleCI で GitHub と GitHub Enterprise を使用する方法について説明します。
+:page-description: このページでは、CircleCI で GitHub と GitHub Enterprise を使用する方法についてわかりやすく説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-toc::[]
-
 [#overview]
 == 概要
 
-CircleCI で GitHub を使用するには、GitHub アカウントを接続する必要があります。 プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の設定がリポジトリに追加されます。
+CircleCI で GitHub を使用するには、GitHub のアカウントを接続する必要があります。 プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の設定がリポジトリに追加されます。
 
 - デプロイキー: GitHub からプロジェクトをチェックアウトするために使用されます。
 - サービスフック (またはプッシュフック): GitHub にプッシュしたときに CircleCI に通知を送信するために使用されます。
@@ -38,12 +37,12 @@ GitHub で Webhook を編集して、ビルドをトリガーするイベント�
 
 詳しくは、 https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub のフックの編集ドキュメント] を参照してください。
 
-タグプッシュでのビルド方法については、CircleCI のドキュメントで <<workflows#using-contexts-and-filtering-in-your-workflows,ワークフローフィルター>> の説明を参照してください。
+タグプッシュでのビルド方法については、CircleCI のドキュメントで xref:workflows#using-contexts-and-filtering-in-your-workflows[ワークフローフィルター] の説明を参照してください。
 
 [#permissions-overview]
 == アクセス許可の概要
 
-CircleCI では、 http://developer.github.com/v3/oauth/#scopes[GitHub のアクセス許可モデル] に定義されているように、GitHub からの次のアクセス許可をリクエストします。
+CircleCI では、link:http://developer.github.com/v3/oauth/#scopes[GitHub のアクセス許可モデル] に定義されているように、GitHub からの次のアクセス許可をリクエストします。
 
 **読み取りアクセス許可**
 
@@ -61,8 +60,6 @@ CircleCI では、 http://developer.github.com/v3/oauth/#scopes[GitHub のアク
 
 NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は GitHub が提供すると決めたアクセス許可のみに制限されます。 たとえば、全ユーザーのリポジトリ (パブリックとプライベートの両方) の一覧を GitHub から取得するには、 https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` スコープ] の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
 
-CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は GitHub に連絡し、その旨をお伝えください。
-
 [#connect-a-github-account]
 == GitHub アカウントの接続
 
@@ -70,12 +67,8 @@ https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する�
 
 次に、CircleCI でプロジェクトを実行するために必要なアクセス許可を設定します。
 
-[#user-keys-and-deploy-keys]
-== ユーザーキーとデプロイキー
-
-**ユーザーキーとは**
-
-ユーザーキーは、ユーザーに固有の SSH キーペアです。 GitHub がパブリックキーを格納し、CircleCI がプライベートキーを格納します。 プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+[#deploy-keys-and-user-keys]
+== デプロイキーとユーザーキー
 
 **デプロイキーとは**
 
@@ -83,36 +76,41 @@ https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する�
 
 ビルドからリポジトリにプッシュするには、書き込みアクセス権のあるデプロイキーが必要です。 デプロイキーを作成するための GitHub 固有の方法については、次のセクションを参照してください。
 
-**ユーザーキーとデプロイキーの違い**
+**ユーザーキーとは**
 
-GitHub がサポートするキーの種類は、ユーザーキーとデプロイキーだけです。 デプロイキーはグローバルに一意であり (たとえば、複数のリポジトリへのアクセス権を持つデプロイキーを作成するメカニズムはありません)、またユーザーキーには、それに関連付けられているユーザーとは別の_スコープ_の概念はありません。
+ユーザーキーは、ユーザーに固有の SSH キーペアです。 GitHub がパブリックキーを格納し、CircleCI がプライベートキーを格納します。 プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+
+**ユーザーキーとデプロイキーの違いとは？**
+
+GitHub がサポートするキーの種類は、デプロイキーとユーザーキーだけです。 デプロイキーはグローバルに一意であり (たとえば、複数のリポジトリへのアクセス権を持つデプロイキーを作成するメカニズムはありません)、またユーザーキーには、それに関連付けられているユーザーとは別の_スコープ_の概念はありません。
 
 複数のリポジトリへのアクセス権をきめ細かく設定するには、GitHub で <<#controlling-access-via-a-machine-user,マシンユーザー>> と呼ばれるアカウントの作成を検討してください。 このユーザーにビルドが必要とする権限を正確に付与し、次にそのユーザーキーを CircleCI 上のプロジェクトに関連付けます。
 
-[#create-a-github-deploy-key]
-=== GitHub のデプロイキーの作成
+[#create-additional-github-ssh-keys]
+=== GitHub SSH キーの追加作成
 
-この例では、GitHub リポジトリは `https://github.com/you/test-repo` で、CircleCI プロジェクトは `https://circleci.com/gh/you/test-repo` です。
+他のサービスにアクセスするために追加のSSHキーが必要な場合は、以下の手順で追加のキーを作成することができます。
 
-1. https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub の説明] に従って、SSH キーペアを作成します。 パスフレーズの入力を求められても、**入力しない** でください。
+この例では、GitHub リポジトリは `https://github.com/you/test-repo` で、CircleCI プロジェクトは `https://app.circleci.com/pipelines/github/you/test-repo` です。
 
+. link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub の説明] に従って、SSH キーペアを作成します。 パスワードを入力するよう求められた場合、**入力しないでください**（以下はmacOSでキーを生成するコマンドの一例です）。
++
 ```shell
-ssh-keygen -t ed25519 -C "your_email@example.com"
+  ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-
-1. `https://github.com/you/test-repo/settings/keys` に移動して **Add Deploy Key** をクリックします。 Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 **Allow write access** をオンにし、**Add key** をクリックします。
-1. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 Hostname のフィールドには、`github.com` を入力し、手順 1 で作成したプライベートキーを追加します。 次に **Add SSH Key** をクリックします。
-1. `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
-
+. `https://github.com/you/test-repo/settings/keys` に移動して **Add Deploy Key** をクリックします。 Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 **Allow write access** をオンにし、**Add key** をクリックします。
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 Hostname のフィールドには、`github.com` を入力し、手順 1 で作成したプライベートキーを追加します。 次に **Add SSH Key** をクリックします。
+. `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
++
 ```yaml
-version: 2.1
+  version: 2.1
 
-jobs:
-  deploy-job:
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SO:ME:FIN:G:ER:PR:IN:T"
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
 ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
@@ -134,7 +132,7 @@ CircleCI がプロジェクトをビルドするときには、プライベー�
 
 CircleCI が SSH キーを公開することはありません。
 
-CircleCI が生成するチェックアウトキーペアのプライベートキーが CircleCI システムの外に出ることはなく (パブリックキーのみ GitHub に転送されます)、ストレージ上では安全に暗号化されています。 しかし、これらのキーはビルドコンテナにインストールされるため、CircleCI で実行されるすべてのコードから読み取りできるようになります。 同様に、SSH 接続が可能な開発者は、このキーに直接アクセスできます。
+CircleCI が生成するチェックアウトキーペアのプライベートキーが CircleCI システムの外に出ることはなく (パブリックキーのみ GitHub に転送されます)、ストレージ上では安全に暗号化されています。 しかし、これらのキーはビルドコンテナにインストールされるため、CircleCI で実行されるすべてのコードから読み取ることができます。 同様に、SSH 接続が可能な開発者は、このキーに直接アクセスできます。
 
 SSH キーは信頼するユーザーとのみ共有してください。 ユーザーキーを使用するプロジェクトの場合、すべての GitHub コラボレーターがリポジトリにアクセスできるため、ユーザーキーはソースコードを委ねられる人とのみ共有してください。
 
@@ -158,13 +156,13 @@ Permission denied (publickey).
 [#add-a-circleci-config-file]
 == .circleci/config.yml ファイルの追加
 
-必要なアクセス許可のセットアップが完了したら、次のステップでは、CircleCI で使用するプロジェクトに `.circleci/config.yml` ファイルを追加します。 CircleCI に接続するリポジトリに `.circleci` ディレクトリを追加します。 そのディレクトリ内に `config.yml` ファイルを追加します。
+必要なアクセス許可のセットアップが完了したら、次のステップでは、CircleCI で使用するプロジェクトに `.circleci/config.yml` ファイルを追加します。 CircleCI に接続するリポジトリに `.circleci` ディレクトリを追加してください。 そのディレクトリ内に `config.yml` ファイルを追加します。
 
 `.circleci/config.yml` ファイルを作成し、GitHub のリポジトリに対してコミットすると、CircleCI は直ちにそのコードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。
 
-CircleCI は、毎回クリーンなコンテナでテストを実行します。これにより、コードをプッシュするたびにテストが新たに実行され、他のユーザーはコードにアクセスできません。 テストの更新を https://circleci.com/dashboard[お客様のダッシュボード] でリアルタイムに確認します。 ステータス更新をメール通知で受け取ったり、GitHub に表示されるステータスバッジを確認したりできます。 また、プルリクエスト画面にもすべてのテストが合格したことを示す総合的なステータスが表示されます。
+CircleCI は、毎回クリーンなコンテナでテストを実行します。これにより、コードをプッシュするたびにテストが新たに実行され、他のユーザーはコードにアクセスできません。 テストの更新を link:https://circleci.com/dashboard[お客様のダッシュボード] でリアルタイムに確認します。 ステータス更新をメール通知で受け取ったり、GitHub に表示されるステータスバッジを確認したりできます。 また、プルリクエスト画面にもすべてのテストが合格したことを示す総合的なステータスが表示されます。
 
-順を追って設定を確認するには、 <<config-intro#,設定ファイルのチュートリアル>> を参照してください。
+順を追って設定を確認するには、 xref:config-intro#[設定ファイルのチュートリアル] を参照してください。
 
 [#enable-your-project-to-check-out-additional-private-repositories]
 == プロジェクトでの追加のプライベートリポジトリのチェックアウトの有効化
@@ -223,25 +221,25 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 NOTE: これらの手順を実行するには、マシンユーザーが管理者アクセス権を持っている必要があります。 プロジェクトの追加が終了したら、マシンユーザーのアクセス権を読み取り専用に戻すとよいでしょう。
 
-1. https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
+1. link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
 1. GitHub にマシンユーザーとしてログインします。
-1. https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
+1.  link:https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
 1. **Project** ページで、マシンユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
-1. **Project Settings > Checkout SSH keys** ページで、**Authorize With GitHub** ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
-1. **Create and add XXXX user key** ボタンをクリックします。
+1. Project Settings > SSH keys** ページで、**User Key** セクションの下にある、**Authorize With GitHub** ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
+1. 認証後、再度**SSH keys**ページに移動し、**User Key**セクションに移動し、**Add User Key**ボタンをクリックし、**Confirm User**ボタンをクリックします。
 
 これで、CircleCI はビルド中に実行されるすべての Git コマンドに対して、マシンユーザーの SSH キーを使用するようになります。
 
 [#third-party-applications]
 == サードパーティのアプリケーション
 
-GitHub は最近、 https://help.github.com/articles/about-third-party-application-restrictions/[組織単位での] サードパーティーアプリケーションへのアクセスの承認機能を追加しました。 この変更が行われるまでは、組織のどのメンバーでも (GitHub のユーザーアカウントに紐づく OAuth トークンを生成して) アプリケーションを承認することが可能となっていました。また、アプリケーションはその OAuth トークンを用いることで、ユーザーが API を経由して実行するのと同じように、OAuth で認められている権限の範囲内で動作することができました。
+GitHub は最近、 link:https://help.github.com/articles/about-third-party-application-restrictions/[組織単位での] サードパーティーアプリケーションへのアクセスの承認機能を追加しました。 この変更が行われるまでは、組織のどのメンバーでも (GitHub のユーザーアカウントに紐づく OAuth トークンを生成して) アプリケーションを承認することが可能となっていました。また、アプリケーションはその OAuth トークンを用いることで、ユーザーが API を経由して実行するのと同じように、OAuth で認められている権限の範囲内で動作することができました。
 
 現在のデフォルトでは、サードパーティのアクセス制限が有効になっている場合、OAuth トークンは組織のデータにアクセス_できません_。 OAuth の処理中かその後に、ユーザーは組織単位で明確にアクセス許可をリクエストしなければならず、組織の管理者はそのリクエストを承認する必要があります。
 
-オーナーまたは管理者の場合、GitHub の https://github.com/settings/organizations[Organization settings] ページにアクセスし、その組織の **Settings** ボタンをクリックするとサードパーティのアクセス制限を有効にすることができます。 サードパーティアプリケーションの制限を設定する場合は、**Third-party application access policy** のセクションで、**Setup application access restrictions** ボタンをクリックします。
+オーナーまたは管理者の場合、GitHub の link:https://github.com/settings/organizations[Organization settings] ページにアクセスし、その組織の **Settings** ボタンをクリックするとサードパーティのアクセス制限を有効にすることができます。 サードパーティアプリケーションの制限を設定する場合は、**Third-party application access policy** のセクションで、**Setup application access restrictions** ボタンをクリックします。
 
-これらの設定の詳細や設定方法は、 https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub] で参照できます。
+これらの設定の詳細や設定方法は、 link:https://docs.github.com/ja/organizations/managing-oauth-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub] で参照できます。
 
 NOTE: CircleCI がビルドを実行している組織でこの制限を有効にすると、CircleCI は GitHub からプッシュイベントフックを受け取らなくなり、新しいプッシュをビルドしません。 API 呼び出しも拒否されます。これにより、たとえば古いビルドをリビルドしたときに、ソースのチェックアウトが失敗します。 CircleCI を再び稼働させるには、CircleCI アプリケーションへのアクセスを許可する必要があります。
 
@@ -259,7 +257,7 @@ NOTE: CircleCI がビルドを実行している組織でこの制限を有効�
 - CircleCI が承認されると、組織名の隣にチェックマークが表示されます。
 
 [#admin-owner-workflow]
-==== オーナー (管理者) のワークフロー
+==== 管理者・オーナーのワークフロー
 
 - 組織のオーナー (管理者) の場合、**Grant** ボタンをクリックすると CircleCI にアクセス権を付与することができます。
 - CircleCI アプリを認証するためにパスワードを確認される場合があります。
@@ -267,14 +265,13 @@ NOTE: CircleCI がビルドを実行している組織でこの制限を有効�
 
 アクセスが承認されると、CircleCI は元通りの挙動になるはずです。
 
+[#rename-organizations-and-repositories]
 == 組織名とリポジトリ名の変更
 
-{: #rename-organizations-and-repositories }
-
-組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories) ガイドに従い、変更プロセスの途中で環境変数やコンテキストへのアクセスを失わないようにしてください。
+組織名やリポジトリ名を変更したい場合は、xref:rename-organizations-and-repositories#[組織名およびリポジトリ名の変更]ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
 
 [#next-steps]
 == 次のステップ
 
-- <<config-intro#,設定ファイルのチュートリアル>>
-- <<hello-world#,Hello World>>
+- xref:config-intro#[設定ファイルのチュートリアル]
+- xref:hello-world#[Hello world]

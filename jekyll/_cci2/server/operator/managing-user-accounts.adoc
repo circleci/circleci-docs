@@ -1,19 +1,17 @@
 ---
-description: "This section provides information to help CircleCI server v4.x  operators manage user accounts."
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Managing user accounts
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This section provides information to help CircleCI server v4.x  operators manage user accounts.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This section provides information to help operators manage user accounts. For an overview of user accounts, see the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting *Admin*.
-
-toc::[]
 
 [#suspending-accounts]
 == Suspending accounts

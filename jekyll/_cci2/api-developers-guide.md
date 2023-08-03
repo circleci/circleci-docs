@@ -273,9 +273,6 @@ Many of the API calls make use of the `{project-slug}` triplet, described [above
         build:
           docker:
             - image: "circleci/node:<< pipeline.parameters.image-tag >>"
-              auth:
-                username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
           environment:
             IMAGETAG: "<< pipeline.parameters.image-tag >>"
           steps:
@@ -314,9 +311,6 @@ Before trying any of the API calls in this section, make sure you have a persona
 {: #get-project-details }
 
 You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (VCS) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
-
-If you would like more detailed information about a project, or need a refresher on the specifics of a project, refer to the CircleCI [Projects]({{site.baseurl}}/projects/) page.
-{: class="alert alert-info"}
 
 #### Steps
 {: #steps }

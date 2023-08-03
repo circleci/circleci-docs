@@ -15,20 +15,8 @@ contentTags:
 
 このドキュメントでは、GitHub Actions から CircleCI に移行する方法を概説します。
 
-[#why-migrate-to-circleci]
-== CircleCI に移行する理由
-
-CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
-
-1. **高度なキャッシュ** - https://circleci.com/docs/ja/caching/#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ] に加えて、CircleCI では https://circleci.com/docs/ja/docker-layer-caching/[Docker イメージレイヤー] に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
-1. **ビルドへの SSH 接続** - CircleCI は、 https://circleci.com/docs/ja/ssh-access-jobs/[実行環境への安全な SSH 接続] 機能を提供しており、ログの監視、ファイルの操作、および各環境と直接やり取りすることが可能です。 これは、失敗したビルドのデバッグに非常に役立ちます。
-1. **リソースクラス** - プラットフォーム上でさまざまなサイズの https://circleci.com/docs/ja/optimizations/#resource-class[Executor] を使用することができ、ノード上のワークロードの大きさに応じた調整に最適です。
-1. **テストの並列実行** - CircleCI のプラットフォームは、 https://circleci.com/docs/ja/workflows/[ジョブの同時実行] だけでなく、並行環境間でテストを分割する機能も備えています。 https://circleci.com/docs/ja/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで] 、ビルド時間を大幅に短縮することができます。
-
-その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/ja/signup/[今すぐ無料アカウントを作成し] 、CircleCI をお試しください。チームでのご利用をお考えでしたら、 https://circleci.com/ja/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[セールスチームにご連絡をいただければ] 、トライアルを設定させていただきます。
-
 [#concepts]
-== コンセプト
+== 概念
 
 [#jobs-and-workflows]
 === ジョブとワークフロー
@@ -43,8 +31,7 @@ GitHub Actions と CircleCI には、「ジョブ」と「ワークフロー」�
 |===
 |GitHub |CircleCI
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 name: My GitHub Actions Workflow
 
@@ -61,9 +48,7 @@ jobs:
     steps:
       # job steps
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job_1:
@@ -87,6 +72,7 @@ workflows:
 
 [#actions-vs-orbs]
 === Actions と Orb の比較
+
 GitHub の「アクション」とは、ジョブ内で実行する再利用可能なコマンドやタスクのことです。 しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
 
 CircleCI の場合は、同様の機能を https://circleci.com/docs/ja/orb-intro/#section=configuration[Orb] で提供しています。 主な違いは、CircleCI の Orb はパッケージ化された再利用可能な YAML であり、再利用可能なジョブ、Executor、またはコマンドを 「Orb 化」し、ジョブやワークフローの中で適切に使用することができます。
@@ -95,6 +81,7 @@ GitHub では、Marketplace でアクションを参照できます。CircleCI �
 
 [#runners-vs-executors]
 === ランナーと Executor の比較
+
 GitHub では、YAML の `runs-on` キーによって、Linux、macOS、Windows のビルドの実行環境を指定することができ、コンテナで何かを実行したい場合は、追加の `container` キーを指定します。
 
 CircleCI では、同じように環境 (Executor と呼ばれる) を選択でき、Docker 用のオプションや機能が追加されています。
@@ -106,6 +93,8 @@ CircleCI では、同じように環境 (Executor と呼ばれる) を選択で�
 [#configuration-comparison]
 == 設定の比較
 
+{% include snippets/ja/docker-auth.adoc %}
+
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
@@ -114,9 +103,7 @@ CircleCI では、同じように環境 (Executor と呼ばれる) を選択で�
 
 2+|実行環境の指定:  GitHub ではコンテナの実行は別々に指定されますが、CircleCI では `docker` が https://circleci.com/docs/ja/configuration-reference/#docker-machine-macos-windows-executor[Executor の独自のクラス] です。
 
-
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 # Choosing an Operating System
 runs-on: ubuntu-latest # or windows, etc.
@@ -125,16 +112,11 @@ runs-on: ubuntu-latest # or windows, etc.
 container:
   image: openjdk:17.0-jdk
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 # Docker (container) Executor
 docker:
   - image: cimg/openjdk:17.0
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 # Linux Ubuntu Executor
 machine: true
@@ -146,12 +128,12 @@ macos:
 # Windows Executor
 # NOTE: Orb declaration needed. See docs
 executor: win/vs2019
+
 ----
 
 2+|依存関係/サービスの指定:  CircleCI で最初に指定されたイメージ以降に指定されたイメージは、すべて https://circleci.com/docs/ja/configuration-reference/#docker[依存関係] として扱われます。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -170,24 +152,15 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   build:
     docker:
       # Primary Executor
       - image: cimg/openjdk:17.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
       # Dependency Service(s)
       - image: postgres:10.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -196,8 +169,7 @@ jobs:
 
 2+|ジョブ内で https://circleci.com/docs/ja/configuration-reference/#run[実行する] ステップの指定:  同じような機能ですが、構文が異なります。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -207,9 +179,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   build:
@@ -221,11 +191,9 @@ jobs:
           command: ./gradlew build
 ----
 
-2+|共有タスクの利用 (GitHub ならアクション、CircleCI なら Orb):  CircleCI では、最初にトップレベルの Orb を宣言し、 https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します] 。
-これは Python や JavaScript のインポートに似た概念です。
+2+|共有タスクの利用 (GitHub ならアクション、CircleCI なら Orb):  CircleCI では、最初にトップレベルの Orb を宣言し、 https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します] 。これは Python や JavaScript のインポートに似た概念です。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -241,9 +209,7 @@ jobs:
           SLACK_USERNAME: Bobby
           SLACK_WEBHOOK: # WEBHOOK
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 orbs:
   slack-orb: circleci/slack@3.4.0
@@ -262,11 +228,9 @@ jobs:
 ----
 
 2+|ワークフローでの条件付きステップの使用:  CircleCI では、 https://circleci.com/docs/ja/configuration-reference/#the-when-attribute[ステップの基本的な条件] (例: on_success (デフォルト)、
-on_success、on_failure) だけでなく、パラメーターに基づいた https://circleci.com/docs/ja/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 
-また、 https://circleci.com/docs/ja/reusing-config/#using-the-parameters-declaration[条件付きのジョブ] も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが現在 https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中] です。
+on_success、on_failure) だけでなく、パラメーターに基づいた https://circleci.com/docs/ja/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 また、 https://circleci.com/docs/ja/reusing-config/#using-the-parameters-declaration[条件付きのジョブ] も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが現在 https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中] です。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -280,9 +244,7 @@ jobs:
         run: echo "Always step"
         if: always()
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   build:
@@ -300,7 +262,7 @@ jobs:
 ----
 |===
 
-CircleCI のその他の設定例は、 <<examples-and-guides-overview#,サンプルとガイドの概要>> と <<example-configs#,サンプルプロジェクト>> のページをご覧ください。
+GitHub Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。
 
 GitHub Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。 しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 

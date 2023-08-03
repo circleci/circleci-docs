@@ -7,7 +7,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 [custom-images]: {{ site.baseurl }}/custom-images/
 [building-docker-images]: {{ site.baseurl }}/building-docker-images/
@@ -20,14 +19,13 @@ You can use the Docker execution environment to run your [jobs]({{site.baseurl}}
 
 Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
 
+{% include snippets/docker-auth.md %}
+
 ```yaml
 jobs:
   my-job:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
@@ -76,20 +74,7 @@ The following examples show how you can use public images from various sources:
 {: #available-docker-resource-classes }
 
 The [`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
-job. In Docker, the following resources classes are available:
-
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge               | 16    | 32GB
-2xlarge+              | 20    | 40GB
-{: class="table table-striped"}
-
-**Note**: `2xlarge` and `2xlarge+` require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.
+job.
 
 Specify a resource class using the `resource_class` key, as follows:
 
@@ -102,6 +87,28 @@ jobs:
     steps:
     #  ...  other config
 ```
+
+### x86
+{: #x86 }
+
+For the Docker execution environment, the following resources classes are available for the x86 architecture:
+
+{% include snippets/docker-resource-table.md %}
+
+### Arm
+{: #arm }
+
+The following resource classes are available for Arm with Docker:
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**. For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
 
 ## Docker benefits and limitations
 {: #docker-benefits-and-limitations }
@@ -127,7 +134,7 @@ Capability | `docker` | `machine`
  Full root access | No | Yes
  Run multiple databases | Yes <sup>(3)</sup> | Yes
  Run multiple versions of the same software | No | Yes
- [Docker layer caching]({{ site.baseurl }}/docker-layer-caching/) | Yes | Yes
+ [Docker layer caching](/docs/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/configuration-reference/#resource_class) | Yes | Yes
@@ -161,7 +168,11 @@ More details on the Docker executor are available in the [Configuring CircleCI](
 ## Using multiple Docker images
 {: #using-multiple-docker-images }
 
-It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/glossary/#primary-container).
+It is possible to specify multiple images for your job. Each image will be used to spin up a separate container.
+
+Using multiple containers for a job will be useful if you need to use a database for your tests, or for some other required service.
+
+When using a multi-container job setup, all containers run in a common network and every exposed port will be available on `localhost`. All containers can communicate with one another. It is also possible to change this hostname using the `name` key. For a full list of options, see the [Configuration reference](/configuration-reference/#docker).
 
 **In a multi-image configuration job, all steps are executed in the container created by the first image listed**.
 

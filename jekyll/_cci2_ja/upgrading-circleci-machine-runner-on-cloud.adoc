@@ -1,0 +1,179 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+---
+= クラウド上の CircleCI マシンランナーの更新
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、Linux、Windows、macOS で CircleCI マシンランナーを手動で更新する方法をわかりやすくご紹介しています。
+:icons: font
+:toc: macro:
+:toc-tittle:
+
+**CAUTION: セルフホストランナーバージョン 1.0 は 2023年8月3日に終了します。 今すぐ 1.1 にアップデートしてください。
+
+ここでは、CircleCI クラウド 上で CircleCI マシンランナーを更新する方法を説明します。
+
+[#check-current-version]
+== 現在のマシンランナーバージョンの確認
+
+マシンランナーのバージョンは、バイナリに `--version` フラグを付けることで確認することができます。 CircleCI マシンランナー バイナリのデフォルトのインストールディレクトリは以下の通りです：
+
+* Linux と macOS: `/opt/circleci/circleci-launch-agent`
+* Windows: `C:\Program Files\CircleCI\circleci-launch-agent.exe`
+
+[#enable-auto-update]
+== 自動更新の有効化方法
+
+既存のCircleCIマシンランナーをアップグレードする最も簡単な方法は、設定ファイルで自動更新を有効にし、ランナーインスタンスを再起動することです。 自動更新を有効にするには、次の手順に従います：
+
+. マシンランナー設定ファイルから `disable_auto_update` オプションを削除するか、 `runner.disable_auto_update` を `false` に設定してください。
+. CircleCI マシンランナーエージェントを管理するために使用されるプロセス管理を使用して、マシンランナーインスタンスを再起動してください。 もしマシンランナーを管理するためにプロセス管理が使用されていない場合は、macOS や Linux システムでは `kill -9` を使用してインスタンスを手動で停止し、 Windows システムではタスクマネージャーを使用して手動で再起動する必要があります。
+
+マシンランナーの設定に関する詳細は、xref:runner-config-reference#[マシンランナー設定リファレンス]を参照してください。
+
+=== Linux
+
+```shell
+sudo systemctl restart circleci.service
+```
+
+=== macOS
+
+```shell
+sudo launchctl stop '/Library/LaunchDaemons/com.circleci.runner.plist'
+sudo launchctl start '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+=== Windows
+
+```shell
+Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
+Start ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+
+NOTE: 環境変数で自動更新機能を無効にしている場合があります。 構成ファイルで自動更新を有効にした後にマシンランナーのインストールが更新されない場合は、環境変数 `LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE`  の値を `false` に設定するか、完全に変数をアンセットしてください。 その後、再度マシンランナーインスタンスを再起動してください。
+
+[#manually-update-by-downloading-a-new-version-of-the-machine-runner-binary]
+== マシンランナーバイナリの新バージョンダウンロードによる手動更新
+
+自動更新が使用できないマシンランナーでは、ローンチエージェントバイナリ（launch-agent binary）として知られるマシンランナーバイナリを手動でダウンロードし、既存のバージョンを置き換えるために使用することができます。
+
+NOTE: もしマシンランナーを管理するためにプロセス管理が使用されていない場合は、macOS や Linux システムでは `kill -9` を使用してインスタンスを手動で停止し、 Windows システムではタスクマネージャーを使用して手動で再起動する必要があります。
+
+バイナリをダウンロードするプロセスは、3つのステップに分かれています：バイナリのダウンロード、バイナリの置換、そしてCircleCIマシンランナーサービスの再起動です。 各ステップの詳細は次のセクションで説明します。
+
+=== 1.  新しいバージョンのバイナリをダウンロード
+
+==== Linux または macOS のバイナリをダウンロードする
+
+===== プラットフォーム環境変数を設定
+
+xref:runner-installation-linux#[Linux] や xref:runner-installation-mac#[macOS] のインストール作業と同様に、まず環境変数 `platform` を対象となるインストールシステムに対して正しい値に設定する必要があります。
+
+```shell
+# for Linux x86_64
+export platform=linux/amd64
+```
+
+```shell
+# for Linux ARM64
+export platform=linux/arm64
+```
+
+```shell
+# for Linux s390x
+export platform=linux/s390x
+```
+
+```shell
+# for Linux ppc64le
+export platform=linux/ppc64le
+```
+
+```shell
+# for macOS ARM64 (M1+ chips)
+export platform=darwin/arm64
+```
+
+```shell
+# for macOS x86_64
+export platform=darwin/amd64
+```
+
+===== 新エージェントバイナリのダウンロード
+
+```shell
+# Download the new version of the CircleCI Agent manually on macOS, and Linux with bash
+base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+agent_version=$(curl "${base_url}/release.txt")
+curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
+mkdir -p "${platform}"
+file="$(grep -F "${platform}" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
+curl --compressed -L "${base_url}/${agent_version}/${file}" -o "${file}"
+grep "${file}" checksums.txt | sha256sum --check || echo "Failed to download the CircleCI machine runner binary, please try again"
+chmod +x $file
+```
+
+==== Windows のバイナリをダウンロードする
+
+```shell
+# Download the new version of the CircleCI Agent manually on Windows with PowerShell
+$Env:platform = "windows/amd64"
+mkdir $Env:platform
+$Env:baseURL =  "https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+$Env:agentVersion = $(curl "$Env:baseURL/release.txt")
+$Env:agentVersion = "$Env:agentVersion".Trim()
+curl "$Env:baseURL/$Env:agentVersion/checksums.txt" -o checksums.txt
+$Env:fileName = $(Select-String $Env:platform checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')
+$Env:fileName = $Env:fileName.Trim()
+curl "$Env:baseURL/$Env:agentVersion/$Env:fileName" -o $Env:fileName
+$Env:fileHash = $(Get-FileHash $Env:fileName -Algorithm "SHA256" | select -expand "Hash")
+$Env:expectedHash = "$(grep $Env:filename checksums.txt)".Split(" ")[0]
+if ($Env:expectedHash -ne $Env:fileHash) { Write-Output "CircleCI machine runner binary download failed, please try again"}else{Write-Output "CircleCI machine runner binary successfully downloaded to $CWD/$Env:fileName"}
+```
+
+=== 2. 既存のバイナリを新しいバージョンに置き換える
+
+==== Linux で既存バイナリを置き換える
+
+```shell
+sudo systemctl stop circleci.service
+# Replace the current binary with the newly downloaded binary, by default the machine runner binary is installed to `/opt/circleci/circleci-launch-agent`
+```
+
+==== macOS で既存バイナリを置き換える
+
+```shell
+sudo launchctl stop '/Library/LaunchDaemons/com.circleci.runner.plist'
+# Replace the current binary with the newly downloaded binary, by default the machine runner binary is installed to `/opt/circleci/circleci-launch-agent`
+```
+
+==== Windows で既存バイナリを置き換える
+
+```shell
+Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
+# Replace the current binary with the newly downloaded binary, this will require renaming or deleting the existing binary
+```
+
+=== 3. マシンランナーサービスを再起動する
+
+==== Linux のマシンランナーサービスを再起動する
+
+```shell
+sudo systemctl start circleci.service
+```
+
+==== macOS のマシンランナーサービスを再起動する
+
+```shell
+sudo launchctl start '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+==== Windows のマシンランナーサービスを再起動する
+
+```shell
+Start-ScheduledTask -TaskName "CircleCI Launch Agent"
+```

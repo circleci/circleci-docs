@@ -1,17 +1,17 @@
 ---
-description: "Details of the new features included in each CircleCI server 4.x release."
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = CircleCI server v4.x release notes
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Details of the new features included in each CircleCI server 4.x release.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-Server v4.x offers the following:
+Server v4.0 offers the following:
 
 * Greatly improved security handling, installation, and update processes.
 * Installed using Helm charts and images that can be pulled ahead of time to comply with your security processes.
@@ -27,6 +27,14 @@ Find information about migration in the link:/docs/server/installation/migrate-f
 [#upgrade]
 == Upgrade
 For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrade Server v4 Guide].
+
+[#release-4-0-3]
+== Release 4.0.3
+
+[#changelog-4-0-3]
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-4-0-3[changelog].
 
 [#release-4-0-2]
 == Release 4.0.2

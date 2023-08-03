@@ -2,12 +2,11 @@
 layout: classic-docs
 title: "Using Workspaces to Share Data between Jobs"
 description: "This document describes how to use workspaces to share data to downstream jobs in your workflows."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Workflows each have an associated `workspace`. Workspaces are used to transfer data to downstream jobs as the workflow progresses.
@@ -19,7 +18,7 @@ For example, a project with a `build` job that builds a `.jar` file and saves it
 ## Overview
 {: #overview }
 
-Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. 
+Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem.
 
 Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
@@ -27,10 +26,10 @@ Some notes about workspaces:
 
 * Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 * Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
-* The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace. 
+* The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace.
 * Each job can only see content added to the workspace by the jobs that are upstream of it.
-* When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined. 
-* If multiple concurrent jobs persist, the same filename then attaching the workspace will error.
+* When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined.
+* If multiple concurrent jobs persist the same filename, then attaching the workspace will error.
 * If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
 By default, workspace storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
@@ -46,7 +45,8 @@ If you have custom storage settings, `persist_to_workspace` will default to the 
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `.circleci/config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
-{:.tab.workspaces.Cloud}
+{% include snippets/docker-auth.md %}
+
 ```yaml
 version: 2.1
 
@@ -54,113 +54,6 @@ executors:
   my-executor:
     docker:
       - image: buildpack-deps:jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /tmp
-
-jobs:
-  flow:
-    executor: my-executor
-    steps:
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - echo-output
-
-  downstream:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
-
-workflows:
-  btd:
-    jobs:
-      - flow
-      - downstream:
-          requires:
-            - flow
-```
-
-{:.tab.workspaces.Server_3}
-```yaml
-version: 2.1
-
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /tmp
-
-jobs:
-  flow:
-    executor: my-executor
-    steps:
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - echo-output
-
-  downstream:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
-
-workflows:
-  btd:
-    jobs:
-      - flow
-      - downstream:
-          requires:
-            - flow
-```
-
-{:.tab.workspaces.Server_2}
-```yaml
-version: 2
-
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp
 
 jobs:

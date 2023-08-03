@@ -4,15 +4,13 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Benefits of CircleCI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Benefits of choosing CircleCI for CI/CD
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 
 [#benefits-of-circleci]

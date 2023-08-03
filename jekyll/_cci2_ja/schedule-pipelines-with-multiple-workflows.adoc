@@ -5,7 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = 複数のワークフローを使ったパイプラインのスケジュール実行
 :page-layout: classic-docs

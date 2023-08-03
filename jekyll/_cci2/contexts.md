@@ -3,12 +3,11 @@ layout: classic-docs
 title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
@@ -20,14 +19,7 @@ If you have existing contexts (or environment variables) and you would like to r
 
 You can create and manage contexts on the **Organization Settings** page of the [CircleCI web app](https://app.circleci.com). You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project's [`.circleci/config.yml`]({{site.baseurl}}/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
-{:.tab.contextsimage.Cloud}
 ![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
-
-{:.tab.contextsimage.Server_3}
-![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
-
-{:.tab.contextsimage.Server_2}
-![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_server.png)
 
 To use environment variables set on the **Contexts** page of the web app, the person running the workflow must be a member of the organization for which the context is set.
 
@@ -52,7 +44,6 @@ Context names must be unique for each VCS organization. The default name for a c
 
 4. Add the `context` key to the [`workflows`]({{site.baseurl}}/configuration-reference/#workflows) section of your `.circleci/config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
-{:.tab.contexts.Cloud}
 ```yaml
 version: 2.1
 
@@ -68,59 +59,6 @@ jobs:
   run-tests:
     docker:
       - image: cimg/base:2020.01
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: "echo environment variables from org-global context"
-          command: echo $MY_ENV_VAR
-```
-
-{:.tab.contexts.Server_3}
-```yaml
-version: 2.1
-
-workflows:
-  my-workflow:
-    jobs:
-      - run-tests:
-          context:
-            - org-global
-            - my-context
-
-jobs:
-  run-tests:
-    docker:
-      - image: cimg/base:2020.01
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: "echo environment variables from org-global context"
-          command: echo $MY_ENV_VAR
-```
-
-{:.tab.contexts.Server_2}
-```yaml
-version: 2.1
-
-workflows:
-  my-workflow:
-    jobs:
-      - run-tests:
-          context: org-global
-
-jobs:
-  run-tests:
-    docker:
-      - image: cimg/base:2020.01
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -156,7 +94,7 @@ You can combine several contexts for a single job by adding them to the context 
 ## Restrict a context
 {: #restrict-a-context }
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's VCS teams. If you are using CircleCI server v2.x with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
@@ -196,61 +134,8 @@ Administrators of CircleCI server installations can find the **Refresh Permissio
 
 Adding an [approval job]({{site.baseurl}}/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
 
-{:.tab.approvingcontexts.Cloud}
 ```yaml
 version: 2.1
-
-# Jobs declaration for build, test and deploy not displayed
-
-workflows:
-  jobs:
-    build-test-deploy:
-      - build
-      - test:
-          context: my-restricted-context
-          requires:
-            - build
-      - hold:
-          type: approval # presents manual approval button in the UI
-          requires:
-            - build
-      - deploy:
-          context: deploy-key-restricted-context
-          requires:
-            - build
-            - hold
-            - test
-```
-
-{:.tab.approvingcontexts.Server_3}
-```yaml
-version: 2.1
-
-# Jobs declaration for build, test and deploy not displayed
-
-workflows:
-  jobs:
-    build-test-deploy:
-      - build
-      - test:
-          context: my-restricted-context
-          requires:
-            - build
-      - hold:
-          type: approval # presents manual approval button in the UI
-          requires:
-            - build
-      - deploy:
-          context: deploy-key-restricted-context
-          requires:
-            - build
-            - hold
-            - test
-```
-
-{:.tab.approvingcontexts.Server_2}
-```yaml
-version: 2
 
 # Jobs declaration for build, test and deploy not displayed
 
@@ -281,7 +166,7 @@ In this example, the jobs `test` and `deploy` are restricted, and `deploy` will 
 
 CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
-NOTE: API support for project restricted contexts is coming soon. 
+NOTE: API support for project restricted contexts is coming soon.
 
 Organization Admins have read/write access to all projects, and have unrestricted access to all contexts.
 
@@ -354,6 +239,9 @@ If a deleted context was being used by a job in a workflow, the job will start t
 
 ## Context management with the CLI
 {: #context-management-with-the-cli}
+
+**Using GitLab?** Managing Contexts via the CircleCI CLI is not currently supported for GitLab projects.
+{: class="alert alert-info"}
 
 While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several [context-oriented commands](https://circleci-public.github.io/circleci-cli/circleci_context.html).
 
@@ -457,7 +345,7 @@ To rotate an environment variable from the API, call the [Update environment var
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 * [CircleCI environment variable descriptions]({{site.baseurl}}/env-vars/)
 * [Workflows]({{site.baseurl}}/workflows/)

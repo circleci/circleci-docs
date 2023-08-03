@@ -1,18 +1,16 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Glossary
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#circleci-administrator]
 == CircleCI administrator
@@ -31,7 +29,7 @@ A container is a running instance of an image.
 [#docker-layer-caching]
 == Docker layer caching
 
-The CircleCI Docker Layer Caching feature allows builds to reuse Docker image layers from previous builds. Image layers are stored in separate volumes in the cloud, and are not shared between projects. Layers may only be used by builds from the same project. For additional information about how the secure environment is created, see the <<docker-layer-caching#,Docker Layer Caching>> and <<building-docker-images#,Running Docker Commands>> documents. 
+The CircleCI Docker Layer Caching (DLC) feature allows builds to reuse Docker image layers from previous builds. Use DLC to speed up workflows. Jobs that are configured to build Docker images run in a shorter time on subsequent runs. Layers may only be used by builds from the same project. For more information and usage examples, see the xref:docker-layer-caching#[Docker Layer Caching] and xref:building-docker-images#[Running Docker Commands] pages.
 
 [#environment-variables]
 == Environment variables
@@ -71,7 +69,7 @@ The owner of the team's VCS organization.
 [#pipeline]
 == Pipeline
 
-A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.yml.' file. _Pipelines are not available on CircleCI server v2.x._
+A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.yml.' file.
 
 [#primary-container]
 == Primary container

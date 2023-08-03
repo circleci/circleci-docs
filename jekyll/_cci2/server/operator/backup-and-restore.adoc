@@ -1,17 +1,15 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+    - Server v4.x
+    - Server Admin
 ---
 = Backup and restore
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
 :icons: font
-:toc: macro
-:toc-title:
-
-toc::[]
+:experimental:
 
 [#overview-backup]
 == Overview
@@ -31,9 +29,9 @@ NOTE: Backup and restore of the CircleCI services is dependent on Velero. If you
 [source,bash]
 
 ----
-K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
-CHART=$(helm list -o yaml  | yq '.[].chart' )
-REV=$(helm list -o yaml  | yq '.[].revision')
+K8S_NS=<your_server_namespace>
+CHART=$(helm list -n "$K8S_NS" -o yaml  | yq '.[].chart' )
+REV=$(helm list -n "$K8S_NS" -o yaml  | yq '.[].revision')
 RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
 
 velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"

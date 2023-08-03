@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "パブリックリポジトリの例"
-short-title: "パブリックリポジトリの例"
 description: "このページでは CircleCI 設定ファイルのサンプルを紹介します。 これらのサンプルには、CircleCI を使ってコードのデプロイを開始するにの必要な基本的なステップがすべて含まれています。"
-categories:
-  - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 CircleCI で実行されるパブリックプロジェクトおよびオープンソースプロジェクトのサンプル全体は、以下の各ドキュメントとリンク先の `.circleci/config.yml` ファイルでご確認いただけます。

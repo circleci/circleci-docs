@@ -20,6 +20,58 @@ CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュー
 
 toc::[]
 
+== リリース 3.4.7
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/[changelog] を参照して下さい。
+
+== リリース 3.4.6
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-6[changelog] を参照して下さい。
+
+== リリース 3.4.5
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-5[changelog] を参照して下さい。
+
+== リリース 3.4.4
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#リリース-3-4-4[changelog] を参照して下さい。
+
 == リリース 3.4.3
 
 === アップグレードに関する注意事項
@@ -86,9 +138,9 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-1[changelog] を参照して下さい。
 
-== リリース 3.3.0
+== リリース 3.2.1
 
-=== 新機能
+=== アップグレードに関する注意事項
 
 * Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、 https://circleci.com/docs/ja/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール] を参照してください。
 * https://circleci.com/docs/ja/webhooks/[Webhooks] が利用できるようになりました。
@@ -129,7 +181,7 @@ v3.1.x から v3.2.x. にアップグレードする前に、まず <<Upgrade no
 
 KOTS 管理者コンソールのメニューバーで *Version History* を選択し、CircleCI Server v3.2.0 の **Deploy** をクリックします。
 
-サーバー 3.1.x から 3.2 へのアップグレード時には、PostgreSQL ポッドの変更のためにダウンタイムが発生します。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
+DNS レコードを更新して既存の CircleCI Server をアップグレードするには、次の手順を実施してください。 このアップデートにより 2つの問題が発生する可能性があり、ここではその問題について説明します。
 
 ==== PostgreSQL ポッドが  `pending` のまま
 
@@ -188,20 +240,20 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 === 新機能
 
-* 完全なプライベートネットワーク環境でのインストールを必要とするお客様は、KOTS管理コンソールの設定画面からパブリックIPがVMに割り当てられないようにすることができます。 なお、非パブリックIPの設定を有効にした場合、実行中のジョブにSSHアクセスが必要なときは、VPCにVPNを設定するなどの回避策が必要となりますのでご注意ください。
-* プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、 https://circleci.com/docs/ja/server-3-operator-proxy/[サーバー 3.xのプロキシ設定] を参照してください。
-* マシン実行環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。
-* https://circleci.com/docs/ja/insights/[インサイトAPI] が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
-* 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。
-* VMサービスにカスタムLinux AMIが利用できるようになりました。
-* SSL ターミネーションを無効にできるようになりました。 サーバーをファイアウォールの内側に置いている場合、これによりファイアウォールでの SSL ターミネーションが利用できます。
-* 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張のドキュメント] を参照してください。
-* https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform] に Nomad のオートスケーリングの例を追加しました。
+* CircleCI Server 環境を完全にプライベート化したいというお客様のご要望に応え、使用するロード バランサーをプライベートのもののみに限定するオプションが導入されました。 詳細については、 https://circleci.com/docs/ja/server-3-operator-load-balancers/[ロードバランサー] のガイドをご覧ください。
+* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage がサポートされます。
+* CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/ja/dynamic-config/[ダイナミックコンフィグ] をご覧ください。
+* ランナーがサーバーで利用可能となりました。 インストール手順などの詳細については、 https://circleci.com/docs/ja/runner-overview/?section=executors-and-images[ランナーに関するドキュメント] をご覧ください。
+* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。
+* 次のサービスを外部化できるようになりました。
+* バックアップ＆復元機能が利用できるようになりました。 詳細については、 https://circleci.com/docs/ja/server-3-operator-backup-and-restore/[バックアップと復元] をご覧ください。
+* 2XLリソースクラスをサポートするようになりました。 大きいリソースクラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張のドキュメント] を参照してください。
+* ビルドアーティファクトとテスト結果のライフサイクルを KOTS 管理者コンソールの **Storage Object Expiry** で設定できるようになりました。また、期限切れを無効にしてアーティファクトとテスト結果を無期限に保持するオプションも追加されました。
 * 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 詳細については、 https://circleci.com/docs/ja/server-3-operator-build-artifacts/[CircleCI Server v3.x ビルド アーティファクト] を参照してください。
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-0[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-1-0[changelog] を参照して下さい。
 
 == リリース 3.1.0
 

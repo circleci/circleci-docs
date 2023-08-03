@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Manual Orb Authoring Process"
 description: "Authoring simple orbs manually without the orb development kit."
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -135,7 +135,6 @@ orbs:
   node: circleci/node@4.7.0
 
 workflows:
-  version: 2
   example-workflow:
       jobs:
         - node/test
@@ -154,9 +153,6 @@ jobs:
   node/test:
     docker:
     - image: cimg/node:13.11.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:

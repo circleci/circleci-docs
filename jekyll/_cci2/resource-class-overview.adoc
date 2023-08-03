@@ -1,18 +1,16 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Resource class overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of resource classes in CircleCI
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Use resource classes to:
 
@@ -21,9 +19,9 @@ Use resource classes to:
 * Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 
 [#introduction]
-== Introduction 
+== Introduction
 
-The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor. 
+The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 
 [source,yaml]
 ----
@@ -38,7 +36,7 @@ jobs:
 
 Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements. For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
 
-When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the link:/docs/runner-installation/[installation process].
+When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:runner-overview/#getting-started[installation process].
 
 [source,yaml]
 ----
@@ -76,7 +74,7 @@ For config examples showing how to use the `resource_class` key to **specify CPU
 * GPU resource classes: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] and link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
 * link:/docs/configuration-reference/#arm-execution-environment-linux[Arm resource classes]
 
-To get started setting up a **self-hosted runner**, see the link:/docs/runner-installation[Installing self-hosted runners with the web app] page.
+To get started setting up a **self-hosted runner**, see the xref:runner-overview/#getting-started[Getting started] section of the Self-hosted runners overview.
 
 [#default-resource-class]
 == Default resource class
@@ -97,6 +95,11 @@ The job details page in the web app shows the resource class used for a job.
 image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
 
 Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
+
+[#view-resource-usage-per-job]
+=== View resource usage per job
+
+{% include snippets/resource-class-view.adoc %}
 
 === Resource class Insights
 

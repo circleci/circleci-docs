@@ -3,7 +3,6 @@ contentTags:
   platform:
   - Server v4.x
   - Server v3.x
-  - Server v2.x
   - Server Admin
 ---
 = Security
@@ -11,10 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
-:toc: macro
-:toc-title:
-
-include::../_includes/snippets/server-2-eol-banner.adoc[]
+:experimental:
 
 This document outlines security features built into CircleCI and related integrations.
 

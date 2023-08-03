@@ -1,13 +1,14 @@
 ---
 
-version:
-- Server v4.x
-- サーバー管理者
+contentTags:
+  platform:
+    - Server v4.x
+    - サーバー管理者
 ---
 = トラブルシューティングとサポート
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
+:page-description: このドキュメントでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -108,8 +109,3 @@ kubectl logs <pod-name> -n <namespace>
 ----
 kubectl delete pod <pod-name> -n <name-space> --now
 ----
-
-[#debug-queuing-builds]
-== キューに入れられたビルドのデバッグ
-
-キューに入れられたビルドのデバッグに関する問題を解決するには、CircleCI Server 2.x の https://circleci.com/docs/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング] ガイドを参照してください。

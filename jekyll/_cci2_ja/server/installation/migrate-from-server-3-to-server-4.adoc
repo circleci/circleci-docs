@@ -7,7 +7,7 @@ version:
 = CircleCI Server v3 から v4.x への移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Server v3.x から v4.x. に移行する方法をご確認ください。
+:page-description: このドキュメントでは、CircleCI Server v3.x から v4.x. に移行する方法を詳しくご紹介しています。
 :icons: font
 :toc: macro
 
@@ -83,7 +83,7 @@ kubectl -n <namespace> create secret docker-registry regcred \
 ** Server 4.x のライセンス文字列。CircleCI の担当者から提供されます。
 . スクリプトが完成すると、実行する次のステップの詳細についての下記のようなメッセージが表示されます。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 ############ Upgrade Commands ################
 Before upgrading to 4.x, follow the steps below:
@@ -106,6 +106,8 @@ helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-v
 NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
 It should be - <domain-name>:4647
 ----
+
+NOTE: CircleCI Server v4.0 にアップグレードする際に、Postgres インスタンスが外部化されて **いない場合**、Postgres チャートもアップグレードされます。
 
 IMPORTANT: CircleCI Server v4.0 にアップグレードする際に、Postgres インスタンスが外部化されて **いない場合**、Postgres チャートもアップグレードされます。
 
@@ -147,7 +149,7 @@ DEBUG: Memory usage: 12 of 15M
 
 次に、helm-diff コマンドを作成し、出力をレビューします。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 helm registry login cciserver.azurecr.io -u <image-registry-username>
 
@@ -184,7 +186,7 @@ helm-value ファイルの検証が完了したら、以下のコマンドを実
 
 Helm レジストリは Azure プライベートレジストリに保存されています。 そのレジストリにアクセスするためのユーザー名とトークンが提供されます。
 
-[source,shell]
+[source,shell,subs=attributes+]
 ----
 helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.1 --force
 ----

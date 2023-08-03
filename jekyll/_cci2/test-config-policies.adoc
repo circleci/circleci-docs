@@ -3,17 +3,15 @@ description: Open preview of config policies for CircleCI. Learn about testing y
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
-= Test config policies - Open preview
+= Test config policies
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
-
-CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
+NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 
@@ -22,7 +20,7 @@ This guide assumes you are familiar with writing config policies. If you would l
 [#prerequisites]
 == Prerequisites
 
-The instructions on this page assume you have followed and completed the xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[Create a policy] guide, through which you will have done the following:
+The instructions on this page assume you have followed and completed the xref:create-and-manage-config-policies#create-a-policy[Create a policy] guide, through which you will have done the following:
 
 * Enabled config policies for your organization
 * Created a simple policy to check CircleCI config versions within your org. You will have the following file structure: `./config-policies/version.rego`
@@ -81,7 +79,7 @@ test_version_check:
         status: HARD_FAIL
         hard_failures:
           - rule: check_version
-            reason: version must be at least 2.0 but got 1
+            reason: version must be at least 2.1 but got 1
 ----
 
 . Run the `test` command against your `config-policies` directory:
@@ -175,6 +173,73 @@ meta: null
 ok    config-policies    0.000s
 
 1/1 tests passed (0.000s)
+----
+
+. To get the test output in JSON format, use the `--format` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --format=json
+----
++
+Expected output:
++
+[source,json]
+----
+[
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check",
+    "Elapsed": "306.467µs",
+    "ElapsedMS": 0
+  },
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/absent_version",
+    "Elapsed": "94.728µs",
+    "ElapsedMS": 0
+  },
+  {
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/inferior_version",
+    "Elapsed": "360.223µs",
+    "ElapsedMS": 0
+  },
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/version_wrong_type",
+    "Elapsed": "209.058µs",
+    "ElapsedMS": 0
+  }
+]
+----
+
+. To get the test output in JUnit XML format, use the `--format` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --format=junit
+----
++
+Expected output:
++
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="root" tests="4" failures="0" errors="0" time="0.002">
+        <testsuite tests="4" failures="0" time="0.002" name="config-policies" timestamp="">
+                <properties></properties>
+                <testcase classname="config-policies" name="test_version_check" time="0.001"></testcase>
+                <testcase classname="config-policies" name="test_version_check/absent_version" time="0.000"></testcase>
+                <testcase classname="config-policies" name="test_version_check/inferior_version" time="0.000"></testcase>
+                <testcase classname="config-policies" name="test_version_check/version_wrong_type" time="0.001"></testcase>
+        </testsuite>
+</testsuites>
 ----
 
 [#add-another-policy-and-test]

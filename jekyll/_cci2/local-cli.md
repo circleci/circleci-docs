@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Installing the CircleCI local CLI
+title: Install and configure the CircleCI local CLI
 description: How to install the CircleCI local CLI
 categories: [troubleshooting]
 contentTags:
@@ -8,7 +8,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 suggested:
   - title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
@@ -21,20 +20,18 @@ suggested:
 ## Overview
 {: #overview }
 
-The [CircleCI command line interface (CLI)](https://circleci-public.github.io/circleci-cli/) brings CircleCI's advanced and powerful tools to your terminal. The CLI is supported on cloud and server v3.x+ installations. If you are using server v2.x, please see the [legacy CLI installation](#using-the-cli-on-circleci-server-v2-x) section.
+The [CircleCI command line interface (CLI)](https://circleci-public.github.io/circleci-cli/) brings CircleCI's advanced and powerful tools to your terminal.
 
 Some of the things you can do with the CLI include:
 
-- Debug and validate your CI config
-- Run jobs locally
+- [Debug and validate your CircleCI configuration](/docs/how-to-use-the-circleci-local-cli/#validate-a-circleci-config)
+- [Run jobs locally](/docs/how-to-use-the-circleci-local-cli/#run-a-job-in-a-container-on-your-machine)
 - Query CircleCI's API
-- Create, publish, view, and manage orbs
-- Manage contexts
+- [Create, publish, view, and manage orbs](/docs/how-to-use-the-circleci-local-cli/#orb-development-kit)
+- [Manage contexts](/docs/how-to-use-the-circleci-local-cli/#context-management)
+- [Split your tests](/docs/how-to-use-the-circleci-local-cli/#test-splitting) to run across [parallel environments](/docs/parallelism-faster-jobs/) to reduce pipeline duration
 
 This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
-
-* TOC
-{:toc}
 
 ## Installation
 {: #installation }
@@ -131,7 +128,7 @@ For **macOS** installations with Homebrew, you will need to run the following co
 
 ### Updating the legacy CLI
 {: #updating-the-legacy-cli }
-{:.no_toc}
+
 
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
 
@@ -142,8 +139,8 @@ circleci switch
 
 This command may prompt you for `sudo` if your user does not have write permissions to the install directory, `/usr/local/bin`.
 
-## Configuring the CLI
-{: #configuring-the-cli }
+## Configure the CLI
+{: #configure-the-cli }
 
 Before using the CLI, you need to generate a CircleCI API token from the [Personal API Token tab](https://app.circleci.com/settings/user/tokens). After you get your token, configure the CLI by running:
 
@@ -152,18 +149,6 @@ circleci setup
 ```
 
 The set up process will prompt you for configuration settings. If you are using the CLI with CircleCI cloud, use the default CircleCI host. If you are using CircleCI server, change the value to your installation address (for example, circleci.your-org.com).
-
-## Validate a CircleCI config
-{: #validate-a-circleci-config }
-
-You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally.
-
-To validate your configuration, navigate to a directory with a `.circleci/config.yml` file and run:
-
-```shell
-circleci config validate
-# Config file at .circleci/config.yml is valid
-```
 
 ## Uninstallation
 {: #uninstallation }
@@ -184,21 +169,54 @@ choco uninstall circleci-cli -y --remove dependencies
 ```
 **Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
 
-## Using the CLI on CircleCI server v2.x
-{: #using-the-cli-on-circleci-server-v2-x }
-
-Currently, only the legacy CircleCI CLI is available to run on server v2.x installations of CircleCI on macOS and Linux distributions. To install the legacy CLI:
-
-1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
-2. To install the CLI, run the following command:
-
-```shell
-$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
-```
-
-The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
-
 ## Next steps
 {: #next-steps }
 
-- [Introduction to execution environments]({{site.baseurl}}/executor-intro)
+- [How to validate your CircleCI configuration](/docs/how-to-use-the-circleci-local-cli/#validate-a-circleci-config)
+- [How to run a job in a container on your local machine](/docs/how-to-use-the-circleci-local-cli/#run-a-job-in-a-container-on-your-machine)
+- [How to create, publish, view, and manage orbs](/docs/how-to-use-the-circleci-local-cli/#orb-development-kit)
+- [How to manage contexts](/docs/how-to-use-the-circleci-local-cli/#context-management)
+- [How to split your tests](/docs/how-to-use-the-circleci-local-cli/#test-splitting) to run across [parallel environments](/docs/parallelism-faster-jobs/) to reduce pipeline duration
+
+---
+
+## CLI articles in the support centre
+{: #useful-links }
+
+If you wish to suggest ways we could improve the CLI please [share your suggestion on the GitHub repo](https://github.com/CircleCI-Public/circleci-cli)
+
+- [How to check private repositories with local jobs using the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/360033753374-Checkout-private-repositories-with-local-jobs-run-through-circleci-cli)
+
+- [How to know if your project is using deprecated Machine images with the CLI?](https://support.circleci.com/hc/en-us/articles/4421154407195-Deprecating-Ubuntu-14-04-and-16-04-images-EOL-5-31-22)
+
+- [How to validate a config that uses private Orbs with the CLI?](https://support.circleci.com/hc/en-us/articles/10643012267291-How-to-validate-a-config-that-uses-private-Orbs)
+
+- [Understanding the difference between public, private and unlisted orbs](https://support.circleci.com/hc/en-us/articles/4406826701339-Orbs-Public-vs-Private-vs-Unlisted)
+
+- [How to make your orbs private using the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/360035341894-How-can-I-make-my-orbs-private-)
+
+- [How to list your private orb using the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/15222621603355-How-to-Find-your-Private-Orb-s-Documentation)
+
+- [How to delete an orb using the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/360045977834-Can-I-delete-an-Orb-)
+
+- [How to delete a project Docker Layer Cache with the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/14027411555355-How-to-delete-a-projects-Docker-Layer-Cache)
+
+- [Docker Layer Cache FAQ](https://support.circleci.com/hc/en-us/articles/4407580027675-Docker-Layer-Caching-FAQ)
+
+- [How to rotate your self-hosted runner resource class tokens using the CircleCI CLI?](https://support.circleci.com/hc/en-us/articles/14031352897819-How-to-Rotate-your-Self-Hosted-Runner-Resource-Class-Tokens)
+
+- [How to use the CLI to verify namespaces and resource classes have been created correctly when installing the CircleCI runner ?](https://support.circleci.com/hc/en-us/articles/360057144631-CircleCI-Runner-Error-Message-We-cannot-run-this-job-using-the-selected-resource-class-)
+
+- [How to use realitycheck to validate your CircleCI Server installation for GitHub Enterprise via the CLI?](https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation)
+
+
+### Troubleshooting
+{: #troubleshooting }
+
+- [What if the CLI context commands error with "Must have admin permission"?](https://support.circleci.com/hc/en-us/articles/360047644153-CircleCI-CLI-Context-Command-errors-with-Must-have-admin-permission-)
+
+- [What if the CLI fails with "panic: yaml: line 4: could not find expected ':'"?](https://support.circleci.com/hc/en-us/articles/360046871833-CircleCI-CLI-Fails-With-panic-yaml-line-4-could-not-find-expected-Error)
+
+- [What if the CLI command “circleci local execute” fails with "--storage-opt is supported only for overlay over xfs with 'pquota' mount option"?](https://support.circleci.com/hc/en-us/articles/7060937560859-How-to-resolve-error-storage-opt-is-supported-only-for-overlay-over-xfs-with-pquota-mount-option-when-running-jobs-locally-with-the-cli)
+
+- [What if the CLI command “circleci local execute” fails with “not implemented for cgroup v2 unified hierarchy“?](https://support.circleci.com/hc/en-us/articles/4413013337371-CircleCI-CLI-Running-circleci-local-execute-Results-in-not-implemented-for-cgroup-v2-unified-hierarchy-Error)
