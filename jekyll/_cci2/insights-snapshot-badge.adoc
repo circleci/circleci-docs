@@ -74,7 +74,7 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/
 --
 [source,markdown]
 ----
-[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/github/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
+[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
 ----
 --
 

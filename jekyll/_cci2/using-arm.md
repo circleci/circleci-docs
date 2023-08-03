@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Using the Arm execution environment"
+title: "Using the Arm VM execution environment"
 description: "Learn how to configure a your jobs to run in the Arm execution environment."
 contentTags:
   platform:
@@ -9,7 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-You can access the Arm execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.
+You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -17,7 +17,7 @@ You can access the Arm execution environment for a job by using the machine exec
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2204:2023.07.1
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -55,7 +55,13 @@ For pricing and plans information, see the [resource class pricing overview](htt
 
 Arm resources are accessible by using the machine executor when using one of the following images:
 
+#### Ubuntu 20.04 - focal
 * `ubuntu-2004:current` - most recent, recommended for all users
+* `ubuntu-2004:2023.07.1`
+* `ubuntu-2004:2023.04.2`
+* `ubuntu-2004:2023.02.1`
+* `ubuntu-2004:2022.10.1`
+* `ubuntu-2004:2022.07.1`
 * `ubuntu-2004:2022.04.1`
 * `ubuntu-2004:202201-02`
 * `ubuntu-2004:202201-01`
@@ -65,6 +71,14 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2004:202104-01`
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
+
+#### Ubuntu 22.04 - jammy
+* `ubuntu-2204:current` - most recent, recommended for all users
+* `ubuntu-2204:2023.07.1`
+* `ubuntu-2204:2023.04.2`
+* `ubuntu-2204:2023.02.1`
+* `ubuntu-2204:2022.10.2`
+* `ubuntu-2204:2022.07.2`
 
 For a full list of machine executor images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine). And for announcements about image updates, see [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64).
 
@@ -95,6 +109,14 @@ WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong a
 ```
 
 If you build an image on an M1 you need to specify `docker build --platform linux/amd64` as the default builds `arm64`.
+
+## Arm on Docker
+{: #arm-on-docker }
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**.
+{: class="alert alert-caution"}
+
+For further information on using Arm with the Docker execution environment, see the [Using the Docker execution enviornment](/docs/using-docker/#arm) page.
 
 
 ## Learn More

@@ -242,6 +242,9 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ## X11 forwarding over SSH
 {: #x11-forwarding-over-ssh }
 
+SSH reruns are not currently supported for GitLab or GitHub apps projects. This feature is in development and will be available soon. To find out if you authenticated through GitHub OAuth or GitHub apps, see the [GitHub apps integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
 1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
