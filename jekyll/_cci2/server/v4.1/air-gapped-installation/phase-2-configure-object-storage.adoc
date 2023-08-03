@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: How to configure object storage through MinIO to run CircleCI server in an air-gapped environment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO

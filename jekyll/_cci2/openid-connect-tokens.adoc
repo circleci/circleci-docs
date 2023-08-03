@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can be configured to use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
 
@@ -154,16 +153,16 @@ orbs:
 ----
 jobs:
   aws-example:
-   environment:
+    environment:
       AWS_REGION: us-west-1
     docker:
-      - image: cimg/aws:2022.06
+      - image: cimg/aws:2023.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
           role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          aws-region: ${AWS_REGION}
           # optional parameters
           profile-name: "OIDC-PROFILE"
           role-session-name: "example-session"
@@ -287,19 +286,19 @@ After navigating to the **Grant Access** section of the GCP web UI, follow these
   * The issuer is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your CircleCI organization ID.
 . Click **Continue** to configure provider attributes.
 +
-Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding." For example:
+Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
 +
 [.table.table-striped]
 [cols=2*, stripes=even]
 
 |===
 | google.subject
-| attribute.project_id
+| assertion.sub
 
-| attribute.org_id
+| attribute.aud
 | assertion.aud
 
-| assertion.sub
+| attribute.project
 | assertion['oidc.circleci.com/project-id']
 |===
 +
@@ -333,7 +332,7 @@ An example of the configuration file is shown below. Note, the `audience` has no
 }
 ```
 
-In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file.
+In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE`, as noted in the (<<#openid-connect-id-token-availability,token availability>> section).
 
 If your token comes from an API response, it might be useful to set up the configuration to read a JSON file. In this case, the `type` will need to be set to `json` and you will need to provide a valid `path`, for example, `response.id_token`.
 
@@ -360,6 +359,7 @@ gcloud iam workload-identity-pools create-cred-config \
 ==== Adding GCP to the CircleCI configuration file
 
 You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_TOKEN_FILE` by running the following:
+
 ```bash
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 ```
@@ -390,7 +390,7 @@ You will also need to add the following environment variables to a <<contexts#,c
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb. Note that you can enable the use of OIDC token when using circleci/gcp-cli orb version 3.0.0 or later.
 
 ```yaml
 version: 2.1

@@ -3,15 +3,15 @@ description: Open preview of config policies for CircleCI. Reference page for fu
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Config policy reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
 This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
@@ -343,6 +343,33 @@ enable_hard["rule_contexts_reserved_by_branches"]
 == CircleCI Utility helpers
 
 The following helpers are imported using `import data.circleci.utils`
+
+[#is_parameterized_expression]
+=== `is_parameterized_expression`
+
+CAUTION: **Using server?** The `is_parameterized_expression` helper is currently unavailable on CircleCI server.
+
+This function checks any value and returns true if it is a string that contains a parameter expression, otherwise it returns false.
+
+[#definition-is-parameterized-expression]
+==== Definition
+
+[source,rego]
+----
+is_parameterized_expression(value)
+return boolean
+----
+
+[#usage-is-parameterized-expression]
+==== Usage
+
+[source,rego]
+----
+is_parameterized_expression("hello world")                      # false
+is_parameterized_expression(42)                                 # false
+is_parameterized_expression("release-<<parameters.version>>")   # true
+----
+
 
 [#get_element_name]
 === `get_element_name`

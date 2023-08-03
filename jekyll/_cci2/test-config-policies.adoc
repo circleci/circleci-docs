@@ -3,15 +3,15 @@ description: Open preview of config policies for CircleCI. Learn about testing y
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
-= Test config policies - Open preview
+= Test config policies
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 

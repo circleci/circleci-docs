@@ -1,0 +1,1406 @@
+---
+contentTags:
+  platform:
+  - Server v4.2
+  - サーバー管理者
+---
+= Installation reference
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+[#example-manifests]
+== マニフェストの例
+以下は、CircleCI Server Helm のスピンアップに必要な基本的なパラメーターが含まれたマニフェストの例です。
+
+[#aws]
+=== AWS
+以下は、AWS 環境での circleci-server のインストールに必要なパラメータのマニフェストの例です。このインストールでは、サービスアカウント用の IAM ロール (IRSA) を使用することが推奨されていることに注意してください。base64エンコーディングのフィールドは、そのようにマークされています。
+
+[source,yaml]
+----
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license>'
+  container:
+    registry: cciserver.azurecr.io
+    org:
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+
+object_storage:
+  bucketName: '<s3-bucket-name>'
+  s3:
+    enabled: true
+    endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
+    region: "<aws-region>"
+    irsaRole: "<arn-of-irsa-role>"
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: "<aws-region>"
+      subnets:
+      - "<subnet-id>"
+      securityGroupId: "<security-group-id>"
+      irsaRole: "<arn-of-irsa-role>"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+
+pusher:
+  secret: "<pusher-secret>"
+
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
+
+----
+
+[#gcp]
+=== GCP
+以下は、GCP 環境での circleci-server のインストールに必要なパラメータのマニフェストの例です。このインストールでは、推奨される Workload Identity を使用することに注意してください。base64エンコーディングのフィールドは、そのようにマークされています。
+
+[source,yaml]
+----
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license-for-circleci-server>'
+  container:
+    registry: cciserver.azurecr.io
+    org:
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+object_storage:
+  bucketName: "<gcs-bucket-name>"
+  gcs:
+    enabled: true
+    workloadIdentity: "<service-account-email-with-gcs-access>"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+vm_service:
+  providers:
+    gcp:
+      enabled: true
+      project_id: <gcp-project-id>
+      network_tags:
+      - <network-tag>
+      zone: <gcp-zone>
+      network: "<gcp-network>"
+      subnetwork: "" # leave blank for auto-subnetting
+      workloadIdentity: "<service-account-email-with-compute-access>"
+
+pusher:
+  secret: "<pusher-secret>"
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+----
+
+[#all-values-yaml-options]
+== Helm の `values.yaml` の全オプション
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| キー
+| タイプ
+| デフォルト
+| 説明
+
+| `apiToken`
+| 文字列
+| `""`
+a| API token:
+
+**オプション 1:** ここに値を設定し、CircleCI が自動的にシークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+| `api_service.replicas`
+| 整数
+| `1`
+| `api-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `audit_log_service.replicas`
+| 整数
+| `1`
+| `audit-log-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `branch_service.replicas`
+| 整数
+| `1`
+| `branch-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `builds_service.replicas`
+| 整数
+| `1`
+| `builds-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `contexts_service.replicas`
+| 整数
+| `1`
+| `contexts-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `cron_service.replicas`
+| 整数
+| `1`
+| `cron-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `dispatcher.replicas`
+| 整数
+| `1`
+| `dispatcher` のデプロイ用にデプロイするレプリカの数です。
+
+| `distributor_cleaner.replicas`
+| 整数
+| `1`
+| distributor-cleaner のデプロイ用にデプロイするレプリカの数です。
+
+| `distributor_dispatcher.replicas`
+| 整数
+| `1`
+| `distributor-dispatcher` のデプロイ用にデプロイするレプリカの数です。
+
+| `distributor_external.replicas`
+| 整数
+| `1`
+| `distributor-external` deployment.
+
+| `distributor_internal.replicas`
+| 整数
+| `1`
+| `distributor-internal` のデプロイ用にデプロイするレプリカの数です。
+
+| `domain_service.replicas`
+| 整数
+| `1`
+| `domain-service` のデプロイ用にデプロイするレプリカの数です。
+
+| `frontend.replicas`
+| 整数
+| `1`
+| `frontend` のデプロイ用にデプロイするレプリカの数です。
+
+| `github`
+| オブジェクト
+a|
+[source,yaml]
+----
+{
+  "clientId": "",
+  "clientSecret": "",
+  "defaultToken": "",
+  "enterprise": false,
+  "fingerprint": null,
+  "hostname": "ghe.example.com",
+  "scheme": "https",
+  "selfSignedCert": false,
+  "unsafeDisableWebhookSSLVerification": false
+}
+----
+| VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)。
+
+
+| `github.clientId`
+| 文字列
+| `""`
+a| Github 経由の OAuth ログイン用のクライアントシークレットです。
+
+**オプション 1:** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** ここは空白のままにして、Kubernetes Secretを自分で作成します。 CircleCIはそれが存在すると仮定します。**Settings > Developer Settings > OAuth Apps** に移動して作成します。ホームページは `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に、コールバックは `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
+
+|`github.clientSecret`
+|文字列
+|`""`
+a| Github経由のOAuthログインのクライアントシークレット：
+
+**オプション 1:** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 `github.clientID` で指定した同じ場所から取得します。
+
+|`github.defaultToken`
+|string
+|`""`
+a| xref:phase-2-core-services/#github-enterprise-integration[GitHub Enterprise のインスタンス用のパーソナルアクセストークン]:
+
+**オプション 1:** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+|`github.enterprise`
+|ブール値
+|`false`
+|GitHub Enterprise の場合は `true` に、GitHub.com の場合は `false` に設定します。
+
+|`github.fingerprint`
+|文字列
+|`nil`
+|GitHub Enterprise インスタンスを直接 `ssh-keyscan` できない場合に必要です。プロキシで `ssh-keyscan` することはできません。
+
+|`github.hostname`
+|文字列
+|`"ghe.example.com"`
+|GitHubのホスト名。GitHub.com では無視されます。GitHub Enterprise をインストールしているホスト名です。
+
+|`github.scheme`
+|文字列
+|`"https"`
+|'http' または 'https' のいずれか。GitHub.com では無視されます。GitHub Enterprise インストールで TLS を使用していない場合は 'http' に設定します。
+
+|`github.selfSignedCert`
+|ブール値
+|`false`
+|GitHub が自己署名証明書を使用している場合は 'true' を設定します。
+
+|`github.unsafeDisableWebhookSSLVerification`
+|ブール値
+|`false`
+|Webhook のSSL検証を無効にする。これは安全ではないので、プロダクションシナリオでは行わないでください。これは、GitHubのインストールがCircleCIサーバー証明書に署名した認証局を信頼していない場合（たとえば、自己署名されている場合）に必要です。
+
+|`global.container.org`
+|文字列
+|`"circleci"`
+|レジストリの組織は、デフォルトから Circleci にすべてのイメージをプルします。
+
+|`global.container.registry`
+|文字列
+|`""`
+|すべてのイメージをプルするレジストリで、デフォルトでは Dockerhub です。
+
+|`global.domainName`
+|文字列
+|`""`
+|お客様の CircleCI のドメイン名です。
+
+|`global.imagePullSecrets[0].name`
+|文字列
+|`"regcred"`
+|
+
+|`global.license`
+|文字列
+|`""`
+|CircleCIインストールのライセンスです。
+
+|`global.scheme`
+|文字列
+|`"https"`
+|CircleCIインストールのスキーマです。
+
+|`global.tracing.collector_host`
+|文字列
+|`""`
+|
+
+|`global.tracing.enabled`
+|ブール値
+|`false`
+|
+
+|`global.tracing.sample_rate`
+|フロート
+|`1`
+|
+
+|`insights_service.dailyCronHour`
+|整数
+|`3`
+|デフォルトは現地サーバー時間の午前3時です。
+
+|`insights_service.hourlyCronMinute`
+|整数
+|`35`
+|デフォルトでは、各時刻の 35 分過ぎに設定されています。
+
+|`insights_service.isEnabled`
+|ブール値
+|`true`
+|insights-service のデプロイを有効にするかどうかを指定します。
+
+|`insights_service.replicas`
+|整数
+|`1`
+|insights-service のデプロイ用にデプロイするレプリカの数です。
+
+|`internal_zone`
+|文字列
+|`"server.circleci.internal"`
+|
+
+|`keyset`
+|オブジェクト
+|`{"encryption":"","signing":""}`
+a| CircleCI で生成されるアーティファクトの暗号化と署名に使用するキーセットです。 CircleCI Server の設定にはこれらの値が必要です。
+
+**オプション 1:** `keyset.signing` と `keyset.encryption` の値をここに設定します。CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 シークレットは 'signing-keys' という名前にし、`signing-key` と `encryption-key` が使える必要があります。
+
+|`keyset.encryption`
+|文字列
+|`""`
+|署名キーです。 アーティファクト署名キーを生成するには `docker run circleci/server-keysets:latest generate encryption -a stdout` を実行してください。
+
+|`keyset.signing`
+|文字列
+|`""`
+|署名キーです。 アーティファクト署名キーを生成するには `docker run circleci/server-keysets:latest generate signing -a stdout` を実行してください。
+
+|`kong.acme.email`
+|文字列
+|`"your-email@example.com"`
+|
+
+|`kong.acme.enabled`
+|ブール値
+|`false`
+|この設定は、お客様の為に link:https://letsencrypt.org/[Let's Encrypt] 証明書を取得し、更新します。デフォルトでは `false` になっていますが、これはあなたのドメイン (およびアプリのサブドメイン) に有効な DNS エントリがある場合にのみ機能するためです。そのため、この設定をオフにしてデプロイし、最初に DNS レコードを設定する必要があります。その後、必要であれば、この設定を true に設定し、更新された設定で `helm upgrade` を実行できます。
+
+|`kong.debug_level`
+|文字列
+|`"notice"`
+|Kong のデバッグレベルを指定します。 設定できるレベルは、`debug`、 `info`、 `warn`、 `error`、 `crit`です。 デフォルトの設定は "notice" です。
+
+|`kong.replicas`
+|int
+|`1`
+|
+
+|`kong.resources.limits.cpu`
+|文字列
+|`"3072m"`
+|
+
+|`kong.resources.limits.memory`
+|文字列
+|`"3072Mi"`
+|
+
+|`kong.resources.requests.cpu`
+|文字列
+|`"512m"`
+|
+
+|`kong.resources.requests.memory`
+|文字列
+|`"512Mi"`
+|
+
+|`legacy_notifier.replicas`
+|int
+|`1`
+|legacy-notifier のデプロイに使用するレプリカの数です。
+
+|`mongodb.architecture`
+|文字列
+|`"standalone"`
+|
+
+|`mongodb.auth.database`
+|文字列
+|`"admin"`
+|
+
+|`mongodb.auth.existingSecret`
+|文字列
+|`""`
+|
+
+|`mongodb.auth.mechanism`
+|文字列
+|`"SCRAM-SHA-1"`
+|
+
+|`mongodb.auth.password`
+|文字列
+|`""`
+|
+
+|`mongodb.auth.rootPassword`
+|文字列
+|`""`
+|
+
+|`mongodb.auth.username`
+|文字列
+|`"root"`
+|
+
+|`mongodb.fullnameOverride`
+|文字列
+|`"mongodb"`
+|
+
+|`mongodb.hosts`
+|文字列
+|`"mongodb:27017"`
+|MongoDB のホストです。共有インスタンスの場合は、複数のホストをカンマ区切りで指定します。
+
+|`mongodb.image.tag`
+|文字列
+|`"3.6.22-debian-9-r38"`
+|
+
+|`mongodb.internal`
+|ブール値
+|`true`
+|外部化した MongoDB インスタンスを使いたい場合は false を設定します。
+
+|`mongodb.labels.app`
+|文字列
+|`"mongodb"`
+|
+
+|`mongodb.labels.layer`
+|文字列
+|`"data"`
+|
+
+|`mongodb.options`
+|文字列
+|`""`
+|
+
+|`mongodb.persistence.size`
+|文字列
+|`"8Gi"`
+|
+
+|`mongodb.podAnnotations."backup.velero.io/backup-volumes"`
+|文字列
+|`"datadir"`
+|
+
+|`mongodb.podLabels.app`
+|文字列
+|`"mongodb"`
+|
+
+|`mongodb.podLabels.layer`
+|文字列
+|`"data"`
+|
+
+|`mongodb.ssl`
+|ブール値
+|`false`
+|
+
+|`mongodb.tlsInsecure`
+|ブール値
+|`false`
+|カスタムCAまたは自己署名証明書によるSSL接続を使用する場合は、これを true に設定します。
+
+|`mongodb.useStatefulSet`
+|ブール値
+|`true`
+|
+
+|`nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled"`
+|文字列
+|`"true"`
+|
+
+|`nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"`
+|文字列
+|`"nlb"`
+|Network Load Balancerには "nlb"、Classic Load Balancerには "clb "を使用します。機能比較は link:https://aws.amazon.com/jp/elasticloadbalancing/features/?nc1=h_ls[このAWSのページ] をご覧下さい。
+
+|`nginx.aws_acm.enabled`
+|ブール値
+|`false`
+|⚠️ WARNING: これを有効にすると、フロントエンドのサービスが再作成され、ロードバランサが再作成されます。デプロイされた設定を更新する場合は、フロントエンドのドメインを新しいロードバランサにルーティングする必要があります。また、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert： <acm-arn>` を `nginx.annotations` ブロックに追加します。
+
+|`nginx.loadBalancerIp`
+|文字列
+|`""`
+|ロードバランサーIP GCPでプロビジョニングされたロードバランサーに静的IPを使用するには、予約済みの静的IPv4アドレスに設定します。
+
+|`nginx.private_load_balancers`
+|ブール値
+|`false`
+|
+
+|`nginx.replicas`
+|整数
+|`1`
+|
+
+|`nginx.resources.limits.cpu`
+|文字列
+|`"3000m"`
+|
+
+|`nginx.resources.limits.memory`
+|文字列
+|`"3072Mi"`
+|
+
+|`nginx.resources.requests.cpu`
+|文字列
+|`"500m"`
+|
+
+|`nginx.resources.requests.memory`
+|文字列
+|`"512Mi"`
+|
+
+|`nomad.auto_scaler.aws.accessKey`
+|文字列
+|`""`
+a|AWS 認証設定。
+
+**オプション 1:** ここに accessKey と secretKey を設定すると、CircleCI がシークレットを作成します。
+
+**オプション 2:** accessKey とs ecretKey は空白のままにしておき、シークレットは自分で作成してください。CircleCI はそれが存在すると仮定する。
+
+**オプション 3:** accessKey と secretKeyは空白のままにしておき、irsaRole フィールドを設定する（サービスアカウントのIAMロール）。
+
+|`nomad.auto_scaler.aws.autoScalingGroup`
+|文字列
+|`"asg-name"`
+|
+
+|`nomad.auto_scaler.aws.enabled`
+|ブール値
+|`false`
+|
+
+|`nomad.auto_scaler.aws.irsaRole`
+|文字列
+|`""`
+|
+
+|`nomad.auto_scaler.aws.region`
+|文字列
+|`"some-region"`
+|
+
+|`nomad.auto_scaler.aws.secretKey`
+|文字列
+|`""`
+|
+
+|`nomad.auto_scaler.enabled`
+|ブール値
+|`false`
+|
+
+|`nomad.auto_scaler.gcp.enabled`
+|ブール値
+|`false`
+|
+
+|`nomad.auto_scaler.gcp.mig_name`
+|文字列
+|`"some-managed-instance-group-name"`
+|
+
+|`nomad.auto_scaler.gcp.project_id`
+|文字列
+|`"some-project"`
+|
+
+|`nomad.auto_scaler.gcp.region`
+|文字列
+|`""`
+|
+
+|`nomad.auto_scaler.gcp.service_account`
+|オブジェクト
+|`{"project_id":"... ...","type":"service_account"}`
+a|GCP Authentication Config.
+
+**オプション 1:** service_account にサービスアカウントの JSON（文字列ではなく生のJSON）を設定すると、CircleCI がシークレットを作成します。
+
+**オプション 2:** service_account フィールドはデフォルトのままにしておき、シークレットは自分で作成します。CircleCI はそれが存在すると仮定します。
+
+**オプション 3:** service_accountフィールドはデフォルトのままにしておき、workloadIdentityフィールドにサービスアカウントのEメールを設定して、ワークロードIDを使用します。
+
+|`nomad.auto_scaler.gcp.workloadIdentity`
+|文字列
+|`""`
+|
+
+|`nomad.auto_scaler.gcp.zone`
+|文字列
+|`""`
+|
+
+|`nomad.auto_scaler.scaling.max`
+|整数
+|`5`
+|
+
+|`nomad.auto_scaler.scaling.min`
+|整数
+|`1`
+|
+
+|`nomad.auto_scaler.scaling.node_drain_deadline`
+|文字列
+|`"5m"`
+|
+
+|`nomad.buildAgentImage`
+|文字列
+|`"circleci/picard"`
+|
+
+|`nomad.clients`
+|オブジェクト
+|`{}`
+|
+
+|`nomad.server.gossip.encryption.enabled`
+|ブール値
+|`true`
+|
+
+|`nomad.server.gossip.encryption.key`
+|文字列
+|`""`
+|
+
+|`nomad.server.replicas`
+|整数
+|`3`
+|
+
+|`nomad.server.rpc.mTLS`
+|オブジェクト
+|`{"CACertificate":"","certificate":"","enabled":false,"privateKey":""}`
+|RPC通信にはmTLSを強く推奨します。これはトラフィックを暗号化するだけでなく、認証されていないクライアントがワーカーとしてクラスタに参加できないようにクライアントを認証します。ここでは Base64 エンコードされた PEM エンコードされた証明書が期待されます。
+
+|`nomad.server.rpc.mTLS.CACertificate`
+|文字列
+|`""`
+|base64 エンコードされた nomad mTLS 認証局。
+
+|`nomad.server.rpc.mTLS.certificate`
+|文字列
+|`""`
+|base64 エンコードされた nomad mTLS 証明書。
+
+|`nomad.server.rpc.mTLS.privateKey`
+|文字列
+|`""`
+|nomad の mTLS プライベートキーを base64 エンコードしたものです。
+
+|`nomad.server.service.unsafe_expose_api`
+|ブール値
+|`false`
+|
+
+|`object_storage`
+|オブジェクト
+a|
+[source,yaml]
+----
+{"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}}
+----
+|ビルド成果物、監査ログ、テスト結果などのオブジェクトストレージです。チャートが機能するためには、`object_storage.s3.enabled` または `object_storage.gcs.enabled` のいずれかが true でなければなりません。
+
+|`object_storage.expireAfter`
+|整数
+|`0`
+|アーティファクトの有効期限が切れる日数。
+
+|`object_storage.gcs.service_account`
+|オブジェクト
+|`{"project_id":"... ...","type":"service_account"}`
+a|GCP Storage (GCS) authentication config.
+
+**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.
+
+**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists.
+
+**Option 3:** Leave the `service_account` field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+
+|`object_storage.s3`
+|object
+|`{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}`
+|S3 Configuration for Object Storage. Authentication methods: AWS Access/Secret Key, and IRSA Role.
+
+|`object_storage.s3.accessKey`
+|string
+|`""`
+a|AWS Authentication Config.
+
+**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.
+
+**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists.
+
+**Option 3:** Leave accessKey and secretKey blank, set the irsaRole field (IAM roles for service accounts), and set region: `your-aws-region`.
+
+|`object_storage.s3.endpoint`
+|string
+|`"https://s3.us-east-1.amazonaws.com"`
+|API endpoint for S3. If in AWS `us-west-2`, for example, this would be the regional endpoint `\http://s3.us-west-2.amazonaws.com`. If using S3 compatible storage, specify the API endpoint of your object storage server.
+
+|`orb_service.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the orb-service deployment.
+
+|`output_processor.replicas`
+|int
+|`2`
+|Number of replicas to deploy for the output-processor deployment.
+
+|`permissions_service.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the permissions-service deployment.
+
+|`postgresql.auth.existingSecret`
+|string
+|`""`
+|
+
+|`postgresql.auth.password`
+|string
+|`""`
+|
+
+|`postgresql.auth.postgresPassword`
+|string
+|`""`
+|Password for the "postgres" admin user. Ignored if `auth.existingSecret` with key `postgres-password` is provided. If `postgresql.internal` is false, use `auth.username` and `auth.password`.
+
+|`postgresql.auth.username`
+|string
+|`""`
+|
+
+|`postgresql.fullnameOverride`
+|string
+|`"postgresql"`
+|
+
+|`postgresql.image.tag`
+|string
+|`"12.6.0"`
+|
+
+|`postgresql.internal`
+|bool
+|`true`
+|
+
+|`postgresql.primary.persistence.existingClaim`
+|string
+|`""`
+|
+
+|`postgresql.primary.persistence.size`
+|string
+|`"8Gi"`
+|
+
+|`postgresql.postgresqlHost`
+|string
+|`"postgresql"`
+|
+
+|`postgresql.postgresqlPort`
+|int
+|`5432`
+|
+
+|`postgresql.primary.extendedConfiguration`
+|string
+|`"max_connections = 500\nshared_buffers = 300MB\n"`
+|
+
+|`postgresql.primary.podAnnotations."backup.velero.io/backup-volumes"`
+|string
+|`"data"`
+|
+
+|`postgresql.tls.enabled`
+|bool
+|`false`
+|Enable TLS traffic support
+
+|`postgresql.tls.autoGenerated`
+|bool
+|`false`
+|Generate self-signed TLS certificates automatically
+
+|`postgresql.tls.certificatesSecret`
+|bool
+|`false`
+|Enable TLS traffic support
+
+|`postgresql.tls.certFilename`
+|bool
+|`false`
+|Certificate filename used in your `certificatesSecret`
+
+|`postgresql.tls.certKeyFilename`
+|bool
+|`false`
+|Certificate key filename used in your `certificatesSecret`
+
+|`postgresql.tls.certCAFilename`
+|bool
+|`false`
+|CA Certificate filename used in your `certificatesSecret`. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting a certificate from them.
+
+|`prometheus.alertmanager.enabled`
+|bool
+|`false`
+|
+
+|`prometheus.enabled`
+|bool
+|`false`
+|
+
+|`prometheus.extraScrapeConfigs`
+|string
+|`"- job_name: 'telegraf-metrics'\n  scheme: http\n  metrics_path: /metrics\n  static_configs:\n  - targets:\n    - \"telegraf:9273\"\n    labels:\n      service: telegraf\n"`
+|
+
+|`prometheus.fullnameOverride`
+|string
+|`"prometheus"`
+|
+
+|`prometheus.nodeExporter.fullnameOverride`
+|string
+|`"node-exporter"`
+|
+
+|`prometheus.pushgateway.enabled`
+|bool
+|`false`
+|
+
+|`prometheus.server.emptyDir.sizeLimit`
+|string
+|`"8Gi"`
+|
+
+|`prometheus.server.fullnameOverride`
+|string
+|`"prometheus-server"`
+|
+
+|`prometheus.server.persistentVolume.enabled`
+|bool
+|`false`
+|
+
+|`proxy.enabled`
+|bool
+|`false`
+|If false, all proxy settings are ignored.
+
+|`proxy.http`
+|object
+|`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
+|Proxy for HTTP requests.
+
+|`proxy.https`
+|object
+|`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
+|Proxy for HTTPS requests.
+
+|`proxy.no_proxy`
+|list
+|`[]`
+|List of hostnames, IP CIDR blocks exempt from proxying. Loopback and intra-service traffic is never proxied.
+
+|`pusher.key`
+|string
+|`"circle"`
+|
+
+|`pusher.secret`
+|string
+|`"REPLACE_THIS_SECRET"`
+|
+
+|`rabbitmq.auth.erlangCookie`
+|string
+|`""`
+|
+
+|`rabbitmq.auth.existingErlangSecret`
+|string
+|`""`
+|
+
+|`rabbitmq.auth.existingPasswordSecret`
+|string
+|`""`
+|
+
+|`rabbitmq.auth.password`
+|string
+|`""`
+|
+
+|`rabbitmq.auth.username`
+|string
+|`"circle"`
+|
+
+|`rabbitmq.fullnameOverride`
+|string
+|`"rabbitmq"`
+|
+
+|`rabbitmq.image.tag`
+|string
+|`"3.8.14-debian-10-r10"`
+|
+
+|`rabbitmq.podAnnotations."backup.velero.io/backup-volumes"`
+|string
+|`"data"`
+|
+
+|`rabbitmq.podLabels.app`
+|string
+|`"rabbitmq"`
+|
+
+|`rabbitmq.podLabels.layer`
+|string
+|`"data"`
+|
+
+|`rabbitmq.replicaCount`
+|int
+|`1`
+|
+
+|`rabbitmq.statefulsetLabels.app`
+|string
+|`"rabbitmq"`
+|
+
+|`rabbitmq.statefulsetLabels.layer`
+|string
+|`"data"`
+|
+
+|`redis.cluster.enabled`
+|bool
+|`true`
+|
+
+|`redis.cluster.slaveCount`
+|int
+|`1`
+|
+
+|`redis.fullnameOverride`
+|string
+|`"redis"`
+|
+
+|`redis.image.tag`
+|string
+|`"6.2.1-debian-10-r13"`
+|
+
+|`redis.master.podAnnotations."backup.velero.io/backup-volumes"`
+|string
+|`"redis-data"`
+|
+
+|`redis.podLabels.app`
+|string
+|`"redis"`
+|
+
+|`redis.podLabels.layer`
+|string
+|`"data"`
+|
+
+|`redis.replica.podAnnotations."backup.velero.io/backup-volumes"`
+|string
+|`"redis-data"`
+|
+
+|`redis.statefulset.labels.app`
+|string
+|`"redis"`
+|
+
+|`redis.statefulset.labels.layer`
+|string
+|`"data"`
+|
+
+|`redis.usePassword`
+|bool
+|`false`
+|
+
+|`schedulerer.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the schedulerer deployment.
+
+|`serveUnsafeArtifacts`
+|bool
+|`false`
+|⚠️ WARNING: Changing this to true will serve HTML artifacts instead of downloading them. This can allow specially-crafted artifacts to gain control of users' CircleCI accounts.
+
+|`sessionCookieKey`
+|string
+|`""`
+a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
+
+**Option 1:** Set the value here and CircleCI will create the secret automatically.
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+
+|`smtp`
+|object
+|`{"host":"smtp.example.com","notificationUser":"builds@circleci.com","password":"secret-smtp-passphrase","port":25,"tls":true,"user":"notification@example.com"}`
+|Email notification settings.
+
+|`smtp.port`
+|int
+|`25`
+|Outbound connections on port 25 are blocked on most cloud providers. Should you select this default port, be aware that your notifications may fail to send.
+
+|`smtp.tls`
+|bool
+|`true`
+|StartTLS is used to encrypt mail by default. Only disable this if you can otherwise guarantee the confidentiality of traffic.
+
+|`soketi.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the soketi deployment.
+
+|`telegraf.args[0]`
+|string
+|`"--config"`
+|
+
+|`telegraf.args[1]`
+|string
+|`"/etc/telegraf/telegraf.d/telegraf_custom.conf"`
+|
+
+|`telegraf.config.agent.interval`
+|string
+|`"30s"`
+|
+
+|`telegraf.config.agent.omit_hostname`
+|bool
+|`true`
+|
+
+|`telegraf.config.agent.round_interval`
+|bool
+|`true`
+|
+
+|`telegraf.config.custom_config_file`
+|string
+|`""`
+|
+
+|`telegraf.config.inputs[0].statsd.service_address`
+|string
+|`":8125"`
+|
+
+|`telegraf.config.outputs[0].prometheus_client.listen`
+|string
+|`":9273"`
+|
+
+|`telegraf.fullnameOverride`
+|string
+|`"telegraf"`
+|
+
+|`telegraf.image.tag`
+|string
+|`"1.17-alpine"`
+|
+
+|`telegraf.mountPoints[0].mountPath`
+|string
+|`"/etc/telegraf/telegraf.d"`
+|
+
+|`telegraf.mountPoints[0].name`
+|string
+|`"telegraf-custom-config"`
+|
+
+|`telegraf.mountPoints[0].readOnly`
+|bool
+|`true`
+|
+
+|`telegraf.rbac.create`
+|bool
+|`false`
+|
+
+|`telegraf.serviceAccount.create`
+|bool
+|`false`
+|
+
+|`telegraf.volumes[0].configMap.name`
+|string
+|`"telegraf-custom-config"`
+|
+
+|`telegraf.volumes[0].name`
+|string
+|`"telegraf-custom-config"`
+|
+
+|`test_results_service.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the test-results-service deployment.
+
+|`tink.enabled`
+|bool
+|`false`
+|When enabled, Tink will be used instead of Vault for contexts encryption.
+
+|`tink.keyset`
+|string
+|`""`
+|The keyset generated the Tink CLI to be used for contexts encryption
+
+|`tls.certificate`
+|string
+|`""`
+|base64 encoded certificate, leave empty to use self-signed certificates.
+
+|`tls.privateKey`
+|string
+|`""`
+|base64 encoded private key, leave empty to use self-signed certificates.
+
+|`vault`
+|object
+|`{"image":{"repository":"circleci/vault-cci","tag":"0.4.196-1af3417"},"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"token":"","transitPath":"transit","url":"http://vault:8200"}`
+|External Services configuration.
+
+|`vault.internal`
+|bool
+|`true`
+|Disables this charts Internal Vault instance.
+
+|`vault.token`
+|string
+|`""`
+|This token is required when `internal: false`.
+
+|`vault.transitPath`
+|string
+|`"transit"`
+|When `internal: true`, this value is used for the vault transit path.
+
+|`vm_gc.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the vm-gc deployment.
+
+|`vm_scaler.prescaled`
+|list
+|`[{"count":0,"cron":"","docker-engine":true,"image":"docker-default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"docker","type":"l1.large"},{"count":0,"cron":"","docker-engine":false,"image":"windows-default","type":"windows.medium"}]`
+|Configuration options for, and numbers of, prescaled instances.
+
+|`vm_scaler.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the vm-scaler deployment.
+
+|`vm_service.dlc_lifespan_days`
+|int
+|`3`
+|Number of days to keep DLC volumes before pruning them.
+
+|`vm_service.enabled`
+|bool
+|`true`
+|
+
+|`vm_service.providers`
+|object
+|`{"ec2":{"accessKey":"","assignPublicIP":true,"enabled":false,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-8asfas76","subnets":["subnet-abcd1234"],"tags":["key","value"],"windowsAMI":"ami-mywindowsami"},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"my-server-vpc","network_tags":["circleci-vm"],"project_id":"my-server-project","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zone":"us-west2-a"}}`
+|Provider configuration for the VM service.
+
+|`vm_service.providers.ec2.accessKey`
+|string
+|`""`
+a|EC2 Authentication Config.
+
+**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.
+
+**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists.
+
+**Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+
+|`vm_service.providers.ec2.enabled`
+|bool
+|`false`
+|Set to enable EC2 as a virtual machine provider.
+
+|`vm_service.providers.ec2.subnets`
+|list
+|`["subnet-abcd1234"]`
+|Subnets must be in the same availability zone.
+
+|`vm_service.providers.gcp.enabled`
+|bool
+|`false`
+|Set to enable GCP Compute as a VM provider.
+
+|`vm_service.providers.gcp.service_account`
+|object
+|`{"project_id":"... ...","type":"service_account"}`
+|GCP Compute Authentication Config.
+
+**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.
+
+**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists.
+
+**Option 3:** Leave the `service_account` field as its default, and set the `workloadIdentityField` with a service account email to use workload identities.
+
+|`vm_service.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the vm-service deployment.
+
+|`web_ui.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui deployment.
+
+|`web_ui_404.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-404 deployment.
+
+|`web_ui_insights.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-insights deployment.
+
+|`web_ui_onboarding.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-onboarding deployment.
+
+|`web_ui_org_settings.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-org-settings deployment.
+
+|`web_ui_project_settings.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-project-settings deployment.
+
+|`web_ui_server_admin.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-server-admin deployment.
+
+|`web_ui_user_settings.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the web-ui-user-settings deployment.
+
+|`webhook_service.isEnabled`
+|bool
+|`true`
+|
+
+|`webhook_service.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the webhook-service deployment.
+
+|`workflows_conductor_event_consumer.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the workflows-conductor-event-consumer deployment.
+
+|`workflows_conductor_grpc.replicas`
+|int
+|`1`
+|Number of replicas to deploy for the workflows-conductor-grpc deployment.
+
+|===

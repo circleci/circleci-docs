@@ -56,7 +56,7 @@ certificates and profiles.
 
 ### Preparing your Xcode project for use with Fastlane Match
 {: #preparing-your-xcode-project-for-use-with-fastlane-match }
-{:.no_toc}
+
 
 Before setting up Match you must ensure that the code signing
 settings in your Xcode project are configured as follows:
@@ -66,7 +66,7 @@ settings in your Xcode project are configured as follows:
 
 ### Adding Match to the Fastlane lane
 {: #adding-match-to-the-fastlane-lane }
-{:.no_toc}
+
 
 On CircleCI, Fastlane Match will need to be run every time you build and sign your app. The easiest way to do this is to add the `match` action to the lane which builds your app.
 
@@ -97,7 +97,7 @@ end
 
 ### Adding a user key to the CircleCI project
 {: #adding-a-user-key-to-the-circleci-project }
-{:.no_toc}
+
 
 To enable Fastlane Match to download the certificates and the keys
 from GitHub, it is necessary to add a user key with access to both the
@@ -130,7 +130,7 @@ project repo and the Fastlane Match repo from GitHub.
 
 ### Adding the Match passphrase to the project
 {: #adding-the-match-passphrase-to-the-project }
-{:.no_toc}
+
 
 To enable Fastlane Match to decrypt the certificates and profiles stored in
 the GitHub repo, it is necessary to add the encryption passphrase that
@@ -142,7 +142,7 @@ encrypted at rest.
 
 ### Building and code-signing the app on CircleCI
 {: #invoking-the-fastlane-test-lane-on-circleci }
-{:.no_toc}
+
 
 After you have configured Match and added its invocation into the appropriate
 lane, you can run that lane on CircleCI. The following `config.yml` will

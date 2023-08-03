@@ -66,4 +66,4 @@ Free プランで macOS でビルドを行っている組織にも、毎月 25,0
 [#billing-faqs]
 == FAQ
 
-include::../_includes/snippets/faq/billing-faq-snip.adoc[]
+include::../_includes/snippets/ja/faq/billing-faq-snip.adoc[]

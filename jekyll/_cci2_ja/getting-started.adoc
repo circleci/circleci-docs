@@ -11,22 +11,24 @@ contentTags:
 
 このスタートガイドのチュートリアルでは、既存のプロジェクトをCircleCIに接続し、アプリ内の設定エディタを使用し、新しいプロジェクトにチームメンバーを招待して共同作業を行う方法を説明します。
 
+NOTE: 2023年6月14日より、CircleCIでプロジェクトを設定する際の体験が簡素化される可能性があります。  詳細は link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[コミュニティフォーラム]をご覧ください。
+
 CircleCI の `config.yml` オプションの全リストを確認したい場合は、xref:configuration-reference#[CircleCI の設定] を参照してください。
 
 // set up prerequisites
 
-== 前提条件
+== 次のステップ
 
-* link:https://circleci.com/ja/signup[CircleCI無料アカウントに登録]
-* xref:first-steps#[サインインしてVCSを接続する👋]
-* link:https://github.com/new[GitHub], link:https://github.com/new[Bitbucket], link:https://gitlab.com/projects/new[GitLab] のいずれかのリポジトリを作成する。
+* link:https://circleci.com/training/[オンデマンドの開発者無料トレーニング]
+* link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI 基礎ビデオ]
+* xref:config-intro#[設定ファイルの概要]
 
 ++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
 
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, view the pipeline, and see it pass. {% endcapture %}
+{% capture content %}  新しいコードリポジトリに接続し、CircleCI設定ファイルを新しいブランチにコミットし、パイプラインを表示し、それがパスするのを選択します。 {% endcapture %}
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
 
@@ -53,7 +55,7 @@ CircleCI の `config.yml` オプションの全リストを確認したい場合
 --
 ++++
 {% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Find your repository, and click <strong>Set Up Project</strong>.
+CircleCIウェブアプリで、サイドバーから<a  href="https://app.circleci.com/projects">Projects</a>を選択する。 リポジトリを探し、<strong>Set Up Project</strong>をクリックします。
 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
 {% endcapture %}
 
@@ -61,10 +63,10 @@ In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Pro
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
 {%- endcapture -%}
 
-{% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+{% include two-up.html title="1. プロジェクトを選択する" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. サンプル設定ファイルの Hello World を選択します。
+Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file" モーダルで、<b>Fast</b>を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
 {% endcapture %}
 
 {%- capture select-config -%}
@@ -74,10 +76,10 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 {% capture content %}
-You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. <b>Click Commit and Run.</b>
+<a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCIコンフィグエディタ</a>に、サンプルの<code>config.yml</code>ファイルがあらかじめ入力されています。 <b>コミットして実行をクリックする。</b>
 <br>
 <br>
-This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
+これは <code>.circleci/config.yml</code> という名前の新しいブランチで、リポジトリのルートにある <code>circleci-project-setup</code>.
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
@@ -87,7 +89,7 @@ This will create a <code>.circleci/config.yml</code> file at the root of your re
 {% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
 
 {% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
+すぐに合格のパイプラインができるはずだ。 If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
 
 {%- capture congrats-first-green-pipeline -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
@@ -103,7 +105,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 --
 ++++
 {% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Find your repository, and click <strong>Set Up Project</strong>.
+CircleCIウェブアプリで、サイドバーから<a  href="https://app.circleci.com/projects">Projects</a>を選択する。 リポジトリを探し、<strong>Set Up Project</strong>をクリックします。
 リポジトリが見つからない場合は、 左上にある Orb Selector を使って正しい組織を見つけます。
 {% endcapture %}
 
@@ -124,7 +126,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 {% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. <b>Click Commit and Run.</b> This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
+<a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCIコンフィグエディタ</a>に、サンプルの<code>config.yml</code>ファイルがあらかじめ入力されています。 <b>コミットして実行をクリックする</b> これにより、<code>.circleci/config.yml</code> ファイルが <code>circleci-project-setup</code> という新しいブランチのリポジトリのルートに作成されます。
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}

@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 

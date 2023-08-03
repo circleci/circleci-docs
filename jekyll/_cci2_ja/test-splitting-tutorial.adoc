@@ -50,6 +50,8 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 
 下記は、後で編集を行う `.circleci/config.yml` テンプレートのコピーです。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 [source,yaml]
 ----
 version: 2.1
@@ -61,9 +63,6 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/node:16.10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages:
@@ -80,7 +79,7 @@ workflows:
 
 * **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント xref:configuration-reference#[CircleCI の設定] を参照してください。
 * **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、 link:https://circleci.com/developer/ja/orbs/orb/circleci/node[Developer Hub] を参照してください。
-* **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは `build-and-test` という名前の一つのジョブで構成され、このジョブは、プロジェクトコードのチェックアウト、Node パッケージのインストール、デフォルトパッケージマネージャーの設定、テストの実行を行う複数のステップで構成されています。
+* **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは`build-and-test`という名前の1つのジョブで構成されており、プロジェクトのコードをチェックアウトし、Nodeパッケージをインストールし、デフォルトのパッケージマネージャを設定し、テストを実行する（8行目から16行目）といういくつかのステップで構成されています。
 
 テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
 
@@ -90,14 +89,13 @@ workflows:
 まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
 
 . GitHub で link:https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシュします。
-. Open the link:https://app.circleci.com[CircleCI web app]. お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
+. https://app.circleci.com[CircleCI Web アプリ] を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
 . プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
 . config.yml ファイルを選択するよに求められます。 そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。 **Set Up Project** をクリックします。
 . サンプルの設定ファイルの一覧が表示されます。 ウィンドウ内でスクロールダウンすると、**Node (Advanced)** が表示されるので、**Select** をクリックします。
 +
 image::test-splitting-sample-configs.png[Sample config for Node]
 . すると、設定ファイルに移動します。 プロジェクトでは実際には Yarn を使うため、`npm` の代わりに `yarn` を使うように下記ステップを編集する必要があります。
-
 +
 [source,yaml]
 ----
@@ -113,7 +111,7 @@ steps:
     name: Run tests
     command: yarn test
 ----
-. 変更が完了したら、 **Commit and Run** ボタンをクリックします。  `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
+. 変更が完了したら、 **Commit and Run** ボタンをクリックします。 `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
 +
 image::test-splitting-first-pipeline.png[Successful pipeline run]
 +
@@ -162,7 +160,7 @@ parallelism: 5
 * すると、それらのファイルは `circleci tests split` に渡され、テスト分割グループが作成されます。
 * `--split-by=timings` フラグは、タイミングデータに基づいてテストを分割する必要があることを示します。 他の分割オプションについては、xref:parallelism-faster-jobs#splitting-test-files[テストの並列実行のテストファイルの分割セクション] を参照してください。
 +
-NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
+NOTE: `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 +
 実際には、これらの CircleCI CLI コマンドにより、まだテストは実行されません。そのためには `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数 
  `$TEST` に保存されます。
@@ -176,7 +174,7 @@ NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コ�
 
 ----
 +
-これによりテスト結果 (JUnit XML ファイルとして保存) が 先程のステップで作成した `~/junit` サブディレクトリにコピーされます。  `when` 属性を 値 `always` と一緒に使うと、前のステップの実行が成功したかどうかにかかわらず、この特定のステップは必ず実行されるようになります。
+これによりテスト結果 (JUnit XML ファイルとして保存) が 先程のステップで作成した `~/junit` サブディレクトリにコピーされます。 `when` 属性を 値 `always` と一緒に使うと、前のステップの実行が成功したかどうかにかかわらず、この特定のステップは必ず実行されるようになります。
 .. 最後に、`store_test_results` ステップを追加します。
 +
 [source,yaml]
@@ -226,7 +224,7 @@ workflows:
         - build-and-test
 ----
 
-`.circleci/config.yml` への 3 つの変更が完了したら、変更をプッシュします。 それによりパイプラインがトリガーされ、テストが再び実行されますが、今回はその結果が保存されます。
+'.circleci/config.yml`に変更を加えたら、変更をプッシュしてください。 それによりパイプラインがトリガーされ、テストが再び実行されますが、今回はその結果が保存されます。
 
 [#step-three-view-results]
 == ステップ 3: 結果を確認する

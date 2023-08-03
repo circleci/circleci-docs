@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -8,10 +8,9 @@ contentTags:
 :page-liquid:
 :page-description: A quickstart tutorial for the CircleCI VS Code extension.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview#[overview]. 
+This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview#[overview].
 
 [#prerequisites]
 == Prerequisites
@@ -102,9 +101,9 @@ The extension integrates a Language Server specific to CircleCI configuration fi
 
 . To verify that language support is working, open a `.yml` file in a `.circleci` directory.
 +
-Even without taking any further action, you should see: 
+Even without taking any further action, you should see:
 
-* Syntax coloration is applied. 
+* Syntax coloration is applied.
 * Red warnings appear if you introduce syntax errors.
 * You are able to use go-to-definition commands on the file.
 +

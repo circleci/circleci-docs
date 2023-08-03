@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's container runner.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :container:
 
 This page describes how to install CircleCI's container runner.
@@ -27,7 +26,7 @@ This page describes how to install CircleCI's container runner.
 {% include snippets/runner/terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. Create namespace and resource class 
+== 1. Create namespace and resource class
 
 [.tab.container-runner.Web_app_installation]
 --

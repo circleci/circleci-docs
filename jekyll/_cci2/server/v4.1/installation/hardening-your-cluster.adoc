@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This section provides supplemental information on hardening your Kubernetes cluster.
 

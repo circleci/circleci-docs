@@ -60,6 +60,6 @@ Using dependency pinning with hashes like this prevents malicious binaries or pa
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 - [Security recommendations]({{site.baseurl}}/security-recommendations)

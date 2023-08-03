@@ -12,8 +12,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This section assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page and
 have followed the steps outlined in the xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[Getting Started with Dynamic Configuration] section.

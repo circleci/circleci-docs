@@ -39,7 +39,7 @@ CLI では、以下のパターンを使用したテストファイルのグロ�
 - `[abc]` は、角かっこ内の任意の文字に一致します (パス区切り文字を除く)。
 - `{foo,bar,...}` は、中かっこ内のいずれかの文字シーケンスに一致します。
 
-パターン照合の結果を確認するには、`echo` コマンドを使用します。
+**パターンマッチング（pattern-matching）の結果を確認するには、`echo` コマンドを使用します。
 
 ```yaml
 # ~/.circleci/config.yml
@@ -47,10 +47,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/node:20.3.0
     parallelism: 4
     steps:
       - run:

@@ -1,0 +1,2 @@
+**Using Docker?** Authenticating Docker pulls from image registries is recommended when using the Docker execution environment. Authenticated pulls allow access to private Docker images, and may also grant higher rate limits, depending on your registry provider. For further information see [Using Docker authenticated pulls](/docs/private-images).
+{: class="alert alert-info" }

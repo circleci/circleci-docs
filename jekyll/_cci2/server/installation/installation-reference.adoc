@@ -1,14 +1,14 @@
 ---
 contentTags:
   platform:
-    - Server v4.x
+    - Server v4.0
     - Server Admin
 ---
 = Installation reference
 :page-layout: classic-docs
+:page-description: Reference page for all values options available for installations of CircleCI server v4
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#example-manifests]
 == Example Manifests

@@ -1,0 +1,1 @@
+CAUTION: Self-hosted runner version 1.0 will sunset on August 3, 2023. xref:upgrading-circleci-machine-runner-on-cloud#[Update to 1.1 now.]
