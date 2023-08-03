@@ -1,0 +1,4 @@
+Config
+CircleCI cloud
+CircleCI server
+circleci.com
