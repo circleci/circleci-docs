@@ -92,8 +92,6 @@ You can add or delete a configuration source for your project. If you followed t
 
 Once you define a configuration source, you can set up a trigger that points to that configuration.
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
-
 [#triggers]
 === Triggers
 
@@ -104,8 +102,6 @@ If you followed the steps above to connect GitHub, a trigger set with GitHub as 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
 
 When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline shoud be triggered.
-
-**Trigger filters** and editing triggers is not currently supported for GitHub App integrations.
 
 [#project-settings-advanced]
 === Advanced
@@ -166,17 +162,22 @@ There are a number of built-in environment variables that are not available in G
 The following sections are features of CircleCI which are not currently fully supported. These features are planned for future releases.
 
 [#manual-trigger-pipeline-option]
-== Manual trigger pipeline option
+=== Manual trigger pipeline option
 The ability to manually trigger a pipeline from the web app is not currently supported for GitHub Apps projects.
 
 [#in-app-config-editor]
-== In-app config editor
+=== In-app config editor
 The in-app config editor is currently **only** available for GitHub App accounts during project creation.
 
 [#account-integrations]
 === Account integrations
 
 There is currently no method to manage the connection with GitHub outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitHub identity as part of their user profile's account integration settings.
+
+[#scheudled-pipelines]
+=== Scheduled pipelines
+
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub Apps projects. This feature is planned for a future release.
 
 [#auto-cancel-redundant-workflows]
 === Auto-cancel redundant workflows
