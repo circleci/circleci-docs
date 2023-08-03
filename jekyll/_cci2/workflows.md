@@ -8,8 +8,6 @@ contentTags:
   - Server v4.x
   - Server v3.x
 suggested:
-  - title: Manual job approval and scheduled workflow runs
-    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
   - title: Filter workflows by branch
     link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   - title: How to trigger a workflow
@@ -222,8 +220,8 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
-The scheduled workflows feature is set to be deprecated. Using **scheduled pipelines** rather than scheduled workflows offers several benefits. Visit the scheduled pipelines [migration guide]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the [Scheduled pipelines]({{site.baseurl}}/scheduled-pipelines) page.
-{: class="alert alert-warning"}
+**The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on [CircleCI Discuss](https://discuss.circleci.com/).
+{: class="alert alert-note"}
 
 Runing a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 

@@ -9,6 +9,8 @@ plan:
 - Scale
 ---
 
+{% include snippets/linux-cuda-deprecation-notice.md %}
+
 You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to Nvidia GPUs for specialized workloads.
 
 To use the Linux GPU execution environment, use the machine executor and specify a GPU-enabled image. For a full list of machine executor images see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) or the [Configuration Reference]({{site.baseurl}}/configuration-reference#available-linux-gpu-images).
@@ -58,7 +60,7 @@ jobs:
 Specify a resource class to fit your project and requirements. For further details on credit usage for these options, see the [Resource Class pricing and plans page](https://circleci.com/product/features/resource-classes/).
 
 ### Linux GPU
-{: linux-gpu}
+{: #linux-gpu}
 
 ```yaml
 version: 2.1
@@ -80,3 +82,8 @@ jobs:
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
 {% include snippets/gpu-windows-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}

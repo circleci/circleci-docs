@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn how to pull an image from AWS ECR using OIDC authentication
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Follow this how-to guide to configure a `docker` job to pull an image from AWS ECR using OIDC authentication.
 
@@ -85,12 +84,12 @@ If you followed the xref:openid-connect-tokens#set-up-aws[Set up AWS instruction
 jobs:
   job_name:
     docker:
-      - image: <your-image-arn>
+      - image: <your-image-uri>
         aws_auth:
           oidc_role_arn: <your-iam-role-arn>
 ----
 
-. Replace `<your-image-arn>` with the Amazon Resource Name (ARN) of the ECR image you want to pull. This ARN typically follows the format `aws_account_id.dkr.ecr.region.amazonaws.com/repository:tag`.
+. Replace `<your-image-uri>` with the URI of the ECR image you want to pull. This URI typically follows the format `aws_account_id.dkr.ecr.region.amazonaws.com/repository:tag`.
 
 . Replace `<your-iam-role-arn>` with the ARN of the IAM role you want to assume. This is the role you created in the last section.
 

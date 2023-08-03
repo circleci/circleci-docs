@@ -14,7 +14,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
+{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 このページでは、CircleCI のセルフホストコンテナとマシンランナーに関してよく寄せられるご質問にお答えします。
 

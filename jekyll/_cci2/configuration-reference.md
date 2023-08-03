@@ -629,7 +629,9 @@ A map of environment variable names and values. For more information on defining
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
+This feature is used to optimize test steps. If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel.
+
+You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the [Test splitting and parallelism]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
 Example:
 
@@ -949,20 +951,16 @@ jobs:
 #### **`resource_class`**
 {: #resourceclass }
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
+The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
 
-We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it is possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
 If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
-{: class="alert alert-warning"}
 
 Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 {: class="alert alert-warning"}
 
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
-{: class="alert alert-note"}
-
-If you are using CircleCI server, contact your system administrator for a list of available resource classes.
 {: class="alert alert-note"}
 
 ---
@@ -986,17 +984,6 @@ jobs:
 ##### Docker execution environment
 {: #docker-execution-environment }
 
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge<sup>(2)</sup> | 16    | 32GB
-2xlarge+<sup>(2)</sup>| 20    | 40GB
-{: class="table table-striped"}
-
 Example:
 
 ```yaml
@@ -1008,6 +995,19 @@ jobs:
     steps:
       ... // other config
 ```
+
+###### x86
+{: #x86 }
+
+{% include snippets/docker-resource-table.md %}
+
+###### Arm
+{: #arm }
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**. For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
 
 ---
 

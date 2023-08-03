@@ -1,6 +1,6 @@
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|--------------
- `15.0.0` | Xcode 15.0 Beta 1 (15A5160n) | 13.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12394/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-beta-1-released/48298)
+ `15.0.0` | Xcode 15 Beta 2 (15A5161b) | 13.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12543/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-beta-2-released-includes-visionos-sdk/48452)
 `14.3.1` | Xcode 14.3.1 (14E300b) | 13.2.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12131/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-3-1-rc-released/48152)
  `14.2.0` | Xcode 14.2 (14C18) | 12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v10821/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-2-rc-released-breaking-changes/46303)
  `14.1.0` | Xcode 14.1 (14B47b) | 12.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v9002/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-1-rc-2-released/45890)

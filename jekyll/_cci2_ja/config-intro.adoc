@@ -42,6 +42,8 @@ CircleCI では、オンデマンドのシェルによりコマンドを実行�
 . プロジェクトのルートに、`.circleci` フォルダーを作成します。 フォルダー名は、CircleCI が認識できるように、必ずピリオドで始めてください。
 . `config.yml` ファイルを `.circleci` フォルダー内に作成し、以下のコードをペーストします。
 +
+{% include snippets/ja/docker-auth.adoc %}
++
 [source,yaml]
 ----
 version: 2.1
@@ -49,9 +51,6 @@ jobs:
   build:
     docker:
       - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step

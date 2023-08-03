@@ -43,6 +43,8 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 
 以下は、2 つの同時実行ジョブから成るデフォルトのワークフローオーケストレーションのシンプルな例です。 この `workflows` キーには一意の名前を指定する必要があります。 この例では、一意の名前は `build_and_test` です。 `jobs` キーは一意の名前のワークフローの下にネストされ、ジョブ名のリストが含まれます。 ジョブには依存関係が定義されていないため、同時に実行されます。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 ```yaml
 version: 2.1
 
@@ -50,18 +52,12 @@ jobs:
   build:
     docker:
       - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>

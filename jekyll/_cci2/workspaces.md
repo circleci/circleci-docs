@@ -29,7 +29,7 @@ Some notes about workspaces:
 * The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace.
 * Each job can only see content added to the workspace by the jobs that are upstream of it.
 * When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined.
-* If multiple concurrent jobs persist, the same filename then attaching the workspace will error.
+* If multiple concurrent jobs persist the same filename, then attaching the workspace will error.
 * If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
 By default, workspace storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.

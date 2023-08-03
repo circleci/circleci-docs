@@ -8,8 +8,7 @@ contentTags:
 :page-description: "Learn how to configure a your jobs to run in the macOS execution environment."
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch, and Apple TV simulators.
 
@@ -41,7 +40,7 @@ jobs:
 
 {% include snippets/xcode-silicon-vm.adoc %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the xref:dedicated-hosts-macos#[Dedicated hosts] documentation.
 
 [#available-resource-classes]
 == Available resource classes
@@ -56,6 +55,11 @@ jobs:
       xcode: "14.2.0"
     resource_class: macos.x86.medium.gen2
 ----
+
+[#view-resource-usage]
+=== View resource usage
+
+{% include snippets/resource-class-view.adoc %}
 
 [#using-the-macos-executor]
 == Image update cycle for the macOS executor

@@ -93,6 +93,8 @@ CircleCI では、同じように環境 (Executor と呼ばれる) を選択で�
 [#configuration-comparison]
 == 設定の比較
 
+{% include snippets/ja/docker-auth.adoc %}
+
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
@@ -115,9 +117,6 @@ container:
 # Docker (container) Executor
 docker:
   - image: cimg/openjdk:17.0
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 # Linux Ubuntu Executor
 machine: true
@@ -160,20 +159,12 @@ jobs:
     docker:
       # Primary Executor
       - image: cimg/openjdk:17.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
       # Dependency Service(s)
       - image: postgres:10.8
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
-
 ----
 
 2+|ジョブ内で https://circleci.com/docs/ja/configuration-reference/#run[実行する] ステップの指定:  同じような機能ですが、構文が異なります。
@@ -271,7 +262,7 @@ jobs:
 ----
 |===
 
-CircleCI のその他の設定例は、 <<examples-and-guides-overview#,サンプルとガイドの概要>> と <<example-configs#,サンプルプロジェクト>> のページをご覧ください。
+GitHub Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。
 
 GitHub Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。 しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 

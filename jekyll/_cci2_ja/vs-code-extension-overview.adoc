@@ -12,153 +12,152 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI 用の VS Code 拡張機能を使用すると、VS Code とブラウザを行き来するコンテキストスイッチの手間を解消できます。
+CircleCI の VS Code 拡張機能を使用すると、VS Code から直接 CircleCI パイプラインを管理できます。
 
 [#introduction]
 == はじめに
 
-CircleCI 用 VS Code 拡張機能では、CircleCI パイプラインを IDE から直接表示、管理できるほか、CircleCI の YAML 設定ファイルの作成、変更、編集に役立つコンテキストヘルプも利用できます。
+この VS Code 拡張機能には以下が含まれています。
 
-- The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
-- The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
+- **パイプラインマネージャー**: IDE (統合開発環境) 内でパイプラインを確認、管理できます。 これにより、VS Code とブラウザーを行き来することなく、パイプラインの問題を把握して即座に対応可能です。
+- **コンフィグヘルパー**: コンフィグファイルの操作、作成、編集に役立つ支援機能を IDE 上で利用できます。
 
 [#install-the-vs-code-extension]
 == VS Code 拡張機能をインストールする
 
-この拡張機能のインストールとセットアップ手順については、VS Code の link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[Marketplace ページ]を参照するか、VS Code の [Extensions (拡張機能)] タブで検索してください。
+この拡張機能のインストールとセットアップ手順については、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code Marketplace のページ]を参照するか、VS Code の [Extensions (拡張機能)] タブで CircleCI 拡張機能を検索してください。
 
 [#pipelines-panel]
-== Pipelines panel
+== パイプラインパネル
 
-The pipelines panel provides a visual interface for managing your pipelines. The panel lists your most recent pipelines, workflows, and jobs in a project, and lets you monitor their status as well as interact with them.
+パイプラインパネルでは、見やすいインターフェースでパイプラインを管理できます。 このパネルには、プロジェクトで最近実行されたパイプライン、ワークフロー、ジョブが一覧表示されます。それぞれの状態を確認するだけでなく、操作することも可能です。
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png[Screenshot of side panel with pipeline information]
 
-For each object, you can trigger certain events on hover.
+各オブジェクトにカーソルを合わせると、所定のイベントをトリガーできます。
 
 [#pipeline]
 === パイプライン
 
-xref:pipelines#[Pipelines] are the top-level tree item in the panel, and they contain your workflows. Hovering over a pipeline lets you:
+パイプラインパネルのツリーの最上位にはxref:pipelines#[パイプライン]が表示されており、展開するとワークフローが表示されます。 パイプラインにカーソルを合わせると、以下の操作を行えます。
 
-- Open in browser, to view pipeline details in the CircleCI app in your default web browser
+- お使いのデフォルト Web ブラウザーで CircleCI Web アプリを開き、パイプラインの詳細を確認する
 
 [#workflow]
 === ワークフロー
 
-xref:workflows#[Workflows] are nested under each pipeline, and contain jobs. Hovering over a workflow lets you:
+各パイプラインにはxref:workflows#[ワークフロー]がネストされており、展開するとジョブが表示されます。 ワークフローにカーソルを合わせると、以下の操作を行えます。
 
-- Open in browser, to view workflow details in the CircleCI app, in your default web browser
-- Rerun the workflow from start, to re-trigger the entire workflow
-- Rerun the workflow from failed, to rerun only the workflow's failed jobs
+- お使いのデフォルト Web ブラウザーで CircleCI Web アプリを開き、ワークフローの詳細を確認する
+- ワークフローを最初から再実行して、ワークフロー全体をやり直す
+- ワークフローを失敗状態から再実行して、ワークフロー内の失敗したジョブのみをやり直す
 
 [#job]
 === ジョブ
 
-xref:jobs-steps#[Jobs] are nested under each workflow, and can contain tests and artifacts. Hovering over a job lets you:
+各ワークフローにはxref:jobs-steps#[ジョブ]がネストされており、展開するとテストとアーティファクトが表示されます。 ジョブにカーソルを合わせると、以下の操作を行えます。
 
-- Approve the job (only if the job is on hold)
-- Cancel the job (only if the job is running)
-- Re-run the job with SSH (refer to the xref:#re-run-with-ssh[Re-run with SSH] section below for more information)
-- View job details
+- ジョブを承認する (ジョブが保留中の場合のみ)
+- ジョブをキャンセルする (ジョブが実行中の場合のみ)
+- SSH 接続でジョブを再実行する (詳しくは「xref:#re-run-with-ssh[SSH での再実行]」セクションを参照)
+- ジョブの詳細を確認する
++
+image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[ジョブの詳細が表示されたサイドパネルのスクリーンショット]
 
-image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
+また、ジョブを展開すると以下の操作を行えます。
 
-Expanding a job also lets you:
-
-- Load xref:test#[tests], if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication `[FLAKY]`.
-- Load xref:artifacts#[artifacts], if any are created by the job. Once the artifacts are loaded, you can download them by clicking on them.
+- xref:test#[テスト]を読み込む (テストのメタデータを取得するように設定している場合):  CircleCI でフレーキー (実行結果が不安定) と判定されたテストには、`[FLAKY]` マークが表示されます。
+- xref:artifacts#[アーティファクト]を読み込む (ジョブでアーティファクトが作成されている場合):  読み込んだアーティファクトは、クリックしてダウンロードできます。
 
 [#re-run-with-ssh]
-=== Re-run with SSH
+=== SSH での再実行
 
-There are two ways to re-run jobs with SSH directly from VS Code:
+以下の 2 通りの方法で、VS Code から直接 SSH 接続してジョブを再実行できます。
 
-- Open the job detail page, then click the green **SSH** button on the top right.
-
+* ジョブの詳細ページを開き、右上にある **SSH** ボタンをクリックする
++
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screenshot of side Panel with job details]
-
-- Hover over the job in the pipelines panel, and click the SSH action button next to the job name.
-
+* パイプラインパネルのジョブにカーソルを合わせ、ジョブ名の隣に表示される [SSH] ボタンをクリックする
++
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun otpions]
 
-In both cases, you will be presented with two options:
+どちらの操作でも、以下の 2 つのオプションが表示されます。
 
-- Open an SSH session in the terminal
-- Open SSH session in a remote VS Code window
+* ターミナルで SSH セッションを開始する
+* VS Code のリモートウィンドウで SSH セッションを開始する
++
+VS Code のリモートウィンドウを使用するには、VS Code 公式の link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] 拡張機能が必要です。 VS Code 内でリモート環境に SSH 接続する方法については、link:https://code.visualstudio.com/docs/remote/ssh[VS Code のドキュメント (英語)] をご覧ください。
 
-This feature requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on remote development using SSH in VS Code directly in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
+SSH でジョブを再実行するには、初めにお使いの GitHub または Bitbucket の SSH キーへのパスを設定する必要があります。 初めて SSH で再実行しようとすると、必要な SSH キーへのパスを選択するよう求められます。 この手順をスキップした場合、または設定した SSH キーへのパスを変更する場合は、CircleCI VS Code 拡張機能の設定の **[SSH]** セクションで設定できます。
 
-To re-run your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the CircleCI VS Code extension settings.
-
-If the job you want to re-run uses parallelism, you will be able to select which parallel run you want to SSH into.
+また、再実行対象のジョブで並列実行機能を使用している場合は、SSH 接続する並列実行を選択できます。
 
 [#notifications]
-=== Notifications (通知)
+=== 通知
 
-You can set up notifications to warn you when a workflow in your pipelines panel has changed status.
+パイプラインパネルのワークフローの状態の変化について知らせる通知を設定できます。
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png[Screenshot of a notification pop-up for a failed workflow]
 
-If you are not following a workflow in the pipelines panel, you cannot be notified about a status change event. For instance, if you have set the extension to follow only the current branch, you cannot be notified of status changes for other branches.
+パイプラインパネルでフォローしていないワークフローについては、状態変化の通知は利用できません。 たとえば、拡張機能で現在のブランチしかフォローしていない場合、他のブランチの状態変化の通知は受けられません。
 
-NOTE: We do not recommend enabling notifications for when a status changes to “Running,” which may result in too many notifications to be useful.
+NOTE: "Running (実行中)" 状態への変化に関する通知を有効にすると、通知頻度が高くなりすぎて不便になることがあるため、推奨されません。
 
 [#status-bar]
-=== Status Bar
+=== ステータスバー
 
-The status bar provides information at-a-glance about the status of the CircleCI extension, your project, and your most recent workflow.
+ステータスバーでは、CircleCI 拡張機能、プロジェクト、最近実行されたワークフローの状態をひと目で確認できます。
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_status-bar.png[Screenshot of the status bar]
 
-The status bar can display the following statuses:
+ステータスバーに表示される状態は以下のとおりです。
 
-- **Not logged in**: Upon clicking on the status bar, a CircleCI login page will open.
-- **No project**: Upon clicking on the status bar, the settings page will open so you can select a project.
-- **Success / On hold / Failed**, and other workflow statuses: this refers to the status of the top (that is, the most recent) pipeline in your panel. Upon clicking on the status bar, the associated workflow will come into focus on the pipelines panel.
+- **[Not logged in (未ログイン)]**: ステータスバーをクリックすると、CircleCI へのログインページが開きます。
+- **[No project (プロジェクトなし)]**: ステータスバーをクリックすると、プロジェクトを選択する設定ページが開きます。
+- **[Success (成功)]/[On hold (保留)]/[Failed (失敗)]** (およびその他のワークフローの状態): パイプラインパネルの一番上にある (直近に実行された) パイプラインの状態を示します。 ステータスバーをクリックすると、パイプラインパネルの対応するワークフローがハイライトされます。
 
 [#config-helper]
-== Config helper
+== コンフィグヘルパー
 
-The VS Code extension also provides in-file contextual help for your CircleCI configs, including:
+VS Code 拡張機能には、CircleCI コンフィグファイルの編集を状況に応じて支援する以下の機能も用意されています。
 
-- **Rich code navigation through “go-to-definition” and “go-to-reference” commands.** Hover over a job name or executor parameter to verify its definition or view where they are referenced elsewhere in the file. You can also explore the definition of orb-defined commands or parameters.
+- **"宣言へ移動" と "参照へ移動" コマンドによるファイル内ナビゲーション**: ジョブ名または Executor のパラメーターにカーソルを合わせると、それらの宣言内容やファイル内での参照箇所を確認できます。 また、Orb に宣言されているコマンドやパラメーターの内容も確認可能です。
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
-- **Contextual documentation and usage hints when hovering on specific keys.** This helps you avoid having to frequently switch to your browser to check the documentation when editing your configuration. Links to the official CircleCI docs are also provided on hover, for easier navigation.
+- **特定のキーにカーソルを合わせると表示されるコンテキストヘルプと使い方のヒント**: VS Code とブラウザーを行き来することなく、ドキュメントを参照しながらコンフィグファイルを編集できます。 カーソルを合わせると CircleCI 公式ドキュメントへのリンクも表示されるため、すぐにアクセスできます。
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_on-hover-documentation.png[Screenshot showing the contextual information on hover]
-- **構文検証**. This helps you identify typos, incorrect use of parameters, incomplete definitions, wrong types, invalid or deprecated machine versions, etc.
+- **構文検証**:  入力ミス、パラメーターの不適切な使用、不完全な宣言、型の間違い、無効なマシンバージョン、廃止済みのマシンバージョンなどを検出できます。
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_syntax-validation.gif[Screenshot showing the synthax highlightning when an error is identified]
-- **Usage warnings**. This helps you identify deprecated parameters, unused jobs or executors, or missing properties that prevent you from taking advantage of CircleCI’s full capabilities.
+- **使い方に関する警告**:  CircleCI をフル活用するうえでの妨げとなる廃止済みのパラメーター、未使用のジョブや Executor、不足しているプロパティを検出できます。
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlightning to warn on an unused job]
-- **Auto completion**. This is available with both built-in keys and parameters as well as user-defined variables.
+- **自動補完機能**:  デフォルトのキーおよびパラメーターだけでなく、ユーザー定義の変数も自動的に補完されます。
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_autocomplete.png[Screenshot showing two suggestions to autocomplete the line of code]
 
 [#config-validation-commands]
-=== Config validation commands
+=== コンフィグファイル検証用のコマンド
 
-The config helper also provides two commands that help you statically validate your YAML config files without having to run a pipeline.
+コンフィグヘルパーには、パイプラインを実行することなく YAML コンフィグファイルを静的に検証できる 2 つのコマンドも用意されています。
 
-* Validate current configuration file
+* 現在のコンフィグファイルを検証する
 +
-Corresponds to the CLI command `circleci config validate`, and verifies statically that the config file is well formed. Please note that this command only validates this file for structure and syntax errors, but not for semantic error (e.g. "This job does not exist").
-* Validate current configuration file against org policy
+CircleCI CLI の `circleci config validate` コマンドに相当し、コンフィグファイルの形式に誤りがないかどうかを静的に検証します。 このコマンドで検証されるのはファイルの構造エラーと構文エラーだけであり、セマンティックエラー ("このジョブは存在しない" など) は検証されないことに注意してください。
+* 組織のポリシーに照らして現在のコンフィグファイルを検証する
 +
-Corresponds to the CLI command `circleci policy decide`, and verifies that the configuration file complies with your organisation policies (if any are set).
+CircleCI CLI の `circleci policy decide` コマンドに相当し、設定済みの組織ポリシーにコンフィグファイルが準拠しているかどうかを検証します。
 
-Both of these commands can be run by:
+どちらのコマンドも、次の方法で実行できます。
 
-- Opening the VS Code Command Palette.
-- Right-clicking anywhere within an opened `.circleci/config.yml` file.
-- Clicking on the CircleCI button on the top right of the editor when you have a `.circleci/config.yml`open. Note that the button will not be visible if you are editing any other file.
+- VS Code のコマンドパレットを開く
+- 開いている `.circleci/config.yml` ファイル内の任意の場所を右クリックする。
+- `.circleci/config.yml` を開いた状態で、エディター右上にある [CircleCI] ボタンをクリックする。 他に編集しているファイルがある場合、このボタンは表示されません。
 
 [#open-source-language-server]
-=== Open source language server
+=== オープンソースの言語サーバー
 
-The config helper is based on a dedicated language server specific for CircleCI YAML files, which is open source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
+コンフィグヘルパーは CircleCI YAML ファイル専用の言語サーバーをベースとしており、この言語サーバーはオープンソースです。 プロジェクトのリポジトリ (link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server]) にて言語サーバーのソースコードを公開しており、投稿やイシューも受け付けています。
 
-You can also integrate the language server into any editor which supports the Language Server Protocol, and build your own plugin to benefit from config helper capabilities in your favourite editor.
+また、Language Server Protocol に対応したエディターであれば、この言語サーバーを統合可能です。プラグインを作成することで、お気に入りのエディターでコンフィグヘルパーを利用できます。

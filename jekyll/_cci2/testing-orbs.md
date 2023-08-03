@@ -288,7 +288,7 @@ workflows:
 
 The AWS ECR orb contains a job named "build-and-push-image" which will build and push an image to the AWS ECR repository. We run this job and others with multiple parameter options to test their functionality with each code change.
 
-Similar to how we could use additional steps to test our commands, we can take advantage of [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps-requires-version-21) to validate in the job environment, or as shown in this example, we can "clean up" anything we may have created in the job. Post-Steps are additional steps that can be injected at the end of an existing job.
+Similar to how we could use additional steps to test our commands, we can take advantage of [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps) to validate in the job environment, or as shown in this example, we can "clean up" anything we may have created in the job. Post-Steps are additional steps that can be injected at the end of an existing job.
 
 ## What's next?
 {: #whats-next }

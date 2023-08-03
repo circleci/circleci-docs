@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v4.x
   - Server v3.x
@@ -8,13 +8,12 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 
 This page describes how to update the CircleCI's **machine runner** on CircleCI server installations.
 
-toc::[]
+
 
 [#self-hosted-runner-for-server-compatibility]
 == Machine runner on server compatibility

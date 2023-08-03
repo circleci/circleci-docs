@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn the basics of CircleCI deployment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction

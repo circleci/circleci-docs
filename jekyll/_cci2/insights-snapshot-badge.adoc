@@ -8,15 +8,16 @@ contentTags:
 :page-liquid:
 :page-description: Generate a badge that displays Insights metrics for a project.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-[#overview]
-== Overview
+CAUTION: Insights snapshot badges are not currently supported for GitLab projects.
 
 The Insights snapshot badge, similar to a xref:status-badges#[status badge] that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.
 
 image::insights-snapshot-badge-example.png[Insights snapshot badge embedded on README]
+
+[#introduction]
+== Introduction
 
 The most common use case for the Insights snapshot badge is to display xref:insights#[Insights] metrics for the deployment workflow on the project’s main branch in the README. With that said, the badge can be configured to display Insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
 
@@ -73,7 +74,7 @@ image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/
 --
 [source,markdown]
 ----
-[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/github/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
+[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
 ----
 --
 
