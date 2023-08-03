@@ -745,3 +745,11 @@ xref:insights-tests#[テスト インサイト機能]は現在、GitLab のお�
 
 - xref:config-intro#[設定ファイルのチュートリアル]
 - xref:hello-world#[Hello world]
+
+[#relevant-gitlab-articles]
+== 役立つ GitLab の記事とガイド
+* link:https://circleci.com/ja/integrations/gitlab/[GitLab と CircleCI の連携]
+* link:https://circleci.com/ja/blog/announcing-gitlab-support/[CircleCI に GitLab が対応]
+* link:https://circleci.com/ja/blog/setting-up-continuous-integration-with-gitlab/[GitLab と CircleCI で CI を構築する方法]
+* link:https://circleci.com/ja/blog/gitlab-ultimate-guide/[GitLab（ギットラブ）とは？完全ガイド]
+* link:https://circleci.com/ja/circleci-versus-gitlab/[GitLab CI/CD と CircleCI　の比較]
