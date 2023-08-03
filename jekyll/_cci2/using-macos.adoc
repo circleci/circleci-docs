@@ -56,6 +56,11 @@ jobs:
     resource_class: macos.x86.medium.gen2
 ----
 
+[#view-resource-usage]
+=== View resource usage
+
+{% include snippets/resource-class-view.adoc %}
+
 [#using-the-macos-executor]
 == Image update cycle for the macOS executor
 

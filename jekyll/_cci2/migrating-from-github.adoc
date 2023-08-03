@@ -200,7 +200,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for GitHub, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/configuration-reference/#orbs[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]
@@ -240,7 +240,7 @@ jobs:
 ----
 
 2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
-on_success, on_failure) as well as https://circleci.com/docs/configuration-reference/#the-when-step-requires-version-21[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
+on_success, on_failure) as well as https://circleci.com/docs/configuration-reference/#the-when-step[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
 currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
 
 a|
