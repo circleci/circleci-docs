@@ -150,6 +150,19 @@ circleci setup
 
 The set up process will prompt you for configuration settings. If you are using the CLI with CircleCI cloud, use the default CircleCI host. If you are using CircleCI server, change the value to your installation address (for example, circleci.your-org.com).
 
+## Telemetry
+{: #telemetry }
+
+The CircleCI CLI includes a telemetry feature that collects basic errors and feature usage data in order to help us improve the experience for everyone.
+
+Telemetry works on an opt-in basis: when running a command for the first time, you will be asked for consent to enable telemetry. Telemetry is disabled by default for non-interactive terminals, ensuring that scripts that leverage the CLI run smoothly.
+
+You can disable or enable telemetry any time in one of the following ways:
+
+* Run the commands `circleci telemetry enable` or `circleci telemetry disable`
+
+* Set the `CIRCLECI_CLI_TELEMETRY_OPTOUT` environment variable to `1` or `true` to disable it
+
 ## Uninstallation
 {: #uninstallation }
 
