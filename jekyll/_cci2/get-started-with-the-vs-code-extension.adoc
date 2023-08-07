@@ -92,6 +92,8 @@ Alternatively, you can configure SSH keys for the extension manually through the
 
 To open an SSH session in a dedicated VS Code remote window, you need to install the link:https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer[official Remote Explorer extension for VS Code].
 
+NOTE: **Using GitLab?** Re-run with SSH from VS Code is not yet enabled for Gitlab projects.
+
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_ssh_remote_window.png[VS Code with remote development window]
 
 [#open-a-config-file-to-test-language-support-features]
