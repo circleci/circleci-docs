@@ -103,9 +103,10 @@ If you have not received an invite, please contact your org administrator.
 Note that if you are setting up a project for the first time, you may need to authenticate with your VCS provider. After a one-time authentication, you will be able to set up subsequent projects more quickly. Refer to the xref:create-project#[Creating a Project] guide for more information. 
 
 The full set of documentation for integrating GitHub, Bitbucket, or GitLab projects are available as follows:
-- xref:github-apps-integration#[Bitbucket integration]
+
+- xref:github-apps-integration#[GitHub App integration]
 - xref:bitbucket-integration#[Bitbucket integration]
-- xref:gitlab-integration#[Bitbucket integration]
+- xref:gitlab-integration#[GitLab integration]
 
 ////
 
