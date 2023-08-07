@@ -1038,17 +1038,17 @@ a|AWS 認証設定を指定します。
 |
 
 |`rabbitmq.statefulsetLabels.app`
-|string
+|文字列
 |`"rabbitmq"`
 |
 
 |`rabbitmq.statefulsetLabels.layer`
-|string
+|文字列
 |`"data"`
 |
 
 |`redis.cluster.enabled`
-|bool
+|ブール値
 |`true`
 |
 
@@ -1058,47 +1058,47 @@ a|AWS 認証設定を指定します。
 |
 
 |`redis.fullnameOverride`
-|string
+|文字列
 |`"redis"`
 |
 
 |`redis.image.tag`
-|string
+|文字列
 |`"6.2.1-debian-10-r13"`
 |
 
 |`redis.master.podAnnotations."backup.velero.io/backup-volumes"`
-|string
+|文字列
 |`"redis-data"`
 |
 
 |`redis.podLabels.app`
-|string
+|文字列
 |`"redis"`
 |
 
 |`redis.podLabels.layer`
-|string
+|文字列
 |`"data"`
 |
 
 |`redis.replica.podAnnotations."backup.velero.io/backup-volumes"`
-|string
+|文字列
 |`"redis-data"`
 |
 
 |`redis.statefulset.labels.app`
-|string
+|文字列
 |`"redis"`
 |
 
 |`redis.statefulset.labels.layer`
-|string
+|文字列
 |`"data"`
 |
 
 |`redis.usePassword`
-|bool
+|ブール値
 |`false`
 |
 
@@ -1108,12 +1108,12 @@ a|AWS 認証設定を指定します。
 |Number of replicas to deploy for the schedulerer deployment.
 
 |`serveUnsafeArtifacts`
-|bool
+|ブール値
 |`false`
 |⚠️ WARNING: Changing this to true will serve HTML artifacts instead of downloading them. This can allow specially-crafted artifacts to gain control of users' CircleCI accounts.
 
 |`sessionCookieKey`
-|string
+|文字列
 |`""`
 a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
 
