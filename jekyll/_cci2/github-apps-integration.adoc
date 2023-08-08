@@ -130,7 +130,7 @@ You will be guided through the SSH key generation process in the CircleCI web ap
 
 . In the CircleCI web app **Create Project** page, copy and paste your private key, including `---BEGIN RSA PRIVATE KEY---` and `---END RSA PRIVATE KEY---`, into the **GitHub personal SSH key** field.
 
-When you push to your GitLab repository from a job, CircleCI will use the SSH key you added.
+When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
 
 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
@@ -202,12 +202,12 @@ The recommendation is to either:
 [#ssh-rerun]
 === SSH rerun
 
-SSH reruns are not currently supported for GitHub App projects. This feature is in development and will be available soon.
+SSH reruns are not currently supported for GitHub App projects. This feature will be available in a future release.
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy keys and user keys are not used by GitHub Apps integrations. All keys are stored in **Project Settings > Additional SSH Keys**. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project.
+Deploy keys and user keys are not used by GitHub Apps integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project.
 
 [#free-and-open-source-setting]
 === Free and open source setting
