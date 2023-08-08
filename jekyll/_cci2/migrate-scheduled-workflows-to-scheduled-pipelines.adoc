@@ -104,6 +104,5 @@ daily-run-workflow:
 
 [#next-steps]
 == Next steps
-
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
 - xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
