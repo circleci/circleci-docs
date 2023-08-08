@@ -12,11 +12,8 @@ contentTags:
 :page-description: このドキュメントでは、CircleCI セルフホストランナーの Docker へのインストール手順をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
-
 :toc-title:
 :machine:
-
-{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 このページでは、CircleCI のマシンランナーを Docker Executor を使用してインストールする方法を説明します。 プライベート Kubernetes クラスタでのセルフホストランナーのセットアップをお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 

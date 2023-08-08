@@ -12,8 +12,6 @@ contentTags:
 :icons: font
 :experimental:
 
-{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
-
 [#introduction]
 == Introduction
 
