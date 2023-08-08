@@ -154,7 +154,7 @@ CircleCI users have different abilities depending on assigned roles in a particu
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-There are a number of built-in environment variables that are not available in GitHub-based projects for accounts authenticated through GitHub Apsps. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
+There are a number of built-in environment variables that are not available in GitHub-based projects for accounts authenticated through GitHub Apps. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
 [#coming-soon]
 == Coming soon
