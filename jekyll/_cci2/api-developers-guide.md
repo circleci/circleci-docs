@@ -93,10 +93,10 @@ v1) return EDN if no accept header is specified.
 * This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
 <br>
-If you authenticated with the **GitHub OAuth app**, this section is relevant to you.
+If you authenticated with the **GitHub OAuth app**, this section is relevant to you. For **GitHub App**, refer to the [following section](#gitlab-saas-support-projects).
 {: class="alert alert-info" }
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+If you want to pull information from CircleCI about a GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
 For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
 
@@ -110,7 +110,7 @@ The `project_slug` is included in the payload when pulling information about a p
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#gitlab-saas-support-projects), the slug format has been changed.
+For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitHub App and GitLab projects](#gitlab-saas-support-projects), the slug format has been changed.
 
 ### GitHub App and GitLab projects
 {: #gitlab-saas-support-projects }
@@ -120,7 +120,7 @@ For GitHub and Bitbucket projects, `project_slug` is currently usable as a human
 * This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
 <br>
-If you authenticated with **GitHub Apps**, this section is relevant to you.
+If you authenticated with **GitHub App**, this section is relevant to you. For **GitHub OAuth**, refer to the [above section](#github-and-bitbucket-projects).
 {: class="alert alert-info" }
 
 {% include snippets/api-v2-usage-standalone.md %}
@@ -158,7 +158,7 @@ Many of the API calls make use of the `{project-slug}` triplet, described [above
 ### Prerequisites
 {: #prerequisites }
 
-* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. **GitLab SaaS users:** Please note the [change in the definition](#gitlab-saas-support-projects) for the project slug references in the examples and use cases on the rest of this document.
+* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. **GitHub App and GitLab users:** Please note the [change in the definition](#gitlab-saas-support-projects) for the project slug references in the examples and use cases on the rest of this document.
 * Completion of the CircleCI [onboarding]({{ site.baseurl }}/getting-started).
 
 ### Steps
@@ -294,8 +294,7 @@ Many of the API calls make use of the `{project-slug}` triplet, described [above
     }' https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
-This concludes the end-to-end example of using the v2 API. For more detailed
-information about other endpoints you may wish to call, please refer to the
+For more detailed information about other endpoints you may wish to call, please refer to the
 [CircleCI API v2 Documentation](https://circleci.com/docs/api/v2/) for an overview of all
 endpoints currently available.
 
