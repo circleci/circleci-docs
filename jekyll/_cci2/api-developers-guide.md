@@ -94,7 +94,7 @@ v1) return EDN if no accept header is specified.
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
 <br>
 If you authenticated with the **GitHub OAuth app**, this section is relevant to you. For **GitHub App**, refer to the [following section](#gitlab-saas-support-projects).
-{: class="alert alert-info" }
+{: class="alert alert-info"}
 
 If you want to pull information from CircleCI about a GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
@@ -121,7 +121,7 @@ For GitHub and Bitbucket projects, `project_slug` is currently usable as a human
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
 <br>
 If you authenticated with **GitHub App**, this section is relevant to you. For **GitHub OAuth**, refer to the [above section](#github-and-bitbucket-projects).
-{: class="alert alert-info" }
+{: class="alert alert-info"}
 
 {% include snippets/api-v2-usage-standalone.md %}
 
