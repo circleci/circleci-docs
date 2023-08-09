@@ -28,7 +28,7 @@
 | `13.2.1`
 | Xcode 13.2.1 (13C100)
 | 11.6.2
-| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2243/index.html[Installed software]()
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2243/index.html[Installed software]
 | https://discuss.circleci.com/t/xcode-13-2-1-released/42334[Release Notes]
 
 | `13.1.0`
@@ -55,3 +55,10 @@
 | https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2297/index.html[Installed software]
 | https://discuss.circleci.com/t/xcode-11-7-released/37312[Release Notes]
 |===
+
+[WARNING]
+====
+The `macos.x86.metal.gen1` resource class is being deprecated on October 2, 2023. Xcode v14.0.1 is the latest version that will be supported by these macOS resources.
+
+See our link:https://discuss.circleci.com/t/macos-intel-support-deprecation-in-january-2024/48718[announcement] for more details.
+====
