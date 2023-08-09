@@ -12,7 +12,7 @@ contentTags:
 
 //TODO: Check backlinks
 
-To run your very first build on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your email address and connect your GitHub, Bitbucket, or GitLab accounts in the process.
+To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your email address and connect your GitHub, Bitbucket, or GitLab account in the process.
 
 - If you are **creating a new CircleCI org** for your team, follow the xref:#sign-up-and-create-an-org[Sign up and create an org] steps below. 
 - If you are signing up for a CircleCI account through an **invite** from someone on your team, follow the steps in the xref:#sign-up-with-an-invite[Sign up with an invite] section.
@@ -20,27 +20,27 @@ To run your very first build on CircleCI, go to the link:https://circleci.com/si
 [#vcs-integrations]
 == VCS integrations
 
-CircleCI supports GitHub, Bitbucket, and GitLab projects. If you use **GitHub** or **GitLab**, and are setting up a CircleCI organization for your team, you will be setting the VCS integration type and authenticating with your VCS provider during the signup process. Team members that you invite afterwards to your CircleCI org will have to also later authenticate with the VCS provider if they are to create new projects.
+CircleCI supports GitHub, Bitbucket, and GitLab projects. If you use **GitHub** or **GitLab**, and are creating a CircleCI organization for your team, you will be setting the VCS integration type and authenticating with your VCS provider during the signup process. Team members that you invite afterwards to your CircleCI org will have to also later authenticate with the VCS provider if they are to create new projects.
 
 If you use **Bitbucket**, every team member signing up for a new account and joining your org will authenticate with Bitbucket during the signup process.
 
 [#sign-up-and-create-an-org]
 == Sign up and create an org
 
-If you are new to CircleCI, you will be creating a CircleCI organization. A CircleCI organization may correspond directly to a _personal_ CircleCI account, or more commonly, to a _shared_ account in which a team collaborates and with which multiple team members' personal CircleCI accounts can be associated. 
+If you are new to CircleCI, you will create a CircleCI organization. A CircleCI organization may correspond directly to a _personal_ CircleCI account, or more commonly, to a _shared_ account in which a team collaborates and with which multiple team members' personal CircleCI accounts can be associated. 
 
-. To create an account for free with CircleCI, enter your email address and password.
+. To create an account for free with CircleCI, enter your email address and password on the link:https://circleci.com/signup/[Sign Up] page.
 
-. You will be taken to a screen where you can respond to prompts that best describe your role and your engineering organization.
+. On the next screen, respond to prompts that best describe your role and your engineering organization.
 
-. You will be prompted to connect your code. Choose the version control system (VCS) that contains your code repositories: GitHub, GitLab.com (cloud), GitLab Self-Managed, or Bitbucket.
+. Then, connect your code. Choose the version control system (VCS) that contains your code repositories: GitHub, GitLab.com (cloud), GitLab Self-Managed, or Bitbucket.
 
 [#GitHub]
 === GitHub
 
 . For GitHub, you will be taken to a screen to install GitHub Apps. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
 
-. Next, you will be redirected to the Create New Project page where you can set up your first project and run your first pipeline in CircleCI. You will need an SSH key that will also be added as a deploy key in GitHub. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
+. Next, in the Create New Project page, you will set up your first project and trigger your first pipeline in CircleCI. You need an SSH key. Add the private key on this page, and add the corresponding public key as a deploy key in GitHub. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
 +
 If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel]. 
 
@@ -87,7 +87,7 @@ NOTE: The full set of documentation for integrating Bitbucket with CircleCI can 
 
 If you are new to CircleCI and signing up using an invite from a team member, you will be _joining_ a CircleCI organization. The CircleCI organization is a _shared_ account where a team collaborates and with which multiple team members' personal CircleCI accounts can be associated. 
 
-[NOTE] 
+[CAUTION] 
 ====
 You must follow the link from an invite email in order to join an existing CircleCI organization. If you attempt to sign up directly from the link:https://circleci.com/signup/[Sign Up] page, you will be creating a new organization. 
 
