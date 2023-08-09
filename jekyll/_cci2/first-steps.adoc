@@ -48,7 +48,7 @@ If you do not want to connect to your code at this time and only wish to continu
 +
 When you are ready, you can connect to your GitHub account from the CircleCI web app by xref:create-project#[creating a new project].
 
-NOTE: The full set of documentation for integrating GitHub with CircleCI can be found on the xref:github-apps-integration#[GitHub Apps integration page].
+NOTE: The full set of documentation for integrating GitHub with CircleCI can be found on the xref:github-apps-integration#[GitHub App integration page].
 
 [#gitlab]
 === GitLab
