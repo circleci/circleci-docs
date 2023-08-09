@@ -55,7 +55,7 @@ NOTE: The full set of documentation for integrating GitHub with CircleCI can be 
 [#gitlab]
 === GitLab
 
-. For GitLab, you will be taken to a screen where you can connect your code from either a GitLab.com or GitLab Self-managed account. Follow the prompts to connect to your GitLab account and create a new project. You can also refer to the xref:create-project#[Creating a Project] guide for more details on this step.
+. For GitLab, connect your code from either a GitLab.com or GitLab Self-managed account. Follow the prompts to connect to your GitLab account and create a new project. You can also refer to the xref:create-project#[Creating a Project] guide for more details on this step.
 +
 If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel]. 
 
@@ -70,7 +70,7 @@ NOTE: The full set of documentation for integrating GitLab with CircleCI can be 
 [#bitbucket]
 === Bitbucket
 
-. For Bitbucket, you will be taken to a screen where you can authenticate with your Bitbucket account and connect your code.
+. For Bitbucket, you will authenticate with your Bitbucket account and connect your code.
 
 . Once you have authenticated, you will be redirected to your organization dashboard in the CircleCI web app. From here, you can start to trigger and run project pipelines, set up more projects, and invite team members to your org.
 +
@@ -96,11 +96,11 @@ If you have not received an invite, please contact your org administrator.
 
 . To create an account for free with CircleCI, follow the link in your invite email and enter your email address and password. 
 
-. You will be taken to a screen where you can respond to prompts that best describe your role and your engineering organization.
+. On the next screen, respond to prompts that best describe your role and your engineering organization.
 
 . Finally, you will be taken to your organization's pipelines dashboard in the CircleCI web app. From here, you can follow projects or trigger pipelines in projects to which you have access in your organization, or set up new projects.
 
-Note that if you are setting up a project for the first time, you may need to authenticate with your VCS provider. After a one-time authentication, you will be able to set up subsequent projects more quickly. Refer to the xref:create-project#[Creating a Project] guide for more information. 
+Note that if you are setting up a project for the first time, you may need to authenticate with your VCS provider. Once you have completed a one-time authentication, you will be able to set up subsequent projects in CircleCI more quickly. Refer to the xref:create-project#[Creating a Project] guide for more information. 
 
 The full set of documentation for integrating GitHub, Bitbucket, or GitLab projects are available as follows:
 
