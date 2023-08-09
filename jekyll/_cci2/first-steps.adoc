@@ -38,13 +38,13 @@ If you are new to CircleCI, you will create a CircleCI organization. A CircleCI 
 [#GitHub]
 === GitHub
 
-. For GitHub, you will be taken to a screen to install GitHub Apps. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
+. For GitHub, you will be taken to a screen to install the CircleCI GitHub App. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
 
 . Next, in the Create New Project page, you will set up your first project and trigger your first pipeline in CircleCI. You need an SSH key. Add the private key on this page, and add the corresponding public key as a deploy key in GitHub. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
 +
 If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel]. 
 
-. You will be taken to the dashboard in the CircleCI web app. From here, you can start to trigger and run project pipelines, create more projects, and invite team members to your org.
+. You will be taken to the dashboard in the CircleCI web app. From here, you can start to trigger pipelines, create more projects, and invite team members to your org.
 
 ** If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
 +
@@ -85,7 +85,7 @@ NOTE: The full set of documentation for integrating Bitbucket with CircleCI can 
 [#sign-up-with-an-invite]
 == Sign up with an invite
 
-If you are new to CircleCI and signing up using an invite from a team member, you will be _joining_ a CircleCI organization. The CircleCI organization is a _shared_ account where a team collaborates and with which multiple team members' personal CircleCI accounts can be associated. 
+If you are signing up using an invite from a team member, you will be _joining_ a CircleCI organization. The CircleCI organization is a _shared_ account where a team collaborates, and with which multiple team members' personal CircleCI accounts can be associated. 
 
 [CAUTION] 
 ====
