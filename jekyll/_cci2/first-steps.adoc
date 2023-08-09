@@ -10,8 +10,6 @@ contentTags:
 :icons: font
 :experimental:
 
-//TODO: Check backlinks
-
 To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your email address and connect your GitHub, Bitbucket, or GitLab account in the process.
 
 - If you are **creating a new CircleCI org** for your team, follow the xref:#sign-up-and-create-an-org[Sign up and create an org] steps below. 
@@ -107,22 +105,6 @@ The full set of documentation for integrating GitHub, Bitbucket, or GitLab proje
 - xref:github-apps-integration#[GitHub App integration]
 - xref:bitbucket-integration#[Bitbucket integration]
 - xref:gitlab-integration#[GitLab integration]
-
-////
-
-TODO: Check backlinks
-[#vcs-signup]
-== Sign up with GitHub or Bitbucket
-
-
-[#gitlab-signup]
-== Sign up with GitLab
-
-
-[#email-signup]
-== Sign up with email
-
-////
 
 [#terms]
 == Terms
