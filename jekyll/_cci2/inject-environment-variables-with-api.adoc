@@ -34,6 +34,8 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
+Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+
 IMPORTANT: Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets).
 
 Read more about pipeline parameters on the xref:pipeline-variables#[Pipeline values and parameters] page.
