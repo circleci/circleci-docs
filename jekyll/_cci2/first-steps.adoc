@@ -103,6 +103,7 @@ Note that if you are setting up a project for the first time, you may need to au
 The full set of documentation for integrating GitHub, Bitbucket, or GitLab projects are available as follows:
 
 - xref:github-apps-integration#[GitHub App integration]
+- xref:github-integration#[GitHub OAuth integration]
 - xref:bitbucket-integration#[Bitbucket integration]
 - xref:gitlab-integration#[GitLab integration]
 
