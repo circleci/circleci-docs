@@ -20,14 +20,13 @@ Docker 実行環境を使用して Docker コンテナで[ジョブ]({{site.base
 
 コンテナをスピンアップするには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルで Docker イメージを指定します。 ジョブのステップはすべてこのコンテナで実行されます。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 ```yaml
 jobs:
   my-job:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_ コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
@@ -77,20 +76,7 @@ Docker イメージは以下の方法で指定することができます。
 
 [`resource_class`]({{ site.baseurl }}/ja/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
-| クラス      | vCPU | RAM   |
-| -------- | ---- | ----- |
-| small    | 1    | 2 GB  |
-| medium   | 2    | 4 GB  |
-| medium+  | 3    | 6 GB  |
-| large    | 4    | 8 GB  |
-| xlarge   | 8    | 16 GB |
-| 2xlarge  | 16   | 32 GB |
-| 2xlarge+ | 20   | 40 GB |
-{: class="table table-striped"}
-
-**注**: `2xlarge` と `2xlarge+` はサポートチームのレビューが必要です。 ご利用の際は、[サポートチケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
-
-`resource_class` キーを使ってリソースクラスを以下のように指定します。
+リソースクラスは `resource_class` キーで指定します：
 
 ```yaml
 jobs:
@@ -101,6 +87,28 @@ jobs:
     steps:
     #  ...  other config
 ```
+
+### x86
+{: #x86 }
+
+Docker実行環境では、以下のリソース・クラスが x86 アーキテクチャで利用可能です：
+
+{% include snippets/ja/docker-resource-table.md %}
+
+### Arm
+{: #arm }
+
+以下のリソース・クラスは、Docker で Arm を使用できます：
+
+**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
 
 ## Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
