@@ -13,15 +13,15 @@ contentTags:
 
 このドキュメントでは、CircleCI の設定でブラウザーテストの実行とデバッグを行う一般的な方法について説明します。
 
-## 前提条件
-{: #prerequisites }
-
-「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
-
 ## 概要
 {: #overview }
 
 コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザーベースのテストは、変更が加えられるたびに、各デプロイの前、または特定のブランチで実行されるように設定できます。
+
+## 前提条件
+{: #prerequisites }
+
+「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
 
 ## Selenium
 {: #selenium }
@@ -55,11 +55,7 @@ jobs:
           background: true
 ```
 
-サンプルアプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
-
-ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザーテスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する [Discuss のスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
-
-Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 クロスブラウザー テストを実行するこれらのクラウドは、クラウド上に既製のインフラストラクチャを提供しているため、開発者が Selenium 環境の設定に時間をかける必要はありません。
+Selenium用に環境を構成する代わりに、LambdaTest、Sauce Labs、またはBrowserStackのようなクラウドベースのプラットフォームに移行することができます。これらのクロスブラウザテストクラウドは、Selenium環境の構成に時間を費やす必要がないように、既製のインフラストラクチャを提供します。
 
 ## LambdaTest
 {: #lambdatest }
@@ -68,7 +64,7 @@ Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、Bro
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
-CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 この Orb を使用することで Lambda tunnel をすばやくセットアップし、テストのステップを定義できます。
+CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト [Or](https://circleci.com/developer/ja/orbs/orb/lambdatest/lambda-tunnel) を開発しました。 この Orb を使用することで Lambda tunnel をすばやくセットアップし、テストのステップを定義できます。
 
 {% raw %}
 ```yaml
@@ -98,7 +94,6 @@ JavaScript を使用して Web アプリケーションをテストしている�
 1. CircleCI プロジェクトに `SAUCE_USERNAME` と `SAUCE_ACCESS_KEY` を [環境変数]({{site.baseurl}}/ja/env-vars/)として追加します。
 2. CircleCI プロジェクトの `config.yml` を saucectl-run Orb を含むよう変更し、この Orb をワークフロー内でジョブとして定義します。
 
-{% raw %}
 ```yaml
 version: 2.1
 
@@ -109,9 +104,6 @@ jobs:
   test-cypress:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
@@ -123,7 +115,6 @@ workflows:
     jobs:
       - test-cypress
 ```
-{% endraw %}
 
 ## BrowserStack と Appium
 {: #browserstack-and-appium }
@@ -139,7 +130,6 @@ JavaScript エンドツーエンド テストに使用できるブラウザー �
 
 このプロセスを簡素化するために、CircleCI 承認済み Orb を使用して、結果を Cypress ダッシュボードにポストせずにすべての Cypress テストを実行するなどのさまざまなテストを実行することができます。 以下に例示する CircleCI 承認済み Orb では、結果がダッシュボードにパブリッシュされずに、すべての Cypress テストが実行されます。
 
-{% raw %}
 ```yaml
 version: 2.1
 
@@ -152,7 +142,6 @@ workflows:
       - cypress/run:
           no-workspace: true
 ```
-{% endraw %}
 
 設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)を参照してください。
 
@@ -175,7 +164,6 @@ workflows:
 
 ### ローカル ブラウザーを使用して CircleCI 上の HTTP サーバーにアクセス
 {: #using-a-local-browser-to-access-http-server-on-circleci }
-{:.no_toc}
 
 CircleCI 上で HTTP サーバーを実行するテストを行う場合、ローカル マシンで動作するブラウザーを使用して障害テストのデバッグを行うと便利な場合があります。 これは、SSH を有効にした実行によって簡単にセットアップできます。
 
@@ -189,13 +177,12 @@ ssh -p 64625 ubuntu@54.221.135.43
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
 
-1. 次に、ローカル マシンでブラウザーを開き、`http://localhost:8080` に移動すると、CircleCI コンテナ上のポート `3000` で実行されているサーバーに直接リクエストが送信されます。 CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
+1. 次に、ローカルマシンでブラウザを開き、`http://localhost:3000`に移動して、CircleCIコンテナのポート`8080`で動作しているサーバーに直接リクエストを送信する。また、CircleCIコンテナ上のテストサーバーを手動で起動することもできます（まだ起動していない場合）。開発マシン上のブラウザから、実行中のテストサーバーにアクセスできるはずです。
 
 この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
 
 ### VNC からのブラウザー操作
 {: #interacting-with-the-browser-over-vnc }
-{:.no_toc}
 
 VNC を使用して、テストを実行しているブラウザーを表示し、操作することができます。 これは、実ブラウザーを実行するドライバーを使用している場合にのみ機能します。 Selenium が制御するブラウザーを操作できますが、PhantomJS はヘッドレスなので、操作する対象がありません。
 
@@ -257,6 +244,8 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 ## SSH からの X11 転送
 {: #x11-forwarding-over-ssh }
+
+SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に使えるようになる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub apps integration](/docs/github-apps-integration/) ページを参照ください。
 
 CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 
