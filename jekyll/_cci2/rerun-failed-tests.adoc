@@ -16,11 +16,11 @@ Use the rerun failed tests feature to only rerun a subset of tests instead of re
 [#introduction]
 == Introduction
 
-When you select **rerun failed tests** (see image below), only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.
+When you select **rerun failed tests** (see image below), a new workflow is triggered where only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.  
 
 Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[rerun your workflow from failed]. This type of rerun executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.
+This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.  
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
@@ -137,6 +137,7 @@ gem 'rspec_junit_formatter'
     path: ~/rspec
 ```
 
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 . Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-ruby-cucumber-tests]
@@ -153,6 +154,7 @@ gem 'rspec_junit_formatter'
 - store_test_results:
     ~/cucumber
 ```
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
 . Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
@@ -185,7 +187,10 @@ gem 'rspec_junit_formatter'
         path: test_results
 ```
 +
-Remember to modify the `glob` command for your specific use case.  **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
+
+. Update the `glob` command to match your specific use case.  **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 Cypress may output a warning saying `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
 
@@ -207,12 +212,14 @@ You can also add it to your `jest.config.js` file by following these link:https:
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
+      npx jest --listTests | circleci tests run --command="JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --" --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
 - store_test_results:
     path: ./reports/
 ```
+
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
 . Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 +
@@ -228,19 +235,21 @@ You can also add it to your `jest.config.js` file by following these link:https:
     command: |
       mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
       pnpm run serve &
-      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      TESTFILES=$(circleci tests glob "specs/e2e/**/*.spec.ts")
       echo "$TESTFILES" | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
 
  - store_test_results:
     path: results.xml
 ```
 
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
+
 . Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
 +
 NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with this feature.
 
-[#configure-a-job-running-gradle-tests]
-=== Configure a job running Gradle tests
+[#configure-a-job-running-kotlin-or-gradle-tests]
+=== Configure a job running Kotlin or Gradle tests
 
 . Modify your test command to use `circleci tests run`:
 +
@@ -273,6 +282,7 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 
 . Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
 
+
 [#configure-a-job-running-go-tests]
 === Configure a job running Go tests
 
@@ -285,8 +295,57 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 - store_test_results:
     path: junit.xml
 ```
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
 . **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+
+[#configure-a-job-running-elixir-tests]
+=== Configure a job running Elixir tests
+
+. Modify your test command to use `circleci tests run`:
++
+```yaml
+- run:
+    name: Run tests
+    command: |
+      circleci tests glob 'lib/**/*_test.exs'
+      | circleci tests run --command='xargs -n1 echo > test_file_paths.txt'
+
+      mix ecto.setup --quiet
+      cat test_file_paths.txt | xargs mix test
+
+- store_test_results:
+    path: _build/test/my_app/test-junit-report.xml
+    when: always
+```
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
+
+. Update the `glob` command to match your use case. 
+
+[#configure-a-job-running-phpunit-tests]
+=== Configure a job running PHPUnit tests
+
+. Modify your test command to use `circleci tests run`:
++
+```yaml
+
+# Use phpunit-finder to output list of tests to stdout for a test suite named functional 
+# Pass those tests as stdin to circleci tests run
+
+- run:
+    name: Run functional tests
+    command: |
+      TESTS_TO_RUN=$(/data/vendor/bin/phpunit-finder -- functional)
+      echo "$TESTS_TO_RUN" | circleci tests run --command="xargs -I{} -d\" \" /data/vendor/bin/phpunit {} --log-junit /data/artifacts/phpunit/phpunit-functional-$(basename {}).xml" --verbose --split-by=timings
+
+- store_test_results:
+    path: artifacts/phpunit
+    when: always
+```
+
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
+
+. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[phpunit-finder] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#output-test-files-only]
 === Output test files only
@@ -334,6 +393,8 @@ Django takes as input test filenames with a format that uses dots ("."), however
 - store_test_results:
     path: test-results
 ```
+
+. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
 [#known-limitations]
 == Known limitations
@@ -412,7 +473,7 @@ jobs:
           paths:
             - cover.out
           when: always
-      # Needed for to rerun failed tests
+      # Needed to rerun failed tests
       - store_test_results:
           path: junit.xml
           when: always

@@ -12,8 +12,6 @@ contentTags:
 :toc: macro:
 :toc-tittle:
 
-**CAUTION: セルフホストランナーバージョン 1.0 は 2023年8月3日に終了します。 今すぐ 1.1 にアップデートしてください。
-
 ここでは、CircleCI クラウド 上で CircleCI マシンランナーを更新する方法を説明します。
 
 [#check-current-version]
