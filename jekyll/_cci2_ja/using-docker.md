@@ -100,15 +100,15 @@ Docker実行環境では、以下のリソース・クラスが x86 アーキテ
 
 以下のリソース・クラスは、Docker で Arm を使用できます：
 
-**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+**Arm on Docker** 価格情報、およびArmリソースクラスをサポートするCircleCI Docker convenienceイメージのリストについては、[Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601)をご覧ください。
 {: class="alert alert-caution"}
 
-{% include snippets/docker-arm-resource-table.md %}
+{% include snippets/ja/docker-arm-resource-table.md %}
 
-### View resource usage
+### リソースの使用状況を見る
 {: #view-resource-usage }
 
-{% include snippets/resource-class-view.md %}
+{% include snippets/ja/resource-class-view.md %}
 
 ## Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
