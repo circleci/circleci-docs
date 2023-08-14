@@ -15,39 +15,47 @@ contentTags:
 
 :toc-title:
 
-このガイドでは、CircleCI でプロジェクトを作成する方法を紹介します。
+このガイドでは、CircleCI で新規プロジェクトを作成する方法を紹介します。
+
+[#prerequisites]
+== 前提条件
+
+* コードに接続された CircleCI のアカウント。https://circleci.com/ja/signup/[無料でサインアップ]できます。
+* CircleCI 上に構築したいコードリポジトリ。
 
 toc::[]
 
 [#step-one-link-your-vcs-with-circleci]
 == ステップ 1: バージョン管理システム (VCS) と CircleCI をリンクさせる
 
-ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、バージョン管理システム (VCS) を選択します。 メールアドレスで登録することもできます。
+CircleCI アカウントの設定に使用される認証方法は、CircleCI における「プロジェクト」の定義、および利用可能な権限管理プロセスを決定します：
 
-CircleCI プロジェクトとお客様の VCS 内の既存リポジトリをリンクさせる必要があります。 リポジトリがあり、そのリポジトリへの CircleCI のアクセスが承認されていることを確認してください (GitHub では、オプションで CircleCI によるプライベートリポジトリへのアクセスをブロックできます)。
+* **GitHub OAuth**、または **Bitbucket** を使用して認証した場合、CircleCIの "プロジェクト "はGitHubの "リポジトリ "に直接マッピングされます。以下の<<set-up-a-project>>の手順に従ってください。
 
-[#step-two-create-a-project-in-circleci]
-== ステップ 2: CircleCI でプロジェクトを作成する
+*　*GitLab**または**GitHub apps**で認証した場合、CircleCI内の "プロジェクト "は、作成した後にコードリポジトリと関連付けるスタンドアロンのエンティティです。以下の<<create-a-project>>の手順に従ってください。
+
+[#set-up-a-project]
+== プロジェクトの設定
+
+注: xref:github-integration#[GitHubのOAuth]、またはxref:bitbucket-integration#[Bitbucket]のいずれかでCircleCIを認証した場合は、このセクションの手順が適用されます。
+
+注: 2023年6月14日より、CircleCIでプロジェクトを設定する際に簡略化されたエクスペリエンスが表示される可能性があります。 詳細はリンク：https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[コミュニティフォーラム]をご覧ください。
 
 下記の手順により、CircleCI で新しいプロジェクトを作成します。
 
-. CircleCI のサイドバーで、 **Projects** をクリックします。
-. プロジェクトを見つけたら、その隣にある青色の **Set Up Project** ボタンをクリックします。
+. CircleCI Web アプリのサイドバーで、 **Projects** をクリックします。
+. リスト内でプロジェクトを見つけたら、その隣にある青色の **Set Up Project** ボタンをクリックします。
 +
 image::config-set-up-project.png[Set up Project]
 +
 プロジェクトが見つからない場合は、CircleCI の画面左上で正しい組織が選択されているか確認してください。
 +
 image::cci-organizations.png[Select Organization]
-
-[#step-three-specify-a-config-file]
-== ステップ 3: 設定ファイルを指定する
-
++
 プロジェクトのセットアップが完了すると、`config.yml` ファイルを提供するよう求められます。
 
-NOTE: 2023年6月14日より、CircleCIでプロジェクトを設定する際の体験が簡素化される可能性があります。  詳細は link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[コミュニティフォーラム]をご覧ください。
-
 . ポップアップウィンドウから、任意のオプションを選択してください。 選択肢は以下の 3 つです。
++
 * リポジトリの `.circleci` ディレクトリに `config.yml` を含める
 * リポジトリの新しいブランチに CI スターターパイプラインをコミットする
 * 編集可能な `config.yml` テンプレートを使用する
@@ -55,15 +63,46 @@ NOTE: 2023年6月14日より、CircleCIでプロジェクトを設定する際�
 CI スターターパイプラインを選択すると、 `config.yml` のサンプルファイルが作成され、リポジトリの `circleci-project-setup` ブランチにコミットされます。
 +
 `config.yml` ファイルの作成については、 <<config-intro#,設定ファイルの概要>> を参照してください。
++
 . 青色の **Set Up Project** ボタンをクリックします。
 
 パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集するか、ダッシュボードでプロジェクトの省略記号 (…) をクリックし、 **Configuration File** を選択します。 その出力は、CircleCI ダッシュボードで確認できます。
 
-パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集するか、ダッシュボードでプロジェクトの省略記号 (…) をクリックし、 **Configuration File** を選択します。
+パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集するか、ダッシュボードでプロジェクトの横にある省略記号をクリックし、**設定ファイル** を選択します。これにより、CircleCI コンフィギュレーションエディタが開き、そこから `config.yml` ファイルを編集してコミットすることができます。
 
 image::edit-config-file.png[Edit Configuration File]
 
-これにより、CircleCI の設定ファイルエディターが開き、 `config.yml` を編修し、コミットすることができます。
+[#create-a-project]
+=== プロジェクトの作成
+
+NOTE: xref:gitlab-integration#[GitLab]、またはxref:github-apps-integration#[GitHub apps]のいずれかでCircleCIを認証した場合は、このセクションの手順が適用されます。
+
+CircleCI で新しいプロジェクトを作成するには、以下の手順に従ってください：
+
+. CircleCI Web アプリで、サイドバーの **Projects** をクリックします。
+. ページ上部にある **Create Project** をクリックします。
++
+image::create-project-button.png[Create a project]
+
+. 新規プロジェクトの作成ウィンドウで、以下のオプションを使用します:
++
+** CircleCI にコードの保存場所を知らせる
+** `.circleci/config.yml`ファイルの管理オプションを選択します。CircleCIに設定ファイルを選択させ、これをリポジトリの新しいブランチにコミットするか、CircleCIウェブアプリでスターター設定ファイルを編集し、それを自分でリポジトリにコミットするかを選択できます。
+** xref:github-apps-integration#[GitHubアプリ]で認証した場合は、SSHアクセスの設定も指示に従ってください。
+** `config.yml` ファイルの作成方法については、以下のページを参照してください：
+*** xref:config-intro#[設定の紹介]
+*** xref:sample-config#[config.yml ファイルの例]
+*** xref:configuration-reference#[設定リファレンス]
++
+image::create-new-project-window.png[新規プロジェクトウィンドウの作成]
+
+. プロジェクト名フィールドにはリポジトリの名前が自動的に入力されますが、必要に応じて変更することができます。
+
+. ウィンドウの一番下にある **Create Project** をクリックします。
+
+CircleCIは指定された `.circleci/config.yml` ファイルを使用してパイプラインを実行します。出力は CircleCI ダッシュボードで確認できます。
+
+パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集します。
 
 [#see-also]
 == 関連項目
