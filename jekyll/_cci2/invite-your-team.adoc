@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Invite team members
+= Invite your team
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Add your team to your CircleCI organization
