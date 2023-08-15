@@ -42,7 +42,7 @@ Docker Executor を使用する場合、`docker` キーの下に記載される�
 ## ジョブにパラメーターを渡す
 {: #passing-parameters-to-jobs }
 
-パラメーターを使うと、異なるパッケージバージョンや異なる実行環境などの複数のシナリオで一つのジョブを何度も実行することができます。 この機能の拡張版が[マトリックスジョブ]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)です。 下記は実行時にパラメータをジョブに渡す基本的な例です。
+パラメーターを使うと、異なるパッケージバージョンや異なる実行環境などの複数のシナリオで一つのジョブを何度も実行することができます。 この機能の拡張版が[マトリックスジョブ](/docs/ja/configuration-reference/#matrix)です。 下記は実行時にパラメータをジョブに渡す基本的な例です。
 
 ```yml
 version: 2.1
