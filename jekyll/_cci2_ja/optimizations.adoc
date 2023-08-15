@@ -1,0 +1,204 @@
+---
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= 最適化の概要
+:page-layout: classic-docs
+:page-description: 5分でわかる CircleCI パイプラインを最適化する方法についてこちらのドキュメントページで学びましょう。
+:page-liquid:
+:toc: macro
+:toc-title:
+:experimental:
+
+このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 各方法について簡単に説明し、ジョブを高速化するためのユースケースを紹介します。
+
+[#data]
+== データ使用量を最適化するする方法
+
+[#custom-storage-controls]
+=== カスタム ストレージコントロール
+
+https://app.circleci.com/[CircleCI web アプリ] には、ワークスペース、キャッシュ、および成果物の保存期間をカスタマイズするためのコントロールが用意されています。これらの設定は、menu:Plan[Usage Controls]に移動して見つけることができます。デフォルトでは、保存期間は最大に設定されています： アーティファクトは 30 日、キャッシュとワークスペースは 15 日です。
+
+カスタムストレージ設定の詳細については、xref:persist-data#custom-storage-usage[データの永続化] ページを参照してください。
+
+[#workspaces]
+=== ワークスペース
+
+ワークスペースは、ランに固有で、ダウンストリーム・ジョブに必要なデータを渡すために使用されます。そのため、ワークフローを使用している場合、ビルドの早い段階で実行されたジョブがデータを取得し、ビルドの遅い段階で実行されたジョブが後でそのデータを使用できるようにすることができます。
+
+ジョブのデータを永続化し、xref:configuration-reference#attachworkspace[`attach_workspace`] キーを介して下流のジョブから利用できるようにするには、xref:configuration-reference#persisttoworkspace[`persist_to_workspace`] キーを使用するようにジョブを設定します。`persist_to_workspace` の `paths:`プロパティで指定されたファイルとディレクトリは、ルートキーで指定されたディレクトリに相対するワークフローの一時ワークスペースにアップロードされる。その後、ファイルとディレクトリはアップロードされ、後続のジョブ（およびワークフローの再実行）が使用できるようになります。
+
+* 詳しくはこちらの xref:workspaces[ワークスペース] ページをご覧ください。
+
+[#speed]
+== パイプラインの高速化
+
+[#docker-image-choice]
+=== Dockerイメージの選択
+
+プロジェクトに適した docker イメージを選択することは、ビルド時間に大きな影響を与えます。例えば、基本的な言語イメージを選択すると、パイプラインを実行するたびに依存関係やツールをダウンロードする必要がありますが、これらの依存関係やツールがすでにインストールされているイメージを選択またはビルドすれば、ビルドの実行ごとにこの時間を節約できます。プロジェクトを構成してイメージを指定する際には、以下のオプションを考慮してください：
+
+* CircleCI は様々な xref:circleci-images#[CircleCI イメージ]を提供しており、通常は公式の Dockerイメージをベースにしていますが、様々な便利な言語ツールがプリインストールされています。
+* xref:custom-images#[カスタムイメージ]を作成することで、プロジェクトに最大限の特殊性を持たせることができます。そのために、xref:custom-images#creating-a-custom-image-manually[画像を手動で作成するためのガイダンス]を提供しています。
+
+[#docker-layer-caching]
+=== Docker レイヤーキャッシング (DLC)
+
+Docker レイヤーキャッシングは、Docker イメージのビルド時間を短縮するのに役立つ機能です。DLC は、CI/CD プロセスの定期的な一部として Docker イメージを頻繁にビルドする場合に便利です。
+
+DLCは依存関係のキャッシュと似ており、ジョブの中で構築したイメージレイヤーを保存し、次回以降のビルドで利用できるようにします。
+
+* 詳しくは xref:docker-layer-caching#[Dockerレイヤーキャッシング] ページを参照してください。
+
+[#caching-dependencies]
+=== 依存関係のキャッシュ
+
+キャッシュは、ジョブを最適化しようとするときに最初に検討すべきことの1つです。ジョブが何らかの時点でデータを取得する場合、キャッシュを利用できる可能性が高いです。よくある例は、パッケージ/依存性マネージャの使用です。たとえば、プロジェクトが Yarn、Bundler、Pip を使用している場合、ジョブの間にダウンロードされた依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用するためにキャッシュすることができます。
+
+* 詳しくは xref:caching#[キャッシュの依存関係] ページを参照してください。
+
+[#workflows]
+=== ワークフロー
+
+ワークフローは、ジョブの集合とその実行順序を定義する手段を提供します。もし、お客様のコンフィギュレーションにおいて、2つのジョブが互いに独立して実行されるようなステップがあれば、ワークフローが役に立つかもしれません。ワークフローは、CI/CDの設定を補強し、改善するための他のいくつかの機能も提供します。ワークフローについて詳しくは xref:workflows#[ワークフロー] ページを参照してください。
+
+* link:https://github.com/CircleCI-Public/circleci-demo-workflows/[CircleCI デモワークフローリポジトリ] でワークフローのサンプル例を見ることができます。
+
+[#parallelism]
+=== 並列実行
+
+プロジェクトに大規模なテストスイートがある場合、xref:configuration-reference#parallelism[`parallelism`] と、xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[CircleCI のテスト分割機能]、または or a xref:parallelism-faster-jobs#other-ways-to-split-tests[サードパーティのアプリケーションまたはライブラリ] を使用して、複数のマシンにテストを分割するようにビルドを設定することができます。CircleCI はファイルベースでマシン間のテストの自動割り当てをサポートしていますが、テストの割り当て方法を手動でカスタマイズすることもできます。
+
+* テストの分割については、xref:parallelism-faster-jobs#[並列実行] ページを参照してください。
+
+[#resource-class]
+=== リソースクラス
+
+`resource_class` を使用すると、ジョブごとにCPUとRAMのリソースを指定することができる。CircleCIクラウドで利用可能なリソースクラスオプションの一覧は、xref:configuration-reference#resourceclass[設定リファレンス]を参照してください。CircleCIサーバーインストール用の同等のリストについては、システム管理者にお問い合わせください。
+
+リソースクラスの設定方法の例:
+
+[.tab.resource-class.Docker]
+--
+[source,yaml]
+----
+jobs:
+  my-build:
+    docker:
+      - image: cimg/base:current
+    resource_class: xlarge
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.Linux_VM]
+--
+[source,yaml]
+----
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:current
+    resource_class: large
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.macOS]
+--
+[source,yaml]
+----
+jobs:
+  build:
+    macos:
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.Windows]
+--
+[source,yaml]
+----
+jobs:
+  build: # name of your job
+    machine:
+      image: 'windows-server-2022-gui:current'
+    resource_class: windows.medium
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.Arm]
+--
+[source,yaml]
+----
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+    #  ...  other config
+----
+--
+
+[.tab.resource-class.GPU]
+--
+[source,yaml]
+----
+jobs:
+  build:
+    machine:
+      image: linux-cuda-12:default
+    resource_class: gpu.nvidia.medium
+    steps:
+    #  ...  other config
+----
+
+NOTE: GPU実行環境にアクセスしたい場合は、link:https://support.circleci.com/hc/ja/requests/new[サポートチケット] を開いてください。
+--
+
+* リソースクラスについての詳細は、link:/docs/resource-class-overview/[リソースクラスの概要] ページを参照してください。
+
+[#configuraiton]
+== 設定ファイルの最適化
+
+[#dynamic-configuration]
+=== ダイナミック コンフィギュレーション
+
+ダイナミックコンフィグを使用すると、特定のパイプライン値やファイルパスに応じて、CircleCI設定ファイルを動的に生成できます。ダイナミックコンフィグを使用すると、次のことが可能になります：
+
+* 条件付きワークフロー/コマンドの実行。
+* パイプラインのパラメータ値を渡したり、追加の設定の生成。
+* デフォルトの .circleci/ directory の外に存在する、個別の config.yml コンフィギュレーションのトリガー。
+
+ダイナミック・コンフィギュレーションについての詳細は、link:/docs/dynamic-config/[ダイナミック・コンフィギュレーション] 概要ページをご覧ください。
+
+[#orbs]
+=== Orb
+
+Orb は、どのようなプロジェクトでも使用できる、パラメータ設定可能な再利用可能なパッケージです。Orb を使って、以下のことができます：
+
+* 設定の簡素化 (`.circleci/_config.yml`)
+* 繰り返されるプロセスの自動化
+* プロジェクト設定の迅速化
+* サードパーティツールとの連携の簡素化
+
+Orb についての詳細は、 link:/docs/ja/orb-intro/[Orb の概要] ページをご覧ください。
+
+[#see-also]
+== 関連記事
+
+* link:{{site.baseurl}}/persist-data[データの永続化]
+* カスタマイズの完全なリストについては link:{{site.baseurl}}/configuration-reference/[設定リファレンス] ページをご覧ください。
+* Yarnがどのようにビルドを高速化し、エラーを減らすことができるかについては、link:{{site.baseurl}}/caching/#basic-example-of-package-manager-caching[依存関係のキャッシュ] のページをご覧ください。
