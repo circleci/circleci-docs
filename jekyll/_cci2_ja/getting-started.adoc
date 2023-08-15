@@ -136,7 +136,7 @@ CircleCI ウェブアプリで、サイドバーから <a  href="https://app.cir
 サンプル <code>config.yml</code> ファイルがあらかじめ入力された <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>に入ります。 そして<b>Click Commit and Run.</b> をクリックします。
 <br>
 <br>
-これにより、リポジトリのルート、<code>circleci-project-setup</code><code>という新しいブランチに <code>.circleci/config.yml</code> ファイルが作成されます。
+これにより、リポジトリのルート、<code>circleci-project-setup</code>という新しいブランチに <code>.circleci/config.yml</code> ファイルが作成されます。
 {% endcapture %}
 
 {%- capture CCI-config-editor -%}
