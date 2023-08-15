@@ -1,0 +1,92 @@
+---
+contentTags:
+  platform:
+  - クラウド
+---
+= ロールと権限の管理
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI でロールと権限を管理するためのノウハウガイドをこちらのページでわかりやすくご紹介しています。
+:icons: font
+:experimental:
+
+NOTE: xref:gitlab-integration#[GitLab] または xref:github-apps-integration#[GitHub apps]で CircleCI アカウントを認証した場合は、このページの内容が適用されます。
+
+CircleCI のロールと関連する権限を使用して、組織やプロジェクトへのユーザーアクセスを管理します。 このページのガイドでは、組織に人を追加する方法、パーミッションを更新する方法、組織内の人に特定のプロジェクトのロールを割り当てる方法を紹介します。CircleCIのロールとパーミッションの概要については、xref:roles-and-permissions-overview#[ロールとパーミッションの概要] ページを参照してください。
+
+[#prerequisites]
+== 前提条件
+
+* お客様のコードに接続されたCircleCIアカウント。アカウントをお持ちでない場合は、link:https://circleci.com/ja/signup/[こちらにて無料で新規アカウント作成]を行なってください。
+* 少なくとも1つのプロジェクトが組織内で作成されていること。詳しくは、xref:create-project#[プロジェクト作成] ページをご覧ください。
+
+[#add-people-to-your-organization]
+== 組織にチームメンバーを追加する
+
+NOTE: チームメンバーを組織に追加するには 「Organization Admin」権限を持つメンバーのみが他のメンバーを追加することができます。
+
+. CircleCI の webアプリのサイドバーより **「Organization Settings」** をクリックします。
+. 次に **「People」**　をクリックします。
+. そして btn:[Invite] ボタンをクリックします。
+. 招待したいメンバーのメールアドレスを入力します。スペースで区切って複数の人を追加することもできます。
+. 招待する人に適用する役割をドロップダウンメニューから選択します。
+. 最後に btn:[Send Invite(s)]をクリックします。
+
+招待されたユーザーは、招待を承諾するためのリンクを含むEメール通知 (`noreply@circleci.com` から送信されたメール)を受け取ります。
+
+現在 CircleCI アカウントを持っていない場合は、サインアップする必要があります。すでに CircleCI アカウントを持っている場合は、組織に追加され、ログインしている場合は、ウェブアプリの左上にある組織スイッチャーのオプションとして組織が表示されます。
+
+[#change-org-level-permissions]
+== 個人の組織レベルの権限を変更する方法
+
+NOTE: 個人の組織レベルの権限を変更する場合には、「Organization Admin」 を持つ権限者のみが権限の変更を実行することができます。
+
+. CircleCIウェブアプリで、サイドバーの **Organization Settings** をクリックします。
+. 次に、**People** をクリックします。
+. スクロールして、アクセス許可を更新したいメンバーを探します。
+. 名前の横のドロップダウンメニューを使用して、新しい役割を選択します。
+
+[#remove-people-from-your-organization]
+== 組織からメンバーを排除する方法
+
+NOTE: 少なくとも一人の組織管理者がいなければなりません。最後の組織管理者を削除しようとするとエラーになりますのでご注意ください。
+
+NOTE: メンバーの排除をする際にも、「Organization Admin」権限を持つメンバーのみが他のメンバーを排除することができます。
+
+. CircleCI の webアプリのサイドバーより **Organization Settings** をクリックします。
+. 次に **「People」**　をクリックします。
+. スクロールして削除したいメンバーを探します。
+. 名前の横にある省略記号 (...) ボタンをクリックし、btn:[組織から削除]を選択します。
+
+
+[#assign-a-project-role]
+== プロジェクトの役割を割り当てる方法
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[プロジェクトの役割を割り当てる方法]
+
+. CircleCIウェブアプリで、サイドバーの **Dashboard** をクリックします。
+. フィルタのドロップダウンメニューを使用してプロジェクトを選択します。
+. btn:[Project Settings] をクリックします。
+. **People** をサイドバーでクリックします。
+. btn:[Assign Project Roles] を次にクリックします。
+. ロールを割り当てたいメンバーのユーザー名を選択します。
+. **Project Role** ドロップダウンメニューを使用して、割り当てたい役割を選択します。
+. 最後に btn:[Assign Role] をクリックすれば完了です。
+
+[#change-a-persons-project-level-permissions]
+== プロジェクトレベルの権限を変更する
+
+. CircleCIウェブアプリで、サイドバーの **Dashboard** をクリックします。
+. フィルタのドロップダウンメニューを使用してプロジェクトを選択します。
+. btn:[Project Settings] をクリックします。
+. サイドバーメニューの **People** をクリックします。
+. 担当者名の横にあるドロップダウンメニューを使って、新しいプロジェクトの役割を選択します。
+
+[#remove-people-from-your-project]
+== プロジェクトからメンバーを外す方法
+
+. CircleCIウェブアプリで、サイドバーの **Dashboard** をクリックします。
+. フィルタのドロップダウンメニューを使用してプロジェクトを選択します。
+. btn:[Project Settings] をクリックします。
+. サイドバーにある **People** をクリックします。
+. 名前の横の (...) ボタンをクリックし、btn:[Remove project role] を選択すれば完了です。
