@@ -9,9 +9,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:experimental:
-
-{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
+:experimental:ß
 
 [#self-hosted-runner-configuration-reference]
 == Machine runner configuration reference
