@@ -9,10 +9,15 @@ contentTags:
     - Server v3.x
 ---
 
-## 概要
-{: #overview }
+**SSH によるジョブの再実行** を使用して、ジョブの問題をトラブルシューティングします。この機能を使用すると、ログファイル、実行中のプロセス、およびディレクトリパスを検査できます。
 
-多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べるのが一番の方法です。 CircleCI では、すべてのジョブに SSH でアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご参照ください。
+## 概要
+{: #introduction }
+
+SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に利用可能になる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub apps integration](/docs/github-apps-integration/) ページを参照してください。
+{: class="alert alert-info" }
+
+CircleCIでは、SSH経由ですべてのジョブにアクセスするオプションがあります。SSHを使ったCI/CDパイプラインのデバッグに関する [ブログ記事（英語）](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご覧ください。
 
 SSH を使用してログインする場合、ユーザーは対話型のログインシェルを実行しています。 最初にコマンドが失敗したディレクトリまたは 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 どちらの場合も、クリーンな実行は開始されません。 `pwd` または `ls` を実行すると、正しいディレクトリにいることを確認できます。
 

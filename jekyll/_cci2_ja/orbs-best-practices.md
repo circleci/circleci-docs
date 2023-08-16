@@ -218,7 +218,7 @@ Orb に特定の実行環境が必要なジョブを複数設定しているの�
 CircleCI のジョブでは、その実行前後にステップを挿入することができます。また、パラメーターを使用することでジョブ内にステップを挿入することも可能です。 一般的に、カスタム ジョブにコマンドを組み込む (該当する場合) よりも、ジョブを設定する方がユーザーにとっては容易です。 挿入可能なステップを用いると、ジョブの柔軟性が高まるだけでなく、Orb で新機能を試しやすくなります。
 
 詳しくは次を参照してください。
-* [事前ステップと事後ステップ]({{site.baseurl}}/ja/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [事前ステップと事後ステップ]({{site.baseurl}}/ja/configuration-reference/#pre-steps-and-post-steps)
 * [ステップ型パラメーター]({{site.baseurl}}/ja/reusing-config/#steps)
 
 ### Executor
