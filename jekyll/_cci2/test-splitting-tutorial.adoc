@@ -117,7 +117,6 @@ steps:
 ----
 
 . After you've made these changes, go ahead and click btn:[Commit and Run]. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. 
-
 +
 image::test-splitting-first-pipeline.png[Successful pipeline run]
 +
@@ -170,7 +169,7 @@ image::test-splitting-first-setup-steps.png[Steps run successfully within the jo
 --
 . Import the project code into GitLab, using the repo URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
 
-. Open the link:https://app.circleci.com[CircleCI web app]. Make sure you are in the correct organization (`\https://app.circleci.com/pipelines/circleci/<project-slug>`), then navigate to **Projects**.
+. Open the link:https://app.circleci.com[CircleCI web app]. Make sure you are in the correct organization (`\https://app.circleci.com/pipelines/circleci/:slug-remainder`), then navigate to **Projects**.
 
 . Click btn:[Create Project].
 

@@ -77,4 +77,4 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 [#next-steps]
 == Next steps
 
-For more information on using API v2 endpoints, see the link:https://circleci.com/docs/api/v2/[API Reference Documentation] and the <<api-developers-guide/#example-end-to-end-api-request,API Developers Guide Worked Example>>.
+For more information on using API v2 endpoints, see the link:https://circleci.com/docs/api/v2/[API Reference Documentation] and the <<api-developers-guide/#example-end-to-end-api-request,API Developers Guide end-to-end example>>.
