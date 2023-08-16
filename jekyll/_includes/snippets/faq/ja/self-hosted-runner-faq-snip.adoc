@@ -39,7 +39,7 @@ CAUTION: ジョブに Docker デーモンへのアクセスを許可すること
 
 NOTE: セルフホストランナーにインバウンド接続は必要ありません。 それ以外では、ジョブの内容に応じた接続が必要になります。
 
-CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
+CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circleci-tasks-prod.s3.us-east-1.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 === CircleCI のセルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか?

@@ -39,7 +39,7 @@ In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS
 
 NOTE: No inbound connectivity is required by a self-hosted runner. Any other required connectivity is dependent on the content of the jobs themselves.
 
-CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
+CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circleci-tasks-prod.s3.us-east-1.amazonaws.com`.
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 === How do caching, workspaces, and artifacts work with CircleCI's self-hosted runners?
