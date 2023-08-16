@@ -26,7 +26,7 @@ NOTE: For GitHub users, refer to the xref:github-apps-integration#[GitHub App in
 You must be an Organization Admin to invite your team to CircleCI.
 
 . In the CircleCI web app, go to menu:Organization Settings[People], then click btn:[Invite].
-. To send out email invites, enter your team members' email addresses, each separated by spaces, then assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the **Invite** form based on role. 
+. To send out email invites, enter your team members' email addresses, each separated by a space, then assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the **Invite** form based on role. 
 
 Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:manage-roles-and-permissions#[Manage roles and permissions guide] for more details.
 
@@ -36,7 +36,7 @@ Once they join your org, you can then also assign each team member a role on an 
 . On the **Dashboard** in the CircleCI web app, use the filter dropdown to select a project.
 . Click the **Add team members** link next to the project name.
 . A modal window will pop up. Click the btn:[Invite my team] button in the window to copy an invite message that you can send to your team members.
-. Your team members will need the use the sign-up link in your invite message to join your organization.
+. Your team members will need to use the sign-up link in your invite message to join your organization.
 
 [#see-also]
 == See also
