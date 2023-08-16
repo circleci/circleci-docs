@@ -22,6 +22,8 @@ CircleCI の VS Code 拡張機能を使用すると、VS Code から直接 Circl
 - **パイプラインマネージャー**: IDE (統合開発環境) 内でパイプラインを確認、管理できます。 これにより、VS Code とブラウザーを行き来することなく、パイプラインの問題を把握して即座に対応可能です。
 - **コンフィグヘルパー**: コンフィグファイルの操作、作成、編集に役立つ支援機能を IDE 上で利用できます。
 
+NOTE: 現在、GitLab と GitHub apps プロジェクトで使えるのは **Config Helper** だけです。GitHub OAuth で認証したのか GitHub apps で認証したのかを調べるには、xref:github-apps-integration#[GitHub app 連携] ページを参照ください。
+
 [#install-the-vs-code-extension]
 == VS Code 拡張機能をインストールする
 

@@ -87,4 +87,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-マトリックスジョブに関する詳細は、<<configuration-reference#matrix-requires-version-21,設定ファイルのリファレンス>>を参照してください。
+マトリックスジョブに関する詳細は、xref:configuration-reference#matrix[設定ファイルのリファレンス]を参照してください。
