@@ -22,6 +22,8 @@ en:
         children:
           - name: Sign up and try
             link: first-steps
+          - name: Invite your team
+            link: invite-your-team
           - name: Quickstart guide
             link: getting-started
           - name: YAML configuration intro

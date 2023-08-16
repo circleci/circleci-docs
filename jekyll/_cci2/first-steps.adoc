@@ -12,7 +12,7 @@ contentTags:
 
 To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your email address and connect your GitHub, Bitbucket, or GitLab account in the process.
 
-- If you are **creating a new CircleCI org** for your team, follow the xref:#sign-up-and-create-an-org[Sign up and create an org] steps below. 
+- If you are **creating a new CircleCI org** for your team, follow the xref:#sign-up-and-create-an-org[Sign up and create an org] steps below.
 - If you are signing up for a CircleCI account through an **invite** from someone on your team, follow the steps in the xref:#sign-up-with-an-invite[Sign up with an invite] section.
 
 [#vcs-integrations]
@@ -117,6 +117,8 @@ By signing up, you are agreeing to our link:https://circleci.com/terms-of-servic
 [#next-steps]
 == Next steps
 
+- Read the xref:invite-your-team.adoc#[Invite your team] page for steps on adding team members to your CircleCI org.
 - Go to the xref:hello-world#[Hello World] page to learn the basics of setting up a CircleCI configuration file. 
-- Read the xref:concepts#[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors 
+- Read the xref:concepts#[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors. 
+
 - Refer to the full xref:configuration-reference#[CircleCI configuration reference] for creating a `.circleci/config.yml` file, which determines your execution environment and automates your tests.
