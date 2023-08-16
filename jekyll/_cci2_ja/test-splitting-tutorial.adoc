@@ -9,7 +9,7 @@ contentTags:
 = テスト分割によるパイプラインの高速化
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI でテストを分割し、実行する方法について説明します。
+:page-description: このチュートリアルでは、テスト分割とは？ CircleCI でテストを分割し、実行する方法などについてわかりやすく説明します。
 :icons: font
 :toc: macro
 
@@ -36,12 +36,12 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 このチュートリアルに沿って実行するには、以下を準備する必要があります。
 
 * CircleCI のアカウント: アカウントをお持ちでない場合は、 xref:first-steps#[無料で登録していただけます。]
-* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や Bitbucket) : まだお済みでない場合は、xref:github-integration#[GitHub] と xref:bitbucket-integration#[Bitbucket の連携] のページの手順に従って VCS プロバイダーの関連付けをしてください。
+* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub、Bitbucket、GitLab) : まだお済みでない場合は、xref:github-integration#[GitHub] 、xref:bitbucket-integration#[Bitbucket の連携]、xref:gitlab-integration#[GitLabの連携] のページの手順に従って VCS プロバイダーの関連付けをしてください。
 
 [#about-the-sample-app]
 == サンプルアプリについて
 
-このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、 link:https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub] でご確認ください。 このアプリは、 link:https://create-react-app.dev/[React アプリの作成] を使って作成され、 link:https://jestjs.io/[Jest] のテストフレームワークを使用するように設定されています。 link:https://github.com/jest-community/jest-junit[jest-junit] Reporter を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
+このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、 link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial[GitHub] でご確認ください。 このアプリは、 link:https://create-react-app.dev/[React アプリの作成] を使って作成され、 link:https://jestjs.io/[Jest] のテストフレームワークを使用するように設定されています。 link:https://github.com/jest-community/jest-junit[jest-junit] Reporter を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
 
 このチュートリアルの後半で CircleCI のプロジェクトをセットアップする場合は、編集が可能な config.yml テンプレートを使用するオプションを選択します。 このチュートリアルで使用するテンプレートは、Node プロジェクトで使用可能なスターター設定です。 下記セクションで設定についての簡単な説明をお読みください。CircleCI での Node プロジェクトの設定に既に慣れている方は、先に進んでプロジェクトの設定を行なってください。
 
@@ -84,14 +84,20 @@ workflows:
 テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
 
 [#step-one-add-the-project]
-== ステップ 1: プロジェクトを追加する
+== 1. プロジェクトを追加する
 
 まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
 
-. GitHub で link:https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシュします。
-. https://app.circleci.com[CircleCI Web アプリ] を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
+[.tab.add_project.GitHub]
+--
+. GitHub で link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[リポジトリをフォーク] します。
+
+. link:https://app.circleci.com[CircleCI Web アプリ] を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
+
 . プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
+
 . config.yml ファイルを選択するよに求められます。 そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。 **Set Up Project** をクリックします。
+
 . サンプルの設定ファイルの一覧が表示されます。 ウィンドウ内でスクロールダウンすると、**Node (Advanced)** が表示されるので、**Select** をクリックします。
 +
 image::test-splitting-sample-configs.png[Sample config for Node]
@@ -118,11 +124,94 @@ image::test-splitting-first-pipeline.png[Successful pipeline run]
 緑色の Success ステータスを拡張して `build-and-test` ジョブを開き、パイプラインで実行されたステップをご自由にご覧ください。
 +
 image::test-splitting-first-setup-steps.png[Steps run successfully within the job]
+--
+
+[.tab.add_project.Bitbucket]
+--
+. リポジトリの URL を使って、プロジェクトのコードをBitbucketにインポートします。: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
+
+. link:https://app.circleci.com[CircleCI Web アプリ]を開いて、お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/bitbucket/<your-vcs-username>`)、 **Projects** に移動します。
+
+. プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
+
+. config.yml ファイルを選択するよに求められます。そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。**Set Up Project** をクリックします。
+
+. サンプルの設定ファイルの一覧が表示されます。 ウィンドウ内でスクロールダウンすると、**Node (Advanced)** が表示されるので、**Select** をクリックします。
++
+image::test-splitting-sample-configs.png[Sample config for Node]
+
+. アプリ内の設定エディターに移動します。このプロジェクトでは実際にYarnを使っているので、以下のステップを編集して、`npm`の代わりに`yarn`を使うようにします：
++
+[source,yaml]
+----
+steps:
+# Checkout the code as the first step.
+  - checkout
+# Next, the node orb's install-packages step will install the dependencies from a package.json.
+# The orb install-packages step will also automatically cache them for faster future runs.
+  - node/install-packages:
+    # If you are using yarn, change the line below from "npm" to "yarn"
+    pkg-manager: yarn
+  - run:
+    name: Run tests
+    command: yarn test
+----
+
+. 変更が完了したら、 **Commit and Run** ボタンをクリックします。 `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
++
+image::test-splitting-first-pipeline.png[Successful pipeline run]
++
+緑色の Success ステータスを展開し、`build-and-test` ジョブを開いて、パイプラインで実行されたステップを自由に見てください。
++
+image::test-splitting-first-setup-steps.png[Steps run successfully within the job]
+--
+
+[.tab.add_project.GitLab]
+--
+. プロジェクトのコードを GitLab にインポートするには、こちらのリポジトリの URL を使用してください。: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
+
+. link:https://app.circleci.com[CircleCI Web アプリ] を開いて、お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/circleci/<project-slug>`)、 **Projects** に移動します。
+
+. btn:[Create Project]をクリックします。
+
+. ドロップダウンからサンプルプロジェクトリポジトリを選択します。
+
+. config.yml ファイルを選択するよに求められます。そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。**Set Up Project** をクリックします。
+
+. アプリ内設定エディターに移動します。btn:[Change: Hello World]をクリックして設定テンプレートを変更します。すると、サンプル設定のリストが表示されます。ウィンドウを下にスクロールし、**Node (Advanced)**と表示されたら、btn:[Select]をクリックします。
++
+image::test-splitting-sample-configs.png[Sample config for Node]
+
+. このプロジェクトは実際にはYarnを使用しているので、`npm` の代わりに `yarn` を使用するように設定内の `build-and-test` ジョブの定義を編集する必要があります。アプリ内のエディタを使って、次のようにステップを編集します：
++
+[source,yaml]
+----
+steps:
+# Checkout the code as the first step.
+  - checkout
+# Next, the node orb's install-packages step will install the dependencies from a package.json.
+# The orb install-packages step will also automatically cache them for faster future runs.
+  - node/install-packages:
+    # If you are using yarn, change the line below from "npm" to "yarn"
+    pkg-manager: yarn
+  - run:
+    name: Run tests
+    command: yarn test
+----
+
+. 変更が完了したら、 **Commit and Run** ボタンをクリックします。 `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
++
+image::test-splitting-first-pipeline.png[Successful pipeline run]
++
+緑色の Success ステータスを展開し、`build-and-test` ジョブを開いて、パイプラインで実行されたステップを自由に見てください。
++
+image::test-splitting-first-setup-steps.png[Steps run successfully within the job]
+--
 
 [#step-two-set-up-test-splitting]
-== ステップ 2: テスト分割をセットアップする
+== 2. テスト分割をセットアップする
 
-コードリポジトリのローカルコピーをダウンロードしたら、テキストエディターで下記の手順を実行し、`.circleci/config.yml` に変更を加えます。 または、CircleCI Web アプリでブランチを選択し、**Edit Config** ボタンを選択すると、プロジェクトの設定ファイルを編集できます。
+コードリポジトリのローカルコピーをダウンロードしたら、テキストエディターで下記の手順を実行し、`.circleci/config.yml` に変更を加えます。 また、GitHub または Bitbucket を使用している場合は、CircleCI ウェブアプリでブランチを選択し、**Edit Config** ボタンを選択すると、プロジェクトの設定ファイルを編集できます。
 
 . `build-and-test` ジョブで、`docker` キーの後に `parallelism` キーと 値 `5` を追加します。
 +
@@ -227,7 +316,7 @@ workflows:
 '.circleci/config.yml`に変更を加えたら、変更をプッシュしてください。 それによりパイプラインがトリガーされ、テストが再び実行されますが、今回はその結果が保存されます。
 
 [#step-three-view-results]
-== ステップ 3: 結果を確認する
+== 3. 結果を確認する
 
 CircleCI Web アプリで、**Success** ステータスをクリックし、`build-and-test` ジョブを開き、先程トリガーしたパイプラインのステップを確認します。
 
@@ -254,13 +343,13 @@ image::test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
 Timing タブの右上にアイドルタイムが表示されます。 このパイプラインでは、各実行の終了から最も時間がかかった実行の終了までの合計時間は11秒でした。
 
 [#step-four-split-by-timing-data]
-== ステップ 4: タイミングデータで分割する
+== 4. タイミングデータで分割する
 
 前のステップでは、テスト分割は名前に基づいてテストを分割するようにデフォルトで設定されていました。 それによりテストデーターが保存されたため、 次のパイプライン実行ではタイミングでテストを分割することができます。
 
 . プロジェクトで変更をコミットし、パイプラインを再びトリガーします。
 +
-たとえば、Node Orb を `circleci/node@5.0.2` などの新しいバージョンにアップグレードを試みます。 または、Web アプリでプロジェクトの **Dashboard** に行き、**Trigger Pipeline** Rerun ボタンをクリックし、パイプラインを再びトリガーすることも選択できます。
+例えば、`circleci/node@5.0.2` のような新しいバージョンの Node orb にアップグレードしてみてください。あるいは、GitHub や Bitbucket を使っている場合は、Web アプリでプロジェクトの **ダッシュボード** にアクセスし、プロジェクトダッシュボードの btn:[Trigger Pipeline] をクリックして、パイプラインをトリガーすることもできます。
 . Web アプリでパイプラインを開き、**Test application** ステップを表示します。 今回は、出力に `Autodetected filename timings.` があるはずです。 これは CircleCI が前の実行によるタイミングデータに基づいてテストを分割していることを意味します。
 +
 image::test-splitting-by-timing.png[Testing step showing split by timing]
