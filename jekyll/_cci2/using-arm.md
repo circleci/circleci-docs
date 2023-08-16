@@ -83,7 +83,6 @@ For a full list of machine executor images, see the [CircleCI Developer Hub](htt
   let us know.
 * In server 3.x, Arm resources are only available when using the EC2 provider
   for VM service. This is because there are no Arm instances available in GCP.
-* CircleCI does not currently support ARM with our Docker executor. If you would like to follow updates on this functionality, please refer to the following Canny post: [Support ARM resource class on Docker executor](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor).
 
 ### M1 Mac Support
 {: #m1-mac-support }
