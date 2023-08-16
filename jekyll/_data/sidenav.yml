@@ -30,8 +30,10 @@ en:
             link: config-editor
       - name: VCS integration
         children:
-          - name: GitHub integration overview
+          - name: GitHub OAuth integration overview
             link: github-integration
+          - name: GitHub apps integration overview
+            link: github-apps-integration
           - name: Bitbucket integration overview
             link: bitbucket-integration
           - name: GitLab integration overview
@@ -1010,8 +1012,10 @@ ja:
       - name: VCS Integration
         i18n_name: VCSとの連携
         children:
-          - name: GitHub
+          - name: GitHub OAuth
             link: ja/github-integration
+          - name: GitHub apps
+            link: ja/github-apps-integration
           - name: Bitbucket
             link: ja/bitbucket-integration
           - name: GitLab
