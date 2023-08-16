@@ -283,7 +283,7 @@ workflows:
 
 AWS ECR Orb には、イメージをビルドし AWS ECR リポジトリにプッシュする、"build-and-push-image" という名前のジョブが含まれています。 このジョブや他のジョブを複数のパラメーター オプションを使用して実行し、コードを変更するたびに機能をテストします。
 
-新たなステップを追加してコマンドをテストする方法と同様に、 [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps-requires-version-21) を利用してジョブ環境でバリデーションしたり、このサンプルで示すように、ジョブで作成したものをすべて「クリーンアップ」したりすることもできます。 Post-Step は、既存のジョブの最後に挿入可能な追加のステップです。
+新たなステップを追加してコマンドをテストする方法と同様に、 [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps) を利用してジョブ環境でバリデーションしたり、このサンプルで示すように、ジョブで作成したものをすべて「クリーンアップ」したりすることもできます。 Post-Step は、既存のジョブの最後に挿入可能な追加のステップです。
 
 ## 次の手順
 {: #whats-next }
