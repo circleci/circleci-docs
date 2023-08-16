@@ -245,7 +245,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ## SSH からの X11 転送
 {: #x11-forwarding-over-ssh }
 
-SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に使えるようになる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub apps integration](/docs/github-apps-integration/) ページを参照ください。
+SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に使えるようになる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub apps integration](/docs/ja/github-apps-integration/) ページを参照ください。
 
 CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 
