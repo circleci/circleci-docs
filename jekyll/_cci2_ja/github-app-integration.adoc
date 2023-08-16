@@ -1,0 +1,230 @@
+---
+contentTags:
+  platform:
+  - クラウド
+---
+= GitHub Apps インテグレーションの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: GitHub Apps と CircleCI を統合して、GitHub CI/CD パイプラインを管理する方法をこちらのドキュメントでわかりやすくご紹介しています。
+:icons: font
+:experimental:
+
+[NOTE]
+====
+**CircleCI での GitHub 認証が変更されます**。2023年8月より、CircleCIアカウントを GitHub で認証する際、GitHub OAuth アプリではなく、CircleCI の GitHub Apps から認証されるようになります。どのアカウントタイプかは、CircleCI Webアプリにアクセスし、ブラウザで URL を確認することで確認できます：
+
+* このスタイルの URL は、**GitHub Apps** で認証されたことを示します。: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* この形式の URL は、**GitHub OAuth apps** で認証したことを示します: `https://app.circleci.com/github/<your GitHub username>`
+
+違いについての詳細は、link:https://docs.github.com/ja/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub Apps と OAuth アプリの違い]をご覧ください。
+====
+
+CircleCIアカウントが **GitHub App** で認証されている場合、このページのコンテンツはあなたのためのものです。
+
+このページでは、GitHub プロジェクトと CircleCI の連携について説明します。以下のセクションでは、GitHubプロジェクトの CI/CD パイプラインを管理するための概念と方法を紹介します。GitHub プロジェクト向けに開発中の CircleCI の機能については、<<incoming-soon>>セクションで詳しく説明しています。
+
+現在、GitHub App の連携には以下の制限が設けられています：
+
+- 各ユーザーは、最大3つの組織を作成することができます。
+- フリープランの各組織は、最大10プロジェクトまで持つことができます。
+
+より多くの組織やプロジェクトが必要な場合は、xref:plan-overview#[有料プラン]のアップグレード、または link:https://support.circleci.com/hc/ja/requests/new[サポートチームへのお問い合わせ]をご検討ください。
+
+[#sign-up]
+== GitHub プロジェクトを CircleCI に連携するステップ
+
+xref:first-steps#[新規アカウント登録ページ] の手順に従って、GitHub アカウントを接続し、CircleCI 組織を作成します。
+
+新しい組織を作成し、GitHub アカウントを接続すると、リポジトリから新しいプロジェクトを作成するプロンプトが表示されます。プロジェクトの CircleCI 設定を行うために、以下のオプションが表示されます：
+
+* **Faster**: CI パイプラインを新しいブランチにコミットする。
++
+CircleCI は自動的に新しいブランチを作成し、基本設定ファイルをコミットします。その後、GitHub のリポジトリでさらにファイルを変更することができます。
+
+* **Fast**: 編集して保存できる `config.yml` テンプレートを使用します。
++
+様々なテンプレート（例えば、Node.js、Python、iOSアプリ）から、プロジェクトに最適なサンプル `.circleci/config.yml` を選択できます。保存する前にCircleCIでファイルを変更することができます。configは新しいブランチにコミットされます。
+
+**Faster** を選択すると、プロジェクトを作成した時点で自動的にパイプラインが起動します。
+
+NOTE: CircleCIを初めて使う場合は、xref:getting-started#[クイックスタートガイド] や our xref:hello-world#[Hello world] の例を参考にしたり、xref:sample-config#[サンプル設定]で様々なワークフローを見ることができます。 The xref:configuration-reference#[設定リファレンス] は`.circleci/config.yml` ファイルで使用されるキーへの完全なリファレンスです。
+
+[#trigger-pipeline]
+== CircleCI でパイプラインをトリガーする
+
+上のセクションで説明した **Faster** (commit a starter CI pipeline) オプションを使って新しいプロジェクトを作成すると、自動的にパイプラインが起動します。CircleCI ダッシュボードに移動すると、すぐにパイプラインが実行されているのが確認できるはずです。
+
+**Fast** 設定を使用する場合、Web アプリの **Commit and Run** ボタンをクリックして `.circleci/config.yml` を保存するまで、パイプラインはトリガーされません。
+
+GitHub リポジトリに変更をプッシュするたびに、新しいパイプラインがトリガーされ、CircleCI Web アプリ内のプロジェクトで実行されていることが確認できるはずです。
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[成功実行例]
+
+Web アプリ内で既存の CircleCI 設定を編集することは現在できません。GitHub リポジトリで設定をさらに変更することができます。リポジトリでさらに変更をコミットすると、自動的にパイプラインが起動します。
+
+現在、CircleCI Web アプリからパイプラインを手動でトリガーすることはできません。
+
+[#project-settings]
+== プロジェクトの設定
+
+CircleCI 内では、プロジェクトはパイプラインの定義である1つ以上の **configurations** を持つことができます。 _Configurations_ には、レポジトリの `.circleci/config.yml` ファイルが含まれますが、これに限定されません。
+
+プロジェクトは1つ以上の **triggers** を持つことができます。トリガーには、VCSが含まれますが、これに限定されません。トリガーは、パイプラインを開始するためにどのコンフィギュレーションを使用するかを決定します。
+
+以下の設定は、プロジェクト内の **Project Settings** ボタンをクリックすると表示されます。現時点では、設定もトリガーも GitLab と GitHub App の統合に限定されています。
+
+[#people]
+=== メンバー
+
+プロジェクトロールは、組織内でどのユーザーがどのプロジェクトにアクセスできるかを制御します。これにより、チームは自分のプロジェクトのみに限定的にアクセスすることができ、一方、マネージャーやその他の人は、組織的に広くアクセスすることができます。アクセスオプションは以下のとおりです：
+
+* Admin（管理者）: プロジェクトとすべての設定に対する読み取りと書き込みのアクセス権、および他のユーザーのアクセス権を管理する能力。
+* Contributor: プロジェクトといくつかの設定に対する読み取りと書き込みのアクセス権。
+* Viewer（視聴者）: プロジェクトと一部の設定への読み取り専用アクセス。
+
+パーミッションの完全なリストについては、xref:roles-and-permissions-overview#[ロールとパーミッションの概要] ページを参照してください。
+
+[#configuration]
+=== 構成
+
+プロジェクトの設定ソースを追加したり削除したりできます。上記の手順で GitHub に接続した場合は、GitHub の設定ソースが自動的に追加されます。
+
+コンフィギュレーションソースを定義すると、そのコンフィギュレーションを指すトリガーを設定することができます。
+
+[#triggers]
+=== トリガー
+
+**スケジュールされたパイプライン機能は、現在 GitHub App との連携では使用できません。**
+
+上記の手順で GitHub を接続した場合、GitHub をコンフィギュレーション・ソースとするトリガー・セットが自動的に追加されています。
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[トリガー設定ページ]
+
+CircleCI GitHub App が組織にインストールされると、GitHub はアクセスを許可したリポジトリのイベントを送信し始めます。トリガーが作成されると、CircleCI はパイプラインがトリガーされるべきかどうかを判断するためにイベントデータを使用するのに十分な情報を持っています。
+
+[#project-settings-advanced]
+=== 高度な設定
+
+- CircleCI のセットアップワークフローを使用して、ダイナミックコンフィギュレーションを有効にすることができます。ダイナミックコンフィギュレーションについては、 xref:dynamic-config#[ダイナミックコンフィギュレーション] ガイドをご覧ください。
+- 現時点では、**Free and Open Source** の設定はサポートされていませんが、将来的に利用できるようにする計画があります。
+- 現時点では、冗長なワークフローの自動キャンセルはサポートされていません。詳細は `skip` または `cancel` ジョブとワークフローのページのxref:skip-build#auto-cancelling[自動キャンセル] セクションを参照してください。
+
+[#project-settings-ssh-keys]
+=== GitHub プロジェクトの SSH キー
+
+CircleCI でプロジェクトを作成する際、SSH キーを作成・追加します。現時点では、**追加SSHキー** のみが GitHub App 連携に適用されます。
+
+[#create-ssh-key]
+==== SSHキーを作成する
+
+CircleCI Web アプリの **Create Project** ページでSSHキー生成プロセスを案内します。手順は以下の通りです：
+
+. 以下のコマンドを使用してSSHキー・ペアを作成します。 パスフレーズを入力するプロンプトが表示されたら、**入力しないでください**。:
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+. GitHub リポジトリのメニュー [Settings [Security > Deploy Keys]]にアクセスします。ここに公開キーをコピー＆ペーストしてください。書き込み権限は必要ありません。タイトルは何でもかまいません。
+
+. CircleCI web アプリの **Create Project** ページで、`---BEGIN RSA PRIVATE KEY---` と `---END RSA PRIVATE KEY---` を含む秘密鍵をコピーし、**GitHub personal SSH key** フィールドに貼り付けます。
+
+ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加した SSH キーを使用します。
+
+SSHキーの詳細については、xref:add-ssh-key#[CircleCI へのSSHキーの追加] のページをご覧ください。
+
+[#organization-settings]
+== 組織の設定
+
+GitHub Apps の連携では、組織とユーザーはVCSから独立して管理されます。組織とユーザーは CircleCI 組織とユーザーとみなされ、VCS で定義されたものに依存しない独自の役割と権限を持ちます。
+
+組織レベルで設定を管理するには、CircleCI Web アプリのサイドバーにある btn:[Organization Settings] をクリックします。
+
+[#organization-settings-people]
+=== ユーザー設定
+
+ユーザーを追加または削除し、組織のユーザーロールとユーザー招待を管理します。詳細については、xref:roles-and-permissions-overview#[役割と権限の概要] ページを参照してください。
+
+[#roles-and-permissions]
+== 役割と権限
+
+CircleCI ユーザーは、特定の組織で割り当てられた役割によって異なる能力を持つ。CircleCI の組織とプロジェクトの役割と関連する権限の詳細なリストについては、 xref:roles-and-permissions-overview#[役割と権限] ページを参照してください。
+
+[#deprecated-system-environment-variables]
+== 非推奨のシステム環境変数
+
+GitHub Apps で認証されたアカウントでは、GitHub ベースのプロジェクトでは利用できない組み込み環境変数がいくつかあります。各環境変数の VCS サポートは、プロジェクトの値と変数ページの xref:variables#built-in-environment-variables[組み込み環境変数] の表に示されています。パイプラインがこれらの環境変数を必要とする場合は、利用可能な xref:pipeline-variables#[パイプラインの値]の中から適切な代替を使用することをお勧めします。
+
+[#coming-soon]
+== 近日公開
+
+以下のセクションは、現在完全にサポートされていない CircleCI の機能です。これらの機能は将来のリリースを予定しています。
+
+[#manual-trigger-pipeline-option]
+=== 手動トリガーパイプラインのオプション
+Web アプリから手動でパイプラインをトリガーする機能は、現在 GitHub Apps プロジェクトではサポートされていません。
+
+[#in-app-config-editor]
+=== アプリ内コンフィグエディター
+アプリ内設定エディター（In-app config editor）は、現在 **GitHub App アカウントでのみ** プロジェクト作成時に利用できます。
+
+[#account-integrations]
+=== アカウントの連携
+
+現在のところ、プロジェクトのセットアップ、トリガー、構成設定以外で GitHub との接続を管理する方法はありません。CircleCI では、ユーザープロファイルのアカウント連携設定の一部として、ユーザーの GitHub ID を管理できるように取り組んでいます。
+
+[#scheudled-pipelines]
+=== パイプラインのスケジュール実行
+
+xref:scheduled-pipelines#[パイプラインのスケジュール実行] 機能は、現在 GitHub Apps プロジェクトではサポートされていません。この機能は将来のリリースを予定しています。
+
+[#auto-cancel-redundant-workflows]
+=== 冗長ワークフローの自動キャンセル
+
+Auto-cancel redundant workflows「冗長ワークフローの自動キャンセル」は現在サポートされていません。パイプラインページからノイズを取り除き、コミットのフィードバックまでの時間を短縮するためによく使われます。 xref:skip-build#auto-cancelling[ジョブおよびワークフローのスキップまたはキャンセル] ページを参照してください。
+
+[#passing-secrets-to-forked-pull-requests]
+=== フォークされたプルリクエストにシークレットを渡す
+
+フォークされたプルリクエストにシークレットを渡すことは現在サポートされていません。
+
+[#stop-building]
+=== ビルドの中止オプション
+
+GitHub App の連携では、現在のところ **Project settings** にある **Stop Building** オプションをサポートしていません。
+
+現時点での推奨は次のいずれかです:
+
+* インストールを一時停止します。これにより、CircleCI へのすべてのイベント送信が停止されるため、すべてのビルドが停止します。このオプションは、GitHub **Organization settings** の **GitHub Apps** メニューオプションから利用できます。
+* 単一のプロジェクトが CircleCI にイベントを送信しないようにします。このオプションは、GitHub **Organization Settings** の **GitHub Apps** メニューオプションで利用できます。 **Repository access** で、**Only select repositories** を選択し、ビルドを停止したいリポジトリの選択を解除します。
+
+[#ssh-rerun]
+=== SSH の再実行
+
+現在、GitHub App プロジェクトでは SSH の再実行はサポートされていません。この機能は将来のリリースで利用可能になります。
+
+[#additional-ssh-keys-only]
+=== 追加のSSHキーのみ
+
+GitHub Apps との連携では、デプロイキーとユーザーキーは使用されません。全てのキーは menu:Project Settings[ Additional SSH Keys] に保存されます。プロジェクトを設定するには、**Create Project** オプションを使用します。 オプションの選択後、プロジェクトの SSH キーを作成するためのガイドが表示されます。
+
+[#free-and-open-source-setting]
+=== フリー・オープンソース設定
+
+オープンソースプランは現在、GitHub App のお客様はご利用いただけません。CircleCI は、オープンソースコミュニティがこれをサポートするための作業を継続するように最新情報を提供します。
+
+[#test-insights]
+=== Test Insights（テストインサイト機能）
+
+xref:insights-tests#[Test Insights] は現在サポートされていません。
+
+[#badges]
+=== バッジ
+
+xref:status-badges#[ステータスバッジ] および xref:insights-snapshot-badge#[インサイトスナップショットバッジ] 機能は現在サポートされていません。
+
+[#next-steps]
+== 次のステップ
+- xref:config-intro#[設定チュートリアル]
+- xref:hello-world#[Hello world]
