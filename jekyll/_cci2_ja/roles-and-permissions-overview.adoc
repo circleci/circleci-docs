@@ -1,16 +1,16 @@
 ---
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Roles and permissions
+= 役割と権限について
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
+:page-description: CircleCI のさまざまなプロジェクトおよび組織の役割と、各役割に関連する権限の概要をこのドキュメントでご紹介しています。
 :icons: font
 :experimental:
 
-NOTE: If you authenticated your CircleCI account with xref:gitlab-integration#[GitLab] or xref:github-apps-integration#[GitHub apps], the content on this page applies to you.
+NOTE: xref:gitlab-integration#[GitLab]　または xref:github-apps-integration#[GitHub Apps]で CircleCI アカウントを認証した場合は、このページの内容が適用されます。
 
 Manage user access to organizations and projects with CircleCI roles and associated permissions. By default, users can access projects based on roles set at an organization level. For more granular control, you can assign roles at the project level.
 
