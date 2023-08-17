@@ -106,4 +106,5 @@ jobs:
 {: #see-also }
 
 - [Storing and Accessing Artifacts](/docs/artifacts/)
+- [CircleCI and JFrog](https://circleci.com/circleci-and-jfrog/)
 
