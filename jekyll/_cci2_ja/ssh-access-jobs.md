@@ -14,7 +14,7 @@ contentTags:
 ## 概要
 {: #introduction }
 
-SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に利用可能になる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub apps integration](/docs/github-apps-integration/) ページを参照してください。
+SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に利用可能になる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub apps integration]({{ site.baseurl }}/ja/github-apps-integration/) ページを参照してください。
 {: class="alert alert-info" }
 
 CircleCIでは、SSH経由ですべてのジョブにアクセスするオプションがあります。SSHを使ったCI/CDパイプラインのデバッグに関する [ブログ記事（英語）](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご覧ください。

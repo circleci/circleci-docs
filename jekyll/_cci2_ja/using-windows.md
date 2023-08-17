@@ -371,7 +371,7 @@ jobs:
 ## Windows ビルドへの SSH 接続
 {: #ssh-into-your-windows-build }
 
-SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に使えるようになる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub app 連携](/docs/github-apps-integration/) ページを参照ください。
+SSH の再実行は、現在 GitLab や GitHub アプリのプロジェクトではサポートされていません。この機能は開発中で、近日中に使えるようになる予定です。GitHub OAuth や GitHub apps で認証したかどうかを調べるには、[GitHub app 連携]({{ site.baseurl }}/ja/github-apps-integration/) ページを参照ください。
 
 Windows ビルドコンテナに SSH 接続することができます。 これは、パイプラインに関する問題のトラブルシューティングに便利です。 Windows コンテナに SSH 接続するには、以下の手順を実行します。
 
