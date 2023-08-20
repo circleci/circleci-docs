@@ -36,7 +36,7 @@ If you are new to CircleCI, you will create a CircleCI organization. A CircleCI 
 [#GitHub]
 === GitHub
 
-NOTE: **GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, your sign-up experience may reflect either the process described in this section, or the process described in the xref:#bitbucket[Bitbucket] section. For more information, read the xref:github-integration[GitHub OAuth integration page]. 
+NOTE: **GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, your sign-up experience may reflect either the process described in this section, or the process described in the xref:#bitbucket[Bitbucket] section. For more information, read the xref:github-integration#[GitHub OAuth integration page]. 
 
 . For GitHub, you will be taken to a screen to install the CircleCI GitHub App. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
 
