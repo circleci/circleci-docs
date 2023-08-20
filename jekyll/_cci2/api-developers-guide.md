@@ -96,17 +96,17 @@ v1) return EDN if no accept header is specified.
 If you authenticated with the **GitHub OAuth app**, this section is relevant to you. For **GitHub App**, refer to the [following section](#gitlab-saas-support-projects).
 {: class="alert alert-info"}
 
-If you want to pull information from CircleCI about a GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+If you want to pull information from CircleCI about a GitHub OAuth repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to it in API calls as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
 For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
 
 With this API, CircleCI introduces a string representation of the triplet called the `project_slug`, which takes the following form:
 
 ```
-{vcs_type}/{org_name}/{repo_name}
+:vcs_type/:org_name/:repo_name
 ```
 
-The `project_slug` is included in the payload when pulling information about a project, and when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project.
+The `project_slug` is also included in the response payload when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project.
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
