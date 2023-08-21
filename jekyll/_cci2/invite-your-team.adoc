@@ -33,9 +33,11 @@ Once they join your org, you can then also assign each team member a role on an 
 [#invite-team-github-oauth-bitbucket]
 == GitHub OAuth and Bitbucket users
 
+Any user who is already a member of your CircleCI organization may use this process to invite new team members to CircleCI.
+
 . On the **Dashboard** in the CircleCI web app, use the filter dropdown to select a project.
 . Click the **Add team members** link next to the project name.
-. A modal window will pop up. Click the btn:[Invite my team] button in the window to copy an invite message that you can send to your team members.
+. A modal window will pop up. Click the btn:[Invite my team] button in the window to copy an invite message that you can send to your team members. The sign-up link is _not_ unique to a single team member. This link can be shared and used for multiple users at the same time.
 . Your team members will need to use the sign-up link in your invite message to join your organization.
 
 [#see-also]
