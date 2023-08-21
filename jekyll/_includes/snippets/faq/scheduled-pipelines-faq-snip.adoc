@@ -13,7 +13,7 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
+Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#what-time-zone-is-used-for-scheduled-pipelines]
 === What time zone is used for scheduled pipelines?

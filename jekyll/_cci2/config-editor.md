@@ -2,12 +2,15 @@
 layout: classic-docs
 title: "Using the CircleCI In-app Configuration Editor"
 description: "Docs page on In-app configuration editor use and features"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
 ---
+
+The in-app config editor is not currently available outside the project creation process for [GitLab](/docs/gitlab-integration/) or [GitHub App](/docs/github-apps-integration) integrations.
+{: class="alert alert-warning"}
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 

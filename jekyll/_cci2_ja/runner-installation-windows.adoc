@@ -12,12 +12,9 @@ contentTags:
 :page-description: このドキュメントでは、CircleCI セルフホストランナーの Windows へのインストール手順をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
-
 :toc-title:
 :machine:
 :windows:
-
-{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
 
 このページでは、CircleCI のマシンランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
 

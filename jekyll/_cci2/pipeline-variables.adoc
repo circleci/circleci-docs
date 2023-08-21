@@ -107,6 +107,8 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
+Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+
 [#passing-parameters-when-triggering-pipelines-using-the-circleci-web-app]
 === Passing parameters when triggering pipelines using the CircleCI web app
 

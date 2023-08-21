@@ -20,7 +20,7 @@ The VS Code extension includes:
 - The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
 - The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
 
-NOTE: Currently only the **Config Helper** is available for GitLab and GitHub apps projects. To find out if you authenticated through GitHub OAuth or GitHub apps, see the xref:github-apps-integration#[GitHub apps integration] page.
+NOTE: Currently only the **Config Helper** is available for GitLab and GitHub App projects. To find out if you authenticated through GitHub OAuth or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 [#install-the-vs-code-extension]
 == Install the VS Code extension

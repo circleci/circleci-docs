@@ -3,17 +3,29 @@ contentTags:
   platform:
   - Cloud
 ---
-= GitHub integration overview
+= GitHub OAuth app integration overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of using GitHub and GitHub Enterprise with CircleCI.
 :icons: font
 :experimental:
 
-[#overview]
-== Overview
+[NOTE]
+====
+**GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
 
-To use CircleCI with GitHub you need to connect your GitHub account. When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
+
+For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
+====
+
+If your CircleCI account is authenticated through the **GitHub OAuth app**, the content on this page is for you.
+
+[#introduction]
+== Introduction
+
+When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
 
 - A deploy key that is used to check out your project from GitHub.
 - A service hook (or "push hook") that is used to notify CircleCI when you push to GitHub.
@@ -27,7 +39,7 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 
 These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
 
-The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).  Details on how to enable can be found on our link:https://discuss.circleci.com/t/product-launch-override-only-build-prs-setting/47807[community forum]. 
+The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).  Details on how to enable can be found on our link:https://discuss.circleci.com/t/product-launch-override-only-build-prs-setting/47807[community forum].
 
 It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
 

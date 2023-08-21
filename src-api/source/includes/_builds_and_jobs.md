@@ -271,20 +271,14 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
 }
 ```
 
-### See Also
-
-[Triggering Jobs with the API](https://circleci.com/docs/2.0/api-job-trigger/#section=jobs)
-
 **`POST` Request:** Triggers a new build and then returns a summary of the build.
 
 **Parameter** | **Description**
 ------- | -------------
 revision | The specific revision to build. Default is null and the head of the branch is used. Cannot be used with tag parameter.
 tag | The tag to build. Default is null. Cannot be used with revision parameter.
-parallel | The number of containers to use to run the build. Default is null and the project default is used. This parameter is ignored for builds running on our 2.0 infrastructure.
 build_parameters | Additional environment variables to inject into the build environment. A map of names to values.
 
-**Note** Triggering a new job is not currently supported with configurations that specify `version: 2.1`.
 
 ## Trigger a new Job with a Branch
 
@@ -376,13 +370,12 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 **`POST` Request:** Triggers a new build and then returns a summary of the build.
 
 <aside class="notice">
-For more about build parameters, see 2.0 build parameters <a href="https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-api-v1">for environment variables</a>. The response for “failed” should be a boolean `true` or `null`.
+For more about build parameters, refer to the guide for <a href="https://circleci.com/docs/inject-environment-variables-with-api/#api-v1">injecting environment variables with API v1</a>. The response for “failed” should be a boolean `true` or `null`.
 </aside>
 
 **Parameter** | **Description**
 ------- | -------------
 revision | The specific revision to build. Default is null and the head of the branch is used. Cannot be used with tag parameter.
-parallel | The number of containers to use to run the build. Default is null and the project default is used. This parameter is ignored for builds running on our 2.0 infrastructure.
 build_parameters | Additional environment variables to inject into the build environment. A map of names to values.
 
 **Note** Triggering a new job with a branch is not currently supported with configurations that specify `version: 2.1`.
@@ -447,5 +440,5 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 **`GET` Request** Provides test metadata for a build.
 
 <aside class="notice">
-Learn how to set up your 2.0 builds to <a href="https://circleci.com/docs/2.0/collect-test-data/">Collect Test Metadata</a>.
+Learn how to set up your jobs to <a href="https://circleci.com/docs/collect-test-data//">collect test metadata</a>.
 </aside>
