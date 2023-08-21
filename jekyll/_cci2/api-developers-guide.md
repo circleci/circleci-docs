@@ -90,8 +90,12 @@ v1) return EDN if no accept header is specified.
 
 **GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
 <br>
-* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
-* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
+<br>
+This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+<br>
+<br>
+This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
+<br>
 <br>
 If you authenticated with the **GitHub OAuth app**, this section is relevant to you. For **GitHub App**, refer to the [following section](#gitlab-saas-support-projects).
 {: class="alert alert-info"}
@@ -117,10 +121,14 @@ For GitHub and Bitbucket projects, `project_slug` is currently usable as a human
 
 **GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
 <br>
-* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
-* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
 <br>
-If you authenticated with **GitHub App**, this section is relevant to you. For **GitHub OAuth**, refer to the [above section](#github-and-bitbucket-projects).
+This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+<br>
+<br>
+This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
+<br>
+<br>
+If you authenticated with the **GitHub OAuth app**, this section is relevant to you. For **GitHub App**, refer to the [following section](#gitlab-saas-support-projects).
 {: class="alert alert-info"}
 
 For GitHub App and GitLab projects, organization as well as project names do not serve as identifiers, and are not part of project slugs. These projects currently use a new slug format:
