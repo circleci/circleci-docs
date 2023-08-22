@@ -1,0 +1,233 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= GitHub App integration overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to integrate GitHub with CircleCI to manage your GitHub CI/CD pipelines.
+:icons: font
+:experimental:
+
+[NOTE]
+====
+**GitHub authorization with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
+
+* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github/<your GitHub username>`
+
+For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
+====
+
+If your CircleCI account is authenticated through the **GitHub App**, the content on this page is for you.
+
+This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub projects are detailed in the <<coming-soon>> section.
+
+The following limits are currently in place for GitHub App integrations:
+
+- Each user can create up to three organizations.
+- Each organization under a Free plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+
+[#sign-up]
+== Steps to integrate GitHub projects with CircleCI
+
+Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to connect your GitHub account, which creates your CircleCI organization.
+
+When you create a new organization and connect your GitHub account, you will be prompted to create a new project from a repository. You will be presented with the following options to set up a CircleCI configuration for your project:
+
+* **Faster**: Commit a starter CI pipeline to a new branch.
++
+CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitHub repo.
+
+* **Fast**: Use a `config.yml` template that you can edit and save.
++
+You can choose a sample `.circleci/config.yml` to best fit your project from a variety of templates (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is committed on a new branch.
+
+Choosing **Faster** automatically triggers a pipeline once you create the project.
+
+NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
+
+[#trigger-pipeline]
+== Trigger a pipeline in CircleCI
+
+When you create a new project using the **Faster** (commit a starter CI pipeline) option described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
+
+If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
+
+Each time you push changes to your GitHub repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+
+Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitHub repo. Committing further changes in your repo will automatically trigger a pipeline.
+
+Manually triggering a pipeline from the CircleCI web app is not available at this time.
+
+[#project-settings]
+== Project settings
+
+Within CircleCI, a project can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repo.
+
+A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a VCS. A trigger determines which configuration should be used to start a pipeline.
+
+The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab and GitHub App integrations.
+
+[#people]
+=== People
+
+Project roles give control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access. The access options are:
+
+* Admin: Read and write access to the project and all settings and ability to manage other users' access.
+* Contributor: Read and write access to the project and some settings.
+* Viewer: Read only access to the project and some settings.
+
+For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
+
+[#configuration]
+=== Configuration
+
+You can add or delete a configuration source for your project. If you followed the steps above to connect GitHub, a GitHub configuration source has been automatically added for you.
+
+Once you define a configuration source, you can set up a trigger that points to that configuration.
+
+image::{{site.baseurl}}/assets/img/docs/standalone/configuration-gh.png[Trigger setup page]
+
+[#triggers]
+=== Triggers
+
+**The scheduled pipelines feature is not currently available for use with GitHub App integrations.**
+
+If you followed the steps above to connect GitHub, a trigger set with GitHub as the configuration source has been automatically added for you.
+
+image::{{site.baseurl}}/assets/img/docs/standalone/triggers-gh.png[Trigger setup page]
+
+When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline shoud be triggered.
+
+[#project-settings-advanced]
+=== Advanced
+
+- You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
+- At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+- At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
+
+[#project-settings-ssh-keys]
+=== GitHub project SSH keys
+
+When creating a project in CircleCI, you will create and add SSH keys. At this time, only **Additional SSH Keys** are applicable to GitHub App integrations.
+
+[#create-ssh-key]
+==== Create an SSH key
+
+You will be guided through the SSH key generation process in the CircleCI web app on the **Create Project** page. The steps are as follows:
+
+. Create an SSH key-pair by using the following command. When prompted to enter a passphrase, do **not** enter one:
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+. Go to your GitHub repository menu:Settings[Security > Deploy Keys]. Copy and paste your public key here. We **do not** require write access. The title can be anything you want.
+
+. In the CircleCI web app **Create Project** page, copy and paste your private key, including `---BEGIN RSA PRIVATE KEY---` and `---END RSA PRIVATE KEY---`, into the **GitHub personal SSH key** field.
+
+When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
+
+For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
+
+[#organization-settings]
+== Organization settings
+
+For GitHub App integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
+
+To manage settings at the organization level, click btn:[Organization Settings] in the CircleCI web app sidebar.
+
+[#organization-settings-people]
+=== People
+
+Add or remove users, and manage user roles for the organization as well as user invites. See the xref:roles-and-permissions-overview#[Roles and permissions overview] page for full details.
+
+[#roles-and-permissions]
+== Roles and permissions
+
+CircleCI users have different abilities depending on assigned roles in a particular organization. For a detailed list of CircleCI org and project roles and associated permissions, see the xref:roles-and-permissions-overview#[Roles and permissions] page.
+
+[#deprecated-system-environment-variables]
+== Deprecated system environment variables
+
+There are a number of built-in environment variables that are not available in GitHub-based projects for accounts authenticated through the GitHub App. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
+
+[#coming-soon]
+== Coming soon
+
+The following sections are features of CircleCI which are not currently fully supported. These features are planned for future releases.
+
+[#manual-trigger-pipeline-option]
+=== Manual trigger pipeline option
+The ability to manually trigger a pipeline from the web app is not currently supported for GitHub App projects.
+
+[#in-app-config-editor]
+=== In-app config editor
+The in-app config editor is currently **only** available for GitHub App accounts during project creation.
+
+[#account-integrations]
+=== Account integrations
+
+There is currently no method to manage the connection with GitHub outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitHub identity as part of their user profile's account integration settings.
+
+[#scheudled-pipelines]
+=== Scheduled pipelines
+
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release.
+
+[#auto-cancel-redundant-workflows]
+=== Auto-cancel redundant workflows
+
+Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
+
+[#passing-secrets-to-forked-pull-requests]
+=== Passing secrets to forked pull requests
+
+Passing secrets to forked pull requests is not currently supported.
+
+[#stop-building]
+=== Stop building
+
+GitHub App integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**.
+
+The recommendation is to either:
+
+* Suspend your installation. This would stop sending all events to CircleCI, so all builds will stop. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option.
+* Stop a single project from sending events to CircleCI. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option. Under **Repository access**, select **Only select repositories** and deselect the repository you want to stop building.
+
+[#ssh-rerun]
+=== SSH rerun
+
+SSH reruns are not currently supported for GitHub App projects. This feature will be available in a future release.
+
+[#additional-ssh-keys-only]
+=== Additional SSH keys only
+
+Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project.
+
+[#free-and-open-source-setting]
+=== Free and open source setting
+
+Open source plans are not currently available to GitHub App customers. CircleCI will keep the open source community up to date as work continues to support this.
+
+[#test-insights]
+=== Test Insights
+
+xref:insights-tests#[Test Insights] is currently not supported.
+
+[#badges]
+=== Badges
+
+The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights snapshot badge] features are not currently supported.
+
+[#next-steps]
+== Next Steps
+- xref:config-intro#[Configuration tutorial]
+- xref:hello-world#[Hello world]
+

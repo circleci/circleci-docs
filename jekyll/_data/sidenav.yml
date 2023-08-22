@@ -22,6 +22,8 @@ en:
         children:
           - name: Sign up and try
             link: first-steps
+          - name: Invite your team
+            link: invite-your-team
           - name: Quickstart guide
             link: getting-started
           - name: YAML configuration intro
@@ -30,8 +32,10 @@ en:
             link: config-editor
       - name: VCS integration
         children:
-          - name: GitHub integration overview
+          - name: GitHub OAuth app integration overview
             link: github-integration
+          - name: GitHub Apps integration overview
+            link: github-apps-integration
           - name: Bitbucket integration overview
             link: bitbucket-integration
           - name: GitLab integration overview
@@ -376,12 +380,18 @@ en:
             link: security-supply-chain
           - name: Secure secrets handling
             link: security-recommendations
+      - name: CircleCI account roles and permissions
+        children:
+          - name: Roles and permissions overview
+            link: roles-and-permissions-overview
       - name: Authentication
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
       - name: How-to guides
         children:
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
           - name: Set an environment variable
             link: set-environment-variable
           - name: Inject environment variables with the API
@@ -1004,8 +1014,10 @@ ja:
       - name: VCS Integration
         i18n_name: VCSとの連携
         children:
-          - name: GitHub
+          - name: GitHub OAuth app
             link: ja/github-integration
+          - name: GitHub apps
+            link: ja/github-apps-integration
           - name: Bitbucket
             link: ja/bitbucket-integration
           - name: GitLab
