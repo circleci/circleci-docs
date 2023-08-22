@@ -18,7 +18,9 @@ To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign 
 [#vcs-integrations]
 == VCS integrations
 
-CircleCI supports GitHub, Bitbucket, and GitLab projects. If you use **GitHub** or **GitLab**, and are creating a CircleCI organization for your team, you will set the version control system (VCS) integration type and authenticate with your VCS provider during the signup process. Team members that you invite afterwards to your CircleCI org can join in CircleCI without also authenticating with your VCS. However, if they are to create new projects, they will need to authenticate during the project creation process.
+CircleCI supports GitHub, Bitbucket, and GitLab projects.
+
+If you use **GitHub** or **GitLab**, and are creating a CircleCI organization for your team, you will set the version control system (VCS) integration type, and authenticate with your VCS provider during the signup process. Team members that you invite to your CircleCI org can join without authenticating with your VCS. However, if they are to create new projects, they will authenticate during the project creation process.
 
 If you use **Bitbucket**, every team member signing up for a new account and joining your org will authenticate with Bitbucket _during_ the signup process.
 
