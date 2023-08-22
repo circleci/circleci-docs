@@ -32,7 +32,7 @@ en:
             link: config-editor
       - name: VCS integration
         children:
-          - name: GitHub OAuth integration overview
+          - name: GitHub OAuth app integration overview
             link: github-integration
           - name: GitHub Apps integration overview
             link: github-apps-integration
@@ -1014,7 +1014,7 @@ ja:
       - name: VCS Integration
         i18n_name: VCSとの連携
         children:
-          - name: GitHub OAuth
+          - name: GitHub OAuth app
             link: ja/github-integration
           - name: GitHub apps
             link: ja/github-apps-integration
