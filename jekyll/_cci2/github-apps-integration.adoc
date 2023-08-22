@@ -92,6 +92,8 @@ You can add or delete a configuration source for your project. If you followed t
 
 Once you define a configuration source, you can set up a trigger that points to that configuration.
 
+image::{{site.baseurl}}/assets/img/docs/standalone/configuration-gh.png[Trigger setup page]
+
 [#triggers]
 === Triggers
 
@@ -99,7 +101,7 @@ Once you define a configuration source, you can set up a trigger that points to 
 
 If you followed the steps above to connect GitHub, a trigger set with GitHub as the configuration source has been automatically added for you.
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
+image::{{site.baseurl}}/assets/img/docs/standalone/triggers-gh.png[Trigger setup page]
 
 When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline shoud be triggered.
 
