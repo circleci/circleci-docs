@@ -38,7 +38,7 @@ If you are new to CircleCI, you will create a CircleCI organization. A CircleCI 
 [#GitHub]
 === GitHub
 
-NOTE: **GitHub authorization with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, your sign-up experience may reflect either the process described in this section, or the process described in the xref:#bitbucket[Bitbucket] section. For more information, read the xref:github-integration#[GitHub OAuth app integration page].
+NOTE: **GitHub authorization with CircleCI is changing**. Starting August 2023 when you authorize your CircleCI account with GitHub, your sign-up experience may reflect either the process described in this section, or the process described in the xref:#bitbucket[Bitbucket] section. For more information, read the xref:github-integration#[GitHub OAuth app integration page].
 
 . For GitHub, you will be taken to a screen to install the CircleCI GitHub App. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
 
@@ -80,7 +80,7 @@ For more details on setting up a project in CircleCI, read the xref:create-proje
 
 ** If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
 +
-When you are ready, you can connect your Bitbucket account from the CircleCI web app. Click your user icon in the lower left corner to open your *User Settings*. Under *Account Integrations*, click btn:[Connect] to authenticate with Bitbucket and start setting up your projects.
+When you are ready, you can connect your Bitbucket account from the CircleCI web app. Click your user icon in the lower left corner to open your *User Settings*. Under *Account Integrations*, click btn:[Connect] to authorize with Bitbucket and start setting up your projects.
 
 NOTE: The full set of documentation for integrating Bitbucket with CircleCI can be found on the xref:bitbucket-integration#[Bitbucket integration page].
 
