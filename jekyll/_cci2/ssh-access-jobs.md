@@ -14,7 +14,7 @@ Troubleshoot problems in a job using **Rerun job with SSH**. Using this feature 
 ## Introduction
 {: #introduction }
 
-SSH reruns are not currently supported for GitLab or GitHub App projects. This feature is in development and will be available soon. To find out if you authenticated through GitHub OAuth or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+SSH reruns are not currently supported for GitLab or GitHub App projects. This feature is in development and will be available soon. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
 {: class="alert alert-info" }
 
 CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.

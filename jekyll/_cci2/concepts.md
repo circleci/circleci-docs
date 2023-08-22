@@ -370,7 +370,7 @@ See the [Pipelines overview](/docs/pipelines) page for more information.
 ## Projects
 {: #projects }
 
-For [GitHub OAuth](/docs/github-integration/) and [Bitbucket](/docs/bitbucket-integration/) accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
+For [GitHub OAuth app](/docs/github-integration/) and [Bitbucket](/docs/bitbucket-integration/) accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
 For [GitHub App](/docs/github-apps-integration/) and [GitLab](/docs/gitlab-integration/) users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub or GitLab repository) to that project. A standalone project can have:
 

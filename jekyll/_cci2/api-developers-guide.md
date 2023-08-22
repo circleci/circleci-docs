@@ -100,7 +100,7 @@ This style of URL indicates you authenticated with the **GitHub OAuth app**: `ht
 If you authenticated with the **GitHub OAuth app**, this section is relevant to you. For **GitHub App**, refer to the [following section](#gitlab-saas-support-projects).
 {: class="alert alert-info"}
 
-If you want to pull information from CircleCI about a GitHub OAuth repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to it in API calls as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+If you want to pull information from CircleCI about a GitHub OAuth app repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to it in API calls as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
 For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
 

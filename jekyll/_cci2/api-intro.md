@@ -49,7 +49,7 @@ With API v2, CircleCI is introducing a string representation called the `project
 :vcs_type/:org_name/:repo_name
 ```
 
-The `project_slug` is included in the response payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. For GitHub OAuth and Bitbucket projects, it is currently usable as a human-readable identifier for a given project.
+The `project_slug` is included in the response payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. For GitHub OAuth app and Bitbucket projects, it is currently usable as a human-readable identifier for a given project.
 
 ## Authentication
 {: #authentication }
