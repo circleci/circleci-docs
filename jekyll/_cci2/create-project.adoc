@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Creating a Project in CircleCI
+= Create a project in CircleCI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to create a project in CircleCI."
@@ -22,10 +22,10 @@ This guide gets you started with creating a new project in CircleCI.
 
 == Build a new project on CircleCI
 
-The authentication method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
+The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
-* If you authenticated using **GitHub OAuth**, or **Bitbucket**, a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to <<set-up-a-project>> below.
-* If you authenticated through **GitLab** or the CircleCI **GitHub App**, a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to <<create-a-project>> below.
+* If you authenticated using xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket], a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to <<set-up-a-project>> below.
+* If you authenticated through xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to <<create-a-project>> below.
 
 [#set-up-a-project]
 === Set up a project

@@ -46,7 +46,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 [#check-your-account-type]
 === Check your account type
 
-The authentication method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
+The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
 * If you authenticated using the xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket], a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to **Set up a project** below.
 * If you authenticated through xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to **Create a Project** below.
