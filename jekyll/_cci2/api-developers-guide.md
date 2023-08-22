@@ -88,7 +88,7 @@ v1) return EDN if no accept header is specified.
 ### GitHub OAuth and Bitbucket projects
 {: #github-and-bitbucket-projects }
 
-**GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
+**GitHub authorization with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
 <br>
 <br>
 This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
@@ -119,7 +119,7 @@ For GitHub and Bitbucket projects, `project_slug` is currently usable as a human
 ### GitHub App and GitLab projects
 {: #gitlab-saas-support-projects }
 
-**GitHub authentication with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
+**GitHub authorization with CircleCI is changing**. Starting August 2023 when you authenticate your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
 <br>
 <br>
 This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
