@@ -1,57 +1,55 @@
 ---
 layout: classic-docs
-title: "Connecting Jira with CircleCI"
+title: "Connect Jira with CircleCI"
 description: "Connecting Jira with CircleCI"
+contentTags:
+  platform:
+  - Cloud
 ---
 
-This document describes how you can connect Jira to your CircleCI builds. With
-the CircleCI Jira plugin, you can display your build statuses in Jira.
+Integrate your CI/CD build and deployment status notifications directly into your Jira cards. Connect your CircleCI jobs with Jira Cloud using the following:
 
-**Note:** You have to be an Jira admin to install this plugin.
+* The [CircleCI for Jira](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira) Atlassian Forge application
+* The [circleci/jira](https://circleci.com/developer/orbs/orb/circleci/jira) orb
 
 ## Installation steps
 {: #installation-steps }
 
-1. Navigate to project settings and select `Jira integration`
-![CircleCI web app Project Settings Jira integration options]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
-2. Go to the Atlassian Marketplace to get the [CircleCI Jira Plugin](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)
-![Atlassian marketplace showing CircleCI Jira plugin]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
-3. Install the plugin and follow the prompts to set it up.
-![Setting up the plugin 1]({{ site.baseurl }}/assets/img/docs/jira_plugin_3.png)
-![Setting up the plugin 2]({{ site.baseurl }}/assets/img/docs/jira_plugin_4.png)
-4. Return to the CircleCI Jira Integration settings page and add the generated token.
+### Install the CircleCI for Jira app
+{: #install-the-circleci-for-jira-app }
 
----
+1. Install the [CircleCI for Jira](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira) app from the Atlassian Marketplace in the appropriate Jira Cloud instance. To do this you must be a [Jira Admin](https://support.atlassian.com/jira-software-cloud/docs/manage-atlassian-marketplace-apps-in-team-managed-projects/)![Select organization and confirm app installation]({{ site.baseurl }}/assets/img/docs/jira_install_app.png)
 
-## Viewing build and deploy statuses in Jira
-{: #viewing-build-and-deploy-statuses-in-jira }
+1. Navigate to the [configuration page](https://confluence.atlassian.com/upm/viewing-installed-apps-273875714.html). To find the configuration page, navigate to [admin.atlassian.com](https://admin.atlassian.com/), select the appropriate organization, and then on the appropriate Jira instance, click the three-dot menu, and then click **Manage Jira apps**.![manage apps menu]({{ site.baseurl }}/assets/img/docs/jira_manage_apps.png)
 
-With CircleCI orbs it is possible to display your build and deploy status
-in Jira Cloud. To do this, you will need to:
+1. From the **Manage apps** page, click on the **CircleCI for Jira** app under **User-installed apps** to expand the app details and click **Configure**.![Expand App Details]({{ site.baseurl }}/assets/img/docs/jira_expand_app_details.png)
 
-1. Make sure you followed the steps above to connect Jira Cloud with CircleCI.
-1. Make sure that you are using version `2.1` at the top of your `.circleci/config.yml` file.
-1. To get an API token for build information retrieval, go to [User Settings > Tokens](https://app.circleci.com/settings/user/tokens) and create a token. Copy the token. (*Note*: older versions of the Jira orb may require you to retrieve a _Project API Token_, which is accessible from **Project Settings > API Permissions**)
-1. To give the integration access to the key, go to **Project Settings -> Environment Variables** and add a variable named _CIRCLE_TOKEN_ with the value being the token you just made.
-1. Add the Jira orb to your configuration and invoke it (see example below).
+1. To display the app fully, it is essential that you grant it permission to access Atlassian products on your behalf. Click **Allow access** to authorize.![Allow the app access to Atlassian on your behalf]({{ site.baseurl }}/assets/img/docs/jira_allow_app_access.png)
 
-The example config below provides a bare `config.yml` illustrating the use of the Jira Orb.
+1. For the initial setup you will need to provide your CircleCI Organization ID, which you can find by navigating to **Organization Settings > Overview** in the [CircleCI application](https://app.circleci.com/).![Get CircleCI Organization ID]({{ site.baseurl }}/assets/img/docs/jira_get_org_id.png)
+
+1. This integration authenticates via [OpenID Connect (OIDC)](/docs/openid-connect-tokens/). By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
+
+1. Once you have provided your CircleCI Organization ID and optionally modified the allowed audiences, click **Submit** to save your changes.![Set the Organization ID on the app Configure page]({{ site.baseurl }}/assets/img/docs/jira_set_organization_id.png)
+
+1. Now copy your **Webhook URL** for use in the next section.![Click on button to copy the Webtrigger URL]({{ site.baseurl }}/assets/img/docs/jira_copy_webtrigger_url.png)
 
 
-```yaml
-version: 2.1
-orbs: # adds orbs to your configuration
-  jira: circleci/jira@1.0.5 # invokes the Jira orb, making its commands accessible
-workflows:
-  build:
-    jobs:
-      - build:
-          post-steps:
-            - jira/notify # Runs the Jira's "notify" commands after a build has finished its steps.
-jobs:
-  build:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - run: echo "hello"
-```
+### Configure the Jira orb
+{: #configure-the-jira-orb }
+
+The [circleci/jira](https://circleci.com/developer/orbs/orb/circleci/jira) orb is responsible for relaying information about your build or deployment to the CircleCI Jira application.
+
+1. Begin by saving the **Webhook URL** from the previous section as an _environment variable_. This could be added as a [Project Environment Variable](/docs/set-environment-variable/#set-an-environment-variable-in-a-project) or within a [Context](/docs/set-environment-variable/#set-an-environment-variable-in-a-context). We recommend naming the variable `JIRA_WEBHOOK_URL`.
+1. Next, import the Jira orb into your `.circleci/config.yml` file and implement the `jira/notify` command at the _end_ of your build and deployment jobs. Detailed and up-to-date configuration examples can be found on the [orb page](https://circleci.com/developer/orbs/orb/circleci/jira#usage-examples).
+
+## View build and deploy statuses in Jira
+{: #view-build-and-deploy-statuses-in-jira }
+
+The [circleci/jira](https://circleci.com/developer/orbs/orb/circleci/jira) orb automatically detects the Jira ticket number from the branch name or commit message. The build or deployment status is then posted to the appropriate Jira ticket. You can view build and deployment information, natively, in the right sidebar of any Jira ticket.
+
+![Jira build status]({{ site.baseurl }}/assets/img/docs/jira_ticket_sidebar.png)
+
+From this sidebar menu you can click into the build or deployment information to view the full CircleCI job details.
+
+![Jira builds tab]({{ site.baseurl }}/assets/img/docs/jira_builds_tab.png)
