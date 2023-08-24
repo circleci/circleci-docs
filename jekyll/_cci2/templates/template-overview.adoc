@@ -102,7 +102,7 @@ xref:about-circleci#[About CircleCI]
 
 Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
 
-xref:about-circleci#learn-more[About CircleCI]
+xref:../about-circleci#learn-more[About CircleCI]
 
 [#code-examples]
 === Code examples
@@ -149,5 +149,5 @@ For more information, see xref:https://ui.circleci.com/docs/style/formatting/#us
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:benefits-of-circleci#[Benefits of CircleCI]
-* xref:concepts#[CircleCI concepts]
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]
