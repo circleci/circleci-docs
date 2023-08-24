@@ -16,17 +16,17 @@ contentTags:
 ////
 Some notes on attributes
 
-:page-liquid: - ensures that all liquid tags are processed before rendering the content more info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
+:page-liquid: - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
 
 :icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
 
-:experimental: allows us access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
+:experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
 
 ////
 
 This template will help you create a new docs page to provide conceptual information about a feature or task in CircleCI. To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-overview.adoc?plain=1[here]. There is additional detail in the comments.
 
-// If possible display the use cases in a bullet list, for example:
+// If possible display the use cases in a bullet list:
 
 The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. Content templates help you to:
 
@@ -140,6 +140,8 @@ NOTE: **Need to add a note?** This is how to do it
 CAUTION: **Need to add a caution?** This is how to do it
 
 WARNING: **Need to add a warning?** This is how to do it
+
+We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
 
 For more information, see xref:https://ui.circleci.com/docs/style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
 
