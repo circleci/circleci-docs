@@ -6,7 +6,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Page title goes here
+= Page title
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A short page description goes here
@@ -24,23 +24,28 @@ Some notes on attributes
 
 ////
 
-This template will help you create a new docs page to provide conceptual information about a feature or task in CircleCI. To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports.
+This template will help you create a new docs page to provide conceptual information about a feature or task in CircleCI. To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-overview.adoc?plain=1[here]. There is additional detail in the comments.
+
+// If possible display the use cases in a bullet list, for example:
+
+The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. Content templates help you to:
+
+* Develop new content quickly
+* Ensure your page conforms to the style guide
 
 [#introduction]
 == Introduction
 
 Use the introduction to explain more about the feature/task, what it is for, why it is useful, and the wider context. Try to answer the question “What’s in it for me?” for the reader.
 
-You might want to include an image or diagram here to help illustrate the concept:
+You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanitory information:
 
 image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for images here]
-
-Th docs team can work with you to help create helpful image to support explanitory information.
 
 [#quickstart]
 == Quickstart
 
-Some readers will want to read through a full overview page to get a deep understanding of how a feature work, the full set of options available to them, any gotchas or limitations that might apply to them, and find troubleshooting information so they can know what to expect. However, some readers will want to get started with the feature or task right away and then dip back into the docs as needed. For the latter it's a good idea to provide a quickstart section that gets them up and running with the basics in just a few steps.:
+Some readers will want to read through a full overview page to get a deep understanding of how a feature works, the full set of options available to them, any gotchas or limitations that might apply to them, and to find troubleshooting information. Some readers will want to get started with the feature or task right away and then return to the docs as needed. For the latter it is a good idea to provide a quickstart section to help get the reader up and running with the basics in just a few steps:
 
 // The following will render as a numbered list
 
@@ -49,7 +54,7 @@ Some readers will want to read through a full overview page to get a deep unders
 . Inlcude a step for every action
 . Try not to skip steps or assume readers will know which button to click etc.
 
-Alternatively, point readers to a how-to guide or tutorial in this Quickstart section.
+Alternatively, point readers to a how-to guide or tutorial in this quickstart section.
 
 [#how-the-feature-works]
 == How the feature works
@@ -81,6 +86,8 @@ This is the syntax for creating a table. This example has one heading row and on
 |Text for row 1 column 2
 |Text for row 1 column 3
 |===
+
+For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
 
 [#links-and-cross-references]
 === Links and cross references
@@ -123,9 +130,22 @@ jobs:
             echo '^^^The files in your repo^^^'
 ----
 
+[#banners]
+=== Banners
+
+In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+
+NOTE: **Need to add a note?** This is how to do it
+
+CAUTION: **Need to add a caution?** This is how to do it
+
+WARNING: **Need to add a warning?** This is how to do it
+
+For more information, see xref:https://ui.circleci.com/docs/style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
 [#next-steps]
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
 * xref:benefits-of-circleci#[Benefits of CircleCI]
-* xref:concepts#[CirceCI concepts]
+* xref:concepts#[CircleCI concepts]
