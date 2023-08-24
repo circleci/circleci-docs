@@ -98,7 +98,7 @@ link:https://circleci.com/[CircleCI website]
 
 To link to another page within the docs use a cross reference:
 
-xref:about-circleci#[About CircleCI]
+xref:../about-circleci#[About CircleCI]
 
 Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
 
