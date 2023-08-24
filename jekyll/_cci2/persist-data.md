@@ -160,7 +160,7 @@ For questions on data usage for the IP ranges feature, visit the [FAQ](/docs/faq
 
 Usage of network transfer to self-hosted runners can be mitigated by using custom local storage, such as a persistent volume as opposed to the built-in caches/workspaces provided by CircleCI.
 
-Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
+Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Additionally, pulling images from a us-east-1 via ECR for example would not incur charges as we also host in us-east-1. 
 
 ## See also
 {: #see-also }
