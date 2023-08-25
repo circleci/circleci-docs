@@ -1,0 +1,91 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI remote Docker images support policy
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI remote Docker images release, update, and deprecation policy
+:icons: font
+:experimental:
+
+[#overview]
+== Overview
+
+This document outlines the xref:building-docker-images#[CircleCI remote Docker image] release, update, and deprecation policy.
+
+This policy applies to all CircleCI remote Docker images built for the remote Docker platform.
+
+[#release-policy]
+== Release policy
+
+The CircleCI remote Docker images are based on our Linux VM images with Docker installed for the purposes of providing a remote environment that can execute Docker commands within jobs on the Docker executor.
+
+We aim to support the latest two versions of the Docker Engine that are classified as within Security Support status.
+
+Remote Docker images will be updated when a patch version is released from upstream. Tags will be redirected to the updated images automatically as described in the xref:#tagging[tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
+
+[#tagging]
+== Tagging
+
+We support various tags for the remote Docker environment which allow customers to choose the type of remote Docker environment they require.
+
+For the latest major version of Docker:
+
+- `edge`: This image is for testing purposes. It is updated frequently without warning and could include breaking changes. 
+
+- `current`: This image is the current stable image. This is the default if no tag is selected.
+
+- `previous`: Once an `edge` image is promoted to current, the previous `current` image is moved to the `previous` tag.
+
+For the previous major version of Docker, we support a single tag following the format of `dockerXX` - e.g., `docker23` for Docker 23. This tag will point to the latest patch version of the major release, and will be updated if any patch versions are issued by the upstream.
+
+
+[#critical-cve-patches]
+== Critical CVE patches
+
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in our remote Docker images, we will investigate the impact that this has on our images being used within the CircleCI execution environment. 
+
+In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our Discuss Forum.
+
+
+[#bug-reports-issues-and-prs]
+== Bug reports, issues, and PRs
+
+Please file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the remote Docker images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+
+[#image-lifespan-eol]
+== Image lifespan / EOL
+
+Image lifespan will generally follow the support status of Docker Engine by Docker. Once a new major version of Docker is released, we will begin the deprecation process of the oldest version that we support and schedule it to be removed. This allows us to maintain two versions of Docker Engine effectively.
+
+Example: When Docker 25 is released:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Version
+| Support
+
+| Docker 23
+| `docker23` tag deprecated and removed
+
+| Docker 24
+| Moved from `current`, `edge` and `previous` tags `docker24` tag
+
+| Docker 25
+| Set to `current`, `edge` and `previous` tags
+|===
+
+
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. 
+
+We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images.
+
+[#exceptions]
+== Exceptions
+
+​​At any time, we reserve the right to work outside of the information in this document if the circumstances require. In the event that we are required to make an exception to the policy, we will aim to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our Discuss Forum, along with additional outreach, such as an email notice, where possible.
