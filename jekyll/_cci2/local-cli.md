@@ -155,13 +155,13 @@ The set up process will prompt you for configuration settings. If you are using 
 
 The CircleCI CLI includes a telemetry feature that collects basic errors and feature usage data in order to help us improve the experience for everyone.
 
-Telemetry works on an opt-in basis: when running a command for the first time, you will be asked for consent to enable telemetry. Telemetry is disabled by default for non-interactive terminals, ensuring that scripts that leverage the CLI run smoothly.
+Telemetry works on an opt-in basis. When running a command for the first time, you will be asked for consent to enable telemetry. Telemetry is disabled by default for non-interactive terminals, ensuring that scripts that leverage the CLI run smoothly.
 
 You can disable or enable telemetry any time in one of the following ways:
 
-* Run the commands `circleci telemetry enable` or `circleci telemetry disable`
+* Run one of the following commands: `circleci telemetry enable` or `circleci telemetry disable`
 
-* Set the `CIRCLECI_CLI_TELEMETRY_OPTOUT` environment variable to `1` or `true` to disable it
+* To disable telemetry, set the `CIRCLECI_CLI_TELEMETRY_OPTOUT` environment variable to `1` or `true`
 
 ## Uninstallation
 {: #uninstallation }
