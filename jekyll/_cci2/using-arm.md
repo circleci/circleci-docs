@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Using the Arm VM execution environment"
-description: "Learn how to configure a your jobs to run in the Arm execution environment."
+description: "Learn how to configure a your jobs to run in the Arm VM execution environment."
 contentTags:
   platform:
   - Cloud
