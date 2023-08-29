@@ -21,7 +21,7 @@ The CircleCI credit-based usage plans enable you to only pay for what you use, w
 The right plan for you and your team will depend on several factors:
 
 - How many users are on your team
-- How much support you need (community and free support, standard support, or premium support)
+- How much link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response-Timings[support] you need (community and free support, standard support, or premium support)
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
