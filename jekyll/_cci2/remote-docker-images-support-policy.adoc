@@ -26,12 +26,12 @@ The CircleCI remote Docker images are based on our Linux VM images with Docker i
 
 We aim to support the latest two versions of the Docker Engine that are classified as within Security Support status.
 
-Remote Docker images will be updated when a patch version is released from upstream. Tags will be redirected to the updated images automatically as described in the xref:#tagging[tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
+Remote Docker images will be updated when a patch version is released upstream. Tags will be redirected to the updated images automatically as described in the xref:#tagging[tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
 
 [#tagging]
 == Tagging
 
-We support various tags for the remote Docker environment which allow customers to choose the type of remote Docker environment they require.
+We support various tags for the remote Docker environment to allow you to choose the type of remote Docker environment you require.
 
 For the latest major version of Docker:
 
@@ -49,13 +49,13 @@ For the previous major version of Docker, we support a single tag following the 
 
 When critical CVEs are disclosed that affect the versions of the operating system or software stack in our remote Docker images, we will investigate the impact that this has on our images being used within the CircleCI execution environment. 
 
-In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our Discuss Forum.
+In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures on our link:https://discuss.circleci.com/[Discuss Forum].
 
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
 
-Please file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the remote Docker images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+You can file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the remote Docker images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
 
 [#image-lifespan-eol]
 == Image lifespan / EOL
