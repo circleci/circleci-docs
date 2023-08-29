@@ -225,7 +225,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | agent.image.tag
 | Agent image tag
-| edge
+| kubernetes-3
 
 | agent.pullSecrets
 | link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks

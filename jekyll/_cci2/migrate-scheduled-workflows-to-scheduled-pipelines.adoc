@@ -78,7 +78,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs].
+For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs]. Also see the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#use-project-settings]
 === Use project settings in the web app
@@ -104,6 +104,5 @@ daily-run-workflow:
 
 [#next-steps]
 == Next steps
-
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
 - xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]

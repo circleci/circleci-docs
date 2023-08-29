@@ -100,6 +100,9 @@ The Timing tab lets you identify which steps are taking the longest amount of ti
 ## Test Insights
 {: #test-insights }
 
+The test Insights feature is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 When test results are stored, test analytics also become available on the **Tests** tab of the **Insights** page in the web app. Metrics for flaky tests, tests with the lowest success rates, and slow tests help you identify opportunities to optimize pipelines as well as further improve your testing strategy.
 
 More information is available on the [Test Insights](/docs/insights-tests) page.
