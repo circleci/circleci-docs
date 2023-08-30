@@ -972,7 +972,7 @@ en:
             link: style/using-code-samples
       - name: Content templates
         children:
-          - name: Overview page template
+          - name: Conceptual page template
             link: templates/template-conceptual
 
 ja:
