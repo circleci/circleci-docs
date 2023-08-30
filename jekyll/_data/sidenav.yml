@@ -973,7 +973,7 @@ en:
       - name: Content templates
         children:
           - name: Overview page template
-            link: templates/template-overview
+            link: templates/template-conceptual
 
 ja:
   - name: About CircleCI
