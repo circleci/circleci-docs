@@ -409,7 +409,7 @@ Examples for all execution environments are available on the following pages:
 * [Using the macOS execution environment](/docs/using-macos)
 * [Using the Windows execution environment](/docs/using-windows)
 * [Using the GPU execution environment](/docs/using-gpu)
-* [Using the Arm execution environment](/docs/using-arm)
+* [Using the Arm VM execution environment](/docs/using-arm)
 
 Pricing and plans information for the various resource classes can be found on the [Resource classes](https://circleci.com/product/features/resource-classes/) product page.
 
