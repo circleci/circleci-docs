@@ -1000,7 +1000,7 @@ jobs:
 ###### Arm
 {: #arm }
 
-**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Resource classes page](https://circleci.com/product/features/resource-classes/).
 {: class="alert alert-caution"}
 
 {% include snippets/docker-arm-resource-table.md %}
