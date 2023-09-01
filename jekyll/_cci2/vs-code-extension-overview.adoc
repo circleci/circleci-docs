@@ -70,7 +70,7 @@ Expanding a job also lets you:
 [#re-run-with-ssh]
 === Re-run with SSH
 
-NOTE: **Using GitLab?** Re-run with SSH from VS Code is not yet enabled for Gitlab projects.
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects.
 
 There are two ways to re-run jobs with SSH directly from VS Code:
 
