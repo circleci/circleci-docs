@@ -25,7 +25,7 @@ Audit logs and other items from the application are also stored in object storag
 [#execution-environment]
 == Execution environment
 
-CircleCI server v4.x uses Nomad as the primary job scheduler. Refer to our xref:introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI server v4.2 uses Nomad as the primary job scheduler. Refer to our xref:introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
 
