@@ -132,5 +132,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* Read the link:/docs/server/operator/managing-user-accounts#,Managing user accounts>> guide.
+* Read the xref:managing-user-accounts[Managing user accounts] guide.
 endif::[]

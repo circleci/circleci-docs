@@ -13,8 +13,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-post-brownout.adoc %}
-
 このページでは、Linux に CircleCI のマシンランナーをインストールする方法を説明します。
 
 [#prerequisites]

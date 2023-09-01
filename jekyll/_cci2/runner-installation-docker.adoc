@@ -13,8 +13,6 @@ contentTags:
 :experimental:
 :machine:
 
-{% include snippets/runner-1.0-deprecation-post-brownout.adoc %}
-
 This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
 
 [#new-recommended-method-container-runner]
