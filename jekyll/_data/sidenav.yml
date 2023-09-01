@@ -208,6 +208,8 @@ en:
             link: convenience-images-support-policy
           - name: Linux CUDA images support policy
             link: linux-cuda-images-support-policy
+          - name: Remote Docker images support policy
+            link: remote-docker-images-support-policy
           - name: Xcode image policy
             link: xcode-policy
 
