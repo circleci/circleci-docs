@@ -52,7 +52,7 @@ If your VS Code workspace contains one or more CircleCI projects, the extension 
 
 If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (icon:cog[]) at the top of the pipelines panel), and select your projects manually.
 
-NOTE: **Using GitLab?** The pipelines manager does not yet support automatic detection for GitLab projects. Please select your project manually from the settings page.
+NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects. Please select your project manually from the settings page.
 
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
 
