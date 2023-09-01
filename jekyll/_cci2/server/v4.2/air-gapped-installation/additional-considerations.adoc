@@ -60,7 +60,7 @@ If using a K3s installation, link:https://metallb.universe.tf/installation/[Meta
 
 Once installed, the following steps need to be followed:
 
-. Create a configmap resource to create an address pool for MetalLB.
+. Create a configmap resource as an address pool for MetalLB.
 +
 [source, yaml]
 ----
