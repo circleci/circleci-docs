@@ -33,7 +33,7 @@ To use this template make a copy and place it in the `_cci2` directory. The file
 
 The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
 
-Contributors internal to CircleCI can also consider setting up a local development environment to preview changes before pushing. More information on this can be found
+Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
 
 [#introduction]
 == Introduction
