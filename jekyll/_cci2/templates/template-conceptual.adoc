@@ -43,7 +43,7 @@ Use the introduction to explain more about the feature/task, what it is for, why
 * What’s in it for me?
 * How does this feature / task help me create more value?
 
-You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanitory information:
+You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanatory information:
 
 image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for images here]
 
