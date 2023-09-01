@@ -876,9 +876,9 @@ helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 [#create-dns-entry]
 == 5. Create DNS entry
-Create a DNS entry for your NGINX load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
+Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
-You need the IP address, or, if using AWS, the DNS name of the NGINX load balancer. You can find this information with the following command:
+You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
 
 [source,shell]
 ----
