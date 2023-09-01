@@ -31,7 +31,7 @@ The insecure-registries section must be added to the file (if it exists), or the
 This file will need to be configured on the following machines:
 
 - All Nomad nodes in the air-gapped environment
-- Potentially all K3s nodes in the air-gapped environment, if using docker-backed K3s
+- Potentially all K3s (lightweight Kubernetes) nodes in the air-gapped environment, if using docker-backed K3s
 
 In addition, on each K3s node, the following file must be configured at `/etc/rancher/k3s/registries.yaml`. Take note to include the protocol where referenced.
 
@@ -56,7 +56,7 @@ configs:
 
 CircleCI server makes use of link:Service Type: Load Balancer kubernetes resources[Service] `type: LoadBalancer`` kubernetes resources to listen to traffic on multiple ports.
 
-If using a K3s (lightweight Kubernetes) installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
+If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
 
 Once installed, the following steps need to be followed:
 
