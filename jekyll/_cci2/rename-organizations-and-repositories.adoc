@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The content on this page is only relevant to GitHub and Bitbucket. Due to the standalone nature of GitLab accounts in CircleCI, no changes are required when orgs or repos are renamed.
+NOTE: The content on this page is only relevant to GitHub OAuth app and Bitbucket integrations. Due to the standalone nature of GitLab and GitHub App accounts in CircleCI, no changes are required when orgs or repos are renamed. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 If you need to rename a **GitHub** or **Bitbucket** organization or repository that you have previously connected to CircleCI, best practice is to follow the steps listed below. If you do not follow this process, it is possible you may lose access to your organization or repository settings, including **environment variables** and **contexts**.
 
