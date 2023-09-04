@@ -972,6 +972,10 @@ en:
             link: style/using-tables
           - name: Using code samples
             link: style/using-code-samples
+      - name: Content templates
+        children:
+          - name: Conceptual page template
+            link: templates/template-conceptual
 
 ja:
   - name: About CircleCI
