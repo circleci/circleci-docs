@@ -9,7 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
+CircleCI offers several execution environments: Docker (x86 or Arm), Linux VM (virtual machine), macOS, Windows, GPU and Arm VM. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
 
 For each job in your project config you will specify an execution environment by assigning it an **executor**. An **executor** defines the underlying technology or environment in which to run a job, and which image to use to best-suit your project.
 
@@ -194,10 +194,10 @@ jobs:
 
 Find out more about the GPU execution environment on the [Using the GPU Execution Environment](/docs/using-gpu/) page.
 
-## Arm
+## Arm VM
 {: #arm }
 
-To access the Arm execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
+To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -257,7 +257,7 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment](/docs/using-arm/) page.
+Find out more about the Arm VM execution environment in the [Using the Arm VM Execution Environment](/docs/using-arm/) page. You can also use [Arm on Docker](/docs/using-docker/#arm).
 
 ## Self-hosted runner
 {: #self-hosted-runner }

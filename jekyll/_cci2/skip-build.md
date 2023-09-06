@@ -72,8 +72,9 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* Your project's default branch (usually `main`) will never auto-cancel builds.
+* Your project's default branch (usually `main`) will never auto-cancel workflows.
 * Auto-cancel affect pipelines triggered by pushes to a VCS or via the API.
+* Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
 {: #enable-auto-cancel }
