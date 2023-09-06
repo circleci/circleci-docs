@@ -27,6 +27,8 @@ Pipeline values and parameters can be used to create reusable pipeline configura
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
+Please note: if using setup workflows, all pipeline parameters must be present in the subsequent configuration, even if calling with the API 
+
 For a full list of values and built-in environment variables, see the xref:variables#pipeline-values[Project values and variables] guide.
 
 include::../_includes/snippets/pipeline-values.adoc[]
