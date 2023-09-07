@@ -24,7 +24,9 @@ Some notes on attributes
 
 ////
 
-This template will help you create a new **tutorial**. A tutorial should guide users who are new to a feature through getting set up and using the feature, and point them to further reading for alternative use cases and options. Content templates help you to:
+This template will help you create a new **tutorial**. A tutorial should guide users who are new to a feature through getting set up and using the feature, and point them to further reading for alternative use cases and options. To help decide whether content should be a tutorial or a how-to guide, see the link:https://diataxis.fr/tutorials-how-to/[Diataxis website].
+
+Content templates help you to:
 
 * Develop new content quickly
 * Ensure your page conforms to the style guide
