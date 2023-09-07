@@ -793,6 +793,9 @@ jobs:
 #### **`machine`**
 {: #machine }
 
+**CircleCI Cloud** The use of `machine: true` is deprecated. You must specify an image to use.
+{: class="alert alert-caution"}
+
 The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
@@ -804,17 +807,24 @@ docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer 
 
 Example:
 
-```yaml
-version: 2.1
+{:.tab.machine.Cloud}
+```yml
 jobs:
-  build:
-    machine:
-      image: ubuntu-2004:202010-01
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+
     steps:
-      - checkout
-      - run:
-          name: "Testing"
-          command: echo "Hi"
+        # Commands run in a Linux virtual machine environment
+```
+
+{:.tab.machine.Server}
+```yml
+jobs:
+  build: # name of your job
+    machine: true # executor type
+    steps:
+      # Commands run in a Linux virtual machine environment
 ```
 
 ---

@@ -15,6 +15,9 @@ Using the machine executor gives your application full access to OS resources an
 
 To use the machine executor, use the [`machine` key]({{site.baseurl}}/configuration-reference/#machine) in your job configuration and specify an image:
 
+**CircleCI Cloud** The use of `machine: true` is deprecated. You must specify an image to use.
+{: class="alert alert-caution"}
+
 {:.tab.machineblock.Cloud}
 ```yaml
 version: 2.1
