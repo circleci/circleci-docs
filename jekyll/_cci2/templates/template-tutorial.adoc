@@ -150,7 +150,7 @@ For more information, see xref:../style/formatting/#using-notes-tips-cautions-wa
 [#the-second-step]
 == 2. The second step
 
-Each main step in the tutorial should be under it's own level 2 (`==`) heading, using the numbered list format.
+Each main step in the tutorial should be under its own level 2 (`==`) heading, using the numbered list format.
 
 [#conclusion]
 == Conclusion
