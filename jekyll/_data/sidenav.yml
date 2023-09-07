@@ -976,6 +976,8 @@ en:
         children:
           - name: Conceptual page template
             link: templates/template-conceptual
+          - name: How-to guide template
+            link: templates/template-how-to
 
 ja:
   - name: About CircleCI
