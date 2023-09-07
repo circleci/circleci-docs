@@ -50,7 +50,7 @@ If available and/or relevant, list what the reader must have in place in order f
 * Permissions
 * Dependencies
 
-NOTE: Prereqisites might not be the same for every user, or it might not be possible to outline every prerequisite given the different systems/environments that different orgs/teams/users may use.
+NOTE: Prerequisites might not be the same for every user, or it might not be possible to outline every prerequisite given the different systems/environments that different orgs/teams/users may use.
 
 Prerequisites may include things like:
 
