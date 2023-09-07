@@ -33,8 +33,8 @@ GitHub Checks should not be confused with GitHub status updates:
 
 If both these features are enabled, in a GitHub PR view the Checks tab will show workflow status and the Checks section in the PR conversation view will show job status.
 
-If you are using GitHuck Checks or GitHub Status updates with the [Skip Jobs feature](https://circleci.com/docs/skip-build/#skip-jobs)
-the status of the skipped builds will not be reported though the checks will be created in GitHub.  
+If you are using GitHuck Checks or GitHub Status updates with the [skip jobs feature](/docs/skip-build/#skip-jobs),
+the status of the skipped builds will not be reported even though the checks will be created in GitHub.
 
 ## Prerequisites
 {: #prerequisites }
