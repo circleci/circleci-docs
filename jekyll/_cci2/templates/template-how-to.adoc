@@ -86,7 +86,9 @@ You may also consider adding numbers to the headings to more clearly outline the
 In a how-to guide, you might walk the reader through an example scenario. Examples should be based on real-world use cases as much as possible and address business objectives.
 
 [#this-is-a-subsection-title]
-=== This is a subsection title
+=== a. This is a subsection title
+
+Subsections can be used to break steps into logical sub-parts as needed, and should be numbered using lowercase letters.
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 
@@ -95,7 +97,7 @@ Break up large blocks of text where possible to help make it easier to consume. 
 * Item 3
 
 [#using-tables]
-=== Using tables
+=== b. Using tables
 
 This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
 
@@ -114,7 +116,7 @@ This is the syntax for creating a table. This example has one heading row and on
 For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
 
 [#links-and-cross-references]
-=== Links and cross references
+=== c. Links and cross references
 
 To link out to content outside of the docs use a link:
 
@@ -129,7 +131,7 @@ Notice the `#` at the end of the filename. You can place the subsection anchor t
 xref:../about-circleci#learn-more[About CircleCI]
 
 [#code-examples]
-=== Code examples
+=== d. Code examples
 
 Whenever possible, the how-to guide should provide examples that cover our users' most widely used languages and frameworks, unless the guide itself is specific to a particular language, platform, or framework.
 
@@ -157,7 +159,7 @@ jobs:
 ----
 
 [#banners]
-=== Banners
+=== e. Banners
 
 In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
 
@@ -170,6 +172,16 @@ WARNING: **Need to add a warning?** This is how to do it
 We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
 
 For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+[#the-second-step]
+== 2. The second step
+
+Each main step in the how-to guide should be under its own level 2 (`==`) heading, using the numbered list format.
+
+[#conclusion]
+== Conclusion
+
+End the guide with a conclusion section that summarizes what was covered.
 
 [#next-steps]
 == Next steps
