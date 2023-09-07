@@ -11,7 +11,11 @@ contentTags:
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
 
-{% include snippets/docker-auth.md %}
+If you would like to get set up quickly, see our language-specific quickstart guides:
+
+* [Node](/docs/2.0/language-javascript/)
+* [Python](/docs/2.0/language-python/)
+* [Go](/docs/2.0/language-go/)
 
 ## Tools for editing configuration files
 {: tools-for-editing-configuration-files }
@@ -24,6 +28,8 @@ The CircleCI VS Code extension is available to download on the [VS Code marketpl
 
 ## Simple configuration examples
 {: #simple-configuration-examples }
+
+{% include snippets/docker-auth.md %}
 
 ### Concurrent workflow
 {: #concurrent-workflow }
