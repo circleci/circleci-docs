@@ -1,0 +1,158 @@
+---
+contentTags: 
+  platform:
+  - Cloud
+---
+
+ = Migrating from Launch Agent to the new Machine Runner Agent
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to migrate from Launch agent to the new machine runner agent
+:icons: font
+:toc: macro
+:toc-title:
+:machine:
+
+This page describes how to migrate an existing Launch Agent installation to the new Machine Runner Agent.
+
+Migrating from Launch Agent to the new Machine Runner is a fairly straightforward process. The prerequisites are the same as for Launch Agent. First Launch Agent is uninstalled and removed and then the new agent is installed. The configuration file is 1:1 compatible between the agents so should not need modifying during the migration
+
+[#uninstall-launch-agent]
+== 1. Uninstalling Launch Agent
+
+The first step is to uninstall launch agent. The exact process depends on the platform, as described in the following sections.
+
+[#uninstall-launch-agent-linux]
+=== Linux
+
+. If the agent has been installed as a `systemd` service, run the following commands the stop and uninstall the service unit, and delete the service file. (The new agent will install a new service unit):
+
++
+```shell
+sudo systemctl stop circleci.service
+sudo systemctl disable circleci.service
+
+sudo rm /usr/lib/systemd/system/circleci.service
+```
+
+. The launch agent binary can now be removed from the machine. The default install location is `/opt/circleci/circleci-launch-agent`, but this may differ on your machine if the agent was installed somewhere else. The entire `/opt/circleci` subdirectory can be removed at this point.
+
+. Finally, move the agent configuration file. The default location for this is `/etc/opt/circleci/launch-agent-config.yaml`. Move the file to `/etc/circleci-runner/circleci-runner-config.yaml` using the following command:
+
++
+```shell
+mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/c sircleci-runner-config.yaml
+```
+
+Alternatively, you can let the machine agent install process create a config file template and copy the existing config into the newly created file (CROSSLINK)
+
+[#uninstalling-launch-agent-linux-se]
+==== RHEL/Rocky Linux
+
+In addition to the steps listed above, the SELinux policy should be uninstalled using the following command:
+
+```shell
+sudo semodule -r circleci_launch_agent
+```
+
+[#uninstalling-launch-agent-macos]
+=== MacOS
+
+. If the agent has been installed as a launchd service, run the following commands to stop the service and remove the service file:
+
++
+```shell
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+
+sudo rm `/Library/LaunchDaemons/com.circleci.runner.plist`
+```
+
+. The launch agent binary can now be removed from the machine. The default install location is `/opt/circleci/circleci-launch-agent` but this may differ on your machine if the agent was installed somewhere else. The entire `/opt/circleci` subdirectory can be removed at this point.
+
+. Finally, move the agent configuration file. The default location for this is `/Library/Preferences/com.circleci.runner/launch-agent-config.yaml`. Move the file to `$HOME/Library/Preferences/com.circleci.runner/config.yaml`. 
+
+Alternatively you can let the Machine Agent install process create a config file template and copy the existing config into the newly created file (CROSSLINK)
+
+[#uninstalling-launch-agent-windows]
+=== Windows
+
+. To uninstall the launch agent, you can download the link:https://github.com/CircleCI-Public/runner-installation-files/blob/main/windows-install/Uninstall-CircleCIRunner.ps1[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location. Then, run the script with the following command (from an administrator PowerShell console):
+
++
+```shell
+./Uninstall-CircleCIRunner.ps1
+```
+
++
+This will remove all launch agent components, including the configuration file.
+
++
+If you want to reuse the values with the new install, you should save the file to a temporary location while migrating. It is stored by default at `$env:ProgramFiles\CircleCI`
+
+
+[#install-machine-agent]
+== 2. Installing the Machine Agent
+
+The new agent has a streamlined installation experience on Linux/MacOS thanks to new packaged options.
+
+[#install-machine-agent-linux]
+=== Linux
+
+. At present deb and rpm packages are available for linux. Use the following commands to install them
+
++
+```shell
+# DEB Commands
+# This script installs the package repository to the package manager
+curl -s https://packagecloud.io/install/repositories/circleci/runner/script.deb.sh | sudo bash
+sudo apt install circleci-runner
+
+# RPM Commands
+# This script installs the package repository to the package manager
+curl -s https://packagecloud.io/install/repositories/circleci/runner/script.rpm.sh | sudo bash
+sudo yum install circleci-runner
+```
+
+. The packages will install the latest version of the agent, along with creating a circleci user and required directories for operation of the agent. The RPM package installs the required SELinux policy.
+
+. The packages will create a template configuration file at `/etc/circleci-runner/circleci-runner-config.yaml`. This configuration is 1:1 compatible with the launch agent configuration, apart from the auto-update feature. Since auto-update has been removed from the new agent, you should use the appropriate package management update tools to get new versions of the package when they are released. 
+
++
+```shell
+sudo systemctl enable circlci-runner
+sudo systemctl start circleci-runner
+```
+
+[#install-machine-agent-macos]
+=== MacOS
+
+. A `brew` package is available for MacOS. Use the following commands to install the machine agent:
+
++
+```shell
+brew tap circleci-public/homebrew-circleci
+brew install --cask circleci-public/homebrew-circleci/circleci-runner
+```
+
++
+The package will install the latest version of the agent along with required directories for the operation of the agent.
+
+. The package will create a template configuration file (if it does not already exist) at `$HOME/Library/Preferences/com.circleci.runner/config.yaml`. This configuration is 1:1 compatible with the launch agent configuration, apart from the auto-update feature. Since auto-update has been removed from the new agent, you should use the appropriate package management update tools to get new versions of the package when they are released.
+
++
+```shell
+launchctl load $HOME/Library/LaunchAgents/com.circleci.runner.plist
+```
+
++
+This only needs to be run once after the machine runner has been installed. After that the machine runner will automatically start when the user logs in. 
+
+[#install-machine-agent-windows]
+=== Windows
+
+. To install the new agent, download the https://github.com/CircleCI-Public/runner-installation-files/blob/main/windows-install/Install-CircleCIRunner.ps1[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location. Then, run the script with the following command (from an administrator PowerShell console):
+
++
+```shell
+./Install-CircleCIRunner.ps1
+```
