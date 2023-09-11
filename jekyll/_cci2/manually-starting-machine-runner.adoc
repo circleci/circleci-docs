@@ -21,12 +21,30 @@ This page describes how to manually start a jobs using CircleCI's machine runner
 
 To run jobs you will need to have done the following:
 
-- Installed the machine runner agent binary on the target machine
 - Created a user with the appropriate permissions
 - Created a working directory for jobs
 
+[#download-runner-agent]
+== 1. Downloaded the runner agent binary
+
+The runner agent binary can be downloaded from S3 using the following commands:
+
+```shell
+curl -sfL $(curl -sfL https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/manifest.json \
+  | jq -r .releases.current.linux.amd64.url) \
+  -o circleci-runner.tar.gz
+
+printf "$(curl -sfL https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/manifest.json \
+  | jq -r .releases.current.linux.amd64.sha256) circleci-runner.tar.gz" \
+  | sha256sum -c
+
+tar xvf circleci-runner.tar.gz
+```
+
+This will download the binary, validate the checksum & extract the binary from the tarball.
+
 [#create-agent-configuration]
-== 1. Create the agent configuration
+== 2. Create the agent configuration
 
 The following template can be used to create the configuration file for the agent. The file should be created with at least read permisssions for the invoking user has. The full configuration schema reference can be found here (LINK TO CONFIG REFERENCE)
 
@@ -46,7 +64,7 @@ logging:
 ```
 
 [#start-machine-runner-agent]
-== 2. Start the machine runner agent
+== 3. Start the machine runner agent
 
 The following command is used to launch the machine runner agent:
 
@@ -57,6 +75,6 @@ The following command is used to launch the machine runner agent:
 The agent will output logs to `stdout` indicating it has start correctly.
 
 [#run-a-job]
-== 3. Run a job
+== 4. Run a job
 
 You can now trigger a CircleCI job using the resource class associated with the machine runner agent. The agent will claim and run the task.
