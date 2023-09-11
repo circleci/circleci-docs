@@ -46,7 +46,7 @@ This will download the binary, validate the checksum & extract the binary from t
 [#create-agent-configuration]
 == 2. Create the agent configuration
 
-The following template can be used to create the configuration file for the agent. The file should be created with at least read permisssions for the invoking user has. The full configuration schema reference can be found here (LINK TO CONFIG REFERENCE)
+The following template can be used to create the configuration file for the agent. The file should be created with at least read permisssions for the invoking user has. To see all the available configuration options, visit the xref:runner-config-reference.adoc[Machine runner configuration reference] page
 
 ```yaml
 api:
