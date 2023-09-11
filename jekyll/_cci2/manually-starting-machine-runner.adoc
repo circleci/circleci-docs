@@ -1,0 +1,62 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Manually starting machine runner on Linux
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to manually start running jobs using machine runner on Linux.
+:icons: font
+:experimental:
+:machine:
+:linux:
+
+This page describes how to manually start a jobs using CircleCI's machine runner on Linux.
+
+[#prerequisites]
+== Prerequisites
+
+To run jobs you will need to have done the following:
+
+- Installed the machine runner agent binary on the target machine
+- Created a user with the appropriate permissions
+- Created a working directory for jobs
+
+[#create-agent-configuration]
+== 1. Create the agent configuration
+
+The following template can be used to create the configuration file for the agent. The file should be created with at least read permisssions for the invoking user has. The full configuration schema reference can be found here (LINK TO CONFIG REFERENCE)
+
+```yaml
+api:
+  auth_token: << AUTH_TOKEN >>
+  # On server, set url to the hostname of your server installation. For example,
+  # url: https://circleci.example.com
+runner:
+  name: << AGENT_NAME >>
+  working_directory: << WORKING_DIRECTORY >>
+  cleanup_working_directory: true
+logging:
+  level: "info"
+  format: "text"
+  file: "-"
+```
+
+[#start-machine-runner-agent]
+== 2. Start the machine runner agent
+
+The following command is used to launch the machine runner agent:
+
+```script
+./circleci-runner machine -c /path/to/config.yaml
+```
+
+The agent will output logs to `stdout` indicating it has start correctly.
+
+[#run-a-job]
+== 3. Run a job
+
+You can now trigger a CircleCI job using the resource class associated with the machine runner agent. The agent will claim and run the task

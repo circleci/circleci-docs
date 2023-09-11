@@ -238,6 +238,8 @@ en:
             link: runner-installation-mac
           - name: Docker installation
             link: runner-installation-docker
+          - name: Manually start a job on Linux
+            link: manually-starting-machine-runner
           - name: Machine runner configuration reference
             link: runner-config-reference
       - name: How-to Guides
