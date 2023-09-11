@@ -13,9 +13,9 @@ This document provides sample `.circleci/config.yml` files that you can use as a
 
 If you would like to get set up quickly, see our language-specific quickstart guides:
 
-* [Node](/docs/2.0/language-javascript/)
-* [Python](/docs/2.0/language-python/)
-* [Go](/docs/2.0/language-go/)
+* [Node](/docs/language-javascript/)
+* [Python](/docs/language-python/)
+* [Go](/docs/language-go/)
 
 ## Tools for editing configuration files
 {: tools-for-editing-configuration-files }
