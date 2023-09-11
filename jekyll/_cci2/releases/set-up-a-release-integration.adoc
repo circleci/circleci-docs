@@ -40,7 +40,7 @@ Contributors from within CircleCI can also consider setting up a local developme
 [#introduction]
 == Introduction
 
-Use the introduction to explain what the reader is going to achieve through following the tutorial. Link back to the _conceptual_ page that accompanies the tutorial, to illustrate this here is a link to the xref:template-conceptual#[template for conceptual pages]. If possible provide a demo or example. The tutorial should ideally be written to accompany a public/open source example that any reader can use, but the tutorial should also be able to accommodate a reader’s own project.
+Use the introduction to explain what the reader is going to achieve through following the tutorial. Link back to the _conceptual_ page that accompanies the tutorial, to illustrate this here is a link to the link:/docs/templates/template-conceptual#[template for conceptual pages]. If possible provide a demo or example. The tutorial should ideally be written to accompany a public/open source example that any reader can use, but the tutorial should also be able to accommodate a reader’s own project.
 
 [#prerequisites]
 == Prerequisites
