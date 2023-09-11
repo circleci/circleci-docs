@@ -156,6 +156,6 @@ For more information, see xref:../style/formatting/#using-notes-tips-cautions-wa
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* link:/templates/template-tutorial[Tutorial template]
+* link:/docs/templates/template-tutorial[Tutorial template]
 * xref:../benefits-of-circleci#[Benefits of CircleCI]
 * xref:../concepts#[CircleCI concepts]
