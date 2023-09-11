@@ -1,0 +1,161 @@
+---
+# These platform content tags control the tags that appear at the top of the docs page. Use them to show the reader which CircleCI platforms support the feature or task you are writing about
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Releases overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A short page description goes here
+:icons: font
+:experimental:
+
+////
+Some notes on attributes
+
+:page-liquid: - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
+
+:icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
+
+:experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
+
+////
+
+This template will help you create a new docs page to provide **conceptual** information about a feature or task in CircleCI. Content templates help you to:
+
+* Develop new content quickly
+* Ensure your page conforms to the style guide
+
+To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-conceptual.adoc?plain=1[here]. There is additional detail in the comments.
+
+The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
+
+Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
+
+[#introduction]
+== Introduction
+
+Use the introduction to explain more about the feature/task, what it is for, why it is useful, and the wider context. Try to answer the following questions for the reader:
+
+* What’s in it for me?
+* How does this feature / task help me create more value?
+
+You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanatory information:
+
+image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for images here]
+
+[#quickstart]
+== Quickstart
+
+Some readers will want to read through a full overview page to get a deep understanding of how a feature works, the full set of options available to them, any gotchas or limitations that might apply to them, and to find troubleshooting information. Other readers will want to get started with the feature or task right away and then return to the docs as needed. For the latter it is a good idea to provide a quickstart section to help get the reader up and running with the basics in just a few steps.
+
+Point readers to a how-to guide or tutorial in this quickstart section.
+
+Alternatively, if a separate guide doesn't exist yet, provide some numbered steps here to get set up:
+
+// The following will render as a numbered list
+
+. Provide some steps here
+. To get started with this feature
+. Inlcude a step for every action
+. Try not to skip steps or assume readers will know, for example, which button to click
+
+[#how-the-feature-works]
+== How the feature works
+
+Consider providing some detail on how the feature works 'under the hood' so readers can better conceptualise what they are doing. You might want to break this down into subsections.
+
+[#this-is-a-subsection-title]
+=== This is a subsection title
+
+Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
+
+* Item 1
+* Item 2
+* Item 3
+
+[#using-tables]
+=== Using tables
+
+This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Header text column 1
+|Header text column 2
+|Header text column 3
+
+|Text for row 1 column 1
+|Text for row 1 column 2
+|Text for row 1 column 3
+|===
+
+For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
+
+[#links-and-cross-references]
+=== Links and cross references
+
+To link out to content outside of the docs use a link:
+
+link:https://circleci.com/[CircleCI website]
+
+To link to another page within the docs use a cross reference:
+
+xref:../about-circleci#[About CircleCI]
+
+Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
+
+xref:../about-circleci#learn-more[About CircleCI]
+
+[#code-examples]
+=== Code examples
+
+Use asciidoc source blocks for code:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: The Second Step
+          command: |
+            ls -al
+            echo '^^^The files in your repo^^^'
+----
+
+[#banners]
+=== Banners
+
+In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+
+NOTE: **Need to add a note?** This is how to do it
+
+CAUTION: **Need to add a caution?** This is how to do it
+
+WARNING: **Need to add a warning?** This is how to do it
+
+We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
+
+For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:template-tutorial#[Tutorial template]
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]
