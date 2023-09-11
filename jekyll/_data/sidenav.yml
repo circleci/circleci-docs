@@ -589,6 +589,14 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
+  - name: Release
+    icon: icons/sidebar/getting-started-new.svg
+    children:
+      - name: Set up
+        children:
+          - name: Set up a release integration
+            link: releases/set-up-a-release-integration
+
   - name: Server administration v4.2
     icon: icons/sidebar/admin-new.svg
     children:
