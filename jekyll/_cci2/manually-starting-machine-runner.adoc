@@ -50,7 +50,7 @@ logging:
 
 The following command is used to launch the machine runner agent:
 
-```script
+```shell
 ./circleci-runner machine -c /path/to/config.yaml
 ```
 
@@ -59,4 +59,4 @@ The agent will output logs to `stdout` indicating it has start correctly.
 [#run-a-job]
 == 3. Run a job
 
-You can now trigger a CircleCI job using the resource class associated with the machine runner agent. The agent will claim and run the task
+You can now trigger a CircleCI job using the resource class associated with the machine runner agent. The agent will claim and run the task.
