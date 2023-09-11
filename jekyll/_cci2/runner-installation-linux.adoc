@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Machine runner installation on Linux
+= Machine runner package installation on Linux
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Linux.
@@ -33,30 +33,28 @@ This page describes how to install CircleCI's machine runner on Linux.
 --
 {% include snippets/runner/install-with-web-app-steps.adoc %}
 --
+
 [.tab.machine-runner.CLI_installation]
 --
 {% include snippets/runner/install-with-cli-steps.adoc %}
-
 --
 
 
 [#install-circleci-runner]
 == 2. Install circleci-runner
-
 [.tab.machine-runner-package-installation.debian]
 --
 {% include snippets/runner/machine-runner-deb-package-install.adoc %}
 --
+
 [.tab.machine-runner-package-installation.rpm]
 --
 {% include snippets/runner/machine-runner-rpm-package-install.adoc %}
 --
-[.tab.machine-runner-package-installation.manual_installation]
---
-{% include snippets/runner/machine-runner-manual-install.adoc %}
 
---
+{% include snippets/machine-runner-example.adoc %}
 
+The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 
 [#troubleshooting]
 == Troubleshooting

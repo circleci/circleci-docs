@@ -230,8 +230,10 @@ en:
             link: container-runner
       - name: Machine runner
         children:
-          - name: Linux installation
+          - name: Linux package installation
             link: runner-installation-linux
+          - name: Linux manual installation
+            link: runner-manual-installation-linux
           - name: Windows installation
             link: runner-installation-windows
           - name: macOS installation
