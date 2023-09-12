@@ -255,7 +255,7 @@ image::{{ site.baseurl }}/assets/img/docs/approval_job.png[組織の切り替え
 
 下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` は POSIX 規格の `crontab` の構文で表記します。`cron` の書き方については link:https://www.unix.com/man-page/POSIX/1posix/crontab/[crontab man page] を参照してください。 この例では、Workflow は `main` と `beta` のブランチにおいてのみ実行されます。
 
-*注:* ワークフローのスケジュール実行は、最大 15 分遅れることがあります。 これは、午前 0 時 (UTC) などの混雑時の信頼性を維持するために実施されます。 スケジュールが設定されたワークフローが分単位の正確性で開始されることを想定しないようにご注意ください。
+NOTE: ワークフローのスケジュール実行は、最大 15 分遅れることがあります。 これは、午前 0 時 (UTC) などの混雑時の信頼性を維持するために実施されます。 スケジュールが設定されたワークフローが分単位の正確性で開始されることを想定しないようにご注意ください。
 
 [,yaml]
 ----
@@ -507,7 +507,7 @@ workflows:
             <<: *filters-production # this is calling the previously set yaml anchor
 ----
 
-*注:* GitHub からの Web フック ペイロードは、link:https://developer.github.com/webhooks/#payloads[上限が 5MB] に設定されており、link:https://developer.github.com/v3/activity/events/types/#createevent[一部のイベント]は最大 3 つのタグに制限されます。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
+NOTE: GitHub からの Web フック ペイロードは、link:https://developer.github.com/webhooks/#payloads[上限が 5MB] に設定されており、link:https://developer.github.com/v3/activity/events/types/#createevent[一部のイベント]は最大 3 つのタグに制限されます。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
 
 [#using-regular-expressions-to-filter-tags-and-branches]
 === 正規表現を使用してタグとブランチをフィルタリングする

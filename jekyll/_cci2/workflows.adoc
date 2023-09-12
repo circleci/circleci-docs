@@ -254,7 +254,7 @@ By default, a workflow is triggered on every `git push`. To trigger a workflow o
 
 In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the link:https://www.unix.com/man-page/POSIX/1posix/crontab/[crontab man page] for `cron` syntax basics. The workflow will be run on the `main` and `beta` branches.
 
-Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain reliability during busy times such as 12:00am UTC. Do not assume that scheduled workflows are started with to-the-minute accuracy.
+NOTE: Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain reliability during busy times such as 12:00am UTC. Do not assume that scheduled workflows are started with to-the-minute accuracy.
 
 [source,yaml]
 ----
@@ -507,7 +507,7 @@ workflows:
             <<: *filters-production # this is calling the previously set yaml anchor
 ----
 
-Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
+NOTE: Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
 
 [#using-regular-expressions-to-filter-tags-and-branches]
 === Using regular expressions to filter tags and branches
