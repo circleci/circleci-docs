@@ -8,7 +8,7 @@ contentTags:
 = ワークフローを使ったジョブのオーケストレーション
 :page-description: CircleCI ワークフローを使ったジョブのオーケストレーションについて学びます。
 :experimental:
-:icons: “font”
+:icons: font
 :page-layout: classic-docs
 :page-liquid:
 
