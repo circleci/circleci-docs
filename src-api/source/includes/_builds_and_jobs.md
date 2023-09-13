@@ -380,7 +380,7 @@ build_parameters | Additional environment variables to inject into the job envir
 
 **Note** Triggering a new job with a branch is not currently supported with configurations that specify `version: 2.1`.
 
-## Trigger a new Job by Project
+## Trigger a new Pipeline by Project
 
 ```sh
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build -H "Circle-Token: <circle-token>"
