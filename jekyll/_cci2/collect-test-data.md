@@ -166,6 +166,7 @@ steps:
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
         JEST_JUNIT_OUTPUT_DIR: ./reports/
+        JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
   - store_test_results:
       path: ./reports/
 ```

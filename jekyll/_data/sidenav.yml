@@ -978,6 +978,8 @@ en:
             link: templates/template-conceptual
           - name: How-to guide template
             link: templates/template-how-to
+          - name: Tutorial page template
+            link: templates/template-tutorial
 
 ja:
   - name: About CircleCI
