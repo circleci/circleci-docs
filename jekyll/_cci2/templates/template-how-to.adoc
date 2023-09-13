@@ -58,7 +58,7 @@ This is the first subsection in the how-to guide. List any prerequisites that th
 * Roles and permissions
 * Skills/knowledge
 // This renders as a nested item
-** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:https://circleci.com/docs/parallelism-faster-jobs#[Test splitting and parallelism] page."
+** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:../parallelism-faster-jobs#[Test splitting and parallelism] page."
 * Any other dependencies
 
 Sometimes, there may be topics to know or tasks to complete that are _helpful_ in order to successfully finish the how-to guide, but do not necessarily have a negative impact on the user's flow if they only do those as they go along. For example, you may include generating an API token in the how-to steps itself, rather than listing it as a strict prerequisite. Use your best judgment to decide whether to add such a requirement as a prerequisite or as a step that is part of the how-to.
@@ -80,8 +80,8 @@ In a how-to guide, you might walk the reader through an example scenario. Exampl
 
 Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
 
-* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
-* Otherwise, consider using lowercase letters. (As an example, see xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests]) 
+* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:../manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
+* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests]) 
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 
