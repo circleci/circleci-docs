@@ -180,52 +180,6 @@ shallow | An optional boolean parameter that may be sent to improve performance 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?limit=20&offset=5&filter=completed -H "Circle-Token: <circle-token>"
 ```
 
-**Note:** You can narrow the jobs to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
-
-```json
-[ {
-  "vcs_url" : "https://github.com/circleci/mongofinil",
-  "build_url" : "https://circleci.com/gh/circleci/mongofinil/22",
-  "build_num" : 22,
-  "branch" : "master",
-  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
-  "committer_name" : "Allen Rohner",
-  "committer_email" : "arohner@gmail.com",
-  "subject" : "Don't explode when the system clock shifts backwards",
-  "body" : "", // commit message body
-  "why" : "github", // short string explaining the reason we built
-  "dont_build" : null, // reason why we didn't build, if we didn't build
-  "queued_at" : "2013-02-12T21:33:30Z" // time the job was queued
-  "start_time" : "2013-02-12T21:33:38Z", // time the job started running
-  "stop_time" : "2013-02-12T21:34:01Z", // time the job finished running
-  "build_time_millis" : 23505,
-  "username" : "circleci",
-  "reponame" : "mongofinil",
-  "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
-  "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
-  "retry_of" : null, // build_num of the job that this is a retry of
-  "previous" : { // previous job
-    "status" : "failed",
-    "build_num" : 21
-  }, ... ]
-```
-
-**`GET` Request:** Returns a job summary for each of the last 30 job runs for a single project, ordered by build_num.
-
-**Parameter** | **Description**
-------- | -------------
-limit | The number of jobs to return. Maximum 100, defaults to 30.
-offset | The API returns jobs starting from this offset, defaults to 0.
-filter | Restricts which jobs are returned. Set to "completed", "successful", "failed", "running", or defaults to no filter.
-shallow | An optional boolean value that may be sent to improve overall performance if set to 'true.'
-
-### Improving Performance In Recent Job Requests Using the `Shallow` Parameter
-
-When making API requests for information about recent job runs, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
-
-#### Sample Request Using the `Shallow` Parameter
-
 ```json
 [{
 	"committer_date": "2019-04-12T10:44:51-07:00",
@@ -280,5 +234,55 @@ When making API requests for information about recent job runs, you may experien
 	"author_email": "trevor@circleci.com"
 }]
 ```
+
+**`GET` Request:** Returns a job summary for each of the last 30 job runs for a single project, ordered by `build_num`.
+
+**Parameter** | **Description**
+------- | -------------
+limit | The number of jobs to return. Maximum 100, defaults to 30.
+offset | The API returns jobs starting from this offset, defaults to 0.
+filter | Restricts which jobs are returned. Set to "completed", "successful", "failed", "running", or defaults to no filter.
+shallow | An optional boolean value that may be sent to improve overall performance if set to 'true.'
+
+**Note:** You can narrow the jobs to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
+
+### Improving Performance In Recent Job Requests Using the `Shallow` Parameter
+
+When making API requests for information about recent job runs, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
+
+```sh
+curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
+```
+
+```json
+[ {
+  "vcs_url" : "https://github.com/circleci/mongofinil",
+  "build_url" : "https://circleci.com/gh/circleci/mongofinil/22",
+  "build_num" : 22,
+  "branch" : "master",
+  "vcs_revision" : "1d231626ba1d2838e599c5c598d28e2306ad4e48",
+  "committer_name" : "Allen Rohner",
+  "committer_email" : "arohner@gmail.com",
+  "subject" : "Don't explode when the system clock shifts backwards",
+  "body" : "", // commit message body
+  "why" : "github", // short string explaining the reason we built
+  "dont_build" : null, // reason why we didn't build, if we didn't build
+  "queued_at" : "2013-02-12T21:33:30Z" // time the job was queued
+  "start_time" : "2013-02-12T21:33:38Z", // time the job started running
+  "stop_time" : "2013-02-12T21:34:01Z", // time the job finished running
+  "build_time_millis" : 23505,
+  "username" : "circleci",
+  "reponame" : "mongofinil",
+  "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
+  "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
+  "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
+  "retry_of" : null, // build_num of the job that this is a retry of
+  "previous" : { // previous job
+    "status" : "failed",
+    "build_num" : 21
+  }, ... ]
+```
+
+#### Sample Request Using the `Shallow` Parameter
 
 The example to the right shows a user request for recent job information. Notice that when the user passes the `shallow` parameter, a limited set of information is returned, thereby improving response time and minimizing performance lag.

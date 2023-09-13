@@ -393,7 +393,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
   }
 ```
 
-**`POST` Request:** Triggers a job of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.
+**`POST` Request:** Triggers a pipeline of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.
 
 
 <aside class="notice">
