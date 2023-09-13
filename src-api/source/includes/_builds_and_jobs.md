@@ -130,7 +130,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:org_name/:project/
 }
 ```
 
-**`POST` Request:** Retries the job and then returns a summary of the new job.
+**`POST` Request:** Retries the job and then returns a summary of the new job run.
 
 ## Add User to Job
 
@@ -184,7 +184,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 ```
 
 
-**`POST` Request:** Cancels the job and then returns a summary of the job.
+**`POST` Request:** Cancels the job and then returns a summary of the job run.
 
 ## Trigger a new Job
 ```sh
@@ -271,7 +271,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
 }
 ```
 
-**`POST` Request:** Triggers a new job and then returns a summary of the job.
+**`POST` Request:** Triggers a new job and then returns a summary of the job run.
 
 **Parameter** | **Description**
 ------- | -------------
@@ -367,7 +367,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 }
 ```
 
-**`POST` Request:** Triggers a new job and then returns a summary of the job.
+**`POST` Request:** Triggers a new job and then returns a summary of the job run.
 
 <aside class="notice">
 For more about build parameters, refer to the guide for <a href="https://circleci.com/docs/inject-environment-variables-with-api/#api-v1">injecting environment variables with API v1</a>. The response for “failed” should be a boolean `true` or `null`.
@@ -397,7 +397,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 
 
 <aside class="notice">
-Prerequisite: You must go to your Project Settings in the CircleCI app and enable pipelines. This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.
+<strong>Note:</strong> This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.
 This also means that this endpoint is not available for CircleCI Server.
 </aside>
 

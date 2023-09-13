@@ -164,12 +164,12 @@ curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
 
 Request Type: `GET`
 
-Returns a job summary for each of the last 30 recent jobs, ordered by `build_num`.
+Returns a job summary for each of the last 30 recent job runs, ordered by `build_num`.
 
 **Parameter** | **Description**
 ------- | -------------
-limit | The number of jobs to return. Maximum 100, defaults to 30.
-offset | The API returns jobs starting from this offset, defaults to 0.
+limit | The number of job runs to return. Maximum 100, defaults to 30.
+offset | The API returns job runs starting from this offset, defaults to 0.
 shallow | An optional boolean parameter that may be sent to improve performance if set to 'true'.
 
 **Note**: When making an API request for Project information, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
@@ -180,13 +180,7 @@ shallow | An optional boolean parameter that may be sent to improve performance 
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?limit=20&offset=5&filter=completed -H "Circle-Token: <circle-token>"
 ```
 
->**Note:** You can narrow the jobs to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
-
->Example: 
-
-```sh
-curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
-```
+**Note:** You can narrow the jobs to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
 
 ```json
 [ {
@@ -217,7 +211,7 @@ curl https://circleci.com/api/v1.1/recent-builds?limit=1&shallow=true
   }, ... ]
 ```
 
-**`GET` Request:** Returns a job summary for each of the last 30 jobs for a single git repo, ordered by build_num.
+**`GET` Request:** Returns a job summary for each of the last 30 job runs for a single project, ordered by build_num.
 
 **Parameter** | **Description**
 ------- | -------------
@@ -228,9 +222,7 @@ shallow | An optional boolean value that may be sent to improve overall performa
 
 ### Improving Performance In Recent Job Requests Using the `Shallow` Parameter
 
-When making API requests for information about recent jobs, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
-
-The example to the right shows a user request for recent job information. Notice that when the user passes the `shallow` parameter, a limited set of information is returned, thereby improving response time and minimizing performance lag.
+When making API requests for information about recent job runs, you may experience performance lag and a decrease in overall performance while the request is being processed by the server. To improve performance, CircleCI recommends you pass the `shallow` parameter in your request.
 
 #### Sample Request Using the `Shallow` Parameter
 
@@ -288,3 +280,5 @@ The example to the right shows a user request for recent job information. Notice
 	"author_email": "trevor@circleci.com"
 }]
 ```
+
+The example to the right shows a user request for recent job information. Notice that when the user passes the `shallow` parameter, a limited set of information is returned, thereby improving response time and minimizing performance lag.

@@ -87,10 +87,10 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 ------- | -------------
 /me | Provides information about the signed in user.
 /projects | Lists all projects you are following on CircleCI, with job information organized by branch.
- /project/:vcs-type/:username/:project | Returns a summary for each of the last 30 jobs for a single project.
-/recent-builds | Returns a summary for each of the last 30 recent jobs, ordered by build\_num.
-/project/:vcs-type/:username/:project/:build_num | Returns full details for a single job. The response includes all of the fields from the job summary. This is also the payload for the [notification webhooks](https://circleci.com/docs/configuration-reference/#notify), in which case this object is the value to a key named ‘payload’.
-/project/:vcs-type/:username/:project/:build_num/artifacts | Lists the artifacts produced by a given bjob.
+ /project/:vcs-type/:username/:project | Returns a summary for each of the last 30 job runs for a single project.
+/recent-builds | Returns a summary for each of the last 30 recent job runs, ordered by build\_num.
+/project/:vcs-type/:username/:project/:build_num | Returns full details for a single job run. The response includes all of the fields from the job summary. This is also the payload for the [notification webhooks](https://circleci.com/docs/configuration-reference/#notify), in which case this object is the value to a key named ‘payload’.
+/project/:vcs-type/:username/:project/:build_num/artifacts | Lists the artifacts produced by a given job run.
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Retrieves a checkout key.
 
 ### POST Requests
@@ -98,10 +98,10 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 **API** | **Description**
 ------- | -------------
 /project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI.
-/project/:vcs-type/:org_name/:project/:build\_num/retry | Retries the job, returns a summary of the new job.
-/project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the job, returns a summary of the job.
+/project/:vcs-type/:org_name/:project/:build\_num/retry | Retries the job, returns a summary of the new job run.
+/project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the job, returns a summary of the job run.
 /project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the job's SSH permissions.
-/project/:vcs-type/:username/:project/tree/:branch | Triggers a new job, returns a summary of the job. Optional [build parameters](https://circleci.com/docs/inject-environment-variables-with-api/#api-v1) can be set.
+/project/:vcs-type/:username/:project/tree/:branch | Triggers a new job, returns a summary of the job run. Optional [build parameters](https://circleci.com/docs/inject-environment-variables-with-api/#api-v1) can be set.
 /project/:vcs-type/:username/:project/ssh-key | Creates an SSH key used to access external systems that require SSH key-based authentication.
 /project/:vcs-type/:username/:project/checkout-key | Creates a new checkout key.
 

@@ -43,7 +43,7 @@ curl -L https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wg
 an HTTP `3xx` status code (the `-L` switch in `curl` will achieve this).
 * `:token` is an API token with 'view-builds' scope.
 
-## Artifacts of the latest Job
+## Artifacts of the latest Job run
 
 ```sh
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?branch=:branch&filter=:filter -H "Circle-Token: <circle-token>"
@@ -63,13 +63,13 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/a
 } ]
 ```
 
-Returns an array of artifacts produced by the latest job on a given branch.
+Returns an array of artifacts produced by the latest job run on a given branch.
 
 Request Type: `GET`
 
 **Parameter** | **Description**
 ------- | -------------
-branch | The branch you would like to look in for the latest job. Returns artifacts for latest job in entire project if omitted.
+branch | The branch you would like to look in for the latest job run. Returns artifacts for latest job run in entire project if omitted.
 filter | Restricts which jobs are returned. Set to "completed", "successful", "failed", "running", or defaults to no filter.
 
 
