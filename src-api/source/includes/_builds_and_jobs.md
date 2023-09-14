@@ -187,8 +187,10 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 **`POST` Request:** Cancels the job and then returns a summary of the job run.
 
 ## Trigger a new Job
+
 ```sh
 curl -X POST --header "Content-Type: application/json" -H "Circle-Token: <circle-token>" -d '{
+  "job": "deploy-preview"
   "tag": "v0.1", // optional
   "parallel": 2, //optional, default null
   "build_parameters": { // optional
@@ -253,7 +255,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
   },
   "subject": "Merge pull request #15 from circleci/minor-version-bump",
   "messages": [],
-  "job_name": null,
+  "job_name": "my-new-job",
   "retry_of": null,
   "previous_successful_build": {
     "build_num": 53,
@@ -275,6 +277,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
 
 **Parameter** | **Description**
 ------- | -------------
+job | Name of job. If not provided, defaults to a job named "build".
 revision | The specific revision to build. Default is null and the head of the branch is used. Cannot be used with tag parameter.
 tag | The tag to build. Default is null. Cannot be used with revision parameter.
 build_parameters | Additional environment variables to inject into the job environment. A map of names to values.
