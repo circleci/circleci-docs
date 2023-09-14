@@ -20,6 +20,8 @@ The VS Code extension includes:
 - The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
 - The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
 
+NOTE: Currently only the **Config Helper** is available for GitLab and GitHub App projects. To find out if you authenticated through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
 [#install-the-vs-code-extension]
 == Install the VS Code extension
 
@@ -69,6 +71,8 @@ Expanding a job also lets you:
 
 [#re-run-with-ssh]
 === Re-run with SSH
+
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects.
 
 There are two ways to re-run jobs with SSH directly from VS Code:
 

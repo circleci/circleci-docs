@@ -82,7 +82,7 @@ Below is a break down of what is happening during this build’s execution:
 ### Resource classes
 {: #resource-classes}
 
-**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**. For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Resource classes page](https://circleci.com/product/features/resource-classes/).
 {: class="alert alert-caution"}
 
 The resource class for the remote Docker environment is determined by the configuration of the primary container.

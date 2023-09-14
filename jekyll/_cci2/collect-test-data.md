@@ -89,6 +89,10 @@ For information on viewing your storage usage, and calculating your monthly stor
 
 ## Test Insights
 {: #test-insights }
+
+The test Insights feature is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 See the [Test Insights](/docs/insights-tests/) page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
 
@@ -162,6 +166,7 @@ steps:
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
         JEST_JUNIT_OUTPUT_DIR: ./reports/
+        JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
   - store_test_results:
       path: ./reports/
 ```
