@@ -4,17 +4,17 @@ contentTags:
     - Server v4.2
     - Server Admin
 ---
-= CircleCI server v4.x FAQ
+= CircleCI server v4.2 FAQ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find answers about the CircleCI server v4.x data retention policy, what control is granted over Nomad certificates
+:page-description: Find answers about the CircleCI server v4.2 data retention policy, what control is granted over Nomad certificates
 :icons: font
 :toc: macro
 :toc-title:
 
 toc::[]
 
-## Does server 4.x have a data retention policy?
+## Does server v4.2 have a data retention policy?
 We do not currently support a defined data retention policy. Data is stored indefinitely on server.
 
 ## What control is granted over Nomad certificates?
