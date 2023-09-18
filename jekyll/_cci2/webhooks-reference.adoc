@@ -227,7 +227,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab or GitHub Apps. For parameters available for for GitHub OAuth app and Bitbucket integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab or GitHub Apps. For parameters available for GitHub OAuth app and Bitbucket integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
