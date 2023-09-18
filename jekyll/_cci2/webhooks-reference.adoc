@@ -227,7 +227,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-Data associated to the pipeline. Present for pipelines associated with GitLab. See <<#vcs>> below for GitHub and Bitbucket.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab or GitHub Apps. For parameters available for for GitHub OAuth app and Bitbucket integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -246,7 +246,7 @@ Data associated to the pipeline. Present for pipelines associated with GitLab. S
 
 | gitlab
 | no
-| A map present when the pipeline is associated with a GitLab trigger
+| A map present when the pipeline is associated with a GitLab or GitHub App trigger
 |===
 
 [#circleci]
@@ -279,7 +279,8 @@ Data associated to the pipeline. Present for pipelines associated with GitLab. S
 [#vcs]
 === VCS
 
-NOTE: The VCS map and its contents are always present for GitHub and Bitbucket projects, but not for GitLab projects. See <<#trigger-parameters,trigger parameters>> above for GitLab parameters.
+NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket projects, but not for GitLab or GitHub App projects. See <<#trigger-parameters,trigger parameters>> above for GitLab and GitHub App parameters.  To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
+
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -344,8 +345,10 @@ NOTE: The VCS map and its contents are always present for GitHub and Bitbucket p
 [#sample-webhook-payloads]
 == Sample webhook payloads
 
+NOTE: To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
+
 [#workflow-completed-for-github-and-bitbucket]
-=== workflow-completed for GitHub and Bitbucket
+=== workflow-completed for GitHub OAuth and Bitbucket
 
 ```json
 {
@@ -406,7 +409,7 @@ NOTE: The VCS map and its contents are always present for GitHub and Bitbucket p
 ```
 
 [#job-completed-for-github-and-bitbucket]
-=== job-completed for GitHub and Bitbucket
+=== job-completed for GitHub OAuth and Bitbucket
 
 ```json
 {
@@ -474,7 +477,7 @@ NOTE: The VCS map and its contents are always present for GitHub and Bitbucket p
 ```
 
 [#workflow-completed-gitlab]
-=== workflow-completed for GitLab
+=== workflow-completed for GitLab and GitHub App
 
 ```json
 {
@@ -550,7 +553,7 @@ NOTE: The VCS map and its contents are always present for GitHub and Bitbucket p
 ```
 
 [#job-completed-gitlab]
-=== job-completed for GitLab
+=== job-completed for GitLab and GitHub App
 
 ```json
 {
