@@ -9,7 +9,7 @@ plan:
 - Scale
 ---
 
-{% include snippets/linux-cuda-deprecation-notice.md %}
+{% include snippets/linux-cuda-deprecation-brownout.md %}
 
 You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to Nvidia GPUs for specialized workloads.
 
