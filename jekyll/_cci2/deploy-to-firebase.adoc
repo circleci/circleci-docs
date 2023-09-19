@@ -36,6 +36,8 @@ Then, link:https://cloud.google.com/docs/authentication/provide-credentials-adc#
 
 {% include snippets/env-var-or-context.adoc %}
 
+NOTE: Review the link:https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys[Google IAM documentation] for best practices in managing service account keys. 
+
 [#add-token-to-project-env-vars]
 == 3. Declare environment variable inside `run` step
 
