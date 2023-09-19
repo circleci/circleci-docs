@@ -2,18 +2,16 @@
 layout: classic-docs
 title: "Build open source projects"
 description: "Best practices for building open source projects"
+contentTags:
+  platform:
+  - Cloud
 ---
-
-## Introduction
-{: #introduction }
 
 This document provides tips and best practices for building your open source project on CircleCI.
 
-To support the open source community, organizations on GitHub or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
+## Credits for open source projects
 
-**Notes:**
-* If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
-* Open-source credit availability and limits will not be visible in the UI.
+See the [Using Credits](/docs/credits/#open-source-credit-usage) page for up-to-date information on free credits available for open source projects
 
 ## Security
 {: #security }
@@ -47,7 +45,7 @@ The ability to override the **Only build pull requests** setting is also support
 
 Currently, the only way to override the **Only build pull requests** setting is to open a support request at [https://support.circleci.com/](https://support.circleci.com/). In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our [ideas forum](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests).
 
-Enabling **Only build pull requests** may result in duplicate builds. You can find troubleshooting steps in this [support article](https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push). 
+Enabling **Only build pull requests** may result in duplicate builds. You can find troubleshooting steps in this [support article](https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push).
 
 CircleCI will build all commits from your project's *default branch and tags* regardless of any setting.
 {: class="alert alert-info" }
@@ -111,7 +109,6 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[React](https://github.com/facebook/react)** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools).
 - **[React Native](https://github.com/facebook/react-native/)** - Build native mobile apps using JavaScript and React.
 - **[Flow](https://github.com/facebook/flow/)** - Adds static typing to JavaScript to improve developer productivity and code quality.
-- **[Vue](https://github.com/vuejs/vue)** -  Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 - **[Storybook](https://github.com/storybookjs/storybook)** - Interactive UI component dev & test: React, React Native, Vue, Angular, Ember.
 - **[Electron](https://github.com/electron/electron)** - Build cross-platform desktop apps with JavaScript, HTML, and CSS.
 - **[Angular](https://github.com/angular/angular)** - Framework for building browser and desktop web applications.
@@ -119,7 +116,6 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[PyTorch](https://github.com/pytorch/pytorch)** - Data manipulation and Machine Learning platform.
 - **[Calypso](https://github.com/Automattic/wp-calypso)** - The next generation webapp powering WordPress.com.
 - **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
-- **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
 ## See also
 
