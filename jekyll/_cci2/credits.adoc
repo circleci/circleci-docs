@@ -43,7 +43,7 @@ Properly managing network and storage usage can potentially lower the amount of 
 [#open-source-credit-usage]
 == Open source credit usage
 
-NOTE: Open source credits for the Free plan are not currently available for GitLab and GitHub App integrations. To find out which GitHub account typer you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Open source credits for the Free plan are not currently available for GitLab and GitHub App integrations. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
 Organizations on our Free plan can use up to 400,000 credits per month, for free, for Linux open source builds. Using our Free plan and keeping your repository public will enable this for you. Open-source credit availability and limits are not visible in the CircleCI web app.
 
