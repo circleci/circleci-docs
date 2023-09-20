@@ -11,3 +11,7 @@ exceptions:
   - ABC
   - ADD
   - API
+  - YAML
+  - SSH
+  - CLI
+  - URL

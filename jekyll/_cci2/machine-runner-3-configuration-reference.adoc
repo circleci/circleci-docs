@@ -2,20 +2,18 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.3
 ---
-= Machine runner (3.0) configuration reference
+= Machine runner 3.0 configuration reference - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:experimental:ß
+:experimental:
 
-[#self-hosted-runner-configuration-reference]
-== Machine runner (3.0) configuration reference
+NOTE: Machine runner 3.0 is currently in open preview
 
-A YAML file is used to configure the machine runner, how it communicates with CircleCI's servers, and how it will launch the task-agent.
+A YAML file is used to configure the machine runner, how it communicates with CircleCI's servers, and how it will launch the task-agent. This page explains all available parameters.
 
-The configuration file uses the following format with the various parameters explained in more detail below, and is by default located at `/etc/circleci-runner/circleci-runner-config.yaml` on linux machines.
+The configuration file uses the following format with the various parameters explained in more detail below, and is by default located at `/etc/circleci-runner/circleci-runner-config.yaml` on Linux machines.
 
 ```yaml
 api:
@@ -64,7 +62,7 @@ api:
 === logging.level
 `$CIRCLECI_RUNNER_LOGGING_LEVEL`
 
-This sets the logging level for the circleci-runner service. The logging level defaults to `info`.
+This sets the logging level for the `circleci-runner` service. The logging level defaults to `info`.
 
 Example:
 
@@ -78,7 +76,7 @@ logging:
 === logging.format
 `$CIRCLECI_RUNNER_LOGGING_FORMAT`
 
-This sets the logging format for the circleci-runner service used for stderr and file logging. The logging format defaults to `color`.
+This sets the logging format for the `circleci-runner` service used for stderr and file logging. The logging format defaults to `color`.
 
 Example:
 
@@ -106,7 +104,7 @@ logging:
 === runner.task-agent-directory
 `$CIRCLECI_RUNNER_TASK_AGENT_DIRECTORY`
 
-This parameter accepts the path to the directory of the circleci-runner task agent binary and defaults to `~/.local/bin`.
+This parameter accepts the path to the directory of the `circleci-runner` task agent binary and defaults to `~/.local/bin`.
 
 ```yaml
 runner:
@@ -260,7 +258,7 @@ Draining can end in one of two ways:
 === runner.idle_timeout
 `$CIRCLECI_RUNNER_IDLE_TIMEOUT`
 
-This timeout will enable a machine runner to terminate if no task has been claimed within the given time period. The value is a string with the following unit identifiers: `h`, `m` or `s` for hours, minutes, and seconds respectively (e.g., `5m` is 5 minutes).
+This timeout will enable a machine runner to terminate if no task has been claimed within the given time period. The value is a string with the following unit identifiers: `h`, `m` or `s` for hours, minutes, and seconds respectively (for example, `5m` is 5 minutes).
 
 NOTE: The default behaviour is to never time out due to inactivity.
 
@@ -324,4 +322,4 @@ jobs:
       - run: echo "Hi I'm on Runners!"
 ```
 
-The job will then execute using your self-hosted runner when you push the config to your VCS provider.
+The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
