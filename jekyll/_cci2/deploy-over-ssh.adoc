@@ -60,7 +60,7 @@ jobs:
         - run:
             name: Deploy Over SSH
             command: |
-            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+              ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
 
 workflows:
     build-and-deploy:
