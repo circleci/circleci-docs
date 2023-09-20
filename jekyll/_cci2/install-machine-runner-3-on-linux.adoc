@@ -2,7 +2,6 @@
 contentTags:
   platform:
   - Cloud
-  - Server v3.x
 ---
 = Install machine runner 3.0 on Linux - Open preview
 :page-layout: classic-docs
