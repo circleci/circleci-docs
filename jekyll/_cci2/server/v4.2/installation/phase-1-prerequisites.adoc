@@ -14,7 +14,7 @@ contentTags:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.2 overview].
+CircleCI server v4.2 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.2 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -463,7 +463,7 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 
 [#object-storage-and-permissions]
 == 7. Object storage and permissions
-CircleCI server v4.x hosts build artifacts, test results, and other state object storage. The following storage options are supported:
+CircleCI server v4.2 hosts build artifacts, test results, and other state object storage. The following storage options are supported:
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 

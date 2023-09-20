@@ -1,0 +1,184 @@
+---
+# These platform content tags control the tags that appear at the top of the docs page. Use them to show the reader which CircleCI platforms support the feature or task you are writing about
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+// The page title for a how-to guide should be concise yet descriptive. It immediately tells the reader at a glance what will be accomplished.
+= Page title
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A short page description goes here
+:icons: font
+:experimental:
+
+////
+Some notes on attributes
+
+:page-liquid: - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
+
+:icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
+
+:experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
+
+////
+
+[NOTE]
+====
+This template will help you create a new docs page that shows the reader how to carry out a task and accomplish a specific goal with CircleCI. Content templates help you to:
+
+* Develop new content quickly
+* Ensure your page conforms to the style guide
+
+To use this template, make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-how-to.adoc?plain=1[here]. There is additional detail in the comments.
+
+Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
+====
+
+In a how-to guide, include one or two opening paragraphs. The opening paragraph should be used to briefly describe to the reader what the reader will do using this guide, and what the outcomes are when they successfully finish the task. The information in the opening paragraph should help answer the following questions for the reader:
+
+* "What’s in it for me?"
+* "How does this feature / task help me create more value?"
+
+TIP: Since the reader will usually want to quickly get to the task at hand, keep the introduction succinct.
+
+TIP: Consider providing a link to an xref:template-conceptual#[overview or conceptual doc], should the reader be interested in more explanatory or background information regarding the feature or task.
+
+[#prerequisites]
+== Prerequisites
+
+This is the first subsection in the how-to guide. List any prerequisites that the reader needs to have already met in order for them to successfully complete the task. These may include:
+
+// The following will render as an unordered (bullet) list
+
+* Completing a certain task, such as signing up for a CircleCI account and having at least one project building in CircleCI
+* CircleCI plan
+* Roles and permissions
+* Skills/knowledge
+// This renders as a nested item
+** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:../parallelism-faster-jobs#[Test splitting and parallelism] page."
+* Any other dependencies
+
+Sometimes, there may be topics to know or tasks to complete that are _helpful_ in order to successfully finish the how-to guide, but do not necessarily have a negative impact on the user's flow if they only do those as they go along. For example, you may include generating an API token in the how-to steps itself, rather than listing it as a strict prerequisite. Use your best judgment to decide whether to add such a requirement as a prerequisite or as a step that is part of the how-to.
+
+// The section headings in which you outline the steps should be in an active voice
+[#carry-out-the-task]
+== 1. Carry out the task
+
+The main body of the guide should be broken into logical steps, with headings for each step. The steps should guide the reader through using the feature. 
+
+Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
+
+
+
+In a how-to guide, you might walk the reader through an example scenario. Examples should be based on real-world use cases as much as possible and address business objectives.
+
+[#this-is-a-subsection-title]
+=== 1. This is a subsection title
+
+Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
+
+* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:../manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
+* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests]) 
+
+Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
+
+* Item 1
+* Item 2
+* Item 3
+
+[#using-tables]
+=== 2. Using tables
+
+This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Header text column 1
+|Header text column 2
+|Header text column 3
+
+|Text for row 1 column 1
+|Text for row 1 column 2
+|Text for row 1 column 3
+|===
+
+For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
+
+[#links-and-cross-references]
+=== 3. Links and cross references
+
+To link out to content outside of the docs use a link:
+
+link:https://circleci.com/[CircleCI website]
+
+To link to another page within the docs use a cross reference:
+
+xref:../about-circleci#[About CircleCI]
+
+Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
+
+xref:../about-circleci#learn-more[About CircleCI]
+
+[#code-examples]
+=== 4. Code examples
+
+Whenever possible, the how-to guide should provide examples that cover our users' link:https://circleci.com/blog/devops-language-trends-2023[most widely used languages and frameworks], unless the guide itself is specific to a particular language, platform, or framework.
+
+Use AsciiDoc source blocks for code examples:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: The Second Step
+          command: |
+            ls -al
+            echo '^^^The files in your repo^^^'
+----
+
+[#banners]
+=== 5. Banners
+
+In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+
+NOTE: **Need to add a note?** This is how to do it
+
+CAUTION: **Need to add a caution?** This is how to do it
+
+WARNING: **Need to add a warning?** This is how to do it
+
+We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
+
+For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+[#the-second-step]
+== 2. The second step
+
+Each main step in the how-to guide should be under its own level 2 (`==`) heading, using the numbered list format.
+
+[#conclusion]
+== Conclusion
+
+End the guide with a conclusion section that summarizes what was covered.
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]

@@ -16,6 +16,6 @@ CircleCI typically collects usage data, such as logs and other aggregated data, 
 
 [#current-data-collected]
 == Current data collected
-Currently, server v4.x does not include the data collection service. The service will be included in a future release.
+Currently, server v4.2 does not include the data collection service. The service will be included in a future release.
 
 With any release, we will communicate what additional data will be collected.

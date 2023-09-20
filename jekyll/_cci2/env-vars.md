@@ -170,6 +170,9 @@ For more information, read the documentation on [using the parameters declaratio
 
 Another possible method to interpolate values into your configuration is to use a `run` step to export environment variables to `BASH_ENV`, as shown below.
 
+The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
+{: class="alert alert-info"}
+
 ```yaml
 steps:
   - run:
@@ -180,9 +183,6 @@ steps:
 ```
 
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run, allowing you to use interpolation and share environment variables across `run` steps.
-
-The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
-{: class="alert alert-info"}
 
 ### Environment variable substitution
 {: #environment-variable-substitution }
