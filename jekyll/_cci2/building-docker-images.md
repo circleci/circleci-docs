@@ -26,7 +26,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-          version: 20.10.14
+          version: current
 ```
 
 When `setup_remote_docker` executes, any Docker-related commands you use will be executed locally on the virtual machine used to spin up containers for your job.
@@ -61,7 +61,7 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
-          version: 20.10.14
+          version: current
           docker_layer_caching: true
 
       # build and push Docker image
@@ -112,33 +112,22 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 ```yml
       - setup_remote_docker:
-          version: 20.10.11
+          version: edge
 ```
 
-CircleCI supports multiple versions of Docker.
+CircleCI supports multiple tags for Remote Docker, as per our [Remote Docker tagging policy]({{site.baseurl}}/remote-docker-images-support-policy/#tagging).
 
-For **x86** architecture, the following versions are available:
+For **x86** and **arm** architecture, the following tags are available:
 
-- `20.10.24`
-- `20.10.23` (default)
-- `20.10.18`
-- `20.10.17`
-- `20.10.14`
-- `20.10.12`
-- `20.10.11`
-- `20.10.7`
-- `20.10.6`
-- `20.10.2`
-- `19.03.13`
-
-For **Arm**, the following versions are supported:
-
-- `default`
 - `edge`
+- `current` (default)
+- `previous`
 
-<!---
-Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
---->
+The above tags currently resolve to image versions within the Docker 24 release.
+
+To use Docker 23, the previous Docker release, use the following tag:
+
+- `docker23`
 
 The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 {: class="alert alert-info"}
