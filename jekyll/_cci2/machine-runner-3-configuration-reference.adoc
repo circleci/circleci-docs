@@ -55,7 +55,7 @@ api:
 === runner.name
 `$CIRCLECI_RUNNER_NAME`
 
-`RUNNER_NAME` is a unique name of your choosing assigned to this particular machine runner. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
+`RUNNER_NAME` is a unique name of your choosing assigned to this particular machine runner. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app. The only special characters accepted in `RUNNER_NAME` are `. () - _`.
 
 
 [#logging-level]
@@ -90,7 +90,7 @@ logging:
 === logging.file
 `$CIRCLECI_RUNNER_LOGGING_FILE`
 
-This controls the file where the machine runner launch-agent and task-agent logs will go. See xref:runner-concepts.adoc#task-agent[CircleCI concepts] for more information on launch-agents and task-agents.
+This controls the file where the machine runner launch-agent and task-agent logs will go. See xref:runner-concepts.adoc#task-agent[Runner concepts] for more information on launch-agents and task-agents.
 
 Example:
 
@@ -130,8 +130,8 @@ The prefix can also be a custom script. The arguments passed to the script will 
 
 The custom script must:
 
-1. Take great care to ensure the task-agent (that is, the arguments passed to it) runs
-2. Forward the exit code from task-agent as its own exit code
+* Take great care to ensure the task-agent (that is, the arguments passed to it) runs
+* Forward the exit code from task-agent as its own exit code
 
 Example script saved as `/var/opt/circleci/wrapper.sh`:
 
@@ -146,7 +146,7 @@ echo "CircleCI task agent finished."
 exit $exit
 ```
 
-Config snippet for above example:
+Here is the configuration snippet for the example above:
 
 ```yaml
 runner:
@@ -245,14 +245,14 @@ runner:
 [#customizing-job-timeouts-and-drain-timeouts]
 ==== Customizing job timeouts and drain timeouts
 
-If you would like to customize the job timeout setting, you can “drain” the job by sending the machine runner a termination (TERM) signal, which then causes the machine runner to attempt to gracefully shutdown. When this TERM signal is received, the machine runner enters “draining” mode, preventing the machine runner from accepting any new jobs, but still allowing any current active job to be completed. At the end of “draining,” the machine runner then signals the task-agent to cancel any active job (by sending it a TERM signal).
+If you would like to customize the job timeout setting, you can “drain” the job by sending the machine runner a termination (TERM) signal, which then causes the machine runner to attempt to gracefully shutdown. When this TERM signal is received, the machine runner enters _draining_ mode, preventing the machine runner from accepting any new jobs, but still allowing any current active job to be completed. At the end of _draining_, the machine runner then signals the task-agent to cancel any active job (by sending it a TERM signal).
 
 NOTE: If the task-agent does not exit a brief period after the TERM, the machine runner will manually kill it by sending it a KILL signal.
 
 Draining can end in one of two ways:
 
 * The task has been in the draining state for longer than the configured `max_run_time`
-* An additional TERM signal is received by the machine runner during “draining”
+* An additional TERM signal is received by the machine runner during _draining_
 
 [#runner-idle-timeout]
 === runner.idle_timeout
