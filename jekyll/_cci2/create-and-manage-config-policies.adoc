@@ -3,17 +3,17 @@ description: Learn how to write and manage config policies for CircleCI project 
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Create and manage config policies
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
-Follow the how-to guides on this page to learn how to create and use config policies.
+Follow the how-to guides on this page to manage, create, and use config policies.
 
 [#config-policy-management-enablement]
 == Enable or disable policy evaluation for an organization
@@ -54,37 +54,133 @@ Example output:
 
 {% include snippets/find-organization-id.adoc %}
 
-[#create-a-policy]
-== Create a policy
+[#manage-policies-with-your-vcs]
+== Manage policies with your VCS
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. There are various ways to manage your policies but here is a list of recommended best practices:
 
-Follow these steps to create a policy that checks the `version` of CircleCI config files to ensure it is greater than or equal to `2.1`.
+* Store your policies in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
 
-. Enable config policies for your organization
+* Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
+
+The rest on the steps in this section show how to set up a CI/CD pipeline to manage your policies.
+
+[#prerequisites]
+=== Prerequisites
+
+For the config policies pipeline recommended in this guide you will need to securely manage some environment variables:
+
+* `CIRCLECI_CLI_TOKEN` with the value of a personal API token to authenticate the CLI
+* `ORG_ID` with the value of the organization ID
+
+You can do this using a context. For more information about setting up and using contexts to securely manage environment variables see the xref:contexts#[Using contexts] page. You might already have a context set up for this or you might want to create a new one. For this example the context name `my-context` is used.
+
+. In the CircleCI web app, select **Organization settings > Contexts**
+. Click **Create Context** and enter a name for your context, for example `my-context`
+. Click your new context name in the list to access options
+. Click **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:local-cli#configuring-the-cli[Installting the CircleCI local CLI] page). Then click **Add Environment Variable** again to complete.
+. Click **Add Environment Variable** and enter `ORG_ID` for the environment variable name, and your organization ID for the value.
 +
-[source,shell]
-----
-circleci policy settings --enabled=true --owner-id <your-organization-ID>
-----
-+
-Example output:
-+
-[source,shell]
-----
-{
-  "enabled": true
-}
-----
+{% include snippets/find-organization-id.adoc %}
 
-. Create an empty directory to store your policies. For example:
+[set-up-a-config-policy-management-ci-pipeline]
+=== Set up a config policies CI/CD pipeline
+
+. Set up a repository in your VCS to manage policies. In this example the repo is called `config-policies`.
+
+. Make a local clone of your repo using your preferred method.
+
+. Create a directory in your new repo for your Rego policy files, for example:
 +
 [source,shell]
 ----
 mkdir ./config-policies
 ----
 
-. Inside your new directory create a Rego file for your new policy. Call it: `version.rego`.
+. Create a `.circleci/config.yml` file for your new policies repository, and copy and paste the config example below. This configuration pushes policies to CircleCI on commits to the `main` branch, and shows a diff of the policy bundle on commits to all other branches:
++
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  circleci-cli: circleci/circleci-cli@0.1.9 # Use orb to make the `circleci-cli/default` executor available for running jobs
+
+workflows:
+  main-workflow:
+    jobs:
+      - diff-policy-bundle:
+          context: my-context
+          filters:
+            branches:
+              ignore: main # on all branches other than main
+      - push-policy-bundle:
+          context: my-context
+          filters:
+            branches:
+              only: main # only on the main branch
+
+jobs:
+  diff-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Diff policy bundle
+          command: circleci policy diff ./config --owner-id $ORG_ID # show a diff of the policy bundle
+
+  push-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Push policy bundle
+          command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
+----
++
+Your file structure should now look something like:
++
+[source,shell]
+----
+.
+├── README.md
+├── .circleci
+    └── config.yml
+└── config-policies
+----
++
+[NOTE]
+====
+The context for each job is shown as `my-context`. This context name is arbitrary, but it must be active and declare the following environment variables:
+
+* `CIRCLECI_CLI_TOKEN` with the value of a personal API token to authenticate the CLI
+* `ORG_ID` with the value of the organization ID
+
+For setup steps see the <<prerequisites>> on this page.
+====
+
+[#create-a-policy]
+== Create a policy
+
+Once you have decided how to manage your policies, the next step is to create a policy. Follow the steps in this section to create a policy that checks the `version` of CircleCI config files to ensure `version` is greater than or equal to `2.1`.
+
+[#write-your-policy]
+=== 1. Write your policy
+
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+
+. <<config-policy-management-enablement,Enable config policies>> for your organization, if you have not already done so.
+
+. If you have followed the steps above to set up CI/CD for your config policies, you will already have a directly for storing your policies. If not, create an empty directory to store your policies. For example:
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+
+. Inside your new directory create a Rego file for your new policy. Call it, `version.rego`.
 
 . Add the following content to `version.rego`:
 +
@@ -113,17 +209,44 @@ check_version = reason {
 }
 ----
 
-. Upload your policy to your organization:
-+
+[#push-up-your-policy-bundle]
+=== 2. Push up your policy bundle
+
+You can now push your new policy to your organization for it to take effect. You have two options:
+
+* Push the policy manually using the CLI from your local environment
+* Push your changes to your config policy repo if you are managing policies via your VCS as shown <<manage-policies-with-your-vcs,above>>.
+
+[tab.allow.manual]
+--
+Create and upload the policy bundle using CircleCI CLI:
+
 [source,shell]
 ----
-circleci policy push ./config-policies --owner-id <your-organization-ID>
+circleci policy push ./config-policies –owner-id <your-organization-ID>
 ----
-+
+
+If the upload was successful, you will see something like the following:
+
+[source,shell]
+----
+{
+  “Created”: [“example”]
+}
+----
+--
+
+[tab.allow.push_to_vcs]
+--
+If you have set up your config policies repository with the sample configuration shown <<manage-policies-with-your-vcs,above>>, push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+
+You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+--
+
 Now, when a pipeline is triggered within your organization, the project's `.circleci/config.yml` will be validated against this policy.
 
 [#update-a-policy]
-=== Update a policy
+=== 3. Update your policy
 
 To illustrate making a change to an existing policy, suppose you made an error when creating the policy above. You realize that some project configurations in your organization are using CircleCI config version `2.0`, and you want your policy to reflect this.
 
@@ -137,79 +260,35 @@ To illustrate making a change to an existing policy, suppose you made an error w
 }
 ----
 
-. Push the policy directory containing the updated policy file using the CLI (verify the diff, and choose yes when prompted):
+. Push the policy directory containing the updated policy:
 +
+[tab.change.manual]
+--
+Create and upload the policy bundle using CircleCI CLI:
+
 [source,shell]
 ----
-circleci policy push ./config-policies --owner-id <your-organization-ID>
+circleci policy push ./config-policies –owner-id <your-organization-ID>
 ----
 
-[#manage-policies-with-your-vcs]
-== Manage policies with your VCS
+If the upload was successful, you will see something like the following:
 
-CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
-
-We recommend creating a bot account for pushing policies, and using its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
-
-[set-up-a-config-policy-management-ci-pipeline]
-=== Set up a config policies CI/CD pipeline
-
-. Set up repository in your VCS to manage policies.
-
-. Create a directory in your new repo for your Rego policy files, for example:
-+
 [source,shell]
 ----
-mkdir ./config-policies
+{
+  “Created”: [“example”]
+}
 ----
-
-. Create a `.circleci/config.yml` file for your new policies repository, and copy and paste the config example below. This example pushes policies to CircleCI on commits to the `main` branch, and shows a diff of the policy bundle on commits to all other branches:
+--
 +
-[NOTE]
-====
-The context for each job is shown as `<my-context>`. This context name is arbitrary, but it must be active and declare the following environment variables:
+[tab.change.push_to_vcs]
+--
+Push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
-* `CIRCLECI_CLI_TOKEN` with the value of a personal API token to authenticate the CLI
-* `ORG_ID` with the value of the organization ID
-====
-+
-[source,yaml]
-----
-version: 2.1
+You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+--
 
-orbs:
-  circleci-cli: circleci/circleci-cli@0.1.9 # Use orb to make the `circleci-cli/default` executor available for running jobs
+[#next-steps]
+== Next steps
 
-workflows:
-  main-workflow:
-    jobs:
-      - diff-policy-bundle:
-          context: <my-context>
-          filters:
-            branches:
-              ignore: main # on all branches other than main
-      - push-policy-bundle:
-          context: <my-context>
-          filters:
-            branches:
-              only: main # only on the main branch
-
-jobs:
-  diff-policy-bundle:
-    executor: circleci-cli/default
-    resource_class: small
-    steps:
-      - checkout
-      - run:
-          name: Diff policy bundle
-          command: circleci policy diff ./config --owner-id $ORG_ID # show a diff of the policy bundle
-
-  push-policy-bundle:
-    executor: circleci-cli/default
-    resource_class: small
-    steps:
-      - checkout
-      - run:
-          name: Push policy bundle
-          command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
-----
+If you would like to write tests for your policy, check out the xref:test-config-policies#[Test config policies] guide.

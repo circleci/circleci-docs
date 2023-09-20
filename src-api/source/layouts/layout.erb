@@ -833,7 +833,7 @@ end
       <div class="dark-box"></div>
       <div class="content">
         <div class="header-links">
-          <a class="content-link" target="_blank" href="https://circleci.com/docs/2.0">
+          <a class="content-link" target="_blank" href="https://circleci.com/docs/">
             Documentation
             <%= image_tag "new-window.svg", width: '90%',  class: 'new-window' %>
           </a>
@@ -842,6 +842,9 @@ end
             <%= image_tag "new-window.svg", width: '90%',  class: 'new-window' %>
           </a>
         </div>
+        <aside class="v2-banner notice">
+        API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users start with or migrate to API v2. To learn more about API v2, read our <a target="_blank" href="https://circleci.com/docs/api-developers-guide/">developer's guide</a> or the <a target="_blank" href="https://circleci.com/docs/api/v2/">reference docs</a>.  
+        </aside>
         <%= page_content %>
       </div>
       <div class="dark-box">

@@ -10,8 +10,7 @@ contentTags:
 :description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from TeamCity to CircleCI.
 

@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,15 +10,12 @@ contentTags:
 :page-liquid:
 :page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :icons: font
-:toc: macro
-:toc-title:
-
-{% include snippets/runner-1.0-deprecation-brownout.adoc %}
+:experimental:
 
 [#introduction]
 == Introduction
 
-CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
+CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment.
 
 You have the option of installing your self-hosted runner in a Kubernetes cluster using a container runner, or within a machine execution environment using a machine runner. The diagrams below illustrate how CircleCI's container runner and machine runner extend our existing systems.
 
@@ -37,7 +34,7 @@ image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 [#circleci-self-hosted-runner-operation]
 == CircleCI's self-hosted runner operation
 
-Once a CircleCI's self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. 
+Once a CircleCI's self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI.
 
 [#circleci-runner-use-cases]
 == CircleCI runner use cases
@@ -63,7 +60,7 @@ CircleCI offers two types of self-hosted runners: container and machine.
 CircleCI's self-hosted runner has historically executed each job using a one-to-one mapping between the CI job and a <<configuration-reference#machine,machine>> environment (virtual or physical) that has the self-hosted runner binary installed on it. Exclusively running jobs in this manner sacrifices several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
 
 * The ability to seamlessly use custom Docker images during job execution
-* Access to a consistent, clean containerized build environment with every job 
+* Access to a consistent, clean containerized build environment with every job
 
 Container runner is installed in a Kubernetes (k8s) cluster which enables you to run containerized jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
 

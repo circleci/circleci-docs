@@ -1,8 +1,7 @@
 = Style and voice
 :page-layout: classic-docs
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 == Talk confidently and directly
 Use an active voice, talk directly to the reader using simple, direct, clear and confident language. Using active voice helps us to keep instructions as short as possible, and is, in most cases, the quickest way to convey meaning to the reader
@@ -57,7 +56,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * Avoid semicolons and dashes (en or em) to split sentences. Instead, add a new sentence, or use commas and periods.
 * Do not use ampersands (&) as a substitute for the word "and". The ampersand is used in logical notation for the binary operator AND.
 * Do not put a period at the end of a sentence if the sentence ends with a URL, code sample or command. People are likely to copy and paste and could end up copying the period too.
-* We use the oxford comma. For example: “Please bring me a pencil, eraser, and notebook.” The comma after “eraser” is the oxford comma. 
+* We use the oxford comma. For example: “Please bring me a pencil, eraser, and notebook.” The comma after “eraser” is the oxford comma.
 
 == Numbers
 * Write out numbers one through nine, 10 and above use numerals. Some exceptions:
@@ -65,7 +64,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 ** Ages, even for inanimate objects: Beth, a 12-year-old turtle; the 2-year-old testing framework
 ** Dollars and cents: $5; 5 cents
 ** Measurements (such as dimensions and speed): 6 feet tall, 9-by-12 workspace; 7 miles per hour
-** Millions, billions: 3 million users 
+** Millions, billions: 3 million users
 
 == Grammar
 * "Login" and "Setup" are not verbs, they are nouns. Use as follows:

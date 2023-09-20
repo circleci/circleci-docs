@@ -20,7 +20,7 @@ This is a quickstart guide for integrating a Node.JS project with CircleCI. This
 {: #prerequisites}
 
 * [A CircleCI account]({{site.baseurl}}/first-steps/)
-* A Node.JS project located in a supported VCS (currently GitHub or Bitbucket)
+* A Node.JS project located in a supported VCS
 
 If you do not have a Node.JS project, but would like to follow this guide, you can use our sample project, which is [hosted on GitHub]({{site.gh_public_org_url}}/sample-javascript-cfd)
 and is [building on CircleCI]({{site.cci_public_org_url}}/sample-javascript-cfd). Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
@@ -136,7 +136,7 @@ jobs:
 ```
 
 Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project).
-{ class="alert alert-info" }
+{: class="alert alert-info" }
 
 ### 3. Create a workflow
 {: #create-a-workflow }
@@ -170,6 +170,9 @@ workflows:
 {: #conclusion }
 
 You just set up a Node.js app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
+
+**Deploy options?** For alternative deployment targets, search the [orb registry](https://circleci.com/developer/orbs), where you will find integrations such as [Kubernetes](https://circleci.com/developer/orbs/orb/circleci/kubernetes), [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs), [GCP GKE](https://circleci.com/developer/orbs/orb/circleci/gcp-gke), and more.
+{: class="alert alert-info"}
 
 ## Full configuration file
 {: #full-configuration-file }

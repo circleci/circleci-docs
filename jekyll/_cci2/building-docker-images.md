@@ -55,6 +55,7 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.17
+    resource_class: xlarge
     steps:
       - checkout
       # ... steps for building/testing app ...
@@ -74,9 +75,23 @@ jobs:
 Below is a break down of what is happening during this build’s execution:
 
 * All commands are executed in the [primary-container](/docs/glossary/#primary-container). (line 5)
-* Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 11)
-* [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 13)
+* Once `setup_remote_docker` is called, all Docker-related commands are executed locally. (line 12)
+* [Docker Layer Caching](/docs/glossary/#docker-layer-caching) (DLC) is enabled to speed up image building. (line 14)
 * We use [project environment variables](/docs/set-environment-variable/#set-an-environment-variable-in-a-project) to store credentials for Docker Hub. (line 19)
+
+### Resource classes
+{: #resource-classes}
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**. For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+{: class="alert alert-caution"}
+
+The resource class for the remote Docker environment is determined by the configuration of the primary container.
+
+For **x86** architecture the equivalent Linux VM resource class is used for remote Docker, relative to how the primary container is configured, apart from if you are using `small` or `medium+`, in which case `medium` and `large` are used, respectively. For a full list of available Linux VM resource classes see the [Configuration Reference](/docs/configuration-reference/#linuxvm-execution-environment).
+
+For **Arm**, the equivalent Arm VM resource class will be used. For a full list of available Arm VM resource classes see the [Configuration Reference](/docs/configuration-reference/#arm-execution-environment).
+
+For credit/pricing information, see the [Resource class product page](https://circleci.com/product/features/resource-classes/).
 
 ## Install the Docker CLI
 {: #install-the-docker-cli}
@@ -100,9 +115,13 @@ To specify the Docker version, you can set it as a `version` attribute:
           version: 20.10.11
 ```
 
-CircleCI supports multiple versions of Docker. The following are the available versions:
+CircleCI supports multiple versions of Docker.
 
-- `20.10.18` (default)
+For **x86** architecture, the following versions are available:
+
+- `20.10.24`
+- `20.10.23` (default)
+- `20.10.18`
 - `20.10.17`
 - `20.10.14`
 - `20.10.12`
@@ -111,6 +130,11 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `20.10.6`
 - `20.10.2`
 - `19.03.13`
+
+For **Arm**, the following versions are supported:
+
+- `default`
+- `edge`
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.

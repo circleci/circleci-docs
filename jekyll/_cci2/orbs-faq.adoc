@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: This page answers the most frequently asked questions about orbs.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.
 

@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,11 +10,8 @@ contentTags:
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Docker.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :machine:
-
-{% include snippets/runner-1.0-deprecation-brownout.adoc %}
 
 This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
 
@@ -46,7 +43,7 @@ The host needs to have Docker installed. Once the `runner` container is started,
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
 [#create-namespace-and-resource-class]
-=== 1. Create namespace and resource class 
+=== 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --

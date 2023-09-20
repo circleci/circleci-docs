@@ -9,14 +9,13 @@ contentTags:
 :page-liquid:
 :page-description: Learn now to migrate from CircleCI server v3.x to v4.x.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Migrating from server v3.x to v4.0.x is an _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade CircleCI server from v3.x to v4.0.x.
 
 We recommend using a staging environment before completing this process in a production environment. This will allow you to gain a better understanding of the migration process, and give you an idea of how long the migration will take to complete.
 
-toc::[]
+
 
 [#prerequisites]
 == Prerequisites

@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: How to add additional SSH keys to CircleCI
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
 
@@ -70,4 +69,4 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 
 * xref:github-integration#[GitHub Integration]
 * xref:bitbucket-integration#[Bitbucket Integration]
-* xref:gitlab-integration#[GitLab Integration]
+* xref:gitlab-integration#[GitLab CI Integration]

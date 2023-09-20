@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: Details of the new features included in each CircleCI server 4.x release.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Server v4.0 offers the following:
 

@@ -7,7 +7,7 @@ contentTags:
 = GitLab との連携
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、GitLab と CircleCI の連携方法についてわかりやすく説明します。
+:page-description: このドキュメントでは、GitLab CI と CircleCI の連携方法についてわかりやすく説明します。
 :icons: font
 :toc: macro
 
@@ -50,7 +50,7 @@ CircleCI により自動で新規ブランチが作成され、基本的な設�
 
 * GitLab self-managed インスタンスの URL (例: `https://test-gitlab.circleci.com`)
 +
-self-managed インスタンスには、GitLab プロジェクトを 1 つ以上追加しておく必要があります。 インスタンスにプロジェクトが存在しない場合、連携の認証に失敗します。  self-managed インスタンスはパブリックインターネットからアクセス可能である必要があります。**ファイアウォールの内側に配置している場合は使用できません**。
+self-managed インスタンスには、GitLab プロジェクトを 1 つ以上追加しておく必要があります。 インスタンスにプロジェクトが存在しない場合、連携の認証に失敗します。  self-managed インスタンスはパブリックインターネットからアクセス可能である必要があります。**ファイアウォールの内側に配置している場合は使用できません**。  セルフマネージド インスタンスがファイアウォールの背後にある場合は、link:https://discuss.circleci.com/t/gitlab-self-managed-support-on-circleci-is-now-here/47726/3?u=sebastian-lerner[回避策の提案]を参照してください。
 * link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[パーソナルアクセストークン]。 このトークンには `api` スコープを設定する必要があります。
 
 [#known-hosts-input]
@@ -745,3 +745,11 @@ xref:insights-tests#[テスト インサイト機能]は現在、GitLab のお�
 
 - xref:config-intro#[設定ファイルのチュートリアル]
 - xref:hello-world#[Hello world]
+
+[#relevant-gitlab-articles]
+== 役立つ GitLab の記事とガイド
+* link:https://circleci.com/ja/integrations/gitlab/[GitLab と CircleCI の連携]
+* link:https://circleci.com/ja/blog/announcing-gitlab-support/[CircleCI に GitLab が対応]
+* link:https://circleci.com/ja/blog/setting-up-continuous-integration-with-gitlab/[GitLab と CircleCI で CI を構築する方法]
+* link:https://circleci.com/ja/blog/gitlab-ultimate-guide/[GitLab（ギットラブ）とは？完全ガイド]
+* link:https://circleci.com/ja/circleci-versus-gitlab/[GitLab CI/CD と CircleCI　の比較]

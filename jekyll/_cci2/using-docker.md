@@ -74,20 +74,7 @@ The following examples show how you can use public images from various sources:
 {: #available-docker-resource-classes }
 
 The [`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
-job. In Docker, the following resources classes are available:
-
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge               | 16    | 32GB
-2xlarge+              | 20    | 40GB
-{: class="table table-striped"}
-
-**Note**: `2xlarge` and `2xlarge+` require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.
+job.
 
 Specify a resource class using the `resource_class` key, as follows:
 
@@ -100,6 +87,28 @@ jobs:
     steps:
     #  ...  other config
 ```
+
+### x86
+{: #x86 }
+
+For the Docker execution environment, the following resources classes are available for the x86 architecture:
+
+{% include snippets/docker-resource-table.md %}
+
+### Arm
+{: #arm }
+
+The following resource classes are available for Arm with Docker:
+
+**Arm on Docker** Support for Arm architecture in the Docker execution environment is in **Preview**. For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601).
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
 
 ## Docker benefits and limitations
 {: #docker-benefits-and-limitations }

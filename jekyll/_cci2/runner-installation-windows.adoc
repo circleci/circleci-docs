@@ -10,12 +10,9 @@ contentTags:
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Windows.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :machine:
 :windows:
-
-{% include snippets/runner-1.0-deprecation-brownout.adoc %}
 
 This page describes how to install CircleCI's machine runner on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
@@ -37,7 +34,7 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 {% include snippets/runner/terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. Create namespace and resource class 
+== 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --

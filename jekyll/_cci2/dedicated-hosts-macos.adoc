@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The dedicated host resource class is available for those developing, building, testing, and signing iOS, iPadOS, macOS, WatchOS, and tvOS applications using the Xcode IDE. These dedicated resources provide an isolated environment for increased security.
 

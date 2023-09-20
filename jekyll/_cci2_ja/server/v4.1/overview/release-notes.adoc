@@ -36,13 +36,37 @@ NOTE: 移行プロセスでは、後続のリリースに移行する前に、�
 
 アップグレード手順については、 xref:../installation/upgrade-server#[Server v4 へのアップグレードガイド] を参照してください。
 
-[#release-4-1-1]
+[#release-4-1-4]
+== リリース 4.1.3
+
+[#changelog-4-1-4]
+=== 更新履歴
+
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#リリース-4-1-3[更新履歴] を参照して下さい。
+
+[#release-4-1-3]
+== リリース 4.1.2
+
+[#changelog-4-1-3]
+=== 更新履歴
+
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#リリース-4-1-2[更新履歴] を参照して下さい。
+
+[#release-4-1-2]
 == リリース 4.1.1
+
+[#changelog-4-1-2]
+=== 更新履歴
+
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9-4-1-1[更新履歴] を参照して下さい。
+
+[#release-4-1-1]
+== リリース 4.1.0
 
 [#changelog-4-1-1]
 === 更新履歴
 
-このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/#%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9-4-1-1[更新履歴] を参照して下さい。
+このリリースの詳細については、 link:https://circleci.com/ja/server/changelog/[更新履歴] を参照して下さい。
 
 [#release-4-1-0]
 == リリース 4.1.0

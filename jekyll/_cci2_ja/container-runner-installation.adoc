@@ -3,8 +3,6 @@
 contentTags:
   platform:
   - クラウド
-  - Server v4.x
-  - Server v3.x
 ---
 = コンテナランナーのインストール (Kubernetes)
 :page-layout: classic-docs
@@ -14,18 +12,57 @@ contentTags:
 :toc: macro
 
 :toc-title:
+:container:
 
-このページでは、CircleCI コンテナランナーのインストール手順を説明します。
+CircleCI のコンテナランナーをインストールする方法についてこのドキュメントでわかりやすく説明します。
 
-{% include snippets/ja/runner-platform-prerequisites.adoc %}
+// {% include snippets/runner-platform-prerequisites.adoc %}
 
-[#installation-instructions]
-== インストール手順
+[#prerequisites]
+== 前提条件
 
-1.  `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行してコンテナランナーの Helm リポジトリを追加します。
-1. `helm repo update` を実行します。
-1. `kubectl create namespace circleci` を実行し、 `circleci` Kubernetes 名前空間を作成します。
-1. `values.yaml` ファイルという以下を含むファイルを作成します。
+{% include snippets/runner/ja/container-runner-prereq.adoc %}
+
+[#self-hosted-runner-terms-agreement]
+== セルフホストランナーの利用条件
+
+{% include snippets/runner/ja/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. ネームスペースとリソースクラスの作成
+
+[.tab.container-runner.Web_app_installation]
+--
+{% include snippets/runner/ja/install-with-web-app-steps.adoc %}
+--
+
+[.tab.container-runner.CLI_installation]
+--
+{% include snippets/runner/ja/install-with-cli-steps.adoc %}
+--
+
+[#container-runner-installation]
+== 2. コンテナランナー インストール
+
+. 以下のコマンドを実行して、コンテナランナー Helm のレポジトリを追加します：
++
+[source,shell]
+----
+helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm
+----
+. 次に以下を実行します：
++
+[source,shell]
+----
+helm repo update
+----
+. 次に、以下のコマンドを実行し、`circleci` Kubernetes namespaceを作成します：
++
+[source,shell]
+----
+kubectl create namespace circleci
+----
+. `values.yaml` ファイルという以下を含むファイルを作成します。
 +
 ```yaml
 agent:
@@ -33,17 +70,22 @@ agent:
     namespace/my-rc:
       token: <resource_class_token>
 ```
-1.  `helm install container-agent container-agent/container-agent -n circleci -f values.yaml` を実行します。
+. 最後に、以下のコマンドを実行します：
++
+[source,shell]
+----
+helm install container-agent container-agent/container-agent -n circleci -f values.yaml
+----
 
 [#container-runner-configuration-example]
 == コンテナランナーの設定例
 
-クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。 セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
+クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。 コンテナランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-ジョブのセットアップの簡単な例 (`cimg/base:2021.11` は、よく使用される CircleCI の Docker イメージです):
+以下は、ジョブ設定のシンプルなコード例です (`cimg/base:2021.11` は、よく使用される CircleCI の Docker イメージです)。
 
 ```yaml
 version: 2.1

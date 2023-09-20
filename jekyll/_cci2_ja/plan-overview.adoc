@@ -19,7 +19,7 @@ contentTags:
 [#overview]
 == 概要
 
-クレジットベースの従量課金制プランでは、使用量に応じた料金のみが請求されます。また、チームの CI/CD ソリューションの柔軟なカスタマイズや拡張が可能です (link:https://circleci.com/ja/continuous-integration/[CI/CD] )。 クレジットは、秒単位で消費され、分単位のレートは選択したビルドの設定によって異なります。
+クレジットベースの従量課金制プランでは、使用量に応じた料金のみが請求されます。また、チームの link:https://circleci.com/ja/continuous-integration/[CI/CD] ソリューションの柔軟なカスタマイズや拡張が可能です。 クレジットは、秒単位で消費され、分単位のレートは選択したビルドの設定によって異なります。
 
 チームに最適なプランを検討する際は、以下のような要素を考慮する必要があります。
 
@@ -48,6 +48,8 @@ contentTags:
 == クレジットベースプランの設定
 
 Free プランまたは Performance プランの設定を行うには、link:https://app.circleci.com/[CircleCI Web アプリケーション]から、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は link:https://circleci.com/ja/talk-to-us/[お問い合わせください]。
+
+Performance プランの解約については、xref:faq#cancel-performance-plan[Performance プランの解約に関するFAQ]をご参照ください。
 
 [#managing-credit-usage]
 == クレジット使用量の管理

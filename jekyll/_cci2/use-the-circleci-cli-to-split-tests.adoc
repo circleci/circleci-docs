@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up identical execution environments in which your job is run.
 

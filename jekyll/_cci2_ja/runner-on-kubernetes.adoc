@@ -14,8 +14,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-brownout.adoc %}
-
 [#strongly-recommended-method]
 == 強く推奨される方法
 

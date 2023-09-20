@@ -12,8 +12,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-brownout.adoc %}
-
 [#self-hosted-runner-configuration-reference]
 == マシンランナーの設定ファイルのリファレンス
 

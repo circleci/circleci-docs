@@ -100,9 +100,11 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 - API を使ってスケジュールを設定する
 - ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行する
 
+++++
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/x3ruGpx6SEI" title="Scheduled pipelines tutorial" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+++++
 
 これらのシナリオに関するドキュメントは、以下のページを参照してください：
 - xref:set-a-nightly-scheduled-pipeline#[パイプラインのスケジュール実行を夜間に設定する]
@@ -111,7 +113,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 [#scheduled-pipelines-faqs]
 == FAQ
 
-include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
+include::../_includes/snippets/faq/ja/scheduled-pipelines-faq-snip.adoc[]
 
 [#next-steps]
 == 次のステップ

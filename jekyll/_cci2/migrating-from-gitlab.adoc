@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: An overview of how to migrate from GitLab to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from GitLab to CircleCI.
 
@@ -24,7 +23,7 @@ Follow the steps on the link:/docs/first-steps/#gitlab-signup[Sign Up and Try] p
 [#build-configuration]
 == Build configuration
 
-If you are using GitLab's CI/CD, you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+If you are using link:/docs/gitlab-integration/[GitLab's CI/CD], you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/config-intro/[here] to learn how to configure the `.config.yml` file.
 

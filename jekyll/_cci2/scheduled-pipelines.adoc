@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn about scheduled pipelines for your CircleCI projects.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 **Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 

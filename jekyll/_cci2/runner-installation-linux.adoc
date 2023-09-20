@@ -10,12 +10,9 @@ contentTags:
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Linux.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :machine:
 :linux:
-
-{% include snippets/runner-1.0-deprecation-brownout.adoc %}
 
 This page describes how to install CircleCI's machine runner on Linux.
 
@@ -30,7 +27,7 @@ This page describes how to install CircleCI's machine runner on Linux.
 {% include snippets/runner/terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. Create namespace and resource class 
+== 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --

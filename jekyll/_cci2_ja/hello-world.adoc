@@ -25,8 +25,10 @@ sectionTags:
 
 すでに CircleCI に "プラグイン" するリポジトリをお持ちの場合は、設定ファイルのコミットを含め、すべて CircleCI Web アプリ内で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 [#echo-hello-world-cloud]
-== Echo hello world
+== Server v4.x での Echo hello world
 
 この例では、`hello world` をコンソールに出力する `hello-job` というジョブを追加します。 まずは以下の手順を行います。
 
@@ -45,9 +47,6 @@ jobs:
   hello-job:
     docker:
       - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
@@ -191,7 +190,7 @@ image:hello-world-app.png[ジョブステップ出力内に hello world が表�
 **ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
 [#echo-hello-world-server]
-== Server v4.x での Echo hello world
+== Server v3.x での Echo hello world
 
 NOTE: CircleCI Server 上で macOS 実行環境内でビルドするには、 link:/docs/ja/runner-overview[セルフホストランナー] を使用します。
 
@@ -212,9 +211,6 @@ jobs:
   hello-job:
     docker:
       - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
@@ -305,7 +301,7 @@ image:hello-world-app.png[ジョブステップ出力内に hello world が表�
 **ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
 [#next-steps]
-== Server v3.x での Echo hello world
+== 次のステップ
 
 * CircleCI 固有のコンセプトのサマリーについては、 link:/docs/ja/concepts[コンセプト] のページを参照してください。
 * 同時実行、順次実行、スケジュール実行、手動承認の各ワークフローによるジョブ実行のオーケストレーションの例については、 link:/docs/ja/workflows[ワークフロー] に関するページを参照してください。

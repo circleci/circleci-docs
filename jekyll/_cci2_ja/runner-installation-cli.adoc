@@ -12,10 +12,7 @@ contentTags:
 :page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
-
-{% include snippets/ja/runner-1.0-deprecation-brownout.adoc %}
 
 ここでは、CLI を使って **マシンセルフホストランナー** をインストールする方法を説明します。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 
@@ -168,10 +165,13 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 |1.0.29477-605777e
 
 |3.4
-|1.0.48283-583799b
+|1.1.63254-c1aa872
 
 |4.0
-|1.0.48283-583799b
+|1.1.63254-c1aa872
+
+|4.1
+|1.1.63254-c1aa872
 |===
 +
 `<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、以下を実行します。
@@ -229,10 +229,13 @@ CircleCI Server のマイナーバージョンはそれぞれ、特定バージ�
 |1.0.29477-605777e
 
 |3.4
-|1.0.48283-583799b
+|1.1.63254-c1aa872
 
 |4.0
-|1.0.48283-583799b
+|1.1.63254-c1aa872
+
+|4.1
+|1.1.63254-c1aa872
 |===
 
 [#additional-resources]
