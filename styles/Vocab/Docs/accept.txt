@@ -2,3 +2,6 @@ Config
 CircleCI cloud
 CircleCI server
 circleci.com
+OAuth
+boolean
+cron
