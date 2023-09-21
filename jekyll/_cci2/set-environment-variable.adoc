@@ -35,7 +35,7 @@ jobs:
           # available in current step.
           command: |
             echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            echo "export VERY_IMPORTANT=VALUE_CONTENT" >> "$BASH_ENV"
             source "$BASH_ENV"
 ```
 
