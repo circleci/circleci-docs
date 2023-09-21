@@ -40,7 +40,7 @@ sudo rm /usr/lib/systemd/system/circleci.service
 . Finally, move the agent configuration file. The default location for this is `/etc/opt/circleci/launch-agent-config.yaml`. Move the file to `/etc/circleci-runner/circleci-runner-config.yaml` using the following command:
 +
 ```shell
-mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/c sircleci-runner-config.yaml
+mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/circleci-runner-config.yaml
 ```
 +
 Alternatively, you can let the machine agent install process create a config file template and copy the existing config into the newly created file (CROSSLINK)
