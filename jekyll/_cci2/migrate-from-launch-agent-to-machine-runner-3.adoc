@@ -45,7 +45,7 @@ mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/circleci-runn
 Alternatively, you can let the machine agent install process create a config file template and copy the existing config into the newly created file (CROSSLINK)
 
 [#uninstalling-launch-agent-linux-se]
-==== RHEL/Rocky Linux
+=== RHEL/Rocky Linux
 
 In addition to the steps listed above, the SELinux policy should be uninstalled using the following command:
 
