@@ -43,7 +43,7 @@ sudo rm /usr/lib/systemd/system/circleci.service
 
 +
 ```shell
-mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/c sircleci-runner-config.yaml
+mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/circleci-runner-config.yaml
 ```
 
 Alternatively, you can let the machine agent install process create a config file template and copy the existing config into the newly created file (CROSSLINK)
