@@ -255,6 +255,20 @@ circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml JOB_NAME
 ```
 
+Note that JOB_NAME is the value of the key-value pair: for example, given 
+
+```yaml
+jobs:
+  test:
+    name: "Test Application"
+```
+
+the invocation would be
+
+```shell
+circleci local execute -c process.yml "Test Application"
+```
+
 The following commands will run an example build on your local machine on one of CircleCI's demo applications:
 
 ```shell
