@@ -20,7 +20,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 [#backup-and-restore]
 == Backup and restore
 
-Backups of CircleCI server can be created through link:https://velero.io/[Velero] which are detailed in our xref:backup-and-restore[Backup and Restore] documentation.
+Backups of CircleCI server can be created through link:https://velero.io/[Velero] which is detailed in our xref:backup-and-restore[Backup and Restore] documentation.
 
 
 [#email-notifications]

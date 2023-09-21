@@ -27,9 +27,9 @@ NOTE: Backup and restore of the CircleCI services is dependent on Velero. If you
 
 To use Velero, you must first install the link:https://velero.io/docs/v1.12/basic-install/[Velero CLI]. Then using Velero's CLI, you will need to install the Velero server components along with the appropriate plugin for your cloud storage solution. Follow the instructions linked below based on your chosen storage backend:
 
-link:https://github.com/vmware-tanzu/velero-plugin-for-aws#overview[AWS S3]
-link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#overview[GCP GCS]
-link:https://velero.io/docs/v1.12/contributions/minio/[S3 Compatible (Minio)]
+* link:https://github.com/vmware-tanzu/velero-plugin-for-aws#overview[AWS S3]
+* link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#overview[GCP GCS]
+* link:https://velero.io/docs/v1.12/contributions/minio/[S3 Compatible (Minio)]
 
 NOTE: CircleCI server makes use of Persistent Volumes for data storage. To include these volumes in your backups you will need to add the node agent flag `--use-node-agent` to your Velero install command. link:https://velero.io/docs/v1.12/customize-installation/#enable-file-system-backup[Read here] for more information.
 
