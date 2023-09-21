@@ -228,6 +228,12 @@ en:
             link: container-runner-installation
           - name: Container runner reference
             link: container-runner
+      - name: Machine runner (3.0)
+        children:
+          - name: Install machine runner 3.0 on Linux
+            link: install-machine-runner-3-on-linux
+          - name: Machine runner (3.0) configuration reference
+            link: machine-runner-3-configuration-reference
       - name: Machine runner
         children:
           - name: Linux installation

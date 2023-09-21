@@ -5,3 +5,6 @@ circleci.com
 OAuth
 boolean
 cron
+namespace
+hostname
+stderr
