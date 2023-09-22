@@ -18,7 +18,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 [#backup-and-restore]
 == Backup and restore
 
-Backups of CircleCI server can be created through link:https://velero.io/[Velero] which is detailed in our xref:backup-and-restore#[Backup and Restore] documentation.
+Backups of CircleCI server can be created through link:https://velero.io/[Velero] which is detailed in our xref:../operator/backup-and-restore#[Backup and Restore] documentation.
 
 [#email-notifications]
 == Email Notifications
@@ -49,7 +49,7 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* link:/docs/server/installation/hardening-your-cluster[Hardening your cluster]
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Server 3.x to 4.0.x migration]
-* link:/docs/server/operator/backup-and-restore[Backup and restore]
+* xref:hardening-your-cluster#[Hardening your cluster]
+* xref:migrate-from-server-3-to-server-4#[Server 3.x to 4.0.x migration]
+* xref:../operator/backup-and-restore#[Backup and restore]
 endif::[]
