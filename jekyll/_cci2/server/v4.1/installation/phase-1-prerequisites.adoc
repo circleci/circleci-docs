@@ -48,11 +48,6 @@ Download and install the following software before continuing:
 | {helmdiffversion} or greater
 | Helping with `values.yaml` changes and updates
 | Optional, but may help with troubleshooting between releases
-
-| link:https://github.com/vmware-tanzu/velero/releases[Velero CLI]
-| Latest
-| Backup and restore capability
-| See Velero's link:https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
 |===
 
 // Don't include this section in the GCP PDF.
