@@ -54,33 +54,35 @@ sudo semodule -r circleci_launch_agent
 ```
 
 [#install-machine-agent]
-== 2. Installing the Machine Agent
+== 2. Install the machine agent
 
 Packaged versions of the machine runner 3.0 are available for Linux for a streamlined installation experience.
 
-. At present deb and rpm packages are available for linux. Use the following commands to install them
+. Deb and rpm packages are available for Linux. Choose your package, and install using the following commands. The packages install the latest version of the agent. They also create a CircleCI user as well as required directories for operation of the agent.
 +
+[tab.package.Deb]
+--
 ```shell
 # DEB Commands
 # This script installs the package repository to the package manager
 curl -s https://packagecloud.io/install/repositories/circleci/runner/script.deb.sh | sudo bash
 sudo apt install circleci-runner
 ```
+--
 +
+[tab.package.Rpm]
+--
 ```shell
 # RPM Commands
 # This script installs the package repository to the package manager
 curl -s https://packagecloud.io/install/repositories/circleci/runner/script.rpm.sh | sudo bash
 sudo yum install circleci-runner
 ```
+--
+
+. The packages create template configuration files at `/etc/circleci-runner/circleci-runner-config.yaml`. This configuration is 1:1 compatible with the launch agent configuration, apart from the auto-update feature. Since auto-update has been removed from the new agent, you should use the appropriate package management update tools to get new versions of the package when they are released. When using the `apt` package to update the agent package, you will need to clear the configuration file modified prompt. This can be avoided using the `--force-confold` flag or by removing the modified configuration file before upgrading.
 +
-The packages install the latest version of the agent. They also create a circleci user as well as required directories for operation of the agent.
-
-. The packages create a template configuration file at `/etc/circleci-runner/circleci-runner-config.yaml`. This configuration is 1:1 compatible with the launch agent configuration, apart from the auto-update feature. Since auto-update has been removed from the new agent, you should use the appropriate package management update tools to get new versions of the package when they are released. When using the `apt` package to update the agent package, you will need to clear the configuration file modified prompt. This can be avoided using the `--force-confold` flag or by removing the modified configuration file before upgrading.
-
-+
-Once the config file has been populated, the following command will restart the agent so it can begin claiming:
-
+Once the configuration file has been populated, the following command will restart the agent so it can begin claiming:
 +
 ```shell
 sudo systemctl enable circlci-runner
