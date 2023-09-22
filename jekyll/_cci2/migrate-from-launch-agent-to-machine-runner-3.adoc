@@ -42,7 +42,7 @@ sudo rm /usr/lib/systemd/system/circleci.service
 mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/circleci-runner-config.yaml
 ```
 +
-Alternatively, you can let the machine agent install process create a config file template and copy the existing config into the newly created file (CROSSLINK)
+Alternatively, you can let the machine agent install process create a config file template and copy the xref:runner-installation-linux#create-the-circleci-self-hosted-runner-configuration[existing config] into the newly created file.
 
 [#uninstalling-launch-agent-linux-se]
 === RHEL/Rocky Linux
