@@ -232,6 +232,8 @@ en:
         children:
           - name: Install machine runner 3.0 on Linux
             link: install-machine-runner-3-on-linux
+          - name: Migrate from launch agent to machine runner 3.0
+            link: migrate-from-launch-agent-to-machine-runner-3
           - name: Machine runner (3.0) configuration reference
             link: machine-runner-3-configuration-reference
       - name: Machine runner
