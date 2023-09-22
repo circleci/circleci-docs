@@ -14,14 +14,14 @@ contentTags:
 
 Workflows each have an associated `workspace`. Workspaces are used to transfer data to downstream jobs as the workflow progresses.
 
-Use workspaces to pass along data that is unique to a workflow and is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
+Use workspaces to pass along data that is unique to a workflow and is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by subsequent test jobs.
 
 For example, a project with a `build` job that builds a `.jar` file and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace.
 
 [#overview]
 == Overview
 
-Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem.
+Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-executor store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their execution environment's filesystem.
 
 Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
@@ -69,8 +69,8 @@ jobs:
 
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
-          # taken to be the root directory of the workspace.
+          # Must be an absolute path, or relative path from working_directory. This is a directory in the execution
+          # environment which is taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
           paths:
