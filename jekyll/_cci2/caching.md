@@ -289,9 +289,7 @@ For example, you may want to clear the cache in the following scenarios by incre
 ### Cache size
 {: #cache-size }
 
-We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks. Above this limit, check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
-
-Larger cache sizes are allowed, but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting them into multiple distinct caches.
+You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
 
 ### Viewing network and storage usage
 {: #viewing-network-and-storage-usage }
