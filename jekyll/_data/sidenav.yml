@@ -34,7 +34,7 @@ en:
         children:
           - name: GitHub OAuth app integration overview
             link: github-integration
-          - name: GitHub Apps integration overview
+          - name: GitHub App integration overview
             link: github-apps-integration
           - name: Bitbucket integration overview
             link: bitbucket-integration
