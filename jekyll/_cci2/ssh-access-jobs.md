@@ -45,7 +45,7 @@ The job virtual machine (VM) will remain available for an SSH connection for **1
 
 If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the job output.
 
-If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow will be run with SSH enabled for that job.
+If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow will be run with SSH enabled for that job, even after SSH capability has been disabled on the project level.
 {: class="alert alert-info" }
 
 ## Debugging: "permission denied (publickey)"
