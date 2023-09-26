@@ -8,3 +8,6 @@ cron
 namespace
 hostname
 stderr
+Rollout
+Rollouts
+Asciidoctor
