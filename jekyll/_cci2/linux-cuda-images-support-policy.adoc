@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/linux-cuda-brownout.adoc %}
+{% include snippets/linux-cuda-deprecation-notice.adoc %}
 
 [#overview]
 == Overview
