@@ -1,51 +1,38 @@
 ---
-# These platform content tags control the tags that appear at the top of the docs page. Use them to show the reader which CircleCI platforms support the feature or task you are writing about
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
 ---
-= Set up a release integration
+= Set up a release integration - Open preview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A short page description goes here
+:page-description: Tutorial outlining how to set up a new CircleCI release integration.
 :icons: font
 :experimental:
 
-////
-Some notes on attributes
+NOTE: CircleCI releases is currently in **open preview**
 
-:page-liquid: - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
-
-:icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
-
-:experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
-
-////
-
-This template will help you create a new **tutorial**. A tutorial should guide users who are new to a feature through getting set up and using the feature, and point them to further reading for alternative use cases and options. To help decide whether content should be a tutorial or a how-to guide, see the link:https://diataxis.fr/tutorials-how-to/[Diataxis website].
-
-Content templates help you to:
-
-* Develop new content quickly
-* Ensure your page conforms to the style guide
-
-To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-tutorial.adoc?plain=1[here]. There is additional detail in the comments.
-
-The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
-
-Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
+Gain visibility into releases to your Kubernetes cluser, and control over release commands with CircleCI release integrations. The steps outlined on this page guide you to set up a release integration.
 
 [#introduction]
 == Introduction
 
-Use the introduction to explain what the reader is going to achieve through following the tutorial. Link back to the _conceptual_ page that accompanies the tutorial, to illustrate this here is a link to the link:/docs/templates/template-conceptual#[template for conceptual pages]. If possible provide a demo or example. The tutorial should ideally be written to accompany a public/open source example that any reader can use, but the tutorial should also be able to accommodate a reader’s own project.
+CircleCI release integrations give you visibility into your releases on the releases dashboard in the CircleCI web app, as well as controls for various features. From the releases dashboard, you can:
+
+* Restore a version
+* Scale a version
+* Restart a version
+
+CircleCI releases supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Some further controls are available from the releases dashboard for projects that use Argo Rollouts:
+
+* Retry release
+* Promote release
+* Cancel release
 
 [#prerequisites]
 == Prerequisites
 
-If available and/or relevant, list what the reader must have in place in order for the document to be meaningful and helpful. This might include:
+In order to set up a release integration with CircleCI you will need to ensure the following prerequisites are fulfilled:
 
 * Tools
 * Skills/knowledge
