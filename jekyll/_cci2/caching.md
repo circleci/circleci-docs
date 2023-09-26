@@ -289,7 +289,7 @@ For example, you may want to clear the cache in the following scenarios by incre
 ### Cache size
 {: #cache-size }
 
-You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
+You can view the cache size from the CircleCI jobs page within the `restore_cache` step.
 
 ### Viewing network and storage usage
 {: #viewing-network-and-storage-usage }
