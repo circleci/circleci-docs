@@ -14,7 +14,7 @@ sudo yum install circleci-runner -y
 
 ```
 
-. Replace `<AUTH_TOKEN>` with the token generated in the steps above. You may use your text editor to do this, or edit and run the following commands to replace the token automatically:
+. Replace `<< AUTH_TOKEN >>` with the token generated in the steps above. You may use your text editor to do this, or edit and run the following commands to replace the token automatically:
 +
 ```shell
 export RUNNER_AUTH_TOKEN="your-runner-auth-token-here"

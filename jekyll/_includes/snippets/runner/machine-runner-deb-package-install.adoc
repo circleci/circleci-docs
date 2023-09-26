@@ -18,11 +18,11 @@ sudo apt-get install -y circleci-runner
 
 ```
 
-. Replace `<AUTH_TOKEN>` with the token generated in the steps above. You may use your text editor to do this, or edit and run the following commands to replace the token automatically:
+. Replace `<< AUTH_TOKEN >>` with the token generated in the steps above. You may use your text editor to do this, or edit and run the following commands to replace the token automatically:
 +
 ```shell
 export RUNNER_AUTH_TOKEN="your-runner-auth-token-here"
-sudo sed -i "s/<AUTH_TOKEN>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circleci-runner-config.yaml
+sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circleci-runner-config.yaml
 ```
 
 . Start the `circleci-runner service`, and check that it is currently running:
