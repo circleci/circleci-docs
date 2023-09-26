@@ -600,6 +600,10 @@ en:
   - name: Release
     icon: icons/sidebar/getting-started-new.svg
     children:
+      - name: Overview
+        children:
+          - name: Releases overview
+            link: releases/releases-overview
       - name: Set up
         children:
           - name: Set up a release integration
