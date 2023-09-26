@@ -139,5 +139,5 @@ If your org is hitting the hard-coded concurrency limits, you can disable these 
 ----
 distributor_dispatcher:
   ...
-  disable_concurrency: false
+  disable_concurrency: true
 ----

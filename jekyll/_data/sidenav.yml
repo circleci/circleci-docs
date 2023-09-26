@@ -34,7 +34,7 @@ en:
         children:
           - name: GitHub OAuth app integration overview
             link: github-integration
-          - name: GitHub Apps integration overview
+          - name: GitHub App integration overview
             link: github-apps-integration
           - name: Bitbucket integration overview
             link: bitbucket-integration
@@ -228,6 +228,14 @@ en:
             link: container-runner-installation
           - name: Container runner reference
             link: container-runner
+      - name: Machine runner (3.0)
+        children:
+          - name: Install machine runner 3.0 on Linux
+            link: install-machine-runner-3-on-linux
+          - name: Migrate from launch agent to machine runner 3.0
+            link: migrate-from-launch-agent-to-machine-runner-3
+          - name: Machine runner (3.0) configuration reference
+            link: machine-runner-3-configuration-reference
       - name: Machine runner
         children:
           - name: Linux installation
@@ -596,6 +604,10 @@ en:
         children:
           - name: Releases overview
             link: releases/releases-overview
+      - name: Set up
+        children:
+          - name: Set up a release integration
+            link: releases/set-up-a-release-integration
 
   - name: Server administration v4.2
     icon: icons/sidebar/admin-new.svg
@@ -984,6 +996,8 @@ en:
         children:
           - name: Conceptual page template
             link: templates/template-conceptual
+          - name: How-to guide template
+            link: templates/template-how-to
           - name: Tutorial page template
             link: templates/template-tutorial
 

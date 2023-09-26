@@ -1,0 +1,154 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Set up a release integration - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Tutorial outlining how to set up a new CircleCI release integration.
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**
+
+Gain visibility into releases to your Kubernetes cluser, and control over release commands with CircleCI release integrations. The steps outlined on this page guide you to set up a release integration.
+
+[#introduction]
+== Introduction
+
+CircleCI release integrations give you visibility into your releases on the releases dashboard in the CircleCI web app, as well as controls for various features. From the releases dashboard, you can:
+
+* Restore a version
+* Scale a version
+* Restart a version
+
+CircleCI releases supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Some further controls are available from the releases dashboard for projects that use Argo Rollouts:
+
+* Retry release
+* Promote release
+* Cancel release
+
+[#prerequisites]
+== Prerequisites
+
+In order to set up a release integration with CircleCI you will need to ensure the following prerequisites are fulfilled:
+
+* Tools
+* Skills/knowledge
+* Permissions
+* Dependencies
+
+NOTE: Prerequisites might not be the same for every user, or it might not be possible to outline every prerequisite given the different systems/environments that different orgs/teams/users may use.
+
+Prerequisites may include things like:
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A code repository you want to build on CircleCI.
+
+== 1. The first step
+
+The main body of the tutorial should be broken into logical steps with headings for each step. The steps should guide the reader through setting up and using the feature. Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
+
+[#this-is-a-subsection-title]
+=== a. This is a subsection title
+
+Subsections can be used to break steps into logical sub-parts as needed, and should be numbered using lowercase letters.
+
+Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
+
+* Item 1
+* Item 2
+* Item 3
+
+[#using-tables]
+=== b. Using tables
+
+This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Header text column 1
+|Header text column 2
+|Header text column 3
+
+|Text for row 1 column 1
+|Text for row 1 column 2
+|Text for row 1 column 3
+|===
+
+For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
+
+[#links-and-cross-references]
+=== c. Links and cross references
+
+To link out to content outside of the docs use a link:
+
+link:https://circleci.com/[CircleCI website]
+
+To link to another page within the docs use a cross reference:
+
+xref:../about-circleci#[About CircleCI]
+
+Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
+
+xref:../about-circleci#learn-more[About CircleCI]
+
+[#code-examples]
+=== d. Code examples
+
+Use asciidoc source blocks for code:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: The Second Step
+          command: |
+            ls -al
+            echo '^^^The files in your repo^^^'
+----
+
+[#banners]
+=== e. Banners
+
+In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+
+NOTE: **Need to add a note?** This is how to do it
+
+CAUTION: **Need to add a caution?** This is how to do it
+
+WARNING: **Need to add a warning?** This is how to do it
+
+We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
+
+For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+[#the-second-step]
+== 2. The second step
+
+Each main step in the tutorial should be under its own level 2 (`==`) heading, using the numbered list format.
+
+[#conclusion]
+== Conclusion
+
+End the tutoral with a conclusion section that summarizes what was covered.
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]

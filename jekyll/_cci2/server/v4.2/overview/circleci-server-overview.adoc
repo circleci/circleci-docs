@@ -7,7 +7,7 @@ contentTags:
 = CircleCI server v4.2 overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
+:page-description: CircleCI server v4.2 is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
 :toc: macro
 :toc-title:
@@ -21,8 +21,8 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 
 NOTE: For installation instructions, you have the option of either the xref:../installation/phase-1-prerequisites#[regular] or xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] installation guide.
 
-.CircleCI Server v4.x Architecture
-image::server-4-architecture-diagram.png[Server v4.x services architecture]
+.CircleCI Server v4.2 Architecture
+image::server-4-architecture-diagram.png[Server v4.2 services architecture]
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
@@ -99,7 +99,7 @@ Job artifacts and outputs are sent directly from jobs in Nomad to object storage
 [#services]
 == Services
 
-CircleCI server v4.x consists of the following services. Find their descriptions and failure implications below:
+CircleCI server v4.2 consists of the following services. Find their descriptions and failure implications below:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -377,6 +377,6 @@ ifndef::pdf[]
 == Next steps
 
 * xref:release-notes#[CircleCI server v4.2 release notes]
-* xref:../installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
+* xref:../installation/phase-1-prerequisites#[Server 4.2 Installation Prerequisites]
 * xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]
