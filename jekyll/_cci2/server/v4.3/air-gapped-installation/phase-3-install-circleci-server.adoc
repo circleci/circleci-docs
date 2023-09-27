@@ -113,14 +113,14 @@ NOTE: Update the port on your Docker registry hostname as necessary
 NOTE: If using a non-tls installation for your docker registry, visit the xref:additional-considerations#non-tls-docker-registry-installations[Non-TLS Docker Installation] section for consideration.
 
 
-[#configure-vm-service]
-=== f. Disable VM Service
-In the `vm_service` section of `values.yaml`, set `enabled` to `false` to disable it. This feature requires cloud connectivity.
+[#configure-machine-provisioner]
+=== f. Disable Machine Provisioner
+In the `machine_provisioner` section of `values.yaml`, set `enabled` to `false` to disable it. This feature requires cloud connectivity.
 
 [source, yaml]
 ----
-# VM Service Disabled - Requires cloud connectivity
-vm_service:
+# Machine Provisioner Disabled - Requires cloud connectivity
+machine_provisioner:
   enabled: false
 ----
 

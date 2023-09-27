@@ -12,21 +12,23 @@ contentTags:
 :toc: macro
 :toc-title:
 
-VM service controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
+Machine Provisioner controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
 
-This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
+This section describes the available configuration options for Machine Provisioner.
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-vm-service[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+NOTE: Prescaling controls will be exposed in future for tuning.
 
-[#vm-provider]
-== VM provider
-The following configuration options are for the VM provider: either AWS or GCP.
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up Machine Provisioner are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+
+[#provider]
+== provider
+The following configuration options are for the machine-provisioner provider: either AWS or GCP.
 
 [#aws]
 === AWS
-There is a section in your `values.yaml` file that configures VM Service to work with AWS EC2. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+There is a section in your `values.yaml` file that configures Machine Provisioner to work with AWS EC2. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
-The information in this section describes post-installation configuration options for VM service.
+The information in this section describes post-installation configuration options for Machine Provisioner.
 
 [#windows-image-aws]
 ==== Windows image
@@ -35,7 +37,7 @@ If you require Windows executors, you can supply an AMI ID in your `values.yaml`
 
 [source,yaml]
 ----
-vm_service:
+machine_provisioner:
   providers:
     ec2:
       ...
@@ -49,7 +51,7 @@ If you wish to provide a custom AMI for Linux machine executors, you can supply 
 
 [source,yaml]
 ----
-vm_service:
+machine_provisioner:
   providers:
     ec2:
       ...
@@ -182,9 +184,9 @@ The default AMIs for server v4.3 are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+There is a section in your `values.yaml` file that configures Machine Provisioner to work with GCP. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
-The information in this section describes post-installation configuration options for VM service.
+The information in this section describes post-installation configuration options for Machine Provisioner.
 
 [#windows-image-gcp]
 ==== Windows image
@@ -193,7 +195,7 @@ If you require Windows executors, you can supply an AMI ID in your `values.yaml`
 
 [source,yaml]
 ----
-vm_service:
+machine_provisioner:
   providers:
     gcp:
       ...
@@ -207,7 +209,7 @@ If you wish to provide a custom AMI for Linux machine executors, you can supply 
 
 [source,yaml]
 ----
-vm_service:
+machine_provisioner:
   providers:
     gcp:
       ...
@@ -217,40 +219,32 @@ vm_service:
 [#instance-preallocation]
 == Instance preallocation
 
-WARNING: If xref:../../../docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per minute to ensure they do not end up in an unworkable state.
 
-CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
-
-To configure server to keep instances preallocated, use the keys shown in the following `values.yaml` examples:
+To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` examples:
 
 NOTE: For a full list of options, see the xref:../installation/installation-reference/#all-values-yaml-options[Installation Reference] page.
 
 [source,yaml]
 ----
-vm_scaler:
-  # -- Number of replicas to deploy for the vm-scaler deployment.
-  replicas: 1
-  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
-  prescaled:
-    - type: l1.medium
+# -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+scheduled:
+    - executor: linux
+      class: medium
       image: docker-default
-      docker-engine: true # remote Docker environment
       cron: ""
       count: 2
 ----
 
 [source,yaml]
 ----
-vm_scaler:
-  # -- Number of replicas to deploy for the vm-scaler deployment.
-  replicas: 1
-  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
-  prescaled:
-    - type: l1.medium
-      image: default
-      docker-engine: false # machine execution environment
-      cron: ""
-      count: 2
+# -- Configuration options for, and numbers of, prescaled instances for machine jobs.
+scheduled:
+  - executor: linux
+    class: medium
+    image: default
+    cron: ""
+    count: 2
 ----
 
 [#apply-changes]

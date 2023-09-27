@@ -489,16 +489,17 @@ Once you have configured the environmental variables and contexts, rerun the rea
 
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
-[#vm-service]
-== 3. VM service
+[#machine-provisioner]
+== 3. Machine Provisioner
 
-VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm VM execution environments, and those that are configured to use xref:../../../configuration-reference#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+Machine Provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm VM execution environments, and those that are configured to use xref:../../../configuration-reference#setupremotedocker[remote Docker]. Machine Provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
-NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:../operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
+NOTE: Once you have completed the server installation process you can further configure Machine Provisioner, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:../operator/manage-virtual-machines-with-machine-provisioner[Managing Virtual Machines with Machine Provisioner] page.
+NOTE: Overriding scaling options is currently not supported, but will be supported in the future.
 
 ifndef::env-gcp[]
 
-[#aws-vm-service]
+[#aws-machine-provisioner]
 === AWS
 
 [#set-up-security-group]
@@ -519,11 +520,11 @@ aws eks describe-cluster --name=<cluster-name> --query "cluster.kubernetesNetwor
 
 . *Create a security group*
 +
-Run the following commands to create a security group for VM service:
+Run the following commands to create a security group for Machine Provisioner:
 +
 [source,shell]
 ----
-aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
+aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI Machine Provisioner security group" --group-name "circleci-machine-provisioner-sg"
 ----
 +
 This outputs a GroupID to be used in the next steps:
@@ -533,38 +534,9 @@ This outputs a GroupID to be used in the next steps:
     "GroupId": "<VM_SECURITY_GROUP_ID>"
 }
 
-. *Apply security group Nomad*
-+
-Use the security group you just created, and your CIDR block values, to apply the security group. This allows VM service to communicate with created EC2 instances on port 22.
-+
-[source,shell]
-----
-aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
-----
-+
-For each link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the Nomad clients, find the subnet cidr block and add two rules with the following commands.
-+
-[source,shell]
-----
-# find CIDR block
-aws ec2 describe-subnets --subnet-ids=<nomad-subnet-id> --query "Subnets[*].[SubnetId, CidrBlock]" --region=<region> | xargs
-----
-+
-[source,shell]
-----
-# add a security group allowing docker access from nomad clients, to VM instances
-aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
-----
-+
-[source,shell]
-----
-# add a security group allowing SSH access from nomad clients, to VM instances
-aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SUBNET_IPV4_CIDR>"
-----
-
 . *Apply the security group for SSH (If using public IPs for machines)*
 +
-If using public IPs for VM service instances, run the following command to apply the security group rules so users can SSH into their jobs:
+If using public IPs for Machine Provisioner instances, run the following command to apply the security group rules so users can SSH into their jobs:
 +
 [source,shell]
 ----
@@ -578,7 +550,7 @@ There are two ways to authenticate CircleCI with your cloud provider: IAM Roles 
 
 [.tab.vmauthaws.IRSA]
 --
-The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
+The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring Machine Provisioner in CircleCI.
 
 . *Create indentity provider*
 +
@@ -629,7 +601,7 @@ aws iam create-role --role-name circleci-vm --assume-role-policy-document file:/
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:vm-service"
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:machine-provisioner"
         }
       }
     }
@@ -662,7 +634,6 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
         "arn:aws:ec2:*:*:launch-template/*",
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
         "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
       ]
@@ -673,21 +644,7 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:CreateVolume"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:ec2:*:*:volume/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     },
@@ -706,18 +663,6 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:CreateAction" : "CreateVolume"
-        }
-      }
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateTags"
-      ],
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
           "ec2:CreateAction" : "RunInstances"
         }
       }
@@ -727,16 +672,13 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
         "ec2:CreateTags",
         "ec2:StartInstances",
         "ec2:StopInstances",
-        "ec2:TerminateInstances",
-        "ec2:AttachVolume",
-        "ec2:DetachVolume",
-        "ec2:DeleteVolume"
+        "ec2:TerminateInstances"
       ],
       "Effect": "Allow",
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
+          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     },
@@ -769,13 +711,16 @@ Attach the policy to the role:
 aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_ARN>
 ----
 
-. *Configure VM-Service*
+. *Configure Machine Provisioner*
 +
-Configure VM service by adding the following to `values.yaml`:
+Configure Machine Provisioner by adding the following to `values.yaml`:
 +
+
+Note: If deploying in specific zone need to specify subnetwork for GCP
+
 [source,yaml]
 ----
-vm_service:
+machine_provisioner:
   providers:
     ec2:
       enabled: true
@@ -783,7 +728,7 @@ vm_service:
       assignPublicIP: true
       irsaRole: "<IRSA_ROLE_ARN>"
       subnets:
-      - "<SUBNET_ID>"
+        - "<SUBNET_ID>"
       securityGroupId: "<SECURITY_GROUP_ID>"
 ----
 --
@@ -796,15 +741,15 @@ Create a new user with programmatic access:
 +
 [source,shell]
 ----
-aws iam create-user --user-name circleci-vm-service
+aws iam create-user --user-name circleci-machine-provisioner
 ----
 +
-Optionally, vm-service does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
-Once done, you may skip to step 9, enabling vm-service.
+Optionally, machine-provisioner does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
+Once done, you may skip to step 9, enabling machine-provisioner.
 +
 . *Create policy*
 +
-Create a `policy.json` file with the following content. You should fill in the ID of the VM Service security group created in step 2 (`VMServiceSecurityGroupId`) and VPC ID (`vpcID`) below.
+Create a `policy.json` file with the following content. You should fill in the ID of the Machine Provisioner security group created in step 2 (`MachineProvisionerSecurityGroupID`) and VPC ID (`vpcID`) below.
 +
 [source,json]
 ----
@@ -821,9 +766,8 @@ Create a `policy.json` file with the following content. You should fill in the I
         "arn:aws:ec2:*:*:launch-template/*",
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<YOUR_VMServiceSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<YOUR_MachineProvisionerSecurityGroupID>"
       ]
     },
     {
@@ -832,21 +776,7 @@ Create a `policy.json` file with the following content. You should fill in the I
       "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
         "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
-        }
-      }
-    },
-    {
-      "Action": [
-        "ec2:CreateVolume"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:ec2:*:*:volume/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+          "aws:RequestTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     },
@@ -865,18 +795,6 @@ Create a `policy.json` file with the following content. You should fill in the I
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:CreateAction" : "CreateVolume"
-        }
-      }
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateTags"
-      ],
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
           "ec2:CreateAction" : "RunInstances"
         }
       }
@@ -886,16 +804,13 @@ Create a `policy.json` file with the following content. You should fill in the I
         "ec2:CreateTags",
         "ec2:StartInstances",
         "ec2:StopInstances",
-        "ec2:TerminateInstances",
-        "ec2:AttachVolume",
-        "ec2:DetachVolume",
-        "ec2:DeleteVolume"
+        "ec2:TerminateInstances"
       ],
       "Effect": "Allow",
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
+          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     },
@@ -924,26 +839,26 @@ Once you have created the policy.json file, attach it to an IAM policy and creat
 +
 [source,shell]
 ----
-aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
+aws iam put-user-policy --user-name circleci-machine-provisioner --policy-name circleci-machine-provisioner --policy-document file://policy.json
 ----
 
 . *Create an access key and secret for the user*
 +
-If you have not already created them, you will need an access key and secret for the `circleci-vm-service` user. You can create those by running the following command:
+If you have not already created them, you will need an access key and secret for the `circleci-machine-provisioner` user. You can create those by running the following command:
 +
 [source,shell]
 ----
-aws iam create-access-key --user-name circleci-vm-service
+aws iam create-access-key --user-name circleci-machine-provisioner
 ----
 
 . *Configure server (there are two options)*
 +
 * *Option 1 - Add the keys to `values.yaml`*
-Add the VM Service configuration to `values.yaml`.
+Add the Machine Provisioner configuration to `values.yaml`.
 +
 [source,shell]
 ----
-vm_service:
+machine_provisioner:
   providers:
     ec2:
       enabled: true
@@ -952,7 +867,7 @@ vm_service:
       accessKey: "<ACCESS-KEY>"
       secretKey: "<SECRET-KEY>"
       subnets:
-      - "<SUBNET_ID>"
+        - "<SUBNET_ID>"
       securityGroupId: "<SECURITY_GROUP_ID>"
 ----
 +
@@ -961,9 +876,9 @@ Instead of providing the access key and secret in your `values.yaml` file, you m
 +
 [source,shell]
 ----
-kubectl create secret generic vm-service-secret \
-  --from-literal=ec2AccessKey=<access-key> \
-  --from-literal=ec2SecretKey=<secret-key>
+kubectl create secret generic machine-provisioner-secret \
+  --from-literal=accessKey=<access-key> \
+  --from-literal=secretKey=<secret-key>
 ----
 --
 
@@ -1007,7 +922,7 @@ External VMs need the networking rules described in xref:hardening-your-cluster/
 
 . *Create user*
 +
-We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[documentation] as reference.
+We recommend you create a unique service account used exclusively by Machine Provisioner. The Compute Instance Admin (Beta) role is broad enough to allow Machine Provisioner to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[documentation] as reference.
 +
 [source,shell]
 ----
@@ -1051,7 +966,7 @@ This step is required only if you are using link:https://cloud.google.com/kubern
 ----
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
-    --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
+    --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/machine-provisioner]"
 ----
 --
 +
@@ -1069,17 +984,17 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *Configure CircleCI server*
 +
-When using service account keys for configuring access for the VM service, there are two options.
+When using service account keys for configuring access for the Machine Provisioner, there are two options.
 +
 [.tab.configureserver.CircleCI_creates_Secret]
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
-Add the VM Service configuration to values.yaml.
+Add the Machine Provisioner configuration to values.yaml.
 
 [source,yaml]
 ----
-vm_service:
+machine_provisioner:
   enabled: true
   replicas: 1
   providers:
@@ -1087,8 +1002,8 @@ vm_service:
       enabled: false
       project_id: <project-id>
       network_tags:
-      - circleci-vm
-      - <your-network>
+        - circleci-vm
+        - <your-network>
       zone: <zone>
       network: <network>
       subnetwork: <subnetwork>
@@ -1108,15 +1023,15 @@ Instead of providing the service account in your `values.yaml` file, you may cre
 
 [source,shell]
 ----
-kubectl create secret generic vm-service-secret \
+kubectl create secret generic machine-provisioner-secret \
   --from-literal=gcp_sa.json=<access-key>
 ----
 --
 
 endif::env-aws[]
 
-[#vm-service-validation]
-=== VM Service Validation
+[#machine-provisioner-validation]
+=== Machine Provisioner Validation
 
 Apply they changes made to your `values.yaml` file.
 
@@ -1126,7 +1041,7 @@ namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion43} -f <path-to-values.yaml>
 ----
 
-Once you have configured and deployed CircleCI server, you should validate that VM Service is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the VM Service Jobs complete. At this point, all tests should pass.
+Once you have configured and deployed CircleCI server, you should validate that Machine Provisioner is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the Machine Provisioner Jobs complete. At this point, all tests should pass.
 
 [#runner]
 == 4. Runner

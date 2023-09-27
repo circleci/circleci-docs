@@ -642,8 +642,8 @@ en:
             link: server/v4.3/operator/managing-user-accounts
           - name: Managing orbs
             link: server/v4.3/operator/managing-orbs
-          - name: Manage virtual machines with VM service
-            link: server/v4.3/operator/manage-virtual-machines-with-vm-service
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.3/operator/manage-virtual-machines-with-machine-provisioner
           - name: Configuring external services
             link: server/v4.3/operator/configuring-external-services
           - name: Expanding internal database volumes

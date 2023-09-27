@@ -84,8 +84,8 @@ nomad:
         enabled: false # mTLS is disabled - it is recommended that this be enabled
 
 
-# VM Service Disabled - Requires cloud connectivity
-vm_service:
+# Machine Provisioner Disabled - Requires cloud connectivity
+machine_provisioner:
   enabled: false
 
 # Additional nginx annotations
@@ -120,5 +120,8 @@ rabbitmq:
   auth:
     password: "<<rabbitmq-password>>"
     erlangCookie: "<<rabbitmq-erlang-cookie>>"
+
+docker_provisioner:
+  enabled: false
 
 ----
