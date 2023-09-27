@@ -9,6 +9,9 @@ contentTags:
     - Server v3.x
 ---
 
+[GitLab](/docs/ja/gitlab-integration/) や [GitHub Apps](/docs/ja/github-apps-integration) のインテグレーションでは、プロジェクトの作成プロセス以外ではアプリ内設定エディターを利用できません。
+{: class="alert alert-warning"}.
+
 CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更することができます。 また、CI/CD プロセスを統一された方法で迅速に変更できます。
 
 ![設定ファイルエディター]({{site.baseurl}}/assets/img/docs/config-editor-main.png)

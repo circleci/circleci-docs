@@ -21,7 +21,7 @@ NOTE: **ImagineX Consulting からのヒント**
 [#sign-up-with-gitlab]
 == GitLab アカウントでの登録
 
-link:/docs/first-steps/#gitlab-signup[CircleCI のユーザー登録] のページに記載されている手順で GitLab アカウントと CircleCI を接続し、以下の内容に従って CI/CD 設定を CircleCI に移行します。
+link:/docs/first-steps/#gitlab[CircleCI のユーザー登録] のページに記載されている手順で GitLab アカウントと CircleCI を接続し、以下の内容に従って CI/CD 設定を CircleCI に移行します。
 
 [#build-configuration]
 == ビルドの設定

@@ -17,7 +17,7 @@ Machine Executor を使用して、Arm リソースを含む Linux 仮想マシ�
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2204:2023.07.1
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -50,7 +50,13 @@ jobs:
 
 Arm リソースは、Machine Executor を使って以下のいずれかのイメージを使用する際に利用できます。
 
+#### Ubuntu 20.04 - focal
 * `ubuntu-2004:current` - 最新版。全てのユーザーに推奨
+* `ubuntu-2004:2023.07.1`
+* `ubuntu-2004:2023.04.2`
+* `ubuntu-2004:2023.02.1`
+* `ubuntu-2004:2022.10.1`
+* `ubuntu-2004:2022.07.1`
 * `ubuntu-2004:2022.04.1`
 * `ubuntu-2004:202201-02`
 * `ubuntu-2004:202201-01`
@@ -60,6 +66,14 @@ Arm リソースは、Machine Executor を使って以下のいずれかのイ�
 * `ubuntu-2004:202104-01`
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
+
+#### Ubuntu 22.04 - jammy
+* `ubuntu-2204:current` - 最新版。全てのユーザーに推奨
+* `ubuntu-2204:2023.07.1`
+* `ubuntu-2204:2023.04.2`
+* `ubuntu-2204:2023.02.1`
+* `ubuntu-2204:2022.10.2`
+* `ubuntu-2204:2022.07.2`
 
 Machine Executor イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。 イメージの更新に関する通知は、[CircleCI の Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64)を参照してください。
 

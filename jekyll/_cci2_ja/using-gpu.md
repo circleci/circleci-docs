@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "GPU 実行環境の使用"
-description: "GPU 実行環境で実行するジョブの設定方法を説明します。"
+description: "このドキュメントページでは、GPU 実行環境で実行するジョブの設定方法をわかりやすく説明します。"
 contentTags:
   platform:
     - クラウド
@@ -21,7 +21,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2004-cuda-11.4:202110-01
+      image: linux-cuda-12:default
+      resource_class: gpu.nvidia.medium
     steps:
       - run: nvidia-smi
 ```
@@ -68,8 +69,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2004-cuda-11.4:202110-01
-    resource_class: gpu.nvidia.small
+      image: linux-cuda-12:default
+    resource_class: gpu.nvidia.medium
     steps:
       - run: nvidia-smi
 ```
@@ -82,3 +83,8 @@ jobs:
 Windows の場合、現在 1 つのリソースクラスのオプションがあります。 これはデフォルトで使用されるため、お客様の設定で指定する必要はありません。
 
 {% include snippets/ja/gpu-windows-resource-table.md %}
+
+### リソースの使用状況を見る
+{: #view-resource-usage }
+
+{% include snippets/ja/resource-class-view.md %}

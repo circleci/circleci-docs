@@ -123,14 +123,20 @@ DEBUG[2023-05-18T22:09:08Z] Received: ****
 ```bash
 gem 'rspec_junit_formatter'
 ```
-. `circleci tests run` を使うようにテストコマンドを更新します。
+
+. Modify your test command to use `circleci tests run`:
 +
 ```yaml
  - run: mkdir ~/rspec
  - run:
     command: |
       circleci tests glob "spec/**/*_spec.rb" | circleci tests run --command="xargs bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml" --verbose --split-by=timings
+
+ - store_test_results:
+    path: ~/rspec
 ```
+
+. `circleci tests run` コマンドで `xargs` を使って、テストファイル/クラス名のリストを標準入力から `--command` に渡していることを確認してください。
 . `glob` コマンドは、必要に応じて調整してください。 テスト結果を `rspec` に対応した形式で出力する方法については、「xref:collect-test-data#rspec[テストデータの収集]」の RSpec に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
 [#configure-a-job-running-ruby-cucumber-tests]
@@ -142,8 +148,13 @@ gem 'rspec_junit_formatter'
 - run: mkdir -p ~/cucumber
 - run:
     command: |
-    circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit --out ~/cucumber/junit.xml" --verbose --split-by=timings
+    circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out ~/cucumber/junit.xml" --verbose --split-by=timings
+
+- store_test_results:
+    ~/cucumber
 ```
+. `circleci tests run` コマンドで `xargs` を使って、テストファイル/クラス名のリストを標準入力から `--command` に渡していることを確認してください。
+
 . `glob` コマンドは、必要に応じて調整してください。 テスト結果を `Cucumber` に対応した形式で出力する方法については、「xref:collect-test-data#cucumber[テストデータの収集]」の Cucumber に関するセクションを参照してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
 [#configure-a-job-running-cypress-tests]
@@ -174,6 +185,9 @@ gem 'rspec_junit_formatter'
         path: test_results
 ```
 +
+
+. `circleci tests run` コマンドで `xargs` を使って、テストファイル/クラス名のリストを標準入力から `--command` に渡していることを確認してください。
+
 `glob` コマンドの部分は、ニーズにあわせて調整してください。  **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。**
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
@@ -193,7 +207,7 @@ gem 'rspec_junit_formatter'
 ```yaml
 - run:
     command: |
-      npx jest --listTests | circleci tests run --command=“JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --” --verbose --split-by=timings
+      npx jest --listTests | circleci tests run --command="JEST_JUNIT_ADD_FILE_ATTRIBUTE=true xargs npx jest --config jest.config.js --runInBand --" --verbose --split-by=timings
     environment:
       JEST_JUNIT_OUTPUT_DIR: ./reports/
   - store_test_results:
@@ -213,7 +227,7 @@ gem 'rspec_junit_formatter'
     command: |
       mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
       pnpm run serve &
-      TESTFILES = $(circleci tests glob "specs/e2e/**/*.spec.ts")
+      TESTFILES=$(circleci tests glob "specs/e2e/**/*.spec.ts")
       echo "$TESTFILES" | circleci tests run --command="xargs pnpm playwright test --config=playwright.config.ci.ts --reporter=junit" --verbose --split-by=timings
 ```
 . `glob` コマンドは、必要に応じて調整してください。 **現在のジョブでxref:test-splitting-tutorial#[インテリジェントテスト分割機能]を使用している場合は、`circleci tests split` コマンドを `circleci tests run` コマンドに変更し、`--split-by=timings` パラメーターを付けてください。** テスト分割を使用しない場合は、`--split-by=timings` を省略できます。 注：link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwrightの既にビルドインされている flag]（`PLAYWRIGHT_JUNIT_OUTPUT_NAME`）を使用して、JUnit XML 出力ディレクトリを指定することも可能です。

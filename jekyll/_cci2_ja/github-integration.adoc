@@ -4,18 +4,29 @@ contentTags:
   platform:
   - クラウド
 ---
-= GitHub との連携ガイド
+= GitHub OAuth アプリ連携
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このページでは、CircleCI で GitHub と GitHub Enterprise を使用する方法についてわかりやすく説明します。
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-[#overview]
-== 概要
+[NOTE]
+====
+**CircleCIでのGitHub認証が変更されます**。 2023年8月より、CircleCI アカウントを GitHub で認証する際、**GitHub OAuth** アプリではなく、CircleCI の **GitHub App** から認証されるようになります。どのアカウントタイプかは、CircleCI Web アプリにアクセスし、ブラウザで URL を確認することで確認できます：
 
-CircleCI で GitHub を使用するには、GitHub のアカウントを接続する必要があります。 プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の設定がリポジトリに追加されます。
+* このスタイルの URL は、**GitHub App** で認証されたことを示します: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* このスタイルの URL は、**GitHub OAuth app** で認証されたことを示します: `https://app.circleci.com/github/<your GitHub username>`
+
+GitHub Apps と OAuth　の違いに関しては、こちらの link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub Apps と OAuth アプリの違い]をご覧ください。
+====
+
+＊お客様の CircleCI　アカウントが **GitHub OAuth アプリ**で認証されている場合は、このページが適応されますので引き続きお読みください。
+
+[#introduction]
+== GitHub 連携に関する概要
+
+CircleCI にプロジェクトを追加すると、新規アカウント登録時に CircleCI に与えた権限を使用して、以下の設定がリポジトリに追加されます。
 
 - デプロイキー: GitHub からプロジェクトをチェックアウトするために使用されます。
 - サービスフック (またはプッシュフック): GitHub にプッシュしたときに CircleCI に通知を送信するために使用されます。
@@ -58,7 +69,7 @@ CircleCI では、link:http://developer.github.com/v3/oauth/#scopes[GitHub の�
 - リポジトリにデプロイキーを追加する
 - リポジトリにサービスフックを追加する
 
-NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は GitHub が提供すると決めたアクセス許可のみに制限されます。 たとえば、全ユーザーのリポジトリ (パブリックとプライベートの両方) の一覧を GitHub から取得するには、 https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` スコープ] の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
+NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は GitHub OAuth アプリ が提供すると決めたアクセス許可のみに制限されます。 たとえば、全ユーザーのリポジトリ (パブリックとプライベートの両方) の一覧を GitHub から取得するには、 https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` スコープ] の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
 
 [#connect-a-github-account]
 == GitHub アカウントの接続

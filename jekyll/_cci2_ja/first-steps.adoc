@@ -7,67 +7,117 @@ contentTags:
 = CircleCI のユーザー登録
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI 導入の第一歩.
+:page-description: CircleCI 導入の第一歩をこのドキュメントページでご紹介しています。
 :icons: font
-:toc: macro
-
-:toc-title:
+:experimental:
 
 CircleCI で最初のビルドを実行するには、link:https://circleci.com/ja/signup/[ユーザー登録] のページに移動してください。 GitHub、 Bitbucket、 または GitLab アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
 
-[#vcs-signup]
-== GitHub または Bitbucket のアカウントでの登録
+- チームのために新しい **CircleCI org を作成**する場合は、以下の xref:#sign-up-and-create-an-org[登録と組織作り]の手順に従ってください。
+- チームの誰かから**招待**を受けてCircleCIアカウントにサインアップする場合は、xref:#sign-up-with-an-invite[招待でサインアップ] セクションの手順に従ってください。
 
-. link:https://circleci.com/auth/vcs-connect?connection=Github[**GitHub で登録**] または link:https://circleci.com/auth/vcs-connect?connection=Bitbucket[**Bitbucket で登録**] のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。
+[#vcs-integrations]
+== VCS との統合
+
+CircleCIは、GitHub、Bitbucket、GitLabプロジェクトをサポートしています。GitHub**または**GitLab**を使用し、チームのためにCircleCI組織を作成する場合、サインアッププロセスでバージョン管理システム（VCS）の統合タイプを設定し、VCSプロバイダで認証します。その後CircleCI orgに招待したチームメンバーは、VCSで認証しなくてもCircleCIに参加することができます。ただし、新しいプロジェクトを作成する場合は、プロジェクト作成プロセスで認証する必要があります。
+
+**Bitbucket** を使用している場合、新しいアカウントにサインアップしてお客様の組織に参加するすべてのチームメンバーは、サインアッププロセス中に Bitbucket で認証されます。
+
+[#sign-up-and-create-an-org]
+==　アカウント登録し、組織を作成する方法
+
+CircleCI を初めてご利用になる場合は、CircleCI 組織を作成します。CircleCI 組織は、_個人_ CircleCI アカウントに直接対応することも、より一般的には、チームが協力し、複数のチームメンバーの個人 CircleCI アカウントを関連付けることができる_共有_アカウントに対応することもできます。
+
+. CircleCI で無料でアカウントを作成するには、link:https://circleci.com/signup/[サインアップ] ページでメールアドレスとパスワードを入力してください。
+
+. 次の画面で、お客様の役割と所属するエンジニアリング組織を最もよく表すプロンプトに回答してください。
+
+. 次に、コードを接続します。コード リポジトリがある VCS を選択を選択してください： GitHub、GitLab.com（クラウド）、GitLab Self-Managed、Bitbucketに現在対応しています。
+
+[#GitHub]
+=== GitHub
+
+NOTE: **CircleCIでのGitHub認証が変更されます**。2023年8月以降、CircleCIアカウントをGitHubで認証する場合、このセクションに記載されているプロセス、または xref:#bitbucket[Bitbucket]セクションに記載されているプロセスのいずれかがサインアップに反映される可能性があります。詳細については、xref:github-integration[GitHub OAuth統合ページ]をお読みください。
+
+. GitHubの場合、CircleCI GitHub Appをインストールする画面が表示されます。このステップでは、CircleCIがアクセスできるリポジトリを指定するか、GitHub組織内のすべてのリポジトリにCircleCIがアクセスできるようにするかを選択します。
+
+. 次に、Create New Projectページで、最初のプロジェクトを設定し、CircleCIで最初のパイプラインをトリガーします。SSHキーが必要です。このページで秘密鍵を追加し、対応する公開鍵をGitHubのデプロイ鍵として追加します。ページの指示に従うか、詳細は xref:create-project#[プロジェクトの作成]ガイドを参照してください。
 +
-NOTE: GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 Sign Up ボタンの横にあるドロップダウンメニューを使ってリストから **Public Repos Only** を選択します。
-. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力し、**ログイン** をクリックします。
-. **Authorize Application** または同等のボタンをクリックします。 CircleCI パイプラインのダッシュボードにリダイレクトされます。
-. CircleCI アプリケーションの **Project** ページから、プロジェクトコードのビルドを開始します。
+この時点でコードに接続せず、Eメールサインアップのみを続行したい場合は、btn:[Cancel]をクリックしてください。 
 
-[#gitlab-signup]
-== GitLab アカウントでの登録
+. CircleCI Webアプリのダッシュボードに移動します。ここからパイプラインのトリガー、プロジェクトの作成、チームメンバーの招待を行うことができます。
 
-[.tab.signup.New_to_CircleCI]
---
-. link:https://circleci.com/signup/[**GitLab で登録**] をクリックします。
-. メールアドレスを入力し、CircleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
-. GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。
- 画面の指示に従って GitLab.com または GitLab Self-managed （セルフマネージド）のアカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
---
+** この時点でコードを接続しないことを選択した場合でも、CircleCIアプリ内でいくつかのサンプルプロジェクトを探索することができます。CircleCI でビルドされている人気のオープンソースプロジェクト (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または私たち自身のサンプルプロジェクトの1つを見てみましょう： link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[サンプル JavaScript アプリ]、link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[サンプル Python アプリ]。
++
+準備ができたら、CircleCI Web アプリから xref:create-project#[新規プロジェクトの作成]で GitHub アカウントに接続できます。
 
-[.tab.signup.Existing_CircleCI_users]
---
-**新しい組織を作成する**
+NOTE: GitHub と CircleCI を統合するためのドキュメント一式は、xref:github-apps-integration#[GitHub App 連携ページ]にあります。
 
-.  link:https://app.circleci.com/[CircleCI Web アプリ] にログインします。
-. ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
-. GitLab.com オプションの隣にある **Connect** をクリックします。 GitLab アカウントの承認、プロジェクトの作成、および GitLab アカウントからのリポジトリの接続についての説明が表示されます。 その後、組織のダッシュボードに自動的に移動します。
+[#gitlab]
+=== GitLab
 
-この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 組織のプランは、最初は Free プランになります。 後で他のプランにアップグレードできます。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
---
+. GitLab の場合は、GitLab.com か GitLab Self-managed のアカウントからコードを接続します。プロンプトに従って GitLab アカウントに接続し、新しいプロジェクトを作成します。このステップの詳細については、xref:create-project#[プロジェクトの作成] ガイドを参照することもできます。
++
+この時点でコードに接続せず、Eメールサインアップのみを続行したい場合は、btn:[Cancel]をクリックしてください。
 
-NOTE: GitLab と CircleCI の連携に関する詳細は link:/docs/gitlab-integration[GitLab.com の連携についてのページ] を参照してください。
+. リポジトリを選択し、新規 CircleCI プロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。ここから、プロジェクトパイプラインのトリガーや実行、プロジェクトの作成、チームメンバーの招待を行うことができます。
 
-[#email-signup]
-== メールアドレスでの登録
+** この時点でコードを接続しないことを選択した場合でも、CircleCIアプリ内でいくつかのサンプルプロジェクトを探索することができます。CircleCI でビルドされている人気のオープンソースプロジェクト (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または私たち自身のサンプルプロジェクトの1つを見てみましょう： link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[サンプル JavaScript アプリ]、link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[サンプル Python アプリ]。
++
+準備ができたら、CircleCI Web アプリから xref:create-project#[新しいプロジェクトの作成]で GitLa アカウントに接続できます。
 
-. link:https://circleci.com/signup/[**メールアドレスで登録**] をクリックします。
-. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
-. コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしします。 お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
-. 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 CircleCI 上の一般的なオープンソースプロジェクトビルド (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または弊社独自のサンプルプロジェクト (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[JavaScript サンプルアプリ]) や (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[Python サンプルアプリ]) をご覧いただけます。
+NOTE: GitLab と CircleCI を連携するためのドキュメントは、xref:gitlab-integration#[GitLab 連携 ページ]をご覧ください。
 
-link:/docs/pipelines[パイプライン] や link:/docs/workflows[ワークフロー] などの機能をご覧いただけるようになります。 **Dashboard** 、 **Projects**、 **Organization Settings:** 、および **Plan** のページは、コードに接続するまで使用できません。
+[#bitbucket]
+=== Bitbucket
 
-準備ができたら CircleCI Web アプリから GitHub、BitBucket、 GitLab のアカウントに接続できます。
+. Bitbucket の場合は、Bitbucket アカウントで認証し、コードを接続します。
+
+. 認証が完了すると、CircleCI Web アプリの組織ダッシュボードにリダイレクトされます。ここから、プロジェクトパイプラインのトリガーや実行、プロジェクトの設定、チームメンバーの招待を行うことができます。
++
+CircleCI でのプロジェクト設定の詳細については、xref:create-project#[プロジェクトの作成]ガイドをご覧ください。
+
+** この時点でコードを接続しないことを選択した場合でも、CircleCIアプリ内でいくつかのサンプルプロジェクトを探索することができます。CircleCI でビルドされている人気のオープンソースプロジェクト (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または私たち自身のサンプルプロジェクトの1つを見てみましょう： link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[サンプル JavaScript アプリ]、link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[サンプル Python アプリ]。
++
+準備ができたら、CircleCI Webアプリから Bitbucket アカウントに接続できます。左下のユーザーアイコンをクリックし、*User Settings* を開きます。アカウント統合*の下にある btn:[Connect]をクリックして Bitbucket と認証し、プロジェクトの設定を開始します。
+
+NOTE: Bitbucket と CircleCI を連携するためのガイドは、こちらの xref:bitbucket-integration#[Bitbucket 連携ページ]をご覧ください。
+
+[#sign-up-with-an-invite]
+== 招待でアカウント登録する場合
+
+チームメンバーからの招待でサインアップする場合、CircleCI 組織に参加することになります。CircleCI 組織は、チームが共同作業を行うための共有アカウントであり、複数のチームメンバーの個人 CircleCI アカウントを関連付けることができます。
+
+[CAUTION] 
+====
+既存の CircleCI 組織に参加するには、招待メールからのリンクに従う必要があります。link:https://circleci.com/ja/signup/[サインアップページ]から直接サインアップしようとすると、新しい組織を作成することになります。
+
+招待状を受け取っていない場合は、所属する組織の管理者に連絡してください。
+====
+
+. CircleCI で無料でアカウントを作成するには、招待メールに記載されているリンクに従い、メールアドレスとパスワードを入力してください。
+
+. 次の画面で、お客様の役割と所属するエンジニアリング組織を最もよく表すプロンプトに回答してください。
+
+. 最後に、CircleCI Web アプリの組織のパイプラインダッシュボードに移動します。ここから、組織でアクセス権を持つプロジェクトやトリガーパイプラインをフォローしたり、新しいプロジェクトを設定することができます。
+
+NOTE: 初めてプロジェクトをセットアップする場合、VCS プロバイダーの認証が必要になる場合があります。一度認証が完了すれば、それ以降は CircleCI でプロジェクトを素早く設定することができます。詳細は xref:create-project#[プロジェクトの作成]ガイドを参照してください。
+
+GitHub、Bitbucket、GitLab のプロジェクトを連携するためのガイドは、以下の通りです：
+
+- xref:github-apps-integration#[GitHub App 連携ガイド]
+- xref:github-integration#[GitHub OAuth 連携ガイド]
+- xref:bitbucket-integration#[Bitbucket 連携ガイド]
+- xref:gitlab-integration#[GitLab 連携ガイド]
 
 [#terms]
-== 利用規約
+== Terms
 
-ユーザー登録を行うことで、link:https://circleci.com/terms-of-service/[SaaS 利用規約] および link:https://circleci.com/privacy/[プライバシーポリシー] に同意したものと見なされます。 CircleCI では、サービスの改善を目的として、お客様のアカウントデータへの読み取りアクセスまたは書き込みアクセスの許可をお願いする場合があります。 GitHub アカウントをお持ちで、プライベートプロジェクトへのアクセスの共有を希望されない場合は、パブリックリポジトリを選択してください。 このサイトは reCAPTCHA により保護されています。Google の link:https://policies.google.com/privacy?hl=ja[プライバシーポリシー] と link:https://policies.google.com/terms?hl=ja[利用規約] が適用されます。
+ユーザー登録すると、link:https://circleci.com/terms-of-service/[SaaS 契約 (英語)] と link:https://circleci.com/privacy/[プライバシーポリシー (英語)]の内容に同意したものとみなされます。プライベートリポジトリの情報を共有したくない方は「公開リポジトリ」を選んでください。CircleCI のサービス改善を目的として、アカウントのデータにアクセスすることがあります。reCAPTCHA による確認が必要です、Googleの link:https://policies.google.com/privacy?hl=ja[プライバシー ポリシー] と link:https://policies.google.com/terms?hl=ja[利用規約] が適用されます。
 
 [#next-steps]
 == 次のステップ
 
-* link:/docs/hello-world[Hello World] のページに移動し、プロジェクトの基礎、組織の切り替え、link:/docs/configuration-reference[`.circleci/config.yml`] (実行環境を決定し、テストを自動化するための設定ファイル) について学びましょう。
-* link:/docs/concepts[コンセプト] のページでパイプライン、Executor、イメージ、ワークフロー、ジョブなどの CircleCI の基本的なコンセプトの概要をご確認ください。
+- xref:hello-world#[Hello World]のページでCircleCI の設定ファイルの基本を学びましょう。
+- パイプラインやエクゼキュータなど、CircleCI の基礎となる概念の概要については、xref:concepts#[コンセプト]ドキュメントを参考してください。
+- 実行環境を決定し、テストを自動化する `.circleci/config.yml` ファイルの作成については、完全な xref:configuration-reference#[CircleCI 設定リファレンス] を参照してください。
