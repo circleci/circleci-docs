@@ -1,0 +1,49 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Configure your Kubernetes components - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**
+
+Visualise and control deployments to your Kubernetes cluster with CircleCI release environments. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
+
+[#introduction]
+== Introduction
+
+In this tutorial you will configure your Kubernetes components, adding labels and feature flags to enable visibility and control over your deployments, and access to the following features:
+
+* Restore a version
+* Scale a version
+* Restart a version
+* Retry a release (when using Argo Rollouts)
+* Promote a release (when using Argo Rollouts)
+* Cancel a release (when using Argo Rollouts)
+
+[#prerequisites]
+== Prerequisites
+
+Before following the steps below, ensure the release integration has been successfully set up. Refer to the xref:set-up-a-release-integration#[Set up a release integration] page.
+
+[#add-labels]
+== 1. Add labels to your Deployment/Rollout
+
+#TBD#
+
+[#conclusion]
+== Conclusion
+
+In this tutorial you have configured your Kubernetes components for visibility and control in the CircleCI releases dashboard.
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]

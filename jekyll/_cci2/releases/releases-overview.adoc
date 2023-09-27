@@ -12,7 +12,7 @@ contentTags:
 
 NOTE: CircleCI releases is currently in **open preview**
 
-Visualise and control releases to your Kubernetes cluster with CircleCI release integrations.
+Visualise and control deployments to your Kubernetes cluster with CircleCI release environments.
 
 [#introduction]
 == Introduction
