@@ -17,7 +17,7 @@ Visualise and control deployments to your Kubernetes cluster with CircleCI relea
 [#introduction]
 == Introduction
 
-In this tutorial you will configure your Kubernetes components, adding labels and feature flags to enable visibility and control over your deployments, and access to the following features:
+In this tutorial you will configure your Kubernetes components, adding labels and annotations to enable visibility and control over your deployments, and access to the following features:
 
 * Restore a version
 * Scale a version
@@ -34,7 +34,7 @@ Before following the steps below, ensure the release environment has been succes
 [#add-required-labels]
 == 1. Add required labels to your Deployment/Rollout
 
-To enable your release to show up on the releases dashboard in the CircleCI web app, add the following labels to your Deployment of Argo Rollout:
+To enable your release to show up on the releases dashboard in the CircleCI web app, add the following labels to your Kubernetes Deployment or Argo Rollout:
 
 * Specify the `app` and `version` label in the Kubernetes object `Metadata.Labels`
 * Specify the `app` and `version` label in the Kubernetes object `Spec.Template.Metadata.Labels`

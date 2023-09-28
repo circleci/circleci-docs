@@ -36,9 +36,9 @@ image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for image
 
 If you want to get started with CircleCI releases right away, you can jump to:
 
-xref:set-up-a-release-environment.adoc#[Tutorial: Set up a release environment]
+* xref:set-up-a-release-environment.adoc#[Tutorial: Set up a release environment]
+* xref:configure-your-kubernetes-components.adoc#[Tutorial: Configure your Kubernetes components]
 
-#Is there a separate setup guide for using feature flags?#
 #Add links to how to guide for using commands?#
 
 [#how-the-feature-works]
