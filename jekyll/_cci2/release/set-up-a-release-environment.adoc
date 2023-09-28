@@ -1,0 +1,110 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Set up a release environment - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Tutorial outlining how to set up a new CircleCI release environment and install the CircleCI release agent.
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**
+
+Visualise and control deployments to your Kubernetes cluster with CircleCI release environments. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
+
+[#introduction]
+== Introduction
+
+In this tutorial you will set up an integration between CircleCI and your Kubernetes cluster. Once configured, release status can be reported to the CircleCI web app, and commands from CircleCI can be #mapped to your release ???# to enable you to:
+
+* Restore a version
+* Scale a version
+* Restart a version
+* Retry a release (when using Argo Rollouts)
+* Promote a release (when using Argo Rollouts)
+* Cancel a release (when using Argo Rollouts)
+
+[#prerequisites]
+== Prerequisites
+
+In order to set up a release environment with CircleCI you will need to ensure the following prerequisites are fulfilled:
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A project building on CircleCI. See the xref:../create-project#[Create a project] page for steps.
+* You must be an **org admin**. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page.
+* A Kubernetes .... #Not sure of the specifics here - they need a Kubernetes cluster to which they are deploying something? Or should we say a Kubernetes Deployment?#
+
+CircleCI supports Kubernetes, Helm, and Argo Rollouts. The supported versions are listed below:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|System
+|Supported versions
+
+|Kubernetes
+a| 1.28.0 +
+1.27.0
+
+|Helm (optional)
+a| 3.12.0 +
+3.11.0
+
+|Argo Rollouts (optional)
+a| 1.6.0 +
+1.5.0
+|===
+
+[#create-release-environment]
+== 1. Create your release environment and token
+
+. In the CircleCI web app, click **Releases** in the sidebar
+. Click btn:[Add Release Environment]
+. Enter a name for your release environment and click btn:[Create Integration]
+. Click to select the environment you just created
+. Click btn:[Create New Token] and click btn:[Create Token]
+. The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then click btn:[Done]
+
+[#add-release-agent]
+== 2. Add the release agent into your Kubernetes cluster
+
+Use Helm to install the CircleCI release agent into your Kubernetes cluster
+
+. Add the CircleCI release agent by running the following command:
++
+[,shell]
+----
+helm repo add release-agent https://circleci-public.github.io/cci-k8s-release-agent
+----
+
+. Then, update your local Helm chart repository cache
++
+[,shell]
+----
+helm repo add release-agent https://circleci-public.github.io/cci-k8s-release-agent
+----
+
+[#install-the-release-agent]
+== 3. Install the release agent
+
+Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster. Be sure to substitute the token you created in the previous step:
++
+[,shell]
+----
+helm install circleci-release-agent-system release-agent/circleci-release-agent \
+--set tokenSecret.token=[YOUR_CCI_INTEGRATION_TOKEN] --create-namespace \
+--namespace circleci-release-agent-system
+----
+
+[#conclusion]
+== Conclusion
+
+In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now #link to command how to guides#
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:configure-your-kubernetes-components#[Configure your Kubernetes components]

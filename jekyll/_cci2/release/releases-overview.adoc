@@ -1,0 +1,118 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Releases overview - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn CircleCI releases for visibility into Kubernetes releases, how it works, and how to get set up
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**
+
+Visualise and control deployments to your Kubernetes cluster with CircleCI release environments.
+
+[#introduction]
+== Introduction
+
+CircleCI release environments give you visibility into your Kubernetes deployments in the CircleCI web app, as well as access to controls for release management. From the releases dashboard, you can:
+
+* Restore a version
+* Scale a version
+* Restart a version
+
+CircleCI releases supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Some further controls are available from the releases dashboard for projects that use Argo Rollouts:
+
+* Retry release
+* Promote release
+* Cancel release
+
+image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for images here]
+
+[#quickstart]
+== Quickstart
+
+If you want to get started with CircleCI releases right away, you can jump to:
+
+xref:set-up-a-release-environment.adoc#[Tutorial: Set up a release environment]
+
+#Is there a separate setup guide for using feature flags?#
+#Add links to how to guide for using commands?#
+
+[#how-the-feature-works]
+== How the feature works
+
+CircleCI integrates with Kubernetes deployments and Argo Rollouts to give you visibility and control over your release process through the CircleCI web app
+
+#Need some info about how it all works#
+
+[#releases-requirements]
+== Requirements
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|System
+|Supported versions
+
+|Kubernetes
+a| 1.28.0 +
+1.27.0
+
+|Helm (optional)
+a| 3.12.0 +
+3.11.0
+
+|Argo Rollouts (optional)
+a| 1.6.0 +
+1.5.0
+|===
+
+[#releases-concepts]
+== Concepts
+
+The following sections describe concepts that will help you fully understand your release environment.
+
+[#delivery]
+=== Delivery
+
+[#deployment]
+=== Deployment
+
+[#release]
+=== Release
+
+[#component]
+=== Component
+
+[#command]
+=== Command
+
+[#release-status]
+== Release status
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Status
+|Notes
+
+|RUNNING
+| Currently in progress
+
+|FAILED
+| Pods have reached an unhealthy status. This can be recovered once the release has completed
+
+| SUCCESS
+| The Deployment or Rollout has all desired pods available
+|===
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* link:/docs/templates/template-tutorial[Tutorial template]
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]
