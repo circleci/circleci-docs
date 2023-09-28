@@ -603,13 +603,13 @@ en:
       - name: Overview
         children:
           - name: Releases overview
-            link: releases/releases-overview
+            link: release/releases-overview
       - name: Set up
         children:
-          - name: Set up a release integration
-            link: releases/set-up-a-release-integration
+          - name: Set up a release environment
+            link: release/set-up-a-release-environment
           - name: Configure your Kubernetes components
-            link: releases/configure-your-kubernetes-components
+            link: release/configure-your-kubernetes-components
 
   - name: Server administration v4.2
     icon: icons/sidebar/admin-new.svg
