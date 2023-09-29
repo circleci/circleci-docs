@@ -35,8 +35,6 @@ xref:ios-codesigning#[iOSコード署名プロジェクトと] xref:hello-world-
 
 {% include snippets/ja/xcode-silicon-vm.adoc %}
 
-専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、xref:dedicated-hosts-macos#[専有ホスト]内の表を参照してください
-
 [#getting-started]
 == はじめよう
 

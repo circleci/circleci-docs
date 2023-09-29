@@ -31,8 +31,6 @@ There is documentation for [iOS code signing projects](/docs/ios-codesigning/) a
 
 {% include snippets/xcode-silicon-vm.md %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
-
 ## Getting started
 {: #getting-started }
 
