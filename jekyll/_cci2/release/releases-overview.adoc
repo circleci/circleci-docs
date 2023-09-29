@@ -36,8 +36,8 @@ image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for image
 
 If you want to get started with CircleCI releases right away, you can jump to:
 
-* xref:set-up-a-release-environment.adoc#[Tutorial: Set up a release environment]
-* xref:configure-your-kubernetes-components.adoc#[Tutorial: Configure your Kubernetes components]
+* xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up a release environment]
+* xref:configure-your-kubernetes-components.adoc#[Tutorial 2: Configure your Kubernetes components]
 
 #Add links to how to guide for using commands?#
 
@@ -46,15 +46,18 @@ If you want to get started with CircleCI releases right away, you can jump to:
 
 CircleCI integrates with Kubernetes deployments and Argo Rollouts to give you visibility and control over your release process through the CircleCI web app
 
-#Need some info about how it all works#
+#Add some information about how it all works#
 
 [#releases-requirements]
 == Requirements
 
+[#tooling]
+=== Tooling
+
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|System
+|Tool
 |Supported versions
 
 |Kubernetes
@@ -69,6 +72,9 @@ a| 3.12.0 +
 a| 1.6.0 +
 1.5.0
 |===
+
+[#labels-and-annotations]
+=== Labels and annotations
 
 [#releases-concepts]
 == Concepts
