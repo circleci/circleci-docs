@@ -58,13 +58,19 @@ github:
   clientId: "<generated-github-client-id>"
   clientSecret: "<generated-github-client-secret>"
 
-vm_service:
+docker_provisioner:
+  providers:
+    ec2:
+      enabled: true
+      irsaRole: "<arn-of-irsa-role>"
+
+machine_provisioner:
   providers:
     ec2:
       enabled: true
       region: "<aws-region>"
       subnets:
-      - "<subnet-id>"
+        - "<subnet-id>"
       securityGroupId: "<security-group-id>"
       irsaRole: "<arn-of-irsa-role>"
 
@@ -102,6 +108,7 @@ global:
 
 apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
+
 keyset:
   signing: '<generated-signing-key>'
   encryption: '<generated-encryption-key>'
@@ -109,6 +116,7 @@ keyset:
 github:
   clientId: "<generated-github-client-id>"
   clientSecret: "<generated-github-client-secret>"
+
 object_storage:
   bucketName: "<gcs-bucket-name>"
   gcs:
@@ -119,27 +127,37 @@ mongodb:
   auth:
     rootPassword: "<mongodb-root-password>"
     password: "<mongodb-password>"
-vm_service:
+
+machine_provisioner:
   providers:
     gcp:
       enabled: true
       project_id: <gcp-project-id>
       network_tags:
-      - <network-tag>
+        - <network-tag>
       zone: <gcp-zone>
       network: "<gcp-network>"
       subnetwork: "" # leave blank for auto-subnetting
       workloadIdentity: "<service-account-email-with-compute-access>"
 
+docker_provisioner:
+  providers:
+    gcp:
+      enabled: true
+      workloadIdentity: "<service-account-email-with-nomad-compute-access>"
+
 pusher:
   secret: "<pusher-secret>"
+
 postgresql:
   auth:
     postgresPassword: "<postgres-password>"
+
 rabbitmq:
   auth:
     password: "<rabbitmq-password>"
     erlangCookie: "<rabbitmq-erlang-cookie>"
+
 nomad:
   server:
     gossip:
@@ -1102,11 +1120,6 @@ a|AWS Authentication Config.
 |`false`
 |
 
-|`schedulerer.replicas`
-|int
-|`1`
-|Number of replicas to deploy for the schedulerer deployment.
-
 |`serveUnsafeArtifacts`
 |bool
 |`false`
@@ -1226,11 +1239,6 @@ a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
 |`"telegraf-custom-config"`
 |
 
-|`test_results_service.replicas`
-|int
-|`1`
-|Number of replicas to deploy for the test-results-service deployment.
-
 |`tink.enabled`
 |bool
 |`false`
@@ -1270,78 +1278,6 @@ a|Session Cookie Key. NOTE: Must be exactly 16 bytes.
 |string
 |`"transit"`
 |When `internal: true`, this value is used for the vault transit path.
-
-|`vm_gc.replicas`
-|int
-|`1`
-|Number of replicas to deploy for the vm-gc deployment.
-
-|`vm_scaler.prescaled`
-|list
-|`[{"count":0,"cron":"","docker-engine":true,"image":"docker-default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"docker","type":"l1.large"},{"count":0,"cron":"","docker-engine":false,"image":"windows-default","type":"windows.medium"}]`
-|Configuration options for, and numbers of, prescaled instances.
-
-|`vm_scaler.replicas`
-|int
-|`1`
-|Number of replicas to deploy for the vm-scaler deployment.
-
-|`vm_service.dlc_lifespan_days`
-|int
-|`3`
-|Number of days to keep DLC volumes before pruning them.
-
-|`vm_service.enabled`
-|bool
-|`true`
-|
-
-|`vm_service.providers`
-|object
-|`{"ec2":{"accessKey":"","assignPublicIP":true,"enabled":false,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-8asfas76","subnets":["subnet-abcd1234"],"tags":["key","value"],"windowsAMI":"ami-mywindowsami"},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"my-server-vpc","network_tags":["circleci-vm"],"project_id":"my-server-project","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zone":"us-west2-a"}}`
-|Provider configuration for the VM service.
-
-|`vm_service.providers.ec2.accessKey`
-|string
-|`""`
-a|EC2 Authentication Config.
-
-**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.
-
-**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists.
-
-**Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
-
-|`vm_service.providers.ec2.enabled`
-|bool
-|`false`
-|Set to enable EC2 as a virtual machine provider.
-
-|`vm_service.providers.ec2.subnets`
-|list
-|`["subnet-abcd1234"]`
-|Subnets must be in the same availability zone.
-
-|`vm_service.providers.gcp.enabled`
-|bool
-|`false`
-|Set to enable GCP Compute as a VM provider.
-
-|`vm_service.providers.gcp.service_account`
-|object
-|`{"project_id":"... ...","type":"service_account"}`
-|GCP Compute Authentication Config.
-
-**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.
-
-**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists.
-
-**Option 3:** Leave the `service_account` field as its default, and set the `workloadIdentityField` with a service account email to use workload identities.
-
-|`vm_service.replicas`
-|int
-|`1`
-|Number of replicas to deploy for the vm-service deployment.
 
 |`web_ui.replicas`
 |int

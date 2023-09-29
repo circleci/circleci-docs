@@ -527,9 +527,7 @@ You will need to update your DNS records to the new loadbalancer once you have r
 You can choose to disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following the first option (do nothing) and forward the following ports to your CircleCI load balancer:
 
 * Frontend / API Gateway [TCP 80, 443]
-* VM service [TCP 3000]
 * Nomad server [TCP 4647]
-* Output processor [gRPC 8585]
 
 --
 
@@ -767,7 +765,7 @@ The following fields need to be configured in your `values.yaml`:
 * Toggle `proxy.enabled` to `"1"`
 * Enter details for `proxy.http.host` and `proxy.https.host`, along with their associated ports. These values can be the same but they both need to be configured.
 * For authentication you will need to configure `proxy.http.auth.enabled` and `proxy.https.auth.enabled` as `"1"`. You will also need to configure the respective username and password for both HTTP and HTTPS.
-* configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see xref:installing-server-behind-a-proxy#known-limitations[Known Limitations] for an explanation), and the CIDRs of both vm-service and Nomad.
+* configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see xref:installing-server-behind-a-proxy#known-limitations[Known Limitations] for an explanation), and the CIDR of Nomad.
 
 [source,yaml]
 ----
@@ -793,7 +791,6 @@ proxy:
     - "<github.example.internal>"
     - "<circleci.example.internal>"
     - "<nomad-subnet-cidr>"
-    - "<vm-service-cidr>"
     - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
@@ -897,7 +894,7 @@ Now we will move on to build services. It may take a while for all your services
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-NOTE: VM service and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
+NOTE: Machine Provisioner and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
 
 ifndef::pdf[]
 [#next-steps]

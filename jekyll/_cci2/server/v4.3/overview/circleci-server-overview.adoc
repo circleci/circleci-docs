@@ -40,14 +40,6 @@ The CircleCI server application exposes four services, using a single load balan
 | Nomad Control Plane
 | 4647
 | Exposes an RPC protocol for Nomad clients.
-
-| Output Processor
-| 8585
-| Ingests output from Nomad runners.
-
-| VM Service
-| 3000
-| Provisions virtual machines.
 |===
 
 The application exposes a number of external ports. These ports are used for various functions as defined in the table below.
@@ -183,12 +175,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Scheduled workflows will not run.
 |
 
-| dispatcher
-| Execution
-| Split jobs into tasks and send them to scheduler to run.
-| No jobs will be sent to Nomad. The run queue will increase in size, but there should be no meaningful loss of data.
-|
-
 | distributor-*
 | App Core
 | Responsible for accepting build requests and destributing the job to appropriate queues.
@@ -250,9 +236,9 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-| output-processor
+| output and step
 | Execution
-| Receives job output and status updates and writes them to MongoDB. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
+| Receives job output and status updates and writes them to S3. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
 |
 |
 
@@ -260,12 +246,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | App Core
 | Provides the CircleCI permissions interface.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
-|
-
-| scheduler
-| Execution
-| Runs tasks sent to it. Works with Nomad server.
-| No jobs will be sent to Nomad. The run queue will increase in size, but there should be no meaningful loss of data.
 |
 
 | socketi
@@ -280,28 +260,22 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-| test-results-service
+| docker-provisioner
+| Docker Compute Management
+| Responsible for scheduling jobs on Nomad cluster(s).
+|
+|
+
+| machine-provisioner
+| Machine Compute Management
+| Periodically requests machines from compute provider to run job on for both machine and remote-docker jobs.
+| Periodically checks for stale machine and remote Docker instances and requests that provider removes them.
+|
+
+| execution-gateway
 | Execution
-| Parses test result files and stores data.
-| There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
+| Boundary for execution to provide API to rest of CircleCI
 |
-
-| vm-gc
-| Compute Management
-| Periodically checks for stale machine and remote Docker instances and requests that vm-service remove them.
-| Old vm-service instances might not be destroyed until this service is restarted.
-|
-
-| vm-scaler
-| Machine
-| Periodically requests that vm-service provision more instances for running machine and remote Docker jobs.
-| VM instances for machine and Remote Docker might not be provisioned, causing you to run out of capacity to run jobs with these executors.
-| Different overlay for EKS versus GKE.
-
-| vm-service
-| Machine
-| Inventory of available vm-service instances, and provisioning of new instances.
-| Jobs that use machine or remote Docker will fail.
 |
 
 | web-ui-*
@@ -333,9 +307,9 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 [#platforms]
 == Platforms
-CircleCI server is designed to deploy within a Kubernetes cluster. The virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images.
+CircleCI server is designed to deploy within a Kubernetes cluster. The machine service (Machine Provisioner) is able to leverage unique EKS or GKE offerings to dynamically create VM images.
 
-If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as VM service across a much wider range of operating systems and machine types (for example, macOS).
+If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as Machine Provisioner across a much wider range of operating systems and machine types (for example, macOS).
 
 We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand.
 
