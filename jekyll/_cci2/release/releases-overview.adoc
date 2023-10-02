@@ -121,9 +121,43 @@ a| 1.6.0 +
 
 |`Metadata.Annotations`
 |`circleci.com/project-id`
-|Project ID for the CircleCI project for the job that deploys your component
+|Project ID for the CircleCI project associated with the job that deploys your component
 |No. Used to enable release management controls
 
+|`Metadata.Annotations`
+|`circleci.com/operation-timeout`
+|A Go duration string, for example, 5m, 10m15s
+|No. Only needed to set a custom timeout duration. This option is only available if you are using Helm to configure your Kubernetes resources.
+
+|`Metadata.Annotations`
+|`circleci.com/restore-version-enabled`
+|`false`
+|No. Only set if you want to disable the restore version feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/scale-version-enabled`
+|`false`
+|No. Only set if you want to disable the scale version feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/restart-version-enabled`
+|`false`
+|No. Only set if you want to disable the restart version feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/retry-release-enabled`
+|`false`
+|No. Only set if you want to disable the retry release feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/promote-release-enabled`
+|`false`
+|No. Only set if you want to disable the promote release feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/cancel-release-enabled`
+|`false`
+|No. Only set if you want to disable the cancel release feature for your component.
 |===
 
 [#releases-concepts]
