@@ -86,22 +86,22 @@ a| 1.6.0 +
 
 |`Metadata.Labels`
 |`app`
-|#?#
+|A name for your application
 |Yes
 
 |`Metadata.Labels`
 |`version`
-|#?#
+|Current version
 |Yes
 
 |`Spec.Template.Metadata.Labels`
 |`app`
-|
+|See above
 | Yes
 
 |`Spec.Template.Metadata.Labels`
 |`version`
-|
+|See above
 | Yes
 
 |`Metadata.Annotations`
