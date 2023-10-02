@@ -57,15 +57,13 @@ metadata:
 #At this point could they go and check in the app to see if they see it? Or should that wait until they actually do a release?#
 
 [#link-release]
-== 2. Link release to deployment job trigger
+== 2. Link release to deployment job trigger (optional)
 
 You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on you config and tooling:
 
-* `circleci.com/pipeline-id` should be set to the `pipeline.id` xref:../variables#pipeline-values[pipeline value].
-
-* `circleci.com/workflow-id` should be set to the `CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable].
-
 * `circleci.com/job-number` should be set to the `CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable].
+* `circleci.com/pipeline-id` should be set to the `pipeline.id` xref:../variables#pipeline-values[pipeline value].
+* `circleci.com/workflow-id` should be set to the `CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable].
 
 Once these values and variables are rendered, the config will look something like:
 
@@ -81,9 +79,42 @@ metadata:
 ----
 
 [#enable-release-management]
-== 3. Enable release management
+== 3. Enable release management (optional)
 
-#TODO#
+By adding a few additional annotations to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your releases dashboard, such as restoring, scaling, and restarting component versions. To get started, add the `circleci.com/project-id` annotation with the value found on the relevant CircleCI project settings page.
+
+[,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    ...
+    circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
+----
+
+#Screenshot#
+
+[#operation-timeout]
+=== a. Custom operation timeout
+
+The `circleci.com/operation-timeout` annotation allows a custom timeout to be specified for Helm Rollback operations performed as part of a Restore Version command. Valid values are Go duration strings (for example, 5m, 10m15s). This option is available if you are using Helm to manage your Kubernetes resources.
+
+For example,
+
+[,yaml]
+----
+annotations:
+  circleci.com/operation-timeout: 10m
+----
+
+[#opt-out-ui-based-actions]
+=== b. Opt out of UI-based actions
+
+[#example-deployment]
+== Example Deployment
+
+
 
 [#conclusion]
 == Conclusion

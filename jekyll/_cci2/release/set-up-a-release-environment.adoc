@@ -17,7 +17,7 @@ Visualise and control deployments to your Kubernetes cluster with CircleCI relea
 [#introduction]
 == Introduction
 
-In this tutorial you will set up an integration between CircleCI and your Kubernetes cluster. Once configured, release status can be reported to the CircleCI web app, and commands from CircleCI can be #mapped to your release ???# to enable you to:
+In this tutorial you will set up an integration between CircleCI and your Kubernetes cluster. Once configured, release status can be reported to the CircleCI web app, and the following commands can be executed in your cluster by the release agent via controls in the CircleCI UI:
 
 * Restore a version
 * Scale a version
@@ -32,9 +32,9 @@ In this tutorial you will set up an integration between CircleCI and your Kubern
 In order to set up a release environment with CircleCI you will need to ensure the following prerequisites are fulfilled:
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* A project building on CircleCI. See the xref:../create-project#[Create a project] page for steps.
-* You must be an **org admin**. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page.
-* A Kubernetes .... #Not sure of the specifics here - they need a Kubernetes cluster to which they are deploying something? Or should we say a Kubernetes Deployment?#
+* A Kubernetes cluster
+* A project building on CircleCI that deploys to your Kubernetes cluster. See the xref:../create-project#[Create a project] page for steps.
+* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page
 
 CircleCI supports Kubernetes, Helm, and Argo Rollouts. The supported versions are listed below:
 
@@ -62,7 +62,7 @@ a| 1.6.0 +
 
 . In the CircleCI web app, click **Releases** in the sidebar
 . Click btn:[Add Release Environment]
-. Enter a name for your release environment and click btn:[Create Integration]
+. Enter a name for your release environment and click btn:[Create Environment]
 . Click to select the environment you just created
 . Click btn:[Create New Token] and click btn:[Create Token]
 . The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then click btn:[Done]
@@ -90,7 +90,7 @@ helm repo update
 == 3. Install the release agent
 
 Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster. Be sure to substitute the token you created in the previous step:
-+
+
 [,shell]
 ----
 helm install circleci-release-agent-system release-agent/circleci-release-agent \
@@ -101,7 +101,7 @@ helm install circleci-release-agent-system release-agent/circleci-release-agent 
 [#conclusion]
 == Conclusion
 
-In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now #link to command how to guides#
+In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now xref:configure-your-kubernetes-components#[Configure your Kubernetes components].
 
 [#next-steps]
 == Next steps
