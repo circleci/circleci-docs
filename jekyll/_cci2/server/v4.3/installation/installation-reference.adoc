@@ -58,12 +58,6 @@ github:
   clientId: "<generated-github-client-id>"
   clientSecret: "<generated-github-client-secret>"
 
-docker_provisioner:
-  providers:
-    ec2:
-      enabled: true
-      irsaRole: "<arn-of-irsa-role>"
-
 machine_provisioner:
   providers:
     ec2:
@@ -139,12 +133,6 @@ machine_provisioner:
       network: "<gcp-network>"
       subnetwork: "" # leave blank for auto-subnetting
       workloadIdentity: "<service-account-email-with-compute-access>"
-
-docker_provisioner:
-  providers:
-    gcp:
-      enabled: true
-      workloadIdentity: "<service-account-email-with-nomad-compute-access>"
 
 pusher:
   secret: "<pusher-secret>"

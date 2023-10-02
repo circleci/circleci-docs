@@ -54,7 +54,6 @@ This can alternatively be done by just manually cleaning up remaining vms before
 . For upgrade from 4.2:
 * Remove vm_service block from values file
 * Add machine_provisioner block to values file
-* Add docker_provisioner block to values file
 * Update vm-service IAM Policy (machine-provisioner requires slightly different permissions)
 
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
