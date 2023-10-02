@@ -63,6 +63,9 @@ When pushed to a VCS, this commit will not be built on CircleCI because of the `
 ## Auto-cancel redundant workflows
 {: #auto-cancel}
 
+The **Auto-cancel redundant workflows** option is not available for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the GitHub App, see the [GitHub Apps integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info"}
+
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to complete before the most recent version starts.
 
 To save time, you can configure CircleCI to automatically cancel any non-terminated workflows when a newer pipeline is triggered on that same branch.
@@ -72,8 +75,9 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* Your project's default branch (usually `main`) will never auto-cancel builds.
+* Your project's default branch (usually `main`) will never auto-cancel workflows.
 * Auto-cancel affect pipelines triggered by pushes to a VCS or via the API.
+* Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
 {: #enable-auto-cancel }
@@ -91,12 +95,3 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 
 * Scheduled workflows
 * Re-run workflows
-
-### Steps to enable auto-cancel for CircleCI server installations
-{: #steps-to-enable-auto-cancel-for-circleci-server-installations }
-
-1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
-
-2. In the **Build Settings** section, click on **Advanced Settings**.
-
-3. In the **Auto-cancel redundant builds** section, click the **On** button.

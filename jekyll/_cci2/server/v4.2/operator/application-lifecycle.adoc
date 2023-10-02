@@ -7,7 +7,7 @@ contentTags:
 = Application lifecycle
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI server v4.x semantic versioning and release schedules.
+:page-description: Learn about CircleCI server v4.2 semantic versioning and release schedules.
 :icons: font
 :toc: macro
 :toc-title:

@@ -66,6 +66,8 @@ Pipeline parameters support the following types:
 
 See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
 
+NOTE: When using setup workflows, all pipeline parameters must be present in the subsequent configuration, including in API calls. More information on setup workflows can be found in the xref:dynamic-config#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
+
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
 ```yml

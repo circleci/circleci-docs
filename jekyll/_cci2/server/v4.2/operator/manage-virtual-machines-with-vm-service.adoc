@@ -59,7 +59,7 @@ vm_service:
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
-The default AMIs for server v4.x are based on Ubuntu 22.04.
+The default AMIs for server v4.2 are based on Ubuntu 22.04.
 
 [#x86-ami-list]
 ===== x86 AMI list

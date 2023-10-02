@@ -4,7 +4,7 @@
     * [Reusable configuration](/docs/reusing-config) elements, including executors, commands and jobs.
     * Packaged reusable configuration, known as [orbs](/docs/orb-intro).
     * Improved configuration validation error messages.
-    * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when new pipelines are triggered on non-default branches (auto-cancel is available for GitHub and Bitbuket users).
+    * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when new pipelines are triggered on non-default branches (auto-cancel is available for GitHub and Bitbucket users).
 
 It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 {: class="alert alert-info" }

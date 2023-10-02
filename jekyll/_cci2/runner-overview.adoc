@@ -85,6 +85,7 @@ Machine runner is not compatible with CircleCI's convenience images or custom Do
 To get started with CircleCI's self-hosted runners:
 
 * Provide your own platform to deploy your CircleCI's self-hosted runners (see the following <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms).
+* You will need at least one credit on your account to use runners. Runner execution itself does not require credits but one credit is required in case your jobs use storage or networking. For more information, see the xref:persist-data#overview-of-network-and-storage-transfer[Persisting data overview].
 * For container runner installation, visit the xref:container-runner#[Container runner] page.
 * For machine runner, visit the installation guide for your desired platform:
 ** xref:runner-installation-linux#[Linux]

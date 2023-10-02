@@ -160,9 +160,9 @@ workflows:
 ----
 --
 
-[.tab.hellocloud.Arm]
+[.tab.hellocloud.Arm_VM]
 --
-The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to link:/docs/using-arm[Using the Arm execution environment] page for more information.
+The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to link:/docs/using-arm[Using the Arm VM execution environment] page for more information.
 
 [source,yaml]
 ----
@@ -267,7 +267,7 @@ workflows:
 
 [.tab.helloserver4.Arm]
 --
-The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to link:/docs/using-arm[Using the Arm execution environment] page for more information.
+The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to link:/docs/using-arm[Using the Arm VM execution environment] page for more information.
 
 [source,yaml]
 ----

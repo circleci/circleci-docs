@@ -29,14 +29,14 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<#architecture,Architecture>>
 | <<#workflows,Workflows>>
 
-| <<#dedicated-hosts-macos,Dedicated hosts for macOS>>
+| <<#orbs,Orbs>>
 | <<#dynamic-configuration,Dynamic configuration>>
 
-| <<#orbs,Orbs>>
+| <<#author-orbs,Author orbs>>
 | <<#billing,Billing>>
 
-| <<#author-orbs,Author orbs>>
 | <<#cancel-performance-plan,Cancel Performance plan>>
+| 
 |===
 
 [#general]
@@ -58,11 +58,6 @@ include::../_includes/snippets/faq/host-faq-snip.adoc[]
 == Architecture
 
 include::../_includes/snippets/faq/architecture-faq-snip.adoc[]
-
-[#dedicated-hosts-macos]
-== Dedicated hosts for macOS
-
-include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
 
 [#orbs]
 == Orbs
