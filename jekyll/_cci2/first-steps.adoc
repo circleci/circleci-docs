@@ -35,11 +35,9 @@ If you are new to CircleCI, you will create a CircleCI organization. A CircleCI 
 
 . Then, connect your code. Choose the VCS that contains your code repositories: GitHub, GitLab.com (cloud), GitLab Self-Managed, or Bitbucket.
 
-[#GitHub]
-=== GitHub
-
-NOTE: **GitHub authorization with CircleCI is changing**. Starting August 2023 when you authorize your CircleCI account with GitHub, your sign-up experience may reflect either the process described in this section, or the process described in the xref:#bitbucket[Bitbucket] section. For more information, read the xref:github-integration#[GitHub OAuth app integration page].
-
+[.tab.source-of-change.GitHub]
+--
+[start=4]
 . For GitHub, you will be taken to a screen to install the CircleCI GitHub App. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
 
 . Next, in the Create New Project page, you will set up your first project and trigger your first pipeline in CircleCI. You need an SSH key. Add the private key on this page, and add the corresponding public key as a deploy key in GitHub. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
@@ -53,10 +51,11 @@ If you do not want to connect to your code at this time and only wish to continu
 When you are ready, you can connect to your GitHub account from the CircleCI web app by xref:create-project#[creating a new project].
 
 NOTE: The full set of documentation for integrating GitHub with CircleCI can be found on the xref:github-apps-integration#[GitHub App integration page].
+--
 
-[#gitlab]
-=== GitLab
-
+[.tab.source-of-change.GitLab]
+--
+[start=4]
 . For GitLab, connect your code from either a GitLab.com or GitLab Self-managed account. Follow the prompts to connect to your GitLab account and create a new project. You can also refer to the xref:create-project#[Creating a Project] guide for more details on this step.
 +
 If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel].
@@ -68,10 +67,11 @@ If you do not want to connect to your code at this time and only wish to continu
 When you are ready, you can connect to your GitLab account from the CircleCI web app by xref:create-project#[creating a new project].
 
 NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the xref:gitlab-integration#[GitLab integration page].
+--
 
-[#bitbucket]
-=== Bitbucket
-
+[.tab.source-of-change.Bitbucket]
+--
+[start=4]
 . For Bitbucket, you will authenticate with your Bitbucket account and connect your code.
 
 . Once you have authenticated, you will be redirected to your organization dashboard in the CircleCI web app. From here, you can start to trigger and run project pipelines, set up more projects, and invite team members to your org.
@@ -83,6 +83,7 @@ For more details on setting up a project in CircleCI, read the xref:create-proje
 When you are ready, you can connect your Bitbucket account from the CircleCI web app. Click your user icon in the lower left corner to open your *User Settings*. Under *Account Integrations*, click btn:[Connect] to authorize with Bitbucket and start setting up your projects.
 
 NOTE: The full set of documentation for integrating Bitbucket with CircleCI can be found on the xref:bitbucket-integration#[Bitbucket integration page].
+--
 
 [#sign-up-with-an-invite]
 == Sign up with an invite
