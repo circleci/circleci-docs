@@ -4,6 +4,7 @@ CircleCI server
 circleci.com
 OAuth
 boolean
+Boolean
 cron
 namespace
 hostname
