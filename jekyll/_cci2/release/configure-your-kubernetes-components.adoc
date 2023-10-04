@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: CircleCI releases is currently in **open preview**
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
 
 The steps outlined on this page guide you to configure your Kubernetes resources for integration with your release environment.
 
@@ -174,16 +174,50 @@ metadata:
 [#example-deployment]
 == Example Deployment
 
+The following snippet shows an example deployment showing all required and optional labels and annotations.
 
+[,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    circleci.com/cancel-release-enabled: "true"
+    circleci.com/helm-revision-number: "1"
+    circleci.com/job-number: "1"
+    circleci.com/operation-timeout: 30m
+    circleci.com/pipeline-id: 88dfee99-0348-407f-b113-dbf270cad093
+    circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
+    circleci.com/promote-release-enabled: "true"
+    circleci.com/restart-version-enabled: "true"
+    circleci.com/restore-version-enabled: "true"
+    circleci.com/retry-release-enabled: "true"
+    circleci.com/scale-version-enabled: "true"
+    circleci.com/workflow-id: 5b8c4de8-fd5f-4be2-80a4-3d0c03fc138c
+  labels:
+    app: example-deployment
+    version: 1.0.0
+  name: example-deployment
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example-deployment
+  template:
+    metadata:
+      labels:
+        app: example-deployment
+        version: 1.0.0
+    spec:
+      containers:
+        - name: example-deployment
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+----
 
 [#conclusion]
 == Conclusion
 
 In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard.
-
-[#next-steps]
-== Next steps
-
-// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:../benefits-of-circleci#[Benefits of CircleCI]
-* xref:../concepts#[CircleCI concepts]

@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: CircleCI releases is currently in **open preview**
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
 
 Visualise and control deployments to your Kubernetes cluster with CircleCI release environments. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
 
