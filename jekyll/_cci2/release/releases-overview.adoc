@@ -192,7 +192,7 @@ A _component_ in CircleCI is a collection of code and configuration that is depl
 [#command]
 === Command
 
-A command is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. These actions are run asynchronously and CircleCI reports the results back to the CircleCI web app releases dashboard, as you see for an individual job step.
+A command is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. These actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app where you can see them in the releases dashboard, similar to how step output works for CI jobs.
 
 Some commands which are available for all components. These are:
 
