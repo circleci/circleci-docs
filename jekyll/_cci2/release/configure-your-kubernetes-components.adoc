@@ -39,6 +39,8 @@ To enable your release to show up on the releases dashboard in the CircleCI web 
 * Specify the `app` and `version` label in the Kubernetes object `Metadata.Labels`
 * Specify the `app` and `version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
 
+NOTE: Do not add `version` to the selector labels. These labels can not be changed later, and `version` changes frequently.
+
 For example:
 
 [,yaml]
@@ -123,7 +125,7 @@ annotations:
 [#operation-timeout]
 === b. Custom operation timeout
 
-CAUTION: This option is only available when using Helm to configure your Kubernetes resources.
+NOTE: This option is only available when using Helm to configure your Kubernetes resources.
 
 The `circleci.com/operation-timeout` annotation allows a custom timeout to be specified for Helm Rollback operations performed as part of a Restore Version command. Valid values are Go duration strings (for example, 5m, 10m15s). This option is available if you are using Helm to manage your Kubernetes resources.
 

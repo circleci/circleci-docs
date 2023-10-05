@@ -39,10 +39,10 @@ If you want to get started with CircleCI releases right away, you can jump to:
 
 #Add links to how to guide for using commands?#
 
-[#how-the-feature-works]
-== How the feature works
+[#how-it-works]
+== How it works
 
-CircleCI integrates with Kubernetes deployments and Argo Rollouts to provide visibility and control over your release process through the CircleCI web app.
+CircleCI can integrate with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
 #Add some information about how it all works#
 
@@ -124,7 +124,7 @@ a| 1.6.0 +
 
 |`Metadata.Annotations`
 |`circleci.com/operation-timeout`
-|A Go duration string, for example, 5m, 10m15s
+|A link:https://pkg.go.dev/maze.io/x/duration#Duration[Go duration string], for example, 5m, 10m15s
 |No. Only needed to set a custom timeout duration. This option is only available if you are using Helm to configure your Kubernetes resources.
 
 |`Metadata.Annotations`
@@ -192,7 +192,7 @@ A _component_ in CircleCI is a collection of code and configuration that is depl
 [#command]
 === Command
 
-A command is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. These actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app where you can see them in the releases dashboard, similar to how step output works for CI jobs.
+A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. These actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app where you can see them in the releases dashboard, similar to how step output works for CI jobs.
 
 Some commands are available for all components. These are:
 
@@ -224,6 +224,18 @@ A subset of commands are available for _progressive_ releases (when using Argo R
 | SUCCESS
 | The Deployment or Rollout has all desired pods available
 |===
+
+[#coming-soon]
+== Coming soon
+
+A number of features improvements are planned to be added through the open preview period and beyond:
+
+* Display release environment details in the CircleCI web app
+* Guided onboarding experience
+* link:https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/[Blue Green] deployments via Argo Rollouts
+* #Release job type (add releases to your workflow DAG)#
+* #Analysis run results/details#
+* #Improved searching, filtering and ability to pin/favorite components#
 
 [#known-limitations]
 == Known limitations
