@@ -1,6 +1,10 @@
 ---
 name: Unclear
 about: Confusing language
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Location

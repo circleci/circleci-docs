@@ -1,6 +1,10 @@
 ---
 name: Undocumented
 about: Missing information
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Missing Information

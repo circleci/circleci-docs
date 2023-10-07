@@ -1,6 +1,10 @@
 ---
 name: Incorrect
 about: Incorrect information
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Locations
