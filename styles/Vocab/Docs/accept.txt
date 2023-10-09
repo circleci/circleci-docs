@@ -9,3 +9,4 @@ cron
 namespace
 hostname
 stderr
+XML
