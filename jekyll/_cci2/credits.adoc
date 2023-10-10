@@ -32,7 +32,7 @@ You can view the xref:plan-overview#[Plan overview] page for more information, o
 - xref:plan-scale#[Scale plan]
 - xref:plan-server#[Server plan]
 
-Consider taking a moment to look at the CircleCI link:https://circleci.com/pricing/[Pricing] page to learn more about how credits are distributed across different machine types and resource classes.
+Take a look at the CircleCI link:https://circleci.com/pricing/[Pricing] page, and the link:https://circleci.com/product/features/resource-classes/[resource class comparison table], to learn more about how credits are distributed across different machine types and resource classes.
 
 [#managing-credit-usage]
 == Managing credit usage
