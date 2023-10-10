@@ -7,6 +7,12 @@
 | VM Software Manifest
 | Release Notes
 
+| `15.1.0`
+| Xcode 15.1 Beta 1 (15C5028h)
+| 13.6
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13566/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-1-beta-1-released/49468[Release Notes]
+
 | `15.0.0`
 | Xcode 15 (15A240d)
 | 13.5.1

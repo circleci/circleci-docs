@@ -1,6 +1,6 @@
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|--------------
- `15.0.0` | Xcode 15 (15A240d) | 13.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13456/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-rc-released-important-notice-for-visionos-sdk-users/49278)
+ `15.1.0` | Xcode 15.1 Beta (15C5028h) | 13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13560/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-1-beta-1-released/49468)
  `14.3.1` | Xcode 14.3.1 (14E300b) | 13.2.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12128/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-3-1-rc-released/48152)
  `14.2.0` | Xcode 14.2 (14C18) | 12.6.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11441/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/announcing-apple-silicon-m1-support-now-available/46908)
  `14.1.0` | Xcode 14.1 (14B47b) | 12.6.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11763/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/announcing-m1-large-now-available-on-performance-plans/47797/22)
