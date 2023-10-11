@@ -1,0 +1,92 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Manage releases - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to guide for managing releases from the CircleCI web app
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
+
+The steps outlined on this page guide you through the tasks required to manage your releases.
+
+[#prerequisites]
+== Prerequisites
+
+Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-a-release-environment#[Set up a release environment] and xref:configure-your-kubernetes-component#[Configure your Kubernetes component] pages.
+
+[#restore-a-version]
+== Restore a version
+
+:icons: image
+:iconsdir: {{site.baseurl}}/assets/img/icons/releases/
+icon:restore-a-version[Restore a version icon]
+
+The _restore a version_ command restores a previously released version of a component.
+
+[#restore-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the version your want to restore, and click the restore icon in the **Actions** column
+. Read through the recommendations in the popup and if you want to proceed type `RESTORE` and click btn:[Restore]
+
+:icons: font
+NOTE: Revert the changes in your source repository as soon as possible after using this command
+
+[#restore-notes]
+=== Notes
+
+Executing the _restore a version_ command from the CircleCI web app is the equivalent of using the following:
+
+* If you are using xref:configure-your-kubernetes-components#helm-rollback[Helm]:
++
+[,yml]
+----
+helm rollback <release-name> <revision-number> -n <namespace>
+----
+* If you are using Argo Rollouts and **not** Helm:
++
+[,yml]
+----
+kubectl argo rollouts undo <rollout-name> --to-revision=<revision_number>
+----
++
+If `revision_number` is not supplied the component will be rolled back to the previous revision
+* For a Kubernetes Deployment:
++
+[,yml]
+----
+kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<revision-number>`
+----
+
+
+
+[#scale-a-version]
+== Scale a version
+
+[#scale-steps]
+=== Steps
+
+[#restart-a-version]
+== Restart a version
+
+[#retry-a-release]
+== Retry a release
+:icons: font
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+[#promote-a-release]
+== Promote a release
+
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+[#cancel-a-release]
+== Cancel a release
+
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]

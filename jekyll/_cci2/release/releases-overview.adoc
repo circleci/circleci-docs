@@ -36,8 +36,7 @@ If you want to get started with CircleCI releases right away, you can jump to:
 
 * xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up a release environment]
 * xref:configure-your-kubernetes-components.adoc#[Tutorial 2: Configure your Kubernetes components]
-
-#Add links to how to guide for using commands?#
+* xref:manage-releases#[How-to: Manage releases]
 
 [#how-it-works]
 == How it works
