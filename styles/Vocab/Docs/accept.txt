@@ -13,3 +13,7 @@ Rollout
 Rollouts
 Asciidoctor
 endraw
+HPA
+HPAs
+Autoscaler
+Autoscalers
