@@ -55,7 +55,9 @@ With no further changes, the full `test` job is still run in each of the four ex
 ### Use parallelism with self-hosted runners
 {: #use-parallelism-with-self-hosted-runners }
 
-To use the parallelism feature with jobs that use [self-hosted runners](/docs/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
+To use the parallelism feature with jobs that use [self-hosted runners](/docs/runner-overview/), ensure that you have at least two self-hosted machine runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
+
+If you are using parallelism on [Container Runner](/docs/container-runner/), you will need to make sure that `agent.maxConcurrentTasks` and your Kubernetes cluster can accommodate the number of parallel tasks you want to run or you will run into queuing as well.
 
 For more information, see the [Configuration reference](/docs/configuration-reference/#parallelism) page.
 
