@@ -93,5 +93,17 @@ jobs:
 
 . Replace `<your-iam-role-arn>` with the ARN of the IAM role you want to assume. This is the role you created in the last section.
 
+. There must be at least one context present in your job before CircleCI will generate the $CIRCLE_OIDC_TOKEN environment variable.
+
+[source,yaml]
+----
+workflows:
+  workflow_name:
+    jobs:
+      - job_name:
+          context: aws
+----
+
+
 . Save the changes to your CircleCI configuration file. Next time the job runs, CircleCI will use the specified IAM role and act as an OIDC provider to authenticate and pull your specified ECR image.
 
