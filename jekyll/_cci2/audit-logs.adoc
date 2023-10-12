@@ -29,7 +29,7 @@ Per link:https://circleci.com/privacy/#information[our data retention policy], a
 [#audit-log-events]
 == Audit log events
 
-The following are the system events that are logged. See `action` in the Field section below for the definition and format.
+The following are a list of common and important events found in the audit log. This list is not comprehensive and you may see additional action types logged that are not represented below. See `action` in the Field section below for the definition and format.
 
 - context.create
 - context.delete
