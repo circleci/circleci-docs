@@ -105,7 +105,15 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 10 Gbps
 |===
 
-There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you set up a new VPC rather than use an existing one.
+[#vpc-cluster-sizing-recommendations]
+==== VPC & Cluster Sizing Recommandations
+While there are no strict requirements for VPC setup or disk size, the following practices are recommended for optimal performance and stability in production environments.
+
+1. VPC Selection
+  - It's advised to create a new VPC specifically for CircleCI Server and its components, rather than using an existing one.
+2. Subnet Provisioning
+  - For high availability and to avoid potential outages, provision subnets using /18 CIDR blocks across multiple Availability Zones.
+
 
 [#supported-kubernetes-versions]
 === Supported Kubernetes versions
