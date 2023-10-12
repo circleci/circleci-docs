@@ -60,6 +60,7 @@ CircleCI requests the following permissions from GitHub, defined in the link:htt
 
 - Get a list of a user's repos
 - Add an SSH key to a user's account
+- Add Environment Variables to Project Settings
 
 **Admin Permissions**, needed for setting up a project
 
