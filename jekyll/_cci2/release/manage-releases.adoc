@@ -19,19 +19,20 @@ The steps outlined on this page guide you through the tasks required to manage y
 
 Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-a-release-environment#[Set up a release environment] and xref:configure-your-kubernetes-component#[Configure your Kubernetes component] pages.
 
-[#restore-a-version]
-== Restore a version
+[#restore-version]
+== Restore version
 
-The _restore a version_ command restores a previously released version of a component.
+The _restore version_ command restores a previously released version of a component.
 
-image::../../img/docs/releases/restore-a-version.png[Screenshot showing the restore a version button]
+image::../../img/docs/releases/restore-version.png[Screenshot showing the restore version button]
 
 [#restore-steps]
 === Steps
 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . You are now in the timeline view. Select your component from the dropdown menu.
-. Scroll to locate the version your want to restore, and click the restore icon in the **Actions** column
+. Scroll to locate the version your want to restore, and click on the version number to enter the release details page
+. Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Restore Version**
 . Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then click btn:[Restore]
 
 NOTE: Revert the associated changes in your source repository as soon as possible after using this command
@@ -39,7 +40,7 @@ NOTE: Revert the associated changes in your source repository as soon as possibl
 [#restore-notes]
 === Notes
 
-Executing the _restore a version_ command from the CircleCI web app is the equivalent of using the following:
+Executing the _restore version_ command from the CircleCI web app is the equivalent of using the following:
 
 * If you are using xref:configure-your-kubernetes-components#helm-rollback[Helm]:
 +
@@ -59,16 +60,16 @@ If `revision_number` is not supplied the component will be rolled back to the pr
 +
 [,shell]
 ----
-kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<revision-number>`
+kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<revision-number>
 ----
 
 
-[#scale-a-version]
-== Scale a version
+[#scale-version]
+== Scale version
 
-The _scale a version_ command allows you to scale up or down a currently live version of a component.
+The _scale version_ command allows you to scale up or down a currently live version of a component.
 
-image::../../img/docs/releases/scale-a-version.png[Screenshot showing the scale a version button]
+image::../../img/docs/releases/scale-version.png[Screenshot showing the scale version button]
 
 [#scale-steps]
 === Steps
@@ -84,7 +85,7 @@ CAUTION: Any Horizontal Pod Autoscalers (HPAs) defined for this component will b
 [#scale-notes]
 === Notes
 
-Executing the _scale a version_ command is the equivalent of the following:
+Executing the _scale version_ command is the equivalent of the following:
 
 * If you are using Argo Rollouts:
 +
@@ -100,12 +101,12 @@ kubectl patch rollout <rollout_name> -n <namespace> --type='json' -p='[{"op": "r
 kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
 ----
 
-[#restart-a-version]
-== Restart a version
+[#restart-version]
+== Restart version
 
-The _restart a version_ command allows you to restart a currently live version of a component.
+The _restart version_ command allows you to restart a currently live version of a component.
 
-image::../../img/docs/releases/restart-a-version.png[Screenshot showing the restart a version button]
+image::../../img/docs/releases/restart-version.png[Screenshot showing the restart version button]
 
 [#start-steps]
 === Steps
@@ -119,7 +120,7 @@ image::../../img/docs/releases/restart-a-version.png[Screenshot showing the rest
 [#restart-notes]
 === Notes
 
-Executing the _restart a version_ command is the equivalent of the following:
+Executing the _restart version_ command is the equivalent of the following:
 
 * If you are using Argo Rollouts:
 +
@@ -136,23 +137,23 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 ----
 
 
-[#retry-a-release]
-== Retry a release
+[#retry-release]
+== Retry release
 
-The _retry a release_ command is available to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo rollout retry]. You may want to use this command if your release has entered a xref:releases-overview#release-status[failed] state.
-
-NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
-
-[#promote-a-release]
-== Promote a release
-
-Use the _promote a release_ command to promote a rollout that is paused at a canary step. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+The _retry release_ command is available to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry]. You may want to use this command if your release has entered a xref:releases-overview#release-status[failed] state.
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
-[#cancel-a-release]
-== Cancel a release
+[#promote-release]
+== Promote release
 
-Use the _cancel a release_ command to stop a release from progressing and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
+Use the _promote release_ command to promote a release that is paused at a canary step. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+[#cancel-release]
+== Cancel release
+
+Use the _cancel release_ command to stop a release from progressing and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
