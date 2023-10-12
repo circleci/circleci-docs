@@ -94,6 +94,7 @@ kubectl patch rollout <rollout_name> -n <namespace> --type='json' -p='[{"op": "r
 ----
 
 * For a Kubernetes Deployment:
++
 [,shell]
 ----
 kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
@@ -102,8 +103,43 @@ kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"o
 [#restart-a-version]
 == Restart a version
 
+The _restart a version_ command allows you to restart a currently live version of a component.
+
+image::../../img/docs/releases/restart-a-version.png[Screenshot showing the restart a version button]
+
+[#start-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. Select the **Components** tab
+. Scroll to find your component a click to enter the component view
+. Find the active version that you would like to restart, and click the restart icon
+. Read the note associated with this command in the popup and to proceed type `RESTART` and click btn:[RESTART]
+
+[#restart-notes]
+=== Notes
+
+Executing the _restart a version_ command is the equivalent of the following:
+
+* If you are using Argo Rollouts:
++
+[,shell]
+----
+kubectl patch rollout my-rollout -n my-namespace --type='json' -p='[{"op": "replace", "path": "/spec/restartAt", "value": <timestamp>}]'
+----
+
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl rollout restart deployment/<deployment-name> -n <namespace>
+----
+
+
 [#retry-a-release]
 == Retry a release
+
+The _retry a release_ command is avaiable to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo rollout retry].
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
