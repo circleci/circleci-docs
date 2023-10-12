@@ -140,16 +140,46 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 [#retry-release]
 == Retry release
 
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
 The _retry release_ command is available to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry]. You may want to use this command if your release has entered a xref:releases-overview#release-status[failed] state.
 
-NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
-
-[#promote-release]
-== Promote release
-
-Use the _promote release_ command to promote a release that is paused at a canary step. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+[#promote]
+== Promote
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+Use the _promote_ commands to promote a release that is paused at a step. You have the option to either promote a single step, to _skip_ that step, or btn:[Promote All] to skip all steps and complete the release. The btn:[Promote] and btn:[Promote All] options are visible in the step view on the release details page.
+
+image::../../img/docs/releases/promote-options.png[Screenshot showing the promote release options]
+
+For more information on the Rollouts Promote commands see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+
+[#promote-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the running release you want to promote. Click on the version number to enter the release details page.
+. You will now see the btn:[Promote] and btn:[Promote All] options. Click to promote the release as required. The command will be run immediately with no intermediary checks.
+
+[#promote-notes]
+=== Notes
+
+Executing the _promote_ commands are equivalent to the following:
+
+* Promote a single step:
++
+[,shell]
+----
+kubectl argo rollouts promote <rollout-name>
+----
+* Promote all:
++
+[,shell]
+----
+kubectl argo rollouts promote --full <rollout-name>
+----
 
 [#cancel-release]
 == Cancel release
