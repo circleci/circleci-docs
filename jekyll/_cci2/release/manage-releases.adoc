@@ -139,16 +139,20 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 [#retry-a-release]
 == Retry a release
 
-The _retry a release_ command is avaiable to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo rollout retry].
+The _retry a release_ command is available to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo rollout retry]. You may want to use this command if your release has entered a xref:releases-overview#release-status[failed] state.
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
 [#promote-a-release]
 == Promote a release
 
+Use the _promote a release_ command to promote a rollout that is paused at a canary step. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
 [#cancel-a-release]
 == Cancel a release
+
+Use the _cancel a release_ command to stop a release from progressing and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
