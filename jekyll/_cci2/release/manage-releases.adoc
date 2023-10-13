@@ -29,13 +29,13 @@ image::../../img/docs/releases/restore-version.png[Screenshot showing the restor
 [#restore-steps]
 === Steps
 
+NOTE: The steps outlined here are to revert a release from the release details page in the CircleCI web app. Is it also possible to run this command from the releases timeline, using the restore release icon in the **Actions** column.
+
 . Select btn:[Releases] in the CircleCI web app sidebar
-. You are now in the timeline view. Select your component from the dropdown menu.
+. You are now in the timeline view. Select your component from the dropdown menu
 . Scroll to locate the version your want to restore, and click on the version number to enter the release details page
 . Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Restore Version**
-. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then click btn:[Restore]
-
-NOTE: Revert the associated changes in your source repository as soon as possible after using this command
+. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then click btn:[Restore]. It is recommended to revert the associated changes in your source repository as soon as possible after using this command
 
 [#restore-notes]
 === Notes
