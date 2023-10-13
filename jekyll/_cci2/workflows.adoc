@@ -532,6 +532,8 @@ When you use workflows, you increase your ability to rapidly respond to failures
 
 image::/docs/assets/img/docs/rerun-from-failed.png[CircleCI Workflows Page]
 
+NOTE: If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow will be run with SSH enabled for that job, even after SSH capability has been disabled at the project level.
+
 [#troubleshooting]
 == Troubleshooting
 

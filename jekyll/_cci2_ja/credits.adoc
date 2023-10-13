@@ -9,7 +9,6 @@ contentTags:
 :description: CircleCI クレジットベースプランシステムについて.
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI クレジットベースプランシステムについて
 :icons: font
 :toc: macro
 

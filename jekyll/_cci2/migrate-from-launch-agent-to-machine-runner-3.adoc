@@ -85,6 +85,6 @@ sudo yum install circleci-runner
 Once the configuration file has been populated, the following command will restart the agent so it can begin claiming:
 +
 ```shell
-sudo systemctl enable circlci-runner
+sudo systemctl enable circleci-runner
 sudo systemctl start circleci-runner
 ```
