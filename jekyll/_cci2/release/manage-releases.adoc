@@ -142,7 +142,29 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
-The _retry release_ command is available to run an link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry]. You may want to use this command if your release has entered a xref:releases-overview#release-status[failed] state.
+Use the _retry release_ command to retry a release that has failed or been cancelled. For more information about this command, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
+
+#screenshot#
+
+[#promote-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the failed or cancelled release you want to retry. Click on the version number to enter the release details page.
+. Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Retry Release**
+
+#add in steps ^ need to check as I don't have permissions#
+
+[#retry-notes]
+=== Notes
+
+Executing the _retry release_ command is the equivalent to running:
+
+[,yml]
+----
+kubectl argo rollouts retry <rollout-name> -n=<namespace>
+----
 
 [#promote]
 == Promote
@@ -187,3 +209,25 @@ kubectl argo rollouts promote --full <rollout-name>
 Use the _cancel release_ command to stop a release from progressing and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+#screenshot#
+
+[#cancel-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the running release you want to cancel. Click on the version number to enter the release details page.
+. Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Cancel Release**
+
+#add in steps ^ need to check as I don't have permissions#
+
+[#cancel-notes]
+=== Notes
+
+Executing the _cancel release_ command is the equivalent to running:
+
+[,yml]
+----
+kubectl argo rollouts abort <rollout-name> -n=<namespace>
+----
