@@ -43,7 +43,7 @@ If you want to get started with CircleCI releases right away, you can jump to:
 
 CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
-Configure a release environment to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces your require.
+Configure a release environment to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces you require.
 
 Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
