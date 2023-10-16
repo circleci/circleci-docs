@@ -36,7 +36,7 @@ In order to set up a release environment with CircleCI you will need to ensure t
 * A project building on CircleCI that deploys to your Kubernetes cluster. See the xref:../create-project#[Create a project] page for steps.
 * You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page
 
-CircleCI supports Kubernetes, Helm, and Argo Rollouts. The supported versions are listed below:
+CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions have been tested and proven to work. Older versions may work but are not guaranteed:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -99,19 +99,13 @@ helm upgrade --install circleci-release-agent-system release-agent/circleci-rele
 --set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MANAGE]
 ----
 
-Once you have fun this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated:
+Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated:
 
 . Click btn:[Releases] in the CircleCI web app sidebar
 . Click btn:[Configure Environments] at the top left
 . Click on the name of your release environment to view the environment details page
 
-[#conclusion]
-== Conclusion
-
-In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now xref:configure-your-kubernetes-components#[Configure your Kubernetes components].
-
 [#next-steps]
 == Next steps
 
-// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:configure-your-kubernetes-components#[Configure your Kubernetes components]
+In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now xref:configure-your-kubernetes-components#[Configure your Kubernetes components].

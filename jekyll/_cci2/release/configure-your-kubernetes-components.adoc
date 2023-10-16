@@ -17,14 +17,7 @@ The steps outlined on this page guide you to configure your Kubernetes resources
 [#introduction]
 == Introduction
 
-In this tutorial you will configure your Kubernetes components, adding labels and annotations to enable visibility and control over your deployments, and access to the following features:
-
-* Restore a version
-* Scale a version
-* Restart a version
-* Retry a release (when using Argo Rollouts)
-* Promote a release (when using Argo Rollouts)
-* Cancel a release (when using Argo Rollouts)
+In this tutorial you will configure your Kubernetes components, adding labels and annotations to enable visibility and control over your deployments.
 
 [#prerequisites]
 == Prerequisites
@@ -219,12 +212,7 @@ spec:
             - containerPort: 80
 ----
 
-[#conclusion]
-== Conclusion
-
-In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard.
-
 [#next-steps]
 == Next steps
 
-Learn how to manage your releases in the xref:manage-releases[Manage releases] how-to guide.
+In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard. Next, learn how to manage your releases in the xref:manage-releases[Manage releases] how-to guide.
