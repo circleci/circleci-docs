@@ -176,8 +176,6 @@ en:
             link: hello-world-macos
           - name: iOS code signing
             link: ios-codesigning
-          - name: Dedicated host resources
-            link: dedicated-hosts-macos
       - name: Windows
         children:
           - name: Using the Windows execution environment

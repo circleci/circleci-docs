@@ -96,11 +96,6 @@ The table below shows the permissions associated with each CircleCI organization
 ^|
 ^|
 
-^| View org releases
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
-
 ^| Manage org credentials
 ^| icon:check-circle[]
 ^|
@@ -291,6 +286,36 @@ The table below shows the permissions associated with each CircleCI organization
 ^|
 ^|
 
+| *Releases*
+|
+|
+|
+
+^| Create release environment
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| 
+
+^| Delete release environment
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| View release environment
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View components
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View releases
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
 |===
 
 
@@ -424,6 +449,41 @@ The table below shows the permissions associated with each CircleCI project role
 ^| Edit config sources
 ^| icon:check-circle[]
 ^|
+^|
+
+| *Releases*
+|
+|
+|
+
+^| Restore component version
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Restart component
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Scale component
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Cancel release
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| 
+
+^| Promote release steps
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Retry release
+^| icon:check-circle[]
+^| icon:check-circle[]
 ^|
 
 |===

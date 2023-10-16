@@ -19,9 +19,9 @@ Visualise and control deployments to your Kubernetes cluster with CircleCI relea
 
 CircleCI release environments give you visibility into your Kubernetes deployments in the CircleCI web app, as well as access to controls for release management. From the releases dashboard, you can:
 
-* Restore a version
-* Scale a version
-* Restart a version
+* Restore version
+* Scale version
+* Restart version
 
 CircleCI releases supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Some further controls are available from the releases dashboard for projects that use Argo Rollouts:
 
@@ -51,11 +51,13 @@ CircleCI can integrate with your Kubernetes cluster to give you visibility and c
 [#tooling]
 === Tooling
 
+NOTE: The following versions have been tested and proven to work. Older versions may work but are not guaranteed.
+
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
 |Tool
-|Supported versions
+|Tested versions
 
 |Kubernetes
 a| 1.28.0 +
