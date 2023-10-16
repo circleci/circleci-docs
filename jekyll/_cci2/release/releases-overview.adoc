@@ -213,6 +213,8 @@ A subset of commands are available for _progressive_ releases (when using Argo R
 [#release-status]
 == Release status
 
+Releases can be in any of the following statuses:
+
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
@@ -251,10 +253,12 @@ A number of features and improvements are planned to be added through open previ
 kubectl rollout restart deployment/circleci-release-agent-system -n circleci-release-agent-system
 ----
 
+* Restarting the release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
+
 [#troubleshooting]
 == Troubleshooting
 
-#TBD#
+{% include snippets/troubleshoot/releases-troubleshoot.adoc %}
 
 [#next-steps]
 == Next steps

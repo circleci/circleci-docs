@@ -1,0 +1,70 @@
+[#deployment-not-showing-up]
+=== Why is my Deployment/Rollout not showing up in the components tab or releases timeline view?
+
+* Check that the Deployment/Rollout is annotated ith the required labels. More information is available in the link:/docs/configure-your-kubernetes-components#[Set up guides]. If the required labels were not presetn, then adding them should solve the problem.
+
+* If you are using a Deployment, check that the desired replicas is not set to `0`. Deployments with `0` replicas are not reported as releases, even if they are scaled up subsequently. The configured value can be seen on the release agent deployment in the `circleci-release-agent-system` namespace. Here is an example in which the number of desired replicas is 2:
++
+[,yml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+  namespace: sample-namespace
+spec:
+  replicas: 2
+----
+
+* Check that the Deployment/Rollout is in a namespace managed by the release agent. This can be verified by checking the `MANAGED_NAMESPACES` environment variable on the release agent deployment in the `circleci-release-agent-system` namespace. Here is an example in which only the default namespace is being managed:
++
+[,yml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: circleci-release-agent
+  namespace: circleci-release-agent-system
+spec:
+  template:
+    spec:
+      containers:
+      - env:
+        - name: MANAGED_NAMESPACES
+          value: default
+----
+
+[#why-stuck-in-running]
+=== Why is my release is stuck in `Running` status
+
+* Check whether the Deployment or Rollout that triggered the release was deleted before the release could complete. In this scenario, this is an expected behavior. This experience will be improved upon in future release agent updates.
+
+* If you are using a Deployment, check whether the release agent restarted before all pods for the deployment could become ready. This is a known limitation that will be addressed in future updates of the release agent. Restarting a release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
+
+[#no-releases]
+=== Why are no new releases are showing up? and/or why are components versions not being updated?
+
+* Check whether the token used by the release agent has been revoked:
+.. Select btn:[Releases] in the CircleCI web app sidebar
+.. Click btn:[Configure Environments] to enter the release environments view
+.. Click to select your environment to view valid token details, including when the token was last used.
++
+If the token has been last used longer than a minute ago, then this is likely to be the problem.
+
+* Check whether tokens are being shared between multiple release environments. This is **not** supported. Check this by following these steps:
+.. Retrieve the token value from the token field in the `circleci-release-agent` secret in the `circleci-release-agent-system` namespace
+.. Compare the value with the partially obscured value for the available Tokens in the CircleCI web app
++
+If the token does **not** show up in the list, then it has been revoked or the value configured on the release agent is incorrect.
+In either case, creating a new token and reinstalling the Release Agent with the new value should solve the issue.
+
+[#restore-version-time-out]
+=== Why is `restore version` using Helm is timing out
+
+The time required for a Helm-based _restore version_ to complete successfully is dependent on the specific configuration of the target component. For example, a large number of replicas will lead to a longer duration, which could cause a timeout. It is possible to specify a different timeout by adding the circleci.com/operation-timeout annotation to the Rollout or Deployment. The default value for this is 10 minutes. For steps see the link:/docs/release/configure-your-kubernetes-components/#operation-timeout[Configure your Kubernetes components] page.
+
+[#restore-version-button-unavailable]
+=== The Restore Version button is not available for a Component Version
+
+Check whether the component has been undeployed. If there are currently no live versions for a component, the btn:[Restore Version] button will not be visible for that component until at least one version has been deployed.
+
