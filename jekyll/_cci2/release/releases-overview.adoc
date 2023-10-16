@@ -250,13 +250,6 @@ A number of features and improvements are planned to be added through open previ
 [#known-limitations]
 == Known limitations
 
-* If you install Argo Rollouts _after_ installing the CircleCI release agent into your cluster, you will need to restart the release agent. You can use this command:
-+
-[,shell]
-----
-kubectl rollout restart deployment/circleci-release-agent-system -n circleci-release-agent-system
-----
-
 * Restarting the release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
 
 [#troubleshooting]
