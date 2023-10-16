@@ -223,3 +223,8 @@ spec:
 == Conclusion
 
 In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard.
+
+[#next-steps]
+== Next steps
+
+Learn how to manage your releases in the xref:manage-releases[Manage releases] how-to guide.
