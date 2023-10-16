@@ -42,7 +42,7 @@ spec:
 * If you are using a Deployment, check whether the release agent restarted before all pods for the deployment could become ready. This is a known limitation that will be addressed in future updates of the release agent. Restarting a release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
 
 [#no-releases]
-=== Why are no new releases are showing up? and/or why are components versions not being updated?
+=== Why are no new releases are showing up? and/or why are component versions not being updated?
 
 * Check whether the token used by the release agent has been revoked:
 .. Select btn:[Releases] in the CircleCI web app sidebar
