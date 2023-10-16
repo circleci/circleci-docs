@@ -99,7 +99,7 @@ helm install circleci-release-agent-system release-agent/circleci-release-agent 
 --set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MANAGE]
 ----
 
-Once you have fun this command, you can check your environment is set up by navigating to the environment details page and check the "last used" date:
+Once you have fun this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated:
 
 . Click btn:[Releases] in the CircleCI web app sidebar
 . Click btn:[Configure Environments] at the top left
