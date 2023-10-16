@@ -17,7 +17,7 @@ The steps outlined on this page guide you through the tasks required to manage y
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-a-release-environment#[Set up a release environment] and xref:configure-your-kubernetes-component#[Configure your Kubernetes component] pages.
+Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-a-release-environment#[Set up a release environment] and xref:configure-your-kubernetes-component#[Configure your Kubernetes component] pages for more information.
 
 [#restore-version]
 == Restore version
@@ -35,14 +35,14 @@ NOTE: The steps outlined here are to revert a release from the release details p
 . You are now in the timeline view. Select your component from the dropdown menu
 . Scroll to locate the version your want to restore, and click on the version number to enter the release details page
 . Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Restore Version**
-. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then click btn:[Restore]. It is recommended to revert the associated changes in your source repository as soon as possible after using this command
+. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then click btn:[Restore]. We recommend reverting the associated changes in your source repository as soon as possible after using this command
 
 [#restore-notes]
 === Notes
 
 Executing the _restore version_ command from the CircleCI web app is the equivalent of using the following:
 
-* If you are using xref:configure-your-kubernetes-components#helm-rollback[Helm]:
+* If you are using Helm (Helm opt-in instructions are xref:configure-your-kubernetes-components#helm-rollback[here]):
 +
 [,shell]
 ----
@@ -154,8 +154,6 @@ Use the _retry release_ command to retry a release that has failed or been cance
 . Scroll to locate the failed or cancelled release you want to retry. Click on the version number to enter the release details page.
 . Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Retry Release**
 
-#add in steps ^ need to check as I don't have permissions#
-
 [#retry-notes]
 === Notes
 
@@ -206,7 +204,7 @@ kubectl argo rollouts promote --full <rollout-name>
 [#cancel-release]
 == Cancel release
 
-Use the _cancel release_ command to stop a release from progressing and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
+Use the _cancel release_ command to stop a release from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
@@ -219,8 +217,6 @@ NOTE: You can use this command if you are using link:https://argoproj.github.io/
 . You are now in the timeline view. Select your component from the dropdown menu.
 . Scroll to locate the running release you want to cancel. Click on the version number to enter the release details page.
 . Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Cancel Release**
-
-#add in steps ^ need to check as I don't have permissions#
 
 [#cancel-notes]
 === Notes
