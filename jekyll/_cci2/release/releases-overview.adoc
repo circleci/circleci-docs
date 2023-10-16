@@ -53,7 +53,7 @@ Developers can monitor releases in the CircleCI web app, and run commands to man
 [#tooling]
 === Tooling
 
-NOTE: The following versions have been tested and proven to work. Older versions may work but are not guaranteed.
+The following versions have been tested and proven to work. Older versions may work but are not guaranteed.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -76,6 +76,8 @@ a| 1.6.0 +
 
 [#labels-and-annotations]
 === Labels and annotations
+
+The following table shows a complete list of labels and annotations either required or available for configuring your release environment.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -212,7 +214,7 @@ A subset of commands are available for _progressive_ releases (when using Argo R
 [#release-status]
 == Release status
 
-Releases can be in any of the following statuses:
+Releases can be in one of the following states:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -221,13 +223,16 @@ Releases can be in any of the following statuses:
 |Notes
 
 |RUNNING
-| Currently in progress
+|The release is currently in progress
 
 |FAILED
-| Pods have reached an unhealthy status. This can be recovered once the release has completed
+|Pods have reached an unhealthy status. This can be recovered once the release has completed
 
-| SUCCESS
-| The Deployment or Rollout has all desired pods available
+|SUCCESS
+|The Deployment or Rollout has all desired pods available
+
+|CANCELLED
+|The release has been cancelled, either using the `cancel release` option, or by being superseded by another release
 |===
 
 [#coming-soon]
