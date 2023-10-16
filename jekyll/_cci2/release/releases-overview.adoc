@@ -17,13 +17,13 @@ Visualise and control deployments to your Kubernetes cluster with CircleCI relea
 [#introduction]
 == Introduction
 
-CircleCI release environments give you visibility into your Kubernetes deployments in the CircleCI web app, as well as access to controls for release management. From the releases dashboard, you can:
+CircleCI release environments give you visibility into your Kubernetes deployments in the CircleCI web app, as well as access to commands for release management. From the CircleCI web app, you can:
 
 * Restore version
 * Scale version
 * Restart version
 
-CircleCI releases supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Some further controls are available from the releases dashboard for projects that use Argo Rollouts:
+We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Some further controls are available for projects that use Argo Rollouts:
 
 * Retry release
 * Promote release
@@ -42,9 +42,11 @@ If you want to get started with CircleCI releases right away, you can jump to:
 [#how-it-works]
 == How it works
 
-CircleCI can integrate with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
+CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
-#Add some information about how it all works#
+Configure a release environment to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces your require.
+
+Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
 [#releases-requirements]
 == Requirements
