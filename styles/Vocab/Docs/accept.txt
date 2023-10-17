@@ -9,4 +9,9 @@ cron
 namespace
 hostname
 stderr
+config policies
+config policy
+Config policies
+Config policy
 XML
+
