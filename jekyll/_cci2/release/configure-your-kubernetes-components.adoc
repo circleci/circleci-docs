@@ -220,4 +220,4 @@ spec:
 [#next-steps]
 == Next steps
 
-In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard. Next, learn how to manage your releases in the xref:manage-releases[Manage releases] how-to guide.
+In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard. Next, learn how to manage your releases in the xref:manage-releases#[Manage releases] how-to guide.
