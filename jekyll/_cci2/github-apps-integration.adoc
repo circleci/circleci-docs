@@ -158,8 +158,8 @@ CircleCI users have different abilities depending on assigned roles in a particu
 
 There are a number of built-in environment variables that are not available in GitHub-based projects for accounts authenticated through the GitHub App. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
-[#coming-soon]
-== Coming soon
+[#currently-not-supported]
+== Currently not supported
 
 The following sections are features of CircleCI which are not currently fully supported. These features are planned for future releases.
 

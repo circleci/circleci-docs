@@ -92,6 +92,9 @@ Find out more about the macOS execution environment on the [Using macOS](/docs/u
 ## Windows
 {: #windows }
 
+The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+{: class="alert alert-info"}
+
 To access the Windows execution environment, either use the Windows orb and then specify one of the default executor from the orb, or use the `machine` executor and specify a windows image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
 {:.tab.windowsblock.Cloud_with_orb}
