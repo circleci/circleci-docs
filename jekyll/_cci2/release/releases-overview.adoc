@@ -226,10 +226,10 @@ Releases can be in one of the following states:
 |The release is currently in progress
 
 |FAILED
-|Pods have reached an unhealthy status. This can be recovered once the release has completed
+|Resources have reached an unhealthy status (pods for the new version of a Kubernetes component)
 
 |SUCCESS
-|The Deployment or Rollout has all desired pods available
+|The Deployment or Rollout has all desired resources available (all pods specified by a Kubernetes Deployment or Argo Rollout)
 
 |CANCELLED
 |The release has been cancelled, either using the `cancel release` option, or by being superseded by another release
