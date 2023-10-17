@@ -19,3 +19,7 @@ HPAs
 Autoscaler
 Autoscalers
 XML
+config policies
+config policy
+Config policies
+Config policy
