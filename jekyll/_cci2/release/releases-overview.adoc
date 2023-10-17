@@ -43,6 +43,8 @@ If you want to get started with CircleCI releases right away, you can jump to:
 
 CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
+image::../../img/docs/releases/releases-architecture.png[Diagram showing the architecture of CircleCI releases]
+
 Configure a release environment to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces you require.
 
 Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
@@ -233,6 +235,9 @@ Releases can be in one of the following states:
 
 |CANCELLED
 |The release has been cancelled, either using the `cancel release` option, or by being superseded by another release
+
+|EXPIRED
+|Release commands failed to be picked up by the release agent within the required time window
 |===
 
 [#coming-soon]

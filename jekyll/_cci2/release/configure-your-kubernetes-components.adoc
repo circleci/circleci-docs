@@ -59,8 +59,6 @@ spec:
 
 Once you have updated your Deployment or Rollout, check the CircleCI releases dashboard and you should see your release in the timeline view.
 
-#screenshot#
-
 [#link-release]
 == 2. Link release to deployment job trigger (optional)
 
@@ -86,7 +84,7 @@ metadata:
 [#configure-release-management]
 == 3. Configure release management (optional)
 
-By adding a few additional annotations to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your releases dashboard. This includes restoring, scaling, and restarting component versions. To get started, add the `circleci.com/project-id` annotation with the value found on the relevant CircleCI project settings page.
+By adding an annotation to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your releases dashboard. This includes restoring, scaling, and restarting component versions. To get started, add the `circleci.com/project-id` annotation with the value found on the relevant CircleCI project settings page.
 
 [,yaml]
 ----
@@ -98,7 +96,14 @@ metadata:
     circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
 ----
 
-#Screenshot#
+To find your project ID:
+
+. Click **Projects** in the CircleCI web app sidebar
+. Use the search function to find your project
+. Click the ellipsis menu next to your project and click btn:[Project Settings]
+. Your project ID is available to copy from the overview page
++
+image::../../img/docs/project-id.png[Screenshot showing where to find the project ID]
 
 [#helm-rollback]
 === a. Use Helm rollback

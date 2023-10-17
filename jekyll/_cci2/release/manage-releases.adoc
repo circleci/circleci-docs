@@ -144,7 +144,7 @@ NOTE: You can use this command if you are using link:https://argoproj.github.io/
 
 Use the _retry release_ command to retry a release that has failed or been cancelled. For more information about this command, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
 
-#screenshot#
+image::../../img/docs/releases/retry-release.png[Screenshot showing the retry release button]
 
 [#promote-steps]
 === Steps
@@ -208,7 +208,7 @@ Use the _cancel release_ command to stop a release from progressing, and revert 
 
 NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
-#screenshot#
+image::../../img/docs/releases/cancel-release.png[Screenshot showing the cancel release button]
 
 [#cancel-steps]
 === Steps
