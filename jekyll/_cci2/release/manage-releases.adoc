@@ -64,12 +64,12 @@ kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<
 ----
 
 
-[#scale-version]
-== Scale version
+[#scale-component]
+== Scale component
 
-The _scale version_ command allows you to scale up or down a currently live version of a component.
+The _scale component_ command allows you to scale up or down a currently live version of a component.
 
-image::../../img/docs/releases/scale-version.png[Screenshot showing the scale version button]
+image::../../img/docs/releases/scale-component.png[Screenshot showing the scale component button]
 
 [#scale-steps]
 === Steps
@@ -85,7 +85,7 @@ CAUTION: Any Horizontal Pod Autoscalers (HPAs) defined for this component will b
 [#scale-notes]
 === Notes
 
-Executing the _scale version_ command is the equivalent of the following:
+Executing the _scale component_ command is the equivalent of the following:
 
 * If you are using Argo Rollouts:
 +
@@ -101,12 +101,12 @@ kubectl patch rollout <rollout_name> -n <namespace> --type='json' -p='[{"op": "r
 kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
 ----
 
-[#restart-version]
-== Restart version
+[#restart-component]
+== Restart component
 
-The _restart version_ command allows you to restart a currently live version of a component.
+The _restart component_ command allows you to restart a currently live version of a component.
 
-image::../../img/docs/releases/restart-version.png[Screenshot showing the restart version button]
+image::../../img/docs/releases/restart-component.png[Screenshot showing the restart component button]
 
 [#start-steps]
 === Steps
@@ -120,7 +120,7 @@ image::../../img/docs/releases/restart-version.png[Screenshot showing the restar
 [#restart-notes]
 === Notes
 
-Executing the _restart version_ command is the equivalent of the following:
+Executing the _restart component_ command is the equivalent of the following:
 
 * If you are using Argo Rollouts:
 +

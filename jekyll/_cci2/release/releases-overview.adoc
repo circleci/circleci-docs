@@ -20,8 +20,8 @@ Visualise and control deployments to your Kubernetes cluster with CircleCI relea
 CircleCI release environments give you visibility into your Kubernetes deployments in the CircleCI web app, as well as access to commands for release management. From the CircleCI web app, you can:
 
 * Restore version
-* Scale version
-* Restart version
+* Scale component
+* Restart component
 
 We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
 
@@ -142,12 +142,12 @@ The following table shows a complete list of labels and annotations either requi
 |`Metadata.Annotations`
 |`circleci.com/scale-version-enabled`
 |`false`
-|No. Only set if you want to disable the scale version feature for your component.
+|No. Only set if you want to disable the scale component feature for your component.
 
 |`Metadata.Annotations`
 |`circleci.com/restart-version-enabled`
 |`false`
-|No. Only set if you want to disable the restart version feature for your component.
+|No. Only set if you want to disable the restart component feature for your component.
 
 |`Metadata.Annotations`
 |`circleci.com/retry-release-enabled`
@@ -193,8 +193,8 @@ A _command_ is a user-initiated action CircleCI performs on the user's behalf to
 Some commands are available for all components. These are:
 
 * Restore version
-* Scale version
-* Restart version
+* Scale component
+* Restart component
 
 A subset of commands are available for _progressive_ releases (when using Argo Rollouts). These are:
 

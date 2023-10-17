@@ -146,12 +146,12 @@ If you would like to disable any release management features for a specific comp
 
 NOTE: If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature will be **enabled**. Release management features are enabled by default unless explicitly disabled:
 
-* `circleci.com/restore-version-enabled` toggles the Restore Version feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/scale-version-enabled` toggles the Scale Version feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/restart-version-enabled` toggles the Restart Version feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/retry-release-enabled` toggles the Retry Release feature on the annotated Argo Rollout
-* `circleci.com/promote-release-enabled` toggles the Promote Release feature on the annotated Argo Rollout
-* `circleci.com/cancel-release-enabled` toggles the Cancel Release feature on the annotated Argo Rollout
+* `circleci.com/restore-version-enabled` toggles the restore version feature on the annotated Kubernetes Deployment or Argo Rollout
+* `circleci.com/scale-component-enabled` toggles the scale component feature on the annotated Kubernetes Deployment or Argo Rollout
+* `circleci.com/restart-component-enabled` toggles the restart component feature on the annotated Kubernetes Deployment or Argo Rollout
+* `circleci.com/retry-release-enabled` toggles the retry release feature on the annotated Argo Rollout
+* `circleci.com/promote-release-enabled` toggles the promote release feature on the annotated Argo Rollout
+* `circleci.com/cancel-release-enabled` toggles the cancel release feature on the annotated Argo Rollout
 
 In the following example, all features are explicitly disabled for the annotated Deployment:
 
