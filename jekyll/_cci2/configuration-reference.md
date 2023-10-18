@@ -1850,13 +1850,9 @@ Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** u
 ##### Using `pipeline` values
 {: #using-pipeline-values }
 
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
 
-{% include snippets/pipeline-values.md %}
-
-For a list of pipeline values compatible with GitLab, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
-
-For example:
+Example:
 
 ```yaml
 version: 2.1

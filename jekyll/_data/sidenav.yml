@@ -176,8 +176,6 @@ en:
             link: hello-world-macos
           - name: iOS code signing
             link: ios-codesigning
-          - name: Dedicated host resources
-            link: dedicated-hosts-macos
       - name: Windows
         children:
           - name: Using the Windows execution environment
@@ -264,6 +262,100 @@ en:
             link: troubleshoot-self-hosted-runner
           - name: Scaling self-hosted runner
             link: runner-scaling
+
+  - name: Test
+    icon: icons/sidebar/passed.svg
+    children:
+      - name: Run tests
+        children:
+          - name: Automated testing
+            link: test
+          - name: Collect test data
+            link: collect-test-data
+      - name: Testing strategies
+        children:
+          - name: Browser testing
+            link: browser-testing
+          - name: Generate code coverage metrics
+            link: code-coverage
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
+      - name: Monitor tests
+        children:
+          - name: Test Insights
+            link: insights-tests
+      - name: Tutorials
+        children:
+          - name: Speed up pipelines with test splitting
+            link: test-splitting-tutorial
+          - name: Testing iOS applications
+            link: testing-ios
+          - name: Testing macOS applications
+            link: testing-macos
+      - name: How-to guides
+        children:
+          - name: Use the CircleCI CLI to split tests
+            link: use-the-circleci-cli-to-split-tests
+      - name: Reference
+        children:
+          - name: Troubleshoot test splitting
+            link: troubleshoot-test-splitting
+
+  - name: Deploy
+    icon: icons/sidebar/getting-started-new.svg
+    children:
+      - name: Deployment
+        children:
+          - name: Deployment overview
+            link: deployment-overview
+      - name: How-to guides
+        children:
+          - name: Deploy Android applications
+            link: deploy-android-applications
+          - name: Deploy to Artifactory
+            link: deploy-to-artifactory
+          - name: Deploy to AWS
+            link: deploy-to-aws
+          - name: Push image to ECR and deploy to ECS
+            link: ecr-ecs
+          - name: Deploy to Azure Container Registry
+            link: deploy-to-azure-container-registry
+          - name: Deploy to Capistrano
+            link: deploy-to-capistrano
+          - name: Deploy to Cloud Foundry
+            link: deploy-to-cloud-foundry
+          - name: Deploy to Firebase
+            link: deploy-to-firebase
+          - name: Deploy to Google Cloud Platform
+            link: deploy-to-google-cloud-platform
+          - name: Deploy to Heroku
+            link: deploy-to-heroku
+          - name: Deploy iOS applications
+            link: deploy-ios-applications
+          - name: Deploy over SSH
+            link: deploy-over-ssh
+          - name: Publish packages to Packagecloud
+            link: publish-packages-to-packagecloud
+          - name: Publish to NPM registry
+            link: deploy-to-npm-registry
+
+  - name: Release - Open preview
+    icon: icons/sidebar/release.svg
+    children:
+      - name: Overview
+        children:
+          - name: Releases overview
+            link: release/releases-overview
+      - name: Set up
+        children:
+          - name: Set up a release environment
+            link: release/set-up-a-release-environment
+          - name: Configure your Kubernetes components
+            link: release/configure-your-kubernetes-components
+      - name: How to
+        children:
+          - name: Manage releases
+            link: release/manage-releases
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
@@ -520,96 +612,6 @@ en:
             link: sample-config
           - name: Database examples
             link: postgres-config
-
-  - name: Test
-    icon: icons/sidebar/passed.svg
-    children:
-      - name: Run tests
-        children:
-          - name: Automated testing
-            link: test
-          - name: Collect test data
-            link: collect-test-data
-      - name: Testing strategies
-        children:
-          - name: Browser testing
-            link: browser-testing
-          - name: Generate code coverage metrics
-            link: code-coverage
-          - name: Re-run failed tests overview
-            link: rerun-failed-tests
-      - name: Monitor tests
-        children:
-          - name: Test Insights
-            link: insights-tests
-      - name: Tutorials
-        children:
-          - name: Speed up pipelines with test splitting
-            link: test-splitting-tutorial
-          - name: Testing iOS applications
-            link: testing-ios
-          - name: Testing macOS applications
-            link: testing-macos
-      - name: How-to guides
-        children:
-          - name: Use the CircleCI CLI to split tests
-            link: use-the-circleci-cli-to-split-tests
-      - name: Reference
-        children:
-          - name: Troubleshoot test splitting
-            link: troubleshoot-test-splitting
-
-  - name: Deploy
-    icon: icons/sidebar/getting-started-new.svg
-    children:
-      - name: Deployment
-        children:
-          - name: Deployment overview
-            link: deployment-overview
-      - name: How-to guides
-        children:
-          - name: Deploy Android applications
-            link: deploy-android-applications
-          - name: Deploy to Artifactory
-            link: deploy-to-artifactory
-          - name: Deploy to AWS
-            link: deploy-to-aws
-          - name: Push image to ECR and deploy to ECS
-            link: ecr-ecs
-          - name: Deploy to Azure Container Registry
-            link: deploy-to-azure-container-registry
-          - name: Deploy to Capistrano
-            link: deploy-to-capistrano
-          - name: Deploy to Cloud Foundry
-            link: deploy-to-cloud-foundry
-          - name: Deploy to Firebase
-            link: deploy-to-firebase
-          - name: Deploy to Google Cloud Platform
-            link: deploy-to-google-cloud-platform
-          - name: Deploy to Heroku
-            link: deploy-to-heroku
-          - name: Deploy iOS applications
-            link: deploy-ios-applications
-          - name: Deploy over SSH
-            link: deploy-over-ssh
-          - name: Publish packages to Packagecloud
-            link: publish-packages-to-packagecloud
-          - name: Publish to NPM registry
-            link: deploy-to-npm-registry
-
-  - name: Release
-    icon: icons/sidebar/getting-started-new.svg
-    children:
-      - name: Overview
-        children:
-          - name: Releases overview
-            link: release/releases-overview
-      - name: Set up
-        children:
-          - name: Set up a release environment
-            link: release/set-up-a-release-environment
-          - name: Configure your Kubernetes components
-            link: release/configure-your-kubernetes-components
 
   - name: Server administration v4.2
     icon: icons/sidebar/admin-new.svg
@@ -1337,6 +1339,118 @@ ja:
             link: ja/runner-config-reference
             i18n_name: マシンランナーの設定リファレンス
 
+  - name: Test
+    i18n_name: テスト
+    icon: icons/sidebar/passed.svg
+    children:
+      - name: Run tests
+        i18n_name: テストの実行
+        children:
+          - name: Automated testing
+            link: ja/test
+            i18n_name: テストの自動化
+          - name: Collect test data
+            link: ja/collect-test-data
+            i18n_name: テストデータの収集
+      - name: Testing strategies
+        i18n_name: テスト対策
+        children:
+          - name: Browser testing
+            link: ja/browser-testing
+            i18n_name: ブラウザーテスト
+          - name: Code coverage
+            link: ja/code-coverage
+            i18n_name: コードカバレッジ
+          - name: Rerun failed tests overview
+            link: ja/rerun-failed-tests
+            i18n_name: 失敗したテストのみを再実行
+      - name: Monitor tests
+        i18n_name: テストの管理
+        children:
+          - name: Test Insights
+            i18n_name: テストインサイト
+            link: ja/insights-tests
+      - name: Tutorials
+        i18n_name: チュートリアル
+        children:
+          - name: Speed up pipelines with test splitting
+            link: ja/test-splitting-tutorial
+            i18n_name: テスト分割によるパイプラインの高速化
+          - name: Testing iOS applications
+            link: ja/testing-ios
+            i18n_name: iOSアプリをテストする
+          - name: Testing macOS applications
+            link: ja/testing-macos
+            i18n_name: macOSアプリのテスト
+      - name: How-to guides
+        i18n_name: ガイド
+        children:
+          - name: Use the CircleCI CLI to split tests
+            link: ja/use-the-circleci-cli-to-split-tests
+            i18n_name: CircleCI CLI を使用したテスト分割
+      - name: Reference
+        i18n_name: リファレンス
+        children:
+          - name: Troubleshoot test splitting
+            link: ja/troubleshoot-test-splitting
+            i18n_name: テスト分割のトラブルシュート
+
+  - name: Deploy
+    icon: icons/sidebar/getting-started-new.svg
+    i18n_name: デプロイ
+    children:
+      - name: Deployment
+        i18n_name: デプロイメント
+        children:
+          - name: Deployment overview
+            link: ja/deployment-overview
+            i18n_name: デプロイの概要
+      - name: How-to guides
+        i18n_name: ガイド
+        children:
+          - name: Deploy Android applications
+            link: ja/deploy-android-applications
+            i18n_name: Androidアプリのデプロイ
+          - name: Deploy to Artifactory
+            link: ja/deploy-to-artifactory
+            i18n_name: Artifactoryへのデプロイ
+          - name: Deploy to AWS
+            link: ja/deploy-to-aws
+            i18n_name: AWSへのデプロイ
+          - name: Deploy service update to AWS ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
+          - name: Deploy to Azure Container Registry
+            link: ja/deploy-to-azure-container-registry
+            i18n_name: Azure Container Registryへのデプロイ
+          - name: Deploy to Capistrano
+            link: ja/deploy-to-capistrano
+            i18n_name: Capistranoへのデプロイ
+          - name: Deploy to Cloud Foundry
+            link: ja/deploy-to-cloud-foundry
+            i18n_name: Cloud Foundryへのデプロイ
+          - name: Deploy to Firebase
+            link: ja/deploy-to-firebase
+            i18n_name: Firebaseへのデプロイ
+          - name: Deploy to Google Cloud Platform
+            link: ja/deploy-to-google-cloud-platform
+            i18n_name: Google Cloud Platformへのデプロイ
+          - name: Deploy to Heroku
+            link: ja/deploy-to-heroku
+            i18n_name: Herokuへのデプロイ
+          - name: Deploy iOS applications
+            link: ja/deploy-ios-applications
+            i18n_name: iOSアプリのデプロイ
+          - name: Deploy to NPM registry
+            link: ja/deploy-to-npm-registry
+            i18n_name: NPMレジストリへのデプロイ
+          - name: Deploy over SSH
+            link: ja/deploy-over-ssh
+            i18n_name: SSHを使用したデプロイ
+          - name: Publish packages to Packagecloud
+            link: ja/publish-packages-to-packagecloud
+            i18n_name: Packagecloudへのデプロイ
+
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
     i18n_name: 最適化
@@ -1707,118 +1821,6 @@ ja:
           - name: API v1.1 Reference
             link: https://circleci.com/docs/api/v1
             i18n_name: API v1.1リファレンス
-
-  - name: Test
-    i18n_name: テスト
-    icon: icons/sidebar/passed.svg
-    children:
-      - name: Run tests
-        i18n_name: テストの実行
-        children:
-          - name: Automated testing
-            link: ja/test
-            i18n_name: テストの自動化
-          - name: Collect test data
-            link: ja/collect-test-data
-            i18n_name: テストデータの収集
-      - name: Testing strategies
-        i18n_name: テスト対策
-        children:
-          - name: Browser testing
-            link: ja/browser-testing
-            i18n_name: ブラウザーテスト
-          - name: Code coverage
-            link: ja/code-coverage
-            i18n_name: コードカバレッジ
-          - name: Rerun failed tests overview
-            link: ja/rerun-failed-tests
-            i18n_name: 失敗したテストのみを再実行
-      - name: Monitor tests
-        i18n_name: テストの管理
-        children:
-          - name: Test Insights
-            i18n_name: テストインサイト
-            link: ja/insights-tests
-      - name: Tutorials
-        i18n_name: チュートリアル
-        children:
-          - name: Speed up pipelines with test splitting
-            link: ja/test-splitting-tutorial
-            i18n_name: テスト分割によるパイプラインの高速化
-          - name: Testing iOS applications
-            link: ja/testing-ios
-            i18n_name: iOSアプリをテストする
-          - name: Testing macOS applications
-            link: ja/testing-macos
-            i18n_name: macOSアプリのテスト
-      - name: How-to guides
-        i18n_name: ガイド
-        children:
-          - name: Use the CircleCI CLI to split tests
-            link: ja/use-the-circleci-cli-to-split-tests
-            i18n_name: CircleCI CLI を使用したテスト分割
-      - name: Reference
-        i18n_name: リファレンス
-        children:
-          - name: Troubleshoot test splitting
-            link: ja/troubleshoot-test-splitting
-            i18n_name: テスト分割のトラブルシュート
-
-  - name: Deploy
-    icon: icons/sidebar/getting-started-new.svg
-    i18n_name: デプロイ
-    children:
-      - name: Deployment
-        i18n_name: デプロイメント
-        children:
-          - name: Deployment overview
-            link: ja/deployment-overview
-            i18n_name: デプロイの概要
-      - name: How-to guides
-        i18n_name: ガイド
-        children:
-          - name: Deploy Android applications
-            link: ja/deploy-android-applications
-            i18n_name: Androidアプリのデプロイ
-          - name: Deploy to Artifactory
-            link: ja/deploy-to-artifactory
-            i18n_name: Artifactoryへのデプロイ
-          - name: Deploy to AWS
-            link: ja/deploy-to-aws
-            i18n_name: AWSへのデプロイ
-          - name: Deploy service update to AWS ECS
-            link: ja/deploy-service-update-to-aws-ecs
-            i18n_name: 変更のECSへのデプロイ
-          - name: Deploy to Azure Container Registry
-            link: ja/deploy-to-azure-container-registry
-            i18n_name: Azure Container Registryへのデプロイ
-          - name: Deploy to Capistrano
-            link: ja/deploy-to-capistrano
-            i18n_name: Capistranoへのデプロイ
-          - name: Deploy to Cloud Foundry
-            link: ja/deploy-to-cloud-foundry
-            i18n_name: Cloud Foundryへのデプロイ
-          - name: Deploy to Firebase
-            link: ja/deploy-to-firebase
-            i18n_name: Firebaseへのデプロイ
-          - name: Deploy to Google Cloud Platform
-            link: ja/deploy-to-google-cloud-platform
-            i18n_name: Google Cloud Platformへのデプロイ
-          - name: Deploy to Heroku
-            link: ja/deploy-to-heroku
-            i18n_name: Herokuへのデプロイ
-          - name: Deploy iOS applications
-            link: ja/deploy-ios-applications
-            i18n_name: iOSアプリのデプロイ
-          - name: Deploy to NPM registry
-            link: ja/deploy-to-npm-registry
-            i18n_name: NPMレジストリへのデプロイ
-          - name: Deploy over SSH
-            link: ja/deploy-over-ssh
-            i18n_name: SSHを使用したデプロイ
-          - name: Publish packages to Packagecloud
-            link: ja/publish-packages-to-packagecloud
-            i18n_name: Packagecloudへのデプロイ
 
   - name: Server Administration v4.x
     i18n_name: Server v4.x 管理

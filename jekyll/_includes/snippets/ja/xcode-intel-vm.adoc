@@ -75,5 +75,3 @@
 |===
 
 WARNING: The `11.7.0`, `13.0.0`, `13.1.0`, `13.2.1` and `13.3.1` images are deprecated and will be removed on 7 August 2023. See our link:https://discuss.circleci.com/t/xcode-image-deprecation-and-eol-notice-2023/48264[announcement] for more details.
-
-WARNING: The `medium` and `large` resource classes are being deprecated on October 2, 2023. Xcode v14.2は、macOSリソースでサポートされる最新バージョンです。 See our link:https://discuss.circleci.com/t/macos-resource-deprecation-update/46891[announcement] for more details.

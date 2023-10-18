@@ -12,9 +12,6 @@
 **We are deprecating support for all Intel-based macOS resources.**
 <br>
 <br>
-The `medium` and `large` resource classes are being deprecated on October 2, 2023. Xcode v14.2 is the latest version that will be supported by these macOS resources.
-<br>
-<br>
 The `macos.x86.medium.gen2` resource class is being deprecated on January 31, 2024. Xcode v15.1 is the latest version that will be supported by this macOS resource.
 <br>
 <br>

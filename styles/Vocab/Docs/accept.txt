@@ -5,6 +5,7 @@ CircleCI server
 circleci.com
 OAuth
 boolean
+Boolean
 cron
 namespace
 hostname
@@ -13,3 +14,12 @@ Rollout
 Rollouts
 Asciidoctor
 endraw
+HPA
+HPAs
+Autoscaler
+Autoscalers
+XML
+config policies
+config policy
+Config policies
+Config policy

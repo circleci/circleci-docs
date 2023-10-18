@@ -40,8 +40,6 @@ jobs:
 
 {% include snippets/xcode-silicon-vm.adoc %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the xref:dedicated-hosts-macos#[Dedicated hosts] documentation.
-
 [#available-resource-classes]
 == Available resource classes
 
