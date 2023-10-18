@@ -125,7 +125,7 @@ annotations:
 
 NOTE: This option is only available when using Helm to configure your Kubernetes resources.
 
-The `circleci.com/operation-timeout` annotation allows a custom timeout to be specified for Helm Rollback operations performed as part of a Restore Version command. Valid values are Go duration strings (for example, 5m, 10m15s). This option is available if you are using Helm to manage your Kubernetes resources.
+The `circleci.com/operation-timeout` annotation allows a custom timeout to be specified for Helm Rollback operations performed as part of a Restore Version command. Valid values are link:https://pkg.go.dev/time#ParseDuration[Go duration strings] (for example, 5m, 10m15s). This option is available if you are using Helm to manage your Kubernetes resources.
 
 For example,
 
@@ -164,8 +164,8 @@ metadata:
   namespace: default
   annotations:
     circleci.com/restore-version-enabled: false
-    circleci.com/scale-version-enabled: false
-    circleci.com/restart-version-enabled: false
+    circleci.com/scale-component-enabled: false
+    circleci.com/restart-component-enabled: false
     circleci.com/retry-release-enabled: false
     circleci.com/promote-release-enabled: false
     circleci.com/cancel-release-enabled: false
@@ -189,10 +189,10 @@ metadata:
     circleci.com/pipeline-id: 88dfee99-0348-407f-b113-dbf270cad093
     circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
     circleci.com/promote-release-enabled: "true"
-    circleci.com/restart-version-enabled: "true"
+    circleci.com/restart-component-enabled: "true"
     circleci.com/restore-version-enabled: "true"
     circleci.com/retry-release-enabled: "true"
-    circleci.com/scale-version-enabled: "true"
+    circleci.com/scale-component-enabled: "true"
     circleci.com/workflow-id: 5b8c4de8-fd5f-4be2-80a4-3d0c03fc138c
   labels:
     app: example-deployment

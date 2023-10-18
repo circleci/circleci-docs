@@ -131,7 +131,7 @@ The following table shows a complete list of labels and annotations either requi
 
 |`Metadata.Annotations`
 |`circleci.com/operation-timeout`
-|A link:https://pkg.go.dev/maze.io/x/duration#Duration[Go duration string], for example, 5m, 10m15s
+|A link:https://pkg.go.dev/time#ParseDuration[Go duration string], for example, 5m, 10m15s
 |No. Only needed to set a custom timeout duration. This option is only available if you are using Helm to configure your Kubernetes resources.
 
 |`Metadata.Annotations`
@@ -140,12 +140,12 @@ The following table shows a complete list of labels and annotations either requi
 |No. Only set if you want to disable the restore version feature for your component.
 
 |`Metadata.Annotations`
-|`circleci.com/scale-version-enabled`
+|`circleci.com/scale-component-enabled`
 |`false`
 |No. Only set if you want to disable the scale component feature for your component.
 
 |`Metadata.Annotations`
-|`circleci.com/restart-version-enabled`
+|`circleci.com/restart-component-enabled`
 |`false`
 |No. Only set if you want to disable the restart component feature for your component.
 
