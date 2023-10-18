@@ -61,7 +61,7 @@ nano $HOME/Library/Preferences/com.circleci.runner/config.yaml
 ```
 runner:
   name: "my-osx-runner"
-  working_directory: "/Users/yourusername/Library/com.circleci.runner/workdir"
+  working_directory: "/Users/$USER/Library/com.circleci.runner/workdir"
   cleanup_working_directory: true
 api:
   auth_token: "your-auth-token"
