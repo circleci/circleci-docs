@@ -35,7 +35,7 @@ spec:
 ----
 
 [#why-stuck-in-running]
-=== Why is my release is stuck in `Running` status
+=== Why is my release is stuck in the `Running` state?
 
 * If you are using a Deployment, check whether it was deleted before the release could complete. In this scenario, this is an expected behavior. This experience will be improved upon in future release agent updates.
 
@@ -59,21 +59,21 @@ If the token does **not** show up in the list, then it has been revoked or the v
 In either case, creating a new token and reinstalling the Release Agent with the new value should solve the issue.
 
 [#restore-version-time-out]
-=== Why is `restore version` using Helm is timing out
+=== Why is `restore version` using Helm is timing out?
 
 The time required for a Helm-based _restore version_ to complete successfully is dependent on the specific configuration of the target component. For example, a large number of replicas will lead to a longer duration, which could cause a timeout. It is possible to specify a different timeout by adding the `circleci.com/operation-timeout` annotation to the Rollout or Deployment. The default value for this is 10 minutes. For steps see the link:/docs/release/configure-your-kubernetes-components/#operation-timeout[Configure your Kubernetes components] page.
 
 [#restore-version-button-unavailable]
-=== The Restore Version button is not available for a Component Version
+=== Why is the restore version button not available for a component version?
 
 Check whether the component has been undeployed. If there are currently no live versions for a component, the btn:[Restore Version] button will not be visible for that component until at least one version has been deployed.
 
 [#all-features-unavailable-on-release]
-=== Why all buttons (Promote, Promote All and Cancel) are disabled on a Release 
+=== Why are all buttons (**Promote**, **Promote All** and **Cancel**) disabled for a release?
 
-Check whether the Release is a Rollback. If this is the case, then this is a known issue that will be solved in one of the upcoming updates to the Release Agent.
+Check whether the release is a Rollback. If this is the case, then this is a known issue that will be solved in a future update to the CircleCI release agent.
 
 [#commands-failing]
-=== Why are all actions on a Component or Release for a given Component failing?
+=== Why are all commands for my component failing?
 
-Check if the error message is “invalid or missing project ID“. In that case the Component is missing a valid Project ID.
+Check if the error message is “invalid or missing project ID“. In this case the component is missing a valid link:/docs/release/configure-your-kubernetes-components/#configure-release-management[Project ID].
