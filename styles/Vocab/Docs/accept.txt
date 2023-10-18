@@ -1,4 +1,5 @@
 Config
+config
 CircleCI cloud
 CircleCI server
 circleci.com
@@ -9,4 +10,16 @@ cron
 namespace
 hostname
 stderr
+Rollout
+Rollouts
+Asciidoctor
+endraw
+HPA
+HPAs
+Autoscaler
+Autoscalers
 XML
+config policies
+config policy
+Config policies
+Config policy
