@@ -306,6 +306,21 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
+^| Create environment token
+^| icon:check-circle[]
+^|
+^| 
+
+^| Revoke environment token
+^| icon:check-circle[]
+^|
+^|
+
+^| List environment token
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
 ^| View components
 ^| icon:check-circle[]
 ^| icon:check-circle[]
