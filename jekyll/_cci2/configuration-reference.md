@@ -812,7 +812,7 @@ Example:
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+      image: ubuntu-2004:current # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
 
     steps:
         # Commands run in a Linux virtual machine environment
