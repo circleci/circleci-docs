@@ -140,12 +140,12 @@ The following table shows a complete list of labels and annotations either requi
 |No. Only set if you want to disable the restore version feature for your component.
 
 |`Metadata.Annotations`
-|`circleci.com/scale-version-enabled`
+|`circleci.com/scale-component-enabled`
 |`false`
 |No. Only set if you want to disable the scale component feature for your component.
 
 |`Metadata.Annotations`
-|`circleci.com/restart-version-enabled`
+|`circleci.com/restart-component-enabled`
 |`false`
 |No. Only set if you want to disable the restart component feature for your component.
 
