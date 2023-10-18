@@ -293,12 +293,12 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Create release environment
 ^| icon:check-circle[]
-^| icon:check-circle[]
+^|
 ^| 
 
 ^| Delete release environment
 ^| icon:check-circle[]
-^| icon:check-circle[]
+^|
 ^|
 
 ^| View release environment
