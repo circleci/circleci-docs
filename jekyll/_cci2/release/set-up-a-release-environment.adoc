@@ -45,8 +45,8 @@ CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions ha
 |Supported versions
 
 |Kubernetes
-a| 1.28.0 +
-1.27.0
+a| 1.27.0 +
+1.26.0
 
 |Helm
 a| 3.12.0 +
