@@ -128,7 +128,7 @@ You will be guided through the SSH key generation process in the CircleCI web ap
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to your GitHub repository menu:Settings[Security > Deploy Keys]. Copy and paste your public key here. We **do not** require write access. The title can be anything you want.
+. Go to your GitHub repository menu:Settings[Security > Deploy Keys]. Copy and paste your public key here. We **do not** require write access. The title can be anything you want.  Only a GitHub repository "admin" role is required (not GitHub organization owner), see (GitHub's docs for more details)[https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization]. 
 
 . In the CircleCI web app **Create Project** page, copy and paste your private key, including `---BEGIN RSA PRIVATE KEY---` and `---END RSA PRIVATE KEY---`, into the **GitHub personal SSH key** field.
 
