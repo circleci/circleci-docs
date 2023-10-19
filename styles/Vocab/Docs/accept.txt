@@ -1,4 +1,5 @@
 Config
+config
 CircleCI cloud
 CircleCI server
 circleci.com
@@ -18,3 +19,13 @@ Autoscaler
 autoscaler
 Certbot
 keyset
+Rollout
+Rollouts
+Asciidoctor
+endraw
+HPA
+HPAs
+config policies
+config policy
+Config policies
+Config policy
