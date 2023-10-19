@@ -209,7 +209,8 @@ SSH reruns are not currently supported for GitHub App projects. This feature wil
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project.
+Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project. If you are looking to set up an SSH key in order to check out code from additional repositories in GitHub, see xref:add-ssh-key/#steps-to-add-additional-ssh-keys[Add additional SSH keys].  
+
 
 [#free-and-open-source-setting]
 === Free and open source setting
