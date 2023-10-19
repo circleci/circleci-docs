@@ -370,16 +370,16 @@ See the [Pipelines overview](/docs/pipelines) page for more information.
 ## Projects
 {: #projects }
 
-For GitHub and Bitbucket accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
+For [GitHub OAuth app](/docs/github-integration/) and [Bitbucket](/docs/bitbucket-integration/) accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
-For GitLab users, a _project_ in CircleCI is standalone. You name your project and then connect your code (GitLab repository) to that project. A standalone project can have:
+For [GitHub App](/docs/github-apps-integration/) and [GitLab](/docs/gitlab-integration/) users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub or GitLab repository) to that project. A standalone project can have:
 
 * One or more configurations (pipeline definitions), including, but not limited to, a `.circleci/config.yml` file in the repo associated with the project.
 * One or more triggers (events from a source of change), including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
 
 Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow any project you have access to. There are two options:
 
-* _Set Up_ any project that you are the owner of in your VCS.
+* _Set Up_ or _Create_ any project that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications](/docs/notifications/) for the project's status.
 
 ![Project dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
@@ -409,7 +409,7 @@ Examples for all execution environments are available on the following pages:
 * [Using the macOS execution environment](/docs/using-macos)
 * [Using the Windows execution environment](/docs/using-windows)
 * [Using the GPU execution environment](/docs/using-gpu)
-* [Using the Arm execution environment](/docs/using-arm)
+* [Using the Arm VM execution environment](/docs/using-arm)
 
 Pricing and plans information for the various resource classes can be found on the [Resource classes](https://circleci.com/product/features/resource-classes/) product page.
 
@@ -418,7 +418,7 @@ The `resource_class` key is also used to configure a [self-hosted runner instanc
 ## Steps
 {: #steps }
 
- Steps are a collection of the executable commands required to complete your job. For example, the [`checkout`](/docs/configuration-reference#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration](/docs/configuration-reference#commands-requires-version-21), making them reusable across your configuration.
+ Steps are a collection of the executable commands required to complete your job. For example, the [`checkout`](/docs/configuration-reference#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration](/docs/configuration-reference#commands), making them reusable across your configuration.
 
 ```yaml
 version: 2.1

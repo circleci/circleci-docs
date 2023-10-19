@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn about how the CircleCI VS Code extension can help you manage your pipelines, workflows and jobs.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The CircleCI Visual Studio Code extension enables you to manage your CircleCI pipelines directly from VS Code.
 
@@ -20,6 +19,8 @@ The VS Code extension includes:
 
 - The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
 - The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
+
+NOTE: Currently only the **Config Helper** is available for GitLab and GitHub App projects. To find out if you authenticated through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 [#install-the-vs-code-extension]
 == Install the VS Code extension
@@ -71,23 +72,25 @@ Expanding a job also lets you:
 [#re-run-with-ssh]
 === Re-run with SSH
 
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects.
+
 There are two ways to re-run jobs with SSH directly from VS Code:
 
-- Open the job detail page, then click the green **SSH** button on the top right.
-
+* Open the job detail page, then click the **SSH** button on the top right.
++
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screenshot of side Panel with job details]
 
-- Hover over the job in the pipelines panel, and click the SSH action button next to the job name.
-
+* Or, hover over the job in the pipelines panel, and click the SSH action button next to the job name.
++
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun otpions]
 
 In both cases, you will be presented with two options:
 
-- Open an SSH session in the terminal
+* Open an SSH session in the terminal.
 
-- Open SSH session in a remote VS Code window
-
-This feature requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on remote development using SSH in VS Code directly in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
+* Open an SSH session in a remote VS Code window.
++
+Using a remote development window requires the official VS Code link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh[Remote - SSH] extension. You can find more information on remote development in VS Code using SSH in the link:https://code.visualstudio.com/docs/remote/ssh[VS Code docs].
 
 To re-run your job with SSH, you will first have to set the path to your GitHub or Bitbucket SSH key. The first time you attempt to re-run with SSH, the extension will guide you to select the path of the relevant SSH key. If you had skipped this step, or want to modify the path at a later time, you can do so from the **SSH** section of the CircleCI VS Code extension settings.
 

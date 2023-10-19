@@ -1,0 +1,265 @@
+---
+contentTags:
+  platform:
+  - Server v4.2
+  - Server Admin
+---
+= Manage virtual machines with VM Service
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:icons: font
+:toc: macro
+:toc-title:
+
+VM service controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
+
+This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
+
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-vm-service[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+
+[#vm-provider]
+== VM provider
+The following configuration options are for the VM provider: either AWS or GCP.
+
+[#aws]
+=== AWS
+There is a section in your `values.yaml` file that configures VM Service to work with AWS EC2. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+
+The information in this section describes post-installation configuration options for VM service.
+
+[#windows-image-aws]
+==== Windows image
+
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI server Windows image builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      ...
+      windowsAMI: "<my-windows-ami>"
+----
+
+[#linux-image-aws]
+==== Alternative Linux VM image
+
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI server Linux image builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      ...
+      linuxAMI: "<my-linux-ami>"
+----
+
+[#default-aws-ami-lists]
+==== Default AWS AMI lists
+
+The default AMIs for server v4.2 are based on Ubuntu 22.04.
+
+[#x86-ami-list]
+===== x86 AMI list
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1`
+| `ami-03dc54f7559144972`
+
+| `ca-central-1`
+| `ami-0575d605472840942`
+
+| `ap-south-1`
+| `ami-047ef6196620f56ca`
+
+| `ap-southeast-2`
+| `ami-0521f8d70ef9dbd24`
+
+| `ap-southeast-1`
+| `ami-0ef0354f4eb3b7428`
+
+| `eu-central-1`
+| `ami-0a8286fff7b5ed33a`
+
+| `eu-west-1`
+| `ami-093618a1d0185f9e8`
+
+| `eu-west-2`
+| `ami-08f00d41b17d3ea0a`
+
+| `sa-east-1`
+| `ami-064b0bfe97e6ec04c`
+
+| `us-east-2`
+| `ami-068cb131f91632f12`
+
+| `us-west-1`
+| `ami-0a4b7cf088a798be3`
+
+| `us-west-2`
+| `ami-018e05f98628cf5e5`
+
+| `ap-northeast-1`
+| `ami-06f32ec6aeecbeaa6`
+
+| `ap-northeast-2`
+| `ami-084c1abb1e8dabffd`
+
+| `eu-west-3`
+| `ami-09b3e24bccae3252f`
+
+| `us-gov-east-1`
+| `ami-0de525cac9ac9bea8`
+
+| `us-gov-west-1`
+| `ami-02abf947586cae56b`
+|===
+
+[#arm-ami-list]
+===== Arm AMI list
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+|`us-east-1`
+|`ami-0b11ce74f44e45578`
+
+|`ca-central-1`
+|`ami-07400e987dd82901d`
+
+|`ap-south-1`
+|`ami-072fe819d7b94b095`
+
+|`ap-southeast-2`
+|`ami-0510826f7f3a83b3e`
+
+|`ap-southeast-1`
+|`ami-0e5b703665f3e4517`
+
+|`eu-central-1`
+|`ami-045ea67b0f35ef1ef`
+
+|`eu-west-1`
+|`ami-044ac39c87438d89d`
+
+|`eu-west-2`
+|`ami-0a399817fbbb240e4`
+
+|`sa-east-1`
+|`ami-0ebc0e64fb943e191`
+
+|`us-east-2`
+|`ami-01f7dc2f8590b1611`
+
+|`us-west-1`
+|`ami-085fb1dd323aa02c7`
+
+|`us-west-2`
+|`ami-0e5ea38c131f05c8f`
+
+|`ap-northeast-1`
+|`ami-02c8fac0dbbbad74f`
+
+|`ap-northeast-2`
+|`ami-022e2eacee7328cca`
+
+|`us-gov-east-1`
+|`ami-0bb797dcfa52ce04d`
+
+|`us-gov-west-1`
+|`ami-0ab175883ff460b17`
+|===
+
+[#gcp]
+=== GCP
+There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+
+The information in this section describes post-installation configuration options for VM service.
+
+[#windows-image-gcp]
+==== Windows image
+
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI server Windows image builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    gcp:
+      ...
+      windowsImage: "<my-windows-image>"
+----
+
+[#linux-image-gcp]
+==== Alternative Linux VM image
+
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI server Linux image builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    gcp:
+      ...
+      linuxImage: "<my-linux-image>"
+----
+
+[#instance-preallocation]
+== Instance preallocation
+
+WARNING: If xref:../../../docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+
+CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+
+To configure server to keep instances preallocated, use the keys shown in the following `values.yaml` examples:
+
+NOTE: For a full list of options, see the xref:../installation/installation-reference/#all-values-yaml-options[Installation Reference] page.
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: docker-default
+      docker-engine: true # remote Docker environment
+      cron: ""
+      count: 2
+----
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: default
+      docker-engine: false # machine execution environment
+      cron: ""
+      count: 2
+----
+
+[#apply-changes]
+== Apply changes
+
+Apply the changes made to your `values.yaml` file:
+
+[source,shell,subs=attributes+]
+----
+namespace=<your-namespace>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion42} -f <path-to-values.yaml>
+----

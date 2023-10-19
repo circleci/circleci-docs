@@ -8,8 +8,7 @@ contentTags:
 :page-description: Testing iOS applications on macOS.
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document describes how to set up and customize testing for an iOS application with CircleCI.
 
@@ -32,8 +31,6 @@ There is documentation for xref:ios-codesigning#[iOS code signing projects] and 
 === Supported Xcode versions for Apple silicon
 
 {% include snippets/xcode-silicon-vm.adoc %}
-
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the xref:dedicated-hosts-macos#[Dedicated hosts] documentation.
 
 [#getting-started]
 == Getting started

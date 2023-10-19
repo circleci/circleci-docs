@@ -9,10 +9,15 @@ contentTags:
   - Server v3.x
 ---
 
-## Overview
-{: #overview }
+Troubleshoot problems in a job using **Rerun job with SSH**. Using this feature you can inspect log files, running processes, and directory paths.
 
-Often the best way to troubleshoot problems is to SSH into a job and inspect log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
+## Introduction
+{: #introduction }
+
+SSH reruns are not currently supported for GitLab or GitHub App projects. This feature is in development and will be available soon. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
+CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
 When you log in with SSH, you are running an **interactive** login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
@@ -39,6 +44,9 @@ If you are using the Windows executor you will need to pass in the shell you wan
 The job virtual machine (VM) will remain available for an SSH connection for **10 minutes after the pipeline finishes running** and then automatically shut down (or you can cancel it). After you SSH into the job, the connection will remain open for **one hour** for customers on the Free plan, or **two hours** for all other customers.
 
 If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the job output.
+
+If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow will be run with SSH enabled for that job, even after SSH capability has been disabled at the project level.
+{: class="alert alert-info" }
 
 ## Debugging: "permission denied (publickey)"
 {: #debugging-permission-denied-publickey }

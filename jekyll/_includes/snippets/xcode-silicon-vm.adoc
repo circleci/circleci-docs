@@ -7,6 +7,12 @@
 | VM Software Manifest
 | Release Notes
 
+| `15.0.0`
+| Xcode 15 (15A240d)
+| 13.5.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13456/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-rc-released-important-notice-for-visionos-sdk-users/49278[Release Notes]
+
 | `14.3.1`
 | Xcode 14.3.1 (14E300b)
 | 13.2.1

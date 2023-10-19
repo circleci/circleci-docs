@@ -1,0 +1,90 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Migrate from launch agent to machine runner 3.0 - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview
+:icons: font
+:toc: macro
+:toc-title:
+:machine:
+:experimental:
+:linux:
+
+This page describes how to migrate an existing launch agent installation to machine runner 3.0. Machine runner 3.0 includes improved network resiliency, and a simpler installation management strategy, utilizing operating system packages.
+
+NOTE: Machine runner 3.0 is currently in **open preview**, and is currently available on **Linux** only
+
+Migrating from launch agent to machine runner 3.0 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3.0 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
+
+[#uninstall-launch-agent]
+== 1. Uninstall launch agent
+
+The first step is to uninstall launch agent. The exact process depends on the platform, as described in the following sections.
+
+. If the agent has been installed as a `systemd` service, run the following commands to stop and uninstall the service unit, and delete the service file (the new agent will install a new service unit):
++
+```shell
+sudo systemctl stop circleci.service
+sudo systemctl disable circleci.service
+
+sudo rm /usr/lib/systemd/system/circleci.service
+```
+
+. The launch agent binary can now be removed from the machine. The default install location is `/opt/circleci/circleci-launch-agent`, but this may differ on your machine if the agent was installed somewhere else. The entire `/opt/circleci` subdirectory can be removed at this point.
+
+. Finally, move the agent configuration file. The default location for this is `/etc/opt/circleci/launch-agent-config.yaml`. Move the file to `/etc/circleci-runner/circleci-runner-config.yaml` using the following command:
++
+```shell
+mv /etc/opt/circleci/launch-agent-config.yaml /etc/circleci-runner/circleci-runner-config.yaml
+```
++
+Alternatively, you can let the machine agent install process create a config file template and copy the xref:runner-installation-linux#create-the-circleci-self-hosted-runner-configuration[existing config] into the newly created file.
+
+[#uninstalling-launch-agent-linux-se]
+=== RHEL/Rocky Linux
+
+In addition to the steps listed above, the SELinux policy should be uninstalled using the following command:
+
+```shell
+sudo semodule -r circleci_launch_agent
+```
+
+[#install-machine-agent]
+== 2. Install the machine agent
+
+Packaged versions of the machine runner 3.0 are available for Linux for a streamlined installation experience.
+
+. Deb and rpm packages are available for Linux. Choose your package, and install using the following commands. The packages install the latest version of the agent. They also create a CircleCI user as well as required directories for operation of the agent.
++
+[tab.package.Deb]
+--
+```shell
+# DEB Commands
+# This script installs the package repository to the package manager
+curl -s https://packagecloud.io/install/repositories/circleci/runner/script.deb.sh | sudo bash
+sudo apt install circleci-runner
+```
+--
++
+[tab.package.Rpm]
+--
+```shell
+# RPM Commands
+# This script installs the package repository to the package manager
+curl -s https://packagecloud.io/install/repositories/circleci/runner/script.rpm.sh | sudo bash
+sudo yum install circleci-runner
+```
+--
+
+. The packages create template configuration files at `/etc/circleci-runner/circleci-runner-config.yaml`. This configuration is 1:1 compatible with the launch agent configuration, apart from the auto-update feature. Since auto-update has been removed from the new agent, you should use the appropriate package management update tools to get new versions of the package when they are released. When using the `apt` package to update the agent package, you will need to clear the configuration file modified prompt. This can be avoided using the `--force-confold` flag or by removing the modified configuration file before upgrading.
++
+Once the configuration file has been populated, the following command will restart the agent so it can begin claiming:
++
+```shell
+sudo systemctl enable circleci-runner
+sudo systemctl start circleci-runner
+```

@@ -10,10 +10,7 @@ contentTags:
 :page-description: このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
-
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
 
 このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 

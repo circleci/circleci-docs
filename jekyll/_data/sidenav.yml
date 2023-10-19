@@ -22,6 +22,8 @@ en:
         children:
           - name: Sign up and try
             link: first-steps
+          - name: Invite your team
+            link: invite-your-team
           - name: Quickstart guide
             link: getting-started
           - name: YAML configuration intro
@@ -30,8 +32,10 @@ en:
             link: config-editor
       - name: VCS integration
         children:
-          - name: GitHub integration overview
+          - name: GitHub OAuth app integration overview
             link: github-integration
+          - name: GitHub App integration overview
+            link: github-apps-integration
           - name: Bitbucket integration overview
             link: bitbucket-integration
           - name: GitLab integration overview
@@ -62,9 +66,11 @@ en:
             link: language-javascript
           - name: Python quickstart
             link: language-python
+          - name: Go quickstart
+            link: language-go
           - name: Configuration tutorial
             link: config-intro
-          - name: Set up the Slack orb
+          - name: Use the Slack orb to set up notifications
             link: slack-orb-tutorial
       - name: How-To guides
         children:
@@ -170,8 +176,6 @@ en:
             link: hello-world-macos
           - name: iOS code signing
             link: ios-codesigning
-          - name: Dedicated host resources
-            link: dedicated-hosts-macos
       - name: Windows
         children:
           - name: Using the Windows execution environment
@@ -180,7 +184,7 @@ en:
             link: hello-world-windows
       - name: Arm
         children:
-          - name: Using the Arm execution environment
+          - name: Using the Arm VM execution environment
             link: using-arm
       - name: GPU
         children:
@@ -200,6 +204,10 @@ en:
         children:
           - name: Convenience images support policy
             link: convenience-images-support-policy
+          - name: Linux CUDA images support policy
+            link: linux-cuda-images-support-policy
+          - name: Remote Docker images support policy
+            link: remote-docker-images-support-policy
           - name: Xcode image policy
             link: xcode-policy
 
@@ -218,6 +226,14 @@ en:
             link: container-runner-installation
           - name: Container runner reference
             link: container-runner
+      - name: Machine runner (3.0)
+        children:
+          - name: Install machine runner 3.0 on Linux
+            link: install-machine-runner-3-on-linux
+          - name: Migrate from launch agent to machine runner 3.0
+            link: migrate-from-launch-agent-to-machine-runner-3
+          - name: Machine runner (3.0) configuration reference
+            link: machine-runner-3-configuration-reference
       - name: Machine runner
         children:
           - name: Linux installation
@@ -246,6 +262,100 @@ en:
             link: troubleshoot-self-hosted-runner
           - name: Scaling self-hosted runner
             link: runner-scaling
+
+  - name: Test
+    icon: icons/sidebar/passed.svg
+    children:
+      - name: Run tests
+        children:
+          - name: Automated testing
+            link: test
+          - name: Collect test data
+            link: collect-test-data
+      - name: Testing strategies
+        children:
+          - name: Browser testing
+            link: browser-testing
+          - name: Generate code coverage metrics
+            link: code-coverage
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
+      - name: Monitor tests
+        children:
+          - name: Test Insights
+            link: insights-tests
+      - name: Tutorials
+        children:
+          - name: Speed up pipelines with test splitting
+            link: test-splitting-tutorial
+          - name: Testing iOS applications
+            link: testing-ios
+          - name: Testing macOS applications
+            link: testing-macos
+      - name: How-to guides
+        children:
+          - name: Use the CircleCI CLI to split tests
+            link: use-the-circleci-cli-to-split-tests
+      - name: Reference
+        children:
+          - name: Troubleshoot test splitting
+            link: troubleshoot-test-splitting
+
+  - name: Deploy
+    icon: icons/sidebar/getting-started-new.svg
+    children:
+      - name: Deployment
+        children:
+          - name: Deployment overview
+            link: deployment-overview
+      - name: How-to guides
+        children:
+          - name: Deploy Android applications
+            link: deploy-android-applications
+          - name: Deploy to Artifactory
+            link: deploy-to-artifactory
+          - name: Deploy to AWS
+            link: deploy-to-aws
+          - name: Push image to ECR and deploy to ECS
+            link: ecr-ecs
+          - name: Deploy to Azure Container Registry
+            link: deploy-to-azure-container-registry
+          - name: Deploy to Capistrano
+            link: deploy-to-capistrano
+          - name: Deploy to Cloud Foundry
+            link: deploy-to-cloud-foundry
+          - name: Deploy to Firebase
+            link: deploy-to-firebase
+          - name: Deploy to Google Cloud Platform
+            link: deploy-to-google-cloud-platform
+          - name: Deploy to Heroku
+            link: deploy-to-heroku
+          - name: Deploy iOS applications
+            link: deploy-ios-applications
+          - name: Deploy over SSH
+            link: deploy-over-ssh
+          - name: Publish packages to Packagecloud
+            link: publish-packages-to-packagecloud
+          - name: Publish to NPM registry
+            link: deploy-to-npm-registry
+
+  - name: Release - Open preview
+    icon: icons/sidebar/release.svg
+    children:
+      - name: Overview
+        children:
+          - name: Releases overview
+            link: release/releases-overview
+      - name: Set up
+        children:
+          - name: Set up a release environment
+            link: release/set-up-a-release-environment
+          - name: Configure your Kubernetes components
+            link: release/configure-your-kubernetes-components
+      - name: How to
+        children:
+          - name: Manage releases
+            link: release/manage-releases
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
@@ -334,8 +444,6 @@ en:
             link: create-an-orb
           - name: Manually author an orb
             link: orb-author-validate-publish
-          - name: Using the Slack orb
-            link: slack-orb-tutorial
       - name: How-to guides
         children:
           - name: Deploy service update to ECS
@@ -374,16 +482,18 @@ en:
             link: security-supply-chain
           - name: Secure secrets handling
             link: security-recommendations
-      - name: Config policy management
+      - name: CircleCI account roles and permissions
         children:
-          - name: Config policies overview (Open preview)
-            link: config-policy-management-overview
+          - name: Roles and permissions overview
+            link: roles-and-permissions-overview
       - name: Authentication
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
       - name: How-to guides
         children:
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
           - name: Set an environment variable
             link: set-environment-variable
           - name: Inject environment variables with the API
@@ -396,19 +506,29 @@ en:
             link: stop-building-a-project-on-circleci
           - name: Rename organizations and repositories
             link: rename-organizations-and-repositories
-          - name: Create and manage config policies (Open preview)
+
+  - name: Manage config policies
+    icon: icons/sidebar/lock.svg
+    children:
+      - name: Overview
+        children:
+          - name: Config policies overview
+            link: config-policy-management-overview
+      - name: How-to guides
+        children:
+          - name: Create and manage config policies
             link: create-and-manage-config-policies
-          - name: Test config policies (Open preview)
+          - name: Test config policies
             link: test-config-policies
-          - name: Use the CLI for config and policy development (Open preview)
+          - name: Use the CLI for config and policy development
             link: use-the-cli-for-config-and-policy-development
-          - name: Config policies for self-hosted runner (Open preview)
+          - name: Config policies for self-hosted runner
             link: config-policies-for-self-hosted-runner
-          - name: Manage contexts with config policies (Open preview)
+          - name: Manage contexts with config policies
             link: manage-contexts-with-config-policies
       - name: Reference
         children:
-          - name: Config policy reference (Open preview)
+          - name: Config policy reference
             link: config-policy-reference
 
   - name: Integration
@@ -456,8 +576,10 @@ en:
     children:
       - name: CLI
         children:
-          - name: Installing the CircleCI local CLI
+          - name: Install and configure the CircleCI local CLI
             link: local-cli
+          - name: How to use the CircleCI local CLI
+            link: how-to-use-the-circleci-local-cli
       - name: APIs
         children:
           - name: API v2 introduction
@@ -466,10 +588,16 @@ en:
             link: api-developers-guide
           - name: Managing API tokens
             link: managing-api-tokens
+          - name: API v2 reference
+            link: https://circleci.com/docs/api/v2
+          - name: API v1 reference
+            link: https://circleci.com/docs/api/v1
       - name: IDE TOOLS
         children:
           - name: VS Code extension overview
             link: vs-code-extension-overview
+          - name: Get started with the VS Code extension
+            link: get-started-with-the-vs-code-extension
       - name: Config tools
         children:
           - name: CircleCI config SDK
@@ -484,92 +612,86 @@ en:
             link: sample-config
           - name: Database examples
             link: postgres-config
-      - name: How-to guides
-        children:
-          - name: How to use the CircleCI local CLI
-            link: how-to-use-the-circleci-local-cli
-      - name: Reference
-        children:
-          - name: API v2 reference
-            link: https://circleci.com/docs/api/v2
-          - name: API v1 reference
-            link: https://circleci.com/docs/api/v1
 
-  - name: Test
-    icon: icons/sidebar/passed.svg
+  - name: Server administration v4.2
+    icon: icons/sidebar/admin-new.svg
     children:
-      - name: Run tests
+      - name: Server v4.2 overview
         children:
-          - name: Automated testing
-            link: test
-          - name: Collect test data
-            link: collect-test-data
-      - name: Testing strategies
+          - name: CircleCI server v4.2 overview
+            link: server/v4.2/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.2/overview/release-notes
+      - name: Server v4.2 installation
         children:
-          - name: Browser testing
-            link: browser-testing
-          - name: Generate code coverage metrics
-            link: code-coverage
-          - name: Fail fast (Open preview)
-            link: fail-fast
-      - name: Monitor tests
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.2/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.2/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.2/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.2/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.2/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.2
+            link: server/v4.2/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.2/installation/installation-reference
+      - name: Air-gapped installation v4.2
         children:
-          - name: Test Insights
-            link: insights-tests
-      - name: Tutorials
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.2/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.2/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.2/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.2/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.2/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.2/air-gapped-installation/example-values
+      - name: Server v4.2 operations
         children:
-          - name: Speed up pipelines with test splitting
-            link: test-splitting-tutorial
-          - name: Testing iOS applications
-            link: testing-ios
-          - name: Testing macOS applications
-            link: testing-macos
-      - name: How-to guides
-        children:
-          - name: Use the CircleCI CLI to split tests
-            link: use-the-circleci-cli-to-split-tests
-      - name: Reference
-        children:
-          - name: Troubleshoot test splitting
-            link: troubleshoot-test-splitting
-
-  - name: Deploy
-    icon: icons/sidebar/getting-started-new.svg
-    children:
-      - name: Deployment
-        children:
-          - name: Deployment overview
-            link: deployment-overview
-      - name: How-to guides
-        children:
-          - name: Deploy Android applications
-            link: deploy-android-applications
-          - name: Deploy to Artifactory
-            link: deploy-to-artifactory
-          - name: Deploy to AWS
-            link: deploy-to-aws
-          - name: Deploy service update to AWS ECS
-            link: deploy-service-update-to-aws-ecs
-          - name: Deploy to Azure Container Registry
-            link: deploy-to-azure-container-registry
-          - name: Deploy to Capistrano
-            link: deploy-to-capistrano
-          - name: Deploy to Cloud Foundry
-            link: deploy-to-cloud-foundry
-          - name: Deploy to Firebase
-            link: deploy-to-firebase
-          - name: Deploy to Google Cloud Platform
-            link: deploy-to-google-cloud-platform
-          - name: Deploy to Heroku
-            link: deploy-to-heroku
-          - name: Deploy iOS applications
-            link: deploy-ios-applications
-          - name: Deploy over SSH
-            link: deploy-over-ssh
-          - name: Publish packages to Packagecloud
-            link: publish-packages-to-packagecloud
-          - name: Publish to NPM registry
-            link: deploy-to-npm-registry
+          - name: Operator overview
+            link: server/v4.2/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.2/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.2/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.2/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.2/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.2/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.2/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.2/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.2/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.2/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.2/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.2/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.2/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.2/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.2/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.2/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.2/operator/faq
 
   - name: Server administration v4.1
     icon: icons/sidebar/admin-new.svg
@@ -874,6 +996,14 @@ en:
             link: style/using-tables
           - name: Using code samples
             link: style/using-code-samples
+      - name: Content templates
+        children:
+          - name: Conceptual page template
+            link: templates/template-conceptual
+          - name: How-to guide template
+            link: templates/template-how-to
+          - name: Tutorial page template
+            link: templates/template-tutorial
 
 ja:
   - name: About CircleCI
@@ -918,8 +1048,10 @@ ja:
       - name: VCS Integration
         i18n_name: VCSとの連携
         children:
-          - name: GitHub
+          - name: GitHub OAuth app
             link: ja/github-integration
+          - name: GitHub apps
+            link: ja/github-apps-integration
           - name: Bitbucket
             link: ja/bitbucket-integration
           - name: GitLab
@@ -1145,9 +1277,9 @@ ja:
             i18n_name: GPUの使用
       - name: Arm
         children:
-          - name: Using Arm
+          - name: Using the Arm VM execution environment
             link: ja/using-arm
-            i18n_name: Armの使用
+            i18n_name: Arm VM 実行環境の使用
 
       - name: Self-hosted runner
         i18n_name: セルフホストランナー
@@ -1206,6 +1338,118 @@ ja:
           - name: Machine runner configuration reference
             link: ja/runner-config-reference
             i18n_name: マシンランナーの設定リファレンス
+
+  - name: Test
+    i18n_name: テスト
+    icon: icons/sidebar/passed.svg
+    children:
+      - name: Run tests
+        i18n_name: テストの実行
+        children:
+          - name: Automated testing
+            link: ja/test
+            i18n_name: テストの自動化
+          - name: Collect test data
+            link: ja/collect-test-data
+            i18n_name: テストデータの収集
+      - name: Testing strategies
+        i18n_name: テスト対策
+        children:
+          - name: Browser testing
+            link: ja/browser-testing
+            i18n_name: ブラウザーテスト
+          - name: Code coverage
+            link: ja/code-coverage
+            i18n_name: コードカバレッジ
+          - name: Rerun failed tests overview
+            link: ja/rerun-failed-tests
+            i18n_name: 失敗したテストのみを再実行
+      - name: Monitor tests
+        i18n_name: テストの管理
+        children:
+          - name: Test Insights
+            i18n_name: テストインサイト
+            link: ja/insights-tests
+      - name: Tutorials
+        i18n_name: チュートリアル
+        children:
+          - name: Speed up pipelines with test splitting
+            link: ja/test-splitting-tutorial
+            i18n_name: テスト分割によるパイプラインの高速化
+          - name: Testing iOS applications
+            link: ja/testing-ios
+            i18n_name: iOSアプリをテストする
+          - name: Testing macOS applications
+            link: ja/testing-macos
+            i18n_name: macOSアプリのテスト
+      - name: How-to guides
+        i18n_name: ガイド
+        children:
+          - name: Use the CircleCI CLI to split tests
+            link: ja/use-the-circleci-cli-to-split-tests
+            i18n_name: CircleCI CLI を使用したテスト分割
+      - name: Reference
+        i18n_name: リファレンス
+        children:
+          - name: Troubleshoot test splitting
+            link: ja/troubleshoot-test-splitting
+            i18n_name: テスト分割のトラブルシュート
+
+  - name: Deploy
+    icon: icons/sidebar/getting-started-new.svg
+    i18n_name: デプロイ
+    children:
+      - name: Deployment
+        i18n_name: デプロイメント
+        children:
+          - name: Deployment overview
+            link: ja/deployment-overview
+            i18n_name: デプロイの概要
+      - name: How-to guides
+        i18n_name: ガイド
+        children:
+          - name: Deploy Android applications
+            link: ja/deploy-android-applications
+            i18n_name: Androidアプリのデプロイ
+          - name: Deploy to Artifactory
+            link: ja/deploy-to-artifactory
+            i18n_name: Artifactoryへのデプロイ
+          - name: Deploy to AWS
+            link: ja/deploy-to-aws
+            i18n_name: AWSへのデプロイ
+          - name: Deploy service update to AWS ECS
+            link: ja/deploy-service-update-to-aws-ecs
+            i18n_name: 変更のECSへのデプロイ
+          - name: Deploy to Azure Container Registry
+            link: ja/deploy-to-azure-container-registry
+            i18n_name: Azure Container Registryへのデプロイ
+          - name: Deploy to Capistrano
+            link: ja/deploy-to-capistrano
+            i18n_name: Capistranoへのデプロイ
+          - name: Deploy to Cloud Foundry
+            link: ja/deploy-to-cloud-foundry
+            i18n_name: Cloud Foundryへのデプロイ
+          - name: Deploy to Firebase
+            link: ja/deploy-to-firebase
+            i18n_name: Firebaseへのデプロイ
+          - name: Deploy to Google Cloud Platform
+            link: ja/deploy-to-google-cloud-platform
+            i18n_name: Google Cloud Platformへのデプロイ
+          - name: Deploy to Heroku
+            link: ja/deploy-to-heroku
+            i18n_name: Herokuへのデプロイ
+          - name: Deploy iOS applications
+            link: ja/deploy-ios-applications
+            i18n_name: iOSアプリのデプロイ
+          - name: Deploy to NPM registry
+            link: ja/deploy-to-npm-registry
+            i18n_name: NPMレジストリへのデプロイ
+          - name: Deploy over SSH
+            link: ja/deploy-over-ssh
+            i18n_name: SSHを使用したデプロイ
+          - name: Publish packages to Packagecloud
+            link: ja/publish-packages-to-packagecloud
+            i18n_name: Packagecloudへのデプロイ
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
@@ -1391,12 +1635,6 @@ ja:
           - name: Secure secrets handling
             link: ja/security-recommendations
             i18n_name: シークレットの安全な取り扱い
-      - name: Config policy management
-        i18n_name: 設定ファイルのポリシー管理
-        children:
-          - name: Config policies overview (Open preview)
-            link: ja/config-policy-management-overview
-            i18n_name: コンフィグポリシーの概要
       - name: Authentication
         i18n_name: 認証
         children:
@@ -1418,28 +1656,45 @@ ja:
           - name: Rotate project SSH keys
             link: ja/rotate-project-ssh-keys
             i18n_name: プロジェクトの SSH キーをローテーションする
-          - name: Create and manage config policies (Open preview)
-            link: ja/create-and-manage-config-policies
-            i18n_name: 設定ファイルのポリシーの作成と管理
-          - name: Test config policies (Open preview)
-            link: ja/test-config-policies
-            i18n_name: 設定ファイルのポリシーのテスト - オープンプレビュー
-          - name: Use the CLI for config and policy development (Open preview)
-            link: ja/use-the-cli-for-config-and-policy-development
-            i18n_name: CLIを使用したポリシー作成
-          # - name: Config policies for self-hosted runner (Open preview)
-          #   link: ja/config-policies-for-self-hosted-runner
-          #   i18n_name:
           # - name: Stop building a project on CircleCI
           #   link: ja/stop-building-a-project-on-circleci
           #   i18n_name:
           - name: Rename organizations and repositories
             link: ja/rename-organizations-and-repositories
             i18n_name: 組織名とリポジトリ名の変更
+
+  - name: Manage config policies
+    i18n_name: 設定ファイルのポリシー管理
+    icon: icons/sidebar/lock.svg
+    children:
+      - name: Overview
+        i18n_name: 設定ファイルのポリシー管理
+        children:
+          - name: Config policies overview
+            link: ja/config-policy-management-overview
+            i18n_name: コンフィグポリシーの概要
+      - name: How-to guides
+        i18n_name: ガイド
+        children:
+          - name: Create and manage config policies
+            link: ja/create-and-manage-config-policies
+            i18n_name: 設定ファイルのポリシーの作成と管理
+          - name: Test config policies
+            link: ja/test-config-policies
+            i18n_name: 設定ファイルのポリシーのテスト - オープンプレビュー
+          - name: Use the CLI for config and policy development
+            link: ja/use-the-cli-for-config-and-policy-development
+            i18n_name: CLIを使用したポリシー作成
+          - name: Config policies for self-hosted runner
+            link: ja/config-policies-for-self-hosted-runner
+            i18n_name: 設定ファイルのポリシーをセルフホストランナーに適用する
+          - name: Manage contexts with config policies
+            link: manage-contexts-with-config-policies
+            i18n_name: コンフィグファイルポリシーを使ったコンテキストの管理
       - name: Reference
         i18n_name: リファレンス
         children:
-          - name: Config policy reference (Open preview)
+          - name: Config policy reference
             link: ja/config-policy-reference
             i18n_name: リファレンス
 
@@ -1566,118 +1821,6 @@ ja:
           - name: API v1.1 Reference
             link: https://circleci.com/docs/api/v1
             i18n_name: API v1.1リファレンス
-
-  - name: Test
-    i18n_name: テスト
-    icon: icons/sidebar/passed.svg
-    children:
-      - name: Run tests
-        i18n_name: テストの実行
-        children:
-          - name: Automated testing
-            link: ja/test
-            i18n_name: テストの自動化
-          - name: Collect test data
-            link: ja/collect-test-data
-            i18n_name: テストデータの収集
-      - name: Testing strategies
-        i18n_name: テスト対策
-        children:
-          - name: Browser testing
-            link: ja/browser-testing
-            i18n_name: ブラウザーテスト
-          - name: Code coverage
-            link: ja/code-coverage
-            i18n_name: コードカバレッジ
-          - name: Fail fast (Open preview)
-            link: ja/fail-fast
-            i18n_name: フェイルファスト
-      - name: Monitor tests
-        i18n_name: テストの管理
-        children:
-          - name: Test Insights
-            i18n_name: テストインサイト
-            link: ja/insights-tests
-      - name: Tutorials
-        i18n_name: チュートリアル
-        children:
-          - name: Speed up pipelines with test splitting
-            link: ja/test-splitting-tutorial
-            i18n_name: テスト分割によるパイプラインの高速化
-          - name: Testing iOS applications
-            link: ja/testing-ios
-            i18n_name: iOSアプリをテストする
-          - name: Testing macOS applications
-            link: ja/testing-macos
-            i18n_name: macOSアプリのテスト
-      - name: How-to guides
-        i18n_name: ガイド
-        children:
-          - name: Use the CircleCI CLI to split tests
-            link: ja/use-the-circleci-cli-to-split-tests
-            i18n_name: CircleCI CLI を使用したテスト分割
-      - name: Reference
-        i18n_name: リファレンス
-        children:
-          - name: Troubleshoot test splitting
-            link: ja/troubleshoot-test-splitting
-            i18n_name: テスト分割のトラブルシュート
-
-  - name: Deploy
-    icon: icons/sidebar/getting-started-new.svg
-    i18n_name: デプロイ
-    children:
-      - name: Deployment
-        i18n_name: デプロイメント
-        children:
-          - name: Deployment overview
-            link: ja/deployment-overview
-            i18n_name: デプロイの概要
-      - name: How-to guides
-        i18n_name: ガイド
-        children:
-          - name: Deploy Android applications
-            link: ja/deploy-android-applications
-            i18n_name: Androidアプリのデプロイ
-          - name: Deploy to Artifactory
-            link: ja/deploy-to-artifactory
-            i18n_name: Artifactoryへのデプロイ
-          - name: Deploy to AWS
-            link: ja/deploy-to-aws
-            i18n_name: AWSへのデプロイ
-          - name: Deploy service update to AWS ECS
-            link: ja/deploy-service-update-to-aws-ecs
-            i18n_name: 変更のECSへのデプロイ
-          - name: Deploy to Azure Container Registry
-            link: ja/deploy-to-azure-container-registry
-            i18n_name: Azure Container Registryへのデプロイ
-          - name: Deploy to Capistrano
-            link: ja/deploy-to-capistrano
-            i18n_name: Capistranoへのデプロイ
-          - name: Deploy to Cloud Foundry
-            link: ja/deploy-to-cloud-foundry
-            i18n_name: Cloud Foundryへのデプロイ
-          - name: Deploy to Firebase
-            link: ja/deploy-to-firebase
-            i18n_name: Firebaseへのデプロイ
-          - name: Deploy to Google Cloud Platform
-            link: ja/deploy-to-google-cloud-platform
-            i18n_name: Google Cloud Platformへのデプロイ
-          - name: Deploy to Heroku
-            link: ja/deploy-to-heroku
-            i18n_name: Herokuへのデプロイ
-          - name: Deploy iOS applications
-            link: ja/deploy-ios-applications
-            i18n_name: iOSアプリのデプロイ
-          - name: Deploy to NPM registry
-            link: ja/deploy-to-npm-registry
-            i18n_name: NPMレジストリへのデプロイ
-          - name: Deploy over SSH
-            link: ja/deploy-over-ssh
-            i18n_name: SSHを使用したデプロイ
-          - name: Publish packages to Packagecloud
-            link: ja/publish-packages-to-packagecloud
-            i18n_name: Packagecloudへのデプロイ
 
   - name: Server Administration v4.x
     i18n_name: Server v4.x 管理

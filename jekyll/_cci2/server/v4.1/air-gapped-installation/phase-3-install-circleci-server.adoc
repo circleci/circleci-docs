@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: How to install the CircleCI server Helm deployment to an air-gapped environment.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 With prerequisites installed, and object storage configured, you can now copy over and install the CircleCI Helm deployment to the Kubernetes cluster in your air-gapped environment.
 

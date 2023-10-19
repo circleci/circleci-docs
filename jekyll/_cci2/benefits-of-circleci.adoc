@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Benefits of choosing CircleCI for CI/CD
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 
 [#benefits-of-circleci]
@@ -22,10 +21,10 @@ Organizations choose CircleCI because jobs run fast and builds can be optimized 
 As a developer using CircleCI you can:
 
 - xref:ssh-access-jobs#[SSH into any job] to debug your build issues.
-- Set up xref:parallelism-faster-jobs#[parallelism] in your `.circleci/config.yml` file to run jobs faster.
+- Set up xref:parallelism-faster-jobs#[parallelism] in your `.circleci/config.yml` file to run test jobs faster.
 - Configure xref:caching#[caching] with two simple keys to reuse data from previous jobs in your xref:workflows#[workflow].
 - Configure self-hosted xref:runner-overview#[runners] for unique platform support.
-- Access xref:using-arm#[Arm resources] for the machine executor.
+- Access xref:using-arm#[Arm VM resources] and xref:using-docker#arm[Arm on Docker].
 - Use xref:orb-intro#[orbs], reusable packages of configuration, to integrate with third parties.
 - Use pre-built Docker xref:circleci-images#[images] in a variety of languages.
 - Use the link:https://www.circleci.com/docs/api/v2[API] to retrieve information about jobs and workflows.

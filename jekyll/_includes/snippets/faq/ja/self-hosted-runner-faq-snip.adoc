@@ -39,7 +39,7 @@ CAUTION: ジョブに Docker デーモンへのアクセスを許可すること
 
 NOTE: セルフホストランナーにインバウンド接続は必要ありません。 それ以外では、ジョブの内容に応じた接続が必要になります。
 
-CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
+CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circleci-tasks-prod.s3.us-east-1.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 === CircleCI のセルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか?
@@ -250,7 +250,7 @@ $ helm upgrade container-agent
 コンテナランナーアプリケーションは、同じメジャーバージョンにおけるリリースとの下位互換性と最新のマイナーバージョンにおける脆弱性やバグに対するサポートを保証します。 コンテナランナーの Helm チャートでは、同じメジャーバージョン内の値ファイルとの下位互換性を保証します。
 
 [#security-implications]
-==== コンテナランナーについてセキュリティ上の注意事項はありますか。
+==== コンテナランナーについてセキュリティ上の注意事項はありますか？
 
 コンテナランナーでは、マシンランナーと同じく、コンテナランナーをホストするインフラストラクチャ内でユーザーが任意のコードを実行できます。つまり悪意のある攻撃者が、内部システムに関する情報を得るためにこれを悪用する可能性があります。 このリスクを軽減するため、セキュリティに関するすべてのベストプラクティスに従ってください。
 
@@ -259,31 +259,7 @@ $ helm upgrade container-agent
 
 IAM ロールは、link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS ドキュメント] に従って、コンテナランナーで使用するサービスアカウントに関連付けることができます。 ジョブの設定ファイルのイメージで AWS 認証情報が指定されている場合、コンテナランナーのサービスアカウントに付与されている IAM ロールの代わりに AWS 認証情報が使用されます。 コンテナランナーのサービスアカウントの詳細については、xref:container-runner#[コンテナランナー] を参照してください。
 
-[#sample-configuration-container-agent]
 ==== コンテナランナーを使った設定ファイルのフルサンプルはありますか？
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    resource_class: <namespace>/<resource-class>
-    steps:
-      - checkout
-      - ...
-
-workflows:
-  build-workflow:
-    jobs:
-      - build
-```
-
-==== CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合はどうすればよいですか？
 
 CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合は、Docker がインストールされた xref:runner-installation-docker#[マシンランナー] を使用できます。
 

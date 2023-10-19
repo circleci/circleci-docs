@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#non-tls-docker-registry-installations]
 == Non-TLS Docker Registry Installations

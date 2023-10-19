@@ -1,6 +1,6 @@
 ---
 description: Learn how to scale CircleCI's self-hosted runners.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,11 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
-toc::[]
-
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+:experimental:
 
 [#introduction]
 == Introduction
@@ -37,7 +33,7 @@ There are several API endpoints to help you set up a solution to scale machine r
 * <<runner-api#get-apiv2runnertasksrunning,Running Tasks>>
 * <<runner-api#get-apiv2runner,List Resource Classes>>
 
-A scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class, so it's important to query every available resource class to get the total number of running tasks. 
+A scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class, so it's important to query every available resource class to get the total number of running tasks.
 
 If you're using machine runners, you can devise a scaling solution to add more machine runners to the resource class that has more pending work.
 

@@ -74,20 +74,7 @@ The following examples show how you can use public images from various sources:
 {: #available-docker-resource-classes }
 
 The [`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
-job. In Docker, the following resources classes are available:
-
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge               | 16    | 32GB
-2xlarge+              | 20    | 40GB
-{: class="table table-striped"}
-
-**Note**: `2xlarge` and `2xlarge+` require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.
+job.
 
 Specify a resource class using the `resource_class` key, as follows:
 
@@ -100,6 +87,28 @@ jobs:
     steps:
     #  ...  other config
 ```
+
+### x86
+{: #x86 }
+
+For the Docker execution environment, the following resources classes are available for the x86 architecture:
+
+{% include snippets/docker-resource-table.md %}
+
+### Arm
+{: #arm }
+
+The following resource classes are available for Arm with Docker:
+
+**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Resource classes page](https://circleci.com/product/features/resource-classes/).
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
+
+### View resource usage
+{: #view-resource-usage }
+
+{% include snippets/resource-class-view.md %}
 
 ## Docker benefits and limitations
 {: #docker-benefits-and-limitations }
@@ -117,13 +126,13 @@ There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` i
 
 Capability | `docker` | `machine`
 ----------|----------|----------
- Start time | Instant | 30-60 sec
+ Start time | Instant | Instant for most <sup>(1)</sup>
  Clean environment | Yes | Yes
- Custom images | Yes <sup>(1)</sup> | No
- Build Docker images | Yes <sup>(2)</sup> | Yes
+ Custom images | Yes <sup>(2)</sup> | No
+ Build Docker images | Yes <sup>(3)</sup> | Yes
  Full control over job environment | No | Yes
  Full root access | No | Yes
- Run multiple databases | Yes <sup>(3)</sup> | Yes
+ Run multiple databases | Yes <sup>(4)</sup> | Yes
  Run multiple versions of the same software | No | Yes
  [Docker layer caching](/docs/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
@@ -131,11 +140,13 @@ Capability | `docker` | `machine`
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/configuration-reference/#resource_class) | Yes | Yes
 {: class="table table-striped"}
 
-<sup>(1)</sup> See [Using Custom Docker Images][custom-images].
+<sup>(1)</sup> Some less commonly used execution environments may see up to 90 seconds of start time.
 
-<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
+<sup>(2)</sup> See [Using Custom Docker Images][custom-images].
 
-<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
+<sup>(3)</sup> Requires using [Remote Docker][building-docker-images].
+
+<sup>(4)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
 
 For more information on `machine`, see the next section below.
 

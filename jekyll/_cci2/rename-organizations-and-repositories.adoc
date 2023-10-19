@@ -1,28 +1,40 @@
 ---
-version:
-- Cloud
-- Server
+contentTags:
+  platform:
+  - Cloud
 ---
 = Rename organizations and repositories
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This how-to guide goes over changing the names of organizations and repositories.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-If you need to rename an organization or repository that you have previously connected to CircleCI, best practice is to follow the steps listed below. If you do not follow this process, it is possible you may lose access to your organization or repository settings, including **environment variables** and **contexts**.
+This page details everything you need to know about renaming organizations and repositories connected to CircleCI. Renaming works differently depending on how your account is connected:
+
+* GitHub App
+* GitLab
+* GitHub OAuth app
+* Bitbucket
+
+NOTE: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+[#github-app-or-gitlab]
+== GitHub App or GitLab
+
+For accounts authorized through the GitHub App or GitLab, no changes are required when organizations or repositories are renamed in the connected VCS (version control system). CircleCI organizations and projects are _standalone_ entities, not directly tied to code repo or org names.
+
+It is not currently possible to rename standalone organizations or projects within CircleCI itself.
+
+[#github-oauth-app-or-bitbucket]
+== GitHub OAuth app or Bitbucket
+
+If you need to rename a GitHub (OAuth app) or Bitbucket organization or repository that you have previously connected to CircleCI, best practice is to follow the steps listed below. If you do not follow this process, it is possible you may lose access to your organization or repository settings, including **environment variables** and **contexts**.
 
 [#rename-organizations-and-repositories]
-== Steps to rename organizations and repositories
+=== Steps to rename organizations and repositories
 
 1. Rename organization or repository in your VCS
 2. Go to the CircleCI web app using the new org/repo name, for example: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`
 3. Confirm that your plan, projects, and settings have been transferred successfully
 4. If desired, you are now free to create a new org/repo with the previously-used name in your VCS
-
-[#see-also]
-== See also
-
-* xref:contexts.adoc[Contexts]
-* xref:env-vars.adoc[Environment variables]

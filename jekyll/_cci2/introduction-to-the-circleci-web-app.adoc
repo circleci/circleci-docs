@@ -8,8 +8,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the basic features and settings of the CircleCI web app.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
 
@@ -69,12 +68,14 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 Projects associated with your organization will appear on the **Projects** page. You have the option to:
 
-* _Set Up_ any project that you are the owner of in your VCS.
+* xref:create-project#[_Set Up_ or _Create_ any project] that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:notifications#[email notifications] for the project's status.
 
 Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
 
 Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, Insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
+
+NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available in xref:github-apps-integration#[GitHub App] or xref:gitlab-integration#[GitLab] projects. Refer to the Coming soon section in each integration overview page for more details on CircleCI features that are not fully supported.    
 
 image::web_ui_projects.png[Projects page]
 
@@ -112,6 +113,8 @@ image::web_ui_text_editor.png[Text editor in the web app]
 [#insights]
 == Insights
 
+NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available in xref:github-apps-integration#[GitHub App] or xref:gitlab-integration#[GitLab] projects. Refer to the Coming soon section in each integration overview page for more details on CircleCI features that are not fully supported.  
+
 The Insights page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days.
 
 image::web_ui_insights_overview.png[Insights page]
@@ -121,7 +124,7 @@ While the main Insights page gives you an overview of all projects, you can also
 image::web_ui_insights_runs.png[Details of insights]
 
 [#self-hosted-runners]
-== Self-Hosted Runners
+== Self-Hosted runners
 
 The self-hosted runners page shows the inventory of resource classes and associated self-hosted runners. You may also create a new resource class from this page. Before this ability is available to you, you will need to accept the terms of use for self-hosted runners, which is found in the <<#organization-settings,organization settings>>.
 
@@ -177,6 +180,8 @@ image::web_ui_plan_controls.png[Usage controls]
 
 [#user-settings]
 == User settings
+
+NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available in xref:github-apps-integration#[GitHub App] or xref:gitlab-integration#[GitLab] projects. Refer to the Coming soon section in each integration overview page for more details on CircleCI features that are not fully supported.  
 
 User settings can be found by scrolling to the bottom of the side navigation and clicking on your user icon.
 

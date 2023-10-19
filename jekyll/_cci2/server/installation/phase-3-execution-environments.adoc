@@ -8,8 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
@@ -17,7 +16,7 @@ Before you begin with the CircleCI server v4.x execution environment installatio
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
-toc::[]
+
 
 [#nomad-clients]
 == 1. Nomad clients
@@ -494,7 +493,7 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM service
 
-VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm execution environments, and those that are configured to use link:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm VM execution environments, and those that are configured to use link:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
 NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
 

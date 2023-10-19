@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: "This document lists the steps required to upgrade a CircleCI server v4.x installation."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page describes the steps needed to upgrade you CircleCI server v4.x installation.
 

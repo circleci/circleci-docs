@@ -1,0 +1,48 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Invite your team
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Add your team to your CircleCI organization
+:icons: font
+:experimental:
+
+After setting up an organization in CircleCI, invite your team to create and collaborate on projects.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* At least one project created in your organization. See the xref:create-project#[Create a project] page for instructions.
+
+[#invite-team-github-app-gitlab]
+== GitHub App and GitLab users
+
+NOTE: These steps are for GitHub App accounts. Refer to the xref:github-apps-integration#[GitHub App integration] to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
+
+You must be an Organization Admin to invite your team to CircleCI.
+
+. In the CircleCI web app, go to menu:Organization Settings[People], then click btn:[Invite].
+. To send out email invites, enter your team members' email addresses, each separated by a space, then assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the **Invite** form based on role.
+
+Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:manage-roles-and-permissions#[Manage roles and permissions guide] for more details.
+
+[#invite-team-github-oauth-bitbucket]
+== GitHub OAuth and Bitbucket users
+
+NOTE: These steps are for GitHub OAuth app and Bitbucket accounts. If you use GitHub, refer to the xref:github-integration#[GitHub OAuth app integration] guide to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
+
+Any user who is already a member of your CircleCI organization may use this process to invite new team members to CircleCI.
+
+. On the **Dashboard** in the CircleCI web app, use the filter dropdown to select a project.
+. Click the **Add team members** link next to the project name.
+. A modal window will pop up. Click the btn:[Invite my team] button in the window to copy an invite message that you can send to your team members. The sign-up link is _not_ unique to a single team member. This link can be shared and used for multiple users at the same time.
+. Your team members will need to use the sign-up link in your invite message to join your organization.
+
+[#see-also]
+== See also
+
+- xref:roles-and-permissions-overview#[CircleCI roles and permissions overview]

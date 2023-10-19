@@ -14,8 +14,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
-
 [#namespaces-and-resource-classes]
 == 名前空間とリソースクラス
 

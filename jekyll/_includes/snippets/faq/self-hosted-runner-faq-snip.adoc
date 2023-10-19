@@ -10,7 +10,7 @@ A resource class is a label to match your CircleCI job with a type of runner (or
 
 Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
 
-Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid.
+Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid. The resource class token only has access to claim tasks.
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 === What is the security model for CircleCI's self-hosted runners?
@@ -39,7 +39,7 @@ In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS
 
 NOTE: No inbound connectivity is required by a self-hosted runner. Any other required connectivity is dependent on the content of the jobs themselves.
 
-CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
+CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circleci-tasks-prod.s3.us-east-1.amazonaws.com`.
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 === How do caching, workspaces, and artifacts work with CircleCI's self-hosted runners?

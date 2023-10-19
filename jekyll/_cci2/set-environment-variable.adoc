@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: How to set environment variables for use in your CircleCI pipelines.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level.
 
@@ -36,7 +35,7 @@ jobs:
           # available in current step.
           command: |
             echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            echo "export VERY_IMPORTANT=VALUE_CONTENT" >> "$BASH_ENV"
             source "$BASH_ENV"
 ```
 

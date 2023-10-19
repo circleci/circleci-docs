@@ -10,8 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#using-test-splitting-with-python-django-tests]
 ## Using test splitting with Python Django tests
@@ -38,9 +37,9 @@ Using this example, here is a quick example of how you can accomplish test split
 ----
 
 [#using-test-splitting-with-pytest]
-## Using test splitting with pytest
+## Using test splitting with `pytest`
 
-If you try to split your tests across containers with pytest, you may encounter any of the following errors:
+If you try to split your tests across containers with `pytest`, you may encounter any of the following errors:
 
 [source,shell]
 ----
@@ -52,7 +51,7 @@ No timing found for "tests/commands/test_2.py"
 If any of these errors are returned, you may need to make a few adjustments, which are listed below.
 
 [#are-you-setting-a-custom-working-directory?]
-### Are you setting a custom working_directory?
+### Are you setting a custom `working_directory`?
 
 If so, you may need to adjust the file paths that are saving to your test metadata XML file. Alternatively, if you are able to, try working out of the standard working directory we set for a container to see if that helps (you can do this by removing any instances of `working_directory` in your test run job).
 
@@ -69,11 +68,16 @@ cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 The `.circleci/resources/pytest_build_config.ini` path may need to be replaced to point to where it's located in your project.
 
 [#are-you-setting-the-junit-family-in-your-pytest-ini]
-### Are you setting the junit_family in your pytest.ini?
+### Are you setting the `junit_family` in your `pytest.ini`?
 
-Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[pytest docs]. Search for "families" to see the relevant information.
+Check to see if you have something like `junit_family=legacy` set in your `pytest.ini` file. For more information on how to set `junit_family`, refer to the `pytest` link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[docs]. Search for "families" to see the relevant information.
 
-CAUTION: A breaking change was introduced in pytest 6.1 the `junit_family` xml format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`. For more information see the link:https://docs.pytest.org/en/stable/changelog.html#id137[pytest changelog].
+A breaking change was introduced in `pytest` 6.1 the `junit_family` XML format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`. For more information see the link:https://docs.pytest.org/en/stable/changelog.html#id137[pytest changelog]. If this is your issue, you may see the following error:
+
+[,shell]
+----
+Error autodetecting timing type, falling back to weighting by name. Autodetect no matching filename or classname.  If file names are used, double check paths for absolute vs relative.
+----
 
 [#example-project-that-correctly-splits-by-timing]
 ### Example project that correctly splits by timings

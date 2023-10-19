@@ -66,7 +66,8 @@ server-attributes: &server
   relfilesuffix: /
   outfilesuffix: /index.html
   serverversion4: 4.0.4
-  serverversion41: 4.1.4
+  serverversion41: 4.1.5
+  serverversion42: 4.2.1
   serverversion: 3.4.6
   terraformversion: 0.15.4
   kubectlversion: 1.19
@@ -144,6 +145,7 @@ defaults:
       sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
       contentTags: null
+      sectionTags: null
 
 t:
   translation_in_progress:

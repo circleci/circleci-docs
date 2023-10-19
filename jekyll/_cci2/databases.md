@@ -16,7 +16,7 @@ This document describes how to use the official CircleCI pre-built Docker contai
 
 ## Overview
 {: #overview }
-{:.no_toc}
+
 
 CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Developer Hub](https://circleci.com/developer/images).
 
@@ -91,7 +91,7 @@ This section describes additional optional configuration for further customizing
 
 ### Using binaries
 {: #using-binaries }
-{:.no_toc}
+
 
 To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
 
@@ -103,7 +103,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 
 ### Using Dockerize to wait for dependencies
 {: #using-dockerize-to-wait-for-dependencies }
-{:.no_toc}
+
 
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI `config.yml` file:
@@ -151,7 +151,7 @@ Redis also has a CLI available:
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 Refer to the [Database Configuration Examples]({{ site.baseurl }}/postgres-config/) document for additional configuration file examples.
 

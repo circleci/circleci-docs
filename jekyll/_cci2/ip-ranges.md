@@ -14,7 +14,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 ## Overview
 {: #overview }
 
-IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments using existing wokflows and platforms. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
+IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments using existing workflows and platforms. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
 The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled. If you are looking to predict the cost, see CircleCI's [blog post](https://circleci.com/blog/network-transfer-ip-ranges/) for futher information.
 
@@ -156,16 +156,6 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 
 In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. The following IP address ranges are used by CircleCI macOS Cloud:
 
-- 162.252.208.0/24
-- 162.252.209.0/24
-- 192.206.63.0/24
-- 162.221.90.0/24
-- 38.39.177.0/24
-- 38.39.178.0/24
-- 38.39.188.0/24
-- 38.39.189.0/24
-- 38.39.186.0/24
-- 38.39.187.0/24
 - 38.39.184.0/24
 - 38.39.185.0/24
 - 38.39.183.0/24

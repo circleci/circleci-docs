@@ -465,8 +465,8 @@ The `orbs` key is supported in `version: 2.1` configuration
 Key | Required | Type | Description
 ----|-----------|------|------------
 orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/configuration-reference/#executors-requires-version-21) section below.
-commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/configuration-reference/#commands-requires-version-21) section below.
+executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/configuration-reference/#executors) section below.
+commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/configuration-reference/#commands) section below.
 {: class="table table-striped"}
 
 The following example uses the `node` orb that exists in the certified `circleci` namespace. Refer to the Node orb page in the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/node) for more examples and information.
@@ -629,7 +629,9 @@ A map of environment variable names and values. For more information on defining
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
+This feature is used to optimize test steps. If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel.
+
+You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the [Test splitting and parallelism]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
 Example:
 
@@ -843,12 +845,8 @@ If you are using CircleCI server, contact your system administrator for details 
 
 When using the Linux [GPU executor]({{ site.baseurl }}/using-gpu), the available images are:
 
-* `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
-* `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
-* `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1, Docker v19.03.13, nvidia-container-toolkit v1.4.0-1
-* `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
-* `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1, Docker v19.03.0-ce, nvidia-docker v2.2.2
-* `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
+* `linux-cuda-11:default` v11.4, v11.6, v11.8 (default), Docker v20.10.24
+* `linux-cuda-12:default` v12.0, v12.1 (default), Docker v20.10.24
 
 ---
 
@@ -949,20 +947,16 @@ jobs:
 #### **`resource_class`**
 {: #resourceclass }
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
+The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
 
-We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it is possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
 If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
-{: class="alert alert-warning"}
 
 Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 {: class="alert alert-warning"}
 
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
-{: class="alert alert-note"}
-
-If you are using CircleCI server, contact your system administrator for a list of available resource classes.
 {: class="alert alert-note"}
 
 ---
@@ -986,17 +980,6 @@ jobs:
 ##### Docker execution environment
 {: #docker-execution-environment }
 
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge<sup>(2)</sup> | 16    | 32GB
-2xlarge+<sup>(2)</sup>| 20    | 40GB
-{: class="table table-striped"}
-
 Example:
 
 ```yaml
@@ -1008,6 +991,19 @@ jobs:
     steps:
       ... // other config
 ```
+
+###### x86
+{: #x86 }
+
+{% include snippets/docker-resource-table.md %}
+
+###### Arm
+{: #arm }
+
+**Arm on Docker** For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the [Resource classes page](https://circleci.com/product/features/resource-classes/).
+{: class="alert alert-caution"}
+
+{% include snippets/docker-arm-resource-table.md %}
 
 ---
 
@@ -1134,8 +1130,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604-cuda-10.1:201909-23
-    resource_class: gpu.nvidia.small
+      image: linux-cuda-12:default
+    resource_class: gpu.nvidia.medium
     steps:
       - run: nvidia-smi
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
@@ -1169,7 +1165,7 @@ jobs:
 
 ---
 
-##### Arm execution-environment (LinuxVM)
+##### Arm VM execution-environment
 {: #arm-execution-environment-linux }
 
 {% include snippets/arm-resource-table.md %}
@@ -1854,13 +1850,9 @@ Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** u
 ##### Using `pipeline` values
 {: #using-pipeline-values }
 
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
 
-{% include snippets/pipeline-values.md %}
-
-For a list of pipeline values compatible with GitLab, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
-
-For example:
+Example:
 
 ```yaml
 version: 2.1

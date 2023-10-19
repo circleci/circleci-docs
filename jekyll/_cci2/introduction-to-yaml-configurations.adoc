@@ -11,8 +11,7 @@ contentTags:
 :page-liquid:
 :page-description: "Overview of CircleCI configuration written in YAML"
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 The crux of connecting CircleCI to your project is a `config.yml`, which is held in a `.circleci` directory. CircleCI configuration files are written in https://yaml.org/[YAML], a more human-friendly data serialization format for programming languages. YAML is a strict superset of JSON, so anything you can do in JSON, you can also do in YAML. CircleCI YAML configurations will largely consist of key-value pairs, and nested key-value pairs.
 

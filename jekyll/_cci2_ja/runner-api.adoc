@@ -13,9 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/ja/runner-1.0-deprecation-first.adoc %}
-
-このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
+このドキュメントには、CircleCI のセルフホストランナーAPIのすべての外部向けエンドポイントが含まれています。 このAPIは、メインの CircleCI v2 API とは別に、セルフホストランナージョブの管理および実行に使用されます。 これは、`runner.circleci.com`でホストされています。
 
 [#authentication-methods]
 == 認証方法
@@ -71,15 +69,15 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 
 指定したパラメーターに基づいて使用可能なセルフホストランナーの一覧を取得します。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
-[#authentication-methods]
+[#get-api-v3-runner-authentication-methods]
 ==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v3/runner でエンドポイントにアクセスできるようになります。
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 * リソースクラストークン (リソースクラス作成時に生成されます)
 
-[#request]
+[#get-api-v3-runner-request]
 ===== リクエスト
 
 [.table.table-striped]
@@ -104,20 +102,20 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | 指定した名前空間でセルフホストランナーの一覧を絞り込みます。
 |===
 
-[#examples]
-==== サンプル
+[#get-api-v3-runner-examples]
+==== 例
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/runner?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
+curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H "Circle-Token: secret-token"
 ```
 
-[#response]
+[#get-api-v3-runner-response]
 ==== 応答
 
 [.table.table-striped]
@@ -132,8 +130,8 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 |JSON
 |===
 
-[#response-schema]
-==== 応答スキーム
+[#get-api-v3-runner-response-schema]
+==== 応答スキーマ
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -184,8 +182,8 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 |実行中のマシンランナーローンチエージェントのバージョン
 |===
 
-[#example]
-==== 例
+[#get-api-v3-runner-example]
+==== サンプル
 
 ```json
 {
@@ -208,14 +206,14 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 
 指定したリソース クラスで未処理のタスクの数を取得します。
 
-[#authentication-methods]
+[#get-api-v3-tasks-authentication-methods]
 ==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v3/runner でエンドポイントにアクセスできるようになります。
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 
-[#request]
+[#get-api-v3-tasks-request]
 ==== リクエスト
 
 [.table.table-striped]
@@ -234,15 +232,15 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
-[#examples]
+[#get-api-v3-tasks-examples]
 ==== 例
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
-[#response]
+[#get-api-v3-tasks-response]
 ==== 応答
 
 [.table.table-striped]
@@ -257,8 +255,8 @@ curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespa
 |JSON
 |===
 
-[#response-schema]
-==== 応答スキーム
+[#get-api-v3-tasks-response-schema]
+==== 応答スキーマ
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -274,7 +272,7 @@ curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespa
 |未処理のタスクの数
 |===
 
-[#example]
+[#get-api-v3-tasks-example]
 ==== 例
 
 ```json
@@ -288,14 +286,14 @@ curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespa
 
 指定したリソースクラスで実行中のタスクの数を取得します。
 
-[#authentication-methods]
+[#get-api-v3-tasks-running-authentication-methods]
 ==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v3/runner でエンドポイントにアクセスできるようになります。
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 
-[#request]
+[#get-api-v3-tasks-running-request]
 ==== リクエスト
 
 [.table.table-striped]
@@ -314,15 +312,15 @@ curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespa
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
-[#examples]
+[#get-api-v3-tasks-running-examples]
 ==== 例
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/tasks/running?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
-[#response]
+[#get-api-v3-tasks-running-response]
 ==== 応答
 
 [.table.table-striped]
@@ -337,8 +335,8 @@ curl -X GET https://runner.circleci.com/api/v3/tasks/running?resource-class=test
 |JSON
 |===
 
-[#response-schema]
-==== 応答スキーム
+[#get-api-v3-tasks-running-response-schema]
+==== 応答スキーマ
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -354,7 +352,7 @@ curl -X GET https://runner.circleci.com/api/v3/tasks/running?resource-class=test
 |実行中のタスクの数
 |===
 
-[#example]
+[#get-api-v3-tasks-running-example]
 ==== 例
 
 ```json

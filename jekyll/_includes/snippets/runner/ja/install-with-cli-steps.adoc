@@ -1,0 +1,37 @@
+//== Command line installation: pre-steps
+
+// Display the following step for machine runner installation only as container runner is not yet avaiable on server
+
+ifdef::machine[]
+
+NOTE: **サーバー用のセルフホストランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
+
+endif::[]
+
+セルフホストランナーをインストールするには、下記手順を実行し、名前空間と認証トークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。
+
+お客様のランナーは、link:https://app.circleci.com/[Web アプリ内] のインベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
+
+. 組織のセルフホストランナーの名前空間を作成します。 *作成できる名前空間は、各組織につき 1 つのみです。* CircleCI の組織のアカウント名を小文字で使用することを推奨します。 既に Orb を使用している場合は、Orb で使用しているのと同じ名前空間にします。
++
+下記のコマンドを使って名前空間を作成します。
++
+```
+circleci namespace create <name> --org-id <your-organization-id>
+```
++
+TIP: 
+組織に既にネームスペースがある場合、上記のコマンドを実行して別のネームスペースを作成すると、エ ラーが表示されます。 エラーメッセージは既存のネームスペースの名前を返します。 この場合、既存のネームスペースを使用して、以下の手順 2 に進みます。
+. 次のコマンドを実行して、セルフホストランナーの名前空間用のリソースクラスを作成します。
++
+```
+circleci runner resource-class create <namespace>/<resource-class> <description> --generate-token
+```
++
+`<namespace>` と  `<resource-class>` は、それぞれお客様の orgネームスペースと希望するリソースクラス名に置き換えてください。 オプションで説明を追加することもできます。
++
+例: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
++
+リソースクラス トークンは、ランナーリソースクラスが正常に作成された後に返されます。
++
+CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。

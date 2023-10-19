@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,10 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
-:toc: macro
-:toc-title:
-
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+:experimental:
 
 This document contains all the external facing endpoints for the CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`
 
@@ -204,7 +201,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 ```
 
 [#get-api-v3-tasks]
-=== GET /api/v3/tasks
+=== GET /api/v3/runner/tasks
 
 Get the number of unclaimed tasks for a given resource class.
 
@@ -238,7 +235,7 @@ Get the number of unclaimed tasks for a given resource class.
 ==== Examples
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 
@@ -284,7 +281,7 @@ curl -X GET https://runner.circleci.com/api/v3/tasks?resource-class=test-namespa
 ```
 
 [#get-api-v3-tasks-running]
-=== GET /api/v3/tasks/running
+=== GET /api/v3/runner/tasks/running
 
 Get the number of running tasks for a given resource class.
 
@@ -318,7 +315,7 @@ Get the number of running tasks for a given resource class.
 ==== Examples
 
 ```shell
-curl -X GET https://runner.circleci.com/api/v3/tasks/running?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-class=test-namespace/test-resource \
     -H "Circle-Token: secret-token"
 ```
 

@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -9,10 +9,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
-
-{% include snippets/runner-1.0-deprecation-first.adoc %}
+:experimental:ß
 
 [#self-hosted-runner-configuration-reference]
 == Machine runner configuration reference
@@ -128,7 +125,7 @@ runner:
 === runner.cleanup_working_directory
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
-CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
+CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`.
 
 Example:
 

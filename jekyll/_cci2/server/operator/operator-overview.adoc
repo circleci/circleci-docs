@@ -9,8 +9,7 @@ contentTags:
 :page-liquid:
 :page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the https://circleci.com/docs/server/overview/circleci-server-v4-overview[CircleCI Server v4.x Overview].
 
@@ -22,8 +21,6 @@ CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
 
 Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
-
-toc::[]
 
 [#execution-environment]
 == Execution environment

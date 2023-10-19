@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.4'
+ruby '2.7.6'
 
 gem "jekyll", '~> 4.2.0', github: "jekyll/jekyll"
 gem 'html-proofer'
@@ -10,14 +10,14 @@ gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"
 gem "liquid-c"
-gem 'nokogiri', '~> 1.13'
+gem 'nokogiri', '~> 1.14'
 gem 'htmlcompressor'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'jekyll-asciidoc', github: "asciidoctor/jekyll-asciidoc"
-  gem 'jekyll-algolia', '~> 1.0' # Used by `Update Algolia Index` CI step
+  gem 'jekyll-algolia', '~> 1.6', '>= 1.6.0' # Used by `Update Algolia Index` CI step
   gem 'jekyll-last-modified-at' # Used for page metadata
 end
 

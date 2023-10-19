@@ -12,8 +12,7 @@ contentTags:
 :page-liquid:
 :page-description: This document describes the Free plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#introduction]
 == Introduction
@@ -28,7 +27,9 @@ Pipeline values and parameters can be used to create reusable pipeline configura
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-For a full list of values and built-in environment variables, see the xref:variables#pipeline-values[Project values and variables] guide.
+For a full list of values and built-in environment variables, see the xref:variables#[Project values and variables] guide.
+
+NOTE: For GitHub users, refer to the xref:github-apps-integration#[GitHub App integration] or xref:github-integration#[GitHub OAuth app integration] guides to check which integration type applies to you.
 
 include::../_includes/snippets/pipeline-values.adoc[]
 
@@ -64,6 +65,8 @@ Pipeline parameters support the following types:
 - enum
 
 See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
+
+NOTE: When using setup workflows, all pipeline parameters must be present in the subsequent configuration, including in API calls. More information on setup workflows can be found in the xref:dynamic-config#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
@@ -107,6 +110,8 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   }
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
+
+Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#passing-parameters-when-triggering-pipelines-using-the-circleci-web-app]
 === Passing parameters when triggering pipelines using the CircleCI web app
