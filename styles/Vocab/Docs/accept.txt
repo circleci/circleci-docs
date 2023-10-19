@@ -10,3 +10,11 @@ namespace
 hostname
 stderr
 XML
+kubectl
+Gbps
+Subnet
+subnet
+Autoscaler
+autoscaler
+Certbot
+keyset
