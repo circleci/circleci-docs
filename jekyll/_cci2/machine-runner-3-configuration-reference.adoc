@@ -40,7 +40,7 @@ This is a token used to identify the machine runner to CircleCI and can be gener
 === api.url
 `$CIRCLECI_RUNNER_API_URL`
 
-This is a url pointing to `https://runner.circleci.com` by default. It should not be modified unless you have a CircleCI Server installation. In that case, it must be set to the URL of your server installation.
+This is a url pointing to `https://runner.circleci.com` by default. It should not be modified unless you have a CircleCI server installation. In that case, it must be set to the URL of your server installation.
 
 [#runner-name]
 === runner.name
