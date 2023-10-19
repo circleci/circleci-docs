@@ -293,15 +293,30 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Create release environment
 ^| icon:check-circle[]
-^| icon:check-circle[]
-^| 
+^|
+^|
 
 ^| Delete release environment
 ^| icon:check-circle[]
-^| icon:check-circle[]
+^|
 ^|
 
 ^| View release environment
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Create environment token
+^| icon:check-circle[]
+^|
+^| 
+
+^| Revoke environment token
+^| icon:check-circle[]
+^|
+^|
+
+^| List environment token
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -474,7 +489,7 @@ The table below shows the permissions associated with each CircleCI project role
 ^| Cancel release
 ^| icon:check-circle[]
 ^| icon:check-circle[]
-^| 
+^|
 
 ^| Promote release steps
 ^| icon:check-circle[]
@@ -491,7 +506,7 @@ The table below shows the permissions associated with each CircleCI project role
 [#permissions-scope]
 == Permissions scope
 
-Your CircleCI roles and associated permissions are **not** derived from the permissions set in your version control system (VCS). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
+Your CircleCI roles and associated permissions are **not** derived from the permissions set in your VCS (version control system). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
 
 For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated VCS identity.
 
