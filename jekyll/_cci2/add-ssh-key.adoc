@@ -27,7 +27,7 @@ For more information about the differences, see the link:https://docs.github.com
 [#overview]
 == Overview
 
-If you want to set up an SSH key in order to check out code from GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages for steps to add SSH keys.
+If you want to set up an SSH key in order to check out code from GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages.
 
 If your org was authorized with GitHub App or you use GitLab as your VCS, or if you need additional SSH keys to access other services, follow the steps below to add an SSH key to your project.
 
