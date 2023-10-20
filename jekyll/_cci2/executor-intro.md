@@ -44,6 +44,9 @@ Find out more about the Docker execution environment on the [Using Docker](/docs
 ## Linux VM
 {: #linux-vm }
 
+**CircleCI Cloud** The use of `machine: true` is deprecated. You must specify an image to use.
+{: class="alert alert-caution"}
+
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine)
 
 {:.tab.machine.Cloud}
