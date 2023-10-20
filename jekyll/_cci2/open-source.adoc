@@ -19,7 +19,7 @@ This page provides the details of 3rd-party open source components used in Circl
 The following 3rd-party open source components are used in the CircleCI release agent. The release agent is used to integrate CircleCI with Kubernetes clusters for release management. For more information, see the xref:/release/releases-overview#[Releases docs].
 
 [.table.table-striped]
-[cols=3*, options="header", stripes=even,format=csv]
+[cols=2*, options="header", stripes=even,format=csv]
 |===
 include::release-agent.csv[]
 |===
