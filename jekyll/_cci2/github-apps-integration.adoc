@@ -128,7 +128,7 @@ You will be guided through the SSH key generation process in the CircleCI web ap
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to your GitHub repository menu:Settings[Security > Deploy Keys]. Copy and paste your public key here. We **do not** require write access. The title can be anything you want.  Only a GitHub repository "admin" role is required (not GitHub organization owner), see (GitHub's docs for more details)[https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization]. 
+. Go to your GitHub repository menu:Settings[Security > Deploy Keys]. Copy and paste your public key here. We **do not** require write access. The title can be anything you want. Only a GitHub repository "admin" role is required (not GitHub organization owner), see link:https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization[GitHub's docs for more details].
 
 . In the CircleCI web app **Create Project** page, copy and paste your private key, including `---BEGIN RSA PRIVATE KEY---` and `---END RSA PRIVATE KEY---`, into the **GitHub personal SSH key** field.
 
@@ -209,7 +209,7 @@ SSH reruns are not currently supported for GitHub App projects. This feature wil
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project. If you are looking to set up an SSH key in order to check out code from additional repositories in GitHub, see xref:add-ssh-key/#steps-to-add-additional-ssh-keys[Add additional SSH keys].  
+Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project. If you are looking to set up an SSH key in order to check out code from additional repositories in GitHub, see xref:add-ssh-key#steps-to-add-additional-ssh-keys[Add additional SSH keys].
 
 
 [#free-and-open-source-setting]
