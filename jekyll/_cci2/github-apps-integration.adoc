@@ -40,7 +40,7 @@ When you create a new organization and connect your GitHub account, you will be 
 
 * **Faster**: Commit a starter CI pipeline to a new branch.
 +
-CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitHub repo.
+CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitHub repository.
 
 * **Fast**: Use a `config.yml` template that you can edit and save.
 +
@@ -61,16 +61,16 @@ Each time you push changes to your GitHub repository, a new pipeline is triggere
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
-Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitHub repo. Committing further changes in your repo will automatically trigger a pipeline.
+Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
 
 Manually triggering a pipeline from the CircleCI web app is not available at this time.
 
 [#project-settings]
 == Project settings
 
-Within CircleCI, a project can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repo.
+Within CircleCI, a project can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repository.
 
-A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a VCS. A trigger determines which configuration should be used to start a pipeline.
+A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a Version Control System (VCS). A trigger determines which configuration should be used to start a pipeline.
 
 The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab and GitHub App integrations.
 
@@ -103,7 +103,7 @@ If you followed the steps above to connect GitHub, a trigger set with GitHub as 
 
 image::{{site.baseurl}}/assets/img/docs/standalone/triggers-gh.png[Trigger setup page]
 
-When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline shoud be triggered.
+When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
 
 [#project-settings-advanced]
 === Advanced
@@ -158,10 +158,10 @@ CircleCI users have different abilities depending on assigned roles in a particu
 
 There are a number of built-in environment variables that are not available in GitHub-based projects for accounts authenticated through the GitHub App. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
-[#coming-soon]
-== Coming soon
+[#currently-not-supported]
+== Currently not supported
 
-The following sections are features of CircleCI which are not currently fully supported. These features are planned for future releases.
+The following sections are features of CircleCI which are not currently supported. These features are planned for future releases.
 
 [#manual-trigger-pipeline-option]
 === Manual trigger pipeline option
@@ -211,7 +211,6 @@ SSH reruns are not currently supported for GitHub App projects. This feature wil
 
 Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project. If you are looking to set up an SSH key in order to check out code from additional repositories in GitHub, see xref:add-ssh-key#steps-to-add-additional-ssh-keys[Add additional SSH keys].
 
-
 [#free-and-open-source-setting]
 === Free and open source setting
 
@@ -226,6 +225,11 @@ xref:insights-tests#[Test Insights] is currently not supported.
 === Badges
 
 The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights snapshot badge] features are not currently supported.
+
+[#only-build-pull-requests]
+=== Only build Pull Requests
+
+The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
 [#next-steps]
 == Next Steps
