@@ -85,8 +85,8 @@ machine_provisioner:
     gcp:
       ...
       zones:
-        - us-east1-a
-        - us-east1-b
+        - <gcp-zone1>
+        - <gcp-zone2>
 ----
 
 . Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments##set-up-authentication[Set up authentication] for more details

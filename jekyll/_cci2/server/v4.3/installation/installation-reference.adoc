@@ -132,7 +132,9 @@ machine_provisioner:
       project_id: <gcp-project-id>
       network_tags:
         - <network-tag>
-      zone: <gcp-zone>
+      zones:
+        - <gcp-zone1>
+        - <gcp-zone2>
       network: "<gcp-network>"
       subnetwork: "" # leave blank for auto-subnetting
       workloadIdentity: "<service-account-email-with-compute-access>"
