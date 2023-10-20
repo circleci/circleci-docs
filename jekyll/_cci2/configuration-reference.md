@@ -1065,6 +1065,9 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 ##### Windows execution environment
 {: #windows-execution-environment }
 
+The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+{: class="alert alert-info"}
+
 {% include snippets/windows-resource-table.md %}
 
 Example:
