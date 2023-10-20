@@ -1005,7 +1005,9 @@ machine_provisioner:
       network_tags:
         - circleci-vm
         - <your-network>
-      zone: <zone>
+      zones: 
+        - <zone1>
+        - <zone2>
       network: <network>
       subnetwork: <subnetwork>
 
