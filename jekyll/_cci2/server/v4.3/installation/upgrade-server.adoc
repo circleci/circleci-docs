@@ -18,7 +18,8 @@ A successful deployment will update the web app. Unless noted in the release not
 
 NOTE: We recommend that you do not skip releases when upgrading.
 
-NOTE: Related to new execution systems
+Please note the following changes in the 4.3 upgrade.
+
 * Docker Layer Caching (DLC)
 ** old docker layer caching (dlc) volumes will not be carried over and need to be wiped manually
 ** projects that stop using dlc wont delete final DLC cache without manual intervention
@@ -38,6 +39,15 @@ This can alternatively be done by just manually cleaning up remaining vms before
 
 * Storage
 ** Excluding DLC, historical artifacts will continue to be supported in new execution system with no user changes
+
+* Postgres
+** The Postgres image will be updated during this release which will cause a short downtime.
+
+* Workflows Conductor
+** There is a workflows-conductor data migration that will run as a job in the background after your upgrade. The migration processing projects in batches of 1000 and sleeping for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores but in our production environment, a batch of 1000 projects took about 6 seconds.
+** Please ensure that your CircleCI server 4.3 install is left running until after the migrade is completed.
+** You can confrim that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
+
 
 [#prerequisites]
 == Prerequisites
