@@ -67,6 +67,9 @@ machine_provisioner:
         - "<subnet-id>"
       securityGroupId: "<security-group-id>"
       irsaRole: "<arn-of-irsa-role>"
+      tags:
+        name1: "value1"
+        name2: "value2"
 
 mongodb:
   auth:
