@@ -30,13 +30,22 @@ CircleCI test splitting lets you intelligently define where splits happen across
 
 It is also possible to use the CLI to [manually allocate tests](#manual-allocation) across parallel environments. Another alternative is to use [environment variables](#using-environment-variables-to-split-tests) instead of the CLI to configure split tests.
 
+## Quickstart
+{: #quickstart }
+
+The following how-to guide walks you through the steps required to glob your test files, split your tests evenly across parallel containers or VMs, and then run your tests in parallel:
+
+* **How-to**: [Use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests/)
+
 ## Specify a job's parallelism level
 {: #specify-a-jobs-parallelism-level }
 
 Test suites are conventionally defined at the [job](/docs/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
 
-To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job.
+To run a job's steps in multiple parallel environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case four Docker containers using the `cimg/base:2023.09` image.
+
+With no further changes, the full `test` job is still run in each of the four environments. In order to automatically run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to use the `circleci tests run` CLI command in your configuration to split your test suite across your parallel environments.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -44,13 +53,11 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: cimg/base:2022.11
+      - image: cimg/base:2023.09
     parallelism: 4
 ```
 
 ![Parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
-
-With no further changes, the full `test` job is still run in each of the four execution environment. In order to automatically run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to use the `circleci tests` CLI commands in your configuration.
 
 ### Use parallelism with self-hosted runners
 {: #use-parallelism-with-self-hosted-runners }
@@ -78,7 +85,6 @@ jobs:
     docker:
       - image: cimg/go:1.18.1
     resource_class: large
-    working_directory: ~/my-app
     steps:
       - run: go test
 ```
@@ -86,7 +92,7 @@ jobs:
 To split these tests using timing data:
 
 1. Introduce parallelism to spin up a number of identical test environments (4 in this example)
-2. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
+2. Use the `circleci tests run` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
 
 ```yaml
 jobs:
@@ -95,7 +101,6 @@ jobs:
       - image: cimg/go:1.18.1
     parallelism: 4
     resource_class: large
-    working_directory: ~/my-app
     steps:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
