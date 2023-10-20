@@ -49,12 +49,61 @@ This can alternatively be done by just manually cleaning up remaining vms before
 [#upgrade-steps]
 == Upgrade steps
 
+NOTE: This upgrade is a disruptive process and downtime is expected. Please do not attempt to run jobs during this upgrade.
+
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
-. For upgrade from 4.2:
-* Remove vm_service block from values file
-* Add machine_provisioner block to values file
-* Update vm-service IAM Policy (machine-provisioner requires slightly different permissions)
+. Rename the `vm_service` block in your values file to `machine_provisioner`. This block will use the same values as `vm_service` did with the followed exeptions.
+
+  On AWS, tags are no longer formatted as an array and are instead in dictionary format. eg:
+[source,yaml]
+----
+machine_provisioner:
+  providers:
+    ec2:
+      ...
+      tags:
+        tag1: "value1"
+        tag2: "value2"
+----
+
+  On GCP, zones are now entered as an array. eg:
+[source,yaml]
+----
+machine_provisioner:
+  providers:
+    gcp:
+      ...
+      zones:
+        - us-east1-a
+        - us-east1-b
+----
+
+. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments##set-up-authentication[Set up authentication] for more details
+
+. Update the vm-service trust policy. The current policy is directed at the `vm-service` service account. Change this to `machine-provisioner` as below:
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "<OIDC_PROVIDER_ARN>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:machine-provisioner"
+        }
+      }
+    }
+
+  ]
+}
+----
 
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
 +
@@ -67,3 +116,5 @@ helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n 
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
+
+. Remove port 2376 from your vm-service security group as it is no longer needed.
