@@ -102,7 +102,7 @@ jobs:
     parallelism: 4
     resource_class: large
     steps:
-      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ```
 
 For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test splitting tutorial](/docs/test-splitting-tutorial).
