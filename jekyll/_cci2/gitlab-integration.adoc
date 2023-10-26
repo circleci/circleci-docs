@@ -349,10 +349,10 @@ xref:insights-tests#[Test Insights] is currently not supported for GitLab custom
 
 The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights snapshot badge] features are not currently supported for GitLab projects.
 
-[#CircleCI Self-hosteed Server product]
-=== CircleCI Self-hosted Server product 
+[#circleci-server]
+=== CircleCI self-hosted server product 
 
-GitLab is not yet supported for link:https://circleci.com/pricing/server/[CircleCI Server].
+GitLab is not yet supported for link:https://circleci.com/pricing/server/[CircleCI server].
 
 [#next-steps]
 == Next Steps
