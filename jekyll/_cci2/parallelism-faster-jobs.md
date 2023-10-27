@@ -110,6 +110,25 @@ For a more detailed walkthrough, read the [guide to using the CLI to split tests
 The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 {: class="alert alert-info"}
 
+## The tests run command
+
+Use the `circleci tests run` command to run your tests, split your tests across parallel executors and take advantage of the [rerun failed tests](/docs/rerun-failed-tests/) options.
+
+The following table show a full list of option flags available when using `circleci tests run`.
+
+Flag | Type | Description | Required?
+--- | --- | --- | ---
+`--command` | string | The command string is the script that will be run for a list of tests determined by the options provided to the plugin | Yes
+`--index` | uint | index of node can also be set with CIRCLE_NODE_INDEX. (default 1) | No
+`--split-by` | string | how to weight the split, allowed values are "name", "filesize", and "timings". (default "name") | No
+`--time-default` | duration | override default time value of test timing data when timing is not found (default 0s). The option expects a value to be passed in the following form: `<int value><unit>`. For example: `--time-default 10s` (for 10 seconds), `--time-default 1m` (for 1 minute) | No
+`--timings-file` | string | JSON file containing historical timing data. (default "/tmp/.circleci-task-data-653a503f531a1d65b41855a5-1-build/circle-test-results/results.json") | No
+`--timings-type` | string | name of the field to use from historical test results when matching against the test names given to the command in order to determine their historical timings, previous status and flakiness. Available values: `classname`, `name`, `file` (default). (default "none") | No
+`--total` | uint | number of nodes can also be set with CIRCLE_NODE_TOTAL. (default 2) | No
+`-v`, `--verbose` | --- | enable verbose logging output. | No
+`--version` | --- | print out current version. | No
+{: class="table table-striped"}
+
 ## Manual allocation
 {: #manual-allocation }
 
