@@ -61,8 +61,7 @@ NOTE: This upgrade is a disruptive process and downtime is expected. Please do n
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
 . Rename the `vm_service` block in your `values.yml` file to `machine_provisioner`. This block will use the same values as `vm_service` with the followed exeptions:
-+
-On AWS, tags are no longer formatted as an array and are instead in dictionary format, for example:
+** On AWS, tags are no longer formatted as an array and are instead in dictionary format, for example:
 +
 [source,yaml]
 ----
@@ -74,8 +73,8 @@ machine_provisioner:
         tag1: "value1"
         tag2: "value2"
 ----
-+
-On GCP, zones are now entered as an array, for example:
+
+** On GCP, zones are now entered as an array, for example:
 +
 [source,yaml]
 ----
