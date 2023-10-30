@@ -89,15 +89,19 @@ helm repo update
 [#install-the-release-agent]
 == 3. Install the release agent
 
-Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster. Be sure to substitute the token you created in the previous step, and also include a list of Kubernetes namespaces you want to manage:
+Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster. Be sure to substitute the token you created in the previous step, and also, if required, include a list of Kubernetes namespaces you want to monitor.
+
+If you want to only monitor the `default` namespace, you do not need to supply a list with `--set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MONITOR]`. The `default` namespace is monitored by default.
 
 [,shell]
 ----
 helm upgrade --install circleci-release-agent-system release-agent/circleci-release-agent \
 --set tokenSecret.token=[YOUR_CCI_INTEGRATION_TOKEN] --create-namespace \
 --namespace circleci-release-agent-system \
---set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MANAGE]
+--set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MONITOR]
 ----
+
+NOTE: You can further customize the agent installation and check all available options link:https://circleci-public.github.io/cci-k8s-release-agent/[here].
 
 Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated:
 
