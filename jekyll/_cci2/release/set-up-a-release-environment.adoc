@@ -91,7 +91,7 @@ helm repo update
 
 Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster. Be sure to substitute the token you created in the previous step, and also, if required, include a list of Kubernetes namespaces you want to monitor.
 
-If you want to only monitor the `default` namespace, you do not need to supply a list with `--set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MONITOR]`. The `default` namespace is monitored by default.
+If you only want to monitor the `default` namespace, you do not need to supply a list with `--set manageNamespaces=[YOUR_LIST_OF_NAMESPACES_TO_MONITOR]`. The `default` namespace is monitored by default.
 
 [,shell]
 ----
