@@ -110,6 +110,23 @@ For a more detailed walkthrough, read the [guide to using the CLI to split tests
 The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 {: class="alert alert-info"}
 
+### Use the tests split command
+
+It is also possible to split tests using the `circleci tests split` command. Using the example from above, splitting the Go tests would be done as follows:
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
+    resource_class: large
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+```
+
+The `circleci tests split` command has been superceded by `circleci tests run` as this command also gives you access to the [rerun failed tests](/docs/rerun-failed-tests/) options.
+
 ## The tests run command
 
 Use the `circleci tests run` command to run your tests, split your tests across parallel executors and take advantage of the [rerun failed tests](/docs/rerun-failed-tests/) options.
