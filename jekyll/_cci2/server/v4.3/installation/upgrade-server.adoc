@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This page describes the steps needed to upgrade your CircleCI server v4.3 installation.
+This page describes the steps needed to upgrade your CircleCI server installation to v4.3.
 
 A successful deployment will update the web app. Unless noted in the release notes, updates are rolling updates and there is no downtime.
 
@@ -21,32 +21,29 @@ NOTE: We recommend that you do not skip releases when upgrading.
 Please note the following changes in the 4.3 upgrade.
 
 * Docker Layer Caching (DLC)
-** old docker layer caching (dlc) volumes will not be carried over and need to be wiped manually
-** projects that stop using dlc wont delete final DLC cache without manual intervention
-** dlc now runs through S3 and GCS instead of SSD Volumes
+** Old DLC volumes will not be carried over and need to be wiped manually
+** Projects that stop using DLC will not delete final DLC cache without manual intervention
+** DLC now runs through S3 and GCS instead of SSD Volumes
 
-* Machine Jobs
-** machine jobs will now run through machine provisioner
-** When migrating vm-gc will need to cleanup all machines left running before it is removed. All other vm-service related
-pods can be removed during migration first. If this is not followed vm-service machines will not be cleaned up without manual intervention.
-This can alternatively be done by just manually cleaning up remaining vms before starting machine-provisioner.
-** Machine and Remote docker jobs no longer flow through nomad and run completely in a single machine. Nomad is NOT required to run machine jobs.
-** If deploying in specific zone need to specify subnetwork for gcp
-** IAM users have changed names to end with machine-provisioner instead of vm-service so some users might need to be altered.
+* Machine jobs
+** machine jobs will now run through _machine provisioner_
+** When migrating `vm-gc` will need to clean up all machines left running before it is removed. All other `vm-service` related pods can be removed during migration first. If this is not followed, `vm-service` machines will not be cleaned up without manual intervention. This can alternatively be done by manually cleaning up remaining VMs before starting machine provisioner.
+** Machine and remote Docker jobs no longer flow through Nomad, and they run completely in a single machine. Nomad is **not** required to run machine jobs.
+** If deploying in a specific zone need to specify subnetwork for GCP
+** IAM users have changed names to end with `machine-provisioner` instead of `vm-service` so some users might need to be altered.
 
 * Docker jobs
-** Run through nomad, but are orchestrated through docker-provisioner
+** Run through Nomad, but are orchestrated through `docker-provisioner`
 
 * Storage
-** Excluding DLC, historical artifacts will continue to be supported in new execution system with no user changes
+** Excluding DLC, historical artifacts will continue to be supported in the new execution system with no user changes
 
-* Postgres
-** The Postgres image will be updated during this release which will cause a short downtime.
+* PostgreSQL
+** The PostgreSQL image will be updated during this release, which will cause a short downtime.
 
-* Workflows Conductor
-** There is a workflows-conductor data migration that will run as a job in the background after your upgrade. The migration processing projects in batches of 1000 and sleeping for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores but in our production environment, a batch of 1000 projects took about 6 seconds.
-** Please ensure that your CircleCI server 4.3 install is left running until after the migrade is completed.
-** You can confrim that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
+* Workflows conductor
+** There is a `workflows-conductor` data migration that will run as a job in the background after your upgrade. The migration processes projects in batches of 1000 and sleeps for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores, but in our production environment, a batch of 1000 projects took around 6 seconds.
+** Ensure that your CircleCI server v4.3 installation is left running until after the migration has completed. You can confrim that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
 
 
 [#prerequisites]
@@ -63,9 +60,10 @@ NOTE: This upgrade is a disruptive process and downtime is expected. Please do n
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
-. Rename the `vm_service` block in your values file to `machine_provisioner`. This block will use the same values as `vm_service` did with the followed exeptions.
-
-  On AWS, tags are no longer formatted as an array and are instead in dictionary format. eg:
+. Rename the `vm_service` block in your `values.yml` file to `machine_provisioner`. This block will use the same values as `vm_service` with the followed exeptions:
++
+On AWS, tags are no longer formatted as an array and are instead in dictionary format, for example:
++
 [source,yaml]
 ----
 machine_provisioner:
@@ -76,8 +74,9 @@ machine_provisioner:
         tag1: "value1"
         tag2: "value2"
 ----
-
-  On GCP, zones are now entered as an array. eg:
++
+On GCP, zones are now entered as an array, for example:
++
 [source,yaml]
 ----
 machine_provisioner:
@@ -89,7 +88,7 @@ machine_provisioner:
         - <gcp-zone2>
 ----
 
-. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments##set-up-authentication[Set up authentication] for more details
+. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments##set-up-authentication[Set up authentication] page for more details.
 
 . Update the vm-service trust policy. The current policy is directed at the `vm-service` service account. Change this to `machine-provisioner` as below:
 +
@@ -127,4 +126,4 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
 
-. Remove port 2376 from your vm-service security group as it is no longer needed.
+. Remove port 2376 from your `vm-service` security group as it is no longer needed.
