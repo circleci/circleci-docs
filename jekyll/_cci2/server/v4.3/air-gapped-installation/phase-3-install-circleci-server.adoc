@@ -114,12 +114,12 @@ NOTE: If using a non-tls installation for your docker registry, visit the xref:a
 
 
 [#configure-machine-provisioner]
-=== f. Disable Machine Provisioner
+=== f. Disable machine provisioner
 In the `machine_provisioner` section of `values.yaml`, set `enabled` to `false` to disable it. This feature requires cloud connectivity.
 
 [source, yaml]
 ----
-# Machine Provisioner Disabled - Requires cloud connectivity
+# Machine provisioner disabled - Requires cloud connectivity
 machine_provisioner:
   enabled: false
 ----

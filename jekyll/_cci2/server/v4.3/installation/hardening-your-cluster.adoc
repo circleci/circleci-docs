@@ -226,8 +226,8 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 You will only need the egress rules for internet access and SSH for your VCS.
 
 [#notes-on-aws-networkingl]
-== Notes on AWS networking with Machine Provisioner
-When using the EC2 provider for Machine Provisioner, there is an `assignPublicIP` option available in the `values.yaml` file.
+== Notes on AWS networking with machine provisioner
+When using the EC2 provider for machine provisioner, there is an `assignPublicIP` option available in the `values.yaml` file.
 
 [source,yaml]
 ----
@@ -239,7 +239,7 @@ machine_provisioner:
       assignPublicIP: false
 ----
 
-By default this option is set to false, meaning any instance created by Machine Provisioner will only be assigned a private IP address.
+By default, this option is set to false, meaning any instance created by machine provisioner will only be assigned a private IP address.
 
 [#private-ips-only]
 === Private IPs only
@@ -263,9 +263,9 @@ Within the ingress rules of the VM security group, the following rules can be cr
 [#using-public-ips]
 === Using Public IPs
 
-When the `assignPublicIP` option is set to true, all EC2 instances created by Machine Provisioner are assigned **public** IPv4 addresses, and, as such, all services communicating with them do so via their public addresses.
+When the `assignPublicIP` option is set to true, all EC2 instances created by pachine provisioner are assigned **public** IPv4 addresses, and, as such, all services communicating with them do so via their public addresses.
 
-When hardening an installation where the Machine Provisioner uses public IPs, the following rules can be created.
+When hardening an installation where the machine provisioner uses public IPs, the following rules can be created:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

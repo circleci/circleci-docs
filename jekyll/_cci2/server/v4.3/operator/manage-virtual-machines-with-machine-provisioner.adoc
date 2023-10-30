@@ -4,31 +4,31 @@ contentTags:
   - Server v4.3
   - Server Admin
 ---
-= Manage virtual machines with VM Service
+= Manage virtual machines with machine provisioner
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-description: CircleCI server’s machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :toc: macro
 :toc-title:
 
-Machine Provisioner controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
+Machine provisioner controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
 
-This section describes the available configuration options for Machine Provisioner.
+This section describes the available configuration options for machine provisioner.
 
-NOTE: Prescaling controls will be exposed in future for tuning.
+NOTE: Prescaling controls will be exposed in a future release for tuning.
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up Machine Provisioner are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
 
 [#provider]
 == provider
-The following configuration options are for the machine-provisioner provider: either AWS or GCP.
+The following configuration options are for the machine provisioner provider, either AWS or GCP.
 
 [#aws]
 === AWS
-There is a section in your `values.yaml` file that configures Machine Provisioner to work with AWS EC2. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+There is a section in your `values.yaml` file that configures machine provisioner to work with AWS EC2. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
-The information in this section describes post-installation configuration options for Machine Provisioner.
+The information in this section describes post-installation configuration options for machine provisioner.
 
 [#windows-image-aws]
 ==== Windows image
@@ -184,9 +184,9 @@ The default AMIs for server v4.3 are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-There is a section in your `values.yaml` file that configures Machine Provisioner to work with GCP. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+There is a section in your `values.yaml` file that configures machine provisioner to work with GCP. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
-The information in this section describes post-installation configuration options for Machine Provisioner.
+The information in this section describes post-installation configuration options for machine provisioner.
 
 [#windows-image-gcp]
 ==== Windows image

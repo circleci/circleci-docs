@@ -28,10 +28,10 @@ NOTE: Related to new execution systems
 ** machine jobs will now run through machine provisioner
 ** When migrating vm-gc will need to cleanup all machines left running before it is removed. All other vm-service related
 pods can be removed during migration first. If this is not followed vm-service machines will not be cleaned up without manual intervention.
-This can alternatively be done by just manually cleaning up remaining vms before starting machine-provisioner.
+This can alternatively be done by just manually cleaning up remaining vms before starting `machine-provisioner`.
 ** Machine and Remote docker jobs no longer flow through nomad and run completely in a single machine. Nomad is NOT required to run machine jobs.
 ** If deploying in specific zone need to specify subnetwork for gcp
-** IAM users have changed names to end with machine-provisioner instead of vm-service so some users might need to be altered.
+** IAM users have changed names to end with `machine-provisioner` instead of `vm-service` so some users might need to be altered.
 
 * Docker jobs
 ** Run through nomad, but are orchestrated through docker-provisioner
@@ -52,8 +52,8 @@ This can alternatively be done by just manually cleaning up remaining vms before
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
 . For upgrade from 4.2:
-* Remove vm_service block from values file
-* Add machine_provisioner block to values file
+* Remove `vm_service` block from values file
+* Add `machine_provisioner` block to values file
 * Update vm-service IAM Policy (machine-provisioner requires slightly different permissions)
 
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:

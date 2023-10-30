@@ -84,7 +84,7 @@ nomad:
         enabled: false # mTLS is disabled - it is recommended that this be enabled
 
 
-# Machine Provisioner Disabled - Requires cloud connectivity
+# Machine provisioner disabled - Requires cloud connectivity
 machine_provisioner:
   enabled: false
 
