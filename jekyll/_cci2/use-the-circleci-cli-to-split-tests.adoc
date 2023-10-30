@@ -12,9 +12,9 @@ contentTags:
 :icons: font
 :experimental:
 
-CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up identical execution environments in which your job is run.
+CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up the specified number of identical execution environments in which your job is run.
 
-Test splitting requires the CircleCI CLI together with parallelism. The CLI commands `circleci tests glob` and `circleci tests split` are used to define your test suite and allocate tests across multiple environments. The CLI is automatically injected into your job at run-time, so there is no further setup required to use the `circleci tests` commands.
+Test splitting requires the CircleCI CLI together with parallelism. The CLI commands `circleci tests glob` and `circleci tests run` are used to define your test suite and allocate tests across multiple environments. The CLI is automatically injected into your job at run-time, so there is no further setup required to use the `circleci tests` commands.
 
 WARNING: The `circleci tests` commands cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
 
@@ -57,18 +57,18 @@ jobs:
 [#split-tests]
 == 2. Split tests
 
-To split tests, pass in a list of tests to the `circleci tests split` command.
+To split your tests, pass in a list of tests to the `circleci tests run` command.
 
 The following test splitting options are available:
 
-* Alphabetically by name (by default, if none specified)
-* `--split-by=timings` (recommended)
-* `--split-by=filesize`
+* Alphabetically by name (default if none specified)
+* Split using timing data `--split-by=timings` – We recommend this option as it results in the most even split across your parallel execution environments.
+* Split using file size `--split-by=filesize`
 
 [#split-by-name]
 === a. Split by name (default)
 
-By default, if you do not specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames or classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
+By default, if you do not specify a method using the `--split-by` flag, `circleci tests run` expects a list of filenames or classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
 
 * Pipe a glob of test files, as demonstrated in the above section.
 ```shell
