@@ -231,6 +231,11 @@ The xref:status-badges#[status badge] and xref:insights-snapshot-badge#[Insights
 
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
+[#orb-authoring]
+=== Orb authoring
+The ability to author and publish orbs is dependent on certain commands within the CircleCI CLI.  The CircleCI CLI is not yet fully supported for organizations and projects that integrate with GitHub App.
+
+
 [#next-steps]
 == Next Steps
 - xref:config-intro#[Configuration tutorial]
