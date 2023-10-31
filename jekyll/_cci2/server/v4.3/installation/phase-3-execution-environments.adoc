@@ -624,7 +624,7 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
 ----
 {
   "Version": "2012-10-17",
-  "Statement": [
+  "Statement": [    
     {
       "Action": "ec2:RunInstances",
       "Effect": "Allow",
@@ -636,7 +636,8 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
+        "arn:aws:ec2:*:*:volume/*"
       ]
     },
     {
@@ -767,7 +768,7 @@ Create a `policy.json` file with the following content. You should fill in the I
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<YOUR_MachineProvisionerSecurityGroupID>"
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
       ]
     },
     {
@@ -825,7 +826,7 @@ Create a `policy.json` file with the following content. You should fill in the I
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<vpc-id>"
+          "ec2:Vpc": "<VPC_ID>"
         }
       }
     }
@@ -1004,7 +1005,9 @@ machine_provisioner:
       network_tags:
         - circleci-vm
         - <your-network>
-      zone: <zone>
+      zones: 
+        - <zone1>
+        - <zone2>
       network: <network>
       subnetwork: <subnetwork>
 

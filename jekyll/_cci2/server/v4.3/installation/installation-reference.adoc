@@ -67,6 +67,9 @@ machine_provisioner:
         - "<subnet-id>"
       securityGroupId: "<security-group-id>"
       irsaRole: "<arn-of-irsa-role>"
+      tags:
+        name1: "value1"
+        name2: "value2"
 
 mongodb:
   auth:
@@ -129,7 +132,9 @@ machine_provisioner:
       project_id: <gcp-project-id>
       network_tags:
         - <network-tag>
-      zone: <gcp-zone>
+      zones:
+        - <gcp-zone1>
+        - <gcp-zone2>
       network: "<gcp-network>"
       subnetwork: "" # leave blank for auto-subnetting
       workloadIdentity: "<service-account-email-with-compute-access>"
