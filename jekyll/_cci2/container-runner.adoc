@@ -129,7 +129,7 @@ Additional instructions can be found in our link:https://support.circleci.com/hc
 [#parameters]
 == Helm Chart Parameters
 
-The container runner helm chart is hosted in a link:https://github.com/CircleCI-Public/container-runner-helm-chart[github repo].
+The container runner helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here].
 
 The following are **CircleCI specific settings**:
 
