@@ -17,7 +17,6 @@ jekyll/assets/js/*.bundle.js
 jekyll/assets/js/*.chunk.js
 run-results/
 node_modules/
-release/
 
 
 # we need to keep these folders for symlinking

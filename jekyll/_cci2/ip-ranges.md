@@ -156,10 +156,6 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 
 In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. The following IP address ranges are used by CircleCI macOS Cloud:
 
-- 38.39.188.0/24
-- 38.39.189.0/24
-- 38.39.186.0/24
-- 38.39.187.0/24
 - 38.39.184.0/24
 - 38.39.185.0/24
 - 38.39.183.0/24
@@ -186,5 +182,3 @@ macOS builds are automatically restricted within the IP ranges listed here. In o
 - There is currently no support for specifying IP ranges configuration syntax when using the [pipeline parameters feature]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration). Find more details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
 
 - IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/configuration-reference/#machine), not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/configuration-reference/#machine), or with `setup_remote_docker`, will fail with an error. See this [Discuss post](https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639) for details.
-
-- CircleCI is aware of a bug where on rare occassions, the IP address that is used during job execution is not from the well-defined set of IPs listed above.

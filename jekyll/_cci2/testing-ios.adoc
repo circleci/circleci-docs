@@ -32,8 +32,6 @@ There is documentation for xref:ios-codesigning#[iOS code signing projects] and 
 
 {% include snippets/xcode-silicon-vm.adoc %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the xref:dedicated-hosts-macos#[Dedicated hosts] documentation.
-
 [#getting-started]
 == Getting started
 

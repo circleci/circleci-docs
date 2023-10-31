@@ -126,13 +126,13 @@ There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` i
 
 Capability | `docker` | `machine`
 ----------|----------|----------
- Start time | Instant | 30-60 sec
+ Start time | Instant | Instant for most <sup>(1)</sup>
  Clean environment | Yes | Yes
- Custom images | Yes <sup>(1)</sup> | No
- Build Docker images | Yes <sup>(2)</sup> | Yes
+ Custom images | Yes <sup>(2)</sup> | No
+ Build Docker images | Yes <sup>(3)</sup> | Yes
  Full control over job environment | No | Yes
  Full root access | No | Yes
- Run multiple databases | Yes <sup>(3)</sup> | Yes
+ Run multiple databases | Yes <sup>(4)</sup> | Yes
  Run multiple versions of the same software | No | Yes
  [Docker layer caching](/docs/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
@@ -140,11 +140,13 @@ Capability | `docker` | `machine`
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/configuration-reference/#resource_class) | Yes | Yes
 {: class="table table-striped"}
 
-<sup>(1)</sup> See [Using Custom Docker Images][custom-images].
+<sup>(1)</sup> Some less commonly used execution environments may see up to 90 seconds of start time.
 
-<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
+<sup>(2)</sup> See [Using Custom Docker Images][custom-images].
 
-<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
+<sup>(3)</sup> Requires using [Remote Docker][building-docker-images].
+
+<sup>(4)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
 
 For more information on `machine`, see the next section below.
 

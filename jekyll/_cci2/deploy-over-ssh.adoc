@@ -51,25 +51,25 @@ In your `.circleci/config.yml`, create a `deploy` job and add a command to deplo
 version: 2.1
 
 jobs:
-    build:
-    #...
-    deploy:
+  build:
+  #...
+  deploy:
     machine:
-        enabled: true
+      image: ubuntu-2204:2023.07.2
     steps:
-        - run:
-            name: Deploy Over SSH
-            command: |
+      - run:
+          name: Deploy Over SSH
+          command: |
             ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
 
 workflows:
-    build-and-deploy:
+  build-and-deploy:
     jobs:
-        - build
-        - deploy:
-            requires:
+      - build
+      - deploy:
+          requires:
             - build # only deploy once build job has completed
-            filters:
+          filters:
             branches:
-                only: main # only deploy on the main branch
+              only: main # only deploy on the main branch
 ```

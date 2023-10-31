@@ -49,11 +49,6 @@ Download and install the following software before continuing:
 | {helmdiffversion} or greater
 | Helping with `values.yaml` changes and updates
 | Optional, but may help with troubleshooting between releases
-
-| link:https://github.com/vmware-tanzu/velero/releases[Velero CLI]
-| Latest
-| Backup and restore capability
-| See Velero's link:https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
 |===
 
 // Don't include this section in the GCP PDF.
@@ -111,7 +106,18 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 10 Gbps
 |===
 
-There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you set up a new VPC rather than use an existing one.
+[#vpc-cluster-sizing-recommendations]
+=== VPC and cluster sizing recommendations
+
+While there are no strict requirements for VPC (Virtual Private Cloud) setup or disk size, the following practices are recommended for optimal performance and stability in production environments.
+
+* **VPC Selection**
++
+We recommend you create a new VPC specifically for CircleCI server and its components, rather than using an existing VPC.
+
+*  **Subnet Provisioning**
++
+For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
 
 [#supported-kubernetes-versions]
 === Supported Kubernetes versions
@@ -127,7 +133,7 @@ There are no requirements regarding VPC setup or disk size for your cluster. It 
 |===
 
 [#minimum-permissions-requirments]
-=== Minimum permissions requirments
+=== Minimum permissions requirements
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
@@ -154,7 +160,7 @@ eksctl utils write-kubeconfig --cluster circleci-server
 
 NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary to use `eksctl`. See the AWS documentation on link:https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
 
-NOTE: As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as Postgres, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
+NOTE: As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as PostgreSQL, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
 
 endif::env-gcp[]
 
@@ -288,8 +294,8 @@ If using GitHub Enterprise, you also need a personal access token and the domain
 Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI server.
 
 [#static-ip-address]
-== 4. Static IPs
-It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is reprovisioned.
+== 4. Static IP addresses
+It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is re-provisioned.
 
 ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
@@ -327,7 +333,7 @@ endif::env-aws[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
-By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
@@ -353,7 +359,7 @@ ifndef::env-gcp[]
 [#aws-route-53]
 === AWS Route 53
 
-. If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. You can install the plugin with the following command:
+. If you are using AWS Route 53 for DNS, you need the `certbot-route53` plugin installed. You can install the plugin with the following command:
 +
 [source,shell]
 ----
@@ -374,14 +380,14 @@ ifndef::env-aws[]
 [#google-cloud-dns]
 === Google Cloud DNS
 
-. If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
+. If you host your DNS on Google Cloud, you need the `certbot-dns-google` plugin installed. You can install the plugin with the following command:
 +
 [source,shell]
 ----
 python3 -m pip install certbot-dns-google
 ----
 . The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
-.. Create a custom role for certbot:
+.. Create a custom role for Certbot:
 +
 [source,shell]
 ----
@@ -433,7 +439,7 @@ CircleCI server listens on the following port numbers, which need to be configur
 
 Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports.
 
-NOTE: The Output Processor service communicates using gRPC and requires the proxy or loadbalancer to support HTTP/2.
+NOTE: The Output Processor service communicates using gRPC and requires the proxy or load balancer to support HTTP/2.
 
 endif::env-aws[]
 
@@ -780,7 +786,7 @@ aws iam put-user-policy \
   --policy-document file://policy.json
 ----
 
-. Create Access Key for user circleci-server.
+. Create Access Key for user `circleci-server`.
 +
 NOTE: You will need this when you configure your server installation later.
 +
@@ -870,7 +876,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 --
 **Option 2:** Static credentials
 
-If you are not using Workload Identity, create a json file containing static credentials.
+If you are not using Workload Identity, create a JSON file containing static credentials.
 
 [source,shell]
 ----

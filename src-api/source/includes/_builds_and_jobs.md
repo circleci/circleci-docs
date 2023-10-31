@@ -273,6 +273,10 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
 }
 ```
 
+<aside class="warning">
+We recommend migrating from this endpoint to use API v2  <a href="https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline">trigger a pipeline</a>.
+</aside>
+
 **`POST` Request:** Triggers a new job and then returns a summary of the job run.
 
 **Parameter** | **Description**
@@ -370,11 +374,11 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 }
 ```
 
-**`POST` Request:** Triggers a new job and then returns a summary of the job run.
-
-<aside class="notice">
-For more about build parameters, refer to the guide for <a href="https://circleci.com/docs/inject-environment-variables-with-api/#api-v1">injecting environment variables with API v1</a>. The response for “failed” should be a boolean `true` or `null`.
+<aside class="warning">
+We recommend migrating from this endpoint to use API v2  <a href="https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline">trigger a pipeline</a>.
 </aside>
+
+**`POST` Request:** Triggers a new job and then returns a summary of the job run.
 
 **Parameter** | **Description**
 ------- | -------------
@@ -384,6 +388,10 @@ build_parameters | Additional environment variables to inject into the job envir
 **Note** Triggering a new job with a branch is not currently supported with configurations that specify `version: 2.1`.
 
 ## Trigger a new Pipeline by Project
+
+<aside class="warning">
+We recommend migrating from this endpoint to use API v2  <a href="https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline">trigger a pipeline</a>.
+</aside>
 
 ```sh
 curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build -H "Circle-Token: <circle-token>"

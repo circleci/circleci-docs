@@ -793,6 +793,9 @@ jobs:
 #### **`machine`**
 {: #machine }
 
+**CircleCI Cloud** The use of `machine: true` is deprecated. You must specify an image to use.
+{: class="alert alert-caution"}
+
 The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
@@ -804,17 +807,24 @@ docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer 
 
 Example:
 
-```yaml
-version: 2.1
+{:.tab.machine.Cloud}
+```yml
 jobs:
-  build:
-    machine:
-      image: ubuntu-2004:202010-01
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:current # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+
     steps:
-      - checkout
-      - run:
-          name: "Testing"
-          command: echo "Hi"
+        # Commands run in a Linux virtual machine environment
+```
+
+{:.tab.machine.Server}
+```yml
+jobs:
+  build: # name of your job
+    machine: true # executor type
+    steps:
+      # Commands run in a Linux virtual machine environment
 ```
 
 ---
@@ -1064,6 +1074,9 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 
 ##### Windows execution environment
 {: #windows-execution-environment }
+
+The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+{: class="alert alert-info"}
 
 {% include snippets/windows-resource-table.md %}
 
@@ -1850,13 +1863,9 @@ Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** u
 ##### Using `pipeline` values
 {: #using-pipeline-values }
 
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
 
-{% include snippets/pipeline-values.md %}
-
-For a list of pipeline values compatible with GitLab, see the [Pipeline values and parameters](/docs/pipeline-variables/) page.
-
-For example:
+Example:
 
 ```yaml
 version: 2.1
