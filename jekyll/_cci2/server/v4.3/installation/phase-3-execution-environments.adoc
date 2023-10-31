@@ -490,11 +490,12 @@ Once you have configured the environmental variables and contexts, rerun the rea
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
 [#machine-provisioner]
-== 3. Machine Provisioner
+== 3. Machine provisioner
 
-Machine Provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm VM execution environments, and those that are configured to use xref:../../../configuration-reference#setupremotedocker[remote Docker]. Machine Provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+Machine provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm VM execution environments, and those that are configured to use xref:../../../configuration-reference#setupremotedocker[remote Docker]. Machine provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
-NOTE: Once you have completed the server installation process you can further configure Machine Provisioner, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:../operator/manage-virtual-machines-with-machine-provisioner[Managing Virtual Machines with Machine Provisioner] page.
+NOTE: Once you have completed the server installation process you can further configure machine provisioner, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:../operator/manage-virtual-machines-with-machine-provisioner[Managing Virtual Machines with machine provisioner] page.
+
 NOTE: Overriding scaling options is currently not supported, but will be supported in the future.
 
 ifndef::env-gcp[]
@@ -520,11 +521,11 @@ aws eks describe-cluster --name=<cluster-name> --query "cluster.kubernetesNetwor
 
 . *Create a security group*
 +
-Run the following commands to create a security group for Machine Provisioner:
+Run the following commands to create a security group for machine provisioner:
 +
 [source,shell]
 ----
-aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI Machine Provisioner security group" --group-name "circleci-machine-provisioner-sg"
+aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI machine provisioner security group" --group-name "circleci-machine-provisioner-sg"
 ----
 +
 This outputs a GroupID to be used in the next steps:
@@ -536,7 +537,7 @@ This outputs a GroupID to be used in the next steps:
 
 . *Apply the security group for SSH (If using public IPs for machines)*
 +
-If using public IPs for Machine Provisioner instances, run the following command to apply the security group rules so users can SSH into their jobs:
+If using public IPs for machine provisioner instances, run the following command to apply the security group rules so users can SSH into their jobs:
 +
 [source,shell]
 ----
@@ -550,7 +551,7 @@ There are two ways to authenticate CircleCI with your cloud provider: IAM Roles 
 
 [.tab.vmauthaws.IRSA]
 --
-The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring Machine Provisioner in CircleCI.
+The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring machine provisioner in CircleCI.
 
 . *Create indentity provider*
 +
@@ -712,13 +713,12 @@ Attach the policy to the role:
 aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_ARN>
 ----
 
-. *Configure Machine Provisioner*
+. *Configure machine provisioner*
 +
-Configure Machine Provisioner by adding the following to `values.yaml`:
+Configure machine provisioner by adding the following to `values.yaml`:
 +
-
-Note: If deploying in specific zone need to specify subnetwork for GCP
-
+NOTE: If deploying in specific zone need to specify subnetwork for GCP
++
 [source,yaml]
 ----
 machine_provisioner:
@@ -745,12 +745,12 @@ Create a new user with programmatic access:
 aws iam create-user --user-name circleci-machine-provisioner
 ----
 +
-Optionally, machine-provisioner does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
-Once done, you may skip to step 9, enabling machine-provisioner.
+Optionally, machine provisioner does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
+Once done, you may skip to step 9, enabling machine provisioner.
 +
 . *Create policy*
 +
-Create a `policy.json` file with the following content. You should fill in the ID of the Machine Provisioner security group created in step 2 (`MachineProvisionerSecurityGroupID`) and VPC ID (`vpcID`) below.
+Create a `policy.json` file with the following content. You should fill in the ID of the machine provisioner security group created in step 2 (`MachineProvisionerSecurityGroupID`) and VPC ID (`vpcID`) below.
 +
 [source,json]
 ----
@@ -855,7 +855,7 @@ aws iam create-access-key --user-name circleci-machine-provisioner
 . *Configure server (there are two options)*
 +
 * *Option 1 - Add the keys to `values.yaml`*
-Add the Machine Provisioner configuration to `values.yaml`.
+Add the machine provisioner configuration to `values.yaml`.
 +
 [source,shell]
 ----
@@ -923,7 +923,7 @@ External VMs need the networking rules described in xref:hardening-your-cluster/
 
 . *Create user*
 +
-We recommend you create a unique service account used exclusively by Machine Provisioner. The Compute Instance Admin (Beta) role is broad enough to allow Machine Provisioner to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[documentation] as reference.
+We recommend you create a unique service account used exclusively by machine provisioner. The Compute Instance Admin (Beta) role is broad enough to allow machine provisioner to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[documentation] as reference.
 +
 [source,shell]
 ----
@@ -985,13 +985,13 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *Configure CircleCI server*
 +
-When using service account keys for configuring access for the Machine Provisioner, there are two options.
+When using service account keys for configuring access for the machine provisioner, there are two options.
 +
 [.tab.configureserver.CircleCI_creates_Secret]
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
-Add the Machine Provisioner configuration to values.yaml.
+Add the machine provisioner configuration to `values.yaml`.
 
 [source,yaml]
 ----
@@ -1034,7 +1034,7 @@ kubectl create secret generic machine-provisioner-secret \
 endif::env-aws[]
 
 [#machine-provisioner-validation]
-=== Machine Provisioner Validation
+=== Machine provisioner validation
 
 Apply they changes made to your `values.yaml` file.
 
@@ -1044,7 +1044,7 @@ namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion43} -f <path-to-values.yaml>
 ----
 
-Once you have configured and deployed CircleCI server, you should validate that Machine Provisioner is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the Machine Provisioner Jobs complete. At this point, all tests should pass.
+Once you have configured and deployed CircleCI server, you should validate that machine provisioner is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the machine provisioner Jobs complete. At this point, all tests should pass.
 
 [#runner]
 == 4. Runner

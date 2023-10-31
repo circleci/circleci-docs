@@ -894,7 +894,7 @@ Now we will move on to build services. It may take a while for all your services
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-NOTE: Machine Provisioner and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
+NOTE: Machine provisioner and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
 
 ifndef::pdf[]
 [#next-steps]
