@@ -62,7 +62,7 @@ nano $HOME/Library/Preferences/com.circleci.runner/config.yaml
 [,shell]
 ----
 runner:
-  name: "my-osx-runner"
+  name: "my-macos-runner"
   working_directory: "/Users/$USER/Library/com.circleci.runner/workdir"
   cleanup_working_directory: true
 api:
@@ -94,7 +94,7 @@ logging:
 [#review-accept-apple-signature-notarization]
 == 3. Review and accept the Apple signature notarization
 
-The binary must be approved to run on your macOS system because the self-hosted runner is not compiled from source during installation. This can be done via the UI by accepting the macOS pop-up asking if you wish to run the binary from the internet, or programmatically.
+The binary must be approved to run on your macOS system because the self-hosted runner is not compiled from source during installation. This can be done via the macOS UI by accepting the pop-up asking if you wish to run the binary from the internet, or programmatically.
 
 . Verify the signature and notarization with this command:
 +
@@ -177,3 +177,8 @@ $HOME/Library/Logs/com.circleci.runner/runner.log
 {% include snippets/machine-runner-example.adoc %}
 
 The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
+
+[#additional-resources]
+== Additional resources
+
+-xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
