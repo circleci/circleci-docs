@@ -14,36 +14,51 @@ contentTags:
 
 This page describes the steps needed to upgrade your CircleCI server installation to v4.3.
 
-A successful deployment will update the web app. Unless noted in the release notes, updates are rolling updates and there is no downtime.
+A successful deployment will update the web app. This upgrade to v4.3 is a disruptive process and downtime is expected.
 
 NOTE: We recommend that you do not skip releases when upgrading.
 
-Please note the following changes in the 4.3 upgrade.
+[#notes]
+== Notes on changes in v4.3
 
-* Docker Layer Caching (DLC)
-** Old DLC volumes will not be carried over and need to be wiped manually
-** Projects that stop using DLC will not delete final DLC cache without manual intervention
-** DLC now runs through S3 and GCS instead of SSD Volumes
+Please note the following significant changes in server v4.3.
 
-* Machine jobs
-** machine jobs will now run through _machine provisioner_
-** When migrating `vm-gc` will need to clean up all machines left running before it is removed. All other `vm-service` related pods can be removed during migration first. If this is not followed, `vm-service` machines will not be cleaned up without manual intervention. This can alternatively be done by manually cleaning up remaining VMs before starting machine provisioner.
-** Machine and remote Docker jobs no longer flow through Nomad, and they run completely in a single machine. Nomad is **not** required to run machine jobs.
-** If deploying in a specific zone need to specify subnetwork for GCP
-** IAM users have changed names to end with `machine-provisioner` instead of `vm-service` so some users might need to be altered.
+[#dlc]
+=== Docker Layer Caching (DLC)
 
-* Docker jobs
-** Run through Nomad, but are orchestrated through `docker-provisioner`
+* Old DLC volumes will not be carried over and need to be wiped manually
+* Projects that stop using DLC will not delete final DLC cache without manual intervention
+* DLC now runs through S3 and GCS instead of SSD Volumes
 
-* Storage
-** Excluding DLC, historical artifacts will continue to be supported in the new execution system with no user changes
+[#machine]
+=== Machine jobs
 
-* PostgreSQL
-** The PostgreSQL image will be updated during this release, which will cause a short downtime.
+* Machine jobs will now run through _machine provisioner_
+* When migrating `vm-gc` will need to clean up all machines left running before it is removed. All other `vm-service` related pods can be removed during migration first. If this is not followed, `vm-service` machines will not be cleaned up without manual intervention. This can alternatively be done by manually cleaning up remaining VMs before starting machine provisioner.
+* Machine and remote Docker jobs no longer flow through Nomad, and they run completely in a single machine. Nomad is **not** required to run machine jobs.
+* If deploying in a specific zone need to specify subnetwork for GCP
+* IAM users have changed names to end with `machine-provisioner` instead of `vm-service` so some users might need to be altered.
 
-* Workflows conductor
-** There is a `workflows-conductor` data migration that will run as a job in the background after your upgrade. The migration processes projects in batches of 1000 and sleeps for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores, but in our production environment, a batch of 1000 projects took around 6 seconds.
-** Ensure that your CircleCI server v4.3 installation is left running until after the migration has completed. You can confrim that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
+[#docker-jobs]
+=== Docker jobs
+
+* Run through Nomad, but are orchestrated through `docker-provisioner`
+
+[#storage]
+=== Storage
+
+* Excluding DLC, historical artifacts will continue to be supported in the new execution system with no user changes
+
+[#postgresql]
+=== PostgreSQL
+
+* The PostgreSQL image will be updated during this release, which will cause a short downtime.
+
+[#workflows-conductor]
+=== Workflows conductor
+
+* There is a `workflows-conductor` data migration that will run as a job in the background after your upgrade. The migration processes projects in batches of 1000 and sleeps for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores, but in our production environment, a batch of 1000 projects took around 6 seconds.
+* Ensure that your CircleCI server v4.3 installation is left running until after the migration has completed. You can confrim that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
 
 
 [#prerequisites]
