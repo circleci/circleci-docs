@@ -148,6 +148,30 @@ jobs:
 
 The `circleci tests split` command has been superceded by `circleci tests run` as this command also gives you access to the [rerun failed tests](/docs/rerun-failed-tests/) options.
 
+
+### JUnit XML report formatting
+{: #junit-xml-reports}
+
+CircleCI requires test results to be uploaded as JUnit XML reports. The following formatting allows CircleCI to parse timing data from test results and use the data for test splitting:
+
+* The `file` attribute, either on the `<testsuite>` or `<testcase>` tag
+* The `time` attribute, on the `<testcase>` tag
+
+The following example is a snippet from an XML file with a format that CircleCI can parse:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" tests="3" failures="1">
+  <testsuite tests="3">
+    <testcase classname="foo1" name="ASuccessfulTest" time="10" file="src/__tests__/App.test.js" />
+    <testcase classname="foo2" name="AnotherSuccessfulTest" time="5" file="src/__tests__/App.test.js" />
+    <testcase classname="foo3" name="AFailingTest" time="1.1050" file="src/__tests__/App.test.js">
+        <failure type="NotEnoughFoo"> details about failure </failure>
+    </testcase>
+  </testsuite>
+</testsuites>
+```
+
 ## Manual allocation
 {: #manual-allocation }
 
