@@ -1,0 +1,26 @@
+---
+readtime: false
+contentTags:
+  platform:
+  - Cloud
+  - Server
+---
+= Open Source Acknowledgments
+:page-layout: classic-docs
+:page-description: List and acknowledgements for open-source projects and libraries that are used in CircleCI products and services.
+:icons: font
+:page-liquid:
+:experimental:
+
+This page provides the details of 3rd-party open source components used in CircleCI products.
+
+[.tab.oss-ack.Release_agent]
+--
+The following 3rd-party open source components are used in the CircleCI release agent. The release agent is used to integrate CircleCI with Kubernetes clusters for release management. For more information, see the xref:/release/releases-overview#[Releases docs].
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even,format=csv]
+|===
+include::release-agent.csv[]
+|===
+--

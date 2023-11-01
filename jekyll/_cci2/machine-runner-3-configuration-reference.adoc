@@ -163,7 +163,8 @@ Example:
 
 ```yaml
 runner:
-  working_directory: /var/opt/circleci/%s
+  working_directory: "/var/lib/circleci-runner/workdir"
+  cleanup_working_directory: false
 ```
 
 `$CIRCLECI_RUNNER_CLEANUP_WORK_DIR`

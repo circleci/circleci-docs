@@ -8,7 +8,7 @@ macos.m1.large.gen1 | 8 @ 3.2 GHz | 12GB | <i class="fa fa-check" aria-hidden="t
 **We are deprecating support for all Intel-based macOS resources.**
 <br>
 <br>
-The `macos.x86.medium.gen2` resource class is being deprecated on January 31, 2024. Xcode v15.1 is the latest version that will be supported by this macOS resource.
+The `macos.x86.medium.gen2` resource class is being deprecated on June 28, 2024. Xcode v15.1 is the latest version that will be supported by this macOS resource.
 <br>
 <br>
 See our [announcement](https://discuss.circleci.com/t/macos-intel-support-deprecation-in-january-2024/48718) for more details.

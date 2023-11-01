@@ -10,15 +10,21 @@ cron
 namespace
 hostname
 stderr
+XML
+kubectl
+Gbps
+Subnet
+subnet
+Autoscaler
+autoscaler
+Certbot
+keyset
 Rollout
 Rollouts
 Asciidoctor
 endraw
 HPA
 HPAs
-Autoscaler
-Autoscalers
-XML
 config policies
 config policy
 Config policies

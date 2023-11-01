@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI では、コンテキストを使用するジョブの環境変数で OpenID Connect ID (OIDC) トークンを利用できます。 ジョブは、CircleCI に永続的な認証情報を保存することなく、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
+CircleCI では、環境変数で OpenID Connect ID (OIDC) トークンを利用できます。 ジョブは、CircleCI に永続的な認証情報を保存することなく、このトークンを使って互換性のあるクラウドサービスにアクセスすることができます。
 
 [#openid-connect-id-token-availability]
 == OpenID Connect の IDトークン利用可能

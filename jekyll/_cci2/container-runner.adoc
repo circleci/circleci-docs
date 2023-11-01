@@ -127,7 +127,9 @@ Even if there is no further pod configuration, the resource class must be presen
 Additional instructions can be found in our link:https://support.circleci.com/hc/en-us/articles/15773444776731-How-to-use-customSecret-on-Container-Runner[Support Center].
 
 [#parameters]
-=== Helm Chart Parameters
+== Helm Chart Parameters
+
+The container runner helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here].
 
 The following are **CircleCI specific settings**:
 

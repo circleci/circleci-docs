@@ -8,12 +8,16 @@ en:
             link: about-circleci
           - name: Benefits of CircleCI
             link: benefits-of-circleci
+          - name: Web app introduction
+            link: introduction-to-the-circleci-web-app
+      - name: Reference
+        children:
           - name: Concepts
             link: concepts
           - name: Glossary
             link: glossary
-          - name: Web app introduction
-            link: introduction-to-the-circleci-web-app
+          - name: Open source acknowledgements
+            link: open-source
 
   - name: Getting started
     icon: icons/sidebar/continue.svg
