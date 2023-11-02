@@ -18,6 +18,12 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
+== Release 3.4.8
+
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-8[changelog].
+
 == Release 3.4.7
 
 === Upgrade notes

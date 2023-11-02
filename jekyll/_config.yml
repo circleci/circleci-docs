@@ -68,7 +68,7 @@ server-attributes: &server
   serverversion4: 4.0.4
   serverversion41: 4.1.5
   serverversion42: 4.2.1
-  serverversion: 3.4.6
+  serverversion: 3.4.8
   terraformversion: 0.15.4
   kubectlversion: 1.19
   helmversion: 3.9.2
