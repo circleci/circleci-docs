@@ -64,8 +64,8 @@ The following versions have been tested and proven to work. Older versions may w
 |Tested versions
 
 |Kubernetes
-a| 1.28.0 +
-1.27.0
+a| 1.27.0 +
+1.26.0
 
 |Helm
 a| 3.12.0 +
