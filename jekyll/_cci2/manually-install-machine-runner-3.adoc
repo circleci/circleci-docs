@@ -3,10 +3,10 @@ contentTags:
   platform:
   - Cloud
 ---
-= Manually run machine runner 3.0 - Open preview
+= Manually install machine runner 3.0 - Open preview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Instructions on how to manually start CircleCI's self-hosted machine runner (3.0) on macOS and linux.
+:page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3.0 on macOS and Linux.
 :icons: font
 :experimental:
 :machine:
@@ -17,8 +17,9 @@ NOTE: Machine runner 3.0 is currently in open preview
 
 This page describes how to manually start CircleCI's machine runner 3.0 on macOS and linux.
 
-WARN: The recommended method for installing and using the CircleCI machine runner 3.0 with xref:install-machine-runner-3-on-macos.adoc[the homebrew package] on macOS and xref:install-machine-runner-3-on-linux.adoc[the linux packages] on linux.
-WARN: A manually installed CircleCI machine runner 3.0 will not automatically update.
+CAUTION: The recommended method for installing and using the CircleCI machine runner 3.0 is with xref:install-machine-runner-3-on-macos.adoc[the homebrew package] on macOS and xref:install-machine-runner-3-on-linux.adoc[the linux packages] on linux.
+
+WARNING: A manually installed CircleCI machine runner 3.0 will not automatically update.
 
 [#prerequisites]
 == Prerequisites
@@ -39,65 +40,68 @@ WARN: A manually installed CircleCI machine runner 3.0 will not automatically up
 
 == 2. Download the CircleCI machine runner for macOS
 
-NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$RUNNER_VERSION` environment variable can be changed from the value of `current` to the specific prefered version. 
-+
+NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$RUNNER_VERSION` environment variable can be changed from the value of `current` to the specific prefered version.
+
 [,shell]
----
+----
 export RUNNERVERSION='current'
 export CPUARCH=$(/usr/bin/arch | grep 'x86_64' && echo 'amd64' || echo 'arm64')
 export OSTARGET=$(uname -s | tr '[:upper:]' '[:lower:]')
 curl -s -L "https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/${RUNNERVERSION}/circleci-runner_${OSTARGET}_${CPUARCH}.tar.gz" -o $HOME/circleci-runner.tar.gz && tar -zxvf $HOME/circleci-runner.tar.gz
----
+----
 
 == 3. Mark the CircleCI machine runner as executable
+
+Update permissions for your CircleCI machine runner to enable running its binary:
+
 [,shell]
-The downloaded CircleCI machine runner will need to have its permissions configured to enable running its binary.
-+
----
+----
 chomd +x $HOME/circleci-runner
----
+----
 
 == 4. Create the CircleCI machine runner configuration and working directory
-. Create the directory where CircleCI machine runner jobs will start in
+
+. Create the directory in which CircleCI machine runner jobs will start:
 +
 [,shell]
----
+----
 mkdir $HOME/circleci
----
+----
 
-. Create the CircleCI runner configuration file.
+. Create a CircleCI runner configuration file:
 +
 [,shell]
----
+----
 touch $HOME/circleci-runner-config.yaml
----
+----
 
-. Populate the newly created file with the configuration for your runner. An example can be seen below. 
-
+. Populate the newly created file with the configuration for your runner. An example can be seen below.
++
 NOTE: You will need to change the auth_token value from `"your-auth-token"` to the resource class token created in step 1.
 +
 [,shell]
----
+----
 nano $HOME/circleci-runner-config.yaml
----
+----
 +
 [,shell]
----
+----
 runner:
   name: "my-macos-runner"
   working_directory: "$HOME/circleci"
   cleanup_working_directory: true
 api:
   auth_token: "your-auth-token"
----
+----
 
 == 5. Start the CircleCI machine runner
+
 [,shell]
----
+----
 $HOME/circleci-runner --config $HOME/circleci-runner-config.yaml
----
+----
 
 [#additional-resources]
 == Additional resources
 
--xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
