@@ -233,7 +233,7 @@ en:
           - name: Install on macOS
             link: install-machine-runner-3-on-macos
           - name: Manual installation
-            link: manually-install-machine-runner-3
+            link: machine-runner-3-manual-installation
           - name: Migrate from launch agent to machine runner 3.0
             link: migrate-from-launch-agent-to-machine-runner-3
           - name: Machine runner 3.0 configuration reference
