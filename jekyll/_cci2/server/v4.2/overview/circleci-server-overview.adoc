@@ -354,13 +354,17 @@ We do our best to support a wide range of platforms for installation. We use env
 | Tested
 |
 
+| Local installation
+| Tested
+| See xref:../air-gapped-installation/phase-1-prerequisites#[Air gapped installation] docs
+
 | Azure
 | Untested
-| Should work with Minio Azure gateway and Runner.
+| Should work with MinIO and Runner.
 
 | Digital Ocean
 | Untested
-| Should work with Minio Digital Ocean gateway and Runner.
+| Should work with MinIO and Runner.
 
 | OpenShift
 | Untested
@@ -368,7 +372,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Rancher
 | Untested
-| Should work with Minio and Runner.
+| Should work with MinIO and Runner.
 |===
 
 ifndef::pdf[]
