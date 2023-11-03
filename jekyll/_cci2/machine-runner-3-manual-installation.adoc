@@ -39,7 +39,7 @@ WARNING: If you follow this manual installation method, CircleCI machine runner 
 [#download-circleci-runner]
 
 [#download-machine-runner]
-== 2. Download the CircleCI machine runner for macOS
+== 2. Download the CircleCI machine runner
 
 NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$RUNNER_VERSION` environment variable can be changed from the value of `current` to the specific preferred version.
 
