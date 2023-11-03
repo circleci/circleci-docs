@@ -6,3 +6,5 @@ match: $sentence
 exceptions:
   - ABC
   - add
+  - CircleCI
+  - Linux
