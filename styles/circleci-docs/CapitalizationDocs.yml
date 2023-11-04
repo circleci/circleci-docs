@@ -1,0 +1,10 @@
+extends: capitalization
+message: "'%s' should be in sentence case"
+level: warning
+# $title, $sentence, $lower, $upper, or a pattern.
+match: $sentence
+exceptions:
+  - ABC
+  - add
+  - CircleCI
+  - Linux
