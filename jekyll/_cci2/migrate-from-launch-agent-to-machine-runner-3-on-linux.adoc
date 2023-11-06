@@ -3,20 +3,18 @@ contentTags:
   platform:
   - Cloud
 ---
-= Migrate from launch agent to machine runner 3.0 - Open preview
+= Migrate from launch agent to machine runner 3.0 on Linux - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview
 :icons: font
 :toc: macro
 :toc-title:
-:machine:
 :experimental:
+:machine:
 :linux:
 
 This page describes how to migrate an existing launch agent installation to machine runner 3.0. Machine runner 3.0 includes improved network resiliency, and a simpler installation management strategy, utilizing operating system packages.
-
-NOTE: Machine runner 3.0 is currently in **open preview**, and is currently available on **Linux** only
 
 Migrating from launch agent to machine runner 3.0 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3.0 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
 
