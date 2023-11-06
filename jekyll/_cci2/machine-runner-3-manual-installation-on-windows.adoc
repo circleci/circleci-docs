@@ -34,7 +34,7 @@ This page describes how to manually run CircleCI's machine runner 3.0 on Windows
 
 NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$runnerVersion` variable can be changed from the value of `current` to the specific preferred version.
 
-[,shell]
+[,powershell]
 ----
 $runnerVersion = "current"
 $availableAgents = (Invoke-WebRequest "https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/manifest.json" -UseBasicParsing).Content.Trim() | ConvertFrom-Json
@@ -57,7 +57,7 @@ del $agentFile
 
 NOTE: The runner token created in #create-namespace-and-resource-class will need to be substituted in for the auth_token
 
-[,shell]
+[,powershell]
 ----
 New-Item -Name Workdir -ItemType Directory
 @"
