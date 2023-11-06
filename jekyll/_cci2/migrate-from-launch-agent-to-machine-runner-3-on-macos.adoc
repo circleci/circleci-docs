@@ -29,21 +29,9 @@ sudo rm -f '/Library/LaunchDaemons/com.circleci.runner.plist'
 sudo rm -rf '/opt/circleci'
 ----
 
-[#move-existing-launch-agent-config]
-== 2. Move the existing launch agent config
-Machine runner 3.0 is backwards compatible with the launch agent configuration, it can be reused instead of creating a whole new configuration file and runner token for a macOS machine runner. 
-
-[,shell]
-----
-mkdir -p $HOME/Library/Preferences/com.circleci.runner
-sudo chown $USER: /Library/Preferences/com.circleci.runner
-mv /Library/Preferences/com.circleci.runner/launch-agent-config.yaml $HOME/Library/com.circleci.runner
-sudo rm -rf /Library/Preferences/com.circleci.runner
-----
-
 [#install-macos-machine-runner]
-== 3. Install the macOS Machine Runner 3.0
-Follow the instructions in xref:install-machine-runner-3-on-macos[Install machine runner 3.0 on macOS] to install machine runner 3.0 using a homebrew package.
+== 2. Install the macOS Machine Runner 3.0
+Follow the instructions in xref:install-machine-runner-3-on-macos#install-circleci-runner[Install machine runner 3.0 on macOS] to install machine runner 3.0 using a homebrew package.
 
 [#additional-resources]
 == Additional resources
