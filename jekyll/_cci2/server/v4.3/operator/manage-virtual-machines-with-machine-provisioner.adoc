@@ -21,7 +21,7 @@ NOTE: Prescaling controls will be exposed in a future release for tuning.
 CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
 
 [#provider]
-== provider
+== Provider
 The following configuration options are for the machine provisioner provider, either AWS or GCP.
 
 [#aws]

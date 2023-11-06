@@ -20,9 +20,7 @@ contentTags:
 [#migration]
 == Migrate
 
-NOTE: The migration process requires that you install v4.0.x first before moving to subsequent releases.
-
-For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
+NOTE: The migration process for v3.x to v4.x requires that you install v4.0.x first before moving to subsequent releases. For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
 
 Find information about migration in the following guides:
 
@@ -31,7 +29,7 @@ Find information about migration in the following guides:
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide].
+For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide]. There is a background database migration job that is run on install/upgrade to server 4.3. Customers upgrading to 4.3 **must ensure** this job completes.
 
 [#release-4-3-0]
 == Release 4.3.0

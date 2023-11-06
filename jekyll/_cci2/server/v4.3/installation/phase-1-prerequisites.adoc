@@ -133,7 +133,7 @@ For high availability, and to avoid potential outages, you should provision subn
 |===
 
 [#minimum-permissions-requirments]
-=== Minimum permissions requirments
+=== Minimum permissions requirements
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
@@ -160,7 +160,7 @@ eksctl utils write-kubeconfig --cluster circleci-server
 
 NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary to use `eksctl`. See the AWS documentation on link:https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
 
-NOTE: As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as Postgres, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
+NOTE: As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as PostgreSQL, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
 
 endif::env-gcp[]
 
@@ -170,7 +170,7 @@ ifndef::env-aws[]
 === GKE
 You can learn more about creating a GKE cluster in the link:https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE docs].
 
-CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
+CAUTION: Do not use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
 . link:https://cloud.google.com/sdk/gcloud[Install] and link:https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project.
 +
@@ -294,7 +294,7 @@ If using GitHub Enterprise, you also need a personal access token and the domain
 Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI server.
 
 [#static-ip-address]
-== 4. Static IPs
+== 4. Static IP addresses
 It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is reprovisioned.
 
 ifndef::env-gcp[]
@@ -333,7 +333,7 @@ endif::env-aws[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
-By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
@@ -359,7 +359,7 @@ ifndef::env-gcp[]
 [#aws-route-53]
 === AWS Route 53
 
-. If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. You can install the plugin with the following command:
+. If you are using AWS Route 53 for DNS, you need the `certbot-route53` plugin installed. You can install the plugin with the following command:
 +
 [source,shell]
 ----
@@ -380,14 +380,14 @@ ifndef::env-aws[]
 [#google-cloud-dns]
 === Google Cloud DNS
 
-. If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
+. If you host your DNS on Google Cloud, you need the `certbot-dns-google` plugin installed. You can install the plugin with the following command:
 +
 [source,shell]
 ----
 python3 -m pip install certbot-dns-google
 ----
 . The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
-.. Create a custom role for certbot:
+.. Create a custom role for Certbot:
 +
 [source,shell]
 ----
@@ -782,7 +782,7 @@ aws iam put-user-policy \
   --policy-document file://policy.json
 ----
 
-. Create Access Key for user circleci-server.
+. Create Access Key for user `circleci-server`.
 +
 NOTE: You will need this when you configure your server installation later.
 +
@@ -872,7 +872,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 --
 **Option 2:** Static credentials
 
-If you are not using Workload Identity, create a json file containing static credentials.
+If you are not using Workload Identity, create a JSON file containing static credentials.
 
 [source,shell]
 ----

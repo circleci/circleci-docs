@@ -21,7 +21,7 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 
 NOTE: For installation instructions, you have the option of either the xref:../installation/phase-1-prerequisites#[regular] or xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] installation guide.
 
-.CircleCI Server v4.3 Architecture
+.CircleCI server v4.3 Architecture
 image::server-4-architecture-diagram.png[Server v4.3 services architecture]
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
@@ -54,28 +54,28 @@ The application exposes a number of external ports. These ports are used for var
 | Use
 | Notes
 
-| 80
+| `80`
 | TCP
 | Inbound
 | End users
 | HTTP web app traffic
 |
 
-| 443
+| `443`
 | TCP
 | Inbound
 | End users
 | HTTP web app traffic
 |
 
-| 22
+| `22`
 | TCP
 | Inbound
 | Administrators
 | SSH
 | Only required for the bastion host.
 
-| 64535-65535
+| `64535`-`65535`
 | TCP
 | Inbound
 |
@@ -102,135 +102,135 @@ CircleCI server v4.3 consists of the following services. Find their descriptions
 | What happens if it fails?
 | Notes
 
-| api-service
+| `api-service`
 | App Core
 | Provides a GraphQL API that provides data to render the web frontend.
 | Many parts of the UI (such as Contexts) will fail completely.
 |
 
-| audit-log-service
+| `audit-log-service`
 | App Core
 | Persists audit log events to blob storage for long-term storage.
 | Some events may not be recorded.
 |
 
-| branch-service
+| `branch-service`
 | App Core
 | A service responsible for listening to the event stream. Detects branch deletions, job updates, pushes, workflow updates.
 |
 |
 
-| builds-service
+| `builds-service`
 | App Core
 | Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service.
 |
 |
 
-| circleci-mongodb
+| `circleci-mongodb`
 | Execution
 | Primary datastore
 |
 |
 
-| circleci-postgres
+| `circleci-postgres`
 | Data storage for microservices.
 |
 |
 |
 
-| circleci-rabbitmq
+| `circleci-rabbitmq`
 | Pipelines and Execution
 | Queuing for workflow messaging, test results, usage, crons, output, notifications, and scheduler.
 |
 |
 
-| circleci-redis
+| `circleci-redis`
 | Execution
 | Caches data that will not be stored permanently (such as build logs), for request caching, and for rate limit calculations.
 | A failed cache can result in rate limiting from the VCS if too many calls are made to it.
 |
 
-| circleci-telegraf
+| `circleci-telegraf`
 |
 | Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
 but can also be configured to be exported to other places (such as Datadog or Prometheus).
 |
 |
 
-| circleci-vault
+| `circleci-vault`
 |
 | HashiCorp Vault to run encryption and decryption as a service for secrets.
 |
 |
 
-| contexts-service
+| `contexts-service`
 | App Core
 | Stores and provides encrypted contexts.
 | All builds using Contexts will fail.
 |
 
-| cron-service
+| `cron-service`
 | Pipelines
 | Triggers scheduled workflows.
 | Scheduled workflows will not run.
 |
 
-| distributor-*
+| `distributor-*`
 | App Core
 | Responsible for accepting build requests and destributing the job to appropriate queues.
 |
 |
 
-| domain-service
+| `domain-service`
 | App Core
 | Stores and provides information about our domain model. Works with permissions and API.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
 |
 
-| frontend
+| `frontend`
 | Frontend
 | CircleCI web app and www-api proxy.
 | The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK, but no updates will be seen.
 | Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests.
 
-| insights-service
+| `insights-service`
 | Metrics
 | A service to aggregate build and usage metrics for exporting and analysis.
 |
 |
 
-| kong
+| `kong`
 | App Core
 | API management.
 |
 |
 
 
-| legacy-notifier
+| `legacy-notifier`
 | App Core
 | Handles notifications to external services (for example, Slack or email).
 |
 |
 
-| nginx
+| `nginx`
 | App Core / Frontend
 | Handles traffic redirection and ingress.
 |
 |
 
-| nomad-autoscaler
+| `nomad-autoscaler`
 | Nomad
 | Manages scaling of Nomad clusters in AWS and GCP environments.
 |
 |
 
-| nomad-server
+| `nomad-server`
 | Nomad
 | Responsible for managing nomad clients.
 |
 |
 
-| orb-service
+| `orb-service`
 | Pipelines
 | Handles communication between orb registry and config.
 |
@@ -242,61 +242,61 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-| permissions-service
+| `permissions-service`
 | App Core
 | Provides the CircleCI permissions interface.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
 |
 
-| socketi
+| `socketi`
 | Frontend
 | Websockets server.
 |
 |
 
-| telegraf
+| `telegraf`
 | Metrics
 | Collection of metrics.
 |
 |
 
-| docker-provisioner
+| `docker-provisioner`
 | Docker Compute Management
 | Responsible for scheduling jobs on Nomad cluster(s).
 |
 |
 
-| machine-provisioner
+| `machine-provisioner`
 | Machine Compute Management
-| Periodically requests machines from compute provider to run job on for both machine and remote-docker jobs.
+| Periodically requests machines from compute provider to run jobs for both `machine` and remote Docker.
 | Periodically checks for stale machine and remote Docker instances and requests that provider removes them.
 |
 
-| execution-gateway
+| `execution-gateway`
 | Execution
 | Boundary for execution to provide API to rest of CircleCI
 |
 |
 
-| web-ui-*
+| `web-ui-*`
 | Frontend
 | Micro Front End (MFE) services used to render the frontend web application GUI.
 | The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
 | The MFEs are used to render the web application located at app.<my domain here>
 
-| webhook-service
+| `webhook-service`
 | App Core
 | Service reponsible for all webhooks, including management of state and handling events.
 |
 |
 
-| workflows-conductor-event-consumer
+| `workflows-conductor-event-consumer`
 | Pipelines
 | Takes in information from VCS to kick off pipelines.
 | New Pipelines will not be kicked off when there are changes in the VCS.
 |
 
-| workflows-conductor-grpc
+| `workflows-conductor-grpc`
 | Pipelines
 | Helps translate the information through gRPC.
 |
