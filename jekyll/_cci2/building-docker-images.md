@@ -119,7 +119,7 @@ CircleCI supports multiple versions of Docker.
 
 For **x86** architecture, the following versions are available:
 
-- `24.0.6` (default)
+- `default` (uses Docker version 24.0.6)
 - `20.10.24`
 - `20.10.23`
 - `20.10.18`
