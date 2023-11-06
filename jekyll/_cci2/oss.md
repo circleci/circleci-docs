@@ -43,7 +43,7 @@ To change this setting, go to the **Project Settings>Advanced** of your project 
 
 The ability to override the **Only build pull requests** setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
 
-Currently, the only way to override the **Only build pull requests** setting is to open a support request at [https://support.circleci.com/](https://support.circleci.com/). In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our [ideas forum](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests).
+You can override the **Only build pull requests** setting by utilizing the API and following the steps outlined in this [support article](https://support.circleci.com/hc/en-us/articles/15222074173723-How-to-allowlist-additional-branches-for-Only-Build-Pull-Requests).
 
 Enabling **Only build pull requests** may result in duplicate builds. You can find troubleshooting steps in this [support article](https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push).
 
