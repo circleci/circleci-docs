@@ -56,7 +56,7 @@ NOTE: If you are installing the Windows machine runner for CircleCI cloud, skip 
 [#installation-steps]
 == 3. Machine runner installation on Windows
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
@@ -80,7 +80,7 @@ After setup completes, the machine runner starts automatically and begins lookin
 
 Uninstalling machine runners will prepare the system for installation again.
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
 . Run the following in your PowerShell:
