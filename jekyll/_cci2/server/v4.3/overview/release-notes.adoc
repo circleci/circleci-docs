@@ -15,14 +15,16 @@ contentTags:
 [#overview]
 == Overview
 
-The v4.3 release introduces upgraded execution architecture. Previously execution was through VM service. This has been replaced with machine provisioner. The new architecture has improved efficiency and stability, and brings server inline with CircleCI cloud execution, so server will benefit from future updates faster. Some specific benefits include:
+The v4.3 release introduces upgraded execution architecture. Previously, VM service was responsible for creating virtual machines for `machine` and remote Docker jobs. This has been replaced with machine provisioner. The new architecture has improved efficiency and stability. This upgrade also brings server inline with CircleCI cloud execution, meaning server will benefit from future updates faster. Some specific benefits include:
 
+* A new UI for step output, which is better at handling larger output and colour.
+* New systems for processing job output (step data, caches, artifacts etc.) is much more efficient.
 * `machine` and remote Docker jobs no longer run through Nomad so compute costs are cut down significantly.
 * You do not need to run a Nomad cluster if you just want to run machine (and/or remote Docker jobs) on your server instance.
 * DLC is now configured to run through S3, which is cheaper than running on SSD volumes, and there is no longer a limit on the amount of DLC jobs that can be run in parallel. DLC stays more consistent with better pruning and is shared between all jobs in a project instead of each cache being different.
-* VM service could fall back to another region/zone, but machine provisioner can handle gaps in availability:
-** Distribute load across availability zones through round-robining
-** Send percentage of traffic to a different zone
+* VM service could fall back to another region/zone, but machine provisioner can handle gaps in availability through:
+** Distributing load across availability zones through round-robining
+** Sending a percentage of traffic to a different zone
 ** Instance type fallbacks based on deficits and success
 
 [#migration]
