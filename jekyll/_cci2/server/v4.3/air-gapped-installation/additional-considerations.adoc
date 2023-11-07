@@ -54,7 +54,7 @@ configs:
 [#service-type-load-balancers-k3s]
 == Service Type Load Balancers in K3s
 
-CircleCI server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` kubernetes resources to listen to traffic on multiple ports.
+CircleCI server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
 
 If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
 
@@ -91,7 +91,7 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 ----
 
-. After installing the Helm chart, the circleci-proxy service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the configmap above). The example below uses the IP address `10.0.0.5`.
+. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the configmap above). The example below uses the IP address `10.0.0.5`.
 +
 [source, bash]
 ----

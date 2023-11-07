@@ -152,7 +152,7 @@ CircleCI server v4.3 consists of the following services. Find their descriptions
 
 | `circleci-telegraf`
 |
-| Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
+| Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to Telegraf,
 but can also be configured to be exported to other places (such as Datadog or Prometheus).
 |
 |
@@ -177,7 +177,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | `distributor-*`
 | App Core
-| Responsible for accepting build requests and destributing the job to appropriate queues.
+| Responsible for accepting build requests and distributing the job to appropriate queues.
 |
 |
 
@@ -236,9 +236,9 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-| output and step
+| output
 | Execution
-| Receives job output and status updates and writes them to S3. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
+| Receives job output and status updates and writes them to S3. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, and test results.
 |
 |
 
@@ -251,6 +251,12 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | `socketi`
 | Frontend
 | Websockets server.
+|
+|
+
+| `step`
+| Frontend
+| Provides UI output in the job view
 |
 |
 
@@ -281,12 +287,12 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | `web-ui-*`
 | Frontend
 | Micro Front End (MFE) services used to render the frontend web application GUI.
-| The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
-| The MFEs are used to render the web application located at app.<my domain here>
+| The respective services page will fail to load. Example: A `web-ui-server-admin` failure means the server Admin page will fail to load.
+| The MFEs are used to render the web application located at `app.<my domain here>`
 
 | `webhook-service`
 | App Core
-| Service reponsible for all webhooks, including management of state and handling events.
+| Service responsible for all webhooks, including management of state and handling events.
 |
 |
 

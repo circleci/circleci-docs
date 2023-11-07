@@ -22,9 +22,9 @@ Best practice is to make as many of the resources as private as possible. If you
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
 
-NOTE: An nginx reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. nginx is responsible routing the traffic to the following services: `kong` and `nomad`.
+NOTE: An NGINX reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong` and `nomad`.
 
-CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+CAUTION: When using Amazon Certificate Manager (ACM), the name of the NGINX service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
 
 [#network-traffic]
 == Network traffic
@@ -36,7 +36,7 @@ The rules explained here are assumed to be stateful and for TCP connections only
 
 [#reverse-proxy-status]
 === Reverse proxy status
-You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
+You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both NGINX and Kong in CircleCI server, we expose the status pages of both via port 80.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -44,7 +44,7 @@ You may wish to check the status of the services routing traffic in your CircleC
 | Service
 | Endpoint
 
-| nginx
+| NGINX
 | `/nginx_status`
 
 | Kong
@@ -67,27 +67,27 @@ If the traffic rules for your load balancers have not been created automatically
 | Source
 | Purpose
 
-| circleci-proxy/-acm
+| `circleci-proxy/-acm`
 | 80
 | External
-| User Interface & Frontend API
+| User interface and frontend API
 
-| circleci-proxy/-acm
+| `circleci-proxy/-acm`
 | 443
 | External
-| User Interface & Frontend API
+| User interface and frontend API
 
-| circleci-proxy/-acm
+| `circleci-proxy/-acm`
 | 3000
 | Nomad clients
 | Communication with Nomad clients
 
-| circleci-proxy/-acm
+| `circleci-proxy/-acm`
 | 4647
 | Nomad clients
 | Communication with Nomad clients
 
-| circleci-proxy/-acm
+| `circleci-proxy/-acm`
 | 8585
 | Nomad clients
 | Communication with Nomad clients
@@ -104,7 +104,7 @@ These rules apply to all compute instances, but not to the load balancers.
 [#ingress-common]
 === Ingress
 If you want to access your instances using SSH, you will need to open port 22 for TCP connections for the instances in question.
-It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule when needed.
+It is recommended to scope the rule as closely as possible to allowed source IP addresses and/or only add such a rule when needed.
 
 [#egress-common]
 === Egress
@@ -120,7 +120,7 @@ By default, the traffic within your Kubernetes cluster is regulated by networkin
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 
-* link:https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
+* link:https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kubernetes Network Policy Overview]
 * link:https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
 * link:https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
 
@@ -242,7 +242,7 @@ machine_provisioner:
 By default, this option is set to false, meaning any instance created by machine provisioner will only be assigned a private IP address.
 
 [#private-ips-only]
-=== Private IPs only
+=== Private IP addresses only
 When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the link:https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
 
 Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
@@ -261,11 +261,11 @@ Within the ingress rules of the VM security group, the following rules can be cr
 |===
 
 [#using-public-ips]
-=== Using Public IPs
+=== Using Public IP addresses
 
-When the `assignPublicIP` option is set to true, all EC2 instances created by pachine provisioner are assigned **public** IPv4 addresses, and, as such, all services communicating with them do so via their public addresses.
+When the `assignPublicIP` option is set to true, all EC2 instances created by machine provisioner are assigned **public** IPv4 addresses. Also, all services communicating with them do so via their public addresses.
 
-When hardening an installation where the machine provisioner uses public IPs, the following rules can be created:
+When hardening an installation where the machine provisioner uses public IP addresses, the following rules can be created:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

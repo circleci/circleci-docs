@@ -31,7 +31,7 @@ To see some common upgrade path options, see link:https://support.circleci.com/h
 Please note the following significant changes in server v4.3.
 
 [#dlc]
-=== Docker Layer Caching (DLC)
+=== Docker layer caching (DLC)
 
 * Old DLC volumes will not be carried over and need to be wiped manually
 * Projects that stop using DLC will not delete final DLC cache without manual intervention
