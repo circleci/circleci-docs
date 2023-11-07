@@ -266,6 +266,12 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
+| `runner-admin`
+| Runner Admin
+| Manages Runner resource classes and tokens, & coordinates runner task handling
+|
+|
+
 | `docker-provisioner`
 | Docker Compute Management
 | Responsible for scheduling jobs on Nomad cluster(s).

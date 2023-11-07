@@ -1113,6 +1113,46 @@ a|AWS Authentication Config.
 |`false`
 |
 
+|`runner_admin.default_cpu_req`
+|number
+|`1`
+| Default CPU request for runner admin pods
+
+|`runner_admin.default_memory_req`
+|string
+|`"512M"`
+| Default memory request for runner admin pods
+
+|`runner_admin.default_cpu_limit`
+|number
+|`1`
+| Default CPU limit for runner admin pods
+
+|`runner_admin.default_memory_limit`
+|string
+|`"512M"`
+| Default memory limit for runner admin pods
+
+|`runner_admin.external.replics`
+|int
+|`1`
+|Number of replicas to deploy for the `runner-admin-external` deployment
+
+|`runner_admin.external.launch_agent_base_url`
+|string
+|"https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+|Location of the launch-agent binaries. hen using an air-gapped environment, the launch-agent binaries will need to be hosted within the air gap and this value updated.
+
+|runner_admin.internal.replicas
+|int
+|`1`
+|Number of replicas to deploy for the `runner-admin-internal` deployment
+
+|runner_admin.cleaner.replicas
+|int
+|`1`
+|Number of replicas to deploy for the `runner-admin-cleaner` deployment
+
 |`serveUnsafeArtifacts`
 |boolean
 |`false`
