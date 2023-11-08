@@ -236,6 +236,8 @@ en:
             link: install-machine-runner-3-on-linux
           - name: Install on macOS
             link: install-machine-runner-3-on-macos
+          - name: Install on Windows
+            link: install-machine-runner-3-on-windows
           - name: Manual installation
             link: machine-runner-3-manual-installation
           - name: Migrate from launch agent to machine runner 3.0

@@ -14,12 +14,11 @@ contentTags:
 
 This page describes how to install CircleCI's machine runner 3.0 on Windows. This has been tested for Windows Server 2019 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
-The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
+This page walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
 Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
 
-*The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.*
-
+NOTE: The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.
 
 [#prerequisites]
 == Prerequisites
@@ -61,9 +60,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the machine runner (`runner-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3.0 Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the machine runner (`runner-agent-config.yaml`) will open in Notepad. Fill in the requested information (see xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3.0 Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
-After setup completes, the machine runner starts automatically and begins looking for jobs to process.
+After your setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
 {% include snippets/machine-runner-example.adoc %}
 
@@ -85,11 +84,11 @@ Uninstalling machine runners will prepare the system for installation again.
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Continuous mode vs. single task mode for Windows self-hosted runners
 
-By default, Windows machine runners run in xref:machine-runner-3-configuration-reference.adoc#runner-mode[Machine Runner 3.0 Configuration Reference] in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
+By default, Windows machine runners run in xref:machine-runner-3-configuration-reference.adoc#runner-mode[Machine Runner 3.0 Configuration Reference] in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
 
-A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.
+A Windows machine runner *can* be run in `continuous` mode. However, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected, and job failure.
 
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Windows.
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner>> guide if you encounter issues installing or running machine runner on Windows.
