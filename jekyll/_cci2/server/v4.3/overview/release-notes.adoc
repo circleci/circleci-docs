@@ -1,0 +1,50 @@
+---
+contentTags:
+  platform:
+    - Server v4.3
+    - Server Admin
+---
+= CircleCI server v4.3 release notes
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Details of the new features included in each CircleCI server v4.3 release.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#overview]
+== Overview
+
+The v4.3 release introduces upgraded execution architecture. Previously, VM service was responsible for creating virtual machines for `machine` and remote Docker jobs. This has been replaced with machine provisioner. The new architecture has improved efficiency and stability. This upgrade also brings server inline with CircleCI cloud execution, meaning server will benefit from future updates faster. Some specific benefits include:
+
+* A new UI for step output, which is better at handling larger output and colour.
+* New systems for processing job output (step data, caches, artifacts etc.) is much more efficient.
+* `machine` and remote Docker jobs no longer run through Nomad so compute costs are cut down significantly.
+* You do not need to run a Nomad cluster if you just want to run machine (and/or remote Docker jobs) on your server instance.
+* DLC is now configured to run through S3, which is cheaper than running on SSD volumes, and there is no longer a limit on the amount of DLC jobs that can be run in parallel. DLC stays more consistent with better pruning and is shared between all jobs in a project instead of each cache being different.
+* VM service could fall back to another region/zone, but machine provisioner can handle gaps in availability through:
+** Distributing load across availability zones through round-robining
+** Sending a percentage of traffic to a different zone
+** Instance type fallbacks based on deficits and success
+
+[#migration]
+== Migrate
+
+NOTE: The migration process for v3.x to v4.x requires that you install v4.0.x first before moving to subsequent releases. For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
+
+Find information about migration in the following guides:
+
+* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
+* xref:../../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
+
+[#upgrade]
+== Upgrade
+For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide]. There is a background database migration job that is run on install/upgrade to server 4.3. When upgrading to 4.3 you **must ensure this job completes**.
+
+[#release-4-3-0]
+== Release 4.3.0
+
+[#changelog-4-3-0]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/server/changelog/#release-4-3-0[changelog].
