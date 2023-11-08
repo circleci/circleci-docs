@@ -96,7 +96,7 @@ image::task-lifecycle.png[Image showing the task lifecycle with no content messa
 
 - **Pod restart:** Check if there were any container agent pod restarts around the time the workflow ran. If the pod was restarted around that time it would have resulted in the job not being processed. In such a case, we recommend rerunning the job once again.
 
-You can check the logs for any of the previous runs using the command `kubectl logs $(kubectl get pods -l app=container-agent -o jsonpath='{.items[0].metadata.name}' -n <namespace>) --previous -n <namespace>  >> container-runner.logs
+You can check the logs for any of the previous runs using the command `kubectl logs  -n <namespace> <full pod name> --previous`
 `.
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
