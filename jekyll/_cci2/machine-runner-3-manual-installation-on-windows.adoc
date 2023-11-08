@@ -6,12 +6,12 @@ contentTags:
 = Machine runner 3.0 manual installation for Windows
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3.0 on Windows.
+:page-description: Instructions on how to manually install CircleCI's self-hosted machine runner 3.0 on Windows.
 :icons: font
 :machine:
 :Windows:
 
-This page describes how to manually run CircleCI's machine runner 3.0 on Windows Server.
+This page describes how to manually install CircleCI's machine runner 3.0 on Windows Server.
 
 [#prerequisites]
 == Prerequisites
@@ -30,7 +30,7 @@ This page describes how to manually run CircleCI's machine runner 3.0 on Windows
 
 [#download-machine-runner]
 == 2. Download the CircleCI machine runner
-. Using PowerShell download the current version of CircleCI machine runner and verify the download.
+Using PowerShell, download the current version of CircleCI machine runner and verify the download.
 
 NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$runnerVersion` variable can be changed from the value of `current` to the specific preferred version.
 
@@ -52,10 +52,11 @@ del $agentFile
 ----
 
 [#create-configuration-and-working-directory]
-3. Create the CircleCI machine runner configuration and working directory
-. Using PowerShell create the CircleCI machine runner configuration file and working directory.
+== 3. Create the CircleCI machine runner configuration and working directory
 
-NOTE: The runner token created in #create-namespace-and-resource-class will need to be substituted in for the auth_token
+Using PowerShell, create the CircleCI machine runner configuration file and working directory.
+
+NOTE: The runner token created in <<create-namespace-and-resource-class,Step 1>> will need to be substituted in for the `auth_token`
 
 [,powershell]
 ----
@@ -72,11 +73,11 @@ runner:
 logging:
   file: circleci-runner.log
 "@ -replace "([^`r])`n", "`$1`r`n" | Out-File machine-runner-config.yaml -Encoding ascii
-
 ----
 
 [#start-machine-runner]
 == 4. Start the CircleCI machine runner
+
 [,shell]
 ----
 ./circleci-runner.exe machine --config machine-runner-config.yaml
