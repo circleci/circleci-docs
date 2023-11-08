@@ -3,17 +3,14 @@ contentTags:
   platform:
   - Cloud
 ---
-= Machine runner 3.0 manual installation - Open preview
+= Machine runner 3.0 manual installation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3.0 on macOS and Linux.
 :icons: font
-:experimental:
 :machine:
 :macOS:
 :linux:
-
-NOTE: Machine runner 3.0 is currently in open preview
 
 This page describes how to manually start CircleCI's machine runner 3.0 on macOS and Linux.
 

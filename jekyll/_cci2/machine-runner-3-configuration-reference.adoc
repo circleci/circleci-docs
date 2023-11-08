@@ -3,13 +3,10 @@ contentTags:
   platform:
   - Cloud
 ---
-= Machine runner 3.0 configuration reference - Open preview
+= Machine runner 3.0 configuration reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:experimental:
-
-NOTE: Machine runner 3.0 is currently in open preview
 
 A YAML file is used to configure the machine runner, how it communicates with CircleCI's servers, and how it will launch the task-agent. This page explains all available parameters.
 

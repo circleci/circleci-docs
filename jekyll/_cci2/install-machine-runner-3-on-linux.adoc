@@ -3,16 +3,13 @@ contentTags:
   platform:
   - Cloud
 ---
-= Install machine runner 3.0 on Linux - Open preview
+= Install machine runner 3.0 on Linux
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on Linux.
 :icons: font
-:experimental:
 :machine:
 :linux:
-
-NOTE: Machine runner 3.0 is currently in open preview
 
 This page describes how to install CircleCI's machine runner 3.0 on Linux.
 
