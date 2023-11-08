@@ -40,7 +40,7 @@ The container-agent gets installed with container runner. Container-agent polls 
 [#machine-runner-3]
 == Machine runner 3
 
-The machine-runner-3 replaces launch-agent on cloud, brining improvments to network resliencey, installation, and upgrading process. As with launch-agent any user who is able to execute a job will be able to gain the same privileges as the task-agent which when installed using the provided packages runs as the `circleci` user.
+The machine runner 3.0 replaces launch-agent on cloud, bringing improvements to network resiliency, installation, and the upgrade process. As with launch-agent, any user who is able to execute a job will be able to gain the same privileges as the task-agent, which when installed using the provided packages runs as the `circleci` user.
 
 [#launch-agent]
 == Launch-agent
@@ -49,7 +49,7 @@ The launch-agent manages gathering the information required to run a task with m
 
 The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The launch-agent will run as `root`, but the task-agent will run as `circleci`.
 
-Launch-agent is currently supported on Server v4.x and v3.x. Cloud users should instead refer to [Machine Runner 3](#machine-runner-3).
+Launch-agent is currently supported on Server v4.x and v3.x. Cloud users should instead refer to <<machine-runner-3,Machine Runner 3>>.
 
 [#self-hosted-runner-concurrency]
 == Self-hosted runner concurrency
