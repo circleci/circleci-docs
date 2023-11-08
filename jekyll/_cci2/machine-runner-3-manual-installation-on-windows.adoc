@@ -63,7 +63,7 @@ NOTE: The runner token created in <<create-namespace-and-resource-class,Step 1>>
 New-Item -Name Workdir -ItemType Directory
 @"
 api:
-  auth_token: "1e8e5665db675aa30abab7218e3c10ffbaaa1b52aaa86dcfbacb9bbbaece306ed66c6d7f181145d8"
+  auth_token: "<< YOUR RUNNER TOKEN >>"
   url: https://runner.circleci.com
 runner:
   name: "$env:COMPUTERNAME"
