@@ -26,16 +26,17 @@ The first step is to uninstall launch agent.
 
 . Run the following in your PowerShell:
 +
-```
+[,powershell]
+----
 ./Uninstall-CircleCIRunner.ps1
-```
+----
 
 [#copy-current-runner-configuration]
 == 2. Copy current launch agent configuration
 
 Machine runner 3.0 is backwards compatible with the launch-agent configuration file. Using PowerShell copy the existing launch-agent config for use with the machine runner 3.0 installation.
 
-[,shell]
+[,powershell]
 ----
 $desktopDir = [Environment]::GetFolderPath("Desktop")
 copy "$env:ProgramFiles\CircleCI\runner-agent-config.yaml" "$desktopDir/runner-agent-config.yaml"
@@ -50,7 +51,7 @@ copy "$env:ProgramFiles\CircleCI\runner-agent-config.yaml" "$desktopDir/runner-a
 
 . Run the following in your PowerShell:
 +
-[,shell]
+[,powershell]
 ----
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
 ./Install-CircleCIRunner.ps1
