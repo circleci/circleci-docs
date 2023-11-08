@@ -347,8 +347,6 @@ The following helpers are imported using `import data.circleci.utils`
 [#is_parameterized_expression]
 === `is_parameterized_expression`
 
-CAUTION: **Using server?** The `is_parameterized_expression` helper is currently unavailable on CircleCI server.
-
 This function checks any value and returns true if it is a string that contains a parameter expression, otherwise it returns false.
 
 [#definition-is-parameterized-expression]

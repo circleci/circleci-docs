@@ -8,3 +8,8 @@ exceptions:
   - add
   - CircleCI
   - Linux
+  - Nomad
+  - Kubernetes
+  - Secret
+  - GitHub
+  - Enterprise
