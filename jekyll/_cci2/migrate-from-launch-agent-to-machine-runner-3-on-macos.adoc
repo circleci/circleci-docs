@@ -20,7 +20,7 @@ Migrating from launch agent to machine runner 3.0 is a straightforward process. 
 
 [#uninstall-launch-agent]
 == 1. Uninstall launch agent service
-The first step is to uninstall launch-agent. If the agent has been installed as a `launchctl` service run the following commands to stop as well as uninstall the service, and delete the service file. 
+The first step is to uninstall launch-agent. If the agent has been installed as a `launchctl` service run the following commands to stop as well as uninstall the service, and delete the service file.
 
 [,shell]
 ----
@@ -36,4 +36,4 @@ Follow the instructions in xref:install-machine-runner-3-on-macos#install-circle
 [#additional-resources]
 == Additional resources
 
--xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

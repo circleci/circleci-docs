@@ -18,8 +18,8 @@ This page describes how to migrate an existing launch agent installation to mach
 Migrating from launch agent to machine runner 3.0 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3.0 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
 
 [#uninstall-launch-agent]
-1. Uninstall launch agent
-The first step is to uninstall launch agent. 
+== 1. Uninstall launch agent
+The first step is to uninstall launch agent.
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
@@ -31,9 +31,9 @@ The first step is to uninstall launch agent.
 ```
 
 [#copy-current-runner-configuration]
-3. Copy current launch agent configuration
+== 2. Copy current launch agent configuration
 
-. Machine runner 3.0 is backwards compatible with the launch-agent configuration file. Using PowerShell copy the existing launch-agent config for use with the machine runner 3.0 installation.
+Machine runner 3.0 is backwards compatible with the launch-agent configuration file. Using PowerShell copy the existing launch-agent config for use with the machine runner 3.0 installation.
 
 [,shell]
 ----
@@ -42,7 +42,7 @@ copy "$env:ProgramFiles\CircleCI\runner-agent-config.yaml" "$desktopDir/runner-a
 ----
 
 [#install-machine-runner]
-2. Install machine runner 3.0
+== 3. Install machine runner 3.0
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 
@@ -58,7 +58,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the information from the previous configuration file copied in the [copy current runner configuration step](#copy-current-runner-configuration). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill in the information from the previous configuration file copied in <<copy-current-runner-configuration,step 2>>. The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
