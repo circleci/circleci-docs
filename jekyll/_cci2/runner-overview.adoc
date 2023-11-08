@@ -88,10 +88,10 @@ To get started with CircleCI's self-hosted runners:
 * You will need at least one credit on your account to use runners. Runner execution itself does not require credits but one credit is required in case your jobs use storage or networking. For more information, see the xref:persist-data#overview-of-network-and-storage-transfer[Persisting data overview].
 * For container runner installation, visit the xref:container-runner#[Container runner] page.
 * For machine runner, visit the installation guide for your desired platform:
-** xref:runner-installation-linux#[Linux]
-** xref:runner-installation-mac#[macOS]
-** xref:runner-installation-windows#[Windows]
-** xref:runner-installation-docker#[Docker]
+** xref:install-machine-runner-3-on-linux#[Linux]
+** xref:install-machine-runner-3-on-macos#[macOS]
+** xref:install-machine-runner-3-on-windows#[Windows]
+** xref:container-runner-installation#[Kubernetes]
 
 [#available-self-hosted-runner-platforms]
 == Available self-hosted runner platforms
@@ -142,5 +142,5 @@ Take the https://academy.circleci.com/runner-course?access_code=public-2021[runn
 == See also
 - xref:runner-concepts#[Runner Concepts]
 - xref:container-runner#[Container runner reference guide]
-- xref:runner-config-reference#[Machine runner reference guide]
+- xref:machine-runner-3-configuration-reference#[Machine runner reference guide]
 - link:https://circleci.com/changelog/self-hosted-runner/[Self-hosted runner change log]
