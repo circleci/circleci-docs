@@ -44,7 +44,10 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
 
-You can trigger a pipeline for a project using the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
+Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
+For non GitLab/GitHub App projects, you can trigger a pipeline for a project using the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
 
