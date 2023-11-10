@@ -250,6 +250,9 @@ runner:
 [#considerations-before-enabling-ssh-debugging]
 ==== Considerations before enabling SSH debugging
 
+The "SSH debugging" feature is not currently supported for GitLab or GitHub App projects. To find out if your project uses the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 Task-agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the system that the self-hosted runner is installed on.
 
 * The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple machine runners are installed on the same host.
