@@ -10,8 +10,8 @@
 | `15.1.0`
 | Xcode 15.1 beta 2 (15C5042i)
 | 13.6
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13624/manifest.txt[Installed software]
-| link:https://discuss.circleci.com/t/xcode-15-1-beta-2-released/49688[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13764/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-beta-2-re-released-and-bumped-to-macos-14-1/49816[Release Notes]
 
 | `15.0.0`
 | Xcode 15 (15A240d)
