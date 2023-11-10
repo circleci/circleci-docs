@@ -234,6 +234,11 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 
 If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
+[#granting-permissions-to-organiztion-members]
+== Granting permissions to workspace members
+
+By default, only BitBucket workspace administrators can view your organization's plan page, organization settings, organization analytics, private orbs, webhooks, runners, and connections. To enable all BitBucket workspace members permissions to the above, an organization admin will need to enable the Bitbucket Workspace members settings from the oranization settings > VCS.  
+
 [#next-steps]
 == Next Steps
 - xref:config-intro#[Configuration tutorial]
