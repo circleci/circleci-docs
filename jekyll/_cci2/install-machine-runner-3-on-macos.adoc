@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Install machine runner 3.0 on macOS - Open preview
+= Install machine runner 3.0 on macOS
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on macOS.
@@ -11,8 +11,6 @@ contentTags:
 :experimental:
 :machine:
 :macOS:
-
-NOTE: Machine runner 3.0 is currently in open preview
 
 This page describes how to install CircleCI's machine runner 3.0 on macOS.
 

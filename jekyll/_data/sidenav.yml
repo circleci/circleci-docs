@@ -236,10 +236,18 @@ en:
             link: install-machine-runner-3-on-linux
           - name: Install on macOS
             link: install-machine-runner-3-on-macos
-          - name: Manual installation
+          - name: Install on Windows
+            link: install-machine-runner-3-on-windows
+          - name: Manual install on Linux and macOS
             link: machine-runner-3-manual-installation
-          - name: Migrate from launch agent to machine runner 3.0
-            link: migrate-from-launch-agent-to-machine-runner-3
+          - name: Manual install on Windows
+            link: machine-runner-3-manual-installation-on-windows
+          - name: Migrate from launch agent to machine runner 3.0 on Linux
+            link: migrate-from-launch-agent-to-machine-runner-3-on-linux
+          - name: Migrate from launch agent to machine runner 3.0 on macOS
+            link: migrate-from-launch-agent-to-machine-runner-3-on-macos
+          - name: Migrate from launch agent to machine runner 3.0 on Windows
+            link: migrate-from-launch-agent-to-machine-runner-3-on-windows
           - name: Machine runner 3.0 configuration reference
             link: machine-runner-3-configuration-reference
       - name: Machine runner
@@ -620,6 +628,86 @@ en:
             link: sample-config
           - name: Database examples
             link: postgres-config
+
+  - name: Server administration v4.3
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.3 overview
+        children:
+          - name: CircleCI server v4.3 overview
+            link: server/v4.3/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.3/overview/release-notes
+      - name: Server v4.3 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.3/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.3/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.3/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.3/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.3/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.3/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.3
+            link: server/v4.3/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.3/installation/installation-reference
+      - name: Air-gapped installation v4.3
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.3/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.3/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.3/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.3/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.3/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.3/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.3/air-gapped-installation/example-values
+      - name: Server v4.3 operations
+        children:
+          - name: Operator overview
+            link: server/v4.3/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.3/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.3/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.3/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.3/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/v4.3/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.3/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.3/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.3/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.3/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.3/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.3/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.3/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.3/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.3/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.3/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.3/operator/faq
 
   - name: Server administration v4.2
     icon: icons/sidebar/admin-new.svg

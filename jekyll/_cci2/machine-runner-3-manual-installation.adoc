@@ -13,8 +13,6 @@ contentTags:
 :macOS:
 :linux:
 
-NOTE: Machine runner 3.0 is currently in open preview
-
 This page describes how to manually start CircleCI's machine runner 3.0 on macOS and Linux.
 
 CAUTION: We recommend installing and using CircleCI machine runner 3.0 with xref:install-machine-runner-3-on-macos.adoc[the Homebrew package] on macOS and xref:install-machine-runner-3-on-linux.adoc[the Linux packages] on Linux. The manual method described on this page is an optional alternative.
