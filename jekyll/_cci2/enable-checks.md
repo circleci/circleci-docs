@@ -12,7 +12,10 @@ contentTags:
 ## Introduction
 {: #introduction }
 
-This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to the GitHub app. **The GitHub checks integration feature is not currently available on CircleCI server**.
+The GitHub Checks feature is not currently supported for projects that have integrated with the CircleCI GitHub App. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
+This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to GitHub user interface. **The GitHub checks integration feature is not currently available on CircleCI server**.
 
 GitHub Checks provides you with workflow status messages and gives the option to rerun workflows from the GitHub Checks page.
 
