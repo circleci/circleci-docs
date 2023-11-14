@@ -9,6 +9,9 @@ contentTags:
   - Server v3.x
 ---
 
+The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the [GitHub App integration page](/docs/github-apps-integration).
+{: class="alert alert-info"}
+
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - Is VM-based to guarantee full job isolation.

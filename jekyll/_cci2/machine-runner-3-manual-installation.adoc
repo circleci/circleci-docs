@@ -1,0 +1,109 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Machine runner 3.0 manual installation - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3.0 on macOS and Linux.
+:icons: font
+:experimental:
+:machine:
+:macOS:
+:linux:
+
+This page describes how to manually start CircleCI's machine runner 3.0 on macOS and Linux.
+
+CAUTION: We recommend installing and using CircleCI machine runner 3.0 with xref:install-machine-runner-3-on-macos.adoc[the Homebrew package] on macOS and xref:install-machine-runner-3-on-linux.adoc[the Linux packages] on Linux. The manual method described on this page is an optional alternative.
+
+WARNING: If you follow this manual installation method, CircleCI machine runner 3.0 will not automatically update.
+
+[#prerequisites]
+== Prerequisites
+
+{% include snippets/runner/machine-runner-prereq.adoc %}
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+[#download-circleci-runner]
+
+[#download-machine-runner]
+== 2. Download the CircleCI machine runner
+
+NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$RUNNER_VERSION` environment variable can be changed from the value of `current` to the specific preferred version.
+
+[,shell]
+----
+export RUNNERVERSION='current'
+export CPUARCH=$(/usr/bin/arch | grep 'x86_64' && echo 'amd64' || echo 'arm64')
+export OSTARGET=$(uname -s | tr '[:upper:]' '[:lower:]')
+curl -s -L "https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/${RUNNERVERSION}/circleci-runner_${OSTARGET}_${CPUARCH}.tar.gz" -o $HOME/circleci-runner.tar.gz && tar -zxvf $HOME/circleci-runner.tar.gz
+----
+
+[#mark-machine-runner-as-executable]
+== 3. Mark the CircleCI machine runner as executable
+
+Update permissions for your CircleCI machine runner to enable running its binary:
+
+[,shell]
+----
+chomd +x $HOME/circleci-runner
+----
+
+[#create-configuration-and-working-directory]
+== 4. Create the CircleCI machine runner configuration and working directory
+
+. Create the directory in which CircleCI machine runner jobs will start:
++
+[,shell]
+----
+mkdir $HOME/circleci
+----
+
+. Create a CircleCI runner configuration file:
++
+[,shell]
+----
+touch $HOME/circleci-runner-config.yaml
+----
+
+. Populate the newly created file with the configuration for your runner. An example can be seen below.
++
+NOTE: You will need to change the `auth_token` value from `"your-auth-token"` to the resource class token created in step 1.
++
+[,shell]
+----
+nano $HOME/circleci-runner-config.yaml
+----
++
+[,shell]
+----
+runner:
+  name: "my-macos-runner"
+  working_directory: "$HOME/circleci"
+  cleanup_working_directory: true
+api:
+  auth_token: "your-auth-token"
+----
+
+[#start-machine-runner]
+== 5. Start the CircleCI machine runner
+
+[,shell]
+----
+$HOME/circleci-runner --config $HOME/circleci-runner-config.yaml
+----
+
+[#additional-resources]
+== Additional resources
+
+xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
