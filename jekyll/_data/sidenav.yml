@@ -296,6 +296,8 @@ en:
             link: code-coverage
           - name: Re-run failed tests overview
             link: rerun-failed-tests
+          - name: Test splitting and parallelism
+            link: parallelism-faster-jobs
       - name: Monitor tests
         children:
           - name: Test Insights
@@ -398,8 +400,14 @@ en:
         children:
           - name: Dynamic configuration
             link: dynamic-config
+      - name: Tutorials
+        children:
+          - name: Speed up pipelines with test splitting
+            link: test-splitting-tutorial
       - name: How-to guides
         children:
+          - name: Use the CircleCI CLI to split tests
+            link: use-the-circleci-cli-to-split-tests
           - name: Use matrix jobs
             link: using-matrix-jobs
           - name: Use dynamic configuration
