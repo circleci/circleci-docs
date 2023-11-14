@@ -36,7 +36,7 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<#billing,Billing>>
 
 | <<#cancel-performance-plan,Cancel Performance plan>>
-| 
+|
 |===
 
 [#general]

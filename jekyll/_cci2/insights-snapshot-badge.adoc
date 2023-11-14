@@ -10,8 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-The Insights snapshot badge is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info" }
+NOTE: The Insights snapshot badge is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 The Insights snapshot badge, similar to a xref:status-badges#[status badge] that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.
 

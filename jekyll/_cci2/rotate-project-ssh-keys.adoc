@@ -27,9 +27,8 @@ sectionTags:
 = Rotate project SSH keys
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to guide detailing how to rotate your project SSH keys.
+:page-description: How to rotate your project SSH keys.
 :icons: font
-:experimental:
 :experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
@@ -39,10 +38,9 @@ When using project SSH keys, CircleCI holds the private key, and the target syst
 [#github-projects]
 == GitHub projects
 
-To find out if your project uses the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page
-{: class="alert alert-info" }
+NOTE: To find out if your project uses the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
+Go to menu:Project Settings[SSH Keys] to view SSH keys set up for your project.
 
 [#rotate-a-deploy-key]
 === Rotate a deploy key (GitHub OAuth App)

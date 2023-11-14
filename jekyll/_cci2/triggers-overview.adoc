@@ -44,10 +44,9 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
 
-Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info" }
+NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-For non GitLab/GitHub App projects, you can trigger a pipeline for a project using the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
+For non GitLab/GitHub App projects, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
 
@@ -68,10 +67,9 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 [#schedule-a-pipeline]
 == Schedule a pipeline
 
-Scheduling a pipeline is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info" }
+NOTE: Scheduling a pipeline is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-For non GitLab/GitHub App projects, scheduled pipelines allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the <<scheduled-pipelines#,Scheduled Pipelines>> docs.
+For non GitLab/GitHub App projects, scheduled pipelines allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the <<scheduled-pipelines#,Scheduled Pipelines>> docs.
 
 [#next-steps]
 == Next steps
