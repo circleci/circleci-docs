@@ -22,14 +22,14 @@ For more information about the differences, see the link:https://docs.github.com
 
 If your CircleCI account is authenticated through the **GitHub App**, the content on this page is for you.
 
-This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub projects are detailed in the <<coming-soon>> section.
+This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
 
 The following limits are currently in place for GitHub App integrations:
 
 - Each user can create up to three organizations.
 - Each organization under a Free plan can have up to 10 projects.
 
-If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team]. If you need to delete an organization, link:https://support.circleci.com/hc/en-us/articles/13006651761307-How-to-Delete-an-Organization[contact our Support team].
 
 [#sign-up]
 == Steps to integrate GitHub projects with CircleCI

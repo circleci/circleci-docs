@@ -9,7 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-Status badges are not currently supported for GitLab projects.
+Status badges are not currently supported for GitLab or GitHub App projects.
 {: class="alert alert-warning"}
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.

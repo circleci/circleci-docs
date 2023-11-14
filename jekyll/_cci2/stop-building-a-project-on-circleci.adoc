@@ -21,7 +21,9 @@ This page provides details on how to stop builds for a project on CircleCI, and 
 
 CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI you need to contact CircleCI support, as detailed in the <<remove-a-project-from-circleci>> section.
 
-To stop building one of your projects on CircleCI, follow these steps:
+NOTE: The **Stop Building** option is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+If you are using the GitHub OAuth App or BitBucket, to stop building one of your projects on CircleCI, follow these steps:
 
 . Go to the **Project Settings** page in the CircleCI web app for the project you want to stop.
 . Scroll to the bottom of the Overview page and click **Stop Building**. You will need to reconfirm your choice in the popup.

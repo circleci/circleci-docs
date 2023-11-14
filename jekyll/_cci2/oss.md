@@ -37,6 +37,9 @@ For more information, see the [Set an environment variable]({{site.baseurl}}/set
 ### Only build pull requests
 {: #only-build-pull-requests }
 
+The "Only build pull requests" feature is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 
 To change this setting, go to the **Project Settings>Advanced** of your project and set the **Only build pull requests** option to _On_.
@@ -53,6 +56,9 @@ CircleCI will build all commits from your project's *default branch and tags* re
 ### Build pull requests from forked repositories
 {: #build-pull-requests-from-forked-repositories }
 
+The "build pull requests from forked repositories" setting is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Project Settings > Advanced** of your project and set the **Build forked pull requests** option to _On_.
@@ -64,6 +70,9 @@ If a user submits a pull request to your repository from a fork, but no pipeline
 
 ### Pass secrets to builds from forked pull requests
 {: #pass-secrets-to-builds-from-forked-pull-requests }
+
+The "pass secrets to builds from forked pull requests" setting is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
