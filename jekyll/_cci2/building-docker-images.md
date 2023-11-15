@@ -25,8 +25,7 @@ jobs:
       - image: cimg/base:2022.06
     steps:
       # ... steps for building/testing app ...
-      - setup_remote_docker:
-          version: 20.10.14
+      - setup_remote_docker
 ```
 
 When `setup_remote_docker` executes, any Docker-related commands you use will be executed locally on the virtual machine used to spin up containers for your job.
@@ -61,7 +60,6 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
-          version: 20.10.14
           docker_layer_caching: true
 
       # build and push Docker image
@@ -108,38 +106,26 @@ The [CircleCI convenience images]({{site.baseurl}}/circleci-images/) for the Doc
 ## Specify a Docker version for remote docker
 {: #docker-version }
 
-To specify the Docker version, you can set it as a `version` attribute:
+To optionally specify a Docker version, you can set it as a `version` attribute with supported tags:
 
 ```yml
       - setup_remote_docker:
-          version: 20.10.11
+          version: edge
 ```
 
-CircleCI supports multiple versions of Docker.
+CircleCI supports multiple tags for Remote Docker, as per our [Remote Docker tagging policy]({{site.baseurl}}/remote-docker-images-support-policy/#tagging).
 
-For **x86** architecture, the following versions are available:
-
-- `default` (uses Docker version 24.0.6)
-- `20.10.24`
-- `20.10.23`
-- `20.10.18`
-- `20.10.17`
-- `20.10.14`
-- `20.10.12`
-- `20.10.11`
-- `20.10.7`
-- `20.10.6`
-- `20.10.2`
-- `19.03.13`
-
-For **Arm**, the following versions are supported:
-
+For **x86** and **arm** architecture, the following tags are available:
 - `default`
 - `edge`
+- `previous`
 
-<!---
-Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
---->
+The above tags resolve to the latest supported Docker version, which is currently Docker 24.
+
+To use Docker 23, the previous Docker release, use the following tag:
+- `docker23`
+
+To use the current deprecated version, Docker 20, use `20.10.24`
 
 The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 {: class="alert alert-info"}
