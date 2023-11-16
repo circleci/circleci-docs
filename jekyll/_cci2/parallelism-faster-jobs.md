@@ -45,7 +45,7 @@ The `parallelism` key specifies how many independent executors are set up to run
 
 To run a job's steps in multiple parallel environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case, four Docker containers using the `cimg/base:2023.09` image.
 
-Use the `circleci tests run` command to split _and_ run your tests. Your tests will be split up, and a portion of your tests run in each, parallel, environment. This reduces the overall time taken to run the full test suite. In this example tests will be split up into four, alphabetically, by name.
+Use the `circleci tests run` command to split _and_ run your tests. Your tests will be split up, and a portion of your tests run in each, parallel, environment. This reduces the overall time taken to run the full test suite. In this example tests will be split up into four, and the split points are decided based on historic timing data.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -56,8 +56,7 @@ jobs:
     parallelism: 4
     resource_class: large
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --"
-
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ```
 
 ![Parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
