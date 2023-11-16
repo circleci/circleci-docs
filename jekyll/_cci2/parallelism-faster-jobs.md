@@ -175,7 +175,7 @@ Flag | Type | Description | Required?
 `--command` | string | The command string is the script that will be run for a list of tests determined by the options provided to the plugin | Yes
 `--index` | uint | index of node can also be set with CIRCLE_NODE_INDEX. (default 1) | No
 `--split-by` | string | how to weight the split, allowed values are "name", "filesize", and "timings". (default "name") | No
-`--timings-type` | string | name of the field to use from historical test results when matching against the test names given to the command in order to determine their historical timings, previous status and flakiness. Available values: `classname`, `name`, `file` (default). (default "none") | No
+`--timings-type` | string | name of the field to use from historical test results when matching against the test names given to the command in order to determine their historical timings, previous status and flakiness. Available values: `classname`, `name`, `file` (default). | No
 `--total` | uint | number of nodes can also be set with CIRCLE_NODE_TOTAL. (default 2) | No
 `-v`, `--verbose` | --- | enable verbose logging output. | No
 {: class="table table-striped"}
