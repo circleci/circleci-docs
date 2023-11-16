@@ -74,6 +74,52 @@ For more information, see the [Configuration reference](/docs/configuration-refe
 ## How test splitting works
 {: #how-test-splitting-works }
 
+CircleCI's test splitting feature allows you to specify a number of identical execution environments for a job (parallelism), and then split your test suite into an equal number of portions so that the tests can be run in parallel to reduce the length of time taken for your test pipeline. You can split your tests up in a few different ways:
+
+* Alphabetically, by name. This is the default:
+  ```yaml
+  # ~/.circleci/config.yml
+  jobs:
+    build:
+      docker:
+        - image: cimg/go:1.18.1
+      parallelism: 4
+      resource_class: large
+      steps:
+        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --"
+
+  ```
+
+* By size:
+  ```yaml
+  # ~/.circleci/config.yml
+  jobs:
+    build:
+      docker:
+        - image: cimg/go:1.18.1
+      parallelism: 4
+      resource_class: large
+      steps:
+        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname -- --split-by=filesize"
+
+  ```
+
+* By using historic timing data:
+  ```yaml
+  jobs:
+    build:
+      docker:
+        - image: cimg/go:1.18.1
+      parallelism: 4
+      resource_class: large
+      steps:
+        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+```
+
+
+### Example using timing-based test splitting
+{: #example-using-timing-based-test-splitting}
+
 Using **timing-based** test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
 
 ![Test Splitting]({{site.baseurl}}/assets/img/docs/test_splitting.png)
@@ -125,12 +171,9 @@ Flag | Type | Description | Required?
 `--command` | string | The command string is the script that will be run for a list of tests determined by the options provided to the plugin | Yes
 `--index` | uint | index of node can also be set with CIRCLE_NODE_INDEX. (default 1) | No
 `--split-by` | string | how to weight the split, allowed values are "name", "filesize", and "timings". (default "name") | No
-`--time-default` | duration | override default time value of test timing data when timing is not found (default 0s). The option expects a value to be passed in the following form: `<int value><unit>`. For example: `--time-default 10s` (for 10 seconds), `--time-default 1m` (for 1 minute) | No
-`--timings-file` | string | JSON file containing historical timing data. (default "/tmp/.circleci-task-data-653a503f531a1d65b41855a5-1-build/circle-test-results/results.json") | No
 `--timings-type` | string | name of the field to use from historical test results when matching against the test names given to the command in order to determine their historical timings, previous status and flakiness. Available values: `classname`, `name`, `file` (default). (default "none") | No
 `--total` | uint | number of nodes can also be set with CIRCLE_NODE_TOTAL. (default 2) | No
 `-v`, `--verbose` | --- | enable verbose logging output. | No
-`--version` | --- | print out current version. | No
 {: class="table table-striped"}
 
 ### The tests split command
@@ -151,11 +194,13 @@ jobs:
 
 The `circleci tests split` command has been superceded by `circleci tests run` as this command also gives you access to the [rerun failed tests](/docs/rerun-failed-tests/) options.
 
+Integrating with some [third party tools](#other-ways-to-split-tests) might still require you to use `circleci tests split`. For usage steps see, [Use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests/#tests-split-examples).
+
 
 ### JUnit XML report formatting
 {: #junit-xml-reports}
 
-CircleCI requires test results to be uploaded as JUnit XML reports. The following formatting allows CircleCI to parse timing data from test results and use the data for test splitting:
+In order to use the test splitting feature, CircleCI requires test results to be uploaded as JUnit XML reports. The following formatting allows CircleCI to parse timing data from test results and use the data for test splitting:
 
 * The `file` attribute, either on the `<testsuite>` or `<testcase>` tag
 * The `time` attribute, on the `<testcase>` tag
@@ -190,7 +235,7 @@ The number of containers is specified by the [`parallelism` key](/docs/configura
 The current container index is automatically picked up from the `$CIRCLE_NODE_INDEX` environment variable, but can be manually set by using the `--index` flag.
 
 ```shell
-circleci tests run --index=0 test_filenames.txt
+cat test_filenames.txt | circleci tests run --command=">index0.txt xargs echo" --index=0 --split-by=name
 ```
 
 Refer to the [Project values and variables](/docs/variables#built-in-environment-variables) page for more details.
