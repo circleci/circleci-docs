@@ -37,24 +37,27 @@ The following how-to guide walks you through the steps required to glob your tes
 
 * **How-to**: [Use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests/)
 
-## Specify a job's parallelism level
+## Specify parallel environments for a test job
 {: #specify-a-jobs-parallelism-level }
 
 Test suites are conventionally defined at the [job](/docs/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
 
-To run a job's steps in multiple parallel environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case four Docker containers using the `cimg/base:2023.09` image.
+To run a job's steps in multiple parallel environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case, four Docker containers using the `cimg/base:2023.09` image.
 
-With no further changes, the full `test` job is still run in each of the four environments. In order to automatically run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to use the `circleci tests run` CLI command in your configuration to split your test suite across your parallel environments.
+Use the `circleci tests run` command to split _and_ run your tests. Your tests will be split up, and a portion of your tests run in each, parallel, environment. This reduces the overall time taken to run the full test suite. In this example tests will be split up into four, alphabetically, by name.
 
 ```yaml
 # ~/.circleci/config.yml
-version: 2.1
 jobs:
-  test:
+  build:
     docker:
-      - image: cimg/base:2023.09
+      - image: cimg/go:1.18.1
     parallelism: 4
+    resource_class: large
+    steps:
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --"
+
 ```
 
 ![Parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
