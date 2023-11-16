@@ -43,9 +43,9 @@ The following how-to guide walks you through the steps required to glob your tes
 Test suites are conventionally defined at the [job](/docs/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
 
-To run a job's steps in multiple parallel environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case, four Docker containers using the `cimg/base:2023.09` image.
+To run a job's steps in multiple, parallel execution environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case, four Docker containers using the `cimg/base:2023.09` image.
 
-Use the `circleci tests run` command to split _and_ run your tests. Your tests will be split up, and a portion of your tests run in each, parallel, environment. This reduces the overall time taken to run the full test suite. In this example tests will be split up into four, and the split points are decided based on historic timing data.
+Use the `circleci tests run` command to split _and_ run your tests. Your tests will be split up, and a portion of your tests run in each execution environment. This reduces the overall time taken to run the full test suite. In this example tests will be split up into four, and the split points are calculated based on historic timing data.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -117,9 +117,9 @@ CircleCI's test splitting feature allows you to specify a number of identical ex
 
 When using timing-based test splitting, the CLI attempts to auto detect the granularity of the test split (for example, whether to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
-* `name`
-* `classname`
-* `file`
+* `name` - test name
+* `classname`  class name
+* `file` - file name
 
 ### Example using timing-based test splitting
 {: #example-using-timing-based-test-splitting}
