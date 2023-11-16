@@ -113,8 +113,13 @@ CircleCI's test splitting feature allows you to specify a number of identical ex
       resource_class: large
       steps:
         - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
-```
+  ```
 
+When using timing-based test splitting, the CLI attempts to auto detect the granularity of the test split (for example, whether to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
+
+* `name`
+* `classname`
+* `file`
 
 ### Example using timing-based test splitting
 {: #example-using-timing-based-test-splitting}
