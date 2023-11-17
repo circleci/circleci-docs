@@ -46,3 +46,5 @@ Telegraf
 statsd
 Datadog
 Airtable
+Xcode
+Fastlane
