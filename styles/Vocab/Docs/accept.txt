@@ -29,6 +29,14 @@ config policies
 config policy
 Config policies
 Config policy
+JUnit
+globbing
+RSpec
+Gemfile
+stdin
+Gradle
+PHPUnit
+Globbing
 Homebrew
 reprovision
 reprovisioned
@@ -48,3 +56,5 @@ Datadog
 Airtable
 Xcode
 Fastlane
+walkthrough
+Walkthrough
