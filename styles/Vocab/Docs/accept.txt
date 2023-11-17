@@ -58,3 +58,4 @@ Xcode
 Fastlane
 walkthrough
 Walkthrough
+XCTest

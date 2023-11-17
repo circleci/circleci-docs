@@ -15,7 +15,7 @@ contentTags:
 [#introduction]
 == Introduction
 
-CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, pytest, JUnit, Selenium, XCTest, and more.
+CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, `pytest`, JUnit, Selenium, XCTest, and more.
 
 When you integrate your tests into your CircleCI pipelines, you not only deliver software to your users more reliably and efficiently, you get feedback more quickly so you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
 
@@ -113,7 +113,7 @@ When test results are stored, test analytics also become available on the *Tests
 More information is available on the xref:insights-tests#[Test Insights] page.
 
 [#rerun-failed-tests-only]
-== Re-run failed tests only (circleci tests run)
+== Re-run failed tests only (`circleci tests run`)
 
 You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
 
