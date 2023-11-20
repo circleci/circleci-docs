@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI webhooks with Airtable
 :page-description: Example webhooks use-case with webhooks
-:icons: “font”
+:icons: font
 :page-layout: classic-docs
 :page-liquid:
 :experimental:

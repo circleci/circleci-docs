@@ -6,7 +6,7 @@ contentTags:
 = Testing macOS applications
 :page-description: Testing macOS applications.
 :experimental:
-:icons: “font”
+:icons: font
 :page-layout: classic-docs
 :page-liquid:
 

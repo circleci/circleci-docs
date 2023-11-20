@@ -8,7 +8,7 @@ contentTags:
 = Automated testing in CircleCI
 :page-description: An overview of setting up testing automation, integration, and analytics.
 :experimental:
-:icons: “font”
+:icons: font
 :page-layout: classic-docs
 :page-liquid:
 
