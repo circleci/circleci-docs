@@ -133,7 +133,9 @@ kill $!
 [#disable-concurrency-limits]
 == Disable concurrency limits
 
-If your org is hitting the hard-coded concurrency limits, you can disable these limits by setting the following in your `values.yaml`:
+We recommend disabling concurrency limits for your CircleCI server installation. Disable concurrency limits by setting the following in your `values.yaml`:
+
+NOTE: Concurrency limits are disabled by default from server v4.1.5
 
 [source,yaml]
 ----
@@ -141,3 +143,5 @@ distributor_dispatcher:
   ...
   disable_concurrency: true
 ----
+
+You can check whether you are hitting these limits by checking the `distributor-disptacher` logs for a message that mentions `concurrency limits`.
