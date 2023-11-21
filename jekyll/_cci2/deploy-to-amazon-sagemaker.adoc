@@ -31,7 +31,7 @@ In a how-to guide, include one or two opening paragraphs. The opening paragraph 
 
 TIP: Since the reader will usually want to quickly get to the task at hand, keep the introduction succinct.
 
-TIP: Consider providing a link to an xref:template-conceptual#[overview or conceptual doc], should the reader be interested in more explanatory or background information regarding the feature or task.
+TIP: Consider providing a link to an xref:/templates/template-conceptual#[overview or conceptual doc], should the reader be interested in more explanatory or background information regarding the feature or task.
 ß
 [#prerequisites]
 == Prerequisites
@@ -67,8 +67,8 @@ In a how-to guide, you might walk the reader through an example scenario. Exampl
 
 Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
 
-* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:../manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
-* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests])
+* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
+* Otherwise, consider using lowercase letters. (As an example, see xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests])
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 
@@ -104,11 +104,11 @@ link:https://circleci.com/[CircleCI website]
 
 To link to another page within the docs use a cross reference:
 
-xref:../about-circleci#[About CircleCI]
+xref:about-circleci#[About CircleCI]
 
 Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
 
-xref:../about-circleci#learn-more[About CircleCI]
+xref:about-circleci#learn-more[About CircleCI]
 
 [#code-examples]
 === 4. Code examples
@@ -151,7 +151,7 @@ WARNING: **Need to add a warning?** This is how to do it
 
 We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
 
-For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+For more information, see xref:/style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
 
 [#the-second-step]
 == 2. The second step
@@ -167,5 +167,5 @@ End the guide with a conclusion section that summarizes what was covered.
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:../benefits-of-circleci#[Benefits of CircleCI]
-* xref:../concepts#[CircleCI concepts]
+* xref:benefits-of-circleci#[Benefits of CircleCI]
+* xref:concepts#[CircleCI concepts]
