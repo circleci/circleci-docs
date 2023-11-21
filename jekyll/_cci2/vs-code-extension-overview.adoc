@@ -198,11 +198,15 @@ Triggering a pipeline with a _custom_ configuration can have side effects, for e
 Config test run pipelines have access to contexts, and project environment variables, based on which branch they are run on, and user permissions
 ====
 
+NOTE: Config test runs are disabled for projects that make use of xref:dynamic-config#[dynamic configuration]
+
 The following steps show how to trigger a config test run pipeline from the VS Code extension:
 
 . Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
 . Expand the Run panel to view your projects.
 . For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[].
+
+image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run.png[Screenshot showing the run pannel]
 
 The pipeline is now visible in your Dashboard in the CircleCI web app, at `https://app.circleci.com/pipelines/github/`
 
