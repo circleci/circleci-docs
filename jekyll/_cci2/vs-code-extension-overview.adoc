@@ -82,7 +82,7 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screen
 
 * Or, hover over the job in the pipelines panel, and click the SSH action button next to the job name.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun otpions]
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun options]
 
 In both cases, you will be presented with two options:
 
@@ -136,11 +136,11 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_on-hover
 
 - **Syntax validation**. This helps you identify typos, incorrect use of parameters, incomplete definitions, wrong types, invalid or deprecated machine versions, etc.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_syntax-validation.gif[Screenshot showing the synthax highlightning when an error is identified]
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_syntax-validation.gif[Screenshot showing the syntax highlighting when an error is identified]
 
 - **Usage warnings**. This helps you identify deprecated parameters, unused jobs or executors, or missing properties that prevent you from taking advantage of CircleCI’s full capabilities.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlightning to warn on an unused job]
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlighting to warn on an unused job]
 
 - **Auto completion**. This is available with both built-in keys and parameters as well as user-defined variables.
 +
@@ -153,7 +153,7 @@ The config helper also provides two commands that help you statically validate y
 
 * Validate current configuration file
 +
-Corresponds to the CLI command `circleci config validate`, and verifies statically that the config file is well formed. Please note that this command only validates this file for structure and syntax errors, but not for semantic error (e.g. "This job does not exist").
+Corresponds to the CLI command `circleci config validate`, and verifies statically that the config file is well formed. Please note that this command only validates this file for structure and syntax errors, but not for semantic error (for example, "This job does not exist").
 
 * Validate current configuration file against org policy
 +
@@ -165,7 +165,7 @@ Both of these commands can be run by:
 
 - Right-clicking anywhere within an opened `.circleci/config.yml` file.
 
-- Clicking on the CircleCI button on the top right of the editor when you have a `.circleci/config.yml`open. Note that the button will not be visible if you are editing any other file.
+- Clicking on the CircleCI button on the top right of the editor when you have a `.circleci/config.yml` open. Note that the button will not be visible if you are editing any other file.
 
 [#open-source-language-server]
 === Open source language server
@@ -173,4 +173,25 @@ Both of these commands can be run by:
 The config helper is based on a dedicated language server specific for CircleCI YAML files, which is open source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
 
 You can also integrate the language server into any editor which supports the Language Server Protocol, and build your own plugin to benefit from config helper capabilities in your favourite editor.
+
+[#trigger-a-config-test-run]
+== Trigger a config test run
+
+NOTE: The config test run feature is currently in **closed preview**. Config test runs are available on the **Free Plan**, for accounts integrated through the **GitHub OAuth app**, or **Bitbucket**. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page.
+
+Use config test runs to iterate on your pipeline configuration without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your config test runs in the CircleCI web app, just the same as any other pipeline.
+
+[#prerequisites]
+=== Prerequisites
+
+* v2.0 or higher of the CircleCI VS Code extension
+* A CircleCI account integrated through the GitHub OAuth app, or Bitbucket. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
+* You must be on the link:https://circleci.com/pricing/[Free plan]
+
+[#steps]
+=== Steps
+
+
+
+
 
