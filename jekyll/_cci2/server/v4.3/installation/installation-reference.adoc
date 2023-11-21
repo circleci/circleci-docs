@@ -918,51 +918,6 @@ a|AWS Authentication Config.
 |`false`
 |CA Certificate filename used in your `certificatesSecret`. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting a certificate from them.
 
-|`prometheus.alertmanager.enabled`
-|boolean
-|`false`
-|
-
-|`prometheus.enabled`
-|boolean
-|`false`
-|
-
-|`prometheus.extraScrapeConfigs`
-|string
-|`"- job_name: 'telegraf-metrics'\n  scheme: http\n  metrics_path: /metrics\n  static_configs:\n  - targets:\n    - \"telegraf:9273\"\n    labels:\n      service: telegraf\n"`
-|
-
-|`prometheus.fullnameOverride`
-|string
-|`"prometheus"`
-|
-
-|`prometheus.nodeExporter.fullnameOverride`
-|string
-|`"node-exporter"`
-|
-
-|`prometheus.pushgateway.enabled`
-|boolean
-|`false`
-|
-
-|`prometheus.server.emptyDir.sizeLimit`
-|string
-|`"8Gi"`
-|
-
-|`prometheus.server.fullnameOverride`
-|string
-|`"prometheus-server"`
-|
-
-|`prometheus.server.persistentVolume.enabled`
-|boolean
-|`false`
-|
-
 |`proxy.enabled`
 |boolean
 |`false`
@@ -1220,11 +1175,6 @@ a|Session cookie key. Must be exactly 16 bytes.
 |`telegraf.config.inputs[0].statsd.service_address`
 |string
 |`":8125"`
-|
-
-|`telegraf.config.outputs[0].prometheus_client.listen`
-|string
-|`":9273"`
 |
 
 |`telegraf.fullnameOverride`
