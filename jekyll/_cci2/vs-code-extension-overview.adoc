@@ -170,7 +170,7 @@ Both of these commands can be run by:
 [#open-source-language-server]
 === Open source language server
 
-The config helper is based on a dedicated language server specific for CircleCI YAML files, which is open source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[circleci-yaml-language-server].
+The config helper is based on a dedicated language server specific for CircleCI YAML files, which is open source. You can view its source code, contribute and add issues directly on the project repository: link:https://github.com/CircleCI-Public/circleci-yaml-language-server[CircleCI YAML language server].
 
 You can also integrate the language server into any editor which supports the Language Server Protocol, and build your own plugin to benefit from config helper capabilities in your favourite editor.
 
@@ -191,7 +191,20 @@ Use config test runs to iterate on your pipeline configuration without committin
 [#steps]
 === Steps
 
+[WARNING]
+====
+Triggering a pipeline with a _custom_ configuration can have side effects, for example, unwanted deployment. We recommend using this feature **only** on feature branches.
 
+Config test run pipelines have access to contexts, and project environment variables, based on which branch they are run on, and user permissions
+====
+
+The following steps show how to trigger a config test run pipeline from the VS Code extension:
+
+. Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
+. Expand the Run panel to view your projects.
+. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[].
+
+The pipeline is now visible in your Dashboard in the CircleCI web app, at `https://app.circleci.com/pipelines/github/`
 
 
 
