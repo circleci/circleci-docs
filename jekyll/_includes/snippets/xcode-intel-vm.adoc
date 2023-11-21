@@ -8,7 +8,7 @@
 | Release Notes
 
 | `15.1.0`
-| Xcode 15.1 beta 2 (2B374)
+| Xcode 15.1 beta 3 (2B374)
 | 14.1
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13795/manifest.txt[Installed software]
 | link:https://discuss.circleci.com/t/xcode-15-1-beta-3-released/49876[Release Notes]
