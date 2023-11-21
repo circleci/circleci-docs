@@ -31,7 +31,7 @@ In a how-to guide, include one or two opening paragraphs. The opening paragraph 
 
 TIP: Since the reader will usually want to quickly get to the task at hand, keep the introduction succinct.
 
-TIP: Consider providing a link to an xref:/templates/template-conceptual#[overview or conceptual doc], should the reader be interested in more explanatory or background information regarding the feature or task.
+TIP: Consider providing a link to an overview or conceptual doc, should the reader be interested in more explanatory or background information regarding the feature or task.
 ß
 [#prerequisites]
 == Prerequisites
@@ -45,7 +45,7 @@ This is the first subsection in the how-to guide. List any prerequisites that th
 * Roles and permissions
 * Skills/knowledge
 // This renders as a nested item
-** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:../parallelism-faster-jobs#[Test splitting and parallelism] page."
+** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:parallelism-faster-jobs#[Test splitting and parallelism] page."
 * Any other dependencies
 
 Sometimes, there may be topics to know or tasks to complete that are _helpful_ in order to successfully finish the how-to guide, but do not necessarily have a negative impact on the user's flow if they only do those as they go along. For example, you may include generating an API token in the how-to steps itself, rather than listing it as a strict prerequisite. Use your best judgment to decide whether to add such a requirement as a prerequisite or as a step that is part of the how-to.
