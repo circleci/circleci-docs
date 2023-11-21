@@ -76,6 +76,8 @@ Enabling SAML protection on a GitHub org can cause changes to CircleCI’s setti
 * GitHub Checks, from the GitHub website, select menu:Organization Settings[VCS > GitHub Checks]
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
 
+For more information on GitHub Checks and GitHub status updates, see the xref:enable-checks#github-check-and-github-status-updates[Enabling GitHub checks].
+
 [#connect-a-github-account]
 == Connect a GitHub account
 
