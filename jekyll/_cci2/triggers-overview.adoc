@@ -73,12 +73,17 @@ To trigger a pipeline from anywhere that can emit a webhook, or run a curl comma
 
 . Navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
 . Select "Inbound Webhook" from the "Connect To" dropdown menu, and click **Next**.
++
+image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an inbound webhook trigger]
+
 . Fill in the details of your trigger source and trigger description, and click **Save**.
 . You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source. The secret will not be shown again so be sure to copy the URL before clicking **Done**.
++
+image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
 
 Below is an example of how you would set up the webhook trigger in Hugging Face:
 
-#INSERT IMAGE#
+image::triggers/inbound-webhooks-hugging-face-setup.png[screenshot showing inbound webhook trigger Hugging Face setup]
 
 [#schedule-a-pipeline]
 == Schedule a pipeline
