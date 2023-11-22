@@ -1,0 +1,39 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Migrate from launch agent to machine runner 3.0 on Linux - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview
+:icons: font
+:toc: macro
+:toc-title:
+:machine:
+:experimental:
+:macos:
+
+This page describes how to migrate an existing launch agent installation to machine runner 3.0. Machine runner 3.0 includes improved network resiliency, and a simpler installation management strategy, utilizing operating system packages.
+
+Migrating from launch agent to machine runner 3.0 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3.0 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
+
+[#uninstall-launch-agent]
+== 1. Uninstall launch agent service
+The first step is to uninstall launch-agent. If the agent has been installed as a `launchctl` service run the following commands to stop as well as uninstall the service, and delete the service file.
+
+[,shell]
+----
+sudo launchtl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+sudo rm -f '/Library/LaunchDaemons/com.circleci.runner.plist'
+sudo rm -rf '/opt/circleci'
+----
+
+[#install-macos-machine-runner]
+== 2. Install the macOS Machine Runner 3.0
+Follow the instructions in xref:install-machine-runner-3-on-macos#install-circleci-runner[Install machine runner 3.0 on macOS] to install machine runner 3.0 using a homebrew package.
+
+[#additional-resources]
+== Additional resources
+
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

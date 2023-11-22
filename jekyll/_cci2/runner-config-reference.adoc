@@ -1,7 +1,6 @@
 ---
 contentTags:
   platform:
-  - Cloud
   - Server v4.x
   - Server v3.x
 ---
@@ -250,6 +249,8 @@ runner:
 
 [#considerations-before-enabling-ssh-debugging]
 ==== Considerations before enabling SSH debugging
+
+NOTE: The "SSH debugging" feature is not currently supported for GitLab or GitHub App projects. To find out if your project uses the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 Task-agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the system that the self-hosted runner is installed on.
 
