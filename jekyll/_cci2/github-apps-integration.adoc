@@ -176,8 +176,8 @@ There is no automated way to migrate your organization that is connected with Ci
 9. Repeat steps 5-8 by clicking "Projects" >> "Create a Project" for each project in your previous organization.
 10. If you are using xref:contexts, you will need to recreate the contexts in your new organization.
 11. Invite your teammates to the new organization that is integrated with GitHub App using the instructions on xref:invite-your-team[this page].
-12. If you are on a Performance pricing plan, go to "Plan" in the CircleCI UI and click on the "Share and Transfer" tab. Click "Transfer plan" and follow the instructions to transfer your pricing plan to your new organization (use "/circleci" as the VCS and the organization ID that is found in Organization Settings as the <org> if prompted).  
-13. If you followed step 12, your pricing plan will now be transferred to the organization that is your "new" organization that uses the GitHub App integration. 
+12. If you are on a Performance pricing plan, go to "Plan" in the CircleCI UI and click on the "Share and Transfer" tab. Click "Transfer plan" and follow the instructions to transfer your pricing plan to your new organization by clicking on the new organization in the "transfer" UI.  
+13. If you followed step 12, your Performance pricing plan will now be transferred to the organization that is your "new" organization that uses the GitHub App integration. 
 14. Submit a request to link:https://support.circleci.com/[Support at CircleCI] to delete the "old" organization.  At this point, you will be left with a GitHub App integrated organization that has the same payment plan and projects as your previous organization.
 
 If you need to transfer private orbs or self-hosted runner resource classes, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.  Data from xref:insights and historical pipeline runs will not be present in your new organization.  Contexts will also not be present
