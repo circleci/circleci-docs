@@ -174,12 +174,12 @@ The config helper is based on a dedicated language server specific for CircleCI 
 
 You can also integrate the language server into any editor which supports the Language Server Protocol, and build your own plugin to benefit from config helper capabilities in your favourite editor.
 
-[#trigger-a-config-test-run]
-== Trigger a config test run
+[#test-run-your-config-from-vs-code]
+== Test run your config from VS Code
 
-NOTE: The config test run feature is currently in **closed preview**. Config test runs are available on the **Free Plan**, for accounts integrated through the **GitHub OAuth app**, or **Bitbucket**. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page.
+NOTE: The ability to trigger a pipeline from VS Code with a _custom_ config is currently in **closed preview**. This feature is available on the **Free Plan** for accounts integrated through the **GitHub OAuth app**, or **Bitbucket**. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page.
 
-Use config test runs to iterate on your pipeline configuration without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your config test runs in the CircleCI web app, just the same as any other pipeline.
+Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the CircleCI web app, just the same as any other pipeline.
 
 [#prerequisites]
 === Prerequisites
@@ -187,6 +187,8 @@ Use config test runs to iterate on your pipeline configuration without committin
 * v2.0 or higher of the CircleCI VS Code extension
 * A CircleCI account integrated through the GitHub OAuth app, or Bitbucket. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
 * You must be on the link:https://circleci.com/pricing/[Free plan]
+* You need to opt-in to this feature per project. For your project, navigate to menu:Project Settings[VS Code extension] and toggle #TBD#
+* Your project must **not** make use of xref:dynamic-config#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
 [#steps]
 === Steps
@@ -195,20 +197,19 @@ Use config test runs to iterate on your pipeline configuration without committin
 ====
 Triggering a pipeline with a _custom_ configuration can have side effects, for example, unwanted deployment. We recommend using this feature **only** on feature branches.
 
-Config test run pipelines have access to contexts, and project environment variables, based on which branch they are run on, and user permissions
+Test run pipelines triggered from VS Code have access to contexts, and project environment variables, based on which branch they are run on, and user permissions.
 ====
 
-NOTE: Config test runs are disabled for projects that make use of xref:dynamic-config#[dynamic configuration]
-
-The following steps show how to trigger a config test run pipeline from the VS Code extension:
+The following steps show how to trigger a test run pipeline from the VS Code extension:
 
 . Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
-. Expand the Run panel to view your projects.
-. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[].
+. Expand the **Run** panel to view your projects.
+. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[]. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
+. The pipeline is now visible in your dashboard in the CircleCI web app, at `https://app.circleci.com/pipelines/github/`, and the Pipelines panel in the VS Code extension.
 
-image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run.png[Screenshot showing the run pannel]
+image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run.png[Screenshot showing the run panel]
 
-The pipeline is now visible in your Dashboard in the CircleCI web app, at `https://app.circleci.com/pipelines/github/`
+
 
 
 
