@@ -187,7 +187,7 @@ Trigger pipelines from VS Code to iterate on your CircleCI config without commit
 * v2.0 or higher of the CircleCI VS Code extension
 * A CircleCI account integrated through the GitHub OAuth app, or Bitbucket. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
 * You must be on the link:https://circleci.com/pricing/[Free plan]
-* You need to opt-in to this feature per project. For your project, navigate to menu:Project Settings[VS Code extension] and toggle #TBD#
+* You need to opt-in to this feature per project. For your project, navigate to menu:Project Settings[VS Code integration] and toggle the "Run local config from VS Code" to **On**.
 * Your project must **not** make use of xref:dynamic-config#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
 [#steps]
