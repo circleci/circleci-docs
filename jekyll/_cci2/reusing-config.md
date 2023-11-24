@@ -748,7 +748,7 @@ executors:
     docker:
       - image: cimg/node:lts
     environment:
-     ENV: ci
+      ENV: ci
 
 jobs:
   build:
@@ -769,7 +769,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     environment:
-     ENV: ci       # From executor.
+      ENV: ci       # From executor.
     steps:
       - run: echo "Node will not be installed."
 ```
@@ -841,7 +841,7 @@ jobs:
         type: string
     machine: true
     steps:
-      - say:
+      - saywhat:
           saywhat: "<< parameters.saywhat >>"
 commands:
   saywhat:
