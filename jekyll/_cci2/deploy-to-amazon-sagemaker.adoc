@@ -1,7 +1,7 @@
 ---
 contentTags:
   platform:
-  - Cloud;l;
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
@@ -12,58 +12,72 @@ contentTags:
 :icons: font
 :experimental:
 
-[NOTE]
-====
-This template will help you create a new docs page that shows the reader how to carry out a task and accomplish a specific goal with CircleCI. Content templates help you to:
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available. The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is also in **open preview**.
 
-* Develop new content quickly
-* Ensure your page conforms to the style guide
+This how-to guide will walk you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker, and track those releases in the CircleCI release dashboard with the ability to manage promotions and rollbacks. You will orchestrate model deployments to endpoints across different environments. The link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] allows you to train a new model package version and then deploy it across multiple environments.
 
-To use this template, make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-how-to.adoc?plain=1[here]. There is additional detail in the comments.
+For further information about the orb and the releases feature see the following:
 
-Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
-====
+* xref:releases/releases-overview#[Releases overview]
+* link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
 
-In a how-to guide, include one or two opening paragraphs. The opening paragraph should be used to briefly describe to the reader what the reader will do using this guide, and what the outcomes are when they successfully finish the task. The information in the opening paragraph should help answer the following questions for the reader:
-
-* "What’s in it for me?"
-* "How does this feature / task help me create more value?"
-
-TIP: Since the reader will usually want to quickly get to the task at hand, keep the introduction succinct.
-
-TIP: Consider providing a link to an overview or conceptual doc, should the reader be interested in more explanatory or background information regarding the feature or task.
-ß
 [#prerequisites]
 == Prerequisites
 
-This is the first subsection in the how-to guide. List any prerequisites that the reader needs to have already met in order for them to successfully complete the task. These may include:
+To follow along with this how-to guide you will need the following:
 
-// The following will render as an unordered (bullet) list
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free]
+* Basic knowledge of Amazon SageMaker
+* An AWS account with access to SageMaker and a SageMaker studio domain
+* A copy of the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples[example repo]
 
-* Completing a certain task, such as signing up for a CircleCI account and having at least one project building in CircleCI
-* CircleCI plan
-* Roles and permissions
-* Skills/knowledge
-// This renders as a nested item
-** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:parallelism-faster-jobs#[Test splitting and parallelism] page."
-* Any other dependencies
+[#set-up-a-circleci-release-environment]
+== 1. Set up a CircleCI release environment
 
-Sometimes, there may be topics to know or tasks to complete that are _helpful_ in order to successfully finish the how-to guide, but do not necessarily have a negative impact on the user's flow if they only do those as they go along. For example, you may include generating an API token in the how-to steps itself, rather than listing it as a strict prerequisite. Use your best judgment to decide whether to add such a requirement as a prerequisite or as a step that is part of the how-to.
+First, set up a release environment to monitor your releases from the CircleCI web app, and access options to manage promotions and rollbacks.
 
-// The section headings in which you outline the steps should be in an active voice
-[#carry-out-the-task]
-== 1. Carry out the task
+. In the CircleCI web app, select **Releases** from the sidebar
+. If this is your first release environment, you will see an option to btn:[Add Release Environment]. If not, Click btn:[Configure Environments] in the top right corner, and then click btn:[Configure New Environment]
++
+image::deploy/add-release-environment.png[Screenshot showing option to add a new release environment]
+. In the popup, select **Amazon SageMaker** from the "Environment" dropdown. Give your new environment a name, and click btn:[Create Environment]
++
+image::deploy/create-new-environment.png[Screenshot showing new release environment popup]
+. Click on your new environment name to enter the environment view
+. Click btn:[Create New Token]
+. Click btn:[Create Token]. Be sure to save this token, you will create an environment variable later to store it.
 
-The main body of the guide should be broken into logical steps, with headings for each step. The steps should guide the reader through using the feature.
+[#set-up-amazon-sagemaker-access]
+== 2. Set up Amazon SageMaker access
 
-Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
+[#oidc-identity-provider]
+=== a. OIDC Identity Provider
 
+In this section you will create an IAM (Identity and Access Management) Identity Provider in your AWS IAM for the CircleCI OIDC Provider. The Amazon SageMaker orb uses OIDC. You may already have this set up, in which case you can skip this section. For more information on CircleCI OIDC functionality, see the xref:openid-connect-tokens#authenticate-jobs-with-cloud-providers[Using OpenID Connect tokens in jobs] page.
 
+. Navigate to your AWS Management Console
+. Go to menu:IAM[Access management > Identity providers]
+. Select **Add Provider**
++
+image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console Add Provider option]
+. Under "Provider Type", select **OpenID Connect**
+. Enter your "Provider URL". This will be `https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
++
+{% include snippets/find-organization-id.adoc %}
+. Click **Get Thumbprint**
+. For "Audience" enter your organization ID
+. Click btn:[Add Provider]
 
-In a how-to guide, you might walk the reader through an example scenario. Examples should be based on real-world use cases as much as possible and address business objectives.
+Next, create a Role.
 
-[#this-is-a-subsection-title]
-=== 1. This is a subsection title
+[#role]
+=== b. Role
+
+. From your AWS management console, navigate to menu:IAM[Roles]
+. Click **Create Role**
+
+#Add all steps for creating the Role#
+
 
 Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
 
