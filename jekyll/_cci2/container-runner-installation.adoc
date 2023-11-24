@@ -77,6 +77,52 @@ agent:
 helm install container-agent container-agent/container-agent -n circleci -f values.yaml
 ----
 
+
+[#enable-rerun-job-with-ssh]
+== 3. Enable Rerun job with SSH (Optional) (Open Preview)
+The Rerun job with SSH feature is now in open preview for CircleCI Container Runner. To enable this optional feature, follow the instructions below.
+
+=== Retry With SSH Considerations - Container Runner
+Before enabling this feature, please read through all considerations below.
+
+- Task-agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the cluster container runner is installed on.
+
+- The host port used by the SSH server is currently fixed to `54782`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple machine runners are installed on the same host.
+
+- The SSH server will inherit the same user privileges and associated access authorizations as the task-agent, defined by the `runner-command_prefix,runner.command_prefix` parameter.
+
+- The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH. However, only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
+
+- Rerunning a job with SSH will hold the job open for **two hours** if a connection is made to the SSH server, or **ten minutes** if no connection is made, unless canceled. While in this state, the job is counted against an organization’s concurrency limit, and the task-agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
+
+- When establishing a SSH connection, users may experience a warning related to a host change due to the reuse of a previously used port to connect to a different pod. RSA fingerprints of hosts can be cross-referenced with the output in the console for verification.
+
+
+=== Enabling Rerun job with SSH - Container Runner (Open Preview)
+The Rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8s.io/[Gateway API] to facilitate SSH access from outside your cluster. To enable this feature, Gateway API resources must first be provisioned on your cluster, and the CircleCI container agent configuration must be updated.
+
+
+NOTE: **Supported Gateway API implementations:**
+CircleCI has tested and currently supports link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other Gateway API implementations that support TCPRoute resources are likely compatible, but these implementations have not been tested and may not be compatible. Our recommendation is to use the link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway chart] as your implementation.
+
+
+==== Install Envoy Gateway to your cluster
+First, install the Envoy Gateway chart and wait for Envoy Gateway to become available, as defined in the 
+link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway TCP Routing installation document].
+
+
+==== Enable the Rerun job with SSH feature
+Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = “true”` parameter to the Container Runner configuration, and redeploy the updated manifest.
+
+
+[source,yaml]
+----
+agent:
+  ssh:
+    enabled: "true"
+----
+
+
 [#container-runner-configuration-example]
 == Container runner configuration example
 
