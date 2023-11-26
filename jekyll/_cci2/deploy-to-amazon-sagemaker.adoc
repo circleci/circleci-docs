@@ -45,6 +45,8 @@ image::deploy/add-release-environment.png[Screenshot showing option to add a new
 image::deploy/create-new-environment.png[Screenshot showing new release environment popup]
 . Click on your new environment name to enter the environment view
 . Click btn:[Create New Token]
++
+image::deploy/release-create-new-token.png[Screenshot showing create new token button]
 . Click btn:[Create Token]. Be sure to save this token, you will create an environment variable later to store it.
 
 [#set-up-amazon-sagemaker-access]
@@ -61,34 +63,135 @@ In this section you will create an IAM (Identity and Access Management) Identity
 +
 image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console Add Provider option]
 . Under "Provider Type", select **OpenID Connect**
-. Enter your "Provider URL". This will be `https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
+. Enter your "Provider URL". This will be `\https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
 +
 {% include snippets/find-organization-id.adoc %}
 . Click **Get Thumbprint**
 . For "Audience" enter your organization ID
 . Click btn:[Add Provider]
 
-Next, create a Role.
+Next, create a Policy and then a Role.
+
+[#policy]
+=== b. Policy
+
+. From your AWS management console, navigate to menu:IAM[Policies]
+. Click btn:[Create Policy]
+. Click btn:[JSON] to select the JSON policy editor and then copy in the following permissions. We have organized the permissions into two groups. OrbPermissions and S3Access statements are used for the deployment of the model to the endpoints. The S3AccessTrainModel and SageMakerTrainModel statements are needed if you want to train the demo model we provide.
++
+NOTE: Update the S3 bucket information to match your setup. Create a bucket if one does not yet exist.
++
+[,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "OrbPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:AddTags",
+                "sagemaker:CreateEndpointConfig",
+                "sagemaker:CreateModel",
+                "sagemaker:DescribeEndpoint",
+	 	        "sagemaker:DescribeEndpointConfig",
+                "sagemaker:ListEndpoints",
+                "sagemaker:ListModelPackages",
+                "sagemaker:ListTags",
+                "sagemaker:UpdateEndpoint",
+                "iam:PassRole"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "S3Access",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<BUCKET_FOR_MODEL_ASSETS>/*"
+            ]
+        },
+        {
+            "Sid": "S3AccessTrainModel",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sagemaker-sample-files/*",
+                "arn:aws:s3:::circleci-sagemaker-pipeline",
+                "arn:aws:s3:::circleci-sagemaker-pipeline/*"
+            ]
+        },
+        {
+            "Sid": "SageMakerTrainModel",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateTrainingJob",
+                "sagemaker:DescribeTrainingJob",
+                "logs:DescribeLogStreams",
+                "sagemaker:ListModelPackageGroups",
+                "sagemaker:CreateModelPackage",
+                "sagemaker:UpdateModelPackage"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+----
+
+. Scroll down and click btn:[Next]
+. Give your policy a name and then click btn:[Create Policy]
 
 [#role]
-=== b. Role
+=== c. Role
 
 . From your AWS management console, navigate to menu:IAM[Roles]
 . Click **Create Role**
+. Select **Web Identity** and then select the CircleCI provider you created above, and under Audience, select your org ID
+. Use the search function to find the policy you created above by name, select it and click btn:[Next]
+. Give your Role a name, and then scroll to the Trust policy section. Set up the Trust relationship between the Role and the CircleCI OIDC Provider. Here is an example Policy.
++
+NOTE: you must replace the placeholders <CIRCLECI-ORG-ID> and <CIRCLECI-PROJECT-ID> with your proper info.
++
+[,json]
+----
+{
+	"Version": "2012-10-17",
+	"Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::<AWS-ACCOUNT-ID>:oidc-provider/oidc.circleci.com/org/<CIRCLECI-ORG-ID>"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringLike": {
+                    "oidc.circleci.com/org/<CIRCLECI-ORG-ID>:sub": "org/<CIRCLECI-ORG-ID>/project/<CIRCLECI-PROJECT-ID>/user/*"
+                }
+            }
+        },
+        {
+			"Effect": "Allow",
+			"Principal": {
+				"Service": "sagemaker.amazonaws.com"
+			},
+			"Action": "sts:AssumeRole"
+		}
 
-#Add all steps for creating the Role#
+    ]
+}
+----
+. Click btn:[Create Role]
+. Select your roll from the list and copy the Role ARN, you will need this in the next section.
++
+image::deploy/role-arn.png[Screenshot showing location of Role ARN]
 
-
-Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
-
-* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
-* Otherwise, consider using lowercase letters. (As an example, see xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests])
-
-Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
-
-* Item 1
-* Item 2
-* Item 3
 
 [#using-tables]
 === 2. Using tables
