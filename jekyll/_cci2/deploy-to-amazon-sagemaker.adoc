@@ -18,7 +18,7 @@ This how-to guide walks you through the steps to set up and use the Amazon SageM
 
 For further information about the orb and the releases feature see the following:
 
-* xref:/release/releases-overview#[Releases overview]
+* xref:./release/releases-overview#[Releases overview]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
 
 [#prerequisites]
