@@ -14,7 +14,7 @@ contentTags:
 
 NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available. The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is also in **open preview**.
 
-This how-to guide will walk you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker, and track those releases in the CircleCI release dashboard with the ability to manage promotions and rollbacks. You will orchestrate model deployments to endpoints across different environments. The link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] allows you to train a new model package version and then deploy it across multiple environments.
+This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. You will track releases in the CircleCI release dashboard. This gives you the ability to manage promotions and rollbacks. You will orchestrate model deployments to endpoints across different environments. The link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] allows you to train a new model package version and then deploy it across multiple environments.
 
 For further information about the orb and the releases feature see the following:
 
@@ -69,8 +69,6 @@ image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console
 . Click **Get Thumbprint**
 . For "Audience" enter your organization ID
 . Click btn:[Add Provider]
-
-Next, create a Policy and then a Role.
 
 [#policy]
 === b. Policy
@@ -198,7 +196,7 @@ image::deploy/role-arn.png[Screenshot showing location of Role ARN]
 
 The CircleCI Amazon SageMaker orb requires some environment variables to function. You can store these environment variables at the project level, or you can store them using a xref:contexts#[context]. The following steps show how to add the environment variables at the project level. You need to add two environment variables, as follows:
 
-* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:release/release-overview#[CircleCI releases]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
+* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:release/releases-overview#[CircleCI releases]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
 * `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
 
 . From the CircleCI web app, click **Dashboard** in the sidebar
