@@ -12,9 +12,9 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available. The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is also in **open preview**.
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available. The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is also in **open preview**. No charges will be associated with using the orb.
 
-This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. You will track releases in the CircleCI release dashboard. This gives you the ability to manage promotions and rollbacks. You will orchestrate model deployments to endpoints across different environments. The link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] allows you to train a new model package version and then deploy it across multiple environments.
+This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. It uses the sample repository link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] as a reference, but you can adapt every step to your requirements. Through this guide, you will learn how to orchestrate model deployment to endpoints across different environments, as well as track and manage your releases in the CircleCI release UI.
 
 For further information about the orb and the releases feature see the following:
 
@@ -348,7 +348,7 @@ image::deploy/job-approval.png[Approval job]
 [#check-in-on-your-release]
 == 6. Check in on your release
 
-The CircleCI release dashboard offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate easily to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
+The CircleCI release UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate easily to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
 
 image::deploy/sagemaker-releases.png[Releases dashboard]
 
