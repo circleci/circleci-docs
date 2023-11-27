@@ -20,6 +20,7 @@ For further information about the orb and the releases feature see the following
 
 * xref:/release/releases-overview#[Releases overview]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
+* link:https://circleci.com/blog/amazon-sagemaker-deployment-orchestration/[**Blog post**: Using Amazon SageMaker orb to orchestrate model deployment across environments]
 
 [#prerequisites]
 == Prerequisites
