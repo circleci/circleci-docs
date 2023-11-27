@@ -153,10 +153,8 @@ NOTE: Update the S3 bucket information to match your setup. Create a bucket if o
 . Click **Create Role**
 . Select **Web Identity** and then select the CircleCI provider you created above, and under Audience, select your org ID
 . Use the search function to find the policy you created above by name, select it and click btn:[Next]
-. Give your Role a name, and then scroll to the Trust policy section. Set up the Trust relationship between the Role and the CircleCI OIDC Provider. Here is an example Policy.
+. Give your Role a name, and then scroll to the Trust policy section. Set up the Trust relationship between the Role and the CircleCI OIDC Provider. Here is an example Policy. Remember to replace the placeholders `<CIRCLECI-ORG-ID>` and `<CIRCLECI-PROJECT-ID>` with your values.
 +
-NOTE: Replace the placeholders `<CIRCLECI-ORG-ID>` and `<CIRCLECI-PROJECT-ID>` with your values.
-
 [,json]
 ----
 {
