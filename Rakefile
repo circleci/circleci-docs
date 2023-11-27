@@ -37,7 +37,17 @@ end
 desc 'Test with HTMLproofer'
 task :test do
 
-  ignore_ja_files = Dir.glob('./jekyll/_site/docs/ja/**/*').select { |e| File.file? e };
+  def makeFilePath(target_dir)
+    return "./jekyll/_site/#{JEKYLL_BASENAME}/#{target_dir}/index.html"
+  end
+
+  ignore_dirs = [
+    "api/v2",
+    "reference-2-1"
+  ]
+
+  ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
+  ignore_ja_files = Dir.glob("./jekyll/_site/#{JEKYLL_BASENAME}/ja/**/*").select { |e| File.file? e };
 
   options = {
     :allow_hash_href => true,
@@ -46,7 +56,7 @@ task :test do
     :disable_external => true,
     :empty_alt_ignore => true,
     :parallel => { :in_processes => HTML_PROOFER_PARALLEL},
-    :file_ignore => ignore_ja_files,
+    :file_ignore => ignore_files.concat(ignore_ja_files),
   }
 
   HTMLProofer.check_directory("./jekyll/_site", options).run
