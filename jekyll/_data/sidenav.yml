@@ -264,8 +264,6 @@ en:
             link: runner-config-reference
       - name: How-to Guides
         children:
-          - name: Upgrading machine runner on cloud
-            link: upgrading-circleci-machine-runner-on-cloud
           - name: Upgrade machine runner on server
             link: runner-upgrading-on-server
       - name: Reference

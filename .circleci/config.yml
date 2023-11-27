@@ -90,7 +90,7 @@ commands:
 workflows:
 
   build-deploy:
-    when: 
+    when:
       not: << pipeline.parameters.run-schedule >>
     jobs:
       - build_server_pdfs:
@@ -220,9 +220,6 @@ jobs:
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run: sudo apt-get update; sudo apt-get --yes install nkf
-      # - run:
-      #     name: Shim untranslated Japanese pages
-      #     command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
       - set-jekyll-basename
       - run:
           name: Build the Jekyll site
@@ -253,7 +250,7 @@ jobs:
           root: ~/circleci-docs/jekyll/
           paths:
             - _site/*
-  
+
   reindex-search:
     executor:
       name: ruby/default
@@ -286,4 +283,4 @@ jobs:
       - image: cibuilds/aws:1.16.185
     steps:
       - trigger-docs-platform-build
-      
+

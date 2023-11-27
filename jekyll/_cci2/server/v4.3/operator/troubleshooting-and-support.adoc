@@ -133,15 +133,3 @@ sudo docker run --rm -it clojure lein repl :connect "${INET_ADDR}":6005
 kill $!
 ----
 
-[#disable-concurrency-limits]
-== Disable concurrency limits
-
-If your org is hitting the hard-coded concurrency limits, you can disable these limits by setting the following in your `values.yaml`:
-
-[source,yaml]
-----
-distributor_dispatcher:
-  ...
-  disable_concurrency: false
-----
-
