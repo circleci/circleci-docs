@@ -6,13 +6,13 @@ contentTags:
 = Releases overview - Open preview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn CircleCI releases for visibility into Kubernetes releases, how it works, and how to get set up
+:page-description: Learn CircleCI releases for visibility into Kubernetes and Amazon SageMaker releases, how it works, and how to get set up
 :icons: font
 :experimental:
 
 NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
 
-Visualise and control deployments to your Kubernetes cluster with CircleCI release environments.
+Visualise and control your deployments with CircleCI release environments. The CircleCI releases feature currently supports deployments to Kubernetes, and Amazon SageMaker.
 
 [#introduction]
 == Introduction
@@ -32,11 +32,13 @@ We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for pro
 [#quickstart]
 == Quickstart
 
-If you want to get started with CircleCI releases right away, you can jump to:
+If you want to get started with CircleCI releases for Kubernetes right away, you can jump to:
 
 * xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up a release environment]
 * xref:configure-your-kubernetes-components.adoc#[Tutorial 2: Configure your Kubernetes components]
 * xref:manage-releases#[How-to: Manage releases]
+
+To get set up with releases for Amazon SageMaker, refer to the xref:../deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
 
 [#how-it-works]
 == How it works
