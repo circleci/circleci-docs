@@ -29,7 +29,8 @@ To follow along with this how-to guide you will need the following:
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free]
 * Basic knowledge of Amazon SageMaker
-* An AWS account with access to SageMaker and a SageMaker studio domain
+* An AWS account with access to SageMaker
+* A SageMaker studio domain to follow along the training step, or an existing Model Package Registry if you have already trained one
 * A copy of the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples[example repository] building on CircleCI. For steps to get the project set up, see the xref:create-project#[Create a project in CircleCI] page.
 
 [#set-up-a-circleci-release-environment]
