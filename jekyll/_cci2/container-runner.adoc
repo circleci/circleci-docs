@@ -1,5 +1,9 @@
 ---
 description: Details of CircleCI's container runner
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.3
 ---
 = Container runner reference
 :page-layout: classic-docs
