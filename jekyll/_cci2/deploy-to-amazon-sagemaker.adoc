@@ -257,7 +257,7 @@ Make the following updates:
 |===
 
 [#models]
-== 4. Build a model package version
+== 5. Build a model package version
 
 The sample app used in this how-to guide uses a model commonly found in AWS documentation, **Abalone**. It has just been renamed. If you already have your own model, feel free to adapt the configuration file to use that one instead. All you will need to do is update the `model_name` parameter.
 
@@ -269,7 +269,7 @@ Assuming you are using our example repository, follow these steps to build a new
 Every time you run this workflow by pushing to the `model-train` branch, anew model version is created.
 
 [#using-tables]
-== 5. Use the orb
+== 6. Use the orb
 
 Let's break down the `deploy-model-through-to-prod workflow`. Our first job is `aws-sagemaker/create_model`. This job creates a model from your latest Model Package in the registry. This will be what we then deploy to the inference endpoints. In general, `create-model` just needs to be called one time at the beginning of your workflow:
 
@@ -348,7 +348,7 @@ Next, is an approval job. This stops the workflow from deploying to production u
 image::deploy/job-approval.png[Approval job]
 
 [#check-in-on-your-release]
-== 6. Check in on your release
+== 7. Check in on your release
 
 The CircleCI release UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate easily to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
 
