@@ -109,16 +109,24 @@ link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway TCP Ro
 
 
 ==== 2. Enable the Rerun job with SSH feature
-Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = “true”` parameter to the container runner configuration, and redeploy the updated manifest.
 
-For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
-
+. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = “true”` parameter to the container runner configuration :
++
 [source,yaml]
 ----
 agent:
   ssh:
     enabled: "true"
 ----
+
+. Redeploy the updated manifest:
++
+[,yaml]
+----
+helm upgrade <release-name> container-agent/container-agent -n <namespace> -f values.yaml
+----
+
+For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
 
 [#container-runner-configuration-example]
 == Container runner configuration example
