@@ -264,8 +264,6 @@ en:
             link: runner-config-reference
       - name: How-to Guides
         children:
-          - name: Upgrading machine runner on cloud
-            link: upgrading-circleci-machine-runner-on-cloud
           - name: Upgrade machine runner on server
             link: runner-upgrading-on-server
       - name: Reference
@@ -328,6 +326,8 @@ en:
             link: deployment-overview
       - name: How-to guides
         children:
+          - name: Deploy to Amazon SageMaker
+            link: deploy-to-amazon-sagemaker
           - name: Deploy Android applications
             link: deploy-android-applications
           - name: Deploy to Artifactory

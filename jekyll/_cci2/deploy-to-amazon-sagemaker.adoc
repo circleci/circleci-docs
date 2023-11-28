@@ -1,0 +1,366 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Deploy to Amazon SageMaker
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A short page description goes here
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available. The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is also in **open preview**. No charges will be associated with using the orb.
+
+This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. It uses the sample repository link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] as a reference, but you can adapt every step to your requirements. Through this guide, you will learn how to orchestrate model deployment to endpoints across different environments, as well as track and manage your releases in the CircleCI release UI.
+
+For further information about the orb and the releases feature see the following:
+
+* xref:/release/releases-overview#[Releases overview]
+* link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
+* link:https://circleci.com/blog/amazon-sagemaker-deployment-orchestration/[**Blog post**: Using Amazon SageMaker orb to orchestrate model deployment across environments]
+
+[#prerequisites]
+== Prerequisites
+
+To follow along with this how-to guide you will need the following:
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free]
+* Basic knowledge of Amazon SageMaker
+* An AWS account with access to SageMaker
+* A SageMaker studio domain to follow along the training step, or an existing Model Package Registry if you have already trained one
+* A copy of the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples[example repository] building on CircleCI. For steps to get the project set up, see the xref:create-project#[Create a project in CircleCI] page.
+
+[#set-up-a-circleci-release-environment]
+== 1. Set up a CircleCI release environment
+
+First, set up a release environment to monitor your releases from the CircleCI web app, and access options to manage promotions and rollbacks.
+
+. In the CircleCI web app, select **Releases** from the sidebar
+. If this is your first release environment, you will see an option to btn:[Add Release Environment]. If not, Click btn:[Configure Environments] in the top right corner, and then click btn:[Configure New Environment]
++
+image::deploy/add-release-environment.png[Screenshot showing option to add a new release environment]
+. In the popup, select **Amazon SageMaker** from the "Environment" dropdown. Give your new environment a name, and click btn:[Create Environment]
++
+image::deploy/create-new-environment.png[Screenshot showing new release environment popup]
+. Click on your new environment name to enter the environment view
+. Click btn:[Create New Token]
++
+image::deploy/release-create-new-token.png[Screenshot showing create new token button]
+. Click btn:[Create Token]. Be sure to save this token, you will create an environment variable later to store it.
+
+[#set-up-amazon-sagemaker-access]
+== 2. Set up Amazon SageMaker access
+
+[#oidc-identity-provider]
+=== a. OIDC Identity Provider
+
+In this section you will create an IAM (Identity and Access Management) Identity Provider in your AWS IAM for the CircleCI OIDC Provider. The Amazon SageMaker orb uses OIDC. You may already have this set up, in which case you can skip this section. For more information on CircleCI OIDC functionality, see the xref:openid-connect-tokens#authenticate-jobs-with-cloud-providers[Using OpenID Connect tokens in jobs] page.
+
+. Navigate to your AWS Management Console
+. Go to menu:IAM[Access management > Identity providers]
+. Select **Add Provider**
++
+image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console Add Provider option]
+. Under "Provider Type", select **OpenID Connect**
+. Enter your "Provider URL". This will be `\https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
++
+{% include snippets/find-organization-id.adoc %}
+. Click **Get Thumbprint**
+. For "Audience" enter your organization ID
+. Click btn:[Add Provider]
+
+[#policy]
+=== b. Policy
+
+. From your AWS management console, navigate to menu:IAM[Policies]
+. Click btn:[Create Policy]
+. Click btn:[JSON] to select the JSON policy editor and then copy in the following permissions. We have organized the permissions into two groups. OrbPermissions and S3Access statements are used for the deployment of the model to the endpoints. The S3AccessTrainModel and SageMakerTrainModel statements are needed if you want to train the demo model we provide.
++
+NOTE: Update the S3 bucket information to match your setup. Create a bucket if one does not yet exist.
++
+[,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "OrbPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:AddTags",
+                "sagemaker:CreateEndpointConfig",
+                "sagemaker:CreateModel",
+                "sagemaker:DescribeEndpoint",
+	 	        "sagemaker:DescribeEndpointConfig",
+                "sagemaker:ListEndpoints",
+                "sagemaker:ListModelPackages",
+                "sagemaker:ListTags",
+                "sagemaker:UpdateEndpoint",
+                "iam:PassRole"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "S3Access",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<BUCKET_FOR_MODEL_ASSETS>/*"
+            ]
+        },
+        {
+            "Sid": "S3AccessTrainModel",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sagemaker-sample-files/*",
+                "arn:aws:s3:::circleci-sagemaker-pipeline",
+                "arn:aws:s3:::circleci-sagemaker-pipeline/*"
+            ]
+        },
+        {
+            "Sid": "SageMakerTrainModel",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateTrainingJob",
+                "sagemaker:DescribeTrainingJob",
+                "logs:DescribeLogStreams",
+                "sagemaker:ListModelPackageGroups",
+                "sagemaker:CreateModelPackage",
+                "sagemaker:UpdateModelPackage"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+----
+
+. Scroll down and click btn:[Next]
+. Give your policy a name and then click btn:[Create Policy]
+
+[#role]
+=== c. Role
+
+. From your AWS management console, navigate to menu:IAM[Roles]
+. Click **Create Role**
+. Select **Web Identity** and then select the CircleCI provider you created above, and under Audience, select your org ID
+. Use the search function to find the policy you created above by name, select it and click btn:[Next]
+. Give your Role a name, and then scroll to the Trust policy section. Set up the Trust relationship between the Role and the CircleCI OIDC Provider. Here is an example Policy. Remember to replace the placeholders `<CIRCLECI-ORG-ID>` and `<CIRCLECI-PROJECT-ID>` with your values.
++
+[,json]
+----
+{
+	"Version": "2012-10-17",
+	"Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::<AWS-ACCOUNT-ID>:oidc-provider/oidc.circleci.com/org/<CIRCLECI-ORG-ID>"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringLike": {
+                    "oidc.circleci.com/org/<CIRCLECI-ORG-ID>:sub": "org/<CIRCLECI-ORG-ID>/project/<CIRCLECI-PROJECT-ID>/user/*"
+                }
+            }
+        },
+        {
+			"Effect": "Allow",
+			"Principal": {
+				"Service": "sagemaker.amazonaws.com"
+			},
+			"Action": "sts:AssumeRole"
+		}
+
+    ]
+}
+----
+
+. Click btn:[Create Role]
+. Select your role from the list and copy the Role ARN, you will need this in the next section.
++
+image::deploy/role-arn.png[Screenshot showing location of Role ARN]
+
+[#set-environment-variables]
+== 3. Set environment variables
+
+The CircleCI Amazon SageMaker orb requires some environment variables to function. You can store these environment variables at the project level, or you can store them using a xref:contexts#[context]. The following steps show how to add the environment variables at the project level. You need to add two environment variables, as follows:
+
+* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:release/releases-overview#[CircleCI releases]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
+* `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
+
+. From the CircleCI web app, click **Dashboard** in the sidebar
+. Use the project filter dropp-down to choose your project
+. Click btn:[Project Settings] and then choose **Environment Variables**
+. Click btn:[Add Environment Variable] button to enter a name and value of the new environment variable.
++
+image::deploy/add-env-var.png[Screenshot showing add environment variable popup]
+. Repeat step four for the second environment variable
+
+[#set-up-config]
+== 4. Set up your CircleCI configuration
+
+Take a look at the `.circleci/config.yml` for the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples/blob/main/.circleci/config.yml[sample project]. There is a block of pipeline parameters at the top. You need to update the defaults with your values.
+
+[source,yaml]
+----
+parameters:
+  bucket:
+    type: string
+    default: circleci-sagemaker-pipeline
+  model_desc:
+    type: string
+    default: "Kitten Classifier allowing us to distinguish between giraffes and kittens."
+  model_name:
+    type: string
+    default: kitten-classifier
+  project_id:
+    type: string
+    default: "e47ee9b0-446f-44cf-bec8-5407ceb06930"
+  region_name:
+    type: string
+    default: us-east-1
+----
+
+Make the following updates:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Parameter
+|Default
+
+|`bucket`
+|The bucket you set up in the Role Policy
+
+|`model_desc`
+|A description of your model
+
+|`model_name`
+|The name of the model
+
+|`project_id`
+|The CircleCI project ID, you can find this on the Project Settings page in the CircleCI web app
+
+|`region_name`
+|The region, for example, `us-east-1`
+|===
+
+[#models]
+== 5. Build a model package version
+
+The sample app used in this how-to guide uses a model commonly found in AWS documentation, **Abalone**. It has just been renamed. If you already have your own model, feel free to adapt the configuration file to use that one instead. All you will need to do is update the `model_name` parameter.
+
+Assuming you are using our example repository, follow these steps to build a new model package version:
+
+. There is a workflow (`model-train`) configured to run on the branch `model-train`. Checkout the `model-train` branch, and push it up to GitHub
+. The `model-train` workflow will make a new model package version in the model registry. If the model package doesn't already exist, it will create it.
+
+Every time you run this workflow by pushing to the `model-train` branch, anew model version is created.
+
+[#using-tables]
+== 6. Use the orb
+
+Let's break down the `deploy-model-through-to-prod workflow`. Our first job is `aws-sagemaker/create_model`. This job creates a model from your latest Model Package in the registry. This will be what we then deploy to the inference endpoints. In general, `create-model` just needs to be called one time at the beginning of your workflow:
+
+[,yaml]
+----
+- aws-sagemaker/create_model:
+    # job name that will show in Workflow DAG
+    name: create-model
+    # s3 bucket where asset will be stored
+    bucket: << pipeline.parameters.bucket >>
+    # Name of the model in SageMaker that we will be deploying.
+    model_name: << pipeline.parameters.model_name >>
+    # We use the pipeline.id as the unique identifier for some of the configs we create
+    circle_pipeline_id: << pipeline.id >>
+    # Region where we are deploying to
+    region_name: << pipeline.parameters.region_name >>
+    filters: *main-branch-only
+----
+
+* Aside from `name` and `filters`, all other parameters are passed in from our pipeline parameters.
+* `name` controls the name of this job visible in the Workflow graph in the CircleCI web app.
+* `filters` allows you to control what branch the job runs on.
+
+Next, we need to create the endpoint configuraiton, this happens in the job `aws-sagemaker/create_endpoint_configuration`:
+
+[,yaml]
+----
+- aws-sagemaker/create_endpoint_configuration:
+    name: dev:create-model-endpoint-config
+    bucket: << pipeline.parameters.bucket >>
+    deploy_environment: dev
+    model_name: << pipeline.parameters.model_name >>
+    circle_pipeline_id: << pipeline.id >>
+    circle_project_id: << pipeline.parameters.project_id >>
+    region_name: << pipeline.parameters.region_name >>
+    requires:
+        - create-model
+    filters: *main-branch-only
+----
+
+* `deploy_environment` is an arbitrary string you can use to bucket your model releases, for example, dev, staging, testing, prod. In our example config, you can see we are only using two, `dev` and `prod`.
+
+Next, we need to push out the updated configuration, this happens in the job `aws-sagemaker/deploy_endpoint`:
+
+[,yaml]
+----
+    - aws-sagemaker/deploy_endpoint:
+        name: dev:deploy-model-to-endpoint
+        bucket: << pipeline.parameters.bucket >>
+        deploy_environment: dev
+        model_name: << pipeline.parameters.model_name >>
+        # Description for the model. q: can we make it optional?
+        model_desc: << pipeline.parameters.model_desc >>
+        pipeline_id: << pipeline.id >>
+        # You can find this value in the Project Settings in CircleCI
+        project_id: << pipeline.parameters.project_id >>
+        region_name: << pipeline.parameters.region_name >>
+        requires:
+            - dev:create-model-endpoint-config
+        filters: *main-branch-only
+----
+
+* The only thing to set here is the `deploy_environment` so we know what `endpoint_configuration` to use. This will deploy your endpoint configuration.
+
+Next, is an approval job. This stops the workflow from deploying to production until a human approves it. When this does get approval, we then repeat the above steps of `aws-sagemaker/create_endpoint_configuration` and `aws-sagemaker/deploy_endpoint` but with `deploy_environment` set to `prod`.:
+
+[,yaml]
+----
+- promote-model-to-prod-endpoint:
+        type: approval
+    requires:
+        - dev:deploy-model-to-endpoint
+    filters: *main-branch-only
+----
+
+image::deploy/job-approval.png[Approval job]
+
+[#check-in-on-your-release]
+== 7. Check in on your release
+
+The CircleCI release UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate easily to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
+
+image::deploy/sagemaker-releases.png[Releases dashboard]
+
+Click on the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
+
+image::deploy/sagemaker-component-view.png[Releases component view]
+
+Select the version to see the version details page for version being released. Clicking on specific versions lets you monitor release progress in real-time.
+
+image::deploy/wait-for-availability.png[Releases version view]
+
+[#conclusion]
+== Conclusion
