@@ -326,6 +326,8 @@ en:
             link: deployment-overview
       - name: How-to guides
         children:
+          - name: Deploy to Amazon SageMaker
+            link: deploy-to-amazon-sagemaker
           - name: Deploy Android applications
             link: deploy-android-applications
           - name: Deploy to Artifactory
