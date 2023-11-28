@@ -322,6 +322,7 @@ Container runner needs the following Kubernetes permissions:
 ** List
 
 If link:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job with SSH] is enabled, the following permissions are also required:
+
 * link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
 ** Get
 
