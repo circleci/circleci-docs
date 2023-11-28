@@ -53,7 +53,7 @@ jobs:
 When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[set the variable in a shell command].
 
 [#pipeline-parameters-in-configuration]
-== Pipeline parameters in configuration
+== Pipeline parameters
 
 Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
 
@@ -193,7 +193,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 - Pipeline parameters are not in scope in the body of orbs, even inline orbs, to prevent data leaks.
 
 [#conditional-workflows]
-== Conditional workflows
+== Pipeline parameters and conditional workflows
 
 Use the xref:configuration-reference#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:configuration-reference#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
