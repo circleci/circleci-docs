@@ -501,8 +501,8 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 [#limitations]
 == Limitations
 
+* Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
 * There is no support for container environments other than Kubernetes at this time.
-* Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 * <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
 
 [#faqs]
