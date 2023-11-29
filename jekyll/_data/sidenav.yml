@@ -212,6 +212,8 @@ en:
             link: linux-cuda-images-support-policy
           - name: Remote Docker images support policy
             link: remote-docker-images-support-policy
+          - name: Windows images support policy
+            link: windows-images-support-policy
           - name: Xcode image policy
             link: xcode-policy
 
