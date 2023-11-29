@@ -42,7 +42,7 @@ Steps are collections of executable commands, which are run during a job.
 
 The `checkout` key is required under `steps` to checkout your code. The `run` key enables addition of arbitrary, multi-line shell command scripting.
 
-In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the xref:configuration-reference#steps[Steps key] section of the Configuration Reference.
+In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under steps. For a full list of step options see the xref:configuration-reference#steps[Steps key] section of the Configuration Reference.
 
 [#passing-parameters-to-jobs]
 == Passing parameters to jobs

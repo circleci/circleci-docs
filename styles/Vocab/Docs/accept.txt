@@ -63,3 +63,5 @@ cgroup
 CPUs
 JVM
 Lein
+Jira
+Atlassian
