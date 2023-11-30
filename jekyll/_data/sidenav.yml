@@ -206,6 +206,8 @@ en:
             link: high-uid-error
       - name: Reference
         children:
+          - name: Android images support policy
+            link: android-images-support-policy
           - name: Convenience images support policy
             link: convenience-images-support-policy
           - name: Linux CUDA images support policy
