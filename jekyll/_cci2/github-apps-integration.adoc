@@ -252,7 +252,7 @@ Open source plans are not currently available to GitHub App customers. CircleCI 
 xref:insights-tests#[Test Insights] is currently not supported.
 
 [#badges]
-=== Insights Snapshot Badges
+=== Insights snapshot badge
 
 The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported.
 
