@@ -16,11 +16,11 @@ Use the rerun failed tests feature to only rerun a subset of tests instead of re
 [#introduction]
 == Introduction
 
-When you select **rerun failed tests** (see image below), a new workflow is triggered where only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.  
+When you select **rerun failed tests** (see image below), a new workflow is triggered where only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.
 
 Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[rerun your workflow from failed]. This type of rerun executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
-This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.  
+This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
@@ -393,7 +393,7 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 ```
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your use case. 
+. Update the `glob` command to match your use case.
 
 [#configure-a-job-running-phpunit-tests]
 === Configure a job running PHPUnit tests
@@ -402,7 +402,7 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 +
 ```yaml
 
-# Use phpunit-finder to output list of tests to stdout for a test suite named functional 
+# Use phpunit-finder to output list of tests to stdout for a test suite named functional
 # Pass those tests as stdin to circleci tests run
 
 - run:
@@ -465,6 +465,9 @@ Django takes as input test filenames with a format that uses dots ("."), however
       [ -s files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
 
 - run:
+    name: Run tests
+    command:
+      # Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
       cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
       cat circleci_test_files.txt
       TESTFILES=$(cat circleci_test_files.txt)
