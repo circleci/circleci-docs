@@ -137,15 +137,15 @@ Configuration processing happens in the following stages:
 
 The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
-[#the-scope-of-pipeline-parameters]
-== The scope of pipeline parameters
+[#the-scope-of-parameters-in-configuration]
+== The scope of parameters in configuration
 
 Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
 
 [#element-parameter-scope]
 === Element parameter scope
 
-Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, for example, a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
+Element parameters, which are parameters set in a job, a command, or an executor, use lexical scoping. That is, element parameters are in scope within the element they are defined in. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
 ```yaml
 version: 2.1
@@ -191,6 +191,13 @@ Pipeline parameters which are defined in configuration are always in scope, with
 
 - Pipeline parameters are not in scope for the definition of other pipeline parameters, so they cannot depend on one another.
 - Pipeline parameters are not in scope in the body of orbs, even inline orbs, to prevent data leaks.
+
+[#pipeline-parameters-and-dynamic-configuration]
+=== Pipeline parameters and dynamic configuration
+
+When using setup workflows to pass control of the pipeline to a second configuration, all pipeline parameters that are declared in the setup workflow must also be declared, with the same defaults, in the second configuration.
+
+When the setup workflow passes control to a second configuration, the parameters passed _to_ the setup workflow will be merged in with any parameters specified _in_ the setup workflow, before being passed to the second configuration. When using dynamic configuration, the second configuration must tolerate receiving any parameters that the setup workflow's code passes, as well as any parameters that the setup workflow _could_ accept.
 
 [#conditional-workflows]
 == Pipeline parameters and conditional workflows
