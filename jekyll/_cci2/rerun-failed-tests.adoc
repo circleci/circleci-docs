@@ -380,14 +380,16 @@ Django takes as input test filenames with a format that uses dots ("."), however
 
 ```
 - run:
-    name: Run tests
+    name: get tests
     command: |
       # Get the test file names, write them to files.txt, and split them by historical timing data
       circleci tests glob "**/test*.py" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by-timings is optional
-      # Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
       [ -s files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
 
 - run:
+    name: Run tests
+    command:
+      # Change filepaths into format Django accepts (replace slashes with dots).  Save the filenames in a TESTFILES variable
       cat files.txt | tr "/" "." | sed "s/\.py//g" | sed "s/tests\.//g" > circleci_test_files.txt
       cat circleci_test_files.txt
       TESTFILES=$(cat circleci_test_files.txt)
