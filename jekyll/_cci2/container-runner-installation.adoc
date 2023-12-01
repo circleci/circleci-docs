@@ -100,7 +100,7 @@ The Rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8
 
 
 NOTE: **Supported Gateway API implementations:**
-CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support TCPRoute resources are likely compatible, but not all of these implementations have been tested, and may not be compatible. Our recommendation is to use Envoy Gateway as your implementation. As with most Gateway API implementations, note that Envoy Gateway is currently in beta and is still under development.
+CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support TCPRoute resources are likely to be compatible, but not all of these implementations have been tested, and therefore compatibility is not guaranteed. Our recommendation is to use Envoy Gateway as your implementation. Envoy Gateway is currently in beta and is under development.
 
 
 ==== 1. Install Envoy Gateway to your cluster
