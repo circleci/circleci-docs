@@ -28,7 +28,7 @@ Please note that a _default_ CircleCI pipeline executes steps in a non-interacti
 
 1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
-2. To start a job with SSH enabled, select the **Rerun job with SSH** option from the **Rerun Workflow** dropdown menu.
+2. To start a job with SSH enabled, select the **Rerun job with SSH** option from the **Rerun** dropdown menu.
 
      The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
      {: class="alert alert-info" }
