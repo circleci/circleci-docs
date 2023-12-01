@@ -66,8 +66,6 @@ Pipeline parameters support the following types:
 
 See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
 
-NOTE: When using setup workflows, all pipeline parameters must be present in the subsequent configuration, including in API calls. More information on setup workflows can be found in the xref:dynamic-config#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
-
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
 ```yml
@@ -198,6 +196,10 @@ Pipeline parameters which are defined in configuration are always in scope, with
 When using setup workflows to pass control of the pipeline to a second configuration, all pipeline parameters that are declared in the setup workflow must also be declared, with the same defaults, in the second configuration.
 
 When the setup workflow passes control to a second configuration, the parameters passed _to_ the setup workflow will be merged in with any parameters specified _in_ the setup workflow, before being passed to the second configuration. When using dynamic configuration, the second configuration must tolerate receiving any parameters that the setup workflow's code passes, as well as any parameters that the setup workflow _could_ accept.
+
+If there are name conflicts between pipeline parameters specified in a setup workflow and those specified in an API request when triggering a pipeline, the continuation process will fail, and the pipeline will error.
+
+More information on setup workflows can be found in the xref:dynamic-config#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
 
 [#conditional-workflows]
 == Pipeline parameters and conditional workflows
