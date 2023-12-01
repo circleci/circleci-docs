@@ -27,22 +27,22 @@ The following diagram illustrates how data flows between jobs:
 
 image::/docs/assets/img/docs/jobs-overview.png[Jobs overview]
 
-The job names shown in this diagram are just examples. You can name your jobs whatever you want.
+The job names shown in this diagram are just examples. You can name your jobs anything you want.
 
 Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux, macOS, or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
 
 When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
 
-See the xref:executor-intro#[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
+See the xref:executor-intro#[Introduction to Execution Environments] document for a comparison of the different executor types and links to more information about each option.
 
 [#steps-overview]
 == Steps overview
 
-Steps are collections of executable commands, which are run during a job.
+Steps are collections of executable commands, that run during a job.
 
-The `checkout` key is required under `steps` to checkout your code. The `run` key enables addition of arbitrary, multi-line shell command scripting.
+The `checkout` key is required under `steps` to checkout your code. The `run` key enables the addition of arbitrary, multi-line shell command scripting.
 
-In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under steps. For a full list of step options see the xref:configuration-reference#steps[Steps key] section of the Configuration Reference.
+In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under steps. For a full list of the step options see the xref:configuration-reference#steps[Steps key] section in xref:configuration-reference#[Configuration Reference].
 
 [#passing-parameters-to-jobs]
 == Passing parameters to jobs
@@ -75,7 +75,7 @@ workflows:
 [#using-a-job-from-an-orb]
 == Using a job from an orb
 
-Orbs are packages or reusable configuration that you can use in your projects. Orbs usually contain commands that you can use in your jobs, as well as whole jobs that you can schedule in your workflows.
+Orbs are packages or reusable configurations that you can use in your projects. Orbs usually contain commands that you can use in your jobs, as well as whole jobs that you can schedule in your workflows.
 
 Take the link:https://circleci.com/developer/orbs/orb/circleci/slack[Slack orb] as an example. This orb provides a job called link:https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification[`on-hold`], which you can use in your workflows. This job pauses the workflow to require manual approval, and sends a slack notification. To use this job, reference it in your workflow (see line 10):
 
@@ -141,7 +141,7 @@ workflows:
 ----
 
 [#next-steps]
-== Next Steps
+== Next steps
 
 * Read more about orchestrating jobs in the xref:workflows#[Using Workflows to Schedule Jobs] page.
 * Read more about passing data between jobs in the xref:workspaces#[Using Workspaces to Share Data between Jobs] page.
