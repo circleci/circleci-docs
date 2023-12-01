@@ -130,15 +130,7 @@ Once the changes have been pushed, return to your terminal and continue the setu
 
 You will be provided with a link to the project building on CircleCI where you can view the full pipeline. You should also see the CLI has automatically migrated you into a new development branch, named `alpha`. You can use any branch naming you would like, you do not need to exclusively develop on `alpha`.
 
-=== 8. Enable Dynamic Configuration
-
-Using the orb development kit makes use of link:/docs/dynamic-config/[Dynamic configuration], you will need to enable this feature. You will receive an error on your first pipeline that will state that this feature is not yet enabled.
-
-Following the link:/docs/dynamic-config/#getting-started-with-dynamic-config-in-circleci[Getting started with dynamic config in CircleCI] guide, open the **Project Settings** page for your orb on CircleCI, navigate to the **Advanced** tab, and click on the **Enable dynamic config using setup workflows** button.
-
-Once enabled, all future commits to your project will run through the full pipeline and test your orb. You could manually re-run the pipeline at this point, but since you are only working with sample code at this moment, it is not necessary.
-
-=== 9. Develop your orb
+=== 8. Develop your orb
 
 From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to fit your requirements. On each _push_, your orb will be automatically built and tested. More information on developing your orb can be found on the link:/docs/orb-author/#writing-your-orb[Orb authoring process] page.
 
