@@ -1,0 +1,32 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Customize claims in the OIDC token
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn about the capabilities to customize claims in OIDC tokens.
+:icons: font
+:experimental:
+
+[#introduction]
+== Introduction
+
+OpenID Connect (OIDC) tokens allow you to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. CircleCI OIDC tokens can be customized to meet the unique needs of different cloud services.
+
+[#on-demand-openid-connect-id-tokens]
+== On demand OpenID Connect ID tokens
+
+CircleCI allows creation of OIDC tokens on demand in a job. Mulitple OIDC tokens can be created in a job with options to customize claims.
+The circleci cli may be used in a step to do this.
+
+[source,shell]
+----
+circleci run oidc get --claims '{"aud"="audience_name"}'
+----
+
+The above command will create an OIDC token with the `aud` claim set to "audience_name", and return the token to `stdout`.
+You may pass this value to a variable and use the variable to call the cloud service for authentication.
+
+NOTE: **The OIDC token** created by the above command can be printed without masking, so care should be taken to not log/print the token in the CI.
