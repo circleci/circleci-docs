@@ -59,7 +59,7 @@ jobs:
     steps:
       - checkout
       - install-awscli
-      - run: 
+      - run:
           name: Deploy to S3
           command: |
             # set the variable AWS_WEB_IDENTITY_TOKEN_FILE to a temporary file that will hold the OIDC token
