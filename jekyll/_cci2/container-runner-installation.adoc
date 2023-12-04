@@ -129,15 +129,20 @@ agent:
   ssh:
     enabled: "true"
 ----
-
+For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
 . Redeploy the updated manifest:
 +
 [source,shell]
 ----
 helm upgrade <release-name> container-agent/container-agent -n <namespace> -f values.yaml
 ----
-
-For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
+. Wait for the SSH link:https://gateway-api.sigs.k8s.io/api-types/gateway/#gateway[Gateway] to be programmed:
++
+[source,shell]
+----
+kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n <namespace>
+----
+Container runner is now ready for rerunning jobs with SSH.
 
 [#container-runner-configuration-example]
 == Container runner configuration example
