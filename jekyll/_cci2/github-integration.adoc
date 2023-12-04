@@ -85,6 +85,13 @@ In the link:https://app.circleci.com/[CircleCI web app], select the organization
 
 Next you will need to set up the necessary permissions to run your projects on CircleCI.
 
+[#disconnect-a-github-account]
+== Disconnect a GitHub account
+
+In the link:https://app.circleci.com/[CircleCI web app], select the organization you want to disconnect to GitHub and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar, then navigate to **Account Integrations**. Here you will see a list of connections and the organizations they are associated with. Select disconnect for the Github connection associated to appropriate organization. Once disconnected you will be redirected to the CircleCI login page. You can reconnect by logging in to CircleCI and navigating to the user settings again, selecting **Account Integrations** and selecting "connect". 
+
+When disconnecting an VCS connection through Account Integrations, any existing personal API key will be invalidated. Any SSH keys or deploy keys may also be invalidated. Disconnecting the VCS connection is intended to be used when issues arise, like joining the wrong organization, or connecting with the wrong Github user, changes to organization name in the VCS.  
+
 [#deploy-keys-and-user-keys]
 == Deploy keys and user keys
 
