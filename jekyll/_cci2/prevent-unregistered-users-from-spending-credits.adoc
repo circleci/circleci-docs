@@ -1,0 +1,157 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Prevent unregistered users from spending credits
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A how to guide to configuring your org so that unregistered users will not be able to perform actions that spend credits3
+:icons: font
+:experimental:
+
+It is possible for _unregistered_ users to trigger pipelines and therefore spend credits. Use the **Prevent unregistered user spend** option if you would like to only allow registered users to trigger work that consumed credits for your org. For a full breakdown of the various ways pipelines can be triggered, see the xref:triggers-overview[Triggers overview].
+
+[NOTE]
+====
+_Unregistered users_ are how CircleCI tracks users who have triggered builds but have not signed up for a CircleCI account. These users will count as link:https://support.circleci.com/hc/en-us/articles/360034783154[active users], despite being unregistered. For more details about unregistered users.
+
+For more information about unregistered users, see this link:https://support.circleci.com/hc/en-us/articles/360037744473-What-is-an-Unregistered-User-[support article]
+====
+
+[#prerequisites]
+== Prerequisites
+
+This is the first subsection in the how-to guide. List any prerequisites that the reader needs to have already met in order for them to successfully complete the task. These may include:
+
+// The following will render as an unordered (bullet) list
+
+* Completing a certain task, such as signing up for a CircleCI account and having at least one project building in CircleCI
+* CircleCI plan
+* Roles and permissions
+* Skills/knowledge
+// This renders as a nested item
+** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:../parallelism-faster-jobs#[Test splitting and parallelism] page."
+* Any other dependencies
+
+Sometimes, there may be topics to know or tasks to complete that are _helpful_ in order to successfully finish the how-to guide, but do not necessarily have a negative impact on the user's flow if they only do those as they go along. For example, you may include generating an API token in the how-to steps itself, rather than listing it as a strict prerequisite. Use your best judgment to decide whether to add such a requirement as a prerequisite or as a step that is part of the how-to.
+
+// The section headings in which you outline the steps should be in an active voice
+[#carry-out-the-task]
+== 1. Carry out the task
+
+The main body of the guide should be broken into logical steps, with headings for each step. The steps should guide the reader through using the feature.
+
+Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
+
+
+
+In a how-to guide, you might walk the reader through an example scenario. Examples should be based on real-world use cases as much as possible and address business objectives.
+
+[#this-is-a-subsection-title]
+=== 1. This is a subsection title
+
+Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
+
+* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:../manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
+* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests])
+
+Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
+
+* Item 1
+* Item 2
+* Item 3
+
+[#using-tables]
+=== 2. Using tables
+
+This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Header text column 1
+|Header text column 2
+|Header text column 3
+
+|Text for row 1 column 1
+|Text for row 1 column 2
+|Text for row 1 column 3
+|===
+
+For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
+
+[#links-and-cross-references]
+=== 3. Links and cross references
+
+To link out to content outside of the docs use a link:
+
+link:https://circleci.com/[CircleCI website]
+
+To link to another page within the docs use a cross reference:
+
+xref:../about-circleci#[About CircleCI]
+
+Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
+
+xref:../about-circleci#learn-more[About CircleCI]
+
+[#code-examples]
+=== 4. Code examples
+
+Whenever possible, the how-to guide should provide examples that cover our users' link:https://circleci.com/blog/devops-language-trends-2023[most widely used languages and frameworks], unless the guide itself is specific to a particular language, platform, or framework.
+
+Use AsciiDoc source blocks for code examples:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: The Second Step
+          command: |
+            ls -al
+            echo '^^^The files in your repo^^^'
+----
+
+[#banners]
+=== 5. Banners
+
+In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+
+NOTE: **Need to add a note?** This is how to do it
+
+CAUTION: **Need to add a caution?** This is how to do it
+
+WARNING: **Need to add a warning?** This is how to do it
+
+We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
+
+For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+[#the-second-step]
+== 2. The second step
+
+Each main step in the how-to guide should be under its own level 2 (`==`) heading, using the numbered list format.
+
+[#conclusion]
+== Conclusion
+
+End the guide with a conclusion section that summarizes what was covered.
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]

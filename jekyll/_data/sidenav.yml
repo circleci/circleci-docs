@@ -530,6 +530,8 @@ en:
             link: stop-building-a-project-on-circleci
           - name: Rename organizations and repositories
             link: rename-organizations-and-repositories
+          - name: Prevent unregistered users from spending credits
+            link: prevent-unregistered-users-from-spending-credits
 
   - name: Manage config policies
     icon: icons/sidebar/lock.svg
@@ -1076,6 +1078,10 @@ en:
         children:
           - name: Server plan overview
             link: plan-server
+      - name: How-to guides
+        children:
+          - name: Prevent unregistered users from spending credits
+            link: prevent-unregistered-users-from-spending-credits
 
   - name: Contributing to CircleCI docs
     icon: icons/sidebar/changelog.svg
