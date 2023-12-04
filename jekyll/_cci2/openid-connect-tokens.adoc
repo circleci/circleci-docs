@@ -469,3 +469,7 @@ workflows:
 ```
 
 You have the ability to use multiple service accounts from the _same_ GCP project, or multiple service accounts from _multiple_ GCP projects. You can read about these methods and find an example in CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
+
+[#next-steps]
+== Next Steps
+- xref:oidc-tokens-with-custom-claims#[On demand OpenID Connect tokens with custom claims]
