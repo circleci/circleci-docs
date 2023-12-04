@@ -83,6 +83,9 @@ circleci orb init </path/to/myProject-orb> --private
 
 === 3. Choose the fully automated orb setup option
 
+The fully automated orb setup option is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 ```shell
 ? Would you like to perform an automated setup of this orb?:
    ▸  Yes, walk me through the process.
