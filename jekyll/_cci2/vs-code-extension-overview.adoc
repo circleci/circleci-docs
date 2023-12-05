@@ -177,7 +177,7 @@ You can also integrate the language server into any editor which supports the La
 [#test-run-your-config-from-vs-code]
 == Test run your config from VS Code
 
-NOTE: The ability to trigger a pipeline from VS Code with a _unversioned_ config is currently in **closed preview**. This feature is available on the **Free Plan** for projects integrated through the **GitHub OAuth app**, or **Bitbucket**. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page. If you are on a non-free plan and would like to sign up for the closed preview, you can do so link:https://docs.google.com/forms/d/1IDOyltcRRN0g5XULRK7qIzmF2Mvb5fnclk9If38_9yI/edit[here].
+NOTE: The ability to trigger a pipeline from VS Code with a _unversioned_ config is currently in **closed preview**. This feature is available on the **Free Plan** for projects integrated through the **GitHub OAuth app**, or **Bitbucket**. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page. If you are on the Performance of Scale plan, and would like to sign up for the closed preview, you can do so link:https://docs.google.com/forms/d/1IDOyltcRRN0g5XULRK7qIzmF2Mvb5fnclk9If38_9yI/edit[here].
 
 Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the CircleCI web app, just the same as any other pipeline.
 
@@ -190,12 +190,14 @@ Trigger pipelines from VS Code to iterate on your CircleCI config without commit
 * You need to opt-in to this feature per project. For your project, navigate to menu:Project Settings[VS Code integration] and toggle the "Run pipelines with unversioned config" to **On**.
 * Your project must **not** make use of xref:dynamic-config#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
+NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored, and instead, the configuration file is overridden by a custom configuration file passed as a parameter.
+
 [#steps]
 === Steps
 
 [WARNING]
 ====
-Triggering a pipeline with a _custom_ configuration can have side effects, for example, unwanted deployment. We recommend using this feature **only** on feature branches.
+Triggering a pipeline with an _unversioned_ configuration can have side effects, for example, unwanted deployment. We recommend using this feature **only** on feature branches.
 
 Test run pipelines triggered from VS Code have access to contexts, and project environment variables, based on which branch they are run on, and user permissions.
 ====
