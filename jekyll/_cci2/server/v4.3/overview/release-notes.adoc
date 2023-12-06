@@ -63,4 +63,8 @@ For full details of this release see the link:https://circleci.com/changelog/ser
 [#changelog-4-3-0]
 === Changelog
 
+<<<<<<< HEAD
 For full details of this release see the link:https://circleci.com/changelog/server-release-4-3/[changelog].
+=======
+For full details of this release see the link:https://circleci.com/server/changelog/#release-4-3-0[changelog].
+>>>>>>> 7695c7aa9 (Adding server 4.3.1 changelog (#8473))
