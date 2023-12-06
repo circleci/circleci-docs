@@ -68,7 +68,7 @@ server-attributes: &server
   serverversion4: 4.0.5
   serverversion41: 4.1.6
   serverversion42: 4.2.2
-  serverversion43: 4.3.0
+  serverversion43: 4.3.1
   serverversion44: 4.4.0
   serverversion: 3.4.8
   terraformversion: 0.15.4
