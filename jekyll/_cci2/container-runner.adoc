@@ -321,6 +321,11 @@ Container runner needs the following Kubernetes permissions:
 ** Get
 ** List
 
+If link:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job with SSH] is enabled, the following permissions are also required:
+
+* link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
+** Get
+
 In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
 
 * Pods, Pods/Logs
@@ -499,7 +504,6 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 [#limitations]
 == Limitations
 
-* The ability to rerun a job with SSH.
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
 * There is no support for container environments other than Kubernetes at this time.
 * Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]

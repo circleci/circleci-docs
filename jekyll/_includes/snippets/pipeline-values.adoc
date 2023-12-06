@@ -18,7 +18,7 @@
 | `pipeline.trigger_source`    | GitHub OAuth, Bitbucket | String  | The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
 | `pipeline.schedule.name`     | GitHub OAuth, Bitbucket | String  | The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
 | `pipeline.schedule.id`       | GitHub OAuth, Bitbucket | String  | The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
-| `pipeline.trigger_parameters.circleci.trigger_type` | GitHub App, GitLab | | GitLab
+| `pipeline.trigger_parameters.circleci.trigger_type` | GitHub App, GitLab | | GitHub App, GitLab
 | `pipeline.trigger_parameters.circleci.event_time` | GitHub App, GitLab | | Timestamp CircleCI received the event
 | `pipeline.trigger_parameters.circleci.event_type` | GitHub App, GitLab | | Push, pull request, manual, etc.
 | `pipeline.trigger_parameters.circleci.project_id` | GitHub App, GitLab | | CircleCI project ID

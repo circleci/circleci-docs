@@ -33,6 +33,7 @@ The following list shows common and important events found in the audit log. Thi
 
 - context.create
 - context.delete
+- context.secrets.accessed
 - context.env_var.delete
 - context.env_var.store
 - project.env_var.create

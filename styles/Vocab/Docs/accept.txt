@@ -61,3 +61,11 @@ Walkthrough
 XCTest
 unversioned
 Unversioned
+cgroup
+CPUs
+JVM
+Lein
+Jira
+Atlassian
+Bundler
+uncheck
