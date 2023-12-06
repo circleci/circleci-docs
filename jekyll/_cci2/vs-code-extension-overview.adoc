@@ -183,6 +183,8 @@ Trigger pipelines from VS Code to iterate on your CircleCI config without commit
 
 image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
 
+image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
+
 [#prerequisites]
 === Prerequisites
 
