@@ -42,6 +42,13 @@ Any user who is already a member of your CircleCI organization may use this proc
 . A modal window will pop up. Click the btn:[Invite my team] button in the window to copy an invite message that you can send to your team members. The sign-up link is _not_ unique to a single team member. This link can be shared and used for multiple users at the same time.
 . Your team members will need to use the sign-up link in your invite message to join your organization.
 
+Alternatively, to craft a custom invite link for your organization, follow these steps: 
+
+. In the CircleCI web app, go to menu:Organization Settings[Overview] and copy your **Organization ID**.
+. Incorporate your Organization ID and VCS (either GitHub or Bitbucket) into the invitation link using the following format: ‘https://app.circleci.com/launchpad/invited?source-button=collaboration-widget&invitePage=launchpad&orgId=[your-organization-id]&vcsType=[github-or-bitbucket]’
+. Send this sign-up link to new team members to join your organization.      
+
+
 [#see-also]
 == See also
 

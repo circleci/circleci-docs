@@ -107,7 +107,7 @@
 | The SHA1 hash of the last commit of the current build.
 
 | `CIRCLE_TAG`
-| GitHub, Bitbucket
+| GitHub OAuth, GitHub App, Bitbucket, GitLab
 | String
 | The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Workflows page.
 

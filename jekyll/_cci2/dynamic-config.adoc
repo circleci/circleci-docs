@@ -36,9 +36,13 @@ To get started with Dynamic configuration in CircleCI:
 . Click the *Project Settings* button in the upper-right corner.
 . On the left-hand panel, select *Advanced*.
 . Scroll to the *Enable dynamic config using setup workflows* setting, and toggle it to the "on" position, as shown below:
-  image:{{site.baseurl}}/assets/img/docs/dynamic-config-enable.png[Enable dynamic config in the UI]
++
+NOTE: Projects created **after** December 1st 2023 have dynamic config enabled by default. If this applies to your project, you can skip this step.
++
+image:{{site.baseurl}}/assets/img/docs/dynamic-config-enable.png[Enable dynamic config in the UI]
 . While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will *not* be used until you add the `setup` key with a value of `true` to that `config.yml`.
-  Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a setup configuration.
++
+Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a setup configuration.
 . At the end of the `setup` workflow, a `continue` job from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation` orb] must be called. This does _not_ apply if you want to conditionally execute workflows or steps based on *updates to specified files* ("path filtering"), as described in the xref:using-dynamic-configuration#[Using dynamic configuration] how-to guide.
 
 [#how-dynamic-config-works]

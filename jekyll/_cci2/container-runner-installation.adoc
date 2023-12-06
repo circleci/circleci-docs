@@ -100,17 +100,28 @@ The Rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8
 
 
 NOTE: **Supported Gateway API implementations:**
-CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other Gateway API implementations that support TCPRoute resources are likely compatible, but these implementations have not been tested, and may not be compatible. Our recommendation is to use the link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway chart] as your implementation.
+CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support TCPRoute resources are likely to be compatible, but not all of these implementations have been tested, and therefore compatibility is not guaranteed. Our recommendation is to use Envoy Gateway as your implementation. Envoy Gateway is currently in beta and is under development.
 
 
 ==== 1. Install Envoy Gateway to your cluster
-First, install the Envoy Gateway chart and wait for Envoy Gateway to become available, as defined in the
-link:https://gateway.envoyproxy.io/latest/user/tcp-routing/[Envoy Gateway TCP Routing installation document].
+. First, install the Gateway API CRDs and Envoy Gateway, as defined in the
+link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document]. To do this, replace `<version>` with the link:https://gateway.envoyproxy.io/blog/2022/10/01/versions/[most recent stable release] compatible with your cluster, then run the following command:
++
+[source,shell]
+----
+helm install eg oci://docker.io/envoyproxy/gateway-helm --version <version> -n envoy-gateway-system --create-namespace
+----
+. Finally, wait for Envoy Gateway to become available:
++
+[source,shell]
+----
+kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for=condition=Available
+----
 
 
 ==== 2. Enable the Rerun job with SSH feature
 
-. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = “true”` parameter to the container runner configuration :
+. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = "true"` parameter to the container runner configuration:
 +
 [source,yaml]
 ----
@@ -118,15 +129,24 @@ agent:
   ssh:
     enabled: "true"
 ----
++
+For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
 
 . Redeploy the updated manifest:
 +
-[,yaml]
+[source,shell]
 ----
-helm upgrade <release-name> container-agent/container-agent -n <namespace> -f values.yaml
+helm upgrade --wait --timeout=5m <release-name> container-agent/container-agent -n <namespace> -f values.yaml
 ----
 
-For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
+. Wait for the SSH link:https://gateway-api.sigs.k8s.io/api-types/gateway/#gateway[Gateway] to be programmed:
++
+[source,shell]
+----
+kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n <namespace>
+----
++
+Container runner is now ready for rerunning jobs with SSH.
 
 [#container-runner-configuration-example]
 == Container runner configuration example
