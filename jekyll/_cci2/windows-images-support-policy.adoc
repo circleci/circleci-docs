@@ -61,7 +61,7 @@ You can file a link:https://support.circleci.com/hc/en-us/requests/new[support t
 
 Once the next major version of Windows Server is released by Microsoft, and generally available to customers, we will deprecate the oldest version of Windows Server that we support and schedule it to be removed.
 
-After the new version of Windows Server has been released, we will then move the current Windows Server version into an extended support phase and move to the tagging system described in the Tagging section of this document.
+After the new version of Windows Server has been released, we will then move the current Windows Server version into an extended support phase and move to the tagging system described in the <<tagging>> section of this document.
 
 Current Deprecation (Jan 2024):
 
