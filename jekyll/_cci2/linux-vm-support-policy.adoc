@@ -29,7 +29,7 @@ Tags we support for this image (tag is what is specified in `.circleci/config.ym
 
 - `default` version is what you will receive if do not specify an image.
 
-- `current` version of image will receive updates approximately every 3 months.
+- `current` version of the image will receive updates approximately every three months.
 
 - `previous` version of image will receive the previous version of current.
 
