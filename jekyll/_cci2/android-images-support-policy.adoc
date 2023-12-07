@@ -35,7 +35,7 @@ For the latest major version of Docker:
 
 - `default`: This image is the current stable version of the image and will receive updates approximately every 3 months.
 
-- `edge`: These tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the `current` image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after period of stability (generally an average of a week).
+- `edge`: These tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the `current` image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability (generally an average of a week).
 
 - Date based tagging: Android images are generally released once every 3 months. The date-based tagging conventions take the format of `<year>.<month>.<patch>`, such as `2023.10.1`. We recommend using the default version and not pinning to a date version.
 
