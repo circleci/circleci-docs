@@ -31,7 +31,7 @@ Tags we support for this image (tag is what is specified in `.circleci/config.ym
 
 - `current` version of the image will receive updates approximately every three months.
 
-- `previous` version of image will receive the previous version of current.
+- `previous` version of the image will receive the previous version of `current`.
 
 - `edge` tags are reserved for previews of new releases, which will initially point to this tag. The edge tags may include incremental updates to the current quarterly (every 3 months) image release, which may change without notice, and is not recommended to be used for production CI workloads. currentwill be updated with these changes after a period of stability.
 
