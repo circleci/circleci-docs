@@ -20,7 +20,7 @@ This document outlines the CircleCI Windows image release, update, and deprecati
 
 The Windows images are based on Windows Server. We aim to maintain and release two major versions of Windows Server at all times. Currently we support `Windows server 2019` and `Windows server 2022`
 
-Tags will be redirected to the updated images automatically as described in the xref:#tagging[tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
+Tags will be redirected to the updated images automatically as described in the <<tagging>> section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
 
 [#tagging]
 == Tagging
