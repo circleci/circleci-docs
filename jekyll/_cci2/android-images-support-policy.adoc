@@ -13,7 +13,7 @@ contentTags:
 [#overview]
 == Overview
 
-This document outlines the Circleci Android image release, update, and deprecation policy. This policy applies to all CircleCI Android images built for the Machine executor.
+This document outlines the CircleCI Android image release, update, and deprecation policy. This policy applies to all CircleCI Android images built for the machine executor.
 
 [#release-policy]
 == Release policy
