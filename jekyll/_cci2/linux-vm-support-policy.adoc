@@ -70,7 +70,7 @@ Current Deprecation (Jan 2024):
 |===
 
 
-When Ubuntu 24.04 LTS is released:
+Example: When Ubuntu 24.04 LTS is released
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
