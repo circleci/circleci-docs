@@ -37,7 +37,7 @@ Tags we support for this image (tag is what is specified in `.circleci/config.ym
 
 - Date based tagging: The Ubuntu LTS based images have the image slug format of: `ubuntu-<LTS version>:<year>.<month>.<patch>`, such as `ubuntu-2204:2023.10.1`. We recommend using the `default` version and not pinning to a date version.
 
-We always aim to release a version of this image every 3 months.
+We always aim to release a version of this image every three months.
 
 [#critical-cve-patches]
 == Critical CVE patches
