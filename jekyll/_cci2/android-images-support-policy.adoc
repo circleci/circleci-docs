@@ -62,8 +62,8 @@ Current Deprecation (Jan 2024):
 | Release cycle
 | Image status
 
-| Current Year
-| Keep all quarterly images of this year; Keep Q4 (October) image release of last 2 years
+| Current year
+| Keep all quarterly images of this year. Keep Q4 (October) image release of the last 2 years
 
 |===
 
