@@ -52,7 +52,7 @@ Please file a link:https://support.circleci.com/hc/en-us/requests/new[Support Ti
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-We will keep a total of 7 images at maximum, with a deprecation cycle happening once per year. The table below shows what images will be kept in each cycle. Generally we will aim to start EOL process within 3 months of new version release.
+We will keep a total of seven images at maximum, with a deprecation cycle happening once per year. The table below shows which images will be kept in each cycle. Generally we will aim to start EOL process within 3 months of a new version release.
 
 Current Deprecation (Jan 2024):
 
