@@ -13,7 +13,7 @@ contentTags:
 [#overview]
 == Overview
 
-This document outlines the CircleCI Windows image release, update, and deprecation policy. This policy applies to all Windows images built for the Windows Executor.
+This document outlines the CircleCI Windows image release, update, and deprecation policy. This policy applies to all Windows images built for the Windows executor.
 
 [#release-policy]
 == Release policy
