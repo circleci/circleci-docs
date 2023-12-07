@@ -59,8 +59,8 @@ Current Deprecation (Jan 2024):
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Release Cycle
-| Image Status
+| Release cycle
+| Image status
 
 | Current Year
 | Keep all quarterly images of this year; Keep Q4 (October) image release of last 2 years
