@@ -37,7 +37,7 @@ We support various tags for the Windows environment, allowing you to choose a su
 
 We generally install the latest Major version of Visual Studio Community Edition that coincides with the Windows Server version in the image when it is built.
 
-We always aim to release a version of the supported windows images (e.g. currently this is `Windows server 2019` and `Windows server 2022`) every 3 months. We recommend using the `default` version and not pinning to a date version.
+We always aim to release a version of the supported windows images (for example, currently this is `Windows server 2019` and `Windows server 2022`) every 3 months. We recommend using the `default` version and not pinning to a date version.
 
 == Tagging with the Windows Orb:
 
