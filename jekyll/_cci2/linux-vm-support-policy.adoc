@@ -35,7 +35,7 @@ Tags we support for this image (tag is what is specified in `.circleci/config.ym
 
 - `edge` tags are reserved for previews of new releases, which will initially point to this tag. The edge tags may include incremental updates to the current quarterly (every 3 months) image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
 
-- `Date based tagging`: The Ubuntu LTS based images have the image slug format of: `ubuntu-<LTS version>:<year>.<month>.<patch>`, such as `ubuntu-2204:2023.10.1`. We recommend using the `default` version and not pinning to a date version.
+- Date based tagging: The Ubuntu LTS based images have the image slug format of: `ubuntu-<LTS version>:<year>.<month>.<patch>`, such as `ubuntu-2204:2023.10.1`. We recommend using the `default` version and not pinning to a date version.
 
 We always aim to release a version of this image every 3 months.
 
