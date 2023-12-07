@@ -63,7 +63,7 @@ Once the next major version of Windows Server is released by Microsoft, and gene
 
 After the new version of Windows Server has been released, we will then move the current Windows Server version into an extended support phase and move to the tagging system described in the <<tagging>> section of this document.
 
-Current Deprecation (Jan 2024):
+Current deprecation (Jan 2024):
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
