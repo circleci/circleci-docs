@@ -6,16 +6,16 @@
 | Type
 | Value
 
-| `pipeline.id`                | GitHub App, GitHub OAuth, Bitbucket | String  | A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
-| `pipeline.number`            | GitHub App, GitHub OAuth, Bitbucket | Integer | A project unique integer id for the pipeline.
-| `pipeline.project.git_url`   | GitHub App, GitHub OAuth, Bitbucket | String  | The URL where the current project is hosted. For example, `https://github.com/circleci/circleci-docs`.
-| `pipeline.project.type`      | GitHub App, GitHub OAuth, Bitbucket | String  | The lower-case name of the VCS provider, for example, `github`, `bitbucket`.
-| `pipeline.git.tag`           | GitHub App, GitHub OAuth, Bitbucket | String  | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
-| `pipeline.git.branch`        | GitHub App, GitHub OAuth, Bitbucket | String  | The name of the git branch that was pushed to trigger the pipeline.
-| `pipeline.git.revision`      | GitHub App, GitHub OAuth, Bitbucket | String  | The long (40-character) git SHA that is being built.
+| `pipeline.id`                | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+| `pipeline.number`            | GitHub App, GitHub OAuth, Bitbucket, GitLab | Integer | A project unique integer id for the pipeline.
+| `pipeline.project.git_url`   | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | The URL where the current project is hosted. For example, `https://github.com/circleci/circleci-docs`.
+| `pipeline.project.type`      | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | The lower-case name of the VCS provider, for example, `github`, `bitbucket`.
+| `pipeline.git.tag`           | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+| `pipeline.git.branch`        | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | The name of the git branch that was pushed to trigger the pipeline.
+| `pipeline.git.revision`      | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | The long (40-character) git SHA that is being built.
 | `pipeline.git.base_revision` | GitHub OAuth, Bitbucket | String  | The long (40-character) git SHA of the build prior to the one being built. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
-| `pipeline.in_setup`          | GitHub App, GitHub OAuth, Bitbucket | Boolean | True if the pipeline is in the setup phase, for example, running a xref:dynamic-config#[setup workflow].
-| `pipeline.trigger_source`    | GitHub App, GitHub OAuth, Bitbucket | String  | The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+| `pipeline.in_setup`          | GitHub App, GitHub OAuth, Bitbucket, GitLab | Boolean | True if the pipeline is in the setup phase, for example, running a xref:dynamic-config#[setup workflow].
+| `pipeline.trigger_source`    | GitHub App, GitHub OAuth, Bitbucket, GitLab | String  | The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
 | `pipeline.schedule.name`     | GitHub OAuth, Bitbucket | String  | The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
 | `pipeline.schedule.id`       | GitHub OAuth, Bitbucket | String  | The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
 | `pipeline.trigger_parameters.circleci.trigger_type` | GitHub App, GitLab | | GitHub App, GitLab
