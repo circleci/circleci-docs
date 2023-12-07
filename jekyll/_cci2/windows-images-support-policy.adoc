@@ -39,7 +39,8 @@ We generally install the latest Major version of Visual Studio Community Edition
 
 We always aim to release a version of the supported windows images (for example, currently this is `Windows server 2019` and `Windows server 2022`) every 3 months. We recommend using the `default` version and not pinning to a date version.
 
-== Tagging with the Windows Orb:
+[#tagging-with-the-windows-orb]
+== Tagging with the Windows orb
 
 The variant of Windows Server can be specified by choosing the name parameter in the Windows Orb. The most recent version of Windows Server will always be accessible via the `win/default` name, but previous versions require explicit definition, such as `win/server-2019`.
 
