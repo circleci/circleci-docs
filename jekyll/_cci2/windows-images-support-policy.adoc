@@ -42,7 +42,7 @@ We always aim to release a version of the supported windows images (for example,
 [#tagging-with-the-windows-orb]
 == Tagging with the Windows orb
 
-The variant of Windows Server can be specified by choosing the name parameter in the Windows Orb. The most recent version of Windows Server will always be accessible via the `win/default` name, but previous versions require explicit definition, such as `win/server-2019`.
+The variant of Windows Server can be specified by choosing the name parameter in the Windows orb. The most recent version of Windows Server will always be accessible via the `win/default` name, but previous versions require explicit definition, such as `win/server-2019`.
 
 Each quarterly (published every 3 months) image for the current tag Windows Server version is published to a date-based tag, such as 2023.10.1, which can be explicitly defined in the version parameter of the Orb.
 
