@@ -42,7 +42,7 @@ We always aim to release a version of this image every three months.
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in Linux VM images, we will investigate the impact that this has on our images being used within the CircleCI execution environment.  If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in Linux VM images, we will investigate the impact that this has on our images being used within the CircleCI execution environment.  If customers are impacted by these CVEs we will push a patch fix to the released image(s). This image will supersede the original image.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
