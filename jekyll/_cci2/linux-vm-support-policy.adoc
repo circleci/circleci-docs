@@ -90,7 +90,7 @@ Example: When Ubuntu 24.04 LTS is released
 
 When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs.
 
-We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release
+We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release.
 
 [#exceptions]
 == Exceptions
