@@ -63,7 +63,7 @@ Current Deprecation (Jan 2024):
 | Support
 
 | Ubuntu 20.04 LTS
-| Build quarterly images for current year and retain Q4 (October) release from past two years.
+| Build quarterly images for current year and retain Q4 (October) release from the past two years.
 
 | Ubuntu 22.04 LTS
 | Quarterly images built and only Q4 image retained each year
