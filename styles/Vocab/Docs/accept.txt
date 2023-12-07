@@ -67,3 +67,4 @@ Jira
 Atlassian
 Bundler
 uncheck
+CVE
