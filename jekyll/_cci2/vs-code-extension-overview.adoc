@@ -179,7 +179,7 @@ You can also integrate the language server into any editor which supports the La
 
 NOTE: The ability to trigger a pipeline from VS Code with a _unversioned_ config is currently in **closed preview**. This feature is available on the **Free Plan** for projects integrated through the **GitHub OAuth app**, or **Bitbucket**. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page. If you are on the Performance of Scale plan, and would like to sign up for the closed preview, you can do so link:https://docs.google.com/forms/d/1IDOyltcRRN0g5XULRK7qIzmF2Mvb5fnclk9If38_9yI/edit[here].
 
-Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the CircleCI web app, just the same as any other pipeline.
+Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
 
 image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
 
