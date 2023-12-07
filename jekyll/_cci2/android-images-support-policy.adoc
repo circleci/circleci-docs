@@ -24,7 +24,7 @@ Android images are released once a quarter, with patch releases potentially bein
 - We aim to package 6 levels of the Android API within each image release.
 - As this image is not specifically designed for the Android Gradle Plugin (AGP), some updates may come later than desired. However, we aim to follow compatibility matrices for link:https://docs.gradle.org/current/userguide/compatibility.html[AGP] and link:https://developer.android.com/build/releases/gradle-plugin#updating-gradle[Gradle].
 
-Releases may be skipped if there are no material updates to core Android functionality, such as sdkmanager, ndk or platform versions.
+Releases may be skipped if there are no material updates to core Android functionality, such as `sdkmanager`, `ndk` or platform versions.
 
 [#tagging]
 == Tagging
