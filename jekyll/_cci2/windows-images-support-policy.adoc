@@ -31,7 +31,7 @@ We support various tags for the Windows environment, allowing you to choose a su
 
 - `current`: version of Windows Server will receive updates approximately every three months. This tag will be the same version as what is provided if no tag is specified.
 
-- `edge`: tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the current quarterly image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after period of stability.
+- `edge`: tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the current quarterly image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
 
 - `previous`: version of Windows Server will receive the previous version of `current`.
 
