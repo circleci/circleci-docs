@@ -25,7 +25,7 @@ We aim to maintain, support, and release the two most recent LTS versions of Ubu
 [#tagging]
 == Tagging
 
-Tags we support for this image (tag is what is specified in .circleci/config.yml when requesting an image):
+Tags we support for this image (tag is what is specified in `.circleci/config.yml` when requesting an image):
 
 - `default` version is what you will receive if do not specify an image.
 
