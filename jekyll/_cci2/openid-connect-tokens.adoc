@@ -472,4 +472,4 @@ You have the ability to use multiple service accounts from the _same_ GCP projec
 
 [#next-steps]
 == Next Steps
-- xref:on-demand-oidc-tokens-with-custom-claims#[On demand OpenID Connect tokens with custom claims]
+- xref:oidc-tokens-with-custom-claims#[OpenID Connect tokens with custom claims]
