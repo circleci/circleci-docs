@@ -13,7 +13,7 @@ contentTags:
 [#overview]
 == Overview
 
-This document outlines the CircleCI Linux VM (Machine) Image release, update and deprecation policy. This policy applies to all CircleCI Linux VM (Machine) Images built for the Machine executor. Note that there is a separate link:https://circleci.com/docs/linux-cuda-images-support-policy/[CUDA image support policy].
+This document outlines the CircleCI Linux VM (machine) image release, update and deprecation policy. This policy applies to all CircleCI Linux VM (machine) images built for the machine executor. Note that there is a separate xref:linux-cuda-images-support-policy#[CUDA image support policy].
 
 [#release-policy]
 == Release policy
