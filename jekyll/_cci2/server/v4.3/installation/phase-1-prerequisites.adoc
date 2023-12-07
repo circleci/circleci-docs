@@ -333,7 +333,7 @@ endif::env-aws[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
-By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+You should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 

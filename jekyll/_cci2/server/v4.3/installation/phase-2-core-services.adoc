@@ -446,20 +446,11 @@ endif::env-aws[]
 
 [#tls]
 === j. TLS
-For TLS, you have 4 options:
-
-[.tab.tls.Do_nothing]
---
-*Do nothing*
-
-Do nothing. Self-signed certificates will automatically be generated for you.  This is a good option for trials but not recommended for production use.
-
-NOTE: These self-signed certificates will not be trusted by your browser.  You will need to add an exception to your browser to access the application. Additionally, the certificates will be updated with new self-signed certificates when an update is pushed.
---
+For TLS, you have 5 options:
 
 [.tab.tls.Lets_Encrypt]
 --
-*Let's Encrypt*
+**Option 1:** *Let's Encrypt*
 
 https://letsencrypt.org/[Let's Encrypt] will request and manage certificates for you.  This is a good option when the load balancer is publicly accessible. The following snippet (using your own email) can be added to `values.yaml`:
 
@@ -474,9 +465,32 @@ kong:
 NOTE: Let's Encrypt may take up to 30 minutes to be reflected in your browser.
 --
 
+[.tab.tls.You_create_Secret]
+--
+**Option 2:** *Create the Kubernetes Secret yourself*
+
+You can create the k8s secret `kong-tls` from your certificate and key files.
+
+[source,shell]
+----
+kubectl -n <namespace> create secret tls kong-tls \
+  --cert=/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem \
+  --key=/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
+
+kubectl -n <namespace> annotate secretkong-tls \
+  meta.helm.sh/release-name=<helm-release-name> \
+  meta.helm.sh/release-namespace=<namespace> \
+  helm.sh/resource-policy=keep --overwrite
+
+kubectl -n <namespace>  label secret/kong-tls \
+  app.kubernetes.io/managed-by=Helm --overwrite
+
+----
+--
+
 [.tab.tls.Supply_private_key_and_certificate]
 --
-*Supply a private key and certificate*
+**Option 3:** *Supply a private key and certificate*
 
 You can supply a private key and certificate, which you may have created during the prerequisites steps. The key and certificates will need to be base64 encoded. You can retrieve and encode the values with the following commands:
 
@@ -498,7 +512,7 @@ tls:
 
 [.tab.tls.Use_AWS_Certificate_Manager]
 --
-*Use ACM*
+**Option 4:** *Use ACM*
 
 Have link:https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the link:https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
@@ -522,7 +536,7 @@ You will need to update your DNS records to the new load balancer once you have 
 
 [.tab.tls.Terminate_TLS_upstream]
 --
-*Disable TLS within CircleCI*
+**Option 5:** *Disable TLS within CircleCI*
 
 You can choose to disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following the first option (do nothing) and forward the following ports to your CircleCI load balancer:
 
