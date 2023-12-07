@@ -14,7 +14,7 @@ It is possible for _unregistered_ users to trigger pipelines, and therefore, spe
 
 [NOTE]
 ====
-An _unregistered_ user is how CircleCI tracks users who have triggered builds but have not signed up for a CircleCI account. Unregistered user activity within an org is mapped to, and counts as a single link:https://support.circleci.com/hc/en-us/articles/360034783154[active user].
+An _unregistered_ user is how CircleCI tracks users who have triggered builds but have not signed up for a CircleCI account. Unregistered user activity within an org is mapped to, and counts as, a single link:https://support.circleci.com/hc/en-us/articles/360034783154[active user].
 
 For more information about unregistered users, see this link:https://support.circleci.com/hc/en-us/articles/360037744473-What-is-an-Unregistered-User-[support article]
 ====
