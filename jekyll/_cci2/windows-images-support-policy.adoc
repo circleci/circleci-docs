@@ -78,7 +78,7 @@ Current deprecation (Jan 2024):
 | Build quarterly images and only Q4 (October) releases retained each year
 |===
 
-Example: When Windows Server 2025 is Released
+Example: When Windows Server 2025 is released
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
