@@ -3,24 +3,20 @@ contentTags:
   platform:
   - Cloud
 ---
-= Customize claims in the OIDC token
+= On-demand OIDC tokens with custom claims
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn about the capabilities to customize claims in OIDC tokens.
 :icons: font
 :experimental:
 
-[#introduction]
-== Introduction
-
-OpenID Connect (OIDC) tokens allow you to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. CircleCI OIDC tokens can be customized to meet the unique needs of different cloud services.
+Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens on demand using the CircleCI CLI, and customize your claims to meet the unique needs of different cloud services.
 See xref:openid-connect-tokens#[Default OpenID Connect tokens in jobs] for more information on default OIDC tokens provided by CircleCI in jobs.
 
-[#on-demand-openid-connect-id-tokens]
-== On demand OpenID Connect ID tokens
+[#create-oidc-token-on-demand-in-a-job]
+== Create an OIDC token on demand in a job
 
-CircleCI allows creation of OIDC tokens on demand in a job. Mulitple OIDC tokens can be created in a job with options to customize claims.
-The circleci cli may be used in a step to do this.
+CircleCI allows creation of OIDC tokens on demand in a job. Multiple OIDC tokens can be created in a job with the option to customize claims. The CircleCI CLI may be used in a step to do this, as follows:
 
 [source,shell]
 ----
@@ -30,9 +26,12 @@ circleci run oidc get --claims '{"aud": "audience_name"}'
 The above command will create an OIDC token with the `aud` claim set to "audience_name", and return the token to `stdout`.
 You may pass this value to a variable and use the variable to call the cloud service for authentication.
 
-NOTE: **The OIDC token** created by the above command can be printed with no masking, care should be taken to not log/print the token in the job steps.
+CAUTION: **The OIDC token** created by the above command can be printed with no masking, care should be taken to not log/print the token in the job steps.
 
-Below is an example configuration that deploys a static html webpage to AWS S3 using On-demand OIDC token with customized `aud` claim in a job.
+[#example-configuration]
+== Example configuration
+
+Below is an example configuration that deploys a static HTML webpage to AWS S3 using on-demand OIDC token generation, with a customized `aud` claim in a job.
 
 ```yaml
 version: 2.1
