@@ -518,8 +518,8 @@ en:
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
-          - name: On demand OIDC tokens with custom claims
-            link: on-demand-oidc-tokens-with-custom-claims
+          - name: OIDC tokens with custom claims
+            link: oidc-tokens-with-custom-claims
       - name: How-to guides
         children:
           - name: Manage roles and permissions
