@@ -10,8 +10,6 @@ contentTags:
 
 This quickstart guide takes you through connecting an existing project to CircleCI, using the in-app config editor, and inviting team members to collaborate on your new project.
 
-NOTE: Starting June 14, 2023, you may see a simplified experience when setting up a project on CircleCI.  See our link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[community forum] for more details.
-
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
 
 == Prerequisites
