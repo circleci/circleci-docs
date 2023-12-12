@@ -349,7 +349,7 @@ If the container runner crashes, there is no expectation that in-process or queu
 [#logging-containers]
 == Logging containers
 
-Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI web app.
+Container runner schedules a logging container if there are secondary (service) containers in the task pod. This container will get the secondary container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
 
 Logging containers require a service account token with the minimal privileges to get container logs.
 
