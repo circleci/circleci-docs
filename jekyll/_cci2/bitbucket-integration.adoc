@@ -237,7 +237,7 @@ If you would like to rename your organization or repository, please follow the x
 [#granting-permissions-to-organiztion-members]
 == Granting permissions to workspace members
 
-By default, only BitBucket workspace administrators can view your organization's plan page, organization settings, organization analytics, private orbs, webhooks, runners, and connections. To enable all BitBucket workspace members permissions to the above, an organization admin will need to enable the Bitbucket Workspace members settings from the oranization settings > VCS.  
+By default, only BitBucket workspace administrators can view your organization's plan page, organization settings, organization analytics, private orbs, webhooks, runners, and connections. To enable all BitBucket workspace members permissions to the above, an organization admin will need to enable the Bitbucket Workspace members settings from the menu:organization settings[VCS].  
 
 [#next-steps]
 == Next Steps
