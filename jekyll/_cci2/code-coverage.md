@@ -23,11 +23,6 @@ You can upload your code coverage reports directly to CircleCI. First, add a cov
 
 ![Artifacts tab in the web app]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
-## Code coverage and parallelism
-{: #code-coverage-and-parallelism }
-
-Code coverage reports are saved as [build artifacts](/docs/artifacts/). If you wish to take advantage of CircleCI test splitting and parallelism, you will also need to save your test results using the [`store_test_results` key](/docs/configuration-reference/#storetestresults). For more information on test splitting and parallelism, see the [Test splitting and parallelism overview](/docs/parallelism-faster-jobs/) and the [Test splitting tutorial](/docs/test-splitting-tutorial/).
-
 ## Language-specific code coverage options
 {: #language-specific-code-coverage-options}
 

@@ -59,6 +59,8 @@ Fastlane
 walkthrough
 Walkthrough
 XCTest
+unversioned
+Unversioned
 cgroup
 CPUs
 JVM
@@ -67,3 +69,4 @@ Jira
 Atlassian
 Bundler
 uncheck
+CVE
