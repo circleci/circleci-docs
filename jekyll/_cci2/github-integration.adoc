@@ -88,9 +88,22 @@ Next you will need to set up the necessary permissions to run your projects on C
 [#disconnect-a-github-account]
 == Disconnect a GitHub account
 
-In the link:https://app.circleci.com/[CircleCI web app], select the organization you want to disconnect to GitHub and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar, then navigate to **Account Integrations**. Here you will see a list of connections and the organizations they are associated with. Select disconnect for the Github connection associated to appropriate organization. Once disconnected you will be redirected to the CircleCI login page. You can reconnect by logging in to CircleCI and navigating to the user settings again, selecting **Account Integrations** and selecting "connect". 
+Follow these steps to disconnect your CircleCI account from GitHub.
 
-When disconnecting an VCS connection through Account Integrations, any existing personal API key will be invalidated. Any SSH keys or deploy keys may also be invalidated. Disconnecting the VCS connection is intended to be used when issues arise, like joining the wrong organization, or connecting with the wrong Github user, changes to organization name in the VCS.  
+[CAUTION]
+====
+When disconnecting a VCS connection using the method described here, any existing personal API keys will be invalidated. Any SSH keys, or deploy keys may also be invalidated. Disconnecting the VCS connection is intended to be used when issues arise, for example:
+
+* You joined the wrong organization
+* You connected with the wrong GitHub user account
+* Changes to the organization name in your VCS
+====
+
+. From the link:https://app.circleci.com/[CircleCI web app], select the organization you want to disconnect from GitHub. To do this use the org switcher at the top of the sidebar
+. Navigate to **User Settings** by clicking on the user icon on the bottom of sidebar, then select **Account Integrations**
+. You will see a list of connections along with the GitHub organizations they are associated with. Select btn:[Disconnect] for the GitHub connection you wish to disconnect.
+
+Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI, navigate to user settings (icon at the bottom of the web app sidebar), and under **Account Integrations** click btn:[Connect] next to GitHub.
 
 [#deploy-keys-and-user-keys]
 == Deploy keys and user keys
