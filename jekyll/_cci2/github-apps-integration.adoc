@@ -36,17 +36,8 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 
 Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to connect your GitHub account, which creates your CircleCI organization.
 
-When you create a new organization and connect your GitHub account, you will be prompted to create a new project from a repository. You will be presented with the following options to set up a CircleCI configuration for your project:
+When you create a new organization and connect your GitHub account, you will be prompted to create a new project from a repository. After creating a new project, CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository. You will be presented with the following options to either commit and run the generated configuration file on a new branch or view the generated configuration file in the configuration editor. 
 
-* **Faster**: Commit a starter CI pipeline to a new branch.
-+
-CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitHub repository.
-
-* **Fast**: Use a `config.yml` template that you can edit and save.
-+
-You can choose a sample `.circleci/config.yml` to best fit your project from a variety of templates (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is committed on a new branch.
-
-Choosing **Faster** automatically triggers a pipeline once you create the project.
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
 
