@@ -12,11 +12,11 @@ contentTags:
 :icons: font
 :experimental:
 
-Use resource classes to:
+Resource classes are used to specify the compute size requirements (CPU and RAM) for running a link:/docs/concepts/#jobs[job]. 
 
-* Specify compute resource size (CPU and RAM) for running a link:/docs/concepts/#jobs[job].
-* Optimize executors based on historical trends with resource class Insights.
-* Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
+Allocating a resource class to each job keeps pipelines running efficiently. Over time, you can use link:/docs/resource-class-overview/#resource-class-insights[resource class Insights] to optimize executors based on historical trends.
+
+For users with their own execution environment, use resources classes to configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 
 [#introduction]
 == Introduction
@@ -65,7 +65,7 @@ jobs:
 [#quickstart]
 == Quickstart
 
-For config examples showing how to use the `resource_class` key to **specify CPU and RAM size** for an execution environment, see the following sections of the configuration reference page:
+For examples of how to use the `resource_class` key to **specify CPU and RAM size** for an execution environment, refer to the following sections of the configuration reference page:
 
 * link:/docs/configuration-reference/#docker-execution-environment[Docker resource classes]
 * link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM resource classes]
@@ -92,9 +92,9 @@ Information about the resource classes used in your jobs can be found in the web
 The job details page in the web app shows the resource class used for a job.
 
 .Resource class identifier in web app
-image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
+image::resource-class-job.png[The job details page in the CircleCI web app, showing the Exectuor and Resource Class for a job alongside other details like Branch, Commit and Author]
 
-Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
+Alternatively, use the "Get job details" API endpoint to return information about a job, including the resource class being used. Refer to the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide for step-by-step instructions.
 
 [#view-resource-usage-per-job]
 === View resource usage per job
@@ -115,7 +115,7 @@ To find resource class Insights:
 .. Expand a job to view the resource class Insights.
 +
 .Resource class Insights
-image::resource-class-insights.png[Screenshot showing resource class Insights]
+image::resource-class-insights.png[The job details page in the CirlceCI web app showing resource class Insights, like CPU and RAM usage, under the "Resources" tab]
 
 [#see-also]
 == See also
