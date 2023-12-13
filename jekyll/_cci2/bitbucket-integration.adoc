@@ -194,16 +194,16 @@ Provide CircleCI with a Bitbucket user key in your project's **Project Settings*
 == Best practices for keys
 
 - Use Deploy Keys whenever possible.
-- You must rotate the Deploy or User key as part of revoking user access to that repo.
+- You must rotate the Deploy or User key as part of revoking user access to that repository.
   1. After revoking the user’s access in Bitbucket, delete keys in Bitbucket.
   2. Delete the keys in the CircleCI project.
   3. Regenerate the keys in CircleCI project.
-- Ensure no developer has access to a build in a repo with a User Key that requires more access than they have.
+- Ensure no developer has access to a build in a repository with a User Key that requires more access than they have.
 
 [#establish-the-authenticity-of-an-ssh-host]
 == Establish the authenticity of an SSH host
 
-When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for bitbucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The `checkout` job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for Bitbucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The `checkout` job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
 
 ```shell
 mkdir -p ~/.ssh
@@ -223,7 +223,7 @@ bitbucket.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+
 ➜  ~ ✗
 ```
 
-You can add the key to known_hosts by running the following command:
+You can add the key to `known_hosts` by running the following command:
 ```shell
 ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 ```
@@ -232,6 +232,11 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 == Rename organizations and repositories
 
 If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+
+[#grant-permissions-to-organiztion-members]
+== Grant permissions to workspace members
+
+By default, only Bitbucket workspace administrators can view your organization's plan page, organization settings, organization analytics, private orbs, webhooks, runners, and connections. To enable all Bitbucket workspace members permissions to the above, an organization admin will need to enable the Bitbucket Workspace members settings from the menu:organization settings[VCS].
 
 [#next-steps]
 == Next Steps
