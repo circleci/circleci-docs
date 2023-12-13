@@ -45,21 +45,22 @@ image:{{site.baseurl}}/assets/img/docs/dynamic-config-enable.png[Enable dynamic 
 Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a setup configuration.
 . At the end of the `setup` workflow, a `continue` job from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation` orb] must be called. This does _not_ apply if you want to conditionally execute workflows or steps based on *updates to specified files* ("path filtering"), as described in the xref:using-dynamic-configuration#[Using dynamic configuration] how-to guide.
 
+[NOTE]
+====
+- The setup phase requires `version: 2.1` or higher.
+- A pipeline can only be continued once (that is, a pipeline cannot be continued with another setup configuration).
+- A pipeline can only be continued within six hours of its creation.
+- The setup configuration can only include one workflow.
+- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
+- Pipeline parameters declared in the setup configuration must also be declared in the continuation configuration. These parameters can be used at continuation time. For more information, see the xref:pipeline-variables#pipeline-parameters-and-dynamic-configuration[Pipeline values and parameters] page.
+====
+
 [#how-dynamic-config-works]
 == How dynamic config works
 
 CircleCI's dynamic configuration feature uses setup workflows. A _setup workflow_ can contain jobs that compute pipeline parameters, which can then be passed into an additional configuration that potentially exists in other directories. A setup workflow can also be used to generate new configurations via pre-existing scripts. In any case, the setup workflow continues the pipeline on to the desired next configuration.
 
 Behind the scenes, the _continuation_ configuration is implemented as a call to a public _pipeline continuation_ API. This API accepts a _continuation key_, which is a secret, unique-per-pipeline key that is automatically injected into the environment of jobs executed as part of the initial setup workflow. The API also accepts a configuration string, as well as a set of pipeline parameters.
-
-Note that:
-
-- The setup phase requires `version: 2.1` or higher.
-- A pipeline can only be continued once (that is, a pipeline cannot be continued with another setup configuration).
-- A pipeline can only be continued within six hours of its creation.
-- The setup configuration can only include one workflow.
-- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
-- Pipeline parameters declared in the setup configuration must also be declared in the continuation configuration. These parameters can be used at continuation time.
 
 For a basic example on how to use setup workflows for dynamic configuration generation, see the xref:using-dynamic-configuration#[Using dynamic configuration] how-to guide.
 
