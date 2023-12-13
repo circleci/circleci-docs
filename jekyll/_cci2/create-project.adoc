@@ -70,6 +70,8 @@ image::edit-config-file.png[Edit Configuration File]
 
 NOTE: If you authenticated CircleCI with either xref:gitlab-integration#[GitLab], or the xref:github-apps-integration#[GitHub App], the steps in this section apply to you.
 
+**GitHub App**
+
 Follow these steps to create a new project in CircleCI:
 
 . In the CircleCI web app, click **Projects** in the sidebar.
@@ -77,11 +79,31 @@ Follow these steps to create a new project in CircleCI:
 +
 image::create-project-button.png[Create a project]
 
+. In the Connect Code window, click the **GitHub** tile.
+. In the Create New Project window, use the options to:
++
+** Input your project name in the Project Name field.
+** Follow the instructions to setup SSH access.
+** Tell CircleCI where your code is stored.
+** Click **Create Project** at the bottom of the window.
+** CircleCI will now automatically generate a custom configuration file based on the programming languages and frameworks detected in your selected repository. 
+** When the custom configuration file has been generated, click **Commit and Run** to commit your custom configuration file on a new branch called 'update-circleci-config'. Alternatively, click **Review configuration file** to view the custom configuration file in the configuration editor. 
+** If CircleCI is unable to generate a custom configuration file, CircleCI will generate a fallback template that you can utilize to create your `config.yml` file.
+
+**GitLab**
+
+Follow these steps to create a new project in CircleCI:
+
+. In the CircleCI web app, click **Projects** in the sidebar.
+. Click **Create Project** at the top of the page.
++
+image::create-project-button.png[Create a project]
+
+. In the Connect Code window, click the **GitLab** tile.
 . In the Create New Project window, use the options to:
 +
 ** Tell CircleCI where your code is stored
 ** Choose an option for managing your `.circleci/config.yml` file. You can either choose to let CircleCI pick a configuration file for you, and commit this to a new branch in you repository, or you can edit a starter config file in the CircleCI web app and commit that to your repository yourself.
-** If you authenticated through the xref:github-apps-integration#[GitHub App], also follow the instructions to setup SSH access.
 ** For guidance on creating a `config.yml` file, see the following pages:
 *** xref:config-intro#[Configuration introduction]
 *** xref:sample-config#[Sample config.yml files]
