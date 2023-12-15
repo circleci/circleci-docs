@@ -73,7 +73,8 @@ If you authorized CircleCI with either xref:gitlab-integration#[GitLab], or the 
 [#github-app-project]
 ==== GitHub App project
 
-**GitHub App**
+[#github-app-project]
+==== GitHub App project
 
 Follow these steps to create a new project in CircleCI:
 
