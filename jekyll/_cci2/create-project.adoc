@@ -86,8 +86,7 @@ image::create-project-button.png[Create a project]
 ** Input your project name in the Project Name field.
 ** Follow the instructions to set up SSH access.
 ** Tell CircleCI where your code is stored.
-** Click **Create Project** at the bottom of the window.
-** CircleCI will now automatically generate a custom configuration file based on the programming languages and frameworks detected in your selected repository. 
+** Click **Create Project** at the bottom of the window. CircleCI will now automatically generate a custom configuration file based on the programming languages and frameworks detected in your selected repository. 
 ** When the custom configuration file has been generated, click **Commit and Run** to commit your custom configuration file on a new branch called 'update-circleci-config'. Alternatively, click **Review configuration file** to view the custom configuration file in the configuration editor. 
 ** If CircleCI is unable to generate a custom configuration file, CircleCI will generate a fallback template that you can utilize to create your `config.yml` file.
 
