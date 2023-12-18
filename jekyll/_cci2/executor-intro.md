@@ -95,7 +95,7 @@ Find out more about the macOS execution environment on the [Using macOS](/docs/u
 ## Windows
 {: #windows }
 
-The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
 {: class="alert alert-info"}
 
 To access the Windows execution environment, either use the Windows orb and then specify one of the default executor from the orb, or use the `machine` executor and specify a windows image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
@@ -117,8 +117,8 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Cloud_with_machine}
-```yml
+{:.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket}
+```yaml
 version: 2.1
 
 jobs:
@@ -129,23 +129,41 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server_3}
-```yml
+{:.tab.windowsblock.Cloud_GitHub_App_&_GitLab}
+```yaml
 version: 2.1
 
 jobs:
   build: # name of your job
-    machine: # executor type
-      image: windows-default
-    resource_class: windows.medium
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 ```
 
 Find out more about the Windows execution environment in the [Using the Windows Execution Environment](/docs/using-windows/) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.

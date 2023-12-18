@@ -1075,53 +1075,56 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 ##### Windows execution environment
 {: #windows-execution-environment }
 
-The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. For more information, see the [Using the Windows execution environment](/docs/using-windows/) page. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
 {: class="alert alert-info"}
 
 {% include snippets/windows-resource-table.md %}
 
 Example:
 
-{:.tab.windowsblock.Cloud_with_orb}
+{:.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket}
 ```yaml
 version: 2.1
 
-orbs:
-  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
-
 jobs:
   build: # name of your job
-    executor:
-      name: win/default # executor type
-      size: medium # can be medium, large, xlarge, 2xlarge
-
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblock.Cloud_with_machine}
-```yaml
-jobs:
-  build: # name of your job
+    resource_class: 'windows.medium'
     machine:
       image: 'windows-server-2022-gui:current'
       shell: 'powershell.exe -ExecutionPolicy Bypass'
-    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
 
+{:.tab.windowsblock.Cloud_GitHub_App_&_GitLab}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
 {:.tab.windowsblock.Server}
 ```yaml
+version: 2.1
+
 jobs:
   build: # name of your job
     machine:
       image: windows-default
-    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
