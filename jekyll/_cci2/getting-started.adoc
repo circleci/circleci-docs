@@ -44,12 +44,68 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 [#check-your-account-type]
 === Check your account type
 
-The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
+**GitHub authorization with CircleCI is changing**. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-* If you authenticated using the xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket], a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to **Set up a project** below.
-* If you authenticated through xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to **Create a Project** below.
+[.tab.quickstart1.GitHub_App]
+--
+++++
+{% capture content %}
+In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
+Don’t see these options? Use the org selector in the top left corner to find the correct organization.
+{% endcapture %}
 
-[.tab.quickstart1.Create_project]
+{%- capture select-project -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project.png
+{%- endcapture -%}
+
+{% include two-up.html title="1. Create a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+
+
+{% capture content %}
+Check all the options are correct for your project, and follow the instructions to supply a private SSH key. CircleCI will use this to authenticate with GitHub and check out your code. Then click <b>Create Project</b>.
+{% endcapture %}
+
+{%- capture supply-ssh -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project-gh-app.png
+{%- endcapture -%}
+
+{% include two-up.html title="2. Supply an SSH key" content=content imageURL=supply-ssh imageAlt="Supply private SSH key" %}
+
+
+{% capture content %}
+A <code>config.yml</code> is generated for your based on the languages and frameworks used in your project.
+{% endcapture %}
+
+{%- capture configure-your-project -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png
+{%- endcapture -%}
+
+{% include two-up.html title="3. Generate config" content=content imageURL=configure-your-project imageAlt="Config Editor" %}
+
+
+{% capture content %}
+Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>. At this point you can also choose <strong>Review configuration file</strong> if you would rather check or make changes to the config file before committing.
+{% endcapture %}
+
+{%- capture commit-run-github -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png
+{%- endcapture -%}
+
+{% include two-up.html title="4. Commit and run your config" content=content imageURL=commit-run-github imageAlt="Commit a config" %}
+
+
+{% capture content %}
+You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
+
+{%- capture congrats-first-green-pipeline -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
+{%- endcapture -%}
+
+{% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+++++
+--
+
+[.tab.quickstart1.GitLab]
 --
 ++++
 {% capture content %}
@@ -108,7 +164,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 ++++
 --
 
-[.tab.quickstart1.Set_up_project]
+[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket]
 --
 ++++
 {% capture content %}
