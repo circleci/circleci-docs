@@ -376,7 +376,7 @@ You can read more about using SSH in your builds [here]({{site.baseurl}}/ssh-acc
 
 These are the issues with the Windows executor that we are aware of and will address as soon as we can:
 
-* Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
+* The `add_ssh_keys` step is required for _any_ SSH key used in the job
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 * The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
 
