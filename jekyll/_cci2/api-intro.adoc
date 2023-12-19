@@ -12,7 +12,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
+The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows, and pipelines. There are currently two supported API versions:
 
 * link:https://circleci.com/docs/api/v1/[API v1.1 Reference]
 * link:https://circleci.com/docs/api/v2/[API v2 Reference]
