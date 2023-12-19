@@ -2,15 +2,17 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI API Developer's Guide
+= CircleCI API developer's guide
 :page-description: API guide for internal and external CircleCI developers
 :experimental:
 :icons: font
 :page-layout: classic-docs
 :page-liquid:
 
-This guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
+This guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
 [#api-categories]
 == API categories
@@ -189,7 +191,7 @@ Many of the API calls make use of the `+{project-slug}+` triplet, described <<ge
 [#prerequisites]
 === Prerequisites
 
-* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. *GitHub App and GitLab users:* Please note the <<gitlab-saas-support-projects,change in the definition>> for the project slug references in the examples and use cases on the rest of this document.
+* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. *GitHub App and GitLab users:* Note the <<gitlab-saas-support-projects,change in the definition>> for the project slug references in the examples and use cases on the rest of this document.
 * Completion of the CircleCI link:{{ site.baseurl }}/getting-started[onboarding].
 
 [#steps]
@@ -217,7 +219,7 @@ Many of the API calls make use of the `+{project-slug}+` triplet, described <<ge
 ----
 
 . Add an API token from the link:https://circleci.com/account/api[Personal API Tokens page]. Be sure to write down and store your API token in a secure place once you generate it.
-. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
+. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 +
 [,shell]
 ----
@@ -333,7 +335,7 @@ You will need to declare the parameters you expect to receive from the API. In t
  }' https://circleci.com/api/v2/project/{project-slug}/pipeline
 ----
 
-For more detailed information about other endpoints you may wish to call, please refer to the
+For more detailed information about other endpoints you may wish to call, refer to the
 link:https://circleci.com/docs/api/v2/[CircleCI API v2 Documentation] for an overview of all
 endpoints currently available.
 
@@ -349,7 +351,7 @@ Before trying any of the API calls in this section, make sure you have a persona
 
 You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (VCS) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `+project/{project-slug}+` endpoint by passing the `project-slug` parameter.
 
-[#steps]
+[#get-project-steps]
 ==== Steps
 
 Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `+/project/{project-slug}+` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
@@ -384,16 +386,16 @@ To return project details, perform the following steps:
  }
 ----
 
-Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, please refer to the link:https://circleci.com/docs/api/v2/#get-a-project[Get Project Details] section of the _CircleCI API v2 Reference Guide_.
+Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, refer to the link:https://circleci.com/docs/api/v2/#get-a-project[Get Project Details] section of the _CircleCI API v2 Reference Guide_.
 
 [#get-job-details]
 === Get job details
 
 Much like the Get a project API request described in the previous example, the link:https://circleci.com/docs/api/v2/index.html#operation/getJobDetails[Get job details] API request enables you to return specific job information from the CircleCI API by making a single API request.
 
-Retrieving job information can be very useful when you want information about how your job performed, what resources were used (e.g. pipeline, executor type, etc.), and the time it took for the job to finish.
+Retrieving job information can be very useful when you want information about how your job performed, what resources were used (for example, pipeline, executor type, etc.), and the time it took for the job to finish.
 
-[#steps]
+[#get-job-details-steps]
 ==== Steps
 
 Of the several jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `+GET /project/{project_slug}/job/{job-number}+` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
@@ -461,16 +463,22 @@ To return job details, perform the following steps:
  }
 ----
 
-Notice in the example above that you will receive very specific information about your job, including specific project and workflow details for the job, the date and time the job started and then finished, as well as job-specific information such as the executor type used, current status of the job, and the duration of the job.
+Notice in the example above that you will receive very specific information about your job:
 
-For a more detailed breakdown of each value returned in this request, please refer to the https://circleci.com/docs/api/v2/#get-job-details[Get Job Details] section of the API v2 Reference Guide.
+* Project and workflow details for the job
+* Date and time the job started and finished
+* Executor type
+* Current status of the job
+* Duration of the job.
+
+For a more detailed breakdown of each value returned in this request, refer to the https://circleci.com/docs/api/v2/#get-job-details[Get job details] section of the API v2 Reference Guide.
 
 [#download-artifacts]
 === Download artifacts
 
 The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our link:{{site.baseurl}}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci[API v1.1 guide] -- keep checking back here as this functionality will be added to API v2 in the future.
 
-[#steps]
+[#download-artifacts-steps]
 ==== Steps
 
 . Ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
@@ -482,7 +490,7 @@ The following section details the steps you need to follow to download artifacts
 
 . Retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
 +
-image::{{ site.baseurl }}/assets/img/docs/job-number.png[Job Number]
+image::{{ site.baseurl }}/assets/img/docs/job-number.png[Job number]
 
 . Next, use the `curl` command to return a list of artifacts for a specific job.
 +
@@ -712,7 +720,7 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
   },
 ----
 
-When reviewing each individual review job, please note that the following information returned for each job:
+The following information is returned for each job:
 
 * `id` - The ID associated with the individual job.
 * `status` - The status of the job.
