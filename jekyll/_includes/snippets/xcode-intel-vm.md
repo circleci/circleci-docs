@@ -1,6 +1,7 @@
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|--------------
-`15.1.0 | Xcode 15 beta 3 (23B74) | 14.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13795/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-1-beta-3-released/49876)
+`15.2.0` | Xcode 15.2 (15C5500c) | 14.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13976/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-2-beta-1-released/50062)
+`15.1.0` | Xcode 15.1 (15C65) | 14.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13945/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-1-rc-released/50026)
  `15.0.0` | Xcode 15 (15A240d) | 13.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13456/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-15-rc-released-important-notice-for-visionos-sdk-users/49278)
 `14.3.1` | Xcode 14.3.1 (14E300b) | 13.2.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12131/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-3-1-rc-released/48152)
  `14.2.0` | Xcode 14.2 (14C18) | 12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v10821/manifest.txt) | [Release Notes](https://discuss.circleci.com/t/xcode-14-2-rc-released-breaking-changes/46303)
@@ -13,7 +14,7 @@
 **We are deprecating support for all Intel-based macOS resources.**
 <br>
 <br>
-The `macos.x86.medium.gen2` resource class is being deprecated on January 31, 2024. Xcode v15.1 is the latest version that will be supported by this macOS resource.
+The `macos.x86.medium.gen2` resource class is being deprecated on June 28, 2024. Xcode v15.1 is the latest version that will be supported by this macOS resource.
 <br>
 <br>
 See our [announcement](https://discuss.circleci.com/t/macos-intel-support-deprecation-in-january-2024/48718) for more details.

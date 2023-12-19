@@ -14,12 +14,22 @@ contentTags:
 
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
 
+[NOTE]
+====
+**GitHub authorization with CircleCI is changing**. Starting August, 2023 when you authorize your CircleCI account with GitHub, this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
+
+* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci`
+* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/github`
+
+For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
+====
+
 [#overview]
 == Overview
 
-If you are looking to set up an SSH key in order to check out code from GitHub or Bitbucket, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages.
+If you want to set up an SSH key in order to checkout code from additional repositories in GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket within a job, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages.  If you need additional SSH keys to access other services and your org is set up to the use xref:github-integration#[GitHub OAuth app] or BitBucket, follow the steps below.
 
-If you are using GitLab as your VCS, or if you need additional SSH keys to access other services, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
+If you want to set up an SSH key in order to checkout code from additional repositories or to access other services from within your job and your org is authorized with GitHub App or you use GitLab as your VCS, follow the steps below to add an SSH key to your project.  
 
 You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
 
@@ -42,7 +52,7 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file.
+To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint must be the MD5 hash, not SHA256. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 hash will be visible.
 
 For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 
@@ -59,6 +69,8 @@ jobs:
 
 All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
 
+To checkout additional repositories from within your job, ensure that you run the `checkout` command *before* `add_ssh_keys`; otherwise, `CIRCLE_CI_REPOSITORY_URL` will be empty.  Also ensure that the private key is added to the CircleCI project and that the public key has been added to the additional repositories that you want to checkout from within your job.
+
 [#adding-multiple-keys-with-blank-hostnames]
 == Adding multiple keys with blank hostnames
 
@@ -67,6 +79,7 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 [#see-also]
 == See Also
 
-* xref:github-integration#[GitHub Integration]
+* xref:github-integration#[GitHub OAuth Integration]
+* xref:github-apps-integration#[GitHub Apps Integration]
 * xref:bitbucket-integration#[Bitbucket Integration]
 * xref:gitlab-integration#[GitLab CI Integration]

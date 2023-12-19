@@ -128,6 +128,8 @@ en:
             link: schedule-pipelines-with-multiple-workflows
           - name: Set a nightly scheduled pipeline
             link: set-a-nightly-scheduled-pipeline
+          - name: Use dynamic configuration
+            link: using-dynamic-configuration
           - name: Configure databases
             link: databases
           - name: Migrate from deploy to run
@@ -206,12 +208,18 @@ en:
             link: high-uid-error
       - name: Reference
         children:
+          - name: Android images support policy
+            link: android-images-support-policy
           - name: Convenience images support policy
             link: convenience-images-support-policy
+          - name: Linux VM images support policy
+            link: linux-vm-support-policy
           - name: Linux CUDA images support policy
             link: linux-cuda-images-support-policy
           - name: Remote Docker images support policy
             link: remote-docker-images-support-policy
+          - name: Windows images support policy
+            link: windows-images-support-policy
           - name: Xcode image policy
             link: xcode-policy
 
@@ -264,8 +272,6 @@ en:
             link: runner-config-reference
       - name: How-to Guides
         children:
-          - name: Upgrading machine runner on cloud
-            link: upgrading-circleci-machine-runner-on-cloud
           - name: Upgrade machine runner on server
             link: runner-upgrading-on-server
       - name: Reference
@@ -328,6 +334,8 @@ en:
             link: deployment-overview
       - name: How-to guides
         children:
+          - name: Deploy to Amazon SageMaker
+            link: deploy-to-amazon-sagemaker
           - name: Deploy Android applications
             link: deploy-android-applications
           - name: Deploy to Artifactory
@@ -514,6 +522,8 @@ en:
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
+          - name: OIDC tokens with custom claims
+            link: oidc-tokens-with-custom-claims
       - name: How-to guides
         children:
           - name: Manage roles and permissions
@@ -530,6 +540,8 @@ en:
             link: stop-building-a-project-on-circleci
           - name: Rename organizations and repositories
             link: rename-organizations-and-repositories
+          - name: Prevent unregistered users from spending credits
+            link: prevent-unregistered-users-from-spending-credits
 
   - name: Manage config policies
     icon: icons/sidebar/lock.svg
@@ -1076,6 +1088,10 @@ en:
         children:
           - name: Server plan overview
             link: plan-server
+      - name: How-to guides
+        children:
+          - name: Prevent unregistered users from spending credits
+            link: prevent-unregistered-users-from-spending-credits
 
   - name: Contributing to CircleCI docs
     icon: icons/sidebar/changelog.svg

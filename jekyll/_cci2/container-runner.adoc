@@ -321,6 +321,11 @@ Container runner needs the following Kubernetes permissions:
 ** Get
 ** List
 
+If link:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job with SSH] is enabled, the following permissions are also required:
+
+* link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
+** Get
+
 In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
 
 * Pods, Pods/Logs
@@ -344,7 +349,7 @@ If the container runner crashes, there is no expectation that in-process or queu
 [#logging-containers]
 == Logging containers
 
-Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI web app.
+Container runner schedules a logging container if there are secondary (service) containers in the task pod. This container will get the secondary container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
 
 Logging containers require a service account token with the minimal privileges to get container logs.
 
@@ -499,7 +504,6 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 [#limitations]
 == Limitations
 
-* The ability to rerun a job with SSH.
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
 * There is no support for container environments other than Kubernetes at this time.
 * Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]

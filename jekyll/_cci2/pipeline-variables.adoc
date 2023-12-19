@@ -53,7 +53,7 @@ jobs:
 When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[set the variable in a shell command].
 
 [#pipeline-parameters-in-configuration]
-== Pipeline parameters in configuration
+== Pipeline parameters
 
 Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
 
@@ -65,8 +65,6 @@ Pipeline parameters support the following types:
 - enum
 
 See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
-
-NOTE: When using setup workflows, all pipeline parameters must be present in the subsequent configuration, including in API calls. More information on setup workflows can be found in the xref:dynamic-config#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
@@ -137,15 +135,15 @@ Configuration processing happens in the following stages:
 
 The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
-[#the-scope-of-pipeline-parameters]
-== The scope of pipeline parameters
+[#the-scope-of-parameters-in-configuration]
+== The scope of parameters in configuration
 
 Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
 
 [#element-parameter-scope]
 === Element parameter scope
 
-Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, for example, a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
+Element parameters, which are parameters set in a job, a command, or an executor, use lexical scoping. That is, element parameters are in scope within the element they are defined in. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
 ```yaml
 version: 2.1
@@ -160,7 +158,9 @@ commands:
 
 jobs:
   daily-message:
-    machine: true
+    machine:
+      image: ubuntu-2004:current
+    resource_class: large
     parameters:
       message:
         type: string
@@ -190,8 +190,19 @@ Pipeline parameters which are defined in configuration are always in scope, with
 - Pipeline parameters are not in scope for the definition of other pipeline parameters, so they cannot depend on one another.
 - Pipeline parameters are not in scope in the body of orbs, even inline orbs, to prevent data leaks.
 
+[#pipeline-parameters-and-dynamic-configuration]
+=== Pipeline parameters and dynamic configuration
+
+When using setup workflows to pass control of the pipeline to a second configuration, all pipeline parameters that are declared in the setup workflow must also be declared, with the same defaults, in the second configuration.
+
+When the setup workflow passes control to a second configuration, the parameters passed _to_ the setup workflow will be merged in with any parameters specified _in_ the setup workflow, before being passed to the second configuration. When using dynamic configuration, the second configuration must tolerate receiving any parameters that the setup workflow's code passes, as well as any parameters that the setup workflow _could_ accept.
+
+If there are name conflicts between pipeline parameters specified in a setup workflow and those specified in an API request when triggering a pipeline, the continuation process will fail, and the pipeline will error.
+
+More information on setup workflows can be found in the xref:dynamic-config#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
+
 [#conditional-workflows]
-== Conditional workflows
+== Pipeline parameters and conditional workflows
 
 Use the xref:configuration-reference#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:configuration-reference#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 

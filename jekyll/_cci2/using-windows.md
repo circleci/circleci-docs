@@ -9,8 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-The Windows execution environment is not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info"}
+
 
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
@@ -19,30 +18,24 @@ The Windows execution environment provides the tools to build Windows projects, 
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 
-You can access the Windows execution environment by using the machine executor and specifying a Windows image.
+You can access the Windows execution environment by using the machine executor and specifying a Windows image, or by using the windows orb and specifying the default executor.
 
-To keep your configuration simple and to ensure you are using the most up-to-date image, you can instead use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows), and then specify the default executor from the orb in your job configuration. CircleCI strongly encourages using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
+## Quickstart
+{: #quickstart }
 
-Both options are shown in the example below. The configuration for CircleCI server is different because the Windows execution environment is managed by your server administrator.
+For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info"}
 
-{:.tab.windowsblock.Cloud_with_orb}
-```yaml
-version: 2.1 # Use version 2.1 to enable Orb usage.
+Configuration options for using the Windows execution environment are shown below.
 
-orbs:
-  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
+For the GitHub App/GitLab example, you will need to supply and SSH key to your build environment. Follow these steps:
 
-jobs:
-  build: # name of your job
-    executor: win/default # executor type
+1. In the CircleCI web app **Dashboard**, select your project from the dropdown menu and click **Project Settings**
+1. Select **SSH keys** from the sidebar
+1. Copy the fingerprint for the "Additional SSH key" with the hostname `gitlab.com`
+1. Use the `add_ssh_keys` key in your configuration to add the SSH key to your execution environment
 
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblock.Cloud_with_machine}
+{:.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket}
 ```yaml
 version: 2.1
 
@@ -54,6 +47,25 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Cloud_GitHub_App_&_GitLab}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
@@ -72,7 +84,29 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Note that in order to use a specific image with the Windows orb, for example, Windows Server 2022, it must be specified in the `executor` type, as shown in the following snippet:
+
+### The Windows orb
+{: #the-windows-orb}
+
+To keep your configuration simple and to ensure you are using the most up-to-date image, you can instead use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows), and then specify the default executor from the orb in your job configuration. CircleCI strongly encourages using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
+
+```yaml
+version: 2.1 # Use version 2.1 to enable Orb usage.
+
+orbs:
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor: win/default # executor type
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+To use a specific image with the Windows orb, for example, Windows Server 2022, it must be specified in the `executor` type, as shown in the following snippet:
 {: class="alert alert-info"}
 
 ```yaml

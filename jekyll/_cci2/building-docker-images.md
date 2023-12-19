@@ -125,6 +125,9 @@ The above tags resolve to the latest supported Docker version, which is currentl
 To use Docker 23, the previous Docker release, use the following tag:
 - `docker23`
 
+To use Docker 24, patch updates will occur until Docker 25 is released, use the following tag:
+- `docker24`
+
 To use the current deprecated version, Docker 20, use `20.10.24`
 
 The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.

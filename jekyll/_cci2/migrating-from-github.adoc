@@ -19,7 +19,7 @@ This document provides an overview of how to migrate from GitHub Actions to Circ
 [#jobs-and-workflows]
 === Jobs and workflows
 
-Both GitHub Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
+Both GitHub Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (for example, "run unit tests" or "build a Docker image").
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
@@ -122,15 +122,17 @@ docker:
   - image: cimg/openjdk:17.0
 
 # Linux Ubuntu Executor
-machine: true
+machine:
+  image: ubuntu-2004:202010-01
 
 # macOS Executor
 macos:
   xcode: 14.2.0
 
 # Windows Executor
-# NOTE: Orb declaration needed. See docs
-executor: win/vs2019
+machine:
+  image: 'windows-server-2022-gui:current'
+resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
 ----
 
 2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated https://circleci.com/docs/configuration-reference/#docker[as dependencies].
@@ -239,8 +241,8 @@ jobs:
           webhook: # WEBHOOK
 ----
 
-2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
-on_success, on_failure) as well as https://circleci.com/docs/configuration-reference/#the-when-step[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
+2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/configuration-reference/#the-when-attribute[basic conditions on steps] (for example, `on_success` [default], +
+`on_success`, `on_failure`) as well as https://circleci.com/docs/configuration-reference/#the-when-step[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
 currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
 
 a|

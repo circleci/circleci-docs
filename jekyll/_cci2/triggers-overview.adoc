@@ -27,7 +27,7 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
 
-NOTE: This feature is not yet available for GitLab accounts.
+NOTE: This feature is not yet available for GitLab or GitHub App accounts. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
 In the CircleCI web app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled:
 
@@ -44,7 +44,7 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
 
-NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.  Alternatively for projects using GitHub App, the link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[inbound webhooks] functionality provides similar capabilities.
+NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.  Alternatively for projects using GitHub App, the <<trigger-a-pipeline-from-an-inbound-webhook,inbound webhooks>> functionality provides similar capabilities.
 
 For non GitLab/GitHub App projects, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
@@ -63,6 +63,27 @@ curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 
 TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
+
+[#trigger-a-pipeline-from-an-inbound-webhook]
+== Trigger a pipeline from an inbound webhook
+
+NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+
+To trigger a pipeline from anywhere that can emit a webhook, or run a curl command, follow these steps:
+
+. Navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
+. Select "Inbound Webhook" from the "Connect To" dropdown menu, and click **Next**.
++
+image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an inbound webhook trigger]
+
+. Fill in the details of your trigger source, trigger description, and config file path. Then, click **Save**.
+. You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source. The secret will not be shown again so be sure to copy the URL before clicking **Done**.
++
+image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
+
+Below is an example of how you would set up the webhook trigger in Hugging Face:
+
+image::triggers/inbound-webhooks-hugging-face-setup.png[screenshot showing inbound webhook trigger Hugging Face setup]
 
 [#schedule-a-pipeline]
 == Schedule a pipeline
