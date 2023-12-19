@@ -80,7 +80,7 @@ NOTE: Pipeline parameters are *not* treated as sensitive data and *must not* be 
 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 endpoints, please refer to the https://circleci.com/docs/api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+For a complete list of all API v2 endpoints, refer to the https://circleci.com/docs/api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 [#new-endpoints]
 === New endpoints
