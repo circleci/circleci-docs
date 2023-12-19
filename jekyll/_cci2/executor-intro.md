@@ -297,4 +297,3 @@ When using a machine executor, if a port range is hardcoded, the range in `/proc
 {: #next-steps }
 
 * Read more about [Pre-built CircleCI convenience images](/docs/circleci-images/) for the Docker execution environment.
-* Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.

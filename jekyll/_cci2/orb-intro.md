@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Orbs overview"
 description: "Starting point for using CircleCI orbs"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -14,7 +14,7 @@ Use orbs to:
 * Simplify configuration (`.circleci/_config.yml`)
 * Automate repeated processes
 * Accelerate project setup
-* Simplify integration with third-party tools 
+* Simplify integration with third-party tools
 
 ## Introduction
 {: #introduction }
@@ -33,7 +33,7 @@ If you would like to author your own orb, read more on the [Introduction to Auth
 ## Use an orb
 {: #use-an-orb }
 
-An orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used. For example: `<namespace>/<orb-name>@1.2.3`. 
+An orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used. For example: `<namespace>/<orb-name>@1.2.3`.
 
 Each orb within the [registry](https://circleci.com/developer/orbs) provides a [quickstart guide](https://circleci.com/developer/orbs/orb/circleci/node#quick-start), which contains a sample code snippet for importing that specific orb, with its most recent version, into your `.circleci/config.yml`.
 
@@ -84,7 +84,7 @@ jobs:
 ## Benefits of using orbs
 {: #benefits-of-using-orbs }
 
-Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the [`circleci/node`](https://circleci.com/developer/orbs/orb/circleci/node) orb), compared to the configuration required without using the orb (defining a job with the required steps for testing the application). 
+Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the [`circleci/node`](https://circleci.com/developer/orbs/orb/circleci/node) orb), compared to the configuration required without using the orb (defining a job with the required steps for testing the application).
 
 Orbs let you pull in pre-defined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
@@ -161,8 +161,8 @@ Orbs in the registry will appear with one of three different namespace designati
 {: #public-or-private }
 Orbs can be published in one of two ways:
 
-* **Public**: Searchable in the orb registry, and available for anyone to use 
-* **Private**: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated 
+* **Public**: Searchable in the orb registry, and available for anyone to use
+* **Private**: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated
 
 To understand these concepts further, read the [Public Orbs vs Private Orbs]({{site.baseurl}}/orb-concepts/#private-orbs-vs-public-orbs) section of the Orb Concepts page.
 
@@ -178,14 +178,14 @@ Private orb details pages may only be viewed by logged-in members of your organi
 
 To access the orbs page in the web app, navigate to **Organization Settings** and select **Orbs** from the sidebar.
 
-The orbs page lists orbs created within your organization. You can view: 
+The orbs page lists orbs created within your organization. You can view:
 
 * Orb type (public or private)
-* Orb usage (how many times the orb is used across all configurations) 
+* Orb usage (how many times the orb is used across all configurations)
 * Latest version
 * Description
 
-Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples. 
+Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples.
 
 
 ## See also
@@ -195,4 +195,3 @@ Full orb details, including orb source, are accessible by clicking on the orb na
 - Refer to [Orbs FAQ]({{site.baseurl}}/orbs-faq/) for information on known issues and questions that have been addressed when using CircleCI orbs.
 - Refer to [Reusable Configuration Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Orb Testing Methodologies]({{site.baseurl}}/testing-orbs/) for information on how to test orbs you have created.
-- Take the [orbs course](https://academy.circleci.com/orbs-course?access_code=public-2021) with CircleCI academy to learn more.

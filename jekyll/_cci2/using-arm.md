@@ -113,8 +113,3 @@ If you build an image on an M1 you need to specify `docker build --platform linu
 {: #arm-on-docker }
 
 For further information on using Arm with the Docker execution environment, see the [Using the Docker execution enviornment](/docs/using-docker/#arm) page.
-
-
-## Learn More
-{: #learn-more }
-Take the [Arm course](https://academy.circleci.com/arm-course?access_code=public-2021) with CircleCI Academy to learn more about using Arm resources and associated use cases.

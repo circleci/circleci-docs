@@ -124,8 +124,3 @@ DLC operates in the same way for jobs that use parallelism. If a `machine` job u
 DLC was previously enabled via the `reusable: true` key. The `reusable` key has been deprecated in favor of the `docker_layer_caching` key.
 
 In addition, the `exclusive: true` option is deprecated and all remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive remote Docker environment that other jobs cannot access.
-
-## Learn More
-{: #learn-more }
-
-Take the [DLC course](https://academy.circleci.com/docker-layer-caching?access_code=public-2021) with CircleCI Academy to learn more.
