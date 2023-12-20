@@ -1,0 +1,40 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Update the Kubernetes release agent - Open preview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to update the Kubernetes release agent for integrations with CircleCI releases
+:icons: font
+:experimental:
+
+NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
+
+The steps outlined on this page guide you to update the release agent installed in your Kubernetes cluster.
+
+Refer to the link:https://circleci.com/changelog/[CircleCI Change log] to find out about new release agent versioning, updates and fixes.
+
+[#prerequisites]
+== Prerequisites
+
+To update the Kubernetes release agent you should have a working CircleCI release environment connected to your Kubernetes cluster. Refer to the xref:set-up-a-release-environment#[Set up a release environment] and xref:configure-your-kubernetes-components#[Configure your Kubernetes components] pages for more information.
+
+[#update-steps]
+== Update steps
+
+. Update your local Helm cache:
++
+[,shell]
+----
+helm repo update
+----
+. Upgrade to the new version:
++
+[,shell]
+----
+helm upgrade circleci-release-agent-system release-agent/circleci-release-agent \
+--version 0.0.7 \
+-n circleci-release-agent-system
+----
