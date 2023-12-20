@@ -12,6 +12,7 @@ contentTags:
 :icons: font
 :toc: macro
 :toc-title:
+:macos:
 
 このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
 
@@ -26,7 +27,7 @@ contentTags:
 {% include snippets/runner/ja/terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. ネームスペースとリソースクラスの作成 
+== 1. ネームスペースとリソースクラスの作成
 
 [.tab.machine-runner.Web_app_installation]
 --
