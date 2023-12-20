@@ -75,4 +75,3 @@ include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
 - A how-to guide for xref:using-dynamic-configuration#[Using dynamic configuration]
 - The link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation` orb]
 - The link:https://circleci.com/docs/api/v2/#operation/continuePipeline[`continuePipeline` API call]
-- Take the link:https://academy.circleci.com/dynamic-config?access_code=public-2021[dynamic configuration course] with CircleCI Academy to learn more.
