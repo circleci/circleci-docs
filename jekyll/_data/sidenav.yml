@@ -382,6 +382,8 @@ en:
         children:
           - name: Manage releases
             link: release/manage-releases
+          - name: Update the Kubernetes release agent
+            link: release/update-the-kubernetes-release-agent
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
