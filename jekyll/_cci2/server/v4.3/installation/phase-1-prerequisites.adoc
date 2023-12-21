@@ -94,13 +94,13 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | NIC speed
 
 | < 500
-| 3
-| 12 cores
-| 32 GB
+| 4
+| 24 cores
+| 90 GB
 | 1 Gbps
 
 | 500+
-| 3
+| 6
 | 48 cores
 | 240 GB
 | 10 Gbps
@@ -129,7 +129,7 @@ For high availability, and to avoid potential outages, you should provision subn
 | Kubernetes Version
 
 | 4.3.x
-| 1.22 - 1.24
+| 1.26 - 1.27
 |===
 
 [#minimum-permissions-requirments]
