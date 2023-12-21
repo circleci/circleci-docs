@@ -223,7 +223,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies –-owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -268,7 +268,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies –-owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:
