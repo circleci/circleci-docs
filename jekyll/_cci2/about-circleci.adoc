@@ -55,12 +55,6 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 [#learn-more]
 == Learn More
 
-[#on-circleci-academy]
-=== On CircleCI Academy
-
-* link:https://academy.circleci.com/cicd-basics?access_code=public-2021[CI/CD 101 workshop]
-* link:https://academy.circleci.com/general-developer-training?access_code=public-2021[General developer training]
-
 [#on-our-blog]
 === On our blog
 

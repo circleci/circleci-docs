@@ -112,4 +112,7 @@ Once you have run this command, you can check your environment is set up by navi
 [#next-steps]
 == Next steps
 
-In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now xref:configure-your-kubernetes-components#[Configure your Kubernetes components].
+In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now:
+
+* xref:configure-your-kubernetes-components#[Configure your Kubernetes components].
+* Learn how to xref:update-the-kubernetes-release-agent#[update the Kubernetes release agent]

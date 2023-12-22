@@ -133,11 +133,6 @@ Almost all standard CircleCI features are available for use with self-hosted run
 
 * For limitations relating to container runner, visit the <<container-runner#limitations, Container runner>> page.
 
-[#learn-more]
-== Learn more
-
-Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about installing machine runners on your infrastructure.
-
 [#see-also]
 == See also
 - xref:runner-concepts#[Runner Concepts]
