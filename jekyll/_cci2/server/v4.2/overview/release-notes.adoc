@@ -35,6 +35,15 @@ For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4
 
 CAUTION: If you are upgrading from server v4.1.x and have user-managed secrets, ensure you follow the steps in the xref:../installation/upgrade-server#[Upgrade server v4.2 guide].
 
+[#release-4-2-4]
+== Release 4.2.4
+
+[#changelog-4-2-4]
+=== Changelog
+- Security Updates
+- Removes the unused distributor_dispatcher.disable_concurrency value
+For full details of this release see the link:https://circleci.com/server/changelog/#release-4-2-4[changelog].
+
 
 [#release-4-2-3]
 == Release 4.2.3
