@@ -234,6 +234,9 @@ deploy for the execution-gateway-api deployment.
 
 |execution_gateway.force_legacy_ui |string |`+"false"+` |
 
+|execution_gateway.plan_concurrency |int |`+2500+` |Maximum concurrency
+you wish to permit per org in your environment
+
 |execution_gateway.public_api_replicas |int |`+1+` |Number of replicas
 to deploy for the execution-gateway-public-api deployment.
 
