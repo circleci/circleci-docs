@@ -28,6 +28,14 @@ Find information about migration in the link:/docs/server/installation/migrate-f
 == Upgrade
 For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrade Server v4 Guide].
 
+[#release-4-0-6]
+== Release 4.0.6
+
+[#changelog-4-0-6]
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-4-0-6[changelog].
+
 [#release-4-0-5]
 == Release 4.0.5
 
