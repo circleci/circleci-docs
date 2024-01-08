@@ -202,7 +202,7 @@ Triggering a pipeline with an _unversioned_ configuration can have side effects,
 
 Test run pipelines triggered from VS Code have access to contexts, and project environment variables, based on which branch they are run on, and user permissions.
 
-You can opt-out to this feature per project. For your project, navigate to menu:Project Settings[VS Code integration] and toggle the "Run pipelines with unversioned config" to **Off**.
+You can opt-out of this feature per project. For your project, navigate to menu:Project Settings[VS Code integration] and toggle the "Run pipelines with unversioned config" option to **Off**.
 ====
 
 The following steps show how to test run a pipeline from the VS Code extension:
