@@ -49,8 +49,8 @@ For full details of this release see the link:https://circleci.com/server/change
 
 [#changelog-4-2-3]
 === Changelog
-Updates to GitHub's SSH key fingerprints
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-2-3[changelog].
+
+For full details of this release see the link:https://circleci.com/server/changelog/#server-release-4-2-3[changelog].
 
 
 [#release-4-2-2]
