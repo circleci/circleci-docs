@@ -116,6 +116,37 @@ The job should only rerun tests that are from a `classname` of `file` that had a
 [#additional-examples]
 == Additional examples
 
+[#configure-a-job-running-ruby-minitest-tests-across-parallel-ci-nodes-with-knapsack-pro]
+=== Configure a job running Ruby (minitest) tests across parallel CI nodes with Knapsack Pro
+
+Knapsack Pro dynamically distributes your tests based on up-to-date test execution data to achieve the perfect split.
+
+To use Knapsack Pro with the CircleCI rerun failed tests feature, you just need to:
+
+. link:https://docs.knapsackpro.com/knapsack_pro-ruby/guide/[Install Knapsack Pro] in your project.
+
+. Add the following gem to your Gemfile:
++
+```bash
+gem 'minitest-ci'
+```
+
+. Modify your test command to use `circleci tests`:
++
+```yaml
+ - run:
+     name: Minitest with Knapsack Pro
+     command: |
+       export KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=/tmp/tests_to_run.txt
+
+       # Retrieve the tests to run (all or just the failed ones), and let Knapsack Pro split them optimally.
+       circleci tests glob "test/**/*_test.rb" | circleci tests run --index 0 --total 1 --command ">$KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE xargs -n1 echo" --verbose
+       bundle exec rake "knapsack_pro:queue:minitest[--verbose --ci-report --no-ci-clean]"
+
+ - store_test_results:
+     path: test/reports
+```
+
 [#configure-a-job-running-ruby-rspec-tests]
 === Configure a job running Ruby (rspec) tests
 
