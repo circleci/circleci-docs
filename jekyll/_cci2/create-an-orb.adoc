@@ -117,7 +117,7 @@ If your GitHub account is authorised with CircleCI using the GitHub App integrat
 * When prompted, `Enter your circleci username or organization`, you will need to inspect the URL from the CircleCI web app and provide the org ID portion:
 .. Navigate to the link:https://app.circleci.com[CircleCI web app]
 .. The URL will be in the form: `\https://app.circleci.com/pipelines/circleci/<org-ID-string>`. The last string is the org ID that you need.
-* At the end of the automated set up process you will receive an error: `Error: Could not follow project`. At this point you need to push your project up to GitHub, and set it up in a new CircleCI project. Steps for creating a new project can be found on the xref:https://circleci.com/docs/create-project#[Create a project] page.
+* At the end of the automated set up process you will receive an error: `Error: Could not follow project`. At this point you need to push your project up to GitHub, and set it up in a new CircleCI project. Steps for creating a new project can be found on the xref:create-project#[Create a project] page.
 * Once you have your orb pushed up to GitHub and your project set up, you will need to make a few manual updates:
 ** In `config.yml` and `test-deploy-yml`, update `vcs_type: << pipeline.project.type >>` to be `vcs_type: github`.
 ** In `src/@orb.yml` update `source_url: <orb URL>` to be `source_url: "https://github.com/<your-github-user-or-org-name>/<your-orb-repo-name>"`.
