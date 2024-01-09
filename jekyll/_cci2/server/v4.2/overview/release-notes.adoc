@@ -40,9 +40,8 @@ CAUTION: If you are upgrading from server v4.1.x and have user-managed secrets, 
 
 [#changelog-4-2-4]
 === Changelog
-- Security Updates
-- Removes the unused distributor_dispatcher.disable_concurrency value
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-2-4[changelog].
+
+For full details of this release see the link:https://circleci.com/server/changelog/#server-release-4-2-4[changelog].
 
 
 [#release-4-2-3]
