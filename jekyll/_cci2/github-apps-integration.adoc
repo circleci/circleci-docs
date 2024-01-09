@@ -166,7 +166,6 @@ There is no automated way to migrate your organization from the GitHub OAuth app
 
 CAUTION: The following steps include creating a new org. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
 
-<<<<<<< HEAD
 
 . Open an incognito/private window and login to your current CircleCI account from circleci.com/login > "Signed up before September 2023" > Login with GitHub
 . In the bottom left-hand corner, click the avatar and select "User Settings"
@@ -174,8 +173,6 @@ CAUTION: The following steps include creating a new org. If you need to transfer
 . Log out and clear your browser cache.  Then go to circleci.com/signup and create a new email/password login.
 . Fill out the onboarding survey and on the "Connect your code" page, click the gravitar in the bottom left-hand corner. Navigate to "User Settings" > "Account Integrations".
 . At the bottom of the page, click on the link that says, "if you received instructions..." and re-authorize the GitHub organization. At this point, you will have a new CircleCI account that still has your old GitHub OAuth App organizations, but can also be used to login via email/password which will be the login mechanism after you have switched to the GitHub App integration.
-=======
->>>>>>> 5a50da86b (Update github-apps-integration.adoc)
 . From your existing CircleCI organization in the CircleCI web app, click the organization dropdown in the top-left corner.
 . At the bottom of the drop-down, click btn:[Create New Organization].
 . On the "Connect your code" page, click btn:[Connect] next to "GitHub".

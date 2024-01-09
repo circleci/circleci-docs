@@ -109,6 +109,19 @@ If your GitHub account is authorised with CircleCI using the GitHub App integrat
 ** In `config.yml` and `test-deploy-yml`, update `vcs_type: << pipeline.project.type >>` to be `vcs_type: github`.
 ** In `src/@orb.yml` update `source_url: <orb URL>` to be `source_url: "https://github.com/<your-github-user-or-org-name>/<your-orb-repo-name>"`.
 
+==== GitHub App integration additional steps
+
+If your GitHub account is authorised with CircleCI using the GitHub App integration, you will need to follow some extra steps, as listed below. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+* When prompted, `Are you using GitHub or Bitbucket or GitHub app (if GH App use circleci as the entry)?`, enter `circleci`.
+* When prompted, `Enter your circleci username or organization`, you will need to inspect the URL from the CircleCI web app and provide the org ID portion:
+.. Navigate to the link:https://app.circleci.com[CircleCI web app]
+.. The URL will be in the form: `\https://app.circleci.com/pipelines/circleci/<org-ID-string>`. The last string is the org ID that you need.
+* At the end of the automated set up process you will receive an error: `Error: Could not follow project`. At this point you need to push your project up to GitHub, and set it up in a new CircleCI project. Steps for creating a new project can be found on the xref:https://circleci.com/docs/create-project#[Create a project] page.
+* Once you have your orb pushed up to GitHub and your project set up, you will need to make a few manual updates:
+** In `config.yml` and `test-deploy-yml`, update `vcs_type: << pipeline.project.type >>` to be `vcs_type: github`.
+** In `src/@orb.yml` update `source_url: <orb URL>` to be `source_url: "https://github.com/<your-github-user-or-org-name>/<your-orb-repo-name>"`.
+
 === 4. Follow the prompts to set up your orb
 
 In the background, the `orb init` command copies and customizes the link:https://github.com/CircleCI-Public/Orb-Template[orb template] based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will be asked for the remote git repository URL that you obtained back in step 1.
