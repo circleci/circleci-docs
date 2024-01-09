@@ -66,7 +66,7 @@ server-attributes: &server
   relfilesuffix: /
   outfilesuffix: /index.html
   serverversion4: 4.0.5
-  serverversion41: 4.1.6
+  serverversion41: 4.1.7
   serverversion42: 4.2.2
   serverversion43: 4.3.1
   serverversion: 3.4.8
