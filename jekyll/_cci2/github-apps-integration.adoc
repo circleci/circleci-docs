@@ -182,7 +182,7 @@ NOTE: You can install the CircleCI GitHub App into the same GitHub organization 
 . Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on xref:invite-your-team#[this page].
 . If you are on a Performance pricing plan, go to "Plan" in the CircleCI web app and click on the "Share and Transfer" tab. Click "Transfer plan" and follow the instructions to transfer your pricing plan to your new organization by clicking on the new organization in the "transfer" UI.
 . If you followed step 12, your Performance pricing plan will now be transferred to your new organization (the one that is integrated through the CircleCI GitHub App integration).
-. At this point, you will be left with a GitHub App integrated organization that has the same payment plan and projects as your previous organization. If you get logged out, you can continue to use the "Login with GitHub" button on circleci.com/login as long as the old organization is not deleted.
+. At this point, you will be left with a GitHub App-integrated organization that has the same payment plan and projects as your previous organization. If you get logged out, you can continue to use the "Login with GitHub" button on link:https://circleci.com/login[the CircleCI login page] as long as the old organization is not deleted.
 
 NOTE: Data from xref:insights#[Insights] and historical pipeline runs will not be present in your new organization. Contexts will not be present until you recreate them for your new org.
 
