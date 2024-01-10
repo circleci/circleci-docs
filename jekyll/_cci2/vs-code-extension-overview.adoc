@@ -197,11 +197,11 @@ NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.ym
 
 [WARNING]
 ====
-Triggering a pipeline with an _unversioned_ configuration can have side effects, for example, unwanted deployment. We recommend using this feature **only** on feature branches.
+Please be mindful when running pipelines with _unversioned_ configuration, and take care to ensure no jobs with unintended effects are included in the run.
 
-Test run pipelines triggered from VS Code have access to contexts, and project environment variables, based on which branch they are run on, and user permissions.
+Test run pipelines triggered from VS Code have access to contexts and project environment variables, based on which branch they are run on and on author permissions. We therefore recommend using this feature **only** on feature branches.
 
-This feature is enabled by default on all projects. You can opt-out of this feature per project. For more details, see <<feature-settings>>. 
+This feature is enabled by default on all projects. You can opt-out of this feature per project. For more details, see <<feature-controls>>. 
 
 The following issues will be addressed in the coming weeks: 
 - Audit logs do not mention that a pipeline was run with unversioned config.
@@ -216,18 +216,12 @@ The following steps show how to test run a pipeline from the VS Code extension:
 . For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[]. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
 . The pipeline is now visible in your link:https://app.circleci.com/pipelines/[dashboard] in the CircleCI web app, and the Pipelines panel in the VS Code extension.
 
-[#feature-settings]
-=== Feature Settings
+[#feature-controls]
+=== Feature Controls
 
-Access to this feature can be controlled **at the project level**.
+This feature is enabled by default on all projects, but access to it can be controlled **at the project level**.
 
 * Project level settings can be found under menu:Project Settings[VS Code integration]. Toggle the "Run pipelines with unversioned config" option to **Off** to opt-out. 
 
 We plan on adding organization-level controls for this feature soon. 
-
-
-
-
-
-
 
