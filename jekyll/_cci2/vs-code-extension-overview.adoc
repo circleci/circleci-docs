@@ -203,7 +203,10 @@ Test run pipelines triggered from VS Code have access to contexts, and project e
 
 This feature is enabled by default on all projects. You can opt-out of this feature per project or per org. See more details under Feature Settings. 
 
-At this time, audit logs do not mention that a pipeline was run with unversioned config, and PR status checks may be altered as a result of unversioned config overrides. Both issues will be addressed in the coming weeks.
+The following issues will be addressed in the coming weeks: 
+- Audit logs do not mention that a pipeline was run with unversioned config.
+- Pipelines run with unversioned configuration are not differentiated from other pipelines in the WebUI.
+- PR status checks may be altered as a result of unversioned config overrides
 ====
 
 The following steps show how to test run a pipeline from the VS Code extension:
