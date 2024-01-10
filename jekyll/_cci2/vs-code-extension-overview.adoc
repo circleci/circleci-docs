@@ -192,8 +192,6 @@ image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Scre
 
 NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored, and instead, the configuration file is overridden by a custom configuration file passed as a parameter.
 
-[#steps]
-=== Steps
 
 [WARNING]
 ====
@@ -208,6 +206,9 @@ The following issues will be addressed in the coming weeks:
 - Pipelines run with unversioned configuration are not differentiated from other pipelines in the WebUI.
 - PR status checks may be altered as a result of unversioned config overrides
 ====
+
+[#steps]
+=== Steps
 
 The following steps show how to test run a pipeline from the VS Code extension:
 
