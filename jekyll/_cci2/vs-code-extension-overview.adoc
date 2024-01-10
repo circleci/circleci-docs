@@ -220,9 +220,10 @@ The following steps show how to test run a pipeline from the VS Code extension:
 [#feature-controls]
 === Feature Controls
 
-This feature is enabled by default on all projects, but access to it can be controlled **at the project level**.
+The ability to trigger pipelines from VS Code is enabled by default on all projects. You can opt-out of this feature **at the project level**, as follows:
 
-* Project level settings can be found under menu:Project Settings[VS Code integration]. Toggle the "Run pipelines with unversioned config" option to **Off** to opt-out. 
+. Navigate to Project Settings[VS Code integration]
+. Toggle the "Run pipelines with unversioned config" option to **Off** to opt-out
 
 We plan on adding organization-level controls for this feature soon. 
 
