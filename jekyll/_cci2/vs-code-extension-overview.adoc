@@ -177,7 +177,7 @@ You can also integrate the language server into any editor which supports the La
 [#test-run-your-config-from-vs-code]
 == Test run your config from VS Code
 
-NOTE: The ability to trigger a pipeline from VS Code with a _unversioned_ config is currently in **open preview**.
+NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ config is currently in **open preview**.
 
 Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
 
@@ -195,15 +195,15 @@ NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.ym
 
 [WARNING]
 ====
-Please be mindful when running pipelines with _unversioned_ configuration, and take care to ensure no jobs with unintended effects are included in the run.
+Use caution when running pipelines with _unversioned_ configuration. Take care to ensure no jobs with unintended effects are included in the run.
 
-Test run pipelines triggered from VS Code have access to contexts and project environment variables, based on which branch they are run on and on author permissions. We therefore recommend using this feature **only** on feature branches.
+Test run pipelines triggered from VS Code have access to contexts and project environment variables based on branch and author permissions. We recommend using this feature **only** on feature branches.
 
-This feature is enabled by default on all projects. You can opt-out of this feature per project. For more details, see <<feature-controls>>. 
+The ability to trigger pipelines from VS Code is enabled by default on all projects. You can opt-out of this feature per project. For more details, see <<feature-controls>>. 
 
-The following issues will be addressed in the coming weeks: 
+The following issue fixes are in development: 
 - Audit logs do not mention that a pipeline was run with unversioned config.
-- Pipelines run with unversioned configuration are not differentiated from other pipelines in the WebUI.
+- Pipelines run with unversioned configuration are not differentiated from other pipelines in the CircleCI web app.
 - PR status checks may be altered as a result of unversioned config overrides
 ====
 
