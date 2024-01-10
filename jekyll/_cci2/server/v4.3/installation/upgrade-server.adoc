@@ -70,7 +70,11 @@ Please note the following significant changes in server v4.3.
 [#vault]
 === Vault
 
+<<<<<<< HEAD
 * We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation before backing up your server installation in preparation for upgrading to v4.3. Customers that do not perform this step may have issues restoring Vault from backup in v4.3.
+=======
+* We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation before backing up your server installation in preparation for upgrading to v4.3. Customers that do not perform this step may have issues restoring Vault from backup in v4.3. 
+>>>>>>> 2e84a057f (Update jekyll/_cci2/server/v4.3/installation/upgrade-server.adoc)
 
 
 [#prerequisites]
