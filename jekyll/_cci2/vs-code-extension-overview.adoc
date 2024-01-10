@@ -225,5 +225,5 @@ The ability to trigger pipelines from VS Code is enabled by default on all proje
 . Navigate to Project Settings[VS Code integration]
 . Toggle the "Run pipelines with unversioned config" option to **Off** to opt-out
 
-We plan on adding organization-level controls for this feature soon. 
+NOTE: We plan on adding organization-level controls for this feature soon. 
 
