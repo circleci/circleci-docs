@@ -34,7 +34,7 @@ For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrad
 [#changelog-4-0-6]
 === Changelog
 
-For full details of this release see the https://circleci.com/server/changelog/#release-4-0-6[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-0-6[changelog].
 
 [#release-4-0-5]
 == Release 4.0.5
