@@ -36,25 +36,33 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 
 Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to connect your GitHub account, which creates your CircleCI organization.
 
-When you create a new organization and connect your GitHub account, you will be prompted to create a new project from a repository. After creating a new project, CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository. You will be presented with the following options to either commit and run the generated configuration file on a new branch or view the generated configuration file in the configuration editor. 
+When you create a new organization and connect your GitHub account, you will be guided to start creating projects, as follows:
 
+. You will be prompted to create a new project from a repository
+. After creating a new project, CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository
+. You will be presented with options to either
+.. btn:[Commit and Run] the generated CircleCI configuration in a new branch
+.. Review the configuration file in the configuration editor in the CircleCI web app
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
 
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
-When you create a new project using the **Faster** (commit a starter CI pipeline) option described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
+When you choose the btn:[Commit and Run] option described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
-If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
+If you choose to review the configuration file in the config editor first, the pipeline is triggered after you save the `.circleci/config.yml` by clicking the btn:[Commit and Run] button..
 
 Each time you push changes to your GitHub repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
-Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
+[NOTE]
+====
+Editing an existing CircleCI configuration within the web app is not currently available. All further changes to the configuration should be made in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
 
 Manually triggering a pipeline from the CircleCI web app is not available at this time.
+====
 
 [#project-settings]
 == Project settings
