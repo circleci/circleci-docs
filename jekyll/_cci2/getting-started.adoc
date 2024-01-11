@@ -73,7 +73,7 @@ Check all the options are correct for your project, and follow the instructions 
 
 
 {% capture content %}
-A <code>config.yml</code> is generated for your based on the languages and frameworks used in your project.
+A <code>config.yml</code> file is generated for you based on the languages and frameworks used in your project.
 {% endcapture %}
 
 {%- capture configure-your-project -%}
