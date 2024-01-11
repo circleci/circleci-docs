@@ -44,12 +44,68 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 [#check-your-account-type]
 === Check your account type
 
-The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
+**GitHub authorization with CircleCI is changing**. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-* If you authenticated using the xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket], a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to **Set up a project** below.
-* If you authenticated through xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to **Create a Project** below.
+[.tab.quickstart1.GitHub_App]
+--
+++++
+{% capture content %}
+In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
+Don’t see these options? Use the org selector in the top left corner to find the correct organization.
+{% endcapture %}
 
-[.tab.quickstart1.Create_project]
+{%- capture select-project -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project.png
+{%- endcapture -%}
+
+{% include two-up.html title="1. Create a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+
+
+{% capture content %}
+Check all the options are correct for your project, and follow the instructions to supply a private SSH key. CircleCI will use this to authenticate with GitHub and check out your code. Then click <b>Create Project</b>.
+{% endcapture %}
+
+{%- capture supply-ssh -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project-gh-app.png
+{%- endcapture -%}
+
+{% include two-up.html title="2. Supply an SSH key" content=content imageURL=supply-ssh imageAlt="Supply private SSH key" %}
+
+
+{% capture content %}
+A <code>config.yml</code> file is generated for you based on the languages and frameworks used in your project.
+{% endcapture %}
+
+{%- capture configure-your-project -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/generating-config.png
+{%- endcapture -%}
+
+{% include two-up.html title="3. Generate config" content=content imageURL=configure-your-project imageAlt="Config Editor" %}
+
+
+{% capture content %}
+Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>. At this point you can also choose <strong>Review configuration file</strong> if you would rather check or make changes to the config file before committing.
+{% endcapture %}
+
+{%- capture commit-run-github -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-github-app.png
+{%- endcapture -%}
+
+{% include two-up.html title="4. Commit and run your config" content=content imageURL=commit-run-github imageAlt="Commit a config" %}
+
+
+{% capture content %}
+You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
+
+{%- capture congrats-first-green-pipeline -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
+{%- endcapture -%}
+
+{% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+++++
+--
+
+[.tab.quickstart1.GitLab]
 --
 ++++
 {% capture content %}
@@ -108,7 +164,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 ++++
 --
 
-[.tab.quickstart1.Set_up_project]
+[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket]
 --
 ++++
 {% capture content %}
@@ -166,7 +222,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 {% include getting-started-section-header.html title="2. Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
-Click on the green <b>Success</b> button to see details about the <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. <code>say-hello-workflow</code>  ran one job called <b>say-hello</b>.
+Click on the green <b>Success</b> button to see details about a <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. The workflow expands to show all jobs that ran.
 {% endcapture %}
 
 {%- capture what-just-happened -%}
@@ -177,13 +233,7 @@ Click on the green <b>Success</b> button to see details about the <a class="no-e
 
 
 {% capture content %}
-Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/concepts/#steps">steps</a> in this job:
-<ul>
-<li>Spin up environment</li>
-<li>Preparing environment variables</li>
-<li>Checkout code</li>
-<li>Say hello</li>
-</ul>
+Click on a job to enter the job view and see all the steps that ran.
 {% endcapture %}
 
 {%- capture view-results -%}
@@ -193,7 +243,7 @@ Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.co
 {% include two-up.html title="2. View your results" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
 
 {% capture content %}
-It is easy for teammates and collaborators to view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
+Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code. Invite team members using the <strong>Add team members</strong> link next to your project name on the dashboard. If you do not see this option, ensure you have a project selected.
 {% endcapture %}
 
 {%- capture collab-with-team -%}
@@ -254,7 +304,6 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 [#next-steps]
 == Next steps
 
-* link:https://circleci.com/training/[On-demand free developer training]
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
 * xref:config-intro#[Introduction to configuration]
 * xref:concepts#[CircleCI concepts]
