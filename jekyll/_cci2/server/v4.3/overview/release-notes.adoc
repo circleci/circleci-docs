@@ -55,4 +55,4 @@ For full details of this release see the link:https://circleci.com/changelog/ser
 [#changelog-4-3-0]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-3-0[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-3/[changelog].
