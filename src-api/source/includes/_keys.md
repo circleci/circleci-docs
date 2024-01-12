@@ -58,11 +58,11 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout
   }
 ```
 
-**`GET` Request**: Returns an individual checkout key.
+**`GET` Request**: Returns an individual checkout key. Supply fingerprint as a path parameter. Fingerprint can be of type md5 or sha256. sha256 fingerprints should be URL-encoded.
 
 ## Delete Checkout Key
 
-**`DELETE` Request:** Deletes the checkout key.
+**`DELETE` Request:** Deletes a checkout key by fingerprint. Supply fingerprint as a path parameter. Fingerprint can be of type md5 or sha256. sha256 fingerprints should be URL-encoded.
 
 ```sh
 curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint -H "Circle-Token: <circle-token>"
@@ -94,7 +94,7 @@ curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fing
 # no response expected
 ```
 
-**`DELETE` Request:** Deletes an SSH key from the system.
+**`DELETE` Request:** Deletes an SSH key from the system by fingerprint. Supply `fingerprint` in request body. Fingerprint can be of type md5 or sha256.
 
 
 ## Heroku Keys
