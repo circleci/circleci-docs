@@ -211,7 +211,7 @@ gem 'rspec_junit_formatter'
      destination: test-results
 ```
 
-. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. This is useful when you have slow test files but don't want to manually split test examples into smaller test files.
+. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. This is useful when you have slow test files but do not want to manually split test examples into smaller test files.
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
