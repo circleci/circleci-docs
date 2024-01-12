@@ -121,7 +121,7 @@ The job should only rerun tests that are from a `classname` of `file` that had a
 
 Knapsack Pro dynamically distributes your tests based on up-to-date test execution data to achieve the perfect split.
 
-To use Knapsack Pro with the CircleCI rerun failed tests feature, you just need to:
+To use Knapsack Pro with the CircleCI rerun failed tests feature, follow these steps:
 
 . link:https://docs.knapsackpro.com/knapsack_pro-ruby/guide/[Install Knapsack Pro] in your project.
 
