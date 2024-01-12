@@ -41,7 +41,7 @@ CAUTION: If you are upgrading from server v4.1.x and have user-managed secrets, 
 [#changelog-4-2-4]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#server-release-4-2-4[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-2-4[changelog].
 
 
 [#release-4-2-3]
@@ -50,7 +50,7 @@ For full details of this release see the link:https://circleci.com/server/change
 [#changelog-4-2-3]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#server-release-4-2-3[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-2-3[changelog].
 
 
 [#release-4-2-2]
@@ -75,4 +75,4 @@ For full details of this release see the link:https://circleci.com/changelog/rel
 [#changelog-4-2-0]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-2-0[changelog].
+For full details of this release see the link:https://circleci.com/changelog/release-4-2-0[changelog].
