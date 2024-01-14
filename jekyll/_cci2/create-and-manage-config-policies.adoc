@@ -128,7 +128,7 @@ jobs:
       - checkout
       - run:
           name: Diff policy bundle
-          command: circleci policy diff ./config --owner-id $ORG_ID # show a diff of the policy bundle
+          command: circleci policy diff ./config-policies --owner-id $ORG_ID # show a diff of the policy bundle
 
   push-policy-bundle:
     executor: circleci-cli/default
@@ -137,7 +137,7 @@ jobs:
       - checkout
       - run:
           name: Push policy bundle
-          command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
+          command: circleci policy push ./config-policies --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
 ----
 +
 Your file structure should now look something like:
@@ -223,7 +223,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies –-owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -268,7 +268,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies –-owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:

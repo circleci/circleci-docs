@@ -37,7 +37,7 @@ For more information, see the [Set an environment variable]({{site.baseurl}}/set
 ### Only build pull requests
 {: #only-build-pull-requests }
 
-The "Only build pull requests" feature is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+The "Only build pull requests" feature is not currently supported for GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
 {: class="alert alert-info" }
 
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.

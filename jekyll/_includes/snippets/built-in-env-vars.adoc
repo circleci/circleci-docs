@@ -107,14 +107,14 @@
 | icon:check[]
 
 | `CIRCLE_PROJECT_REPONAME`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, GitHub App, GitLab, Bitbucket
 | String
 | The name of the repository of the current project.
 | icon:check[]
 | icon:check[]
 
 | `CIRCLE_PROJECT_USERNAME`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, GitHub App, GitLab, Bitbucket
 | String
 | The GitHub or Bitbucket username of the current project.
 | icon:check[]
@@ -142,7 +142,7 @@
 | icon:check[]
 
 | `CIRCLE_SHA1`
-| GitHub, Bitbucket
+| GitHub OAuth, GitHub App, GitLab, Bitbucket
 | String
 | The SHA1 hash of the last commit of the current build.
 | icon:check[]

@@ -116,6 +116,37 @@ The job should only rerun tests that are from a `classname` of `file` that had a
 [#additional-examples]
 == Additional examples
 
+[#configure-a-job-running-ruby-minitest-tests-across-parallel-ci-nodes-with-knapsack-pro]
+=== Configure a job running Ruby (minitest) tests across parallel CI nodes with Knapsack Pro
+
+Knapsack Pro dynamically distributes your tests based on up-to-date test execution data to achieve the perfect split.
+
+To use Knapsack Pro with the CircleCI rerun failed tests feature, follow these steps:
+
+. link:https://docs.knapsackpro.com/knapsack_pro-ruby/guide/[Install Knapsack Pro] in your project.
+
+. Add the following gem to your Gemfile:
++
+```bash
+gem 'minitest-ci'
+```
+
+. Modify your test command to use `circleci tests`:
++
+```yaml
+ - run:
+     name: Minitest with Knapsack Pro
+     command: |
+       export KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=/tmp/tests_to_run.txt
+
+       # Retrieve the tests to run (all or just the failed ones), and let Knapsack Pro split them optimally.
+       circleci tests glob "test/**/*_test.rb" | circleci tests run --index 0 --total 1 --command ">$KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE xargs -n1 echo" --verbose
+       bundle exec rake "knapsack_pro:queue:minitest[--verbose --ci-report --no-ci-clean]"
+
+ - store_test_results:
+     path: test/reports
+```
+
 [#configure-a-job-running-ruby-rspec-tests]
 === Configure a job running Ruby (rspec) tests
 
@@ -140,6 +171,47 @@ gem 'rspec_junit_formatter'
 . `--format RspecJunitFormater` must come after any other `--format` rspec argument
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 . Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+
+[#configure-a-job-running-ruby-rspec-tests-across-parallel-ci-nodes-with-knapsack-pro]
+=== Configure a job running Ruby (rspec) tests across parallel CI nodes with Knapsack Pro
+
+Knapsack Pro dynamically distributes your tests based on up-to-date test execution data to achieve the perfect split.
+
+To use Knapsack Pro with the CircleCI rerun failed tests feature, follow these steps:
+
+. link:https://docs.knapsackpro.com/knapsack_pro-ruby/guide/[Install Knapsack Pro] in your project.
+
+. Add the following gem to your Gemfile:
++
+```bash
+gem 'rspec_junit_formatter'
+```
+
+. Modify your test command to use `circleci tests`:
++
+```yaml
+ - run:
+    name: RSpec with Knapsack Pro
+    command: |
+      export CIRCLE_TEST_REPORTS=/tmp/test-results
+      mkdir -p $CIRCLE_TEST_REPORTS
+
+      export KNAPSACK_PRO_RSPEC_SPLIT_BY_TEST_EXAMPLES=true
+
+      export KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=/tmp/tests_to_run.txt
+      # Retrieve the tests to run (all or just the failed ones), and let Knapsack Pro split them optimally.
+      circleci tests glob "spec/**/*_spec.rb" | circleci tests run --index 0 --total 1 --command ">$KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE xargs -n1 echo" --verbose
+      bundle exec rake "knapsack_pro:queue:rspec[--format documentation --format RspecJunitFormatter --out tmp/rspec.xml]"
+
+ - store_test_results:
+     path: /tmp/test-results
+
+ - store_artifacts:
+     path: /tmp/test-results
+     destination: test-results
+```
+
+. You may also enable link:https://docs.knapsackpro.com/ruby/split-by-test-examples/[Split by Test Examples] to parallelize tests across CI nodes by individual `it`/`specify`. This is useful when you have slow test files but do not want to manually split test examples into smaller test files.
 
 [#configure-a-job-running-ruby-cucumber-tests]
 === Configure a job running Ruby (Cucumber) tests
