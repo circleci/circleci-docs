@@ -100,7 +100,7 @@ api:
 
 [,shell]
 ----
-$HOME/circleci-runner --config $HOME/circleci-runner-config.yaml
+$HOME/circleci-runner machine --config $HOME/circleci-runner-config.yaml
 ----
 
 [#additional-resources]
