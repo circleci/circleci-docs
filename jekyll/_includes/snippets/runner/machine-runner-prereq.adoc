@@ -4,18 +4,24 @@
 To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
 
 ifdef::linux[]
-* https://www.gnu.org/software/coreutils/[coreutils] (Linux only)
+* https://www.gnu.org/software/coreutils/[coreutils]
 endif::[]
 
 ifdef::macOS[]
 * https://brew.sh/[Homebrew]
 endif::[]
 
+ifndef::windows[]
 * https://curl.se/[curl] (installed by default on macOS)
+endif::[]
+
+ifndef::windows[]
 * sha256sum (if not pre-installed):
 ** `brew install coreutils` for macOS
 ** `sudo apt install coreutils` for Ubuntu/Debain
 ** `sudo yum install coreutils` for Red Hat
+endif::[]
+
 * https://www.gnu.org/software/tar/[tar]
 
 ifndef::macOS[]
