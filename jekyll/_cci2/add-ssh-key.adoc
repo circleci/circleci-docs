@@ -52,9 +52,11 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint must be the MD5 hash, not SHA256. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 hash will be visible.
+To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
 
-For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
+CAUTION: **Using server?** only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
+
+For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the MD5 fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 
 [source,yaml]
 ----
@@ -65,6 +67,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SO:ME:FIN:G:ER:PR:IN:T"
+            - "SHA256:NPj4IcXxqQEKGXOghi/QbG2sohoNfvZ30JwCcdSSNM0"
 ----
 
 All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application. Fingerprints in CircleCI environment variables will fail.
