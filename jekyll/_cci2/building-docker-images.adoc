@@ -128,7 +128,7 @@ For *x86* and *arm* architecture, the following tags are available:
 * `edge`
 * `previous`
 
-The above tags resolve to the latest supported Docker version, which is currently Docker 24.
+The above tags resolve to the latest supported Docker version, which is Docker 24.
 
 To use Docker 23, the previous Docker release, use the following tag:
 
@@ -140,7 +140,7 @@ To use Docker 24, patch updates will occur until Docker 25 is released, use the 
 
 To use the current deprecated version, Docker 20, use `20.10.24`
 
-NOTE: The `version` key is not currently supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+NOTE: The `version` key is not supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 [#run-docker-commands-using-the-machine-executor]
 == Run Docker commands using the machine executor

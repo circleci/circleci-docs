@@ -17,11 +17,11 @@ This page describes common methods for running and debugging browser testing in 
 [#overview]
 == Overview
 
-Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run:
+Every time you commit and push code, CircleCI automatically runs your tests against the browsers you choose. You can configure your browser-based tests to run:
 
-* Whenever a change is made
+* On every change
 * Before every deployment
-* On a specified branch.
+* On a specified branch
 
 [#prerequisites]
 == Prerequisites
@@ -31,14 +31,14 @@ Refer to the xref:circleci-images#[Pre-built CircleCI convenience images] and ad
 [#selenium]
 == Selenium
 
-Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
+Automation tools used for browser tests often use Selenium WebDriver, a widely-adopted browser driving standard.
 
 Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X server documentation.
 
 WebDriver can operate in two modes, local, or remote:
 
 * When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine.
-* When run remotely, your tests interact with a Selenium server, and it is up to the server to drive the browsers.
+* When run remotely, your tests interact with a Selenium server, and the server drives the browsers.
 
 If Selenium is not included in your primary Docker image, install, and run Selenium as shown below:
 
@@ -63,7 +63,7 @@ jobs:
           background: true
 ----
 
-Alternatively, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you do not have to spend time configuring a Selenium environment.
+As an alternative, move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you do not have to spend time configuring a Selenium environment.
 
 [#lambdatest]
 == LambdaTest
@@ -72,7 +72,7 @@ link:https://www.lambdatest.com/[LambdaTest] integrates with CircleCI to boost y
 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live. Lambda Tunnel executes a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
-LambdaTest has developed a link:https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel[CircleCI orb] for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps.
+LambdaTest has developed a link:https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel[CircleCI orb] for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to set up a Lambda tunnel and the define your test steps.
 
 [,yaml]
 ----
@@ -99,7 +99,7 @@ Sauce Labs has an extensive network of operating system and browser combinations
 If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using link:https://docs.saucelabs.com/testrunner-toolkit[`saucectl`] with the JS framework of your choice, and then integrating the link:https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run[saucectl-run orb] in your CircleCI workflow.
 
 . Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as xref:env-vars#[environment variables] in your Circle CI project.
-. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
+. Edit your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
 
 [,yaml]
 ----
@@ -157,7 +157,7 @@ For more examples using the Cypress orb, refer to the link:https://circleci.com/
 [#debugging-browser-tests]
 == Debugging browser tests
 
-Integration tests can be hard to debug, especially when they are running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
+This section provides some examples of how to debug browser tests on CircleCI.
 
 [#using-screenshots-and-artifacts]
 === Using screenshots and artifacts
@@ -193,7 +193,7 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 
 . Then, open your browser on your local machine and navigate to `+http://localhost:3000+` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
 
-This is a very easy way to debug things when setting up Selenium tests, for example.
+This is a good way to debug when setting up Selenium tests.
 
 [#interacting-with-the-browser-over-vnc]
 === Interacting with the browser over VNC
@@ -277,7 +277,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 [#x11-forwarding-over-ssh]
 == X11 forwarding over SSH
 
-NOTE: SSH reruns are not currently supported for GitLab or GitHub App projects. This feature is in development and will be available soon. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: SSH reruns are not supported for GitLab or GitHub App projects. This feature is in development and will be available in a future update. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
