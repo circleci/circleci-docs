@@ -11,13 +11,21 @@ ifdef::macOS[]
 * https://brew.sh/[Homebrew]
 endif::[]
 
-ifndef::windows[]
+ifdef::linux[]
+* https://curl.se/[curl]
+endif::[]
+
+ifdef::macOS[]
 * https://curl.se/[curl] (installed by default on macOS)
 endif::[]
 
-ifndef::windows[]
+ifdef::macOS[]
 * sha256sum (if not pre-installed):
-** `brew install coreutils` for macOS
+** `brew install coreutils`
+endif::[]
+
+ifdef::linux[]
+* sha256sum (if not pre-installed):
 ** `sudo apt install coreutils` for Ubuntu/Debain
 ** `sudo yum install coreutils` for Red Hat
 endif::[]
