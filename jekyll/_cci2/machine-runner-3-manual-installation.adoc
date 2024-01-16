@@ -22,7 +22,27 @@ WARNING: If you follow this manual installation method, CircleCI machine runner 
 [#prerequisites]
 == Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://www.gnu.org/software/coreutils/[coreutils] - Linux only
+
+* https://brew.sh/[Homebrew] - macOS only
+
+* https://curl.se/[curl] (installed by default on macOS)
+
+* sha256sum (if not pre-installed):
+** `brew install coreutils`
+** `sudo apt install coreutils` for Ubuntu/Debain
+** `sudo yum install coreutils` for Red Hat
+
+* https://www.gnu.org/software/tar/[tar]
+
+* https://www.gnu.org/software/gzip/[gzip] - Linux only
+
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement

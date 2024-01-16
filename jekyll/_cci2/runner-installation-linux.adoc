@@ -18,7 +18,25 @@ This page describes how to install CircleCI's machine runner on Linux.
 [#prerequisites]
 == Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://www.gnu.org/software/coreutils/[coreutils]
+
+* https://curl.se/[curl]
+
+* sha256sum (if not pre-installed):
+** `sudo apt install coreutils` for Ubuntu/Debain
+** `sudo yum install coreutils` for Red Hat
+
+* https://www.gnu.org/software/tar/[tar]
+
+* https://www.gnu.org/software/gzip/[gzip]
+
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
