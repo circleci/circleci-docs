@@ -74,3 +74,11 @@ Unversioned
 APIs
 backoff
 unformatted
+geckodriver
+Xvfb
+framebuffer
+Appium
+JavaScript
+Behat
+unencrypted
+XQuartz
