@@ -13,3 +13,9 @@ exceptions:
   - Secret
   - GitHub
   - Enterprise
+  - WebDriver
+  - LambdaTest
+  - Sauce Labs
+  - BrowserStack
+  - Selenium
+  - Cucumber

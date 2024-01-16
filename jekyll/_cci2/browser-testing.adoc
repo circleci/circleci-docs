@@ -35,12 +35,12 @@ Many automation tools used for browser tests use Selenium WebDriver, a widely-ad
 
 Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X server documentation.
 
-WebDriver can operate in two modes, local or remote:
+WebDriver can operate in two modes, local, or remote:
 
 * When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine.
 * When run remotely, your tests interact with a Selenium server, and it is up to the server to drive the browsers.
 
-If Selenium is not included in your primary Docker image, install and run Selenium as shown below:
+If Selenium is not included in your primary Docker image, install, and run Selenium as shown below:
 
 {% include snippets/docker-auth.adoc %}
 
