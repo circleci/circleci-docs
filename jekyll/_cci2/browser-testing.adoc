@@ -91,7 +91,7 @@ jobs:
 [#sauce-labs]
 == Sauce Labs
 
-Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI, which can be used to execute tests directly from a variety of JavaScript frameworks.
+Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI. Use `saucectl` to execute tests directly from a variety of JavaScript frameworks.
 
 [#saucectl]
 === `saucectl`
@@ -129,7 +129,7 @@ workflows:
 
 Following the example above, you can replace the installation of Sauce Labs with another cross-browser testing platform, such as BrowserStack. Then, set the `USERNAME` and `ACCESS_KEY` xref:env-vars#[environment variables] to those associated with your BrowserStack account.
 
-For mobile applications, it is possible to use Appium or an equivalent platform that uses the WebDriver protocol. To do this, install Appium in your job, and use CircleCI xref:env-vars#[environment variables] for the `USERNAME` and `ACCESS_KEY`.
+For mobile applications, you can use Appium or an equivalent platform that uses the WebDriver protocol. To do this, install Appium in your job, and use CircleCI xref:env-vars#[environment variables] for the `USERNAME` and `ACCESS_KEY`.
 
 [#cypress]
 == Cypress
@@ -157,14 +157,14 @@ For more examples using the Cypress orb, refer to the link:https://circleci.com/
 [#debugging-browser-tests]
 == Debugging browser tests
 
-Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
+Integration tests can be hard to debug, especially when they are running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
 
 [#using-screenshots-and-artifacts]
 === Using screenshots and artifacts
 
-CircleCI can be configured to collect xref:artifacts#[build artifacts] and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the xref:configuration-reference#storeartifacts[`store_artifacts` section] of the configuration reference for an example.
+Configure CircleCI to collect xref:artifacts#[build artifacts] and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the xref:configuration-reference#storeartifacts[`store_artifacts` section] of the configuration reference for an example.
 
-Saving screenshots is supported by most test suites. It is a built-in feature in WebKit and Selenium:
+Saving screenshots is supported by most test suites, and is a built-in feature in WebKit and Selenium:
 
 * link:http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver[Manually, using Selenium directly]
 * link:https://github.com/mattheworiordan/capybara-screenshot[Automatically on failure, using Cucumber]
@@ -173,7 +173,7 @@ Saving screenshots is supported by most test suites. It is a built-in feature in
 [#using-a-local-browser-to-access-http-server-on-circleci]
 === Using a local browser to access HTTP server on CircleCI
 
-If you are running a test that runs an HTTP server on CircleCI, it can be helpful to use a browser running on your local machine to debug a failing test. You can do this with an SSH-enabled run.
+If your test runs an HTTP server on CircleCI, use a browser running on your local machine to debug a failing test. You can do this with an SSH-enabled run.
 
 . Run an SSH build using the btn:[Rerun Job with SSH] button on the *Job page* of the CircleCI app. The command to log into the container over SSH is as follows:
 +
@@ -182,7 +182,7 @@ If you are running a test that runs an HTTP server on CircleCI, it can be helpfu
 ssh -p 64625 ubuntu@54.221.135.43
 ----
 
-. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `+http://localhost:3000+` on your local browser to port `8080` on the CircleCI container. An example use case for this would be if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request `\http://localhost:3000`, you should see whatever is being served on port 8080 of the container.
+. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `+http://localhost:3000+` on your local browser to port `8080` on the CircleCI container. An example use case for this would be if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request `\http://localhost:3000`, you should see whatever is served on port 8080 of the container.
 +
 NOTE: Update `8080` to be the port you are running on the CircleCI container.
 +
@@ -200,7 +200,7 @@ This is a very easy way to debug things when setting up Selenium tests, for exam
 
 VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
 
-. Install a VNC viewer. If you're using macOS, consider link:http://sourceforge.net/projects/chicken/[Chicken of the VNC].
+. Install a VNC viewer. If you are using macOS, consider link:http://sourceforge.net/projects/chicken/[Chicken of the VNC].
 link:http://www.realvnc.com/download/viewer/[RealVNC] is also available on most platforms.
 . Open a Terminal window, xref:ssh-access-jobs#[start an SSH run] to a CircleCI container and forward the remote port 5901 to the local port 5902.
 +
@@ -223,7 +223,7 @@ sudo apt install vnc4server metacity
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ----
 
-. Since your connection is secured with SSH, there is no need for a strong password. However, you still need _a_ password, so enter `password` at the prompt.
+. Since your connection is secured with SSH, there is no need for a strong password. You do still need _a_ password, so enter `password` at the prompt.
 . Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
 . You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
 . To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
@@ -281,7 +281,7 @@ NOTE: SSH reruns are not currently supported for GitLab or GitHub App projects. 
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-. Install an X Window System on your computer. If you're using macOS, consider link:http://xquartz.macosforge.org/landing/[XQuartz].
+. Install an X Window System on your computer. If you are using macOS, consider link:http://xquartz.macosforge.org/landing/[XQuartz].
 . With X set up on your system, xref:ssh-access-jobs#[start an SSH build] to a CircleCI VM, using the `-X` flag to set up forwarding:
 +
 [,shell]
