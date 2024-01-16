@@ -109,7 +109,8 @@
 | `pipeline.trigger_parameters.circleci.event_type`
 | GitHub App, GitLab
 |
-| Push, pull request, manual, etc.
+| GitLab: Push, merge request 
+| GitHub App: push
 | icon:check[]
 | icon:times[]
 
