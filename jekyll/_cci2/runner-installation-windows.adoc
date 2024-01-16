@@ -25,7 +25,11 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 [#prerequisites]
 == Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+* https://www.gnu.org/software/tar/[tar]
+
+* https://www.gnu.org/software/gzip/[gzip]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
