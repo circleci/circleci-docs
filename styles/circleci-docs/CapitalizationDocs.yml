@@ -1,6 +1,7 @@
 extends: capitalization
 message: "'%s' should be in sentence case"
-level: warning
+level: error
+scope: heading
 # $title, $sentence, $lower, $upper, or a pattern.
 match: $sentence
 exceptions:
@@ -19,3 +20,5 @@ exceptions:
   - BrowserStack
   - Selenium
   - Cucumber
+  - X Server
+  - Docker
