@@ -22,3 +22,12 @@ exceptions:
   - Cucumber
   - X Server
   - Docker
+  - Bundler
+  - Ruby
+  - Gradle
+  - Java
+  - Leiningen
+  - Clojure
+  - Node
+  - Python
+  - Pipenv
