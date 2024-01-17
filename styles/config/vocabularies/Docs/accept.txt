@@ -82,3 +82,6 @@ JavaScript
 Behat
 unencrypted
 XQuartz
+lockfile
+classpath
+Pipenv
