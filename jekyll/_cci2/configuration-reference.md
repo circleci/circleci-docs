@@ -1847,7 +1847,8 @@ The lifetime of artifacts, workspaces, and caches can be customized on the [Circ
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [Create additional GitHub SSH keys]({{site.baseurl}}/github-integration/#create-additional-github-ssh-keys) page.
 
-CAUTION: **Using server?** only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
+**Using server?** only MD5 fingerprints are supported. In CircleCI in **Project Settings > SSH keys > Additional SSH keys** the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
+{: class="alert alert-warning" }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
