@@ -32,7 +32,7 @@ If you cannot use the container runner linked above, you can use Docker and inst
 [#machine-runner-prerequsites]
 === Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+* link:https://docs.docker.com/engine/install/[Docker]
 
 [#additional-prerequisites]
 ==== Additional prerequisites with Docker

@@ -23,7 +23,13 @@ NOTE: The Windows Server needs to be a domain member when you set this up in dom
 [#prerequisites]
 == Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://www.gnu.org/software/tar/[tar]
+
+* https://www.gnu.org/software/gzip/[gzip]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
