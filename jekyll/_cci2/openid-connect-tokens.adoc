@@ -295,7 +295,7 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 | google.subject
 | assertion.sub
 
-| attribute.aud
+| attribute.org_id 
 | assertion.aud
 
 | attribute.project
