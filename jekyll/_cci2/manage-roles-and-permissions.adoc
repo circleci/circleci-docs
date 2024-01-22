@@ -12,7 +12,7 @@ contentTags:
 
 NOTE: If you authenticated your CircleCI account with xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], the content on this page applies to you.
 
-Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
+Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. You can also manage roles for groups of users with xref:manage-groups#[groups].For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
 [#prerequisites]
 == Prerequisites
@@ -34,7 +34,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 
-If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
+If they do not have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
 
 [#change-org-level-permissions]
 == Change a person's org-level permissions
@@ -44,7 +44,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 . In the CircleCI web app, click on **Organization Settings** in the sidebar
 . Click on **People**
 . Scroll to locate the person you want to update permissions for
-. Use the dropdow menu next to their name to select a new role
+. Use the dropdown menu next to their name to select a new role
 
 [#remove-people-from-your-organization]
 == Remove people from your organization
@@ -56,7 +56,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 . In the CircleCI web app, click on **Organization Settings** in the sidebar
 . Click on **People**
 . Scroll to locate the person you want to remove
-. Click the elipsis (...) button next to their name and select btn:[Remove from organization]
+. Click the ellipsis (...) button next to their name and select btn:[Remove from organization]
 
 [#assign-a-project-role]
 == Assign a project role
@@ -79,7 +79,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 . Select your project using the filter dropdown menu
 . Click btn:[Project Settings]
 . Click **People** in the sidebar menu
-. Use the drowdown menu next to the person's name to select a new project role
+. Use the dropdown menu next to the person's name to select a new project role
 
 [#remove-people-from-your-project]
 == Remove people from your project
@@ -88,5 +88,5 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 . Select your project using the filter dropdown menu
 . Click btn:[Project Settings]
 . Click **People** in the sidebar menu
-. Click the elipsis (...) button next to their name and select btn:[Remove project role]
+. Click the ellipsis (...) button next to their name and select btn:[Remove project role]
 
