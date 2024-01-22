@@ -60,6 +60,8 @@ Fastlane
 walkthrough
 Walkthrough
 XCTest
+unversioned
+Unversioned
 cgroup
 CPUs
 JVM
@@ -69,8 +71,6 @@ Atlassian
 Bundler
 uncheck
 CVE
-unversioned
-Unversioned
 APIs
 backoff
 unformatted
