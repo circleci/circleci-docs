@@ -181,10 +181,28 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
+| `docker-provisioner-*`
+| Docker Compute Management
+| Responsible for scheduling jobs on Nomad cluster(s).
+|
+|
+
 | `domain-service`
 | App Core
 | Stores and provides information about our domain model. Works with permissions and API.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
+|
+
+| `execution-gateway-*`
+| Execution
+| Boundary for execution to provide API to rest of CircleCI
+|
+|
+
+| `feature-flags-api`
+| TBC
+| TBC
+| TBC
 |
 
 | `frontend`
@@ -212,6 +230,12 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
+| `machine-provisioner-*`
+| Machine Compute Management
+| Periodically requests machines from compute provider to run jobs for both `machine` and remote Docker.
+| Periodically checks for stale machine and remote Docker instances and requests that provider removes them.
+|
+
 | `nginx`
 | App Core / Frontend
 | Handles traffic redirection and ingress.
@@ -228,6 +252,18 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Nomad
 | Responsible for managing nomad clients.
 |
+|
+
+| `oidc-service`
+| TBC
+| TBC
+| TBC
+|
+
+| `oidc-tasks-service`
+| TBC
+| TBC
+| TBC
 |
 
 | `orb-service`
@@ -248,7 +284,19 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
 |
 
-| `socketi`
+| `policy-service-*`
+| TBC
+| TBC
+| TBC
+|
+
+| `runner-admin`
+| Runner Admin
+| Manages Runner resource classes and tokens, & coordinates runner task handling
+|
+|
+
+| `soketi`
 | Frontend
 | Websockets server.
 |
@@ -263,30 +311,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | `telegraf`
 | Metrics
 | Collection of metrics.
-|
-|
-
-| `runner-admin`
-| Runner Admin
-| Manages Runner resource classes and tokens, & coordinates runner task handling
-|
-|
-
-| `docker-provisioner`
-| Docker Compute Management
-| Responsible for scheduling jobs on Nomad cluster(s).
-|
-|
-
-| `machine-provisioner`
-| Machine Compute Management
-| Periodically requests machines from compute provider to run jobs for both `machine` and remote Docker.
-| Periodically checks for stale machine and remote Docker instances and requests that provider removes them.
-|
-
-| `execution-gateway`
-| Execution
-| Boundary for execution to provide API to rest of CircleCI
 |
 |
 
@@ -313,7 +337,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Helps translate the information through gRPC.
 |
 |
-
 
 |===
 
