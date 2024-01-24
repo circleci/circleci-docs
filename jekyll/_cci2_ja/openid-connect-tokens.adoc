@@ -143,7 +143,7 @@ TIP: Orb とは、繰り返し利用する構成内容を 1 行のコードに�
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.5
+  aws-cli: circleci/aws-cli@4.1.2
 ----
 . AWSサービスと対話する前に、`aws-cli/setup` コマンドを実行するようにジョブを構成します。 `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role-arn` と `aws-region` を指定する必要があります。
 +
@@ -151,20 +151,22 @@ orbs:
 ----
 jobs:
   aws-example:
-   environment:
-      AWS_REGION: us-west-1
+    parameters:
+      AWS_REGION: 
+        default: us-west-1
+        type: string
     docker:
-      - image: cimg/aws:2022.06
+      - image: cimg/aws:2023.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          role_arn: arn:aws:iam::123456789012:role/OIDC-ROLE
+          region: << parameters.AWS_REGION >>
           # optional parameters
-          profile-name: "OIDC-PROFILE"
-          role-session-name: "example-session"
-          session-duration: "1800"
+          profile_name: OIDC-PROFILE
+          role_session_name: example-session
+          session_duration: 1800
 ----
 +
 また、任意で、`profile-name`、`role-session-name`、`session-duration` を指定します。 `profile-name` を指定すると、指定したプロファイルに応じて一時キーとトークンが設定されます。 指定する `profile-name` は、他の AWS コマンドと揃える必要があります。 `profile-name` を指定しない場合、キーとトークンはデフォルトプロファイルにあわせてされます。
@@ -177,24 +179,26 @@ jobs:
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.5
+  aws-cli: circleci/aws-cli@4.1.2
 
 jobs:
   aws-example:
-   environment:
-      AWS_REGION: us-west-1
+   parameters:
+      AWS_REGION: 
+        default: us-west-1
+        type: string
     docker:
       - image: cimg/aws:2022.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          role_arn: arn:aws:iam::123456789012:role/OIDC-ROLE
+          region: << parameters.AWS_REGION >>
           # optional parameters
-          profile-name: "OIDC-PROFILE"
-          role-session-name: "example-session"
-          session-duration: "1800"
+          profile_name: OIDC-PROFILE
+          role_session_name: example-session
+          session_duration: 1800
       - run:
         name: Log-into-AWS-ECR
         command: |

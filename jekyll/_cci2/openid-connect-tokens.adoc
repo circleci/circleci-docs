@@ -144,7 +144,7 @@ TIP: Orbs are reusable packages of YAML configuration that condense repeated pie
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.5
+  aws-cli: circleci/aws-cli@4.1.2
 ----
 
 . Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you have created in the step above along with your `aws-region`.
@@ -153,20 +153,22 @@ orbs:
 ----
 jobs:
   aws-example:
-    environment:
-      AWS_REGION: us-west-1
+    parameters:
+      AWS_REGION: 
+        default: us-west-1
+        type: string
     docker:
       - image: cimg/aws:2023.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: ${AWS_REGION}
+          role_arn: arn:aws:iam::123456789012:role/OIDC-ROLE
+          region: << parameters.AWS_REGION >>
           # optional parameters
-          profile-name: "OIDC-PROFILE"
-          role-session-name: "example-session"
-          session-duration: "1800"
+          profile_name: OIDC-PROFILE
+          role_session_name: example-session
+          session_duration: 1800
 ----
 +
 You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
@@ -179,24 +181,26 @@ Below is an example of a complete configuration with a job that configures a pro
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.5
+  aws-cli: circleci/aws-cli@4.1.2
 
 jobs:
   aws-example:
-   environment:
-      AWS_REGION: us-west-1
+   parameters:
+      AWS_REGION: 
+        default: us-west-1
+        type: string
     docker:
       - image: cimg/aws:2022.06
     steps:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          role_arn: arn:aws:iam::123456789012:role/OIDC-ROLE
+          region: << parameters.AWS_REGION >>
           # optional parameters
-          profile-name: "OIDC-PROFILE"
-          role-session-name: "example-session"
-          session-duration: "1800"
+          profile_name: OIDC-PROFILE
+          role_session_name: example-session
+          session_duration: 1800
       - run:
         name: Log-into-AWS-ECR
         command: |
