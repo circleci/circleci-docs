@@ -145,7 +145,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@4.1.2
 ----
-. AWSサービスと対話する前に、`aws-cli/setup` コマンドを実行するようにジョブを構成します。 `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role-arn` と `aws-region` を指定する必要があります。
+. AWSサービスと対話する前に、`aws-cli/setup` コマンドを実行するようにジョブを構成します。 `aws-cli/setup` コマンドには、前述の手順で作成したロールに関連する `role_arn` と `region` を指定する必要があります。
 +
 [source,yaml]
 ----
@@ -169,11 +169,11 @@ jobs:
           session_duration: 1800
 ----
 +
-また、任意で、`profile-name`、`role-session-name`、`session-duration` を指定します。 `profile-name` を指定すると、指定したプロファイルに応じて一時キーとトークンが設定されます。 指定する `profile-name` は、他の AWS コマンドと揃える必要があります。 `profile-name` を指定しない場合、キーとトークンはデフォルトプロファイルにあわせてされます。
+また、任意で、`profile_name`、`role_session_name`、`session_duration` を指定します。 `profile_name` を指定すると、指定したプロファイルに応じて一時キーとトークンが設定されます。 指定する `profile_name` は、他の AWS コマンドと揃える必要があります。 `profile_name` を指定しない場合、キーとトークンはデフォルトプロファイルにあわせてされます。
 +
-さらに、`role-session-name` または `session-duration` を指定しない場合、それぞれデフォルト値の `${CIRCLE_JOB}` (ジョブ名) と 3600 秒に設定されます。
+さらに、`role_session_name` または `session_duration` を指定しない場合、それぞれデフォルト値の `${CIRCLE_JOB}` (ジョブ名) と 3600 秒に設定されます。
 
-以下に示すコンフィグファイルのサンプルでは、OIDC を使用するプロファイルを構成してからそのプロファイルで AWS ECR にログインするジョブを設定しています。 `role-arn` に適切な権限を設定していれば、このプロファイルを使用して S3 や EKS、ECS などの他の AWS コマンドも実行できます。
+以下に示すコンフィグファイルのサンプルでは、OIDC を使用するプロファイルを構成してからそのプロファイルで AWS ECR にログインするジョブを設定しています。 `role_arn` に適切な権限を設定していれば、このプロファイルを使用して S3 や EKS、ECS などの他の AWS コマンドも実行できます。
 
 ```yaml
 version: 2.1

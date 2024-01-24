@@ -147,7 +147,7 @@ orbs:
   aws-cli: circleci/aws-cli@4.1.2
 ----
 
-. Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you have created in the step above along with your `aws-region`.
+. Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role_arn` associated with the role you have created in the step above along with your `region`.
 +
 [source,yaml]
 ----
@@ -171,11 +171,11 @@ jobs:
           session_duration: 1800
 ----
 +
-You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
+You can optionally provide a `profile_name`, `role_session_name`, and `session_duration`. If you provide a `profile_name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile_name` with the rest of your aws commands. If a `profile_name` is not provided, the keys and token will be configured to the default profile.
 +
-Additionally, if you do not provide a `role-session-name` or `session-duration`, their default values are `${CIRCLE_JOB}` (your job’s name) and 3600 seconds respectively.
+Additionally, if you do not provide a `role_session_name` or `session_duration`, their default values are `${CIRCLE_JOB}` (your job’s name) and 3600 seconds respectively.
 
-Below is an example of a complete configuration with a job that configures a profile with OIDC and uses it to log into AWS ECR. The same profile can be used to run other AWS commands, such as S3, EKS, ECS, and more, as long as the `role-arn` has been configured with appropriate permissions.
+Below is an example of a complete configuration with a job that configures a profile with OIDC and uses it to log into AWS ECR. The same profile can be used to run other AWS commands, such as S3, EKS, ECS, and more, as long as the `role_arn` has been configured with appropriate permissions.
 
 ```yaml
 version: 2.1
