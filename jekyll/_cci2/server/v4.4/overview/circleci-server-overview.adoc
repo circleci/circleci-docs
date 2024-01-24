@@ -255,15 +255,15 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 
 | `oidc-service`
-| TBC
-| TBC
-| TBC
+| App Core
+| Mints OIDC tokens, serves OpenID configuration and public JSON web keys.
+| OIDC tokens would not be present in jobs. Jobs depending on images present in AWS ECR and authenticated with OIDC will fail to run.
 |
 
 | `oidc-tasks-service`
-| TBC
-| TBC
-| TBC
+| App Core
+| Provides interface for minting OIDC tokens with customizable claims. Integrates with the OIDC service.
+| OIDC tokens would not be present in jobs. Jobs depending on images present in AWS ECR and authenticated with OIDC will fail to run.
 |
 
 | `orb-service`
@@ -285,9 +285,9 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 
 | `policy-service-*`
-| TBC
-| TBC
-| TBC
+| App Core
+| Core service of config policies framework. Allows management of policy documents and policy bundles, and evaluates inputs against these bundles using the `circle-policy-agent`.
+| While config policies is enabled for your organization, all pipelines will fail to run.
 |
 
 | `runner-admin`
