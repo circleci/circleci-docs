@@ -114,6 +114,14 @@ runner:
 api:
   auth_token: "your-auth-token"
 ----
+. If you are using CircleCI Server you will need to provide the url for your install. You can do this by adding the url to `$HOME/circleci-runner-config.yaml` using text editor of your choice.
++
+```yaml
+api:
+  auth_token: "your-auth-token"
+  # On server, set url to the hostname of your server installation.
+  url: https://your.domain.here
+```
 
 [#start-machine-runner]
 == 5. Start the CircleCI machine runner
