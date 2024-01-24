@@ -30,11 +30,6 @@ Download and install the following software before continuing:
 | Used for
 | Notes
 
-| link:https://www.terraform.io/downloads.html[Terraform]
-| {terraformversion} or greater
-| Infrastructure Management
-|
-
 | link:https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
 | {kubectlversion} or greater
 | Kubernetes CLI
@@ -49,40 +44,71 @@ Download and install the following software before continuing:
 | {helmdiffversion} or greater
 | Helping with `values.yaml` changes and updates
 | Optional, but may help with troubleshooting between releases
+
+| link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
+| TBC
+| TBC
+| AWS installs only
+
+| `gcloud` and `gsutil` as part of the link:https://cloud.google.com/sdk/docs/[Google Cloud SDK].
+| TBC
+| TBC
+| GCP installs only
+
+| link:https://www.terraform.io/downloads.html[Terraform]
+| {terraformversion} or greater
+| Infrastructure Management
+| Required for installations within GCP or AWS
+
+| Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
+| TBC
+| TBC
+| Required for installations outside AWS and GCP, for example, local installation.
+
 |===
+
+
+
+[#create-a-vpc]
+== 2. Create a VPC
+
+NOTE: **Installing server locally?** you can skip this step, but you should ensure you follow the resourcing recommendation of using /18 CIDR blocks to ensure you have adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
+
+If you are installing server in the cloud, either AWS or GCP, you will need to create a new virtual private cloud (VPC).
+
+Refer to the AWS or GCP guides, as follows:
+
+* link:https://docs.aws.amazon.com/eks/latest/userguide/creating-a-vpc.html[Create a VPC - AWS]
+* link:https://cloud.google.com/vpc/docs/create-modify-vpc-networks#console[Create a VPC - GCP]
+
+[#vpc-cluster-sizing-recommendations]
+=== VPC and cluster sizing recommendations
+
+While there are no strict requirements for VPC (Virtual Private Cloud) setup or disk size, the following practices are recommended for optimal performance and stability in production environments.
+
+* **VPC Selection**
++
+We recommend you create a new VPC specifically for CircleCI server and its components, rather than using an existing VPC.
+
+*  **Subnet Provisioning**
++
+For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
 
 // Don't include this section in the GCP PDF.
 
 ifndef::env-gcp[]
 
-[#aws-required-software]
-=== AWS required software
-
-- link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
-
-// Stop hiding from GCP PDF:
-
-endif::env-gcp[]
-
-// Don't include this section in the AWS PDF:
-
-ifndef::env-aws[]
-
-[#gcp-required-software]
-=== GCP required software
-
-- `gcloud` and `gsutil`. You can install and set-up these tools up by installing Google Cloud SDK. For further information refer to the link:https://cloud.google.com/sdk/docs/[Google Cloud SDK docs].
-
-endif::env-aws[]
-
-[#s3-compatible-storage-required-software]
-=== S3 compatible storage required software
-
-- Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
+CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. There are instructions for creating an EKS or GKE cluster below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+
+[#cluster-requirements]
+=== Cluster requirements
+
+[#compute-resources]
+==== Compute resources
+The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -106,21 +132,8 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 10 Gbps
 |===
 
-[#vpc-cluster-sizing-recommendations]
-=== VPC and cluster sizing recommendations
-
-While there are no strict requirements for VPC (Virtual Private Cloud) setup or disk size, the following practices are recommended for optimal performance and stability in production environments.
-
-* **VPC Selection**
-+
-We recommend you create a new VPC specifically for CircleCI server and its components, rather than using an existing VPC.
-
-*  **Subnet Provisioning**
-+
-For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
-
 [#supported-kubernetes-versions]
-=== Supported Kubernetes versions
+==== Supported Kubernetes versions
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -133,7 +146,7 @@ For high availability, and to avoid potential outages, you should provision subn
 |===
 
 [#minimum-permissions-requirments]
-=== Minimum permissions requirements
+==== Minimum permissions requirements
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
@@ -299,7 +312,7 @@ It is recommended to provision a static IP address to assign to the load balance
 
 ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
-=== GCP - Reserve a static external IP address
+=== GCP: Reserve a static external IP address
 The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
 
 Make note of the returned IPv4 address for use later in the values.yaml file.
@@ -308,7 +321,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 [#aws-reserve-an-elastic-ip-address]
-=== AWS - Reserve an elastic IP address
+=== AWS: Reserve an elastic IP address
 To reserve an elastic IP address in AWS, run the following AWS CLI commands in your desired environment.
 
 This command needs to be run to generate an address for every subnet the load balancer deploys into - default 3.

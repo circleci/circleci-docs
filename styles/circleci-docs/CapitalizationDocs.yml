@@ -31,3 +31,12 @@ exceptions:
   - Node
   - Python
   - Pipenv
+  - VPC
+  - EKS
+  - GKE
+  - Workload Identity
+  - IP
+  - GCP
+  - TLS
+  - AWS
+  - Route 53

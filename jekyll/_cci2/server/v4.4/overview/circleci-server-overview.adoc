@@ -19,10 +19,16 @@ CircleCI server is an on-premises CI/CD platform for enterprise customers who ha
 
 CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster.
 
-NOTE: For installation instructions, you have the option of either the xref:../installation/phase-1-prerequisites#[regular] or xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] installation guide.
+[#architecture]
+== Architecture
+
+The following diagram presents and overview of the services architecture of CircleCI server.
 
 .CircleCI server v4.4 Architecture
 image::server-4-architecture-diagram.png[Server v4.4 services architecture]
+
+[#ports-and-services]
+=== Ports and services
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
@@ -83,13 +89,18 @@ The application exposes a number of external ports. These ports are used for var
 | Only required for the Nomad clients.
 |===
 
-CircleCI server schedules CI jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
-server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
+[#job-scheduling-and-artifact-storage]
+=== Job scheduling and artifact storage
+
+CircleCI server schedules CI jobs using HashiCorp link:https://www.nomadproject.io/[Nomad]. The Nomad control plane runs inside your Kubernetes cluster, while the Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster.
+CircleCI server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
+
+For more information on Nomad architecture and use, see the xref:../operator/introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster operation].
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, Google Cloud Storage, or other supported options). Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
-[#services]
-== Services
+[#list-of-services-and-their-function]
+== List of services and their function
 
 CircleCI server v4.4 consists of the following services. Find their descriptions and failure implications below:
 
@@ -314,11 +325,11 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-
 |===
 
-[#platforms]
-== Platforms
+[#supported-platforms]
+== Supported platforms
+
 CircleCI server is designed to deploy within a Kubernetes cluster. The machine service (machine provisioner) is able to leverage unique EKS or GKE offerings to dynamically create VM images.
 
 If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as machine provisioner across a much wider range of operating systems and machine types (for example, macOS).
@@ -342,7 +353,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Local installation
 | Tested
-| See xref:../air-gapped-installation/phase-1-prerequisites#[Air gapped installation] docs
+|
 
 | Azure
 | Untested
@@ -360,6 +371,15 @@ We do our best to support a wide range of platforms for installation. We use env
 | Untested
 | Should work with MinIO and Runner.
 |===
+
+[#installation-options]
+== Installation options
+
+CircleCI server can be installed using cloud resrouces (GCP or AWS), locally, and in an air-gapped environment. For installation instructions, refer to the following:
+
+* xref:../installation/phase-1-prerequisites#[Cloud] installation guide. Follow the sections for your chosen cloud provider.
+* xref:../installation/phase-1-prerequisites#[Local] installation. Notes are provided in the main installation guide to show which sections are optional, or different, for local installations.
+* xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped] installation guide. This guide is designed to be used along-side key sections of the main xref:../installation/phase-1-prerequisites#[installation guide].
 
 ifndef::pdf[]
 
