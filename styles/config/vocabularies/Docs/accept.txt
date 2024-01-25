@@ -74,3 +74,14 @@ CVE
 APIs
 backoff
 unformatted
+geckodriver
+Xvfb
+framebuffer
+Appium
+JavaScript
+Behat
+unencrypted
+XQuartz
+lockfile
+classpath
+Pipenv
