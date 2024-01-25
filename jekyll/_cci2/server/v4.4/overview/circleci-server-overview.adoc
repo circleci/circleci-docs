@@ -200,9 +200,9 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 
 | `feature-flags-api`
-| TBC
-| TBC
-| TBC
+| Execution
+| Used to configure and fetch feature flags.
+| Systems will use defaults in place of any flags. In the case of server it should have no effect, since no feature flags should be set.
 |
 
 | `frontend`
