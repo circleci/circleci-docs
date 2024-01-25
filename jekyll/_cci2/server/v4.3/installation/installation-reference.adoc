@@ -671,7 +671,7 @@ One of `+object_storage.s3.enabled+` or `+object_storage.gcs.enabled+`
 must be true for the chart to function.
 
 |object_storage.expireAfter |int |`+0+` |Number of days after which
-artifacts will expire
+artifacts will expire from the UI
 
 |object_storage.gcs.service_account |object
 |`+{"project_id":"... ...","type":"service_account"}+` |GCP Storage
