@@ -150,7 +150,7 @@ This directory takes a fully qualified path and allows you to control the defaul
 
 NOTE: These directories will not automatically be removed, please see `cleanup_working_directory` to configure cleanup of directory.
 
-NOTE: For Machine Runner 3.0, there is no replacement of the `%s` placeholder to a unique value.
+NOTE: For Machine Runner 3.0, the `%s` substitution feature is not supported.
 The `%s` value in the working directory path would be interpreted as a literal value.
 
 Example:
