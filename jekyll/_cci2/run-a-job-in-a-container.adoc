@@ -68,9 +68,9 @@ Caching is not currently supported in local jobs. When you have either a <<confi
 
 Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a <<configuration-reference#storeartifacts,`store_artifacts`>> step, however, local builds will not upload artifacts. If a step is not available on a local build you will see an error in the console.
 
-**Environment variables**
+**Environment variables and Contexts**
 
-For security reasons, encrypted environment variables configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
+For security reasons, encrypted environment variables or Contexts configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
 
 ```shell
 circleci help build
