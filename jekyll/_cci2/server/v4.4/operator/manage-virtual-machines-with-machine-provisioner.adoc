@@ -73,55 +73,55 @@ The default AMIs for server v4.4 are based on Ubuntu 22.04.
 | AMI
 
 | `us-east-1`
-| `ami-03dc54f7559144972`
-
-| `ca-central-1`
-| `ami-0575d605472840942`
-
-| `ap-south-1`
-| `ami-047ef6196620f56ca`
-
-| `ap-southeast-2`
-| `ami-0521f8d70ef9dbd24`
-
-| `ap-southeast-1`
-| `ami-0ef0354f4eb3b7428`
-
-| `eu-central-1`
-| `ami-0a8286fff7b5ed33a`
-
-| `eu-west-1`
-| `ami-093618a1d0185f9e8`
-
-| `eu-west-2`
-| `ami-08f00d41b17d3ea0a`
-
-| `sa-east-1`
-| `ami-064b0bfe97e6ec04c`
+| `ami-060a1e5d499c85d12`
 
 | `us-east-2`
-| `ami-068cb131f91632f12`
+| `ami-036fa23a3bd3b5013`
+
+| `ca-central-1`
+| `ami-0e323ff60823ceb5c`
+
+| `ap-south-1`
+| `ami-072d2c41d591ee7a5`
+
+| `ap-southeast-2`
+| `ami-0880195a4612a9d61`
+
+| `ap-southeast-1`
+| `ami-0177e901826e7b422`
+
+| `eu-central-1`
+| `ami-00588b75fa9a72eff`
+
+| `eu-west-1`
+| `ami-08a090a8c770fe41f`
+
+| `eu-west-2`
+| `ami-056ff1116a86d9e87`
+
+| `sa-east-1`
+| `ami-0117daec76cc825e7`
 
 | `us-west-1`
-| `ami-0a4b7cf088a798be3`
+| `ami-09bc39e1cf1850c79`
 
 | `us-west-2`
-| `ami-018e05f98628cf5e5`
+| `ami-01f4236b649731f59`
 
 | `ap-northeast-1`
-| `ami-06f32ec6aeecbeaa6`
+| `ami-0d71a7594982c0233`
 
 | `ap-northeast-2`
-| `ami-084c1abb1e8dabffd`
+| `ami-06b70b9f78e46f8b4`
 
 | `eu-west-3`
-| `ami-09b3e24bccae3252f`
+| `ami-0af2e6edf47f7b7cc`
 
 | `us-gov-east-1`
-| `ami-0de525cac9ac9bea8`
+| `ami-00e0319619e88edf7`
 
 | `us-gov-west-1`
-| `ami-02abf947586cae56b`
+| `ami-0fdf4561a0d3b0346`
 |===
 
 [#arm-ami-list]
@@ -134,52 +134,52 @@ The default AMIs for server v4.4 are based on Ubuntu 22.04.
 | AMI
 
 |`us-east-1`
-|`ami-0b11ce74f44e45578`
-
-|`ca-central-1`
-|`ami-07400e987dd82901d`
-
-|`ap-south-1`
-|`ami-072fe819d7b94b095`
-
-|`ap-southeast-2`
-|`ami-0510826f7f3a83b3e`
-
-|`ap-southeast-1`
-|`ami-0e5b703665f3e4517`
-
-|`eu-central-1`
-|`ami-045ea67b0f35ef1ef`
-
-|`eu-west-1`
-|`ami-044ac39c87438d89d`
-
-|`eu-west-2`
-|`ami-0a399817fbbb240e4`
-
-|`sa-east-1`
-|`ami-0ebc0e64fb943e191`
+|`ami-09688117b98d2fc85`
 
 |`us-east-2`
-|`ami-01f7dc2f8590b1611`
+|`ami-0f74df98c729f23da`
+
+|`ca-central-1`
+|`ami-0c38cb9bafc2d2367`
+
+|`ap-south-1`
+|`ami-0bd058bca7362651a`
+
+|`ap-southeast-2`
+|`ami-063193aeb76899a04`
+
+|`ap-southeast-1`
+|`ami-0b93f7ee96e0544c8`
+
+|`eu-central-1`
+|`ami-0603edd8ca55f1aea`
+
+|`eu-west-1`
+|`ami-06284417985a234a6`
+
+|`eu-west-2`
+|`ami-042850328df475cf4`
+
+|`sa-east-1`
+|`ami-065ea52e0a95d6097`
 
 |`us-west-1`
-|`ami-085fb1dd323aa02c7`
+|`ami-008f62919e40a0607`
 
 |`us-west-2`
-|`ami-0e5ea38c131f05c8f`
+|`ami-0f02394a567f27c57`
 
 |`ap-northeast-1`
-|`ami-02c8fac0dbbbad74f`
+|`ami-0cd7ad99dc5c77394`
 
 |`ap-northeast-2`
-|`ami-022e2eacee7328cca`
+|`ami-02c787546f70518d8`
 
 |`us-gov-east-1`
-|`ami-0bb797dcfa52ce04d`
+|`ami-0b0841c7bba30ab06`
 
 |`us-gov-west-1`
-|`ami-0ab175883ff460b17`
+|`ami-02268e2fe5572a88c`
 |===
 
 [#gcp]
