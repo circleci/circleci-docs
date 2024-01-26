@@ -30,7 +30,7 @@ image::server-4-architecture-diagram.png[Server v4.4 services architecture]
 [#ports-and-services]
 === Ports and services
 
-The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
+The CircleCI server application exposes two services, `nginx` and `nomad-server`, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -92,7 +92,14 @@ The application exposes a number of external ports. These ports are used for var
 [#job-scheduling-and-artifact-storage]
 === Job scheduling and artifact storage
 
-CircleCI server schedules CI jobs using HashiCorp link:https://www.nomadproject.io/[Nomad]. The Nomad control plane runs inside your Kubernetes cluster, while the Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster.
+CircleCI server schedules CI jobs using HashiCorp link:https://www.nomadproject.io/[Nomad]. Depending on the execution environment used for a job, the resources are provisioned through one of the following:
+
+* Nomad for the Docker executor
+* Machine provisioner for virtual machines (VMs), the `machine` executor
+* Runner, if used, for all executor types
+
+The Nomad control plane runs inside your Kubernetes cluster. Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster.
+
 CircleCI server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
 For more information on Nomad architecture and use, see the xref:../operator/introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster operation].
@@ -375,7 +382,7 @@ We do our best to support a wide range of platforms for installation. We use env
 [#installation-options]
 == Installation options
 
-CircleCI server can be installed using cloud resrouces (GCP or AWS), locally, and in an air-gapped environment. For installation instructions, refer to the following:
+CircleCI server can be installed using cloud resources (GCP or AWS), locally, and in an air-gapped environment. For installation instructions, refer to the following:
 
 * xref:../installation/phase-1-prerequisites#[Cloud] installation guide. Follow the sections for your chosen cloud provider.
 * xref:../installation/phase-1-prerequisites#[Local] installation. Notes are provided in the main installation guide to show which sections are optional, or different, for local installations.

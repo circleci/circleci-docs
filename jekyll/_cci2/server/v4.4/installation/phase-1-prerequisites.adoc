@@ -46,13 +46,13 @@ Download and install the following software before continuing:
 | Optional, but may help with troubleshooting between releases
 
 | link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
-| TBC
-| TBC
+| Latest
+| Managing AWS resources
 | AWS installs only
 
 | `gcloud` and `gsutil` as part of the link:https://cloud.google.com/sdk/docs/[Google Cloud SDK].
-| TBC
-| TBC
+| Latest
+| Managing GCP resources
 | GCP installs only
 
 | link:https://www.terraform.io/downloads.html[Terraform]
