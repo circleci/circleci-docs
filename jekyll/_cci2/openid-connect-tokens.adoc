@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
 = Using OpenID Connect tokens in jobs
 :page-layout: classic-docs
@@ -98,6 +99,11 @@ OIDC tokens will only be generated for forked builds if the **Pass secrets to bu
 If you do allow OIDC tokens to be generated for forks, you **must** check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require.
 
 For more information about building open source projects on CircleCI, see the xref:oss#[Build open source projects] page.
+
+[#oidc-server]
+== OIDC on CircleCI server
+
+OIDC is supported from server v4.4+. However, OIDC is **not** supported if your server installation is in an air-gapped environment.
 
 [#authenticate-jobs-with-cloud-providers]
 ==  Authenticate jobs with cloud providers
@@ -295,7 +301,7 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 | google.subject
 | assertion.sub
 
-| attribute.org_id 
+| attribute.org_id
 | assertion.aud
 
 | attribute.project
