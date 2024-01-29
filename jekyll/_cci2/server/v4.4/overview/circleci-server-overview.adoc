@@ -181,10 +181,28 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
+| `docker-provisioner-*`
+| Docker Compute Management
+| Responsible for scheduling jobs on Nomad cluster(s).
+|
+|
+
 | `domain-service`
 | App Core
 | Stores and provides information about our domain model. Works with permissions and API.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
+|
+
+| `execution-gateway-*`
+| Execution
+| Boundary for execution to provide API to rest of CircleCI
+|
+|
+
+| `feature-flags-api`
+| Execution
+| Used to configure and fetch feature flags.
+| Systems will use defaults in place of any flags. In the case of server it should have no effect, since no feature flags should be set.
 |
 
 | `frontend`
@@ -212,6 +230,12 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
+| `machine-provisioner-*`
+| Machine Compute Management
+| Periodically requests machines from compute provider to run jobs for both `machine` and remote Docker.
+| Periodically checks for stale machine and remote Docker instances and requests that provider removes them.
+|
+
 | `nginx`
 | App Core / Frontend
 | Handles traffic redirection and ingress.
@@ -228,6 +252,18 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Nomad
 | Responsible for managing nomad clients.
 |
+|
+
+| `oidc-service`
+| App Core
+| Mints OIDC tokens, serves OpenID configuration and public JSON web keys.
+| OIDC tokens would not be present in jobs. Jobs depending on images present in AWS ECR and authenticated with OIDC will fail to run.
+|
+
+| `oidc-tasks-service`
+| App Core
+| Provides interface for minting OIDC tokens with customizable claims. Integrates with the OIDC service.
+| OIDC tokens would not be present in jobs. Jobs depending on images present in AWS ECR and authenticated with OIDC will fail to run.
 |
 
 | `orb-service`
@@ -248,7 +284,19 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
 |
 
-| `socketi`
+| `policy-service-*`
+| App Core
+| Core service of config policies framework. Allows management of policy documents and policy bundles, and evaluates inputs against these bundles using the `circle-policy-agent`.
+| While config policies is enabled for your organization, all pipelines will fail to run.
+|
+
+| `runner-admin`
+| Runner Admin
+| Manages Runner resource classes and tokens, & coordinates runner task handling
+|
+|
+
+| `soketi`
 | Frontend
 | Websockets server.
 |
@@ -263,30 +311,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | `telegraf`
 | Metrics
 | Collection of metrics.
-|
-|
-
-| `runner-admin`
-| Runner Admin
-| Manages Runner resource classes and tokens, & coordinates runner task handling
-|
-|
-
-| `docker-provisioner`
-| Docker Compute Management
-| Responsible for scheduling jobs on Nomad cluster(s).
-|
-|
-
-| `machine-provisioner`
-| Machine Compute Management
-| Periodically requests machines from compute provider to run jobs for both `machine` and remote Docker.
-| Periodically checks for stale machine and remote Docker instances and requests that provider removes them.
-|
-
-| `execution-gateway`
-| Execution
-| Boundary for execution to provide API to rest of CircleCI
 |
 |
 
@@ -313,7 +337,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Helps translate the information through gRPC.
 |
 |
-
 
 |===
 
