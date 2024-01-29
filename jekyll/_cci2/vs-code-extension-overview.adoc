@@ -177,7 +177,7 @@ You can also integrate the language server into any editor which supports the La
 [#test-run-your-config-from-vs-code]
 == Test run your config from VS Code
 
-NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ config is currently in **open preview**.
+NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ config is currently in **Open Preview**.
 
 Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
 
@@ -199,7 +199,7 @@ Use caution when running pipelines with _unversioned_ configuration. Take care t
 
 Test run pipelines triggered from VS Code have access to contexts and project environment variables based on branch and author permissions. We recommend using this feature **only** on feature branches.
 
-The ability to trigger pipelines from VS Code is enabled by default on all projects. You can opt-out of this feature per project. For more details, see <<feature-controls>>. 
+Access to this feature is controlled by an opt-in setting which only organization admins can control. Once your organization has opted-in, you can opt-out for each individual project. For more details, see <<feature-controls>>. 
 
 The following issue fixes are in development: 
 - Audit logs do not mention that a pipeline was run with unversioned config.
@@ -220,10 +220,9 @@ The following steps show how to test run a pipeline from the VS Code extension:
 [#feature-controls]
 === Feature Controls
 
-The ability to trigger pipelines from VS Code is enabled by default on all projects. You can opt-out of this feature **at the project level**, as follows:
+The ability to trigger pipelines from VS Code can be controlled **at the org level** and **at the project level**. 
 
-. Navigate to Project Settings[VS Code integration]
-. Toggle the "Run pipelines with unversioned config" option to **Off** to opt-out
+* Organization level settings can be found under menu:Organization Settings[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to On to opt-in. 
+    Organization level settings can be changed only by organization admins, and override project settings.
 
-NOTE: We plan on adding organization-level controls for this feature soon. 
-
+* Project level settings can be found under menu:Project Settings[VS Code integration].  The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to Off to opt-out.
