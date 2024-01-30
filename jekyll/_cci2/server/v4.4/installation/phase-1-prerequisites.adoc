@@ -488,7 +488,7 @@ CircleCI server v4.4 hosts build artifacts, test results, and other state object
 
 While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
-If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:../air-gapped-installation/phase-2-configure-object-storage/phase-2-configure-object-storage#[Air-gapped installation docs].
+If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:../air-gapped-installation/phase-2-configure-object-storage#[Air-gapped installation docs].
 
 NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:installing-server-behind-a-proxy#[Installing server behind a proxy] guide.
 
