@@ -671,7 +671,7 @@ One of `+object_storage.s3.enabled+` or `+object_storage.gcs.enabled+`
 must be true for the chart to function.
 
 |object_storage.expireAfter |int |`+0+` |Number of days after which
-artifacts will expire
+artifacts will expire from the UI
 
 |object_storage.gcs.service_account |object
 |`+{"project_id":"... ...","type":"service_account"}+` |GCP Storage
@@ -762,7 +762,7 @@ with your externalized postgres instance
 
 |postgresql.image.repository |string |`+"server-postgres"+` |
 
-|postgresql.image.tag |string |`+"12.16.32-dc3b53b"+` |
+|postgresql.image.tag |string |`+"12.16.37-7629bfd"+` |
 
 |postgresql.internal |bool |`+true+` |
 
