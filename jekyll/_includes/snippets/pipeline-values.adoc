@@ -64,13 +64,6 @@
 | icon:check[]
 | icon:check[]
 
-| `pipeline.in_setup`
-| GitHub App, GitHub OAuth, Bitbucket, GitLab
-| Boolean
-| True if the pipeline is in the setup phase, for example, running a xref:dynamic-config#[setup workflow].
-| icon:check[]
-| icon:check[]
-
 | `pipeline.trigger_source`
 | GitHub App, GitHub OAuth, Bitbucket, GitLab
 | String
