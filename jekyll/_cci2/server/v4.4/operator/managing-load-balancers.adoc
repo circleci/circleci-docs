@@ -34,7 +34,7 @@ In your values.yaml override file, set the following parameter to true. The para
 [source,yaml]
 ----
 nginx:
-    private_load_balancers: false
+    private_load_balancers: true
 ----
 
 NOTE: If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes requests a new load balancer with the new configuration.
