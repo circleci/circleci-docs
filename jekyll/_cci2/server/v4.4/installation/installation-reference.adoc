@@ -167,7 +167,8 @@ nomad:
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
 
-[width="100%",cols="16%,18%,27%,39%",options="header",]
+[.table.table-striped]
+[cols=4*, options="header"]
 |===
 |Key |Type |Default |Description
 |api_service.replicas |int |`+1+` |Number of replicas to deploy for the
