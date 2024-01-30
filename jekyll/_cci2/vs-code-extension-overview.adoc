@@ -186,9 +186,9 @@ image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Scre
 [#prerequisites]
 === Prerequisites
 
-* CircleCI VS Code extension v2.0 or higher
+* CircleCI VS Code extension v2.3.0 or higher
 * A CircleCI account integrated through the GitHub OAuth app, or Bitbucket. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
-* Your org must have opted-in to this feature through Organization Settings. See <<feature-controls>> for more details.
+* Your org must have opted-in to this feature through Organization Settings. You may need to ask your org admin to do so for you. See <<feature-controls>> for more details.
 * Your project must **not** make use of xref:dynamic-config#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
 NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored. Instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term “unversioned” refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
@@ -271,7 +271,7 @@ The events above do not call out the new value explicitly, but this is inferable
 At this time, audit logs **do not** explicitly call out if a pipeline was run with unversioned config.
 
 [#coming-soon]
-==== Coming soon
+===== Coming soon
 
 In the coming weeks, we commit to adding the following audit log event to include more information: `trigger-event.create`. The event data payload is as follows:
 
