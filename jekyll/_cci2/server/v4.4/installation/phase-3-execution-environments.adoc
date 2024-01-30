@@ -25,9 +25,9 @@ Execution environments in CircleCI server are resourced in the following ways:
 ** Nomad Server is installed and configured within your Kubernetes cluster and is used for scheduling jobs
 ** Nomad Clients are installed outside your Kubernetes cluster and are used for running jobs that are configured to use the Docker execution environment. CircleCI provides sample Terraform modules for you to reference and use to streamline the installation process if you are installing within AWS or GCP. Installing in this way also enables the use of the Nomad Autoscaler
 
-* <<machine-provisioner,Machine provisioner>> is used in AWS/GCP installations to provision resources and run jobs that are configured to use the `machine` execution environment, including Linux and Windows VMs. If you install outside AWS or GCP (that is, a local installation) you will use self-hosted runners to run VM-configured jobs.
+* <<machine-provisioner,Machine provisioner>> is used in AWS/GCP installations to provision resources and run jobs that are configured to use the `machine` execution environment, including Linux and Windows VMs, including Arm resources, if your server installation is within AWS. If you install outside AWS or GCP (that is, a local installation) you will use self-hosted runners to run VM-configured jobs.
 
-* xref:../../../runner-overview#[Runner] can be used for all execution environments.
+* xref:../../../runner-overview#[Runner] can be used for all execution environments, including macOS.
 
 [#nomad-clients]
 == 1. Nomad clients
