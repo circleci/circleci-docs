@@ -135,7 +135,7 @@ kill $!
 
 We recommend disabling concurrency limits for your CircleCI server installation. Disable concurrency limits by setting the following in your `values.yaml`:
 
-NOTE: Concurrency limits are disabled by default from server v4.1.5
+NOTE: Concurrency limits are disabled by default from server v4.1.5. From server v4.1.6, the `distributor_dispatcher.disable_concurrency` flag has been removed and concurrency limits are permanently disabled.
 
 [source,yaml]
 ----

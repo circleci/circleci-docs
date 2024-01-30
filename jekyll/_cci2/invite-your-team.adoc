@@ -45,7 +45,7 @@ Any user who is already a member of your CircleCI organization may use this proc
 Alternatively, to craft a custom invite link for your organization, follow these steps: 
 
 . In the CircleCI web app, go to menu:Organization Settings[Overview] and copy your **Organization ID**.
-. Incorporate your Organization ID and VCS (either GitHub or Bitbucket) into the invitation link using the following format: ‘https://app.circleci.com/launchpad/invited?source-button=collaboration-widget&invitePage=launchpad&orgId=[your-organization-id]&vcsType=[github-or-bitbucket]’
+. Incorporate your Organization ID and VCS (either GitHub or Bitbucket) into the invitation link using the following format: `\https://app.circleci.com/launchpad/invited?source-button=collaboration-widget&invitePage=launchpad&orgId=[your-organization-id]&vcsType=[github-or-bitbucket]`
 . Send this sign-up link to new team members to join your organization.      
 
 
