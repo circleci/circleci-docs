@@ -50,12 +50,19 @@ In the examples on this page, project IDs, branch names, and context names can b
 * Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID>
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+
 Example output:
 +
 [source,shell]
@@ -138,9 +145,16 @@ You can now push your new policy to your organization for it to take effect. You
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -298,9 +312,16 @@ You can now push your new policy to your organization for it to take effect. You
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -395,9 +416,16 @@ You can now push your new policy to your organization for it to take effect. You
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -499,9 +527,16 @@ You can now push your new policy to your organization for it to take effect. You
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:

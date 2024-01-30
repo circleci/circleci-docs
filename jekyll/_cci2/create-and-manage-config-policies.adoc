@@ -21,12 +21,19 @@ Follow the how-to guides on this page to manage, create, and use config policies
 Control whether policy evaluation is applied to pipeline configurations within your organization using the `--enabled` flag.
 
 * To **enable** policy evaluation run the following command. This sets `--enabled` to `true`, which means project configurations **will** be evaluated against your organization's policies when pipelines are triggered.:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID>
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+
 Example output:
 +
 [source,shell]
@@ -37,12 +44,19 @@ Example output:
 ----
 
 * To **disable** policy evaluation run the following command. This sets `--enabled` to `false`, which means project configurations **will not** be evaluated against your organization's policies when pipelines are triggered.:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy settings --enabled=false --owner-id <your-organization-ID>
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy settings --enabled=false --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+
 Example output:
 +
 [source,shell]
@@ -221,9 +235,16 @@ You can now push your new policy to your organization for it to take effect. You
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –-owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+ push ./config-policies –-owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -266,9 +287,16 @@ To illustrate making a change to an existing policy, suppose you made an error w
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –-owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy push ./config-policies –-owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:

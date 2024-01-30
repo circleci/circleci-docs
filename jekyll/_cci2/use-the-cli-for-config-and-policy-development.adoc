@@ -26,9 +26,16 @@ The following command requests the specified config input be judged against the 
 
 Example decision command:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG --policy-base-url <your-circleci-server-domain>
 ----
 
 Example CircleCI decision:
@@ -60,9 +67,16 @@ way of developing and testing policies. It is similar to the previous command ex
 
 The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR --policy-base-url <your-circleci-server-domain>
 ----
 
 Policies that use `data.meta...` values like `vcs.branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
@@ -79,9 +93,37 @@ The CLI provides a `policy logs` command to fetch the policy decision logs for y
 
 Following is the output of this command when run with `--help` flag:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy logs --help
+
+# Returns the following:
+Get policy (decision) logs
+
+
+Usage:
+  circleci policy logs [flags]
+
+Examples:
+policy logs  --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f --after 2022/03/14 --out output.json
+
+Flags:
+      --after string        filter decision logs triggered AFTER this datetime
+      --before string       filter decision logs triggered BEFORE this datetime
+      --branch string       filter decision logs based on branch name
+      --context string      policy context (default "config")
+  -h, --help                help for logs
+      --out string          specify output file name
+      --owner-id string     the id of the policy's owner
+      --project-id string   filter decision logs based on project-id
+      --status string       filter decision logs based on their status
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy logs --help --policy-base-url <your-circleci-server-domain>
 
 # Returns the following:
 Get policy (decision) logs

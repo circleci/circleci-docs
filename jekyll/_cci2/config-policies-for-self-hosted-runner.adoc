@@ -23,12 +23,19 @@ Follow this how-to guide to learn how to create a config policy to restrict whic
 * Set up a self-hosted runner. See the xref:runner-overview/#getting-started[Getting started] section of the Self-hosted runners overview.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID>
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+
 Example output:
 +
 [source,shell]
@@ -91,9 +98,16 @@ You can now push your new policy to your organization for it to take effect. You
 --
 Create and upload the policy bundle using CircleCI CLI:
 
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:

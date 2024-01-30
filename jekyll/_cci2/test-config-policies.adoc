@@ -83,12 +83,19 @@ test_version_check:
 ----
 
 . Run the `test` command against your `config-policies` directory:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,shell]
@@ -101,12 +108,19 @@ ok    config-policies    0.001s
 NOTE: If you already have multiple policies in your `./config-policies` directory, more than just the `version.rego` file, you will probably see a different output, possibly including failures.
 
 . To see the tests that ran individually, you can also run with the `--verbose` or `-v` flag, as follows:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies --verbose
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,shell]
@@ -121,12 +135,19 @@ ok    config-policies                          0.001s
 ----
 
 . To run a specific test you can provide a regular expression to the `--run` flag, as follows:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies --verbose --run "absent_version$"
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "absent_version$" --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,shell]
@@ -138,12 +159,19 @@ ok    config-policies                      0.000s
 ----
 
 . To better understand how the test was executed, including which input and metadata the test was run against, and the raw OPA evaluation, you can pass the `--debug` flag, as follows:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies --verbose --run "absent_version$" --debug
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "absent_version$" --debug --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,shell]
@@ -176,12 +204,19 @@ ok    config-policies    0.000s
 ----
 
 . To get the test output in JSON format, use the `--format` flag, as follows:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies --format=json
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --format=json --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,json]
@@ -220,12 +255,19 @@ Expected output:
 ----
 
 . To get the test output in JUnit XML format, use the `--format` flag, as follows:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies --format=junit
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --format=junit --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,xml]
@@ -333,12 +375,19 @@ test_minimum_remote_docker_version:
 ----
 
 . Run the `test` command against the `config-policies` directory containing two policies and tests:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output. The tests have started to fail:
 +
 [source,shell]
@@ -462,12 +511,19 @@ It is a good idea to have tests that run against the entire bundle that will be 
 ----
 
 . Run all all tests including those in subfolders by appending `/...` to the test path:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies/...
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies/... --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output. Tests are passing again:
 +
 [source,shell]
@@ -542,12 +598,19 @@ test_break_all_rules:
 ----
 
 . Run the full set of tests again in verbose mode:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies/...
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies/... --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,shell]
@@ -604,12 +667,19 @@ test_version_check:
 ----
 
 . Run the tests again to see the results:
-+
+
+{:.tab.machineblock.Cloud}
 [source,shell]
 ----
 circleci policy test ./config-policies/version -v
 ----
-+
+
+{:.tab.machineblock.Server}
+[source,shell]
+----
+circleci policy test ./config-policies/version -v --policy-base-url <your-circleci-server-domain>
+----
+
 Expected output:
 +
 [source,shell]
