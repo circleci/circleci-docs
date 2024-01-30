@@ -76,7 +76,7 @@ Update permissions for your CircleCI machine runner to enable running its binary
 
 [,shell]
 ----
-chomd +x $HOME/circleci-runner
+chmod +x $HOME/circleci-runner
 ----
 
 [#create-configuration-and-working-directory]

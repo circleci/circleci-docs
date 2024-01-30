@@ -150,6 +150,9 @@ This directory takes a fully qualified path and allows you to control the defaul
 
 NOTE: These directories will not automatically be removed, please see `cleanup_working_directory` to configure cleanup of directory.
 
+NOTE: For Machine Runner 3.0, the `%s` substitution feature is not supported.
+The `%s` value in the working directory path would be interpreted as a literal value.
+
 Example:
 
 ```yaml
@@ -159,18 +162,6 @@ runner:
 
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
-`$CIRCLECI_RUNNER_CLEANUP_WORK_DIR`
-
-CircleCI recommends using a knowable directory, however it is possible to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`.
-
-Example:
-
-```yaml
-runner:
-  working_directory: "/var/lib/circleci-runner/workdir"
-  cleanup_working_directory: false
-```
-
 `$CIRCLECI_RUNNER_CLEANUP_WORK_DIR`
 
 This flag enables you to control the working directory cleanup after each job.
