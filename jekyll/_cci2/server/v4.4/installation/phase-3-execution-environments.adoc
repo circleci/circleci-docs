@@ -17,11 +17,25 @@ Before you begin with the CircleCI server v4.4 execution environment installatio
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
+== Introduction
+
+Execution environments in CircleCI server are resourced in the following ways:
+
+* HashiCorp Nomad is used for scheduling jobs and running Docker jobs
+** Nomad Server is installed and configured within your Kubernetes cluster and is used for scheduling jobs
+** Nomad Clients are installed outside your Kubernetes cluster and are used for running jobs that are configured to use the Docker execution environment. CircleCI provides sample Terraform modules for you to reference and use to streamline the installation process if you are installing within AWS or GCP. Installing in this way also enables the use of the Nomad Autoscaler
+
+* <<machine-provisioner,Machine provisioner>> is used in AWS/GCP installations to provision resources and run jobs that are configured to use the `machine` execution environment, including Linux and Windows VMs. If you install outside AWS or GCP (that is, a local installation) you will use self-hosted runners to run VM-configured jobs.
+
+* xref:../../../runner-overview#[Runner] can be used for all execution environments.
+
 [#nomad-clients]
 == 1. Nomad clients
 Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad server) and run (through Nomad clients) CircleCI jobs.
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
+
+NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:../air-gapped-installation/phase-4-configure-nomad-clients#[Air-gapped] docs on setting up Nomad clients.
 
 [#create-your-cluster-with-terraform]
 === a. Create your cluster with Terraform
@@ -410,7 +424,7 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 ----
 
 [#nomad-clients-validation]
-=== 3. Nomad Clients Validation
+=== e. Nomad Clients validation
 
 CircleCI has created a project called link:https://github.com/circleci/realitycheck[reality check] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of reality check will move from red (fail) to green (pass).
 
