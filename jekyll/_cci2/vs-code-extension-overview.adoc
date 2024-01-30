@@ -186,19 +186,19 @@ image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Scre
 [#prerequisites]
 === Prerequisites
 
-* v2.0 or higher of the CircleCI VS Code extension
+* CircleCI VS Code extension v2.0 or higher
 * A CircleCI account integrated through the GitHub OAuth app, or Bitbucket. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
 * Your org must have opted-in to this feature through Organization Settings. See <<feature-controls>> for more details.
 * Your project must **not** make use of xref:dynamic-config#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
-NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored, and instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term “unversioned” refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
+NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored. Instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term “unversioned” refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
 
 
 [WARNING]
 ====
 Use caution when running pipelines with _unversioned_ configuration. Take care to ensure no jobs with unintended effects are included in the run. For more details, see <<security-implications>>.
 
-Access to this feature is controlled by an opt-in setting which only organization admins can control. Once your organization has opted-in, you can opt-out for each individual project. For more details, see <<feature-controls>>. 
+Access to this feature is controlled by an opt-in setting that only organization admins can control. Once your organization has opted-in, you can opt-out for each individual project. For more details, see <<feature-controls>>.
 
 ====
 
@@ -215,29 +215,28 @@ The following steps show how to test run a pipeline from the VS Code extension:
 [#feature-controls]
 === Feature Controls
 
-The ability to trigger pipelines from VS Code can be controlled **at the org level** and **at the project level**. 
+The ability to trigger pipelines from VS Code can be controlled **at the org level** and **at the project level**.
 
-* Organization level settings can be found under menu:Organization Settings[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to On to opt-in. 
-    Organization level settings can be changed only by organization admins, and override project settings.
+* Organization level settings can be found under menu:Organization Settings[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to **On** to opt-in. Organization level settings override project settings, and they can be changed only by organization admins.
 
-* Project level settings can be found under menu:Project Settings[VS Code integration].  The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to Off to opt-out.
+* Project level settings can be found under menu:Project Settings[VS Code integration]. The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to **Off** to opt-out.
 
 [#security-implications]
 === Security Implications
 
-Running pipelines with unversioned config can cause security vulnerabilities. Before enabling this feature, please acknowledge the following risks. 
+CAUTION: Running pipelines with unversioned config can cause security vulnerabilities. Before enabling this feature, ensure you acknowledge the following risks.
 
 [#branch-protection]
 ==== Branch protection
 This feature allows running arbitrary configs on any branch, including protected branches. Pipelines triggered this way will have access to the same **environment variables, contexts and OIDC tokens** as if they were triggered on the corresponding branch from VCS by the same user.
 
-It’s worth calling out that link:https://circleci.com/docs/oidc-tokens-with-custom-claims/[OIDC tokens] make a number of cryptographically verifiable claims about a pipeline execution, including some claims about the VCS. As the unversioned config is not provided by a VCS, these claims should not be made on a pipeline with unversioned config. In the current state, an unversioned config could be used to exploit the claims in the OIDC token to affect production.
+link:https://circleci.com/docs/oidc-tokens-with-custom-claims/[OIDC tokens] make a number of cryptographically verifiable claims about a pipeline execution, including some claims about the VCS. As the unversioned config is not provided by a VCS, these claims should not be made on a pipeline with unversioned config. In the current state, an unversioned config could be used to exploit the claims in the OIDC token to affect production.
 
-This increase the risk of secret exfiltration, and might let users access cloud resources they shouldn’t be able to.  
+This increases the risk of secret exfiltration, and could let users access cloud resources they should not be able to.
 
 [#vcs-status-checks]
 ==== VCS Status checks
-Currently, triggering pipelines with unversioned config may allow bypassing VCS status checks for the corresponding commits. 
+Triggering pipelines with unversioned config may allow bypassing VCS status checks for the corresponding commits.
 
 This is a known issue that we are committed to resolve in the coming weeks.
 
@@ -245,7 +244,7 @@ This is a known issue that we are committed to resolve in the coming weeks.
 ==== Access and permissions
 link:https://circleci.com/docs/contexts/#restrict-a-context-to-a-security-group-or-groups[Context restrictions based on groups or security groups] are respected. We recommend using groups to exclude context access to untrusted users.
 
-Per-user, per-project, per-branch and per-org permission checks are also respected by pipelines triggered with unversioned config. 
+Per-user, per-project, per-branch and per-org permission checks are also respected by pipelines triggered with unversioned config.
 
 [#config-policies]
 ==== Config Policies
@@ -256,32 +255,32 @@ link:https://circleci.com/docs/config-policy-management-overview/[Config policy 
 
 Audit logs trace when organization and project level settings are changed for this feature.
 
-- the event `organzation.settings.update` is sent when organization-level settings for this feature are changed
-- the event `project.settings.update` is sent when project-level settings for this feature are changed.
+- The event `organzation.settings.update` is sent when organization-level settings for this feature are changed.
+- The event `project.settings.update` is sent when project-level settings for this feature are changed.
 
 Both the events below log:
 
-- date and time of the event happened
+- Date and time of the event happened
 
-- user ID of the actor performing the action
+- User ID of the actor performing the action
 
-- information on which setting was changed. 
+- Information on which setting was changed
 
-It’s worth noting that for now the events above don’t call out explicitly the new value, but this is inferable by looking at the current state of the setting.
+The events above do not call out the new value explicitly, but this is inferable by looking at the current state of the setting.
 
 At this time, audit logs **do not** explicitly call out if a pipeline was run with unversioned config.
 
-In the coming weeks, we commit to adding the the following event to include that information:
+[#coming-soon]
+==== Coming soon
 
-- `trigger-event.create`
-    Event data payload:
-    - pipeline ID
-    - pipeline number
-    - author
-    - trigger “origin” (API, VCS…)
-    - is config unversioned? `true/false``
+In the coming weeks, we commit to adding the following audit log event to include more information: `trigger-event.create`. The event data payload is as follows:
 
-You can use the information above to view the `config.yml` file associated with this pipeline, by searching  for it through the Web App:
-```
-https://app.circleci.com/projects/{VCS}/{ORGANIZATION_NAME}/{PROJECT_NAME}/config/?branchName={BRANCH_NAME}&pipelineNumber={PIPELINE_ID}
-````
+- Pipeline ID
+- Pipeline number
+- Author
+- Trigger “origin” (API, VCS…)
+- Is config unversioned? `true/false`
+
+You will be able to use the information above to view the `config.yml` file associated with this pipeline, by searching for it through the CircleCI web app, as follows:
+
+`\https://app.circleci.com/projects/{VCS}/{ORGANIZATION_NAME}/{PROJECT_NAME}/config/?branchName={BRANCH_NAME}&pipelineNumber={PIPELINE_ID}`
