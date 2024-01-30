@@ -84,7 +84,8 @@ Replace `api.auth_token` with the token generated in the steps above, and choose
 ```shell
 export CIRCLECI_RUNNER_API_URL="your server domain"
 ```
-or by adding the url to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
++
+Or by adding the url to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
 +
 ```yaml
 api:
