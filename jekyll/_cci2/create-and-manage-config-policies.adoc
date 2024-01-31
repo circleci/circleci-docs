@@ -244,7 +244,7 @@ circleci policy push ./config-policies –-owner-id <your-organization-ID>
 {:.tab.machineblock.Server}
 [source,shell]
 ----
- push ./config-policies –-owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+circleci policy push ./config-policies –-owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 
 If the upload was successful, you will see something like the following:
