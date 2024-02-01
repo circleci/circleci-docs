@@ -146,7 +146,7 @@ Use the _retry release_ command to retry a release that has failed or been cance
 
 image::../../img/docs/releases/retry-release.png[Screenshot showing the retry release button]
 
-[#promote-steps]
+[#retry-steps]
 === Steps
 
 . Select btn:[Releases] in the CircleCI web app sidebar

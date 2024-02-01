@@ -11,6 +11,7 @@ contentTags:
 
 This page describes how to use some features of the CircleCI CLI.
 
+[#prerequisites]
 == Prerequisites
 
 To follow the guides on this page you will need the following:
@@ -111,8 +112,8 @@ A file beginning with `@` will have its contents merged into its parent folder l
 Thus:
 
 ```shell
-$ cat foo/bar/@baz.yml
-{baz: qux}
+cat foo/bar/@baz.yml
+\{baz: qux}
 ```
 
 Is mapped to:
@@ -234,7 +235,7 @@ workflows:
 
 The CLI enables you to run jobs in your configuration with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue.
 
-[#prerequisites]
+[#run-job-prerequisites]
 === Prerequisites
 
 You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project with a valid `.circleci/config.yml` file in it.

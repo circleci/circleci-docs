@@ -99,11 +99,14 @@ The ability to rerun a job with SSH is in open preview for CircleCI container ru
 The Rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8s.io/[Gateway API] to facilitate SSH access from outside your cluster. To enable this feature, Gateway API resources must first be provisioned on your cluster, and the CircleCI container agent configuration must be updated.
 
 
-NOTE: **Supported Gateway API implementations:**
+[NOTE]
+====
+**Supported Gateway API implementations:**
 CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support TCPRoute resources are likely to be compatible, but not all of these implementations have been tested, and therefore compatibility is not guaranteed. Our recommendation is to use Envoy Gateway as your implementation. Envoy Gateway is currently in beta and is under development.
+====
 
 
-==== 1. Install Envoy Gateway to your cluster
+=== 1. Install Envoy Gateway to your cluster
 . First, install the Gateway API CRDs and Envoy Gateway, as defined in the
 link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document]. To do this, replace `<version>` with the link:https://gateway.envoyproxy.io/blog/2022/10/01/versions/[most recent stable release] compatible with your cluster, then run the following command:
 +
@@ -119,7 +122,7 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 ----
 
 
-==== 2. Enable the Rerun job with SSH feature
+=== 2. Enable the Rerun job with SSH feature
 
 . Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = "true"` parameter to the container runner configuration:
 +

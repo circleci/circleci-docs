@@ -85,10 +85,10 @@ For additional information, refer to the **Schedule** section under the link:htt
 [#use-project-settings]
 === Use project settings in the web app
 
-1. In the CircleCI web app, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project and click on **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
-2. Navigate to **Triggers**.
-3. To create a new schedule, click **Add Trigger**.
-4. Define the new schedule by filling out the form, then click **Save Trigger**.
+. In the CircleCI web app, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project and click on **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
+. Navigate to **Triggers**.
+. To create a new schedule, click **Add Trigger**.
+. Define the new schedule by filling out the form, then click **Save Trigger**.
 
 The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
 
