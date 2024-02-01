@@ -15,7 +15,13 @@ contentTags:
 [#overview]
 == Overview
 
-The v4.4 release introduces #TBD#
+The v4.4 release introduces the following feature enhancements:
+
+* xref:../../../openid-connect-tokens#[OpenID connect tokens]: CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can be configured to use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
+* link:https://circleci.com/changelog/machine-runner-3-0-released/[Machine runner 3.0]: Improved setup, usability and maintainability.
+* xref:../../../container-runner-installation#enable-rerun-job-with-ssh[Rerun job with SSH option for container runners], in open preview.
+
+For a full list of fixes, changes, new features and known issues, follow the links to individual change log posts below.
 
 [#migration]
 == Migrate
