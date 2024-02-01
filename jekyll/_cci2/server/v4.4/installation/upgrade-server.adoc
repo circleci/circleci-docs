@@ -23,11 +23,6 @@ When upgrading from one minor version to the next, ensure your upgrade path incl
 
 To see some common upgrade path options, see link:https://support.circleci.com/hc/en-us/articles/15819961443483-Server-4-x-Upgrade-Path[this support article].
 
-[#notes]
-== Notes on changes in v4.4
-
-Please note the following significant changes in server v4.4.
-
 [#prerequisites]
 == Prerequisites
 
@@ -38,13 +33,18 @@ Please note the following significant changes in server v4.4.
 [#upgrade-steps]
 == Upgrade steps
 
+. Ensure your cluster is running a compatible Kubernetes version for this release (1.26 - 1.27).
+
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
-#INSERT UPGRADE STEPS HERE#
+. Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
++
+[source,shell,subs=attributes+]
+helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion44} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Perform the upgrade:
 +
-[source,shell]
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+[source,shell,subs=attributes+]
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion44} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
