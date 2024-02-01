@@ -106,9 +106,6 @@ workflows:
       not: << pipeline.parameters.run-schedule >>
     jobs:
       - build_server_pdfs:
-          filters:
-            branches:
-              only: /.*/server/*
       - build_api_docs
       - build:
           requires:
