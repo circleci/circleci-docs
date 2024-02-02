@@ -15,9 +15,7 @@ _Jobs_ are a definition of what steps/commands to run and the xref:reusing-confi
 [#orbs-on-private-installation-server]
 === Can orbs be used on a private installation of CircleCI server?
 
-Orbs can be used with installations of CircleCI server v3. For information on importing and using orbs for server, see the xref:server-3-operator-orbs#[CircleCI Server v3.x orbs guide].
-
-Orbs are not available on installations of server v2.19.x, however, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to link:https://discuss.circleci.com/t/orbs-on-server-solution/36264[use orbs on server].
+Orbs can be used with installations of CircleCI server. For information on importing and using orbs for server, see the xref:/server/v4.3/operator/managing-orbs#[CircleCI server managing orbs] page.
 
 [#report-an-issue-with-a-public-orb]
 === How can I report a bug or issue with a public orb?
