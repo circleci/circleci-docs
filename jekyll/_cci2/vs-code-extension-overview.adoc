@@ -247,25 +247,30 @@ link:https://circleci.com/docs/contexts/#restrict-a-context-to-a-security-group-
 Per-user, per-project, per-branch and per-org permission checks are also respected by pipelines triggered with unversioned config.
 
 [#config-policies]
-==== Config Policies
+==== Config policies
 link:https://circleci.com/docs/config-policy-management-overview/[Config policy rules] apply to unversioned configs as they do to VCS-provided configs. This means that an unversioned config that does not pass a policy rule will trigger a policy fail, just like a VCS-provided config. However, if config policies differ per branch, it could be possible exploit these differences to run an unversioned config on a GitHub-protected branch, without going through a code merge.
 
 [#auditability]
 ==== Auditability
 
-The audit log event `trigger-event.create` includes information that permit to distinguish pipelines that are run with unversioned config, in particular the following properties: 
-- `trigger-source`: `api` | `api, vscode` 
-- `config-source`: `vcs` | `api` 
+The audit log event `trigger-event.create` includes information that permit to distinguish pipelines that are run with unversioned config, in particular the following properties:
+
+- `trigger-source`: `api` | `api, vscode`
+- `config-source`: `vcs` | `api`
 
 You will be able to use the information in the event payload to view the `config.yml` file associated with a given pipeline, by searching for it through the CircleCI web app, as follows:
+
 `\https://app.circleci.com/projects/{VCS}/{ORGANIZATION_NAME}/{PROJECT_NAME}/config/?branchName={BRANCH_NAME}&pipelineNumber={PIPELINE_ID}`
 
 The following audit log events trace when organization and project level settings are changed for this feature:
+
 - `organzation.settings.update`: emitted when organization-level settings for this feature are changed
 - `project.settings.update`: emitted when project-level settings for this feature are changed
 
 Both the events above log:
-- Date and time 
+
+- Date and time
 - User ID of the actor performing the action
 - Setting that was changed
+
 The events above do not call out the new value explicitly, but this is inferable by looking at the current setting state.
