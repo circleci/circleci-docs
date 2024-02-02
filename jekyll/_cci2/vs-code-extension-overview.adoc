@@ -253,34 +253,19 @@ link:https://circleci.com/docs/config-policy-management-overview/[Config policy 
 [#auditability]
 ==== Auditability
 
-Audit logs trace when organization and project level settings are changed for this feature.
+The audit log event `trigger-event.create` includes information that permit to distinguish pipelines that are run with unversioned config, in particular the following properties: 
+- `trigger-source`: `api` | `api, vscode` 
+- `config-source`: `vcs` | `api` 
 
-- The event `organzation.settings.update` is sent when organization-level settings for this feature are changed.
-- The event `project.settings.update` is sent when project-level settings for this feature are changed.
-
-Both the events below log:
-
-- Date and time of the event happened
-
-- User ID of the actor performing the action
-
-- Information on which setting was changed
-
-The events above do not call out the new value explicitly, but this is inferable by looking at the current state of the setting.
-
-At this time, audit logs **do not** explicitly call out if a pipeline was run with unversioned config.
-
-[#coming-soon]
-===== Coming soon
-
-In the coming weeks, we commit to adding the following audit log event to include more information: `trigger-event.create`. The event data payload is as follows:
-
-- Pipeline ID
-- Pipeline number
-- Author
-- Trigger “origin” (API, VCS…)
-- Is config unversioned? `true/false`
-
-You will be able to use the information above to view the `config.yml` file associated with this pipeline, by searching for it through the CircleCI web app, as follows:
-
+You will be able to use the information in the event payload to view the `config.yml` file associated with a given pipeline, by searching for it through the CircleCI web app, as follows:
 `\https://app.circleci.com/projects/{VCS}/{ORGANIZATION_NAME}/{PROJECT_NAME}/config/?branchName={BRANCH_NAME}&pipelineNumber={PIPELINE_ID}`
+
+The following audit log events trace when organization and project level settings are changed for this feature:
+- `organzation.settings.update`: emitted when organization-level settings for this feature are changed
+- `project.settings.update`: emitted when project-level settings for this feature are changed
+
+Both the events above log:
+- Date and time 
+- User ID of the actor performing the action
+- Setting that was changed
+The events above do not call out the new value explicitly, but this is inferable by looking at the current setting state.
