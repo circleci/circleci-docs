@@ -209,7 +209,7 @@ The following steps show how to test run a pipeline from the VS Code extension:
 
 . Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
 . Expand the **Run** panel to view your projects.
-. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[]. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
+. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[] **Run local config on branch <your-branch-name>**. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
 . The pipeline is now visible in your link:https://app.circleci.com/pipelines/[dashboard] in the CircleCI web app, and the Pipelines panel in the VS Code extension. Please note that, for now, pipelines run with unversioned configuration are not differentiated from other pipelines in the CircleCI web app.
 
 [#feature-controls]
