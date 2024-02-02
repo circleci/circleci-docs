@@ -105,11 +105,9 @@ workflows:
     when:
       not: << pipeline.parameters.run-schedule >>
     jobs:
-      - build_server_pdfs
       - build_api_docs
       - build:
           requires:
-            - build_server_pdfs
             - build_api_docs
       - reindex-search:
           filters:
@@ -137,21 +135,6 @@ workflows:
       - trigger-deploy
 
 jobs:
-
-  build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
-    docker:
-      - image: asciidoctor/docker-asciidoctor
-    steps:
-      - *attach_workspace
-      - checkout
-      - run:
-          name: Build PDFs for server v3
-          command: ./scripts/build_pdfs_server_3.sh
-      - run:
-          name: Build PDFs for server v4
-          command: ./scripts/build_pdfs_server_4.sh
-      - store_artifacts:
-          path: release/tmp/
 
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
@@ -187,7 +170,7 @@ jobs:
           paths:
             - api
 
-  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
+  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, and javascript)
   # and puts everything in its place for a Jekyll build.
   build:
     executor:
@@ -232,7 +215,6 @@ jobs:
             cp -r /tmp/workspace/api/ jekyll/_api/
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
-            mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run: sudo apt-get update; sudo apt-get --yes install nkf
       - set-jekyll-basename
