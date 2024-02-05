@@ -15,8 +15,7 @@ kubectl
 Gbps
 Subnet
 subnet
-Autoscaler
-autoscaler
+[Aa]utoscaler
 Certbot
 keyset
 Rollout
