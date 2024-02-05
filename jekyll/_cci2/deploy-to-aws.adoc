@@ -86,7 +86,7 @@ jobs: # Define the build and deploy jobs
             --cache-control "max-age=86400"
 ```
 
-[#deploy-to-aws-s3-without orbs]
+[#deploy-to-aws-s3-without-orbs]
 == Deploy to S3 without orbs
 
 [#create-iam-user-2]

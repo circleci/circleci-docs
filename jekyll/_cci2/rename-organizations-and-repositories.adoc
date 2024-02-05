@@ -34,7 +34,7 @@ If you need to rename a GitHub (OAuth app) or Bitbucket organization or reposito
 [#rename-organizations-and-repositories]
 === Steps to rename organizations and repositories
 
-1. Rename organization or repository in your VCS
-2. Go to the CircleCI web app using the new org/repo name, for example: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`
-3. Confirm that your plan, projects, and settings have been transferred successfully
-4. If desired, you are now free to create a new org/repo with the previously-used name in your VCS
+. Rename organization or repository in your VCS
+. Go to the CircleCI web app using the new org/repo name, for example: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`
+. Confirm that your plan, projects, and settings have been transferred successfully
+. If desired, you are now free to create a new org/repo with the previously-used name in your VCS
