@@ -1,0 +1,49 @@
+---
+description: "CircleCI Server v3.x のアップグレードに必要な手順について説明します。"
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
+---
+= CircleCI Server v3.x のアップグレードガイド
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI Server v3.x をアップグレードするには、サーバーがインストールされている Kubernetes クラスタにアクセスし、KOTS 管理者コンソールのインスタンスを実行している必要があります。 
+
+アップグレードをする前に、 https://circleci.com/docs/server-3-operator-backup-and-restore[バックアップと復元] の設定が完了していることを確認してください。 
+
+デプロイが成功すると UI が更新されます。 リリースノートに記載されていない限り、アップデートはローリングアップデートでありダウンタイムはありません。 
+
+NOTE: リリースをスキップしないことをお勧めします。
+
+== CircleCI Server v３.x のアップグレード
+
+. KOTS の管理者コンソールにアクセスします。 アクセスするには、下記をご自身の CircleCI Server 名前空間に置き換えて実行します。 
++
+----
+kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
+----
+
+. インストールの際に作成したパスワードで管理者コンソールにログインします。
+
+. *Snapshots* タブを選択し、お使いの環境のスナップショットを作成します。 詳細については、 https://circleci.com/docs/server-3-operator-backup-and-restore/#creating-backups[バックアップと復元] ガイドを参照してください。
+
+.  *Version History* を選択します。 先に進む前に、*Check for Updates* をクリックします。 
+
+. 最新バージョンが表示されたら、下記のチェックリストを実行し、アップグレードしたいバージョンの *Deploy* を選択します。
++
+* https://circleci.com/server/changelog/[change log] をチェックし、新しいバージョンをデプロイする前に実行しなければならないアクションがないことを確認します。 
+* デプロイするバージョンの設定を確認し、他にデプロイしたい新しいフィールドや機能がないことを確認します (Deploy ボタンの横にあるギアをクリックすると、そのバージョンに固有の設定が表示されます）。 
+
+. テスト環境で https://github.com/circleci/realitycheck[`reality check`] をデプロイして実行し、インストールした CircleCI Server が完全に動作していることを確認します。
+
+
+
+
+
+
+
