@@ -23,6 +23,11 @@ When upgrading from one minor version to the next, ensure your upgrade path incl
 
 To see some common upgrade path options, see link:https://support.circleci.com/hc/en-us/articles/15819961443483-Server-4-x-Upgrade-Path[this support article].
 
+[#recommendations]
+== Recommendations
+
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.4. Customers that do not perform this step may have issues restoring Vault from backup in v4.4.
+
 [#prerequisites]
 == Prerequisites
 
