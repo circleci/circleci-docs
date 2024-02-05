@@ -270,7 +270,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
     executor: pw-focal-development
     parallelism: 4
     steps:
-      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
 
 ## Next steps
