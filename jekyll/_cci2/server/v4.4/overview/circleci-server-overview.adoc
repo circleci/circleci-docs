@@ -25,7 +25,7 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 The following diagram presents and overview of the services architecture of CircleCI server.
 
 .CircleCI server v4.4 Architecture
-image::server-4-architecture-diagram.png[Server v4.4 services architecture]
+image::server-4-architecture-diagram-2024.png[Server v4.4 services architecture]
 
 [#ports-and-services]
 === Ports and services
