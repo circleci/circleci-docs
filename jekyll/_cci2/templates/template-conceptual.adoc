@@ -29,7 +29,7 @@ This template will help you create a new docs page to provide **conceptual** inf
 * Develop new content quickly
 * Ensure your page conforms to the style guide
 
-To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-conceptual.adoc?plain=1[here]. There is additional detail in the comments.
+To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/templates/template-conceptual.adoc?plain=1[page template here]. There is additional detail in the comments.
 
 The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
 
@@ -45,7 +45,7 @@ Use the introduction to explain more about the feature/task, what it is for, why
 
 You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanatory information:
 
-image::{{site.baseurl}}/assets/img/docs/arch.png[Provide some alt text for images here]
+image::{{site.baseurl}}/assets/img/docs/arch.png[Diagram that includes flow from Repository and Apps to CircleCI API, from CircleCI API to Orchestration, from Orchestration to Execution, and from Execution to Deployment.]
 
 [#quickstart]
 == Quickstart
