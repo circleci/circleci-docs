@@ -20,8 +20,8 @@ For more information on OIDC token, see the xref:openid-connect-tokens#[OpenID C
 
 CircleCI allows you to create OIDC tokens in a job. Using this method you can:
 
-* Customize the `aud` claim
-* Create one or more OIDC tokens in a job
+* Customize the `aud` claim. Only the `aud` claim is customizable.
+* Create one or more OIDC tokens in a job.
 
 Use the CircleCI CLI in a `step` to create your customized token, as follows:
 
