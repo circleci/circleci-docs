@@ -43,4 +43,4 @@ For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4
 [#changelog-4-4-0]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#release-4-4-0[changelog].
+For full details of this release see the link:https://circleci.com/server/changelog/#server-release-4-4-0[changelog].
