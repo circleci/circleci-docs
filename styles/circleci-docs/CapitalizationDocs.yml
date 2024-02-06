@@ -40,3 +40,4 @@ exceptions:
   - TLS
   - AWS
   - Route 53
+  - OIDC
