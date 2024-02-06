@@ -81,9 +81,7 @@ image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an in
 +
 image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
 
-Below is an example of how you would set up the webhook trigger in Hugging Face:
-
-image::triggers/inbound-webhooks-hugging-face-setup.png[screenshot showing inbound webhook trigger Hugging Face setup]
+See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for examples on how to trigger this newly created webhook from a `cURL` command or a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].  Note that if triggering via `cURL`, you must use a `POST` request with `content-type: application/json` 
 
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
