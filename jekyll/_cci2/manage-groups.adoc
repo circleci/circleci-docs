@@ -25,7 +25,7 @@ The how-to guides on this page provide steps for some common group management ta
 [#create-a-group]
 == Create a group
 
-NOTE: To do this, you must have the _Organization Admin_ role. #CHECK - if all the same on this page move note to top and display once#
+NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Organization Settings** in the sidebar
 . Select **Groups** from the sidebar
@@ -38,7 +38,7 @@ View your new group in the groups list. Click on the group name to view details.
 [#add-people-to-a-group]
 == Add people to a group
 
-NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
+NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Organization Settings** in the sidebar
 . Select **Groups** from the sidebar
@@ -49,7 +49,7 @@ NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
 [#add-a-group-to-a-project]
 == Add a group to a project
 
-NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
+NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Projects** in the sidebar
 . Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
@@ -60,7 +60,7 @@ NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
 [#assign-a-new-project-role-to-a-group]
 == Assign a new project role to a group
 
-NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
+NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Projects** in the sidebar
 . Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
@@ -71,7 +71,7 @@ NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
 [#delete-a-group]
 == Delete a group
 
-NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
+NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Organization Settings** in the sidebar
 . Select **Groups** from the sidebar
@@ -81,7 +81,7 @@ NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
 [#remove-a-user-from-a-group]
 == Remove a user from a group
 
-NOTE: To do this, you must have the _Organization Admin_ role. #CHECK#
+NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Organization Settings** in the sidebar
 . Select **Groups** from the sidebar
