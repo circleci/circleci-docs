@@ -25,6 +25,8 @@ CircleCI allows you to create OIDC tokens in a job. Using this method you can:
 
 Use the CircleCI CLI in a `step` to create your customized token, as follows:
 
+NOTE: The `circleci run oidc` commands cannot be run locally via the CLI, only within a job in your CircleCI configuration.
+
 [source,shell]
 ----
 circleci run oidc get --claims '{"aud": "audience_name"}'
