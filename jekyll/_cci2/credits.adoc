@@ -46,7 +46,7 @@ NOTE: Open source credits for the Free plan are not currently available for GitL
 
 Organizations on our Free plan can use up to 400,000 credits per month, for free, for Linux open source builds. Using our Free plan and keeping your repository public will enable this for you. Open-source credit availability and limits are not visible in the CircleCI web app.
 
-If you build on macOS, we also offer organizations on our Free plan 30,000 credits every month to use on macOS open source builds. For access to this, contact our team at mailto:billing@circleci.com[billing@circleci.com].
+If you build on macOS, we also offer organizations on our Free plan 30,000 credits every month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal].
 
 [#troubleshooting-job-is-queued]
 == Troubleshooting: Am I charged if my job is "queued" or "preparing"?

@@ -23,8 +23,6 @@ CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization sinc
 
 https://circleci.com/signup/[Sign up for a free account today], or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
 
-NOTE: If you have Premium or Advanced Support, please reach out to mailto:customersuccess@circleci.com[customersuccess@circleci.com] for a more tailored migration plan with Gantt charts, custom trainings etc.
-
 [#project-migration-methodology]
 == Project migration methodology
 
