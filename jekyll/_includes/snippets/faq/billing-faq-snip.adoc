@@ -183,7 +183,7 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 
 Open source organizations on our *Free plan* receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
 
-If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal]. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
+If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal], which includes an Ask AI option to get you the information you need. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
 
 [#discounts-for-open-source-performance-plan]
 === Can I get discounts for open source on the Performance plan?
