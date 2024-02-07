@@ -81,13 +81,16 @@ image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an in
 +
 image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
 
-To trigger this webhook from using `curl`, copy and paste this sample request and replace the URL and secret with the URL and secret that you generated in the prevoius step:
+To trigger this webhook using `curl`, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 
-`curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/6ccfca1c-5ed6-4dcf-96ca-374969d6edcb?secret=insertSecret'`
+NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
 
-Note that if triggering via `cURL`, you must use a `POST` request with `content-type: application/json`.
+[,shell]
+----
+curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
+----
 
-See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].   
+See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
