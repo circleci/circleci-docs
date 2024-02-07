@@ -10,6 +10,7 @@ contentTags:
 :page-description: How to configure object storage through MinIO to run CircleCI server in an air-gapped environment.
 :icons: font
 :experimental:
+:circleci-agent-version: 1.0.213499-server-4.1-ecdb045d
 
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO
@@ -33,39 +34,28 @@ image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket acces
 
 [#copy-circleci-build-agent]
 == 2. Copy the CircleCI build agent
-Copy the latest CircleCI build agent into MinIO within your air-gapped environment.
-
-[#download-latest-release-txt]
-=== a. Download the latest release.txt file
-Download the latest link:https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
-
-[source, bash]
-----
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt
-----
+Copy the pinned CircleCI build agent into MinIO within your air-gapped environment.
 
 [#copy-release-txt]
-=== b. Copy the release.txt file to MinIO
-Copy the `release.txt` file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
+=== a. Create a release.txt file and copy to MinIO
+Create a `release.txt` file with the value `{circleci-agent-version}`. Copy this file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
 
-[#retrieve-latest-release-bin]
-=== c. Retrieve the latest release binary
-Using the `release.txt` file, retrieve and download the latest `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
+[#retrieve-pinned-agent-bin]
+=== b. Retrieve the pinned agent binary
+Retrieve and download the latest `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
 
-[source, bash]
+[source, bash,subs="attributes+"]
 ----
-LATEST_RELEASE=$(cat release.txt)
-
 # Download circleci-agent
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/linux/amd64/circleci-agent
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/{circleci-agent-version}/linux/amd64/circleci-agent
 
 # Download checksums
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/checksums.txt
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/{circleci-agent-version}/checksums.txt
 ----
 
 [#create-release-dir]
 === d. Create a release directory in the circleci-data bucket
-Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In this example, a directory is created at the root of `circleci-data` in MinIO with the following name: `1.0.164633-f867f14f`
+Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In this example, a directory is created at the root of `circleci-data` in MinIO with the following name: `{circleci-agent-version}`
 
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
@@ -73,11 +63,12 @@ image::./minio/minio_create_release_dir.png[Creating a directory in the circleci
 === e. Upload the checksums.txt file to the newly created directory.
 Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in MinIO nested under the newly created release directory (step d).
 
-[source,shell]
+[source,shell,subs="attributes+"]
 ----
 # The structure of the directory should now look like this
-1.0.164633-f867f14f/
+{circleci-agent-version}/
 └── checksums.txt
+
 ----
 
 image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
@@ -86,10 +77,10 @@ image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the relea
 === f. Create two new subdirectories in the release directory
 Within the release directory (step d), create two new nested subdirectories, first `linux`, and then within it, `amd64`.
 
-[source,shell]
+[source,shell,subs="attributes+"]
 ----
 # The structure of the directory of the bucket should look like this:
-1.0.164633-f867f14f/
+{circleci-agent-version}/
 ├── checksums.txt
 └── linux/
     └── amd64/
@@ -103,10 +94,10 @@ image::./minio/minio_create_amd_dir.png[Creating an amd dir]
 === g. Copy the downloaded circleci-agent file
 Copy the downloaded `circleci-agent` file (step c) to your virtual environment, and place it in the amd64 directory you just created.
 
-[source,shell]
+[source,shell,subs="attributes+"]
 ----
 # The final structure of the bucket should look similar to this:
-1.0.137184-db08738f/
+{circleci-agent-version}/
 ├── checksums.txt
 └── linux/
     └── amd64/
