@@ -43,7 +43,7 @@ The below sample uses the Android orb to run a single job.
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@x.y.z
+  android: circleci/android@2.4.0
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
@@ -53,6 +53,10 @@ workflows:
           # Use pre-steps and post-steps if necessary
           # to execute custom steps before and afer any of the built-in steps
           system-image: system-images;android-29;default;x86
+          executor:
+            name: android/android-machine
+            resource-class: large
+            tag: 2021.10.1
 ```
 
 [#more-complex-orb-usage]
@@ -66,13 +70,14 @@ This example shows how you can use more granular orb commands to achieve what th
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@x.y.z
+  android: circleci/android@2.4.0
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
       name: android/android-machine
       resource-class: large
+      tag: 2021.10.1
     steps:
       - checkout
       # Create an AVD named "myavd"
@@ -184,11 +189,11 @@ workflows:
 {% endraw %}
 
 [#using-the-android-image-on-server-v3x]
-=== Using the android image on server v3.x
+=== Using the android image on server
 
-**Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
+NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
-From CircleCI server 3.4, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+From CircleCI server 3.4+, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
 
 ```yaml
 version: 2.1

@@ -60,9 +60,10 @@ For a self-hosted runner, ensure that you have an `ssh-agent` on your system to 
 
 [source,yaml]
 ----
-version: 2.1
 jobs:
   deploy-job:
+    docker:
+      - image: cimg/base:2022.09
     steps:
       - add_ssh_keys:
           fingerprints:
