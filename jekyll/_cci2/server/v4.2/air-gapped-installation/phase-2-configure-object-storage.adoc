@@ -34,7 +34,7 @@ image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket acces
 
 [#copy-circleci-build-agent]
 == 2. Copy the CircleCI build agent
-Copy the pinned CircleCI build agent into MinIO within your air-gapped environment.
+Follow the steps in this section to copy the pinned CircleCI build agent into MinIO within your air-gapped environment.
 
 [#retrieve-pinned-agent-version]
 === a. Extract the pinned agent version from the Helm chart
@@ -43,13 +43,13 @@ Fetch the `circleci-server` Helm chart and extract the pinned agent version from
 [source, bash]
 ----
 # Fetch the Helm chart for inspection. Replace `<version>` with the full version of CircleCI server.
-$ helm fetch oci://cciserver.azurecr.io/circleci-server --version <version> --untar
+helm fetch oci://cciserver.azurecr.io/circleci-server --version <version> --untar
 
 # Set `$CIRCLE_AGENT_VERSION` to the value of `circleci/picard` in `images.yaml`.
-$ export CIRCLE_AGENT_VERSION=$(grep 'circleci/picard:' ./circleci-server/images.yaml | cut -d' ' -f2)
+export CIRCLE_AGENT_VERSION=$(grep 'circleci/picard:' ./circleci-server/images.yaml | cut -d' ' -f2)
 
 # Verify `$CIRCLE_AGENT_VERSION` is set. The value should be similar in form to `1.0.217358-0b5336a7`.
-$ echo $CIRCLE_AGENT_VERSION
+echo $CIRCLE_AGENT_VERSION
 ----
 
 [#copy-release-txt]
