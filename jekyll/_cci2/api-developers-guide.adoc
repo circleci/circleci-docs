@@ -203,19 +203,19 @@ Many of the API calls make use of the `+{project-slug}+` triplet, described <<ge
 +
 [,yaml]
 ----
- # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/configuration-reference
- version: 2.1
- # Use a package of configuration called an orb.
- orbs:
-   # Declare a dependency on the node orb
-   node: circleci/node@4.7.0
-   # Orchestrate or schedule a set of jobs
-   workflows:
-   # Name the workflow "test_my_app"
-     test_my_app:
-   # Run the node/test job in its own container
-       jobs:
-       - node/test
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+# Declare a dependency on the node orb
+  node: circleci/node@4.7.0
+# Orchestrate or schedule a set of jobs
+workflows:
+# Name the workflow "test_my_app"
+  test_my_app:
+# Run the node/test job in its own container
+    jobs:
+      - node/test
 ----
 
 . Add an API token from the link:https://circleci.com/account/api[Personal API Tokens page]. Be sure to write down and store your API token in a secure place once you generate it.
@@ -302,23 +302,24 @@ While this alone can be useful, we want to be able to customize parameters of th
 
 . Let us move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key.
  +
- First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
+First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 +
 [,yaml]
 ----
-   version: 2.1
-   jobs:
-     build:
-       docker:
-         - image: "circleci/node:<< pipeline.parameters.image-tag >>"
-       environment:
-         IMAGETAG: "<< pipeline.parameters.image-tag >>"
-       steps:
-         - run: echo "Image tag used was ${IMAGETAG}"
-   parameters:
-     image-tag:
-       default: latest
-       type: string
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: "circleci/node:<< pipeline.parameters.image-tag >>"
+    environment:
+      IMAGETAG: "<< pipeline.parameters.image-tag >>"
+    steps:
+      - run: echo "Image tag used was ${IMAGETAG}"
+parameters:
+  image-tag:
+    default: latest
+    type: string
 ----
 +
 You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we define an `image-tag` to be expected in the JSON payload of a POST request to the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a new pipeline] endpoint.
@@ -364,26 +365,26 @@ To return project details, perform the following steps:
 +
 [,shell]
 ----
-   curl -X GET https://circleci.com/api/v2/project/{project_slug} \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --header "Circle-Token: $CIRCLE_TOKEN" \
+curl -X GET https://circleci.com/api/v2/project/{project_slug} \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 
 . After passing the `project-slug` parameter and making the API request, you will receive unformatted JSON text similar to the example shown below.
 +
 [,json]
 ----
- {
-   "slug": "gh/CircleCI-Public/api-preview-docs",
-   "name": "api-preview-docs",
-   "organization_name": "CircleCI-Public",
-   "vcs_info": {
-     "vcs_url": "https://github.com/CircleCI-Public/api-preview-docs",
-     "provider": "GitHub",
-     "default_branch": "master"
-   }
- }
+{
+  "slug": "gh/CircleCI-Public/api-preview-docs",
+  "name": "api-preview-docs",
+  "organization_name": "CircleCI-Public",
+  "vcs_info": {
+    "vcs_url": "https://github.com/CircleCI-Public/api-preview-docs",
+    "provider": "GitHub",
+    "default_branch": "master"
+  }
+}
 ----
 
 Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, refer to the link:https://circleci.com/docs/api/v2/#get-a-project[Get Project Details] section of the _CircleCI API v2 Reference Guide_.
@@ -408,59 +409,59 @@ To return job details, perform the following steps:
 +
 [,shell]
 ----
-   curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
-     --header "Content-Type: application/json" \
-     --header "Accept: application/json" \
-     --header "Circle-Token: $CIRCLE_TOKEN" \
+curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 
 . After passing the parameters and making the API request, you will receive unformatted JSON text similar to the example shown below.
 +
 [,json]
 ----
-   {
-   "web_url": "string",
-   "project": {
-     "slug": "gh/CircleCI-Public/api-preview-docs",
-     "name": "api-preview-docs",
-     "external_url": "https://github.com/CircleCI-Public/api-preview-docs"
-   },
-   "parallel_runs": [{
-     "index": 0,
-     "status": "string"
-   }],
-   "started_at": "2020-01-24T11:33:40Z",
-   "latest_workflow": {
-     "id": "string",
-     "name": "build-and-test"
-   },
-   "name": "string",
-   "executor": {
-     "type": "string",
-     "resource_class": "string"
-   },
-   "parallelism": 0,
-   "status": null,
-   "number": 0,
-   "pipeline": {
-     "id": "string"
-   },
-   "duration": 0,
-   "created_at": "2020-01-13T18:51:40Z",
-   "messages": [{
-     "type": "string",
-     "message": "string",
-     "reason": "string"
-   }],
-   "contexts": [{
-     "name": "string"
-   }],
-   "organization": {
-     "name": "string"
-   },
-   "queued_at": "2020-01-13T18:51:40Z",
-   "stopped_at": "2020-01-13T18:51:40Z"
- }
+  {
+  "web_url": "string",
+  "project": {
+    "slug": "gh/CircleCI-Public/api-preview-docs",
+    "name": "api-preview-docs",
+    "external_url": "https://github.com/CircleCI-Public/api-preview-docs"
+  },
+  "parallel_runs": [{
+    "index": 0,
+    "status": "string"
+  }],
+  "started_at": "2020-01-24T11:33:40Z",
+  "latest_workflow": {
+    "id": "string",
+    "name": "build-and-test"
+  },
+  "name": "string",
+  "executor": {
+    "type": "string",
+    "resource_class": "string"
+  },
+  "parallelism": 0,
+  "status": null,
+  "number": 0,
+  "pipeline": {
+    "id": "string"
+  },
+  "duration": 0,
+  "created_at": "2020-01-13T18:51:40Z",
+  "messages": [{
+    "type": "string",
+    "message": "string",
+    "reason": "string"
+  }],
+  "contexts": [{
+    "name": "string"
+  }],
+  "organization": {
+    "name": "string"
+  },
+  "queued_at": "2020-01-13T18:51:40Z",
+  "stopped_at": "2020-01-13T18:51:40Z"
+}
 ----
 
 Notice in the example above that you will receive very specific information about your job:
@@ -485,7 +486,7 @@ The following section details the steps you need to follow to download artifacts
 +
 [,shell]
 ----
- export CIRCLE_TOKEN={your_api_token}
+export CIRCLE_TOKEN={your_api_token}
 ----
 
 . Retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
@@ -555,10 +556,10 @@ NOTE: Whenever you see curly brackets `{}`, this represents a variable that you 
 +
 [,shell]
 ----
- curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
- --header "Content-Type: application/json"
- --header "Accept: application/json"
- --header "Circle-Token: $CIRCLE_TOKEN"
+curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
+--header "Content-Type: application/json"
+--header "Accept: application/json"
+--header "Circle-Token: $CIRCLE_TOKEN"
 ----
 
 . After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
