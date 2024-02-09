@@ -21,9 +21,7 @@ CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization sinc
 . **Resource Classes** - You can use various different xref:optimizations#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
 . **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[splitting workloads] between different containers.
 
-https://circleci.com/signup/[Sign up for a free account today], or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
-
-NOTE: If you have Premium or Advanced Support, please reach out to mailto:customersuccess@circleci.com[customersuccess@circleci.com] for a more tailored migration plan with Gantt charts, custom trainings etc.
+https://circleci.com/signup/[Sign up for a free account today].
 
 [#project-migration-methodology]
 == Project migration methodology
