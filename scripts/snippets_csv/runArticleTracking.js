@@ -15,7 +15,7 @@ const addToDataTotal = async (filePath, lineStart, lineStop) => {
   // We need to be careful to not have our file names use .md or .adoc in them except as file extensions
   let pageName = (filePath.substring(filePath.lastIndexOf("/") + 1, filePath.length)).replace('.md', '').replace('.adoc', '');
   let linkToDocs = 'https://circleci.com/docs/2.0/' + pageName;
-  
+
   let info = {
     pageName: pageName,
     lines: `${lineStart}-${lineStop}`,
@@ -87,7 +87,7 @@ export const articleTracking = async () => {
         let isSingleLineCode = (hit.line.match(/```/g) || []).length === 2;
         // Don't record snippits that are CLI/API commands and responses
         let skip = (hit.line.match(/```shell/g) || []).length === 1;
-        
+
         if(!skip) {
           if (isSingleLineCode) {
             promises.push(addToDataTotal(file, hit.lineNo, hit.lineNo));

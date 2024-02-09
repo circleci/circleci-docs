@@ -59,7 +59,7 @@ const addToData = async (filePath, lineStart, lineStop) => {
 
   return info;
 };
-    
+
 export const snippetTracking = async () => {
   console.log('exploreSingle')
   const files = await glob(
