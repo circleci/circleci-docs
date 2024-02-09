@@ -24,7 +24,7 @@ The first step is to uninstall launch-agent. If the agent has been installed as 
 
 [,shell]
 ----
-sudo launchtl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 sudo rm -f '/Library/LaunchDaemons/com.circleci.runner.plist'
 sudo rm -rf '/opt/circleci'
 ----
