@@ -11,6 +11,9 @@ contentTags:
 
 A YAML file is used to configure the machine runner, how it communicates with CircleCI's servers, and how it will launch the task-agent. This page explains all available parameters.
 
+[#introduction]
+== Introduction
+
 The configuration file uses the following format with the various parameters explained in more detail below, and is by default located at `/etc/circleci-runner/circleci-runner-config.yaml` on Linux machines.
 
 ```yaml

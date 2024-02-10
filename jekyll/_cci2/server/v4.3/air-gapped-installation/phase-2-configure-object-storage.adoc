@@ -34,39 +34,44 @@ image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket acces
 
 [#copy-circleci-build-agent]
 == 2. Copy the CircleCI build agent
-Copy the latest CircleCI build agent into MinIO within your air-gapped environment.
+Follow the steps in this section to copy the pinned CircleCI build agent into MinIO within your air-gapped environment.
 
-[#download-latest-release-txt]
-=== a. Download the latest release.txt file
-Download the latest link:https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
+[#retrieve-pinned-agent-version]
+=== a. Extract the pinned agent version from the Helm chart
+Fetch the `circleci-server` Helm chart and extract the pinned agent version from it. Set this to the environment variable `$CIRCLE_AGENT_VERSION` so that it can be referenced in later steps.
 
 [source, bash]
 ----
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt
+# Fetch the Helm chart for inspection. Replace `<version>` with the full version of CircleCI server.
+helm fetch oci://cciserver.azurecr.io/circleci-server --version <version> --untar
+
+# Set `$CIRCLE_AGENT_VERSION` to the value of `circleci/picard` in `images.yaml`.
+export CIRCLE_AGENT_VERSION=$(grep 'circleci/picard:' ./circleci-server/images.yaml | cut -d' ' -f2)
+
+# Verify `$CIRCLE_AGENT_VERSION` is set. The value should be similar in form to `1.0.217358-0b5336a7`.
+echo $CIRCLE_AGENT_VERSION
 ----
 
 [#copy-release-txt]
-=== b. Copy the release.txt file to MinIO
-Copy the `release.txt` file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
+=== b. Create a release.txt file and copy to MinIO
+Create a `release.txt` file with the value of `$CIRCLE_AGENT_VERSION`. Copy this file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
 
-[#retrieve-latest-release-bin]
-=== c. Retrieve the latest release binary
-Using the `release.txt` file, retrieve and download the latest `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
+[#retrieve-pinned-agent-bin]
+=== c. Retrieve the pinned agent binary
+Retrieve and download the pinned `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
 
 [source, bash]
 ----
-LATEST_RELEASE=$(cat release.txt)
-
 # Download circleci-agent
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/linux/amd64/circleci-agent
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/linux/amd64/circleci-agent
 
 # Download checksums
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/checksums.txt
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/checksums.txt
 ----
 
 [#create-release-dir]
 === d. Create a release directory in the circleci-data bucket
-Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In this example, a directory is created at the root of `circleci-data` in MinIO with the following name: `1.0.164633-f867f14f`
+Using the version specified by `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In the following examples, a directory is created at the root of `circleci-data` in MinIO with the name `$CIRCLE_AGENT_VERSION`. Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
 
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
@@ -76,8 +81,9 @@ Copy the downloaded `checksums.txt` file (step c) to your virtual environment, a
 
 [source,shell]
 ----
-# The structure of the directory should now look like this
-1.0.164633-f867f14f/
+# The structure of the directory should now look like this.
+# Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
+$CIRCLE_AGENT_VERSION/
 └── checksums.txt
 ----
 
@@ -90,7 +96,7 @@ Within the release directory (step d), create two new nested subdirectories, fir
 [source,shell]
 ----
 # The structure of the directory of the bucket should look like this:
-1.0.164633-f867f14f/
+$CIRCLE_AGENT_VERSION/
 ├── checksums.txt
 └── linux/
     └── amd64/
@@ -107,7 +113,7 @@ Copy the downloaded `circleci-agent` file (step c) to your virtual environment, 
 [source,shell]
 ----
 # The final structure of the bucket should look similar to this:
-1.0.137184-db08738f/
+$CIRCLE_AGENT_VERSION/
 ├── checksums.txt
 └── linux/
     └── amd64/

@@ -61,7 +61,7 @@ NOTE: You may see a notification indicating a background item for Circle Interne
 brew install circleci-runner
 ----
 
-. Open the runner `config.yaml` file with the text editor of your choice, and modify the `[[RUNNER_NAME]]` and `[[RESOURCE_CLASS_TOKEN]]` template values.
+. Open the runner `config.yaml` file with the text editor of your choice, and modify the `runner.name` and `api.auth_token` values.
 +
 [,shell]
 ----
@@ -77,8 +77,22 @@ runner:
 api:
   auth_token: "your-auth-token"
 ----
+Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
 
-. Replace `[[RESOURCE_CLASS_TOKEN]]` with the token generated in the steps above, and choose a name for your runner.
+. If you are using CircleCI server you will need to provide the url for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
++
+```shell
+export CIRCLECI_RUNNER_API_URL="your server domain"
+```
++
+Or by adding the url to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
++
+```yaml
+api:
+  auth_token: "your-auth-token"
+  # On server, set url to the hostname of your server installation.
+  url: https://your.domain.here
+```
 
 [#migrate-existing-configuration-files]
 === Migrate existing configuration files

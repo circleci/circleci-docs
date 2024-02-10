@@ -36,7 +36,7 @@ CircleCI is a modern CI/CD tool aimed at performance and developer productivity.
 **Flexibility**:: CircleCI is vendor and tool-agnostic. Our config allows integration with any platform or cloud provider that has an API. See our https://circleci.com/integrations/[integrations page] for existing partnerships. Dependencies and libraries can be installed ad-hoc in your job, and we offer https://circleci.com/docs/caching/[dependency caching] to speed up subsequent builds.
 **Shareable, Reusable Configuration**:: Steps, execution environments, and jobs can be templated, parameterized, shared, and reused across different projects and teams using https://circleci.com/docs/orb-intro/#section=configuration[CircleCI orbs]. Take advantage of the https://circleci.com/developer/orbs[numerous integrations and orbs] already written for you.
 
-We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out.
 
 [#concepts]
 == Concepts

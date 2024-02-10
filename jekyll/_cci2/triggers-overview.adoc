@@ -81,9 +81,27 @@ image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an in
 +
 image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
 
-Below is an example of how you would set up the webhook trigger in Hugging Face:
+To trigger this webhook using `curl`, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 
-image::triggers/inbound-webhooks-hugging-face-setup.png[screenshot showing inbound webhook trigger Hugging Face setup]
+NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
+
+[,shell]
+----
+curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
+----
+
+See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
+
+[#trigger-a-pipeline-from-vs-code-with-unversioned-config]
+== Trigger a pipeline from VS Code with unversioned config
+
+NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ config is currently in **Open Preview**.
+
+Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
+
+For full details, see the xref:vs-code-extension-overview#test-run-your-config-from-vs-code[VS Code extension overview].
+
+image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
 
 [#schedule-a-pipeline]
 == Schedule a pipeline

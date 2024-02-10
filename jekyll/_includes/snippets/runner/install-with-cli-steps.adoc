@@ -7,7 +7,7 @@ endif::[]
 
 In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below. Please note that to create resource classes and tokens you need to be an organization administrator in the VCS provider.
 
-You can view your installed runners on the inventory page in the https://app.circleci.com/[web app], by clicking *Self-Hosted Runners* on the left navigation.
+You can view your installed runners on the inventory page in the https://app.circleci.com/[web app] or your CircleCI server app, by clicking *Self-Hosted Runners* on the left navigation.
 
 . Create a namespace for your organization's self-hosted runners. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI organization's account name. If you already use orbs, this namespace should be the same namespace orbs use.
 +
