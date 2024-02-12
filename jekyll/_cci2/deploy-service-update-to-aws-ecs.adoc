@@ -14,7 +14,7 @@ document-type:
 :icons: font
 :experimental:
 
-In this how-to guide, you will learn how to to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
+In this how-to guide, you will learn how to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
 
 [#introduction]
 == Introduction
@@ -36,7 +36,7 @@ NOTE: the `CIRCLE_SHA1` variable used in this example is built-in, so it is alwa
 [#specify-a-version]
 == 2. Specify a version
 
-Every CircleCI `config.yml`` starts with the version key. This key is used to issue warnings about breaking changes.
+Every CircleCI `config.yml` starts with the version key. This key is used to issue warnings about breaking changes.
 
 [source,yaml]
 ----
@@ -53,9 +53,9 @@ In this example you will need to use three orbs in your configuration. Add them 
 [source,yaml]
 ----
 orbs:
-  aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
-  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+  aws-ecr: circleci/aws-ecr@9.0.2 # use the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@4.0.0 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@4.1.2 # use the AWS CLI orb
 ----
 
 TIP: When using orbs, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your project.
@@ -85,14 +85,26 @@ workflows:
   build-and-deploy:
     jobs:
       - aws-ecr/build-and-push-image: # orb built-in job
-          repo: '${MY_APP_PREFIX}'
-          tag: '${CIRCLE_SHA1}'
+          auth:
+            - aws-cli/setup:
+                profile: OIDC-USER
+                role_arn: arn:aws:iam::123456789012:role/VALID_OIDC_ECR_ROLE
+          profile: OIDC-USER
+          region: AWS_REGION
+          registry_id: ${AWS_ECR_REGISTRY_ID}
+          repo: ${MY_APP_PREFIX}
+          tag: ${CIRCLE_SHA1}
       - aws-ecs/deploy-service-update: # orb built-in job
           requires:
             - aws-ecr/build-and-push-image
-          family: '${MY_APP_PREFIX}-service'
-          cluster: '${MY_APP_PREFIX}-cluster'
-          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+          auth:
+            - aws-cli/setup:
+                profile: OIDC-USER
+                role_arn: arn:aws:iam::123456789012:role/VALID_OIDC_ECS_ROLE
+          cluster: ${MY_APP_PREFIX}-cluster
+          container_image_name_updates: container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}
+          family: ${MY_APP_PREFIX}-service
+          profile: OIDC-USER
 ----
 
 For a full list of usage options and orb elements see the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS-ECS orb page] in the CircleCI orbs registry.
@@ -106,26 +118,29 @@ Once you have updated the Amazon ECS service, you can verify the update was corr
 ----
 jobs:
   verify-deployment:
-    executor: aws-cli/default
+    docker:
+      - image: cimg/python:3.10
     steps:
-      - aws-cli/install
       - aws-cli/setup:
-          aws-access-key-id: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_DEFAULT_REGION
-          aws-secret-access-key: AWS_DEFAULT_REGION
+          profile_name: OIDC-PROFILE
+          region: AWS_REGION
+          role_arn: arn:aws:iam::123456789012:role/OIDC_ARN
+          role_session_name: example-session-name
+          session_duration: '3600'
       - run:
-          name: Get last task definition
           command: >
             TASK_DEFINITION_ARN=$(aws ecs describe-task-definition \
-                --task-definition ${MY_APP_PREFIX}-service \
+                --task_definition ${MY_APP_PREFIX}-service \
                 --output text \
-                --query 'taskDefinition.taskDefinitionArn')
+                --query 'taskDefinition.taskDefinitionArn' \
+                --profile default)
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            "$BASH_ENV"
-      - aws-ecs/verify-revision-is-deployed:
-          family: '${MY_APP_PREFIX}-service'
-          cluster: '${MY_APP_PREFIX}-cluster'
-          task-definition-arn: '${TASK_DEFINITION_ARN}'
+            $BASH_ENV
+          name: Get last task definition
+      - aws-ecs/verify_revision_is_deployed:
+          cluster: ${MY_APP_PREFIX}-cluster
+          family: ${MY_APP_PREFIX}-service
+          task_definition_arn: ${TASK_DEFINITION_ARN}
 ----
 
 This section illustrates how you can use the orb to install and configure the AWS CLI, retrieve the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[task definition] that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb.
@@ -162,9 +177,9 @@ workflows:
 version: 2.1 # 2.1 config required to use orbs
 
 orbs:
-  aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
-  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+  aws-ecr: circleci/aws-ecr@9.0.2 # use the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@4.0.0 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@4.1.2 # use the AWS CLI orb
 
 jobs:
   verify-deployment:
