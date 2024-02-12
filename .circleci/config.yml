@@ -106,7 +106,8 @@ workflows:
     when:
       not: << pipeline.parameters.run-schedule >>
     jobs:
-      - vale/lint
+      - vale/lint:
+          reference_branch: master
       - build_api_docs
       - build:
           requires:
