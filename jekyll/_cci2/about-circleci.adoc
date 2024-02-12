@@ -15,7 +15,7 @@ contentTags:
 [#introduction]
 == Introduction
 
-CircleCI's mission is to manage change so software teams can innovate faster. CircleCI empowers technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. CircleCI provides enterprise-class support and services, and works where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers.
+CCCCCircleCI's mission is to manage change so software teams can innovate faster. CircleCI empowers technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. CircleCI provides enterprise-class support and services, and works where you work: Linux, macOS, Android, and Windows - in the cloud or on your servers.
 
 Build, test, and deploy by using intelligent automation.
 
