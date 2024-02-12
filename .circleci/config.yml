@@ -108,7 +108,6 @@ workflows:
     jobs:
       - vale/lint:
           reference_branch: master
-         # base_dir: ../jekyll/_cci2/
       - build_api_docs
       - build:
           requires:
