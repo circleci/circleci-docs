@@ -6,6 +6,7 @@ orbs:
   ruby: circleci/ruby@1.1.4
   node: circleci/node@4.7.0
   md-proofer: hubci/md-proofer@0.1
+  vale: circleci/vale@1.1.1
 
 # This is using the new Scheduled Pipeline feature.
 # Right now (10/2021) there is no UI to configure it, so if you need to
@@ -105,6 +106,7 @@ workflows:
     when:
       not: << pipeline.parameters.run-schedule >>
     jobs:
+      - vale/lint
       - build_api_docs
       - build:
           requires:
