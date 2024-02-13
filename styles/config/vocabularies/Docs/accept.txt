@@ -4,8 +4,7 @@ CircleCI cloud
 CircleCI server
 circleci.com
 OAuth
-boolean
-Boolean
+[Bb]oolean
 cron
 namespace
 hostname
@@ -84,3 +83,5 @@ XQuartz
 lockfile
 classpath
 Pipenv
+UUID
+UUIDs
