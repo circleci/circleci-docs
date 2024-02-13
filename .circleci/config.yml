@@ -103,8 +103,10 @@ commands:
 workflows:
 
   lint:
-    when:
-      not: << pipeline.parameters.run-schedule >>
+    unless:
+      and:
+        - equal: [ master, << pipeline.git.branch >> ]
+        - << pipeline.parameters.run-schedule >>
     jobs:
       - vale/lint:
           reference_branch: master
