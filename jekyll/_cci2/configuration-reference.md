@@ -2010,7 +2010,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 ---
 
 ###### **`branches`**
-{: #branches }
+{: #schedule-branches }
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
 
