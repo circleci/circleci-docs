@@ -104,7 +104,7 @@ workflows:
 
   lint:
     unless:
-      and:
+      or:
         - equal: [ master, << pipeline.git.branch >> ]
         - << pipeline.parameters.run-schedule >>
     jobs:
