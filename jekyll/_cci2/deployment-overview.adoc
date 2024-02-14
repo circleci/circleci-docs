@@ -25,6 +25,8 @@ CircleCI can also be configured to integrate with other services for:
 
 Quickly customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
+NOTE: **Deploy to Kubernetes?** Refer to our xref:release/releases-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
+
 [#the-basics-of-deployment]
 == The basics of deployment
 
@@ -46,7 +48,7 @@ A manual approval button will then be available from the workflows map in the Ci
 == Using orbs to simplify deployment
 
 <<orb-intro#,Orbs>> are packages of reusable configuration.
-For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration. 
+For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
 Orbs are available for many common deployment targets.
 Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry].
 
