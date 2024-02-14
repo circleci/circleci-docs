@@ -105,7 +105,7 @@ Use the following how-to guides to deal with common use cases:
 * <<deploy-to-npm-registry#,Deploy to NPM registry>>
 * <<deploy-over-ssh#,Deploy over SSH>>
 * <<authorize-google-cloud-sdk#,Authorize Google Cloud SDK>>
-* <<publish-packages-to-packagecloud#,Publish packages to packagecloud>>
+* <<publish-packages-to-packagecloud#,Publish packages to Packagecloud>>
 
 Go to the link:https://circleci.com/developer/orbs[orbs registry] to simplify your configuration by using an orb for your deployment target.
 If the orb you need has not been created yet, consider <<orb-author-intro#,authoring one>>!
