@@ -29,13 +29,13 @@ config policy
 Config policies
 Config policy
 JUnit
-globbing
+[Gg]lobbing
 RSpec
 Gemfile
 stdin
 Gradle
 PHPUnit
-Globbing
+[Gg]lobbing
 Homebrew
 reprovision
 reprovisioned
@@ -84,3 +84,12 @@ XQuartz
 lockfile
 classpath
 Pipenv
+[Mm]onorepo
+[Mm]onorepos
+[Rr]ebase
+[Gg]it
+npm
+Gzip
+UID
+UIDs
+
