@@ -6,8 +6,6 @@ contentTags:
   - Server 3.x
 ---
 = Authorize Google Cloud SDK
-:categories: ["deploying"]
-:contentTags: {"platform"=>["Cloud", "Server 4.x", "Server 3.x"]}
 :description: How to authorize the Google Cloud SDK
 :experimental:
 :icons: font

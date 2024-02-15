@@ -12,25 +12,38 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
+<<<<<<< HEAD
 This page describes common methods for running and debugging browser testing in your CircleCI config.
+=======
+This document describes common methods for running and debugging browser testing in your CircleCI config.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#overview]
 == Overview
 
+<<<<<<< HEAD
 Every time you commit and push code, CircleCI automatically runs your tests against the browsers you choose. You can configure your browser-based tests to run:
 
 * On every change
 * Before every deployment
 * On a specified branch
+=======
+Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#prerequisites]
 == Prerequisites
 
+<<<<<<< HEAD
 Refer to the xref:circleci-images#[Pre-built CircleCI convenience images] and add `-browsers:` to the image name. This will give you a variant that includes Java 8, geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
+=======
+Refer to the xref:circleci-images#[Pre-built CircleCI convenience images] and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#selenium]
 == Selenium
 
+<<<<<<< HEAD
 Automation tools used for browser tests often use Selenium WebDriver, a widely-adopted browser driving standard.
 
 Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X server documentation.
@@ -41,6 +54,15 @@ WebDriver can operate in two modes, local, or remote:
 * When run remotely, your tests interact with a Selenium server, and the server drives the browsers.
 
 If Selenium is not included in your primary Docker image, install, and run Selenium as shown below:
+=======
+Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
+
+Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on set up. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X server documentation.
+
+WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run remotely, your tests interact with a Selenium server, and it is up to the server to drive the browsers.
+
+If Selenium is not included in your primary Docker image, install and run Selenium as shown below:
+>>>>>>> c08375d58 (convert browser-testing)
 
 {% include snippets/docker-auth.adoc %}
 
@@ -63,16 +85,28 @@ jobs:
           background: true
 ----
 
+<<<<<<< HEAD
 As an alternative, move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you do not have to spend time configuring a Selenium environment.
+=======
+As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don't have to spend time configuring a Selenium environment.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#lambdatest]
 == LambdaTest
 
+<<<<<<< HEAD
 link:https://www.lambdatest.com/[LambdaTest] integrates with CircleCI to boost your go-to-market delivery. Perform automated cross browser testing with LambdaTest. Ensure your development code renders seamlessly through an online Selenium grid providing 2000+ real browsers running through machines, on the cloud. Perform automation testing in parallel with LambdaTest's Selenium grid to drastically trim down your test cycles.
 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live. Lambda Tunnel executes a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
 LambdaTest has developed a link:https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel[CircleCI orb] for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to set up a Lambda tunnel and the define your test steps.
+=======
+link:https://www.lambdatest.com/[LambdaTest] now integrates with CircleCI to boost your go-to-market delivery. Perform automated cross browser testing with LambdaTest to ensure your development code renders seamlessly through an online Selenium grid providing 2000+ real browsers running through machines, on the cloud. Perform automation testing in parallel with LambdaTest's Selenium grid to drastically trim down your test cycles.
+
+LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live, by executing a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
+
+LambdaTest has developed a link:https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel[CircleCI orb] for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [,yaml]
 ----
@@ -91,15 +125,26 @@ jobs:
 [#sauce-labs]
 == Sauce Labs
 
+<<<<<<< HEAD
 Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI. Use `saucectl` to execute tests directly from a variety of JavaScript frameworks.
 
 [#saucectl]
 === `saucectl`
+=======
+Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI, which can be used to execute tests directly from a variety of JavaScript frameworks.
+
+[#saucectl]
+=== saucectl
+>>>>>>> c08375d58 (convert browser-testing)
 
 If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using link:https://docs.saucelabs.com/testrunner-toolkit[`saucectl`] with the JS framework of your choice, and then integrating the link:https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run[saucectl-run orb] in your CircleCI workflow.
 
 . Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as xref:env-vars#[environment variables] in your Circle CI project.
+<<<<<<< HEAD
 . Edit your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
+=======
+. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [,yaml]
 ----
@@ -127,16 +172,28 @@ workflows:
 [#browserstack-and-appium]
 == BrowserStack and Appium
 
+<<<<<<< HEAD
 Following the example above, you can replace the installation of Sauce Labs with another cross-browser testing platform, such as BrowserStack. Then, set the `USERNAME` and `ACCESS_KEY` xref:env-vars#[environment variables] to those associated with your BrowserStack account.
 
 For mobile applications, you can use Appium or an equivalent platform that uses the WebDriver protocol. To do this, install Appium in your job, and use CircleCI xref:env-vars#[environment variables] for the `USERNAME` and `ACCESS_KEY`.
+=======
+As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the `USERNAME` and `ACCESS_KEY` xref:env-vars#[environment variables] to those associated with your BrowserStack account.
+
+For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI xref:env-vars#[environment variables] for the `USERNAME` and `ACCESS_KEY`.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#cypress]
 == Cypress
 
+<<<<<<< HEAD
 Another browser testing solution you can use in your JavaScript end-to-end testing is link:https://www.cypress.io/[Cypress]. Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application.
 
 To simplify this process, use the Cypress orb. You can run all Cypress tests without posting the results to your Cypress dashboard. The example below shows configuration for this scenario:
+=======
+Another browser testing solution you can use in your Javascript end-to-end testing is link:https://www.cypress.io/[Cypress]. Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application.
+
+To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [,yaml]
 ----
@@ -152,19 +209,33 @@ workflows:
           no-workspace: true
 ----
 
+<<<<<<< HEAD
 For more examples using the Cypress orb, refer to the link:https://circleci.com/developer/orbs/orb/cypress-io/cypress[Cypress orb] page in the CircleCI orbs registry.
+=======
+There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the link:https://circleci.com/developer/orbs/orb/cypress-io/cypress[Cypress Orbs] page in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#debugging-browser-tests]
 == Debugging browser tests
 
+<<<<<<< HEAD
 This section provides some examples of how to debug browser tests on CircleCI.
+=======
+Integration tests can be hard to debug, especially when they are running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#using-screenshots-and-artifacts]
 === Using screenshots and artifacts
 
+<<<<<<< HEAD
 Configure CircleCI to collect xref:artifacts#[build artifacts] and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the xref:configuration-reference#storeartifacts[`store_artifacts` section] of the configuration reference for an example.
 
 Saving screenshots is supported by most test suites, and is a built-in feature in WebKit and Selenium:
+=======
+CircleCI may be configured to collect xref:artifacts#[build artifacts] and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the xref:configuration-reference#storeartifacts[store_artifacts] section of the Configuring CircleCI document for an example.
+
+Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and is supported by most test suites:
+>>>>>>> c08375d58 (convert browser-testing)
 
 * link:http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver[Manually, using Selenium directly]
 * link:https://github.com/mattheworiordan/capybara-screenshot[Automatically on failure, using Cucumber]
@@ -173,16 +244,26 @@ Saving screenshots is supported by most test suites, and is a built-in feature i
 [#using-a-local-browser-to-access-http-server-on-circleci]
 === Using a local browser to access HTTP server on CircleCI
 
+<<<<<<< HEAD
 If your test runs an HTTP server on CircleCI, use a browser running on your local machine to debug a failing test. You can do this with an SSH-enabled run.
 
 . Run an SSH build using the btn:[Rerun Job with SSH] button on the *Job page* of the CircleCI app. The command to log into the container over SSH is as follows:
+=======
+If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
+
+. Run an SSH build using the Rerun Job with SSH button on the *Job page* of the CircleCI app. The command to log into the container over SSH is as follows:
+>>>>>>> c08375d58 (convert browser-testing)
 +
 [,shell]
 ----
 ssh -p 64625 ubuntu@54.221.135.43
 ----
 
+<<<<<<< HEAD
 . To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `+http://localhost:3000+` on your local browser to port `8080` on the CircleCI container. An example use case for this would be if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request `\http://localhost:3000`, you should see whatever is served on port 8080 of the container.
+=======
+. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `+http://localhost:3000+` on your local browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
+>>>>>>> c08375d58 (convert browser-testing)
 +
 NOTE: Update `8080` to be the port you are running on the CircleCI container.
 +
@@ -193,7 +274,11 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 
 . Then, open your browser on your local machine and navigate to `+http://localhost:3000+` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
 
+<<<<<<< HEAD
 This is a good way to debug when setting up Selenium tests.
+=======
+This is a very easy way to debug things when setting up Selenium tests, for example.
+>>>>>>> c08375d58 (convert browser-testing)
 
 [#interacting-with-the-browser-over-vnc]
 === Interacting with the browser over VNC
