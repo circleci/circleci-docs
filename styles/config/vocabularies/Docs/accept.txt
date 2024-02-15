@@ -29,7 +29,6 @@ config policy
 Config policies
 Config policy
 JUnit
-[Gg]lobbing
 RSpec
 Gemfile
 stdin
