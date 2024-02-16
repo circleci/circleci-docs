@@ -41,3 +41,4 @@ exceptions:
   - AWS
   - Route 53
   - OIDC
+  - PHP
