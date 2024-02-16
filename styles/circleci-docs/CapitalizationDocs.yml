@@ -42,3 +42,4 @@ exceptions:
   - Route 53
   - OIDC
   - PHP
+  - VS Code

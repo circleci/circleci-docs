@@ -92,4 +92,5 @@ Gzip
 UID
 UIDs
 Codecov
-
+[Tt]ooltip
+[Tt]ooltips
