@@ -39,7 +39,8 @@ Next, follow these steps to create a new release from your changes.
 . *Open a new Pull Request to the default branch.*
 +
 The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory automatically xref:testing-orbs#yaml-lint[lint], xref:testing-orbs#shellcheck[ShellCheck], xref:testing-orbs#review[review], and xref:testing-orbs#integration-testing[test] your orb changes in the CircleCI web app.
-. *Ensure all tests pass.* +
+. *Ensure all tests pass.*
++
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.
 Notice there are two workflows, `lint-pack` will run first and contains our linting, ShellCheck, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
 +
@@ -52,7 +53,8 @@ Examples:
 ** `fix: x-command parameter from string to integer`
 ** `feat: added new x parameter to y command`
 
-. *Tag and Release!* +
+. *Tag and Release!*
++
 Your changes have now been merged to the default branch, but if you check the link:https://circleci.com/developer/orbs[Orb Registry], you will see no new versions have been published.
 
 To publish a new version of our orb, you need to tag your release. A tag can be created and pushed manually, however we recommend using link:https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release[GitHub.com's Releases feature].
@@ -62,7 +64,7 @@ Using GitHub's Releases feature will allows you to publish "Release Notes", whic
 Follow the GitHub docs to create a new release.
 
 . When asked to select a tag, specify the new tag that will be published with this release. Double check the current orb version in the link:https://circleci.com/developer/orbs[Orb Registry]. If you are unsure of what type of change you are making, we will have an opportunity to correct this in a moment. Ensure your tag fits the format `vX.Y.Z`
-. Click the "+ Auto-generate release notes" button. A summary of changes will be generated for you, containing any pull requests which have been merged since the last release. If you have used link:https://www.conventionalcommits.org/[Conventional Commit messages], it should be easy to determine the semantic increment change based on the commit message. For instance, if we had two commits prefixed with "fix:", we would expect the semantic version to increment by a "patch" level.
+. Click the `+ Auto-generate release notes` button. A summary of changes will be generated for you, containing any pull requests which have been merged since the last release. If you have used link:https://www.conventionalcommits.org/[Conventional Commit messages], it should be easy to determine the semantic increment change based on the commit message. For instance, if we had two commits prefixed with "fix:", we would expect the semantic version to increment by a "patch" level.
 . Add your title, and publish the release.
 . Complete!
 
