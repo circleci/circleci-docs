@@ -43,3 +43,5 @@ exceptions:
   - OIDC
   - PHP
   - VS Code
+  - CLI
+  - API
