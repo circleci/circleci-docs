@@ -129,6 +129,7 @@ docker build <path-to-dockerfile>
 
 You will see how all commands specified in you Dockerfile are executed. If there are any errors they will be displayed and you will need to fix them before continuing. If the build is successful you will have something like this at the end:
 
+[,shell]
 ----
 ...
 Successfully built e32703162dd4
