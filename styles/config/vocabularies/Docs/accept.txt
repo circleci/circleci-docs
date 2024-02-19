@@ -85,3 +85,5 @@ Codecov
 [Tt]ooltips?
 Artifactory
 Packagecloud
+Dockerfiles?
+Docker's
