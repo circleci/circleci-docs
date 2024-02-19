@@ -54,7 +54,13 @@ a| The subject. This identifies who is running the CircleCI job and where. `$CIR
 
 For `$CIRCLE_OIDC_TOKEN` its value is: `"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
-For `$CIRCLE_OIDC_TOKEN_V2` its value is: `"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repo URL and reference to the change that caused the job to run.
+For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:triggers-overview#[trigger]:
+
+* If the trigger is an xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[inbound webhook] then:
+`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+
+* Otherwise it will be:
+`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repo URL and reference to the change that caused the job to run.
 
 | `aud`
 | The audience. Currently, this is a fixed value `"ORGANIZATION_ID"`, a string containing a UUID that identifies the job's project's organization.
@@ -79,10 +85,10 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repo that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`.
+| The URL of the repo that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by inbound webhooks.
 
 | `oidc.circleci.com/vcs-ref`
-| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`.
+| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by inbound webhooks.
 
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
