@@ -233,7 +233,7 @@ gem 'rspec_junit_formatter'
 [#configure-a-job-running-cypress-tests]
 === Configure a job running Cypress tests
 
-. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter] (note this is a 3rd party tool that is not maintained by CircleCI).  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
+. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter` package] (note this is a 3rd party tool that is not maintained by CircleCI).  You can install in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
 +
 ```yaml
   #add required reporters (or add to package.json)
@@ -706,7 +706,7 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Question:** Can I use the `--record` functionality with Cypress and "rerun failed tests"?
 
-**Answer:** Yes, you can pass the `--group` flag to Cypress and the `--ci-build-id` flag to group the results of CircleCi's parallelization.  Because the name passed to `--group` must be unique within the run, you can use CircleCI's built-in environment variables:
+**Answer:** Yes, you can pass the `--group` flag to Cypress and the `--ci-build-id` flag to group the results of CircleCI's parallelization.  Because the name passed to `--group` must be unique within the run, you can use CircleCI's built-in environment variables:
 
 [,shell]
 ----
