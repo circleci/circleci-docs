@@ -79,3 +79,7 @@ classpath
 Pipenv
 Artifactory
 Packagecloud
+minitest
+.circleci/config.yml
+classname?
+[Pp]arallelization
