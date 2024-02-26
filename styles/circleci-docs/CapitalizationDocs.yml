@@ -45,3 +45,6 @@ exceptions:
   - VS Code
   - CLI
   - API
+  - Google Cloud
+  - SDK
+  - Google Container Registry
