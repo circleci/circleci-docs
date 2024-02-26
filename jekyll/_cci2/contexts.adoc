@@ -37,7 +37,7 @@ Be aware that organization members can create contexts, but only organization ad
 image::{{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png[Contexts]
 
 . Click the *Create Context* button to add a unique name for your context. Click the *Create Context* button in the dialog box to finalize. The new context will appear in a list with security set to `All members` to indicate that anyone in your organization can access this context at runtime.
-. You can now click on any context created in your list to add environment variables. Click on the *Add Environment Variable* button to enter the variable name and value you wish to associate with this context. Click the *Add Environment Variable* button in the dialog box to finialize.
+. You can now click on any context created in your list to add environment variables. Click on the *Add Environment Variable* button to enter the variable name and value you wish to associate with this context. Click the *Add Environment Variable* button in the dialog box to finalize.
 . Add the `context` key to the xref:configuration-reference#workflows[`workflows`] section of your `.circleci/config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
 [,yaml]
