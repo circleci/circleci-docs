@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Configure your Kubernetes components - Open preview
+= Configure your Kubernetes components
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.

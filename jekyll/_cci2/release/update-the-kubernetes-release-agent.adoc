@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Update the Kubernetes release agent - Open preview
+= Update the Kubernetes release agent
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to update the Kubernetes release agent for integrations with CircleCI releases

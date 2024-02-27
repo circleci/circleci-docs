@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Releases overview - Open preview
+= Releases overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn CircleCI releases for visibility into Kubernetes and Amazon SageMaker releases, how it works, and how to get set up

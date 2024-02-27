@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Set up a release environment - Open preview
+= Set up a release environment
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to set up a new CircleCI release environment and install the CircleCI release agent.
