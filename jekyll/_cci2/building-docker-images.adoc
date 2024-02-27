@@ -80,7 +80,7 @@ Below is a break down of what is happening during this build's execution:
 
 * All commands execute in the xref:glossary#primary-container[primary-container]. (line 5)
 * Once you call `setup_remote_docker`, all Docker-related commands execute locally. (line 12)
-* Enable xref:glossary#docker-layer-caching[Docker Layer Caching] (DLC) to speed up image building. (line 14)
+* Enable xref:glossary#docker-layer-caching[Docker Layer Caching] (DLC) to speed up image building. (line 13)
 * We use xref:set-environment-variable#set-an-environment-variable-in-a-project[project environment variables] to store credentials for Docker Hub. (line 19)
 
 [#resource-classes]
