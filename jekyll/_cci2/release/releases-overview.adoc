@@ -51,9 +51,66 @@ Configure a release environment to install the CircleCI release agent into your 
 
 Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
+[#the-releases-UI]
 == The releases UI
 
-#TO DO#
+The CircleCI releases UI is a powerful tool for visualising, monitoring and managing your releases. The pages included in the releases UI are described below.
+
+[#dashboard]
+=== The dashboard
+
+#INSERT SCREENSHOT OF RELEASES DASHBOARD#
+
+Select **Releases** in the CircleCI web app sidebar to enter the releases dashboard. The dashboard shows the following:
+
+* **Timeline**: A timeline of releases for all components in your release environment. You can use the filter drop down at the top to filter by component. Information you see here includes live status updates, release trigger source, release version, release type (for example, _progressive_, when you are using an Argo Rollout. From here you can access:
+** The release details page for a specific release by clicking on the status badge or version number
+** The component or release environment details pages by clicking on the respective names
+** The project dashboard for the CircleCI project associated with a release
+** The job details page in the CircleCI web app for the deployment job that kicked off the release
+** The commit details page in your VCS for the commit that started the deployment
+* **Environments**:  List of release environments set up for your organization. From here you can:
+** Access settings for each environment (icon:cog[])
+** Access the environment details view by clicking on the release environment name
+* **Components**: A list of components and their associated projects. From here you can:
+** Get straight to the component building on CircleCI
+** Access the component detail view
+
+=== View all releases for a release environment
+
+To view all releases for a release environment, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Environments** tab
+. Click to select your environment by name
+. You are now in the environments page. Select the **Releases** tab to view a list of all releases for your chosen environment
+
+=== View all commands run for a release environment
+
+To view all commands run for a release environment, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Environments** tab
+. Click to select your environment by name
+. You are now in the environments page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment
+
+=== View all releases for a component
+
+To view all releases for a release environment, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Components** tab
+. Click to select your component by name. You can use the filter at the top of the page to help
+. You are now in the component page. Select the **Releases** tab to view a list of all releases for your chosen component
+
+=== View all commands run for a component
+
+To view all commands run for a component, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Components** tab
+. Click to select your component by name. You can use the filter at the top of the page to help
+. You are now in the component page. Select the **Commands** tab to view a list of all commands run for your chosen component
 
 [#releases-requirements]
 == Requirements
