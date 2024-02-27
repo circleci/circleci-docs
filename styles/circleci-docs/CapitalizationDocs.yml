@@ -41,6 +41,9 @@ exceptions:
   - AWS
   - Route 53
   - OIDC
+  - OpenID Connect
+  - ID
+  - Google Cloud Platform
   - PHP
   - VS Code
   - CLI

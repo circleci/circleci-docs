@@ -75,6 +75,9 @@ XQuartz
 lockfile
 classpath
 Pipenv
+UUID
+UUIDs
+Packagecloud
 [Mm]onorepos?
 [Rr]ebase
 [Gg]it
