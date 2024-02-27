@@ -12,12 +12,12 @@ contentTags:
 
 NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
 
-Visualise and control your deployments with CircleCI release environments. The CircleCI releases feature currently supports deployments to Kubernetes, and Amazon SageMaker.
+Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and Amazon SageMaker are supported.
 
 [#introduction]
 == Introduction
 
-CircleCI release environments give you visibility into your Kubernetes deployments in the CircleCI web app, as well as access to commands for release management. From the CircleCI web app, you can:
+CircleCI releases gives you visibility into your Kubernetes deployments within the CircleCI web app, as well as access to commands and visualisations for release management. From the CircleCI web app, you can:
 
 * Restore version
 * Scale component
@@ -51,13 +51,17 @@ Configure a release environment to install the CircleCI release agent into your 
 
 Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
+== The releases UI
+
+#TO DO#
+
 [#releases-requirements]
 == Requirements
 
 [#tooling]
 === Tooling
 
-The following versions have been tested and proven to work. Older versions may work but are not guaranteed.
+We test the versions listed here. Older versions may work but are not guaranteed.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -129,7 +133,7 @@ The following table shows a complete list of labels and annotations either requi
 |`Metadata.Annotations`
 |`circleci.com/project-id`
 |Project ID for the CircleCI project associated with the job that deploys your component
-|No. Used to enable release management controls
+|Yes
 
 |`Metadata.Annotations`
 |`circleci.com/operation-timeout`
@@ -170,7 +174,7 @@ The following table shows a complete list of labels and annotations either requi
 [#releases-concepts]
 == Concepts
 
-The following sections describe concepts that will help you fully understand your release environment, and how releases fit with your CI/CD pipeline.
+The following sections describe concepts that will help you fully understand how CircleCI releases integration and capabilities.
 
 [#component]
 === Component
@@ -185,7 +189,7 @@ _Delivery_ is the act of packaging code changes and making them available for De
 [#deployment]
 === Deployment
 
-_Deployment_ is the act of putting a new component version into a particular environment, regardless of whether users and other services immediately interact with the new version or a previous one. Depending on the type of deployment, a release may happen as a later task (such as switching over traffic shaping rules for a blue/green deployment) or as a direct consequence of the deployment (such as a standard Kubernetes rolling update).
+_Deployment_ is the act of putting a new component version into an environment, regardless of whether users and other services interact with the new version or a previous one. Depending on the type of deployment, a release may happen as a later task (such as switching over traffic shaping rules for a blue/green deployment) or as a direct consequence of the deployment (such as a standard Kubernetes rolling update).
 
 [#command]
 === Command
@@ -247,7 +251,6 @@ Releases can be in one of the following states:
 
 A number of features and improvements are planned to be added through open preview and beyond:
 
-* Display release environment details in the CircleCI web app
 * Guided release environment setup experience in the CircleCI web app
 * link:https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/[Blue Green] deployments via Argo Rollouts
 * Connect releases to your CircleCI workflows

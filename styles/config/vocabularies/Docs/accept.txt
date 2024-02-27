@@ -1,7 +1,6 @@
 .circleci/config.yml
 [Aa]utoscalers?
 [Bb]oolean
-[Cc]onfig
 [Cc]onfig policies
 [Cc]onfig policy
 [Ee]nterprise
@@ -70,6 +69,7 @@ GKE
 Gradle
 Gzip
 HashiCorp
+Helm
 Homebrew
 hostname
 HPA
@@ -120,6 +120,7 @@ Terraform
 Tink
 TLS
 TypeScript
+UI
 UIDs?
 uncheck
 unencrypted

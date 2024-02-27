@@ -12,7 +12,7 @@ contentTags:
 
 NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
 
-Visualise and control deployments to your Kubernetes cluster with CircleCI release environments. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
+Visualise and control deployments to your Kubernetes cluster with CircleCIs. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
 
 [#introduction]
 == Introduction
@@ -29,7 +29,7 @@ In this tutorial you will set up an integration between CircleCI and your Kubern
 [#prerequisites]
 == Prerequisites
 
-In order to set up a release environment with CircleCI you will need to ensure the following prerequisites are fulfilled:
+Before setting up your release environment with CircleCI, run through the following prerequisites:
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A Kubernetes cluster
