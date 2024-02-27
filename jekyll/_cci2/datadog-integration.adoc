@@ -24,7 +24,7 @@ The link:https://docs.datadoghq.com/integrations/circleci/[Datadog CircleCI inte
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to Datadog.
 
-. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
+. Log in to the link:https://app.circleci.com/projects[CircleCI web app]
 
 . Access one of your CircleCI projects
 

@@ -30,7 +30,7 @@ Refer to the documentation for your target cloud service for steps to add an ide
 
 The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is the organization ID (a universally unique identifier) that represents your organization. You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** in the https://app.circleci.com/[CircleCI web app].
 
-The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
+The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims[OIDC tokens with custom claims] page.
 
 NOTE: It is possible to use CircleCI's OIDC tokens with multiple cloud services.
 
@@ -181,7 +181,7 @@ jobs:
           session-duration: "1800"
 ----
 +
-You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
+You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your AWS commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
 +
 Additionally, if you do not provide a `role-session-name` or `session-duration`, their default values are `${CIRCLE_JOB}` (your job’s name) and 3600 seconds respectively.
 
@@ -222,7 +222,7 @@ workflows:
 ```
 
 [#advanced-usage]
-==== Advanced Usage
+==== Advanced usage
 
 You can take advantage of the format of the claims in CircleCI's <<format-of-the-openid-connect-id-token,OIDC token>> to limit what your CircleCI jobs can do in AWS.
 
@@ -304,14 +304,14 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 [cols=2*, stripes=even]
 
 |===
-| google.subject
-| assertion.sub
+| `google.subject`
+| `assertion.sub`
 
-| attribute.org_id
-| assertion.aud
+| `attribute.org_id`
+| `assertion.aud`
 
-| attribute.project
-| assertion['oidc.circleci.com/project-id']
+| `attribute.project`
+| `assertion['oidc.circleci.com/project-id']`
 |===
 +
 . Navigate to **Service Account** in the IAM & Admin Panel to create a service account, and give appropriate permission.
@@ -320,7 +320,7 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 . A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions.
 . Under **Select principals**, you can add conditions, or leave the default.
 . Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**.
-. Save the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration.
+. Save the downloaded configuration file in your repository. This file will be referenced in your CircleCI configuration.
 
 An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:
 
@@ -358,7 +358,7 @@ If your token comes from an API response, it might be useful to set up the confi
   }
 ```
 
-Please note, if needed, you can also attempt to generate the GCP configuration file by running the following script:
+NOTE: If needed, you can also attempt to generate the GCP configuration file by running the following script:
 
 ```shell
 gcloud iam workload-identity-pools create-cred-config \
@@ -402,7 +402,7 @@ You will also need to add the following environment variables to a <<contexts#,c
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb. Note that you can enable the use of OIDC token when using circleci/gcp-cli orb version 3.0.0 or later.
+Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[`circleci/gcp-cli` orb]. Note that you can enable the use of OIDC token when using `circleci/gcp-cli` orb version 3.0.0 or later.
 
 ```yaml
 version: 2.1
@@ -483,5 +483,5 @@ workflows:
 You have the ability to use multiple service accounts from the _same_ GCP project, or multiple service accounts from _multiple_ GCP projects. You can read about these methods and find an example in CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
 
 [#next-steps]
-== Next Steps
+== Next steps
 - xref:oidc-tokens-with-custom-claims#[OpenID Connect tokens with custom claims]
