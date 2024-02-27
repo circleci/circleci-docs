@@ -510,15 +510,12 @@ ifndef::env-gcp[]
 
 . *Get the information needed to create security groups*
 +
-The following command returns your VPC ID (`vpcId`) and CIDR Block (`serviceIpv4Cidr`) which you need throughout this section:
+The following command returns your VPC ID (`vpcId`) which you need throughout this section:
 +
 [source,shell]
 ----
 # Fetch VPC Id
 aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.vpcId" --region=<region> --output text | xargs
-
-# Fetch CIDR Block
-aws eks describe-cluster --name=<cluster-name> --query "cluster.kubernetesNetworkConfig.serviceIpv4Cidr" --region=<region> --output text | xargs
 ----
 
 . *Create a security group*
@@ -770,7 +767,7 @@ Create a `policy.json` file with the following content. You should fill in the I
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
         "arn:aws:ec2:*:*:volume/*"
       ]
     },
