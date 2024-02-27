@@ -260,11 +260,6 @@ The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not curren
 
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
-[#Re-install-github-app]
-=== Re-install GitHub App
-
-If you have uninstalled the CircleCI GitHub App, there is currently no option to re-install it from the CircleCI UI.  As a workaround, navigate directly to `https://app.circleci.com/settings/project/circleci/<orgID>/<projectID>/triggers/add` (replace `<orgID>` with the organization ID from Organization Settings and replace `<projectID>` with the project ID from Project Settings).  At that point, you will be able re-install the CircleCI GitHub App and create a new trigger.
-
 [#next-steps]
 == Next Steps
 - xref:config-intro#[Configuration tutorial]
