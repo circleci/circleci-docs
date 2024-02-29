@@ -124,8 +124,8 @@ jobs:
 These two small changes have significantly increased the functionality of your config file:
 
 * *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
-* *Line 7:* The `checkout` command fetches the code from your git repo.
-* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repo that has been checked out. You can now perform further actions on this repo.
+* *Line 7:* The `checkout` command fetches the code from your git repository.
+* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repository that has been checked out. You can now perform further actions on this repository.
 
 As before, commit and push your updated `config.yml` file.
 
@@ -134,7 +134,7 @@ You should now see some additional steps on the CircleCI dashboard:
 * *Checkout code* has cloned the code from your git repository.
 * *The Second Step* has listed the files found in your git repository.
 
-image::config-second-step.png[Checking out your repo]
+image::config-second-step.png[Checking out your repository]
 
 [#part-3-using-different-environments-and-creating-workflows]
 == Part 3: Using different environments and creating workflows
