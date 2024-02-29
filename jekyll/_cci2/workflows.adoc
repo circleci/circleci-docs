@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Using Workflows to Orchestrate Jobs
+= Using Workflows to orchestrate jobs
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
 :page-layout: classic-docs
 :page-liquid:
@@ -56,17 +56,17 @@ Workflows may appear with one of the following states:
 | SUCCESS
 | All jobs in the workflow completed successfully
 
-| ON HOLD
+| NEEDS APPROVAL
 | A job in the workflow is waiting for approval
 
 | NEEDS SETUP
-| A workflow stanza is not included or is incorrect in the xref:configuration-reference#[.circleci/config.yml] file for this project
+| A workflow stanza is not included or is incorrect in the xref:configuration-reference#[`.circleci/config.yml` file] for this project
 |===
 
 [#workflows-configuration-examples]
 == Workflows configuration examples
 
-NOTE: For a full specification of the_ `workflows` _key, see the xref:configuration-reference#workflows[Workflows] section of the Configuration Reference.
+NOTE: For a full specification of the `workflows` key, see the xref:configuration-reference#workflows[Workflows] section of the Configuration Reference.
 
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow.
 
@@ -178,11 +178,11 @@ In this example, as soon as the `build` job finishes successfully, all four acce
 See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out[Sample Fan-in/Fan-out Workflow config] for a full example.
 
 [#holding-a-workflow-for-a-manual-approval]
-== Holding a workflow for a manual approval
+== Hold a workflow for a manual approval
 
-Workflows can be configured to wait for manual approval of a job before continuing to the next job. Anyone who has push access to the repository can click the *Approval* button to continue the workflow. To do this, add a job to the `jobs` list with the key `type: approval`.
+Configure a workflow to wait for manual approval before continuing using an `approval` job. Anyone who has push access to the repository can click the *Approve* button in the CircleCI web app to continue the workflow.
 
-The following is a config example, with comments:
+To set up a manual approval workflow, add a job to the `jobs` list of your workflow with `type: approval`. For example:
 
 [source,yaml]
 ----
@@ -201,7 +201,7 @@ workflows:
           requires: # test2 is dependent on the success of job `test1`
             - test1
       - hold: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
+          type: approval # This key-value pair will set your workflow to a status of "Needs Approval"
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
       # On approval of the `hold` job, any successive job that requires the `hold` job will run.
@@ -220,26 +220,25 @@ being issued.
 Some things to keep in mind when using manual approval in a workflow:
 
 * `approval` is a special job type that is *only* available to jobs under the `workflow` key
-* The `hold` job must be a unique name not used by any other job.
-* that is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
-* The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key in it.
-* All jobs that are to run after a manually approved job _must_ `require` the name of that job. Refer to the `deploy` job in the above example.
+* The `hold` job must be a unique name not used by any other job. That is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
+* The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key.
+* All jobs that are to run after a manually approved job _must_ `require` the name of the approval job. Refer to the `deploy` job in the above example.
 * Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshot demonstrates a workflow on hold.
+The following screenshot demonstrates a workflow the needs approval, the approval popup, and the resulting workflow map once approved.
 
-image::/docs/assets/img/docs/approval_job_cloud.png[Approved Jobs in On Hold Workflow]
+image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the resulting workflow map]
 
-By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
+By clicking on the approval job's name (`hold`, in the screenshot above), an approval dialog box appears requesting that you approve the approval job. You can also choose to close the popup without approving.
 
-After approving, the rest of the workflow runs as directed.
+After approving, the rest of the workflow runs as configured.
 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
 NOTE: *The deprecation of the scheduled workflows feature has been postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-Runing a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
+Running a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
 Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is *only* added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
 
@@ -353,7 +352,7 @@ The environment variables are defined by setting the `context` key as shown to t
 [#branch-level-job-execution]
 === Branch-level job execution
 
-The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `.circleci/config.yml`, as follows:
+The following example shows a workflow configured with jobs on three branches: Develop, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `.circleci/config.yml`, as follows:
 
 image::/docs/assets/img/docs/branch_level.png[Branch-Level Job Execution]
 
@@ -518,7 +517,7 @@ For example, `+only: /^config-test/+` only matches the `config-test` tag. To mat
 
 Using tags for semantic versioning is a common use case. To match patch versions 3-7 of a 2.1 release, you could write `+/^version-2\.1\.[3-7]/+`.
 
-For full details on pattern-matching rules, see the link:https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html[java.util.regex documentation].
+For full details on pattern-matching rules, see the link:https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html[`java.util.regex` documentation].
 
 [#using-workspaces-to-share-data-between-jobs]
 == Using workspaces to share data between jobs
@@ -552,7 +551,7 @@ to discern what might be failing.
 
 In some cases, a failure may happen before the workflow runs (during pipeline processing). Re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
-Also, please note that you cannot re-run jobs and workflows that are 90 days or older.
+NOTE: You cannot re-run jobs and workflows that are 90 days or older.
 
 [#workflows-waiting-for-status-in-github]
 === Workflows waiting for status in GitHub
