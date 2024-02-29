@@ -153,7 +153,7 @@ The config helper also provides two commands that help you statically validate y
 
 * Validate current configuration file
 +
-Corresponds to the CLI command `circleci config validate`, and verifies statically that the config file is well formed. Please note that this command only validates this file for structure and syntax errors, but not for semantic error (for example, "This job does not exist").
+Corresponds to the CLI command `circleci config validate`, and statically verifies that the config file is well formed. This command only validates the file for structure and syntax errors, **not** for semantic error (for example, "This job does not exist").
 
 * Validate current configuration file against org policy
 +
@@ -210,7 +210,7 @@ The following steps show how to test run a pipeline from the VS Code extension:
 . Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
 . Expand the **Run** panel to view your projects.
 . For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[] **Run local config on branch <your-branch-name>**. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
-. The pipeline is now visible in your link:https://app.circleci.com/pipelines/[dashboard] in the CircleCI web app, and the Pipelines panel in the VS Code extension. Please note that, for now, pipelines run with unversioned configuration are not differentiated from other pipelines in the CircleCI web app.
+. The pipeline is now visible in your link:https://app.circleci.com/pipelines/[dashboard] in the CircleCI web app, and the Pipelines panel in the VS Code extension. Currently, pipelines run with unversioned configuration are not differentiated from other pipelines in the CircleCI web app.
 
 [#feature-controls]
 === Feature Controls
@@ -235,7 +235,7 @@ link:https://circleci.com/docs/oidc-tokens-with-custom-claims/[OIDC tokens] make
 This increases the risk of secret exfiltration, and could let users access cloud resources they should not be able to.
 
 [#vcs-status-checks]
-==== VCS Status checks
+==== VCS status checks
 Triggering pipelines with unversioned config may allow bypassing VCS status checks for the corresponding commits.
 
 This is a known issue that we are committed to resolve in the coming weeks.

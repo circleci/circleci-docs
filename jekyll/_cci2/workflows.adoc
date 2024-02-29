@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Using Workflows to Orchestrate Jobs
+= Using Workflows to orchestrate jobs
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
 :page-layout: classic-docs
 :page-liquid:
@@ -60,13 +60,13 @@ Workflows may appear with one of the following states:
 | A job in the workflow is waiting for approval
 
 | NEEDS SETUP
-| A workflow stanza is not included or is incorrect in the xref:configuration-reference#[.circleci/config.yml] file for this project
+| A workflow stanza is not included or is incorrect in the xref:configuration-reference#[`.circleci/config.yml` file] for this project
 |===
 
 [#workflows-configuration-examples]
 == Workflows configuration examples
 
-NOTE: For a full specification of the_ `workflows` _key, see the xref:configuration-reference#workflows[Workflows] section of the Configuration Reference.
+NOTE: For a full specification of the `workflows` key, see the xref:configuration-reference#workflows[Workflows] section of the Configuration Reference.
 
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow.
 
@@ -182,7 +182,7 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan
 
 Configure a workflow to wait for manual approval before continuing using an `approval` job. Anyone who has push access to the repository can click the *Approve* button in the CircleCI web app to continue the workflow.
 
-To set up a amnual approval workflow, add a job to the `jobs` list of your workflow with `type: approval`. For example:
+To set up a manual approval workflow, add a job to the `jobs` list of your workflow with `type: approval`. For example:
 
 [source,yaml]
 ----
@@ -238,7 +238,7 @@ After approving, the rest of the workflow runs as configured.
 
 NOTE: *The deprecation of the scheduled workflows feature has been postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-Runing a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
+Running a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
 Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is *only* added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
 
@@ -352,7 +352,7 @@ The environment variables are defined by setting the `context` key as shown to t
 [#branch-level-job-execution]
 === Branch-level job execution
 
-The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `.circleci/config.yml`, as follows:
+The following example shows a workflow configured with jobs on three branches: Develop, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `.circleci/config.yml`, as follows:
 
 image::/docs/assets/img/docs/branch_level.png[Branch-Level Job Execution]
 
@@ -517,7 +517,7 @@ For example, `+only: /^config-test/+` only matches the `config-test` tag. To mat
 
 Using tags for semantic versioning is a common use case. To match patch versions 3-7 of a 2.1 release, you could write `+/^version-2\.1\.[3-7]/+`.
 
-For full details on pattern-matching rules, see the link:https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html[java.util.regex documentation].
+For full details on pattern-matching rules, see the link:https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html[`java.util.regex` documentation].
 
 [#using-workspaces-to-share-data-between-jobs]
 == Using workspaces to share data between jobs
@@ -551,7 +551,7 @@ to discern what might be failing.
 
 In some cases, a failure may happen before the workflow runs (during pipeline processing). Re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
-Also, please note that you cannot re-run jobs and workflows that are 90 days or older.
+NOTE: You cannot re-run jobs and workflows that are 90 days or older.
 
 [#workflows-waiting-for-status-in-github]
 === Workflows waiting for status in GitHub
