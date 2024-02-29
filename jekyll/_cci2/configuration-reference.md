@@ -2135,18 +2135,23 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
 ```yml
+workflows:
+  my-workflow:
+    jobs:
+      - build
+      - test
+          requires:
+            - build
       - hold:
           type: approval
           requires:
-            - test1
-            - test2
+            - test
       - deploy:
           requires:
             - hold
 ```
 
-The `hold` job name must not exist in the main configuration.
-{: class="alert alert-info"}
+An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration devise.
 
 ---
 

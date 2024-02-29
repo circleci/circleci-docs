@@ -56,7 +56,7 @@ Workflows may appear with one of the following states:
 | SUCCESS
 | All jobs in the workflow completed successfully
 
-| ON HOLD
+| NEEDS APPROVAL
 | A job in the workflow is waiting for approval
 
 | NEEDS SETUP
@@ -178,11 +178,11 @@ In this example, as soon as the `build` job finishes successfully, all four acce
 See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out[Sample Fan-in/Fan-out Workflow config] for a full example.
 
 [#holding-a-workflow-for-a-manual-approval]
-== Holding a workflow for a manual approval
+== Hold a workflow for a manual approval
 
-Workflows can be configured to wait for manual approval of a job before continuing to the next job. Anyone who has push access to the repository can click the *Approval* button to continue the workflow. To do this, add a job to the `jobs` list with the key `type: approval`.
+Configure a workflow to wait for manual approval before continuing using an `approval` job. Anyone who has push access to the repository can click the *Approve* button in the CircleCI web app to continue the workflow.
 
-The following is a config example, with comments:
+To set up a amnual approval workflow, add a job to the `jobs` list of your workflow with `type: approval`. For example:
 
 [source,yaml]
 ----
@@ -201,7 +201,7 @@ workflows:
           requires: # test2 is dependent on the success of job `test1`
             - test1
       - hold: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
+          type: approval # This key-value pair will set your workflow to a status of "Needs Approval"
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
       # On approval of the `hold` job, any successive job that requires the `hold` job will run.
@@ -220,19 +220,18 @@ being issued.
 Some things to keep in mind when using manual approval in a workflow:
 
 * `approval` is a special job type that is *only* available to jobs under the `workflow` key
-* The `hold` job must be a unique name not used by any other job.
-* that is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
-* The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key in it.
-* All jobs that are to run after a manually approved job _must_ `require` the name of that job. Refer to the `deploy` job in the above example.
+* The `hold` job must be a unique name not used by any other job. That is, your custom configured jobs, such as `build` or `test1` in the example above wouldn't be given a `type: approval` key.
+* The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key.
+* All jobs that are to run after a manually approved job _must_ `require` the name of the approval job. Refer to the `deploy` job in the above example.
 * Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshot demonstrates a workflow on hold.
+The following screenshot demonstrates a workflow the needs approval, the approval popup, and the resulting workflow map once approved.
 
-image::/docs/assets/img/docs/approval_job_cloud.png[Approved Jobs in On Hold Workflow]
+image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the resulting workflow map]
 
-By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
+By clicking on the approval job's name (`hold`, in the screenshot above), an approval dialog box appears requesting that you approve the approval job. You can also choose to close the popup without approving.
 
-After approving, the rest of the workflow runs as directed.
+After approving, the rest of the workflow runs as configured.
 
 [#scheduling-a-workflow]
 == Scheduling a workflow
