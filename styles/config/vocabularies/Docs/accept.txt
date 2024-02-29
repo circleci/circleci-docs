@@ -1,8 +1,10 @@
 .circleci/config.yml
+[Aa]uditability
 [Aa]utoscalers?
 [Bb]oolean
 [Cc]onfig policies
 [Cc]onfig policy
+[Cc]ron
 [Ee]nterprise
 [Gg]it
 [Gg]lobbing
@@ -45,7 +47,6 @@ classpath?
 Clojure
 Codecov
 CPUs
-cron
 Cucumber
 CVE
 Cypress
@@ -57,6 +58,7 @@ Dockerfiles?
 EKS
 Elixir
 endraw
+[Ee]xfiltration
 FAQs?
 Fastlane
 framebuffer
@@ -112,6 +114,7 @@ RSpec
 Ruby
 Sauce Labs
 Selenium
+SSH
 statsd
 stderr
 stdin
@@ -122,13 +125,16 @@ TLS
 TypeScript
 UI
 UIDs?
-uncheck
+[Uu]ncheck
 unencrypted
 unformatted
+untrusted
 UUID
 UUIDs?
+VCS
 VMs
 VPC
+VS Code
 WebDriver
 Workload Identity
 X Server
