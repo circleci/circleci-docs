@@ -107,7 +107,7 @@ The CircleCI releases UI is a powerful tool for visualising, monitoring and mana
 [#dashboard]
 === The dashboard
 
-#INSERT SCREENSHOT OF RELEASES DASHBOARD#
+image::../../img/docs/releases/dashboard.png[Screenshot showing the releases dashboard in the CircleCI web app]
 
 Select **Releases** in the CircleCI web app sidebar to enter the releases dashboard. The dashboard shows the following:
 
