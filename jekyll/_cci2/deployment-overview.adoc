@@ -104,7 +104,7 @@ Use the following how-to guides to deal with common use cases:
 * <<deploy-to-google-cloud-platform#,Deploy to Google Cloud Platform>>
 * <<deploy-to-heroku#,Deploy to Heroku>>
 * <<deploy-ios-applications#,Deploy iOS applications>>
-* <<deploy-to-npm-registry#,Deploy to NPM registry>>
+* <<deploy-to-npm-registry#,Deploy to npm registry>>
 * <<deploy-over-ssh#,Deploy over SSH>>
 * <<authorize-google-cloud-sdk#,Authorize Google Cloud SDK>>
 * <<publish-packages-to-packagecloud#,Publish packages to Packagecloud>>
