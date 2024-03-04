@@ -9,7 +9,7 @@
 
 | `15.3.0`
 | Xcode 15.3 RC (15E5202a)
-| 14.3
+| 14.3.1
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14463/manifest.txt[Installed software]
 | link:https://discuss.circleci.com/t/xcode-15-3-release-candidate-rc-released/50622[Release Notes]
 
