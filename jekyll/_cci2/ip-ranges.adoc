@@ -10,10 +10,14 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-Enable CircleCI jobs to go through a set of well-defined IP address ranges.
+Enable CircleCI jobs to go through a set of well-defined IP address ranges. This can be useful if you are interacting with systems that are _not_ public, for example:
+
+* Accessing a private artifact repository
+* Testing internal systems
+* Interfacing with a system on a cloud service: Google Cloud, AWS, Azure, etc.
 
 [#overview]
-== Overview
+== Introduction
 
 IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments using existing workflows and platforms. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
@@ -24,7 +28,7 @@ The feature is available to customers on a link:https://circleci.com/pricing/[Pe
 
 IP ranges let you limit inbound connections to your infrastructure to IP address ranges that are verifiably associated with CircleCI.
 
-Some example use cases where IP-based restricted access might be desired include:
+Some example of where IP-based restricted access might be desired include:
 
 * Accessing private artifact repositories
 * Pulling dependencies from a CocoaPods proxy hosted behind a firewall
@@ -153,12 +157,12 @@ The machines that execute _all jobs_ on CircleCI's platform, not just jobs opted
 * link:https://ip-ranges.amazonaws.com/ip-ranges.json[AWS]: CircleCI uses the _us-east-1_ and _us-east-2_ regions
 * link:https://www.gstatic.com/ipranges/cloud.json[GCP]: CircleCI uses the _us-east1_ and _us-central1_ regions
 
-CircleCI _does not recommend_ configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI's machines. Additionally, there is _no guarantee_ that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
+CircleCI _does not recommend_ configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI's machines. There is _no guarantee_ that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
 
 [#circleci-macos-cloud]
 == CircleCI macOS cloud
 
-In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs executed by machines. The following IP address ranges are used by CircleCI macOS Cloud:
+In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs executed by machines. The following IP address ranges are used by CircleCI macOS Cloud:
 
 * 38.39.184.0/24
 * 38.39.185.0/24
@@ -181,4 +185,4 @@ macOS builds are automatically restricted within the IP ranges listed here. In o
 == Known limitations
 
 * There is currently no support for specifying IP ranges configuration syntax when using the link:{{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration[pipeline parameters feature]. Find more details in this https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6[Discuss post].
-* IP ranges is currently available exclusively for the link:{{site.baseurl}}/configuration-reference/#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a link:{{site.baseurl}}/configuration-reference/#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.
+* IP ranges is currently available for the link:{{site.baseurl}}/configuration-reference/#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a link:{{site.baseurl}}/configuration-reference/#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.

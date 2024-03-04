@@ -30,7 +30,7 @@ NOTE: **Deploy to Kubernetes?** Refer to our xref:release/releases-overview#[Rel
 [#the-basics-of-deployment]
 == The basics of deployment
 
-Here are core concepts to get the deployment you need:
+Here are the core concepts you need to get a deployment set up:
 
 * **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require.
 
@@ -43,6 +43,8 @@ Environment variables can be:
 
 * **Manual approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job in your workflow.
 A manual approval button will then be available from the workflows map in the CircleCI web app.
+
+If you need to restrict connections, consider enabling xref:ip-ranges#[IP ranges] for your deployment job.
 
 [#using-orbs-to-simplify-deployment]
 == Using orbs to simplify deployment
@@ -75,14 +77,14 @@ Under the hood, this orb creates, bundles, and deploys your application using yo
 [#using-images-to-simplify-deployment]
 == Using images to simplify deployment
 
-CircleCI offers convenience images, which are Docker images that contain the tools required for common deployment scenarios.
+CircleCI provides maintained Docker images (convenience images) that contain the tools required for common deployment scenarios.
 Convenience images provide fast spin-up times, reliability, and stability.
 Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] to learn more about each of the deploy convenience images:
 
-- link:https://circleci.com/developer/images/image/cimg/deploy[cimg/deploy]
-- link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws]
-- link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure]
-- link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp]
+- link:https://circleci.com/developer/images/image/cimg/deploy[`cimg/deploy`]
+- link:https://circleci.com/developer/images/image/cimg/aws[`cimg/aws`]
+- link:https://circleci.com/developer/images/image/cimg/azure[`cimg/azure`]
+- link:https://circleci.com/developer/images/image/cimg/gcp[`cimg/gcp`]
 
 [#next-steps]
 == Next steps
