@@ -54,7 +54,7 @@ Developers can monitor releases in the CircleCI web app, and run commands to man
 [#releases-concepts]
 == Concepts
 
-The following sections describe concepts that will help you fully understand how CircleCI releases integration and capabilities.
+The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI's release features.
 
 [#component]
 === Component

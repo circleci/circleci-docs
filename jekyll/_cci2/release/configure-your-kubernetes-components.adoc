@@ -62,7 +62,7 @@ Once you have updated your Deployment or Rollout, check the CircleCI releases da
 [#link-release]
 == 2. Link release to deployment job trigger (optional)
 
-You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on you configuration and tooling:
+You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on your configuration and tooling:
 
 * `circleci.com/job-number` should be set to the `CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable].
 * `circleci.com/pipeline-id` should be set to the `pipeline.id` xref:../variables#pipeline-values[pipeline value].
