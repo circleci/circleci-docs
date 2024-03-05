@@ -31,11 +31,15 @@ Per link:https://circleci.com/privacy/#information[our data retention policy], a
 
 The following list shows common and important events found in the audit log. This list is not comprehensive, and you may see additional action types logged that are not represented below. See `action` in the Field section below for the definition and format.
 
+- checkout-key.create
+- checkout-key.delete
+- checkout-key.delete-all
 - context.create
 - context.delete
 - context.secrets.accessed
 - context.env_var.delete
 - context.env_var.store
+- deploy-keys.delete
 - project.env_var.create
 - project.env_var.delete
 - project.settings.update
