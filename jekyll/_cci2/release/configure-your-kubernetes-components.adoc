@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Configure your Kubernetes components - Open preview
+= Configure your Kubernetes components
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
@@ -62,13 +62,13 @@ Once you have updated your Deployment or Rollout, check the CircleCI releases da
 [#link-release]
 == 2. Link release to deployment job trigger (optional)
 
-You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on you config and tooling:
+You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on your configuration and tooling:
 
 * `circleci.com/job-number` should be set to the `CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable].
 * `circleci.com/pipeline-id` should be set to the `pipeline.id` xref:../variables#pipeline-values[pipeline value].
 * `circleci.com/workflow-id` should be set to the `CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable].
 
-Once these values and variables are rendered, the config will look something like:
+Once these values and variables are rendered, the configuration will look something like:
 
 [,yaml]
 ----
@@ -172,7 +172,7 @@ metadata:
 ----
 
 [#example-deployment]
-== Example Deployment
+== Example deployment
 
 The following snippet shows an example deployment showing all required and optional labels and annotations.
 

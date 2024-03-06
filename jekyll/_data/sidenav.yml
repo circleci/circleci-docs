@@ -119,7 +119,6 @@ en:
       - name: Troubleshoot
         link: troubleshoot
 
-
   - name: Orchestrate and trigger
     icon: icons/sidebar/pipeline.svg
     children:
@@ -396,7 +395,7 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
-  - name: Release - Open preview
+  - name: Release
     icon: icons/sidebar/release.svg
     children:
       - name: Overview
