@@ -93,6 +93,7 @@ Lein
 Leiningen
 Linux
 lockfile
+macOS
 minitest
 namespace
 Node
@@ -129,6 +130,7 @@ UIDs?
 unencrypted
 unformatted
 untrusted
+URLEncoder
 UUID
 UUIDs?
 VCS
