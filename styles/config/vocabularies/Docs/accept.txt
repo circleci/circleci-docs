@@ -22,7 +22,7 @@
 [Uu]nversioned
 [Ww]alkthrough
 Airtable
-APIs
+APIs?
 Appium
 Artifactory
 Asciidoctor
@@ -44,6 +44,7 @@ circleci.com
 classname?
 classpath
 classpath?
+CLI
 Clojure
 Codecov
 CPUs

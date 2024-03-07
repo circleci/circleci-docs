@@ -19,11 +19,13 @@ If you have existing contexts (or environment variables) and you would like to r
 [#overview]
 == Overview
 
-You can create and manage contexts on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app]. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project's xref:configuration-reference#context[`.circleci/config.yml`] file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
+Manage contexts on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app], or via the link:https://circleci.com/docs/api/v2/index.html#tag/Context[API]. You must be an organization member to view, create, or edit contexts.
+
+Create a context and then add environment variables to it. You can use the xref:configuration-reference#context[`context` key] in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
 image::{{site.baseurl}}/assets/img/docs/contexts_cloud.png[Contexts Overview]
 
-To use environment variables set on the *Contexts* page of the web app, the person running the workflow must be a member of the organization for which the context is set.
+To use environment variables set within a context, the person running the workflow must be a member of the organization for which the context is set.
 
 NOTE: Context names must be unique for each VCS organization. The default name for a context is `org-global`. Contexts created with the initial default name of `org-global` will continue to work.
 
@@ -36,10 +38,10 @@ Be aware that organization members can create contexts, but only organization ad
 +
 image::{{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png[Contexts]
 
-. Click the *Create Context* button to add a unique name for your context. Click the *Create Context* button in the dialog box to finalize. The new context will appear in a list with security set to `All members` to indicate that anyone in your organization can access this context at runtime.
+. Click the *Create Context* button to add a unique name for your context. Click the *Create Context* button in the dialog box to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
 . You can now click on any context created in your list to add environment variables. Click on the *Add Environment Variable* button to enter the variable name and value you wish to associate with this context. Click the *Add Environment Variable* button in the dialog box to finalize.
-. Add the `context` key to the xref:configuration-reference#workflows[`workflows`] section of your `.circleci/config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
-
+. To allow a job to access the environment variables stored in a context, add a context key to that job's entry in the xref:configuration-reference#workflows[`workflows`] section of the `.circleci/config.yml` file. This grants the job access to use the environment variables defined in that context. In the following example, the `run-tests` job will have access to the variables set in the `org-global` and `my-context` contexts.
++
 [,yaml]
 ----
 version: 2.1
@@ -63,7 +65,7 @@ jobs:
           command: echo $MY_ENV_VAR
 ----
 
-CAUTION: If you move your repository to a new organization, you must also have the context with that unique name set in the new organization (<<rename-orgs-and-repositories,see below>>).
+CAUTION: If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
 [#contexts-and-environment-variable-constraints]
 === Contexts and environment variable constraints
