@@ -90,7 +90,7 @@ You can combine several contexts for a single job by adding them to the context 
 [#restrict-a-context]
 == Restrict a context
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add _security groups_ to a new or existing context. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict contexts at run time by adding security groups, project restrictions, or expression restrictions. Only organization administrators may add restrictions to new or existing context. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
@@ -101,7 +101,7 @@ NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contex
 [#run-workflows-with-a-restricted-context]
 === Run workflows with a restricted context
 
-To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context and must sign up for CircleCI. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+To invoke a job that uses a restricted context, a user must be a member of one of the security groups or projects assigned to the context, or the expressions assigned to the context must be true. If the user running the workflow does not have access to the context or an expression evaluates to false, the workflow will fail with the `Unauthorized` status.
 
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
@@ -195,6 +195,181 @@ You must be an *organization admin* to remove projects from contexts though the 
 . Select the name of the existing context for which you would like to modify restrictions.
 . Click the *X* button next to the project restriction you would like to remove. The project restriction will be removed for the context.
 . If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
+
+[#expression-restrictions]
+== Expression restrictions
+
+Contexts can also be restricted by setting rules that the pipeline-values must match. These rules are called “expression restrictions”, and can be set using the context restriction API or on the Context page in the CircleCI UI.
+
+Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean and, or, and not operators.
+
+Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use.
+
+For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch:
+
+----
+pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")`
+----
+
+Tabs and newlines are considered whitespace so can be used to break long lines, but have no other significance, e.g. the above could also be written:
+
+----
+pipeline.git.branch == "main"
+and not job.ssh.enabled
+and not (pipeline.config_source starts-with "api")`
+----
+
+=== Variables
+
+All pipeline-values[link - but I don’t want people to use the “trigger_parameters” ones because they should be going away, ideally we have a list of definitely supported pipeline-values for different sources of change] can be used as variables in an expression. There are also special job-specific variables available to use in expressions
+
+|========
+| name | type | description 
+| job.ssh.enabled | boolean | true if ssh is enabled for the job, false otherwise 
+|========
+
+If a variable is referenced in an expression, but there isn’t a value set for that variable in the pipeline trying to use the expression then the restriction will “fail closed” and prevent the context being used.
+
+=== Errors
+
+Any errors evaluating an expression will “fail closed” and prevent the context being used. Errors include
+
+Using a variable that does not exist.
+
+Using a non-numeric value as an operand to the numeric comparison operators.
+
+Using a non-string value as an operand to the starts-with operator.
+
+=== Examples
+
+Allow the context only on the project’s `main` branch
+
+----
+pipeline.git.branch == "main"
+----
+
+Restrict a context to the `main` branch, disallow use in an SSH rerun, and disallow use with “dry-run” config
+
+----
+pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api")
+----
+
+Allow the context only the project’s `main` branch, or branches starting with `integration-test`
+
+----
+pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
+----
+
+=== Operators
+
+*Logical:* `and`, `or`
+
+These are short-circuiting boolean operators.
+
+*Equality:* `==`, `!=`
+
+String, numeric, and boolean equality. If the operands are of different types then `==` will evaluate `false`, and `!=` will evaluate `true`.
+
+*Equality:* `starts-with`
+
+String prefix equality, `"hello world" starts-with "hello"` evaluates as `true`. It is an error to use a non-string type as an operand.
+
+*Numeric comparison:* `>=`, `>`, `<=`, `<`
+
+Numeric comparisons. It is an error to use a non-numeric type as an operand.
+
+*Negation:* `not`
+
+Boolean negation. Note that `not` has very high precedence and so binds very tightly. Use sub-expressions to apply not to more complex expressions.
+
+E.g. with `foo` being `true` and `bar` being `false`:
+
+- `not foo and bar` evaluates to `false`
+- `not (foo and bar)` evaluates to `true`
+
+*Sub-expressions*
+
+Sub-expressions can be grouped with parentheses `(`, `)`
+
+=== Precedence
+The operator precedence table, from weakest to strongest binding:
+Note that all operators are left associative, but in practice operator chaining should be avoided for anything other than `and` or `or` since evaluation may cause type mismatches for other operators (see Evaluation below).
+|=======
+| Operator    | Associativity 
+| or          | left          
+| and         | left          
+| == !=       | left          
+| starts-with |               
+| >= > <= <   | left          
+| not !       |               
+|=======
+
+=== Literals
+
+==== Numbers 
+
+Numeric literals are whole integers (longs).
+
+E.g. `1`, `768`
+
+==== Strings
+
+String literals are enclosed within double-quotes ". The \\
+character is used to escape an embedded quote, or to escape an
+embedded \\.
+
+E.g. `"the quick brown fox"`, `"You can embed \\" and \\\\ characters"`
+
+==== Booleans 
+
+The boolean literals are `true`, and `false`.
+
+=== Evaluation
+
+An expression is evaluated to produce a single boolean `true` or `false` value.
+
+Other than the boolean value `false`, all values ultimately evaluate as `true`.
+
+A variable evaluates to the variable’s value, if the variable does not exist then the expression is immediately considered to have evaluated `false`. In other words, expression evaluation will “fail closed” when it encounters an unknown variable.
+
+As an expression is evaluated the result of an operator is effectively embedded “in place” as the evaluation continues
+
+E.g. to evaluate
+
+----
+pipeline.git.branch == "main"
+and not job.ssh.enabled
+and not (pipeline.config_source starts-with "api") 
+----
+
+where:
+
+* `pipeline.git.branch` is `"main"`
+* `job.ssh.enabled` is `false`
+* `pipeline.config_source` is `"api"`
+
+
+. Variable lookup: replace `pipeline.git.branch` with its value:
+.. `"main" == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api")`
+. Evaluate `"main" == "main"`:
+.. `true and not job.ssh.enabled and not (pipeline.config_source starts-with "api")`
+. Variable lookup: replace `job.ssh.enabled` with its value:
+.. `true and not false and not (pipeline.config_source starts-with "api")`
+. Evaluate `not false`:
+.. `true and true and not (pipeline.config_source starts-with "api")`
+. Evaluate `true and true`:
+.. `true and not (pipeline.config_source starts-with "api")`
+. Variable lookup: replace `pipeline.config_source` with its value:
+.. `true and not ("api" starts-with "api")`
+. Evaluate `("api" starts-with "api")`
+.. `true and not true`
+. Evaluate `not true`:
+.. `true and false`
+. Evaluate `true and false`:
+.. `false`
+Result: `false`.
+
+
 
 [#remove-groups-from-contexts]
 == Remove groups from contexts
