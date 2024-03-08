@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Manage releases - Open preview
+= Manage releases
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to guide for managing releases from the CircleCI web app
@@ -29,12 +29,11 @@ image::../../img/docs/releases/restore-version.png[Screenshot showing the restor
 [#restore-steps]
 === Steps
 
-NOTE: The steps outlined here are to revert a release from the release details page in the CircleCI web app. Is it also possible to run this command from the releases timeline, using the restore release icon in the **Actions** column.
+NOTE: The steps outlined here are to revert a release from the release dashboard in the CircleCI web app. Is it also possible to run this command from a release details page. Click on a release number to view a release details page.
 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . You are now in the timeline view. Select your component from the dropdown menu
-. Scroll to locate the version your want to restore, and click on the version number to enter the release details page
-. Click to open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and click **Restore Version**
+. Scroll to locate the version your want to restore, and click on the "Restore release" icon in the **Actions** column
 . Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then click btn:[Restore]. We recommend reverting the associated changes in your source repository as soon as possible after using this command
 
 [#restore-notes]
@@ -77,7 +76,8 @@ image::../../img/docs/releases/scale-component.png[Screenshot showing the scale 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . Select the **Components** tab
 . Scroll to find your component a click to enter the component view
-. Find the active version that you would like to scale, and click the scale icon
+. Find the active version that you would like to scale and click the ellipsis menu icon (icon:ellipsis-h[])
+. Click btn:[Scale Component]
 . Read through the notes associated with this command in the popup and to proceed type `SCALE` and click btn:[Scale]
 
 CAUTION: Any Horizontal Pod Autoscalers (HPAs) defined for this component will be deleted as a result of this action
@@ -114,7 +114,8 @@ image::../../img/docs/releases/restart-component.png[Screenshot showing the rest
 . Select btn:[Releases] in the CircleCI web app sidebar
 . Select the **Components** tab
 . Scroll to find your component a click to enter the component view
-. Find the active version that you would like to restart, and click the restart icon
+. Find the active version that you would like to restart, and click the ellipsis menu icon (icon:ellipsis-h[])
+. Click btn:[Restart Component]
 . Read the note associated with this command in the popup and to proceed type `RESTART` and click btn:[RESTART]
 
 [#restart-notes]
