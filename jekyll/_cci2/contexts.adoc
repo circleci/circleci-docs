@@ -273,9 +273,9 @@ xref:pipeline-variables#pipeline-values[Pipeline values] can be used as variable
 |===
 | name | type | description
 
-| `job.ssh.enabled `
+| `job.ssh.enabled`
 | boolean
-| `true` if ssh is enabled for the job, `false` otherwise
+| `true` if SSH is enabled for the job, `false` otherwise
 |===
 
 If a variable is referenced in an expression but there is no value set for that variable in the pipeline, the expression will _fail closed_ and prevent the context being used.
@@ -306,7 +306,7 @@ Allow the context only on the project's `main` branch, or branches starting with
 pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Restrict a context to the `main` branch, disallow use in an SSH rerun, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned config]:
+Restrict a context to the `main` branch, disallow use in an SSH rerun, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
 
 [source]
 ----
