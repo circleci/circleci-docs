@@ -251,12 +251,9 @@ If a variable is referenced in an expression, but there isn’t a value set for 
 === Errors
 
 Any errors evaluating an expression will “fail closed” and prevent the context being used. Errors include
-
-Using a variable that does not exist.
-
-Using a non-numeric value as an operand to the numeric comparison operators.
-
-Using a non-string value as an operand to the starts-with operator.
+* Using a variable that does not exist.
+* Using a non-numeric value as an operand to the numeric comparison operators.
+* Using a non-string value as an operand to the starts-with operator.
 
 === Examples
 
@@ -298,7 +295,7 @@ Numeric comparisons. It is an error to use a non-numeric type as an operand.
 
 *Negation:* `not`
 
-Boolean negation. Note that `not` has very high precedence and so binds very tightly. Use sub-expressions to apply not to more complex expressions.
+Boolean negation. Note that `not` has very high precedence and so binds very tightly. Use sub-expressions to apply `not` to more complex expressions.
 
 E.g. with `foo` being `true` and `bar` being `false`:
 
