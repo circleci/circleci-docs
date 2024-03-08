@@ -1,6 +1,10 @@
 ---
 name: Typo
 about: A typographical error
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Location

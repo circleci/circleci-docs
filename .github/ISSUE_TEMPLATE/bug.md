@@ -1,6 +1,10 @@
 ---
 name: Bug
 about: A technical problem
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Description

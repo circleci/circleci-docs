@@ -1,6 +1,10 @@
 ---
 name: Grammatical Error
 about: Grammatically incorrect writing
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Location
