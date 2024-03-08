@@ -90,7 +90,7 @@ You can combine several contexts for a single job by adding them to the context 
 [#restrict-a-context]
 == Restrict a context
 
-CircleCI enables you to restrict contexts at run time by adding security groups, project restrictions, or expression restrictions. Only organization administrators may add restrictions to new or existing context. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict contexts at run time by adding security groups, project restrictions, or expression restrictions. Only organization administrators may add restrictions to new or existing contexts. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
