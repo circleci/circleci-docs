@@ -89,53 +89,35 @@ When creating contexts and environment variables, note the following:
 
 For any VCS enterprise installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GitHub Enterprise installation is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two organizations that exist in the same GitHub Enterprise installation for the Kiwi account. Duplicate contexts within an account will fail with an error.
 
-[#how-to]
-== How-to
-
 [#combine-contexts]
-=== Combine contexts
+== Combine contexts
 
 You can combine several contexts for a single job by adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way, you can scope contexts to be as small and granular as you like.
 
 [#restrict-a-context]
-=== Restrict a context
+== Restrict a context
 
-CircleCI enables you to restrict contexts at run time by adding security groups, project restrictions, or expression restrictions. Only organization administrators may add restrictions to new or existing contexts. Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+
+NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups. Only GitHub OAuth accounts support security group restrictions. To find out which GitHub account type you have, refer to the xref:github-integration#[GitHub OAuth integration] page.
+
+CircleCI enables you to restrict contexts at run time in the following ways:
+* Using security groups
+* Using project restrictions
+* Using expression restrictions
+
+Only organization administrators may add restrictions to new or existing contexts.
+
+Security groups are your organization's VCS teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables. The default security group is `All members`, and enables any member of the organization who uses CircleCI to use the context.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
-The default security group is `All members`, and enables any member of the organization who uses CircleCI to use the context.
-
-NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups.
-
 [#run-workflows-with-a-restricted-context]
-==== Run workflows with a restricted context
+=== Run workflows with a restricted context
 
 To invoke a job that uses a restricted context, a user must be a member of one of the security groups or projects assigned to the context, or the expressions assigned to the context must be true. If the user running the workflow does not have access to the context or an expression evaluates to false, the workflow will fail with the `Unauthorized` status.
 
-[#restrict-a-context-to-a-security-group-or-groups]
-==== Restrict a context to a security group or groups
-
-You must be an organization administrator to complete the following task.
-
-. Navigate to menu:Organization Settings[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
-. Click the *Create Context* button if you wish to use a new context, or click the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
-. Click the *Add Security Group* (GitHub users) or *Add Project Restriction* (GitLab users) button to view the dialog box.
-. Make your choices in the dialog box and then click the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
-. Click *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then click the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
-. Navigate back to menu:Organization Settings[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
-
-Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
-
-[#make-changes-to-context-restrictions]
-==== Make changes to context restrictions
-
-Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found on the https://app.circleci.com/settings/user[Account Integrations] page.
-
-Administrators of CircleCI server installations can find the *Refresh Permissions* button at `<circleci-hostname>/account`.
-
 [#approve-jobs-that-use-restricted-contexts]
-==== Approve jobs that use restricted contexts
+=== Approve jobs that use restricted contexts
 
 Adding an link:{{site.baseurl}}/configuration-reference/#type[approval job] to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
 
@@ -166,6 +148,30 @@ workflows:
 ----
 
 In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job will run, which will present a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the approver is not part of the restricted context security group.
+
+[#security-goup-restrictions]
+== Security group restrictions
+
+[#restrict-a-context-to-a-security-group-or-groups]
+=== Restrict a context to a security group or groups
+
+You must be an organization administrator to complete the following task.
+
+. Navigate to menu:Organization Settings[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
+. Click the *Create Context* button if you wish to use a new context, or click the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
+. Click the *Add Security Group* (GitHub users) or *Add Project Restriction* (GitLab users) button to view the dialog box.
+. Make your choices in the dialog box and then click the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
+. Click *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then click the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
+. Navigate back to menu:Organization Settings[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
+
+Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
+
+[#make-changes-to-context-restrictions]
+=== Make changes to security group context restrictions
+
+Changes to security group restrictions for contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the organization administrator to refresh permissions once the change has been made. The *Refresh Permissions* button can be found on the https://app.circleci.com/settings/user[Account Integrations] page.
+
+Administrators of CircleCI server installations can find the *Refresh Permissions* button at `<circleci-hostname>/account`.
 
 [#project-restrictions]
 === Project restrictions
@@ -209,20 +215,22 @@ You must be an *organization admin* to remove projects from contexts though the 
 [#expression-restrictions]
 == Expression restrictions
 
-Contexts can also be restricted by setting rules that the pipeline-values must match. These rules are called “expression restrictions”, and can be set using the context restriction API or on the Context page in the CircleCI UI.
+Restrict contexts by setting rules that xref:pipeline-variables#pipeline-values[pipeline values] must match. These rules are called _expression restrictions_. Set expression restrictions using the context restriction API or on the Context page (menu:Organization Settings[Contexts>Expression Restrictions]) in the CircleCI web app.
 
-Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean and, or, and not operators.
+Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean `and`, `or`, and `not` operators.
 
 Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use.
 
 For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch:
 
+[source]
 ----
 pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")`
 ----
 
-Tabs and newlines are considered whitespace so can be used to break long lines, but have no other significance, e.g. the above could also be written:
+Tabs and new lines are considered whitespace so can be used to break long lines, but have no other significance. For example, the snippet above could also be written:
 
+[source]
 ----
 pipeline.git.branch == "main"
 and not job.ssh.enabled
@@ -234,8 +242,8 @@ and not (pipeline.config_source starts-with "api")`
 All pipeline-values[link - but I don’t want people to use the “trigger_parameters” ones because they should be going away, ideally we have a list of definitely supported pipeline-values for different sources of change] can be used as variables in an expression. There are also special job-specific variables available to use in expressions
 
 |========
-| name | type | description 
-| job.ssh.enabled | boolean | true if ssh is enabled for the job, false otherwise 
+| name | type | description
+| job.ssh.enabled | boolean | true if ssh is enabled for the job, false otherwise
 |========
 
 If a variable is referenced in an expression, but there isn’t a value set for that variable in the pipeline trying to use the expression then the restriction will “fail closed” and prevent the context being used.
@@ -305,18 +313,18 @@ Sub-expressions can be grouped with parentheses `(`, `)`
 The operator precedence table, from weakest to strongest binding:
 Note that all operators are left associative, but in practice operator chaining should be avoided for anything other than `and` or `or` since evaluation may cause type mismatches for other operators (see Evaluation below).
 |=======
-| Operator    | Associativity 
-| or          | left          
-| and         | left          
-| == !=       | left          
-| starts-with |               
-| >= > <= <   | left          
-| not !       |               
+| Operator    | Associativity
+| or          | left
+| and         | left
+| == !=       | left
+| starts-with |
+| >= > <= <   | left
+| not !       |
 |=======
 
 === Literals
 
-==== Numbers 
+==== Numbers
 
 Numeric literals are whole integers (longs).
 
@@ -330,7 +338,7 @@ embedded \\.
 
 E.g. `"the quick brown fox"`, `"You can embed \\" and \\\\ characters"`
 
-==== Booleans 
+==== Booleans
 
 The boolean literals are `true`, and `false`.
 
@@ -349,7 +357,7 @@ E.g. to evaluate
 ----
 pipeline.git.branch == "main"
 and not job.ssh.enabled
-and not (pipeline.config_source starts-with "api") 
+and not (pipeline.config_source starts-with "api")
 ----
 
 where:
