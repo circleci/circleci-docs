@@ -65,7 +65,7 @@ Retrieve and download the pinned `circleci-agent` release and checksums from the
 curl -O --compressed https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/linux/amd64/circleci-agent
 
 # Download checksums
-wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/checksums.txt
+curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/checksums.txt
 ----
 
 [#create-release-dir]
