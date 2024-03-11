@@ -1508,6 +1508,16 @@ CircleCI does not check out submodules. If your project requires submodules, add
 The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 {: class="alert alert-info"}
 
+###### **Blobless clones** 
+To help improve the overall performance of code checkouts from Git source code hosts, a "blobless" strategy is being rolled out. This reduces the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
+
+While this improves performance in most cases, if a downstream step requires those objects to exist for scanning or comparisons, it can cause failures. To work around these potential problems, a fetch directly after a checkout will ensure the required data is available:
+
+```yml
+- checkout
+- run: git fetch
+```
+
 ---
 
 ##### **`setup_remote_docker`**
