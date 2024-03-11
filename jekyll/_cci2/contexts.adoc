@@ -269,34 +269,7 @@ Follow these steps to set an expression restriction on a context:
 . Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]
 . Select the context you want to add an expression restriction to
 . Click btn:[Add Expression Restriction]
-
-#TO DO add the rest of the steps to this section, also use tabs and add the API option#
-
-[#variables]
-=== Variables
-
-xref:pipeline-variables#pipeline-values[Pipeline values] can be used as variables in an expression restriction. There are also special job-specific variables available to use in expressions. You can not use the `pipeline.trigger_parameters.*` pipeline values in expression restrictions.
-
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| name | type | description
-
-| `job.ssh.enabled`
-| boolean
-| `true` if SSH is enabled for the job, `false` otherwise
-|===
-
-If a variable is referenced in an expression but there is no value set for that variable in the pipeline, the expression will _fail closed_ and prevent the context being used.
-
-[#errors]
-=== Errors
-
-Any errors evaluating an expression will _fail closed_ and prevent the context being used. Errors include the following:
-
-* Using a variable that does not exist
-* Using a non-numeric value as an operand to the numeric comparison operators
-* Using a non-string value as an operand to the starts-with operator
+. Enter your expression in the text box and click btn:[Add Expression Restriction] again to confirm
 
 [#examples]
 === Examples
@@ -321,6 +294,34 @@ Restrict a context to the `main` branch, disallow use in an SSH rerun, and disal
 ----
 pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api")
 ----
+
+[#variables]
+=== Variables
+
+xref:pipeline-variables#pipeline-values[Pipeline values] can be used as variables in an expression restriction. The exception to this is that `pipeline.trigger_parameters.*` pipeline values cannot be used.
+
+There are also special job-specific variables available to use in expressions, as follows:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| name | type | description
+
+| `job.ssh.enabled`
+| boolean
+| `true` if SSH is enabled for the job, `false` otherwise
+|===
+
+If an expression references a variable that has no value set in the pipeline, the expression will _fail closed_ and prevent use of the context.
+
+[#errors]
+=== Errors
+
+Any errors evaluating an expression will _fail closed_ and prevent use of the context. Errors include the following:
+
+* Using a variable that does not exist
+* Using a non-numeric value as an operand to the numeric comparison operators
+* Using a non-string value as an operand to the starts-with operator
 
 === Operators
 
