@@ -241,13 +241,7 @@ You must be an *organization admin* to remove projects from contexts though the 
 [#expression-restrictions]
 == Expression restrictions
 
-Restrict contexts by setting rules that xref:pipeline-variables#pipeline-values[pipeline values] must match. These rules are called _expression restrictions_. Set up expression restrictions using the context restriction API or on the Context page (menu:Organization Settings[Contexts>Expression Restrictions]) in the CircleCI web app.
-
-Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean `and`, `or`, and `not` operators.
-
-Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use.
-
-For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch:
+Restrict contexts by setting up _expression restrictions_. Expression restrictions are rules that xref:pipeline-variables#pipeline-values[pipeline values] must match. Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use. For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch:
 
 [source]
 ----
@@ -262,6 +256,21 @@ pipeline.git.branch == "main"
 and not job.ssh.enabled
 and not (pipeline.config_source starts-with "api")`
 ----
+
+You can set up expression restrictions using the context restriction API, or via the Context page (menu:Organization Settings[Contexts>Expression Restrictions]) in the CircleCI web app.
+
+Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean `and`, `or`, and `not` operators.
+
+[#set-an-expression-restriction]
+=== Set an expression restriction
+
+Follow these steps to set an expression restriction on a context:
+
+. Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]
+. Select the context you want to add an expression restriction to
+. Click btn:[Add Expression Restriction]
+
+#TO DO add the rest of the steps to this section, also use tabs and add the API option#
 
 [#variables]
 === Variables
