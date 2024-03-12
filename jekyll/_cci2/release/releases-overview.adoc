@@ -330,7 +330,7 @@ We are working on updates to:
 +
 ** Indicate out-of-scope releases
 ** Prevent you from attempting to restore unavailable releases
-** Provising a manual way for you to mark releases as unavailable
+** Provide a manual way for you to mark releases as unavailable
 
 [#troubleshooting]
 == Troubleshooting
