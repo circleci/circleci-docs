@@ -320,6 +320,17 @@ A number of features and improvements are planned to be added through open previ
 == Known limitations
 
 * Restarting the release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
+* **In the CircleCI releases UI it is currently possible for you to attempt and restore a version that does not exist**. All releases are presented in the UI, including those outside of the scope of any version history limits you might have set. We do not currently filter out releases for which there is no longer any data.
++
+Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
++
+If you have these limits set, you can not restore a version outside the limit. For example, if your limit is set to the last 10 releases, you can not restore the 11th deployment back.
++
+We are working on updates to:
++
+** Indicate out-of-scope releases
+** Prevent you from attempting to restore unavailable releases
+** Provide a manual way for you to mark releases as unavailable
 
 [#troubleshooting]
 == Troubleshooting
