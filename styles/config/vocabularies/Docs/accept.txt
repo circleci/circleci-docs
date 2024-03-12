@@ -47,6 +47,7 @@ classpath
 classpath?
 Clojure
 Codecov
+[Cc]onfig
 CPUs
 Cucumber
 CVE
