@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Configure your Kubernetes components - Open preview
+= Configure your Kubernetes components
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
@@ -17,22 +17,32 @@ The steps outlined on this page guide you to configure your Kubernetes resources
 [#introduction]
 == Introduction
 
-In this tutorial you will configure your Kubernetes components, adding labels and annotations to enable visibility and control over your deployments.
+In this tutorial you will configure your Kubernetes components, adding labels and annotation, to enable visibility and control over your deployments.
 
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the release environment has been set up successfully. Refer to the xref:set-up-a-release-environment#[Set up a release environment] page.
+Before following the steps below, ensure the release environment is set up. Refer to the xref:set-up-a-release-environment#[Set up a release environment] page.
 
 [#add-required-labels]
-== 1. Add required labels to your Deployment/Rollout
+== 1. Add required labels and annotation to your Deployment/Rollout
 
-To enable your release to show up on the releases dashboard in the CircleCI web app, add the following labels to your Kubernetes Deployment or Argo Rollout:
+To enable your release to show up on the releases UI in the CircleCI web app, add the following labels and annotation to your Kubernetes Deployment or Argo Rollout:
 
 * Specify the `app` and `version` label in the Kubernetes object `Metadata.Labels`
 * Specify the `app` and `version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
+* Add the `circleci.com/project-id` annotation with the value set to your project ID
++
+[NOTE]
+====
+**Find your project ID:**
 
-NOTE: Do not add `version` to the selector labels. These labels can not be changed later, and `version` changes frequently.
+. Click **Projects** in the CircleCI web app sidebar and use the search function to find your project
+. Click the ellipsis menu next to your project and click btn:[Project Settings]
+. Your project ID is available to copy from the overview page
++
+image::../../img/docs/project-id.png[Screenshot showing where to find the project ID]
+====
 
 For example:
 
@@ -41,6 +51,8 @@ For example:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    circleci.com/project-id: <your-project-ID>
   labels:
     app: example-deployment
     version: 1.0.0
@@ -57,18 +69,20 @@ spec:
         version: 1.0.0
 ----
 
+NOTE: Do not add `version` to the selector labels. These labels can not be changed later, and `version` changes frequently.
+
 Once you have updated your Deployment or Rollout, check the CircleCI releases dashboard and you should see your release in the timeline view.
 
 [#link-release]
 == 2. Link release to deployment job trigger (optional)
 
-You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on you config and tooling:
+You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on your configuration and tooling:
 
 * `circleci.com/job-number` should be set to the `CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable].
 * `circleci.com/pipeline-id` should be set to the `pipeline.id` xref:../variables#pipeline-values[pipeline value].
 * `circleci.com/workflow-id` should be set to the `CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable].
 
-Once these values and variables are rendered, the config will look something like:
+Once these values and variables are rendered, the configuration will look something like:
 
 [,yaml]
 ----
@@ -84,26 +98,7 @@ metadata:
 [#configure-release-management]
 == 3. Configure release management (optional)
 
-By adding an annotation to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your releases dashboard. This includes restoring, scaling, and restarting component versions. To get started, add the `circleci.com/project-id` annotation with the value found on the relevant CircleCI project settings page.
-
-[,yaml]
-----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  annotations:
-    ...
-    circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
-----
-
-To find your project ID:
-
-. Click **Projects** in the CircleCI web app sidebar
-. Use the search function to find your project
-. Click the ellipsis menu next to your project and click btn:[Project Settings]
-. Your project ID is available to copy from the overview page
-+
-image::../../img/docs/project-id.png[Screenshot showing where to find the project ID]
+By adding annotations to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your releases dashboard, including the ability to restore, scale, and restart component versions.
 
 [#helm-rollback]
 === a. Use Helm rollback
@@ -123,7 +118,7 @@ annotations:
 [#operation-timeout]
 === b. Custom operation timeout
 
-NOTE: This option is only available when using Helm to configure your Kubernetes resources.
+CAUTION: This option is only available when using Helm to configure your Kubernetes resources.
 
 The `circleci.com/operation-timeout` annotation allows a custom timeout to be specified for Helm Rollback operations performed as part of a Restore Version command. Valid values are link:https://pkg.go.dev/time#ParseDuration[Go duration strings] (for example, 5m, 10m15s). This option is available if you are using Helm to manage your Kubernetes resources.
 
@@ -144,7 +139,7 @@ metadata:
 
 If you would like to disable any release management features for a specific component, you can do so by adding any of the following annotations with the value `false` to the related Kubernetes Deployment or Argo Rollout.
 
-NOTE: If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature will be **enabled**. Release management features are enabled by default unless explicitly disabled:
+NOTE: If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature is **enabled**. Release management features are enabled by default unless explicitly disabled, as follows:
 
 * `circleci.com/restore-version-enabled` toggles the restore version feature on the annotated Kubernetes Deployment or Argo Rollout
 * `circleci.com/scale-component-enabled` toggles the scale component feature on the annotated Kubernetes Deployment or Argo Rollout
@@ -172,7 +167,7 @@ metadata:
 ----
 
 [#example-deployment]
-== Example Deployment
+== Example deployment
 
 The following snippet shows an example deployment showing all required and optional labels and annotations.
 

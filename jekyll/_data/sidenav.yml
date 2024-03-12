@@ -397,7 +397,7 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
-  - name: Release - Open preview
+  - name: Release
     icon: icons/sidebar/release.svg
     children:
       - name: Overview

@@ -2,7 +2,6 @@
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]oolean
-[Cc]onfig
 [Cc]onfig policies
 [Cc]onfig policy
 [Cc]ron
@@ -73,6 +72,7 @@ GKE
 Gradle
 Gzip
 HashiCorp
+Helm
 Homebrew
 hostname
 HPA
@@ -94,6 +94,7 @@ Lein
 Leiningen
 Linux
 lockfile
+macOS
 minitest
 namespace
 Node
@@ -124,11 +125,13 @@ Terraform
 Tink
 TLS
 TypeScript
+UI
 UIDs?
 [Uu]ncheck
 unencrypted
 unformatted
 untrusted
+URLEncoder
 UUID
 UUIDs?
 VCS
