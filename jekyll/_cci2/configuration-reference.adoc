@@ -749,7 +749,7 @@ A map of environment variable names and values. For more information on defining
 
 This feature is used to optimize test steps. If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel.
 
-You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the link:{{ site.baseurl }}/parallelism-faster-jobs/[Test splitting and parallelism] page.
+You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the xref:parallelism-faster-jobs#[Test splitting and parallelism] page.
 
 Example:
 
@@ -765,7 +765,7 @@ jobs:
     resource_class: large
     working_directory: ~/my-app
     steps:
-      - run: go test -v $(go list ./... | circleci tests split)
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
 '''
@@ -783,24 +783,19 @@ Reserved parameter-names:
 * `type`
 * `filters`
 * `matrix`
-// Others?
 
-// branches & type pass `circleci config validate`. Strange
-
-See link:{{ site.baseurl }}/reusing-config/#parameter-syntax[Parameter Syntax]
-// In this reference, it's not mentioned which types are allowed for job-parameters.
-for definition details.
+See xref:reusing-config#parameter-syntax[Parameter Syntax] for definition details.
 
 '''
 
 [#executor-job]
 ==== Executor *`docker`* / *`machine`* / *`macos`*
 
-CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
+CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment, and operating system in which to run a job.
 
 Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
 
-Learn more about execution environments and executors in the link:{{ site.baseurl }}/executor-intro/[Introduction to Execution Environments].
+Learn more about execution environments and executors in the xref:executor-intro#[Introduction to Execution Environments].
 
 '''
 
@@ -809,6 +804,8 @@ Learn more about execution environments and executors in the link:{{ site.baseur
 
 Configured by `docker` key which takes a list of maps:
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -820,12 +817,12 @@ Configured by `docker` key which takes a list of maps:
 | name
 | N
 | String
-| `name` defines the the hostname for the container (the default is `localhost`), which is used for reaching secondary (service) containers. By default, all services are exposed directly on `localhost`. This field is useful if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
+| `name` defines the hostname for the container (the default is `localhost`), which is used for reaching secondary (service) containers. By default, all services are exposed directly on `localhost`. This field is useful if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
 
 | entrypoint
 | N
 | String or List
-| The command used as executable when launching the container. `entrypoint` overrides the image's https://docs.docker.com/engine/reference/builder/#entrypoint[`ENTRYPOINT`].
+| The command used as executable when launching the container. `entrypoint` overrides the image's link:https://docs.docker.com/engine/reference/builder/#entrypoint[`ENTRYPOINT`].
 
 | command
 | N
@@ -840,7 +837,7 @@ Configured by `docker` key which takes a list of maps:
 | environment
 | N
 | Map
-| A map of environment variable names and values. The `environment` settings apply to the entrypoint/command run by the docker container, not the job steps.
+| A map of environment variable names and values. The `environment` settings apply to the entrypoint/command run by the Docker container, not the job steps.
 
 | auth
 | N
@@ -853,19 +850,18 @@ Configured by `docker` key which takes a list of maps:
 | Authentication for AWS Elastic Container Registry (ECR)
 |===
 
-For a link:{{ site.baseurl }}/glossary/#primary-container[primary container] (the first container in the list) if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
-This is because the primary container is typically used only for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
-A link:{{ site.baseurl
-}}/custom-images/#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
+For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
+This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+A link:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the link:{{ site.baseurl }}/using-docker[Using the Docker Execution Environment] page.
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the link:using-docker#[Using the Docker Execution Environment] page.
 
 '''
 
 [#docker-auth]
 ===== Docker registry authentication
 
-Some registries, Docker Hub, for example, may rate limit anonymous docker pulls. It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See link:{{ site.baseurl }}/private-images/[Using Docker Authenticated Pulls] for details.
+Some registries, Docker Hub, for example, may rate limit anonymous Docker pulls. We recommend that you authenticate to pull private and public images. The username and password can be specified in the `auth` field. See xref:private-images#[Using Docker Authenticated Pulls] for details.
 
 Example:
 
@@ -927,7 +923,7 @@ jobs:
           oidc_role_arn: <your-iam-role-arn>
 ----
 
-For steps to get set up with OIDC to pull images from AWS ECR, see the link:/docs/pull-an-image-from-aws-ecr-with-oidc/[Pull and image from AWS ECR with OIDC] page.
+For steps to get set up with OIDC to pull images from AWS ECR, see the xref:pull-an-image-from-aws-ecr-with-oidc#[Pull and image from AWS ECR with OIDC] page.
 
 [#env-vars]
 ====== Use environment variables
@@ -950,22 +946,24 @@ jobs:
 [#machine]
 ==== *`machine`*
 
-*CircleCI Cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+NOTE: *CircleCI Cloud* The use of `machine: true` is deprecated. You must specify an image to use.
 
 The machine executor is configured using the `machine` key, which takes a map:
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
 | image
 | Y
 | String
-| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our link:/docs/server/v4.1/operator/manage-virtual-machines-with-vm-service/[VM Service documentation].
+| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/v4.4/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
 
 | docker_layer_caching
 | N
 | Boolean
-| Set this to `true` to enable link:{{ site.baseurl }}/docker-layer-caching[Docker Layer Caching].
+| Set this to `true` to enable xref:docker-layer-caching#[Docker Layer Caching].
 |===
 
 Example:
@@ -995,14 +993,14 @@ jobs:
 [#available-linux-machine-images-cloud]
 ===== Available Linux `machine` images
 
-*Specifying an image in your config file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
+*Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
 * https://circleci.com/developer/machine/image/ubuntu-2004[ubuntu-2004]
 * https://circleci.com/developer/machine/image/ubuntu-2204[ubuntu-2204]
 
-More information on what software is available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
+More information on the software available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
 
-The machine executor supports link:{{ site.baseurl }}/docker-layer-caching[Docker Layer Caching] which is useful when you are building Docker images during your job or Workflow.
+The machine executor supports xref:docker-layer-caching#[Docker Layer Caching], which is useful when you are building Docker images during your job or Workflow.
 
 '''
 
@@ -1016,7 +1014,7 @@ If you are using CircleCI server, contact your system administrator for details 
 [#available-linux-gpu-images]
 ===== Available Linux GPU `machine` images
 
-When using the Linux link:{{ site.baseurl }}/using-gpu[GPU executor], the available images are:
+When using the Linux xref:using-gpu#[GPU executor], the available images are:
 
 * `linux-cuda-11:default` v11.4, v11.6, v11.8 (default), Docker v20.10.24
 * `linux-cuda-12:default` v12.0, v12.1 (default), Docker v20.10.24

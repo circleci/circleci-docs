@@ -22,6 +22,7 @@
 [Uu]nversioned
 [Ww]alkthrough
 Airtable
+Android
 APIs
 Appium
 Artifactory
