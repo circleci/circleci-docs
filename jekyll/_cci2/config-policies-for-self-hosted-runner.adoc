@@ -15,6 +15,15 @@ NOTE: The config policies feature is available on the **Scale** plan and from Ci
 
 Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
 
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
+
 [#prerequisites]
 == Prerequisites
 
@@ -85,7 +94,7 @@ In the following steps you will replace `namespace/resource_class` and `project_
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment
-* Push your changes to your config policy repo if you are xref:create-and-manage-config-policies#manage-policies-with-your-vcs[managing policies via your VCS].
+* Push your changes to your config policy repository if you are xref:create-and-manage-config-policies#manage-policies-with-your-vcs[managing policies via your VCS].
 
 [tab.allow.manual]
 --
