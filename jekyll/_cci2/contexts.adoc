@@ -283,10 +283,21 @@ Follow these steps to set an expression restriction on a context:
 [,shell]
 ----
 curl --request GET \
-  --url 'https://circleci.com/api/v2/context?owner-id=<your-org-id>&page-token=NEXT_PAGE_TOKEN' \
+  --url 'https://circleci.com/api/v2/context?owner-id=<your-org-ID>&page-token=NEXT_PAGE_TOKEN' \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
   --header "Accept: application/json" \
-  --header "Content-Type: application/json" \
+  --header "Content-Type: application/json" | jq
+----
+. Copy the ID for your context from the previous API response
+. Create your context expression restriction, as follows, substituting your context ID and expression restriction:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/context/<your-context-ID>/restrictions \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+  --data '{"restriction_type":"expression","restriction_value":"<your-expression-restriction>"}'
 ----
 --
 
