@@ -25,6 +25,7 @@ Airtable
 Android
 APIs
 Appium
+Arm
 Artifactory
 Asciidoctor
 Atlassian
@@ -34,6 +35,7 @@ AWS
 backoff
 Behat
 Bitbucket
+[Bb]lobless
 BrowserStack
 Bundler
 Certbot
@@ -56,12 +58,14 @@ datastore
 Django
 Docker
 Dockerfiles?
+[Dd]otfile
 EKS
 Elixir
 endraw
 [Ee]xfiltration
 FAQs?
 Fastlane
+filename
 framebuffer
 Gbps
 GCP
@@ -69,6 +73,7 @@ geckodriver
 Gemfile
 GitHub
 GKE
+GPU
 Gradle
 Gzip
 HashiCorp
@@ -95,6 +100,7 @@ Leiningen
 Linux
 lockfile
 macOS
+manpage
 minitest
 namespace
 Node
@@ -120,7 +126,10 @@ SSH
 statsd
 stderr
 stdin
+[Ss]ubkeys?
+[Ss]ubshells?
 Telegraf
+templated
 Terraform
 Tink
 TLS
@@ -135,10 +144,11 @@ URLEncoder
 UUID
 UUIDs?
 VCS
-VMs
+VMs?
 VPC
 VS Code
 WebDriver
+Windows
 Workload Identity
 X Server
 Xcode

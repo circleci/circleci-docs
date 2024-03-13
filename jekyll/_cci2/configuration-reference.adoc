@@ -1026,7 +1026,7 @@ When using the Linux xref:using-gpu#[GPU executor], the available images are:
 
 CircleCI supports running jobs on Android for testing and deploying Android applications.
 
-To use the https://circleci.com/developer/machine/image/android[Android image] directly with the machine executor, add the following to your job:
+To use the link:https://circleci.com/developer/machine/image/android[Android image] directly with the machine executor, add the following to your job:
 
 [,yaml]
 ----
@@ -1038,25 +1038,25 @@ jobs:
       image: android:2022.09.1
 ----
 
-The Android image can also be accessed using the https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
+The Android image can also be accessed using the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
 
-For examples, refer to the link:/docs/android-machine-image[Using Android Images with the Machine Executor] page.
+For examples, refer to the xref:android-machine-image#[Using Android Images with the Machine Executor] page.
 
 '''
 
 [#available-windows-machine-images-cloud]
 ===== Available Windows `machine` images
 
-*Specifying an image in your config file is strongly recommended.* CircleCI supports multiple Windows machine images that can be specified in the `image` field.
+*Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Windows machine images that can be specified in the `image` field.
 
 For a full list of supported images, refer to one of the following:
 
-* https://circleci.com/developer/machine/image/windows-server-2022-gui[windows-server-2022-gui]
-* https://circleci.com/developer/machine/image/windows-server-2019[windows-server-2019]
+* link:https://circleci.com/developer/machine/image/windows-server-2022-gui[`windows-server-2022-gui` image]
+* link:https://circleci.com/developer/machine/image/windows-server-2019[`windows-server-2019` image]
 
-More information on what software is available in each image can be found in our https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss forum].
+More information on what software is available in each image can be found in our link:https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss forum].
 
-Alternatively, use the https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to manage your Windows execution environment. For examples, see the link:{{site.baseurl}}/using-windows/[Using the Windows Execution Environment] page.
+Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to manage your Windows execution environment. For examples, see the xref:using-windows#[Using the Windows Execution Environment] page.
 
 '''
 
@@ -1070,9 +1070,9 @@ If you are using CircleCI server, contact your system administrator for details 
 [#available-windows-gpu-image]
 ===== Available Windows GPU `machine` image
 
-When using the Windows link:{{ site.baseurl }}/using-gpu[GPU executor], the available image is:
+When using the Windows xref:using-gpu#[GPU executor], the available image is:
 
-* https://circleci.com/developer/machine/image/windows-server-2019-cuda[`windows-server-2019-cuda`]
+* link:https://circleci.com/developer/machine/image/windows-server-2019-cuda[`windows-server-2019-cuda`]
 
 *Example*
 
@@ -1091,15 +1091,17 @@ jobs:
 [#macos]
 ==== *`macos`*
 
-CircleCI supports running jobs on https://developer.apple.com/macos/[macOS], to allow you to build, test, and deploy apps for macOS, https://developer.apple.com/ios/[iOS], https://developer.apple.com/tvos/[tvOS] and https://developer.apple.com/watchos/[watchOS]. To run a job in a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode you would like to use.
+CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS], to allow you to build, test, and deploy apps for macOS, link:https://developer.apple.com/ios/[iOS], link:https://developer.apple.com/tvos/[tvOS] and https://developer.apple.com/watchos/[watchOS]. To run a job in a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode you would like to use.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
-| xcode
+| `xcode`
 | Y
 | String
-| The version of Xcode that is installed on the virtual machine, see the link:{{ site.baseurl }}/using-macos/#supported-xcode-versions[Supported Xcode Versions section of the Testing iOS] document for the complete list.
+| The version of Xcode that is installed on the virtual machine, see the xref:using-macos#supported-xcode-versions[Supported Xcode Versions section of the Testing iOS] document for the complete list.
 |===
 
 Example: Use a macOS virtual machine with Xcode version 14.2.0:
@@ -1126,7 +1128,7 @@ jobs:
 
 The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
 
-We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it is possible you are hitting these limits. https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request a raise on these limits for your account.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request a raise on these limits for your account.
 
 If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
 
@@ -1139,7 +1141,7 @@ If you want to confirm how much memory you have been allocated, you can check th
 [#self-hosted-runner]
 ===== Self-hosted runner
 
-Use the `resource_class` key to configure a https://circleci.com/docs/runner-overview/[self-hosted runner instance].
+Use the `resource_class` key to configure a xref:runner-overview#[self-hosted runner instance].
 
 For example:
 
@@ -1177,7 +1179,7 @@ jobs:
 [#arm]
 ====== Arm
 
-*Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the https://circleci.com/product/features/resource-classes/[Resource classes page].
+*Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
 
 {% include snippets/docker-arm-resource-table.md %}
 
@@ -1236,14 +1238,14 @@ jobs:
 [#macos-server]
 ===== macOS execution environment on server
 
-If you are working on CircleCI server v3.1 and up, you can access the macOS execution environment using link:/docs/runner-overview[self-hosted runner].
+If you are working on CircleCI server v3.1 and up, you can access the macOS execution environment using xref:runner-overview#[self-hosted runner].
 
 '''
 
 [#windows-execution-environment]
 ===== Windows execution environment
 
-For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. For more information, see the link:/docs/using-windows/[Using the Windows execution environment] page. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the link:/docs/github-apps-integration/[GitHub App integration] page.
+For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. For more information, see the xref:using-windows#[Using the Windows execution environment] page. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 {% include snippets/windows-resource-table.md %}
 
@@ -1416,7 +1418,7 @@ jobs:
 
 In its short form, the `run` step allows us to directly specify which `command` to execute as a string value. In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
 
-Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
+Another shorthand, which is possible for some steps, is to use the step name as a string instead of a key/value pair:
 
 [,yml]
 ----
@@ -1426,10 +1428,12 @@ jobs:
       - checkout
 ----
 
-In this case, the `checkout` step will checkout project source code into the job's <<jobs,`working_directory`>>.
+In this case, the `checkout` step will check out project source code into the job's <<jobs,`working_directory`>>.
 
 In general all steps can be described as:
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -1448,8 +1452,10 @@ Each built-in step is described in detail below.
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism >1, see link:{{site.baseurl}}/migrate-from-deploy-to-run[Migrate from deploy to run].
+NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:migrate-from-deploy-to-run#[Migrate from deploy to run].
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -1505,7 +1511,7 @@ Each `run` declaration represents a new shell. It is possible to specify a multi
       make test
 ----
 
-You can also configure commands to run <<background-commands,in the background>> if you don't want to wait for the step to complete before moving on to subsequent run steps.
+You can also configure commands to run <<background-commands,in the background>> if you do not want to wait for the step to complete before moving on to subsequent run steps.
 
 '''
 
@@ -1516,7 +1522,7 @@ For jobs that run on *Linux*, the default value of the `shell` option is `/bin/b
 
 For jobs that run on *macOS*, the default shell is `/bin/bash --login -eo pipefail`. The shell is a non-interactive login shell. The shell will execute `/etc/profile/` followed by `~/.bash_profile` before every step.
 
-For more information about which files are executed when bash is invocated, https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
+For more information about which files are executed when bash is invocated, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
 
 Descriptions of the `-eo pipefail` options are provided below.
 
@@ -1560,7 +1566,7 @@ For example:
 
 If `make test` fails, the `-o pipefail` option will cause the whole step to fail. Without `-o pipefail`, the step will always run successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which will always return a zero status.
 
-Note that even if `make test` fails the rest of pipeline will be executed.
+NOTE: If `make test` fails the rest of pipeline will be executed.
 
 If you want to avoid this behaviour, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
 
@@ -1573,7 +1579,7 @@ For more information, see the link:{{ site.baseurl }}/using-shell-scripts/[Using
 [#background-commands]
 ====== _Background commands_
 
-The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
+The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the configuration for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
 [,yml]
 ----
@@ -1607,7 +1613,7 @@ In this case, `command` and `name` become the string value of `run`, and the res
 '''
 
 [#the-when-attribute]
-====== The `when` Attribute
+====== The `when` attribute
 
 By default, CircleCI will execute job steps one at a time, in the order that they are defined in `config.yml`, until a step fails (returns a non-zero exit code). After a command fails, no further job steps will be executed.
 
@@ -1615,8 +1621,7 @@ Adding the `when` attribute to a job step allows you to override this default be
 
 The default value of `on_success` means that the step will run only if all of the previous steps have been successful (returned exit code 0).
 
-A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job
-step that needs to upload logs or code-coverage data somewhere.
+A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
@@ -1650,19 +1655,21 @@ run: |
 '''
 
 [#the-when-step]
-===== *The `when` Step*
+===== *The `when` step*
 
 The `when` and `unless` steps are supported in `version: 2.1` configuration
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the link:{{ site.baseurl }}/reusing-config/#defining-conditional-steps[Conditional Steps section of the Reusing Config document] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config#defining-conditional-steps[Conditional Steps section of the reusable configuratoin reference] for more details.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
 | condition
 | Y
 | Logic
-| link:{{site.baseurl}}/configuration-reference/#logic-statements[A logic statement]
+| xref:configuration-reference#logic-statements[A logic statement]
 
 | steps
 | Y
@@ -1706,8 +1713,10 @@ workflows:
 [#checkout]
 ===== *`checkout`*
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -1729,7 +1738,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ----
 
-The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our link:/docs/github-integration#establish-the-authenticity-of-an-ssh-host[integration guide] -- this guide will also be helpful if you wish to implement a custom checkout command.
+The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our xref:github-integration#establish-the-authenticity-of-an-ssh-host[integration guide] -- this guide will also be helpful if you wish to implement a custom checkout command.
 
 CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
@@ -1740,7 +1749,7 @@ CircleCI does not check out submodules. If your project requires submodules, add
 - run: git submodule update --init
 ----
 
-The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restore_cache,restore_cache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run,run>> step with command `git gc` before doing so.
+The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restore_cache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
 
 ====== *Blobless clones*
 
@@ -1759,7 +1768,7 @@ While this improves performance in most cases, if a downstream step requires tho
 [#setupremotedocker]
 ===== *`setup_remote_docker`*
 
-Allows Docker commands to be run locally. See link:{{ site.baseurl }}/building-docker-images/[Running Docker Commands] for details.
+Allows Docker commands to be run locally. See xref:building-docker-images#[Running Docker Commands] for details.
 
 [,yaml]
 ----
@@ -1773,34 +1782,39 @@ jobs:
           version: 20.10.14
 ----
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
 | docker_layer_caching
 | N
 | boolean
-| Set this to `true` to enable link:{{ site.baseurl }}/docker-layer-caching/[Docker Layer Caching] in the Remote Docker Environment (default: `false`)
+| Set this to `true` to enable xref:docker-layer-caching#[Docker Layer Caching] in the Remote Docker Environment (default: `false`)
 
 | version
 | N
 | String
-| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported docker versions link:{{site.baseurl}}/building-docker-images/#docker-version[here].
+| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported docker versions xref:building-docker-images#docker-version[here].
 |===
 
-*Notes*:
-
-* `setup_remote_docker` is not compatible with the `machine` executor. See link:{{ site.baseurl }}/docker-layer-caching/#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
+[NOTE]
+====
+* `setup_remote_docker` is not compatible with the `machine` executor. See xref:docker-layer-caching#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
 * The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+====
 
 '''
 
 [#savecache]
 ===== *`save_cache`*
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can <<restore_cache,restore this cache>>. Learn more on the link:{{site.baseurl}}/caching/[Caching Dependencies] page.
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can <<restore_cache,restore this cache>>. Learn more on the xref:caching#[Caching Dependencies] page.
 
-Cache retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
+Cache retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -1829,8 +1843,10 @@ The cache for a specific `key` is immutable and cannot be changed once written.
 
 NOTE: If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
 
-When storing a new cache, the `key` value may contain special templated values for your convenience:
+When storing a new cache, the `key` value may contain special, templated, values for your convenience:
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Template | Description
 
@@ -1847,10 +1863,10 @@ When storing a new cache, the `key` value may contain special templated values f
 | The SSH key used to checkout the repo.
 
 | {% raw %}`{{ .Environment.variableName }}`{% endraw %}
-| The environment variable `variableName` (supports any environment variable link:{{site.baseurl}}/env-vars[exported by CircleCI] or added to a specific link:{{site.baseurl}}/contexts[context]--not any arbitrary environment variable).
+| The environment variable `variableName` (supports any environment variable xref:env-vars#[exported by CircleCI] or added to a specific xref:contexts#[context]--not any arbitrary environment variable).
 
 | {% raw %}`{{ checksum "filename" }}`{% endraw %}
-| A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
+| A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repository and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It is important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 
 | {% raw %}`{{ epoch }}`{% endraw %}
 | The current time in seconds since the unix epoch.
@@ -1885,10 +1901,11 @@ Example:
 
 {% endraw %}
 
-*Notes:*
-
-* Wildcards are not currently supported in `save_cache` paths. Please visit the https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths[Ideas board] and vote for this feature if it would be useful for you or your organization.
+[NOTE]
+====
+* Wildcards are not currently supported in `save_cache` paths. Visit the link:https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths[Ideas board] and vote for this feature if it would be useful for you or your organization.
 * In some instances, a workaround for this is to save a particular workspace to cache:
+====
 
 {% raw %}
 
