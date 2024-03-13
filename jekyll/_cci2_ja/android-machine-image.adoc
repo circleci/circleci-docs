@@ -145,6 +145,7 @@ jobs:
           # run in parallel with the emulator starting up, to optimize build time
           name: Run assembleDebugAndroidTest task
           command: |
+            export TERM=dumb
             ./gradlew assembleDebugAndroidTest
       - run:
           name: Wait for emulator to start
