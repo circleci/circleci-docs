@@ -58,6 +58,15 @@ The decision result tracks which rules were included in the making of the decisi
 [#use-the-cli-with-config-policies]
 == Use the CLI with config policies
 
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
+
 Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
 
 The following config policies sub-commands are currently supported within the CLI:
@@ -273,7 +282,7 @@ hard_fail["use_official_docker_image"]
 [#using-pipeline-metadata]
 === Using pipeline metadata
 
-When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
+When writing policies for CircleCI config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
 
 When a policy is evaluated in the context of a triggered pipeline the following properties will be available on `data.meta`:
 
@@ -588,7 +597,7 @@ For further reading, see the link:https://circleci.com/blog/compliance-with-conf
 [#testing-policies]
 == Testing policies
 
-It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and OPA test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
 
 [#dynamic-config]
 == Config policies and dynamic configuration
