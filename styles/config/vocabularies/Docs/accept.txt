@@ -125,6 +125,7 @@ Playwright
 [Pp]re
 preallocate
 Python
+RAM
 reprovision
 reprovisioned
 [Rr]eusability

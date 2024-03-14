@@ -1174,14 +1174,14 @@ jobs:
 [#x86]
 ====== x86
 
-{% include snippets/docker-resource-table.md %}
+{% include snippets/docker-resource-table.adoc %}
 
 [#arm]
 ====== Arm
 
 *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
 
-{% include snippets/docker-arm-resource-table.md %}
+{% include snippets/docker-arm-resource-table.adoc %}
 
 '''
 
