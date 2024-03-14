@@ -69,6 +69,7 @@ EKS
 Elixir
 endraw
 [Ee]xfiltration
+[Ff]alsy
 FAQs?
 Fastlane
 filename
@@ -88,6 +89,7 @@ Homebrew
 hostname
 HPA
 HPAs?
+invocated
 IP
 Java
 JavaScript
@@ -120,6 +122,7 @@ Packagecloud
 PHPUnit
 Pipenv
 Playwright
+[Pp]re
 preallocate
 Python
 reprovision
@@ -161,6 +164,7 @@ VS Code
 WebDriver
 Windows
 Workload Identity
+x86
 X Server
 Xcode
 XCTest

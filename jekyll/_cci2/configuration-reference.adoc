@@ -429,10 +429,10 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 |===
 | Key | Required | Type | Description
 
-| version
+| `version`
 | Y
 | String
-| `2`, `2.0`, or `2.1` See the xref:reusing-config#[Reusing Config] doc for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+| `2`, `2.0`, or `2.1` See the xref:reusing-config#[Reusable configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 |===
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
@@ -447,7 +447,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 |===
 | Key | Required | Type | Description
 
-| setup
+| `setup`
 | N
 | Boolean
 | Designates the config.yaml for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
@@ -467,17 +467,17 @@ NOTE: The `orbs` key is supported in `version: 2.1` configuration
 |===
 | Key | Required | Type | Description
 
-| orbs
+| `orbs`
 | N
 | Map
 | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the xref:creating-orbs#[Creating Orbs] documentation for details.
 
-| executors
+| `executors`
 | N
 | Map
 | A map of strings to executor definitions. See the <<executors>> section below.
 
-| commands
+| `commands`
 | N
 | Map
 | A map of command names to command definitions. See the <<commands>> section below.
@@ -529,17 +529,17 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 |===
 | Key | Required | Type | Description
 
-| steps
+| `steps`
 | Y
 | Sequence
 | A sequence of steps run inside the calling job of the command.
 
-| parameters
+| `parameters`
 | N
 | Map
 | A map of parameter keys. See the xref:reusing-config#parameter-syntax[Parameter Syntax] section of the xref:reusing-config#[Reusing Config] document for details.
 
-| description
+| `description`
 | N
 | String
 | A string that describes the purpose of the command.
@@ -574,7 +574,7 @@ Pipeline parameters declared for use in the configuration. See xref:pipeline-var
 |===
 | Key | Required | Type | Description
 
-| parameters
+| `parameters`
 | N
 | Map
 | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See xref:reusing-config#parameter-syntax[Parameter Syntax] for details.
@@ -594,42 +594,42 @@ Executors define the execution environment in which the steps of a job will be r
 |===
 | Key | Required | Type | Description
 
-| docker
+| `docker`
 | Y ^(1)^
 | List
-| Options for <<docker,docker executor>>
+| Options for <<docker,Docker executor>>
 
-| resource_class
+| `resource_class`
 | N
 | String
 | Amount of CPU and RAM allocated to each container in a job.
 
-| machine
+| `machine`
 | Y ^(1)^
 | Map
 | Options for <<machine,machine executor>>
 
-| macos
+| `macos`
 | Y ^(1)^
 | Map
 | Options for <<macos,macOS executor>>
 
-| windows
+| `windows`
 | Y ^(1)^
 | Map
 | <<windows,Windows executor>> currently working with orbs. Check out link:https://circleci.com/developer/orbs/orb/circleci/windows[the orb].
 
-| shell
+| `shell`
 | N
 | String
 | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See <<default-shell-options,Default Shell Options>>)
 
-| working_directory
+| `working_directory`
 | N
 | String
 | In which directory to run the steps. Will be interpreted as an absolute path.
 
-| environment
+| `environment`
 | N
 | Map
 | A map of environment variable names and values.
@@ -677,57 +677,57 @@ Each job consists of the job's name as a key and a map as a value. A name should
 |===
 | Key | Required | Type | Description
 
-| docker
+| `docker`
 | Y ^(1)^
 | List
-| Options for <<docker,docker executor>>
+| Options for the <<docker,Docker executor>>
 
-| machine
+| `machine`
 | Y ^(1)^
 | Map
-| Options for <<machine,machine executor>>
+| Options for the <<machine,machine executor>>
 
-| macos
+| `macos`
 | Y ^(1)^
 | Map
-| Options for <<macos,macOS executor>>
+| Options for the <<macos,macOS executor>>
 
-| shell
+| `shell`
 | N
 | String
 | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See <<default-shell-options,Default Shell Options>>)
 
-| parameters
+| `parameters`
 | N
 | Map
 | <<parameters,Parameters>> for making a `job` explicitly configurable in a `workflow`.
 
-| steps
+| `steps`
 | Y
 | List
 | A list of <<steps,steps>> to be performed
 
-| working_directory
+| `working_directory`
 | N
 | String
 | In which directory to run the steps. Will be interpreted as an absolute path. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. *Note:* Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. `working_directory` will be created automatically if it doesn't exist.
 
-| parallelism
+| `parallelism`
 | N
 | Integer
 | Number of parallel instances of this job to run (default: 1)
 
-| environment
+| `environment`
 | N
 | Map
 | A map of environment variable names and values.
 
-| branches
+| `branches`
 | N
 | Map
 | This key is deprecated. Use <<jobfilters,workflows filtering>> to control which jobs run for which branches.
 
-| resource_class
+| `resource_class`
 | N
 | String
 | Amount of CPU and RAM allocated to each container in a job.
@@ -809,42 +809,42 @@ Configured by `docker` key which takes a list of maps:
 |===
 | Key | Required | Type | Description
 
-| image
+| `image`
 | Y
 | String
-| The name of a custom docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
+| The name of a custom Docker image to use. The first `image` listed under a job defines the job's own primary container image where all steps will run.
 
-| name
+| `name`
 | N
 | String
 | `name` defines the hostname for the container (the default is `localhost`), which is used for reaching secondary (service) containers. By default, all services are exposed directly on `localhost`. This field is useful if you would rather have a different hostname instead of `localhost`, for example, if you are starting multiple versions of the same service.
 
-| entrypoint
+| `entrypoint`
 | N
 | String or List
 | The command used as executable when launching the container. `entrypoint` overrides the image's link:https://docs.docker.com/engine/reference/builder/#entrypoint[`ENTRYPOINT`].
 
-| command
+| `command`
 | N
 | String or List
-| The command used as pid 1 (or args for entrypoint) when launching the container. `command` overrides the image's `COMMAND`. It will be used as arguments to the image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
+| The command used as PID 1 (or arguments for entrypoint) when launching the container. `command` overrides the image's `COMMAND`. It will be used as arguments to the image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
 
-| user
+| `user`
 | N
 | String
 | Which user to run commands as within the Docker container
 
-| environment
+| `environment`
 | N
 | Map
 | A map of environment variable names and values. The `environment` settings apply to the entrypoint/command run by the Docker container, not the job steps.
 
-| auth
+| `auth`
 | N
 | Map
 | Authentication for registries using standard `docker login` credentials
 
-| aws_auth
+| `aws_auth`
 | N
 | Map
 | Authentication for AWS Elastic Container Registry (ECR)
@@ -946,7 +946,7 @@ jobs:
 [#machine]
 ==== *`machine`*
 
-NOTE: *CircleCI Cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specify an image to use.
 
 The machine executor is configured using the `machine` key, which takes a map:
 
@@ -955,15 +955,15 @@ The machine executor is configured using the `machine` key, which takes a map:
 |===
 | Key | Required | Type | Description
 
-| image
+| `image`
 | Y
 | String
 | The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/v4.4/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
 
-| docker_layer_caching
+| `docker_layer_caching`
 | N
 | Boolean
-| Set this to `true` to enable xref:docker-layer-caching#[Docker Layer Caching].
+| Set this to `true` to enable xref:docker-layer-caching#[Docker layer caching].
 |===
 
 Example:
@@ -1117,7 +1117,7 @@ jobs:
 '''
 
 [#branches-deprecated]
-==== *`branches` -- DEPRECATED*
+==== *`branches` - DEPRECATED*
 
 *This key is deprecated. Use <<jobfilters,workflows filtering>> to control which jobs run for which branches.*
 
@@ -1437,7 +1437,7 @@ In general all steps can be described as:
 |===
 | Key | Required | Type | Description
 
-| <step_type>
+| `<step_type>`
 | Y
 | Map or String
 | A configuration map for the step or some string whose semantics are defined by the step.
@@ -1459,42 +1459,42 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 |===
 | Key | Required | Type | Description
 
-| command
+| `command`
 | Y
 | String
 | Command to run via the shell
 
-| name
+| `name`
 | N
 | String
 | Title of the step to be shown in the CircleCI UI (default: full `command`)
 
-| shell
+| `shell`
 | N
 | String
 | Shell to use for execution command (default: See <<default-shell-options,Default Shell Options>>)
 
-| environment
+| `environment`
 | N
 | Map
 | Additional environmental variables, locally scoped to command
 
-| background
+| `background`
 | N
 | Boolean
 | Whether or not this step should run in the background (default: false)
 
-| working_directory
+| `working_directory`
 | N
 | String
 | In which directory to run this step. Will be interpreted relative to the <<jobs,`working_directory`>> of the job). (default: `.`)
 
-| no_output_timeout
+| `no_output_timeout`
 | N
 | String
 | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s". The default is 10 minutes and the maximum is governed by the <<jobs,maximum time a job is allowed to run>>.
 
-| when
+| `when`
 | N
 | String
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
@@ -1623,7 +1623,7 @@ The default value of `on_success` means that the step will run only if all of th
 
 A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
 
-A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
+A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts.
 
 Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
 
@@ -1666,12 +1666,12 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 |===
 | Key | Required | Type | Description
 
-| condition
+| `condition`
 | Y
 | Logic
 | xref:configuration-reference#logic-statements[A logic statement]
 
-| steps
+| `steps`
 | Y
 | Sequence
 | A list of steps to execute when the condition is true
@@ -1720,7 +1720,7 @@ A special step used to check out source code to the configured `path` (defaults 
 |===
 | Key | Required | Type | Description
 
-| path
+| `path`
 | N
 | String
 | Checkout directory. Will be interpreted relative to the <<jobs,`working_directory`>> of the job). (default: `.`)
@@ -1728,8 +1728,8 @@ A special step used to check out source code to the configured `path` (defaults 
 
 If `path` already exists and is:
 
-* a git repo - step will not clone whole repo, instead will fetch origin
-* NOT a git repo - step will fail.
+* A git repository - step will not clone whole repository, instead will fetch origin
+* NOT a git repository - step will fail.
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
 
@@ -1749,7 +1749,7 @@ CircleCI does not check out submodules. If your project requires submodules, add
 - run: git submodule update --init
 ----
 
-The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restore_cache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
+The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restorecache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
 
 ====== *Blobless clones*
 
@@ -1768,7 +1768,7 @@ While this improves performance in most cases, if a downstream step requires tho
 [#setupremotedocker]
 ===== *`setup_remote_docker`*
 
-Allows Docker commands to be run locally. See xref:building-docker-images#[Running Docker Commands] for details.
+Allows Docker commands to be run locally. See xref:building-docker-images#[Running Docker commands] for details.
 
 [,yaml]
 ----
@@ -1787,15 +1787,15 @@ jobs:
 |===
 | Key | Required | Type | Description
 
-| docker_layer_caching
+| `docker_layer_caching`
 | N
 | boolean
 | Set this to `true` to enable xref:docker-layer-caching#[Docker Layer Caching] in the Remote Docker Environment (default: `false`)
 
-| version
+| `version`
 | N
 | String
-| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported docker versions xref:building-docker-images#docker-version[here].
+| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
 |===
 
 [NOTE]
@@ -1809,7 +1809,7 @@ jobs:
 [#savecache]
 ===== *`save_cache`*
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can <<restore_cache,restore this cache>>. Learn more on the xref:caching#[Caching Dependencies] page.
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can <<restorecache,restore this cache>>. Learn more on the xref:caching#[Caching Dependencies] page.
 
 Cache retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
@@ -1818,22 +1818,22 @@ Cache retention can be customized on the link:https://app.circleci.com/[CircleCI
 |===
 | Key | Required | Type | Description
 
-| paths
+| `paths`
 | Y
 | List
 | List of directories which should be added to the cache
 
-| key
+| `key`
 | Y
 | String
 | Unique identifier for this cache
 
-| name
+| `name`
 | N
 | String
 | Title of the step to be shown in the CircleCI UI (default: "Saving Cache")
 
-| when
+| `when`
 | N
 | String
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
@@ -1860,7 +1860,7 @@ When storing a new cache, the `key` value may contain special, templated, values
 | The VCS revision currently being built.
 
 | {% raw %}`{{ .CheckoutKey }}`{% endraw %}
-| The SSH key used to checkout the repo.
+| The SSH key used to checkout the repository.
 
 | {% raw %}`{{ .Environment.variableName }}`{% endraw %}
 | The environment variable `variableName` (supports any environment variable xref:env-vars#[exported by CircleCI] or added to a specific xref:contexts#[context]--not any arbitrary environment variable).
@@ -1869,7 +1869,7 @@ When storing a new cache, the `key` value may contain special, templated, values
 | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repository and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It is important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 
 | {% raw %}`{{ epoch }}`{% endraw %}
-| The current time in seconds since the unix epoch.
+| The current time in seconds since the UNIX epoch.
 
 | {% raw %}`{{ arch }}`{% endraw %}
 | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
@@ -1932,17 +1932,17 @@ Restores a previously saved cache based on a `key`. Cache needs to have been sav
 |===
 | Key | Required | Type | Description
 
-| key
+| `key`
 | Y ^(1)^
 | String
 | Single cache key to restore
 
-| keys
+| `keys`
 | Y ^(1)^
 | List
 | List of cache keys to lookup for a cache to restore. Only first existing key will be restored.
 
-| name
+| `name`
 | N
 | String
 | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
@@ -2025,12 +2025,12 @@ Step to store artifacts (for example logs, binaries, etc) to be available in the
 |===
 | Key | Required | Type | Description
 
-| path
+| `path`
 | Y
 | String
 | Directory in the primary container to save as job artifacts
 
-| destination
+| `destination`
 | N
 | String
 | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`)
@@ -2059,14 +2059,14 @@ Example:
 
 Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's *Test Summary* section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the xref:collect-test-data#[Collecting Test Data] page.
 
-It is also possible to store test results as build artifacts. For steps, refer to <<storeartifacts,the *store_artifacts* step>> section.
+It is also possible to store test results as build artifacts. For steps, refer to <<storeartifacts,the `store_artifacts` step>> section.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
-| path
+| `path`
 | Y
 | String
 | Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML test metadata files, or to a single test file.
@@ -2111,12 +2111,12 @@ Workspace storage retention can be customized on the https://app.circleci.com/[C
 |===
 | Key | Required | Type | Description
 
-| root
+| `root`
 | Y
 | String
 | Either an absolute path or a path relative to `working_directory`
 
-| paths
+| `paths`
 | Y
 | List
 | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
@@ -2190,7 +2190,7 @@ Special step used to attach the workflow's workspace to the current container. T
 |===
 | Key | Required | Type | Description
 
-| at
+| `at`
 | Y
 | String
 | Directory to attach the workspace to.
@@ -2222,7 +2222,7 @@ Special step that adds SSH keys from a project's settings to a container. Also c
 |===
 | Key | Required | Type | Description
 
-| fingerprints
+| `fingerprints`
 | N
 | List
 | List of fingerprints corresponding to the keys to be added (default: all keys added)
@@ -2311,7 +2311,7 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 |===
 | Key | Required | Type | Description
 
-| version
+| `version`
 | Y if config version is `2`
 | String
 | Should currently be `2`
@@ -2336,7 +2336,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 |===
 | Key | Required | Type | Description
 
-| triggers
+| `triggers`
 | N
 | Array
 | Should currently be `schedule`.
@@ -2379,7 +2379,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 |===
 | Key | Required | Type | Description
 
-| cron
+| `cron`
 | Y
 | String
 | See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
@@ -2397,7 +2397,7 @@ Trigger filters can have the key `branches`.
 |===
 | Key | Required | Type | Description
 
-| filters
+| `filters`
 | Y
 | Map
 | A map defining rules for execution on specific branches
@@ -2421,17 +2421,17 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 |===
 | Key | Required | Type | Description
 
-| branches
+| `branches`
 | Y
 | Map
 | A map defining rules for execution on specific branches
 
-| only
+| `only`
 | Y
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 
-| ignore
+| `ignore`
 | N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
@@ -2440,7 +2440,7 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 '''
 
 [#using-when-in-workflows]
-==== *Using `when` in Workflows*
+==== *Using `when` in workflows*
 
 Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
 
@@ -2492,7 +2492,7 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 |===
 | Key | Required | Type | Description
 
-| jobs
+| `jobs`
 | Y
 | List
 | A list of jobs to run with their dependencies
@@ -2517,7 +2517,7 @@ Jobs are run concurrently by default, so you must explicitly require any depende
 |===
 | Key | Required | Type | Description
 
-| requires
+| `requires`
 | N
 | List
 | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
@@ -2535,7 +2535,7 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 |===
 | Key | Required | Type | Description
 
-| name
+| `name`
 | N
 | String
 | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
@@ -2551,7 +2551,7 @@ Jobs may be configured to use global environment variables set for an organizati
 |===
 | Key | Required | Type | Description
 
-| context
+| `context`
 | N
 | String/List
 | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
@@ -2600,7 +2600,7 @@ Workflows will ignore job-level branching. If you use job-level branching and la
 |===
 | Key | Required | Type | Description
 
-| filters
+| `filters`
 | N
 | Map
 | A map defining rules for execution on specific branches
@@ -2642,17 +2642,17 @@ Branches can have the keys `only` and `ignore`, which either map to a single str
 |===
 | Key | Required | Type | Description
 
-| branches
+| `branches`
 | N
 | Map
 | A map defining rules for execution on specific branches
 
-| only
+| `only`
 | N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 
-| ignore
+| `ignore`
 | N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
@@ -2677,17 +2677,17 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 |===
 | Key | Required | Type | Description
 
-| tags
+| `tags`
 | N
 | Map
 | A map defining rules for execution on specific tags
 
-| only
+| `only`
 | N
 | String, or List of Strings
 | Either a single tag specifier, or a list of tag specifiers
 
-| ignore
+| `ignore`
 | N
 | String, or List of Strings
 | Either a single tag specifier, or a list of tag specifiers
@@ -2709,17 +2709,17 @@ The `matrix` stanza allows you to run a parameterized job multiple times with di
 |===
 | Key | Required | Type | Description
 
-| parameters
+| `parameters`
 | Y
 | Map
 | A map of parameter names to every value the job should be called with
 
-| exclude
+| `exclude`
 | N
 | List
 | A list of argument maps that should be excluded from the matrix
 
-| alias
+| `alias`
 | N
 | String
 | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
@@ -2942,27 +2942,27 @@ includes:
 | resolves to a truthy value
 | `<< pipeline.parameters.my-parameter >>`
 
-| and
+| `and`
 | N logic statements
 | all arguments are truthy
 | `and: [ true, true, false ]`
 
-| or
+| `or`
 | N logic statements
 | any argument is truthy
 | `or: [ false, true, false ]`
 
-| not
+| `not`
 | 1 logic statement
 | the argument is not truthy
 | `not: true`
 
-| equal
+| `equal`
 | N values
 | all arguments evaluate to equal values
 | `equal: [ 42, << pipeline.number >>]`
 
-| matches
+| `matches`
 | `pattern` and `value`
 | `value` matches the `pattern`
 | `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
