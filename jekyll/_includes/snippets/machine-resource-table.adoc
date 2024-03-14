@@ -1,0 +1,40 @@
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+|Class | vCPUs | RAM | Disk Size | Cloud | Server
+
+| medium
+| 2
+| 7.5 GB
+| 150GB
+| icon:check[]
+| icon:check[]
+
+| large
+| 4
+| 15 GB
+| 150GB
+| icon:check[]
+| icon:check[]
+
+| xlarge
+| 8
+| 32 GB
+| 150GB
+| icon:check[]
+| icon:check[]
+
+| 2xlarge
+| 16
+| 64 GB
+| 150GB
+| icon:check[]
+| icon:check[]
+
+| 2xlarge+
+| 32
+| 64 GB
+| 150GB
+| icon:check[]
+| icon:check[]
+|===

@@ -1188,7 +1188,7 @@ jobs:
 [#linuxvm-execution-environment]
 ===== LinuxVM execution environment
 
-{% include snippets/machine-resource-table.md %}
+{% include snippets/machine-resource-table.adoc %}
 
 Example:
 
@@ -1218,7 +1218,7 @@ jobs:
 [#macos-execution-environment]
 ===== macOS execution environment
 
-{% include snippets/macos-resource-table.md %}
+{% include snippets/macos-resource-table.adoc %}
 
 *Example*
 
