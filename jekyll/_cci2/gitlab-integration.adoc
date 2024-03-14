@@ -324,11 +324,6 @@ Passing secrets to forked pull requests is not a currently supported option for 
 
 GitLab integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
 
-[#ssh-rerun]
-=== SSH rerun
-
-SSH reruns are not currently supported for GitLab projects. This feature is in development and will be available soon.
-
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 

@@ -344,16 +344,13 @@ jobs:
 ## SSH into your Windows build
 {: #ssh-into-your-windows-build }
 
-SSH reruns are not currently supported for GitLab or GitHub App projects. This feature is in development and will be available soon. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info" }
-
 It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:
 
 ### Steps
 {: #steps }
 
 
-1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
+1. Ensure that you have added an SSH key to your [User Settings](https://app.circleci.com/settings/user/job-ssh-keys), or to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
 
 2. To start a job with SSH enabled, select the **Rerun job with SSH** option from the "Rerun Workflow" dropdown menu.
 
