@@ -146,6 +146,8 @@ en:
             link: triggers-overview
       - name: How-to guides
         children:
+          - name: Set up multiple configuration files for a project
+            link: set-up-multiple-configuration-files-for-a-project
           - name: Notify a Slack channel of a paused workflow
             link: notify-a-slack-channel-of-a-paused-workflow
           - name: Use branch filters

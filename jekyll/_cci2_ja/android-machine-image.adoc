@@ -118,7 +118,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: android:202102-01
+      image: android:default
     # To optimize build times, we recommend "large" and above for Android-related jobs
     resource_class: large
     steps:
@@ -145,6 +145,7 @@ jobs:
           # run in parallel with the emulator starting up, to optimize build time
           name: Run assembleDebugAndroidTest task
           command: |
+            export TERM=dumb
             ./gradlew assembleDebugAndroidTest
       - run:
           name: Wait for emulator to start
