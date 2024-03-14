@@ -23,7 +23,7 @@
 [Ww]alkthrough
 Airtable
 [Aa]llowlist?
-APIs
+APIs?
 Appium
 Artifactory
 [Aa]rchitected
@@ -47,6 +47,7 @@ circleci.com
 classname?
 classpath
 classpath?
+CLI
 Clojure
 Codecov
 [Cc]onfig
