@@ -428,9 +428,9 @@ Numeric literals are whole integers (longs). For example, `1` or `768`.
 ==== Strings
 
 String literals are enclosed within double-quotes `" "`.
-The `\\` character is used to escape an embedded quote, or to escape an embedded `\\`.
+The `\` character is used to escape an embedded quote, or to escape an embedded `\`.
 
-For example, `"the quick brown fox"`, `"You can embed \\" and \\\\ characters"`
+For example, `"the quick brown fox"`, `"You can embed \" and \\ characters"`
 
 ==== Booleans
 
