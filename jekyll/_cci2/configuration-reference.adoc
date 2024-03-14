@@ -1901,12 +1901,6 @@ Example:
 
 {% endraw %}
 
-[NOTE]
-====
-* Wildcards are not currently supported in `save_cache` paths. Visit the link:https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths[Ideas board] and vote for this feature if it would be useful for you or your organization.
-* In some instances, a workaround for this is to save a particular workspace to cache:
-====
-
 {% raw %}
 
 [,yml]
@@ -1920,13 +1914,21 @@ Example:
 
 {% endraw %}
 
+[NOTE]
+====
+* Wildcards are not currently supported in `save_cache` paths. Visit the link:https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths[Ideas board] and vote for this feature if it would be useful for you or your organization.
+* In some instances, a workaround for this is to save a particular workspace to cache:
+====
+
 '''
 
 [#restorecache]
 ===== *`restore_cache`*
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<save_cache,`save_cache` step>>. Learn more in link:{{ site.baseurl }}/caching/[the caching documentation].
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<save_cache,`save_cache` step>>. Learn more in xref:caching#[the caching documentation].
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2009,15 +2011,17 @@ Example:
 [#deploy-deprecated]
 ===== *`deploy` - DEPRECATED*
 
-See <<run,run>> for current processes. If you have menu:parallelism[1] in your job, see the link:{{site.baseurl}}/migrate-from-deploy-to-run[Migrate from deploy to run] guide.
+See <<run>> for current processes. If you have parallelism `> 1` in your job, see the link:migrate-from-deploy-to-run#[Migrate from deploy to run] guide.
 
 '''
 
 [#storeartifacts]
 ===== *`store_artifacts`*
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the link:{{ site.baseurl }}/artifacts/[Uploading Artifacts] document for more information.
+Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the xref:artifacts#[Uploading Artifacts] page for more information.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2034,7 +2038,7 @@ Step to store artifacts (for example logs, binaries, etc) to be available in the
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
-Artifact storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
+Artifact storage retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
 Example:
 
@@ -2053,10 +2057,12 @@ Example:
 [#storetestresults]
 ===== *`store_test_results`*
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's *Test Summary* section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the link:{{site.baseurl}}/collect-test-data/[Collecting Test Data] page.
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's *Test Summary* section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the xref:collect-test-data#[Collecting Test Data] page.
 
-It is also possible to store test results as a build artifact; to do so, please refer to <<storeartifacts,the *store_artifacts* step>>.
+It is also possible to store test results as build artifacts. For steps, refer to <<storeartifacts,the *store_artifacts* step>> section.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2094,12 +2100,14 @@ test-results
 [#persisttoworkspace]
 ===== *`persist_to_workspace`*
 
-Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the link:{{site.baseurl}}/workspaces/[Using Workspaces to Share Data Between Jobs] page.
+Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the xref:workspaces#[Using Workspaces to Share Data Between Jobs] page.
 
 `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
 
 Workspace storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2114,7 +2122,7 @@ Workspace storage retention can be customized on the https://app.circleci.com/[C
 | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
 |===
 
-The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
+The root key is a directory on the container which is taken to be the root directory of the workspace. The path values are all relative to the root.
 
 *Example for root Key*
 
@@ -2149,6 +2157,7 @@ After this step completes, the following directories are added to the workspace:
 
 The `paths` list uses `Glob` from Go, and the pattern matches https://golang.org/pkg/path/filepath/#Match[filepath.Match].
 
+[source]
 ----
 pattern:
         { term }
@@ -2165,15 +2174,19 @@ character-range:
         lo '-' hi matches character c for lo <= c <= hi
 ----
 
-The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). *Note:* Everything must be relative to the work space root directory.
+The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/').
+
+NOTE: Everything must be relative to the work space root directory.
 
 '''
 
 [#attachworkspace]
 ===== *`attach_workspace`*
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the link:{{site.baseurl}}/workspaces/[Using Workspaces to Share Data Between Jobs] page.
+Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the link:{{site.baseurl}}/workspaces/[Using workspaces] page.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2200,10 +2213,12 @@ The lifetime of artifacts, workspaces, and caches can be customized on the https
 [#add-ssh-keys]
 ===== *`add_ssh_keys`*
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the link:{{site.baseurl}}/github-integration/#create-additional-github-ssh-keys[Create additional GitHub SSH keys] page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:github-integration#create-additional-github-ssh-keys[Create additional GitHub SSH keys] page.
 
 *Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2229,7 +2244,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 [#using-pipeline-values]
 ===== Using `pipeline` values
 
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the link:/docs/pipeline-variables/[Pipeline values and parameters] page.
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the xref:pipeline-variables#[Pipeline values and parameters] page.
 
 Example:
 
@@ -2252,7 +2267,9 @@ jobs:
 [#circleciipranges]
 ==== *`circleci_ip_ranges`*
 
-Enables jobs to go through a set of well-defined IP address ranges. See link:{{ site.baseurl }}/ip-ranges/[IP ranges] for details.
+NOTE: A paid account on a https://circleci.com/pricing/[Performance or Scale plan] is required to access IP ranges.
+
+Enables jobs to go through a set of well-defined IP address ranges. See xref:ip-ranges#[IP ranges] for details.
 
 Example:
 
@@ -2273,26 +2290,24 @@ workflows:
       - build
 ----
 
-*Notes*:
-
-* A paid account on a https://circleci.com/pricing/[Performance or Scale plan] is required to access IP ranges.
-
 '''
 
 [#workflows]
 == *`workflows`*
 
-Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the link:{{site.baseurl}}/workflows/[Using Workflows to Orchestrate Jobs] page.
+Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the xref:workflows#[Using Workflows to Orchestrate Jobs] page.
 
 '''
 
 [#workflow-version]
 === *`version`*
 
-The workflows `version` key is *not* required for v2.1 configuration
+The workflows `version` key is *not* required for `version: 2.1` configuration
 
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2316,6 +2331,8 @@ A unique name for your workflow.
 
 Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2330,7 +2347,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 [#schedule]
 ===== *`schedule`*
 
-The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines link:{{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the link:{{site.baseurl}}/scheduled-pipelines[Scheduled pipelines] page.
+The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
@@ -2357,13 +2374,15 @@ workflows:
 
 The `cron` key is defined using POSIX `crontab` syntax.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
 | cron
 | Y
 | String
-| See the http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
+| See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
 |===
 
 '''
@@ -2371,8 +2390,10 @@ The `cron` key is defined using POSIX `crontab` syntax.
 [#filters]
 ====== *`filters`*
 
-Trigger Filters can have the key `branches`.
+Trigger filters can have the key `branches`.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2387,15 +2408,16 @@ Trigger Filters can have the key `branches`.
 [#branches]
 ====== *`branches`*
 
-The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a link:{{ site.baseurl }}/workflows/#using-contexts-and-filtering-in-your-workflows[workflow] for the `main` branch.
+The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:workflows#using-contexts-and-filtering-in-your-workflows[workflow] for the `main` branch.
 
-Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with ``/``'s, or map to a list of such strings. Regular expressions must match the *entire* string.
+Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the *entire* string.
 
 * Any branches that match `only` will run the job.
 * Any branches that match `ignore` will not run the job.
-* If neither `only` nor `ignore` are specified then all branches will run the job.
-If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
+* If neither `only` nor `ignore` are specified then all branches will run the job. If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2420,9 +2442,9 @@ If both `only` and `ignore` are specified, the `only` is used and `ignore` will 
 [#using-when-in-workflows]
 ==== *Using `when` in Workflows*
 
-Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration
+Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a link:{{site.baseurl}}/configuration-reference/#logic-statements[logic statement] to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements>> to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -2456,7 +2478,7 @@ This example prevents the workflow `integration_tests` from running unless the t
 }
 ----
 
-Refer to the link:{{ site.baseurl }}/workflows[Workflows] for more examples and conceptual information.
+Refer to the xref:workflows#[Workflows] for more examples and conceptual information.
 
 '''
 
@@ -2465,6 +2487,8 @@ Refer to the link:{{ site.baseurl }}/workflows[Workflows] for more examples and 
 
 A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2486,8 +2510,10 @@ A job name that exists in your `config.yml`.
 [#requires]
 ====== *`requires`*
 
-Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
+Jobs are run concurrently by default, so you must explicitly require any dependencies by their job name if you need some jobs to run sequentially.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2502,8 +2528,10 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 [#name]
 ====== *`name`*
 
-The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
+The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (for example, sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2526,7 +2554,7 @@ Jobs may be configured to use global environment variables set for an organizati
 | context
 | N
 | String/List
-| The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single Context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
+| The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
 |===
 
 '''
@@ -2534,7 +2562,7 @@ Jobs may be configured to use global environment variables set for an organizati
 [#type]
 ====== *`type`*
 
-A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the link:{{site.baseurl}}/workflows/#holding-a-workflow-for-a-manual-approval[Using Workflows to Orchestrate Jobs] page.
+A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the xref:workflows#holding-a-workflow-for-a-manual-approval[Using workflows to orchestrate jobs] page.
 
 Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
@@ -2563,10 +2591,12 @@ An approval job can have any name. In the example above the approval job is name
 [#jobfilters]
 ====== *`filters`*
 
-Job Filters can have the key `branches` or `tags`.
+Job filters can have the keys `branches` or `tags`.
 
 Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2593,20 +2623,22 @@ workflows:
 
 The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
 
-You can read more about using regex in your config in the link:{{ site.baseurl }}/workflows/#using-regular-expressions-to-filter-tags-and-branches[Using Workflows to Schedule Jobs] page.
+You can read more about using regex in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
 
 '''
 
 [#branches]
 ====== *`branches`*
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
+Branches can have the keys `only` and `ignore`, which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
 
 * Any branches that match `only` will run the job.
 * Any branches that match `ignore` will not run the job.
 * If neither `only` nor `ignore` are specified then all branches will run the job.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2640,6 +2672,8 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 * If neither `only` nor `ignore` are specified then the job is skipped for all tags.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2659,7 +2693,7 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 | Either a single tag specifier, or a list of tag specifiers
 |===
 
-For more information, see the link:{{ site.baseurl }}/workflows/#executing-workflows-for-a-git-tag[Executing Workflows For a Git Tag] section of the Workflows document.
+For more information, see the xref:workflows#executing-workflows-for-a-git-tag[Executing workflows for a git tag] section of the Workflows page.
 
 '''
 
@@ -2668,8 +2702,10 @@ For more information, see the link:{{ site.baseurl }}/workflows/#executing-workf
 
 The `matrix` key is supported in `version: 2.1` configuration
 
-The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on link:{{site.baseurl}}/using-matrix-jobs[Using Matrix Jobs]. In order to use the `matrix` stanza, you must use parameterized jobs.
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on xref:using-matrix-jobs#[Using Matrix Jobs]. In order to use the `matrix` stanza, you must use parameterized jobs.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2881,6 +2917,8 @@ Logic statements are evaluated to boolean values at configuration compilation
 time, that is, before the workflow is run. The group of logic statements
 includes:
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Type | Arguments | `true` if | Example
 
@@ -2945,7 +2983,7 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 as necessary. They can be nested in an arbitrary fashion, according to their
 argument specifications, and to a maximum depth of 100 levels.
 
-`matches` uses https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular
 expressions]
 for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and
 `$` to avoid accidental partial matches.
@@ -3024,7 +3062,7 @@ workflows:
 [#example-full-configuration]
 == Example full configuration
 
-{% include snippets/docker-auth.md %}
+{% include snippets/docker-auth.adoc %}
 
 {% raw %}
 
