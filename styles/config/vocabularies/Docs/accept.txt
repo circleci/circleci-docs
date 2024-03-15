@@ -58,6 +58,7 @@ CPUs
 Cucumber
 CVE
 Cypress
+Datacenter
 Datadog
 datastore
 Django
@@ -122,6 +123,7 @@ Packagecloud
 PHPUnit
 Pipenv
 Playwright
+PowerShell
 [Pp]re
 preallocate
 Python

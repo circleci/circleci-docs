@@ -1247,7 +1247,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 
 For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. For more information, see the xref:using-windows#[Using the Windows execution environment] page. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-{% include snippets/windows-resource-table.md %}
+{% include snippets/windows-resource-table.adoc %}
 
 Example:
 

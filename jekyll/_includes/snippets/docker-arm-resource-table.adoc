@@ -3,25 +3,25 @@
 |===
 | Class | vCPUs | RAM | Cloud | Server
 
-| arm.medium
+| `arm.medium`
 | 2
 | 8 GB
 | icon:check[]
 | icon:times[]
 
-| arm.large
+| `arm.large`
 | 4
 | 16 GB
 | icon:check[]
 | icon:times[]
 
-| arm.xlarge
+| `arm.xlarge`
 | 8
 | 32 GB
 | icon:check[]
 | icon:times[]
 
-| arm.2xlarge
+| `arm.2xlarge`
 | 16
 | 64 GB
 | icon:check[]
