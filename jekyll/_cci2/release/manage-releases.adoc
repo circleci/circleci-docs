@@ -10,8 +10,6 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
-
 The steps outlined on this page guide you through the tasks required to manage your releases.
 
 [#prerequisites]
