@@ -56,7 +56,7 @@ jobs:
     parallelism: 4
     resource_class: large
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=filename
 ```
 
 ![Parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
@@ -112,14 +112,15 @@ CircleCI's test splitting feature allows you to specify a number of identical ex
       parallelism: 4
       resource_class: large
       steps:
-        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=filename
   ```
 
 When using timing-based test splitting, the CLI attempts to auto detect the granularity of the test split (for example, whether to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
-* `name` - test name
+* `testname` - test name
 * `classname`  class name
-* `file` - file name
+* `filename` - file name
+* `autodetect` - autodetect to test name, class name or file name
 
 ### Example using timing-based test splitting
 {: #example-using-timing-based-test-splitting}
@@ -155,7 +156,7 @@ jobs:
     parallelism: 4
     resource_class: large
     steps:
-      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=filename
 ```
 
 For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test splitting tutorial](/docs/test-splitting-tutorial).
