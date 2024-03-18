@@ -1356,7 +1356,7 @@ jobs:
 [#arm-execution-environment-linux]
 ===== Arm VM execution-environment
 
-{% include snippets/arm-resource-table.md %}
+{% include snippets/arm-resource-table.adoc %}
 
 Example:
 

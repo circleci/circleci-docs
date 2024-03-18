@@ -109,6 +109,7 @@ Leiningen
 Linux
 lockfile
 macOS
+\bMac\b
 manpage
 minitest
 namespace
