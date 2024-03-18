@@ -482,12 +482,12 @@ where the values are:
 [#context-management-with-the-cli]
 == Context management with the CLI
 
-NOTE: Managing Contexts via the CircleCI CLI is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
 
-While contexts can be managed on the CircleCI web application, the https://circleci-public.github.io/circleci-cli/[CircleCI CLI] provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several https://circleci-public.github.io/circleci-cli/circleci_context.html[context-oriented commands].
+You can use the link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI] to manage contexts, as an alternative to the web app and the API. With the CLI, you can execute several link:https://circleci-public.github.io/circleci-cli/circleci_context.html[context-oriented commands].
 
 * `create` - Create a new context
-* `delete` - Delete the named context
+* `delete` - Delete a named context
 * `list` - List all contexts
 * `remove-secret` - Remove an environment variable from the named context
 * `show` - Show a context
@@ -497,12 +497,12 @@ The above list are "sub-commands" in the CLI, which would be executed like so:
 
 [,shell]
 ----
-circleci context create
+circleci context create --org-id <org-id> <context-name> [flags]
 ----
 
-Many commands will require that you include additional information as indicated by the parameters delimited by `< >`. For example, after running `circleci context create`, you will be instructed to provide more information: `circleci context create <vcs-type> <org-name> <context-name> [flags]`.
+Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-You will need to properly xref:local-cli#configuring-the-cli[configure the CLI] with a token to enable performing context related actions.
+{% include snippets/find-organization-id.adoc %}
 
 [#environment-variable-usage]
 == Environment variable usage
