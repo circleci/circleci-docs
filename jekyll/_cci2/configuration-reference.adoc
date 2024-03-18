@@ -968,7 +968,9 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 Example:
 
-[,yml tab machine Cloud]
+[.tab.machine.Cloud]
+--
+[,yml]
 ----
 jobs:
   build: # name of your job
@@ -978,8 +980,11 @@ jobs:
     steps:
         # Commands run in a Linux virtual machine environment
 ----
+--
 
-[,yml tab machine Server]
+[.tab.machine.Server]
+--
+[,yml]
 ----
 jobs:
   build: # name of your job
@@ -987,6 +992,7 @@ jobs:
     steps:
       # Commands run in a Linux virtual machine environment
 ----
+--
 
 '''
 
@@ -1119,7 +1125,7 @@ jobs:
 [#branches-deprecated]
 ==== *`branches` - DEPRECATED*
 
-*This key is deprecated. Use <<jobfilters,workflows filtering>> to control which jobs run for which branches.*
+This key is deprecated. Use <<jobfilters,workflows filtering>> to control which jobs run for which branches.
 
 '''
 
@@ -1132,9 +1138,9 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
 
-Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+CAUTION: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
-If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+NOTE: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 '''
 
@@ -1192,7 +1198,9 @@ jobs:
 
 Example:
 
-[,yaml tab linuxvm Cloud]
+[.tab.linuxvm.Cloud]
+--
+[,yaml]
 ----
 jobs:
   build:
@@ -1202,8 +1210,11 @@ jobs:
     steps:
       ... // other config
 ----
+--
 
-[,yaml tab linuxvm Server]
+[.tab.linuxvm.Server]
+--
+[,yaml]
 ----
 jobs:
   build:
@@ -1212,6 +1223,7 @@ jobs:
     steps:
       ... // other config
 ----
+--
 
 '''
 
@@ -1251,7 +1263,9 @@ For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle
 
 Example:
 
-[,yaml tab windowsblock Cloud_GitHub_OAuth_&_Bitbucket]
+[.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket]
+--
+[,yaml]
 ----
 version: 2.1
 
@@ -1266,8 +1280,11 @@ jobs:
         - checkout
         - run: Write-Host 'Hello, Windows'
 ----
+--
 
-[,yaml tab windowsblock Cloud_GitHub_App_&_GitLab]
+[.tab.windowsblock.Cloud_GitHub_App_&_GitLab]
+--
+[,yaml]
 ----
 version: 2.1
 
@@ -1286,8 +1303,11 @@ jobs:
         - checkout
         - run: Write-Host 'Hello, Windows'
 ----
+--
 
-[,yaml tab windowsblock Server]
+[.tab.windowsblock.Server]
+--
+[,yaml]
 ----
 version: 2.1
 
@@ -1300,6 +1320,7 @@ jobs:
         - checkout
         - run: Write-Host 'Hello, Windows'
 ----
+--
 
 '''
 
@@ -1360,7 +1381,9 @@ jobs:
 
 Example:
 
-[,yaml tab armblock Cloud]
+[.tab.armblock.Cloud]
+--
+[,yaml]
 ----
 jobs:
   my-job:
@@ -1371,8 +1394,11 @@ jobs:
       - run: uname -a
       - run: echo "Hello, Arm!"
 ----
+--
 
-[,yaml tab armblock Server_v3_and_v4]
+[.tab.armblock.Server]
+--
+[,yaml]
 ----
 jobs:
   my-job:
@@ -1383,6 +1409,7 @@ jobs:
       - run: uname -a
       - run: echo "Hello, Arm!"
 ----
+--
 
 '''
 
@@ -1625,7 +1652,7 @@ A value of `always` means that the step will run regardless of the exit status o
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts.
 
-Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
+NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
 
 [,yml]
 ----
@@ -1657,7 +1684,7 @@ run: |
 [#the-when-step]
 ===== *The `when` step*
 
-The `when` and `unless` steps are supported in `version: 2.1` configuration
+NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
 
 A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config#defining-conditional-steps[Conditional Steps section of the reusable configuratoin reference] for more details.
 
@@ -1713,6 +1740,21 @@ workflows:
 [#checkout]
 ===== *`checkout`*
 
+[NOTE]
+====
+*Blobless clones*
+
+To help improve the overall performance of code checkouts from Git source code hosts, a "blobless" strategy is being rolled out. This reduces the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
+
+While this improves performance in most cases, if a downstream step requires those objects to exist for scanning or comparisons, it can cause failures. To work around these potential problems, a fetch directly after a checkout will ensure the required data is available:
+
+[,yml]
+----
+- checkout
+- run: git fetch
+----
+====
+
 A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
 [.table.table-striped]
@@ -1749,19 +1791,7 @@ CircleCI does not check out submodules. If your project requires submodules, add
 - run: git submodule update --init
 ----
 
-The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restorecache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
-
-====== *Blobless clones*
-
-To help improve the overall performance of code checkouts from Git source code hosts, a "blobless" strategy is being rolled out. This reduces the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
-
-While this improves performance in most cases, if a downstream step requires those objects to exist for scanning or comparisons, it can cause failures. To work around these potential problems, a fetch directly after a checkout will ensure the required data is available:
-
-[,yml]
-----
-- checkout
-- run: git fetch
-----
+NOTE: The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restorecache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
 
 '''
 
@@ -1885,7 +1915,7 @@ Template examples:
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it makes sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
 
-TIP: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
+NOTE: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
 Example:
 
@@ -2206,7 +2236,7 @@ Example:
     at: /tmp/workspace
 ----
 
-The lifetime of artifacts, workspaces, and caches can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Here you can control the storage retention periods for these objects. If no storage period is set, the default storage retention period of artifacts is 30 days, while the default storage retention period of workspaces and caches is 15 days.
+NOTE: The lifetime of artifacts, workspaces, and caches can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Here you can control the storage retention periods for these objects. If no storage period is set, the default storage retention period of artifacts is 30 days, while the default storage retention period of workspaces and caches is 15 days.
 
 '''
 
@@ -2215,7 +2245,7 @@ The lifetime of artifacts, workspaces, and caches can be customized on the https
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:github-integration#create-additional-github-ssh-keys[Create additional GitHub SSH keys] page.
 
-*Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
+CAUTION: *Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2302,7 +2332,7 @@ Used for orchestrating all jobs. Each workflow consists of the workflow name as 
 [#workflow-version]
 === *`version`*
 
-The workflows `version` key is *not* required for `version: 2.1` configuration
+NOTE: The workflows `version` key is *not* required for `version: 2.1` configuration
 
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
@@ -2347,7 +2377,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 [#schedule]
 ===== *`schedule`*
 
-The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
+CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
@@ -2442,7 +2472,7 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 [#using-when-in-workflows]
 ==== *Using `when` in workflows*
 
-Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
+NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
 
 You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements>> to determine whether or not to run that workflow.
 
@@ -2593,7 +2623,7 @@ An approval job can have any name. In the example above the approval job is name
 
 Job filters can have the keys `branches` or `tags`.
 
-Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
+NOTE: Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2700,7 +2730,7 @@ For more information, see the xref:workflows#executing-workflows-for-a-git-tag[E
 [#matrix]
 ====== *`matrix`*
 
-The `matrix` key is supported in `version: 2.1` configuration
+NOTE: The `matrix` key is supported in `version: 2.1` configuration
 
 The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on xref:using-matrix-jobs#[Using Matrix Jobs]. In order to use the `matrix` stanza, you must use parameterized jobs.
 
@@ -2872,7 +2902,7 @@ workflows:
 [#pre-steps-and-post-steps]
 ====== *`pre-steps`* and *`post-steps`*
 
-Pre-steps and post-steps are supported in `version: 2.1` configuration
+NOTE: Pre-steps and post-steps are supported in `version: 2.1` configuration
 
 Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
