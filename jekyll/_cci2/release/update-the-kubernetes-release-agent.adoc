@@ -22,6 +22,10 @@ To update the Kubernetes release agent you need an operational CircleCI release 
 * xref:set-up-a-release-environment#[Set up a release environment]
 * xref:configure-your-kubernetes-components#[Configure your Kubernetes components]
 
+NOTE: We have made a small but significant change in the helm installation command that you need to be aware of.
+The argument name `manageNamespaces` has been corrected to `managedNamespaces`.
+Please make sure to use `managedNamespaces` instead of `manageNamespaces` when installing or upgrading to the newer versions of the software. If you have any scripts or automation that includes the previous command, they need to be updated to use managedNamespaces.
+
 [#update-steps]
 == Update steps
 
@@ -35,7 +39,8 @@ helm repo update
 +
 [,shell]
 ----
-helm upgrade circleci-release-agent-system release-agent/circleci-release-agent \
---version 1.0.0 \
--n circleci-release-agent-system
+helm upgrade --install circleci-release-agent-system release-agent/circleci-release-agent \
+--set tokenSecret.token=[YOUR_CCI_INTEGRATION_TOKEN] --create-namespace \
+--namespace circleci-release-agent-system \
+--set managedNamespaces="{namespace1,namespace2}"
 ----
