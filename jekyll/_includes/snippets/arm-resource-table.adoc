@@ -17,7 +17,7 @@
 | icon:check[]
 | icon:check[]
 
-| arm.xlarge
+| `arm.xlarge`
 | 8
 | 32GB
 | 100 GB

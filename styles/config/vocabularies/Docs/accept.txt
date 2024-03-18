@@ -145,8 +145,10 @@ stdin
 [Ss]ubkeys?
 [Ss]ubshells?
 subcommand
+TeamCity
 Telegraf
 templated
+[Tt]emplatizable
 Terraform
 Tink
 TLS
