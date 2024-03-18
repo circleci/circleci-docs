@@ -2446,7 +2446,7 @@ Trigger filters can have the key `branches`.
 
 '''
 
-[#branches]
+[#schedule-branches]
 ====== *`branches`*
 
 The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:workflows#using-contexts-and-filtering-in-your-workflows[workflow] for the `main` branch.
