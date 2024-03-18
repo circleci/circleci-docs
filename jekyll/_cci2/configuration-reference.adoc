@@ -1306,7 +1306,7 @@ jobs:
 [#gpu-execution-environment-linux]
 ===== GPU execution environment (Linux)
 
-{% include snippets/gpu-linux-resource-table.md %}
+{% include snippets/gpu-linux-resource-table.adoc %}
 
 Example:
 
@@ -1331,7 +1331,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 [#gpu-execution-environment-windows]
 ===== GPU execution-environment (Windows)
 
-{% include snippets/gpu-windows-resource-table.md %}
+{% include snippets/gpu-windows-resource-table.adoc %}
 
 Example:
 
