@@ -3,35 +3,35 @@
 |===
 |Class | vCPUs | RAM | Disk Size | Cloud | Server
 
-| medium
+| `medium`
 | 2
 | 7.5 GB
 | 150GB
 | icon:check[]
 | icon:check[]
 
-| large
+| `large`
 | 4
 | 15 GB
 | 150GB
 | icon:check[]
 | icon:check[]
 
-| xlarge
+| `xlarge`
 | 8
 | 32 GB
 | 150GB
 | icon:check[]
 | icon:check[]
 
-| 2xlarge
+| `2xlarge`
 | 16
 | 64 GB
 | 150GB
 | icon:check[]
 | icon:check[]
 
-| 2xlarge+
+| `2xlarge+`
 | 32
 | 64 GB
 | 150GB
