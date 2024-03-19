@@ -381,7 +381,9 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 [#steps]
 === Steps
 
-. Ensure that you have added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings], or to your link:https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or link:https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket] account.
+NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer.
+
+. If you have not already done so, add an SSH key to your https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or VM that is running your job.
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the "Rerun Workflow" dropdown menu.
 . To see the connection details, expand the "Enable SSH" section in the job output where you will see the SSH command needed to connect:
 +

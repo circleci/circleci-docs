@@ -26,7 +26,9 @@ Note that a _default_ CircleCI pipeline executes steps in a non-interactive shel
 [#steps]
 == Steps
 
-. Ensure that you have added an SSH key to your https://app.circleci.com/settings/user/job-ssh-keys[User Settings], or to your https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket] account.
+NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer.
+
+. If you have not already done so, add an SSH key to your https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or VM that is running your job.
 
 . Navigate to the job view for the job you want to rerun.
 .. From the CircleCI web app link:https://app.circleci.com/pipelines/[dashboard], select your project from the dropdown menu
