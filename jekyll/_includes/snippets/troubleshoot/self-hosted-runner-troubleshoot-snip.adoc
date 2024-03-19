@@ -107,6 +107,22 @@ We suggest connecting to the pod using the command `kubectl exec --stdin --tty -
 
 There are also external tools for monitoring resource usage on the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation].
 
+[#task-agent-appears-not-running]
+=== Task agent appears not running
+
+Container agent may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe]. The livesness probe on container agent checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output it's PID for container agent to store and user to monitor task agent's liveness. This probe may fail if the task agent failts to start, no longer exists or takes longer to initiate than container agent's liveness probe's default timeouts. You may find and adjust the liveness probe defaults in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L60-L64[values.yaml] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runners's helm chart]. 
+In the example below we have changed the liveness probe's settings to allow a 2.5 mins startup time before probing(initialDelaySecond) and 2.5 mins of failures before the liveness probe fails(the probe will wait 30 seconds between each probe and allow for 5 failure responses before failing the probe) and the container-agent is terminated. 
+```yaml
+agent:
+  livenessProbe:
+    initialDelaySeconds: 150
+    periodSeconds: 30
+    timeoutSeconds: 15
+    successThreshold: 1
+    failureThreshold: 5
+```
+In the event that the liveness probe fails or container agent isssued a kill command and the pod terminates, container agent has a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[prestop hook] which attempts to kill any existing task agent by it's provided PID. This is essentially to ensure there is no orphaned task agent for which container agent has it's PID. However if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`. 
+
 [#machine-runner]
 == Machine runner
 
