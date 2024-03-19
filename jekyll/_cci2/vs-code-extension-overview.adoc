@@ -234,12 +234,6 @@ link:https://circleci.com/docs/oidc-tokens-with-custom-claims/[OIDC tokens] make
 
 This increases the risk of secret exfiltration, and could let users access cloud resources they should not be able to.
 
-[#vcs-status-checks]
-==== VCS status checks
-Triggering pipelines with unversioned config may allow bypassing VCS status checks for the corresponding commits.
-
-This is a known issue that we are committed to resolve in the coming weeks.
-
 [#access-and-permissions]
 ==== Access and permissions
 link:https://circleci.com/docs/contexts/#restrict-a-context-to-a-security-group-or-groups[Context restrictions based on groups or security groups] are respected. We recommend using groups to exclude context access to untrusted users.
