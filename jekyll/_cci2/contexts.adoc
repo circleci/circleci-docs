@@ -522,64 +522,119 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the contexts page will take precedence over variables added on the *Project Settings* page.
 
 [#creating-environment-variables]
-=== Create environment variables with the CLI or API
+=== Add an environment variable to a context
 
-*With the CLI*
-
-_If this is your first time using the CLI, follow the instructions on link:{{site.baseurl}}/local-cli/?section=configuration[CircleCI CLI configuration] to set up your CircleCI command line interface._
+[.tab.addEnvVar.CLI]
+--
+NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
 
 To create an environment variable using our CLI, perform the following steps:
 
-. If you have not already done so, find the right context name that will contain the new environment variable by executing this command: `circleci context list <vcs-type> <org-name>`
-. Store a new environment variable under that context by executing this command: `circleci context store-secret <vcs-type> <org-name> <context-name> <env-var-name>`
+. If you have not already done so, find the right context name that will contain the new environment variable by executing this command:
++
+[,shell]
+----
+circleci context list --org-id <org-id>
+----
 
-Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
+. Store a new environment variable under that context by executing this command:
++
+[,shell]
+----
+circleci context store-secret --org-id <org-id> <context-name> <environment-variable-name>
+----
++
+The CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
+--
 
-*With the API*
-
+[.tab.addEnvVar.API]
+--
 To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plain text secret as a string.
+--
 
 [#deleting-environment-variables]
-=== Delete environment variables with the CLI or API
+=== Remove an environment variable from a context
 
-*With the CLI*
+Removing an enviornment variable from a context deletes the envrionment variable from your account.
 
-To delete an environment variable using the CLI, perform the following steps:
+[.tab.removeEnvVar.CLI]
+--
+NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
 
-. If you have not already done so, find the context name that contains the environment variable you wish to delete by executing this command: `circleci context list <vcs-type> <org-name>`
-. Confirm the environment variable exists within that context. To list all variables under that context, execute this command: `circleci context show <vcs-type> <org-name> <context-name>`
-. Delete the environment variable by executing this command: `circleci context remove-secret <vcs-type> <org-name> <context-name> <env-var-name>`
+To remove an environment variable from a context using the CLI, perform the following steps:
 
-*With the API*
+. If you have not already done so, find the context name that contains the environment variable you wish to delete by executing this command:
++
+[,shell]
+----
+circleci context list --org-id <org-id>
+----
 
+. Confirm the environment variable exists within that context. To list all variables under that context, execute this command:
++
+[,shell]
+----
+circleci context show --org-id <org-id> <context-name>
+----
+
+. Delete the environment variable by executing this command:
++
+[,shell]
+----
+circleci context remove-secret --org-id <org-id> <context-name> <secret name>
+----
+--
+
+[.tab.removeEnvVar.API]
+--
 To delete an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Delete environment variable] endpoint.
 
 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated.
+--
 
 [#rotating-environment-variables]
 === Rotate environment variables with the CLI or API
 
 Rotation refers to the process of updating a secret's value without deleting it or changing its name.
 
-Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is always good practice to periodically rotate secrets. Many organizations automate this process, for example, running a script when an employee leaves the company, or when a secret may have been compromised.
+Because environment variables can be shared, passed around between employees and teams, and exposed inadvertently, it is good practice to periodically rotate secrets. You can automate this process, for example, running a script when an employee leaves the company, or when a secret may have been compromised.
 
-Context environment variables can be rotated using CircleCI's CLI, or by accessing the API.
+Context environment variables can be rotated using CircleCI's CLI or API.
 
-*With the CLI*
-
-_If this is your first time using the CLI, follow the instructions on link:{{site.baseurl}}/local-cli/?section=configuration[CircleCI CLI configuration] to set up your CircleCI command line interface._
+[.tab.rotateEnvVar.API]
+--
+NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
 
 To rotate an environment variable using the CLI, perform the following steps:
 
-. If you have not already done so, find the context name that contains the variable you would like to rotate by executing this command: `circleci context list <vcs-type> <org-name>`
-. Find the environment variable to rotate within that context by executing this command: `circleci context show <vcs-type> <org-name> <context-name>`
-. Update the existing environment variable under that context. Execute this command and replace the `env-var-name` with the name of the environment variable from Step 2: `circleci context store-secret <vcs-type> <org-name> <context-name> <env-var-name>`
+. If you have not already done so, find the context name that contains the variable you would like to rotate by executing this command:
++
+[,shell]
+----
+circleci context list --org-id <org-id>
+----
 
-Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
+. Find the environment variable to rotate within that context by executing this command:
++
+[,shell]
+----
+circleci context show --org-id <org-id> <context-name>
+----
 
-*With the API*
+. Update the existing environment variable under that context. Execute this command and replace the `<env-var-name>` with the name of the environment variable you chose in Step 2:
++
+[,shell]
+----
+circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+----
++
+Note that the CLI will prompt you to input the new secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
+--
 
+[.tab.rotateEnvVar.API]
+--
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plain text secret as a string.
+--
 
 {% include snippets/secrets-masking.adoc %}
 
