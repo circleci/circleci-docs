@@ -96,7 +96,7 @@ If you only want to monitor the `default` namespace, you do not need to supply a
 helm upgrade --install circleci-release-agent-system release-agent/circleci-release-agent \
 --set tokenSecret.token=[YOUR_CCI_INTEGRATION_TOKEN] --create-namespace \
 --namespace circleci-release-agent-system \
---set manageNamespaces="{namespace1,namespace2}"
+--set managedNamespaces="{namespace1,namespace2}"
 ----
 
 NOTE: You can further customize the agent installation and check all available options link:https://circleci-public.github.io/cci-k8s-release-agent/[here].
