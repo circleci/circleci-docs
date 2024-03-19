@@ -341,19 +341,14 @@ The CircleCI CLI is also used for some advanced features during job runs, for ex
 
 The above list are "sub-commands" in the CLI, which would be executed like so:
 
-```shell
-circleci context create
+[,shell]
+----
+circleci context create --org-id <org-id> <context-name> [flags]
+----
 
-# Returns the following:
-List all contexts
+Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-Usage:
-  circleci context list <vcs-type> <org-name> [flags]
-```
-
-Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
-
-As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+{% include snippets/find-organization-id.adoc %}
 
 [#next-steps]
 == Next steps
