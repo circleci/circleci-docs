@@ -1,0 +1,29 @@
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Class | vCPUs | RAM | Cloud | Server
+
+| `arm.medium`
+| 2
+| 8 GB
+| icon:check[]
+| icon:times[]
+
+| `arm.large`
+| 4
+| 16 GB
+| icon:check[]
+| icon:times[]
+
+| `arm.xlarge`
+| 8
+| 32 GB
+| icon:check[]
+| icon:times[]
+
+| `arm.2xlarge`
+| 16
+| 64 GB
+| icon:check[]
+| icon:times[]
+|===

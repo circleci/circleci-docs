@@ -101,6 +101,7 @@ You can combine several contexts for a single job by adding them to the context 
 NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups. Only GitHub OAuth accounts support security group restrictions. To find out which GitHub account type you have, refer to the xref:github-integration#[GitHub OAuth integration] page.
 
 CircleCI enables you to restrict contexts at run time in the following ways:
+
 * Using security groups
 * Using project restrictions
 * Using expression restrictions
@@ -263,6 +264,8 @@ Rules are expressed in a small language that supports equality checks, numeric c
 
 [#set-an-expression-restriction]
 === Set an expression restriction
+
+NOTE: You must be an organization administrator to set an expression restriction.
 
 Follow these steps to set an expression restriction on a context:
 
