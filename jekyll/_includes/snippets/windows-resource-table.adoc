@@ -1,0 +1,35 @@
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Class | vCPUs | RAM | Disk Size | Cloud | Server
+
+|`medium` (default)
+| 4
+| 15GB
+| 200 GB
+| icon:check[]
+| icon:check[]
+
+| `large `
+| 8
+| 30GB
+| 200 GB
+| icon:check[]
+| icon:check[]
+
+| `xlarge`
+| 16
+| 60GB
+| 200 GB
+| icon:check[]
+| icon:check[]
+
+| `2xlarge`
+| 32
+| 128GB
+| 200 GB
+| icon:check[]
+| icon:check[]
+|===
+
+NOTE: **Using server?** Check with your systems administrator whether you have access to the Windows execution environment.

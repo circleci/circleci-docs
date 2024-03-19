@@ -22,9 +22,11 @@
 [Uu]nversioned
 [Ww]alkthrough
 Airtable
+Android
 [Aa]llowlist?
 APIs?
 Appium
+Arm
 Artifactory
 [Aa]rchitected
 Asciidoctor
@@ -36,6 +38,7 @@ backoff
 [Bb]anlist?
 Behat
 Bitbucket
+[Bb]lobless
 BrowserStack
 Bundler
 Certbot
@@ -55,18 +58,22 @@ CPUs
 Cucumber
 CVE
 Cypress
+Datacenter
 Datadog
 datastore
 Django
 Docker
 Dockerfiles?
+[Dd]otfile
 [Ee]nablement
 EKS
 Elixir
 endraw
 [Ee]xfiltration
+[Ff]alsy
 FAQs?
 Fastlane
+filename
 framebuffer
 Gbps
 GCP
@@ -74,6 +81,7 @@ geckodriver
 Gemfile
 GitHub
 GKE
+GPU
 Gradle
 Gzip
 HashiCorp
@@ -82,6 +90,7 @@ Homebrew
 hostname
 HPA
 HPAs?
+invocated
 IP
 Java
 JavaScript
@@ -100,6 +109,8 @@ Leiningen
 Linux
 lockfile
 macOS
+\bMac\b
+manpage
 minitest
 namespace
 Node
@@ -113,8 +124,11 @@ Packagecloud
 PHPUnit
 Pipenv
 Playwright
+PowerShell
+[Pp]re
 preallocate
 Python
+RAM
 reprovision
 reprovisioned
 [Rr]eusability
@@ -128,8 +142,13 @@ SSH
 statsd
 stderr
 stdin
+[Ss]ubkeys?
+[Ss]ubshells?
 subcommand
+TeamCity
 Telegraf
+templated
+[Tt]emplatizable
 Terraform
 Tink
 TLS
@@ -145,11 +164,13 @@ URLEncoder
 UUID
 UUIDs?
 VCS
-VMs
+VMs?
 VPC
 VS Code
 WebDriver
+Windows
 Workload Identity
+x86
 X Server
 Xcode
 XCTest

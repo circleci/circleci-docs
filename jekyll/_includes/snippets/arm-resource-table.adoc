@@ -1,0 +1,35 @@
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Class  | vCPUs | RAM | Disk Size | Cloud | Server
+
+| `arm.medium` (default)
+| 2
+| 8GB
+| 100 GB
+| icon:check[]
+| icon:check[]
+
+| `arm.large`
+| 4
+| 16GB
+| 100 GB
+| icon:check[]
+| icon:check[]
+
+| `arm.xlarge`
+| 8
+| 32GB
+| 100 GB
+| icon:check[]
+| icon:check[]
+
+| `arm.2xlarge`
+| 16
+| 64GB
+| 100 GB
+| icon:check[]
+| icon:check[]
+|===
+
+NOTE: **Using server?** Check with your systems administrator whether you have access to the Arm execution environment.
