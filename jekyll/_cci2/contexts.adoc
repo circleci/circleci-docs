@@ -555,7 +555,7 @@ To create an environment variable using the API, call the https://circleci.com/d
 [#deleting-environment-variables]
 === Remove an environment variable from a context
 
-Removing an enviornment variable from a context deletes the envrionment variable from your account.
+Removing an environment variable from a context deletes the environment variable from your account.
 
 [.tab.removeEnvVar.CLI]
 --
@@ -601,7 +601,7 @@ Because environment variables can be shared, passed around between employees and
 
 Context environment variables can be rotated using CircleCI's CLI or API.
 
-[.tab.rotateEnvVar.API]
+[.tab.rotateEnvVar.CLI]
 --
 NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
 
