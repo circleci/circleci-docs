@@ -44,11 +44,11 @@ image::rerun-job-with-ssh.png[Screenshot showing rerun job with SSH option]
 
 . To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
 +
+NOTE: After clicking btn:[Rerun Job With SSH] you may notice that your job did not populate the Enable SSH step. This could indicate that you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
++
 image::rerun-job-connect.png[Screenshot showing rerun job with SSH option]
 
 . Run the connection command given in the job output and follow the instructions to SSH into the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
-
-NOTE: After clicking btn:[Rerun Job With SSH] you may notice that your job did not populate the Enable SSH step. This could indicate that you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
 
 If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `+ssh -p <remote_ip> -- powershell.exe+`.
 
