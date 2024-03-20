@@ -251,12 +251,12 @@ xref:insights-tests#[Test Insights] is currently not supported.
 The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported.
 
 [#only-build-pull-requests]
-=== Only build Pull Requests
+=== Only build pull requests
 
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
 [#next-steps]
-== Next Steps
+== Next steps
 - xref:config-intro#[Configuration tutorial]
 - xref:hello-world#[Hello world]
 
