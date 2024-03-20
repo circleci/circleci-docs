@@ -111,13 +111,14 @@ LambdaTest
 Lein
 Leiningen
 Linux
+[Ll]iveness
 lockfile
 macOS
 \bMac\b
 manpage
 minitest
 namespace
-Node
+[Nn]ode
 Nomad
 npm
 OAuth
@@ -140,6 +141,7 @@ Rollouts?
 Route 53
 RSpec
 Ruby
+[Rr]unner
 Sauce Labs
 Selenium
 SSH

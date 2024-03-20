@@ -35,7 +35,7 @@ You need to scale your cluster more effectively to avoid this state.
 [#the-node-a-task-is-running-on-abruptly-dies]
 === The node a task is running on abruptly dies
 
-When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a timeout for it. Kubectl will also still show the pod as running until the cluster’s liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
+When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a timeout for it. `kubectl` will also still show the pod as running until the cluster's liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
 ```bash
 kubectl delete pod $POD_NAME --force
 ```
@@ -75,7 +75,7 @@ If the task pod for a resource class is misconfigured, the task will fail once c
 ```bash
 could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
 ```
-No pod has been created in the Kuberenetes cluster. You will need to correct the task pod configuration as described on the <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> page.
+No pod has been created in the Kubernetes cluster. You will need to correct the task pod configuration as described on the <<container-runner#resource-class-configuration-custom-pod,Container runner>> page.
 
 [#bash-missing]
 === Bash missing
@@ -106,6 +106,30 @@ We suggest connecting to the pod using the command `kubectl exec --stdin --tty -
 - **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within your link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[values.yaml] or within your xref:container-runner/#resource-class-configuration-custom-pod[config.yaml].
 
 There are also external tools for monitoring resource usage on the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation].
+
+[#task-agent-appears-not-running]
+=== Task agent appears not running
+
+The task pod may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
+
+The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in the link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[values.yaml] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runners's Helm chart].
+
+In the example below we have set the liveness probe to allow a 2.5 minute startup time before probing(`initialDelaySecond`) and 2.5 minutes of failures before the liveness probe fails (the probe will wait 30 seconds between each probe and allow for 5 failure responses before failing the probe) and the task pod is terminated.
+
+```yaml
+agent:
+  resourceClasses:
+    <namespace>/<resource-class>:
+      spec:
+        containers:
+          - livenessProbe:
+            initialDelaySeconds: 150
+            periodSeconds: 30
+            timeoutSeconds: 15
+            successThreshold: 1
+            failureThreshold: 5
+```
+In the event that the liveness probe fails or the task pod terminates, there is a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[prestop hook], which attempts to kill any existing task agent by its provided PID. This is to ensure there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
 
 [#machine-runner]
 == Machine runner
