@@ -28,7 +28,7 @@ Note that a _default_ CircleCI pipeline executes steps in a non-interactive shel
 
 NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer.
 
-. If you have not already done so, add an SSH key to your https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or VM that is running your job.
+. If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or VM that is running your job.
 
 . Navigate to the job view for the job you want to rerun.
 .. From the CircleCI web app link:https://app.circleci.com/pipelines/[dashboard], select your project from the dropdown menu
@@ -47,6 +47,8 @@ image::rerun-job-with-ssh.png[Screenshot showing rerun job with SSH option]
 image::rerun-job-connect.png[Screenshot showing rerun job with SSH option]
 
 . Run the connection command given in the job output and follow the instructions to SSH into the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
+
+NOTE: After clicking btn:[Rerun Job With SSH] you may notice that your job did not populate the Enable SSH step. This could indicate that you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
 
 If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `+ssh -p <remote_ip> -- powershell.exe+`.
 
