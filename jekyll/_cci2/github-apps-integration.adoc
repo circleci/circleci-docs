@@ -133,7 +133,7 @@ You will be guided through the SSH key generation process in the CircleCI web ap
 
 When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
 
-For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
+For more information on SSH keys, visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
 == Organization settings
@@ -230,11 +230,6 @@ The recommendation is to either:
 * Suspend your installation. This would stop sending all events to CircleCI, so all builds will stop. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option.
 * Stop a single project from sending events to CircleCI. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option. Under **Repository access**, select **Only select repositories** and deselect the repository you want to stop building.
 
-[#ssh-rerun]
-=== SSH rerun
-
-SSH reruns are not currently supported for GitHub App projects. This feature will be available in a future release.
-
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
@@ -256,12 +251,12 @@ xref:insights-tests#[Test Insights] is currently not supported.
 The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported.
 
 [#only-build-pull-requests]
-=== Only build Pull Requests
+=== Only build pull requests
 
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
 [#next-steps]
-== Next Steps
+== Next steps
 - xref:config-intro#[Configuration tutorial]
 - xref:hello-world#[Hello world]
 
