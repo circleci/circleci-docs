@@ -25,6 +25,7 @@ Airtable
 Android
 [Aa]llowlist?
 APIs?
+\b[Aa]pp\b
 Appium
 Arm
 Artifactory
@@ -47,6 +48,7 @@ CircleCI
 CircleCI cloud
 CircleCI server
 circleci.com
+CI/CD
 classname?
 classpath
 classpath?
@@ -87,9 +89,10 @@ Gzip
 HashiCorp
 Helm
 Homebrew
-hostname
+[Hh]ostname
 HPA
 HPAs?
+[Ii]nsights
 invocated
 IP
 Java
@@ -100,6 +103,7 @@ JUnit
 JVM
 keyset
 Knapsack Pro
+known_hosts
 Kotlin
 kubectl
 Kubernetes
@@ -107,13 +111,14 @@ LambdaTest
 Lein
 Leiningen
 Linux
+[Ll]iveness
 lockfile
 macOS
 \bMac\b
 manpage
 minitest
 namespace
-Node
+[Nn]ode
 Nomad
 npm
 OAuth
@@ -136,6 +141,7 @@ Rollouts?
 Route 53
 RSpec
 Ruby
+[Rr]unner
 Sauce Labs
 Selenium
 SSH

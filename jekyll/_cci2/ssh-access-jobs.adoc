@@ -17,18 +17,18 @@ Troubleshoot problems in a job using *Rerun job with SSH*. Using this feature yo
 [#introduction]
 == Introduction
 
-NOTE: SSH reruns are not currently supported for GitLab or GitHub App projects. This feature is in development and will be available soon. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the link:/docs/github-apps-integration/[GitHub App integration] page.
-
 CircleCI gives you the option to access all jobs via SSH. Read our https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/[blog post] on debugging CI/CD pipelines with SSH.
 
 When you log in with SSH, you are running an *interactive* login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (for example, `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
-Please note that a _default_ CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
+Note that a _default_ CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
 
 [#steps]
 == Steps
 
-. Ensure that you have added an SSH key to your https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket] account.
+NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer.
+
+. If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or VM that is running your job.
 
 . Navigate to the job view for the job you want to rerun.
 .. From the CircleCI web app link:https://app.circleci.com/pipelines/[dashboard], select your project from the dropdown menu
@@ -40,11 +40,13 @@ image::jobs-list.png[Expand workflow to see the list of jobs]
 +
 The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
 +
-image::rerun-job-with-ssh.png[Screenshot showing rerun job with ssh option]
+image::rerun-job-with-ssh.png[Screenshot showing rerun job with SSH option]
 
 . To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
 +
-image::rerun-job-connect.png[Screenshot showing rerun job with ssh option]
+NOTE: After clicking btn:[Rerun Job With SSH] you may notice that your job did not populate the Enable SSH step. This could indicate that you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
++
+image::rerun-job-connect.png[Screenshot showing rerun job with SSH option]
 
 . Run the connection command given in the job output and follow the instructions to SSH into the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 
