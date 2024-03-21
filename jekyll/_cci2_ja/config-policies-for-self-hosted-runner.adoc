@@ -4,6 +4,7 @@ description: セルフホストランナーでジョブを実行可能なプロ�
 contentTags:
   platform:
   - クラウド
+  - Server v4.x
 ---
 = 設定ファイルのポリシーをセルフホストランナーに適用する
 :page-layout: classic-docs

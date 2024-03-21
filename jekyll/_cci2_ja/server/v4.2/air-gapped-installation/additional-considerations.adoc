@@ -1,0 +1,135 @@
+---
+contentTags:
+  platform:
+  - Server v4.2
+  - サーバー管理者
+---
+= その他の検討事項
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントページでは、CircleCI Server のエアギャップインストールを開始する際に考慮すべき項目をわかりやすくご紹介します。
+:icons: font
+:toc: macro
+:toc-title:
+
+[#non-tls-docker-registry-installations]
+== TLS 以外の Docker レジストリのインストール
+
+Air-gapped Docker レジストリを設定する際には、TLS 証明書を使用してトラフィックを暗号化することを推奨します。非 TLS、または自己署名のインストールを使用する場合は、以下の追加手順を実行する必要があります。
+
+Dockerを使用してDockerレジストリにアクセスするマシンでは、Dockerデーモンの設定を更新する必要があります（Linuxでは `/etc/docker/daemon.json` にあります）。
+
+insecure-registries セクションは（存在する場合は）ファイルに追加する必要があり、存在しない場合は以下のようにしてファイルを作成する必要がある。レジストリの完全なホスト名とポートを必ず含めてください。ただし、プロトコル（`http://` または `https://`）は含めないでください。
+
+[source, json]
+----
+{
+      "insecure-registries":["docker.example.internal:5000"]
+}
+----
+
+このファイルは以下のマシンで設定する必要があります：
+
+- エアギャップ環境の全 Nomad ノード
+- Docker バックアップされた K3s を使用している場合、エアギャップ環境内のすべての K3s ノードの可能性があります
+
+また、各 K3s ノードでは、`/etc/rancher/k3s/registries.yaml` に以下のファイルを設定する必要がある。参照するプロトコルを含めるように注意してください。
+
+[source, yaml]
+----
+mirrors:
+  "docker.example.internal:5000":
+    endpoint:
+      - "http://docker.example.internal:5000"
+configs:
+  "docker.example.internal:5000":
+    tls:
+      insecure_skip_verify: true
+----
+
+---
+
+
+
+[#service-type-load-balancers-k3s]
+== K3 におけるサービスタイプのロードバランサー
+
+CircleCI サーバーは Service Type を利用する： ロードバランサーの kubernetes リソースを利用し、複数のポートでトラフィックをリッスンします。
+
+K3s を使用している場合、link:https://metallb.universe.tf/installation/[MetalLB] を使用してK3sノード上に仮想ロードバランサーを作成し、CircleCIサーバーへのイングレストラフィックを許可することができます。
+
+インストールが完了したら、以下の手順に従ってください：
+
+MetalLB 用のアドレスプールを作成するには、configmap リソースを作成する必要があります。
+
+[source, yaml]
+----
+apiVersion: "v1"
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+    protocol: layer2
+    addresses:
+      - <<k3s_internal_ip_range_start>>-<<k3s_internal_ip_range_end>>
+----
+
+アドレスプールには "default "以外の名前を付けることもできるが、`values.yaml` のアノテーションを更新する必要がある。k3sノードが1つしかない場合、アドレス範囲は同じIPを繰り返す必要があります（例えば、`10.0.0.5-10.0.0.5`）。
+
+この configmap リソースをクラスタに適用すると (`kubectl apply -f metallb-configmap.yaml`)、Helm インストール用の `values.yaml` でアドレスプール名を更新できるようになります。
+
+[source, yaml]
+----
+# Additional nginx annotations
+nginx:
+  annotations:
+    # This example uses MetalLB as a k3s load balancer
+    metallb.universe.tf/allow-shared-ip: default
+----
+
+Helm チャートをインストールした後、circleci-proxyサービスはロードバランサーとして動作するk3sノードの内部IPを使用するようにパッチを適用する必要があります（このIPは上記のconfigmapに入力された範囲である必要があります）。以下の例では、IPアドレス`10.0.0.5`を使用しています。
+
+[source, bash]
+----
+kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externalIPs":["10.0.0.5"]}}'
+----
+
+完了したら、DNS レコードをサーバーのインストール（server.internal.example.com）と10.0.0.5の（*.server.internal.example.com）用に作成できます。
+
+[#tls-importing]
+== 信頼された TLS 証明書をインポートする
+
+GitHub Enterpriseインスタンスで自己署名証明書またはカスタム認証局証明書を使用する場合、CircleCIサーバーは以下の2つの方法でこれらの証明書を信頼するように設定できます。
+
+NOTE: いずれかの方法で提供される値は、GitHub Enterprise 証明書でのみサポートされます。現時点では、他の VCS アプリケーションには対応していません。
+
+[#configuring-the-tls-imports-value]
+=== TLS インポート値を設定する
+`values.yaml`ファイルの `tls.imports` の値には、TLS証明書を取得して信頼するための `hostname:port` の組み合わせのリストを含めることができます。
+
+[source, yaml]
+----
+tls:
+  ...
+  import:
+    - github.airgap.example.com:443
+----
+
+それぞれの `hostname:port` の組み合わせに対して、CircleCI Server はインストール中に特定の GitHub Enterprise インスタンスのパブリック証明書を取得し、そのインスタンスとの接続を確立するためにそれを信頼します。
+
+
+[#configuring-the-tls-certificates-array]
+=== TLS 証明書配列の設定
+インポートする証明書の `hostname:port` の組み合わせのリストを提供する代わりに、`values.yaml`ファイルの `tls.certificates` 値に、信頼する対応するTLS証明書の公開証明書チェーンを、base64エンコードされた証明書文字列のリストとして提供することができます。
+
+[source, yaml]
+----
+tls:
+  ...
+  certificates:
+    - <<base64-encoded-public-tls-certificate-chain>>
+----

@@ -3,6 +3,7 @@
 contentTags:
   platform:
   - クラウド
+  - Server v4.x
 ---
 = コンフィグファイルポリシーを使ったコンテキストの管理
 :page-layout: classic-docs
