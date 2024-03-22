@@ -1,4 +1,4 @@
-import ObjectsToCsv from 'objects-to-csv' //Converts an array of JavaScript objects into the CSV format
+import ObjectsToCsv from 'objects-to-csv'
 import fs from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url';
@@ -41,7 +41,7 @@ const runArticleTracking = async () => {
     // get the data
     const data = await articleTracking();
     log(`Found ${data.length} snippets`);
-
+  
     // write the data to the output CSV file in chuncks of 500
     // this is done to prevent writing to much data which can cause issues
     // with the CSV library
