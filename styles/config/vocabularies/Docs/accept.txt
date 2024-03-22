@@ -21,6 +21,7 @@
 [Uu]ncheck
 [Uu]nversioned
 [Ww]alkthrough
+[Aa]ctions
 Airtable
 Android
 [Aa]llowlist?
@@ -139,6 +140,7 @@ reprovisioned
 [Rr]eusability
 Rollouts?
 Route 53
+[Rr]unbook
 RSpec
 Ruby
 [Rr]unner
