@@ -190,7 +190,7 @@ workflows:
 {% endraw %}
 
 [#using-the-android-image-on-server-v3x]
-=== Using the android image on server
+=== Using the Android image on server
 
 NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
@@ -207,7 +207,7 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server/operator/managing-orbs#[CircleCI server orbs] page for instructions on importing orbs.
+It is also possible to use the Android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server/operator/managing-orbs#[CircleCI server orbs] page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
