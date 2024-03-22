@@ -84,7 +84,7 @@ $ tree
 3 directories, 3 files
 ```
 
-The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys.
+The UNIX `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys.
 
 The following command will `pack` up the example folder from above:
 
@@ -283,7 +283,7 @@ cd circleci-demo-go
 circleci local execute build
 ```
 
-The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and Postgres Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
+The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and PostgreSQL Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
 
 [#limitations-of-running-jobs-locally]
 === Limitations of running jobs locally
@@ -341,19 +341,14 @@ The CircleCI CLI is also used for some advanced features during job runs, for ex
 
 The above list are "sub-commands" in the CLI, which would be executed like so:
 
-```shell
-circleci context create
+[,shell]
+----
+circleci context create --org-id <org-id> <context-name> [flags]
+----
 
-# Returns the following:
-List all contexts
+Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-Usage:
-  circleci context list <vcs-type> <org-name> [flags]
-```
-
-Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
-
-As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+{% include snippets/find-organization-id.adoc %}
 
 [#next-steps]
 == Next steps

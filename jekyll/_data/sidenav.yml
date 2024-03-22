@@ -89,6 +89,36 @@ en:
           - name: FAQ
             link: faq
 
+  - name: Reference
+    icon: icons/sidebar/changelog.svg
+    children:
+      - name: Configuration reference
+        link: configuration-reference
+      - name: Concepts
+        link: concepts
+      - name: Reusable configuration reference
+        link: reusing-config
+      - name: Project values and variables
+        link: variables
+      - name: API v2 reference
+        link: https://circleci.com/docs/api/v2
+      - name: API v1 reference
+        link: https://circleci.com/docs/api/v1
+      - name: Self-hosted runner API
+        link: runner-api
+      - name: Optimization reference
+        link: optimizations
+      - name: Insights metrics glossary
+        link: insights-glossary
+      - name: Config policy reference
+        link: config-policy-reference
+      - name: Webhooks reference
+        link: webhooks-reference
+      - name: Frequently asked questions
+        link: FAQ
+      - name: Troubleshoot
+        link: troubleshoot
+
   - name: Orchestrate and trigger
     icon: icons/sidebar/pipeline.svg
     children:
@@ -116,6 +146,8 @@ en:
             link: triggers-overview
       - name: How-to guides
         children:
+          - name: Set up multiple configuration files for a project
+            link: set-up-multiple-configuration-files-for-a-project
           - name: Notify a Slack channel of a paused workflow
             link: notify-a-slack-channel-of-a-paused-workflow
           - name: Use branch filters
@@ -365,7 +397,7 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
-  - name: Release - Open preview
+  - name: Release
     icon: icons/sidebar/release.svg
     children:
       - name: Overview

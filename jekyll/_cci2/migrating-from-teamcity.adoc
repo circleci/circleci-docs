@@ -36,7 +36,7 @@ CircleCI is a modern CI/CD tool aimed at performance and developer productivity.
 **Flexibility**:: CircleCI is vendor and tool-agnostic. Our config allows integration with any platform or cloud provider that has an API. See our https://circleci.com/integrations/[integrations page] for existing partnerships. Dependencies and libraries can be installed ad-hoc in your job, and we offer https://circleci.com/docs/caching/[dependency caching] to speed up subsequent builds.
 **Shareable, Reusable Configuration**:: Steps, execution environments, and jobs can be templated, parameterized, shared, and reused across different projects and teams using https://circleci.com/docs/orb-intro/#section=configuration[CircleCI orbs]. Take advantage of the https://circleci.com/developer/orbs[numerous integrations and orbs] already written for you.
 
-We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out.
 
 [#concepts]
 == Concepts
@@ -45,7 +45,7 @@ We have various other features that set our solution apart. https://circleci.com
 === High-level differences
 
 * CircleCI and TeamCity share the concept of projects.
-* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (e.g. run unit tests).
+* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (for example, run unit tests).
 * TeamCity has traditionally used the UI to configure most builds, with Kotlin Script configuration being a newer, recent feature. CircleCI uses YAML to configure the majority of pipeline functionality.
 
 [.table.table-striped.table-migrating-page.table-no-background]
@@ -275,7 +275,6 @@ For more information on CircleCI Concepts, visit our https://circleci.com/docs/c
 
 TeamCity requires setting up a build agent with the required OS and tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/executor-intro/[available executors].
 
-..circleci/config.yml
 [source,yaml]
 ----
 version: 2.1
@@ -293,11 +292,11 @@ jobs:
 
 === Steps
 
-In TeamCity, build steps are chosen from a list of defined Runner Types (e.g. Visual Studio, Maven, Gradle, etc.). On CircleCI, step definition can flexibly take any commands you would run in a Terminal or Command Prompt.
+In TeamCity, build steps are chosen from a list of defined Runner Types (for example, Visual Studio, Maven, Gradle, etc.). On CircleCI, step definition can flexibly take any commands you would run in a Terminal or Command Prompt.
 
-Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our <<examples-and-guides-overview#,Examples and Guides Overview>> for various language and framework examples.
+Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a Node container and `npm` commands. Visit our <<examples-and-guides-overview#,Examples and Guides Overview>> for various language and framework examples.
 
-{% include snippets/docker-auth.md %}
+{% include snippets/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Configuration Introduction
+= Configuration introduction
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI config.yml file."
@@ -29,14 +29,14 @@ This guide covers the following topics:
 * How to use workflows to orchestrate your build.
 * How to add approval steps to your workflow.
 
-CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for guidance on the basics.
+CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repository project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for guidance on the basics.
 
 [#part-1-using-the-shell]
 == Part 1: Using the shell
 
 CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
 
-. If you have not done so already, <<first-steps#,sign up with CircleCI>> and then either create or set up a new project. You can follow the steps to connect a code repository in our xref:getting-started#[Quickstart guide]. 
+. If you have not done so already, <<first-steps#,sign up with CircleCI>> and then either create or set up a new project. You can follow the steps to connect a code repository in our xref:getting-started#[Quickstart guide].
 . Once you have created or set up your project in CircleCI, go to the `.circleci/config.yml` file and replace its contents with the following code:
 +
 {% include snippets/docker-auth.adoc %}
@@ -86,9 +86,9 @@ image:config-first-step.png[Successful step within job]
 NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
 
 [#part-2-using-code-from-your-repo]
-== Part 2: Using code from your repo
+== Part 2: Using code from your repository
 
-CircleCI provides several commands to simplify complex actions. In this example, you will use the `checkout` command. This command fetches the code from your git repo. Once you have retrieved that code, you can work with it in subsequent steps.
+CircleCI provides several commands to simplify complex actions. In this example, you will use the `checkout` command. This command fetches the code from your git repository. Once you have retrieved that code, you can work with it in subsequent steps.
 
 If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
 
@@ -124,8 +124,8 @@ jobs:
 These two small changes have significantly increased the functionality of your config file:
 
 * *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
-* *Line 7:* The `checkout` command fetches the code from your git repo.
-* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repo that has been checked out. You can now perform further actions on this repo.
+* *Line 7:* The `checkout` command fetches the code from your git repository.
+* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repository that has been checked out. You can now perform further actions on this repository.
 
 As before, commit and push your updated `config.yml` file.
 
@@ -134,7 +134,7 @@ You should now see some additional steps on the CircleCI dashboard:
 * *Checkout code* has cloned the code from your git repository.
 * *The Second Step* has listed the files found in your git repository.
 
-image::config-second-step.png[Checking out your repo]
+image::config-second-step.png[Checking out your repository]
 
 [#part-3-using-different-environments-and-creating-workflows]
 == Part 3: Using different environments and creating workflows
@@ -310,7 +310,7 @@ Most of this code will look familiar to you. There are a couple of important add
 
 As before, commit and push your updated `config.yml` file.
 
-If you look at your pipeline in CircleCI, you will see the a purple status badge of *On Hold*.
+If you look at your pipeline in CircleCI, you will see the a purple status badge of *Needs Approval*.
 
 image::config-on-hold.png[Job requires approval]
 

@@ -37,6 +37,8 @@ For information on managing network and storage usage, see the xref:persist-data
 
 NOTE: Uploaded artifact filenames are encoded using the link:https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html[Java URLEncoder]. Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
+If you need to restrict the connections allowed in your jobs, consider enabling xref:ip-ranges#[IP ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
+
 [#uploading-artifacts]
 == Uploading artifacts
 
