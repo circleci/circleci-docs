@@ -11,7 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
+TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
