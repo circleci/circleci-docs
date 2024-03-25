@@ -33,7 +33,7 @@ Refer to the xref:circleci-images#[Pre-built CircleCI convenience images] and ad
 
 Automation tools used for browser tests often use Selenium WebDriver, a widely-adopted browser driving standard.
 
-Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X server documentation.
+Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
 
 WebDriver can operate in two modes, local, or remote:
 
@@ -226,7 +226,7 @@ ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 . Since your connection is secured with SSH, there is no need for a strong password. You do still need _a_ password, so enter `password` at the prompt.
 . Start your VNC viewer and connect to `localhost:5902`. Enter your `password` at the prompt.
 . You should see a display containing a terminal window. Since your connection is secured through the SSH tunnel, ignore any warnings about an insecure or unencrypted connection.
-. To allow windows to open in the VNC server, set the `DISPLAY` variable. Without this command, windows would open in the default (headless) X server.
+. To allow Windows to open in the VNC server, set the `DISPLAY` variable. Without this command, Windows would open in the default (headless) X Server.
 +
 [,shell]
 ----
