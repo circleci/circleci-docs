@@ -27,7 +27,7 @@ For more information about the differences, see the link:https://docs.github.com
 [#overview]
 == Overview
 
-If you want to set up an SSH key in order to checkout code from additional repositories in GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket within a job, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages.  If you need additional SSH keys to access other services and your org is set up to the use xref:github-integration#[GitHub OAuth app] or BitBucket, follow the steps below.
+If you want to set up an SSH key in order to checkout code from additional repositories in GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket within a job, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages.  If you need additional SSH keys to access other services and your org is set up to the use xref:github-integration#[GitHub OAuth app] or Bitbucket, follow the steps below.
 
 If you want to set up an SSH key in order to checkout code from additional repositories or to access other services from within your job and your org is authorized with GitHub App or you use GitLab as your VCS, follow the steps below to add an SSH key to your project.
 
@@ -48,7 +48,7 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 . Click the *Add SSH Key* button.
 
 [#add-ssh-keys-to-a-job]
-== Add SSH Keys to a Job
+== Add SSH keys to a job
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
@@ -60,9 +60,10 @@ For a self-hosted runner, ensure that you have an `ssh-agent` on your system to 
 
 [source,yaml]
 ----
-version: 2.1
 jobs:
   deploy-job:
+    docker:
+      - image: cimg/base:2022.09
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -77,10 +78,10 @@ To checkout additional repositories from within your job, ensure that you run th
 [#adding-multiple-keys-with-blank-hostnames]
 == Adding multiple keys with blank hostnames
 
-If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
+If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use `ssh-agent`. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the `ssh-agent` for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
 
 [#see-also]
-== See Also
+== See also
 
 * xref:github-integration#[GitHub OAuth Integration]
 * xref:github-apps-integration#[GitHub Apps Integration]
