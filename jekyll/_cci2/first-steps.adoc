@@ -40,7 +40,7 @@ If you are new to CircleCI, you will create a CircleCI organization. A CircleCI 
 [start=4]
 . For GitHub, you will be taken to a screen to install the CircleCI GitHub App. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
 
-. Next, in the Create New Project page, you will set up your first project and trigger your first pipeline in CircleCI. You need an SSH key. Add the private key on this page, and add the corresponding public key as a deploy key in GitHub. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
+. Next, in the Create New Project page, you will set up your first project and trigger your first pipeline in CircleCI. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
 +
 If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel].
 
