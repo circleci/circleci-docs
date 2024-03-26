@@ -10,7 +10,7 @@ contentTags:
 :page-liquid:
 :page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
 :icons: font
-:experimental:ß
+:experimental:
 
 This page answers frequently asked questions for CircleCI's self-hosted container and machine runners.
 
