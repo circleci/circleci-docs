@@ -1382,4 +1382,4 @@ limit configuration for the workflows-conductor-grpc deployment.
 
 |workflows_conductor_grpc.resources.limits.memory |string |`+"8Gi"+`
 |Memory limit configuration for the workflows-conductor-grpc deployment.
-|===
+|=== 
