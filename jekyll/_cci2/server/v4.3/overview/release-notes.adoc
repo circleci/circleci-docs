@@ -27,16 +27,6 @@ The v4.3 release introduces upgraded execution architecture. Previously, VM serv
 ** Sending a percentage of traffic to a different zone
 ** Instance type fallbacks based on deficits and success
 
-[#migration]
-== Migrate
-
-NOTE: The migration process for v3.x to v4.x requires that you install v4.0.x first before moving to subsequent releases. For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
-
-Find information about migration in the following guides:
-
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
-* xref:../../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
-
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide]. There is a background database migration job that is run on install/upgrade to server 4.3. When upgrading to 4.3 you **must ensure this job completes**.
