@@ -568,15 +568,19 @@ NOTE: If you wish to store artifacts which are larger than 5GB, you will need to
       "Principal": {
         "Federated": "<OIDC_PROVIDER_ARN>"
       },
-      "Action": [
-        "sts:AssumeRoleWithWebIdentity",
-        "sts:AssumeRole"
-      ],
+      "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
           "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
         }
       }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "<ROLE_ARN>"
+      },
+      "Action": "sts:AssumeRole"
     }
   ]
 }
