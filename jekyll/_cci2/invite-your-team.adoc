@@ -21,7 +21,7 @@ After setting up an organization in CircleCI, invite your team to create and col
 [#invite-team-github-app-gitlab]
 == GitHub App and GitLab users
 
-NOTE: These steps are for GitHub App accounts. Refer to the xref:github-apps-integration#[GitHub App integration] to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
+NOTE: These steps are for GitLab and GitHub App accounts. Refer to the xref:github-apps-integration#[GitHub App integration] to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
 
 You must be an Organization Admin to invite your team to CircleCI.
 
@@ -35,19 +35,17 @@ Once they join your org, you can then also assign each team member a role on an 
 
 NOTE: These steps are for GitHub OAuth app and Bitbucket accounts. If you use GitHub, refer to the xref:github-integration#[GitHub OAuth app integration] guide to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
 
-Any user who is already a member of your CircleCI organization may use this process to invite new team members to CircleCI.
+To join an existing CircleCI organization with a GitHub OAuth integration:
 
-. On the **Dashboard** in the CircleCI web app, use the filter dropdown to select a project.
-. Click the **Add team members** link next to the project name.
-. A modal window will pop up. Click the btn:[Invite my team] button in the window to copy an invite message that you can send to your team members. The sign-up link is _not_ unique to a single team member. This link can be shared and used for multiple users at the same time.
-. Your team members will need to use the sign-up link in your invite message to join your organization.
+. Navigate to our link:https://circleci.com/vcs-authorize/[login page].
+. Click **Log in** > **Signed up for CircleCI with GitHub or Bitbucket before September 2023**.
+. Select **Log in with GitHub**.
 
-Alternatively, to craft a custom invite link for your organization, follow these steps: 
+To join an existing CircleCI organization with a Bitbucket integration:
 
-. In the CircleCI web app, go to menu:Organization Settings[Overview] and copy your **Organization ID**.
-. Incorporate your Organization ID and VCS (either GitHub or Bitbucket) into the invitation link using the following format: `\https://app.circleci.com/launchpad/invited?source-button=collaboration-widget&invitePage=launchpad&orgId=[your-organization-id]&vcsType=[github-or-bitbucket]`
-. Send this sign-up link to new team members to join your organization.      
-
+. Navigate to our link:https://circleci.com/vcs-authorize/[login page].
+. Click **Log in** > **Signed up for CircleCI with GitHub or Bitbucket before September 2023**.
+. Select **Log in with Bitbucket**.
 
 [#see-also]
 == See also
