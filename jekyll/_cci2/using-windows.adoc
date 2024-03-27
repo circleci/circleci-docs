@@ -24,18 +24,11 @@ You can access the Windows execution environment by using the machine executor a
 [#quickstart]
 == Quickstart
 
-NOTE: For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
-
 Configuration options for using the Windows execution environment are shown below.
 
-For the GitHub App/GitLab example, you will need to supply and SSH key to your build environment. Follow these steps:
 
-. In the CircleCI web app *Dashboard*, select your project from the dropdown menu and click *Project Settings*
-. Select *SSH keys* from the sidebar
-. Copy the fingerprint for the "Additional SSH key" with the hostname `gitlab.com`
-. Use the `add_ssh_keys` key in your configuration to add the SSH key to your execution environment
 
-[.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket]
+[.tab.windowsblock.Cloud]
 --
 [,yaml]
 ----
@@ -49,28 +42,6 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-----
---
-
-[.tab.windowsblock.Cloud_GitHub_App_&_GitLab]
---
-[,yaml]
-----
-version: 2.1
-
-jobs:
-  build: # name of your job
-    resource_class: 'windows.medium'
-    machine:
-      image: 'windows-server-2022-gui:current'
-      shell: 'powershell.exe -ExecutionPolicy Bypass'
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - add_ssh_keys:
-            fingerprints:
-              - "SO:ME:FIN:G:ER:PR:IN:T"
         - checkout
         - run: Write-Host 'Hello, Windows'
 ----
