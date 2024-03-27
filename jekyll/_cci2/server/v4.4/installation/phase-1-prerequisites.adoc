@@ -716,7 +716,7 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 --
 **Option 2:** IAM access keys
 
-NOTE: If you wish to store artifacts which are larger than 5GB, you will need to disable presigned mode which requires an AWS role. We recommend you follow the instructions for creating an IRSA role in this case.
+NOTE: If you wish to store artifacts which are larger than 5GB, you will need to disable presigned mode which requires an AWS role. Disabling presigned mode will enable the use of muli-part uploads to S3 which can support larger files and potentially faster transfers. We recommend you follow the instructions for creating an IRSA role in this case.
 
 . Create an IAM user for CircleCI server.
 +
