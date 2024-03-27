@@ -678,7 +678,7 @@ object_storage:
     irsaRole: "<irsa-arn>"
 ----
 
-**Non-presigned URLs (Optional)**
+**Non-presigned Mode (Optional)**
 If you wish to store artifacts larger than 5GB, you will need to disable presigned URLS. Add the following to the `object_storage.s3` section:
 [source,yaml]
 ----
