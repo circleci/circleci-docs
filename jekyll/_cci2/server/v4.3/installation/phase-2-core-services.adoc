@@ -678,7 +678,7 @@ object_storage:
     irsaRole: "<irsa-arn>"
 ----
 
-**Non-presigned Mode (Optional)**
+**Disable Presigned Mode (Optional)**
 If you wish to store artifacts larger than 5GB, you will need to link:https://circleci.com/docs/server/v4.3/installation/phase-1-prerequisites/#s3-storage[update your trust policy for your IRSA role]. Then disable presigned mode by adding the following to the `object_storage.s3` section:
 [source,yaml]
 ----
