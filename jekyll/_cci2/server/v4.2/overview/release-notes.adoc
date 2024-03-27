@@ -17,18 +17,6 @@ contentTags:
 
 The v4.2 release introduces the config policies feature to CircleCI server. Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc. For more information see the xref:../../../config-policy-management-overview#[Config policies overview]. To use config policies CLI commands with server, append all commands shown in the docs with `--policy-base-url https://<CIRCLECI-SERVER-DOMAIN>.com`
 
-[#migration]
-== Migrate
-
-NOTE: The migration process requires that you install v4.0.x first before moving to subsequent releases.
-
-For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
-
-Find information about migration in the following guides:
-
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
-* xref:../../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
-
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.2 guide].
