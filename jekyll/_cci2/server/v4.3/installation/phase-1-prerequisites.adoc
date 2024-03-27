@@ -556,7 +556,7 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
 }
 ----
 +
-NOTE: If you wish to store artifacts which are larger than 5GB, you will need to enable non-presigned URLs. To do this you will need your IRSA role to assume itself. Replace your trust policy above with the contents below.
+NOTE: If you wish to store artifacts which are larger than 5GB, you will need to enable non-presigned URLs. To do this you will need your IRSA role to be able to assume itself. Replace your trust policy above with the contents below.
 +
 [source, json]
 ----
