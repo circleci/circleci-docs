@@ -146,6 +146,7 @@ Ruby
 [Rr]unner
 Sauce Labs
 Selenium
+[Ss]ignup
 SSH
 statsd
 stderr

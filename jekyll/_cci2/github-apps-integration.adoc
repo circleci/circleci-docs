@@ -51,7 +51,7 @@ NOTE: If you are new to CircleCI, you may wish to get started with our xref:gett
 
 When you choose the btn:[Commit and Run] option described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
-If you choose to review the configuration file in the config editor first, the pipeline is triggered after you save the `.circleci/config.yml` by clicking the btn:[Commit and Run] button..
+If you choose to review the configuration file in the config editor first, the pipeline is triggered after you save the `.circleci/config.yml` by clicking the btn:[Commit and Run] button.
 
 Each time you push changes to your GitHub repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
@@ -109,30 +109,6 @@ When the CircleCI GitHub App is installed for your organization, GitHub starts t
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
 - At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
-
-[#project-settings-ssh-keys]
-=== GitHub project SSH keys
-
-When creating a project in CircleCI, you will create and add SSH keys. At this time, only **Additional SSH Keys** are applicable to GitHub App integrations.
-
-[#create-ssh-key]
-==== Create an SSH key
-
-You will be guided through the SSH key generation process in the CircleCI web app on the **Create Project** page. The steps are as follows:
-
-. Create an SSH key-pair by using the following command. When prompted to enter a passphrase, do **not** enter one:
-+
-```shell
-  ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-. Go to your GitHub repository menu:Settings[Security > Deploy Keys]. Copy and paste your public key here. We **do not** require write access. The title can be anything you want. Only a GitHub repository "admin" role is required (not GitHub organization owner), see link:https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization[GitHub's docs for more details].
-
-. In the CircleCI web app **Create Project** page, copy and paste your private key, including `---BEGIN RSA PRIVATE KEY---` and `---END RSA PRIVATE KEY---`, into the **GitHub personal SSH key** field.
-
-When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
-
-For more information on SSH keys, visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
 == Organization settings

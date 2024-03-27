@@ -60,7 +60,6 @@ Next, create a trigger for your new configuration source.
 . Click btn:[Next]
 . Complete the required form fields:
 ** Give your trigger a descriptive name
-** Add the private SSH key for your project in the SSH key field. This is the same key you used to create your project
 ** Select your project repository from the dropdown
 ** Choose your new configuration source from the "Choose config to run" menu
 
