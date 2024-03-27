@@ -33,7 +33,7 @@ The CI/CD process allows developers to release higher quality, more stable produ
 [#circleci-in-your-workflow]
 == CircleCI in your workflow
 
-A software repository on a supported version control system (VCS) needs to be authorized and added as a project on link:https://circleci.com[circleci.com]. Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each link:/docs/glossary/#job[job] in a separate xref:glossary#container[container] or link:https://circleci.com/developer/images?imageType=machine[virtual machine].
+A software repository on a supported version control system (VCS) needs to be authorized and added as a project on link:https://app.circleci.com/[CircleCI]. Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each link:/docs/glossary/#job[job] in a separate xref:glossary#container[container] or link:https://circleci.com/developer/images?imageType=machine[virtual machine].
 
 CircleCI sends an email notification of success or failure after the tests complete. CircleCI also includes integrated xref:notifications#[Slack and IRC notifications]. Code test coverage results are available from the details page for any project for which a reporting library is added.
 
@@ -53,7 +53,7 @@ The link:https://circleci.com/developer/orbs[orbs registry] contains packages of
 Other cloud service deployments can be scripted using SSH, or by installing the API client of the service with your job configuration.
 
 [#learn-more]
-== Learn More
+== Learn more
 
 [#on-our-blog]
 === On our blog

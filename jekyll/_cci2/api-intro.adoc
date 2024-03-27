@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= API v2 Introduction
+= API v2 introduction
 :description: Introduction to the CircleCI API
 :experimental:
 :icons: font

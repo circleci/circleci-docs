@@ -13,7 +13,7 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
 
-This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
+This reference page lists a selection of _helpers_, or CircleCI-specific functions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
 The `circle-policy-agent` package includes built-in functions for common config policy
 use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
@@ -340,7 +340,7 @@ enable_hard["rule_contexts_reserved_by_branches"]
 ----
 
 [#circleci-utility-helpers]
-== CircleCI Utility helpers
+== CircleCI utility helpers
 
 The following helpers are imported using `import data.circleci.utils`
 

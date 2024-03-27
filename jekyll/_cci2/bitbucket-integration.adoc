@@ -23,7 +23,7 @@ CircleCI builds push hooks by default. So, builds are triggered for all push hoo
 There are some additional, less common cases where CircleCI uses hooks, as follows:
 
 - CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
-- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repos.
+- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
 
 These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
 
@@ -37,8 +37,7 @@ Refer to the link:https://confluence.atlassian.com/bitbucket/manage-webhooks-735
 
 Refer to the CircleCI documentation on xref:workflows#using-contexts-and-filtering-in-your-workflows[Workflow filters] for information on how to build tag pushes.
 
-NOTE: **Bitbucket personal orgs:**
-CircleCI expects that your personal/default organization matches your Bitbucket username. Bitbucket now supports renaming your personal workspace to differ from your username, however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, make sure its name matches your username.
+NOTE: **Bitbucket personal orgs:** CircleCI expects that your personal/default organization matches your Bitbucket username. Bitbucket now supports renaming your personal workspace to differ from your username, however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, make sure its name matches your username.
 
 [#permissions-overview]
 == Permissions overview
@@ -51,13 +50,13 @@ CircleCI requests the following permissions from Bitbucket, as defined in the li
 
 **Write Permissions**
 
-- Get a list of a user's repos
+- Get a list of a user's repositories
 - Add an SSH key to a user's account
 
 **Admin Permissions**, needed for setting up a project
 
-- Add deploy keys to a repo
-- Add service hooks to a repo
+- Add deploy keys to a repository
+- Add service hooks to a repository
 
 NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions Bitbucket chooses to supply.
 
@@ -94,7 +93,9 @@ Bitbucket does not currently provide CircleCI with an API to create user keys. H
 
 . In the browser inspector, select the **Network** tab, and clear the console.
 
-. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
+. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal.
++
+NOTE: Creating a machine user is strongly advised, though not mandatory.
 
 . In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
 
@@ -173,7 +174,7 @@ Permission denied (publickey).
 ```
 
 [#add-a-circleci-config-file]
-== Add a .circleci/config.yml file
+== Add a CircleCI config file
 
 After the necessary permissions have been set up, the next step is adding a `.circleci/config.yml` file to the projects you would like to use with CircleCI. Add a `.circleci` directory to a repository you want to connect to CircleCI. Inside that directory, add a `config.yml` file.
 
@@ -231,7 +232,7 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 [#rename-organizations-and-repositories]
 == Rename organizations and repositories
 
-If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#grant-permissions-to-organiztion-members]
 == Grant permissions to workspace members
@@ -239,6 +240,6 @@ If you would like to rename your organization or repository, please follow the x
 By default, only Bitbucket workspace administrators can view your organization's plan page, organization settings, organization analytics, private orbs, webhooks, runners, and connections. To enable all Bitbucket workspace members permissions to the above, an organization admin will need to enable the Bitbucket Workspace members settings from the menu:organization settings[VCS].
 
 [#next-steps]
-== Next Steps
+== Next steps
 - xref:config-intro#[Configuration tutorial]
 - xref:hello-world#[Hello world]
