@@ -371,65 +371,9 @@ Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_contex
 [#config-policy-management]
 == Config policy management
 
-The CircleCI CLI can be used to manage config policies for your projects. Config policies allow you to enforce best practices and standards across your organization. With the CLI, you can execute several config policy-related commands:
+The CircleCI CLI can be used to manage config policies for your projects. Config policies allow you to enforce best practices and standards across your organization.
 
-[NOTE]
-====
-**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
-[source,shell]
-----
-circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
-----
-====
-
-Config policies sub-commands are grouped under the `circleci policy` command.
-
-The following config policies sub-commands are supported within the CLI:
-
-* `diff` - shows the difference between local and remote policy bundles
-* `fetch` - fetches the policy bundle (or one policy, based on name) from remote
-* `push` - pushes the policy bundle (activate policy bundle)
-+
-For example, running the following command activates a policy bundle stored at `./policy_bundle_dir_path`:
-+
-[source,shell]
-----
-circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
-----
-*  `settings` - used to modify config policies settings as required.
-+
-When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
-+
-[source,shell]
-----
-circleci policy settings --owner-id <your-organization-ID>
-----
-+
-Example output:
-+
-[source,shell]
-----
-{
-  "enabled": false
-}
-----
-* `test` - used to run tests on your policies.
-+
-For example, running the following command runs all defined tests in the `policies` directory:
-+
-[source,shell]
-----
-circleci policy test ./policies
-----
-+
-Example output:
-+
-[source,shell]
-----
-ok    policies    0.001s
-
-3/3 tests passed (0.001s)
-----
+For full details on creating, testing, and managing config policies for your organization, including how-to guides, see the xref:config-policy-management-overview#[Manage config policies] section.
 
 [#next-steps]
 == Next steps
