@@ -115,7 +115,7 @@ Guides for integrating GitHub, Bitbucket, or GitLab projects are available as fo
 [#terms]
 == Terms
 
-By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and aren’t ready to share access to your private projects, you can choose public repos instead. Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
+By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and aren’t ready to share access to your private projects, you can choose public repositories instead. Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
 
 [#next-steps]
 == Next steps
