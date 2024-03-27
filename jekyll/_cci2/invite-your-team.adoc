@@ -38,14 +38,14 @@ NOTE: These steps are for GitHub OAuth app and Bitbucket accounts. If you use Gi
 To join an existing CircleCI organization with a GitHub OAuth integration:
 
 . Navigate to our link:https://circleci.com/vcs-authorize/[login page]. 
-. Click the **Log in** and **Signed up for CircleCI with GitHub or Bitbucket before September 2023** CTAs. 
-. Select the **Log in with GitHub** CTA. 
+. Click **Log in** > **Signed up for CircleCI with GitHub or Bitbucket before September 2023**. 
+. Select **Log in with GitHub**. 
 
 To join an existing CircleCI organization with a Bitbucket integration:
 
 . Navigate to our link:https://circleci.com/vcs-authorize/[login page]. 
-. Click the **Log in** and **Signed up for CircleCI with GitHub or Bitbucket before September 2023** CTAs. 
-. Select the **Log in with Bitbucket** CTA.
+. Click **Log in** > **Signed up for CircleCI with GitHub or Bitbucket before September 2023**. 
+. Select **Log in with Bitbucket**.
 
 [#see-also]
 == See also
