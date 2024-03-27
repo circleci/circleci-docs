@@ -108,7 +108,6 @@ When the CircleCI GitHub App is installed for your organization, GitHub starts t
 === Advanced
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
-- At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
 - At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#project-settings-ssh-keys]
@@ -233,12 +232,8 @@ The recommendation is to either:
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. Use the **Create Project** option to get a project set up. You will be guided through creating SSH keys for your project. If you are looking to set up an SSH key in order to check out code from additional repositories in GitHub, see xref:add-ssh-key#steps-to-add-additional-ssh-keys[Add additional SSH keys].
+Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. If you are looking to set up an SSH key in order to check out code from additional repositories in GitHub, see xref:add-ssh-key#steps-to-add-additional-ssh-keys[Add additional SSH keys].
 
-[#free-and-open-source-setting]
-=== Free and open source setting
-
-Open source plans are not currently available to GitHub App customers. CircleCI will keep the open source community up to date as work continues to support this.
 
 [#test-insights]
 === Test Insights
