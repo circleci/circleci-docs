@@ -123,11 +123,11 @@ agent:
       spec:
         containers:
           - livenessProbe:
-            initialDelaySeconds: 150
-            periodSeconds: 30
-            timeoutSeconds: 15
-            successThreshold: 1
-            failureThreshold: 5
+              initialDelaySeconds: 150
+              periodSeconds: 30
+              timeoutSeconds: 15
+              successThreshold: 1
+              failureThreshold: 5
 ```
 In the event that the liveness probe fails or the task pod terminates, there is a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[prestop hook], which attempts to kill any existing task agent by its provided PID. This is to ensure there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
 
