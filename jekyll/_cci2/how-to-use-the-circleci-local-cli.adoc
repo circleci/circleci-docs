@@ -168,7 +168,7 @@ Running the following command validates your config, but will also display expan
 
 [,shell]
 ----
-circleci config process
+circleci config process <path-to-config.yml>
 ----
 
 Consider the following example configuration that uses the link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] orb:
@@ -186,12 +186,7 @@ workflows:
         - node/test
 ----
 
-Running the following command will output a YAML file like the example below. This is the expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed:
-
-[,shell]
-----
-circleci config process .circleci/config.yml
-----
+Processing this config file will output a YAML file like the example below. This is the expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed:
 
 {% raw %}
 
@@ -267,31 +262,36 @@ workflows:
 [#run-a-job-in-a-container-on-your-machine]
 == Run a job in a container on your machine
 
-The CircleCI CLI enables you to run a job from your configuration locally with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue. Only single jobs can be run locally, not workflows.
+The CircleCI CLI enables you to run a job from your configuration locally with Docker. This can be useful for the following:
+
+* To run tests before pushing configuration changes
+* Debugging your build process without impacting your build queue
+
+Only single jobs can be run locally, not workflows.
 
 [#run-job-prerequisites]
 === Prerequisites
 
-You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project with a valid `.circleci/config.yml` file in it.
+You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project that includes a valid `.circleci/config.yml` file.
 
 [#running-a-job]
 === Run a job
 
 . Navigate to the root of your project containing the `.circleci/config.yml` file.
 
-. Run the following command, specifying the job you would like to run:
-
-[,shell]
-----
-circleci local execute <job-name>
-----
-
-If your CircleCI configuration is set to version 2.1, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
-
+. Run the following command specifying the job you would like to run. If your CircleCI configuration is set to version 2.1, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
++
 [,shell]
 ----
 circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml <job-name>
+----
++
+If you are using `version: 2` configuration, you can simply run:
++
+[,shell]
+----
+circleci local execute <job-name>
 ----
 
 The commands above will run the job you specify by name. The CLI uses Docker to pull down the requirements for the build and then execute your CI steps locally.
@@ -299,7 +299,7 @@ The commands above will run the job you specify by name. The CLI uses Docker to 
 [#limitations-of-running-jobs-locally]
 === Limitations of running jobs locally
 
-Although running jobs locally with `circleci` is very helpful, there are some limitations.
+Although running jobs locally with `circleci` is helpful, there are some limitations.
 
 [#executors]
 ==== Executors
@@ -343,7 +343,7 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 [#test-splitting]
 == Test splitting
 
-The CircleCI CLI is also used for some advanced features during job runs, for example xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[test splitting] for build time optimization.
+The CircleCI CLI is used for some advanced features during job runs, for example xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[test splitting] for build time optimization.
 
 [#context-management]
 == Context management
@@ -367,6 +367,69 @@ circleci context create --org-id <org-id> <context-name> [flags]
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
 {% include snippets/find-organization-id.adoc %}
+
+[#config-policy-management]
+== Config policy management
+
+The CircleCI CLI can be used to manage config policies for your projects. Config policies allow you to enforce best practices and standards across your organization. With the CLI, you can execute several config policy-related commands:
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
+
+Config policies sub-commands are grouped under the `circleci policy` command.
+
+The following config policies sub-commands are supported within the CLI:
+
+* `diff` - shows the difference between local and remote policy bundles
+* `fetch` - fetches the policy bundle (or one policy, based on name) from remote
+* `push` - pushes the policy bundle (activate policy bundle)
++
+For example, running the following command activates a policy bundle stored at `./policy_bundle_dir_path`:
++
+[source,shell]
+----
+circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
+----
+*  `settings` - used to modify config policies settings as required.
++
+When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
++
+[source,shell]
+----
+circleci policy settings --owner-id <your-organization-ID>
+----
++
+Example output:
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
+* `test` - used to run tests on your policies.
++
+For example, running the following command runs all defined tests in the `policies` directory:
++
+[source,shell]
+----
+circleci policy test ./policies
+----
++
+Example output:
++
+[source,shell]
+----
+ok    policies    0.001s
+
+3/3 tests passed (0.001s)
+----
 
 [#next-steps]
 == Next steps
