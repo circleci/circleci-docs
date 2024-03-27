@@ -9,6 +9,7 @@ contentTags:
 :categories: ["migration"]
 :description: Frequently asked questions about CircleCI
 :experimental:
+:icons: font
 :page-layout: classic-docs
 :short-title: FAQ
 

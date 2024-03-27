@@ -78,6 +78,20 @@
 | icon:check[]
 | icon:times[]
 
+| `CIRCLE_ORGANIZATION_ID`
+| GitHub OAuth, GitHub App, Bitbucket, GitLab
+| String
+| A unique identifier for the CircleCI organization.
+| icon:check[]
+| icon:times[]
+
+| `CIRCLE_PIPELINE_ID`
+| GitHub OAuth, GitHub App, Bitbucket, GitLab
+| String
+| A unique identifier for the current pipeline.
+| icon:check[]
+| icon:times[]
+
 | `CIRCLE_PR_NUMBER`
 | GitHub OAuth, Bitbucket
 | Integer
@@ -105,6 +119,13 @@
 | The largest job number in a given branch that is less than the current job number. **Note**: The variable is not always set, and is not deterministic. It is also not set on runner executors. This variable is likely to be deprecated, and CircleCI recommends users to avoid using it.
 | icon:check[]
 | icon:check[]
+
+| `CIRCLE_PROJECT_ID`
+| GitHub OAuth, GitHub App, Bitbucket, GitLab
+| String
+| A unique identifier for the current project.
+| icon:check[]
+| icon:times[]
 
 | `CIRCLE_PROJECT_REPONAME`
 | GitHub OAuth, GitHub App, GitLab, Bitbucket

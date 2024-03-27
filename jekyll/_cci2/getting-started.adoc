@@ -5,6 +5,7 @@ contentTags:
 ---
 = Quickstart guide
 :page-layout: classic-docs
+:icons: font
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-liquid:
 
