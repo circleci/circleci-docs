@@ -112,7 +112,7 @@ When you connect a repository with your CircleCI project, behind the scenes, Cir
 The following limits are currently in place for GitLab integrations:
 
 - Each user can create up to three organizations.
-- Each organization under a Free plan can have up to 10 projects.
+- Each organization under a Free Plan can have up to 10 projects.
 
 If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
 

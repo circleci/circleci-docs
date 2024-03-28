@@ -79,13 +79,13 @@ api:
 ----
 Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
 
-. If you are using CircleCI server you will need to provide the url for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. If you are using CircleCI server you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 ```shell
 export CIRCLECI_RUNNER_API_URL="your server domain"
 ```
 +
-Or by adding the url to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
+Or by adding the URL to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
 +
 ```yaml
 api:

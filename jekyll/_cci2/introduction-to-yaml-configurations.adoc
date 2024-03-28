@@ -6,7 +6,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Introduction to YAML Configurations
+= Introduction to YAML configuration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Overview of CircleCI configuration written in YAML"
@@ -40,7 +40,7 @@ Next, your configuration needs a job to run, and an execution environment for th
 - GPU
 - Arm
 
-There are some limitations depending on the execution environment in your configuration. Please visit the <<executor-intro#,Introduction to Execution Environments>> page to get started in that section of our documentation, which has extensive information on each execution environment.
+There are some limitations depending on the execution environment in your configuration. Visit the <<executor-intro#,Introduction to Execution Environments>> page to get started in that section of our documentation, which has extensive information on each execution environment.
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 

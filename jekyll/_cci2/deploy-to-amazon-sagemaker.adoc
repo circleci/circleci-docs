@@ -310,7 +310,7 @@ Next, we need to create the endpoint configuraiton, this happens in the job `aws
     filters: *main-branch-only
 ----
 
-* `deploy_environment` is an arbitrary string you can use to bucket your model releases, for example, dev, staging, testing, prod. In our example config, you can see we are only using two, `dev` and `prod`.
+* `deploy_environment` is an arbitrary string you can use to bucket your model releases, for example, `dev`, `staging`, `testing`, `prod`. In our example config, you can see we are only using two, `dev` and `prod`.
 
 Next, we need to push out the updated configuration, this happens in the job `aws-sagemaker/deploy_endpoint`:
 

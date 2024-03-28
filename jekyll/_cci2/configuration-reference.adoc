@@ -461,7 +461,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | `setup`
 | N
 | Boolean
-| Designates the config.yaml for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
+| Designates the `config.yaml` for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
 |===
 
 The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
@@ -1145,7 +1145,7 @@ This key is deprecated. Use <<jobfilters,workflows filtering>> to control which 
 
 The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
 
-We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request a raise on these limits for your account.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or Custom Plan and experience queuing for certain resource classes, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request a raise on these limits for your account.
 
 If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
 
@@ -2308,7 +2308,7 @@ jobs:
 [#circleciipranges]
 ==== *`circleci_ip_ranges`*
 
-NOTE: A paid account on a https://circleci.com/pricing/[Performance or Scale plan] is required to access IP ranges.
+NOTE: A paid account on a https://circleci.com/pricing/[Performance or Scale Plan] is required to access IP ranges.
 
 Enables jobs to go through a set of well-defined IP address ranges. See xref:ip-ranges#[IP ranges] for details.
 
