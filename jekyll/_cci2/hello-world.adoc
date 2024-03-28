@@ -61,7 +61,7 @@ workflows:
 
 [.tab.hellocloud.Linux_VM]
 --
-The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
 
 [source,yaml]
 ----
@@ -220,7 +220,7 @@ workflows:
 
 [.tab.helloserver4.Linux_VM]
 --
-The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
 
 [source,yaml]
 ----

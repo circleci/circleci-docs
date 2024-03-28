@@ -66,6 +66,7 @@ Codecov
 CodeDeploy
 [Cc]onfig
 Container Registry
+Coreutils
 CPUs
 CRD
 Cucumber
@@ -144,6 +145,7 @@ macOS
 \bMac\b
 manpage
 minitest
+[Mm]ultiline
 namespace
 [Nn]ode
 Nomad
@@ -164,6 +166,8 @@ PowerShell
 preallocate
 Python
 RAM
+RDoc
+READMEs?
 reprovision
 reprovisioned
 [Rr]eusability
@@ -174,6 +178,8 @@ RSpec
 Ruby
 [Rr]unner
 S3
+SAML
+SSO
 Sauce Labs
 Scale Plan
 SDK
@@ -181,6 +187,7 @@ Selenium
 SemVer
 Server Plan
 [Ss]ignup
+SKUs?
 SSH
 statsd
 stderr
@@ -188,6 +195,7 @@ stdin
 [Ss]ubkeys?
 [Ss]ubshells?
 subcommand
+superset
 TCPRoute
 TeamCity
 Telegraf
@@ -203,6 +211,7 @@ UI
 UIDs?
 [Uu]ncheck
 unencrypted
+[Uu]nfollow[ing]?
 unformatted
 untrusted
 URLEncoder
@@ -222,3 +231,4 @@ XCTest
 XML
 XQuartz
 Xvfb
+YAML

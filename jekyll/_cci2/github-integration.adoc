@@ -71,7 +71,7 @@ NOTE: CircleCI only asks for permissions that are absolutely necessary. However,
 [#saml-sso]
 == SAML SSO
 
-Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Please ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
+Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
 
 * GitHub Checks, from the GitHub website, select menu:Organization Settings[VCS > GitHub Checks]
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
@@ -313,9 +313,9 @@ After access is granted, CircleCI should behave normally again.
 [#rename-organizations-and-repositories]
 ## Rename organizations and repositories
 
-If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
-== Next Steps
+== Next steps
 - xref:config-intro#[Configuration tutorial]
 - xref:hello-world#[Hello world]
