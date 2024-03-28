@@ -36,7 +36,7 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<#author-orbs,Author orbs>>
 | <<#billing,Billing>>
 
-| <<#cancel-performance-plan,Cancel Performance plan>>
+| <<#cancel-performance-plan,Cancel Performance Plan>>
 |
 |===
 
@@ -103,6 +103,6 @@ Visit our link:https://circleci.com/pricing/[Pricing page] to find details about
 include::../_includes/snippets/faq/billing-faq-snip.adoc[]
 
 [#cancel-performance-plan]
-== Cancel Performance plan
+== Cancel Performance Plan
 
 include::../_includes/snippets/faq/cancel-subscription-faq-snip.adoc[]

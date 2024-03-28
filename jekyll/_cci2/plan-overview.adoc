@@ -42,9 +42,9 @@ Visit the pages below to learn about the features of CircleCI's plans.
 
 [#configuring-your-credit-plan]
 == Configuring your credit plan
-To set up a Free or Performance plan, go to **Plan > Plan Overview** in the CircleCI link:https://app.circleci.com/[web application]. From there, select the plan that best fits your needs. To set up a Scale or Server plan, link:https://circleci.com/talk-to-us/[contact us].
+To set up a Free or Performance Plan, go to **Plan > Plan Overview** in the CircleCI link:https://app.circleci.com/[web application]. From there, select the plan that best fits your needs. To set up a Scale or Server Plan, link:https://circleci.com/talk-to-us/[contact us].
 
-For details on cancelling a Performance plan, refer to the xref:faq#cancel-performance-plan[Cancel Performance plan FAQ].
+For details on cancelling a Performance Plan, refer to the xref:faq#cancel-performance-plan[Cancel Performance Plan FAQ].
 
 [#managing-credit-usage]
 == Managing credit usage

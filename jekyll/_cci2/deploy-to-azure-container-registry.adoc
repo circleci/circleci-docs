@@ -12,7 +12,7 @@ contentTags:
 :icons: font
 :experimental:
 
-In this how-to guide, you will learn how to to configure CircleCI to deploy to Azure Container Registry.
+In this how-to guide, you will learn how to configure CircleCI to deploy to Azure Container Registry.
 
 [#introduction]
 == Introduction
@@ -21,7 +21,7 @@ This page describes a simple deployment to the Azure Container Registry (ACR) us
 
 {% include snippets/env-var-or-context.adoc %}
 
-In addition to the orb described below, CircleCI has created an Azure convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure].
+In addition to the orb described below, CircleCI has created an Azure convenience image focusing on link:https://circleci.com/developer/images/image/cimg/azure[deployment: `cimg/azure`].
 
 
 For detailed information about the Azure ACR orb, including all options, refer to the link:https://circleci.com/developer/orbs/orb/circleci/azure-acr[CircleCI ACR Orb Reference] page.
@@ -29,7 +29,17 @@ For detailed information about the Azure ACR orb, including all options, refer t
 [#provide-env-vars]
 == 1. Provide environment variables to CircleCI
 
-Whether your require a user or service principal login, you will need to provide environment variables for username, password and tenant to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`.
+Whether your require a user or service principal login, you will need to provide environment variables for username, password and tenant to CircleCI. For user logins use environment variable names as follows:
+
+* `AZURE_USERNAME`
+* `AZURE_PASSWORD`
+* `AZURE_TENANT`
+
+For service principal logins use:
+
+* `AZURE_SP`
+* `AZURE_SP_PASSWORD`
+* `AZURE_SP_TENANT`
 
 [#deploy-to-acr]
 == 2. Deploy to ACR

@@ -21,7 +21,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges. This
 
 IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments using existing workflows and platforms. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
-The feature is available to customers on a link:https://circleci.com/pricing/[Performance or Scale plan]. This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
+The feature is available to customers on a link:https://circleci.com/pricing/[Performance or Scale Plan]. This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 [#use-cases]
 == IP ranges use cases

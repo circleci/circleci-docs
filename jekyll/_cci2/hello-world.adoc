@@ -136,7 +136,7 @@ workflows:
 
 [.tab.hellocloud.GPU]
 --
-NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] plan.
+NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] Plan.
 
 The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for link:/docs/configuration-reference#available-windows-gpu-image[Windows] and link:/docs/configuration-reference#available-linux-gpu-images[Linux]. Refer to link:/docs/using-gpu[Using the GPU execution environment] page for more information.
 

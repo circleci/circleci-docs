@@ -297,4 +297,4 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
 * xref:config-intro#[Introduction to configuration]
 * xref:concepts#[CircleCI concepts]
-* xref:plan-free#[Benefits of CircleCI free plan]
+* xref:plan-free#[Benefits of CircleCI Free Plan]

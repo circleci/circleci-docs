@@ -10,7 +10,7 @@ contentTags:
 :experimental:
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the Free plan available to developers on CircleCI.
+:page-description: This document describes the Free Plan available to developers on CircleCI.
 :icons: font
 :experimental:
 

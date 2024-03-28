@@ -76,7 +76,7 @@ All CircleCI customers can request audit logs from the web app. To have access t
 
 Frequency limits for requests are as follows:
 
-- Free plan: 1 request per day
+- Free Plan: 1 request per day
 - All paid plans: 3 requests per day
 - Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year
 

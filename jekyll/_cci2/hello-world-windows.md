@@ -20,7 +20,7 @@ A Windows Server 2022 image is now available to CircleCI Cloud customers, read m
 To follow along with this document you will need:
 
 * An [account](https://circleci.com/signup/) on CircleCI.
-* Either the Free, Performance, or Scale [plan](https://circleci.com/pricing/usage/).
+* Either the Free, Performance, or Scale [Plan](https://circleci.com/pricing/usage/).
 
 ## Example application
 {: #example-application }

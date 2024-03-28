@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Examples and Guides Overview
+= Examples and guides overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Resources for learning CircleCI using examples.

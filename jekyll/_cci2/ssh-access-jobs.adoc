@@ -52,7 +52,7 @@ image::rerun-job-connect.png[Screenshot showing rerun job with SSH option]
 
 If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `+ssh -p <remote_ip> -- powershell.exe+`.
 
-The job virtual machine (VM) will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it). After you SSH into the job, the connection will remain open for *one hour* for customers on the Free plan, or *two hours* for all other customers.
+The job virtual machine (VM) will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it). After you SSH into the job, the connection will remain open for *one hour* for customers on the Free Plan, or *two hours* for all other customers.
 
 If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the job output.
 

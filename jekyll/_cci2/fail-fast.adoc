@@ -3,11 +3,11 @@ version:
 - Cloud
 - Server
 ---
-= Fail fast - Open preview
+= Fail fast - DEPRECATED
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A new way to tighten your feedback loop when running tests on CircleCI.
 :icons: font
 :experimental:
 
-WARNING: This preview feature will not be moved to general availability and is deprecated. For questions and/or issues, please comment on our link:https://discuss.circleci.com/t/product-launch-preview-fail-tests-faster/46785[Community forum].
+WARNING: This preview feature will not be moved to general availability and is deprecated. For questions and/or issues, comment on our link:https://discuss.circleci.com/t/product-launch-preview-fail-tests-faster/46785[Community forum].
