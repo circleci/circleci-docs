@@ -461,7 +461,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | `setup`
 | N
 | Boolean
-| Designates the config.yaml for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
+| Designates the `config.yaml` for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
 |===
 
 The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.

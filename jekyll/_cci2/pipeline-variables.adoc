@@ -59,10 +59,10 @@ Pipeline parameters are declared using the `parameters` key at the top level of 
 
 Pipeline parameters support the following types:
 
-- string
-- boolean
-- integer
-- enum
+- `string`
+- `boolean`
+- `integer`
+- `enum`
 
 See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
 
@@ -180,7 +180,7 @@ Even though the `print` command is called from the `cat-file` job, the file para
 [#pipeline-value-scope]
 === Pipeline value scope
 
-Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
+Pipeline values, the pipeline-wide values that are provided by CircleCI (for example, `<< pipeline.number >>`) are always in scope.
 
 [#pipeline-parameter-scope]
 === Pipeline parameter scope

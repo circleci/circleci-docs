@@ -186,12 +186,14 @@ SDK
 Selenium
 SemVer
 Server Plan
+SLAs?
 [Ss]ignup
 SKUs?
 SSH
 statsd
 stderr
 stdin
+[Ss]tdout
 [Ss]ubkeys?
 [Ss]ubshells?
 subcommand
