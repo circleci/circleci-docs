@@ -647,8 +647,6 @@ Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the 
 --
 **Option 1:** Use IAM keys.
 
-NOTE: This option is not recommended if your pipelines store artifacts greater than 5GB. A limitation with the MinIO backend causes S3 uploads with objects greater than 5GB to fail when using IAM keys. For 5GB+ object support, use IRSA (documented below).
-
 Add the following to the `object_storage.s3` section:
 
 [source,yaml]
@@ -679,6 +677,18 @@ object_storage:
     region: "<role-region>"
     irsaRole: "<irsa-arn>"
 ----
+
+**Disable Presigned Mode (Optional)**
+If you wish to store artifacts larger than 5GB, you will need to link:https://circleci.com/docs/server/v4.4/installation/phase-1-prerequisites/#s3-storage[update your trust policy for your IRSA role]. Then disable presigned mode by adding the following to the `object_storage.s3` section:
+[source,yaml]
+----
+object_storage:
+  ...
+  s3:
+    ...
+    presigned: false
+    storageRole: "<irsa-arn>"
+----
 --
 
 [.tab.s3compatible.You_create_Secret]
@@ -695,7 +705,7 @@ kubectl -n <namespace> create secret generic object-storage-secret \
 ----
 --
 
-CircleCI server will use the role provided to authenticate to S3.
+CircleCI server will use the credentials provided to authenticate to S3.
 
 
 // Stop hiding from GCP PDF:
