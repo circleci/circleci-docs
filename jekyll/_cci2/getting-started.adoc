@@ -18,7 +18,6 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
-
 ++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
@@ -42,7 +41,6 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 ++++
-
 
 [#check-your-account-type]
 === Check your account type
@@ -299,4 +297,4 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
 * xref:config-intro#[Introduction to configuration]
 * xref:concepts#[CircleCI concepts]
-* xref:plan-free#[Benefits of CircleCI Free Plan]
+* xref:plan-free#[Benefits of CircleCI free plan]
