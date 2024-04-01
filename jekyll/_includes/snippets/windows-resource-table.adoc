@@ -10,7 +10,7 @@
 | icon:check[]
 | icon:check[]
 
-| `large `
+| `large`
 | 8
 | 30GB
 | 200 GB
