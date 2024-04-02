@@ -78,7 +78,7 @@ Unlike CircleCI's stable images (which are frozen and will not change), once a n
 
 If you are requesting an image using an Xcode version that is currently in beta, you should expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling, which are beyond CircleCI's control.
 
-To read about CircleCI's customer support policy regarding beta images, please check out the following link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
+To read about CircleCI's customer support policy regarding beta images, check out the following link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
 
 [#apple-silicon-support]
 === Apple silicon support
@@ -88,10 +88,10 @@ Running or testing Apple silicon apps natively can be done on our silicon-based 
 It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
 [#xcode-cross-compilation]
-== Xcode Cross Compilation
+== Xcode cross compilation
 
 [#universal-binaries]
-=== Universal Binaries
+=== Universal binaries
 
 Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
 
