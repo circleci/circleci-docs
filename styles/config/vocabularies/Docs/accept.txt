@@ -66,6 +66,7 @@ Clojure
 Cloud Foundry
 Codecov
 CodeDeploy
+Coinbase
 [Cc]onfig
 Container Registry
 Coreutils
@@ -151,6 +152,7 @@ manpage
 minitest
 [Mm]ultiline
 namespace
+New Relic
 [Nn]ode
 Nomad
 npm
@@ -158,6 +160,7 @@ OAuth
 OIDC
 OOM
 OPA
+OpenID Connect
 orgs?
 Packagecloud
 [Pp]arameterization
