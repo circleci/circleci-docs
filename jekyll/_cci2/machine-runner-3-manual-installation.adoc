@@ -24,7 +24,7 @@ WARNING: If you follow this manual installation method, CircleCI machine runner 
 
 To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
 
-* https://www.gnu.org/software/coreutils/[coreutils] - Linux only
+* https://www.gnu.org/software/coreutils/[Coreutils] - Linux only
 
 * https://brew.sh/[Homebrew] - macOS only
 
@@ -37,10 +37,10 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * https://www.gnu.org/software/tar/[tar]
 
-* https://www.gnu.org/software/gzip/[gzip] - Linux only
+* https://www.gnu.org/software/gzip/[Gzip] - Linux only
 
-* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
-* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
+* `sepolicy` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
+* `rpmbuild` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
 
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
@@ -114,7 +114,7 @@ runner:
 api:
   auth_token: "your-auth-token"
 ----
-. If you are using CircleCI Server you will need to provide the url for your install. You can do this by adding the url to `$HOME/circleci-runner-config.yaml` using text editor of your choice.
+. If you are using CircleCI server you will need to provide the URL for your install. You can do this by adding the URL to `$HOME/circleci-runner-config.yaml` using text editor of your choice.
 +
 ```yaml
 api:

@@ -13,10 +13,12 @@ This quickstart guide takes you through connecting an existing project to Circle
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
 
+pass:[<!-- vale off -->]
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
+
 
 ++++
 {%- capture header-banner-1 -%}
@@ -41,6 +43,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 ++++
+
 
 [#check-your-account-type]
 === Check your account type
@@ -291,10 +294,12 @@ On a failed pipeline, you can <a class="no-external-icon" href="https://circleci
 That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or link:https://support.circleci.com/hc/en-us[ask for help].
 ////
 
+pass:[<!-- vale on -->]
+
 [#next-steps]
 == Next steps
 
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
 * xref:config-intro#[Introduction to configuration]
 * xref:concepts#[CircleCI concepts]
-* xref:plan-free#[Benefits of CircleCI free plan]
+* xref:plan-free#[Benefits of CircleCI Free Plan]

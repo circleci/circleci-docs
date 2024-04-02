@@ -47,10 +47,12 @@ Bitbucket
 [Bb]lobless
 BrowserStack
 Buildah
+Buildkite
 Bundler
 Capistrano
 Certbot
 cgroup
+Chocolatey
 CircleCI
 CircleCI cloud
 CircleCI server
@@ -77,6 +79,7 @@ Datadog
 datastore
 deduplicate
 deduplicated
+DevOps
 Django
 Docker
 Dockerfiles?
@@ -92,6 +95,7 @@ EOL
 FAQs?
 Fastfile
 Fastlane
+Fastlane Match
 filename
 framebuffer
 Free Plan
@@ -152,6 +156,7 @@ Nomad
 npm
 OAuth
 OIDC
+OOM
 OPA
 orgs?
 Packagecloud
@@ -171,12 +176,15 @@ READMEs?
 reprovision
 reprovisioned
 [Rr]eusability
+RHEL
+Rocky
 Rollouts?
 Route 53
 [Rr]unbook
 RSpec
 Ruby
 [Rr]unner
+[Rr]untimes?
 S3
 SAML
 SSO
@@ -189,6 +197,7 @@ Server Plan
 SLAs?
 [Ss]ignup
 SKUs?
+[Ss]nap
 SSH
 statsd
 stderr
@@ -224,6 +233,7 @@ VMs?
 VPC
 VS Code
 WebDriver
+Webtrigger
 Windows
 Workload Identity
 x86
