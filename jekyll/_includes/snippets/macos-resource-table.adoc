@@ -3,19 +3,19 @@
 |===
 | Class | vCPUs | RAM | Cloud | Server
 
-| macos.x86.medium.gen2*
+| `macos.x86.medium.gen2*`
 | 4 @ 3.2 GHz
 | 8GB
 | icon:check[]
 | icon:times[]
 
-| macos.m1.medium.gen1
+| `macos.m1.medium.gen1`
 | 4 @ 3.2 GHz
 | 6GB
 | icon:check[]
 | icon:times[]
 
-| macos.m1.large.gen1
+| `macos.m1.large.gen1`
 | 8 @ 3.2 GHz
 | 12GB
 | icon:check[]

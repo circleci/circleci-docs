@@ -62,6 +62,7 @@ classpath?
 CLI
 Clojure
 Cloud Foundry
+CocoaPods
 Codecov
 CodeDeploy
 [Cc]onfig
@@ -161,12 +162,14 @@ PHP
 PHPUnit
 Pipenv
 Playwright
+Podfile
 PowerShell
 [Pp]re
 preallocate
 Python
 RAM
 RDoc
+React Native
 READMEs?
 reprovision
 reprovisioned
@@ -207,6 +210,7 @@ Terraform
 Tink
 TLS
 [Tt]olerations
+[Tt]oolchains?
 [Tt]ruthy
 TypeScript
 UI

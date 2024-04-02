@@ -1,7 +1,7 @@
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Config
+| Configuration
 | Xcode Version
 | macOS Version
 | VM Software Manifest
