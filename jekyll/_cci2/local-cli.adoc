@@ -35,7 +35,7 @@ NOTE: If you have previously installed CLI prior to October 2018, you may need t
 For the majority of installations, we recommend one of the package managers outlined in the sections below to install the CircleCI CLI.
 
 [#linux-install-with-snap]
-=== Linux: Install with Snap
+=== Linux install with Snap
 
 The following commands will install the CircleCI CLI, Docker, and both the security and auto-update features that come along with https://snapcraft.io/[Snap packages].
 
@@ -48,7 +48,7 @@ sudo snap connect circleci:docker docker
 With snap packages, the Docker command will use the Docker snap, not a version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
 
 [#macos-install-with-homebrew]
-=== macOS: Install with Homebrew
+=== macOS install with Homebrew
 
 If you are using https://brew.sh/[Homebrew] with macOS, you can install the CLI with the following command:
 
@@ -65,7 +65,7 @@ brew install --ignore-dependencies circleci
 ----
 
 [#windows-install-with-chocolatey]
-=== Windows: Install with Chocolatey
+=== Windows install with Chocolatey
 
 For Windows users, CircleCI provides a https://chocolatey.org/[Chocolatey] package:
 
@@ -206,7 +206,7 @@ choco uninstall circleci-cli -y --remove dependencies
 [#useful-links]
 == CLI articles in the support centre
 
-If you wish to suggest ways we could improve the CLI please https://github.com/CircleCI-Public/circleci-cli[share your suggestion on the GitHub repository]
+If you wish to suggest ways we could improve the CLI link:https://github.com/CircleCI-Public/circleci-cli[share your suggestion on the GitHub repository].
 
 * https://support.circleci.com/hc/en-us/articles/360033753374-Checkout-private-repositories-with-local-jobs-run-through-circleci-cli[How to check private repositories with local jobs using the CircleCI CLI?]
 * https://support.circleci.com/hc/en-us/articles/4421154407195-Deprecating-Ubuntu-14-04-and-16-04-images-EOL-5-31-22[How to know if your project is using deprecated Machine images with the CLI?]

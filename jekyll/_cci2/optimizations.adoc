@@ -41,7 +41,7 @@ To persist data from a job and make it available to downstream jobs via the xref
 [#docker-image-choice]
 === Docker image choice
 
-Choosing the right docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
+Choosing the right Docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI provides a range of xref:circleci-images#[convenience images], typically based on official Docker images, but with a range of useful language tools pre-installed.
 * You can create xref:custom-images#[custom images], maximizing specificity for your projects. To help with this we provide xref:custom-images#creating-a-custom-image-manually[guidance for building images manually].
@@ -67,7 +67,7 @@ Caching should be one of the first things you consider when trying to optimize y
 
 Workflows provide a means to define a collection of jobs and their run order. If at any point in your configuration you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the xref:workflows#[Workflow] page.
 
-* You can view examples of workflows in the link:https://github.com/CircleCI-Public/circleci-demo-workflows/[CircleCI demo workflows repo].
+* You can view examples of workflows in the link:https://github.com/CircleCI-Public/circleci-demo-workflows/[CircleCI demo workflows repository].
 
 [#parallelism]
 === Parallelism
@@ -181,7 +181,7 @@ Use dynamic configuration to generate CircleCI config files dynamically, dependi
 
 * Execute conditional workflows/commands.
 * Pass pipeline parameter values and/or generate additional configuration.
-* Trigger separate config.yml configurations, which exist outside the default parent .circleci/ directory.
+* Trigger separate config.yml configurations, which exist outside the default parent `.circleci/` directory.
 
 Read more about dynamic configuration on the link:/docs/dynamic-config/[Dynamic configuration] overview page.
 

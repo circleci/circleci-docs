@@ -47,10 +47,12 @@ Bitbucket
 [Bb]lobless
 BrowserStack
 Buildah
+Buildkite
 Bundler
 Capistrano
 Certbot
 cgroup
+Chocolatey
 CircleCI
 CircleCI cloud
 CircleCI server
@@ -64,6 +66,7 @@ Clojure
 Cloud Foundry
 Codecov
 CodeDeploy
+Coinbase
 [Cc]onfig
 Container Registry
 Coreutils
@@ -77,6 +80,7 @@ Datadog
 datastore
 deduplicate
 deduplicated
+DevOps
 Django
 Docker
 Dockerfiles?
@@ -92,6 +96,7 @@ EOL
 FAQs?
 Fastfile
 Fastlane
+Fastlane Match
 filename
 framebuffer
 Free Plan
@@ -147,12 +152,15 @@ manpage
 minitest
 [Mm]ultiline
 namespace
+New Relic
 [Nn]ode
 Nomad
 npm
 OAuth
 OIDC
+OOM
 OPA
+OpenID Connect
 orgs?
 Packagecloud
 [Pp]arameterization
@@ -171,12 +179,15 @@ READMEs?
 reprovision
 reprovisioned
 [Rr]eusability
+RHEL
+Rocky
 Rollouts?
 Route 53
 [Rr]unbook
 RSpec
 Ruby
 [Rr]unner
+[Rr]untimes?
 S3
 SAML
 SSO
@@ -189,6 +200,7 @@ Server Plan
 SLAs?
 [Ss]ignup
 SKUs?
+[Ss]nap
 SSH
 statsd
 stderr
@@ -224,6 +236,7 @@ VMs?
 VPC
 VS Code
 WebDriver
+Webtrigger
 Windows
 Workload Identity
 x86

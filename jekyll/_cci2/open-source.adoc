@@ -5,7 +5,7 @@ contentTags:
   - Cloud
   - Server
 ---
-= Open Source Acknowledgments
+= Open source acknowledgments
 :page-layout: classic-docs
 :page-description: List and acknowledgements for open-source projects and libraries that are used in CircleCI products and services.
 :icons: font

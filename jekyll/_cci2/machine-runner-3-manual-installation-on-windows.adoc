@@ -18,7 +18,7 @@ This page describes how to manually install CircleCI's machine runner 3.0 on Win
 
 * https://www.gnu.org/software/tar/[tar]
 
-* https://www.gnu.org/software/gzip/[gzip]
+* https://www.gnu.org/software/gzip/[Gzip]
 
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
