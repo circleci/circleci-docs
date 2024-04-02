@@ -5,6 +5,7 @@ contentTags:
 ---
 = Quickstart guide
 :page-layout: classic-docs
+:icons: font
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-liquid:
 
@@ -62,25 +63,14 @@ Don’t see these options? Use the org selector in the top left corner to find t
 
 
 {% capture content %}
-Check all the options are correct for your project, and follow the instructions to supply a private SSH key. CircleCI will use this to authenticate with GitHub and check out your code. Then click <b>Create Project</b>.
-{% endcapture %}
-
-{%- capture supply-ssh -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project-gh-app.png
-{%- endcapture -%}
-
-{% include two-up.html title="2. Supply an SSH key" content=content imageURL=supply-ssh imageAlt="Supply private SSH key" %}
-
-
-{% capture content %}
-A <code>config.yml</code> file is generated for you based on the languages and frameworks used in your project.
+Give your project a name, check the options, then click <strong>Create Project</strong>. A <code>config.yml</code> file is generated for you based on the languages and frameworks used in your project.
 {% endcapture %}
 
 {%- capture configure-your-project -%}
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/generating-config.png
 {%- endcapture -%}
 
-{% include two-up.html title="3. Generate config" content=content imageURL=configure-your-project imageAlt="Config Editor" %}
+{% include two-up.html title="2. Generate config" content=content imageURL=configure-your-project imageAlt="Config Editor" %}
 
 
 {% capture content %}
@@ -91,7 +81,7 @@ Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-github-app.png
 {%- endcapture -%}
 
-{% include two-up.html title="4. Commit and run your config" content=content imageURL=commit-run-github imageAlt="Commit a config" %}
+{% include two-up.html title="3. Commit and run your config" content=content imageURL=commit-run-github imageAlt="Commit a config" %}
 
 
 {% capture content %}
@@ -101,7 +91,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
 {%- endcapture -%}
 
-{% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
 ++++
 --
 

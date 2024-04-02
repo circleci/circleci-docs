@@ -8,7 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:experimental:ß
+:experimental:
 
 [#self-hosted-runner-configuration-reference]
 == Machine runner configuration reference

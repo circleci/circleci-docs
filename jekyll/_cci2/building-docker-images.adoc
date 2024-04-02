@@ -40,7 +40,7 @@ In the CircleCI web app, jobs that run in the remote Docker environment have the
 
 image::{{ site.baseurl }}/assets/img/docs/remote-docker-label.png[Remote Docker label]
 
-NOTE: The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a Docker container. If your executor is `machine` (and you want to use docker commands in your config) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
+NOTE: The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a Docker container. If your executor is `machine` (and you want to use Docker commands in your config) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
 
 [#specifications]
 == Specifications
@@ -50,7 +50,7 @@ For technical specifications and pricing information for the remote Docker envir
 [#run-docker-commands-using-the-docker-executor]
 == Run Docker commands using the Docker executor
 
-The example below shows how you can build and deploy a Docker image for our link:https://github.com/CircleCI-Public/circleci-demo-docker[demo docker project] using the Docker executor, with remote Docker:
+The example below shows how you can build and deploy a Docker image for our link:https://github.com/CircleCI-Public/circleci-demo-docker[demo Docker project] using the Docker executor, with remote Docker:
 
 [,yml]
 ----
@@ -110,7 +110,7 @@ The xref:circleci-images#[CircleCI convenience images] for the Docker executor c
 ----
 
 [#docker-version]
-== Specify a Docker version for remote docker
+== Specify a Docker version for remote Docker
 
 To optionally specify a Docker version, you can set it as a `version` attribute with supported tags:
 
@@ -122,7 +122,7 @@ To optionally specify a Docker version, you can set it as a `version` attribute 
 
 CircleCI supports the tags listed below for remote Docker, as per our link:{{site.baseurl}}/remote-docker-images-support-policy/#tagging[Remote Docker tagging policy].
 
-For *x86* and *arm* architecture, the following tags are available:
+For *x86* and *Arm* architecture, the following tags are available:
 
 * `default`
 * `edge`
@@ -176,4 +176,3 @@ jobs:
 * xref:docker-layer-caching#[Docker Layer Caching]
 * xref:glossary#job-space[job-space]
 * xref:glossary#primary-container[primary-container]
-* xref:glossary#docker-layer-caching[docker-layer-caching]

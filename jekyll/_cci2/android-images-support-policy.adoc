@@ -47,7 +47,7 @@ When critical CVEs are disclosed that affect the versions of the operating syste
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
 
-Please file a link:https://support.circleci.com/hc/en-us/requests/new[Support Ticket with CircleCI Support] for any issues or bugs found with the Android VM (machine) images. Our Support Team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+File a link:https://support.circleci.com/hc/en-us/requests/new[Support Ticket with CircleCI Support] for any issues or bugs found with the Android VM (machine) images. Our Support Team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
 
 [#image-lifespan-eol]
 == Image lifespan / EOL

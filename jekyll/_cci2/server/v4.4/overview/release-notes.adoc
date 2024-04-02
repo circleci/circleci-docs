@@ -23,19 +23,17 @@ The v4.4 release introduces the following feature enhancements:
 
 For a full list of fixes, changes, new features and known issues, follow the links to individual change log posts below.
 
-[#migration]
-== Migrate
-
-NOTE: The migration process for v3.x to v4.x requires that you install v4.0.x first before moving to subsequent releases. For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
-
-Find information about migration in the following guides:
-
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
-* xref:../../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
-
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.4 guide].
+
+[#release-4-4-2]
+== Release 4.4.2
+
+[#changelog-4-4-2]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-4-4-2/[changelog].
 
 [#release-4-4-1]
 == Release 4.4.1

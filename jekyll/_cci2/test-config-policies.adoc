@@ -11,9 +11,18 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
+----
+====
 
 This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policies overview] and xref:create-and-manage-config-policies#[Create and manage config policies] pages.
 
@@ -446,7 +455,7 @@ It is best-practice to use a file structure that allows you to write stable test
 │   │   ├── policy2_test.yaml
 ----
 
-It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subfolder with its tests. This way each subfolder will run with a sub-bundle and the tests defined within it.
+It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subdirectory with its tests. This way each subdirectory will run with a sub-bundle and the tests defined within it.
 
 . Update the file structure:
 +
@@ -461,7 +470,7 @@ It is a good idea to have tests that run against the entire bundle that will be 
 │   │   ├── version_test.yaml
 ----
 
-. Run all all tests including those in subfolders by appending `/...` to the test path:
+. Run all tests including those in subdirectories by appending `/...` to the test path:
 +
 [source,shell]
 ----
@@ -684,7 +693,7 @@ workflows:
 ----
 ====
 
-. Run `circleci policy test` to see how any opa tests that the policy contains are run:
+. Run `circleci policy test` to see how any OPA tests that the policy contains are run:
 +
 [source,shell]
 ----

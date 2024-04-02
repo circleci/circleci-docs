@@ -54,7 +54,7 @@ All the containers being run by an <<#executor,executor>> for the current job.
 [#job]
 == Job
 
-<<jobs-steps#,Jobs>> are collections of steps, which run commands/scripts as required. Each job must declare an executor that is either docker, machine, windows, or macos.
+<<jobs-steps#,Jobs>> are collections of steps, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`.
 
 [#orbs]
 == Orbs
@@ -69,7 +69,7 @@ The owner of the team's VCS organization.
 [#pipeline]
 == Pipeline
 
-A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.yml.' file.
+A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project `.circleci/config.yml` file.
 
 [#primary-container]
 == Primary container

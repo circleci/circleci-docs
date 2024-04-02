@@ -568,6 +568,36 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
   ]
 }
 ----
++
+NOTE: If you wish to store artifacts which are larger than 5GB, you will need to disable presigned mode. To do this you will need your IRSA role to assume itself. Replace your trust policy above with the contents below.
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "<OIDC_PROVIDER_ARN>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "<ROLE_ARN>"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+----
 
 . Create the policy using the command and template below. Fill in the bucket name and the role ARN.
 +
@@ -685,6 +715,8 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 [.tab.authentication.IAM_access_keys]
 --
 **Option 2:** IAM access keys
+
+NOTE: If you wish to store artifacts which are larger than 5GB, you will need to disable presigned mode which requires an AWS role. Disabling presigned mode will enable the use of muli-part uploads to S3 which can support larger files and potentially faster transfers. We recommend you follow the instructions for creating an IRSA role in this case.
 
 . Create an IAM user for CircleCI server.
 +

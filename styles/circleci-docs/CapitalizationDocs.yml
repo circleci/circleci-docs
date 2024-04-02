@@ -10,3 +10,7 @@ match: $sentence
 #
 # a. This is my heading
 prefix: '^[a-z]\.\s'
+exceptions:
+  - DEPRECATED
+  - Deprecated
+  - Open preview

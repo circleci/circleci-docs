@@ -98,7 +98,7 @@ agent:
 [#custom-secret]
 == Custom token secret
 
-Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
 
 The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
 
@@ -121,16 +121,16 @@ circleci-runner.resourceClass: <my-token>
 circleci-runner.resourceClass2: <my-token-2>
 ```
 
-Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+Due to Kubernetes secret key character constraints, the `/` separating the namespace and resource class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
 
-Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
+Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an empty map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
 Additional instructions can be found in our link:https://support.circleci.com/hc/en-us/articles/15773444776731-How-to-use-customSecret-on-Container-Runner[Support Center].
 
 [#parameters]
-== Helm Chart Parameters
+== Helm chart parameters
 
-The container runner helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here].
+The container runner Helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here].
 
 The following are **CircleCI specific settings**:
 
@@ -202,105 +202,105 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | Description
 | Default
 
-| nameOverride
+| `nameOverride`
 | Override the chart name
-| ""
+| `""`
 
-| fullnameOverride
+| `fullnameOverride`
 | Override the full generated name
-| ""
+| `""`
 
-| agent.replicaCount
+| `agent.replicaCount`
 | Number of container-agents to deploy. The recommendation is to leave this value at 1
-| 1
+| `1`
 
-| agent.image.registry
+| `agent.image.registry`
 | Agent image registry
 | ""
 
-| agent.image.repository
+| `agent.image.repository`
 | Agent image repository
-| circleci/container-agent
+| `circleci/container-agent`
 
-| agent.image.pullPolicy
+| `agent.image.pullPolicy`
 | Agent image pull policy
-| Always
+| `Always`
 
-| agent.image.tag
+| `agent.image.tag`
 | Agent image tag
-| kubernetes-3
+| `kubernetes-3`
 
-| agent.pullSecrets
+| `agent.pullSecrets`
 | link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks
-| []
+| `[]`
 
-| agent.matchLabels
+| `agent.matchLabels`
 | Match labels used on agent pods
-| app: container-agent
+| `app: container-agent`
 
-| agent.podAnnotations
+| `agent.podAnnotations`
 | Extra annotations added to agent pods
-| {}
+| `{}`
 
-| agent.podSecurityContext
+| `agent.podSecurityContext`
 | Security context policies added to agent pods
-| {}
+| `{}`
 
-| agent.containerSecurityContext
+| `agent.containerSecurityContext`
 | Security context policies add to agent containers
-| {}
+| `{}`
 
-| agent.resources
+| `agent.resources`
 | Custom resource specifications for container runner pods
 | {}
 
-| agent.nodeSelector
+| `agent.nodeSelector`
 | Node selector for agent pods
-| {}
+| `{}`
 
-| agent.tolerations
+| `agent.tolerations`
 | Node tolerations for agent pods
-| {}
+| `{}`
 
-| agent.tolerations
+| `agent.tolerations`
 | Node tolerations for agent pods
-| []
+| `[]`
 
-| agent.affinity
+| `agent.affinity`
 | Node affinity for agent pods
-| {}
+| `{}`
 
-| agent.autodetectPlatform
+| `agent.autodetectPlatform`
 | Autodetect the OS and CPU architecture of the node that the task pod is running on. If false, the node is assumed to be the same OS and CPU architecture as the container runner pod and cluster-wide permissions are unneeded.
-| true
+| `true`
 
-| serviceAccount.create
+| `serviceAccount.create`
 | Create a custom service account for the agent
-| true
+| `true`
 
-| rbac.create
+| `rbac.create`
 | Create a Role and RoleBinding for the service account
-| true
+| `true`
 
-| logging.image.registry
+| `logging.image.registry`
 | Image registry for link:#logging-containers[logging containers]
 | ""
 
-| logging.image.repository
+| `logging.image.repository`
 | Image repository for link:#logging-containers[logging containers]
-| circleci/logging-collector
+| `circleci/logging-collector`
 
-| logging.image.tag
+| `logging.image.tag`
 | Image tag for link:#logging-containers[logging containers]
-| edge
+| `edge`
 
-| logging.serviceAccount.create
+| `logging.serviceAccount.create`
 | Create a custom service account token for link:#logging-containers[logging containers]
-| true
+| `true`
 
-| logging.rbac.create
+| `logging.rbac.create`
 | Create a Role and RoleBinding for link:#logging-containers[logging containers]
-| true
+| `true`
 |===
 
 Container runner needs the following Kubernetes permissions:
@@ -366,7 +366,7 @@ limits:
 ```
 
 [#constraint-validation]
-== Constraint Validation
+== Constraint validation
 
 Container runner allows you to configure task pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container runner has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container runner claiming jobs which it cannot schedule which would then fail.
 
@@ -409,7 +409,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-* A third-party tool like Buildah or Kaniko
+* A third-party tool like Buildah or kaniko
 * Machine runner installed with Docker installed on it
 * CircleCI-hosted compute
 
@@ -417,7 +417,7 @@ Note: Third-party tools should be used at your own discretion.
 
 While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
 
-You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used Kaniko to build a container image.
+You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
 
 Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
 
@@ -512,4 +512,4 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 [#faqs]
 == FAQs
 
-Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
+Visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.

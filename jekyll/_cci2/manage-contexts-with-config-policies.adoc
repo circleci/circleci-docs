@@ -11,9 +11,18 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
 Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
 
 [#introduction]
 == Introduction
@@ -132,7 +141,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.allow.manual]
 --
@@ -292,7 +301,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment, or;
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.block.manual]
 --
@@ -389,7 +398,7 @@ In the following steps you will replace `<project-ID-1>` and `<context-1>` (and 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment, or;
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.reserve.manual]
 --
@@ -493,7 +502,7 @@ In the following steps you will replace `<context-1>` (and `<context-2>` if you 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment, or;
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.branch.manual]
 --

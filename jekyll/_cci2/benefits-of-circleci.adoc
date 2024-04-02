@@ -42,7 +42,7 @@ Visit CircleCI's link:https://circleci.com/pricing[Pricing page] to view free an
 
 You can link:https://circleci.com/signup[sign up] for free to get access to unlimited projects on CircleCI's fully-hosted cloud platform.
 
-Organizations on the free plan are given free credits to use on open source projects. Visit the xref:oss#[Building open source projects] page for more information about free containers for public open source projects.
+Organizations on the Free Plan are given free credits to use on open source projects. Visit the xref:oss#[Building open source projects] page for more information about free containers for public open source projects.
 
 [#next-steps]
 == Next steps

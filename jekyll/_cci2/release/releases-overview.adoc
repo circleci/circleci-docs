@@ -10,8 +10,6 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available.
-
 Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and Amazon SageMaker are supported.
 
 [#introduction]
@@ -305,21 +303,21 @@ Releases can be in one of the following states:
 |Release commands failed to be picked up by the release agent within the required time window
 |===
 
-[#coming-soon]
-== Coming soon
-
-A number of features and improvements are planned to be added through open preview and beyond:
-
-* Guided release environment setup experience in the CircleCI web app
-* link:https://argo-rollouts.readthedocs.io/en/stable/features/bluegreen/[Blue Green] deployments via Argo Rollouts
-* Connect releases to your CircleCI workflows
-* Display Argo Rollouts analysis run details in the CircleCI web app
-* Improved searching and filtering on the release dashboard
-
 [#known-limitations]
 == Known limitations
 
 * Restarting the release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
+* **In the CircleCI releases UI it is currently possible for you to attempt and restore a version that does not exist**. All releases are presented in the UI, including those outside of the scope of any version history limits you might have set. We do not currently filter out releases for which there is no longer any data.
++
+Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
++
+If you have these limits set, you can not restore a version outside the limit. For example, if your limit is set to the last 10 releases, you can not restore the 11th deployment back.
++
+We are working on updates to:
++
+** Indicate out-of-scope releases
+** Prevent you from attempting to restore unavailable releases
+** Provide a manual way for you to mark releases as unavailable
 
 [#troubleshooting]
 == Troubleshooting
