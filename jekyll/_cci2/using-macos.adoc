@@ -20,6 +20,7 @@ jobs:
   build:
     macos:
       xcode: 14.2.0
+    resource_class: macos.m1.medium.gen1
 
     steps:
       # Commands will execute in macOS container
@@ -51,7 +52,7 @@ jobs:
   build:
     macos:
       xcode: "14.2.0"
-    resource_class: macos.x86.medium.gen2
+    resource_class: macos.m1.medium.gen1
 ----
 
 [#view-resource-usage]
@@ -77,7 +78,7 @@ Unlike CircleCI's stable images (which are frozen and will not change), once a n
 
 If you are requesting an image using an Xcode version that is currently in beta, you should expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling, which are beyond CircleCI's control.
 
-To read about CircleCI's customer support policy regarding beta images, please check out the following link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
+To read about CircleCI's customer support policy regarding beta images, check out the following link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
 
 [#apple-silicon-support]
 === Apple silicon support
@@ -87,10 +88,10 @@ Running or testing Apple silicon apps natively can be done on our silicon-based 
 It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
 [#xcode-cross-compilation]
-== Xcode Cross Compilation
+== Xcode cross compilation
 
 [#universal-binaries]
-=== Universal Binaries
+=== Universal binaries
 
 Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
 
@@ -121,7 +122,7 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ----
 
 [#cross-compiled-binaries]
-=== Cross Compiled Binaries
+=== Cross compiled binaries
 
 While universal binaries are only supported under Xcode `12.2`+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For `xcodebuild` the process is relatively straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to `x86_64`.
 
@@ -184,12 +185,12 @@ steps:
 [#optimizing-fastlane]
 === Optimizing Fastlane
 
-By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the link:https://docs.fastlane.tools/actions/run_tests/#parameters[fastlane docs].
+By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the link:https://docs.fastlane.tools/actions/run_tests/#parameters[Fastlane docs].
 
 [#optimizing-cocoapods]
-=== Optimizing Cocoapods
+=== Optimizing CocoaPods
 
-In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
+In addition to the basic setup steps, it is best practice to use CocoaPods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repository. This will allow you to install pods faster, reducing build times. If you are using CocoaPods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
 
 To enable this, ensure the first line in your Podfile is as follows:
 
@@ -198,14 +199,14 @@ To enable this, ensure the first line in your Podfile is as follows:
 source 'https://cdn.cocoapods.org/'
 ----
 
-If upgrading from Cocoapods 1.7 or older, ensure the **Fetch CocoaPods Specs** step is removed from your CircleCI configuration, and ensure the following line is removed from your Podfile:
+If upgrading from CocoaPods 1.7 or older, ensure the **Fetch CocoaPods Specs** step is removed from your CircleCI configuration, and ensure the following line is removed from your Podfile:
 
 [source,shell]
 ----
 source 'https://github.com/CocoaPods/Specs.git'
 ----
 
-To update Cocoapods to the latest stable version, simply update the Ruby gem with the following command:
+To update CocoaPods to the latest stable version, simply update the Ruby gem with the following command:
 
 [source,shell]
 ----
@@ -214,7 +215,7 @@ sudo gem install cocoapods
 
 A further recommendation is to check your link:http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
 
-WARNING: The previous S3 mirror provided by CircleCI for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, however, switching to the CDN method described above is recommended.
+WARNING: The previous S3 mirror provided by CircleCI for the CocoaPods Spec repository is no longer being maintained or updated since the release of CocoaPods 1.8. It will remain available to prevent existing jobs breaking, however, switching to the CDN method described above is recommended.
 
 [#optimizing-homebrew]
 === Optimizing Homebrew
@@ -257,10 +258,10 @@ The following common test tools are known to work well on CircleCI:
 [#react-native-projects]
 === React Native projects
 
-React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, please see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application]
+React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application]
 
 [#using-multiple-executor-types-macos-docker]
-== Using Multiple Executor Types (macOS + Docker)
+== Using multiple executor types (macOS + Docker)
 
 It is possible to use multiple xref:executor-intro#[executor types] in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
