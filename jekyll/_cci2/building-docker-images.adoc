@@ -152,22 +152,22 @@ The example below shows how you can build a Docker image using the `machine` exe
 version: 2.1
 
 jobs:
- build:
-   machine:
-    image: ubuntu-2204:2022.04.2
-   steps:
-     - checkout
-     # start proprietary DB using private Docker image
-     # with credentials stored in the UI
-     - run: |
-         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-         docker run -d --name db company/proprietary-db:1.2.3
+  build:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    steps:
+      - checkout
+      # start proprietary DB using private Docker image
+      # with credentials stored in the UI
+      - run: |
+          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          docker run -d --name db company/proprietary-db:1.2.3
 
-     # build the application image
-     - run: docker build -t company/app:$CIRCLE_BRANCH .
+      # build the application image
+      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
-     # deploy the image
-     - run: docker push company/app:$CIRCLE_BRANCH
+      # deploy the image
+      - run: docker push company/app:$CIRCLE_BRANCH
 ----
 
 [#see-also]
