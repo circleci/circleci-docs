@@ -62,8 +62,10 @@ Now configure your `.circleci/config.yml` file for uploading your coverage repor
 [,yaml]
 ----
 version: 2.1
+
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
+
 jobs:
   build:
     docker:
@@ -129,8 +131,10 @@ The generated files will be found under `htmlcov/`, which can be uploaded in a `
 [,yaml]
 ----
 version: 2.1
+
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
+
 jobs:
   build:
     docker:
@@ -151,6 +155,7 @@ jobs:
           $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
     - store_artifacts:
         path: htmlcov
+
 workflows:
   test-workflow:
     jobs:
@@ -244,8 +249,10 @@ Below is a minimal CI configuration to correspond with the above example:
 [,yaml]
 ----
 version: 2.1
+
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
+
 jobs:
   build:
     docker:
@@ -266,8 +273,10 @@ link:https://github.com/gotwarlost/istanbul[Istanbul] is a popular library for g
 [,yaml]
 ----
 version: 2.1
+
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
+
 jobs:
   build:
     docker:
@@ -293,8 +302,10 @@ In the following basic `.circleci/config.yml`, we upload the coverage reports in
 [,yaml]
 ----
 version: 2.1
+
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
+
 jobs:
   build:
     docker:
@@ -361,13 +372,25 @@ The Codecov orb is a partner orb. You or your organization admin will need to op
 [,yaml]
 ----
 version: 2.1
+
 orbs:
-  codecov: codecov/codecov@1.0.2
+  codecov: codecov/codecov@4.0.1
+
 jobs:
-  build:
+  test-and-upload-python:
+    docker:
+      - image: cimg/python:3.10
     steps:
-      - codecov/upload:
-          file: {{ coverage_report_filepath }}
+      - checkout
+      - run: pip install -r requirements.txt
+      - run: pytest --cov .
+      - codecov/upload
+
+workflows:
+  upload-to-codecov:
+    jobs:
+      - test-and-upload-python
+
 ----
 
 Read more about Codecov's orb in their link:https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/[guest blog post].

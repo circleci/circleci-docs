@@ -47,11 +47,13 @@ Having multiple directories under a single cache key increases the chance of the
 
 [,yaml]
 ----
-dependency_cache_paths:
-  - /mnt/ramdisk/node_modules
-  - /mnt/ramdisk/.cache/yarn
-  - /mnt/ramdisk/apps/a/node_modules
-  - /mnt/ramdisk/apps/b/node_modules
+      - save_cache:
+          paths:
+            - /mnt/ramdisk/node_modules
+            - /mnt/ramdisk/.cache/yarn
+            - /mnt/ramdisk/apps/a/node_modules
+            - /mnt/ramdisk/apps/b/node_modules
+          key: v1-node-{{ checksum "package.json" }}
 ----
 
 [#combine-jobs-when-possible]
