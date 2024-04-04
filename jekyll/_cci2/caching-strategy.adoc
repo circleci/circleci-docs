@@ -45,6 +45,7 @@ You can also consider configuring your projects to rerun failed jobs rather than
 
 Having multiple directories under a single cache key increases the chance of there being a change to the cache. In the example below, there may be changes in the first two directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
 
+{% raw %}
 [,yaml]
 ----
       - save_cache:
@@ -55,6 +56,7 @@ Having multiple directories under a single cache key increases the chance of the
             - /mnt/ramdisk/apps/b/node_modules
           key: v1-node-{{ checksum "package.json" }}
 ----
+{% endraw %}
 
 [#combine-jobs-when-possible]
 === Combine jobs when possible
