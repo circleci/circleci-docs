@@ -157,18 +157,18 @@ To output JUnit compatible test data with Jest you can use [jest-junit](https://
 A working `.circleci/config.yml` section might look like this:
 
 ```yml
-steps:
-  - run:
-      name: Install JUnit coverage reporter
-      command: yarn add --dev jest-junit
-  - run:
-      name: Run tests with JUnit as reporter
-      command: jest --ci --runInBand --reporters=default --reporters=jest-junit
-      environment:
-        JEST_JUNIT_OUTPUT_DIR: ./reports/
-        JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
-  - store_test_results:
-      path: ./reports/
+    steps:
+      - run:
+          name: Install JUnit coverage reporter
+          command: yarn add --dev jest-junit
+      - run:
+          name: Run tests with JUnit as reporter
+          command: jest --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/
+            JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
+      - store_test_results:
+          path: ./reports/
 ```
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
@@ -205,88 +205,90 @@ Following is an example for Mocha with nyc, contributed by [marcospgp](https://g
 
 {% raw %}
 ```yml
+version: '2.1'
+
 jobs:
-    build:
+  build:
+    environment:
+      CC_TEST_REPORTER_ID: code_climate_id_here
+      NODE_ENV: development
+    docker:
+      - image: cimg/node:16.10
         environment:
-            CC_TEST_REPORTER_ID: code_climate_id_here
-            NODE_ENV: development
-        docker:
-            - image: cimg/node:16.10
-              environment:
-                MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
-            - image: mongo:4.0
-              environment:
-                MONGO_INITDB_ROOT_USERNAME: admin
-                MONGO_INITDB_ROOT_PASSWORD: password
-        working_directory: ~/repo
-        steps:
-            - checkout
+          MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
+      - image: mongo:4.0
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: password
+    working_directory: ~/repo
+    steps:
+      - checkout
 
-            # Update npm
-            - run:
-                name: update-npm
-                command: 'sudo npm install -g npm@latest'
+      # Update npm
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
 
-            # Download and cache dependencies
-            - restore_cache:
-                keys:
-                    - v1-dependencies-{{ checksum "package-lock.json" }}
-                    # fallback to using the latest cache if no exact match is found
-                    - v1-dependencies-
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+              - v1-dependencies-{{ checksum "package-lock.json" }}
+              # fallback to using the latest cache if no exact match is found
+              - v1-dependencies-
 
-            - run: npm install
+      - run: npm install
 
-            - run: npm install mocha-junit-reporter # just for CircleCI
+      - run: npm install mocha-junit-reporter # just for CircleCI
 
-            - save_cache:
-                paths:
-                    - node_modules
-                key: v1-dependencies-{{ checksum "package-lock.json" }}
+      - save_cache:
+          paths:
+              - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
-            - run: mkdir reports
+      - run: mkdir reports
 
-            # Run mocha
-            - run:
-                name: npm test
-                command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
-                when: always
+      # Run mocha
+      - run:
+          name: npm test
+          command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+          when: always
 
-            # Run eslint
-            - run:
-                name: eslint
-                command: |
-                    ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
-                when: always
+      # Run eslint
+      - run:
+          name: eslint
+          command: |
+              ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
+          when: always
 
-            # Run coverage report for Code Climate
+      # Run coverage report for Code Climate
 
-            - run:
-                name: Setup Code Climate test-reporter
-                command: |
-                    # download test reporter as a static binary
-                    curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-                    chmod +x ./cc-test-reporter
-                    ./cc-test-reporter before-build
-                when: always
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+              # download test reporter as a static binary
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+              ./cc-test-reporter before-build
+          when: always
 
-            - run:
-                name: code-coverage
-                command: |
-                    mkdir coverage
-                    # nyc report requires that nyc has already been run,
-                    # which creates the .nyc_output folder containing necessary data
-                    ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
-                    ./cc-test-reporter after-build -t lcov
-                when: always
+      - run:
+          name: code-coverage
+          command: |
+              mkdir coverage
+              # nyc report requires that nyc has already been run,
+              # which creates the .nyc_output folder containing necessary data
+              ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
+              ./cc-test-reporter after-build -t lcov
+          when: always
 
-            # Upload results
+      # Upload results
 
-            - store_test_results:
-                path: reports
+      - store_test_results:
+          path: reports
 
-            - store_artifacts: # upload test coverage as artifact
-                path: ./coverage/lcov.info
-                prefix: tests
+      - store_artifacts: # upload test coverage as artifact
+          path: ./coverage/lcov.info
+          prefix: tests
 ```
 {% endraw %}
 
@@ -437,6 +439,7 @@ The `path:` is a directory relative to the project’s root directory where the 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
 ```yml
+    steps:
       - run:
           name: run tests
           command: |
@@ -455,6 +458,7 @@ unittest does not support JUnit XML, but in almost all cases you can [run unitte
 
 After adding pytest to your project, you can produce and upload the test results like this:
 ```yml
+    steps:
       - run:
           name: run tests
           command: |
@@ -547,6 +551,7 @@ Assuming that your are already using kaocha as your test runner, do these things
 Add the `kaocha-junit-xml` plugin to your dependencies
 
 Edit your `project.clj` to add the lambdaisland/kaocha-junit-xml plugin, or do the equivalent if you are using deps.edn.
+
 ```clojure
 (defproject ,,,
   :profiles {,,,
@@ -562,6 +567,7 @@ Edit the kaocha config file `test.edn` to use this test reporter
 ```
 
 Add the store_test_results step your `.circleci/config.yml`
+
 ```yml
 version: 2.1
 jobs:
@@ -607,13 +613,19 @@ The [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) orb's
 For example, a `.circleci/config.yml` section for running all `*.bats` tests within the `src/tests` folder might look like the following:
 
 ```yml
+version: 2.1
+
 orbs:
-  bats: circleci/bats@1.1.0
+  bats: circleci/bats@1.1.0
+
 workflows:
-  test:
-    jobs:
-      - bats/run:
-          path: ./src/tests
+  test-my-app:
+    jobs:
+      - bats/run:
+          formatter: junit
+          path: ./src/tests
+          timing: true
+
 ```
 
 ### GoogleTest
@@ -644,14 +656,15 @@ Xcode generates test results in a plist (property list) file format. It is possi
 {: #playwright }
 
 ```yml
- - run:
-    command: |
-      mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
-      pnpm run serve &
-      pnpm playwright test --config=playwright.config.ci.ts --reporter=junit
+    steps:
+      - run:
+          command: |
+            mkdir test-results #can also be switched out for passing PLAYWRIGHT_JUNIT_OUTPUT_NAME directly to Playwright
+            pnpm run serve &
+            pnpm playwright test --config=playwright.config.ci.ts --reporter=junit
 
-- store_test_results:
-    path: results.xml
+      - store_test_results:
+          path: results.xml
 ```
 
 Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with some of CircleCI's testing features.
@@ -661,13 +674,14 @@ Ensure that you are using version 1.34.2 or later of Playwright. Earlier version
 {: #cypress }
 
 ```yml
- - run:
-    command: |
-      npm install --save-dev cypress-multi-reporters mocha-junit-reporter
-      cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json ...<other options>
+    steps:
+      - run:
+          command: |
+            npm install --save-dev cypress-multi-reporters mocha-junit-reporter
+            cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json ...<other options>
 
-- store_test_results:
-    path: results.xml
+      - store_test_results:
+          path: results.xml
 ```
 
 ### WebdriverIO
@@ -695,13 +709,14 @@ module.exports = {
 Update your `.circleci/config.yml` to upload the test results to CircleCI.
 
 ```yml
- - run:
-    command: |
-      npm install @wdio/junit-reporter --save-dev
-      wdio wdio.test.conf.js
+    steps:
+      - run:
+          command: |
+            npm install @wdio/junit-reporter --save-dev
+            wdio wdio.test.conf.js
 
-- store_test_results:
-    path: ./test-results
+      - store_test_results:
+          path: ./test-results
 ```
 
 ## API
