@@ -13,13 +13,12 @@ This quickstart guide takes you through connecting an existing project to Circle
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
 
-pass:[<!-- vale off -->]
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
-
+pass:[<!-- vale off -->]
 ++++
 {%- capture header-banner-1 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
