@@ -47,13 +47,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: cimg/base:2024.02
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
+      - image: cimg/base:2024.02
     steps:
       - checkout
       - run: <command>
