@@ -12,8 +12,9 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
+CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. Pipelines have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
 
+== Dashboard
 When visiting your CircleCI dashboard, you are shown a list of recently triggered pipelines for your organization/account.
 
 image::/docs/assets/img/docs/pipelines-dashboard.png[Screenshot of the pipelines dashboard in the CircleCI app]
@@ -28,6 +29,41 @@ image::/docs/assets/img/docs/pipelines-job-step-test-artifact.png[Job tab option
 The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members.
 
 image::/docs/assets/img/docs/pipelines-job-output.png[Download and share job step output]
+
+=== Configuration sources and project triggers
+
+NOTE: The information in this section applies to accounts integrated with the xref:github-apps-integration#[CircleCI GitHub App] or xref:gitlab-integration#[GitLab]. To find out which GitHub integration type you have refer to the xref:github-apps-integration#[GitHub App integration] page.
+
+=== Configuration source
+
+Configuration sources show CircleCI where a pipeline configuration for your project is stored. Each configuration source is a pipeline definition.
+
+A project can have one or more configuration sources. Configurations include, but are not limited to, a `.circleci/config.yml` file in your repository. When you create a project in CircleCI and connect it to a repository, a configuraiton source is set up for you automatically, connected to the `.circleci/config.yml` you set up, either by supplying it yourself or by using an generated configuraiton file created through the project onboarding process.
+
+#ADD SCREENSHOT#
+
+==== Add a configuraiton source
+
+TIP: If you created a project xref:create-a-project#[in the CircleCI web app] you will find a configuration source is already set up.
+
+To add a configuration source, follow these steps:
+
+. In the CircleCI web app, click on **Projects** in the sidebar
+. Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
+. Select **Configuration** in the sidebar
+. Click btn:[Add Configuration Source]
+. Fill in the form fields and options:
+** Give your configuraiton source a descriptive name
+** Under Configuration Source select the platform that matches where your project is set up (for example, GitHub App)
+** Authorize your connection if this is not already showing with a icon:check-circle[]
+** Select your project repository #NEED TO ADD INFO ON WHAT PEOPLE CAN AND CANT DO HERE#
+** Select a fallback branch to use in case you try to build on a branch with no configuration defined
+** Enter the path to your configuraiton file relative to the root of your repository. For example, `.circleci/config.yml`
+. Click btn:[Save]
+
+Once you have set up a configuration source you need to set up a project trigger for the configuration source. This is described in the following section.
+
+=== Project trigger
 
 [#visual-studio-code-extension]
 == VS Code extension
