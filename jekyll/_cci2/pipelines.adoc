@@ -36,9 +36,11 @@ NOTE: The information in this section applies to accounts integrated with the xr
 
 === Configuration source
 
-Configuration sources show CircleCI where a pipeline configuration for your project is stored. Each configuration source is a pipeline definition.
+Configuration sources show CircleCI where a pipeline configuration for your project is stored. Each configuration source is a pipeline definition, which can be used when _triggering_ a pipeline.
 
-A project can have one or more configuration sources. Configurations include, but are not limited to, a `.circleci/config.yml` file in your repository. When you create a project in CircleCI and connect it to a repository, a configuraiton source is set up for you automatically, connected to the `.circleci/config.yml` you set up, either by supplying it yourself or by using an generated configuraiton file created through the project onboarding process.
+A project can have one or more configuration sources. Configurations include, but are not limited to, a `.circleci/config.yml` file in your repository.
+
+When you create a project in CircleCI and connect it to a repository, a configuraiton source is set up for you automatically, connected to the configuration file you set up, either by supplying it yourself or by using a generated configuraiton file created through the project onboarding process.
 
 #ADD SCREENSHOT#
 
@@ -64,6 +66,25 @@ To add a configuration source, follow these steps:
 Once you have set up a configuration source you need to set up a project trigger for the configuration source. This is described in the following section.
 
 === Project trigger
+
+A project can have one or more triggers, which are associated with events from a source of change. Triggers include, but are not limited to, a push to a branch on a version control system (VCS), for example, a GitHub repository. A trigger determines an event (or events) along with a configuration source to define a pipeline.
+
+A trigger kicks off a pipeline to run the workflows defined by your connected configuration source.
+
+==== Add a project trigger
+
+To add a project trigger for a configuraiton source, follow these steps:
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Triggers** in the sidebar
+. Click btn:[Add Trigger]
+. Select **GitHub App** in the dropdown menu
+. Click btn:[Next]
+. Complete the required form fields:
+** Give your trigger a descriptive name
+** Select your project repository from the dropdown
+** Choose your new configuration source from the "Choose config to run" menu
 
 [#visual-studio-code-extension]
 == VS Code extension
