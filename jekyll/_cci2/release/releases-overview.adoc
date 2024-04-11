@@ -201,22 +201,22 @@ The following table shows a complete list of labels and annotations either requi
 |Required?
 
 |`Metadata.Labels`
-|`app`
+|`circleci.com/component-name`
 |A name for your application
 |Yes
 
 |`Metadata.Labels`
-|`version`
+|`circleci.com/version`
 |Current version
 |Yes
 
 |`Spec.Template.Metadata.Labels`
-|`app`
+|`circleci.com/component-name`
 |See above
 | Yes
 
 |`Spec.Template.Metadata.Labels`
-|`version`
+|`circleci.com/version`
 |See above
 | Yes
 
