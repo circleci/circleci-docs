@@ -27,8 +27,8 @@ Before following the steps below, ensure the release environment is set up. Refe
 
 To enable your release to show up on the releases UI in the CircleCI web app, add the following labels and annotation to your Kubernetes Deployment or Argo Rollout:
 
-* Specify the `app` and `version` label in the Kubernetes object `Metadata.Labels`
-* Specify the `app` and `version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
+* Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Metadata.Labels`
+* Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
 * Add the `circleci.com/project-id` annotation with the value set to your project ID
 +
 [NOTE]
@@ -52,22 +52,32 @@ metadata:
   annotations:
     circleci.com/project-id: <your-project-ID>
   labels:
-    app: example-deployment
-    version: 1.0.0
+    circleci.com/component-name: example-deployment
+    circleci.com/version: 1.0.0
   name: example-deployment
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: example-deployment
+      ...     
   template:
     metadata:
       labels:
-        app: example-deployment
-        version: 1.0.0
+        ...     
+        circleci.com/component-name: example-deployment
+        circleci.com/version: 1.0.0
 ----
 
-NOTE: Do not add `version` to the selector labels. These labels can not be changed later, and `version` changes frequently.
+NOTE: Do not add `circleci.com/version` and `circleci.com/component-name` to the selector labels. These labels can not be changed later, and `circleci.com//version` should change for every new release.
+
+[WARNING]
+====
+If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend to migrate to the new labels as soon as possible.
+
+Support for the old labels will be dropped in one of the next releases. 
+
+After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and rollouts managed through Helm.
+====
 
 Once you have updated your Deployment or Rollout, check the CircleCI releases dashboard and you should see your release in the timeline view.
 
@@ -188,8 +198,8 @@ metadata:
     circleci.com/scale-component-enabled: "true"
     circleci.com/workflow-id: 5b8c4de8-fd5f-4be2-80a4-3d0c03fc138c
   labels:
-    app: example-deployment
-    version: 1.0.0
+    circleci.com/component-name: example-deployment
+    circleci.com/version: 1.0.0
   name: example-deployment
   namespace: default
 spec:
@@ -201,7 +211,8 @@ spec:
     metadata:
       labels:
         app: example-deployment
-        version: 1.0.0
+        circleci.com/component-name: example-deployment
+        circleci.com/version: 1.0.0
     spec:
       containers:
         - name: example-deployment
