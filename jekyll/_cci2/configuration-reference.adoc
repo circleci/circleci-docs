@@ -2613,7 +2613,7 @@ workflows:
   my-workflow:
     jobs:
       - build
-      - test
+      - test:
           requires:
             - build
       - hold:
