@@ -120,7 +120,7 @@ jobs:
 
   build2:
     machine:
-      image: ubuntu-2204:2022.07.1
+      image: ubuntu-2204:2024.01.2
     steps:
       - attach_workspace:
         # Must be absolute path or relative path from working_directory
@@ -375,10 +375,8 @@ jobs:
 #...
   build2:
     machine: # Specifies a machine image that uses
-      # an Ubuntu version 20.04 image with Docker 20.10.12
-      # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
-      # for new image releases.
-      image: ubuntu-2004:202201-02
+      # an Ubuntu version 22.04 image
+      image: ubuntu-2204:2024.01.2
     steps:
       - checkout
 
