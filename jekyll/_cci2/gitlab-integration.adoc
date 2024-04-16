@@ -164,7 +164,7 @@ For a complete list of permissions, see the xref:roles-and-permissions-overview#
 [#configuration]
 === Configuration sources and project triggers
 
-You can add or delete a configuration sources and triggers for your project. For details see the xref:pipelines#configuration-sources-and-project-triggers[pipelines overview].
+You can add or delete configuration sources and triggers for your project. For details see the xref:pipelines#configuration-sources-and-project-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced
