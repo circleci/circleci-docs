@@ -389,7 +389,7 @@ Consider the following example policy and configuration:
 ----
 import future.keywords
 
-policy["name"] = "example_mistake"
+policy_name["example_mistake"]
 
 enable_hard["enforce_not_large_resource"]
 
