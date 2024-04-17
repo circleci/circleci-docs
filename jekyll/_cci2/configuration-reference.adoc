@@ -411,7 +411,7 @@ suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
   - title: Intro to dynamic config
-    link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
+    link: https://circlecidiscuss.zendesk.com/hc/en-us/community/posts/24866672240411-Intro-to-Dynamic-Config-via-Setup-Workflows
   - title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
   - title: Validate your config using local CLI
@@ -1015,7 +1015,7 @@ jobs:
 * https://circleci.com/developer/machine/image/ubuntu-2004[ubuntu-2004]
 * https://circleci.com/developer/machine/image/ubuntu-2204[ubuntu-2204]
 
-More information on the software available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
+Announcements about updates to these images are made in our link:https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images[discuss community].
 
 The machine executor supports xref:docker-layer-caching#[Docker Layer Caching], which is useful when you are building Docker images during your job or Workflow.
 
@@ -1071,7 +1071,7 @@ For a full list of supported images, refer to one of the following:
 * link:https://circleci.com/developer/machine/image/windows-server-2022-gui[`windows-server-2022-gui` image]
 * link:https://circleci.com/developer/machine/image/windows-server-2019[`windows-server-2019` image]
 
-More information on what software is available in each image can be found in our link:https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss forum].
+Announcements about updates to these images are made in our link:https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images[discuss community].
 
 Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to manage your Windows execution environment. For examples, see the xref:using-windows#[Using the Windows Execution Environment] page.
 

@@ -10,7 +10,7 @@ contentTags:
 ---
 
 
-**Legacy images with the prefix "circleci/" were [deprecated](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
+**Legacy images with the prefix "circleci/" were deprecated** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
 {: class="alert alert-warning"}
 
 This document provides information about convenience images (pre-built Docker images maintained by CircleCI) and a listing by language, service type, and tags.
@@ -32,8 +32,7 @@ If you would like to directly search for an image, you can browse CircleCI Docke
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
 otherwise improve functionality, and these changes can sometimes affect
-how images work in CircleCI jobs. Please follow the [**convenience-images** tag on
-Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
+how images work in CircleCI jobs. Follow [updates on our discuss community](https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images) to be notified in advance of scheduled maintenance._
 
 ### Examples
 {: #examples }

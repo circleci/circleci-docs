@@ -25,7 +25,7 @@ It is possible to configure the use of the Android image in your configuration w
 [#pre-installed-software]
 == Pre-installed software
 
-View the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
+Refer to the link:https://circleci.com/developer/machine/image/android[Android image] page on our developer hub for image details. Update announcements will also be made on our link:https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images[discuss community] detailing changes to pre-installed software.
 
 [#examples]
 == Examples
