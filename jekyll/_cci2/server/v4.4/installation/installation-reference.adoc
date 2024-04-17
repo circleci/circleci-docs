@@ -167,6 +167,7 @@ nomad:
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
 
+pass:[<!-- vale off -->]
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
@@ -1383,3 +1384,4 @@ limit configuration for the workflows-conductor-grpc deployment.
 |workflows_conductor_grpc.resources.limits.memory |string |`+"8Gi"+`
 |Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]
