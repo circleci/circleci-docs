@@ -9,9 +9,11 @@ contentTags:
 :page-liquid:
 :page-description: How to configure object storage through MinIO to run CircleCI server in an air-gapped environment.
 :icons: font
+:experimental:
 :toc: macro
 :toc-title:
 
+pass:[<!-- vale off -->]
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO
 CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
@@ -60,7 +62,7 @@ Create a `release.txt` file with the value of `$CIRCLE_AGENT_VERSION`. Copy this
 === c. Retrieve the pinned agent binary
 Retrieve and download the pinned `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
 
-[source,bash]
+[,bash]
 ----
 # Download circleci-agent
 curl -O --compressed https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/linux/amd64/circleci-agent
@@ -79,7 +81,7 @@ image::./minio/minio_create_release_dir.png[Creating a directory in the `circlec
 === e. Upload the checksums.txt file to the newly created directory.
 Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in MinIO nested under the newly created release directory (step d).
 
-[source,shell]
+[,shell]
 ----
 # The structure of the directory should now look like this.
 # Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
@@ -87,13 +89,13 @@ $CIRCLE_AGENT_VERSION/
 └── checksums.txt
 ----
 
-image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
+image::./minio/minio_upload_checksums.png[Uploading `checksums.txt` into the release directory]
 
 [#create-new-subdirs]
 === f. Create two new subdirectories in the release directory
 Within the release directory (step d), create two new nested subdirectories, first `linux`, and then within it, `amd64`.
 
-[source,shell]
+[,shell]
 ----
 # The structure of the directory of the bucket should look like this:
 $CIRCLE_AGENT_VERSION/
@@ -110,7 +112,7 @@ image::./minio/minio_create_amd_dir.png[Creating an AMD dir]
 === g. Copy the downloaded `circleci-agent` file
 Copy the downloaded `circleci-agent` file (step c) to your virtual environment, and place it in the amd64 directory you just created.
 
-[source,shell]
+[,shell]
 ----
 # The final structure of the bucket should look similar to this:
 CIRCLE_AGENT_VERSION/
