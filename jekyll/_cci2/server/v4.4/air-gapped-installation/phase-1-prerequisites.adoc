@@ -49,7 +49,7 @@ CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You wi
 
 [#login-to-acr]
 === a. Log in to CircleCI server container registry
-Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Contact mailto:support@circleci.com[CircleCI support] for more information.
+Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Access the link:https://support.circleci.com/[CircleCI support portal] for more information.
 
 [,bash]
 ----
