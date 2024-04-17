@@ -195,7 +195,7 @@ runner:
 === `runner.use_home_ssh_dir_for_checkout_keys`
 `$USE_HOME_SSH_DIR_FOR_CHECKOUT_KEYS`
 
-This flag enables you to use the home directory of the user running the self-hosted runner instance for storing SSH checkout keys
+This flag enables you to use the home directory of the user running the self-hosted runner instance for storing SSH checkout keys.
 
 The possible values are:
 
