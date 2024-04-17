@@ -11,7 +11,7 @@ contentTags:
 :toc-title:
 
 [#example-manifests]
-== Example Manifests
+== Example manifests
 The following are example manifests that contain the basic required parameters necessary to spin up the `circleci-server` Helm installation.
 
 [#aws]
@@ -167,6 +167,7 @@ nomad:
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
 
+pass:[<!-- vale off -->]
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
@@ -1383,3 +1384,4 @@ limit configuration for the workflows-conductor-grpc deployment.
 |workflows_conductor_grpc.resources.limits.memory |string |`+"8Gi"+`
 |Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]
