@@ -13,9 +13,9 @@ contentTags:
 :toc-title:
 
 [#non-tls-docker-registry-installations]
-== Non-TLS Docker Registry installations
+== Non-TLS Docker registry installations
 
-When configuring your air-gapped docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-TLS, or self-signed installation, the following additional steps will need to be taken.
+When configuring your air-gapped Docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-TLS, or self-signed installation, the following additional steps will need to be taken.
 
 On machines that access the Docker registry using Docker, the Docker daemon config must be updated (located on Linux at `/etc/docker/daemon.json`).
 
@@ -31,7 +31,7 @@ The insecure-registries section must be added to the file (if it exists), or the
 This file will need to be configured on the following machines:
 
 - All Nomad nodes in the air-gapped environment
-- Potentially all K3s (lightweight Kubernetes) nodes in the air-gapped environment, if using docker-backed K3s
+- Potentially all K3s (lightweight Kubernetes) nodes in the air-gapped environment, if using Docker-backed K3s
 
 In addition, on each K3s node, the following file must be configured at `/etc/rancher/k3s/registries.yaml`. Take note to include the protocol where referenced.
 
@@ -52,7 +52,7 @@ configs:
 
 
 [#service-type-load-balancers-k3s]
-== Service Type Load Balancers in K3s
+== Service type load balancers in K3s
 
 CircleCI server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
 

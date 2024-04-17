@@ -11,7 +11,7 @@ contentTags:
 :toc-title:
 
 [#example-manifests]
-== Example Manifests
+== Example manifests
 The following are example manifests that contain the basic required parameters necessary to spin up the `circleci-server` Helm installation.
 
 [#aws]

@@ -16,7 +16,7 @@ This guide contains information for CircleCI server operators, or those responsi
 
 CircleCI server schedules CI/CD jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane and Kong.
 
-CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated virtual machines for remote docker jobs.
+CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated virtual machines for remote Docker jobs.
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
 
@@ -45,9 +45,8 @@ guide.
 
 [#github]
 === GitHub
-CircleCI uses GitHub or GitHub Enterprise as an identity provider. GitHub Enterprise can, in turn, use
-https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM]
-to manage users from an external identity provider.
+CircleCI uses GitHub or GitHub Enterprise as an Identity Provider. GitHub Enterprise can, in turn, use
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM] to manage users from an external Identity Provider.
 
 NOTE: CircleCI does not support changing the URL or backend GitHub instance after it has been set up.
 

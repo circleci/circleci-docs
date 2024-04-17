@@ -268,7 +268,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | `nomad-server`
 | Nomad
-| Responsible for managing nomad clients.
+| Responsible for managing Nomad Clients.
 |
 |
 
@@ -316,7 +316,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | `soketi`
 | Frontend
-| Websockets server.
+| WebSockets server.
 |
 |
 

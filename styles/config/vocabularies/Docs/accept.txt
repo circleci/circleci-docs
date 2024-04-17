@@ -27,6 +27,7 @@ Airtable
 Amazon SageMaker
 Android
 [Aa]llowlist?
+AMI
 APIs?
 \b[Aa]pp\b
 Appium
@@ -69,7 +70,7 @@ Codecov
 CodeDeploy
 Coinbase
 [Cc]onfig
-Container Registry
+[Cc]ontainer [Rr]egistry
 Coreutils
 CPUs
 CRD
@@ -139,6 +140,7 @@ keystore
 Knapsack Pro
 known_hosts
 Kotlin
+Krew
 kubectl
 Kubernetes
 LambdaTest
@@ -150,6 +152,7 @@ lockfile
 macOS
 \bMac\b
 manpage
+MFEs?
 minitest
 [Mm]ultiline
 namespace
@@ -171,17 +174,22 @@ PHPUnit
 Pipenv
 Playwright
 Podfile
+PostgreSQL
 PowerShell
 [Pp]re
 preallocate
+[Pp]roxying
+PVC
 Python
 RAM
 RDoc
 React Native
 READMEs?
+Reality Check
 reprovision
 reprovisioned
 [Rr]eusability
+Restic
 RHEL
 Rocky
 Rollouts?
@@ -193,6 +201,7 @@ Ruby
 [Rr]untimes?
 S3
 SAML
+[Ss]andbox(ing|ed)
 SSO
 Sauce Labs
 Scale Plan
@@ -236,11 +245,13 @@ URLEncoder
 UUID
 UUIDs?
 VCS
+Velero
 VMs?
 VPC
 VS Code
 WebDriver
 Webtrigger
+WebSockets?
 Windows
 Workload Identity
 x86
