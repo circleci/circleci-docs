@@ -50,7 +50,7 @@ image::{{site.baseurl}}/assets/img/docs/project-settings-configuration.png[Confi
 
 ==== Add a configuraiton source
 
-TIP: If you created a project xref:create-a-project#[in the CircleCI web app] you will find a configuration source is already set up.
+TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a configuration source is already set up.
 
 image::{{site.baseurl}}/assets/img/docs/add-configuration-source.png[Add a configuration source]
 
@@ -75,7 +75,7 @@ Once you have set up a configuration source you need to set up a project trigger
 
 === Project triggers
 
-TIP: If you created a project xref:create-a-project#[in the CircleCI web app] you will find a trigger is already set up.
+TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a trigger is already set up.
 
 A project can have one or more triggers, which are associated with events from a source of change. Triggers include, but are not limited to, a push to a branch on a version control system (VCS), for example, a GitHub repository. A trigger determines an event (or events) along with a configuration source to define a pipeline.
 
