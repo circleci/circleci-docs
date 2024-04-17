@@ -36,6 +36,8 @@ image::/docs/assets/img/docs/pipelines-job-output.png[Download and share job ste
 
 NOTE: The information in this section on configuration sources and triggers applies to accounts integrated with the xref:github-apps-integration#[CircleCI GitHub App] or xref:gitlab-integration#[GitLab]. There are two GitHub integration types, either OAuth or through the GitHub App. To find out which GitHub integration type you have refer to the xref:github-apps-integration#[GitHub App integration] page.
 
+#Add some information about why people want to go and add these things. On the Multiple config files setup page for GitHub app we have: You can use multiple configuration files in a CircleCI project and set up separate triggers for each one. Each configuration triggers a separate pipeline on a trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.#
+
 === Configuration source
 
 Configuration sources show CircleCI where a pipeline configuration for your project is stored. A configuration source can be set up for use when _triggering_ a pipeline.
@@ -58,7 +60,7 @@ To add a configuration source, follow these steps:
 . Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
 . Select **Configuration** in the sidebar
 . Click btn:[Add Configuration Source]
-. Fill in the form fields and options:
+. Complete the form fields and options:
 ** Give your configuraiton source a descriptive name
 ** Under Configuration Source select the platform that matches where your project is set up (for example, GitHub App)
 +
@@ -108,16 +110,18 @@ To add a project trigger for a configuraiton source, follow these steps:
 . Select **Triggers** in the sidebar
 . Click btn:[Add Trigger]
 . Select the same location in the "Connect to" dropdown menu that you selected for your configuration source (for example, GitHub App)
-+
-NOTE: For GitLab self-managed you can enter the URL for instances you have already set up with CircleCI. You will need to enter your personal access token again to authorize the connection.
 . Click btn:[Next]
-. Complete the required form fields:
+. Complete the form fields and options:
 ** Give your trigger a descriptive name
 ** Authorize your connection if this is not already showing with a icon:check-circle[]
++
+NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
 ** Select your project repository from the dropdown
 ** Choose your configuration source from the "Choose config to run" menu
 ** (Optional) If you are using GitLab you can configure <<gitlab-project-triggers,trigger filters>>
 . Click btn:[Save]
+
+#We should give a step here, something like - Commit a change to your project to check the trigger is set up correctly?#
 
 [#visual-studio-code-extension]
 == VS Code extension
