@@ -106,6 +106,7 @@ workflows:
     unless:
       or:
         - equal: [ master, << pipeline.git.branch >> ]
+        - equal: [ preview, << pipeline.git.branch >> ]
         - << pipeline.parameters.run-schedule >>
     jobs:
       - vale/lint:
