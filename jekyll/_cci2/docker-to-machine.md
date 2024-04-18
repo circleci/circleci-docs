@@ -30,7 +30,7 @@ installed for your application and tests.
 ## Pre-installed software
 {: #pre-installed-software }
 
-The most up to date list of pre-installed software can be found on the [image builder](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) page. You can also visit the [Discuss](https://discuss.circleci.com/) page for more information.
+Visit the link:https://circleci.com/developer/images?imageType=machine[CircleCI developer hub] for details of each CircleCI image. You can also follow announcements on the link:https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images[discuss community].
 
 Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 

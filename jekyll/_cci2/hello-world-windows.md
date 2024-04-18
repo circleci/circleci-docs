@@ -11,9 +11,6 @@ contentTags:
 
 This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/getting-started/).
 
-A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198).
-{: class="alert alert-warning"}
-
 ## Prerequisites
 {: #prerequisites }
 

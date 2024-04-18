@@ -93,7 +93,7 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2204:2022.10.2`
 * `ubuntu-2204:2022.07.2`
 
-For a full list of machine executor images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. And for announcements about image updates, see link:https://discuss.circleci.com/c/ecosystem/circleci-images/64[CircleCI Discuss].
+For a full list of machine executor images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]. And for announcements about image updates, follow the link:https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images[CircleCI discuss community].
 
 [#limitations]
 == Limitations
