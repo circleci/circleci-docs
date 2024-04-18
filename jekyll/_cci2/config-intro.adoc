@@ -14,8 +14,6 @@ contentTags:
 
 This guide gets you started with the CircleCI `config.yml` file.
 
-
-
 [#getting-started-with-circleci-config]
 == Getting started with CircleCI config
 

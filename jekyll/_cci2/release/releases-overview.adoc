@@ -57,7 +57,7 @@ The sections below explain some key software delivery concepts. Understanding th
 [#component]
 === Component
 
-A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `app` label.
+A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
 
 [#delivery]
 === Delivery
@@ -201,22 +201,22 @@ The following table shows a complete list of labels and annotations either requi
 |Required?
 
 |`Metadata.Labels`
-|`app`
+|`circleci.com/component-name`
 |A name for your application
 |Yes
 
 |`Metadata.Labels`
-|`version`
+|`circleci.com/version`
 |Current version
 |Yes
 
 |`Spec.Template.Metadata.Labels`
-|`app`
+|`circleci.com/component-name`
 |See above
 | Yes
 
 |`Spec.Template.Metadata.Labels`
-|`version`
+|`circleci.com/version`
 |See above
 | Yes
 

@@ -415,6 +415,13 @@ executors: # Define reusable executor
 jobs:
   test:
     executor: lg-executor
+    steps:
+      - checkout
+
+workflows:
+  my-workflow:
+    jobs:
+      - test
 ----
 
 In the above example, the policy is bypassed and will **not trigger**. The policy inspects `jobs` and does not find a `resource_class == "large"`.
@@ -430,10 +437,14 @@ version: 2.1
 
 jobs:
   test:
+    docker:
+      - image: my-image
     parameters:
       size:
         type: string
     resource_class: << parameters.size >> # parameterized definition of resource_class
+    steps:
+      - checkout
 
 workflows:
   main:
@@ -570,11 +581,15 @@ restrict_resource_classes[reason] {
 version: 2.1
 
 jobs:
-  parameters:
-    size:
-      type: string
-  resource_class: << parameters.size >>
-  steps: [...]
+  test:
+    parameters:
+      size:
+        type: string
+    docker:
+      - image: my-image
+    resource_class: << parameters.size >>
+    steps:
+      - checkout
 
 workflows:
   main:

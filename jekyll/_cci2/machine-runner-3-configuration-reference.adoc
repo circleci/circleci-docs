@@ -191,6 +191,26 @@ runner:
   cleanup_working_directory: true
 ```
 
+[#runner-use-ssh-dir-for-checkout-keys]
+=== `runner.use_home_ssh_dir_for_checkout_keys`
+`$USE_HOME_SSH_DIR_FOR_CHECKOUT_KEYS`
+
+This flag enables you to use the home directory of the user running the self-hosted runner instance for storing SSH checkout keys.
+
+The possible values are:
+
+* `true`
+* `false`
+
+NOTE: The default value is `false`.
+
+Example:
+
+```yaml
+runner:
+   use_home_ssh_dir_for_checkout_keys: true
+```
+
 [#runner-mode]
 === `runner.mode`
 

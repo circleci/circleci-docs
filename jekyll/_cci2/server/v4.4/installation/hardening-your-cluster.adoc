@@ -148,7 +148,7 @@ If you are using a managed service, you can check the rules created for the traf
 |===
 
 [#nomad-clients-ingress-egress]
-== Nomad Clients
+== Nomad clients
 Nomad clients do not need to communicate with each other. You can block traffic between Nomad client instances completely.
 
 [#ingress-nomad]
@@ -261,7 +261,7 @@ Within the ingress rules of the VM security group, the following rules can be cr
 |===
 
 [#using-public-ips]
-=== Using Public IP addresses
+=== Using public IP addresses
 
 When the `assignPublicIP` option is set to true, all EC2 instances created by machine provisioner are assigned **public** IPv4 addresses. Also, all services communicating with them do so via their public addresses.
 
