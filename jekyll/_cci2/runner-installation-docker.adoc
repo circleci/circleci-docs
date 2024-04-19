@@ -12,17 +12,17 @@ contentTags:
 :experimental:
 :machine:
 
-This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
+This page describes how to install CircleCI's machine runner with the Docker executor on server. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
 
 [#new-recommended-method-container-runner]
-== New recommended method (container runner)
+== New supported method for Docker Installation (container runner)
 
 The <<container-runner#,container runner>> is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 
 [#machine-approach-with-docker]
 == Machine-based approach with Docker
 
-If you cannot use the container runner linked above, you can use Docker and install machine runners with the instructions below.
+NOTICE: The instructions below are no longer supported for Cloud customers. 
 
 [#runner-terms]
 === Runner terms
