@@ -12,7 +12,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-CAUTION: *Legacy images with the prefix `circleci/`` were link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
+CAUTION: *Legacy images with the prefix `circleci/`` were deprecated* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
 
 You can use the Docker execution environment to run your xref:jobs-steps#[jobs] in Docker containers. The Docker execution environment is accessed using the xref:configuration-reference#docker[Docker executor]. Using Docker increases performance by building only what is required for your application.
 

@@ -54,7 +54,7 @@ You can view the list of available images xref:configuration-reference#available
 [#pre-installed-software]
 == Pre-installed software
 
-The most up to date list of pre-installed software can be found on the link:https://discuss.circleci.com/tag/machine-images[Discuss] page.
+For details of what is included in each image, refer to the link:https://circleci.com/developer/images?imageType=machine[CircleCI developer hub]. Changes to images will be announced on the link:https://circlecidiscuss.zendesk.com/hc/en-us/community/topics/23770998354971-CircleCI-Images[CircleCI discuss community].
 
 If you are already using an image and would like to verify the all the packages that come pre-installed, you can run the `apt list --installed` command as a step, like in the example below:
 
