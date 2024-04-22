@@ -120,7 +120,7 @@ api:
 api:
   auth_token: "your-auth-token"
   # On server, set url to the hostname of your server installation.
-  url: https://your.domain.here
+  url: https://runner.circleci.com
 ```
 
 [#start-machine-runner]
