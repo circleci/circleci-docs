@@ -13,9 +13,9 @@ contentTags:
 :machine:
 :windows:
 
-This page describes how to install CircleCI's machine runner on Windows for server. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
+CAUTION: This installation method is deprecated for **CIrcleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-windows#[machine runner 3.0 installation guide] for the recommended steps to set up Windows self-hosted runners on CircleCI cloud.
 
-Please note that this method is deprecated for cloud customers and see https://circleci.com/docs/install-machine-runner-3-on-windows/ for recommended Runner installation on Windows for cloud.
+This page describes how to install machine runner on Windows for **CircleCI server**. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
 The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
