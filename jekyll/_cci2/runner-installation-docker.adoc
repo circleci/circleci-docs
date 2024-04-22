@@ -22,7 +22,7 @@ The <<container-runner#,container runner>> is the recommended approach for runni
 [#machine-approach-with-docker]
 == Machine-based approach with Docker
 
-NOTICE: The instructions below are no longer supported for Cloud customers. 
+CAUTION: The instructions below are not supported for Cloud customers. 
 
 [#runner-terms]
 === Runner terms
