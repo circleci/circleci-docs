@@ -309,11 +309,6 @@ The following sections are features of CircleCI which are not currently fully su
 
 There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
 
-[#auto-cancel-redundant-workflows]
-=== Auto-cancel redundant workflows
-
-Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
-
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
 
