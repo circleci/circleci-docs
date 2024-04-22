@@ -13,7 +13,9 @@ contentTags:
 :machine:
 :macos:
 
-This page describes how to install CircleCI's machine runner on macOS. Please note that this method is deprecated for cloud customers and see https://circleci.com/docs/install-machine-runner-3-on-macos/ for recommended approach. 
+CAUTION: This installation method is deprecated for **CIrcleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up macOS self-hosted runners on CircleCI cloud.
+
+This page describes how to install CircleCI's machine runner on macOS for **CircleCI server** customers. 
 
 [#prerequisites]
 == Prerequisites
