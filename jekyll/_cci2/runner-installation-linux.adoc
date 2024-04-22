@@ -13,7 +13,9 @@ contentTags:
 :machine:
 :linux:
 
-This page describes how to install CircleCI's machine runner on Linux for Server customers. Please note that this method is deprecated for cloud customers and see https://circleci.com/docs/install-machine-runner-3-on-linux/ for recommended Runner installation on Linux for cloud. 
+CAUTION: This installation method is deprecated for **CIrcleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
+ 
+This page describes how to install CircleCI's machine runner on Linux for **CircleCI server** customers. 
 
 [#prerequisites]
 == Prerequisites
