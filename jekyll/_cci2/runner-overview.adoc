@@ -31,6 +31,11 @@ image::container-runner-model.png[CircleCI's container runner architecture]
 image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
 
+[#circleci-launch-agent-1-1-deprecated]
+== Launch Agent 1.1 Deprecated
+
+Launch Agent 1.1 has been deprecated. Machine Runner 3.0 is the recommended replacement. Launch Agent 1.1 will cease to be supported as of July 31, 2024. 
+
 [#circleci-self-hosted-runner-operation]
 == CircleCI's self-hosted runner operation
 
