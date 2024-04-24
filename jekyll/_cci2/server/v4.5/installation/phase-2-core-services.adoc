@@ -448,15 +448,6 @@ endif::env-aws[]
 === j. TLS
 For TLS, you have 4 options:
 
-[.tab.tls.Do_nothing]
---
-*Do nothing*
-
-Do nothing. Self-signed certificates will automatically be generated for you.  This is a good option for trials but not recommended for production use.
-
-NOTE: These self-signed certificates will not be trusted by your browser.  You will need to add an exception to your browser to access the application. Additionally, the certificates will be updated with new self-signed certificates when an update is pushed.
---
-
 [.tab.tls.Lets_Encrypt]
 --
 *Let's Encrypt*
