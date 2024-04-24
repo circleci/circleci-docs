@@ -204,9 +204,11 @@ TIP: CircleCI recommends using link:https://cloud.google.com/kubernetes-engine/d
 [source,shell]
 ----
 gcloud container clusters create circleci-server \
-  --num-nodes 4 \
+  --num-nodes 5 \
   --machine-type n1-standard-8 \
-  --workload-pool=<PROJECT_ID>.svc.id.goog
+  --workload-pool=<PROJECT_ID>.svc.id.goog \
+  --network <NETWORK> \
+  --subnetwork <SUBNETWORK> 
 ----
 +
 NOTE: Your kube-context should get updated with the new cluster credentials automatically.
@@ -228,20 +230,6 @@ gcloud components install gke-gcloud-auth-plugin
 [source,shell]
 ----
 kubectl cluster-info
-----
-. Create a service account:
-+
-[source,shell]
-----
-gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
-  --display-name="<DISPLAY_NAME>"
-----
-. Retrieve credentials for the service account:
-+
-[source,shell]
-----
-gcloud iam service-accounts keys create <KEY_FILE> \
-  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
 ----
 endif::env-aws[]
 
@@ -400,6 +388,20 @@ ifndef::env-aws[]
 python3 -m pip install certbot-dns-google
 ----
 . The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
+.. Create a service account:
++
+[source,shell]
+----
+gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
+  --display-name="<DISPLAY_NAME>"
+----
+.. Retrieve credentials for the service account:
++
+[source,shell]
+----
+gcloud iam service-accounts keys create <KEY_FILE> \
+  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
+----
 .. Create a custom role for Certbot:
 +
 [source,shell]
