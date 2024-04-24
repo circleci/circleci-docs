@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: This feature is only available for accounts integrated through the CircleCI **GitHhub App**. To find out your integration type, check the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: This feature is only available for accounts integrated through the CircleCI **GitHub App**. To find out your integration type, check the xref:github-apps-integration#[GitHub App integration] page.
 
 You can use multiple configuration files in a CircleCI project and set up separate triggers for each one. Each configuration triggers a separate pipeline on a trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.
 
