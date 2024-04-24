@@ -1,7 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.4
+  - Server v4.5
   - Server Admin
 ---
 = Phase 3 - install CircleCI server
@@ -146,7 +146,7 @@ We recommend first creating a namespace (`circleci-server`) and deploying the ch
 
 [source,bash,subs=attributes+]
 ----
-helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version {serverversion44} -f <path-to-values.yaml>
+helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version {serverversion45} -f <path-to-values.yaml>
 ----
 
 [#post-install-circleci-server-helm-airgap]

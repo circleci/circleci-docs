@@ -1,7 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.4
+  - Server v4.5
   - Server Admin
 ---
 = Example `values.yaml`

@@ -1,7 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.4
+  - Server v4.5
   - Server Admin
 ---
 = Manage virtual machines with machine provisioner
@@ -61,7 +61,7 @@ machine_provisioner:
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
-The default AMIs for server v4.4 are based on Ubuntu 22.04.
+The default AMIs for server v4.5are based on Ubuntu 22.04.
 
 [#x86-ami-list]
 ===== x86 AMI list
@@ -255,5 +255,5 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion44} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion45} -f <path-to-values.yaml>
 ----

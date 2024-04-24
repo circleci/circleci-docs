@@ -1,7 +1,7 @@
 ---
 contentTags:
   platform:
-    - Server v4.4
+    - Server v4.5
     - Server Admin
 ---
 = Operator overview
@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the xref:../overview/circleci-server-overview#[CircleCI server v4.4 overview].
+This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the xref:../overview/circleci-server-overview#[CircleCI server v4.5overview].
 
 CircleCI server schedules CI/CD jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane and Kong.
 
@@ -25,7 +25,7 @@ Audit logs and other items from the application are also stored in object storag
 [#execution-environment]
 == Execution environment
 
-CircleCI server v4.4 uses Nomad as the primary job scheduler. Refer to our xref:introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI server v4.5uses Nomad as the primary job scheduler. Refer to our xref:introduction-to-nomad-cluster-operation#[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
 

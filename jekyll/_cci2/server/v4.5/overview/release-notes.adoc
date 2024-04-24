@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-    - Server v4.4
+    - Server v4.5
     - Server Admin
 ---
-= CircleCI server v4.4 release notes
+= CircleCI server v4.5release notes
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Details of the new features included in each CircleCI server v4.4 release.
+:page-description: Details of the new features included in each CircleCI server v4.5release.
 :icons: font
 :toc: macro
 :toc-title:
@@ -15,7 +15,7 @@ contentTags:
 [#overview]
 == Overview
 
-The v4.4 release introduces the following feature enhancements:
+The v4.5release introduces the following feature enhancements:
 
 * xref:../../../openid-connect-tokens#[OpenID Connect tokens]: CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can be configured to use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
 * link:https://circleci.com/changelog/machine-runner-3-0-released/[Machine runner 3.0]: Improved setup, usability and maintainability.
@@ -25,7 +25,7 @@ For a full list of fixes, changes, new features and known issues, follow the lin
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.4 guide].
+For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.5guide].
 
 [#release-4-4-2]
 == Release 4.4.2

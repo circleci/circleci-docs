@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-    - Server v4.4
+    - Server v4.5
     - Server Admin
 ---
-= CircleCI server v4.4 overview
+= CircleCI server v4.5overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server v4.4 is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
+:page-description: CircleCI server v4.5is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
 :toc: macro
 :toc-title:
@@ -24,8 +24,8 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 
 The following diagram presents and overview of the services architecture of CircleCI server.
 
-.CircleCI server v4.4 Architecture
-image::server-4-architecture-diagram-2024.png[Server v4.4 services architecture]
+.CircleCI server v4.5Architecture
+image::server-4-architecture-diagram-2024.png[Server v4.5services architecture]
 
 [#ports-and-services]
 === Ports and services
@@ -109,7 +109,7 @@ Job artifacts and outputs are sent directly from jobs in Nomad to object storage
 [#list-of-services-and-their-function]
 == List of services and their function
 
-CircleCI server v4.4 consists of the following services. Find their descriptions and failure implications below:
+CircleCI server v4.5consists of the following services. Find their descriptions and failure implications below:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -417,7 +417,7 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:release-notes#[CircleCI server v4.4 release notes]
-* xref:../installation/phase-1-prerequisites#[Server v4.4 Installation Prerequisites]
+* xref:release-notes#[CircleCI server v4.5release notes]
+* xref:../installation/phase-1-prerequisites#[Server v4.5Installation Prerequisites]
 * xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]
