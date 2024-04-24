@@ -1013,7 +1013,7 @@ machine_provisioner:
   replicas: 1
   providers:
     gcp:
-      enabled: false
+      enabled: true
       project_id: <project-id>
       network_tags:
         - circleci-vm
