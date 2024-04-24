@@ -901,6 +901,11 @@ When using Workload Identity you need to configure your account such that the wo
 
 [source,shell]
 ----
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --condition=None
+
 gcloud iam service-accounts add-iam-policy-binding circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<PROJECT_ID>.svc.id.goog[<K8S_NAMESPACE>/object-storage]"
