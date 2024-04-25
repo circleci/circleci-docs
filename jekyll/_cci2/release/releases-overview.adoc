@@ -175,8 +175,9 @@ We test the versions listed here. Older versions may work but are not guaranteed
 |Tested versions
 
 |Kubernetes
-a| 1.27.0 +
-1.26.0
+a| 1.29.0 +
+1.28.0
+1.27.0
 
 |Helm
 a| 3.12.0 +
