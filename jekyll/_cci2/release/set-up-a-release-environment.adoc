@@ -36,25 +36,7 @@ Before setting up your release environment with CircleCI, run through the follow
 
 CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions have been tested and proven to work. Older versions may work but are not guaranteed:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-|System
-|Supported versions
-
-|Kubernetes
-a| 1.29.0 +
-1.28.0
-1.27.0
-
-|Helm
-a| 3.12.0 +
-3.11.0
-
-|Argo Rollouts (optional)
-a| 1.6.0 +
-1.5.0
-|===
+{% include snippets/release/supported-versions.adoc %}
 
 [#create-release-environment]
 == 1. Create your release environment and token
