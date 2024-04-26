@@ -13,17 +13,16 @@ contentTags:
 :icons: font
 :experimental:
 
-Dynamic configuration in CircleCI is the process of describing a pipeline in which the work done is in some way dynamically determined. The dynamic configuration itself can be unique to the requirements of your specific project. CircleCI offers a number of features and processes that can be used to create a dynamic configuration that works for you.
+Dynamic configuration in CircleCI is the process of describing a pipeline in which the work done is dynamically determined. Dynamic configuration is flexible. The features allow you to create a configuration to match the requirements of your specific project.
 
 Some examples of using dynamic configuration in CircleCI include:
 
-* Optimize pipelines by incorporating logic that checks for file changes or parameter values so that only necessary work is done in each pipeline
-* Share common configuration across projects by generating project-specific sections dynamically based on parameters
-* _Continue_ a pipeline based on the path of changed files
-* Split up a configuration file into reusable fragments that can be dynamically assembled
-* Generate full configurations from very small company-specifiic configurations. If you have many repositories with similar CI/CD requirements, you can generate a full CircleCI YAML configuration dynamically from small template configuration that may use another configuration language.
-* Generate and run a configuration based on where code has changed.
-* If you are working with a language or framework that has its own configuration language, you can generate a CircleCI configuration dynamically from that existing configuration file.
+* Incorporate logic to check for file changes or parameter values so that only necessary work is done in each pipeline.
+* Share common configuration across projects by generating project-specific sections dynamically based on parameters.
+* _Continue_ a pipeline, or generate and run a configuration based on where code has changed.
+* Split up a configuration file into reusable fragments that can be dynamically assembled.
+* Generate full CircleCI configurations from small company-specifiic configurations. For example, if you have many repositories with similar CI/CD requirements, you can generate a full CircleCI YAML configuration dynamically from small template configuration written in any configuration language.
+* When working with a language or framework that has its own configuration language, you can generate CircleCI config dynamically from existing configuration files.
 
 == Quickstart
 
@@ -32,11 +31,11 @@ Some examples of using dynamic configuration in CircleCI include:
 
 CircleCI's dynamic configuration feature is made up of the following resources that can be used together to fit a variety of use cases:
 
-* CircleCI API v2 link:https://circleci.com/docs/api/v2/index.html#operation/continuePipeline[continue a pipeline] endpoint
+* The xref:configuration-reference#setup[`setup` config field] allows you to designate the file as _dynamic_, allowing the use of dynamic configuration features. When a configuration is marked as _dynamic_ (`setup: true`) the `CIRCLE_CONTINUATION_KEY` is available which is required to authorize the continuation of one configuration to another via the link:https://circleci.com/docs/api/v2/index.html#operation/continuePipeline[continue a pipeline] API v2 endpoint.
 
-Two orbs:
+* The API v2 link:https://circleci.com/docs/api/v2/index.html#operation/continuePipeline[continue a pipeline] endpoint allows you to continue a pipeline from one configuration to another.
 
-CircleCI Developer Hub - circleci/path-filtering
+* The link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] allows you to map filepaths, pipelines parameters and configuration files in order to determine what work should be done when a change happens in a location in a repo.
 
 CircleCI Developer Hub - circleci/continuation
 
@@ -97,6 +96,8 @@ Adding the key `setup: true` to the top level of your parent configuration file 
 - Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
 - Pipeline parameters declared in the setup configuration must also be declared in the continuation configuration. These parameters can be used at continuation time. For more information, see the xref:pipeline-variables#pipeline-parameters-and-dynamic-configuration[Pipeline values and parameters] page.
 ====
+
+== Using dynamic configuration on CircleCI server
 
 [#dynamic-config-faqs]
 == FAQs
