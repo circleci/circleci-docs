@@ -46,6 +46,7 @@ backoff
 Behat
 Bitbucket
 [Bb]lobless
+Braintrust
 BrowserStack
 Buildah
 Buildkite
@@ -93,6 +94,7 @@ Elixir
 endraw
 Envoy Gateway
 EOL
+[Ee]vals
 [Ee]xfiltration
 [Ff]alsy
 FAQs?
@@ -144,10 +146,12 @@ Krew
 kubectl
 Kubernetes
 LambdaTest
+Large Language Model
 Lein
 Leiningen
 Linux
 [Ll]iveness
+LLMs?
 lockfile
 macOS
 \bMac\b

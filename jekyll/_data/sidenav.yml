@@ -328,6 +328,8 @@ en:
             link: collect-test-data
       - name: Testing strategies
         children:
+          - name: Large Language Model evaluation
+            link: large-language-model-evaluation
           - name: Browser testing
             link: browser-testing
           - name: Generate code coverage metrics
