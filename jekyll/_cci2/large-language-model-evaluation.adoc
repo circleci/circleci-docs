@@ -84,7 +84,7 @@ Need code example in CircleCI-public
 You can find a full tutorial of how to use the Evals orb on this page.
 ////
 
-Further documentation on how to use the orb is available on the link:https://circleci.com/developer/orbs/orb/circleci/evals[Orb page].  
+Further documentation on how to use the orb is available on the link:https://circleci.com/developer/orbs/orb/circleci/evals[Orb page]. Orb usage examples are available in the sample repository link:https://github.com/CircleCI-Public/llm-eval-examples[[LLM-eval-examples].
 
 == Storing credentials for your evaluations
 CircleCI makes it easy to store your credentials for LLM providers as well as LLMOps tools. Navigate to menu:Project Settings[LLMOps] to enter, verify, and access your OpenAI secrets. You will also find a starting template for your `config.yml` file.
