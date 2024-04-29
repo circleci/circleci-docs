@@ -958,14 +958,14 @@ Apply the Compute Instance Admin (beta) role to the service account:
 +
 [source,shell]
 ----
-gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
+gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:circleci-server-vm@<PROJECT_ID>.iam.gserviceaccount.com --role roles/compute.instanceAdmin --condition=None
 ----
 +
 And:
 +
 [source,shell]
 ----
-gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
+gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:circleci-server-vm@<PROJECT_ID>.iam.gserviceaccount.com --role roles/iam.serviceAccountUser --condition=None
 ----
 
 . *Enable Workload Identity for Service Account or get JSON key file*
@@ -978,7 +978,12 @@ This step is required only if you are using link:https://cloud.google.com/kubern
 
 [source,shell]
 ----
-gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member serviceAccount:circleci-server-vm@<PROJECT_ID>.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --condition=None
+
+gcloud iam service-accounts add-iam-policy-binding circleci-server-vm@<PROJECT_ID>.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/machine-provisioner]"
 ----
@@ -1013,7 +1018,7 @@ machine_provisioner:
   replicas: 1
   providers:
     gcp:
-      enabled: false
+      enabled: true
       project_id: <project-id>
       network_tags:
         - circleci-vm
