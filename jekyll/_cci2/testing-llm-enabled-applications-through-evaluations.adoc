@@ -19,7 +19,7 @@ Evaluations, also known as evals, are a methodology for assessing the quality of
 
 Evaluations provide insights into the performance and efficiency of applications based on LLMs, and allow teams to quantify how well their AI implementation works, measure improvements, and catch regressions.
 
-The term _evaluation_ initially referred to a way to rate and compare AI models, but it has expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
+The term _evaluation_ initially referred to a way to rate and compare AI models. It has since expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
 
 The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response.  There are many evaluation methodologies, such as:
 
@@ -41,7 +41,7 @@ Evaluations can cover many aspects of a model performance, including:
 
 Evaluations can be expressed as classic software tests, typically characterised by the "input, expected output, assertion" format, and as such they can be automated into CircleCI pipelines.
 
-It is crucial to keep two important differences between evals and classic software tests in mind:
+There are two important differences between evals and classic software tests to keep in mind:
 
 * LLMs are predominantly non-deterministic, leading to flaky evaluations, unlike deterministic software tests.
 * Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in regular software testing.
@@ -73,7 +73,7 @@ image::/docs/assets/img/docs/llmops/github-pr-comment.png[Jobs overview]
 +
 image::/docs/assets/img/docs/llmops/artifact.png[Jobs overview]
 
-You can review the summary, and, if required, proceed to a detailed analyses of the individual evaluation on your third party evaluation provider.
+You can review the summary and, if required, proceed to a detailed analysis of the individual evaluation on your third party evaluation provider.
 
 ////
 == Getting started with the Evals orb

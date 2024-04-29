@@ -55,10 +55,10 @@ Capistrano
 Certbot
 cgroup
 Chocolatey
-CircleCI
+CircleCI\b
 CircleCI cloud
 CircleCI server
-circleci.com
+\bcircleci\.com\b
 CI/CD
 classname?
 classpath
