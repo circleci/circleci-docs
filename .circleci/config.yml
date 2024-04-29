@@ -111,7 +111,7 @@ workflows:
     jobs:
       - vale/lint:
           reference_branch: master
-          base_dir: jekyll/_cci2
+          base_dir: ~/project/jekyll/_cci2
 
   build-deploy:
     when:
