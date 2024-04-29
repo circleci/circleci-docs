@@ -152,4 +152,4 @@ Cancel the job and rerun it. If your job is still not running, file a link:https
 
 CircleCI's machine runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
-NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI's Self-hosted Runner]. 
+NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see the xref:jekyll/_cci2/machine-runner-3-configuration-reference.adoc#runner-ssh-advertise_addr[Machine Runner Instructions] or the xref:jekyll/_cci2/container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner instructions].
