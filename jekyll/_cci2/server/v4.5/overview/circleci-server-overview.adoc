@@ -4,7 +4,7 @@ contentTags:
     - Server v4.5
     - Server Admin
 ---
-= CircleCI server v4.5overview
+= CircleCI server v4.5 overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI server v4.5is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.

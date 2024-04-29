@@ -4,7 +4,7 @@ contentTags:
     - Server v4.5
     - Server Admin
 ---
-= CircleCI server v4.5release notes
+= CircleCI server v4.5 release notes
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Details of the new features included in each CircleCI server v4.5release.
