@@ -5,13 +5,13 @@ contentTags:
     - Server v4.x
 ---
 = Testing LLM-enabled applications through evaluations
-:description: Docs page on setting up LLM evaluation in your CI/CD pipeline
+:description: Docs page on setting up LLM evaluations in your CI/CD pipeline
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :experimental:
 
-This page describes common methods for running large language model (LLM) evaluations on CircleCI.
+This page describes common methods for testing applications powered by large language models (LLMs) through evaluations.
 
 == Evaluations overview
 
