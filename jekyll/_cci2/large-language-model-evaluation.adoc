@@ -23,7 +23,7 @@ The term _evaluation_ initially referred to a way to rate and compare AI models,
 
 The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response.  There are numerous evaluation methodologies, including:
 
-* Intrinsic and extrinsic evaluations
+* LLM-assisted evaluations
 * Human evaluations
 * Bias and fairness checks
 * Readability evaluations
@@ -34,7 +34,7 @@ Evaluations can cover many aspects of a model performance, including:
 * Make accurate predictions
 * Avoid hallucinations and generate relevant content
 * Respond in a fair and unbiased way, and within a specific style
-* Avoid certain
+* Avoid certain expressions
 
 == Automating evaluations with CircleCI
 
