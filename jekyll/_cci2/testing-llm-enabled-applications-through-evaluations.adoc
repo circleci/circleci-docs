@@ -54,7 +54,7 @@ Using an open source library or third-party tools can simplify defining evaluati
 
 [NOTE]
 ====
-The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith. The orb is compatible with GitHub projects.
+The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith.
 
 If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
 ====
@@ -65,7 +65,7 @@ Given the volatile nature of evaluations, evaluations orchestrated by the Circle
 
 Instead, a summary of the evaluation results is created and presented:
 
-* As a comment on the corresponding GitHub pull request:
+* As a comment on the corresponding GitHub pull request (GitHub projects only):
 +
 image::/docs/assets/img/docs/llmops/github-pr-comment.png[Jobs overview]
 
