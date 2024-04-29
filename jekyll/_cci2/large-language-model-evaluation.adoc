@@ -25,6 +25,7 @@ The evaluation process involves using a dataset of inputs to an LLM or applicati
 
 * LLM-assisted evaluations
 * Human evaluations
+* Intrinsic and extrinsic evaluations
 * Bias and fairness checks
 * Readability evaluations
 
