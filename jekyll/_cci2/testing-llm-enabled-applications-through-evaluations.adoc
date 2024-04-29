@@ -2,7 +2,7 @@
 contentTags:
   platform:
     - Cloud
-    - Server v4.x
+    - Server
 ---
 = Testing LLM-enabled applications through evaluations
 :description: Docs page on setting up LLM evaluations in your CI/CD pipeline
@@ -54,7 +54,7 @@ Using an open source library or third-party tools can simplify defining evaluati
 
 [NOTE]
 ====
-The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith.
+The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith. The orb is compatible with GitHub projects.
 
 If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
 ====
