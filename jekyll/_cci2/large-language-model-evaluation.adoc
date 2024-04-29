@@ -50,18 +50,18 @@ With CircleCI, you can define, automate, and run evaluations using your preferre
 
 Using an open source library or third-party tools can simplify defining evaluations, tracking progress, and reviewing the evaluation outcomes.
 
-== The CircleCI AI evals orb
+== The CircleCI Evals orb
 
 [NOTE]
 ====
-The link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official AI evals orb] supports integrations with Braintrust and LangSmith.
+The link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official Evals orb] supports integrations with Braintrust and LangSmith.
 
 If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
 ====
 
-CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official evaluations orb] that simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
+CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official Evals orb] that simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
 
-Given the volatile nature of evaluations, evaluations orchestrated by the CircleCI AI evals orb do not halt the pipeline if an evaluation fails. This approach ensures that the inherent flakiness of evaluations does not disrupt the development cycle.
+Given the volatile nature of evaluations, evaluations orchestrated by the CircleCI Evals orb do not halt the pipeline if an evaluation fails. This approach ensures that the inherent flakiness of evaluations does not disrupt the development cycle.
 
 Instead, a summary of the evaluation results is created and presented:
 
@@ -76,18 +76,18 @@ image::/docs/assets/img/docs/llmops/artifact.png[Jobs overview]
 You can review the summary, and, if required, proceed to a detailed analyses of the individual evaluation on your third party evaluation provider.
 
 ////
-== Getting started with the evaluations orb
+== Getting started with the Evals orb
 
 Link to tutorial which will live in another page ( under Tests > Tutorials)
 Need code example in CircleCI-public
 
-You can find a full tutorial of how to use the LLM-evaluations orb on this page.
+You can find a full tutorial of how to use the Evals orb on this page.
 ////
 
 == Storing credentials for your evaluations
 CircleCI makes it easy to store your credentials for LLM providers as well as LLMOps tools. Navigate to menu:Project Settings[LLMOps] to enter, verify, and access your OpenAI secrets. You will also find a starting template for your `config.yml` file.
 
-You can also save the credentials to your preferred evaluation platform, including Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that leverages the AI evals orb.
+You can also save the credentials to your preferred evaluation platform, including Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that leverages the Evals orb.
 
 To get started, navigate to menu:Project Settings[LLMOps]:
 
