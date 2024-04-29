@@ -54,12 +54,12 @@ Using an open source library or third-party tools can simplify defining evaluati
 
 [NOTE]
 ====
-The link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official Evals orb] supports integrations with Braintrust and LangSmith.
+The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith.
 
 If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
 ====
 
-CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official Evals orb] that simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
+CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] that simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
 
 Given the volatile nature of evaluations, evaluations orchestrated by the CircleCI Evals orb do not halt the pipeline if an evaluation fails. This approach ensures that the inherent flakiness of evaluations does not disrupt the development cycle.
 
