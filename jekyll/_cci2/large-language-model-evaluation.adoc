@@ -4,14 +4,14 @@ contentTags:
     - Cloud
     - Server v4.x
 ---
-= Large Language Model evaluation
+= Testing LLM-enabled applications through evaluations
 :description: Docs page on setting up LLM evaluation in your CI/CD pipeline
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :experimental:
 
-This page describes common methods for running Large Language Model (LLM) evaluations on CircleCI.
+This page describes common methods for running large language model (LLM) evaluations on CircleCI.
 
 == Evaluations overview
 
@@ -21,7 +21,7 @@ Evaluations provide insights into the performance and efficiency of applications
 
 The term _evaluation_ initially referred to a way to rate and compare AI models, but it has expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
 
-The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response.  There are numerous evaluation methodologies, including:
+The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response.  There are many evaluation methodologies, such as:
 
 * LLM-assisted evaluations
 * Human evaluations
@@ -54,7 +54,11 @@ Using an open source library or third-party tools can simplify defining evaluati
 
 [NOTE]
 ====
+<<<<<<< HEAD
 The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith.
+=======
+The link:https://circleci.com/developer/orbs/orb/circleci/ai-evals[official AI evals orb] supports integrations with Braintrust and LangSmith. The orb is compatible with GitHub projects.
+>>>>>>> cdf96e5d6 (change title)
 
 If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
 ====

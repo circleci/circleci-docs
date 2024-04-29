@@ -146,7 +146,6 @@ Krew
 kubectl
 Kubernetes
 LambdaTest
-Large Language Model
 Lein
 Leiningen
 Linux
