@@ -162,8 +162,10 @@ You can learn more about creating an Amazon EKS cluster in the link:https://aws.
 +
 [source,shell]
 ----
-eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.2xlarge
+eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.2xlarge --with-oidc --region "<your-region>"
 ----
++
+`--with-oidc` as in the example above is used to add an IAM OIDC provider to your cluster. This provider is necessary for adding the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[EBS CSI driver] and enabling link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA roles] on your cluster. See below for more information. `eksctl` may be further extended with other flags to customize your EKS cluster following their link:https://eksctl.io/usage/creating-and-managing-clusters/[documentation]
 . Once the cluster has been created, you can use the following command to configure `kubectl` access:
 +
 [source,shell]
