@@ -328,6 +328,8 @@ en:
             link: collect-test-data
       - name: Testing strategies
         children:
+          - name: Testing LLM-enabled applications through evaluations
+            link: testing-llm-enabled-applications-through-evaluations
           - name: Browser testing
             link: browser-testing
           - name: Generate code coverage metrics

@@ -46,6 +46,7 @@ backoff
 Behat
 Bitbucket
 [Bb]lobless
+Braintrust
 BrowserStack
 Buildah
 Buildkite
@@ -54,10 +55,10 @@ Capistrano
 Certbot
 cgroup
 Chocolatey
-CircleCI
+CircleCI\b
 CircleCI cloud
 CircleCI server
-circleci.com
+\bcircleci\.com\b
 CI/CD
 classname?
 classpath
@@ -93,6 +94,7 @@ Elixir
 endraw
 Envoy Gateway
 EOL
+[Ee]vals
 [Ee]xfiltration
 [Ff]alsy
 FAQs?
@@ -148,6 +150,7 @@ Lein
 Leiningen
 Linux
 [Ll]iveness
+LLMs?
 lockfile
 macOS
 \bMac\b
