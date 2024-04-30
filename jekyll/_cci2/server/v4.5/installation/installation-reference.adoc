@@ -208,6 +208,43 @@ the builds-service deployment.
 |builds_service.resources.limits.memory |string |`+"6Gi"+` |Memory limit
 for the builds-service deployment.
 
+|ciam_gateway.internal_api.replicas |int |`+1+` |Number of replicas to
+deploy for the ciam-gateway-service internal deployment.
+
+|ciam_gateway.internal_api.resources.limits.cpu |int |`+2+` |CPU limit
+for the ciam-gateway-service internal api deployment.
+
+|ciam_gateway.internal_api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the ciam-gateway-service internal api deployment.
+
+|ciam_gateway.outgoing_api.replicas |int |`+1+` |Number of replicas to
+deploy for the ciam-gateway-service outgoing deployment.
+
+|ciam_gateway.outgoing_api.resources.limits.cpu |int |`+2+` |CPU limit
+for the ciam-gateway-service outgoing api deployment.
+
+|ciam_gateway.outgoing_api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the ciam-gateway-service outgoing api deployment.
+
+|ciam_gateway.public_api.replicas |int |`+1+` |Number of replicas to
+deploy for the ciam-gateway-service public deployment.
+
+|ciam_gateway.public_api.resources.limits.cpu |int |`+2+` |CPU limit for
+the ciam-gateway-service public api deployment.
+
+|ciam_gateway.public_api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the ciam-gateway-service public api deployment.
+
+|ciam_service.internal_admin_api.replicas |int |`+1+` |Number of
+replicas to deploy for the ciam-service internal admin deployment.
+
+|ciam_service.internal_admin_api.resources.limits.cpu |int |`+2+` |CPU
+limit for the ciam-service internal admin api deployment.
+
+|ciam_service.internal_admin_api.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the ciam-service internal admin api
+deployment.
+
 |contexts_service.replicas |int |`+1+` |Number of replicas to deploy for
 the contexts-service deployment.
 
@@ -414,9 +451,6 @@ exists. +
  The secret must be named '`license`' and have the key
 '`license`' (where the value equals the base64 encoded string of your
 license). It must be in the same namespace as your installation.
-
-|global.loginPageBanner |string |`+""+` |Login Page Banner, Accepts HTML
-tags
 
 |global.nodeAffinity |object |`+{}+` |NodeAffinity template to apply to
 all CircleCI pods
@@ -779,6 +813,13 @@ Nomad Autoscaler. Note this repository is not managed by CircleCI.
 been tested against this specific version tag; edit this value at your
 own risk.
 
+|nomad.auto_scaler.scaling.cooldown |string |`+"2m"+` |A time interval
+after a scaling action during which no additional scaling will be
+performed on the resource.
+
+|nomad.auto_scaler.scaling.evaluation_interval |string |`+"1m"+`
+|Defines how often the policy is evaluated by the Autoscaler.
+
 |nomad.auto_scaler.scaling.max |int |`+5+` |
 
 |nomad.auto_scaler.scaling.min |int |`+1+` |
@@ -992,12 +1033,28 @@ with your externalized postgres instance
 |postgresql.primary.extendedConfiguration |string
 |`+"max_connections = 500\nshared_buffers = 300MB\n"+` |
 
+|postgresql.primary.labels.app |string |`+"postgres"+` |
+
+|postgresql.primary.labels.layer |string |`+"data"+` |
+
 |postgresql.primary.persistence.existingClaim |string |`+""+` |
 
 |postgresql.primary.persistence.size |string |`+"8Gi"+` |
 
 |postgresql.primary.podAnnotations.”backup.velero.io/backup-volumes”
 |string |`+"data"+` |
+
+|postgresql.primary.podLabels.app |string |`+"postgres"+` |
+
+|postgresql.primary.podLabels.layer |string |`+"data"+` |
+
+|postgresql.readReplicas.labels.app |string |`+"postgres"+` |
+
+|postgresql.readReplicas.labels.layer |string |`+"data"+` |
+
+|postgresql.readReplicas.podLabels.app |string |`+"postgres"+` |
+
+|postgresql.readReplicas.podLabels.layer |string |`+"data"+` |
 
 |proxy.enabled |bool |`+false+` |If false, all proxy settings are
 ignored
@@ -1226,6 +1283,8 @@ limit for the step-receiver deployment
 
 |telegraf.config.inputs[0].statsd.service_address |string |`+":8125"+` |
 
+|telegraf.config.outputs[0].file.files[0] |string |`+"stdout"+` |
+
 |telegraf.fullnameOverride |string |`+"telegraf"+` |
 
 |telegraf.mountPoints[0].mountPath |string
@@ -1309,6 +1368,12 @@ web-ui-404 deployment.
 
 |web_ui_404.resources.limits.memory |string |`+"256Mi"+` |Memory limit
 configuration for the web-ui-404 deployment
+
+|web_ui_authentication.replicas |int |`+1+` |Number of replicas to
+deploy for the web-ui-authentication deployment.
+
+|web_ui_authentication.resources.limits.memory |string |`+"350Mi"+`
+|Memory limit configuration for the web-ui-authentication deployment
 
 |web_ui_insights.replicas |int |`+1+` |Number of replicas to deploy for
 the web-ui-insights deployment.
