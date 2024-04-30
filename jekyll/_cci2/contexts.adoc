@@ -167,11 +167,11 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
-You must be an organization administrator to complete the following task. Note: this is not supported for orgs that integrate with xref:github-apps-integration/[CircleCI's GitHub App].
+You must be an organization administrator to complete the following task. Note: this is not supported for orgs that integrate with xref:github-apps-integration/[CircleCI's GitHub App], xref:gitlab-integration/[GitLab], or BitBucket.
 
 . Navigate to menu:Organization Settings[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
 . Click the *Create Context* button if you wish to use a new context, or click the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
-. Click the *Add Security Group* (GitHub OAuth App users) or *Add Project Restriction* (GitLab users) button to view the dialog box.
+. Click the *Add Security Group* (GitHub OAuth App users) button to view the dialog box.
 . Make your choices in the dialog box and then click the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
 . Click *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then click the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
 . Navigate back to menu:Organization Settings[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
