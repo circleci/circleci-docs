@@ -7,7 +7,7 @@ contentTags:
 = Upgrade server
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "This document lists the steps required to upgrade a CircleCI server v4.5installation."
+:page-description: "This document lists the steps required to upgrade a CircleCI server v4.5 installation."
 :icons: font
 :toc: macro
 :toc-title:
@@ -26,7 +26,7 @@ To see some common upgrade path options, see link:https://support.circleci.com/h
 [#recommendations]
 == Recommendations
 
-We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.5. Customers that do not perform this step may have issues restoring Vault from backup in v4.5.
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.5. Customers that do not perform this step may have issues restoring Vault from backup in v4.5.
 
 [#prerequisites]
 == Prerequisites
