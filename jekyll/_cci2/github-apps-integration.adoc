@@ -177,6 +177,10 @@ The following sections are features of CircleCI which are not currently supporte
 === Manual trigger pipeline option
 The ability to manually trigger a pipeline from the web app is not currently supported for GitHub App projects.
 
+[#restrict-a-context-to-a-security-group]
+=== Restrict a context to a security group
+The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
+
 [#in-app-config-editor]
 === In-app config editor
 The in-app config editor is currently **only** available for GitHub App accounts during project creation.
