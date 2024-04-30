@@ -278,6 +278,8 @@ en:
             link: install-machine-runner-3-on-macos
           - name: Install on Windows
             link: install-machine-runner-3-on-windows
+          - name: Install on Docker
+            link: install-machine-runner-3-on-docker
           - name: Manual install on Linux and macOS
             link: machine-runner-3-manual-installation
           - name: Manual install on Windows

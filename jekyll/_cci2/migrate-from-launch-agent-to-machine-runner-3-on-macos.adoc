@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
 = Migrate from launch agent to machine runner 3.0 on Linux - Open preview
 :page-layout: classic-docs

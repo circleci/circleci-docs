@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
 = Install machine runner 3.0 on Windows
 :page-layout: classic-docs
