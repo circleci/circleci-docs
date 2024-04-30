@@ -12,6 +12,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
+CAUTION: If your CircleCI server installation is on GKE, do not upgrade to v4.5 at this time. GKE support will be announced in a future release.
+
 [#overview]
 == Overview
 

@@ -914,7 +914,7 @@ You need additional information about your cluster to complete the next section.
 gcloud container clusters describe
 ----
 
-This command returns something like the following, which includes network, region and other details that you need to complete the next section:
+This command returns something like the following, which includes network, region, and other details that you need to complete the next section:
 
 [source, json]
 ----
