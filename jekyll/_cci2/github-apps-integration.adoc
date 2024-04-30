@@ -179,7 +179,7 @@ The ability to manually trigger a pipeline from the web app is not currently sup
 
 [#restrict-a-context-to-a-security-group]
 === Restrict a context to a security group
-The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for projects GitHub App projects.
+The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
 
 [#in-app-config-editor]
 === In-app config editor
