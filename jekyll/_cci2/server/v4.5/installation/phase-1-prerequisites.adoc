@@ -172,7 +172,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.2xlarge --
 ----
 eksctl utils write-kubeconfig --cluster circleci-server
 ----
-. As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as PostgreSQL, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
+. As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as PostgreSQL, MongoDB, Redis, RabbitMQ and Vault. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
 
 NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary to use `eksctl`. See the AWS documentation on link:https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
 
