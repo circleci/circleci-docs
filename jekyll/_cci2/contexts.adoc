@@ -195,7 +195,7 @@ To make a context available _only_ to the administrators of the organization, yo
 [#add-and-remove-users-from-teams-and-groups]
 === Add and remove users from teams and groups
 
-*GitHub OAuth App users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
+*GitHub OAuth app users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
 
 [#adding-and-removing-environment-variables-from-restricted-contexts]
 === Add and remove environment variables from restricted contexts
