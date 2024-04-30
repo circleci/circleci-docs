@@ -200,7 +200,6 @@ NOTE: Currently, the only fields that can be edited for existing filters are **T
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
 - At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
-- At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#project-settings-ssh-keys]
 === GitLab project SSH keys
