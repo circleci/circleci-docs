@@ -13,4 +13,5 @@ prefix: '^[a-z]\.\s'
 exceptions:
   - DEPRECATED
   - Deprecated
+  - deprecated
   - Open preview
