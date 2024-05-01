@@ -220,7 +220,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | `agent.image.repository`
 | Agent image repository
-| `circleci/container-agent`
+| `circleci/runner-agent`
 
 | `agent.image.pullPolicy`
 | Agent image pull policy
