@@ -111,6 +111,8 @@ NOTE: In machine runner 3.0, the environment variable name prefix has changed fr
 
 To migrate from launch agent to machine runner 3.0 on Docker, stop and remove the launch agent containers and replace them with machine runner 3.0 containers, using the commands described above. 
 
+{% include snippets/machine-runner-example.adoc %}
+
 [#additional-resources]
 == Additional resources
 
