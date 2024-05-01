@@ -82,6 +82,7 @@ Cypress
 Datacenter
 Datadog
 datastore
+Debian
 deduplicate
 deduplicated
 DevOps
@@ -230,6 +231,7 @@ stdin
 [Ss]ubshells?
 subcommand
 superset
+systemd
 TCPRoute
 TeamCity
 Telegraf
@@ -242,6 +244,7 @@ TLS
 [Tt]oolchains?
 [Tt]ruthy
 TypeScript
+Ubuntu
 UI
 UIDs?
 [Uu]ncheck
