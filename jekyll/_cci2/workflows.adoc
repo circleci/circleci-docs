@@ -36,7 +36,7 @@ Workflows may appear with one of the following states:
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| State | Description | Terminal State
+| State | Description | Terminal state
 
 | RUNNING
 | Workflow is in progress
@@ -67,7 +67,7 @@ Workflows may appear with one of the following states:
 | No
 
 | ERROR
-| A workflow stanza is not included or is incorrect in the xref:configuration-reference#[`.circleci/config.yml` file] for this project
+| We experienced an internal error starting a job in the workflow
 | Yes
 
 |
@@ -76,7 +76,7 @@ Workflows may appear with one of the following states:
 | Yes
 |===
 
-NOTE: After 90 days non-terminal workflows will be cancelled by the CircleCI Automation actor.
+NOTE: After 90 days non-terminal workflows will be cancelled automatically by CircleCI.
 
 [#workflows-configuration-examples]
 == Workflows configuration examples
