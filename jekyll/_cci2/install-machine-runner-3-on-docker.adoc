@@ -107,7 +107,9 @@ docker stop <container-name>; docker rm <container-name>;
 [#migrating-from-launch-agent]
 === Migrating from launch agent
 
-To migrate from launch agent to machine runner 3.0 on Docker simply requires stopping & removing the launch agent based containers and replacing them with the machine runner 3.0 based containers, as described above. The prefix of the name of environment variables has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
+NOTE: In machine runner 3.0, the environment variable name prefix has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
+
+To migrate from launch agent to machine runner 3.0 on Docker, stop and remove the launch agent containers and replace them with machine runner 3.0 containers, using the commands described above. 
 
 [#additional-resources]
 == Additional resources
