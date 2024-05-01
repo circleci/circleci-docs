@@ -12,5 +12,6 @@ match: $sentence
 prefix: '^[a-z]\.\s'
 exceptions:
   - DEPRECATED
-  - [Dd]eprecated
+  - Deprecated
+  - deprecated
   - Open preview
