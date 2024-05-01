@@ -26,7 +26,7 @@ There are two main approaches available for installing dependencies:
 
 * Allow the jobs to install their own dependencies
 
-This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner (eg. into the working directory).
+This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner. For example into the working directory.
 
 * Pre-install dependencies on the machine where the machine runner is installed
 
@@ -59,7 +59,7 @@ If you would prefer to take complete control of artifact storage, CircleCI recom
 [#what-are-the-best-practices-for-managing-state-between-jobs]
 === What are the best practices for managing state between jobs?
 
-Machine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
+Machine runners are not opinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
 
 In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
 
@@ -73,7 +73,7 @@ If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show
 [#can-i-delete-self-hosted-runner-resource-classes]
 === Can I delete self-hosted runner resource classes?
 
-Yes, self-hosted runner resource classes can be deleted through the xref:local-cli#[CLI]. Please be sure you want to permanently delete the resource class and its associated tokens, as this action cannot be undone.
+Yes, self-hosted runner resource classes can be deleted through the xref:local-cli#[CLI]. Be sure you want to permanently delete the resource class and its associated tokens, as this action cannot be undone.
 
 ```bash
 circleci runner resource-class delete <resource-class> --force
@@ -87,7 +87,7 @@ Organization admins in your VCS provider can create and delete self-hosted runne
 [#can-i-delete-runner-resource-class-tokens]
 === Can I delete runner resource class tokens?
 
-Yes, runner resource class tokens can be deleted through the xref:local-cli#[CLI]. Please be sure you want to permanently delete the token as this action cannot be undone. Note this will not delete the resource class itself, only the token.
+Yes, runner resource class tokens can be deleted through the xref:local-cli#[CLI]. Be sure you want to permanently delete the token as this action cannot be undone. Note this will not delete the resource class itself, only the token.
 
 To get the list of tokens and their identifiers:
 
@@ -120,7 +120,7 @@ No, runner resource classes cannot be used by jobs that are not associated with 
 [#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found]
 === Why did my test splitting job step error with `circleci: command not found`?
 
-On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI cloud (such as test splitting and step halt commands). Please note, `circleci` is not to be confused with the xref:local-cli#[local CircleCI CLI], and is simply an alias of `circleci-agent`.
+On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI cloud (such as test splitting and step halt commands). Note, `circleci` is not to be confused with the xref:local-cli#[local CircleCI CLI], and is simply an alias of `circleci-agent`.
 
 If you would like to use the local CircleCI CLI in your self-hosted runner jobs, which can proxy test commands to `circleci-agent`, you can install the CLI via a job step. Install the CLI as a <<#how-do-i-install-dependencies-needed-for-my-jobs,dependency>> on your machine for machine runner, or include it in a Docker image for container runner.
 
