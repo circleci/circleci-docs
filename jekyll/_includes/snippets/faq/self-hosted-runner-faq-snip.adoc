@@ -217,11 +217,6 @@ The command removes all the Kubernetes objects associated with the chart and del
 
 No, container runner is meant to complement machine runners. With container runner and machine runners, CircleCI users have the flexibility to choose the execution environment they desire (Container vs. Machine) just like they are afforded on CircleCI’s cloud platform.
 
-[#increase-agent-replicacount]
-==== What happens if I increase `agent.ReplicaCount`?
-
-Currently, Kubernetes will attempt to deploy an additional container runner. This is not recommended at this time as this scenario is untested and may not work as expected.
-
 [#how-does-the-agent-maxconcurrenttasks-parameter-work]
 ==== If there are two container runners deployed to a single Kubernetes cluster, how does the `agent.maxConcurrentTasks` parameter work?
 
