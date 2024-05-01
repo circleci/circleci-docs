@@ -13,7 +13,7 @@ contentTags:
 :machine:
 :docker:
 
-This page describes how to install CircleCI's machine runner 3.0 with the Docker executor on server. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner-installation#,Container runner>> page.
+This page describes how to install CircleCI's machine runner 3.0 with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner-installation#,Container runner>> page.
 
 [#new-recommended-method-container-runner]
 == Recommended method for Docker installation (container runner)
