@@ -36,6 +36,8 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * `rpmbuild` (link:https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
+* link:https://gnupg.org/download/[GPG 2.1+]
+
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
@@ -57,6 +59,16 @@ To install machine runners and run jobs, you will need to have root access, and 
 [.tab.machine-runner-package-installation.rpm]
 --
 {% include snippets/runner/machine-runner-rpm-package-install.adoc %}
+--
+[.tab.machine-runner-manual-installation]
+--
+If you are unable to use the prebuilt packages to install your self-hosted runner the manual installation process may be used.
+
+CAUTION: We recommend installing and using machine runner 3.0 with the Linux packages on Linux.
+
+WARNING: If you follow the manual installation method, CricleCI machine runner 3.0 will not update or start automatically.
+
+xref:machine-runner-3-manual-installation.adoc[Machine Runner 3.0 manual installation process]
 --
 
 {% include snippets/machine-runner-example.adoc %}
