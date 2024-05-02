@@ -113,10 +113,10 @@ import data.circleci.config
 policy_name["contexts_allowed_by_project"]
 
 # Declare a rule
-rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
     ["<project-ID>"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_contexts_allowed_by_project_ids"]
@@ -231,10 +231,10 @@ import data.circleci.config
 policy_name["contexts_allowed_by_sample_project"]
 
 # Declare a rule
-rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
     Front_end_applications,
     Front_end_application_contexts
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_contexts_allowed_by_project_ids"]
@@ -273,10 +273,10 @@ import data.circleci.config
 policy_name["contexts_blocked_by_sample_project"]
 
 # Declare a rule
-rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids{
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
     ["<project-ID>"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_contexts_blocked_by_project_ids"]
@@ -370,10 +370,10 @@ import data.circleci.config
 policy_name["reserved_contexts"]
 
 # Declare a rule
-rule_reserve_contexts = config.contexts_reserved_by_project_ids{
+rule_reserve_contexts = config.contexts_reserved_by_project_ids(
     ["<project-ID-1>","<project-ID-1>"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_reserve_contexts"]
@@ -465,9 +465,9 @@ import data.circleci.config
 policy_name["prod_context_protection"]
 
 # Declare a rule
-use_prod_context_on_main = config.contexts_reserved_by_branches{["main"],
+use_prod_context_on_main = config.contexts_reserved_by_branches(["main"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # This rule will apply to all projects subscribed in project_groups.rego under policy_restrict_context_access
 enable_rule["use_prod_context_on_main"]{
