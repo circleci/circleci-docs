@@ -171,7 +171,6 @@ You can add or delete configuration sources and triggers for your project. For d
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
 - At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
-- At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#project-settings-ssh-keys]
 === GitLab project SSH keys
@@ -279,11 +278,6 @@ The following sections are features of CircleCI which are not currently fully su
 === Account integrations
 
 There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
-
-[#auto-cancel-redundant-workflows]
-=== Auto-cancel redundant workflows
-
-Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests

@@ -1,0 +1,23 @@
+---
+contentTags:
+  platform:
+    - Server v4.5
+    - Server Admin
+---
+= CircleCI server v4.5 FAQ
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Find answers about the CircleCI server v4.5 data retention policy, what control is granted over Nomad certificates
+:icons: font
+:toc: macro
+:toc-title:
+
+
+## Does server v4.5 have a data retention policy?
+We do not currently support a defined data retention policy. Data is stored indefinitely on server.
+
+## What control is granted over Nomad certificates?
+Full control of the certificates, all the way down to mTLS for Nomad.
+
+## Is it possible to change or disable the polling time which checks for health status?
+No, this is not customizable.

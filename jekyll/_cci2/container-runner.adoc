@@ -211,7 +211,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | `""`
 
 | `agent.replicaCount`
-| Number of container-agents to deploy. The recommendation is to leave this value at 1
+| Number of container-agents to deploy.
 | `1`
 
 | `agent.image.registry`
@@ -220,7 +220,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | `agent.image.repository`
 | Agent image repository
-| `circleci/container-agent`
+| `circleci/runner-agent`
 
 | `agent.image.pullPolicy`
 | Agent image pull policy

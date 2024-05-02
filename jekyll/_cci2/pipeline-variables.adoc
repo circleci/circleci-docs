@@ -96,6 +96,12 @@ jobs:
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to link:https://circleci.com/docs/api/v2/#trigger-a-new-pipeline[trigger a pipeline]. This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
+The API limits the number of parameters that can be passed:
+
+* 100 max entries
+* 128 maximum key length
+* 512 maximum value length
+
 The `parameters` key passed in this `POST` request is *NOT* secret.
 
 The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.

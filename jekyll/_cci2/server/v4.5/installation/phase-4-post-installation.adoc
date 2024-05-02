@@ -1,0 +1,57 @@
+---
+contentTags:
+  platform:
+  - Server v4.5
+  - Server Admin
+---
+= Phase 4 - post installation
+:page-layout: classic-docs
+:page-description: CircleCI server post installation steps for v4.5
+:icons: font
+:toc: macro
+:toc-title:
+
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
+Before you begin with the CircleCI server v4.5 post installation phase, ensure you have run through xref:phase-1-prerequisites#[Phase 1 – Prerequisites], xref:phase-2-core-services#[Phase 2 - Core Services Installation] and xref:phase-3-execution-environments#[Phase 3 - Execution Environments Installation].
+
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+
+[#backup-and-restore]
+== Backup and restore
+
+Backups of CircleCI server can be created through link:https://velero.io/[Velero] which is detailed in our xref:../operator/backup-and-restore#[Backup and Restore] documentation.
+
+[#email-notifications]
+== Email notifications
+
+Add email notification support by adding the following to `values.yaml`:
+
+[source,yaml]
+----
+smtp:
+  host: <hostname-of-submission-server>
+  user: <username-for-submission-server>
+  password: <password-for-submission-server
+  port: <mail-port>
+----
+
+[#managing-orbs]
+== Managing orbs
+
+CircleCI server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
+
+* Copying orbs from the public registry.
+* Updating orbs that may have been copied previously.
+* Registering your company's private orbs, if you have any.
+
+For more information and steps to complete these tasks, see the xref:../operator/managing-orbs#[Orbs on server guide].
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* xref:hardening-your-cluster#[Hardening Your Cluster]
+* xref:../../installation/migrate-from-server-3-to-server-4#[Server 4.x Migration]
+* xref:../operator/backup-and-restore#[Backup & Restore]
+endif::[]

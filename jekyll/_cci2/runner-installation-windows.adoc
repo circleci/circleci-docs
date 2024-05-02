@@ -13,7 +13,9 @@ contentTags:
 :machine:
 :windows:
 
-This page describes how to install CircleCI's machine runner on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-windows#[machine runner 3.0 installation guide] for the recommended steps to set up Windows self-hosted runners on CircleCI cloud.
+
+This page describes how to install machine runner on Windows for **CircleCI server**. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
 The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
@@ -27,7 +29,7 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 
 * https://www.gnu.org/software/tar/[tar]
 
-* https://www.gnu.org/software/gzip/[gzip]
+* https://www.gnu.org/software/gzip/[Gzip]
 
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
@@ -72,7 +74,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
@@ -95,7 +97,7 @@ Uninstalling machine runners will prepare the system for installation again.
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Continuous mode vs. single task mode for Windows self-hosted runners
 
-By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
+By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
 
 A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.
 
