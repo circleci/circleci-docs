@@ -60,16 +60,6 @@ To install machine runners and run jobs, you will need to have root access, and 
 --
 {% include snippets/runner/machine-runner-rpm-package-install.adoc %}
 --
-[.tab.machine-runner-manual-installation]
---
-If you are unable to use the prebuilt packages to install your self-hosted runner the manual installation process may be used.
-
-CAUTION: We recommend installing and using machine runner 3.0 with the Linux packages on Linux.
-
-WARNING: If you follow the manual installation method, CricleCI machine runner 3.0 will not update or start automatically.
-
-xref:machine-runner-3-manual-installation.adoc[Machine Runner 3.0 manual installation process]
---
 
 {% include snippets/machine-runner-example.adoc %}
 
@@ -79,3 +69,12 @@ The job will then execute using your self-hosted runner when you push the `.circ
 == Troubleshooting
 
 Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
+
+[#additional-resources]
+== Additional resources
+
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3.0]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
