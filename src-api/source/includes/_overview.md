@@ -64,7 +64,7 @@ curl -u <circle-token>: "https://circleci.com/api/..."
 curl "https://circleci.com/api/v1.1/me?circle-token=<circle-token>"
 ```
 
-You can add the API token using your [account dashboard](https://circleci.com/account/api). We recommend using **personal API tokens** at this time as project API tokens are **not** supported for API v2. Project API tokens are supported for a subset of API v1 endpoints.
+You can add the API token using your [account dashboard](https://circleci.com/account/api). We recommend using **personal API tokens** at this time because project API tokens are **not** supported for API v2. Project API tokens are supported for most API v1 endpoints. Notes are included below to indicate when a personal API token is required.
 
 To be authenticated by the API server, use this as the value of the Circle-Token header:
 
