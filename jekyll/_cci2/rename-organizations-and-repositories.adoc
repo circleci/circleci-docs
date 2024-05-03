@@ -37,6 +37,7 @@ If you need to rename a GitHub (OAuth app) or Bitbucket organization or reposito
 
 [#rename-organizations-and-repositories]
 === Steps to rename organizations and repositories
+Note: it is not possible to rename projects that use CircleCI's GitHub App or GitLab integrations.  The following instructions are for orgs and projects that use CircleCI's GitHub OAuth App or Bitbucket integrations.
 
 . Rename organization or repository in your VCS
 . Go to the CircleCI web app using the new org/repo name, for example: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`
