@@ -24,6 +24,8 @@ Please ensure that you are using a personal API token generated _after_ your use
 
 Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
 
+NOTE: Because orbs used in your server installation are stored in a local orb registry, they are private by default. The `--private` flag is not supported when referencing orbs stored in your server orb registry.
+
 [#list-available-orbs]
 == List available orbs
 To list available public orbs, visit the orb directory, or run the following command:
