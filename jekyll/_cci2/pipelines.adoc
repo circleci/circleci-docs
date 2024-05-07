@@ -79,7 +79,7 @@ Once you have set up a configuration source you need to set up a project trigger
 
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a trigger is already set up.
 
-Triggers are rules that define which configuration source should be run on a given event. A project can have one or more triggers, which are associated with events from a source of change. Triggers include, but are not limited to, a push to a branch on a version control system (VCS), for example, a GitHub repository. A trigger determines an event (or events) along with a configuration source to define a pipeline. A trigger can have only one configuration source but a configuration source can have multiple triggers.
+Triggers are rules that define which configuration source should be run on a given event. A project can have one or more triggers, which are associated with events from a source of change. Triggers include, but are not limited to, a push to a branch on a version control system (VCS), for example, a GitHub repository. A trigger can have only one configuration source but a configuration source can have multiple triggers.
 
 A trigger kicks off a pipeline to run the workflows defined by your connected configuration source.
 
@@ -121,11 +121,11 @@ To add a project trigger for a configuration source, follow these steps:
 . Click btn:[Next]
 . Complete the form fields and options:
 ** Give your trigger a descriptive name
-** Authorize your connection if this is not already showing with a icon:check-circle[]
+** Authorize your connection if this is not already showing with a icon:check-circle[] (Not required for inbound webhooks)
 +
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
-** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to.
-** Choose your configuration source from the "Choose config to run" menu
+** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to (Not required for inbound webhooks)
+** Choose your configuration source from the "Choose config to run" menu. If you are setting up an inbound webhook trigger you will just need to supply a path to a `config.yml` file and we will create a configuraiton source for you.
 ** (Optional) If you are using GitLab you can configure <<gitlab-project-triggers,trigger filters>>
 . Click btn:[Save]
 
