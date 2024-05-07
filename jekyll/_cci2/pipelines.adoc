@@ -83,31 +83,40 @@ Triggers are rules that define which configuration source should be run on a giv
 
 A trigger kicks off a pipeline to run the workflows defined by your connected configuration source.
 
-image::{{site.baseurl}}/assets/img/docs/project-settings-triggers.png[Triggers]
+==== Add a project trigger
 
-==== GitHub App project triggers
+To add a project trigger for a configuration source or inbound webhook, follow these steps:
 
-When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
-
-==== GitLab project triggers
-
-When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
-
-In addition to a configuration source, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repository.
-
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
-
-**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
-
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
-
-==== Inbound webhook triggers
+[.tab.trigger.Inbound_webhook]
+--
 
 NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
 Setting up an inbound webhook trigger allows you to trigger pipelines from external services. Any service that can make cURL requests can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[Triggers overview] page.
 
-==== Add a project trigger
+image::{{site.baseurl}}/assets/img/docs/add-project-trigger-webhook.png[Add a project trigger]
+
+To add a project trigger for a configuration source, follow these steps:
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Triggers** in the sidebar
+. Click btn:[Add Trigger]
+. Select **Inbound Webhook** from the dropdown menu
+. Click btn:[Next]
+. Complete the form fields and options:
+** Give your trigger a descriptive name
+** (Optional) Add a description
+** Supply a path to a `config.yml` file and CircleCI will create a configuration source for you
+. Click btn:[Save]
+
+To verify your trigger is set up correctly, trigger an event from your third party system.
+--
+
+[.tab.trigger.GitHub]
+--
+
+When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
 
 image::{{site.baseurl}}/assets/img/docs/add-project-trigger.png[Add a project trigger]
 
@@ -121,15 +130,48 @@ To add a project trigger for a configuration source, follow these steps:
 . Click btn:[Next]
 . Complete the form fields and options:
 ** Give your trigger a descriptive name
+** Authorize your connection if this is not already showing with a icon:check-circle[]
+** Choose your configuration source from the "Choose config to run" menu.
+. Click btn:[Save]
+
+To verify your trigger is set up correctly, trigger an event from your repository.
+--
+
+[.tab.trigger.GitLab]
+--
+
+When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
+
+In addition to a configuration source, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repository.
+
+image::{{site.baseurl}}/assets/img/docs/add-project-trigger.png[Add a project trigger]
+
+To add a project trigger for a configuration source, follow these steps:
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Triggers** in the sidebar
+. Click btn:[Add Trigger]
+. Select the same location in the "Connect to" dropdown menu that you selected for your configuration source (for example, GitLab)
+. Click btn:[Next]
+. Complete the form fields and options:
+** Give your trigger a descriptive name
 ** Authorize your connection if this is not already showing with a icon:check-circle[] (Not required for inbound webhooks)
 +
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
 ** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to (Not required for inbound webhooks)
-** Choose your configuration source from the "Choose config to run" menu. If you are setting up an inbound webhook trigger you will just need to supply a path to a `config.yml` file and we will create a configuraiton source for you.
-** (Optional) If you are using GitLab you can configure <<gitlab-project-triggers,trigger filters>>
+** Choose your configuration source from the "Choose config to run" menu.
+** (Optional) You can configure <<user-content-trigger-filters,trigger filters>>.
 . Click btn:[Save]
 
-To verify your trigger is set up correctly, trigger an event from your repository or, in the case of an Inbound Webhook trigger, from your third party system.
+To verify your trigger is set up correctly, trigger an event from your repository or.
+
+[#trigger-filters]**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
+--
 
 [#visual-studio-code-extension]
 == VS Code extension
