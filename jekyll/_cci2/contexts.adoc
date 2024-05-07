@@ -302,7 +302,7 @@ curl --request POST \
   --url https://circleci.com/api/v2/context/<your-context-ID>/restrictions \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
   --header 'content-type: application/json' \
-  --data '{"restriction_type":"expression","restriction_value":"<your-expression-restriction>"}
+  --data '{"restriction_type":"expression","restriction_value":"<your-expression-restriction>"}'
 ----
 --
 
