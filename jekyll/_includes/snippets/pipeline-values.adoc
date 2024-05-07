@@ -2,7 +2,7 @@
 [cols=6*, options="header", stripes=even]
 |===
 | Variable
-| VCS
+| Source
 | Type
 | Value
 | Cloud
@@ -405,6 +405,13 @@ a|  * GitLab: push, merge request
 | GitLab
 |
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.webhook.body`
+| Inbound webhook
+| String
+| The body of the payload that was sent with an xref:triggers-overview/#trigger-a-pipeline-from-an-inbound-webhook#[inbound webhook].
 | icon:check[]
 | icon:times[]
 
