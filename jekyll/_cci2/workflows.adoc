@@ -34,34 +34,49 @@ For example, if only one job in a workflow fails, you will know it is failing in
 Workflows may appear with one of the following states:
 
 [.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=3*, options="header", stripes=even]
 |===
-| State | Description
+| State | Description | Terminal state
 
 | RUNNING
 | Workflow is in progress
+| No
 
 | NOT RUN
 | Workflow was never started
+| Yes
 
 | CANCELED
 | Workflow was canceled before it finished
+| Yes
 
 | FAILING
-| A job in the workflow has failed
+| A job in the workflow has failed, but others are still running or yet to be approved
+| No
 
 | FAILED
 | One or more jobs in the workflow failed
+| Yes
 
 | SUCCESS
 | All jobs in the workflow completed successfully
+| Yes
 
-| NEEDS APPROVAL
+| NEEDS APPROVAL (UI) / ON HOLD
 | A job in the workflow is waiting for approval
+| No
 
-| NEEDS SETUP
-| A workflow stanza is not included or is incorrect in the xref:configuration-reference#[`.circleci/config.yml` file] for this project
+| ERROR
+| We experienced an internal error starting a job in the workflow
+| Yes
+
+|
+| UNAUTHORIZED
+| One or more of the jobs terminated with a `unauthorized` job status, because the triggerer does not have access to a required restricted context.
+| Yes
 |===
+
+NOTE: After 90 days non-terminal workflows will be cancelled automatically by CircleCI.
 
 [#workflows-configuration-examples]
 == Workflows configuration examples

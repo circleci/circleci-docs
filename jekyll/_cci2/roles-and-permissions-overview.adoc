@@ -261,7 +261,7 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Trigger build
+^| Trigger re-run via the CircleCI web app
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|

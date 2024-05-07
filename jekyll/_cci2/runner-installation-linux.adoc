@@ -13,16 +13,16 @@ contentTags:
 :machine:
 :linux:
 
-CAUTION: This installation method is deprecated for **CIrcleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
- 
-This page describes how to install CircleCI's machine runner on Linux for **CircleCI server** customers. 
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
+
+This page describes how to install CircleCI's machine runner on Linux for **CircleCI server** customers.
 
 [#prerequisites]
 == Prerequisites
 
 To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
 
-* https://www.gnu.org/software/coreutils/[coreutils]
+* https://www.gnu.org/software/coreutils/[Coreutils]
 
 * https://curl.se/[curl]
 
@@ -32,11 +32,11 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * https://www.gnu.org/software/tar/[tar]
 
-* https://www.gnu.org/software/gzip/[gzip]
+* https://www.gnu.org/software/gzip/[Gzip]
 
-* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* `sepolicy` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
-* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+* `rpmbuild` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
@@ -66,7 +66,7 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#create-the-circleci-user-and-working-directory]
 == 3. Create `circleci` user and working directory
 
-These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (for example, `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
 [#ubuntu-debian]
 === Ubuntu/Debian
@@ -221,7 +221,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (for example, proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 
