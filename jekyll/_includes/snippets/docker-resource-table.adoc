@@ -46,4 +46,4 @@
 | icon:check[]
 |===
 
-NOTE: `2xlarge` and `2xlarge+` require review by our support team. link:https://support.circleci.com/hc/en-us/requests/new[Open a support ticket] if you would like to request access.
+NOTE: Resource Classes are enforced by the plan being used. Please see our link:https://circleci.com/pricing/[pricing] page for more details on the resource classes available.
