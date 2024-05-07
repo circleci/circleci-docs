@@ -412,13 +412,13 @@ NOTE: All operators are left associative. In practice, you should avoid operator
 | `==` `!=`
 | left
 
-| starts-with
+| `starts-with`
 |
 
 | `>=` `>` `<=` `<`
 | left
 
-| not !
+| `not` `!`
 |
 |===
 
