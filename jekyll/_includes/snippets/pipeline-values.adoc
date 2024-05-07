@@ -3,7 +3,7 @@
 |===
 | Variable
 | Source
-| Type/format
+| Type
 | Value
 | Cloud
 | Server
@@ -410,7 +410,7 @@ a|  * GitLab: push, merge request
 
 | `pipeline.trigger_parameters.webhook.body`
 | Inbound webhook
-| Raw JSON
+| String
 | The body of the payload that was sent with an xref:triggers-overview/#trigger-a-pipeline-from-an-inbound-webhook#[inbound webhook].
 | icon:check[]
 | icon:times[]
