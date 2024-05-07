@@ -408,4 +408,11 @@ a|  * GitLab: push, merge request
 | icon:check[]
 | icon:times[]
 
+| `pipeline.trigger_parameters.webhook.body`
+| Inbound webhook
+|
+| The body of the payload that was sent with an xref:triggers-overview/#trigger-a-pipeline-from-an-inbound-webhook#[inbound webhook].
+| icon:check[]
+| icon:times[]
+
 |===
