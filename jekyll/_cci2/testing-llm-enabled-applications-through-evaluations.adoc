@@ -65,7 +65,7 @@ Given the volatile nature of evaluations, evaluations orchestrated by the Circle
 
 Instead, a summary of the evaluation results is created and presented:
 
-* As a comment on the corresponding GitHub pull request (GitHub projects only):
+* As a comment on the corresponding GitHub pull request (currently available only for projects integrated with Github OAuth):
 +
 image::/docs/assets/img/docs/llmops/github-pr-comment.png[Jobs overview]
 
