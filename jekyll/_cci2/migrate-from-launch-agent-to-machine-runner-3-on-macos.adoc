@@ -2,8 +2,9 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
-= Migrate from launch agent to machine runner 3.0 on Linux - Open preview
+= Migrate from launch agent to machine runner 3.0 on macOS
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview

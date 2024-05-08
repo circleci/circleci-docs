@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
 = Machine runner 3.0 configuration reference - Open preview
 :page-layout: classic-docs

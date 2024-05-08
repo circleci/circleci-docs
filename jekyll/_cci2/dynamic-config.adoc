@@ -90,7 +90,8 @@ Adding the key `setup: true` to the top level of your parent configuration file 
 [NOTE]
 ====
 - The setup phase requires `version: 2.1` or higher.
-- A pipeline can only be continued once (that is, a pipeline cannot be continued with another setup configuration).
+- A pipeline can only be continued once (that is, a pipeline cannot be continued with another setup configuration). 
+- The setup workflow can only have one continue pipeline step.
 - A pipeline can only be continued within six hours of its creation.
 - The setup configuration can only include one workflow.
 - Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.

@@ -63,9 +63,6 @@ When pushed to a VCS, this commit will not be built on CircleCI because of the `
 ## Auto-cancel redundant workflows
 {: #auto-cancel}
 
-The **Auto-cancel redundant workflows** option is not available for GitHub App projects. To find out if you authorized through the GitHub OAuth app or the GitHub App, see the [GitHub Apps integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info"}
-
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to complete before the most recent version starts.
 
 To save time, you can configure CircleCI to automatically cancel any non-terminated workflows when a newer pipeline is triggered on that same branch.

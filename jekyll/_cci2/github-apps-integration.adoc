@@ -108,7 +108,6 @@ When the CircleCI GitHub App is installed for your organization, GitHub starts t
 === Advanced
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
-- At this time, auto-cancel redundant workflows is not supported. Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#organization-settings]
 == Organization settings
@@ -178,6 +177,10 @@ The following sections are features of CircleCI which are not currently supporte
 === Manual trigger pipeline option
 The ability to manually trigger a pipeline from the web app is not currently supported for GitHub App projects.
 
+[#restrict-a-context-to-a-security-group]
+=== Restrict a context to a security group
+The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
+
 [#in-app-config-editor]
 === In-app config editor
 The in-app config editor is currently **only** available for GitHub App accounts during project creation.
@@ -191,11 +194,6 @@ There is currently no method to manage the connection with GitHub outside of the
 === Scheduled pipelines
 
 The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release.
-
-[#auto-cancel-redundant-workflows]
-=== Auto-cancel redundant workflows
-
-Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests

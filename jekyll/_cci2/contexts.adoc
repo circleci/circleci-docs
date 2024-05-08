@@ -169,9 +169,11 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 
 You must be an organization administrator to complete the following task.
 
+NOTE: Restricting a context to a security group is supported for orgs integrated through the GitHub OAuth app and **not supported** for orgs that integrate with xref:github-apps-integration#[CircleCI's GitHub App], xref:gitlab-integration#[GitLab], or Bitbucket.
+
 . Navigate to menu:Organization Settings[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
 . Click the *Create Context* button if you wish to use a new context, or click the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
-. Click the *Add Security Group* (GitHub users) or *Add Project Restriction* (GitLab users) button to view the dialog box.
+. Click the *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then click the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
 . Click *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then click the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
 . Navigate back to menu:Organization Settings[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
@@ -193,7 +195,7 @@ To make a context available _only_ to the administrators of the organization, yo
 [#add-and-remove-users-from-teams-and-groups]
 === Add and remove users from teams and groups
 
-*GitHub users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
+*GitHub OAuth app users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it can take up to a few hours to update the CircleCI records and remove access to the context.
 
 [#adding-and-removing-environment-variables-from-restricted-contexts]
 === Add and remove environment variables from restricted contexts
@@ -246,7 +248,7 @@ Restrict contexts by setting up _expression restrictions_. Expression restrictio
 
 [source]
 ----
-pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")`
+pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")
 ----
 
 Tabs and new lines are considered whitespace so can be used to break long lines, but have no other significance. For example, the snippet above could also be written:
@@ -255,7 +257,7 @@ Tabs and new lines are considered whitespace so can be used to break long lines,
 ----
 pipeline.git.branch == "main"
 and not job.ssh.enabled
-and not (pipeline.config_source starts-with "api")`
+and not (pipeline.config_source starts-with "api")
 ----
 
 You can set up expression restrictions using the context restriction API, or via the Context page (menu:Organization Settings[Contexts>Expression Restrictions]) in the CircleCI web app.
@@ -401,22 +403,22 @@ NOTE: All operators are left associative. In practice, you should avoid operator
 |===
 | Operator    | Associativity
 
-| or
+| `or`
 | left
 
-| and
+| `and`
 | left
 
-| == !=
+| `==` `!=`
 | left
 
-| starts-with
+| `starts-with`
 |
 
-| >= > <= <
+| `>=` `>` `<=` `<`
 | left
 
-| not !
+| `not` `!`
 |
 |===
 
