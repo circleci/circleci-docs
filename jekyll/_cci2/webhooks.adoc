@@ -5,14 +5,16 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Webhooks overview
+= Use webhooks to integrate with third party services
 :page-layout: classic-docs
-:page-description: Using Webhooks to subscribe to CircleCI events
+:page-description: Use webhooks to integrate with third-party services and subscribe to CircleCI events
 :icons: font
 :page-liquid:
 :experimental:
 
-Use webhooks to:
+Use **inbound webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command. Inbound webhooks are available for accounts integrated thought the xref:github-apps-integration#[GitHub App].
+
+Use **outbound webhooks** to:
 
 * Build a custom dashboard to visualize or analyze workflow/job events.
 * Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
@@ -85,7 +87,7 @@ CircleCI expects the server that responds to a webhook will return a 2xx respons
 
 Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the xref:webhooks-reference#common-top-level-keys[`id` property] in the webhook payload for identification.
 
-If you have feedback about timeouts and retries, please get link:https://circleci.canny.io/webhooks[get in touch] with our team.
+If you have feedback about timeouts and retries, link:https://circleci.canny.io/webhooks[get in touch] with our team.
 
 [#headers]
 === Webhook headers
