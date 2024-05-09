@@ -36,6 +36,8 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * `rpmbuild` (link:https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
+* link:https://gnupg.org/download/[GPG 2.1+]
+
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
@@ -67,3 +69,12 @@ The job will then execute using your self-hosted runner when you push the `.circ
 == Troubleshooting
 
 Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
+
+[#additional-resources]
+== Additional resources
+
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3.0]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
