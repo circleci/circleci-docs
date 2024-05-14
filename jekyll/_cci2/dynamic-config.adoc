@@ -25,6 +25,7 @@ Dynamic configuration can mean:
 
 == Quickstart
 
+[#enable-dynamic-config]
 === Enable dynamic configuration
 
 NOTE: Projects created **after** December 1st 2023 have dynamic config enabled by default. If this applies to your project, you can skip this step.
@@ -89,15 +90,15 @@ CircleCI's dynamic configuration is made up of the following resources, which ca
 
 * Use the API v2 link:https://circleci.com/docs/api/v2/index.html#operation/continuePipeline[continue a pipeline] endpoint to continue a pipeline from one configuration to another. This endpoint can be used directly or via one of the dynamic configuration orbs described next.
 
-* Use the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] to map filepaths, pipelines parameters, and configuration files to determine the work that should be done when a change happens in a specific location in a repository.
+* Use the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] to map file paths, pipelines parameters, and configuration files to determine the work that should be done when a change happens in a specific location in a repository.
 
 * Use the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] to continue one configuration to another and set up any required pipeline parameters.
 
 === Use path filtering for monorepos
 
-Set up path filtering to set pipeline parameters and continuation configuration sources based on the location of changes in your repo.
+Set up path filtering to set pipeline parameters and continuation configuration sources based on the location of changes in your repository.
 
-In a monorepo (single repository) setup you can use path filtering to avoid all of your microservices/sub-projects being put through the entirety of your build, test, and deployment processes when any single update is introduced. For example, you may have multiple projects within your repository (`project_1`, `project_2`, `project_3`). You can use path filtering to only run tests and deployment for `project_1` if change happened in `project_1`'s files. The path filtering orb is available to help simplify your configuration further. For a full exaple of path filtering, see the #INSERT LINK WHEN READY#
+In a monorepo (single repository) setup you can use path filtering to avoid all of your microservices/sub-projects being put through the entirety of your build, test, and deployment processes when any single update is introduced. For example, you may have multiple projects within your repository (`project_1`, `project_2`, `project_3`). You can use path filtering to only run tests and deployment for `project_1` if change happened in `project_1`'s files. The path filtering orb is available to help simplify your configuration further. For a full exa,ple of path filtering, see the #INSERT LINK WHEN READY#
 
 #DIAGRAM OF PATH FILTERING FOR MONOREPO SETUP#
 
@@ -113,7 +114,7 @@ If you are using CircleCI server there are a few extra steps you will need to ta
 
 * You will need to import the path filtering and continuation orbs into your server installation using the following commands:
 +
-NOTE: These examples show importing the most recent versions of the orbs. You can also specify a semver version constraint to import a specific version, for example, `circleci/continuation@1.0.0`.
+NOTE: These examples show importing the most recent versions of the orbs. You can also specify a SemVer version constraint to import a specific version, for example, `circleci/continuation@1.0.0`.
 +
 [,yaml]
 ----
