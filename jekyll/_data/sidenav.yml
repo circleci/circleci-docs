@@ -34,16 +34,6 @@ en:
             link: introduction-to-yaml-configurations
           - name: In-app configuration editor
             link: config-editor
-      - name: VCS integration
-        children:
-          - name: GitHub OAuth app integration overview
-            link: github-integration
-          - name: GitHub App integration overview
-            link: github-apps-integration
-          - name: Bitbucket integration overview
-            link: bitbucket-integration
-          - name: GitLab integration overview
-            link: gitlab-integration
       - name: Migration
         children:
           - name: Introduction to CircleCI migration
@@ -589,7 +579,6 @@ en:
           - name: Rename organizations and repositories
             link: rename-organizations-and-repositories
 
-
   - name: Manage config policies
     icon: icons/sidebar/lock.svg
     children:
@@ -623,10 +612,20 @@ en:
             link: webhooks
           - name: Notifications overview
             link: notifications
-      - name: Partnerships
-        children:
           - name: Build open source projects
             link: oss
+      - name: VCS integration
+        children:
+          - name: GitHub OAuth app integration overview
+            link: github-integration
+          - name: GitHub App integration overview
+            link: github-apps-integration
+          - name: Bitbucket integration overview
+            link: bitbucket-integration
+          - name: GitLab integration overview
+            link: gitlab-integration
+      - name: Third-party integrations
+        children:
           - name: Enable GitHub Checks
             link: enable-checks
           - name: Connect with Jira

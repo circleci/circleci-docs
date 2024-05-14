@@ -116,4 +116,7 @@ To migrate from launch agent to machine runner 3.0 on Docker, stop and remove th
 [#additional-resources]
 == Additional resources
 
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
 - xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

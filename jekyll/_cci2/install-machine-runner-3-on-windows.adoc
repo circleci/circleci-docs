@@ -99,3 +99,12 @@ A Windows machine runner *can* be run in `continuous` mode. However, doing so el
 == Troubleshooting
 
 Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner>> guide if you encounter issues installing or running machine runner on Windows.
+
+[#additional-resources]
+== Additional resources
+
+- xref:machine-runner-3-manual-installation-on-windows.adoc[Manual installation for machine runner 3.0 on Windows]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
