@@ -143,7 +143,7 @@ workflows:
 
 This configuration file is our _continuation configuration_ that is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameters, which were changed based on the path to any changes in a commit, and uses them to conditionally run workflows.
 
-#NEED TO CHECK: can we even use `name` in these maven/test jobs like this? nad are these maven commands correct?#
+#NEED TO CHECK: can we even use `name` in these maven/test jobs like this? and are these maven commands correct?#
 
 [source,yaml]
 ----

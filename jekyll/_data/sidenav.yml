@@ -122,6 +122,8 @@ en:
             link: workflows
           - name: Use workspaces to share data between jobs
             link: workspaces
+          - name: Dynamic configuration
+            link: dynamic-config
           - name: Skip or cancel jobs and workflows
             link: skip-build
           - name: Pipeline values and parameters
