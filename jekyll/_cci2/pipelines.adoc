@@ -92,11 +92,11 @@ To add a project trigger for a configuration source or inbound webhook, follow t
 
 NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
-Setting up an inbound webhook trigger allows you to trigger pipelines from external services. Any service that can make cURL requests can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[Triggers overview] page.
+Setting up an inbound webhook trigger allows you to trigger pipelines from external services. Any service that can emmit a webhook or make cURL requests can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[Triggers overview] page.
 
 image::{{site.baseurl}}/assets/img/docs/add-project-trigger-webhook.png[Add a project trigger]
 
-To add a project trigger for a configuration source, follow these steps:
+To add a project trigger for an inbound webhook, follow these steps:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
@@ -104,11 +104,19 @@ To add a project trigger for a configuration source, follow these steps:
 . Click btn:[Add Trigger]
 . Select **Inbound Webhook** from the dropdown menu
 . Click btn:[Next]
++
+image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an inbound webhook trigger]
 . Complete the form fields and options:
 ** Give your trigger a descriptive name
 ** (Optional) Add a description
 ** Supply a path to a `config.yml` file and CircleCI will create a configuration source for you
 . Click btn:[Save]
+
+. You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source appended with the secret.
++
+CAUTION: The secret will not be shown again so be sure to copy the URL before clicking **Done**.
++
+image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
