@@ -92,7 +92,7 @@ To add a project trigger for a configuration source or inbound webhook, follow t
 
 NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
-Setting up an inbound webhook trigger allows you to trigger pipelines from external services. Any service that can emmit a webhook or make cURL requests can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[Triggers overview] page.
+Setting up an inbound webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make cURL requests can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[Triggers overview] page.
 
 image::{{site.baseurl}}/assets/img/docs/add-project-trigger-webhook.png[Add a project trigger]
 
