@@ -167,7 +167,7 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
-You must be an organization administrator to complete the following task. 
+You must be an organization administrator to complete the following task.
 
 NOTE: Restricting a context to a security group is supported for orgs integrated through the GitHub OAuth app and **not supported** for orgs that integrate with xref:github-apps-integration#[CircleCI's GitHub App], xref:gitlab-integration#[GitLab], or Bitbucket.
 
@@ -248,7 +248,7 @@ Restrict contexts by setting up _expression restrictions_. Expression restrictio
 
 [source]
 ----
-pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")`
+pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")
 ----
 
 Tabs and new lines are considered whitespace so can be used to break long lines, but have no other significance. For example, the snippet above could also be written:
@@ -257,7 +257,7 @@ Tabs and new lines are considered whitespace so can be used to break long lines,
 ----
 pipeline.git.branch == "main"
 and not job.ssh.enabled
-and not (pipeline.config_source starts-with "api")`
+and not (pipeline.config_source starts-with "api")
 ----
 
 You can set up expression restrictions using the context restriction API, or via the Context page (menu:Organization Settings[Contexts>Expression Restrictions]) in the CircleCI web app.
@@ -403,22 +403,22 @@ NOTE: All operators are left associative. In practice, you should avoid operator
 |===
 | Operator    | Associativity
 
-| or
+| `or`
 | left
 
-| and
+| `and`
 | left
 
-| == !=
+| `==` `!=`
 | left
 
-| starts-with
+| `starts-with`
 |
 
-| >= > <= <
+| `>=` `>` `<=` `<`
 | left
 
-| not !
+| `not` `!`
 |
 |===
 

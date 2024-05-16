@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Machine runner 3.0 manual installation - Open preview
+= Machine runner 3.0 manual installation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3.0 on macOS and Linux.
@@ -135,4 +135,8 @@ $HOME/circleci-runner machine --config $HOME/circleci-runner-config.yaml
 [#additional-resources]
 == Additional resources
 
-xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
