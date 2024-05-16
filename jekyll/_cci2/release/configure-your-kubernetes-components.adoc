@@ -33,7 +33,11 @@ To enable your release to show up on the releases UI in the CircleCI web app, ad
 +
 [NOTE]
 ====
-**Find your project ID:**
+There are two ways to specify your **project ID**, as follows:
+
+* Use the `$CIRCLE_PROJECT_ID` xref:variables#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
+
+* Manually copy the value from the project settings page:
 
 . Click **Projects** in the CircleCI web app sidebar and use the search function to find your project
 . Click the ellipsis menu next to your project and click btn:[Project Settings]
@@ -145,7 +149,7 @@ metadata:
 [#opt-out-ui-based-actions]
 === c. Opt out of UI-based actions
 
-If you would like to disable any release management features for a specific component, you can do so by adding any of the following annotations with the value `false` to the related Kubernetes Deployment or Argo Rollout.
+Remember that all UI-based actions are enabled by default (no actions are required to enable them). If you would like to disable any release management features for a specific component, you can do so by adding any of the following annotations with the value `false` to the related Kubernetes Deployment or Argo Rollout.
 
 NOTE: If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature is **enabled**. Release management features are enabled by default unless explicitly disabled, as follows:
 
