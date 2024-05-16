@@ -143,8 +143,6 @@ workflows:
 
 This configuration file is our _continuation configuration_ that is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameters, which were changed based on the path to any changes in a commit, and uses them to conditionally run workflows.
 
-#NEED TO CHECK: can we even use `name` in these maven/test jobs like this? and are these maven commands correct?#
-
 [source,yaml]
 ----
 version: 2.1
@@ -207,9 +205,3 @@ In the above configuration, we:
 ** **Lines 22-28**: The `service-1` workflow triggers the `maven/test` job on the `service-1` directory, when the pipeline parameter value mapped to run-build-service-1-job is set to `true`. This will only happen if a change was made in the `serivce-1` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
 ** **Lines 31-37**: The `service-2` workflow triggers the `maven/test` job on the `service-2` directory, when the pipeline parameter value mapped to run-build-service-2-job is set to `true`. This will only happen if a change was made in the `serivce-2` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
 ** **Lines 43-50**: The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the path filtering. This runs the `maven/test` job on the `tests` directory to run integration tests against the built services.
-
-#TO DO#
-
-* #Add similar example but showing config splitting. Split the continuation config for the different directories up and store in the relevant dir and have them brought together using the path filtering orb#
-
-* #Add further examples, such as piecing together config elements? https://github.com/ryanpedersen42/config-pack-dynamic/blob/main/.circleci/config.yml#
