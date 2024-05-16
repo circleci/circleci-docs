@@ -342,7 +342,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Local installation
 | Tested
-| See xref:../air-gapped-installation/phase-1-prerequisites#[Air gapped installation] docs
+| See xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped installation] docs
 
 | Azure
 | Untested
