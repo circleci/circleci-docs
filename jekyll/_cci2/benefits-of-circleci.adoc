@@ -33,7 +33,7 @@ As a developer using CircleCI you can:
 
 As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses link:https://www.nomadproject.io/[Nomad] for scheduling.
 
-See the xref:server/overview/circleci-server-v4-overview#[CircleCI server overview] for server documentation.
+See the xref:server/v4.5/overview/circleci-server-overview#[CircleCI server overview] for server documentation.
 
 [#pricing-options]
 == Pricing options

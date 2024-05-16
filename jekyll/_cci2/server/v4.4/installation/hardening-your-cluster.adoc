@@ -282,6 +282,5 @@ When hardening an installation where the machine provisioner uses public IP addr
 
 ifndef::pdf[]
 ## Next steps
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
 * xref:../operator/operator-overview#[Server v4.4 Operator Overview]
 endif::[]
