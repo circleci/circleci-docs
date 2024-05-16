@@ -69,7 +69,8 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 
 NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
-To trigger a pipeline from anywhere that can emit a webhook, or run a curl command, follow these steps:
+=== 1. Set up an inbound webhook trigger
+Follow these steps to set up an inbound webhook trigger for a pipeline from anywhere that can emit a webhook,or run a curl command:
 
 . Navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
 . Select "Inbound Webhook" from the "Connect To" dropdown menu, and click **Next**.
@@ -81,7 +82,9 @@ image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an in
 +
 image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
 
-To trigger this webhook using `curl`, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
+=== 2. Trigger your pipeline
+
+You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 
 NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
 

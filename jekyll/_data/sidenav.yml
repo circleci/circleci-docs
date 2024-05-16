@@ -134,6 +134,8 @@ en:
         children:
           - name: Triggers overview
             link: triggers-overview
+          - name: Use webhooks to integrate with third party services
+            link: webhooks
       - name: How-to guides
         children:
           - name: Set up multiple configuration files for a project
