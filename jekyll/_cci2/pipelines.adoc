@@ -69,7 +69,7 @@ NOTE: For GitLab Self-managed, you can input any instance that you have previous
 ** Select your repository
 +
 CAUTION: **Select the same repository for your configuration source and trigger** (described in the following section). There is currently a bug that means that CircleCI will always look for the configuration source in the same repository from which the triggering event was emitted.
-** (Optional) If you will be assigning an inbound webhook trigger to this configuration source, select a fallback branch to use in case the triggering event does not have a triggering branch.
+** Select a fallback branch to use in case the triggering event does not have a triggering branch. This branch will be used if you trigger this pipeline via inbound webhook.
 ** Enter the path to your configuration file relative to the root of your repository. For example, `.circleci/config.yml`. If you are integrated through the GitHub App, you can enter any path to a `.yml` file, and the file can have any name you choose.
 . Click btn:[Save]
 
@@ -79,13 +79,13 @@ Once you have set up a configuration source you need to set up a project trigger
 
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a trigger is already set up.
 
-Triggers are rules that define which configuration source should be run on a given event. A project can have one or more triggers, which are associated with events from a source of change. Triggers include, but are not limited to, a push to a branch on a version control system (VCS), for example, a GitHub repository. A trigger can have only one configuration source but a configuration source can have multiple triggers.
+Triggers are rules to define that a configuration source should be run on a given event. A project can have one or more triggers, which are associated with events from a source of change. The most common type of trigger is a VCS event, for example a push to a branch on a GitHub repository, but any system that can emit outbound webhooks can also be set up as a pipeline trigger. A trigger can have only one configuration source but a configuration source can have multiple triggers.
 
 A trigger kicks off a pipeline to run the workflows defined by your connected configuration source.
 
 ==== Add a project trigger
 
-To add a project trigger for a configuration source or inbound webhook, follow these steps:
+To add a project trigger for a configuration source, follow these steps:
 
 [.tab.trigger.Inbound_webhook]
 --
