@@ -284,7 +284,7 @@ There is currently no method to manage the connection with GitLab outside of the
 
 Passing secrets to forked pull requests is not a currently supported option for GitLab integrations.
 
-[#scheudled-pipelines]
+[#scheduled-pipelines]
 === Scheduled pipelines
 
 The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitLab projects. This feature is planned for a future release.
