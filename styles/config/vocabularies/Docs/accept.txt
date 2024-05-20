@@ -164,6 +164,7 @@ minitest
 [Mm]ultiline
 namespace
 New Relic
+nginx
 [Nn]ode
 Nomad
 npm
@@ -211,6 +212,7 @@ S3
 SAML
 [Ss]andbox(ing|ed)
 SSO
+[Ss]afelist
 Sauce Labs
 Scale Plan
 SDK

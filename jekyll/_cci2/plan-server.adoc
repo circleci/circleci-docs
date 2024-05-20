@@ -17,7 +17,7 @@ This document describes the Server Plan available to developers.
 
 [#server-plan]
 == Server Plan
-CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. See the xref:server/overview/circleci-server-v4-overview#[Server documentation] for more information.
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. See the xref:server/v4.5/overview/circleci-server-overview#[Server documentation] for more information.
 
 The Server Plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment.
 

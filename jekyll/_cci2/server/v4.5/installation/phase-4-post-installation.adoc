@@ -52,6 +52,5 @@ ifndef::pdf[]
 == Next steps
 
 * xref:hardening-your-cluster#[Hardening Your Cluster]
-* xref:../../installation/migrate-from-server-3-to-server-4#[Server 4.x Migration]
 * xref:../operator/backup-and-restore#[Backup & Restore]
 endif::[]
