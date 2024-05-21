@@ -19,10 +19,11 @@ This page covers the configuration requirements for some basic dynamic configura
 - <<a-basic-example>>. In this example, a script is used to generate a YAML configuration file. The continuation orb is used to continue the pipeline using the generated configuration.
 - <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>
 
+[#prerequisites]
 == Prerequisites
 
-* This section assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page
-* If your project was created before December 1st 2023, enable dynamic configuration in your xref:dynamic-config#enable-dynamic-config[project settings]
+* This section assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page.
+* If your project was created before December 1st 2023, enable dynamic configuration in your xref:dynamic-config#enable-dynamic-config[project settings].
 
 [#a-basic-example]
 == Continue a pipeline with a dynamically generated configuration file
@@ -205,3 +206,421 @@ In the above configuration, we:
 ** **Lines 22-28**: The `service-1` workflow triggers the `maven/test` job on the `service-1` directory, when the pipeline parameter value mapped to run-build-service-1-job is set to `true`. This will only happen if a change was made in the `serivce-1` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
 ** **Lines 31-37**: The `service-2` workflow triggers the `maven/test` job on the `service-2` directory, when the pipeline parameter value mapped to run-build-service-2-job is set to `true`. This will only happen if a change was made in the `serivce-2` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
 ** **Lines 43-50**: The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the path filtering. This runs the `maven/test` job on the `tests` directory to run integration tests against the built services.
+
+[#generate-a-config-file-based-on-modified-files]
+== Generate a configuration file based on modified files
+
+For this example, consider a project that includes:
+
+* Separate directories for code (`src/`) and docs (`doc/`)
+* A setup configuration, `config.yml`
+* Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`
+* A `shared-config.yml` file that defines shared jobs to be used when building the code and the docs
+* A `no-updates.yml` config file to be used in the event that a pipeline is triggered with no changes
+
+Each configuration file is explained in the following sections.
+
+[,shell]
+----
+.
+├── .circleci
+│   ├── code-config.yml
+│   ├── config.yml
+│   ├── docs-config.yml
+│   ├── no-updates.yml
+│   └── shared-config.yml
+├── README.md
+├── doc
+│   └── my-docs.txt
+└── src
+    └── my-code.txt
+----
+
+[#setup-config-1]
+=== Setup configuration
+
+In this example, the setup configuration includes a single job from the path filtering orb, which is used to map pipeline parameter values and configuration files with paths to specific locations in our repository.
+
+Under the hood the following will happen when the pipeline is triggered:
+
+* A script will run that checks for modified files in a commit against a base branch (we are using the default, `main`).
+* The required configuration will be generated using the relevant config files from our project, and the pipeline parameters will be set.
+* The pipeline will be continued using the new configuration.
+
+[,yml]
+----
+version: 2.1
+
+# define this file as the setup phase of your dynamic configuration
+setup: true
+
+# define the parameters that will be used to generate the dynamic configuration.
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-code:
+    type: boolean
+    default: false
+  build-docs:
+    type: boolean
+    default: false
+
+# invoke the path-filtering orb to make the filter job available.
+orbs:
+  path-filtering: circleci/path-filtering@1.0.0
+
+workflows:
+  setup-workflow:
+    jobs:
+      - path-filtering/filter:
+          base-revision: main
+          config-path: .circleci/no-updates.yml
+          mapping: | # The mapping will be used to generate the dynamic configuration for all conditions that match.
+            .* always-continue true .circleci/shared-config.yml
+            src/.* build-code true .circleci/code-config.yml
+            doc/.* build-docs true .circleci/docs-config.yml
+----
+
+[#shared-jobs-1]
+=== Shared jobs
+
+In the event of changes to any file in the repository the `shared-config.yml` config file will form part of the pipeline continuation configuration. The only time this config will not be used is if there is a commit that contains no changes. Notice that this is a partial configuration and contains only jobs not workflows. This is because these are jobs that can be used along with either the `code-config.yml` or `docs-config.yml`, both of which include workflows that orchestrate these shared jobs.
+
+[,yml]
+----
+version: 2.1
+
+# define the parameters from the setup config.
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-code:
+    type: boolean
+    default: false
+  build-docs:
+    type: boolean
+    default: false
+
+# define the shared jobs that will be available for all continued workflows.
+jobs:
+  lint:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Running linting"
+
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Running tests"
+----
+
+[#directory-specific-config-1]
+=== Directory-specific configuration
+
+The config files for building the separate directories, `src/` and `/doc`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
+
+[#code-config-1]
+==== `code-config.yml`
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build-code:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Building code"
+
+workflows:
+  code-workflow:
+    jobs:
+      - lint # use the shared lint job.
+      - test # use the shared test job.
+      - build-code
+----
+
+[#docs-config-1]
+==== `docs-config.yml`
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build-docs:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Building docs"
+
+workflows:
+  docs-workflow:
+    jobs:
+      - lint # use the shared lint job.
+      - build-docs
+----
+
+[#config-no-change-1]
+=== Configuration for no change
+
+We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined filepaths CircleCI needs to know what to do next. One way to configure this scenario is to provide an alternative configuration using the `config-path` parameter. `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the changes in the pipeline. In this example we use a YAML called `no-updates.yml`.
+
+[,yml]
+----
+version: 2.1
+
+# define the parameters from the setup config.
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-code:
+    type: boolean
+    default: false
+  build-docs:
+    type: boolean
+    default: false
+
+jobs:
+  no-updates:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "No updates have been made"
+
+workflows:
+  no-update-workflow:
+    jobs:
+      - no-updates
+----
+
+Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
+
+[#pack-generate-validate]
+== Pack, generate, and validate a configuration file for pipeline continuation
+
+For this example, consider a project that includes:
+
+* Separate directories for code (`src/`) and docs (`doc/`)
+* A setup configuration, `config.yml`
+* Configuration files for building the code and the docs are separate, `code-config.yml` and `docs-config.yml`
+* A `shared/` configuration directory containing our shared jobs in separate YAML files. This is used to generate `shared-config.yml` using the xref:how-to-use-the-circleci-local-cli#packing-a-config[CircleCI CLI command] `circleci config pack`
+* A `no-updates.yml` config file to be used in the event that there are no changes
+
+[,shell]
+----
+.
+├── .circleci
+│   ├── code-config.yml
+│   ├── config.yml
+│   ├── docs-config.yml
+│   ├── no-updates.yml
+│   ├── shared
+│   │   └── jobs
+│   │       ├── lint.yml
+│   │       └── test.yml
+│   └── shared-config.yml
+├── README.md
+├── doc
+│   └── my-docs.txt
+└── src
+    └── my-code.txt
+----
+
+[#setup-config-2]
+=== Setup configuration
+
+The setup configuration had a single job, `setup`, which has the following steps:
+
+. Checkout the code
+. Install the CircleCI CLI
+. Generate a shared configuration file
+. Map file paths with pipeline parameter values and configuration files, using the path filtering orb
+. Generate a configuration file to fit the changes included in the commit that triggered the pipeline
+. Validate the configuration file using the CLI
+. Continue the pipeline with the new configuration file using the continuation orb
+
+[,yaml]
+----
+version: 2.1
+
+# define this file as the setup phase of your dynamic configuration
+setup: true
+
+# define the parameters that will be used to generate the dynamic configuration.
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-code:
+    type: boolean
+    default: false
+  build-docs:
+    type: boolean
+    default: false
+
+# invoke the orbs to filter, pack and continue configs.
+orbs:
+  path-filtering: circleci/path-filtering@1.0.0
+  circleci-cli: circleci/circleci-cli@0.1.9
+  continuation: circleci/continuation@1.0.0
+
+jobs:
+  setup:
+    executor: path-filtering/default
+    steps:
+      - checkout
+
+      # Install the CircleCI CLI
+      - circleci-cli/install
+
+      # Generate the shared configuration from a directory with the pack command.
+      - run:
+          name: Generate shared configuration
+          command: circleci config pack .circleci/shared >> .circleci/shared-config.yml
+
+      # The mapping will be used to generate the dynamic configuration for all conditions that match.
+      - path-filtering/set-parameters:
+          base-revision: main
+          config-path: .circleci/no-updates.yml
+          mapping: |
+            .* always-continue true .circleci/shared-config.yml
+            src/.* build-code true .circleci/code-config.yml
+            doc/.* build-docs true .circleci/docs-config.yml
+
+      # Generate the dynamic configuration based on the parameters set in the previous step.
+      - path-filtering/generate-config
+
+      # Optionally validate the generated configuration.
+      - run:
+          name: Validate config
+          command: circleci config validate /tmp/generated-config.yml
+
+      # Continue the pipeline with the generated configuration.
+      - continuation/continue:
+          configuration_path: /tmp/generated-config.yml
+
+workflows:
+  setup-workflow:
+    jobs:
+      - setup
+----
+
+[#shared-jobs-2]
+=== Shared jobs
+
+In this example sour shared jobs, `lint` and `test`, are stored in individual YAML files using a directory structure compatible with the `circleci config pack` command, in which jobs are stored in a `jobs` folder, commands stored in a `commands` folder, and so on. These files can be used in the setup stage of our dynamic configuration to generate a shared configuration by "packing" the relevant components together.
+
+TIP: When packing a config using `circleci config pack`, the component names are not included in the configuration files, they are taken from the file names.
+
+[#lint]
+==== `shared/lint.yml`
+
+[,yml]
+----
+docker:
+  - image: cimg/base:stable
+steps:
+  - run: echo "Running linting"
+----
+
+[#test]
+==== `shared/test.yml`
+
+[,yml]
+----
+docker:
+  - image: cimg/base:stable
+steps:
+  - run: echo "Running tests"
+----
+
+[#directory-specific-config-2]
+=== Directory-specific configuration
+
+The config files for building the separate directories, `src/` and `/doc`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
+
+[#code-config-2]
+==== `code-config.yml`
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build-code:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Building code"
+
+workflows:
+  code-workflow:
+    jobs:
+      - lint # use the shared lint job.
+      - test # use the shared test job.
+      - build-code
+----
+
+[#docs-config-2]
+==== `docs-config.yml`
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build-docs:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "Building docs"
+
+workflows:
+  docs-workflow:
+    jobs:
+      - lint # use the shared lint job.
+      - build-docs
+----
+
+[#config-no-change-2]
+=== Configuration for no change
+
+We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined filepaths CircleCI needs to know what to do next. One way to configure this scenario is to provide an alternative configuration using the `config-path` parameter. `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the changes in the pipeline. In this example we use a YAML called `no-updates.yml`.
+
+[,yml]
+----
+version: 2.1
+
+# define the parameters from the setup config.
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-code:
+    type: boolean
+    default: false
+  build-docs:
+    type: boolean
+    default: false
+
+jobs:
+  no-updates:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "No updates have been made"
+
+workflows:
+  no-update-workflow:
+    jobs:
+      - no-updates
+----
+
+Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
