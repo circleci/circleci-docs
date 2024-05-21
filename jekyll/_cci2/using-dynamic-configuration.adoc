@@ -14,10 +14,12 @@ contentTags:
 :icons: font
 :experimental:
 
-This page covers the configuration requirements for some basic dynamic configuration examples. The following examples are provided below:
+This page covers some dynamic configuration examples. The following examples are provided below:
 
-- <<a-basic-example>>. In this example, a script is used to generate a YAML configuration file. The continuation orb is used to continue the pipeline using the generated configuration.
-- <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>
+- <<a-basic-example>>: In this example, a script is used to generate a YAML configuration file. The continuation orb is used to continue the pipeline using the generated configuration.
+- <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>: In this example, two configuration files are used, a setup configuration and a continuation configuration. Pipeline parameters and conditional workflow logic is used to generate and continue the pipeline based on the location of file changes.
+- <<generate-a-config-file-based-on-modified-files>>: In this example the continuation configuration is split into separate project-specific config files, and a shared config file. Path filtering is used to generate a config file for continuation based on the location of file changes.
+- <<pack-generate-validate>>:  In this example the continuation configuration is split into separate project-specific config files, and a shared config directory. Path filtering is used to pack, generate and validate a config file for continuation based on the location of file changes.
 
 [#prerequisites]
 == Prerequisites

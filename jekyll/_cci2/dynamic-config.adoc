@@ -113,7 +113,9 @@ For example, you may have multiple projects within your repository (`project_1`,
 
 For projects that consist of multiple modules, you may require a separate job/workflow to run for each module when changes are introduced. You can split your configuration up and store the config for each module separately within the module's directory, keeping related code and config together. Module jobs/workflows can be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you can use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered. This scenario can also be referred to as _config splitting_.
 
-#Insert diagram and link to example for config splitting when ready#
+// Diagram
+
+For an example of config splitting, see the xref:using-dynamic-configuration#pack-generate-validate[Dynamic configuration how-to guide].
 
 == Using dynamic configuration on CircleCI server
 
