@@ -17,15 +17,15 @@ contentTags:
 This page covers some dynamic configuration examples. The following examples are provided below:
 
 - <<a-basic-example>>: In this example, a script is used to generate a YAML configuration file. The continuation orb is used to continue the pipeline using the generated configuration.
-- <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>: In this example, two configuration files are used, a setup configuration and a continuation configuration. Pipeline parameters and conditional workflow logic is used to generate and continue the pipeline based on the location of file changes.
-- <<generate-a-config-file-based-on-modified-files>>: In this example the continuation configuration is split into separate project-specific config files, and a shared config file. Path filtering is used to generate a config file for continuation based on the location of file changes.
-- <<pack-generate-validate>>:  In this example the continuation configuration is split into separate project-specific config files, and a shared config directory. Path filtering is used to pack, generate and validate a config file for continuation based on the location of file changes.
+- <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>: In this example, two configuration files are used, a setup configuration and a continuation configuration. The path filtering orb is used to conditionally set pipeline parameters, and conditional workflow logic is used to generate and continue the pipeline based on the location of modified files.
+- <<generate-a-config-file-based-on-modified-files>>: In this example the continuation configuration is split into separate project-specific config files and a shared config file. Path filtering is used to generate a config file for continuation based on the location of modified files.
+- <<pack-generate-validate>>:  In this example the continuation configuration is split into separate project-specific config files, and a shared config directory. Path filtering is used to pack, generate and validate a config file for continuation based on the location of modified files.
 
 [#prerequisites]
 == Prerequisites
 
-* This section assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page.
-* If your project was created before December 1st 2023, enable dynamic configuration in your xref:dynamic-config#enable-dynamic-config[project settings].
+* The content on this page assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page.
+* If your project was created before December 1st 2023 you will need to enable dynamic configuration in your xref:dynamic-config#enable-dynamic-config[project settings].
 
 [#a-basic-example]
 == Continue a pipeline with a dynamically generated configuration file
@@ -63,8 +63,6 @@ workflows:
       - setup
 ----
 
-In the above configuration, we:
-
 * **Line 4**: Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 * **Line 8**: Invoke the `continuation` orb so we can use it.
 * **Lines 11-20**: Define a job called `setup` that uses the default xref:executor-intro#[`executor`] provided by the `continuation` orb as an . This job:
@@ -82,7 +80,7 @@ For a more in-depth explanation of what the `continuation` orb does, review the 
 
 Your project may benefit from the ability to conditionally run some configuration based upon changes made to a specific set of files. Dynamically deciding the work to do in a pipeline based on the location of changes is beneficial when your code/microservices are stored in a monorepo, or a single repository. Without this ability, using _static_ configuration, each time a change is made to any file, all jobs and workflows would run even if they are unrelated to the actual change being made.
 
-Use the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] to help simplify the process of using dynamic configuration based on the paths to changed files.
+Use the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] to help simplify the process of using dynamic configuration based on the paths to modified files.
 
 Consider a monorepo structure, as follows:
 
@@ -100,14 +98,14 @@ Consider a monorepo structure, as follows:
 │   ├── IntegrationTests.java
 ----
 
-An example implementation of CircleCI's dynamic configuration for this structure is provided in the following `config.yml` and `continue_config.yml`:
+An example implementation of CircleCI's dynamic configuration for this structure is provided in the following `config.yml` and `continue_config.yml`.
 
 [#config]
-=== config.yml
+=== Setup configuration: `config.yml`
 
-Your `config.yml` file defines the initial setup phase of the dynamic configuration. In this example the path filtering orb is used to map file paths with pipeline parameters. If a change is made to a file matching a path regex, the corresponding parameter is set to the given value. These pipeline parameters are then passed to the continuation configuration and are used in the workflows conditional logic setup to determine which jobs should run.
+The `config.yml` file defines the initial setup phase of the dynamic configuration. In this example the path filtering orb is used to map file paths with pipeline parameter values. This means, if a change is made to a file matching a path regex, the corresponding parameter is set to the given value. These pipeline parameters are then passed to the continuation configuration and are used in the configured workflow conditional logic to determine which jobs should run.
 
-The path filtering orb uses the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] under the hood to continue the pipeline with the modified parameters. The configuration passed using the continuation orb is described in the next section.
+The path filtering orb uses the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] under the hood to continue the pipeline with the modified parameter values. The configuration used to continue the pipeline is described in the next section.
 
 [source,yaml]
 ----
@@ -142,9 +140,9 @@ workflows:
 ----
 
 [#continueconfig]
-=== continue_config.yml
+=== Continuation configuration: `continue_config.yml`
 
-This configuration file is our _continuation configuration_ that is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameters, which were changed based on the path to any changes in a commit, and uses them to conditionally run workflows.
+In this example, `continue_config.yml` is the _continuation configuration_, which means it is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameter values, which were modified based on the paths to any changes in a commit, and uses them to conditionally run workflows using the `when` key. FOr more information on using `when` in workflows, see the xref:configuration-reference#using-when-in-workflows[Configuration reference].
 
 [source,yaml]
 ----
@@ -200,8 +198,6 @@ workflows:
           app_src_directory: 'tests'
 ----
 
-In the above configuration, we:
-
 * **Line 4**: Invoke the Maven orb so we can use it's preconfigured jobs
 * **Lines 8-14**: Define our two boolean pipeline parameters, the same parameters we have defined in the setup phase: `run-build-service-1-job` and `run-build-service-2-job`
 * Define three separate workflows to be conditionally executed based on the pipeline parameter values:
@@ -214,11 +210,11 @@ In the above configuration, we:
 
 For this example, consider a project that includes:
 
-* Separate directories for code (`src/`) and docs (`doc/`)
-* A setup configuration, `config.yml`
-* Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`
-* A `shared-config.yml` file that defines shared jobs to be used when building the code and the docs
-* A `no-updates.yml` config file to be used in the event that a pipeline is triggered with no changes
+* Separate directories for code (`src/`) and docs (`doc/`).
+* A setup configuration, `config.yml`.
+* Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`.
+* A `shared-config.yml` file that defines shared jobs to be used when building the code and the docs.
+* A `no-updates.yml` config file to be used in the event that a pipeline is triggered with no changes.
 
 Each configuration file is explained in the following sections.
 
@@ -241,13 +237,13 @@ Each configuration file is explained in the following sections.
 [#setup-config-1]
 === Setup configuration
 
-In this example, the setup configuration includes a single job from the path filtering orb, which is used to map pipeline parameter values and configuration files with paths to specific locations in our repository.
+In this example, the setup configuration includes a single job referenced from the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering#jobs-filter[path filtering orb], which is used to map pipeline parameter values and configuration files with paths to specific locations in the repository.
 
-Under the hood the following will happen when the pipeline is triggered:
+Under the hood the following steps are taken when the pipeline is triggered:
 
-* A script will run that checks for modified files in a commit against a base branch (we are using the default, `main`).
-* The required configuration will be generated using the relevant config files from our project, and the pipeline parameters will be set.
-* The pipeline will be continued using the new configuration.
+* A script runs to check for modified files in a commit against a base branch (in this example, the default, `main`).
+* A continuation configuration is generated using the relevant config files from the project, and the pipeline parameter values are set.
+* The pipeline is continued using the continuation configuration.
 
 [,yml]
 ----
@@ -287,7 +283,9 @@ workflows:
 [#shared-jobs-1]
 === Shared jobs
 
-In the event of changes to any file in the repository the `shared-config.yml` config file will form part of the pipeline continuation configuration. The only time this config will not be used is if there is a commit that contains no changes. Notice that this is a partial configuration and contains only jobs not workflows. This is because these are jobs that can be used along with either the `code-config.yml` or `docs-config.yml`, both of which include workflows that orchestrate these shared jobs.
+In the event of changes to _any_ file in the repository (`.*`) the `shared-config.yml` configuration is included in the continuation configuration. The only time `shared-config.yml` will not be used is on a commit that contains no changes.
+
+NOTE: `shared-config.yml` is a partial configuration and contains only jobs, not workflows. This is because these jobs will be used along with either the `code-config.yml` or `docs-config.yml` configs, both of which include workflows that orchestrate these shared jobs.
 
 [,yml]
 ----
@@ -371,7 +369,9 @@ workflows:
 [#config-no-change-1]
 === Configuration for no change
 
-We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined filepaths CircleCI needs to know what to do next. One way to configure this scenario is to provide an alternative configuration using the `config-path` parameter. `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the changes in the pipeline. In this example we use a YAML called `no-updates.yml`.
+We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined paths, CircleCI needs to know what to do next.
+
+One way to handle this scenario is to provide an alternative configuration using the `config-path` parameter (see line 27 <<setup-config-1,here>>). `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the path to modified files. In this example, we use a `no-updates.yml` configuration file. Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
 
 [,yml]
 ----
@@ -402,18 +402,16 @@ workflows:
       - no-updates
 ----
 
-Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
-
 [#pack-generate-validate]
 == Pack, generate, and validate a configuration file for pipeline continuation
 
 For this example, consider a project that includes:
 
-* Separate directories for code (`src/`) and docs (`doc/`)
-* A setup configuration, `config.yml`
-* Configuration files for building the code and the docs are separate, `code-config.yml` and `docs-config.yml`
+* Separate directories for code (`src/`) and docs (`doc/`).
+* A setup configuration, `config.yml`/
+* Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`.
 * A `shared/` configuration directory containing our shared jobs in separate YAML files. This is used to generate `shared-config.yml` using the xref:how-to-use-the-circleci-local-cli#packing-a-config[CircleCI CLI command] `circleci config pack`
-* A `no-updates.yml` config file to be used in the event that there are no changes
+* A `no-updates.yml` config file to be used in the event that there are no changes.
 
 [,shell]
 ----
@@ -440,13 +438,13 @@ For this example, consider a project that includes:
 
 The setup configuration had a single job, `setup`, which has the following steps:
 
-. Checkout the code
-. Install the CircleCI CLI
-. Generate a shared configuration file
-. Map file paths with pipeline parameter values and configuration files, using the path filtering orb
-. Generate a configuration file to fit the changes included in the commit that triggered the pipeline
-. Validate the configuration file using the CLI
-. Continue the pipeline with the new configuration file using the continuation orb
+* Checkout code
+* Install the CircleCI CLI
+* Generate a shared configuration file
+* Map file paths with pipeline parameter values and configuration files, using the path filtering orb
+* Generate a configuration file to fit the changes included in the commit that triggered the pipeline
+* Validate the configuration file using the CLI
+* Continue the pipeline with the new configuration file using the continuation orb
 
 [,yaml]
 ----
@@ -517,7 +515,7 @@ workflows:
 [#shared-jobs-2]
 === Shared jobs
 
-In this example sour shared jobs, `lint` and `test`, are stored in individual YAML files using a directory structure compatible with the `circleci config pack` command, in which jobs are stored in a `jobs` folder, commands stored in a `commands` folder, and so on. These files can be used in the setup stage of our dynamic configuration to generate a shared configuration by "packing" the relevant components together.
+In this example, shared jobs, `lint` and `test`, are stored in individual YAML files using a directory structure compatible with the `circleci config pack` command. Jobs are stored in a `jobs` folder, commands stored in a `commands` folder, and so on. These files can be used in the setup stage of our dynamic configuration to generate a shared configuration by "packing" the relevant components together.
 
 TIP: When packing a config using `circleci config pack`, the component names are not included in the configuration files, they are taken from the file names.
 
@@ -594,7 +592,10 @@ workflows:
 [#config-no-change-2]
 === Configuration for no change
 
-We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined filepaths CircleCI needs to know what to do next. One way to configure this scenario is to provide an alternative configuration using the `config-path` parameter. `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the changes in the pipeline. In this example we use a YAML called `no-updates.yml`.
+We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined paths, CircleCI needs to know what to do next.
+
+One way to handle this scenario is to provide an alternative configuration using the `config-path` parameter (see line 27 <<setup-config-1,here>>). `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the path to modified files. In this example, we use a `no-updates.yml` configuration file. Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
+
 
 [,yml]
 ----

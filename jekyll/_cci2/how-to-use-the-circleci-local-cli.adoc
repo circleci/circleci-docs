@@ -100,6 +100,8 @@ This CLI pack command (separate to `circleci orb pack` described above) allows y
 
 How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. Consider the following folder structure example:
 
+TIP: When packing a config using `circleci config pack`, the component names are not included in the configuration files, they are taken from the file names.
+
 [,shell]
 ----
 $ tree
