@@ -71,7 +71,7 @@ CocoaPods
 Codecov
 CodeDeploy
 Coinbase
-[Cc]onfig\b
+[Cc]onfigs?\b
 [Cc]ontainer [Rr]egistry
 Coreutils
 CPUs

@@ -43,7 +43,7 @@ setup: true
 
 # invoke the continuation orb to make the continuation/continue command available
 orbs:
-  continuation: circleci/continuation@0.1.2
+  continuation: circleci/continuation@1
 
 jobs:
   setup:
@@ -117,7 +117,7 @@ setup: true
 # use the path-filtering orb to continue a pipeline based on
 # the path of an updated set of files
 orbs:
-  path-filtering: circleci/path-filtering@0.1.1
+  path-filtering: circleci/path-filtering@1
 
 workflows:
   always-run:
@@ -142,7 +142,7 @@ workflows:
 [#continueconfig]
 === Continuation configuration: `continue_config.yml`
 
-In this example, `continue_config.yml` is the _continuation configuration_, which means it is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameter values, which were modified based on the paths to any changes in a commit, and uses them to conditionally run workflows using the `when` key. FOr more information on using `when` in workflows, see the xref:configuration-reference#using-when-in-workflows[Configuration reference].
+In this example, `continue_config.yml` is the _continuation configuration_, which means it is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameter values, which were modified based on the paths to any changes in a commit, and uses them to conditionally run workflows using the `when` key. For more information on using `when` in workflows, see the xref:configuration-reference#using-when-in-workflows[Configuration reference].
 
 [source,yaml]
 ----
@@ -252,18 +252,6 @@ version: 2.1
 # define this file as the setup phase of your dynamic configuration
 setup: true
 
-# define the parameters that will be used to generate the dynamic configuration.
-parameters:
-  always-continue:
-    type: boolean
-    default: false
-  build-code:
-    type: boolean
-    default: false
-  build-docs:
-    type: boolean
-    default: false
-
 # invoke the path-filtering orb to make the filter job available.
 orbs:
   path-filtering: circleci/path-filtering@1.0.0
@@ -285,7 +273,7 @@ workflows:
 
 In the event of changes to _any_ file in the repository (`.*`) the `shared-config.yml` configuration is included in the continuation configuration. The only time `shared-config.yml` will not be used is on a commit that contains no changes.
 
-NOTE: `shared-config.yml` is a partial configuration and contains only jobs, not workflows. This is because these jobs will be used along with either the `code-config.yml` or `docs-config.yml` configs, both of which include workflows that orchestrate these shared jobs.
+NOTE: `shared-config.yml` is a partial configuration and contains only shared parameters and jobs, not workflows. This is because these jobs will be used along with either the `code-config.yml` or `docs-config.yml` configs, both of which include workflows that orchestrate these shared jobs. Using this kind of set up you can include anything that should _always_ run in the shared configuration, including workflows that should always run.
 
 [,yml]
 ----
@@ -425,7 +413,6 @@ For this example, consider a project that includes:
 │   │   └── jobs
 │   │       ├── lint.yml
 │   │       └── test.yml
-│   └── shared-config.yml
 ├── README.md
 ├── doc
 │   └── my-docs.txt
@@ -520,7 +507,7 @@ In this example, shared jobs, `lint` and `test`, are stored in individual YAML f
 TIP: When packing a config using `circleci config pack`, the component names are not included in the configuration files, they are taken from the file names.
 
 [#lint]
-==== `shared/lint.yml`
+==== `shared/jobs/lint.yml`
 
 [,yml]
 ----
@@ -531,7 +518,7 @@ steps:
 ----
 
 [#test]
-==== `shared/test.yml`
+==== `shared/jobs/test.yml`
 
 [,yml]
 ----
