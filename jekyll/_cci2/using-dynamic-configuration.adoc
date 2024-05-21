@@ -408,7 +408,7 @@ workflows:
 For this example, consider a project that includes:
 
 * Separate directories for code (`src/`) and docs (`doc/`).
-* A setup configuration, `config.yml`/
+* A setup configuration, `config.yml`.
 * Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`.
 * A `shared/` configuration directory containing our shared jobs in separate YAML files. This is used to generate `shared-config.yml` using the xref:how-to-use-the-circleci-local-cli#packing-a-config[CircleCI CLI command] `circleci config pack`
 * A `no-updates.yml` config file to be used in the event that there are no changes.
