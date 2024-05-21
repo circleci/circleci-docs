@@ -22,9 +22,9 @@ Best practice is to make as many of the resources as private as possible. If you
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
 
-NOTE: An NGINX reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong` and `nomad`.
+NOTE: An nginx reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. nginx is responsible routing the traffic to the following services: `kong` and `nomad`.
 
-CAUTION: When using Amazon Certificate Manager (ACM), the name of the NGINX service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
+CAUTION: When using Amazon Certificate Manager (ACM), the name of the nginx service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
 
 [#network-traffic]
 == Network traffic
@@ -36,7 +36,7 @@ The rules explained here are assumed to be stateful and for TCP connections only
 
 [#reverse-proxy-status]
 === Reverse proxy status
-You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both NGINX and Kong in CircleCI server, we expose the status pages of both via port 80.
+You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -44,7 +44,7 @@ You may wish to check the status of the services routing traffic in your CircleC
 | Service
 | Endpoint
 
-| NGINX
+| nginx
 | `/nginx_status`
 
 | Kong
@@ -282,6 +282,5 @@ When hardening an installation where the machine provisioner uses public IP addr
 
 ifndef::pdf[]
 ## Next steps
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3.x to v4.x]
 * xref:../operator/operator-overview#[Server v4.4 Operator Overview]
 endif::[]

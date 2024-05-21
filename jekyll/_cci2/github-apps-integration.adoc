@@ -85,24 +85,9 @@ Project roles give control over which users have access to which projects within
 For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
 [#configuration]
-=== Configuration
+=== Configuration sources and project triggers
 
-You can add or delete a configuration source for your project. If you followed the steps above to connect GitHub, a GitHub configuration source has been automatically added for you.
-
-Once you define a configuration source, you can set up a trigger that points to that configuration.
-
-image::{{site.baseurl}}/assets/img/docs/standalone/configuration-gh.png[Trigger setup page]
-
-[#triggers]
-=== Triggers
-
-**The scheduled pipelines feature is not currently available for use with GitHub App integrations.**
-
-If you followed the steps above to connect GitHub, a trigger set with GitHub as the configuration source has been automatically added for you.
-
-image::{{site.baseurl}}/assets/img/docs/standalone/triggers-gh.png[Trigger setup page]
-
-When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
+You can add or delete configuration sources and triggers for your project. For details see the xref:pipelines#configuration-sources-and-project-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced

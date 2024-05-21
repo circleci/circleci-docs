@@ -419,5 +419,4 @@ ifndef::pdf[]
 
 * xref:release-notes#[CircleCI server v4.5 release notes]
 * xref:../installation/phase-1-prerequisites#[Server v4.5 installation prerequisites]
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]
