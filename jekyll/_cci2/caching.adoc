@@ -368,7 +368,7 @@ During step execution, the templates above are replaced by runtime values and us
 | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
 
 | {% raw %}`{{ arch }}`{% endraw %}
-| Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:faq#which-cpu-architectures-does-circleci-support[supported CPU architectures].
+| Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:faq#cpu-architecture-circleci-support[supported CPU architectures].
 |===
 
 [#further-notes-on-using-keys-and-templates]
