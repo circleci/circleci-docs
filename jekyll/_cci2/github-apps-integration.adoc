@@ -180,6 +180,11 @@ There is currently no method to manage the connection with GitHub outside of the
 
 The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release.
 
+[#build-forked-pull-requests]
+=== Build forked pull requests
+
+The Build forked pull requests feature is not currently supported.
+
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
 
