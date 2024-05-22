@@ -95,6 +95,53 @@ agent:
           - name: "other"
 ```
 
+[#unsafe-retries]
+=== Unsafe retries
+
+Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would normally be displayed in the CircleCI web app as an infrastructure fail should be expected to trigger an unsafe retry when enabled.
+
+This feature is also useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
+
+[CAUTION]
+====
+This feature is called “unsafe retries” for a reason. Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
+====
+
+Here is how unsafe retries work with container runner:
+
+1. If a pod fails or gets evicted during runtime, container runner will release the task.
+2. All resources managed by container runner for the task, such as the Kubernetes pod and secret, are cleaned up and deleted.
+3. The released task then becomes available for reclaim by any container runner instance configured for the same resource class.
+4. Once reclaimed, the task is restarted completely from scratch, including previously run steps.
+5. A task can be retried up to 3 times before it is deemed to have permanently failed.
+
+To enable unsafe retries, you need to set the `enableUnsafeRetries` flag in the <<resource-class-configuration-custom-pod,resource class configuration>> for each resource class. Here is an example where two resource classes are defined - one with unsafe retries enabled for spot instances and the other one where it is not enabled:
+[source,yaml]
+----
+agent:
+  resourceClasses:
+    your-namespace/your-resource-class-1:
+      enableUnsafeRetries: true
+      token: your-resource-class-1-token
+      # The following spec isn't required, but serves as an example of how you could schedule tasks on spot instances using tolerations for the node's taint
+      spec:
+        tolerations:
+        - key: "lifecycle"
+          operator: "Equal"
+          value: "Ec2Spot"
+          effect: "NoExecute"
+    your-namespace/your-resource-class-2:
+      # Unsafe retries are disabled by default
+      token: your-resource-class-2-token
+      # This resource class can only schedule tasks on nodes without taints specific to spot instances
+----
+
+==== Monitoring
+
+Container runner logs an event whenever a task encounters a runtime failure. The specific error message is provided under the `app.error` field within the `service-work` span. To check whether the task is set to be rerun or not (either because it cannot be retried or all retries have been exhausted), you can inspect the `app.to_retry` field. This boolean indicates the retry status of the task.
+
+You can utilize these fields with your preferred Kubernetes logging integrations to monitor when and how frequently tasks are retried.
+
 [#custom-secret]
 == Custom token secret
 
