@@ -138,7 +138,7 @@ agent:
 
 ==== Monitoring
 
-Container runner logs an event whenever a task encounters a runtime failure. The specific error message is provided under the `app.error` field within the `service-work` span. To check whether the task is set to be rerun or not (either because it cannot be retried or all retries have been exhausted), you can inspect the `app.to_retry` field. This boolean indicates the retry status of the task.
+Container runner logs an event whenever a task encounters a runtime failure. The specific error message is provided under the `error` field within the `service-work` span. To check whether the task is set to be rerun or not (either because it cannot be retried or all retries have been exhausted), you can inspect the `app.to_retry` field. This boolean indicates the retry status of the task.
 
 You can utilize these fields with your preferred Kubernetes logging integrations to monitor when and how frequently tasks are retried.
 
