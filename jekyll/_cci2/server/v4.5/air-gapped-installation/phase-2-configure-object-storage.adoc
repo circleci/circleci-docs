@@ -130,7 +130,7 @@ Follow the steps in this section to copy the required files into MinIO within yo
 
 [#copy-canary-txt-file]
 === a. Copy canary.txt file
-Download the canary.txt file required by distributor.
+Download the `canary.txt` file required by distributor.
 
 [,bash]
 ----
