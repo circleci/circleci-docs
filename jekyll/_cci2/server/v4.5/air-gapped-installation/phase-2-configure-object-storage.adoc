@@ -126,7 +126,7 @@ image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 
 [#copy-other-miscellaneous-files]
 == 3. Copy other miscellaneous files
-Follow the steps in this section to copy the following files into MinIO within your air-gapped environment.
+Follow the steps in this section to copy the required files into MinIO within your air-gapped environment.
 
 [#copy-canary-txt-file]
 === a. Copy canary.txt file
