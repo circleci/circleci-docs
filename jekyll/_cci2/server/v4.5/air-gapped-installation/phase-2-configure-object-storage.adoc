@@ -138,7 +138,7 @@ Download the `canary.txt` file required by distributor.
 curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.txt
 ----
 
-Copy this canary.txt file to the root directory of the `circleci-data` bucket.
+Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
 
 [#copy-candidate-txt-file]
 === b. Copy candidate.txt file
