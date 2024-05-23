@@ -150,7 +150,7 @@ Download the `candidate.txt` file required by `runner_admin`.
 curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/candidate.txt
 ----
 
-Copy this candidate.txt file to the root directory of the `circleci-data` bucket.
+Copy this `candidate.txt` file to the root directory of the `circleci-data` bucket.
 
 [#next-steps]
 == Next steps
