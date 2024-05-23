@@ -210,7 +210,7 @@ workflows:
 
 For this example, consider a project that includes:
 
-* Separate directories for code (`src/`) and docs (`doc/`).
+* Separate directories for code (`src/`) and docs (`docs/`).
 * A setup configuration, `config.yml`.
 * Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`.
 * A `shared-config.yml` file that defines shared jobs to be used when building the code and the docs.
@@ -228,7 +228,7 @@ Each configuration file is explained in the following sections.
 │   ├── no-updates.yml
 │   └── shared-config.yml
 ├── README.md
-├── doc
+├── docs
 │   └── my-docs.txt
 └── src
     └── my-code.txt
@@ -241,7 +241,7 @@ In this example, the setup configuration includes a single job referenced from t
 
 Under the hood the following steps are taken when the pipeline is triggered:
 
-* A script runs to check for modified files in a commit against a base branch (in this example, the default, `main`).
+* A script runs to check for modified files in a commit against a base branch (in this example, the default, `generate-config-file-main`).
 * A continuation configuration is generated using the relevant config files from the project, and the pipeline parameter values are set.
 * The pipeline is continued using the continuation configuration.
 
@@ -260,12 +260,12 @@ workflows:
   setup-workflow:
     jobs:
       - path-filtering/filter:
-          base-revision: main
+          base-revision: generate-config-file-main
           config-path: .circleci/no-updates.yml
           mapping: | # The mapping will be used to generate the dynamic configuration for all conditions that match.
             .* always-continue true .circleci/shared-config.yml
             src/.* build-code true .circleci/code-config.yml
-            doc/.* build-docs true .circleci/docs-config.yml
+            docs/.* build-docs true .circleci/docs-config.yml
 ----
 
 [#shared-jobs-1]
@@ -273,7 +273,7 @@ workflows:
 
 In the event of changes to _any_ file in the repository (`.*`) the `shared-config.yml` configuration is included in the continuation configuration. The only time `shared-config.yml` will not be used is on a commit that contains no changes.
 
-NOTE: `shared-config.yml` is a partial configuration and contains only shared parameters and jobs, not workflows. This is because these jobs will be used along with either the `code-config.yml` or `docs-config.yml` configs, both of which include workflows that orchestrate these shared jobs. Using this kind of set up you can include anything that should _always_ run in the shared configuration, including workflows that should always run.
+NOTE: `shared-config.yml` is designed to be used either on it's own or along with other partial configurations. `code-config.yml` or `docs-config.yml` include workflows that orchestrate the shared jobs defined in `shared-config.yml`. Using this kind of set up you can include anything that should _always_ run in the shared configuration.
 
 [,yml]
 ----
@@ -304,12 +304,23 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: echo "Running tests"
+
+  any-change:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "This is a shared job that will reun for any change in the project."
+
+workflows:
+  run-on-any-change:
+    jobs:
+      - any-change
 ----
 
 [#directory-specific-config-1]
 === Directory-specific configuration
 
-The config files for building the separate directories, `src/` and `/doc`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
+The config files for building the separate directories, `src/` and `/docs`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
 
 [#code-config-1]
 ==== `code-config.yml`
@@ -395,7 +406,7 @@ workflows:
 
 For this example, consider a project that includes:
 
-* Separate directories for code (`src/`) and docs (`doc/`).
+* Separate directories for code (`src/`) and docs (`docs/`).
 * A setup configuration, `config.yml`.
 * Separate configuration files for building the code and the docs, `code-config.yml` and `docs-config.yml`.
 * A `shared/` configuration directory containing our shared jobs in separate YAML files. This is used to generate `shared-config.yml` using the xref:how-to-use-the-circleci-local-cli#packing-a-config[CircleCI CLI command] `circleci config pack`
@@ -414,7 +425,7 @@ For this example, consider a project that includes:
 │   │       ├── lint.yml
 │   │       └── test.yml
 ├── README.md
-├── doc
+├── docs
 │   └── my-docs.txt
 └── src
     └── my-code.txt
@@ -479,7 +490,7 @@ jobs:
           mapping: |
             .* always-continue true .circleci/shared-config.yml
             src/.* build-code true .circleci/code-config.yml
-            doc/.* build-docs true .circleci/docs-config.yml
+            docs/.* build-docs true .circleci/docs-config.yml
 
       # Generate the dynamic configuration based on the parameters set in the previous step.
       - path-filtering/generate-config
@@ -531,7 +542,7 @@ steps:
 [#directory-specific-config-2]
 === Directory-specific configuration
 
-The config files for building the separate directories, `src/` and `/doc`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
+The config files for building the separate directories, `src/` and `/docs`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
 
 [#code-config-2]
 ==== `code-config.yml`
