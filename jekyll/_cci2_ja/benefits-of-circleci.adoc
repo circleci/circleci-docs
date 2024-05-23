@@ -35,7 +35,7 @@ CircleCI の開発者向け機能の一例を以下に示します。
 
 また、お客様のサーバーにインストールする CircleCI Server では、オペレーターや管理者として、ビルドを監視してインサイトを取得したり、link:https://www.nomadproject.io/[Nomad] を使用してスケジューリングしたりすることも可能です。
 
-CircleCI Server について詳しくは、xref:server/overview/circleci-server-v4-overview#[CircleCI Server の概要]を参照してください。
+CircleCI Server について詳しくは、link:https://circleci.com/docs/server/v4.5/overview/circleci-server-overview[CircleCI Server の概要]を参照してください。
 
 [#pricing-options]
 == 料金オプション
