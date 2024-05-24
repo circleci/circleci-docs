@@ -201,7 +201,7 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Publish dev orb
+^| Publish development orb
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
@@ -306,17 +306,17 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Create integration token
+^| Create environment integration token
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
 
-^| Revoke integration token
+^| Revoke environment integration token
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| List integration token
+^| List environment integration token
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
