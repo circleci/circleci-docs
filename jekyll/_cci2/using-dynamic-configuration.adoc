@@ -273,7 +273,7 @@ workflows:
 
 In the event of changes to _any_ file in the repository (`.*`) the `shared-config.yml` configuration is included in the continuation configuration. The only time `shared-config.yml` will not be used is on a commit that contains no changes.
 
-NOTE: `shared-config.yml` is designed to be used either on it's own or along with other partial configurations. `code-config.yml` or `docs-config.yml` include workflows that orchestrate the shared jobs defined in `shared-config.yml`. Using this kind of set up you can include anything that should _always_ run in the shared configuration.
+NOTE: `shared-config.yml` is designed to be used either on its own or along with other partial configurations. You can include anything that should _always_ run in the shared configuration.. `code-config.yml` or `docs-config.yml` include workflows that orchestrate the shared jobs defined in `shared-config.yml` and they can be combined together to create the required pipeline for a set of changes.
 
 [,yml]
 ----
