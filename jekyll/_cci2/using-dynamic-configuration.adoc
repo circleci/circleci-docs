@@ -268,8 +268,8 @@ workflows:
             docs/.* build-docs true .circleci/docs-config.yml
 ----
 
-[#shared-jobs-1]
-=== Shared jobs
+[#shared-configuration-1]
+=== Shared configuration
 
 In the event of changes to _any_ file in the repository (`.*`) the `shared-config.yml` configuration is included in the continuation configuration. The only time `shared-config.yml` will not be used is on a commit that contains no changes.
 
