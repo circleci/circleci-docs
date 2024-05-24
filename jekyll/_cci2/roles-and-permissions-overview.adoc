@@ -291,32 +291,32 @@ The table below shows the permissions associated with each CircleCI organization
 |
 |
 
-^| Create release environment
+^| Create environment integration
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Delete environment integration
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| Delete release environment
-^| icon:check-circle[]
-^|
-^|
-
-^| View release environment
+^| View environment integration
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Create environment token
+^| Create integration token
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Revoke integration token
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| Revoke environment token
-^| icon:check-circle[]
-^|
-^|
-
-^| List environment token
+^| List integration token
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
