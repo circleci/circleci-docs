@@ -1012,8 +1012,8 @@ jobs:
 
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
-* https://circleci.com/developer/machine/image/ubuntu-2004[ubuntu-2004]
-* https://circleci.com/developer/machine/image/ubuntu-2204[ubuntu-2204]
+* https://circleci.com/developer/machine/image/ubuntu-2004[Ubuntu-2004]
+* https://circleci.com/developer/machine/image/ubuntu-2204[Ubuntu-2204]
 
 More information on the software available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
 
@@ -1697,7 +1697,7 @@ run: |
 
 NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config#defining-conditional-steps[Conditional Steps section of the reusable configuratoin reference] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config#defining-conditional-steps[Conditional Steps section of the reusable configuration reference] for more details.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1820,7 +1820,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-          version: 20.10.14
+          version: 24.0.9
 ----
 
 [.table.table-striped]
@@ -1836,7 +1836,7 @@ jobs:
 | `version`
 | N
 | String
-| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
+| Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
 |===
 
 [NOTE]
