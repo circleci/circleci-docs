@@ -1820,7 +1820,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-          version: 20.10.14
+          version: 24.0.9
 ----
 
 [.table.table-striped]
@@ -1836,7 +1836,7 @@ jobs:
 | `version`
 | N
 | String
-| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
+| Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
 |===
 
 [NOTE]
