@@ -1820,7 +1820,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-          version: 24.0.9
+          version: default
 ----
 
 [.table.table-striped]
