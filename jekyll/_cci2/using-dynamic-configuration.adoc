@@ -208,6 +208,8 @@ workflows:
 [#generate-a-config-file-based-on-modified-files]
 == Generate a configuration file based on modified files
 
+TIP: This project is available on link:https://github.com/CircleCI-Public/dynamic-configuration-examples/tree/generate-config-file-main[GitHub] and you can see it building on link:https://app.circleci.com/pipelines/github/CircleCI-Public/dynamic-configuration-examples?branch=generate-config-file-main[CircleCI].
+
 For this example, consider a project that includes:
 
 * Separate directories for code (`src/`) and docs (`docs/`).
@@ -216,7 +218,7 @@ For this example, consider a project that includes:
 * A `shared-config.yml` file that defines shared jobs to be used when building the code and the docs.
 * A `no-updates.yml` config file to be used in the event that a pipeline is triggered with no changes.
 
-This project is available on link:https://github.com/CircleCI-Public/dynamic-configuration-examples/tree/generate-config-file-main[GitHub] and you can see it building on link:https://app.circleci.com/pipelines/github/CircleCI-Public/dynamic-configuration-examples?branch=generate-config-file-main[CircleCI]. Each configuration file is explained in the following sections.
+Each configuration file is explained in the following sections.
 
 [,shell]
 ----
@@ -404,6 +406,8 @@ workflows:
 [#pack-generate-validate]
 == Pack, generate, and validate a configuration file for pipeline continuation
 
+TIP: This project is available on link:https://github.com/CircleCI-Public/dynamic-configuration-examples/tree/pack-validate-continue-main[GitHub] and you can see it building on link:https://app.circleci.com/pipelines/github/CircleCI-Public/dynamic-configuration-examples?branch=pack-validate-continue-main[CircleCI].
+
 For this example, consider a project that includes:
 
 * Separate directories for code (`src/`) and docs (`docs/`).
@@ -435,7 +439,7 @@ For this example, consider a project that includes:
     └── my-code.txt
 ----
 
-This project is available on link:https://github.com/CircleCI-Public/dynamic-configuration-examples/tree/pack-validate-continue-main[GitHub] and you can see it building on link:https://app.circleci.com/pipelines/github/CircleCI-Public/dynamic-configuration-examples?branch=pack-validate-continue-main[CircleCI].
+NOTE: `@shared.yml` exists to provide the required `version` key for the config in the event that a pipeline is triggered on a change outside the `src/` or `docs/` directories.
 
 [#setup-config-2]
 === Setup configuration
