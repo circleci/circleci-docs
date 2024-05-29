@@ -216,7 +216,7 @@ For this example, consider a project that includes:
 * A `shared-config.yml` file that defines shared jobs to be used when building the code and the docs.
 * A `no-updates.yml` config file to be used in the event that a pipeline is triggered with no changes.
 
-Each configuration file is explained in the following sections.
+This project is available on link:https://github.com/CircleCI-Public/dynamic-configuration-examples/tree/generate-config-file-main[GitHub] and you can see it building on link:https://app.circleci.com/pipelines/github/CircleCI-Public/dynamic-configuration-examples?branch=generate-config-file-main[CircleCI]. Each configuration file is explained in the following sections.
 
 [,shell]
 ----
@@ -422,14 +422,20 @@ For this example, consider a project that includes:
 │   ├── no-updates.yml
 │   ├── shared
 │   │   └── jobs
+│   │       ├── any-change.yml
 │   │       ├── lint.yml
 │   │       └── test.yml
+│   │   └── workflows
+│   │       ├── run-on-any-change.yml
+|   |       └── @shared.yml
 ├── README.md
 ├── docs
 │   └── my-docs.txt
 └── src
     └── my-code.txt
 ----
+
+This project is available on link:https://github.com/CircleCI-Public/dynamic-configuration-examples/tree/pack-validate-continue-main[GitHub] and you can see it building on link:https://app.circleci.com/pipelines/github/CircleCI-Public/dynamic-configuration-examples?branch=pack-validate-continue-main[CircleCI].
 
 [#setup-config-2]
 === Setup configuration
@@ -485,7 +491,7 @@ jobs:
 
       # The mapping will be used to generate the dynamic configuration for all conditions that match.
       - path-filtering/set-parameters:
-          base-revision: main
+          base-revision: pack-validate-continue-main
           config-path: .circleci/no-updates.yml
           mapping: |
             .* always-continue true .circleci/shared-config.yml
@@ -510,12 +516,34 @@ workflows:
       - setup
 ----
 
-[#shared-jobs-2]
-=== Shared jobs
+[#shared-configuration]
+=== Shared configuration
 
-In this example, shared jobs, `lint` and `test`, are stored in individual YAML files using a directory structure compatible with the `circleci config pack` command. Jobs are stored in a `jobs` folder, commands stored in a `commands` folder, and so on. These files can be used in the setup stage of our dynamic configuration to generate a shared configuration by "packing" the relevant components together.
+In this example, shared configuration elements are stored in individual YAML files using a directory structure compatible with the `circleci config pack` command.
+
+Jobs are stored in a `jobs` folder, workflows stored in a `workflows` folder, and so on. These files can be used in the setup stage of our dynamic configuration to generate a shared configuration by "packing" the relevant components together.
 
 TIP: When packing a config using `circleci config pack`, the component names are not included in the configuration files, they are taken from the file names.
+
+==== `shared/workflows/run-on-any-change.yml`
+
+This workflow runs the job `any-change` on all pipelines triggered by a change in the repository, even if that change is outside of the `/src` or `/docs` directories.
+
+[,yml]
+----
+jobs:
+  - any-change
+----
+
+==== `shared/jobs/any-change.yml`
+
+[,yml]
+----
+docker:
+  - image: cimg/base:stable
+steps:
+  - run: echo "This is a shared job that will run for any change in the project."
+----
 
 [#lint]
 ==== `shared/jobs/lint.yml`
