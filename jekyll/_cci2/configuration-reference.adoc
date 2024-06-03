@@ -674,7 +674,7 @@ See the xref:reusing-config#using-parameters-in-executors[Using Parameters in Ex
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see xref:sample-config#[Sample config.yml] for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using link:#workflows[workflows].
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using xref:workflows#[workflows].
 
 '''
 
