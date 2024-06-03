@@ -4,7 +4,7 @@ contentTags:
   - Server v4.3
   - Server Admin
 ---
-= Phase 3 - Execution environments
+= Phase 3 - execution environments
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -144,7 +144,7 @@ ifndef::env-gcp[]
 ==== AWS autoscaler IAM/role
 Create an IAM user or role and policy for Nomad Autoscaler. You may take **one** of the following approaches:
 
-* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access and secret key will be available in Terraform's output.
+* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[Nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access and secret key will be available in Terraform's output.
 * Create a Nomad Autoscaler IAM user manually with the <<iam-policy-for-nomad-autoscaler,IAM policy below>>. Then, generate an access and secret key for this user.
 * You may create a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
 
@@ -250,7 +250,7 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using xref:phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
@@ -274,7 +274,7 @@ When creating a Nomad GCP service account manually, the service account will nee
 endif::env-aws[]
 
 [#nomad-servers]
-== 2. Nomad Servers
+== 2. Nomad servers
 
 Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad Servers.
 
@@ -308,7 +308,7 @@ Once the Kubernetes Secret exists, no change to `values.yaml` is required. The K
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
-CircleCI will create the Kubernetes Secret "nomad-gossip-encryption-key" automatically.
+CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automatically.
 
 --
 
@@ -410,11 +410,11 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 ----
 
 [#nomad-clients-validation]
-=== 3. Nomad Clients Validation
+=== 3. Nomad clients validation
 
-CircleCI has created a project called link:https://github.com/circleci/realitycheck[reality check] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of reality check will move from red (fail) to green (pass).
+CircleCI has created a project called link:https://github.com/circleci/realitycheck[Reality Check] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of Reality Check will move from red (fail) to green (pass).
 
-Before running reality check, check if the Nomad servers can communicate with the Nomad clients by executing the below command.
+Before running Reality Check, check if the Nomad servers can communicate with the Nomad clients by executing the below command.
 
 [source,shell]
 ----
@@ -429,10 +429,10 @@ ID        DC       Name              Class        Drain  Eligibility  Status
 132ed55b  default  ip-192-168-44-29  linux-64bit  false  eligible     ready
 ----
 
-To run reality check, you need to clone the repository. Depending on your GitHub setup, you can use one of the following commands:
+To run Reality Check, you need to clone the repository. Depending on your GitHub setup, you can use one of the following commands:
 
 [#github-cloud]
-==== GitHub Cloud
+==== GitHub cloud
 
 [source,shell]
 ----
@@ -449,7 +449,7 @@ git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions please see the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
+Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions see the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
 
 .Environmental Variables
 [.table.table-striped]
@@ -485,9 +485,9 @@ Once you have successfully cloned the repository, you can follow it from within 
 |Leave blank
 |===
 
-Once you have configured the environmental variables and contexts, rerun the reality check tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following:
+Once you have configured the environmental variables and contexts, rerun the Reality Check tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following:
 
-image::realitycheck-pipeline.png[Screenshot showing the reality check project building in the CircleCI app]
+image::realitycheck-pipeline.png[Screenshot showing the Reality Check project building in the CircleCI app]
 
 [#machine-provisioner]
 == 3. Machine provisioner
@@ -552,9 +552,9 @@ There are two ways to authenticate CircleCI with your cloud provider: IAM Roles 
 --
 The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring machine provisioner in CircleCI.
 
-. *Create identity provider*
+. *Create Identity Provider*
 +
-Create an IAM OIDC identity provider for your EKS Cluster:
+Create an IAM OIDC Identity Provider for your EKS Cluster:
 +
 [source,shell]
 ----
@@ -1040,7 +1040,7 @@ namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion43} -f <path-to-values.yaml>
 ----
 
-Once you have configured and deployed CircleCI server, you should validate that machine provisioner is operational. You can rerun the reality check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
+Once you have configured and deployed CircleCI server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
 
 [#runner]
 == 4. Runner
