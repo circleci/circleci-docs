@@ -121,7 +121,7 @@ For an example of config splitting, see the xref:using-dynamic-configuration#pac
 
 TIP: For more information on managing orbs in a server installation see the xref:/server/v4.5/operator/managing-orbs#[Managing orbs] page.
 
-If you are using CircleCI server there are a few extra steps you will need to take to use the dynamic configuraiton orbs.
+If you are using CircleCI server there are a few extra steps you will need to take to use the dynamic configuration orbs.
 
 * You will need to import the path filtering and continuation orbs into your server installation using the following commands:
 +
