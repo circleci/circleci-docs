@@ -674,7 +674,7 @@ See the xref:reusing-config#using-parameters-in-executors[Using Parameters in Ex
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see xref:sample-config#[Sample config.yml] for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using link:workflows#[workflows].
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using xref:workflows#[workflows].
 
 '''
 
@@ -863,7 +863,7 @@ Configured by `docker` key which takes a list of maps:
 
 For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
 This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
-A link:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
+A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the link:using-docker#[Using the Docker Execution Environment] page.
 
@@ -2052,7 +2052,7 @@ Example:
 [#deploy-deprecated]
 ===== *`deploy` - DEPRECATED*
 
-See <<run>> for current processes. If you have parallelism `> 1` in your job, see the link:migrate-from-deploy-to-run#[Migrate from deploy to run] guide.
+See <<run>> for current processes. If you have parallelism `> 1` in your job, see the xref:migrate-from-deploy-to-run#[Migrate from deploy to run] guide.
 
 '''
 
