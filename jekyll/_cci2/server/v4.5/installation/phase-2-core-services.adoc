@@ -405,13 +405,13 @@ global:
 
 [#static-ips]
 === i. Static IP addresses
-If you provisioned a Static IP (GCP) or Elastic IP addresses (AWS) in the prerequisites, you can now add the values under the NGINX block.
+If you provisioned a Static IP (GCP) or Elastic IP addresses (AWS) in the prerequisites, you can now add the values under the nginx block.
 
 ifndef::env-gcp[]
 
 [#gcp-add-static-ip]
 ==== GCP - add static IP address
-For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the NGINX block.
+For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
 
 [source,yaml]
 ----
@@ -427,7 +427,7 @@ ifndef::env-aws[]
 
 [#aws-add-elastic-ip]
 ==== AWS - add Elastic IP addresses
-For AWS, under NGINX annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. The number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
+For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. The number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
 
 
 [source,yaml]
@@ -852,7 +852,7 @@ You may add the keyset to your `values.yaml` under `tink` as in the example belo
 [source,yaml]
 ----
 tink:
-  enabled: false
+  enabled: true
   keyset: "<your-keyset>"
 ----
 --
@@ -875,9 +875,9 @@ helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 [#create-dns-entry]
 == 5. Create DNS entry
-Create a DNS entry for your NGINX load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
+Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
-You need the IP address, or, if using AWS, the DNS name of the NGINX load balancer. You can find this information with the following command:
+You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
 
 [source,shell]
 ----
