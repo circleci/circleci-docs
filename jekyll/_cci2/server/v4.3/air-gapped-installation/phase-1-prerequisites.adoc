@@ -60,7 +60,7 @@ Download all images required for the release of CircleCI server to your local ma
 
 [source, bash]
 ----
-SERVER_4_2_IMAGE_LIST=`cat <<EOF
+SERVER_4_3_IMAGE_LIST=`cat <<EOF
 bitnami/postgresql:12.6.0
 cciserver.azurecr.io/api-gateway:0.1.31061-3f64088
 cciserver.azurecr.io/api-service:0.1.14854-4511416d
@@ -127,7 +127,7 @@ EOF
 
 [source, bash]
 ----
-echo $SERVER_4_2_IMAGE_LIST | while read -r image; do docker pull $image; done
+echo $SERVER_4_3_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]
