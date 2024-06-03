@@ -122,6 +122,8 @@ en:
             link: workflows
           - name: Use workspaces to share data between jobs
             link: workspaces
+          - name: Dynamic configuration
+            link: dynamic-config
           - name: Skip or cancel jobs and workflows
             link: skip-build
           - name: Pipeline values and parameters
@@ -144,6 +146,8 @@ en:
             link: using-branch-filters
           - name: Selecting a workflow to run
             link: selecting-a-workflow-to-run-using-pipeline-parameters
+          - name: Use dynamic configuration
+            link: using-dynamic-configuration
           - name: Migrate scheduled workflows to scheduled pipelines
             link: migrate-scheduled-workflows-to-scheduled-pipelines
           - name: Schedule pipelines with multiple workflows
