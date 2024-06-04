@@ -134,8 +134,8 @@ machine_provisioner:
 ----
 
 [#add-additional-nginx-annotations]
-=== g. Add additional NGINX annotations
-Add any additional NGINX annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+=== g. Add additional nginx annotations
+Add any additional nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [source, yaml]
 ----
