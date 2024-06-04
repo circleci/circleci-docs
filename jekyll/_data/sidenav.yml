@@ -122,6 +122,8 @@ en:
             link: workflows
           - name: Use workspaces to share data between jobs
             link: workspaces
+          - name: Dynamic configuration
+            link: dynamic-config
           - name: Skip or cancel jobs and workflows
             link: skip-build
           - name: Pipeline values and parameters
@@ -146,6 +148,8 @@ en:
             link: using-branch-filters
           - name: Selecting a workflow to run
             link: selecting-a-workflow-to-run-using-pipeline-parameters
+          - name: Use dynamic configuration
+            link: using-dynamic-configuration
           - name: Migrate scheduled workflows to scheduled pipelines
             link: migrate-scheduled-workflows-to-scheduled-pipelines
           - name: Schedule pipelines with multiple workflows
@@ -1097,70 +1101,6 @@ en:
           - name: FAQs
             link: server/v4.1/operator/faq
 
-  - name: Server administration v4.0
-    icon: icons/sidebar/admin-new.svg
-    children:
-      - name: Server v4.0 overview
-        children:
-          - name: CircleCI server v4.x overview
-            link: server/overview/circleci-server-v4-overview
-          - name: Release notes
-            link: server/overview/release-notes
-      - name: Server v4.0 installation
-        children:
-          - name: Phase 1 - Prerequisites
-            link: server/installation/phase-1-prerequisites
-          - name: Phase 2 - Core
-            link: server/installation/phase-2-core-services
-          - name: Phase 3 - Execution
-            link: server/installation/phase-3-execution-environments
-          - name: Phase 4 - Post-installation
-            link: server/installation/phase-4-post-installation
-          - name: Hardening your cluster
-            link: server/installation/hardening-your-cluster
-          - name: Installing server behind a proxy
-            link: server/installation/installing-server-behind-a-proxy
-          - name: Migrate from server v3 to v4
-            link: server/installation/migrate-from-server-3-to-server-4
-          - name: Migrate from server v2 to v4
-            link: server/installation/migrate-from-server-2-to-server-4
-          - name: Upgrade server v4.x
-            link: server/installation/upgrade-server-4
-          - name: Installation reference
-            link: server/installation/installation-reference
-      - name: Server v4.0 operations
-        children:
-          - name: Operator overview
-            link: server/operator/operator-overview
-          - name: Introduction to Nomad cluster operation
-            link: server/operator/introduction-to-nomad-cluster-operation
-          - name: Managing user accounts
-            link: server/operator/managing-user-accounts
-          - name: Managing orbs
-            link: server/operator/managing-orbs
-          - name: Manage virtual machines with VM service
-            link: server/operator/manage-virtual-machines-with-vm-service
-          - name: Configuring external services
-            link: server/operator/configuring-external-services
-          - name: Expanding internal database volumes
-            link: server/operator/expanding-internal-database-volumes
-          - name: Managing load balancers
-            link: server/operator/managing-load-balancers
-          - name: User authentication
-            link: server/operator/user-authentication
-          - name: Managing build artifacts
-            link: server/operator/managing-build-artifacts
-          - name: Usage data collection
-            link: server/operator/usage-data-collection
-          - name: CircleCI server security features
-            link: server/operator/circleci-server-security-features
-          - name: Application lifecycle
-            link: server/operator/application-lifecycle
-          - name: Troubleshooting and support
-            link: server/operator/troubleshooting-and-support
-          - name: Backup and restore
-            link: server/operator/backup-and-restore
-
   - name: Plans and pricing
     icon: icons/sidebar/plans-outline.svg
     children:
@@ -2039,112 +1979,6 @@ ja:
           - name: API v1.1 Reference
             link: https://circleci.com/docs/api/v1
             i18n_name: API v1.1リファレンス
-
-  - name: Server Administration v4.x
-    i18n_name: Server v4.x 管理
-    icon: icons/sidebar/admin-new.svg
-    children:
-      - name: Server v4.x Overview
-        i18n_name: Server v4.xの概要
-        children:
-          - name: CircleCI server v4.x overview
-            link: ja/server/overview/circleci-server-v4-overview
-            i18n_name: 概要
-          - name: Release notes
-            link: ja/server/overview/release-notes
-            i18n_name: リリースノート
-      - name: Server v4.x Installation
-        i18n_name: Server v4.xのインストール
-        children:
-          - name: Phase 1 - Prerequisites
-            link: ja/server/installation/phase-1-prerequisites
-            i18n_name: ステップ1 - 前提条件
-          - name: Phase 2 - Core
-            link: ja/server/installation/phase-2-core-services
-            i18n_name: ステップ2 - コアサービス
-          - name: Phase 3 - Execution
-            link: ja/server/installation/phase-3-execution-environments
-            i18n_name: ステップ3 - 実行環境
-          - name: Phase 4 - Post-installation
-            link: ja/server/installation/phase-4-post-installation
-            i18n_name: ステップ4 - インストールの後処理
-          - name: Hardening your cluster
-            link: ja/server/installation/hardening-your-cluster
-            i18n_name: クラスタのセキュリティ強化
-          - name: Installing server behind a proxy
-            link: ja/server/installation/installing-server-behind-a-proxy
-            i18n_name: プロキシ経由のインストール
-          - name: Migrate from server v3 to v4
-            link: ja/server/installation/migrate-from-server-3-to-server-4
-            i18n_name: v3からv4への移行
-          - name: Upgrade server v4.x
-            link: ja/server/installation/upgrade-server-4
-            i18n_name: v4.xのアップグレード
-          - name: Installation reference
-            link: ja/server/installation/installation-reference
-            i18n_name: インストールのリファレンスガイド
-      - name: Server v4.x operations
-        i18n_name: v3.x 管理者ガイド
-        children:
-          - name: Operator overview
-            link: ja/server/operator/operator-overview
-            i18n_name: 概要
-          - name: Introduction to Nomad cluster operation
-            link: ja/server/operator/introduction-to-nomad-cluster-operation
-            i18n_name: Nomadクラスタの操作
-          - name: Managing user accounts
-            link: ja/server/operator/managing-user-accounts
-            i18n_name: ユーザーアカウントの管理
-          - name: Managing orbs
-            link: ja/server/operator/managing-orbs
-            i18n_name: Orbの管理
-          - name: Manage virtual machines with VM service
-            link: ja/server/operator/manage-virtual-machines-with-vm-service
-            i18n_name: VMの管理
-          - name: Configuring external services
-            link: ja/server/operator/configuring-external-services
-            i18n_name: 外部サービスの設定
-          - name: Expanding internal database volumes
-            link: ja/server/operator/expanding-internal-database-volumes
-            i18n_name: 内部データベースのボリューム拡張
-          - name: Managing load balancers
-            link: ja/server/operator/managing-load-balancers
-            i18n_name: ロードバランサーの管理
-          - name: User authentication
-            link: ja/server/operator/user-authentication
-            i18n_name: ユーザー認証
-          - name: Managing build artifacts
-            link: ja/server/operator/managing-build-artifacts
-            i18n_name: ビルドアーティファクトの管理
-          - name: Usage data collection
-            link: ja/server/operator/usage-data-collection
-            i18n_name: 使用状況データの収集
-          - name: CircleCI server security features
-            link: ja/server/operator/circleci-server-security-features
-            i18n_name: セキュリティ機能
-          - name: Application lifecycle
-            link: ja/server/operator/application-lifecycle
-            i18n_name: アプリケーション ライフサイクル
-          - name: Troubleshooting and support
-            link: ja/server/operator/troubleshooting-and-support
-            i18n_name: トラブルシュートとサポート
-          - name: Backup and restore
-            link: ja/server/operator/backup-and-restore
-            i18n_name: バックアップと復元
-      - name: Server v4.0.0 PDF
-        children:
-          - name: v4.0.0 Overview
-            link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
-            i18n_name: v4.0.0 概要
-          - name: v4.0.0 Installation Guide for AWS
-            link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
-            i18n_name: v4.0.0 インストールガイド AWS
-          - name: v4.0.0 Installation Guide for GCP
-            link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
-            i18n_name: v4.0.0 インストールガイド GCP
-          - name: v4.0.0 Operations Guide
-            link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
-            i18n_name: v4.0.0 管理者ガイド
 
   - name: CircleCI Plans
     i18n_name: CircleCIのプラン設定

@@ -136,7 +136,7 @@ You will need to allow your AWS account to trust CircleCI's OpenID Connect token
 +
 {% include snippets/find-organization-id.adoc %}
 
-. Once your have created your Identity Provider, a banner will appear at the top of the ADW console with the options to **Assign role**. Click this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
+. Once your have created your Identity Provider, a banner will appear at the top of the AWS console with the options to **Assign role**. Click this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
 +
 ** The **Identity Provider** that you just created.
 ** For **Audience**, choose the only option, which is your organization ID that you entered earlier.

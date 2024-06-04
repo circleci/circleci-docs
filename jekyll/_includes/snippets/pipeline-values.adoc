@@ -411,7 +411,7 @@ a|  * GitLab: push, merge request
 | `pipeline.trigger_parameters.webhook.body`
 | Inbound webhook
 | String
-| The body of the payload that was sent with an xref:triggers-overview/#trigger-a-pipeline-from-an-inbound-webhook#[inbound webhook].
+| The body of the payload that was sent with an xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[inbound webhook].
 | icon:check[]
 | icon:times[]
 

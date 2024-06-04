@@ -4,7 +4,7 @@ contentTags:
   - Server v4.1
   - Server Admin
 ---
-= Phase 4 - Post installation
+= Phase 4 - post installation
 :page-layout: classic-docs
 :icons: font
 :experimental:
@@ -22,7 +22,7 @@ Backups of CircleCI server can be created through link:https://velero.io/[Velero
 
 
 [#email-notifications]
-== Email Notifications
+== Email notifications
 
 Add email notification support by adding the following to `values.yaml`:
 
@@ -51,6 +51,5 @@ ifndef::pdf[]
 == Next steps
 
 * xref:hardening-your-cluster#[Hardening Your Cluster]
-* xref:../../installation/migrate-from-server-3-to-server-4#[Server 4.x Migration]
 * xref:../operator/backup-and-restore#[Backup & Restore]
 endif::[]

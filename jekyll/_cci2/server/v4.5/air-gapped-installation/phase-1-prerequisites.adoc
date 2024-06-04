@@ -61,7 +61,7 @@ Download all images required for the release of CircleCI server to your local ma
 
 [,bash]
 ----
-SERVER_4_2_IMAGE_LIST=`cat <<EOF
+SERVER_4_5_IMAGE_LIST=`cat <<EOF
 cciserver.azurecr.io/docker-agent:1.0.16422-f79384c
 cciserver.azurecr.io/picard:1.0.234836-59bdf2c3
 cciserver.azurecr.io/machine-agent:1.0.70126-8f96354
@@ -135,7 +135,7 @@ EOF
 
 [source, bash]
 ----
-echo $SERVER_4_2_IMAGE_LIST | while read -r image; do docker pull $image; done
+echo $SERVER_4_5_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]

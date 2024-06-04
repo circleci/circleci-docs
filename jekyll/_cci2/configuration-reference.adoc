@@ -674,7 +674,7 @@ See the xref:reusing-config#using-parameters-in-executors[Using Parameters in Ex
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see xref:sample-config#[Sample config.yml] for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using link:workflows#[workflows].
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using xref:workflows#[workflows].
 
 '''
 
@@ -863,7 +863,7 @@ Configured by `docker` key which takes a list of maps:
 
 For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
 This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
-A link:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
+A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the link:using-docker#[Using the Docker Execution Environment] page.
 
@@ -1012,8 +1012,8 @@ jobs:
 
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
-* https://circleci.com/developer/machine/image/ubuntu-2004[ubuntu-2004]
-* https://circleci.com/developer/machine/image/ubuntu-2204[ubuntu-2204]
+* https://circleci.com/developer/machine/image/ubuntu-2004[Ubuntu-2004]
+* https://circleci.com/developer/machine/image/ubuntu-2204[Ubuntu-2204]
 
 More information on the software available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
 
@@ -1697,7 +1697,7 @@ run: |
 
 NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config#defining-conditional-steps[Conditional Steps section of the reusable configuratoin reference] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config#defining-conditional-steps[Conditional Steps section of the reusable configuration reference] for more details.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1820,7 +1820,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-          version: 20.10.14
+          version: default
 ----
 
 [.table.table-striped]
@@ -1836,7 +1836,7 @@ jobs:
 | `version`
 | N
 | String
-| Version string of Docker you would like to use (default: `20.10.17`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
+| Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
 |===
 
 [NOTE]
@@ -2052,7 +2052,7 @@ Example:
 [#deploy-deprecated]
 ===== *`deploy` - DEPRECATED*
 
-See <<run>> for current processes. If you have parallelism `> 1` in your job, see the link:migrate-from-deploy-to-run#[Migrate from deploy to run] guide.
+See <<run>> for current processes. If you have parallelism `> 1` in your job, see the xref:migrate-from-deploy-to-run#[Migrate from deploy to run] guide.
 
 '''
 
