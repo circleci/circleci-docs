@@ -92,6 +92,15 @@ distributor:
   launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
 ----
 
+Update the runner_admin section of the `values.yaml` file to point `external.launch_agent_base_url` to the `circleci-data` bucket.
+
+[source, yaml]
+----
+runner_admin:
+  external:
+    launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
+----
+
 NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
 
 NOTE: Update the protocol to `http` or `https` depending on your MinIO installation.
@@ -125,8 +134,8 @@ machine_provisioner:
 ----
 
 [#add-additional-nginx-annotations]
-=== g. Add additional NGINX annotations
-Add any additional NGINX annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
+=== g. Add additional nginx annotations
+Add any additional nginx annotations as necessary depending on your installation to provision a load balancer. In this example, MetalLB is used. For more information, see the xref:additional-considerations/#service-type-load-balancers-k3s[Service Type Load Balancers in K3s] section on the Additional considerations page.
 
 [source, yaml]
 ----

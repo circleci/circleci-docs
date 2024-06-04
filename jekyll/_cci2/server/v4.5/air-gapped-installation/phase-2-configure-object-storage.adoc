@@ -124,6 +124,34 @@ CIRCLE_AGENT_VERSION/
 
 image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 
+[#copy-other-miscellaneous-files]
+== 3. Copy other miscellaneous files
+Follow the steps in this section to copy the required files into MinIO within your air-gapped environment.
+
+[#copy-canary-txt-file]
+=== a. Copy canary.txt file
+Download the `canary.txt` file required by distributor.
+
+[,bash]
+----
+# Download canary.txt
+curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.txt
+----
+
+Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
+
+[#copy-candidate-txt-file]
+=== b. Copy candidate.txt file
+Download the `candidate.txt` file required by `runner_admin`.
+
+[,bash]
+----
+# Download candidate.txt
+curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/candidate.txt
+----
+
+Copy this `candidate.txt` file to the root directory of the `circleci-data` bucket.
+
 [#next-steps]
 == Next steps
 
