@@ -140,6 +140,7 @@ Java
 JavaScript
 Jest
 Jira
+jq\b
 JUnit
 JVM
 kaniko

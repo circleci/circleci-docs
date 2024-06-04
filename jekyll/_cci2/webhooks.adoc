@@ -91,6 +91,28 @@ To configure webhooks within the CircleCI app:
 
 === Extract inbound webhook payload data
 
+The inbound webhook body is available by using the `pipeline.trigger_parameters.webhook.body` pipeline value.
+
+The following example shows how you can use `jq` to extract values you want to use in your configuration into environment variables. In this example the webhook body contains a property called `branch`. `jq` is installed and used to extract the `branch` value into an environment variable, which is then used in the following GitHub clone command.
+
+TIP: The xref:configuration-reference#commands[command] configured in this example uses commands from the link:https://circleci.com/developer/orbs/orb/circleci/jq[jq] and link:https://circleci.com/developer/orbs/orb/circleci/github-cli[GitHub CLI] orbs.
+
+[,yaml]
+----
+commands:
+  shallow_clone:
+    description: Shallow Git Clone
+    steps:
+      - gh/setup:
+          token: "GITHUB_TOKEN_ALACRITY_BOT"
+      - jq/install
+      - run:
+          name: Shallow Clone
+          environment:
+            WEBHOOK_BRANCH: << pipeline.trigger_parameters.webhook.body >> | jq .branch
+          command: gh repo clone << pipeline.trigger_parameters.github_app.repo_url >> . -- --depth 10 --branch "$WEBHOOK_BRANCH"
+----
+
 == Outbound webhooks
 
 #intro para#
