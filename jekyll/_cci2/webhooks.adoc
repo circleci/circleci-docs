@@ -81,7 +81,7 @@ To configure webhooks within the CircleCI app:
 
 === Inbound webhook setup
 
-#Make inbound webhook setup into a snippet and reuse here#
+{% include snippets/inbound-webhook-setup.adoc %}
 
 == Inbound webhooks
 
