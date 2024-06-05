@@ -121,6 +121,8 @@ Navigate to Project B in the CircleCI web app and set up an inbound webhook by f
 
 Navigate to Project A in the CircleCI web app and set up an environment variable. The value of the environment variable will be the secret from the inbound webhook you just set up for Project B.
 
+TIP: As an alternative, you can add an environment variable using a xref:contexts#[context].
+
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
 . Select **Environment Variables** from the sidebar
@@ -155,9 +157,11 @@ workflows:
 
 === Extract inbound webhook payload data
 
-The inbound webhook body is available by using the `pipeline.trigger_parameters.webhook.body` pipeline value.
+The inbound webhook body is available by using the `pipeline.trigger_parameters.webhook.body` xref:variables#pipeline-values[pipeline value].
 
-The following example shows how you can use `jq` to extract values you want to use in your configuration into environment variables. In this example the webhook body contains a property called `branch`. `jq` is installed and used to extract the `branch` value into an environment variable, which is then used in the following GitHub clone command.
+The following example shows how you can use `jq` to extract values from the webhook payload into environment variables when you want to use them in your configuration.
+
+In this example the webhook body contains a property called `branch`. `jq` is installed and used to extract the `branch` value into an environment variable names `WEBHOOK_BRANCH`, which is then used in a GitHub clone command.
 
 TIP: The xref:configuration-reference#commands[command] configured in this example uses commands from the link:https://circleci.com/developer/orbs/orb/circleci/jq[jq] and link:https://circleci.com/developer/orbs/orb/circleci/github-cli[GitHub CLI] orbs.
 
@@ -179,7 +183,7 @@ commands:
 
 == Outbound webhooks
 
-#intro para#
+Use outbound webhooks to integrate your CircleCI builds with external services. The following sections detail CircleCI outbound webhook structure and protocols.
 
 [#communication-protocol]
 === Communication protocol for outbound webhooks
