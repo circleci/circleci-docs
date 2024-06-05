@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4.x
 ---
-= Use webhooks to integrate with third party services
+= Use webhooks to integrate with services
 :page-layout: classic-docs
 :page-description: Use webhooks to integrate with third-party services and subscribe to CircleCI events
 :icons: font

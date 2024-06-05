@@ -136,7 +136,7 @@ en:
         children:
           - name: Triggers overview
             link: triggers-overview
-          - name: Use webhooks to integrate with third party services
+          - name: Use webhooks to integrate with services
             link: webhooks
       - name: How-to guides
         children:
