@@ -81,13 +81,77 @@ To configure webhooks within the CircleCI app:
 
 === Inbound webhook setup
 
+Follow these steps to set up and test an inbound webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
+
 {% include snippets/inbound-webhook-setup.adoc %}
+
+. You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
++
+NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
++
+[,shell]
+----
+curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
+----
+
+See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
 == Inbound webhooks
 
-#intro para#
+Use **inbound webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command. This section presents some use cases for CircleCI inbound webhooks.
 
 === Trigger one pipeline from another with inbound webhooks
+
+Use an inbound webhook to configure one pipeline to trigger a second pipeline. For example, you might need to run a set of integration tests on a repository after you have made a change to a separate repository.
+
+For this example, assume you have two projects in separate repositories:
+
+* Project A
+* Project B
+
+When a change is made to Project A, we want the full Project A configuration to be run, and then the Project B pipeline should be triggered. To achieve this, follow these steps:
+
+==== 1. Set up an inbound webhook for Project B
+
+Navigate to Project B in the CircleCI web app and set up an inbound webhook by following these steps:
+
+{% include snippets/inbound-webhook-setup.adoc %}
+
+==== 2. Configure Project A to trigger Project B
+
+Navigate to Project A in the CircleCI web app and set up an environment variable. The value of the environment variable will be the secret from the inbound webhook you just set up for Project B.
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Environment Variables** from the sidebar
+. Select btn:[Add Environment Variable]
+. Give your environment variable a name, for example, `WEBHOOK_SECRET`
+. Update your Project A configuration file with a step that will trigger a pipeline for Project B, for example (lines 13-16):
++
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: example
+          command: echo "one step"
+
+      - run:
+          name: Kick off new pipeline
+          command: |
+              curl -X POST -H "content-type: application/json" "https://internal.circleci.com/private/soc/e/6ccfca1c-5ed6-4dcf-96ca-374969d6edcb?secret=${WEBHOOK_SECRET}"
+
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello
+----
 
 === Extract inbound webhook payload data
 

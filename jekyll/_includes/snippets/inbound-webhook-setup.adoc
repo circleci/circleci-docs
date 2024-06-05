@@ -1,7 +1,5 @@
 NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
-Follow these steps to set up and test an inbound webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
-
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
 . Select **Triggers** in the sidebar
@@ -21,14 +19,3 @@ image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an in
 CAUTION: The secret will not be shown again so be sure to copy the URL before clicking **Done**.
 +
 image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
-
-. You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
-+
-NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
-+
-[,shell]
-----
-curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
-----
-
-See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].

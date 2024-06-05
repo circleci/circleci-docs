@@ -67,7 +67,20 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 [#trigger-a-pipeline-from-an-inbound-webhook]
 == Trigger a pipeline from an inbound webhook
 
+Follow these steps to set up and test an inbound webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
+
 {% include snippets/inbound-webhook-setup.adoc %}
+
+. You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
++
+NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
++
+[,shell]
+----
+curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
+----
+
+See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config

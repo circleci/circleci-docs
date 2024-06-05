@@ -190,6 +190,8 @@ PowerShell
 [Pp]re
 preallocate
 [Pp]rox[ying|ied]
+\bProject A\b
+\bProject B\b
 Pusher
 PVC
 Python
