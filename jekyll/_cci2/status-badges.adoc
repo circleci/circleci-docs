@@ -161,3 +161,8 @@ image::{{site.baseurl}}/assets/img/docs/svg-failed.png[Failed `svg` version]
 image::{{site.baseurl}}/assets/img/docs/shield-passing.png[Passing shield version]
 
 image::{{site.baseurl}}/assets/img/docs/shield-failing.png[Failing shield version]
+
+[#known-issues-and-limitations]
+== Known issues and limitations
+
+* In certain cases where there are multiple workflows running within a pipeline, there is a known bug where the status badge will show the result (Red or Green) of the latest workflow that has completed running instead of waiting for all of the workflows in a pipeline to finish terminating and then updating the badge (Red or Green) to use the result of the last workflow.
