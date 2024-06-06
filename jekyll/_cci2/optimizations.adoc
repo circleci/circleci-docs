@@ -72,7 +72,7 @@ Workflows provide a means to define a collection of jobs and their run order. If
 [#parallelism]
 === Parallelism
 
-If your project has a large test suite, you can configure your build to use xref:configuration-reference#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file-basis You can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use xref:configuration-reference#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file-basis. You can also manually customize how tests are allocated.
 
 * Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs#[Parallelism and test splitting] page.
 * Refer to the xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests] how-to guide.
