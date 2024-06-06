@@ -1887,7 +1887,7 @@ NOTE: If the cache for the given `key` already exists it will not be modified, a
 When storing a new cache, the `key` value may contain special, templated, values for your convenience:
 
 [.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=2*, options="header", stripes=even]
 |===
 | Template | Description
 
