@@ -106,6 +106,8 @@ Use an inbound webhook to configure one pipeline to trigger a second pipeline. F
 
 For this example, assume you have two projects in separate repositories:
 
+TIP: You can also use this method to trigger one pipeline from another within the _same_ project.
+
 * Project A
 * Project B
 
