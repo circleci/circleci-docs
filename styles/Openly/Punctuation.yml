@@ -1,0 +1,13 @@
+---
+extends: substitution
+message: Use '%s' instead of '%s'
+level: error
+scope: text
+ignorecase: false
+nonword: true
+action:
+  name: replace
+swap:
+  e\.g\.: eg
+  i\.e\.: ie
+  \b(?:eg|ie)[^,]: eg, or ie,
