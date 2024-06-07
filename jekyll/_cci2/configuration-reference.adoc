@@ -760,7 +760,11 @@ A map of environment variable names and values. For more information on defining
 
 This feature is used to optimize test steps. If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel.
 
-You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time. Learn more on the xref:parallelism-faster-jobs#[Test splitting and parallelism] page.
+You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time.
+
+* Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs#[Parallelism and test splitting] page.
+* Refer to the xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests] how-to guide.
+* Follow the xref:test-splitting-tutorial#[Test splitting tutorial].
 
 Example:
 

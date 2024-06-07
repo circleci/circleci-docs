@@ -36,7 +36,7 @@ To persist data from a job and make it available to downstream jobs via the xref
 * Read more on the xref:workspaces[Workspaces] page.
 
 [#speed]
-== Speed up pipelines
+== Reduce build time
 
 [#docker-image-choice]
 === Docker image choice
@@ -72,9 +72,18 @@ Workflows provide a means to define a collection of jobs and their run order. If
 [#parallelism]
 === Parallelism
 
-If your project has a large test suite, you can configure your build to use xref:configuration-reference#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use xref:configuration-reference#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file-basis. You can also manually customize how tests are allocated.
 
-* Read more about splitting tests on the xref:parallelism-faster-jobs#[Parallelism] page.
+* Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs#[Parallelism and test splitting] page.
+* Refer to the xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests] how-to guide.
+* Follow the xref:test-splitting-tutorial#[Test splitting tutorial].
+
+[#rerun-failed-tests]
+=== Rerun failed tests
+
+Use the rerun failed tests feature to only rerun a subset of tests when a transient test failure arises, rather than rerunning the entire test suite.
+
+* For more information see the xref:rerun-failed-tests#[Rerun failed tests] page.
 
 [#resource-class]
 === Resource class
