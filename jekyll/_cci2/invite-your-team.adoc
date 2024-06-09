@@ -27,7 +27,7 @@ After creating an account, you can join an existing CircleCI organization using 
 * Search via GitHub
 * Search via Bitbucket
 
-Steps for each option are as follows:
+These options are also available using the **Join Organizaiton** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are given in the following sections.
 
 === Join an existing CircleCI organization via an invite:
 
