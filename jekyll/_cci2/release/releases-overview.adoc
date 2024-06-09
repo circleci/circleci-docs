@@ -130,7 +130,7 @@ To view all releases for a release environment, follow these steps:
 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . You are now in the timeline view. Select the **Environments** tab
-. Click to select your environment by name
+. Select your environment by name
 . You are now on the environment details page. Select the **Releases** tab to view a list of all releases for your chosen environment
 
 === View all commands run for a release environment
@@ -139,7 +139,7 @@ To view all commands run for a release environment, follow these steps:
 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . You are now in the timeline view. Select the **Environments** tab
-. Click to select your environment by name
+. Select your environment by name
 . You are now on the environment details page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment
 
 === View all releases for a component
@@ -148,7 +148,7 @@ To view all releases for a component, follow these steps:
 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . You are now in the timeline view. Select the **Components** tab
-. Click to select your component by name. You can use the filter at the top of the page to help
+. Select your component by name. You can use the filter at the top of the page to help
 . You are now on the component details page. Select the **Releases** tab to view a list of all releases for your chosen component
 
 === View all commands run for a component
@@ -157,7 +157,7 @@ To view all commands run for a component, follow these steps:
 
 . Select btn:[Releases] in the CircleCI web app sidebar
 . You are now in the timeline view. Select the **Components** tab
-. Click to select your component by name. You can use the filter at the top of the page to help
+. Select your component by name. You can use the filter at the top of the page to help
 . You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component
 
 [#releases-requirements]
