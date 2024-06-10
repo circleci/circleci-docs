@@ -1,0 +1,26 @@
+---
+extends: spelling
+message: "Did you really mean '%s'?"
+level: error
+code: false
+action:
+  name: suggest
+  params:
+    - spellings
+ignore:
+  - openly/tech-terms/security.txt
+  - openly/tech-terms/blockchain.txt
+  - openly/tech-terms/devops.txt
+  - openly/tech-terms/general.txt
+  - openly/tech-terms/techwriting.txt
+  - openly/tech-terms/mobile.txt
+  - openly/tech-terms/java.txt
+  - openly/tech-terms/linux.txt
+  - openly/tech-terms/tech-slang.txt
+  - openly/tech-terms/csharp.txt
+  - openly/tech-terms/ddd.txt
+  - openly/tech-terms/business.txt
+  - openly/tech-terms/monitoring.txt
+  - openly/tech-terms/apis.txt
+  - openly/tech-terms/geospatial.txt
+  - openly/tech-terms/javascript.txt
