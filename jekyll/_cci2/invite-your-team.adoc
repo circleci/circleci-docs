@@ -21,13 +21,17 @@ After setting up an organization in CircleCI, ensure your whole team get access.
 [#find-your-team]
 == Find your team
 
-After creating an account, you can join an existing CircleCI organization using the **Find Your Team** dropdown menu in the **Join Your Teammates** card on the link:https://app.circleci.com/home/[homepage]. There are three options:
+After creating an account, you can join an existing CircleCI organization using the **Find Your Team** dropdown menu in the **Join Your Teammates** card on the link:https://app.circleci.com/home/[homepage].
+
+image::getting-started/find-your-team.png[Screenshot showing the welcome screen with the find your team menu expanded]
+
+There are three options:
 
 * Join via an invite
 * Search via GitHub
 * Search via Bitbucket
 
-These options are also available using the **Join Organizaiton** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are given in the following sections.
+These options are also available at any time using the **Join Organization** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are outlined in the following sections.
 
 === Join an existing CircleCI organization via an invite:
 
