@@ -70,25 +70,28 @@ Workflows may appear with one of the following states:
 | We experienced an internal error starting a job in the workflow
 | Yes
 
-|
 | UNAUTHORIZED
-| One or more of the jobs terminated with a `unauthorized` job status, because the triggerer does not have access to a required restricted context.
+| One or more of the jobs terminated with a `unauthorized` job status. The triggering account does not have access to a required restricted context.
 | Yes
 |===
 
-NOTE: After 90 days non-terminal workflows will be cancelled automatically by CircleCI.
+NOTE: After 90 days non-terminal workflows will are automatically by CircleCI.
 
 [#workflows-configuration-examples]
 == Workflows configuration examples
 
-NOTE: For a full specification of the `workflows` key, see the xref:configuration-reference#workflows[Workflows] section of the Configuration Reference.
+TIP: For a full specification of the `workflows` key, see the xref:configuration-reference#workflows[Workflows] section of the Configuration Reference.
 
-To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow.
+To run a set of concurrent jobs, add a new `workflows:` section to your existing CircleCI configuration file. Give the workflow a unique name.
 
 [#concurrent-job-execution]
 === Concurrent job execution
 
-The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows` key named `build_and_test`, and by nesting the `jobs` key with a list of job names. The jobs have no dependencies defined, so they will run concurrently.
+The following example configuration file shows the default workflow orchestration of two concurrent jobs. Concurrent jobs are defined as follows:
+
+* Use the `workflows` key.
+* Name the workflow, in this case, `build_and_test`.
+* Nest the `jobs` key with a list of job names that are defined in the configuration file. In this example the jobs have no dependencies defined, so they will run concurrently.
 
 {% include snippets/docker-auth.adoc %}
 
@@ -130,7 +133,7 @@ The following example shows a workflow with four sequential jobs. The jobs run a
 
 image::/docs/assets/img/docs/sequential_workflow.png[Sequential Job Execution Workflow]
 
-The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
+The following configuration snippet is an example of a workflow configured for sequential job execution:
 
 [source,yaml]
 ----
@@ -149,7 +152,7 @@ workflows:
             - test2
 ----
 
-The dependencies are defined by setting the `requires` key as shown. The `deploy` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. So, the `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
+The dependencies are defined by setting the `requires` key as shown. The `deploy` job will not run until the `build` and `test1` and `test2` jobs complete successfully. A job must wait until all upstream jobs in the dependency graph have run. The `deploy` job waits for the `test2` job, the `test2` job waits for the `test1` job and the `test1` job waits for the `build` job.
 
 See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml[Sample Sequential Workflow config] for a full example.
 
@@ -160,7 +163,7 @@ The illustrated example workflow runs a common build job, then fans-out to run a
 
 image::/docs/assets/img/docs/fan-out-in.png[Fan-out and Fan-in Workflow]
 
-The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
+The following configuration snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
 [source,yaml]
 ----
@@ -240,7 +243,7 @@ Some things to keep in mind when using manual approval in a workflow:
 * All jobs that are to run after a manually approved job _must_ `require` the name of the approval job. Refer to the `deploy` job in the above example.
 * Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshot demonstrates a workflow the needs approval, the approval popup, and the resulting workflow map once approved.
+The following screenshot demonstrates a workflow that needs approval, the approval popup, and the resulting workflow map once approved.
 
 image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the resulting workflow map]
 
@@ -253,9 +256,13 @@ After approving, the rest of the workflow runs as configured.
 
 NOTE: *The deprecation of the scheduled workflows feature has been postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-Running a workflow for every commit for every branch can be inefficient and expensive. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
+By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
-Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is *only* added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
+Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling a workflow is an alternative to building on every commit. You can _schedule_ a workflow to run at a certain time for a specific branch or branches.
+
+Scheduling a workflow will prevent commits to your code from triggering the workflow for the specified branches, and instead the workflow will run on a schedule.
+
+Consider scheduling workflows that are resource-intensive or that generate reports on a schedule rather than on every commit. Schedule a workflow by adding a `triggers` key to the workflow configuration. The `triggers` key is *only* added under the `workflows` key. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
 
 If you do not configure any workflows in your `.circleci/config.yml`, an implicit workflow is used. If you declare a workflow to run a scheduled build, the implicit workflow is no longer run. You must add your workflow to your `config.yml` in order for CircleCI to also build on every commit.
 
@@ -263,8 +270,6 @@ NOTE: When you schedule a workflow, the workflow will be counted as an individua
 
 [#nightly-example]
 === Nightly example
-
-By default, a workflow is triggered on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`.
 
 In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax, see the link:https://www.unix.com/man-page/POSIX/1posix/crontab/[crontab man page] for `cron` syntax basics. The workflow will be run on the `main` and `beta` branches.
 
