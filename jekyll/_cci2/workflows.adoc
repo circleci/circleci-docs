@@ -5,14 +5,14 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Using Workflows to orchestrate jobs
+= Using workflows to orchestrate jobs
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :experimental:
 
-Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the workflows feature and provides example configurations.
+Workflows in CircleCI are used to orchestrate jobs, with options to control run order, scheduling, and access to resources. This page explains how to configure workflows to suit your project. Optimizing your workflow configuration can increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
 
 [#overview]
 == Overview
@@ -24,7 +24,7 @@ With workflows, you can:
 * Run and troubleshoot jobs independently with real-time status feedback.
 * Schedule workflows for jobs that should only run periodically.
 * Fan-out to run multiple jobs concurrently for efficient version testing.
-* Fan-in to quickly deploy to multiple platforms.
+* Fan-in to deploy to multiple platforms.
 
 For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire workflow to fail and rerunning the entire job set, you can rerun _just the failed job_.
 
@@ -246,7 +246,7 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 Some things to keep in mind when using manual approval in a workflow:
 
 * `approval` is a special job type that is *only* available to jobs under the `workflow` key.
-* The `hold` job must be a unique name not used by any other job. That is, your custom configured jobs, such as `build` or `test1` in the example above could not be given a `type: approval` key.
+* The `hold` job must be a unique name not used by any other job. That is, your custom configured jobs, such as `build` or `test1` in the example above would not be configured as `type: approval`.
 * The name of the approval job is arbitrary. For example, the name could be `wait` or `pause`.
 * All jobs you want to run _after_ a manual approval job _must_ `require` the name of the approval job.
 * Jobs run in the order defined in the workflow. When the workflow encounters a job with `type: approval`, the workflow pauses until approval is granted. One approval is granted the workflow continues to process jobs in the order defined in the configuration file.
@@ -379,6 +379,10 @@ The `test1` and `test2` jobs have access to environment variables stored in the 
 * Was the pipeline triggered by a user who xref:contexts#security-goup-restrictions[has access] (is in the relevant org/security group etc.)?
 * Does the xref:contexts#project-restrictions[project have access] to the context? By default all projects in an organization have access to contexts set for that organization, but restrictions on project access can be configured.
 * Does the pipeline meet the requirements of any xref:contexts#expression-restrictions[expression restrictions] set up for the context?
+
+== Use conditional logic in workflows
+
+#TODO#
 
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
@@ -576,7 +580,7 @@ image::/docs/assets/img/docs/orchestrate-and-trigger/rerun-from-failed-pipelines
 
 [tab.rerun-screenshot.Rerun_from_the_workflows_page]
 --
-image::/docs/assets/img/docs/orchestrate-and-trigger/rerun-from-failed-workflows-page.png[erun a workflow from failed from the workflows page]
+image::/docs/assets/img/docs/orchestrate-and-trigger/rerun-from-failed-workflows-page.png[Rerun a workflow from failed from the workflows page]
 --
 
 NOTE: If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow will be run with SSH enabled for that job, even after SSH capability has been disabled at the project level.
@@ -589,17 +593,14 @@ This section describes common problems and solutions for workflows.
 [#workflow-and-subsequent-jobs-do-not-trigger]
 === Workflow and subsequent jobs do not trigger
 
-If you do not see your workflows triggering, a common cause is a configuration error
-preventing the workflow from starting. As a result, the workflow does not start
-any jobs. Navigate to your project's pipelines and click on your workflow name
-to discern what might be failing.
+If you do not see your workflows trigger, a common cause is a configuration error preventing the workflow from starting. As a result, the workflow does not start any jobs. Navigate to your project's pipelines and select your workflow name to discern what might be failing.
 
 [#rerunning-workflows-fails]
 === Rerunning workflows fails
 
 In some cases, a failure may happen before the workflow runs (during pipeline processing). Re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
-NOTE: You cannot re-run jobs and workflows that are 90 days or older.
+NOTE: You cannot rerun jobs and workflows that are 90 days or older.
 
 [#workflows-waiting-for-status-in-github]
 === Workflows waiting for status in GitHub
@@ -610,7 +611,7 @@ image::/docs/assets/img/docs/github_branches_status.png[Uncheck GitHub Status Ke
 
 Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
 
-Go to menu:Settings[Branches] in GitHub and click btn:[Edit] on the protected branch to deselect the settings, for example: `\https://github.com/your-org/project/settings/branches`.
+Go to menu:Settings[Branches] in GitHub and select btn:[Edit] on the protected branch to deselect the settings, for example: `\https://github.com/your-org/project/settings/branches`.
 
 [#see-also]
 == See also
