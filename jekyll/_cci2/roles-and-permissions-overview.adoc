@@ -1,0 +1,521 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Roles and permissions
+:page-layout: classic-docs
+:page-liquid:
+:page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
+:icons: font
+:experimental:
+
+NOTE: If you authenticated your CircleCI account with xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], the content on this page applies to you.
+
+Manage user access to organizations and projects with CircleCI roles and associated permissions. By default, users can access projects based on roles set at an organization level. For more granular control, you can assign roles at the project level. Manage roles for groups of users with xref:manage-groups#[groups].
+
+[#quickstart]
+== Quickstart
+
+For instructions on managing roles and permissions, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page. For more information on managing project roles for groups of users, see the xref:manage-groups#[manage-groups] page.
+
+[#organization-role-permissions-matrix]
+== Organization role permissions matrix
+
+The table below shows the permissions associated with each CircleCI organization role:
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
+
+3+^| ORGANIZATION ROLES
+
+|
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+| *Organization*
+|
+|
+|
+
+^| Create namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| Manage namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| View org settings
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage org settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View org access
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage org access
+^| icon:check-circle[]
+^|
+^|
+
+^| View org credentials
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View org policies
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage org policies
+^| icon:check-circle[]
+^|
+^|
+
+^| View org connections
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage org connections
+^| icon:check-circle[]
+^|
+^|
+
+^| Manage org credentials
+^| icon:check-circle[]
+^|
+^|
+
+^| View org audit logs
+^| icon:check-circle[]
+^|
+^|
+
+^| View plan
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage plan
+^| icon:check-circle[]
+^|
+^|
+
+| *Insights*
+|
+|
+|
+
+^| View org insights
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Runner*
+|
+|
+|
+
+^| View runners
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage runners
+^| icon:check-circle[]
+^|
+^|
+
+| *Projects*
+|
+|
+|
+
+^| View projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Create projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage project settings
+^| icon:check-circle[]
+^|
+^|
+
+| *Contexts*
+|
+|
+|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit context variables
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage contexts
+^| icon:check-circle[]
+^|
+^|
+
+| *Orbs*
+|
+|
+|
+
+^| Create/update orb
+^| icon:check-circle[]
+^|
+^|
+
+^| View private orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Publish development orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Publish orb
+^| icon:check-circle[]
+^|
+^|
+
+| *Webhooks*
+|
+|
+|
+
+^| View org webhooks
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage org webhooks
+^| icon:check-circle[]
+^|
+^|
+
+^| View project webhooks
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage project webhooks
+^| icon:check-circle[]
+^|
+^|
+
+| *Schedule*
+|
+|
+|
+
+^| View schedule
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit schedule
+^| icon:check-circle[]
+^|
+^|
+
+| *Triggers*
+|
+|
+|
+
+^| View triggers
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Trigger re-run via the CircleCI web app
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit triggers
+^| icon:check-circle[]
+^|
+^|
+
+| *Config sources*
+|
+|
+|
+
+^| View config sources
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit config sources
+^| icon:check-circle[]
+^|
+^|
+
+| *Releases*
+|
+|
+|
+
+^| Create environment integration
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Delete environment integration
+^| icon:check-circle[]
+^|
+^|
+
+^| View environment integration
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Create environment integration token
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Revoke environment integration token
+^| icon:check-circle[]
+^|
+^|
+
+^| List environment integration token
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View components
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View releases
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+|===
+
+
+[#project-role-permissions-matrix]
+=== Project role permissions matrix
+
+The table below shows the permissions associated with each CircleCI project role:
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
+
+3+^| PROJECT ROLES
+
+|
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+| *Projects*
+|
+|
+|
+
+^| View projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View project access
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View project credentials
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage project
+^| icon:check-circle[]
+^|
+^|
+
+| *Webhooks*
+|
+|
+|
+
+^| View project webhooks
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage project webhooks
+^| icon:check-circle[]
+^|
+^|
+
+| *Schedule*
+|
+|
+|
+
+^| View schedule
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit schedule
+^| icon:check-circle[]
+^|
+^|
+
+| *Triggers*
+|
+|
+|
+
+^| View triggers
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Trigger build
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit triggers
+^| icon:check-circle[]
+^|
+^|
+
+| *Contexts*
+|
+|
+|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit context variables
+^|
+^|
+^|
+
+^| Manage contexts
+^|
+^|
+^|
+
+| *Config sources*
+|
+|
+|
+
+^| View config sources
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit config sources
+^| icon:check-circle[]
+^|
+^|
+
+| *Releases*
+|
+|
+|
+
+^| Restore component version
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Restart component
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Scale component
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Cancel release
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Promote release steps
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Retry release
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+|===
+
+[#permissions-scope]
+== Permissions scope
+
+Your CircleCI roles and associated permissions are **not** derived from the permissions set in your VCS (version control system). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
+
+For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated VCS identity.
+
+[#role-hierarchy]
+== Role hierarchy across groups and individuals
+
+Users can have roles assigned to them both individually and as part of a xref:manage-groups#[group]. The _highest_ role always applies. For example, if a user has the role of **admin** assigned for a project, and that user is also part of a group with the role of **contributor** for the project, the user will still have **admin** permissions for the project.
+
+[#next-steps]
+== Next steps
+
+* xref:manage-roles-and-permissions#[Manage roles and permissions]

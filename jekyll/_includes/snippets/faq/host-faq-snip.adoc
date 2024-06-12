@@ -7,4 +7,4 @@
 [#circleci-20-available-to-enterprise-customers]
 === Is CircleCI available to enterprise customers?
 
-Yes, CircleCI server is available for installation on AWS or GCP. See the xref:server/overview/circleci-server-v4-overview#[CircleCI server v4.x overview] for details and links to installation instructions. link:https://circleci.com/pricing/server/[Contact us] to discuss your requirements.
+Yes, CircleCI server is available for installation on AWS or GCP. See the xref:server/v4.5/overview/circleci-server-overview#[CircleCI server v4.x overview] for details and links to installation instructions. link:https://circleci.com/pricing/server/[Contact us] to discuss your requirements.

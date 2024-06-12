@@ -30,9 +30,6 @@ contentTags:
 |<<#architecture,アーキテクチャ>>
 |<<#workflows,ワークフロー機能>>
 
-|<<#dedicated-hosts-macos,macOS の専有ホスト>>
-|<<#dynamic-configuration,ダイナミックコンフィグ>>
-
 |<<#orbs,Orb>>
 |<<#billing,料金・支払い>>
 
@@ -59,11 +56,6 @@ include::../_includes/snippets/faq/ja/host-faq-snip.adoc[]
 == アーキテクチャ
 
 include::../_includes/snippets/faq/ja/architecture-faq-snip.adoc[]
-
-[#dedicated-hosts-macos]
-== macOS の専有ホスト
-
-include::../_includes/snippets/faq/ja/dedicated-hosts-macos-faq-snip.adoc[]
 
 [#orbs]
 == Orb

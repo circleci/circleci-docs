@@ -9,7 +9,7 @@ contentTags:
   - Server v3.x
 ---
 
-CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
+CircleCI offers several execution environments: Docker (x86 or Arm), Linux VM (virtual machine), macOS, Windows, GPU and Arm VM. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
 
 For each job in your project config you will specify an execution environment by assigning it an **executor**. An **executor** defines the underlying technology or environment in which to run a job, and which image to use to best-suit your project.
 
@@ -43,6 +43,9 @@ Find out more about the Docker execution environment on the [Using Docker](/docs
 
 ## Linux VM
 {: #linux-vm }
+
+**CircleCI Cloud** The use of `machine: true` is deprecated. You must specify an image to use.
+{: class="alert alert-caution"}
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine)
 
@@ -92,6 +95,9 @@ Find out more about the macOS execution environment on the [Using macOS](/docs/u
 ## Windows
 {: #windows }
 
+For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info"}
+
 To access the Windows execution environment, either use the Windows orb and then specify one of the default executor from the orb, or use the `machine` executor and specify a windows image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
 {:.tab.windowsblock.Cloud_with_orb}
@@ -111,8 +117,8 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Cloud_with_machine}
-```yml
+{:.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket}
+```yaml
 version: 2.1
 
 jobs:
@@ -123,23 +129,41 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server_3}
-```yml
+{:.tab.windowsblock.Cloud_GitHub_App_&_GitLab}
+```yaml
 version: 2.1
 
 jobs:
   build: # name of your job
-    machine: # executor type
-      image: windows-default
-    resource_class: windows.medium
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 ```
 
 Find out more about the Windows execution environment in the [Using the Windows Execution Environment](/docs/using-windows/) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
@@ -194,10 +218,10 @@ jobs:
 
 Find out more about the GPU execution environment on the [Using the GPU Execution Environment](/docs/using-gpu/) page.
 
-## Arm
+## Arm VM
 {: #arm }
 
-To access the Arm execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
+To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -257,7 +281,7 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment](/docs/using-arm/) page.
+Find out more about the Arm VM execution environment in the [Using the Arm VM Execution Environment](/docs/using-arm/) page. You can also use [Arm on Docker](/docs/using-docker/#arm).
 
 ## Self-hosted runner
 {: #self-hosted-runner }
@@ -273,4 +297,3 @@ When using a machine executor, if a port range is hardcoded, the range in `/proc
 {: #next-steps }
 
 * Read more about [Pre-built CircleCI convenience images](/docs/circleci-images/) for the Docker execution environment.
-* Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.

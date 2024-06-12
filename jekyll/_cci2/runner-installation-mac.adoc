@@ -1,7 +1,6 @@
 ---
 contentTags:
   platform:
-  - Cloud
   - Server v4.x
   - Server v3.x
 ---
@@ -14,12 +13,25 @@ contentTags:
 :machine:
 :macos:
 
-This page describes how to install CircleCI's machine runner on macOS.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up macOS self-hosted runners on CircleCI cloud.
+
+This page describes how to install CircleCI's machine runner on macOS for **CircleCI server** customers.
 
 [#prerequisites]
 == Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://brew.sh/[Homebrew]
+
+* https://curl.se/[curl] (installed by default on macOS)
+
+* sha256sum (if not pre-installed):
+** `brew install coreutils`
+
+* https://www.gnu.org/software/tar/[tar]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement

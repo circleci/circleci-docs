@@ -3,6 +3,7 @@ description: Details of CircleCI's container runner
 contentTags:
   platform:
   - Cloud
+  - Server v4.3+
 ---
 = Container runner reference
 :page-layout: classic-docs
@@ -94,10 +95,57 @@ agent:
           - name: "other"
 ```
 
+[#unsafe-retries]
+=== Unsafe retries
+
+Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail should be expected to trigger an unsafe retry when enabled.
+
+Unsafe retries is useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
+
+[CAUTION]
+====
+This feature is called “unsafe retries” for a reason. Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
+====
+
+The following sequence shows how unsafe retires work:
+
+1. If a pod fails or gets evicted during runtime, container runner will release the task.
+2. All resources managed by container runner for the task, such as the Kubernetes pod and secret, are cleaned up and deleted.
+3. The released task then becomes available for reclaim by any container runner instance configured for the same resource class.
+4. Once reclaimed, the task is restarted completely from scratch, including previously run steps.
+5. A task can be retried up to 3 times before it is deemed to have permanently failed.
+
+To enable unsafe retries, set the `enableUnsafeRetries` flag in the <<resource-class-configuration-custom-pod,resource class configuration>> for each resource class. The following example shows two resource class definitions. Unsafe retries is enabled for the first, for spot instances, but not for the second resource class:
+[source,yaml]
+----
+agent:
+  resourceClasses:
+    your-namespace/your-resource-class-1:
+      enableUnsafeRetries: true
+      token: your-resource-class-1-token
+      # The following spec isn't required, but serves as an example of how you could schedule tasks on spot instances using tolerations for the node's taint
+      spec:
+        tolerations:
+        - key: "lifecycle"
+          operator: "Equal"
+          value: "Ec2Spot"
+          effect: "NoExecute"
+    your-namespace/your-resource-class-2:
+      # Unsafe retries are disabled by default
+      token: your-resource-class-2-token
+      # This resource class can only schedule tasks on nodes without taints specific to spot instances
+----
+
+==== Monitoring
+
+Container runner logs an event whenever a task encounters a runtime failure. The specific error message is provided under the `error` field within the `service-work` span. To check whether the task is set to be rerun or not (either because it cannot be retried or all retries have been exhausted), you can inspect the `app.to_retry` field. This boolean indicates the retry status of the task.
+
+You can utilize these fields with your preferred Kubernetes logging integrations to monitor when and how frequently tasks are retried.
+
 [#custom-secret]
 == Custom token secret
 
-Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
 
 The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
 
@@ -120,14 +168,16 @@ circleci-runner.resourceClass: <my-token>
 circleci-runner.resourceClass2: <my-token-2>
 ```
 
-Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+Due to Kubernetes secret key character constraints, the `/` separating the namespace and resource class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
 
-Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
+Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an empty map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
 Additional instructions can be found in our link:https://support.circleci.com/hc/en-us/articles/15773444776731-How-to-use-customSecret-on-Container-Runner[Support Center].
 
 [#parameters]
-=== Helm Chart Parameters
+== Helm chart parameters
+
+The container runner Helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here].
 
 The following are **CircleCI specific settings**:
 
@@ -199,105 +249,105 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | Description
 | Default
 
-| nameOverride
+| `nameOverride`
 | Override the chart name
-| ""
+| `""`
 
-| fullnameOverride
+| `fullnameOverride`
 | Override the full generated name
-| ""
+| `""`
 
-| agent.replicaCount
-| Number of container-agents to deploy. The recommendation is to leave this value at 1
-| 1
+| `agent.replicaCount`
+| Number of container-agents to deploy.
+| `1`
 
-| agent.image.registry
+| `agent.image.registry`
 | Agent image registry
 | ""
 
-| agent.image.repository
+| `agent.image.repository`
 | Agent image repository
-| circleci/container-agent
+| `circleci/runner-agent`
 
-| agent.image.pullPolicy
+| `agent.image.pullPolicy`
 | Agent image pull policy
-| Always
+| `Always`
 
-| agent.image.tag
+| `agent.image.tag`
 | Agent image tag
-| edge
+| `kubernetes-3`
 
-| agent.pullSecrets
+| `agent.pullSecrets`
 | link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks
-| []
+| `[]`
 
-| agent.matchLabels
+| `agent.matchLabels`
 | Match labels used on agent pods
-| app: container-agent
+| `app: container-agent`
 
-| agent.podAnnotations
+| `agent.podAnnotations`
 | Extra annotations added to agent pods
-| {}
+| `{}`
 
-| agent.podSecurityContext
+| `agent.podSecurityContext`
 | Security context policies added to agent pods
-| {}
+| `{}`
 
-| agent.containerSecurityContext
+| `agent.containerSecurityContext`
 | Security context policies add to agent containers
-| {}
+| `{}`
 
-| agent.resources
+| `agent.resources`
 | Custom resource specifications for container runner pods
 | {}
 
-| agent.nodeSelector
+| `agent.nodeSelector`
 | Node selector for agent pods
-| {}
+| `{}`
 
-| agent.tolerations
+| `agent.tolerations`
 | Node tolerations for agent pods
-| {}
+| `{}`
 
-| agent.tolerations
+| `agent.tolerations`
 | Node tolerations for agent pods
-| []
+| `[]`
 
-| agent.affinity
+| `agent.affinity`
 | Node affinity for agent pods
-| {}
+| `{}`
 
-| agent.autodetectPlatform
+| `agent.autodetectPlatform`
 | Autodetect the OS and CPU architecture of the node that the task pod is running on. If false, the node is assumed to be the same OS and CPU architecture as the container runner pod and cluster-wide permissions are unneeded.
-| true
+| `true`
 
-| serviceAccount.create
+| `serviceAccount.create`
 | Create a custom service account for the agent
-| true
+| `true`
 
-| rbac.create
+| `rbac.create`
 | Create a Role and RoleBinding for the service account
-| true
+| `true`
 
-| logging.image.registry
+| `logging.image.registry`
 | Image registry for link:#logging-containers[logging containers]
 | ""
 
-| logging.image.repository
+| `logging.image.repository`
 | Image repository for link:#logging-containers[logging containers]
-| circleci/logging-collector
+| `circleci/logging-collector`
 
-| logging.image.tag
+| `logging.image.tag`
 | Image tag for link:#logging-containers[logging containers]
-| edge
+| `edge`
 
-| logging.serviceAccount.create
+| `logging.serviceAccount.create`
 | Create a custom service account token for link:#logging-containers[logging containers]
-| true
+| `true`
 
-| logging.rbac.create
+| `logging.rbac.create`
 | Create a Role and RoleBinding for link:#logging-containers[logging containers]
-| true
+| `true`
 |===
 
 Container runner needs the following Kubernetes permissions:
@@ -318,6 +368,11 @@ Container runner needs the following Kubernetes permissions:
 * Nodes
 ** Get
 ** List
+
+If link:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job with SSH] is enabled, the following permissions are also required:
+
+* link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
+** Get
 
 In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
 
@@ -342,7 +397,7 @@ If the container runner crashes, there is no expectation that in-process or queu
 [#logging-containers]
 == Logging containers
 
-Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI web app.
+Container runner schedules a logging container if there are secondary (service) containers in the task pod. This container will get the secondary container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
 
 Logging containers require a service account token with the minimal privileges to get container logs.
 
@@ -358,7 +413,7 @@ limits:
 ```
 
 [#constraint-validation]
-== Constraint Validation
+== Constraint validation
 
 Container runner allows you to configure task pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container runner has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container runner claiming jobs which it cannot schedule which would then fail.
 
@@ -401,15 +456,15 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-1. A third-party tool like Buildah or Kaniko
-2. Machine runner installed with Docker installed on it
-3. CircleCI-hosted compute
+* A third-party tool like Buildah or kaniko
+* Machine runner installed with Docker installed on it
+* CircleCI-hosted compute
 
 Note: Third-party tools should be used at your own discretion.
 
 While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
 
-You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used Kaniko to build a container image.
+You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
 
 Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
 
@@ -497,13 +552,12 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 [#limitations]
 == Limitations
 
-* The ability to rerun a job with SSH.
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
 * There is no support for container environments other than Kubernetes at this time.
-* Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 * <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
+* `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:configuration-reference#oidc[Configuration Reference].
 
 [#faqs]
 == FAQs
 
-Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
+Visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.

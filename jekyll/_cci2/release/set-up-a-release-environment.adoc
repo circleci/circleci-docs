@@ -1,0 +1,99 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Set up a release environment
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Tutorial outlining how to set up a new CircleCI release environment and install the CircleCI release agent.
+:icons: font
+:experimental:
+
+Visualise and control deployments to your Kubernetes cluster with CircleCI releases. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
+
+[#introduction]
+== Introduction
+
+In this tutorial you will set up an integration between CircleCI and your Kubernetes cluster. Once configured, release status can be reported to the CircleCI web app, and the following commands can be executed in your cluster by the release agent via controls in the CircleCI UI:
+
+* Restore a version
+* Scale a version
+* Restart a version
+* Retry a release (when using Argo Rollouts)
+* Promote a release (when using Argo Rollouts)
+* Cancel a release (when using Argo Rollouts)
+
+[#prerequisites]
+== Prerequisites
+
+Before setting up your release environment with CircleCI, run through the following prerequisites:
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A Kubernetes cluster
+* A project building on CircleCI that deploys to your Kubernetes cluster. See the xref:../create-project#[Create a project] page for steps.
+* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page
+
+CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions have been tested and proven to work. Older versions may work but are not guaranteed:
+
+{% include snippets/release/supported-versions.adoc %}
+
+[#create-release-environment]
+== 1. Create your release environment and token
+
+. In the CircleCI web app, select **Releases** in the sidebar.
+. Select btn:[Add Release Environment].
+. Enter a name for your release environment and select btn:[Create Environment].
+. Select the environment you just created.
+. Select btn:[Create New Token] and then btn:[Create Token]
+. The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then select btn:[Done]
+
+[#add-release-agent]
+== 2. Add the release agent into your Kubernetes cluster
+
+Use Helm to install the CircleCI release agent into your Kubernetes cluster
+
+. Add the link:https://circleci-public.github.io/cci-k8s-release-agent/[CircleCI release agent Helm repository] by running the following command:
++
+[,shell]
+----
+helm repo add release-agent https://circleci-public.github.io/cci-k8s-release-agent
+----
+
+. Then, update your local Helm chart repository cache
++
+[,shell]
+----
+helm repo update
+----
+
+[#install-the-release-agent]
+== 3. Install the release agent
+
+Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster. Be sure to substitute the token you created in the previous step, and also, if required, include a list of Kubernetes namespaces you want to monitor.
+
+If you only want to monitor the `default` namespace, you do not need to supply a list with `--set manageNamespaces="{namespace1,namespace2}"`. The `default` namespace is monitored by default. If you struggle to pass the `manageNamespaces` value, try enclosing the array value or the whole parameter itself in a string, with double or single quotes.
+
+[,shell]
+----
+helm upgrade --install circleci-release-agent-system release-agent/circleci-release-agent \
+--set tokenSecret.token=[YOUR_CCI_INTEGRATION_TOKEN] --create-namespace \
+--namespace circleci-release-agent-system \
+--set managedNamespaces="{namespace1,namespace2}"
+----
+
+NOTE: You can further customize the agent installation and check all available options link:https://circleci-public.github.io/cci-k8s-release-agent/[here].
+
+Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated:
+
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. Select btn:[Configure Environments] at the top left of the page.
+. Select the name of your release environment to view the environment details page.
+
+[#next-steps]
+== Next steps
+
+In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now:
+
+* xref:configure-your-kubernetes-components#[Configure your Kubernetes components].
+* Learn how to xref:update-the-kubernetes-release-agent#[update the Kubernetes release agent]

@@ -78,6 +78,19 @@ Docker イメージは以下の方法で指定することができます。
 
 リソースクラスは `resource_class` キーで指定します：
 
+| クラス      | vCPU | RAM   |
+| -------- | ---- | ----- |
+| small    | 1    | 2 GB  |
+| medium   | 2    | 4 GB  |
+| medium+  | 3    | 6 GB  |
+| large    | 4    | 8 GB  |
+| xlarge   | 8    | 16 GB |
+| 2xlarge  | 16   | 32 GB |
+| 2xlarge+ | 20   | 40 GB |
+{: class="table table-striped"}
+
+**注**: リソースクラスはご利用のプランによって異なります。利用可能なリソースクラスの詳細については、[料金ページ](https://circleci.com/pricing/)をご覧ください。
+
 ```yaml
 jobs:
   build:

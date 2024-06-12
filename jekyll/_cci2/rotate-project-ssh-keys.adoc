@@ -27,9 +27,8 @@ sectionTags:
 = Rotate project SSH keys
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to guide detailing how to rotate your project SSH keys.
+:page-description: How to rotate your project SSH keys.
 :icons: font
-:experimental:
 :experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
@@ -39,20 +38,24 @@ When using project SSH keys, CircleCI holds the private key, and the target syst
 [#github-projects]
 == GitHub projects
 
-Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
+NOTE: To find out if your project uses the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-[#rotate-a-deploy-key-github]
-=== Rotate a deploy key
+Go to menu:Project Settings[SSH Keys] to view SSH keys set up for your project.
+
+[#rotate-a-deploy-key]
+=== Rotate a deploy key (GitHub OAuth App)
+
+Only relevant to projects using GitHub OAuth App:
 
 . Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
 . Delete the deploy key by clicking the **X**.
 . Add a new deploy key by clicking **Add Deploy Key**.
 . Go to GitHub’s repository project settings to delete the matching public key. The GitHub URL is typically `https://github.com/<org>/<project>/settings/keys`, or you may already have the page open if you clicked on the keyname in step 1. The keys are named `CircleCI`. Removing any key titled `CircleCI` created before the rotation is recommended. The new public SSH key will be automatically added once the old key is deleted.
 
-[#rotate-a-user-key-github]
-=== Rotate a user key
+[#rotate-a-user-key-github-oauth-app]
+=== Rotate a user key (GitHub OAuth App)
 
-If you have set up user keys for your project, follow these steps:
+Only relevant to projects using GitHub OAuth App.  If you have set up user keys for your project, follow these steps:
 
 . Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
 . Delete the user key by clicking the **X**.
@@ -63,10 +66,10 @@ CAUTION: The user key name contains the project name, however, a user key may gi
 
 NOTE: If using organization SSO, take note of which org is currently authorized. If access is needed for the newly created key, you will need to reauthorize it.
 
-[#rotate-an-additional-SSH-key-github]
-=== Rotate an additional SSH key
+[#rotate-an-additional-SSH-key-github-oauth-app-and-github-app]
+=== Rotate an additional SSH key (GitHub OAuth App & GitHub App)
 
-If you are using additional SSH keys in your project, follow these steps:
+Relevant to projects that use the GitHub OAuth App and projects that use the CircleCI GitHub App. If you are using additional SSH keys in your project, follow these steps:
 
 . Take note of the existing key to know which target system it is used for, and the fingerprint for your records. This could be a VCS, a machine, or another SSH based system.
 . Delete the SSH key by clicking the **X**.
@@ -133,5 +136,3 @@ In some scenarios, you might also be using additional SSH keys that are not tied
 . Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
 . Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
 . Authorize the target system to use the new key.
-
-

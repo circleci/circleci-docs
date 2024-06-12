@@ -7,12 +7,12 @@ contentTags:
 = Troubleshooting and support
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.x installation.
+:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.2 installation.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.x installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.2 installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
 
 toc::[]
 
@@ -136,12 +136,15 @@ kill $!
 [#disable-concurrency-limits]
 == Disable concurrency limits
 
-If your org is hitting the hard-coded concurrency limits, you can disable these limits by setting the following in your `values.yaml`:
+We recommend disabling concurrency limits for your CircleCI server installation. Disable concurrency limits by setting the following in your `values.yaml`:
+
+NOTE: Concurrency limits are disabled by default from server v4.2.1. From server v4.2.2, the `distributor_dispatcher.disable_concurrency` flag has been removed and concurrency limits are permanently disabled.
 
 [source,yaml]
 ----
 distributor_dispatcher:
   ...
-  disable_concurrency: false
+  disable_concurrency: true
 ----
 
+You can check whether you are hitting these limits by checking the `distributor-disptacher` logs for a message that mentions `concurrency limits`.

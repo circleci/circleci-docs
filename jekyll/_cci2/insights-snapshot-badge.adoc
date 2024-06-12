@@ -3,14 +3,14 @@ contentTags:
   platform:
   - Cloud
 ---
-= Insights Snapshot Badge
+= Insights snapshot badge
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Generate a badge that displays Insights metrics for a project.
 :icons: font
 :experimental:
 
-CAUTION: Insights snapshot badges are not currently supported for GitLab projects.
+NOTE: The Insights snapshot badge is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 The Insights snapshot badge, similar to a xref:status-badges#[status badge] that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.
 

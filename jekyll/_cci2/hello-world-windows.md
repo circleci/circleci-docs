@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
 title: "Hello World On Windows"
-short-title: "Hello World On Windows"
 description: "First Windows project on CircleCI"
-categories: [getting-started]
-order: 4
 contentTags:
   platform:
   - Cloud
@@ -13,10 +10,6 @@ contentTags:
 ---
 
 This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/getting-started/).
-
-* TOC
-{:toc}
-
 
 A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198).
 {: class="alert alert-warning"}
@@ -27,14 +20,12 @@ A Windows Server 2022 image is now available to CircleCI Cloud customers, read m
 To follow along with this document you will need:
 
 * An [account](https://circleci.com/signup/) on CircleCI.
-* Either the Free, Performance, or Scale [plan](https://circleci.com/pricing/usage/).
+* Either the Free, Performance, or Scale [Plan](https://circleci.com/pricing/usage/).
 
 ## Example application
 {: #example-application }
 
 Let us consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
-
-**Note:** If you are using Windows on CircleCI server, replace usage of orbs with a machine image, as described in the [Using the Windows executor on CircleCI server](#windows-on-server) section.
 
 You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml). It also includes browser and UI testing, but we will focus on the `hello-world` workflow for now.
 
@@ -114,6 +105,6 @@ In our last step, we store the build executable as an artifact, making it access
 
 Consider reading documentation on some of CircleCI’s features:
 
-* See the [Concepts]({{site.baseurl}}/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
+* See the [Concepts]({{site.baseurl}}/concepts/) document for a summary of configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
 * Refer to the [Workflows]({{site.baseurl}}/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/circleci-images/) documentation, respectively.

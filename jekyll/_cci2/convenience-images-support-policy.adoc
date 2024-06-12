@@ -22,7 +22,7 @@ This policy applies to all CircleCI convenience images we publish to the `cimg` 
 [#base-images]
 == Base images
 
-Our Docker convenience images are all built upon our base image, `cimg/base`. This image is in turn built upon the official Ubuntu docker image.
+Our Docker convenience images are all built upon our base image, `cimg/base`. This image is in turn built upon the official Ubuntu Docker image.
 
 We aim to build variants of this image for all LTS versions of Ubuntu that are being maintained in “Standard Support” status. We will stop building variants of `cimg/base` with Ubuntu LTS versions that drop out of support.
 
@@ -37,7 +37,7 @@ We encourage users who are building their own images for use on CircleCI to use 
 [#release-policy]
 == Release policy
 
-We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. Please note that this is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new convenience images.
+We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. This is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new convenience images.
 
 For our deployment focused images, we provide a new image once per month.
 

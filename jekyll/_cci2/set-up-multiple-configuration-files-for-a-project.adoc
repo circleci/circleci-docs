@@ -1,0 +1,69 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Set up multiple configuration files for a project
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A step by step guide for setting up multiple configuration files for a project in CircleCI.
+:icons: font
+:experimental:
+
+NOTE: This feature is only available for accounts integrated through the CircleCI **GitHub App**. To find out your integration type, check the xref:github-apps-integration#[GitHub App integration] page.
+
+You can use multiple configuration files in a CircleCI project and set up separate triggers for each one. Each configuration triggers a separate pipeline on a trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.
+
+[#prerequisites]
+== Prerequisites
+
+To use multiple configuration files for a project in CircleCI, you will need to meet the following prerequisites:
+
+* A CircleCI account connected to your code in GitHub, integrated through our xref:github-apps-integration#[GitHub App]. You can link:https://circleci.com/signup/[sign up for free].
+* A project set up in CircleCI that you want to configure with multiple configuration files. See the xref:create-project#[Create a project in CircleCI] page for steps.
+
+[#add-additional-config-file]
+== 1. Add an additional configuration file to your project repository
+
+NOTE: **Splitting up an existing configuration?** If you are following these steps because you have an existing project building on CircleCI and you want to split your configuration into multiple files, you can create a new file in the `.circleci/` directory and move over some parts of your existing configuration file to your new YAML files.
+
+In the GitHub repository for your project add a new CircleCI configuration file in the `.circleci/` directory. Your new configuration file must use the `.yml` extension but can have any name. Add your required configuration to the file and commit it to your repository.
+
+As your repository is set up as a project in CircleCI, a `config.yml` file will exist already. If you do not see `.circleci/config.yml`, check which branch you are on. You may have set this up on a non-default branch during the set up process.
+
+Each configuration file will trigger a separate pipeline so it is important that each configuration file is complete with all necessary elements for the pipeline, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
+
+[#set-up-configuration-source]
+== 2. Set up a configuration source
+
+Next, add a new configuration source in your CircleCI project settings.
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Configuration** in the sidebar
+. Click btn:[Add Configuration Source]
+. Complete the required form fields:
+** Give your configuration source a descriptive name
+** Ensure **GitHub App** is selected under **Configuration Source**
+** Select the same repository as the project you are building
+
+[#create-a-new-trigger]
+== 3. Create a new trigger
+
+Next, create a trigger for your new configuration source.
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Triggers** in the sidebar
+. Click btn:[Add Trigger]
+. Select **GitHub App** in the dropdown menu
+. Click btn:[Next]
+. Complete the required form fields:
+** Give your trigger a descriptive name
+** Select your project repository from the dropdown
+** Choose your new configuration source from the "Choose config to run" menu
+
+[#conclusion]
+== Conclusion
+
+You have now successfully set up multiple configuration files for your project on CircleCI. Each configuration file will trigger a separate pipeline on the configured trigger events.

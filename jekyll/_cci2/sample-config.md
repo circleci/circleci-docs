@@ -11,7 +11,11 @@ contentTags:
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
 
-{% include snippets/docker-auth.md %}
+If you would like to get set up quickly, see our language-specific quickstart guides:
+
+* [Node](/docs/language-javascript/)
+* [Python](/docs/language-python/)
+* [Go](/docs/language-go/)
 
 ## Tools for editing configuration files
 {: tools-for-editing-configuration-files }
@@ -24,6 +28,8 @@ The CircleCI VS Code extension is available to download on the [VS Code marketpl
 
 ## Simple configuration examples
 {: #simple-configuration-examples }
+
+{% include snippets/docker-auth.md %}
 
 ### Concurrent workflow
 {: #concurrent-workflow }
@@ -106,38 +112,32 @@ workflows:
 ### Approval job
 {: #approval-job }
 
-The example below shows a sequential workflow with an [approval step](/docs/configuration-reference/#type). The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensuring the workflow waits for manual approval in the CircleCI web app before the `deploy` job can run. All jobs run in Docker containers using the base image provided by CircleCI.
-
-* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
-
-This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
-
-![Approval Workflow Graph]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+The example below shows a sequential workflow with an [approval job](/docs/configuration-reference/#type). Use an approval job to require manual approval before downstream jobs may proceed.
 
 ```yaml
 version: 2.1
 
+executors: # Define an executor
+  my-executor:
+    docker:
+      - image: cimg/base:2024.01
 # Define the jobs we want to run for this project
 jobs:
   build:
-    docker:
-      - image: cimg/base:2023.03
+    executor: my-executor
     steps:
       - checkout
-      - run: echo "this is the build job"
+      - run: echo "build"
   test:
-    docker:
-      - image: cimg/base:2023.03
+    executor: my-executor
     steps:
       - checkout
-      - run: echo "this is the test job"
+      - run: echo "test"
   deploy:
-    docker:
-      - image: cimg/base:2023.03
+    executor: my-executor
     steps:
       - checkout
-      - run: echo "this is the deploy job"
+      - run: echo "deploy"
 
 # Orchestrate our job run sequence
 workflows:
@@ -151,11 +151,30 @@ workflows:
           type: approval
           requires:
             - build
-            - test
       - deploy:
           requires:
             - hold
 ```
+
+The workflow runs as follows:
+
+1. `build` job runs
+1. `test` job runs
+1. `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app
+1. Once `hold` job is approved the `deploy` job runs
+
+An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration devise.
+
+The image below shows the workflow view for the following configuration example. This image has three parts to show:
+
+* The workflow map with the `hold` job paused
+* The "Needs Approval" popup that appears when you click on a hold job
+* The workflow view again once the `hold` job has been approved and the `deploy` job has run
+
+![Approval Workflow Graph]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+
+* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
 ## Sample configuration with sequential workflow and secondary Docker container
 {: #sample-configuration-with-sequential-workflow }

@@ -1,0 +1,314 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Releases overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn CircleCI releases for visibility into Kubernetes and Amazon SageMaker releases, how it works, and how to get set up
+:icons: font
+:experimental:
+
+Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and Amazon SageMaker are supported.
+
+[#introduction]
+== Introduction
+
+CircleCI releases gives you visibility into your Kubernetes deployments within the CircleCI web app, as well as access to commands and visualisations for release management. From the CircleCI web app, you can:
+
+* Restore version
+* Scale component
+* Restart component
+
+We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
+
+* Retry release
+* Promote release
+* Cancel release
+
+[#quickstart]
+== Quickstart
+
+If you want to get started with CircleCI releases for Kubernetes right away, you can jump to:
+
+* xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up a release environment]
+* xref:configure-your-kubernetes-components.adoc#[Tutorial 2: Configure your Kubernetes components]
+* xref:manage-releases#[How-to: Manage releases]
+
+To get set up with releases for Amazon SageMaker, refer to the xref:../deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
+
+[#how-it-works]
+== How it works
+
+CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
+
+image::../../img/docs/releases/releases-architecture.png[Diagram showing the architecture of CircleCI releases]
+
+Configure a release environment to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces you require.
+
+Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
+
+[#releases-concepts]
+== Concepts
+
+The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI's release features.
+
+[#component]
+=== Component
+
+A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
+
+[#delivery]
+=== Delivery
+
+_Delivery_ is the act of packaging code changes and making them available for Deployment. Continuous delivery is the prerequisite step for continuous deployment. With some variations on the technologies being used, the delivery process creates executables from code and then makes them available from a repository to be deployed to an environment at a subsequent time.
+
+[#deployment]
+=== Deployment
+
+_Deployment_ is the act of putting a new component version into an environment, regardless of whether users and other services interact with the new version or a previous one. Depending on the deployment type, a release may happen as a later task (such as switching over traffic shaping rules for a blue/green deployment) or as a direct consequence of the deployment (such as a standard Kubernetes rolling update).
+
+[#command]
+=== Command
+
+A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. These actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app where you can see them in the releases dashboard, similar to how step output works for CI jobs.
+
+Some commands are available for all components. These are:
+
+* Restore version
+* Scale component
+* Restart component
+
+A subset of commands are available for _progressive_ releases (when using Argo Rollouts). These are:
+
+* Retry release
+* Promote release
+* Cancel release
+
+[#release]
+=== Release
+
+A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services.
+
+A release can happen when an existing component is updated or when the first version for a new component is deployed.
+
+In the releases dashboard, releases are tagged as **Progressive** if they refer to an Argo Rollout.
+
+A release starts when the component version is updated, and ends when the new version has reached 100% availability, and all associated validations have been completed. In the case of a progressive release, this happens when the Rollout completes. In the case of a Deployment, this happens when the Deployment replicas are all available and ready.
+
+[#the-releases-UI]
+== The releases UI
+
+The CircleCI releases UI is a powerful tool for visualising, monitoring and managing your releases. The pages included in the releases UI are described below.
+
+[#dashboard]
+=== The dashboard
+
+image::../../img/docs/releases/dashboard.png[Screenshot showing the releases dashboard in the CircleCI web app]
+
+Select **Releases** in the CircleCI web app sidebar to enter the releases dashboard. The dashboard shows the following:
+
+* **Timeline**: A timeline of releases for all components in your release environment. You can use the filter drop down at the top to select a component. Information you see here includes live status updates, release trigger source, release version, release type (for example, _progressive_, when you are using an Argo Rollout). From here you can access:
+** The release details page for a specific release by clicking on the status badge or version number
+** The component or release environment details pages by clicking on the respective names
+** The project dashboard for the CircleCI project associated with a release
+** The job details page in the CircleCI web app for the deployment job that kicked off the release
+** The commit details page in your VCS for the commit that started the deployment
+
+* **Environments**: List of release environments set up for your organization. From here you can:
+** Access settings for each environment (icon:cog[])
+** Access the environment details view by clicking on the release environment name
+
+* **Components**: A list of components and their associated projects. From here you can:
+** Get straight to the component's project building on CircleCI
+** Access the component detail view
+
+=== View all releases for a release environment
+
+To view all releases for a release environment, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Environments** tab
+. Select your environment by name
+. You are now on the environment details page. Select the **Releases** tab to view a list of all releases for your chosen environment
+
+=== View all commands run for a release environment
+
+To view all commands run for a release environment, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Environments** tab
+. Select your environment by name
+. You are now on the environment details page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment
+
+=== View all releases for a component
+
+To view all releases for a component, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Components** tab
+. Select your component by name. You can use the filter at the top of the page to help
+. You are now on the component details page. Select the **Releases** tab to view a list of all releases for your chosen component
+
+=== View all commands run for a component
+
+To view all commands run for a component, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select the **Components** tab
+. Select your component by name. You can use the filter at the top of the page to help
+. You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component
+
+[#releases-requirements]
+== Requirements
+
+[#tooling]
+=== Tooling
+
+We test the versions listed here. Older versions may work but are not guaranteed.
+
+{% include snippets/release/supported-versions.adoc %}
+
+[#labels-and-annotations]
+=== Labels and annotations
+
+The following table shows a complete list of labels and annotations either required or available for configuring your release environment.
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|
+|Label/annotation
+|Value
+|Required?
+
+|`Metadata.Labels`
+|`circleci.com/component-name`
+|A name for your application
+|Yes
+
+|`Metadata.Labels`
+|`circleci.com/version`
+|Current version
+|Yes
+
+|`Spec.Template.Metadata.Labels`
+|`circleci.com/component-name`
+|See above
+| Yes
+
+|`Spec.Template.Metadata.Labels`
+|`circleci.com/version`
+|See above
+| Yes
+
+|`Metadata.Annotations`
+|`circleci.com/job-number`
+|`CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable]
+| No. Used to enable linking between deploy job and release
+
+|`Metadata.Annotations`
+|`circleci.com/pipeline-id`
+|`pipeline.id` xref:../variables#pipeline-values[pipeline value]
+| No. Used to enable linking between deploy job and release
+
+|`Metadata.Annotations`
+|`circleci.com/workflow-id`
+|`CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable]
+| No. Used to enable linking between deploy job and release
+
+|`Metadata.Annotations`
+|`circleci.com/project-id`
+|Project ID for the CircleCI project associated with the job that deploys your component
+|Yes
+
+|`Metadata.Annotations`
+|`circleci.com/operation-timeout`
+|A link:https://pkg.go.dev/time#ParseDuration[Go duration string], for example, 5m, 10m15s
+|No. Only needed to set a custom timeout duration. This option is only available if you are using Helm to configure your Kubernetes resources.
+
+|`Metadata.Annotations`
+|`circleci.com/restore-version-enabled`
+|`false`
+|No. Only set if you want to disable the restore version feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/scale-component-enabled`
+|`false`
+|No. Only set if you want to disable the scale component feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/restart-component-enabled`
+|`false`
+|No. Only set if you want to disable the restart component feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/retry-release-enabled`
+|`false`
+|No. Only set if you want to disable the retry release feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/promote-release-enabled`
+|`false`
+|No. Only set if you want to disable the promote release feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/cancel-release-enabled`
+|`false`
+|No. Only set if you want to disable the cancel release feature for your component.
+|===
+
+[#release-status]
+== Release status
+
+Releases can be in one of the following states:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Status
+|Notes
+
+|RUNNING
+|The release is currently in progress
+
+|FAILED
+|Resources have reached an unhealthy status (pods for the new version of a Kubernetes component)
+
+|SUCCESS
+|The Deployment or Rollout has all desired resources available (all pods specified by a Kubernetes Deployment or Argo Rollout)
+
+|CANCELLED
+|The release has been cancelled, either using the `cancel release` option, or by being superseded by another release
+
+|EXPIRED
+|Release commands failed to be picked up by the release agent within the required time window
+|===
+
+[#known-limitations]
+== Known limitations
+
+* Restarting the release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
+* **In the CircleCI releases UI it is currently possible for you to attempt and restore a version that does not exist**. All releases are presented in the UI, including those outside of the scope of any version history limits you might have set. We do not currently filter out releases for which there is no longer any data.
++
+Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
++
+If you have these limits set, you can not restore a version outside the limit. For example, if your limit is set to the last 10 releases, you can not restore the 11th deployment back.
++
+We are working on updates to:
++
+** Indicate out-of-scope releases
+** Prevent you from attempting to restore unavailable releases
+** Provide a manual way for you to mark releases as unavailable
+
+[#troubleshooting]
+== Troubleshooting
+
+{% include snippets/troubleshoot/releases-troubleshoot.adoc %}
+
+[#next-steps]
+== Next steps
+
+xref:set-up-a-release-environment#[Set up a release environment]
+

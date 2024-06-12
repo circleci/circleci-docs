@@ -54,7 +54,7 @@ All the containers being run by an <<#executor,executor>> for the current job.
 [#job]
 == Job
 
-<<jobs-steps#,Jobs>> are collections of steps, which run commands/scripts as required. Each job must declare an executor that is either docker, machine, windows, or macos.
+<<jobs-steps#,Jobs>> are collections of steps, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`.
 
 [#orbs]
 == Orbs
@@ -69,7 +69,7 @@ The owner of the team's VCS organization.
 [#pipeline]
 == Pipeline
 
-A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.yml.' file.
+A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project `.circleci/config.yml` file.
 
 [#primary-container]
 == Primary container
@@ -84,7 +84,11 @@ The user who adds a repository in the VCS to CircleCI as a project.
 [#project]
 == Project
 
-A CircleCI project shares the name of the code repository for which it automates workflows, tests, and deployment. It is visible on the **Projects** page of the https://app.circleci.com/[CircleCI web app] and must be added with the **Set Up Project** button. After a project is added, it is possible to configure settings, contexts, environment variables, and team members who may follow the project. Following a project enables you to subscribe to email notifications for the project's build status, and adds the project to your CircleCI dashboard.
+For xref:github-integration#[GitHub OAuth app] and xref:bitbucket-integration#[Bitbucket] accounts, a CircleCI project shares the name of the code repository for which it automates workflows, tests, and deployment. A project is visible on the **Projects** page of the https://app.circleci.com/[CircleCI web app] and must be added with the **Set Up Project** button.
+
+For xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] accounts, a CircleCI project is a standalone entity that you first create, and then associate with a code repository. You can create projects and connect your code in the link:https://app.circleci.com/[CircleCI web app].
+
+After a project is set up or created, it is possible to configure settings, contexts, environment variables, and team members who may follow the project. Following a project enables you to subscribe to email notifications for the project's build status, and adds the project to your CircleCI dashboard.
 
 [#remote-docker]
 == Remote Docker

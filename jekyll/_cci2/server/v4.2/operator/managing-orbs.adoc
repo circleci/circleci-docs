@@ -4,15 +4,15 @@ contentTags:
     - Server v4.2
     - Server Admin
 ---
-= Managing Orbs
+= Managing orbs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.x.
+:page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.2.
 :icons: font
 :toc: macro
 :toc-title:
 
-This section describes how to manage orbs for an installation of server v4.x. Server installations include their own local orb registry. All orbs referenced in configs refer to the orbs in the server orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
+This section describes how to manage orbs for an installation of server v4.2. Server installations include their own local orb registry. All orbs referenced in configs refer to the orbs in the server orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
 
 For information on orbs and related use cases, see the xref:../../../orb-intro#[orbs docs].
 
@@ -20,9 +20,11 @@ If you are looking for information on creating an orb, see the xref:../../../orb
 
 Orbs are accessed via the xref:../../../local-cli#[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a xref:../../../managing-api-tokens#[personal API token].
 
-Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
+Ensure that you are using a personal API token generated _after_ your user account is made an admin.
 
 Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
+
+NOTE: Because orbs used in your server installation are stored in a local orb registry, they are private by default. The `--private` flag is not supported when referencing orbs stored in your server orb registry.
 
 [#list-available-orbs]
 == List available orbs

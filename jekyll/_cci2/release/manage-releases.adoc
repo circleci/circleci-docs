@@ -1,0 +1,228 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Manage releases
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to guide for managing releases from the CircleCI web app
+:icons: font
+:experimental:
+
+The steps outlined on this page guide you through the tasks required to manage your releases.
+
+[#prerequisites]
+== Prerequisites
+
+Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-a-release-environment#[Set up a release environment] and xref:configure-your-kubernetes-components#[Configure your Kubernetes components] pages for more information.
+
+[#restore-version]
+== Restore version
+
+The _restore version_ command restores a previously released version of a component.
+
+image::../../img/docs/releases/restore-version.png[Screenshot showing the restore version button]
+
+[#restore-steps]
+=== Steps
+
+NOTE: The steps outlined here are to revert a release from the release dashboard in the CircleCI web app. Is it also possible to run this command from a release details page. Select a release number to view a release details page.
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu
+. Scroll to locate the version your want to restore, and select the "Restore release" icon in the **Actions** column
+. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then select btn:[Restore]. We recommend reverting the associated changes in your source repository as soon as possible after using this command
+
+[#restore-notes]
+=== Notes
+
+Executing the _restore version_ command from the CircleCI web app is the equivalent of using the following:
+
+* If you are using Helm (Helm opt-in instructions are xref:configure-your-kubernetes-components#helm-rollback[here]):
++
+[,shell]
+----
+helm rollback <release-name> <revision-number> -n <namespace>
+----
+* If you are using Argo Rollouts and **not** Helm:
++
+[,shell]
+----
+kubectl argo rollouts undo <rollout-name> --to-revision=<revision_number>
+----
++
+If `revision_number` is not supplied the component will be rolled back to the previous revision
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<revision-number>
+----
+
+
+[#scale-component]
+== Scale component
+
+The _scale component_ command allows you to scale up or down a currently live version of a component.
+
+image::../../img/docs/releases/scale-component.png[Screenshot showing the scale component button]
+
+[#scale-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. Select the **Components** tab
+. Scroll to find and select your component to enter the component view
+. Find the active version that you would like to scale and select the ellipsis menu icon (icon:ellipsis-h[])
+. Select btn:[Scale Component]
+. Read through the notes associated with this command in the popup and to proceed type `SCALE` and select btn:[Scale]
+
+CAUTION: Any Horizontal Pod Autoscalers (HPAs) defined for this component will be deleted as a result of this action
+
+[#scale-notes]
+=== Notes
+
+Executing the _scale component_ command is the equivalent of the following:
+
+* If you are using Argo Rollouts:
++
+[,shell]
+----
+kubectl patch rollout <rollout_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
+----
+
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
+----
+
+[#restart-component]
+== Restart component
+
+The _restart component_ command allows you to restart a currently live version of a component.
+
+image::../../img/docs/releases/restart-component.png[Screenshot showing the restart component button]
+
+[#start-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. Select the **Components** tab
+. Scroll to find and select your component to enter the component view
+. Find the active version that you would like to restart and select the ellipsis menu icon (icon:ellipsis-h[])
+. Select btn:[Restart Component]
+. Read the note associated with this command in the popup and to proceed type `RESTART` and select btn:[RESTART]
+
+[#restart-notes]
+=== Notes
+
+Executing the _restart component_ command is the equivalent of the following:
+
+* If you are using Argo Rollouts:
++
+[,shell]
+----
+kubectl patch rollout my-rollout -n my-namespace --type='json' -p='[{"op": "replace", "path": "/spec/restartAt", "value": <timestamp>}]'
+----
+
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl rollout restart deployment/<deployment-name> -n <namespace>
+----
+
+
+[#retry-release]
+== Retry release
+
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+Use the _retry release_ command to retry a release that has failed or been cancelled. For more information about this command, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
+
+image::../../img/docs/releases/retry-release.png[Screenshot showing the retry release button]
+
+[#retry-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the failed or cancelled release you want to retry. Select the version number to enter the release details page.
+. Open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and select **Retry Release**
+
+[#retry-notes]
+=== Notes
+
+Executing the _retry release_ command is the equivalent to running:
+
+[,yml]
+----
+kubectl argo rollouts retry <rollout-name> -n=<namespace>
+----
+
+[#promote]
+== Promote
+
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+Use the _promote_ commands to promote a release that is paused at a step. You have the option to either promote a single step, to _skip_ that step, or btn:[Promote All] to skip all steps and complete the release. The btn:[Promote] and btn:[Promote All] options are visible in the step view on the release details page.
+
+image::../../img/docs/releases/promote-options.png[Screenshot showing the promote release options]
+
+For more information on the Rollouts Promote commands see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+
+[#promote-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the running release you want to promote. Select the version number to enter the release details page.
+. You will now see the btn:[Promote] and btn:[Promote All] options. Select btn:[Promote] to promote the release as required. The command will be run immediately with no intermediary checks.
+
+[#promote-notes]
+=== Notes
+
+Executing the _promote_ commands are equivalent to the following:
+
+* Promote a single step:
++
+[,shell]
+----
+kubectl argo rollouts promote <rollout-name>
+----
+* Promote all:
++
+[,shell]
+----
+kubectl argo rollouts promote --full <rollout-name>
+----
+
+[#cancel-release]
+== Cancel release
+
+Use the _cancel release_ command to stop a release from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
+
+NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+image::../../img/docs/releases/cancel-release.png[Screenshot showing the cancel release button]
+
+[#cancel-steps]
+=== Steps
+
+. Select btn:[Releases] in the CircleCI web app sidebar
+. You are now in the timeline view. Select your component from the dropdown menu.
+. Scroll to locate the running release you want to cancel. Select the version number to enter the release details page.
+. Open the ellipsis menu at the top right of the page (icon:ellipsis-h[]) and select **Cancel Release**.
+
+[#cancel-notes]
+=== Notes
+
+Executing the _cancel release_ command is the equivalent to running:
+
+[,yml]
+----
+kubectl argo rollouts abort <rollout-name> -n=<namespace>
+----

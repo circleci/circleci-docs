@@ -1,0 +1,17 @@
+extends: capitalization
+message: "'%s' should be in sentence case"
+level: error
+scope: heading
+# $title, $sentence, $lower, $upper, or a pattern.
+match: $sentence
+# sentence-cased, but allows for a common prefix:
+#
+# E.g.,
+#
+# a. This is my heading
+prefix: '^[a-z]\.\s'
+exceptions:
+  - DEPRECATED
+  - Deprecated
+  - deprecated
+  - Open preview

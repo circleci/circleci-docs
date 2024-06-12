@@ -22,8 +22,3 @@ contentTags:
 - **同時実行** - 複数のコンテナを使用して、複数のジョブを同時に実行できます。 同時実行を行うには、[ワークフローのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参考に開発ワークフローを設定し、[設定ファイルのサンプル]({{site.baseurl}}/ja/sample-config/#concurrent-workflow)に示す方法でジョブを並列実行してください。
 
 - **並列実行** - テストを複数のコンテナに分割することで、テスト全体のスピードを大幅に向上できます。 テストを並列で実行するには、[CircleCI の構成に関するドキュメント]({{ site.baseurl }}/ja/configuration-reference/#parallelism)で説明されているように `.circleci/config.yml` ファイルを変更します。 設定ファイルを変更してテストの分割と並列実行を行い、ビルド時間を短縮する方法については、[テストの並列実行に関するドキュメント]({{site.baseurl}}/ja/parallelism-faster-jobs/)をご覧ください。
-
-## 従量課金制プランへの移行
-{: #migrating-to-a-usage-based-plan }
-
-プランの移行手順の詳細は、[Discuss の投稿](https://discuss.circleci.com/t/circleci/43635) をご覧いただくか、[カスタマーサポート](mailto:cs@circleci.com)にご連絡ください。

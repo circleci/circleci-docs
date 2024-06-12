@@ -21,7 +21,7 @@ Add the SSH key for the target to which you are deploying (these instructions ar
 
 . In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
 
-. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
 . On the **Project Settings** page, click on **SSH Keys**.
 
@@ -51,25 +51,25 @@ In your `.circleci/config.yml`, create a `deploy` job and add a command to deplo
 version: 2.1
 
 jobs:
-    build:
-    #...
-    deploy:
+  build:
+  #...
+  deploy:
     machine:
-        enabled: true
+      image: ubuntu-2204:2023.07.2
     steps:
-        - run:
-            name: Deploy Over SSH
-            command: |
+      - run:
+          name: Deploy Over SSH
+          command: |
             ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
 
 workflows:
-    build-and-deploy:
+  build-and-deploy:
     jobs:
-        - build
-        - deploy:
-            requires:
+      - build
+      - deploy:
+          requires:
             - build # only deploy once build job has completed
-            filters:
+          filters:
             branches:
-                only: main # only deploy on the main branch
+              only: main # only deploy on the main branch
 ```

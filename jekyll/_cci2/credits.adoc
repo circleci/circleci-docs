@@ -8,7 +8,6 @@ contentTags:
 :description: Learn about the CircleCI credits-based plan system.
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
 :icons: font
 :experimental:
 
@@ -17,7 +16,7 @@ This document describes how to find the available resources regarding credits wi
 [#overview]
 == Overview
 
-Credits are used on CircleCI's Free, Performance, Scale, and Server plans. Each plan offers key CI/CD features, and some plans offer customization options depending on your needs.
+Credits are used on CircleCI's Free, Performance, Scale, and Server Plans. Each plan offers key CI/CD features, and some plans offer customization options depending on your needs.
 
 The right plan for you and your team will depend on several factors:
 
@@ -28,31 +27,31 @@ The right plan for you and your team will depend on several factors:
 
 You can view the xref:plan-overview#[Plan overview] page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
 
-- xref:plan-free#[Free plan]
-- xref:plan-performance#[Performance plan]
-- xref:plan-scale#[Scale plan]
-- xref:plan-server#[Server plan]
+- xref:plan-free#[Free Plan]
+- xref:plan-performance#[Performance Plan]
+- xref:plan-scale#[Scale Plan]
+- xref:plan-server#[Server Plan]
 
-Consider taking a moment to look at the CircleCI link:https://circleci.com/pricing/[Pricing] page to learn more about how credits are distributed across different machine types and resource classes.
+Take a look at the CircleCI link:https://circleci.com/pricing/[Pricing] page, and the link:https://circleci.com/product/features/resource-classes/[resource class comparison table], to learn more about how credits are distributed across different machine types and resource classes.
 
 [#managing-credit-usage]
 == Managing credit usage
 
-Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the xref:persist-data#[Persisting data] page.
+Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:persist-data#[Persisting data] page.
 
 [#open-source-credit-usage]
 == Open source credit usage
 
-Organizations on our Free plan receive a set amount of free credits per month for Linux open source builds. Using our Free plan and keeping your repository public will enable this for you.  Open-source credit availability and limits will not be visible in the UI.
+Organizations on our Free Plan can use up to 400,000 credits per month, for free, for Linux open source builds. Using our Free Plan and keeping your repository public will enable this for you. Open-source credit availability and limits are not visible in the CircleCI web app.
 
-If you build on macOS, we also offer organizations on our Free plan a number of free credits every month to use on macOS open source builds. For access to this, contact our team at mailto:billing@circleci.com[billing@circleci.com].
+If you build on macOS, we also offer organizations on our Free Plan 30,000 credits every month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal], which includes an Ask AI option to get you the information you need.
 
 [#troubleshooting-job-is-queued]
 == Troubleshooting: Am I charged if my job is "queued" or "preparing"?
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
-If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent docker images. See xref:building-docker-images#[Building Docker images] for more information.
+If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent Docker images. See xref:building-docker-images#[Building Docker images] for more information.
 
 [#questions-and-comments]
 ## Questions and comments

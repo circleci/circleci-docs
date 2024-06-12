@@ -28,8 +28,6 @@ lhttps://circleci.com/ja/signup/[今すぐ無料アカウントを作成し] 、
 
 CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-2021[移行コース]を受講すると、CircleCI への移行についてさらに詳しく学ぶことができます。
 
-NOTE: Premium サポートや Advanced サポートをご利用のお客様は、mailto:customersuccess@circleci.com[customersuccess@circleci.com] にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
-
 [#project-migration-methodology]
 == プロジェクトの移行方法
 

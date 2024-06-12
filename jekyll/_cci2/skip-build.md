@@ -14,7 +14,7 @@ This document describes how to skip or cancel work when triggering pipelines. Th
 ## Skip jobs
 {: #skip-jobs }
 
-By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. This not only skips the marked commit, but also **all other commits** in the push.
+By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the **latest commit** you pushed. This will skip the pipeline execution for all the commits included in the push.
 
 ### Scope
 {: #scope }
@@ -22,7 +22,7 @@ By default, CircleCI automatically triggers a pipeline whenever you push changes
 A few points to note regarding the scope of the `ci skip` feature:
 
 * The pipeline and workflows will still exist for these commits but no jobs will be run.
-* If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
+* If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
 ### Example commit title
@@ -72,8 +72,9 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* Your project's default branch (usually `main`) will never auto-cancel builds.
+* Your project's default branch (usually `main`) will never auto-cancel workflows.
 * Auto-cancel affect pipelines triggered by pushes to a VCS or via the API.
+* Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
 {: #enable-auto-cancel }
@@ -91,12 +92,3 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 
 * Scheduled workflows
 * Re-run workflows
-
-### Steps to enable auto-cancel for CircleCI server installations
-{: #steps-to-enable-auto-cancel-for-circleci-server-installations }
-
-1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
-
-2. In the **Build Settings** section, click on **Advanced Settings**.
-
-3. In the **Auto-cancel redundant builds** section, click the **On** button.

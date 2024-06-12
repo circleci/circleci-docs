@@ -4,15 +4,15 @@ contentTags:
     - Server v4.2
     - Server Admin
 ---
-= Upgrade server v4.x
+= Upgrade server
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "This document lists the steps required to upgrade a CircleCI server v4.x installation."
+:page-description: "This document lists the steps required to upgrade a CircleCI server v4.2 installation."
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes the steps needed to upgrade your CircleCI server v4.x installation.
+This page describes the steps needed to upgrade your CircleCI server v4.2 installation.
 
 A successful deployment will update the web app. Unless noted in the release notes, updates are rolling updates and there is no downtime.
 
@@ -65,3 +65,8 @@ helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n 
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
+
+[#vault]
+=== Vault
+
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation after upgrading. Customers that do not perform this step may have issues restoring Vault from backup in v4.2.

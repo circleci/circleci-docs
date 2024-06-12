@@ -64,7 +64,7 @@ curl -u <circle-token>: "https://circleci.com/api/..."
 curl "https://circleci.com/api/v1.1/me?circle-token=<circle-token>"
 ```
 
-You can add the API token using your [account dashboard](https://circleci.com/account/api). Both personal and project API tokens are supported for API v1, however, we recommend using personal API tokens at this time as project API tokens are **not** supported for API v2.
+You can add the API token using your [account dashboard](https://circleci.com/account/api). We recommend using **personal API tokens** at this time because project API tokens are **not** supported for API v2. Project API tokens are supported for most API v1 endpoints. Notes are included below to indicate when a personal API token is required.
 
 To be authenticated by the API server, use this as the value of the Circle-Token header:
 
@@ -86,11 +86,11 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 **API** | **Description**
 ------- | -------------
 /me | Provides information about the signed in user.
-/projects | Lists all projects you are following on CircleCI, with build information organized by branch.
- /project/:vcs-type/:username/:project | Returns a build summary for each of the last 30 builds for a single git repo.
-/recent-builds | Returns a build summary for each of the last 30 recent builds, ordered by build\_num.
-/project/:vcs-type/:username/:project/:build_num | Returns full details for a single build. The response includes all of the fields from the build summary. This is also the payload for the [notification webhooks](https://circleci.com/docs/configuration-reference/#notify), in which case this object is the value to a key named ‘payload’.
-/project/:vcs-type/:username/:project/:build_num/artifacts | Lists the artifacts produced by a given build.
+/projects | Lists all projects you are following on CircleCI, with job information organized by branch.
+ /project/:vcs-type/:username/:project | Returns a summary for each of the last 30 job runs for a single project.
+/recent-builds | Returns a summary for each of the last 30 recent job runs, ordered by build\_num.
+/project/:vcs-type/:username/:project/:build_num | Returns full details for a single job run. The response includes all of the fields from the job summary. This is also the payload for the [notification webhooks](https://circleci.com/docs/configuration-reference/#notify), in which case this object is the value to a key named ‘payload’.
+/project/:vcs-type/:username/:project/:build_num/artifacts | Lists the artifacts produced by a given job run.
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Retrieves a checkout key.
 
 ### POST Requests
@@ -98,11 +98,11 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 **API** | **Description**
 ------- | -------------
 /project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI.
-/project/:vcs-type/:org_name/:project/:build\_num/retry | Retries the build, returns a summary of the new build.
-/project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the build, returns a summary of the build.
-/project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the build's SSH permissions.
-/project/:vcs-type/:username/:project/tree/:branch | Triggers a new build, returns a summary of the build. Optional [build parameters](https://circleci.com/docs/inject-environment-variables-with-api/#api-v1) can be set.
-/project/:vcs-type/:username/:project/ssh-key | Creates an ssh key used to access external systems that require SSH key-based authentication.
+/project/:vcs-type/:org_name/:project/:build\_num/retry | Retries the job, returns a summary of the new job run.
+/project/:vcs-type/:username/:project/:build\_num/cancel | Cancels the job, returns a summary of the job run.
+/project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the job's SSH permissions.
+/project/:vcs-type/:username/:project/tree/:branch | Triggers a new job, returns a summary of the job run. Optional [build parameters](https://circleci.com/docs/inject-environment-variables-with-api/#api-v1) can be set.
+/project/:vcs-type/:username/:project/ssh-key | Creates an SSH key used to access external systems that require SSH key-based authentication.
 /project/:vcs-type/:username/:project/checkout-key | Creates a new checkout key.
 
 ### DELETE Requests
@@ -148,17 +148,12 @@ In most cases, the HTTP 429 response code will be accompanied by the [Retry-Afte
 
 ## List Ordering
 
-```
-(https://circleci.com/docs/api/v1-reference/#recent-builds)
-(https://circleci.com/docs/api/v1-reference/#recent-builds-project)
-```
-
 There are two API endpoints where the list order is significant:
 
-* Recent Builds Across All Projects
-* Recent Builds For a Single Project
+* [Recent jobs across all projects](https://circleci.com/docs/api/v1-reference/#recent-builds)
+* [Recent jobs for a single project](https://circleci.com/docs/api/v1-reference/#recent-builds-project)
 
-In both cases, builds are returned in the order that they were created. For all other endpoints, the order has no special significance.
+In both cases, jobs are returned in the order that they were created. For all other endpoints, the order has no special significance.
 
 ## Accept Header
 
@@ -174,4 +169,4 @@ Some CircleCI APIs may emit a `Cache-Control` header to indicate that the respon
 
 ## F/OSS
 
-If you have a [Free / Open Source Software (F/OSS) project] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only /project endpoints will return the requested data without the need for a token. People will also be able to view the build results dashboard for the project as well.
+If you have a [Free / Open Source Software (F/OSS) project] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only `/project` endpoints will return the requested data without the need for a token. People will also be able to view the job results dashboard for the project as well.
