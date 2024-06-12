@@ -8,11 +8,19 @@
 
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
 
-Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack; for example, to listen on a network interface, or to modify the system with `sysctl` commands.
+Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example, to listen on a network interface, or to modify the system with `sysctl` commands.
 
 To use the machine executor, use the xref:configuration-reference#machine[`machine` key] in your job configuration and specify an image:
 
-NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+[NOTE]
+====
+The use of `machine: true` is deprecated when using **CircleCI cloud**. You must specify an image to use.
+
+`machine: true` **is** supported when using:
+
+* Self-hosted runners
+* When using the machine executor on CircleCI server
+====
 
 [.tab.machineblock.Cloud]
 --
