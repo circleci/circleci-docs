@@ -26,7 +26,7 @@ You can generate code for the following formats:
 * Image URL
 * Markdown
 * Textile
-* Rdoc
+* RDoc
 * AsciiDoc
 * reStructuredText
 * pod
@@ -161,3 +161,8 @@ image::{{site.baseurl}}/assets/img/docs/svg-failed.png[Failed `svg` version]
 image::{{site.baseurl}}/assets/img/docs/shield-passing.png[Passing shield version]
 
 image::{{site.baseurl}}/assets/img/docs/shield-failing.png[Failing shield version]
+
+[#known-issues-and-limitations]
+== Known issues and limitations
+
+* In cases where there are multiple workflows running within a pipeline, the status badge will show the result (red or green) of the _latest_ workflow that has finished running. This is a bug. The expected behavior is for the badge to update to show the result of the _last_ workflow once the pipeline is complete.
