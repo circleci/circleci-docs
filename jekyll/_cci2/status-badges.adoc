@@ -26,7 +26,7 @@ You can generate code for the following formats:
 * Image URL
 * Markdown
 * Textile
-* Rdoc
+* RDoc
 * AsciiDoc
 * reStructuredText
 * pod
