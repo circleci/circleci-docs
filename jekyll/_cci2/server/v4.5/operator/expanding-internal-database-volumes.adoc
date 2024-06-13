@@ -330,3 +330,5 @@ kubectl rollout restart sts mongodb
 ----
 kubectl rollout restart sts redis-master redis-slave
 ----
+
+NOTE: Running out of disk space for either MongoDB or PostgreSQL may result in failures in CircleCI server such as job failures. These jobs may become stuck as the disk space runs out and will need to be cancelled and rerun once the volumes have been expanded.

@@ -262,7 +262,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 As you can see, the size of your directories has been increased.
 
-When completing these steps, if you find, as expected, that the new pods _do_ show the resized volumes, it is still worth checking with the `kubectl describe` commands shown below. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
+When completing these steps, if you find that the new pods _do_ show the resized volumes, as expected, it is still worth checking with the `kubectl describe` commands shown below. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
 
 * **PostgreSQL**
 +
@@ -330,3 +330,5 @@ kubectl rollout restart sts mongodb
 ----
 kubectl rollout restart sts redis-master redis-slave
 ----
+
+NOTE: Running out of disk space for either MongoDB or PostgreSQL may result in failures in CircleCI server such as job failures. These jobs may become stuck as the disk space runs out and will need to be cancelled and rerun once the volumes have been expanded.
