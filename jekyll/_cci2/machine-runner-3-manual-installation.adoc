@@ -65,7 +65,7 @@ NOTE: The current CircleCI machine runner binary can always be found by using `c
 [,shell]
 ----
 export RUNNERVERSION='current'
-export CPUARCH=$(/usr/bin/arch | grep 'x86_64' && echo 'amd64' || echo 'arm64')
+export CPUARCH=$(/usr/bin/arch | grep 'x86_64' >/dev/null 2>/dev/null && echo 'amd64' || echo 'arm64')
 export OSTARGET=$(uname -s | tr '[:upper:]' '[:lower:]')
 curl -s -L "https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/${RUNNERVERSION}/circleci-runner_${OSTARGET}_${CPUARCH}.tar.gz" -o $HOME/circleci-runner.tar.gz && tar -zxvf $HOME/circleci-runner.tar.gz
 ----

@@ -1928,7 +1928,7 @@ Template examples:
 * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
 * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it makes sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
+While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 
 NOTE: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
@@ -2593,6 +2593,8 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 
 Jobs may be configured to use global environment variables set for an organization, see the link:{{ site.baseurl }}/contexts[Contexts] document for adding a context in the application settings.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 

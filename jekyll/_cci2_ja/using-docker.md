@@ -20,14 +20,13 @@ Docker 実行環境を使用して Docker コンテナで[ジョブ]({{site.base
 
 コンテナをスピンアップするには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルで Docker イメージを指定します。 ジョブのステップはすべてこのコンテナで実行されます。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 ```yaml
 jobs:
   my-job:
     docker:
       - image: cimg/node:lts
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_ コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
@@ -77,6 +76,8 @@ Docker イメージは以下の方法で指定することができます。
 
 [`resource_class`]({{ site.baseurl }}/ja/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
+リソースクラスは `resource_class` キーで指定します：
+
 | クラス      | vCPU | RAM   |
 | -------- | ---- | ----- |
 | small    | 1    | 2 GB  |
@@ -90,8 +91,6 @@ Docker イメージは以下の方法で指定することができます。
 
 **注**: リソースクラスはご利用のプランによって異なります。利用可能なリソースクラスの詳細については、[料金ページ](https://circleci.com/pricing/)をご覧ください。
 
-`resource_class` キーを使ってリソースクラスを以下のように指定します。
-
 ```yaml
 jobs:
   build:
@@ -101,6 +100,28 @@ jobs:
     steps:
     #  ...  other config
 ```
+
+### x86
+{: #x86 }
+
+Docker実行環境では、以下のリソース・クラスが x86 アーキテクチャで利用可能です：
+
+{% include snippets/ja/docker-resource-table.md %}
+
+### Arm
+{: #arm }
+
+以下のリソース・クラスは、Docker で Arm を使用できます：
+
+**Arm on Docker** 価格情報、およびArmリソースクラスをサポートするCircleCI Docker convenienceイメージのリストについては、[Arm and Docker Discuss post](https://discuss.circleci.com/t/product-launch-arm-docker-preview/48601)をご覧ください。
+{: class="alert alert-caution"}
+
+{% include snippets/ja/docker-arm-resource-table.md %}
+
+### リソースの使用状況を見る
+{: #view-resource-usage }
+
+{% include snippets/ja/resource-class-view.md %}
 
 ## Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
