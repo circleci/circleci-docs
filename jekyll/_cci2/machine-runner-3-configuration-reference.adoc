@@ -108,7 +108,7 @@ This parameter accepts the path to the directory of the `circleci-runner` task a
 
 ```yaml
 runner:
-  task-agent-directory: "~/.local/bin"
+  task_agent_directory: "~/.local/bin"
 ```
 
 
