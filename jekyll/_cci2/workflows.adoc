@@ -245,8 +245,17 @@ In this example, the `deploy` job will not run until the `hold` job is approved.
 
 [.tab.approve.API]
 --
-. Use the workflow
-
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. You need your workflow ID and the `approval_request_id` (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:variables#[pipeline values or environment variables], or by xref:webhooks#[receiving webhooks] or polling the API. To approve a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/approvePendingApprovalJobById[approve a job] endpoint, for example:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/workflow/<workflow-ID>/approve/<approval_request_id> \
+  --header 'authorization: Basic REPLACE_BASIC_AUTH' \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+----
 --
 
 In this example, the purpose of the `hold` job is to wait for approval to begin deployment. A job can be approved for up to 90 days after it starts.
