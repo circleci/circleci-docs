@@ -26,7 +26,7 @@ en:
         children:
           - name: Sign up and try
             link: first-steps
-          - name: Invite your team
+          - name: Join teammates on CircleCI
             link: invite-your-team
           - name: Quickstart guide
             link: getting-started
