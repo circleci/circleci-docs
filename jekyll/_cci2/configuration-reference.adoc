@@ -2461,6 +2461,26 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 * Any branches that match `ignore` will not run the job.
 * If neither `only` nor `ignore` are specified then all branches will run the job. If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
 
+[source,yaml]
+----
+workflows:
+  commit:
+    jobs:
+      - test
+      - deploy
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+                - /^release\/.*/
+    jobs:
+      - coverage
+----
+
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
