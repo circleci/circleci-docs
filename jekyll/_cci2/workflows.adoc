@@ -411,7 +411,102 @@ You can filter workflows by branch, git tag, both, or neither. Workflow filters 
 * If neither `only` nor `ignore` are specified then the job is skipped for all branches/tags.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-If **both branch and tag** filtering is configured, the **branch** filters will take precedence when running the workflow.
+If **both branch and tag** filtering is configured, the **branch** filters take precedence.
+
+The following table outlines what will happen for different tag/branch filter configurations:
+
+[.table.table-striped]
+[cols=7*, options="header", stripes=even]
+|===
+|Push to tag?
+|Config includes `tag: only`
+|Config includes `tag: ignore`
+|Push to branch?
+|Config includes `branches: only`
+|Config includes `branches: ignore`
+|Outcome
+
+| icon:thumbs-down[role="circle-red"]
+| -
+| -
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| -
+| Run workflow if push is to configured `only` branch(es).
+
+| icon:thumbs-down[role="circle-red"]
+| -
+| -
+| icon:thumbs-up[role="circle-green"]
+| -
+| icon:thumbs-up[role="circle-green"]
+| Run workflow if push is **not** to `ignore` branch(es).
+
+| icon:thumbs-down[role="circle-red"]
+| -
+| -
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| Run workflow because there has been a push to a branch.
+
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| -
+| icon:thumbs-down[role="circle-red"]
+| -
+| -
+| Run workflow if push is to configured `only` tag(s).
+
+| icon:thumbs-up[role="circle-green"]
+| -
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| -
+| -
+| Run workflow if **not** to configured `ignore` tag(s).
+
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| icon:thumbs-down[role="circle-red"]
+| -
+| -
+| Do **not** run workflow because there is no push to a branch.
+
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| -
+| Run workflow if push is to configured `only` branch(es). Ignore all tag filters, branches take precedence.
+
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| icon:thumbs-up[role="circle-green"]
+| -
+| icon:thumbs-up[role="circle-green"]
+| Run workflow if push is **not** to configured `ignore` branch(es). Ignore tag information, branches take precedence and no configured tag filters.
+
+| icon:thumbs-up[role="circle-green"]
+| -
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| Run workflow if push is **not** to configured `ignore` tag(s).
+
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| icon:thumbs-up[role="circle-green"]
+| -
+| -
+| Run workflow because there has been a push to a branch.
+
+|===
 
 [#branch-level-job-execution]
 === Branch-level job execution
