@@ -234,6 +234,11 @@ The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not curren
 
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
+[#github-status-updates]
+=== GitHub Status Updates
+
+GitHub Status Updates is not currently supported for GitHub App Integrations. 
+
 [#next-steps]
 == Next steps
 - xref:config-intro#[Configuration tutorial]
