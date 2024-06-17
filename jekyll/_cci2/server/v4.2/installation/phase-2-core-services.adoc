@@ -290,7 +290,7 @@ mongodb:
 ----
 --
 
-[#rabbinmq-configurations-and-auth-secrets]
+[#rabbitmq-configurations-and-auth-secrets]
 === f. RabbitMQ configurations and auth Secrets
 
 The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
