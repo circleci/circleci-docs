@@ -237,7 +237,7 @@ The Only Build Pull Requests option (usually available in menu:Project Settings[
 [#github-status-updates]
 === GitHub Status Updates
 
-GitHub Status Updates is not currently supported for GitHub App Integrations. 
+xref:enable-checks#github-check-and-github-status-updates[GitHub status updates] are currently not supported for the GitHub App Integration.
 
 [#next-steps]
 == Next steps
