@@ -2387,6 +2387,24 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 | Should currently be `schedule`.
 |===
 
+Line 3:
+
+[,yml]
+----
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
+     jobs:
+       - test
+----
+
 '''
 
 [#schedule]
@@ -2395,6 +2413,8 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
+
+Line 4:
 
 [,yml]
 ----
@@ -2430,6 +2450,24 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
 |===
 
+Line 5:
+
+[,yml]
+----
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
+     jobs:
+       - test
+----
+
 '''
 
 [#filters]
@@ -2447,6 +2485,24 @@ Trigger filters can have the key `branches`.
 | Map
 | A map defining rules for execution on specific branches
 |===
+
+Line 6:
+
+[,yml]
+----
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
+     jobs:
+       - test
+----
 
 '''
 
@@ -2725,6 +2781,27 @@ Branches can have the keys `only` and `ignore`, which either map to a single str
 | Either a single branch specifier, or a list of branch specifiers
 |===
 
+[source,yaml]
+----
+workflows:
+  dev_stage_pre-prod:
+    jobs:
+      - test_dev:
+          filters:  # using regex filters requires the entire branch to match
+            branches:
+              only:  # only branches matching the below regex filters will run
+                - dev
+                - /user-.*/
+      - test_stage:
+          filters:
+            branches:
+              only: stage
+      - test_pre-prod:
+          filters:
+            branches:
+              only: /pre-prod(?:-.+)?$/
+----
+
 '''
 
 [#tags]
@@ -2761,6 +2838,20 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 |===
 
 For more information, see the xref:workflows#executing-workflows-for-a-git-tag[Executing workflows for a git tag] section of the Workflows page.
+
+[source,yaml]
+----
+workflows:
+  untagged-build:
+    jobs:
+      - build
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
+----
 
 '''
 

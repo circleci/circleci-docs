@@ -402,18 +402,29 @@ This example prevents the workflow `integration_tests` from running unless the `
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
 
-The following sections provide examples for using filters to manage job execution.
+The following sections provide examples for using filters in your workflows to manage job execution.
+
+You can filter workflows by branch, git tag, both, or neither. Workflow filters for branches and tags have the keys `only` and `ignore`:
+
+* Any branches/tags that match `only` will run the job.
+* Any branches/tags that match `ignore` will not run the job.
+* If neither `only` nor `ignore` are specified then the job is skipped for all branches/tags.
+* If both `only` and `ignore` are specified the `only` is considered before `ignore`.
+
+If **both branch and tag** filtering is configured, the **branch** filters will take precedence when running the workflow.
 
 [#branch-level-job-execution]
 === Branch-level job execution
 
-The following example shows a workflow configured to run specific sets of jobs on three separate branches: `dev`, `stage`, and `pre-prod`.
+The following example has one workflow that is configured to run different sets of jobs for different branches:
 
-NOTE: Workflows ignore `branches` keys nested under `jobs` configuration. If you use the deprecated job-level branches key, remove the job-level branching and instead declare it in the workflows section of your `.circleci/config.yml`.
+* The `test_dev` job is run on the `dev` branch and any branch that begins `user-`
+* The `test_stage` job is run on the `stage` branch
+* The `test_pre-prod` job is run on any branch starting `pre-prod` including any suffix added to the branch name using a hyphen.
 
-image::/docs/assets/img/docs/branch_level.png[Branch-Level Job Execution]
+NOTE: Workflows ignore `branches` keys used in the `jobs` declaration. If you use the xref:configuration-reference#branches[deprecated job-level branches key], replace them with workflow filters.
 
-The following `.circleci/config.yml` snippet is an example of a workflow configured for branch-level job execution:
+TIP: This example shows how to provide strings and lists of strings when configuring workflow filters.
 
 [source,yaml]
 ----
@@ -436,6 +447,10 @@ workflows:
               only: /pre-prod(?:-.+)?$/
 ----
 
+This setup can be illustrated as follows:
+
+image::/docs/assets/img/docs/branch_level.png[Branch-Level Job Execution]
+
 For more information on regular expressions, see the <<using-regular-expressions-to-filter-tags-and-branches,Using Regular Expressions to Filter Tags And Branches>> section below.
 
 For a full example of workflows, see the link:https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml[configuration file] for the Sample Sequential Workflow With Branching project.
@@ -443,7 +458,9 @@ For a full example of workflows, see the link:https://github.com/CircleCI-Public
 [#executing-workflows-for-a-git-tag]
 === Executing workflows for a git tag
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters. Both lightweight and annotated tags are supported.
+NOTE: Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive them all.
+
+CircleCI does not run workflows for tags unless you explicitly specify tag filters using regular expressinos. Both lightweight and annotated tags are supported.
 
 If you have configured a job to run on a git tag you must also specify tag filters for any dependent jobs. Use <<using-regular-expressions-to-filter-tags-and-branches,regular expressions>> to specify tag filters for a job.
 
@@ -466,7 +483,9 @@ workflows:
               only: /^v.*/
 ----
 
-In the example below, two jobs are defined within the `build-n-deploy` workflow:
+---
+
+In the example below, two jobs are configured within the `build-deploy` workflow:
 
 * The `build` job runs for all branches and all tags.
 * The `deploy` job runs for no branches and only for tags starting with 'v'.
@@ -474,7 +493,7 @@ In the example below, two jobs are defined within the `build-n-deploy` workflow:
 [source,yaml]
 ----
 workflows:
-  build-n-deploy:
+  build-deploy:
     jobs:
       - build:
           filters:  # required since `deploy` has tag filters AND requires `build`
@@ -490,11 +509,13 @@ workflows:
               ignore: /.*/
 ----
 
-In the example below, three jobs are defined with the `build-test-deploy` workflow:
+---
+
+In the example below, three jobs are configured for the `build-test-deploy` workflow:
 
 * The `build` job runs for all branches and only tags starting with 'config-test'.
-* The `test` job runs for all branches and only tags starting with 'config-test'.
-* The `deploy` job runs for no branches and only tags starting with 'config-test'.
+* The `test` job runs once the `build` job completes for all branches and only tags starting with 'config-test'.
+* The `deploy` job runs once the `test` job completes for no branches and only tags starting with 'config-test'.
 
 [source,yaml]
 ----
@@ -521,7 +542,9 @@ workflows:
               ignore: /.*/
 ----
 
-In the example below, two jobs are defined (`test` and `deploy`) and three workflows utilize those jobs:
+---
+
+In the example below, two jobs are defined (`test` and `deploy`) and three workflows use those jobs:
 
 * The `build` workflow runs for all branches except `main` and is not run on tags.
 * The `staging` workflow will only run on the `main` branch and is not run on tags.
@@ -564,8 +587,6 @@ workflows:
             <<: *filters-production # this is calling the previously set yaml anchor
 ----
 
-NOTE: Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive them all.
-
 [#using-regular-expressions-to-filter-tags-and-branches]
 === Using regular expressions to filter tags and branches
 
@@ -580,15 +601,39 @@ For full details on pattern-matching rules, see the link:https://docs.oracle.com
 [#using-workspaces-to-share-data-between-jobs]
 == Using workspaces to share data between jobs
 
-Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. For further information on workspaces and their configuration see the xref:workspaces#[Using Workspaces to Share Data Between Jobs] doc.
+Each workflow has an associated xref:configuration-reference#persisttoworkspace[workspace] for transferring files to downstream jobs as a workflow progresses.
+
+Configuration options are available to:
+
+* xref:configuration-reference#persisttoworkspace[persist files to the workspace]
++
+[,yaml]
+----
+- persist_to_workspace:
+    root: /tmp/workspace
+    paths:
+      - target/application.jar
+      - build/*
+----
+
+* xref:configuration-reference#attachworkspace[attach a workflow's workspace] to a container.
++
+[,yaml]
+----
+- attach_workspace:
+    at: /tmp/workspace
+----
+
+For further information on workspaces and their configuration see the xref:workspaces#[Using Workspaces to Share Data Between Jobs] doc.
 
 [#rerunning-a-workflows-failed-jobs]
 == Rerunning a workflow's failed jobs
 
-You can configure workflows to speed up your ability to respond to failures. To rerun only a workflow's _failed_ jobs, follow these steps:
+Workflows help to speed up your ability to respond to failures. One way to do this is to only rerun failed jobs rather than a whole workflow. To rerun only a workflow's _failed_ jobs, follow these steps:
 
-. In the CircleCI web app select **Pipelines** in the sidebar
-. Use the filters to find your pipeline
+. In the link:https://app.circleci.com/home/[CircleCI web app] select your organization.
+. Select **Pipelines** in the sidebar.
+. Use the filters to find your project and pipeline.
 . Find the row in the pipeline view for the workflow you would like to rerun from failed and select the *Rerun from failed* icon. This option is also available in the workflow view using the rerun dropdown menu, which you can access by clicking on the workflow name or badge.
 
 [tab.rerun-screenshot.Rerun_from_the_pipelines_page]
@@ -601,7 +646,7 @@ image::/docs/assets/img/docs/orchestrate-and-trigger/rerun-from-failed-pipelines
 image::/docs/assets/img/docs/orchestrate-and-trigger/rerun-from-failed-workflows-page.png[Rerun a workflow from failed from the workflows page]
 --
 
-NOTE: If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
+NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 
 [#states]
 === Workflow states
@@ -660,19 +705,19 @@ This section describes common problems and solutions for workflows.
 [#workflow-and-subsequent-jobs-do-not-trigger]
 === Workflow and subsequent jobs do not trigger
 
-If you do not see your workflows trigger, a common cause is a configuration error preventing the workflow from starting. As a result, the workflow does not start any jobs. Navigate to your project's pipelines and select your workflow name to locate the failure.
+If you do not see your workflows running, check for configuration errors that may be preventing the workflow from starting. Navigate to your link:https://app.circleci.com/pipelines/[project's pipelines] and find your workflow name to locate the failure.
 
 [#rerunning-workflows-fails]
 === Rerunning workflows fails
 
-In some cases, a failure may happen before the workflow runs (during pipeline processing). Re-running the workflow will fail even though it succeeded before the outage. To work around this, push a change to the project's repository. This will rerun the pipeline processing first, and then rerun the workflow.
+Failures may happen before a workflow runs during pipeline processing. Re-running the in this case workflow will fail. Push a change to the project repository or use the trigger pipeline option to rerun the pipeline.
 
 NOTE: You cannot rerun jobs and workflows that are >= 90 days.
 
 [#workflows-waiting-for-status-in-github]
 === Workflows waiting for status in GitHub
 
-If you have workflows configured on a protected branch and the status check never completes, check the `ci/circleci` status key. `ci/circleci` should be and deselected as it is related to a deprecated check.
+If you have workflows configured on a protected branch and the status check never completes, check the `ci/circleci` status key. `ci/circleci` is related to a deprecated check and should be and deselected.
 
 image::/docs/assets/img/docs/github_branches_status.png[Uncheck GitHub Status Keys]
 
