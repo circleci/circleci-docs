@@ -614,7 +614,7 @@ en:
     children:
       - name: Integration features
         children:
-          - name: Use webhooks to integrate with third party services
+          - name: Webhook integration
             link: webhooks
           - name: Notifications overview
             link: notifications

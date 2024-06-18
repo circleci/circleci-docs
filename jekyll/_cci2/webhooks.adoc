@@ -11,9 +11,9 @@ contentTags:
 :page-liquid:
 :experimental:
 
-Use **inbound webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command. Inbound webhooks are available for accounts integrated thought the xref:github-apps-integration#[GitHub App].
+Use <<inbound-webhooks>> to trigger a pipeline from anywhere that can emit a webhook or run a curl command. Inbound webhooks are available for accounts integrated thought the xref:github-apps-integration#[GitHub App].
 
-Use **outbound webhooks** to:
+Use <<outbound-webhooks>> to:
 
 * Build a custom dashboard to visualize or analyze workflow/job events.
 * Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
