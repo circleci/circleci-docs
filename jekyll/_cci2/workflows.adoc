@@ -239,6 +239,7 @@ Some things to keep in mind when using manual approval in a workflow:
 * The name of the job to hold is arbitrary - it could be `wait` or `pause`, for example, as long as the job has a `type: approval` key.
 * All jobs that are to run after a manually approved job _must_ `require` the name of the approval job. Refer to the `deploy` job in the above example.
 * Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
+* Jobs downstream of an approval job can be restricted by adding a link:/docs/contexts/#approve-jobs-that-use-restricted-contexts[restricted context] to those downstream jobs.
 
 The following screenshot demonstrates a workflow the needs approval, the approval popup, and the resulting workflow map once approved.
 
