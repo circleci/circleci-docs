@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4.x
 ---
-= Use webhooks to integrate with services
+= Webhook integration
 :page-layout: classic-docs
 :page-description: Use webhooks to integrate with third-party services and subscribe to CircleCI events
 :icons: font
@@ -33,55 +33,13 @@ Setting up an **inbound webhook** on CircleCI enables a third party service to t
 
 NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
-[#quickstart]
-== Quickstart
+== Inbound webhooks
 
-=== Outbound webhook setup
+Use **inbound webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command. This section presents some use cases for CircleCI inbound webhooks.
 
-NOTE: There is a limit of 5 outbound webhooks per project.
+=== Quickstart
 
-Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
-
-To configure webhooks via API see our documentation for https://circleci.com/docs/api/v2/#tag/Webhook[Webhooks Public API].
-
-To configure webhooks within the CircleCI app:
-
-. Visit a specific project you have set up on CircleCI
-. Click on *Project Settings*
-. In the sidebar of your Project Settings, click on *Webhooks*
-. Click *Add Webhook*
-. Fill out the webhook form (the table below describes the fields and their intent)
-. Provided your receiving API or third party service is set up, click *Test Ping Event* to dispatch a test event. Note that the test ping event has an abbreviated payload for ease of testing. See full examples of xref:webhooks#workflow-completed[workflow-completed] and xref:webhooks#job-completed[job-completed] events below.
-
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| Field | Required? | Intent
-
-| Webhook name
-| Y
-| The name of your webhook
-
-| URL
-| Y
-| The URL the webhook will make POST requests to
-
-| Certificate Validation
-| Y
-| Ensure the receiving host has a valid SSL certificate before sending an event. You should only leave this unchecked for testing purposes.
-
-| Secret token
-| N
-| Used by your API/platform to validate incoming data is from CircleCI
-
-| Select an event
-| Y
-| You must select at least one event that will trigger a webhook
-|===
-
-=== Inbound webhook setup
-
-Follow these steps to set up and test an inbound webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
+Follow these steps to set up and test an inbound webhook trigger. Trigger from anywhere that can emit a webhook or run a curl command:
 
 {% include snippets/inbound-webhook-setup.adoc %}
 
@@ -96,11 +54,7 @@ curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/
 
 See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
-== Inbound webhooks
-
-Use **inbound webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command. This section presents some use cases for CircleCI inbound webhooks.
-
-=== Trigger one pipeline from another with inbound webhooks
+=== Example: Trigger one pipeline from another
 
 Use an inbound webhook to configure one pipeline to trigger a second pipeline. For example, you might need to run a set of integration tests on a repository after you have made a change to a separate repository.
 
@@ -125,11 +79,12 @@ Navigate to Project A in the CircleCI web app and set up an environment variable
 
 TIP: As an alternative, you can add an environment variable using a xref:contexts#[context].
 
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
-. Select **Environment Variables** from the sidebar
-. Select btn:[Add Environment Variable]
-. Give your environment variable a name, for example, `WEBHOOK_SECRET`
+. In the link:https://app.circleci.com/[CircleCI web app] select your organization.
+. Select **Projects** in the sidebar.
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), and select **Project Settings**.
+. Select **Environment Variables** from the sidebar.
+. Select btn:[Add Environment Variable].
+. Give your environment variable a name, for example, `WEBHOOK_SECRET`.
 . Update your Project A configuration file with a step that will trigger a pipeline for Project B, for example (lines 13-16):
 +
 [,yaml]
@@ -157,7 +112,7 @@ workflows:
       - say-hello
 ----
 
-=== Extract inbound webhook payload data
+=== Example: Extract inbound webhook payload data
 
 The inbound webhook body is available by using the `pipeline.trigger_parameters.webhook.body` xref:variables#pipeline-values[pipeline value].
 
@@ -186,6 +141,52 @@ commands:
 == Outbound webhooks
 
 Use outbound webhooks to integrate your CircleCI builds with external services. The following sections detail CircleCI outbound webhook structure and protocols.
+
+=== Quickstart
+
+NOTE: Projects are limited to 5 outbound webhooks.
+
+Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
+
+To configure webhooks via API see our documentation for https://circleci.com/docs/api/v2/#tag/Webhook[Webhooks Public API].
+
+To configure webhooks within the CircleCI app:
+
+. In the link:https://app.circleci.com/[CircleCI web app] select your organization.
+. Select **Projects** in the sidebar.
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), and select **Project Settings**.
+. In the sidebar select *Webhooks*
+. Select *Add Webhook*
+. Fill out the webhook form (the table below describes the fields and their intent)
+. If your receiving API or third party service is set up, select *Test Ping Event* to send a test event.
++
+NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:webhooks#workflow-completed[workflow-completed] and xref:webhooks#job-completed[job-completed] events below.
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Field | Required? | Intent
+
+| Webhook name
+| Y
+| The name of your webhook
+
+| URL
+| Y
+| The URL the webhook will make POST requests to
+
+| Certificate Validation
+| Y
+| Ensure the receiving host has a valid SSL certificate before sending an event. You should only leave this unchecked for testing purposes.
+
+| Secret token
+| N
+| Used by your API/platform to validate incoming data is from CircleCI
+
+| Select an event
+| Y
+| You must select at least one event that will trigger a webhook
+|===
 
 [#communication-protocol]
 === Communication protocol for outbound webhooks
