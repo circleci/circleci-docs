@@ -29,7 +29,7 @@ CAUTION: If you are upgrading from server v4.1.x and have user-managed secrets, 
 [#changelog-4-2-6]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/changelog/server-release-4-2-6[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-4-2-6[changelog].
 
 [#release-4-2-5]
 == Release 4.2.5
