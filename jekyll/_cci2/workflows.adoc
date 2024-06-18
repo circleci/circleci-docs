@@ -72,7 +72,7 @@ Workflows may appear with one of the following states:
 
 |
 | UNAUTHORIZED
-| One or more of the jobs terminated with a `unauthorized` job status, because the triggerer does not have access to a required restricted context.
+| One or more of the jobs terminated with a `unauthorized` job status, because the user who triggered the pipeline or approved an approval job does not have access to a required restricted context.
 | Yes
 |===
 
@@ -195,7 +195,7 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan
 [#holding-a-workflow-for-a-manual-approval]
 == Hold a workflow for a manual approval
 
-Configure a workflow to wait for manual approval before continuing using an `approval` job. Anyone who has push access to the repository can click the *Approve* button in the CircleCI web app to continue the workflow.
+Configure a workflow to wait for manual approval before continuing using an `approval` job. Anyone who has push access to the repository can use the *Approve* button in the CircleCI web app to continue the workflow.
 
 To set up a manual approval workflow, add a job to the `jobs` list of your workflow with `type: approval`. For example:
 
@@ -227,8 +227,8 @@ workflows:
 ----
 
 The outcome of the above example is that the `deploy` job will not run until
-you click the `hold` job in the *Workflows* page of the CircleCI app and then
-click *Approve*. In this example, the purpose of the `hold` job is to wait for
+you navigate the `hold` job in the *Workflows* page of the CircleCI app and then
+select *Approve*. In this example, the purpose of the `hold` job is to wait for
 approval to begin deployment. A job can be approved for up to 90 days after
 being issued.
 
@@ -245,7 +245,7 @@ The following screenshot demonstrates a workflow the needs approval, the approva
 
 image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the resulting workflow map]
 
-By clicking on the approval job's name (`hold`, in the screenshot above), an approval dialog box appears requesting that you approve the approval job. You can also choose to close the popup without approving.
+By selecting on the approval job's name (`hold`, in the screenshot above), an approval dialog box appears requesting that you approve the approval job. You can also choose to close the popup without approving.
 
 After approving, the rest of the workflow runs as configured.
 
@@ -543,7 +543,7 @@ Each workflow has an associated workspace which can be used to transfer files to
 [#rerunning-a-workflows-failed-jobs]
 == Rerunning a workflow's failed jobs
 
-When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's *failed* jobs, click the *Workflows* icon in the app and select a workflow to see the status of each job, then click the *Rerun* button and select *Rerun from failed*.
+When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's *failed* jobs, navigate to the *Pipelines* page in the app, select a workflow to see the status of each job, then select the *Rerun* button to see the option to *Rerun from failed*.
 
 image::/docs/assets/img/docs/rerun-from-failed.png[CircleCI Workflows Page]
 
@@ -559,7 +559,7 @@ This section describes common problems and solutions for workflows.
 
 If you do not see your workflows triggering, a common cause is a configuration error
 preventing the workflow from starting. As a result, the workflow does not start
-any jobs. Navigate to your project's pipelines and click on your workflow name
+any jobs. Navigate to your project's pipelines and select your workflow
 to discern what might be failing.
 
 [#rerunning-workflows-fails]
@@ -578,7 +578,7 @@ image::/docs/assets/img/docs/github_branches_status.png[Uncheck GitHub Status Ke
 
 Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
 
-Go to menu:Settings[Branches] in GitHub and click btn:[Edit] on the protected branch to deselect the settings, for example: `\https://github.com/your-org/project/settings/branches`.
+Go to menu:Settings[Branches] in GitHub and use the btn:[Edit] option on the protected branch to deselect the settings, for example: `\https://github.com/your-org/project/settings/branches`.
 
 [#see-also]
 == See also
