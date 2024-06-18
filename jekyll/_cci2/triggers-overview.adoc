@@ -35,11 +35,11 @@ In the CircleCI web app, when you have a specific branch selected, the **Trigger
 +
 image::branch-filter.png[screenshot showing location of branch filter on pipelines dashboard]
 
-. Click **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
+. Select **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
 +
 image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
 
-. Click **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+. Select **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
