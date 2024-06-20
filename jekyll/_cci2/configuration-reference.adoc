@@ -2547,16 +2547,18 @@ workflows:
 | Map
 | A map defining rules for execution on specific branches
 
-| `only`
-| Y
+| `only` ^1^
+| N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 
-| `ignore`
+| `ignore` ^1^
 | N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 |===
+
+^1^: One of either `only` or `ignore` branch filters must be specified. If both are present, `only` is used.
 
 '''
 
