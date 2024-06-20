@@ -35,7 +35,7 @@ NOTE: The steps described in this section apply to all CircleCI accounts. If you
 .. Expand the workflow that contains your job
 +
 image::jobs-list.png[Expand workflow to see the list of jobs]
-.. Click the job name to enter the job view
+.. Select the job name to enter the job view
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the *Rerun* dropdown menu.
 +
 The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
