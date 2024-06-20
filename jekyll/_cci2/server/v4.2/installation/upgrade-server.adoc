@@ -33,7 +33,6 @@ From server v4.2, CircleCI server auto-generates the following secrets if not pr
 
 - xref:../installation/phase-2-core-services#api-token[api-token]
 - xref:../installation/phase-2-core-services#session-cookie[session-cookie]
-- xref:../installation/phase-2-core-services#rabbitmq-configurations-and-auth-secrets[rabbitmq-key]
 - xref:../installation/phase-2-core-services#pusher-kubernetes-secret[pusher]
 - xref:../installation/phase-3-execution-environments#nomad-gossip-encryption-key[nomad-gossip-encryption-key]
 
@@ -54,6 +53,13 @@ kubectl -n <namespace> label secret/<secret-name> \
 == Upgrade steps
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
+
+. Export the "RabbitMQ" password as we are upgrading helm chart for the same as well.
+
+[source,shell]
+----
+export RABBITMQ_PASSWORD=$(kubectl get secret --namespace <namespace> rabbitmq-key -o jsonpath="{.data.rabbitmq-password}" | base64 -d)
+----
 
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
 +
