@@ -33,6 +33,7 @@ From server v4.2, CircleCI server auto-generates the following secrets if not pr
 
 - xref:../installation/phase-2-core-services#api-token[api-token]
 - xref:../installation/phase-2-core-services#session-cookie[session-cookie]
+- xref:../installation/phase-2-core-services#rabbitmq-configurations-and-auth-secrets[rabbitmq-key]
 - xref:../installation/phase-2-core-services#pusher-kubernetes-secret[pusher]
 - xref:../installation/phase-3-execution-environments#nomad-gossip-encryption-key[nomad-gossip-encryption-key]
 
