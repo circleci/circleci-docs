@@ -39,6 +39,7 @@ For full details of this release see the link:https://circleci.com/changelog/ser
 
 For full details of this release see the link:https://circleci.com/changelog/server-release-4-1-9-and-4-2-5[changelog].
 
+
 [#release-4-2-4]
 == Release 4.2.4
 
