@@ -28,7 +28,6 @@ For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4
 
 For full details of this release see the link:https://circleci.com/changelog/server-4-1-10/[changelog].
 
-
 [#release-4-1-9]
 == Release 4.1.9
 
