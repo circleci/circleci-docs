@@ -139,7 +139,7 @@ GEM
     pygments.rb (1.1.2)
       multi_json (>= 1.0.0)
     racc (1.7.1)
-    rack (2.2.3.1)
+    rack (2.2.6.4)
     rainbow (3.0.0)
     rake (13.0.3)
     rb-fsevent (0.11.0)
@@ -181,11 +181,10 @@ DEPENDENCIES
   jekyll-sitemap
   kramdown-parser-gfm
   liquid-c
-  nokogiri (~> 1.14)
   pronto
   pronto-markdownlint
   pygments.rb (~> 1.1.2)
-  rack (~> 2.2.3.1)
+  rack (~> 2.2.6.3)
   rake
 
 RUBY VERSION

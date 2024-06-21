@@ -10,10 +10,9 @@ gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"
 gem "liquid-c"
-gem 'nokogiri', '~> 1.14'
 gem 'htmlcompressor'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
-gem 'rack', '~> 2.2.3.1'
+gem 'rack', '~> 2.2.6.3'
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
