@@ -107,45 +107,10 @@ a|  * GitLab: push, merge request
 | icon:check[]
 | icon:times[]
 
-| `pipeline.trigger_parameters.circleci.project_id`
-| GitHub App, GitLab
-|
-| CircleCI project ID
-| icon:check[]
-| icon:times[]
-
-| `pipeline.trigger_parameters.circleci.actor_id`
-| GitHub App, GitLab
-|
-| CircleCI user ID
-| icon:check[]
-| icon:times[]
-
 | `pipeline.trigger_parameters.gitlab.type`
 | GitLab
 |
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| icon:check[]
-| icon:times[]
-
-| `pipeline.trigger_parameters.github_app.type`
-| GitHub App
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| icon:check[]
-| icon:times[]
-
-| `pipeline.trigger_parameters.gitlab.project_id`
-| GitLab
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| icon:check[]
-| icon:times[]
-
-| `pipeline.trigger_parameters.github_app.project_id`
-| GitHub App
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
 | icon:check[]
 | icon:times[]
 
@@ -349,13 +314,6 @@ a|  * GitLab: push, merge request
 | GitLab
 |
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| icon:check[]
-| icon:times[]
-
-| `pipeline.trigger_parameters.github_app.commit_author_email`
-| GitHub App
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
 | icon:check[]
 | icon:times[]
 

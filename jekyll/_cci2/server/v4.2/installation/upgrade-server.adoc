@@ -54,6 +54,13 @@ kubectl -n <namespace> label secret/<secret-name> \
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
+. Export the "RabbitMQ" password. We are also upgrading the RabbitMQ Helm chart during this upgrade.
++
+[source,shell]
+----
+export RABBITMQ_PASSWORD=$(kubectl get secret --namespace <namespace> rabbitmq-key -o jsonpath="{.data.rabbitmq-password}" | base64 -d)
+----
+
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
 +
 [source,shell]

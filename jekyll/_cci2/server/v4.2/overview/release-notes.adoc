@@ -23,6 +23,23 @@ For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4
 
 CAUTION: If you are upgrading from server v4.1.x and have user-managed secrets, ensure you follow the steps in the xref:../installation/upgrade-server#[Upgrade server v4.2 guide].
 
+[#release-4-2-6]
+== Release 4.2.6
+
+[#changelog-4-2-6]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-2-6[changelog].
+
+[#release-4-2-5]
+== Release 4.2.5
+
+[#changelog-4-2-5]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-1-9-and-4-2-5[changelog].
+
+
 [#release-4-2-4]
 == Release 4.2.4
 

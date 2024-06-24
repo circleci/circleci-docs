@@ -27,3 +27,39 @@ Additional labels for pre-release and build metadata are available as extensions
 [#release-schedule]
 == Release schedule
 We release monthly patch fixes for bugs and security concerns. We will have quarterly new feature releases. All releases will be posted to the change log. To stay up to date with the most recent releases, subscribe to the link:https://circleci.com/server/changelog/[change log].
+
+[#end-of-support]
+== End of support
+With each minor release, in accordance with our link:https://circleci.com/legal/terms-of-service/[terms of service], we end support for previous versions of server. The following table provides dates for previously released versions. 
+
+CAUTION: Future dates listed here may change at any time. 
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Version | Released | End of Support
+
+|4.5.x 
+|4/30/2024 
+|4/30/2025*
+
+|4.4.x 
+|2/05/2024 
+|2/28/2025*
+
+|4.3.x 
+|11/07/2023 
+|11/30/2024*
+
+|4.2.x 
+|7/18/2023 
+|7/31/2024*
+
+|4.1.x 
+|3/21/2023 
+|3/31/2024
+
+|4.0.x 
+|7/28/2022 
+|7/31/2023
+|===

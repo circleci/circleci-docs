@@ -35,11 +35,11 @@ In the CircleCI web app, when you have a specific branch selected, the **Trigger
 +
 image::branch-filter.png[screenshot showing location of branch filter on pipelines dashboard]
 
-. Click **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
+. Select **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
 +
 image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
 
-. Click **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+. Select **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
@@ -67,40 +67,20 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 [#trigger-a-pipeline-from-an-inbound-webhook]
 == Trigger a pipeline from an inbound webhook
 
-NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+Follow these steps to set up and test an inbound webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
 
-To trigger a pipeline from anywhere that can emit a webhook, or run a curl command, follow these steps:
+{% include snippets/inbound-webhook-setup.adoc %}
 
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
-. Select **Triggers** in the sidebar
-. Click btn:[Add Trigger]
-. Select **Inbound Webhook** from the dropdown menu
-. Click btn:[Next]
+. You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +
-image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an inbound webhook trigger]
-
-. Complete the form fields and options:
-** Give your trigger a descriptive name
-** (Optional) Add a description
-** Supply a path to a `config.yml` file and CircleCI will create a configuration source for you
-. Click btn:[Save]
-. You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source appended with the secret.
-+
-CAUTION: The secret will not be shown again so be sure to copy the URL before clicking **Done**.
-+
-image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
-
-To trigger this webhook using `curl`, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
-
 NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
-
++
 [,shell]
 ----
 curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
 ----
 
-See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
+For more information on using inbound and outbound webhooks, see the xref:webhooks#[Use webhooks to integrate with services] page. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
