@@ -158,8 +158,8 @@ Use an `approval` job to configure a workflow to wait for manual approval before
 
 Some things to keep in mind when using manual approval in a workflow:
 
-* `approval` is a special job type that is configured when listing jobs under the `workflow` key.
-* The approval job name must be a unique and not used by any other job in your configuration. For example, your configured jobs, such as `build` or `test1` in the example below, would not be set as `type: approval`.
+* `hold` is a special job type that is configured when listing jobs under the `workflow` key. You do not need to define a `hold` type job in the `jobs` section of your configuration. If you do configure steps for a job that is given the `hold` type in the workflows section, the steps for that job will not be run. A `hold` job is _only_ used to hold the workflow for approval, not to run any work.
+* The approval job name must be unique and not used by any other job in your configuration.
 * The name of the approval job is arbitrary. For example, an approval job can be named `hold`, `wait`, `pause`, etc.
 * All jobs that run _after_ a manual approval job **must** `require` the name of the approval job.
 * Jobs run in the order defined in the workflow. When the workflow encounters a job with `type: approval`, the workflow pauses until approval is granted. Once approval is granted the workflow continues to process jobs in the order defined in the configuration file.
@@ -408,7 +408,7 @@ This example prevents the workflow `integration_tests` from running unless the `
 
 The following sections provide examples for using filters in your workflows to manage job execution.
 
-You can filter workflows by branch, git tag, both, or neither. Workflow filters for branches and tags have the keys `only` and `ignore`:
+You can filter workflows by branch, git tag, or neither. Workflow filters for branches and tags have the keys `only` and `ignore`:
 
 * Any branches/tags that match `only` will run the job.
 * Any branches/tags that match `ignore` will not run the job.
@@ -468,6 +468,8 @@ CircleCI does not run workflows for tags unless you explicitly specify tag filte
 
 If you have configured a job to run on a git tag you must also specify tag filters for any dependent jobs. Use <<using-regular-expressions-to-filter-tags-and-branches,regular expressions>> to specify tag filters for a job.
 
+---
+
 In the example below, two workflows are defined:
 
 * `untagged-build` runs the `build` job for all branches.
@@ -492,7 +494,7 @@ workflows:
 In the example below, two jobs are configured within the `build-deploy` workflow:
 
 * The `build` job runs for all branches and all tags.
-* The `deploy` job runs for no branches and only for tags starting with 'v'.
+* The `deploy` job runs for all branches and only for tags starting with 'v'.
 
 [source,yaml]
 ----
@@ -509,8 +511,6 @@ workflows:
           filters:
             tags:
               only: /^v.*/
-            branches:
-              ignore: /.*/
 ----
 
 ---
