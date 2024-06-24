@@ -158,12 +158,12 @@ Use an `approval` job to configure a workflow to wait for manual approval before
 
 Some things to keep in mind when using manual approval in a workflow:
 
-* `hold` is a special job type that is configured when listing jobs under the `workflow` key. You do not need to define a `hold` type job in the `jobs` section of your configuration. If you do configure steps for a job that is given the `hold` type in the workflows section, the steps for that job will not be run. A `hold` job is _only_ used to hold the workflow for approval, not to run any work.
-* The approval job name must be unique and not used by any other job in your configuration.
+* `approval` is a special job type that is configured when listing jobs under the `workflows` key. You do not need to define an `approval` type job in the `jobs` section of your configuration. If you do configure steps for a job that is given the `approval` type in the workflows section, the steps for that job will not be run. An `approval` job is _only_ used to _hold_ the workflow for approval, not to run any work.
+* The `approval` job name must be unique and not used by any other job in your configuration.
 * The name of the approval job is arbitrary. For example, an approval job can be named `hold`, `wait`, `pause`, etc.
-* All jobs that run _after_ a manual approval job **must** `require` the name of the approval job.
+* All jobs that run _after_ a manual approval job **must** `require` the name of the `approval` job.
 * Jobs run in the order defined in the workflow. When the workflow encounters a job with `type: approval`, the workflow pauses until approval is granted. Once approval is granted the workflow continues to process jobs in the order defined in the configuration file.
-* Jobs downstream of an approval job can be restricted by adding a xref:contexts#approve-jobs-that-use-restricted-contexts[restricted context] to those downstream jobs.
+* Jobs downstream of an `approval` job can be restricted by adding a xref:contexts#approve-jobs-that-use-restricted-contexts[restricted context] to those downstream jobs.
 
 The following screenshot demonstrates:
 
@@ -173,7 +173,7 @@ The following screenshot demonstrates:
 
 image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the workflow map]
 
-By clicking on the approval job's name (`hold`, in the screenshot above), an approval dialog box appears. You can approve or close the popup without approving.
+By clicking on the `approval` job's name (`hold`, in the screenshot above), an approval dialog box appears. You can approve or close the popup without approving.
 
 === Configure an approval job
 
