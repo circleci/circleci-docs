@@ -59,9 +59,15 @@ This section covers creating a new CircleCI organization. A CircleCI organizatio
 
 . Give your organization a name and select btn:[Let's Go].
 
-. Create a project to get started. Select **Get Started** in the "Create a project" card, and refer to the xref:create-project#[Create a project] page for steps.
+. Create a project to get started. Select **Get Started** in the "Create a project" card, and refer to the xref:create-project#create-a-project[Create a project] page for further steps.
 +
-TIP: If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
+[TIP]
+====
+If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app.
+
+* You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])
+* Or some of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
+====
 
 . Invite your team from menu:Organization Settings[People]. For more information on inviting people to your org, see the xref:invite-your-team#invite-teammates[Join your teammates] page.
 

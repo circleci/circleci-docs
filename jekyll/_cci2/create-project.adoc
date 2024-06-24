@@ -37,18 +37,22 @@ If you authorized CircleCI with either xref:gitlab-integration#[GitLab], or the 
 
 Follow these steps to create a new project in CircleCI:
 
-. In the CircleCI web app, click **Projects** in the sidebar.
-. Click btn:[Create Project] at the top of the page.
+. In the CircleCI web app, select **Organization Home** in the sidebar.
+. Select btn:[Create Project] at the top of the page.
 +
 image::create-project-button.png[Create a project]
 
-. In the Connect Code window, click the **GitHub** tile.
-. In the Create New Project window, use the options to:
+. In the connect your code window, select the **GitHub** tile.
 +
-** Input your project name in the Project Name field.
-** Tell CircleCI where your code is stored.
-** Click btn:[Create Project] at the bottom of the window. CircleCI will now automatically generate a custom configuration file based on the programming languages and frameworks detected in your selected repository.
-** When the custom configuration file has been generated, click btn:[Commit and Run] to commit your custom configuration file on a new branch called `circleci-project-setup`. Alternatively, click btn:[Review configuration file] to view the custom configuration file in the configuration editor.
+NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect.
+
+. Give your project a name, select the GitHub repository you would like to connect, and select btn:[Create Project].
+. CircleCI automatically generates a custom configuration file based on the programming languages and frameworks detected in your selected repository.
+. When the custom configuration file has been generated, you have some options:
+** Select btn:[Commit and Run] to commit your custom configuration file on a new branch called.
+
+DONE UP TO HERE
+** Select btn:[Review configuration file] to view the custom configuration file in the configuration editor.
 ** If CircleCI is unable to generate a custom configuration file, CircleCI will generate a fallback template that you can utilize to create your `config.yml` file.
 
 [#gitlab-project]
