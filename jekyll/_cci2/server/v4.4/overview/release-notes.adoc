@@ -27,6 +27,22 @@ For a full list of fixes, changes, new features and known issues, follow the lin
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.4 guide].
 
+[#release-4-4-4]
+== Release 4.4.4
+
+[#changelog-4-4-4]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-4/[changelog].
+
+[#release-4-4-3]
+== Release 4.4.3
+
+[#changelog-4-4-3]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-4-3/[changelog].
+
 [#release-4-4-2]
 == Release 4.4.2
 
