@@ -163,6 +163,7 @@ Some things to keep in mind when using manual approval in a workflow:
 * The name of the approval job is arbitrary. For example, an approval job can be named `hold`, `wait`, `pause`, etc.
 * All jobs that run _after_ a manual approval job **must** `require` the name of the approval job.
 * Jobs run in the order defined in the workflow. When the workflow encounters a job with `type: approval`, the workflow pauses until approval is granted. Once approval is granted the workflow continues to process jobs in the order defined in the configuration file.
+* Jobs downstream of an approval job can be restricted by adding a xref:contexts#approve-jobs-that-use-restricted-contexts[restricted context] to those downstream jobs.
 
 The following screenshot demonstrates:
 
@@ -693,7 +694,7 @@ Workflows may have one of the following states:
 | Yes
 
 | UNAUTHORIZED
-| One or more of the jobs terminated with a `unauthorized` job status. The triggering account does not have access to a required restricted context.
+| One or more of the jobs terminated with a `unauthorized` job status. The user who triggered the pipeline or approved an approval job does not have access to a required restricted context.
 | Yes
 |===
 
