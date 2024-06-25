@@ -114,6 +114,7 @@ GCP
 geckodriver
 Gemfile
 GitHub
+\bGitLab self-managed\b
 GKE
 Google Cloud
 Google Cloud Functions
