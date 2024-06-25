@@ -2387,8 +2387,6 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 | Should currently be `schedule`.
 |===
 
-Line 3:
-
 [,yml]
 ----
 workflows:
@@ -2413,8 +2411,6 @@ workflows:
 CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
-
-Line 4:
 
 [,yml]
 ----
@@ -2450,8 +2446,6 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
 |===
 
-Line 5:
-
 [,yml]
 ----
 workflows:
@@ -2485,8 +2479,6 @@ Trigger filters can have the key `branches`.
 | Map
 | A map defining rules for execution on specific branches
 |===
-
-Line 6:
 
 [,yml]
 ----
