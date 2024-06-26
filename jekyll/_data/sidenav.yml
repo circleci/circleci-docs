@@ -118,7 +118,7 @@ en:
             link: pipelines
           - name: Jobs and steps
             link: jobs-steps
-          - name: Use workflows to orchestrate jobs
+          - name: Workflow orchestration
             link: workflows
           - name: Use workspaces to share data between jobs
             link: workspaces
@@ -136,6 +136,8 @@ en:
         children:
           - name: Triggers overview
             link: triggers-overview
+          - name: Webhook integration
+            link: webhooks
       - name: How-to guides
         children:
           - name: Set up multiple configuration files for a project
@@ -612,7 +614,7 @@ en:
     children:
       - name: Integration features
         children:
-          - name: Webhooks overview
+          - name: Webhook integration
             link: webhooks
           - name: Notifications overview
             link: notifications
