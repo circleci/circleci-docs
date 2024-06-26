@@ -226,7 +226,7 @@ jobs:
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
             cp -r /tmp/workspace/api/* jekyll/_api/
-      - run: sudo apt-get update; sudo apt-get --yes install nkf
+      - run: sudo apt-get --yes install nkf
       - set-jekyll-basename
       - run:
           name: Build the Jekyll site
