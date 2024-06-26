@@ -31,6 +31,16 @@ The v4.3 release introduces upgraded execution architecture. Previously, VM serv
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide]. There is a background database migration job that is run on install/upgrade to server 4.3. When upgrading to 4.3 you **must ensure this job completes**.
 
+https://circleci.com/changelog/server-release-4-3-5/
+
+[#release-4-3-5]
+== Release 4.3.5
+
+[#changelog-4-3-5]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-3-5/[changelog].
+
 [#release-4-3-4]
 == Release 4.3.4
 
