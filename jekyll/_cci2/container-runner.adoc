@@ -390,6 +390,8 @@ NOTE: Cluster-wide permissions are used by container runner to autodetect the OS
 
 Each container runner has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed. By default this will remove all jobs older than five hours and five minutes. This can be shortened or lengthened via the `agent.kubeGCThreshold` parameter. However, if you do shorten the garbage collection (GC) frequency, also shorten the max task run time via the `agent.maxRunTime` parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
 
+In addition, GC may remove some objects sooner than this threshold. Task pods have a liveness probe which checks for a running task-agent process. Once a task completes or fails, the task-agent process will stop running and the liveness probe will fail which will trigger GC.
+
 Container runner will drain and restart cleanly when sent a termination signal. Container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 
 If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
