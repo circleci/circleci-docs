@@ -206,6 +206,9 @@ jobs:
       #     command: |
       #       sudo apt-get update --allow-releaseinfo-change
       #       sudo apt-get install cmake pkg-config
+      - run:
+          name: "Install liquid-c"
+          command: gem install liquid-c -v '4.0.0' --source 'https://rubygems.org/' -- --with-cflags=\"-Wno-compound-token-split-by-macro\"
       - ruby-deps
       - node/install-packages:
           pkg-manager: yarn
