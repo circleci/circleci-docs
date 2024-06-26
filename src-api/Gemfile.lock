@@ -140,7 +140,7 @@ DEPENDENCIES
   tzinfo (~> 1.2.10)
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 3.1.3p185
 
 BUNDLED WITH
    2.1.4
