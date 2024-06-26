@@ -122,6 +122,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    webrick (1.7.0)
 
 PLATFORMS
   ruby
@@ -138,6 +139,7 @@ DEPENDENCIES
   sass (~> 3.7)
   sprockets (~> 3.7)
   tzinfo (~> 1.2.10)
+  webrick
 
 RUBY VERSION
    ruby 3.1.3p185
