@@ -98,7 +98,7 @@ agent:
 [#customizable-service-containers]
 === Customizable service containers
 
-By default, link:https://circleci.com/docs/using-docker/#using-multiple-docker-images[service (or secondary) containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. This allows fine-tuned control over a service's resource usage on a per-image basis.
+By default, xref:using-docker#using-multiple-docker-images[service (or secondary) containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. Using the available overrides allows fine-tuned control over a service's resource usage on a per-image basis.
 
 [#customizable-service-containers-example]
 ==== Example
@@ -164,7 +164,7 @@ In this configuration:
 - `cimg/mysql:8` matches the `pattern` rule at the resource class scope and is allocated 0.6 CPU units and 300Mi of memory.
 - `cimg/mongo:5` doesn't match any rule from the service container options, hence defaults to the `default` rule at the resource class scope and is allocated 0.4 CPU units and 150Mi of memory.
 
-The rendered Pod specification would then appear as:
+The rendered Pod specification would then appear as follows:
 
 [source,yaml]
 ----
@@ -192,25 +192,25 @@ spec:
           memory: "150Mi"
 ----
 
-In the following sections, we'll discuss these customization options in greater detail.
+In the following sections, we will discuss these customization options in greater detail.
 
 ==== Image match types
 
 Image match types govern how images are matched for container customization. The types include:
 
-. *Exact:*
-For exact matching, the image string must be an exact match. For example, `cimg/redis:6.2.6` only matches the `cimg/redis:6.2.6` image.
+. *Exact:* For exact matching, the image string must be an exact match. For example, `cimg/redis:6.2.6` only matches the `cimg/redis:6.2.6` image.
 
-. *Prefix:*
-For prefix matching, the image string matches all images with a common prefix. For example, `cimg/redis:` will match any `cimg/redis` image regardless of the tag.
+. *Prefix:* For prefix matching, the image string matches all images with a common prefix. For example, `cimg/redis:` will match any `cimg/redis` image regardless of the tag.
 
-. *Pattern:*
-For pattern matching, a Go-based regex pattern is used to match images. For example, `cimg/(redis|postgres):.*` matches any `redis` or `postgres` image from the `cimg` repository regardless of the tag. Refer to the link:https://golang.org/pkg/regexp/syntax/[Golang regex syntax] and link:https://regex101.com/[regex101.com] to test your regular expressions.
+. *Pattern:* For pattern matching, a Go-based regex pattern is used to match images. For example, `cimg/(redis|postgres):.*` matches any `redis` or `postgres` image from the `cimg` repository regardless of the tag. Refer to the link:https://golang.org/pkg/regexp/syntax/[Golang regex syntax] and link:https://regex101.com/[regex101.com] to test your regular expressions.
 
-. *Default:*
-The `Default` match type applies when an image did not match any of the other image match types. It sets a single specification for all such service containers.
+. *Default:* The `Default` match type applies when an image did not match any of the other image match types. It sets a single specification for all such service containers.
 
-In terms of precedence, selectors follow the hierarchy: `Exact` -> `Prefix` -> `Pattern` -> `Default`. If a given image name doesn't match any rule in the hierarchy, it defaults to the `Default` rule. Note, match types defined at the resource class scope take precedence over those at the same match type.
+===== Order of precedence
+
+Selectors follow the hierarchy: `Exact` -> `Prefix` -> `Pattern` -> `Default`. If a given image name does not match any rule in the hierarchy, it defaults to the `Default` rule. 
+
+NOTE: Match types defined at the resource class scope take precedence over those at the same match type.
 
 ==== Selection scope
 
@@ -232,9 +232,8 @@ resourceClasses:
               memory: "500Mi"
 ----
 
-. *Global:*
-This scope applies a custom configuration globally to all containers across all resource classes. It is considered when no matching scope is found at the Resource class level.
-
+. *Global:* This scope applies a custom configuration globally to all containers across all resource classes. It is considered when no matching scope is found at the resource class level.
++
 [source,yaml]
 ----
 agent:
@@ -247,7 +246,9 @@ agent:
             memory: "200Mi"
 ----
 
-When it comes to precedence, the `Resource class` scope overrides any `Global` scope selection for a given match type. If a match is available in both scopes, the `Resource class` scope prevails.
+===== Order of precedence
+
+The `Resource class` scope overrides any `Global` scope selection for a given match type. If a match is available in both scopes, the `Resource class` scope prevails.
 
 ==== Troubleshooting
 
