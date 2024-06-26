@@ -118,7 +118,7 @@ en:
             link: pipelines
           - name: Jobs and steps
             link: jobs-steps
-          - name: Use workflows to orchestrate jobs
+          - name: Workflow orchestration
             link: workflows
           - name: Use workspaces to share data between jobs
             link: workspaces
