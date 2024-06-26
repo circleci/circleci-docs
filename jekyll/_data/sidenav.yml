@@ -28,8 +28,12 @@ en:
             link: first-steps
           - name: Join teammates on CircleCI
             link: invite-your-team
+          - name: Create a project
+            link: create-project
           - name: Quickstart guide
             link: getting-started
+          - name: Hello world
+            link: hello-world
           - name: YAML configuration intro
             link: introduction-to-yaml-configurations
           - name: In-app configuration editor
@@ -66,12 +70,6 @@ en:
             link: config-intro
           - name: Use the Slack orb to set up notifications
             link: slack-orb-tutorial
-      - name: How-To guides
-        children:
-          - name: Create a project
-            link: create-project
-          - name: Hello world
-            link: hello-world
       - name: Reference
         children:
           - name: Configuration reference
