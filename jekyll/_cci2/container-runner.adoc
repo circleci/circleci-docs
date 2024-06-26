@@ -216,9 +216,8 @@ NOTE: Match types defined at the resource class scope take precedence over those
 
 Selection scopes determine the context in which the customization is applied. This comprises:
 
-. *Resource class:*
-This scope specifies a custom configuration for all containers running within a particular resource class. For example, setting specific resources under `your-namespace/your-resource-class` impacts only the containers running within this specific class. This scope takes precedence over the Global scope.
-
+. *Resource class:* This scope specifies a custom configuration for all containers running within a particular resource class. For example, setting specific resources under `your-namespace/your-resource-class` impacts only the containers running within this specific class. This scope takes precedence over the Global scope.
++
 [source,yaml]
 ----
 resourceClasses:
