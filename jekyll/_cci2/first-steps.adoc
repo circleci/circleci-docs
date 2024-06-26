@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page and create an account or follow an email invite link from your team. After signing up you can create an organization or find your teammates.
+To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page or follow an email invite link from your team, and create an account. After signing up you can create an organization or find your teammates.
 
 [NOTE]
 ====
@@ -55,7 +55,7 @@ If you want to primarily build **Bitbucket** projects, sign up with your Bitbuck
 
 This section covers creating a new CircleCI organization. A CircleCI organization may correspond directly to a _personal_ CircleCI account, or more commonly, to a _shared_ account. Shared orgs are where teams collaborate. Multiple collaborating team members' personal CircleCI accounts can be associated with a shared org.
 
-. From your user homepage Select btn:[Get Started] in the "Start a new organization" card.
+. From your user homepage select btn:[Get Started] in the "Start a new organization" card.
 
 . Give your organization a name and select btn:[Let's Go].
 
@@ -65,11 +65,11 @@ This section covers creating a new CircleCI organization. A CircleCI organizatio
 ====
 If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app.
 
-* You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])
+* You can take a look at a popular open source project building on CircleCI, link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook].
 * Or some of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
 ====
 
-. Invite your team from menu:Organization Settings[People]. For more information on inviting people to your org, see the xref:invite-your-team#invite-teammates[Join your teammates] page.
+. Invite your team by navigating to menu:Organization Settings[People]. For more information on inviting people to your org, see the xref:invite-your-team#invite-teammates[Join your teammates] page.
 
 [#sign-up-with-an-invite]
 == Sign up with an invite

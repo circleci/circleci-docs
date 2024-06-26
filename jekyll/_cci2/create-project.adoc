@@ -24,13 +24,15 @@ This guide gets you started with creating a new project in CircleCI.
 
 The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
-* If you authenticated using xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket], a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to <<set-up-a-project>> below.
-* If you authenticated through xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to <<create-a-project>> below.
+On the **Organization Home** page, check which option you see:
+
+* If you see a btn:[Set up a project] button, follow steps to <<set-up-a-project>> below.
+* If you see a btn:[Create Project] button, follow steps to <<create-a-project>> below.
 
 [#create-a-project]
 === Create a project
 
-If you authorized CircleCI with either xref:gitlab-integration#[GitLab], or the xref:github-apps-integration#[GitHub App], follow the steps in the section below that applies to you.
+Choose steps to follow below, depending on where your code is stored:
 
 [.tab.create-project.GitHub_App]
 --
