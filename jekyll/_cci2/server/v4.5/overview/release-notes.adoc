@@ -23,6 +23,14 @@ The v4.5 release introduces security and performance improvements.
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.5 guide].
 
+[#release-4-5-1]
+== Release 4.5.1
+
+[#changelog-4-5-1]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-5-1/[changelog].
+
 [#release-4-5-0]
 == Release 4.5.0
 
