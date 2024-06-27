@@ -20,6 +20,22 @@ Server v4.1 introduces an air-gapped installation option. For more information s
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4 guide].
 
+[#release-4-1-10]
+== Release 4.1.10
+
+[#changelog-4-1-10]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-1-10/[changelog].
+
+[#release-4-1-9]
+== Release 4.1.9
+
+[#changelog-4-1-9]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-1-9-and-4-2-5/[changelog].
+
 [#release-4-1-8]
 == Release 4.1.8
 

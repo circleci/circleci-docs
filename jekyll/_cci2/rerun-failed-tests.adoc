@@ -698,6 +698,12 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
+**Question:** I use Cypress and my job seems to be uploading test results just fine, but the failed test re-run is still running all of the tests instead of just the failed tests
+
+**Answer:** It is possible that the JUnit XML files do not have the proper metadata for the failed tests rerun.  Try using the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter` package] to ensure the test results being uploaded have the proper JUnit XML format.
+
+---
+
 **Question:** What is the oldest job that can use "rerun failed tests"?
 
 **Answer:** Rerunning failed tests is currently available for workflows that are less than 15 days old.

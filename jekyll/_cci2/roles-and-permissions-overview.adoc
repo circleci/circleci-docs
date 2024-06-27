@@ -183,7 +183,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Manage contexts
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Orbs*
@@ -268,7 +268,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Edit triggers
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Config sources*
@@ -283,7 +283,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Edit config sources
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Releases*

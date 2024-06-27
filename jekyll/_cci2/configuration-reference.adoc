@@ -1928,7 +1928,7 @@ Template examples:
 * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
 * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it makes sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
+While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 
 NOTE: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
@@ -2387,6 +2387,22 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 | Should currently be `schedule`.
 |===
 
+[,yml]
+----
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
+     jobs:
+       - test
+----
+
 '''
 
 [#schedule]
@@ -2430,6 +2446,22 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
 |===
 
+[,yml]
+----
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
+     jobs:
+       - test
+----
+
 '''
 
 [#filters]
@@ -2448,6 +2480,22 @@ Trigger filters can have the key `branches`.
 | A map defining rules for execution on specific branches
 |===
 
+[,yml]
+----
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 0 * * *"
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
+     jobs:
+       - test
+----
+
 '''
 
 [#schedule-branches]
@@ -2461,6 +2509,26 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 * Any branches that match `ignore` will not run the job.
 * If neither `only` nor `ignore` are specified then all branches will run the job. If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
 
+[source,yaml]
+----
+workflows:
+  commit:
+    jobs:
+      - test
+      - deploy
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+                - /^release\/.*/
+    jobs:
+      - coverage
+----
+
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
@@ -2471,16 +2539,18 @@ Branches can have the keys `only` and `ignore` which each map to a single string
 | Map
 | A map defining rules for execution on specific branches
 
-| `only`
-| Y
+| `only` ^1^
+| N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 
-| `ignore`
+| `ignore` ^1^
 | N
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 |===
+
+^1^: One of either `only` or `ignore` branch filters must be specified. If both are present, `only` is used.
 
 '''
 
@@ -2593,6 +2663,8 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 
 Jobs may be configured to use global environment variables set for an organization, see the link:{{ site.baseurl }}/contexts[Contexts] document for adding a context in the application settings.
 
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
 |===
 | Key | Required | Type | Description
 
@@ -2703,6 +2775,27 @@ Branches can have the keys `only` and `ignore`, which either map to a single str
 | Either a single branch specifier, or a list of branch specifiers
 |===
 
+[source,yaml]
+----
+workflows:
+  dev_stage_pre-prod:
+    jobs:
+      - test_dev:
+          filters:  # using regex filters requires the entire branch to match
+            branches:
+              only:  # only branches matching the below regex filters will run
+                - dev
+                - /user-.*/
+      - test_stage:
+          filters:
+            branches:
+              only: stage
+      - test_pre-prod:
+          filters:
+            branches:
+              only: /pre-prod(?:-.+)?$/
+----
+
 '''
 
 [#tags]
@@ -2739,6 +2832,20 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 |===
 
 For more information, see the xref:workflows#executing-workflows-for-a-git-tag[Executing workflows for a git tag] section of the Workflows page.
+
+[source,yaml]
+----
+workflows:
+  untagged-build:
+    jobs:
+      - build
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
+----
 
 '''
 

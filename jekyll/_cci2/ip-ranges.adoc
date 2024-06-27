@@ -132,7 +132,7 @@ To query these, you can use any DNS resolver. Here is an example using `dig` wit
 dig all.knownips.circleci.com A +short
 ----
 
-Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. *30 days notice* will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
+Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. *30 days notice* will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes. 
 
 [#pricing]
 == Pricing
@@ -165,6 +165,7 @@ CircleCI _does not recommend_ configuring an IP-based firewall based on the AWS 
 In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs executed by machines. The following IP address ranges are used by CircleCI macOS Cloud:
 
 * 100.27.248.128/25
+* 100.29.139.128/25
 * 38.39.184.0/24
 * 38.39.185.0/24
 * 38.39.183.0/24
@@ -180,10 +181,12 @@ In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs execut
 
 *IP ranges* is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI's platform.
 
-macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
+macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds. 
+
+*macOS IP ranges are not included in the machine-consumable lists maintained in DNS.* Refer to the list above for the most up-to-date macOS IPs.
 
 [#known-limitations]
 == Known limitations
 
-* There is currently no support for specifying IP ranges configuration syntax when using the link:{{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration[pipeline parameters feature]. Find more details in this https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6[Discuss post].
+* Currently, the system does not have support for specifying IP ranges configuration syntax when using the link:{{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration[pipeline parameters feature]. Find more details in this https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6[Discuss post].
 * IP ranges is currently available for the link:{{site.baseurl}}/configuration-reference/#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a link:{{site.baseurl}}/configuration-reference/#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.

@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-After setting up an organization in CircleCI, ensure your whole team can access CircleCI.
+After setting up an organization in CircleCI, ensure your whole team get access.
 
 [#prerequisites]
 == Prerequisites
@@ -18,34 +18,48 @@ After setting up an organization in CircleCI, ensure your whole team can access 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * At least one project created in your organization. See the xref:create-project#[Create a project] page for instructions.
 
-[#invite-team-github-oauth-bitbucket]
-== GitHub OAuth and Bitbucket users
+[#find-your-team]
+== Find your team
 
-NOTE: These steps are for GitHub OAuth app and Bitbucket accounts. If you use GitHub, refer to the xref:github-integration#[GitHub OAuth app integration] guide to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
+After creating an account, you can join an existing CircleCI organization using the **Find Your Team** dropdown menu in the **Join Your Teammates** card on the link:https://app.circleci.com/home/[homepage].
 
-To join an existing CircleCI organization with a GitHub OAuth integration:
+image::getting-started/find-your-team.png[Screenshot showing the welcome screen with the find your team menu expanded]
 
-. Navigate to our link:https://circleci.com/vcs-authorize/[login page].
-. Click **Log in** > **Signed up for CircleCI with GitHub or Bitbucket before September 2023**.
-. Select **Log in with GitHub**.
+There are three options:
 
-To join an existing CircleCI organization with a Bitbucket integration:
+* Join via an invite
+* Search via GitHub
+* Search via Bitbucket
 
-. Navigate to our link:https://circleci.com/vcs-authorize/[login page].
-. Click **Log in** > **Signed up for CircleCI with GitHub or Bitbucket before September 2023**.
-. Select **Log in with Bitbucket**.
+These options are also available at any time using the **Join Organization** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are outlined in the following sections.
 
-[#invite-team-github-app-gitlab]
-== GitHub App and GitLab users
+=== Join an existing CircleCI organization via an invite:
 
-NOTE: These steps are for GitLab and GitHub App accounts. Refer to the xref:github-apps-integration#[GitHub App integration] to check if your GitHub integration uses the GitHub App or the GitHub OAuth app.
+. Reach out to your organization admin to request an invite
+. Your organization admin will need to follow the steps below in the ‘Invite teammates’ section to send you an email invite. Once you receive your invitation, click the invitation link to login and join your organization
 
-You must be an Organization Admin to invite your team to CircleCI.
+=== Join an existing CircleCI organization with a GitHub OAuth app integration:
+
+. Select "Search via GitHub" from the **Find Your Team** dropdown
+. Authorize the GitHub OAuth app for read access to your GitHub organization membership
+. After authorization, you will be redirected to CircleCI where we will list all matching CircleCI organizations that you are eligible to join. Select btn:[Join Organizations] to successfully complete joining these organizations in CircleCI.
++
+NOTE: If you do not see the organization you would like to join listed, you will need to receive an invite to join from an organization admin. Reach out to your admin to request an invite, and send them a link to this help doc for reference.
+
+=== Join an existing CircleCI organization with a Bitbucket integration:
+
+. Select "Search via Bitbucket" from the **Find Your Team** dropdown to be redirected to Bitbucket
+. Enter your Bitbucket credentials to authorize CircleCI to your Bitbucket account
+. After authorization, you will be redirected back to CircleCI and will be added to your organization
+
+[#invite-teammates]
+== Invite teammates to join your GitHub App or GitLab organization
+
+NOTE: These steps are for GitLab and GitHub App accounts. Refer to the xref:github-apps-integration#[GitHub App integration] page to check if your GitHub integration uses the GitHub App or the GitHub OAuth app. You must be an Organization Admin to invite your team to CircleCI.
 
 . In the CircleCI web app, go to menu:Organization Settings[People], then click btn:[Invite].
-. To send out email invites, enter your team members' email addresses, each separated by a space, then assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the **Invite** form based on role.
-
-Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:manage-roles-and-permissions#[Manage roles and permissions guide] for more details.
+. To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
+. Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:manage-roles-and-permissions#[Manage roles and permissions] page for more details.
 
 [#see-also]
 == See also
