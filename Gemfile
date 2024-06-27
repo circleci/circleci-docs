@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.6'
+ruby '3.1.3'
 
 gem "jekyll", '~> 4.2.0', github: "jekyll/jekyll"
 gem 'html-proofer'
@@ -9,11 +9,10 @@ gem 'pygments.rb', '~> 1.1.2'
 gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"
-gem "liquid-c"
-gem 'nokogiri', '~> 1.14'
+gem 'liquid-c', '~> 4.0.1'
 gem 'htmlcompressor'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
-gem 'rack', '~> 2.2.3.1'
+gem 'rack', '~> 2.2.6.3'
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
