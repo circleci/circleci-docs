@@ -33,8 +33,14 @@ jobs:
 
 [#supported-xcode-versions-intel]
 === Supported Xcode versions for Intel
+[WARNING]
+====
+*Intel-based resources reached end of life on June 28, 2024.*
 
-{% include snippets/xcode-intel-vm.adoc %}
+The `macos.x86.medium.gen2` resource class is no longer available. The default resource class for all customers is now m1 medium.
+
+====
+
 
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
@@ -84,8 +90,6 @@ To read about CircleCI's customer support policy regarding beta images, check ou
 === Apple silicon support
 
 Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:runner-overview#available-self-hosted-runner-platforms[CircleCI runner].
-
-It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
 [#xcode-cross-compilation]
 == Xcode cross compilation
