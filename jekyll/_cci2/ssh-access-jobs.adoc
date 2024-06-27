@@ -21,7 +21,7 @@ CircleCI gives you the option to access all jobs via SSH. Read our https://circl
 
 When you log in with SSH, you are running an *interactive* login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (for example, `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
-Note that a _default_ CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
+Note that a _default_ CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but fail in non-interactive mode.
 
 [#steps]
 == Steps
@@ -35,7 +35,7 @@ NOTE: The steps described in this section apply to all CircleCI accounts. If you
 .. Expand the workflow that contains your job
 +
 image::jobs-list.png[Expand workflow to see the list of jobs]
-.. Click the job name to enter the job view
+.. Select the job name to enter the job view
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the *Rerun* dropdown menu.
 +
 The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
