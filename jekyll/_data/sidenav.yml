@@ -2066,35 +2066,35 @@ ja:
             link: server/v4.5/installation/installation-reference
             i18n_name: インストールのリファレンスガイド
       - name: Air-gapped installation v4.5
-        i18n_name:
+        i18n_name: Server v4.5のエアギャップ環境にのインストール
         children:
           - name: Phase 1 - Prerequisites
             link: server/v4.5/air-gapped-installation/phase-1-prerequisites
-            i18n_name: TBC
+            i18n_name: ステップ1 - 前提条件
           - name: Phase 2 - Configure object storage
             link: server/v4.5/air-gapped-installation/phase-2-configure-object-storage
-            i18n_name: TBC
+            i18n_name: ステップ2 - ストレージ
           - name: Phase 3 - Install CircleCI server
             link: server/v4.5/air-gapped-installation/phase-3-install-circleci-server
-            i18n_name: TBC
+            i18n_name: ステップ3 - インストール
           - name: Phase 4 - Configure Nomad clients
             link: server/v4.5/air-gapped-installation/phase-4-configure-nomad-clients
-            i18n_name: TBC
+            i18n_name: ステップ4 - Nomad
           - name: Phase 5 - Test installation
             link: server/v4.5/air-gapped-installation/phase-5-test-your-installation
-            i18n_name: TBC
+            i18n_name: ステップ5 - インストールの確認
           - name: Additional considerations
             link: server/v4.5/air-gapped-installation/additional-considerations
-            i18n_name: TBC
+            i18n_name: 追加の検討事項
           - name: Example values.yaml
             link: server/v4.5/air-gapped-installation/example-values
-            i18n_name: TBC
+            i18n_name: values.yaml の参考
       - name: Server v4.5 operations
-        i18n_name:
+        i18n_name: Server v4.5 管理者ガイド
         children:
           - name: Operator overview
             link: server/v4.5/operator/operator-overview
-            i18n_name: 管理者ガイド
+            i18n_name: 概要
           - name: Introduction to Nomad cluster operation
             link: server/v4.5/operator/introduction-to-nomad-cluster-operation
             i18n_name: Nomadクラスタの操作
@@ -2106,7 +2106,7 @@ ja:
             i18n_name: Orbの管理
           - name: Manage virtual machines with Machine Provisioner
             link: server/v4.5/operator/manage-virtual-machines-with-machine-provisioner
-            i18n_name: TBC
+            i18n_name: VMの管理
           - name: Configuring external services
             link: server/v4.5/operator/configuring-external-services
             i18n_name: 外部サービスの設定
@@ -2139,7 +2139,7 @@ ja:
             i18n_name: バックアップと復元
           - name: Upgrade MongoDB
             link: server/v4.5/operator/upgrade-mongo
-            i18n_name: TBC
+            i18n_name: MongoDBのアップグレード
           - name: FAQs
             link: server/v4.5/operator/faq
-            i18n_name: TBC
+            i18n_name: よくある質問
