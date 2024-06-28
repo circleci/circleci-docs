@@ -10,100 +10,79 @@ contentTags:
 :icons: font
 :experimental:
 
-To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your email address and connect your GitHub, Bitbucket, or GitLab account in the process.
+To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page or follow an email invite link from your team, and create an account. After signing up you can create an organization or find your teammates.
 
-- If you are **creating a new CircleCI org** for your team, follow the xref:#sign-up-and-create-an-org[Sign up and create an org] steps below.
-- If you are signing up for a CircleCI account through an **invite** from someone on your team, follow the steps in the xref:#sign-up-with-an-invite[Sign up with an invite] section.
-
-[#vcs-integrations]
-== VCS integrations
-
+[NOTE]
+====
 CircleCI supports GitHub, Bitbucket, and GitLab projects.
 
 If you use **GitHub** or **GitLab**, and are creating a CircleCI organization for your team, you will set the version control system (VCS) integration type, and authenticate with your VCS provider during the signup process. Team members that you invite to your CircleCI org can join without authenticating with your VCS. However, if they are to create new projects, they will authenticate during the project creation process.
 
 If you use **Bitbucket**, every team member signing up for a new account and joining your org will authenticate with Bitbucket _during_ the signup process.
+====
+
+== Sign up
+
+From the link:https://circleci.com/signup/[Sign Up] page, do one of the following:
+
+=== Building GitHub and GitLab projects?
+
+If you want to build mainly **GitHub** or **GitLab** projects, sign up with your email address to create an account.
+
+TIP: If you want to collaborate on an existing org you can request an invitation now and use an invite link to signup, or you can create an account and request an invite later.
+
+. Select btn:[Sign Up].
+. Enter your email address and create a password.
+. Answer a few questions about how you plan to use CircleCI.
+. You can now choose one of the following:
+** Use the xref:invite-your-team#[Find Your Team] option to connect your account to a shared org
+** <<sign-up-and-create-an-org>>
+
+=== Building Bitbucket projects?
+
+If you want to primarily build **Bitbucket** projects, sign up with your Bitbucket account. After you connect your Bitbucket account you can go ahead and start setting up projects, following the xref:create-project#set-up-a-project[Create a project in CircleCI] page. Your org in CircleCI maps directly to your Bitbucket workspace.
+
+. Select btn:[Sign Up With Bitbucket].
+. Log in to your Bitbucket account
+. Enter your email address and create a password.
+
+. Choose between creating an organization or joining your teammates in an existing org:
+** If you are **creating a new CircleCI org** for your team, follow the <<sign-up-and-create-an-org>> steps below.
+** If you want to join an existing shared organization, follow the steps on the xref:#invite-your-team[Join your teammates] page.
 
 [#sign-up-and-create-an-org]
-== Sign up and create an org
+== Create an org
 
-If you are new to CircleCI, you will create a CircleCI organization. A CircleCI organization may correspond directly to a _personal_ CircleCI account, or more commonly, to a _shared_ account in which a team collaborates and with which multiple team members' personal CircleCI accounts can be associated.
+This section covers creating a new CircleCI organization. A CircleCI organization may correspond directly to a _personal_ CircleCI account, or more commonly, to a _shared_ account. Shared orgs are where teams collaborate. Multiple collaborating team members' personal CircleCI accounts can be associated with a shared org.
 
-. To create an account for free with CircleCI, enter your email address and password on the link:https://circleci.com/signup/[Sign Up] page.
+. From your user homepage select btn:[Get Started] in the "Start a new organization" card.
 
-. On the next screen, respond to prompts that best describe your role and your engineering organization.
+. Give your organization a name and select btn:[Let's Go].
 
-. Then, connect your code. Choose the VCS that contains your code repositories: GitHub, GitLab.com (cloud), GitLab Self-Managed, or Bitbucket.
-
-[.tab.source-of-change.GitHub]
---
-[start=4]
-. For GitHub, you will be taken to a screen to install the CircleCI GitHub App. In this step, you can specify exactly which repositories CircleCI can access, or opt to give CircleCI access to all repositories in your GitHub organization.
-
-. Next, in the Create New Project page, you will set up your first project and trigger your first pipeline in CircleCI. Follow the instructions on the page, or refer to the xref:create-project#[Creating a Project] guide for more details.
+. Create a project to get started. Select **Get Started** in the "Create a project" card, and refer to the xref:create-project#create-a-project[Create a project] page for further steps.
 +
-If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel].
+[TIP]
+====
+If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app.
 
-. You will be taken to the dashboard in the CircleCI web app. From here, you can start to trigger pipelines, create more projects, and invite team members to your org.
+* You can take a look at a popular open source project building on CircleCI, link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook].
+* Or some of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
+====
 
-** If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
-+
-When you are ready, you can connect to your GitHub account from the CircleCI web app by xref:create-project#[creating a new project].
-
-NOTE: The full set of documentation for integrating GitHub with CircleCI can be found on the xref:github-apps-integration#[GitHub App integration page].
---
-
-[.tab.source-of-change.GitLab]
---
-[start=4]
-. For GitLab, connect your code from either a GitLab.com or GitLab Self-managed account. Follow the prompts to connect to your GitLab account and create a new project. You can also refer to the xref:create-project#[Creating a Project] guide for more details on this step.
-+
-If you do not want to connect to your code at this time and only wish to continue with the email signup, click btn:[Cancel].
-
-. Once you have selected a repository and created a new CircleCI project, you will be redirected to the dashboard in the CircleCI web app. From here, you can start to trigger and run project pipelines, create more projects, and invite team members to your org.
-
-** If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
-+
-When you are ready, you can connect to your GitLab account from the CircleCI web app by xref:create-project#[creating a new project].
-
-NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the xref:gitlab-integration#[GitLab integration page].
---
-
-[.tab.source-of-change.Bitbucket]
---
-[start=4]
-. For Bitbucket, you will authenticate with your Bitbucket account and connect your code.
-
-. Once you have authenticated, you will be redirected to your organization dashboard in the CircleCI web app. From here, you can start to trigger and run project pipelines, set up more projects, and invite team members to your org.
-+
-For more details on setting up a project in CircleCI, read the xref:create-project#[Creating a Project] guide.
-
-** If you choose not to connect your code at this time, you can still explore some example projects within the CircleCI app. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
-+
-When you are ready, you can connect your Bitbucket account from the CircleCI web app. Click your user icon in the lower left corner to open your *User Settings*. Under *Account Integrations*, click btn:[Connect] to authorize with Bitbucket and start setting up your projects.
-
-NOTE: The full set of documentation for integrating Bitbucket with CircleCI can be found on the xref:bitbucket-integration#[Bitbucket integration page].
---
+. Invite your team by navigating to menu:Organization Settings[People]. For more information on inviting people to your org, see the xref:invite-your-team#invite-teammates[Join your teammates] page.
 
 [#sign-up-with-an-invite]
 == Sign up with an invite
 
-If you are signing up using an invite from a team member, you will be _joining_ a CircleCI organization. The CircleCI organization is a _shared_ account where a team collaborates, and with which multiple team members' personal CircleCI accounts can be associated.
+If you are signing up using an invite from your team, you will be _joining_ a CircleCI organization. The CircleCI organization is a _shared_ account where a team collaborates, and with which multiple team members' personal CircleCI accounts can be associated.
 
-[CAUTION]
-====
-You must follow the link from an invite email in order to join an existing CircleCI organization. If you attempt to sign up directly from the link:https://circleci.com/signup/[Sign Up] page, you will be creating a new organization.
-
-If you have not received an invite you can contact your org administrator.
-====
-
-. To create an account for free with CircleCI, follow the link in your invite email and enter your email address and password.
+. To create an account for free with CircleCI, follow the link in your invite email and enter your email address and create a password.
 
 . On the next screen, respond to prompts that best describe your role and your engineering organization.
 
-. Finally, you will be taken to your organization's pipelines dashboard in the CircleCI web app. From here, you can follow projects or trigger pipelines in projects to which you have access in your organization, or set up new projects.
+. Finally, you will be taken to your organization's pipelines dashboard in the CircleCI web app. From here, you can follow projects or trigger pipelines in projects to which you have access in your organization, or xref:create-project#[create new projects].
 
-Note that if you are setting up a project for the first time, you may need to authenticate with your VCS provider. Once you have completed a one-time authentication, you will be able to set up subsequent projects in CircleCI more quickly. Refer to the xref:create-project#[Creating a Project] guide for more information.
+NOTE: If you are setting up a project for the first time, you may need to authenticate with your VCS provider. Once you have completed a one-time authentication, you will be able to set up subsequent projects in CircleCI more quickly. Refer to the xref:create-project#[Creating a Project] guide for more information.
 
 Guides for integrating GitHub, Bitbucket, or GitLab projects are available as follows:
 
@@ -120,8 +99,7 @@ By signing up, you are agreeing to our link:https://circleci.com/terms-of-servic
 [#next-steps]
 == Next steps
 
-- Read the xref:invite-your-team.adoc#[Invite your team] page for steps on adding team members to your CircleCI org.
+- Read the xref:invite-your-team.adoc#[Join your teammates] page for steps on adding team members to your CircleCI org.
 - Go to the xref:hello-world#[Hello World] page to learn the basics of setting up a CircleCI configuration file.
 - Read the xref:concepts#[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors.
-
 - Refer to the full xref:configuration-reference#[CircleCI configuration reference] for creating a `.circleci/config.yml` file, which determines your execution environment and automates your tests.
