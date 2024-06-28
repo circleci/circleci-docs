@@ -295,7 +295,7 @@ The value of the `cron` key must be a link:https://crontab.guru/[valid crontab e
 
 The following are *not* supported:
 
-* Cron step syntax (for example, `*/1`, `*/20`).
+* Cron step syntax (for example, `pass:[*/1]`, `pass:[*/20]`).
 * Range elements within comma-separated lists of elements.
 * Range elements for days (for example, `Tue-Sat`).
 
