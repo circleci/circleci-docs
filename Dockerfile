@@ -1,4 +1,4 @@
-FROM ruby:2.7.6
+FROM ruby:3.1.3
 
 RUN apt update -y
 RUN apt-get install -y cmake pkg-config
