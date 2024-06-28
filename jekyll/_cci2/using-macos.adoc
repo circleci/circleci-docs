@@ -33,6 +33,7 @@ jobs:
 
 [#supported-xcode-versions-intel]
 === Supported Xcode versions for Intel
+
 [WARNING]
 ====
 *Intel-based resources reached end of life on June 28, 2024.*
