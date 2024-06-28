@@ -151,7 +151,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
-      tag: '2.7.6-browsers'
+      tag: '3.1.3-browsers'
     steps:
       - checkout
       - *attach_workspace
@@ -187,7 +187,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.7.6-browsers'
+      tag: '3.1.3-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -203,9 +203,7 @@ jobs:
           command: md-proofer lint jekyll/_cci2/ jekyll/_api/
       - run:
           name: Install dependencies for pronto gem
-          command: |
-            sudo apt-get update --allow-releaseinfo-change
-            sudo apt-get install cmake pkg-config
+          command: sudo apt-get install cmake pkg-config
       - ruby-deps
       - node/install-packages:
           pkg-manager: yarn
@@ -228,7 +226,7 @@ jobs:
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
             cp -r /tmp/workspace/api/* jekyll/_api/
-      - run: sudo apt-get update; sudo apt-get --yes install nkf
+      - run: sudo apt-get --yes install nkf
       - set-jekyll-basename
       - run:
           name: Build the Jekyll site
@@ -263,7 +261,7 @@ jobs:
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.7.6-browsers'
+      tag: '3.1.3-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production

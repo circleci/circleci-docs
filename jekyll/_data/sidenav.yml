@@ -262,6 +262,8 @@ en:
         children:
           - name: Container runner installation
             link: container-runner-installation
+          - name: Container runner performance benchmarks
+            link: container-runner-performance-benchmarks
           - name: Container runner reference
             link: container-runner
       - name: Machine runner 3.0
