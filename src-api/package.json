@@ -16,5 +16,11 @@
     "openapi-snippet": "^0.9.1",
     "redoc-cli": "^0.9.10",
     "snippet-enricher-cli": "0.0.8"
+  },
+  "resolutions": {
+    "braces": "3.0.3"
+  },
+  "resolutions:comments": {
+    "braces": "CVE-2024-4068"
   }
 }
