@@ -25,7 +25,7 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 
 Yes, you can set up xref:scheduled-pipelines#[Scheduled pipelines] through the xref:scheduled-pipelines#use-project-settings[CircleCI web app], or with xref:scheduled-pipelines#use-the-api[CircleCI API v2].
 
-If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], please see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
+If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
 
 [#scheduled-pipelines-guaranteed-to-run-time-scheduled]
 === Are scheduled pipelines guaranteed to run at precisely the time scheduled?
@@ -35,7 +35,7 @@ CircleCI provides no guarantees about precision. A schedule will be run as if th
 [#scheduled-pipeline-run-later]
 === Why did my scheduled pipeline run later than expected?
 
-There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to link:https://en.wikipedia.org/wiki/Cron#CRON_expression[the Cron expression].
+The scheduling expression with scheduled pipelines is different to link:https://en.wikipedia.org/wiki/Cron#CRON_expression[the Cron expression].
 
 For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window. Note that it does not mean that it will run at 08:00 UTC exactly.
 
@@ -44,4 +44,4 @@ However, subsequent runs of the scheduled pipeline will always be run on the sam
 [#do-you-support-regex]
 === Do you support regex?
 
-Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regexes) included in the webhook, API call, or schedule.
+Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regex) included in the webhook, API call, or schedule.
