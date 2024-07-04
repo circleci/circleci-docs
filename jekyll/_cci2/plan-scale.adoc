@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This document describes the Scale Plan available to developers.
+This document describes the CircleCI Scale Plan.
 
 [#scale-plan]
 == Scale Plan
@@ -41,6 +41,18 @@ Customize the amount of active users based on your needs.
 [#unlimited-self-hosted-runners]
 === Unlimited self-hosted runners
 Unlimited self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
+
+=== Releases
+
+Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and SageMaker are supported.
+
+On the Scale Plan, you get **five components**, and each **additional component** is **40k credits**. Each release is **250 credits**.
+
+* A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit.
+
+* A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
+
+Start with the xref:releases-overview#[Releases overview] for more information on the feature.
 
 [#custom-storage-retention]
 === Custom storage retention
