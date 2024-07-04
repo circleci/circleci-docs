@@ -53,7 +53,7 @@ On the Performance Plan, you get **three components**, and each **additional com
 
 * A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
 
-Start with the xref:releases-overview#[Releases overview] for more information on the feature.
+Start with the xref:release/releases-overview#[Releases overview] for more information on the feature.
 
 [#custom-storage-retention]
 === Custom storage retention
