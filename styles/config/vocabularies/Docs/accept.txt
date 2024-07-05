@@ -114,6 +114,7 @@ GCP
 geckodriver
 Gemfile
 GitHub
+\bGitLab self-managed\b
 GKE
 Google Cloud
 Google Cloud Functions
@@ -125,6 +126,7 @@ GPU
 Gradle
 Gzip
 HashiCorp
+[Hh]eadspace
 Helm
 Heroku
 Homebrew
@@ -151,6 +153,7 @@ known_hosts
 Kotlin
 Krew
 kubectl
+Kubelet
 Kubernetes
 LambdaTest
 Lein
@@ -200,6 +203,7 @@ RDoc
 React Native
 READMEs?
 Reality Check
+ReplicaSet
 reprovision
 reprovisioned
 [Rr]eusability

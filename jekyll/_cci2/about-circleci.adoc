@@ -19,7 +19,7 @@ CircleCI's mission is to manage change so software teams can innovate faster. Ci
 
 Build, test, and deploy by using intelligent automation.
 
-image::{{site.baseurl}}/assets/img/docs/arch.png[CircleCI process diagram]
+image::circleci-system-diagram.png[CircleCI process diagram]
 
 [#what-is-ci-cd]
 == What is CI/CD?

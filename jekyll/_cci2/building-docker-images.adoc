@@ -12,14 +12,16 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-Use the remote Docker environment (`setup_remote_docker`) to build Docker images in the Docker execution environment. When you use the remote Docker environment for a job, any Docker commands you run in your job execute locally on the virtual machine used to spin up your primary Docker container.
+Use the remote Docker environment to build Docker images within the Docker execution environment.
+
+When you use remote Docker for a job, all Docker commands execute locally on the virtual machine used to spin up your primary Docker container.
 
 NOTE: The _remote_ in "remote Docker" is a legacy term from when remote Docker usage would spin up a separate, remote environment for running Docker commands.
 
 [#introduction]
 == Introduction
 
-To build Docker images for deployment using the Docker execution environment, you must use the `setup_remote_docker` key. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images (for example, using `docker` or `docker-compose` commands) when using the Docker execution environment, you must use the `setup_remote_docker` key in your job:
 
 {% include snippets/docker-auth.adoc %}
 
@@ -34,18 +36,39 @@ jobs:
       - setup_remote_docker
 ----
 
-When `setup_remote_docker` executes, any Docker commands you use will execute locally on the virtual machine used to spin up containers for your job.
+Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that used to spin up the primary container.
 
-In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label.
+In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label, as follows:
 
 image::{{ site.baseurl }}/assets/img/docs/remote-docker-label.png[Remote Docker label]
 
-NOTE: The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a Docker container. If your executor is `machine` (and you want to use Docker commands in your config) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
+CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor _is_ a Docker container. If your job uses a VM rather than a container (for example, your executor is `machine`) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
 
 [#specifications]
 == Specifications
 
-For technical specifications and pricing information for the remote Docker environment, see link:https://discuss.circleci.com/t/changes-to-remote-docker-reporting-pricing/47759[Discuss]. For CircleCI server installations, contact the systems administrator for specifications.
+The resource class used for the remote Docker environment is determined by how you configure the primary container for the job. The sections below show how Docker and remote Docker environments correlate.
+
+For specification, credit, and pricing information for all resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource class product page].
+
+=== x86
+For *x86* architecture, the equivalent Linux VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also. Exceptions to this are as follows:
+
+* If you use the `small` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `medium`.
+* If you use the `medium+` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `large`.
+
+For a full list of available Linux VM resource classes see the xref:configuration-reference#linuxvm-execution-environment[Configuration Reference].
+
+=== Arm
+
+TIP: *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
+
+For *Arm* architecture the equivalent Arm VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also.
+
+For a full list of available Arm VM resource classes see the xref:configuration-reference#arm-execution-environment[Configuration Reference].
+
+=== CircleCI server
+For CircleCI server installations, contact the systems administrator for specifications.
 
 [#run-docker-commands-using-the-docker-executor]
 == Run Docker commands using the Docker executor
@@ -83,23 +106,10 @@ Below is a break down of what is happening during this build's execution:
 * Enable xref:glossary#docker-layer-caching[Docker Layer Caching] (DLC) to speed up image building. (line 13)
 * We use xref:set-environment-variable#set-an-environment-variable-in-a-project[project environment variables] to store credentials for Docker Hub. (line 19)
 
-[#resource-classes]
-=== Resource classes
-
-NOTE: *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
-
-The resource class for the remote Docker environment is determined by the configuration of the primary container.
-
-For *x86* architecture the equivalent Linux VM resource class is used for remote Docker, relative to how the primary container is configured, apart from if you are using `small` or `medium+`, in which case `medium` and `large` are used, respectively. For a full list of available Linux VM resource classes see the xref:configuration-reference#linuxvm-execution-environment[Configuration Reference].
-
-For *Arm*, the equivalent Arm VM resource class will be used. For a full list of available Arm VM resource classes see the xref:configuration-reference#arm-execution-environment[Configuration Reference].
-
-For credit/pricing information, see the link:https://circleci.com/product/features/resource-classes/[Resource class product page].
-
 [#install-the-docker-cli]
 == Install the Docker CLI
 
-The xref:circleci-images#[CircleCI convenience images] for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job before calling any `docker` commands.
+xref:circleci-images#[CircleCI convenience images] have the Docker CLI pre-installed. If you are using a third-party image for your primary container that does not have the Docker CLI installed, then link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job before calling any `docker` commands.
 
 [,yml]
 ----
@@ -140,12 +150,12 @@ To use Docker 24, patch updates will occur until Docker 25 is released, use the 
 
 To use the current deprecated version, Docker 20, use `20.10.24`
 
-NOTE: The `version` key is not supported on CircleCI server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+NOTE: The `version` key is not supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 [#run-docker-commands-using-the-machine-executor]
 == Run Docker commands using the machine executor
 
-The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
+The example below shows how you can build a Docker image using the `machine` executor with the default image. Note that this does not require the use of remote Docker:
 
 [,yaml]
 ----

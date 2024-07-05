@@ -18,14 +18,133 @@ This guide gets you started with creating a new project in CircleCI.
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* A code repository you want to build on CircleCI.
+* Code you want to build on CircleCI.
 
 == Build a new project on CircleCI
 
 The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
-* If you authenticated using xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket], a "project" in CircleCI maps directly to a "repository" in GitHub. Follow steps to <<set-up-a-project>> below.
-* If you authenticated through xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], a "project" within CircleCI is a standalone entity that you create and then associate with a code repository. Follow steps to <<create-a-project>> below.
+On the **Organization Home** page, check which option you see:
+
+* If you see a btn:[Set up a project] button, follow steps to <<set-up-a-project>> below.
+* If you see a btn:[Create Project] button, follow steps to <<create-a-project>> below.
+
+[#create-a-project]
+=== Create a project
+
+Choose steps to follow below, depending on where your code is stored:
+
+[.tab.create-project.GitHub_App]
+--
+Follow these steps to create a new project in CircleCI:
+
+. In the CircleCI web app, select **Organization Home** in the sidebar.
+. Select btn:[Create Project] at the top of the page.
++
+image::create-project/create-project-button.png[Create a project]
+
+. In the connect your code window, select the **GitHub** tile.
++
+image::create-project/connect-your-code.png[Connect your code window]
++
+NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect.
+
+. Give your project a name, select the GitHub repository you would like to connect, and select btn:[Create Project].
++
+image::create-project/name-project.png[Name project and tell CircleCI which code repository to connect]
+
+. If a CircleCI config file exists in your repository already you will be redirected to the pipelines page. Otherwise, CircleCI automatically generates a custom configuration file based on the programming languages and frameworks detected in your selected repository. If CircleCI is unable to generate a custom configuration file, a fallback template is used.
++
+image::create-project/analysing-repo-contents.png[Analysing repository contents and auto-generating configuration]
++
+When the custom configuration file has been generated, you have some options:
+
+** Select btn:[Commit and Run] to commit your custom configuration file on a new branch called `circleci-project-setup` and then land on the pipelines page.
++
+image::create-project/generated-config-commit-and-run.png[Window showing generated config and options to commit and run or use an existing config]
+** Select btn:[Use Existing Config] for the option to download the generated config and instructions to commit this or another CircleCI configuration file to your repository directly. The select btn:[Start Building] to navigate to the pipelines page.
++
+image::create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
+--
+
+[.tab.create-project.GitLab_Cloud]
+--
+Follow these steps to create a new project in CircleCI:
+
+. In the CircleCI web app, select **Organization Home** in the sidebar.
+. Select btn:[Create Project] at the top of the page.
++
+image::create-project/create-project-button.png[Create a project]
+
+. In the connect your code window, select the **GitLab** tile, then choose GitLab **Cloud**.
++
+image::create-project/connect-your-code.png[Connect your code window]
+
+. In the Create New Project window, you have some options:
++
+image::create-project/create-new-gitlab-project.png[Create new project window]
++
+** If you see a blue btn:[Connect] button rather than your GitLab username, select btn:[Connect] to redirect to GitLab and authorise the connection.
+** The **Project Name** field (bottom of the window) is automatically populated with the name of your repository, but you can change this if required.
+** Use the repository dropdown menu to tell CircleCI where your code is stored.
+** Choose an option for managing your `.circleci/config.yml` file:
+*** **Fastest:** Use a config file that already exists in your repository.
+*** **Faster:** Let CircleCI pick a configuration file for you, and commit this to a new branch in you repository.
+*** **Fast:** View and edit a starter config file in the CircleCI web app and commit that to your repository yourself
+
+. Select **Create Project** at the bottom of the window.
+
+. If you chose the fastest/faster options you will now be on the pipelines page of the CircleCI web app. If you chose "fast" you have some options:
+
+** Select btn:[Commit and Run] to commit your custom configuration file on a new branch called `circleci-project-setup`.
++
+image::create-project/generated-config-commit-and-run.png[Window showing generated config and options to commit and run or use an existing config]
+** Select btn:[Use Existing Config] for the option to download the generated config and instructions to commit this or another CircleCI configuration file to your repository directly. The select btn:[Start Building].
++
+image::create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
+--
+
+[.tab.create-project.GitLab_self-managed]
+--
+Follow these steps to create a new project in CircleCI:
+
+. In the CircleCI web app, select **Organization Home** in the sidebar.
+. Select btn:[Create Project] at the top of the page.
++
+image::create-project/create-project-button.png[Create a project]
+
+. In the connect your code window, select the **GitLab** tile, then choose GitLab **self-managed**.
++
+image::create-project/connect-your-code.png[Connect your code window]
+
+. In the Create New Project window, you have some options:
++
+image::create-project/create-new-gitlab-self-managed-project.png[Create new project window]
++
+[NOTE]
+====
+If this is your first GitLab self-managed project you will now set up your integration:
+
+* Verify your GitLab URL
+* Generate an add a personal access token
+* Add your known hosts, following the instructions in the app
+====
+** The **Project Name** field (bottom of the window) is automatically populated with the name of your repository, but you can change this if required.
+** Use the repository dropdown menu to tell CircleCI where your code is stored.
+** Select **Create Project**. You will then be redirected to the Pipelines page.
+** The express CircleCI configuration setup is not currently available for GitLab self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
++
+[TIP]
+====
+For guidance on creating a `config.yml` file, see the following pages:
+
+* xref:config-intro#[Configuration introduction]
+* xref:sample-config#[Sample config.yml files]
+* xref:configuration-reference#[Configuration reference]
+====
+--
+
+CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 
 [#set-up-a-project]
 === Set up a project
@@ -34,88 +153,31 @@ NOTE: If you authenticated CircleCI with either the xref:github-integration#[Git
 
 Follow these steps to  set up a new project in CircleCI:
 
-. In the CircleCI web app, click **Projects** in the sidebar.
-. Find your project in the list and click the blue **Set Up Project** button next to it.
+. In the CircleCI web app, select **Organization Home** in the sidebar.
+. Select btn:[Set up a project].
 +
-image::config-set-up-project.png[Set up Project]
+image::create-project/set-up-a-project.png[Set up a project button]
+. Find your project in the list and select btn:[Set Up Project].
 +
-If you cannot see your project, check you have selected the correct organization in the top left-hand corner of CircleCI.
-+
-image::cci-organizations.png[Select Organization]
-+
-Once you have set up your project, you will be prompted to provide a `config.yml` file.
+[TIP]
+====
+**Can't see your project?** Select the dark blue section at the top of the window to navigate to your user homepage and select an organization.
 
-. From the pop-up window, select your preferred option. You can either:
-+
-* Include a `config.yml` in the `.circleci` directory of your repository.
-* Commit a starter CI pipeline to a new branch of your repository.
-* Use an editable `config.yml` template.
-+
-If you choose the starter CI pipeline, a sample `config.yml` file is created and committed to a `circleci-project-setup` branch in your repository.
-+
-For guidance on creating a `config.yml` file, see <<config-intro#,Configuration Introduction>>.
-+
-. Click the blue **Set Up Project** button.
+image::create-project/user-home-page.png[Select Organization]
+====
+
+. Choose an `config.yml` option in the modal. You can choose from the following:
+** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the <<config-intro#,Configuration Introduction>>.
+** **Faster**: Commit a starter CI pipeline to a new `circleci-project-setup` branch of your repository.
+** View, edit and commit a template `config.yml`.
+
+. Select **Set Up Project**.
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output in the CircleCI dashboard.
 
-To make changes to your pipeline, either edit the `.circleci/config.yml` file in your repository, or click the ellipsis next your project in the Dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
+To make changes to your pipeline, either edit the `.circleci/config.yml` file in your repository, or select the ellipsis next your project in the Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file. You can also access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
 
-image::edit-config-file.png[Edit Configuration File]
-
-[#create-a-project]
-=== Create a project
-
-If you authorized CircleCI with either xref:gitlab-integration#[GitLab], or the xref:github-apps-integration#[GitHub App], follow the steps in the section below that applies to you.
-
-[#github-app-project]
-==== GitHub App project
-
-Follow these steps to create a new project in CircleCI:
-
-. In the CircleCI web app, click **Projects** in the sidebar.
-. Click btn:[Create Project] at the top of the page.
-+
-image::create-project-button.png[Create a project]
-
-. In the Connect Code window, click the **GitHub** tile.
-. In the Create New Project window, use the options to:
-+
-** Input your project name in the Project Name field.
-** Tell CircleCI where your code is stored.
-** Click btn:[Create Project] at the bottom of the window. CircleCI will now automatically generate a custom configuration file based on the programming languages and frameworks detected in your selected repository.
-** When the custom configuration file has been generated, click btn:[Commit and Run] to commit your custom configuration file on a new branch called `circleci-project-setup`. Alternatively, click btn:[Review configuration file] to view the custom configuration file in the configuration editor.
-** If CircleCI is unable to generate a custom configuration file, CircleCI will generate a fallback template that you can utilize to create your `config.yml` file.
-
-[#gitlab-project]
-==== GitLab project
-
-Follow these steps to create a new project in CircleCI:
-
-. In the CircleCI web app, click **Projects** in the sidebar.
-. Click btn:[Create Project] at the top of the page.
-+
-image::create-project-button.png[Create a project]
-
-. In the Connect Code window, click the **GitLab** tile.
-. In the Create New Project window, use the options to:
-+
-** Tell CircleCI where your code is stored
-** Choose an option for managing your `.circleci/config.yml` file. You can either choose to let CircleCI pick a configuration file for you, and commit this to a new branch in you repository, or you can edit a starter config file in the CircleCI web app and commit that to your repository yourself.
-** For guidance on creating a `config.yml` file, see the following pages:
-*** xref:config-intro#[Configuration introduction]
-*** xref:sample-config#[Sample config.yml files]
-*** xref:configuration-reference#[Configuration reference]
-+
-image::create-new-project-window.png[Create new project window]
-
-. The Project Name field is automatically populated with the name of your repository, but you can change this if required.
-
-. Click **Create Project** at the bottom of the window.
-
-CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output in the CircleCI dashboard.
-
-To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
+image::create-project/configuration-file.png[Edit Configuration File]
 
 [#see-also]
 == See also
