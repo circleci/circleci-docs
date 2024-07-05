@@ -19,6 +19,8 @@ The Performance Plan offers a set number of credits across a variety of resource
 
 The Performance Plan offers a higher amount of network usage, and other advantages over the Free Plan, as described below.
 
+The Performance Plan offers *5* link:https://support.circleci.com/hc/en-us/articles/360034783154-What-is-an-Active-User[active users], and you can increase this number as you grow. Refer to the link:https://circleci.com/pricing#[pricing page] for details.
+
 [#access-to-ip-ranges]
 === Access to IP ranges
 Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature enabled have their traffic routed through one of the defined IP address ranges during job execution.
