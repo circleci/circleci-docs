@@ -392,7 +392,7 @@ Each container runner has a garbage collector. The garbage collector ensures the
 
 CAUTION: If you change the garbage collection threshold but do **not** keep the max task run time lower than the garbage collection frequency, a running task pod could be removed by the garbage collector.
 
-In addition, GC may remove some objects sooner than this threshold. Task pods have a liveness probe which checks for a running task-agent process. Once a task completes or fails, the task-agent process will stop running and the liveness probe will fail which will trigger GC.
+The garbage collector may remove some objects sooner than the threshold. Task pods have a liveness probe that checks for a running task-agent process. Once a task completes or fails, the task-agent process will stop running and the liveness probe will fail, which will trigger GC.
 
 Container runner will drain and restart cleanly when sent a termination signal. Container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 
