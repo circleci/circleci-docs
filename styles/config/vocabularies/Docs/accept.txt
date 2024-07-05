@@ -214,6 +214,7 @@ Rollouts?
 Route 53
 [Rr]unbook
 RSpec
+Rubies
 Ruby
 [Rr]unner
 [Rr]untimes?

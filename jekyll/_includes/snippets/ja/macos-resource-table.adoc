@@ -5,10 +5,6 @@
 |vCPU
 |RAM
 
-|macos.x86.medium.gen2
-|4 @ 3.2 GHz
-|8GB
-
 |macos.m1.medium.gen1
 |4 @ 3.2 GHz
 |6GB
