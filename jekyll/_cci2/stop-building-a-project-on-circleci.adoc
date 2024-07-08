@@ -14,23 +14,55 @@ contentTags:
 
 [#introduction]
 == Introduction
-This page provides details on how to stop builds for a project on CircleCI, and how to remove all project data when required.
+This page outlines how to stop builds for a project on CircleCI, and how to delete a project when required.
 
 [#stop-building-a-project]
 == Stop building a project
 
 CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI you need to contact CircleCI support, as detailed in the <<remove-a-project-from-circleci>> section.
 
-NOTE: The **Stop Building** option is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: The **Stop Building** option is supported for GitHub OAuth and Bitbucket integrations with CircleCI. **Stop Building** is not supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-If you are using the GitHub OAuth App or BitBucket, to stop building one of your projects on CircleCI, follow these steps:
+If you are using the GitHub OAuth App or Bitbucket, to stop building one of your projects on CircleCI, follow these steps:
 
 . Go to the **Project Settings** page in the CircleCI web app for the project you want to stop.
-. Scroll to the bottom of the Overview page and click **Stop Building**. You will need to reconfirm your choice in the popup.
+. Scroll to the bottom of the Overview page and select **Stop Building**. You will need to reconfirm your choice in the popup.
 
-NOTE: If you want to start building this project again, just go to the **Projects** page in the web app and click **Set Up Project** and follow the set up steps.
+NOTE: If you want to start building this project again, just go to the **Projects** page in the web app and select **Set Up Project** and follow the set up steps.
 
 [#remove-a-project-from-circleci]
-== Remove a project from CircleCI
+== Delete a project from CircleCI
 
-If you want to remove a project from your CircleCI account, link:https://support.circleci.com/hc/en-us/requests/new[contact support] with details of the project that you wish to remove.
+If you want to remove a project from your CircleCI account, follow the steps below. Deleting a project will remove the complete build history. Project deletion requests must be submitted or approved by an organization admin.
+
+. Follow the instructions for your VCS integration to unlink the project from your account.
++
+[tab.vcs.GitHub_OAuth_app]
+--
+Remove webhooks and deploy keys created by CircleCI from your repository. For guidance, see this link:https://support.circleci.com/hc/en-us/articles/360021666393-How-to-stop-building-by-manually-removing-the-CircleCI-webhook-and-deploy-key-from-your-GitHub-repository[Support Article].
+--
++
+[tab.vcs.Bitbucket]
+--
+Remove webhooks and deploy keys created by CircleCI from your repository. For guidance, see this https://support.circleci.com/hc/en-us/articles/360025040233-How-to-stop-building-by-manually-removing-the-CircleCI-webhook-and-deploy-key-from-your-Bitbucket-repository[Support Article].
+--
++
+[tab.vcs.GitHub_App]
+--
+. In the link:https://app.circleci.com/home/[CircleCI web app], select the organization associated with the project you want to remove.
+. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
+. Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
+. Select **Triggers** from the sidebar and delete all triggers associated with your project.
+. Select **Configuration** from the sidebar and delete all configuration sources associated with your project.
+--
++
+[tab.vcs.GitLab]
+--
+. In the link:https://app.circleci.com/home/[CircleCI web app], select the organization associated with the project you want to remove.
+. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
+. Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
+. Select **Triggers** from the sidebar and delete all triggers associated with your project.
+. Select **Configuration** from the sidebar and delete all configuration sources associated with your project.
+--
+
+. Open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request. For more information on submitting support requests, see this https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[support article].
