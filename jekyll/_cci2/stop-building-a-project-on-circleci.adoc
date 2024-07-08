@@ -50,8 +50,8 @@ Remove webhooks and deploy keys created by CircleCI from your repository. For gu
 [tab.vcs.GitHub_App]
 --
 . In the link:https://app.circleci.com/home/[CircleCI web app], select the organization associated with the project you want to remove.
-. Select the project you want to remove. If you do not see it select **Projects** in the sidebar and find it in the list.
-. Select **Project Settings**, or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**.
+. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
+. Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
 . Select **Triggers** from the sidebar and delete all triggers associated with your project.
 . Select **Configuration** from the sidebar and delete all configuration sources associated with your project.
 --
@@ -59,8 +59,8 @@ Remove webhooks and deploy keys created by CircleCI from your repository. For gu
 [tab.vcs.GitLab]
 --
 . In the link:https://app.circleci.com/home/[CircleCI web app], select the organization associated with the project you want to remove.
-. Select the project you want to remove. If you do not see it select **Projects** in the sidebar and find it in the list.
-. Select **Project Settings**, or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**.
+. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
+. Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
 . Select **Triggers** from the sidebar and delete all triggers associated with your project.
 . Select **Configuration** from the sidebar and delete all configuration sources associated with your project.
 --
