@@ -1,0 +1,28 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Intelligent summaries
+:page-layout: classic-docs
+:page-liquid:
+:page-description: An overview of the intelligent summaries feature, an AI enabled helper feature in CircleCI that provides help with build failures
+:icons: font
+:experimental:
+
+CircleCI's intelligent summaries provide contextual help with build failures. Select btn:[Explain this error] from a failed job's step output to see an AI-generated summary of the error, along with suggestions on how to fix it.
+
+== Enable intelligent summaries
+
+The intelligent summaries feature is **disabled** by default. You can opt-in to the feature, as follows:
+
+NOTE: Only organization administrators can enable or disable the feature.
+
+. From the link:https://app.circleci.com/home/[CircleCI web app] select your organization card.
+. Select **Organization Settings** from the sidebar.
+. Select **Advanced** from the menu.
+. Use the "Enable intelligent summaries of build failure messages" toggle to enable or disable the feature.
+
+== Use intelligent summaries
+
+== Privacy and security
