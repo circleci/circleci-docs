@@ -872,26 +872,25 @@ WARNING: If your Tink keyset is somehow lost, you will need to generate a new ke
 
 CircleCI server optionally supports https://circleci.com/docs/openid-connect-tokens/[OpenID Connect (OIDC) tokens] in jobs.
 
-This feature is not enabled by default and requires a few additional steps to set up:
+This feature is not enabled by default and requires a few additional steps to set up, as follows:
 
 . Generate a https://mkjwk.org/[JSON Web Key (JWK)] using the default parameters and copy the `Public and Private Keypair Set` to a secure and convenient location (for example, `~/oidc-service-jwk.json`). This key pair will be used by `oidc-service` to sign the OIDC tokens used in jobs.
 
 . The JWK will need to be base64 encoded without line wrapping before using it on server:
-+
-On Linux:
+** On Linux:
 +
 [source,shell]
 ----
 $ base64 -w0 ~/oidc-service-jwk.json
 ----
-+
-On macOS:
+** On macOS:
 +
 [source,shell]
 ----
 $ base64 -b0 ~/oidc-service-jwk.json
 ----
-Copy the output to a secure location, so it can be referenced in the next step.
++
+TIP: Copy the output to a secure location, so it can be referenced in the next step.
 
 . Finally, enable `oidc-service` and supply it the base64 encoded JWK from your server Helm values file:
 +
