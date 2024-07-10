@@ -46,7 +46,7 @@ Unlimited self-hosted runners, allowing you to run more jobs on your own infrast
 
 Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and SageMaker are supported.
 
-On the Scale Plan, you get **five components**, and each **additional component** is **40k credits**. Each release is **250 credits**.
+On the Scale Plan, you get **five components** with associated releases per month. Each **additional component** is **40k credits**. Each release is **250 credits**. Components with no releases are not charged.
 
 * A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit.
 
