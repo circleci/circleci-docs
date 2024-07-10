@@ -20,7 +20,7 @@ The Free Plan offers premium features that allow your team to be productive, eff
 
 The Free Plan includes a set number of credits across a variety of resource classes, per month. You can customize how you use your credits depending on your build configuration and execution environment. A small number of credits are charged per minute.
 
-The Free Plan offers *five* link:https://support.circleci.com/hc/en-us/articles/360034783154-What-is-an-Active-User[active users]. Users beyond this limit are charged in credits.
+The Free Plan offers *five* link:https://support.circleci.com/hc/en-us/articles/360034783154-What-is-an-Active-User[active users]. Users beyond this limit are charged at 25,000 credits.
 
 Below are the features you can use on the Free Plan. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource classes] features page for details on CPU, memory, network and storage, and credit usage for available compute types.
 
