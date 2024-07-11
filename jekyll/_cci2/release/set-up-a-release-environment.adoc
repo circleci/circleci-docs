@@ -39,13 +39,17 @@ CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions ha
 {% include snippets/release/supported-versions.adoc %}
 
 [#create-release-environment]
-== 1. Create your release environment and token
+== 1. Create your release environment
 
 . In the CircleCI web app, select **Releases** in the sidebar.
-. Select btn:[Add Release Environment].
-. Enter a name for your release environment and select btn:[Create Environment].
-. Select the environment you just created.
-. Select btn:[Create New Token] and then btn:[Create Token]
+. Select btn:[Create your first Environment Integration]. If you already have environment integrations set up, you can add new environment integrations from the `Environments` tab.
+. Enter a name for your release environment and select btn:[Next: Release Agent Setup].
+. The onboarding wizard will then guide you through the next steps.
+. After completing all the steps in the wizard you would have successfully created a release environment and installed the release agent into your Kubernetes cluster and configured your Kubernetes components.
+. Alternatively you can also follow along the steps outlined in this doc. You will need a `CCI_INTEGRATION_TOKEN` for the next step.
+. Navigate to the `Environments` tab.
+. Select the `gear` icon corresponding to the environment you just created to enter the `Environment Integration Settings` page.
+. Select btn:[Create Integration Token] and then btn:[Create Token]
 . The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then select btn:[Done]
 
 [#add-release-agent]
