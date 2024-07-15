@@ -32,7 +32,7 @@ We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for pro
 
 If you want to get started with CircleCI releases for Kubernetes right away, you can jump to:
 
-* xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up a release environment]
+* xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up an environment integration]
 * xref:configure-your-kubernetes-components.adoc#[Tutorial 2: Configure your Kubernetes components]
 * xref:manage-releases#[How-to: Manage releases]
 

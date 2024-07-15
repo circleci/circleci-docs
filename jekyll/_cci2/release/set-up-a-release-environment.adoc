@@ -3,14 +3,14 @@ contentTags:
   platform:
   - Cloud
 ---
-= Set up a release environment
+= Set up an environment integration
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Tutorial outlining how to set up a new CircleCI release environment and install the CircleCI release agent.
+:page-description: Tutorial outlining how to set up a new CircleCI environment integration and install the CircleCI release agent.
 :icons: font
 :experimental:
 
-Visualise and control deployments to your Kubernetes cluster with CircleCI releases. The steps outlined on this page guide you to set up a release environment and install the CircleCI release agent into your Kubernetes cluster.
+Visualise and control deployments to your Kubernetes cluster with CircleCI releases. The steps outlined on this page guide you to set up an environment integration and install the CircleCI release agent into your Kubernetes cluster.
 
 [#introduction]
 == Introduction
@@ -27,7 +27,7 @@ In this tutorial you will set up an integration between CircleCI and your Kubern
 [#prerequisites]
 == Prerequisites
 
-Before setting up your release environment with CircleCI, run through the following prerequisites:
+Before setting up your environment integration with CircleCI, run through the following prerequisites:
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A Kubernetes cluster
@@ -39,11 +39,15 @@ CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions ha
 {% include snippets/release/supported-versions.adoc %}
 
 [#create-release-environment]
-== 1. Create your release environment
+== 1. Create your environment integration
 
+[.tab.environmentintegration.Kubernetes_cluster]
+--
 . In the CircleCI web app, select **Releases** in the sidebar.
-. Select btn:[Create your first Environment Integration]. If you already have environment integrations set up, you can add new environment integrations from the `Environments` tab.
-. Enter a name for your release environment and select btn:[Next: Release Agent Setup].
+. If this is your first environment setup, select btn:[Create your first Environment Integration]. If you already have environments set up, choose the **Environments** tab and select btn:[Create Environment Integration].
+. Enter a name for your environment, and a description if you would like.
+. Use the dropdown menu to choose your environment integration type, either Kubernetes cluster, or Amazon SageMaker, then select btn:[Next: Release Agent Setup].
+. To set up the release agent into
 . The onboarding wizard will then guide you through the next steps.
 . After completing all the steps in the wizard you would have successfully created a release environment and installed the release agent into your Kubernetes cluster and configured your Kubernetes components.
 . Alternatively you can also follow along the steps outlined in this doc. You will need a `CCI_INTEGRATION_TOKEN` for the next step.
