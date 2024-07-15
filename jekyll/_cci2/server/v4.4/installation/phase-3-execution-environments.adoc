@@ -353,7 +353,7 @@ kubectl -n <namespace> label secret/nomad-mtls \
 --
 [.tab.encryption.CircleCI_creates_Secret]
 --
-**Option 2:** Add the base64 encoded values to your values.yaml
+**Option 2:** Add the base64 encoded values to your `values.yaml`
 
 [source,yaml]
 ----
