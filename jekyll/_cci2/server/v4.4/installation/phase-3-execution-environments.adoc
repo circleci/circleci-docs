@@ -329,7 +329,7 @@ CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automat
 [#nomad-mtls]
 === b. Nomad mTLS
 
-The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your values.yaml or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI Server installation. The values must be base64 encoded.
+The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
 
 [.tab.encryption.You_create_Secret]
 --
