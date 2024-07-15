@@ -150,11 +150,10 @@ sudo xattr -r -d com.apple.quarantine "$(brew --prefix)/bin/circleci-runner"
 
 To start the macOS machine runner 3.0 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
 
-[.tab.domain.GUI]
+[.tab.startdomain.GUI_domain]
 --
-*GUI domain*
 
-1. For running the agent in a GUI session, you can bootstrap the provided `.plist` file and enable the service by running the following commands:
+. For running the agent in a GUI session, you can bootstrap the provided `.plist` file and enable the service by running the following commands:
 +
 [source,shell]
 ----
@@ -162,7 +161,7 @@ launchctl bootstrap gui/$(id -u) $HOME/Library/LaunchAgents/com.circleci.runner.
 launchctl enable gui/$(id -u)/com.circleci.runner
 launchctl kickstart -k gui/$(id -u)/com.circleci.runner
 ----
-2. Finally, you can check the service is running by invoking the following command:
+. Finally, you can check the service is running by invoking the following command:
 +
 [source,shell]
 ----
@@ -170,9 +169,8 @@ launchctl print gui/$(id -u)/com.circleci.runner
 ----
 --
 
-[.tab.domain.User]
+[.tab.startdomain.User_domain]
 --
-*User domain*
 
 1. When using a non-GUI (or headless) session, the provided `.plist` file should be moved to `/Library/LaunchAgents`. This location is for per-user agents configured by the administrator, which allows the service to load after a reboot. Run the following command to do this:
 +
@@ -201,17 +199,17 @@ launchctl print user/$(id -u)/com.circleci.runner
 
 To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
 
-[.tab.domain.GUI]
+[.tab.stopdomain.GUI_domain]
 --
-Targeting the GUI domain:
+
 [source,shell]
 ----
 launchctl disable gui/$(id -u)/com.circleci.runner
 ----
 --
-[.tab.domain.User]
+[.tab.stopdomain.User_domain]
 --
-Targeting the user domain:
+
 [source,shell]
 ----
 launchctl disable user/$(id -u)/com.circleci.runner
@@ -220,11 +218,11 @@ launchctl disable user/$(id -u)/com.circleci.runner
 
 [#uninstall-machine-runner-macos]
 == Uninstall machine runner 3.0 on macOS
-To uninstall machine runner from your macOS device, follow these steps.
+To uninstall machine runner 3.0 from your macOS device, follow these steps.
 
 . Stop the machine runner service by using the following command to disable it, depending on the service target used during installation:
 +
-[.tab.domain.GUI]
+[.tab.uninstalldomain.GUI_domain]
 --
 Targeting the GUI domain:
 [source,shell]
@@ -233,7 +231,7 @@ launchctl bootout gui/$(id -u)/com.circleci.runner
 ----
 --
 +
-[.tab.domain.User]
+[.tab.uninstalldomain.User_domain]
 --
 Targeting the user domain:
 [source,shell]
@@ -256,7 +254,7 @@ brew uninstall --cask circleci-public/homebrew-circleci/circleci-runner
 [.tab.machine-runner-uninstall-macos.Purge_logs_and_configuration]
 --
 
-This command will *purge all logs and configuration files*.
+CAUTION: This command will *purge all logs and configuration files*.
 
 To uninstall and purge all logs and configuration files, run the following command.
 
