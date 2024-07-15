@@ -129,7 +129,7 @@ For high availability, and to avoid potential outages, you should provision subn
 | Kubernetes Version
 
 | 4.2.x
-| 1.22 - 1.24
+| 1.22 - 1.28
 |===
 
 [#minimum-permissions-requirments]
