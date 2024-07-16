@@ -3,6 +3,7 @@
 Convenience script for exporting pages data into a CSV file.
 
 ## Usage
+Update to the glob library to fix CVEs requires usage of node v16 or higher.
 
 ### Quickstart
 

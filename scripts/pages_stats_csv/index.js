@@ -1,5 +1,11 @@
 const ObjectsToCsv = require('objects-to-csv');
-const glob = require('glob-promise');
+const {
+  glob,
+  globSync,
+  globStream,
+  globStreamSync,
+  Glob,
+} = require('glob')
 const search = require('search-in-file');
 const { gitlogPromise } = require('gitlog');
 const path = require('path');
@@ -39,9 +45,7 @@ const processFile = async (file) => {
 const explore = async () => {
   let promises = [];
 
-  const files = await glob(
-    `${repoPath}/jekyll/@(${directories.join('|')})/*.@(md|adoc)`,
-  );
+  const files = await glob(`${repoPath}/jekyll/@(${directories.join('|')})/*.@(md|adoc)`,{});
   log(`Found ${files.length} files`);
 
   files.forEach((f) => {
