@@ -12,8 +12,9 @@ gem "kramdown-parser-gfm"
 gem 'liquid-c', '~> 4.0.1'
 gem 'htmlcompressor'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
-gem 'rack', '~> 2.2.8.1'
+gem 'rack', '~> 3.0.0'
 gem 'nokogiri', '~> 1.16.5'
+gem 'httparty', '~> 0.21.0'
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
