@@ -141,7 +141,6 @@ GEM
     pygments.rb (1.1.2)
       multi_json (>= 1.0.0)
     racc (1.8.0)
-    rack (3.0.11)
     rainbow (3.0.0)
     rake (13.0.3)
     rb-fsevent (0.11.0)
@@ -187,7 +186,6 @@ DEPENDENCIES
   pronto
   pronto-markdownlint
   pygments.rb (~> 1.1.2)
-  rack (~> 3.0.0)
   rake
 
 RUBY VERSION
