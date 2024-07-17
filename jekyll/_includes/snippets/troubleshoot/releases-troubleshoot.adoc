@@ -1,7 +1,7 @@
 [#deployment-not-showing-up]
 === Why is my Deployment/Rollout not showing up in the components tab or releases timeline view?
 
-* Check that the Deployment/Rollout is annotated with the required labels. More information is available in the link:/docs/release/configure-your-kubernetes-components#[Set up guides]. If the required labels were not present, then adding them should solve the problem.
+* Check that the Deployment/Rollout is annotated with the required labels. More information is available in the xref:release/configure-your-kubernetes-components#[Set up guides]. If the required labels were not present, then adding them should solve the problem.
 
 * If you are using a Deployment, check that the desired replicas is not set to `0`. Deployments with `0` replicas are not reported as releases, even if they are scaled up subsequently. The configured value can be seen on the release agent deployment in the `circleci-release-agent-system` namespace. Here is an example in which the number of desired replicas is 2:
 +
