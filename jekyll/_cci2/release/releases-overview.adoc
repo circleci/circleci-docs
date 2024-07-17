@@ -32,8 +32,8 @@ We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for pro
 
 If you want to get started with CircleCI releases for Kubernetes right away, you can jump to:
 
-* xref:set-up-a-release-environment.adoc#[Tutorial 1: Set up a release environment]
-* xref:configure-your-kubernetes-components.adoc#[Tutorial 2: Configure your Kubernetes components]
+* xref:set-up-a-release-environment#[Tutorial 1: Set up a release environment]
+* xref:configure-your-kubernetes-components#[Tutorial 2: Configure your Kubernetes components]
 * xref:manage-releases#[How-to: Manage releases]
 
 To get set up with releases for Amazon SageMaker, refer to the xref:../deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
