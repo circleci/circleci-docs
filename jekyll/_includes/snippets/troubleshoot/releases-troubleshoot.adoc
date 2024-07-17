@@ -46,8 +46,8 @@ spec:
 
 * Check whether the token used by the release agent has been revoked:
 .. Select btn:[Releases] in the CircleCI web app sidebar
-.. Click btn:[Configure Environments] to enter the release environments view
-.. Click to select your environment to view valid token details, including when the token was last used.
+.. Select btn:[Configure Environments] to enter the release environments view
+.. Select your environment to view valid token details, including when the token was last used.
 +
 If the token has been last used longer than a minute ago, then this is likely to be the problem.
 
@@ -69,7 +69,7 @@ The time required for a Helm-based _restore version_ to complete successfully is
 Check whether the component has been undeployed. If there are currently no live versions for a component, the btn:[Restore Version] button will not be visible for that component until at least one version has been deployed.
 
 [#all-features-unavailable-on-release]
-=== Why are all buttons (**Promote**, **Promote All** and **Cancel**) disabled for a release?
+=== Why are all buttons disabled for a release?
 
 Check whether the release is a Rollback. If this is the case, then this is a known issue that will be solved in a future update to the CircleCI release agent.
 
