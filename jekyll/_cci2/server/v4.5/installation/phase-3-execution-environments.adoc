@@ -329,7 +329,31 @@ CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automat
 [#nomad-mtls]
 === b. Nomad mTLS
 
-The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module.  They must be base64 encoded.
+The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
+
+[.tab.encryption.You_create_Secret]
+--
+**Option 1:** Generate a secret with the mTLS cert values
+
+[source, shell]
+----
+kubectl -n <namespace> create secret generic nomad-mtls \
+  --ca.pem="<base64-encoded-certificate>" \
+  --key.pem="<base64-encoded-private-key>" \
+  --cert.pem="<base64-encoded-ca-certificate>"
+
+kubectl -n <namespace> annotate secret/nomad-mtls \
+  meta.helm.sh/release-name=<helm-release-name> \
+  meta.helm.sh/release-namespace=<namespace> \
+  helm.sh/resource-policy=keep --overwrite
+
+kubectl -n <namespace> label secret/nomad-mtls \
+  app.kubernetes.io/managed-by=Helm --overwrite
+----
+--
+[.tab.encryption.CircleCI_creates_Secret]
+--
+**Option 2:** Add the base64 encoded values to your `values.yaml`
 
 [source,yaml]
 ----
@@ -343,6 +367,7 @@ nomad:
         privateKey: "<base64-encoded-private-key>"
         CACertificate: "<base64-encoded-ca-certificate>"
 ----
+--
 
 [#nomad-autoscaler]
 === c. Nomad Autoscaler

@@ -662,6 +662,10 @@ en:
   - name: Developer toolkit
     icon: icons/sidebar/code.svg
     children:
+      - name: AI features
+        children:
+          - name: Intelligent summaries
+            link: intelligent-summaries
       - name: CLI
         children:
           - name: Install and configure the CircleCI local CLI
