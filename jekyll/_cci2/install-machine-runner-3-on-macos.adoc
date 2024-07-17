@@ -82,18 +82,20 @@ Replace `api.auth_token` with the token generated in the steps above, and choose
 
 . If you are using CircleCI server you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
-```shell
+[source,shell]
+----
 export CIRCLECI_RUNNER_API_URL="your server domain"
-```
+----
 +
 Or by adding the URL to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
 +
-```yaml
+[source,yaml]
+----
 api:
   auth_token: "your-auth-token"
   # On server, set url to the hostname of your server installation.
   url: https://your.domain.here
-```
+----
 
 [#migrate-existing-configuration-files]
 === Migrate existing configuration files
@@ -122,81 +124,154 @@ The binary must be approved to run on your macOS system because the self-hosted 
 
 . Verify the signature and notarization with this command:
 +
-```shell
+[source,shell]
+----
 spctl -a -vvv -t install "$(brew --prefix)/bin/circleci-runner"
-```
+----
 +
 It should return an output that looks like this:
 +
-```shell
+[source,shell]
+----
 /opt/homebrew/bin/circleci-runner: accepted
 source=Notarized Developer ID
 origin=Developer ID Application: Circle Internet Services Inc.
-```
+----
 
 . When ready, run the command to accept the notarization. You will need to enter the macOS system password.
 +
-```shell
+[source,shell]
+----
 sudo xattr -r -d com.apple.quarantine "$(brew --prefix)/bin/circleci-runner"
-```
+----
 
 [#start-macos-machine-runner]
 == 4. Start macOS machine runner 3.0
 
-To start the macOS machine runner 3.0 for the first time, run the following commands to bootstrap and load the `plist` file:
+To start the macOS machine runner 3.0 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
 
-```shell
-launchctl bootstrap gui/`stat -f %u` $HOME/Library/LaunchAgents/com.circleci.runner.plist
-launchctl load $HOME/Library/LaunchAgents/com.circleci.runner.plist
-```
+[.tab.startdomain.GUI_domain]
+--
+
+. For running the agent in a GUI session, you can bootstrap the provided `.plist` file and enable the service by running the following commands:
++
+[source,shell]
+----
+launchctl bootstrap gui/$(id -u) $HOME/Library/LaunchAgents/com.circleci.runner.plist
+launchctl enable gui/$(id -u)/com.circleci.runner
+launchctl kickstart -k gui/$(id -u)/com.circleci.runner
+----
+. Finally, you can check the service is running by invoking the following command:
++
+[source,shell]
+----
+launchctl print gui/$(id -u)/com.circleci.runner
+----
+--
+
+[.tab.startdomain.User_domain]
+--
+
+1. When using a non-GUI (or headless) session, the provided `.plist` file should be moved to `/Library/LaunchAgents`. This location is for per-user agents configured by the administrator, which allows the service to load after a reboot. Run the following command to do this:
++
+[source,shell]
+----
+sudo mv $HOME/Library/LaunchAgents/com.circleci.runner.plist /Library/LaunchAgents/
+----
+2. Now you can bootstrap the `.plist` file and enable the service by running the following commands:
++
+[source,shell]
+----
+launchctl bootstrap user/$(id -u) /Library/LaunchAgents/com.circleci.runner.plist
+launchctl enable user/$(id -u)/com.circleci.runner
+launchctl kickstart -k user/$(id -u)/com.circleci.runner
+----
+3. Finally, you can check the service is running by invoking the following command:
++
+[source,shell]
+----
+launchctl print user/$(id -u)/com.circleci.runner
+----
+--
 
 [#stop-macos-machine-runner]
 == 5. Stop macOS machine runner 3.0
 
-To stop the machine runner service, run the following command to unload the `plist` file:
-```shell
-launchctl unload $HOME/Library/LaunchAgents/com.circleci.runner.plist
-```
+To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
+
+[.tab.stopdomain.GUI_domain]
+--
+
+[source,shell]
+----
+launchctl disable gui/$(id -u)/com.circleci.runner
+----
+--
+[.tab.stopdomain.User_domain]
+--
+
+[source,shell]
+----
+launchctl disable user/$(id -u)/com.circleci.runner
+----
+--
 
 [#uninstall-machine-runner-macos]
 == Uninstall machine runner 3.0 on macOS
-To uninstall machine runner from your macOS device, follow these steps.
+To uninstall machine runner 3.0 from your macOS device, follow these steps.
 
-. Stop the machine runner service by using the following command to unload the `plist` file:
+. Stop the machine runner service by using the following command to disable it, depending on the service target used during installation:
 +
-```shell
-launchctl unload $HOME/Library/LaunchAgents/com.circleci.runner.plist
-```
+[.tab.uninstalldomain.GUI_domain]
+--
+Targeting the GUI domain:
+[source,shell]
+----
+launchctl bootout gui/$(id -u)/com.circleci.runner
+----
+--
++
+[.tab.uninstalldomain.User_domain]
+--
+Targeting the user domain:
+[source,shell]
+----
+launchctl bootout user/$(id -u)/com.circleci.runner
+----
+--
 . Uninstall machine runner:
 +
 [.tab.machine-runner-uninstall-macos.Keep_logs_and_configuration]
 --
 To uninstall without purging logs and configuration files, run the following command.
 
-```shell
+[source,shell]
+----
 brew uninstall --cask circleci-public/homebrew-circleci/circleci-runner
-```
+----
 --
 +
 [.tab.machine-runner-uninstall-macos.Purge_logs_and_configuration]
 --
 
-This command will *purge all logs and configuration files*.
+CAUTION: This command will *purge all logs and configuration files*.
 
 To uninstall and purge all logs and configuration files, run the following command.
 
-```shell
+[source,shell]
+----
 brew uninstall --cask --zap circleci-public/homebrew-circleci/circleci-runner
-```
+----
 --
 
 [#access-runner-logs]
 == Access runner logs
 On your macOS machine, logs from `circleci-runner` are located in the following directory by default.
 
-```shell
+[source,shell]
+----
 $HOME/Library/Logs/com.circleci.runner/runner.log
-```
+----
 
 {% include snippets/machine-runner-example.adoc %}
 
