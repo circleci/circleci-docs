@@ -56,7 +56,7 @@ For `$CIRCLE_OIDC_TOKEN` its value is: `"org/<organization_id>/project/<project_
 
 For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:triggers-overview#[trigger]:
 
-* If the trigger is an xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[inbound webhook] then:
+* If the trigger is an xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[custom webhook] then:
 `"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 * Otherwise it will be:
@@ -85,10 +85,10 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by inbound webhooks.
+| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/vcs-ref`
-| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by inbound webhooks.
+| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.

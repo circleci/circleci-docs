@@ -121,9 +121,9 @@ A subset of built-in environment variables are not available in GitHub-based pro
 
 CircleCI's GitHub App integration provides fine-grained permissions, uses short-lived tokens, and gives you more control over which repositories CircleCI has access to.  The CircleCI GitHub App also enables the following functions:
 
-* link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[Inbound webhooks]
-link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI's config suggestions bot]
-* The ability to use link:https://discuss.circleci.com/t/product-update-multiple-configuration-files-per-project/50637[multiple configuration files within one project]
+* xref:webhooks#custom-webhooks[Custom webhooks]
+* link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI's config suggestions bot]
+* The ability to use xref:set-up-multiple-configuration-files-for-a-project#[multiple configuration files within one project]
 
 You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
 

@@ -36,7 +36,7 @@ image::/docs/assets/img/docs/pipelines-job-output.png[Download and share job ste
 
 NOTE: The information in this section on configuration sources and triggers applies to accounts integrated with the xref:github-apps-integration#[CircleCI GitHub App] or xref:gitlab-integration#[GitLab]. There are two GitHub integration types, either OAuth or through the GitHub App. To find out which GitHub integration type you have refer to the xref:github-apps-integration#[GitHub App integration] page.
 
-Set up configuration sources and project triggers to define when and how pipelines are automatically triggered for a project. These triggers may be from external services (inbound webhooks), or from commits or tags on a version control system.
+Set up configuration sources and project triggers to define when and how pipelines are automatically triggered for a project. These triggers may be from external services (custom webhooks), or from commits or tags on a version control system.
 
 === Configuration source
 
@@ -69,7 +69,7 @@ NOTE: For GitLab Self-managed, you can input any instance that you have previous
 ** Select your repository
 +
 CAUTION: **Select the same repository for your configuration source and trigger** (described in the following section). There is currently a bug that means that CircleCI will always look for the configuration source in the same repository from which the triggering event was emitted.
-** Select a fallback branch to use in case the triggering event does not have a triggering branch. This branch will be used if you trigger this pipeline via inbound webhook.
+** Select a fallback branch to use in case the triggering event does not have a triggering branch. This branch will be used if you trigger this pipeline via a custom webhook.
 ** Enter the path to your configuration file relative to the root of your repository. For example, `.circleci/config.yml`. If you are integrated through the GitHub App, you can enter any path to a `.yml` file, and the file can have any name you choose.
 . Click btn:[Save]
 
@@ -87,36 +87,14 @@ A trigger kicks off a pipeline to run the workflows defined by your connected co
 
 To add a project trigger for a configuration source, follow these steps:
 
-[.tab.trigger.Inbound_webhook]
+[.tab.trigger.Custom_webhook]
 --
 
-NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[Triggers overview] page.
 
-Setting up an inbound webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make cURL requests can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[Triggers overview] page.
+To add a project trigger for a custom webhook, follow these steps:
 
-image::{{site.baseurl}}/assets/img/docs/add-project-trigger-webhook.png[Add a project trigger]
-
-To add a project trigger for an inbound webhook, follow these steps:
-
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
-. Select **Triggers** in the sidebar
-. Click btn:[Add Trigger]
-. Select **Inbound Webhook** from the dropdown menu
-. Click btn:[Next]
-+
-image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an inbound webhook trigger]
-. Complete the form fields and options:
-** Give your trigger a descriptive name
-** (Optional) Add a description
-** Supply a path to a `config.yml` file and CircleCI will create a configuration source for you
-. Click btn:[Save]
-
-. You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source appended with the secret.
-+
-CAUTION: The secret will not be shown again so be sure to copy the URL before clicking **Done**.
-+
-image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
+{% include snippets/custom-webhook-setup.adoc %}
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
@@ -164,10 +142,10 @@ To add a project trigger for a configuration source, follow these steps:
 . Click btn:[Next]
 . Complete the form fields and options:
 ** Give your trigger a descriptive name
-** Authorize your connection if this is not already showing with a icon:check-circle[] (Not required for inbound webhooks)
+** Authorize your connection if this is not already showing with a icon:check-circle[] (Not required for custom webhooks)
 +
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
-** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to (Not required for inbound webhooks)
+** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to (Not required for custom webhooks)
 ** Choose your configuration source from the "Choose config to run" menu.
 ** (Optional) You can configure <<user-content-trigger-filters,trigger filters>>.
 . Click btn:[Save]
