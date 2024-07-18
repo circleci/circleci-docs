@@ -119,7 +119,7 @@ Docker also has built-in image caching and enables you to build, run, and publis
 
 Choosing Docker limits your runs to what is possible from within a Docker container (including our xref:building-docker-images#[Remote Docker] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
 
-There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
+The table below shows tradeoffs between using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
