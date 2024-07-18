@@ -129,7 +129,7 @@ commands:
     description: Shallow Git Clone
     steps:
       - gh/setup:
-          token: "GITHUB_TOKEN_ALACRITY_BOT"
+          token: "GITHUB_TOKEN"
       - jq/install
       - run:
           name: Shallow Clone
