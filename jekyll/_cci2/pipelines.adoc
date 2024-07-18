@@ -56,13 +56,13 @@ image::{{site.baseurl}}/assets/img/docs/add-configuration-source.png[Add a confi
 
 To add a configuration source, follow these steps:
 
-. In the CircleCI web app, click on **Projects** in the sidebar
-. Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
-. Select **Configuration** in the sidebar
-. Click btn:[Add Configuration Source]
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Select the ellipsis next to your project (icon:ellipsis-h[]) and choose **Project Settings**.
+. Select **Configuration** in the sidebar.
+. Select btn:[Add Configuration Source].
 . Complete the form fields and options:
-** Give your configuration source a descriptive name, for example `Run tests and deploy`
-** Under Configuration Source select the platform that matches where your project is set up (for example, GitHub App)
+** Give your configuration source a descriptive name, for example `Run tests and deploy`.
+** Under Configuration Source select the platform that matches where your project is set up (for example, GitHub App).
 +
 NOTE: For GitLab Self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new configuration source, you will first need to add a new connection via your xref:gitlab-integration#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
 ** Authorize your connection if this is not already showing with a icon:check-circle[]
@@ -71,7 +71,7 @@ NOTE: For GitLab Self-managed, you can input any instance that you have previous
 CAUTION: **Select the same repository for your configuration source and trigger** (described in the following section). There is currently a bug that means that CircleCI will always look for the configuration source in the same repository from which the triggering event was emitted.
 ** Select a fallback branch to use in case the triggering event does not have a triggering branch. This branch will be used if you trigger this pipeline via a custom webhook.
 ** Enter the path to your configuration file relative to the root of your repository. For example, `.circleci/config.yml`. If you are integrated through the GitHub App, you can enter any path to a `.yml` file, and the file can have any name you choose.
-. Click btn:[Save]
+. Select btn:[Save].
 
 Once you have set up a configuration source you need to set up a project trigger to connect it to. This is described in the following section.
 
@@ -109,16 +109,16 @@ image::{{site.baseurl}}/assets/img/docs/add-project-trigger.png[Add a project tr
 To add a project trigger for a configuration source, follow these steps:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
-. Select **Triggers** in the sidebar
-. Click btn:[Add Trigger]
-. Select the same location in the "Connect to" dropdown menu that you selected for your configuration source (for example, GitHub App)
-. Click btn:[Next]
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Select the same location in the "Connect to" dropdown menu that you selected for your configuration source (for example, GitHub App).
+. Select btn:[Next].
 . Complete the form fields and options:
-** Give your trigger a descriptive name
-** Authorize your connection if this is not already showing with a icon:check-circle[]
+** Give your trigger a descriptive name.
+** Authorize your connection if this is not already showing with a icon:check-circle[].
 ** Choose your configuration source from the "Choose config to run" menu.
-. Click btn:[Save]
+. Select btn:[Save].
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
@@ -135,20 +135,20 @@ image::{{site.baseurl}}/assets/img/docs/add-project-trigger.png[Add a project tr
 To add a project trigger for a configuration source, follow these steps:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, click the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
-. Select **Triggers** in the sidebar
-. Click btn:[Add Trigger]
-. Select the same location in the "Connect to" dropdown menu that you selected for your configuration source (for example, GitLab)
-. Click btn:[Next]
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Select the same location in the "Connect to" dropdown menu that you selected for your configuration source (for example, GitLab).
+. Select btn:[Next].
 . Complete the form fields and options:
-** Give your trigger a descriptive name
-** Authorize your connection if this is not already showing with a icon:check-circle[] (Not required for custom webhooks)
+** Give your trigger a descriptive name.
+** Authorize your connection if this is not already showing with a icon:check-circle[] (Not required for custom webhooks).
 +
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
-** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to (Not required for custom webhooks)
+** Select your repository from the dropdown menu. This should match the repository your configuration source is connected to (Not required for custom webhooks).
 ** Choose your configuration source from the "Choose config to run" menu.
 ** (Optional) You can configure <<user-content-trigger-filters,trigger filters>>.
-. Click btn:[Save]
+. Select btn:[Save]
 +
 CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. The webhook is set up automatically by CircleCI. This is a known issue and will be fixed.
 
