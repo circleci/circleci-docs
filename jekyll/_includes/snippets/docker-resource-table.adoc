@@ -1,3 +1,5 @@
+NOTE: For credit and access information, see the link:https://circleci.com/pricing/[pricing page]. Resource class access is dependent on your xref:plan-overview#[Plan].
+
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
@@ -45,5 +47,3 @@
 | icon:check[]
 | icon:check[]
 |===
-
-NOTE: Resource classes are enforced by the plan being used. See the link:https://circleci.com/pricing/[pricing page] for more details on the resource classes available.
