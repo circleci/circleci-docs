@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Managing build artifacts
 :page-layout: classic-docs
@@ -27,46 +28,46 @@ By default, only predefined artifact types are allowed to be rendered. This prot
 | Plain
 
 | Application
-| json
+| JSON
 
 | Image
-| png
+| PNG
 
 | Image
-| jpg
+| JPG
 
 | Image
-| gif
+| GIF
 
 | Image
-| bmp
+| BMP
 
 | Video
-| webm
+| WEBM
 
 | Video
-| ogg
+| OGG
 
 | Video
-| mp4
+| MP4
 
 | Audio
-| webm
+| WEBM
 
 | Audio
-| aac
+| AAC
 
 | Audio
-| mp4
+| MP4
 
 | Audio
-| mpeg
+| MPEG
 
 | Audio
-| ogg
+| OGG
 
 | Audio
-| wav
+| WAV
 |===
 <<<
 
@@ -79,25 +80,25 @@ Also, by default, the following types will be rendered as plain text:
 | Unsafe Type
 
 | Text
-| html
+| HTML
 
 | Text
-| css
+| CSS
 
 | Text
-| javascript
+| JavaScript
 
 | Text
 | ecmascript
 
 | Application
-| javascript
+| JavaScript
 
 | Application
 | ecmascript
 
 | Text
-| xml
+| XML
 |===
 
 [#allow-unsafe-types]
