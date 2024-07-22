@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.2
   - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
@@ -272,7 +273,7 @@ CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, th
 
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
 
-. In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
+. In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select **New OAuth App**.
 +
 .New GitHub OAuth App
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
@@ -302,7 +303,7 @@ ifndef::env-gcp[]
 === GCP - Reserve a static external IP address
 The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
 
-Make note of the returned IPv4 address for use later in the values.yaml file.
+Make note of the returned IPv4 address for use later in the `values.yaml` file.
 
 endif::env-gcp[]
 
@@ -327,7 +328,7 @@ aws ec2 allocate-address
 #}
 ----
 
-Make note of each of the returned `AllocationId` values from the CLI for use in the values.yaml file.
+Make note of each of the returned `AllocationId` values from the CLI for use in the `values.yaml` file.
 
 endif::env-aws[]
 
@@ -486,7 +487,7 @@ NOTE: If you are installing behind a proxy, object storage should be behind this
 ifndef::env-gcp[]
 
 [#s3-storage]
-=== S3 Storage
+=== S3 storage
 
 [#create-aws-s3-bucket]
 ==== a. Create AWS S3 Bucket
@@ -503,7 +504,10 @@ aws s3api create-bucket \
 [#set-up-authentication-aws]
 ==== b. Set up authentication
 
-There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+Authenticate CircleCI with S3 in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA) - **recommended**
+* IAM access keys
 
 [.tab.authentication.IRSA]
 --
@@ -511,7 +515,7 @@ There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accou
 
 The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for installing CircleCI.
 
-. Create an IAM OIDC identity provider for your EKS Cluster.
+. Create an IAM OIDC Identity Provider for your EKS Cluster.
 +
 [source,shell]
 ----
