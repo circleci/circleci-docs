@@ -36,6 +36,7 @@ Please note the following significant changes in server v4.3.
 * Old DLC volumes will not be carried over and need to be wiped manually
 * Projects that stop using DLC will not delete final DLC cache without manual intervention
 * DLC now runs through S3 and GCS instead of SSD Volumes
+* If AWS S3 is used for https://circleci.com/docs/server/v4.3/installation/phase-1-prerequisites/#s3-storage[object storage], DLC now requires https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html[versioning to be enabled] on the bucket.
 
 [#machine]
 === Machine jobs

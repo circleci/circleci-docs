@@ -495,9 +495,19 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=<YOUR_REGION>
 ----
 
+==== b. Enable bucket versioning
+
+To use the https://circleci.com/docs/docker-layer-caching/[Docker layer caching] (DLC) feature in CircleCI, https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html[bucket versioning] needs to be enabled. Run the following command to do that on the bucket created in the previous step:
+[source,shell]
+----
+aws s3api put-bucket-versioning \
+    --bucket <YOUR_BUCKET_NAME> \
+    --region <YOUR_REGION> \
+    --versioning-configuration Status=Enabled
+----
 
 [#set-up-authentication-aws]
-==== b. Set up authentication
+==== c. Set up authentication
 
 There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
