@@ -3,24 +3,27 @@ contentTags:
   platform:
   - Cloud
 ---
-= Configure your Kubernetes components
+= Manual install - configure your Kubernetes components
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
 :icons: font
 :experimental:
 
-The steps outlined on this page guide you to configure your Kubernetes resources for integration with your release environment.
+The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-releases#[Set up CircleCI releases] page.
 
 [#introduction]
 == Introduction
 
-In this tutorial you will configure your Kubernetes components, adding labels and annotation, to enable visibility and control over your deployments.
+In this tutorial you will configure your Kubernetes components, adding labels and annotation to enable visibility and control over your deployments.
 
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the release environment is set up. Refer to the xref:set-up-a-release-environment#[Set up a release environment] page.
+Before following the steps below, ensure the following:
+
+* Set up your environment integration. Refer to the xref:set-up-a-release-environment#[Set up a release environment] page.
+* Install the CircleCI release agent into your Kubernetes cluster. Refer to the xref:set-up-the-release-agent#[Set up the release agent] page.
 
 [#add-required-labels]
 == 1. Add required labels and annotation to your Deployment/Rollout
