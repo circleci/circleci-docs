@@ -3,10 +3,10 @@ contentTags:
   platform:
   - Cloud
 ---
-= Set up CircleCI releases
+= Manual install - set up the release agent
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Tutorial outlining how to set up CircleCI releases, covering creating an environment integration, installing the release agent and creating components.
+:page-description: Tutorial outlining how to manually install the CircleCI release agent into your Kubernetes cluster
 :icons: font
 :experimental:
 
