@@ -497,7 +497,7 @@ aws s3api create-bucket \
 
 ==== b. Enable bucket versioning
 
-To use the https://circleci.com/docs/docker-layer-caching/[Docker layer caching] (DLC) feature in CircleCI, https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html[bucket versioning] needs to be enabled. Run the following command to do that on the bucket created in the previous step:
+To use the link:https://circleci.com/docs/docker-layer-caching/[Docker layer caching] (DLC) feature in CircleCI, link:https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html[bucket versioning] needs to be enabled. Run the following command to enable bucket versioning on the bucket created in the previous step:
 [source,shell]
 ----
 aws s3api put-bucket-versioning \
