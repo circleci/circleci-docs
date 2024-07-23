@@ -46,7 +46,7 @@ The following versions of Kubernetes, Helm, and Argo Rollouts have been tested a
 . If this is your first environment setup, select btn:[Create your first Environment Integration]. If you already have environments set up, choose the **Environments** tab and select btn:[Create Environment Integration].
 . Enter a name for your environment, and a description if you would like.
 . Use the dropdown menu to choose your environment integration type, Kubernetes cluster, then select btn:[Next: Release Agent Setup].
-. To set up the release agent into your cluster and set up your components, follow the in-app setup steps.
+. To set up the release agent into your cluster and set up your components, follow the in-app setup steps. If you would rather continue the setup process manually, see the xref:set-up-the-release-agent#[Set up the release agent] page.
 
 After completing all the steps you will have done the following:
 
