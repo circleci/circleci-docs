@@ -501,7 +501,7 @@ nginx:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>
   aws_acm:
-    enabled: false
+    enabled: true
 ----
 
 [WARNING]
@@ -914,7 +914,7 @@ You need the IP address, or, if using AWS, the DNS name of the nginx load balanc
 
 [source,shell]
 ----
-kubectl get service circleci-proxy
+kubectl get service -l app=circleci-proxy
 ----
 
 [#validation]
