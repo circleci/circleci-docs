@@ -36,13 +36,14 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 
 Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to connect your GitHub account, which creates your CircleCI organization.
 
-When you create a new organization and connect your GitHub account, you will be guided to start creating projects, as follows:
+When you create a new organization, you will be guided to start creating projects, as follows:
 
-. You will be prompted to create a new project from a repository
-. After creating a new project, CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository
-. You will be presented with options to either
-.. btn:[Commit and Run] the generated CircleCI configuration in a new branch
-.. Review the configuration file in the configuration editor in the CircleCI web app
+. The first project you create will prompt you to install the CircleCI GitHub App in a GitHub organization.
++
+CAUTION: **If your GitHub organization has more than 100 repositories**, select the "Only select repositories" option when installing the GitHub App. There is a known issue where GitHub organizations with more than 100 repositories cannot view their repositories in CircleCI if they select the "All repositories" option when installing the CircleCI GitHub App.
+. After installing the GitHub App, you will select a repository to use for your project's first pipeline.
+. CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
+. If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`).
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
 
