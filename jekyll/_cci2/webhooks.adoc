@@ -195,7 +195,7 @@ Once set up, a webhook is sent whenever an event occurs on the CircleCI platform
 
 A webhook is sent using an HTTP POST to the URL that was registered when the webhook was created, with a body encoded using JSON.
 
-CircleCI expects the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 5 seconds.
+CircleCI expects the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 10 seconds.
 
 Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the xref:webhooks-reference#common-top-level-keys[`id` property] in the webhook payload for identification.
 
