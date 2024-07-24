@@ -3,3 +3,5 @@
 \bcircleci\s
 please
 Please
+bitbucket
+BitBucket

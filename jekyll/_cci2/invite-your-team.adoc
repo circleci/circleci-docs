@@ -29,7 +29,7 @@ To join an organization, there are three options:
 
 * <<join-via-invite,Join via an invite>>
 * <<join-via-github,Search via GitHub>>
-* <<join-via-bitbucket,Search via Bitbucket>>
+* <<join-via-bitbucket,Search via Bitbucket Cloud>>
 
 These options are also available at any time using the **Join Organization** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are outlined in the following sections.
 
@@ -49,11 +49,11 @@ These options are also available at any time using the **Join Organization** men
 NOTE: If you do not see the organization you would like to join listed, you will need to receive an invite to join from an organization admin. Reach out to your admin to request an invite, and send them a link to this help doc for reference.
 
 [#join-via-bitbucket]
-=== Join an existing CircleCI organization with a Bitbucket integration
+=== Join an existing CircleCI organization with a Bitbucket Cloud integration
 
-. Select "Search via Bitbucket" from the **Find Your Team** dropdown to be redirected to Bitbucket
-. Enter your Bitbucket credentials to authorize CircleCI to your Bitbucket account
-. After authorization, you will be redirected back to CircleCI and will be added to your organization
+. Select "Search via Bitbucket" from the **Find Your Team** dropdown to be redirected to Bitbucket Cloud.
+. Enter your Bitbucket Cloud credentials to authorize CircleCI to your Bitbucket Cloud account.
+. After authorization, you will be redirected back to CircleCI and will be added to your organization.
 
 [#invite-teammates]
 == Invite teammates to join your GitHub App or GitLab organization

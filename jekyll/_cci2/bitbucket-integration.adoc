@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Bitbucket integration overview
+= Bitbucket Cloud integration overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of using Bitbucket with CircleCI.
@@ -13,9 +13,9 @@ contentTags:
 [#overview]
 == Overview
 
-To use CircleCI with Bitbucket you need to connect your Bitbucket account. When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+To use CircleCI with Bitbucket Cloud you need to connect your Bitbucket Cloud account. When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
 
-- A deploy key that is used to check out your project from Bitbucket.
+- A deploy key that is used to check out your project from Bitbucket Cloud.
 - A service hook (or "push hook") that is used to notify CircleCI when you push to Bitbucket.
 
 CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
