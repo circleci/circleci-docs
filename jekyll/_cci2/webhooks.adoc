@@ -11,25 +11,11 @@ contentTags:
 :page-liquid:
 :experimental:
 
-Use <<custom-webhooks>> to trigger a pipeline from anywhere that can emit a webhook or run a curl command. Custom webhooks are available for accounts integrated through the xref:github-apps-integration#[GitHub App].
-
-Use <<outbound-webhooks>> to:
-
-* Build a custom dashboard to visualize or analyze workflow/job events.
-* Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
-* Use tools like xref:webhooks-airtable#[Airtable] to capture data and visualize it.
-* Alert when a workflow is cancelled, then use the API to rerun the workflow.
-* Trigger notification systems to alert people when workflows/jobs complete.
-* Build your own automation plugins and tools.
-
-[#introduction]
-== Introduction
-
 A webhook allows you to connect a platform (for example, CircleCI, an API you create yourself, or a third party service) to a stream of future _events_.
 
 Setting up an **outbound webhook** on CircleCI enables your third party service to receive information (referred to as _events_) from CircleCI, as they happen. This can help you avoid polling the API or manually checking the CircleCI web application for desired information.
 
-Setting up a **custom webhook** on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
+Setting up an inbound webhook (as a **custom webhook** trigger) on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
 
 NOTE: Selecting a custom webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
@@ -144,7 +130,18 @@ commands:
 
 == Outbound webhooks
 
-Use outbound webhooks to integrate your CircleCI builds with external services. The following sections detail CircleCI outbound webhook structure and protocols.
+Use outbound webhooks to integrate your CircleCI builds with external services. 
+
+For example, you could use <<outbound-webhooks>> to:
+
+* Build a custom dashboard to visualize or analyze workflow/job events.
+* Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
+* Use tools like xref:webhooks-airtable#[Airtable] to capture data and visualize it.
+* Alert when a workflow is cancelled, then use the API to rerun the workflow.
+* Trigger notification systems to alert people when workflows/jobs complete.
+* Build your own automation plugins and tools.
+
+The following sections detail CircleCI outbound webhook structure and protocols.
 
 === Quickstart
 
