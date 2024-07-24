@@ -56,9 +56,11 @@ NOTE: If you do not see the organization you would like to join listed, you will
 . After authorization, you will be redirected back to CircleCI and will be added to your organization.
 
 [#invite-teammates]
-== Invite teammates to join your GitHub App or GitLab organization
+== Invite teammates to join your GitHub App, GitLab or Bitbucket Data Center organization
 
-NOTE: These steps are for GitLab and GitHub App accounts. Refer to the xref:github-apps-integration#[GitHub App integration] page to check if your GitHub integration uses the GitHub App or the GitHub OAuth app. You must be an Organization Admin to invite your team to CircleCI.
+NOTE: These steps are for GitLab, GitHub App, and Bitbucket Data Center accounts. Refer to the xref:github-apps-integration#[GitHub App integration] page to check if your GitHub integration uses the GitHub App or the GitHub OAuth app. You must be an Organization Admin to invite your team to CircleCI.
+
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
 
 . In the CircleCI web app, go to menu:Organization Settings[People], then select btn:[Invite].
 . To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.

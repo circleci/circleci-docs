@@ -29,6 +29,8 @@ From the link:https://circleci.com/signup/[Sign Up] page, do one of the followin
 
 If you want to build mainly **GitHub**, **GitLab** or **Bitbucket Data Center** projects, sign up with your email address to create an account.
 
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+
 TIP: If you want to collaborate on an existing org you can create an account and request an invite later.
 
 . Select btn:[Sign Up].
