@@ -207,6 +207,7 @@ React Native
 READMEs?
 Reality Check
 ReplicaSet
+[Rr]epo
 reprovision
 reprovisioned
 [Rr]eusability
