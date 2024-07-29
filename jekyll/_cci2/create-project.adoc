@@ -50,29 +50,12 @@ image::create-project/what-project.png[Screenshot showing options to choose what
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
 +
 image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
-
-. In the connect your code window, select the **GitHub** tile.
-+
-image::create-project/connect-your-code.png[Connect your code window]
 +
 NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. **If your GitHub organization has more than 100 repositories**, select the **Only select repositories** option. There is a known issue where GitHub organizations with more than 100 repositories cannot view their repositories in CircleCI if they select the "All repositories" option when installing the CircleCI GitHub App.
 
-. Give your project a name, select the GitHub repository you would like to connect, and select btn:[Create Project].
-+
-image::create-project/name-project.png[Name project and tell CircleCI which code repository to connect]
+. Follow the in-app prompts to give your project a name.
 
-. If a CircleCI config file exists in your repository already you will be redirected to the pipelines page. Otherwise, CircleCI automatically generates a custom configuration file based on the programming languages and frameworks detected in your selected repository. If CircleCI is unable to generate a custom configuration file, a fallback template is used.
-+
-image::create-project/analysing-repo-contents.png[Analysing repository contents and auto-generating configuration]
-+
-When the custom configuration file has been generated, you have some options:
-
-** Select btn:[Commit and Run] to commit your custom configuration file on a new branch called `circleci-project-setup` and then land on the pipelines page.
-+
-image::create-project/generated-config-commit-and-run.png[Window showing generated config and options to commit and run or use an existing config]
-** Select btn:[Use Existing Config] for the option to download the generated config and instructions to commit this or another CircleCI configuration file to your repository directly. The select btn:[Start Building] to navigate to the pipelines page.
-+
-image::create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
+. If a CircleCI config file exists in your repository already you will be redirected to the pipelines page. Otherwise, CircleCI automatically generates a custom configuration file based on the programming languages and frameworks detected in your selected repository. If CircleCI is unable to generate a custom configuration file, a fallback template is used. Select btn:[Commit and Run].
 --
 
 [.tab.create-project.GitLab_Cloud]
@@ -88,13 +71,9 @@ image::create-project/create-project-button.png[Create a project]
 +
 image::create-project/what-project.png[Screenshot showing options to choose what you want to do in your project]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitLab Cloud. Select btn:[GitLab Cloud] and then btn:[Authorize in GitLab]
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitLab] and then btn:[Authorize in GitLab]
 +
 image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
-
-. In the connect your code window, select the **GitLab** tile, then choose GitLab **Cloud**.
-+
-image::create-project/connect-your-code.png[Connect your code window]
 
 . In the Create New Project window, you have some options:
 +
@@ -133,13 +112,9 @@ image::create-project/create-project-button.png[Create a project]
 +
 image::create-project/what-project.png[Screenshot showing options to choose what you want to do in your project]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from your GitLab self-managed instance. Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
 +
 image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
-
-. In the connect your code window, select the **GitLab** tile, then choose GitLab **self-managed**.
-+
-image::create-project/connect-your-code.png[Connect your code window]
 
 . In the Create New Project window, you have some options:
 +
@@ -184,30 +159,15 @@ image::create-project/create-project-button.png[Create a project]
 +
 image::create-project/what-project.png[Screenshot showing options to choose what you want to do in your project]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from Bitbucket Data Center. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center]
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center]
 +
-image::create-project/choose-a-repo.png[Choose a repostory window with option to add another VCS]
+image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
 
-. In the connect your code window, select the **GitLab** tile, then choose GitLab **self-managed**.
-+
-image::create-project/connect-your-code.png[Connect your code window]
+. On the next screen give your project a descriptive name
 
-. In the Create New Project window, you have some options:
-+
-image::create-project/create-new-gitlab-self-managed-project.png[Create new project window]
-+
-[NOTE]
-====
-If this is your first GitLab self-managed project you will now set up your integration:
+. Next you will set up a pipeline for your project. Select btn:[Set up Pipeline].
 
-* Verify your GitLab URL
-* Generate an add a personal access token
-* Add your known hosts, following the instructions in the app
-====
-** The **Project Name** field (bottom of the window) is automatically populated with the name of your repository, but you can change this if required.
-** Use the repository dropdown menu to tell CircleCI where your code is stored.
-** Select **Create Project**. You will then be redirected to the Pipelines page.
-** The express CircleCI configuration setup is not currently available for GitLab self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
+
 +
 [TIP]
 ====
