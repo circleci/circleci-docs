@@ -23,6 +23,7 @@ You can choose to pay for premium features per active user, compute, and optiona
  ** Credits rollover each month and expire after one year.
 * Docker Layer Caching (DLC) is paid for with credits per usage, similar to
 compute credits.
+* You can find the full explanation of how credits and features are priced link:https://circleci.com/pricing/[here on our pricing page.]
 
 [#run-out-of-credits]
 === What happens when I run out of credits?
