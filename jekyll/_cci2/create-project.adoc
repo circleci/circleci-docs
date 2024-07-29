@@ -167,6 +167,12 @@ image::create-project/choose-a-repo.png[Choose a repository window with option t
 
 . Next you will set up a pipeline for your project. Select btn:[Set up Pipeline].
 
+. In the **Add Pipeline** window, give your pipeline a name, for example, `integration-tests`.
+. Select **Bitbucket Data Center** from the Config Source list. This will prompt you to set up your integration. Select the link in the banner to get to menu:Organization Settings[Integrations].
+
+. Select btn:[Set up Integration] next to Bitbucket Data Center.
+
+#ADD INFO ABOUT KNOWN HOSTS WHEN WE HAVE IT#
 
 +
 [TIP]
