@@ -199,3 +199,8 @@ Docker layer caching (DLC) reduces build times on pipelines where Docker images 
 To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
 
 Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
+
+[#support-plan-info]
+=== What does a paid Support Plan get me?
+
+By purchasing a paid Support Plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes, with a 24 x 7 coverage plan to ensure that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[please check out this article on our Support site.]
