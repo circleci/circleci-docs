@@ -190,6 +190,16 @@ for the audit-log-service deployment.
 |audit_log_service.resources.limits.memory |string |`+"3584Mi"+` |Memory
 limit for the audit-log-service deployment.
 
+|authentication_service.login_api.replicas |int |`+1+` |Number of
+replicas to deploy for the authentication-service login api deployment.
+
+|authentication_service.login_api.resources.limits.cpu |int |`+2+` |CPU
+limit for the authentication-service login api deployment.
+
+|authentication_service.login_api.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the authentication-service login api
+deployment.
+
 |branch_service.replicas |int |`+1+` |Number of replicas to deploy for
 the branch-service deployment.
 
@@ -519,7 +529,7 @@ levels: `+debug+`, `+info+`, `+warn+`, `+error+`, `+crit+`, `+notice+`.
 |kong.image.repository |string |`+"kong"+` |The Docker image repository
 for Kong. Note this repository is not managed by CircleCI.
 
-|kong.image.tag |string |`+"2.8.1"+` |The Kong image tag. Kong has been
+|kong.image.tag |string |`+"3.3.1"+` |The Kong image tag. Kong has been
 tested against this specific version tag; edit this value at your own
 risk.
 
@@ -731,7 +741,7 @@ the `+nginx.annotations+` block.
 |nginx.image.repository |string |`+"nginx"+` |The Docker image
 repository for NGINX. Note this repository is not managed by CircleCI.
 
-|nginx.image.tag |string |`+"1.21.6"+` |Nginx has been tested against
+|nginx.image.tag |string |`+"1.27.0"+` |Nginx has been tested against
 this specific version tag; edit this value at your own risk.
 
 |nginx.loadBalancerIp |string |`+""+` |Load Balancer IP. To use a static
@@ -1226,7 +1236,7 @@ traffic.
 Soketi image repository for NGINX. Note this repository is not managed
 by CircleCI.
 
-|soketi.image.tag |string |`+"0.19-16-distroless"+` |Soketi has been
+|soketi.image.tag |string |`+"1.6-16-distroless"+` |Soketi has been
 tested against this specific version tag; edit this value at your own
 risk.
 
