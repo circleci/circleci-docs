@@ -203,4 +203,4 @@ Note that the benefits of Docker layer caching are only apparent on pipelines th
 [#support-plan-info]
 === What does a paid Support Plan get me?
 
-By purchasing a paid Support Plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes, with a 24 x 7 coverage plan to ensure that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[please check out this article on our Support site.]
+By purchasing a paid Support Plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes, with a 24 x 7 coverage plan, to ensure that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[refer to this support article].
