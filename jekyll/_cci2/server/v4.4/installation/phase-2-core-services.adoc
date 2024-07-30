@@ -887,7 +887,7 @@ $ base64 -w0 ~/oidc-service-jwk.json
 +
 [source,shell]
 ----
-$ base64 -b0 ~/oidc-service-jwk.json
+$ base64 -b0 -i ~/oidc-service-jwk.json
 ----
 +
 TIP: Copy the output to a secure location, so it can be referenced in the next step.
