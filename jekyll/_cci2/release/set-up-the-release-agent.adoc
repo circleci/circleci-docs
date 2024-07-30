@@ -14,13 +14,7 @@ This tutorial shows how to manually install the CircleCI release agent into your
 
 == Prerequisites
 
-Before setting up the CircleCI release agent in your Kubernetes cluster, check you meet the following prerequisites:
-
-* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* A Kubernetes cluster
-* A project building on CircleCI that deploys to your Kubernetes cluster. See the xref:../create-project#[Create a project] page for steps.
-* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page.
-* An environment integration set up in the CircleCI web app for your deployment. See the xref:set-up-circleci-releases#[Set up CircleCI releases] page for steps.
+Before setting up the CircleCI release agent in your Kubernetes cluster, check you have an environment integration set up in the CircleCI web app for your deployment. See the xref:set-up-circleci-releases#[Set up CircleCI releases] page for steps and prerequisites.
 
 == 1. Add the release agent into your Kubernetes cluster
 
@@ -40,18 +34,23 @@ helm repo add release-agent https://circleci-public.github.io/cci-k8s-release-ag
 helm repo update
 ----
 
-[#install-the-release-agent]
-== 2. Install the release agent
+== 2. Create an integration token
 
-Install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster.
+You will need a `CCI_INTEGRATION_TOKEN` to install the CircleCI release agent into your cluster. To create an integration token, follow these steps:
 
-You will need a `CCI_INTEGRATION_TOKEN` for the next step.
-. Navigate to the `Environments` tab.
-. Select the `gear` icon corresponding to the environment you just created to enter the `Environment Integration Settings` page.
+. In the CircleCI web app, select **Releases** in the sidebar.
+. Navigate to the **Environments** tab.
+. Select the gear icon (icon:cog[]) corresponding to the environment you just created to enter the Environment Integration Settings page.
 . Select btn:[Create Integration Token] and then btn:[Create Token]
 . The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then select btn:[Done]
 
-If required, include a list of Kubernetes namespaces you want to monitor. If you only want to monitor the `default` namespace, you do not need to supply a list with `--set manageNamespaces="{namespace1,namespace2}"`. The `default` namespace is monitored by default. If you struggle to pass the `manageNamespaces` value, try enclosing the array value or the whole parameter itself in a string, with double or single quotes.
+
+[#install-the-release-agent]
+== 2. Install the release agent
+
+Use the following command to install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster.
+
+If required, you can include a list of Kubernetes namespaces you want to monitor. If you only want to monitor the `default` namespace, you do not need to supply a list with `--set manageNamespaces="{namespace1,namespace2}"`. The `default` namespace is monitored by default. If you struggle to pass the `manageNamespaces` value, try enclosing the array value or the whole parameter itself in a string, with double or single quotes.
 
 [,shell]
 ----
@@ -63,11 +62,11 @@ helm upgrade --install circleci-release-agent-system release-agent/circleci-rele
 
 NOTE: You can further customize the agent installation and check all available options link:https://circleci-public.github.io/cci-k8s-release-agent/[here].
 
-Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated:
+Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated. It navigate to the environment details page, follow these steps:
 
-. Select btn:[Releases] in the CircleCI web app sidebar.
-. Select btn:[Configure Environments] at the top left of the page.
-. Select the name of your release environment to view the environment details page.
+. Select **Releases** in the CircleCI web app sidebar.
+. Select the **Environments** tab.
+. Select the name of your environment integration to view the environment details page.
 
 [#next-steps]
 == Next steps
