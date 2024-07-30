@@ -17,6 +17,14 @@ The steps outlined on this page guide you to configure your Kubernetes resources
 
 In this tutorial you will configure your Kubernetes components, adding labels and annotation to enable visibility and control over your deployments.
 
+To set up a component for your environment, you can do one of the following:
+
+* Follow the steps on this page.
+* Follow the in-app component setup guide, which can be found as follows:
+.. Select **Releases** in the CircleCI web app sidebar
+.. Select the **Components** tab
+.. Select btn:[Add Component], choose your environment integration and follow the in-app guide.
+
 [#prerequisites]
 == Prerequisites
 
