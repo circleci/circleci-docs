@@ -47,7 +47,7 @@ image::create-project/create-project-button.png[Create a project]
 +
 image::create-project/connect-your-code.png[Connect your code window]
 +
-NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect.
+NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. **If your GitHub organization has more than 100 repositories**, select the **Only select repositories** option. There is a known issue where GitHub organizations with more than 100 repositories cannot view their repositories in CircleCI if they select the "All repositories" option when installing the CircleCI GitHub App.
 
 . Give your project a name, select the GitHub repository you would like to connect, and select btn:[Create Project].
 +

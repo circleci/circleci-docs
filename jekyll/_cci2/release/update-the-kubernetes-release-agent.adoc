@@ -24,15 +24,6 @@ To update the Kubernetes release agent you need an operational CircleCI release 
 
 [CAUTION]
 ====
-We have made a small but significant change in the Helm installation command that you need to be aware of.
-
-**The argument name `manageNamespaces` is now `managedNamespaces`.**
-
-You must use `managedNamespaces` instead of `manageNamespaces` when installing or upgrading the CircleCI release agent. If you have any scripts or automation that includes the previous command, you will also need to update them to use `managedNamespaces`.
-====
-
-[WARNING]
-====
 If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend to migrate to the new labels as soon as possible.
 
 Support for the old labels will be dropped in one of the next releases. 

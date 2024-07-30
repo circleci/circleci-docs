@@ -260,6 +260,7 @@ Ubuntu
 UI
 UIDs?
 [Uu]ncheck
+[Uu]ndeploy[ed]?
 unencrypted
 [Uu]nfollow[ing]?
 unformatted

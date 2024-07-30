@@ -99,7 +99,7 @@ CircleCI's test splitting feature allows you to specify a number of identical ex
       parallelism: 4
       resource_class: large
       steps:
-        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname -- --split-by=filesize"
+        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=filesize
 
   ```
 
