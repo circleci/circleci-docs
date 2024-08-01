@@ -8,7 +8,7 @@ For example, the 25,000 credit package would provide 2,500 build minutes when us
 When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
 
 [#buy-credits-in-any-increments]
-=== How do I buy credits? Can I buy in any increments?
+=== How do I buy credits?
 
 Every month, you are charged for your selected credit package at the beginning of the month.
 
@@ -28,16 +28,16 @@ compute credits.
 [#run-out-of-credits]
 === What happens when I run out of credits?
 
-On the *Performance plan*, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
+On the *Performance Plan*, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
 
-If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
+If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app, then select menu:Plan[Plan Usage]. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
 
-On the *Free plan*, jobs will fail to run once you have run out of credits.
+On the *Free Plan*, jobs will fail to run once you have run out of credits.
 
 [#do-credits-expire]
 === Do credits expire?
 
-*Performance plan*: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+*Performance Plan*: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
 
 [#how-do-i-pay]
 === How do I pay?
@@ -47,17 +47,17 @@ You can pay from inside the CircleCI app for monthly pricing.
 [#when-do-i-pay]
 === When do I pay?
 
-On the *Performance plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% when there are 0 credits remaining) will be paid _at the time of the refill_.
+On the *Performance Plan*, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% when there are 0 credits remaining) will be paid _at the time of the refill_.
 
 [#what-is-prepaid-billing]
 === What is prepaid billing?
 
-Prepaid billing is a payment option for customers on the Performance plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and be able to get discounted prices for credits based on volume purchased.
+Prepaid billing is a payment option for customers on the Performance Plan. Prepaid Billing allows you to purchase credits in bulk, pay upfront, and be able to get discounted prices for credits based on volume purchased.
 
 [#how-can-i-get-on-prepaid-billing]
 === How can I get on prepaid billing?
 
-All Performance plan customers can choose to get on prepaid billing through the CircleCI web app. To access this option, follow these steps:
+All Performance Plan customers can choose to get on prepaid billing through the CircleCI web app. To access this option, follow these steps:
 
 . Select **Plan** in the web app
 . Select the **Manage** tab
@@ -71,7 +71,7 @@ You will still have access to any balance credits that were previously purchased
 [#i-selected-prepaid-billing-but-i-didnt-receive-a-discount]
 === I selected prepaid billing but I didn’t receive a discount. Why?
 
-Discounting for prepaid billing starts at a purchase volume of 5 Million credits onwards.
+Discounting for prepaid billing starts at a purchase volume of 5 Million credits and up.
 
 [#what-happens-when-i-run-out-of-all-my-prepaid-billing-credits]
 === What happens when I run out of all my prepaid billing credits?
@@ -90,7 +90,7 @@ You can follow these steps:
 
 . Select **Plan* in the web app
 . Select the **Manage** tab
-. Click the pencil icon in the **Credits** section to edit your auto refill rate
+. Select the pencil icon in the **Credits** section to edit your auto refill rate
 
 [#do-i-still-get-bonus-credits-and-5-free-seats]
 === Do I still get 30,000 bonus credits and 5 free seats on prepaid billing?
@@ -100,11 +100,11 @@ Yes, all prepaid billing customers still receive the benefit of 30,000 credits a
 [#share-plans-across-organizations-billed-centrally]
 === Is there a way to share plans across organizations and have them billed centrally?
 
-Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+Yes, log in to the CircleCI web app, then navigate to menu:Plan[Share & Transfer].
 
 On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
 
-On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
+On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the Free Plan.
 
 [#container-used-for-under-one-minute-pay-for-a-full-minute]
 === If a container is used for under one minute, do I have to pay for a full minute?
@@ -119,7 +119,7 @@ Calculate your monthly storage and network costs by finding your storage and net
 [#storage]
 ==== Storage
 
-To calculate monthly storage costs from your daily usage, click on the *Storage* tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
+To calculate monthly storage costs from your daily usage, select the *Storage* tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
 [#network]
 ==== Network
@@ -150,9 +150,9 @@ You can view an approximation of network transfer for any Docker job (excluding 
 Credit usage covers access to compute. We prefer to keep usage costs as low as possible to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost.
 
 [#what-constitutes-an-active-user]
-=== What constitutes an _Active User_?
+=== What is an "active" user?
 
-An `active user` is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
+An active user is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
 - Commits from users that trigger builds, including PR Merge commits
 - Re-running jobs in the CircleCI web application, including xref:ssh-access-jobs#[SSH debug]
@@ -162,7 +162,7 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 
 NOTE: If your project is xref:oss#[open-source] you will *not* be considered an active user.
 
-To find a list of your Active Users, log in to the CircleCI web app, click menu:Plan[Plan Usage > Users].
+To find a list of your active users, log in to the CircleCI web app, select menu:Plan[Plan Usage > Users].
 
 [#charged-job-is-queued-or-preparing]
 === Am I charged if my job is "Queued" or "Preparing"?
@@ -177,19 +177,19 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 - On the monthly renewal date if your team is on the monthly plan.
 - On the annual renewal date if your team is on the annual plan.
 - On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
-- If you are on the Performance plan, anytime your team's credit balance drops below your preset limit, another credit purchase will be processed.
+- If you are on the Performance Plan, anytime your team's credit balance drops below your preset limit, another credit purchase will be processed.
 
 [#credit-plans-for-open-source-projects]
 === Are there credit plans for open source projects?
 
-Open source organizations on our *Free plan* receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
+Open source organizations on our *Free Plan* receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
 
-If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal], which includes an Ask AI option to get you the information you need. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
+If you build on macOS, we also offer organizations on our Free Plan 25,000 free credits per month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal], which includes an Ask AI option to get you the information you need. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
 
 [#discounts-for-open-source-performance-plan]
-=== Can I get discounts for open source on the Performance plan?
+=== Can I get discounts for open source on the Performance Plan?
 
-CircleCI no longer offers discounts for open source customers on the Performance plan.
+CircleCI no longer offers discounts for open source customers on the Performance Plan.
 
 [#charge-for-docker-layer-caching]
 === Why does CircleCI charge for Docker layer caching?
@@ -201,6 +201,6 @@ To estimate your DLC cost, look at the jobs in your config file with Docker laye
 Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
 
 [#support-plan-info]
-=== What does a paid Support Plan get me?
+=== What does a paid support plan include?
 
-By purchasing a paid Support Plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes, with a 24 x 7 coverage plan, to ensure that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[refer to this support article].
+By purchasing a paid support plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes, with a 24 x 7 coverage plan, to ensure that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[refer to this support article].
