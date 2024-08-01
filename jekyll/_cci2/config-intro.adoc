@@ -199,7 +199,7 @@ The following commentary describes what occurs in each line of the sample code:
 * *Lines 4-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
 * *Line 14:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
 * *Lines 15-16:* The _Fetch-Code_ job uses a basic git-compatible image.
-* *Lines 27-23:* This code is repeated from Part 2, but now it is a separate job.
+* *Lines 17-23:* This code is repeated from Part 2, but now it is a separate job.
 * *Line 25:* The third job is _Using-Node_.
 * *Lines 26-27:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
 * *Lines 28-32:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
