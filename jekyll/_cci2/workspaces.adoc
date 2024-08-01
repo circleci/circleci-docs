@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Using Workspaces to Share Data between Jobs
+= Using workspaces to share data between jobs
 :page-layout: classic-docs
 :page-description: This document describes how to use workspaces to share data to downstream jobs in your workflows.
 :page-liquid:
