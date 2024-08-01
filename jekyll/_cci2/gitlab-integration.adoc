@@ -162,9 +162,9 @@ Project roles give control over which users have access to which projects within
 For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
 [#configuration]
-=== Configuration sources and project triggers
+=== Pipelines and triggers
 
-You can add or delete configuration sources and triggers for your project. For details see the xref:pipelines#configuration-sources-and-project-triggers[pipelines overview].
+You can add or delete pipelines and triggers for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced
