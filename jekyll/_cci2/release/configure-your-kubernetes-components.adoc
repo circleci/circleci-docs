@@ -30,7 +30,7 @@ To set up a component for your environment, you can do one of the following:
 
 Before following the steps below, ensure the following:
 
-* Set up your environment integration. Refer to the xref:set-up-a-release-environment#[Set up a release environment] page.
+* Set up your environment integration. Refer to the xref:set-up-circleci-releases#[Set up CircleCI releases] page.
 * Install the CircleCI release agent into your Kubernetes cluster. Refer to the xref:set-up-the-release-agent#[Set up the release agent] page.
 
 [#add-required-labels]

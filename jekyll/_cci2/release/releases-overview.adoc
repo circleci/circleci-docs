@@ -312,5 +312,5 @@ We are working on updates to:
 [#next-steps]
 == Next steps
 
-xref:set-up-a-release-environment#[Set up an environment integration]
+xref:set-up-circleci-releases#[Set up CircleCI releases]
 
