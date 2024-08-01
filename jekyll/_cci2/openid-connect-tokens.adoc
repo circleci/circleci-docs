@@ -56,7 +56,7 @@ For `$CIRCLE_OIDC_TOKEN` its value is: `"org/<organization_id>/project/<project_
 
 For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:triggers-overview#[trigger]:
 
-* If the trigger is an xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[inbound webhook] then:
+* If the trigger is an xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[custom webhook] then:
 `"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 * Otherwise it will be:
@@ -85,10 +85,10 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by inbound webhooks.
+| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/vcs-ref`
-| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by inbound webhooks.
+| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
@@ -136,7 +136,7 @@ You will need to allow your AWS account to trust CircleCI's OpenID Connect token
 +
 {% include snippets/find-organization-id.adoc %}
 
-. Once your have created your Identity Provider, a banner will appear at the top of the AWS console with the options to **Assign role**. Click this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
+. Once your have created your Identity Provider, a banner appears at the top of the AWS console with the option to **Assign role**. Select this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
 +
 ** The **Identity Provider** that you just created.
 ** For **Audience**, choose the only option, which is your organization ID that you entered earlier.
@@ -291,12 +291,12 @@ After navigating to the **Grant Access** section of the GCP web UI, follow these
 
 . Navigate to the **IAM & Admin panel**.
 . On the side panel, navigate to **Workload Identity Federation**.
-. Click the **Add Provider** button.
-. Select **OpenID Connect (OIDC)** from the "Select a provider" dropdown and click **Save**.
+. Select **Add Provider**.
+. Select **OpenID Connect (OIDC)** from the "Select a provider" dropdown and select **Save**.
 . Fill out the **Provider details** form.
   * Select **Allowed audiences** since the `aud` claim in the JSON Web Token is a UUID (your CircleCI organization ID). The `audience` will be your CircleCI organization ID.
   * The issuer is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your CircleCI organization ID.
-. Click **Continue** to configure provider attributes.
+. Select **Continue** to configure provider attributes.
 +
 Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
 +
@@ -316,10 +316,10 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 +
 . Navigate to **Service Account** in the IAM & Admin Panel to create a service account, and give appropriate permission.
 . Navigate back to **Workload Identity Federation** and select the provider from the table.
-. Click the **Grant access** button.
+. Select **Grant access**.
 . A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions.
 . Under **Select principals**, you can add conditions, or leave the default.
-. Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**.
+. Select **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**.
 . Save the downloaded configuration file in your repository. This file will be referenced in your CircleCI configuration.
 
 An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:

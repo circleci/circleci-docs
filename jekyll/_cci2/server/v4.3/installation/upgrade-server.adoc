@@ -28,14 +28,15 @@ To see some common upgrade path options, see link:https://support.circleci.com/h
 [#notes]
 == Notes on changes in v4.3
 
-Please note the following significant changes in server v4.3.
+Note the following significant changes in server v4.3.
 
 [#dlc]
-=== Docker layer caching (DLC)
+=== Docker layer caching (or DLC)
 
 * Old DLC volumes will not be carried over and need to be wiped manually
 * Projects that stop using DLC will not delete final DLC cache without manual intervention
 * DLC now runs through S3 and GCS instead of SSD Volumes
+* If AWS S3 is used for xref:phase-1-prerequisites#s3-storage[object storage], the use of Docker layer caching (DLC) requires link:https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html[versioning to be enabled] on the bucket.
 
 [#machine]
 === Machine jobs
@@ -64,7 +65,7 @@ Please note the following significant changes in server v4.3.
 [#workflows-conductor]
 === Workflows conductor
 
-* There is a `workflows-conductor` data migration that will run as a job in the background after your upgrade. The migration processes projects in batches of 1000 and sleeps for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores, but in our production environment, a batch of 1000 projects took around 6 seconds.
+* A `workflows-conductor` data migration will run as a job in the background after your upgrade. The migration processes projects in batches of 1000 and sleeps for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores, but in our production environment, a batch of 1000 projects took around 6 seconds.
 * Ensure that your CircleCI server v4.3 installation is left running until after the migration has completed. You can confirm that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
 
 [#vault]
@@ -84,9 +85,9 @@ Please note the following significant changes in server v4.3.
 [#upgrade-steps]
 == Upgrade steps
 
-NOTE: This upgrade is a disruptive process and downtime is expected. Please do not attempt to run jobs during this upgrade.
+NOTE: This upgrade is a disruptive process and downtime is expected. Do not attempt to run jobs during this upgrade.
 
-. Ensure your cluster is running a compatible kubernetes version for this release (1.26 - 1.27).
+. Ensure your cluster is running a compatible Kubernetes version for this release (1.26 - 1.29).
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
