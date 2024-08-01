@@ -57,7 +57,7 @@ docker stop <container-name>; docker rm <container-name>;
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 +
-NOTE: When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+NOTE: When starting the Docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
 
 [#upgrading-self-hosted-runner-in-a-non-containerized-environment]
 === Upgrading machine runner in a non-containerized environment
