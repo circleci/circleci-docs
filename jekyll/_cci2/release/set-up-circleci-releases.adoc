@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-Visualise and control deployments to your Kubernetes cluster or SageMaker service with CircleCI releases. The steps outlined on this page guide you to set up CircleCI releases using the CircleCI web app onboarding process. If you would rather get set up manually, see #ADD LINK TO NEW PAGE FOR MANUAL RELEASE AGENT SETUP#
+Visualise and control deployments to your Kubernetes cluster or SageMaker service with CircleCI releases. The steps outlined on this page guide you to set up CircleCI releases using the CircleCI web app onboarding process. Alternatively, once you have set up an environment integration, you can follow the guides linked below to install the release agent and configure components manually.
 
 [#introduction]
 == Introduction
