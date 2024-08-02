@@ -186,9 +186,9 @@ When creating a GitLab-based project in CircleCI, an SSH key is created, which i
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then click **Add key**.
+. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then select **Add key**.
 
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then select **Add SSH Key**.
 
 . In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 +
