@@ -53,7 +53,7 @@ Remove webhooks and deploy keys created by CircleCI from your repository. For gu
 . Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
 . Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
 . Select **Triggers** from the sidebar and delete all triggers associated with your project.
-. Select **Configuration** from the sidebar and delete all configuration sources associated with your project.
+. Select **Pipelines** from the sidebar and delete all pipelines associated with your project.
 --
 +
 [tab.vcs.GitLab]
@@ -62,7 +62,7 @@ Remove webhooks and deploy keys created by CircleCI from your repository. For gu
 . Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
 . Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
 . Select **Triggers** from the sidebar and delete all triggers associated with your project.
-. Select **Configuration** from the sidebar and delete all configuration sources associated with your project.
+. Select **Pipelines** from the sidebar and delete all pipelines associated with your project.
 --
 
 . Open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request. For more information on submitting support requests, see this https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[support article].
