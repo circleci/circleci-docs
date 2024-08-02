@@ -1,13 +1,13 @@
-NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Selecting a custom webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar.
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]), and select **Project Settings**.
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
-. Select **Inbound Webhook** from the dropdown menu.
+. Select **Custom Webhook** from the dropdown menu.
 . Select btn:[Next].
 +
-image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an inbound webhook trigger]
+image::triggers/custom-webhooks-add-trigger.png[screenshot showing adding a custom webhook trigger]
 
 . Complete the form fields and options:
 ** Give your trigger a descriptive name.
@@ -18,4 +18,4 @@ image::triggers/inbound-webhooks-add-trigger.png[screenshot showing adding an in
 +
 CAUTION: The secret will not be shown again so be sure to copy the URL before clicking **Done**.
 +
-image::triggers/inbound-webhooks-secret-url.png[screenshot showing inbound webhook trigger secret and URL]
+image::triggers/custom-webhooks-secret-url.png[screenshot showing a custom webhook trigger secret and URL]
