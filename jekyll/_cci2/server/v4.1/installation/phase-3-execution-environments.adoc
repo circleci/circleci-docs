@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Phase 3 - execution environments
 :page-layout: classic-docs
@@ -34,7 +35,7 @@ ifndef::env-gcp[]
 ==== AWS cluster
 You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[example AWS Terraform configuration].
 
-* *Server endpoint* - This is the domain name of the CircleCI application.
+* *Server endpoint* - The domain name of the CircleCI application.
 
 * *Subnet ID (subnet)*, *VPC ID (vpc_id)*, and *DNS server (dns_server)* of your cluster. Run the following commands to get the cluster VPC ID (vpcId), and subnets (subnetIds):
 +
@@ -573,7 +574,10 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 [#set-up-authentication]
 ==== Set up authentication
 
-There are two ways to authenticate CircleCI with your cloud provider: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+Authenticate CircleCI with your cloud provider in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA) - **recommended**
+* IAM access keys.
 
 [.tab.vmauthaws.IRSA]
 --

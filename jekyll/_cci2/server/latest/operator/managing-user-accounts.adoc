@@ -34,7 +34,7 @@ When an account is no longer required, you can suspend the account. It will no l
 . Navigate to your CircleCI Admin Settings.
 . Select *Users* from the Admin Settings menu.
 . Scroll to locate the account in either the Active or Inactive window.
-. Click *Suspend* next to the account name and the account will appear in the Suspended window.
+. Select *Suspend* next to the account name and the account will appear in the Suspended window.
 
 [#inactive-accounts]
 === Inactive accounts
@@ -51,7 +51,7 @@ To activate a new account that was automatically suspended and allow the associa
 . Navigate to your CircleCI Admin Settings.
 . Select *Users* from the Admin Settings menu.
 . View the *Suspended New Users* window.
-. Click on *Activate* next to the User you wish to grant access and the account will appear in the Active Window.
+. Select **Activate* next to the User you wish to grant access and the account will appear in the Active Window.
 
 [#reactivate-an-account]
 === Reactivate an account
