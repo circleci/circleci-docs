@@ -32,7 +32,7 @@ We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for pro
 
 If you want to get started with CircleCI releases for Kubernetes right away, you can jump to:
 
-* xref:set-up-a-release-environment#[Tutorial 1: Set up a release environment]
+* xref:set-up-circleci-releases#[Tutorial 1: Set up CircleCI releases]
 * xref:configure-your-kubernetes-components#[Tutorial 2: Configure your Kubernetes components]
 * xref:manage-releases#[How-to: Manage releases]
 
@@ -45,7 +45,7 @@ CircleCI integrates with your Kubernetes cluster to give you visibility and cont
 
 image::../../img/docs/releases/releases-architecture.png[Diagram showing the architecture of CircleCI releases]
 
-Configure a release environment to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces you require.
+Configure environment integrations to install the CircleCI release agent into your Kubernetes clusters. Configure the release agent to only monitor the namespaces you require.
 
 Developers can monitor releases in the CircleCI web app, and run commands to manage those releases from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
@@ -109,56 +109,58 @@ image::../../img/docs/releases/dashboard.png[Screenshot showing the releases das
 
 Select **Releases** in the CircleCI web app sidebar to enter the releases dashboard. The dashboard shows the following:
 
-* **Timeline**: A timeline of releases for all components in your release environment. You can use the filter drop down at the top to select a component. Information you see here includes live status updates, release trigger source, release version, release type (for example, _progressive_, when you are using an Argo Rollout). From here you can access:
-** The release details page for a specific release by clicking on the status badge or version number
-** The component or release environment details pages by clicking on the respective names
-** The project dashboard for the CircleCI project associated with a release
-** The job details page in the CircleCI web app for the deployment job that kicked off the release
-** The commit details page in your VCS for the commit that started the deployment
+* **Timeline**: A timeline of releases across your organization's components and environments. You can use the filter drop downs at the top to select a component and/or environment. Information you see here includes live status updates, release trigger source, release version, release type (for example, _progressive_, when you are using an Argo Rollout). From here you can access:
+** The release details page for a specific release by clicking on the status badge or version number.
+** The component or environment details pages by clicking on the respective names.
+** The project dashboard for the CircleCI project associated with a release.
+** The job details page in the CircleCI web app for the deployment job that kicked off the release.
+** The commit details page in your VCS for the commit that started the deployment.
 
-* **Environments**: List of release environments set up for your organization. From here you can:
-** Access settings for each environment (icon:cog[])
-** Access the environment details view by clicking on the release environment name
+* **Environments**: List of environment integrations set up for your organization. From here you can:
+** Set up a new environment integration by selecting btn:[Create Environment Integration].
+** Access settings for each environment (icon:cog[]).
+** Access the environment details view by selecting an environment name.
 
 * **Components**: A list of components and their associated projects. From here you can:
-** Get straight to the component's project building on CircleCI
-** Access the component detail view
+** Set up a new component by selecting btn:[Create Component]. From here you can select and environment that has a successful environment integration set up, and from there you can add a new component.
+** Get straight to the component's project building on CircleCI by selecting the project name.
+** Access setting for each component (icon:cog[]).
 
-=== View all releases for a release environment
+=== View all releases for an environment
 
-To view all releases for a release environment, follow these steps:
+To view all releases for an environment, follow these steps:
 
-. Select btn:[Releases] in the CircleCI web app sidebar
-. You are now in the timeline view. Select the **Environments** tab
-. Select your environment by name
-. You are now on the environment details page. Select the **Releases** tab to view a list of all releases for your chosen environment
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Environments** tab.
+. Select your environment by name.
+. You are now on the environment details page. Select the **Releases** tab to view a list of all releases for your chosen environment.
 
-=== View all commands run for a release environment
+=== View all commands run for an environment
 
-To view all commands run for a release environment, follow these steps:
+To view all commands run for an environment, follow these steps:
 
-. Select btn:[Releases] in the CircleCI web app sidebar
-. You are now in the timeline view. Select the **Environments** tab
-. Select your environment by name
-. You are now on the environment details page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Environments** tab.
+. Select your environment by name.
+. You are now on the environment details page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment.
 
 === View all releases for a component
 
 To view all releases for a component, follow these steps:
 
-. Select btn:[Releases] in the CircleCI web app sidebar
-. You are now in the timeline view. Select the **Components** tab
-. Select your component by name. You can use the filter at the top of the page to help
-. You are now on the component details page. Select the **Releases** tab to view a list of all releases for your chosen component
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Components** tab.
+. Select your component by name. You can use the filter at the top of the page to help.
+. You are now on the component details page. Select the **Releases** tab to view a list of all releases for your chosen component.
 
 === View all commands run for a component
 
 To view all commands run for a component, follow these steps:
 
-. Select btn:[Releases] in the CircleCI web app sidebar
-. You are now in the timeline view. Select the **Components** tab
-. Select your component by name. You can use the filter at the top of the page to help
-. You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Components** tab.
+. Select your component by name. You can use the filter at the top of the page to help.
+. You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component.
 
 [#releases-requirements]
 == Requirements
@@ -173,7 +175,7 @@ We test the versions listed here. Older versions may work but are not guaranteed
 [#labels-and-annotations]
 === Labels and annotations
 
-The following table shows a complete list of labels and annotations either required or available for configuring your release environment.
+The following table shows a complete list of labels and annotations either required or available for configuring your environment integration.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -262,7 +264,7 @@ The following table shows a complete list of labels and annotations either requi
 [#release-status]
 == Release status
 
-Releases can be in one of the following states:
+A release can be in one of the following states:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -310,5 +312,5 @@ We are working on updates to:
 [#next-steps]
 == Next steps
 
-xref:set-up-a-release-environment#[Set up a release environment]
+xref:set-up-circleci-releases#[Set up CircleCI releases]
 

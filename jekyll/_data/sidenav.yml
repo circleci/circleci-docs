@@ -406,9 +406,11 @@ en:
             link: release/releases-overview
       - name: Set up
         children:
-          - name: Set up a release environment
-            link: release/set-up-a-release-environment
-          - name: Configure your Kubernetes components
+          - name: Set up CircleCI releases
+            link: release/set-up-circleci-releases
+          - name: Manual install - Set up the release agent
+            link: release/set-up-the-release-agent
+          - name: Manual intall - Configure your Kubernetes components
             link: release/configure-your-kubernetes-components
       - name: How to
         children:
