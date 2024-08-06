@@ -34,7 +34,7 @@ GitLab CI/CD integration with CircleCI introduces the concept of "standalone" pr
 
 Follow the steps on the xref:first-steps#gitlab[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
 
-NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
+NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the "maintainer" role or higher.
 
 [.tab.signup.GitLab_SaaS]
 --
@@ -92,15 +92,15 @@ Follow the steps on the **Create New Project** page:
 
 image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
 
-. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Click **Verify**.
+. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Select **Verify**.
 
-. Enter your personal access token. Click **Connect**.
+. Enter your personal access token. Select **Connect**.
 
-. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Click **Connect**.
+. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Select **Connect**.
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name.
 
-. Finally, click **Create Project**. You will then be redirected to the newly-created project's Pipelines page.
+. Finally, select **Create Project**. You will then be redirected to the newly-created project's Pipelines page.
 
 The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repository to see your pipeline on the dashboard.
 --
@@ -162,9 +162,9 @@ Project roles give control over which users have access to which projects within
 For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
 [#configuration]
-=== Configuration sources and project triggers
+=== Pipelines and triggers
 
-You can add or delete configuration sources and triggers for your project. For details see the xref:pipelines#configuration-sources-and-project-triggers[pipelines overview].
+You can add or delete pipelines and triggers for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced
@@ -186,9 +186,9 @@ When creating a GitLab-based project in CircleCI, an SSH key is created, which i
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then click **Add key**.
+. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then select **Add key**.
 
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then select **Add SSH Key**.
 
 . In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 +
@@ -213,7 +213,7 @@ For more information on SSH keys, refer to the xref:add-ssh-key#[Adding an SSH k
 
 For GitLab integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-To manage settings at the organization level, click btn:[Organization Settings] in the CircleCI web app sidebar.
+To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People
