@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Phase 2 - Configure object storage
 :page-layout: classic-docs
@@ -18,7 +19,7 @@ CircleCI server supports link:https://min.io/[MinIO] for air-gapped object stora
 image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
-=== a. Create a circleci-data bucket.
+=== a. Create a `circleci-data` bucket.
 Create a new bucket in MinIO named `circleci-data`.
 
 NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
@@ -26,7 +27,7 @@ NOTE: This bucket can be given a different name, but references to it will need 
 image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
 [#configure-circleci-data-bucket]
-=== b. Configure the circleci-data bucket.
+=== b. Configure the `circleci-data` bucket.
 In the settings for the `circleci-data` bucket, change the access policy to `public`.
 
 image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
@@ -69,7 +70,7 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE
 ----
 
 [#create-release-dir]
-=== d. Create a release directory in the circleci-data bucket
+=== d. Create a release directory in the `circleci-data` bucket
 Using the version specified by `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In the following examples, a directory is created at the root of `circleci-data` in MinIO with the name `$CIRCLE_AGENT_VERSION`. Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
 
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
@@ -101,12 +102,12 @@ $CIRCLE_AGENT_VERSION/
     └── amd64/
 ----
 
-image::./minio/minio_create_linux_dir.png[Creating a linux dir]
+image::./minio/minio_create_linux_dir.png[Creating a Linux dir]
 
-image::./minio/minio_create_amd_dir.png[Creating an amd dir]
+image::./minio/minio_create_amd_dir.png[Creating an AMD dir]
 
 [#copy-build-agent-bin]
-=== g. Copy the downloaded circleci-agent file
+=== g. Copy the downloaded `circleci-agent` file
 Copy the downloaded `circleci-agent` file (step c) to your virtual environment, and place it in the amd64 directory you just created.
 
 [source,shell]

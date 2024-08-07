@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.4
   - Server Admin
+noindex: true
 ---
 = Additional considerations
 :page-layout: classic-docs
@@ -60,7 +61,7 @@ If using a K3s installation, link:https://metallb.universe.tf/installation/[Meta
 
 Once installed, the following steps need to be followed:
 
-. Create a configmap resource as an address pool for MetalLB.
+. Create a ConfigMap resource as an address pool for MetalLB.
 +
 [source, yaml]
 ----
@@ -80,7 +81,7 @@ data:
 +
 The address pool can be named something other than "default", but the annotations in `values.yaml` will need to be updated. If there is only one k3s node, the address range should have the same IP repeated (for example, `10.0.0.5-10.0.0.5`).
 
-. Once this configmap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), update the address pool name in `values.yaml` for the Helm installation.
+. Once this ConfigMap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), update the address pool name in `values.yaml` for the Helm installation.
 +
 [source, yaml]
 ----
@@ -91,7 +92,7 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 ----
 
-. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the configmap above). The example below uses the IP address `10.0.0.5`.
+. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the ConfigMap above). The example below uses the IP address `10.0.0.5`.
 +
 [source, bash]
 ----

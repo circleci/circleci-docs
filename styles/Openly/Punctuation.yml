@@ -10,4 +10,3 @@ action:
 swap:
   e\.g\.: eg
   i\.e\.: ie
-  \b(?:eg|ie)[^,]: eg, or ie,

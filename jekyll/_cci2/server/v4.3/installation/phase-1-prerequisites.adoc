@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
@@ -509,7 +510,10 @@ aws s3api put-bucket-versioning \
 [#set-up-authentication-aws]
 ==== c. Set up authentication
 
-Two ways to authenticate CircleCI with S3 are: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+Authenticate CircleCI with S3 in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA) - recommended.
+* IAM access keys.
 
 [.tab.authentication.IRSA]
 --

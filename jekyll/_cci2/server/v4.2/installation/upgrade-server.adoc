@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.2
     - Server Admin
+noindex: true
 ---
 = Upgrade server
 :page-layout: classic-docs
@@ -31,10 +32,10 @@ NOTE: We recommend that you do not skip releases when upgrading.
 
 From server v4.2, CircleCI server auto-generates the following secrets if not present in the Kubernetes namespace:
 
-- xref:../installation/phase-2-core-services#api-token[api-token]
-- xref:../installation/phase-2-core-services#session-cookie[session-cookie]
-- xref:../installation/phase-2-core-services#pusher-kubernetes-secret[pusher]
-- xref:../installation/phase-3-execution-environments#nomad-gossip-encryption-key[nomad-gossip-encryption-key]
+- xref:../installation/phase-2-core-services#api-token[`api-token`]
+- xref:../installation/phase-2-core-services#session-cookie[`session-cookie`]
+- xref:../installation/phase-2-core-services#pusher-kubernetes-secret[`pusher`]
+- xref:../installation/phase-3-execution-environments#nomad-gossip-encryption-key[`nomad-gossip-encryption-key`]
 
 **Before upgrading to Server 4.2**: If you manage the secrets listed above yourself, run the following command for **each secret** to let CircleCI server know that they already exist.
 

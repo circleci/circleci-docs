@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.4
   - Server Admin
+noindex: true
 ---
 = Installation reference
 :page-layout: classic-docs

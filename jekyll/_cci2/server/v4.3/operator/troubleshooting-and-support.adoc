@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.3
     - Server Admin
+noindex: true
 ---
 = Troubleshooting and support
 :page-layout: classic-docs
@@ -31,7 +32,7 @@ To generate a support bundle, follow the steps below.
 kubectl -n <namespace> get pods
 ----
 
-. Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew].
+. Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[Krew].
 
 . Install link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl plugin)] to your local development machine.
 

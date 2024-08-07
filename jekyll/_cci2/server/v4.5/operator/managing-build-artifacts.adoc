@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.5
     - Server Admin
+noindex: true
 ---
 = Managing build artifacts
 :page-layout: classic-docs

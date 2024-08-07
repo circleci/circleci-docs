@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.5
   - Server Admin
+noindex: true
 ---
 = Phase 2 - Configure object storage
 :page-layout: classic-docs

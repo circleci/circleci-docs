@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Hardening your cluster
 :page-layout: classic-docs

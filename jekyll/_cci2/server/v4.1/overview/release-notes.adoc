@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.1 release notes
 :page-layout: classic-docs

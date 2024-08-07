@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Phase 3 - execution environments
 :page-layout: classic-docs
@@ -546,7 +547,10 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 [#set-up-authentication]
 ==== Set up authentication
 
-There are two ways to authenticate CircleCI with your cloud provider: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+Authenticate CircleCI with your cloud provider in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA) - recommended.
+* IAM access keys.
 
 [.tab.vmauthaws.IRSA]
 --

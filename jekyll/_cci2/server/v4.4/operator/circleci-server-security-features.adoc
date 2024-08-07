@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.4
   - Server Admin
+noindex: true
 ---
 = CircleCI server security features
 :page-layout: classic-docs
