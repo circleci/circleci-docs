@@ -110,7 +110,7 @@ cciserver.azurecr.io/webhook-service:0.1.9796-7424165
 cciserver.azurecr.io/webhook-service-migrator:0.1.9790-7424165
 cciserver.azurecr.io/web-ui:0.1.23582-1257bf5cd
 cciserver.azurecr.io/web-ui-404:0.1.22986-1057f8a88
-cciserver.azurecr.io/web-ui-authentication:0.1.23256-b24c41980
+cciserver.azurecr.io/web-ui-authentication:0.1.28453-91aba168a
 cciserver.azurecr.io/web-ui-insights:0.1.23382-1e8f5bebe
 cciserver.azurecr.io/web-ui-onboarding:0.1.24126-8b8953b8a
 cciserver.azurecr.io/web-ui-org-settings:0.1.26851-fef0e040a
@@ -118,9 +118,9 @@ cciserver.azurecr.io/web-ui-project-settings:0.1.24141-719b10e11
 cciserver.azurecr.io/web-ui-runners:0.1.23317-f9a8c3114
 cciserver.azurecr.io/web-ui-server-admin:0.1.3487-87c7ad7
 cciserver.azurecr.io/web-ui-user-settings:0.1.23169-4a8dd825c
-cciserver.azurecr.io/workflows-conductor:1.0.21509-e6028e1
+cciserver.azurecr.io/workflows-conductor:1.0.21574-1fe47dd
 cciserver.azurecr.io/workflows-conductor-migrator:1.0.21509-e6028e1
-circleci/picard:1.0.244378-5aecfcba
+circleci/picard:1.0.246523-server-4.6-c5b4f03f
 docker.io/bitnami/mongodb:3.6.22-debian-9-r38
 docker.io/bitnami/rabbitmq:3.11.16-debian-11-r0
 docker.io/bitnami/redis:6.2.1-debian-10-r13
