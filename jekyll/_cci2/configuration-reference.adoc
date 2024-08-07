@@ -1846,7 +1846,7 @@ jobs:
 [NOTE]
 ====
 * `setup_remote_docker` is not compatible with the `machine` executor. See xref:docker-layer-caching#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI list [here](https://circleci.com/docs/server/v4.2/operator/manage-virtual-machines-with-vm-service/#default-aws-ami-lists)
+* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:listserver/v4.2/operator/manage-virtual-machines-with-vm-service/#default-aws-ami-lists[here]
 ====
 
 '''
