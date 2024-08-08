@@ -51,7 +51,7 @@ object_storage:
   s3:
     enabled: true
     endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
-    region: "<aws-region>"
+    region: "<aws-region>"  # defaults to us-east-1, Update this value if you are using a different region
     irsaRole: "<arn-of-irsa-role>"
 
 github:
