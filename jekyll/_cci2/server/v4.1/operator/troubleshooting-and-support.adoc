@@ -110,7 +110,7 @@ If you are in an air-gapped environment, you will first need to download the `le
 
 [source,bash]
 ----
-docker run -it clojure lein repl :connect 6005
+docker run -it clojure lein repl :start
 docker commit $(docker ps -aq | head -1) <your-private-registry>/clojure
 ----
 
