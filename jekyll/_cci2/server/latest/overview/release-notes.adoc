@@ -15,7 +15,7 @@ contentTags:
 [#overview]
 == Overview
 
-The v4.6 release introduces #TBD#
+The v4.6 release includes enhancements to the CircleCI web app, and improved pipeline labelling to show when pipelines are rerun from start, fail or with SSH.
 
 [#upgrade]
 == Upgrade
