@@ -58,7 +58,7 @@
 | icon:check[]
 
 | `pipeline.git.base_revision`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The long (40-character) git SHA of the build prior to the one being built. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
 | icon:check[]
@@ -72,14 +72,14 @@
 | icon:check[]
 
 | `pipeline.schedule.name`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
 | icon:check[]
 | icon:check[]
 
 | `pipeline.schedule.id`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
 | icon:check[]

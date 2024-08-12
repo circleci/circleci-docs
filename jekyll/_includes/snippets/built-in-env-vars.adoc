@@ -93,21 +93,21 @@
 | icon:times[]
 
 | `CIRCLE_PR_NUMBER`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | Integer
 | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
 | icon:check[]
 | icon:check[]
 
 | `CIRCLE_PR_REPONAME`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
 | icon:check[]
 | icon:check[]
 
 | `CIRCLE_PR_USERNAME`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
 | icon:check[]
@@ -142,21 +142,21 @@
 | icon:check[]
 
 | `CIRCLE_PULL_REQUEST`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
 | icon:check[]
 | icon:check[]
 
 | `CIRCLE_PULL_REQUESTS`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | List
 | Comma-separated list of URLs of the current build's associated pull requests.
 | icon:check[]
 | icon:check[]
 
 | `CIRCLE_REPOSITORY_URL`
-| GitHub OAuth, Bitbucket
+| GitHub OAuth, Bitbucket Cloud
 | String
 | The URL of your GitHub or Bitbucket repository.
 | icon:check[]
