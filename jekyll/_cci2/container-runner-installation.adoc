@@ -125,13 +125,13 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 
 === 2. Enable the Rerun job with SSH feature
 
-. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = "true"` parameter to the container runner configuration:
+. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = true` parameter to the container runner configuration:
 +
 [source,yaml]
 ----
 agent:
   ssh:
-    enabled: "true"
+    enabled: true
 ----
 +
 For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].
