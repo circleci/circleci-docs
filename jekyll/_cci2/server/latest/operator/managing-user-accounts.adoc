@@ -60,7 +60,7 @@ To reactivate an account that has been suspended:
 . Navigate to your CircleCI Admin Settings.
 . Select *Users* from the Admin Settings menu.
 . View the Suspended window.
-. Click on *Activate* next to the User you wish to grant access and the account will appear in the Active window.
+. Select *Activate* next to the User you wish to grant access and the account will appear in the Active window.
 
 [#limiting-registration-by-github-organization]
 == Limiting registration by GitHub organization
