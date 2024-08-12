@@ -34,7 +34,30 @@ Integrate with CircleCI to access features for automated software delivery:
 
 . Follow the steps on the xref:create-project#create-a-project[Create a project] page to create a project in CircleCI and set up an integration with your Bitbucket Data Center project.
 
-#WHAT'S THE EQUIVALENT HERE?# When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
+. **Set up your integration with Bitbucket Data Center if you have not already**:
+.. In the CircleCI web app, select **Organization Settings** in the sidebar.
+.. Select **Integrations** in the sidebar.
+.. Select btn:[Set Up Integration] next to Bitbucket Data Center.
+.. In the modal, enter your Bitbucket Data Center instance URL and your known_hosts. For guidance on generating known_hosts, see <<known-hosts>>.
+.. Select btn:[Set Up Integration].
+.. Select the back arrow to exit **Organization Settings**.
+
+. **Next set up a pipeline.**:
+.. Select **Project Settings**.
+.. Select **Pipelines** in the sidebar.
+.. Select **Set Up Pipeline**. Fill in the required fields:
+** Give your pipeline a descriptive name.
+** Select **Bitbucket Data Center** under Config Source.
+** Provide a project HTTP access token with the project admin scope. For more information see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Select btn:[Connect].
+** Select your repository and branch.
+** Enter .circleci/config.yml  in the Config File Path field.
+.. Select btn:[Save].
+
+. **Next set up a trigger**:
+..
+
+
+When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
 
 The following limits are currently in place for Bitbucket Data Center integrations:
 
@@ -43,7 +66,8 @@ The following limits are currently in place for Bitbucket Data Center integratio
 
 If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
 
-=== Generate `known_hosts` file
+[#known-hosts]
+=== Generate `known_hosts`
 
 For Bitbucket Data Center integrations, it is necessary to add your instance's SSH host keys to a `known hosts` file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic.
 
