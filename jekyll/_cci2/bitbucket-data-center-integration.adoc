@@ -42,9 +42,9 @@ Integrate with CircleCI to access features for automated software delivery:
 .. Select btn:[Set Up Integration].
 .. Select the back arrow to exit **Organization Settings**.
 
-. For the next sections you will need an **project HTTP access token** with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
+. For the next sections you will need to **create a project HTTP access token** with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
 
-. **Next set up a pipeline.**:
+. **Set up a pipeline**:
 .. Select **Project Settings**.
 .. Select **Pipelines** in the sidebar.
 .. Select **Set Up Pipeline**. Fill in the required fields:
@@ -55,7 +55,7 @@ Integrate with CircleCI to access features for automated software delivery:
 ** Enter .circleci/config.yml  in the Config File Path field.
 .. Select btn:[Save].
 
-. **Next set up a trigger**:
+. **Set up a trigger**:
 .. Select **Triggers** in the Project Settings sidebar.
 .. Select **Add Trigger**.
 .. Select Bitbucket Data Center from the dropdown and select btn:[Next].
@@ -66,16 +66,24 @@ Integrate with CircleCI to access features for automated software delivery:
 ** Choose the pipeline you just created under the dropdown to show CircleCI which pipeline to trigger.
 .. Select btn:[Save].
 
+. If you have not already done so, **add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
++
+[TIP]
+====
+For help with creating a CircleCI `config.yml`, see the following pages:
 
+* xref:hello-world#[Hello world]
+* xref:sample-config#[Sample config]
+* xref:configuration-reference#[Configuration reference]
+====
 
-When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
+Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
-The following limits are currently in place for Bitbucket Data Center integrations:
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
-- Each user can create up to three organizations.
-- Each organization under a Free Plan can have up to 10 projects.
+Make any further changes to your CircleCI config in your Bitbucket Data Center repository. Editing an existing CircleCI configuration within the web app is not currently available.
 
-If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+Committing changes in your repository will automatically trigger a pipeline. Manually triggering a pipeline from the CircleCI web app is not available at this time.
 
 [#known-hosts]
 === Generate `known_hosts`
@@ -130,20 +138,18 @@ cat ~/.ssh/known_hosts
 
 By following these steps, you can use `ssh-keyscan` to gather the host keys of a remote server and add them to your known hosts file for secure SSH connections.
 
-[#trigger-pipeline]
-== Trigger a pipeline in CircleCI
+== How it works
 
-If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
+When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
 
-When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
+== Limitations
 
-Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
+The following limits are currently in place for Bitbucket Data Center integrations:
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+- Each user can create up to three organizations.
+- Each organization under a Free Plan can have up to 10 projects.
 
-Make any further changes to your CircleCI config in your Bitbucket Data Center repository. Editing an existing CircleCI configuration within the web app is not currently available.
-
-Committing changes in your repository will automatically trigger a pipeline. Manually triggering a pipeline from the CircleCI web app is not available at this time.
+If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
 
 [#project-settings]
 == Project settings
