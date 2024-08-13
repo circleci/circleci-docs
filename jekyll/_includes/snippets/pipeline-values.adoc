@@ -55,7 +55,7 @@
 | Boolean
 | Whether the branch the pipeline was triggered on is the default branch.
 | icon:check[]
-| icon:check[] (>= v4.6)
+| icon:check[] (>= v4.7)
 
 | `pipeline.git.revision`
 | GitHub App, GitHub OAuth, Bitbucket, GitLab
