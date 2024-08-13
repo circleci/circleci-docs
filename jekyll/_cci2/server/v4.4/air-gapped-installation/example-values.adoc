@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.4
   - Server Admin
+noindex: true
 ---
 = Example `values.yaml`
 :page-layout: classic-docs

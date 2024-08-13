@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Installation reference
 :page-layout: classic-docs
@@ -11,7 +12,7 @@ contentTags:
 :toc-title:
 
 [#example-manifests]
-== Example Manifests
+== Example manifests
 The following are example manifests that contain the basic required parameters necessary to spin up the `circleci-server` Helm installation.
 
 [#aws]
@@ -51,7 +52,7 @@ object_storage:
   s3:
     enabled: true
     endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
-    region: "<aws-region>"
+    region: "<aws-region>" # defaults to us-east-1, Update this value if you are using a different region
     irsaRole: "<arn-of-irsa-role>"
 
 github:
@@ -166,7 +167,7 @@ nomad:
 
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
-
+pass:[<!-- vale off -->]
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
@@ -1383,3 +1384,4 @@ limit configuration for the workflows-conductor-grpc deployment.
 |workflows_conductor_grpc.resources.limits.memory |string |`+"8Gi"+`
 |Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]

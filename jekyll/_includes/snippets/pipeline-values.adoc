@@ -50,6 +50,13 @@
 | icon:check[]
 | icon:check[]
 
+| `pipeline.git.branch.is_default`
+| GitHub App, GitHub OAuth, Bitbucket, GitLab
+| Boolean
+| Whether the branch the pipeline was triggered on is the default branch.
+| icon:check[]
+| icon:check[] (>= v4.7)
+
 | `pipeline.git.revision`
 | GitHub App, GitHub OAuth, Bitbucket, GitLab
 | String

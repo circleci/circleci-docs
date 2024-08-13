@@ -23,6 +23,7 @@
 [Ww]alkthrough
 [Aa]ctions
 ACR
+[Aa]ir-gapped
 Airtable
 Amazon SageMaker
 Android
@@ -76,6 +77,7 @@ Codecov
 CodeDeploy
 Coinbase
 [Cc]onfigs?\b
+ConfigMap
 [Cc]ontainer [Rr]egistry
 Coreutils
 CPUs
@@ -92,6 +94,7 @@ deduplicate
 deduplicated
 DevOps
 Django
+DLC
 DNS
 Docker
 Dockerfiles?

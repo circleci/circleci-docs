@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Installation reference
 :page-layout: classic-docs
@@ -11,8 +12,8 @@ contentTags:
 :experimental:
 
 [#example-manifests]
-== Example Manifests
-The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server helm installation.
+== Example manifests
+The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server Helm installation.
 
 [#aws]
 === AWS
@@ -156,6 +157,7 @@ nomad:
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
 
+pass:[<!-- vale off -->]
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
@@ -169,8 +171,8 @@ nomad:
 | contexts_service.replicas | int | `1` | Number of replicas to deploy for the contexts-service deployment. |
 | cron_service.replicas | int | `1` | Number of replicas to deploy for the cron-service deployment. |
 | dispatcher.replicas | int | `1` | Number of replicas to deploy for the dispatcher deployment. |
-| distributor.agent_base_url | string | `"https://circleci-binary-releases.s3.amazonaws.com/circleci-agent"` | location of the task-agent.  When airgapped, the task-agent will need to be hosted within the airgap and this value updated |
-| distributor.launch_agent_base_url | string | `"https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"` | Location of the launch-agent.  When airgapped, the launch-agent will need to be hosted within the airgap and this value updated |
+| distributor.agent_base_url | string | `"https://circleci-binary-releases.s3.amazonaws.com/circleci-agent"` | location of the task-agent.  When air-gapped, the task-agent will need to be hosted within the air gap and this value updated |
+| distributor.launch_agent_base_url | string | `"https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"` | Location of the launch-agent.  When air-gapped, the launch-agent will need to be hosted within the air gap and this value updated |
 | distributor_cleaner.replicas | int | `1` | Number of replicas to deploy for the distributor-dispatcher deployment. |
 | distributor_dispatcher.replicas | int | `1` | Number of replicas to deploy for the distributor-dispatcher deployment. |
 | distributor_external.replicas | int | `1` | Number of replicas to deploy for the distributor-external deployment. |
@@ -411,3 +413,4 @@ nomad:
 | workflows_conductor_event_consumer.replicas | int | `1` | Number of replicas to deploy for the workflows-conductor-event-consumer deployment. |
 | workflows_conductor_grpc.replicas | int | `1` | Number of replicas to deploy for the workflows-conductor-grpc deployment. |
 |===
+pass:[<!-- vale on -->]

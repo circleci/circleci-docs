@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Configuring external services
 :page-layout: classic-docs
@@ -11,7 +12,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This page describes how to configure external services for use with either a new CircleCI server v4.x installation or migrating internal Postgres and MongoDB data from existing CircleCI server v4.x installation to your externalized datastores.
+This page describes how to configure external services for use with either a new CircleCI server v4.x installation or migrating internal PostgreSQL and MongoDB data from existing CircleCI server v4.x installation to your externalized datastores.
 
 [#postgresql]
 == PostgreSQL
@@ -88,7 +89,7 @@ postgresql:
   postgresqlPort: <port> # The port of your PostgreSQL instance
 ----
 
-NOTE: `postgresql.internal: false` will remove any previously deployed Postgres instance deployed internally
+NOTE: `postgresql.internal: false` will remove any previously deployed PostgreSQL instance deployed internally
 
 [tab.postgres.Create_secret_yourself]
 --
@@ -125,7 +126,7 @@ postgresql:
 ----
 --
 
-The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized Postgres instance then when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance then when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
 
 
 [#backing-up-postgresql]
