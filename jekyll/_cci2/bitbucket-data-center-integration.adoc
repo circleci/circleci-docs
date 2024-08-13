@@ -42,19 +42,30 @@ Integrate with CircleCI to access features for automated software delivery:
 .. Select btn:[Set Up Integration].
 .. Select the back arrow to exit **Organization Settings**.
 
+. For the next sections you will need an **project HTTP access token** with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
+
 . **Next set up a pipeline.**:
 .. Select **Project Settings**.
 .. Select **Pipelines** in the sidebar.
 .. Select **Set Up Pipeline**. Fill in the required fields:
 ** Give your pipeline a descriptive name.
 ** Select **Bitbucket Data Center** under Config Source.
-** Provide a project HTTP access token with the project admin scope. For more information see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Select btn:[Connect].
+** Provide your project HTTP access token with the project admin scope. Select btn:[Connect].
 ** Select your repository and branch.
 ** Enter .circleci/config.yml  in the Config File Path field.
 .. Select btn:[Save].
 
 . **Next set up a trigger**:
-..
+.. Select **Triggers** in the Project Settings sidebar.
+.. Select **Add Trigger**.
+.. Select Bitbucket Data Center from the dropdown and select btn:[Next].
+.. Fill in the required fields:
+** Give your trigger a descriptive name.
+** Provide your project HTTP access token with the project admin scope. Select btn:[Connect].
+** Select your repository and branch.
+** Choose the pipeline you just created under the dropdown to show CircleCI which pipeline to trigger.
+.. Select btn:[Save].
+
 
 
 When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
