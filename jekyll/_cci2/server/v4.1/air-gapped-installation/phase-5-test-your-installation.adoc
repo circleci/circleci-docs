@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Phase 5 - Test your installation
 :page-layout: classic-docs
@@ -25,7 +26,7 @@ CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `o
 
 [#modify-reality-check]
 == 3. Modify Reality Check source code
-Replace any references to docker images in .circleci/config.yml with your internal docker registry.
+Replace any references to Docker images in .circleci/config.yml with your internal Docker registry.
 
 For example, in your GitHub enterprise instance, change the following:
 
@@ -46,7 +47,7 @@ For example, in your GitHub enterprise instance, change the following:
       - image: <your-internal-registry-hostname-and-port>/python:3.6.0
 ----
 
-NOTE: Leave image values nested under "machine" as is. Only modify docker image values.
+NOTE: Leave image values nested under "machine" as is. Only modify Docker image values.
 
 
 [#run-reality-check]

@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.4
     - Server Admin
+noindex: true
 ---
 = Troubleshooting and support
 :page-layout: classic-docs
@@ -13,8 +14,6 @@ contentTags:
 :toc-title:
 
 This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.4 installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
-
-toc::[]
 
 [#generate-support-bundle]
 == Generate support bundle
