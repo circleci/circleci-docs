@@ -92,6 +92,7 @@ Guides for integrating GitHub, Bitbucket, or GitLab projects are available as fo
 - xref:github-integration#[GitHub OAuth app integration]
 - xref:bitbucket-integration#[Bitbucket Cloud integration]
 - xref:gitlab-integration#[GitLab integration]
+- xref:bitbucket-data-center-integration#[Bitbucket Data Center integration]
 
 [#terms]
 == Terms

@@ -6,7 +6,7 @@ contentTags:
 = Bitbucket Cloud integration overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document provides an overview of using Bitbucket with CircleCI.
+:page-description: This document provides an overview of using Bitbucket Cloud with CircleCI.
 :icons: font
 :experimental:
 

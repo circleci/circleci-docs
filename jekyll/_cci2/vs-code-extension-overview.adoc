@@ -74,13 +74,13 @@ Expanding a job also lets you:
 
 NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects.
 
-There are two ways to re-run jobs with SSH directly from VS Code:
+Re-run jobs with SSH directly from VS Code in one of two ways:
 
-* Open the job detail page, then click the **SSH** button on the top right.
+* Open the job detail page, then select the **SSH** button on the top right.
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screenshot of side Panel with job details]
 
-* Or, hover over the job in the pipelines panel, and click the SSH action button next to the job name.
+* Or, hover over the job in the pipelines panel, and select the SSH action button next to the job name.
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun options]
 
@@ -104,7 +104,7 @@ image::{{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png[Scree
 
 If you are not following a workflow in the pipelines panel, you cannot be notified about a status change event. For instance, if you have set the extension to follow only the current branch, you cannot be notified of status changes for other branches.
 
-NOTE: We do not recommend enabling notifications for when a status changes to “Running,” which may result in too many notifications to be useful.
+NOTE: We do not recommend enabling notifications for when a status changes to "Running", which may result in too many notifications to be useful.
 
 [#status-bar]
 === Status bar
@@ -126,7 +126,7 @@ The status bar can display the following statuses:
 
 The VS Code extension also provides in-file contextual help for your CircleCI configs, including:
 
-- **Rich code navigation through “go-to-definition” and “go-to-reference” commands.** Hover over a job name or executor parameter to verify its definition or view where they are referenced elsewhere in the file. You can also explore the definition of orb-defined commands or parameters.
+- **Rich code navigation through "go-to-definition" and "go-to-reference" commands.** Hover over a job name or executor parameter to verify its definition or view where they are referenced elsewhere in the file. You can also explore the definition of orb-defined commands or parameters.
 +
 image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
 
@@ -187,11 +187,11 @@ image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Scre
 === Prerequisites
 
 * CircleCI VS Code extension v2.3.0 or higher
-* A CircleCI account integrated through the GitHub OAuth app, or Bitbucket. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
+* A CircleCI account integrated through the GitHub OAuth app, or Bitbucket Cloud. To find out which GitHub account type you have, see the xref:github-integration#[GitHub OAuth app integration] page
 * Your org must have opted-in to this feature through Organization Settings. You may need to ask your org admin to do so for you. See <<feature-controls>> for more details.
 * Your project must **not** make use of xref:dynamic-config#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
-NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored. Instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term “unversioned” refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
+NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored. Instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term "unversioned" refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
 
 
 [WARNING]
@@ -209,7 +209,7 @@ The following steps show how to test run a pipeline from the VS Code extension:
 
 . Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
 . Expand the **Run** panel to view your projects.
-. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and click icon:play[] **Run local config on branch <your-branch-name>**. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
+. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and select icon:play[] **Run local config on branch <your-branch-name>**. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
 . The pipeline is now visible in your link:https://app.circleci.com/pipelines/[dashboard] in the CircleCI web app, and the Pipelines panel in the VS Code extension. Currently, pipelines run with unversioned configuration are not differentiated from other pipelines in the CircleCI web app.
 
 [#feature-controls]

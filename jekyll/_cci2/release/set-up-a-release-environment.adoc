@@ -32,7 +32,7 @@ Before setting up your release environment with CircleCI, run through the follow
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A Kubernetes cluster
 * A project building on CircleCI that deploys to your Kubernetes cluster. See the xref:../create-project#[Create a project] page for steps.
-* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview.adoc#[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page
+* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:../roles-and-permissions-overview#[Roles and permissions overview]. If your integration is through Bitbucket Cloud or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:../github-apps-integration.adoc#[GitHub App integration] page
 
 CircleCI supports Kubernetes, Helm, and Argo Rollouts. The following versions have been tested and proven to work. Older versions may work but are not guaranteed:
 

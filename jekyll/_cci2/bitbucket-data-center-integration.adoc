@@ -92,15 +92,15 @@ For Bitbucket Data Center integrations, it is necessary to add your instance's S
 
 The `known_hosts` file stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
 
-. **Run the `ssh-keyscan` command**: Use the command with the appropriate options and the hostname or IP address of the remote server. Do not include `http` or `https` in the URL; just use the hostname or IP address:
-+
+**Run the `ssh-keyscan` command**: Use the command with the appropriate options and the hostname or IP address of the remote server. Do not include `http` or `https` in the URL; just use the hostname or IP address:
+
 [,shell]
 ----
 ssh-keyscan hostname_or_ip
 ----
-+
+
 For example, to scan the host keys of `example.com`, you would run the following:
-+
+
 [,shell]
 ----
 ssh-keyscan example.com
@@ -129,7 +129,7 @@ ssh-keyscan example.com >> ~/.ssh/known_hosts
 ssh-keyscan -p 2222 example.com
 ----
 
-5. **Verify the addition**: After running `ssh-keyscan`, you can verify that the keys have been added to the `known_hosts` file by checking the file's content, as follows:
+* **Verify the addition**: After running `ssh-keyscan`, you can verify that the keys have been added to the `known_hosts` file by checking the file's content, as follows:
 +
 [,source]
 ----

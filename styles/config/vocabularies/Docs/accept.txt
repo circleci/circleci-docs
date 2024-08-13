@@ -69,7 +69,7 @@ classpath
 classpath?
 CLI
 Clojure
-Cloud
+[Cc]loud
 Cloud Foundry
 CocoaPods
 Codecov
