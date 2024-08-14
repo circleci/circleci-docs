@@ -7,6 +7,12 @@
 | VM Software Manifest
 | Release Notes
 
+| `16.1.0`
+| Xcode 16.1 Beta 1 (16B5001e)
+| 14.5.0
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14972/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-1-beta-1-released/51693[Release Notes]
+
 | `16.0.0`
 | Xcode 16.0 Beta 5 (16A5221g)
 | 14.5.0
