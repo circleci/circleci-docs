@@ -331,11 +331,11 @@ pass:[<!-- vale off -->]
 | redis.cluster.slaveCount | int | `1` |  |
 | redis.fullnameOverride | string | `"redis"` |  |
 | redis.image.tag | string | `"6.2.1-debian-10-r13"` |  |
-| redis.master.persistence.size | string | `"8Gi"` | To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes |
+| redis.master.persistence.size | string | `"8Gi"` | To increase PVC size, follow this guide: https://circleci.com/docs/server/v4.1/operator/expanding-internal-database-volumes |
 | redis.master.podAnnotations."backup.velero.io/backup-volumes" | string | `"redis-data"` |  |
 | redis.podLabels.app | string | `"redis"` |  |
 | redis.podLabels.layer | string | `"data"` |  |
-| redis.slave.persistence.size | string | `"8Gi"` | To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes |
+| redis.slave.persistence.size | string | `"8Gi"` | To increase PVC size, follow this guide: https://circleci.com/docs/server/v4.1/operator/expanding-internal-database-volumes |
 | redis.slave.podAnnotations."backup.velero.io/backup-volumes" | string | `"redis-data"` |  |
 | redis.statefulset.labels.app | string | `"redis"` |  |
 | redis.statefulset.labels.layer | string | `"data"` |  |
