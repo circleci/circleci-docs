@@ -59,7 +59,7 @@ To add or edit a pipeline, follow these steps:
 . In the CircleCI web app, select **Projects** in the sidebar.
 . Select the ellipsis next to your project (icon:ellipsis-h[]) and choose **Project Settings**.
 . Select **Pipelines** in the sidebar.
-. Select btn:[Add Pipeline], or click if you wish to edit an existing one click on the pencil icon on the right.
+. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Under Config Source select the platform that matches where your project is set up (for example, GitHub App).
