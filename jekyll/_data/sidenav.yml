@@ -624,15 +624,15 @@ en:
             link: oss
       - name: VCS integration
         children:
-          - name: GitHub App integration overview
+          - name: GitHub App integration
             link: github-apps-integration
-          - name: GitLab integration overview
+          - name: GitLab integration
             link: gitlab-integration
-          - name: Bitbucket Data Center integration overview
+          - name: Bitbucket Data Center integration
             link: bitbucket-data-center-integration
-          - name: GitHub OAuth app integration overview
+          - name: GitHub OAuth app integration
             link: github-integration
-          - name: Bitbucket Cloud integration overview
+          - name: Bitbucket Cloud integration
             link: bitbucket-integration
 
       - name: Third-party integrations
