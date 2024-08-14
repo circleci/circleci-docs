@@ -17,7 +17,7 @@ This page walks you through integrating a Bitbucket Data Center project with Cir
 [#overview]
 == CircleCI Bitbucket Data Center integration overview
 
-CircleCI CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your Bitbucket Data Center projects each time a developer pushes a change to the codebase, and/or when a merge request is created.
+CircleCI CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your Bitbucket Data Center projects each time a developer pushes a change to the codebase, and when a pull request is merged.
 
 Integrate with CircleCI to access features for automated software delivery:
 
@@ -57,7 +57,7 @@ Integrate with CircleCI to access features for automated software delivery:
 ** Select **Bitbucket Data Center** under Config Source.
 ** Provide the project HTTP access token you created in the previous step. Select btn:[Connect].
 ** Select your repository and branch.
-** Enter `.circleci/config.yml` in the Config File Path field.
+** In the Config File Path field enter the path to the config file in your repository. Typically this is `.circleci/config.yml` but can be whatever you have configured in your project.
 .. Select btn:[Save].
 
 . **Set up a trigger**:
