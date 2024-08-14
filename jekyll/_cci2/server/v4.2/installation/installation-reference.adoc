@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.2
   - Server Admin
+noindex: true
 ---
 = Installation reference
 :page-layout: classic-docs
@@ -11,7 +12,7 @@ contentTags:
 :toc-title:
 
 [#example-manifests]
-== Example Manifests
+== Example manifests
 The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server Helm installation.
 
 [#aws]
@@ -156,6 +157,7 @@ nomad:
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
 
+pass:[<!-- vale off -->]
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
@@ -183,13 +185,13 @@ dispatcher deployment.
 
 |distributor.agent_base_url |string
 |`+"https://circleci-binary-releases.s3.amazonaws.com/circleci-agent"+`
-|location of the task-agent. When airgapped, the task-agent will need to
-be hosted within the airgap and this value updated
+|location of the task-agent. When air-gapped, the task-agent will need to
+be hosted within the air gap and this value updated
 
 |distributor.launch_agent_base_url |string
 |`+"https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"+`
-|Location of the launch-agent. When airgapped, the launch-agent will
-need to be hosted within the airgap and this value updated
+|Location of the launch-agent. When air-gapped, the launch-agent will
+need to be hosted within the air gap and this value updated
 
 |distributor_cleaner.replicas |int |`+1+` |Number of replicas to deploy
 for the distributor-dispatcher deployment.
@@ -209,12 +211,12 @@ the domain-service deployment.
 |frontend.replicas |int |`+1+` |Number of replicas to deploy for the
 frontend deployment.
 
-|github |object
+|GitHub |object
 |`+{"clientId":"","clientSecret":"","enterprise":false,"fingerprint":null,"hostname":"ghe.example.com","scheme":"https","unsafeDisableWebhookSSLVerification":false}+`
-|VCS Configuration details (currently limited to Github Enterprise and
-Github.com)
+|VCS Configuration details (currently limited to GitHub Enterprise and
+GitHub.com)
 
-|github.clientId |string |`+""+` |Client ID for OAuth Login via Github
+|github.clientId |string |`+""+` |Client ID for OAuth Login via GitHub
 (2 Options). +
  *Option 1:* Set the value here and CircleCI will
 create the secret automatically. +
@@ -684,7 +686,7 @@ secret name for existingPasswordSecret
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/v4.2/operator/expanding-internal-database-volumes
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -695,7 +697,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/v4.2/operator/expanding-internal-database-volumes
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -916,3 +918,4 @@ deployment.
 |workflows_conductor_grpc.replicas |int |`+1+` |Number of replicas to
 deploy for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]

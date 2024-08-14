@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Installation reference
 :page-layout: classic-docs
@@ -11,7 +12,7 @@ contentTags:
 :toc-title:
 
 [#example-manifests]
-== Example Manifests
+== Example manifests
 The following are example manifests that contain the basic required parameters necessary to spin up the `circleci-server` Helm installation.
 
 [#aws]
@@ -166,7 +167,7 @@ nomad:
 
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
-
+pass:[<!-- vale off -->]
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
@@ -1067,7 +1068,7 @@ this value is '`15672`' else port of external rabbitmq instance
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/v4.3/operator/expanding-internal-database-volumes
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1082,7 +1083,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/v4.3/operator/expanding-internal-database-volumes
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1383,3 +1384,4 @@ limit configuration for the workflows-conductor-grpc deployment.
 |workflows_conductor_grpc.resources.limits.memory |string |`+"8Gi"+`
 |Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]
