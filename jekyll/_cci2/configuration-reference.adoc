@@ -973,7 +973,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | `image`
 | Y
 | String
-| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/v4.4/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
+| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/latest/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
 
 | `docker_layer_caching`
 | N

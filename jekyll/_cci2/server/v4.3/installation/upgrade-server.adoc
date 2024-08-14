@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.3
     - Server Admin
+noindex: true
 ---
 = Upgrade server
 :page-layout: classic-docs
@@ -71,14 +72,14 @@ Note the following significant changes in server v4.3.
 [#vault]
 === Vault
 
-* We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation before backing up your server installation in preparation for upgrading to v4.3. Customers that do not perform this step may have issues restoring Vault from backup in v4.3. 
+* We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation before backing up your server installation in preparation for upgrading to v4.3. Customers that do not perform this step may have issues restoring Vault from backup in v4.3.
 
 
 [#prerequisites]
 == Prerequisites
 
 * Ensure you have access to the Kubernetes cluster in which server is installed.
-* Ensure you have migrated from Vault to Tink on your 4.2.x instance as link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. 
+* Ensure you have migrated from Vault to Tink on your 4.2.x instance as link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here].
 * Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
 * Ensure there is a recent backup. For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
 

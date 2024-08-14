@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.4
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.4 release notes
 :page-layout: classic-docs
@@ -26,6 +27,14 @@ For a full list of fixes, changes, new features and known issues, follow the lin
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.4 guide].
+
+[#release-4-4-6]
+== Release 4.4.6
+
+[#changelog-4-4-6]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-6/[changelog].
 
 [#release-4-4-5]
 == Release 4.4.5
