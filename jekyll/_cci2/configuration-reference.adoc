@@ -973,7 +973,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | `image`
 | Y
 | String
-| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/v4.4/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
+| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/latest/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
 
 | `docker_layer_caching`
 | N
@@ -1846,7 +1846,7 @@ jobs:
 [NOTE]
 ====
 * `setup_remote_docker` is not compatible with the `machine` executor. See xref:docker-layer-caching#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server/latest/operator/manage-virtual-machines-with-machine-provisioner/#x86-ami-list[here].
 ====
 
 '''
