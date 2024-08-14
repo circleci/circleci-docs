@@ -10,6 +10,8 @@ contentTags:
 :icons: font
 :experimental:
 
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+
 This page walks you through integrating a Bitbucket Data Center project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your Bitbucket Data Center project. CircleCI features that are in development for Bitbucket Data Center projects are detailed in the <<coming-soon>> section.
 
 [#overview]
@@ -27,12 +29,15 @@ Integrate with CircleCI to access features for automated software delivery:
 * xref:orb-intro#[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
 * Developer tools: xref:local-cli#[CircleCI CLI], xref:api-intro#[APIs], and xref:vs-code-extension-overview#[VS Code extension], xref:circleci-config-sdk#[config SDK]
 
-[#sign-up]
 == Steps to integrate Bitbucket Data Center projects with CircleCI
 
-. Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to create a CircleCI account, create a new CircleCI organization. Alternatively you can use an existing organization.
+=== Prerequisites
 
-. Follow the steps on the xref:create-project#create-a-project[Create a project] page to create a project in CircleCI and set up an integration with your Bitbucket Data Center project.
+* Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to create a CircleCI account, create a new CircleCI organization. Alternatively you can use an existing organization.
+
+* Follow the steps on the xref:create-project#create-a-project[Create a project] page to create a project in CircleCI and set up an integration with your Bitbucket Data Center project.
+
+=== Integrate a project with CircleCI
 
 . **Set up your integration with Bitbucket Data Center if you have not already**:
 .. In the CircleCI web app, select **Organization Settings** in the sidebar.
@@ -50,9 +55,9 @@ Integrate with CircleCI to access features for automated software delivery:
 .. Select **Set Up Pipeline**. Fill in the required fields:
 ** Give your pipeline a descriptive name.
 ** Select **Bitbucket Data Center** under Config Source.
-** Provide your project HTTP access token with the project admin scope. Select btn:[Connect].
+** Provide the project HTTP access token you created in the previous step. Select btn:[Connect].
 ** Select your repository and branch.
-** Enter .circleci/config.yml  in the Config File Path field.
+** Enter `.circleci/config.yml` in the Config File Path field.
 .. Select btn:[Save].
 
 . **Set up a trigger**:
@@ -61,12 +66,12 @@ Integrate with CircleCI to access features for automated software delivery:
 .. Select Bitbucket Data Center from the dropdown and select btn:[Next].
 .. Fill in the required fields:
 ** Give your trigger a descriptive name.
-** Provide your project HTTP access token with the project admin scope. Select btn:[Connect].
+** Provide the project HTTP access token you created above. Select btn:[Connect].
 ** Select your repository and branch.
-** Choose the pipeline you just created under the dropdown to show CircleCI which pipeline to trigger.
+** Choose the pipeline you created in the previous step under the dropdown to show CircleCI which pipeline to trigger.
 .. Select btn:[Save].
 
-. If you have not already done so, **add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
+. If you have not already done so, **create a `.circleci` directory to the root of your repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
 +
 [TIP]
 ====
@@ -88,55 +93,25 @@ Committing changes in your repository will automatically trigger a pipeline. Man
 [#known-hosts]
 === Generate `known_hosts`
 
-For Bitbucket Data Center integrations, it is necessary to add your instance's SSH host keys to a `known hosts` file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic.
+Integrating CircleCI with your Bitbucket Data Center instance requires that you store a public SSH host key within the CircleCI organization that will be accessing the Bitbucket Data Center instance.
 
-The `known_hosts` file stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
+To get the required SSH host key, run `ssh-keyscan` with the hostname and port of your Bitbucket Data Center instance. For example:
 
-**Run the `ssh-keyscan` command**: Use the command with the appropriate options and the hostname or IP address of the remote server. Do not include `http` or `https` in the URL; just use the hostname or IP address:
-
-[,shell]
-----
-ssh-keyscan hostname_or_ip
-----
-
-For example, to scan the host keys of `example.com`, you would run the following:
+TIP: Replace the port with the correct port for your instance, and the hostname with your Bitbucket Data Center hostname.
 
 [,shell]
 ----
-ssh-keyscan example.com
+ssh-keyscan -p 1234 bitbucket-datacenter.example.com
 ----
 
-Further options:
+The output will look something like the following:
 
-* **Specify the types of keys to scan**: You can specify the types of keys you want to scan for using the `-t` option followed by a comma-separated list of key types. The common key types are `rsa`, `dsa`, `ecdsa`, and `ed25519`.
-+
-[,source]
+[,shell]
 ----
-ssh-keyscan -t rsa,ecdsa,ed25519 example.com
+[bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
 ----
 
-* **Redirect the output to a known_hosts file**: You can append the output directly to your `~/.ssh/known_hosts` file or any other file you use for storing known hosts.
-+
-[,source]
-----
-ssh-keyscan example.com >> ~/.ssh/known_hosts
-----
-
-* **Using a custom port**: If the SSH service is running on a non-standard port, use the `-p` option to specify the port.
-+
-[,source]
-----
-ssh-keyscan -p 2222 example.com
-----
-
-* **Verify the addition**: After running `ssh-keyscan`, you can verify that the keys have been added to the `known_hosts` file by checking the file's content, as follows:
-+
-[,source]
-----
-cat ~/.ssh/known_hosts
-----
-
-By following these steps, you can use `ssh-keyscan` to gather the host keys of a remote server and add them to your known hosts file for secure SSH connections.
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Organization Settings[Integrations].
 
 == How it works
 

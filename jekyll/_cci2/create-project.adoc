@@ -165,12 +165,11 @@ image::create-project/choose-a-repo.png[Choose a repository window with option t
 
 . On the next screen give your project a descriptive name.
 
-. Next you will set up the following:
+. Next, follow the steps on the xref:bitbucket-data-center-integration#integrate-a-project-with-circleci[Bitbucket integration setup] page to set up the following:
 ** An integration with your Bitbucket Data Center instance (if not already set up for your org).
 ** Set up a pipeline and trigger for your project.
 ** Add a configuration file to your repo.
-+
-Follow the steps on the xref:bitbucket-data-center-integration#steps-to-integrate-bitbucket-data-center-projects-with-circleci[Bitbucket integration setup] page.
+
 --
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
