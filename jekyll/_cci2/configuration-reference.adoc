@@ -973,7 +973,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | `image`
 | Y
 | String
-| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/v4.4/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
+| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:./server/latest/operator/manage-virtual-machines-with-machine-provisioner#[Machine provisioner documentation].
 
 | `docker_layer_caching`
 | N
@@ -1272,13 +1272,11 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 [#windows-execution-environment]
 ===== Windows execution environment
 
-For GitLab and GitHub App projects, you must add `add_ssh_keys` in your `.circle/config.yml` for the Windows execution environment to work. For more information, see the xref:using-windows#[Using the Windows execution environment] page. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
-
 {% include snippets/windows-resource-table.adoc %}
 
 Example:
 
-[.tab.windowsblock.Cloud_GitHub_OAuth_&_Bitbucket]
+[.tab.windowsblock.Cloud]
 --
 [,yaml]
 ----
@@ -1292,29 +1290,6 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-----
---
-
-[.tab.windowsblock.Cloud_GitHub_App_&_GitLab]
---
-[,yaml]
-----
-version: 2.1
-
-jobs:
-  build: # name of your job
-    resource_class: 'windows.medium'
-    machine:
-      image: 'windows-server-2022-gui:current'
-      shell: 'powershell.exe -ExecutionPolicy Bypass'
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - add_ssh_keys:
-            fingerprints:
-              - "SO:ME:FIN:G:ER:PR:IN:T"
-              - "SHA256:NPj4IcXxqQEKGXOghi/QbG2sohoNfvZ30JwCcdSSNM0"
         - checkout
         - run: Write-Host 'Hello, Windows'
 ----
@@ -1846,7 +1821,7 @@ jobs:
 [NOTE]
 ====
 * `setup_remote_docker` is not compatible with the `machine` executor. See xref:docker-layer-caching#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server/latest/operator/manage-virtual-machines-with-machine-provisioner/#x86-ami-list[here].
 ====
 
 '''

@@ -176,6 +176,42 @@ The image below shows the workflow view for the following configuration example.
 * Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
 
+### Hello world
+
+```yml
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
+jobs:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
+    docker:
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
+workflows:
+  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - say-hello
+```
+
 ## Sample configuration with sequential workflow and secondary Docker container
 {: #sample-configuration-with-sequential-workflow }
 

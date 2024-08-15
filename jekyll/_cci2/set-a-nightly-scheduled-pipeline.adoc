@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: Scheduled pipelines are not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+NOTE: Scheduled pipelines are not currently available for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
 
 A common scenario you might want to set up is to trigger a pipeline overnight. The examples below shows how to schedule a pipeline to be run at midnight every night. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or if you would prefer, you can set one using the link:https://circleci.com/docs/api/v2/index.html[API].
 

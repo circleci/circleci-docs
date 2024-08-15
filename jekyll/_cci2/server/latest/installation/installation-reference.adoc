@@ -1,0 +1,1462 @@
+---
+contentTags:
+  platform:
+  - Server v4.6
+  - Server Admin
+---
+= Installation reference
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+[#example-manifests]
+== Example manifests
+The following are example manifests that contain the basic required parameters necessary to spin up the `circleci-server` Helm installation.
+
+[#aws]
+=== AWS
+The snippet below is an example manifest of the necessary parameters for an installation of CircleCI server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
+
+[source,yaml]
+----
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license>'
+  container:
+    registry: cciserver.azurecr.io
+    org:
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+
+object_storage:
+  bucketName: '<s3-bucket-name>'
+  s3:
+    enabled: true
+    endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
+    region: "<aws-region>"
+    irsaRole: "<arn-of-irsa-role>"
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+
+machine_provisioner:
+  providers:
+    ec2:
+      enabled: true
+      region: "<aws-region>"
+      subnets:
+        - "<subnet-id>"
+      securityGroupId: "<security-group-id>"
+      irsaRole: "<arn-of-irsa-role>"
+      tags:
+        name1: "value1"
+        name2: "value2"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+
+pusher:
+  secret: "<pusher-secret>"
+
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
+
+----
+
+[#gcp]
+=== GCP
+The below is an example manifest of the necessary parameters for an installation of CircleCI server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
+
+[source,yaml]
+----
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license-for-circleci-server>'
+  container:
+    registry: cciserver.azurecr.io
+    org:
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+
+object_storage:
+  bucketName: "<gcs-bucket-name>"
+  gcs:
+    enabled: true
+    workloadIdentity: "<service-account-email-with-gcs-access>"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+
+machine_provisioner:
+  providers:
+    gcp:
+      enabled: true
+      project_id: <gcp-project-id>
+      network_tags:
+        - <network-tag>
+      zones:
+        - <gcp-zone1>
+        - <gcp-zone2>
+      network: "<gcp-network>"
+      subnetwork: "" # leave blank for auto-subnetting
+      workloadIdentity: "<service-account-email-with-compute-access>"
+
+pusher:
+  secret: "<pusher-secret>"
+
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
+
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+----
+
+[#all-values-yaml-options]
+== All Helm `values.yaml` options
+
+pass:[<!-- vale off -->]
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+|Key |Type |Default |Description
+|api_service.replicas |int |`+1+` |Number of replicas to deploy for the
+api-service deployment.
+
+|api_service.resources.limits.cpu |string |`+"2000m"+` |CPU limit for
+the api-service deployment.
+
+|api_service.resources.limits.memory |string |`+"8Gi"+` |Memory limit
+for the api-service deployment.
+
+|audit_log_service.replicas |int |`+1+` |Number of replicas to deploy
+for the audit-log-service deployment.
+
+|audit_log_service.resources.limits.cpu |string |`+"2000m"+` |CPU limit
+for the audit-log-service deployment.
+
+|audit_log_service.resources.limits.memory |string |`+"3584Mi"+` |Memory
+limit for the audit-log-service deployment.
+
+|authentication_service.login_api.replicas |int |`+1+` |Number of
+replicas to deploy for the authentication-service login api deployment.
+
+|authentication_service.login_api.resources.limits.cpu |int |`+2+` |CPU
+limit for the authentication-service login api deployment.
+
+|authentication_service.login_api.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the authentication-service login api
+deployment.
+
+|branch_service.replicas |int |`+1+` |Number of replicas to deploy for
+the branch-service deployment.
+
+|branch_service.resources.limits.cpu |string |`+"1000m"+` |CPU limit for
+the branch-service deployment.
+
+|branch_service.resources.limits.memory |string |`+"1Gi"+` |Memory limit
+for the branch-service deployment.
+
+|builds_service.replicas |int |`+1+` |Number of replicas to deploy for
+the builds-service deployment.
+
+|builds_service.resources.limits.cpu |string |`+"1500m"+` |CPU limit for
+the builds-service deployment.
+
+|builds_service.resources.limits.memory |string |`+"6Gi"+` |Memory limit
+for the builds-service deployment.
+
+|ciam_gateway.internal_api.replicas |int |`+1+` |Number of replicas to
+deploy for the ciam-gateway-service internal deployment.
+
+|ciam_gateway.internal_api.resources.limits.cpu |int |`+2+` |CPU limit
+for the ciam-gateway-service internal api deployment.
+
+|ciam_gateway.internal_api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the ciam-gateway-service internal api deployment.
+
+|ciam_gateway.outgoing_api.replicas |int |`+1+` |Number of replicas to
+deploy for the ciam-gateway-service outgoing deployment.
+
+|ciam_gateway.outgoing_api.resources.limits.cpu |int |`+2+` |CPU limit
+for the ciam-gateway-service outgoing api deployment.
+
+|ciam_gateway.outgoing_api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the ciam-gateway-service outgoing api deployment.
+
+|ciam_gateway.public_api.replicas |int |`+1+` |Number of replicas to
+deploy for the ciam-gateway-service public deployment.
+
+|ciam_gateway.public_api.resources.limits.cpu |int |`+2+` |CPU limit for
+the ciam-gateway-service public api deployment.
+
+|ciam_gateway.public_api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the ciam-gateway-service public api deployment.
+
+|ciam_service.internal_admin_api.replicas |int |`+1+` |Number of
+replicas to deploy for the ciam-service internal admin deployment.
+
+|ciam_service.internal_admin_api.resources.limits.cpu |int |`+2+` |CPU
+limit for the ciam-service internal admin api deployment.
+
+|ciam_service.internal_admin_api.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the ciam-service internal admin api
+deployment.
+
+|contexts_service.replicas |int |`+1+` |Number of replicas to deploy for
+the contexts-service deployment.
+
+|contexts_service.resources.limits.cpu |string |`+"500m"+` |CPU limit
+for the contexts-service deployment.
+
+|contexts_service.resources.limits.memory |string |`+"1Gi"+` |Memory
+limit for the contexts-service deployment.
+
+|cron_service.replicas |int |`+1+` |Number of replicas to deploy for the
+cron-service deployment.
+
+|cron_service.resources.limits.cpu |string |`+"2000m"+` |CPU limit for
+the cron-service deployment.
+
+|cron_service.resources.limits.memory |string |`+"4Gi"+` |Memory limit
+for the cron-service deployment.
+
+|distributor.agent_base_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com/circleci-agent"+`
+|location of the task-agent. When airgapped, the task-agent will need to
+be hosted within the airgap and this value updated
+
+|distributor_cleaner.replicas |int |`+1+` |Number of replicas to deploy
+for the distributor-cleaner deployment.
+
+|distributor_cleaner.resources.limits.cpu |string |`+"500m"+` |CPU limit
+for the distributor-cleaner deployment.
+
+|distributor_cleaner.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the distributor-cleaner deployment.
+
+|distributor_dispatcher.replicas |int |`+1+` |Number of replicas to
+deploy for the distributor-dispatcher deployment.
+
+|distributor_dispatcher.resources.limits.cpu |string |`+"500m"+` |CPU
+limit for the distributor-dispatcher deployment.
+
+|distributor_dispatcher.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the distributor-dispatcher deployment.
+
+|distributor_external.replicas |int |`+1+` |Number of replicas to deploy
+for the distributor-external deployment.
+
+|distributor_external.resources.limits.cpu |string |`+"500m"+` |CPU
+limit for the distributor-external deployment.
+
+|distributor_external.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the distributor-external deployment.
+
+|distributor_internal.replicas |int |`+1+` |Number of replicas to deploy
+for the distributor-internal deployment.
+
+|distributor_internal.resources.limits.cpu |string |`+"500m"+` |CPU
+limit for the distributor-internal deployment.
+
+|distributor_internal.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the distributor-internal deployment.
+
+|docker_provisioner.agent_base_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com/docker-provisioner"+`
+|Location of the docker-provisioner agent. When air-gapped, the
+docker-provisioner agent will need to be hosted within the air-gap and
+this value updated
+
+|docker_provisioner.config_path |string |`+""+` |Path to config with
+information about docker resource-classes
+
+|docker_provisioner.enabled |bool |`+true+` |
+
+|docker_provisioner.external.replicas |int |`+1+` |Number of replicas to
+deploy for the docker-provisioner-externalapi deployment.
+
+|docker_provisioner.external.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the docker-provisioner-internalapi
+deployment
+
+|docker_provisioner.internal.replicas |int |`+1+` |Number of replicas to
+deploy for the docker-provisioner-internalapi deployment.
+
+|docker_provisioner.internal.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the docker-provisioner-internalapi
+deployment
+
+|docker_provisioner.plugin_repository_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com"+` |Location of
+the agent plugin binaries. When air-gapped, the plugin binaries will
+need to be hosted within the air-gap and this value updated
+
+|docker_provisioner.provisioner.replicas |int |`+1+` |Number of replicas
+to deploy for the docker-provisioner-provisioner deployment.
+
+|docker_provisioner.provisioner.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the docker-provisioner-provisioner
+deployment
+
+|domain_service.replicas |int |`+1+` |Number of replicas to deploy for
+the domain-service deployment.
+
+|domain_service.resources.limits.cpu |string |`+"2000m"+` |CPU limit for
+the domain-service deployment.
+
+|domain_service.resources.limits.memory |string |`+"1536Mi"+` |Memory
+limit for the domain-service deployment.
+
+|execution_gateway.api.replicas |int |`+1+` |Number of replicas to
+deploy for the execution-gateway-api deployment.
+
+|execution_gateway.api.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the execution-gateway-api deployment
+
+|execution_gateway.force_legacy_ui |string |`+"false"+` |
+
+|execution_gateway.plan_concurrency |int |`+2500+` |Maximum concurrency
+you wish to permit per org in your environment
+
+|execution_gateway.public_api.replicas |int |`+1+` |Number of replicas
+to deploy for the execution-gateway-public-api deployment.
+
+|execution_gateway.public_api.resources.limits.memory |string
+|`+"1536Mi"+` |Memory limit for the execution-gateway-publicapi
+deployment
+
+|feature_flags_api.replicas |int |`+1+` |Number of replicas to deploy
+for the feature-flags-api deployment.
+
+|feature_flags_api.resources.limits.memory |string |`+"512Mi"+` |Memory
+limit for the feature-flags-api deployment.
+
+|frontend.replicas |int |`+1+` |Number of replicas to deploy for the
+frontend deployment.
+
+|frontend.resources.limits.cpu |string |`+"2000m"+` |CPU limit for the
+frontend deployment.
+
+|frontend.resources.limits.memory |string |`+"2Gi"+` |Memory limit for
+the frontend deployment.
+
+|github |object
+|`+{"clientId":"","clientSecret":"","enterprise":false,"fingerprint":null,"hostname":"ghe.example.com","scheme":"https","unsafeDisableWebhookSSLVerification":false}+`
+|VCS Configuration details (currently limited to Github Enterprise and
+Github.com)
+
+|github.clientId |string |`+""+` |Client ID for OAuth Login via Github
+(2 Options). +
+ *Option 1:* Set the value here and CircleCI will
+create the secret automatically. +
+ *Option 2:* Leave this blank,
+and create the secret yourself. CircleCI will assume it exists. +
+
+Create on by Navigating to Settings > Developer Settings > OAuth Apps.
+Your homepage should be set to
+`+{{ .Values.global.scheme }}://{{ .Values.global.domainName }}+` and
+callback should be
+`+{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github+`.
+
+|github.clientSecret |string |`+""+` |Client Secret for OAuth Login via
+Github (2 Options). +
+ *Option 1:* Set the value here and CircleCI
+will create the secret automatically. +
+ *Option 2:* Leave this
+blank, and create the secret yourself. CircleCI will assume it exists.
++
+ Retrieved from the same location as specified in github.clientID.
+
+|github.enterprise |bool |`+false+` |Set to `+true+` for Github
+Enterprise and `+false+` for Github.com
+
+|github.fingerprint |string |`+nil+` |Required when it is not possible
+to directly `+ssh-keyscan+` a GitHub Enterprise instance. It is not
+possible to proxy `+ssh-keyscan+`.
+
+|github.hostname |string |`+"ghe.example.com"+` |Github hostname.
+Ignored on Github.com. This is the hostname of your Github Enterprise
+installation.
+
+|github.scheme |string |`+"https"+` |One of '`http`' or '`https`'.
+Ignored on Github.com. Set to '`http`' if your Github Enterprise
+installation is not using TLS.
+
+|github.unsafeDisableWebhookSSLVerification |bool |`+false+` |Disable
+SSL Verification in webhooks. This is not safe and shouldn’t be done in
+a production scenario. This is required if your Github installation does
+not trust the certificate authority that signed your Circle server
+certificates (e.g they were self signed).
+
+|global.container.org |string |`+""+` |The registry organization to pull
+all images from (if in use), defaults to none.
+
+|global.container.registry |string |`+"cciserver.azurecr.io"+` |The
+registry to pull all images from, defaults to "`cciserver.azurecr.io`".
+
+|global.domainName |string |`+""+` |Domain name of your CircleCI install
+
+|global.imagePullSecrets[0].name |string |`+"regcred"+` |
+
+|global.license |string |`+""+` |License (2 Options) For your CircleCI
+Installation +
+ *Option 1:* Set the value global.license and
+CircleCI will create the secret automatically. +
+ *Option 2:* Leave
+this blank, and create the secret yourself. CircleCI will assume it
+exists. +
+ The secret must be named '`license`' and have the key
+'`license`' (where the value equals the base64 encoded string of your
+license). It must be in the same namespace as your installation.
+
+|global.nodeAffinity |object |`+{}+` |NodeAffinity template to apply to
+all CircleCI pods
+
+|global.nodeSelector |object |`+{}+` |NodeSelector template to apply to
+all CircleCI pods
+
+|global.scheme |string |`+"https"+` |Scheme for your CircleCI install
+
+|global.tolerations |object |`+{}+` |Tolerations to apply to all
+CircleCI pods
+
+|global.tracing.collector_host |string |`+""+` |
+
+|global.tracing.enabled |bool |`+false+` |
+
+|global.tracing.sample_rate |float |`+1+` |
+
+|insights_service.dailyCronHour |int |`+3+` |Defaults to 3AM local
+server time.
+
+|insights_service.hourlyCronMinute |int |`+35+` |Defaults to 35 minutes
+past the hour.
+
+|insights_service.isEnabled |bool |`+true+` |Whether or not to enable
+the insights-service deployment.
+
+|insights_service.replicas |int |`+1+` |Number of replicas to deploy for
+the insights-service deployment.
+
+|insights_service.skipPermissionsCheck |bool |`+false+` |Enable to skip
+the permissions check on the org page and show all projects
+
+|keyset |object |`+{"encryption":"","signing":""}+` |Keysets (2 Options)
+used to encrypt and sign artifacts generated by CircleCI. You need these
+values to configure server. +
+ *Option 1:* Set the values
+keyset.signing and keyset.encryption here and CircleCI will create the
+secret automatically. +
+ *Option 2:* Leave this blank, and create
+the secret yourself. CircleCI will assume it exists. +
+ The secret
+must be named '`signing-keys`' and have the keys; signing-key,
+encryption-key.
+
+|keyset.encryption |string |`+""+` |Encryption Key To generate an
+artifact ENCRYPTION key run:
+`+docker run circleci/server-keysets:latest generate encryption -a stdout+`
+
+|keyset.signing |string |`+""+` |Signing Key To generate an artifact
+SIGNING key run:
+`+docker run circleci/server-keysets:latest generate signing -a stdout+`
+
+|kong.acme.email |string |`+"your-email@example.com"+` |
+
+|kong.acme.enabled |bool |`+false+` |This setting will fetch and renew
+Let’s Encrypt certs for you. It defaults to false as this only works
+when there’s a valid DNS entry for your domain (and the app. sub domain)
+- so you will need to deploy with this turned off and set the DNS
+records first. You can then set this to true and run `+helm upgrade+`
+with the updated setting if you want.
+
+|kong.debug_level |string |`+"notice"+` |Debug level for Kong. Available
+levels: `+debug+`, `+info+`, `+warn+`, `+error+`, `+crit+`, `+notice+`.
+
+|kong.image.repository |string |`+"kong"+` |The Docker image repository
+for Kong. Note this repository is not managed by CircleCI.
+
+|kong.image.tag |string |`+"3.3.1"+` |The Kong image tag. Kong has been
+tested against this specific version tag; edit this value at your own
+risk.
+
+|kong.nginx_worker_processes |int |`+10+` |Determines the number of
+worker processes spawned by Nginx.
+
+|kong.replicas |int |`+1+` |
+
+|kong.resources.limits.cpu |string |`+"3072m"+` |CPU limit for the kong
+deployment.
+
+|kong.resources.limits.memory |string |`+"3072Mi"+` |Memory limit for
+the kong deployment.
+
+|kong.resources.requests.cpu |string |`+"512m"+` |CPU request for the
+kong deployment.
+
+|kong.resources.requests.memory |string |`+"512Mi"+` |Memory request for
+the kong deployment.
+
+|kong.status_page |bool |`+false+` |Set to true for public health check
+page (kong) for load balancers to hit
+
+|legacy_notifier.replicas |int |`+1+` |Number of replicas to deploy for
+the legacy-notifier deployment.
+
+|legacy_notifier.resources.limits.cpu |string |`+"2000m"+` |CPU limit
+for the legacy-notifier deployment.
+
+|legacy_notifier.resources.limits.memory |string |`+"2Gi"+` |Memory
+limit for the legacy-notifier deployment.
+
+|machine_provisioner.agent_download_timeout_seconds |int |`+10+`
+|Timeout when attempting to download task-agent or docker-agent (remote
+docker) in machine-agent
+
+|machine_provisioner.config_path |string |`+""+` |Path to config with
+information about images/providers/resource-classes
+
+|machine_provisioner.demandFudgeFactor |int |`+2+` |demandFudgeFactor
+multiplies the demand from distributor with an additional factor
+
+|machine_provisioner.dlcDockerDiskSizeGB |int |`+100+`
+|dlcDockerDiskSizeGB Configure size of docker disk size. Used for ratio
+to prune on
+
+|machine_provisioner.dlcMaxDiskThresholdGB |int |`+15+`
+|dlcMaxDiskThresholdGB configure dlc max disk threshold
+
+|machine_provisioner.dlcUnusedLifespanDays |int |`+3+`
+|dlcUnusedLifespanDays Configure how long to keep dlc images and build
+cache for
+
+|machine_provisioner.enabled |bool |`+true+` |
+
+|machine_provisioner.external.replicas |int |`+1+` |Number of replicas
+to deploy for the machine-provisioner-externalapi deployment.
+
+|machine_provisioner.external.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the machine-provisioner-externalapi
+deployment
+
+|machine_provisioner.fudgeConstantTerm |int |`+0+` |fudgeConstantTerm
+adds to the results for the forecast rules.
+
+|machine_provisioner.fudgeScaleFactor |float |`+1.4+` |fudgeScaleFactor
+multiplies the results for the forecast rules.
+
+|machine_provisioner.installID |string |`+"production"+` |Unique tag
+machine provisioner applies to machines it manages.
+
+|machine_provisioner.internal.replicas |int |`+1+` |Number of replicas
+to deploy for the machine-provisioner-internalapi deployment.
+
+|machine_provisioner.internal.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the machine-provisioner-internalapi
+deployment
+
+|machine_provisioner.leader.replicas |int |`+1+` |Number of replicas to
+deploy for the machine-provisioner-leader deployment.
+
+|machine_provisioner.leader.resources.limits.memory |string |`+"512Mi"+`
+|Memory limit for the machine-provisioner-leader deployment
+
+|machine_provisioner.machine_agent_base_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com/machine-provisioner"+`
+|Location of the machine-provisioner agent. When air-gapped, the
+machine-provisioner agent will need to be hosted within the air-gap and
+this value updated
+
+|machine_provisioner.machine_agent_download_timeout_seconds |int |`+10+`
+|Timeout when attempting to download machine-agent onto a VM
+
+|machine_provisioner.plugin_repository_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com"+` |Location of
+the agent plugin binaries. When air-gapped, the plugin binaries will
+need to be hosted within the air-gap and this value updated
+
+|machine_provisioner.providers |object
+|`+{"ec2":{"accessKey":"","assignPublicIP":false,"enabled":false,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-123","subnets":["subnet-abc","subnet-def"],"tags":{"key1":"value1","key2":"value2"},"windowsAMI":""},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"default","network_tags":["circleci-vm"],"project_id":"my-server-project","region":"us-central1","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zones":["us-central1-a","us-central1-b","us-central1-c","us-central1-f"]}}+`
+|Provider configuration for Machine Provisioner.
+
+|machine_provisioner.providers.ec2.accessKey |string |`+""+` |EC2
+Authentication Config (3 Options). +
+ *Option 1:* Set accessKey and
+secretKey here, and CircleCI will create the secret for you. +
+
+*Option 2:* Leave accessKey and secretKey blank, and create the secret
+yourself. CircleCI will assume it exists. +
+ *Option 3:* Leave
+accessKey and secretKey blank, and set the irsaRole field (IAM roles for
+service accounts).
+
+|machine_provisioner.providers.ec2.enabled |bool |`+false+` |Set to
+enable EC2 as a virtual machine provider
+
+|machine_provisioner.providers.gcp.enabled |bool |`+false+` |Set to
+enable GCP Compute as a VM provider
+
+|machine_provisioner.providers.gcp.service_account |object
+|`+{"project_id":"... ...","type":"service_account"}+` |GCP Compute
+Authentication Config (3 Options). +
+ *Option 1:* Set
+service_account with the service account JSON (raw JSON, not a string),
+and CircleCI will create the secret for you. +
+ *Option 2:* Leave
+the service_account field as its default, and create the secret
+yourself. CircleCI will assume it exists. +
+ *Option 3:* Leave the
+service_account field as its default, and set the workloadIdentityField
+with a service account email to use workload identities.
+
+|machine_provisioner.provisioner.replicas |int |`+1+` |Number of
+replicas to deploy for the machine-provisioner-provisioner deployment.
+
+|machine_provisioner.provisioner.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the machine-provisioner-leader deployment
+
+|mongodb.architecture |string |`+"standalone"+` |
+
+|mongodb.auth.database |string |`+"admin"+` |
+
+|mongodb.auth.existingSecret |string |`+""+` |
+
+|mongodb.auth.mechanism |string |`+"SCRAM-SHA-1"+` |
+
+|mongodb.auth.password |string |`+""+` |
+
+|mongodb.auth.rootPassword |string |`+""+` |
+
+|mongodb.auth.username |string |`+"root"+` |
+
+|mongodb.fullnameOverride |string |`+"mongodb"+` |
+
+|mongodb.hosts |string |`+"mongodb:27017"+` |MongoDB host. This can be a
+comma-separated list of multiple hosts for sharded instances.
+
+|mongodb.image.tag |string |`+"3.6.22-debian-9-r38"+` |
+
+|mongodb.injectBotToken.image.repository |string |`+"mongo"+` |The
+Docker image repository for MongoDB used by the `+inject-bottoken+` Job.
+Note this repository is not managed by CircleCI.
+
+|mongodb.injectBotToken.image.tag |float |`+3.6+` |The
+`+inject-bottoken+` Job has been tested against this specific version
+tag of MongoDB; edit this value at your own risk.
+
+|mongodb.internal |bool |`+true+` |Set to false if you want to use an
+externalized MongoDB instance.
+
+|mongodb.labels.app |string |`+"mongodb"+` |
+
+|mongodb.labels.layer |string |`+"data"+` |
+
+|mongodb.options |string |`+""+` |
+
+|mongodb.persistence.size |string |`+"8Gi"+` |
+
+|mongodb.podAnnotations.”backup.velero.io/backup-volumes” |string
+|`+"datadir"+` |
+
+|mongodb.podLabels.app |string |`+"mongodb"+` |
+
+|mongodb.podLabels.layer |string |`+"data"+` |
+
+|mongodb.ssl |bool |`+false+` |
+
+|mongodb.tlsInsecure |bool |`+false+` |If using an SSL connection with
+custom CA or self-signed certs, set this to true
+
+|mongodb.useStatefulSet |bool |`+true+` |
+
+|nginx.annotations.”service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled”
+|string |`+"true"+` |
+
+|nginx.annotations.”service.beta.kubernetes.io/aws-load-balancer-type”
+|string |`+"nlb"+` |Use `+nlb+` for Network Load Balancer and `+clb+`
+for Classic Load Balancer see
+https://aws.amazon.com/elasticloadbalancing/features/ for feature
+comparison.
+
+|nginx.aws_acm.enabled |bool |`+false+` |⚠️ WARNING: Enabling this will
+recreate frontend’s service which will recreate the load balancer. If
+you are updating your deployed settings, then you will need to route
+your frontend domain to the new loadbalancer. You will also need to add
+`+service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>+` to
+the `+nginx.annotations+` block.
+
+|nginx.image.repository |string |`+"nginx"+` |The Docker image
+repository for NGINX. Note this repository is not managed by CircleCI.
+
+|nginx.image.tag |string |`+"1.27.0"+` |Nginx has been tested against
+this specific version tag; edit this value at your own risk.
+
+|nginx.loadBalancerIp |string |`+""+` |Load Balancer IP. To use a static
+IP for the provisioned load balancer with GCP, set to a reserved static
+ipv4 address
+
+|nginx.loadBalancerSourceRanges |list |`+[]+` |Load Balancer Source IP
+CIDRs List of IP CIDRs allowed access to load balancer
+
+|nginx.private_load_balancers |bool |`+false+` |
+
+|nginx.replicas |int |`+1+` |
+
+|nginx.resources.limits.cpu |string |`+"3000m"+` |CPU limit for the
+nginx deployment.
+
+|nginx.resources.limits.memory |string |`+"3072Mi"+` |Memory limit for
+the nginx deployment.
+
+|nginx.resources.requests.cpu |string |`+"500m"+` |CPU request for the
+nginx deployment.
+
+|nginx.resources.requests.memory |string |`+"512Mi"+` |Memory request
+for the nginx deployment.
+
+|nomad.auto_scaler.aws.accessKey |string |`+""+` |AWS Authentication
+Config (3 Options). +
+ *Option 1:* Set accessKey and secretKey here,
+and CircleCI will create the secret for you. +
+ *Option 2:* Leave
+accessKey and secretKey blank, and create the secret yourself. CircleCI
+will assume it exists. +
+ *Option 3:* Leave accessKey and secretKey
+blank, and set the irsaRole field (IAM roles for service accounts).
+
+|nomad.auto_scaler.aws.autoScalingGroup |string |`+"asg-name"+` |
+
+|nomad.auto_scaler.aws.enabled |bool |`+false+` |
+
+|nomad.auto_scaler.aws.irsaRole |string |`+""+` |
+
+|nomad.auto_scaler.aws.region |string |`+"some-region"+` |
+
+|nomad.auto_scaler.aws.secretKey |string |`+""+` |
+
+|nomad.auto_scaler.enabled |bool |`+false+` |
+
+|nomad.auto_scaler.gcp.enabled |bool |`+false+` |
+
+|nomad.auto_scaler.gcp.mig_name |string
+|`+"some-managed-instance-group-name"+` |
+
+|nomad.auto_scaler.gcp.project_id |string |`+"some-project"+` |
+
+|nomad.auto_scaler.gcp.region |string |`+""+` |
+
+|nomad.auto_scaler.gcp.service_account |object
+|`+{"project_id":"... ...","type":"service_account"}+` |GCP
+Authentication Config (3 Options). +
+ *Option 1:* Set
+service_account with the service account JSON (raw JSON, not a string),
+and CircleCI will create the secret for you. +
+ *Option 2:* Leave
+the service_account field as its default, and create the secret
+yourself. CircleCI will assume it exists. +
+ *Option 3:* Leave the
+service_account field as its default, and set the workloadIdentity field
+with a service account email to use workload identities.
+
+|nomad.auto_scaler.gcp.workloadIdentity |string |`+""+` |
+
+|nomad.auto_scaler.gcp.zone |string |`+""+` |
+
+|nomad.auto_scaler.image.repository |string
+|`+"hashicorp/nomad-autoscaler"+` |The Docker image repository for the
+Nomad Autoscaler. Note this repository is not managed by CircleCI.
+
+|nomad.auto_scaler.image.tag |string |`+"0.3.7"+` |Nomad Autoscaler has
+been tested against this specific version tag; edit this value at your
+own risk.
+
+|nomad.auto_scaler.scaling.cooldown |string |`+"2m"+` |A time interval
+after a scaling action during which no additional scaling will be
+performed on the resource.
+
+|nomad.auto_scaler.scaling.evaluation_interval |string |`+"1m"+`
+|Defines how often the policy is evaluated by the Autoscaler.
+
+|nomad.auto_scaler.scaling.max |int |`+5+` |
+
+|nomad.auto_scaler.scaling.min |int |`+1+` |
+
+|nomad.auto_scaler.scaling.node_drain_deadline |string |`+"5m"+` |
+
+|nomad.buildAgentImage |string |`+"circleci/picard"+` |By default,
+Dockerhub is assumed to be the image registry unless otherwise specified
+eg: registry.example.com/organization/repository
+
+|nomad.clients |object |`+{}+` |
+
+|nomad.clusterDomain |string |`+"cluster.local"+` |
+
+|nomad.server.gossip.encryption.enabled |bool |`+true+` |
+
+|nomad.server.pdb.enabled |bool |`+true+` |
+
+|nomad.server.pdb.minAvailable |int |`+2+` |
+
+|nomad.server.replicas |int |`+3+` |
+
+|nomad.server.rpc.mTLS |object
+|`+{"CACertificate":"","certificate":"","privateKey":""}+` |Nomad mTLS
+(3 Options), strongly suggested for RPC communication +
+ Encrypts
+traffic and authenticates clients to ensure no unauthenticated clients
+can join the cluster. +
+ *Option 1:* Leave the values blank, and
+don’t use mTLS (not recommended). +
+ *Option 2:* Provide the
+CACertificate, certificate, and privateKey values - CircleCI will create
+the secret for you. +
+ *Option 3:* Leave the value blank (default)
+and create the secret yourself. If the values are populated, CircleCI
+will use them. +
+ The secret must be named '`nomad-mtls`', be in the
+same namespace, and have the key:values of: ca.pem:
+'`base64-encoded-certificate-authority`', key.pem:
+'`base64-encoded-private-key`', cert.pem:
+'`base64-encoded-certificate`'.
+
+|nomad.server.service.unsafe_expose_api |bool |`+false+` |
+
+|object_storage |object
+|`+{"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}}+`
+|Object storage for build artifacts, audit logs, test results and more.
+One of object_storage.s3.enabled or object_storage.gcs.enabled must be
+true for the chart to function.
+
+|object_storage.expireAfter |int |`+0+` |Number of days after which
+artifacts will expire from the UI
+
+|object_storage.gcs.service_account |object
+|`+{"project_id":"... ...","type":"service_account"}+` |GCP Storage
+(GCS) Authentication Config (3 Options). +
+ *Option 1:* Set
+`+service_account+` with the service account JSON (raw JSON, not a
+string), and CircleCI will create the secret for you. +
+ *Option 2:*
+Leave the `+service_account+` field as its default, and create the
+secret yourself. CircleCI will assume it exists. +
+ *Option 3:*
+Leave the `+service_account+` field as its default, and set the
+`+workloadIdentity+` field with a service account email to use workload
+identities.
+
+|object_storage.s3 |object
+|`+{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}+`
+|S3 Configuration for Object Storage. Authentication methods: AWS
+Access/Secret Key, and IRSA Role
+
+|object_storage.s3.accessKey |string |`+""+` |AWS Authentication Config
+(3 Options). +
+ *Option 1:* Set accessKey and secretKey here, and
+CircleCI will create the secret for you. +
+ *Option 2:* Leave
+accessKey and secretKey blank, and create the secret yourself. CircleCI
+will assume it exists. +
+ *Option 3:* Leave accessKey and secretKey
+blank, and set the irsaRole field (IAM roles for service accounts), also
+set region: "`your-aws-region`".
+
+|object_storage.s3.endpoint |string
+|`+"https://s3.us-east-1.amazonaws.com"+` |API endpoint for S3. If in
+AWS us-west-2, for example, this would be the regional endpoint
+http://s3.us-west-2.amazonaws.com. If using S3 compatible storage,
+specify the API endpoint of your object storage server
+
+|object_storage.s3.presigned |bool |`+true+` |When true object storage
+will be handled with presigned URLs. When false direct bucket access
+will be used instead. Direct access requires storageRole to be
+non-empty.
+
+|object_storage.s3.storageRole |string |`+""+` |A role that can be
+assumed to provide direct bucket access credentials. Required if
+presigned is false
+
+|oidc_service.isEnabled |bool |`+false+` |Whether or not to enable oidc
+support.
+
+|oidc_service.json_web_keys |string |`+""+` |The json web key (JWK) or
+key set (JWKS) used for signing ID tokens. Value should be base64
+encoded.
+
+|oidc_service.replicas |int |`+1+` |Number of replicas to deploy for the
+oidc-service deployment.
+
+|oidc_service.resources |object
+|`+{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}+`
+|Resource configuration for the oidc-service deployment.
+
+|oidc_service.token_max_ttl |string |`+"5h"+` |Maximum time-to-live for
+newly minted ID tokens.
+
+|oidc_tasks_service.replicas |int |`+1+` |Number of replicas to deploy
+for the oidc-tasks-service deployment.
+
+|oidc_tasks_service.resources |object
+|`+{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}+`
+|Resource configuration for the oidc-tasks-service deployment.
+
+|orb_service.replicas |int |`+1+` |Number of replicas to deploy for the
+orb-service deployment.
+
+|orb_service.resources.limits.cpu |string |`+"4000m"+` |CPU limit for
+the orb-service deployment.
+
+|orb_service.resources.limits.memory |string |`+"8Gi"+` |Memory limit
+for the orb-service deployment.
+
+|output.internal.replicas |string |`+nil+` |Number of replicas to deploy
+for the output-internal deployment.
+
+|output.internal.resources.limits.memory |string |`+"1Gi"+` |Memory
+limit for the output-internal deployment.
+
+|output.public |object
+|`+{"replicas":1,"resources":{"limits":{"memory":"512Mi"}}}+` |Number of
+replicas to deploy for the output-public deployment.
+
+|output.public.resources.limits.memory |string |`+"512Mi"+` |Memory
+limit for the output-public deployment.
+
+|output.receiver |object
+|`+{"replicas":1,"resources":{"limits":{"memory":"1Gi"}}}+` |Number of
+replicas to deploy for the output-receiver deployment.
+
+|output.receiver.resources.limits.memory |string |`+"1Gi"+` |Memory
+limit for the output-receiver deployment.
+
+|permissions_service.replicas |int |`+1+` |Number of replicas to deploy
+for the permissions-service deployment.
+
+|permissions_service.resources.limits.cpu |string |`+"1000m"+` |CPU
+limit for the permissions-service deployment.
+
+|permissions_service.resources.limits.memory |string |`+"1Gi"+` |Memory
+limit for the permissions-service deployment.
+
+|policy_service.replicas |int |`+1+` |Number of replicas to deploy for
+the policy-service deployment.
+
+|policy_service.resources.limits.cpu |string |`+"200m"+` |CPU limit for
+the policy-service deployment.
+
+|policy_service.resources.limits.memory |string |`+"128Mi"+` |Memory
+limit for the policy-service deployment.
+
+|policy_service_internal.replicas |int |`+1+` |Number of replicas to
+deploy for the policy-service-internal deployment.
+
+|policy_service_internal.resources.limits.cpu |string |`+"200m"+` |CPU
+limit for the policy-service-internal deployment.
+
+|policy_service_internal.resources.limits.memory |string |`+"128Mi"+`
+|Memory limit for the policy-service-internal deployment.
+
+|postgresql.auth.existingSecret |string |`+""+` |
+
+|postgresql.auth.password |string |`+""+` |Use only when
+postgresql.internal is false, this is the password of your externalized
+postgres user Ignored if `+auth.existingSecret+` with key `+password+`
+is provided
+
+|postgresql.auth.postgresPassword |string |`+""+` |Password for the
+"`postgres`" admin user on the internal postgres instance. Use only when
+postgresql.internal is true. Ignored if `+auth.existingSecret+` with key
+`+postgres-password+` is provided.
+
+|postgresql.auth.username |string |`+""+` |Use only when
+postgresql.internal is false, then this is the username used to connect
+with your externalized postgres instance
+
+|postgresql.fullnameOverride |string |`+"postgresql"+` |
+
+|postgresql.image.pullSecrets[0] |string |`+"regcred"+` |
+
+|postgresql.image.registry |string |`+"cciserver.azurecr.io"+` |
+
+|postgresql.image.repository |string |`+"server-postgres"+` |
+
+|postgresql.image.tag |string |`+"12.16.37-7629bfd"+` |
+
+|postgresql.internal |bool |`+true+` |
+
+|postgresql.postgresqlHost |string |`+"postgresql"+` |
+
+|postgresql.postgresqlPort |int |`+5432+` |
+
+|postgresql.primary.extendedConfiguration |string
+|`+"max_connections = 500\nshared_buffers = 300MB\n"+` |
+
+|postgresql.primary.labels.app |string |`+"postgres"+` |
+
+|postgresql.primary.labels.layer |string |`+"data"+` |
+
+|postgresql.primary.persistence.existingClaim |string |`+""+` |
+
+|postgresql.primary.persistence.size |string |`+"8Gi"+` |
+
+|postgresql.primary.podAnnotations.”backup.velero.io/backup-volumes”
+|string |`+"data"+` |
+
+|postgresql.primary.podLabels.app |string |`+"postgres"+` |
+
+|postgresql.primary.podLabels.layer |string |`+"data"+` |
+
+|postgresql.readReplicas.labels.app |string |`+"postgres"+` |
+
+|postgresql.readReplicas.labels.layer |string |`+"data"+` |
+
+|postgresql.readReplicas.podLabels.app |string |`+"postgres"+` |
+
+|postgresql.readReplicas.podLabels.layer |string |`+"data"+` |
+
+|proxy.enabled |bool |`+false+` |If false, all proxy settings are
+ignored
+
+|proxy.http |object
+|`+{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}+`
+|Proxy for HTTP requests
+
+|proxy.https |object
+|`+{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}+`
+|Proxy for HTTPS requests
+
+|proxy.no_proxy |list |`+[]+` |List of hostnames, IP CIDR blocks exempt
+from proxying. Loopback and intra-service traffic is never proxied.
+
+|pusher.key |string |`+"circle"+` |
+
+|rabbitmq.auth.erlangCookie |string |`+""+` |
+
+|rabbitmq.auth.existingErlangSecret |string |`+""+` |
+
+|rabbitmq.auth.existingPasswordSecret |string |`+""+` |
+
+|rabbitmq.auth.password |string |`+""+` |
+
+|rabbitmq.auth.username |string |`+"circle"+` |
+
+|rabbitmq.fullnameOverride |string |`+"rabbitmq"+` |
+
+|rabbitmq.host |string |`+"rabbitmq"+` |When `+internal: true+`, this
+value is '`rabbitmq`' else host of external rabbitmq instance
+
+|rabbitmq.image.tag |string |`+"3.11.16-debian-11-r0"+` |
+
+|rabbitmq.internal |bool |`+true+` |Disables this charts Internal
+RabbitMQ instance
+
+|rabbitmq.management_gui_port |int |`+15672+` |When `+internal: true+`,
+this value is '`15672`' else port of external rabbitmq instance
+
+|rabbitmq.podAnnotations.”backup.velero.io/backup-volumes” |string
+|`+"data"+` |
+
+|rabbitmq.podLabels.app |string |`+"rabbitmq"+` |
+
+|rabbitmq.podLabels.layer |string |`+"data"+` |
+
+|rabbitmq.port |int |`+5672+` |When `+internal: true+`, this value is
+'`5672`' else port of external rabbitmq instance
+
+|rabbitmq.replicaCount |int |`+1+` |
+
+|rabbitmq.statefulsetLabels.app |string |`+"rabbitmq"+` |
+
+|rabbitmq.statefulsetLabels.layer |string |`+"data"+` |
+
+|redis.cluster.enabled |bool |`+true+` |
+
+|redis.cluster.slaveCount |int |`+1+` |
+
+|redis.fullnameOverride |string |`+"redis"+` |
+
+|redis.image.tag |string |`+"6.2.1-debian-10-r13"+` |
+
+|redis.master.extraEnvVars[0].name |string |`+"REDIS_EXTRA_FLAGS"+` |
+
+|redis.master.extraEnvVars[0].value |string |`+"--databases 30"+` |
+
+|redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
+follow this guide:
+https://circleci.com/docs/server/latest/operator/expanding-internal-database-volumes
+
+|redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
+|`+"redis-data"+` |
+
+|redis.podLabels.app |string |`+"redis"+` |
+
+|redis.podLabels.layer |string |`+"data"+` |
+
+|redis.slave.extraEnvVars[0].name |string |`+"REDIS_EXTRA_FLAGS"+` |
+
+|redis.slave.extraEnvVars[0].value |string |`+"--databases 30"+` |
+
+|redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
+follow this guide:
+https://circleci.com/docs/server/latest/operator/expanding-internal-database-volumes
+
+|redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
+|`+"redis-data"+` |
+
+|redis.statefulset.labels.app |string |`+"redis"+` |
+
+|redis.statefulset.labels.layer |string |`+"data"+` |
+
+|redis.usePassword |bool |`+false+` |
+
+|runner_admin.cleaner.replicas |int |`+1+` |Number of replicas to deploy
+for the radm-cleaner deployment.
+
+|runner_admin.cleaner.resources.limits.cpu |string |`+"1"+` |CPU limit
+for the radm-cleaner deployment
+
+|runner_admin.cleaner.resources.limits.memory |string |`+"512M"+`
+|Memory limit for the radm-cleaner deployment
+
+|runner_admin.cleaner.resources.requests.cpu |string |`+"1"+` |CPU
+request for the radm-cleaner deployment
+
+|runner_admin.cleaner.resources.requests.memory |string |`+"512M"+`
+|Memory request for the radm-cleaner deployment
+
+|runner_admin.external.launch_agent_base_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"+`
+|Location of the launch-agent binaries. When using an air-gapped
+environment, the launch-agent binaries will need to be hosted within the
+air gap and this value updated.
+
+|runner_admin.external.replicas |int |`+1+` |Number of replicas to
+deploy for the radm-external deployment.
+
+|runner_admin.external.resources.limits.cpu |string |`+"1"+` |CPU limit
+for the radm-external deployment
+
+|runner_admin.external.resources.limits.memory |string |`+"512M"+`
+|Memory limit for the radm-external deployment
+
+|runner_admin.external.resources.requests.cpu |string |`+"1"+` |CPU
+request for the radm-external deployment
+
+|runner_admin.external.resources.requests.memory |string |`+"512M"+`
+|Memory request for the radm-external deployment
+
+|runner_admin.internal.replicas |int |`+1+` |Number of replicas to
+deploy for the radm-internal deployment.
+
+|runner_admin.internal.resources.limits.cpu |string |`+"1"+` |CPU limit
+for the radm-internal deployment
+
+|runner_admin.internal.resources.limits.memory |string |`+"512M"+`
+|Memory limit for the radm-internal deployment
+
+|runner_admin.internal.resources.requests.cpu |string |`+"1"+` |CPU
+request for the radm-internal deployment
+
+|runner_admin.internal.resources.requests.memory |string |`+"512M"+`
+|Memory request for the radm-internal deployment
+
+|schedulerer.replicas |int |`+1+` |Number of replicas to deploy for the
+schedulerer deployment.
+
+|serveUnsafeArtifacts |bool |`+false+` |⚠️ WARNING: Changing this to
+true will serve HTML artifacts instead of downloading them. This can
+allow specially-crafted artifacts to gain control of users’ CircleCI
+accounts.
+
+|smtp |object
+|`+{"host":"smtp.example.com","notificationUser":"builds@circleci.com","password":"secret-smtp-passphrase","port":25,"tls":true,"user":"notification@example.com"}+`
+|Email notification settings
+
+|smtp.port |int |`+25+` |Outbound connections on port 25 are blocked on
+most cloud providers. Should you select this default port, be aware that
+your notifications may fail to send.
+
+|smtp.tls |bool |`+true+` |StartTLS is used to encrypt mail by default.
+Only disable this if you can otherwise guarantee the confidentiality of
+traffic.
+
+|soketi.image.repository |string |`+"quay.io/soketi/soketi"+` |The
+Soketi image repository for NGINX. Note this repository is not managed
+by CircleCI.
+
+|soketi.image.tag |string |`+"1.6-16-distroless"+` |Soketi has been
+tested against this specific version tag; edit this value at your own
+risk.
+
+|soketi.replicas |int |`+1+` |Number of replicas to deploy for the
+soketi deployment.
+
+|step.internal.replicas |int |`+1+` |Number of replicas to deploy for
+the step-internal deployment.
+
+|step.internal.resources.limits.cpu |int |`+2+` |CPU limit for the
+step-internal deployment
+
+|step.internal.resources.limits.memory |string |`+"512Mi"+` |Memory
+limit for the step-internal deployment
+
+|step.receiver.replicas |int |`+1+` |Number of replicas to deploy for
+the step-receiver deployment.
+
+|step.receiver.resources.limits.cpu |int |`+2+` |CPU limit for the
+step-receiver deployment
+
+|step.receiver.resources.limits.memory |string |`+"512Mi"+` |Memory
+limit for the step-receiver deployment
+
+|telegraf.args[0] |string |`+"--config-directory"+` |
+
+|telegraf.args[1] |string |`+"/etc/telegraf/telegraf.d"+` |
+
+|telegraf.args[2] |string |`+"--watch-config"+` |
+
+|telegraf.args[3] |string |`+"poll"+` |
+
+|telegraf.config.agent.flush_interval |string |`+"60s"+` |
+
+|telegraf.config.agent.interval |string |`+"30s"+` |
+
+|telegraf.config.agent.omit_hostname |bool |`+true+` |
+
+|telegraf.config.custom_config_file |string |`+""+` |
+
+|telegraf.config.inputs[0].statsd.datadog_extensions |bool |`+true+` |
+
+|telegraf.config.inputs[0].statsd.max_ttl |string |`+"12h"+` |
+
+|telegraf.config.inputs[0].statsd.metric_separator |string |`+"."+` |
+
+|telegraf.config.inputs[0].statsd.percentile_limit |int |`+1000+` |
+
+|telegraf.config.inputs[0].statsd.percentiles[0] |int |`+50+` |
+
+|telegraf.config.inputs[0].statsd.percentiles[1] |int |`+95+` |
+
+|telegraf.config.inputs[0].statsd.percentiles[2] |int |`+99+` |
+
+|telegraf.config.inputs[0].statsd.service_address |string |`+":8125"+` |
+
+|telegraf.config.outputs[0].file.files[0] |string |`+"stdout"+` |
+
+|telegraf.fullnameOverride |string |`+"telegraf"+` |
+
+|telegraf.mountPoints[0].mountPath |string
+|`+"/etc/telegraf/telegraf.d"+` |
+
+|telegraf.mountPoints[0].name |string |`+"telegraf-config"+` |
+
+|telegraf.resources.limits.memory |string |`+"512Mi"+` |Memory limit for
+the telegraf deployment.
+
+|telegraf.resources.requests.cpu |string |`+"200m"+` |CPU request for
+the telegraf deployment.
+
+|telegraf.resources.requests.memory |string |`+"256Mi"+` |Memory request
+for the telegraf deployment.
+
+|telegraf.volumes[0].configMap.name |string |`+"telegraf-config"+` |
+
+|telegraf.volumes[0].name |string |`+"telegraf-config"+` |
+
+|tink |object |`+{"enabled":false,"keyset":""}+` |Tink Configuration
++
+ Tink is given precedence over vault. If tink.enabled is true,
+vault will not be deployed. Tink or vault must be set once at install
+and cannot be changed. +
+ *Option 1:* Leave this blank, and create
+the secret yourself. CircleCI will assume it exists. +
+ The secret
+must be named '`tink`' and have the key; keyset. *Option 2:* Set the
+values tink.keyset here and CircleCI will create the secret
+automatically. +
+ Generate a keyset via:
+`+tinkey create-keyset --key-template XCHACHA20_POLY1305+`
+
+|tink.enabled |bool |`+false+` |When enabled, Tink will be used instead
+of Vault for contexts encryption.
+
+|tink.keyset |string |`+""+` |The keyset generated the Tink CLI to be
+used for contexts encryption.
+
+|tls.certificate |string |`+""+` |Base64 encoded certificate must be
+provided if kong.acme.enabled is false
+
+|tls.certificates |list |`+[]+` |List of base64’d certificates that will
+be imported into the system
+
+|tls.import |list |`+[]+` |List of host:port from which to import
+certificates
+
+|tls.privateKey |string |`+""+` |Base64 encoded private key must be
+provided if kong.acme.enabled is false
+
+|vault |object
+|`+{"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"token":"","transitPath":"transit","url":"http://vault:8200"}+`
+|External Services configuration
+
+|vault.internal |bool |`+true+` |Disables this charts Internal Vault
+instance
+
+|vault.token |string |`+""+` |This token is required when
+`+internal: false+`. +
+ *Option 1:* Leave this blank, and create the
+secret yourself. CircleCI will assume it exists. +
+ The secret must
+be named '`vault`' and have the key; token. +
+ *Option 2:* Set the
+values vault.token here and CircleCI will create the secret
+automatically.
+
+|vault.transitPath |string |`+"transit"+` |When `+internal: true+`, this
+value is used for the vault transit path.
+
+|web_ui.replicas |int |`+1+` |Number of replicas to deploy for the
+web-ui deployment.
+
+|web_ui.resources.limits.memory |string |`+"256Mi"+` |Memory limit
+configuration for the web-ui deployment
+
+|web_ui_404.replicas |int |`+1+` |Number of replicas to deploy for the
+web-ui-404 deployment.
+
+|web_ui_404.resources.limits.memory |string |`+"256Mi"+` |Memory limit
+configuration for the web-ui-404 deployment
+
+|web_ui_authentication.replicas |int |`+1+` |Number of replicas to
+deploy for the web-ui-authentication deployment.
+
+|web_ui_authentication.resources.limits.memory |string |`+"350Mi"+`
+|Memory limit configuration for the web-ui-authentication deployment
+
+|web_ui_insights.replicas |int |`+1+` |Number of replicas to deploy for
+the web-ui-insights deployment.
+
+|web_ui_insights.resources.limits.memory |string |`+"256Mi"+` |Memory
+limit configuration for the web-ui-insights deployment
+
+|web_ui_onboarding.replicas |int |`+1+` |Number of replicas to deploy
+for the web-ui-onboarding deployment.
+
+|web_ui_onboarding.resources.limits.memory |string |`+"512Mi"+` |Memory
+limit configuration for the web-ui-onboarding deployment
+
+|web_ui_org_settings.replicas |int |`+1+` |Number of replicas to deploy
+for the web-ui-org-settings deployment.
+
+|web_ui_org_settings.resources.limits.memory |string |`+"256Mi"+`
+|Memory limit configuration for the web-ui-org-settings deployment.
+
+|web_ui_project_settings.replicas |int |`+1+` |Number of replicas to
+deploy for the web-ui-project-settings deployment.
+
+|web_ui_project_settings.resources.limits.memory |string |`+"256Mi"+`
+|Memory limit configuration for the web-ui-project-settings deployment.
+
+|web_ui_runners.replicas |int |`+1+` |Number of replicas to deploy for
+the web-ui-project-settings deployment.
+
+|web_ui_runners.resources.limits.memory |string |`+"512Mi"+` |Memory
+limit configuration for the web-ui-project-settings deployment.
+
+|web_ui_server_admin.replicas |int |`+1+` |Number of replicas to deploy
+for the web-ui-server-admin deployment.
+
+|web_ui_server_admin.resources.limits.memory |string |`+"256Mi"+`
+|Memory limit configuration for the web-ui-server-admin deployment.
+
+|web_ui_user_settings.replicas |int |`+1+` |Number of replicas to deploy
+for the web-ui-user-settings deployment.
+
+|web_ui_user_settings.resources.limits.memory |string |`+"256Mi"+`
+|Memory limit configuration for the user-settings deployment.
+
+|webhook_service.isEnabled |bool |`+true+` |
+
+|webhook_service.replicas |int |`+1+` |Number of replicas to deploy for
+the webhook-service deployment.
+
+|webhook_service.resources.limits.cpu |int |`+2+` |CPU limit
+configuration for the webhook-service deployment.
+
+|webhook_service.resources.limits.memory |string |`+"3G"+` |Memory limit
+configuration for the webhook-service deployment.
+
+|workflows_conductor_event_consumer.replicas |int |`+1+` |Number of
+replicas to deploy for the workflows-conductor-event-consumer
+deployment.
+
+|workflows_conductor_event_consumer.resources.limits.cpu |string
+|`+"6000m"+` |CPU limit configuration for the
+workflows-conductor-event-consumer deployment.
+
+|workflows_conductor_event_consumer.resources.limits.memory |string
+|`+"8Gi"+` |Memory limit configuration for the
+workflows-conductor-event-consumer deployment.
+
+|workflows_conductor_grpc.replicas |int |`+1+` |Number of replicas to
+deploy for the workflows-conductor-grpc deployment.
+
+|workflows_conductor_grpc.resources.limits.cpu |string |`+"4000m"+` |CPU
+limit configuration for the workflows-conductor-grpc deployment.
+
+|workflows_conductor_grpc.resources.limits.memory |string |`+"8Gi"+`
+|Memory limit configuration for the workflows-conductor-grpc deployment.
+|===
+pass:[<!-- vale on -->]
