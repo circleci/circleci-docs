@@ -14,13 +14,13 @@ contentTags:
 ====
 **GitHub authorization with CircleCI is changing**. Starting August 2023 when you authorize your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app, select **Dashboard** from the sidebar, and inspect the URL in your browser:
 
-* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/pipelines/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
 
 For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
 ====
 
-If your CircleCI account is authenticated through the **GitHub App**, the content on this page is for you.
+If your CircleCI organization is authenticated with GitHub through the **GitHub App**, the content on this page is for you.
 
 This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
 
@@ -115,7 +115,7 @@ CircleCI users have different abilities depending on assigned roles in a particu
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-A subset of built-in environment variables are not available in GitHub-based projects for accounts authenticated through the GitHub App. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
+A subset of built-in environment variables are not available in GitHub-based projects authorized through the GitHub App. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
 [#Moving-from-github-oauth-app-to-github-app]
 == Moving from the GitHub OAuth app integration to the GitHub App integration

@@ -54,7 +54,7 @@ TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI 
 [#github-app-or-gitlab]
 == GitHub App, GitLab, Bitbucket Data Center
 
-For accounts authorized through the GitHub App, GitLab or Bitbucket Data Center, no changes are required when organizations or repositories are renamed in the connected VCS (version control system). CircleCI organizations and projects are _standalone_ entities, not directly tied to code repository or org names.
+For CircleCI organizations integrated through the GitHub App, GitLab or Bitbucket Data Center, no changes are required when organizations or repositories are renamed in the connected VCS (version control system). CircleCI organizations and projects are _standalone_ entities, not directly tied to code repository or org names.
 
 You can rename your organization from the CircleCI web app:
 
