@@ -46,6 +46,7 @@ AWS Certificate Manager
 Azure
 backoff
 [Bb]anlist?
+Bash
 Behat
 Bitbucket
 Bitbucket Cloud
@@ -69,7 +70,7 @@ classname?
 classpath
 classpath?
 CLI
-Clojure
+[Cc]lojure
 [Cc]loud
 Cloud Foundry
 CocoaPods
@@ -82,6 +83,7 @@ ConfigMap
 Coreutils
 CPUs
 CRD
+CTest
 Cucumber
 CVE
 Cypress
@@ -105,6 +107,7 @@ Elixir
 endraw
 Envoy Gateway
 EOL
+ESLint
 [Ee]vals
 [Ee]xfiltration
 [Ff]alsy
@@ -115,6 +118,7 @@ Fastlane Match
 filename
 framebuffer
 Free Plan
+[Ff]ormatters?
 Gbps
 GCP
 geckodriver
@@ -146,12 +150,13 @@ invocated
 IP
 Java
 JavaScript
-Jest
+[Jj]est
 Jira
 jq\b
-JUnit
+[JU|ju]nit
 JVM
 kaniko
+[Kk]aocha
 keyset
 keystore
 Knapsack Pro
@@ -180,6 +185,8 @@ nginx
 [Nn]ode
 Nomad
 npm
+[NU|nu]nit
+\bnyc\b
 OAuth
 OIDC
 OOM
@@ -204,6 +211,7 @@ preallocate
 Pusher
 PVC
 Python
+pytest
 RAM
 RDoc
 React Native
@@ -262,6 +270,7 @@ TLS
 [Tt]olerations
 [Tt]oolchains?
 [Tt]ruthy
+trx2junit
 TypeScript
 Ubuntu
 UI
@@ -269,6 +278,7 @@ UIDs?
 [Uu]ncheck
 [Uu]ndeploy[ed]?
 unencrypted
+unittest
 [Uu]nfollow[ing]?
 unformatted
 untrusted
@@ -278,8 +288,11 @@ UUID
 UUIDs?
 VCS
 Velero
+Viget
+[Vv]irtualized
 VMs?
 VPC
+Visual Studio
 VS Code
 WebDriver
 Webtrigger
@@ -290,7 +303,7 @@ x86
 X Server
 Xcode
 XCTest
-XML
+[XML|xml]
 XQuartz
 Xvfb
 YAML
