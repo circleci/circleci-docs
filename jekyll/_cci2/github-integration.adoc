@@ -30,9 +30,9 @@ When you add a project to CircleCI, the following settings are added to the repo
 - A deploy key that is used to check out your project from GitHub.
 - A service hook (or "push hook") that is used to notify CircleCI when you push to GitHub.
 
-CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
+CircleCI builds push hooks by default. Builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
 
-There are some additional, less common cases where CircleCI uses hooks, as follows:
+Some additional, less common cases where CircleCI uses hooks are as follows:
 
 - CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
 - If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
@@ -103,7 +103,7 @@ When disconnecting a VCS connection using the method described here, any existin
 . Navigate to **User Settings** by clicking on the user icon on the bottom of sidebar, then select **Account Integrations**
 . You will see a list of connections along with the GitHub organizations they are associated with. Select btn:[Disconnect] for the GitHub connection you wish to disconnect.
 
-Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI, navigate to user settings (icon at the bottom of the web app sidebar), and under **Account Integrations** click btn:[Connect] next to GitHub.
+Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI, navigate to user settings (icon at the bottom of the web app sidebar), and under **Account Integrations** select btn:[Connect] next to GitHub.
 
 [#deploy-keys-and-user-keys]
 == Deploy keys and user keys
@@ -137,9 +137,9 @@ In this example, the GitHub repository is `https://github.com/you/test-repo`, an
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then click **Add key**.
+. Go to `https://github.com/you/test-repo/settings/keys`, and select **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then select **Add key**.
 
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "hostname" field, enter `github.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "hostname" field, enter `github.com` and add the private key you created in step 1. Then select **Add SSH Key**.
 
 . In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 +
@@ -210,7 +210,7 @@ See the xref:config-intro#[Configuration tutorial] page for a configuration walk
 
 If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository, while a GitHub user key has access to _all_ of your GitHub repositories.
 
-Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with GitHub**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
+Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and select **Authorize with GitHub**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
 
 [#best-practice-for-keys]
 == Best practices for keys
@@ -265,13 +265,13 @@ NOTE: To perform these steps, the machine user must have admin access. When you 
 
 . Log in to GitHub as the machine user.
 
-. Log in to the link:https://circleci.com/login[CircleCI web app]. When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
+. Log in to the link:https://circleci.com/login[CircleCI web app]. When GitHub prompts you to authorize CircleCI, select **Authorize application**.
 
 . From the **Projects** page, follow all projects you want the machine user to have access to.
 
-. On the **Project Settings > SSH keys** page, under the **User Key** section, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
+. On the **Project Settings > SSH keys** page, under the **User Key** section, select **Authorize With GitHub**. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
-. After authorizing, navigate to the **SSH keys** page again, go to the **User Key** section, and click the **Add User Key** button, then the **Confirm User** button.
+. After authorizing, navigate to the **SSH keys** page again, go to the **User Key** section, and select **Add User Key**, then **Confirm User**.
 
 Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
 
@@ -282,7 +282,7 @@ GitHub recently added the ability to approve third party application access on a
 
 Now OAuth tokens will, by default, _not_ have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
 
-If you are an owner or admin, you can enable third party access restrictions by visiting the link:https://github.com/settings/organizations[Organization settings] page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
+If you are an owner or admin, you can enable third party access restrictions by visiting the link:https://github.com/settings/organizations[Organization settings] page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can select the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
 
 You can read more about these settings and how to configure them in the link:https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub documentation].
 
@@ -296,8 +296,8 @@ This section describes how to re-enable CircleCI after enabling third-party appl
 [#non-admin-member-workflow]
 ==== Non-admin member workflow
 
-- If you are member of a GitHub organization (not an admin), click the **Request** button and a message will be sent to an admin of your organization. An admin will have to approve the request.
-- Click **Request approval from owners** to send an email to your organization’s owners.
+- If you are member of a GitHub organization (not an admin), select **Request** and a message will be sent to an admin of your organization. An admin will have to approve the request.
+- Select **Request approval from owners** to send an email to your organization’s owners.
 - While waiting for approval, you will see **Access request pending** next to your organization’s name.
 - If CircleCI has been approved by your organization, you will see a checkmark next to your organization’s name.
 
