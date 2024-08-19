@@ -1,0 +1,91 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Version control system integration overview
+:description: An overview guide to the version control systems you can integrate with CircleCI.
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+When you create a CircleCI project, you are prompted to select a code repository to connect. The code in this repo will be checked out when your pipelines run. CircleCI supports several version control systems (VCS) for your code. The guide gives an overview of the features available to each VCS integration.
+
+[NOTE]
+====
+GitHub can be integrated into your CircleCI org in one of two ways, via the GitHub App or GitHub OAuth. Both are described below. If you would like to quickly see which integration type you have, navigate to CircleCI web app, select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
+
+* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
+====
+
+== Which version control systems are supported?
+
+When creating CircleCI projects you can connect to code repositories hosted on the following VCS providers:
+
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+
+* GitHub
+* GitLab
+* GitLab self-managed
+* Bitbucket
+* Bitbucket Data Center
+
+== Feature support per VCS
+
+[.table.table-striped]
+[cols=7*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
+
+| link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+
+| Reduced permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:webhooks#custom-webhooks[Custom _inbound_ webhook triggers]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:set-up-multiple-configuration-files-for-a-project#[Set up multiple configuration files for a project]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:scheduled-pipelines#[Scheduled pipelines]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+|===

@@ -624,6 +624,8 @@ en:
             link: oss
       - name: VCS integration
         children:
+          - name: VCS integration overview
+            link: version-control-system-integration-overview
           - name: GitHub App integration
             link: github-apps-integration
           - name: GitLab integration
