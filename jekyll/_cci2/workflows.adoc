@@ -465,7 +465,7 @@ For a full example of workflows, see the link:https://github.com/CircleCI-Public
 
 NOTE: Webhook payloads are capped at 25 MB and for some events a maximum of 3 tags. If you push several tags at once, CircleCI may not receive them all.
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters using regular expressinos. Both lightweight and annotated tags are supported.
+CircleCI does not run workflows for tags unless you explicitly specify tag filters using regular expressions. Both lightweight and annotated tags are supported.
 
 If you have configured a job to run on a git tag you must also specify tag filters for any dependent jobs. Use <<using-regular-expressions-to-filter-tags-and-branches,regular expressions>> to specify tag filters for a job.
 
