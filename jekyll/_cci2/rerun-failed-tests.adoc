@@ -720,3 +720,7 @@ circleci tests glob ".cypress/**/*.spec.js" | circleci tests run --command="xarg
 ----
 
 ---
+
+**Question:** Can I use `timings-type=testname`?
+
+**Answer:** In order to use `timings-type=testname`, the test runner/framework must be able to take in as *input* a list of *test names* (as opposed to *classnames* or *file names*). Most test frameworks (including RSpec) do not accept as input a list of test names.  If the test framework accepts as input a list of test names, pipe the test names into `circleci tests run` instead of piping in test file/class names via `circleci tests glob`.  This will enable CircleCI to find the historical test data for individual test names and split the test names into logical groups. 
