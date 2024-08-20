@@ -236,11 +236,6 @@ Open source plans are not currently available to Bitbucket Data Center customers
 
 xref:insights-tests#[Test Insights] is currently not supported for Bitbucket Data Center integrations.
 
-[#badges]
-=== Insights snapshot badge
-
-The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported for Bitbucket Data Center projects.
-
 [#circleci-server]
 === CircleCI self-hosted server product
 
