@@ -34,12 +34,14 @@ If you want to use the [JFrog CLI](https://docs.jfrog-applications.jfrog.io/jfro
 ### 1. Add JFrog to your configuration
 {: #add-jfrog-to-your-configuration }
 
-Add the following to your `.circleci/config.yml`:
+There are a number of methods available for [installing JFrog](https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli/install#installation).  Please refer to their documentation for the method best suited for your pipeline.
+
+For example if using Node, add the following to your `.circleci/config.yml`:
 
 ```yml
 - run:
     name: Install jFrog CLI
-    command: curl -fL https://getcli.jfrog.io/v2-jf | sh
+    command: npm install -g jfrog-cli-v2-jf
 
 ```
 ### 2. Configure credentials
