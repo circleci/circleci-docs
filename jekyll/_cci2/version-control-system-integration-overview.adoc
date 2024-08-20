@@ -32,6 +32,8 @@ When creating CircleCI projects you can connect to code repositories hosted on t
 * Bitbucket
 * Bitbucket Data Center
 
+CircleCI server supports GitHub and GitHub enterprise.
+
 == Feature support per VCS
 
 [.table.table-striped]
@@ -87,5 +89,105 @@ When creating CircleCI projects you can connect to code repositories hosted on t
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
+
+| xref:artifacts#[Artifact storage]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:openid-connect-tokens#[OpenID Connect tokens]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:vs-code-extension-overview#test-run-your-config-from-vs-code[Test run config from VS Code]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:webhooks#outbound-webhooks[Outbound webhooks]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:docker-layer-caching#[Docker layer caching]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:config-policy-management-overview#[Config policies]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:audit-logs#[Audit logs]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:ssh-access-jobs#[Debug with SSH]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:oss#[OSS support]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:skip-build#auto-cancel[Auto-cancel redundant workflows]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:oss#only-build-pull-requests[Only build pull requests]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| Trigger pipelines via API
+
+| Trigger pipelines via web app
+
+| Build pull requests from forked repositories
+
+| Pass secrets to builds from forked pull requests
+
+| Test insights
+
+| In-app config viewing and editing
 
 |===
