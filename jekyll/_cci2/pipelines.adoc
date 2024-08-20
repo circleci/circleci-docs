@@ -173,10 +173,7 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#troubleshooting]
 == Troubleshooting
 
-If you see an error message that says `config file .circleci/sample-filename.yml could not be located on branch sample-branch-name in repository sample-repo-name`, check the following to remediate the issue:
-
-1. Ensure that there is a CircleCI configuration file in the repository on the branch that uses the filename specified in the error message. If there is not one present, add a CircleCI configuration file.
-2. If there is a config file present, navigate to Project Settings > Pipelines in the CircleCI web app for the project where you are seeing this error message. Click the pencil icon for each pipeline listed and ensure that the "Config File Path" field matches the filepath of the config file that is in your repository.  If you changed the name of the config file in your repository, the reference to that filepath must also be changed in the Project Settings > Pipelines section for any pipeline that uses that configuration file.
+include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
 
 [#next-steps]
 == Next steps
