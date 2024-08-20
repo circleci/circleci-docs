@@ -154,14 +154,6 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 
-| xref:oss#[OSS support]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-
 | xref:skip-build#auto-cancel[Auto-cancel redundant workflows]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
@@ -169,6 +161,38 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
+
+| link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:insights-tests#[Test insights]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:oss#[OSS support]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
 
 | xref:oss#only-build-pull-requests[Only build pull requests]
 | icon:thumbs-down[role="circle-red"]
@@ -178,16 +202,28 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 
-| Trigger pipelines via API
+| xref:oss#build-pull-requests-from-forked-repositories[Build pull requests from forked repositories]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
 
-| Trigger pipelines via web app
-
-| Build pull requests from forked repositories
-
-| Pass secrets to builds from forked pull requests
-
-| Test insights
+| xref:oss#pass-secrets-to-builds-from-forked-pull-requests[Pass secrets to builds from forked pull requests]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
 
 | In-app config viewing and editing
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
 
 |===
