@@ -46,4 +46,4 @@ Start with the xref:release/releases-overview#[Releases overview] for more infor
 [#support]
 === Support
 
-Support is available through the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+Support is available through the link:https://discuss.circleci.com/[community forums] and our link:https://support.circleci.com/hc/en-us[support portal].
