@@ -1,0 +1,8 @@
+---
+message: "Don't use 'here' as the content of a link."
+extends: existence
+ignorecase: true
+scope: raw
+level: error
+raw:
+  - '\[here\]\(.+\)'

@@ -68,7 +68,7 @@ Use the [the CircleCI local CLI]({{site.baseurl}}/local-cli) instead of `curl` c
 
 If writing a shell script that uses the CircleCI CLI, remember that in bash you can avoid exposing secrets stored in environment variables or text by using the `<<<` construct, which does not spawn a new process while piping a value:
 ```bash
-`circleci context store-secret <vcs-type> <org-name> <context-name> <secret name> <<< "$MY_SECRET"`
+`circleci context store-secret --org-id <org-id> <context-name> <secret-name> <<< "$MY_SECRET"`
 ```
 This is more reliable than using `echo` or `printf`, which may or may not be shell built-ins and could potentially spawn a process.
 

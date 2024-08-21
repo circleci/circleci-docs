@@ -14,7 +14,7 @@ document-type:
 :icons: font
 :experimental:
 
-In this how-to guide, you will learn how to to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
+In this how-to guide, you will learn how to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
 
 [#introduction]
 == Introduction

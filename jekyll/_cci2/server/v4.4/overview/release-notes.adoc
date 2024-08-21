@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.4
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.4 release notes
 :page-layout: classic-docs
@@ -17,25 +18,63 @@ contentTags:
 
 The v4.4 release introduces the following feature enhancements:
 
-* xref:../../../openid-connect-tokens#[OpenID connect tokens]: CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can be configured to use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
+* xref:../../../openid-connect-tokens#[OpenID Connect tokens]: CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can be configured to use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
 * link:https://circleci.com/changelog/machine-runner-3-0-released/[Machine runner 3.0]: Improved setup, usability and maintainability.
 * xref:../../../container-runner-installation#enable-rerun-job-with-ssh[Rerun job with SSH option for container runners], in open preview.
 
 For a full list of fixes, changes, new features and known issues, follow the links to individual change log posts below.
 
-[#migration]
-== Migrate
-
-NOTE: The migration process for v3.x to v4.x requires that you install v4.0.x first before moving to subsequent releases. For existing customers interested in migrating from v3.x to v4.x, contact your customer success manager.
-
-Find information about migration in the following guides:
-
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
-* xref:../../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
-
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.4 guide].
+
+[#release-4-4-6]
+== Release 4.4.6
+
+[#changelog-4-4-6]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-6/[changelog].
+
+[#release-4-4-5]
+== Release 4.4.5
+
+[#changelog-4-4-5]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-5/[changelog].
+
+[#release-4-4-4]
+== Release 4.4.4
+
+[#changelog-4-4-4]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-4/[changelog].
+
+[#release-4-4-3]
+== Release 4.4.3
+
+[#changelog-4-4-3]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-4-3/[changelog].
+
+[#release-4-4-2]
+== Release 4.4.2
+
+[#changelog-4-4-2]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-4-4-2/[changelog].
+
+[#release-4-4-1]
+== Release 4.4.1
+
+[#changelog-4-4-1]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-1/[changelog].
 
 [#release-4-4-0]
 == Release 4.4.0
@@ -43,4 +82,4 @@ For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4
 [#changelog-4-4-0]
 === Changelog
 
-For full details of this release see the link:https://circleci.com/server/changelog/#server-release-4-4-0[changelog].
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-4-0[changelog].

@@ -3,19 +3,13 @@
 |===
 | Class | vCPUs | RAM | Cloud | Server
 
-| macos.x86.medium.gen2*
-| 4 @ 3.2 GHz
-| 8GB
-| icon:check[]
-| icon:times[]
-
-| macos.m1.medium.gen1
+| `macos.m1.medium.gen1`
 | 4 @ 3.2 GHz
 | 6GB
 | icon:check[]
 | icon:times[]
 
-| macos.m1.large.gen1
+| `macos.m1.large.gen1`
 | 8 @ 3.2 GHz
 | 12GB
 | icon:check[]
@@ -24,9 +18,9 @@
 
 [WARNING]
 ====
-*We are deprecating support for all Intel-based macOS resources.*
+*We have deprecated support for all Intel-based macOS resources.*
 
-The `macos.x86.medium.gen2` resource class is being deprecated on June 28, 2024. Xcode v15.1 is the latest version that will be supported by this macOS resource.
+The `macos.x86.medium.gen2` resource class was deprecated on June 28, 2024.
 
 See our link:https://discuss.circleci.com/t/macos-intel-support-deprecation-in-january-2024/48718[announcement] for more details.
 ====

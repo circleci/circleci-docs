@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.3+
 ---
 = Container runner installation (Kubernetes)
 :page-layout: classic-docs
@@ -79,7 +80,7 @@ helm install container-agent container-agent/container-agent -n circleci -f valu
 
 
 [#enable-rerun-job-with-ssh]
-== 3. Enable Rerun job with SSH (optional) - Open preview
+== 3. Enable rerun job with SSH (optional) - Open preview
 
 The ability to rerun a job with SSH is in open preview for CircleCI container runner. To enable this optional feature, follow the instructions below after reading through the considerations. Rerunning jobs with SSH allows you to troubleshoot problems through inspecting log files, running processes, and directory paths.
 
@@ -124,13 +125,13 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 
 === 2. Enable the Rerun job with SSH feature
 
-. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = "true"` parameter to the container runner configuration:
+. Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = true` parameter to the container runner configuration:
 +
 [source,yaml]
 ----
 agent:
   ssh:
-    enabled: "true"
+    enabled: true
 ----
 +
 For a full list of SSH configuration options, refer to the link:https://github.com/circleci-public/container-runner-helm-chart#values[Helm chart values].

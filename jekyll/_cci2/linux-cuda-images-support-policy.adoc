@@ -27,7 +27,7 @@ The CircleCI CUDA images are based on our Linux VM machine images for the purpos
 
 We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release.
 
-Please note that this is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
+This is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
 
 [#tagging]
 == Tagging
@@ -52,7 +52,7 @@ In most cases, due to the ephemeral and isolated nature of the environment, it i
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
 
-Please file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the CircleCI Linux CUDA images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+File a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the CircleCI Linux CUDA images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
 
 [#image-lifespan-eol]
 == Image lifespan / EOL

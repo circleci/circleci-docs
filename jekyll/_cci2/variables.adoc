@@ -17,7 +17,7 @@ This page is a reference for all built-in values available for use in your Circl
 [#built-in-environment-variables]
 == Built-in environment variables
 
-The following built-in environment variables are available for CircleCI projects. A few environment variables are available for GitHub and Bitbucket projects that have been deprecated for GitLab SaaS support. If you must continue to use those as environment variables in your GitLab pipelines, refer to the workaround described after the list below.
+The following built-in environment variables are available for CircleCI projects. A few environment variables are available for GitHub OAuth and Bitbucket Cloud projects that have been deprecated for GitLab, GitHub App and Bitbucket Data Center support. If you must continue to use those as environment variables in your GitLab pipelines, refer to the workaround described after the list below.
 
 Environment variables are scoped at the job level. They can be used within the context of a job but do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
 

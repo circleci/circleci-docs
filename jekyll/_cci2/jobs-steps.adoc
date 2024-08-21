@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Jobs and Steps
+= Jobs and steps
 :page-description: Description of CircleCI jobs and steps.
 :experimental:
 :icons: font
@@ -141,7 +141,7 @@ workflows:
 ----
 
 [#next-steps]
-== Next Steps
+== Next steps
 
 * Read more about orchestrating jobs in the xref:workflows#[Using Workflows to Schedule Jobs] page.
 * Read more about passing data between jobs in the xref:workspaces#[Using Workspaces to Share Data between Jobs] page.

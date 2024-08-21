@@ -43,7 +43,7 @@ circleci version
 [#create-your-orb]
 == Create your orb
 
-WARNING: Once an orb is created it cannot be deleted. Orbs are link:https://semver.org/[Semver compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+WARNING: Once an orb is created it cannot be deleted. Orbs are link:https://semver.org/[SemVer compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
 
 [#create-a-new-repo]
 === 1. Create a new repository

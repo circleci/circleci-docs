@@ -11,7 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
 CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 

@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.3
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.3 overview
 :page-layout: classic-docs
@@ -226,7 +227,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | `nomad-server`
 | Nomad
-| Responsible for managing nomad clients.
+| Responsible for managing Nomad clients.
 |
 |
 
@@ -342,7 +343,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Local installation
 | Tested
-| See xref:../air-gapped-installation/phase-1-prerequisites#[Air gapped installation] docs
+| See xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped installation] docs
 
 | Azure
 | Untested
@@ -368,5 +369,4 @@ ifndef::pdf[]
 
 * xref:release-notes#[CircleCI server v4.3 release notes]
 * xref:../installation/phase-1-prerequisites#[Server v4.3 Installation Prerequisites]
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]

@@ -11,7 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
@@ -57,6 +57,15 @@ The decision result tracks which rules were included in the making of the decisi
 
 [#use-the-cli-with-config-policies]
 == Use the CLI with config policies
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
 
 Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
 
@@ -273,7 +282,7 @@ hard_fail["use_official_docker_image"]
 [#using-pipeline-metadata]
 === Using pipeline metadata
 
-When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
+When writing policies for CircleCI config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
 
 When a policy is evaluated in the context of a triggered pipeline the following properties will be available on `data.meta`:
 
@@ -369,7 +378,7 @@ Writing policies for CircleCI `version 2.1` configuration introduces some challe
 
 Before executing any pipelines, config `version 2.1` is compiled into config `version 2.0`. This compilation expands all parameters and reusable config blocks (jobs, executors, commands, orbs) into workflows and jobs.
 
-To write highly effective policies, it is essential to reference the _compiled_ version of the config (`input._compiled_`).
+To write highly effective policies, it is essential to reference the _compiled_ version of the config (`input.compiled`).
 
 [#example]
 === Example
@@ -380,7 +389,7 @@ Consider the following example policy and configuration:
 ----
 import future.keywords
 
-policy["name"] = "example_mistake"
+policy_name["example_mistake"]
 
 enable_hard["enforce_not_large_resource"]
 
@@ -406,6 +415,13 @@ executors: # Define reusable executor
 jobs:
   test:
     executor: lg-executor
+    steps:
+      - checkout
+
+workflows:
+  my-workflow:
+    jobs:
+      - test
 ----
 
 In the above example, the policy is bypassed and will **not trigger**. The policy inspects `jobs` and does not find a `resource_class == "large"`.
@@ -421,10 +437,14 @@ version: 2.1
 
 jobs:
   test:
+    docker:
+      - image: my-image
     parameters:
       size:
         type: string
     resource_class: << parameters.size >> # parameterized definition of resource_class
+    steps:
+      - checkout
 
 workflows:
   main:
@@ -444,13 +464,13 @@ To resolve both of these issues, it is important to acknowledge that we want to 
 ----
 # check all jobs in the compiled config and if any use a resource_class equal to "large" return a violation message.
 enforce_not_large_resource[reason] {
-  some job_name, job in input._compiled_.jobs
+  some job_name, job in input.compiled.jobs
   job.resource_class == "large"
   reason = sprintf("job %s using banned large resource class", [job_name])
 }
 ----
 
-Notice the rule now validates `input._compiled_.jobs`. Regardless of parameters or reusable blocks (executors in this example), the policy is applied to all compiled jobs and functions as intended.
+Notice the rule now validates `input.compiled.jobs`. Regardless of parameters or reusable blocks (executors in this example), the policy is applied to all compiled jobs and functions as intended.
 
 [#policing-config-constructs]
 === Policing config 2.1 constructs
@@ -493,7 +513,7 @@ orbs:
 
 In the above example, the rule does not raise a violation because the string `<< pipeline.parameters.evil_orb >>` does not have the `bad/` prefix that the policy aims to detect.
 
-We cannot rely on `input._compiled_` because orbs are compiled away at that stage.
+We cannot rely on `input.compiled` because orbs are compiled away at that stage.
 
 The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:config-policy-reference#is_parameterized_expression[helper].
 
@@ -530,13 +550,13 @@ Policies and their rules can be categorized into two main types:
 
 When working with configuration `version 2.1` constructs and parameterization, it is crucial to understand how these two rule types interact with your policies.
 
-* **Banlist** rules are susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during config compilation, the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `input._compiled_` or detect parameterization and handle it appropriately.
+* **Banlist** rules are susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during config compilation, the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `input.compiled` or detect parameterization and handle it appropriately.
 
 * **Allowlist** rules are incompatible with parameterization. They reject configurations that could otherwise be considered valid but do not cause invalid configurations to pass.
 
 Consider an example to illustrate this:
 
-NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes should target the compiled input (`input._compiled_`). This ensures proper validation against the resolved values.
+NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes should target the compiled input (`input.compiled`). This ensures proper validation against the resolved values.
 
 **Policy using an allowlist to restrict resource classes**
 [source,rego]
@@ -561,11 +581,15 @@ restrict_resource_classes[reason] {
 version: 2.1
 
 jobs:
-  parameters:
-    size:
-      type: string
-  resource_class: << parameters.size >>
-  steps: [...]
+  test:
+    parameters:
+      size:
+        type: string
+    docker:
+      - image: my-image
+    resource_class: << parameters.size >>
+    steps:
+      - checkout
 
 workflows:
   main:
@@ -588,7 +612,9 @@ For further reading, see the link:https://circleci.com/blog/compliance-with-conf
 [#testing-policies]
 == Testing policies
 
-It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and OPA test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
+
+The `circleci policy test` command is intended for testing the validity of the policy when adding and updating your config policies only within your config policy repo. Usage outside of adding/updating your config policy repo could result in false responses resulting from race conditions when reading and writing to the config policy service at the same time.   
 
 [#dynamic-config]
 == Config policies and dynamic configuration

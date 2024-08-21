@@ -13,7 +13,9 @@ contentTags:
 
 This document provides an overview of how to migrate from GitLab to CircleCI.
 
-NOTE: **Tips provided by ImagineX Consulting**
+TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
+
+**Tips provided by ImagineX Consulting**
 
 [#sign-up-with-gitlab]
 == Sign up with GitLab

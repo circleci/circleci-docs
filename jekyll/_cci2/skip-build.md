@@ -14,7 +14,7 @@ This document describes how to skip or cancel work when triggering pipelines. Th
 ## Skip jobs
 {: #skip-jobs }
 
-By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. This not only skips the marked commit, but also **all other commits** in the push.
+By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the **latest commit** you pushed. This will skip the pipeline execution for all the commits included in the push.
 
 ### Scope
 {: #scope }
@@ -22,7 +22,7 @@ By default, CircleCI automatically triggers a pipeline whenever you push changes
 A few points to note regarding the scope of the `ci skip` feature:
 
 * The pipeline and workflows will still exist for these commits but no jobs will be run.
-* If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
+* If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
 ### Example commit title
@@ -62,9 +62,6 @@ When pushed to a VCS, this commit will not be built on CircleCI because of the `
 
 ## Auto-cancel redundant workflows
 {: #auto-cancel}
-
-The **Auto-cancel redundant workflows** option is not available for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the GitHub App, see the [GitHub Apps integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info"}
 
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to complete before the most recent version starts.
 

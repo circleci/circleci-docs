@@ -1,4 +1,4 @@
-# User 
+# User
 
 
 ```sh
@@ -12,6 +12,6 @@ curl https://circleci.com/api/v1.1/me -H "Circle-Token: <circle-token>"
 }
 ```
 
-**`GET` Request**: Provides information about the user that is currently signed in.
+**`GET` Request**: Provides information about the user that is currently signed in. The use of this endpoint requires a **personal API token**.
 
 

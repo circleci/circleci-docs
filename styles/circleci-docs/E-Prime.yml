@@ -18,7 +18,6 @@ tokens:
   - that's
   - there's
   - they're
-  - was
   - wasn't
   - we're
   - were
@@ -27,3 +26,4 @@ tokens:
   - where's
   - who's
   - you're
+  - you've

@@ -45,14 +45,18 @@ You can also consider configuring your projects to rerun failed jobs rather than
 
 Having multiple directories under a single cache key increases the chance of there being a change to the cache. In the example below, there may be changes in the first two directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
 
+{% raw %}
 [,yaml]
 ----
-dependency_cache_paths:
-  - /mnt/ramdisk/node_modules
-  - /mnt/ramdisk/.cache/yarn
-  - /mnt/ramdisk/apps/a/node_modules
-  - /mnt/ramdisk/apps/b/node_modules
+      - save_cache:
+          paths:
+            - /mnt/ramdisk/node_modules
+            - /mnt/ramdisk/.cache/yarn
+            - /mnt/ramdisk/apps/a/node_modules
+            - /mnt/ramdisk/apps/b/node_modules
+          key: v1-node-{{ checksum "package.json" }}
 ----
+{% endraw %}
 
 [#combine-jobs-when-possible]
 === Combine jobs when possible
@@ -108,11 +112,11 @@ If you notice your cache usage is high and would like to reduce it:
 +
 [,yaml]
 ----
-    - save_cache:
-        key: brew-{{epoch}}
-        paths:
-          - /Users/distiller/Library/Caches/Homebrew
-          - /usr/local/Homebrew
+      - save_cache:
+          key: brew-{{epoch}}
+          paths:
+            - /Users/distiller/Library/Caches/Homebrew
+            - /usr/local/Homebrew
 ----
 +
 {% endraw %}
@@ -123,11 +127,11 @@ Notice in the above example that best practices are not followed. `brew-{{ epoch
 +
 [,yaml]
 ----
-    - save_cache:
-        key: brew-{{checksum “Brewfile”}}
-        paths:
-          - /Users/distiller/Library/Caches/Homebrew
-          - /usr/local/Homebrew
+      - save_cache:
+          key: brew-{{checksum “Brewfile”}}
+          paths:
+            - /Users/distiller/Library/Caches/Homebrew
+            - /usr/local/Homebrew
 ----
 +
 {% endraw %}
@@ -146,12 +150,11 @@ Some dependency managers do not properly handle installing on top of partially r
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - gem-cache-{{ arch }}-{{ .Branch }}
-        - gem-cache
+      - restore_cache:
+          keys:
+            - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ arch }}-{{ .Branch }}
+            - gem-cache
 ----
 
 {% endraw %}
@@ -164,10 +167,9 @@ Instead of a cascading fallback, a more stable option is a single version-prefix
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - restore_cache:
+          keys:
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ----
 
 {% endraw %}
@@ -194,19 +196,19 @@ To prevent this behavior, add a step that cleans Bundler before restoring depend
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        # when lock file changes, use increasingly general patterns to restore cache
-        - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - v1-gem-cache-{{ arch }}-{{ .Branch }}-
-        - v1-gem-cache-{{ arch }}-
-  - run: bundle install
-  - run: bundle clean --force
-  - save_cache:
-      paths:
-        - ~/.bundle
-      key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+    steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+            - v1-gem-cache-{{ arch }}-
+      - run: bundle install
+      - run: bundle clean --force
+      - save_cache:
+          paths:
+            - ~/.bundle
+          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ----
 
 {% endraw %}
@@ -223,18 +225,18 @@ Gradle repositories are intended to be centralized, shared, and massive. Partial
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        # when lock file changes, use increasingly general patterns to restore cache
-        - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
-        - gradle-repo-v1-{{ .Branch }}-
-        - gradle-repo-v1-
-  - save_cache:
-      paths:
-        - ~/.gradle/caches
-        - ~/.gradle/wrapper
-      key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+    steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
+            - gradle-repo-v1-{{ .Branch }}-
+            - gradle-repo-v1-
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
+          key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
 ----
 
 {% endraw %}
@@ -253,17 +255,17 @@ Since Leiningen uses Maven under the hood, it behaves in a similar way.
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        # when lock file changes, use increasingly general patterns to restore cache
-        - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
-        - maven-repo-v1-{{ .Branch }}-
-        - maven-repo-v1-
-  - save_cache:
-      paths:
-        - ~/.m2/repository
-      key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+    steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+            - maven-repo-v1-{{ .Branch }}-
+            - maven-repo-v1-
+      - save_cache:
+          paths:
+            - ~/.m2/repository
+          key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
 ----
 
 {% endraw %}
@@ -280,17 +282,17 @@ With NPM5+ and a lock file, you can safely use partial cache restoration.
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        # when lock file changes, use increasingly general patterns to restore cache
-        - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-        - node-v1-{{ .Branch }}-
-        - node-v1-
-  - save_cache:
-      paths:
-        - ~/usr/local/lib/node_modules  # location depends on npm version
-      key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - save_cache:
+          paths:
+            - ~/usr/local/lib/node_modules  # location depends on npm version
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 ----
 
 {% endraw %}
@@ -307,17 +309,17 @@ Pip can use files that are not explicitly specified in `requirements.txt`. Using
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        # when lock file changes, use increasingly general patterns to restore cache
-        - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-        - pip-packages-v1-{{ .Branch }}-
-        - pip-packages-v1-
-  - save_cache:
-      paths:
-        - ~/.local/share/virtualenvs/venv  # this path depends on where pipenv creates a virtualenv
-      key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+    steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - pip-packages-v1-{{ .Branch }}-
+            - pip-packages-v1-
+      - save_cache:
+          paths:
+            - ~/.local/share/virtualenvs/venv  # this path depends on where pipenv creates a virtualenv
+          key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 ----
 
 {% endraw %}
@@ -334,17 +336,17 @@ Yarn has always used a lock file for the reasons explained above.
 
 [,yaml]
 ----
-steps:
-  - restore_cache:
-      keys:
-        # when lock file changes, use increasingly general patterns to restore cache
-        - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        - yarn-packages-v1-{{ .Branch }}-
-        - yarn-packages-v1-
-  - save_cache:
-      paths:
-        - ~/.cache/yarn
-      key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    steps:
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-v1-
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ----
 {% endraw %}
 

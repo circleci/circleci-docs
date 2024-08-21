@@ -3,10 +3,12 @@ contentTags:
   platform:
     - Server v4.4
     - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
 :page-liquid:
+:experimental:
 :page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font
 :toc: macro
@@ -48,9 +50,9 @@ CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You wi
 
 [#login-to-acr]
 === a. Log in to CircleCI server container registry
-Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Please contact mailto:support@circleci.com[] for more information.
+Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Access the link:https://support.circleci.com/[CircleCI support portal] for more information.
 
-[source, bash]
+[,bash]
 ----
 docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
 ----
@@ -58,9 +60,9 @@ docker login cciserver.azurecr.io --username <your-circleci-provided-username> -
 === b. Download all images required for this release
 Download all images required for the release of CircleCI server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
 
-[source, bash]
+[,bash]
 ----
-SERVER_4_2_IMAGE_LIST=`cat <<EOF
+SERVER_4_4_IMAGE_LIST=`cat <<EOF
 cciserver.azurecr.io/docker-agent:1.0.16422-f79384c
 cciserver.azurecr.io/picard:1.0.217358-0b5336a7
 cciserver.azurecr.io/machine-agent:1.0.68480-f0ce8c9d
@@ -131,7 +133,7 @@ EOF
 
 [source, bash]
 ----
-echo $SERVER_4_2_IMAGE_LIST | while read -r image; do docker pull $image; done
+echo $SERVER_4_4_IMAGE_LIST | while read -r image; do docker pull $image; done
 ----
 
 [#copy-all-images]
@@ -146,7 +148,7 @@ Copy the CircleCI server Helm chart to your air-gapped environment.
 === a. Download the latest CircleCI server Helm chart
 Download the latest CircleCI server Helm chart to the current directory.
 
-[source, bash]
+[,bash]
 ----
 helm registry login cciserver.azurecr.io
 helm pull oci://cciserver.azurecr.io/circleci-server -d ./
