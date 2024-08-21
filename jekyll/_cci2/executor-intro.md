@@ -11,6 +11,8 @@ contentTags:
 
 CircleCI offers several execution environments: Docker (x86 or Arm), Linux VM (virtual machine), macOS, Windows, GPU and Arm VM. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
 
+## Executors
+
 For each job in your project config you will specify an execution environment by assigning it an **executor**. An **executor** defines the underlying technology or environment in which to run a job, and which image to use to best-suit your project.
 
 It is possible to specify a different executor type for every job in your [.circleci/config.yml](/docs/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
@@ -19,7 +21,9 @@ It is possible to specify a different executor type for every job in your [.circ
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images](/docs/configuration-reference/#available-linux-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
-<!---![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->
+### Resource class
+
+When you configure an executor it is recommended that you also specify a resource class to Specify compute resource size (CPU and RAM). For an overview of available resource classes per Plan, see the [Resource class web page](https://circleci.com/product/features/resource-classes/).
 
 ## Docker
 {: #docker }
@@ -76,7 +80,7 @@ Find out more about the Linux VM execution environment in the [Using Linux Virtu
 
 To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the [CircleCI Developer Hub](https://circleci.com/developer/machine/image/macos).
 
-If you want to run a macOS build on a server instance, you will need to use [self-hosted runner](/docs/runner-overview/).
+If you want to run a macOS build on CircleCI server, you will need to use [self-hosted runner](/docs/runner-overview/).
 {: class="alert alert-info"}
 
 ```yml
