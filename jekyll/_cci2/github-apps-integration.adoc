@@ -225,11 +225,6 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 
 xref:insights-tests#[Test Insights] is currently not supported.
 
-[#badges]
-=== Insights snapshot badge
-
-The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported.
-
 [#only-build-pull-requests]
 === Only build pull requests
 
