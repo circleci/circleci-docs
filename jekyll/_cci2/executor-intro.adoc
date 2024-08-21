@@ -44,7 +44,10 @@ For example:
 
 === Resource class
 
-When you configure an executor it is recommended that you also specify a resource class to Specify compute resource size (CPU and RAM). For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
+When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
+
+* For an overview of resource classes, see the xref:resource-class-overview#[Resource class overview] page.
+* For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
 
 [#docker]
 == Docker
