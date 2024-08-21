@@ -307,11 +307,6 @@ Open source plans are not currently available to GitLab customers. CircleCI will
 
 xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.
 
-[#badges]
-=== Insights snapshot badge
-
-The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported for GitLab projects.
-
 [#circleci-server]
 === CircleCI self-hosted server product
 
