@@ -1539,7 +1539,7 @@ For jobs that run on *Linux*, the default value of the `shell` option is `/bin/b
 
 For jobs that run on *macOS*, the default shell is `/bin/bash --login -eo pipefail`. The shell is a non-interactive login shell. The shell will execute `/etc/profile/` followed by `~/.bash_profile` before every step.
 
-For more information about which files are executed when bash is invocated, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
+For more information about which files are executed when Bash is invocated, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
 
 Descriptions of the `-eo pipefail` options are provided below.
 
@@ -2382,6 +2382,8 @@ workflows:
 
 [#schedule]
 ===== *`schedule`*
+
+NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
 
 CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
 
