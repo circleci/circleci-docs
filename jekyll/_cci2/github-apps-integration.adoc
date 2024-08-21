@@ -47,6 +47,14 @@ CAUTION: **If your GitHub organization has more than 100 repositories**, select 
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
 
+=== Can I integrate a GitHub org with multiple CircleCI orgs?
+
+A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
+
+If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project.
+
+image::github-app-configuration-page.png[Create a project]
+
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
