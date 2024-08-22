@@ -126,6 +126,8 @@ The following limits are currently in place for Bitbucket Data Center integratio
 
 If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
 
+If you are using both CircleCI's Bitbucket Data Center & xref:gitlab-integration#[GitLab Self-Managed integrations], there is a known bug in the Organization Settings > Integrations section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration in the CircleCI web app. To use both Bitbucket Data Center & GitLab Self-Managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+
 [#project-settings]
 == Project settings
 
