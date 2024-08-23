@@ -48,7 +48,7 @@ jobs:
 The job property name can be anything you like with the following restrictions:
 
 * Must be unique within the jobs stanza.
-* Only alphanumeric characters, underscores, and dashes.
+* Only ASCII alphabet characters, underscores, and dashes.
 * No spaces.
 
 When you configure a job in a workflow you have the option to give it an xref:configuration-reference#name[alternative name]. This alternative name can be useful if you want to call a job more than once in a workflow.
