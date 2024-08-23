@@ -35,7 +35,7 @@ See the xref:executor-intro#[Introduction to Execution Environments] document fo
 
 === Job naming
 
-When you configure a job you will give it a name. This is its job propety name:
+When you configure a job you will give it a name. This is its job property name:
 
 [,yml]
 ----
