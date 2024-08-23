@@ -47,7 +47,7 @@ jobs:
 
 The job property name can be anything you like with the following restrictions:
 
-* Must be unique within the project.
+* Must be unique within the jobs stanza.
 * Only alphanumeric characters, underscores, and dashes.
 * No spaces.
 
