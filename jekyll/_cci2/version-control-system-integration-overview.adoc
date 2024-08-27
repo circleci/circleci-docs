@@ -171,7 +171,7 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 
-| xref:orbs-intro#[Orbs]
+| xref:orb-intro#[Orbs]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
