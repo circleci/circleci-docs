@@ -9,12 +9,30 @@ contentTags:
   - Server v3.x
 ---
 
-This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
+This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
 
-## Skip jobs
+* The jobs within a pipeline can be skipped on commit.
+* Workflows can be cancelled using the auto-cancel feature.
+
+Both methods are described below.
+
+## Skip a pipeline
 {: #skip-jobs }
 
-By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the **latest commit** you pushed. This will skip the pipeline execution for all the commits included in the push.
+By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding one of the following tags within the first 250 characters of the body or title of the **latest commit** you pushed:
+
+* `[ci skip]`
+* `[skip ci]`
+
+Adding one of these tags skips pipeline execution for all the commits included in the push.
+
+## The skip pipeline process
+
+When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this infomation to decide to skip the pipeline trigger.
+
+The way the pipeline is displayed in the CircleCI web app will be different depending on your VCS integration, as follows:
+
+If your project is integrated with CircleCI using the xref:github-apps-integration#[GitHub App] a skipped pipeline will not show on the pipelines page.
 
 ### Scope
 {: #scope }
