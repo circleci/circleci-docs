@@ -77,11 +77,11 @@ CircleCI server supports GitHub and GitHub enterprise.
 
 | xref:set-up-multiple-configuration-files-for-a-project#[Set up multiple configuration files for a project]
 | icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
-| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
-| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
-| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
-| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
 
 | xref:enable-checks#[GitHub Checks]
 | icon:thumbs-down[role="circle-red"]
@@ -91,6 +91,8 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 |===
+
+^1^ _Possible using dynamic configuration_
 
 === Pipeline triggers and integrations
 
