@@ -36,12 +36,12 @@ CircleCI server supports GitHub and GitHub enterprise.
 
 == Feature support per VCS
 
+=== Code checkout and repository integration
+
 [.table.table-striped]
 [cols=7*, options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
-
-7+^|**Code Checkout and Repository Integration**
 
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
 | icon:thumbs-up[role="circle-green"]
@@ -90,9 +90,14 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
+|===
 
-7+^|**Pipeline Triggers and integrations**
+=== Pipeline triggers and integrations
 
+[.table.table-striped]
+[cols=7*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
 | xref:scheduled-pipelines#[Scheduled pipelines]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -124,9 +129,14 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
+|===
 
-7+^|Core Capabilities
+=== Core capabilities
 
+[.table.table-striped]
+[cols=7*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
 | xref:artifacts#[Artifact storage]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
@@ -214,9 +224,14 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
+|===
 
-7+^|Security and permissions
+=== Security and permissions
 
+[.table.table-striped]
+[cols=7*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
 | xref:openid-connect-tokens#[OpenID Connect tokens]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
@@ -256,9 +271,14 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
+|===
 
-7+^|Open Source Support
+=== Open source support
 
+[.table.table-striped]
+[cols=7*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
 | xref:oss#[OSS support]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
