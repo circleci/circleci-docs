@@ -22,14 +22,14 @@ CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root
 [#how-do-i-install-dependencies-needed-for-my-jobs]
 === How do I install dependencies needed for my jobs that use machine runners?
 
-There are two main approaches available for installing dependencies:
+Install dependencies in one of two ways:
 
 * Allow the jobs to install their own dependencies
-
++
 This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner. For example into the working directory.
 
 * Pre-install dependencies on the machine where the machine runner is installed
-
++
 This approach is the most secure; however, this means that if the job’s dependencies change, the self-hosted runner machine must be reconfigured.
 
 [#what-connectivity-is-required]
