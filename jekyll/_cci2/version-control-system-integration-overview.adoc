@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-When you create a CircleCI project, you are prompted to select a code repository to connect. The code in this repo will be checked out when your pipelines run. CircleCI supports several version control systems (VCS) for your code. The guide gives an overview of the features available to each VCS integration.
+When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports several code version control systems (VCS). The guide gives an overview of the features available to each VCS integration.
 
 [NOTE]
 ====
@@ -41,6 +41,8 @@ CircleCI server supports GitHub and GitHub enterprise.
 |===
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center
 
+7+^|**Code Checkout and Repository Integration**
+
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
@@ -48,7 +50,6 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-
 
 | Reduced permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.
 | icon:thumbs-up[role="circle-green"]
@@ -76,11 +77,21 @@ CircleCI server supports GitHub and GitHub enterprise.
 
 | xref:set-up-multiple-configuration-files-for-a-project#[Set up multiple configuration files for a project]
 | icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
+| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
+| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
+| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
+| icon:thumbs-down[role="circle-red"] (possible using dynamic configuration)
+
+| xref:enable-checks#[GitHub Checks]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
+
+7+^|**Pipeline Triggers and integrations**
 
 | xref:scheduled-pipelines#[Scheduled pipelines]
 | icon:thumbs-down[role="circle-red"]
@@ -90,23 +101,15 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 
-| xref:artifacts#[Artifact storage]
+| link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
 
-| xref:openid-connect-tokens#[OpenID Connect tokens]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-
-| xref:vs-code-extension-overview#test-run-your-config-from-vs-code[Test run config from VS Code]
+| xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -122,23 +125,57 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 
+7+^|Core Capabilities
+
+| xref:artifacts#[Artifact storage]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:vs-code-extension-overview#test-run-your-config-from-vs-code[Test run config from VS Code]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:dynamic-config#[Dynamic configuration]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:rerun-failed-tests#[Rerun failed tests]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:orbs-intro#[Orbs]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:parallelism-faster-jobs#[Test splitting and parallelism]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
 | xref:docker-layer-caching#[Docker layer caching]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-
-| xref:config-policy-management-overview#[Config policies]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-
-| xref:audit-logs#[Audit logs]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
@@ -162,15 +199,7 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 
-| link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-
-| xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
+| In-app config viewing and editing
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -186,6 +215,50 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 
+7+^|Security and permissions
+
+| xref:openid-connect-tokens#[OpenID Connect tokens]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:config-policy-management-overview#[Config policies]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:audit-logs#[Audit logs]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:contexts#security-goup-restrictions[Security group context restriction]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:contexts#expression-restrictions[Expression context restriction]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+7+^|Open Source Support
+
 | xref:oss#[OSS support]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
@@ -197,7 +270,7 @@ CircleCI server supports GitHub and GitHub enterprise.
 | xref:oss#only-build-pull-requests[Only build pull requests]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
@@ -218,12 +291,5 @@ CircleCI server supports GitHub and GitHub enterprise.
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 
-| In-app config viewing and editing
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-
 |===
+
