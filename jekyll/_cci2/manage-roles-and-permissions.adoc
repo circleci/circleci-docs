@@ -28,7 +28,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 . In the CircleCI web app, select **Organization Settings** in the sidebar.
 . Select **People**.
 +
-TIP: If you have integrated your code with CircleCI using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] these steps do not apply. You can use the btn:[Copy Invite Link] button to copy the necessary infomation to email your teammates.
+TIP: If you have integrated your code with CircleCI using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] these steps do not apply. You can use the btn:[Copy Invite Link] button to copy the necessary information to email your teammates.
 . Select btn:[Invite].
 . Enter the person's email address. You can add multiple people separated by a space too.
 . Select a role from the dropdown menu to be applied to the people you are inviting.
