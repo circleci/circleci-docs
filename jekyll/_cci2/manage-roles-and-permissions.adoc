@@ -25,12 +25,14 @@ Manage user access to organizations and projects with CircleCI roles and associa
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
-. Click on **People**
-. Click btn:[Invite]
-. Enter the person's email address. You can add multiple people separated by a space too
-. Select a role from the dropdown menu to be applied to the people you are inviting
-. Click btn:[Send Invite(s)]
+. In the CircleCI web app, select **Organization Settings** in the sidebar.
+. Select **People**.
++
+TIP: If you have integrated your code with CircleCI using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] these steps do not apply. You can use the btn:[Copy Invite Link] button to copy the necessary infomation to email your teammates.
+. Select btn:[Invite].
+. Enter the person's email address. You can add multiple people separated by a space too.
+. Select a role from the dropdown menu to be applied to the people you are inviting.
+. Select btn:[Send Invite(s)].
 
 An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 
@@ -41,10 +43,10 @@ If they do not have a CircleCI account, they will need to sign up. If they alrea
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
-. Click on **People**
-. Scroll to locate the person you want to update permissions for
-. Use the dropdown menu next to their name to select a new role
+. In the CircleCI web app, select **Organization Settings** in the sidebar.
+. Select **People**.
+. Scroll to locate the person you want to update permissions for.
+. Use the dropdown menu next to their name to select a new role.
 
 [#remove-people-from-your-organization]
 == Remove people from your organization
@@ -53,40 +55,46 @@ NOTE: You must have at least one org administrator. If you try to remove the las
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
-. Click on **People**
-. Scroll to locate the person you want to remove
-. Click the ellipsis (...) button next to their name and select btn:[Remove from organization]
+. In the CircleCI web app, select **Organization Settings** in the sidebar.
+. Select **People**.
+. Scroll to locate the person you want to remove.
+. Select the ellipsis (...) button next to their name and select btn:[Remove from organization].
 
 [#assign-a-project-role]
 == Assign a project role
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
-. In the CircleCI web app, click on **Dashboard** in the sidebar
-. Select your project using the filter dropdown menu
-. Click btn:[Project Settings]
-. Click **People** in the sidebar menu
-. Click btn:[Assign Project Roles]
-. Select the username of the person you want to assign a role to
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Find your project. You can use the search box to help.
+. Select the ellipsis (...) button next to your project and select btn:[Project Settings].
+. Select **People** in the sidebar menu.
++
+TIP: If you do not see the **People** option, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and project roles are not supported.
+. Select btn:[Assign Project Roles].
+. Select the username of the person you want to assign a role to.
 . Use the **Project Role** dropdown menu to select the role you want to assign
-. Click btn:[Assign Role]
+. Select btn:[Assign Role].
 
 [#change-a-persons-project-level-permissions]
 == Change a person's project-level permissions
 
-. In the CircleCI web app, click on **Dashboard** in the sidebar
-. Select your project using the filter dropdown menu
-. Click btn:[Project Settings]
-. Click **People** in the sidebar menu
-. Use the dropdown menu next to the person's name to select a new project role
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Find your project. You can use the search box to help.
+. Select the ellipsis (...) button next to your project and select btn:[Project Settings].
+. Select **People** in the sidebar menu.
++
+TIP: If you do not see the **People** option, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and project roles are not supported.
+. Use the dropdown menu next to the person's name to select a new project role.
 
 [#remove-people-from-your-project]
 == Remove people from your project
 
-. In the CircleCI web app, click on **Dashboard** in the sidebar
-. Select your project using the filter dropdown menu
-. Click btn:[Project Settings]
-. Click **People** in the sidebar menu
-. Click the ellipsis (...) button next to their name and select btn:[Remove project role]
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Find your project. You can use the search box to help.
+. Select the ellipsis (...) button next to your project and select btn:[Project Settings].
+. Select **People** in the sidebar menu.
++
+TIP: If you do not see the **People** option, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and project roles are not supported.
+. Select the ellipsis (...) button next to their name and select btn:[Remove project role]
 
