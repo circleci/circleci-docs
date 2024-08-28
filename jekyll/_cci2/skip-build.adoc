@@ -14,13 +14,13 @@ contentTags:
 
 This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
 
-* The jobs within a pipeline can be skipped on commit.
+* The CI processes can be skipped for a commit, on push to your repo.
 * Workflows can be cancelled using the auto-cancel feature.
 
 Both methods are described below.
 
 [#skip-jobs]
-== Skip a pipeline
+== Skip CI for a specific push
 
 By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding one of the following tags within the first 250 characters of the body or title of the **latest commit** you pushed:
 
@@ -29,7 +29,7 @@ By default, CircleCI automatically triggers a pipeline whenever you push changes
 
 Adding one of these tags skips pipeline execution for all the commits included in the push.
 
-== Skip CI for a specific push
+=== The skip CI process
 
 When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this infomation to decide not to build your project.
 
