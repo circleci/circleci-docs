@@ -12,7 +12,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
+This page describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
 
 * The CI processes can be skipped for a commit, on push to your repo.
 * Workflows can be cancelled using the auto-cancel feature.
