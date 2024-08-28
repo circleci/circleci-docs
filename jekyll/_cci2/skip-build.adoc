@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Skip or cancel jobs and workflows
+= Skip CI and cancel workflows
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
