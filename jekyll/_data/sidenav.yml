@@ -122,7 +122,7 @@ en:
             link: workspaces
           - name: Dynamic configuration
             link: dynamic-config
-          - name: Skip or cancel jobs and workflows
+          - name: Skip CI and cancel workflows
             link: skip-build
           - name: Pipeline values and parameters
             link: pipeline-variables
