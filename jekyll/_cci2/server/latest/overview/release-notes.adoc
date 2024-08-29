@@ -31,4 +31,4 @@ For full details of this release see the link:https://circleci.com/changelog/#se
 
 === Changelog
 
-For full details of this release see the link:https://circleci.com/changelog/#server-4-6-0[changelog].
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-0[changelog].
