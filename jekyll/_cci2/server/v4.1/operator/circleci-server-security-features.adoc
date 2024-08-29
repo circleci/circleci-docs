@@ -8,7 +8,7 @@ noindex: true
 = CircleCI server security features
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document outlines security features built into CircleCI and related integrations.
+:page-description: This document outlines security features built into CircleCI server v4.1 and related integrations.
 :icons: font
 :experimental:
 

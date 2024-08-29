@@ -8,7 +8,7 @@ noindex: true
 = Troubleshooting and support
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.x installation.
+:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.1 installation.
 :icons: font
 :experimental:
 
