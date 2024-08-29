@@ -31,14 +31,33 @@ You can generate code for the following formats:
 * reStructuredText
 * pod
 
+== Generate status badge code
+
+To get the code you need to embed a status badge for your project, follow these steps:
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select your project from the tiles or list.
+. Select btn:[Project Settings].
+. Select **Status Badges** from the sidebar.
+. Select a branch to show the most recent status for.
+. [Optional] If you project is private, select btn:[Add API token] and in the modal select btn:[Add API token] once again to add an API token to your project with the `status` scope.
+. Select a format for your status badge code from the dropdown.
+. Select btn:[Copy] to copy the token. You can now add the badge to your README or other document.
+
+== Manually generate status badge code
+
+If your project is integrated with CircleCI through GitHub OAuth or Bitbucket Cloud, you can manually generate a status badge for your project. To check which method of GitHub authorization you have, see the xref:github-integration#[GitHub integration] guide.
+
+The manual steps in this section will not work if your project is integrated with GitHub App, GitLab or Bitbucket Data Center
+
 [#generating-a-status-badge]
-== Generating a status badge
+=== Generate a status badge
 
 To generate your own status badge, you will need to know, and substitute, the following variables in the code snippets below:
 
 * `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`
 * `<ORG_NAME>` - The organization or user name the project in question belongs to
-* `<VCS>` - your VCS provider (`gh` for "GitHub" and `bb` for Bitbucket)
+* `<VCS>` - your VCS provider (`gh` for "GitHub" and `bb` for Bitbucket Cloud)
 * `<LINK>` - The link you want the status badge to go to when clicked (example: the pipeline overview page)
 * Optional: an API token (to create badges for private projects)
 
@@ -138,7 +157,7 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 --
 
 [#creating-badges-for-private-repositories]
-== Creating badges for private repositories
+=== Creating badges for private repositories
 
 NOTE: To create a status badge for a private project you will need to create an API token specifically scoped to "status", and include that token in the URL string of your badge. Consider the following markdown image badge snippet against the original markdown example above; it has a URL parameter for a token added.
 

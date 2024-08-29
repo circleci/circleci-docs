@@ -406,9 +406,11 @@ en:
             link: release/releases-overview
       - name: Set up
         children:
-          - name: Set up a release environment
-            link: release/set-up-a-release-environment
-          - name: Configure your Kubernetes components
+          - name: Set up CircleCI releases
+            link: release/set-up-circleci-releases
+          - name: Manual install - Set up the release agent
+            link: release/set-up-the-release-agent
+          - name: Manual intall - Configure your Kubernetes components
             link: release/configure-your-kubernetes-components
       - name: How to
         children:
@@ -622,14 +624,17 @@ en:
             link: oss
       - name: VCS integration
         children:
-          - name: GitHub OAuth app integration overview
-            link: github-integration
-          - name: GitHub App integration overview
+          - name: GitHub App integration
             link: github-apps-integration
-          - name: Bitbucket integration overview
-            link: bitbucket-integration
-          - name: GitLab integration overview
+          - name: GitLab integration
             link: gitlab-integration
+          - name: Bitbucket Data Center integration
+            link: bitbucket-data-center-integration
+          - name: GitHub OAuth app integration
+            link: github-integration
+          - name: Bitbucket Cloud integration
+            link: bitbucket-integration
+
       - name: Third-party integrations
         children:
           - name: Enable GitHub Checks
@@ -662,6 +667,10 @@ en:
   - name: Developer toolkit
     icon: icons/sidebar/code.svg
     children:
+      - name: AI features
+        children:
+          - name: Intelligent summaries
+            link: intelligent-summaries
       - name: CLI
         children:
           - name: Install and configure the CircleCI local CLI
@@ -700,6 +709,86 @@ en:
             link: sample-config
           - name: Database examples
             link: postgres-config
+
+  - name: Server administration v4.6
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.6 overview
+        children:
+          - name: CircleCI server v4.6 overview
+            link: server/latest/overview/circleci-server-overview
+          - name: Release notes
+            link: server/latest/overview/release-notes
+      - name: Server v4.6 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/latest/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/latest/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/latest/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/latest/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/latest/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/latest/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.6
+            link: server/latest/installation/upgrade-server
+          - name: Installation reference
+            link: server/latest/installation/installation-reference
+      - name: Air-gapped installation v4.6
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/latest/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/latest/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/latest/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/latest/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/latest/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/latest/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/latest/air-gapped-installation/example-values
+      - name: Server v4.6 operations
+        children:
+          - name: Operator overview
+            link: server/latest/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/latest/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/latest/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/latest/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/latest/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/latest/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/latest/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/latest/operator/managing-load-balancers
+          - name: User authentication
+            link: server/latest/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/latest/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/latest/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/latest/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/latest/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/latest/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/latest/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/latest/operator/upgrade-mongo
+          - name: FAQs
+            link: server/latest/operator/faq
 
   - name: Server administration v4.5
     icon: icons/sidebar/admin-new.svg

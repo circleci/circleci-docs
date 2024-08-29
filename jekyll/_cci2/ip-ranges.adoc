@@ -166,16 +166,10 @@ In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs execut
 
 * 100.27.248.128/25
 * 100.29.139.128/25
-* 38.39.184.0/24
-* 38.39.185.0/24
-* 38.39.183.0/24
-* 38.23.38.0/24
-* 38.23.39.0/24
-* 38.23.40.0/24
+* 98.80.165.0/24
 * 38.23.41.0/24
 * 38.23.42.0/24
 * 38.23.43.0/24
-* 198.206.135.0/24
 * 207.254.116.0/24
 * 207.254.118.0/24
 
@@ -183,7 +177,7 @@ In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs execut
 
 macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds. 
 
-*macOS IP ranges are not included in the machine-consumable lists maintained in DNS.* Refer to the list above for the most up-to-date macOS IPs.
+*macOS IP ranges are not included in the machine-consumable lists maintained in DNS.* Refer to the list above for the most up-to-date macOS IPs. Information about changes to macOS IP ranges will be included in the link:https://circleci.com/changelog/[changelog] and will be sent to the technical contact(s) listed under menu:Organization Settings[Overview].
 
 [#known-limitations]
 == Known limitations

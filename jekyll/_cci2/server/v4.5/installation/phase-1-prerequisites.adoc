@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.5
   - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
@@ -274,7 +275,7 @@ CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, th
 
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
 
-. In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
+. In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and select the **New OAuth App** button.
 +
 .New GitHub OAuth App
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
@@ -511,11 +512,24 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=<YOUR_REGION>
 ----
 
+==== b. Enable bucket versioning
+
+To use the link:https://circleci.com/docs/docker-layer-caching/[Docker layer caching] (DLC) feature in CircleCI, link:https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html[bucket versioning] needs to be enabled. Run the following command to enable bucket versioning on the bucket created in the previous step:
+[source,shell]
+----
+aws s3api put-bucket-versioning \
+    --bucket <YOUR_BUCKET_NAME> \
+    --region <YOUR_REGION> \
+    --versioning-configuration Status=Enabled
+----
 
 [#set-up-authentication-aws]
-==== b. Set up authentication
+==== c. Set up authentication
 
-There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+Authenticate CircleCI with S3 in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA) - recommended.
+* IAM access keys.
 
 [.tab.authentication.IRSA]
 --

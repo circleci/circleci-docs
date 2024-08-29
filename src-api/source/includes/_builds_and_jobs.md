@@ -132,20 +132,6 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:org_name/:project/
 
 **`POST` Request:** Retries the job and then returns a summary of the new job run.
 
-## Add User to Job
-
-
-```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users -H "Circle-Token: <circle-token>"
-```
-
-```text
-# ...Build Data
-
-```
-
-**`POST` Request:** This API call is only available when using a user API token. If the current user has permission to build the project, this API adds the current user's SSH public key to the authorized keys on each container running a job. This allows them to SSH to the job containers.
-
 ## Cancel a Job
 
 ```sh

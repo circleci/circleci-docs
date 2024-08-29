@@ -392,7 +392,11 @@ NOTE: Cluster-wide permissions are used by container runner to autodetect the OS
 [#garbage-collection]
 == Garbage collection
 
-Each container runner has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed. By default this will remove all jobs older than five hours and five minutes. This can be shortened or lengthened via the `agent.kubeGCThreshold` parameter. However, if you do shorten the garbage collection (GC) frequency, also shorten the max task run time via the `agent.maxRunTime` parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
+Each container runner has a garbage collector. The garbage collector ensures the removal of any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` that are left dangling in the cluster. By default, the garbage collector removes all jobs older than five hours and five minutes. This time limit can be shortened or lengthened via the `agent.gc.threshold` parameter. However, if you do shorten the garbage collection  frequency, you must also shorten the maximum task run time via the `agent.maxRunTime` parameter to be a value smaller than the new garbage collection frequency. 
+
+CAUTION: If you change the garbage collection threshold but do **not** keep the max task run time lower than the garbage collection frequency, a running task pod could be removed by the garbage collector.
+
+The garbage collector may remove some objects sooner than the threshold. Task pods have a liveness probe that checks for a running task-agent process. Once a task completes or fails, the task-agent process will stop running and the liveness probe will fail, which will trigger GC.
 
 Container runner will drain and restart cleanly when sent a termination signal. Container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 

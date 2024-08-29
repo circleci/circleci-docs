@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.2
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.2 release notes
 :page-layout: classic-docs
@@ -17,11 +18,21 @@ contentTags:
 
 The v4.2 release introduces the config policies feature to CircleCI server. Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc. For more information see the xref:../../../config-policy-management-overview#[Config policies overview]. To use config policies CLI commands with server, append all commands shown in the docs with `--policy-base-url https://<CIRCLECI-SERVER-DOMAIN>.com`
 
+WARNING: The last fully compatible CircleCI CLI version for v4.2 is link:https://github.com/CircleCI-Public/circleci-cli/releases/tag/v0.1.30549[v0.1.30549], specifically for operations on self-hosted runners.
+
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.2 guide].
 
 CAUTION: If you are upgrading from server v4.1.x and have user-managed secrets, ensure you follow the steps in the xref:../installation/upgrade-server#[Upgrade server v4.2 guide].
+
+[#release-4-2-7]
+== Release 4.2.7
+
+[#changelog-4-2-7]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-2-7[changelog].
 
 [#release-4-2-6]
 == Release 4.2.6

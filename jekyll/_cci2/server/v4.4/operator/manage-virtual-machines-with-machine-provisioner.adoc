@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.4
   - Server Admin
+noindex: true
 ---
 = Manage virtual machines with machine provisioner
 :page-layout: classic-docs
@@ -26,7 +27,7 @@ The following configuration options are for the machine provisioner provider, ei
 
 [#aws]
 === AWS
-There is a section in your `values.yaml` file that configures machine provisioner to work with AWS EC2. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Machine provisioner is configured to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 
@@ -184,7 +185,7 @@ The default AMIs for server v4.4 are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-There is a section in your `values.yaml` file that configures machine provisioner to work with GCP. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Machine provisioner is configured to work with GCP in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 

@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.5
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.5 release notes
 :page-layout: classic-docs
@@ -22,6 +23,22 @@ The v4.5 release introduces security and performance improvements.
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.5 guide].
+
+[#release-4-5-3]
+== Release 4.5.3
+
+[#changelog-4-5-3]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-5-3/[changelog].
+
+[#release-4-5-2]
+== Release 4.5.2
+
+[#changelog-4-5-2]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-5-2/[changelog].
 
 [#release-4-5-1]
 == Release 4.5.1

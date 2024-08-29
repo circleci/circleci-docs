@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.5
   - Server Admin
+noindex: true
 ---
 = Installation reference
 :page-layout: classic-docs
@@ -51,7 +52,7 @@ object_storage:
   s3:
     enabled: true
     endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
-    region: "<aws-region>"
+    region: "<aws-region>"  # defaults to us-east-1, Update this value if you are using a different region
     irsaRole: "<arn-of-irsa-role>"
 
 github:
@@ -1125,7 +1126,7 @@ this value is '`15672`' else port of external rabbitmq instance
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/v4.5/operator/expanding-internal-database-volumes
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1140,7 +1141,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/v4.5/operator/expanding-internal-database-volumes
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |

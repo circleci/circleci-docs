@@ -27,14 +27,12 @@ Integrate with CircleCI to access features for automated software delivery:
 * xref:orb-intro#[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
 * Developer tools: xref:local-cli#[CircleCI CLI], xref:api-intro#[APIs], and xref:vs-code-extension-overview#[VS Code extension], xref:circleci-config-sdk#[config SDK]
 
-GitLab CI/CD integration with CircleCI introduces the concept of "standalone" projects that are not specific to a VCS. This is a change from the way GitHub and Bitbucket projects are currently integrated.
-
 [#sign-up]
 == Steps to integrate GitLab projects with CircleCI
 
 Follow the steps on the xref:first-steps#gitlab[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
 
-NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
+NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the "maintainer" role or higher.
 
 [.tab.signup.GitLab_SaaS]
 --
@@ -92,15 +90,17 @@ Follow the steps on the **Create New Project** page:
 
 image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
 
-. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Click **Verify**.
+. Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Select **Verify**.
 
-. Enter your personal access token. Click **Connect**.
+. Enter your personal access token. Select **Connect**.
 
-. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Click **Connect**.
+. Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Select **Connect**.
++
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab Self-Managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name.
 
-. Finally, click **Create Project**. You will then be redirected to the newly-created project's Pipelines page.
+. Finally, select **Create Project**. You will then be redirected to the newly-created project's Pipelines page.
 
 The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repository to see your pipeline on the dashboard.
 --
@@ -108,6 +108,8 @@ The express CircleCI configuration setup is not currently available for GitLab S
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
 When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
+
+== Limitations
 
 The following limits are currently in place for GitLab integrations:
 
@@ -162,9 +164,9 @@ Project roles give control over which users have access to which projects within
 For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
 [#configuration]
-=== Configuration sources and project triggers
+=== Pipelines and triggers
 
-You can add or delete configuration sources and triggers for your project. For details see the xref:pipelines#configuration-sources-and-project-triggers[pipelines overview].
+You can add or delete pipelines and triggers for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced
@@ -186,9 +188,9 @@ When creating a GitLab-based project in CircleCI, an SSH key is created, which i
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then click **Add key**.
+. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then select **Add key**.
 
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then select **Add SSH Key**.
 
 . In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 +
@@ -213,7 +215,7 @@ For more information on SSH keys, refer to the xref:add-ssh-key#[Adding an SSH k
 
 For GitLab integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-To manage settings at the organization level, click btn:[Organization Settings] in the CircleCI web app sidebar.
+To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People
@@ -267,7 +269,7 @@ The ability to connect to multiple account integrations on CircleCI allows you t
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-There are a number of built-in environment variables that are not available in GitLab-based projects. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
+A number of built-in environment variables are not available in GitLab-based projects. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values].
 
 [#coming-soon]
 == Coming soon
@@ -277,7 +279,7 @@ The following sections are features of CircleCI which are not currently fully su
 [#account-integrations]
 === Account integrations
 
-There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
+Currently, there is no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
@@ -308,11 +310,6 @@ Open source plans are not currently available to GitLab customers. CircleCI will
 === Test Insights
 
 xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.
-
-[#badges]
-=== Insights snapshot badge
-
-The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported for GitLab projects.
 
 [#circleci-server]
 === CircleCI self-hosted server product

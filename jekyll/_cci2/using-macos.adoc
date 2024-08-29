@@ -31,11 +31,6 @@ jobs:
 [#supported-xcode-versions]
 == Supported Xcode versions
 
-[#supported-xcode-versions-intel]
-=== Supported Xcode versions for Intel
-
-{% include snippets/xcode-intel-vm.adoc %}
-
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 

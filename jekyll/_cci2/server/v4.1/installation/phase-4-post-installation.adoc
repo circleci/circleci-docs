@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Phase 4 - post installation
 :page-layout: classic-docs

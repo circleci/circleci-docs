@@ -44,7 +44,7 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
 
-NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.  Alternatively for projects using GitHub App, the <<trigger-a-pipeline-from-an-inbound-webhook,inbound webhooks>> functionality provides similar capabilities.
+NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.  Alternatively, for projects using GitHub App, the <<trigger-a-pipeline-from-a-custom-webhook,custom webhooks>> functionality provides similar capabilities.
 
 For non GitLab/GitHub App projects, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
@@ -64,14 +64,14 @@ curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username
 
 TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
 
-[#trigger-a-pipeline-from-an-inbound-webhook]
-== Trigger a pipeline from an inbound webhook
+[#trigger-a-pipeline-from-a-custom-webhook]
+== Trigger a pipeline from a custom webhook
 
-Follow these steps to set up and test an inbound webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
+Follow these steps to set up and test a custom webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
 
-{% include snippets/inbound-webhook-setup.adoc %}
+{% include snippets/custom-webhook-setup.adoc %}
 
-. You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
+. You can now test your custom webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +
 NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
 +
@@ -80,7 +80,7 @@ NOTE: When triggering via `curl`, you must use a `POST` request with `content-ty
 curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
 ----
 
-For more information on using inbound and outbound webhooks, see the xref:webhooks#[Use webhooks to integrate with services] page. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
+For more information on using custom and outbound webhooks, see the xref:webhooks#[Use webhooks to integrate with services] page. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
@@ -96,9 +96,9 @@ image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Scre
 [#schedule-a-pipeline]
 == Schedule a pipeline
 
-NOTE: Scheduling a pipeline is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Scheduling a pipeline is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
-For non GitLab/GitHub App projects, scheduled pipelines allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the <<scheduled-pipelines#,Scheduled Pipelines>> docs.
+For non GitLab/GitHub App/Bitbucket Data Center projects, scheduled pipelines allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the <<scheduled-pipelines#,Scheduled Pipelines>> docs.
 
 [#next-steps]
 == Next steps

@@ -11,39 +11,29 @@ contentTags:
 :page-liquid:
 :experimental:
 
-Use <<inbound-webhooks>> to trigger a pipeline from anywhere that can emit a webhook or run a curl command. Inbound webhooks are available for accounts integrated through the xref:github-apps-integration#[GitHub App].
-
-Use <<outbound-webhooks>> to:
-
-* Build a custom dashboard to visualize or analyze workflow/job events.
-* Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
-* Use tools like xref:webhooks-airtable#[Airtable] to capture data and visualize it.
-* Alert when a workflow is cancelled, then use the API to rerun the workflow.
-* Trigger notification systems to alert people when workflows/jobs complete.
-* Build your own automation plugins and tools.
-
-[#introduction]
-== Introduction
-
 A webhook allows you to connect a platform (for example, CircleCI, an API you create yourself, or a third party service) to a stream of future _events_.
 
 Setting up an **outbound webhook** on CircleCI enables your third party service to receive information (referred to as _events_) from CircleCI, as they happen. This can help you avoid polling the API or manually checking the CircleCI web application for desired information.
 
-Setting up an **inbound webhook** on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
+Setting up an inbound webhook (as a **custom webhook** trigger) on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
 
-NOTE: Selecting an inbound webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Selecting a custom webhook as a pipeline trigger is currently in **open preview**. This feature is only available for CircleCI organizations that are integrated with GitHub via the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
-== Inbound webhooks
+== Custom webhooks
 
-Use **inbound webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command. This section presents some use cases for CircleCI inbound webhooks.
+Use **custom webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command.
+
+TIP: Custom webhooks are inbound to CircleCI and are used to trigger pipelines from other services. If you are looking for a way to have a CircleCI pipeline trigger a service, use an <<outbound-webhooks,outbound webhook>>.
+
+This section presents some use cases for CircleCI custom webhooks.
 
 === Quickstart
 
-Follow these steps to set up and test an inbound webhook trigger. Trigger from anywhere that can emit a webhook or run a curl command:
+Follow these steps to set up and test a custom webhook trigger. Trigger from anywhere that can emit a webhook or run a curl command:
 
-{% include snippets/inbound-webhook-setup.adoc %}
+{% include snippets/custom-webhook-setup.adoc %}
 
-. You can now test your inbound webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
+. You can now test your custom webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +
 NOTE: When triggering via `curl`, you must use a `POST` request with `content-type: application/json`.
 +
@@ -56,7 +46,7 @@ See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbo
 
 === Example: Trigger one pipeline from another
 
-Use an inbound webhook to configure one pipeline to trigger a second pipeline. For example, you might need to run a set of integration tests on a repository after you have made a change to a separate repository.
+Use a custom webhook to configure one pipeline to trigger a second pipeline. For example, you might need to run a set of integration tests on a repository after you have made a change to a separate repository.
 
 For this example, assume you have two projects in separate repositories:
 
@@ -67,15 +57,15 @@ TIP: You can also use this method to trigger one pipeline from another within th
 
 When a change is made to Project A, we want the full Project A configuration to be run, and then the Project B pipeline should be triggered. To achieve this, follow these steps:
 
-==== 1. Set up an inbound webhook for Project B
+==== 1. Set up a custom webhook for Project B
 
-Navigate to Project B in the CircleCI web app and set up an inbound webhook by following these steps:
+Navigate to Project B in the CircleCI web app and set up a custom webhook by following these steps:
 
-{% include snippets/inbound-webhook-setup.adoc %}
+{% include snippets/custom-webhook-setup.adoc %}
 
 ==== 2. Configure Project A to trigger Project B
 
-Navigate to Project A in the CircleCI web app and set up an environment variable. The value of the environment variable will be the secret from the inbound webhook you just set up for Project B.
+Navigate to Project A in the CircleCI web app and set up an environment variable. The value of the environment variable will be the secret from the custom webhook you just set up for Project B.
 
 TIP: As an alternative, you can add an environment variable using a xref:contexts#[context].
 
@@ -112,13 +102,13 @@ workflows:
       - say-hello
 ----
 
-=== Example: Extract inbound webhook payload data
+=== Example: Extract custom webhook payload data
 
-The inbound webhook body is available by using the `pipeline.trigger_parameters.webhook.body` xref:variables#pipeline-values[pipeline value].
+The custom webhook body is available by using the `pipeline.trigger_parameters.webhook.body` xref:variables#pipeline-values[pipeline value].
 
 The following example shows how you can use `jq` to extract values from the webhook payload into environment variables when you want to use them in your configuration.
 
-In this example the webhook body contains a property called `branch`. `jq` is installed and used to extract the `branch` value into an environment variable names `WEBHOOK_BRANCH`, which is then used in a GitHub clone command.
+In this example the webhook body contains a property called `branch`. `jq` is installed and used to extract the `branch` value into an environment variable named `WEBHOOK_BRANCH`, which is then used in a GitHub clone command.
 
 TIP: The xref:configuration-reference#commands[command] configured in this example uses commands from the link:https://circleci.com/developer/orbs/orb/circleci/jq[jq] and link:https://circleci.com/developer/orbs/orb/circleci/github-cli[GitHub CLI] orbs.
 
@@ -129,7 +119,7 @@ commands:
     description: Shallow Git Clone
     steps:
       - gh/setup:
-          token: "GITHUB_TOKEN_ALACRITY_BOT"
+          token: "GITHUB_TOKEN"
       - jq/install
       - run:
           name: Shallow Clone
@@ -140,7 +130,18 @@ commands:
 
 == Outbound webhooks
 
-Use outbound webhooks to integrate your CircleCI builds with external services. The following sections detail CircleCI outbound webhook structure and protocols.
+Use outbound webhooks to integrate your CircleCI builds with external services.
+
+For example, you could use <<outbound-webhooks>> to:
+
+* Build a custom dashboard to visualize or analyze workflow/job events.
+* Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
+* Use tools like xref:webhooks-airtable#[Airtable] to capture data and visualize it.
+* Alert when a workflow is cancelled, then use the API to rerun the workflow.
+* Trigger notification systems to alert people when workflows/jobs complete.
+* Build your own automation plugins and tools.
+
+The following sections detail CircleCI outbound webhook structure and protocols.
 
 === Quickstart
 
@@ -195,7 +196,7 @@ Once set up, a webhook is sent whenever an event occurs on the CircleCI platform
 
 A webhook is sent using an HTTP POST to the URL that was registered when the webhook was created, with a body encoded using JSON.
 
-CircleCI expects the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 5 seconds.
+CircleCI expects the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 10 seconds.
 
 Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the xref:webhooks-reference#common-top-level-keys[`id` property] in the webhook payload for identification.
 

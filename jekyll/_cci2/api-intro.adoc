@@ -37,11 +37,11 @@ NOTE: Currently, xref:managing-api-tokens#creating-a-personal-api-token[Personal
 
 [NOTE]
 ====
-*GitHub App and GitLab users:* Note that the definition of *project slug* provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:
+*GitHub App and GitLab users:* Note that the definition of *project slug* provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket Cloud projects only. GitLab, GitHub App and Bitbucket Data Center projects currently use a new slug format:
 
 `circleci/:slug-remainder`
 
-The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the link:{{site.baseurl}}/api-developers-guide/#getting-started-with-the-api/[API Developer's Guide] for more details.
+The project slug for GitLab, GitHub App and Bitbucket Data Center projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the link:{{site.baseurl}}/api-developers-guide/#getting-started-with-the-api/[API Developer's Guide] for more details.
 ====
 
 CircleCI API v2 uses a string representation called the `project_slug`, which is a "triplet" of your version control system (VCS), the name of your organization, and the name of the repository. `project_slug` takes the following form:
@@ -51,12 +51,12 @@ CircleCI API v2 uses a string representation called the `project_slug`, which is
 :vcs_type/:org_name/:repo_name
 ----
 
-The `project_slug` is included in the response payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. For GitHub OAuth app and Bitbucket projects, it is currently usable as a human-readable identifier for a given project.
+The `project_slug` is included in the response payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. For GitHub OAuth app and Bitbucket Cloud projects, it is currently usable as a human-readable identifier for a given project.
 
 [#authentication]
 == Authentication
 
-The CircleCI API v2 enables users to be authenticated by sending your xref:managing-api-tokens#creating-a-personal-api-token[Personal API token] as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the xref:api-developers-guide#[API Developer's Guide].
+The CircleCI API v2 enables users to be authenticated by sending your xref:managing-api-tokens#creating-a-personal-api-token[Personal API token] as an HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the xref:api-developers-guide#[API Developer's Guide].
 
 [discrete#triggering-a-pipeline-with-parameters-example]
 ==== Triggering a pipeline with parameters example
