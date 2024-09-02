@@ -29,7 +29,7 @@ When creating CircleCI projects you can connect to code repositories hosted on t
 * GitHub
 * GitLab
 * GitLab self-managed
-* Bitbucket
+* Bitbucket Cloud
 * Bitbucket Data Center
 
 CircleCI server supports GitHub and GitHub enterprise.
