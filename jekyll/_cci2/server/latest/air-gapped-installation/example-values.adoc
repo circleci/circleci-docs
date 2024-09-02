@@ -7,7 +7,7 @@ contentTags:
 = Example `values.yaml`
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server
+:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.6
 :icons: font
 :toc: macro
 :toc-title:

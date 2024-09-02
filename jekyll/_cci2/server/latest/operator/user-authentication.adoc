@@ -7,7 +7,7 @@ contentTags:
 = User authentication
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server currently supports OAuth through GitHub or GitHub Enterprise.
+:page-description: CircleCI server v4.6 currently supports OAuth through GitHub or GitHub Enterprise.
 :icons: font
 :toc: macro
 :toc-title:
