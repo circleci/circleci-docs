@@ -8,7 +8,7 @@ noindex: true
 = Phase 2 - Configure object storage
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to configure object storage through MinIO to run CircleCI server in an air-gapped environment.
+:page-description: How to configure object storage through MinIO to run CircleCI server v4.1 in an air-gapped environment.
 :icons: font
 :experimental:
 

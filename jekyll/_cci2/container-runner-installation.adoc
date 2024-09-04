@@ -109,7 +109,7 @@ CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[
 
 === 1. Install Envoy Gateway to your cluster
 . First, install the Gateway API CRDs and Envoy Gateway, as defined in the
-link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document]. To do this, replace `<version>` with the link:https://gateway.envoyproxy.io/blog/2022/10/01/versions/[most recent stable release] compatible with your cluster, then run the following command:
+link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document]. To do this, replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command:
 +
 [source,shell]
 ----

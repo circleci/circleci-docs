@@ -53,6 +53,8 @@ Remove webhooks and deploy keys created by CircleCI from your repository. For gu
 . Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
 . Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
 . Select **Triggers** from the sidebar and delete all triggers associated with your project.
++
+TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select **Pipelines** from the sidebar and delete all pipelines associated with your project.
 --
 +
@@ -62,6 +64,8 @@ Remove webhooks and deploy keys created by CircleCI from your repository. For gu
 . Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
 . Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
 . Select **Triggers** from the sidebar and delete all triggers associated with your project.
++
+TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select **Pipelines** from the sidebar and delete all pipelines associated with your project.
 --
 
