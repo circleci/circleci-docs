@@ -101,7 +101,7 @@ CircleCI server supports GitHub.com, GitHub Enterprise Cloud, and GitHub Enterpr
 |===
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center
 | xref:scheduled-pipelines#[Scheduled pipelines]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
@@ -132,6 +132,8 @@ CircleCI server supports GitHub.com, GitHub Enterprise Cloud, and GitHub Enterpr
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-up[role="circle-green"]
 |===
+
+^2^ _One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
 
 === Core capabilities
 

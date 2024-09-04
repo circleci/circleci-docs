@@ -192,7 +192,7 @@ You cannot currently manage the connection with GitHub outside of the project se
 [#scheudled-pipelines]
 === Scheduled pipelines
 
-The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release.
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool.
 
 [#build-forked-pull-requests]
 === Build forked pull requests
@@ -234,6 +234,15 @@ The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not curren
 === Only build pull requests
 
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
+
+[#github-checks]
+=== GitHub Checks
+
+xref:enable-checks/[GitHub Checks] are currently not supported.
+
+[#rerun-workflow-from-failed-commit-status]
+=== Known limitation: commit status when using "rerun workflow from failed"
+When using the "rerun from failed" functionality, there is currently a known limitation where the commit status reported to GitHub is set to "Pending" for jobs that were not re-run.
 
 [#next-steps]
 == Next steps
