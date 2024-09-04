@@ -21,8 +21,14 @@ The v4.6 release includes enhancements to the CircleCI web app, and improved pip
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.6 guide].
 
+== Release 4.6.1
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-1[changelog].
+
 == Release 4.6.0
 
 === Changelog
 
-For full details of this release see the link:https://circleci.com/changelog/#server-4-6-0[changelog].
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-0[changelog].

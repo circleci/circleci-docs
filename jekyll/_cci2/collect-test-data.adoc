@@ -268,7 +268,7 @@ For a full walkthrough, refer to this article link:https://www.viget.com/article
 
 When running Jest tests, use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 
-For more details on `--runInBand`, refer to the link:https://facebook.github.io/jest/docs/en/cli.html#runinband[Jest CLI] documentation. For more information on these issues, see link:https://github.com/facebook/jest/issues/1524#issuecomment-262366820[Issue 1524] and link:https://github.com/facebook/jest/issues/5239#issuecomment-355867359[Issue 5239] of the official Jest repository.
+For more details on `--runInBand`, refer to the link:https://jestjs.io/docs/cli#--runinband[Jest CLI] documentation. For more information on these issues, see link:https://github.com/facebook/jest/issues/1524#issuecomment-262366820[Issue 1524] and link:https://github.com/facebook/jest/issues/5239#issuecomment-355867359[Issue 5239] of the official Jest repository.
 
 [#mocha-for-node]
 === Mocha for Node.js

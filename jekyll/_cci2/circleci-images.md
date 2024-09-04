@@ -28,7 +28,6 @@ If you would like to directly search for an image, you can browse CircleCI Docke
 
 - Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
 - Find all CircleCI pre-built images available on [Docker Hub](https://hub.docker.com/u/cimg).
-- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
 otherwise improve functionality, and these changes can sometimes affect

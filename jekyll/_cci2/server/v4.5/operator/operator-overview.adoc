@@ -8,7 +8,7 @@ noindex: true
 = Operator overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server.
+:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.5.
 :icons: font
 :toc: macro
 :toc-title:

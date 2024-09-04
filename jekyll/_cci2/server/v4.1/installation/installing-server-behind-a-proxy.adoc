@@ -7,7 +7,7 @@ noindex: true
 ---
 = Installing server behind a proxy
 :page-layout: classic-docs
-:page-description: Learn how to install CircleCI server v4.x behind a proxy.
+:page-description: Learn how to install CircleCI server v4.1 behind a proxy.
 :page-liquid:
 :icons: font
 :experimental:
