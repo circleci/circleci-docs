@@ -7,7 +7,7 @@ contentTags:
 = Manage virtual machines with machine provisioner
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server’s machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-description: CircleCI server v4.6’s machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :toc: macro
 :toc-title:

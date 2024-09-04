@@ -22,14 +22,14 @@ CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root
 [#how-do-i-install-dependencies-needed-for-my-jobs]
 === How do I install dependencies needed for my jobs that use machine runners?
 
-There are two main approaches available for installing dependencies:
+Install dependencies in one of two ways:
 
 * Allow the jobs to install their own dependencies
-
++
 This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner. For example into the working directory.
 
 * Pre-install dependencies on the machine where the machine runner is installed
-
++
 This approach is the most secure; however, this means that if the job’s dependencies change, the self-hosted runner machine must be reconfigured.
 
 [#what-connectivity-is-required]
@@ -181,7 +181,7 @@ amd64 and arm64 Linux for both container runner, and the pods that execute tasks
 [#arm64-container-jobs]
 ==== Does container runner support arm64 Docker images?
 
-Yes, container runner supports jobs that use either amd64 or arm64 Docker images, as well as Kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically that are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes documentation].
+Yes, container runner supports jobs that use either amd64 or arm64 Docker images, as well as Kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically that are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-taints/[Kubernetes documentation].
 
 ```yaml
 agent:

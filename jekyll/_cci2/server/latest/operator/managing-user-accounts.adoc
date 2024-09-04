@@ -7,7 +7,7 @@ contentTags:
 = Managing user accounts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides information to help CircleCI server perators manage user accounts.
+:page-description: This section provides information to help CircleCI server v4.6 perators manage user accounts.
 :icons: font
 :toc: macro
 :toc-title:

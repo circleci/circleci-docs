@@ -27,13 +27,41 @@ The following diagram illustrates how data flows between jobs:
 
 image::/docs/assets/img/docs/jobs-overview.png[Jobs overview]
 
-The job names shown in this diagram are just examples. You can name your jobs whatever you want.
-
 Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux, macOS, or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
 
 When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
 
 See the xref:executor-intro#[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
+
+=== Job naming
+
+When you configure a job you will give it a name. This is its job property name:
+
+[,yml]
+----
+version: 2.1
+
+jobs:
+  my-job: # the job property name
+----
+
+The job property name can be anything you like with the following restrictions:
+
+* Must be unique within the jobs stanza.
+* Only ASCII alphabet characters, underscores, and dashes.
+* No spaces.
+
+When you configure a job in a workflow you have the option to give it an xref:configuration-reference#name[alternative name]. This alternative name can be useful if you want to call a job more than once in a workflow.
+
+[,yml]
+----
+workflows:
+  jobs:
+    my-job: # the job property name
+      name: My Job # the alternative job name within the workflow
+----
+
+The job name within the workflow can be anything you like _including_ spaces and special characters.
 
 [#steps-overview]
 == Steps overview
