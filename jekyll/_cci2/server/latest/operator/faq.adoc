@@ -7,7 +7,7 @@ contentTags:
 = CircleCI server v4.6 FAQ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find answers about the CircleCI server v4.6 data retention policy, what control is granted over Nomad certificates
+:page-description: Find answers about the CircleCI server v4.6 data retention policy, what control is granted over Nomad certificates.
 :icons: font
 :toc: macro
 :toc-title:
