@@ -7,7 +7,7 @@ contentTags:
 = Managing load balancers
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this guide to make the frontend load balancer private.
+:page-description: Use this guide to make the frontend load balancer private for CircleCI server v4.6.
 :icons: font
 :toc: macro
 :toc-title:
