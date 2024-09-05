@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports several code version control systems (VCS). The guide gives an overview of the features available to each VCS integration.
+When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports several code version control systems (VCS). This guide gives an overview of the features available to each VCS integration.
 
 [NOTE]
 ====
@@ -22,7 +22,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 
 == Which version control systems are supported?
 
-When creating CircleCI cloud projects you can connect to code repositories hosted on the following VCS providers:
+link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated with code repositories hosted on the following VCS providers:
 
 {% include snippets/bitbucket-data-center-closed-preview.adoc %}
 
@@ -32,9 +32,17 @@ When creating CircleCI cloud projects you can connect to code repositories hoste
 * Bitbucket Cloud
 * Bitbucket Data Center
 
-CircleCI server supports GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server.
+link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
+
+* GitHub.com
+* GitHub Enterprise Cloud
+* GitHub Enterprise Server
 
 == Feature support per VCS
+
+The following tables show feature support per VC for **CircleCI cloud**.
+
+For **CircleCI server**, see the tags on the individual feature pages. On the whole features supported by GitHub OAuth are supported for CircleCI server.
 
 === Code checkout and repository integration
 
