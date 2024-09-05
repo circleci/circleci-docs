@@ -769,7 +769,10 @@ You can see a full example on this link:https://levelup.gitconnected.com/how-to-
 [#xcode]
 === Xcode
 
-Xcode generates test results in a plist (property list) file format. It is possible to convert a plist file format into an XML format that can be uploaded to CircleCI using the `xsltproc` command. Follow the steps in this link:https://medium.com/@warchimede/convert-xcode-plist-test-reports-to-junit-xml-6f0aa8c3fa58[third party resource] to convert the file and then use `store_test_results` to upload the results to CircleCI.
+Xcode generates test results in a `.xcresult` file format.
+
+To integrate with CircleCI's test results features you will need to covert your XCresult bundle to JUnit XML.
+To convert your XCResult bundle you can use a third part tool, for example link:https://fastlane.tools/[Fastlane] or link:https://github.com/xcpretty/xcpretty[xcpretty]. Once your test results are converted you can use `store_test_results` to upload the results to CircleCI.
 
 [#playwright]
 === Playwright
