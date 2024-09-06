@@ -8,7 +8,7 @@ noindex: true
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server application.
+:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.3 application.
 :icons: font
 :toc: macro
 :toc-title:

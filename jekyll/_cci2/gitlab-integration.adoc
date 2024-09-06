@@ -95,6 +95,8 @@ image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new pr
 . Enter your personal access token. Select **Connect**.
 
 . Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Select **Connect**.
++
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab Self-Managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name.
 
@@ -106,6 +108,8 @@ The express CircleCI configuration setup is not currently available for GitLab S
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
 When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
+
+== Limitations
 
 The following limits are currently in place for GitLab integrations:
 
@@ -306,11 +310,6 @@ Open source plans are not currently available to GitLab customers. CircleCI will
 === Test Insights
 
 xref:insights-tests#[Test Insights] is currently not supported for GitLab customers.
-
-[#badges]
-=== Insights snapshot badge
-
-The xref:insights-snapshot-badge#[Insights snapshot badge] feature is not currently supported for GitLab projects.
 
 [#circleci-server]
 === CircleCI self-hosted server product

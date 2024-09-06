@@ -9,7 +9,7 @@ noindex: true
 :page-layout: classic-docs
 :page-liquid:
 :experimental:
-:page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
+:page-description: A guide to installing CircleCI server v4.5 in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font
 :toc: macro
 :toc-title:

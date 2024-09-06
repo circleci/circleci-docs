@@ -8,7 +8,7 @@ noindex: true
 = Managing build artifacts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
+:page-description: Learn how CircleCI server v4.1 build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
 :icons: font
 :experimental:
 
