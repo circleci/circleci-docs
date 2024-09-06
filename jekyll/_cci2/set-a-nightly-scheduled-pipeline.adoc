@@ -55,11 +55,11 @@ async function setupNightlySchedule(){
         },
         "timetable": {
             // once per hour
-            "per_hour": 1,
+            "per-hour": 1,
             // at 01:00 UTC
-            "hours_of_day": [1],
+            "hours-of-day": [1],
             // on the following days of the week
-            "days_of_week": ["TUE", "WED", "THU", "FRI", "SAT"]
+            "days-of-week": ["TUE", "WED", "THU", "FRI", "SAT"]
         }
     },
     {
