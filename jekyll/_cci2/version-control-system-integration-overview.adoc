@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server
 ---
 = Version control system integration overview
 :description: An overview guide to the version control systems you can integrate with CircleCI.
@@ -16,7 +17,7 @@ When you create a CircleCI project you will select a code repository to connect.
 
 link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated with code repositories hosted on the following VCS providers:
 
-{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+
 
 * GitHub.com
 * GitHub Enterprise Cloud
@@ -24,6 +25,8 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * GitLab self-managed
 * Bitbucket Cloud
 * Bitbucket Data Center
++
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
@@ -37,7 +40,7 @@ The following tables show feature support per VCS for **CircleCI cloud**, along 
 
 [NOTE]
 ====
-GitHub can be integrated into your CircleCI org in one of two ways, via the GitHub App or GitHub OAuth. Both are described below. If you would like to quickly see which integration type you have, navigate to CircleCI web app, select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
+GitHub can be integrated into your CircleCI org in one of two ways, via the GitHub App or GitHub OAuth. To see which integration type you have, navigate to CircleCI web app, select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
 
 * This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
@@ -96,7 +99,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-down[role="circle-red"]
 |===
 
-^1^ _Possible using dynamic configuration_
+^1^ _Possible using xref:dynamic-config#[dynamic configuration]._
 
 === Pipeline triggers and integrations
 
