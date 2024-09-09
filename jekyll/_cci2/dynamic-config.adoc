@@ -56,12 +56,12 @@ For some basic examples of using dynamic configuration, see the xref:using-dynam
 
 == Config continuation constraints
 
-Some constraints on continuing pipelines from a `setup` configuration are as follows:
+Some constraints on continuing pipelines from a `setup: true` configuration are as follows:
 
 - The `setup` configuration must be `version: 2.1`.
-- The `setup` configuration must only allow one continuation workflow to run in each pipeline. For example:
-** Have only one workflow that uses a call to the continuation API endpoint, either directly or using an orb.
-** Use logic conditions to ensure only one continuation is allowed at a time.
+- The `setup` configuration must only allow one workflow to run in each pipeline. For example:
+** Have only one workflow configured.
+** Use logic conditions to ensure only one workflow is run for each pipeline.
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
 - Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.

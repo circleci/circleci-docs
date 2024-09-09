@@ -6,6 +6,7 @@ contentTags:
 ---
 = Installation reference
 :page-layout: classic-docs
+:page-description: Reference documentation for installing CircleCI server v4.6.
 :icons: font
 :toc: macro
 :toc-title:

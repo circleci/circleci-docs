@@ -1,23 +1,47 @@
 ---
-layout: classic-docs
-title: Skip or cancel jobs and workflows
-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
 contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
 ---
+= Skip CI and cancel workflows
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
+:icons: font
+:experimental:
 
-This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
+This page describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
 
-## Skip jobs
-{: #skip-jobs }
+* The CI processes can be skipped for a commit, on push to your repo.
+* Workflows can be cancelled using the auto-cancel feature.
 
-By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the **latest commit** you pushed. This will skip the pipeline execution for all the commits included in the push.
+Both methods are described below.
 
-### Scope
-{: #scope }
+[#skip-jobs]
+== Skip CI for a specific push
+
+By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding one of the following tags within the first 250 characters of the body or title of the **latest commit** you pushed:
+
+* `[ci skip]`
+* `[skip ci]`
+
+Adding one of these tags skips pipeline execution for all the commits included in the push.
+
+=== The skip CI process
+
+When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this infomation to decide not to build your project.
+
+The skip process is different depending on your VCS integration, as follows:
+
+* xref:github-apps-integration#[GitHub App]: A skipped pipeline will not show on the pipelines page, and no pipeline will be returned for a skipped commit using the API.
+
+* GitHub OAuth, GitLab, Bitbucket: A skipped pipeline will show in the CircleCI web app pipelines page with a status of NOT RUN. A pipeline will be returned for the skipped commit using the API with a status of `created` but the workflows and jobs will be `not run`.
+
+NOTE: **GitLab known issue**: If you skip a commit using GitLab a pipeline will appear to be running indefinitely in the GitLab UI but the pipeline is not triggered in CircleCI.
+
+=== Scope
 
 A few points to note regarding the scope of the `ci skip` feature:
 
@@ -25,8 +49,7 @@ A few points to note regarding the scope of the `ci skip` feature:
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
-### Example commit title
-{: #example-commit-title }
+=== Example commit title
 
 ```shell
 $ git log origin/master..HEAD
@@ -40,8 +63,7 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
 
 When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit title.
 
-### Example commit description
-{: #example-commit-description }
+=== Example commit description
 
 ```shell
 $ git log origin/master..HEAD
@@ -60,15 +82,14 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
 
 When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci]` in the commit description.
 
-## Auto-cancel redundant workflows
-{: #auto-cancel}
+[#auto-cancel]
+== Auto-cancel redundant workflows
 
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to complete before the most recent version starts.
 
 To save time, you can configure CircleCI to automatically cancel any non-terminated workflows when a newer pipeline is triggered on that same branch.
 
-### Scope
-{: #scope }
+=== Scope
 
 A few points to note regarding the use of the auto-cancel feature:
 
@@ -77,16 +98,15 @@ A few points to note regarding the use of the auto-cancel feature:
 * Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
-{: #enable-auto-cancel }
 
 It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 {: class="alert alert-warning"}
 
-1. In the CircleCI application, go to your **Project Settings**.
+. In the CircleCI application, go to your **Project Settings**.
 
-2. Click on **Advanced Settings**.
+. Select **Advanced Settings**.
 
-3. Toggle the switch to enable the **Auto-cancel redundant workflows** option.
+. Toggle the switch to enable the **Auto-cancel redundant workflows** option.
 
 Projects which have auto-cancel enabled will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 

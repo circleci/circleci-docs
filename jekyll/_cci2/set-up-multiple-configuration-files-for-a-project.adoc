@@ -40,6 +40,8 @@ Next, add a new pipeline in your CircleCI project settings.
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
 . Select **Pipelines** in the sidebar
++
+TIP: If you do not see **Pipelines** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Pipeline]
 . Complete the required form fields:
 ** Give your pipeline a descriptive name
@@ -54,6 +56,8 @@ Next, create a trigger for your pipeline.
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
 . Select **Triggers** in the sidebar
++
+TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Trigger]
 . Select **GitHub App** in the dropdown menu
 . Select btn:[Next]
