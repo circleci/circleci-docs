@@ -43,7 +43,7 @@ Follow these steps to create a new project in CircleCI:
 +
 image::create-project/create-project-button.png[Create a project]
 
-. Choose an option to match the work you want to do in your project.  When naming the project
+. Choose an option to match the work you want to do in your project.
 +
 image::create-project/what-project.png[Screenshot showing options to choose what you want to do in your project]
 
