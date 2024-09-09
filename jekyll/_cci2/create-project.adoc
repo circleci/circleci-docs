@@ -51,9 +51,18 @@ image::create-project/what-project.png[Screenshot showing options to choose what
 +
 image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
 +
-NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. **If your GitHub organization has more than 100 repositories**, select the **Only select repositories** option. There is a known issue where GitHub organizations with more than 100 repositories cannot view their repositories in CircleCI if they select the "All repositories" option when installing the CircleCI GitHub App.
+NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect.
 
 . Follow the in-app prompts to give your project a name.
++
+[TIP]
+====
+**Project names** must meet the following requirements:
+
+* Begin with a letter
+* 3-40 characters long
+* Contain only letters, numbers, or the following characters `" - _ . : ! & + [ ] " ;`
+====
 
 . If a CircleCI config file exists in your repository already you will be redirected to the pipelines page. Otherwise, CircleCI automatically generates a custom configuration file based on the programming languages and frameworks detected in your selected repository. If CircleCI is unable to generate a custom configuration file, a fallback template is used. Select btn:[Commit and Run].
 --
@@ -81,6 +90,16 @@ image::create-project/create-new-gitlab-project.png[Create new project window]
 +
 ** If you see a blue btn:[Connect] button rather than your GitLab username, select btn:[Connect] to redirect to GitLab and authorise the connection.
 ** The **Project Name** field (bottom of the window) is automatically populated with the name of your repository, but you can change this if required.
++
+[TIP]
+====
+**Project names** must meet the following requirements:
+
+* Begin with a letter
+* 3-40 characters long
+* Contain only letters, numbers, or the following characters `" - _ . : ! & + [ ] " ;`
+====
+
 ** Use the repository dropdown menu to tell CircleCI where your code is stored.
 ** Choose an option for managing your `.circleci/config.yml` file:
 *** **Fastest:** Use a config file that already exists in your repository.
@@ -128,7 +147,18 @@ If this is your first GitLab self-managed project you will now set up your integ
 * Generate an add a personal access token
 * Add your known hosts, following the instructions in the app
 ====
+
 ** The **Project Name** field (bottom of the window) is automatically populated with the name of your repository, but you can change this if required.
++
+[TIP]
+====
+**Project names** must meet the following requirements:
+
+* Begin with a letter
+* 3-40 characters long
+* Contain only letters, numbers, or the following characters `" - _ . : ! & + [ ] " ;`
+====
+
 ** Use the repository dropdown menu to tell CircleCI where your code is stored.
 ** Select **Create Project**. You will then be redirected to the Pipelines page.
 ** The express CircleCI configuration setup is not currently available for GitLab self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
@@ -164,6 +194,15 @@ image::create-project/what-project.png[Screenshot showing options to choose what
 image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
 
 . On the next screen give your project a descriptive name.
++
+[TIP]
+====
+**Project names** must meet the following requirements:
+
+* Begin with a letter
+* 3-40 characters long
+* Contain only letters, numbers, or the following characters `" - _ . : ! & + [ ] " ;`
+====
 
 . Next, follow the steps on the xref:bitbucket-data-center-integration#integrate-a-project-with-circleci[Bitbucket integration setup] page to set up the following:
 ** An integration with your Bitbucket Data Center instance (if not already set up for your org).
