@@ -239,9 +239,9 @@ xref:insights-tests#[Test Insights] is currently not supported.
 The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
 
 [#github-checks]
-=== GitHub Checks
+=== GitHub checks
 
-xref:enable-checks/[GitHub Checks] are currently not supported.
+xref:enable-checks/[GitHub checks] are currently not supported.
 
 [#rerun-workflow-from-failed-commit-status]
 === Known limitation: commit status when using "rerun workflow from failed"
