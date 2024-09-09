@@ -469,7 +469,7 @@ For xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab S
 
 * Begin with a letter
 * 3-40 characters long
-* Contain only letters, numbers, or the following characters `" - _ . : ! & + [ ] " ;`
+* Contain only letters, numbers, spaces, or the following characters `" - _ . : ! & + [ ] " ;`
 ====
 
 A standalone project can have:
