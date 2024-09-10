@@ -2,17 +2,34 @@
 contentTags:
   platform:
   - Cloud
+  - Server
 ---
 = Introduction to the CircleCI Web App
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the basic features and settings of the CircleCI web app.
+:page-description: This document describes the basic features and settings available in the CircleCI web app.
 :icons: font
 :experimental:
 
-The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
+The CircleCI web application is a graphic user interface for managing your projects, settings, integrations and organizations. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
 
-Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
+Inside the application, you will find the status of pipelines, workflows and jobs, as well as organization and project settings. You will also find Insights for managing your projects and organizations, and release environments for viewing and managing your releases.
+
+This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
+
+== User home page
+
+When you visit the link:https://app.circleci.com[CircleCI web application] you will land on your **user home page**.
+
+image::user-homepage.png[User home page]
+
+The user home page gives your an overview of the organizations of which you are a member, along with options to create a new organization or join an existing organization.
+
+At the top right of the screen you will see notifications and get access to help resources. You can also select your icon to access user settings or to sign out of the app.
+
+Select an org card to take a look around. The following section describe the various features and options you will find for each organization.
+
+TIP: Once you have selected an org, you can select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time.
 
 [#dashboard-and-side-navigation]
 == Dashboard and side navigation
