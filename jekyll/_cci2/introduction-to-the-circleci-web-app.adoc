@@ -29,18 +29,17 @@ At the top right of the screen you will see notifications and get access to help
 
 Select an org card to take a look around. The following section describe the various features and options you will find for each organization.
 
+== Organization home page and navigation
+
+After selecting an organization you will find yourself on the organization home page. The organization home page shows an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
+
+image::org-homepage.png[Organization home page]
+
 TIP: Once you have selected an org, you can select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time.
 
-[#dashboard-and-side-navigation]
-== Dashboard and side navigation
+From your organization home page you have access to org-level options. You can create a project, select and existing project using the overview project cards, or use the sidebar navigation items to access other areas of the product. The sidebar navigation allows you to visit the following pages (some of these sections are discussed in more detail below):
 
-Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdown menus at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
-
-image::web_ui_dashboard.png[Dashboard page]
-
-If you do not have any projects in your dashboard, or you are missing specific projects, you can select **Projects** on the side navigation. The projects view shows the list of all projects within the organization, which you can choose to follow or unfollow. Following a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
-
-The side navigation allows you to visit the following web application pages:
+**Pipelines**: Allows you to see all pipelines associated with your organization, and expand to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. If a pipeline has multiple workflows there will be a grey bar on the left, and you can see the status of each workflow and expand them individually to view the status of each individual job.
 
 **Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as set up new projects.
 
@@ -62,14 +61,27 @@ At the very bottom of the side navigation (you may have to scroll down), you wil
 
 The sections below describe some of the pages of the web application in more detail.
 
+=== Pipelines dashboard
+
+Select **Pipelines** in the sidebar to enter the pipelines dashboard. By default this page shows the workflow status for all pipelines for all the projects that you are _following_. Use the filters at the top of the page to view the following:
+
+* All pipelines.
+* Just your pipelines.
+* Pipelines for a specific project, and within this a specific branch.
+* Pipelines triggered before a specific day range, for example "Greater than 90 days". This can be helpful when analyzing historical data, as it allows you to filter out and focus on older pipelines without having to scroll through a large amount of data.
+* Use the filter icon to restrict the workflow statuses that you are interested in viewing. For example if you only want to see pipelines with workflows that are "Failed" and "Needs Approval", you can select those options from the filter menu.
+
+If you are missing specific projects from the pipelines dashboard, you can select **Projects** on the side navigation. The projects view shows the list of all projects within the organization, which you can choose to follow or unfollow. Following a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+
 [#view-and-navigate-pipelines]
 == View and navigate pipelines
 
-Your pipelines appear on the **Dashboard** of the CircleCI web app as they are triggered. You can view workflows or single jobs by expanding a pipeline and clicking in on any workflow or job descriptor.
+Your pipelines appear on the **Pipelines** dashboard of the CircleCI web app as they are triggered. You can view workflows or single jobs by expanding a pipeline and clicking on any workflow or job descriptor.
 
 When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
 
-image:pipeline-breadcrumbs.png[Pipelines Breadcrumbs]
+image:pipeline-navigation.png[Pipeline navigation]
+
 
 [#organization-switching]
 == Organization switching
