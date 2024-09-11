@@ -410,7 +410,7 @@ en:
             link: release/set-up-circleci-releases
           - name: Manual install - Set up the release agent
             link: release/set-up-the-release-agent
-          - name: Manual intall - Configure your Kubernetes components
+          - name: Manual install - Configure your Kubernetes components
             link: release/configure-your-kubernetes-components
       - name: How to
         children:
