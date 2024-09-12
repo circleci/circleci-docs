@@ -17,47 +17,43 @@ Inside the application, you will find the status of pipelines, workflows and job
 
 This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
-== User home page
+== User homepage
 
-When you visit the link:https://app.circleci.com[CircleCI web application] you will land on your **user home page**.
+When you visit the link:https://app.circleci.com[CircleCI web application] you will land on your **user homepage**.
 
-image::user-homepage.png[User home page]
+image::user-homepage.png[User homepage]
 
-The user home page gives your an overview of the organizations of which you are a member, along with options to create a new organization or join an existing organization.
+The user homepage gives your an overview of the organizations of which you are a member, along with options to create a new organization or join an existing organization.
 
 At the top right of the screen you will see notifications and get access to help resources. You can also select your icon to access user settings or to sign out of the app.
 
+At the top left of the screen you will find the CircleCI status badge. The status badge displays the operational health of CircleCI. Select the status badge to enter CircleCI's status page.
+
 Select an org card to take a look around. The following section describe the various features and options you will find for each organization.
 
-== Organization home page and navigation
+== Organization homepage and navigation
 
-After selecting an organization you will find yourself on the organization home page. The organization home page shows an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
+After selecting an organization you will find yourself on the organization homepage. The organization home page shows an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
 
-image::org-homepage.png[Organization home page]
+image::org-homepage.png[Organization homepage]
 
 TIP: Once you have selected an org, you can select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time.
 
 From your organization home page you have access to org-level options. You can create a project, select and existing project using the overview project cards, or use the sidebar navigation items to access other areas of the product. The sidebar navigation allows you to visit the following pages (some of these sections are discussed in more detail below):
 
-**Pipelines**: Allows you to see all pipelines associated with your organization, and expand to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. If a pipeline has multiple workflows there will be a grey bar on the left, and you can see the status of each workflow and expand them individually to view the status of each individual job.
+**Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. If a pipeline has multiple workflows there will be a grey bar on the left, and you can see the status of each workflow and expand them individually to view the status of each individual job.
 
-**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as set up new projects.
+**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:create-project#[create/set up new projects].
 
-**Insights**: Provides you with time-series data overviews of credit usage, success rates, and pipeline duration, among other things.
+**Releases**: Set up environment integrations to manage releases for your projects. For full details of the Releases feature, see the xref:release/releases-overview#[Release overview] page.
 
-**Self-Hosted Runners**: Shows a list of your resource classes and self-hosted runners. This page also allows you to set up self-hosted runners, so you can use your own infrastructure for running jobs.
+**Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights#[Using Insights] page.
 
-**Organization Settings**: Settings for your organization including contexts, security, and orbs, among other things. You can also find your organization ID on this page.
+**Self-Hosted Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard shows a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:runner-overview#[Self-hosted runners overview] page.
+
+**Organization Settings**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID on this page.
 
 **Plan**: Shows your network and storage usage, as well as additional settings related to your plan.
-
-**Notifications**: A tooltip with new features or changes. New notifications are identified with a badge next to the navigation item.
-
-**Status**: The status badge will display the operational health of CircleCI. Clicking on this navigation item will bring you to CircleCI's status page.
-
-**Support**: A tooltip with links to community help forums, CircleCI support, as well as links to CircleCI's feature requests and changelog pages.
-
-At the very bottom of the side navigation (you may have to scroll down), you will see your individual **user icon**. Clicking on this will bring you to your individual **User Settings**.
 
 The sections below describe some of the pages of the web application in more detail.
 
@@ -82,13 +78,15 @@ When viewing a single job in a pipeline, you can use the breadcrumbs at the top 
 
 image:pipeline-navigation.png[Pipeline navigation]
 
-
 [#organization-switching]
 == Organization switching
 
-In the top left of the web app, you will find the organization (org) switcher.
+If you want to change which org you are working within, you have a few options:
 
-image:org-centric-ui_newui.png[Switch organization menu in web app]
+* Select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time (1). From the user home page you can select the org that you want to work in. You can also create a new organization from your user home page.
+* Once in an org view you can also use the org switcher at the top of the sidebar (2).
+
+image:org-switch.png[Switch organization using the user homepage or the org switcher]
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available. If you want to add the project `your-org/project`, you must select `your-org` from the org switcher.
 
