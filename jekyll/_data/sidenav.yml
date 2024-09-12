@@ -408,6 +408,8 @@ en:
         children:
           - name: Set up CircleCI releases
             link: release/set-up-circleci-releases
+          - name: Configure release markers
+            link: release/configure-release-markers
           - name: Manual install - Set up the release agent
             link: release/set-up-the-release-agent
           - name: Manual install - Configure your Kubernetes components
