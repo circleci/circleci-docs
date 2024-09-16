@@ -19,8 +19,8 @@ You can use the macOS execution environment to run your xref:jobs-steps#[jobs] i
 jobs:
   build:
     macos:
-      xcode: 14.2.0
-    resource_class: macos.m1.medium.gen1
+      xcode: 16.1.0
+    resource_class: m2pro.medium
 
     steps:
       # Commands will execute in macOS container
@@ -46,8 +46,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "14.2.0"
-    resource_class: macos.m1.medium.gen1
+      xcode: "16.1.0"
+    resource_class: m2pro.medium
 ----
 
 [#view-resource-usage]
