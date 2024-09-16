@@ -14,7 +14,7 @@
 | 12GB
 | icon:check[]
 | icon:times[]
-|===
+|
 
 | `m2pro.medium`
 | 4 @ 3.49 GHz
