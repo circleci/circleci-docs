@@ -16,6 +16,13 @@
 | icon:times[]
 |===
 
+| `m2pro.medium`
+| 4 @ 3.49 GHz
+| 8GB
+| icon:check[]
+| icon:times[]
+|===
+
 [WARNING]
 ====
 *We have deprecated support for all Intel-based macOS resources.*
