@@ -127,7 +127,7 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "16.1.0"
+      xcode: "15.4.0"
     resource_class: m2pro.medium
     steps:
     #  ...  other config
