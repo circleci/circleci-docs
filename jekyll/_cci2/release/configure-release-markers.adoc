@@ -10,7 +10,9 @@ contentTags:
 :icons: font
 :experimental:
 
-This tutorial shows how to add a "release marker" step to your workflow config. Release markers allow you log all new releases in one place and link back to the CI/CD pipelines that caused them, without needing to install the release agent.
+This tutorial shows how to add a release marker step to your workflow config. Release markers allow you log all new releases in one place and link back to the CI/CD pipelines that caused them.
+
+Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. You can use release markers independently, without installing the release agent. If you are interested in comprehensive release visibility and management features, refer to the xref:set-up-circleci-releases#[Set up CircleCI releases] guide for more information.
 
 == 1. Create environment integration
 
@@ -38,8 +40,8 @@ circleci run release log --environment-name=<some-environment-name> --component-
 ----
 
 . Substitute the placeholders above based on your application's details:
-** The `environment-name` param should match the name of your environment integration created via the CircleCI UI.
-** The `component-name` param should match the name of your component as displayed in the CircleCI UI.
+** The `environment-name` parameter should match the name of your environment integration created via the CircleCI UI.
+** The `component-name` parameter should match the name of your component as displayed in the CircleCI UI.
 ** The `target-version` param should match the name of the version being released.
 ** [Optional] You can provide the following parameters if required:
 *** The `namespace` param can be provided to use a value other than `default`.
