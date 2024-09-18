@@ -108,12 +108,16 @@ To add a _release_ job, follow these steps:
 
 . Add a `plan release` step at the end of your existing _deployment_ job so CircleCI knows to expect a release to happen as an outcome of that job:
 +
-[,shell]
+[,yml]
 ----
-...
-(existing deployment commands)
-...
-circleci run release plan --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> <my-service-release>
+jobs:
+  deploy-my-service:
+    executor: some-executor
+    steps:
+      ...
+      (existing deployment commands)
+      ...
+      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=<some-version-name> <my-service-release>
 ----
 +
 Substitute the placeholders above based on your application's details:
