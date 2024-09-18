@@ -14,10 +14,10 @@
 | link:https://discuss.circleci.com/t/xcode-16-1-beta-1-released/51693[Release Notes]
 
 | `16.0.0`
-| Xcode 16.0 RC (16A242)
+| Xcode 16.0 (16A242d)
 | 14.6.1
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15025/manifest.txt[Installed software]
-| link:https://discuss.circleci.com/t/xcode-16-rc-released/51932[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15048/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-ga-released/51990[Release Notes]
 
 | `15.4.0`
 | Xcode 15.4 (15F31d)
