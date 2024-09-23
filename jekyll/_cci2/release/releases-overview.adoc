@@ -288,6 +288,10 @@ A release can be in one of the following states:
 |Release commands failed to be picked up by the release agent within the required time window
 |===
 
+== Release markers
+
+Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. With release markers you can log all new releases in one place and link back to the CI/CD pipelines that caused them. You can use release markers independently, without installing the release agent. For setup information, see the xref:configure-release-markers#[Configure release markers] page.
+
 [#known-limitations]
 == Known limitations
 
