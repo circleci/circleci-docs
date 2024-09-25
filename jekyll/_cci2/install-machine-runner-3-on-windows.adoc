@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
 = Install machine runner 3.0 on Windows
 :page-layout: classic-docs
@@ -12,7 +13,7 @@ contentTags:
 :machine:
 :windows:
 
-This page describes how to install CircleCI's machine runner 3.0 on Windows. This has been tested for Windows Server 2019 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
+This page describes how to install CircleCI's machine runner 3.0 on Windows. This has been tested for Windows Server 2016, 2019, and 2022 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services (RDS) should also work.
 
 This page walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
@@ -23,13 +24,15 @@ NOTE: The Windows Server needs to be a domain member when you set this up in dom
 [#prerequisites]
 == Prerequisites
 
-To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+To install machine runners and run jobs, you will need to have root access, and have the following dependencies installed on your system:
 
-* https://www.gnu.org/software/tar/[tar]
+* link:https://learn.microsoft.com/en-us/windows-server/get-started/install-options-server-core-desktop-experience[Desktop Experience]
 
-* https://www.gnu.org/software/gzip/[gzip]
+* link:https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remote-desktop-services-overview[Remote Desktop Services (RDS)]
 
 * The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+
+NOTE: Additional utilities and tools, such as Chocolatey, Git, and Gzip are automatically installed as part of the <<#installation-steps,installation script>>.
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
@@ -98,3 +101,12 @@ A Windows machine runner *can* be run in `continuous` mode. However, doing so el
 == Troubleshooting
 
 Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner>> guide if you encounter issues installing or running machine runner on Windows.
+
+[#additional-resources]
+== Additional resources
+
+- xref:machine-runner-3-manual-installation-on-windows.adoc[Manual installation for machine runner 3.0 on Windows]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

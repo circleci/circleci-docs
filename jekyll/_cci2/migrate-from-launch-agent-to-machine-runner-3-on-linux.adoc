@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
 = Migrate from launch agent to machine runner 3.0 on Linux
 :page-layout: classic-docs
@@ -68,3 +69,4 @@ sudo systemctl start circleci-runner
 == Additional resources
 
 - xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-manual-installation.adoc[Machine runner 3.0 manual installation reference]

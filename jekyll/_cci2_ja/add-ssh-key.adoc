@@ -29,7 +29,7 @@ GitLabを使用している場合、または他のサービスにアクセス�
 [#steps-to-add-additional-ssh-keys]
 == SSHキーを追加する手順
 
-注: CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。 以下の例はmacOSの場合です。 SSHキーの作成に関する詳細は、link:https://help.github.com/articlesgenerating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub] または link:https://support.atlassian.com/ja/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket] のドキュメントを参照してください。
+注: CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。 以下の例はmacOSの場合です。 SSHキーの作成に関する詳細は、link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub] または link:https://support.atlassian.com/ja/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket] のドキュメントを参照してください。
 
 . ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳しくは、link:https://www.ssh.com/ssh/keygen/[Secure Shell ドキュメント]を参照してください。
 . CircleCI アプリケーションで、 **[Project Settings (プロジェクトの設定)]** ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。

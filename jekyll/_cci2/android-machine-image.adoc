@@ -20,12 +20,12 @@ The Android machine image is accessed through the xref:configuration-reference#a
 [#using-the-android-machine-image]
 == Using the Android machine image
 
-It is possible to configure the use of the Android image in your configuration with xref:orb-intro#[orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Please view the <<#examples,examples>> section below for more details.
+It is possible to configure the use of the Android image in your configuration with xref:orb-intro#[orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Refer to the <<examples>> section below for more details.
 
 [#pre-installed-software]
-== Pre-installed Software
+== Pre-installed software
 
-Please view the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
+View the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
 
 [#examples]
 == Examples
@@ -43,7 +43,7 @@ The below sample uses the Android orb to run a single job.
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@x.y.z
+  android: circleci/android@2.4.0
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
@@ -53,6 +53,10 @@ workflows:
           # Use pre-steps and post-steps if necessary
           # to execute custom steps before and afer any of the built-in steps
           system-image: system-images;android-29;default;x86
+          executor:
+            name: android/android-machine
+            resource-class: large
+            tag: 2021.10.1
 ```
 
 [#more-complex-orb-usage]
@@ -66,13 +70,14 @@ This example shows how you can use more granular orb commands to achieve what th
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@x.y.z
+  android: circleci/android@2.4.0
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
       name: android/android-machine
       resource-class: large
+      tag: 2021.10.1
     steps:
       - checkout
       # Create an AVD named "myavd"
@@ -104,7 +109,7 @@ workflows:
 [#no-orb-example]
 === No-orb example
 
-The following is an example of using the Android machine image, _without_ using the circleci/android link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps are similar to what is run when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[run-ui-tests] job of the orb.
+The following is an example of using the Android machine image, _without_ using the `circleci/android` link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps are similar to what is run when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[`run-ui-tests` job] of the orb.
 
 
 {% raw %}
@@ -114,7 +119,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: android:202102-01
+      image: android:default
     # To optimize build times, we recommend "large" and above for Android-related jobs
     resource_class: large
     steps:
@@ -141,6 +146,7 @@ jobs:
           # run in parallel with the emulator starting up, to optimize build time
           name: Run assembleDebugAndroidTest task
           command: |
+            export TERM=dumb
             ./gradlew assembleDebugAndroidTest
       - run:
           name: Wait for emulator to start
@@ -184,11 +190,11 @@ workflows:
 {% endraw %}
 
 [#using-the-android-image-on-server-v3x]
-=== Using the android image on server v3.x
+=== Using the Android image on server
 
-**Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
+NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
-From CircleCI server 3.4, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+From CircleCI server 3.4+, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
 
 ```yaml
 version: 2.1
@@ -201,7 +207,7 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server/operator/managing-orbs#[CircleCI server orbs] page for instructions on importing orbs.
+It is also possible to use the Android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server/v4.5/operator/managing-orbs#[CircleCI server orbs] page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 

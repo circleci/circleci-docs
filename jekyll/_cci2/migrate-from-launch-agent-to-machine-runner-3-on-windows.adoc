@@ -2,8 +2,9 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
-= Migrate from launch agent to machine runner 3.0 on Windows - Open preview
+= Migrate from launch agent to machine runner 3.0 on Windows
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview on Windows
@@ -64,3 +65,9 @@ The installation will be output into your PowerShell interface.
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
 {% include snippets/machine-runner-example.adoc %}
+
+[#additional-resources]
+== Additional resources
+
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-manual-installation-on-windows.adoc[Machine runner 3.0 manual installation reference]

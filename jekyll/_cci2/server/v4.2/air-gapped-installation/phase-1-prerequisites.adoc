@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.2
     - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
@@ -48,7 +49,7 @@ CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You wi
 
 [#login-to-acr]
 === a. Log in to CircleCI server container registry
-Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Please contact support@circleci.com for more information.
+Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Access the link:https://support.circleci.com/[CircleCI support portal] for more information.
 
 [source, bash]
 ----

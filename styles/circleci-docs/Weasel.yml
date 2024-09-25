@@ -7,7 +7,6 @@ tokens:
   - accidentally
   - additionally
   - allegedly
-  - alternatively
   - angrily
   - anxiously
   - approximately
@@ -39,7 +38,6 @@ tokens:
   - cruelly
   - crumbly
   - cuddly
-  - currently
   - daily
   - daringly
   - deadly
@@ -124,7 +122,6 @@ tokens:
   - normally
   - obediently
   - occasionally
-  - only
   - openly
   - painfully
   - particularly
@@ -134,7 +131,6 @@ tokens:
   - poorly
   - powerfully
   - presumably
-  - previously
   - promptly
   - punctually
   - quarterly
@@ -177,7 +173,6 @@ tokens:
   - sternly
   - stupidly
   - substantially
-  - successfully
   - suddenly
   - surprisingly
   - suspiciously

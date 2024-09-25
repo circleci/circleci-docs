@@ -1,6 +1,6 @@
 extends: occurrence
 message: "More than 3 commas!"
-level: error
+level: warning
 # Here, we're counting the number of times a comma appears
 # in a sentence.
 #

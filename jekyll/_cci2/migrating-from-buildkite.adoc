@@ -53,7 +53,7 @@ Once you have imported your code into GitHub, Bitbucket or GitLab, you can start
 
 Next, you will need to migrate your build configuration. On Buildkite, the build configuration is either defined in the web interface or in a file called `.pipeline.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
 
 The Buildkite and CircleCI configurations will be different. It may be helpful to have both Buildkite and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
@@ -91,7 +91,7 @@ jobs:
       - run: "execute-script-for-job1"
 ----
 
-2+| Specify a docker image to use for a job.
+2+| Specify a Docker image to use for a job.
 
 a|
 [source, yaml]
@@ -169,7 +169,7 @@ workflows:
           - job3
 ----
 
-2+| Execute jobs on multiple platforms. Buildkite uses tags to identify build agents. CircleCI provides executors for docker, Linux and MacOS.
+2+| Execute jobs on multiple platforms. Buildkite uses tags to identify build agents. CircleCI provides executors for Docker, Linux and macOS.
 
 a|
 [source, yaml]

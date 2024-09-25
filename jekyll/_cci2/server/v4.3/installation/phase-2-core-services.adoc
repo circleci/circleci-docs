@@ -3,8 +3,9 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
-= Phase 2 - Core services
+= Phase 2 - core services
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Installation guide for CircleCI server v4.3 core services.
@@ -218,7 +219,7 @@ postgresql:
 
 [#postgres-tls]
 ==== TLS
-PostgreSQL may be extended to use TLS encrypted traffic. When deployed internally, this option is disabled by default but may be enabled by adding the following to your postgreSQL block of your `values.yaml`
+PostgreSQL may be extended to use TLS encrypted traffic. When deployed internally, this option is disabled by default but may be enabled by adding the following to your PostgreSQL block of your `values.yaml`
 
 [source,yaml]
 ----
@@ -359,7 +360,7 @@ kubectl -n <namespace> label secret/pusher \
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
-CircleCI will create the Kubernetes Secret "pusher" automatically.
+CircleCI will create the Kubernetes Secret `pusher` automatically.
 
 --
 
@@ -405,13 +406,13 @@ global:
 
 [#static-ips]
 === i. Static IP addresses
-If you provisioned a Static IP (GCP) or Elastic IP addresses (AWS) in the prerequisites, you can now add the values under the NGINX block.
+If you provisioned a Static IP (GCP) or Elastic IP addresses (AWS) in the prerequisites, you can now add the values under the nginx block.
 
 ifndef::env-gcp[]
 
 [#gcp-add-static-ip]
-==== GCP - Add Static IP address
-For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the NGINX block.
+==== GCP - add static IP address
+For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
 
 [source,yaml]
 ----
@@ -426,8 +427,10 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#aws-add-elastic-ip]
-==== AWS - Add Elastic IP addresses
-For AWS, under NGINX annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. Please note, the number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
+==== AWS - add elastic IP addresses
+For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list.
+
+NOTE: The number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
 
 
 [source,yaml]
@@ -647,8 +650,6 @@ Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the 
 --
 **Option 1:** Use IAM keys.
 
-NOTE: This option is not recommended if your pipelines store artifacts greater than 5GB. A limitation with the MinIO backend causes S3 uploads with objects greater than 5GB to fail when using IAM keys. For 5GB+ object support, use IRSA (documented below).
-
 Add the following to the `object_storage.s3` section:
 
 [source,yaml]
@@ -679,6 +680,18 @@ object_storage:
     region: "<role-region>"
     irsaRole: "<irsa-arn>"
 ----
+
+**Disable Presigned Mode (Optional)**
+If you wish to store artifacts larger than 5GB, you will need to link:https://circleci.com/docs/server/v4.3/installation/phase-1-prerequisites/#s3-storage[update your trust policy for your IRSA role]. Then disable presigned mode by adding the following to the `object_storage.s3` section:
+[source,yaml]
+----
+object_storage:
+  ...
+  s3:
+    ...
+    presigned: false
+    storageRole: "<irsa-arn>"
+----
 --
 
 [.tab.s3compatible.You_create_Secret]
@@ -695,7 +708,7 @@ kubectl -n <namespace> create secret generic object-storage-secret \
 ----
 --
 
-CircleCI server will use the role provided to authenticate to S3.
+CircleCI server will use the credentials provided to authenticate to S3.
 
 
 // Stop hiding from GCP PDF:
@@ -733,7 +746,7 @@ service_account: "<service-account>"
 --
 **Option 2:** Use Workload Identity.
 
-Add the Service Account Email of the workload identity.  Add the following to the `object_storage.gcs` section:
+Add the Service Account Email of the Workload Identity.  Add the following to the `object_storage.gcs` section:
 
 [source,yaml]
 ----
@@ -794,11 +807,11 @@ proxy:
     - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
-=== n. Encrypting Environment Variables
+=== n. Encrypting environment variables
 
-All environment variables stored in contexts are encrypted using either https://www.vaultproject.io/[Hashicorp Vault] or  https://developers.google.com/tink[Google Tink]. By Default, CircleCI server v4.3 will use Vault to generate and store encryption keys.
+All environment variables stored in contexts are encrypted using either https://developers.google.com/tink[Google Tink] or https://www.vaultproject.io/[HashiCorp Vault]. We recommend the use of Tink as Vault has been deprecated.
 
-==== Use Tink (optional)
+==== Use Tink
 
 The following steps cover using Tink as an alternative to Vault:
 
@@ -807,7 +820,7 @@ The following steps cover using Tink as an alternative to Vault:
 [source,yaml]
 ----
 tink:
-  enabled: false
+  enabled: true
   keyset: ""
 ----
 +
@@ -850,7 +863,7 @@ You may add the keyset to your `values.yaml` under `tink` as in the example belo
 [source,yaml]
 ----
 tink:
-  enabled: false
+  enabled: true
   keyset: "<your-keyset>"
 ----
 --
@@ -873,9 +886,9 @@ helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 [#create-dns-entry]
 == 5. Create DNS entry
-Create a DNS entry for your NGINX load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
+Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
-You need the IP address, or, if using AWS, the DNS name of the NGINX load balancer. You can find this information with the following command:
+You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
 
 [source,shell]
 ----

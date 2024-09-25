@@ -19,7 +19,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Goog
 
 Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the xref:authorize-google-cloud-sdk#[Authorizing the Google Cloud SDK] page for full details.
 
-In addition to the orbs described below, CircleCI has created an GCP convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp].
+In addition to the orbs described below, CircleCI has created an GCP convenience image focusing on, link:https://circleci.com/developer/images/image/cimg/gcp[deployment: `cimg/gcp`].
 
 [#using-google-cloud-orbs]
 == Using Google Cloud orbs

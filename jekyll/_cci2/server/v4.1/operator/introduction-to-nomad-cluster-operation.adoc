@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Introduction to Nomad cluster operation
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
+:page-description: Learn how to operate the Nomad Cluster in your CircleCI v4.1 installation.
 :icons: font
 :experimental:
 
@@ -85,7 +86,7 @@ kubectl exec -it <nomad-server-pod-ID> -- nomad logs -job -stderr <nomad-job-id>
 
 NOTE: Be sure to specify the `-stderr` flag, as this is where most Build Agent logs appear.
 
-While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see link:https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, see link:https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
 
 Complete the following steps to get logs from the allocation of the specified job:
 
@@ -133,5 +134,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* Read the xref:managing-user-accounts#[Manging user accounts] guide.
+* Read the xref:managing-user-accounts#[Managing user accounts] guide.
 endif::[]

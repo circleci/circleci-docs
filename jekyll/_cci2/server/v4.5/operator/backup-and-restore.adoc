@@ -1,0 +1,100 @@
+---
+contentTags:
+  platform:
+    - Server v4.5
+    - Server Admin
+noindex: true
+---
+= Backup and restore
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI server v4.5 instance data and state.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#overview-backup]
+== Overview
+
+While operating and administering CircleCI server, you will need to consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+
+CircleCI recommends link:https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
+but it also restores the state of the Kubernetes cluster and its resources at the time of the backup. CirleCI server supports backup and restore with Velero `1.12`. This document outlines recommendations for how to back up and restore your CircleCI server instance data and state using link:https://velero.io/[Velero].
+
+NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
+
+[#installing-velero]
+== Velero installation
+
+To use Velero, you must first install the link:https://velero.io/docs/v1.12/basic-install/[Velero CLI]. Then using Velero's CLI, you will need to install the Velero server components along with the appropriate plugin for your cloud storage solution. Follow the instructions linked below based on your chosen storage backend:
+
+* link:https://github.com/vmware-tanzu/velero-plugin-for-aws#overview[AWS S3]
+* link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#overview[GCP GCS]
+* link:https://velero.io/docs/v1.12/contributions/minio/[S3 Compatible (MinIO)]
+
+NOTE: CircleCI server makes use of Persistent Volumes for data storage. To include these volumes in your backups you will need to add the node agent flag `--use-node-agent` to your Velero install command. link:https://velero.io/docs/v1.12/customize-installation/#enable-file-system-backup[Read here] for more information.
+
+[#creating-backups]
+== Creating backups
+
+Now that Velero is installed on your cluster, you are ready to create your first backup.
+
+[source,bash]
+
+----
+K8S_NS=<your_server_namespace>
+CHART=$(helm list -n "$K8S_NS" -o yaml  | yq '.[].chart' )
+REV=$(helm list -n "$K8S_NS" -o yaml  | yq '.[].revision')
+RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
+
+velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"
+----
+
+[#restoring-backups]
+== Restoring backups
+
+Below are the instructions for how to restore your CircleCI server install using Velero.
+
+[source,bash]
+----
+# List all existing backups
+velero backup get --show-labels
+
+# Restore the specific backup
+velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
+----
+
+[#scheduling-backups]
+== Scheduling backups
+
+See link:https://velero.io/docs/v1.12/disaster-case/[Velero's documentation] on creating scheduled backups.
+
+[#troubleshooting-backup]
+== Troubleshooting
+
+[#errors-occur-during-backup-or-restore-process]
+=== Errors occur during backup or restore process
+
+If you experience an error during backup or restore processes, the first place to look would be the Velero logs.
+Using the command below, you may find 4XX errors, which would likely be caused by issues with your storage bucket access.
+
+* Confirm that your bucket exists and is in the region you expect.
+* Confirm that the credentials provided to Velero can be used to access the bucket.
+* You may need to run the command to install Velero again, this time with updated bucket information.
+
+You may also check the status of pods in the `velero` namespace:
+
+[source,shell]
+----
+$ kubectl get pods --namespace velero
+NAME                          READY   STATUS    RESTARTS   AGE
+node-agent-5vlww              1/1     Pending   0          10m
+node-agent-94ptv              1/1     Running   0          10m
+node-agent-ch6m9              1/1     Pending   0          10m
+node-agent-mknws              1/1     Running   0          10m
+velero-68788b675c-dm2s7       1/1     Running   0          10m
+----
+
+In the above example, some Restic pods are pending, which means they are waiting for a node to have available CPU or memory resources. In this case, you may need to scale your nodes to accommodate Restic.
+
+For more details on troubleshooting Velero issues, refer to the link:https://velero.io/docs/v1.12/troubleshooting/[Velero documentation].

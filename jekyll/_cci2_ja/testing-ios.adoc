@@ -25,11 +25,6 @@ xref:ios-codesigning#[iOSコード署名プロジェクトと] xref:hello-world-
 [#supported-xcode-versions]
 == サポートされている Xcode のバージョン
 
-[#supported-xcode-versions-intel]
-=== IntelでサポートされているXcodeのバージョン
-
-{% include snippets/ja/xcode-intel-vm.adoc %}
-
 [#supported-xcode-versions-silicon]
 === Apple Silicon の Xcode 対応バージョン
 

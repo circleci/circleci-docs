@@ -7,11 +7,29 @@
 | VM Software Manifest
 | Release Notes
 
+| `16.1.0`
+| Xcode 16.1 Beta 2 (16B5014f)
+| 14.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15065/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-1-beta-2-released/52005[Release Notes]
+
+| `16.0.0`
+| Xcode 16.0 (16A242d)
+| 14.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15048/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-ga-released/51990[Release Notes]
+
+| `15.4.0`
+| Xcode 15.4 (15F31d)
+| 14.3.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14775/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-4-0-ga-released/50897[Release Notes]
+
 | `15.3.0`
-| Xcode 15.3 beta 1 (15E5178i)
-| 14.1
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14056/manifest.txt[Installed software]
-| link:https://discuss.circleci.com/t/xcode-15-3-beta-1-released/50367[Release Notes]
+| Xcode 15.3 (15E204a)
+| 14.3.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14490/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-3-ga-released/50717[Release Notes]
 
 | `15.2.0`
 | Xcode 15.2 (15C500b)

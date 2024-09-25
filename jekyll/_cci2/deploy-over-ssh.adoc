@@ -21,7 +21,7 @@ Add the SSH key for the target to which you are deploying (these instructions ar
 
 . In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
 
-. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
 . On the **Project Settings** page, click on **SSH Keys**.
 

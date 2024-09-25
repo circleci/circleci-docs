@@ -42,6 +42,8 @@ task :test do
   end
 
   ignore_dirs = [
+    "api",
+    "api/v1",
     "api/v2",
     "reference-2-1"
   ]

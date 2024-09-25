@@ -3,11 +3,12 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
-= Example values.yaml
+= Example `values.yaml`
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server
+:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.3
 :icons: font
 :toc: macro
 :toc-title:
@@ -20,7 +21,7 @@ The chart assumes an environment with the following resources:
 
 - A K3s cluster for the installation of the Helm chart
 - MetalLB pre-configued on the K3s cluster for ingress
-- A private Docker registry at docker.internal.example.com running on port 5000 with no TLS encryption
+- A private Docker registry at `docker.internal.example.com` running on port 5000 with no TLS encryption
 - A Nomad instance with mTLS disabled
 - A MinIO instance running at minio.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
@@ -28,7 +29,7 @@ The chart assumes an environment with the following resources:
 For more information about specific values, see the standard installation documentation, starting with xref:../installation/phase-2-core-services#[Phase 2 - Core services].
 
 [#values]
-== Values.yaml
+== `values.yaml`
 
 [source, yaml]
 ----

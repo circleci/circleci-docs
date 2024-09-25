@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Avoiding and Debugging Java Memory Errors
+= Avoiding and debugging Java memory errors
 :page-description: How to avoid and debug Java memory errors on CircleCI.
 :experimental:
 :icons: font
@@ -46,7 +46,7 @@ You can see how much memory your container is allocated, and how much it has use
 ----
 
 [#usecontainersupport]
-== UseContainerSupport
+== `UseContainerSupport`
 
 Recent versions of Java (JDK 8u191, and JDK 10 and up) include
 a flag `UseContainerSupport` which defaults on. This flag enables
@@ -135,7 +135,7 @@ with 0 being the highest.
 | no
 | no
 
-| CLI args
+| CLI arguments
 | 1
 | no
 | no

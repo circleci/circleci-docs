@@ -183,7 +183,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Manage contexts
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Orbs*
@@ -201,7 +201,7 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Publish dev orb
+^| Publish development orb
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
@@ -261,14 +261,14 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Trigger build
+^| Trigger re-run via the CircleCI web app
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
 
 ^| Edit triggers
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Config sources*
@@ -283,7 +283,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Edit config sources
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Releases*
@@ -291,32 +291,32 @@ The table below shows the permissions associated with each CircleCI organization
 |
 |
 
-^| Create release environment
+^| Create environment integration
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Delete environment integration
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| Delete release environment
-^| icon:check-circle[]
-^|
-^|
-
-^| View release environment
+^| View environment integration
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Create environment token
+^| Create environment integration token
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Revoke environment integration token
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| Revoke environment token
-^| icon:check-circle[]
-^|
-^|
-
-^| List environment token
+^| List environment integration token
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]

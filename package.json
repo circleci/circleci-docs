@@ -19,5 +19,11 @@
     "markdownlint-cli2-formatter-json": "0.0.4",
     "markdownlint-rule-header-id": "0.0.3",
     "serve": "13.0.2"
+  },
+  "resolutions": {
+    "braces": "3.0.3"
+  },
+  "resolutions:comments": {
+    "braces": "CVE-2024-4068"
   }
 }
