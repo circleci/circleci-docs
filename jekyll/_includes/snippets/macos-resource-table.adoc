@@ -21,6 +21,13 @@
 | 8GB
 | icon:check[]
 | icon:times[]
+|
+
+| `m2pro.large`
+| 4 @ 3.49 GHz
+| 8GB
+| icon:check[]
+| icon:times[]
 |===
 
 [WARNING]
