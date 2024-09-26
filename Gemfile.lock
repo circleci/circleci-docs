@@ -38,7 +38,7 @@ GEM
     algoliasearch (1.27.5)
       httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
-    asciidoctor (2.0.12)
+    asciidoctor (2.0.23)
     bigdecimal (3.1.8)
     colorator (1.1.0)
     concurrent-ruby (1.1.8)
