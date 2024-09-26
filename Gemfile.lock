@@ -161,7 +161,7 @@ GEM
       ethon (>= 0.9.0)
     unicode-display_width (2.0.0)
     verbal_expressions (0.1.5)
-    webrick (1.7.0)
+    webrick (1.8.2)
     yell (2.2.2)
 
 PLATFORMS
