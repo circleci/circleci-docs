@@ -312,27 +312,6 @@ jobs:
       - run: xcodebuild -version
 ```
 
-### macOS VM Storage
-{: #macos-vm-storage }
-
-The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed.
-
-Xcode Version | Class                 | Minimum Available Storage
---------------|-----------------------|--------------------------
-10.3.0        | medium, large         | 36GB
-10.3.0        | macos.x86.medium.gen2 | 36GB
-11.*          | medium, large         | 23GB
-11.*          | macos.x86.medium.gen2 | 23GB
-12.*          | medium, large         | 30GB
-12.*          | macos.x86.medium.gen2 | 30GB<sup>(2)</sup>
-13.*          | medium, large         | 23GB
-13.*          | macos.x86.medium.gen2 | 89GB
-{: class="table table-striped"}
-
-<sup>(1)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
-
-<sup>(2)</sup> _Exception: Xcode 12.0.1, 12.4.0 and 12.5.1 have a minimum 100GB of available storage._
-
 ## Using the Windows executor
 {: #using-the-windows-executor }
 
@@ -388,8 +367,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
-      image: ubuntu-1604-cuda-10.1:201909-23
+      image: linux-cuda-12:default
+      resource_class: gpu.nvidia.medium
     steps:
       - run: nvidia-smi
 ```

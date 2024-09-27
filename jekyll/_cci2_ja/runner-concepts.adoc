@@ -9,12 +9,10 @@ contentTags:
 = セルフホストランナーのコンセプト
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーのコンセプトの概要
+:page-description: このドキュメントでは、CircleCI セルフホストランナーのコンセプトの概要などを詳しく説明しています。
 :icons: font
 :toc: macro
 :toc-title:
-
-toc::[]
 
 [#namespaces-and-resource-classes]
 == 名前空間とリソースクラス

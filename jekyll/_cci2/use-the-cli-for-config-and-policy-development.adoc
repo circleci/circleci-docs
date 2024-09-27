@@ -1,21 +1,19 @@
 ---
-description: Config policy management for CircleCI project configurations.
-contentTags: 
+description: Learn about developing your config policies.
+contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Use the CircleCI CLI for config and policy development
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
-CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
-
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
 [#develop-configs]
 == Develop configs
@@ -24,7 +22,7 @@ Policies for CircleCI configs detect violations and stop builds that do not comp
 
 To mitigate this, you can run your `config.yml` against your organization's policies locally, outside of your CI pipelines, using the CircleCI CLI. You can get immediate feedback on config compliance.
 
-The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred. 
+The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred.
 
 Example decision command:
 
@@ -67,7 +65,7 @@ The policy files (*.rego) present in the given policy directory (searched recurs
 circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
 ----
 
-Policies that use `data.meta...` values like `branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
+Policies that use `data.meta...` values like `vcs.branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
 
 It is recommended that you build a test suite of policy/config combinations and run them locally, or in CI, before pushing them to your organization's active policies.
 
@@ -77,7 +75,7 @@ It is recommended that you build a test suite of policy/config combinations and 
 Audit logs provide documentary evidence for a policy decision being performed at a certain point of time.
 Audit logs include the inputs which influenced the decision, as well as the outcome of the decision.
 
-The CLI provides a `policy logs` command to fetch the policy decision logs for your organization. 
+The CLI provides a `policy logs` command to fetch the policy decision logs for your organization.
 
 Following is the output of this command when run with `--help` flag:
 

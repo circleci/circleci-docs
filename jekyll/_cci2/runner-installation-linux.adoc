@@ -1,51 +1,71 @@
 ---
-contentTags: 
+contentTags:
   platform:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.6
 ---
 = Machine runner installation on Linux
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Linux.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+:machine:
+:linux:
 
-This page describes how to install CircleCI's machine runner on Linux.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
 
-{% include snippets/runner-platform-prerequisites.adoc %}
+This page describes how to install CircleCI's machine runner on Linux for **CircleCI server** customers.
+
+[#prerequisites]
+== Prerequisites
+
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://www.gnu.org/software/coreutils/[Coreutils]
+
+* https://curl.se/[curl]
+
+* sha256sum (if not pre-installed):
+** `sudo apt install coreutils` for Ubuntu/Debain
+** `sudo yum install coreutils` for Red Hat
+
+* https://www.gnu.org/software/tar/[tar]
+
+* https://www.gnu.org/software/gzip/[Gzip]
+
+* `sepolicy` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+
+* `rpmbuild` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
 
 [#download-the-launch-agent-script]
-== Download the machine runner launch-agent script
+== 2. Download launch-agent script and install binary
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, or ARM64:
-
-```shell
-curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
-```
-
-```shell
-chmod +x ./download-launch-agent.sh
-```
-
-```shell
-# For Linux x86_64:
-export platform=linux/amd64 && sh ./download-launch-agent.sh
-```
-
-```shell
-# For Linux ARM64:
-export platform=linux/arm64 && sh ./download-launch-agent.sh
-```
-
-After successful installation, the download-launch-agent.sh file can be deleted.
+{% include snippets/runner/launch-agent-download.adoc %}
 
 [#create-the-circleci-user-and-working-directory]
-== Create the `circleci` user and working directory
+== 3. Create `circleci` user and working directory
 
-These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (for example, `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
 [#ubuntu-debian]
 === Ubuntu/Debian
@@ -73,7 +93,7 @@ sudo chmod 0750 /var/opt/circleci
 ```
 
 ```shell
-sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
+sudo chown -R circleci /var/opt/circleci /opt/circleci
 ```
 
 Consider running the following additional command if you would like to use certified orbs, without errors, that work on Cloud on your self-hosted runner. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
@@ -83,7 +103,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 ```
 
 [#create-the-circleci-self-hosted-runner-configuration]
-== Create the CircleCI's self-hosted runner configuration
+== 4. Create self-hosted runner configuration
 
 Create a `launch-agent-config.yaml` file with a path of `/etc/opt/circleci/launch-agent-config.yaml`, owned by `circleci`, with permissions `600`. Use the following commands:
 
@@ -92,7 +112,7 @@ sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-con
 ```
 
 ```shell
-sudo chown circleci: /etc/opt/circleci/launch-agent-config.yaml
+sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
@@ -114,10 +134,10 @@ runner:
 ```
 
 - Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#configure-selinux-policy]
-== Configure SELinux policy (RHEL 8)
+=== Configure SELinux policy (RHEL 8)
 
 An SELinux policy is required for self-hosted runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this self-hosted runner install.
 
@@ -147,7 +167,7 @@ sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 [#start-machine-runner]
-== Start machine runner
+== 5. Start machine runner
 
 You can now start machine runner as follows:
 
@@ -200,7 +220,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (for example, proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 

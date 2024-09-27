@@ -1,25 +1,22 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server 3
-  - Server 2
+  - Server v4.x
+  - Server v3.x
 ---
 = Concurrency
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 
-In CircleCI, **concurrency** refers to utilizing multiple containers to run multiple jobs at the same time. This is different from CircleCI **parallelism**, which is test-splitting across multiple containers. If you would like information on parallelism, visit the <<parallelism-faster-jobs#,Running Tests in Parallel>> page.
+In CircleCI, **concurrency** refers to utilizing multiple containers to run multiple jobs at the same time. This is different from CircleCI **parallelism**, which is test-splitting across multiple containers. If you would like information on parallelism, visit the xref:parallelism-faster-jobs#[Running Tests in Parallel] page.
 
-Every plan with CircleCI includes the ability to run jobs concurrently. However, the number of jobs you can run concurrently differs between plans. Please refer to the https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
-
-toc::[]
+Every plan with CircleCI includes the ability to run jobs concurrently. However, the number of jobs you can run concurrently differs between plans. Refer to the link:https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
 
 [#concurrency]
 == Concurrency
@@ -30,11 +27,11 @@ Within CircleCI, concurrent jobs can be classified as one of two situations:
 
 This page discusses the first point, and will provide examples of how to configure concurrent jobs in a single workflow. Configuring concurrency in a workflow allows multiple jobs to be run at the same time, in a single workflow, through the use of multiple containers.
 
-To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the <<configuration-reference#resourceclass,resource classes>> for different executors.
+To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[resource classes] for different executors.
 
 If jobs are queued, it is possible you are hitting these limits. Hitting your limit may depend on a few factors, such as how many people in your organization are running jobs at once, or if you have overlapping workflows.
 
-Customers on annual plans can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+Customers on annual plans can request an increase to those limits at no extra charge by contacting link:https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
 
 [#concurrency-in-workflows]
 === Concurrency in workflows
@@ -42,25 +39,21 @@ To run a set of concurrent jobs, you will need to add a `workflows` section to y
 
 The simple example below shows the default workflow orchestration with two concurrent jobs. The `workflows` key needs to have a unique name. In this example, the unique name is `build_and_test`. The `jobs` key is nested under the uniquely named workflow, and contains the list of job names. Since the jobs have no dependencies, they will run concurrently.
 
+{% include snippets/docker-auth.adoc %}
+
 ```yaml
 version: 2.1
 
 jobs:
   build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2024.02
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2024.02
     steps:
       - checkout
       - run: <command>
@@ -69,19 +62,6 @@ workflows:
     jobs:
       - build
       - test
-```
-
-Please note, if you are still using Server 2 and `version: 2`, your `workflows` section will need to specify the version again, as in the below snippet:
-
-```yaml
-...
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test
-...
 ```
 
 [#fan-out-fan-in-workflow-example]
@@ -119,9 +99,7 @@ workflows:
 ...
 ```
 
-Please note, if you are still using CircleCI Server 2 with `version: 2`, you will need to specify the version in the `workflows` section, as mentioned in the <<#concurrency-in-workflows,Concurrency in workflows>> section.
-
 [#see-also]
 == See also
-- <<workflows#,Workflows>>
-- <<sample-config#,Sample config.yml Files>>
+- xref:workflows#[Workflows]
+- xref:sample-config#[Sample config.yml Files]

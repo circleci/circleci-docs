@@ -13,13 +13,13 @@ contentTags:
 :toc-title:
 
 [#overview]
-== 概要
+== インサイト スナップショットバッジの概要
 
-インサイト スナップショットバッジでは、プロジェクトの README に埋め込まれている <<status-badges#,ステータスバッジ>> と同様に、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
+インサイト スナップショットバッジでは、プロジェクトの README に埋め込まれている xref:status-badges#[ステータスバッジ] と同様に、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
 
 image::insights-snapshot-badge-example.png[Insights snapshot badge embedded on README]
 
-インサイト スナップショットバッジの最も一般的なユースケースは、メインブランチのデプロイワークフローの <<insights#, インサイト>> メトリクスの、プロジェクトの README での表示です。 しかし、このバッジは、プロジェクト内のすべてのブランチのすべてのワークフローのインサイトメトリクスを表示するようにも設定できます。 そうすることにより、例えば、スケジュール化したワークフロー、ビルドターゲットが異なるワークフロー、テスト用に使われるワークフローの追加バッジを作成することができます。
+インサイト スナップショットバッジの最も一般的なユースケースは、メインブランチのデプロイワークフローの xref:insights#[インサイト] メトリクスの、プロジェクトの README での表示です。 しかし、このバッジは、プロジェクト内のすべてのブランチのすべてのワークフローのインサイトメトリクスを表示するようにも設定できます。 そうすることにより、例えば、スケジュール化したワークフロー、ビルドターゲットが異なるワークフロー、テスト用に使われるワークフローの追加バッジを作成することができます。
 
 インサイト スナップショットバッジは、一般的にプロジェクトの README に配置されますが、 Web ドキュメントのどこにでも埋め込むことができます。 現在このバッジは、インサイトダッシュボードから下記の 3 つのメトリクスを表示します。
 
@@ -31,7 +31,7 @@ image::insights-snapshot-badge-example.png[Insights snapshot badge embedded on R
 [#generating-an-insights-snapshot-badge]
 == インサイト スナップショットバッジの生成
 
-インサイトスナップショットバッジのパブリックリポジトリ用のコードスニペットを生成するには、 https://app.circleci.com/[CircleCI Web アプリ]を開き、プロジェクトを選択します。 *Project Settings* を開き、*Insights Snapshot Badge* のページに移動します。
+インサイトスナップショットバッジのパブリックリポジトリ用のコードスニペットを生成するには、 link:https://app.circleci.com/[CircleCI Web アプリ]を開き、プロジェクトを選択します。 *Project Settings* を開き、*Insights Snapshot Badge* のページに移動します。
 
 Insights Snapshot Badge のページでは、プロジェクトのメトリクスを表示するブランチ、ワークフロー、時間枠、そしてコードスニペットの形式を選択することができます。
 
@@ -40,7 +40,7 @@ Insights Snapshot Badge のページでは、プロジェクトのメトリク�
 * 画像 URL
 * Markdown
 * Textile
-* Rdoc
+* RDoc
 * AsciiDoc
 * reStructuredText
 * Pod
@@ -59,8 +59,80 @@ Markdown 形式で生成されたインサイト スナップショットバッ�
 
 Insights Snapshot Badge ページで *Add API Token* をクリックすると、直接 API トークンを追加することができます。 これにより、"Status" のスコープを持つ API トークンと "insights-snapshot" ラベルが作成されます。 (プロジェクトの *API Permissions* でも新しいトークンが表示されます)。 コードスニペットは、API の作成後に表示されます。
 
+プロジェクトのステータスバッジ用に既に作成したスコープが「Status」のAPIトークンを再利用したい場合は、上記の CircleCI ウェブアプリのバッジジェネレータの代わりに、以下のテンプレートのいずれかを使用することができます。
+
+以下のテンプレートでは、`< >` の項目をご自身の詳細情報に置き換えてください。 一部のオプションは下表のとおりです。
+
+[.tab.badge.Asciidoc]
+--
+[source,asciidoc]
+----
+image:https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>["CircleCI", link="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"]
+----
+--
+
+[.tab.badge.Markdown]
+--
+[source,markdown]
+----
+[![CircleCI](https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>)](https://app.circleci.com/insights/github/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true)
+----
+--
+
+[.tab.badge.Pod]
+--
+[source,pod]
+----
+=for HTML <a href="https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true"><img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>"></a>
+----
+--
+
+[.tab.badge.Rdoc]
+--
+[source,rdoc]
+----
+{<img src="https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>" alt="CircleCI" />}[https://app.circleci.com/insights/<VCS_FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true]
+----
+--
+
+[.tab.badge.reStructuredText]
+--
+[source,reStructuredText]
+----
+.. image:: https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT_NAME>/<BRANCH>/<WORKFLOW_NAME>/badge.svg?window=<TIME_WINDOW>&circle-token=<YOUR_API_TOKEN_WITH_STATUS_SCOPE>
+        :target: https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT_NAME>/workflows/<WORKFLOW_NAME>/overview?branch=<BRANCH>&reporting-window=<TIME_WINDOW_VERBOSE>&insights-snapshot=true
+----
+--
+
+[.tab.badge.Textile]
+--
+[source,textile]
+----
+!https://dl.circleci.com/insights-snapshot/<VCS>/<ORG_NAME>/<PROJECT-NAME>/<BRANCH>/<WORKFLOW-NAME>/badge.svg?window=<TIME-WINDOW>&circle-token=<YOUR-API-TOKEN-WITH-STATUS-SCOPE>!:https://app.circleci.com/insights/<VCS-FULL>/<ORG_NAME>/<PROJECT-NAME>/workflows/<WORKFLOW-NAME>/overview?branch=<BRANCH>&reporting-window=<TIME-WINDOW-VERBOSE>&insights-snapshot=true
+----
+--
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Item
+|オプション
+
+|`TIME-WINDOW`
+|`24h`, `7d`, `30d`, `60d`, `90d`
+
+|`TIME-WINDOW-VERBOSE`
+|`last-24-hours`, `last-7-days`, `last-30-days`, `last-60-days`, `last-90-days`
+
+|`VCS`
+|`gh`, `bb`
+
+|`VCS-FULL`
+|`github`, `bitbucket`
+|===
+
 [#see-also]
 == 関連項目
 
-* <<status-badges#,ステータスバッジ>>
-* <<insights-glossary#,インサイトメトリクスの用語集>>
+* xref:status-badges#[ステータスバッジ]
+* xref:insights-glossary#[インサイトメトリクスの用語集]

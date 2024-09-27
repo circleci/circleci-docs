@@ -1,0 +1,125 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.3+
+---
+= Container runner performance benchmarks
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Performance benchmarks and tuning.
+:icons: font
+:experimental:
+:container:
+
+Runner benchmarks show the performance tradeoffs of CircleCI self-hosted runners up to a non-acceptable error threshold. From the chart below, you can see there is a trade off between the following:
+
+* ReplicaSet
+* Concurrency
+* Tasks
+* Queue
+* Run time
+
+Depending on your team's workload types, for example, high parallelism, fan-in/out etc. you may need to adjust your cluster for high concurrency and tasks, potentially impacting queuing, run time, and other factors.
+
+By publishing our benchmarks we can make measurable improvements to the performance and scale of CircleCI self-hosted runner, and show the impact of those improvements.
+
+NOTE: Benchmarks were performed on a GKE (Google) cluster with 5 dedicated E2-medium nodes. The `cos_containerd` image was used with GKE version 1.29.4 and no autoscaling.
+
+[.table.table-striped]
+[cols="9", options="header", width="100%"]
+|========================================================================================================================================
+| Total Tasks | Max Concurrency | Replica Count | Node Count | Failure Rate | Avg Run time | Avg Queue Time | Max Queue Time | Max Run Time
+| 128        | 80             | 3            | 5         | 0.000000       | 3855           | 76667            | 103048       | 11022
+| 80         | 80             | 3            | 5         | 0.012500       | 3951           | 45000            | 60557        | 8556
+| 40         | 80             | 3            | 5         | 0.000000       | 2386           | 24865            | 32445        | 10187
+| 20         | 80             | 3            | 5         | 0.000000       | 1939           | 18014            | 23248        | 3095
+| 128        | 40             | 3            | 5         | 0.007812       | 5089           | 90771            | 117578       | 19652
+| 80         | 40             | 3            | 5         | 0.000000       | 2886           | 56460            | 69849        | 7609
+| 40         | 40             | 3            | 5         | 0.000000       | 2146           | 26668            | 35319        | 3508
+| 20         | 40             | 3            | 5         | 0.000000       | 2038           | 19586            | 24868        | 3014
+| 128        | 20             | 3            | 5         | 0.000000       | 6413           | 70101            | 109269       | 31100
+| 80         | 20             | 3            | 5         | 0.000000       | 3078           | 51401            | 72506        | 6939
+| 40         | 20             | 3            | 5         | 0.000000       | 2127           | 31081            | 36791        | 3623
+| 20         | 20             | 3            | 5         | 0.000000       | 2205           | 16902            | 19836        | 3304
+| 128        | 80             | 2            | 5         | 0.007812       | 2848           | 78955            | 111321       | 5731
+| 80         | 80             | 2            | 5         | 0.000000       | 2246           | 56652            | 87118        | 5992
+| 20         | 80             | 2            | 5         | 0.000000       | 1721           | 17674            | 23279        | 2259
+| 40         | 80             | 2            | 5         | 0.000000       | 2135           | 29990            | 36930        | 3248
+| 128        | 40             | 2            | 5         | 0.007812       | 2532           | 72492            | 108279       | 6756
+| 80         | 40             | 2            | 5         | 0.000000       | 3620           | 56225            | 75590        | 9391
+| 40         | 40             | 2            | 5         | 0.000000       | 2048           | 24523            | 33774        | 3154
+| 20         | 40             | 2            | 5         | 0.000000       | 1927           | 15072            | 18269        | 2732
+| 128        | 20             | 2            | 5         | 0.000000       | 2325           | 62237            | 107474       | 5076
+| 80         | 20             | 2            | 5         | 0.000000       | 2553           | 42657            | 67140        | 5982
+| 40         | 20             | 2            | 5         | 0.000000       | 2235           | 28932            | 36972        | 3601
+| 20         | 20             | 2            | 5         | 0.000000       | 1957           | 16123            | 22835        | 2974
+| 128        | 80             | 1            | 5         | 0.000000       | 2105           | 113833           | 190044       | 5106
+| 80         | 80             | 1            | 5         | 0.000000       | 2497           | 82633            | 135382       | 6952
+| 40         | 80             | 1            | 5         | 0.000000       | 2092           | 37600            | 65750        | 3630
+| 20         | 80             | 1            | 5         | 0.000000       | 1842           | 19383            | 24808        | 3004
+| 128        | 40             | 1            | 5         | 0.000000       | 2049           | 109442           | 207049       | 5524
+| 80         | 40             | 1            | 5         | 0.000000       | 1932           | 73936            | 135250       | 3757
+| 40         | 40             | 1            | 5         | 0.000000       | 1937           | 40138            | 51027        | 3343
+| 20         | 40             | 1            | 5         | 0.000000       | 1802           | 17303            | 22432        | 2592
+| 128        | 20             | 1            | 5         | 0.000000       | 1809           | 107782           | 207405       | 3281
+| 80         | 20             | 1            | 5         | 0.000000       | 1755           | 66260            | 126222       | 2863
+| 40         | 20             | 1            | 5         | 0.000000       | 1786           | 35307            | 60009        | 2738
+| 20         | 20             | 1            | 5         | 0.000000       | 2092           | 23581            | 30639        | 2662
+|            |                |              |           | *Average*        | 2499           | 48785            | 74731        | 5943
+|            |                |              |           | *Minimum*        | 1721           | 15072            | 18269        | 2259
+|            |                |              |           | *Max*            | 6413           | 113833           | 207405       | 31100
+|========================================================================================================================================
+
+
+[#runner-configuration-recommendations]
+== Runner configuration recommendations
+Based on the reference architecture of GKE 1.29.4, using a node pool of 5 E2 medium nodes, and the above benchmarks, we can make several recommendations for container runner cluster configuration for the following:
+
+* Replica count of the container agent
+* Maximum concurrent task configuration
+
+[#high-performance-cluster]
+=== High performance cluster
+
+* 3 replicas of container agent
+* 80 concurrent tasks per replica.
+
+This configuration makes a slight trade off in stability, a slightly higher rate of infrastructure failures, to achieve much higher task throughput and to reduce queueing times.
+
+[#high-stability-cluster]
+=== High stability cluster
+
+* 1 replica of container agent
+* 20 concurrent tasks per replica
+
+This configuration trades off throughput for higher stability, with minimal infrastructure failures. This is the default configuration for the container agent Helm chart.
+
+When tuning a cluster for performance there are three main variables to consider: container agent replica count, maximum concurrent tasks per replica, and node pool configuration.
+
+[#container-agent-replica-count]
+== Container agent replica count
+The more replicas of container agent, the faster tasks will get claimed, as each replica runs its own collection of claiming loops. This is beneficial if you have sudden large backlogs of tasks to run, as tasks will be able to be claimed more quickly, and have a pod spec submitted to the Kubernetes cluster for scheduling. It is worth considering that the more replicas used (and more tasks that are able to launch concurrently) the greater the strain on the K8s control plane, and the more prone you will be to task start failures. CircleCI container runners will attempt to reschedule a task up to three times before declaring an infrastructure failure.
+
+[#maximum-concurrent-tasks-per-replica]
+== Maximum concurrent tasks per replica
+This number in particular is very sensitive to node types and counts. The more tasks that are attempted to launch in a short window, the higher the strain on the Kubernetes cluster's control plane, as well as the individual Kubelets, which are responsible for the pods and containers on a specific node. As node power and count increase, the impact of concurrent tasks on a cluster decreases. The lower the number of maximum concurrent tasks, the greater the reliability of tasks successfully starting and not experiencing an infrastructure failure.
+
+The likelihood of an infrastructure failure for a task decreases as node count and resources are increased, particularly CPU.
+
+[#node-types-and-count]
+== Node types and count
+The recommendations already presented are based on the reference cluster configuration. As a node pool grows, or is set to an instance type with greater resources, task execution becomes more reliable. When sizing a cluster, you should add headspace beyond that expected for an individual task. The Kubelet and container driver share the same resources as the pods on the node, and the more resource starved they become the more prone to long queue times and infrastructure failures tasks become. The more distributed pods are able to be scheduled the less pressure and backlog are applied to the individual Kubelets and container engines, resulting in shorter queueing times.
+
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to the xref:troubleshoot-self-hosted-runner#troubleshoot-container-runner[Troubleshoot Container Runner] section of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or using container runner.
+
+[#additional-resources]
+== Additional resources
+
+- xref:container-runner.adoc[Container runner reference guide]
+- xref:runner-concepts.adoc[Self-hosted runner concepts]
+- xref:runner-faqs.adoc[Self-hosted runner FAQ]

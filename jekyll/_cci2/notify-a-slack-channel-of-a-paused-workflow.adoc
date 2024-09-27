@@ -1,6 +1,6 @@
 ---
 description: "A how to guide for using the Slack orb to notify a Slack channel of a paused workflow."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -12,12 +12,11 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
 
-The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] enables you to create different notifications and messages that can be delivered to your desired recipients. 
+The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] enables you to create different notifications and messages that can be delivered to your desired recipients.
 
 This page shows how to use a built-in job from the Slack orb to notify a Slack channel when there is a paused workflow awaiting approval. For more information on approval see the <<workflows#holding-a-workflow-for-a-manual-approval,Using Workflows to Orchestrate Jobs>> page.
 

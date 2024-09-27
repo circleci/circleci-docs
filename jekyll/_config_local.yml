@@ -1,0 +1,28 @@
+defaults:
+  - scope:
+      path: ""
+      type: "cci2"
+    values:
+      lang: "en"
+
+  - scope:
+      path: ""
+      type: "cci2_ja"
+    values:
+      lang: "ja"
+
+  - scope:
+      path: ""
+      type: "style"
+    values:
+      lang: "en"
+
+  - scope:
+      path: ""
+    values:
+      hide: false
+      search: true
+      toc: true # Enable TOC by default
+      suggested: false # Disable helpful resources section by default
+      sitemap: false # Disable sitemap in local
+      readtime: true # Enable Read Time by default

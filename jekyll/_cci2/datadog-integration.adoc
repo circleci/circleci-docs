@@ -1,0 +1,50 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Datadog integration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Datadog.
+:icons: font
+:toc: macro
+
+This page describes how to connect Insights data with link:https://www.datadoghq.com/[Datadog].
+
+[#overview]
+== Overview
+
+The link:https://docs.datadoghq.com/integrations/circleci/[Datadog CircleCI integration] allows you to visualize and analyze data about your CircleCI jobs within Datadog.
+
+[#integration3]
+== Integration
+
+Complete the following steps to set up a CircleCI webhook to forward your logs to Datadog.
+
+. Log in to the link:https://app.circleci.com/projects[CircleCI web app]
+
+. Access one of your CircleCI projects
+
+. Open **Project settings**
+
+. In the project settings sidebar, click **Webhooks**
+
+. Click **Add webhook**
+
+. Complete the following fields:
+** **Webhook name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
+** **Receiver URL**: `\https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is your link:https://app.datadoghq.com/account/login[Datadog API key].
+** **Events**: Select **Workflow Completed** and **Job Completed**.
+** Enable the check: **Certificate verifications**.
+
+. Click **Add Webhook** to save the new webhook.
+
+[#visualize-pipeline-data-in-datadog]
+=== Visualize pipeline data in Datadog
+
+Sign in to link:https://app.datadoghq.com/account/login[Datadog] and visit the Pipelines and Pipeline Executions pages to see data populate after workflows finish.
+
+NOTE: The Pipelines page will only show data for the default branch of each repository.

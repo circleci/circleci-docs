@@ -1,0 +1,46 @@
+//== CircleCI web app installation: pre-steps
+In order to install self-hosted runners, you will need to create a namespace and resource class token. To create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
+
+You can view your installed runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
+
+. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hosted Runners*.
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
+
+. If this is your organization's first time using self-hosted runners, you will need to create a namespace as the first part of this step. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
++
+If your organization already uses orbs, do not create a new namespace. Instead, enter the namespace your organization uses for orbs.
+
+. The second input field is to name your self-hosted runner resource class.
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
+
+. Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
++
+CAUTION: The token cannot be retrieved again, so be sure to store it safely.
+
+ifdef::container[] 
++
+// Display the following step for container runner installation only
+. Select the **Container** tab for installation instructions specific to container runner. These instructions are also included in the next section of this installation guide.
++
+.Install container runner through the web app
+image::runnerui_step_four_cr.png[Container runner in the web app]
++
+endif::[]
+
+ifdef::machine[]
++
+// Display the following step for machine runner installation only
+. Select the **Machine** tab for installation instructions specific to setting up self-hosted runners on Linux, macOS, or Windows. These platform-specific instructions are also included in the next section of this installation guide.
++
+.Install machine runner through the web app
+image::runnerui_step_four.png[Machine runner in the web app]
++
+endif::[]
+
+. You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if you do not yet have any configured. If you do not have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
++
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]

@@ -14,9 +14,7 @@ contentTags:
 
 ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。 セルフホストランナーのサーバーでの使用をお考えの場合は、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> のページをご覧ください。
 
-NOTE: Linux、macOS、Windows へのマシンランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
-
-toc::[]
+NOTE: Linux、macOS、Windows へのマシンランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションをこの UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 [#container-runner-prerequisites]
 == コンテナランナーの前提条件

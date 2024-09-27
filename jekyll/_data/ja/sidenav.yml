@@ -145,7 +145,11 @@ en:
           - 
             name: スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行
           - 
+            name: パイプラインのスケジュール実行を夜間に設定する
           - 
+            name: 複数のワークフローを使ったパイプラインのスケジュール実行
+          - 
+            name: CircleCI CLI を使用したテスト分割
       - 
         name: チュートリアル
         children:
@@ -159,7 +163,8 @@ en:
         name: 会社概要
         children:
           - 
-            name: はじめに
+            name: 実行環境の概要
+          - 
           - 
       - 
         name: Docker
@@ -254,36 +259,40 @@ en:
             name: 組織名とリポジトリ名の変更
           - 
   - 
-    name: Orbs
     icon: icons/sidebar/orbs.svg
     children:
       - 
         name: Orb の使用
-        children:
-          - 
-          - 
-          - 
-            name: Orb に関するよくあるご質問
       - 
-        name: Orb のオーサリング
         children:
           - 
           - 
           - 
-          - 
-          - 
-          - 
-            name: Orb のパブリッシュプロセス
           - 
             name: Orb 開発キット
+      - 
+      - 
+        children:
           - 
+            name: Orb のパブリッシュプロセス
       - 
         name: チュートリアル
         children:
           - 
+          - 
             name: Slack Orb の使用
             link: Slack Orb のチュートリアル
       - 
+      - 
+        name: 参考情報
+        children:
+          - 
+          - 
+            name: Orb に関するよくあるご質問
+          - 
+          - 
+            name: 設定ファイルのリファレンス
+          - 
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
@@ -767,6 +776,15 @@ ja:
           - 
             name: パイプライン値とパラメーター
       - 
+        children:
+          - 
+          - 
+          - 
+            name: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
+          - 
+            name: パイプラインのスケジュール実行を夜間に設定する
+          - 
+            name: 複数のワークフローを使ったパイプラインのスケジュール実行
       - 
         name: チュートリアル
         children:

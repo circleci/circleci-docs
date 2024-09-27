@@ -9,6 +9,8 @@ plan:
   - Scale
 ---
 
+{% include snippets/ja/linux-cuda-deprecation-notice.md %}
+
 お客様のジョブは、GPU 実行環境で実行できます。これには、特別なワークロード用の Nvidia GPU にアクセスするために、Windows マシンか Linux 仮想マシンのいずれかを使用します。
 
 Linux GPU 実行環境を使うには、Machine Executor を使い、GPU 対応イメージを指定します。 Machine Executor イメージの全一覧は、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) または[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference#available-linux-gpu-images)を参照してください。
@@ -46,7 +48,7 @@ version: 2.1
 
 jobs:
   build:
-    machine: 
+    machine:
       image: windows-server-2019-nvidia:stable
     steps:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
@@ -58,7 +60,7 @@ jobs:
 お客様のプロジェクトと要件に適したリソースクラスを指定します。 これらのオプションのクレジット消費量の詳細は、[リソースクラスの料金と各種プランのページ](https://circleci.com/ja/product/features/resource-classes/)を参照してください。
 
 ### Linux GPU
-{: linux-gpu}
+{: #linux-gpu}
 
 ```yaml
 version: 2.1
@@ -80,6 +82,3 @@ jobs:
 Windows の場合、現在 1 つのリソースクラスのオプションがあります。 これはデフォルトで使用されるため、お客様の設定で指定する必要はありません。
 
 {% include snippets/ja/gpu-windows-resource-table.md %}
-
-## CircleCI Server v2.x の GPU
-CircleCI Server v2.x をお使いの場合、GPU 対応マシンを使うように VM サービスを設定できます。 詳細は、[サーバー GPU Executor]({{ site.baseurl }}/ja/gpu/) をご確認ください。

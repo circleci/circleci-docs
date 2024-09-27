@@ -1,0 +1,14 @@
+[#how-many-jobs-can-run-concurrently]
+=== How many jobs can I run concurrently?
+
+The number of jobs you can run concurrently differs between link:https://circleci.com/pricing/[plans]. When using workflows to schedule jobs, you can use a xref:workflows#fan-outfan-in-workflow-example[fan-out/fan-in method] to run jobs concurrently.
+
+[#use-multiple-executor-types-same-workflow]
+=== Can I use multiple executor types in the same workflow?
+
+Yes, this is supported. See the xref:sample-config#sample-configuration-with-multiple-executor-types[Sample configuration] page for examples.
+
+[#build-only-the-jobs-that-changed]
+=== Can I build only the jobs that changed?
+
+You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with xref:pipeline-variables#conditional-workflows[Conditional workflows] and xref:dynamic-config#[Dynamic configurations]. Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline.

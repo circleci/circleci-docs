@@ -1,0 +1,40 @@
+---
+
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
+---
+= CircleCI Server v3.x のメトリクスと監視
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Server 環境のメトリクスの収集と監視について
+:icons: font
+:toc: macro
+:toc-title:
+
+CPU やメモリの使用率などのメトリクス、および内部メトリクスを使用すると以下が可能になります。
+
+* インシデントや異常な動作の迅速な検出
+* コンピューティング リソースの動的なスケーリング
+* インフラ全体の問題をさかのぼって把握
+
+toc::[]
+
+== メトリクスの収集
+
+NOTE: データは最大 15 日間保持されます。
+
+NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみに限定されていません。 デフォルトでは、クラスタ全体からメトリクスを収集します。 必要に応じて、KOTS 管理者コンソールの [Config (設定)] から Prometheus を無効にできます。
+
+=== Prometheus
+https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラートシステムです。 CircleCI Server 3.x には、一般的なパフォーマンスメトリクスの監視が実装されています。
+
+WARNING: Prometheus の機能は、KOTS バージョン 1.65.0 - 1.67.0 で 破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないことをお勧めします。
+
+=== KOTS 管理者 - メトリクス グラフ
+デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 デプロイ後、Prometheus インスタンスのアドレスを KOTS 管理者コンソールに追加できます。 KOTS ではこのアドレスを使用して、クラスタに含まれるコンテナの CPU とメモリ使用率のグラフデータを生成します。
+
+デフォルトの Prometheus アドレスは、`\http://prometheus-server` です。
+
+KOTS ダッシュボードの [Configure graphs (グラフの設定)] を選択します。 `\http://prometheus-server` と入力すると、KOTS でリソース使用率グラフが生成されます。

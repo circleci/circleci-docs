@@ -1,0 +1,45 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= Datadog との連携
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは、Datadog との連携により、CircleCI のすべてのジョブの分析データを追跡し、可視化する方法について説明します。
+:icons: font
+:toc: macro
+
+このページでは、インサイトのデータを link:https://www.datadoghq.com/ja/[Datadog] と連携させる方法について説明します。
+
+[#overview]
+== 概要
+
+link:https://docs.datadoghq.com/ja/integrations/circleci/[Datadog と CircleCI の連携]を使用すると、Datadog で CircleCI ジョブのデータを可視化し、分析できます。
+
+[#integration3]
+== 連携手順
+
+以下の手順に従い、Datadog にログを転送する CircleCI Webhook をセットアップします。
+
+. link:https://app.circleci.com/projects[CircleCI Web アプリ]にログインします。
+. いずれかの CircleCI プロジェクトにアクセスします。
+. **[Project Settings (プロジェクト設定)]** を開きます。
+. プロジェクト設定のサイドバーにある **[Webhooks]** をクリックします。
+. **[Add Webhook (Webhook の追加)]** をクリックします。
+. 以下の項目を入力します。
+** **Webhook name (Webhook 名)**: `Datadog CI Visibility` などの識別しやすい名前を入力します。
+** **Receiver URL (レシーバーの URL)**: `\https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>`。`<API_KEY>` をお使いの link:https://app.datadoghq.com/account/login[Datadog API キー]に置き換えてください。
+** **Events (イベント)**: **[Workflow Completed (ワークフロー完了)]** と **[Job Completed (ジョブ完了)]** を選択します。
+** **[Certificate verification (証明書の検証)]** を有効にします。
+. **[Add Webhook (Webhook の追加)]** をクリックして、新しい Webhook を保存します。
+
+[#visualize-pipeline-data-in-datadog]
+=== Datadog でパイプラインデータを可視化する
+
+ワークフローの完了後に、link:https://app.datadoghq.com/account/login[Datadog] にサインインして [Pipelines (パイプライン)] ページと [Pipeline Executions (パイプラインの実行結果)] ページにアクセスし、データが表示されることを確認します。
+
+NOTE: [Pipelines (パイプライン)] ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。

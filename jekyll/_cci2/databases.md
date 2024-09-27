@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
-title: "Configuring Databases"
-short-title: "Configuring Databases"
+title: "Configure Databases"
 description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
-order: 35
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
@@ -19,7 +16,7 @@ This document describes how to use the official CircleCI pre-built Docker contai
 
 ## Overview
 {: #overview }
-{:.no_toc}
+
 
 CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Developer Hub](https://circleci.com/developer/images).
 
@@ -32,11 +29,10 @@ In the primary image, the config defines an environment variable with the `envir
 
 Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
+{% include snippets/docker-auth.md %}
+
 ```yml
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
 ```
@@ -54,17 +50,11 @@ jobs:
       - image: cimg/python:3.10
         environment:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Service container image
       - image: cimg/postgres:14.0
         environment:
           POSTGRES_USER: postgres
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
@@ -99,15 +89,9 @@ When the database service spins up, it automatically creates the database `circl
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
-### Optimizing PostgreSQL images
-{: #optimizing-postgresql-images }
-{:.no_toc}
-
-The `cimg/postgres` Docker image uses regular persistent storage on disk. Storing the database in a ramdisk may improve performance. This can be done by setting the `PGDATA: /dev/shm/pgdata/data` environment variable in the service container image config.
-
 ### Using binaries
 {: #using-binaries }
-{:.no_toc}
+
 
 To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
 
@@ -119,25 +103,19 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 
 ### Using Dockerize to wait for dependencies
 {: #using-dockerize-to-wait-for-dependencies }
-{:.no_toc}
+
 
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI `config.yml` file:
 
 ```yml
-version: 2.0
+version: 2.1
 jobs:
   build:
     working_directory: /your/workdir
     docker:
       - image: your/image_for_primary_container
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: cimg/postgres:14.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: your_postgres_user
           POSTGRES_DB: your_postgres_test
@@ -173,7 +151,7 @@ Redis also has a CLI available:
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 Refer to the [Database Configuration Examples]({{ site.baseurl }}/postgres-config/) document for additional configuration file examples.
 

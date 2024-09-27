@@ -28,14 +28,14 @@ link:https://circleci-public.github.io/circleci-cli/[CLI] により、Docker を
 CLI により、以下のコマンドを使って Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行することができます。
 
 ```shell
-$ circleci local execute --job JOB_NAME
+$ circleci local execute JOB_NAME
 ```
 
 CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合は、まず設定ファイルを `process.yml` にエクスポートし、以下のコマンドで実行する際にそのファイルを指定する必要があります。
 
 ```shell
 circleci config process .circleci/config.yml > process.yml
-circleci local execute -c process.yml --job JOB_NAME
+circleci local execute -c process.yml JOB_NAME
 ```
 
 以下のコマンドにより、CircleCI のデモアプリケーションのいずれかを使って、ローカルマシン上でサンプルビルドを実行します。
@@ -43,7 +43,7 @@ circleci local execute -c process.yml --job JOB_NAME
 ```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
 cd circleci-demo-go
-circleci local execute --job build
+circleci local execute build
 ```
 
 これらのコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。

@@ -1,9 +1,9 @@
-* Trigger a pipeline via the API with the [trigger a pipeline](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint.
-* Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/pipeline-variables/#conditional-workflows).
-* Use `version 2.1` config, which provides access to:
-    * [Reusable config]({{ site.baseurl }}/reusing-config/) elements, including executors, commands and jobs.
-    * Packaged reusable config, known as [orbs](https://circleci.com/orbs/).
-    * Improved config validation error messages.
-    * Option to enable auto-cancel, within **Advanced Settings**, to terminate workflows when new pipelines are triggered on non-default branches.
+* Trigger a pipeline through the API with the link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[trigger a pipeline] endpoint.
+* Use pipeline parameters to trigger xref:pipeline-variables#conditional-workflows[conditional workflows].
+* Use `version 2.1` configuration, which provides access to:
+    * xref:reusing-config#[Reusable configuration] elements, including executors, commands and jobs.
+    * Packaged reusable configuration, known as xref:orb-intro#[orbs].
+    * Improved configuration validation error messages.
+    * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when new pipelines are triggered on non-default branches.
 
-**Note**, it is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
+NOTE: It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.

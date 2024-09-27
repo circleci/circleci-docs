@@ -1,0 +1,383 @@
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
+
+| `pipeline.id`
+| GitHub, Bitbucket, GitLab
+| String
+| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.number`
+| GitHub, Bitbucket, GitLab
+| Integer
+| A project unique integer id for the pipeline.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.project.git_url`
+| GitHub, Bitbucket, GitLab
+| String
+| The URL where the current project is hosted. For example, `https://github.com/circleci/circleci-docs`.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.project.type`
+| GitHub, Bitbucket, GitLab
+| String
+| The lower-case name of the VCS provider, for example, `github`, `bitbucket`.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.git.tag`
+| GitHub, Bitbucket, GitLab
+| String
+| The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.git.branch`
+| GitHub, Bitbucket, GitLab
+| String
+| The name of the git branch that was pushed to trigger the pipeline.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.git.branch.is_default`
+| GitHub, Bitbucket, GitLab
+| Boolean
+| Whether the branch the pipeline was triggered on is the default branch.
+| icon:check[]
+| icon:check[] (>= v4.7)
+
+| `pipeline.git.revision`
+| GitHub, Bitbucket, GitLab
+| String
+| The long (40-character) git SHA that is being built.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.git.base_revision`
+| GitHub OAuth, Bitbucket Cloud
+| String
+| The long (40-character) git SHA of the build prior to the one being built. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.trigger_source`
+| GitHub, Bitbucket, GitLab
+| String
+| The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.schedule.name`
+| GitHub OAuth, Bitbucket Cloud
+| String
+| The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.schedule.id`
+| GitHub OAuth, Bitbucket Cloud
+| String
+| The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
+| icon:check[]
+| icon:check[]
+
+| `pipeline.trigger_parameters.circleci.trigger_type`
+| GitHub App, GitLab
+|
+| GitHub App, GitLab
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.circleci.event_time`
+| GitHub App, GitLab
+|
+| Timestamp CircleCI received the event
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.circleci.event_type`
+| GitHub App, GitLab
+|
+a|  * GitLab: push, merge request
+    * GitHub App: push
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.type`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.ref`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.ref`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.checkout_sha`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.checkout_sha`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.user_id`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.user_id`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.user_name`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.user_name`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.user_username`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.user_username`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.user_avatar`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.user_avatar`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.repo_name`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.repo_name`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.repo_url`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.repo_url`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.web_url`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.web_url`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.commit_sha`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.commit_sha`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.commit_title`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.commit_title`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.commit_message`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.commit_message`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.commit_timestamp`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.commit_timestamp`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.commit_author_name`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.commit_author_name`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.commit_author_email`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.total_commits_count`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.total_commits_count`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.branch`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.github_app.branch`
+| GitHub App
+|
+| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.default_branch`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.gitlab.is_fork_merge_request`
+| GitLab
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.trigger_parameters.webhook.body`
+| Inbound webhook
+| String
+| The body of the payload that was sent with an xref:triggers-overview#trigger-a-pipeline-from-an-inbound-webhook[inbound webhook].
+| icon:check[]
+| icon:times[]
+
+|===

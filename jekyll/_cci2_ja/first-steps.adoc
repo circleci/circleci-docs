@@ -33,7 +33,7 @@ NOTE: GitHub を使用している場合、CircleCI を制限するオプショ�
 . link:https://circleci.com/signup/[**GitLab で登録**] をクリックします。
 . メールアドレスを入力し、CircleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 . GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。
- 画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
+ 画面の指示に従って GitLab.com または GitLab Self-managed （セルフマネージド）のアカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
 --
 
 [.tab.signup.Existing_CircleCI_users]

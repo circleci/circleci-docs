@@ -1,12 +1,10 @@
 ---
 
-redirect_from: /ja/configuration-cookbook/
 contentTags:
   platform:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = 設定ファイルの概要
 :page-layout: classic-docs
@@ -33,7 +31,7 @@ toc::[]
 * ワークフローを使用して、ビルドをオーケストレーションする方法
 * ワークフローに承認ステップを追加する方法
 
-CircleCI は *Configuration as Code* を貫いています。 その結果として、ビルドからデプロイまでのデリバリープロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 `config.yml` ファイルは、リポジトリプロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 その基本的な内容については、 <<writing-yaml#,YAML の記述>> を参照してください。
+CircleCI は *Configuration as Code* を貫いています。 その結果として、ビルドからデプロイまでのデリバリープロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 `config.yml` ファイルは、リポジトリプロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 その基本的な内容については、 xref:introduction-to-yaml-configurations#[YAML の記述] を参照してください。
 
 [#part-1-using-the-shell]
 == パート 1: シェルの使用
@@ -44,6 +42,8 @@ CircleCI では、オンデマンドのシェルによりコマンドを実行�
 . プロジェクトのルートに、`.circleci` フォルダーを作成します。 フォルダー名は、CircleCI が認識できるように、必ずピリオドで始めてください。
 . `config.yml` ファイルを `.circleci` フォルダー内に作成し、以下のコードをペーストします。
 +
+{% include snippets/ja/docker-auth.adoc %}
++
 [source,yaml]
 ----
 version: 2.1
@@ -51,9 +51,6 @@ jobs:
   build:
     docker:
       - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step
@@ -63,9 +60,9 @@ jobs:
 ----
 +
 上記サンプルコードの各行について、以下で解説します。
-
 * *1 行目:* 使用している CircleCI プラットフォームのバージョンを示します。 `2.1` が最新のバージョンです。
-* *2 行目:* `jobs` レベルには、子ジョブのコレクションが含まれ、ジョブを表しています。 これらのジョブの名前を指定します (_build_、_test_、_deploy_ など)。
+* *2 行目:* `jobs` レベルには、子ジョブのコレクションが含まれ、ジョブを表しています。 これらのジョブの名前を指定します (_build_、_test_、_deploy_ など)
+。
 * *3 行目:* `build` は、`jobs` コレクションの最初の子ジョブです。 このサンプルでは、`build` は唯一のジョブでもあります。
 * *4 行目:* これは、ジョブのコマンドが実行されるコンテナに対し Docker イメージを使用していることを示します。
 * *5 行目:* これが Docker イメージです。 このサンプルでは、Alpine Linux に基づいたミニマムイメージである `alpine:3.15` を示します。
@@ -76,7 +73,6 @@ jobs:
 * *12 行目:* `command` 属性は、実行するシェルコマンドのリストです。 最初のパイプ `|` は、複数行のシェルコマンドがあることを示します。
 * *13 行目:* ビルドシェルに `Hello World!` を出力します。
 * *14 行目:* `This is the delivery pipeline` と出力します。
-
 . `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。
 . CircleCI の Projects ページで、 プロジェクトを検索し、横にある青色の *Set Up Project* ボタンをクリックします。
 +
@@ -365,6 +361,17 @@ TIP: エラーの場合、問題は誤ったインデントにより引き起こ
 * ワークフロー内で手動による承認を要求するため、`approval` ジョブタイプを実行
 
 上記で習得した内容を活用すると、強力なパイプラインを作成することができます。
+
+[#visual-studio-code-extension]
+== 関連項目
+
+VS コード を使用している場合、YAML Config ファイルの記述、編集、ナビゲーション、トラブルシューティングを行う際に、公式の xref:vs-code-extension-overview#[CircleCI extension ガイド] をご覧ください。
+
+この拡張機能は、リアルタイムのシンタックスハイライトと検証、go-to定義とgo-to参照コマンドによるナビゲーション支援、使用ヒント、オートコンプリート候補を提供します。
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+CircleCI VS Code の拡張機能は、link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS コードマーケットプレース] からダウンロードできます。
 
 [#see-also]
 == 関連項目

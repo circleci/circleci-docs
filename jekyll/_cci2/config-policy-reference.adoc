@@ -1,107 +1,34 @@
 ---
-description: Open preview of config policy management for CircleCI
-contentTags: 
+description: Open preview of config policies for CircleCI. Reference page for function helpers.
+contentTags:
   platform:
   - Cloud
+  - Server v4.x
 ---
 = Config policy reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
-CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
-
-This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
+This reference page lists a selection of _helpers_, or CircleCI-specific functions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
 The `circle-policy-agent` package includes built-in functions for common config policy
 use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
-will be able to access these functions. This also means the package name `circleci.config` is
+will be able to access these functions. This also means the package names `circleci.config` and `circleci.utils` are
 reserved.
 
-[#circleci-rego-helpers]
-== CircleCI rego helpers
+[#circleci-config-helpers]
+== CircleCI config helpers
 
-[#jobs]
-=== `jobs`
-
-`jobs` is a Rego object containing jobs that are present in the given CircleCI config file. It 
-can be utilized by policies related to jobs.
-
-[#definition-jobs]
-==== Definition
-
-[source,rego]
-----
-jobs = []string
-----
-
-Example `jobs` object:
-
-[source,json]
-----
-[
-    "job-a",
-    "job-b",
-    "job-c"
-]
-----
-
-[#usage-jobs]
-==== Usage
-
-[source,rego]
-----
-package org
-
-policy_name["example"]
-
-import future.keywords
-import data.circleci.config
-
-jobs := config.jobs
-----
-
-[#require-jobs]
-=== `require_jobs`
-
-This function requires a config to contain jobs based on the job names. Each job in the list of 
-required jobs must be in at least one workflow within the config.
-
-[#definition-require-jobs]
-==== Definition
-
-[source,rego]
-----
-require_jobs([string])
-returns { string }
-----
-
-[#usage-require-jobs]
-==== Usage
-
-[source,rego]
-----
-package org
-
-import data.circleci.config
-
-policy_name["example"]
-
-require_security_jobs = config.require_jobs(["security-check", "vulnerability-scan"])
-
-enable_rule["require_security_jobs"]
-
-hard_fail["require_security_jobs"]
-----
+The following helpers are imported using `import data.circleci.config`
 
 [#orbs]
 === `orbs`
 
-`orbs` is a Rego object containing orbs and versions present in the given config file. It 
+`orbs` is a Rego object containing orbs and versions present in the given config file. It
 can be utilized by policies related to orbs.
 
 [#definition-orbs]
@@ -136,75 +63,10 @@ policy_name["example"]
 my_orbs := config.orbs
 ----
 
-[#require-orbs]
-=== `require_orbs`
-
-This function requires a config to contain orbs based on the orb names. Versions should not 
-be included in the provided list of orbs.
-
-[#definition-require-orbs]
-==== Definition
-
-[source,rego]
-----
-require_orbs([string])
-returns { string: string }
-----
-
-[#usage-require-orbs]
-==== Usage
-
-[source,rego]
-----
-package org
-
-import data.circleci.config
-
-policy_name["example"]
-
-require_security_orbs = config.require_orbs(["circleci/security", "foo/bar"])
-
-enable_rule["require_security_orbs"]
-
-hard_fail["require_security_orbs"]
-----
-
-[#require-orbs-version]
-=== `require_orbs_version`
-
-This function requires a policy to contain orbs based on the orb name and version.
-
-[#definition-require-orbs-version]
-==== Definition
-
-[source,rego]
-----
-require_orbs_version([string])
-returns { string: string }
-----
-
-[#usage-require-orbs-version]
-==== Usage
-
-[source,rego]
-----
-package org
-
-import data.circleci.config
-
-policy_name["example"]
-
-require_orbs_versioned = config.require_orbs_version(["circleci/security@1.2.3", "foo/bar@4.5.6"])
-
-enable_rule["require_orbs_versioned"]
-
-hard_fail["require_orbs_versioned"]
-----
-
 [#ban-orbs]
 === `ban_orbs`
 
-This function violates a policy if a config includes orbs based on the orb name. Versions should not 
+This function violates a policy if a config includes orbs based on the orb name. Versions should not
 be included in the provided list of orbs.
 
 [#definition-ban-orbs]
@@ -212,7 +74,7 @@ be included in the provided list of orbs.
 
 [source,rego]
 ----
-ban_orbs_version([string])
+ban_orbs([string])
 returns { string: string }
 ----
 
@@ -229,9 +91,7 @@ policy_name["example"]
 
 ban_orbs = config.ban_orbs(["evilcorp/evil"])
 
-enable_rule["ban_orbs"]
-
-hard_fail["ban_orbs"]
+enable_hard["ban_orbs"]
 ----
 
 [#ban-orbs-version]
@@ -261,9 +121,7 @@ policy_name["example"]
 
 ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.5.6"])
 
-enable_rule["ban_orbs_versioned"]
-
-hard_fail["ban_orbs_versioned"]
+enable_hard["ban_orbs_versioned"]
 ----
 
 [#resource-class-by-project]
@@ -300,7 +158,315 @@ check_resource_class = config.resource_class_by_project({
   "large": {"$PROJECT_UUID_A","$PROJECT_UUID_B"},
 })
 
-enable_rule["check_resource_class"]
-
-hard_fail["check_resource_class"]
+enable_hard["check_resource_class"]
 ----
+
+[#contexts-allowed-by-project-ids]
+=== `contexts_allowed_by_project_ids`
+
+This function accepts project ids (`PROJECTS`) and
+context names (`ALLOWED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array of strings
+
+It prevents the usage of **any** context **not in** `ALLOWED_CONTEXTS` for **all** projects that are **in** `PROJECTS`.
+
+[#definition-contexts-allowed-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_allowed_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  ALLOWED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-allowed-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${ALLOWED_CONTEXT_NAME_1}","${ALLOWED_CONTEXT_NAME_2}"]
+)
+
+enable_hard["rule_contexts_allowed_by_project_ids"]
+----
+
+[#contexts-blocked-by-project-ids]
+=== `contexts_blocked_by_project_ids`
+
+This function accepts project IDs (`PROJECTS`) and
+context names (`BLOCKED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array of strings
+
+It blocks the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects **in** `PROJECTS`.
+
+[#definition-contexts-blocked-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_blocked_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  BLOCKED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-blocked-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
+)
+
+enable_hard["rule_contexts_blocked_by_project_ids"]
+----
+
+
+[#contexts-reserved-by-project-ids]
+=== `contexts_reserved_by_project_ids`
+
+This function accepts project ids (`PROJECTS`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array-of-strings
+
+It blocks the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects **not in** `PROJECTS`.
+
+[#definition-contexts-reserved-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_reserved_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  RESERVED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_hard["rule_contexts_reserved_by_project_ids"]
+----
+
+
+[#contexts-reserved-by-branches]
+=== `contexts_reserved_by_branches`
+
+This function accepts VCS branch names (`BRANCHES`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* string
+* set-of-strings
+* array-of-strings
+
+Branch names **not in** `BRANCHES` are **not** allowed to use the contexts **in** `RESERVED_CONTEXTS`, however, other contexts may be used.
+
+[#definition-contexts-reserved-by-branches]
+==== Definition
+
+[source,rego]
+----
+contexts_reserved_by_branches(
+  BRANCHES: string | Array<string> | Set<string>
+  CONTEXT_LIST: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-branches]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
+   ["${BRANCH_1}, "${BRANCH_2}", "${BRANCH_3}"]",
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_hard["rule_contexts_reserved_by_branches"]
+----
+
+[#circleci-utility-helpers]
+== CircleCI utility helpers
+
+The following helpers are imported using `import data.circleci.utils`
+
+[#is_parameterized_expression]
+=== `is_parameterized_expression`
+
+This function checks any value and returns true if it is a string that contains a parameter expression, otherwise it returns false.
+
+[#definition-is-parameterized-expression]
+==== Definition
+
+[source,rego]
+----
+is_parameterized_expression(value)
+return boolean
+----
+
+[#usage-is-parameterized-expression]
+==== Usage
+
+[source,rego]
+----
+is_parameterized_expression("hello world")                      # false
+is_parameterized_expression(42)                                 # false
+is_parameterized_expression("release-<<parameters.version>>")   # true
+----
+
+
+[#get_element_name]
+=== `get_element_name`
+
+This function retrieves the name of an element in a config file. You can use it to retrieve the name of jobs in workflows, steps in jobs, etc. If the element is an object, this function will return the object's key.
+
+
+[#definition-get-element-name]
+==== Definition
+
+[source,rego]
+----
+get_element_name(input.<config_key>)
+returns string
+----
+
+[#usage-get-element-name]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+job_name1 = utils.get_element_name(input.jobs[0])
+job_name2 = utils.get_element_name(input.jobs[1])
+----
+
+Consider the following config.yml:
+[source,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - lint
+      - test:
+          context: test-vars
+----
+In the policy example above, `job_name1` would equal `lint` and `job_name2` would equal `test`.
+
+[#to_array]
+=== `to_array`
+
+This function casts a value to an array. Array values are left as is and are **not** cast to Array<Array>.
+
+[#definition-to-array]
+==== Definition
+
+[source,rego]
+----
+to_array(value)
+returns array
+----
+
+[#usage-to-array]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+a = utils.to_array("element")   # a is ["element"]
+b = utils.to_array(["element"]) # b is ["element"]
+----
+
+[#to-set]
+=== `to_set`
+
+This function casts a value to a set. Array values are cast to a set and deduplicated. Set values are left as is and are **not** cast to Set<Set>.
+
+[#definition-to-set]
+==== Definition
+
+[source,rego]
+----
+to_set(value)
+returns set
+----
+
+[#usage-to-set]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import data.circleci.utils
+
+policy_name["example"]
+
+a = utils.to_set("element")                      # a is {"element"}
+b = utils.to_set(["one", "one", "two", "three"]) # b is {"one", "two", "three"}
+c = utils.to_set({"element"})                    # c is {"element"}
+----
+

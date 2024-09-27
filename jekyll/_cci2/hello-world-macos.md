@@ -59,7 +59,7 @@ version: 2.1
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 14.1.0 # indicate our selected version of Xcode
+      xcode: 14.2.0 # indicate your selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
@@ -68,7 +68,7 @@ jobs: # a basic unit of work in a run
 
   build: 
     macos:
-      xcode: 14.1.0 # indicate our selected version of Xcode
+      xcode: 14.2.0 # indicate your selected version of Xcode
     steps: 
       - checkout
       - run:

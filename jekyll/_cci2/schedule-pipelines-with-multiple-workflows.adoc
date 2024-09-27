@@ -1,21 +1,16 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
 ---
 = Schedule pipelines with multiple workflows
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to set conditionals for scheduled pipelines in multiple workflows."
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-[#introduction]
-== Introduction
+NOTE: Scheduled pipelines are not currently available for GitLab, Bitbucket Data Center or GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
 
 Scheduled pipelines are simply triggered pipelines, and by default, for each trigger, every workflow that has been configured will run. You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a scheduled pipeline is triggered. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
 
@@ -58,7 +53,7 @@ You may also add filtering for workflows that should *not* run when a schedule i
 version: 2.1
 ...
 daily-run-workflow:
-# run workflow only when the daily_build pipeline is triggered 
+# run workflow only when the daily_build pipeline is triggered
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
@@ -123,23 +118,23 @@ The example below demonstrates three workflows scheduled with pipeline values. T
 version: 2.1
 ...
 workflows:
-# run workflow only when the daily_build pipeline is triggered 
+# run workflow only when the daily_build pipeline is triggered
   daily-run-workflow:
-    when: 
+    when:
       equal: [ daily_build, << pipeline.schedule.name >> ]
     jobs:
       - job-one
 
   nightly-run-workflow:
   # run workflow only when the daily_build pipeline is triggered
-    when: 
+    when:
       equal: [ daily_build, << pipeline.schedule.name >> ]
     jobs:
       - job-two
 
   weekly-run-workflow:
   # run workflow only when the weekly_build pipeline is triggered
-    when: 
+    when:
       equal: [ weekly_build, << pipeline.schedule.name >> ]
     jobs:
       - job-three

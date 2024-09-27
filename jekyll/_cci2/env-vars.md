@@ -8,7 +8,6 @@ contentTags:
     - Cloud
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -21,7 +20,7 @@ suggested:
 ## Introduction
 {: #introduction }
 
-Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
+Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration. See the [Set an environment variable](/docs/set-environment-variable/) page for guidance on the different ways to set an environment variable.
 
 If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
@@ -75,9 +74,6 @@ jobs: # basic units of work in a run
     docker: # use the Docker executor
       # CircleCI Node images available at: https://circleci.com/developer/images/image/cimg/node
       - image: cimg/node:18.11.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -155,9 +151,6 @@ jobs:
         default: my_repo
     docker:
       - image: cimg/go:1.17.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
@@ -177,6 +170,9 @@ For more information, read the documentation on [using the parameters declaratio
 
 Another possible method to interpolate values into your configuration is to use a `run` step to export environment variables to `BASH_ENV`, as shown below.
 
+The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
+{: class="alert alert-info"}
+
 ```yaml
 steps:
   - run:
@@ -188,8 +184,72 @@ steps:
 
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run, allowing you to use interpolation and share environment variables across `run` steps.
 
-The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
-{: class="alert alert-info"}
+### Environment variable substitution
+{: #environment-variable-substitution }
+
+The CircleCI CLI offers a wrapper around the [`envsubst`](https://github.com/a8m/envsubst) tool, available both locally as well as in all jobs running on CircleCI. `envsubst` is a command-line utility used to replace environment variables in text strings.
+
+CLI command:
+
+```sh
+circleci env subst
+```
+
+#### Usage
+{: #env-subst-usage }
+
+The `circleci env subst` command can accept text input from `stdin` or as an argument.
+
+Within your repository create a file such as `template.json`, with value replaced by environment variable strings
+
+```json
+{
+  "foo": "$FOO",
+  "provider": "${PROVIDER}"
+}
+```
+
+`envsubst` can convert all types of environment variable strings, including those encased in curly braces (`{}`).
+
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating the environment variables in the CircleCI app, either in [Project Settings](/docs/set-environment-variable/#set-an-environment-variable-in-a-project/) or as a [context](/docs/contexts).
+
+```yaml
+version: 2.1
+jobs:
+  process-template:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: Process template file
+          environment:
+            # Environment variables would typically be served via a context
+            FOO: bar
+            PROVIDER: circleci
+          command: |
+            circleci env subst < template.json > deploy.json
+            cat deploy.json
+workflows:
+  env-subst-workflow:
+    jobs:
+      - process-template
+```
+
+In this example, the `<` symbol is used to redirect the contents of the `template.json` file as _input_ to the `env subst` command, while the `>` symbol is used to redirect the output of the env subst command to the `deploy.json`.
+
+You could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
+
+Output:
+
+```sh
+{
+  "foo": "bar",
+  "provider": "circleci"
+}
+```
+
+For instructions on installing the CircleCI CLI locally, read the [Installing the CircleCI local CLI](/docs/local-cli/) guide.
 
 ### Alpine Linux
 {: #alpine-linux }
@@ -223,5 +283,6 @@ You can further restrict access to environment variables using [contexts]({{site
 ## See also
 {: #see-also }
 
-- [Security recommendations]({{site.baseurl}}/security-recommendations)
-- [Inject variables using the CircleCI API]({{site.baseurl}}/inject-environment-variables-with-api/)
+- [Security recommendations](/docs/security-recommendations)
+- [Set an environment variable](/docs/set-environment-variable/)
+- [Inject variables using the CircleCI API](/docs/inject-environment-variables-with-api/)

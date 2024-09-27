@@ -1,6 +1,6 @@
 ---
 description: "A how-to guide for selecting a workflow to run using pipeline parameters."
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -12,8 +12,7 @@ document-type:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 You might find that you want to manually trigger a specific workflow to run using the API but still run a workflow on every push to your project. To achieve this, use <<pipeline-variables#pipeline-parameters-in-configuration,pipeline parameters>> to decide which workflow(s) to run.
 
@@ -34,13 +33,15 @@ parameters:
 
 jobs:
   build:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - checkout
       - run: ./run-tests.sh
 
   report:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - checkout
       - run: ./create-report.sh
@@ -62,7 +63,7 @@ workflows:
 [#supply-parameter-with-api]
 == Supply parameter with API
 
-The `action` parameter will default to `build` on pushes to the project. Below is an example of supplying a different value to `action` using the API v2 link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[Trigger a New Pipeline] endpoint to select a different workflow to run. 
+The `action` parameter will default to `build` on pushes to the project. Below is an example of supplying a different value to `action` using the API v2 link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[Trigger a New Pipeline] endpoint to select a different workflow to run.
 
 In this example, the workflow named `report` would run. Remember to substitute <<api-developers-guide#getting-started-with-the-api,`project-slug`>> with your values.
 
@@ -78,4 +79,4 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 [#next-steps]
 == Next steps
 
-For more information on using API v2 endpoints, see the link:https://circleci.com/docs/api/v2/[API Reference Documentation] and the <<api-developers-guide/#example-end-to-end-api-request,API Developers Guide Worked Example>>.
+For more information on using API v2 endpoints, see the link:https://circleci.com/docs/api/v2/[API Reference Documentation] and the <<api-developers-guide/#example-end-to-end-api-request,API Developers Guide end-to-end example>>.

@@ -1,32 +1,16 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
-redirect_from: 
-  - /tutorials/
-  - /demo-apps/
-  - /language-android/
-  - /language-clojure/
-  - /language-crystal/
-  - /language-dart/
-  - /language-elixir/
-  - /language-go/
-  - /language-haskell/
-  - /language-java/
-  - /language-php/ 
-  - /language-ruby/
-  - /language-scala/
 ---
-= Examples and Guides Overview
+= Examples and guides overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Resources for learning CircleCI using examples. 
+:page-description: Resources for learning CircleCI using examples.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
 
@@ -36,6 +20,12 @@ For basic examples of adding pipeline jobs in a specific execution environment s
 
 [#languages]
 == Language guides
+
+To get a project up and running on CircleCI, see the following quickstart guides:
+
+* xref:language-javascript#[Configure a Node.js application on CircleCI]
+* xref:language-python#[Configure a Python application on CircleCI]
+* xref:language-go#[Configure a Go application on CircleCI]
 
 We have created demo applications in various languages so you can learn by example. Each language listed below has an associated guide and public repository on GitHub.
 
@@ -52,9 +42,6 @@ Use the tutorial associated with your platform to learn about the customization 
 | Platform guide
 | Description
 
-| <<project-walkthrough#,Linux Project Tutorial>>
-| Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
-
 | <<hello-world-macos#example-application,macOS Project Tutorial>>
 | Set up a macOS project in CircleCI.
 
@@ -67,5 +54,5 @@ Use the tutorial associated with your platform to learn about the customization 
 
 [#next-steps]
 == Next steps
-
 - Read the <<sample-config#,Sample config.yml Files>> document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
+- Refer to the xref:configuration-reference#[Configuration reference page] for detailed syntax.

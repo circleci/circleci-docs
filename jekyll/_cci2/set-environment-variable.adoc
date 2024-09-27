@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -8,17 +8,18 @@ contentTags:
 = Set an environment variable
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to set environment variables for use in your CircleCI pipelines. 
+:page-description: How to set environment variables for use in your CircleCI pipelines.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level.
+
+{% include snippets/docker-auth.adoc %}
 
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>. This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars#parameters-and-bash-environment[using `BASH_ENV`]. This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
 ```yaml
 version: 2.1
@@ -26,18 +27,15 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
-          # Add source command to execute code and make variables 
+          # Add source command to execute code and make variables
           # available in current step.
           command: |
             echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            echo "export VERY_IMPORTANT=VALUE_CONTENT" >> "$BASH_ENV"
             source "$BASH_ENV"
 ```
 
@@ -48,7 +46,7 @@ For more information, refer to your shell's documentation on setting environment
 [#set-an-environment-variable-in-a-step]
 == Set an environment variable in a step
 
-To set an environment variable in a step, use the <<configuration-reference#run,`environment` key>>.
+To set an environment variable in a step, use the xref:configuration-reference#run[`environment` key].
 
 ```yaml
 version: 2.1
@@ -56,10 +54,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run:
@@ -71,12 +66,12 @@ jobs:
 ```
 
 NOTE: Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
-to be accessible in more than one step, export the value <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>.
+to be accessible in more than one step, export the value xref:env-vars#parameters-and-bash-environment[using `BASH_ENV`].
 
 [#set-an-environment-variable-in-a-job]
 == Set an environment variable in a job
 
-To set an environment variable in a job, use the <<configuration-reference#job_name,`environment` key>>.
+To set an environment variable in a job, use the xref:configuration-reference#job_name[`environment` key].
 
 ```yaml
 version: 2.1
@@ -85,9 +80,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.04-20.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
 ```
@@ -119,10 +111,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run:
@@ -131,7 +120,7 @@ jobs:
             echo $MY_ENV_VAR
 ```
 
-Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information about controlling access to env vars with contexts, refer to the <<contexts#restricting-a-context,Restricting a context>> documentation.
+Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information about controlling access to env vars with contexts, refer to the xref:contexts#restricting-a-context[Restricting a context] documentation.
 
 [#set-an-environment-variable-in-a-project]
 == Set an environment variable in a project
@@ -157,10 +146,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
     steps:
       - checkout
       - run:
@@ -174,9 +160,9 @@ Once created, environment variables are hidden and uneditable in the application
 [#set-an-environment-variable-in-a-container]
 == Set an environment variable in a container
 
-Environment variables can also be set for a Docker container. To do this, use the <<configuration-reference#docker,`environment` key>>.
+Environment variables can also be set for a Docker container. To do this, use the xref:configuration-reference#docker[`environment` key].
 
-NOTE: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> section of the Custom images guide.
+NOTE: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the xref:custom-images#adding-an-entrypoint[Adding an entrypoint] section of the Custom images guide.
 
 ```yaml
 version: 2.1
@@ -184,10 +170,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: <image>:<tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
         # environment variables available for entrypoint/command run by docker container
         environment:
           MY_ENV_VAR_1: my-value-1
@@ -204,17 +187,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: <image>:<tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/base:2023.06
         environment:
           MY_ENV_VAR_1: my-value-1
           MY_ENV_VAR_2: my-value-2
-      - image: <image>:<tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/postgres:15.3.0
         environment:
           MY_ENV_VAR_3: my-value-3
           MY_ENV_VAR_4: my-value-4

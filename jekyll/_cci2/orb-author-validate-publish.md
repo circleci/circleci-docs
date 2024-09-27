@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Manual Orb Authoring Process"
 description: "Authoring simple orbs manually without the orb development kit."
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -20,7 +20,7 @@ circleci namespace create <name> --org-id <your-organization-id>
 ## 2. Create your orb
 {: #create-your-orb }
 
-Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published. **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
+Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published.
 To create a **[public]({{site.baseurl}}/orb-intro/#public-orbs)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
@@ -29,6 +29,9 @@ To create a **[private]({{site.baseurl}}/orb-intro/#private-orbs)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
+
+The `--private` flag is not currently supported on CircleCI server. Orbs created within a server installation will only be visible to authenticated users.
+{: class="alert alert-info"}
 
 Next, create the content of your orb in a YAML file. Here is a simple example to get you started:
 ```yaml
@@ -135,7 +138,6 @@ orbs:
   node: circleci/node@4.7.0
 
 workflows:
-  version: 2
   example-workflow:
       jobs:
         - node/test
@@ -154,9 +156,6 @@ jobs:
   node/test:
     docker:
     - image: cimg/node:13.11.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:

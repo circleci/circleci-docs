@@ -1,0 +1,98 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= CircleCI Linux VM images support policy
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Linux VM images release, update, and deprecation policy
+:icons: font
+:experimental:
+
+[#overview]
+== Overview
+
+This document outlines the CircleCI Linux VM (machine) image release, update and deprecation policy. This policy applies to all CircleCI Linux VM (machine) images built for the machine executor. Note that there is a separate xref:linux-cuda-images-support-policy#[CUDA image support policy].
+
+[#release-policy]
+== Release policy
+
+The CircleCI Linux VM images are all based on Ubuntu, we support both ARM64 and AMD64 architectures.
+
+We aim to maintain, support, and release the two most recent LTS versions of Ubuntu.
+
+[#tagging]
+== Tagging
+
+Tags we support for this image (tag is what is specified in `.circleci/config.yml` when requesting an image):
+
+- `default` version is what you will receive if do not specify an image.
+
+- `current` version of the image will receive updates approximately every three months.
+
+- `previous` version of the image will receive the previous version of `current`.
+
+- `edge` tags are reserved for previews of new releases, which will initially point to this tag. The edge tags may include incremental updates to the current quarterly (every 3 months) image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
+
+- Date based tagging: The Ubuntu LTS based images have the image slug format of: `ubuntu-<LTS version>:<year>.<month>.<patch>`, such as `ubuntu-2204:2023.10.1`. We recommend using the `default` version and not pinning to a date version.
+
+We always aim to release a version of this image every three months.
+
+[#critical-cve-patches]
+== Critical CVE patches
+
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in Linux VM images, we will investigate the impact that this has on our images being used within the CircleCI execution environment.  If customers are impacted by these CVEs we will push a patch fix to the released image(s). This image will supersede the original image.
+
+[#bug-reports-issues-and-prs]
+== Bug reports, issues, and PRs
+
+You can file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the Linux VM images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+
+[#image-lifespan-eol]
+== Image lifespan / EOL
+
+Image Lifespan will generally follow the support status of Ubuntu by Canonical. Once a new Ubuntu LTS is released, we will begin the deprecation process of the oldest version that we support and schedule it to be removed. This allows us to maintain our aim of two LTS Ubuntu versions effectively.
+
+Current Deprecation (Jan 2024):
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Version
+| Support
+
+| Ubuntu 20.04 LTS
+| Build quarterly images for current year and retain Q4 (October) release from the past two years.
+
+| Ubuntu 22.04 LTS
+| Quarterly images built and only Q4 image retained each year
+|===
+
+
+Example: When Ubuntu 24.04 LTS is released
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Version
+| Support
+
+| Ubuntu 20.04 LTS
+| Deprecated and removed entirely
+
+| Ubuntu 22.04 LTS
+| Retain only Q4 (October) releases from past two years
+
+| Ubuntu 24.04 LTS
+| Quarterly images built and only Q4 (October) image retained from each year
+|===
+
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs.
+
+We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release.
+
+[#exceptions]
+== Exceptions
+
+​​At any time, we reserve the right to work outside of the information in this document if the circumstances require. In the event that we are required to make an exception to the policy, we will aim to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our Discuss Forum, along with additional outreach, such as an email notice, where possible.

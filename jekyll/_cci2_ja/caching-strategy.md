@@ -2,15 +2,11 @@
 layout: classic-docs
 title: "キャッシュ戦略"
 description: "このドキュメントでは、依存関係のキャッシュを管理するための様々なキャッシュ戦略について説明します。"
-categories:
-  - 最適化
-order: 50
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 キャッシュはプロジェクト固有であり、様々なキャッシュ戦略によりキャッシュを最適化して有効性を高めることができます。
@@ -25,7 +21,7 @@ contentTags:
 
 キャッシュを長期間保存すると、ストレージコストに影響が及ぶため、キャッシュを保存する理由やユースケースに応じた必要なキャッシュの保存期間を明確にすることをお勧めします。 ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)のページを参照してください。
 
 ## キャッシュの最適化
 {: #cache-optimization }

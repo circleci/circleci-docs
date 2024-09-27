@@ -9,7 +9,6 @@ contentTags:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このドキュメントでは、CircleCI の設定でブラウザーテストの実行とデバッグを行う一般的な方法について説明します。

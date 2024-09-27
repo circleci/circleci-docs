@@ -5,7 +5,7 @@ short-title: "Authoring Orbs"
 description: "Starting point for authoring CircleCI orbs"
 categories: [getting-started]
 order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -101,7 +101,7 @@ Each directory within `src` corresponds with a [reusable configuration]({{site.b
 
 ##### @orb.yml
 {: #orbyml }
-{:.no_toc}
+
 
 @orb.yml acts as the "root" to your orb project and contains the config version, the orb description, the display key, and imports any additional orbs if needed.
 
@@ -120,7 +120,7 @@ display:
 
 ##### Commands
 {: #commands }
-{:.no_toc}
+
 
 Author and add [Reusable Commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands) to the `src/commands` directory. Each _YAML_ file within this directory will be treated as an orb command, with a name which matches its filename.
 
@@ -145,7 +145,7 @@ steps:
 
 ##### Examples
 {: #examples }
-{:.no_toc}
+
 
 Author and add [Usage Examples]({{site.baseurl}}/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/developer/orbs) for users to reference.
 
@@ -155,7 +155,7 @@ View a full example from the [Orb Template](https://github.com/CircleCI-Public/O
 
 ##### Executors
 {: #executors }
-{:.no_toc}
+
 
 Author and add [Parameterized Executors]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) to the `src/executors` directory.
 
@@ -165,7 +165,7 @@ View a full example from the [Orb Template](https://github.com/CircleCI-Public/O
 
 ##### Jobs
 {: #jobs }
-{:.no_toc}
+
 
 Author and add [Parameterized Jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs) to the `src/jobs` directory.
 
@@ -182,9 +182,6 @@ description: >
 
 docker:
   - image: cimg/base:current
-    auth:
-      username: mydockerhub-user
-      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   greeting:
     type: string
@@ -232,7 +229,7 @@ steps:
 
 ##### Why include scripts?
 {: #why-include-scripts }
-{:.no_toc}
+
 
 CircleCI configuration is written in `YAML`. Logical code such as `bash` can be encapsulated and executed on CircleCI through `YAML`, but, for developers, it is not convenient to write and test programmatic code within a non-executable format. Also, parameters can become cumbersome in more complex scripts as the `<<parameter>>` syntax is a CircleCI native YAML enhancement, and not something that can be interpreted and executed locally.
 
@@ -240,7 +237,7 @@ Using the orb development kit and the `<<include(file)>>` syntax, you can import
 
 ##### Using parameters with scripts
 {: #using-parameters-with-scripts }
-{:.no_toc}
+
 
 To keep your scripts portable and locally executable, it is best practice to expect a set of environment variables within your scripts and set them at the config level. The `greet.sh` file, which was included with the special `<<include(file)>>` syntax above in our `greet.yml` command file, looks like this:
 

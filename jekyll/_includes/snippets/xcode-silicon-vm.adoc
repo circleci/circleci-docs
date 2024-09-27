@@ -1,0 +1,81 @@
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Config
+| Xcode Version
+| macOS Version
+| VM Software Manifest
+| Release Notes
+
+| `16.1.0`
+| Xcode 16.1 Beta 2 (16B5014f)
+| 14.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15065/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-1-beta-2-released/52005[Release Notes]
+
+| `16.0.0`
+| Xcode 16.0 (16A242d)
+| 14.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15048/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-ga-released/51990[Release Notes]
+
+| `15.4.0`
+| Xcode 15.4 (15F31d)
+| 14.3.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14775/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-4-0-ga-released/50897[Release Notes]
+
+| `15.3.0`
+| Xcode 15.3 (15E204a)
+| 14.3.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14490/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-3-ga-released/50717[Release Notes]
+
+| `15.2.0`
+| Xcode 15.2 (15C500b)
+| 14.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14040/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-2-released/50197[Release Notes]
+
+| `15.1.0`
+| Xcode 15.1 (15C65)
+| 14.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13944/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-1-rc-released/50026[Release Notes]
+
+| `15.0.0`
+| Xcode 15 (15A240d)
+| 13.5.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v13456/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-rc-released-important-notice-for-visionos-sdk-users/49278[Release Notes]
+
+| `14.3.1`
+| Xcode 14.3.1 (14E300b)
+| 13.2.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12128/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-14-3-1-rc-released/48152[Release Notes]
+
+| `14.2.0`
+| Xcode 14.2 (14C18)
+| 12.6.3
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11441/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/announcing-apple-silicon-m1-support-now-available/46908[Release Notes]
+
+| `14.1.0`
+| Xcode 14.1 (14B47b)
+| 12.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11763/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/announcing-m1-large-now-available-on-performance-plans/47797/22[Release Notes]
+
+| `14.0.1`
+| Xcode 14.0.1 (14A400)
+| 12.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11770/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/announcing-m1-large-now-available-on-performance-plans/47797/22[Release Notes]
+
+| `13.4.1`
+| Xcode 13.4.1 (13F100)
+| 12.6.1
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11776/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/announcing-m1-large-now-available-on-performance-plans/47797/22[Release Notes]
+|===

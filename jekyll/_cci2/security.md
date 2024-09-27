@@ -5,7 +5,7 @@ category: [administration]
 description: "An overview of security measures taken at CircleCI."
 --- 
 
-This document outlines security initiatives talken by CircleCI.
+This document outlines security initiatives taken by CircleCI.
 
 ## Overview
 {: #overview }
@@ -32,8 +32,6 @@ With CircleCI, you control the resources allocated to run the builds of your cod
 A few different external services and technology integration points touch CircleCI.
 
 - **Web sockets** CircleCI uses [Pusher](https://pusher.com/) client libraries for WebSocket communication between the server and the browser, though for installs an internal server called slanger is used, so Pusher servers have no access to your instance of CircleCI, nor your source control system. This is how CircleCI updates the builds list dynamically, or shows the output of a build line-by-line as it occurs. CircleCI sends build statuses and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL, is done using the same certs over SSL), so it is encrypted in transit.
-
-- **Replicated** For private installations of CircleCI Server, [Replicated](http://www.replicated.com/) is used to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. Your instance of CircleCI Server communicates with Replicated servers to send license key information and version information to check for updates. Replicated does not have access to your data or other systems, and CircleCI does not send any of your data to Replicated.
 
 - **Source control systems** To use CircleCI you will set up a direct connection with your instance of your source control system (GitHub, Bitbucket, GitLab). When you set up CircleCI, you authorize the system to check out your private repositories. You may revoke this permission at any time through your VCS's settings by removing Circle's deploy keys and service hooks from your repositories' admin pages. While CircleCI allows you to selectively build your projects, your VCS's permissions model is "all or nothing" — CircleCI gets permission to access all of a user's repositories or none of them. Your instance of CircleCI will have access to anything hosted in those Git repositories, and will create webhooks for a variety of events (eg: when code is pushed, when a user is added, etc.) that will call back to CircleCI, triggering one or more Git commands that will pull down code to your build fleet.
 

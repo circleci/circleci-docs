@@ -289,7 +289,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     }' https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
-v2 API を使用したエンドツーエンドの例は以上です。 他のエンドポイントに関する詳細な情報は、現在利用可能な全エンドポイントの概要が書かれた [CircleCI API v2 のドキュメント]({{site.baseurl}}/api/v2) を参照してください。
+v2 API を使用したエンドツーエンドの例は以上です。 他のエンドポイントに関する詳細な情報は、現在利用可能な全エンドポイントの概要が書かれた [CircleCI API v2 のドキュメント](https://circleci.com/docs/api/v2) を参照してください。
 
 ## その他の API 使用例
 {: #additional-api-use-cases }
@@ -674,4 +674,4 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 {: #reference }
 
 - CircleCI V2 API に関する詳細情報は、[API V2 の概要]({{site.baseurl}}/ja/api-intro/) をご覧ください。
-- CircleCI V2 API を構成するすべてのエンドポイントの詳細なリストは、[API V2 リファレンスガイド]({{site.baseurl}}/api/v2/)をご覧ください。
+- CircleCI V2 API を構成するすべてのエンドポイントの詳細なリストは、[API V2 リファレンスガイド](https://circleci.com/docs/api/v2/)をご覧ください。

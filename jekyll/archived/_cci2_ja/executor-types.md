@@ -290,10 +290,7 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 
 | クラス                                | vCPU         | RAM   |
 | ---------------------------------- | ------------ | ----- |
-| medium                             | 4 @ 2.7 GHz  | 8 GB  |
 | macos.x86.medium.gen2              | 4 @ 3.2 GHz  | 8 GB  |
-| large                              | 8 @ 2.7 GHz  | 16 GB |
-| macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
 このとき、どのバージョンの Xcode を使うか指定することもできます。 Xcode の特定のバージョンを実行する VM のバージョン番号と技術仕様に関する一覧については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
@@ -309,27 +306,6 @@ jobs:
       # with Xcode 12.5.1 installed
       - run: xcodebuild -version
 ```
-
-### macOS VM のストレージ
-{: #macos-vm-storage }
-
-macOS VM のストレージ容量は、リソースクラスや使用される Xcode イメージによって異なります。 Xcode イメージのサイズは、プリインストールされているツールによって異なります。
-
-| Xcode のバージョン | クラス                   | 最小ストレージ容量          |
-| ------------ | --------------------- | ------------------ |
-| 10.3.0       | Medium、Large          | 36GB               |
-| 10.3.0       | macos.x86.medium.gen2 | 36GB               |
-| 11.*         | Medium、Large          | 23GB               |
-| 11.*         | macos.x86.medium.gen2 | 23GB               |
-| 12.*         | Medium、Large          | 30GB               |
-| 12.*         | macos.x86.medium.gen2 | 30GB<sup>(2)</sup> |
-| 13.*         | Medium、Large          | 23GB               |
-| 13.*         | macos.x86.medium.gen2 | 89GB               |
-{: class="table table-striped"}
-
-<sup>(1)</sup>このリソースは、最低 24 時間のリースが必要です。このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/dedicated-hosts-macos)を参照して下さい。
-
-<sup>(2)</sup>例外: Xcode 12.0.1 と 12.5.1 の最小ストレージ容量は 100GB です。
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }

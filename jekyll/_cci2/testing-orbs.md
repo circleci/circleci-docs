@@ -5,7 +5,7 @@ short-title: "Testing Methodologies"
 description: "Starting point for Testing CircleCI Orbs"
 categories: [getting-started]
 order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -76,7 +76,7 @@ $ yamllint ./src
 Using CircleCI's Local Execute:
 
 ```shell
-circleci local execute --job orb-tools/lint
+circleci local execute orb-tools/lint
 ```
 
 
@@ -105,7 +105,7 @@ circleci orb validate orb.yml
 
 Or, using CircleCI's Local Execute:
 ```shell
-circleci local execute --job orb-tools/pack
+circleci local execute orb-tools/pack
 ```
 ### Shellcheck
 {: #shellcheck }
@@ -127,13 +127,26 @@ shellcheck src/scripts/*.sh
 
 Or, using CircleCI's Local Execute:
 ```shell
-circleci local execute --job shellcheck/check
+circleci local execute shellcheck/check
 ```
 
 ### Review
 {: #review }
 
-The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored.
+The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored using the `exclude` parameter in your config.yaml file.
+
+```yaml
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@11.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - orb-tools/review:
+          exclude: RC006,RC007
+```
 
 Review Checks output to JUnit XML format and are automatically uploaded to CircleCI to be displayed natively in the UI.
 
@@ -208,9 +221,6 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         # Run your orb's commands to validate them.
         - <orb-name>/greet
@@ -223,9 +233,6 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         - github-cli/install
         - run:
@@ -281,7 +288,7 @@ workflows:
 
 The AWS ECR orb contains a job named "build-and-push-image" which will build and push an image to the AWS ECR repository. We run this job and others with multiple parameter options to test their functionality with each code change.
 
-Similar to how we could use additional steps to test our commands, we can take advantage of [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps-requires-version-21) to validate in the job environment, or as shown in this example, we can "clean up" anything we may have created in the job. Post-Steps are additional steps that can be injected at the end of an existing job.
+Similar to how we could use additional steps to test our commands, we can take advantage of [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps) to validate in the job environment, or as shown in this example, we can "clean up" anything we may have created in the job. Post-Steps are additional steps that can be injected at the end of an existing job.
 
 ## What's next?
 {: #whats-next }

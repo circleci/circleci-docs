@@ -1,0 +1,17 @@
+---
+layout: classic-docs
+short-title: Troubleshoot pipelines
+contentTags:
+  platform:
+  - Cloud
+---
+= Troubleshoot pipelines
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Troubleshooting guide for pipelines and scheduled pipelines.
+:icons: font
+:experimental:
+
+This page describes errors and troubleshooting methods for pipelines and scheduled pipelines.
+
+include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]

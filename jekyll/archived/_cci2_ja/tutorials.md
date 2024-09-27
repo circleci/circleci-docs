@@ -6,11 +6,6 @@ version:
   - Cloud
   - Server v3.x
   - Server v2.x
-redirect_from:
-  - /ja/2.0/language-clojure/
-  - /ja/2.0/language-crystal/
-  - /ja/2.0/language-dart/
-  - /ja/2.0/language-elixir/
 ---
 
 お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。

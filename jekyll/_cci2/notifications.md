@@ -1,16 +1,11 @@
 ---
 layout: classic-docs
-title: Using Notifications
+title: Notifications overview
 description: Learn how to use get CircleCI's job status through Slack, IRC, email, and web notifications.
-order: 100
-published: true
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
-
-* TOC
-{:toc}
 
 CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the successful completion or failure of a [workflow]({{ site.baseurl }}/workflows/). IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
@@ -20,18 +15,12 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: cimg/base:2021.04
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
@@ -100,9 +89,6 @@ jobs:
   notify:
     docker:
       - image: cimg/base:2021.04
-        auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD
     steps:
       - slack/notify:
           custom: |
@@ -145,9 +131,6 @@ jobs:
   build:
     docker:
       - image: <Docker image>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - irc/notify:

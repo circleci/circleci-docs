@@ -18,7 +18,7 @@
 | `CIRCLE_PULL_REQUEST`{:.env_var}          | 文字列  | 関連付けられたプル リクエストの URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。                                                                   |
 | `CIRCLE_PULL_REQUESTS`{:.env_var}         | リスト  | 現在のビルドに関連付けられたプル リクエストの URL の一覧 (カンマ区切り)。                                                                                           |
 | `CIRCLE_REPOSITORY_URL`{:.env_var}        | 文字列  | GitHub または Bitbucket リポジトリ URL。                                                                                                     |
-| `CIRCLE_SHA1`{:.env_var}                  | 文字列  | 現在のビルドの前回のコミットの SHA1 ハッシュ。                                                                                                          |
+| `CIRCLE_SHA1`{:.env_var}                  | 文字列  | 現在のビルドの一番新しいコミットの SHA1 ハッシュ。                                                                                                          |
 | `CIRCLE_TAG`{:.env_var}                   | 文字列  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳しくは [Git タグを使ったジョブの実行]({{site.baseurl}}/ja/workflows/#executing-workflows-for-a-git-tag)を参照してください。 |
 | `CIRCLE_USERNAME`{:.env_var}              | 文字列  | パイプラインをトリガーしたユーザーの GitHub または Bitbucket ユーザー名 （そのユーザーが CircleCI のアカウントを持っている場合のみ）                                                   |
 | `CIRCLE_WORKFLOW_ID`{:.env_var}           | 文字列  | 現在のジョブのワークフロー インスタンスの一意の識別子。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。                                                              |

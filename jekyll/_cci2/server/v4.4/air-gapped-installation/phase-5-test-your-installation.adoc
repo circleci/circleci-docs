@@ -1,0 +1,58 @@
+---
+contentTags:
+  platform:
+  - Server v4.4
+  - Server Admin
+noindex: true
+---
+= Phase 5 - Test your installation
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to test your CircleCI server v4.4 installation in an air-gapped environment.
+:icons: font
+:toc: macro
+:toc-title:
+
+Test your air-gapped installation using CircleCI's Reality Check project.
+
+[#copy-reality-check]
+== 1. Copy CircleCI server Reality Check
+Copy the link:https://github.com/circleci/realitycheck[CircleCI server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
+
+[#setup-reality-check]
+== 2. Set up CircleCI server Reality Check
+Set up CircleCI server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the readme].
+
+CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
+
+[#modify-reality-check]
+== 3. Modify Reality Check source code
+Replace any references to Docker images in `.circleci/config.yml` with your internal Docker registry.
+
+For example, in your GitHub Enterprise instance, change the following:
+
+[source, yaml]
+----
+  ...
+  artifacts_test_results:
+    docker:
+      - image: python:3.6.0
+----
+
+
+[source, yaml]
+----
+  ...
+  artifacts_test_results:
+    docker:
+      - image: <your-internal-registry-hostname-and-port>/python:3.6.0
+----
+
+NOTE: Leave image values nested under "machine" as is. Only modify Docker image values.
+
+
+[#run-reality-check]
+== 4. Run Reality Check
+Run Reality Check by pushing a commit to it in your GitHub Enterprise installation.
+
+NOTE: the `aws_jobs` and `gcp_jobs` workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.

@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "ビルドアーティファクトの保存"
-short-title: "ビルドアーティファクトの保存"
 description: "ビルド中に作成されたアーティファクトのアップロード例"
-order: 70
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 このドキュメントでは、CircleCI でのアーティファクトの取扱方法について説明します。 アーティファクトは、ジョブまたはパイプラインの完了後にデータを永続化するために使用します。 たとえば、ドキュメントやその他アセットの構築や、詳しい調査のためのテスト結果の保存などです。
@@ -300,7 +297,7 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 
 アーティファクトを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 アーティファクトを保存する利点の一つは、ビルドが失敗する原因のトラブルシューティングにアーティファクトを使用できることです。 ビルドに成功したら、そのアーティファクトはほぼ必要ありません。 ニーズに合う場合は、アーティファクトのストレージ保存期間を短く設定することを推奨します。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)のページを参照してください。
 
 ## アーティファクトの最適化
 {: #artifacts-optimization }
