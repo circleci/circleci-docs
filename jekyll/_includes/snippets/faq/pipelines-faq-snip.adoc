@@ -8,4 +8,6 @@ While splitting configuration files is not supported, CircleCI does support dyna
 [#build-forked-prs-using-pipelines]
 === Can I trigger forked PRs using pipelines?
 
+NOTE: The "build forked PRs" settings is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
 You can trigger pipelines to build PRs from forked repositories with CircleCI link:https://circleci.com/docs/api/v2/[API v2]. However, by default, CircleCI will not build a PR from a forked repository. If you would like to turn this feature on, navigate to menu:Project Settings[Advanced] in the web app. If you would like more information, you can view this link:https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2[support article].

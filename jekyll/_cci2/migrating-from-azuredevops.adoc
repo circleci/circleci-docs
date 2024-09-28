@@ -17,8 +17,8 @@ This document provides an overview of how to migrate from Azure DevOps to Circle
 NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
-== Source Control Setup
-If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub, Bitbucket or GitLab. For Azure DevOps Git repos, here are links on how to import:
+== Source control setup
+If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub, Bitbucket or GitLab. For Azure DevOps Git repositories, here are links on how to import:
 
 * link:https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * link:https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository[Bitbucket]
@@ -59,7 +59,7 @@ Once you have imported your code into GitHub, Bitbucket, or GitLab, you can star
 [#build-configuration]
 == Build Configuration
 
-If you are using Azure DevOps Pipelines or TFS Build and Release, you will need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+If you are using Azure DevOps Pipelines or TFS Build and Release, you will need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a JSON file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
@@ -102,7 +102,7 @@ jobs:
       - run: "execute-script-for-job1"
 ----
 
-2+| Specify a docker image to use for a job.
+2+| Specify a Docker image to use for a job.
 
 a|
 [source, yaml]
@@ -180,7 +180,7 @@ workflows:
           - job3
 ----
 
-2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
+2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for Docker, Linux and macOS.
 
 a|
 [source, yaml]

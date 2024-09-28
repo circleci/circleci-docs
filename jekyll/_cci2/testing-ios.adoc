@@ -15,17 +15,12 @@ This document describes how to set up and customize testing for an iOS applicati
 [#overview]
 == Overview
 
-CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the <<supported-xcode-versions,software manifest>> for each Xcode image.
+CircleCI offers support for building, testing, and deploying iOS projects on macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the <<supported-xcode-versions,software manifest>> for each Xcode image.
 
-There is documentation for xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-macos#[getting started on MacOS].
+Refer to xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-macos#[getting started on macOS] pages for further information.
 
 [#supported-xcode-versions]
 == Supported Xcode versions
-
-[#supported-xcode-versions-intel]
-=== Supported Xcode versions for Intel
-
-{% include snippets/xcode-intel-vm.adoc %}
 
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
@@ -45,7 +40,7 @@ We highly recommend using link:https://fastlane.tools[Fastlane] to build and sig
 After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already be marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
 
 . In Xcode, choose Product \-> Scheme \-> Manage Schemes
-. Select the "Shared" option for the scheme to share, and click Close
+. Select the "Shared" option for the scheme to share, and select btn:[Close]
 . Ensure the `myproject.xcodeproj/xcshareddata/xcschemes` directory is checked into your Git repository and push the changes
 
 Simple projects should run with minimal configuration.
@@ -94,7 +89,7 @@ The `setup_circle_ci` Fastlane action must be in the `before_all` block to perfo
 * Set up log and test result paths to be easily collectible.
 
 [#example-configuration-for-using-fastlane-on-circleci]
-=== Example Configuration for Using Fastlane on CircleCI
+=== Example configuration for using Fastlane on CircleCI
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
 
@@ -172,7 +167,7 @@ workflows:
             - build-and-test
 ----
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where Fastlane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 
 [#code-signing-with-fastlane-match]
 === Code signing with Fastlane Match
@@ -266,7 +261,7 @@ To run a job with a version of Ruby that is not pre-installed, you must install 
 
 For Xcode versions `14.2` and higher, this can be done with the `rbenv install` command, ensuring you pass the version of Ruby required. If a newer version of Ruby is not available, you will need to update the `ruby-build` package (`brew upgrade ruby-build`) to ensure the latest Ruby version definitions are available.
 
-For Xcode versions `14.1` and lower, we use the link:https://github.com/postmodern/ruby-install[ruby-install] tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
+For Xcode versions `14.1` and lower, we use the link:https://github.com/postmodern/ruby-install[`ruby-install`] tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
 [#using-custom-versions-of-cocoapods-and-other-ruby-gems]
 === Using custom versions of CocoaPods and other Ruby gems
@@ -280,7 +275,7 @@ source 'https://rubygems.org'
 gem 'cocoapods', '= 1.3.0'
 ----
 
-Then you can install these using bundler:
+Then you can install these using Bundler:
 
 {% raw %}
 

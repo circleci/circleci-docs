@@ -37,13 +37,16 @@ For more information, see the [Set an environment variable]({{site.baseurl}}/set
 ### Only build pull requests
 {: #only-build-pull-requests }
 
+The "Only build pull requests" feature is not currently supported for GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 
 To change this setting, go to the **Project Settings>Advanced** of your project and set the **Only build pull requests** option to _On_.
 
 The ability to override the **Only build pull requests** setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
 
-Currently, the only way to override the **Only build pull requests** setting is to open a support request at [https://support.circleci.com/](https://support.circleci.com/). In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our [ideas forum](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests).
+You can override the **Only build pull requests** setting by utilizing the API and following the steps outlined in this [support article](https://support.circleci.com/hc/en-us/articles/15222074173723-How-to-allowlist-additional-branches-for-Only-Build-Pull-Requests).
 
 Enabling **Only build pull requests** may result in duplicate builds. You can find troubleshooting steps in this [support article](https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push).
 
@@ -53,17 +56,20 @@ CircleCI will build all commits from your project's *default branch and tags* re
 ### Build pull requests from forked repositories
 {: #build-pull-requests-from-forked-repositories }
 
+The "build pull requests from forked repositories" setting is not currently supported for GitLab, GitHub App or Bitbucket Cloud or Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Project Settings > Advanced** of your project and set the **Build forked pull requests** option to _On_.
-
-This feature is not currently supported for Bitbucket users.
-{: class="alert alert-info" }
 
 If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCI, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
 ### Pass secrets to builds from forked pull requests
 {: #pass-secrets-to-builds-from-forked-pull-requests }
+
+The "pass secrets to builds from forked pull requests" setting is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 

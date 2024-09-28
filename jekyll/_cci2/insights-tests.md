@@ -8,7 +8,7 @@ contentTags:
   - Cloud
 ---
 
-The test Insights feature is not currently supported for GitLab or GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+The test Insights feature is not currently supported for GitLab, GitHub App, or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
 {: class="alert alert-info" }
 
 ## Overview

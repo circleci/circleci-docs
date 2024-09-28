@@ -1,9 +1,7 @@
 ---
 contentTags:
   platform:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.6
 ---
 = CircleCI's machine runner installation with Docker
 :page-layout: classic-docs
@@ -13,17 +11,17 @@ contentTags:
 :experimental:
 :machine:
 
-This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
+This page describes how to install CircleCI's machine runner with the Docker executor on server. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner#,Container runner>> page.
 
 [#new-recommended-method-container-runner]
-== New recommended method (container runner)
+== Supported method for Docker installation (container runner)
 
 The <<container-runner#,container runner>> is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 
 [#machine-approach-with-docker]
 == Machine-based approach with Docker
 
-If you cannot use the container runner linked above, you can use Docker and install machine runners with the instructions below.
+CAUTION: The instructions below are not supported for Cloud customers.
 
 [#runner-terms]
 === Runner terms
@@ -33,7 +31,7 @@ If you cannot use the container runner linked above, you can use Docker and inst
 [#machine-runner-prerequsites]
 === Prerequisites
 
-{% include snippets/runner/machine-runner-prereq.adoc %}
+* link:https://docs.docker.com/engine/install/[Docker]
 
 [#additional-prerequisites]
 ==== Additional prerequisites with Docker
@@ -88,7 +86,7 @@ When the container starts, it will immediately attempt to start running jobs.
 [#start-the-docker-container-on-server]
 ==== Start the Docker container on server
 
-When starting the docker container on server, the `agent_version` and `LAUNCH_AGENT_API_URL` environment variables will need to be passed in using the `--env` flag.
+When starting the Docker container on server, the `agent_version` and `LAUNCH_AGENT_API_URL` environment variables will need to be passed in using the `--env` flag.
 
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> LAUNCH_AGENT_API_URL=<server_host_name> docker run --env agent_version --env LAUNCH_AGENT_API_URL --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>

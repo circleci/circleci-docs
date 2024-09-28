@@ -33,13 +33,15 @@ parameters:
 
 jobs:
   build:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - checkout
       - run: ./run-tests.sh
 
   report:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - checkout
       - run: ./create-report.sh

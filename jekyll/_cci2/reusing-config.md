@@ -165,7 +165,8 @@ jobs:
         type: integer
         default: 1
     parallelism: << parameters.p >>
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - checkout
 workflows:
@@ -298,7 +299,8 @@ commands:
 
 jobs:
   build:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - run-tests:
           after-deps:
@@ -501,13 +503,10 @@ sync:
         - deploy:
             command: |
                 aws s3 sync \
-                  <<parameters.from>> <<parameters.to>> <<#parameters.arguments>> \
-                  <<parameters.arguments>><</parameters.arguments>>
+                  <<parameters.from>> <<parameters.to>> <<parameters.arguments>>
             name: S3 Sync
 #...
 ```
-
-Please note, CircleCI sometimes uses mustache syntax behind the scenes, as in the example above, in the deploy `command`.
 
 To invoke this `sync` command in your 2.1 `.circleci/config.yml` file, see the following example:
 
@@ -699,7 +698,8 @@ version: 2.1
 # Yaml from foo-orb
 executors:
   bar:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     environment:
       RUN_TESTS: foobar
 ```
@@ -748,7 +748,7 @@ executors:
     docker:
       - image: cimg/node:lts
     environment:
-     ENV: ci
+      ENV: ci
 
 jobs:
   build:
@@ -769,7 +769,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     environment:
-     ENV: ci       # From executor.
+      ENV: ci       # From executor.
     steps:
       - run: echo "Node will not be installed."
 ```
@@ -793,7 +793,8 @@ jobs:
         description: "To whom shall we say hello?"
         default: "World"
         type: string
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - run: echo "Hello << parameters.saywhat >>"
 
@@ -839,9 +840,10 @@ jobs:
         description: "To whom shall we say hello?"
         default: "World"
         type: string
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
-      - say:
+      - saywhat:
           saywhat: "<< parameters.saywhat >>"
 commands:
   saywhat:
@@ -925,7 +927,8 @@ jobs:
         description: "To whom shall we say hello?"
         default: "World"
         type: string
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - say:
           # Since the command "say" doesn't define a default
@@ -996,7 +999,8 @@ The following example defines pre-steps and post-steps in the `bar` job of the `
 version: 2.1
 jobs:
   bar:
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - checkout
       - run:
@@ -1039,7 +1043,8 @@ jobs:
       preinstall-foo:
         type: boolean
         default: false
-    machine: true
+    docker:
+      - image: cimg/base:2023.11
     steps:
       - run: echo "preinstall is << parameters.preinstall-foo >>"
       - when:

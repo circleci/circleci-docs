@@ -3,17 +3,18 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server application.
+:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.1 application.
 :icons: font
 :experimental:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed as a helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.1 overview].
+CircleCI server v4.x is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.1 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -105,7 +106,18 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 10 Gbps
 |===
 
-There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you set up a new VPC rather than use an existing one.
+[#vpc-cluster-sizing-recommendations]
+=== VPC and cluster sizing recommendations
+
+While there are no strict requirements for VPC (Virtual Private Cloud) setup or disk size, the following practices are recommended for optimal performance and stability in production environments.
+
+* **VPC Selection**
++
+We recommend you create a new VPC specifically for CircleCI server and its components, rather than using an existing VPC.
+
+*  **Subnet Provisioning**
++
+For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
 
 [#supported-kubernetes-versions]
 === Supported Kubernetes versions
@@ -121,7 +133,7 @@ There are no requirements regarding VPC setup or disk size for your cluster. It 
 |===
 
 [#minimum-permissions-requirments]
-=== Minimum permissions requirments
+=== Minimum permissions requirements
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
@@ -148,7 +160,7 @@ eksctl utils write-kubeconfig --cluster circleci-server
 
 NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary to use `eksctl`. See the AWS documentation on link:https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions].
 
-NOTE: As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as Postgres, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
+NOTE: As of EKS 1.24, EKS will no longer have the EBS CSI Driver installed by default. This means that EKS cannot manage the EBS volumes for the persistent volumes of your cluster. CircleCI uses persistent volumes for services such as PostgreSQL, MongoDB and Redis. You may manually provision persistence volumes or you may install the EBS CSI Driver on your cluster following the link:https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html[AWS documentation].
 
 endif::env-gcp[]
 
@@ -274,7 +286,7 @@ CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, th
 
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
 
-. In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
+. In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select btn:[New OAuth App].
 +
 .New GitHub OAuth App
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
@@ -296,15 +308,15 @@ If using GitHub Enterprise, you also need a personal access token and the domain
 Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI server.
 
 [#static-ip-address]
-== 4. Static IPs
-It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is reprovisioned.
+== 4. Static IP addresses
+It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is re-provisioned.
 
 ifndef::env-gcp[]
 [#gcp-reserve-a-static-external-ip-address]
 === GCP - Reserve a static external IP address
 The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
 
-Make note of the returned IPv4 address for use later in the values.yaml file.
+Make note of the returned IPv4 address for use later in the `values.yaml` file.
 
 endif::env-gcp[]
 
@@ -329,13 +341,13 @@ aws ec2 allocate-address
 #}
 ----
 
-Make note of each of the returned `AllocationId` values from the CLI for use in the values.yaml file.
+Make note of each of the returned `AllocationId` values from the CLI for use in the `values.yaml` file.
 
 endif::env-aws[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
-By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
@@ -361,7 +373,7 @@ ifndef::env-gcp[]
 [#aws-route-53]
 === AWS Route 53
 
-. If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. You can install the plugin with the following command:
+. If you are using AWS Route 53 for DNS, you need the `certbot-route53` plugin installed. You can install the plugin with the following command:
 +
 [source,shell]
 ----
@@ -382,14 +394,14 @@ ifndef::env-aws[]
 [#google-cloud-dns]
 === Google Cloud DNS
 
-. If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
+. If you host your DNS on Google Cloud, you need the `certbot-dns-google` plugin installed. You can install the plugin with the following command:
 +
 [source,shell]
 ----
 python3 -m pip install certbot-dns-google
 ----
 . The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
-.. Create a custom role for certbot:
+.. Create a custom role for Certbot:
 +
 [source,shell]
 ----
@@ -441,7 +453,7 @@ CircleCI server listens on a number of ports which need to be configured dependi
 
 Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports.
 
-NOTE: The Output Processor service communicates using gRPC and requires the proxy or loadbalancer to support HTTP/2.
+NOTE: The Output Processor service communicates using gRPC and requires the proxy or load balancer to support HTTP/2.
 
 endif::env-aws[]
 
@@ -488,7 +500,7 @@ NOTE: If you are installing behind a proxy, object storage should be behind this
 ifndef::env-gcp[]
 
 [#s3-storage]
-=== S3 Storage
+=== S3 storage
 
 [#create-aws-s3-bucket]
 ==== a. Create AWS S3 Bucket
@@ -505,7 +517,10 @@ aws s3api create-bucket \
 [#set-up-authentication-aws]
 ==== b. Set up authentication
 
-There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+You can authenticate CircleCI with S3 in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA)
+* IAM access keys - **recommended**
 
 [.tab.authentication.IRSA]
 --
@@ -513,7 +528,7 @@ There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accou
 
 The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for installing CircleCI.
 
-. Create an IAM OIDC identity provider for your EKS Cluster.
+. Create an IAM OIDC Identity Provider for your EKS Cluster.
 +
 [source,shell]
 ----
@@ -788,7 +803,7 @@ aws iam put-user-policy \
   --policy-document file://policy.json
 ----
 
-. Create Access Key for user circleci-server.
+. Create Access Key for user `circleci-server`.
 +
 NOTE: You will need this when you configure your server installation later.
 +
@@ -831,7 +846,7 @@ gsutil mb gs://circleci-server-bucket
 
 [#set-up-authentication-gcp]
 ==== b. Set up authentication
-The recommended method for workload/pod authentication is to use link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
+The recommended method for workload/pod authentication is to use link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (JSON) key file).
 
 . Create a Service Account.
 +
@@ -878,7 +893,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 --
 **Option 2:** Static credentials
 
-If you are not using Workload Identity, create a json file containing static credentials.
+If you are not using Workload Identity, create a JSON file containing static credentials.
 
 [source,shell]
 ----

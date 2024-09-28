@@ -1,0 +1,188 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Run Docker commands
+:page-description: How to build Docker images using the Docker execution environment
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+Use the remote Docker environment to build Docker images within the Docker execution environment.
+
+When you use remote Docker for a job, all Docker commands execute locally on the virtual machine used to spin up your primary Docker container.
+
+NOTE: The _remote_ in "remote Docker" is a legacy term from when remote Docker usage would spin up a separate, remote environment for running Docker commands.
+
+[#introduction]
+== Introduction
+
+To build Docker images (for example, using `docker` or `docker-compose` commands) when using the Docker execution environment, you must use the `setup_remote_docker` key in your job:
+
+{% include snippets/docker-auth.adoc %}
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      # ... steps for building/testing app ...
+      - setup_remote_docker
+----
+
+Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that used to spin up the primary container.
+
+In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label, as follows:
+
+image::{{ site.baseurl }}/assets/img/docs/remote-docker-label.png[Remote Docker label]
+
+CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor _is_ a Docker container. If your job uses a VM rather than a container (for example, your executor is `machine`) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
+
+[#specifications]
+== Specifications
+
+The resource class used for the remote Docker environment is determined by how you configure the primary container for the job. The sections below show how Docker and remote Docker environments correlate.
+
+For specification, credit, and pricing information for all resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource class product page].
+
+=== x86
+For *x86* architecture, the equivalent Linux VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also. Exceptions to this are as follows:
+
+* If you use the `small` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `medium`.
+* If you use the `medium+` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `large`.
+
+For a full list of available Linux VM resource classes see the xref:configuration-reference#linuxvm-execution-environment[Configuration Reference].
+
+=== Arm
+
+TIP: *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
+
+For *Arm* architecture the equivalent Arm VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also.
+
+For a full list of available Arm VM resource classes see the xref:configuration-reference#arm-execution-environment[Configuration Reference].
+
+=== CircleCI server
+For CircleCI server installations, contact the systems administrator for specifications.
+
+[#run-docker-commands-using-the-docker-executor]
+== Run Docker commands using the Docker executor
+
+The example below shows how you can build and deploy a Docker image for our link:https://github.com/CircleCI-Public/circleci-demo-docker[demo Docker project] using the Docker executor, with remote Docker:
+
+[,yml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.17
+    resource_class: xlarge
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push CircleCI-Public/circleci-demo-docker:$TAG
+----
+
+Below is a break down of what is happening during this build's execution:
+
+* All commands execute in the xref:glossary#primary-container[primary-container]. (line 5)
+* Once you call `setup_remote_docker`, all Docker-related commands execute locally. (line 12)
+* Enable xref:glossary#docker-layer-caching[Docker Layer Caching] (DLC) to speed up image building. (line 13)
+* We use xref:set-environment-variable#set-an-environment-variable-in-a-project[project environment variables] to store credentials for Docker Hub. (line 19)
+
+[#install-the-docker-cli]
+== Install the Docker CLI
+
+xref:circleci-images#[CircleCI convenience images] have the Docker CLI pre-installed. If you are using a third-party image for your primary container that does not have the Docker CLI installed, then link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job before calling any `docker` commands.
+
+[,yml]
+----
+      # Install via apk on alpine based images
+      - run:
+          name: Install Docker client
+          command: apk add docker-cli
+----
+
+[#docker-version]
+== Specify a Docker version for remote Docker
+
+To optionally specify a Docker version, you can set it as a `version` attribute with supported tags:
+
+[,yml]
+----
+      - setup_remote_docker:
+          version: edge
+----
+
+CircleCI supports the tags listed below for remote Docker, as per our link:{{site.baseurl}}/remote-docker-images-support-policy/#tagging[Remote Docker tagging policy].
+
+For *x86* and *Arm* architecture, the following tags are available:
+
+* `default`
+* `edge`
+* `previous`
+
+The above tags resolve to the latest supported Docker version, which is Docker 24.
+
+To use Docker 23, the previous Docker release, use the following tag:
+
+* `docker23`
+
+To use Docker 24, patch updates will occur until Docker 25 is released, use the following tag:
+
+* `docker24`
+
+To use the current deprecated version, Docker 20, use `20.10.24`
+
+NOTE: The `version` key is not supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+
+[#run-docker-commands-using-the-machine-executor]
+== Run Docker commands using the machine executor
+
+The example below shows how you can build a Docker image using the `machine` executor with the default image. Note that this does not require the use of remote Docker:
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    steps:
+      - checkout
+      # start proprietary DB using private Docker image
+      # with credentials stored in the UI
+      - run: |
+          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          docker run -d --name db company/proprietary-db:1.2.3
+
+      # build the application image
+      - run: docker build -t company/app:$CIRCLE_BRANCH .
+
+      # deploy the image
+      - run: docker push company/app:$CIRCLE_BRANCH
+----
+
+[#see-also]
+== See also
+
+* xref:docker-layer-caching#[Docker Layer Caching]
+* xref:glossary#job-space[job-space]
+* xref:glossary#primary-container[primary-container]

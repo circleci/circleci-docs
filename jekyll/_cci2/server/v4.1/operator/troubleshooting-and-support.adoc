@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Troubleshooting and support
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.x installation.
+:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.1 installation.
 :icons: font
 :experimental:
 
@@ -28,7 +29,7 @@ To generate a support bundle, follow the steps below.
 kubectl -n <namespace> get pods
 ----
 
-. Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew].
+. Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[Krew].
 
 . Install link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl plugin)] to your local development machine.
 
@@ -109,7 +110,7 @@ If you are in an air-gapped environment, you will first need to download the `le
 
 [source,bash]
 ----
-docker run -it clojure lein repl :connect 6005
+docker run -it clojure lein repl :start
 docker commit $(docker ps -aq | head -1) <your-private-registry>/clojure
 ----
 
@@ -133,7 +134,9 @@ kill $!
 [#disable-concurrency-limits]
 == Disable concurrency limits
 
-If your org is hitting the hard-coded concurrency limits, you can disable these limits by setting the following in your `values.yaml`:
+We recommend disabling concurrency limits for your CircleCI server installation. Disable concurrency limits by setting the following in your `values.yaml`:
+
+NOTE: Concurrency limits are disabled by default from server v4.1.5. From server v4.1.6, the `distributor_dispatcher.disable_concurrency` flag has been removed and concurrency limits are permanently disabled.
 
 [source,yaml]
 ----
@@ -141,3 +144,5 @@ distributor_dispatcher:
   ...
   disable_concurrency: true
 ----
+
+You can check whether you are hitting these limits by checking the `distributor-disptacher` logs for a message that mentions `concurrency limits`.

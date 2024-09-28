@@ -12,12 +12,12 @@ contentTags:
 
 NOTE: If you authenticated your CircleCI account with xref:gitlab-integration#[GitLab] or the CircleCI xref:github-apps-integration#[GitHub App], the content on this page applies to you.
 
-Manage user access to organizations and projects with CircleCI roles and associated permissions. By default, users can access projects based on roles set at an organization level. For more granular control, you can assign roles at the project level.
+Manage user access to organizations and projects with CircleCI roles and associated permissions. By default, users can access projects based on roles set at an organization level. For more granular control, you can assign roles at the project level. Manage roles for groups of users with xref:manage-groups#[groups].
 
 [#quickstart]
 == Quickstart
 
-For instructions on managing roles and permissions, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page.
+For instructions on managing roles and permissions, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page. For more information on managing project roles for groups of users, see the xref:manage-groups#[manage-groups] page.
 
 [#organization-role-permissions-matrix]
 == Organization role permissions matrix
@@ -183,7 +183,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Manage contexts
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Orbs*
@@ -201,7 +201,7 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Publish dev orb
+^| Publish development orb
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
@@ -261,14 +261,14 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Trigger build
+^| Trigger re-run via the CircleCI web app
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
 
 ^| Edit triggers
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Config sources*
@@ -283,7 +283,7 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Edit config sources
 ^| icon:check-circle[]
-^|
+^| icon:check-circle[]
 ^|
 
 | *Releases*
@@ -291,17 +291,32 @@ The table below shows the permissions associated with each CircleCI organization
 |
 |
 
-^| Create release environment
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| 
-
-^| Delete release environment
+^| Create environment integration
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
 
-^| View release environment
+^| Delete environment integration
+^| icon:check-circle[]
+^|
+^|
+
+^| View environment integration
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Create environment integration token
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Revoke environment integration token
+^| icon:check-circle[]
+^|
+^|
+
+^| List environment integration token
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -474,7 +489,7 @@ The table below shows the permissions associated with each CircleCI project role
 ^| Cancel release
 ^| icon:check-circle[]
 ^| icon:check-circle[]
-^| 
+^|
 
 ^| Promote release steps
 ^| icon:check-circle[]
@@ -491,9 +506,14 @@ The table below shows the permissions associated with each CircleCI project role
 [#permissions-scope]
 == Permissions scope
 
-Your CircleCI roles and associated permissions are **not** derived from the permissions set in your version control system (VCS). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
+Your CircleCI roles and associated permissions are **not** derived from the permissions set in your VCS (version control system). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
 
 For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated VCS identity.
+
+[#role-hierarchy]
+== Role hierarchy across groups and individuals
+
+Users can have roles assigned to them both individually and as part of a xref:manage-groups#[group]. The _highest_ role always applies. For example, if a user has the role of **admin** assigned for a project, and that user is also part of a group with the role of **contributor** for the project, the user will still have **admin** permissions for the project.
 
 [#next-steps]
 == Next steps

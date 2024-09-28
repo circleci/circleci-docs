@@ -10,12 +10,12 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: Scheduled pipelines are not currently available for GitLab and GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+NOTE: Scheduled pipelines are not currently available for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
 
 A common scenario you might want to set up is to trigger a pipeline overnight. The examples below shows how to schedule a pipeline to be run at midnight every night. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or if you would prefer, you can set one using the link:https://circleci.com/docs/api/v2/index.html[API].
 
 [#set-a-in-the-web-app]
-=== Set a schedule in the web app
+== Set a schedule in the web app
 
 In your desired project, navigate to **Project Settings > Triggers** to see the form for specifying a schedule for a trigger.
 
@@ -26,7 +26,7 @@ The form allows you to schedule a trigger weekly or monthly. The weekly option (
 For a nightly schedule, you will need to take into account the form uses UTC (coordinated universal time). For example, if you would like your pipeline to trigger at midnight (0:00) in eastern standard time (EST), you would need to find the difference from UTC. In this scenario, 0:00 EST is 5:00 UTC.
 
 [#set-a-schedule-with-the-api]
-=== Set a schedule with the API
+== Set a schedule with the API
 
 To set a schedule with the API, you will need a project building on CircleCI, environment variables set, and your CircleCI personal API token. Much like in the web app form, you are required to enter a name, parameters (like the branch or tag) as well as a timetable.
 
@@ -55,11 +55,11 @@ async function setupNightlySchedule(){
         },
         "timetable": {
             // once per hour
-            "per_hour": 1,
+            "per-hour": 1,
             // at 01:00 UTC
-            "hours_of_day": [1],
+            "hours-of-day": [1],
             // on the following days of the week
-            "days_of_week": ["TUE", "WED", "THU", "FRI", "SAT"]
+            "days-of-week": ["TUE", "WED", "THU", "FRI", "SAT"]
         }
     },
     {

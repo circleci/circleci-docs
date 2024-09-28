@@ -69,7 +69,3 @@ Click the **Jobs** tab next to **Overview** to view the following cumulative dat
 {: #see-also }
 
 Refer to the [Collect Test Data](/docs/collect-test-data/) document for guidance on configuring Insights into your most failed tests.
-
-## Learn More
-{: #learn-more }
-Take the [Insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.

@@ -11,9 +11,18 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
 Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview#[Config policies overview].
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
 
 [#introduction]
 == Introduction
@@ -104,10 +113,10 @@ import data.circleci.config
 policy_name["contexts_allowed_by_project"]
 
 # Declare a rule
-rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
     ["<project-ID>"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_contexts_allowed_by_project_ids"]
@@ -132,7 +141,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.allow.manual]
 --
@@ -222,10 +231,10 @@ import data.circleci.config
 policy_name["contexts_allowed_by_sample_project"]
 
 # Declare a rule
-rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
     Front_end_applications,
     Front_end_application_contexts
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_contexts_allowed_by_project_ids"]
@@ -264,10 +273,10 @@ import data.circleci.config
 policy_name["contexts_blocked_by_sample_project"]
 
 # Declare a rule
-rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids{
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
     ["<project-ID>"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_contexts_blocked_by_project_ids"]
@@ -292,7 +301,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment, or;
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.block.manual]
 --
@@ -361,10 +370,10 @@ import data.circleci.config
 policy_name["reserved_contexts"]
 
 # Declare a rule
-rule_reserve_contexts = config.contexts_reserved_by_project_ids{
+rule_reserve_contexts = config.contexts_reserved_by_project_ids(
     ["<project-ID-1>","<project-ID-1>"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # Enable the rule and choose the hard_fail enforcement level
 enable_hard["rule_reserve_contexts"]
@@ -389,7 +398,7 @@ In the following steps you will replace `<project-ID-1>` and `<context-1>` (and 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment, or;
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.reserve.manual]
 --
@@ -456,9 +465,9 @@ import data.circleci.config
 policy_name["prod_context_protection"]
 
 # Declare a rule
-use_prod_context_on_main = config.contexts_reserved_by_branches{["main"],
+use_prod_context_on_main = config.contexts_reserved_by_branches(["main"],
     ["<context-1>","<context-2>"]
-}
+)
 
 # This rule will apply to all projects subscribed in project_groups.rego under policy_restrict_context_access
 enable_rule["use_prod_context_on_main"]{
@@ -493,7 +502,7 @@ In the following steps you will replace `<context-1>` (and `<context-2>` if you 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment, or;
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tab.branch.manual]
 --

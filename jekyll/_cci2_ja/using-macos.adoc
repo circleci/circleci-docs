@@ -33,11 +33,6 @@ jobs:
 [#supported-xcode-versions]
 == サポートされている Xcode のバージョン
 
-[#supported-xcode-versions-intel]
-=== IntelでサポートされているXcodeのバージョン
-
-{% include snippets/ja/xcode-intel-vm.adoc %}
-
 [#supported-xcode-versions-silicon]
 === Apple Silicon の Xcode 対応バージョン
 
@@ -53,8 +48,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "14.2.0"
-    resource_class: macos.x86.medium.gen2
+      xcode: "15.4.0"
+    resource_class: macos.m1.medium.gen1
 ----
 
 [#using-the-macos-executor]

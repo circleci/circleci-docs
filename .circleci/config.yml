@@ -5,7 +5,8 @@ version: 2.1 # Set the CI version.
 orbs:
   ruby: circleci/ruby@1.1.4
   node: circleci/node@4.7.0
-  md-proofer: hubci/md-proofer@0.1
+  md-proofer: hubci/md-proofer@0.1.1
+  vale: circleci/vale@1.1.1
 
 # This is using the new Scheduled Pipeline feature.
 # Right now (10/2021) there is no UI to configure it, so if you need to
@@ -85,22 +86,40 @@ commands:
             --header 'content-type: application/json' \
             --data '{"branch": "main"}'
 
+  trigger-docs-platform-preview-build:
+    description: Call API V2 to deploy content to Docs Platform Preview
+    steps:
+      - run:
+          name: Deploy content to Docs Platform Preview
+          command: |
+            curl --request POST \
+            --url https://circleci.com/api/v2/project/gh/circleci/docs-platform/pipeline \
+            --header "Circle-Token: $CIRCLECI_API_KEY" \
+            --header 'content-type: application/json' \
+            --data '{"branch": "preview"}'
+
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
 
+  lint:
+    unless:
+      or:
+        - equal: [ master, << pipeline.git.branch >> ]
+        - equal: [ preview, << pipeline.git.branch >> ]
+        - << pipeline.parameters.run-schedule >>
+    jobs:
+      - vale/lint:
+          reference_branch: master
+          base_dir: ~/project/jekyll/_cci2/
+
   build-deploy:
-    when: 
+    when:
       not: << pipeline.parameters.run-schedule >>
     jobs:
-      - build_server_pdfs:
-          filters:
-            branches:
-              only: /.*/server/*
       - build_api_docs
       - build:
           requires:
-            - build_server_pdfs
             - build_api_docs
       - reindex-search:
           filters:
@@ -112,6 +131,12 @@ workflows:
           filters:
             branches:
               only: master
+      - deploy-preview:
+          requires:
+            - build
+          filters:
+            branches:
+              only: preview
 
 
   # We run a nightly build to refresh content and build docs-platform
@@ -123,25 +148,10 @@ workflows:
 
 jobs:
 
-  build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
-    docker:
-      - image: asciidoctor/docker-asciidoctor
-    steps:
-      - *attach_workspace
-      - checkout
-      - run:
-          name: Build PDFs for server v3
-          command: ./scripts/build_pdfs_server_3.sh
-      - run:
-          name: Build PDFs for server v4
-          command: ./scripts/build_pdfs_server_4.sh
-      - store_artifacts:
-          path: release/tmp/
-
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
-      tag: '2.7.6-browsers'
+      tag: '3.1.3-browsers'
     steps:
       - checkout
       - *attach_workspace
@@ -172,12 +182,12 @@ jobs:
           paths:
             - api
 
-  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
+  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, and javascript)
   # and puts everything in its place for a Jekyll build.
   build:
     executor:
       name: ruby/default
-      tag: '2.7.6-browsers'
+      tag: '3.1.3-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -193,9 +203,7 @@ jobs:
           command: md-proofer lint jekyll/_cci2/ jekyll/_api/
       - run:
           name: Install dependencies for pronto gem
-          command: |
-            sudo apt-get update --allow-releaseinfo-change
-            sudo apt-get install cmake pkg-config
+          command: sudo apt-get install cmake pkg-config
       - ruby-deps
       - node/install-packages:
           pkg-manager: yarn
@@ -217,12 +225,8 @@ jobs:
             cp -r /tmp/workspace/api/ jekyll/_api/
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
-            mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
-      - run: sudo apt-get update; sudo apt-get --yes install nkf
-      - run:
-          name: Shim untranslated Japanese pages
-          command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
+      - run: sudo apt-get --yes install nkf
       - set-jekyll-basename
       - run:
           name: Build the Jekyll site
@@ -253,11 +257,11 @@ jobs:
           root: ~/circleci-docs/jekyll/
           paths:
             - _site/*
-  
+
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.7.6-browsers'
+      tag: '3.1.3-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -281,9 +285,17 @@ jobs:
       - set-jekyll-basename
       - trigger-docs-platform-build
 
+  deploy-preview:
+    docker:
+      - image: cibuilds/aws:1.16.185
+    steps:
+      - attach_workspace:
+          at: ./generated-site
+      - set-jekyll-basename
+      - trigger-docs-platform-preview-build
+
   trigger-deploy:
     docker:
       - image: cibuilds/aws:1.16.185
     steps:
       - trigger-docs-platform-build
-      

@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.1 overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
+:page-description: CircleCI server v4.1 is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 :icons: font
 :experimental:
 
@@ -20,7 +21,7 @@ CircleCI server provides the same features as CircleCI’s cloud offering, but o
 
 NOTE: For installation instructions, you have the option of either the xref:../installation/phase-1-prerequisites#[regular] or xref:../air-gapped-installation/phase-1-prerequisites#[air-gapped] installation guide.
 
-.CircleCI Server v4.x Architecture
+.CircleCI server v4.x Architecture
 image::server-4-architecture-diagram.png[Server v4.x services architecture]
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
@@ -109,209 +110,209 @@ CircleCI server v4.x consists of the following services. Find their descriptions
 | What happens if it fails?
 | Notes
 
-| api-service
+| `api-service`
 | App Core
 | Provides a GraphQL API that provides data to render the web frontend.
 | Many parts of the UI (such as Contexts) will fail completely.
 |
 
-| audit-log-service
+| `audit-log-service`
 | App Core
 | Persists audit log events to blob storage for long-term storage.
 | Some events may not be recorded.
 |
 
-| branch-service
+| `branch-service`
 | App Core
 | A service responsible for listening to the event stream. Detects branch deletions, job updates, pushes, workflow updates.
 |
 |
 
-| builds-service
+| `builds-service`
 | App Core
 | Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service.
 |
 |
 
-| circleci-mongodb
+| `circleci-mongodb`
 | Execution
 | Primary datastore
 |
 |
 
-| circleci-postgres
+| `circleci-postgres`
 | Data storage for microservices.
 |
 |
 |
 
-| circleci-rabbitmq
+| `circleci-rabbitmq`
 | Pipelines and Execution
 | Queuing for workflow messaging, test results, usage, crons, output, notifications, and scheduler.
 |
 |
 
-| circleci-redis
+| `circleci-redis`
 | Execution
 | Caches data that will not be stored permanently (such as build logs), for request caching, and for rate limit calculations.
 | A failed cache can result in rate limiting from the VCS if too many calls are made to it.
 |
 
-| circleci-telegraf
+| `circleci-telegraf`
 |
-| Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
+| Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to Telegraf,
 but can also be configured to be exported to other places (such as Datadog or Prometheus).
 |
 |
 
-| circleci-vault
+| `circleci-vault`
 |
 | HashiCorp Vault to run encryption and decryption as a service for secrets.
 |
 |
 
-| contexts-service
+| `contexts-service`
 | App Core
 | Stores and provides encrypted contexts.
 | All builds using Contexts will fail.
 |
 
-| cron-service
+| `cron-service`
 | Pipelines
 | Triggers scheduled workflows.
 | Scheduled workflows will not run.
 |
 
-| dispatcher
+| `dispatcher`
 | Execution
 | Split jobs into tasks and send them to scheduler to run.
 | No jobs will be sent to Nomad. The run queue will increase in size, but there should be no meaningful loss of data.
 |
 
-| distributor-*
+| `distributor-*`
 | App Core
-| Responsible for accepting build requests and destributing the job to appropriate queues.
+| Responsible for accepting build requests and distributing the job to appropriate queues.
 |
 |
 
-| domain-service
+| `domain-service`
 | App Core
 | Stores and provides information about our domain model. Works with permissions and API.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
 |
 
-| frontend
+| `frontend`
 | Frontend
 | CircleCI web app and www-api proxy.
 | The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK, but no updates will be seen.
 | Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests.
 
-| insights-service
+| `insights-service`
 | Metrics
 | A service to aggregate build and usage metrics for exporting and analysis.
 |
 |
 
-| kong
+| `kong`
 | App Core
 | API management.
 |
 |
 
 
-| legacy-notifier
+| `legacy-notifier`
 | App Core
 | Handles notifications to external services (for example, Slack or email).
 |
 |
 
-| nginx
+| `nginx`
 | App Core / Frontend
 | Handles traffic redirection and ingress.
 |
 |
 
-| nomad-autoscaler
+| `nomad-autoscaler`
 | Nomad
 | Manages scaling of Nomad clusters in AWS and GCP environments.
 |
 |
 
-| nomad-server
+| `nomad-server`
 | Nomad
-| Responsible for managing nomad clients.
+| Responsible for managing Nomad clients.
 |
 |
 
-| orb-service
+| `orb-service`
 | Pipelines
 | Handles communication between orb registry and config.
 |
 |
 
-| output-processor
+| `output-processor`
 | Execution
 | Receives job output and status updates and writes them to MongoDB. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
 |
 |
 
-| permissions-service
+| `permissions-service`
 | App Core
 | Provides the CircleCI permissions interface.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
 |
 
-| scheduler
+| `scheduler`
 | Execution
 | Runs tasks sent to it. Works with Nomad server.
 | No jobs will be sent to Nomad. The run queue will increase in size, but there should be no meaningful loss of data.
 |
 
-| socketi
+| `socketi`
 | Frontend
 | Websockets server.
 |
 |
 
-| telegraf
+| `telegraf`
 | Metrics
 | Collection of metrics.
 |
 |
 
-| test-results-service
+| `test-results-service`
 | Execution
 | Parses test result files and stores data.
 | There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
 |
 
-| vm-gc
+| `vm-gc`
 | Compute Management
 | Periodically checks for stale machine and remote Docker instances and requests that vm-service remove them.
 | Old vm-service instances might not be destroyed until this service is restarted.
 |
 
-| vm-scaler
+| `vm-scaler`
 | Machine
 | Periodically requests that vm-service provision more instances for running machine and remote Docker jobs.
 | VM instances for machine and Remote Docker might not be provisioned, causing you to run out of capacity to run jobs with these executors.
 | Different overlay for EKS versus GKE.
 
-| vm-service
+| `vm-service`
 | Machine
 | Inventory of available vm-service instances, and provisioning of new instances.
 | Jobs that use machine or remote Docker will fail.
 |
 
-| web-ui-*
+| `web-ui-*`
 | Frontend
 | Micro Front End (MFE) services used to render the frontend web application GUI.
-| The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
+| The respective services page will fail to load. Example: A `web-ui-server-admin` failure means the server Admin page will fail to load.
 | The MFEs are used to render the web application located at app.<my domain here>
 
-| webhook-service
+| `webhook-service`
 | App Core
-| Service reponsible for all webhooks, including management of state and handling events.
+| Service responsible for all webhooks, including management of state and handling events.
 |
 |
 
@@ -326,7 +327,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Helps translate the information through gRPC.
 |
 |
-
 
 |===
 
@@ -353,13 +353,17 @@ We do our best to support a wide range of platforms for installation. We use env
 | Tested
 |
 
+| Local installation
+| Tested
+| See xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped installation] docs
+
 | Azure
 | Untested
-| Should work with Minio Azure gateway and Runner.
+| Should work with MinIO and Runner.
 
 | Digital Ocean
 | Untested
-| Should work with Minio Digital Ocean gateway and Runner.
+| Should work with MinIO and Runner.
 
 | OpenShift
 | Untested
@@ -367,7 +371,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Rancher
 | Untested
-| Should work with Minio and Runner.
+| Should work with MinIO and Runner.
 |===
 
 ifndef::pdf[]
@@ -377,5 +381,4 @@ ifndef::pdf[]
 
 * xref:release-notes#[CircleCI server v4.1 release notes]
 * xref:../installation/phase-1-prerequisites#[Server 4.x Installation Prerequisites]
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to server v4]
 endif::pdf[]
