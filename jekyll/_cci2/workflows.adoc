@@ -172,9 +172,9 @@ The following screenshot demonstrates:
 
 * A workflow that needs approval.
 * The approval popup.
-* The workflow map after approval.
+* The workflow graph after approval.
 
-image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the workflow map]
+image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow graph with "Needs approval" job, the approval popup, and the workflow graph]
 
 By clicking on the `approval` job's name (`hold`, in the screenshot above), an approval dialog box appears. You can approve, cancel, or close the popup without approving.
 
