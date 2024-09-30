@@ -154,7 +154,7 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan
 [#holding-a-workflow-for-a-manual-approval]
 == Hold a workflow for a manual approval
 
-Use an `approval` job to configure a workflow to wait for manual approval before continuing. Anyone who has push access to the repository can approve the job to continue the workflow. Approve either by using the *Approve* button in the CircleCI web app, or via the API.
+Use an `approval` job to configure a workflow to wait for manual approval before continuing. Anyone who has push access to the repository can approve the job to continue the workflow or cancel to end the workflow. Approve or Cancel either by using the buttons in the CircleCI web app, or via the API.
 
 Some things to keep in mind when using manual approval in a workflow:
 
@@ -162,18 +162,21 @@ Some things to keep in mind when using manual approval in a workflow:
 * The `approval` job name must be unique and not used by any other job in your configuration.
 * The name of the approval job is arbitrary. For example, an approval job can be named `hold`, `wait`, `pause`, etc.
 * All jobs that run _after_ a manual approval job **must** `require` the name of the `approval` job.
-* Jobs run in the order defined in the workflow. When the workflow encounters a job with `type: approval`, the workflow pauses until approval is granted. Once approval is granted the workflow continues to process jobs in the order defined in the configuration file.
+* Jobs run in the order defined in the workflow.
+* When the workflow encounters a job with `type: approval`, the workflow pauses until action is taken to approve or cancel.
+* If approval is granted the workflow continues to process jobs in the order defined in the configuration file.
+* If cancel is granted the downstream jobs are not run.
 * Jobs downstream of an `approval` job can be restricted by adding a xref:contexts#approve-jobs-that-use-restricted-contexts[restricted context] to those downstream jobs.
 
 The following screenshot demonstrates:
 
 * A workflow that needs approval.
 * The approval popup.
-* The workflow map after approval.
+* The workflow graph after approval.
 
-image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow map with "Needs approval" job, the approval popup, and the workflow map]
+image::/docs/assets/img/docs/approval-workflow-map.png[A three section image showing workflow graph with "Needs approval" job, the approval popup, and the workflow graph]
 
-By clicking on the `approval` job's name (`hold`, in the screenshot above), an approval dialog box appears. You can approve or close the popup without approving.
+By clicking on the `approval` job's name (`hold`, in the screenshot above), an approval dialog box appears. You can approve, cancel, or close the popup without approving.
 
 === Configure an approval job
 
@@ -227,7 +230,30 @@ To approve a job follow these steps:
 ----
 curl --request POST \
   --url https://circleci.com/api/v2/workflow/<workflow-ID>/approve/<approval_request_id> \
-  --header 'authorization: Basic REPLACE_BASIC_AUTH' \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+----
+--
+
+=== Cancel a job
+
+To Cancel a job follow these steps:
+
+[.tab.cancel.CircleCI_web_app]
+--
+. Select the `hold` job in the *Workflows* page of the CircleCI web app.
+. Select btn:[Cancel].
+--
+
+[.tab.cancel.API]
+--
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:variables#[pipeline values or environment variables], or by xref:webhooks#[receiving webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
++
+[,shell]
+----
+curl --request POST \
+  --url https://circleci.com/api/v2/jobs/<job-ID>/cancel \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
   --header 'content-type: application/json' \
 ----
