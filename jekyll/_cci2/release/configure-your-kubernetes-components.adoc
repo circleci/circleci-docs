@@ -99,23 +99,85 @@ Once you have updated your Deployment or Rollout, check the CircleCI releases da
 [#link-release]
 == 2. Link release to deployment job trigger (optional)
 
-You can link your release with the CircleCI _deployment_ job that triggered it. To do this, add the following annotations to your Deployment/Rollout. The method for incorporating these values and variables will depend on your configuration and tooling:
+You can link your release with the CircleCI _deployment_ job that triggered it by adding a _release_ job to your workflow. By adding a _release_ job to your deployment workflow, you can also:
 
-* `circleci.com/job-number` should be set to the `CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable].
-* `circleci.com/pipeline-id` should be set to the `pipeline.id` xref:../variables#pipeline-values[pipeline value].
-* `circleci.com/workflow-id` should be set to the `CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable].
+* Monitor the in-cluster release process as part of the overall deployment workflow in CircleCI, making it easier to find releases for a given pipeline.
+* Orchestrate releases across multiple environments (for example, deploy to production only after a successful release in a staging environment).
 
-Once these values and variables are rendered, the configuration will look something like:
+To add a _release_ job, follow these steps:
+
+. Add a `plan release` step at the end of your existing _deployment_ job so CircleCI knows to expect a release to happen as an outcome of that job:
++
+[,yml]
+----
+jobs:
+  deploy-my-service:
+    executor: some-executor
+    steps:
+      ...
+      (existing deployment commands)
+      ...
+      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=<some-version-name> <my-service-release>
+----
++
+Substitute the placeholders above based on your application's details:
++
+** The `environment-name` parameter should match the name of your environment integration created via the CircleCI UI.
+** The `component-name` parameter should match the name of your component as displayed in the CircleCI UI.
+** The `target-version` parameter should match the name of the version being released (same as the value of the `circleci.com/version` label)
+** The name of the "release plan" (`my-service-release` in the example above) can be any arbitrary value you would like. The release plan name is used to reference the "release plan" as part of the release job config.
++
+[Optional] You can also add the following parameters if required:
++
+** `namespace` - Use this parameter to use a value other than `default`.
+** `release-strategy` - Use this parameter to provide a value other than `deployment` (available options are `deployment` and `progressive`).
++
+CAUTION: If you are using Argo Rollouts for a given component, be sure to set the `release-strategy` param to `progressive`.
+
+. Define a new job to monitor the release, referencing the `release plan` created above as part of the _deployment_ job:
++
+[,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: <my-service-release>
+----
+
+. Add this new job to your workflow, referencing your _deployment_ job as a dependency:
++
+[,yaml]
+----
+workflows:
+  deploy-service:
+    jobs:
+      - deploy-my-service
+      - release-my-service:
+          requires:
+            - deploy-my-service
+----
+
+The final configuration will look something like:
 
 [,yaml]
 ----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  annotations:
-    circleci.com/job-number: "1"
-    circleci.com/pipeline-id: 88dfee99-0348-407f-b113-dbf270cad093
-    circleci.com/workflow-id: 5b8c4de8-fd5f-4be2-80a4-3d0c03fc138c
+jobs:
+  deploy-my-service:
+    executor: some-executor
+    steps:
+      - ./deploy.sh
+      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=some-version-name my-service-release
+  release-my-service:
+    type: release
+    plan_name: my-service-release
+
+workflows:
+  deploy-service:
+    jobs:
+      - deploy-my-service
+      - release-my-service:
+          requires:
+            - deploy-my-service
 ----
 
 [#configure-release-management]
