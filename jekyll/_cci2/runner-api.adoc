@@ -1,24 +1,25 @@
 ---
-version:
-- Cloud
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI Runner API
+= CircleCI's self-hosted runner API
 :page-layout: classic-docs
 :page-liquid:
+:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative for information on how to sign up for the Scale plan.
+This document contains all the external facing endpoints for the CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`
 
-This document contains all the external facing endpoints for the CircleCI runner API.
+[#authentication-methods]
+== Authentication methods
 
-toc::[]
+The CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
 
-== Authentication Methods
-
-The CircleCI runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
-
+[#circle-token-personal-authentication]
 === Circle-Token (personal authentication)
 
 This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
@@ -29,21 +30,24 @@ This authentication method is based on personal tokens and follows the same rule
 | Name
 | Description
 
-| circle-token header
-| Header that contains the `circle-token` used to authenticate the user.
+| Circle-Token header
+| Header that contains the `<circle-token>` used to authenticate the user.
 
 | http basic auth username
-| The token can be provided using the Basic scheme, where username should be set as the `circle-token` and the password should be left blank.
+| The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
-=== Browser Session Authentication
+[#browser-session-authentication]
+=== Browser session authentication
 
 Ring-session sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
 
-=== Launch Token
+[#resource-class-authentication-token]
+=== Resource class token authentication
 
-This token is the same one used in the launch-agent setup.
+This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
 
+[#supported-methods]
 ==== Supported methods
 
 [.table.table-striped]
@@ -56,19 +60,23 @@ This token is the same one used in the launch-agent setup.
 | The token that should be provided using the Bearer scheme.
 |===
 
+[#endpoints]
 == Endpoints
 
-=== GET /api/v2/runner
+[#get-api-v3-runner]
+=== GET /api/v3/runner
 
-Lists the available runners based on the specified parameters. It is mandatory to use one parameter to filter results.
+Lists the available self-hosted runners based on the specified parameters. It is mandatory to use one parameter to filter results.
 
-==== Authentication Methods
+[#get-api-v3-runner-authentication-methods]
+==== Authentication methods
 
 * Circle-Token (personal authentication)
-* Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
+* Resource class token (generated when creating a resource class)
 
+[#get-api-v3-runner-request]
 ===== Request
 
 [.table.table-striped]
@@ -84,28 +92,30 @@ Lists the available runners based on the specified parameters. It is mandatory t
 | string
 | query
 | false
-| filters the list of runners by specific resource class.
+| filters the list of self-hosted runners by specific resource class.
 
 | namespace
 | string
 | query
 | false
-| filters the list of runners by namespace.
+| filters the list of self-hosted runners by namespace.
 |===
 
-== Examples
+[#get-api-v3-runner-examples]
+==== Examples
 
-```sh
-curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
 ```
 
-```sh
-curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
-    -H 'Circle-Token: secret-token'
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
+    -H "Circle-Token: secret-token"
 ```
 
-=== Response
+[#get-api-v3-runner-response]
+==== Response
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -119,7 +129,8 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |JSON
 |===
 
-=== Response Schema
+[#get-api-v3-runner-response-schema]
+==== Response schema
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -132,47 +143,48 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |items
 |[object]
 |true
-|array containing the runners
+|array containing the self-hosted runners
 
 |resource_class
 |string
 |true
-|runner resource class
+|self-hosted runner resource class
 
 |hostname
 |string
 |true
-|runner hostname
+|self-hosted runner hostname
 
 |name
 |string
 |true
-|runner name
+|self-hosted runner name
 
 |first_connected
 |string (date-time)
 |true
-|first time the runner was connected
+|first time the self-hosted runner was connected
 
 |last_connected
 |string (date-time)
 |true
-|last time the runner was connected
+|last time the self-hosted runner was connected
 
 |last_used
 |string (date-time)
 |true
-|last time the runner was used to run a job
+|last time the self-hosted runner was used to run a job
 
 |version
 |string
 |true
-|version of the launch-agent running
+|version of the machine runner launch-agent running
 |===
 
-== Example
+[#get-api-v3-runner-example]
+==== Example
 
-```sh
+```json
 {
     "items": [
         {
@@ -188,19 +200,20 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 }
 ```
 
-
-=== GET /api/v2/runner/tasks
+[#get-api-v3-tasks]
+=== GET /api/v3/runner/tasks
 
 Get the number of unclaimed tasks for a given resource class.
 
-==== Authentication Methods
+[#get-api-v3-tasks-authentication-methods]
+==== Authentication methods
 
 * Circle-Token (personal authentication)
-* Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
 
-===== Request
+[#get-api-v3-tasks-request]
+==== Request
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -218,14 +231,16 @@ Get the number of unclaimed tasks for a given resource class.
 | filters tasks by specific resource class.
 |===
 
-== Examples
+[#get-api-v3-tasks-examples]
+==== Examples
 
-```sh
-curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
 ```
 
-=== Response
+[#get-api-v3-tasks-response]
+==== Response
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -239,7 +254,8 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 |JSON
 |===
 
-=== Response Schema
+[#get-api-v3-tasks-response-schema]
+==== Response schema
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -255,11 +271,92 @@ curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-
 |number of unclaimed tasks
 |===
 
-== Example
+[#get-api-v3-tasks-example]
+==== Example
 
 ```json
 {
     "unclaimed_task_count": 42
+}
+```
+
+[#get-api-v3-tasks-running]
+=== GET /api/v3/runner/tasks/running
+
+Get the number of running tasks for a given resource class.
+
+[#get-api-v3-tasks-running-authentication-methods]
+==== Authentication methods
+
+* Circle-Token (personal authentication)
+* Browser Session Authentication
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
+
+[#get-api-v3-tasks-running-request]
+==== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| resource-class
+| string
+| query
+| true
+| filters tasks by specific resource class.
+|===
+
+[#get-api-v3-tasks-running-examples]
+==== Examples
+
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
+```
+
+[#get-api-v3-tasks-running-response]
+==== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|200
+|Number of running tasks
+|JSON
+|===
+
+[#get-api-v3-tasks-running-response-schema]
+==== Response schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|running_runner_tasks
+|int
+|true
+|number of running tasks
+|===
+
+[#get-api-v3-tasks-running-example]
+==== Example
+
+```json
+{
+    "running_runner_tasks": 42
 }
 ```
 

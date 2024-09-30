@@ -1,0 +1,87 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+=  パイプラインのスケジュール実行を夜間に設定する
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "パイプラインのスケジュール実行を特定のタイムテーブルで作成する方法を説明します。"
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#introduction]
+== 概要
+
+多くの場合に必要とされるのは、パイプラインを夜間にトリガーする設定です。 下記のコード例では、パイプラインを毎晩真夜中に実行するように設定する方法を紹介します。 廃止予定のワークフローのスケジュール実行とは異なり、基本的なパイプラインのスケジュール実行の設定は設定ファイルでは行いません。 スケジュールの設定は、link:https://app.circleci.com/[CircleCI Web アプリ] から行います。ご希望の場合は、link:https://circleci.com/docs/api/v2/index.html[API] を使って設定することも可能です。
+
+[#set-a-in-the-web-app]
+=== Web アプリでスケジュールを設定する
+
+任意のプロジェクトで、 **Project Settings > Triggers** に移動すると、トリガースケジュールを指定するフォームが表示されます。
+
+image::{{site.baseurl}}/assets/img/docs/pipelines-scheduled-trigger-form.png[Scheduled pipelines web app form]
+
+このフォームではトリガーを毎週または毎月スケジュールできます。 上記のような毎週オプションの場合、一週間の中で特定の日を選択できます。 毎月オプションの場合、月のカレンダーから特定の日を選択できます。 次に、どちらのオプションの場合も 1 年の中でトリガーをリピートしたい月を指定します。
+
+夜間にスケジュールを設定する場合、このフォームでは UTC (協定世界時) が使用されるのでご注意ください。 たとえば、東部標準時 (EST) の真夜中 (0:00) にパイプラインをトリガーするには、UTC との時差を把握する必要があります。 この場合、EST の 0:00 は UTC では 5:00 になります。
+
+[#set-a-schedule-with-the-api]
+=== API を使ってスケジュールを設定する
+
+API を使ってスケジュールを設定するには、CircleCI でビルドしているプロジェクト、一連の環境変数、そして CircleCI パーソナル API トークンが必要です。 Web アプリのフォームと同じように、名前、パラメーター (ブランチやタグなど)、タイムテーブルを入力する必要があります。
+
+```javascript
+const axios = require('axios').default;
+require('dotenv').config()
+
+// environment variables
+const API_BASE_URL = "https://circleci.com/api/v2/project"
+const vcs = process.env.VCS_TYPE
+const org = process.env.ORG_NAME
+const project = process.env.PROJECT_ID
+const token = process.env.CIRCLE_TOKEN
+
+const postScheduleEndpoint = `${API_BASE_URL}/${vcs}/${org}/${project}/schedule`
+
+async function setupNightlySchedule(){
+  let res = await axios.post(postScheduleEndpoint,
+    {
+      name: "Nightly build",
+      description: "Builds and pushes a new build every night.",
+        "attribution-actor": "system",
+        "parameters": {
+          "branch": "main",
+          "run-schedule": true
+        },
+        "timetable": {
+            // once per hour
+            "per_hour": 1,
+            // at 01:00 UTC
+            "hours_of_day": [1],
+            // on the following days of the week
+            "days_of_week": ["TUE", "WED", "THU", "FRI", "SAT"]
+        }
+    },
+    {
+      headers: { 'Circle-Token': token }
+    }
+  )
+  console.log(res.data)
+}
+
+setupNightlySchedule()
+```
+
+この link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/tree/main/build-scheduling[サンプルプロジェクト] のビルドスケジュールは、GitHub 上でご覧いただけます。
+
+[#next-steps]
+== 次のステップ
+
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]

@@ -1,33 +1,31 @@
 ---
 layout: classic-docs
-title: "パイプラインの表示"
-short-title: "パイプラインの表示"
-description: "パイプラインの概要"
-categories:
-  - getting-started
-order: 1
-version:
-  - Cloud
+title: "パイプラインの概要"
+description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-This document provides a summary of the Pipelines page in the CircleCI app and documents some of the changes to the CircleCI user interface.
+CircleCI パイプラインは、プロジェクトのすべての `.circleci/config.yml` ファイルを含む最高レベルの作業単位です。 パイプラインには、ジョブを管理するワークフローが含まれます。 固定の直線的なライフサイクルがあり、特定のユーザーに関連付けられています。 パイプラインは、変更が CircleCI 設定ファイルを含むプロジェクトにプッシュされた際にトリガーされますが、 CircleCI アプリケーションから又は API を使用して手動でスケジュールを設定したりトリガーすることもできます。
 
-## 概要
-{: #overview }
+CircleCI ダッシュボードにアクセスすると、お客様の組織またはアカウントで最近トリガーされたパイプラインのリストが表示されます。
 
-You may have noticed some changes to CircleCI's web interface lately. We have some exciting changes that are rolling out regarding how your builds are being grouped and the user interface that presents that information. Let's begin by stating what a **Pipeline** is.
+![CircleCI アプリのパイプラインダッシュボードのスクリーンショット]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
-**Pipelines** represent the entire configuration that is run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline.
+## パイプラインのアーキテクチャ
+{: #pipeline-architecture }
 
-When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
+パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプラインのいずれかのジョブに移動すると、各タブからジョブ出力、テスト結果、アーティファクトにアクセスできます。
 
-## Jobs, tests, artifacts
-{: #jobs-tests-artifacts }
+![CircleCI Web アプリの ジョブタブオプション]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
+さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
+![ジョブのステップのアウトプットをダウンロード、シェアするボタン]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
 
-Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
-
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+## 次のステップ
+{: #next-steps}
+パイプラインのトリガーの詳細については、[トリガーの概要]({{site.baseurl}}/ja/triggers-overview)を参照してください。

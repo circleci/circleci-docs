@@ -1,0 +1,42 @@
+---
+contentTags:
+  platform:
+  - Server v4.x
+  - Server v3.x
+---
+= Server Plan
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes the Server Plan available to developers on CircleCI.
+:icons: font
+:experimental:
+:concurrency:
+:orbs:
+
+This document describes the Server Plan available to developers.
+
+[#server-plan]
+== Server Plan
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. See the xref:server/v4.5/overview/circleci-server-overview#[Server documentation] for more information.
+
+The Server Plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment.
+
+The Server Plan gives you access to a few additional upgrades over some of the other plans:
+
+[#custom-user-seat-count]
+=== Custom user seat count
+Customize the amount of active users based on your needs.
+
+[#custom-storage-retention]
+=== Custom storage retention
+The link:https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
+
+[#additional-support-options]
+=== Additional support options
+Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Server Plan also has access to the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+
+[#circleci-features]
+== CircleCI features
+In addition to the upgraded features listed above, the Server Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
+
+{% include snippets/features-of-circleci.adoc %}

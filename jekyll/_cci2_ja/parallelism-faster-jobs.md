@@ -1,306 +1,168 @@
 ---
 layout: classic-docs
-title: "テストの並列実行"
-short-title: "テストの並列実行"
-description: "テストを並列に実行する方法"
-categories:
-  - 最適化
-order: 60
-version:
-  - Cloud
-  - Server v2.x
+title: "テスト分割と並列実行"
+description: "CircleCI パイプラインを最適化するために、並列のコンピューティング環境でテストを分割し実行するためのガイドです。"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 この時間を短縮するために、テストを複数の Executor に分散させて並列に実行することができます。 それには、並列処理レベルを指定して、テスト ジョブ用にスピン アップする個別の Executor の数を定義する必要があります。 そして、CircleCI CLI を使用してテストファイルを分割するか、環境変数を使用して各並列マシンを個別に構成します。
+並列実行とテスト分割機能を使用すると以下を実現できます。
 
-* 目次
-{:toc}
+* CI/CD パイプラインのテストにかかる時間の削減
+* テストを分割する [Executor ]({{site.baseurl}}/executor-intro/) の数の指定
+* CircleCI CLI が提供するオプション (名前やサイズに基づいて、またはタイミングデータを使って) によるテストスイートの分割
 
-## ジョブの並列処理レベルの指定
-{: #specifying-a-jobs-parallelism-level }
+## はじめに
+{: #introduction }
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) レベルで定義します。 `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+パイプラインは、多くの場合コードがコミットされるたびに一連のテストが実行されるように設定されます。 プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、複数の並列の実行環境でテストを分割し、実行することができます。 テスト分割は、CI/CD パイプラインのテスト部分を高速化できる優れた方法です。
 
-ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。
+テスト分割機能を使用すると、1 つのテストスイートのどこで分割するかを以下によりインテリジェントに定義できます。
 
-```yaml
-# ~/.circleci/config.yml
-version: 2
-jobs:
-  test:
-    docker:
-      - image: circleci/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    parallelism: 4
-```
+* 名前で
+* サイズで
+* タイミングデータを使って
 
-![並列処理]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+CLI を使って、並列の環境に[テストを手動で割り当てる](#manual-allocation)こともできます。 または、CLI の代わりに[環境変数](#using-environment-variables-to-split-tests)を使って分割するテストを設定することもできます。
 
-詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#parallelism)」を参照してください。
+## ジョブの並列実行レベルの指定
+{: #specify-a-jobs-parallelism-level }
 
-## CircleCI CLI を使用したテストの分割
-{: #using-the-circleci-cli-to-split-tests }
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/)レベルで定義します。 `parallelism` キーにより、ジョブを実行するためにセットアップする独立した Executor の数を指定します。
 
-CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテストランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 割り当てには CircleCI CLI が必要で、実行時にビルドに自動挿入されます。
-
-CLI をローカルにインストールするには、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」の説明を参照してください。
-
-注: `circleci tests` コマンド (`glob` と `split`) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
-
-### テストファイルの分割
-{: #splitting-test-files }
-{:.no_toc}
-
-CLI では、並列ジョブの実行時に複数のマシンにテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテストランナーに渡す必要があります。
-
-#### テストファイルのグロブ
-{: #globbing-test-files }
-{:.no_toc}
-
-CLI では、以下のパターンを使用したテストファイルのグロブをサポートしています。
-
-- `*` は、任意の文字シーケンスに一致します (パス区切り文字を除く)。
-- `**` は、任意の文字シーケンスに一致します (パス区切り文字を含む)。
-- `?` は、任意の 1 文字に一致します (パス区切り文字を除く)。
-- `[abc]` は、角かっこ内の任意の文字に一致します (パス区切り文字を除く)。
-- `{foo,bar,...}` は、中かっこ内のいずれかの文字シーケンスに一致します。
-
-テストファイルをグロブするには、`circleci tests glob` コマンドに 1 つ以上のパターンを渡します。
-
-```
-circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
-```
-
-パターン照合の結果を確認するには、`echo` コマンドを使用します。
+ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。 下記のコード例では、`parallelism` は `4` に設定されており、このジョブには 4 つの同一の実行環境がセットアップされることを意味します。
 
 ```yaml
 # ~/.circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/base:2022.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 4
+```
+
+![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+
+その後変更がなければ、`test` ジョブ全体が 4 つの各実行環境で実行されます。 _別々の_テストを各環境で自動的に実行し、全テストの実行にかかる総時間を短縮するには、設定ファイルで `circleci tests` という CLI コマンドを使用する必要があります。
+
+### セルフホストランナーでの並列実行機能の使用
+{: #use-parallelism-with-self-hosted-runners }
+
+[セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 指定したリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない超過した並列タスクは、セルフホストランナーが使用可能になるまでキューに入ります。
+
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#parallelism) を参照してください。
+
+## テスト分割のしくみ
+{: #how-test-splitting-works }
+
+例えば **タイミングベース** のテスト分割機能を使うと、 _以前の_ テスト実行のタイミングデータを使って、並行で実行される指定した数のテスト環境でテストスイートをできるだけ均等に分割できます。 これにより、使用中のコンピューティング能力のテスト時間が可能な限り短くなります。
+
+![テスト分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
+
+タイミングベースのテスト分割により、テストを最も正確に分割でき、各テストスイートの実行を確実に最適化することができます。 分割する場所の決定には、必ず最新のタイミンングデータが使用されます。
+
+go テストスイートを例にあげます。 この例では、すべてのテスト実行が 1つのテスト環境 (Docker コンテナ) で順番に実行されます。
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    resource_class: large
+    working_directory: ~/my-app
     steps:
-      - run:
-          command: |
-            echo $(circleci tests glob "foo/**/*" "bar/**/*")
-            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
+      - run: go test
 ```
 
-#### タイミングデータに基づいた分割
-{: #splitting-by-timing-data }
+以下の方法により、これらのテストをタイミングデータを使って分割できます。
 
-一連の並列 Executor でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 これにより、テストが最も均等に分割され、全体のテスト時間が短縮されます。
+1. 並列実行により、多数の同一テスト環境 (下記例では 4 個) をスピンアップする
+2. `--split-by=timings` フラグを指定して `circleci tests split` コマンドを使用し、テストをすべての実行環境で均等に分割する
 
-![テストの分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
-
-CircleCI は、テストスイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミングデータを保存しています。 このタイミングデータには、使用している言語に応じて、ファイル名またはクラス名ごとに各テストが完了するのにかかった時間が記録されます。
-
-メモ: `store_test_results` を使用しないと、テストの分割に使用できるタイミングデータは生成されません。
-
-タイミングで分割するには、分割タイプ `timings` を付けて `--split-by` フラグを使用します。 これで、使用可能なタイミングデータが分析され、テストが可能な限り均等に並列コンテナに分割され、テストの実行時間が最短になります。
-
-```
-circleci tests glob "**/*.go" | circleci tests split --split-by=timings
-```
-
-CLI は、テスト スイートによって生成されたタイミング データに、ファイル名とクラス名の両方が存在することを想定しています。 デフォルトでは、ファイル名に基づいて分割されますが、`--timings-type` フラグを使用してクラス名を指定することもできます。
-
-```
-cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-手動でタイミングデータを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) ステップを使用します。
+詳細については、[CLI を使ったテスト分割に関するガイド](/docs/use-the-circleci-cli-to-split-tests)を参照するか、[テスト分割のチュートリアル](/docs/test-splitting-tutorial)をご覧ください。
 
-注: タイミングデータが見つからない場合、`Error autodetecting timing type, falling back to weighting by name` というメッセージが出力されます。 この場合、テストは、テスト名に基づきアルファベット順に分割されます。
+テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行でテスト時間が最適化されます。
+{: class="alert alert-info"}
 
-#### テスト名に基づいた分割
-{: #splitting-by-name }
-{:.no_toc}
+## 手動による設定
+{: #manual-allocation }
 
-デフォルトでは、`--split-by` フラグを使用しない場合、`circleci tests split` はファイル名またはクラス名の一覧が渡されることを想定しており、テスト名によってアルファベット順にテストを分割します。 ファイル名の一覧は、以下に挙げる複数の方法で用意できます。
+CLI は現在のコンテナインデックスと使用可能な実行環境の数を調べます。 次に、決定論的な分割アルゴリズムを使用して、使用可能なすべてのコンテナでテストファイルを分割します。
 
-テストファイル名を含むテキストファイルを作成する
+デフォルトでは、プロジェクトの設定ファイルの `parallelism` キーによってコンテナ数を指定します。 `--total` フラグを使用すると、手動でも設定できます。
 
-```
-circleci tests split test_filenames.txt
-```
-
-テストファイルへのパスを指定する
-
-```
-circleci tests split < /path/to/items/to/split
-```
-
-テストファイルのグロブをパイプする
-
-```
-circleci tests glob "test/**/*.java" | circleci tests split
-```
-
-CLI は、使用可能なコンテナ数と現在のコンテナインデックスを調べます。 次に、決定論的な分割アルゴリズムを使用して、使用可能なすべてのコンテナでテストファイルを分割します。
-
-デフォルトでは、`parallelism` キーによってコンテナ数を指定します。 `--total` フラグを使用すれば、手動で設定できます。
-
-```
+```shell
 circleci tests split --total=4 test_filenames.txt
 ```
 
-同様に、現在のコンテナインデックスは環境変数を基に自動的に決定されますが、`--index` フラグを使用して手動で設定することも可能です。
+同様に、現在のコンテナインデックスは `$CIRCLE_NODE_INDEX` 環境変数を基に自動的に決定されますが、`--index` フラグを使用して手動で設定することも可能です。
 
-```
+```shell
 circleci tests split --index=0 test_filenames.txt
 ```
 
-#### ファイルサイズに基づいた分割
-{: #splitting-by-filesize }
-{:.no_toc}
-
-ファイルパスを指定すれば、CLI はファイルサイズでも分割できます。 それには、分割タイプ `filesize` を付けて `--split-by` フラグを使用します。
-
-```
-circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
-```
-
-## 環境変数を使用したテストの分割
+## 環境変数を使用したテスト分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables)」を参照してください。
+CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用し、コンテナを個別に設定することができます。
 
-## 分割テストの実行
-{: #running-split-tests }
+* `$CIRCLE_NODE_TOTAL` は、ジョブの実行に使用されている並列コンテナの総数です。
+* `$CIRCLE_NODE_INDEX` は、現在実行している特定のコンテナのインデックスです。
 
-テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテストランナーに渡します。
-
-```bash
-circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
-bundle exec rspec $(cat /tmp/tests-to-run)
-```
-
-ファイル `/tmp/tests-to-run` の内容は、`$CIRCLE_NODE_INDEX` と `$CIRCLE_NODE_TOTAL` に応じて、コンテナごとに異なる値を持ちます。
-
-## Python Django テストでのテスト分割の使用
-{: #using-test-splitting-with-python-django-tests }
-
-CircleCI でテスト分割を活用するには、実行するテストの一覧を渡す必要があります。 しかし、Django を使用する場合、テストの実行方法によっては、テストをグロブして渡すことができません。
-
-独自のユースケースに合わせたテスト分割では、問題が発生することがあります。 Python Django でテスト分割を行えない問題については、\[こちらの Discuss の記事\] (https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624) に解決例が示されています。
-
-以下に、この例を使用してテスト分割を行う簡単な例を示します。
-```
-- run:
-    command: |
-      # __init__ ファイルを除外してテストファイルを取得
-      TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
-      echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
-      cat circleci_test_files.txt
-      TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
-      # manage.py テストに合わせた形式にファイルパスを変更
-      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
-      echo $TESTFILES
-      pipenv run python manage.py test --verbosity=2 $TESTFILES  
-```
-
-## その他のテスト分割方法
-{: #using-test-splitting-with-pytest }
-
-pytest で複数のコンテナにテストを分割しようとすると、以下のいずれかのエラーが発生することがあります。
-
-```
-No timing found for "tests/commands/__init__.py"
-No timing found for "tests/commands/test_1.py"
-No timing found for "tests/commands/test_2.py"
-```
-
-これらのエラーのいずれかが返された場合は、以下に示すような多少の調整が必要です。
-
-### カスタムの working_directory を設定している場合
-{: #are-you-setting-a-custom-working-directory? }
-
-この場合は、テストメタデータの XML ファイルに保存するファイルパスを調整してみてください。 または、可能であれば、コンテナの標準作業ディレクトリを使用して、エラーを解決できるかどうか試してください。 具体的には、テスト実行ジョブに含まれる `working_directory` をすべて削除します。
-
-### `pytest.ini` の場所を確認する
-{: #where-does-your-pytest-ini-live }
-
-テスト分割を正しく行うには、ルートディレクトリでテストを実行する必要があります。 テストの実行場所がルートディレクトリではない場合、`run` コマンドをテストする前に以下のコマンドを実行してみてください。
-
-```
-cp -f .circleci/resources/pytest_build_config.ini pytest.ini
-```
-
-`.circleci/resources/pytest_build_config.ini` パスは、プロジェクト内でこのファイルが実際に置かれている場所に合わせて置き換えてください。
-
-### pytest.ini に junit_family を設定している場合
-{: #are-you-setting-the-junit-family-in-your-pytest-ini }
-
-pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、[こちら](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)のページを参照してください。
-
-上記ページの該当箇所は、"families" で検索すると確認できます。
-
-### タイミング基準で正しく分割するサンプルプロジェクト
-{: #example-project-that-correctly-splits-by-timing }
-
-以下に、テストの分割方法を紹介する [`sample-python-cfd` プロジェクト](https://github.com/CircleCI-Public/sample-python-cfd)からフォークしたサンプルを示します。
-
-```
-version: 2.1
-orbs:
-  python: circleci/python@1.2
-jobs:
-  build-and-test:
-    parallelism: 2
-    docker:
-      - image: cimg/python:3.8
-    steps:
-      - checkout
-      - python/install-packages:
-          pkg-manager: pip
-      - run:
-          name: テストの実行
-          command: |
-            set -e
-            TEST_FILES=$(circleci tests glob "openapi_server/**/test_*.py" | circleci tests split --split-by=timings)
-            mkdir -p test-results
-            pytest --verbose --junitxml=test-results/junit.xml $TEST_FILES
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
-workflows:
-  sample:
-    jobs:
-      - build-and-test
-```
-
-テスト分割を適切に行うビルドのサンプルについては、[こちら](https://app.circleci.com/pipelines/github/nbialostosky/sample-python-cfd/18/workflows/8b37bd45-ed19-42e1-8cc4-44401697f3fc/jobs/20)をご覧ください。
-
-### ビデオ: グロブのトラブルシューティング
-{: #video-troubleshooting-globbing }
-{:.no_toc}
-
-注: 以下のビデオで使われているコマンドを実際に使用するには、[`ジョブに SSH で接続`]({{ site.baseurl }}/2.0/ssh-access-jobs/)する必要があります。 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
-
-## 関連項目
-{: #see-also }
-
-[コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)
+詳細については、[プロジェクトの値と変数]({{site.baseurl}}/ja/variables#built-in-environment-variables)を参照してください。
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
 
-一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされています。 CircleCI ではこれらのアプリケーションの開発やサポートを行っていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、[CircleCI の Discuss フォーラム](https://discuss.circleci.com/)で対処方法を検索するか、質問してみてください。
+一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされていますが、 CircleCI ではこれらのアプリケーションの開発やサポートを行っていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、[Discuss フォーラム](https://discuss.circleci.com/)で対処方法を検索するか、質問してみてください。
 
 - **[Knapsack Pro](https://knapsackpro.com)**: 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 CI のビルド時間への効果は[こちらのグラフ](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress)でご確認ください。
 
 - **[phpunit-finder](https://github.com/previousnext/phpunit-finder)**: `phpunit.xml` ファイルに対してクエリを行い、テストファイル名の一覧を取得して出力するヘルパー CLI ツールです。 テストを分割して CI ツールのタイミングに基づいて並列に実行する場合に、このツールを使用すると便利です。
 - **[go list](https://golang.org/cmd/go/#hdr-List_packages_or_modules)**: Golang パッケージをグロブするには、組み込みの Go コマンド `go list ./...` を使用します。 これにより、パッケージテストを複数のコンテナに分割できます。
 
+  ```shell
+  go test -v $(go list ./... | circleci tests split)
   ```
-  go test -v $(go list ./...| circleci tests split)
+- **[Playwright](https://github.com/microsoft/playwright)**: Web テストと自動化のフレームワークで、共有のテストを設定不要で実行することができます。 詳細についてはm[Playwright のドキュメント](https://playwright.dev/docs/ci#circleci)を参照してください。
+
+  ```yaml
+  job-name:
+    executor: pw-focal-development
+    parallelism: 4
+    steps:
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
+
+## 既知の制限
+{: #known-limitations }
+
+現時点では、タイミングデータに基づいたテスト分割は Windows リソースクラスでは使用できません。
+
+## 次のステップ
+{: #next-steps }
+
+* [CircleCI を使ってテストを分割する方法](/docs/use-the-circleci-cli-to-split-tests)
+* チュートリアル: [パイプラインを高速化するためのテスト分割](/docs/ja/test-splitting-tutorial)
+* [テスト分割のとラブルシューティング](/docs/troubleshoot-test-splitting/)
+* [テストデータの収集](/docs/collect-test-data/)
+* [テストインサイト](/docs/insights-tests/)

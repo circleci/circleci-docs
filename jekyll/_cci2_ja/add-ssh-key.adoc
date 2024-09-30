@@ -1,0 +1,75 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI に SSH キーを登録する
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは、CircleCI に SSH キーを登録する方法を詳しくわかりやすく説明しています。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH キーを登録する必要があります。
+
+[#overview]
+== 概要
+
+GitHubやBitbucketからコードをチェックアウトするためにSSHキーを設定したい場合は、xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] または xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] の連携ページを参照してください。
+
+GitLabを使用している場合、または他のサービスにアクセスするために追加のSSHキーが必要な場合は、使用しているCircleCIのバージョンに応じて以下の手順に従って、プロジェクトにSSHキーを追加してください。
+
+**注:** SSH キーを登録するにはパブリックキーを `~/.ssh/authorized_keys`  に登録する必要がある場合があります。
+
+[#steps-to-add-additional-ssh-keys]
+== SSHキーを追加する手順
+
+注: CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。 以下の例はmacOSの場合です。 SSHキーの作成に関する詳細は、link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub] または link:https://support.atlassian.com/ja/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket] のドキュメントを参照してください。
+
+. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳しくは、link:https://www.ssh.com/ssh/keygen/[Secure Shell ドキュメント]を参照してください。
+. CircleCI アプリケーションで、 **[Project Settings (プロジェクトの設定)]** ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
+. [**Project Settings (プロジェクトの設定)**] で、 [**SSH Keys (SSH キー)**] をクリックします (画面左側のメニュー)。
+. スクロールし、 [**Additional SSH Keys (追加 SSH キー)**] のセクションに移動します。
+. [**Add SSH Key (SSH キーの追加)**] ボタンをクリックします。
+. [**Hostname (ホスト名)**] フィールドにキーに関連付けるホスト名を入力します (例: `git.heroku.com`)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
+. [**Private Key (プライベート キー)**] フィールドに登録する SSH キーを貼り付けます。
+. [*Add SSH Key (SSH キーの追加)*] ボタンをクリックします。
+
+[#add-ssh-keys-to-a-job]
+== ジョブに SSH キーを登録する
+
+すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH キーに自動的に署名します。 ただし、コンテナに実際にキーを登録するには、`add_ssh_keys` キーを必ず使用してください。
+
+SSH キーをコンテナに登録するには、 xref:configuration-reference#add_ssh_keys[特別なステップ]である `add_ssh_keys` を設定ファイルの適切な xref:jobs-steps#[ジョブ] の中で使用します。
+
+セルフホストランナーの場合、システムに `ssh-agent`  があり `add_ssh_keys` ステップが正常に使用できることを確認して下さい。 SSH キーは、`$HOME/.ssh/id_rsa_<fingerprint>` に記述されます。`$HOME` は、ジョブを実行するように設定されたユーザーのホームディレクトリで、`<fingerprint>` はこのキーのフィンガープリントです。 ホストエントリーは、キーを使用するための関連する `IdentityFile` オプションと一緒に `$HOME/.ssh/config` にも追加されます。
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+----
+
+*注:* `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録されたキーと一致している必要があります。 CircleCI環境変数にある Fingerprints は失敗します。
+
+[#adding-multiple-keys-with-blank-hostnames]
+== ホスト名を指定せずに複数のキーを登録する
+
+ホスト名を指定せずに複数の SSH キーをプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH キーがある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、そのキーが正しいキーがどうかにかかわらず、常に最初のキーが使用されます。 コンテナに SSH キーを登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録されたキーを読み取って、このジョブで使用する ssh-agent からすべてのキーを削除します。
+
+[#see-also]
+== 関連項目
+
+* xref:github-integration#[GitHub との連携ガイド]
+* xref:bitbucket-integration#[Bitbucket との連携ガイド]
+* xref:gitlab-integration#[GitLab CI/CDとの連携ガイド]

@@ -1,14 +1,12 @@
 ---
 layout: classic-docs
 title: "コンテナ ID をホスト ID にマップできないエラーのデバッグ"
-short-title: "コンテナ ID をホスト ID にマップできないエラーのデバッグ"
 description: "コンテナの起動時に「コンテナ ID XXX をホスト ID にマップできません」というエラーが発生した場合のデバッグ"
-categories:
-  - troubleshooting
-order: 21
-version:
-  - Cloud
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 コンテナの起動時に、以下のエラー メッセージが表示されることがあります。
@@ -44,7 +42,7 @@ Docker はコンテナを起動するとイメージをプルし、そのイメ�
 
 以下の例では、[circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid) 内で `find` コマンドを使用して無効なファイルを探します。
 
-```bash
+```shell
 # コンテナ内でシェルを開始します
 $ docker run -it circleci/doc-highid sh
 

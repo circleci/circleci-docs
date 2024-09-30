@@ -1,0 +1,27 @@
+[#does-circleci-look-at-my-code]
+=== Does CircleCI look at my code?
+
+CircleCI employees never look at your code without permission. If you have requested support, a support engineer may ask permission to look at your code to help you debug the problem.
+
+See the CircleCI xref:security#[Security policy] for more details.
+
+[#use-circleci-without-creating-base-images]
+=== Can I use CircleCI without creating base images?
+
+Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the link:https://circleci.com/developer/images[CircleCI Developer Hub] and the xref:circleci-images#[CircleCI images guide].
+
+For the `machine` executor, see the xref:configuration-reference#available-linux-machine-images[available machine images] list.
+
+For an introduction to execution environments and images, see the xref:executor-intro#[Introduction to execution environments].
+
+[#request-new-features]
+=== Can I request new features?
+
+Yes, you can visit CircleCI's link:https://circleci.canny.io/[Ideas] page to request new features, or view features that have already been requested. To request a new feature, you will first need to select a category from the *Give Feedback* section.
+
+When viewing requested features, you can sort by *Trending*, *Top*, and *New*, as well as filter by the following:
+
+- *Under Review*: CirlceCI is considering these feature requests.
+- *Planned*: CircleCI has planned to work on these feature requests in the future.
+- *In Progress*: CircleCI is currently working on these feature requests.
+- *Complete*: CircleCI has added these feature requests to its current offerings.

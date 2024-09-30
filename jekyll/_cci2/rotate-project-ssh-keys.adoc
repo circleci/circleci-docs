@@ -1,0 +1,138 @@
+---
+contentTags:
+  platform:
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+  vcs:
+    - github
+    - bitbucket
+    - gitlab
+sectionTags:
+  github:
+    - "#github-projects"
+    - "#rotate-a-deploy-key-github"
+    - "#rotate-a-user-key-github"
+    - "#rotate-an-additional-SSH-key-github"
+  bitbucket:
+    - "#bitbucket-projects"
+    - "#rotate-a-deploy-key-bitbucket"
+    - "#rotate-a-user-key-bitbucket"
+    - "#rotate-an-additional-SSH-key-bitbucket"
+  gitlab:
+    - "#gitlab-projects"
+    - "#rotate-an-SSH-key-gitlab"
+    - "#rotate-an-additional-SSH-key-gitlab"
+---
+= Rotate project SSH keys
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to rotate your project SSH keys.
+:icons: font
+:experimental:
+
+To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
+
+When using project SSH keys, CircleCI holds the private key, and the target system (typically a VCS, machine, or another SSH based system) holds the matching public key via its authorization system. To rotate SSH keys both the private and public keys need to be removed.
+
+[#github-projects]
+== GitHub projects
+
+NOTE: To find out if your project uses the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+Go to menu:Project Settings[SSH Keys] to view SSH keys set up for your project.
+
+[#rotate-a-deploy-key]
+=== Rotate a deploy key (GitHub OAuth App)
+
+Only relevant to projects using GitHub OAuth App:
+
+. Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
+. Delete the deploy key by clicking the **X**.
+. Add a new deploy key by clicking **Add Deploy Key**.
+. Go to GitHub’s repository project settings to delete the matching public key. The GitHub URL is typically `https://github.com/<org>/<project>/settings/keys`, or you may already have the page open if you clicked on the keyname in step 1. The keys are named `CircleCI`. Removing any key titled `CircleCI` created before the rotation is recommended. The new public SSH key will be automatically added once the old key is deleted.
+
+[#rotate-a-user-key-github-oauth-app]
+=== Rotate a user key (GitHub OAuth App)
+
+Only relevant to projects using GitHub OAuth App.  If you have set up user keys for your project, follow these steps:
+
+. Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
+. Delete the user key by clicking the **X**.
+. Add a new user key by clicking **Add User Key**.
+. Go to GitHub’s User settings to delete the matching public key. The GitHub URL is typically `https://github.com/settings/keys` or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled `CircleCI` created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+
+CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
+
+NOTE: If using organization SSO, take note of which org is currently authorized. If access is needed for the newly created key, you will need to reauthorize it.
+
+[#rotate-an-additional-SSH-key-github-oauth-app-and-github-app]
+=== Rotate an additional SSH key (GitHub OAuth App & GitHub App)
+
+Relevant to projects that use the GitHub OAuth App and projects that use the CircleCI GitHub App. If you are using additional SSH keys in your project, follow these steps:
+
+. Take note of the existing key to know which target system it is used for, and the fingerprint for your records. This could be a VCS, a machine, or another SSH based system.
+. Delete the SSH key by clicking the **X**.
+. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent[GitHub's documentation].
+. Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
+. Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system.
+. Authorize the target system to use the new key.
+
+[#bitbucket-projects]
+== Bitbucket projects
+
+Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
+
+[#rotate-a-deploy-key-bitbucket]
+=== Rotate a deploy key
+
+. Take note of the current key information to rotate.
+. Delete the deploy key by clicking the **X**.
+. Add a new deploy key by clicking **Add Deploy Key**.
+. Go to Bitbucket’s project admin access-key settings to delete the matching public key. The Bitbucket URL is typically `https://bitbucket.org/<org>/<project>/admin/access-keys/`. The keys are named `CircleCI`. Since the fingerprint hash is not shown, it is recommended to remove any key titled `CircleCI` created before the rotation. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+
+
+[#rotate-a-user-key-bitbucket]
+=== Rotate a user key
+
+. Take note of the current key information to rotate.
+. Delete the user key by clicking the **X**.
+. Add a new user key following the xref:bitbucket-integration/#create-a-bitbucket-user-key[Create a Bitbucket user key] instructions.
+. Go to Bitbucket’s user account settings to delete the matching public key. The Bitbucket URL is typically `https://bitbucket.org/account/settings/ssh-keys/`. The user names the keys, therefore, CircleCI does not know if the key name contains the string `CircleCI`. It is recommended to remove any key created before the rotation.
+
+[#rotate-an-additional-SSH-key-bitbucket]
+=== Rotate an additional SSH key
+
+. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine, or another SSH based system.
+. Delete the SSH key by clicking the **X**.
+. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket's documentation].
+. Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
+. Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
+. Authorize the target system to use the new key.
+
+[#gitlab-projects]
+== GitLab projects
+
+Go to **Project Settings > SSH Keys** to view SSH keys set up for your project. The link:/docs/gitlab-integration/[GitLab CI integration] with CircleCI does not use deploy keys or user keys.
+
+[#rotate-an-SSH-key-gitlab]
+=== Rotate an SSH key
+
+. Take note of the existing key and fingerprint to be able to match the target system it is used for, typically `gitlab.com`.
+. Delete the SSH key by clicking the **X**.
+. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.gitlab.com/ee/user/ssh.html[GitLab's documentation].
+. Add the private key by clicking **Add SSH Key**. It is recommended you name the key `gitlab.com`. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
+. Go to your GitLab project's settings for the repository (**Settings > Repository**) and expand the **Deploy keys** section. The keys are named `circleci-pipeline-triggers` and you can match the fingerprint. It is recommended to remove any key created before the rotation.
+. Add the new key. For consistency, you can name the key in the title section `circleci-pipeline-triggers`. Paste the public key and click **Add key** to finalize.
+
+[#rotate-an-additional-SSH-key-gitlab]
+=== Rotate an additional SSH key
+
+In some scenarios, you might also be using additional SSH keys that are not tied to GitLab.
+
+. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine, or another SSH based system.
+. Delete the SSH key by clicking the **X**.
+. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair[GitLab's documentation].
+. Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
+. Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
+. Authorize the target system to use the new key.

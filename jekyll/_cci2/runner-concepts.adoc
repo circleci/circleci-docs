@@ -1,0 +1,69 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Self-hosted runner Concepts
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Conceptual Overview for CircleCI's self-hosted runner.
+:icons: font
+:experimental:
+
+[#namespaces-and-resource-classes]
+== Namespaces and resource classes
+
+Self-hosted runners require both a namespace and a resource class.
+
+A **namespace** is a unique identifier claimed by a CircleCI organization. Each CircleCI organization can claim one unique and immutable namespace. Typically, the namespace chosen is the lowercase representation of your organization's name on your VCS (this is suggested).
+
+A **resource class** is a label to match your CircleCI job with a type of runner that is identified to process that job. The first part of the resource class is your organization's namespace. For example, a CircleCI resource class could be `circleci/documentation`. Resources classes are created when you go through the process of installing self-hosted runners.
+
+Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific places. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
+
+Optionally, you can give your resource class a description.
+
+Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+
+[#task-agent]
+== Task-agent
+
+The task-agent handles running a task retrieved and configured by the container runner or machine runner. Task-agents run with the same privileges as `circleci`.
+
+[#container-agent]
+== Container-agent
+
+The container-agent gets installed with container runner. Container-agent polls CircleCI for jobs, spins up ephemeral pods with an injected task-agent, and executes each job within each pod. The pods are torn down after the jobs have completed.
+
+[#machine-runner-3]
+== Machine runner 3
+
+The machine runner 3.0 replaces launch-agent on cloud and server v4.4+, bringing improvements to network resiliency, installation, and the upgrade process. As with launch-agent, any user who is able to execute a job will be able to gain the same privileges as the task-agent, which when installed using the provided packages runs as the `circleci` user.
+
+[#launch-agent]
+== Launch-agent
+
+The launch-agent manages gathering the information required to run a task with machine runner (defined as a parallel run of a job) while also downloading and launching the task-agent process.
+
+The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The launch-agent will run as `root`, but the task-agent will run as `circleci`.
+
+Launch-agent is currently supported on Server v4.x and v3.x. Cloud users and server v4.4+ users should instead refer to <<machine-runner-3,Machine Runner 3>>.
+
+[#self-hosted-runner-concurrency]
+== Self-hosted runner concurrency
+
+Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your organization.
+
+[#public-repositories]
+== Public repositories
+
+CircleCI's self-hosted runners are xref:/runner-faqs.adoc#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization[not available] for use with public projects that have the **Build forked pull requests** setting enabled. This feature is not availalbe for security reasons. A malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI's self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+
+* Malicious programs running on the machine
+* Escaping the machine's self-hosted runner sandbox
+* Exposing access to the machine's network environment
+* Persisting unwanted or dangerous data on the machine
+
+NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].

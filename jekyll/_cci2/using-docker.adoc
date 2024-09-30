@@ -1,0 +1,274 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Using the Docker execution environment
+:page-description: Learn how to configure a your jobs to run in the Docker execution environment
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+CAUTION: *Legacy images with the prefix `circleci/`` were link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
+
+You can use the Docker execution environment to run your xref:jobs-steps#[jobs] in Docker containers. The Docker execution environment is accessed using the xref:configuration-reference#docker[Docker executor]. Using Docker increases performance by building only what is required for your application.
+
+Specify a Docker image in your xref:configuration-reference#[`.circleci/config.yml`] file to spin up a container. All steps in your job will be run in this container.
+
+{% include snippets/docker-auth.adoc %}
+
+[,yaml]
+----
+jobs:
+  my-job:
+    docker:
+      - image: cimg/node:lts
+----
+
+A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the link:https://docs.docker.com/engine/docker-overview/[Docker Overview documentation] for concepts.
+
+CircleCI maintains convenience images on Docker Hub for popular languages. See link:https://circleci.com/developer/images[the CircleCI Developer Hub] for a complete list of image names and tags.
+
+NOTE: If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
+
+[#specifying-docker-images]
+== Specifying Docker images
+
+Docker images may be specified in a few ways:
+
+* By the image name and version tag on Docker Hub, or
+* By using the URL to an image in a registry.
+
+Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, refer to xref:private-images#[Using Docker Authenticated Pulls].
+
+The following examples show how you can use public images from various sources:
+
+[#public-convenience-images-on-docker-hub]
+=== CircleCI's public convenience images on Docker Hub
+
+* `name:tag`
+** `cimg/node:14.17-browsers`
+* `name@digest`
+** `+cimg/node@sha256:aa6d08a04d13dd8a...+`
+
+[#public-images-on-docker-hub]
+=== Public images on Docker Hub
+
+* `name:tag`
+** `alpine:3.13`
+* `name@digest`
+** `+alpine@sha256:e15947432b813e8f...+`
+
+[#public-docker-registries]
+=== Public images on Docker registries
+
+* `image_full_url:tag`
+** `gcr.io/google-containers/busybox:1.24`
+* `image_full_url@digest`
+** `+gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...+`
+
+[#available-docker-resource-classes]
+== Available Docker resource classes
+
+The xref:configuration-reference#resource_class[`resource_class`] key allows you to configure CPU and RAM resources for each job.
+
+Specify a resource class using the `resource_class` key, as follows:
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:current
+    resource_class: xlarge
+    steps:
+    #  ...  other config
+----
+
+[#x86]
+=== x86
+
+For the Docker execution environment, the following resources classes are available for the x86 architecture:
+
+{% include snippets/docker-resource-table.adoc %}
+
+[#arm]
+=== Arm
+
+The following resource classes are available for Arm with Docker:
+
+{% include snippets/docker-arm-resource-table.adoc %}
+
+[#view-resource-usage]
+=== View resource usage
+
+{% include snippets/resource-class-view.adoc %}
+
+[#docker-benefits-and-limitations]
+== Docker benefits and limitations
+
+Docker also has built-in image caching and enables you to build, run, and publish Docker images via xref:building-docker-images#[Remote Docker]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
+
+* Your application is self-sufficient.
+* Your application requires additional services to be tested.
+* Your application is distributed as a Docker image (requires using xref:building-docker-images#[Remote Docker]).
+* You want to use `docker-compose` (requires using xref:building-docker-images#[Remote Docker]).
+
+Choosing Docker limits your runs to what is possible from within a Docker container (including our xref:building-docker-images#[Remote Docker] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
+
+The table below shows tradeoffs between using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Capability | `docker` | `machine`
+
+| Start time
+| Instant
+| Instant for most ^(1)^
+
+| Clean environment
+| Yes
+| Yes
+
+| Custom images
+| Yes ^(2)^
+| No
+
+| Build Docker images
+| Yes ^(3)^
+| Yes
+
+| Full control over job environment
+| No
+| Yes
+
+| Full root access
+| No
+| Yes
+
+| Run multiple databases
+| Yes ^(4)^
+| Yes
+
+| Run multiple versions of the same software
+| No
+| Yes
+
+| xref:docker-layer-caching#[Docker layer caching]
+| Yes
+| Yes
+
+| Run privileged containers
+| No
+| Yes
+
+| Use Docker compose with volumes
+| No
+| Yes
+
+| xref:configuration-reference#resource_class[Configurable resources (CPU/RAM)]
+| Yes
+| Yes
+|===
+
+^(1)^ Some less commonly used execution environments may see up to 90 seconds of start time.
+
+^(2)^ See xref:custom-images#[Using Custom Docker Images].
+
+^(3)^ Requires using xref:building-docker-images#[Remote Docker].
+
+^(4)^ While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
+
+For more information on `machine`, see the next section below.
+
+[#docker-image-best-practices]
+== Docker image best practices
+
+* If you encounter problems with rate limits imposed by your registry provider, using xref:private-images#[authenticated Docker pulls] may grant higher limits.
+
+* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to xref:private-images#[add Docker Hub authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+
+* Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `+redis@sha256:95f0c9434f37db0a4f...+` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
+
+* If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the xref:custom-images#[Using Custom-Built Docker Images] page for more information.
+
+* When you use xref:private-images#aws-ecr[AWS ECR] images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
+
+* If your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
+
+More details on the Docker executor are available on the xref:configuration-reference#[Configuration reference] page.
+
+[#using-multiple-docker-images]
+== Using multiple Docker images
+
+It is possible to specify multiple images for your job. Each image will be used to spin up a separate container.
+
+Using multiple containers for a job will be useful if you need to use a database for your tests, or for some other required service.
+
+When using a multi-container job setup, all containers run in a common network and every exposed port will be available on `localhost`. All containers can communicate with one another. It is also possible to change this hostname using the `name` key. For a full list of options, see the xref:configuration-reference#docker[Configuration reference].
+
+*In a multi-image configuration job, all steps are executed in the container created by the first image listed*.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run.
+     - image: cimg/base:current
+    # Secondary container image on common network.
+     - image: cimg/mariadb:10.6
+
+    steps:
+      # command will execute in an Ubuntu-based container
+      # and can access MariaDB on localhost
+      - run: sleep 5 && nc -vz localhost 3306
+----
+
+[#ram-disks]
+== RAM disks
+
+A RAM disk is available at `/mnt/ramdisk` that offers a link:https://en.wikipedia.org/wiki/Tmpfs[temporary file storage paradigm], similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents of your project (all files checked out from git, dependencies, assets generated etc).
+
+The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+     - image: alpine
+
+    working_directory: /mnt/ramdisk
+
+    steps:
+      - run: |
+          echo '#!/bin/sh' > run.sh
+          echo 'echo Hello world!' >> run.sh
+          chmod +x run.sh
+      - run: ./run.sh
+----
+
+[#caching-docker-images]
+== Caching Docker images
+
+NOTE: This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to xref:docker-layer-caching#[Docker layer caching], which is a feature used to speed up building new Docker images in your projects.
+
+The time it takes to spin up a Docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
+
+If you are using a more popular image, such as CircleCI convenience images, then cache hits are more likely for a larger number of layers. Most of the popular CircleCI images use the same base image. The majority of the base layers are the same between images, so you have a greater chance of having a cache hit.
+
+The environment has to spin up for every new job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run. (CircleCI never reuses containers, for security reasons.) Once the job is finished, the container is destroyed. There is no guarantee that jobs, even in the same workflow, will run on the same Docker host machine. This implies that the cache status may differ.
+
+In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst-case scenario of a full image pull should be accounted for in all jobs.
+
+In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as link:https://circleci.com/developer/images[CircleCI convenience images], you will have more chances of hitting cached layers in the "Spin Up Environment" step.
+
+[#next-steps]
+== Next steps
+
+Find out more about using xref:circleci-images#[Convenience Images] with the Docker executor.

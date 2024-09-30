@@ -1,0 +1,100 @@
+---
+description: This is document provides examples of deploying to Firebase.
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Deploy to Firebase
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.
+
+[#introduction]
+== Introduction
+
+This page provides a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's `devDependencies` since attempting to install `firebase-tools` globally in CircleCI will not work.
+
+[#install-firebase-tools]
+== 1. Install tools
+
+[source,shell]
+----
+npm install --save-dev firebase-tools
+----
+
+[#authenticate-with-a-service-account]
+== 2. Authenticate with a service account
+
+If you have not already done so, link:https://cloud.google.com/iam/docs/service-accounts-create[create a Google Cloud service account] with the appropriate access for the deploy job.
+
+Then, link:https://cloud.google.com/docs/authentication/provide-credentials-adc#wlif-key[create a service account key]. You may store the key file contents in your project's environment variables (in this guide, we name the project environment variable `$SA_KEY`). Refer to the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] guide for instructions. CircleCI will use this credential to authenticate with Firebase.
+
+{% include snippets/env-var-or-context.adoc %}
+
+NOTE: Review the link:https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys[Google IAM documentation] for best practices in managing service account keys.
+
+[#add-token-to-project-env-vars]
+== 3. Declare environment variable inside `run` step
+
+. Inside a `run` step, output the value of the environment variable, that is, the contents of the service account key file, to a JSON file.
+
+. Set the JSON file path as the value of an environment variable `$GOOGLE_APPLICATION_CREDENTIALS` xref:env-vars#order-of-precedence[declared in the shell]. Then, run the Firebase deploy command.
+
+[source,yaml]
+----
+      - run:
+          name: Deploy on Firebase
+          command: |
+            echo $SA_KEY > credentials.json
+            GOOGLE_APPLICATION_CREDENTIALS=credentials.json firebase deploy
+----
+
+To learn more about how Google finds application credentials, refer to the link:https://cloud.google.com/docs/authentication/application-default-credentials#GAC[documentation for Google Cloud authentication].
+
+[#deploy-example]
+== Deploy example
+
+The following example shows how you can add a Firebase deploy job to your project's `.circleci/config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
+
+[source,yaml]
+----
+version: 2.1
+
+deploy-job:
+  docker:
+    - image: <docker-image-name-tag>
+  working_directory: /tmp/my-project
+  steps:
+    - run:
+        name: Deploy on Firebase
+        command: |
+          echo $SA_KEY > credentials.json
+          GOOGLE_APPLICATION_CREDENTIALS=credentials.json firebase deploy
+
+workflows:
+  deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: main
+
+----
+
+[#google-cloud-functions]
+== Google Cloud Functions
+
+If you are using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `.circleci/config.yml`:
+
+[source,yaml]
+----
+    - run: cd functions && npm install
+----

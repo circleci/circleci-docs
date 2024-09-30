@@ -1,115 +1,23 @@
 ---
-version:
-- Cloud
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI Runner on Kubernetes
+= CircleCI's self-hosted runner installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-toc::[]
+[#strongly-recommended-method]
+== Strongly recommended method
 
-== Introduction
+The <<container-runner#,container runner>> is the recommended approach for using self-hosted runners with Kubernetes.
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
+[#deprecated-method]
+== Deprecated method
 
-This installation guide is to help set up CircleCI runner on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
-
-The Helm chart will spin up one or more pods of *the same runner resource class*. This is useful for when you want all of these runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
-
-If you want to have different runners specialized for different workloads, it is recommended to create different runner resource classes and rerun these instructions/have separate charts for each runner class you create.
-
-=== Prerequisites
-* Be on Scale plan or trialing Scale plan. See above.
-* Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
-* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
-
-=== CircleCI Server Installation
-
-When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
-
-==== Upgrading Runner Deployment for Server
-
-. Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
-. Deploy the changes to the cluster 
-+
-....
-$ helm upgrade -f values.yaml "circleci-runner" ./ \
-  --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
-  --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
-  --namespace your-namespace
-....
-+
-
-Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
-
-== Getting Started
-
-. Clone the repository at https://github.com/CircleCI-Public/circleci-runner-k8s.
-. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
-. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
-+
-....
-$ helm install "circleci-runner" ./ \
-  --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
-  --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
-  --namespace your-namespace
-....
-+
-. Verify your pods are up and running by checking their status and following the logs. You should see output like the following:
-+
-....
-$ kubectl get pods --all-namespaces
-NAMESPACE     NAME                                                             READY   STATUS    RESTARTS   AGE
-default       circleci-runner-test-7d6b8fc6f-4z5wl                             1/1     Running   0          28h
-default       circleci-runner-test-7d6b8fc6f-h97jz                             1/1     Running   0          28h
-default       circleci-runner-test-7d6b8fc6f-pksc6                             1/1     Running   0          28h
-default       circleci-runner-test-7d6b8fc6f-q74p4                             1/1     Running   0          28h
-default       circleci-runner-test-7d6b8fc6f-wh6m2                             1/1     Running   0          28h
-
-$ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
-
-... (output truncated)
-
-time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
-time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
-time="2021-03-25T20:55:40Z" level=info msg="no task found"
-....
-
-== Chart Values
-
-Customizable parameters are left inside the `+values.yaml+` file. See the following chart for information about each of the values:
-
-[.table]
-[cols=4*, options="header"]
-[cols="2,1,1,4"]
-|===
-| Value             | Default   | Required? | Description
-
-| `+image.repository+`
-`+image.tag+`
-| `+circleci/runner+`
-`+launch-agent+`
-| Y
-| You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
-
-| `+replicaCount+`  | 1         | Y         | The number of replicas of this runner you want in your cluster. Must currently be set and updated manually. See <<limitationspending-work,Pending Work>>.
-
-| `+resourceClass+` | -         | Y         | The resource class you created for your runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
-
-| `+runnerToken+`   | -         | Y         | The token you created for your runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
-
-| `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI Server installations.
-
-| all other values  | -         | N         | Modify at your own discretion and risk.
-
-|===
-
-== Limitations/Pending Work
-* The Helm chart currently does not configure permissions, therefore, the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
-* The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
-* The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you will need to set up separate charts for each one.
-
+If you are not using a <<container-runner#,container runner>>, see this link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] for documentation on the old method for using self-hosted runners with Kubernetes.

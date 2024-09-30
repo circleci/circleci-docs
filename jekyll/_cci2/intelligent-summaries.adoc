@@ -1,0 +1,45 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Intelligent summaries
+:page-layout: classic-docs
+:page-liquid:
+:page-description: An overview of the intelligent summaries feature, an AI enabled helper feature in CircleCI that provides help with build failures
+:icons: font
+:experimental:
+
+CircleCI's intelligent summaries provide contextual help with build failures. Select btn:[Explain this error] from a failed job's step output to see an AI-generated summary of the error, along with suggestions on how to fix it. Use intelligent summaries to speed up the process of resolving common issues without needing to dig into documentation, or other resources.
+
+== Enable intelligent summaries
+
+The intelligent summaries feature is **disabled** by default. You can opt-in to the feature, as follows:
+
+NOTE: Only organization administrators can enable or disable intelligent summaries.
+
+. From the link:https://app.circleci.com/home/[CircleCI web app] select your organization card.
+. Select **Organization Settings** from the sidebar.
+. Select **Advanced** from the menu.
+. Use the "Enable intelligent summaries of build failure messages" toggle to enable or disable the feature.
+
+== Use intelligent summaries
+
+The btn:[Explain this error] button is available at the step output level in the CircleCI web app. You can locate the option by clicking through to the failed step from your link:https://app.circleci.com/home/[homepage], as follows:
+
+. Select your organization card from the homepage.
+. Select **Pipelines** from the sidebar.
+. Locate your pipeline that has a failure, and use the arrow in the **Status** column to expand the failed workflow.
+. Select the name of the failed job.
+. From the job view, with the **Steps** tab selected, you are viewing the step output. Locate a failed step and select btn:[Explain this error].
+. A panel appears on the right side of the screen with the intelligent summary, which includes a description of the error and steps to fix it.
+
+If you see a banner stating that "Intelligent Build Failures are Disabled", an organization administrator can enable the feature as outlined in <<enable-intelligent-summaries,the previous section>>.
+
+== Privacy and security
+
+Intelligent summaries works by sending an error message along with build failure logs to a third-party LLM. Prior to submitting the error message and logs to the LLM, CircleCI passes the message through a filter to remove any sensitive information, such as, access keys and passwords.
+
+OpenAI is used as the LLM for this feature. If this changes, this page will be updated to reflect the change, and there will be an announcement on our link:https://discuss.circleci.com/[community forum].
+
+The data we send to the LLM is not used for training purposes and no data is saved by the LLM. No personal information is sent to the LLM.

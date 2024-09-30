@@ -1,0 +1,117 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Sumo Logic integration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Sumo Logic.
+:icons: font
+:experimental:
+
+This page describes how to connect Insights data with link:https://www.sumologic.com/[Sumo Logic].
+
+[#overview]
+== Overview
+
+The link:https://www.sumologic.com/application/circleci/[Sumo Logic CircleCI integration] allows you to visualize and analyze data about your CircleCI jobs within Sumo Logic.
+
+[#integration]
+== Integration
+
+The CircleCI app for Sumo Logic provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
+
+[#the-circleci-dashboard-for-sumo-logic]
+== The CircleCI dashboard for Sumo Logic
+
+Use this dashboard to:
+
+* Monitor real-time CI performance, activity, and health, or track over time.
+* Identify opportunities for optimization.
+
+image:{{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
+
+Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
+
+- Total Jobs Ran
+- Job Health (% success)
+- Summary
+- Jobs Ran Per Project
+- Daily Performance
+- Jobs Per Day
+- 5 Most Recent Failed Jobs
+- 5 Most Recent Failed Workflows
+- Top 10 Longest Workflows (Averaged)
+- Top 10 Longest Running Jobs
+- Average Job Runtime Per Day
+
+Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
+
+image:{{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png[Sumo Logic App catalogue]
+
+NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
+
+[#set-up-sumo-logic-metrics-using-circleci-webhooks]
+== Set up Sumo Logic metrics using CircleCI webhooks
+
+To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
+
+[#configure-webhooks]
+=== Configure Webhooks
+
+[#step-1-configure-hosted-collector]
+==== 1. Configure hosted collector
+
+Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[Configuring a Hosted Collector].
+
+[#step-2-add-an-http-source]
+==== 2. Add an HTTP Source
+
+To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
+
+When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
+
+[#step-3-configure-project-webhooks]
+==== 3. Configure Project Webhooks
+
+Complete the following steps to set up a CircleCI webhook to forward your logs to Sumo Logic.
+
+. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
+
+. Access one of your CircleCI projects
+
+. Open **Project settings**
+
+. In the project settings sidebar, click **Webhooks**
+
+. Click **Add webhook**
+
+. Complete the following fields:
+** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
+** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section
+** **Events**: Select **Workflow Completed** and **Job Completed**.
+** Enable the check: **Certificate verifications**.
+
+. Click **Add Webhook** to save the new webhook.
+
+[#install-the-circleci-app-for-sumo-logic]
+=== Install the CircleCI App for Sumo Logic
+
+Now that you have set up collection, install the Sumo Logic App for CircleCI to use pre-configured searches and dashboards that provide insight into your CI/CD pipeline.
+
+. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
+. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
+. To install the app, complete the following fields:
+** **App Name**. You can retain the existing name, or enter a name of your choice for the app
+** **Data Source**. Select either of these options for the data source:
+*** Choose **Source Category**, and select a source category from the list
+*** Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
+** **Advanced**. Select the location in the library (the default is the personal folder in the library), or click **New Folder** to add a new folder
+. Click **Add to Library**
+
+Once the app is installed, it will appear in your personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically.
+
+NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available immediately, but with a bit of time, you will see full graphs and maps.

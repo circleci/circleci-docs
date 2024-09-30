@@ -1,0 +1,287 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.4+
+---
+= Install machine runner 3.0 on macOS
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on macOS.
+:icons: font
+:experimental:
+:machine:
+:macOS:
+
+This page describes how to install CircleCI's machine runner 3.0 on macOS.
+
+[#prerequisites]
+== Prerequisites
+
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://brew.sh/[Homebrew]
+
+* https://curl.se/[curl] (installed by default on macOS)
+
+* sha256sum (if not pre-installed):
+** `brew install coreutils`
+
+* https://www.gnu.org/software/tar/[tar]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+[#install-circleci-runner]
+== 2. Install CircleCI runner on macOS
+
+You can install runner on macOS with link:http://brew.sh/[Homebrew].
+
+. On the target macOS machine with Homebrew installed, run the following command to add the CircleCI repository:
++
+[,shell]
+----
+brew tap circleci-public/circleci
+----
+
+. Run the following command to install the `circleci-runner` package:
++
+NOTE: You may see a notification indicating a background item for Circle Internet Services Inc. has been added.
++
+[,shell]
+----
+brew install circleci-runner
+----
+
+. Open the runner `config.yaml` file with the text editor of your choice, and modify the `runner.name` and `api.auth_token` values.
++
+[,shell]
+----
+nano $HOME/Library/Preferences/com.circleci.runner/config.yaml
+----
++
+[,shell]
+----
+runner:
+  name: "my-macos-runner"
+  working_directory: "/Users/$USER/Library/com.circleci.runner/workdir"
+  cleanup_working_directory: true
+api:
+  auth_token: "your-auth-token"
+----
+Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
+
+. If you are using CircleCI server you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
++
+[source,shell]
+----
+export CIRCLECI_RUNNER_API_URL="your server domain"
+----
++
+Or by adding the URL to `$HOME/Library/Preferences/com.circleci.runner/config.yaml` using text editor of your choice.
++
+[source,yaml]
+----
+api:
+  auth_token: "your-auth-token"
+  # On server, set url to the hostname of your server installation.
+  url: https://your.domain.here
+----
+
+[#migrate-existing-configuration-files]
+=== Migrate existing configuration files
+If you are migrating an existing configuration from a previous runner installation, you may move the existing launch agent file from its current path to the new path.
+
+NOTE: this will overwrite the default config file installed via brew and replace it with your existing config file.
+
+[,shell]
+----
+mv /Library/Preferences/com.circleci.runner/launch-agent-config.yaml $HOME/Library/Preferences/com.circleci.runner/config.yaml
+----
+
+After copying the file, you may remove the logging block to send logs to the default location for machine runner 3.0 (specified below):
+
+[,yaml]
+----
+# remove this block from your existing config
+logging:
+  file: /Library/Logs/com.circleci.runner.log
+----
+
+[#review-accept-apple-signature-notarization]
+== 3. Review and accept the Apple signature notarization
+
+The binary must be approved to run on your macOS system because the self-hosted runner is not compiled from source during installation. This can be done via the macOS UI by accepting the pop-up asking if you wish to run the binary from the internet, or programmatically.
+
+. Verify the signature and notarization with this command:
++
+[source,shell]
+----
+spctl -a -vvv -t install "$(brew --prefix)/bin/circleci-runner"
+----
++
+It should return an output that looks like this:
++
+[source,shell]
+----
+/opt/homebrew/bin/circleci-runner: accepted
+source=Notarized Developer ID
+origin=Developer ID Application: Circle Internet Services Inc.
+----
+
+. When ready, run the command to accept the notarization. You will need to enter the macOS system password.
++
+[source,shell]
+----
+sudo xattr -r -d com.apple.quarantine "$(brew --prefix)/bin/circleci-runner"
+----
+
+[#start-macos-machine-runner]
+== 4. Start macOS machine runner 3.0
+
+To start the macOS machine runner 3.0 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
+
+[.tab.startdomain.GUI_domain]
+--
+
+. For running the agent in a GUI session, you can bootstrap the provided `.plist` file and enable the service by running the following commands:
++
+[source,shell]
+----
+launchctl bootstrap gui/$(id -u) $HOME/Library/LaunchAgents/com.circleci.runner.plist
+launchctl enable gui/$(id -u)/com.circleci.runner
+launchctl kickstart -k gui/$(id -u)/com.circleci.runner
+----
+. Finally, you can check the service is running by invoking the following command:
++
+[source,shell]
+----
+launchctl print gui/$(id -u)/com.circleci.runner
+----
+--
+
+[.tab.startdomain.User_domain]
+--
+
+1. When using a non-GUI (or headless) session, the provided `.plist` file should be moved to `/Library/LaunchAgents`. This location is for per-user agents configured by the administrator, which allows the service to load after a reboot. Run the following command to do this:
++
+[source,shell]
+----
+sudo mv $HOME/Library/LaunchAgents/com.circleci.runner.plist /Library/LaunchAgents/
+----
+2. Now you can bootstrap the `.plist` file and enable the service by running the following commands:
++
+[source,shell]
+----
+launchctl bootstrap user/$(id -u) /Library/LaunchAgents/com.circleci.runner.plist
+launchctl enable user/$(id -u)/com.circleci.runner
+launchctl kickstart -k user/$(id -u)/com.circleci.runner
+----
+3. Finally, you can check the service is running by invoking the following command:
++
+[source,shell]
+----
+launchctl print user/$(id -u)/com.circleci.runner
+----
+--
+
+[#stop-macos-machine-runner]
+== 5. Stop macOS machine runner 3.0
+
+To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
+
+[.tab.stopdomain.GUI_domain]
+--
+
+[source,shell]
+----
+launchctl disable gui/$(id -u)/com.circleci.runner
+----
+--
+[.tab.stopdomain.User_domain]
+--
+
+[source,shell]
+----
+launchctl disable user/$(id -u)/com.circleci.runner
+----
+--
+
+[#uninstall-machine-runner-macos]
+== Uninstall machine runner 3.0 on macOS
+To uninstall machine runner 3.0 from your macOS device, follow these steps.
+
+. Stop the machine runner service by using the following command to disable it, depending on the service target used during installation:
++
+[.tab.uninstalldomain.GUI_domain]
+--
+Targeting the GUI domain:
+[source,shell]
+----
+launchctl bootout gui/$(id -u)/com.circleci.runner
+----
+--
++
+[.tab.uninstalldomain.User_domain]
+--
+Targeting the user domain:
+[source,shell]
+----
+launchctl bootout user/$(id -u)/com.circleci.runner
+----
+--
+. Uninstall machine runner:
++
+[.tab.machine-runner-uninstall-macos.Keep_logs_and_configuration]
+--
+To uninstall without purging logs and configuration files, run the following command.
+
+[source,shell]
+----
+brew uninstall --cask circleci-public/homebrew-circleci/circleci-runner
+----
+--
++
+[.tab.machine-runner-uninstall-macos.Purge_logs_and_configuration]
+--
+
+CAUTION: This command will *purge all logs and configuration files*.
+
+To uninstall and purge all logs and configuration files, run the following command.
+
+[source,shell]
+----
+brew uninstall --cask --zap circleci-public/homebrew-circleci/circleci-runner
+----
+--
+
+[#access-runner-logs]
+== Access runner logs
+On your macOS machine, logs from `circleci-runner` are located in the following directory by default.
+
+[source,shell]
+----
+$HOME/Library/Logs/com.circleci.runner/runner.log
+----
+
+{% include snippets/machine-runner-example.adoc %}
+
+The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
+
+[#additional-resources]
+== Additional resources
+
+- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3.0]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

@@ -1,0 +1,89 @@
+---
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
+---
+= CircleCI Server AWS S3 ストレージのライフサイクルに関するガイド
+:page-layout: classic-docs
+:page-liquid:
+:page-description: AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのガイドです。
+:source-highlighter: rouge
+:rouge-linenums-mode: inline
+:icons: font
+:toc: macro
+:toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+このガイドは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのものです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にユーザーに問題が発生するのを回避することができます。
+
+CircleCI Server では、S3 ライフサイクルポリシーは自動的に設定されません。 このガイドの図表は、お客様のサーバーのライフサイクルポリシーを作成する際に役立つ例です。 ポリシーのルールの追加に必要なステップの詳細は、 https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide] を参照してください。
+
+== S3 バケットのライフサイクルポリシー設定例
+
+ifndef::pdf[NOTE: 表を右にスクロールするとすべての内容が表示されます。]
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| **プレフィックス**
+| **タグ**
+| **想定される日数**
+| **ファイルの説明**
+| **削除した場合の影響**
+
+| `artifacts`
+| なし
+| 30
+| 一般的なアーティファクト (0>store_artifacts</code> と `store_test_results`からの成果物)
+| ジョブの結果のアーティファクトリストからアーティファクトがなくなります。 URL が 404 を返します。
+
+| `artifacts`
+| `"circleci.object_type" === "project.cache"`
+| 15
+| 依存関係のキャッシュ
+| キャッシュがないため削除後最初のビルドに時間がかかります。
+
+| `artifacts`
+| `"circleci.object_type" === "workflow.workspace"`
+| 15
+| ワークスペース
+| ワークスペースに依存するジョブが再実行された場合 (SSH 再実行など)、`attach_workspace` はファイルをリストアせず、その後のステップが失敗します。
+
+| `artifacts/picard-task-configs`
+| なし
+| 1
+| タスクの設定
+| なし
+
+| `action-logs`
+| なし
+| 365
+| 各ステップからの出力
+| 出力は表示されなくなります。 各ステップのプルダウンを開いても、ローディングインジケータは表示されたままになります。
+
+| `cache `
+| なし
+| 15
+| レガシーキャッシュ
+| このフォルダーは積極的に使用されていません。 ジョブがこれらのファイルに依存している場合、キャッシュがないため削除後最初のビルドに時間がかかります。
+|===
+
+[discrete]
+== 上記リスト外の追加ローケーション
+
+[discrete]
+=== `audit-logs`
+
+ここには監査ログが保存されます。 このフォルダーやこのフォルダー下のファイルを削除しても、その後の CircleCI の運用には影響はありませんが、削除したログは完全に消え、復元することはできません。
+
+[discrete]
+=== `code-signing-keys`
+
+ここには macOS/iOS アプリ用の署名キーが保存されます。 このフォルダーは積極的に使用されていません。
+
+[discrete]
+=== `test-results`
+
+ここには`store_test_results`で収集された統計データが保存されます。 このデータはその後 `circleci tests split --split-by=timings`を使ったテスト分割に使用されます。 *テスト結果を削除すると、`parallelism`を使ったその後のジョブで CIRCLE BUG エラーを引き起こします。*

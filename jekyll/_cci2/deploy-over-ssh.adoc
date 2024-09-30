@@ -1,0 +1,75 @@
+---
+description: This is document provides examples of deploying over SSH.
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Deploy over SSH
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
+
+[# add-ssh-key-target]
+== 1. Add SSH key for target
+
+Add the SSH key for the target to which you are deploying (these instructions are for cloud, server v3.x, and server v4.x).
+
+. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
+
+. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
+
+. On the **Project Settings** page, click on **SSH Keys**.
+
+. Scroll down to the **Additional SSH Keys** section.
+
+. Click the **Add SSH Key** button.
+
+. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
+
+. In the **Private Key** field, paste the SSH key you are adding.
+
+. Click the **Add SSH Key** button.
+
+For additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
+
+[#ssh-username-and-hostname]
+== 2. Add the SSH username and hostname
+
+Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+
+[#create-deploy-job]
+== 3. Create a deploy job
+
+In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+  #...
+  deploy:
+    machine:
+      image: ubuntu-2204:2023.07.2
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only deploy once build job has completed
+          filters:
+            branches:
+              only: main # only deploy on the main branch
+```

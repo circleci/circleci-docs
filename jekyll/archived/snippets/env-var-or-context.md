@@ -1,0 +1,1 @@
+To take advantage of [secrets masking]({{ site.baseurl }}/contexts/#secrets-masking), it is best practice to set environment variables at the [project level]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) or within a [context]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-context).

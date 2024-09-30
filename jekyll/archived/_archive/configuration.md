@@ -74,7 +74,7 @@ This means you will need to **add a colon** to the end of the command for it to 
 
 **Important note:** modifiers are **double indented**, so **four spaces** instead of two. (This is probably the cause if you get an error like `Syntax Error while parsing circle.yml: mapping values are not allowed here...`)
 
-{% highlight yaml %}
+```yml
 dependencies:
   override:
     - bundle install: # note the colon here
@@ -84,7 +84,7 @@ dependencies:
           foo2: bar2
         pwd:
           test_dir
-{% endhighlight %}
+```
 
 <h2 id="machine">Machine configuration</h2>
 

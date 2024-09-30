@@ -1,0 +1,508 @@
+---
+
+description: CircleCI コンテナランナーの詳細
+contentTags:
+  platform:
+  - クラウド
+---
+= コンテナランナーのリファレンスガイド
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このページでは、CircleCI コンテナランナーを用いたジョブの運用・設定に関する総合ガイドです。
+
+[#running-your-first-job]
+== コンテナランナーで最初のジョブを実行する
+
+xref:container-runner-installation#[コンテナランナーのインストール] のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
+
+[#sample-configuration-container-agent]
+== コンテナランナーのサンプル設定
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+[#resource-class-configuration-custom-pod]
+== リソースクラスの設定とカスタマイズされたタスク Pod の設定
+
+コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトが提供します。
+
+各リソースクラスは、次のパラメーターをサポートしています。
+
+- `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
+- CircleCI ジョブの実行に使用するポッド用のカスタマイズされた Kubernetes Pod 設定
+
+この Pod の設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes Pod] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスク Pod 内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
+
+以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
+
+- `spec.containers[0].name`
+- `spec.containers[0].container.image`
+- `spec.containers[0].container.args`
+- `spec.containers[0].container.command`
+- `spec.containers[0].container.workingDir`
+- `spec.restartPolicy`
+- `metadata.name`
+- `metadata.namespace`
+
+以下は、2 つのリソースクラスを使用した設定ファイルのフルサンプルです。
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+      spec:
+        imagePullSecrets:
+          - name: "other"
+```
+
+[#custom-secret]
+== カスタムトークンのシークレット
+
+上記の設定ファイルを使うと、リソースクラストークンを含む Kubernetes シークレットがプロビジョニングされます。 状況によっては、ご自身のシークレットをプロビジョニングしたい場合や、単に Helm でトークンを指定したくない場合もあります。 その場合は、代わりにご自身のトークンを含む Kubernetes シークレットをプロビジョニングし、その名前を `agent.customSecret` フィールドに指定します。
+
+シークレットには各リソースクラス用のフィールドが含まれ、リソースクラス名をキーとしてトークンを値として使用する必要があります。 以下の `resourceClasses` 設定を検討しください。
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      metadata:
+        annotations:
+          custom.io: <my-annotation>
+
+    circleci-runner/resourceClass2:
+```
+
+対応するカスタムシークレットにはフィールドが 2 つあります。
+
+```yaml
+circleci-runner.resourceClass: <my-token>
+circleci-runner.resourceClass2: <my-token-2>
+```
+
+Kubernetes シークレットキーの文字制限により、名前空間とリソースクラス名を区切る `/` は `.` に置き換えられます。 トークンと正しい設定を紐付けるために、名前がこれ以外の点において `resourceClasses` の設定ファイルと完全に一致する必要があります。
+
+Pod の設定がこれ以上ない場合でも、上記の設定ファイル例の `circleci-runner/resourceClass2` が示すように、`resourceClasses` にリソースクラスを空のマップとして入力する必要があります。
+
+[#parameters]
+=== Helm チャートのパラメーター
+
+以下は **CircleCI 固有の設定** です。
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|パラメーター
+|説明
+|デフォルト
+
+|agent.runnerAPI
+|ランナー API の URL
+|`https://runner.circleci.com`
+
+|agent.name
+|この特定の `container-agent` インスタンスに割り当てる名前 (できれば一意の名前)。 この名前は、CircleCI UI の Runner Inventory ページに表示されます。 指定しない場合は、デプロイの名前がデフォルトで設定されます。
+|`container-agent` (デプロイの名前)
+
+|agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要* 
+|リソースクラスタスクの設定。 上記の "<<resource-class-configuration-custom-pod,リソースクラスの設定>>" を参照してください。
+|{}
+
+|agent.customSecret
+|リソースクラストークンを含む Kubernetes が提供されているユーザー。 上記の "<<custom-secret,カスタムトークンのシークレット>>" を参照してください。
+|""
+
+|agent.terminationGracePeriodSeconds
+|コンテナランナーをシャットダウンする際の、終了までの猶予期間。
+|18300
+
+|agent.maxRunTime
+|タスクの最大実行時間。 この値は、上記の猶予期間より短くなければなりません。指定可能な値については <<runner-config-reference/#runner-max_run_time#, ドキュメント>> を参照してください。
+|5 時間
+
+|agent.maxConcurrentTasks
+|同時に要求または実行できるタスクの最大数
+|20
+
+|agent.kubeGCEnabled
+|ガベージコレクションを有効または無効にするオプション
+|true
+
+|agent.kubeGCThreshold
+|ガベージコレクションで削除されるまでに Pod が実行できる時間
+|5 時間 5 分
+
+|agent.constraintChecker.enable
+|制約チェッカーを有効にするかどうかの指定
+|false
+
+|agent.constraintChecker.threshold
+|リソースクラスの要求を無効にする前に失敗したチェックの数
+|3
+
+|agent.constraintChecker.interval
+|制約チェックの間隔
+|15 分
+|===
+
+---
+
+以下は **Kubernetes オブジェクトの設定** です。 先頭に `agent` が付いたパラメーターはコンテナランナー Pod 用で、ジョブが実行される一時的な Pod 用ではありません。
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|パラメーター
+|説明
+|デフォルト
+
+|nameOverride
+|チャート名の上書き
+|""
+
+|fullnameOverride
+|生成されたフルネームの上書き
+|""
+
+|agent.replicaCount
+|デプロイするコンテナエージェントの数。 デフォルト値の 1 のままにすることをお勧めします。
+|1
+
+|agent.image.registry
+|エージェントイメージのレジストリ
+|""
+
+|agent.image.repository
+|エージェントイメージのリポジトリ
+|circleci/container-agent
+
+|agent.image.pullPolicy
+|エージェントイメージのプルポリシー
+|Always
+
+|agent.image.tag
+|エージェントイメージのタグ
+|edge
+
+|agent.pullSecrets
+|コンテナランナー Pod 用 (タスクを実行する一時的な Pod 用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
+|[]
+
+|agent.matchLabels
+|エージェント Pod で使用されるマッチラベル
+|app: container-agent
+
+|agent.podAnnotations
+|エージェント Pod に追加する追加注釈
+|{}
+
+|agent.podSecurityContext
+|エージェントポッドに追加するセキュリティコンテキストポリシー
+|{}
+
+|agent.containerSecurityContext
+|エージェントコンテナに追加するセキュリティコンテキストポリシー
+|{}
+
+|agent.resources
+|コンテナランナーポッド用のカスタマイズされたリソース仕様
+|{}
+
+|agent.nodeSelector
+|エージェントポッドの Node Selector
+|{}
+
+|agent.tolerations
+|エージェントポッドの Node Toleration
+|{}
+
+|agent.tolerations
+|エージェントポッドの Node Toleration
+|[]
+
+|agent.affinity
+|エージェントポッドの Node Affinity
+|{}
+
+|agent.autodetectPlatform
+|タスク Pod を実行している Node の OS と CPU アーキテクチャの自動検出。 false の場合、その Node はコンテナランナー Pod と同じ OS および CPU アーキテクチャであるとみなされ、クラスタ全体の権限は不要です。
+|true
+
+|serviceAccount.create
+|エージェント用のカスタムサービスアカウントを作成
+|true
+
+|rbac.create
+|サービスアカウントの Role と RoleBinding を作成
+|true
+
+|logging.image.registry
+|link:#logging-containers[コンテナのロギング]
+|""
+
+|logging.image.repository
+|link:#logging-containers[コンテナのロギング] のイメージリポジトリ
+|circleci/logging-collector
+
+|logging.image.tag
+|link:#logging-containers[コンテナのロギング] のイメージタグ
+|edge
+
+|logging.serviceAccount.create
+|link:#logging-containers[コンテナのロギング] のカスタムサービスアカウントトークンの作成
+|true
+
+|logging.rbac.create
+|link:#logging-containers[コンテナのロギング] のロールと RoleBinding の作成
+|true
+|===
+
+コンテナランナーには、以下の Kubernetes の権限が必要です。
+
+* PPods, Pods/Exec
+** Get
+** Watch
+** List
+** Create
+** Delete
+* Secret
+** Get
+** List
+** Create
+** Delete
+* Events
+** Watch
+* Node
+** Get
+** List
+
+また link:#logging-containers[コンテナのロギング] には、サービスコンテナのログを取得し、CircleCI Web アプリに転送するために以下の最低限の権限が必要です。
+
+* Pods, Pods/Logs
+** Watch
+
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
+
+コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
+
+NOTE: コンテナランナーは、クラスタ全体の権限を使って、タスク Pod が実行されている Node の OS と CPU アーキテクチャを自動検出します。 コンテナランナーにこの権限を付与したくない場合は、`agent.autodetectPlatform` を `false` に設定します。すると、その Node の OS と アーキテクチャはコンテナランナーの Pod を実行する Node と一致するものとみなされます。
+
+[#garbage-collection]
+== コンテナのロギング
+
+コンテナエージェントは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いたポッドやシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスク Pod が GC によって削除されてしまう場合があります。
+
+コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 コンテナランナーが、起動に失敗したタスクを自動的にローンチしようとすることはありません。 これは、CircleCI Web アプリで行えます。
+
+現時点では、コンテナランナーがクラッシュすると、処理中またはキューで待機中のタスクが安全に処理されることは期待できません。
+
+[#logging-containers]
+== コンテナのロギング
+
+タスク Pod にサービスコンテナがあると、コンテナランナーはコンテナのロギングをスケジュールします。 このコンテナは、サービスコンテナのログを取得し、CircleCI Web アプリに転送します。
+
+コンテナのロギングには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
+
+コンテナランナーは現在、ロギングコンテナに対してデフォルトのリソース制限とリクエストを設定しています、これらは以下の通りです：
+
+```yaml
+requests:
+  cpu: 50m
+  memory: 64Mi
+limits:
+  cpu: 100m
+  memory: 128Mi
+```
+
+[#constraint-validation]
+== 制約条件の検証
+
+コンテナランナーを使用すると、Kubernetes の設定がすべて行われたタスク Pod を設定できます。 つまり、Pod が制約によりスケジュールできないように設定されている場合があります。 この解決策として、コンテナランナーには、Pod をスケジュールできるようクラスタの現在の状態と各リソースクラスの設定を定期的に確認する制約チェッカーが備わっています。 これにより、コンテナランナーがスケジュールできないジョブを要求し、失敗するのを防ぐことができます。
+
+制約チェッカーによるチェックの失敗が多すぎた場合、再びチェックをパスするようになるまでそのリソースクラスの要求は無効になります。
+
+現在、クラスタの状態に対して以下の制約のチェックを行っています。
+
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selector]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node 名]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - MatchExpressions  がチェックされる場合のみ
+
+この機能の例として、以下のリソースクラスの設定ファイルを検討してみましょう。
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      spec:
+        nodeSelector:
+          disktype: ssd
+
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+```
+
+1 つ目のリソースクラスには 、SSD を持つ Node にスケジュールされるようにする Node Selector が含まれています。 運用中に何らかの理由で、クラスタにそのラベルの Node がなくなったとします。 すると制約チェッカーは `circleci-runner/resourceClass` のチェックに失敗し、再び正しいラベルの Node が見つかるまでジョブの要求を無効にします。 各リソースクラスのチェックは互いに独立しているため、`circleci-runner/resourceClass2` の要求への影響はありません。
+
+[#cost-and-availability]
+== コンテナイメージのビルド
+
+link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
+
+コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
+
+[#building-container-images]
+== 制限事項
+
+link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。
+
+コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。
+
+1. Buildah や Kaniko などのサードパーティー製ツール
+1. Docker がインストールされたマシンランナー
+1. CircleCI がホストするコンピューティング環境
+
+注: サードパーティ製ツールはお客様の判断でご使用ください。
+
+コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
+
+Kaniko を使ったコンテナイメージのビルドの成功例については、 
+link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[コミュニティフォーラムについて] を参照してください。
+
+もう一つのオプションは、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
+
+```yaml
+docker:
+  - image: quay.io/buildah/stable:v1.27.0
+```
+
+[#using-the-buildah-image]
+=== Buildah の使用
+
+Buildah は、コンテナ内の link:https://github.com/containers/fuse-overlayfs[fuse-overlay] プログラムに依存します。つまり、使用するにはヒューズデバイスプラグインを設定する必要があります。 このオプションでは、Buildah を使用するためにコンテナに `/dev/fuse` を追加するようホスト上の Buildah に指示するため、コンテナ内で `fuse-overlayfs` を使用するには `/dev/fuse` が必要です。 Kubernetes にはホストデバイスを安全にシェアできるデバイスプラグインシステムが備わっています。
+
+`dev/fuse` の設定をインストールするには、link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[このリポジトリ] をコンテナエージェントのデプロイで Helm コマンドを実行している場所にクローンします。 次に、下記を実行します。
+
+```
+kubectl create -f fuse-device-plugin-k8s-1.16.yml
+```
+
+`kubectl get daemonset -n kube-system` を実行し、`fuse-device-plugin-daemonset` があることが確認できれば、この構成は正しく設定されています。
+
+このデバイスが追加されたら、コンテナエージェントの <<#resource-class-configuration-custom-pod,リソースクラスの設定>> を更新します。
+
+```yaml
+resourceClasses:
+ <namespace>/<resourceClass>:
+  token: <token>
+   spec:
+    containers:
+     - resources:
+        limits:
+         github.com/fuse: 1
+```
+
+これで、コンテナエージェントジョブで Buildah コマンドを実行し、コンテナをビルドできるようになります。 
+
+```yaml
+  docker-image:
+    docker:
+      - image: quay.io/buildah/stable
+    resource_class: <namespace>/<resourceClass>
+    steps:
+      - checkout
+      - run:
+          name: sanity-test
+          command: |
+            buildah version
+      - run:
+          name: Building-a-container
+          command: |
+            buildah bud -f ./Dockerfile -t myimage:0.1
+            buildah push myimage:tag
+```
+
+[#using-buildah-with-custom-images]
+=== カスタムイメージでの Buildah の使用
+
+独自のカスタムイメージをビルドし、Dockerfile に Buildah のインストールを含めることもできます。
+
+```
+sudo yum install buildah
+```
+
+link:https://circleci.com/developer/images[CircleCI イメージ] を使用する場合は、インストール用のリポジトリをジョブの `steps` に追加してください。
+
+```
+sudo apt-get update
+sudo apt-get install -y wget ca-certificates gnupg2
+VERSION_ID=$(lsb_release -r | cut -f2)
+echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel-kubic-libcontainers-stable.list
+curl -Ls https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_$VERSION_ID/Release.key | sudo apt-key add -
+sudo apt-get update
+sudo apt install buildah -y
+```
+
+次に、`BUILDAH_ISOLATION` に `chroot` を指定します。
+
+```
+# Default to isolate the filesystem with chroot.
+ENV BUILDAH_ISOLATION=chroot
+```
+
+次に、 上記の <<#using-the-buildah-image,Buildah イメージの使用>> と同じ手順でヒューズディバイスプラグインをコンテナエージェントのデプロイに追加し、これらのジョブでカスタムイメージを使用してコンテナイメージをビルドするよう `.circleci/config.yml` ファイルを更新します。
+
+[#limitations]
+== FAQ
+
+* SSH を使用したジョブの再実行
+* 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。
+* Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
+* コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
+* コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
+
+[#faqs]
+== FAQ
+
+コンテナランナーについてよく寄せられるご質問については、 <<runner-faqs#container-runner-specific-faqs,ランナーについてのよく寄せられるご質問のページ >> をご覧ください。

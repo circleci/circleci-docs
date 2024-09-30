@@ -5,22 +5,30 @@ description: > # this means to ignore newlines until "baseurl:"
   The documentation site for CircleCI, the fastest testing platform on the
   Internet.
 
-url: "http://localhost:4040" # the base hostname & protocol for your site
+url: "https://ui.circleci.com" # the base hostname & protocol for your site
 baseurl: "/docs" # the subpath of your site, e.g. /blog
+gh_help_articles_url: "https://help.github.com/articles"
 gh_url: "https://github.com/circleci/circleci-docs"
+gh_private_org_url: "https://github.com/circleci"
+gh_public_org_url: "https://github.com/CircleCI-Public"
+cci_public_org_url: "https://app.circleci.com/pipelines/github/CircleCI-Public"
 devhub_base_url: "https://circleci.com/developer"
+blog_base_url: "https://circleci.com/blog"
+support_base_url: "https://support.circleci.com"
 noindex: false
 
 exclude:
   - .jekyll-cache
 
 plugins:
-  - jekyll-include-cache
   - jekyll-sitemap
   - jekyll-asciidoc
-  - jekyll-target-blank
-  - jekyll-toc
-  - jekyll/minibundle
+  - jekyll-last-modified-at
+
+# Approximate distance, with customizable threshold,
+# ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
+jekyll_timeago:
+  depth: 1
 
 algolia:
   application_id: U0RXNGRK45
@@ -32,28 +40,18 @@ algolia:
     - html
     - md
     - adoc
-  nodes_to_index: 'p,h1'
+  max_record_size: 20000
+  nodes_to_index: "p,h1"
   settings:
-    highlightPreTag: '<strong>'
-    highlightPostTag: '</strong>'
-    attributesToSnippet: [
-      'content:80',
-      'headings',
-      'title'
-    ]
-    attributesToHighlight: [
-      'content:80',
-      'headings',
-      'title'
-    ]
+    highlightPreTag: "<strong>"
+    highlightPostTag: "</strong>"
+    attributesToSnippet: ["content:80", "headings", "title"]
+    attributesToHighlight: ["content:80", "headings", "title"]
     minProximity: 3
 
 toc:
   min_level: 1
-  max_level: 4
-
-sass:
-  sass_dir: _sass
+  max_level: 6
 
 markdown: kramdown
 kramdown:
@@ -62,46 +60,40 @@ kramdown:
 liquid:
   error_mode: strict
 
+server-attributes: &server
+  imagesdir: /docs/assets/img/docs/
+  relfileprefix: ../
+  relfilesuffix: /
+  outfilesuffix: /index.html
+  serverversion4: 4.0.6
+  serverversion41: 4.1.10
+  serverversion42: 4.2.7
+  serverversion43: 4.3.9
+  serverversion44: 4.4.7
+  serverversion45: 4.5.5
+  serverversion46: 4.6.2
+  serverversion: 3.4.8
+  terraformversion: 0.15.4
+  kubectlversion: 1.19
+  helmversion: 3.9.2
+  helmdiffversion: 3.5.0
+  kotsversion: 1.65.0
+
 asciidoc:
-  attributes:
-      source-highlighter: rouge
-      serverversion: 3.2.0
-      terraformversion: 0.15.4
-      kubectlversion: 1.19
-      helmversion: 3.4.0
-      kotsversion: 1.47.3
+  attributes: *server
 
 asciidoctor:
-  base_dir: _cci2/
+  base_dir: :docdir
   safe: unsafe
-  attributes:
-    imagesdir: /docs/assets/img/docs/
-    relfileprefix: ../
-    outfilesuffix: /index.html
-    serverversion: 3.2.0
-    terraformversion: 0.15.4
-    kubectlversion: 1.19
-    helmversion: 3.4.0
-    kotsversion: 1.47.3
+  attributes: *server
 
 collections:
-  # this is named with an underscore because it needs to be processed
-  # before the collections that render the actual pages.
-  # jekyll is processing in alpha order...
-  _glossary:
-  cci1:
-    name: "1.0 Docs"
-    site_section: true
-    output: true
-    permalink: /1.0/:path/
-    prefix: "/1.0"
-    selectorName: "1.0"
   cci2:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /2.0/:path/
-    prefix: "/2.0"
+    permalink: :path/
+    prefix: "/"
     selectorName: "2.0"
   api:
     name: "API Docs"
@@ -114,52 +106,56 @@ collections:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /ja/2.0/:path/
-    prefix: "/ja/2.0"
+    permalink: /ja/:path/
+    prefix: "/ja"
     selectorName: "2.0"
+  style:
+    name: "Style Guide"
+    site_section: true
+    output: true
+    permalink: /style/:path/
+    prefix: "/style"
+    selectorName: "style"
 
 twitter_username: circleci
 github_username: circleci
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "cci2"
     values:
       lang: "en"
 
-  -
-    scope:
+  - scope:
       path: ""
       type: "cci2_ja"
     values:
       lang: "ja"
 
-  -
-    scope:
+  - scope:
+      path: ""
+      type: "style"
+    values:
+      lang: "en"
+
+  - scope:
       path: ""
     values:
       hide: false
       search: true
-
-  # Enable TOC by default
-  - scope:
-      path: ""
-    values:
-      toc: true
-
-  # Disable suggested by default
-  - scope:
-      path: ""
-    values:
-      suggested: false
+      toc: true # Enable TOC by default
+      suggested: false # Disable helpful resources section by default
+      sitemap: true # Enable sitemap by default
+      readtime: true # Enable Read Time by default
+      contentTags: null
+      sectionTags: null
 
 t:
-    translation_in_progress:
-        ja: "このページはただいま翻訳中です"
+  translation_in_progress:
+    ja: "このページはただいま翻訳中です"
 
-segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
+segment: "mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ"
 
 analytics:
   events:
@@ -168,5 +164,4 @@ rollbar_env: development
 
 # Optimizely SDK key for dev env
 optimizely: "GfYszBpMkefBSwiiEkH3b3"
-
 # server_version: "2.18.4"

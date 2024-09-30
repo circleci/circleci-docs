@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Upload to Artifactory
+title: Artifactory (archived)
 categories: [how-to]
 description: How to upload Artifacts to Artifactory
 sitemap: false

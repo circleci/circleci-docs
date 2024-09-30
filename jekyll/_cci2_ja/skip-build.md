@@ -1,31 +1,37 @@
 ---
 layout: classic-docs
-title: ビルドのスキップとキャンセル
-short-title: ビルドのスキップとキャンセル
-description: CircleCI の自動ビルドを止める方法
-order: 100
-version:
-  - Cloud
-  - Server v2.x
+title: ジョブとワークフローのスキップとキャンセル
+description: このドキュメントでは、ジョブのスキップや、ワークフローの自動キャンセルにより、プロジェクトで処理が自動的に実行されるタイミングを制御する方法について説明します。
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-以下のセクションに沿って、ビルドをスキップまたはキャンセルする方法について説明します。
+このドキュメントでは、パイプラインをトリガーする際に処理をスキップまたはキャンセルする方法を説明します。 これには複数の方法があります。 パイプラインのジョブをコミット時にスキップする、またはワークフロー自動キャンセル機能を使ってワークフローをキャンセルすることが可能です。 それぞれの方法を下記でご紹介します。
 
-* TOC
-{:toc}
+## ジョブをスキップする
+{: #skip-jobs }
 
-## Skipping a build
-{: #skipping-a-build }
+CircleCI はデフォルトでは、プロジェクトに変更をプッシュするたびに自動的にパイプラインをトリガーします。 この動作を無効にするには、コミットの本文またはタイトルの最初の 250 文字の中に、 `[ci skip]` タグまたは `[skip ci]` タグを追加します。 これにより、マークされたコミットだけでなく、そのプッシュに含まれる**他のすべてのコミット**もスキップされます。
 
-By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
+**CircleCI Server v2.x** をお使いの場合は、このパイプラインの機能を使わなくても、下記の方法でワークフローをスキップできます。
+{: class="alert alert-info"}
 
-**Note:** This feature is not supported for fork PRs. Scheduled workflows will not be cancelled even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
+### スコープ
+{: #scope }
 
-### Example commit title
+`ci skip` 機能のスコープに関して以下の点にご注意ください。
+
+* これらのコミットにパイプラインとワークフローは存在しますが、ジョブは実行されません。
+* 一度に複数のコミットをプッシュする場合、1 つの `[ci skip]` または `[skip ci]` で**すべてのコミット**のビルドがスキップされます。
+* この機能はフォーク PR ではサポートされていません。 `[ci skip]` のメッセージを含むコミットをプッシュしても、スケジュールされたワークフローは実行されます。 設定ファイルを変更することで、現在のスケジュールをアップグレードすることができます。
+
+### コミットのタイトルの例
 {: #example-commit-title }
-{:.no_toc}
 
-```bash
+```shell
 $ git log origin/master..HEAD
 
 commit 63ce74221ff899955dd6258020d6cb9accede893
@@ -35,13 +41,12 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
     fix misspelling [ci skip]
 ```
 
-When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit title.
+このコミットはタイトルに `[ci skip]` が含まれているため、VCS にプッシュされても CircleCI 上でビルドされません。
 
-### Example commit description
+### コミットの説明の例
 {: #example-commit-description }
-{:.no_toc}
 
-```bash
+```shell
 $ git log origin/master..HEAD
 
 commit 99b4ce4d59e79cb379987b39c65f7113631f0635
@@ -56,45 +61,50 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
     First attempt at feature
 ```
 
-When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci]` in the commit description.
+このコミットは説明に `[ci skip]` または `[skip ci]` が含まれているため、VCS にプッシュされても CircleCI 上でビルドされません。
 
-**Note:** If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
+## 冗長ワークフローの自動キャンセル
+{: #auto-cancel}
 
-## Auto cancelling a redundant build
-{: #auto-cancelling-a-redundant-build }
+ブランチに変更を頻繁にプッシュすると、キューに入る可能性が高まります。 これにより、古いパイプラインのビルドが終わるまで、最新バージョンでのビルドを実行できない場合があります。
 
-If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to finish building before the most recent version starts.
+時間を節約するために、同じブランチで新しいパイプラインがトリガーされた場合は完了していないワークフローを自動的にキャンセルするように CircleCI を設定することができます。
 
-To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
+### スコープ
+{: #scope }
 
-**Note:** Your project's default branch (usually `master`) will never auto-cancel builds.
+自動キャンセル機能を使用する際は以下の点にご注意ください。
 
-### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
-{: #steps-to-enable-auto-cancel-for-pipelines-triggered-by-pushes-to-github-or-the-api }
-{:.no_toc}
+* プロジェクトのデフォルトのブランチ (通常は `main`) では、ビルドの自動キャンセルは行われません。
+* 自動キャンセルは、VCS へのプッシュや API 経由のプッシュによりトリガーされたパイプラインに影響を与えます。
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
+### 自動キャンセルの有効化
+{: #enable-auto-cancel }
 
-1. In the CircleCI application, go to your Project Settings.
+非デフォルトのブランチで自動デプロイジョブを設定している場合など、自動キャンセル機能の有効化による影響を慎重に検討する必要があります。
+{: class="alert alert-warning"}
 
-2. Click on **Advanced Settings**.
+1. CircleCI Web アプリで **Project Settings** に移動します。　
 
-3. In the **Auto-cancel redundant builds** section, enable the feature by switching the toggle switch to the **On** position.
+2. **Advanced Settings** をクリックします。
 
-Projects for which auto-cancel is enabled in the Advanced Settings will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
-- スケジュールされたワークフローおよび再実行されたワークフローはキャンセルされません。
+3. スイッチを切り替えて、**Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル)**オプションを有効にします。
 
-## Auto cancel for CircleCI server installations
+自動キャンセルが有効になっているプロジェクトでは、非デフォルトのブランチで新しいビルドがトリガーされると、同じブランチ上のパイプラインやワークフローがキャンセルされます。ただし、以下のワークフローを除きます。
+
+* スケジュールされたワークフロー
+* 再実行のワークフロー
+
+## CircleCI Server での自動キャンセル
 {: #auto-cancel-for-circleci-server-installations }
 
-CircleCI Server does not currently use the pipelines feature, and as a result the Auto Cancel Builds feature only works for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
+CircleCI Server v2.x では、ビルドの自動キャンセル機能は 、API によりトリガーされたビルド、またはワークフローを使用**しない**プロジェクトの GitHub へのプッシュによりトリガーされたビルドにのみ有効です。
 
-### Steps to enable auto-cancel for CircleCI server installations
+### CircleCI Server での自動キャンセルを有効にする手順
 {: #steps-to-enable-auto-cancel-for-circleci-server-installations }
-{:.no_toc}
 
 1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
-2. In the **Build Settings** section, click on **Advanced Settings**.
+2. **Build Settings** セクションで、**Advanced Settings** をクリックします。
 
-3. In the **Auto-cancel redundant builds** section, click the **On** button.
+3. **Auto-cancel redundant builds** セクションで **On** ボタンをクリックします。

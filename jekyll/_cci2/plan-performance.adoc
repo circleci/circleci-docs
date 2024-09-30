@@ -1,0 +1,74 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Performance Plan
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes the Performance Plan available to developers on CircleCI.
+:icons: font
+:experimental:
+:orbs:
+
+This document describes the CircleCI Performance Plan.
+
+[#performance-plan]
+== Performance Plan
+The Performance Plan offers a set number of credits across a variety of resource classes, per month. You can customize your credit spend depending on your build configuration and execution environment.
+
+The Performance Plan offers a higher amount of network usage, and other advantages over the Free Plan, as described below.
+
+The Performance Plan offers *five* link:https://support.circleci.com/hc/en-us/articles/360034783154-What-is-an-Active-User[active users], and you can increase this number as you grow. Each additional user is charges at 25,000 credits. Refer to the link:https://circleci.com/pricing#[pricing page] for details.
+
+[#access-to-ip-ranges]
+=== Access to IP ranges
+Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature enabled have their traffic routed through one of the defined IP address ranges during job execution.
+
+For more information about this features, refer to the xref:ip-ranges#[IP ranges] page.
+
+[#additional-resource-classes]
+=== Additional resource classes
+Access to some of the larger machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
+
+For more information, refer to the xref:executor-intro#[Execution environments overview] page.
+
+[#less-queuing-with-more-concurrency]
+=== Less queuing with more concurrency
+A larger number of jobs can run concurrently in your workflows, as described below in <<#concurrency,Concurrency>>.
+
+[#scalable-user-seat-count]
+=== Scalable user seat count
+Included is a set number of active users. Additional users can be added by using your credits. If you need more credits, they can be purchased to cover additional users on a per month basis. This process allows you to scale your credit package to align with build activity.
+
+[#additional-self-hosted-runners]
+=== Additional self-hosted runners
+A significant increase in the number of self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
+
+=== Releases
+
+Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and SageMaker are supported.
+
+On the Performance Plan, you get **three components** with associated releases per month. Each **additional component** is **40k credits**. Each release is **250 credits**. Components with no releases are not charged.
+
+* A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit.
+
+* A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
+
+Start with the xref:release/releases-overview#[Releases overview] for more information on the feature.
+
+[#custom-storage-retention]
+=== Custom storage retention
+The link:https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
+
+[#additional-support-options]
+=== Additional support options
+Additional support through SLAs (limited hours and days), and support package add-ons. The Performance Plan also has access to the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+
+NOTE: For details on cancelling a Performance Plan, refer to the xref:faq#cancel-performance-plan[Cancel Performance Plan FAQ].
+
+[#circleci-features]
+== CircleCI features
+In addition to the upgraded features listed above, the Performance Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
+
+{% include snippets/features-of-circleci.adoc %}

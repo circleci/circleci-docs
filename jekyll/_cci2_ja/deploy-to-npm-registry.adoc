@@ -1,0 +1,90 @@
+---
+
+description: このドキュメントでは、npm レジストリにデプロイするためのコード例を紹介します。
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= npm レジストリへのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このノウハウガイドでは、CircleCI を npm レジストリに公開する設定方法を説明しています。
+
+[#introduction]
+== はじめに
+
+パッケージを npm レジストリにパブリッシュするように CircleCI をセットアップすると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
+
+[#obtain-the-npm-authToken]
+== 1.  npm authToken を取得
+
+パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 そのためには、まず npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 以下の行を探します。
+
+```shell
+//registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
+```
+
+この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
+
+[#set-npm-token]
+== 2.  npm トークンの設定
+
+xref:environment-variables#setting-environment-variables-for-all-commands-without-adding-them-to-git[プロジェクト設定] に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
+
+[#configure-circleci]
+== 3.  CircleCI を構成する
+
+authToken を `~/.npmrc` に追加するように CircleCI を構成し、バージョンが指定されたタグにのみ `npm publish` を実行します。
+
+```yaml
+version: 2.1
+
+jobs:
+    publish:
+    docker:
+        - image: <docker-image-name-tag>
+            auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+        - checkout
+        - run:
+            name: Publish to NPM
+            command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
+
+workflows:
+    tagged-build:
+    jobs:
+        - publish:
+            filters:
+            tags:
+                only: /v[0-9]+(\.[0-9]+)*/
+```
+
+[#create-new-version]
+== 4. 新しいバージョンの作成
+
+新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
+
+```shell
+npm version 10.0.1
+```
+
+これで、`package.json` ファイルが更新され、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。
+
+```shell
+git push --follow-tags
+```
+
+[#publish]
+== 5. パブリッシュ
+
+テストが完了すると、パッケージが npm に自動的にパブリッシュされます。

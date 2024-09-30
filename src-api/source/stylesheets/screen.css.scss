@@ -194,7 +194,7 @@ html, body {
     line-height: 24px;
   }
 
-  .toc-h2, .related-h2 {
+  .toc-h2, .helpful-h2 {
     font-size: $toc-h2-size;
     padding: 2px 0;
     padding-left: (($nav-padding + $nav-indent) / 2);
@@ -274,6 +274,14 @@ html, body {
   &.open {left: $nav-width}
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  scroll-margin-top: 74px;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
@@ -358,15 +366,13 @@ html, body {
     clear: both;
   }
 
-
-
-  .header-links,  {
+  .header-links {
     margin-right: 50%;
     padding: 24px 28px;
     box-sizing: border-box;
     display: flex;
-
   }
+
   .content-link {
     color: #7F7F7F;
     display: flex;
@@ -384,7 +390,6 @@ html, body {
     width: 12px;
     padding-left: 8px;
   }
-
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
     margin-right: $examples-width;
@@ -524,9 +529,7 @@ html, body {
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
-    margin-top: 1.5em;
     margin-bottom: 1.5em;
-    background: $aside-notice-bg;
     line-height: 1.6;
 
     &.warning {
@@ -535,6 +538,19 @@ html, body {
 
     &.success {
       background-color: $aside-success-bg;
+    }
+
+    &.notice {
+      margin-top: 1.5em;
+      background: $aside-notice-bg;
+    }
+
+    &.v2-banner {
+      margin-top: 0em;
+      background: #FBF8E5;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
     }
   }
 

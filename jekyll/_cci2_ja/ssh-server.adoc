@@ -1,30 +1,32 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+description: "ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 また、CircleCI Server 上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認ください。"
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
 ---
-= SSH Rerun Architecture in Server
+= サーバーにおける SSH での再実行のアーキテクチャ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This section describes how SSH reruns work within installations of CircleCI Server. This information is designed to help system administrators have an overview to help with considerations when customizations are made to an installation. This guide is also here to help with debugging in the event of a problem with SSH reruns in an installation.
+ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 記載されている情報は、システム管理者が CircleCI Server をカスタマイズする際の検討材料として提供しています。 また、CircleCI サーバー上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認いただけます。
 
-== Rerunning a Job with SSH
-For an overview of the purpose of SSH reruns in CircleCI, see the <<ssh-access-jobs#,Debugging with SSH guide>>. The image below describes the IP addresses and ports used to restart jobs within VMs and containers when a rerun with SSH is requested.
+== SSH でのジョブの再実行
+For an overview of the purpose of SSH reruns in CircleCI, see the <<ssh-access-jobs#, Debugging with SSH guide>>. 以下のイメージは、SSH による再実行が要求された場合に、VM やコンテナ内のジョブを再起動するために使用される IP アドレスとポートを説明したものです。
 
-The default situation for a Server installation with no customizations is for the `outer` agent to use AWS metadata to select the instance's public IP address.
+カスタマイズされていない CricleCI Server のデフォルト設定では、 `外部` エージェントが AWS のメタデータを使ってインスタンスのパブリック IP アドレスを選択します。
 
-If any networking customizations are made from the default that either block the metadata endpoint or make the public IP unsuitable, then creating a file at `/etc/circleci/public-ipv4` can be used as an override. This file should be created on each Nomad Client, usually via a boot script, and be populated with the IP address that should be used to connect. As an example, the following script uses the instance private IP from AWS metadata:
+デフォルトから、メタデータのエンドポイントをブロックしたり、パブリック IP を不適切に変更するようなネットワークのカスタマイズを行った場合、`/etc/circleci/public-ipv4`にファイルを作成することにより、上書きすることができます。 このファイルは、通常は起動スクリプトを使って各 Nomad クライアント上で作成し、接続時に使用する IP アドレスを入力する必要があります。 以下のスクリプト例では、 AWS のメタデータのインスタンスのプライベート IP を使用しています。
 
-```sh
+```shell
 #!/bin/sh
 PRIVATE_IP="$(curl http://169.254.169.254/latest/meta-data/local-ipv4)"
 mkdir -p /etc/circleci
 echo $PRIVATE_IP | tee /etc/circleci/public-ipv4
 ```
 
-.SSH Rerun Architecture
+.SSH での再実行のアーキテクチャ
 image::SSH-server.png[SSH Rerun Architecture]

@@ -1,0 +1,45 @@
+---
+toc: false
+---
+= Cross references and links
+:page-layout: classic-docs
+:icons: font
+:toc-title:
+
+[#cross-references]
+== Cross references
+* Cross references (links between docs pages) in **.adoc** should be made in the following form:
++
+[source,adoc]
+----
+link:/docs/github-integration#user-keys-and-deploy-keys[User Keys and Deploy Keys]
+----
+
+* The **.md** equivalent would be to use a link:
++
+[source,md]
+----
+[User Keys and Deploy Keys](/github-integration#user-keys-and-deploy-keys)
+----
+
+* Cross references should explicitly name the document or section to which they are linking.
+** **Good:** Refer to the https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document. +
+** **Bad:** See here for info on https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[adding project-level environment variables]. 
+
+[#links]
+== Links
+
+* Links to third party sites should be in the following form in asciidoc content:
++
+[source,adoc]
+----
+link:https://circleci.com[CircleCI]
+----
+
+* The markdown link syntax is as follows:
++
+[source,md]
+----
+[CircleCI](https://circleci.com)
+----
+

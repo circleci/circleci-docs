@@ -1,0 +1,109 @@
+---
+contentTags:
+  platform:
+  - Server v4.0 - v4.6
+---
+= CircleCI's machine runner installation with Docker
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on Docker.
+:icons: font
+:experimental:
+:machine:
+
+This page describes how to install CircleCI's machine runner with the Docker executor on server. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner#,Container runner>> page.
+
+[#new-recommended-method-container-runner]
+== Supported method for Docker installation (container runner)
+
+The <<container-runner#,container runner>> is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+
+[#machine-approach-with-docker]
+== Machine-based approach with Docker
+
+CAUTION: The instructions below are not supported for Cloud customers.
+
+[#runner-terms]
+=== Runner terms
+
+{% include snippets/runner/terms.adoc %}
+
+[#machine-runner-prerequsites]
+=== Prerequisites
+
+* link:https://docs.docker.com/engine/install/[Docker]
+
+[#additional-prerequisites]
+==== Additional prerequisites with Docker
+
+The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
+
+The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
+
+[#create-namespace-and-resource-class]
+=== 1. Create namespace and resource class
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
+
+[#create-a-dockerfile-that-extends-the-machine-runner-image]
+=== 2. Create a Dockerfile that extends the machine runner image
+
+Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
+
+```dockerfile
+FROM circleci/runner:launch-agent
+RUN sudo apt-get update; \
+    sudo apt-get install --no-install-recommends -y \
+        python3
+```
+
+[#build-the-docker-image]
+=== 3. Build the Docker image
+
+```shell
+docker build --file ./Dockerfile.runner.extended .
+```
+
+[#start-the-docker-container]
+=== 4. Start the Docker container
+
+NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
+
+```shell
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
+When the container starts, it will immediately attempt to start running jobs.
+
+[#start-the-docker-container-on-server]
+==== Start the Docker container on server
+
+When starting the Docker container on server, the `agent_version` and `LAUNCH_AGENT_API_URL` environment variables will need to be passed in using the `--env` flag.
+
+```shell
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> LAUNCH_AGENT_API_URL=<server_host_name> docker run --env agent_version --env LAUNCH_AGENT_API_URL --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
+[#stopping-the-docker-container]
+=== Stopping the Docker container
+
+```shell
+docker stop <container-name>
+```
+
+[#remove-the-docker-container]
+=== Remove the Docker container
+
+In some cases you might need to fully remove a stopped machine runner container from the system, such as when recreating a container using the same name.
+
+```shell
+docker stop <container-name>; docker rm <container-name>;
+```

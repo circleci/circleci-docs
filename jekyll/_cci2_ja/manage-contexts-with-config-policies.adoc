@@ -1,0 +1,517 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+---
+= コンフィグファイルポリシーを使ったコンテキストの管理
+:page-layout: classic-docs
+:page-liquid:
+:page-description: コンフィグファイルポリシーを使ってコンテキストの使用を管理する方法について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+NOTE: コンフィグファイルポリシーの管理機能は **Scale** プランでのみご利用いただけます。
+
+ここでは、コンフィグファイルポリシーを作成して組織でのコンテキストの使用を管理する方法について説明します。 コンフィグファイルポリシーの詳細については、「xref:config-policy-management-overview#[設定ファイルのポリシー管理機能の概要]」を参照してください。
+
+[#introduction]
+== はじめに
+
+コンフィグファイルポリシーでは、OPA (link:https://www.openpolicyagent.org/[Open Policy Agent]) を活用した意思決定エンジンによってポリシーを指定でき、またそれらのポリシーがパイプラインの設定で遵守されているかどうかの判定が返されます。 パイプラインの設定で組織のポリシーが遵守されていない場合、最も厳しいケースでは、遵守するまでそのパイプラインはトリガーできません。
+
+シークレット管理を適切に設計するには、セキュリティと利便性の繊細なバランスが肝心です。 コンフィグファイルポリシーを使用しさまざまなレベルでコンテキストを厳重に管理すれば、このバランスを取ることができます。
+
+このガイドでは、組織でのコンテキストの使用に関するポリシーを作成するうえで役立つ__ヘルパー__ (CircleCI 専用の Rego 関数) を紹介します。
+
+ここで扱うコンテキスト用ヘルパーは次のとおりです。
+
+* xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`]
+* xref:config-policy-reference#contexts-blocked-by-project-ids[`contexts_blocked_by_project_ids`]
+* xref:config-policy-reference#contexts-reserved-by-project-ids[`contexts_reserved_by_project_ids`]
+* xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`]
+
+このページの例では、以下の形式でプロジェクト ID、ブランチ名、コンテキスト名を指定します。
+
+* 文字列
+* 文字列のセット
+* 文字列の配列
+
+[#prerequisites]
+== 前提条件
+
+* 対応する VCS に xref:first-steps#[CircleCI アカウント]を連携する
+* CircleCI CLI をインストールまたは更新する。CLI でコンフィグファイルポリシーを利用する前に、トークンで認証を行ってください。 詳細については、「xref:local-cli#[CircleCI のローカル CLI のインストール]」をご覧ください。
+* 以下のように、組織でコンフィグファイルポリシーの評価を **enabled** に設定する。この設定により、パイプラインのトリガー時に、組織のポリシーに対するプロジェクト設定の評価が**行われます**。
++
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
++
+{% include snippets/find-organization-id.adoc %}
+* 作業を開始する前に「xref:create-and-manage-config-policies#create-a-policy[ポリシーを作成する]」と「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」に目を通しておくことをお勧めします。 ポリシーの保存と作成には、組織内のリポジトリを使用するのがベストプラクティスです。 この方法の詳細と、ポリシー作成用のパイプラインのセットアップ方法については、「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」をご覧ください。
+* このページの例を使用するには、シークレットの保存用にコンテキストを使用する必要があります。 詳細については「xref:contexts#[コンテキストの使用]」を参照してください。
+
+[#define-the-contexts-allowed-for-a-project]
+== プロジェクトでの使用を許可するコンテキストの定義
+
+プロジェクトごとに使用可能なコンテキストを制限できれば、何かと便利です。 たとえば、EKS に関連するデプロイキーが設定されたコンテキストは、それらのキーを使用して EKS へのデプロイを行うプロジェクトに制限するのがお勧めです。
+
+この制限を適用するポリシーを作成するには、xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] ヘルパーを使用します。 このヘルパー関数はプロジェクト ID とコンテキスト名を受け取り、指定したすべてのプロジェクトに対し、許可リストに**ない**コンテキストの使用を禁止します。
+
+[#create-your-policy-1]
+=== 1.  ポリシーを作成する
+
+. まだ作成していない場合は、まずポリシー保存用の空のディレクトリを作成します。 以下に例を示します。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 保存用のディレクトリ内に、新しいポリシーのファイルを作成します。 名前は `allow_contexts.rego` とします。
+. 作成した `allow_contexts.rego` ファイルを開き、以下のスニペットを貼り付けます。
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["contexts_allowed_by_project"]
+
+# Declare a rule
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+    ["<project-ID>"],
+    ["<context-1>","<context-2>"]
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_contexts_allowed_by_project_ids"]
+----
++
+NOTE: `contexts_allowed_by_project_ids` ヘルパーを使用するため、`config` キーワードを使用しています。
++
+`<project-ID>` と `<context-1>` は (複数のコンテキストを指定する場合は `<context-2>` も)、以降の手順で__実際の__プロジェクトおよびコンテキストと置き換えます。 置き換え後の `allow_contexts.rego` ポリシーをアップロードすると、指定したプロジェクトでは、許可リスト内のコンテキスト以外にはアクセスできなくなります。
+
+[#update-with-your-details-1]
+=== 2.  ポリシーに実際の情報を入力する
+
+. 制限するプロジェクトの ID で `<project-ID>` を置き換えます。
+** CircleCI Web アプリのサイドバーから **[Projects (プロジェクト)]** に移動し、プロジェクトの横の省略記号 (`...`) をクリックして、**[Project Settings (プロジェクト設定)]** をクリックしてプロジェクト ID を確認します。
+. 使用を許可するコンテキストの名前で `<context-1>` を置き換えます。 複数のコンテキストを配列形式で追加することもできます。今の時点では 1 つにしておいてもかまいません。
+** コンテキストの一覧を見るには、CircleCI Web アプリのサイドバーで **[Organization settings (組織設定)]** をクリックして、メニューの **[Contexts (コンテキスト)]** をクリックします。
+
+[#push-up-your-policy-bundle-1]
+=== 3.  ポリシーバンドルをプッシュする
+
+これで、新しいポリシーを組織にプッシュして有効化できるようになりました。 選択肢は以下の 2 つです。
+
+* ローカル環境で CLI を使用して手動でポリシーをプッシュする
+* コンフィグファイルポリシーのリポジトリに変更をプッシュする (「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」に従い VCS でポリシーを管理している場合)
+
+[tab.allow.manual]
+--
+CircleCI CLI を使用して、ポリシーバンドルを作成しアップロードします。
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+アップロードに成功すると、以下のようなメッセージが表示されます。
+
+[source,shell]
+----
+{
+  “Created”: [“contexts_allowed_by_sample_project”]
+}
+----
+--
+
+[tab.allow.push_to_vcs]
+--
+「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」にあるサンプル設定を参考にコンフィグファイルポリシーのリポジトリを設定した場合は、そのリポジトリの `main` ブランチに変更をプッシュし、CircleCI Web アプリでポリシーのパイプラインが実行されていることを確認してください。
+
+プッシュ先を development ブランチにすることもできます。この場合、変更をプッシュすると、新しいポリシーが CircleCI 組織にプッシュされるのではなく、ポリシーバンドルの差分が提供されます。 これはポリシーを作成する際に便利です。
+--
+
+NOTE: ポリシーのテストの作成方法については、「xref:test-config-policies#[設定ファイルのポリシーのテスト]」を参照してください。
+
+[#conclusion-1]
+=== まとめ
+
+これで `allow_contexts.rego` という新しいポリシーをプッシュできました。以降は、ポリシーで設定した許可リストに含まれないコンテキストに指定のプロジェクトでアクセスしようとすると、パイプラインのトリガーが失敗するようになります。 ダッシュボードでは次のように通知されます。
+
+image::config-policies/context-fail.png[Dashboard page]
+
+[#use-sets-and-variables]
+=== セットと変数を活用する
+
+先ほどの例では、プロジェクト ID とコンテキスト名をポリシーにハードコーディングしました。 しかし、この方法ではポリシーが読みづらくわかりにくくなるので、理想的ではありません。 推奨されるのは、別の `.rego` ファイルで定義したxref:config-policy-management-overview#use-sets-and-variables[セットと変数を使用する]方法です。 このためには、以下の手順を実行します。
+
+. コンテキストと ID 用に `project_ids.rego`、`project_groups.rego`、`context_groups.rego` という 3 つのファイルを作成して、次のようなファイル構造にします。
++
+[source,shell]
+----
+├── config-policies/
+│   ├── allow_contexts.rego
+│   ├── project_ids.rego
+│   ├── project_groups.rego
+│   ├── context_groups.rego
+----
+. これらの新しい `.rego` ファイルに以下のコードをそれぞれを入力します。`< >` で囲まれた ID とコンテキストの名前は、前セクションのように実際のデータで置き換えてください。
+** `project_id.rego`
++
+[source,rego]
+----
+# Single application project IDs. Can be automated.
+my_project_id := “<project-ID>”
+----
+** `project_groups.rego`
++
+[source,rego]
+----
+# sets can be used to group variables
+Front_end_applications := {my_project_id}
+----
+** `context_groups.rego`
++
+[source,rego]
+----
+# sets can be used to group variables
+Front_end_application_contexts := {"<context-1>","<context-2>"}
+----
+. 最後に、`allow_policy.rego` ポリシーを以下のように書き換えます。
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["contexts_allowed_by_sample_project"]
+
+# Declare a rule
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids{
+    Front_end_applications,
+    Front_end_application_contexts
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_contexts_allowed_by_project_ids"]
+----
+
+[#define-the-contexts-blocked-for-a-project]
+== プロジェクトでの使用を許可しないコンテキストの定義
+
+シークレット管理のセキュリティをより強固にする必要がある場合は、セキュリティやコンプライアンス上の理由でシークレットにアクセスしてはならないプロジェクトに対し、特定のコンテキストへのアクセスを禁止します。
+
+この制限を適用するポリシーを作成するには、`contexts_blocked_by_project_ids` ヘルパーを使用します。 このヘルパー関数はプロジェクト ID とコンテキスト名を受け取り、指定したすべてのプロジェクトに対し、禁止リストに含まれるコンテキストの使用を禁止します。
+
+[#create-your-policy-2]
+=== 1. ポリシーを作成する
+
+. まだ作成していない場合は、まずポリシー保存用の空のディレクトリを作成します。 以下に例を示します。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 保存用のディレクトリ内に、新しいポリシーのファイルを作成します。 名前は `block_contexts.rego` とします。
+. 作成した `block_contexts.rego` ファイルを開き、以下のスニペットを貼り付けます。
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["contexts_blocked_by_sample_project"]
+
+# Declare a rule
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids{
+    ["<project-ID>"],
+    ["<context-1>","<context-2>"]
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_contexts_blocked_by_project_ids"]
+----
++
+NOTE: `contexts_blocked_by_project_ids` ヘルパーを使用するため、`config` キーワードを使用しています。
++
+`<project-ID>` と `<context-1>` は (複数のコンテキストを指定する場合は `<context-2>` も)、以降の手順で__実際の__プロジェクトおよびコンテキストと置き換えます。 置き換え後の `block_contexts.rego` ポリシーをアップロードすると、指定したプロジェクトでは、禁止リスト内のコンテキストにアクセスできなくなります。
+
+[#update-with-your-details-2]
+=== 2. ポリシーに実際の情報を入力する
+
+. 制限するプロジェクトの ID で `<project-ID>` を置き換えます。
+** CircleCI Web アプリのサイドバーから **[Projects (プロジェクト)]** に移動し、プロジェクトの横の省略記号 (`...`) をクリックします。 **[Project Settings (プロジェクト設定)]** をクリックして、プロジェクト ID を確認します。
+. 使用を禁止するコンテキストの名前で `<context-1>` を置き換えます。 複数のコンテキストを配列形式で追加することもできます。今の時点では 1 つにしておいてもかまいません。
+** コンテキストの一覧を見るには、CircleCI Web アプリのサイドバーで **[Organization settings (組織設定)]** をクリックして、メニューの **[Contexts (コンテキスト)]** をクリックします。
+
+[#push-up-your-policy-bundle-2]
+=== 3. ポリシーバンドルをプッシュする
+
+これで、新しいポリシーを組織にプッシュして有効化できるようになりました。 選択肢は以下の 2 つです。
+
+* ローカル環境で CLI を使用して手動でポリシーをプッシュする
+* コンフィグファイルポリシーのリポジトリに変更をプッシュする (「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」に従い VCS でポリシーを管理している場合)
+
+[tab.block.manual]
+--
+CircleCI CLI を使用して、ポリシーバンドルを作成しアップロードします。
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+アップロードに成功すると、以下のようなメッセージが表示されます。
+
+[source,shell]
+----
+{
+  “Created”: [“contexts_blocked_by_sample_project”]
+}
+----
+--
+
+[tab.block.push_to_vcs]
+--
+「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」にあるサンプル設定を参考にコンフィグファイルポリシーのリポジトリを設定した場合は、そのリポジトリの `main` ブランチに変更をプッシュし、CircleCI Web アプリでポリシーのパイプラインが実行されていることを確認してください。
+
+プッシュ先を development ブランチにすることもできます。この場合、変更をプッシュすると、新しいポリシーが CircleCI 組織にプッシュされるのではなく、ポリシーバンドルの差分が提供されます。 これはポリシーを作成する際に便利です。
+--
+
+NOTE: ポリシーのテストの作成方法については、「xref:test-config-policies#[設定ファイルのポリシーのテスト]」を参照してください。
+
+[#conclusion-2]
+=== まとめ
+
+これで `block_contexts.rego` という新しいポリシーをプッシュできました。以降は、ポリシーで設定した禁止リストに含まれるコンテキストに指定のプロジェクトでアクセスしようとすると、パイプラインのトリガーが失敗するようになります。 ダッシュボードでは次のように通知されます。
+
+image::config-policies/context-fail-2.png[Dashboard page showing fail]
+
+[#define-the-contexts-reserved-by-a-project]
+== プロジェクト専用のコンテキストの定義
+
+コンテキストを特定のプロジェクト専用として予約することで、許可リストにないプロジェクトに対してそれらのコンテキストの使用を禁止できます。 たとえば、OIDC アクセス関連のコンテキストの使用を、OIDC アクセスを必要とするアプリケーション (プロジェクト) のみに制限することができます。 OIDC アクセスが不要なアプリケーションはこれらのコンテキストにアクセスできず、 ハードフェイルとなりパイプラインがトリガーに失敗します。
+
+この制限を適用するポリシーを作成するには、`contexts_reserved_by_project_ids` ヘルパーを使用します。 このヘルパー関数はプロジェクト ID とコンテキスト名を受け取ります。 許可リストにないすべてのプロジェクトに対し、予約されたコンテキストの使用を禁止します。
+
+[#create-your-policy-3]
+=== 1. ポリシーを作成する
+
+. まだ作成していない場合は、まずポリシー保存用の空のディレクトリを作成します。 以下に例を示します。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 保存用のディレクトリ内に、新しいポリシーのファイルを作成します。 名前は `reserve_contexts.rego` とします。
+. 作成した `reserve_contexts.rego` ファイルを開き、以下のスニペットを貼り付けます。
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["reserved_contexts"]
+
+# Declare a rule
+rule_reserve_contexts = config.contexts_reserved_by_project_ids{
+    ["<project-ID-1>","<project-ID-1>"],
+    ["<context-1>","<context-2>"]
+}
+
+# Enable the rule and choose the hard_fail enforcement level
+enable_hard["rule_reserve_contexts"]
+----
++
+NOTE: `contexts_reserved_by_project_ids` ヘルパーを使用するため、`config` キーワードを使用しています。
++
+`<project-ID-1>` と `<context-1>` は (複数のコンテキストを指定する場合は `<project-ID-2>` と `<context-2>` も)、以降の手順で__実際の__プロジェクトおよびコンテキストと置き換えます。 置き換え後の `reserve_contexts.rego` ポリシーをアップロードすると、指定したコンテキストを、許可リストに追加したプロジェクト以外で使用できなくなります。
+
+[#update-with-your-details-3]
+=== 2. ポリシーに実際の情報を入力する
+
+. 許可リストに追加する 1 つ目のプロジェクトの ID で `<project-ID-1>` を置き換えます。 複数のプロジェクト ID を配列として追加することもできます。今の時点では 1 つにしておいてもかまいません。
+** CircleCI Web アプリのサイドバーから **[Projects (プロジェクト)]** に移動し、プロジェクトの横の省略記号 (`...`) をクリックして、**[Project Settings (プロジェクト設定)]** をクリックしてプロジェクト ID を確認します。
+. 使用を制限する 1 つ目のコンテキストの名前で `<context-1>` を置き換えます。 複数のコンテキストを配列形式で追加することもできます。今の時点では 1 つにしておいてもかまいません。
+** コンテキストの一覧を見るには、CircleCI Web アプリのサイドバーで **[Organization settings (組織設定)]** をクリックして、メニューの **[Contexts (コンテキスト)]** をクリックします。
+
+[#push-up-your-policy-bundle-3]
+=== 3. ポリシーバンドルをプッシュする
+
+これで、新しいポリシーを組織にプッシュして有効化できるようになりました。 選択肢は以下の 2 つです。
+
+* ローカル環境で CLI を使用して手動でポリシーをプッシュする
+* コンフィグファイルポリシーのリポジトリに変更をプッシュする (「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」に従い VCS でポリシーを管理している場合)
+
+[tab.reserve.manual]
+--
+CircleCI CLI を使用して、ポリシーバンドルを作成しアップロードします。
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+アップロードに成功すると、以下のようなメッセージが表示されます。
+
+[source,shell]
+----
+{
+  “Created”: [“reserved_contexts”]
+}
+----
+--
+
+[tab.reserve.push_to_vcs]
+--
+「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」にあるサンプル設定を参考にコンフィグファイルポリシーのリポジトリを設定した場合は、そのリポジトリの `main` ブランチに変更をプッシュし、CircleCI Web アプリでポリシーのパイプラインが実行されていることを確認してください。
+
+プッシュ先を development ブランチにすることもできます。この場合、変更をプッシュすると、新しいポリシーが CircleCI 組織にプッシュされるのではなく、ポリシーバンドルの差分が提供されます。 これはポリシーを作成する際に便利です。
+--
+
+NOTE: ポリシーのテストの作成方法については、「xref:test-config-policies#[設定ファイルのポリシーのテスト]」を参照してください。
+
+[#conclusion-3]
+=== まとめ
+
+これで `reserve_contexts.rego` という新しいポリシーをプッシュできました。以降は、ポリシーの許可リストに含まれないプロジェクトが設定済みの予約リストに含まれるコンテキストにアクセスしようとすると、パイプラインのトリガーが失敗するようになります。 ダッシュボードでは次のように通知されます。
+
+[#define-the-contexts-reserved-by-branch]
+== ブランチ専用のコンテキストの定義
+
+ビルド対象のブランチ別に、使用可能なコンテキストを (したがってシークレットも) 制限することができます。 ブランチ基準で制限を行うことで、1 つのリポジトリでアプリケーション環境を管理しながら、ブランチごとにシークレットの使用を制御できます。 たとえば、本番環境のシークレットと開発環境のシークレットを分割すれば、 開発ブランチ上のビルドは本番環境のシークレットにアクセスできなくなります。
+
+このユースケースのポリシーを定義するには、xref:config-policy-reference#contexts-reserved-by-branches[`contexts_reserved_by_branches`] ヘルパーを使用します。 このヘルパー関数はブランチ名とコンテキスト名を受け取り、 指定のブランチで実行されるパイプラインのみが許可リスト内のコンテキストにアクセスできるようにします。
+
+[#create-your-policy-4]
+=== 1. ポリシーを作成する
+
+. まだ作成していない場合は、まずポリシー保存用の空のディレクトリを作成します。 以下に例を示します。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 保存用のディレクトリ内に、新しいポリシーのファイルを作成します。 名前は `context_protection.rego` とします。
+. 作成した `context_protection.rego` ファイルを開き、以下のスニペットを貼り付けます。
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+# import CircleCI specific helper functions
+import data.circleci.config
+
+# Declare a policy name
+policy_name["prod_context_protection"]
+
+# Declare a rule
+use_prod_context_on_main = config.contexts_reserved_by_branches{["main"],
+    ["<context-1>","<context-2>"]
+}
+
+# This rule will apply to all projects subscribed in project_groups.rego under policy_restrict_context_access
+enable_rule["use_prod_context_on_main"]{
+    policy_restrict_context_access[data.meta.project_id]
+}
+hard_fail["use_prod_context_on_main"]
+----
++
+NOTE: `contexts_reserved_by_branches` ヘルパーを使用するため、`config` キーワードを使用しています。
+. `project_groups.rego` という名前で 2 つ目の rego ファイルを作成し、このルールを適用するプロジェクトを指定します。 任意のプロジェクト ID で `<project-ID>` を置き換えます。
++
+`project_groups.rego`
++
+[source,rego]
+----
+# sets can be used to group variables
+policy_restrict_context_access := <project-ID>
+----
+
+`<context-1>` は (複数指定する場合は `<context-2>` も)、以降の手順で__実際の__コンテキストの名前と置き換えます。 置き換え後の `context_protection.rego` ポリシーをアップロードすると、`project_groups.rego` で指定したプロジェクトは、`main` ブランチのビルド以外では指定のコンテキストを使用できなくなります。
+
+[#update-with-your-details-4]
+=== 2. ポリシーに実際の情報を入力する
+
+. 使用を許可するコンテキストの名前で `<context-1>` を置き換えます。 複数のコンテキストを配列形式で追加することもできます。今の時点では 1 つにしておいてもかまいません。
+** コンテキストの一覧を見るには、CircleCI Web アプリのサイドバーで **[Organization settings (組織設定)]** をクリックして、メニューの **[Contexts (コンテキスト)]** をクリックします。
+
+[#push-up-your-policy-bundle-4]
+=== 3. ポリシーバンドルをプッシュする
+
+これで、新しいポリシーを組織にプッシュして有効化できるようになりました。 選択肢は以下の 2 つです。
+
+* ローカル環境で CLI を使用して手動でポリシーをプッシュする
+* コンフィグファイルポリシーのリポジトリに変更をプッシュする (「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」に従い VCS でポリシーを管理している場合)
+
+[tab.branch.manual]
+--
+CircleCI CLI を使用して、ポリシーバンドルを作成しアップロードします。
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+アップロードに成功すると、以下のようなメッセージが表示されます。
+
+[source,shell]
+----
+{
+  “Created”: [“prod_context_protection”]
+}
+----
+--
+
+[tab.branch.push_to_vcs]
+--
+「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」にあるサンプル設定を参考にコンフィグファイルポリシーのリポジトリを設定した場合は、そのリポジトリの `main` ブランチに変更をプッシュし、CircleCI Web アプリでポリシーのパイプラインが実行されていることを確認してください。
+
+プッシュ先を development ブランチにすることもできます。この場合、変更をプッシュすると、新しいポリシーが CircleCI 組織にプッシュされるのではなく、ポリシーバンドルの差分が提供されます。 これはポリシーを作成する際に便利です。
+--
+
+NOTE: ポリシーのテストの作成方法については、「xref:test-config-policies#[設定ファイルのポリシーのテスト]」を参照してください。
+
+[#conclusion-4]
+=== まとめ
+
+これで、`context_protection.rego` という新しいポリシーをプッシュできました。以降は、`main` 以外のブランチで本番環境のコンテキストが使用されている場合、そのブランチでのパイプラインのトリガーが失敗するようになります。 このことはダッシュボードでも通知されます。
+
+[#next-steps]
+== 次のステップ
+
+* xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]
+* xref:test-config-policies#[設定ファイルのポリシーのテスト]
+* xref:config-policy-reference#[コンフィグファイルポリシーに関するリファレンス]

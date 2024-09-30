@@ -1,0 +1,209 @@
+---
+
+description: CircleCIプロジェクト構成の設定ファイルポリシーの書き方、管理方法についてご紹介します。
+contentTags:
+  platform:
+  - クラウド
+---
+= 設定ファイルのポリシーの作成と管理
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。
+
+このページでは、設定ファイルのポリシーに関するテストを作成、セットアップする方法をガイド形式で説明します。
+
+[#config-policy-management-enablement]
+== 組織のポリシー評価を有効・無効にする
+
+組織のパイプライン設定にポリシーの評価を適用するかどうかは、`--enabled` フラグを使って制御できます。
+
+* ポリシーの評価を**有効化**するには、以下のコマンドを実行します。 これにより、`--enabled` が `true` になります。パイプラインのトリガー時に、組織のポリシーに対してプロジェクトの設定ファイルが評価**されます**。
++
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
+* ポリシーの評価を**無効化**するには、以下のコマンドを実行します。 これにより、`--enabled` が `false` になります。パイプラインのトリガー時には、組織のポリシーに対するプロジェクトの設定ファイルの評価は**行われません**。
++
+[source,shell]
+----
+circleci policy settings --enabled=false --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
+
+{% include snippets/find-organization-id.adoc %}
+
+[#create-a-policy]
+== 組織のポリシー評価を有効・無効にする
+
+CAUTION: 設定ファイルのポリシー管理で CLI を使用する前に、ご使用の CLI がトークンで認証されており、更新されていることをご確認ください。 詳細については、link:/docs/local-cli[ローカルの CLI のインストール]のページをご覧ください。
+
+以下の手順に従って、CircleCI 設定ファイルの `version` が `2.1` 以上であることを確認するポリシーを作成します。
+
+. 組織の設定ファイルのポリシー管理機能を有効にします。
++
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
+. ポリシーの保存用に空のディレクトリを作成します。 たとえば以下のようになります。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 新しいディレクトリ内に、新しいポリシー用の Rego ファイルを作成します。 今回は `version.rego` という名前にします。
+. 以下の内容を `version.rego` に追加します。
++
+[source,rego]
+----
+# All policies start with the org package definition
+package org
+
+policy_name["example"]
+
+# signal to circleci that check_version is enabled and must be included when making a decision
+# Also, signal to circleci that check_version is a hard_failure condition and that builds should be
+# stopped if this rule is not satisfied.
+enable_hard["check_version"]
+
+# define check version
+check_version = reason {
+    not input.version # check the case where version is not in the input
+    reason := "version must be defined"
+} {
+    not is_number(input.version) # check that version is number
+    reason := "version must be a number"
+} {
+    not input.version >= 2.1 # check that version is at least 2.1
+    reason := sprintf("version must be at least 2.1 but got %v", [input.version])
+}
+----
+. 組織にポリシーをアップロードします。
++
+[source,shell]
+----
+circleci policy push ./config-policies --owner-id <your-organization-ID>
+----
++
+これで、組織内でパイプラインがトリガーされる際、このポリシーに対してプロジェクトの `.circleci/config.yml` が検証されるようになりました。
+
+[#update-a-policy]
+=== ポリシーの更新
+
+既存のポリシーに変更を加える方法を説明するために、上記のポリシーの作成中に間違ってしまったとします。 たとえば、組織の一部のプロジェクト設定ファイルで CircieCI のバージョン `2.0` が使用されていたので、これをポリシーに反映してみましょう。
+
+. `version.rego` ファイルのルール定義のうち、最後のチェックを以下のように変更します。
++
+[source,rego]
+----
+{
+    not input.version >= 2.0 # check that version is at least 2.0
+    reason := sprintf("version must be at least 2.0 but got %v", [input.version])
+}
+----
+. この更新されたポリシーファイルを含むポリシーディレクトリを CLI を使ってプッシュします (差分を検証し、プロンプトが表示されたら yes を選択します)。
++
+[source,shell]
+----
+circleci policy push ./config-policies --owner-id <your-organization-ID>
+----
+
+[#manage-policies-with-your-vcs]
+== ポリシーを作成する
+
+CircleCI のポリシーは、ポリシーのディレクトリを CLI を介して CircleCI にプッシュして管理します。 推奨されるポリシーディレクトリの管理方法は、組織の VCS のレポジトリにポリシーディレクトリを保存することです。 これは、CircleCI の内部でポリシーを管理する方法です。 ポリシーバンドルのプッシュは、CircleCI パイプラインをトリガーすることで実行できます。
+
+以下の手順に従って、CircleCI 設定ファイルの `version` が `2.1` 以上であることを確認するポリシーを作成します。 最大限のセキュリティを確保するには、トークンを環境変数としてコンテキスト内に保存し、そのコンテキストをポリシーの管理を担当するグループに制限する必要があります 詳細については、link:/docs/contexts[コンテキストの使用]のページを参照してください。
+
+[set-up-a-config-policy-management-ci-pipeline]
+=== 設定ファイルポリシーCI/CDパイプラインの設定
+
+. VCS にポリシーを管理するためのレポジトリをセットアップします。
+. 新しいリポジトリに Rego ポリシーファイル用のディレクトリを作成します。
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. 新しいポリシーのリポジトリ用の `.circleci/config.yml` ファイルを作成し、以下の設定サンプルをコピー & ペーストします。 このサンプルでは、`main` ブランチのコミット時に CircleCI にポリシーをプッシュし、他のすべてのブランチへのコミット時のポリシーバンドルにおける差分を表示します。
++
+[NOTE]
+====
+この例では、各ジョブのコンテキストを <my-context> と表記しています。 このコンテキスト名は任意ですが、該当するコンテキストがアクティブであり、以下の環境変数を宣言している必要があります。
+
+* `CIRCLECI_CLI_TOKEN`: CLI 認証用の パーソナル API トークンの値を設定
+* `ORG_ID`: 組織 ID の値を設定
+====
++
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  circleci-cli: circleci/circleci-cli@0.1.9 # Use orb to make the `circleci-cli/default` executor available for running jobs
+
+workflows:
+  main-workflow:
+    jobs:
+      - diff-policy-bundle:
+          context: <my-context>
+          filters:
+            branches:
+              ignore: main # on all branches other than main
+      - push-policy-bundle:
+          context: <my-context>
+          filters:
+            branches:
+              only: main # only on the main branch
+
+jobs:
+  diff-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Diff policy bundle
+          command: circleci policy diff ./config --owner-id $ORG_ID # show a diff of the policy bundle
+
+  push-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Push policy bundle
+          command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
+----

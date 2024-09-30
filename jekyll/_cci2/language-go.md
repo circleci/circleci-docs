@@ -1,306 +1,206 @@
 ---
 layout: classic-docs
-title: "Language Guide: Go"
-short-title: "Go"
-description: "Building and Testing with Go (Golang) on CircleCI 2.0"
-categories: [language-guides]
-order: 3
-version:
-- Cloud
-- Server v2.x
+title: "Configure a Go application on CircleCI"
+description: "Set up CI/CD for a Go project on CircleCI using orbs"
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
-CircleCI supports building Go projects using any version of Go that can be
-installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+{% include snippets/language-guided-tour-cards.md lang="go" demo_url_slug="go" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
 
-* TOC
-{:toc}
+## Overview
+{: #overview-new }
 
-## Quickstart: Demo Go reference project
-{: #quickstart-demo-go-reference-project }
+This is a quickstart guide for integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
 
-We maintain a reference Go project to show how to build on CircleCI 2.0:
+## Prerequisites
+{: #prerequisites}
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a>
-- [Demo Go Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
+* [A CircleCI account]({{site.baseurl}}/first-steps/)
+* A Go project located in a supported VCS
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Go projects.
+If you do not have a Go project, but would like to follow this guide, you can use our sample project which is [hosted on GitHub](https://github.com/CircleCI-Public/sample-go-cfd)
+and is [building on CircleCI]({{site.cci_public_org_url}}/sample-go-cfd){:rel="nofollow"}. Consider [forking the repository]({{site.gh_help_articles_url}}/fork-a-repo/)
+and rewriting [the configuration file]({{site.gh_public_org_url}}/sample-go-cfd/blob/main/.circleci/config.yml)
+as you follow this guide.
 
+## Configuration walkthrough
+{: #configuration-walkthrough-new }
 
-## Sample configuration
-{: #sample-configuration }
+Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/). Follow the steps below to create a working `config.yml` file.
 
-{% raw %}
+### 1. Specify a version
+{: #specify-a-version-new }
 
+Every CircleCI config.yml starts with the version key. This key is used to issue warnings about breaking changes.
 ```yaml
-version: 2 # use CircleCI 2.0
-jobs: # basic units of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
-    docker: # run the steps with Docker
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.16
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: circleci/postgres:9.6-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # environment variables for primary container
-          POSTGRES_USER: circleci-demo-go
-          POSTGRES_DB: circle_test
-
-    parallelism: 2
-
-    environment: # environment variables for the build itself
-      TEST_RESULTS: /tmp/test-results # path to where test results will be saved
-
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
-      - run: mkdir -p $TEST_RESULTS # create the test results directory
-
-      - restore_cache: # restores saved cache if no changes are detected since last run
-          keys:
-            - go-mod-v4-{{ checksum "go.sum" }}
-
-      #  Wait for Postgres to be ready before proceeding
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-
-          # store the results of our tests in the $TEST_RESULTS directory
-          command: |
-            PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
-            gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
-
-      - run: make # pull and build dependencies for the project
-
-      - save_cache:
-          key: go-mod-v4-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
-
-      - run:
-          name: Start service
-          environment:
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: ./workdir/contacts
-          background: true # keep service running and proceed to next step
-
-      - run:
-          name: Validate service is working
-          command: |
-            sleep 5
-            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
-
-      - store_artifacts: # upload test summary for display in Artifacts
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results: # upload test results for display in Test Summary
-          path: /tmp/test-results
-workflows:
-  version: 2
-  build-workflow:
-    jobs:
-      - build
+version: 2.1
 ```
 
-{% endraw %}
+`2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
 
-### Pre-built CircleCI Docker images
-{: #pre-built-circleci-docker-images }
-{:.no_toc}
+### 2. Use the Go orb
+{: #use-the-go-orb }
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
+The Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go) contains a set of prepackaged CircleCI configurations you can use to perform common CircleCI tasks for the Go programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about [orbs]({{site.baseurl}}/orb-intro/).
 
-### Build the demo project yourself
-{: #build-the-demo-project-yourself }
-{:.no_toc}
-
-A good way to start using CircleCI is to build a project yourself. Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
-
-1. Fork the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a> to your own account
-2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
-3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
-
-If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
-
----
-
-## Config walkthrough
-{: #config-walkthrough }
-
-This section explains the commands in `.circleci/config.yml`
-
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
-This key is used to issue warnings about breaking changes.
-
+To add the orb to your config, insert:
 ```yaml
-version: 2
+orbs:
+  go: circleci/go@1.7.3
 ```
 
-Next, we have a `jobs` key. If we do not use workflows and have only one job, it must be named `build`. Below, our job specifies to use the `docker` executor as well as the CircleCI created docker-image for golang 1.12. Next, we use a *secondary image* so that our job can also make use of Postgres. Finally, we use the `environment` key to specify environment variables for the Postgres container.
+**Note**: When using an orb, it is a good idea to check the [Orb Registry](https://circleci.com/developer/orbs) to ensure you are using the most recent version, or the version that fits best with your specific project.
 
+### 3. Create jobs
+{: #create-jobs }
 
-```yaml
-jobs: # basic units of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
-    docker: # run the steps with Docker
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.16
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: circleci/postgres:9.6-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment: # environment variables for primary container
-          POSTGRES_USER: circleci-demo-go
-          POSTGRES_DB: circle_test
-```
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or virtual machine. Learn more about jobs on the [Jobs and Steps]({{site.baseurl}}/jobs-steps/) page.
 
-After setting up Docker we will set an environment variable to store the path to
-our test results. Note, this environment variable is set for the entirety of the _job_ whereas the environment variables set for `POSTGRES_USER` and `POSTGRES_DB` are specifically for the Postgres container.
+A common ask from developers who are getting started with CircleCI is to perform three basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Go orb, we can use commands that are built into the orb to keep our config simple and succinct.
+
+#### a. Build and test the app
+{: #build-and-test-the-app }
+
+For this step, we use commands that come preconfigured in the Go [orb]({{site.devhub_base_url}}/orbs/orb/circleci/go). Go modules are downloaded and cached and tests are run.
 
 ```yaml
-    environment:
-      TEST_RESULTS: /tmp/test-results
-```
-
-Now we need to add several `steps` within the `build` job. Steps make up the bulk of a job.
-
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
-to check out source code.
-
-```yaml
+jobs:
+  build_and_test: # this can be any name you choose
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.19.2' # Specify a version tag
     steps:
-      - checkout
+      - checkout # checkout source code
+      - go/load-cache # Load cached Go modules.
+      - go/mod-download # Run 'go mod download'.
+      - go/save-cache # Save Go modules to cache.
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
 ```
 
-Next we create a directory for collecting test results
+#### b. Deploy the app
+{: #deploy-the-app }
+
+In this quickstart guide, we will deploy to [Heroku](https://www.heroku.com/). We can do this using the official Heroku orb by adding a new line into our orb section. The Heroku orb contains a set of prepackaged CircleCI configurations you can use to deploy applications to Heroku. Learn more about the [Heroku orb]({{site.devhub_base_url}}/orbs/orb/circleci/heroku).
 
 ```yaml
-      - run: mkdir -p $TEST_RESULTS
+orbs:
+  go: circleci/go@1.7.3
+  heroku: circleci/heroku@1.2.6
 ```
 
-Then we pull down the cache (if present). If this is your first run, this won't do anything.
-
-{% raw %}
-```yaml
-      - restore_cache: # restores saved cache if no changes are detected since last run
-          keys:
-            - go-mod-v4-{{ checksum "go.sum" }}
-```
-{% endraw %}
-
-And install the Go implementation of the JUnit reporting tool and other dependencies for our application. These are good candidates to be pre-installed in primary container.
-
-Both containers (primary and postgres) start simultaneously. Postgres, however, may require some time to get ready. If our tests start before Postgres is available, the job will fail. It is good practice to wait until dependent services are ready; in this example Postgres is the only dependent service.
+We then need to add a job to our list to take care of the deploy step:
 
 ```yaml
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+jobs:
+  # ...previous job(s)...
+  deploy: # this can be any name you choose
+    executor: heroku/default # use the default executor defined within the orb
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-Now we run our tests. To do that, we need to set an environment variable for our database's URL and path to the DB migrations files. This step has some additional commands, we'll explain them below.
+Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project).
+{: class="alert alert-info" }
 
-{% raw %}
-```yaml
-      - run:
-          name: Run unit tests
-          environment:
-            CONTACTS_DB_URL: "postgres://rot@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: |
-            PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
-            gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
-```
-{% endraw %}
+### 4. Create a workflow
+{: #create-a-workflow }
 
-The command for running unit tests is more complicated than some of our other
-steps. Here we are using [test splitting]({{ site.baseurl
-}}/2.0/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. Test splitting can help speed up your pipeline if your project has a large test suite.
-
-Next we run our actual build command using `make` - the Go sample project uses make to run build commands. If this build happens to pull in new dependencies, we will cache them in the `save_cache` step.
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about [workflow configuration]({{ site.baseurl }}/configuration-reference/#workflows).
 
 ```yaml
-      - run: make
-
-      - save_cache:
-          key: v1-pkg-cache
-          paths:
-            - ~/.cache/go-build
+workflows:
+  build_test_deploy: # this can be any name you choose
 ```
 
+### 5. Add jobs to the workflow
+{: #add-jobs-to-the-workflow }
 
-Now we will start the Postgres dependent service, using `curl` to ping it to validate that the service is up and running.
-
-{% raw %}
-```yaml
-      - run:
-          name: Start service
-          environment:
-            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
-          command: ./workdir/contacts
-          background: true # keep service running and proceed to next step
-
-      - run:
-          name: Validate service is working
-          command: |
-            sleep 5
-            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
-```
-{% endraw %}
-
-If all went well, the service ran and successfully responded to the post request at `localhost:8080`.
-
-Finally, let's specify a path to store the results of the tests. The
-`store_test_results` step allows you to leverage insights to view how your test
-results are doing over time, while using the `store_artifacts` step allows you
-to upload any type of file; in this case, also the test logs if one would like
-to inspect them manually.
+Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 ```yaml
-      - store_artifacts: # upload test summary for display in Artifacts
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results: # upload test results for display in Test Summary
-          path: /tmp/test-results
+workflows:
+  build_test_deploy:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
 ```
 
+### 6. Conclusion
+{: #conclusion }
 
-Finally, we specify the workflow block. This is not mandatory (as we only have one job to sequence) but it is recommended.
+You just set up a Go app to build on CircleCI, and deploy to Heroku. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
+
+**Deploy options?** For alternative deployment targets, search the [orb registry](https://circleci.com/developer/orbs), where you will find integrations such as [Kubernetes](https://circleci.com/developer/orbs/orb/circleci/kubernetes), [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs), [GCP GKE](https://circleci.com/developer/orbs/orb/circleci/gcp-gke), and more.
+{: class="alert alert-info"}
+
+## Full configuration file
+{: #full-configuration-file-new }
 
 ```yaml
+version: 2.1
+orbs:
+  go: circleci/go@1.7.3
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  build_and_test: # this can be any name you choose
+    executor:
+      name: go/default # Use the default executor from the orb
+      tag: '1.19.2' # Specify a version tag
+    steps:
+      - checkout # checkout source code
+      - go/load-cache # Load cached Go modules.
+      - go/mod-download # Run 'go mod download'.
+      - go/save-cache # Save Go modules to cache.
+      - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
+          covermode: atomic
+          failfast: true
+          race: true
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
+
+  deploy: # this can be any name you choose
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 
 workflows:
-  version: 2
-  build-workflow: # the name of our workflow
-    jobs: # the jobs that we are sequencing.
-      - build
+  test_my_app:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
 ```
-
-Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
-{: #see-also }
+{: #see-also-new }
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-
-How to use [workflows]({{ site.baseurl }}/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
-
-Refer to the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for more caching strategies.
+- [Test splitting and rerun failed tests for Go](/docs/rerun-failed-tests/#configure-a-job-running-go-tests)
+- [Continuous integration for Go applications](https://circleci.com/blog/continuous-integration-for-go-applications/)
+- Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)

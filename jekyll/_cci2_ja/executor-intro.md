@@ -1,93 +1,118 @@
 ---
 layout: classic-docs
-title: "Executor とイメージ"
-short-title: "Executor とイメージ"
-description: "CircleCI 2.0 の Executor とイメージ"
-categories:
-  - configuration
-order: 1
-version:
-  - Cloud
-  - Server v2.x
-  - Server v3.x
+title: "実行環境の概要"
+description: "CircleCI の全実行環境の概要"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-CircleCI offers several build environments. We call these **executors**. **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、macOS、Windows、GPU、Arm) を提供しています。 プロジェクトの設定ファイルで定義されたジョブはそれぞれ、Docker コンテナまたは仮想マシンのいずれかの隔離された実行環境で実行されます。
 
-![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
+プロジェクトの設定ファイル内の各ジョブに **Executor** を割り当て、実行環境を指定します。 **Executor** により、基盤テクノロジー、つまりジョブの実行環境とプロジェクトに最適なイメージが定義されます。
 
-## Docker
+[.circleci/config.yml](/docs/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば、下記のようにします。
+
+- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある [ビルド済みの CircleCI Docker イメージ](/docs/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
+- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト](/docs/configuration-reference/#available-machine-images)に記載されている Ubuntu バージョンを使用します。
+- macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。<!---!\[Executor Overview\]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->## Docker
 {: #docker }
 
-```
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
+{: class="alert alert-warning"}
+
+Docker 実行環境を使用するには、`docker` Executor を使ってイメージを指定します。 CircleCI がビルドした CircleCI イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=docker) を参照してください。
+
+```yml
 jobs:
-  build: # ジョブの名前
-    docker: # Executor タイプ
-      - image: buildpack-deps:trusty # プライマリ コンテナで Ubuntu Trusty を実行します
+  build: # name of your job
+    docker: # executor type
+      - image: cimg/base:stable # primary container will run the latest, production-ready base image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      steps:
-        # プライマリ コンテナで実行するコマンド
+    steps:
+        # Commands run in the primary container
 ```
 
-`docker` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker)をご覧ください。
+Docker 実行環境に関する詳細は、[Docker の使用](/docs/using-docker/)のページを参照してください。
 
-## Machine
-{: #machine }
+## Linux VM
+{: #linux-vm }
+
+Linux VM 実行環境を使用するには、`machine` Executor を使って Linux イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.machine.Cloud}
-```
-steps:
-        # Linux 仮想マシン環境で実行するコマンド
+```yml
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+
+    steps:
+        # Commands run in a Linux virtual machine environment
 ```
 
-{:.tab.machine.Server}
-```
+{:.tab.machine.Server_3}
+```yml
 jobs:
-  build:
-    machine:
-      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+  build: # name of your job
+    machine: true # executor type
     steps:
       # Commands run in a Linux virtual machine environment
 ```
 
-`machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
+{:.tab.machine.Server_2}
+```yml
+jobs:
+  build: # name of your job
+    machine: true # executor type
+
+    steps:
+      # Commands run in a Linux virtual machine environment
+```
+
+Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用](/docs/using-linuxvm/)のページを参照してください。
 
 ## macOS
 {: #macos }
 
-_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) をご覧ください。
 
-```
+サーバーインスタンスで macOS ビルドを実行するには、[セルフホストランナー](/docs/runner-overview/)を使う必要があります。
+{: class="alert alert-info"}
+
+```yml
 jobs:
-  build: # ジョブの名前
-    macos: # Executor タイプ
-      xcode: 11.3.0
+  build: # name of your job
+    macos: # executor type
+      xcode: 14.2.0
 
     steps:
-      # Xcode 11.3 がインストールされた
-      # macOS 仮想マシン環境で実行するコマンド
+      # Commands run in a macOS virtual machine environment
+      # with Xcode 14.2.0 installed
 ```
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos)をご覧ください。
+macOS 実行環境に関する詳細は、[macOS の使用](/docs/using-macos/)のページを参照してください。
 
 ## Windows
 {: #windows }
 
-Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
+Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
 
-* クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
-* オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。 これは、*CircleCI Server v2.18.3* からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
-
-{:.tab.windowsblock.Cloud}
-```
-version: 2.1 # Use version 2.1 to enable orb usage.
+{:.tab.windowsblock.Cloud_with_orb}
+```yml
+version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # The Windows orb gives you everything you need to start using the Windows executor
 
 jobs:
   build: # name of your job
-    executor: win/default # executor type
+    executor: win/server-2022 # use one of the executors defined within the windows orb
 
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -95,30 +120,182 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
-```
-jobs:
-  build: # ジョブの名前
-    machine:
-      image: windows-default # Windows マシン イメージ
-    resource_class: windows.medium
-    steps:
-      # Windows 仮想マシン環境で実行するコマンド
+{:.tab.windowsblock.Cloud_with_machine}
+```yml
+version: 2.1
 
+jobs:
+  build: # name of your job
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
+    steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#using-the-windows-executor)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+{:.tab.windowsblock.Server_3}
+```yml
+version: 2.1
 
-## 関連項目
-{: #see-also }
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: windows-default
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
 
-* [Choosing an executor type]({{ site.baseurl }}/ja/2.0/executor-types/)
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/ja/2.0/circleci-images/)
-* [Building on MacOS]({{site.baseurl}}/ja/2.0/hello-world-macos)
-* [Building on Windows]({{site.baseurl}}/ja/2.0/hello-world-windows)
+{:.tab.windowsblock.Server_2}
+```yaml
+version: 2
 
-## Learn More
-{: #learn-more }
-Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: windows-default
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+Windows 実行環境に関する詳細は、 [Windows 実行環境の使用](/docs/using-windows/)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
+
+## GPU
+{: #gpu }
+
+GPU 実行環境を使用するには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+
+サーバーインスタンスで GPU ビルドを実行することはできません。
+{: class="alert alert-info"}
+
+{:.tab.gpublock.Linux}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    resource_class: gpu.nvidia.small
+    machine:
+      image: ubuntu-2004-cuda-11.4:202110-01
+    resource_class: gpu.nvidia.small
+    steps:
+      - run: nvidia-smi
+```
+
+{:.tab.gpublock.Windows_without_orb}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: windows-server-2019-cuda
+    resource_class: gpu.nvidia.small
+    steps:
+      - run: nvidia-smi
+```
+
+{:.tab.gpublock.Windows_with_orb}
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@4.1.1
+
+jobs:
+  build:
+    executor: win/server-2019-cuda
+    steps:
+      - run: 'Write-Host ''Hello, Windows'''
+```
+
+GPU 実行環境に関する詳細は、 [GPU 実行環境の使用](/docs/using-gpu/)のページを参照してください。
+
+## Arm
+
+Arm 実行環境を使用するには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine` イメージの全リストは、 [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+
+{:.tab.armblock.Cloud}
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+
+  build-large:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+```
+
+{:.tab.armblock.Server}
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+  build-large:
+    machine:
+      image: arm-default
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+```
+
+Arm 実行環境に関する詳細は、 [GPU 実行環境の使用](/docs/using-arm/)のページを参照してください。
+
+## セルフホストランナー
+{: #self-hosted-runner }
+
+Kubernetes を使用する[コンテナランナー](/docs/container-runner/)、および Linux、Windows、macOS で[マシンランナー](/docs/runner-overview/#machine-runner-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
+
+## ポート範囲
+{: #port-ranges }
+
+When using a machine executor, if a port range is hardcoded, the range in `/proc/sys/net/ipv4/ip_local_reserved_ports` should be avoided. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
+
+## 次のステップ
+{: #next-steps }
+
+* Docker 実行環境用の [ビルド済み CircleCI イメージ](/docs/circleci-images/)に関する詳細をお読みください。
+* CircleCI Academy の[ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021)を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。

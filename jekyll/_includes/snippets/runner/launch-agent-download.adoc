@@ -1,0 +1,128 @@
+// STEPS TO DOWNLOAD AND RUN LAUNCH-AGENT SCRIPT
+ifndef::windows[]
+// Display the download-launch-agent step only for macOS and Linux
+. Save the https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[download-launch-agent script] in the root of your project. When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the launch agent version.
++
+Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
+
+. Set your target platform and run the `download-launch-agent.sh` script to download, verify, and install the binary. 
+* If you are using **cloud**, use the table below to find your platform variable:
++
+--
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Installation Target
+| Variable
+
+// Display only Linux target platform options on the Linux install page
+ifdef::linux[]
+| Linux x86_64
+| `platform=linux/amd64`
+
+| Linux ARM64
+| `platform=linux/arm64`
+
+| Linux s390x
+| `platform=linux/s390x`
+
+| Linux ppc64le
+| `platform=linux/ppc64le`
+endif::[]
+
+// Display only macOS target platform options on the macOS install page
+ifdef::macos[]
+| macOS x86_64
+| `platform=darwin/amd64`
+
+| macOS M1
+| `platform=darwin/arm64`
+endif::[]
+|===
+
+
+ifdef::linux[]
+
+// Display code snippet for Linux installation only
+
+For example, on **cloud**, to set your platform for Linux x86_64 and run the `download-launch-agent.sh` script, run the following:
+
+```shell
+export platform=linux/amd64 && sh ./download-launch-agent.sh
+```
+
+endif::[]
+
+ifdef::macos[]
+
+// Display code snippet for macOS installation only
+For example, on **cloud**, to set your platform for macOS M1 and run the `download-launch-agent.sh` script, run the following:
+
+```shell
+export platform=darwin/arm64 && sh ./download-launch-agent.sh
+```
+endif::[]
+--
+// The following closes the ifndef on line 4
++
+endif::[]
+
+* For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
++
+--
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Server version
+| Launch agent version
+
+| 3.0
+| Runner not supported
+
+| 3.1
+| 1.0.11147-881b608
+
+| 3.2
+| 1.0.19813-e9e1cd9
+
+| 3.3
+| 1.0.29477-605777e
+
+| 3.4
+| 1.1.73695-40bf772
+
+| 4.0
+| 1.1.73695-40bf772
+
+| 4.1
+| 1.1.73695-40bf772
+
+| 4.2
+| 1.1.73695-40bf772
+
+| 4.3
+| 1.1.73189-8792751
+|===
+
+
+Substitute `<launch-agent-version>` with your launch-agent version for server and run the following:
+
+// Display code example for Linux and macOS only
+ifndef::windows[]
+
+```shell
+export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
+```
+
+NOTE: Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
+endif::[]
+
+// Display code example for Windows only
+ifdef::windows[]
+
+```powershell
+$Env:agentVer = "<launch-agent-version>"
+```
+endif::[]
+
+--

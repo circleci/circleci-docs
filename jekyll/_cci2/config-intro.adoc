@@ -1,0 +1,350 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Configuration introduction
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "Learn how to get started with the CircleCI config.yml file."
+:icons: font
+:experimental:
+
+This guide gets you started with the CircleCI `config.yml` file.
+
+[#getting-started-with-circleci-config]
+== Getting started with CircleCI config
+
+This guide covers the following topics:
+
+* How CircleCI finds and runs `config.yml`.
+* How you can use shell commands to perform actions.
+* How `config.yml` interacts with your code.
+* How to trigger a build.
+* How to use Docker containers to run your jobs in a specific environment.
+* How to use workflows to orchestrate your build.
+* How to add approval steps to your workflow.
+
+CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repository project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for guidance on the basics.
+
+[#part-1-using-the-shell]
+== Part 1: Using the shell
+
+CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
+
+. If you have not done so already, <<first-steps#,sign up with CircleCI>> and then either create or set up a new project. You can follow the steps to connect a code repository in our xref:getting-started#[Quickstart guide].
+. Once you have created or set up your project in CircleCI, go to the `.circleci/config.yml` file and replace its contents with the following code:
++
+{% include snippets/docker-auth.adoc %}
++
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: alpine:3.15
+    steps:
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+----
++
+The following commentary describes what occurs in each line of the sample code:
++
+* *Line 1:* This indicates the version of the CircleCI platform you are using. `2.1` is the most recent version.
+* *Line 2:* The `jobs` level contains a collection of children, representing your jobs. You specify the names for these jobs, for example, _build_, _test_, _deploy_.
+* *Line 3:* `build` is the first child in the `jobs` collection. In this example, `build` is also the only job.
+* *Line 4:* This specifies that you are using a Docker image for the container where your job's commands are run.
+* *Line 5:* This is the Docker image. The example shows `alpine:3.15`, a minimal image based on Alpine Linux.
++
+As mentioned in the note above the sample code, you may optionally supply your Docker credentials when using a Docker executor.
++
+* *Line 6:* The `steps` collection is a list of `run` directives.
+* *Line 7:* Each `run` directive is executed in the order in which it is declared.
+* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` should be meaningful to you as an action within your build process.
+* *Line 9:* The `command` attribute is a list of shell commands that you want to execute. The initial pipe, `|`, indicates there will be multiple lines of shell commands.
+* *Line 10:* Prints `Hello World!` in your build shell.
+* *Line 11:* Prints `This is the delivery pipeline`.
+
+. Commit your `config.yml` file (and push, if you are working remotely).
+
+. A new pipeline is triggered in CircleCI. You can see the output in the link:https://app.circleci.com/[CircleCI dashboard]. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details.
++
+image::config-intro-part1-job.png[Successful build job]
++
+You should see your step - The First Step - with the output of the commands:
++
+image:config-first-step.png[Successful step within job]
+
+NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
+
+[#part-2-using-code-from-your-repo]
+== Part 2: Using code from your repository
+
+CircleCI provides several commands to simplify complex actions. In this example, you will use the `checkout` command. This command fetches the code from your git repository. Once you have retrieved that code, you can work with it in subsequent steps.
+
+If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
+
+If you already have a `config.yml` file from the example above, here are the changes you need to make:
+
+* On Line 5, change the image to `cimg/base:2021.04`.
+* On Line 7, add a `checkout` command.
+* Add another run step (lines 13-17) at the end.
+
+Make sure you observe the indentation.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: The Second Step
+          command: |
+            ls -al
+            echo '^^^The files in your repo^^^'
+----
+
+These two small changes have significantly increased the functionality of your config file:
+
+* *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
+* *Line 7:* The `checkout` command fetches the code from your git repository.
+* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repository that has been checked out. You can now perform further actions on this repository.
+
+As before, commit and push your updated `config.yml` file.
+
+You should now see some additional steps on the CircleCI dashboard:
+
+* *Checkout code* has cloned the code from your git repository.
+* *The Second Step* has listed the files found in your git repository.
+
+image::config-second-step.png[Checking out your repository]
+
+[#part-3-using-different-environments-and-creating-workflows]
+== Part 3: Using different environments and creating workflows
+
+In Parts 1 and 2, you ran your job in basic Linux-based Docker containers.
+
+With CircleCI, you can run different jobs in different execution environments, such as virtual machines or Docker containers. By changing the Docker image, you can quickly upgrade your environment version or change languages.
+
+In this part, you will create additional jobs and run them using different Docker images.
+
+If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  # running commands on a basic image
+  Hello-World:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - run:
+          name: Saying Hello
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  # fetching code from the repo
+  Fetch-Code:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: Getting the Code
+          command: |
+            ls -al
+            echo '^^^Your repo files^^^'
+  # running a node container
+  Using-Node:
+    docker:
+      - image: cimg/node:17.2
+    steps:
+      - run:
+          name: Running the Node Container
+          command: |
+            node -v
+workflows:
+  Example-Workflow:
+    jobs:
+      - Hello-World
+      - Fetch-Code:
+          requires:
+            - Hello-World
+      - Using-Node:
+          requires:
+            - Fetch-Code
+----
+
+This example is more complicated than the others, but it introduces several important concepts. Parts 1 and 2 included just one job called _build_, which contained several steps. This example includes three jobs. By separating those steps into jobs, you can run each of them in a different environment.
+
+The following commentary describes what occurs in each line of the sample code:
+
+* *Line 3:* You can add comments to your config.yml file by preceding them with the # (hash) sign.
+* *Lines 4-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
+* *Line 14:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
+* *Lines 15-16:* The _Fetch-Code_ job uses a basic git-compatible image.
+* *Lines 17-23:* This code is repeated from Part 2, but now it is a separate job.
+* *Line 25:* The third job is _Using-Node_.
+* *Lines 26-27:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
+* *Lines 28-32:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
+* *Lines 33-34:* This line creates a workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
+* *Lines 35-36:* These lines specify the first job, _Hello-World_.
+* *Lines 37-39:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a `requires:`, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
+* *Lines 40-42:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_.
+
+As before, commit and push your updated `config.yml` file.
+
+In CircleCI, your pipeline will look different. Your workflow is now called _Example-Workflow_ and you have three jobs, rather than just one.
+
+image::config-intro-part3.png[Running multiple jobs]
+
+If you click on the _Using-Node_ job and then the _Running the Node Container_ step, you should see that the command `node -v` has printed the version of Node.
+
+image::config-node-job.png[Running Node job]
+
+In this example, you have:
+
+* Added comments to document your jobs.
+* Created multiple jobs to run in different Docker containers.
+* Created a workflow to define the order in which your jobs run.
+* Introduced some logic to ensure that the previous job must complete successfully before the next job is executed.
+
+TIP: To increase your understanding, experiment with other <<circleci-images#,CircleCI images>>, or add some more jobs to your workflow.
+
+[#part-4-adding-a-manual-approval]
+== Part 4: Adding a manual approval
+
+The CircleCI workflow model is based on the orchestration of preceding jobs. As you saw in Part 3, the `requires` statement specifies that a job should run only if the previous job has been successfully executed.
+
+In Part 3, an event triggering the pipeline caused the `Hello-World` job to run immediately. The remaining jobs ran automatically, once `Hello-World` had completely successfully.
+
+In this part, you will create a manual approval stage. This means subsequent jobs are executed only after you have approved the next step in the CircleCI app.
+
+If you have not done so already, create a `.circleci` directory in your project, add a `config.yml` file, and type or paste the code from the example below:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  # running commands on a basic image
+  Hello-World:
+    docker:
+      - image: alpine:3.15
+    steps:
+      - run:
+          name: Saying Hello
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  # fetching code from the repo
+  Fetch-Code:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: Getting the Code
+          command: |
+            ls -al
+            echo '^^^Your repo files^^^'
+  # running a node container
+  Using-Node:
+    docker:
+      - image: cimg/node:17.2
+    steps:
+      - run:
+          name: Running the Node Container
+          command: |
+            node -v
+  Now-Complete:
+    docker:
+      - image: alpine:3.15
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'The work is now complete.'
+
+workflows:
+  Example-Workflow:
+    jobs:
+      - Hello-World
+      - Fetch-Code:
+          requires:
+            - Hello-World
+      - Using-Node:
+          requires:
+            - Fetch-Code
+      - Hold-for-Approval:
+          type: approval
+          requires:
+            - Using-Node
+            - Fetch-Code
+      - Now-Complete:
+          requires:
+            - Hold-for-Approval
+----
+
+Most of this code will look familiar to you. There are a couple of important additions:
+
+* *Lines  52-56*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
+* *Lines 57-59*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
+
+As before, commit and push your updated `config.yml` file.
+
+If you look at your pipeline in CircleCI, you will see the a purple status badge of *Needs Approval*.
+
+image::config-on-hold.png[Job requires approval]
+
+To approve the job, click the thumbs up icon to the right of the _Hold-for-Approval_ job in the _Actions_ column. In the pop-up message, click the blue btn:[Approve] button.
+
+Now you will see a tick in the Actions column and your jobs should complete.
+
+Click on the _Now-Complete_ job, then the _Approval Complete_ step. You should see the output of your command: `The work is now complete`.
+
+image::config-approval-complete.png[Approval complete]
+
+TIP: If you encounter errors, the problem is likely to be caused by incorrect indentation. The <<config-editor#,CircleCI Configuration Editor>> validates your syntax, provides autocomplete suggestions, and offers tips.
+
+In this example, you have:
+
+* Introduced some additional logic to control your workflow.
+* Implemented the `approval` job type to require a manual approval within your workflow.
+
+Using what you have learned above, you are ready to create some powerful pipelines.
+
+[#visual-studio-code-extension]
+## VS Code extension
+
+If you use VS Code, you might find the official xref:vs-code-extension-overview#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+
+The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
+
+[#see-also]
+== See also
+
+* <<configuration-reference#,Configuring CircleCI>>
+* <<executor-intro#,Executors and Images>>
+* <<workflows#,Using Workflows to Orchestrate Jobs>>
+
+

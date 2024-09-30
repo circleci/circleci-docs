@@ -15,7 +15,7 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 */
-;(function () {
+(function () {
   'use strict';
 
   var languages = [];
@@ -26,16 +26,18 @@ under the License.
 
   function activateLanguage(language) {
     if (!language) return;
-    if (language === "") return;
+    if (language === '') return;
 
-    $(".lang-selector a").removeClass('active');
-    $(".lang-selector a[data-language-name='" + language + "']").addClass('active');
-    for (var i=0; i < languages.length; i++) {
-      $(".highlight.tab-" + languages[i]).hide();
-      $(".lang-specific." + languages[i]).hide();
+    $('.lang-selector a').removeClass('active');
+    // prettier-ignore
+    $(".lang-selector a[data-language-name='" + language + "']")
+      .addClass('active');
+    for (var i = 0; i < languages.length; i++) {
+      $('.highlight.tab-' + languages[i]).hide();
+      $('.lang-specific.' + languages[i]).hide();
     }
-    $(".highlight.tab-" + language).show();
-    $(".lang-specific." + language).show();
+    $('.highlight.tab-' + language).show();
+    $('.lang-specific.' + language).show();
 
     window.recacheHeights();
 
@@ -69,7 +71,7 @@ under the License.
       // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
       val = val === undefined ? null : decodeURIComponent(val);
 
-      if (!ret.hasOwnProperty(key)) {
+      if (!Object.prototype.hasOwnProperty.call(ret, key)) {
         ret[key] = val;
       } else if (Array.isArray(ret[key])) {
         ret[key].push(val);
@@ -79,21 +81,31 @@ under the License.
 
       return ret;
     }, {});
-  };
+  }
 
   function stringifyURL(obj) {
-    return obj ? Object.keys(obj).sort().map(function (key) {
-      var val = obj[key];
+    return obj
+      ? Object.keys(obj)
+          .sort()
+          .map(function (key) {
+            var val = obj[key];
 
-      if (Array.isArray(val)) {
-        return val.sort().map(function (val2) {
-          return encodeURIComponent(key) + '=' + encodeURIComponent(val2);
-        }).join('&');
-      }
+            if (Array.isArray(val)) {
+              return val
+                .sort()
+                .map(function (val2) {
+                  return (
+                    encodeURIComponent(key) + '=' + encodeURIComponent(val2)
+                  );
+                })
+                .join('&');
+            }
 
-      return encodeURIComponent(key) + '=' + encodeURIComponent(val);
-    }).join('&') : '';
-  };
+            return encodeURIComponent(key) + '=' + encodeURIComponent(val);
+          })
+          .join('&')
+      : '';
+  }
 
   // gets the language set in the query string
   function getLanguageFromQueryString() {
@@ -121,19 +133,23 @@ under the License.
 
   // if a button is clicked, add the state to the history
   function pushURL(language) {
-    if (!history) { return; }
+    if (!history) {
+      return;
+    }
     var hash = window.location.hash;
     if (hash) {
       hash = hash.replace(/^#+/, '');
     }
-    history.pushState({}, '', '?' + generateNewQueryString(language) + '#' + hash);
+    // prettier-ignore
+    history
+      .pushState({}, '', '?' + generateNewQueryString(language) + '#' + hash);
 
     // save language as next default
-    localStorage.setItem("language", language);
+    localStorage.setItem('language', language);
   }
 
   function setupLanguages(l) {
-    var defaultLanguage = localStorage.getItem("language");
+    var defaultLanguage = localStorage.getItem('language');
 
     languages = l;
 
@@ -142,8 +158,11 @@ under the License.
       // the language is in the URL, so use that language!
       activateLanguage(presetLanguage);
 
-      localStorage.setItem("language", presetLanguage);
-    } else if ((defaultLanguage !== null) && (jQuery.inArray(defaultLanguage, languages) != -1)) {
+      localStorage.setItem('language', presetLanguage);
+    } else if (
+      defaultLanguage !== null &&
+      jQuery.inArray(defaultLanguage, languages) != -1
+    ) {
       // the language was the last selected one saved in localstorage, so use that language!
       activateLanguage(defaultLanguage);
     } else {
@@ -153,9 +172,9 @@ under the License.
   }
 
   // if we click on a language tab, activate that language
-  $(function() {
-    $(".lang-selector a").on("click", function() {
-      var language = $(this).data("language-name");
+  $(function () {
+    $('.lang-selector a').on('click', function () {
+      var language = $(this).data('language-name');
       pushURL(language);
       activateLanguage(language);
       return false;

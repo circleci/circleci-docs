@@ -1,61 +1,65 @@
 ---
 layout: classic-docs
-title: Testing macOS Applications
-short-title: Testing macOS Applications
+title: macOS アプリケーションのテスト
+short-title: macOS アプリケーションのテスト
 categories:
-  - platforms
-description: Testing macOS Applications
+  - プラットフォーム
+description: macOS アプリケーションのテスト.
 order:
 ---
 
-This document describes how to configure CircleCI for macOS app UI testing.
+このドキュメントでは、CircleCI を macOS アプリの UI テスト用に設定する方法を説明します。
 
-* TOC
+* 目次
 {:toc}
 
-## Overview
+## 概要
 {: #overview }
 {:.no_toc}
 
-CircleCI supports testing macOS apps on the macOS executor and by utilising Fastlane, and the macOS permissions orb, this can be set up quickly and easily.
+CircleCIでは、以下での macOS アプリのテストに対応しています。
 
-By setting up automated macOS app testing on CircleCI, you can easily test your app against different versions of macOS and add automation to your development pipeline.
+- macOS Executor
+- Fastlane
+- macOS permissions orb
 
-## Concepts
+macOS アプリの自動テストを設定することで、様々なバージョンの macOS に対してアプリを簡単にテストすることができ、開発パイプラインに自動化を導入することができます。
+
+## 概念
 {: #concepts }
 
-To test a macOS app, the Xcode Runner requires the ability to take control of the app under test to allow it to spoof user interactions. Over time, Apple has increased security in macOS and now triggering a macOS app UI test will cause a popup permissions dialog to ask whether you wish to allow control. On a local development machine this is not an issue, however, in a headless CI environment, it is not possible to interact with the UI.
+macOS アプリをテストするためには、Xcode Runner がユーザーによる操作のように動作するようテスト対象のアプリを制御できるようにする必要があります。 Apple は長い間 macOS のセキュリティ強化を重ね、現在では macOS アプリの UI テストをトリガーすると、制御を許可するかどうかを尋ねる許可ダイアログがポップアップ表示されます。 これはローカルの開発マシンでは問題ありませんが、ヘッドレスの CI 環境では、UIを操作することはできません。
 
-Apple does not provide an alternative command line based tool for granting permissions, but there is a workaround. By manually modifying the permissions database, we can insert new permissions which will allow Xcode Helper to interact with apps. This file, called `TCC.db`, is responsible for holding information about the permissions that have been requested and granted, or denied, for each app.
+Apple は、アクセス許可を付与するコマンドラインベースの代替ツールを提供していませんが、回避策があります。 アクセス許可データベースを手動で変更することにより、Xcode Helper がアプリを操作できるよう新しいアクセス許可を挿入することができます。 この `TCC.db` と呼ばれるファイルは、各アプリに対するアクセス許可の要求、付与、または拒否に関する情報を保持しています。
 
-There are two unique `TCC.db` files in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime.
+一意の `TCC.db` ファイルが 2 つ使用されています。 1つ目のコピーは、ホームディレクトリの `~/Library/Application Support/com.apple.TCC/TCC.db` に、2つ目のコピーは、 `/Library/Application Support/com.apple.TCC/TCC.db` にあります。 アクセス許可を追加または変更する場合は、実行時にアクセス許可が確実に有効となるようこの２つのファイル両方を編集する必要があります。
 
-While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
+System Integrity Protection (SIP: システム整合性保護) が有効な状態だと、ホームディレクトリに配置されているコピーへの書き込みは可能ですが、`/Library/Application Support/com.apple.TCC/TCC.db` への書き込みはできません (macOS Mojave以降)。 CircleCI 上では、Xcode 11.7 以降のすべてのイメージの SIP が無効になっています。 SIP が有効なイメージに対して `TCC.db` への書き込みを行うと、ジョブが失敗します。
 
-While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
+アクセス許可の追加は、CircleCI の設定で `sqlite3` コマンドを使って手動で書くこともできますが、 [CircleCIでは、これを簡略化するための Orb](https://circleci.com/developer/orbs/orb/circleci/macos) を提供しています。
 
-## Supported Xcode and macOS Versions
+## サポートされている Xcode および macOS のバージョン
 {: #supported-xcode-and-macos-versions }
 
-Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
+macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
+詳細については、 [サポートされている Xcode バージョン](/ja/testing-ios/#supported-xcode-versions) のリストを参照してください。
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/hello-world-macos/?section=executors-and-images#xcode-cross-compilation).
+Xcode Cross Compilation にご興味がある方は、[こちら](/ja/using-macos/#xcode-cross-compilation)をご覧ください。
 
-## Setting up a macOS UI Test Project
+## macOS UI テストプロジェクトの設定
 {: #setting-up-a-macos-ui-test-project }
 
-Configuring CircleCI to run UI tests on a macOS app happens in two parts. Firstly, the CircleCI config needs to add the correct permissions and set up the environment to run the tests. Secondly, Fastlane needs to be configured to execute the tests.
+macOS アプリで UI テストを実行するための CircleCI の設定は、2つのパートに分かれています。 まず、CircleCI の設定で正しいアクセス許可を追加し、テストの実行環境を整える必要があります。 次に、テストを実行するために fastlane を設定する必要があります。
 
-### Configuring CircleCI
+### CircleCI の設定
 {: #configuring-circleci }
 
-In the CircleCI `config.yml` we need to include the `circleci/macos` [orb](https://circleci.com/developer/orbs/orb/circleci/macos) and call the `macos/add-mac-uitest-permissions` step. This step ensures that the correct permissions are added to run Xcode UI tests on a macOS app.
+`config.yml` で、 `circleci/macos` [Orb](https://circleci.com/developer/orbs/orb/circleci/macos) を含め、 `macos/add-mac-uitest-permissions` のステップを呼び出します。 このステップでは、macOS アプリで Xcode UI テストを実行するための正しいアクセス許可が追加されていることを確認します。
 
-If additional permissions are required, you can find out how to set these up in the [macOS permission orb documentation](https://circleci.com/developer/orbs/orb/circleci/macos).
+追加のアクセス許可が必要な場合は、[macOS アクセス許可 Orb に関するドキュメント](https://circleci.com/developer/orbs/orb/circleci/macos)で設定方法をご確認ください。
 
-Sample `config.yml` for testing a macOS app:
+macOS アプリをテストするためのサンプル `config.yml` です。
 
 ```yaml
 version: 2.1
@@ -66,11 +70,11 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 14.2.0
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
-        - mac-permissions/add-mac-uitest-permissions
+        - mac-permissions/add-uitest-permissions
         - run: bundle install
         - run: bundle exec fastlane testandbuild
 
@@ -80,12 +84,14 @@ workflows:
             - build-test
 ```
 
-### Configuring Fastlane
+### fastlane の設定
 {: #configuring-fastlane }
 
-Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Please note that when using Fastlane, depending on the actions in your configuration, you may need to setup a 2-factor Authentication (2FA). See the [Fastlane Docs for more information](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication).
+fastlane を使うと、長い Xcode コマンドを手動で呼び出す代わりに、シンプルな設定ファイルを書くだけで macOS アプリのテストを開始することができます。 fastlane により、macOS アプリのビルド、署名 (テスト用)、テストが可能です。 なお、fastlane を使用する場合、設定されたアクションによっては、 二要素認証 (2FA) を設定する必要がある場合があります。
 
-A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/) (the code signing documentation talks about iOS but it is also applicable to macOS).
+詳細については、[fatlane のドキュメント](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) を参照してください。
+
+以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント](/docs/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
 
 ```ruby
 # fastlane/Fastfile
@@ -103,19 +109,19 @@ platform :mac do
 end
 ```
 
-A fully configured sample project can be found [on GitHub](https://github.com/CircleCI-Public/macos-orb).
+プロジェクトの完全な設定サンプルは、[GitHub 上での使用](https://github.com/CircleCI-Public/macos-orb)をご覧ください。
 
-## Working with the macOS Orb
+## macOS Orb を使用した作業
 {: #working-with-the-macos-orb }
 
-The `TCC.db` file is simply an SQLite database, so this makes it easy to inject new permissions, or modify existing ones, during a job.
+`TCC.db` ファイルは単なる SQLite データベースなので、ジョブ中に新しいアクセス許可を挿入したり、既存のアクセス許可を変更したりすることが簡単にできます。
 
-While it can be written to manually with `sqlite3` commands, we encourage the use of the [macOS orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this. The examples in this section are all based on using the orb.
+`sqlite3` コマンドを使って手動で書き込むこともできますが、[macOS Orb](https://circleci.com/developer/orbs/orb/circleci/macos)を使用してこの作業を簡易化することをお勧めします。 ここで紹介する例は、すべて Orb を使用した場合のものです。
 
-### Listing Current Permissions
+### 現在のアクセス許可の一覧表示
 {: #listing-current-permissions }
 
-To list the currently defined permissions in both the user and system database, call the `list-permissions` command provided by the orb, such as in this example:
+ユーザーデータベースとシステムデータベースの両方で現在定義されているアクセス許可を一覧表示するには、以下の例のように、Orb が提供する `list-permissions` コマンドを呼び出します。
 
 ```yaml
 version: 2.1
@@ -126,15 +132,16 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permissions
+
 ```
 
-Sample output:
+以下のように出力されます。
 
-```bash
+```shell
 client              service                          allowed
 ------------------  -------------------------------  ----------
 com.apple.Terminal  kTCCServiceSystemPolicyAllFiles  1
@@ -144,12 +151,12 @@ com.apple.systemev  kTCCServiceAccessibility         1
 com.apple.Terminal  kTCCServiceAccessibility         1
 ```
 
-This command generates two steps; one lists the contents of the user `TCC.db` and one lists the system `TCC.db`.
+このコマンドは 2 つのステップを生成します。1つはユーザーの `TCC.db` のコンテンツをリストアップし、もう1つはシステムの `TCC.db` をリストアップします。
 
-### Listing permission types
+### アクセス許可の種類の一覧表示
 {: #listing-permission-types }
 
-To grant permissions, the correct type of key for the permission type needs to be passed. These are not clearly documented by Apple, but can be found by running the `list-permission-types` command, as this example shows:
+アクセス許可を付与するには、許可の種類に応じた正しい種類のキーを渡す必要があります。 この方法に関して Apple による明確な文書はありませんが、以下の例のように、 `list-permission-types` コマンドの実行により正しい種類のキーを見つけることができます。
 
 ```yaml
 version: 2.1
@@ -160,15 +167,15 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permission-types
 ```
 
-Sample output:
+以下のように出力されます。
 
-```bash
+```shell
 kTCCServiceMediaLibrary
 kTCCServiceSiri
 kTCCServiceMotion
@@ -176,10 +183,10 @@ kTCCServiceSpeechRecognition
 ...
 ```
 
-### Granting default permissions for macOS app testing
+### macOS アプリのテスト用にデフォルトのアクセス許可を付与する
 {: #granting-default-permissions-for-macos-app-testing }
 
-For most developers, only a few standard permissions for Terminal and Xcode Helper are required to set up the environment for macOS app UI Testing. These can be set by calling the `add-uitest-permissions` command, such as in this example:
+ほとんどの開発者にとって macOS アプリの UI テスト環境のセットアップに必要なのは、ターミナルと Xcode Helper へのいくつかの標準的なアクセス許可のみです。 これは、`add-uitest-permissions` コマンドを呼び出すことで設定できます（下記例を参照）。
 
 ```yaml
 version: 2.1
@@ -190,16 +197,16 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
 ```
 
-### Granting new permissions
+### 新しいアクセス許可の付与
 {: #granting-new-permissions }
 
-The orb can be used to add custom permissions with the `add-permission` command. The following example grants Screen Capture permissions to Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters:
+Orb を使って、 `add-permission` コマンドでカスタムのアクセス許可を追加することができます。 以下の例では、ターミナルにスクリーンキャプチャへのアクセス許可を与えています。 バンドル IDと [アクセス許可](#listing-permission-types)の種類はどちらも必須のパラメーターです。
 
 ```yaml
 version: 2.1
@@ -210,7 +217,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -218,10 +225,10 @@ jobs:
             permission-type: "kTCCServiceScreenCapture"
 ```
 
-### Removing a permission
+### アクセス許可の削除
 {: #removing-a-permission }
 
-In the unlikely event that a permission needs to be removed during a job, use the `delete-permission` command. In the following example, we are removing Screen Capture permissions from Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters:
+万が一、ジョブ中にアクセス許可を削除する必要がある場合は、 `delete-permission` コマンドを使います。 以下の例では、ターミナルからスクリーンキャプチャへのアクセス許可を削除しています。 バンドル IDと [アクセス許可](#listing-permission-types)の種類はどちらも必須のパラメーターです。
 
 ```yaml
 version: 2.1
@@ -232,7 +239,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 11.7.0
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/delete-permission:

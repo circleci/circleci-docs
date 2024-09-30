@@ -1,0 +1,30 @@
+---
+
+version:
+- クラウド
+- Server
+---
+= 組織名とリポジトリ名の変更
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、組織名やリポジトリ名を変更する方法を紹介します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CircleCI と連携済みの組織やリポジトリの名前を変更する必要ある場合は、下記手順に従うことを推奨します。 この手順に従わないと、**環境変数** や **コンテキスト** などの、組織やリポジトリの設定にアクセスできなくなる恐れがあります。
+
+[#rename-organizations-and-repositories]
+== 組織名とリポジトリ名の変更手順
+
+1. VCS で組織名やリポジトリ名を変更します。
+1. CircleCI Web アプリに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>` のように新しい組織名およびリポジトリ名を使用します。
+1. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
+1. これで、必要に応じて VCS で使用した名前で新しい組織やリポジトリを作成できます
+
+[#see-also]
+== 関連項目
+
+* xref:contexts.adoc[コンテキスト]
+* xref:env-vars.adoc[環境変数]

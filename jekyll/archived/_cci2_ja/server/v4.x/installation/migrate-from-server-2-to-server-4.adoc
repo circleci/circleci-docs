@@ -1,0 +1,116 @@
+---
+
+contentTags:
+  platform:
+  - Server v2.x
+  - Server v4.x
+  - サーバー管理者
+---
+= CircleCI Server v2.19 から v4.0 への移行
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Server 2.19.x から 4.0 に移行する方法を解説します。
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI Server v2.19.x から v4.0 に移行する際は、v2.19 インスタンスのデータ (Mongo、Postgres、Vault) をバックアップしてから、待機中の CircleCI Server v4.0 インスタンスにそのデータを復元する必要があります。 問題が発生した場合は、v2.19 インスタンスにフォールバックできます。 移行する場合、先に CircleCI Server v4.0 システムのインストールを完了している必要があります。
+
+移行には、データストアのサイズにより数分～数時間かかります。 移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を先に試すことで、移行プロセスに対する理解を深められるだけでなく、移行完了にかかる時間を確認することもできます。
+
+[#prerequisites]
+== 前提条件
+
+. 現在インストールされている CircleCI Server が v2.19x である。
+. v2.19 インスタンスのバックアップが完了している。 外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
+. データストアが以下の条件を満たしている。 これはinitコンテナのボリュームマウントの制限によるものです。 AWS環境ではそのような制限はない。
+. 新規 CircleCI Server v4.0 をlink:/docs/server/installation/phase-1-prerequisites[インストール済み]である。
+.. データストアを**外部化**している場合: Postgres をバージョン 12 に更新している。
+.. **内部**データストアを使用している場合: v4.0 のインストール環境で MongoDB、Postgres、Redis に割り当てるボリュームのサイズを、v2.19 のインストール環境でこれらに割り当てているボリュームのサイズ以上に設定する。 4.x のデータストアのボリュームは、link:/docs/server/operator/expanding-internal-database-volumes/[こちらの手順]で変更可能です。
+. コンテキストを使用した link:https://github.com/circleci/realitycheck[realitycheck] の実行が正常に完了している。
+. 移行スクリプトを実行するマシンに以下を準備する。
+. 移行スクリプトを実行するマシンに以下を準備する。
+- CircleCI Server v4.0 インスタンスに合わせて構成した `kubectl`
+- CircleCI Server v2.19 サービスマシンへの `ssh` アクセス
+
+[#migration]
+== 移行
+
+WARNING: CircleCI Server v4.0 に移行すると、v2.19 アプリケーションはシャットダウンされます。 v2.19 アプリケーションは自動では再起動されませんが、Replicated の管理コンソールを使用して手動で再起動することはできます。 CircleCI Server v2.19 と CircleCI Server v4.0 を同時に実行すると、v2.19 のビルドデータに問題が発生するおそれがあります。 CircleCI Server v4.0 を実行している間、CircleCI Server v2.19 は再起動しないでください。
+
+WARNING: 移行プロセスを開始するとダウンタイムが発生します。 移行前にメンテナンス期間を設定してください。
+
+以下の手順に従って、CircleCI Server v2.19.x から CircleCI Server v4.0 への移行スクリプトが含まれるリポジトリをクローンします。
+
+この移行スクリプトで行われる処理は、以下のとおりです。
+
+* v2.19.x アプリケーションを停止させる。
+* 事前チェックを実行し、v2.19.x の名前空間とデータストアを確認する。
+* v2.19.x アプリケーションの PostgreSQL データベースおよび Mongo データベースの tarball を作成する。
+* Vault の既存のアプリケーションデータと CircleCI の暗号化/署名キーをアーカイブする。
+* v2.19.x の tarball を v4.0 環境にエクスポートする。 エクスポートされたデータストアは、`circleci_export` という名前のディレクトリに保存されます。このディレクトリは、移行スクリプトを実行したディレクトリを基準に作成されます。 これはデバッグに役立ちます。
+* 事前チェックを実行し、v4.0 インスタンスの名前空間とデータストアを確認する。
+* v4.0 アプリケーションのデプロイを 0 にスケーリングする。
+* 前の手順でエクスポートした tarball から新しい v4.0 インスタンスにデータをインポートする。
+* v4.0 アプリケーションのデプロイを 1 にスケーリングする。
+
+[#clone-the-repository-and-run-the-migration-script]
+=== 1.  リポジトリをクローンして移行スクリプトを実行する
+
+ターミナルで以下を実行します。
+
+. `git clone \https://github.com/CircleCI-Public/server-scripts` を実行します。
+. `cd server-scripts/migrate` を実行して、`migrate` ディレクトリに移動します。
+. `./migrate.sh --server4` を実行して、移行スクリプトを実行します。
+注: サービスを外部化している場合は、`bash migrate.sh -v -p -m` を実行してください。 `-v -p -m` の各フラグを指定すると、Vault、Postgres、Mongo への移行がそれぞれスキップされます。 3 つすべてをスキップすると、v2.19.x サービスマシンの `/data/circle/circleci-encryption-keys` からキーがコピーされます。これらのファイルを `cat` して、v4.0 の構成ページにファイルの内容をアップロードできます。
+. 以下の情報を入力するよう求められます。
+* CircleCI Server 2.19 のユーザー名
+* CircleCI Server 2.19 のホスト名
+* CircleCI Server 2.19.x の SSH キー ファイルのパス
+* CircleCI Server 4.0 の Kubernetes 名前空間
+. スクリプトの実行が完了したら、KOTS 管理者コンソールで 2.19 インスタンスの署名キーと暗号化キーを新しい 4.0 インスタンスに追加する必要があります。 このキーは `circleci_export/circle-data` にあります。
+. 2.19 インスタンスで使用していたのと同じストレージバケットを参照するように 4.0 インスタンスを更新するか、データを新しいバケットにコピーする必要があります。 後者の方法では、移行後も 2.19 インスタンスが正常に動作します。そのため、この移行をテストの一貫として行う場合には後者のアプローチをお勧めします。
+
+NOTE: 4.0 の環境で使用するホスト名が 2.19 とは異なる場合、GitHub Webhook は 2.19 の環境で使用していたホスト名を引き続き参照します。 ホスト名は、*[Stop Building (ビルドの停止)]*、*[Set Up Project (プロジェクトのセットアップ)]* の順にクリックして簡単に更新できます。 これを行った後も、プロジェクトに関連するコンテキストと環境変数は引き続き保持されます。
+
+[#validate-your-migration-to-server-v4]
+=== 2. CircleCI Server v4.0 への移行を検証する
+
+新しいコミットをプッシュすることで、新しい CircleCI Server 4.0 環境でコンテキストを使用して https://github.com/circleci/realitycheck[realitycheck] を再実行します。
+
+[#update-your-team]
+=== 3. 最新情報をチームで共有する
+
+https://github.com/circleci/realitycheck[realitycheck] の実行が正常に完了したら、新しい CircleCI UI と URL (変化した場合) をチームに連絡します。
+
+[#frequently-asked-questions]
+== よく寄せられるご質問
+
+[#where-did-all-my-job-and-build-history-go?]
+=== 過去のジョブとビルドの履歴がありません。どこに移動されたのですか？
+
+* 既存のジョブとビルドの履歴はすべて、[Legacy Jobs (レガシージョブ)] ビューに移動されます。 ジョブの全履歴は、以下のいずれかの方法で表示できます。
+** [Projects (プロジェクト)] -> [PROJECT_NAME] の順に選択し、プロジェクトのビルド履歴下部にある `legacy jobs view (レガシージョブビュー)` リンクを選択する。
+** 以下の URL パターンを使用する: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
+** 特定のジョブを参照するには、ジョブ番号を次の URL に追加する: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
+
+[#why-does-nothing-happen-when-i-select-start-building]
+=== 移行後にプロジェクトで [Start Building (ビルドの開始)] を選択しても何も起こりません。なぜですか？
+
+* デフォルトでは、新しく追加されたプロジェクト (1 回もフォローされていないプロジェクト) は、初めてフォローされた後に自動的にビルドがトリガーされます。 プロジェクトが過去に 2.19 または 4.0 でフォローされたことがある場合、そのプロジェクトは新しいプロジェクトや最初のビルドとはみなされません。そのため、フォローしてもビルドはトリガーされません。 ビルドをトリガーするには、新しいコミットやブランチのプッシュなど、GitHub Webhook をトリガーするアクティビティを実行してください。
+
+[#i-got-an-error]
+=== "Error from server (NotFound):" というエラーが表示されました。
+
+* 移行スクリプトでは、Postgres および MongoDB の命名規則が特定のパターンに従っているものと想定しています。 このエラーが表示される場合、インストール環境が標準と異なっているか、DB が移行されていないなどの問題があります。 このエラーが表示された場合は、サポートバンドルと、移行スクリプトの出力を添えてサポートにお問い合わせ下さい。
+
+[#transitioning-to-pipelines]
+== トラブルシューティング
+
+Server v2.x から v4.0 に移行する場合、パイプラインを導入する前にプロジェクトの設定を行います。 CircleCI Server v4.0 では、パイプラインが自動的に有効化されるため、プロジェクトの設定 (`.circleci/_config.yml`) を `version: 2.1` に変更するだけで、Server v4.0 で利用可能なすべての機能にアクセスすることができます。
+
+[#what-to-read-next]
+== 次に読む
+
+* https://circleci.com/docs/ja/server/installation/hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/ja/server/operator/operator-overview[CircleCI Server 4.0 運用ガイド]

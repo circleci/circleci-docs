@@ -1,0 +1,51 @@
+//[#machine-runner-debian-package-installation]
+//== Machine runner debian package installation
+
+The easiest way to install runner on a debian or ubuntu system is to use CircleCI's pre-built packages.
+
+
+. On the target machine, install the CircleCI registry. This script will automatically run `apt-get update`:
++
+```shell
+curl -s https://packagecloud.io/install/repositories/circleci/runner/script.deb.sh?any=true | sudo bash
+
+```
+
+. Next, install the `circleci-runner` package:
++
+```shell
+sudo apt-get install -y circleci-runner
+
+```
+
+. Replace `<< AUTH_TOKEN >>` with the token generated in the steps above. You may use your text editor to do this, or edit and run the following commands to replace the token automatically:
++
+```shell
+export RUNNER_AUTH_TOKEN="your-runner-auth-token-here"
+sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circleci-runner-config.yaml
+```
+
+. If you are using CircleCI server you will need to provide the url for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
++
+```shell
+export CIRCLECI_RUNNER_API_URL="your server domain"
+```
++
+Or by adding the url to `/etc/circleci-runner/circleci-runner-config.yaml` using text editor of your choice.
++
+```yaml
+api:
+  auth_token: << AUTH_TOKEN >>
+  # On server, set url to the hostname of your server installation.
+  url: https://your.domain.here
+```
+
+. Start the `circleci-runner service`, and check that it is currently running:
++
+```shell
+sudo systemctl enable circleci-runner && sudo systemctl start circleci-runner
+
+# Check status
+sudo systemctl status circleci-runner
+
+```

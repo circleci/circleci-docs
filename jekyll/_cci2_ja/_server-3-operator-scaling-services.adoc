@@ -1,0 +1,18 @@
+---
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
+---
+= CircleCI Server v3.x スケーリングサービス
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI Server 3.x より前のバージョンでは、サーバーのスケーリングには JVM ヒープサイズ、 RAM およびその他のリソースの拡張が必要でした。 Server 3.0 では、レプリカセットを使用してサービスのスケールアウトを行います。 フロントエンドまたは出力プロセッサのスケールアップを行う場合、これらのサービスで使用できるレプリカ数を増やします。
+
+レプリカセットを設定するには 2 つの方法があります。
+
+デプロイの設定

@@ -1,0 +1,64 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - サーバー管理者
+---
+= セキュリティの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、CircleCI のセキュリティ機能について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このドキュメントでは、 CircleCI の使用時にデータやシークレットのセキュリティを確保するために推奨されるベストプラクティスについて概説します。 CircleCI の使用を開始するにあたり、CircleCI ユーザーとして考慮していただきたいセキュリティ上のベストプラクティスを紹介します。
+
+[#minimize-and-rotate-secrets]
+== シークレットの保護
+
+ビルドに必要なシークレット (プライベートキー、環境変数) の数を最小限に抑え、定期的にシークレットのローテーションを行ってください。 組織のシークレットを定期的に (チームメンバーが変わるときは特に) ローテーションすることが重要です。
+
+シークレットを定期的にローテーションすることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。 使用するシークレットは範囲を制限し、  _必ず_ ビルドに必要な最低限の権限のみを付与してください。
+
+ご使用の CircleCI 以外のプラットフォームのロールと権限のシステムを確認してください。 たとえば、AWS の IAM 機能や GitHub の link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[マシンユーザー]の機能などです。
+
+
+スクリプトを記述したり、コマンドラインで作業する際は、xref:security-recommendations#/[シークレットの安全な取り扱い] に記載されているアドバイスに従ってください。
+
+[#secure-your-environment-variables]
+== 環境変数の保護
+
+複数のチームで環境変数を共有する場合は、選択したセキュリティグループで xref:contexts/#restricting-a-context[制限付きコンテキスト] を使用してください。
+
+パブリックの **オープンソースプロジェクト** では、環境変数を共有するかどうかを明記します。
+
+CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡すかどうかを制御できます。 これはデフォルトでは **有効化** されていません。 この設定とオープンソースのセキュリティの詳細については、xref:oss/#security[オープンソースプロジェクトのドキュメント] を参照してください。
+
+[#secure-your-vcs]
+== VCS の保護
+
+VCS プロバイダーから付与された組織の権限を確認し、 link:https://ja.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] にできる限り従ってください (組織に属している場合)。
+
+VCS では必ず 2 要素認証 (2FA) を使用してください。
+
+- link:https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA]
+- link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket 2FA]
+- link:https://docs.gitlab.com/ee/user/profile/account/two_factor_authentication.html[GitLab 2FA]
+
+VCS アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
+
+== 関連項目
+
+- xref:security/#[セキュリティ機能]
+- xref:security-recommendations/#[安全なシークレットの取り扱い]
+- xref:contexts/#[コンテキスト]
+- xref:ip-ranges/#[IP アドレスの範囲機能]
+- xref:openid-connect-tokens/#[Open ID Connect トークン]
+- xref:env-vars/#[環境変数の使用]
+
+// - Ensure you audit who has access to SSH keys in your organization.

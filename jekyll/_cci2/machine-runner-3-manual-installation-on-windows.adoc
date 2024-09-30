@@ -1,0 +1,98 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.4+
+---
+= Machine runner 3.0 manual installation for Windows
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to manually install CircleCI's self-hosted machine runner 3.0 on Windows.
+:icons: font
+:machine:
+:Windows:
+
+This page describes how to manually install CircleCI's machine runner 3.0 on Windows Server.
+
+[#prerequisites]
+== Prerequisites
+
+* https://www.gnu.org/software/tar/[tar]
+
+* https://www.gnu.org/software/gzip/[Gzip]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+[#download-machine-runner]
+== 2. Download the CircleCI machine runner
+Using PowerShell, download the current version of CircleCI machine runner and verify the download.
+
+NOTE: The current CircleCI machine runner binary can always be found by using `current` as the version. To install a specific previous version of the CircleCI runner the `$runnerVersion` variable can be changed from the value of `current` to the specific preferred version.
+
+[,powershell]
+----
+$runnerVersion = "current"
+$availableAgents = (Invoke-WebRequest "https://circleci-binary-releases.s3.amazonaws.com/circleci-runner/manifest.json" -UseBasicParsing).Content.Trim() | ConvertFrom-Json
+$agentURL = $availableAgents.releases.$runnerVersion.windows.amd64.url
+$agentHash = $availableAgents.releases.$runnerVersion.windows.amd64.sha256
+$agentFile = $agentURL.Split("/")[-1]
+
+Invoke-WebRequest $agentURL -OutFile $agentFile -UseBasicParsing
+if ((Get-FileHash "$agentFile" -Algorithm SHA256).Hash.ToLower() -ne $agentHash.ToLower()) {
+    throw "Invalid checksum for CircleCI Machine Runner, please try download again"
+}
+
+tar -zxvf $agentFile
+del $agentFile
+----
+
+[#create-configuration-and-working-directory]
+== 3. Create the CircleCI machine runner configuration and working directory
+
+Using PowerShell, create the CircleCI machine runner configuration file and working directory.
+
+NOTE: The runner token created in <<create-namespace-and-resource-class,Step 1>> will need to be substituted in for the `auth_token`
+
+[,powershell]
+----
+New-Item -Name Workdir -ItemType Directory
+@"
+api:
+  auth_token: "<< YOUR RUNNER TOKEN >>"
+  url: https://runner.circleci.com
+runner:
+  name: "$env:COMPUTERNAME"
+  mode: single-task
+  working_directory: "./Workdir"
+  cleanup_working_directory: true
+logging:
+  file: circleci-runner.log
+"@ -replace "([^`r])`n", "`$1`r`n" | Out-File machine-runner-config.yaml -Encoding ascii
+----
+
+[#start-machine-runner]
+== 4. Start the CircleCI machine runner
+
+[,shell]
+----
+./circleci-runner.exe machine --config machine-runner-config.yaml
+----
+
+[#additional-resources]
+== Additional resources
+
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

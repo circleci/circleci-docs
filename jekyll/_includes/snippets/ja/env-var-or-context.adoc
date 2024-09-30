@@ -1,0 +1,1 @@
+<<contexts#secrets-masking,シークレットのマスキング>> を活用するには、環境変数は <<env-vars#setting-an-environment-variable-in-a-project,プロジェクトレベル>> で、または <<env-vars#setting-an-environment-variable-in-a-context,コンテキスト>> 内で設定することをお勧めします。

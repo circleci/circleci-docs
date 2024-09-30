@@ -1,0 +1,222 @@
+---
+contentTags:
+  platform:
+  - Server v2.x
+  - 管理者
+---
+= 証明書の設定
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing (ELB) certificate.
+:icons: font
+:toc: macro
+:toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+ここでは、以下のセクションに沿って、カスタムルート認証局 (CA) を使用するためのスクリプトと、Elastic Load Balancing (ELB) 証明書を使用するプロセスについて説明します。
+
+toc::[]
+
+== カスタムルート CA の使用
+
+CircleCI では、`usr/local/share/ca-certificates/`のパスに追加された有効な証明書はすべて信頼します。
+
+以下の`openssl` コマンド例は、証明書を配置する方法の一つです。 組織の Vault/PKI ソリューションから証明書をプルすることも可能です。
+
+インストール環境によっては、サーバー間の暗号化と信頼の確立のために内部ルート認証局を使用します。 顧客のルート証明書を使用する場合は、CircleCI GitHub Enterprise インスタンスでその証明書をインポートし、信頼できる証明書としてマークする必要があります。 CircleCI は、GitHub や Webhook の API 呼び出しで通信する際、その信頼に従います。
+
+CA 証明書は、Java キーストアが理解できる形式で記述され、チェーン全体を含む必要があります。
+
+以下のスクリプトは、必要な手順を示しています。
+
+```shell
+GHE_DOMAIN=github.example.com
+
+# GitHub Enterprise デプロイから CA チェーンを取得します。
+openssl s_client -connect ${GHE_DOMAIN}:443 -showcerts < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/ghe.crt
+```
+
+次に、ポート 8800 のシステムコンソールに移動し、アップグレードされたプロトコルに変更します。 プロトコルを「HTTPS (TLS/SSLEnabled)」設定に変更し、サービスを再起動することができます。  「GitHub 認証のテスト」を試行すると、今回は x509 関連のエラーではなく、成功が返されます。
+
+== ELB 証明書の設定
+
+プライマリ証明書として機能する ELB 証明書を取得するために、 以下の手順を実行する必要があります。 以降のセクションで説明するように、ELB と CircleCI Server の証明書が必要です。
+
+NOTE: HTTP リクエストのポートを開くと、CircleCI は HTTPS リダイレクトを返すことができます。
+
+NOTE: Server v2.19.02 以降では、クラシックロードバランサー (CLB) はサポートされていません。
+
+<<<
+
+. ELB で以下のポートを開きます。
++
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| ロードバランサーのプロトコル
+| ロードバランサーのポート
+| インスタンスのプロトコル
+| インスタンスのポート
+| 暗号化
+| SSL 証明書
+
+| HTTP
+| 80
+| HTTP
+| 80
+| N/A
+| N/A
+
+| SSL
+| 443
+| SSL
+| 443
+| 変更
+| your-cert
+
+| SSL
+| 3000
+| SSL
+| 3000
+| 変更
+| your-cert
+
+| HTTPS
+| 8800
+| HTTPS
+| 8800
+| 変更
+| your-cert
+
+| SSL
+| 8081
+| SSL
+| 8081
+| 変更
+| your-cert
+
+| SSL
+| 8082
+| SSL
+| 8082
+| 変更
+| your-cert
+|===
+
+. ELB に以下のセキュリティグループを追加します。
++
+NOTE: 以下のソースは、だれもがこのポート範囲でインスタンスにアクセスできるオープン状態となります。 不都合が生じる場合は、自由に制約を加えてください。 そのソース範囲外の IP アドレスを使用しているユーザーは、機能が制限されることになります。
+
++
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| タイプ
+| プロトコル
+| ポート範囲
+| ソース
+
+| SSH
+| TCP
+| 22
+| 0.0.0.0
+
+| HTTPS
+| TCP
+| 443
+| 0.0.0.0
+
+| カスタム TCP ルール
+| TCP
+| 8800
+| 0.0.0.0
+
+| カスタム TCP ルール
+| TCP
+| 64535-65535
+| 0.0.0.0
+|===
+
+. 次に、CircleCI の管理コンソールで、`Privacy` セクションに有効な証明書とキーファイルをアップロードします。 実際の証明書管理は ELB で実行されるため、これには外部的な署名も、現在の証明書も不要です。 ただし、CircleCI で HTTPS リクエストを使用するには、管理者コンソールで設定されたホスト名と「Common Name (FQDN)」が一致する証明書およびキーが必要です。
+
+. これで、[GitHub Authorization Callback (GitHub 承認コールバック)] に `http` ではなく `https` を設定できます。
+
+=== 自己署名証明書の使用
+
+ELB は_現在の_証明書を必要としないため、任意の有効期間を持つ自己署名証明書を生成することも可能です。
+
+. openssl コマンド `openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 1 -out certificate.pem` を使用して証明書とキーを生成します。
+
+. 求められた情報を入力します。
++
+NOTE: 指定する Common Name は、CircleCI で設定されたホストと一致している必要があります。
+
+. certificate.pem ファイルと key.pem ファイルをローカルに保存します。
+
+== CircleCI Server での TLS/HTTPS の設定
+
+有効な SSL 証明書とキーファイルの生成には、各種のソリューションを使用できます。 そのうちの 2つについて説明します。
+
+=== Certbot の使用
+
+このセクションでは、Certbot を使用して、Services マシンに DNS レコードセットを手動で追加し、Server v2.x に TLS/HTTPS を設定する方法を説明します。 Certbot は通常、ポート 80 または 443 を経由の DNS レコードの検証に依存していますが、これはポートの競合により、バージョン 2.2.0 の CircleCI Server ではサポートされていません。
+
+. Stop the Service CircleCI server Management Console (`<circleci-hostname>:8800`).
+
+. Services マシンに SSH で接続します。
+
+. 以下のコマンドを使用して、Certbot をインストールし、証明書を生成します。
++
+```shell
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot
+certbot certonly --manual --preferred-challenges dns
+```
+
+. DNS TXT レコードを追加するように指示されます。
+
+. レコードが正常に生成されたら、`fullchain.pem` と `privkey.pem` をローカルに保存します。
+
+DNS レコードのために Route 53 を使用している場合は、TXT レコードを簡単に追加できます。 新しいレコードセットを作成する場合は、TXT タイプを選択し、適切な値を引用符で囲んで指定してください。
+
+=== CircleCI Server への証明書の追加
+
+`.pem`形式の有効な証明書とキーファイルを入手したら、それを CircleCI Server にアップロードする必要があります。
+
+. `hostname:8800/console/settings` に移動します。
+
+. [Privacy (プライバシー)] セクションで、[SSL only (Recommened) (SSL のみ (推奨))] にチェックマークを付けます。
+
+. 新しく生成した証明書とキーをアップロードします。
+
+. [Verify TLS Settings (TLS 設定を検証)] をクリックして、正しく機能していることを確認します。
+
+. 設定ページの下にある [Save (保存)] をクリックし、指示に従って再起動します。
+
+Ensure the hostname is properly configured from the Management Console (`<circleci-hostname>:8800`) **and** that the hostname used matches the DNS records associated with the TLS certificates.
+
+GitHub/GitHub Enterprise の [Auth Callback URL] 設定が、Services マシンを指すドメイン名と、使用するプロトコル (たとえば、*https*://info-tech.io/</code>）を含めて一致していることを確認します。
+
+=== 証明書を Replicated に追加する
+
+The Replicated Management Console (`<circleci-hostname>:8800`) runs on a different web server, so you also need to apply the certificate used above for Replicated. 適用するには以下の手順を実行します。
+
+. Navigate to `<circleci-hostname>:8800/console/settings#tls-key-cert`
+
+. 新しく生成した証明書とキーをアップロードします。
+
+. ページの下にある*保存*ボタンをクリックし、求められた場合、Replicated の UI を再起動します。
+
+TLS 証明書が失効すると、ドメイン名を使って Replicated の UI にアクセスすることができなくなりますが、IP アドレスを使って Replicated UI にアクセスすることは可能です。 その後、UI から TLS 証明書とキーをアップロードできます。
+
+または、ホスト名、path-to-key、path-to-certificate を変更して Services マシン上で以下のコマンドを実行して 証明書やキーをアップロードすることも可能です。
+
+```shell
+$ sudo replicated console cert set <circleci-hostname> /path/to/key /path/to/cert
+$ replicatedctl app stop
+$ replicatedctl app start
+```

@@ -1,0 +1,36 @@
+---
+toc: false
+---
+= Using lists
+:page-layout: classic-docs
+:icons: font
+:toc-title:
+
+* To generate numbered steps (an ordered list) use the following syntax:
++
+[source,adoc]
+----
+. step 1 text
+. step 2 test
+. step 3 text
+----
+
+* To keep numbered steps flowing correctly when code blocks, images or admonitions are used inside steps, use the `+` on the line before the block starts to indicate the block is part of the step above:
++
+[source,adoc]
+----
+  . Step one
+  . Step two involves some code
+  +
+  [source, shell]
+  ----
+  some code
+  ----
+  . Step three is still in number order
+----
+
+* Use ordered lists for steps in a process. All other lists should be unordered.
+
+* Capitalize the first word of each item in a list.
+
+* If the text in the bullet is a full sentence or completes the intro stem use a period at the end.

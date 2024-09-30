@@ -1,603 +1,110 @@
 ---
-version:
-- Cloud
-- Server v3.x
+
+contentTags:
+  platform:
+  - クラウド
 ---
-= CircleCI ランナーのインストール
+= Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI セルフホストランナーをコンテナソリューションとして、または Linux、 macOS、Windows にインストールする際に役立つリソースを紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale
-plan] and with https://circleci.com/pricing/server/[server]. Please reach out
-to your sales representative (or https://circleci.com/contact-us/?cloud[contact
-us]) for information on how to sign up for the Scale plan or server.
+ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。 セルフホストランナーのサーバーでの使用をお考えの場合は、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> のページをご覧ください。
 
-Linux、macOS、Docker、および Windows プラットフォームへの CircleCI ランナーのインストール方法について説明します。 他のプラットフォームに関する詳細は、「xref:runner-overview.adoc#available-circleci-runner-platforms[利用可能な CircleCI ランナー プラットフォーム]」を参照してください。
+NOTE: Linux、macOS、Windows へのマシンランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションをこの UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
-toc::[]
+[#container-runner-prerequisites]
+== コンテナランナーの前提条件
 
-== 前提条件
+ジョブのインストールや実行には、ルートアクセスおよび以下の設定とインストールが必要です。
 
-インストール プロセスでは、システムに以下のユーティリティをインストール済みであることを前提としています。
+* link:https://kubernetes.io/[Kubernetes] 1.12+
+* link:https://helm.sh/[Helm] 3.x
+* ランナー xref:runner-faqs#what-is-a-runner-resource-class[ランナーリソースクラストークン]
+* 他のワークロードがない状態の Kubernetes 名前空間
+* checkout ステップで、SSH でチェックアウトするように Git が設定されていること。使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
 
-* <<local-cli#installation,CircleCI CLI>>
-* curl (macOS ではデフォルトでインストール済み)
-* sha256sum (Linux では apt または yum により coreutils の一部としてインストール、macOS では brew によりインストール)
-* バージョン 235 以降の systemd (Linux のみ)
-* sepolicy (RHEL 8 のみ)
-* rpmbuild (RHEL 8 のみ)
-* ユーザーの作成権限および /opt 以下のディレクトリの作成権限
+[#machine-runner-prerequisites]
+== マシンランナーの前提条件
 
-== 認証
+ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
-NOTE: 以下のコマンドを実行できるのは、組織のオーナーまたは管理者だけです。
+* https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
+* https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
+* sha256sum (プリインストールされていない場合):
+- macOS の場合は、`brew install coreutils` (https://brew.sh/[Homebrew] が必要)
+- `Ubuntu/Debain の場合は、`sudo apt install coreutils`
+- Red Hat の場合は、`sudo yum install coreutils`
+* https://www.gnu.org/software/tar/[tar]
+* https://www.gnu.org/software/gzip/[gzip]
+* sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
+* rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
-認証のために、下記手順を実行して名前空間と認証トークンを作成する必要があります。
+[#self-hosted-runner-terms-agreement]
+== セルフホストランナー規約への同意
 
-. 組織のランナー リソース用の名前空間を作成します。
+Web アプリを介してマシンランナーをインストールする前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
+
+image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
+
+規約に同意すると、**セルフホストランナー** はサイドナビゲーションバーに常に表示されるようになります。
+
+CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS の https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
+
+[#circleci-web-app-installation]
+== CircleCI Web アプリでのインストール
+
+セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。 名前空間やリソースクラスについては、<<runner-concepts#namespaces-and-resource-classes,コンセプト>> のページを参照してください。
+
+お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
+
+. https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
 +
-NOTE: 作成できる名前空間は、組織ごとに 1 つだけです。 Orb を既に使用中の場合、この名前空間は Orb で使用しているのと同じものになります。 
-+ 
-次のコマンドを実行します。 
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
+. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。 *作成できる名前空間は、各組織につき 1 つのみです。* 必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
+. 組織で Orb を使用したことがある場合、新しい名前空間は作成せずに組織が Orb 用に使用している名前空間を入力します。
+. 次の入力フィールドで組織のセルフホストランナーのリソースクラス名を作成します。
 +
-```
-circleci namespace create <name> <vcs-type> <org-name>
-```
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
+. リソースクラストークンをコピーし保存します。 セルフホストランナーはこのトークンを使って関連するリソースクラスの作業を要求します。
 +
-例: 組織の GitHub URL が `https://github.com/circleci` の場合、`circleci namespace create my-namespace github circleci`。
-. 次のコマンドを実行して、名前空間内にランナー用のリソース クラスを作成します。
-+ 
-```
-circleci runner resource-class create <resource-class> <description>
-``` 
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
 +
-例: `circleci runner resource-class create my-namespace/my-resource-class my-description`。
+CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
+. 続けるには、各プラットフォームのインストール手順に従う必要があります。 コンテナランナーの設定は **Container** タブから、Linux、 macOS、Windows でのセルフホストランナーの設定は **Machine** タブから行います。 お客様の環境に応じた UI のタブをクリックしてください。
 +
-NOTE: リソース クラスとトークンを作成するには、VCS プロバイダーの組織管理者権限を持っている必要があります。
-. 次のコマンドを実行して、上記リソース クラスのための認証用トークンを作成します。 
+[.tab.runner.Container_runner_UI]
+--
+.Web アプリによるコンテナランナーのインストール
+image::runnerui_step_four_cr.png[Container runner in the web app]
+--
 +
-```
-circleci runner token create <resource-class> <nickname>
-``` 
+[.tab.runner.Machine_runner_UI]
+--
+.Web アプリによるマシンランナーのインストール
+image::runnerui_step_four.png[Machine runner in the web app]
+--
 +
-例: `circleci runner token create my-namespace/my-resource-class my-token`。 このコマンドを実行すると、認証トークンを含むランナー設定ファイルが生成され、表示されます。
-
-CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
-
-== ジョブ実行の要件
-
-ジョブを実行するには、マシンに次のツールを用意する必要があります。
-
-* tar
-* gzip
-* coreutils (Linux のみ)
-* git (推奨。ただし任意)
-
-== インストール
-
-=== ローンチ エージェント バイナリのダウンロードとチェックサムの検証
-[[download]]
-このスクリプトでは、ベースのインストール場所に `opt/circleci` を指定しています。
-
-まず、インストール対象のプラットフォームに応じて、次のいずれかの変数を設定します。
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| インストール対象
-| 変数
-
-| Linux x86_64
-| `platform=linux/amd64`
-
-| Linux ARM64
-| `platform=linux/arm64`
-
-| macOS x86_64
-| `platform=darwin/amd64`
-
-| macOS M1
-| `platform=darwin/arm64`
-|===
-
-次に、`circleci-launch-agent` バージョンを設定します。 クラウド版 CircleCI のランナーは、サポートされている最新バージョンに自動的に更新されます。 CircleCI Server の場合、特定のランナー バージョンの相互運用性は検証されていますが、ランナーは自動更新されません。 A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
-
-クラウド版 CircleCI の場合、以下を実行します。
-```bash
-export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-export agent_version=$(curl "${base_url}/release.txt")
-```
-
-For server v3.1.0 and up, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<runner-for-server-compatibility>> to find the correct version):
-```bash
-export agent_version="<launch-agent-version>"
-```
-
-最後に、次のスクリプトを実行して、バイナリをダウンロードして検証し、インストールします。
-```bash
-# ランナー ディレクトリのセットアップ
-prefix=/opt/circleci
-sudo mkdir -p "$prefix/workdir"
-
-# ローンチ エージェントのダウンロード
-echo "Using CircleCI Launch Agent version $agent_version"
-echo "Downloading and verifying CircleCI Launch Agent Binary"
-base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
-mkdir -p "$platform"
-echo "Downloading CircleCI Launch Agent: $file"
-curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
-
-# ダウンロードの検証
-echo "Verifying CircleCI Launch Agent download"
-grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
-```
-
-=== プラットフォームごとのインストール方法
-
-次のセクションでは、プラットフォーム別のインストール方法を説明します。
-
-* <<Linux への CircleCI ランナーのインストール方法, Linux>>
-* <<macOS への CircleCI ランナーのインストール方法, macOS>>
-* <<Docker へのインストール方法, Docker>>
-* <<Windows へのインストール方法, Windows>>
-
-== CircleCI Runner Installation (Linux)
-
-=== CircleCI ランナー設定ファイルを作成する
-
-Linux 用の推奨される CircleCI ランナー設定ファイルを次に示します。
-
-```yaml
-api:
-  auth_token: AUTH_TOKEN
-  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
-  # url: https://circleci.example.com
-
-runner:
-  name: RUNNER_NAME
-  command_prefix: ["sudo", "-niHu", "circleci", "--"]
-  working_directory: /opt/circleci/workdir/%s
-  cleanup_working_directory: true
-```
-
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` には、任意の値を指定できます。
-
-=== CircleCI ランナー設定ファイルをインストールする
-
-作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、パーミッションを `600` に設定します。
-
-```bash
-sudo chown root: /opt/circleci/launch-agent-config.yaml
-sudo chmod 600 /opt/circleci/launch-agent-config.yaml
-```
-
-=== CircleCI ユーザーと作業ディレクトリを作成する
-
-タスク エージェントの実行時に使用するユーザーとディレクトリを作成します。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
-
-==== Ubuntu/Debian
-
-```bash
-id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
-
-mkdir -p /opt/circleci/workdir
-chown -R circleci /opt/circleci/workdir
-```
-
-==== CentOS/RHEL
-
-```bash
-id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
-
-mkdir -p /opt/circleci/workdir
-chown -R circleci /opt/circleci/workdir
-```
-
-=== SELinux ポリシーを構成する (RHEL 8)
-
-RHEL 8 システムでランナーがジョブを受け取り、実行するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このランナーが実行する個別のジョブで必要になる可能性がある権限を追加するものではないことに留意してください。
-
-`/opt/circleci/policy` というディレクトリを作成し、最初のポリシー モジュールを生成します。
-
-```bash
-sudo mkdir -p /opt/circleci/policy
-
-# まだインストールしていない場合 sepolicy と rpmbuild をインストールする
-sudo yum install -y policycoreutils-devel
-sudo yum install -y rpm-build
-
-sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci-launch-agent
-```
-
-次の Type Enforcement ファイル https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] をダウンロードして、ポリシーをインストールします。
-
-```bash
-sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
-
-sudo /opt/circleci/policy/circleci_launch_agent.sh
-```
-
-=== `systemd` ユニットを有効にする
-
-次のスクリプトを `/opt/circleci/circleci.service` として作成し、所有者を `root` に、パーミションを `755` に設定します。
-
-`TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
-
-CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとジョブを開始しようとすることに注意が必要です。つまり、ジョブの実行に必要な他のサービスがローンチ エージェントより先に起動するよう構成する必要があります。 ローンチ エージェントはサービスとして設定可能であり、次のスクリプトで systemd により管理できます。
-
-```
-[Unit]
-Description=CircleCI Runner
-After=network.target
-[Service]
-ExecStart=/opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
-Restart=always
-User=root
-NotifyAccess=exec
-TimeoutStopSec=18300
-[Install]
-WantedBy = multi-user.target
-```
-
-次に、下記コマンドによりサービスを有効化します。
-
-```bash
-prefix=/opt/circleci
-systemctl enable $prefix/circleci.service
-```
-
-=== サービスを起動する
-
-CircleCI ランナー サービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
-
-```bash
-systemctl start circleci.service
-```
-
-=== サービスの実行状態を確認する
-
-`systemctl` コマンドで表示されるシステム レポートの `Status` フィールドで、簡単な実行状態を確認できます。 このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
-
-エージェントの状態は、次のコマンドを実行して確認できます。
-
-```bash
-systemctl status circleci.service --no-pager
-```
-
-このコマンドの出力は次のようになります。
-
-```
-circleci.service - CircleCI Runner
-   Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
- Main PID: 5592 (circleci-launch)
-   Status: "Healthy"
-    Tasks: 8 (limit: 2287)
-   CGroup: /system.slice/circleci.service
-           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
-```
-
-また、次のコマンドを実行してシステムのログを確認することもできます。
-
-```bash
-journalctl -u circleci
-```
-
-== CircleCI Runner Installation (macOS)
-
-=== CircleCI ランナー設定ファイルを作成する
-
-CircleCI ランナーを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。
-
-下記のテンプレートを、大文字で記載されたパラメーターを適切な値で置き換えて完成させます。 完成したら、`launch-agent-config.yaml` として保存します。
-
-```yaml
-api:
-  auth_token: AUTH_TOKEN
-  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
-  # url: https://circleci.example.com
-
-runner:
-  name: RUNNER_NAME
-  command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
-  working_directory: /tmp/%s
-  cleanup_working_directory: true
-
-logging:
-  file: /Library/Logs/com.circleci.runner.log
-```
-
-=== CircleCI ランナー設定ファイルをインストールする
-
-`root` ユーザーとして、CircleCI ランナー設定ファイルの保存ディレクトリを作成します。
-
-```bash
-sudo mkdir -p '/Library/Preferences/com.circleci.runner'
-```
-
-このディレクトリに、先ほど作成した `launch-agent-config.yaml` をコピーします。
-
-```bash
-sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/launch-agent-config.yaml'
-```
-
-=== `launchd .plist` をインストールする
-
-次の内容を `/Library/LaunchDaemons/com.circleci.runner.plist` にコピーし、所有者を `root` に、パーミッションを `644` に設定します。
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-    <dict>
-        <key>Label</key>
-        <string>com.circleci.runner</string>
-
-        <key>Program</key>
-        <string>/opt/circleci/circleci-launch-agent</string>
-
-        <key>ProgramArguments</key>
-        <array>
-            <string>circleci-launch-agent</string>
-            <string>--config</string>
-            <string>/Library/Preferences/com.circleci.runner/launch-agent-config.yaml</string>
-        </array>
-
-        <key>RunAtLoad</key>
-        <true/>
-
-        <!-- ランナーは実行状態を維持する必要があります -->
-        <key>KeepAlive</key>
-        <true/>
-
-        <!-- ランナーによるリソースの使用が macOS で制限されないようにする設定です-->
-        <key>ProcessType</key>
-        <string>Interactive</string>
-
-        <!-- 失敗時または更新後にランナーを再起動する頻度を増やします -->
-        <key>ThrottleInterval</key>
-        <integer>3</integer>
-
-        <!-- ランナーがシャットダウンするまで 10 分間待機します (ランナー自体はタスクが完了するまで待機します) -->
-        <key>ExitTimeOut</key>
-        <integer>600</integer>
-
-        <!-- ログの出力とローテーションの設定はランナー固有のものを使用します -->
-        <key>StandardOutPath</key>
-        <string>/dev/null</string>
-        <key>StandardErrorPath</key>
-        <string>/dev/null</string>
-    </dict>
-</plist>
-```
-
-=== `launchd` サービスを有効にする
-
-2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
-
-```bash
-sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
-```
-
-これで、サービスをロードできます。
-
-```bash
-sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
-```
-
-=== サービスの実行状態を確認する
-
-macOS のコンソールを使用して、CircleCI ランナーのログを確認できます。 `com.circleci.runner.log` という名前のログに含まれる "Log Reports" の部分を確認してください。
-
-== Docker Installation
-
-ホストには、Docker をインストールしておく必要があります。 `runner` コンテナは、起動するとすぐにジョブの実行を試みます。 コンテナは停止されるまで、他のジョブの実行用に再利用され続けます。
-
-ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
-
-=== CircleCI ランナーのイメージを拡張した Dockerfile を作成する
-
-次の例では、ベース イメージ上に python3 をインストールします。
-
-`Dockerfile.runner.extended`
-
-```
-FROM circleci/runner:launch-agent
-RUN apt-get update; \
-    apt-get install --no-install-recommends -y \
-        python3
-```
-
-=== Docker イメージをビルドする
-
-```bash
-docker build --file ./Dockerfile.runner.extended .
-```
-
-=== Docker コンテナを起動する
-
-NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
-
-```bash
-CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
-```
-
-コンテナは、起動するとすぐにジョブの実行を試みます。
-
-==== Start the Docker container on server
-
-When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
-
-``` bash
-CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
-```
-
-=== Docker コンテナを停止する
-
-``` bash
-docker stop <container-name>
-```
-
-=== Remove the Docker container
-
-In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
-
-``` bash
-docker stop <container-name>; docker rm <container-name>;
-```
-
-== Windows Installation
-
-NOTE: 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、デスクトップ エクスペリエンス搭載 Datacenter エディションでテスト済みです。
-
-この手順では、CircleCI ローンチ エージェントとその依存関係 (Chocolatey、Git、Gzip) を Windows Server にインストールします。
-
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
-
-* また、このセットアップをドメイン環境で行う際には、Windows Server はドメイン メンバーである必要があります。 ランナー インスタンスは、ドメイン コントローラーとして動作している Windows Server では実行できません。
-
-=== インストール手順
-
-. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。 
-
-. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
-
-. 以下を PowerShell で実行します。
+各プラットフォームのインストール手順は、Web アプリでも CircleCI ドキュメントでもご確認いただけます。 ページリストは、 <<#platform-specific-instructions,各プラットフォームのインストール手順>> をご覧ください。
+. 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
 +
-```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-./Install-CircleCIRunner.ps1
-```
-+
-PowerShell インターフェイスにインストール結果が出力されます。
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
 
-. インストール中、ランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 Please fill the file out with the requested information (see <<Configuration file reference, 設定ファイルのリファレンス>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+[#platform-specific-instructions]
+=== 各プラットフォームのインストール手順
 
-セットアップが完了すると、ローンチ エージェントが自動的に起動し、処理対象のジョブの検索を開始します。
+下記より、各プラットフォームのインストール手順をご覧いただけます。
 
-== Kubernetes へのインストール方法
+* xref:container-runner-installation.adoc[コンテナランナー]
+* xref:runner-installation-linux.adoc[Linux]
+* xref:runner-installation-mac.adoc[macOS]
+* xref:runner-installation-windows.adoc[Windows]
 
-「xref:runner-on-kubernetes.adoc[Kubernetes での CircleCI ランナーの使用]」を参照してください。
+[#additional-resources]
+== 関連リソース
 
-== Configuration file reference
-
-ローンチ エージェント本体、およびサーバーとエージェントの通信方法やタスク エージェントの起動方法の設定は、YAML ファイルを使用して行います。
-
-設定ファイルの書式は次のとおりであり、以下で説明する各種パラメーターを使用可能です。
-
-```sh
-api:
-  auth_token: AUTH_TOKEN
-runner:
-  name: RUNNER_NAME
-```
-
-=== runner.name
-
-`RUNNER_NAME` には、このローンチ エージェントに割り当てる一意の名前を設定します。 CircleCI UI でのステータスやジョブ結果の確認時にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
-
-=== api.auth_token
-
-ここには、CircleCI でのローンチ エージェントの認証に使用するトークンを設定します。このトークンは、CircleCI CLI から生成できます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
-
-=== runner.command_prefix
-
-このプレフィックスを設定することで、タスク エージェント プロセスの起動方法をカスタマイズできます。 ここでカスタム スクリプトを使用すると、タスク ランナーの前後で任意のコマンドを実行できます。 指定した引数が実行され、完了時にスクリプトから正しい終了コードが返されるよう特に注意してください。
-
-=== runner.working_directory
-
-ここでディレクトリを設定することで、ジョブごとに使用するデフォルトの作業ディレクトリを指定できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行えるよう権限が設定されている必要があります。 設定したディレクトリが存在しない場合は、タスク エージェントにそのディレクトリの作成権限を付与する必要があります。 設定値に `%s` を含めた場合、この変数はジョブごとに異なる値で置き換えられます。 設定した作業ディレクトリは自動的には削除されないことに注意してください。
-
-=== runner.cleanup_working_directory
-
-この値を設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。 デフォルト値は `false` です。
-
-=== runner.mode
-
-This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (single-task) or to continuously poll for new available jobs.
-
-The possible values are:
-
-* continuous
-* single-task
-
-NOTE: The default value is continuous.
-
-=== runner.max_run_time
-
-This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
-
-Here are a few valid examples:
-
-* `72h` - 3 days
-* `1h30m` - 1 hour 30 minutes
-* `30s` - 30 seconds
-* `50m` - 50 minutes
-* `1h30m20s` - An overly specific (yet still valid) duration.
-
-NOTE: The default value is 5 hours.
-
-==== Customizing job timeouts and drain timeouts
-
-If you would like to customize the job timeout setting, you can "drain" the job by sending the Launch Agent a termination (TERM) signal, which then causes the Launch Agent to attempt to gracefully shutdown. When this TERM signal is received, the launch agent enters 'draining' mode, preventing the Launch Agent from accepting any new jobs, but still allowing any current active job to be completed. At the end of "draining," the Launch Agent then signals the Task Agent to cancel any active job (by sending it a TERM signal).
-
-NOTE: If the Task Agent does not exit a brief period after the TERM, the Launch Agent will manually kill it by sending it a KILL signal.
-
-Draining can end in one of two ways:
-
-* The task has been in the draining state for longer than the configured `max_run_time`.
-* An additional TERM signal is received by the Launch Agent during "draining".
-
-=== runner.idle_timeout
-
-This timeout will enable a launch agent to terminate if no task has been claimed within the given time period. The value is a string with the following unit identifiers: `h`, `m` or `s` for hours, minutes and seconds, respectively (e.g., `5m` is 5 minutes).
-
-NOTE: The default behaviour is to never time out due to inactivity.
-
-=== runner.ssh.advertise_addr
-
-This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
-
-The address is of the form `*host:port*` and is displayed in the 'Enable SSH' and 'Wait for SSH' sections for a job that is rerun.
-
-NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the 'Rerun job with SSH' feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
-
-==== Considerations before enabling SSH debugging
-
-Task agent runs an embedded SSH server and agent on a dedicated port when the 'Rerun job with SSH' option is activated. This feature will not affect any other SSH servers or agents on the system that the runner is installed on.
-
-* The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple launch agents are installed on the same host.
-* The SSH server will inherit the same user privileges and associated access authorizations as task agent as defined by the xref:runner-installation.adoc#runner-command_prefix[runner.command_prefix parameter].
-* The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH, but only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
-* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization’s concurrency limit, and the task agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
-
-== CircleCI Server とランナーの互換性
-_CircleCI ランナーは CircleCI Server v3.1.0 以上で使用できます。_
-
-CircleCI Server のマイナー バージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。 以下の表に、CircleCI Server バージョンごとに、ランナーのインストール時に使用できる `circleci-launch-agent` のバージョンを示します。
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| CircleCI Server のバージョン  
-| ローンチ エージェントのバージョン
-
-| 3.0             
-| ランナーはサポートされていません
-
-| 3.1            
-| 1.0.11147-881b608
-|===
-
-
-=== 関連リソース
-
-- https://github.com/CircleCI-Public/runner-preview-docs/[Docker Hub 上の CircleCI ランナー イメージ (英語)]
-- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナー イメージ (英語)]
-- https://circleci.com/docs/[CircleCI ドキュメント (CircleCI 公式ドキュメントをまとめた Web サイト)]
-- https://docs.docker.com/[Docker ドキュメント (英語)]
+- xref:container-runner.adoc[コンテナランナーのリファレンスガイド]
+- xref:runner-faqs.adoc[セルフホストランナーについてよく寄せられるご質問]

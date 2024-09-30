@@ -1,0 +1,57 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI 料金プランの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document is an introduction to the plans CircleCI offers to developers.
+:icons: font
+:toc: macro
+:toc-title:
+
+このドキュメントでは、開発者の皆様に向けた CircleCI の料金プランについてご案内します。
+
+[#overview]
+== 概要
+
+クレジットベースの従量課金制プランでは、使用量に応じた料金のみが請求されます。また、チームの link:https://circleci.com/ja/continuous-integration/[CI/CD] ソリューションの柔軟なカスタマイズや拡張が可能です。 クレジットは、秒単位で消費され、分単位のレートは選択したビルドの設定によって異なります。
+
+チームに最適なプランを検討する際は、以下のような要素を考慮する必要があります。
+
+- チームのユーザー数
+- 必要なサポートのレベル (無料の Community サポート、Standard サポート、Premium サポート)
+- 複数のマシンタイプやリソースクラスの利用の要否
+- セルフホストランナー数の制限の有無
+
+チームでクレジットを使用する場合を考えてみましょう。 チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めているとします。 大規模なプロジェクトもあれば、CI/CD の設定で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットベースプランでは、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定することが可能です。
+
+たとえば、大きな resource_class (CPU 4基、 メモリ 8 GB) を使用して 1 分あたりのクレジット数を増やし、大規模なプロジェクトのビルドを高速化することができます。一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は、小さな resource_class (CPU 1基、 メモリ 2 GB) を使用できます。
+
+このセクションでは、開発者の皆様のCI/CD のニーズに対して各プランで提供される内容を説明します。 マシンタイプ別の消費クレジットについては link:https://circleci.com/ja/pricing/[料金プラン] のページもご確認ください。
+
+[#our-plans]
+== 料金プラン
+
+下記ページから各料金プランの内容をご覧ください。
+
+- xref:plan-free#[Free プラン]
+- xref:plan-performance#[Performance プラン]
+- xref:plan-scale#[Scale プラン]
+- xref:plan-server#[Server プラン]
+
+[#configuring-your-credit-plan]
+== クレジットベースプランの設定
+
+Free プランまたは Performance プランの設定を行うには、link:https://app.circleci.com/[CircleCI Web アプリケーション]から、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は link:https://circleci.com/ja/talk-to-us/[お問い合わせください]。
+
+Performance プランの解約については、xref:faq#cancel-performance-plan[Performance プランの解約に関するFAQ]をご参照ください。
+
+[#managing-credit-usage]
+== クレジット使用量の管理
+
+重複するアーティファクトのアップロードの排除などにより最適化し、クレジット消費を抑えることが可能です。 また、ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、 xref:persist-data#[データの永続化]のページを参照してください。

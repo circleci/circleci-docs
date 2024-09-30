@@ -1,0 +1,11 @@
+extends: occurrence
+message: "More than 3 commas!"
+level: warning
+# Here, we're counting the number of times a comma appears
+# in a sentence.
+#
+# If it occurs more than 3 times, we'll flag it.
+scope: sentence
+ignorecase: false
+max: 3
+token: ','

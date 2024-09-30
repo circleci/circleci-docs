@@ -1,0 +1,162 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= deploy から run への移行
+:page-layout: classic-docs
+:page-liquid:
+:page-description: 廃止予定の deploy ステップから run への移行方法
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#introduction]
+== はじめに
+
+廃止予定の `deploy` ステップが使用されている設定ファイルは、 _変更する必要_ があります。ジョブで xref:parallelism-faster-jobs#[parallelism (並列実行)] が含まれているかどうかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
+
+- *parallelism: 1 のジョブの場合*: `deploy` キーを xref:configuration-reference#run[`run`] キーに変更します。 移行に必要な処理はこれだけです。
+- *parallelism > 1 のジョブの場合*: `parallelism > 1` のジョブの場合、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブでは複数のテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブは `parallelism > 1` となり、deploy ジョブでは以前の `deploy` ステップのコマンドが `run` に置き換えられ、並列実行は行われません。 下記のコード例をご覧ください。
+
+== Parallelism > 1 の場合
+
+以下は、`parallelism > 1` の設定ファイルで、廃止予定の `deploy` ステップを置き換える場合のコード例です。
+
+CAUTION: 1 つ目の例のコードには廃止予定のステップが含まれています。 コピーしないでください。
+
+```yml
+# Example of deprecated syntax, do not copy
+version: 2.1
+jobs:
+  deploy-step-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      - deploy: #deprecated deploy step, do not copy
+          command: |
+            echo "this is a deploy step which needs data from the rand"
+            cat rand_*.txt
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - deploy-step-job
+```
+
+完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出できます。これを実行するには `doing-things-job` を完了させる必要があります。 `doing-things-job` が 並列実行を 3 つ、`deploy-step-job` が実際のデプロイを行います。 以下のコード例を参照してください。
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+  # create a new job with the deploy step in it
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: # change "deploy" to "run"
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      # add your new job and make it depend on the
+      # "doing-things-job"
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+[#using-workspaces]
+=== ワークスペースの使用
+
+`deploy-job` で `doing-things-job` からのファイルが必要な場合は、xref:workspaces#[ワークスペース] を使用します。 ワークスペースを使用すると、2 つのジョブでファイルを共用でき、`deploy-job` のファイルへのアクセスが可能になります。 以下の例を参照してください。
+
+```yml
+version: 2.1
+jobs:
+  doing-things-job:
+    docker:
+      - image: cimg/base:stable
+    parallelism: 3
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+      - run:
+          name: "Write random data"
+          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
+      - run:
+          name: "Emulate doing things"
+          command: |
+            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
+              sleep 30
+            fi
+      # save the files your deploy step needs
+      - persist_to_workspace:
+          root: .     # relative path to our working directory
+          paths:      # file globs which will be persisted to the workspace
+           - rand_*
+
+  deploy-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # attach the files you persisted in the doing-things-job
+      - attach_workspace:
+          at: . # relative path to our working directory
+      - run:
+          command: |
+            echo "this is a deploy step"
+
+workflows:
+  deploy-step-workflow:
+    jobs:
+      - doing-things-job
+      - deploy-job:
+          requires:
+            - doing-things-job
+```
+
+このコード例では "fan-in" ワークフロー (詳細は xref:workflows#fan-outfan-in-workflow-example[ワークフロー] を参照) を効果的に使用しています。
+
+WARNING: 廃止予定の `deploy` ステップのサポートは最終的に終了します。 CircleCI では、お客様が設定ファイルを移行する時間を十分に取る予定です。

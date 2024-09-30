@@ -1,0 +1,68 @@
+---
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
+---
+= JVM ヒープサイズの設定
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、コンテナごとに JVM_HEAP_SIZE の値を設定する方法を説明します。
+:icons: font
+:toc: macro
+:toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+以下のコンテナには JVM ヒープサイズを設定することができます (`frontend`、`test-results`、`output-processing`、`contexts-service`)。 `「Terminating due to java.lang.OutOfMemoryError: Java heap space」`などの「メモリ不足」エラーが表示された場合は、ヒープサイズを増やすことを検討してください。
+
+== 設定
+
+各コンテナの JVM_HEAP_SIZE の値を設定するには、まずサービスマシン上で customizaitions ファイルを作成する必要があります。
+
+1. 以下のように customizations ファイルを作成します。
++
+```shell
+/etc/circleconfig/frontend/customizations
+/etc/circleconfig/test-results/customizations
+/etc/circleconfig/output-processor/customizations
+/etc/circleconfig/contexts-service/customizations
+```
+
+2. 各 customizations ファイルで、次の行を追加して、ご希望の JVM ヒープサイズをエクスポートします。
++
+```shell
+export JVM_HEAP_SIZE=2g
+```
+
+3. 管理コンソールダッシュボードから CircleCI アプリケーションを終了して再起動します（例： your-circleci-hostname.com:8800 ）。
+
+
+== 変更後の検証
+正常に再起動したら、コンテナごとに次の REPL コマンドを実行することにより、設定値が正しく適用されているかを確認できます。
+
+
+* `frontend`
++
+```shell
+sudo docker exec -it frontend lein repl :connect 6005
+```
+* `test-results`
++
+```shell
+sudo docker exec -it test-results lein repl :connect 2719
+```
+* `output-processor`
++
+```shell
+sudo docker exec -it picard-output-processor lein repl :connect 6007
+```
+
+すると、以下の出力が表示されます。
+
+```clojure
+(System/getenv "JVM_HEAP_SIZE") ;; 上記で設定した値が返されます
+```
+```clojure
+(-> (java.lang.Runtime/getRuntime) (.maxMemory)) ;; return value should match with JVM_HEAP_SIZE
+```
