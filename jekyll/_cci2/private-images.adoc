@@ -1,16 +1,14 @@
 ---
-version:
-- Cloud
-- Server v2.x
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
 ---
 = Using Docker Authenticated Pulls
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes how to authenticate with your Docker registry provider to pull images.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document describes how to authenticate with your Docker registry provider to pull images.
 
@@ -18,18 +16,17 @@ Authenticated pulls allow access to private Docker images. It may also grant hig
 
 CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may be implemented for CircleCI users in the future. This is why we are encouraging you and your team to add Docker Hub authentication to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
-toc::[]
+[#docker-hub]
+== Docker Hub
 
-## Docker executor
+[#docker-executor]
+=== Docker executor
 
-For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password, place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
+For the https://circleci.com/docs/using-docker[Docker executor], specify a username and password in the `auth` field of your https://circleci.com/docs/configuration-reference[config.yml] file. To protect the password, place it in a https://circleci.com/docs/contexts/[context], or use a per-project Environment Variable.
 
-NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
-Pulls through Docker Hub registry mirrors are not yet available on server 3.x.
+NOTE: Contexts are the more flexible option. CircleCI supports multiple contexts, which is an effective way to modularize secrets, ensuring jobs can only access what they _need_.
 
-NOTE: Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they _need_.
-
-In this example, we grant the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
+This example grants the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
 
 [source,yaml]
 ----
@@ -72,8 +69,8 @@ username/password for the `auth` key. For example:
     password: $QUAY_PASSWORD
 ----
 
-
-## Machine executor (with Docker orb)
+[#machine-executor-with-docker-orb]
+=== Machine executor (with Docker orb)
 
 Alternatively, you can utilize the `machine` executor to achieve the same result using the Docker orb:
 
@@ -93,7 +90,9 @@ workflows:
 
 jobs:
   machine-job:
-    machine: true
+    machine:
+      image: ubuntu-2004:current
+    resource_class: large
     steps:
       - docker/check:
           docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
@@ -102,17 +101,19 @@ jobs:
           images: 'circleci/node:latest'
 ----
 
-
-## Machine executor (with Docker CLI)
+[#machine-executor-with-docker-cli]
+=== Machine executor (with Docker CLI)
 
 Or with the CLI:
 
 [source,yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-2004:current
+    resource_class: large
     working_directory: ~/my_app
     steps:
       # Docker is preinstalled, along with docker-compose
@@ -124,21 +125,34 @@ jobs:
           docker run -d --name db company/proprietary-db:1.2.3
 ----
 
-## AWS ECR
+[#aws-ecr]
+== AWS ECR
 
-CircleCI now supports pulling private images from Amazon's ECR service.
+CircleCI supports pulling private images from AWS ECR.
 
 TIP: You can pull your private images from ECR repositories in any regions. However, for the best experience, we strongly recommend you make a copy of your image in `us-east-1` region, and specify that `us-east-1` image for the Docker executor.
-Our job execution infrastructure is in the `us-east-1` region, so using `us-east-1` images accelerates the process of spinning up your environment.
+CircleCI job execution infrastructure is in the `us-east-1` region, so using `us-east-1` images accelerates the process of spinning up your environment.
 
-You can start using private images from ECR in one of two ways:
+You can pull images from ECR for your jobs using a few different methods.
 
-1. Set your AWS credentials using standard CircleCI private environment variables.
-2. Specify your AWS credentials in `.circleci/config.yml` using `aws_auth`:
+The best practice approach is to pull from ECR using OpenID Connect (OIDC). See the xref:pull-an-image-from-aws-ecr-with-oidc#[Pull an image from AWS ECR with OIDC] how-to guide for full details.
+
+Some advantages to using OIDC over using AWS credentials to pull images from ECR:
+
+* **Improved security**: By using OIDC authentication, storing AWS credentials directly in your CircleCI configuration or environment variables is avoided, reducing the risk of exposure.
+
+* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate AWS credentials.
+
+* **Fine-grained access control**: By associating an IAM role with the OIDC authentication, exact permissions granted to CircleCI for pulling ECR images can be controlled, ensuring a least-privilege approach.
+
+Alternatively, you can use one of the following methods:
+
+. Set your AWS credentials using standard CircleCI private environment variables.
+. Specify your AWS credentials in `.circleci/config.yml` using `aws_auth`:
 
 [source,yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -152,7 +166,7 @@ Both options are virtually the same. However, the second option enables you to s
 
 [source,yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -182,7 +196,6 @@ jobs:
           command: "something something darkside.... cli"
 
 workflows:
-  version: 2
   main:
     jobs:
       - build:
@@ -199,8 +212,34 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
+The minimum permissions required for your AWS account are as follows (you will need to substitute `YOUR_ECR_REPO_ARN`):
+
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer"
+            ],
+            "Effect": "Allow",
+            "Resource": "<your-ECR-repo-ARN>"
+        },
+        {
+            "Action": [
+                "ecr:GetAuthorizationToken"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+----
+
 ifndef::pdf[]
 ## See also
 
-* https://circleci.com/docs/2.0/configuration-reference[Configuration Reference]
+* https://circleci.com/docs/configuration-reference[Configuration Reference]
 endif::[]

@@ -1,0 +1,6 @@
+[NOTE]
+====
+組織 ID を `--owner-id` フラグで指定する必要があります。
+
+image:org-id.png[screenshot showing where to find your organization ID]
+====

@@ -1,16 +1,15 @@
 ---
 layout: classic-docs
 title: "ビルドアーティファクトの保存"
-short-title: "ビルドアーティファクトの保存"
 description: "ビルド中に作成されたアーティファクトのアップロード例"
-order: 70
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-このドキュメントでは、アーティファクトの取扱方法について説明します。
+このドキュメントでは、CircleCI でのアーティファクトの取扱方法について説明します。 アーティファクトは、ジョブまたはパイプラインの完了後にデータを永続化するために使用します。 たとえば、ドキュメントやその他アセットの構築や、詳しい調査のためのテスト結果の保存などです。
 
 * 目次
 {:toc}
@@ -18,21 +17,23 @@ version:
 ## アーティファクトの概要
 {: #artifacts-overview }
 
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルドプロセス出力を格納するストレージとして使用できます。
+アーティファクトには、ジョブが完了した後もデータが保持され、ビルドプロセス出力を格納するストレージとして使用できます。
 
-たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
+たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
-![アーティファクトのデータ フロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータフロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。
+アーティファクトのもう 1 つの例として、Android アプリとしてパッケージ化されるプロジェクトがあり、この場合は、`.apk` ファイルが Google Play にアップロードされます。
 
-ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
+ジョブによってスクリーンショット、カバレッジレポート、コアファイル、デプロイ tarball などの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
-CircleCI Web アプリでパイプラインの **Job** ページに移動し、[**Artifacts**] タブを見つけます。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
+[CircleCI Web アプリ](https://app.circleci.com/)でパイプラインの **Job** ページに移動し、**Artifacts** タブを見つけます。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
-![[Artifacts (アーティファクト)] タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
+![Artifacts タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
-**アーティファクトへは作成から30日間アクセスできます。 **  ドキュメントや永続的なコンテンツのソースとして依存している場合、S3や静的Webサイト用のGitHub Pages、Netlifyのような専用領域にデプロイすることを推奨します。
+デフォルトのアーティファクトの保存期間は 30 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 30 日間となっています。
+
+ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/)のページを参照してください。
 
 **注:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
@@ -41,8 +42,9 @@ CircleCI Web アプリでパイプラインの **Job** ページに移動し、[
 
 ビルド時に作成したアーティファクトをアップロードするには、以下の例を参考にしてください。
 
+{:.tab.artifacts.Cloud}
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -53,9 +55,37 @@ jobs:
 
     working_directory: /tmp
     steps:
-
       - run:
-          name: ダミー アーティファクトの作成
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+
+```
+
+{:.tab.artifacts.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
           command: |
             echo "my artifact file" > /tmp/artifact-1;
             mkdir /tmp/artifacts;
@@ -69,14 +99,40 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job **ページの **[Artifacts]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。        
+{:.tab.artifacts.Server_2}
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+```
+
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルドアーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job** ページの **Artifacts** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。 1 つのジョブで実行できる `store_artifacts` ステップの数に制限はありません。
 
 現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
   - `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
-  - `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
+  - `destination` **(オプション)** は、アーティファクト API でアーティファクトパスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
 
 ## コアファイルのアップロード
 {: #uploading-core-files }
@@ -92,7 +148,7 @@ jobs:
 
 2. 以下の行を含む `main.c` ファイルを作成します。
 
-     ```C
+     ```c
      # <stdlib.h> を含めます
 
      int main(int argc, char **argv) {
@@ -104,6 +160,61 @@ jobs:
 
 このサンプル C abort プログラムをコンパイルし、コアダンプをアーティファクトとして収集する `config.yml` の全文は、以下のようになります。
 
+{:.tab.artifacts2.Cloud}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/work
+    steps:
+      - checkout
+      - run: make
+      - run: |
+          # tell the operating system to remove the file size limit on core dump files
+          ulimit -c unlimited
+          ./dump
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/core_dumps
+```
+
+{:.tab.artifacts2.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/work
+    steps:
+      - checkout
+      - run: make
+      - run: |
+          # tell the operating system to remove the file size limit on core dump files
+          ulimit -c unlimited
+          ./dump
+      - run:
+          command: |
+            mkdir -p /tmp/core_dumps
+            cp core.* /tmp/core_dumps
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/core_dumps
+```
+
+{:.tab.artifacts2.Server_2}
 ```yaml
 version: 2
 jobs:
@@ -134,16 +245,16 @@ jobs:
 
 最後に、`store_artifacts` によってアーティファクトサービスの `/tmp/core_dumps` ディレクトリにコアダンプファイルが格納されます。
 
-![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
+![アーティファクトページに表示されたコアダンプファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-CircleCI がジョブを実行すると、**Job ページ**の [Artifacts] タブにコアダンプファイルへのリンクが表示されます。
+CircleCI がジョブを実行すると、**Job** ページの **Artifacts** タブにコアダンプファイルへのリンクが表示されます。
 
 ## ビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
 
 `curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
-1. [こちらの手順]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
+1. [こちらの手順]({{ site.baseurl }}/ja/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
 
 2. ターミナルウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 
@@ -157,8 +268,8 @@ export CIRCLE_TOKEN=':your_token'
 # then, the result is piped into `grep` to extract the URLs.
 # finally, `wget` is used to download the the artifacts to the current directory in your terminal.
 
-curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
-   | grep -o 'https://[^"]*' \
+curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
+   | grep -o "https://[^"]*" \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
@@ -168,37 +279,80 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
 ```
 
-CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンスガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
+CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンスガイド](https://circleci.com/docs/api/v1/#artifacts)を参照してください。
 
-| プレースホルダー      | 意味                                                                           |
-| ------------- | ---------------------------------------------------------------------------- |
-| `:your_token` | 上記で作成した個人用の API トークン。                                                        |
-| `:vcs-type`   | 使用しているバージョン管理システム (VCS)。 `github` または `bitbucket` のいずれかとなります。                |
-| `:username`   | ターゲット プロジェクトの VCS プロジェクト アカウントのユーザー名または組織名。 CircleCI アプリケーションの画面左上に表示されています。 |
-| `:project`    | ターゲット VCS リポジトリの名前。                                                          |
-| `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
+| プレースホルダー      | 意味                                                                         |
+| ------------- | -------------------------------------------------------------------------- |
+| `:your_token` | 上記で作成した個人用の API トークン。                                                      |
+| `:vcs-type`   | 使用しているバージョン管理システム (VCS)。 `github` または `bitbucket` のいずれかとなります。              |
+| `:username`   | ターゲットプロジェクトの VCS プロジェクトアカウントのユーザー名または組織名。 CircleCI アプリケーションの画面左上に表示されています。 |
+| `:project`    | ターゲット VCS リポジトリの名前。                                                        |
+| `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                |
 {: class="table table-striped"}
+
+## アーティファクトストレージのカスタマイズ
+{: #artifacts-and-self-hosted-runner }
+
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 アーティファクトに関連するアクションには、ネットワークとストレージの使用が発生するものがあります。 お客様の使用量が制限を超えた場合、料金が発生します。
+
+アーティファクトを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 アーティファクトを保存する利点の一つは、ビルドが失敗する原因のトラブルシューティングにアーティファクトを使用できることです。 ビルドに成功したら、そのアーティファクトはほぼ必要ありません。 ニーズに合う場合は、アーティファクトのストレージ保存期間を短く設定することを推奨します。
+
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)のページを参照してください。
 
 ## アーティファクトの最適化
 {: #artifacts-optimization }
 
-最適化オプションは、実行しようとしている内容に応じてプロジェクトごとに異なります。 ネットワークやストレージの使用量を削減するために、下記をお試しください。
+#### アップロードされているアーティファクトの確認
+{: #check-which-artifacts-are-being-uploaded }
 
-- `store_artifacts` が不必要なファイルをアップロードしていないか確認する。
-- 並列処理を使用している場合は、同じアーティファクトがないか確認する。
-- 最低限のコストでテキストのアーティファクトを圧縮する。
-- UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードする。
-- フィルタを外し、失敗したテストまたは成功したテストのみをアップロードする。
-- 1つのブランチにのみアーティファクトをアップロードする。
-- 大きなアーティファクトは、独自のバケットに無料でアップロードする。
 
-詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#how-to-optimize-your-storage-and-network-transfer-use)のページを参照して下さい。
+実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
+ジョブで並列実行を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
-## 関連項目
-{: #see-also }
-{:.no_toc}
+#### 大きなアーティファクトのアップロード
+{: #uploading-large-artifacts }
 
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching/)
-- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data/#using-artifacts)
+
+テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。 大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに _無料で_ アップロードすることが可能です。
+
+UI テストのイメージや動画をアップロードする場合は、フィルタを適用して対象を絞り、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
+
+パイプラインがバイナリまたは uberJAR をビルドしている場合、コミットのたびにそれが必要かどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
+
+#### テスト失敗時のみの結果のアップロード
+{: #only-upload-test-results-on-failure }
+
+[`when` 属性](/docs/ja/configuration-reference#the-when-attribute)を使用すると、設定のステップの結果に基づいてフィルタリングできます。 `when` 属性は `on_success`、`on_fail` または `always` に設定できます。 失敗したテストのアーティファクトのみをアップロードするには、次のように `when: on_fail` 行をジョブに追加します。
+
+```yaml
+steps:
+  - run:
+      name: Testing application
+      command: make test
+      shell: /bin/bash
+      working_directory: ~/my-app
+      no_output_timeout: 30m
+      environment:
+        FOO: bar
+
+  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+
+  - run: |
+      sudo -u root createuser -h localhost --superuser ubuntu &&
+      sudo createdb -h localhost test_db
+
+  - run:
+      name: Upload Failed Tests
+      command: curl --data fail_tests.log http://example.com/error_logs
+      when: on_fail
+```
+
+## 次のステップ
+{: #next-steps }
+
+- [データの永続化]({{site.baseurl}}/ja/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/workspaces)
+- [最適化の概要]({{site.baseurl}}/ja/optimizations)

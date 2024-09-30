@@ -59,7 +59,6 @@ $ curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 {
   "user_key_fingerprint" : null,
   "days_left_in_trial" : -238,
-  "plan" : "p16",
   "trial_end" : "2011-12-28T22:02:15Z",
   "basic_email_prefs" : "smart",
   "admin" : true,
@@ -162,7 +161,7 @@ The branch name should be url-encoded.
 
 <h2 id="build">Single Job</h2>
 
-<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/2.0/configuration-reference/#notify), in which case this object is the value to a key named 'payload'.
+<span class='label label-info'>Note:</span> This is also the payload for the [notification webhooks]( {{ site.baseurl }}/configuration-reference/#notify), in which case this object is the value to a key named 'payload'.
 
 {{ site.data.api.build | api_endpoint }}
 
@@ -218,13 +217,14 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [Running Tests in Parallel]( {{ site.baseurl }}/2.0/parallelism-faster-jobs/) and [optional build parameters]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
+For more information about build parameters, refer to the [Running tests in Parallel]( {{ site.baseurl }}/parallelism-faster-jobs/) and [Optional build parameters]({{ site.baseurl }}/inject-environment-variables-with-api/#api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
+{: class="alert alert-info" }
 
 {{ site.data.api.project_branch | api_endpoint }}
 
 <h2 id="new-project-build">Trigger a new Build by Project (preview)</h2>
 
-<span class='label label-info'>Prerequisite:</span> You must go to your Project Settings in the CircleCI app to [Enable Build Processing (preview)]( {{ site.baseurl }}/2.0/build-processing/). This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
+<span class='label label-info'>Prerequisite:</span> This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
 
 {{ site.data.api.project_build | api_endpoint }}
 
@@ -269,7 +269,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 {{ site.data.api.test_metadata | api_endpoint }}
 
-<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]( {{ site.baseurl }}/2.0/collect-test-data/)
+<span class='label label-info'>Note:</span> [Learn how to set up your builds to collect test metadata]( {{ site.baseurl }}/collect-test-data/)
 
 ## SSH Keys
 

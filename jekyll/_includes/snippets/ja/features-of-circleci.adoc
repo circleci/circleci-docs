@@ -1,27 +1,29 @@
-=== Private orbs
+=== プライベート Orb
 
-CircleCI orbs are shareable configuration packages that enable developers to create private, standardized configurations for use across an organization by different teams. You have access to an unlimited number of private orbs that you can use to securely share across teams and groups.
+CircleCI Orb は、共有可能な設定パッケージであり、組織全体で様々なチームが使用できるプライベートで標準化された設定を作成していだけます。 チームやグループ間で安全に共有できるプライベート Orb を、数に制限なくご利用いただけます。
 
-For more information on private orbs, refer to the <<orb-intro/#private-orbs-vs-public-orbs,Orbs Introduction>> page.
+プライベート Orb に関する詳細は、<<orb-intro#private-orbs-vs-public-orbs,Orbの概要>> をご覧ください。
 
-=== Concurrency
+=== 同時実行
 
-Concurrency is the ability to run multiple jobs in your workflows at the same time. This is a powerful feature that allows you to decrease your build times and shorten feedback cycles.
+同時実行は、ワークフローにおいて複数のテストを同時に実行できる機能です。
+ この強力な機能により、ビルド時間を削減し、フィードバックサイクルを短縮することができます。
 
-=== Self-hosted runners
 
-CircleCI runners allow you to use your own infrastructure for running jobs, providing more granular control of your own environment and flexibility in building and testing on a wide variety of architectures.
+=== セルフホストランナー
 
-For more information about using CircleCI runners, please see the <<runner-overview#,CircleCI Runner Overview>> page.
+CircleCI ランナーにより、お客様のインフラを使用してジョブを実行できるため、お客様の環境をより詳細に制御することができ、さまざまなアーキテクチャでのビルドとテストを柔軟に行うことができます。
 
-=== Flaky test detection
+CircleCI ランナーの使用方法の詳細については、<<runner-overview#,CircleCI ランナーの概要>> を参照してください。
 
-The average failed workflow wastes approximately 30 minutes. Detecting flaky tests can save you significant amounts of time in your builds and workflows. Advanced insights are available to help you troubleshoot failed and flaky tests.
+=== 結果の不安定なテストの検出
 
-For more detailed information about flaky tests, refer to the <<insights-tests/#flaky-tests,Test Insights>> page.
+ワークフローの失敗による平均消費時間は約 30 分です。 不安定なテストを検出することで、ビルドやワークフローにかかる時間を大幅に短縮できます。 失敗したテストや不安定なテストのトラブルシューティングに役立つ高度なインサイトをご利用いただけます。
 
-=== Docker layer caching
+不安定なテストの詳細については、<<insights-tests#flaky-tests, テストインサイト>> を参照してください。
 
-Reducing the time it takes to build a Docker image is an important consideration for developers who consistently use these images in their workflows. Consider using Docker Layer Caching (DLC) if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, rather than impact the actual container used to run your job. Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster.
+=== Docker レイヤーキャッシュ
 
-For more information about Docker Layer Caching, please refer to the <<docker-layer-caching#,Enabling Docker Layer Caching>> page.
+ワークフローで常に Docker イメージを使用する開発者にとって、 Docker イメージのビルドにかかる時間の短縮は考慮すべき重要な要素です。 Docker イメージのビルドがお客様のCI/CD プロセスにおける日常作業である場合、Docker レイヤーキャッシュ(DLC) の使用をご検討ください。 DLC により、ジョブの実行に使用する実際のコンテナには影響を与えずにジョブ内で作成されるイメージレイヤーが保存されます。 Docker のパフォーマンスを活用して迅速にビルドできるよう効率化機能が設計されています。
+
+Docker レイヤーキャッシュの詳細は、<<docker-layer-caching#,Docker レイヤーキャッシュの有効化>> を参照してください。

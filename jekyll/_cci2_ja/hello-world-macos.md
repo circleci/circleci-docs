@@ -1,16 +1,13 @@
 ---
 layout: classic-docs
-title: "macOS での Hello World"
-short-title: "macOS での Hello World"
+title: "CircleCI での macOS アプリケーションの設定"
 description: "CircleCI での最初の macOS プロジェクト"
-categories:
-  - はじめよう
-order: 4
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
-CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)を参照することをお勧めします。 また、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」も併せてご覧ください。
+CircleCI の **macOS 実行環境**で CI/CD を開始する方法について説明します。 CircleCI の基本事項について学びたい場合は、[入門ガイド]({{site.baseurl }}/getting-started)を参照してください。 また、[iOS プロジェクトのテストと設定]({{ site.baseurl}}/ja/testing-ios/)も併せてご覧ください。
 
 ## 前提条件
 {: #prerequisites }
@@ -23,26 +20,30 @@ CircleCI の **macOS 実行環境**で継続的インテグレーションを開
 ## macOS Executor の概要
 {: #overview-of-the-macos-executor }
 
-macOS 実行環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
+macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
+macOS Executor をセットアップする前に、サンプルアプリをセットアップする必要があります。
 
-## サンプル アプリケーション
+## サンプルアプリ
 {: #example-application }
 
-このサンプルアプリケーションは簡単な mac アプリです。5分間のタイマーが実行され、単体テストが含まれています (このアプリは単に macOS 実行環境の基礎を説明することを目的としており、実際のアプリケーションはこれよりもはるかに複雑です)。
+このサンプルアプリは、シンプルな mac アプリです。 このアプリでは、5 分間のタイマーが実行され、単体テストが 1 つ含まれています。 実際のアプリはこれよりはるかに複雑です。 このアプリは単に mac OS 実行環境について説明するためのものです。
 
-macOS 実行環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
+このサンプルアプリでは、CircleCI は以下を実現するように設定されています。
 
-- コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
-- テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
+- リポジトリに変更をプッシュすると、常に mac OS の仮想マシンで XCode を使ってテストを実行する
+- テストが正常に完了した後、コンパイルされたアプリをアーティファクトとして作成してアップロードする
 
-サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
+このサンプルアプリのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェックアウトできます。
 
-## サンプルの設定ファイル
+下記のサンプル設定ファイルのコードを実行しテストする場合は、GitHub からサンプルアプリをフォークまたは複製する必要があるのでご注意ください。 このサンプル設定ファイルが、すべての Xcode プロジェクトで動作するとは限りません。
+
+## サンプル設定ファイル
 {: #example-configuration-file }
 
-このアプリケーションでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
+このアプリでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
+
+サポートされている Xcode のバージョンの全リストは、[macOS の使用](/docs/using-macos/#supported-xcode-versions)のページでご確認ください。
 
 ```yaml
 version: 2.1
@@ -50,17 +51,17 @@ version: 2.1
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
+      xcode: 14.2.0 # indicate your selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
 
-  build:
+  build: 
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
-    steps:
+      xcode: 14.2.0 # indicate your selected version of Xcode
+    steps: 
       - checkout
       - run:
           # build our application
@@ -75,67 +76,29 @@ jobs: # a basic unit of work in a run
           destination: app
 
 workflows:
-  version: 2
   test_build:
     jobs:
       - test
       - build:
-        requires:
-          test
+          requires:
+            - test
 ```
 
-まだ CircleCI の `config.yml` を編集したことがない方には、わかりにくい部分があるかもしれません。 `config.yml` の動作の概要については、以降のセクションに記載しているリンク先から確認できます。
+上記の例の `.circleci/config.yml` には以下が含まれています。
 
-macOS でのビルドの基礎について説明しているため、上記のサンプルの `config.yml` には以下の内容が含まれています。
-
-- 使用する [`executor`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macos--windows-executor) の指定
-- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) キーによるコードのプル
+- [`executor`](/docs/configuration-reference/#macos) の指定
+- [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) キーによるコードのプル
 - Xcode でのテストの実行
-- アプリケーションのビルド
-- アプリケーションの圧縮と [`store_artifacts`]({{site.baseurl }}/2.0/configuration-reference/#store_artifacts) キーによる保存
+- アプリのビルド
+- アプリの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) キーによる保存
 
-`config.yml` ファイルの詳細については、[設定リファレンスガイド]({{site.baseurl}}/ja/2.0/configuration-reference/)を参照してください。
+`.circleci/config.yml` ファイルの詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
 
-## Xcodeのクロスコンパイル
-{: #xcode-cross-compilation }
-
-### ユニバーサル バイナリ
-{: #universal-binaries } Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables.
-
-### Extracting Unwanted Architectures
-{: #extracting-unwanted-architectures }
-
-Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
-
-Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
-
-```shell
-lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
-```
-
-We can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64` which will output the following
-
-```
-Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
-```
-
-
-### Cross Compiled Binaries
-{: #cross-compiled-binaries }
-
-While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the x86_64 architecture simply change `ARCHS` to `x86_64`.
 
 ## 次のステップ
 {: #next-steps }
 
-macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの構成が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
+macOS Executor は iOS アプリのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
-- [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/2.0/testing-ios)
-- [iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)
-- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ja/2.0/ios-codesigning)
-
-また、CircleCI の機能については、以下のドキュメントを確認してください。
-
-- 2.0 設定ファイルの概要、および `.circleci/config.yml` ファイルにおけるトップレベル キーの階層については「[コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)」を参照してください。
-- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
-- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。
+- [macOS 上の iOS アプリのテスト]({{ site.baseurl }}/ja/testing-ios)
+- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ja/ios-codesigning)

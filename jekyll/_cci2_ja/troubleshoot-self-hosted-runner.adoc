@@ -1,0 +1,17 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+---
+= セルフホストランナーのトラブルシューティング
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
+:icons: font
+:toc: macro
+:toc-title:
+
+このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
+
+include::../_includes/snippets/troubleshoot/ja/self-hosted-runner-troubleshoot-snip.adoc[]

@@ -1,13 +1,12 @@
 ---
 layout: classic-docs
 title: "API トークンの管理"
-short-title: "API トークンの管理"
 description: "CircleCI の API 使用に権限が指定されたトークンを割り当てる方法"
-order: 20
-version:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 CircleCI の API を使用したり、パイプラインの詳細を確認したりするには、適切なアクセス許可を持つ API トークンが必要です。 ここでは、利用可能な API トークンの種類と、トークンを作成および削除する方法について説明します。
@@ -19,7 +18,7 @@ CircleCI では 2 種類の API トークンを作成できます。
 
   1. **パーソナル:** このトークンは CircleCI API とのやり取りに使用され、すべての情報の読み取りと書き込みに対するアクセス権を付与します。
   2. **プロジェクト**: このトークンは特定のプロジェクトに関する情報の読み取りと書き取りに対するアクセス権を付与します。 プロジェクト トークンには、*ステータス*、*読み取り専用*、*すべて*、の 3 つの権限範囲のオプションがあります。
-    - *ステータス* トークン: プロジェクトのビルド ステータスの読み取りに対するアクセス権を付与します。 [ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)際に便利です。
+    - *ステータス* トークン: プロジェクトのビルド ステータスの読み取りに対するアクセス権を付与します。 [ステータス バッジを埋め込む]({{ site.baseurl }}/ja/status-badges/)際に便利です。
     - _読み取り専用_ トークンは、プロジェクトの API への読み取り専用のアクセス権を付与します。
     - _管理者_ トークンは、プロジェクトの API の読み取りおよび書き込みに対するアクセス権を付与します。
 
@@ -84,7 +83,6 @@ API トークンは共有されたり、従業員やチームの間で回され�
 
 APIトークンの使用例としては、以下のようなものが考えられます。
 
-  - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)
-  - [条件付きのジョブをトリガーする]({{ site.baseurl }}/2.0/api-job-trigger/)
-  - [ビルドのアーティファクトをダウンロード]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci)して安全に保管する
-  - ビルドに[環境変数を挿入する]({{ site.baseurl }}/ja/2.0/env-vars/#api-を使用した環境変数の挿入)
+  - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/ja/status-badges/)
+  - [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/ja/artifacts/#downloading-all-artifacts-for-a-build-on-circleci)
+  - ビルドに[環境変数を挿入する]({{ site.baseurl }}/ja/inject-environment-variables-with-api)

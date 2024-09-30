@@ -1,0 +1,308 @@
+---
+
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+sectionTags:
+  cloud:
+    - "#echo-hello-world-cloud"
+  server-v4:
+    - "#echo-hello-world-server-4"
+  server-v3:
+    - "#echo-hello-world-server-3"
+  server-v2:
+    - "#echo-hello-world-server-2"
+---
+= Hello World
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Hello World を任意の実行環境から出力することから CircleCI の利用を始めます。
+:icons: font
+
+ここでは、任意の実行環境を使って基本的なパイプラインの操作を始める方法を紹介します。 このページに記載されている手順は、新しいプロジェクトをローカルで作成し、変更内容をお使いの VCS に Git を使ってプッシュすることを前提としています。 また、CircleCI への link:/docs/ja/first-steps/[ユーザー登録] がお済みであることも前提としています。
+
+すでに CircleCI に "プラグイン" するリポジトリをお持ちの場合は、設定ファイルのコミットを含め、すべて CircleCI Web アプリ内で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
+
+{% include snippets/ja/docker-auth.adoc %}
+
+[#echo-hello-world-cloud]
+== Server v4.x での Echo hello world
+
+この例では、`hello world` をコンソールに出力する `hello-job` というジョブを追加します。 まずは以下の手順を行います。
+
+. ご使用のローカルコードリポジトリのルートディレクトリに、`.circleci` というディレクトリを作成します。
+. 作成した `.circleci` ディレクトリから link:/docs/ja/configuration-reference[`config.yml`] ファイルを作成し、次の内容を追加します (タブを使用して実行環境を選択)。
++
+[.tab.hellocloud.Docker]
+--
+ジョブ `hello-job` は、 link:/docs/ja/circleci-images/#nodejs[ノード用のビルド済み CircleCI Docker イメージ] を実行するコンテナをスピンアップします。 詳細については、 link:/docs/ja/using-docker[Docker 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.Linux_VM]
+--
+ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/images?imageType=machine[Ubuntu マシンイメージ] を実行する Linux 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-linuxvm[Linux VM 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2204:2022.07.1
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.macOS]
+--
+ジョブ `hello-job` は、指定した Xcode バージョンを実行する macOS 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-macos[macOS 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    macos:
+      xcode: 13.4.1
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.Windows]
+--
+ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/orbs/orb/circleci/windows#usage-run_default[Windows Orb] で指定されたデフォルトの Executor を使用する Windows 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-windows[Windows 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  win: circleci/windows@5.0.0 # The Windows orb gives you everything you need to start using the Windows executor.
+
+jobs:
+  hello-job:
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.GPU]
+--
+NOTE: この GPU 実行環境は、 link:https://circleci.com/ja/pricing/[Scale] プランでご利用いただけます。
+
+ジョブ `hello-job` は、Machine Executor を使用する GPU 対応仮想マシンをスピンアップします。 GPU イメージは、 link:/docs/ja/configuration-reference#available-windows-gpu-image[Windows] と link:/docs/ja/configuration-reference#available-linux-gpu-images[Linux] にご利用いただけます。 詳細については、 link:/docs/ja/using-gpu[GPU 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2004-cuda-11.4:202110-01
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.Arm]
+--
+ジョブ `hello-job` は、Machine Executor を使用する [Arm (Linux) 仮想マシン] をスピンアップします。 詳細については、 link:/docs/ja/using-arm[Arm 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+. 変更内容を VCS にコミットしてプッシュします。
+. CircleCI Web アプリの **Projects** ページにアクセスし、新しいプロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。
+. ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
++
+image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
+
+**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
+
+[#echo-hello-world-server]
+== Server v3.x での Echo hello world
+
+NOTE: CircleCI Server 上で macOS 実行環境内でビルドするには、 link:/docs/ja/runner-overview[セルフホストランナー] を使用します。
+
+この例では、`hello world` をコンソールに出力する `hello-job` というジョブを追加します。 まずは以下の手順を行います。
+
+. ご使用のローカルコードリポジトリのルートディレクトリに、`.circleci` というディレクトリを作成します。
+. 作成した `.circleci` ディレクトリから link:/docs/ja/configuration-reference[`config.yml`] ファイルを作成し、次の内容を追加します (タブを使用して実行環境を選択)。
++
+[.tab.helloserver4.Docker]
+--
+ジョブ `hello-job` は、 link:/docs/ja/circleci-images/#nodejs[ノード用のビルド済み CircleCI Docker イメージ] を実行するコンテナをスピンアップします。 詳細については、 link:/docs/ja/using-docker[Docker 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver4.Linux_VM]
+--
+ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/images?imageType=machine[Ubuntu マシンイメージ] を実行する Linux 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-linuxvm[Linux VM 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver4.Windows]
+--
+ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/orbs/orb/circleci/windows#usage-run_default[Windows Orb] で指定されたデフォルトの Executor を使用する Windows 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-windows[Windows 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: windows-default
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver4.Arm]
+--
+ジョブ `hello-job` は Arm (Ubuntu 22.04) 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-arm[Arm 実行環境の使用] のページを参照してください。
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+. 変更内容を VCS にコミットしてプッシュします。
+. CircleCI Web アプリの **Projects** ページにアクセスし、新しいプロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。
+. ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
++
+image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
+
+**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
+
+[#next-steps]
+== 次のステップ
+
+* CircleCI 固有のコンセプトのサマリーについては、 link:/docs/ja/concepts[コンセプト] のページを参照してください。
+* 同時実行、順次実行、スケジュール実行、手動承認の各ワークフローによるジョブ実行のオーケストレーションの例については、 link:/docs/ja/workflows[ワークフロー] に関するページを参照してください。
+* すべてのキーと実行環境の完全なリファレンス情報については、 link:/docs/configuration-reference[CircleCI 設定のリファレンス] に関するページでご確認いただけます。

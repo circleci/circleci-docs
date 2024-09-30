@@ -1,0 +1,47 @@
+[#can-i-migrate-existing-scheduled-workflows]
+=== Can I migrate existing scheduled workflows to scheduled pipelines?
+
+Yes, visit the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Scheduled pipelines migration] guide for more information.
+
+[#find-schedules-that-i-have-created]
+=== How do I find the schedules that I have created?
+
+As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
+
+```shell
+curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>"
+```
+
+Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+
+[#what-time-zone-is-used-for-scheduled-pipelines]
+=== What time zone is used for scheduled pipelines?
+
+Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
+
+[#pipelines-scheduled-to-run-specific-time-of-day]
+=== Can pipelines be scheduled to run at a specific time of day?
+
+Yes, you can set up xref:scheduled-pipelines#[Scheduled pipelines] through the xref:scheduled-pipelines#use-project-settings[CircleCI web app], or with xref:scheduled-pipelines#use-the-api[CircleCI API v2].
+
+If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
+
+[#scheduled-pipelines-guaranteed-to-run-time-scheduled]
+=== Are scheduled pipelines guaranteed to run at precisely the time scheduled?
+
+CircleCI provides no guarantees about precision. A schedule will be run as if the commit was pushed at the configured time.
+
+[#scheduled-pipeline-run-later]
+=== Why did my scheduled pipeline run later than expected?
+
+The scheduling expression with scheduled pipelines is different to link:https://en.wikipedia.org/wiki/Cron#CRON_expression[the Cron expression].
+
+For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window. Note that it does not mean that it will run at 08:00 UTC exactly.
+
+However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run. In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
+
+[#do-you-support-regex]
+=== Do you support regex?
+
+Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regex) included in the webhook, API call, or schedule.

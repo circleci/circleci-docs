@@ -5,6 +5,7 @@
 :doctype: book
 :toc:
 :toc-title: Contents
+:toclevels: 4
 :icons: font
 :page-liquid:
 :source-highlighter: rouge

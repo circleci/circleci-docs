@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License"); you may
 not use this file except in compliance with the License. You may obtain
 a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -16,11 +16,11 @@ under the License.
 <% language_tabs = current_page.data.language_tabs || [] %>
 <% page_content = yield %>
 <%
-  if current_page.data.includes
-    current_page.data.includes.each do |include|
-      page_content += partial("includes/#{include}")
-    end
+if current_page.data.includes
+  current_page.data.includes.each do |include|
+    page_content += partial("includes/#{include}")
   end
+end
 %>
 
 <!doctype html>
@@ -38,13 +38,738 @@ under the License.
     <style>
       <%= Rouge::Themes::MonokaiSublime.render(:scope => '.highlight') %>
     </style>
-    <%= stylesheet_link_tag :screen, media: :screen %>
-    <%= stylesheet_link_tag :print, media: :print %>
-    <% if current_page.data.search %>
-      <%= javascript_include_tag  "all" %>
-    <% else %>
-      <%= javascript_include_tag  "all_nosearch" %>
-    <% end %>
+    <%= inline_css 'screen' %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+    <script>
+
+      /*
+       * jQuery Highlight plugin
+       *
+       * Based on highlight v3 by Johann Burkard
+       * http://johannburkard.de/blog/programming/javascript/highlight-javascript-text-higlighting-jquery-plugin.html
+       *
+       * Code a little bit refactored and cleaned (in my humble opinion).
+       * Most important changes:
+       *  - has an option to highlight only entire words (wordsOnly - false by default),
+       *  - has an option to be case sensitive (caseSensitive - false by default)
+       *  - highlight element tag and class names can be specified in options
+       *
+       * Usage:
+       *   // wrap every occurrance of text 'lorem' in content
+       *   // with <span class='highlight'> (default options)
+       *   $('#content').highlight('lorem');
+       *
+       *   // search for and highlight more terms at once
+       *   // so you can save some time on traversing DOM
+       *   $('#content').highlight(['lorem', 'ipsum']);
+       *   $('#content').highlight('lorem ipsum');
+       *
+       *   // search only for entire word 'lorem'
+       *   $('#content').highlight('lorem', { wordsOnly: true });
+       *
+       *   // don't ignore case during search of term 'lorem'
+       *   $('#content').highlight('lorem', { caseSensitive: true });
+       *
+       *   // wrap every occurrance of term 'ipsum' in content
+       *   // with <em class='important'>
+       *   $('#content').highlight('ipsum', { element: 'em', className: 'important' });
+       *
+       *   // remove default highlight
+       *   $('#content').unhighlight();
+       *
+       *   // remove custom highlight
+       *   $('#content').unhighlight({ element: 'em', className: 'important' });
+       *
+       *
+       * Copyright (c) 2009 Bartek Szopka
+       *
+       * Licensed under MIT license.
+       *
+       */
+
+      jQuery.extend({
+        highlight: function (node, re, nodeName, className) {
+          if (node.nodeType === 3) {
+            var match = node.data.match(re);
+            if (match) {
+              var highlight = document.createElement(nodeName || 'span');
+              highlight.className = className || 'highlight';
+              var wordNode = node.splitText(match.index);
+              wordNode.splitText(match[0].length);
+              var wordClone = wordNode.cloneNode(true);
+              highlight.appendChild(wordClone);
+              wordNode.parentNode.replaceChild(highlight, wordNode);
+              return 1; //skip added node in parent
+            }
+          } else if ((node.nodeType === 1 && node.childNodes) && // only element nodes that have children
+                     !/(script|style)/i.test(node.tagName) && // ignore script and style nodes
+                     !(node.tagName === nodeName.toUpperCase() && node.className === className)) { // skip if already highlighted
+            for (var i = 0; i < node.childNodes.length; i++) {
+              i += jQuery.highlight(node.childNodes[i], re, nodeName, className);
+            }
+          }
+          return 0;
+        }
+      });
+
+      jQuery.fn.unhighlight = function (options) {
+        var settings = { className: 'highlight', element: 'span' };
+        jQuery.extend(settings, options);
+
+        return this.find(settings.element + "." + settings.className).each(function () {
+          var parent = this.parentNode;
+          parent.replaceChild(this.firstChild, this);
+          parent.normalize();
+        }).end();
+      };
+
+      jQuery.fn.highlight = function (words, options) {
+        var settings = { className: 'highlight', element: 'span', caseSensitive: false, wordsOnly: false };
+        jQuery.extend(settings, options);
+
+        if (words.constructor === String) {
+          words = [words];
+        }
+        words = jQuery.grep(words, function(word, i){
+          return word != '';
+        });
+        words = jQuery.map(words, function(word, i) {
+          return word.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+        });
+        if (words.length == 0) { return this; };
+
+        var flag = settings.caseSensitive ? "" : "i";
+        var pattern = "(" + words.join("|") + ")";
+        if (settings.wordsOnly) {
+          pattern = "\\b" + pattern + "\\b";
+        }
+        var re = new RegExp(pattern, flag);
+
+        return this.each(function () {
+          jQuery.highlight(this, re, settings.element, settings.className);
+        });
+      };
+    </script>
+
+    <script>
+      /**
+       * energize.js v0.1.0
+       *
+       * Speeds up click events on mobile devices.
+       * https://github.com/davidcalhoun/energize.js
+       */
+
+      (function() {  // Sandbox
+        /**
+         * Don't add to non-touch devices, which don't need to be sped up
+         */
+        if(!('ontouchstart' in window)) return;
+
+        var lastClick = {},
+            isThresholdReached, touchstart, touchmove, touchend,
+            click, closest;
+
+        /**
+         * isThresholdReached
+         *
+         * Compare touchstart with touchend xy coordinates,
+         * and only fire simulated click event if the coordinates
+         * are nearby. (don't want clicking to be confused with a swipe)
+         */
+        isThresholdReached = function(startXY, xy) {
+          return Math.abs(startXY[0] - xy[0]) > 5 || Math.abs(startXY[1] - xy[1]) > 5;
+        };
+
+        /**
+         * touchstart
+         *
+         * Save xy coordinates when the user starts touching the screen
+         */
+        touchstart = function(e) {
+          this.startXY = [e.touches[0].clientX, e.touches[0].clientY];
+          this.threshold = false;
+        };
+
+        /**
+         * touchmove
+         *
+         * Check if the user is scrolling past the threshold.
+         * Have to check here because touchend will not always fire
+         * on some tested devices (Kindle Fire?)
+         */
+        touchmove = function(e) {
+          // NOOP if the threshold has already been reached
+          if(this.threshold) return false;
+
+          this.threshold = isThresholdReached(this.startXY, [e.touches[0].clientX, e.touches[0].clientY]);
+        };
+
+        /**
+         * touchend
+         *
+         * If the user didn't scroll past the threshold between
+         * touchstart and touchend, fire a simulated click.
+         *
+         * (This will fire before a native click)
+         */
+        touchend = function(e) {
+          // Don't fire a click if the user scrolled past the threshold
+          if(this.threshold || isThresholdReached(this.startXY, [e.changedTouches[0].clientX, e.changedTouches[0].clientY])) {
+            return;
+          }
+
+          /**
+           * Create and fire a click event on the target element
+           * https://developer.mozilla.org/en/DOM/event.initMouseEvent
+           */
+          var touch = e.changedTouches[0],
+              evt = document.createEvent('MouseEvents');
+          evt.initMouseEvent('click', true, true, window, 0, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+          evt.simulated = true;   // distinguish from a normal (nonsimulated) click
+          e.target.dispatchEvent(evt);
+        };
+
+        /**
+         * click
+         *
+         * Because we've already fired a click event in touchend,
+         * we need to listed for all native click events here
+         * and suppress them as necessary.
+         */
+        click = function(e) {
+          /**
+           * Prevent ghost clicks by only allowing clicks we created
+           * in the click event we fired (look for e.simulated)
+           */
+          var time = Date.now(),
+              timeDiff = time - lastClick.time,
+              x = e.clientX,
+              y = e.clientY,
+              xyDiff = [Math.abs(lastClick.x - x), Math.abs(lastClick.y - y)],
+              target = closest(e.target, 'A') || e.target,  // needed for standalone apps
+              nodeName = target.nodeName,
+              isLink = nodeName === 'A',
+              standAlone = window.navigator.standalone && isLink && e.target.getAttribute("href");
+
+          lastClick.time = time;
+          lastClick.x = x;
+          lastClick.y = y;
+
+          /**
+           * Unfortunately Android sometimes fires click events without touch events (seen on Kindle Fire),
+           * so we have to add more logic to determine the time of the last click.  Not perfect...
+           *
+           * Older, simpler check: if((!e.simulated) || standAlone)
+           */
+          if((!e.simulated && (timeDiff < 500 || (timeDiff < 1500 && xyDiff[0] < 50 && xyDiff[1] < 50))) || standAlone) {
+            e.preventDefault();
+            e.stopPropagation();
+            if(!standAlone) return false;
+          }
+
+          /**
+           * Special logic for standalone web apps
+           * See http://stackoverflow.com/questions/2898740/iphone-safari-web-app-opens-links-in-new-window
+           */
+          if(standAlone) {
+            window.location = target.getAttribute("href");
+          }
+
+          /**
+           * Add an energize-focus class to the targeted link (mimics :focus behavior)
+           * TODO: test and/or remove?  Does this work?
+           */
+          if(!target || !target.classList) return;
+          target.classList.add("energize-focus");
+          window.setTimeout(function(){
+            target.classList.remove("energize-focus");
+          }, 150);
+        };
+
+        /**
+         * closest
+         * @param {HTMLElement} node current node to start searching from.
+         * @param {string} tagName the (uppercase) name of the tag you're looking for.
+         *
+         * Find the closest ancestor tag of a given node.
+         *
+         * Starts at node and goes up the DOM tree looking for a
+         * matching nodeName, continuing until hitting document.body
+         */
+        closest = function(node, tagName){
+          var curNode = node;
+
+          while(curNode !== document.body) {  // go up the dom until we find the tag we're after
+            if(!curNode || curNode.nodeName === tagName) { return curNode; } // found
+            curNode = curNode.parentNode;     // not found, so keep going up
+          }
+
+          return null;  // not found
+        };
+
+        /**
+         * Add all delegated event listeners
+         *
+         * All the events we care about bubble up to document,
+         * so we can take advantage of event delegation.
+         *
+         * Note: no need to wait for DOMContentLoaded here
+         */
+        document.addEventListener('touchstart', touchstart, false);
+        document.addEventListener('touchmove', touchmove, false);
+        document.addEventListener('touchend', touchend, false);
+        document.addEventListener('click', click, true);  // TODO: why does this use capture?
+
+      })();
+    </script>
+
+    <script>
+      /* Everything from app/*.js */
+
+      /* Search ******************************************************/
+      (function () {
+        'use strict';
+
+        var content, searchResults;
+        var highlightOpts = { element: 'span', className: 'search-highlight' };
+        var searchDelay = 0;
+        var timeoutHandle = 0;
+        var index;
+
+        function populate() {
+          index = lunr(function () {
+            this.ref('id');
+            this.field('title', { boost: 10 });
+            this.field('body');
+            this.pipeline.add(lunr.trimmer, lunr.stopWordFilter);
+            var lunrConfig = this;
+
+            $('h1, h2').each(function () {
+              var title = $(this);
+              var body = title.nextUntil('h1, h2');
+              lunrConfig.add({
+                id: title.prop('id'),
+                title: title.text(),
+                body: body.text(),
+              });
+            });
+          });
+          determineSearchDelay();
+        }
+
+        $(populate);
+        $(bind);
+
+        function determineSearchDelay() {
+          if (index.tokenSet.toArray().length > 5000) {
+            searchDelay = 300;
+          }
+        }
+
+        function bind() {
+          content = $('.content');
+          searchResults = $('.search-results');
+
+          $('#input-search').on('keyup', function (e) {
+            var wait = (function () {
+              return function (executingFunction, waitTime) {
+                clearTimeout(timeoutHandle);
+                timeoutHandle = setTimeout(executingFunction, waitTime);
+              };
+            })();
+            wait(function () {
+              search(e);
+            }, searchDelay);
+          });
+        }
+
+        function search(event) {
+          var searchInput = $('#input-search')[0];
+
+          unhighlight();
+          searchResults.addClass('visible');
+
+          // ESC clears the field
+          if (event.keyCode === 27) searchInput.value = '';
+
+          if (searchInput.value) {
+            var results = index.search(searchInput.value).filter(function (r) {
+              return r.score > 0.0001;
+            });
+
+            if (results.length) {
+              searchResults.empty();
+              $.each(results, function (index, result) {
+                var elem = document.getElementById(result.ref);
+                // prettier-ignore
+                searchResults.append("<li><a href='#" + result.ref + "'>" + $(elem).text() + '</a></li>');
+              });
+              highlight.call(searchInput);
+            } else {
+              searchResults.html('<li></li>');
+              // prettier-ignore
+              $('.search-results li').text('No Results Found for "' + searchInput.value + '"');
+            }
+          } else {
+            unhighlight();
+            searchResults.removeClass('visible');
+          }
+        }
+
+        function highlight() {
+          if (this.value) content.highlight(this.value, highlightOpts);
+        }
+
+        function unhighlight() {
+          content.unhighlight(highlightOpts);
+        }
+      })();
+
+      /** TOC -------------------------------------------- */
+
+      (function () {
+        'use strict';
+
+        var htmlPattern = /<[^>]*>/g; // eslint-disable-line no-unused-vars
+        var loaded = false;
+
+        var debounce = function (func, waitTime) {
+          var timeout = false;
+          return function () {
+            if (timeout === false) {
+              setTimeout(function () {
+                func();
+                timeout = false;
+              }, waitTime);
+              timeout = true;
+            }
+          };
+        };
+
+        var closeToc = function () {
+          $('.toc-wrapper').removeClass('open');
+          $('#nav-button').removeClass('open');
+        };
+
+        function loadToc($toc, tocLinkSelector, tocListSelector, scrollOffset) {
+          var headerHeights = {};
+          var pageHeight = 0;
+          var windowHeight = 0;
+          var originalTitle = document.title;
+
+          var recacheHeights = function () {
+            headerHeights = {};
+            pageHeight = $(document).height();
+            windowHeight = $(window).height();
+
+            $toc.find(tocLinkSelector).each(function () {
+              var targetId = $(this).attr('href');
+              if (targetId[0] === '#') {
+                headerHeights[targetId] = $(targetId).offset().top;
+              }
+            });
+          };
+
+          var refreshToc = function () {
+            // 74 because v2-banner expands up to 74px scroll-margin-top is set to 74
+            var currentTop = $(document).scrollTop() + scrollOffset + 74;
+
+            if (currentTop + windowHeight >= pageHeight) {
+              // at bottom of page, so just select last header by making currentTop very large
+              // this fixes the problem where the last header won't ever show as active if its content
+              // is shorter than the window height
+              currentTop = pageHeight + 1000;
+            }
+
+            var best = null;
+            for (var name in headerHeights) {
+              if (
+                (headerHeights[name] < currentTop &&
+                 headerHeights[name] > headerHeights[best]) ||
+                best === null
+              ) {
+                best = name;
+              }
+            }
+
+            // Catch the initial load case
+            if (currentTop == scrollOffset && !loaded) {
+              best = window.location.hash;
+              loaded = true;
+            }
+
+            var $best = $toc.find("[href='" + best + "']").first();
+            if (!$best.hasClass('active')) {
+              // .active is applied to the ToC link we're currently on, and its parent <ul>s selected by tocListSelector
+              // .active-expanded is applied to the ToC links that are parents of this one
+              $toc.find('.active').removeClass('active');
+              $toc.find('.active-parent').removeClass('active-parent');
+              $best.addClass('active');
+              $best
+                .parents(tocListSelector)
+                .addClass('active')
+                .siblings(tocLinkSelector)
+                .addClass('active-parent');
+              $best.siblings(tocListSelector).addClass('active');
+              $toc.find(tocListSelector).filter(':not(.active)').slideUp(150);
+              $toc.find(tocListSelector).filter('.active').slideDown(150);
+              if (window.history.replaceState) {
+                window.history.replaceState(null, '', best);
+              }
+              var thisTitle = $best.data('title');
+              if (thisTitle !== undefined && thisTitle.length > 0) {
+                document.title = thisTitle + ' – ' + originalTitle;
+              } else {
+                document.title = originalTitle;
+              }
+            }
+          };
+
+          var makeToc = function () {
+            recacheHeights();
+            refreshToc();
+
+            $('#nav-button').click(function () {
+              $('.toc-wrapper').toggleClass('open');
+              $('#nav-button').toggleClass('open');
+              return false;
+            });
+            $('.page-wrapper').click(closeToc);
+            $('.toc-link').click(closeToc);
+
+            // reload immediately after scrolling on toc click
+            $toc.find(tocLinkSelector).click(function () {
+              setTimeout(function () {
+                refreshToc();
+              }, 0);
+            });
+
+            $(window).scroll(debounce(refreshToc, 200));
+            $(window).resize(debounce(recacheHeights, 200));
+          };
+
+          makeToc();
+
+          window.recacheHeights = recacheHeights;
+          window.refreshToc = refreshToc;
+        }
+
+        window.loadToc = loadToc;
+      })();
+
+
+
+      /* -- _lang.js --------------------------------------------------------- */
+
+      /*
+         Copyright 2008-2013 Concur Technologies, Inc.
+
+         Licensed under the Apache License, Version 2.0 (the "License"); you may
+         not use this file except in compliance with the License. You may obtain
+         a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+         Unless required by applicable law or agreed to in writing, software
+         distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+         WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+         License for the specific language governing permissions and limitations
+         under the License.
+       */
+      (function () {
+        'use strict';
+
+        var languages = [];
+
+        window.setupLanguages = setupLanguages;
+        window.activateLanguage = activateLanguage;
+        window.getLanguageFromQueryString = getLanguageFromQueryString;
+
+        function activateLanguage(language) {
+          if (!language) return;
+          if (language === '') return;
+
+          $('.lang-selector a').removeClass('active');
+          // prettier-ignore
+          $(".lang-selector a[data-language-name='" + language + "']")
+            .addClass('active');
+          for (var i = 0; i < languages.length; i++) {
+            $('.highlight.tab-' + languages[i]).hide();
+            $('.lang-specific.' + languages[i]).hide();
+          }
+          $('.highlight.tab-' + language).show();
+          $('.lang-specific.' + language).show();
+
+          window.recacheHeights();
+
+          // scroll to the new location of the position
+          if ($(window.location.hash).get(0)) {
+            $(window.location.hash).get(0).scrollIntoView(true);
+          }
+        }
+
+        // parseURL and stringifyURL are from https://github.com/sindresorhus/query-string
+        // MIT licensed
+        // https://github.com/sindresorhus/query-string/blob/7bee64c16f2da1a326579e96977b9227bf6da9e6/license
+        function parseURL(str) {
+          if (typeof str !== 'string') {
+            return {};
+          }
+
+          str = str.trim().replace(/^(\?|#|&)/, '');
+
+          if (!str) {
+            return {};
+          }
+
+          return str.split('&').reduce(function (ret, param) {
+            var parts = param.replace(/\+/g, ' ').split('=');
+            var key = parts[0];
+            var val = parts[1];
+
+            key = decodeURIComponent(key);
+            // missing `=` should be `null`:
+            // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+            val = val === undefined ? null : decodeURIComponent(val);
+
+            if (!Object.prototype.hasOwnProperty.call(ret, key)) {
+              ret[key] = val;
+            } else if (Array.isArray(ret[key])) {
+              ret[key].push(val);
+            } else {
+              ret[key] = [ret[key], val];
+            }
+
+            return ret;
+          }, {});
+        }
+
+        function stringifyURL(obj) {
+          return obj
+          ? Object.keys(obj)
+                  .sort()
+                  .map(function (key) {
+                    var val = obj[key];
+
+                    if (Array.isArray(val)) {
+                      return val
+                        .sort()
+                        .map(function (val2) {
+                          return (
+                            encodeURIComponent(key) + '=' + encodeURIComponent(val2)
+                          );
+                        })
+                        .join('&');
+                    }
+
+                    return encodeURIComponent(key) + '=' + encodeURIComponent(val);
+                  })
+                  .join('&')
+          : '';
+        }
+
+        // gets the language set in the query string
+        function getLanguageFromQueryString() {
+          if (location.search.length >= 1) {
+            var language = parseURL(location.search).language;
+            if (language) {
+              return language;
+            } else if (jQuery.inArray(location.search.substr(1), languages) != -1) {
+              return location.search.substr(1);
+            }
+          }
+
+          return false;
+        }
+
+        // returns a new query string with the new language in it
+        function generateNewQueryString(language) {
+          var url = parseURL(location.search);
+          if (url.language) {
+            url.language = language;
+            return stringifyURL(url);
+          }
+          return language;
+        }
+
+        // if a button is clicked, add the state to the history
+        function pushURL(language) {
+          if (!history) {
+            return;
+          }
+          var hash = window.location.hash;
+          if (hash) {
+            hash = hash.replace(/^#+/, '');
+          }
+          // prettier-ignore
+          history
+            .pushState({}, '', '?' + generateNewQueryString(language) + '#' + hash);
+
+          // save language as next default
+          localStorage.setItem('language', language);
+        }
+
+        function setupLanguages(l) {
+          var defaultLanguage = localStorage.getItem('language');
+
+          languages = l;
+
+          var presetLanguage = getLanguageFromQueryString();
+          if (presetLanguage) {
+            // the language is in the URL, so use that language!
+            activateLanguage(presetLanguage);
+
+            localStorage.setItem('language', presetLanguage);
+          } else if (
+            defaultLanguage !== null &&
+            jQuery.inArray(defaultLanguage, languages) != -1
+          ) {
+            // the language was the last selected one saved in localstorage, so use that language!
+            activateLanguage(defaultLanguage);
+          } else {
+            // no language selected, so use the default
+            activateLanguage(languages[0]);
+          }
+        }
+
+        // if we click on a language tab, activate that language
+        $(function () {
+          $('.lang-selector a').on('click', function () {
+            var language = $(this).data('language-name');
+            pushURL(language);
+            activateLanguage(language);
+            return false;
+          });
+        });
+      })();
+
+      /** from all_nosearch.js ----------------------------------------------- */
+
+      $(function () {
+        loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
+        setupLanguages($('body').data('languages'));
+        $('.content').imagesLoaded(function () {
+          window.recacheHeights();
+          window.refreshToc();
+        });
+      });
+
+      window.onpopstate = function () {
+        activateLanguage(getLanguageFromQueryString());
+      };
+
+    </script>
+
+    <%# if current_page.data.search %>
+    <%#= javascript_include_tag  "all" %>
+    <%# else %>
+    <%#= javascript_include_tag  "all_nosearch" %>
+    <%# end %>
+  </head>
+
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
@@ -107,9 +832,6 @@ under the License.
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <aside class="v2-banner notice">
-          v1 APIs will be deprecated within the next year. We recommend switching to the <a target="_blank" href="https://circleci.com/docs/api/v2/">v2 APIs</a>.
-        </aside>
         <div class="header-links">
           <a class="content-link" target="_blank" href="https://circleci.com/docs/2.0">
             Documentation

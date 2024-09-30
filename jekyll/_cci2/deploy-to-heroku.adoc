@@ -1,0 +1,112 @@
+---
+description: This is document provides examples of deploying to Heroku.
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Deploy to Heroku
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+In this how-to guide, you will learn how to configure CircleCI to deploy to Heroku.
+
+[#introduction]
+== Introduction
+
+link:https://www.heroku.com/[Heroku] is a popular platform for hosting applications in the cloud. To configure CircleCI to deploy your application to Heroku, follow the steps below.
+
+== Deploy with the Heroku orb
+
+[#create-account]
+=== 1. Create an account
+
+Create a Heroku account and follow the link:https://devcenter.heroku.com/start[Getting Started on Heroku] documentation to set up a project in your chosen language.
+
+[#create-env-vars]
+=== 2. Create environment variables
+
+Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
+
+[#deploy-with-orb]
+=== 3. Deploy with the Heroku orb
+
+Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your configuration simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
+
+{% include snippets/add-version-number.adoc %}
+
+```yaml
+version: 2.1
+orbs:
+  heroku: circleci/heroku@x.y
+workflows:
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git:
+          post-steps:
+            - run: your-database-migration-command #example of a post-deployment step
+          pre-steps:
+            - run: command-that-run-before-deploying #example of a pre-deployment step
+
+```
+
+For more detailed information about these Heroku orbs, refer to the link:https://circleci.com/developer/orbs/orb/circleci/heroku[CircleCI Heroku Orb].
+
+== Heroku deployment with 2.0 configuration
+
+[#create-account-2]
+=== 1. Create an account
+
+Create a Heroku account and follow the link:https://devcenter.heroku.com/start[Getting Started on Heroku] documentation to set up a project in your chosen language.
+
+[#create-env-vars-2]
+=== 2. Create environment variables
+
+Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
+
+[#create-deploy-job]
+=== 3. Create deploy job
+
+In your `.circleci/config.yml`, create a `deploy` job and add an xref:executor-intro#[executor type].
+
+[#add-steps-deploy-job]
+=== 4. Add steps to your deploy job
+
+Add `steps` to your `deploy` job to checkout and deploy your code. You can specify which branch you would like to deploy. The example below specifies the main branch, and deploys using a `git push` command.
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: <docker-image-name-tag>
+    steps:
+      - checkout
+    # build job ommitted for brevity
+  deploy:
+    docker:
+      - image: <docker-image-name-tag>
+    steps:
+      - checkout
+      - run:
+          name: Deploy Main to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
+
+workflows:
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+            branches:
+              only: main # only run deploy-via-git job on main branch
+```
+
+NOTE: Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the link:https://devcenter.heroku.com/articles/github-integration#automatic-deploys[Heroku documentation] for details.

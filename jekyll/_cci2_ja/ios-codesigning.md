@@ -6,8 +6,9 @@ description: "iOS または Mac アプリのコード署名をセットアップ
 categories:
   - プラットフォーム
 order: 40
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドラインを紹介します。
@@ -20,7 +21,7 @@ version:
 
 このドキュメントは、iOS プロジェクトが 推奨されるベストプラクティスを使用してCircleCI 上に正しくビルドされていることを前提としています。 また Bundler と fastlane を使用しており、`Gemfile`、`Appfile` および `Fastfile` がリポジトリにチェックインされていることを前提としています。
 
-CircleCI で iOS プロジェクトをまだ設定していない場合、[iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios/)で設定手順を確認できます。
+CircleCI で iOS プロジェクトをまだ設定していない場合、[iOS アプリケーションのテスト]({{ site.baseurl }}/ja/testing-ios/)で設定手順を確認できます。
 
 **注意:** CircleCI が正式にサポートしているのは fastlane match によるコード署名のみです。 それ以外の方法も使用できますが、動作を保証するものではなく、サポートもしていません。
 
@@ -127,14 +128,14 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       # ...
       - run: bundle exec fastlane test
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       # ...
       - run: bundle exec fastlane adhoc
@@ -185,7 +186,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -202,7 +203,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc

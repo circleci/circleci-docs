@@ -1,103 +1,75 @@
 ---
-title: Migrating from GitLab
----
 
-= Migrating from GitLab
+contentTags:
+  platform:
+  - クラウド
+  - Server 3.x
+---
+= GitLab からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from GitLab to CircleCI.
+:page-description: GitLab から CircleCI に移行する方法を解説します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。
 
 NOTE: **ImagineX Consulting からのヒント**
 
-== ソースコントロールの設定
+[#sign-up-with-gitlab]
+== GitLab アカウントでの登録
 
-GitLab の SCM を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
+link:/docs/first-steps/#gitlab-signup[CircleCI のユーザー登録] のページに記載されている手順で GitLab アカウントと CircleCI を接続し、以下の内容に従って CI/CD 設定を CircleCI に移行します。
 
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub へのインポート]
-* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[BitBucket へのインポート]
-
-=== GitHub Enterprise
-
-以下は、Git のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
-
-. GitHub Enterprise のインスタンスに空のリポジトリを作成します。
-. Create a bare clone of your GitLab.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
-+
-```shell
-git clone git@gitlab.com:[owner]/[repo-name].git --bare
-```
-. ローカルクローンに、GitHub Enterprise リポジトリをリモートリファレンスとして追加します。
-+
-```shell
-cd [repo-name]
-git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-```
-. すべてのローカルリファレンス（refs/\*）を、リモートの GitHub Enterprise リポジトリにプッシュします。
-+
-```shell
-git push enterprise --mirror
-```
-
-他の GitLab アーティファクトをエクスポートする必要がある場合は、GitLab のドキュメント https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[プロジェクトのエクスポート]に従ってください。
-
-コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/2.0/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
-
+[#build-configuration]
 == ビルドの設定
 
 GitLab の CI/CD を使用している場合は、ビルドの設定を移行する必要があります。 GitLab では、ビルドの設定は、ソースコードリポジトリのルートディレクトリにある `.gitlab-ci.yml` というファイルで定義します。 ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
 
-まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に`config.yml`という名前のファイルを作成します。 次に、CircleCI のドキュメント (https://circleci.com/docs/2.0/config-intro/[こちら]) に沿って、 `.config.yml` ファイルの設定方法を確認します。
+まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に `config.yml` という名前のファイルを作成します。 次に、CircleCI のドキュメント ( https://circleci.com/docs/ja/config-intro/[こちら] ) に沿って、 `.config.yml` ファイルの設定方法を確認します。
 
 GitLab と CircleCI の設定は異なります。 ビルドステップを変換する際は、GitLabと CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://docs.gitlab.com/ee/ci/yaml/[GitLab YML のリファレンスドキュメント]
+* https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML のリファレンスドキュメント]
-
+[#configuration-comparison]
 == 設定の比較
 
+{% include snippets/ja/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| GitLab | CircleCI
+|GitLab |CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義
-a|
-[source, yaml]
+2+|1つのビルドステップを実行するジョブの定義
+
+a|[source, yaml]
 ----
 job1:
   script: "execute-script-for-job1"
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
     steps:
       - checkout
       - run: "execute-script-for-job1"
-
 ----
 
-2+| ジョブに使用するDocker イメージの指定
+2+|ジョブに使用するDocker イメージの指定
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 job1:
   image: node:10
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
@@ -105,10 +77,9 @@ jobs:
       - image: node:10
 ----
 
-2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
+2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 job1:
   stage: build
@@ -131,11 +102,9 @@ stages:
   - test
   - deploy
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -152,7 +121,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2
@@ -165,12 +133,9 @@ workflows:
           - job3
 ----
 
+2+|マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/ja/executor-intro/#section=configuration[実行環境に関するドキュメント] をご覧ください。
 
-
-2+| マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/2.0/executor-types/#section=configuration[Executor に関するドキュメント] をご覧ください。
-
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 ubuntu job:
   tags:
@@ -184,30 +149,29 @@ osx job:
   script:
     - echo "Hello, $USER!"
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   ubuntu-job:
     machine:
-      image: ubuntu-1604:201903-01
+      # The image uses the current tag, which always points to the most recent
+      # supported release. If stability and determinism are crucial for your CI
+      # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+      ubuntu-2004:current
     steps:
       - checkout
       - run: echo "Hello, $USER!"
   osx-job:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
 ----
 
+2+|依存関係のキャッシュ
 
-2+| 依存関係のキャッシュ
-
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 image: node:latest
 
@@ -224,9 +188,7 @@ test_async:
   script:
     - node ./specs/start.js
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 {% raw %}
 jobs:
@@ -247,14 +209,14 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. https://circleci.com/docs/2.0/executor-types/[Executor の選定]
-. https://circleci.com/docs/2.0/configuration-reference/#checkout[コードのチェックアウト]
-. https://circleci.com/docs/2.0/env-vars/[環境変数] と https://circleci.com/docs/2.0/contexts/[コンテキスト]
-. 依存関係のインストール、 https://circleci.com/docs/2.0/caching/[依存関係のキャッシュ]も参照してください。
-. https://circleci.com/docs/2.0/configuration-reference/#docker[サービス コンテナ]
+. https://circleci.com/docs/ja/executor-intro/[Executor の選定]
+. https://circleci.com/docs/ja/configuration-reference/#checkout[コードのチェックアウト]
+. https://circleci.com/docs/ja/env-vars/[環境変数] と https://circleci.com/docs/ja/contexts/[コンテキスト]
+. 依存関係のインストール、 https://circleci.com/docs/ja/caching/[依存関係のキャッシュ] も参照してください。
+. https://circleci.com/docs/ja/configuration-reference/#docker[サービスコンテナ]
 . テストコマンドの実行
-. https://circleci.com/docs/2.0/custom-images/[カスタムイメージ]
-. https://circleci.com/docs/2.0/configuration-reference/#resource_class[リソース クラス]
-. https://circleci.com/docs/2.0/workflows/[ワークフロー]
-. https://circleci.com/docs/2.0/collect-test-data/[テスト結果]/ テストの分割 / https://circleci.com/docs/2.0/parallelism-faster-jobs/[並列処理]
-. https://circleci.com/docs/2.0/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/custom-images/[カスタム CircleCI イメージ]
+. https://circleci.com/docs/ja/configuration-reference/#resource_class[リソースクラス]
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/collect-test-data/[テスト結果] / テストの分割 / https://circleci.com/docs/ja/parallelism-faster-jobs/[並列実行]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]

@@ -1,0 +1,52 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI のメリット
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CI/CD 用に CircleCI を導入するメリット
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#benefits-of-circleci]
+== CircleCI のメリット
+
+CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI では、高度なxref:caching#[キャッシュ]、xref:docker-layer-caching#[Docker レイヤーキャッシュ]、実行マシンのスピードを高めるxref:optimizations#resource-class[リソースクラス]などの設定により、きわめて複雑なパイプラインでも効率的に実行できます。
+
+CircleCI の開発者向け機能の一例を以下に示します。
+
+- xref:ssh-access-jobs#[任意のジョブに SSH 接続し]、ビルドの問題をデバッグする
+- `.circleci/config.yml` ファイルでxref:parallelism-faster-jobs#[並列実行]を設定し、ジョブの実行スピードを高める
+- 簡単な 2 つのキーでxref:caching#[キャッシュ]を設定し、xref:workflows#[ワークフロー]の既存ジョブのデータを再利用する
+- セルフホストxref:runner-overview#[ランナー]を設定して、独自のプラットフォームをサポートする
+- Machine Executor で xref:using-arm#[Arm リソース]を利用する
+- xref:orb-intro#[CircleCI Orb] (再利用可能な設定パッケージ) を使用して、サードパーティツールと連携する
+- 各種言語でビルド済みの Docker xref:circleci-images#[イメージ]を利用する
+- link:https://www.circleci.com/docs/api/v2[API] を使用してジョブやワークフローの情報を取得する
+- xref:local-cli#[CLI] を使用して高度なツールをローカル環境で利用する
+- xref:insights-tests#[テストインサイト]を使用して実行結果が不安定なテストを検出する
+
+また、お客様のサーバーにインストールする CircleCI Server では、オペレーターや管理者として、ビルドを監視してインサイトを取得したり、link:https://www.nomadproject.io/[Nomad] を使用してスケジューリングしたりすることも可能です。
+
+CircleCI Server について詳しくは、link:https://circleci.com/docs/server/v4.5/overview/circleci-server-overview[CircleCI Server の概要]を参照してください。
+
+[#pricing-options]
+== 料金オプション
+
+CircleCI の無料オプションと有料オプションについては、link:https://circleci.com/ja/pricing[料金プランのページ]をご覧ください。
+
+CircleCI でホストされるクラウド版プラットフォームは、無料でlink:https://circleci.com/ja/signup[サインアップ]して利用でき、プロジェクト数の制限もありません。
+
+Free プランをご利用のお客様には、オープンソースプロジェクトに使用できる無料のクレジットが付与されます。 パブリックのオープンソースプロジェクトでは、無料のコンテナも利用できます。詳しくは、「xref:oss#[オープンソースプロジェクトのビルド]」を参照してください。
+
+[#next-steps]
+== 次のステップ
+
+- xref:first-steps#[CircleCI のユーザー登録]

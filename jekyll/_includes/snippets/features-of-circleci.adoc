@@ -1,7 +1,7 @@
 === Private orbs
 CircleCI orbs are shareable configuration packages that enable developers to create private, standardized configurations for use across an organization by different teams. You have access to an unlimited number of private orbs that you can use to securely share across teams and groups.
 
-For more information on private orbs, refer to the <<orb-intro/#private-orbs-vs-public-orbs,Orbs Introduction>> page.
+For more information on private orbs, refer to the <<orb-intro#private-orbs-vs-public-orbs,Orbs Introduction>> page.
 
 === Concurrency
 Concurrency is the ability to run multiple jobs in your workflows at the same time. This is a powerful feature that allows you to decrease your build times and shorten feedback cycles.
@@ -14,7 +14,7 @@ For more information about using CircleCI runners, please see the <<runner-overv
 === Flaky test detection
 The average failed workflow wastes approximately 30 minutes. Detecting flaky tests can save you significant amounts of time in your builds and workflows. Advanced insights are available to help you troubleshoot failed and flaky tests.
 
-For more detailed information about flaky tests, refer to the <<insights-tests/#flaky-tests,Test Insights>> page.
+For more detailed information about flaky tests, refer to the <<insights-tests#flaky-tests,Test Insights>> page.
 
 === Docker layer caching
 Reducing the time it takes to build a Docker image is an important consideration for developers who consistently use these images in their workflows. Consider using Docker Layer Caching (DLC) if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, rather than impact the actual container used to run your job. Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster.

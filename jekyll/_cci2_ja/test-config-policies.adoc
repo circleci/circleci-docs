@@ -1,0 +1,706 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+---
+= 設定ファイルのポリシーのテスト - オープンプレビュー
+:page-layout: classic-docs
+:page-description: 説明を参照してください： CircleCI の設定ポリシーのオープンプレビュー。 設定ファイルのポリシーに関して学びましょう。
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。
+
+このページでは、設定ファイルのポリシーに関するテストを作成、セットアップする方法をガイド形式で説明します。
+
+このページでは、設定ファイルのポリシーに関するテストを作成、セットアップする方法をガイド形式で説明します。 設定ファイルのポリシーの詳細およびポリシーの作成方法については、xref:config-policy-management-overview.adoc[設定ファイルのポリシー管理機能の概要]および xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]を参照してください。
+
+[#prerequisites]
+== 前提条件
+
+このページの説明は、あなたが xref:create-and-manage-config-policies#create-a-policy[ポリシーの作成]ガイドに従って、以下を完了したことを前提としています：
+
+* 組織の設定ファイルのポリシー管理機能を有効にします。
+* 組織内に CircleCI 設定ファイルのバージョンをチェックする簡単なポリシーを作成する。 ポリシーのファイル構造は `./config-policies/version.rego` である必要があります。
+
+[#write-a-policy-test]
+== ポリシーテストを作成する
+
+このセクションでは、既存のポリシー `version.rego` について、ポリシーの実際の動作と、生成される__決定の結果__が適切であるかを確認するテストを作成します。
+
+. `./config-policies` ディレクトリにポリシーのテストファイルを作成します。 このテストファイルに、ポリシーの__期待される動作__一式を記載します。 今回のテストファイルは `./config-policies/version_test.yaml` とします。
+. 作成した `version_test.yaml` ファイルに、下記をコピーします。
++
+[source,yaml]
+----
+# Top level tests must have keys prefixed with `test_`
+test_version_check:
+  # Create the input snippet that will be run against the policy. In the context of config policies, the input corresponds
+  # to CircleCI's config.yml
+  input:
+    version: 2.1
+  # Specify the decision we expect to get from the policy. Fields we expect to be empty can be omitted.
+  decision: &root # optionally you can use a yaml anchor to reuse this decision as a base in subcases below.
+    status: PASS
+    enabled_rules: [check_version]
+
+  # It is totally valid to write more tests at the top level with keys prefixed with `test_`, however it is often practical
+  # to create subcases hierarchically using the cases field.
+  cases: # subcases do not need to begin with `test_`
+    absent_version:
+      # the subcase input will be *merged* into the parent input
+      input:
+        version: null
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be defined
+
+    version_wrong_type:
+      input:
+        version: two
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be a number
+
+    inferior_version:
+      input:
+        version: 1.0
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be at least 2.1 but got 1
+----
+. `config-policies` ディレクトリに対して `test` コマンドを実行します。
++
+[source,shell]
+----
+circleci policy test ./config-policies
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    config-policies    0.001s
+
+4/4 tests passed (0.001s)
+----
++
+NOTE: `./config-policies` ディレクトリ内に `version.rego` ファイル以外のポリシーも存在する場合、テストの出力が異なる可能性があります (失敗する可能性もあります)。
+. 各テストの実行結果を確認するには、以下のように `--verbose` または `-v` フラグを付けて実行します。
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    test_version_check                       0.000s
+ok    test_version_check/absent_version        0.000s
+ok    test_version_check/inferior_version      0.000s
+ok    test_version_check/version_wrong_type    0.000s
+ok    config-policies                          0.001s
+
+4/4 tests passed (0.001s)
+----
+. 指定したテストのみを実行するには、以下のように `--run` フラグに正規表現を指定して実行します。
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "absent_version$"
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    test_version_check/absent_version    0.000s
+ok    config-policies                      0.000s
+
+1/1 tests passed (0.000s)
+----
+. テストの実行対象となった入力やメタデータ、加工前の OPA の評価結果など、テストの実行の様子を確認するには、以下のように `--debug` フラグを指定します。
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "absent_version$" --debug
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    test_version_check/absent_version    0.000s
+---- Debug Test Context ----
+decision:
+    enabled_rules:
+        - check_version
+    hard_failures:
+        - reason: version must be defined
+          rule: check_version
+    status: HARD_FAIL
+evaluation:
+    meta: null
+    org:
+        check_version: version must be defined
+        enable_rule:
+            - check_version
+        hard_fail:
+            - check_version
+        policy_name:
+            - example
+input: {}
+meta: null
+---- End of Test Context ---
+ok    config-policies    0.000s
+
+1/1 tests passed (0.000s)
+----
+. テスト出力をJSON形式で取得するには、以下のように `--format` フラグを使用します
++
+[source,shell]
+----
+circleci policy test ./config-policies --format=json
+----
++
+以下のような結果が出力されます。
++
+[source,json]
+----
+[
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check",
+    "Elapsed": "306.467µs",
+    "ElapsedMS": 0
+  },
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/absent_version",
+    "Elapsed": "94.728µs",
+    "ElapsedMS": 0
+  },
+  {
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/inferior_version",
+    "Elapsed": "360.223µs",
+    "ElapsedMS": 0
+  },
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/version_wrong_type",
+    "Elapsed": "209.058µs",
+    "ElapsedMS": 0
+  }
+]
+----
+. JUnit XML 形式のテスト出力を得るには、以下のように `--format` フラグを使用します：
++
+[source,shell]
+----
+circleci policy test ./config-policies --format=junit
+----
++
+以下のような結果が出力されます。
++
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="root" tests="4" failures="0" errors="0" time="0.002">
+        <testsuite tests="4" failures="0" time="0.002" name="config-policies" timestamp="">
+                <properties></properties>
+                <testcase classname="config-policies" name="test_version_check" time="0.001"></testcase>
+                <testcase classname="config-policies" name="test_version_check/absent_version" time="0.000"></testcase>
+                <testcase classname="config-policies" name="test_version_check/inferior_version" time="0.000"></testcase>
+                <testcase classname="config-policies" name="test_version_check/version_wrong_type" time="0.001"></testcase>
+        </testsuite>
+</testsuites>
+----
+
+[#add-another-policy-and-test]
+== ポリシーテストを作成する
+
+このセクションでは、既存のポリシー `version.rego` について、ポリシーの実際の動作と、生成される__決定の結果__が適切であるかを確認するテストを作成します。 下記の手順では、xref:building-docker-images.adoc[リモート Docker] の下限バージョンを指定するポリシーの作成方法と、このポリシーのテストの作成方法と、作成したテストの実行方法について説明します。
+
+. `./config-policies` ディレクトリにポリシーのテストファイルを作成します。
+. 作成した `version_test.yaml` ファイルに、下記をコピーします。
++
+[source,rego]
+----
+# org level policy
+package org
+
+# needed to use keyworks like `in`.
+import future.keywords
+
+# Unique name identifying this policy in our bundle.
+policy_name["docker"]
+
+# Constant semver string we will be using for comparison checks.
+minimum_remote_docker_version := "20.10.11"
+
+# Mark the rule as enabled. This causes circleci to take this rule into account when making decisions.
+# Also mark this rule as a hard violation level rule. This will stop offending builds from running in production.
+enable_hard["check_min_remote_docker_version"]
+
+check_min_remote_docker_version[reason] {
+	some job_name, job_info in input.jobs
+	some step in job_info.steps
+
+	version := step.setup_remote_docker.version
+
+	semver.compare(version, minimum_remote_docker_version) == -1
+
+	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
+}
+----
+. ポリシーのテストファイルを作成します。 今回のファイルは `./config-policies/docker_test.yaml` とします。
+. 先ほど作成した新しい`docker_test.yaml`ファイルに以下をコピーする：
++
+[source,yaml]
+----
+# Top level tests must have keys prefixed with `test_`
+test_minimum_remote_docker_version:
+  # Create the input snippet that will be run against the policy. In the context of config policies, the input corresponds
+  # to CircleCI's config.yml
+  input:
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+
+  # Specify the decision we expect to get from the policy. Fields we expect to be empty can be omitted.
+  decision: &root_decision # optionally you can use a yaml anchor to reuse this decision as a base in subcases below.
+    status: PASS
+    enabled_rules:
+      - check_min_remote_docker_version
+
+  # It is totally valid to write more tests at the top level with keys prefixed with `test_`, however it is often practical
+  # to create subcases hierarchically using the cases field.
+  cases: # subcases do not need to begin with `test_`
+    greater:
+      # the subcase input will be *merged* into the parent input
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 21.0.0
+      # We specify the new expectation for the decision. In this case it is the same as the parent case.
+      decision: *root_decision
+
+    # here we finally write the case where it fails
+    lesser:
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 20.0.0
+      # this test expectation is based off of the root_decison anchor but overrides it with values we expect.
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_min_remote_docker_version
+            reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+----
+. つのポリシーとテストを含む `config-policies` ディレクトリに対して `test` コマンドを実行する：
++
+[source,shell]
+----
+circleci policy test ./config-policies
+----
++
+以下のような結果が出力されます。 どのテストも失敗に終わるはずです。
++
+[source,shell]
+----
+FAIL    test_minimum_remote_docker_version    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+-    "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+-    "status": "HARD_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/greater    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+-    "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+-    "status": "HARD_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/lesser    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+     "hard_failures": [
+        {"reason":"job \"example\": remote docker version \"20.0.0\" is less than minimum required \"20.10.11\"","rule":"check_min_remote_docker_version"},
+-      {"reason":"version must be defined","rule":"check_version"}
+     ],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "status": "PASS"
+   }
+FAIL    test_version_check/absent_version    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check/inferior_version    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be at least 2.1 but got 1","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check/version_wrong_type    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be a number","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+fail    config-policies    0.002s
+
+0/7 tests passed (0.002s)
+Error: unsuccessful run
+----
+
+バンドルに新しいポリシーを追加したことで新しいルールが追加され、テストが失敗するようになりました。 この決定は次の 2 通りの方法で行われています。
+
+- 新しいルールが `enabled_rules` フィールドに追加された
+- Docker バージョンのポリシーで `version` 設定を必須としておらず、一部のテストでこの設定を指定していなかったために、`soft_failure` が新たに発生した
+
+このような問題の解決策として、ポリシーの管理に適したポリシーファイル構造のベストプラクティスを次のセクションで説明します。
+
+[#manage-policy-test-file-structure]
+== ポリシーテストのファイル構造を管理します
+
+circleci policy test` コマンドがあるフォルダ、例えば `./config-policies` を指すと、そのフォルダにあるすべての `*_test.yaml` ファイルをピックアップし、そのフォルダにある **root** ポリシーに対してテストを実行します。
+
+そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。
+
+[source,shell]
+----
+├── config-policies/
+│   ├── policy_test.yaml
+│   ├── policy1/
+│   │   ├── policy1.rego
+│   │   ├── policy1_test.yaml
+│   ├── policy2/
+│   │   ├── policy2.rego
+│   │   ├── policy2_test.yaml
+----
+
+本番環境で有効にするバンドル全体を対象としたテストを準備するのは良い考えですが、各ポリシーについても安定版テストを作成できた方が便利です。 そのためには、ポリシーをサブフォルダー単位で分離し、各サブフォルダーにテストを格納します。 このようにすれば、サブフォルダーごとにサブバンドルを運用し、テストもサブフォルダー内で定義できます。
+
+. 以下のようにファイル構造を更新します。
++
+[source,shell]
+----
+├── config-policies/
+│   ├── docker/
+│   │   ├── docker.rego
+│   │   ├── docker_test.yaml
+│   ├──version/
+│   │   ├── version.rego
+│   │   ├── version_test.yaml
+----
+. 以下のようにテストパスに `/...` を付けて、サブフォルダー内も含めてすべてのテストを実行します。
++
+[source,shell]
+----
+circleci policy test ./config-policies/...
+----
++
+以下のような結果が出力されます。 これで、テストが再び成功するようになります。
++
+[source,shell]
+----
+?     config-policies            no tests
+ok    config-policies/docker     0.000s
+ok    config-policies/version    0.000s
+
+7/7 tests passed (0.001s)
+----
+. 信頼性をさらに高める方法として、統合テストやエンドツーエンドテストのように、ポリシーバンドル全体を対象とする最上位のテストを作成するのも有効です。
+. `./config-policies/policy_test.yaml` という名前のテストファイルを新しく作成します。
+. `policy_test.yaml` ファイルに下記を貼り付けます。
++
+[source,yaml]
+----
+test_policy:
+  input:
+    version: 2.1
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+  decision: &root_decision
+    status: PASS
+    enabled_rules:
+      - check_min_remote_docker_version
+      - check_version
+  cases:
+    bad_remote_docker:
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 1.0.0
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_min_remote_docker_version
+            reason: 'job "example": remote docker version "1.0.0" is less than minimum required "20.10.11"'
+
+    bad_version:
+      input:
+        version: 1.0
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be at least 2.1 but got 1
+
+test_break_all_rules:
+  input:
+    version: 1.0
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.0.0
+  decision:
+    <<: *root_decision
+    status: HARD_FAIL
+    hard_failures:
+      - rule: check_min_remote_docker_version
+        reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+      - rule: check_version
+        reason: version must be at least 2.1 but got 1
+----
+. verboseモードでテストの全セットを再度実行する：
++
+[source,shell]
+----
+circleci policy test ./config-policies/...
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    config-policies            0.001s
+ok    config-policies/docker     0.001s
+ok    config-policies/version    0.001s
+
+11/11 tests passed (0.003s)
+----
+
+[#use-metadata-with-tests]
+== テストにメタデータを使用します
+
+メタデータは `input` と同様に、テストを書くときに `meta` キーを使って指定することができる。
+
+そのため、以下のように、個々のポリシーについての安定版テストと、ポリシーバンドル全体に対するテストの両方を作成できるファイル構造にすることをお勧めします。
+
+. 指定したプロジェクトについてルールを無効にするには、`project_id` を使用します。 `version.rego` ファイルの `enable_rule` ステートメントを以下のように変更します。
++
+[source.rego]
+----
+exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
+
+enable_rule["check_version"] { data.meta.project_id != exempt_project }
+----
+. このポリシー用のテストを `version_test.yaml` ファイルに追加しましょう。 まず、テストの対象外とするメタデータを指定します。 以下の内容をテストファイルの末尾に追加します。
++
+[source,yaml]
+----
+test_version_check:
+  input:
+    version: 2.1
+  meta:
+    project_id: some_project_id
+  decision: &root
+    status: PASS
+    enabled_rules: [check_version]
+----
+. 対象外のプロジェクト ID が使用されている場合にテスト結果を PASS (合格) とするケースを、`version_test.yaml` に追加します。
++
+[source,yaml]
+----
+  cases:
+    exempt_project:
+      meta:
+        project_id: a944e13e-8217-11ed-8222-cb68ef03c1c6
+
+      # For this decision we expect no enabled rules
+      decision:
+        status: PASS
+----
+. テストを再び実行して、結果を確認します。
++
+[source,shell]
+----
+circleci policy test ./config-policies/version -v
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    test_version_check                       0.000s
+ok    test_version_check/absent_version        0.000s
+ok    test_version_check/exempt_project        0.000s
+ok    test_version_check/inferior_version      0.000s
+ok    test_version_check/version_wrong_type    0.000s
+ok    config-policies/version                  0.000s
+
+5/5 tests passed (0.000s)
+----
+
+NOTE: バージョンに関するポリシーを変更すると、最上位のテストにも影響が生じます。そのため、`policy_test.yaml` にも `meta` 要素を追加する必要があります。
+
+[#opa-tests]
+== OPAテスト
+
+OPAには、レゴ・ドキュメントの中でテストを直接指定する方法もあります 詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA のドキュメント (英語)] を参照してください。
+
+例として、上記のバージョンに関するルールの対象から、特定のプロジェクトを除外してみましょう。 `circleci policy test` コマンドを使用すると、OPA のテストを実行して結果を `<opa.tests>` として出力できます。
+
+実際の例として、以下の手順に、OPA テストを定義した __ヘルパー__ 関数を作成し、`circleci tests` コマンドを実行してこれらのテストの結果を確認する方法を示します。
+
+. ヘルパー関数用のディレクトリを作成します (まだない場合)。
++
+[source,shell]
+----
+mkdir ./config-policies/helpers
+----
+. ヘルパー関数用のファイル `./config-policies/helpers/job_name.rego` を作成します。
+. `job_name.rego` に下記を貼り付けます。 このヘルパーは、job の値を取ってジョブ名を返します。 また、ファイルの末尾に OPA のテストも記載します。
++
+[source.rego]
+----
+package org
+
+import future.keywords
+
+policy_name["job_helper_example"]
+
+get_job_name(job) :=
+  job if is_string(job)
+  else := name {
+    is_object(job)
+    count(job) == 1
+    some name, _ in job
+  }
+
+test_get_job_name_string = get_job_name("test-name") == "test-name"
+test_get_job_name_object = get_job_name({"test-name": {}}) == "test-name"
+test_get_job_name_number = value { not get_job_name(42); value = true }
+----
++
+[NOTE]
+====
+ジョブ名は、ワークフローで文字列として、またはキーを 1 つ持つオブジェクトとして指定できます。 以下の例では、`main` という名前のワークフローを宣言し、2 つのジョブを含めています。 最初のジョブ `test` は文字列リテラルとして指定されており、2 つ目のジョブ `publish` は、ジョブ `test` を必須とするキー `publish` を持つオブジェクトです。
+
+[source,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - test
+      - publish:
+          requires:
+            - test
+
+----
+====
+. `circleci policy test` を実行して、ポリシーに含まれる OPA テストの実行プロセスを確認しましょう。
++
+[source,shell]
+----
+circleci policy test ./config-policies/helpers
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    <opa.tests>         0.001s
+?     config-policies/helpers    no tests
+
+3/3 tests passed (0.001s)
+----
+. 詳細モードで実行すると、実行された OPA テストを名前別に確認できます。
++
+[source,shell]
+----
+circleci policy test ./config-policies/helpers -v
+----
++
+以下のような結果が出力されます。
++
+[source,shell]
+----
+ok    data.org.test_get_job_name_string    0.000s
+ok    data.org.test_get_job_name_object    0.000s
+ok    data.org.test_get_job_name_number    0.000s
+ok    <opa.tests>                          0.001s
+?     config-policies/helpers                     no tests
+
+3/3 tests passed (0.001s)
+----

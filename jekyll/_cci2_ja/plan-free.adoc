@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = CircleCI Free プラン
 :page-layout: classic-docs
@@ -14,24 +15,26 @@ version:
 
 このドキュメントでは、開発者の皆様にご利用いただいける Free プランについてご案内します。
 
+[#free-plan]
 == Free プラン
 
-従来の CircleCI のコンテナベースプランと同様に、従量課金制でも無料の Freeプランをご用意しています。 この Free プランでも CircleCI の多くの主要機能を利用して生産性、効率、速度を高めることが可能です。
+この Free プランでも CircleCI の多くの主要機能を利用して生産性、効率、速度を高めることが可能です。
 
-従量課金制の Free プランでは、さまざまなリソースクラスに対して毎月一定のクレジットが提供され、ビルドの設定や実行環境に基づきご自身でカスタマイズしていただけます。 この組み合わせでは、1 分あたりの消費クレジット数が少なく、ユーザーのシート数に制限はありません。
+Performance プランでは、さまざまなリソースクラスに対して毎月一定のクレジットが提供され、ビルドの設定や実行環境に基づきご自身でカスタマイズしていただけます。 この組み合わせでは、1 分あたりの消費クレジット数が少なく、ユーザーのシート数に制限はありません。
 
 Free プランのユーザー数に制限はなく、何人でも CircleCI 上でビルドおよび開発をしていただけます。 組織内またはオープンソースで、異なるチームやグループで複数のプロジェクトの共同作業を行うことにより、スピードや生産性、そして効率を向上させられます。 使用できるネットワークとストレージは一定なため、ユーザー数の制限がない分、クレジットの割り当てを適切に管理する必要があります。
 
-下記は Free プランでご利用いただける機能です。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は、[料金設定](https://circleci.com/ja/pricing/)のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、[リソースクラスの機能] (https://circleci.com/ja/product/features/resource-classes/)のページを参照してください。
+下記は Free プランでご利用いただける機能です。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
+link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。
 
-NOTE: Free プランでは、 macOS のリソースクラスがまもなく公開されます。
-
+[#available-resource-classes]
 === 利用可能なリソースクラス
 
-Docker、 Linux、 Windows、および macOS （近日公開）のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、<executor-intro#,Executors and Images>のページをご覧ください。
+Docker、 Linux、 Windows、および macOS のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、xref:executor-intro#[Executors and Images] のページをご覧ください。
 
-{% include snippets/features-of-circleci.adoc %}
+{% include snippets/ja/features-of-circleci.adoc %}
 
+[#support]
 === サポート
 
-[community forums](https://discuss.circleci.com/)、[support portal](https://support.circleci.com/hc/en-us)、および [global ticket-based system](https://support.circleci.com/hc/ja/requests/new) からサポートをご利用いただけます。
+サポートは、 link:https://discuss.circleci.com/[コミュニティフォーラム]、 link:https://support.circleci.com/hc/ja[サポートポータル]、link:https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバル サポート] で受けることができます。

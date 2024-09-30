@@ -1,63 +1,31 @@
 ---
 layout: classic-docs
-title: "Pipelines Introduction"
-description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
-categories:
-  - はじめよう
-order: 1
-version:
-  - クラウド
-  - Server v3.x
+title: "パイプラインの概要"
+description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-This page provides information on CircleCI pipelines, how they are triggered, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
+CircleCI パイプラインは、プロジェクトのすべての `.circleci/config.yml` ファイルを含む最高レベルの作業単位です。 パイプラインには、ジョブを管理するワークフローが含まれます。 固定の直線的なライフサイクルがあり、特定のユーザーに関連付けられています。 パイプラインは、変更が CircleCI 設定ファイルを含むプロジェクトにプッシュされた際にトリガーされますが、 CircleCI アプリケーションから又は API を使用して手動でスケジュールを設定したりトリガーすることもできます。
 
-## 概要
-{: #overview }
+CircleCI ダッシュボードにアクセスすると、お客様の組織またはアカウントで最近トリガーされたパイプラインのリストが表示されます。
 
-CircleCI pipelines are the highest-level unit of work, encompassing a project's full `.circleci/config.yml` file. Pipelines include your workflows, which coordinate your jobs. They have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
+![CircleCI アプリのパイプラインダッシュボードのスクリーンショット]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
 
-Pipelines are not available on installations of CircleCI server v2.x.
-
-When visiting your CircleCI dashboard, you are shown a list of recently triggered pipelines for your organization/account.
-
-![Screenshot of the pipelines dashboard in the CircleCI app]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
-
-## Triggering a pipeline
-{: #running-a-pipeline }
-
-Pipelines can be triggered in several ways. Each method is described below.
-
-### Trigger a pipeline on push to your code repository
-{: #run-a-pipeline-on-commit-to-your-code-repository }
-
-Each time a commit is pushed to one of your projects, on a branch that has a `.circleci/config.yml` file included, a pipeline is triggered.
-
-### Trigger a pipeline from the CircleCI app
-{: #run-a-pipeline-from-the-circleci-app }
-
-In the CircleCI app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled. Click **Trigger Pipeline**, choose if you want to specify any pipeline parameters, and click **Trigger Pipeline** again.
-
-### Trigger a pipeline using the API
-{: #run-a-pipeline-using-the-api }
-
-You can trigger a pipeline for a project using the [Trigger a New Pipeline]({{site.baseurl}}/api/v2/#operation/triggerPipeline) endpoint.
-
-
-<!---
-### Scheduling a pipeline
-{: #scheduling-a-pipeline }
-
-TBC
---->
-
-## Pipeline architecture
+## パイプラインのアーキテクチャ
 {: #pipeline-architecture }
 
-パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプライン中のいずれかのジョブに移動すると、ジョブ出力、テスト結果、アーティファクトに各タブからアクセスできます。
+パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプラインのいずれかのジョブに移動すると、各タブからジョブ出力、テスト結果、アーティファクトにアクセスできます。
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
+![CircleCI Web アプリの ジョブタブオプション]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-Further, the output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
+さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+![ジョブのステップのアウトプットをダウンロード、シェアするボタン]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+
+## 次のステップ
+{: #next-steps}
+パイプラインのトリガーの詳細については、[トリガーの概要]({{site.baseurl}}/ja/triggers-overview)を参照してください。

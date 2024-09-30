@@ -1,0 +1,71 @@
+---
+description: This is document provides examples of deploying to Azure Container Registry.
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Deploy to Azure Container Registry
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+In this how-to guide, you will learn how to configure CircleCI to deploy to Azure Container Registry.
+
+[#introduction]
+== Introduction
+
+This page describes a simple deployment to the Azure Container Registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
+
+{% include snippets/env-var-or-context.adoc %}
+
+In addition to the orb described below, CircleCI has created an Azure convenience image focusing on link:https://circleci.com/developer/images/image/cimg/azure[deployment: `cimg/azure`].
+
+
+For detailed information about the Azure ACR orb, including all options, refer to the link:https://circleci.com/developer/orbs/orb/circleci/azure-acr[CircleCI ACR Orb Reference] page.
+
+[#provide-env-vars]
+== 1. Provide environment variables to CircleCI
+
+Whether your require a user or service principal login, you will need to provide environment variables for username, password and tenant to CircleCI. For user logins use environment variable names as follows:
+
+* `AZURE_USERNAME`
+* `AZURE_PASSWORD`
+* `AZURE_TENANT`
+
+For service principal logins use:
+
+* `AZURE_SP`
+* `AZURE_SP_PASSWORD`
+* `AZURE_SP_TENANT`
+
+[#deploy-to-acr]
+== 2. Deploy to ACR
+
+Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
+
+{% include snippets/add-version-number.adoc %}
+
+```yaml
+version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
+
+orbs:
+    azure-acr: circleci/azure-acr@x.y.z # Use the Azure ACR orb in your config
+
+workflows:
+    build-deploy:
+    jobs:
+        - azure/build-and-push-image:
+            dockerfile: <name-of-your-dockerfile> # defaults to `Dockerfile`
+            path: <path-to-your-dockerfile> # Defaults to working directory
+            login-server-name: <your-login-server-name> # e.g. {yourregistryname}.azure.io
+            registry-name: <your-ACR-registry-name>
+            repo: <URI-to-your-login-server-name>
+            filters:
+            branches:
+                only: main # Only deploys when the commit is on the Main branch
+```
+
+If pushing to your repository is required, see the "Deployment Keys" section of the xref:github-integration#user-keys-and-deploy-keys[GitHub] or xref:bitbucket-integration#deploy-keys-and-user-keys[Bitbucket Cloud] instructions. Then, configure the Azure Web App to use your production branch.

@@ -1,0 +1,571 @@
+---
+description: Details of CircleCI's container runner
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.3+
+---
+= Container runner reference
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+This document is a comprehensive guide to operating and configuring jobs with the CircleCI container runner.
+
+[#running-your-first-job]
+== Running your first job with container runner
+
+Follow the instructions outlined on the xref:container-runner-installation#[Container runner installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+
+[#sample-configuration-container-agent]
+== Container runner sample configuration
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+[#resource-class-configuration-custom-pod]
+== Resource class configuration and custom task pod configuration
+
+Container runner supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
+
+Each resource class supports the following parameters:
+
+- `token`: The runner resource class token used to claim tasks (**required**).
+- Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
+
+The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. <<customizable-service-containers,Customizable service containers>> can be used to provide different container configuration between service containers and the main task container.
+
+The following fields will be overwritten by container runner to ensure correct task function, and expected CircleCI configuration behavior:
+
+- `spec.containers[0].name`
+- `spec.containers[0].container.image`
+- `spec.containers[0].container.args`
+- `spec.containers[0].container.command`
+- `spec.containers[0].container.workingDir`
+- `spec.restartPolicy`
+- `metadata.name`
+- `metadata.namespace`
+
+Below is a full configuration example, containing two resource classes:
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+      spec:
+        imagePullSecrets:
+          - name: "other"
+```
+
+[#customizable-service-containers]
+=== Customizable service containers
+
+By default, xref:using-docker#using-multiple-docker-images[service (or secondary) containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. Using the available overrides allows fine-tuned control over a service's resource usage on a per-image basis.
+
+[#customizable-service-containers-example]
+==== Example
+
+Consider the following container runner Helm values:
+
+[source,yaml]
+----
+agent:
+  serviceContainers:
+    exact:
+      "cimg/redis:6":
+        resources:
+          requests:
+            cpu: "0.5"
+            memory: "200Mi"
+  resourceClasses:
+    your-namespace/your-resource-class:
+      serviceContainers:
+        exact:
+          "cimg/postgres:16":
+            resources:
+              requests:
+                cpu: "1"
+                memory: "500Mi"
+        prefix:
+          "cimg/postgres":
+            resources:
+              requests:
+                cpu: "0.7"
+                memory: "250Mi"
+        pattern:
+          "cimg/mysql:.*":
+            resources:
+              requests:
+                cpu: "0.6"
+                memory: "300Mi"
+        default:
+          resources:
+            requests:
+              cpu: "0.4"
+              memory: "150Mi"
+----
+
+And the following CircleCI `config.yml` snippet:
+[source,yaml]
+----
+jobs:
+  build:
+    resource_class: your-namespace/your-resource-class
+    docker:
+      - image: cimg/base:current
+      - image: cimg/redis:6
+      - image: cimg/postgres:16
+      - image: cimg/mysql:8
+      - image: cimg/mongo:5
+----
+
+In this configuration:
+
+- `cimg/redis:6` matches the `exact` rule at the global scope (within `agent.serviceContainers`) and is allocated 0.5 CPU units and 200Mi of memory.
+- `cimg/postgres:16` matches the `exact` rule at the resource class scope (`your-namespace/your-resource-class`) and is allocated 1 CPU unit and 500Mi of memory.
+- `cimg/mysql:8` matches the `pattern` rule at the resource class scope and is allocated 0.6 CPU units and 300Mi of memory.
+- `cimg/mongo:5` doesn't match any rule from the service container options, hence defaults to the `default` rule at the resource class scope and is allocated 0.4 CPU units and 150Mi of memory.
+
+The rendered Pod specification would then appear as follows:
+
+[source,yaml]
+----
+spec:
+  containers:
+    - name: cimg/redis:6
+      resources:
+        requests:
+          cpu: "0.5"
+          memory: "200Mi"
+    - name: cimg/postgres:16
+      resources:
+        requests:
+          cpu: "1"
+          memory: "500Mi"
+    - name: cimg/mysql:8
+      resources:
+        requests:
+          cpu: "0.6"
+          memory: "300Mi"
+    - name: cimg/mongo:5
+      resources:
+        requests:
+          cpu: "0.4"
+          memory: "150Mi"
+----
+
+In the following sections, we will discuss these customization options in greater detail.
+
+==== Image match types
+
+Image match types govern how images are matched for container customization. The types include:
+
+. *Exact:* For exact matching, the image string must be an exact match. For example, `cimg/redis:6.2.6` only matches the `cimg/redis:6.2.6` image.
+
+. *Prefix:* For prefix matching, the image string matches all images with a common prefix. For example, `cimg/redis:` will match any `cimg/redis` image regardless of the tag.
+
+. *Pattern:* For pattern matching, a Go-based regex pattern is used to match images. For example, `cimg/(redis|postgres):.*` matches any `redis` or `postgres` image from the `cimg` repository regardless of the tag. Refer to the link:https://golang.org/pkg/regexp/syntax/[Golang regex syntax] and link:https://regex101.com/[regex101.com] to test your regular expressions.
+
+. *Default:* The `Default` match type applies when an image did not match any of the other image match types. It sets a single specification for all such service containers.
+
+===== Order of precedence
+
+Selectors follow the hierarchy: `Exact` -> `Prefix` -> `Pattern` -> `Default`. If a given image name does not match any rule in the hierarchy, it defaults to the `Default` rule. 
+
+NOTE: Match types defined at the resource class scope take precedence over those at the same match type.
+
+==== Selection scope
+
+Selection scopes determine the context in which the customization is applied. This comprises:
+
+. *Resource class:* This scope specifies a custom configuration for all containers running within a particular resource class. For example, setting specific resources under `your-namespace/your-resource-class` impacts only the containers running within this specific class. This scope takes precedence over the Global scope.
++
+[source,yaml]
+----
+resourceClasses:
+  your-namespace/your-resource-class:
+    serviceContainers:
+      exact:
+        "cimg/postgres:16":
+          resources:
+            requests:
+              cpu: "1"
+              memory: "500Mi"
+----
+
+. *Global:* This scope applies a custom configuration globally to all containers across all resource classes. It is considered when no matching scope is found at the resource class level.
++
+[source,yaml]
+----
+agent:
+  serviceContainers:
+    exact:
+      "cimg/redis:6":
+        resources:
+          requests:
+            cpu: "0.5"
+            memory: "200Mi"
+----
+
+===== Order of precedence
+
+The `Resource class` scope overrides any `Global` scope selection for a given match type. If a match is available in both scopes, the `Resource class` scope prevails.
+
+==== Troubleshooting
+
+Container runner sets link:https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/[Kubernetes annotations] on the pod corresponding to each service container. This annotation includes metadata about the selection scope and image match type for the container specification.
+
+These values take the following form: `app.circleci.com/container-spec-secondary-<ordinal-number>: {"selectionScope":"<global|resource-class>","imageMatchType":"<exact|prefix|pattern|default>"}`.
+
+For instance, consider again the configurations from the <<#customizable-service-containers-example,example>> above. These would lead to the following annotations being added to the pod, which you can also find on the pod description in the job's Task lifecycle step:
+
+[source]
+----
+Annotations:
+  app.circleci.com/container-spec-secondary-1: {"selectionScope":"global","imageMatchType":"exact"}  <- Corresponds to "cimg/redis:6"
+  app.circleci.com/container-spec-secondary-2: {"selectionScope":"resource-class","imageMatchType":"exact"} <- Corresponds to "cimg/postgres:16"
+  app.circleci.com/container-spec-secondary-3: {"selectionScope":"resource-class","imageMatchType":"pattern"} <- Corresponds to "cimg/mysql:8"
+  app.circleci.com/container-spec-secondary-4: {"selectionScope":"resource-class","imageMatchType":"default"} <- Corresponds to "cimg/mongo:5"
+----
+
+[#unsafe-retries]
+=== Unsafe retries
+
+Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail should be expected to trigger an unsafe retry when enabled.
+
+Unsafe retries is useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
+
+[CAUTION]
+====
+This feature is called “unsafe retries” for a reason. Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
+====
+
+The following sequence shows how unsafe retires work:
+
+1. If a pod fails or gets evicted during runtime, container runner will release the task.
+2. All resources managed by container runner for the task, such as the Kubernetes pod and secret, are cleaned up and deleted.
+3. The released task then becomes available for reclaim by any container runner instance configured for the same resource class.
+4. Once reclaimed, the task is restarted completely from scratch, including previously run steps.
+5. A task can be retried up to 3 times before it is deemed to have permanently failed.
+
+To enable unsafe retries, set the `enableUnsafeRetries` flag in the <<resource-class-configuration-custom-pod,resource class configuration>> for each resource class. The following example shows two resource class definitions. Unsafe retries is enabled for the first, for spot instances, but not for the second resource class:
+[source,yaml]
+----
+agent:
+  resourceClasses:
+    your-namespace/your-resource-class-1:
+      enableUnsafeRetries: true
+      token: your-resource-class-1-token
+      # The following spec isn't required, but serves as an example of how you could schedule tasks on spot instances using tolerations for the node's taint
+      spec:
+        tolerations:
+        - key: "lifecycle"
+          operator: "Equal"
+          value: "Ec2Spot"
+          effect: "NoExecute"
+    your-namespace/your-resource-class-2:
+      # Unsafe retries are disabled by default
+      token: your-resource-class-2-token
+      # This resource class can only schedule tasks on nodes without taints specific to spot instances
+----
+
+==== Monitoring
+
+Container runner logs an event whenever a task encounters a runtime failure. The specific error message is provided under the `error` field within the `service-work` span. To check whether the task is set to be rerun or not (either because it cannot be retried or all retries have been exhausted), you can inspect the `app.to_retry` field. This boolean indicates the retry status of the task.
+
+You can utilize these fields with your preferred Kubernetes logging integrations to monitor when and how frequently tasks are retried.
+
+[#custom-secret]
+== Custom token secret
+
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+
+The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      metadata:
+        annotations:
+          custom.io: <my-annotation>
+
+    circleci-runner/resourceClass2:
+  customSecret: <name_of_secret>
+```
+
+The corresponding custom secret would have 2 fields:
+
+```yaml
+circleci-runner.resourceClass: <my-token>
+circleci-runner.resourceClass2: <my-token-2>
+```
+
+Due to Kubernetes secret key character constraints, the `/` separating the namespace and resource class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+
+Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an empty map, as shown by `circleci-runner/resourceClass2` in the above config example.
+
+Additional instructions can be found in our link:https://support.circleci.com/hc/en-us/articles/15773444776731-How-to-use-customSecret-on-Container-Runner[Support Center].
+
+[#parameters]
+== Helm chart parameters
+
+The container runner Helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here]. You can find a full link:https://github.com/circleci-public/container-runner-helm-chart#values[chart values reference] section in the readme.
+
+
+[#container-permissions]
+== Kubernetes permissions
+
+Container runner needs the following Kubernetes permissions:
+
+* Pods, Pods/Exec
+** Get
+** Watch
+** List
+** Create
+** Delete
+* Secrets
+** Get
+** List
+** Create
+** Delete
+* Events
+** Watch
+* Nodes
+** Get
+** List
+
+If link:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job with SSH] is enabled, the following permissions are also required:
+
+* link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
+** Get
+
+In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
+
+* Pods, Pods/Logs
+** Watch
+
+By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
+
+It is assumed that the container runner is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
+
+NOTE: Cluster-wide permissions are used by container runner to autodetect the OS and CPU architecture of the node that the task pod is running on. If you do not want to grant these permissions to container runner, you can set `agent.autodetectPlatform` to `false`, which will assume the node OS and architecture matches the node that the container runner pod is on.
+
+[#garbage-collection]
+== Garbage collection
+
+Each container runner has a garbage collector. The garbage collector ensures the removal of any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` that are left dangling in the cluster. By default, the garbage collector removes all jobs older than five hours and five minutes. This time limit can be shortened or lengthened via the `agent.gc.threshold` parameter. However, if you do shorten the garbage collection  frequency, you must also shorten the maximum task run time via the `agent.maxRunTime` parameter to be a value smaller than the new garbage collection frequency. 
+
+CAUTION: If you change the garbage collection threshold but do **not** keep the max task run time lower than the garbage collection frequency, a running task pod could be removed by the garbage collector.
+
+The garbage collector may remove some objects sooner than the threshold. Task pods have a liveness probe that checks for a running task-agent process. Once a task completes or fails, the task-agent process will stop running and the liveness probe will fail, which will trigger GC.
+
+Container runner will drain and restart cleanly when sent a termination signal. Container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
+
+If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
+
+[#logging-containers]
+== Logging containers
+
+Container runner schedules a logging container if there are secondary (service) containers in the task pod. This container will get the secondary container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
+
+Logging containers require a service account token with the minimal privileges to get container logs.
+
+Container runner currently sets default resource limits and requests on the logging container, they are:
+
+```yaml
+requests:
+  cpu: 50m
+  memory: 64Mi
+limits:
+  cpu: 100m
+  memory: 128Mi
+```
+
+[#constraint-validation]
+== Constraint validation
+
+Container runner allows you to configure task pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container runner has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container runner claiming jobs which it cannot schedule which would then fail.
+
+If the constraint checker fails too many checks, it will disable claiming for that resource class until the checks start to pass again.
+
+Currently the following constraints are checked against the cluster state:
+
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selectors]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Name]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - Only MatchExpressions are checked
+
+As an example of how this works, consider the following resource class configuration:
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      spec:
+        nodeSelector:
+          disktype: ssd
+
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+```
+
+The first resource class has a node selector to ensure it is scheduled to nodes with an SSD. For some reason during operations the cluster no longer has any nodes with that label. The constraint checker will now fail checks for `circleci-runner/resourceClass` and will disable claiming jobs until it finds nodes with the correct label again. `circleci-runner/resourceClass2` claiming is not affected, the checks for different resource classes are independent of each other.
+
+[#cost-and-availability]
+== Cost and availability
+
+Container runner jobs are eligible for <<persist-data#managing-network-and-storage-usage,Runner Network Egress>>. This is in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
+
+The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. Final pricing and plan availability will be announced closer to the general availability of the offering.
+
+[#building-container-images]
+== Building container images
+
+link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] is not recommended due to the security risk it can pose to your cluster.
+
+To build container images in a container-agent job, a user may use:
+
+* A third-party tool like Buildah or kaniko
+* Machine runner installed with Docker installed on it
+* CircleCI-hosted compute
+
+Note: Third-party tools should be used at your own discretion.
+
+While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
+
+You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
+
+Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
+
+```yaml
+docker:
+  - image: quay.io/buildah/stable:v1.27.0
+```
+
+[#using-the-buildah-image]
+=== Using the Buildah image
+
+Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
+
+To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running Helm commands for your container-agent deployment. Then run:
+
+```
+kubectl create -f fuse-device-plugin-k8s-1.16.yml
+```
+
+You can confirm that this has been configured correctly by running `kubectl get daemonset -n kube-system` and confirming that `fuse-device-plugin-daemonset` is present and ready.
+
+Once this device has been added, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>>:
+
+```yaml
+resourceClasses:
+ <namespace>/<resourceClass>:
+  token: <token>
+   spec:
+    containers:
+     - resources:
+        limits:
+         github.com/fuse: 1
+```
+
+This will now let you run Buildah commands with container agent jobs and build containers:
+
+```yaml
+  docker-image:
+    docker:
+      - image: quay.io/buildah/stable
+    resource_class: <namespace>/<resourceClass>
+    steps:
+      - checkout
+      - run:
+          name: sanity-test
+          command: |
+            buildah version
+      - run:
+          name: Building-a-container
+          command: |
+            buildah bud -f ./Dockerfile -t myimage:0.1
+            buildah push myimage:tag
+```
+
+[#using-buildah-with-custom-images]
+=== Using Buildah with custom images
+
+You can also build your own custom image and include the installation of Buildah in your Dockerfile:
+
+```
+sudo yum install buildah
+```
+
+If you plan to use a CircleCI link:https://circleci.com/developer/images[convenience image], ensure you add the repository for installation to your job's `steps`:
+
+```
+sudo apt-get update
+sudo apt-get install -y wget ca-certificates gnupg2
+VERSION_ID=$(lsb_release -r | cut -f2)
+echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel-kubic-libcontainers-stable.list
+curl -Ls https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_$VERSION_ID/Release.key | sudo apt-key add -
+sudo apt-get update
+sudo apt install buildah -y
+```
+
+Additionally, set the isolation variable to default to `chroot`:
+
+```
+# Default to isolate the filesystem with chroot.
+ENV BUILDAH_ISOLATION=chroot
+```
+
+You can then follow the same instructions as <<#using-the-buildah-image,Using the Buildah image>> above to add the fuse device plugin to the container-agent deployment and update your `.circleci/config.yml` file to use your custom images and build container images in those jobs.
+
+[#limitations]
+== Limitations
+
+* Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
+* Only Kubernetes container environments are supported at this time.
+* <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
+* `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:configuration-reference#oidc[Configuration Reference].
+
+[#faqs]
+== FAQs
+
+Visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.

@@ -1,14 +1,12 @@
 ---
 layout: classic-docs
-title: "Executor Migration from Docker to Machine"
-short-title: "Migrating Executor from Docker to `machine`"
-description: "Best practices and considerations when migrating executor"
-categories: [migration]
-order:  1
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+title: "Migrating from Docker to Machine"
+description: "Best practices and considerations when migrating your executor from Docker to machine"
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 This document contains some general guidelines and considerations to
@@ -19,7 +17,7 @@ make when moving from the Docker executor to machine, or vice versa.
 
 ## Overview
 {: #overview }
-{:.no_toc}
+
 
 Occasionally, the Docker executor isn't quite the right fit for your
 builds. This can include a lack of memory or requiring more dedicated
@@ -32,50 +30,9 @@ installed for your application and tests.
 ## Pre-installed software
 {: #pre-installed-software }
 
-By default, the machine executor images come installed with useful
-utilities, but application specific requirements will need to be
-installed. If a dependency is not installed within Ubuntu 16.04 by
-default, or is not found on this list, it will need to be manually
-installed (note the most up to date list can be found
-[here](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh)):
+The most up to date list of pre-installed software can be found on the [image builder](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) page. You can also visit the [Discuss](https://discuss.circleci.com/) page for more information.
 
--   mysql\_57
--   mongo
--   postgres
--   java
--   oraclejdk8
--   java
--   openjdk8
--   sysadmin
--   devtools
--   jq
--   redis
--   memcached
--   rabbitmq
--   firefox
--   chrome
--   phantomjs
--   awscli
--   gcloud
--   heroku
--   python 2.7.12\*
--   python 3.5.2
--   nodejs 6.1.0\*
--   nvm
--   golang 1.7.3
--   ruby 2.3.1\*
--   rvm
--   clojure
--   scala
--   docker
--   socat
--   nsenter
-
-\* global default
-
-Additional packages can be installed with
-`sudo apt-get install <package>`. If the package in question is not
-found, `sudo apt-get update` may be required before installing it.
+Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 
 ## Running docker containers on machine
 {: #running-docker-containers-on-machine }
@@ -111,6 +68,6 @@ help decide which is right for your pipelines.
 {: #further-reading }
 
 We have more details on each specific executor
-[here](https://circleci.com/docs/2.0/executor-types/), which includes
+[here]({{site.baseurl}}/executor-intro/), which includes links to
 specific memory and vCPU allocation details, as well as how to implement
 each one in your own configuration.

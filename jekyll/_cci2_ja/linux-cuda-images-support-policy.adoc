@@ -1,0 +1,112 @@
+---
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= CircleCI Linux CUDAイメージサポートポリシー
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Linux CUDAイメージのリリース、アップデート、非推奨ポリシーをこのドキュメントで説明しています。
+:icons: font
+:toc: macro
+:toc-title:
+
+{% include snippets/ja/linux-cuda-deprecation-notice.adoc %}
+
+[#overview]
+== 概要
+
+このドキュメントは、xref:using-gpu#linux-gpu[CircleCI Linux CUDA イメージ]のリリース、アップデート、および非推奨ポリシーの概要を説明し、当社の Linux CUDA イメージに適用されます。
+
+[#release-policy]
+== リリースポリシー
+
+CircleCI CUDA イメージは、CircleCI の GPU エクゼキュータの追加処理能力を活用できるイメージを提供する目的で、当社のLinux VMマシンイメージをベースにしています。
+
+当社では、2つの最新のメジャーCUDAリリースのうち、3つの最新マイナーバージョン（マイナーバージョン >= `6`の場合は、3つの最新偶数マイナーバージョン）をサポートすることを目指しています。Nvidia のリリースサイクルを厳密に追跡し、CUDA のリリースから1週間以内に CircleCI のイメージをリリースすることを目指しています。
+
+これは SLA（service level agreement）ではないことにご注意ください。新しいCUDAイメージの公式 SLA 納期を提供することはできませんし、提供することもありません。
+
+[#tagging]
+== タグ
+
+CircleCI Linux CUDA イメージでは、以下のタグを使用できます：
+
+* Date-based: `linux-cuda-<CUDA-version>:<year.month.patch>`
+** 例 `linux-cuda-11:2023.02.1`
+** “default” slug はローリングベースで最新バージョンのイメージを指します
+*** 例 `linux-cuda-11:default` または `linux-cuda-12:default`
+* Edge: `linux-cuda-<CUDA-version>:edge`
+** 最新のバージョンをできるだけ早く入手したい場合は、 `edge` 画像に新しい変更を組み込んでください。`edge`タグは一般的なリリースの1週間前に利用可能になります。
+
+
+[#critical-cve-patches]
+== 重要な CVE パッチ
+
+Linux または Windows イメージのオペレーティングシステムまたはソフトウェアスタックのバージョンに影響する重大なCVEが公開された場合、CircleCI実行環境全体で使用されている当社のイメージへの影響を調査します。
+
+ほとんどの場合、環境の刹那的で孤立した性質のため、これらの画像にパッチを当てる必要はありません。CircleCI では、これらの開示に関する CircleC のスタンスを、link:https://discuss.circleci.com/[Discuss Forum]を通じて常に伝えていきます。
+
+[#bug-reports-issues-and-prs]
+== バグ報告、問題、PR
+
+CircleCI Linux CUDA イメージに問題やバグが見つかった場合は、CircleCIサポートに link:https://support.circleci.com/hc/ja/requests/new[サポートチケット]を提出してください。サポートチームは、社内の適切なエンジニアリングチームに問題をエスカレーションし、問題のアップデートを提供することができます。
+
+[#image-lifespan-eol]
+== イメージの寿命 / EOL
+
+イメージの寿命は通常、Nvidia の CUDA リリースサイクルに従います。
+
+CUDA の新しいメジャーバージョンがリリースされると、 CircleCI はサポートしている最も古いメジャーバージョンの非推奨プロセスを開始し、削除するスケジュールを立てます。これにより、CUDA の2つのメジャーバージョンを効果的に維持することができます。
+
+=== サンプル例
+
+A major version release -- CUDA 12.0:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Version
+| Support
+
+| CUDA 12
+| `linux-cuda-12` image added
+
+| CUDA 11
+| No change
+
+| CUDA 10
+| `linux-cuda-10` image deprecated
+|===
+
+A minor version release -- CUDA 11.8:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Version
+| Support
+
+| CUDA 11.8
+| Added to `linux-cuda-11`
+
+| CUDA 11.6
+| Remains in the image
+
+| CUDA 11.4
+| Remains in the image; becomes “oldest”
+
+| CUDA 11.2
+| Removed from `linux-cuda-11`
+|===
+
+新しい偶数番号のマイナーバージョンがリリースされると、3つ以上のマイナーバージョンが存在する場合に限り、そのバージョンが追加され、既存の最も古いバージョンは削除されます。
+
+非推奨イメージの削除が決定した場合、ディスカッションフォーラムでアナウンスするとともに、最近のジョブで非推奨画像をリクエストした開発者にメールでお知らせします。また、非推奨イメージの削除が近づいていることを確実に知っていただくために、ブラウンアウトを計画します。
+
+[#exceptions]
+== 例外
+
+当社では、状況に応じて、いつでもこの文書に記載された情報以外の作業を行う権利を留保します。本ポリシーに例外を設ける必要が生じた場合、可能な限り告知を行い、明確にすることを目指します。このような場合、可能であれば、メールによる通知などの追加的な働きかけとともに、CircleCI のディスカッション・フォーラムに発表が掲載されます。

@@ -1,21 +1,41 @@
 # CircleCI Docs: Widgets & Plugins
 
-This page details some of the augmentations either in the documentation presentation, built process etc.
+This page details some of the augmentations in the documentation presentation, built process, etc.
 
 ## Tabbed HTML Elements
 
 ![Tabbed Code Blocks Widget Screenshot](./assets/widget-tabbed-code-blocks.gif)
 
-Tabbed HTML elements allow you to create tabs to display alternate versions of something. The example gif above shows how you can use tabbed  blocks to display different version of a screenshot between CircleCI Cloud and Server.
+Tabbed HTML elements allow you to create tabs to display alternate versions of something. The example gif above shows how you can use tabbed blocks to display different version of a screenshot between CircleCI Cloud and Server.
 
 Here's how this would look in Jekyll's Markdown:
 
 ```md
 {:.tab.jobscreenshot.Cloud}
-![]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
+![Some alt text]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
 
 {:.tab.jobscreenshot.Server}
-![]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
+![Some alt text]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
+```
+
+And in asciidoc:
+
+```adoc
+[.tab.jobscreenshot.Cloud]
+--
+Description text paragraph blah blah
+
+.Image titlex
+image::new-job-page.png[Some alt text]
+--
+
+[.tab.jobscreenshot.Server]
+--
+Description text paragraph blah blah
+
+.Image title
+image::old-job-page.png[Some alt text]
+--
 ```
 
 Using the example line `{:.tab.jobscreenshot.Cloud}`, let's look at how usage of tabs is broken down.

@@ -1,0 +1,97 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Pull an image from AWS ECR with OIDC
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to pull an image from AWS ECR using OIDC authentication
+:icons: font
+:experimental:
+
+Follow this how-to guide to configure a `docker` job to pull an image from AWS ECR using OIDC authentication.
+
+[#introduction]
+== Introduction
+
+When you want to run jobs in the Docker execution environment, you have access to CircleCI convenience images for those containers. Alternatively, you can specify the use of other Docker images. One option is to pull an image from AWS ECR.
+
+The best practice approach when using AWS ECR is to pull images using OpenID Connect (OIDC). Steps for this are described on this page.
+
+For alternative methods, see the xref:private-images#aws-ecr[the AWS ECR section] of the Docker authenticated pulls page.
+
+Some advantages to using OIDC over using AWS credentials to pull images from ECR:
+
+* **Improved security**: By using OIDC authentication, storing AWS credentials directly in your CircleCI configuration or environment variables is avoided, reducing the risk of exposure.
+
+* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate AWS credentials.
+
+* **Fine-grained access control**: By associating an IAM role with the OIDC authentication, exact permissions granted to CircleCI for pulling ECR images can be controlled, ensuring a least-privilege approach.
+
+[#prerequisites]
+== Prerequisites
+
+* A xref:first-steps#[CircleCI account] integrated with a supported VCS.
+* A project `.circleci/config.yml` file containing a job that uses the xref:using-docker#[Docker execution environment], for which you want to use a Docker image stored in AWS ECR.
+* Set up CircleCI as a trusted identity provider in AWS. Follow the xref:openid-connect-tokens#set-up-aws[Set up AWS instructions].
+
+[#set-up-iam-role]
+== 1. Set up IAM role
+
+If you followed the xref:openid-connect-tokens#set-up-aws[Set up AWS instructions], you will have created an IAM role associated with your CircleCI identity provider. You can now use that role, and update the permissions policy, or you can create a new IAM role for this task. Steps for creating a new IAM role are described here.
+
+. Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps. You will need to select the following:
++
+** The **Identity Provider** that you xref:openid-connect-tokens#set-up-aws[created for CircleCI].
+** For **Audience**, choose the only option, which is your organization ID.
+
+. On the **Add Permissions** page, choose **Create Policy** and create a new permissions policy for your IAM role. The minimum permissions required is as follows (you will need to substitute `YOUR_ECR_REPO_ARN`):
++
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer"
+            ],
+            "Effect": "Allow",
+            "Resource": "<your-ECR-repo-ARN>"
+        },
+        {
+            "Action": [
+                "ecr:GetAuthorizationToken"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+----
+
+. Navigate back to the the **Add Permissions** page and refresh to find your new policy, and carry on following the AWS instructions to complete the role creation.
+
+[#update-circleci-config-yml-to-pull-image]
+== 2. Update `.circleci/config.yml` to pull image
+
+. Identify a job in your `.circleci/config.yml` file where you want to use your image stored in ECR, and update the job as follows:
++
+[source,yaml]
+----
+jobs:
+  job_name:
+    docker:
+      - image: <your-image-uri>
+        aws_auth:
+          oidc_role_arn: <your-iam-role-arn>
+----
+
+. Replace `<your-image-uri>` with the URI of the ECR image you want to pull. This URI typically follows the format `aws_account_id.dkr.ecr.region.amazonaws.com/repository:tag`.
+
+. Replace `<your-iam-role-arn>` with the ARN of the IAM role you want to assume. This is the role you created in the last section.
+
+. Save the changes to your CircleCI configuration file. Next time the job runs, CircleCI will use the specified IAM role and act as an OIDC provider to authenticate and pull your specified ECR image.
+

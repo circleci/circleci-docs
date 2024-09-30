@@ -1,0 +1,31 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= Orb の作成に関するよくあるご質問
+:page-layout: classic-docs
+:page-liquid:
+:page-description: よく寄せられるご質問や技術的な問題など、Orb の作成に役立つ情報をまとめました。
+:toc: macro
+
+:toc-title:
+
+よく寄せられるご質問や技術的な問題など、Orb の作成に役立つ情報をまとめました。
+
+[#orb-author-faqs]
+== FAQ
+
+include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+
+[#see-also]
+== 関連項目
+
+- xref:orbs-best-practices#[Orb のベストプラクティス]: 安定版 Orb の作成に関する推奨事項
+- xref:orb-concepts#[Orb のコンセプト]: CircleCI Orb のハイレベルな情報
+- xref:creating-orbs#[Orb のパブリッシュ プロセス]: ワークフローやジョブで使用する Orb に関する情報
+- xref:reusing-config#[Orb リファレンス ガイド]: 再利用可能な Orb、コマンド、パラメーター、および Executor の例
+- xref:testing-orbs#[Orb のテスト手法]: 自分で作成した Orb をテストする方法

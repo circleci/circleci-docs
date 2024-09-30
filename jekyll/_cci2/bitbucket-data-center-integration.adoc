@@ -1,0 +1,250 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Bitbucket Data Center integration overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to integrate Bitbucket Data Center with CircleCI to manage your pipelines with our.
+:icons: font
+:experimental:
+
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+
+This page walks you through integrating a Bitbucket Data Center project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your Bitbucket Data Center project. CircleCI features that are in development for Bitbucket Data Center projects are detailed in the <<coming-soon>> section.
+
+[#overview]
+== CircleCI Bitbucket Data Center integration overview
+
+CircleCI CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your Bitbucket Data Center projects each time a developer pushes a change to the codebase, and when a pull request is merged.
+
+Integrate with CircleCI to access features for automated software delivery:
+
+* xref:workflows#workflows-configuration-examples[Workflow orchestration]
+* xref:optimizations#[Data, compute, and time optimization]
+* Control over xref:security#[security] and xref:contexts#[permissions], and org-level control with xref:config-policy-management-overview#[config policies]
+* xref:executor-intro#[Managed execution environments] (Docker, Linux VM, macOS, Windows, Arm VM, GPU), plus xref:runner-overview#[self-hosted runners]
+* xref:test#[Test integrations], and xref:parallelism-faster-jobs#[test-splitting] to reduce length of the testing phase of your pipelines
+* xref:orb-intro#[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
+* Developer tools: xref:local-cli#[CircleCI CLI], xref:api-intro#[APIs], and xref:vs-code-extension-overview#[VS Code extension], xref:circleci-config-sdk#[config SDK]
+
+== Steps to integrate Bitbucket Data Center projects with CircleCI
+
+=== Prerequisites
+
+* Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to create a CircleCI account, create a new CircleCI organization. Alternatively you can use an existing organization.
+
+* Follow the steps on the xref:create-project#create-a-project[Create a project] page to create a project in CircleCI and set up an integration with your Bitbucket Data Center project.
+
+=== Integrate a project with CircleCI
+
+. **Set up your integration with Bitbucket Data Center if you have not already**:
+.. In the CircleCI web app, select **Organization Settings** in the sidebar.
+.. Select **Integrations** in the sidebar.
+.. Select btn:[Set Up Integration] next to Bitbucket Data Center.
+.. In the modal, enter your Bitbucket Data Center instance URL and your known_hosts. For guidance on generating known_hosts, see <<known-hosts>>.
++
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab Self-Managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+
+.. Select btn:[Set Up Integration].
+.. Select the back arrow to exit **Organization Settings**.
+
+. For the next sections you will need to **create a project HTTP access token** with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
+
+. **Set up a pipeline**:
+.. Select **Project Settings**.
+.. Select **Pipelines** in the sidebar.
+.. Select **Set Up Pipeline**. Fill in the required fields:
+** Give your pipeline a descriptive name.
+** Select **Bitbucket Data Center** under Config Source.
+** Provide the project HTTP access token you created in the previous step. Select btn:[Connect].
+** Select your repository and branch.
+** In the Config File Path field enter the path to the config file in your repository. Typically this is `.circleci/config.yml` but can be whatever you have configured in your project.
+.. Select btn:[Save].
+
+. **Set up a trigger**:
+.. Select **Triggers** in the Project Settings sidebar.
+.. Select **Add Trigger**.
+.. Select Bitbucket Data Center from the dropdown and select btn:[Next].
+.. Fill in the required fields:
+** Give your trigger a descriptive name.
+** Provide the project HTTP access token you created above. Select btn:[Connect].
+** Select your repository and branch.
+** Choose the pipeline you created in the previous step under the dropdown to show CircleCI which pipeline to trigger.
+.. Select btn:[Save].
+
+. If you have not already done so, **create a `.circleci` directory to the root of your repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
++
+[TIP]
+====
+For help with creating a CircleCI `config.yml`, see the following pages:
+
+* xref:hello-world#[Hello world]
+* xref:sample-config#[Sample config]
+* xref:configuration-reference#[Configuration reference]
+====
+
+Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+
+Make any further changes to your CircleCI config in your Bitbucket Data Center repository. Editing an existing CircleCI configuration within the web app is not currently available.
+
+Committing changes in your repository will automatically trigger a pipeline. Manually triggering a pipeline from the CircleCI web app is not available at this time.
+
+[#known-hosts]
+=== Generate `known_hosts`
+
+Integrating CircleCI with your Bitbucket Data Center instance requires that you store a public SSH host key within the CircleCI organization that will be accessing the Bitbucket Data Center instance.
+
+To get the required SSH host key, run `ssh-keyscan` with the hostname and port of your Bitbucket Data Center instance. For example:
+
+TIP: Replace the port with the correct port for your instance, and the hostname with your Bitbucket Data Center hostname.
+
+[,shell]
+----
+ssh-keyscan -p 1234 bitbucket-datacenter.example.com
+----
+
+The output will look something like the following:
+
+[,shell]
+----
+[bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
+----
+
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Organization Settings[Integrations].
+
+== How it works
+
+When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
+
+== Limitations
+
+The following limits are currently in place for Bitbucket Data Center integrations:
+
+- Each user can create up to three organizations.
+- Each organization under a Free Plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+
+[#project-settings]
+== Project settings
+
+Project settings is where you can access the following and more:
+
+* Set up collaborators and roles.
+* Set up and manage pipelines and triggers.
+* Set up project level environment variables, SSH keys and API permissions.
+* Set up integrations, for example, Slack notifications, LLMOps, status badges, webhooks.
+
+[#people]
+=== People and groups
+
+Project roles give control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access. The access options are:
+
+* Admin: Read and write access to the project and all settings and ability to manage other users' access.
+* Contributor: Read and write access to the project and some settings.
+* Viewer: Read only access to the project and some settings.
+
+For full details of roles, permissions, and groups, see the following pages:
+
+* xref:roles-and-permissions-overview#[Roles and permissions overview]
+* xref:manage-groups#[Manage groups]
+
+[#configuration]
+=== Pipelines and triggers
+
+You can add or delete pipelines and triggers for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
+
+[#project-settings-advanced]
+=== Advanced
+
+* You can optionally choose to enable the auto-cancel xref:skip-build#auto-cancel[redundant workflows setting]
+* You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
+* At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+
+[#ssh-keys]
+=== Additional SSH keys
+
+You can add additional SSH keys to the project. You might want to set this up for a few reasons:
+
+* If you would like to allow your project to access or deploy to services
+* If you would like your project to write to, or checkout code from, other repositories
+
+For details see the xref:add-ssh-key#[Additional SSH keys overview].
+
+[#organization-settings]
+== Organization settings
+
+For Bitbucket Data Center integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
+
+To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
+
+[#organization-settings-people]
+=== People
+
+Add or remove users, and manage user roles for the organization as well as user invites. See the xref:roles-and-permissions-overview#[Roles and permissions overview] page for full details.
+
+[#organization-settings-integrations]
+=== Integrations
+
+The Integrations page under Organization Settings allows you to connect your organization with either Bitbucket Data Center or a GitLab self-managed instance. Steps to integrate with Bitbucket Data Center are described on the xref:create-project#[Create a project] page.
+
+[#deprecated-system-environment-variables]
+== Deprecated system environment variables
+
+A number of built-in environment variables are not available in Bitbucket Data Center-based projects. VCS support for each environment variable is indicated in the xref:variables#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page.
+
+If your pipelines need the data provided by the deprecated environment variables, we recommend you use suitable replacements from the available xref:pipeline-variables#[pipeline values] list.
+
+[#coming-soon]
+== Coming soon
+
+The following sections are features of CircleCI which are not currently fully supported for Bitbucket Data Center. These features are planned for future releases.
+
+[#account-integrations]
+=== Account integrations
+
+You can only manage your connections between CircleCI and Bitbucket Data Center through project setup, pipeline and trigger settings. We are working on enabling users to manage their users’ Bitbucket Data Center identity as part of their user profile's account integration settings.
+
+[#passing-secrets-to-forked-pull-requests]
+=== Passing secrets to forked pull requests
+
+Passing secrets to forked pull requests is not a currently supported option for Bitbucket Data Center integrations.
+
+[#scheduled-pipelines]
+=== Scheduled pipelines
+
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for Bitbucket Data Center projects. This feature is planned for a future release.
+
+[#stop-building]
+=== Stop building
+
+Bitbucket Data Center integrations do not currently support the **Stop Building** xref:stop-building-a-project-on-circleci#stop-building-a-project[option] that can normally be found in **Project settings**. As an alternative, you can xref:stop-building-a-project-on-circleci#remove-a-project-from-circleci[Delete a project].
+
+[#additional-ssh-keys-only]
+=== Additional SSH keys only
+
+Deploy keys and user keys are not used by Bitbucket Data Center integrations. Additional Bitbucket Data Center keys are stored in **Project Settings > Additional SSH Keys**.
+
+[#free-and-open-source-setting]
+=== Free and open source setting
+
+Open source plans are not currently available to Bitbucket Data Center customers. CircleCI will keep the open source community up to date as work continues to support this.
+
+[#test-insights]
+=== Test Insights
+
+xref:insights-tests#[Test Insights] is currently not supported for Bitbucket Data Center integrations.
+
+[#circleci-server]
+=== CircleCI self-hosted server product
+
+Bitbucket Data Center is not yet supported for link:https://circleci.com/pricing/server/[CircleCI server].
+
+[#next-steps]
+== Next steps
+- xref:config-intro#[Configuration tutorial]
+- xref:hello-world#[Hello world]

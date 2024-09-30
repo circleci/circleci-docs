@@ -1,0 +1,64 @@
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Config
+| Xcode Version
+| macOS Version
+| Software Manifest
+| Release Notes
+
+| `14.0.1`
+| Xcode 14.0.1 (14A400)
+| 12.5.1
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-3134/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-14-0-1-rc-released/45424[Release Notes]
+
+| `13.4.1`
+| Xcode 13.4 (13F17a)
+| 12.3.1
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2890/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-13-4-1-released/44328[Release Notes]
+
+| `13.3.1`
+| Xcode 13.3 (13E500a)
+| 12.3.1
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2718/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-13-3-1-released/43675[Release Notes]
+
+| `13.2.1`
+| Xcode 13.2.1 (13C100)
+| 11.6.2
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2243/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-13-2-1-released/42334[Release Notes]
+
+| `13.1.0`
+| Xcode 13.1 (13A1030d)
+| 11.6.1
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2218/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-13-1-rc-released/41577[Release Notes]
+
+| `13.0.0`
+| Xcode 13.0 (13A233)
+| 11.5.2
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-1977/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-13-rc-released/41256[Release Notes]
+
+| `12.5.1`
+| Xcode 12.5.1 (12E507)
+| 11.4.0
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-1964/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-12-5-1-released/40490[Release Notes]
+
+| `11.7.0`
+| Xcode 11.7 (11E801a)
+| 10.15.5
+| https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2297/index.html[Installed software]
+| https://discuss.circleci.com/t/xcode-11-7-released/37312[Release Notes]
+|===
+
+[WARNING]
+====
+The `macos.x86.metal.gen1` resource class is being deprecated on October 2, 2023. Xcode v14.0.1 is the latest version that will be supported by these macOS resources.
+
+See our link:https://discuss.circleci.com/t/macos-intel-support-deprecation-in-january-2024/48718[announcement] for more details.
+====

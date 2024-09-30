@@ -1,0 +1,35 @@
+= INSTALLATION GUIDE: A guide for installing or migrating to CircleCI Server v{serverversion4} on Google Cloud Project
+docs@circleci.com
+:media: screen
+:title-page-background-image: image:pdf-header.png[]
+:imagesdir: ../../assets/img/docs/
+:doctype: book
+:toc:
+:toc-title: Contents
+:toclevels: 4
+:icons: font
+:page-liquid:
+:source-highlighter: rouge
+:pagenums:
+:idprefix:
+:idseparator: -
+:sectanchors:
+:autofit-option:
+
+:leveloffset: +1
+
+include::installation/phase-1-prerequisites.adoc[]
+
+include::installation/phase-2-core-services.adoc[]
+
+include::installation/phase-3-execution-environments.adoc[]
+
+include::installation/phase-4-post-installation.adoc[]
+
+include::installation/hardening-your-cluster.adoc[]
+
+include::installation/installing-server-behind-a-proxy.adoc[]
+
+include::installation/migrate-from-server-3-to-server-4.adoc[]
+
+:leveloffset: -1

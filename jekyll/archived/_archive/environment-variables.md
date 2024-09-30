@@ -53,10 +53,6 @@ The SHA1 of the commit being tested.
 
 A link to the homepage for the current repository, for example, `https://github.com/circleci/frontend`.
 
-`CIRCLE_COMPARE_URL`
-
-A link to GitHub's comparison view for this push. Not present for builds that are triggered by GitHub pushes.
-
 `CIRCLE_BUILD_URL`
 
 A permanent link to the current build, for example, `https://circleci.com/gh/circleci/frontend/933`.

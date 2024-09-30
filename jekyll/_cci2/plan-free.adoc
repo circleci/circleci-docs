@@ -1,33 +1,49 @@
 ---
-version:
-- Cloud
+contentTags:
+  platform:
+  - Cloud
 ---
-= CircleCI Free Plan
+= Free Plan
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the Free plan available to developers on CircleCI.
+:page-description: This document describes the Free Plan available to developers on CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 :orbs:
 
-This document describes the Free plan available to developers.
+This page describes the CircleCI Free Plan.
 
-== Free plan
-As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient, and fast.
+[#free-plan]
+== Free Plan
 
-The Free usage-based plan offers a set amount of credits across a variety of resource classes, per month, which you can customize depending on your build configuration and execution environment. With this combination, a small number of credits are charged per minute and there is no limit on user seats.
+The Free Plan offers premium features that allow your team to be productive, efficient, and fast.
 
-The Free plan offers *unlimited users* - there is no limit to the number of users who can build and develop on CircleCI. This allows you to collaborate with different teams and groups within your organization (or open source) on multiple projects, increasing speed, productivity, and efficiency. With an unlimited number of users, you will have to manage your credit allotment accordingly, as there is a set amount of network and storage usage available.
+The Free Plan includes a set number of credits across a variety of resource classes, per month. You can customize how you use your credits depending on your build configuration and execution environment. A small number of credits are charged per minute.
 
-Below are the features you can use on the Free plan. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type on execution environments.
+The Free Plan offers *five* link:https://support.circleci.com/hc/en-us/articles/360034783154-What-is-an-Active-User[active users]. Users beyond this limit are charged at 25,000 credits.
 
-NOTE: Please note, for the Free plan, resource classes on macOS are *coming soon*.
+Below are the features you can use on the Free Plan. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource classes] features page for details on CPU, memory, network and storage, and credit usage for available compute types.
 
-=== Available resource classes 
-A wide array of resource classes on Docker, Linux, Windows, and macOS are available to use. This flexibility helps ensure that you choose the right compute resources. To view examples, or find more information about these executors, please refer to the the <<executor-intro#,Executors and Images>> page.
+[#available-resource-classes]
+=== Available resource classes
+
+A wide array of resource classes on Docker, Arm, Linux, Windows, and macOS are available. To view examples, or find more information about these executors, refer to the xref:executor-intro#[Execution environments overview] page.
 
 {% include snippets/features-of-circleci.adoc %}
 
+=== Releases
+
+Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and SageMaker are supported.
+
+On the Free Plan, you get **three components** with associated releases per month. Components with no releases are not charged. Each release is **250 credits**.
+
+* A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit.
+
+* A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
+
+Start with the xref:release/releases-overview#[Releases overview] for more information on the feature.
+
+[#support]
 === Support
-Support is available through the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
+
+Support is available through the link:https://discuss.circleci.com/[community forums] and our link:https://support.circleci.com/hc/en-us[support portal].

@@ -1,0 +1,81 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Set a nightly scheduled pipeline
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "Learn how to create scheduled pipelines on a specific timetable."
+:icons: font
+:experimental:
+
+NOTE: Scheduled pipelines are not currently available for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+
+A common scenario you might want to set up is to trigger a pipeline overnight. The examples below shows how to schedule a pipeline to be run at midnight every night. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or if you would prefer, you can set one using the link:https://circleci.com/docs/api/v2/index.html[API].
+
+[#set-a-in-the-web-app]
+== Set a schedule in the web app
+
+In your desired project, navigate to **Project Settings > Triggers** to see the form for specifying a schedule for a trigger.
+
+image::{{site.baseurl}}/assets/img/docs/pipelines-scheduled-trigger-form.png[Scheduled pipelines web app form]
+
+The form allows you to schedule a trigger weekly or monthly. The weekly option (shown above) allows you to select specific days of the week. The monthly option allows you to select specific days of the month's calendar. With either option, you then specify which months of the year you would like the trigger to repeat.
+
+For a nightly schedule, you will need to take into account the form uses UTC (coordinated universal time). For example, if you would like your pipeline to trigger at midnight (0:00) in eastern standard time (EST), you would need to find the difference from UTC. In this scenario, 0:00 EST is 5:00 UTC.
+
+[#set-a-schedule-with-the-api]
+== Set a schedule with the API
+
+To set a schedule with the API, you will need a project building on CircleCI, environment variables set, and your CircleCI personal API token. Much like in the web app form, you are required to enter a name, parameters (like the branch or tag) as well as a timetable.
+
+```javascript
+const axios = require('axios').default;
+require('dotenv').config()
+
+// environment variables
+const API_BASE_URL = "https://circleci.com/api/v2/project"
+const vcs = process.env.VCS_TYPE
+const org = process.env.ORG_NAME
+const project = process.env.PROJECT_ID
+const token = process.env.CIRCLE_TOKEN
+
+const postScheduleEndpoint = `${API_BASE_URL}/${vcs}/${org}/${project}/schedule`
+
+async function setupNightlySchedule(){
+  let res = await axios.post(postScheduleEndpoint,
+    {
+      name: "Nightly build",
+      description: "Builds and pushes a new build every night.",
+        "attribution-actor": "system",
+        "parameters": {
+          "branch": "main",
+          "run-schedule": true
+        },
+        "timetable": {
+            // once per hour
+            "per-hour": 1,
+            // at 01:00 UTC
+            "hours-of-day": [1],
+            // on the following days of the week
+            "days-of-week": ["TUE", "WED", "THU", "FRI", "SAT"]
+        }
+    },
+    {
+      headers: { 'Circle-Token': token }
+    }
+  )
+  console.log(res.data)
+}
+
+setupNightlySchedule()
+```
+
+You can view the build scheduling of this link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/tree/main/build-scheduling[sample project] on GitHub.
+
+[#next-steps]
+== Next steps
+
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]

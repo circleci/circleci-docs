@@ -1,30 +1,35 @@
 ---
-title: Migrating from Azure DevOps
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-
-= Migrating from Azure DevOps
+= Migrate from Azure DevOps
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Azure DevOps to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 This document provides an overview of how to migrate from Azure DevOps to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
-== Source Control Setup
-If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or BitBucket. For Azure DevOps Git repos, here are links on how to import into GitHub or BitBucket:
+[#source-control-setup]
+== Source control setup
+If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub, Bitbucket or GitLab. For Azure DevOps Git repositories, here are links on how to import:
 
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+* link:https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
+* link:https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository[Bitbucket]
+* link:https://docs.gitlab.com/ee/user/project/import/repo_by_url.html[GitLab]
 
-For TFVC repositories, we recommend using the git-tfs tool. Here’s a link to the tool and steps for using it:
+For TFVC repositories, we recommend using the git-tfs tool. Here is a link to the tool and steps for using it:
 
-* https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
-* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
+* link:https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
+* link:https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
@@ -47,24 +52,27 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
+If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on link:https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started#[Getting Started guide].
 
-
+[#build-configuration]
 == Build Configuration
 
-If you're using Azure DevOps Pipelines or TFS Build and Release, you'll need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+If you are using Azure DevOps Pipelines or TFS Build and Release, you will need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a JSON file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
 The Azure DevOps Pipelines and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
-* https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
+* link:https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
 
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
+* xref:configuration-reference#[CircleCI YML Reference]
 
-== Configuration Comparison
+[#configuration-comparison]
+== Configuration comparison
+
+{% include snippets/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -94,7 +102,7 @@ jobs:
       - run: "execute-script-for-job1"
 ----
 
-2+| Specify a docker image to use for a job.
+2+| Specify a Docker image to use for a job.
 
 a|
 [source, yaml]
@@ -112,12 +120,9 @@ jobs:
   job1:
     docker:
       - image: node:10
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ----
 
-2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
 [source, yaml]
@@ -146,7 +151,7 @@ stages:
 a|
 [source, yaml]
 ----
-version: 2
+version: 2.1
 jobs:
   job1:
     steps:
@@ -163,7 +168,6 @@ jobs:
       - run: make deploy
 
 workflows:
-  version: 2
   jobs:
     - job1
     - job2
@@ -176,7 +180,7 @@ workflows:
           - job3
 ----
 
-2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
+2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for Docker, Linux and macOS.
 
 a|
 [source, yaml]
@@ -202,13 +206,16 @@ a|
 jobs:
   ubuntuJob:
     machine:
-      image: ubuntu-1604:201903-01
+      # The image uses the current tag, which always points to the most recent
+      # supported release. If stability and determinism are crucial for your CI
+      # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+      image: ubuntu-2004:current
     steps:
       - checkout
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
@@ -218,8 +225,8 @@ jobs:
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
 . Execution of shell scripts and Docker compose files
-. https://circleci.com/docs/2.0/workflows/[Workflows]
-. https://circleci.com/docs/2.0/artifacts/[Artifacts]
-. https://circleci.com/docs/2.0/caching/[Caching]
-. https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
-. https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
+. https://circleci.com/docs/workflows/[Workflows]
+. https://circleci.com/docs/artifacts/[Artifacts]
+. https://circleci.com/docs/caching/[Caching]
+. https://circleci.com/docs/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/optimizations/#section=projects[Performance options]

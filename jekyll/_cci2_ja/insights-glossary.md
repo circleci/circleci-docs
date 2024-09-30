@@ -1,10 +1,11 @@
 ---
 layout: classic-docs
 title: Insights のメトリクスの用語集
-description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
-version:
-  - Cloud
-  - Server v3.x
+description: CircleCI Insights、Insights ダッシュボード、Insights API におけるメトリクスの定義について解説します。
+contentTags:
+  platform:
+    - クラウド
+    - Server v3.x
 ---
 
 ## 概要
@@ -35,7 +36,7 @@ version:
 ## 組織レベルのメトリクス
 {: #organization-level-metrics }
 
-![]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
+![組織レベルのメトリクス例]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
 
 組織レベルのメトリクスは、組織のパフォーマンス分析に利用できます。
 
@@ -51,7 +52,7 @@ version:
 ## ワークフローのメトリクス
 {: #workflow-metrics }
 
-![]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
+![ワークフローメトリクスの例]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
 
 | 用語                                           | 定義                                                                                                                                     |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -96,7 +97,7 @@ version:
 
 ここでは、さまざまなメトリクスの傾向データの表示方法を説明します。
 
-![]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
+![トレンドデータの例]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
 
 - **緑**: このメトリクスは改善傾向にあります。
 - **赤**: このメトリクスは悪化傾向にあります。

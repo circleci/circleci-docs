@@ -1,0 +1,443 @@
+---
+
+description: CircleCI プロジェクト設定の設定ファイルのポリシー管理
+contentTags:
+  platform:
+  - クラウド
+---
+= 設定ファイルのポリシー管理機能の概要
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+NOTE: コンフィグファイルのポリシー管理機能は **Scale** プランでのみご利用いただけます。
+
+コンフィグファイルのポリシー管理機能を使って組織レベルのポリシーを作成し、設定要素が必須なのか、許可する、許可しないなどのルールとスコープを指定することができます。
+
+[#introduction]
+== コンテナランナー
+
+コンフィグファイルのポリシー管理機能により、CircleCI プロジェクトの設定ファイルを管理するポリシーを作成できます。 プロジェクトのコンフィグファイルが関連付けられたポリシーに定められたルールを遵守していない場合、最も厳しいケースでは、遵守するまでそのプロジェクトのパイプラインはトリガーできません。
+
+CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。 この方法ではプロジェクトの拡大に伴い変化するニーズに合うように各パイプラインを作成できるため、開発や反復を迅速に行う際に便利です。 しかし、組織全体の規則やセキュリティポリシーを管理および制定することが困難な場合があります。 そんな場合に、設定ファイルのポリシー管理機能が役立ちます。
+
+コンフィグファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
+
+[#quickstart]
+== はじめに
+
+コンフィグファイルのポリシー管理機能により、CircleCI プロジェクトの設定ファイルを管理するポリシーを作成できます。
+
+CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。
+
+* xref:create-and-manage-config-policies#[コンフィグファイルのポリシーの作成と管理]
+* xref:test-config-policies#[コンフィグファイルのポリシーのテスト]
+* xref:use-the-cli-for-config-and-policy-development#[CLI を使ったコンフィグファイルとポリシーの作成]
+* xref:config-policies-for-self-hosted-runner#[コンフィグファイルのポリシーをセルフホストランナーに適用する方法]
+
+[#how-config-policy-work]
+== クイックスタート
+
+VCS に接続した link:/docs/first-steps[CircleCI アカウント]を既にお持ちで、いますぐコンフィグファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy#[ポリシーの作成ガイド]をお読みください。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
+
+コンフィグポリシーについては、以下のノウハウガイドを用意しています： ポリシーは、ご自身の VCS 内のリポジトリに保存できます。 詳細については、link:/docs/create-and-manage-config-policies[設定ファイルのポリシーの作成と管理]のページを参照してください。
+
+CircleCI では、OPA の出力結果に基づいてポリシーの適用に関する__意思決定結果__を生成します。 この結果は以下のようになります。
+
+```
+status:           PASS | SOFT_FAIL | HARD_FAIL | ERROR
+reason:           string                                      (optional, only present when status is ERROR)
+enabled_rules:    Array<string>
+soft_failures:    Array<{ rule: string, reason: string }>
+hard_failures:    Array<{ rule: string, reason: string }>
+```
+
+意思決定の結果には、意思決定に使用されたルールと、検出されたルール違反 (soft_fail と hard_fail) の一覧が表示されます。
+
+[#use-the-cli-with-config-policies]
+== コンフィグファイルのポリシー管理機能の仕組み
+
+
+設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づく意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。
+
+ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。
+
+* `diff`: ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
+* `fetch`: ポリシーバンドルを (または 1 つのポリシーを名前に基づき) リモートからフェッチします。
+* `push`: ポリシーバンドルをプッシュ (アクティブ化) します。
++
+たとえば、以下のコマンドを実行すると、`./policy_bundle_dir_path` に保存されたポリシーバンドルがアクティブ化されます。
++
+[source,shell]
+----
+circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
+----
+* `settings`- 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。
++
+`settings` サブコマンドをフラグなしで呼び出した場合、現在の設定がフェッチされコンソールに出力されます。
++
+[source,shell]
+----
+circleci policy settings --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
+* `test`: ポリシーに対するテストを実行します。
++
+たとえば、以下のコマンドでは、`policies` ディレクトリにある定義済みテストがすべて実行されます。
++
+[source,shell]
+----
+circleci policy test ./policies
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+ok    policies    0.001s
+
+3/3 tests passed (0.001s)
+----
+
+{% include snippets/ja/find-organization-id.adoc %}
+
+[#writing-rego-policies-using-circleci-domain-specific-language]
+== CLI を使用したコンフィグファイルのポリシー管理
+
+
+CircleCI CLI を使って、プログラム上で組織のポリシーを管理することができます。  ポリシーの管理機能を実行するためのサブコマンドは、`circleci policy` コマンドにまとめられています。
+
+設定ポリシーの管理において、CLI では現在以下のサブコマンドをサポートしています。 そのため、ポリシーはこのページで説明されている CircleCI の仕様に合うように記述する必要があります。
+
+[#package-and-name]
+=== パッケージと名前
+
+すべてのポリシーが `org` パッケージに属し、ポリシー名を最初のルールとして宣言する必要があります。 ポリシーのすべての Rego ファイルには以下が含まれている必要があります。
+
+[source,rego]
+----
+package org
+
+policy_name["unique_policy_name"]
+----
+
+`policy_name` は最大 80 文字の英数字の文字列です。 これは CircleCI において、ポリシーを名前で一意に識別するために使用されます (Kubernetes のリソース名と同様)。
+ポリシー名は一意である必要があります。 1つの組織内で 2 つのポリシーに同じ名前をつけることはできません。
+
+`policy_name` にはルールの一部を使い、`rego key`: `policy_name["NAME"]` として宣言する必要があります。
+
+[#rules]
+=== ルール
+
+`org` パッケージと `policy_name` ルールを宣言すると、ポリシーをルールの一覧として定義できるようになります。 各ルールは 3 つのパートで構成されます。
+
+* 評価: 設定ファイルにポリシー違反がないかを評価
+* 措置: 違反している場合の措置
+* 有効化: 措置を有効にするかどうかを決定
+
+ポリシーを作成する場合には、このフォーマットに従っていれば、CircleCI でのポリシー評価出力の解析に影響を与えることなくカスタムヘルパー関数を作成できます。 ただし、カスタムヘルパー関数を作成する代わりに、ポリシーに `data.circleci.config` をインポートして CircleCI 製のヘルパーを利用することも可能です。 詳細については、link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]を参照してください。
+
+NOTE: 設定ファイルのポリシーの**ヘルパー**とは、通常のルールとほとんど同じですが、ポリシー違反の検出プロセスで個別に__有効化__されないルールを指します。 ヘルパーはポリシーのビルディングブロックとして記述、利用できます。
+
+ポリシーはすべて `input` 変数を使って設定データにアクセスできます。 `input` は評価されるプロジェクトの設定です。 この `input` は CircleCI の設定ファイルの内容と一致するので、`jobs` や `workflows` などの使用可能な任意の設定要素に希望の評価結果を適用するルールを記述することができます。
+
+[source,rego]
+----
+input.workflows     # an array of nested structures mirroring workflows in the CircleCI config
+input.jobs          # an array of nested structures mirroring jobs in the CircleCI config
+----
+
+[#define-a-rule]
+==== ルールの定義
+
+OPA では、ルールよってあらゆるタイプの出力を生成できます。 CircleCI では、違反の対象となるルールには、以下のタイプの出力が必要です。
+
+* 文字列
+* 文字列配列
+* 文字列から文字列のマップ
+
+これは、ルール違反があった際に、開発者や SecOps がそれに基づき対応するためのエラーメッセージが生成される必要があるためです。
+別のタイプの出力を生成するヘルパールールを定義することもできますが、CircleCI が判定時に考慮するルールは、上記の出力タイプでなければなりません。 詳細については、下記の <<#enablement>> のセクションをご覧ください。
+
+[#evaluation]
+===== 評価
+
+設定ファイルが規定されたポリシーに違反した場合に、意思決定エンジンがどのように判定するかを説明します。 評価では、ルールの名前と ID を定義し、条件をチェックして、違反について記載するユーザーフレンドリーな文字列を返します。 ルールの評価には、**ルール名**と**オプションのルール ID** が含まれます。 ルール名は、ルールの評価結果を有効化し、措置を設定するために使用されます。
+
+[source,rego]
+----
+RULE_NAME = reason {
+  ... # some comparison
+  reason := "..."
+}
+----
+
+[source,rego]
+----
+RULE_NAME[RULE_ID] = reason {
+  ... # some comparison
+  reason := "..."
+}
+----
+
+下記は、設定に少なくとも 1 つのワークフローが含まれる設定をチェックするシンプルな評価の例です。
+
+[source,rego]
+----
+contains_workflows = reason {
+    count(input.workflows) > 0
+    reason := "config must contain at least one workflow"
+}
+----
+
+ルール ID は 1 つのルールについて複数回の違反があった場合に識別するために使用されます。 たとえば、1 つの設定ファイルで非公式の Docker イメージを複数使用している場合、`use_official_docker_image` ルールに複数回違反することになります。 ルール ID は複数回の違反が予測される場合のみ使用してください。 場合によっては、ルールを遵守しているかどうかだけを知りたい場合もあります。 その場合、ルール ID は不要です。
+
+[source,rego]
+----
+use_official_docker_image[image] = reason {
+  some image in docker_images   # docker_images are parsed below
+  not startswith(image, "circleci")
+  not startswith(image, "cimg")
+  reason := sprintf("%s is not an approved Docker image", [image])
+}
+
+# helper to parse docker images from the config
+docker_images := {image | walk(input, [path, value])  # walk the entire config tree
+                          path[_] == "docker"         # find any settings that match 'docker'
+                          image := value[_].image}    # grab the images from that section
+
+----
+
+[#enforcement]
+===== 措置
+
+このポリシーの管理機能では、ルールの措置レベルを設定できます。
+
+[source,rego]
+----
+ENFORCEMENT_STATUS["RULE_NAME"]
+----
+
+設定可能なレベルは、以下の 2 つのレベルです。
+
+* `hard_fail`: `policy-service` が設定ファイルにおいて `hard_fail` と設定されたルールに対する違反を検出した場合、パイプラインはトリガーされません。
+* `soft_fail`: `policy-service` が設定ファイルにおいて `soft_fail` と設定されたルールに対する違反を検出した場合、パイプラインはトリガーされますが、そのルール違反は `policy-service` の判定ログに記録されます。
+
+`use_official_docker_image` ルールを `hard_fail` に設定した例:
+
+[source,rego]
+----
+hard_fail["use_official_docker_image"]
+----
+
+[#enablement]
+===== 有効化
+
+ポリシー違反を審査するためにはルールを有効化する必要があります。 有効化されていないルールは、CircleCI 違反出力形式に合致する必要はなく、他のルールのヘルパーとして使用できます。
+
+[source,rego]
+----
+enable_rule["RULE_NAME"]
+----
+
+ルールを有効化するには、そのルールを `enable_rule` オブジェクトにキーとして追加します。 たとえば、`use_official_docker_image` ルールを有効化する場合、以下を使用します。
+
+[source,rego]
+----
+enable_rule["use_official_docker_image"]
+----
+
+`enable_hard` を使用すると、1つのステートメントでルールを有効にし、その実施レベルを `hard` に設定することができます。
+
+以下の記述は等価です：
+
+[source,rego]
+----
+enable_hard["use_official_docker_image"]
+----
+
+[source,rego]
+----
+enable_rule["use_official_docker_image"]
+
+hard_fail["use_official_docker_image"]
+----
+
+[#using-pipeline-metadata]
+=== パイプラインのメタデータの使用
+
+CircleCI 設定ファイルのポリシーを記述する場合、多くの場合プロジェクトやブランチごとに動作が若干異なるポリシーにすることが推奨されます。 それには `data.meta` Rego プロパティーを使用します。
+
+ポリシーがトリガーされたパイプラインのコンテキストで評価されると、`data.meta` において以下のプロパティーが使用できるようになります。
+
+* `project_id` (CircleCI プロジェクトの UUID)
+* `build_number` (number)
+* `ssh_rerun` (boolean) - CIジョブがSSH再実行機能を使って開始されたかどうかを示します。
+* `vcs.branch` (string)
+* `vcs.release_tag` (string)
+* `vcs.origin_repository_url` (string) - コミットが作成されたレポジトリへの URL （フォークされたプルリクエストの場合のみ異なります）
+* `vcs.target_repository_url` (string) - コミットビルドするリポジトリへの URL。
+
+このメタデータは、ルールのアクティブ化/非アクティブ化、評価結果の変更、およびルール定義自体の一部として使用できます。
+
+以下は 1 つのプロジェクトに対してのみルールを制定し、main ブランチ上でのみ `hard_fail` とするポリシーのサンプルです。
+
+[source,rego]
+----
+package org
+
+policy_name["example"]
+
+# specific project UUID
+# use care to avoid naming collisions as assignments are global across the entire policy bundle
+sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
+
+# this rule is enabled only if the body evaluates to true
+enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
+
+# "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
+hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
+----
+
+以下は、信頼できないオリジンからのプルリクエストビルドをブロックするポリシーの例です。
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["forked_pull_requests"]
+
+# this rule is enabled only if the body evaluates to true (origin_repository_url and target_repository_url will be different in case of a forked pull request)
+enable_rule["check_forked_builds"] {
+	data.meta.vcs.origin_repository_url != data.meta.vcs.target_repository_url
+}
+
+# enable hard failure
+hard_fail["check_forked_builds"]
+
+check_forked_builds = reason {
+	not from_trusted_origin(data.meta.vcs.origin_repository_url)
+	reason := sprintf("pipeline triggered from untrusted origin: %s", [data.meta.vcs.origin_repository_url])
+}
+
+from_trusted_origin(origin) {
+	some trusted_origin in {
+		"https://github.com/trusted_org/",
+		"https://bitbucket.org/trusted_org/",
+	}
+
+	startswith(origin, trusted_origin)
+}
+----
+
+以下は、ジョブがセンシティブなコンテキストを使用する設定において、SSHの再実行をブロックするポリシーの例です。
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["ssh_rerun"]
+
+enable_hard["disallow_ssh_rerun"]
+
+sensitive_contexts := { "secops", "deploy_keys", "access_tokens", "security" }
+
+disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
+    data.meta.ssh_rerun
+    some _, job in input.workflows[_].jobs[_]
+    count(utils.to_set(job.context) & sensitive_contexts) > 0
+}
+----
+
+[#use-sets-and-variables]
+== CircleCI ドメイン固有の言語を使った Rego ポリシーの記述
+
+ポリシーは、OPA をサポートする専用の宣言型ポリシー言語である Rego で記述されます。 Rego の詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` 言語に関するドキュメント]を参照してください。 rego を使うと、ポリシーがコードで定義されるので、個々のポリシーの外部のrego ファイルにセットや変数を定義し、複数のポリシーでこれらのセットや変数を参照することができます。 実際の例としては、xref:test-config-policies#[設定ポリシーでコンテキストを管理する]ページを参照してください。
+
+CircleCI が設定ファイルを判定するためには、ポリシーの評価結果を CircleCI が解釈できる必要があります。
+
+[#testing-policies]
+== セットと変数を使用する
+
+プロジェクトIDなどのデータをハードコーディングすると、コードを読むのが難しくなり、 より多くのチームメンバーと共同作業するときに混乱する可能性があります（「`99ada477-7029-44bb-b675-5b2d6448d1ab`　は何ですか」）。 rego を使うと、ポリシーがコードで定義されるので、個々のポリシーの外部のrego ファイルにセットや変数を定義し、複数のポリシーでこれらのセットや変数を参照することができます。 実際の例としては、xref:test-config-policies#[設定ポリシーでコンテキストを管理する]ページを参照してください。
+
+[#dynamic-config]
+== ポリシーのテスト
+
+新しいポリシーを使用する場合、そのポリシーがどのように適用され、どのような意思決定結果が生成されるのかを事前に把握して、不安なくデプロイできなくてはなりません。 そのためのコマンドとして、`circleci policy test` を利用できます。
+
+* _Setup_ configurations
+* _Continuation_ configurations
+* Standard configurations
+
+If required for your project, you can encode rules to apply only to setup configs, or only to non-setup configs, as follows:
+
+[source,rego]
+----
+enable_hard["setup_rule"] { input.setup } # only applied to configs with `setup: true`
+----
+
+[source,rego]
+----
+enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that do not have `setup: true`
+----
+
+[source,rego]
+----
+enable_hard["some_rule"] # rule applied to all configs
+----
+
+For more information about dynamic configuration, see the xref:dynamic-config#[Dynamic configuration overview].
+
+[#example-policy]
+== サンプルポリシー
+
+以下に、`use_official_docker_image` という 1 つのルールが設定されたサンプルポリシーの全体像を示します。このルールは、設定ファイル内に含まれる全 Docker イメージの接頭辞が `circleci` または `cimg` であるかをチェックします。 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。 `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。
+
+また、このサンプルでは `future.keywords` をインポートしています。詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-language/#future-keywords[OPA のドキュメント (英語)] を参照してください。
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["example"]
+
+use_official_docker_image[image] = reason {
+  some image in docker_images   # docker_images are parsed below
+  not startswith(image, "circleci")
+  not startswith(image, "cimg")
+  reason := sprintf("%s is not an approved Docker image", [image])
+}
+
+# helper to parse docker images from the config
+docker_images := {image | walk(input, [path, value])  # walk the entire config tree
+                          path[_] == "docker"         # find any settings that match 'docker'
+                          image := value[_].image}    # grab the images from that section
+
+enable_hard["use_official_docker_image"]
+----
+
+[#next-steps]
+== 次のステップ
+
+* xref:create-and-manage-config-policies#[設定ファイルのポリシーの作成と管理]
+* xref:test-config-policies#[設定ファイルのポリシーのテスト]
+* xref:use-the-cli-for-config-and-policy-development#[CLI を使ったコンフィグファイルとポリシーの作成]
+* xref:config-policy-reference#[設定ファイルのポリシーに関するリファレンス]

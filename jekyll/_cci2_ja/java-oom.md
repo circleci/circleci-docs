@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "Java メモリ エラーの回避とデバッグ"
 description: "CircleCI で Java メモリ エラーを回避およびデバッグする方法"
-version:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 CircleCI で Java メモリ エラーを回避およびデバッグする方法について説明します。
@@ -15,15 +16,15 @@ CircleCI で Java メモリ エラーを回避およびデバッグする方法�
 
 [Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 メモリ制限が設定されていない場合、JVM はシステムで使用可能な合計メモリの一部を事前に割り当てます。 CircleCI は大量のメモリを搭載した大規模なマシンでコンテナ ベースのビルドを実行しており、 各コンテナには、マシンで使用可能な総量よりも少ない量のメモリ制限が設定されています。 こうしたことから、JVM がマシン上の大量のメモリを使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。
 
-By default, Java's is configured so that it will use:
-- More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
-- Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
+デフォルトでは、Java の使用量は以下のように設定されています。
+- 合計メモリの `1/64` 以上（4 GiB の RAM の Docker Medium クラスの場合、64 MiB）
+- 合計メモリの `1/4` 以下（4 GiB の RAM の Docker Medium クラスの場合、１ GiB）
 
-As of [June 3rd 2020](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly detect the number of CPUs and amount of RAM available to the job.
+[2020 年 6 月 3 日](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)の時点では、Docker Executor を使用する際、これらの制限が表示されます。 つまり、Java の最新バージョンでは、ジョブで使用可能な CPU の数や RAM の量を正しく検出します。
 
-For older versions of Java, This can lead to the JVM seeing a large amount of memory and CPUs being available to it, and trying to use more than is allocated to the container. これが原因でメモリ不足 (OOM) エラーが発生することがありますが、エラー メッセージには詳細が示されないため、このエラーをデバッグすることは困難です。 Usually you will see a `137` exit code, which means the process has been `SIGKILL`ed by the OOM killer (`137 = 128 + "kill -9"`).
+以前のバージョンの Java では、JVM がマシン上の大量のメモリと CPU が使用可能であると認識して、コンテナに割り当てられているよりも多くのメモリを使用しようとすることがあります。 これが原因でメモリ不足 (OOM) エラーが発生することがありますが、エラーメッセージには詳細が示されないため、このエラーをデバッグすることは困難です。 通常、`137` 終了コードが表示されます。これは、OOM killer によりプロセスが `SIGKILL` されたことを意味します (`137 = 128 + "kill -9"`)。
 
-You can see how much memory your container is allocated, and how much it has used, by looking at the following files:
+下記のファイルより、コンテナに割り当てられているメモリの量と使用量が確認できます。
 ```
 /sys/fs/cgroup/memory/memory.limit_in_bytes
 /sys/fs/cgroup/memory/memory.max_usage_in_bytes
@@ -38,7 +39,7 @@ You can see how much memory your container is allocated, and how much it has use
 ## 手動でのメモリ制限
 {: #manual-memory-limits }
 
-Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
+cgroup をサポートしていても、JVM はワーカープロセスプールを実行する場合など、メモリを過剰に使用する場合があります。 JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
 
 ## Java 環境変数を使用したメモリ制限の設定
 {: #using-java-environment-variables-to-set-memory-limits }
@@ -51,12 +52,12 @@ Even with cgroup support, the JVM can still use too much memory, e.g. if it exec
 | ----------------------------------------- | ---- | ------ | ----- | ------ | ---- |
 | [`_JAVA_OPTIONS`](#_java_options)         | 0    | 0      | 0     | 0      | 0    |
 | [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2    | 3      | 2     | 2      | 2    |
-| [`JAVA_OPTS`](#java_opts)                 | no   | 2      | no    | 1      | no   |
-| [`JVM_OPTS`](#jvm_opts)                   | *    | no     | no    | no     | *    |
-| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | no   | no     | no    | no     | 1    |
-| [`GRADLE_OPTS`](#gradle_opts)             | no   | 1      | no    | no     | no   |
-| [`MAVEN_OPTS`](#maven_opts)               | no   | no     | 1     | no     | no   |
-| CLI 引数                                    | 1    | no     | no    | no     | no   |
+| [`JAVA_OPTS`](#java_opts)                 | ×    | 2      | ×     | 1      | ×    |
+| [`JVM_OPTS`](#jvm_opts)                   | *    | ×      | ×     | ×      | *    |
+| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | ×    | ×      | ×     | ×      | 1    |
+| [`GRADLE_OPTS`](#gradle_opts)             | ×    | 1      | ×     | ×      | ×    |
+| [`MAVEN_OPTS`](#maven_opts)               | ×    | ×      | 1     | ×      | ×    |
+| CLI 引数                                    | 1    | ×      | ×     | ×      | ×    |
 {:class="table table-striped"}
 
 上記の各環境変数が優先される条件について説明します。
@@ -83,7 +84,7 @@ JVM はこの環境変数を読み取りません。 代わりに Java ベース
 
 この環境変数は Clojure 専用です。 `lein` は `JVM_OPTS` を使用して JVM にメモリ制限を渡します。
 
-**メモ:** `JVM_OPTS` は `lein` 自体のメモリには影響しません。 また、メモリ制限を Java に直接渡すこともできません。 `lein` の使用可能なメモリに影響を与えるには、`LEIN_JVM_OPTS` を使用します。 メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
+**注:** `JVM_OPTS` は `lein` 自体のメモリには影響しません。 また、メモリ制限を Java に直接渡すこともできません。 `lein` の使用可能なメモリに影響を与えるには、`LEIN_JVM_OPTS` を使用します。 メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
 
 ### `LEIN_JVM_OPTS`
 {: #leinjvmopts }
@@ -93,14 +94,14 @@ JVM はこの環境変数を読み取りません。 代わりに Java ベース
 ### `GRADLE_OPTS`
 {: #gradleopts }
 
-See the Gradle documentation for [memory settings](https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory).
+[メモリの設定](https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory)については、Gradle のドキュメントを参照してください。
 
 この環境変数は Gradle プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
 
 ### `MAVEN_OPTS`
 {: #mavenopts }
 
-See the Maven documentation for [memory settings](http://maven.apache.org/configure.html).
+[メモリの設定](http://maven.apache.org/configure.html)については、Maven のドキュメントを参照してください。
 
 この環境変数は Apache Maven プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
 
@@ -109,13 +110,8 @@ See the Maven documentation for [memory settings](http://maven.apache.org/config
 
 Java OOM エラーのデバッグを行っても、たいていの場合 `exit code 137` のエラーしか見つかりません。
 
-Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
+`-XX:MaxRAMPercentage=NN` や `-Xmx=NN` のサイズが、ご自身のアプリを完全にビルドするのに十分な大きさであることを確認します。また、他のプロセスが CircleCI ビルドコンテナの残りのメモリを共有できる大きさであることを確認します。
 
-Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the [cgroup visibility change](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
+JVM の最大ヒープサイズがジョブの制限値を上回る場合でも、ガベージコレクター機能により割り当て速度を維持し、プロセスが大量のメモリを使用し強制終了されるのを回避できます。 ガベージコレクターに割り当てられるデフォルトのスレッド数は、利用可能な CPU の数に基づいており、2020年 6月3日に行われた[cgroup の変更](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)により、アプリが以前よりも多くのメモリを消費し、OOM が強制終了される可能性があります。 このための最善の解決策は、ジョブの使用可能な RAM 内の最大ヒープサイズを設定することです。これにより、限界値を超えないようすぐに完全なガーベジコレクターがトリガされます。
 
-それでも引き続きメモリ制限に達する場合は、[プロジェクトの RAM を増やす](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ことを検討してください。
-
-## 関連項目
-{: #see-also }
-
-[Java Language Guide]({{ site.baseurl }}/ja/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/ja/2.0/language-android/)
+それでも引き続きメモリ制限に達する場合は、[ジョブの RAM を増やす]({{site.baseurl}}/ja/configuration-reference/#resource_class)ことを検討してください。

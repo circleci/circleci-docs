@@ -1,0 +1,118 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Get started with the VS Code extension
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A quickstart tutorial for the CircleCI VS Code extension.
+:icons: font
+:experimental:
+
+This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview#[overview].
+
+[#prerequisites]
+== Prerequisites
+
+Before starting this tutorial, make sure you have:
+
+* Installed VS Code (version `1.67` or above).
+
+* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free]).
+
+* A xref:create-project#[project] you follow that is building on CircleCI.
+
+* CircleCI server users: your self-hosted server URL.
+
+[#install-the-extension]
+== 1. Install the extension
+
+There are two ways to install the CircleCI extension:
+
+* In VS Code, click the **Extensions** icon on the left-hand Activity Bar, or open **View > Extensions**.
+
+* Or, download the extension from the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code Marketplace].
+
+[#authenticate-into-circleci]
+== 2. Authenticate into CircleCI
+
+. In VS Code, open the CircleCI panel by clicking on the CircleCI icon on the activity bar, then click “Log in”.
+
+. You will be prompted to enter a xref:managing-api-tokens#overview[personal API token]. You may create one in your CircleCI link:https://app.circleci.com/settings/user/tokens[**User Settings > Personal API Tokens**].
++
+**CircleCI server**: Make sure to check **I'm a CircleCI server customer**, then enter your self-hosted server URL.
++
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_login.png[Log in to CircleCI from VS Code]
+
+[#set-up-your-project-in-vs-code]
+== 3. Set up your project in VS Code
+
+If your VS Code workspace contains one or more CircleCI projects, the extension will detect them automatically, and the pipelines panel will be populated with your most recent pipelines.
+
+If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (icon:cog[]) at the top of the pipelines panel), and select your projects manually. Only projects you follow are listed for selection.
+
+NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects. Select your project manually from the settings page.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
+
+NOTE: Your manual selection will only persist if no projects are detected automatically.
+
+[#configure-the-pipelines-panel-in-vs-code]
+== 4. Configure the pipelines panel in VS Code
+
+By default, the pipelines panel displays all the latest pipelines run on your project. However, you can also configure it to show only the pipelines you are interested in. You can do so in the extension's settings page (run `CircleCI: Open Settings` from the Command Palette, or click on the settings icon (icon:cog[]) at the top of the pipelines panel).
+
+Specifically, you can choose to display:
+
+* All pipelines triggered by any user (author), or only pipelines you trigger.
+* All branches, only your current branch, or a specific branch.
+** You can also choose to “Always display default branch.”
+* Only pipelines that include workflows with specific statuses.
+
+[#configure-notifications]
+== 5. Configure notifications
+
+By default, you will receive VS Code pop-up notifications every time one of the workflows in your pipelines panel enters a failing status, or needs your approval.
+
+You can configure specific workflow status changes you want to be notified for in the Settings page.
+
+[#configure-ssh-keys]
+== 6. Configure SSH keys
+
+The extension allows you to xref:ssh-access-jobs#[rerun jobs with SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
+
+The SSH functionality uses the same key that you use for your VCS. The easiest way to configure SSH keys for the extension is to try re-running a job with SSH, by clicking on the action icon next to the job.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_rerun_job_ssh.png[Failed job with rerun with SSH icon]
+
+In the Command Palette, you will be asked to select whether you want to start an SSH session in the terminal or in a remote window. The extension will then try to find your key automatically. Follow the prompts to finish configuring your SSH key.
+
+Alternatively, you can configure SSH keys for the extension manually through the Settings page.
+
+To open an SSH session in a dedicated VS Code remote window, you need to install the link:https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer[official Remote Explorer extension for VS Code].
+
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects.
+
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_ssh_remote_window.png[VS Code with remote development window]
+
+[#open-a-config-file-to-test-language-support-features]
+== 7. Open a config file to test language support features
+
+The extension integrates a Language Server specific to CircleCI configuration files.
+
+. To verify that language support is working, open a `.yml` file in a `.circleci` directory.
++
+Even without taking any further action, you should see:
+
+* Syntax coloration is applied.
+* Red warnings appear if you introduce syntax errors.
+* You are able to use go-to-definition commands on the file.
++
+image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper-overview-optimised.gif[Go-to definition in config]
++
+TIP: If you do not see any syntax coloration, you might be using a VS Code theme that is not compatible with our syntax highlighting.
+
+. Open the "Problems" panel to access diagnostics. The panel lists warnings and issues detected by the extension.
+
+TIP: If you do not see any of the above language support features, try running the command `CircleCI: Restart Language Server`.
