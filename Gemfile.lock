@@ -111,7 +111,6 @@ GEM
     mercenary (0.4.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
-    multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.1.1)
@@ -135,8 +134,6 @@ GEM
       thor (>= 0.20.3, < 2.0)
     pronto-markdownlint (0.0.3)
     public_suffix (4.0.7)
-    pygments.rb (1.1.2)
-      multi_json (>= 1.0.0)
     racc (1.8.1)
     rainbow (3.0.0)
     rake (13.0.3)
@@ -182,7 +179,6 @@ DEPENDENCIES
   nokogiri (~> 1.16.5)
   pronto
   pronto-markdownlint
-  pygments.rb (~> 1.1.2)
   rake
 
 RUBY VERSION
