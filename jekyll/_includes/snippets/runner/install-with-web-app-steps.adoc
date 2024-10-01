@@ -3,9 +3,9 @@ In order to install self-hosted runners, you will need to create a namespace and
 
 You can view your installed runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
 
-. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hosted Runners*.
+. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hosted Runners* and select btn:[Create Resource Class].
 +
-image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
+image::runner/runner-ui-step-one.png[Runner set up, step one - Get started]
 
 . If this is your organization's first time using self-hosted runners, you will need to create a namespace as the first part of this step. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +
@@ -21,7 +21,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, s
 +
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
-ifdef::container[] 
+ifdef::container[]
 +
 // Display the following step for container runner installation only
 . Select the **Container** tab for installation instructions specific to container runner. These instructions are also included in the next section of this installation guide.
