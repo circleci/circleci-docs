@@ -1,7 +1,10 @@
-NOTE: Selecting a custom webhook as a pipeline trigger is currently in **open preview**. This feature is only available for accounts that are integrated through the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Selecting a custom webhook as a pipeline trigger is generally available for orgs that integrate with CircleCI's GitHub App do not need to request access. and is available in "Preview" for orgs that integrate with GitHub via the CircleCI GitHub OAuth App. See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-custom-webhooks-now-in-preview/49864[community forum] to request access.  To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.  
+
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), and select **Project Settings**.
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), select **Project Settings**, and select **Pipelines** in the sidebar.
+. If there is already a pipeline set up and it uses the desired YML configuration file, proceed to the **Triggers** step below.  If not, select **Set up pipeline**. If there is a **Connect** button, click it and follow the steps to install the CircleCI GitHub App into your GitHub organization.
+. Name the new pipeline and select the repository where the CircleCI YML configuration file is stored. Enter the file path (including the `.circleci` directory). The file path can be different than `.circleci/config.yml` (ie. `.circleci/webhook.yml`).  Save the pipeline.
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
 . Select **Custom Webhook** from the dropdown menu.
@@ -12,7 +15,7 @@ image::triggers/custom-webhooks-add-trigger.png[screenshot showing adding a cust
 . Complete the form fields and options:
 ** Give your trigger a descriptive name.
 ** (Optional) Add a description.
-** Supply a path to a `config.yml` file and CircleCI will create a configuration source for you:
+** Select the pipeline that you created in the step above.
 . Select btn:[Save].
 . You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source appended with the secret.
 +
