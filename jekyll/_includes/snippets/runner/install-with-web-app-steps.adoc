@@ -7,27 +7,22 @@ You can view your installed runners on the inventory page, by clicking *Self-Hos
 +
 image::runner/runner-ui-step-one.png[Runner set up, step one - Get started]
 
-. If this is your organization's first time using self-hosted runners, you will need to create a namespace as the first part of this step. *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
+. Next, you will create a custom xref:resource-class-overview#[resource class] to use when configuring jobs to use your self-hosted runners. If this is your organization's first time using self-hosted runners. You will need to create or enter a namespace. If your organization already creates orbs, do not create a new namespace, but instead enter the namespace your organization uses for orbs here too. Enter aname for your self-hosted runner resource class.
 +
-If your organization already uses orbs, do not create a new namespace. Instead, enter the namespace your organization uses for orbs.
-
-. The second input field is to name your self-hosted runner resource class.
+TIP: *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +
-image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
+image::runner/runner-ui-step-two.png[Runner set up, step two - Create a namespace and resource class]
 
 . Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
 +
-image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
-+
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
++
+image::runner/runner-ui-step-three.png[Runner set up, step three - Create a resource class token]
 
 ifdef::container[]
 +
 // Display the following step for container runner installation only
-. Select the **Container** tab for installation instructions specific to container runner. These instructions are also included in the next section of this installation guide.
-+
-.Install container runner through the web app
-image::runnerui_step_four_cr.png[Container runner in the web app]
+. Select the **Container** tab and continue on to the container runner installation steps below.
 +
 endif::[]
 
@@ -40,7 +35,3 @@ ifdef::machine[]
 image::runnerui_step_four.png[Machine runner in the web app]
 +
 endif::[]
-
-. You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if you do not yet have any configured. If you do not have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
-+
-image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
