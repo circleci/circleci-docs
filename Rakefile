@@ -49,7 +49,7 @@ task :test do
   ]
 
   ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
-  ignore_ja_files = Dir.glob("./jekyll/_site/#{JEKYLL_BASENAME}/ja/**/*").select { |e| File.file? e };
+  ignore_ja_files = Dir.glob("./jekyll/_site/#{JEKYLL_BASENAME}/ja/**/*.html").map { |path| path.sub("./jekyll/_site/", "") }
 
   options = {
     :allow_hash_href => true,
