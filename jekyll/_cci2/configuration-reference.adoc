@@ -2420,7 +2420,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | `cron`
 | Y
 | String
-| See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
+| See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
 |===
 
 [,yml]

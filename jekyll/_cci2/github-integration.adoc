@@ -50,7 +50,7 @@ Refer to the CircleCI documentation on xref:workflows#using-contexts-and-filteri
 [#permissions-overview]
 == Permissions overview
 
-CircleCI requests the following permissions from GitHub, defined in the link:http://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
+CircleCI requests the following permissions from GitHub, defined in the link:https://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
 
 **Read Permission**
 

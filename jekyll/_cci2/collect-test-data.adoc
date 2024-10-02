@@ -157,7 +157,7 @@ This section provides the following test runner examples:
 
 | JavaScript
 | ESLint
-| link:http://eslint.org/docs/user-guide/formatters/#junit[JUnit formatter]
+| link:https://eslint.org/docs/user-guide/formatters/#junit[JUnit formatter]
 | <<eslint,example>>
 
 | JavaScript
@@ -451,7 +451,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
 [#eslint]
 === ESLint
 
-To output JUnit results from link:http://eslint.org/[ESLint], you can use the link:http://eslint.org/docs/user-guide/formatters/#junit[JUnit formatter].
+To output JUnit results from link:https://eslint.org/[ESLint], you can use the link:https://eslint.org/docs/user-guide/formatters/#junit[JUnit formatter].
 
 A working `.circleci/config.yml` test section might look like this:
 
@@ -581,7 +581,7 @@ After adding pytest to your project, you can produce and upload the test results
 [#maven-surefire-plugin-for-java-junit-results]
 === Maven Surefire Plugin for Java JUnit Results
 
-If you are building a link:http://maven.apache.org/[Maven] based project, you are more than likely using the link:http://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire plugin] to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
+If you are building a link:https://maven.apache.org/[Maven] based project, you are more than likely using the link:https://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire plugin] to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
 [,yml]
 ----

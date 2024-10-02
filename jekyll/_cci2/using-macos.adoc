@@ -248,7 +248,7 @@ The following common test tools are known to work well on CircleCI:
 * link:https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/01-introduction.html[XCTest]
 * link:https://github.com/kiwi-bdd/Kiwi[Kiwi]
 * link:https://github.com/kif-framework/KIF[KIF]
-* link:http://appium.io/[Appium]
+* link:https://appium.io/[Appium]
 
 [#react-native-projects]
 === React Native projects

@@ -211,7 +211,7 @@ to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 [#mavenopts]
 === `MAVEN_OPTS`
 
-See the Maven documentation for link:http://maven.apache.org/configure.html[memory settings].
+See the Maven documentation for link:https://maven.apache.org/configure.html[memory settings].
 
 This environment variable is exclusive to Apache Maven projects.
 Use it
