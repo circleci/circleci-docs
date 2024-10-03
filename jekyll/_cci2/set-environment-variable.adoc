@@ -71,7 +71,7 @@ to be accessible in more than one step, export the value xref:env-vars#parameter
 [#set-an-environment-variable-in-a-job]
 == Set an environment variable in a job
 
-To set an environment variable in a job, use the xref:configuration-reference#job_name[`environment` key].
+To set an environment variable in a job, use the xref:configuration-reference#job-name[`environment` key].
 
 ```yaml
 version: 2.1
@@ -120,12 +120,12 @@ jobs:
             echo $MY_ENV_VAR
 ```
 
-Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information about controlling access to env vars with contexts, refer to the xref:contexts#restricting-a-context[Restricting a context] documentation.
+Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information about controlling access to environment variables with contexts, refer to the xref:contexts#restrict-a-context[Restricting a context] documentation.
 
 [#set-an-environment-variable-in-a-project]
 == Set an environment variable in a project
 
-. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
+. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or select the **Project Settings** button on the project's individual **Pipelines** page.
 +
 image::project-settings-env-var-v2.png[Environment Variables]
 

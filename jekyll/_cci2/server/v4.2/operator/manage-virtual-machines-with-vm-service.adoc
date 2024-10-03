@@ -13,7 +13,7 @@ noindex: true
 :toc: macro
 :toc-title:
 
-VM service controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
+VM service controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images#[Remote Docker] jobs are run.
 
 This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
 
