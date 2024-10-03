@@ -93,24 +93,28 @@ If you do not see your project and it is not currently building on CircleCI, che
 [#projects]
 == Projects
 
-Projects associated with your organization will appear on the **Projects** page. You have the option to:
+Projects associated with your organization appear on the **Projects** page. You have the option to:
 
-* xref:create-project#[_Set Up_ or _Create_ any project] that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:notifications#[email notifications] for the project's status.
+TIP: The options available to you will be different depending on how you integrate your docs with CircleCI (GitHub OAth/Bitbucket Cloud, GitHub App, GitLab, ,Bitbucket Data Center)
 
-Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
+* xref:create-project#create-a-project[Create a project]
+* xref:create-project#set-up-a-project[Set Up any project] that you are the owner of in your VCS.
+* _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:notifications#[email notifications] for the project's status.
 
-Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, Insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on individual project pages, which you can view by clicking on a project's name in the main **Projects** dashboard.
+Unfollowing a project removes its pipelines from your Pipelines page and unsubscribes you from notifications about the projects builds.
 
-NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available in xref:github-apps-integration#[GitHub App] or xref:gitlab-integration#[GitLab] projects. Refer to the Coming soon section in each integration overview page for more details on CircleCI features that are not fully supported.
+NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available for xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab] and xref:bitbucket-data-center-integration#[Bitbucket Data Center] projects.
 
-image::web_ui_projects.png[Projects page]
+Select the ellipsis menu icon (icon:ellipsis-h[ellipsis]) in a project row to access project assets, as follows:
 
-**Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web app. You can make changes to the config file and commit them. At the top of the text editor, you will see the project's branch you are committing the changes to (most often `main`).
+* Configuration file in the config editor.
+* Insights.
+* Project settings
+* Project ID.
 
-image::web_ui_text_editor.png[Text editor in the web app]
+TIP: A **Project Settings** button is also available from the pipelines page when you have a project selected in the filter menu.
 
-**Insights**: This is a link to the <<#insights,Insights>> page.
+image::web-ui-projects.png[Projects page in the CircleCI web app]
 
 [#project-settings]
 === Project settings
