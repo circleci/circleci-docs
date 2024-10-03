@@ -46,7 +46,7 @@ Evaluations can cover many aspects of a model performance, including:
 
 Evaluations can be expressed as classic software tests, typically characterised by the "input, expected output, assertion" format, and as such they can be automated into CircleCI pipelines.
 
-There is two important differences between evals and classic software tests to keep in mind:
+Two important differences between evals and classic software tests to keep in mind:
 
 * LLMs are predominantly non-deterministic, leading to flaky evaluations, unlike deterministic software tests.
 * Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in regular software testing.
