@@ -13,6 +13,11 @@ contentTags:
 
 This page describes common methods for testing applications powered by large language models (LLMs) through evaluations.
 
+[NOTE]
+====
+This documentation is only applicable for link:https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8[CircleCI Evals Orb versions 1.x.x].
+====
+
 == Evaluations overview
 
 Evaluations, also known as evals, are a methodology for assessing the quality of AI software.
