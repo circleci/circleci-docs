@@ -48,7 +48,7 @@ Caching is about achieving a balance between reliability and getting maximum per
 [#saving-cache]
 === Saving cache
 
-CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the xref:configuration-reference#save_cache[save cache section] of the Configuring CircleCI document for additional examples.
+CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the xref:configuration-reference#savecache[save cache section] of the Configuring CircleCI document for additional examples.
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
@@ -65,7 +65,7 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
 CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep your cache keys under this maximum.
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
-NOTE: Unlike the special step xref:configuration-reference#persist_to_workspace[`persist_to_workspace`], neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+NOTE: Unlike the special step xref:configuration-reference#persisttoworkspace[`persist_to_workspace`], neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 [#restoring-cache]
 === Restoring cache

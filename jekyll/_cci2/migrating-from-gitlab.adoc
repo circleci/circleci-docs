@@ -233,7 +233,7 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/configuration-reference/#docker[Service containers]
 . Run testing commands
 . https://circleci.com/docs/custom-images/[Custom convenience images]
-. https://circleci.com/docs/configuration-reference/#resource_class[Resource classes]
+. https://circleci.com/docs/configuration-reference/#resourceclass[Resource classes]
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/parallelism-faster-jobs/[parallelism]
 . https://circleci.com/docs/artifacts/[Artifacts]

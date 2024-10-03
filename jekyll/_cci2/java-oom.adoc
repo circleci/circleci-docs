@@ -230,4 +230,4 @@ build container.
 Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the link:https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor[cgroup visibility change] made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
 
 If you are still consistently hitting memory limits,
-consider xref:configuration-reference#resource_class[increasing your job's RAM allocation].
+consider xref:configuration-reference#resourceclass[increasing your job's RAM allocation].
