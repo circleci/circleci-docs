@@ -49,7 +49,6 @@ task :test do
   ]
 
   ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
-  ignore_ja_files = Dir.glob("./jekyll/_site/#{JEKYLL_BASENAME}/ja/**/*.html").map { |path| path.sub("./jekyll/_site/", "") }
 
   options = {
     :allow_hash_href => true,
@@ -58,10 +57,10 @@ task :test do
     :disable_external => true,
     :empty_alt_ignore => true,
     :parallel => { :in_processes => HTML_PROOFER_PARALLEL},
-    :file_ignore => [/\/ja\//].concat(ignore_files)
+    :file_ignore => ignore_files,
     :directory_index_file => "index.html",
-    :url_ignore => [/\/ja\//]
+    :ignore_files => [/ja\//],
   }
 
-  HTMLProofer.check_directory("./jekyll/_site/#{JEKYLL_BASENAME}", options).run
+  HTMLProofer.check_directory("./jekyll/_site", options).run
 end

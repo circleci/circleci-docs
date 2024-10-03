@@ -202,7 +202,7 @@ jobs:
 {% endraw %}
 
 Make note of the use of a `checksum` in the cache `key`. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache will be updated accordingly. In the above example, the
-xref:configuration-reference#restore_cache[`restore_cache`] example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
+xref:configuration-reference#restorecache[`restore_cache`] example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
 [#writing-to-the-cache-in-workflows]
 == Writing to the cache in workflows
