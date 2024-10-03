@@ -13,6 +13,11 @@ contentTags:
 
 This page describes common methods for testing applications powered by large language models (LLMs) through evaluations.
 
+[NOTE]
+====
+This documentation is only applicable for link:https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8[CircleCI Evals Orb versions 1.x.x].
+====
+
 == Evaluations overview
 
 Evaluations, also known as evals, are a methodology for assessing the quality of AI software.
@@ -41,7 +46,7 @@ Evaluations can cover many aspects of a model performance, including:
 
 Evaluations can be expressed as classic software tests, typically characterised by the "input, expected output, assertion" format, and as such they can be automated into CircleCI pipelines.
 
-There are two important differences between evals and classic software tests to keep in mind:
+Two important differences between evals and classic software tests to keep in mind:
 
 * LLMs are predominantly non-deterministic, leading to flaky evaluations, unlike deterministic software tests.
 * Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in regular software testing.
@@ -65,7 +70,7 @@ Given the volatile nature of evaluations, evaluations orchestrated by the Circle
 
 Instead, a summary of the evaluation results is created and presented:
 
-* As a comment on the corresponding GitHub pull request (currently available only for projects integrated with xref:github-integration#[Github OAuth]):
+* As a comment on the corresponding GitHub pull request (currently available only for projects integrated with xref:github-integration#[GitHub OAuth]):
 +
 image::/docs/assets/img/docs/llmops/github-pr-comment.png[Jobs overview]
 
