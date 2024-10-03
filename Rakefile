@@ -58,10 +58,10 @@ task :test do
     :disable_external => true,
     :empty_alt_ignore => true,
     :parallel => { :in_processes => HTML_PROOFER_PARALLEL},
-    :file_ignore => ignore_files.concat(ignore_ja_files),
+    :file_ignore => [/\/ja\//].concat(ignore_files)
     :directory_index_file => "index.html",
     :url_ignore => [/\/ja\//]
   }
 
-  HTMLProofer.check_directory("./jekyll/_site", options).run
+  HTMLProofer.check_directory("./jekyll/_site/#{JEKYLL_BASENAME}", options).run
 end
