@@ -23,12 +23,12 @@ Rotating secrets regularly means your secrets are only active for a certain amou
 
 Understand the role and permission systems of other platforms you use outside of CircleCI. For example, IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
 
-Follow the advice in xref:security-recommendations#/[Secure secrets handling] when writing scripts and working on the command-line.
+Follow the advice in xref:security-recommendations#[Secure secrets handling] when writing scripts and working on the command-line.
 
 [#secure-your-environment-variables]
 ## Secure your environment variables
 
-Use xref:contexts/#restricting-a-context[restricted contexts] with teams to share environment variables with a select security group.
+Use xref:contexts/#restrict-a-context[restricted contexts] with teams to share environment variables with a select security group.
 
 If your project is **open source and public**, please make note of whether or not you want to share environment variables.
 

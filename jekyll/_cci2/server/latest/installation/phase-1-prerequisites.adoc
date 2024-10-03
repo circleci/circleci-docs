@@ -264,7 +264,7 @@ Follow these steps if you already have a GKE cluster and need to enable Workload
 You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts:
 
 * xref:phase-3-execution-environments#nomad-autoscaler-gcp[Nomad Autoscaler]
-* xref:phase-3-execution-environments#gcp-3[VM]
+* xref:phase-3-execution-environments#gcp-authentication[VM]
 * xref:phase-1-prerequisites#configuring-google-cloud-storage[Object-Storage]
 
 [#create-a-new-github-oauth-app]
