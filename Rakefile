@@ -59,7 +59,7 @@ task :test do
     :parallel => { :in_processes => HTML_PROOFER_PARALLEL},
     :file_ignore => ignore_files,
     :directory_index_file => "index.html",
-    :ignore_files => [/ja\//],
+    :ignore_files => [/ja\//, /api\//],
   }
 
   HTMLProofer.check_directory("./jekyll/_site", options).run
