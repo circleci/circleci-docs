@@ -185,7 +185,7 @@ CAUTION: **Do not** use an existing job that uses <<building-docker-images#,setu
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-container-runner,Troubleshoot Container Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running container runner.
+Refer to the <<troubleshoot-self-hosted-runner#container-runner,Troubleshoot Container Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running container runner.
 
 [#additional-resources]
 == Additional resources

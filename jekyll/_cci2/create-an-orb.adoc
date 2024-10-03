@@ -68,13 +68,13 @@ WARNING: Once an orb is initialized, it **cannot be switched from public to priv
 
 NOTE: The `--private` flag is not currently supported on CircleCI server. Orbs created within a server installation will only be visible to authenticated users.
 
-* To initialize a xref:orb-intro#public-orbs[public] orb:
+* To initialize a xref:orb-intro#public-or-private[public] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb>
 ```
 
-* To initialize a link:orb-intro#private-orbs[private] orb:
+* To initialize a link:orb-intro#public-orprivate[private] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb> --private
@@ -121,7 +121,7 @@ In the setup process you will be asked if you would like to save your xref:manag
 
 Use xref:contexts#restrict-a-context-to-a-security-group-or-groups[security groups] to limit access to users that are allowed to trigger jobs. Only these users will have access to the private xref:managing-api-tokens#[personal API token].
 
-xref:contexts#restricting-a-context[Contexts] can be located by navigating to **Organization Settings > Contexts** in the web app. After creating your orb, you will have a new context called `orb-publishing`. Click into `orb-publishing` and add a **Security Group**.
+xref:contexts#restrict-a-context[Contexts] can be located by navigating to **Organization Settings > Contexts** in the web app. After creating your orb, you will have a new context called `orb-publishing`. Click into `orb-publishing` and add a **Security Group**.
 
 .Secure contexts
 video::ImPE969yv08[youtube]

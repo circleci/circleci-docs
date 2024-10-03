@@ -208,7 +208,7 @@ To update CocoaPods to the latest stable version, simply update the Ruby gem wit
 sudo gem install cocoapods
 ----
 
-A further recommendation is to check your link:http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
+A further recommendation is to check your link:https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
 
 WARNING: The previous S3 mirror provided by CircleCI for the CocoaPods Spec repository is no longer being maintained or updated since the release of CocoaPods 1.8. It will remain available to prevent existing jobs breaking, however, switching to the CDN method described above is recommended.
 

@@ -45,7 +45,7 @@ It is possible to edit the webhooks in GitHub to restrict events that trigger a 
 
 Refer to the link:https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
 
-Refer to the CircleCI documentation on xref:workflows#using-contexts-and-filtering-in-your-workflows[Workflow filters] for information on how to build tag pushes.
+Refer to the CircleCI documentation on xref:workflows#using-filters-in-your-workflows[Workflow filters] for information on how to build tag pushes.
 
 [#permissions-overview]
 == Permissions overview

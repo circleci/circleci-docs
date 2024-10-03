@@ -628,7 +628,7 @@ Executors define the execution environment in which the steps of a job will be r
 | `windows`
 | Y ^(1)^
 | Map
-| <<windows,Windows executor>> currently working with orbs. Check out link:https://circleci.com/developer/orbs/orb/circleci/windows[the orb].
+| <<windows-execution-environment,Windows executor>> currently working with orbs. Check out link:https://circleci.com/developer/orbs/orb/circleci/windows[the orb].
 
 | `shell`
 | N
@@ -711,7 +711,7 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | `parameters`
 | N
 | Map
-| <<parameters,Parameters>> for making a `job` explicitly configurable in a `workflow`.
+| <<parameters-job,Parameters>> for making a `job` explicitly configurable in a `workflow`.
 
 | `steps`
 | Y
@@ -869,7 +869,7 @@ For a xref:glossary#primary-container[primary container], (the first container i
 This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the link:using-docker#[Using the Docker Execution Environment] page.
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
 
 '''
 
@@ -1945,7 +1945,7 @@ Example:
 [#restorecache]
 ===== *`restore_cache`*
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<save_cache,`save_cache` step>>. Learn more in xref:caching#[the caching documentation].
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<savecache,`save_cache` step>>. Learn more in xref:caching#[the caching documentation].
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1997,7 +1997,7 @@ steps:
 
 In this case cache `v1-myapp-cache-new` will be restored because it's the most recent match with `v1-myapp-cache` prefix even if the first key (`v1-myapp-cache`) has exact match.
 
-For more information on key formatting, see the `key` section of <<save_cache,`save_cache` step>>.
+For more information on key formatting, see the `key` section of <<savecache,`save_cache` step>>.
 
 When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
@@ -2385,7 +2385,7 @@ workflows:
 
 NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
 
-CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
+CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines#[Scheduled pipelines] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
@@ -2478,7 +2478,7 @@ workflows:
 [#schedule-branches]
 ====== *`branches`*
 
-The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:workflows#using-contexts-and-filtering-in-your-workflows[workflow] for the `main` branch.
+The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:workflows#using-filters-in-your-workflows[workflow] for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the *entire* string.
 
