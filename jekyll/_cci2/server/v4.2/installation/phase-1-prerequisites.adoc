@@ -264,7 +264,7 @@ You must repeat Step 3 for all the existing node pools. Follow these links for s
 
 * xref:phase-3-execution-environments#gcp[Nomad Autoscaler]
 * xref:phase-3-execution-environments#gcp-authentication[VM]
-* xref:phase-1-prerequisites#configuring-google-cloud-storage[Object-Storage]
+* xref:phase-1-prerequisites#google-cloud-storage[Object-Storage]
 
 [#create-a-new-github-oauth-app]
 == 3. Create a new GitHub OAuth app
