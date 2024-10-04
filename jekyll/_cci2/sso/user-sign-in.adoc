@@ -1,0 +1,28 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= User sign-in
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions outlining how to sign-in as an SSO User
+:icons: font
+:experimental:
+
+NOTE: SAML Single Sign-On for CircleCI is currently in closed preview.
+
+== Accessing an SSO-enabled Organization
+
+[join-an-organization]
+=== Join an organization
+
+New users can join an organization via link:https://circleci.com/docs/manage-roles-and-permissions/#add-people-to-your-organization[an invite] or by visiting https://circleci.com/authentication/login?f=sso. In the future, a `Join with SSO` button will be added to the user homepage.
+
+If a GitHub or Bitbucket social login user is an existing member of, or is invited to, an SSO organization, they must create a new email/password user account in order to access the organization after SSO is enforced.
+
+[log-in-to-an-organization]
+=== Log-in to an organization
+
+If you have logged in to an organization previously, then you will be redirected to your organization's Identity Provider to SSO before being granted access to the CircleCI organization again.
+When your session expires, you will be prompted to re-authenticate.

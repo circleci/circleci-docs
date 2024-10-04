@@ -1,0 +1,53 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Single sign-on (SSO) overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Introduction to CircleCI SAML SSO
+:icons: font
+:experimental:
+
+NOTE: SAML Single Sign-On for CircleCI is currently in closed preview.
+
+[#introduction]
+== Introduction
+
+Single Sign-On (SSO) is a form of authentication which enables users of an application to authenticate once using an Identity
+Provider (IdP). The IdP authenticates the user and, based on their permissions, allows them to access applications managed
+by the organization using a single session.
+
+Single Sign-On (SSO) for CircleCI allows organization administrators to control access for their CircleCI organization
+using an IdP. It makes use of the Security Assertion Markup Language (SAML) 2.0 protocol to perform authentication. When a
+CircleCI organization has enabled SSO, users need to authenticate using the IdP in order to access the organization's
+resources in CircleCI. If the user tries to access the CircleCI organization without having done this, they will be redirected to the
+IdP to authenticate. When a user's session expires, they will no longer be able to access the organization's resources in CircleCI
+and will be prompted to re-authenticate. The length of a user's session is configured in the organization's IdP.
+
+Using SSO for authentication can result in improved security and user experience. For organization administrators and owners, SSO with
+an IdP allows the standardization of user management for an organization, across controlled applications (such as CircleCI). This can
+simplify the process of managing users and their access, because facilitates centralising common tasks such as adding and deleting users,
+managing their permissions, and controlling the allowed session length.
+
+Similarly, for a member of an organization using SSO for authentication, the process of authentication in order to access relevant applications
+is simplified. Rather than authenticating separately for each application they may use, SAML SSO enables the user to confirm their identity
+once with an IdP and that authentication is communicated to the applications (such as CircleCI) that the user has access to. The user may
+access these applications for the duration of their session.
+
+[#prerequisites-and-limitations]
+== Prerequisites and Limitations
+
+SSO for CircleCI currently has the following prerequisites:
+
+- SSO works for organizations using connections like GitHub App, GitLab SaaS or self-managed, or Bitbucket Data Center. SSO for CircleCI does not work for organizations which use GitHub OAuth and Bitbucket Cloud.
+- SSO requires all users to log into CircleCI with a username and password, before authenticating with SSO into an organization.
+- Personal API tokens will not work against your organization after SSO is enabled.
+- The CircleCI VS Code plugin will not work against your organization after SSO is enabled.
+- Currently CircleCI supports SSO using one domain per organization.
+
+[#next-steps]
+== Next steps
+* xref:./setup.adoc[Setup SAML SSO]
+* xref:./user-sign-in.adoc[User sign-in with SSO]
