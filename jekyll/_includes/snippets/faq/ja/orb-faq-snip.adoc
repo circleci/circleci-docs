@@ -1,7 +1,7 @@
 [#can-orbs-be-private]
 === Orb をプライベートにすることはできますか？
 
-xref:orb-intro#private-orbs[プライベート Orb] は、link:https://circleci.com/pricing[当社が提供しているすべてのご利用プラン]で利用可能です。
+xref:orb-intro#public-or-private[プライベート Orb] は、link:https://circleci.com/pricing[当社が提供しているすべてのご利用プラン]で利用可能です。
 
 [#difference-between-commands-and-jobs]
 === コマンドとジョブの違いは何ですか？

@@ -1,7 +1,7 @@
 [#how-many-jobs-can-run-concurrently]
 === 同時に実行できるジョブの数はいくつですか？
 
-同時に実行できるジョブの数はlink:https://circleci.com/ja/pricing/[ご利用されているプラン]によって異なります。 ワークフローを使ってジョブをスケジュール化する場合、xref:workflows#fan-outfan-in-workflow-example[ファンアウトとファンイン方法]によりジョブの同時実行が可能です。
+同時に実行できるジョブの数はlink:https://circleci.com/ja/pricing/[ご利用されているプラン]によって異なります。 ワークフローを使ってジョブをスケジュール化する場合、xref:workflows#fan-outfan-in-workflow[ファンアウトとファンイン方法]によりジョブの同時実行が可能です。
 
 [#use-multiple-executor-types-same-workflow]
 === 1 つのワークフローで複数の Executor タイプを使用できますか？
