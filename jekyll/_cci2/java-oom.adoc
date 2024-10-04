@@ -86,49 +86,49 @@ with 0 being the highest.
 |===
 | Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein
 
-| <<_java_options,`_JAVA_OPTIONS`>>
+| <<javaoptions,`_JAVA_OPTIONS`>>
 | 0
 | 0
 | 0
 | 0
 | 0
 
-| <<java_tool_options,`JAVA_TOOL_OPTIONS`>>
+| <<javatooloptions,`JAVA_TOOL_OPTIONS`>>
 | 2
 | 3
 | 2
 | 2
 | 2
 
-| <<java_opts,`JAVA_OPTS`>>
+| <<javaopts,`JAVA_OPTS`>>
 | no
 | 2
 | no
 | 1
 | no
 
-| <<jvm_opts,`JVM_OPTS`>>
+| <<jvmopts,`JVM_OPTS`>>
 | *
 | no
 | no
 | no
 | *
 
-| <<lein_jvm_opts,`LEIN_JVM_OPTS`>>
+| <<leinjvmopts,`LEIN_JVM_OPTS`>>
 | no
 | no
 | no
 | no
 | 1
 
-| <<gradle_opts,`GRADLE_OPTS`>>
+| <<gradleopts,`GRADLE_OPTS`>>
 | no
 | 1
 | no
 | no
 | no
 
-| <<maven_opts,`MAVEN_OPTS`>>
+| <<mavenopts,`MAVEN_OPTS`>>
 | no
 | no
 | 1
@@ -187,12 +187,7 @@ This environment variable is exclusive to Clojure.
 `lein` uses `JVM_OPTS`
 to pass memory limits to the JVM.
 
-NOTE: `JVM_OPTS` does not affect the memory of `lein` itself,
-nor can it directly pass memory limits to Java.
-To affect ``lein``'s available memory,
-use `LEIN_JVM_OPTS`.
-To directly pass memory limits to Java,
-use <<_java_options,`_JAVA_OPTIONS`>> or <<java_tool_options,`JAVA_TOOL_OPTIONS`>>.
+NOTE: `JVM_OPTS` does not affect the memory of `lein` itself, nor can it directly pass memory limits to Java. To affect `lein`'s available memory, use `LEIN_JVM_OPTS`. To directly pass memory limits to Java, use <<javaoptions,`_JAVA_OPTIONS`>> or <<javatooloptions,`JAVA_TOOL_OPTIONS`>>.
 
 [#leinjvmopts]
 === `LEIN_JVM_OPTS`

@@ -74,7 +74,7 @@ NOTE: The `--private` flag is not currently supported on CircleCI server. Orbs c
 circleci orb init </path/to/myProject-orb>
 ```
 
-* To initialize a link:orb-intro#public-or-private[private] orb:
+* To initialize a xref:orb-intro#public-or-private[private] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb> --private

@@ -68,7 +68,7 @@ The job will then execute using your self-hosted runner when you push the `.circ
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
 
 [#additional-resources]
 == Additional resources

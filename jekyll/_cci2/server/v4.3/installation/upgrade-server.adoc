@@ -119,7 +119,7 @@ machine_provisioner:
         - <gcp-zone2>
 ----
 
-. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments##set-up-authentication[Set up authentication] page for more details.
+. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments#set-up-authentication[Set up authentication] page for more details.
 
 . Update the vm-service trust policy. The current policy is directed at the `vm-service` service account. Change this to `machine-provisioner` as below:
 +
