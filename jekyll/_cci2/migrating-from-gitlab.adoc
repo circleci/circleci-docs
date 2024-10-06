@@ -20,7 +20,7 @@ TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI con
 [#sign-up-with-gitlab]
 == Sign up with GitLab
 
-Follow the steps on the link:/docs/first-steps/#gitlab[Sign Up and Try] page to connect your GitLab account with CircleCI, then follow the steps in the following sections to migrate your CI/CD setup to CircleCI.
+Follow the steps on the link:/docs/first-steps/#github-gitlab-bitbucket-data-center[Sign Up and Try] page to connect your GitLab account with CircleCI, then follow the steps in the following sections to migrate your CI/CD setup to CircleCI.
 
 [#build-configuration]
 == Build configuration
