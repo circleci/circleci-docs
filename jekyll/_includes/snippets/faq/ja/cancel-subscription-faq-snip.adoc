@@ -19,7 +19,7 @@ GitLab ユーザーの場合は、CircleCI Web アプリの xref:gitlab-integrat
 [#what-happens-upon-cancelling-a-performance-plan-subscription]
 === Performance プランを解約するとどうなりますか？
 
-現在の請求期間が終わるまでは、引き続き CircleCI Web アプリの Performance プラン設定にアクセス可能であり、クレジットもご利用いただけます。 請求期間が終了すると、組織のプランが xref:plan-free[Free プラン]に切り替わり、1 か月に使用可能なクレジットの上限が 30,000 になります。
+現在の請求期間が終わるまでは、引き続き CircleCI Web アプリの Performance プラン設定にアクセス可能であり、クレジットもご利用いただけます。 請求期間が終了すると、組織のプランが xref:plan-free#[Free プラン]に切り替わり、1 か月に使用可能なクレジットの上限が 30,000 になります。
 
 なお、現在の請求期間が終了すると、請求書にアクセスできなくなります。 その前に請求書をダウンロードするようご注意ください。
 

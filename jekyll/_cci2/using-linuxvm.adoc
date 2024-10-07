@@ -47,7 +47,7 @@ jobs:
 ----
 --
 
-You can view the list of available images xref:configuration-reference#available-linux-machine-images[in the docs Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
+You can view the list of available images xref:configuration-reference#available-linux-machine-images-cloud[in the Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes

@@ -41,7 +41,7 @@ NOTE: Currently, xref:managing-api-tokens#creating-a-personal-api-token[Personal
 
 `circleci/:slug-remainder`
 
-The project slug for GitLab, GitHub App and Bitbucket Data Center projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the link:{{site.baseurl}}/api-developers-guide/#getting-started-with-the-api/[API Developer's Guide] for more details.
+The project slug for GitLab, GitHub App and Bitbucket Data Center projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the xref:api-developers-guide#getting-started-with-the-api[API Developer's Guide] for more details.
 ====
 
 CircleCI API v2 uses a string representation called the `project_slug`, which is a "triplet" of your version control system (VCS), the name of your organization, and the name of the repository. `project_slug` takes the following form:

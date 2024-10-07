@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-Machine provisioner controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
+Machine provisioner controls how xref:../../../configuration-reference#machine[`machine`] executor and xref:../../../building-docker-images#[Remote Docker] jobs are run.
 
 This section describes the available configuration options for machine provisioner.
 

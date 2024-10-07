@@ -4,8 +4,8 @@ version: 2.1 # Set the CI version.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
   ruby: circleci/ruby@1.1.4
-  node: circleci/node@4.7.0
-  md-proofer: hubci/md-proofer@0.1
+  node: circleci/node@4.9.0
+  md-proofer: hubci/md-proofer@0.1.1
   vale: circleci/vale@1.1.1
 
 # This is using the new Scheduled Pipeline feature.
@@ -278,7 +278,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cibuilds/aws:2.8.13
     steps:
       - attach_workspace:
           at: ./generated-site
@@ -287,7 +287,7 @@ jobs:
 
   deploy-preview:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cibuilds/aws:2.8.13
     steps:
       - attach_workspace:
           at: ./generated-site
@@ -296,6 +296,6 @@ jobs:
 
   trigger-deploy:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cibuilds/aws:2.8.13
     steps:
       - trigger-docs-platform-build

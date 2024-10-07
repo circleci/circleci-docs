@@ -73,7 +73,7 @@ The following examples show how you can use public images from various sources:
 [#available-docker-resource-classes]
 == Available Docker resource classes
 
-The xref:configuration-reference#resource_class[`resource_class`] key allows you to configure CPU and RAM resources for each job.
+The xref:configuration-reference#resourceclass[`resource_class`] key allows you to configure CPU and RAM resources for each job.
 
 Specify a resource class using the `resource_class` key, as follows:
 
@@ -170,7 +170,7 @@ The table below shows tradeoffs between using a `docker` image versus an Ubuntu-
 | No
 | Yes
 
-| xref:configuration-reference#resource_class[Configurable resources (CPU/RAM)]
+| xref:configuration-reference#resourceclass[Configurable resources (CPU/RAM)]
 | Yes
 | Yes
 |===

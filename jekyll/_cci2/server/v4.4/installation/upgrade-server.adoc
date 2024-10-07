@@ -34,7 +34,7 @@ We have moved away from Vault to Tink for encryption. The process for migration 
 
 * Ensure you have access to the Kubernetes cluster in which server is installed.
 * Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
-* Ensure there is a recent backup. For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* Ensure there is a recent backup. For more information, see the xref:../operator/backup-and-restore#creating-backups[Backup and Restore] guide.
 
 [#upgrade-steps]
 == Upgrade steps

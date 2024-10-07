@@ -169,7 +169,7 @@ workflows:
 ### 5. Conclusion
 {: #conclusion }
 
-You just set up a Node.js app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/project-build/#overview) to see how this looks when building on CircleCI.
+You just set up a Node.js app to build on CircleCI. Check out your project’s [pipeline page]({{site.baseurl}}/pipelines/) to see how this looks when building on CircleCI.
 
 **Deploy options?** For alternative deployment targets, search the [orb registry](https://circleci.com/developer/orbs), where you will find integrations such as [Kubernetes](https://circleci.com/developer/orbs/orb/circleci/kubernetes), [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs), [GCP GKE](https://circleci.com/developer/orbs/orb/circleci/gcp-gke), and more.
 {: class="alert alert-info"}

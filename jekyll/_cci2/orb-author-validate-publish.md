@@ -21,11 +21,11 @@ circleci namespace create <name> --org-id <your-organization-id>
 {: #create-your-orb }
 
 Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published.
-To create a **[public]({{site.baseurl}}/orb-intro/#public-orbs)** orb:
+To create a **[public]({{site.baseurl}}/orb-intro/#public-or-private)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-To create a **[private]({{site.baseurl}}/orb-intro/#private-orbs)** orb:
+To create a **[private]({{site.baseurl}}/orb-intro/#public-or-private)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
@@ -251,12 +251,12 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 List your available orbs using the CLI:
 
-To list **[public]({{site.baseurl}}/orb-intro/#public-orbs)** orbs:
+To list **[public]({{site.baseurl}}/orb-intro/#public-or-private)** orbs:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-To list **[private]({{site.baseurl}}/orb-intro/#private-orbs)** orbs:
+To list **[private]({{site.baseurl}}/orb-intro/#public-or-private)** orbs:
 ```shell
 circleci orb list <my-namespace> --private
 ```

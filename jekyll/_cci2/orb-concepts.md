@@ -53,7 +53,7 @@ See the [AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#com
 ### Executors
 {: #executors }
 
-Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/configuration-reference/#docker--machine--macos--windows-executor):
+Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/configuration-reference/#executor-job):
 
 - Docker
 - macOS

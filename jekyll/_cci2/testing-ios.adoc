@@ -355,7 +355,7 @@ These images are also compatible with the official link:https://circleci.com/dev
 [#using-homebrew]
 == Using Homebrew
 
-link:http://brew.sh/[Homebrew] is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency you require to complete your build. For example:
+link:https://brew.sh/[Homebrew] is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency you require to complete your build. For example:
 
 [source,yaml]
 ----

@@ -12,7 +12,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-CircleCI pipelines are the highest-level unit of work, and they are described by a configuration file, for example, `.circleci/config.yml`. _Triggers_ can be set up to automate when a pipeline will be triggered. Pipelines coordinate the execution of workflows and jobs to build, test, and deploy your code. Workflows can be conditional, based on xref:workflows#using-contexts-and-filtering-in-your-workflows[filters], xref:workflows#workflows-configuration-examples[job requirements], and xref:selecting-a-workflow-to-run-using-pipeline-parameters#[pipeline parameters].
+CircleCI pipelines are the highest-level unit of work, and they are described by a configuration file, for example, `.circleci/config.yml`. _Triggers_ can be set up to automate when a pipeline will be triggered. Pipelines coordinate the execution of workflows and jobs to build, test, and deploy your code. Workflows can be conditional, based on xref:workflows#using-filters-in-your-workflows[filters], xref:workflows#workflows-configuration-examples[job requirements], and xref:selecting-a-workflow-to-run-using-pipeline-parameters#[pipeline parameters].
 
 Pipelines include your workflows, which coordinate your jobs. Pipelines have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
 
@@ -153,7 +153,7 @@ TIP: If you do not see **Triggers** in the sidebar, your project is integrated u
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
 ** Select your repository from the dropdown menu. This should match the repository your pipeline is connected to (not required for custom webhooks).
 ** Choose your pipeline from the "Choose config to run" menu.
-** (Optional) You can configure <<user-content-trigger-filters,trigger filters>>.
+** (Optional) You can configure <<trigger-filters,trigger filters>>.
 . Select btn:[Save]
 +
 CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. The webhook is set up automatically by CircleCI. This is a known issue and will be fixed.
