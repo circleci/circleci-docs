@@ -1174,6 +1174,21 @@ httpsnippet@^1.16.7:
     pinkie-promise "^2.0.0"
     stringify-object "^3.3.0"
 
+httpsnippet@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/httpsnippet/-/httpsnippet-2.0.0.tgz#695bc2e662535b37a993d25f40b3496b5ae82350"
+  integrity sha512-Hb2ttfB5OhasYxwChZ8QKpYX3v4plNvwMaMulUIC7M3RHRDf1Op6EMp47LfaU2sgQgfvo5spWK4xRAirMEisrg==
+  dependencies:
+    chalk "^1.1.1"
+    commander "^2.9.0"
+    debug "^2.2.0"
+    event-stream "3.3.4"
+    form-data "3.0.0"
+    fs-readfile-promise "^2.0.1"
+    fs-writefile-promise "^1.0.3"
+    har-validator "^5.0.0"
+    stringify-object "^3.3.0"
+
 ieee754@^1.1.4:
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84"
@@ -1593,7 +1608,15 @@ openapi-sampler@^1.0.0-beta.16:
   dependencies:
     json-pointer "^0.6.0"
 
-openapi-snippet@^0.9.0, openapi-snippet@^0.9.1:
+openapi-snippet@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/openapi-snippet/-/openapi-snippet-0.14.0.tgz#0b5324e560c8a33974db563cfef05bd5a7361cb5"
+  integrity sha512-EObLQB2Hv6t+ZwfSot+ClS4p0bbfzd9pAvSfB8gHoiKwP3F301+baQiEGg5EgdD42rUQ7JwsfskELIP+wXPZWA==
+  dependencies:
+    httpsnippet "^2.0.0"
+    openapi-sampler "^1.0.0-beta.14"
+
+openapi-snippet@^0.9.0:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/openapi-snippet/-/openapi-snippet-0.9.1.tgz#a5e614b5b3cc73dab38da8462ff4123e87bf9ebf"
   integrity sha512-PL7dInP/+AcpZ1QdfkU5ELSQzXhdLe8zC3Z8i8fSg+q8fcU5VF9NdRg1KIlvfGuCrMLVPvP63HhAxCUF/lpUZQ==
