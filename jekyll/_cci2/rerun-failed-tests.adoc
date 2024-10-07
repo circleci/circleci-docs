@@ -27,7 +27,7 @@ image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to 
 [#prerequisites]
 == Prerequisites
 
-* Your testing job in the workflow is configured to xref:collect-test-data/#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#junit-xml-reports[JUnit XML output].
+* Your testing job in the workflow is configured to xref:collect-test-data#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#tests-run-examples[JUnit XML output].
 * The testing job uses `circleci tests run` (see below for details) to execute tests.
 +
 NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag  (see below for instructions).

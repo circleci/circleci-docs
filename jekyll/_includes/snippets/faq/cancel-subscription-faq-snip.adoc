@@ -21,7 +21,7 @@ For GitLab users, your account is listed as "Org Admin" in the CircleCI web app 
 [#what-happens-upon-cancelling-a-performance-plan-subscription]
 === What happens upon cancelling a Performance Plan subscription?
 
-You will continue to have access to the Performance Plan settings in the CircleCI web app and be able to use credits until the end of your current billing cycle. After the cycle ends, your org will be transitioned to the xref:plan-free[Free Plan], where you can use up to 30,000 credits per month.
+You will continue to have access to the Performance Plan settings in the CircleCI web app and be able to use credits until the end of your current billing cycle. After the cycle ends, your org will be transitioned to the xref:plan-free#[Free Plan], where you can use up to 30,000 credits per month.
 
 Note that you will no longer have access to the billing statements after the end of the current billing cycle. Make sure to download your billing statements before then.
 

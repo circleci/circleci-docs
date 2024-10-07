@@ -16,11 +16,11 @@ namespace=<your-server-namespace>
 kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
 ----
 
-Running `kubectl -n "$namespace" get pods` will show most of your pods scaling to down, leaving your database pods running including Postgres.
+Running `kubectl -n "$namespace" get pods` will show most of your pods scaling to down, leaving your database pods running including PostgreSQL.
 
 ==== 2. Validate access to your external PostgreSQL from within the cluster (optional)
 
-. Confirm that pods within your CircleCI Server cluster can access your external Postgres. You can do this from within your internal Postgres.
+. Confirm that pods within your CircleCI server cluster can access your external PostgreSQL. You can do this from within your internal PostgreSQL.
 +
 [source,shell]
 ----

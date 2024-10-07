@@ -20,7 +20,7 @@ TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI con
 [#sign-up-with-gitlab]
 == Sign up with GitLab
 
-Follow the steps on the link:/docs/first-steps/#gitlab[Sign Up and Try] page to connect your GitLab account with CircleCI, then follow the steps in the following sections to migrate your CI/CD setup to CircleCI.
+Follow the steps on the link:/docs/first-steps/#github-gitlab-bitbucket-data-center[Sign Up and Try] page to connect your GitLab account with CircleCI, then follow the steps in the following sections to migrate your CI/CD setup to CircleCI.
 
 [#build-configuration]
 == Build configuration
@@ -233,7 +233,7 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/configuration-reference/#docker[Service containers]
 . Run testing commands
 . https://circleci.com/docs/custom-images/[Custom convenience images]
-. https://circleci.com/docs/configuration-reference/#resource_class[Resource classes]
+. https://circleci.com/docs/configuration-reference/#resourceclass[Resource classes]
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/parallelism-faster-jobs/[parallelism]
 . https://circleci.com/docs/artifacts/[Artifacts]

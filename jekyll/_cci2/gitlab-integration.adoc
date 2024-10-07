@@ -30,7 +30,7 @@ Integrate with CircleCI to access features for automated software delivery:
 [#sign-up]
 == Steps to integrate GitLab projects with CircleCI
 
-Follow the steps on the xref:first-steps#gitlab[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
+Follow the steps on the xref:first-steps#github-gitlab-bitbucket-data-center[Sign up and try CircleCI] page to connect your GitLab account, which creates your CircleCI organization.
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the "maintainer" role or higher.
 
