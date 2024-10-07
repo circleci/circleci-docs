@@ -8,16 +8,16 @@ xref:orb-intro#public-or-private[プライベート Orb] は、link:https://circ
 
 xref:reusing-config#the-commands-key[commands] と xref:reusing-config#authoring-parameterized-jobs[jobs] はいずれも orbs 内で使用可能な要素です。
 
-コマンド には、Orb のロジックを含む一つまたは複数のxref:configuration-reference#steps[ステップ]が含まれます。 コマンドは多くの場合、シェルコード (bash) を実行します。
+コマンド には、Orb のロジックを含む一つまたは複数のxref:configuration-reference#steps[ステップ]が含まれます。 コマンドは多くの場合、シェルコード (Bash) を実行します。
 
 ジョブ は、実行するステップやコマンドの定義であり、 かつ、 ステップやコマンドを実行する xref:reusing-config#the-executors-key[Executor] です。 ジョブはコマンドを呼び出し、xref:workflows#workflows-configuration-examples[ワークフロー]を用いてオーケストレーションされています。
 
 [#orbs-on-private-installation-server]
 === Orb はプライベートなインストール環境で使用できますか？
 
-Orb は、CircleCI Server v3 でご利用いただけます。 CircleCI Server での Orb のインポートと使用に関しては、xref:server-3-operator-orbs#[CircleCI Server v3.x の Orb ガイド]を参照して下さい。
+Orb は、CircleCI server v3 でご利用いただけます。 CircleCI server での Orb のインポートと使用に関しては、xref:server-3-operator-orbs#[CircleCI server v3.x の Orb ガイド]を参照して下さい。
 
-CircleCI Server v2.19.x では Orb は使用できませんが、コミットの前に設定を処理すると、Orb を変換して使用できます。 コミット前の Git Hook の使用については、link:https://discuss.circleci.com/t/orbs-on-server-solution/36264[サーバーでの Orb の使用]を参照して下さい。
+CircleCI server v2.19.x では Orb は使用できませんが、コミットの前に設定を処理すると、Orb を変換して使用できます。 コミット前の Git Hook の使用については、link:https://discuss.circleci.com/t/orbs-on-server-solution/36264[サーバーでの Orb の使用]を参照して下さい。
 
 [#report-an-issue-with-a-public-orb]
 === パブリック Orb  に関するバグや問題をレポートする方法は？
