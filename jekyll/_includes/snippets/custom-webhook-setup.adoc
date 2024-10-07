@@ -4,7 +4,7 @@ NOTE: Selecting a custom webhook as a pipeline trigger is generally available fo
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar.
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]), select **Project Settings**, and select **Pipelines** in the sidebar.
 . If there is already a pipeline set up and it uses the desired YAML configuration file, proceed to the **Triggers** step below (step 5).  If not, select **Set up pipeline**. If there is a **Connect** button, select it and follow the steps to install the CircleCI GitHub App into your GitHub organization.
-. Name the new pipeline and select the repository where the CircleCI YAML configuration file is stored. Enter the file path (including the `.circleci` directory). The file path can be different than `.circleci/config.yml` (ie. `.circleci/webhook.yml`).  Save the pipeline.
+. Name the new pipeline and select the repository where the CircleCI YAML configuration file is stored. Enter the file path (including the `.circleci` directory). The file path can be different than `.circleci/config.yml` (for example, `.circleci/webhook.yml`).  Save the pipeline.
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
 . Select **Custom Webhook** from the dropdown menu.
