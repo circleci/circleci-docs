@@ -44,7 +44,7 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#install-circleci-runner]
 == 2. Install CircleCI runner on macOS
 
-You can install runner on macOS with link:http://brew.sh/[Homebrew].
+You can install runner on macOS with link:https://brew.sh/[Homebrew].
 
 . On the target macOS machine with Homebrew installed, run the following command to add the CircleCI repository:
 +

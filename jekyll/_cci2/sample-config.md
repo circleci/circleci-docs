@@ -167,7 +167,7 @@ An approval job can have any name. In the example above the approval job is name
 
 The image below shows the workflow view for the following configuration example. This image has three parts to show:
 
-* The workflow map with the `hold` job paused
+* The workflow graph with the `hold` job paused
 * The "Needs Approval" popup that appears when you click on a hold job
 * The workflow view again once the `hold` job has been approved and the `deploy` job has run
 

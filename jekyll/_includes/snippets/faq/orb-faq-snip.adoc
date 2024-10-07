@@ -1,7 +1,7 @@
 [#can-orbs-be-private]
 === Can orbs be made private?
 
-xref:orb-intro#private-orbs[Private orbs] are available on any of our link:https://circleci.com/pricing[current plans].
+xref:orb-intro#public-or-private[Private orbs] are available on any of our link:https://circleci.com/pricing[current plans].
 
 [#difference-between-commands-and-jobs]
 === What is the difference between commands and jobs?

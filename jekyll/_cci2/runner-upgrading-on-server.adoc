@@ -21,7 +21,7 @@ Refer to the individual installation pages for machine runner to find the runner
 
 - xref:runner-installation-linux#download-the-launch-agent-script[Linux]
 - xref:runner-installation-mac#download-the-launch-agent-script[macOS]
-- xref:runner-installation-windows##set-launch-agent-version[Windows]
+- xref:runner-installation-windows#set-launch-agent-version[Windows]
 
 [#upgrading-self-hosted-runner-on-server]
 == Upgrading machine runner on server

@@ -33,7 +33,7 @@ Refer to the xref:circleci-images#[Pre-built CircleCI convenience images] and ad
 
 Automation tools used for browser tests often use Selenium WebDriver, a widely-adopted browser driving standard.
 
-Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:http://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
+Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:https://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
 
 WebDriver can operate in two modes, local, or remote:
 
@@ -166,7 +166,7 @@ Configure CircleCI to collect xref:artifacts#[build artifacts] and make them ava
 
 Saving screenshots is supported by most test suites, and is a built-in feature in WebKit and Selenium:
 
-* link:http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver[Manually, using Selenium directly]
+* link:https://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver[Manually, using Selenium directly]
 * link:https://github.com/mattheworiordan/capybara-screenshot[Automatically on failure, using Cucumber]
 * link:https://gist.github.com/michalochman/3175175[Automatically on failure, using Behat and Mink]
 
@@ -200,8 +200,8 @@ The steps described here are a good way to debug when setting up Selenium tests.
 
 VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
 
-. Install a VNC viewer. If you are using macOS, consider link:http://sourceforge.net/projects/chicken/[Chicken of the VNC].
-link:http://www.realvnc.com/download/viewer/[RealVNC] is also available on most platforms.
+. Install a VNC viewer. If you are using macOS, consider link:https://sourceforge.net/projects/chicken/[Chicken of the VNC].
+link:https://www.realvnc.com/download/viewer/[RealVNC] is also available on most platforms.
 . Open a Terminal window, xref:ssh-access-jobs#[start an SSH run] to a CircleCI container and forward the remote port 5901 to the local port 5902.
 +
 [,shell]
@@ -283,7 +283,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
-. Install an X Window System on your computer. If you are using macOS, consider link:http://xquartz.macosforge.org/landing/[XQuartz].
+. Install an X Window System on your computer. If you are using macOS, consider link:https://xquartz.macosforge.org/landing/[XQuartz].
 . With X set up on your system, xref:ssh-access-jobs#[start an SSH build] to a CircleCI VM, using the `-X` flag to set up forwarding:
 +
 [,shell]

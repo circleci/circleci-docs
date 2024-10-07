@@ -13,7 +13,7 @@ noindex: true
 :toc: macro
 :toc-title:
 
-Machine provisioner controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images[Remote Docker] jobs are run.
+Machine provisioner controls how xref:../../../configuration-reference#machine[`machine`] executor and xref:../../../building-docker-images#[Remote Docker] jobs are run.
 
 This section describes the available configuration options for machine provisioner.
 
@@ -185,7 +185,7 @@ The default AMIs for server v4.3 are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-Machine provisioner is configured to work with GCP in your `values.yaml`. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Machine provisioner is configured to work with GCP in your `values.yaml`. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 
@@ -224,7 +224,7 @@ CAUTION: When using preallocated instances be aware that a cron job is scheduled
 
 To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` examples:
 
-NOTE: For a full list of options, see the xref:../installation/installation-reference/#all-values-yaml-options[Installation Reference] page.
+NOTE: For a full list of options, see the xref:../installation/installation-reference#all-values-yaml-options[Installation Reference] page.
 
 [source,yaml]
 ----

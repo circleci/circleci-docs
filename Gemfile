@@ -2,10 +2,9 @@ source 'https://rubygems.org'
 
 ruby '3.1.3'
 
-gem "jekyll", '~> 4.2.0', github: "jekyll/jekyll"
+gem "jekyll", '~> 4.3.0', github: "jekyll/jekyll"
 gem 'html-proofer'
 gem 'asciidoctor'
-gem 'pygments.rb', '~> 1.1.2'
 gem 'rake'
 gem 'dotenv'
 gem "kramdown-parser-gfm"

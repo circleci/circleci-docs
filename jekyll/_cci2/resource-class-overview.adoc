@@ -22,7 +22,7 @@ Use resource classes to:
 [#introduction]
 == Introduction
 
-The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution evironment. 
+The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution evironment.
 
 The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 
@@ -37,7 +37,7 @@ jobs:
       - run: echo "Hello World"
 ----
 
-Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements. 
+Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements.
 
 NOTE: **For a full list of available resource class options,** see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
 
@@ -72,12 +72,12 @@ jobs:
 
 For config examples showing how to use the `resource_class` key to **specify CPU and RAM size** for an execution environment, see the following sections of the configuration reference page:
 
-* link:/docs/configuration-reference/#docker-execution-environment[Docker resource classes]
-* link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM resource classes]
-* link:/docs/configuration-reference/#macos-execution-environment[macOS resource classes]
-* link:/docs/configuration-reference/#windows-execution-environment[Windows resource classes]
-* GPU resource classes: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] and link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
-* link:/docs/configuration-reference/#arm-execution-environment-linux[Arm resource classes]
+* xref:configuration-reference#docker-execution-environment[Docker resource classes]
+* xref:configuration-reference#linuxvm-execution-environment[Linux VM resource classes]
+* xref:configuration-reference#macos-execution-environment[macOS resource classes]
+* xref:configuration-reference#windows-execution-environment[Windows resource classes]
+* GPU resource classes: xref:configuration-reference#gpu-execution-environment-linux[Linux] and xref:configuration-reference#gpu-execution-environment-windows[Windows]
+* xref:configuration-reference#arm-execution-environment-linux[Arm resource classes]
 
 NOTE: **To get started setting up a self-hosted runner**, see the xref:runner-overview/#getting-started[Getting started] section of the Self-hosted runners overview.
 

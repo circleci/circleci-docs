@@ -14,7 +14,7 @@ noindex: true
 
 Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
 
-Configuring a proxy happens during xref:phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
+Configuring a proxy happens during xref:phase-2-core-services#m-installing-behind-a-proxy[Phase 2 - Core services].
 
 [#known-limitations]
 == Known limitations

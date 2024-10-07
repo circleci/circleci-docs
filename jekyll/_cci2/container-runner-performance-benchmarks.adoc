@@ -115,7 +115,7 @@ The recommendations already presented are based on the reference cluster configu
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the xref:troubleshoot-self-hosted-runner#troubleshoot-container-runner[Troubleshoot Container Runner] section of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or using container runner.
+Refer to the xref:troubleshoot-self-hosted-runner#container-runner[Troubleshoot Container Runner] section of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or using container runner.
 
 [#additional-resources]
 == Additional resources
