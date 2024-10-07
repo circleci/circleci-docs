@@ -153,7 +153,7 @@ TIP: If you do not see **Triggers** in the sidebar, your project is integrated u
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
 ** Select your repository from the dropdown menu. This should match the repository your pipeline is connected to (not required for custom webhooks).
 ** Choose your pipeline from the "Choose config to run" menu.
-** (Optional) You can configure <<user-content-trigger-filters,trigger filters>>.
+** (Optional) You can configure <<trigger-filters,trigger filters>>.
 . Select btn:[Save]
 +
 CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. The webhook is set up automatically by CircleCI. This is a known issue and will be fixed.

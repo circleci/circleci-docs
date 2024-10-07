@@ -12,11 +12,11 @@ noindex: true
 :icons: font
 :experimental:
 
-VM service controls how xref:../../../configuration-reference/#machine[`machine`] executor and xref:../../../building-docker-images#[Remote Docker] jobs are run.
+VM service controls how xref:../../../configuration-reference#machine[`machine`] executor and xref:../../../building-docker-images#[Remote Docker] jobs are run.
 
 This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-vm-service[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for xref:../installation/phase-3-execution-environments#aws-vm-service[AWS] and xref:../installation/phase-3-execution-environments#gcp-authentication[GCP].
 
 [#vm-provider]
 == VM provider
@@ -24,7 +24,7 @@ The following configuration options are for the VM provider: either AWS or GCP.
 
 [#aws]
 === AWS
-Configure VM Service to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+Configure VM Service to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for VM service.
 
@@ -182,7 +182,7 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-Configures VM Service to work with GCP in your `values.yml`. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+Configures VM Service to work with GCP in your `values.yml`. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for VM service.
 

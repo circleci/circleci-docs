@@ -58,7 +58,7 @@ Take stock of the current landscape, and understand the differences between Circ
 
 Some things consider during this phase:
 
-- xref:orbs-intro#[Orbs] as an alternative to, for example, Jenkins Plugins
+- xref:orb-intro#[Orbs] as an alternative to, for example, Jenkins Plugins
 - CircleCI YAML xref:configuration-reference#[Configuration Reference]
 - xref:executor-intro#[Execution Environments]
 - xref:collect-test-data#[Testing]

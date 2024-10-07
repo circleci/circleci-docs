@@ -271,7 +271,7 @@ steps:
 
 When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually enter a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, for example, if you were using a [context](/docs/contexts) to store your AWS metadata for multiple projects.
 
-CircleCI ships with the [envsubst](/env-vars/#environment-variable-substitution) CLI built in, which allows us to evaluate environment variables in strings.
+CircleCI ships with the [envsubst](/docs/env-vars/#environment-variable-substitution) CLI built in, which allows us to evaluate environment variables in strings.
 
 ```yaml
 parameters:

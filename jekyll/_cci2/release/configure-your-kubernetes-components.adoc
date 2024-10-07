@@ -46,7 +46,7 @@ To enable your release to show up on the releases UI in the CircleCI web app, ad
 ====
 Specify your **project ID** in one of the following ways:
 
-* Use the `$CIRCLE_PROJECT_ID` xref:variables#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
+* Use the `$CIRCLE_PROJECT_ID` xref:../variables#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
 
 * Manually copy the value from the project settings page:
 
