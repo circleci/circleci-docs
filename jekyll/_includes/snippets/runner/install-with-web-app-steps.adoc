@@ -15,7 +15,7 @@ image::runner/runner-ui-step-two.png[Runner set up, step two - Create a namespac
 
 . Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
 +
-CAUTION: The token cannot be retrieved again, so be sure to store it safely.
+CAUTION: The token cannot be retrieved again, be sure to store it safely.
 +
 image::runner/runner-ui-step-three.png[Runner set up, step three - Create a resource class token]
 
@@ -29,9 +29,6 @@ endif::[]
 ifdef::machine[]
 +
 // Display the following step for machine runner installation only
-. Select the **Machine** tab for installation instructions specific to setting up self-hosted runners on Linux, macOS, or Windows. These platform-specific instructions are also included in the next section of this installation guide.
-+
-.Install machine runner through the web app
-image::runnerui_step_four.png[Machine runner in the web app]
+. Select the **Machine** tab and progress on to the platform-specific instructions in the next section of this installation guide.
 +
 endif::[]

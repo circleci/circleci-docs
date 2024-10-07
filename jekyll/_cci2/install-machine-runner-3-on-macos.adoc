@@ -216,6 +216,10 @@ launchctl disable user/$(id -u)/com.circleci.runner
 ----
 --
 
+{% include snippets/machine-runner-example.adoc %}
+
+The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
+
 [#uninstall-machine-runner-macos]
 == Uninstall machine runner 3.0 on macOS
 To uninstall machine runner 3.0 from your macOS device, follow these steps.
@@ -272,10 +276,6 @@ On your macOS machine, logs from `circleci-runner` are located in the following 
 ----
 $HOME/Library/Logs/com.circleci.runner/runner.log
 ----
-
-{% include snippets/machine-runner-example.adoc %}
-
-The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
 
 [#additional-resources]
 == Additional resources
