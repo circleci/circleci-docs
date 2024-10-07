@@ -241,7 +241,7 @@ The Only Build Pull Requests option (usually available in menu:Project Settings[
 [#github-checks]
 === GitHub checks
 
-xref:enable-checks/[GitHub checks] are currently not supported.
+xref:enable-checks#[GitHub checks] are currently not supported.
 
 [#rerun-workflow-from-failed-commit-status]
 === Known limitation: commit status when using "rerun workflow from failed"

@@ -19,7 +19,7 @@ Scheduled pipelines allow you to trigger pipelines periodically based on a sched
 - Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of xref:contexts#project-restrictions[Restricted contexts].
 - Use xref:dynamic-config#[Dynamic configuration] via setup workflows.
 - Modify the schedule without having to edit `.circleci/config.yml`.
-- Take advantage of xref:skip-build#auto-cancelling[auto-cancelling].
+- Take advantage of xref:skip-build#auto-cancel[auto-cancelling].
 - Specify xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline parameters] associated with a schedule.
 - Manage common schedules, for example, across workflows.
 

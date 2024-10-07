@@ -139,7 +139,7 @@ commands:
             - run: npm install
 ```
 
-Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
+Boolean parameter evaluation is based on the [values specified in YAML 1.1](https://yaml.org/type/bool.html):
 
 * True: `y` `yes` `true` `on`
 * False: `n` `no` `false` `off`

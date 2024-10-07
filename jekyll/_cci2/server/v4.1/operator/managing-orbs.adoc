@@ -16,7 +16,7 @@ This section describes how to manage orbs for an installation of server v4.x. Se
 
 For information on orbs and related use cases, see the xref:../../../orb-intro#[orbs docs].
 
-If you are looking for information on creating an orb, see the xref:../../../orb-author-intro/[Introduction to Authoring Orbs].
+If you are looking for information on creating an orb, see the xref:../../../orb-author-intro#[Introduction to Authoring Orbs].
 
 Orbs are accessed via the xref:../../../local-cli#[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a xref:../../../managing-api-tokens#[personal API token].
 

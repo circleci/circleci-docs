@@ -107,7 +107,7 @@ In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` 
 [#install-awscli]
 === 4. Install the AWS CLI
 
-Install `awscli` in your primary container by following the link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI documentation].
+Install `awscli` in your primary container by following the link:https://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI documentation].
 
 [#deploy-awscli]
 === 5. Deploy with the AWS CLI

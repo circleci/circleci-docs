@@ -27,7 +27,7 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide to get started.
+If you already have a xref:first-steps#[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide to get started.
 
 The following how-to guides are available for config policies:
 
@@ -614,7 +614,7 @@ For further reading, see the link:https://circleci.com/blog/compliance-with-conf
 
 It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and OPA test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
 
-The `circleci policy test` command is intended for testing the validity of the policy when adding and updating your config policies only within your config policy repo. Usage outside of adding/updating your config policy repo could result in false responses resulting from race conditions when reading and writing to the config policy service at the same time.   
+The `circleci policy test` command is intended for testing the validity of the policy when adding and updating your config policies only within your config policy repo. Usage outside of adding/updating your config policy repo could result in false responses resulting from race conditions when reading and writing to the config policy service at the same time.
 
 [#dynamic-config]
 == Config policies and dynamic configuration

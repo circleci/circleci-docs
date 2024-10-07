@@ -161,7 +161,7 @@ To configure webhooks within the CircleCI app:
 . Fill out the webhook form (the table below describes the fields and their intent)
 . If your receiving API or third party service is set up, select *Test Ping Event* to send a test event.
 +
-NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:webhooks#workflow-completed[workflow-completed] and xref:webhooks#job-completed[job-completed] events below.
+NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:webhooks-reference/#sample-webhook-payloads[sample webhook payloads] section of the webhooks reference.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

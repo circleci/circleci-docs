@@ -1049,7 +1049,7 @@ Choose one of the following options, depending on whether you are using Workload
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:../../../server-3-install-prerequisites/index.html#enabling-workload-identities-in-gke-optional[Phase 1 - Prerequisites].
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:phase-1-prerequisites#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
 
 [source,shell]
 ----

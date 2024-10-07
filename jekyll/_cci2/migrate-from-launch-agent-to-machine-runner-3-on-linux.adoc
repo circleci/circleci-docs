@@ -54,7 +54,7 @@ sudo semodule -r circleci_launch_agent
 
 [#install-machine-agent]
 == 2. Install the machine agent
-. Follow the instructions provided in xref:install-machine-runner-3-on-linux[Install machine runner 3.0 on Linux] to install machine runner 3.0 using the provided packages.
+. Follow the instructions provided in xref:install-machine-runner-3-on-linux#[Install machine runner 3.0 on Linux] to install machine runner 3.0 using the provided packages.
 
 . The packages create template configuration files at `/etc/circleci-runner/circleci-runner-config.yaml`. This configuration is 1:1 compatible with the launch agent configuration, apart from the auto-update feature. Since auto-update has been removed from the new agent, you should use the appropriate package management update tools to get new versions of the package when they are released. When using the `apt` package to update the agent package, you will need to clear the configuration file modified prompt. This can be avoided using the `--force-confold` flag or by removing the modified configuration file before upgrading.
 +
