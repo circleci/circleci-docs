@@ -39,7 +39,15 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
 {% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
 
 [#install-circleci-runner]
 == 2. Install CircleCI runner on macOS
@@ -217,8 +225,6 @@ launchctl disable user/$(id -u)/com.circleci.runner
 --
 
 {% include snippets/machine-runner-example.adoc %}
-
-The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
 
 [#uninstall-machine-runner-macos]
 == Uninstall machine runner 3.0 on macOS
