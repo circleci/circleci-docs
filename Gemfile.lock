@@ -54,7 +54,7 @@ GEM
       fiber-local (~> 1.1)
       json
     csv (3.3.0)
-    dotenv (2.8.1)
+    dotenv (3.1.4)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
