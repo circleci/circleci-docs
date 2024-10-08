@@ -164,7 +164,7 @@ Evaluation testing enables you to determine if your evaluation results meet spec
                     <div id="row" style="display: flex; flex-direction: row; gap: 8px;">
 
                                       <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF; width: 50%;">
-                                        <svg width="46" height="36" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="36" height="26" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                           <path d="M0.5 18C0.5 8.05888 8.55888 0 18.5 0H27.5C37.4411 0 45.5 8.05888 45.5 18C45.5 27.9411 37.4411 36 27.5 36H18.5C8.55887 36 0.5 27.9411 0.5 18Z" fill="#94E5AB"></path>
                                           <g clip-path="url(#clip0_87_1823)">
                                           <path fill-rule="evenodd" clip-rule="evenodd" d="M33.1429 10.4278C33.597 10.8519 33.6213 11.5638 33.1972 12.0179L20.5894 25.5179C20.3782 25.744 20.0831 25.8732 19.7736 25.875C19.4642 25.8767 19.1676 25.7509 18.9538 25.5272L12.8116 19.0986C12.3824 18.6494 12.3986 17.9373 12.8478 17.508C13.2971 17.0788 14.0092 17.095 14.4384 17.5443L19.7579 23.1117L31.5528 10.4821C31.9769 10.0281 32.6888 10.0037 33.1429 10.4278Z" fill="#00381A"></path>
@@ -180,7 +180,7 @@ Evaluation testing enables you to determine if your evaluation results meet spec
 
     <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF; width: 50%;">
 
-      <svg width="45" height="36" viewBox="0 0 45 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="36" height="26" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 18C0 8.05888 8.05888 0 18 0H27C36.9411 0 45 8.05888 45 18C45 27.9411 36.9411 36 27 36H18C8.05887 36 0 27.9411 0 18Z" fill="#CC4242"></path>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8295 9.3295C14.2688 8.89017 14.9812 8.89017 15.4205 9.3295L22.5 16.409L29.5795 9.3295C30.0188 8.89017 30.7312 8.89017 31.1705 9.3295C31.6098 9.76884 31.6098 10.4812 31.1705 10.9205L24.091 18L31.1705 25.0795C31.6098 25.5188 31.6098 26.2312 31.1705 26.6705C30.7312 27.1098 30.0188 27.1098 29.5795 26.6705L22.5 19.591L15.4205 26.6705C14.9812 27.1098 14.2688 27.1098 13.8295 26.6705C13.3902 26.2312 13.3902 25.5188 13.8295 25.0795L20.909 18L13.8295 10.9205C13.3902 10.4812 13.3902 9.76884 13.8295 9.3295Z" fill="white"></path>
         </svg>
