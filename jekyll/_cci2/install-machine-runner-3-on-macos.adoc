@@ -88,7 +88,7 @@ api:
 ----
 Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
 
-. If you are using CircleCI server you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. **If you are using CircleCI server** you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 [source,shell]
 ----
@@ -105,11 +105,11 @@ api:
   url: https://your.domain.here
 ----
 
-[#migrate-existing-configuration-files]
-=== Migrate existing configuration files
-If you are migrating an existing configuration from a previous runner installation, you may move the existing launch agent file from its current path to the new path.
+[TIP]
+====
+**If you are migrating an existing configuration from a previous runner installation**, you may move the existing launch agent file from its current path to the new path.
 
-NOTE: this will overwrite the default config file installed via brew and replace it with your existing config file.
+**This will overwrite the default config file installed via brew and replace it with your existing config file.**
 
 [,shell]
 ----
@@ -124,6 +124,7 @@ After copying the file, you may remove the logging block to send logs to the def
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ----
+====
 
 [#review-accept-apple-signature-notarization]
 == 3. Review and accept the Apple signature notarization
@@ -202,8 +203,10 @@ launchctl print user/$(id -u)/com.circleci.runner
 ----
 --
 
+{% include snippets/machine-runner-example.adoc %}
+
 [#stop-macos-machine-runner]
-== 5. Stop macOS machine runner 3.0
+== Stop macOS machine runner 3.0
 
 To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
 
@@ -223,8 +226,6 @@ launchctl disable gui/$(id -u)/com.circleci.runner
 launchctl disable user/$(id -u)/com.circleci.runner
 ----
 --
-
-{% include snippets/machine-runner-example.adoc %}
 
 [#uninstall-machine-runner-macos]
 == Uninstall machine runner 3.0 on macOS
