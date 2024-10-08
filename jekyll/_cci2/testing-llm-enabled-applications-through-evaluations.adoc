@@ -46,8 +46,7 @@ There are important differences between evals and standard software tests to kee
 
 * LLMs are predominantly non-deterministic, leading to flaky evaluations, more so than typical deterministic software tests.
 * Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in standard software testing.
-* cause for concern, unlike failing tests in standard software testing.
-Evaluation results are manually reviewed to determine whether AI application performance meets expectations since the output metric values can fluctuate.
+* Evaluation results are manually reviewed to determine whether AI application performance meets expectations since the output metric values can fluctuate.
 
 With CircleCI, you can define, automate, run evaluations and evaluation testing using your preferred evaluation framework. Through declaring the necessary commands in your `config.yml`,  you can ensure evaluations are run and evaluation results are tested within your CircleCI pipeline.
 
