@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "openapi-snippet": "^0.9.1",
+    "openapi-snippet": "^0.14.0",
     "redoc-cli": "^0.9.10",
     "snippet-enricher-cli": "0.0.8"
   },
