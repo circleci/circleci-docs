@@ -102,10 +102,10 @@ You can configure test case assertions such as:
 }
 ----
 
-Evaluation testing results determine if a workflow should stop or continue:
+Evaluation testing results determine if a job should stop or continue:
 
-* **If the evaluation test fails**: Indicates a proposed change resulted in a degradation of model performance. The workflow will stop running.
-* **If the evaluation test passes**: Indicates that model performance has met set criteria, the workflow will continue running.
+* **If the evaluation test fails**: Indicates a proposed change resulted in a degradation of model performance. The job will stop running, and the pipeline will fail.
+* **If the evaluation test passes**: Indicates that model performance has met set criteria, the job will continue running.
 
 === View Evaluation testing results
 
