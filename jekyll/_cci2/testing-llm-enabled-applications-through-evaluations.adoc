@@ -81,6 +81,8 @@ image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job S
 
 Evaluation testing enables you to determine if your evaluation results meet specified conditions. CircleCI Evaluation Testing is a suite of test cases. Each test case represents a scenario with an assertion to check if a specified condition is true or false. If any test case fails, the evaluation test fails.
 
+image::/docs/assets/img/docs/llmops/evaluation-testing-diagram[Overview diagram of evaluation testing concepts]
+
 You can configure test case assertions such as:
 
 * Thresholds: Check whether 1 or more results fall within a range.
