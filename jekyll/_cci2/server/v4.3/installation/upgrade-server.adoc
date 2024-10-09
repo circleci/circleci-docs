@@ -81,7 +81,7 @@ Note the following significant changes in server v4.3.
 * Ensure you have access to the Kubernetes cluster in which server is installed.
 * Ensure you have migrated from Vault to Tink on your 4.2.x instance as link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here].
 * Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
-* Ensure there is a recent backup. For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* Ensure there is a recent backup. For more information, see the xref:../operator/backup-and-restore#creating-backups[Backup and Restore] guide.
 
 [#upgrade-steps]
 == Upgrade steps
@@ -119,7 +119,7 @@ machine_provisioner:
         - <gcp-zone2>
 ----
 
-. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments##set-up-authentication[Set up authentication] page for more details.
+. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments#set-up-authentication[Set up authentication] page for more details.
 
 . Update the vm-service trust policy. The current policy is directed at the `vm-service` service account. Change this to `machine-provisioner` as below:
 +

@@ -110,7 +110,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
-You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-use[Persisting Data] page.
+You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-usage[Persisting Data] page.
 
 [#workspace-usage-optimization]
 == Workspace optimization

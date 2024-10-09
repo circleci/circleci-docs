@@ -125,7 +125,7 @@ workflows:
 
 If you have a CircleCI account, you can create a new project and add these examples to a `.circleci/config.yaml` file. You can see the strings printed out in the job's build pipeline in the CircleCI web UI.
 
-YAML can be quite picky about indentations. You can use a http://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
+YAML can be quite picky about indentations. You can use a https://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
 
 If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
 

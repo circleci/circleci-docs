@@ -48,7 +48,7 @@ If you have a GitLab integration, you will find that an additional SSH key alrea
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
+To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add-ssh-keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
 
 CAUTION: **Using server?** Only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 

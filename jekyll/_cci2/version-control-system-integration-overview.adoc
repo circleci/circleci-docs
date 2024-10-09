@@ -1,0 +1,361 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server
+---
+= Version control system integration overview
+:description: An overview guide to the version control systems you can integrate with CircleCI.
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports several code version control systems (VCS). This guide gives an overview of the features available to each VCS integration.
+
+== Which version control systems are supported?
+
+link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated with code repositories hosted on the following VCS providers:
+
+
+
+* GitHub.com
+* GitHub Enterprise Cloud
+* GitLab
+* GitLab self-managed
+* Bitbucket Cloud
+* Bitbucket Data Center
++
+{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+
+link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
+
+* GitHub.com
+* GitHub Enterprise Cloud
+* GitHub Enterprise Server
+
+== Feature support for each integration type
+
+The following tables show feature support per VCS for **CircleCI cloud**, along with feature support for **CircleCI server**.
+
+[NOTE]
+====
+GitHub can be integrated into your CircleCI org in one of two ways, via the GitHub App or GitHub OAuth. To see which integration type you have, navigate to CircleCI web app, select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
+
+* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
+* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
+====
+
+=== Code checkout and repository integration
+
+[.table.table-striped]
+[cols=8*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+
+| link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| Reduced permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:set-up-multiple-configuration-files-for-a-project#[Set up multiple configuration files for a project]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^
+
+| xref:enable-checks#[GitHub Checks]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+|===
+
+^1^ _Possible using xref:dynamic-config#[dynamic configuration]._
+
+=== Pipeline triggers and integrations
+
+[.table.table-striped]
+[cols=8*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+
+| xref:webhooks#custom-webhooks[Custom _inbound_ webhook triggers]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:scheduled-pipelines#[Scheduled pipelines]
+| icon:thumbs-down[role="circle-red"] ^2^
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:webhooks#outbound-webhooks[Outbound webhooks]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+|===
+
+^2^ _One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
+
+=== Core capabilities
+
+[.table.table-striped]
+[cols=8*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| xref:artifacts#[Artifact storage]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:vs-code-extension-overview#test-run-your-config-from-vs-code[Test run config from VS Code]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:dynamic-config#[Dynamic configuration]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:rerun-failed-tests#[Rerun failed tests]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:orb-intro#[Orbs]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:parallelism-faster-jobs#[Test splitting and parallelism]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:docker-layer-caching#[Docker layer caching]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:ssh-access-jobs#[Debug with SSH]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:skip-build#auto-cancel[Auto-cancel redundant workflows]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| In-app config viewing and editing
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:insights-tests#[Test insights]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:oss#only-build-pull-requests[Only build pull requests]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+|===
+
+=== Security and permissions
+
+[.table.table-striped]
+[cols=8*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| xref:openid-connect-tokens#[OpenID Connect tokens]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:config-policy-management-overview#[Config policies]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:audit-logs#[Audit logs]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:contexts#security-goup-restrictions[Security group context restriction]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:contexts#expression-restrictions[Expression context restriction]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+|===
+
+=== Open source support
+
+[.table.table-striped]
+[cols=8*, options="header", stripes=even]
+|===
+| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
+| xref:oss#[OSS support]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+
+| xref:oss#build-pull-requests-from-forked-repositories[Build pull requests from forked repositories]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+| xref:oss#pass-secrets-to-builds-from-forked-pull-requests[Pass secrets to builds from forked pull requests]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-up[role="circle-green"]
+
+|===
+

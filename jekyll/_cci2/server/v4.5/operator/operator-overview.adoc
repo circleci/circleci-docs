@@ -41,7 +41,7 @@ See the link:https://www.nomadproject.io/docs/install/production/requirements#re
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
 
 For more information on Nomad port requirements, see the
-xref:../installation/hardening-your-cluster/[Hardening Your Cluster]
+xref:../installation/hardening-your-cluster#[Hardening Your Cluster]
 guide.
 
 [#github]

@@ -49,7 +49,7 @@ jobs:
 [#available-resource-classes]
 == Available resource classes
 
-The following Arm resources are available part of the xref:configuration-reference#machine-executor-linux[`machine` executor]:
+The following Arm resources are available part of the xref:configuration-reference#available-linux-machine-images-cloud[`machine` executor]:
 
 {% include snippets/arm-resource-table.adoc %}
 

@@ -24,7 +24,7 @@ NOTE: We recommend that you do not skip releases when upgrading.
 
 * Ensure you have access to the Kubernetes cluster in which server is installed.
 * Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
-* Ensure there is a recent backup. For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* Ensure there is a recent backup. For more information, see the xref:../operator/backup-and-restore#creating-backups[Backup and Restore] guide.
 * If you are upgrading from Server v4.1.x to Server v4.2.0, and have chosen to manage secrets yourself, follow the <<user-managed-secrets-migration>> step before upgrading.
 
 [#user-managed-secrets-migration]

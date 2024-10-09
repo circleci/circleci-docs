@@ -38,7 +38,7 @@ For example:
 
 * Jobs that require Docker images (`docker`) may use an image for Node.js, Python etc. The xref:circleci-images#[pre-built CircleCI Docker image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
 
-* Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:configuration-reference#available-linux-machine-images[list of available machine images].
+* Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:configuration-reference#available-linux-machine-images-cloud[list of available machine images].
 
 * Jobs that require a macOS VM image (`macos`) may use an Xcode version. A full list is available on the xref:using-macos#supported-xcode-versions[Using macOS] page.
 

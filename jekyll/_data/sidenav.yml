@@ -410,12 +410,14 @@ en:
             link: release/set-up-circleci-releases
           - name: Manual install - Set up the release agent
             link: release/set-up-the-release-agent
-          - name: Manual intall - Configure your Kubernetes components
+          - name: Manual install - Configure your Kubernetes components
             link: release/configure-your-kubernetes-components
       - name: How to
         children:
           - name: Manage releases
             link: release/manage-releases
+          - name: Configure release markers
+            link: release/configure-release-markers
           - name: Update the Kubernetes release agent
             link: release/update-the-kubernetes-release-agent
 
@@ -624,6 +626,8 @@ en:
             link: oss
       - name: VCS integration
         children:
+          - name: VCS integration overview
+            link: version-control-system-integration-overview
           - name: GitHub App integration
             link: github-apps-integration
           - name: GitLab integration
