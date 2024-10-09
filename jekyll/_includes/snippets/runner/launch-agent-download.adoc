@@ -5,7 +5,7 @@ ifndef::windows[]
 +
 Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
 
-. Set your target platform and run the `download-launch-agent.sh` script to download, verify, and install the binary.
+. Set your target platform and run the `download-launch-agent.sh` script to download, verify, and install the binary. 
 * If you are using **cloud**, use the table below to find your platform variable:
 +
 --
@@ -67,7 +67,7 @@ endif::[]
 +
 endif::[]
 
-* For *server v4.x and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
+* For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
 +
 --
 [.table.table-striped]
@@ -75,6 +75,21 @@ endif::[]
 |===
 | Server version
 | Launch agent version
+
+| 3.0
+| Runner not supported
+
+| 3.1
+| 1.0.11147-881b608
+
+| 3.2
+| 1.0.19813-e9e1cd9
+
+| 3.3
+| 1.0.29477-605777e
+
+| 3.4
+| 1.1.73695-40bf772
 
 | 4.0
 | 1.1.73695-40bf772

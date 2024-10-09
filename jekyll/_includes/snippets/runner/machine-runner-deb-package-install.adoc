@@ -1,7 +1,7 @@
 //[#machine-runner-debian-package-installation]
 //== Machine runner debian package installation
 
-The easiest way to install runner on a Debian or Ubuntu system is to use CircleCI's pre-built packages.
+The easiest way to install runner on a debian or ubuntu system is to use CircleCI's pre-built packages.
 
 
 . On the target machine, install the CircleCI registry. This script will automatically run `apt-get update`:
@@ -25,7 +25,7 @@ export RUNNER_AUTH_TOKEN="your-runner-auth-token-here"
 sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circleci-runner-config.yaml
 ```
 
-. **If you are using CircleCI server** you will need to provide the url for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. If you are using CircleCI server you will need to provide the url for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 ```shell
 export CIRCLECI_RUNNER_API_URL="your server domain"
