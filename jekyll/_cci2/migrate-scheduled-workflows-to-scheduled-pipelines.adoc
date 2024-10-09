@@ -56,7 +56,7 @@ daily-run-workflow:
 Before you can create a new schedule, you will need to interpret the frequency your trigger needs to run from the cron expression. Once you have done that, you will create a schedule using either the API or the project settings in the web app. Both methods are described below.
 
 [#use-the-api]
-=== Use the API
+=== a. Use the API
 
 Have your CircleCI token ready, or create a new token by following the steps on the xref:managing-api-tokens#[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
 
@@ -83,7 +83,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs]. Also see the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#use-project-settings]
-=== Use project settings in the web app
+=== b. Use project settings in the web app
 
 . In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
 . Navigate to **Triggers**.

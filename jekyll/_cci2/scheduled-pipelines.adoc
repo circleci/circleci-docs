@@ -60,9 +60,9 @@ If you would like to manage common schedules for multiple workflows, you will ne
 
 If your project has no scheduled workflows, and you would like to try out scheduled pipelines:
 
-1. Have your CircleCI token ready, or create a new token by following the steps on the xref:managing-api-tokens#[Managing API tokens] page.
-2. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
-
+. Have your CircleCI token ready, or create a new token by following the steps on the xref:managing-api-tokens#[Managing API tokens] page.
+. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
++
 ```shell
 curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
 --header "circle-token: <PERSONAL_API_KEY>" \
