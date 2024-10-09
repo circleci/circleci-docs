@@ -39,7 +39,7 @@ Evaluations can cover many aspects of a model performance, including:
 
 Using an open source library or third-party tools can simplify defining evaluations, tracking progress, and reviewing evaluation results.
 
-== Automating evaluations with CircleCI
+== Automate evaluations with CircleCI
 
 *Evaluations can be automated in CircleCI pipelines.* Automating evaluations with CircleCI can enable you to automatically determine whether or not to accept proposed AI application changes, or deploy and release your AI application.
 There are important differences between evals and standard software tests to keep in mind:
@@ -52,7 +52,7 @@ With CircleCI, you can define, automate, run evaluations and evaluation testing 
 
 You can automate your entire process of running evaluations, reviewing evaluation results and determining whether results meet expectations, removing manual work involved with triggering evaluations and reviewing evaluation results.
 
-== The CircleCI Evals orb
+=== The CircleCI Evals orb
 
 [NOTE]
 ====
@@ -67,135 +67,19 @@ CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals
 * Generates reports of evaluation results.
 * Tests evaluation results to determine if they meet specified conditions.
 
-=== Running Evaluations in CircleCI
+==== Run evaluations in CircleCI
 
 With the CircleCI evals orb, evaluations:
 
 * Will run as part of your CircleCI pipeline.
-* Job step details can include direct links to your evaluation results stored on your 3rd party evaluations provider. When you need to further review the evaluation results in detail, this link enables you to easily navigate to and view your evaluation results.
+* Job step details can include direct links to your evaluation results stored on your 3rd party evaluations provider. When you need to further review the evaluation results in detail, this link enables you to navigate to and view your evaluation results.
 * Your evaluation results can be saved to a `.json` file, for evaluation testing.
 
 image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
 
-=== Evaluation testing
+==== Test evaluations in CircleCI
 
 Evaluation testing enables you to determine if your evaluation results meet specified conditions. CircleCI Evaluation Testing is a suite of test cases. Each test case represents a scenario with an assertion to check if a specified condition is true or false. If any test case fails, the evaluation test fails.
-
-++++
-<div style="background-color: #F7F7F7; margin: 2rem auto; max-width: 860px; padding: 2rem; border-radius: 0.2rem;">
-  <h2 style="margin-top: 0; text-align: center;">What is evaluation testing?</h2>
-  <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 400px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">LLM Evaluations</h4><p style="margin-bottom: 0;">Methods used to assess the performance and accuracy of AI models and algorithms. Evals measure metrics such as task fidelity, consistency, relevance and coherence, or tone and style.</p>
-    </div>
-  
-    <div id="connector" style="margin: 0 auto;display: flex;flex-direction:row;gap: 16px;max-width: 400px;padding-left: 4rem;"> 
-     <div style="border-right: 1px solid #404040;"></div> 
-        <p style=" margin-bottom: 0; margin: 0.5rem; font-size: 0.8rem;">LLM evaluations output</p>
-    </div>
-  
-      <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 400px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Evaluation results</h4><p style="margin-bottom: 0;">The set of quantitative (often numeric) results that are output by running an Evaluation.</p>
-    </div>
-
-
-<div id="connector" style="margin: 0 auto;display: flex;flex-direction:row;gap: 16px;max-width: 400px;padding-left: 4rem;"> 
-  <div style="border-left: 1px solid #404040;">
-    
-    </div> 
-    <p style=" margin-bottom: 0; margin: 0.5rem; font-size: 0.8rem;">Evaluation results are provided as</p>
-</div>
-  
-
-
-          <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 400px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Metrics</h4><p style="margin-bottom: 0;">Refers to 1 or more units of data, used as inputs for testing.</p>
-    </div>
-
-<div id="connector" style="margin: 0 auto;display: flex;flex-direction:row;gap: 16px;max-width: 400px;padding-left: 4rem;"> 
-  <div style="border-left: 1px solid #404040;"></div>
-    <p style=" margin-bottom: 0; margin: 0.5rem; font-size: 0.8rem;">Metrics are the inputs for</p>
-</div>
-
-         <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 400px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Evaluation testing</h4><p style="margin-bottom: 0;">A test that determines if input metrics meet specified conditions.</p>
-    </div>
-    
-
-<div id="connector" style="margin: 0 auto;display: flex;flex-direction:row;gap: 16px;max-width: 400px;padding-left: 4rem;"> 
-  <div style="border-left: 1px solid #404040;"></div>
-  <p style=" margin-bottom: 0; margin: 0.5rem; font-size: 0.8rem;">Evaluation testing is composed of a</p>
-</div>
-    
-             <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 400px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Test suite</h4><p style="margin-bottom: 0;">A set of test cases that are related and executed together. Is a <span style="background-color: #f1f1f1; font-family: monospace;">.json</span> file that is assigned a name by the user.</p>
-    </div>
-
-<div id="connector" style="margin: 0 auto;display: flex;flex-direction:row;gap: 16px;max-width: 400px;padding-left: 4rem;"> 
-  <div style="border-left: 1px solid #404040;"></div>
-  <p style=" margin-bottom: 0; margin: 0.5rem; font-size: 0.8rem;">A test suite is made up of one or more</p>
-</div>
-    
-    
-                 <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 648px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-                  
-    <h4 style="margin:0;">Test case</h4><p>A test scenario, tests a single concept to make it clear what has failed when the test does not pass. Each has a:</p>
-                    <div id="row" style="display: flex; flex-direction: row; gap: 8px;">
-                   <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Name</h4><p style="margin-bottom: 0;">The name assigned to the test case. Usually descriptive of the scenario.</p>
-    </div>
-                                      <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Assertion</h4><p style="margin-bottom: 0;">A statement that checks if the specified condition is true. If false, the test fails.</p>
-    </div>
-                                      <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-    <h4 style="margin:0;">Result</h4><p style="margin-bottom: 0;">Each test case has a result of pass or fail.</p>
-    </div>
-                   </div>
-    </div>
-
-
-<div id="connector" style="margin: 0 auto;display: flex;flex-direction:row;gap: 16px;max-width: 400px;padding-left: 4rem;"> 
-  <div style="border-left: 1px solid #404040;"></div>
-  <p style=" margin-bottom: 0; margin: 0.5rem; font-size: 0.8rem;">Once all test cases are evaluated, returns</p>
-</div>
-    
-     <div id="card" style="border-radius: 8px; border: 1px solid #BFBFBF; max-width: 648px; padding: 1rem; margin: 0 auto; background-color: #FFF;">
-                  
-    <h4 style="margin:0 0 0.5rem 0;">Evaluation test results</h4>
-                    <div id="row" style="display: flex; flex-direction: row; gap: 8px;">
-
-                                      <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF; width: 50%;">
-                                        <svg width="36" height="26" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M0.5 18C0.5 8.05888 8.55888 0 18.5 0H27.5C37.4411 0 45.5 8.05888 45.5 18C45.5 27.9411 37.4411 36 27.5 36H18.5C8.55887 36 0.5 27.9411 0.5 18Z" fill="#94E5AB"></path>
-                                          <g clip-path="url(#clip0_87_1823)">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M33.1429 10.4278C33.597 10.8519 33.6213 11.5638 33.1972 12.0179L20.5894 25.5179C20.3782 25.744 20.0831 25.8732 19.7736 25.875C19.4642 25.8767 19.1676 25.7509 18.9538 25.5272L12.8116 19.0986C12.3824 18.6494 12.3986 17.9373 12.8478 17.508C13.2971 17.0788 14.0092 17.095 14.4384 17.5443L19.7579 23.1117L31.5528 10.4821C31.9769 10.0281 32.6888 10.0037 33.1429 10.4278Z" fill="#00381A"></path>
-                                          </g>
-                                          <defs>
-                                          <clipPath id="clip0_87_1823">
-                                          <rect width="21" height="21" fill="white" transform="translate(12.5 7.5)"></rect>
-                                          </clipPath>
-                                          </defs>
-                                          </svg>
-    <h4 style="margin:0;">Success</h4><p style="margin-bottom: 0;">Indicates that model performance has met set criteria, the job will continue running.</p>
-    </div>
-
-    <div id="card-inner" style="border-radius: 8px; border: 1px solid #BFBFBF; padding: 1rem; margin: 0 auto; background-color: #FFF; width: 50%;">
-
-      <svg width="36" height="26" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 18C0 8.05888 8.05888 0 18 0H27C36.9411 0 45 8.05888 45 18C45 27.9411 36.9411 36 27 36H18C8.05887 36 0 27.9411 0 18Z" fill="#CC4242"></path>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8295 9.3295C14.2688 8.89017 14.9812 8.89017 15.4205 9.3295L22.5 16.409L29.5795 9.3295C30.0188 8.89017 30.7312 8.89017 31.1705 9.3295C31.6098 9.76884 31.6098 10.4812 31.1705 10.9205L24.091 18L31.1705 25.0795C31.6098 25.5188 31.6098 26.2312 31.1705 26.6705C30.7312 27.1098 30.0188 27.1098 29.5795 26.6705L22.5 19.591L15.4205 26.6705C14.9812 27.1098 14.2688 27.1098 13.8295 26.6705C13.3902 26.2312 13.3902 25.5188 13.8295 25.0795L20.909 18L13.8295 10.9205C13.3902 10.4812 13.3902 9.76884 13.8295 9.3295Z" fill="white"></path>
-        </svg>
-        
-      <h4 style="margin:0;">Failure</h4><p style="margin-bottom: 0;">Indicates a proposed change led to a degradation of model performance. The job will stop running, and the pipeline will fail.</p>
-      </div>
-                                    
-                   </div>
-    </div>
-  
-
-  
-</div>
-++++
-
 
 You can configure test case assertions such as:
 
@@ -222,7 +106,7 @@ Evaluation testing results determine if a job should stop or continue:
 * **If the evaluation test fails**: Indicates a proposed change resulted in a degradation of model performance. The job will stop running, and the pipeline will fail.
 * **If the evaluation test passes**: Indicates that model performance has met set criteria, the job will continue running.
 
-=== View Evaluation testing results
+==== View evaluation test results
 
 Evaluation testing determines if your evaluation results meet specified conditions. Evaluation testing results are presented in the CircleCI web UI in two locations:
 
@@ -234,7 +118,7 @@ image::/docs/assets/img/docs/llmops/eval-job-eval-test-step.png[Evaluation testi
 +
 image::/docs/assets/img/docs/llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
-== Storing credentials for your evaluations
+== Store credentials for your evaluations
 CircleCI makes it easy to store your credentials for LLM providers as well as LLMOps tools.
 
 * Navigate to **Project Settings > LLMOps** to enter, verify, and access your OpenAI secrets.
