@@ -108,7 +108,7 @@ Evaluation testing results determine if a job should stop or continue, as follow
 
 ==== View evaluation test results
 
-Evaluation testing determines if your evaluation results meet specified conditions. Evaluation testing results are presented in the CircleCI web UI in two locations:
+Evaluation testing determines if your evaluation results meet specified conditions. Evaluation testing results are presented in the CircleCI web app in two locations:
 
 * In the step details
 +
