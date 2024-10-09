@@ -127,7 +127,6 @@ To store your LLM provider credentials, follow these steps:
 . Select btn:[Set Up] next to your chosen provider, and follow the in-app instructions.
 * Here, you can also find a starting template for your `config.yml` file.
 * You can save the credentials for your evaluation platform, including Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that uses the Evals orb.
-* To get started, navigate to **Project Settings > LLMOps**
 
 image::/docs/assets/img/docs/llmops/create-context.png[Project Settings > LLMOPS: Create Context Modal Window in CircleCI]
 image::/docs/assets/img/docs/llmops/openai-context.png[Project Settings > LLMOPS: View contexts in CircleCI]
