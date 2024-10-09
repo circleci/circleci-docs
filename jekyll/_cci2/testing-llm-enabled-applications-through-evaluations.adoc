@@ -119,7 +119,7 @@ image::/docs/assets/img/docs/llmops/eval-job-eval-test-step.png[Evaluation testi
 image::/docs/assets/img/docs/llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
 == Store credentials for your evaluations
-CircleCI makes it easy to store your credentials for LLM providers as well as LLMOps tools.
+Store your credentials for LLM providers and LLMOps tools in CircleCI. Storing credentials in this way allows you to access them directly when configuring your pipeline.
 
 * Navigate to **Project Settings > LLMOps** to enter, verify, and access your OpenAI secrets.
 * Here, you can also find a starting template for your `config.yml` file.
