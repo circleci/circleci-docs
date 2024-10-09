@@ -121,7 +121,10 @@ image::/docs/assets/img/docs/llmops/eval-test-fail-detail.png[Evaluation testing
 == Store credentials for your evaluations
 Store your credentials for LLM providers and LLMOps tools in CircleCI. Storing credentials in this way allows you to access them directly when configuring your pipeline.
 
-* Navigate to **Project Settings > LLMOps** to enter, verify, and access your OpenAI secrets.
+To store your LLM provider credentials, follow these steps:
+
+. Navigate to menu:Project Settings[LLMOps]
+. Select btn:[Set Up] next to your chosen provider, and follow the in-app instructions.
 * Here, you can also find a starting template for your `config.yml` file.
 * You can save the credentials for your evaluation platform, including Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that uses the Evals orb.
 * To get started, navigate to **Project Settings > LLMOps**
