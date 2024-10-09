@@ -104,7 +104,7 @@ You can configure test case assertions, as follows:
 Evaluation testing results determine if a job should stop or continue, as follows:
 
 * **The evaluation test fails**: This indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
-* **If the evaluation test passes**: Indicates that model performance has met set criteria, the job will continue running.
+* **The evaluation test passes**: This indicates that model performance has met set criteria, the job continues to run.
 
 ==== View evaluation test results
 
