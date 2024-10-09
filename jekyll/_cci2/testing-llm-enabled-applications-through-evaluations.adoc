@@ -37,18 +37,19 @@ Evaluations can cover many aspects of a model performance, including:
 * Respond in a fair and unbiased way, and within a specific style
 * Avoid certain expressions
 
-Using an open source library or third-party tools can simplify defining evaluations, tracking progress, and reviewing evaluation results.
-
-== Automate evaluations with CircleCI
-
-*Evaluations can be automated in CircleCI pipelines.* Automating evaluations with CircleCI can enable you to automatically determine whether or not to accept proposed AI application changes, or deploy and release your AI application.
 There are important differences between evals and standard software tests to keep in mind:
 
 * LLMs are predominantly non-deterministic, leading to flaky evaluations, more so than typical deterministic software tests.
 * Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in standard software testing.
 * Evaluation results are manually reviewed to determine whether AI application performance meets expectations since the output metric values can fluctuate.
 
-With CircleCI, you can define, automate, run evaluations and evaluation testing using your preferred evaluation framework. Through declaring the necessary commands in your `config.yml`,  you can ensure evaluations are run and evaluation results are tested within your CircleCI pipeline.
+Using an open source library or third-party tools can simplify defining evaluations, tracking progress, and reviewing evaluation results.
+
+== Automate evaluations with CircleCI
+
+*Evaluations can be automated in CircleCI pipelines.* Automating evaluations with CircleCI can enable you to automatically determine whether or not to accept proposed AI application changes, or deploy and release your AI application.
+
+With CircleCI, you can define, automate, run evaluations and evaluation testing using your preferred evaluation framework. Through declaring the necessary commands in your pipeline configuration you can ensure evaluations are run and evaluation results are tested within your CircleCI pipeline.
 
 You can automate your entire process of running evaluations, reviewing evaluation results and determining whether results meet expectations, removing manual work involved with triggering evaluations and reviewing evaluation results.
 
@@ -58,7 +59,7 @@ You can automate your entire process of running evaluations, reviewing evaluatio
 ====
 The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith.
 
-If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
+If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[].
 ====
 
 CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals[official evals orb], which offers the following capabilities:
@@ -127,8 +128,8 @@ To store your LLM provider credentials, follow these steps:
 
 . Navigate to menu:Project Settings[LLMOps]
 . Select btn:[Set Up] next to your chosen provider, and follow the in-app instructions.
-* Here, you can also find a starting template for your `config.yml` file.
-* You can save the credentials for your evaluation platform, including Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that uses the Evals orb.
+* As part of the process to add your OpenAI credentials, you can also save the credentials for your evaluation platform, such as Braintrust and LangSmith. 
+* These credentials can then be used when setting up a pipeline that uses the Evals orb.
 
 image::/docs/assets/img/docs/llmops/create-context.png[Project Settings > LLMOPS: Create Context Modal Window in CircleCI]
 image::/docs/assets/img/docs/llmops/openai-context.png[Project Settings > LLMOPS: View contexts in CircleCI]
