@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: This feature is generally available for orgs that integrate with CircleCI's GitHub App and is available in "Preview" for orgs that integrate with GitHub via the xref:github-integration#[CircleCI GitHub OAuth App]. See our link:https://discuss.circleci.com/t/product-update-multiple-configuration-files-per-project/50637[community forum] to request access.  To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: This feature is only available for CircleCI organizations that are integrated with GitHub via the CircleCI **GitHub App**. To find out your integration type, check the xref:github-apps-integration#[GitHub App integration] page.
 
 You can use multiple configuration files in a CircleCI project and set up separate triggers for each one. Each configuration triggers a separate pipeline on a trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.
 
@@ -19,7 +19,7 @@ You can use multiple configuration files in a CircleCI project and set up separa
 
 To use multiple configuration files for a project in CircleCI, you will need to meet the following prerequisites:
 
-* A CircleCI account connected to your code in GitHub, integrated through our xref:github-apps-integration#[GitHub App]. You can link:https://circleci.com/signup/[sign up for free]. If you have an existing CircleCI account connected through the GitHub OAuth app, request access to the "preview" for this feature on the link:https://discuss.circleci.com/t/product-update-multiple-configuration-files-per-project/50637[community forum].
+* A CircleCI account connected to your code in GitHub, integrated through our xref:github-apps-integration#[GitHub App]. You can link:https://circleci.com/signup/[sign up for free].
 * A project set up in CircleCI that you want to configure with multiple configuration files. See the xref:create-project#[Create a project in CircleCI] page for steps.
 
 [#add-additional-config-file]
@@ -41,23 +41,23 @@ Next, add a new pipeline in your CircleCI project settings.
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
 . Select **Pipelines** in the sidebar
 +
-TIP: If you do not see **Pipelines** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and support for this feature is not yet available. For GitHub OAuth app integrations you can request preview access, see the note at the top of this page.
-. Select btn:[Add Pipeline] (or btn:[Set Up Pipeline] for GitHub OAuth app integrations)
+TIP: If you do not see **Pipelines** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
+. Select btn:[Add Pipeline]
 . Complete the required form fields:
 ** Give your pipeline a descriptive name
 ** Ensure **GitHub App** is selected under **Pipeline**
-** If you see a btn:[Connect] button, select it and follow instructions to install the GitHub App for your org.
 ** Select the same repository as the project you are building
-. Select btn:[Save]
 
 [#create-a-new-trigger]
 == 3. Create a new trigger
 
 Next, create a trigger for your pipeline.
 
-. Following from the previous step, select **Triggers** in the sidebar
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
+. Select **Triggers** in the sidebar
 +
-TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and support for this feature is not yet available. For GitHub OAuth app integrations you can request preview access, see the note at the top of this page.
+TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Trigger]
 . Select **GitHub App** in the dropdown menu
 . Select btn:[Next]
@@ -65,11 +65,8 @@ TIP: If you do not see **Triggers** in the sidebar, your project is integrated u
 ** Give your trigger a descriptive name
 ** Select your project repository from the dropdown
 ** Choose your new pipeline from the "Choose config to run" menu
-. Select btn:[Save]
 
 [#conclusion]
 == Conclusion
 
-You have now successfully set up multiple configuration files for your project on CircleCI. Each configuration file will trigger a separate pipeline on the configured trigger events. Push a commit to your code to test this out. You should see both pipelines trigger in the CircleCI web app Pipelines page.
-
-NOTE: **GitHub OAuth preview** If you use the btn:[Trigger Pipeline] in the CircleCI web app, you will only trigger your original GitHub OAuth app pipeline, not the second GitHub App integrated pipeline you created by following the steps on this page. To trigger both you will need to push to your code repository.
+You have now successfully set up multiple configuration files for your project on CircleCI. Each configuration file will trigger a separate pipeline on the configured trigger events.

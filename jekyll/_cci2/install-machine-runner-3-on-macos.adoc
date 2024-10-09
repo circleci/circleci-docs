@@ -39,15 +39,7 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[.tab.machine-runner.Web_app_installation]
---
-{% include snippets/runner/install-with-web-app-steps.adoc %}
---
-[.tab.machine-runner.CLI_installation]
---
 {% include snippets/runner/install-with-cli-steps.adoc %}
-
---
 
 [#install-circleci-runner]
 == 2. Install CircleCI runner on macOS
@@ -88,7 +80,7 @@ api:
 ----
 Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
 
-. **If you are using CircleCI server** you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. If you are using CircleCI server you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 [source,shell]
 ----
@@ -105,11 +97,11 @@ api:
   url: https://your.domain.here
 ----
 
-[TIP]
-====
-**If you are migrating an existing configuration from a previous runner installation**, you may move the existing launch agent file from its current path to the new path.
+[#migrate-existing-configuration-files]
+=== Migrate existing configuration files
+If you are migrating an existing configuration from a previous runner installation, you may move the existing launch agent file from its current path to the new path.
 
-**This will overwrite the default config file installed via brew and replace it with your existing config file.**
+NOTE: this will overwrite the default config file installed via brew and replace it with your existing config file.
 
 [,shell]
 ----
@@ -124,7 +116,6 @@ After copying the file, you may remove the logging block to send logs to the def
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ----
-====
 
 [#review-accept-apple-signature-notarization]
 == 3. Review and accept the Apple signature notarization
@@ -203,10 +194,8 @@ launchctl print user/$(id -u)/com.circleci.runner
 ----
 --
 
-{% include snippets/machine-runner-example.adoc %}
-
 [#stop-macos-machine-runner]
-== Stop macOS machine runner 3.0
+== 5. Stop macOS machine runner 3.0
 
 To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
 
@@ -283,6 +272,10 @@ On your macOS machine, logs from `circleci-runner` are located in the following 
 ----
 $HOME/Library/Logs/com.circleci.runner/runner.log
 ----
+
+{% include snippets/machine-runner-example.adoc %}
+
+The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
 
 [#additional-resources]
 == Additional resources

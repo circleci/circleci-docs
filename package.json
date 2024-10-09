@@ -18,7 +18,7 @@
     "markdownlint-cli2": "0.14.0",
     "markdownlint-cli2-formatter-json": "0.0.8",
     "markdownlint-rule-header-id": "0.0.3",
-    "serve": "14.2.3"
+    "serve": "13.0.4"
   },
   "resolutions": {
     "braces": "3.0.3"
