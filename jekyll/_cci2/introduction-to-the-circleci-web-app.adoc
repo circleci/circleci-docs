@@ -11,11 +11,19 @@ contentTags:
 :icons: font
 :experimental:
 
-The CircleCI web application is a graphic user interface for managing your projects, settings, integrations and organizations. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
+The CircleCI web application is a graphic user interface for managing your projects, pipelines, settings, integrations and organizations. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
 
-Inside the application, you will find the status of pipelines, workflows and jobs, as well as organization and project settings. You will also find Insights for managing your projects and organizations, and release environments for viewing and managing your releases.
+Inside the application, you will find the features including the following:
 
-This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
+* Status of pipelines, workflows and jobs.
+* Controls for rerunning, cancelling, approving workflows.
+* Access to job step output and logs.
+* Organization and project settings.
+* Insights for managing your projects and organizations.
+* Releases UI viewing and managing your releases.
+* Self-hosted runner setup and management.
+
+This page is not an exaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
 == User homepage
 
@@ -25,11 +33,11 @@ image::user-homepage.png[User homepage]
 
 The user homepage gives your an overview of the organizations of which you are a member, along with options to create a new organization or join an existing organization.
 
-At the top right of the screen you will see notifications and get access to help resources. You can also select your icon to access user settings or to sign out of the app.
+At the **top right** of the screen you will see notifications and get access to help resources. You can also select your icon to access user settings or to sign out of the app.
 
-At the top left of the screen you will find the CircleCI status badge. The status badge displays the operational health of CircleCI. Select the status badge to enter CircleCI's status page.
+At the **top left** of the screen you will find the CircleCI status badge. The status badge displays the operational health of CircleCI. Select the status badge to enter CircleCI's status page.
 
-Select an org card to take a look around. The following section describe the various features and options you will find for each organization.
+Select an **org card** and take a look around. The following section describe the various features and options you will find for each organization.
 
 == Organization homepage and navigation
 
@@ -95,13 +103,12 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 Projects associated with your organization appear on the **Projects** page. You have the option to:
 
-TIP: The options available to you will be different depending on how you integrate your docs with CircleCI (GitHub OAth/Bitbucket Cloud, GitHub App, GitLab, ,Bitbucket Data Center)
+TIP: The options available to you will be different depending on how you xref:version-control-system-integration-overview#[integrate your code] with CircleCI.
 
 * xref:create-project#create-a-project[Create a project]
 * xref:create-project#set-up-a-project[Set Up any project] that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:notifications#[email notifications] for the project's status.
-
-Unfollowing a project removes its pipelines from your Pipelines page and unsubscribes you from notifications about the projects builds.
+* _Unfollow_ a project to removes it from your Pipelines page and unsubscribe from notifications.
 
 NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available for xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab] and xref:bitbucket-data-center-integration#[Bitbucket Data Center] projects.
 
@@ -119,9 +126,19 @@ image::web-ui-projects.png[Projects page in the CircleCI web app]
 [#project-settings]
 === Project settings
 
+The following settings are available in the project settings page. If you do not see an option, this indicates it is not supported for your xref:version-control-system-integration-overview#[integration type]:
+
 **Overview**: Shows your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
 
-**Triggers**: Allows you to define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+**People**: Shows a list of users who have been grated project-specific permissions. For more information, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page.
+
+**Groups**: Shows a list of user groups that have been grated project-specific permissions. For more information, see the xref:manage-groups#[Manage groups] page.
+
+**Pipelines**: Shows a list of pipelines that have been set up for the project, or the option to begin setting up pipelines if none exist.
+
+**Triggers**: Depending on your integration type, the triggers shows either a list of configures xref:pipelines#pipelines-and-triggers[pipeline triggers], or, if you have access to scheduled pipelines, you can set those up here. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+
+**Releases**:
 
 **Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
 
@@ -131,15 +148,19 @@ image::web-ui-projects.png[Projects page in the CircleCI web app]
 
 **API Permissions**: Allows you to create API tokens, as well as revoke project-specific API tokens.
 
-**Jira Integrations**: Authenticate Jira and set up the Jira orb in your config file to integrate Jira into your projects.
+**LLMOps**:
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
+
+**VS Code Integration**:
 
 **Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
 
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
 **Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
+
+**Docker layer caching**:
 
 [#insights]
 == Insights
