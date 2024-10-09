@@ -84,25 +84,43 @@ Evaluation testing enables you to determine if your evaluation results meet spec
 
 image::/docs/assets/img/docs/llmops/eval-test-diagram.png[Evaluation testing: diagram]
 
+Assuming the evaluation results are in a JSON file as follows:
+
++
+[,json]
+----
+{
+  "correctness": 0.99,
+  "toxicity": 0.2,
+  "labels": [
+    "CORRECT",
+    "ACCURATE",
+    "NOT HARMFUL"
+  ]
+}
+----
+
 You can configure test case assertions, as follows:
 
 * Thresholds: Check whether 1 or more results fall within a range.
 +
-[,shell]
+[,json]
 ----
 {
-  “TestCaseName”: “correctness > 0.99 && toxicity < 0.01”
+  “TestCaseName”: “correctness > 0.9 && toxicity < 0.01”
 }
 ----
 
 * Equality: Check whether results provide an expected answer.
 +
-[,shell]
+[,json]
 ----
 {
-  “TestCaseName”: “label == \”CORRECT\””
+  “TestCaseName”: “labels[0] == \”CORRECT\””
 }
 ----
+
+Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]), with all values from the results JSON file available in the assertions. link:https://playcel.undistro.io/[Try it out].
 
 Evaluation testing results determine if a job should stop or continue, as follows:
 
