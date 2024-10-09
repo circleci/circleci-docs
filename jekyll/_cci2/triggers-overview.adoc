@@ -44,7 +44,7 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
 
-NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.  Alternatively, for projects using GitHub App, the <<trigger-a-pipeline-from-a-custom-webhook,custom webhooks>> functionality provides similar capabilities.
+NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab projects. 
 
 For **projects integrated with GitHub OAuth app or Bitbucket Cloud**, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
@@ -70,7 +70,7 @@ NOTE: This endpoint is currently in preview, and is not yet documented in the li
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>. Here you will find instructions on how to find your project slug.
 
-. To find the **Definition ID** for the **Pipeline** you want to trigger, navigate to your project's  **Project Settings**, and select **Pipelines** in the sidebar. In the column **Definition ID**, click btn:[Copy] for the Pipeline you want to run via API. 
+. To retrieve the **Definition ID** for the **Pipeline** you want to run, navigate to your project's **Project Settings**, and select **Pipelines** in the sidebar. In the column **Definition ID**, select btn:[Copy] for the correct Pipeline. 
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
 +
