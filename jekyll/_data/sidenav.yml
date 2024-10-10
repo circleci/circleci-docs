@@ -589,6 +589,20 @@ en:
           - name: Rename organizations and repositories
             link: rename-organizations-and-repositories
 
+  - name: Single Sign-On (SSO)
+    icon: icons/sidebar/avatar.svg
+    children:
+      - name: SSO
+        children:
+          - name: SSO overview
+            link: sso/overview
+      - name: How-to guides
+        children:
+          - name: SSO Setup
+            link: sso/setup
+          - name: User sign-in
+            link: sso/user-sign-in
+
   - name: Manage config policies
     icon: icons/sidebar/lock.svg
     children:
