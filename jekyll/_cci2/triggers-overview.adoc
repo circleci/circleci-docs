@@ -46,6 +46,8 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 
 NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab projects.
 
+[.tab.apitrigger.GitHub_OAuth_app_/_Bitbucket_Cloud]
+--
 For **projects integrated with GitHub OAuth app or Bitbucket Cloud**, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
@@ -63,7 +65,10 @@ curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 
 TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
+--
 
+[.tab.apitrigger.GitHub_App_/_Bitbucket_Data_Center]
+--
 For **projects integrated with GitHub App or Bitbucket Data Center**, you can trigger a pipeline for a project using the endpoint `https://circleci.com/api/v2/project/{project-slug}/pipeline/run`.
 
 NOTE: This endpoint is currently in preview, and is not yet documented in the link:https://circleci.com/docs/api/v2/index.html[official API V2 documentation].
@@ -88,6 +93,7 @@ curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/
 ----
 
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
+--
 
 [#trigger-a-pipeline-from-a-custom-webhook]
 == Trigger a pipeline from a custom webhook
