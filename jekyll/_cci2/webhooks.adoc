@@ -17,7 +17,7 @@ Setting up an **outbound webhook** on CircleCI enables your third party service 
 
 Setting up an inbound webhook (as a **custom webhook** trigger) on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
 
-NOTE: Selecting a custom webhook as a pipeline trigger is currently in **open preview**. This feature is only available for CircleCI organizations that are integrated with GitHub via the CircleCI GitHub App. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Selecting a custom webhook as a pipeline trigger is generally available for orgs that integrate with CircleCI's GitHub App, and is available in "Preview" for orgs that integrate with GitHub via the CircleCI xref:github-integration#[GitHub OAuth App]. See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-custom-webhooks-now-in-preview/49864[community forum] to request access.  To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
 == Custom webhooks
 

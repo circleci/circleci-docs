@@ -13,8 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "openapi-snippet": "^0.9.1",
-    "redoc-cli": "^0.9.10",
+    "openapi-snippet": "^0.14.0",
+    "redoc-cli": "^0.13.0",
     "snippet-enricher-cli": "0.0.8"
   },
   "resolutions": {
