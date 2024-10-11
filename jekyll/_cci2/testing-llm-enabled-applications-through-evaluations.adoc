@@ -85,7 +85,7 @@ image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job S
 
 Evaluation testing enables you to determine if your evaluation results meet specified conditions. CircleCI evaluation testing uses a suite of test cases. Each test case represents a scenario with an assertion to check if a specified condition is true or false. If any test case fails, the evaluation test fails.
 
-Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]). All values from the results JSON file are available as assertions. Try out CEL link:https://playcel.undistro.io/[here].
+Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]). All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
 
 image::/docs/assets/img/docs/llmops/eval-test-diagram.png[Evaluation testing: diagram]
 
