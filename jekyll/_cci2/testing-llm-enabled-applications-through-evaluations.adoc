@@ -81,7 +81,7 @@ With the CircleCI evals orb, evaluations:
 
 image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
 
-==== Test evaluations in CircleCI
+==== Test evaluation results in CircleCI
 
 Evaluation testing enables you to determine if your evaluation results meet specified conditions. CircleCI evaluation testing uses a suite of test cases. Each test case represents a scenario with an assertion to check if a specified condition is true or false. If any test case fails, the evaluation test fails.
 
