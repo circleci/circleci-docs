@@ -19,7 +19,7 @@ Evaluations, also known as evals, are a methodology for assessing the quality of
 
 Evaluations provide insights into the performance and efficiency of applications based on LLMs, and allow teams to quantify how well their AI implementation works, measure improvements, and catch regressions.
 
-The term _evaluation_ initially referred to a way to rate and compare AI models. It has since expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
+The term _evaluation_ initially referred to a way to rate and compare AI models. Evaluation has since expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
 
 The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response. There are many evaluation methodologies, such as:
 
