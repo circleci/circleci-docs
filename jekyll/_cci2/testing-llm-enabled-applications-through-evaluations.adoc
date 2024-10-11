@@ -89,7 +89,7 @@ Assertions are expressed using the link:https://cel.dev/[Common Expression Langu
 
 image::/docs/assets/img/docs/llmops/eval-test-diagram.png[Evaluation testing: diagram]
 
-Assuming the evaluation results are in a JSON file as follows:
+Assuming the evaluation results are in a `.json` file as follows:
 
 [,json]
 ----
