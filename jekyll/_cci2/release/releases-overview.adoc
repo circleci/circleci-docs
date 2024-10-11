@@ -206,21 +206,6 @@ The following table shows a complete list of labels and annotations either requi
 | Yes
 
 |`Metadata.Annotations`
-|`circleci.com/job-number`
-|`CIRCLE_BUILD_NUM` xref:../variables#built-in-environment-variables[environment variable]
-| No. Used to enable linking between deploy job and release
-
-|`Metadata.Annotations`
-|`circleci.com/pipeline-id`
-|`pipeline.id` xref:../variables#pipeline-values[pipeline value]
-| No. Used to enable linking between deploy job and release
-
-|`Metadata.Annotations`
-|`circleci.com/workflow-id`
-|`CIRCLE_WORKFLOW_ID` xref:../variables#built-in-environment-variables[environment variable]
-| No. Used to enable linking between deploy job and release
-
-|`Metadata.Annotations`
 |`circleci.com/project-id`
 |Project ID for the CircleCI project associated with the job that deploys your component
 |Yes
