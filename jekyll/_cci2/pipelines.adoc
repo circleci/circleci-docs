@@ -53,6 +53,7 @@ image::project-settings-pipelines.png[Pipelines page in project settings]
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a pipeline is already set up.
 
 image::add-pipeline.png[Add a pipeline]
+#rosie to update image#
 
 To add or edit a pipeline, follow these steps:
 
