@@ -63,7 +63,7 @@ NOTE: This endpoint is currently in preview, and is not yet documented in the li
 . Find your project ID:
 .. Select **Projects** in the CircleCI web app sidebar.
 .. Find your project.
-.. Select the ellipsis menu (icon:ellipsis-h[ellipsis])) and choose **Project Settings**.
+.. Select the ellipsis menu (icon:ellipsis-h[ellipsis]) and choose **Project Settings**.
 .. Copy your project ID. Save this somewhere, you will need it later.
 
 . Find your definition ID:
