@@ -76,11 +76,14 @@ Manually triggering a pipeline from the CircleCI web app is not available at thi
 [#project-settings]
 == Project settings
 
-Within CircleCI, a project can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repository.
+Within CircleCI, a project can have one or more **Pipelines**. Each pipeline is defined by two key characteristics:
+* A configuration file, which is stored in a repository referred to as Config source, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used. 
+* A checkout source, which determines which repository will be checked out when running a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step].
+This model allows your CircleCI config to be stored in a different repository from your code. 
 
-A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a Version Control System (VCS). A trigger determines which configuration should be used to start a pipeline.
+Each pipeline can have zero or many **triggers**, which are events that cause a pipeline to run. 
 
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab and GitHub App integrations.
+The following settings are found by clicking the **Project Settings** button within your project. 
 
 [#people]
 === People
@@ -93,10 +96,10 @@ Project roles give control over which users have access to which projects within
 
 For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
-[#configuration]
+[#pipelines-and-triggers]
 === Pipelines and triggers
 
-You can add or delete pipelines and triggers for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
+You can add or delete pipelines for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced
