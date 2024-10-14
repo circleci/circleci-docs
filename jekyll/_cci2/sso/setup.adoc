@@ -24,7 +24,7 @@ To begin setting up a SAML SSO connection in your CircleCI organization, follow 
 . Select **Organization Settings** in the sidebar.
 . Select **Single Sign-On (SSO)** from the sidebar.
 . On the SSO Settings page, select **Setup SSO**.
-. Copy the provided **Setup Parameters**. You will need these to configure your Identity Provider (IdP).
+. Copy the provided **Setup Parameters** and **Allowed iFrame Origin**. You will need these to configure your Identity Provider (IdP).
 
 === Configure your Identity Provider (IdP)
 

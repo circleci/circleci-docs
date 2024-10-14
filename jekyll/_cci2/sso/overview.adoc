@@ -56,4 +56,4 @@ SSO for CircleCI currently has the following prerequisites:
 [#next-steps]
 == Next steps
 * xref:setup#[Setup SAML SSO]
-* xref:user-sign-in#[User sign-in with SSO]
+* xref:sign-in-to-an-sso-enabled-organization#[Sign in to an SSO-enabled organization]
