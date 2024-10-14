@@ -14,7 +14,7 @@ image::triggers/custom-webhooks-add-trigger.png[screenshot showing adding a cust
 #rosie-to-update-image#
 
 . Complete the form fields and options:
-** Give your trigger a descriptive name.
+** Give a descriptive name to the source of this trigger. For example, if you're setting up a Custom Webhook to run pipelines on events from Datadog, enter 'Datadog' here.
 ** (Optional) Add a description.
 ** In the field "Pipeline to run", at the bottom of the page, select the pipeline that you created in the step above.
 // The field "Pipeline to run" should be above "config branch", because it needs to be selected before entering config branch and checkout branch. This change will be made soon, Benny will update the docs as soon as the change is shipped.
