@@ -130,7 +130,7 @@ TIP: If you do not see **Triggers** in the sidebar, your project is integrated u
 ** Select the Trigger source repository
 ** Choose your pipeline from the "Choose pipeline to run" menu.
 ** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
-** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if the Checkout source repository you configured in your Pipeline is not the source of your trigger.
+** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
 . Select btn:[Save].
 
 To verify your trigger is set up correctly, trigger an event from your repository.
