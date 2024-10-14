@@ -25,6 +25,8 @@ Inside the application, you will find the features including the following:
 
 This page is not an exaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
+NOTE: Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab] and xref:bitbucket-data-center-integration#[Bitbucket Data Center] projects. For an overview of feature availability for each integration type, see the xref:version-control-system-integration-overview#[VCS integration overview] page.
+
 == User homepage
 
 When you visit the link:https://app.circleci.com[CircleCI web application] you will land on your **user homepage**.
@@ -110,8 +112,6 @@ TIP: The options available to you will be different depending on how you xref:ve
 * _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:notifications#[email notifications] for the project's status.
 * _Unfollow_ a project to removes it from your Pipelines page and unsubscribe from notifications.
 
-NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available for xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab] and xref:bitbucket-data-center-integration#[Bitbucket Data Center] projects.
-
 Select the ellipsis menu icon (icon:ellipsis-h[ellipsis]) in a project row to access project assets, as follows:
 
 * Configuration file in the config editor.
@@ -136,9 +136,9 @@ The following settings are available in the project settings page. If you do not
 
 **Pipelines**: Shows a list of pipelines that have been set up for the project, or the option to begin setting up pipelines if none exist.
 
-**Triggers**: Depending on your integration type, the triggers shows either a list of configures xref:pipelines#pipelines-and-triggers[pipeline triggers], or, if you have access to scheduled pipelines, you can set those up here. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+**Triggers**: Depending on your integration type, the triggers shows either a list of configured xref:pipelines#pipelines-and-triggers[pipeline triggers], or, if you have access to scheduled pipelines, you can set those up here. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-**Releases**:
+**Releases**: A UI for managing and viewing releases. Setup and manage environment integrations, setup components. For full information on releases features, start with the xref:/release/releases-overview#[Releases overview] page.
 
 **Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
 
@@ -148,11 +148,11 @@ The following settings are available in the project settings page. If you do not
 
 **API Permissions**: Allows you to create API tokens, as well as revoke project-specific API tokens.
 
-**LLMOps**:
+**LLMOps**: Set up integrations with LLMOps providers to streamline the process of configuring pipelines to build and test LLM-enabled applications.
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
 
-**VS Code Integration**:
+**VS Code Integration**: Provides information and a link to organization settings to enable the xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature, which is currently in open-preview for some customers.
 
 **Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
 
@@ -160,18 +160,16 @@ The following settings are available in the project settings page. If you do not
 
 **Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
 
-**Docker layer caching**:
+**Docker layer caching**: Provides an option to delete your cache contents. If jobs that use DLC continuously fail, this may be due to a corrupted cache. Deleting the cache will force a fresh build and can solve the problem.
 
 [#insights]
 == Insights
 
-NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available in xref:github-apps-integration#[GitHub App] or xref:gitlab-integration#[GitLab] projects. Refer to the Coming soon section in each integration overview page for more details on CircleCI features that are not fully supported.
-
-The Insights page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days.
+The Insights page shows you metrics related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range (24 hours, seven, 30, 60, and 90 days).
 
 image::web_ui_insights_overview.png[Insights page]
 
-While the main Insights page gives you an overview of all projects, you can also click on an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on workflow runs.
+While the main Insights page gives you an overview of all projects, you can also select an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on individual jobs and tests.
 
 image::web_ui_insights_runs.png[Details of insights]
 
@@ -232,8 +230,6 @@ image::web_ui_plan_controls.png[Usage controls]
 
 [#user-settings]
 == User settings
-
-NOTE: Some settings and functionality described in this section, including the in-app configuration editor, are currently not available in xref:github-apps-integration#[GitHub App] or xref:gitlab-integration#[GitLab] projects. Refer to the Coming soon section in each integration overview page for more details on CircleCI features that are not fully supported.
 
 User settings can be found by scrolling to the bottom of the side navigation and clicking on your user icon.
 
