@@ -13,9 +13,12 @@ NOTE: Selecting a custom webhook as a pipeline trigger is generally available fo
 image::triggers/custom-webhooks-add-trigger.png[screenshot showing adding a custom webhook trigger]
 
 . Complete the form fields and options:
-** Give your trigger a descriptive name.
+** Enter a descriptive name for the trigger. For example, if you are setting up a custom webhook to run pipelines on events from Datadog, enter "Datadog" here.
 ** (Optional) Add a description.
-** Select the pipeline that you created in the step above.
+** In the field "Pipeline to run", at the bottom of the page, select the pipeline that you created in the step above.
+// The field "Pipeline to run" should be above "config branch", because it needs to be selected before entering config branch and checkout branch. This change will be made soon, Benny will update the docs as soon as the change is shipped.
+** Enter the branch to use to fetch your config file when a Custom Webhook is received.
+** Enter the branch to use to check out your code when using the link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] in config. If your config is stored in the same repository as your code, then your **Config branch** and your **Checkout branch** should be the same.
 . Select btn:[Save].
 . You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source appended with the secret.
 +
