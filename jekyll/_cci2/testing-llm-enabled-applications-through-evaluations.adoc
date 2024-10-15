@@ -50,7 +50,7 @@ Using an open source library or third-party tools can simplify defining evaluati
 *Evaluations can be automated in CircleCI pipelines.* CircleCI enables you to automate decisions regarding the following:
 
 * Acceptance of proposed AI application changes.
-* Deployment and release your AI application.
+* Deployment and release of your AI application.
 
 With CircleCI, you can define, automate, run evaluations and evaluation testing using your preferred evaluation framework. Through declaring the necessary commands in your pipeline configuration you can ensure evaluations are run and evaluation results are tested within your CircleCI pipeline.
 
