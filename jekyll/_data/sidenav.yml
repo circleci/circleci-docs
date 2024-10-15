@@ -536,14 +536,18 @@ en:
         children:
           - name: Roles and permissions overview
             link: roles-and-permissions-overview
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
+          - name: Manage groups
+            link: manage-groups
       - name: SSO authentication
         children:
           - name: SSO overview
             link: sso/overview
           - name: SSO Setup
             link: sso/setup
-          - name: User sign-in for SSO
-            link: sso/user-sign-in
+          - name: Sign in to an SSO-enabled org
+            link: sso/sign-in-to-an-sso-enabled-organization
       - name: OIDC tokens
         children:
           - name: Use OpenID Connect tokens in jobs
@@ -552,10 +556,6 @@ en:
             link: oidc-tokens-with-custom-claims
       - name: How-to guides
         children:
-          - name: Manage roles and permissions
-            link: manage-roles-and-permissions
-          - name: Manage groups
-            link: manage-groups
           - name: Prevent unregistered users from spending credits
             link: prevent-unregistered-users-from-spending-credits
 
