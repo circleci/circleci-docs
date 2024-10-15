@@ -111,7 +111,8 @@ You can configure test case assertions, like this:
 [,json]
 ----
 {
-  “TestCaseName”: “correctness > 0.9 && toxicity < 0.01”
+  "correctness": "correctness > 0.9"
+  "toxicity": "toxicity < 0.01"
 }
 ----
 
@@ -120,9 +121,11 @@ You can configure test case assertions, like this:
 [,json]
 ----
 {
-  “TestCaseName”: “labels[0] == \”CORRECT\””
+  "labels": "labels[0] == \"CORRECT\""
 }
 ----
+
+Test cases are composed of a name and an assertion. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above, use a name based on an input metric: “`correctness`” , “`toxicity`” and "`labels`".
 
 Evaluation testing results determine if a job should stop or continue, as follows:
 
