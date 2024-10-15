@@ -125,7 +125,7 @@ You can configure test case assertions, like this:
 }
 ----
 
-Test cases are composed of a name and an assertion. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above, use a name based on an input metric: “`correctness`” , “`toxicity`” and "`labels`".
+Test cases are composed of a name and an assertion. In the first example above, the name is `correctness` and the assertion is that correctness will be above 0.9. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above use names based on input metrics: `correctness` , `toxicity` and `labels`.
 
 Evaluation testing results determine if a job should stop or continue, as follows:
 
