@@ -44,9 +44,55 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
 
-NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.  Alternatively, for projects using GitHub App, the <<trigger-a-pipeline-from-a-custom-webhook,custom webhooks>> functionality provides similar capabilities.
+NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab projects.
 
-For non GitLab/GitHub App projects, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
+[.tab.apitrigger.GitHub_App_/_Bitbucket_Data_Center]
+--
+For **projects integrated with GitHub App or Bitbucket Data Center**, you can trigger a pipeline for a project using the endpoint `https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run`.
+
+NOTE: This endpoint is currently in preview, and is not yet documented in the link:https://circleci.com/docs/api/v2/index.html[official API V2 documentation].
+
+. If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
+
+. In the link:https://app.circleci.com/home/[CircleCI web app] select your organization. Over the next few steps you will collect the data you need to trigger your pipeline.
+
+. Find your organization ID:
+.. Select **Organization Settings** in the CircleCI web app sidebar.
+.. Copy and your organization ID. Save this somewhere, you will need it later.
+
+. Find your project ID:
+.. Select **Projects** in the CircleCI web app sidebar.
+.. Find your project.
+.. Select the ellipsis menu (icon:ellipsis-h[ellipsis]) and choose **Project Settings**.
+.. Copy your project ID. Save this somewhere, you will need it later.
+
+. Find your definition ID:
+.. You should be in project settings if you are following these steps in sequence. If not see previous steps to get there. Select **Pipelines** in the sidebar.
+.. In the column **Definition ID**, select btn:[Copy] for the correct pipeline. Save this somewhere, you will need it in the next step.
++
+image::triggers/copy-pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
+
+. To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
++
+[source,shell]
+----
+curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "content-type: application/json" \
+  --data '{
+  "definition_id": "<pipeline-definition-id>",
+  "config": {"branch": "<your-branch-name>"},
+  "checkout": {"branch": "<your-branch-name>"},
+  "parameters": {"<param-name>": "<param-value>"}
+  }'
+----
+
+. Head back to the CircleCI web app and see your pipeline running on the dashboard.
+--
+
+[.tab.apitrigger.GitHub_OAuth_app_/_Bitbucket_Cloud]
+--
+For **projects integrated with GitHub OAuth app or Bitbucket Cloud**, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
 
@@ -63,6 +109,7 @@ curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 
 TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
+--
 
 [#trigger-a-pipeline-from-a-custom-webhook]
 == Trigger a pipeline from a custom webhook
