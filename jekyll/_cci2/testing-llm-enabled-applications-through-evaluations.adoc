@@ -58,18 +58,16 @@ You can automate your entire process of running evaluations, reviewing evaluatio
 
 === The CircleCI evals orb
 
-[NOTE]
-====
-The link:https://circleci.com/developer/orbs/orb/circleci/evals[CircleCI evals orb] supports integrations with Braintrust and LangSmith.
-
-If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[].
-====
-
 CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals[evals orb], which offers the following capabilities:
 
 * Simplifies the definition and execution of evaluation jobs using custom scripts and popular third-party tools.
 * Generates reports of evaluation results.
 * Tests evaluation results to determine if they meet specified conditions.
+
+[NOTE]
+====
+Reach out to mailto:ai-feedback@circleci.com[] if you have a feature request for the Evals orb.
+====
 
 ==== Run evaluations in CircleCI
 
