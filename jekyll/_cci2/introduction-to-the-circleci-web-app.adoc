@@ -169,22 +169,18 @@ The Insights page shows you metrics related to workflow run, workflow duration, 
 
 image::web_ui_insights_overview.png[Insights page]
 
-While the main Insights page gives you an overview of all projects, you can also select an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on individual jobs and tests.
+The Insights page gives you an overview of all projects. You can also select an individual project to get further insights into that project's workflows. Then you can select individual workflows to see insights on individual jobs and tests.
 
 image::web_ui_insights_runs.png[Details of insights]
 
 [#self-hosted-runners]
 == Self-hosted runners
 
-The self-hosted runners page shows the inventory of resource classes and associated self-hosted runners. You may also create a new resource class from this page. Before this ability is available to you, you will need to accept the terms of use for self-hosted runners, which is found in the <<#organization-settings,organization settings>>.
+The self-hosted runners page shows an inventory of your self-hosted runners and their associated resource classes. You can also create a new runner resource class from this page.
 
 image::web_ui_runner.png[Runner inventory]
 
-New resource classes will require an existing namespace, or creation of a new namespace if no namespace for the organization has been created yet (organizations can only create a single namespace), as well as a label to match your CircleCI job with a type of runner.
-
-In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. Learn more and get started with self-hosted runners on the xref:runner-overview#[CircleCI self-hosted runners overview].
-
-image::runnerui_step_four.png[Runner setup]
+Learn more and get started with self-hosted runners on the xref:runner-overview#[CircleCI self-hosted runners overview].
 
 [#organization-settings]
 == Organization settings
