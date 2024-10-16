@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: SAML Single Sign-On for CircleCI is currently in preview for Scale customers. Please see <<prerequisites-and-limitations>>
+NOTE: SAML Single Sign-On for CircleCI is currently in preview for Scale Plan customers. See <<prerequisites-and-limitations>>
 for further details. Submit feedback to https://circleci.canny.io/identities-permissions/p/single-sign-on-sso.
 
 Single sign-on (SSO) for CircleCI allows organization administrators to control access for their CircleCI organization using an Identity Provider (IdP).
