@@ -335,6 +335,13 @@ Requested weighting by historical based timing, but they are not present. Fallin
 +
 Since this is the first time you are storing test data from the pipeline, CircleCI does not currently have timing data to work with, so it defaults to splitting tests by name.
 // Check if this applies to GitLab
+
+On subsequent runs, you'll see an additional step labelled **Downloading previous test results**:
++
+image::downloading-previous-test-results-step.png[Downloading previous test results step]
++
+The presence of this step confirms that, during this run, the test results stored by a previous run (with the `store_test_results` step) were successfully retrieved. Provided that the data is xref:parallelism-faster-jobs/#junit-xml-reports[properly formatted], the test suite will be split as evenly as possible over the specified number of test environments.
+
 . Open the **Timing** tab in the job. This tab provides a visualization of how each parallel run did relative to each other.
 +
 image::test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
