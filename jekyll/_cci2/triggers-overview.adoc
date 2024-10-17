@@ -87,6 +87,13 @@ curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/
   }'
 ----
 
+. To run a pipeline based on a **tag** instead of a **branch**, replace the `config` and/or `checkout` fields with:
++
+[source,shell]
+----
+  "config": {"tag": "<your-tag-name>"},
+  "checkout": {"tag": "<your-tag-name>"}
+----
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 --
 
