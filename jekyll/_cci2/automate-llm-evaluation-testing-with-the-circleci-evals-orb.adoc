@@ -4,7 +4,7 @@ contentTags:
     - Cloud
     - Server
 ---
-= Use the CircleCI Evals orb to automate LLM evaluations and evaluation testing
+= Automate LLM evaluation testing with the CircleCI Evals orb
 :description: How to use CircleCI Evals orb.
 :page-layout: classic-docs
 :page-liquid:
