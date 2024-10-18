@@ -18,6 +18,7 @@
     "markdownlint-cli2": "0.14.0",
     "markdownlint-cli2-formatter-json": "0.0.8",
     "markdownlint-rule-header-id": "0.0.3",
+    "mermaid": "^11.3.0",
     "serve": "14.2.3"
   },
   "resolutions": {

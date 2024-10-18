@@ -42,6 +42,15 @@ GEM
       httpclient (~> 2.8, >= 2.8.3)
       json (>= 1.5.1)
     asciidoctor (2.0.23)
+    asciidoctor-diagram (2.3.1)
+      asciidoctor (>= 1.5.7, < 3.x)
+      asciidoctor-diagram-ditaamini (~> 1.0)
+      asciidoctor-diagram-plantuml (~> 1.2021)
+      rexml
+    asciidoctor-diagram-batik (1.17)
+    asciidoctor-diagram-ditaamini (1.0.3)
+    asciidoctor-diagram-plantuml (1.2024.6)
+      asciidoctor-diagram-batik (~> 1.17)
     async (2.17.0)
       console (~> 1.26)
       fiber-annotation
@@ -191,6 +200,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor
+  asciidoctor-diagram (~> 2.3)
   dotenv
   html-proofer
   htmlcompressor
