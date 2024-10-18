@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'html-proofer'
 require 'jekyll'
+require 'asciidoctor-diagram'
 require 'dotenv/load'
 
 JEKYLL_BASENAME = ENV['JEKYLL_BASENAME'] || 'docs'
