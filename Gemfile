@@ -15,6 +15,7 @@ gem 'nokogiri', '~> 1.16.5'
 
 group :jekyll_plugins do
   gem 'jekyll-sitemap'
+  gem 'asciidoctor-diagram' , '~> 2.3'
   gem 'jekyll-asciidoc', github: "asciidoctor/jekyll-asciidoc"
   gem 'jekyll-algolia', '~> 1.6', '>= 1.6.0' # Used by `Update Algolia Index` CI step
   gem 'jekyll-last-modified-at' # Used for page metadata
