@@ -245,6 +245,7 @@ SDK
 Selenium
 SemVer
 Server Plan
+[Ss]ingle sign-on
 SLAs?
 [Ss]ignup
 SKUs?
