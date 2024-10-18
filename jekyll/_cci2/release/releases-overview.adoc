@@ -246,6 +246,30 @@ The following table shows a complete list of labels and annotations either requi
 |No. Only set if you want to disable the cancel release feature for your component.
 |===
 
+== Autodetected releases and release markers
+
+CircleCI automatically generates release markers for your deployment pipelines. Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. Release markers create for you a log of all releases in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Release markers log all new releases in one place and link back to the CI/CD pipelines that caused them. You can use release markers independently, without installing the release agent.
+
+=== Autodetection of releases
+
+CircleCI looks for the word `deploy` in your job names to detect when a release may be in progress. CircleCI generates a release marker for each job that contains the word `deploy` in its name _unless_ any of the following conditions are true:
+
+* The job has a status other than `SUCCESS`.
+* Any of the following keywords and keyword combinations are present in the job name:
+** `dry run`
+** `skip deploy`
+** `bypass deploy`
+** `deployed`
+** `validation`
+** `validate`
+* The project related to the job has releases created via the Kubernetes release agent or manual release jobs in the last two months.
+* You have opted out of the autodetected releases feature.
+* The detected environment integration name collides with an integration you have already set up.
+
+=== Manual setup
+
+If you would rather set up release markers yourself, see the xref:configure-release-markers#[Configure release markers] page.
+
 [#release-status]
 == Release status
 
@@ -258,24 +282,23 @@ A release can be in one of the following states:
 |Notes
 
 |RUNNING
-|The release is currently in progress
+|The release is currently in progress.
 
 |FAILED
-|Resources have reached an unhealthy status (pods for the new version of a Kubernetes component)
+|Resources have reached an unhealthy status (pods for the new version of a Kubernetes component).
 
 |SUCCESS
-|The Deployment or Rollout has all desired resources available (all pods specified by a Kubernetes Deployment or Argo Rollout)
+|The Deployment or Rollout has all desired resources available (all pods specified by a Kubernetes Deployment or Argo Rollout).
 
 |CANCELLED
-|The release has been cancelled, either using the `cancel release` option, or by being superseded by another release
+|The release has been cancelled, either using the `cancel release` option, or by being superseded by another release.
 
 |EXPIRED
-|Release commands failed to be picked up by the release agent within the required time window
+|Release commands failed to be picked up by the release agent within the required time window.
+
+|LOGGED
+|Release has been logged using a release marker and is available in the CircleCI releases UI.
 |===
-
-== Release markers
-
-Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. With release markers you can log all new releases in one place and link back to the CI/CD pipelines that caused them. You can use release markers independently, without installing the release agent. For setup information, see the xref:configure-release-markers#[Configure release markers] page.
 
 [#known-limitations]
 == Known limitations
