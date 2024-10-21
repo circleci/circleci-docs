@@ -12,6 +12,16 @@ contentTags:
 :icons: font
 :experimental:
 
+== Diagram
+
+[mermaid, target="test-mermaid-diagram", format=png]
+----
+graph
+   accTitle: My title here
+   accDescr: My description here
+   A-->B
+----
+
 [#introduction]
 == Introduction
 

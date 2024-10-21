@@ -61,7 +61,7 @@ liquid:
   error_mode: strict
 
 server-attributes: &server
-  imagesdir: /docs/assets/img/docs/
+  imagesdir: /assets/img/docs/
   relfileprefix: ../
   relfilesuffix: /
   outfilesuffix: /index.html
@@ -82,6 +82,8 @@ server-attributes: &server
 asciidoc:
   attributes: *server
 
+keep_files:
+  - /assets/img/docs/
 asciidoctor:
   base_dir: :docdir
   safe: unsafe
