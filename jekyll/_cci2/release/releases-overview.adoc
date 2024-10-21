@@ -266,6 +266,24 @@ CircleCI looks for the word `deploy` in your job names to detect when a release 
 * You have opted out of the autodetected releases feature.
 * The detected environment integration name collides with an integration you have already set up.
 
+=== Opt out of autodetected releases
+If you do not want CircleCI to automatically create release marker for you, you can opt out of this feature either for a whole organization or per-project.
+
+To opt out of autodetected releases for an entire **organization**, follow these steps:
+
+. In the link:https://circleci.com/app/home[CircleCI web app], select your organization.
+. Select **Organization settings** in the sidebar.
+. Select **Releases**.
+. Toggle the "Enable automatic release marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option right.
+
+To opt out of autodetected releases for a **project**, follow these steps:
+
+. In the link:https://circleci.com/app/home[CircleCI web app], select your organization.
+. Select **Projects** in the sidebar.
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), select **Project Settings**.
+. Select **Releases**.
+. Toggle the "Enable automatic release marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option right.
+
 === Manual setup
 
 If you would rather set up release markers yourself, see the xref:configure-release-markers#[Configure release markers] page.
