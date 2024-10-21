@@ -83,7 +83,7 @@ asciidoc:
   attributes: *server
 
 keep_files:
-  - /assets/img/docs/
+  - docs/
 asciidoctor:
   base_dir: :docdir
   safe: unsafe
