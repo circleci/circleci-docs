@@ -1,0 +1,24 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+noindex: true
+---
+= Build a diagram and show it on page
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Testing diagrams
+:icons: font
+:experimental:
+
+== Diagram
+
+[mermaid, target="test-mermaid-diagram", format=png]
+----
+graph
+   accTitle: My title here
+   accDescr: My description here
+   A-->B
+----

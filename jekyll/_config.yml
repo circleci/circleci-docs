@@ -82,6 +82,8 @@ server-attributes: &server
 asciidoc:
   attributes: *server
 
+keep_files:
+  - docs/
 asciidoctor:
   base_dir: :docdir
   safe: unsafe
