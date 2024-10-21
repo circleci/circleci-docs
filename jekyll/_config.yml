@@ -61,7 +61,7 @@ liquid:
   error_mode: strict
 
 server-attributes: &server
-  imagesdir: /assets/img/docs/
+  imagesdir: /docs/assets/img/docs/
   relfileprefix: ../
   relfilesuffix: /
   outfilesuffix: /index.html
