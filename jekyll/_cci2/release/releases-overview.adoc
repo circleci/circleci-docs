@@ -252,7 +252,15 @@ CircleCI automatically generates release markers for your deployment pipelines. 
 
 === Autodetection of releases
 
-CircleCI looks for the word `deploy` in your job names to detect when a release may be in progress. CircleCI generates a release marker for each job that contains the word `deploy` in its name _unless_ any of the following conditions are true:
+CircleCI looks for the word `deploy` in your job names to detect when a release may be in progress and creates an autodetected release marker.
+
+When CircleCI creates a release marker for you automatically, we use the information available in your pipeline configuration to create the following:
+
+* **Component**: CircelCI created a component for the release and uses your project name to create a component name.
+* **Environment integration**: CircleCI creates an enviornment for you, using your job and workflow names to create a relevant name. The environment has the type `AUTODETECTED`.
+* **Release version**: CircleCI uses the build number to populate the release version for the purposes of displaying the release in the CircleCI web app.
+
+If any of the following conditions are true, CircleCI **will not** generate a release marker for a job even if the name contains the word `deploy`:
 
 * The job has a status other than `SUCCESS`.
 * Any of the following keywords and keyword combinations are present in the job name:
@@ -265,6 +273,14 @@ CircleCI looks for the word `deploy` in your job names to detect when a release 
 * The project related to the job has releases created via the Kubernetes release agent or manual release jobs in the last two months.
 * You have opted out of the autodetected releases feature.
 * The detected environment integration name collides with an integration you have already set up.
+
+==== Manual configuration of autodetected releases
+Some points to consider when manually configuring autodetected releases:
+
+* If you decide to manually configure a release marker for an environment integration that was created as part of an autodetected release, you can update the integration type. You do not need to create a new integration. To update the integration type, follow these steps:
+.. #TODO#
+
+* If you change a component name that was originaly autodetected by us, CircleCI creates a new component and the history **will not** carry over. If you do not update the component name, the history **will** carry over.
 
 === Opt out of autodetected releases
 If you do not want CircleCI to automatically create release marker for you, you can opt out of this feature either for a whole organization or per-project.
@@ -284,7 +300,7 @@ To opt out of autodetected releases for a **project**, follow these steps:
 . Select **Releases**.
 . Toggle the "Enable automatic release marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option right.
 
-=== Manual setup
+=== Manual setup of release markers
 
 If you would rather set up release markers yourself, see the xref:configure-release-markers#[Configure release markers] page.
 
