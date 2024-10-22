@@ -45,7 +45,9 @@ Ring-session sent through a cookie on the request. This authentication allows us
 [#resource-class-authentication-token]
 === Resource class token authentication
 
-This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
+This token is generated when creating a new resource class. It is only displayed once when creating a resource class, and cannot be retrieved again.
+
+Resource class tokens are restricted solely to claiming tasks.
 
 [#supported-methods]
 ==== Supported methods
