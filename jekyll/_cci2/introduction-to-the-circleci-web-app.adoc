@@ -41,6 +41,25 @@ At the **top left** of the screen you will find the CircleCI status badge. The s
 
 Select an **org card** and take a look around. The following section describe the various features and options you will find for each organization.
 
+[#user-settings]
+=== User settings
+
+User settings can be found by selecting your user icon at the top right of the user area (dark blue top bar) in the web app at any time. Select your icon and then select ** User Settings**.
+
+image:user_settings.png[User settings]
+
+**Account Integrations**: Shows your user ID as well as account integrations such as your VCS provider.
+
+**Notifications**: Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
+
+**Privacy & Security**: Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
+
+**Personal API tokens**: View and create personal API tokens, used to access the CircleCI API.
+
+**Organization Plans**: See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
+
+**Beta Program**: Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+
 == Organization homepage and navigation
 
 After selecting an organization you will find yourself on the organization homepage. The organization home page shows an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
@@ -185,17 +204,29 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 [#organization-settings]
 == Organization settings
 
-**Overview**: Shows your organization ID.
+**Overview**: Shows your organization ID and name. Manage technical and security contacts for your org.
+
+**People**: Manage user roles and permissions within your organization, or generate org invites.
+
+**Groups**: Manage group level permissions for users in your organization.
 
 **Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. Contexts provide a mechanism for securing and sharing environment variables across projects.
 
 **VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub checks.
 
-**Security**: Allows you to set whether or not you want to allow the use of partner and community orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
+**Security**: Allows you to set whether or not you want to allow the use of partner and community orbs, or private orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
 
-**Orbs**: View a list of all the orbs being used in projects within your organization.
+**Policies**:
+
+**Advanced**: Enable/disable the use of xref:intelligent-summaries#[intelligent summaries] for contextual help with buiild failures. Some orgs have the option to allow xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[triggering pipelines with unversioned config] from VS Code.
+
+**Orbs**: View a list of all the orbs authored by your organization.
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
+
+**Releases**: Find links to set up release markers or release moniotoring for your projects. Enable/disable autodetected releses, which allowes CircleCI to automatically detect releases in your projects and create release markers for you.
+
+**Integrations**: Set up integrations with self-hosted version control systems.
 
 [#plan]
 == Plan
@@ -223,23 +254,6 @@ You can learn more about billing in the billing section of the xref:faq#billing[
 Depending on your plan, you will also have the option to manage the retention periods of artifacts, workspaces, and caches. These settings allow you to keep your workflows clean, but can also help reduce storage costs.
 
 image::web_ui_plan_controls.png[Usage controls]
-
-[#user-settings]
-== User settings
-
-User settings can be found by scrolling to the bottom of the side navigation and clicking on your user icon.
-
-**Account Integrations**: Shows your user ID as well as account integrations such as your VCS provider.
-
-**Notifications**: Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
-
-**Privacy & Security**: Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
-
-**Personal API tokens**: View and create personal API tokens, used to access the CircleCI API.
-
-**Organization Plans**: See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
-
-**Beta Program**: Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
 
 == Next steps
 
