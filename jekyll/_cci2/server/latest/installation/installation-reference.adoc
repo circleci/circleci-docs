@@ -1,12 +1,12 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Installation reference
 :page-layout: classic-docs
-:page-description: Reference documentation for installing CircleCI server v4.6.
+:page-description: Reference documentation for installing CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:
