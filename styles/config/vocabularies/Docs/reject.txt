@@ -6,3 +6,5 @@ Please
 bitbucket
 BitBucket
 PostgrSQL
+[Ee]asy
+[Ee]asily
