@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Example `values.yaml`
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.6.
+:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:
