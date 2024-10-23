@@ -1,19 +1,3 @@
----
-contentTags:
-  platform:
-  - Server v4.7
-  - Server Admin
----
-= Phase 1 - Prerequisites
-:page-layout: classic-docs
-:page-liquid:
-:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.7 application.
-:icons: font
-:toc: macro
-:toc-title:
-
-// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
-
 CircleCI server v4.7 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.7 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
@@ -45,15 +29,19 @@ Download and install the following software before continuing:
 | Helping with `values.yaml` changes and updates
 | Optional, but may help with troubleshooting between releases
 
+ifndef::env-gcp[]
 | link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
 | Latest
 | Managing AWS resources
 | AWS installs only
+endif::env-gcp[]
 
+ifndef::env-aws[]
 | `gcloud` and `gsutil` as part of the link:https://cloud.google.com/sdk/docs/[Google Cloud SDK].
 | Latest
 | Managing GCP resources
 | GCP installs only
+endif::env-aws[]
 
 | link:https://www.terraform.io/downloads.html[Terraform]
 | {terraformversion} or greater
@@ -66,8 +54,6 @@ Download and install the following software before continuing:
 | Required for installations outside AWS and GCP, for example, local installation.
 
 |===
-
-
 
 [#create-a-vpc]
 == 2. Create a VPC
@@ -93,10 +79,6 @@ We recommend you create a new VPC specifically for CircleCI server and its compo
 *  **Subnet Provisioning**
 +
 For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
-
-// Don't include this section in the GCP PDF.
-
-ifndef::env-gcp[]
 
 
 [#create-a-kubernetes-cluster]
@@ -150,6 +132,7 @@ The application uses a large number of resources. Depending on your usage, your 
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
+// Don't include this section in the GCP  page.
 ifndef::env-gcp[]
 
 [#eks]
@@ -178,6 +161,7 @@ NOTE: You may see the following error `AWS STS Access - cannot get role ARN for 
 
 endif::env-gcp[]
 
+// Don't include this section in the AWS page.
 ifndef::env-aws[]
 
 [#gke]
@@ -232,7 +216,6 @@ gcloud components install gke-gcloud-auth-plugin
 ----
 kubectl cluster-info
 ----
-endif::env-aws[]
 
 [#enable-workload-identity-in-gke]
 ==== Enable Workload Identity in GKE (optional)
@@ -267,6 +250,8 @@ You must repeat Step 3 for all the existing node pools. Follow these links for s
 * xref:phase-3-execution-environments#gcp-authentication[VM]
 * xref:phase-1-prerequisites#google-cloud-storage[Object-Storage]
 
+endif::env-aws[]
+
 [#create-a-new-github-oauth-app]
 == 3. Create a new GitHub OAuth app
 
@@ -299,16 +284,18 @@ Create the `defaultToken` by navigating to **User Settings > Developer Settings 
 == 4. Static IP addresses
 It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is reprovisioned.
 
-ifndef::env-gcp[]
+// Don't include this section in the AWS page.
+ifndef::env-aws[]
 [#gcp-reserve-a-static-external-ip-address]
 === GCP: Reserve a static external IP address
 The link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#external-ip[Google Cloud docs] provide information on how reserve an IP address.
 
 Make note of the returned IPv4 address for use later in the `values.yaml` file.
 
-endif::env-gcp[]
+endif::env-aws[]
 
-ifndef::env-aws[]
+// Don't include this section in the GCP page.
+ifndef::env-gcp[]
 [#aws-reserve-an-elastic-ip-address]
 === AWS: Reserve an elastic IP address
 To reserve an elastic IP address in AWS, run the following AWS CLI commands in your desired environment.
@@ -331,7 +318,7 @@ aws ec2 allocate-address
 
 Make note of each of the returned `AllocationId` values from the CLI for use in the `values.yaml` file.
 
-endif::env-aws[]
+endif::env-gcp[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
@@ -356,6 +343,7 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ----
 
+// Do not include in GCP page
 ifndef::env-gcp[]
 
 [#aws-route-53]
@@ -377,6 +365,7 @@ certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_S
 
 endif::env-gcp[]
 
+// Do not include in AWS page
 ifndef::env-aws[]
 
 [#google-cloud-dns]
@@ -427,6 +416,11 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ----
 
+endif::env-aws[]
+
+// Do not include in GCP page
+ifndef::env-gcp[]
+
 [#aws-certmanager]
 === AWS Certificate Manager
 Instead of provisioning your own TLS certificates, if you are setting up CircleCI server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
@@ -442,6 +436,8 @@ aws acm request-certificate \
 
 After running this command, navigate to the Certificate Manager AWS console and follow the wizard to provision the required DNS validation records with Route53. Take note of the ARN of the certificate once it is issued.
 
+endif::env-gcp[]
+
 [#upstream-tls]
 === Upstream TLS termination
 You may have a requirement to terminate TLS for CircleCI server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
@@ -452,8 +448,6 @@ CircleCI server listens on the following port numbers, which need to be configur
 * Nomad server [TCP 4647]
 
 Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports.
-
-endif::env-aws[]
 
 [#encryption-signing-keys]
 == 6. Encryption/signing keys
@@ -495,6 +489,7 @@ If you are installing locally rather than in AWS or GCP, follow the MinIO instru
 
 NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:installing-server-behind-a-proxy#[Installing server behind a proxy] guide.
 
+// Do not include in GCP page.
 ifndef::env-gcp[]
 
 [#s3-storage]
@@ -870,6 +865,7 @@ The result should look like this:
 
 endif::env-gcp[]
 
+// Do not include in AWS page
 ifndef::env-aws[]
 
 [#google-cloud-storage]
