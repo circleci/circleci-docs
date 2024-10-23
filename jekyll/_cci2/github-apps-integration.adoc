@@ -139,10 +139,7 @@ You can not currently automate migrating your organization from the GitHub OAuth
 Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI's GitHub App:
 
 * If the motivation for moving is to leverage new functionality that is only available to the GitHub App integration, consider using your existing organization and installing the GitHub App alongside your OAuth App integration as described in our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204[community forum].
-* Confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.
-* If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
-
-If you cannot move your organization because of missing functionality, link:https://docs.google.com/forms/d/e/1FAIpQLSfnYhFLjmZ0OP8goemexAvgHDPJqgHyDF1QiIl2HdPktTKvlQ/viewform[tell us why].
+* If the motivation is to completely remove the OAuth App, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.  If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
 
 If you would like to switch from the OAuth app integration to the GitHub App integration, follow these steps:
 
