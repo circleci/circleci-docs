@@ -417,6 +417,6 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:release-notes#[CircleCI server v4.7 release notes]
-* xref:../installation/phase-1-prerequisites#[Server v4.7 installation prerequisites]
+* xref:release-notes#[CircleCI server v4.7 release notes].
+* Server v4.7 installation prerequisites for xref:../installation/phase-1-aws-prerequisites#[AWS] and xref:../installation/phase-1-gcp-prerequisites#[GCP].
 endif::pdf[]
