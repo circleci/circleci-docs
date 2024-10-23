@@ -17,7 +17,7 @@ Setting up an **outbound webhook** on CircleCI enables your third party service 
 
 Setting up an inbound webhook (as a **custom webhook** trigger) on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
 
-NOTE: Selecting a custom webhook as a pipeline trigger is generally available for orgs that integrate with CircleCI's GitHub App, and is available in "Preview" for orgs that integrate with GitHub via the CircleCI xref:github-integration#[GitHub OAuth App]. See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-custom-webhooks-now-in-preview/49864[community forum] to request access.  To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: Selecting a custom webhook as a pipeline trigger is generally available for orgs that integrate with CircleCI's GitHub App, and is available in "Preview" for orgs that integrate with GitHub via the CircleCI xref:github-integration#[GitHub OAuth App]. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
 
 == Custom webhooks
 
@@ -42,7 +42,9 @@ NOTE: When triggering via `curl`, you must use a `POST` request with `content-ty
 curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
 ----
 
-See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
+See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub]. 
+
+NOTE: Custom webhooks will not work with xref:contexts#security-goup-restrictions[security group restrictions].  Additionally, the configuration file that is used for pipelines triggered by a custom webhook will only be visible in the CircleCI web app if the configuration file path is `.circleci/config.yml`.
 
 === Example: Trigger one pipeline from another
 

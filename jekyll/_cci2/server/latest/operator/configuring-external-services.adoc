@@ -1,18 +1,18 @@
 ---
 contentTags:
   platform:
-    - Server v4.6
+    - Server v4.7
     - Server Admin
 ---
 = Configuring external services
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to configure the following external services for use with a CircleCI server v4.6 installation
+:page-description: This document describes how to configure the following external services for use with a CircleCI server v4.7 installation
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to configure external services for use with either a new CircleCI server v4.6 installation or migrating internal PostgreSQL and MongoDB data from existing CircleCI server v4.6 installation to your externalized datastores.
+This page describes how to configure external services for use with either a new CircleCI server v4.7 installation or migrating internal PostgreSQL and MongoDB data from existing CircleCI server v4.7 installation to your externalized datastores.
 
 [#postgresql]
 == PostgreSQL
