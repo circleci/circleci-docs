@@ -301,5 +301,6 @@ We are working on updates to:
 [#next-steps]
 == Next steps
 
-xref:set-up-circleci-releases#[Set up CircleCI releases]
+* xref:set-up-circleci-releases#[Set up CircleCI releases]
+* To try out setting up CircleCI releases for a Kubernetes deployment, visit the link:https://github.com/CircleCI-Public/cd-config-examples[Continuous delivery config examples] repo.
 
