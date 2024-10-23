@@ -177,8 +177,6 @@ You can also integrate the language server into any editor which supports the La
 [#test-run-your-config-from-vs-code]
 == Test run your config from VS Code
 
-NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ config is currently in **Open Preview**.
-
 Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
 
 image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
