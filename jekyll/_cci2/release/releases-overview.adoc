@@ -277,8 +277,7 @@ If any of the following conditions are true, CircleCI **will not** generate a re
 ==== Manual configuration of autodetected releases
 Some points to consider when manually configuring autodetected releases:
 
-* If you decide to manually configure a release marker for an environment integration that was created as part of an autodetected release, you can update the integration type. You do not need to create a new integration. To update the integration type, follow these steps:
-.. #TODO#
+* If you decide you would like to manually configure a release marker for an environment integration that was created as part of an autodetected release, refer to the xref:configure-release-markers#[Configure release markers] page to set up a release marker and a new environment integration.
 
 * If you change a component name that was originaly autodetected by us, CircleCI creates a new component and the history **will not** carry over. If you do not update the component name, the history **will** carry over.
 
