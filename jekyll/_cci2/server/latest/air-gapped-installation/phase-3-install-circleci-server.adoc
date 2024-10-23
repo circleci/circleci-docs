@@ -47,7 +47,7 @@ The `hostname` value should be the internal hostname of your GitHub enterprise i
 
 If this instance is not using TLS or self-signed certificates, make sure to set the `unsafeDisableWebhookSSLVerification: true` and `selfSignedCert: true` values.
 
-Additionally, an OAuth application and a personal access token should be set in GitHub Enterprise and values provided as shown below. For more information about this process, see the documentation for creating a xref:../installation/phase-1-prerequisites/#create-a-new-github-oauth-app[GitHub OAuth application].
+Additionally, an OAuth application and a personal access token should be set in GitHub Enterprise and values provided as shown below. For more information about this process, see the documentation for creating a GitHub OAuth application. For details, see the xref:../installation/phase-1-aws-prerequisites/#create-a-new-github-oauth-app[AWS] or xref:../installation/phase-1-gcp-prerequisites/#create-a-new-github-oauth-app[GCP] installation guide.
 
 [source, yaml]
 ----
