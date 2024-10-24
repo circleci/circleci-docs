@@ -947,5 +947,13 @@ endif::env-aws[]
 ifndef::pdf[]
 [#next-steps]
 == Next steps
-* xref:phase-2-core-services#[Phase 2: Core Services Installation].
+ifndef::env-aws[]
+* xref:phase-2-gcp-core-services#[Phase 2 GCP: Core Services Installation].
+endif::env-aws[]
+
+ifndef::env-gcp[]
+* xref:phase-2-aws-core-services#[Phase 2 AWS: Core Services Installation].
+endif::env-gcp[]
+
+
 endif::[]

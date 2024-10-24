@@ -16,7 +16,7 @@ With prerequisites installed, and object storage configured, you can now copy ov
 
 [#prepare-values-yaml]
 == 1. Prepare `values.yaml`
-The `values.yaml` file for installing CircleCI should be prepared according to the xref:../installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+The `values.yaml` file for installing CircleCI should be prepared according to the Create Helm Values section of the regular installation guide (xref:../installation/phase-2-aws-core-services/#create-helm-values[AWS], xref:../installation/phase-2-gcp-core-services/#create-helm-values[GCP]). Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
 
 === a. Configure global values
 
