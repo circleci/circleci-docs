@@ -77,13 +77,13 @@ Manually triggering a pipeline from the CircleCI web app is not available at thi
 == Project settings
 
 Within CircleCI, a project can have one or more **Pipelines**. Each pipeline is defined by two key characteristics:
-* A configuration file, which is stored in a repository referred to as Config source, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used. 
-* A checkout source, which determines which repository will be checked out when running a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step].
-This model allows your CircleCI config to be stored in a different repository from your code. 
 
-Each pipeline can have zero or many **triggers**, which are events that cause a pipeline to run. 
+* A configuration file, which is stored in a repository referred to as _config source_, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used.
+* A checkout source, which determines which repository will be checked out when running a xref:configuration-reference#checkout[checkout step]. This model allows your CircleCI config to be stored in a different repository from your code.
 
-The following settings are found by clicking the **Project Settings** button within your project. 
+Each pipeline can have zero or many **triggers**, which are events that cause a pipeline to run.
+
+The following settings are found by clicking the **Project Settings** button within your project.
 
 [#people]
 === People

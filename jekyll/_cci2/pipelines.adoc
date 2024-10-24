@@ -40,11 +40,11 @@ Set up pipelines and triggers to define when and how pipelines are automatically
 
 === Pipelines
 
-Pipelines define units of work that can be run within your projects. 
+Pipelines define units of work that can be run within your projects.
 Each pipeline is defined by two key characteristics:
-* A configuration file, which is stored in a repository referred to as Config source, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used. 
-* A checkout source, which determines which repository will be checked out when running a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step].
-This model allows your CircleCI config to be stored in a different repository from your code. 
+
+* A configuration file, which is stored in a repository referred to as config source, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used.
+* A checkout source, which determines which repository will be checked out when running a xref:configuration-reference#checkout[checkout step]. This model allows your CircleCI config to be stored in a different repository from your code.
 
 A project can have one or more pipelines, and each pipeline can be associated with one or more triggers.
 
@@ -57,7 +57,6 @@ image::project-settings-pipelines.png[Pipelines page in project settings]
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a pipeline is already set up.
 
 image::add-pipeline.png[Add a pipeline]
-#rosie to update image#
 
 To add or edit a pipeline, follow these steps:
 
@@ -74,10 +73,9 @@ TIP: If you do not see **Pipelines** in the sidebar, your project is integrated 
 NOTE: For GitLab Self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:gitlab-integration#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
 ** Authorize your connection if this is not already showing with a icon:check-circle[]
 ** Define where the config file for this pipeline is stored:
-#Rosie, I wanted to do a further level of indentation here but I can't test if it works#
-    ** Select a repository from the dropdown.
-    ** Enter the path to the config file.
-** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the field Config Source.
+*** Select a repository from the dropdown.
+*** Enter the path to the config file.
+** Under Build Assets, select a checkout Source for this pipeline. This is the repository that will be checked out when a xref:configuration-reference#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the field Config Source.
 . Select btn:[Save].
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. This is described in the following section.
@@ -111,8 +109,7 @@ To verify your trigger is set up correctly, trigger an event from your third par
 
 When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
 
-image::{{site.baseurl}}/assets/img/docs/add-trigger.png[Add a trigger]
-#rosie to update image#
+image::add-trigger.png[Add a trigger]
 
 To add a trigger for a pipeline, follow these steps:
 
