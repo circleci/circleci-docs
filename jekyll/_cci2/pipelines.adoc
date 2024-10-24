@@ -34,8 +34,6 @@ image::/docs/assets/img/docs/pipelines-job-output.png[Download and share job ste
 
 == Pipelines and triggers
 
-NOTE: The information in this section on pipelines and triggers applies to accounts integrated with the xref:github-apps-integration#[CircleCI GitHub App], xref:gitlab-integration#[GitLab] or xref:bitbucket-data-center-integration#[Bitbucket Data Center]. There are two GitHub integration types, either OAuth or through the GitHub App. To find out which GitHub integration type you have refer to the xref:github-apps-integration#[GitHub App integration] page.
-
 Set up pipelines and triggers to define when and how pipelines are automatically triggered for a project. These triggers may be from external services (custom webhooks), or from commits or tags on a version control system.
 
 === Pipelines
@@ -64,7 +62,6 @@ To add or edit a pipeline, follow these steps:
 . Select the ellipsis next to your project (icon:ellipsis-h[]) and choose **Project Settings**.
 . Select **Pipelines** in the sidebar.
 +
-TIP: If you do not see **Pipelines** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
@@ -117,7 +114,6 @@ To add a trigger for a pipeline, follow these steps:
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
 +
-TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Trigger].
 . Select the same location in the "Connect to" dropdown menu that you selected for your pipeline (for example, GitHub App).
 . Select btn:[Next].
