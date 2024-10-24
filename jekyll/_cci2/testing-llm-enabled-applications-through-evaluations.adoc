@@ -11,12 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This page describes common methods for testing applications powered by large language models (LLMs) through evaluations.
-
-[NOTE]
-====
-This documentation is only applicable for link:https://circleci.com/developer/orbs/orb/circleci/evals?version=1.0.8[CircleCI Evals Orb versions 1.x.x].
-====
+This page describes methods for testing applications powered by large language models (LLMs) through evaluations, including automating evaluations with CircleCI.
 
 == Evaluations overview
 
@@ -24,9 +19,9 @@ Evaluations, also known as evals, are a methodology for assessing the quality of
 
 Evaluations provide insights into the performance and efficiency of applications based on LLMs, and allow teams to quantify how well their AI implementation works, measure improvements, and catch regressions.
 
-The term _evaluation_ initially referred to a way to rate and compare AI models. It has since expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
+The term _evaluation_ initially referred to a way to rate and compare AI models. Evaluation has since expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
 
-The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response.  There are many evaluation methodologies, such as:
+The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response. There are many evaluation methodologies, such as:
 
 * LLM-assisted evaluations
 * Human evaluations
@@ -42,64 +37,121 @@ Evaluations can cover many aspects of a model performance, including:
 * Respond in a fair and unbiased way, and within a specific style
 * Avoid certain expressions
 
-== Automating evaluations with CircleCI
+Some important differences between evaluations and standard software tests to consider include the following:
 
-Evaluations can be expressed as classic software tests, typically characterised by the "input, expected output, assertion" format, and as such they can be automated into CircleCI pipelines.
+* LLMs are predominantly non-deterministic, leading to flaky evaluations, more so than typical deterministic software tests.
+* Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in standard software testing.
+* Evaluation results are manually reviewed to determine whether AI application performance meets expectations since the output metric values can fluctuate.
 
-Two important differences between evals and classic software tests to keep in mind:
+Using an open source library or third-party tools can simplify defining evaluations, tracking progress, and reviewing evaluation results.
 
-* LLMs are predominantly non-deterministic, leading to flaky evaluations, unlike deterministic software tests.
-* Evaluation results are subjective. Small regressions in a metric might not necessarily be a cause for concern, unlike failing tests in regular software testing.
+== Automate evaluations with CircleCI
 
-With CircleCI, you can define, automate, and run evaluations using your preferred evaluation framework. Through declaring the necessary commands in your `config.yml`, you can ensure these evaluations are run within your CircleCI pipeline.
+*Evaluations can be automated in CircleCI pipelines.* CircleCI enables you to automate decisions regarding the following:
 
-Using an open source library or third-party tools can simplify defining evaluations, tracking progress, and reviewing the evaluation outcomes.
+* Acceptance of proposed AI application changes.
+* Deployment and release of your AI application.
 
-== The CircleCI Evals orb
+With CircleCI, you can define, automate, run evaluations and evaluation testing using your preferred evaluation framework. Through declaring the necessary commands in your pipeline configuration you can ensure evaluations are run and evaluation results are tested within your CircleCI pipeline.
+
+You can automate your entire process of running evaluations, reviewing evaluation results and determining whether results meet expectations, removing manual work involved with triggering evaluations and reviewing evaluation results.
+
+=== The CircleCI evals orb
+
+CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals[evals orb], which offers the following capabilities:
+
+* Simplifies the definition and execution of evaluation jobs using custom scripts and popular third-party tools.
+* Generates reports of evaluation results.
+* Tests evaluation results to determine if they meet specified conditions.
 
 [NOTE]
 ====
-The link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] supports integrations with Braintrust and LangSmith.
-
-If you run evaluations using a different tool, let us know at mailto:ai-feedback@circleci.com[]. You can also contribute directly to the official orb by opening a PR on the link:https://github.com/CircleCI-Public/ai-evals-orb[public repository].
+Reach out to mailto:ai-feedback@circleci.com[] if you have a feature request for the Evals orb.
 ====
 
-CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals[official Evals orb] that simplifies the definition and execution of evaluation jobs using popular third-party tools, and generates reports of evaluation results.
+==== Run evaluations in CircleCI
 
-Given the volatile nature of evaluations, evaluations orchestrated by the CircleCI Evals orb do not halt the pipeline if an evaluation fails. This approach ensures that the inherent flakiness of evaluations does not disrupt the development cycle.
+With the CircleCI evals orb, evaluations:
 
-Instead, a summary of the evaluation results is created and presented:
+* Will run as part of your CircleCI pipeline.
+* Job step details can include direct links to your evaluation results stored on your 3rd party evaluations provider. When you need to further review the evaluation results in detail, this link enables you to navigate to and view your evaluation results.
+* Your evaluation results can be saved to a `.json` file, for evaluation testing.
 
-* As a comment on the corresponding GitHub pull request (currently available only for projects integrated with xref:github-integration#[GitHub OAuth]):
+image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
+
+==== Test evaluation results in CircleCI
+
+Evaluation testing enables you to determine if your evaluation results meet specified conditions. CircleCI evaluation testing uses a suite of test cases. Each test case represents a scenario with an assertion to check if a specified condition is true or false. If any test case fails, the evaluation test fails.
+
+Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
+
+image::llmops/eval-test-diagram.png[Evaluation testing: diagram]
+
+Assuming the evaluation results are in a `.json` file, as follows:
+
+[,json]
+----
+{
+  "correctness": 0.99,
+  "toxicity": 0.2,
+  "labels": [
+    "CORRECT",
+    "ACCURATE",
+    "NOT HARMFUL"
+  ]
+}
+----
+
+You can configure test case assertions, like this:
+
+* Thresholds: Check whether 1 or more results fall within a range.
 +
-image::/docs/assets/img/docs/llmops/github-pr-comment.png[Jobs overview]
+[,json]
+----
+{
+  "correctness": "correctness > 0.9"
+  "toxicity": "toxicity < 0.01"
+}
+----
 
-* As an artifact within the CircleCI User Interface:
+* Equality: Check whether results provide an expected answer.
 +
-image::/docs/assets/img/docs/llmops/artifact.png[Jobs overview]
+[,json]
+----
+{
+  "labels": "labels[0] == \"CORRECT\""
+}
+----
 
-You can review the summary and, if required, proceed to a detailed analysis of the individual evaluation on your third party evaluation provider.
+Test cases are composed of a name and an assertion. In the first example above, the name is `correctness` and the assertion is that correctness will be above 0.9. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above use names based on input metrics: `correctness` , `toxicity` and `labels`.
 
-////
-== Getting started with the Evals orb
+Evaluation testing results determine if a job should stop or continue, as follows:
 
-Link to tutorial which will live in another page ( under Tests > Tutorials)
-Need code example in CircleCI-public
+* **The evaluation test fails**: This indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
+* **The evaluation test passes**: This indicates that model performance has met set criteria, the job continues to run.
 
-You can find a full tutorial of how to use the Evals orb on this page.
-////
+==== View evaluation test results
 
-Further documentation on how to use the orb is available on the link:https://circleci.com/developer/orbs/orb/circleci/evals[Orb page]. Orb usage examples are available in the sample repository link:https://github.com/CircleCI-Public/llm-eval-examples[[LLM-eval-examples].
+Evaluation testing determines if your evaluation results meet specified conditions. Evaluation testing results are presented in the CircleCI web app in two locations:
 
-== Storing credentials for your evaluations
-CircleCI makes it easy to store your credentials for LLM providers as well as LLMOps tools. Navigate to menu:Project Settings[LLMOps] to enter, verify, and access your OpenAI secrets. You will also find a starting template for your `config.yml` file.
+* In the step details
++
+image::llmops/eval-job-eval-test-step.png[Evaluation testing: Job Step Details]
 
-You can also save the credentials to your preferred evaluation platform, including Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that leverages the Evals orb.
+* In the tests tab. Additionally, when a test case has failed, its details are displayed.
++
+image::llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
-To get started, navigate to menu:Project Settings[LLMOps]:
+== Store credentials for your evaluations
+Store your credentials for LLM providers and LLMOps tools in CircleCI. Storing credentials in this way allows you to access them directly when configuring your pipeline.
 
-image::/docs/assets/img/docs/llmops/create-context.png[Jobs overview]
+To store your LLM provider credentials, follow these steps:
 
-image::/docs/assets/img/docs/llmops/openai-context.png[Jobs overview]
+. Navigate to menu:Project Settings[LLMOps]
+. Select btn:[Set Up] next to your chosen provider, and follow the in-app instructions.
+* When connecting an OpenAI account, you can also save the credentials for your evaluation platform, such as Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that uses the CircleCI evals orb.
+
+image::llmops/create-context.png[Project Settings > LLMOPS: Create Context Modal Window in CircleCI]
+image::llmops/openai-context.png[Project Settings > LLMOPS: View contexts in CircleCI]
 
 
