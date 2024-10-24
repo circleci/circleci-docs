@@ -134,12 +134,12 @@ CircleCI's GitHub App integration provides fine-grained permissions, uses short-
 * link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI's config suggestions bot]
 * The ability to use xref:set-up-multiple-configuration-files-for-a-project#[multiple configuration files within one project]
 
-You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.  
+You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
 
-Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI's GitHub App:
+Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI's GitHub App, consider the following:
 
-* If the motivation for moving is to leverage new functionality that is only available to the GitHub App integration, consider using your existing organization and installing the GitHub App alongside your OAuth App integration as described in our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204[community forum].
-* If the motivation is to completely remove the OAuth App, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.  If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
+* If the motivation for moving is to leverage new functionality that is only available to the GitHub App integration, consider using your existing organization and installing the GitHub App alongside your OAuth app integration as described in our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204[community forum].
+* If the motivation is to completely remove the OAuth app, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.  If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
 
 If you would like to switch from the OAuth app integration to the GitHub App integration, follow these steps:
 
