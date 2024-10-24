@@ -727,14 +727,16 @@ en:
         children:
           - name: Phase 1 AWS - Prerequisites
             link: server/latest/installation/phase-1-aws-prerequisites
-          - name: Phase 2 - Core
-            link: server/latest/installation/phase-2-core-services
+          - name: Phase 2 AWS - Core
+            link: server/latest/installation/phase-2-aws-core-services
           - name: Phase 3 - Execution
             link: server/latest/installation/phase-3-execution-environments
           - name: Phase 4 - Post-installation
             link: server/latest/installation/phase-4-post-installation
           - name: Phase 1 GCP - Prerequisites
             link: server/latest/installation/phase-1-gcp-prerequisites
+          - name: Phase 2 GCP - Core
+            link: server/latest/installation/phase-2-gcp-core-services
           - name: Hardening your cluster
             link: server/latest/installation/hardening-your-cluster
           - name: Installing server behind a proxy
