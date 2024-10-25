@@ -731,7 +731,7 @@ en:
             link: server/latest/installation/phase-2-aws-core-services
           - name: Phase 3 AWS - Execution
             link: server/latest/installation/phase-3-aws-execution-environments
-          - name: Phase 4 AWS - Post-installation
+          - name: Phase 4 AWS - Post-install
             link: server/latest/installation/phase-4-aws-post-installation
           - name: Phase 1 GCP - Prerequisites
             link: server/latest/installation/phase-1-gcp-prerequisites
@@ -739,7 +739,7 @@ en:
             link: server/latest/installation/phase-2-gcp-core-services
           - name: Phase 3 GCP - Execution
             link: server/latest/installation/phase-3-gcp-execution-environments
-          - name: Phase 4 GCP - Post-installation
+          - name: Phase 4 GCP - Post-install
             link: server/latest/installation/phase-4-gcp-post-installation
           - name: Hardening your cluster
             link: server/latest/installation/hardening-your-cluster
