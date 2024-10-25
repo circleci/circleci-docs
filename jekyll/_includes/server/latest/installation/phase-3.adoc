@@ -1097,6 +1097,12 @@ ifndef::pdf[]
 
 [#next-steps]
 == Next steps
+ifndef::env-gcp[]
+* xref:phase-4-aws-post-installation#[Phase 4 AWS: Post Installation]
+endif::env-gcp[]
 
-* xref:phase-4-post-installation#[Phase 4: Post Installation]
+ifndef::env-aws[]
+* xref:phase-4-gcp-post-installation#[Phase 4 GCP: Post Installation]
+endif::env-aws[]
+
 endif::pdf[]
