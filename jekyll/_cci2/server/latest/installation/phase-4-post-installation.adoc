@@ -17,7 +17,7 @@ Before you begin with the CircleCI server v4.7 post installation phase, ensure y
 
 * Prerequisites (xref:phase-1-aws-prerequisites#[Phase 1 AWS – Prerequisites], xref:phase-1-gcp-prerequisites#[Phase 1 GCP – Prerequisites])
 * Core services (xref:phase-2-aws-core-services#[Phase 2 AWS - Core Services Installation], xref:phase-2-gcp-core-services#[Phase 2 GCP - Core Services Installation]).
-* xref:phase-3-execution-environments#[Phase 3 - Execution Environments Installation].
+* Execuiton environments (xref:phase-3-aws-execution-environments#[Phase 3 AWS - Execution Environments Installation], xref:phase-3-gcp-execution-environments#[Phase 3 GCP - Execution Environments Installation]).
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 

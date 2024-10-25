@@ -919,8 +919,15 @@ kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 NOTE: Machine provisioner and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
 
 ifndef::pdf[]
+
 [#next-steps]
 == Next steps
+ifndef::env-aws[]
+* xref:phase-3-gcp-execution-environments#[Phase 3 GCP: Execution Environments Installation]
+endif::env-aws[]
 
-* xref:phase-3-execution-environments#[Phase 3: Execution Environments Installation]
+ifndef::env-gcp[]
+* xref:phase-3-aws-execution-environments#[Phase 3 AWS: Execution Environments Installation]
+endif::env-gcp[]
+
 endif::[]
