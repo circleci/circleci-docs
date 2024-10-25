@@ -105,7 +105,7 @@ The Slack orb is an application that executes as part of your job on CircleCI. B
 
 ==== i. Create a Slack app
 
-. Visit https://api.slack.com/apps[*Your Apps* on the Slack API website] and click the green *Create an App* button.
+. Visit https://api.slack.com/apps[*Your Apps* on the Slack API website] and select the green *Create an App* button.
 +
 image::slack-orb-create-app.png[Create a Slack app]
 +
@@ -117,7 +117,7 @@ image::slack-orb-from-scratch.png[Choose From scratch]
 +
 image::slack-orb-name-app.png[Name your Slack app]
 +
-. Click the green **Create App** button.
+. Select the green **Create App** button.
 
 [#set-your-app-permissions]
 ==== ii. Set your app permissions
@@ -130,7 +130,7 @@ image::slack-orb-permissions.png[Slack app Permissions]
 +
 image::slack-orb-add-scope.png[Add an OAuth Scope]
 +
-. Under **Bot Token Scopes**, click **Add an OAuth Scope**.
+. Under **Bot Token Scopes**, select **Add an OAuth Scope**.
 . The Slack orb needs permission to post chat messages and upload files, so create the following scopes:
 * chat:write
 * chat:write.public
@@ -138,12 +138,12 @@ image::slack-orb-add-scope.png[Add an OAuth Scope]
 +
 image::slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
 
-TIP: To receive Slack notifications in a private channel, you need to add your Slack app to that channel. Open the channel, click the photos of the channel members in the top right-hand corner, then click the *Integrations* tab. From here, you can add an app.
+TIP: To receive Slack notifications in a private channel, you need to add your Slack app to that channel. Open the channel, select the photos of the channel members in the top right-hand corner, then select the *Integrations* tab. From here, you can add an app.
 
 [#install-your-app]
 ==== iii. Install your app
 
-. Once you have created your scopes, scroll up to the top of the page and click the **Install to Workspace** button.
+. Once you have created your scopes, scroll up to the top of the page and select the **Install to Workspace** button.
 +
 image::slack-orb-install-workspace.png[Install to Workspace]
 +
@@ -151,7 +151,7 @@ image::slack-orb-install-workspace.png[Install to Workspace]
 +
 image::slack-orb-allow.png[Allow access]
 +
-. Click the disclosure triangle to double-check the permissions, then click the green **Allow** button.
+. Select the disclosure triangle to double-check the permissions, then select the green **Allow** button.
 . You should see a *Bot User OAuth Token*. Copy this token to your clipboard, ready to add it to CircleCI. Make sure you keep this private.
 +
 image::slack-orb-copy-token.png[Copy OAuth Token]
@@ -163,24 +163,24 @@ In CircleCI, contexts allow you to secure and share environment variables across
 
 In CircleCI:
 
-. Click the **Organization Settings** page.
+. Select the **Organization Settings** page.
 +
 image::slack-orb-organization-settings.png[Organization Settings]
 
-. Under Context, click the blue *Create Context* button and add a unique name, such as `slack-secrets` (that is the name specified in the `config.yml` file above).
+. Under Context, select the blue *Create Context* button and add a unique name, such as `slack-secrets` (that is the name specified in the `config.yml` file above).
 +
 image::slack-orb-create-context.png[Create Context]
 
-. Click the blue **Create Context** button.
-. Click the name of the context you just created.
-. Click the blue *Add Environment Variable* button and enter your first key value pair.
+. Select the blue **Create Context** button.
+. Select the name of the context you just created.
+. Select the blue *Add Environment Variable* button and enter your first key value pair.
 * The Environment Variable Name is `SLACK_ACCESS_TOKEN`.
 * The value is your Slack Bot User OAuth Access Token.
 +
 image::slack-orb-environment-variable.png[Add Environment Variable]
 +
-. Click the **Add Environment Variable** button to save it.
-. Click the blue **Add Environment Variable** button again.
+. Select the **Add Environment Variable** button to save it.
+. Select the blue **Add Environment Variable** button again.
 * The Environment Variable Name is `SLACK_DEFAULT_CHANNEL`.
 * The value is the ID of the default Slack channel for posting your notifications. You can override this setting in your individual jobs.
 +
@@ -210,7 +210,7 @@ You should then see a green **Success** badge and a green tick next to your `not
 +
 image::slack-orb-success.png[Success]
 
-. Click on your job to see what just happened. You should see the message body that was sent to Slack.
+. Select your job to see what just happened. You should see the message body that was sent to Slack.
 
 . Now open your Slack workspace. In the default channel you specified earlier, you should see the alert triggered by your CircleCI pipeline.
 +
