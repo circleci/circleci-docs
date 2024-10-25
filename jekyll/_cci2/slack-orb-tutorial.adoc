@@ -50,7 +50,7 @@ orbs:
 jobs:
   notify:
     docker:
-      - image: 'cimg/base:stable'
+      - image: cimg/base:current
     steps:
       - slack/notify:
           custom: |
@@ -239,7 +239,7 @@ To use these templates in your job, include the `event` and `template` parameter
 jobs:
   notify:
     docker:
-      - image: 'cimg/base:stable'
+      - image: cimg/base:current
     steps:
 - slack/notify:
 	  event: fail
