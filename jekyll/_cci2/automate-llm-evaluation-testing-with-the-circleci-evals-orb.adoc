@@ -42,7 +42,7 @@ image::eval-test-diagram-concepts.png[Evaluation testing: Concepts diagram]
 == Prerequisites
 
 * A CircleCI account connected to your code. You can sign up xref:first-steps#[for free].
-* A CircleCI project with a workflow configured to build your code
+* A CircleCI project with a workflow configured to build your code.
 * CircleCI xref:/contexts#[contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
 * Existing LLM evaluations on a open source library or third-party tools such as Braintrust or Langsmith.
 
