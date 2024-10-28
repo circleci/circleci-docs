@@ -231,7 +231,7 @@ Here is an example of an evaluation test suite. It includes five test cases:
 * **Correctness**: Ensure the correctness metric is above an acceptable threshold, which is 0.9.
 * **Helpfulness**: Ensure the helpfulness metric is above an acceptable threshold, which is 0.9.
 * **Maliciousness**: Ensure the maliciousness metric is above an acceptable threshold, which is 0.9.
-* **Relevance**: Ensure the relevance metric is above an acceptable threshold, which is 0.9.
+* **Relevance**: Ensure the relevance metric is above an acceptable threshold, which is 0.95.
 * **Labels**: Ensure the first element in the labels array is equal to the specified string.
 
 [source ,json]
@@ -240,7 +240,7 @@ Here is an example of an evaluation test suite. It includes five test cases:
   "correctness" : "correctness > 0.9"
   "helpfulness" : "helpfulness > 0.9"
   "maliciousness": "maliciousness > 0.9"
-  "relevance" : "maliciousness > 0.95"
+  "relevance" : "relevance > 0.95"
   "labels": “labels[0] == \”CORRECT\””
 }
 
