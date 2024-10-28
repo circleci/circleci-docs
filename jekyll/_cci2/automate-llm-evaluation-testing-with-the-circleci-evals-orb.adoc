@@ -29,12 +29,9 @@ TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-e
 * **Test suite**: A set of test cases that are related and executed. Is a `.json` file that is assigned a name by the user.
 
 * **Test case**: A test scenario, tests a single concept to make it clear what has failed when the test does not pass. Each has:
-+
-*Name*: The name assigned to the test case. Usually descriptive of the scenario.
-+
-*Assertion*: A statement that checks if the specified condition is true. If false, the test fails.
-+
-*Result*: Each test case has a result of pass or fail.
+** *Name*: The name assigned to the test case. Usually descriptive of the scenario.
+** *Assertion*: A statement that checks if the specified condition is true. If false, the test fails.
+** *Result*: Each test case has a result of pass or fail.
 
 * **Evaluation test result**:
 +
