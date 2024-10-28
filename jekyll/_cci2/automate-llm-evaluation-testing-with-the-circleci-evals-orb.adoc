@@ -164,7 +164,7 @@ image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job S
 +
 image::llmops/eval-job-eval-test-step.png[Evaluation testing: Job Step Details]
 
-* The step details will display results for all assertions
+* The tests tab will surface failed evaluation tests
 +
 image::llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
