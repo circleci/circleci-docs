@@ -228,7 +228,7 @@ Here is an example of an evaluation test suite. It includes 5 test cases:
 
 == 7. Review results in CircleCI’s web app
 
-Here’s an overview of the information you can expect to see in CircleCI’s web app when running a workflow with an evaluation job.
+Here is an overview of the information you can expect to see in CircleCI’s web app when running a workflow with an evaluation job.
 
 *Evaluation results*
 
