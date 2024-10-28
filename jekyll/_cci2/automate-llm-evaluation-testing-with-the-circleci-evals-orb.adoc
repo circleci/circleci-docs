@@ -206,7 +206,7 @@ Here is an example of evaluation results `eval-results.json` provided to CircleC
 
 === Example evaluation test
 
-Here is an example of an evaluation test suite. It includes 5 test cases:
+Here is an example of an evaluation test suite. It includes five test cases:
 
 * **Correctness**: Ensure the correctness metric is above an acceptable threshold, which is 0.9.
 * **Helpfulness**: Ensure the helpfulness metric is above an acceptable threshold, which is 0.9.
