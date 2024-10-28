@@ -63,7 +63,7 @@ orbs:
   evals: circleci/evals@2.0.0
 ----
 
-== 2. Add and define an eval job
+== 2. Add and define an evaluation job
 
 Define a new job to run your LLM evaluations, save evaluation results and test them. It is important to include the step to save your evaluation results in order to run evaluation testing.
 
