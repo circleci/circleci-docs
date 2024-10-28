@@ -26,7 +26,7 @@ TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-e
 
 * **Evaluation test**: A test that determines if input metrics meet specified conditions.
 
-* **Test suite**: A set of test cases that are related and executed. Is a .json file that is assigned a name by the user.
+* **Test suite**: A set of test cases that are related and executed. Is a `.json` file that is assigned a name by the user.
 
 * **Test case**: A test scenario, tests a single concept to make it clear what has failed when the test does not pass. Each has:
 +
