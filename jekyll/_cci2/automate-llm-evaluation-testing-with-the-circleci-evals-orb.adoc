@@ -114,7 +114,7 @@ Given metrics from `eval-results.json`:
 
 Below are example test cases and a demonstration of link:https://cel.dev/[Common Expression Language] (CEL) usage.
 
-* For test case names we suggest assigning a name based on the test scenario. For example, using the name of an input metric: “`correctness`” or “`toxicity`.”
+* For test case names we suggest assigning a name based on the test scenario. For example, using the name of an input metric: `correctness` or `toxicity`.
 
 [source ,json]
 ----
