@@ -92,7 +92,7 @@ jobs:
 
 * In the `.json` file you just created, define your test cases.
 * Each test case is composed of a name and an assertion. 
-* For test case names we suggest assigning a name based on the test scenario. For example, using the name of a metric: “`correctness`” or “`toxicity`.”
+* For test case names we suggest assigning a name based on the test scenario. For example, using the name of a metric: `correctness` or `toxicity`.
 * Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
 
 === Test case examples
