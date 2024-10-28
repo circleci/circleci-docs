@@ -34,10 +34,8 @@ TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-e
 ** *Result*: Each test case has a result of pass or fail.
 
 * **Evaluation test result**:
-+
-*Failure* indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
-+
-*Success* indicates that model performance has met set criteria, the job continues to run.
+** *Failure* indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
+** *Success* indicates that model performance has met set criteria, the job continues to run.
 
 image::eval-test-diagram-concepts.png[Evaluation testing: Concepts diagram]
 
