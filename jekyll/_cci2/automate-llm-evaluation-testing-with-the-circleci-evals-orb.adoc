@@ -134,7 +134,7 @@ Below displays a template, demonstrating that a test case is composed of a name 
 }
 ----
 
-== 5. Add eval job to a workflow
+== 5. Add your evaluation job to a workflow
 
 Define a new workflow, or use an existing one. Add your newly defined job to the workflow. Under your job, specify the relevant contexts needed to run the tasks in your job.
 
