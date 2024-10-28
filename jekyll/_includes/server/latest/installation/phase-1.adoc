@@ -62,10 +62,13 @@ NOTE: **Installing server locally?** you can skip this step, but you should ensu
 
 If you are installing server in the cloud, either AWS or GCP, you will need to create a new virtual private cloud (VPC).
 
-Refer to the AWS or GCP guides, as follows:
+ifndef::env-gcp[]
+Refer to the link:https://docs.aws.amazon.com/eks/latest/userguide/creating-a-vpc.html[AWS guide to creating a VPC].
+endif::env-gcp[]
 
-* link:https://docs.aws.amazon.com/eks/latest/userguide/creating-a-vpc.html[Create a VPC - AWS]
-* link:https://cloud.google.com/vpc/docs/create-modify-vpc-networks#console[Create a VPC - GCP]
+ifndef::env-aws[]
+Refer to thelink:https://cloud.google.com/vpc/docs/create-modify-vpc-networks#console[GCP guide to creating a VPC].
+endif::env-aws[]
 
 [#vpc-cluster-sizing-recommendations]
 === VPC and cluster sizing recommendations
@@ -83,7 +86,7 @@ For high availability, and to avoid potential outages, you should provision subn
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. There are instructions for creating an EKS or GKE cluster below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. There are instructions for creating a cluster below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
 
 [#cluster-requirements]
 === Cluster requirements

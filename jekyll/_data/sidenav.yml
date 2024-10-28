@@ -723,7 +723,7 @@ en:
             link: server/latest/overview/circleci-server-overview
           - name: Release notes
             link: server/latest/overview/release-notes
-      - name: Server v4.6 installation
+      - name: Server v4.7 installation
         children:
           - name: Phase 1 AWS - Prerequisites
             link: server/latest/installation/phase-1-aws-prerequisites

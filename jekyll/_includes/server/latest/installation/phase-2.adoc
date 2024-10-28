@@ -1,4 +1,12 @@
-Before you begin with the CircleCI server v4.7 core services installation phase, ensure all prerequisites are met, as described in the xref:phase-1-aws-prerequisites#[Phase 1 - AWS Prerequisites] or xref:phase-1-gcp-prerequisites#[Phase 1 - GCP Prerequisites] sections.
+Before you begin with the CircleCI server v4.7 core services installation phase, ensure all prerequisites are met, as described in the following page:
+
+ifndef::env-gcp[]
+* xref:phase-1-aws-prerequisites#[Phase 1 - AWS Prerequisites]
+endif::env-gcp[]
+
+ifndef::env-aws[]
+* xref:phase-1-gcp-prerequisites#[Phase 1 - GCP Prerequisites]
+endif::env-aws[]
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -163,7 +171,7 @@ keyset:
 === d. PostgreSQL
 
 [#postgres-credentials]
-==== Credentials
+==== i. Credentials
 The application requires a Kubernetes Secret containing PostgreSQL credentials.  This is true when using either the internal (default) or an externally hosted instance of PostgreSQL. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
 [.tab.postgres.You_create_Secret]
@@ -201,7 +209,7 @@ postgresql:
 --
 
 [#postgres-tls]
-==== TLS
+==== ii. TLS
 PostgreSQL may be extended to use TLS encrypted traffic. When deployed internally, this option is disabled by default but may be enabled by adding the following to your PostgreSQL block of your `values.yaml`
 
 [source,yaml]
@@ -387,15 +395,14 @@ global:
 ----
 
 
-[#static-ips]
-=== i. Static IP addresses
-If you provisioned a Static IP (GCP) or Elastic IP addresses (AWS) in the prerequisites, you can now add the values under the nginx block.
-
 // Don't show in AWS page
 ifndef::env-aws[]
 
 [#gcp-add-static-ip]
-==== GCP - add static IP address
+=== i. Add static IP address
+
+If you provisioned a Static IP (GCP) in the prerequisites, you can now add the value under the nginx block.
+
 For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
 
 [source,yaml]
@@ -412,9 +419,11 @@ endif::env-aws[]
 ifndef::env-gcp[]
 
 [#aws-add-elastic-ip]
-==== AWS - add Elastic IP addresses
-For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. The number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
+=== i. Add Elastic IP addresses
 
+If you provisioned an Elastic IP addresses (AWS) in the prerequisites, you can now add the values under the nginx block.
+
+For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. The number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
 
 [source,yaml]
 ----
@@ -514,7 +523,7 @@ You can choose to disable TLS termination within CircleCI. The system will still
 To configure GitHub with CircleCI, there are two options for providing credentials to the deployment. Steps for both GitHub and GitHub Enterprise (GHE) are given in the next two sections.
 
 [#github]
-==== GitHub
+==== i. GitHub
 These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your GitHub OAuth application in the prerequisites phase (xref:phase-1-aws-prerequisites#create-a-new-github-oauth-app[AWS], xref:phase-1-gcp-prerequisites#create-a-new-github-oauth-app[GCP]).
 
 [.tab.github.You_create_Secret]
@@ -544,7 +553,7 @@ github:
 --
 
 [#github-enterprise-integration]
-==== GitHub Enterprise
+==== ii. GitHub Enterprise
 
 The instructions for GitHub Enterprise are similar, with a few extra steps to enable Enterprise and create the required default token.
 
@@ -595,7 +604,13 @@ github:
 [#object-storage]
 === l. Object storage
 
-Regardless of your storage provider, the bucket name you created during the prerequisites phase (xref:phase-1-aws-prerequisites#object-storage-and-permissions[AWS], xref:phase-1-gcp-prerequisites#object-storage-and-permissions[GCP])  will need to be included.
+ifndef::env-gcp[]
+Regardless of your storage provider, the bucket name you xref:phase-1-aws-prerequisites#object-storage-and-permissions[created during the prerequisites phase] will need to be included.
+endif::env-gcp[]
+
+ifndef::env-aws[]
+Regardless of your storage provider, the bucket name you xref:phase-1-gcp-prerequisites#object-storage-and-permissions[created during the prerequisites phase] will need to be included.
+endif::env-aws[]
 
 [source,yaml]
 ----
