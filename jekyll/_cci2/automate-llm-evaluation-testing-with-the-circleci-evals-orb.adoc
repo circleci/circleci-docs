@@ -75,7 +75,7 @@ jobs:
       - image: cimg/python:stable
     steps:
       # Add an evaluation step
-      # - run: <your eval step> # Run evals and output results for the evaluation test
+      - run: <your eval step> # Run evals and output results for the evaluation test
       - evals/test: # Invoke evaluation test
           name: Run Evaluation Test
           assertions: <your path to .json evaluation test suite> # Replace with your path
