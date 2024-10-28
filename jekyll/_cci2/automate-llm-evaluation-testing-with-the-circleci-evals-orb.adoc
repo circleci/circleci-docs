@@ -151,7 +151,7 @@ workflows:
 == 6. Examples
 
 === Example pipeline configuration
-Here’s an example of a pipeline configuration set up with the Eval orb and job. In the following pipeline configuration example, the job `eval-test` will:
+Here’s an example of a pipeline configuration set up with the CircleCI evals orb and job. In the following pipeline configuration example, the job `eval-test` will:
 
 * Checkout the project repository
 * Run LLM evaluations and store the results
