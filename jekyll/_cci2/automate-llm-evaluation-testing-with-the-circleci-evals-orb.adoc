@@ -71,7 +71,7 @@ Define a new job to run your LLM evaluations, save evaluation results and test t
 ----
 jobs:
   eval-test:
-    docker: 
+    docker:
       - image: cimg/python:stable
     steps:
       # Add an evaluation step
@@ -91,7 +91,7 @@ jobs:
 == 4. Define test cases
 
 * In the `.json` file you just created, define your test cases.
-* Each test case is composed of a name and an assertion. 
+* Each test case is composed of a name and an assertion.
 * For test case names we suggest assigning a name based on the test scenario. For example, using the name of a metric: `correctness` or `toxicity`.
 * Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
 
@@ -185,7 +185,7 @@ orbs:
 
 jobs:
   eval-test:
-    docker: 
+    docker:
       - image: cimg/python:stable
 	steps:
 		- checkout # Checkout project repository
@@ -200,7 +200,7 @@ workflows:
     jobs:
       - eval-test
           context:
-            - openai-4o 
+            - openai-4o
 ----
 
 
