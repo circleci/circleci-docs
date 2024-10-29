@@ -165,7 +165,7 @@ The following settings are available in the project settings page. If you do not
 
 **Triggers**: Depending on your integration type, the triggers page shows either a list of configured xref:pipelines#pipelines-and-triggers[pipeline triggers], or, if you have access to scheduled pipelines, you can set those up here. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-**Releases**: A UI for managing and viewing releases. Setup and manage environment integrations, setup components. For full information on releases features, start with the xref:/release/releases-overview#[Releases overview] page.
+**Releases**: A UI for managing and viewing releases. Setup and manage environment integrations, setup components. For full information on releases features, start with the xref:release/releases-overview#[Releases overview] page.
 
 **Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
 
