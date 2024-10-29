@@ -22,11 +22,11 @@ You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/
 jobs:
   build:
     macos:
-      xcode: 14.2.0
+      xcode: 15.4.0
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 14.2.0 installed
+      # with Xcode 15.4.0 installed
       - run: xcodebuild -version
 ```
 

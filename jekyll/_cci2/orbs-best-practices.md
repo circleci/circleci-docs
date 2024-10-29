@@ -50,7 +50,7 @@ Create detailed descriptions that fully explain the benefit and usage of the orb
 #### Ensure your orb-publishing context is restricted
 {: #ensure-your-orb-publishing-context-is-restricted }
 
-If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/contexts/#restricting-a-context) guide.
+If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/contexts/#restrict-a-context) guide.
 
 ## Structure
 {: #structure }
@@ -271,7 +271,7 @@ steps:
 
 When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually enter a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, for example, if you were using a [context](/docs/contexts) to store your AWS metadata for multiple projects.
 
-CircleCI ships with the [envsubst](/env-vars/#environment-variable-substitution) CLI built in, which allows us to evaluate environment variables in strings.
+CircleCI ships with the [envsubst](/docs/env-vars/#environment-variable-substitution) CLI built in, which allows us to evaluate environment variables in strings.
 
 ```yaml
 parameters:

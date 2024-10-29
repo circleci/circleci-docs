@@ -345,7 +345,7 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 [#test-splitting]
 == Test splitting
 
-The CircleCI CLI is used for some advanced features during job runs, for example xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[test splitting] for build time optimization.
+The CircleCI CLI is used for some advanced features during job runs, for example xref:use-the-circleci-cli-to-split-tests#[test splitting] for build time optimization.
 
 [#context-management]
 == Context management

@@ -66,7 +66,7 @@ to learn more about Identity and Access Management (IAM) permissions.
 [#authenticate-to-google-container-registry]
 == 3. Authenticate to Google Container Registry
 
-Depending on the <<installing-the-google-cloud-sdk,base Docker image you chose>>, you may have to authenticate to the Google Container Registry.
+Depending on the <<install-the-google-cloud-sdk,base Docker image you chose>>, you may have to authenticate to the Google Container Registry.
 
 [,yaml]
 ----

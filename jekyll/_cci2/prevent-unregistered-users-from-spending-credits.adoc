@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-It is possible for _unregistered_ users to trigger pipelines, and therefore, spend credits. Use the **Prevent unregistered user spend** option to only allow registered users the ability to trigger work that consumes credits. For a full breakdown of the various ways pipelines can be triggered, see the xref:triggers-overview[Triggers overview].
+It is possible for _unregistered_ users to trigger pipelines, and therefore, spend credits. Use the **Prevent unregistered user spend** option to only allow registered users the ability to trigger work that consumes credits. For a full breakdown of the various ways pipelines can be triggered, see the xref:triggers-overview#[Triggers overview].
 
 [NOTE]
 ====

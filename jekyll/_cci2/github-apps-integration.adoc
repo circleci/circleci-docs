@@ -39,8 +39,6 @@ Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to conn
 When you create a new organization, you will be guided to start creating projects, as follows:
 
 . The first project you create will prompt you to install the CircleCI GitHub App in a GitHub organization.
-+
-CAUTION: **If your GitHub organization has more than 100 repositories**, select the "Only select repositories" option when installing the GitHub App. There is a known issue where GitHub organizations with more than 100 repositories cannot view their repositories in CircleCI if they select the "All repositories" option when installing the CircleCI GitHub App.
 . After installing the GitHub App, you will select a repository to use for your project's first pipeline.
 . CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
 . If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`).
@@ -76,11 +74,14 @@ Manually triggering a pipeline from the CircleCI web app is not available at thi
 [#project-settings]
 == Project settings
 
-Within CircleCI, a project can have one or more **configurations**, which are pipeline definitions. _Configurations_ include, but are not limited to, a `.circleci/config.yml` file in your repository.
+Within CircleCI, a project can have one or more **Pipelines**. Each pipeline is defined by two key characteristics:
 
-A project can have one or more **triggers**, which are events from a source of change. _Triggers_ include, but are not limited to, a Version Control System (VCS). A trigger determines which configuration should be used to start a pipeline.
+* A configuration file, which is stored in a repository referred to as _config source_, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used.
+* A checkout source, which determines which repository will be checked out when running a xref:configuration-reference#checkout[checkout step]. This model allows your CircleCI config to be stored in a different repository from your code.
 
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab and GitHub App integrations.
+Each pipeline can have zero or many **triggers**, which are events that cause a pipeline to run.
+
+The following settings are found by clicking the **Project Settings** button within your project.
 
 [#people]
 === People
@@ -93,10 +94,10 @@ Project roles give control over which users have access to which projects within
 
 For a complete list of permissions, see the xref:roles-and-permissions-overview#[Roles and permissions overview] page.
 
-[#configuration]
+[#pipelines-and-triggers]
 === Pipelines and triggers
 
-You can add or delete pipelines and triggers for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
+You can add or delete pipelines for your project. For details see the xref:pipelines#pipelines-and-triggers[pipelines overview].
 
 [#project-settings-advanced]
 === Advanced
@@ -136,12 +137,10 @@ CircleCI's GitHub App integration provides fine-grained permissions, uses short-
 
 You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
 
-Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI's GitHub App:
+Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI's GitHub App, consider the following:
 
-* Confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.
-* If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
-
-If you cannot move your organization because of missing functionality, link:https://docs.google.com/forms/d/e/1FAIpQLSfnYhFLjmZ0OP8goemexAvgHDPJqgHyDF1QiIl2HdPktTKvlQ/viewform[tell us why].
+* If the motivation for moving is to leverage new functionality that is only available to the GitHub App integration, consider using your existing organization and installing the GitHub App alongside your OAuth app integration as described in our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204[community forum].
+* If the motivation is to completely remove the OAuth app, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.  If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
 
 If you would like to switch from the OAuth app integration to the GitHub App integration, follow these steps:
 
@@ -241,7 +240,7 @@ The Only Build Pull Requests option (usually available in menu:Project Settings[
 [#github-checks]
 === GitHub checks
 
-xref:enable-checks/[GitHub checks] are currently not supported.
+xref:enable-checks#[GitHub checks] are currently not supported.
 
 [#rerun-workflow-from-failed-commit-status]
 === Known limitation: commit status when using "rerun workflow from failed"

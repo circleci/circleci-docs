@@ -108,4 +108,4 @@ See [our support article for more information](https://support.circleci.com/hc/e
 {: #see-also }
 
 
-[Running Docker Commands]({{site.baseurl}}/building-docker-images/#mounting-folders)
+[Running Docker Commands]({{site.baseurl}}/building-docker-images/)

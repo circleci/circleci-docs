@@ -9,7 +9,7 @@ Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs
 circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
 
-WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a link:https://support.circleci.com/hc/en-us[support ticket].
+WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, you can create a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#protect-users-api-tokens]
 === How do I protect a user's API tokens and other sensitive information?

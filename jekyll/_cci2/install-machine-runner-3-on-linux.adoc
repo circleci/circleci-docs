@@ -48,7 +48,15 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
 {% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
 
 [#install-circleci-runner]
 == 2. Install CircleCI runner
@@ -63,12 +71,10 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 {% include snippets/machine-runner-example.adoc %}
 
-The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
-
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
 
 [#additional-resources]
 == Additional resources

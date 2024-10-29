@@ -65,7 +65,7 @@ TIP: *Arm on Docker* For pricing information, and a list of CircleCI Docker conv
 
 For *Arm* architecture the equivalent Arm VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also.
 
-For a full list of available Arm VM resource classes see the xref:configuration-reference#arm-execution-environment[Configuration Reference].
+For a full list of available Arm VM resource classes see the xref:configuration-reference#arm-execution-environment-linux[Configuration Reference].
 
 === CircleCI server
 For CircleCI server installations, contact the systems administrator for specifications.
