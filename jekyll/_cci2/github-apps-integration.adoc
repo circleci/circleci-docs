@@ -39,8 +39,6 @@ Follow the steps on the xref:first-steps#[Sign up and try CircleCI] page to conn
 When you create a new organization, you will be guided to start creating projects, as follows:
 
 . The first project you create will prompt you to install the CircleCI GitHub App in a GitHub organization.
-+
-CAUTION: **If your GitHub organization has more than 100 repositories**, select the "Only select repositories" option when installing the GitHub App. There is a known issue where GitHub organizations with more than 100 repositories cannot view their repositories in CircleCI if they select the "All repositories" option when installing the CircleCI GitHub App.
 . After installing the GitHub App, you will select a repository to use for your project's first pipeline.
 . CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
 . If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`).
