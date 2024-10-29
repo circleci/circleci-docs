@@ -4,7 +4,7 @@ title: macOS アプリケーションのテスト
 short-title: macOS アプリケーションのテスト
 categories:
   - プラットフォーム
-description: macOS アプリケーションのテスト
+description: macOS アプリケーションのテスト.
 order:
 ---
 
@@ -17,7 +17,11 @@ order:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、 macOS Executor 上での macOS アプリのテストをサポートしており、この設定を fastlane と macOS のアクセス許可 Orb を使って迅速かつ簡単に行うことができます。
+CircleCIでは、以下での macOS アプリのテストに対応しています。
+
+- macOS Executor
+- Fastlane
+- macOS permissions orb
 
 macOS アプリの自動テストを設定することで、様々なバージョンの macOS に対してアプリを簡単にテストすることができ、開発パイプラインに自動化を導入することができます。
 
@@ -39,9 +43,9 @@ System Integrity Protection (SIP: システム整合性保護) が有効な状�
 
 macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
-詳細については、 [サポートされている Xcode バージョン]({{ site.baseurl }}/ja/testing-ios/#supported-xcode-versions) のリストを参照してください。
+詳細については、 [サポートされている Xcode バージョン](/ja/testing-ios/#supported-xcode-versions) のリストを参照してください。
 
-Xcode Cross Compilation にご興味がある方は、[こちら]({{site.baseurl}}/ja/using-macos/#xcode-cross-compilation)をご覧ください。
+Xcode Cross Compilation にご興味がある方は、[こちら](/ja/using-macos/#xcode-cross-compilation)をご覧ください。
 
 ## macOS UI テストプロジェクトの設定
 {: #setting-up-a-macos-ui-test-project }
@@ -66,7 +70,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -83,9 +87,11 @@ workflows:
 ### fastlane の設定
 {: #configuring-fastlane }
 
-fastlane を使うと、長い Xcode コマンドを手動で呼び出す代わりに、シンプルな設定ファイルを書くだけで macOS アプリのテストを開始することができます。 fastlane により、macOS アプリのビルド、署名 (テスト用)、テストが可能です。 なお、fastlane を使用する場合、設定されたアクションによっては、 二要素認証 (2FA) を設定する必要がある場合があります。 詳細については、[fatlane のドキュメント](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) を参照してください。
+fastlane を使うと、長い Xcode コマンドを手動で呼び出す代わりに、シンプルな設定ファイルを書くだけで macOS アプリのテストを開始することができます。 fastlane により、macOS アプリのビルド、署名 (テスト用)、テストが可能です。 なお、fastlane を使用する場合、設定されたアクションによっては、 二要素認証 (2FA) を設定する必要がある場合があります。
 
-以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント]({{ site.baseurl }}/ja/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
+詳細については、[fatlane のドキュメント](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) を参照してください。
+
+以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント](/docs/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
 
 ```ruby
 # fastlane/Fastfile
@@ -126,7 +132,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -161,7 +167,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -191,7 +197,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -211,7 +217,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -233,7 +239,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/delete-permission:

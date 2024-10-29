@@ -12,7 +12,10 @@ contentTags:
 ## Introduction
 {: #introduction }
 
-This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to the GitHub app. **The GitHub checks integration feature is not currently available on CircleCI server**.
+The GitHub Checks feature is not currently supported for projects that have integrated with the CircleCI GitHub App. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
+{: class="alert alert-info" }
+
+This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to GitHub user interface. **The GitHub checks integration feature is not currently available on CircleCI server**.
 
 GitHub Checks provides you with workflow status messages and gives the option to rerun workflows from the GitHub Checks page.
 
@@ -32,6 +35,9 @@ GitHub Checks should not be confused with GitHub status updates:
 * GitHub status updates are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_.
 
 If both these features are enabled, in a GitHub PR view the Checks tab will show workflow status and the Checks section in the PR conversation view will show job status.
+
+If you are using GitHuck Checks or GitHub Status updates with the [skip jobs feature](/docs/skip-build/#skip-jobs),
+the status of the skipped builds will not be reported even though the checks will be created in GitHub.
 
 ## Prerequisites
 {: #prerequisites }

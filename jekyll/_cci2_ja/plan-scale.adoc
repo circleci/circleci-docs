@@ -26,14 +26,14 @@ Scaleプランでは、Free プランや Performanceプランに加えて以下�
 
 IP アドレスの範囲機能により、制限された環境へのアクセスを IP アドレスに基づいて設定することができます。 この機能を有効にしたジョブのトラフィックは、ジョブの実行の際は指定したいずれかの IP アドレスを使用するようになります (この IP アドレスの範囲機能は Performance プランでも Scale プランでも同じです)。
 
-この機能に関する詳細は、<<ip-ranges#,IP アドレスの範囲>> のページをご覧ください。
+この機能に関する詳細は、xref:ip-ranges#[IP アドレスの範囲] のページをご覧ください。
 
 [#access-to-all-resource-classes]
 === すべてのリソースクラスの利用
 
 Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイズをご利用いただけます。 コンピューティングタイプや実行環境別の追加リソースクラスを使用すると、CPU およびメモリの上限を拡大することが可能です。
 
-これらのリソースに関する詳細は、<<executor-intro#,Executors と イメージ>> のページをご覧ください。
+これらのリソースに関する詳細は、xref:executor-intro#[Executors と イメージ] のページをご覧ください。
 
 [#custom-concurrency]
 === 同時実行数のカスタマイズ
@@ -53,16 +53,17 @@ Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイ�
 [#custom-storage-retention]
 === ストレージ保存期間のカスタマイズ
 
-https://app.circleci.com/[CircleCI Web アプリ]では、アーティファクト、ワークスペース、キャッシュプロジェクトのストレージ保存期間のカスタマイズが可能です。 これにより、それぞれのオブジェクトタイプの保存方法をお客様のプロジェクトに最適な方法に設定することができます。 ストレージ保存期間を短くすると、月々のコストを下げることができます。
+link:https://app.circleci.com/[CircleCI Web アプリ]では、アーティファクト、ワークスペース、キャッシュプロジェクトのストレージ保存期間のカスタマイズが可能です。 これにより、それぞれのオブジェクトタイプの保存方法をお客様のプロジェクトに最適な方法に設定することができます。 ストレージ保存期間を短くすると、月々のコストを下げることができます。
 
 [#additional-support-options]
 === サポートオプションの追加
 
-拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Scale プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
+拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Scale プランでは、 link:https://discuss.circleci.com/[コミュニティフォーラム]、 link:https://support.circleci.com/hc/ja[サポートポータル]、および link:https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
 [#circleci-features]
 == CircleCI の機能
 
-上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は https://circleci.com/ja/pricing/[料金設定]のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、 https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能] のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
+上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
+link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
 {% include snippets/ja/features-of-circleci.adoc %}

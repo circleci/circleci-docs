@@ -1,17 +1,12 @@
 ---
 layout: classic-docs
 title: "コンテナ ID をホスト ID にマップできないエラーのデバッグ"
-short-title: "コンテナ ID をホスト ID にマップできないエラーのデバッグ"
 description: "コンテナの起動時に「コンテナ ID XXX をホスト ID にマップできません」というエラーが発生した場合のデバッグ"
-categories:
-  - トラブルシューティング
-order: 21
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 コンテナの起動時に、以下のエラー メッセージが表示されることがあります。

@@ -1,22 +1,18 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
-= CircleCI Plan Overview
+= CircleCI plan overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document is an introduction to the plans CircleCI offers to developers.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-This document is an introduction to the plans CircleCI offers to developers. 
-
-NOTE: If you are an existing customer currently on the legacy CircleCI Container-based plan, you may want to consider consulting the document on using xref:containers#[containers]. If you want to switch from using containers to using credits, please link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket] requesting to do so.
+This document is an introduction to the plans CircleCI offers to developers.
 
 [#overview]
 == Overview
@@ -25,11 +21,11 @@ The CircleCI credit-based usage plans enable you to only pay for what you use, w
 The right plan for you and your team will depend on several factors:
 
 - How many users are on your team
-- How much support you need (community and free support, standard support, or premium support)
+- How much link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response-Timings[support] you need (community and free support, standard support, or premium support)
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-Let's look at how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need less resources from a CI/CD configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
+Let us look at how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need less resources from a CI/CD configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
 
 For example, your team might use a `large` `resource_class` (4 CPUs and 8 GB of memory) and make use of more credits/minute to speed up a build for a bigger project, while only using the `small` `resource_class` (1 CPU, 2 GB memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
 
@@ -46,8 +42,10 @@ Visit the pages below to learn about the features of CircleCI's plans.
 
 [#configuring-your-credit-plan]
 == Configuring your credit plan
-To set up a Free or Performance plan, go to **Plan > Plan Overview** in the CircleCI link:https://app.circleci.com/[web application]. From there, select the plan that best fits your needs. To set up a Scale or Server plan, link:https://circleci.com/talk-to-us/[contact us].
+To set up a Free or Performance Plan, go to **Plan > Plan Overview** in the CircleCI link:https://app.circleci.com/[web application]. From there, select the plan that best fits your needs. To set up a Scale or Server Plan, link:https://circleci.com/talk-to-us/[contact us].
+
+For details on cancelling a Performance Plan, refer to the xref:faq#cancel-performance-plan[Cancel Performance Plan FAQ].
 
 [#managing-credit-usage]
 == Managing credit usage
-There are certain optimizations that can be implemented that can help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the xref:persist-data#[Persisting data] page.
+There are certain optimizations that can be implemented that can help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:persist-data#[Persisting data] page.

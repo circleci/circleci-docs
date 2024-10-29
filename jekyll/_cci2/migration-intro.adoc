@@ -9,24 +9,21 @@ contentTags:
 :page-liquid:
 :page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+
+TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
 
 CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization since the company's founding over a decade ago. On top of the features you would expect from any CI/CD tool, what sets CircleCI apart are the following productivity-boosting features:
 
-1. **Advanced Caching** - On top of xref:caching#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:docker-layer-caching#[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
-2. **SSH Into Builds** - CircleCI offers the ability to xref:ssh-access-jobs#[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
-3. **Resource Classes** - You can use various different xref:optimizations#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
-4. **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[splitting workloads] between different containers.
+. **Advanced Caching** - On top of xref:caching#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:docker-layer-caching#[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
+. **SSH Into Builds** - CircleCI offers the ability to xref:ssh-access-jobs#[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
+. **Resource Classes** - You can use various different xref:optimizations#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
+. **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#how-test-splitting-works[splitting workloads] between different containers.
 
-https://circleci.com/signup/[Sign up for a free account today], or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
-
-You can also enroll in the link:https://academy.circleci.com/arm-course?access_code=public-2021[migrations course] with CircleCI Academy to learn more about migrating to CircleCI.
-
-NOTE: If you have Premium or Advanced Support, please reach out to mailto:customersuccess@circleci.com[customersuccess@circleci.com] for a more tailored migration plan with Gantt charts, custom trainings etc.
+https://circleci.com/signup/[Sign up for a free account today].
 
 [#project-migration-methodology]
 == Project migration methodology
@@ -61,17 +58,17 @@ Take stock of the current landscape, and understand the differences between Circ
 
 Some things consider during this phase:
 
-- <<orbs-intro,#Orbs>> as an alternative to, for example, Jenkins Plugins
-- CircleCI YAML <<configuration-reference#,Configuration Reference>>
-- <<executor-intro#,Execution Environments>>
-- <<collect-test-data#,Testing>>
+- xref:orb-intro#[Orbs] as an alternative to, for example, Jenkins Plugins
+- CircleCI YAML xref:configuration-reference#[Configuration Reference]
+- xref:executor-intro#[Execution Environments]
+- xref:collect-test-data#[Testing]
 
 [#planning-phase]
 ==  Planning phase
 
-Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the <<first-steps#,Sign Up and Try CircleCI>> page.
+Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:first-steps#[Sign Up and Try CircleCI] page.
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/server-3-install-prerequisites/[here].
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described xref:server/latest/installation/phase-1-prerequisites#[here].
 
 [#preparation-phase]
 == Preparation phase
@@ -139,7 +136,7 @@ In the following sections we provide helpful guides and tips for migrating your 
 * <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
 * <<migrating-from-buildkite#,Migrate from Buildkite>>
 * <<migrating-from-gitlab#,Migrate from GitLab>>
-* <<migrating-from-github#,Migrate from Github Actions>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
 * <<migrating-from-jenkins#,Migrate from Jenkins>>
 * <<migrating-from-teamcity#,Migrate from TeamCity>>
 * <<migrating-from-travis#,Migrate from Travis CI>>

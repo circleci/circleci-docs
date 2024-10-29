@@ -1,0 +1,89 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.4+
+---
+= OIDC tokens with custom claims
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn about the capabilities to customize claims in OIDC tokens.
+:icons: font
+:experimental:
+
+Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI CLI, and customize the `aud` claim to meet the unique needs of different cloud services.
+
+For more information on OIDC token, see the xref:openid-connect-tokens#[OpenID Connect tokens] overview.
+
+[#create-oidc-token-in-a-job-with-custom-claims]
+== Create OIDC token in a job with custom claims
+
+CircleCI allows you to create OIDC tokens in a job. Using this method you can:
+
+* Customize the `aud` claim. Only the `aud` claim is customizable.
+* Create one or more OIDC tokens in a job.
+
+Use the CircleCI CLI in a `step` to create your customized token, as follows:
+
+NOTE: The `circleci run oidc` commands cannot be run locally via the CLI, only within a job in your CircleCI configuration.
+
+[source,shell]
+----
+circleci run oidc get --claims '{"aud": "audience_name"}'
+----
+
+The above command creates an OIDC token with the `aud` claim set to `audience_name`, and returns the token to `stdout`.
+Pass this value to a variable and use the variable to call a cloud service for authentication.
+
+CAUTION: **OIDC tokens** created using this method can be printed with no masking. Take care to not log/print the token in your job steps.
+
+[#example-configuration]
+== Example configuration
+
+This example configuration deploys a static HTML webpage to AWS S3 using an OIDC token, with a customized `aud` claim, in a job.
+
+```yaml
+version: 2.1
+
+commands:
+  install-awscli: # https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html
+    steps:
+      - run:
+          name: Install awscli
+          working_directory: /tmp/awscli
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            ./aws/install
+            echo 'export AWS_PAGER=""' | tee -a $BASH_ENV
+
+jobs:
+  deploy-to-s3:
+    docker:
+      - image: node:current-bullseye
+    environment:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_ROLE_ARN: "arn:aws:iam::123456789012:role/S3-READ-WRITE-OIDC-ROLE"
+      S3_TARGET: s3://test-app-oidc-token-test-bucket
+    steps:
+      - checkout
+      - install-awscli
+      - run:
+          name: Deploy to S3
+          command: |
+            # set the variable AWS_WEB_IDENTITY_TOKEN_FILE to a temporary file that will hold the OIDC token
+            export AWS_WEB_IDENTITY_TOKEN_FILE="$(mktemp -u)"
+            # create OIDC token with customized aud claim of org-id
+            OIDC_TOKEN=$(circleci run oidc get --claims '{"aud": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}')
+            # copy the OIDC token to the AWS_WEB_IDENTITY_TOKEN_FILE created earlier
+            echo $OIDC_TOKEN > "$AWS_WEB_IDENTITY_TOKEN_FILE"
+            # make AWS cli calls
+            aws sts get-caller-identity
+            # copy the index.html file of the static site to the specified S3_TARGET location
+            aws s3 cp ./index.html $S3_TARGET
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - deploy-to-s3
+```

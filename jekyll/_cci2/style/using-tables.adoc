@@ -15,8 +15,8 @@ Key | Required | Type | Description
 version | Y | String | Should currently be `2`
 {: class="table table-striped"}
 ----
-+
-For asciidoc content use the following:
+
+* For asciidoc content use the following:
 +
 [source,adoc]
 ----
@@ -34,4 +34,3 @@ For asciidoc content use the following:
 | Should currently be `2`
 |===
 ----
- 

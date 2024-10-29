@@ -1,0 +1,33 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Sign in to an SSO-enabled organization
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions outlining how to sign in as an SSO user
+:icons: font
+:experimental:
+
+NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview#prerequisites-and-limitations[Prerequisites and Limitations]
+for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
+
+[join-an-organization]
+== Join an organization
+
+To join a CircleCI organization that has SSO enabled you must first have an active CircleCI account that you log into with an email and password. For more information on creating a CircleCI account, see the xref:../first-steps#[Sign up and try] page.
+
+Once you have a CircleCI account you can join an SSO-enabled CircleCI organization in one of the following ways:
+
+* Get xref:../manage-roles-and-permissions#add-people-to-your-organization[an invite].
+* Visit the CircleCI link:https://circleci.com/authentication/login?f=sso[SSO login page].
+
+If you have a GitHub or Bitbucket Cloud social login account with CircleCI (that is, you sign in to the CircleCI app using your GitHub/Bitbucket credentials) and you are invited to an SSO-enabled CircleCI organization, you must create a new email/password CircleCI account in order to access the SSO-enabled CircleCI organization.
+
+[log-in-to-an-organization]
+== Log in to an organization
+
+If you have logged in to an SSO-enabled CircleCI organization previously and your session has expired, the next time you attempt to access your organization's resources, you will be redirected to your org's Identity Provider (IdP) to authenticate before being granted access once again.
+
+When your session expires, you will be prompted to re-authenticate.

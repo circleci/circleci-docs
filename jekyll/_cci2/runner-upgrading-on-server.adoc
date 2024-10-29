@@ -1,25 +1,27 @@
 ---
-contentTags: 
+contentTags:
   platform:
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.6
 ---
 = Upgrading the CircleCI's self-hosted runner on server
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 
 This page describes how to update the CircleCI's **machine runner** on CircleCI server installations.
 
-toc::[]
+
 
 [#self-hosted-runner-for-server-compatibility]
 == Machine runner on server compatibility
 
-Refer to the xref:runner-installation-cli#self-hosted-runners-for-server-compatibility[server compatibility chart] to find the runner version you need for your installation.
+Refer to the individual installation pages for machine runner to find the runner version you need for your platform:
+
+- xref:runner-installation-linux#download-the-launch-agent-script[Linux]
+- xref:runner-installation-mac#download-the-launch-agent-script[macOS]
+- xref:runner-installation-windows#set-launch-agent-version[Windows]
 
 [#upgrading-self-hosted-runner-on-server]
 == Upgrading machine runner on server
@@ -55,7 +57,7 @@ docker stop <container-name>; docker rm <container-name>;
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 +
-NOTE: When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+NOTE: When starting the Docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
 
 [#upgrading-self-hosted-runner-in-a-non-containerized-environment]
 === Upgrading machine runner in a non-containerized environment
@@ -69,13 +71,23 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 [#replace-the-circleci-launch-agent-binary-with-the-new-version]
 ==== 1. Replace the `circleci-launch-agent-binary` with the new version
 
-Following the same process as in the xref:runner-installation-cli.adoc#continued-for-linux-macos-and-server[Download the launch-agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted runners for server compatibility chart].
+Following the same step as in the individual platform installations, update the launch agent version environment variable to the correct version, then save and run the script to download and replace the old binary with the newly updated version.
+
+- xref:runner-installation-linux#download-the-launch-agent-script[Linux]
+- xref:runner-installation-mac#download-the-launch-agent-script[macOS]
 
 ```shell
-export agent_version="<launch-agent-version>"
+export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 
-Then, following the xref:runner-installation.adoc#platform-specific-instructions[platform specific installation instructions], replace the old binary with the newly updated version that was just downloaded.
+- xref:runner-installation-windows#installation-steps[Windows]
+```powershell
+$Env:agentVer = "<launch-agent-version>"
+```
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+./Install-CircleCIRunner.ps1
+```
 
 [#stop-the-currently-running-machine-runner]
 ==== 2. Stop the currently running machine runner
@@ -146,7 +158,11 @@ Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 [#additional-resources]
 === Additional resources
-- xref:runner-installation.adoc[Installing the CircleCI Runner]
-- xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions]
+
+- xref:runner-installation-linux#[Linux machine runner installation instructions]
+- xref:runner-installation-mac#[macOS machine runner installation instructions]
+- xref:runner-installation-windows#[Windows machine runner installation instructions]
+- xref:runner-on-kubernetes#[Runner on Kubernetes installation instructions]
+- xref:runner-installation-docker#[Machine runner installation instructions with the Docker executor]
 
 

@@ -5,21 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
-redirect_from:
-  - /ja/tutorials/
-  - /ja/demo-apps/
-  - /ja/language-android/
-  - /ja/language-clojure/
-  - /ja/language-crystal/
-  - /ja/language-dart/
-  - /ja/language-elixir/
-  - /ja/language-go/
-  - /ja/language-haskell/
-  - /ja/language-java/
-  - /ja/language-php/
-  - /ja/language-ruby/
-  - /ja/language-scala/
 ---
 = サンプルとガイドの概要
 :page-layout: classic-docs
@@ -53,9 +38,6 @@ Docker コンテナや Linux VM のような特定の実行環境でパイプラ
 |===
 |プラットフォームガイド
 |説明
-
-|<<project-walkthrough#,Linux プロジェクトのチュートリアル>>
-|Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするための設定について、詳しく説明しています。
 
 |<<hello-world-macos#example-application,macOS プロジェクトのチュートリアル>>
 |CircleCI で macOS プロジェクトを設定する方法

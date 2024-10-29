@@ -1,6 +1,6 @@
 ---
 description: Learn how to scale CircleCI's self-hosted runners.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -10,9 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
-toc::[]
+:experimental:
 
 [#introduction]
 == Introduction
@@ -31,11 +29,11 @@ If you're using the container runner on Kubernetes, it will automatically spin u
 
 There are several API endpoints to help you set up a solution to scale machine runners or your Kubernetes cluster for container runners:
 
-* <<runner-api#get-apiv2runnertasks,Unclaimed Tasks>>
-* <<runner-api#get-apiv2runnertasksrunning,Running Tasks>>
-* <<runner-api#get-apiv2runner,List Resource Classes>>
+* <<runner-api#get-api-v3-tasks,Unclaimed Tasks>>
+* <<runner-api#get-api-v3-tasks-running,Running Tasks>>
+* <<runner-api#get-api-v3-runner,List Resource Classes>>
 
-A scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class, so it's important to query every available resource class to get the total number of running tasks. 
+A scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class, so it's important to query every available resource class to get the total number of running tasks.
 
 If you're using machine runners, you can devise a scaling solution to add more machine runners to the resource class that has more pending work.
 
@@ -49,5 +47,5 @@ There are some machine runner configuration settings which can be used by your s
 * <<runner-config-reference#runner-mode,Runner Mode>>
 ** Choosing `single-task` mode will cause machine runner to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon machine runner exit.
 ** Choosing `continuous` mode will cause the machine runner to poll for new tasks after completing a task. Your scaling solution will need to monitor the task workload and actively shutdown unused machine runners.
-* <<runner-config-reference#runner-idle_timeout,Runner Idle Timeout>>
+* <<runner-config-reference#runner-idle-timeout,Runner Idle Timeout>>
 ** Setting a reasonable timeout can be used for automatic resource recycling during periods of lower demand.

@@ -1,15 +1,12 @@
 ---
 layout: classic-docs
 title: "インサイトの使用"
-short-title: "インサイトの使用"
 description: "リポジトリのステータスおよびテスト パフォーマンスを表示する方法"
-order: 41
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 ---
 
 ## 概要

@@ -1,121 +1,221 @@
 ---
+
 contentTags:
   platform:
   - クラウド
-redirect_from: /ja/gitlab-vcs-support
 ---
-= GitLab.com との連携
+= GitLab との連携
 :page-layout: classic-docs
 :page-liquid:
-:page-description: GitHub と CircleCI の連携方法について説明します。
+:page-description: このドキュメントでは、GitLab CI と CircleCI の連携方法についてわかりやすく説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 [#overview]
 == 概要
 
-このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、リリース予定の機能の概要もご紹介します。
+このドキュメントでは、GitLab プロジェクトと CircleCI の連携方法について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、リリース予定の機能の概要もご紹介します。
 
-[#step-one-sign-up]
-== 1. ユーザー登録
+[#sign-up]
+== ユーザー登録
 
-GitLab との連携は、新規および既存の CircleCI ユーザーに行っていただけます。 link:/docs/first-steps#gitlab-signup[CircleCI のユーザー登録] のページに記載されている手順に従ってください。
+GitLab との連携は、新規および既存の CircleCI ユーザーに行っていただけます。 「xref:first-steps#gitlab-signup[CircleCI のユーザー登録]」に記載されている手順に従い、GitLab アカウントを連携し組織を作成してください。
 
-* GitLab アカウントを紐付けて組織を作成します。
-* プロジェクトを作成し、GitLab アカウントからリポジトリに接続します。
+NOTE: 設定するレポジトリへの API アクセスと書き込みアクセス権が必要です。 GitLab の場合は、"maintainer" 以上のロールに相当します。
 
-リポジトリと CircleCI プロジェクトを接続すると、裏では CircleCI がお客様の GitLab リポジトリ内で Webhook を登録します。 これは、プロジェクトの作成に成功後、リポジトリの **Settings > Webhooks** のページに移動して確認することができます。
+[.tab.signup.GitLab_SaaS]
+--
+新しい組織を作成して、GitLab.com アカウントを CircleCI と連携すると、リポジトリに新しいプロジェクトを作成するように求められます。 リポジトリのうち、ルートに `.circleci` ディレクトリを作成しその中に `config.yml` ファイルを追加しているものがあれば、それを選択します。
 
-NOTE: 設定するレポジトリへの API アクセスと書き込みアクセス権が必要です。 GitLab では、これは "maintainer" 以上のロールです。
+選択したリポジトリに `.circleci/config.yml` が含まれて__いない__場合は、プロジェクト用 CircleCI 設定ファイルを用意する以下のオプションが表示されます。
 
-[NOTE]
-====
-現在下記の制限があります。
+* **Fastest (最速)**: いずれかのリポジトリにある `config.yml` を使用します。
++
+アカウント内にある CircleCI 設定ファイルを追加済みの__別の__リポジトリを選択することもできます。 main ブランチまたは feature ブランチに `.circleci/config.yml` ファイルが存在するリポジトリを選択可能です。 新しいプロジェクトへの設定ファイルのインポート後、CircleCI により新規ブランチが自動で作成され、コミットが追加されます。
+* **Faster (超速)**: 新しいブランチに CI スターターパイプラインをコミットします。
++
+CircleCI により自動で新規ブランチが作成され、基本的な設定ファイルがコミットされます。 コミット後、GitLab リポジトリ内でこの設定ファイルを編集できます。
+* **Fast (高速)**: 編集可能な `config.yml` テンプレートを使用します。
++
+各種 `.circleci/config.yml` テンプレートの中から、プロジェクトに適したサンプルを選択できます (Node.js 用、Python 用、iOS アプリ用など)。 CircleCI 内でテンプレートファイルを必要に応じて編集し、保存します。 保存した設定ファイルは新規ブランチにコミットされます。
+
+上 2 つのオプション (**[Fastest (最速)]** と **[Faster (超速)]**) を選択すると、プロジェクトの作成時にパイプラインが自動でトリガーされます。
+--
+
+[.tab.signup.GitLab_Self-Managed]
+--
+連携には以下のものが必要です。
+
+* GitLab self-managed インスタンスの URL (例: `https://test-gitlab.circleci.com`)
++
+self-managed インスタンスには、GitLab プロジェクトを 1 つ以上追加しておく必要があります。 インスタンスにプロジェクトが存在しない場合、連携の認証に失敗します。  self-managed インスタンスはパブリックインターネットからアクセス可能である必要があります。**ファイアウォールの内側に配置している場合は使用できません**。  セルフマネージド インスタンスがファイアウォールの背後にある場合は、link:https://discuss.circleci.com/t/gitlab-self-managed-support-on-circleci-is-now-here/47726/3?u=sebastian-lerner[回避策の提案]を参照してください。
+* link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[パーソナルアクセストークン]。 このトークンには `api` スコープを設定する必要があります。
+
+[#known-hosts-input]
+* インスタンスの SSH 公開ホストキー。 このキーは、`ssh-keyscan <instance_url>` (例: `ssh-keyscan test-gitlab.circleci.com`) を実行し、コマンドの出力をコピーして、インスタンスから取得します。
++
+出力は以下のようになります。
++
+```shell
+➜  ~ ssh-keyscan test-gitlab.circleci.com
+
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+```
+
+**[Create New Project (新規プロジェクトの作成)]** ページで、以下の手順を実行します。
+
+image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
+
+. self-managed インスタンスの URL を入力します。 入力した URL には自動で `/api/v4` が追加されます。そのため、CircleCI がアカウントへの接続に使用する URL は `https://test-gitlab.circleci.com/api/v4` のようになります。 **[Verify (確認)]** をクリックします。
+. パーソナルアクセストークンを入力して、 **[Connect (接続)]** をクリックします。
+. self-managed インスタンスの SSH ホストキーをコピーして、**[known_hosts (既知のホスト)]** に貼り付けます。 **[Connect (接続)]** をクリックします。
+. アカウントの認証が完了したら、CircleCI プロジェクト用リポジトリを選択して、プロジェクト名をクリックします。
+. 最後に、[**Create Project (プロジェクトを作成)]** をクリックします。 新しく作成したプロジェクトの [Pipelines (パイプライン)] ページにリダイレクトされます。
+
+現在、GitLab self-managed のプロジェクトでは、CircleCI の設定ファイルセットアップ機能は使用できません。 設定ファイルを用意していない場合は、リポジトリに `.circleci/config.yml` ファイルを追加してください。 選択したリポジトリに既に `.circleci/config.yml` が存在する場合、ダッシュボードにパイプラインを表示するには、リポジトリでコミットを保存する必要があります。
+--
+
+NOTE: CircleCI を初めて利用される方は、最初は xref:hello-world#[Hello World] サンプルを使用するか、またはxref:sample-config#[サンプル設定ファイル]で各種のワークフローをご覧になることをお勧めします。 `.circleci/config.yml` で使用するキーの一覧は、「xref:configuration-reference#[CircleCI の設定]」で参照できます。
+
+リポジトリと CircleCI プロジェクトを連携すると、CircleCI により GitLab リポジトリ内に Webhook が登録されます。 これは、プロジェクトの作成に成功後、リポジトリの **[Settings (設定)] > Webhooks** のページに移動して確認することができます。
+
+現在、GitLab との連携には下記の制限があります。
 
 - 各ユーザーが作成できる組織は最大 3 つです。
 - Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
 
-組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/ja/requests/new[サポートチーム] にお問い合わせください。
+組織やプロジェクトを追加する必要がある場合は、xref:plan-overview#[有料プラン]へのアップグレードをご検討いただくか、またはlink:https://support.circleci.com/hc/ja/requests/new[サポートチーム]にお問い合わせください。
 
-====
+[#trigger-pipeline]
+== CircleCI でパイプラインをトリガーする
 
-[#step-two-trigger-pipeline]
-== 2. CircleCI でパイプラインをトリガーする
+[.tab.pipeline.GitLab.com]
+--
+上記の **[Fastest (最速)]** オプション (既存の `config.yml` を使用) または **[Faster (超速)]** オプション (CI スターターパイプラインをコミット) を使用して新規プロジェクトを作成した場合、パイプラインが自動的にトリガーされます。 そのため、CircleCI ダッシュボードの表示後すぐに、パイプラインが実行中になります。
 
-現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
+**[Fast (高速)]** オプションを使用した場合は、Web アプリの **[Commit and Run (コミットして実行)]** ボタンをクリックして `.circleci/config.yml` を保存するまで、パイプラインはトリガーされません。
+--
 
-. まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
-+
-NOTE: CircleCI を初めて利用される方は、最初は <<hello-world#echo-hello-world-on-linux#,Hello World>> サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
+[.tab.pipeline.GitLab_Self-Managed]
+--
+リポジトリのルートに `.circleci` ディレクトリを追加して、そのディレクトリに `config.yml` ファイルを作成します (まだ作成していない場合)。
 
-. GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されます。
-+
+この変更をリポジトリにコミットすると、CircleCI ダッシュボード上でパイプラインが初めて実行中になります。
+--
+
+GitLab リポジトリに変更をプッシュするたびに、新しいパイプラインがトリガーされ、CircleCI Web アプリ内の該当するプロジェクトでそのパイプラインが実行中になります。
+
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+
+現在、Web アプリ内で既存の CircleCI 設定ファイルを編集することはできません。 設定ファイルに変更を加える場合は、GitLab リポジトリで行ってください。
+
+セットアップ後、リポジトリに変更をコミットすると、パイプラインが自動的にトリガーされます。 ただし、現時点では、CircleCI Web アプリからパイプラインを手動でトリガーすることはできません。
 
 [#project-settings]
 == プロジェクト設定
 
 GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab の連携では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
-プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
+プロジェクトには 1 つ以上の**設定ファイル**を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
 
-プロジェクトには 1 つまたは複数の **トリガー** を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
+プロジェクトには 1 つ以上の**トリガー**を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
 
-プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
+プロジェクト内で **[Project Settings (プロジェクト設定)]** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。
 
 [#people]
-=== People
+=== People (メンバー)
 
-プロジェクトのロールにより、組織内でどのユーザーがどのプロジェクトにアクセスできるかをさらに細かく制御できます。 チームには自分たちのプロジェクトのみへのアクセス権を付与し、一方管理者などには組織のより広いアクセス権を付与することができます。 アクセス権のオプションは以下の通りです。
+プロジェクトのロールにより、組織内でどのユーザーがどのプロジェクトにアクセスできるかを細かく制御できます。 これにより、チームには自分たちのプロジェクトのみへのアクセス権を付与し、一方で管理者には組織のより広いアクセス権を付与する、といった制御が可能になります。 アクセス権のオプションは以下の通りです。
 
-* Admin: プロジェクトや全設定の読み取りと書き込みアクセス権と他のユーザーのアクセス権の管理
-* Contributor: プロジェクトや一部の設定の読み取りと書き込みアクセス権
-* Viewer: プロジェクトや一部の設定の読み取りアクセス権のみ
+* Admin (管理者): プロジェクトや全設定の読み取りと書き込みアクセス権、および他のユーザーのアクセス権の管理
+* Contributor (コントリビューター): プロジェクトや一部の設定の読み取りと書き込みアクセス権
+* Viewer (閲覧者): プロジェクトや一部の設定の読み取りアクセス権のみ
 
-すべての権限のリストは、 <<roles-and-permissions>> のセクションをご確認ください。
+すべての権限のリストは、「<<roles-and-permissions,ロールと権限>>」セクションをご確認ください。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
 [#configuration]
-=== 設定
+=== Configuration (設定ファイル)
 
-この時点で、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
+現時点では、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab と連携した場合は、GitLab の設定ソースが自動的に追加されています。
+
+GitLab self-managed を使用している場合は、追加済みのインスタンスを設定ソースとして選択できます。 self-managed インスタンスの別の feature ブランチやリポジトリを新しい設定ソースとして使用する場合は、まず xref:#organization-settings-integrations[**[Organization Settings (組織設定)]**] で新規連携を追加する必要があります。 どちらの場合でも、再びパーソナルアクセストークンを入力して連携を認証するように求められます。
+
+設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
 [#triggers]
-=== トリガー
+=== Triggers (トリガー)
 
-パイプラインを開始する設定ソースを指定するトリガーを追加します。 上記の手順で GitLab を接続したお客様は、GitLab を設定ソースとして設定されたトリガーが自動的に追加されています。
+**現時点では、パイプラインのスケジュール実行機能を GitLab で使用することはできません。**GitLab のトリガーについては以下をお読みください。フィルタリング機能を使い、特定の条件に基づいてパイプラインをトリガーする方法も紹介しています。
+
+パイプラインを開始する設定ソースを指定するトリガーを追加します。 上記の手順で GitLab と連携した場合は、GitLab が設定ソースとして設定されたトリガーが自動的に追加されています。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
 
-トリガーとトリガールールにより、CircleCI が変更ソース (この場合はGitLab) からのイベントをどのように処理するかが決まります。
+トリガーとトリガールールにより、CircleCI で変更ソース (この場合はGitLab) からのイベントをどのように処理するかが決まります。
 
-トリガーが作成されると、CircleCI は GitLab に Webhook を登録します。 GitLab からのプッシュイベントは CircleCI に送信されます。 CircleCI はその後、イベントデータを使って、パイプラインを実行すべきかどうかを決定し、実行する場合、どのパイプラインを実行すべきかを決定します。
+トリガーが作成されると、CircleCI により Webhook が GitLab に登録されます。 GitLab からのプッシュイベントは CircleCI に送信されます。 CircleCI はその後、イベントデータを使って、パイプラインを実行__すべきかどうか__を決定し、実行する場合、__どの__パイプラインを実行すべきかを決定します。
 
-設定ソースに加えて、各トリガーには Webhook の URL や、このシナリオでは、CircleCI が作成した GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するには、GitLab 内で Webhook URLと GitLab トークンを使用して、Webhook をセキュアに登録します。
+各トリガーには、設定ソースに加えて、Webhook の URL のほか、このシナリオでは CircleCI で作成された GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するために、Webhook URL と GitLab トークンを使用して、GitLab に Webhook がセキュアに登録されます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
-**トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
+**トリガーのフィルタリング**により、GitLab の Webhook に用意されているパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプション (マージリクエスト時のみビルドを行うなど) を使用できるほか、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 たとえば、ビルドの開始条件を特定のブランチやユーザーに設定できます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違いにも注意してください。
+NOTE: ただし、現時点では、**[Trigger Name (トリガー名)]** フィールドと **[Filters (フィルター)]** ラジオボタン以外は変更できません。
 
 [#project-settings-advanced]
-=== **高度な設定**
+=== Advanced (高度な設定)
 
-- CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、<<dynamic-config#,ダイナミックコンフィグ>> ガイドをお読みください。
-- 現時点では、**Free and Open Source** 設定はサポートされていませんが、今後提供予定です。
-- 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+- CircleCI のセットアップワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、「xref:dynamic-config#[ダイナミックコンフィグ]」を参照してください。
+- 現時点では、**[Free and Open Source (Free プランのオープンソース)]** 設定はサポートされていませんが、今後提供予定です。
+- 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 詳細については、ジョブとワークフローの`スキップ`や`キャンセル`について説明したxref:skip-build#auto-cancelling[自動キャンセルに関するセクション]を参照してください。
 
 [#project-settings-ssh-keys]
-=== **SSH キー**
+=== プロジェクトの SSH キー
 
-プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。 SSH キーに関する詳細は、<<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
+プロジェクトを作成すると、リポジトリからコードをチェックアウトするための SSH キーが作成されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための SSH キーが新しく生成されます。 現時点では、**[Additional SSH Keys (追加の SSH キー)]** 設定は、GitLab プロジェクトにのみ適用されます。
+
+[#create-gitlab-ssh-key]
+==== GitLab SSH キーを作成する
+
+. link:https://docs.gitlab.com/ee/user/ssh.html[GitLab の説明]に従って、SSH キーペアを作成します。 パスワードを入力するよう求められた場合、**入力しないでください** (以下に、macOS でキーを生成するコマンドの一例を示します)。
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+. link:https://gitlab.com/[GitLab] のプロジェクトにアクセスし、**[Settings (設定)] > [Repository (リポジトリ)]** に移動し、**[Deploy keys (デプロイキー)]** セクションを展開します。 [Title (タイトル)] フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 **[Grant write permissions to this key (このキーに書き込み権限を付与)]** にチェックを入れ、**[Add Key (キーを追加)]** をクリックします。
+. CircleCI アプリのプロジェクトの設定にアクセスし、**[SSH Keys (SSH キー)]** > **[Add SSH key (SSH キーを追加)]** の順に選択します。 [Hostname (ホスト名)] フィールドに `gitlab.com` と入力し、手順 1 で作成したプライベートキーを追加します。 次に **[Add SSH Key (SSH キーを追加)]** をクリックします。
+. `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+ジョブから GitLab リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
+
+SSH キーに関する詳細は、「xref:add-ssh-key#[CircleCI に SSH キーを登録する]」をご覧ください。
 
 [#organization-settings]
 == 組織設定
@@ -124,40 +224,61 @@ GitLab の連携では、特定の VCS に関連づけられない「スタン�
 
 スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
-組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。 CircleCI の組織設定に関する一般的な情報は、<<settings#,設定>> を参照してください。
+組織レベルで設定を管理するには、CircleCI Web アプリの **[Organization Settings (組織設定)]** ボタンをクリックします。
 
 [#organization-settings-people]
-=== People
+=== People (メンバー)
 
-ユーザーを追加または削除し、組織のユーザーロールやユーザーの招待を管理します。
+ユーザーの追加と削除、および組織のユーザーロールとユーザー招待の管理を行えます。
 
-NOTE: 少なくとも１名の組織管理者が必要です。 最後の組織管理者を削除しようとすると、エラーになります。
+NOTE: 組織管理者は少なくとも 1 名必要です。 最後の組織管理者を削除しようとすると、エラーになります。
 
 [#inviting-your-first-team-members]
 ==== 最初のチームメンバーを招待する
 
-新しい組織を作成したら、オプションでダッシュボードからチームメンバーを招待できます。 または、 **Organization Settings** の **People** のセクションからチームメンバーを招待することも可能です。
+新しい組織を作成したら、任意でダッシュボードからチームメンバーを招待できます。 また、**[Organization Settings (組織設定)]** の **[People (メンバー)]** セクションからチームメンバーを招待することも可能です。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-people.png[People section under Organization Settings]
 
-. **Invite** ボタンをクリックします。
-
+. **[Invite (招待)]** ボタンをクリックします。
 . 招待したいユーザーのメールアドレスを入力し、適切なロールを選択します。 複数のユーザーに同じロールをアサインする場合は、複数のアドレスを同時に入力できます。
 +
-現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 ロールや権限の詳細については、<<#about-roles-and-permissions,次のセクション>> を参照してください。
-
-. 招待されたユーザーは、招待を受けるためのリンクが含まれたメール通知 (`noreply@circleci.com` から送信) を受け取ります。
+現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 詳細については、「<<#roles-and-permissions,ロールと権限>>」セクションを参照してください。
+. 招待したユーザーには、招待を受けるためのリンクが記載されたメール通知 (`noreply@circleci.com` から送信) が届きます。
 +
-ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
+招待したユーザーが CircleCI アカウントをお持ちでない場合は、ユーザー登録を行う必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
+
+[#organization-settings-integrations]
+=== [Integrations (連携)] (GitLab self-managed のみ)
+
+GitLab self-managed の組織の場合、別の self-managed インスタンスを追加して組織に連携することができます。
+
+. **[Organization Settings (組織設定)]** の **[Integrations (連携)]** に移動して、新しいインスタンスを追加します。
++
+image::{{site.baseurl}}/assets/img/docs/gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
+. 「xref:#sign-up[ユーザー登録]」セクションの説明に従い、インスタンス URL を入力します。
+
+NOTE: 現在、既存の連携を編集および削除することはできません。
+
+GitLab.com を使用している場合は、xref:#user-account-integrations[ユーザー設定]でアカウント連携を管理できます。
+
+[#establish the authenticity of an SSH host]
+==== SSH ホストの信頼性の確立
+
+GitLab self-managed インスタンスの場合、CircleCI が接続先のホストの信頼性を検証できるように、"既知のホスト" ファイル (`~/.ssh/known_hosts`) に SSH ホストキーを追加する必要があります。 インスタンスのパブリックホストキーは、CircleCI ジョブでコードをチェックアウトする際にリモートホストの身元を確認できるように、**[known_hosts (既知のホスト)]** フィールドに保存されます。
+
+リモートサーバーの SSH キーは、`ssh-keyscan <host>` コマンド (例: `ssh-keyscan test-gitlab.circleci.com`) を実行すると取得できます。
+
+ホストキーの取得時には、フィンガーブリントを調べることでキーが適切かどうかを検証できます。 フィンガーブリントは、self-managed インスタンスの [Help (ヘルプ)] ページの **[Instance Configuration (インスタンス設定)]** セクションで確認できます (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[インスタンス設定に関するこちらのページ (英語)] を参照)。
 
 [#roles-and-permissions]
 == ロールと権限
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
-CircleCI ユーザーのロールと権限は、VCS の権限から派生するものではありません。また、VCS の権限を無視することもできません。 たとえば、CircleCI の _Organization Administrator (組織の管理者)_ である場合、CircleCI 組織内の組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス権が付与されている必要があります。 CircleCI ユーザーの VCS における権限は、関連づけられた GitLab のアイデンティティによって決まります。
+CircleCI ユーザーのロールと権限は、VCS の権限から派生するものではありません。また、VCS の権限を無視することもできません。 たとえば、CircleCI の __Organization Administrator (組織管理者)__ である場合、CircleCI 組織内の組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス権が付与されている必要があります。 CircleCI ユーザーの VCS における権限は、関連づけられた GitLab のアイデンティティによって決まります。
 
-現時点では、トリガーや設定ファイルを管理する際に CircleCI と接続することにより GitLab のアイデンティティを管理できます。
+現時点では、トリガーや設定ファイルを管理する際に CircleCI と連携することにより GitLab のアイデンティティを管理できます。
 
 [#organization-role-permissions-matrix]
 === 組織のロールと権限のマトリックス
@@ -166,13 +287,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 [cols=4*, options="header"]
 |===
 |アクション
-
-3+^|組織のロール
+|組織のロール
 
 |
-|*Admin*
-|*Contributor*
-|*Viewer*
+|*Admin (管理者)*
+|*Contributor (コントリビューター)*
+|*Viewer (閲覧者)*
 
 |*組織*
 |
@@ -180,92 +300,92 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|名前空間の作成
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|名前空間の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織設定の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織設定の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織のアクセス権の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織のアクセス権の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織の認証情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織のポリシーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織のポリシーの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織の連携情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|組織の連携情報の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織のリリース情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|組織の認証情報の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|組織の監査ログの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プランの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プランの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
-|*Insights*
+|*インサイト*
 |
 |
 |
 
 ^|組織の Insights の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
@@ -275,12 +395,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|ランナーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|ランナーの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -290,30 +410,29 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|プロジェクトの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトの作成
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクト設定の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プロジェクトのバージョンの復元
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プロジェクトのカナリアの削除
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
-
 
 |*コンテキスト*
 |
@@ -321,22 +440,22 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|コンテキストの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|コンテキストの使用
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|コンテキストの変数の編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|コンテキストの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -346,22 +465,22 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|Orb の作成/更新
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プライベート Orb の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|開発版 Orb のパブリッシュ
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|Orb のパブリッシュ
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -371,22 +490,22 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|組織の Webhook の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|組織の Webhook の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
 ^|プロジェクトの Webhook の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクトの Webhook の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -396,12 +515,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|スケジュールの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|スケジュールの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -411,17 +530,17 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|トリガーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|ビルドのトリガー
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|トリガーの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -431,17 +550,15 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|設定ファイルソースの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|設定ファイルソースの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
-
 |===
-
 
 [#project-role-permissions-matrix]
 === プロジェクトのロールと権限のマトリックス
@@ -450,13 +567,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 [cols=4*, options="header"]
 |===
 |アクション
-
-3+^|プロジェクトのロール
+|プロジェクトのロール
 
 |
-|*Admin*
-|*Contributor*
-|*Viewer*
+|*Admin (管理者)*
+|*Contributor (コントリビューター)*
+|*Viewer (閲覧者)*
 
 |*プロジェクト*
 |
@@ -464,32 +580,32 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|プロジェクトの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトのアクセス権の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトの認証情報の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトのバージョンの復元
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクトのカナリアの削除
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|プロジェクトの管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -499,12 +615,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|プロジェクトの Webhook の閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|プロジェクトの Webhook の管理
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -514,12 +630,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|スケジュールの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|スケジュールの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -529,17 +645,17 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|トリガーの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|ビルドのトリガー
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
 ^|トリガーの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
 
@@ -549,15 +665,14 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 
 ^|設定ファイルソースの閲覧
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
 ^|設定ファイルソースの編集
-^|icon:check-circle[]
+|icon:check-circle[]
 ^|
 ^|
-
 |===
 
 [#user-settings]
@@ -566,208 +681,75 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 [#user-account-integrations]
 === アカウントの連携
 
-CircleCI のユーザープロフィール内の **User Settings** セクションで、複数のアカウント連携を有効化できます。
+CircleCI のユーザープロフィール内の **[User Settings (ユーザー設定)]** セクションで、複数のアカウント連携を有効化できます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
-CircleCI で複数のアカウント連携ができることにより、以下が実現できます。
+CircleCI で複数のアカウントと連携すると、以下のメリットがあります。
 
-- アカウントの全てのソースコントロールに容易にアクセスする
-- CircleCI で利用可能な全ての認証方法を使用する
-
-[#pipeline-values]
-== パイプライン値
-
-GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用について詳しくは、 
-<<pipeline-variables#,パイプライン値とパラメーター>> を参照して下さい。
-
-[.table.table-striped]
-[cols=2*, options="header"]
-|===
-|名前
-|説明
-
-|`pipeline.trigger_parameters.circleci.trigger_id`
-|イベントを受信したトリガーの ID
-
-|`pipeline.trigger_parameters.circleci.config_source_id`
-|設定ソースの ID
-
-|`pipeline.trigger_parameters.circleci.trigger_type`
-|GitLab
-
-|`pipeline.trigger_parameters.circleci.event_time`
-|CircleCI のイベント受信のタイムスタンプ
-
-|`pipeline.trigger_parameters.circleci.event_type`
-|push、pull request、manual など
-
-|`pipeline.trigger_parameters.circleci.project_id`
-|CircleCI のプロジェクト ID
-
-|`pipeline.trigger_parameters.circleci.actor_id`
-|CircleCI のユーザー ID
-
-|`pipeline.trigger_parameters.gitlab.type`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.project_id`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.ref`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.checkout_sha`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_id`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_name`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_username`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.user_avatar`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.repo_name`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.repo_url`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.web_url`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_sha`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_title`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_message`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_timestamp`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_author_name`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.commit_author_email`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.total_commits_count`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.branch`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.default_branch`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-
-|`pipeline.trigger_parameters.gitlab.is_fork_merge_request`
-|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
-|===
+- アカウントの全てのソースコントロールにアクセスしやすくなる
+- CircleCI で利用可能な全ての認証方法を使用できる
 
 [#deprecated-system-environment-variables]
 == 非推奨のシステム環境変数
 
-GitLab ベースのプロジェクトでは以下のシステム環境変数が使用できません。 パイプラインでこれらの環境変数が必要な場合は、利用可能な <<#pipeline-values,パイプライン値>> の中の適切な値との置き換えを推奨します。
-
-[.table.table-striped]
-[cols=2*, options="header"]
-|===
-|名前
-|説明
-
-|`CI_PULL_REQUESTS`
-|現在のビルドに関連付けられたプルリクエストの URL の一覧 (カンマ区切り)。
-
-|`CI_PULL_REQUEST`
-|関連付けられたプルリクエストの URL。 複数のプル リクエストが関連付けられている場合は、いずれか 1 つの URL がランダムに選択されます。
-
-|`CIRCLE_PR_NUMBER`
-|関連付けられた GitHub または Bitbucket プルリクエストの番号。 フォークしたプルリクエストのみで使用可能です。
-
-|`CIRCLE_PR_USERNAME`
-|プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。
-
-|`CIRCLE_PR_REPONAME`
-|プルリクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。
-
-|`CIRCLE_PROJECT_USERNAME`
-|現在のプロジェクトの GitHub または Bitbucket ユーザー名
-
-|`CIRCLE_PROJECT_REPONAME`
-|現在のプロジェクトのリポジトリの名前
-
-|`CIRCLE_REPOSITORY_URL`
-|GitHub または Bitbucket リポジトリ URL
-
-|`CIRLCE_SHA1`
-|現在のビルドの前回のコミットの SHA1 ハッシュ
-
-|`CIRCLE_TAG`
-|Git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「ワークフローを使用したジョブのオーケストレーション」の <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するジョブの実行のセクション>>を参照してください。
-|===
-
-パイプラインで上記の環境変数を使用する必要がある場合は、設定ファイルで <<env-vars#environment-variable-usage-options,`environment` キー>> を使用し独自のマッピングを行います。
-
-```yaml
-build:
-  docker:
-    - image: cimg/node:17.0
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  environment:
-    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
-  steps:
-    - run: echo $CIRCLE_PROJECT_REPONAME
-```
+GitLab ベースのプロジェクトでは、一部の定義済み環境変数を使用できません。 「プロジェクトの値と変数」のxref:variables#built-in-environment-variables[定義済み環境変数]の表で、環境変数ごとの VCS 対応状況を参照してください。 パイプラインでこれらの環境変数が必要な場合は、xref:pipeline-variables#[パイプライン値]の表に記載されている適切な値との置き換えを推奨します。
 
 [#coming-soon]
-== 近日公開予定
+== 近日公開予定の機能
 
-下記のセクションでは、GitLab 連携では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースされる予定です。
+下記のセクションでは、現段階の GitLab 連携ではまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースされる予定です。
 
 [#account-integrations]
 === アカウントの連携
 
-現在、プロジェクト設定、トリガー、および設定ファイル以外に GitLab との接続を管理する方法はありません。 CircleCI では、ユーザープロフィール内の Account Integration の設定でユーザーの GitLab アイデンティティを管理できるよう取り組んでいます。
+現在、プロジェクト設定、トリガー、および設定ファイル以外に GitLab との連携を管理する方法はありません。 CircleCI では、ユーザープロフィール内の [Account Integrations (アカウント連携)] でユーザーの GitLab アイデンティティを管理できるよう取り組んでいます。
 
 [#auto-cancel-redundant-workflows]
 === 冗長ワークフローの自動キャンセル
 
-Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル) は、現在サポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 詳細は、 xref:/skip-build#auto-cancelling[ジョブとワークフローのスキップとキャンセル] を参照して下さい。
+冗長ワークフローの自動キャンセルは、現時点ではサポートされていません。 この機能の主な用途は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮することです。 詳細は、xref:skip-build#auto-cancelling[ジョブとワークフローのスキップとキャンセル]を参照して下さい。
 
 [#passing-secrets-to-forked-pull-requests]
 === フォークしたプルリクエストにシークレットを渡す
 
-現在、GitLab 連携ではフォークしたプルリクエストにシークレットを渡すオプションはサポートされていません。
+現在、GitLab 連携では、フォークしたプルリクエストにシークレットを渡すオプションはサポートされていません。
 
 [#stop-building]
 === ビルドの停止
 
-現在、GitLab 連携では **Stop Building** オプションをサポートしていません。(このオプションは通常は **Project settings** 内にあります。) CircleCI パイプラインの実行を停止したい場合は、GitLab リポジトリの Webhook を削除することを推奨します。
+現在、GitLab 連携では、**[Stop Building (ビルドの停止)]** オプションをサポートしていません。他の連携では、このオプションは **[Project settings (プロジェクト設定)]** に表示されます。 CircleCI パイプラインの実行を停止したい場合は、GitLab リポジトリの Webhook を削除することを推奨します。
 
 [#ssh-rerun]
 === SSH での再実行
 
-SSH での再実行は、ユーザーのアカウントが GitLab に加えて Bitbucket または GitHub と連携している場合にのみサポートされます。 ユーザーアカウントの Bitbucket または GitHub の SSH キーは、GitLab の SSH での再実行に使用できます。 ユーザーが SSH キーを管理し、SSH 再実行ができるようにする機能を追加予定です。 SSH での再実行には、コンテキストシークレットは渡されません。 CircleCI では、管理者がシークレットの使用と SSH での再実行をより詳細に制御できるよう取り組んでいます。
+SSH での再実行は、アカウントを GitLab に加えて Bitbucket または GitHub と連携している場合にのみサポートされます。 ユーザーアカウントの Bitbucket または GitHub の SSH キーを使用して、GitLab について SSH での再実行を行えます。 CircleCI では、SSH での再実行を可能にするため、SSH の管理機能を追加予定です。 SSH での再実行では、コンテキストシークレットは渡されません。 CircleCI では、管理者がシークレットの使用と SSH での再実行をより詳細に制御できるよう取り組んでいます。
 
 [#additional-ssh-keys-only]
-=== 追加 SSH キーのみ
+=== 追加の SSH キーのみ
 
-GitLab 連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
+GitLab の連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、**[Project Settings (プロジェクト設定)] > [Additional SSH Keys (追加の SSH キー)]** に保存されます。 ただし、コードのチェックアウト用の SSH キーを手動で管理することは推奨されません。 代わりに、**[Set Up Project (プロジェクトをセットアップ)]** オプションまたは **[Project Settings (プロジェクト設定)] > [Configuration (設定ファイル)]** を使用し、リポジトリとの連携を維持して下さい。
 
 [#free-and-open-source-setting]
-=== Free とオープンソースの設定
+=== [Free and open source (Free プランのオープンソース)] 設定
 
-現在、GitLab のお客様には、オープンソースプランはご利用いただけません。 CircleCI ではオープンソースコミュニティを最新の状態に保ち、将来的にはサポートを提供予定です。
+現在、GitLab のお客様は、オープンソースプランをご利用いただけません。 CircleCI では、このプランの対象 VCS の拡大を進めており、最新情報についてはオープンソースコミュニティにお知らせします。
+
+[#test-insights]
+=== テストインサイト
+
+xref:insights-tests#[テスト インサイト機能]は現在、GitLab のお客様には対応しておりません。
+
+[#next-steps]
+== 次のステップ
+
+- xref:config-intro#[設定ファイルのチュートリアル]
+- xref:hello-world#[Hello world]
+
+[#relevant-gitlab-articles]
+== 役立つ GitLab の記事とガイド
+* link:https://circleci.com/ja/integrations/gitlab/[GitLab と CircleCI の連携]
+* link:https://circleci.com/ja/blog/announcing-gitlab-support/[CircleCI に GitLab が対応]
+* link:https://circleci.com/ja/blog/setting-up-continuous-integration-with-gitlab/[GitLab と CircleCI で CI を構築する方法]
+* link:https://circleci.com/ja/blog/gitlab-ultimate-guide/[GitLab（ギットラブ）とは？完全ガイド]
+* link:https://circleci.com/ja/circleci-versus-gitlab/[GitLab CI/CD と CircleCI　の比較]

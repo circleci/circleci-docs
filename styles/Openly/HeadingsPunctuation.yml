@@ -1,0 +1,8 @@
+---
+extends: existence
+message: Do not use '%s' at the end of headings
+link: https://github.com/Openly/docs/blob/master/STYLE.md#capitalization-and-punctuation
+scope: heading
+level: warning
+raw:
+  - '(?:\:|\.)$'

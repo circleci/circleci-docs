@@ -22,7 +22,7 @@ As both a downstream user or publisher of software, you can protect yourself and
 When using CircleCI, you can split credentials and secrets into multiple [contexts]({{site.baseurl}}/contexts) that can be used individually, or combined in a build step. Avoid putting everything into the org-global context. This means that if there is a security error in one build step, only a small subset of your credentials are exposed. This effort is known as the [principle of least](https://en.wikipedia.org/wiki/Principle_of_least_privilege). As an example, the step where you download dependencies and execute their build
 scripts should not have access to your deploy keys because nothing in that step needs them.
 
-Additionally, you can put sensitive contexts used for deploying and signing software into [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context) that are governed by your VCS groups. These secrets are only then accessible to authorized users. In combination with restricted contexts, you can reduce the likelihood of exposing credentials to malicious code by also using VCS branch protection, which requires a review before merging.
+Additionally, you can put sensitive contexts used for deploying and signing software into [restricted contexts]({{site.baseurl}}/contexts/#restrict-a-context) that are governed by your VCS groups. These secrets are only then accessible to authorized users. In combination with restricted contexts, you can reduce the likelihood of exposing credentials to malicious code by also using VCS branch protection, which requires a review before merging.
 
 ### Minimize risk as a developer
 {: #minimize-risk-as-a-developer }
@@ -60,6 +60,6 @@ Using dependency pinning with hashes like this prevents malicious binaries or pa
 
 ## See also
 {: #see-also }
-{:.no_toc}
+
 
 - [Security recommendations]({{site.baseurl}}/security-recommendations)

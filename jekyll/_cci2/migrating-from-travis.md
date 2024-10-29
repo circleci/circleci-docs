@@ -3,7 +3,7 @@ layout: classic-docs
 title: Migrate From Travis CI
 categories: [migration]
 description: An overview of how to migrate from Travis CI to CircleCI.
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server 3.x
@@ -25,8 +25,8 @@ consider reading our [Getting Started Guide]({{ site.baseurl }}/getting-started/
 ## Why migrate to CircleCI?
 {: #why-migrate-to-circleci }
 
-- **Scaling Concurrency**: You can run up to 80 concurrent jobs on our monthly Performance plan or even more on a [custom plan](https://circleci.com/pricing/). Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
-- **Resource Classes**: [vCPU & RAM]({{ site.baseurl }}/configuration-reference/#resource_class) are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
+- **Scaling Concurrency**: You can run up to 80 concurrent jobs on our monthly Performance Plan or even more on a [Custom Plan](https://circleci.com/pricing/). Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
+- **Resource Classes**: [vCPU & RAM]({{ site.baseurl }}/configuration-reference/#resourceclass) are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
 - **Parallelization by Timing**: On top of running many jobs concurrently, CircleCI offers built-in [test splitting]({{ site.baseurl }}/parallelism-faster-jobs/) across multiple environments by timing. This dramatically reduces wall clock time for large test suites to finish. You must implement this manually in Travis CI.
 - **Orbs**: Rather than proprietary integrations, CircleCI offers [orbs]({{ site.baseurl }}/orb-intro/), which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. [Visit the registry](https://circleci.com/developer/orbs).
 
@@ -42,8 +42,8 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | Travis CI         | Circle CI                                                                          | Description                                                                                          |
 |-------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | language:,<br>os: | [docker, machine, macos, windows]({{ site.baseurl }}/executor-intro/)          | CircleCI doesn't assume dependencies or commands based on a language; instead, choose an executor and use `run:` steps as shown below to execute commands you require (e.g., install, build, test). |
-| dist:             | [machine]({{ site.baseurl }}/configuration-reference/#machine)                 | Our Linux VM executor is a Ubuntu VM. You can specify [versions]({{ site.baseurl }}/configuration-reference/#available-linux-machine-images) in the config |
-| cache:            | [restore_cache:]({{ site.baseurl }}/configuration-reference/#restore_cache), [save_cache:]({{ site.baseurl }}/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds |
+| dist:             | [machine]({{ site.baseurl }}/configuration-reference/#machine)                 | Our Linux VM executor is a Ubuntu VM. You can specify [versions]({{ site.baseurl }}/configuration-reference/#available-linux-machine-images-cloud) in the config |
+| cache:            | [restore_cache:]({{ site.baseurl }}/configuration-reference/#restorecache), [save_cache:]({{ site.baseurl }}/configuration-reference/#restorecache) | Use the restore and save cache features to control caching in the builds |
 | before_cache      | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | If you want to run any commands before you cache, simply place a run: step before your cache step(s) in CircleCI |
 | before_install:   | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | CircleCI doesn't separate commands into stages or types. Use `run:` steps to specify any commands and order them per your needs. See [documentation]({{ site.baseurl }}/configuration-reference/#the-when-attribute) for usage of conditional steps |
 | install:          | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | " (see above)                                                                                        |
@@ -52,7 +52,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | after_script:     | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | " (see above)                                                                                        |
 | deploy:           | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | Use a `run:` step to run needed commands for deployment. See our [Deployment overview page]({{site.baseurl}}/deployment-overview) for links to examples. |
 | env:              | [environment:]({{site.baseurl}}/configuration-reference/#environment) | Use the environment: element to specify environment variables                                        |
-| matrix:           | [matrix:]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) | CircleCI also offers matrix syntax under our workflows configuration. |
+| matrix:           | [matrix:]({{site.baseurl}}/configuration-reference/#matrix) | CircleCI also offers matrix syntax under our workflows configuration. |
 | stage:            | [requires:]({{site.baseurl}}/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control concurrent jobs in workflows        |
 {: class="table table-striped"}
 
@@ -90,12 +90,13 @@ root of their repository.
 
 The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
+{% include snippets/docker-auth.md %}
+
 {% raw %}
 ```yaml
 version: 2.1
 
 workflows:
-  version: 2
   build:
     jobs:
       - build
@@ -105,13 +106,7 @@ jobs:
     working_directory: ~/mern-starter
     docker:
       - image: cimg/node:17.2.0 # Primary execution image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mongo:3.4.4         # Service/dependency image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:

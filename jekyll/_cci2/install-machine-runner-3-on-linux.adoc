@@ -1,0 +1,86 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.4+
+---
+= Install machine runner 3.0 on Linux
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on Linux.
+:icons: font
+:experimental:
+:machine:
+:linux:
+
+This page describes how to install CircleCI's machine runner 3.0 on Linux.
+
+[#prerequisites]
+== Prerequisites
+
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* link:https://www.gnu.org/software/coreutils/[Coreutils]
+
+* link:https://curl.se/[curl]
+
+* sha256sum (if not pre-installed):
+** `sudo apt install coreutils` for Ubuntu/Debain
+** `sudo yum install coreutils` for Red Hat
+
+* link:https://www.gnu.org/software/tar/[tar]
+
+* link:https://www.gnu.org/software/gzip/[Gzip]
+
+* `sepolicy` (link:https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+
+* `rpmbuild` (link:https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
+
+* link:https://gnupg.org/download/[GPG 2.1+]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
+
+[#install-circleci-runner]
+== 2. Install CircleCI runner
+[.tab.machine-runner-package-installation.debian]
+--
+{% include snippets/runner/machine-runner-deb-package-install.adoc %}
+--
+[.tab.machine-runner-package-installation.rpm]
+--
+{% include snippets/runner/machine-runner-rpm-package-install.adoc %}
+--
+
+{% include snippets/machine-runner-example.adoc %}
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
+
+[#additional-resources]
+== Additional resources
+
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
+- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3.0]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]

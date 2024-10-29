@@ -5,7 +5,6 @@ contentTags:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = CircleCI でのプロジェクトの作成
 :page-layout: classic-docs
@@ -46,6 +45,8 @@ image::cci-organizations.png[Select Organization]
 
 プロジェクトのセットアップが完了すると、`config.yml` ファイルを提供するよう求められます。
 
+NOTE: 2023年6月14日より、CircleCIでプロジェクトを設定する際の体験が簡素化される可能性があります。  詳細は link:https://discuss.circleci.com/t/product-update-simplifying-circleci-project-creation/48336[コミュニティフォーラム]をご覧ください。
+
 . ポップアップウィンドウから、任意のオプションを選択してください。 選択肢は以下の 3 つです。
 * リポジトリの `.circleci` ディレクトリに `config.yml` を含める
 * リポジトリの新しいブランチに CI スターターパイプラインをコミットする
@@ -53,10 +54,10 @@ image::cci-organizations.png[Select Organization]
 +
 CI スターターパイプラインを選択すると、 `config.yml` のサンプルファイルが作成され、リポジトリの `circleci-project-setup` ブランチにコミットされます。
 +
-`config.yml` ファイルの作成については、 <<config-intro#,設定ふファイルの概要>> を参照してください。
+`config.yml` ファイルの作成については、 <<config-intro#,設定ファイルの概要>> を参照してください。
 . 青色の **Set Up Project** ボタンをクリックします。
 
-これで CircleCI は指定された `config.yml` ファイルを使ってパイプラインを実行するようになりました。 その出力は、CircleCI ダッシュボードで確認できます。
+パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集するか、ダッシュボードでプロジェクトの省略記号 (…) をクリックし、 **Configuration File** を選択します。 その出力は、CircleCI ダッシュボードで確認できます。
 
 パイプラインに変更を加えるには、リポジトリの `.circleci/config.yml` ファイルを編集するか、ダッシュボードでプロジェクトの省略記号 (…) をクリックし、 **Configuration File** を選択します。
 

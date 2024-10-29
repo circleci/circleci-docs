@@ -1,41 +1,63 @@
 ---
-contentTags: 
+contentTags:
   platform:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.6
 ---
 = Machine runner installation on macOS
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on macOS.
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
+:machine:
+:macos:
 
-This page describes how to install CircleCI's machine runner on macOS.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up macOS self-hosted runners on CircleCI cloud.
 
-{% include snippets/runner-platform-prerequisites.adoc %}
+This page describes how to install CircleCI's machine runner on macOS for **CircleCI server** customers.
 
-toc::[]
+[#prerequisites]
+== Prerequisites
+
+To install machine runners and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
+
+* https://brew.sh/[Homebrew]
+
+* https://curl.se/[curl] (installed by default on macOS)
+
+* sha256sum (if not pre-installed):
+** `brew install coreutils`
+
+* https://www.gnu.org/software/tar/[tar]
+
+* The xref:local-cli#[CircleCI CLI] if you wish to install runners from the command line
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+{% include snippets/runner/terms.adoc %}
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[.tab.machine-runner.Web_app_installation]
+--
+{% include snippets/runner/install-with-web-app-steps.adoc %}
+--
+[.tab.machine-runner.CLI_installation]
+--
+{% include snippets/runner/install-with-cli-steps.adoc %}
+
+--
+
 
 [#download-the-launch-agent-script]
-== Download the macOS launch-agent script
+== 2. Download launch-agent script and install binary
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the `launch-agent` binary for your target platform, either x86_64, or M1 (Apple silicon):
-
-```shell
-# For macOS x86_64:
-export platform=darwin/amd64 && sh ./download-launch-agent.sh
-
-# For macOS M1:
-export platform=darwin/arm64 && sh ./download-launch-agent.sh
-```
-
-After successful installation, the launch-agent.sh file can be deleted.
+{% include snippets/runner/launch-agent-download.adoc %}
 
 [#create-a-circleci-self-hosted-runner-configuration]
-== Create a CircleCI's self-hosted runner configuration
+== 3. Create self-hosted runner configuration
 
 You will need to choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
 
@@ -57,11 +79,11 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
-- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
+- Replace `AUTH_TOKEN` with the resource class token created in the <<create-namespace-and-resource-class,set up process>>.
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#update-workdir-ownership]
-== Update the Working Directory Permission
+== 4. Update working directory permission
 
 The CircleCI agent requires write permission to the directory containing the working directory. Change the ownership of that directory to `USERNAME`:
 
@@ -70,7 +92,7 @@ sudo chown USERNAME /var/opt/circleci
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
-== Install the CircleCI's self-hosted runner configuration
+== 5. Install the self-hosted runner configuration
 
 Create a directory as `root` to hold the CircleCI's self-hosted runner configuration:
 
@@ -89,7 +111,7 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 ```
 
 [#create-and-install-the-launchd-plist]
-== Create and install the `launchd .plist`
+== 6. Create and install `launchd .plist`
 
 Create a `com.circleci.runner.plist` file with a path of `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`. Use the following commands:
 
@@ -153,10 +175,8 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
 </plist>
 ```
 
-{% include snippets/machine-runner-example.adoc %}
-
 [#enable-the-launchd-service]
-== Enable the `launchd` service
+== 7. Enable `launchd` service
 
 Now you can load the service:
 
@@ -171,11 +191,13 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 [#verify-the-service-is-running]
-== Verify the service is running
+== 8. Verify the service is running
 
 Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.
+
+{% include snippets/machine-runner-example.adoc %}
 
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.

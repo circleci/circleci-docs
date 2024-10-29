@@ -3,7 +3,6 @@ layout: classic-docs
 title: ヘルプとサポート
 short-title: ヘルプとサポート
 description: 利用可能なサポート オプションの一覧
-redirect_from: /ja/getting-help-with-
 ---
 
 ドキュメントの内容に不備・不足があり、 誠に申し訳ありません。

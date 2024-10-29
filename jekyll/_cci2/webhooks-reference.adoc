@@ -10,8 +10,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
 [#common-top-level-keys]
 == Common top level keys of webhooks
@@ -25,15 +24,15 @@ Each webhook will have some common data as part of the event:
 | Description
 | Type
 
-| id
-| ID used to uniquely identify each event from the system (the client can use this to dedupe events)
+| `id`
+| ID used to uniquely identify each event from the system (the client can use this to deduplicate events)
 | String
 
-| happened_at
+| `happened_at`
 | ISO 8601 timestamp representing when the event happened
 | String
 
-| webhook
+| `webhook`
 | A map of metadata representing the webhook that was triggered
 | Map
 |===
@@ -90,7 +89,7 @@ The following data about the organization associated with the webhook event is p
 
 | name
 | yes
-| Name of the organization (e.g. "circleci")
+| Name of the organization (for example, `circleci`)
 |===
 
 [#job]
@@ -107,27 +106,27 @@ The following data about the job associated with the webhook event is provided:
 | Always present?
 | Description
 
-| id
+| `id`
 | yes
 | Unique ID of the job
 
-| number
+| `number`
 | yes
 | An auto-incrementing number for the job, sometimes used in CircleCI's APIs to identify jobs within a project
 
-| name
+| `name`
 | yes
 | Name of the job as defined in .circleci/config.yml
 
-| status
+| `status`
 | yes
 | Current status of the job
 
-| started_at
+| `started_at`
 | yes
 | When the job started running
 
-| stopped_at
+| `stopped_at`
 | no
 | When the job reached a terminal state (if applicable)                                                        |
 |===
@@ -144,27 +143,27 @@ link:/docs/workflows[Workflows] orchestrate jobs. The following data about the w
 | Always present?
 | Description
 
-| id
+| `id`
 | Yes
 | Unique ID of the workflow
 
-| name
+| `name`
 | Yes
 | Name of the workflow as defined in .circleci/config.yml
 
-| status
+| `status`
 | No
 | Current status of the workflow. Not included in job-level webhooks
 
-| created\_at
+| `created\_at`
 | Yes
 | When the workflow was created
 
-| stopped_at
+| `stopped_at`
 | No
 | When the workflow reached a terminal state (if applicable)
 
-| url
+| `url`
 | Yes
 | URL to the workflow in CircleCI's UI
 |===
@@ -183,27 +182,27 @@ The following Data about the pipeline associated with the webhook event is provi
 | Always present?
 | Description
 
-| id
+| `id`
 | Yes
 | Globally unique ID of the pipeline
 
-| number
+| `number`
 | Yes
 | Number of the pipeline, which is auto-incrementing / unique per project
 
-| created\_at
+| `created\_at`
 | Yes
 | When the pipeline was created
 
-| trigger
+| `trigger`
 | Yes
 | A map of metadata about what caused this pipeline to be created -- see below
 
-| trigger_parameters
+| `trigger_parameters`
 | No
 | A map of metadata about the pipeline -- see below
 
-| vcs
+| `vcs`
 | No
 | A map of metadata about the git commit associated with this pipeline -- see below
 |===
@@ -228,7 +227,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See <<#vcs>> below for GitHub and Bitbucket.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -237,21 +236,21 @@ Data associated to the pipeline. Present for pipelines associated with providers
 | Always present?
 | Description
 
-| circleci
+| `circleci`
 | yes
-| A map containing trigger information -- see <<#circleci>>
+| A map containing trigger information -- see <<circleci>>
 
-| git
+| `git`
 | no
 | A map present when the pipeline is associated with a VCS provider
 
-| gitlab
+| `gitlab`
 | no
-| A map present when the pipeline is associated with a Gitlab trigger
+| A map present when the pipeline is associated with a GitLab, GitHub App or Bitbucket Data Center trigger
 |===
 
 [#circleci]
-==== circleci
+==== `circleci`
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -260,19 +259,19 @@ Data associated to the pipeline. Present for pipelines associated with providers
 | Always present?
 | Description
 
-| event_time
+| `event_time`
 | yes
 | ISO 8601 timestamp representing when the pipeline was created
 
-| event_type
+| `event_type`
 | yes
 | Provider event type that triggered the pipeline (for example, `push`)
 
-| trigger_type
+| `trigger_type`
 | yes
 | Trigger provider (for example, `gitlab`)
 
-| actor_id
+| `actor_id`
 | no
 | CircleCI user id that the pipeline was attributed to
 |===
@@ -280,7 +279,8 @@ Data associated to the pipeline. Present for pipelines associated with providers
 [#vcs]
 === VCS
 
-NOTE: The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See <<#trigger-parameters,trigger parameters>> above for other providers.
+NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud projects, but not for GitLab, GitHub App or Bitbucket Data Center projects. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
+
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -345,8 +345,10 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
 [#sample-webhook-payloads]
 == Sample webhook payloads
 
+NOTE: To find out which GitHub integration you have, see the xref:github-apps-integration#[GitHub Apps integration] page.
+
 [#workflow-completed-for-github-and-bitbucket]
-=== workflow-completed for GitHub and Bitbucket
+=== `workflow-completed` for GitHub OAuth and Bitbucket Cloud
 
 ```json
 {
@@ -407,7 +409,7 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
 ```
 
 [#job-completed-for-github-and-bitbucket]
-=== job-completed for GitHub and Bitbucket
+=== `job-completed` for GitHub OAuth and Bitbucket Cloud
 
 ```json
 {
@@ -475,7 +477,7 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
 ```
 
 [#workflow-completed-gitlab]
-=== workflow-completed for Gitlab
+=== `workflow-completed` for GitLab, GitHub App and Bitbucket Data Center
 
 ```json
 {
@@ -551,7 +553,7 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
 ```
 
 [#job-completed-gitlab]
-=== job-completed for Gitlab
+=== `job-completed` for GitLab, GitHub App and Bitbucket Data Center
 
 ```json
 {

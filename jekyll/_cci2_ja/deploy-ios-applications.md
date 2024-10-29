@@ -24,12 +24,12 @@ CircleCI では、fastlane を使用することにより iOS アプリを自動
 {: #best-practices }
 
 ### Git ブランチの使用
-{: #using-git-branches }
+{: #use-git-branches }
 
 リリースレーンは、Git リポジトリの特定のブランチ (専用のリリース/ベータブランチなど) でのみ実行することをお勧めします。 そうすることで、指定したブランチへのマージが成功した場合のみリリースが可能となり、開発段階においてプッシュがコミットされるたびにリリースされるのを防ぐことができます。 また、iOS アプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローの設定方法については、[ブランチレベルでのジョブの実行]({{site.baseurl}}/ja/workflows/#branch-level-job-execution)をご覧ください。
 
 ### ビルド番号の設定
-{: #setting-the-build-number }
+{: #set-the-build-number }
 
 デプロイサービスにアップロードする際は、iOS アプリのバイナリのビルド番号にご注意ください。 一般的には、 `.xcproject` で設定されていますが、一意になるように手動で更新する必要があります。 各デプロイレーンの実行前にビルド番号が更新されていないと、受信サービスがビルド番号の競合によりバイナリを拒否する場合があります。
 
@@ -55,7 +55,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -72,7 +72,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -102,8 +102,8 @@ workflows:
 ## App Store Connect
 {: #app-store-connect }
 
-### 設定
-{: #setting-up }
+## App Store Connect で設定
+{: #set-up-app-store }
 
 fastlane が iOS バイナリを App Store Connect や TestFlight に自動的にアップロードするように設定するには、fastlane が App Store Connect アカウントにアクセスできるよういくつかのステップを実施する必要があります。
 
@@ -112,6 +112,7 @@ fastlane が iOS バイナリを App Store Connect や TestFlight に自動的�
 API キーを作成するには、 [Apple 開発者向けドキュメント](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api)で説明されている手順に従ってください。 その結果 `.p8` を取得したら、[App Store Connect API キーのページ](https://appstoreconnect.apple.com/access/api)に表示される*発行者 ID* と*キー ID* をメモします。
 
 **注:** `.p8` ファイルをダウンロードし、安全な場所に保存したことを確認してください。 App Store Connect のポータルから離れてしまうと、ファイルを再度ダウンロードすることはできません。
+{: class="alert alert-info" }
 
 次に、いくつかの環境変数を設定する必要があります。 CircleCI プロジェクトで、 **ビルド設定 > 環境変数** に移動し、以下を設定します。
 
@@ -122,7 +123,8 @@ API キーを作成するには、 [Apple 開発者向けドキュメント](htt
 * `.p8` ファイルの内容に、`APP_STORE_CONNECT_API_KEY_KEY`
   * (例: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMGByqGSM49AgCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`)
 
-**注:** `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
+**注:**  `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
+{: class="alert alert-info" }
 
 最後に、fastlane ではどの Apple ID を使用するか、またどのアプリケーションをターゲットにするかを知るために、いくつかの情報が要求されます。 Apple ID とアプリケーションのバンドル ID は、`fastlane/Appfile` で次のように設定できます。
 
@@ -136,8 +138,8 @@ App Store Connect と Apple Developer Portal に別々の認証情報を使う�
 
 この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で [`app_store_connect_api_key`](http://docs.fastlane.tools/actions/app_store_connect_api_key/#app_store_connect_api_key) を呼び出すだけでよくなります。
 
-### App Store へのデプロイ
-{: #deploying-to-the-app-store }
+### 1.  App Store へのデプロイ
+{: #deploy-to-the-app-store }
 
 下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する [`deliver` アクション](http://docs.fastlane.tools/actions/deliver/#deliver/)は、App Store への申請プロセスを自動化する強力なツールです。
 
@@ -178,8 +180,8 @@ platform :ios do
 end
 ```
 
-### TestFlight へのデプロイ
-{: #deploying-to-testflight }
+### 2. TestFlight へのデプロイ
+{: #deploy-to-testflight }
 
 TestFlight は、App Store Connect と連動した Apple のベータ版配信サービスです。 fastlane は、TestFlight の配信管理が簡単に行える[`pilot` アクション](https://docs.fastlane.tools/actions/pilot/)を提供しています。
 
@@ -239,9 +241,10 @@ fastlane add_plugin firebase_app_distribution
 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
 **注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
+{: class="alert alert-info" }
 
-### CLI トークンの生成
-{: #generating-a-cli-token }
+### 2.  CLI トークンの生成
+{: #generate-a-cli-token }
 
 Firebase では、認証時にトークンを使用する必要があります。 トークンの生成には、Firebase CLI とブラウザを使用します。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
 
@@ -308,7 +311,7 @@ workflows:
 **注:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/testing-ios/#using-ruby)ことをお勧めします。
 
 ## Visual Studio App Center へのデプロイ
-{: #deploying-to-visual-studio-app-center }
+{: #deploy-to-visual-studio-app-center }
 
 [Visual Studio App Center](https://appcenter.ms/) (以前は HockeyApp) は、Microsoft の配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
 
@@ -323,7 +326,7 @@ fastlane add_plugin appcenter
 
 **注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
-### App Center の設定
+### 2.  App Center の設定
 {: #app-center-setup }
 
 まず、VS App Center でアプリを作成する必要があります。
@@ -377,7 +380,7 @@ end
 ```
 
 ## TestFairy へのアップロード
-{: #uploading-to-testfairy }
+{: #upload-to-testfairy }
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 

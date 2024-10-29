@@ -68,7 +68,7 @@ Use the [the CircleCI local CLI]({{site.baseurl}}/local-cli) instead of `curl` c
 
 If writing a shell script that uses the CircleCI CLI, remember that in bash you can avoid exposing secrets stored in environment variables or text by using the `<<<` construct, which does not spawn a new process while piping a value:
 ```bash
-`circleci context store-secret <vcs-type> <org-name> <context-name> <secret name> <<< "$MY_SECRET"`
+`circleci context store-secret --org-id <org-id> <context-name> <secret-name> <<< "$MY_SECRET"`
 ```
 This is more reliable than using `echo` or `printf`, which may or may not be shell built-ins and could potentially spawn a process.
 
@@ -92,7 +92,7 @@ When calling the CircleCI API with `curl` commands, you need to provide an API t
 ### Protect your secrets
 {: #protect-your-secrets }
 
-Some API endpoints, such as [addEnvironmentVariableToContext]({{site.baseurl}}/api/v2/#operation/addEnvironmentVariableToContext), may require secrets to be sent in the body of `PUT` or `POST` requests. There are several options to help conceal these secrets:
+Some API endpoints, such as [addEnvironmentVariableToContext](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext), may require secrets to be sent in the body of `PUT` or `POST` requests. There are several options to help conceal these secrets:
 
 * Use a file to compose and store the request body. Be sure to `chmod 0600` this file before adding the secret value to prevent other users from viewing its contents.
   - Point `curl` to this file by using the `@` directive: `curl --data @myfile`
@@ -102,9 +102,3 @@ curl --data @- <<EOF
 {"value":"some-secret-value"}
 EOF
 ```
-
-## See also
-{: #see-also }
-{:.no_toc}
-
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)

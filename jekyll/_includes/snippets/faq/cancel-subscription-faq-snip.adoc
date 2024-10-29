@@ -1,0 +1,38 @@
+[#how-do-i-cancel-a-performance-plan-subscription]
+=== How do I cancel a Performance Plan subscription?
+
+You must have admin access in your CircleCI organization to cancel your xref:plan-performance#[Performance Plan] subscription.
+
+. In the link:https://app.circleci.com/[CircleCI web app], select **Plan** on the left sidebar and then open the **Billing** tab.
+
+. At the bottom of the page, select "Looking to cancel your plan?"
+
+. Select **Cancel**. Follow the prompts to complete the cancellation.
+
+[#how-do-i-know-if-i-am-an-org-admin-in-circleci]
+=== How do I know if I am an org admin in CircleCI?
+
+For GitHub users, your account has the "Owner" role in your GitHub organization.
+
+For Bitbucket Cloud users, your account has "Admin" permissions in your Bitbucket repository.
+
+For GitLab users, your account is listed as "Org Admin" in the CircleCI web app under xref:gitlab-integration#organization-settings-people[**Organization Settings > People**].
+
+[#what-happens-upon-cancelling-a-performance-plan-subscription]
+=== What happens upon cancelling a Performance Plan subscription?
+
+You will continue to have access to the Performance Plan settings in the CircleCI web app and be able to use credits until the end of your current billing cycle. After the cycle ends, your org will be transitioned to the xref:plan-free#[Free Plan], where you can use up to 30,000 credits per month.
+
+Note that you will no longer have access to the billing statements after the end of the current billing cycle. Make sure to download your billing statements before then.
+
+[#what-happens-to-unused-credits-if-a-plan-is-cancelled]
+=== What happens to unused credits if a plan is cancelled?
+
+Credits that are unused at the end of the billing cycle will be forfeited and are not eligible for refunds.
+
+[#is-it-possible-to-reactivate-the-performance-plan-after-cancelling-the-subscription]
+=== Is it possible to reactivate the Performance Plan after cancelling the subscription?
+
+Yes, you can always upgrade to the Performance Plan from the **Plan > Overview** page in the CircleCI web app.
+
+

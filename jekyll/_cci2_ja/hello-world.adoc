@@ -1,12 +1,10 @@
 ---
 
-redirect_from: /ja/examples-intro/
 contentTags:
   platform:
     - クラウド
     - Server v4.x
     - Server v3.x
-    - Server v2.x
 sectionTags:
   cloud:
     - "#echo-hello-world-cloud"
@@ -27,8 +25,10 @@ sectionTags:
 
 すでに CircleCI に "プラグイン" するリポジトリをお持ちの場合は、設定ファイルのコミットを含め、すべて CircleCI Web アプリ内で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
 
+{% include snippets/ja/docker-auth.adoc %}
+
 [#echo-hello-world-cloud]
-== Echo hello world
+== Server v4.x での Echo hello world
 
 この例では、`hello world` をコンソールに出力する `hello-job` というジョブを追加します。 まずは以下の手順を行います。
 
@@ -47,9 +47,6 @@ jobs:
   hello-job:
     docker:
       - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
@@ -192,8 +189,8 @@ image:hello-world-app.png[ジョブステップ出力内に hello world が表�
 
 **ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
-[#echo-hello-world-server-4]
-== Server v4.x での Echo hello world
+[#echo-hello-world-server]
+== Server v3.x での Echo hello world
 
 NOTE: CircleCI Server 上で macOS 実行環境内でビルドするには、 link:/docs/ja/runner-overview[セルフホストランナー] を使用します。
 
@@ -214,9 +211,6 @@ jobs:
   hello-job:
     docker:
       - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
@@ -303,205 +297,6 @@ workflows:
 . ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
 +
 image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
-
-**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
-
-[#echo-hello-world-server-3]
-== Server v3.x での Echo hello world
-
-NOTE: CircleCI Server (v3.1.0 以上) 上で macOS 実行環境内でビルドするには、 link:/docs/ja/runner-overview[セルフホストランナー] を使用します。
-
-この例では、`hello world` をコンソールに出力する `hello-job` というジョブを追加します。 まずは以下の手順を行います。
-
-. ご使用のローカルコードリポジトリのルートディレクトリに、`.circleci` というディレクトリを作成します。
-. 作成した `.circleci` ディレクトリから link:/docs/ja/configuration-reference[`config.yml`] ファイルを作成し、次の内容を追加します (タブを使用して実行環境を選択)。
-+
-[.tab.helloserver3.Docker]
---
-ジョブ `hello-job` は、 link:/docs/ja/circleci-images/#nodejs[ノード用のビルド済み CircleCI Docker イメージ] を実行するコンテナをスピンアップします。 詳細については、 link:/docs/ja/using-docker[Docker 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    docker:
-      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-+
-[.tab.helloserver3.Linux_VM]
---
-ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/images?imageType=machine[Ubuntu マシンイメージ] を実行する Linux 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-linuxvm[Linux VM 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    machine: true
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-+
-[.tab.helloserver3.Windows]
---
-ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/orbs/orb/circleci/windows#usage-run_default[Windows Orb] で指定されたデフォルトの Executor を使用する Windows 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-windows[Windows 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    machine:
-      image: windows-default
-
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-+
-[.tab.helloserver3.Arm]
---
-ジョブ `hello-job` は Arm (Ubuntu 22.04) 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-arm[Arm 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    machine:
-      image: arm-default
-    resource_class: arm.medium
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-. 変更内容を VCS にコミットしてプッシュします。
-. CircleCI Web アプリの **Projects** ページにアクセスし、新しいプロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。
-. ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
-+
-image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
-
-**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
-
-[#echo-hello-world-server-2]
-== Server v2.x での Echo hello world
-
-この例では、`hello world` をコンソールに出力する `hello-job` というジョブを追加します。 まずは以下の手順を行います。
-
-. ご使用のローカルコードリポジトリのルートディレクトリに、`.circleci` というディレクトリを作成します。
-. 作成した `.circleci` ディレクトリから link:/docs/ja/configuration-reference[`config.yml`] ファイルを作成し、次の内容を追加します (タブを使用して実行環境を選択)。
-+
-[.tab.helloserver2.Docker]
---
-ジョブ `hello-job` は、 link:/docs/ja/circleci-images/#nodejs[ノード用のビルド済み CircleCI Docker イメージ] を実行するコンテナをスピンアップします。 詳細については、 link:/docs/ja/using-docker[Docker 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    docker:
-      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-+
-[.tab.helloserver2.Linux_VM]
---
-ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/images?imageType=machine[Ubuntu マシンイメージ] を実行する Linux 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-linuxvm[Linux VM 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    machine: true
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-+
-[.tab.helloserver2.Windows]
---
-ジョブ `hello-job` は、 link:https://circleci.com/developer/ja/orbs/orb/circleci/windows#usage-run_default[Windows Orb] で指定されたデフォルトの Executor を使用する Windows 仮想マシンをスピンアップします。 詳細については、 link:/docs/ja/using-windows[Windows 実行環境の使用] のページを参照してください。
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  hello-job:
-    machine:
-      image: windows-default
-
-    steps:
-      # Commands are run in a Windows virtual machine environment
-      - checkout
-      - run: Write-Host 'Hello, Windows'
-
-workflows:
-  my-workflow:
-    jobs:
-      - hello-job
-----
---
-. 変更内容を VCS にコミットしてプッシュします。
-. CircleCI Web アプリの **Add Projects** ページにアクセスし、**Start Building** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。 クリックすると、ジョブとワークフローがアプリ内の関連ページに表示されます。
 
 **ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
