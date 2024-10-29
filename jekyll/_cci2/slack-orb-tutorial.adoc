@@ -294,7 +294,7 @@ To restrict your alert to a specific branch, add a `branch_pattern` parameter:
       template: basic_fail_1
 ----
 
-This is useful if you do not want to receive alerts for feature branches.
+Restricting your alert to a specific branch is useful if, for example, you do not want to receive alerts for feature branches.
 
 [#use-the-slack-block-kit-builder]
 === b. Use the Slack Block Kit Builder
