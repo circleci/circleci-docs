@@ -1,0 +1,71 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Set up SSO
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Tutorial outlining how to set up SSO for an organization
+:icons: font
+:experimental:
+
+NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview#prerequisites-and-limitations[Prerequisites and Limitations]
+for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
+
+== Setup SAML SSO
+
+To set up SAML SSO, you must have the _Organization Admin_ role. For informaiton on roles and permissions, see the xref:../roles-and-permissions-overview#[Roles and permissions overview].
+
+=== Access Setup Parameters in CircleCI
+
+To begin setting up a SAML SSO connection in your CircleCI organization, follow these steps:
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Organization Settings** in the sidebar.
+. Select **Single Sign-On (SSO)** from the sidebar.
+. On the SSO Settings page, select **Setup SSO**.
+. Copy the provided **Setup Parameters** and **Allowed iFrame Origin**. You will need these to configure your Identity Provider (IdP).
+
+=== Configure your Identity Provider (IdP)
+
+Next you will configure your IdP. The steps to do this will vary depending on your IdP. For example, if you are using Okta, refer to link:https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_saml.html[Okta's documentation].
+
+. Open your IdP and paste the required configuration details (**Setup Parameters** and **Allowed iFrame Origin**) retrieved from CircleCI in the previous section to configure your IdP.
+. Add `https://app.circleci.com` to your IdP's trusted origins for iframe embedding. This is required to validate a user's active SSO session when they are interacting with an SSO organization in CircleCI.
+. The IdP will generate the following information, which you will need to copy in order to complete the next section:
+** SSO URL
+** x509 signing certificate
+
+=== Complete SSO Setup in CircleCI
+
+To complete setting up a SAML SSO connection in your CircleCI organization:
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Organization Settings** in the sidebar.
+. Select **Single Sign-On (SSO)** from the sidebar.
+. Enter the information provided by your IdP in the previous section. For the domain/realm, enter the email domain that your users will use for CircleCI SSO. When ready, select **Save credentials**.
+. Copy the provided TXT record and add it to your DNS. Your SSO Connection will be marked as **Pending** until this has been done. Adding the TXT record to your DNS allows CircleCI to validate that you are the owner of the domain on-which SSO is being enabled.
++
+NOTE: CircleCI will periodically poll DNS to check for the required TXT record. Once your DNS is successfully updated, your SSO connection will be marked as **Connected, not enforced**
+. Once your SSO Connection is marked as **Connected**, toggle **Enforce SSO for all users** on to begin enforcement. Your SSO connection will now be marked as **Connected, enforced**
++
+** Existing organization members will be prompted to authenticate with your IdP the next time they attempt to access your CircleCI organization
+** New organization members must be invited to your organization.
+
+Your organization is now using SSO to grant and deny user access. You can manage user roles by following the xref:../manage-roles-and-permissions#[manage roles and permissions] documentation.
+
+[stop-enforcing-sso]
+== Stop enforcing SSO
+
+SSO can be disabled for an organization. This will revert an organization to using email and password authentication.
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Organization Settings** in the sidebar.
+. Select **Single Sign-On (SSO)** from the sidebar.
+. Toggle **Enforce SSO for all users** off to disable SSO enforcement.
+
+[delete-connection]
+== Delete SSO connection
+
+It is possible to delete an SSO Connection for an organization. This will delete the SSO connection and your organization will no longer require users to be authenticated via SSO. SSO configuration details will permanently be deleted and users will revert to using email and password authentication.

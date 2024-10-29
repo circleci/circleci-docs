@@ -145,6 +145,7 @@ HPA
 HPAs?
 IAM
 Identity Provider
+IdP
 [Ii]nsights
 invocated
 IP
@@ -189,6 +190,7 @@ npm
 \bnyc\b
 OAuth
 OIDC
+Okta
 OOM
 OPA
 OpenID Connect
@@ -245,6 +247,7 @@ SDK
 Selenium
 SemVer
 Server Plan
+[Ss]ingle sign-on
 SLAs?
 [Ss]ignup
 SKUs?
