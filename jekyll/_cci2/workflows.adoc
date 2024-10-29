@@ -268,12 +268,13 @@ NOTE: Scheduled workflows are not available for projects integrated through the 
 
 NOTE: *The deprecation of the scheduled workflows feature is postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work for us to do to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
+CAUTION: The scheduled workflows feature does not support xref:dynamic-config#[Dynamic configuration]. If you use dynamic configuration you will need to use xref:scheduled-pipelines#[Scheduled pipelines] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+
 By default, a workflow runs on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
 
 Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling a workflow is an alternative to building on every commit. You can _schedule_ a workflow to run at a certain time for a specific branch or branches. Consider scheduling workflows that are resource-intensive or that generate reports on a schedule rather than on every commit.
 
 CAUTION: A scheduled workflow will run on a schedule only. A scheduled workflow will **not** be run on commits to your code.
-CAUTION: The scheduled workflows feature does not support xref:dynamic-config#[Dynamic config]. You will need to use the xref:scheduled-pipelines#[Scheduled pipelines] feature. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
 
 If you do not configure any workflows in your `.circleci/config.yml`, an implicit workflow is used. If you configure a scheduled workflow the implicit workflow is no longer run. If you want to build on every commit you must add your workflow to your configuration file.
 
