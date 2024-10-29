@@ -688,6 +688,11 @@ Each job consists of the job's name as a key and a map as a value. A name should
 |===
 | Key | Required | Type | Description
 
+| `type`
+| N
+| String
+| Job type, can be `build`, `release` or `approval`. If not specified, defaults to `build`.
+
 | `docker`
 | Y ^(1)^
 | List
@@ -745,6 +750,17 @@ Each job consists of the job's name as a key and a map as a value. A name should
 |===
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
+
+'''
+
+[#job-type]
+==== `type`
+
+Configure a job type. Options are `release`, `approval`, `build` (default). If a type is not specified, the job defaults to a `build` type.
+
+Jobs with the `release` type are used to xref:/release/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a release in the CircleCI releases UI. For full details, see the xref:/release/releases-overview#[Releases overview] page.
+
+The `approval` type is used to configure a manual approval step. No `job` configuration is required or allowed for an `approval` type job. The `approval` type is most commonly configured within a workflow rather than under the top-level `jobs` key. Only `approval` type jobs can have their `type` configured under `workflows`. See <<type,type under workflows section>> for full details.
 
 '''
 
