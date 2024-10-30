@@ -362,36 +362,7 @@ Any errors evaluating an expression will _fail closed_ and prevent use of the co
 
 The operators you can use are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the example above.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| Operator type | Operators | Description
-
-| Logical
-|`and`, `or`
-| These are short-circuiting boolean operators.
-
-| Equality
-| `==`, `!=`
-| String, numeric, and boolean equality. If the operands are of different types then `==` will evaluate `false`, and `!=` will evaluate `true`.
-
-| Equality
-| `starts-with`
-| String prefix equality, `"hello world" starts-with "hello"` evaluates as `true`. It is an error to use a non-string type as an operand.
-
-| Numeric comparison
-| `>=`, `>`, `<=`, `<`
-| Numeric comparisons. It is an error to use a non-numeric type as an operand.
-
-| Negation
-| `not`
-a| Boolean negation.
-
-Note that `not` has very high precedence and so binds very tightly. Use sub-expressions to apply `not` to more complex expressions. For example, with `foo` being `true` and `bar` being `false`:
-
-  * `not foo and bar` evaluates to `false`
-  * `not (foo and bar)` evaluates to `true`
-|===
+include::../_includes/partials/operators.adoc[]
 
 === Precedence
 The following table shows operator precedence table, from weakest to strongest binding.

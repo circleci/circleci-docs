@@ -2700,6 +2700,11 @@ An approval job can have any name. In the example above the approval job is name
 
 [#jobfilters]
 ====== *`filters`*
+Filter job execution within a workflow based on the following:
+
+* Branch
+* Tag
+* Expression-based condition
 
 Job filters can have the keys `branches` or `tags`.
 
@@ -2713,10 +2718,10 @@ NOTE: Workflows will ignore job-level branching. If you use job-level branching 
 | `filters`
 | N
 | Map
-| A map defining rules for execution on specific branches
+| A map defining rules for execution on specific branches, tags, or based on an expression-based condition.
 |===
 
-The following is an example of how the CircleCI documentation uses a regex to filter running a workflow for building PDF documentation:
+The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
 
 [,yaml]
 ----
@@ -2728,19 +2733,59 @@ workflows:
       - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
           filters:
             branches:
-              only: /server\/.*/
+              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
 ----
 
-The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
+You can read more about using regular expressions in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
 
-You can read more about using regex in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
+'''
+
+====== Expression-based job filters
+Expression-based job filters allow you to conditionally run jobs based on the following:
+
+* xref:variables#pipeline-values[Pipeline values]
+* xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline parameters]
+
+An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run
+
+Using expression-based job filters is one way to optimize your pipelines to lower costs, decrease time to feedback, or run specific jobs based on context of the source of change.
+
+[,yml]
+----
+workflows:
+  deploy:
+    jobs:
+      - init-service
+      - build-service-image:
+          requires:
+            - init-service
+      - dry-run-service:
+          requires:
+            - init-service
+          filters: pipeline.git.branch != "main" and pipeline.git.branch != "canary"
+      - publish-service:
+          requires:
+            - build-service-image
+            - test-service
+          filters: pipeline.git.branch == "main" or pipeline.git.tag starts-with "release"
+      - deploy-service:
+          context:
+            - org-global
+          requires:
+            - publish-service
+          filters: pipeline.git.branch == "main" and pipeline.git.commit.subject starts-with "DEPLOY:"
+----
+
+**Operators**
+
+include::../_includes/partials/operators.adoc[]
 
 '''
 
 [#branches]
 ====== *`branches`*
 
-Branches can have the keys `only` and `ignore`, which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
+The branches filter can have the keys `only` and `ignore`, which map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
 
 * Any branches that match `only` will run the job.
 * Any branches that match `ignore` will not run the job.
@@ -2755,17 +2800,17 @@ Branches can have the keys `only` and `ignore`, which either map to a single str
 | `branches`
 | N
 | Map
-| A map defining rules for execution on specific branches
+| A map defining rules for execution on specific branches.
 
 | `only`
 | N
-| String, or List of Strings
-| Either a single branch specifier, or a list of branch specifiers
+| String, or list of strings
+| Either a single branch specifier, or a list of branch specifiers.
 
 | `ignore`
 | N
-| String, or List of Strings
-| Either a single branch specifier, or a list of branch specifiers
+| String, or list of strings
+| Either a single branch specifier, or a list of branch specifiers.
 |===
 
 [source,yaml]
