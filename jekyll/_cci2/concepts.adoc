@@ -546,12 +546,12 @@ See the xref:jobs-steps#[Jobs and steps] page for more information.
 [#user-types]
 == Roles and user types
 
-CircleCI roles or user types are set up differently depending on how you xref:version-control-system-integration-overview#[integrate your code].
+CircleCI roles, or user types, are set up differently depending on how you xref:version-control-system-integration-overview#[integrate your code].
 
 TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
 === GitHub App, GitLab and Bitbucket Data Center users
-Roles are set at the organization and project level and are separate to permissions and roles set in the version control system where your code is stored. The available roles are:
+Roles are set at the organization and project level and are separate to permissions and roles set in the version control system in which your code is stored. The available roles are:
 
 * Admin
 * Contributor
