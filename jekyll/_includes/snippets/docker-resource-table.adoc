@@ -1,4 +1,4 @@
-NOTE: For credit and access information, see the link:https://circleci.com/pricing/[pricing page]. Resource class access is dependent on your xref:plan-overview#[Plan].
+NOTE: For credit and access information, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page]. Resource class access is dependent on your xref:plan-overview#[Plan].
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
