@@ -1,8 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.6
 ---
 = Machine runner installation on macOS
 :page-layout: classic-docs
@@ -13,7 +12,9 @@ contentTags:
 :machine:
 :macos:
 
-This page describes how to install CircleCI's machine runner on macOS.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up macOS self-hosted runners on CircleCI cloud.
+
+This page describes how to install CircleCI's machine runner on macOS for **CircleCI server** customers.
 
 [#prerequisites]
 == Prerequisites
@@ -78,7 +79,7 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
-- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
+- Replace `AUTH_TOKEN` with the resource class token created in the <<create-namespace-and-resource-class,set up process>>.
 - Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#update-workdir-ownership]
@@ -199,4 +200,4 @@ Open the pre-installed macOS application *Console*. In this application, you can
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.

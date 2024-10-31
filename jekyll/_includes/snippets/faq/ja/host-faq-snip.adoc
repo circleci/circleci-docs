@@ -7,4 +7,4 @@
 [#circleci-20-available-to-enterprise-customers]
 === CircleCI は企業（エンタープライズ）でも利用できますか？
 
-はい、CircleCI Server は AWS または GCP 上にインストールできます。 インストールの詳細やガイドへのリンクは、xref:server/overview/circleci-server-v4-overview#[CircleCI Server v4.x] の概要をご覧ください。 ご要望がございましたら link:https://circleci.com/ja/pricing/server/[お問い合わせ]ください。
+はい、CircleCI server は AWS または GCP 上にインストールできます。 インストールの詳細やガイドへのリンクは、link:https://circleci.com/docs/server/v4.5/overview/circleci-server-overview[CircleCI server v4.x] の概要をご覧ください。 ご要望がございましたら link:https://circleci.com/ja/pricing/server/[お問い合わせ]ください。

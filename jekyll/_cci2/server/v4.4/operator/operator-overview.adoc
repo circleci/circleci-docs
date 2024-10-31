@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.4
     - Server Admin
+noindex: true
 ---
 = Operator overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server.
+:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.4.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +17,7 @@ This guide contains information for CircleCI server operators, or those responsi
 
 CircleCI server schedules CI/CD jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane and Kong.
 
-CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated virtual machines for remote docker jobs.
+CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated virtual machines for remote Docker jobs.
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
 
@@ -40,14 +41,13 @@ See the link:https://www.nomadproject.io/docs/install/production/requirements#re
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
 
 For more information on Nomad port requirements, see the
-https://circleci.com/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+xref:../installation/hardening-your-cluster#[Hardening Your Cluster]
 guide.
 
 [#github]
 === GitHub
-CircleCI uses GitHub or GitHub Enterprise as an identity provider. GitHub Enterprise can, in turn, use
-https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM]
-to manage users from an external identity provider.
+CircleCI uses GitHub or GitHub Enterprise as an Identity Provider. GitHub Enterprise can, in turn, use
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM] to manage users from an external Identity Provider.
 
 NOTE: CircleCI does not support changing the URL or backend GitHub instance after it has been set up.
 

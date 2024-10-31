@@ -28,7 +28,7 @@ CircleCI test splitting lets you intelligently define where splits happen across
 * By **size**
 * Using **timing** data
 
-It is also possible to use the CLI to [manually allocate tests](#manual-allocation) across parallel environments. Another alternative is to use [environment variables](#using-environment-variables-to-split-tests) instead of the CLI to configure split tests.
+It is also possible to use the CLI to [manually allocate tests](#manual-allocation) across parallel environments.
 
 ## Quickstart
 {: #quickstart }
@@ -99,7 +99,7 @@ CircleCI's test splitting feature allows you to specify a number of identical ex
       parallelism: 4
       resource_class: large
       steps:
-        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname -- --split-by=filesize"
+        - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=filesize
 
   ```
 

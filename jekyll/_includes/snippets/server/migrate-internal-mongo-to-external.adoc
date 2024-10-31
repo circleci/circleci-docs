@@ -1,4 +1,4 @@
-NOTE: If you are doing a fresh install of CircleCI Server, then you can skip this section and head to <<connecting-your-external-mongodb>>
+NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-mongodb>>
 
 When a CircleCI server instance deployed, MongoDB is deployed internally by default via its helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
 
@@ -70,7 +70,7 @@ Use the generated MongoDB backup to restore the data to your external MongoDB:
 
 [source,shell]
 ----
-kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --authenticationDatabase admin /tmp/backups/circle_ghe;
+kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --host <external-mongodb-host> --port <external-mongodb-port> --authenticationDatabase admin /tmp/backups/circle_ghe;
 ----
 
 Now your external MongoDB will have your CircleCI server data. In the next section you will update CircleCI server to point to your external MongoDB.

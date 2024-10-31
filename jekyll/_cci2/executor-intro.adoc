@@ -1,0 +1,346 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+---
+= Execution environments overview
+:page-description: An overview of all CircleCI execution environments.
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+CircleCI offers several execution environments:
+
+* Docker (x86 or Arm)
+* Linux VM (virtual machine)
+* macOS
+* Windows
+* GPU
+* Arm VM
+
+Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
+
+== Executors
+
+For each job in your project config you will specify an execution environment by assigning it an *executor*. An *executor* defines the underlying technology or environment in which to run a job, and which image to use to suit your job.
+
+It is possible to specify a different executor and image for each job in your xref:configuration-reference#[.configuration file].
+
+=== Images, containers, and virtual machines
+
+An _image_ is a packaged system that has the instructions for creating a running environment.
+
+A _container_ or _virtual machine_ is the term used for a running instance of an image.
+
+For example:
+
+* Jobs that require Docker images (`docker`) may use an image for Node.js, Python etc. The xref:circleci-images#[pre-built CircleCI Docker image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
+
+* Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:configuration-reference#available-linux-machine-images-cloud[list of available machine images].
+
+* Jobs that require a macOS VM image (`macos`) may use an Xcode version. A full list is available on the xref:using-macos#supported-xcode-versions[Using macOS] page.
+
+=== Resource class
+
+When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
+
+* For an overview of resource classes, see the xref:resource-class-overview#[Resource class overview] page.
+* For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
+
+[#docker]
+== Docker
+
+CAUTION: *Legacy images with the prefix "circleci/" were https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
+
+To access the Docker execution environment, use the `docker` executor and specify an image. For a full list of convenience images, which are built by CircleCI, see the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub]
+
+[,yml]
+----
+jobs:
+  build: # name of your job
+    docker: # executor type
+      - image: cimg/base:stable # primary container will run the latest, production-ready base image
+
+    steps:
+        # Commands run in the primary container
+----
+
+Find out more about the Docker execution environment on the link:/docs/using-docker/[Using Docker] page.
+
+[#linux-vm]
+== Linux VM
+
+NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+
+To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]
+
+[.tab.machine.Cloud]
+--
+[,yml]
+----
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2204:current
+
+    steps:
+        # Commands run in a Linux virtual machine environment
+----
+--
+
+[.tab.machine.Server]
+--
+[,yml]
+----
+jobs:
+  build: # name of your job
+    machine: true # executor type
+    steps:
+      # Commands run in a Linux virtual machine environment
+----
+--
+
+Find out more about the Linux VM execution environment in the xref:using-linuxvm#[Using Linux Virtual Machines] page.
+
+[#macos]
+== macOS
+
+To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/macos[CircleCI Developer Hub].
+
+NOTE: If you want to run a macOS build on CircleCI server, you will need to use xref:runner-overview#[self-hosted runner].
+
+[,yml]
+----
+jobs:
+  build: # name of your job
+    macos: # executor type
+      xcode: 14.2.0
+
+    steps:
+      # Commands run in a macOS virtual machine environment
+      # with Xcode 14.2.0 installed
+----
+
+Find out more about the macOS execution environment on the xref:using-macos#[Using macOS] page.
+
+[#windows]
+== Windows
+
+To access the Windows execution environment, you can either:
+
+* Use the Windows orb and specify one of the default executors.
+* Use the `machine` executor and specify a Windows image.
+
+For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
+
+[.tab.windowsblock.Cloud_with_orb]
+--
+[,yml]
+----
+version: 2.1
+
+orbs:
+  win: circleci/windows@4.1.1 # The Windows orb gives you everything you need to start using the Windows executor
+
+jobs:
+  build: # name of your job
+    executor: win/server-2022 # use one of the executors defined within the windows orb
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+----
+--
+
+[.tab.windowsblock.Cloud]
+--
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build: # name of your job
+    resource_class: 'windows.medium'
+    machine:
+      image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+----
+--
+
+[.tab.windowsblock.Server]
+--
+[,yml]
+----
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+----
+--
+
+Find out more about the Windows execution environment in the xref:using-windows#[Using the Windows Execution Environment] page. See link:https://circleci.com/developer/orbs/orb/circleci/windows[the Windows orb page in the developer hub] for the list of options available in the Windows orb.
+
+[#gpu]
+== GPU
+
+To access the GPU execution environment, use one of the following:
+
+* The Windows orb and specify the GPU-enabled executor.
+* The `machine` executor and specify a Linux or Windows GPU-enabled image.
+
+For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
+
+NOTE: It is not possible to run a GPU build on CircleCI server.
+
+[.tab.gpublock.Linux]
+--
+[,yml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: linux-cuda-12:default
+    resource_class: gpu.nvidia.medium
+    steps:
+      - run: nvidia-smi
+----
+--
+
+[.tab.gpublock.Windows_without_orb]
+--
+[,yml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: windows-server-2019-cuda
+    resource_class: gpu.nvidia.small
+    steps:
+      - run: nvidia-smi
+----
+--
+
+[.tab.gpublock.Windows_with_orb]
+--
+[,yml]
+----
+version: 2.1
+
+orbs:
+  win: circleci/windows@4.1.1
+
+jobs:
+  build:
+    executor: win/server-2019-cuda
+    steps:
+      - run: 'Write-Host ''Hello, Windows'''
+----
+--
+
+Find out more about the GPU execution environment on the xref:using-gpu#[Using the GPU Execution Environment] page.
+
+[#arm]
+== Arm VM
+
+To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
+
+[.tab.armblock.Cloud]
+--
+[,yml]
+----
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+  build-large:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+----
+--
+
+[.tab.armblock.Server_on_AWS]
+--
+[,yml]
+----
+# .circleci/config.yml
+version: 2.1
+
+jobs:
+  build-medium:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+  build-large:
+    machine:
+      image: arm-default
+    resource_class: arm.large
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+
+workflows:
+  build:
+    jobs:
+      - build-medium
+      - build-large
+----
+--
+
+Find out more about the Arm VM execution environment in the xref:using-arm#[Using the Arm VM Execution Environment] page. You can also use xref:using-docker#arm[Arm on Docker].
+
+[#self-hosted-runner]
+== Self-hosted runner
+
+CircleCI provides the ability to have self-hosted runners:
+
+* xref:container-runner#[Container runner] using Kubernetes.
+* xref:runner-overview#machine-runner-use-case[Machine runner] using Linux, Windows, and macOS virtual machines.
+
+[#port-ranges]
+== Port ranges
+
+When using a machine executor, if a port range is hard coded, the range in `/proc/sys/net/ipv4/ip_local_reserved_ports` should be avoided. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
+
+[#next-steps]
+== Next steps
+
+* Read more about xref:circleci-images#[Pre-built CircleCI convenience images] for the Docker execution environment.

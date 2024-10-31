@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Using Workspaces to Share Data between Jobs
+= Using workspaces to share data between jobs
 :page-layout: classic-docs
 :page-description: This document describes how to use workspaces to share data to downstream jobs in your workflows.
 :page-liquid:
@@ -35,7 +35,7 @@ Some notes about workspaces:
 * If multiple concurrent jobs persist the same filename, then attaching the workspace will error.
 * If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
-By default, workspace storage duration is set to 15 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 15 days is also the maximum storage duration you can set.
+By default, on CircleCI cloud, workspace storage duration is set to 15 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 15 days is also the maximum storage duration you can set.
 
 image::/docs/assets/img/docs/workspaces.png[workspaces data flow]
 
@@ -110,7 +110,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
-You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-use[Persisting Data] page.
+You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-usage[Persisting Data] page.
 
 [#workspace-usage-optimization]
 == Workspace optimization

@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
+:page-description: A guide to installing CircleCI server v4.1 in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font
 :experimental:
 
@@ -47,7 +48,7 @@ CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You wi
 
 [#login-to-acr]
 === a. Log in to CircleCI server container registry
-Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Please visit https://support.circleci.com/[support.circleci.com] for more information.
+Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Visit link:https://support.circleci.com/[support.circleci.com] for more information.
 
 [source, bash]
 ----

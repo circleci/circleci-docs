@@ -15,9 +15,6 @@ contentTags:
 
 This document provides information about convenience images (pre-built Docker images maintained by CircleCI) and a listing by language, service type, and tags.
 
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
 
@@ -31,7 +28,6 @@ If you would like to directly search for an image, you can browse CircleCI Docke
 
 - Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
 - Find all CircleCI pre-built images available on [Docker Hub](https://hub.docker.com/u/cimg).
-- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
 otherwise improve functionality, and these changes can sometimes affect
@@ -62,6 +58,7 @@ deterministic images.
 Using the `base` image in your config looks like the example shown below:
 
 ```yaml
+jobs:
   myjob:
     docker:
       - image: cimg/base:2021.04
@@ -69,7 +66,7 @@ Using the `base` image in your config looks like the example shown below:
 
 {% include snippets/docker-auth.md %}
 
-This is a brand new Ubuntu-based image designed to install the bare minimum. The
+This is an Ubuntu-based image designed to install the bare minimum. The
 next-generation convenience images are based on this image.
 
 **When to use it?**
@@ -84,10 +81,10 @@ You can find more config examples for this image on the [Developer Hub](https://
 The example below demonstrates how to use the next-gen Go image, which is based off the `base` image above.
 
 ```yaml
+jobs:
   myjob:
     docker:
       - image:  cimg/go:1.16
-        auth:
 ```
 
 This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`. You can view other next generation images for other languages [below](#next-gen-language-images).
@@ -154,7 +151,7 @@ Follow these steps to find your docker image id:
 3. In the log output, locate the digest for the image.
 4. Add the image ID to the image name as shown below.
 
-```
+```shell
 cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b0182cf
 ```
 

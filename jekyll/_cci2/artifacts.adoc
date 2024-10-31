@@ -37,6 +37,8 @@ For information on managing network and storage usage, see the xref:persist-data
 
 NOTE: Uploaded artifact filenames are encoded using the link:https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html[Java URLEncoder]. Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
+If you need to restrict the connections allowed in your jobs, consider enabling xref:ip-ranges#[IP ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
+
 [#uploading-artifacts]
 == Uploading artifacts
 
@@ -79,7 +81,7 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
 [#uploading-core-files]
 == Uploading core files
 
-This section describes how to get link:http://man7.org/linux/man-pages/man5/core.5.html[core dumps] and push them as artifacts for inspection and debugging. The following example creates a short C program that runs link:http://man7.org/linux/man-pages/man3/abort.3.html[`abort(3)`] to crash the program.
+This section describes how to get link:https://man7.org/linux/man-pages/man5/core.5.html[core dumps] and push them as artifacts for inspection and debugging. The following example creates a short C program that runs link:https://man7.org/linux/man-pages/man3/abort.3.html[`abort(3)`] to crash the program.
 
 . Create a `Makefile` with the following lines:
 +
@@ -224,26 +226,30 @@ xref:configuration-reference#the-when-attribute[The `when` attribute] lets you f
 
 [,yaml]
 ----
-steps:
-  - run:
-      name: Testing application
-      command: make test
-      shell: /bin/bash
-      working_directory: ~/my-app
-      no_output_timeout: 30m
-      environment:
-        FOO: bar
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.01
+    steps:
+      - run:
+          name: Testing application
+          command: make test
+          shell: /bin/bash
+          working_directory: ~/my-app
+          no_output_timeout: 30m
+          environment:
+            FOO: bar
 
-  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+      - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
-  - run: |
-      sudo -u root createuser -h localhost --superuser ubuntu &&
-      sudo createdb -h localhost test_db
+      - run: |
+          sudo -u root createuser -h localhost --superuser ubuntu &&
+          sudo createdb -h localhost test_db
 
-  - run:
-      name: Upload Failed Tests
-      command: curl --data fail_tests.log http://example.com/error_logs
-      when: on_fail
+      - run:
+          name: Upload Failed Tests
+          command: curl --data fail_tests.log http://example.com/error_logs
+          when: on_fail
 ----
 
 [#next-steps]

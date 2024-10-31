@@ -11,9 +11,18 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
 Follow the how-to guides on this page to manage, create, and use config policies.
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+----
+====
 
 [#config-policy-management-enablement]
 == Enable or disable policy evaluation for an organization
@@ -78,7 +87,7 @@ You can do this using a context. For more information about setting up and using
 . In the CircleCI web app, select **Organization settings > Contexts**
 . Click **Create Context** and enter a name for your context, for example `my-context`
 . Click your new context name in the list to access options
-. Click **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:local-cli#configuring-the-cli[Installting the CircleCI local CLI] page). Then click **Add Environment Variable** again to complete.
+. Click **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:local-cli#configure-the-cli[Installing the CircleCI local CLI] page). Then click **Add Environment Variable** again to complete.
 . Click **Add Environment Variable** and enter `ORG_ID` for the environment variable name, and your organization ID for the value.
 +
 {% include snippets/find-organization-id.adoc %}
@@ -86,11 +95,11 @@ You can do this using a context. For more information about setting up and using
 [set-up-a-config-policy-management-ci-pipeline]
 === Set up a config policies CI/CD pipeline
 
-. Set up a repository in your VCS to manage policies. In this example the repo is called `config-policies`.
+. Set up a repository in your VCS to manage policies. In this example the repository is called `config-policies`.
 
-. Make a local clone of your repo using your preferred method.
+. Make a local clone of your repository using your preferred method.
 
-. Create a directory in your new repo for your Rego policy files, for example:
+. Create a directory in your new repository for your Rego policy files, for example:
 +
 [source,shell]
 ----
@@ -215,7 +224,7 @@ check_version = reason {
 You can now push your new policy to your organization for it to take effect. You have two options:
 
 * Push the policy manually using the CLI from your local environment
-* Push your changes to your config policy repo if you are managing policies via your VCS as shown <<manage-policies-with-your-vcs,above>>.
+* Push your changes to your config policy repository if you are managing policies via your VCS as shown <<manage-policies-with-your-vcs,above>>.
 
 [tab.allow.manual]
 --
@@ -238,7 +247,7 @@ If the upload was successful, you will see something like the following:
 
 [tab.allow.push_to_vcs]
 --
-If you have set up your config policies repository with the sample configuration shown <<manage-policies-with-your-vcs,above>>, push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+If you have set up your config policies with the sample configuration shown <<manage-policies-with-your-vcs,above>>, push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --

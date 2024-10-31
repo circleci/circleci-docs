@@ -1,0 +1,49 @@
+NOTE: For credit and access information, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page]. Resource class access is dependent on your xref:plan-overview#[Plan].
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Class | vCPUs | RAM | Cloud | Server
+
+| `small`
+| 1
+| 2GB
+| icon:check[]
+| icon:check[]
+
+| `medium`
+| 2
+| 4GB
+| icon:check[]
+| icon:check[]
+
+| `medium+`
+| 3
+| 6GB
+| icon:check[]
+| icon:check[]
+
+| `large`
+| 4
+| 8GB
+| icon:check[]
+| icon:check[]
+
+| `xlarge`
+| 8
+| 16GB
+| icon:check[]
+| icon:check[]
+
+| `2xlarge`
+| 16
+| 32GB
+| icon:check[]
+| icon:check[]
+
+| `2xlarge+`
+| 20
+| 40GB
+| icon:check[]
+| icon:check[]
+|===

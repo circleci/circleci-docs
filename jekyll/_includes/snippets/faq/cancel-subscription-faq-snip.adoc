@@ -1,27 +1,27 @@
 [#how-do-i-cancel-a-performance-plan-subscription]
-=== How do I cancel a Performance plan subscription?
+=== How do I cancel a Performance Plan subscription?
 
-You must have admin access in your CircleCI organization to cancel your xref:plan-performance#[Performance plan] subscription.
+You must have admin access in your CircleCI organization to cancel your xref:plan-performance#[Performance Plan] subscription.
 
-. In the link:https://app.circleci.com/[CircleCI web app], click **Plan** on the left sidebar and then open the **Billing** tab.
+. In the link:https://app.circleci.com/[CircleCI web app], select **Plan** on the left sidebar and then open the **Billing** tab.
 
-. At the bottom of the page, click "Looking to cancel your plan?" 
+. At the bottom of the page, select "Looking to cancel your plan?"
 
-. Click **Cancel**. Follow the prompts to complete the cancellation.
+. Select **Cancel**. Follow the prompts to complete the cancellation.
 
 [#how-do-i-know-if-i-am-an-org-admin-in-circleci]
 === How do I know if I am an org admin in CircleCI?
 
 For GitHub users, your account has the "Owner" role in your GitHub organization.
 
-For Bitbucket users, your account has "Admin" permissions in your Bitbucket repository.
+For Bitbucket Cloud users, your account has "Admin" permissions in your Bitbucket repository.
 
 For GitLab users, your account is listed as "Org Admin" in the CircleCI web app under xref:gitlab-integration#organization-settings-people[**Organization Settings > People**].
 
 [#what-happens-upon-cancelling-a-performance-plan-subscription]
-=== What happens upon cancelling a Performance plan subscription?
+=== What happens upon cancelling a Performance Plan subscription?
 
-You will continue to have access to the Performance plan settings in the CircleCI web app and be able to use credits until the end of your current billing cycle. After the cycle ends, your org will be transitioned to the xref:plan-free[Free plan], where you can use up to 30,000 credits per month.
+You will continue to have access to the Performance Plan settings in the CircleCI web app and be able to use credits until the end of your current billing cycle. After the cycle ends, your org will be transitioned to the xref:plan-free#[Free Plan], where you can use up to 30,000 credits per month.
 
 Note that you will no longer have access to the billing statements after the end of the current billing cycle. Make sure to download your billing statements before then.
 
@@ -31,8 +31,8 @@ Note that you will no longer have access to the billing statements after the end
 Credits that are unused at the end of the billing cycle will be forfeited and are not eligible for refunds.
 
 [#is-it-possible-to-reactivate-the-performance-plan-after-cancelling-the-subscription]
-=== Is it possible to reactivate the Performance plan after cancelling the subscription?
+=== Is it possible to reactivate the Performance Plan after cancelling the subscription?
 
-Yes, you can always upgrade to the Performance plan from the **Plan > Overview** page in the CircleCI web app.
+Yes, you can always upgrade to the Performance Plan from the **Plan > Overview** page in the CircleCI web app.
 
 

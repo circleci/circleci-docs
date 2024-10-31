@@ -10,7 +10,7 @@ contentTags:
 :experimental:
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the Free plan available to developers on CircleCI.
+:page-description: This document describes the Free Plan available to developers on CircleCI.
 :icons: font
 :experimental:
 
@@ -59,10 +59,10 @@ Pipeline parameters are declared using the `parameters` key at the top level of 
 
 Pipeline parameters support the following types:
 
-- string
-- boolean
-- integer
-- enum
+- `string`
+- `boolean`
+- `integer`
+- `enum`
 
 See xref:reusing-config#parameter-syntax[Parameter syntax] for usage details.
 
@@ -95,6 +95,12 @@ jobs:
 === Passing parameters when triggering pipelines via the API
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to link:https://circleci.com/docs/api/v2/#trigger-a-new-pipeline[trigger a pipeline]. This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
+
+The API limits the number of parameters that can be passed:
+
+* 100 max entries
+* 128 maximum key length
+* 512 maximum value length
 
 The `parameters` key passed in this `POST` request is *NOT* secret.
 
@@ -180,7 +186,7 @@ Even though the `print` command is called from the `cat-file` job, the file para
 [#pipeline-value-scope]
 === Pipeline value scope
 
-Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
+Pipeline values, the pipeline-wide values that are provided by CircleCI (for example, `<< pipeline.number >>`) are always in scope.
 
 [#pipeline-parameter-scope]
 === Pipeline parameter scope

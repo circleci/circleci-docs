@@ -19,7 +19,7 @@ A configuration file that uses the deprecated `deploy` step _must_ be converted,
 
 - *Does your job have parallelism of 1?* Swap out the `deploy` key for the xref:configuration-reference#run[`run`] key. Nothing more is needed to migrate.
 
-- *Does your job have parallelism > 1?* There is no direct replacement for the `deploy` step if you are using `parallelism > 1` in your job. The recommendation is to create two separate jobs within one workflow - a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has `parallelism > 1`, and the deploy job will have the command from the previous `deploy` step replaced with `run` and no parallelism. Please see examples in this guide.
+- *Does your job have parallelism > 1?* There is no direct replacement for the `deploy` step if you are using `parallelism > 1` in your job. The recommendation is to create two separate jobs within one workflow - a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has `parallelism > 1`, and the deploy job will have the command from the previous `deploy` step replaced with `run` and no parallelism. See examples in this guide.
 
 == Parallelism > 1
 The following is an example of replacing the deprecated `deploy` step in a configuration file that has `parallelism > 1`.
@@ -154,6 +154,6 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on the xref:workflows#fan-outfan-in-workflow-example[workflows] page.
+This is effectively using a "fan-in" workflow which is described in detail on the xref:workflows#fan-outfan-in-workflow[workflows] page.
 
 WARNING: Support for the deprecated `deploy` step will eventually be removed. Ample time will be given for customers to migrate their configuration.

@@ -83,11 +83,6 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 }
 ```
 
-
-<aside class="notice">
-This is also the payload for the notification webhooks, in which case this object is the value to a key named ‘payload’
-</aside>
-
 **`GET` Request:** Returns the full details for a single job. The response includes all of the fields from the job summary.
 
 
@@ -131,20 +126,6 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:org_name/:project/
 ```
 
 **`POST` Request:** Retries the job and then returns a summary of the new job run.
-
-## Add User to Job
-
-
-```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users -H "Circle-Token: <circle-token>"
-```
-
-```text
-# ...Build Data
-
-```
-
-**`POST` Request:** This API call is only available when using a user API token. If the current user has permission to build the project, this API adds the current user's SSH public key to the authorized keys on each container running a job. This allows them to SSH to the job containers.
 
 ## Cancel a Job
 
@@ -404,12 +385,12 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
   }
 ```
 
-**`POST` Request:** Triggers a pipeline of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received.
+**`POST` Request:** Triggers a pipeline of the specified project, by branch, revision, or tag. Workflows will be run or scheduled in the same way as when a webhook from source control is received. The use of this endpoint requires a **personal API token**.
 
 
 <aside class="notice">
 <strong>Note:</strong> This endpoint does not yet support the <code>build_parameters</code> options that the job-triggering endpoint supports.
-This also means that this endpoint is not available for CircleCI Server.
+This also means that this endpoint is not available for CircleCI server.
 </aside>
 
 **Parameter** | **Description**

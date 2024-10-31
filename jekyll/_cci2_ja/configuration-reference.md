@@ -1031,8 +1031,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "14.2.0"
-    resource_class: macos.x86.medium.gen2
+      xcode: "15.4.0"
+    resource_class: macos.m1.medium.gen1
     steps:
       ... // other config
 ```

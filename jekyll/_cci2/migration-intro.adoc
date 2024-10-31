@@ -11,6 +11,8 @@ contentTags:
 :icons: font
 :experimental:
 
+TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
+
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
 
@@ -19,7 +21,7 @@ CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization sinc
 . **Advanced Caching** - On top of xref:caching#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:docker-layer-caching#[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
 . **SSH Into Builds** - CircleCI offers the ability to xref:ssh-access-jobs#[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
 . **Resource Classes** - You can use various different xref:optimizations#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
-. **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[splitting workloads] between different containers.
+. **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#how-test-splitting-works[splitting workloads] between different containers.
 
 https://circleci.com/signup/[Sign up for a free account today].
 
@@ -56,17 +58,17 @@ Take stock of the current landscape, and understand the differences between Circ
 
 Some things consider during this phase:
 
-- <<orbs-intro,#Orbs>> as an alternative to, for example, Jenkins Plugins
-- CircleCI YAML <<configuration-reference#,Configuration Reference>>
-- <<executor-intro#,Execution Environments>>
-- <<collect-test-data#,Testing>>
+- xref:orb-intro#[Orbs] as an alternative to, for example, Jenkins Plugins
+- CircleCI YAML xref:configuration-reference#[Configuration Reference]
+- xref:executor-intro#[Execution Environments]
+- xref:collect-test-data#[Testing]
 
 [#planning-phase]
 ==  Planning phase
 
-Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the <<first-steps#,Sign Up and Try CircleCI>> page.
+Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:first-steps#[Sign Up and Try CircleCI] page.
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/server-3-install-prerequisites/[here].
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described xref:server/latest/installation/phase-1-prerequisites#[here].
 
 [#preparation-phase]
 == Preparation phase

@@ -3,8 +3,9 @@ contentTags:
   platform:
     - Server v4.4
     - Server Admin
+noindex: true
 ---
-= Managing Orbs
+= Managing orbs
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.4.
@@ -16,13 +17,15 @@ This section describes how to manage orbs for an installation of server v4.4. Se
 
 For information on orbs and related use cases, see the xref:../../../orb-intro#[orbs docs].
 
-If you are looking for information on creating an orb, see the xref:../../../orb-author-intro/[Introduction to Authoring Orbs].
+If you are looking for information on creating an orb, see the xref:../../../orb-author-intro#[Introduction to Authoring Orbs].
 
 Orbs are accessed via the xref:../../../local-cli#[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a xref:../../../managing-api-tokens#[personal API token].
 
-Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
+Ensure that you are using a personal API token generated _after_ your user account is made an admin.
 
 Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
+
+NOTE: Because orbs used in your server installation are stored in a local orb registry, they are private by default. The `--private` flag is not supported when referencing orbs stored in your server orb registry.
 
 [#list-available-orbs]
 == List available orbs
@@ -65,7 +68,7 @@ NOTE: `<orb-name>` and `<orb-version>` are optional. You can choose to only spec
 [using-orbs-behind-a-proxy]
 == Using orbs behind a proxy
 
-When importing orbs, the CLI must be able to talk to the server installation and to circleci.com. If you want to do this when using a server installation behind a proxy, the CLI needs to be configured to use the proxy to make those requests to `circleci.com`, rather than proxying requests to the server install. For example:
+When importing orbs, the CLI must be able to talk to the server installation and to `circleci.com`. If you want to do this when using a server installation behind a proxy, the CLI needs to be configured to use the proxy to make those requests to `circleci.com`, rather than proxying requests to the server install. For example:
 
 [source,bash]
 ----

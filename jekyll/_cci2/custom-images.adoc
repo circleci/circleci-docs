@@ -77,11 +77,11 @@ RUN go get github.com/jstemmer/go-junit-report
 
 In order to be used as a primary container on CircleCI, a custom Docker image must have the following tools installed:
 
-* bash (most likely already installed or available via your package manager)
+* Bash (most likely already installed or available via your package manager)
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[git]
-* https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation[ssh]
+* https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation[SSH]
 * https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar[tar]
-* http://www.gzip.org/[Gzip]
+* https://www.gzip.org/[Gzip]
 * https://packages.debian.org/sid/ca-certificates[ca-certificates]
 
 Without these tools, some CircleCI services may not work.
@@ -147,7 +147,7 @@ The easiest mechanism is to create an account on https://hub.docker.com/[Docker 
 If your organization is already using Docker Hub you can use your existing account.
 
 NOTE: To use an image with the CircleCI xref:using-docker#[Docker Executor] you must have a public repository.
-If you want to keep your image private, refer to the xref:#private-images#[Using Docker Authenticated Pulls] document for instructions.
+If you want to keep your image private, refer to the xref:private-images#[Using Docker Authenticated Pulls] document for instructions.
 
 The example uses Docker Hub, but you can use different registries if you prefer. Adapt the example based on the registry you are using.
 
@@ -204,11 +204,11 @@ If you have any questions, head over to our https://discuss.circleci.com/[commun
 [#detailed-custom-dockerfile-example-for-ruby]
 == Detailed custom Dockerfile example for Ruby
 
-NOTE: This section assumes you have already used docker login locally.
+NOTE: This section assumes you have already used Docker login locally.
 
 This section demonstrates how to build a Ruby container to use on CircleCI.
 
-The example starts with the link:https://hub.docker.com/_/ruby/[Ruby 2.1] image. However, instead of using FROM ruby:2.1 as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the link:https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10[2.1/Dockerfile].
+The example starts with the link:https://hub.docker.com/_/ruby/[Ruby 2.1] image. However, instead of using FROM `ruby:2.1` as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the link:https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10[2.1/Dockerfile].
 
 Notice the environment variables that are used to pull in the correct versions.
 
@@ -469,7 +469,7 @@ docker run -it 52b773cf50e2 /bin/bash
 root@6cd398c7b61d:/# exit
 ----
 
-Then, commit that hostname replacing ruby-node with your Docker Hub username as follows:
+Then, commit that hostname replacing `ruby-node` with your Docker Hub username as follows:
 
 [,shell]
 ----

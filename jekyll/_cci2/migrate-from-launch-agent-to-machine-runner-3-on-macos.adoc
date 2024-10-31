@@ -2,8 +2,9 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.4+
 ---
-= Migrate from launch agent to machine runner 3.0 on Linux - Open preview
+= Migrate from launch agent to machine runner 3.0 on macOS
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview
@@ -31,9 +32,10 @@ sudo rm -rf '/opt/circleci'
 
 [#install-macos-machine-runner]
 == 2. Install the macOS Machine Runner 3.0
-Follow the instructions in xref:install-machine-runner-3-on-macos#install-circleci-runner[Install machine runner 3.0 on macOS] to install machine runner 3.0 using a homebrew package.
+Follow the instructions in xref:install-machine-runner-3-on-macos#install-circleci-runner[Install machine runner 3.0 on macOS] to install machine runner 3.0 using a Homebrew package.
 
 [#additional-resources]
 == Additional resources
 
 - xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-manual-installation.adoc[Machine runner 3.0 manual installation reference]

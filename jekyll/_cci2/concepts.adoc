@@ -20,7 +20,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 [#concurrency]
 == Concurrency
 
-In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resource_class[resource classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
+In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[resource classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
 
 See the xref:concurrency#[Concurrency] page for more information.
 
@@ -106,7 +106,8 @@ version: 2.1
 
 jobs:
   build1:
-#...
+    docker:
+      - image: cimg/base:2023.03
     steps:
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
       # into the workspace for use in downstream job. Must be an absolute path,
@@ -118,18 +119,31 @@ jobs:
             - echo-output
 
   build2:
-#...
+    machine:
+      image: ubuntu-2204:2024.01.2
     steps:
       - attach_workspace:
         # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
   build3:
-#...
+    docker:
+      - image: cimg/base:2023.03
     steps:
       - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
           path: /tmp/artifact-1
           destination: artifact-file
-#...
+
+workflows:
+  my-workflow:
+    jobs:
+      - build1
+      - build2:
+          requires:
+            - build1
+      - build3:
+          requires:
+            - build1
+            - build2
 ----
 
 {% endraw %}
@@ -173,6 +187,14 @@ jobs:
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+workflows:
+  my-workflow:
+    jobs:
+      - build1
+      - build2:
+          requires:
+            - build1
 ----
 
 {% endraw %}
@@ -207,6 +229,11 @@ jobs:
       - run:
           name: build Elixir image
           command: docker build -t circleci/elixir:example .
+
+workflows:
+  my-workflow:
+    jobs:
+      - build_elixir
 ----
 
 On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds significantly faster.
@@ -237,29 +264,43 @@ An _image_ is a packaged system that includes instructions for creating a runnin
 version: 2.1
 
 jobs:
- build1: # job name
-   docker: # Specifies the primary container image,
-     - image: cimg/base:2022.04-20.04
-     - image: postgres:14.2 # Specifies the database image
-      # for the secondary or service container run in a common
-      # network where ports exposed on the primary container are
-      # available on localhost.
-       environment: # Specifies the POSTGRES_USER authentication
+  build1: # job name
+    docker: # Specifies the primary container image,
+      - image: cimg/base:2022.04-20.04
+      - image: postgres:14.2 # Specifies the database image
+        # for the secondary or service container run in a common
+        # network where ports exposed on the primary container are
+        # available on localhost.
+        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: user
+          POSTGRES_USER: user
+    steps:
+      - checkout
 #...
- build2:
-   machine: # Specifies a machine image that uses
-   # an Ubuntu version 20.04 image with Docker 20.10.12
-   # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
-   # for new image releases.
-     image: ubuntu-2004:202201-02
+  build2:
+    machine: # Specifies a machine image that uses
+      # an Ubuntu version 20.04 image with Docker 20.10.12
+      # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
+      # for new image releases.
+      image: ubuntu-2004:202201-02
+    steps:
+      - checkout
+
 #...
- build3:
-   macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-     xcode: "12.5.1"
+  build3:
+    macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+      xcode: "12.5.1"
+    steps:
+      - checkout
 # ...
+
+workflows:
+  my-workflow:
+    jobs:
+      - build1
+      - build2
+      - build3
 ----
 
 [.tab.executors.Server]
@@ -268,27 +309,37 @@ jobs:
 version: 2.1
 
 jobs:
- build1: # job name
-   docker: # Specifies the primary container image,
-     - image: cimg/base:2022.04-20.04
-     - image: postgres:14.2 # Specifies the database image
-      # for the secondary or service container run in a common
-      # network where ports exposed on the primary container are
-      # available on localhost.
-       environment: # Specifies the POSTGRES_USER authentication
+  build1: # job name
+    docker: # Specifies the primary container image,
+      - image: cimg/base:2022.04-20.04
+      - image: postgres:14.2 # Specifies the database image
+        # for the secondary or service container run in a common
+        # network where ports exposed on the primary container are
+        # available on localhost.
+        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/env-vars/
         # for instructions about using environment variables.
-         POSTGRES_USER: user
+          POSTGRES_USER: user
+    steps:
+      - checkout
 #...
- build2:
-   machine: true
+  build2:
+    machine: true
    # Contact your system administrator for details of the image.
+    steps:
+      - checkout
 #...
+
+workflows:
+  my-workflow:
+    jobs:
+      - build1
+      - build2
 ----
 
 The primary container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. Further images can be added to spin up secondary/service containers.
 
-For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the xref:building-docker-images#accessing-the-remote-docker-environment[Running Docker commands] page.
+For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the xref:building-docker-images#[Running Docker commands] page.
 
 For more information, see the xref:executor-intro#[Execution environments overview] page.
 
@@ -305,34 +356,44 @@ The *machine executor* spins up a complete Ubuntu virtual machine image, giving 
 
 [,yaml]
 ----
- version: 2.1
- jobs:
-   build1: # job name
-     docker: # Specifies the primary container image,
-     # see circleci.com/docs/circleci-images/ for
-     # the list of pre-built CircleCI images on dockerhub.
-       - image: cimg/base:2022.04-20.04
-       - image: postgres:14.2 # Specifies the database image
+version: 2.1
+
+jobs:
+  build1: # job name
+    docker: # Specifies the primary container image,
+      - image: cimg/base:2022.04-20.04
+      - image: postgres:14.2 # Specifies the database image
         # for the secondary or service container run in a common
         # network where ports exposed on the primary container are
         # available on localhost.
-         environment: # Specifies the POSTGRES_USER authentication
-          # environment variable, see circleci.com/docs/env-vars/
-          # for instructions about using environment variables.
-           POSTGRES_USER: user
-...
-   build2:
-     machine: # Specifies a machine image that uses
-     # an Ubuntu version 20.04 image.
-     # The image uses the current tag, which always points to the most recent
-     # supported release. If stability and determinism are crucial for your CI
-     # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
-       image: ubuntu-2004:current
-...
-   build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-       xcode: "12.5.1"
- ...
+        environment: # Specifies the POSTGRES_USER authentication
+        # environment variable, see circleci.com/docs/env-vars/
+        # for instructions about using environment variables.
+          POSTGRES_USER: user
+    steps:
+      - checkout
+#...
+  build2:
+    machine: # Specifies a machine image that uses
+      # an Ubuntu version 22.04 image
+      image: ubuntu-2204:2024.01.2
+    steps:
+      - checkout
+
+#...
+  build3:
+    macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
+      xcode: "12.5.1"
+    steps:
+      - checkout
+# ...
+
+workflows:
+  my-workflow:
+    jobs:
+      - build1
+      - build2
+      - build3
 ----
 
 See the xref:circleci-images#[Images] page for more information.
@@ -364,7 +425,7 @@ See xref:orb-concepts#[Using orbs] for details on how to use orbs in your config
 
 The more tests your project involves, the longer it takes for them to complete on a single machine. Using _test splitting_ and _parallelism_, you can spread your tests across a specified number of separate executors.
 
-Test suites are conventionally defined at the xref:jobs-steps#sample-configuration-with-concurrent-jobs[job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job. and you can use the `circleci tests` commands to split your test suite to run across your parallel executors.
+Test suites are conventionally defined at the xref:jobs-steps#[job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job. and you can use the `circleci tests` commands to split your test suite to run across your parallel executors.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`.
 
@@ -398,9 +459,20 @@ See the xref:pipelines#[Pipelines overview] page for more information.
 [#projects]
 == Projects
 
-For xref:github-integration#[GitHub OAuth app] and xref:bitbucket-integration#[Bitbucket] accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
+For xref:github-integration#[GitHub OAuth app] and xref:bitbucket-integration#[Bitbucket Cloud] accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
-For xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub or GitLab repository) to that project. A standalone project can have:
+For xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab SaaS and self-managed] and xref:bitbucket-data-center-integration#[Bitbucket Data Center] users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
+
+[TIP]
+====
+**Project names** must meet the following requirements:
+
+* Begin with a letter
+* 3-40 characters long
+* Contain only letters, numbers, spaces, or the following characters `" - _ . : ! & + [ ] " ;`
+====
+
+A standalone project can have:
 
 * One or more configurations (pipeline definitions), including, but not limited to, a `.circleci/config.yml` file in the repository associated with the project.
 * One or more triggers (events from a source of change), including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
@@ -429,6 +501,8 @@ jobs:
       - image: cimg/node:current
     # resource class declaration
     resource_class: large
+    steps:
+      - checkout
 ----
 
 Examples for all execution environments are available on the following pages:
@@ -456,7 +530,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: <image-name-tag>
+      - image: cimg/base:2024.02
     steps:
       - checkout # Special step to checkout your source code
       - run: # Run step to execute commands, see

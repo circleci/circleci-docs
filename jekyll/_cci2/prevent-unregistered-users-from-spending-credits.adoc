@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-It is possible for _unregistered_ users to trigger pipelines, and therefore, spend credits. Use the **Prevent unregistered user spend** option to only allow registered users the ability to trigger work that consumes credits. For a full breakdown of the various ways pipelines can be triggered, see the xref:triggers-overview[Triggers overview].
+It is possible for _unregistered_ users to trigger pipelines, and therefore, spend credits. Use the **Prevent unregistered user spend** option to only allow registered users the ability to trigger work that consumes credits. For a full breakdown of the various ways pipelines can be triggered, see the xref:triggers-overview#[Triggers overview].
 
 [NOTE]
 ====
@@ -23,7 +23,7 @@ For more information about unregistered users, see this link:https://support.cir
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free]
-* You must be on the link:https://circleci.com/pricing/[Performance or Scale plan]
+* You must be on the link:https://circleci.com/pricing/[Performance or Scale Plan]
 * You must be an org admin
 
 [#steps]
@@ -32,7 +32,7 @@ For more information about unregistered users, see this link:https://support.cir
 Follow these steps to prevent unregistered users from triggering work that consumes credits:
 
 . In the CircleCI web app, click btn:[Plan] in the sidebar
-. Select the **Usage Controls** tab. If you do not see this option you might be on the Free plan, or you may not be an org admin, in which case this guide does not apply to you.
+. Select the **Usage Controls** tab. If you do not see this option you might be on the Free Plan, or you may not be an org admin, in which case this guide does not apply to you.
 . Click the switch for the **Prevent unregistered user spend** option to "On"
 
 To disable this feature you can toggle this switch "Off" at any time.

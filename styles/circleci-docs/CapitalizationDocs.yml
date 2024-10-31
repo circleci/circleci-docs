@@ -4,5 +4,15 @@ level: error
 scope: heading
 # $title, $sentence, $lower, $upper, or a pattern.
 match: $sentence
+# sentence-cased, but allows for a common prefix:
+#
+# E.g.,
+#
+# a. This is my heading
+prefix: '^[a-z]{1,3}\.\s'
 exceptions:
-  - ABC
+  - DEPRECATED
+  - Deprecated
+  - deprecated
+  - Open preview
+  - I

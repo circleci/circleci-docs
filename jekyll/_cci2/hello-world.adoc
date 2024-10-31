@@ -61,7 +61,7 @@ workflows:
 
 [.tab.hellocloud.Linux_VM]
 --
-The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
 
 [source,yaml]
 ----
@@ -93,7 +93,8 @@ version: 2.1
 jobs:
   hello-job:
     macos:
-      xcode: 13.4.1
+      xcode: 15.4.0
+    resource_class: m2pro.medium
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
@@ -136,7 +137,7 @@ workflows:
 
 [.tab.hellocloud.GPU]
 --
-NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] plan.
+NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] Plan.
 
 The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for link:/docs/configuration-reference#available-windows-gpu-image[Windows] and link:/docs/configuration-reference#available-linux-gpu-images[Linux]. Refer to link:/docs/using-gpu[Using the GPU execution environment] page for more information.
 
@@ -220,7 +221,7 @@ workflows:
 
 [.tab.helloserver4.Linux_VM]
 --
-The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
 
 [source,yaml]
 ----

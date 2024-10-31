@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.2
     - Server Admin
+noindex: true
 ---
 = Upgrade server
 :page-layout: classic-docs
@@ -23,7 +24,7 @@ NOTE: We recommend that you do not skip releases when upgrading.
 
 * Ensure you have access to the Kubernetes cluster in which server is installed.
 * Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
-* Ensure there is a recent backup. For more information, see the xref:../opertor/backup-and-restore#creating-backups[Backup and Restore] guide.
+* Ensure there is a recent backup. For more information, see the xref:../operator/backup-and-restore#creating-backups[Backup and Restore] guide.
 * If you are upgrading from Server v4.1.x to Server v4.2.0, and have chosen to manage secrets yourself, follow the <<user-managed-secrets-migration>> step before upgrading.
 
 [#user-managed-secrets-migration]
@@ -31,10 +32,10 @@ NOTE: We recommend that you do not skip releases when upgrading.
 
 From server v4.2, CircleCI server auto-generates the following secrets if not present in the Kubernetes namespace:
 
-- xref:../installation/phase-2-core-services#api-token[api-token]
-- xref:../installation/phase-2-core-services#session-cookie[session-cookie]
-- xref:../installation/phase-2-core-services#pusher-kubernetes-secret[pusher]
-- xref:../installation/phase-3-execution-environments#nomad-gossip-encryption-key[nomad-gossip-encryption-key]
+- xref:../installation/phase-2-core-services#api-token[`api-token`]
+- xref:../installation/phase-2-core-services#session-cookie[`session-cookie`]
+- xref:../installation/phase-2-core-services#pusher-kubernetes-secret[`pusher`]
+- xref:../installation/phase-3-execution-environments#nomad-gossip-encryption-key[`nomad-gossip-encryption-key`]
 
 **Before upgrading to Server 4.2**: If you manage the secrets listed above yourself, run the following command for **each secret** to let CircleCI server know that they already exist.
 
@@ -54,6 +55,13 @@ kubectl -n <namespace> label secret/<secret-name> \
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
+. Export the "RabbitMQ" password. We are also upgrading the RabbitMQ Helm chart during this upgrade.
++
+[source,shell]
+----
+export RABBITMQ_PASSWORD=$(kubectl get secret --namespace <namespace> rabbitmq-key -o jsonpath="{.data.rabbitmq-password}" | base64 -d)
+----
+
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
 +
 [source,shell]
@@ -65,3 +73,8 @@ helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n 
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
+
+[#vault]
+=== Vault
+
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation after upgrading. Customers that do not perform this step may have issues restoring Vault from backup in v4.2.

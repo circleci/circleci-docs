@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.2
     - Server Admin
+noindex: true
 ---
 = Operator overview
 :page-layout: classic-docs
@@ -40,14 +41,14 @@ See the link:https://www.nomadproject.io/docs/install/production/requirements#re
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
 
 For more information on Nomad port requirements, see the
-https://circleci.com/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+xref:../installation/hardening-your-cluster#[Hardening Your Cluster]
 guide.
 
 [#github]
 === GitHub
-CircleCI uses GitHub or GitHub Enterprise as an identity provider. GitHub Enterprise can, in turn, use
+CircleCI uses GitHub or GitHub Enterprise as an Identity Provider. GitHub Enterprise can, in turn, use
 https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM]
-to manage users from an external identity provider.
+to manage users from an external Identity Provider.
 
 NOTE: CircleCI does not support changing the URL or backend GitHub instance after it has been set up.
 

@@ -17,10 +17,10 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Clou
 [#introduction]
 == Introduction
 
-This pages proivdes a configuration for deployment to Cloud Foundry. CircleCI has developed a CloudFoundry orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
+This pages provides a configuration for deployment to Cloud Foundry. CircleCI has developed a CloudFoundry orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
-== Deploy to Cloud Foundry with 2.1 configuration
+== Deploy to Cloud Foundry with the Cloud Foundry orb
 
 {% include snippets/add-version-number.adoc %}
 
@@ -53,7 +53,7 @@ workflows:
 If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration, refer to the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[CloudFoundry orb] page in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
 
 [#deploy-to-cloud-foundry-with-2-configuration]
-== Deploy to Cloud Foundry with 2.0 configuration
+== Deploy to Cloud Foundry without the orb
 
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you are using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 

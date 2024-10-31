@@ -139,7 +139,7 @@ commands:
             - run: npm install
 ```
 
-Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
+Boolean parameter evaluation is based on the [values specified in YAML 1.1](https://yaml.org/type/bool.html):
 
 * True: `y` `yes` `true` `on`
 * False: `n` `no` `false` `off`
@@ -503,13 +503,10 @@ sync:
         - deploy:
             command: |
                 aws s3 sync \
-                  <<parameters.from>> <<parameters.to>> <<#parameters.arguments>> \
-                  <<parameters.arguments>><</parameters.arguments>>
+                  <<parameters.from>> <<parameters.to>> <<parameters.arguments>>
             name: S3 Sync
 #...
 ```
-
-Please note, CircleCI sometimes uses mustache syntax behind the scenes, as in the example above, in the deploy `command`.
 
 To invoke this `sync` command in your 2.1 `.circleci/config.yml` file, see the following example:
 

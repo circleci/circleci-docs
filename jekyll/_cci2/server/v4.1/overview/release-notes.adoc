@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.1 release notes
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Details of the new features included in each CircleCI server 4.x release.
+:page-description: Details of the new features included in each CircleCI server 4.1 release.
 :icons: font
 :experimental:
 
@@ -16,21 +17,25 @@ contentTags:
 
 Server v4.1 introduces an air-gapped installation option. For more information see the xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped installation guide].
 
-[#migraiton]
-== Migrate
-
-NOTE: The migration process requires that you install v4.0.x first before moving to subsequent releases.
-
-For existing customers interested in migrating from v3.x or v2.x to v4.x, contact your customer success manager.
-
-Find information about migration in the following guides:
-
-* xref:../../installation/migrate-from-server-3-to-server-4#[Migrate from server v3 to v4 guide]
-* xref:../../installation/migrate-from-server-2-to-server-4#[Migrate from server v2 to v4 guide]
-
 [#upgrade]
 == Upgrade
 For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4 guide].
+
+[#release-4-1-10]
+== Release 4.1.10
+
+[#changelog-4-1-10]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-1-10/[changelog].
+
+[#release-4-1-9]
+== Release 4.1.9
+
+[#changelog-4-1-9]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-1-9-and-4-2-5/[changelog].
 
 [#release-4-1-8]
 == Release 4.1.8
