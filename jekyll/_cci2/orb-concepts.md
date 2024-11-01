@@ -31,7 +31,7 @@ As an example, the AWS S3 orb includes a _command_ to copy a file or object to a
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@4.0.0
+  aws-s3: circleci/aws-s3@4.1.0
 
 jobs:
   build:
