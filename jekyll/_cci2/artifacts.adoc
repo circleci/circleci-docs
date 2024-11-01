@@ -168,7 +168,7 @@ Similarly, if you want to download the _latest_ artifacts of a build, replace th
 curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts
 ----
 
-In some cases, you may need to download all artefacts from an entire workflow in one time. Having the workflow ID, possibly using the URL, you can use:
+If you need to download all artifacts from a workflow at the same time you can use the following method. You will need your workflow ID.  Copy your workflow ID from the end of the URL when viewing the workflow page in the CircleCI web app:
 
 [,shell]
 ----
