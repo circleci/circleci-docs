@@ -18,7 +18,7 @@ This section describes the available configuration options for machine provision
 
 NOTE: Prescaling controls will be exposed in a future release for tuning.
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:../installation/phase-3-aws-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-gcp-execution-environments/#gcp-authentication[GCP].
 
 [#provider]
 == Provider
@@ -26,7 +26,7 @@ The following configuration options are for the machine provisioner provider, ei
 
 [#aws]
 === AWS
-Configure machine provisioner to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Configure machine provisioner to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-aws-execution-environments/#machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 
@@ -184,7 +184,7 @@ The default AMIs for server v4.7 are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-Configure machine provisioner to work with GCP in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Configure machine provisioner to work with GCP in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-gcp-execution-environments#machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 

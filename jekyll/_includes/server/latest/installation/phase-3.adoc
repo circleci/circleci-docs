@@ -1,19 +1,14 @@
----
-contentTags:
-  platform:
-  - Server v4.7
-  - Server Admin
----
-= Phase 3 - execution environments
-:page-layout: classic-docs
-:page-liquid:
-:icons: font
-:toc: macro
-:toc-title:
+Before you begin with the CircleCI server v4.7 execution environment installation phase, ensure you have run through the following:
 
-// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+ifndef::env-aws[]
+* xref:phase-1-gcp-prerequisites#[Phase 1 GCP – Prerequisites]
+* xref:phase-2-gcp-core-services#[Phase 2 GCP - Core Services Installation]
+endif::env-aws[]
 
-Before you begin with the CircleCI server v4.7 execution environment installation phase, ensure you have run through xref:phase-1-prerequisites#[Phase 1 – Prerequisites] and xref:phase-2-core-services#[Phase 2 - Core Services Installation].
+ifndef::env-gcp[]
+* xref:phase-1-aws-prerequisites#[Phase 1 AWS – Prerequisites]
+* xref:phase-2-aws-core-services#[Phase 2 AWS - Core Services Installation]
+endif::env-gcp[]
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -42,7 +37,7 @@ NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, 
 
 CircleCI curates Terraform modules to help install Nomad clients in your chosen cloud provider. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files for both AWS and GCP.
 
-// Don't include this section in the GCP PDF:
+// Don't include this section in the GCP page:
 ifndef::env-gcp[]
 
 [#aws-cluster]
@@ -107,10 +102,9 @@ terraform apply
 After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe. The apply process usually only takes a minute.
 
 // Stop hiding from GCP PDF:
-
 endif::env-gcp[]
-// Don't include this section in the AWS PDF:
 
+// Don't include this section in the AWS page:
 ifndef::env-aws[]
 
 [#gcp-cluster]
@@ -146,12 +140,14 @@ terraform apply
 
 After Terraform is done spinning up the Nomad client(s), it outputs the certificates and key needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe.
 
+// Stop hiding from AWS page
 endif::env-aws[]
 
 [#nomad-autoscaler-configuration]
 === b. Nomad Autoscaler configuration
 Nomad can automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's auto scaling resource. With Nomad Autoscaler, you need to provide permission for the utility to manage your auto scaling resource and specify where it is located. CircleCI's Nomad Terraform module can provision the permissions resources, or it can be done manually.
 
+// Don't include this section in the GCP page:
 ifndef::env-gcp[]
 
 [#aws-iam-role]
@@ -191,7 +187,7 @@ NOTE: When using this method, an additional field is required for this secret, a
 
 First, add your access key, secret, and region to the following text, and encode it all with base64.
 
-[source,shell]
+[source]
 ----
 ADDITIONAL_CONFIG=`cat << EOF | base64
 target "aws-asg" {
@@ -219,7 +215,8 @@ kubectl create secret generic nomad-autoscaler-secret \
 [#iam-policy-for-nomad-autoscaler]
 ===== IAM policy for Nomad Autoscaler
 
-[source, json]
+[source,json]
+----
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -244,6 +241,7 @@ kubectl create secret generic nomad-autoscaler-secret \
         }
     ]
 }
+----
 
 endif::env-gcp[]
 
@@ -264,7 +262,7 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:phase-1-gcp-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
@@ -331,7 +329,7 @@ CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automat
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
 
-[.tab.encryption.You_create_Secret]
+[.tab.mtlsencryption.You_create_Secret]
 --
 **Option 1:** Generate a secret with the mTLS cert values
 
@@ -351,7 +349,7 @@ kubectl -n <namespace> label secret/nomad-mtls \
   app.kubernetes.io/managed-by=Helm --overwrite
 ----
 --
-[.tab.encryption.CircleCI_creates_Secret]
+[.tab.mtlsencryption.CircleCI_creates_Secret]
 --
 **Option 2:** Add the base64 encoded values to your `values.yaml`
 
@@ -374,7 +372,7 @@ nomad:
 
 If you have enabled Nomad Autoscaler, also include the following section under `nomad`:
 
-// Don't include this section in the GCP PDF.
+// Don't include this section in the GCP page.
 ifndef::env-gcp[]
 
 [#aws]
@@ -404,7 +402,7 @@ nomad:
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
 
-// Don't include this section in the AWS PDF:
+// Don't include this section in the AWS page:
 ifndef::env-aws[]
 
 [#gcp]
@@ -435,7 +433,7 @@ nomad:
       service_account: "<service-account-json>"
 ----
 
-// Stop hiding from AWS PDF
+// Stop hiding from AWS page
 endif::env-aws[]
 
 === d. Helm upgrade
@@ -1002,7 +1000,7 @@ Choose one of the following options, depending on whether you are using Workload
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:phase-1-prerequisites#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:phase-1-gcp-prerequisites#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
 
 [source,shell]
 ----
@@ -1106,6 +1104,12 @@ ifndef::pdf[]
 
 [#next-steps]
 == Next steps
+ifndef::env-gcp[]
+* xref:phase-4-aws-post-installation#[Phase 4 AWS: Post Installation]
+endif::env-gcp[]
 
-* xref:phase-4-post-installation#[Phase 4: Post Installation]
+ifndef::env-aws[]
+* xref:phase-4-gcp-post-installation#[Phase 4 GCP: Post Installation]
+endif::env-aws[]
+
 endif::pdf[]

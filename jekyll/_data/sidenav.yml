@@ -723,16 +723,24 @@ en:
             link: server/latest/overview/circleci-server-overview
           - name: Release notes
             link: server/latest/overview/release-notes
-      - name: Server v4.6 installation
+      - name: Server v4.7 installation
         children:
-          - name: Phase 1 - Prerequisites
-            link: server/latest/installation/phase-1-prerequisites
-          - name: Phase 2 - Core
-            link: server/latest/installation/phase-2-core-services
-          - name: Phase 3 - Execution
-            link: server/latest/installation/phase-3-execution-environments
-          - name: Phase 4 - Post-installation
-            link: server/latest/installation/phase-4-post-installation
+          - name: Phase 1 AWS - Prerequisites
+            link: server/latest/installation/phase-1-aws-prerequisites
+          - name: Phase 2 AWS - Core
+            link: server/latest/installation/phase-2-aws-core-services
+          - name: Phase 3 AWS - Execution
+            link: server/latest/installation/phase-3-aws-execution-environments
+          - name: Phase 4 AWS - Post-install
+            link: server/latest/installation/phase-4-aws-post-installation
+          - name: Phase 1 GCP - Prerequisites
+            link: server/latest/installation/phase-1-gcp-prerequisites
+          - name: Phase 2 GCP - Core
+            link: server/latest/installation/phase-2-gcp-core-services
+          - name: Phase 3 GCP - Execution
+            link: server/latest/installation/phase-3-gcp-execution-environments
+          - name: Phase 4 GCP - Post-install
+            link: server/latest/installation/phase-4-gcp-post-installation
           - name: Hardening your cluster
             link: server/latest/installation/hardening-your-cluster
           - name: Installing server behind a proxy
