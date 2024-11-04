@@ -6,17 +6,13 @@ contentTags:
   platform:
   - Cloud
   - Server v4.x
-  - Server v3.x
 ---
 
-This document describes how to install and use Docker Compose, and assumes the reader has some experience using the `docker-compose` utility.
+This page describes how to use Docker Compose in your CircleCI pipelines.
 
 If you are new to Docker Compose, do consider reviewing the [official Docker Compose overview](https://docs.docker.com/compose/), or checking out the [Getting Started guide](https://docs.docker.com/compose/gettingstarted/).
 
-* TOC
-{:toc}
-
-The `docker compose` utility is [pre-installed in the CircleCI convenience
+The utility is [pre-installed in the CircleCI convenience
 images]({{ site.baseurl }}/circleci-images/#pre-installed-tools) and machine executor images.
 
 If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file:
@@ -25,7 +21,7 @@ If you are using the Docker executor and **are not** using a convenience image, 
       - run:
           name: Install Docker Compose
           environment:
-            COMPOSE_VERSION: 'v2.25.0'
+            COMPOSE_VERSION: 'v2.30.1'
           command: |
             curl -sSL "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
             mkdir -p ~/.docker/cli-plugins
