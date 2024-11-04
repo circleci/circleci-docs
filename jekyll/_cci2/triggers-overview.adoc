@@ -48,9 +48,7 @@ NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported f
 
 [.tab.apitrigger.GitHub_App_/_Bitbucket_Data_Center]
 --
-For **projects integrated with GitHub App or Bitbucket Data Center**, you can trigger a pipeline for a project using the endpoint `https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run`.
-
-NOTE: This endpoint is currently in preview, and is not yet documented in the link:https://circleci.com/docs/api/v2/index.html[official API V2 documentation].
+For **projects integrated with GitHub App or Bitbucket Data Center**, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[v2 API endpoint] `https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run`.
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
 
