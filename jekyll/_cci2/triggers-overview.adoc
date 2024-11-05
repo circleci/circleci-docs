@@ -27,19 +27,19 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
 
-NOTE: This feature is not yet available for GitLab or GitHub App accounts. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: This feature is not yet available for GitLab accounts. 
 
-In the CircleCI web app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled:
 
-. Select your branch using the branch filter at the top of the dashboard.
-+
-image::branch-filter.png[screenshot showing location of branch filter on pipelines dashboard]
+. In the CircleCI web app, select the **Trigger Pipeline** button on the pipelines page.
 
-. Select **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
-+
-image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
+. Select your pipeline.
 
-. Select **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+. Select your config source branch. For GitHub App and Bitbucket Data Center, you will also need to select your checkout source branch. 
+
+. If you would like to specify any pipeline parameters, select **Add +**. 
+
+. Select **Run Pipeline** and you will see your new pipeline start.
+
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
