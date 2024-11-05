@@ -27,18 +27,27 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
 
-NOTE: This feature is not yet available for GitLab accounts. 
+NOTE: This feature is not available for GitLab integrations.
 
+. In the link:https://app.circleci.com/home[CircleCI web app], select your organization from your homepage, then select your project, either from your org homepage or select **Projects** from the sidebar for a full list. You will now be on your project's pipelines page.
 
-. In the CircleCI web app, select the **Trigger Pipeline** button on the pipelines page.
+. Select btn:[Trigger Pipeline].
++
+image::trigger-pipeline-app.png[Screenshot showing location on trigger pipeline button in the CircleCI web app]
 
-. Select your pipeline.
+. Select the pipeline you want to trigger from the dropdown menu.
 
-. Select your config source branch. For GitHub App and Bitbucket Data Center, you will also need to select your checkout source branch. 
+. Select your config source branch. This tells CircleCI where (repo and branch) to find your pipeline config.
++
+image::trigger-pipeline-app-modal.png[Trigger a pipeline modal in the CircleCI web app]
 
-. If you would like to specify any pipeline parameters, select **Add +**. 
+. If your code is integrated via the **GitHub App or Bitbucket Data Center**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:configuration-reference#checkout[`checkout` step].
++
+TIP: If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
 
-. Select **Run Pipeline** and you will see your new pipeline start.
+. If you would like to specify any pipeline parameters, select **Add +** and enter the required fields.
+
+. Select **Run Pipeline** and you will see your new pipeline running in the web app.
 
 
 [#run-a-pipeline-using-the-api]
