@@ -126,6 +126,28 @@ Select **Releases** in the CircleCI web app sidebar to enter the releases dashbo
 ** Get straight to the component's project building on CircleCI by selecting the project name.
 ** Access setting for each component (icon:cog[]).
 
+=== Add or edit labels for a component
+
+To add or edit labels for a component, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Components** tab.
+. Select your component by name. You can use the filter at the top of the page to help.
+. You are now on the component details page. Select the **Component settings** button.
+. Click on the edit button next to **Labels** to add or remove labels.
+
+=== Add or edit labels for an environment
+
+To add or edit labels for an environment, follow these steps:
+
+. Select btn:[Releases] in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Environments** tab.
+. Select your environment by name.
+. You are now on the environment details page. Select the **Environment Integration Settings** button.
+. Click on the edit button next to **Labels** to add or remove labels.
+
+NOTE: Labels are composed of two values separated by a colon. To specify multiple labels, separate with a comma. You can add up to 20 labels to a component or environment.
+
 === View all releases for an environment
 
 To view all releases for an environment, follow these steps:
