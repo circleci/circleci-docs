@@ -2776,9 +2776,78 @@ workflows:
           filters: pipeline.git.branch == "main" and pipeline.git.commit.subject starts-with "DEPLOY:"
 ----
 
+'''
+
+**Examples**
+
+Allow the job to run only on the project's `main` branch:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main"
+----
+
+Allow the job to run only on the project's `main` branch, or branches starting with `integration-test`:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
+----
+
+Allow the job to run only on the `main` branch, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
+
+[source]
+----
+filters: pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
+----
+
+Use pipeline parameters and the pipeline value `pipeline.git.branch` to run a job only on specific branches **or** when triggered via the API with a pipeline parameter set to true:
+
+[source,yml]
+----
+version: 2.1
+
+parameters:
+  run-storybook-tests:
+    type: boolean
+    default: false
+
+...
+# jobs configuration ommitted for brevity
+
+workflows:
+  build:
+    jobs:
+      - setup
+      - storybook-tests:
+          requires:
+            - setup
+          filters: |
+            pipeline.parameters.run-storybook-tests
+            or pipeline.git.branch == "dry-run-deploy"
+            or pipeline.git.branch starts-with "deploy"
+----
+
+You can use the API to trigger a pipeline with a pipeline parameter set to true:
+
+[source,yml]
+----
+curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "content-type: application/json" \
+  --data {
+  "definition_id": "<pipeline-definition-id>",
+  "config": {"branch": "<your-branch-name>"},
+  "checkout": {"branch": "<your-branch-name>"},
+  "parameters": {"run-storybook-tests": "true"}
+  }
+----
+
 **Operators**
 
-include::../_includes/partials/operators.adoc[]
+The operators you can use are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the example above.
+
+include::../_includes/partials/using-expressions/operators.adoc[]
 
 '''
 

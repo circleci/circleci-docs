@@ -362,7 +362,7 @@ Any errors evaluating an expression will _fail closed_ and prevent use of the co
 
 The operators you can use are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the example above.
 
-include::../_includes/partials/operators.adoc[]
+include::../_includes/partials/using-expressions/operators.adoc[]
 
 === Precedence
 The following table shows operator precedence table, from weakest to strongest binding.
