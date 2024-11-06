@@ -39,6 +39,14 @@ CAUTION: Future dates listed here may change at any time.
 |===
 | Version | Released | End of Support
 
+|4.7.x
+|11/07/2024
+|11/07/2025*
+
+|4.6.x
+|8/12/2024
+|8/12/2025*
+
 |4.5.x
 |4/30/2024
 |4/30/2025*
