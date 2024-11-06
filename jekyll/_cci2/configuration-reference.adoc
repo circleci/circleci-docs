@@ -2746,9 +2746,9 @@ Expression-based job filters allow you to conditionally run jobs based on the fo
 * xref:variables#pipeline-values[Pipeline values]
 * xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline parameters]
 
-An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run
+An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run.
 
-Using expression-based job filters is one way to optimize your pipelines to lower costs, decrease time to feedback, or run specific jobs based on context of the source of change.
+Using expression-based job filters is one way to optimize your pipelines to lower costs, decrease time to feedback, or run specific jobs based on the context of the source of change.
 
 [,yml]
 ----
