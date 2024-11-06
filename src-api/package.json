@@ -14,7 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "snippet-enricher-cli": "0.0.8",
-    "openapi-snippet": "^0.14.0"
+    "openapi-snippet": "^0.14.0",
+    "@redocly/cli": "^1.25.11"
   },
   "resolutions": {
     "braces": "3.0.3"
@@ -23,6 +24,5 @@
     "braces": "CVE-2024-4068"
   },
   "dependencies": {
-    "@redocly/cli": "^1.25.11"
   }
 }
