@@ -27,7 +27,7 @@ build_api_v2() {
     echo "Merging in JSON patches to correct and augment the OpenAPI spec."
     jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-final.json
     echo "Bundling with redocly cli."
-    redocly build-docs openapi-final.json --output=redoc-static.html
+    npx redocly build-docs openapi-final.json --output=redoc-static.html
     echo "Moving build redoc file to api/v2"
     mv redoc-static.html index.html
 }
