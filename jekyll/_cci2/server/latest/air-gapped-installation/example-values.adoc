@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Example `values.yaml`
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.6.
+:page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:
@@ -25,7 +25,10 @@ The chart assumes an environment with the following resources:
 - A MinIO instance running at minio.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
 
-For more information about specific values, see the standard installation documentation, starting with xref:../installation/phase-2-core-services#[Phase 2 - Core services].
+For more information about specific values, see the standard installation documentation, starting with the following:
+
+* xref:../installation/phase-2-aws-core-services#[Phase 2 AWS - Core services]
+* xref:../installation/phase-2-gcp-core-services#[Phase 2 GCP - Core services]
 
 [#values]
 == `Values.yaml`
