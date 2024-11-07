@@ -21,4 +21,3 @@ theme:
       languages:
         - lang: curl
         - lang: Python
-        - lang: C#

@@ -22,7 +22,5 @@
   },
   "resolutions:comments": {
     "braces": "CVE-2024-4068"
-  },
-  "dependencies": {
   }
 }
