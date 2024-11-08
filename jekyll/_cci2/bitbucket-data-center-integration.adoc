@@ -59,11 +59,10 @@ NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Man
 ** Give your pipeline a descriptive name.
 ** Select **Bitbucket Data Center** under Integration.
 ** Provide the project HTTP access token you created in the previous step. Select btn:[Connect].
-** Define where the config file for this pipeline is stored:
-#Rosie, I wanted to do a further level of indentation here but I can't test if it works#
-    ** Select a repository from the dropdown.
-    ** Enter the path to the config file. Typically this is `.circleci/config.yml` but can be any file path with extension `*.yml`.
-** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected under Config Source.  
+** Undr Config, define where the config file for this pipeline is stored:
+*** Select a repository from the dropdown.
+*** Enter the path to the config file. Typically this is `.circleci/config.yml` but can be any file path with extension `*.yml`.
+** Under Build Assets, select a checkout source for this pipeline. This is the repository that will be checked out when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected under Config Source.
 .. Select btn:[Save].
 
 . **Set up a trigger**:
@@ -75,9 +74,9 @@ NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Man
 ** Provide the project HTTP access token you created above. Select btn:[Connect].
 ** Select the Trigger source repository
 ** Choose the pipeline you created in the previous step under the dropdown to show CircleCI which pipeline to trigger.
-** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
-** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if the *Checkout source* repository you configured in your Pipeline is not the source of your trigger.
- 
+** If prompted, enter a config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
+** If prompted, enter a checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if the Checkout Source repository you configured in your Pipeline is not the source of your trigger.
+
 .. Select btn:[Save].
 
 . If you have not already done so, **create a `.circleci` directory to the root of your repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
