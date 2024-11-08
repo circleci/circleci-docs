@@ -59,7 +59,7 @@ NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Man
 ** Give your pipeline a descriptive name.
 ** Select **Bitbucket Data Center** under Integration.
 ** Provide the project HTTP access token you created in the previous step. Select btn:[Connect].
-** Undr Config, define where the config file for this pipeline is stored:
+** Under Config, define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file. Typically this is `.circleci/config.yml` but can be any file path with extension `*.yml`.
 ** Under Build Assets, select a checkout source for this pipeline. This is the repository that will be checked out when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected under Config Source.
