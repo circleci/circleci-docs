@@ -176,14 +176,22 @@ In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs execut
 * 18.97.6.0/24
 * 18.97.7.0/24
 
+A link:https://circleci.com/docs/ip-ranges-list.json[machine-readable list of these IP ranges] is available as well
+
+This list of IP Ranges can also be downloaded and saved using the following curl command:
+
+[,shell]
+----
+curl -O https://circleci.com/docs/ip-ranges-list.json
+----
+
 *IP ranges* is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI's platform.
 
-macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds. 
+macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
 
 *macOS IP ranges are not included in the machine-consumable lists maintained in DNS.* Refer to the list above for the most up-to-date macOS IPs. Information about changes to macOS IP ranges will be included in the link:https://circleci.com/changelog/[changelog] and will be sent to the technical contact(s) listed under menu:Organization Settings[Overview].
 
 [#known-limitations]
 == Known limitations
 
-* Currently, the system does not have support for specifying IP ranges configuration syntax when using the link:{{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration[pipeline parameters feature]. Find more details in this https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6[Discuss post].
 * IP ranges is currently available for the link:{{site.baseurl}}/configuration-reference/#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a link:{{site.baseurl}}/configuration-reference/#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.
