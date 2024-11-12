@@ -319,9 +319,10 @@ If you would like to rename your organization or repository, follow the xref:ren
 === Using GitHub App functionality alongside the GitHub OAuth app
 
 xref:github-apps-integration#[CircleCI’s GitHub App integration] offers increased control over which resources in your VCS CircleCI can access, and lets CircleCI access those resources in a more secure manner. Specifically:
-- Users can select which repositories within a GitHub organization the GitHub App can access
-- The GitHub App only asks for fine-grained permissions to access those resources
-- The GitHub App uses short-lived tokens when accessing your resources.
+
+- You can choose to only allow the CircleCI GitHub App access to specific repositories within your GitHub organization.
+- The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
+- The CircleCI GitHub App uses short-lived tokens when accessing your resources.
 
 Some existing and future functionality on CircleCI, such as triggering a pipeline via a xref:webhooks/#custom-webhooks[custom webhook], will only be available when using the more secure GitHub App integration. Despite only being available when using the GitHub App, this functionality **is still usable** **by organizations that currently integrate with CircleCI’s GitHub OAuth App**. The GitHub App & OAuth App **can co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:github-apps-integration/#currently-not-supported[not yet available] to the GitHub App integration (such as [scheduled pipelines](https://circleci.com/docs/scheduled-pipelines/)) or needing to setup and migrate to a new organization. 
 
