@@ -65,7 +65,7 @@ To add or edit a pipeline, follow these steps:
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
-** Under Integration select the platform that matches where your project is set up (for example, GitHub App).  This step is also compatible with orgs that integrate with xref:github-integration/#using-github-app-functionality[CircleCI's GitHub OAuth App]).
+** Under Integration select the platform that matches where your project is set up (for example, GitHub App).  If you integrate with  xref:github-integration#[CircleCI's GitHub OAuth App]) you can select GitHub App here to install the App into your org and access xref:github-integration#using-github-app-functionality[improved security and new features].
 +
 NOTE: For GitLab Self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:gitlab-integration#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
 ** Authorize your connection if this is not already showing with a icon:check-circle[]
