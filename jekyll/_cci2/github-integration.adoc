@@ -318,7 +318,7 @@ If you would like to rename your organization or repository, follow the xref:ren
 [#using-github-app-functionality]
 === Using GitHub App functionality alongside the GitHub OAuth app
 
-xref:github-apps-integration[CircleCI’s GitHub App integration] offers users more control over which resources in your VCS CircleCI can access and lets CircleCI access those resources in a more secure manner. Specifically:
+xref:github-apps-integration#[CircleCI’s GitHub App integration] offers increased control over which resources in your VCS CircleCI can access, and lets CircleCI access those resources in a more secure manner. Specifically:
 - Users can select which repositories within a GitHub organization the GitHub App can access
 - The GitHub App only asks for fine-grained permissions to access those resources
 - The GitHub App uses short-lived tokens when accessing your resources.
