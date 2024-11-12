@@ -154,7 +154,7 @@ For a complete list of AWS CLI commands and options, see the link:https://docs.a
 
 The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[orb registry page] for a full list of parameters, jobs, commands and options.
 
-Using the `build-and-push-image` job (shown below) requires the following environment variables to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
+Using the `build_and_push_image` job (shown below) requires the following environment variables to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
 
 {% include snippets/add-version-number.adoc %}
 
@@ -162,15 +162,19 @@ Using the `build-and-push-image` job (shown below) requires the following enviro
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your configuration
+  aws-ecr: circleci/aws-ecr@9.3.6 # Use the AWS ECR orb in your configuration
+  aws-cli: circleci/aws-cli@5.1.1 # Use the AWS CLI orb in your configuration
 
 workflows:
   build_and_push_image:
     jobs:
-      - aws-ecr/build-and-push-image: # Use the pre-defined `build-and-push-image` job
+      - aws-ecr/build_and_push_image: # Use the pre-defined `build-and-push-image` job
+          auth:
+            - aws-cli/setup:
+                role_arn: arn:aws:iam::123456789012
           dockerfile: <my-Docker-file>
           path: <path-to-my-Docker-file>
-          profile-name: <my-profile-name>
+          profile_name: <my-profile-name>
           repo: <my-ECR-repo>
           tag: <my-ECR-repo-tag> # default - latest
 ```
@@ -178,34 +182,46 @@ workflows:
 [#update-an-aws-ecs-instance]
 == Update an AWS ECS instance
 
-Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] orbs to easily update an existing AWS ECS instance.
+Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] orbs to update an existing AWS ECS instance.
 
 Using the `build-and-push-image` job (shown below) requires the following environment variables to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
 
 {% include snippets/add-version-number.adoc %}
 
+#check profile and registry_id - have opened issue#
+
 ```yaml
-version: 2.1
-
+version: '2.1'
 orbs:
-  aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your configuration
-  aws-ecs: circleci/aws-ecs@x.y.z # Use the AWS ECS orb in your configuration
-
+  aws-cli: circleci/aws-cli@5.1.0
+  aws-ecr: circleci/aws-ecr@9.3.4
+  aws-ecs: circleci/aws-ecs@6.0.0
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
-          dockerfile: <my-Docker-file>
-          path: <path-to-my-Docker-file>
-          profile-name: <my-profile-name>
+      - aws-ecr/build_and_push_image:
+          auth:
+            - aws-cli/setup:
+                profile: OIDC-USER
+                role_arn: arn:aws:iam::123456789012:role/VALID_OIDC_ECR_ROLE
+          profile: OIDC-USER
+          region: AWS_REGION
+          registry_id: ${AWS_ECR_REGISTRY_ID}
           repo: ${MY_APP_PREFIX}
-          tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update:
+          tag: ${CIRCLE_SHA1}
+      - aws-ecs/deploy_service_update:
+          auth:
+            - aws-cli/setup:
+                profile: OIDC-USER
+                role_arn: arn:aws:iam::123456789012:role/VALID_OIDC_ECS_ROLE
+          cluster: ${MY_APP_PREFIX}-cluster
+          container_image_name_updates: container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}
+          family: ${MY_APP_PREFIX}-service
+          profile: OIDC-USER
+          region: us-east-1
           requires:
-            - aws-ecr/build-and-push-image # only run the deployment job once the build and push image job has completed
-          family: '${MY_APP_PREFIX}-service'
-          cluster: '${MY_APP_PREFIX}-cluster'
-          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            - aws-ecr/build-and-push-image
+
 ```
 
 [#aws-codedeploy]
