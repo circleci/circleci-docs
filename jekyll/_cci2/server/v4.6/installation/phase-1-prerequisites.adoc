@@ -141,7 +141,7 @@ The application uses a large number of resources. Depending on your usage, your 
 | CircleCI Version
 | Kubernetes Version
 
-| 4.5.x
+| 4.6.x
 | 1.26 - 1.29
 |===
 
