@@ -1761,7 +1761,7 @@ While this improves performance in most cases, if a downstream step requires tho
 ----
 ====
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
