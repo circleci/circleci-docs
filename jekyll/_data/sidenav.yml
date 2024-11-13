@@ -352,6 +352,8 @@ en:
         children:
           - name: Use the CircleCI CLI to split tests
             link: use-the-circleci-cli-to-split-tests
+          - name: Automate LLM evaluation testing with the CircleCI Evals orb
+            link: automate-llm-evaluation-testing-with-the-circleci-evals-orb
       - name: Reference
         children:
           - name: Troubleshoot test splitting
@@ -529,14 +531,26 @@ en:
           - name: Reusing configuration
             link: reusing-config
 
-  - name: Manage roles and permissions
+  - name: Manage roles, permissions, and authentication
     icon: icons/sidebar/avatar.svg
     children:
       - name: CircleCI account roles and permissions
         children:
           - name: Roles and permissions overview
             link: roles-and-permissions-overview
-      - name: Authentication
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
+          - name: Manage groups
+            link: manage-groups
+      - name: SSO authentication
+        children:
+          - name: SSO overview
+            link: authentication/sso-overview
+          - name: SSO Setup
+            link: authentication/set-up-sso
+          - name: Sign in to an SSO-enabled org
+            link: authentication/sign-in-to-an-sso-enabled-organization
+      - name: OIDC tokens
         children:
           - name: Use OpenID Connect tokens in jobs
             link: openid-connect-tokens
@@ -544,10 +558,6 @@ en:
             link: oidc-tokens-with-custom-claims
       - name: How-to guides
         children:
-          - name: Manage roles and permissions
-            link: manage-roles-and-permissions
-          - name: Manage groups
-            link: manage-groups
           - name: Prevent unregistered users from spending credits
             link: prevent-unregistered-users-from-spending-credits
 
@@ -714,34 +724,42 @@ en:
           - name: Database examples
             link: postgres-config
 
-  - name: Server administration v4.6
+  - name: Server administration v4.7
     icon: icons/sidebar/admin-new.svg
     children:
-      - name: Server v4.6 overview
+      - name: Server v4.7 overview
         children:
-          - name: CircleCI server v4.6 overview
+          - name: CircleCI server v4.7 overview
             link: server/latest/overview/circleci-server-overview
           - name: Release notes
             link: server/latest/overview/release-notes
-      - name: Server v4.6 installation
+      - name: Server v4.7 installation
         children:
-          - name: Phase 1 - Prerequisites
-            link: server/latest/installation/phase-1-prerequisites
-          - name: Phase 2 - Core
-            link: server/latest/installation/phase-2-core-services
-          - name: Phase 3 - Execution
-            link: server/latest/installation/phase-3-execution-environments
-          - name: Phase 4 - Post-installation
-            link: server/latest/installation/phase-4-post-installation
+          - name: Phase 1 AWS - Prerequisites
+            link: server/latest/installation/phase-1-aws-prerequisites
+          - name: Phase 2 AWS - Core
+            link: server/latest/installation/phase-2-aws-core-services
+          - name: Phase 3 AWS - Execution
+            link: server/latest/installation/phase-3-aws-execution-environments
+          - name: Phase 4 AWS - Post-install
+            link: server/latest/installation/phase-4-aws-post-installation
+          - name: Phase 1 GCP - Prerequisites
+            link: server/latest/installation/phase-1-gcp-prerequisites
+          - name: Phase 2 GCP - Core
+            link: server/latest/installation/phase-2-gcp-core-services
+          - name: Phase 3 GCP - Execution
+            link: server/latest/installation/phase-3-gcp-execution-environments
+          - name: Phase 4 GCP - Post-install
+            link: server/latest/installation/phase-4-gcp-post-installation
           - name: Hardening your cluster
             link: server/latest/installation/hardening-your-cluster
           - name: Installing server behind a proxy
             link: server/latest/installation/installing-server-behind-a-proxy
-          - name: Upgrade server v4.6
+          - name: Upgrade server v4.7
             link: server/latest/installation/upgrade-server
           - name: Installation reference
             link: server/latest/installation/installation-reference
-      - name: Air-gapped installation v4.6
+      - name: Air-gapped installation v4.7
         children:
           - name: Phase 1 - Prerequisites
             link: server/latest/air-gapped-installation/phase-1-prerequisites
@@ -757,7 +775,7 @@ en:
             link: server/latest/air-gapped-installation/additional-considerations
           - name: Example values.yaml
             link: server/latest/air-gapped-installation/example-values
-      - name: Server v4.6 operations
+      - name: Server v4.7 operations
         children:
           - name: Operator overview
             link: server/latest/operator/operator-overview
@@ -793,6 +811,86 @@ en:
             link: server/latest/operator/upgrade-mongo
           - name: FAQs
             link: server/latest/operator/faq
+
+  - name: Server administration v4.6
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.6 overview
+        children:
+          - name: CircleCI server v4.6 overview
+            link: server/v4.6/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.6/overview/release-notes
+      - name: Server v4.6 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.6/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.6/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.6/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.6/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.6/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.6/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.6
+            link: server/v4.6/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.6/installation/installation-reference
+      - name: Air-gapped installation v4.6
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.6/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.6/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.6/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.6/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.6/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.6/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.6/air-gapped-installation/example-values
+      - name: Server v4.6 operations
+        children:
+          - name: Operator overview
+            link: server/v4.6/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.6/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.6/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.6/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.6/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/v4.6/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.6/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.6/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.6/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.6/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.6/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.6/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.6/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.6/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.6/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.6/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.6/operator/faq
 
   - name: Server administration v4.5
     icon: icons/sidebar/admin-new.svg

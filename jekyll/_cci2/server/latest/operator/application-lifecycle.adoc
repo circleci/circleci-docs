@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-    - Server v4.6
+    - Server v4.7
     - Server Admin
 ---
 = Application lifecycle
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI server v4.6 semantic versioning and release schedules.
+:page-description: Learn about CircleCI server v4.7 semantic versioning and release schedules.
 :icons: font
 :toc: macro
 :toc-title:
@@ -38,6 +38,14 @@ CAUTION: Future dates listed here may change at any time.
 [cols=3*, options="header", stripes=even]
 |===
 | Version | Released | End of Support
+
+|4.7.x
+|11/07/2024
+|11/07/2025*
+
+|4.6.x
+|8/12/2024
+|8/12/2025*
 
 |4.5.x
 |4/30/2024
