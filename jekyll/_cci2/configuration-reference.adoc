@@ -2718,7 +2718,7 @@ NOTE: Workflows will ignore job-level branching. If you use job-level branching 
 | `filters`
 | N
 | Map
-| A map defining rules for execution on specific branches, tags, or based on an expression-based condition.
+| A map or string to define rules for job execution. Branch and tag filters require a map. Expression-based filters require a string.
 |===
 
 The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
