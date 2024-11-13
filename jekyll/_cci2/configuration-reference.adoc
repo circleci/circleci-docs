@@ -2780,23 +2780,24 @@ workflows:
 
 **Examples**
 
-Allow the job to run only on the project's `main` branch:
+Only run the job on the project's `main` branch:
 
 [source,yml]
 ----
 filters: pipeline.git.branch == "main"
 ----
 
-Allow the job to run only on the project's `main` branch, or branches starting with `integration-test`:
+Only run the job on the project's `main` branch, or branches starting with `integration-test`:
 
 [source,yml]
 ----
 filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Allow the job to run only on the `main` branch, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
+[#parentheses-example]
+Only run the job on the `main` branch, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
 
-[source]
+[source,yml]
 ----
 filters: pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
 ----
@@ -2845,7 +2846,7 @@ curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/
 
 **Operators**
 
-The operators you can use are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the example above.
+The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the <<user-content-parentheses-example,example above>>.
 
 include::../_includes/partials/using-expressions/operators.adoc[]
 
