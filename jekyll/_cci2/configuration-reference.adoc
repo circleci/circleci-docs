@@ -2794,7 +2794,6 @@ Only run the job on the project's `main` branch, or branches starting with `inte
 filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-[#parentheses-example]
 Only run the job on the `main` branch, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
 
 [source,yml]
@@ -2846,7 +2845,7 @@ curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/
 
 **Operators**
 
-The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the <<user-content-parentheses-example,example above>>.
+The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the examples above.
 
 include::../_includes/partials/using-expressions/operators.adoc[]
 
