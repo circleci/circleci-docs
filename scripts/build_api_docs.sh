@@ -25,7 +25,9 @@ build_api_v2() {
     echo "Adding code samples to openapi.json spec."
     ./node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl" --input=openapi.json  > openapi-with-examples.json
     echo "Merging in JSON patches to correct and augment the OpenAPI spec."
-    jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-final.json
+    jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-patched.json
+    echo Bundle api docs and remove unused components
+    npx redocly bundle openapi-patched.json --remove-unused-components --output openapi-final.json
     echo "Lint API docs"
     npx redocly lint openapi-final.json
     echo "Build docs with redocly cli."
