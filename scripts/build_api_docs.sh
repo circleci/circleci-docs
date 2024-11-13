@@ -28,8 +28,8 @@ build_api_v2() {
     jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-final.json
     echo "Lint API docs"
     npx redocly lint openapi-final.json
-    echo "Bundling with redocly cli."
-    npx redocly build-docs openapi-final.json --output=redoc-static.html
+    echo "Build docs with redocly cli."
+    npx redocly build-docs openapi-final.json
     echo "Moving build redoc file to api/v2"
     mv redoc-static.html index.html
 }
