@@ -132,6 +132,10 @@ Add labels to your components and environments to provide teams with a way to fi
 
 Labels are composed of two values separated by a colon, for example, `team:my-team-name`. To specify multiple labels to a component or environment, separate with a comma. For example, `team:my-team-name, role:web`. You can add up to 20 labels to a component or environment.
 
+==== Use labels to filter components and environments
+
+Once you have added labels to your components and environments, you can use them to filter your view in the releases UI. In the timeline, environments, or components view, select a filter to reduce the content in the tab to only your selection.
+
 ==== Add or edit labels for a component
 
 To add or edit labels for a component, follow these steps:
