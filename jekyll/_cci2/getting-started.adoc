@@ -43,11 +43,7 @@ pass:[<!-- vale off -->]
 {% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
 ++++
 
-
-[#check-your-account-type]
-=== Check your account type
-
-**GitHub authorization with CircleCI is changing**. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
 
 [.tab.quickstart1.GitHub_App]
 --

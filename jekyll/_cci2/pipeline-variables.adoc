@@ -29,7 +29,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 For a full list of values and built-in environment variables, see the xref:variables#[Project values and variables] guide.
 
-NOTE: For GitHub users, refer to the xref:github-apps-integration#[GitHub App integration] or xref:github-integration#[GitHub OAuth app integration] guides to check which integration type applies to you.
+include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
 
 include::../_includes/snippets/pipeline-values.adoc[]
 

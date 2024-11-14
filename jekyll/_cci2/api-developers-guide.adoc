@@ -12,7 +12,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-This guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
+This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
 [#api-categories]
 == API categories
@@ -103,7 +103,7 @@ To find your project slug, follow these steps:
 he `project_slug` is also included in the response payload when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project.
 
 === GitHub OAuth and Bitbucket Cloud
-If your integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `:vcs_type/:org_name/:repo_name` (vcs type can be `github`/`bitbucket` or `gh`/`bb`).
+If your integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
 
 === GitHub App, GitLab and Bitbucket Data Center
 
