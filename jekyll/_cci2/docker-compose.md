@@ -15,15 +15,13 @@ If you are new to Docker Compose, you can review the [official Docker Compose ov
 ## Using Docker Compose with machine executor
 {: #using-docker-compose-with-machine-executor }
 
-If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/using-linuxvm) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details.
+If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/using-linuxvm) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected.
 
 
 ## Using Docker Compose with docker executor
 {: #using-docker-compose-with-docker-executor }
 
-Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
-
-This combination is required if you want to build docker images for deployment.
+Using the `docker` execution environment combined with `setup_remote_docker` provides a remote engine similar to the one created with running Docker commands and the machine execution environment, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a Docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
 
 ## Install Docker Compose
 
