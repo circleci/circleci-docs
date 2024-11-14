@@ -116,7 +116,7 @@ jobs:
     resource_class: large
     working_directory: ~/my_app
     steps:
-      # Docker is preinstalled, along with docker-compose
+      # Docker is preinstalled, along with docker compose
       - checkout
 
       # start proprietary DB using private Docker image

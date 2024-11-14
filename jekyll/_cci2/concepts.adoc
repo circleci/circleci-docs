@@ -281,7 +281,7 @@ jobs:
   build2:
     machine: # Specifies a machine image that uses
       # an Ubuntu version 20.04 image with Docker 20.10.12
-      # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
+      # and docker compose 1.29.2, follow CircleCI Discuss Announcements
       # for new image releases.
       image: ubuntu-2004:202201-02
     steps:
