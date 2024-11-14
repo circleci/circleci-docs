@@ -68,7 +68,7 @@ Some things consider during this phase:
 
 Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:first-steps#[Sign Up and Try CircleCI] page.
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described xref:server/latest/installation/phase-1-prerequisites#[here].
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the server installation guides (xref:server/latest/installation/phase-1-aws-prerequisites#[AWS Prerequisites] and xref:server/latest/installation/phase-1-gcp-prerequisites#[GCP Prerequisites]).
 
 [#preparation-phase]
 == Preparation phase

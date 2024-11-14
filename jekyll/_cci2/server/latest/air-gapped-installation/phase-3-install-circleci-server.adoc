@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Phase 3 - install CircleCI server
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to install the CircleCI server v4.6 Helm deployment to an air-gapped environment.
+:page-description: How to install the CircleCI server v4.7 Helm deployment to an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,7 +16,7 @@ With prerequisites installed, and object storage configured, you can now copy ov
 
 [#prepare-values-yaml]
 == 1. Prepare `values.yaml`
-The `values.yaml` file for installing CircleCI should be prepared according to the xref:../installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+The `values.yaml` file for installing CircleCI should be prepared according to the Create Helm Values section of the regular installation guide (xref:../installation/phase-2-aws-core-services/#create-helm-values[AWS], xref:../installation/phase-2-gcp-core-services/#create-helm-values[GCP]). Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
 
 === a. Configure global values
 
@@ -47,7 +47,7 @@ The `hostname` value should be the internal hostname of your GitHub enterprise i
 
 If this instance is not using TLS or self-signed certificates, make sure to set the `unsafeDisableWebhookSSLVerification: true` and `selfSignedCert: true` values.
 
-Additionally, an OAuth application and a personal access token should be set in GitHub Enterprise and values provided as shown below. For more information about this process, see the documentation for creating a xref:../installation/phase-1-prerequisites/#create-a-new-github-oauth-app[GitHub OAuth application].
+Additionally, an OAuth application and a personal access token should be set in GitHub Enterprise and values provided as shown below. For more information about this process, see the documentation for creating a GitHub OAuth application. For details, see the xref:../installation/phase-1-aws-prerequisites/#create-a-new-github-oauth-app[AWS] or xref:../installation/phase-1-gcp-prerequisites/#create-a-new-github-oauth-app[GCP] installation guide.
 
 [source, yaml]
 ----
@@ -155,7 +155,7 @@ We recommend first creating a namespace (`circleci-server`) and deploying the ch
 
 [source,bash,subs=attributes+]
 ----
-helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version {serverversion46} -f <path-to-values.yaml>
+helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version {serverversion47} -f <path-to-values.yaml>
 ----
 
 [#post-install-circleci-server-helm-airgap]

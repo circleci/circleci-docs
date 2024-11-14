@@ -33,19 +33,19 @@ This authentication method is based on personal tokens and follows the same rule
 | Circle-Token header
 | Header that contains the `<circle-token>` used to authenticate the user.
 
-| http basic auth username
+| HTTP Basic auth username
 | The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
 === Browser session authentication
 
-Ring-session sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
+Ring-session sent through a cookie on the request. This authentication allows users that are already logged into CircleCI.com to access certain endpoints seamlessly.
 
 [#resource-class-authentication-token]
 === Resource class token authentication
 
-This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
+This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again. This token is used exclusively by the self-hosted runner agents for claiming tasks.
 
 [#supported-methods]
 ==== Supported methods
@@ -56,7 +56,7 @@ This token is generated when creating a new resource class. This token is only d
 | Name
 | Description
 
-| http bearer auth
+| HTTP Bearer auth
 | The token that should be provided using the Bearer scheme.
 |===
 
@@ -64,7 +64,7 @@ This token is generated when creating a new resource class. This token is only d
 == Endpoints
 
 [#get-api-v3-runner]
-=== GET /api/v3/runner
+=== `GET /api/v3/runner`
 
 Lists the available self-hosted runners based on the specified parameters. It is mandatory to use one parameter to filter results.
 
@@ -74,7 +74,6 @@ Lists the available self-hosted runners based on the specified parameters. It is
 * Circle-Token (personal authentication)
 * Browser session authentication
 ** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
-* Resource class token (generated when creating a resource class)
 
 [#get-api-v3-runner-request]
 ===== Request
@@ -88,13 +87,13 @@ Lists the available self-hosted runners based on the specified parameters. It is
 | Required
 | Description
 
-| resource-class
+| `resource-class`
 | string
 | query
 | false
 | filters the list of self-hosted runners by specific resource class.
 
-| namespace
+| `namespace`
 | string
 | query
 | false
@@ -124,7 +123,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 | Description
 | Format
 
-|200
+|`200`
 |List of agents
 |JSON
 |===
@@ -140,42 +139,42 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 | Required
 | Description
 
-|items
+|`items`
 |[object]
 |true
 |array containing the self-hosted runners
 
-|resource_class
+|`resource_class`
 |string
 |true
 |self-hosted runner resource class
 
-|hostname
+|`hostname`
 |string
 |true
 |self-hosted runner hostname
 
-|name
+|`name`
 |string
 |true
 |self-hosted runner name
 
-|first_connected
+|`first_connected`
 |string (date-time)
 |true
 |first time the self-hosted runner was connected
 
-|last_connected
+|`last_connected`
 |string (date-time)
 |true
 |last time the self-hosted runner was connected
 
-|last_used
+|`last_used`
 |string (date-time)
 |true
 |last time the self-hosted runner was used to run a job
 
-|version
+|`version`
 |string
 |true
 |version of the machine runner launch-agent running
@@ -200,8 +199,10 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 }
 ```
 
+---
+
 [#get-api-v3-tasks]
-=== GET /api/v3/runner/tasks
+=== `GET /api/v3/runner/tasks`
 
 Get the number of unclaimed tasks for a given resource class.
 
@@ -224,7 +225,7 @@ Get the number of unclaimed tasks for a given resource class.
 | Required
 | Description
 
-| resource-class
+| `resource-class`
 | string
 | query
 | true
@@ -249,7 +250,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 | Description
 | Format
 
-|200
+|`200`
 |Number of unclaimed tasks
 |JSON
 |===
@@ -265,7 +266,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 | Required
 | Description
 
-|unclaimed_task_count
+|`unclaimed_task_count`
 |int
 |true
 |number of unclaimed tasks
@@ -280,8 +281,10 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 }
 ```
 
+---
+
 [#get-api-v3-tasks-running]
-=== GET /api/v3/runner/tasks/running
+=== `GET /api/v3/runner/tasks/running`
 
 Get the number of running tasks for a given resource class.
 
@@ -304,7 +307,7 @@ Get the number of running tasks for a given resource class.
 | Required
 | Description
 
-| resource-class
+| `resource-class`
 | string
 | query
 | true
@@ -329,7 +332,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 | Description
 | Format
 
-|200
+|`200`
 |Number of running tasks
 |JSON
 |===
@@ -345,7 +348,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 | Required
 | Description
 
-|running_runner_tasks
+|`running_runner_tasks`
 |int
 |true
 |number of running tasks
