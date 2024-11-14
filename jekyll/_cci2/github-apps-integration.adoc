@@ -219,7 +219,7 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 [#test-insights]
 === Test Insights
 
-xref:insights-tests#[Test Insights] is currently not supported.
+xref:insights-tests#[Test Insights] is currently not supported for GitHub App integrations.
 
 [#only-build-pull-requests]
 === Only build pull requests

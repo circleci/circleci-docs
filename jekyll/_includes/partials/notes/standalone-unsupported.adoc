@@ -1,0 +1,1 @@
+NOTE: This feature is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, and an overview of feature support, see the xref:version-control-system-integration-overview#feature-support-for-each-integration-type[VCS integration overview] page.
