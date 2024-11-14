@@ -10,36 +10,54 @@ contentTags:
 
 This page describes how to use Docker Compose in your CircleCI pipelines.
 
-If you are new to Docker Compose, do consider reviewing the [official Docker Compose overview](https://docs.docker.com/compose/), or checking out the [Getting Started guide](https://docs.docker.com/compose/gettingstarted/).
+If you are new to Docker Compose, you can review the [official Docker Compose overview](https://docs.docker.com/compose/), or checking out the [Getting Started guide](https://docs.docker.com/compose/gettingstarted/).
 
-The utility is [pre-installed in the CircleCI convenience
+## Using Docker Compose with machine executor
+{: #using-docker-compose-with-machine-executor }
+
+If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/using-linuxvm) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details.
+
+
+## Using Docker Compose with docker executor
+{: #using-docker-compose-with-docker-executor }
+
+Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
+
+This combination is required if you want to build docker images for deployment.
+
+## Install Docker Compose
+
+The Docker Compose utility is [pre-installed in the CircleCI convenience
 images]({{ site.baseurl }}/circleci-images/#pre-installed-tools) and machine executor images.
 
-If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file:
+If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/glossary/#primary-container) during the job execution and use the xref:building-docker-images#[Remote Docker Environment], as follows:
 
 ```yml
       - run:
           name: Install Docker Compose
-          environment:
-            COMPOSE_VERSION: 'v2.30.1'
           command: |
-            curl -sSL "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
-            mkdir -p ~/.docker/cli-plugins
-            chmod +x ~/docker-compose
-            mv ~/docker-compose ~/.docker/cli-plugins/docker-compose
+            # Add Docker's official GPG key:
+            apt-get update
+            DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl
+            install -m 0755 -d /etc/apt/keyrings
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+            chmod a+r /etc/apt/keyrings/docker.asc
+
+            # Add the repository to Apt sources:
+            echo \
+              "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+              $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+              sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+            apt-get update
+            DEBIAN_FRONTEND=noninteractive apt-get install docker-ce-cli docker-buildx-plugin docker-compose-plugin
+
+      - setup_remote_docker #activate the remote docker environment
 ```
 
-The above code example assumes that you will also have `curl` available in your
-executor. If you are constructing your own docker images, consider reading the
-[custom docker images document]({{site.baseurl}}/custom-images/).
+If you are constructing your own Docker images, consider reading the
+[custom docker images page]({{site.baseurl}}/custom-images/).
 
-Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
-
-```yml
-      - setup_remote_docker
-```
-
-This step enables you to run `docker compose` commands to build images:
+Once you have Docker Compose installed, you can use it to build images and run containers:
 
 ```yml
       - run:
@@ -59,7 +77,7 @@ Or to also verify if a service is running for example:
 
 ```yml
       - run:
-          name: Start docker compose and verify service(s)
+          name: Start Docker Compose and verify service(s)
           command: |
             # Setting the Docker Compose project name to "circleci-demo-docker" means
             # the names of our services' containers would be prefixed with "circleci-demo-docker".
@@ -81,19 +99,6 @@ See the [Example docker-compose Project](https://github.com/circleci/cci-demo-do
 
 **Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, run a container in the service's network.
 
-## Using Docker Compose with machine executor
-{: #using-docker-compose-with-machine-executor }
-
-If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/using-linuxvm) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details.
-
-
-## Using Docker Compose with docker executor
-{: #using-docker-compose-with-docker-executor }
-
-Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
-
-This combination is required if you want to build docker images for deployment.
-
 ## Limitations
 {: #limitations }
 
@@ -102,6 +107,5 @@ See [our support article for more information](https://support.circleci.com/hc/e
 
 ## See also
 {: #see-also }
-
 
 [Running Docker Commands]({{site.baseurl}}/building-docker-images/)
