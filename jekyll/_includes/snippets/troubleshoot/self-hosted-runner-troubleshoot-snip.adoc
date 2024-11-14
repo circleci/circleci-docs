@@ -131,6 +131,21 @@ agent:
 ```
 In the event that the liveness probe fails or the task pod terminates, there is a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[prestop hook], which attempts to kill any existing task agent by its provided PID. This is to ensure there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
 
+[#view-the-log-of-a-failed-task-pod]
+=== View the logs of a failed task pod
+
+When a task pod fails, it is cleaned up by the container-agent almost immediately. However, sometimes you may want the pod to stick around longer so that you may review the logs and diagnose the failure. You can disable task pod deletion by adding the environment variable `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP=true` to your container-agent values.yaml.
+
+example:
+
+```yaml
+agent:
+  environment:
+    KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP: true
+```
+
+NOTE: when `` is set to true, then task pods may dangle until they are manually cleaned or until garbage collection deletes these pods. By default, garbage collection removes resources after they have lived for 5 hours and 5 mins. You may tweak these settings however in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L161-L175[container-agent values.yaml].
+
 [#machine-runner]
 == Machine runner
 
