@@ -2552,7 +2552,7 @@ workflows:
 
 NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements>> to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a xref:configuration-reference#logic-statements[logic statement] to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
