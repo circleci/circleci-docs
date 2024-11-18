@@ -581,7 +581,7 @@ After adding pytest to your project, you can produce and upload the test results
 [#maven-surefire-plugin-for-java-junit-results]
 === Maven Surefire Plugin for Java JUnit Results
 
-If you are building a link:https://maven.apache.org/[Maven] based project, you are more than likely using the link:https://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire plugin] to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
+If you are building a link:https://maven.apache.org/[Maven] based project, you are more than likely using the link:https://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire plugin] to generate test reports in XML format. Add the following to the `.circleci/config.yml` file in your project to collect reports.
 
 [,yml]
 ----

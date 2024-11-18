@@ -172,7 +172,7 @@ You can add or delete pipelines and triggers for your project. For details see t
 === Advanced
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
-- At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+- At this time, the **Free and Open Source** setting is not currently supported for GitLab integrations.
 
 [#project-settings-ssh-keys]
 === GitLab project SSH keys

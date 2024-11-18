@@ -193,12 +193,12 @@ The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently su
 [#build-forked-pull-requests]
 === Build forked pull requests
 
-The Build forked pull requests feature is not currently supported.
+The Build forked pull requests feature is not currently supported for GitHub App projects..
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
 
-Passing secrets to forked pull requests is not currently supported.
+Passing secrets to forked pull requests is not currently supported for GitHub App projects.
 
 [#stop-building]
 === Stop building
@@ -224,7 +224,7 @@ xref:insights-tests#[Test Insights] is currently not supported for GitHub App in
 [#only-build-pull-requests]
 === Only build pull requests
 
-The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
+The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations.
 
 [#github-checks]
 === GitHub checks
