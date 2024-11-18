@@ -599,7 +599,7 @@ If you are building a link:https://maven.apache.org/[Maven] based project, you a
 [#gradle-junit-test-results]
 === Gradle JUnit test results
 
-If you are building a Java or Groovy based project with link:https://gradle.org/[Gradle], test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
+If you are building a Java or Groovy based project with link:https://gradle.org/[Gradle], test reports are automatically generated in XML format. Add the following to the `.circleci/config.yml` file in your project to collect reports.
 
 [,yml]
 ----

@@ -263,8 +263,8 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png
 
 The ability to connect to multiple account integrations on CircleCI allows you to:
 
-- Easily access all source controls on your account
-- Use all authentication methods available on CircleCI
+- Access all source controls on your account.
+- Use all authentication methods available on CircleCI.
 
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables

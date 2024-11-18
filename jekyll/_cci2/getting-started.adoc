@@ -210,7 +210,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 {% include getting-started-section-header.html title="2. Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
-Click on the green <b>Success</b> button to see details about a <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. The workflow expands to show all jobs that ran.
+Select the green <b>Success</b> button to see details about a <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. The workflow expands to show all jobs that ran.
 {% endcapture %}
 
 {%- capture what-just-happened -%}
@@ -221,7 +221,7 @@ Click on the green <b>Success</b> button to see details about a <a class="no-ext
 
 
 {% capture content %}
-Click on a job to enter the job view and see all the steps that ran.
+Select a job to enter the job view and see all the steps that ran.
 {% endcapture %}
 
 {%- capture view-results -%}
