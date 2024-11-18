@@ -544,9 +544,9 @@ jobs:
 See the xref:jobs-steps#[Jobs and steps] page for more information.
 
 [#user-types]
-== Roles and user types
+== User roles
 
-CircleCI roles, or user types, are set up differently depending on how you xref:version-control-system-integration-overview#[integrate your code].
+CircleCI roles are set up differently depending on how you xref:version-control-system-integration-overview#[integrate your code].
 
 TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
 
@@ -562,7 +562,7 @@ For an overview of organization and project role permissions, see the xref:roles
 See the xref:manage-roles-and-permissions#[Manage roles and permissions] page for steps to add, remove, and change org and project level roles. You can also manages roles and permissions in xref:manage-groups#[groups].
 
 === GitHub OAuth app and Bitbucket Cloud users
-CircleCI has various user types with permissions inherited from VCS accounts.
+CircleCI has various user roles with permissions inherited from VCS accounts.
 
 * The _Organization Administrator_ is a permission level inherited from your VCS:
  ** GitHub: *Owner* and following at least one project building on CircleCI.
