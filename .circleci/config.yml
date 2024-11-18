@@ -175,7 +175,7 @@ jobs:
           name: Build API 1.x documentation with Slate
           command: ./scripts/build_api_docs.sh -v1
       - run:
-          name: Build API 2.x documentation with Redoc
+          name: Build API 2.x documentation with Redocly
           command: ./scripts/build_api_docs.sh -v2
       - persist_to_workspace:
           root: *workspace_root
