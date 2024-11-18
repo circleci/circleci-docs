@@ -12,68 +12,16 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows, and pipelines. There are currently two supported API versions:
+The CircleCI API may be used to make API calls to interact with your pipelines, projects and orgs, including retrieving detailed information about users, jobs, workflows, and pipelines. There are currently two supported API versions:
 
 * link:https://circleci.com/docs/api/v1/[API v1.1 Reference]
 * link:https://circleci.com/docs/api/v2/[API v2 Reference]
 
-API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI cloud users migrate their scripts to API v2 stable endpoints as soon as possible.
+API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users migrate their scripts to API v2 stable endpoints as soon as possible.
 
 CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
-[#overview]
-== Overview
-
-CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs.
-
-The current categories of the API v2 endpoints are:
-
-{% include snippets/api-v2-endpoints.adoc %}
-
-NOTE: Currently, xref:managing-api-tokens#creating-a-personal-api-token[Personal API tokens] are the only supported tokens on API v2. xref:managing-api-tokens#creating-a-project-api-token[Project tokens] are not currently supported on API v2.
-
-[#getting-started-with-the-api-v2]
-== Getting started with the API v2
-
-[NOTE]
-====
-*GitHub App and GitLab users:* Note that the definition of *project slug* provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket Cloud projects only. GitLab, GitHub App and Bitbucket Data Center projects currently use a new slug format:
-
-`circleci/:slug-remainder`
-
-The project slug for GitLab, GitHub App and Bitbucket Data Center projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the xref:api-developers-guide#getting-started-with-the-api[API Developer's Guide] for more details.
-====
-
-CircleCI API v2 uses a string representation called the `project_slug`, which is a "triplet" of your version control system (VCS), the name of your organization, and the name of the repository. `project_slug` takes the following form:
-
-[,shell]
-----
-:vcs_type/:org_name/:repo_name
-----
-
-The `project_slug` is included in the response payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. For GitHub OAuth app and Bitbucket Cloud projects, it is currently usable as a human-readable identifier for a given project.
-
-[#authentication]
-== Authentication
-
-The CircleCI API v2 enables users to be authenticated by sending your xref:managing-api-tokens#creating-a-personal-api-token[Personal API token] as an HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the xref:api-developers-guide#[API Developer's Guide].
-
-[discrete#triggering-a-pipeline-with-parameters-example]
-==== Triggering a pipeline with parameters example
-
-Here is a simple example using `curl` to trigger a pipeline with parameters:
-
-[,shell]
-----
-curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $CIRCLE_TOKEN" -d '{
-  "parameters": {
-    "myparam": "./myspecialdir",
-    "myspecialversion": "4.8.2"
-  }
-}' https://circleci.com/api/v2/project/{project_slug}/pipeline
-----
-
-NOTE: Pipeline parameters are *not* treated as sensitive data and *must not* be used for sensitive values (secrets). You can find information on using sensitive data correctly in the xref:security-overview#[Security overview] and xref:glossary#context[Contexts] guides.
+To get started with the API v2, see the xref:api-developers-guide#[API developers guide].
 
 [#changes-in-endpoints]
 == Changes in endpoints
@@ -81,50 +29,6 @@ NOTE: Pipeline parameters are *not* treated as sensitive data and *must not* be 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
 For a complete list of all API v2 endpoints, refer to the https://circleci.com/docs/api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
-
-[#new-endpoints]
-=== New endpoints
-
-The table below describes endpoints that have been added to the CircleCI API in v2.
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| Endpoint | Description
-
-| `GET /workflow/:id`
-| Returns an individual workflow based on the `id` parameter being passed in the request.
-
-| `GET /workflow/:id/job`
-| Retrieves all Jobs associated with a specific workflow, based on its unique `id`.
-
-| `GET /project/:project_slug`
-| Retrieves a specific project by its unique slug.
-
-| `POST /project/:project_slug/pipeline`
-| Retrieves an individual project by its unique slug.
-
-| `GET /pipeline/:id`
-| Retrieves an individual pipeline, based on the `id` passed in the request.
-
-| `GET /pipeline/:id/config`
-| Retrieves the configuration of a specific pipeline.
-
-| `GET /project/:project_slug/pipelines/[:filter]`
-| Retrieves the most recent set of pipelines for a Project.
-
-| `GET /insights/:project-slug/workflows`
-| Retrieves summary metrics for an individual project's workflow.
-
-| `GET /insights/:project-slug/workflows/:workflow-name`
-| Retrieves recent runs for a workflow.
-
-| `GET /insights/:project-slug/workflows/:workflow-name/jobs`
-| Retrieves summary metrics for a project workflow's jobs.
-
-| `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name`
-| Retrieves recent runs of a job within a workflow.
-|===
 
 [#deprecated-endpoints]
 === Deprecated endpoints
