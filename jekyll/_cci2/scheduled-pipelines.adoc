@@ -83,6 +83,8 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
+include::../_includes/partials/tips/find-project-slug.adoc[]
+
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs]. Also see the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#migrate-scheduled-workflows-to-scheduled-pipelines]

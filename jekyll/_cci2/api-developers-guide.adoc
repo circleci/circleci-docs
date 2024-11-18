@@ -100,14 +100,14 @@ To find your project slug, follow these steps:
 . Select the icon:ellipsis-h[ellipsis] next to your project and select **Project Settings**.
 . The project slug is listed on the project settings homepage. Use the copy button to copy the slug to your clipboard.
 
-he `project_slug` is also included in the response payload when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project.
+The `project_slug` is also included in the response payload when looking up a link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/getPipelineById[pipeline] or link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[workflow] by ID. The project slug can then be used to get information about the project.
 
 === GitHub OAuth and Bitbucket Cloud
 If your integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
 
 === GitHub App, GitLab and Bitbucket Data Center
 
-The project slug uses UUIDs for org and project identifiers. The project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
+For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up org and project identifiers as opaque , for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. The project slug should not be parsed to retrieve the project or organization ID. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
 
 [#rate-limits]
 == Rate limits
@@ -118,7 +118,7 @@ As the author of an API integration with CircleCI, your integration should expec
 
 For HTTP APIs, when a request is throttled, you will receive link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429[HTTP status code 429]. If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
 
-In most cases, the HTTP 429 response code will be accompanied by the ;link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After[Retry-After HTTP header]. When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
+In most cases, the HTTP 429 response code will be accompanied by the link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After[Retry-After HTTP header]. When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
 To understand the current limit, you can inspect other headers that describe the API limits. These will vary slightly depending on the API call you are making, as different services will impose different limits. The following headers are possible:
 
@@ -138,6 +138,8 @@ The following section details the steps you would need, from start to finish, to
 
 Many of the API calls make use of the `+{project-slug}+` triplet, described <<getting-started-with-the-api,above>>.
 
+You will get a list of pipelines for your project using link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listPipelinesForProject[GET /project/{project-slug}/pipeline].
+
 [#prerequisites]
 === Prerequisites
 
@@ -146,8 +148,7 @@ Many of the API calls make use of the `+{project-slug}+` triplet, described <<ge
 [#steps]
 === Steps
 
-. In your VCS, create a repository (or use an existing one if you prefer
-). The repository for this example will be called `hello-world`. Create a README for your repository so that it is not empty.
+. In your VCS, create a repository (or use an existing one if you prefer). The repository for this how-to guide will be called `hello-world`. Create a README for your repository so that it is not empty.
 . Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:create-project#[Create a project] guide for steps.
 +
 After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
@@ -235,6 +236,8 @@ You will likely receive a long string of unformatted JSON. After formatting, it 
 ----
 
 . One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet triggers a pipeline via `curl` without any body parameters:
++
+CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 +
 [,shell]
 ----
@@ -340,7 +343,7 @@ curl -X GET https://circleci.com/api/v2/project/{project_slug} \
   --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 
-. You will receive unformatted JSON. Once formatted it shoud look similar to the example shown below:
+. You will receive unformatted JSON. Once formatted it should look similar to the example shown below:
 +
 [,json]
 ----
