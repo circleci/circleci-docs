@@ -57,7 +57,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -66,7 +66,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -75,7 +75,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -84,7 +84,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^
+| icon:thumbs-down[role="circle-red"] ^1^ ^2^
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
@@ -101,6 +101,8 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 
 ^1^ _Possible using xref:dynamic-config#[dynamic configuration]._
 
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
+
 === Pipeline triggers and integrations
 
 [.table.table-striped]
@@ -112,13 +114,13 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-red"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 
 | xref:scheduled-pipelines#[Scheduled pipelines]
-| icon:thumbs-down[role="circle-red"] ^2^
+| icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
@@ -127,7 +129,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-down[role="circle-red"]
 
 | link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
@@ -136,7 +138,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 
 | xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
-| icon:thumbs-down[role="circle-red"]
+| icon:thumbs-down[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
@@ -154,7 +156,9 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 |===
 
-^2^ _One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
+^1^ _One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
+
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 
 === Core capabilities
 
