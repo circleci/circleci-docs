@@ -27,19 +27,28 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
 
-NOTE: This feature is not yet available for GitLab or GitHub App accounts. To find out which GitHub account type you have, see the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: This feature is not available for GitLab integrations.
 
-In the CircleCI web app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled:
+. In the link:https://app.circleci.com/home[CircleCI web app], select your organization from your homepage, then select your project, either from your org homepage or select **Projects** from the sidebar for a full list. You will now be on your project's pipelines page.
 
-. Select your branch using the branch filter at the top of the dashboard.
+. Select btn:[Trigger Pipeline].
 +
-image::branch-filter.png[screenshot showing location of branch filter on pipelines dashboard]
+image::trigger-pipeline-app.png[Screenshot showing location on trigger pipeline button in the CircleCI web app]
 
-. Select **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
+. Select the pipeline you want to trigger from the dropdown menu.
+
+. Select your config source branch. This tells CircleCI where (repo and branch) to find your pipeline config.
 +
-image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
+image::trigger-pipeline-app-modal.png[Trigger a pipeline modal in the CircleCI web app]
 
-. Select **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+. If your code is integrated via the **GitHub App or Bitbucket Data Center**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:configuration-reference#checkout[`checkout` step].
++
+TIP: If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
+
+. If you would like to specify any pipeline parameters, select **Add +** and enter the required fields.
+
+. Select **Run Pipeline** and you will see your new pipeline running in the web app.
+
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
@@ -48,9 +57,7 @@ NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported f
 
 [.tab.apitrigger.GitHub_App_/_Bitbucket_Data_Center]
 --
-For **projects integrated with GitHub App or Bitbucket Data Center**, you can trigger a pipeline for a project using the endpoint `https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run`.
-
-NOTE: This endpoint is currently in preview, and is not yet documented in the link:https://circleci.com/docs/api/v2/index.html[official API V2 documentation].
+For **projects integrated with GitHub App or Bitbucket Data Center**, you can trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[v2 API endpoint] `https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run`.
 
 . If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
 

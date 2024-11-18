@@ -194,5 +194,4 @@ macOS builds are automatically restricted within the IP ranges listed here. In o
 [#known-limitations]
 == Known limitations
 
-* Currently, the system does not have support for specifying IP ranges configuration syntax when using the link:{{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration[pipeline parameters feature]. Find more details in this https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6[Discuss post].
 * IP ranges is currently available for the link:{{site.baseurl}}/configuration-reference/#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a link:{{site.baseurl}}/configuration-reference/#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.

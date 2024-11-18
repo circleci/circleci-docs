@@ -266,6 +266,7 @@ metadata:
     circleci.com/helm-revision-number: "1"
     circleci.com/job-number: "1"
     circleci.com/operation-timeout: 30m
+    circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
   labels:
     circleci.com/component-name: example-deployment
     circleci.com/version: 1.0.0
