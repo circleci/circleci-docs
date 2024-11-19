@@ -44,15 +44,19 @@ Using SSO for authentication can result in improved security and user experience
 **For a member of an organization using SSO for authentication:** The process of authentication to access applications is simplified. Rather than authenticating separately for each application, SAML SSO enables the user to confirm their identity _once_ with an IdP and that authentication is communicated to the applications (such as CircleCI) that the user has access to. The user may then access these applications for the duration of their session.
 
 [#prerequisites-and-limitations]
-== Prerequisites and Limitations
+== Limitations
 
-SSO for CircleCI currently has the following prerequisites:
+SSO for CircleCI currently has the following limitations:
 
-- SSO for CircleCI is supported for organizations using integrations through GitHub App, GitLab, and Bitbucket Data Center. SSO is not supported for organizations that integrate their code through the GitHub OAuth app or Bitbucket Cloud. See the xref:../version-control-system-integration-overview#[VCS integration overview] for more information on integration.
-- SSO requires all users to log into CircleCI with a username and password before authenticating with SSO into an organization.
-- Personal API tokens will not work against your organization after SSO is enabled.
-- The CircleCI VS Code plugin will **not** work against your organization after SSO is enabled.
-- CircleCI supports SSO using one domain per organization.
+* SSO for CircleCI is supported for organizations using integrations through GitHub App, GitLab, and Bitbucket Data Center. SSO is not supported for organizations that integrate their code through the GitHub OAuth app or Bitbucket Cloud. See the xref:../version-control-system-integration-overview#[VCS integration overview] for more information on integration.
+* SSO requires all users to log into CircleCI with a username and password before authenticating with SSO into an organization.
+* CircleCI supports SSO using one domain per organization.
+* Personal API tokens will not work against your organization after SSO is enabled. As a result the following features will also be unavailable when using SSO:
+** The CircleCI VS Code plugin will **not** work against your organization after SSO is enabled.
+** The CircleCI CLI will **not** work against your organization after SSO is enabled.
+** API v2 endpoints will **not** be accessible for your organization after SSO is enabled.
+** Config policies will **not** be usable/enforcable for your organization after SSO is enabled.
+
 
 [#next-steps]
 == Next steps
