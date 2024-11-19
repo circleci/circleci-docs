@@ -84,7 +84,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^ ^2^
+| icon:thumbs-down[role="circle-red"] ^1^, ^2^
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
