@@ -222,23 +222,4 @@ workflows:
 [#aws-codedeploy]
 == AWS CodeDeploy
 
-The link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] orb enables you to run deployments through AWS CodeDeploy.
-
-{% include snippets/add-version-number.adoc %}
-
-```yaml
-version: 2.1 # use 2.1 to make use of orbs and pipelines
-
-orbs:
-  aws-code-deploy: circleci/aws-code-deploy@x.y.z # Use the AWS CodeDeploy orb in your configuration
-
-workflows:
-  deploy_application:
-    jobs:
-      - aws-code-deploy/deploy:
-          application-name: <my-application> # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
-          deployment-group: <my-deployment-group> # The name of a new deployment group for the specified application.
-          service-role-arn: <my-deployment-group-role-ARN> # The service role for a deployment group.
-          bundle-bucket: <my-application-S3-bucket> # The s3 bucket where an application revision will be stored.
-          bundle-key: <my-S3-bucket-key> # A key under the s3 bucket where an application revision will be stored.
-```
+The link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] orb enables you to run deployments through AWS CodeDeploy. See the example in the developer hub to get started.
