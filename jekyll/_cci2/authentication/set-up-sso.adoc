@@ -36,7 +36,7 @@ Next you will configure your IdP. The steps to do this will vary depending on yo
 . The IdP will generate the following information, which you will need to copy in order to complete the next section:
 ** SSO URL
 ** x509 signing certificate
-. Set up user accounts in your IdP. Your users will be able to access CircleCI through your IdP once they have a CircleCI account that they sign into with an email and password. Users that have previously been invited to your org, before SSO was set up, will retain their assigned roles. New users are given a default role of xref:roles-and-permissions-overview#organization-role-permissions-matrix[organization viewer].
+. Set up user accounts in your IdP. Your users will be able to access CircleCI through your IdP once they have a CircleCI account that they sign into with an email and password. Users that have previously been invited to your org, before SSO was set up, will retain their assigned roles. New users are given a default role of xref:../roles-and-permissions-overview#organization-role-permissions-matrix[organization viewer].
 
 === Complete SSO Setup in CircleCI
 
