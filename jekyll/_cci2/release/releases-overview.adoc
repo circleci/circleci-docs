@@ -128,13 +128,13 @@ Select **Releases** in the CircleCI web app sidebar to enter the releases dashbo
 
 === Filter and group components and environments with labels
 
-Add labels to your components and environments to provide teams with a way to filter and group content in the releases UI. Once a label is added, you can use this to filter multiple components and/or environments in the UI so each team or developer can focus on the content relevant to them.
+Add labels to your components and environments to provide teams with a way to filter and group content in the releases UI. Once a label is added, you can use this to filter multiple components and/or environments in the UI so you can focus on the content relevant to your team.
 
 Labels are composed of two values separated by a colon, for example, `team:my-team-name`. To specify multiple labels to a component or environment, separate with a comma. For example, `team:my-team-name, role:web`. You can add up to 20 labels to a component or environment.
 
 ==== Use labels to filter components and environments
 
-Once you have added labels to your components and environments, you can use them to filter your view in the releases UI. In the timeline, environments, or components view, select a filter to reduce the content in the tab to only your selection.
+Once you have added labels to your components and environments, you can use them to filter your view in the releases UI. In the timeline, environments, or components view, select a filter to reduce the content in the tab to only your selection. You can also use the label filter dropdown menu at the top of the page.
 
 ==== Add or edit labels for a component
 
