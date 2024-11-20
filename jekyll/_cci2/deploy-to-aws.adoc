@@ -184,7 +184,7 @@ workflows:
 
 Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] orbs to update an existing AWS ECS instance.
 
-Using the `build-and-push-image` job (shown below) requires the following environment variables to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
+Using the `build-and-push-image` job (shown below) requires the following environment variables to be set: `OIDC-USER`, `AWS_REGION`, `MY_APP_PREFIX`.
 
 {% include snippets/add-version-number.adoc %}
 
@@ -204,16 +204,16 @@ workflows:
                 role_arn: arn:aws:iam::123456789012:role/VALID_OIDC_ECR_ROLE
           profile_name: OIDC-USER
           region: AWS_REGION
-          repo: ${MY_APP_PREFIX}
-          tag: ${CIRCLE_SHA1}
+          repo: MY_APP_PREFIX
+          tag: CIRCLE_SHA1 # This is a built-in environment variable
       - aws-ecs/deploy_service_update:
           auth:
             - aws-cli/setup:
                 profile_name: OIDC-USER
                 role_arn: arn:aws:iam::123456789012:role/VALID_OIDC_ECS_ROLE
-          cluster: ${MY_APP_PREFIX}-cluster
+          cluster: MY_APP_PREFIX-cluster
           container_image_name_updates: container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}
-          family: ${MY_APP_PREFIX}-service
+          family: MY_APP_PREFIX-service
           profile_name: OIDC-USER
           region: us-east-1
           requires:
