@@ -167,7 +167,7 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
-You must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app to us esecurity group context restrictions.
+To use security group context restrictions you must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app.
 
 include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
