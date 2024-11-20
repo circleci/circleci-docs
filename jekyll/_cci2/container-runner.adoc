@@ -368,6 +368,7 @@ Container runner needs the following Kubernetes permissions:
 ** Create
 ** Delete
 * Events
+** List
 ** Watch
 * Nodes
 ** Get

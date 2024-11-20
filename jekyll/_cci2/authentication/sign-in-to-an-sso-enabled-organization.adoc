@@ -21,13 +21,15 @@ To join a CircleCI organization that has SSO enabled you must first have an acti
 Once you have a CircleCI account you can join an SSO-enabled CircleCI organization in one of the following ways:
 
 * Get xref:../manage-roles-and-permissions#add-people-to-your-organization[an invite].
-* Visit the CircleCI link:https://circleci.com/authentication/login?f=sso[SSO login page].
+* Visit the CircleCI link:https://app.circleci.com/home/[home page]. Select the **Join Organisation** dropdown, and then select the option to **Join via SSO**.
 
 If you have a GitHub or Bitbucket Cloud social login account with CircleCI (that is, you sign in to the CircleCI app using your GitHub/Bitbucket credentials) and you are invited to an SSO-enabled CircleCI organization, you must create a new email/password CircleCI account in order to access the SSO-enabled CircleCI organization.
 
 [log-in-to-an-organization]
-== Log in to an organization
+== Authenticate with SSO for an organization
 
-If you have logged in to an SSO-enabled CircleCI organization previously and your session has expired, the next time you attempt to access your organization's resources, you will be redirected to your org's Identity Provider (IdP) to authenticate before being granted access once again.
+You must be logged in to your email/password CircleCI account in order to authenticate with SSO for an organization.
+
+If you have authenticated with an SSO-enabled CircleCI organization previously and your session has expired, the next time you attempt to access your organization's resources, you will be redirected to your org's Identity Provider (IdP) to authenticate before being granted access once again.
 
 When your session expires, you will be prompted to re-authenticate.

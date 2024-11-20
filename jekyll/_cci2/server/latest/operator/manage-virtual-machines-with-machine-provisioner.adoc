@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Manage virtual machines with machine provisioner
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server v4.6 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-description: CircleCI server v4.7 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :toc: macro
 :toc-title:
@@ -18,7 +18,7 @@ This section describes the available configuration options for machine provision
 
 NOTE: Prescaling controls will be exposed in a future release for tuning.
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-execution-environments/#gcp-authentication[GCP].
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:../installation/phase-3-aws-execution-environments/#aws-machine-provisioner[AWS] and xref:../installation/phase-3-gcp-execution-environments/#gcp-authentication[GCP].
 
 [#provider]
 == Provider
@@ -26,7 +26,7 @@ The following configuration options are for the machine provisioner provider, ei
 
 [#aws]
 === AWS
-Configure machine provisioner to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Configure machine provisioner to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-aws-execution-environments/#machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 
@@ -61,7 +61,7 @@ machine_provisioner:
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
-The default AMIs for server v4.6 are based on Ubuntu 22.04.
+The default AMIs for server v4.7 are based on Ubuntu 22.04.
 
 [#x86-ami-list]
 ===== x86 AMI list
@@ -184,7 +184,7 @@ The default AMIs for server v4.6 are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-Configure machine provisioner to work with GCP in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-execution-environments/#aws-machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
+Configure machine provisioner to work with GCP in your `values.yaml` file. During installation you will have set up a security group and authentication. See the xref:../installation/phase-3-gcp-execution-environments#machine-provisioner[Installation Phase 3 - Execution Environments] page for more information.
 
 The information in this section describes post-installation configuration options for machine provisioner.
 
@@ -255,5 +255,5 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion46} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
 ----
