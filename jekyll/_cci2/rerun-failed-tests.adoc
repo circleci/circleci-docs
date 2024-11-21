@@ -10,71 +10,125 @@ contentTags:
 :icons: font
 :experimental:
 
-
 Use the rerun failed tests feature to only rerun a subset of tests instead of rerunning the entire test suite when a transient test failure arises.
 
 [#introduction]
 == Introduction
 
-When you select **rerun failed tests** (see image below), a new workflow is triggered where only a subset of tests are rerun, instead of rerunning the entire test suite when a transient test failure arises.
-
-Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to link:https://support.circleci.com/hc/en-us/articles/360050303671-How-To-Rerun-a-Workflow[rerun your workflow from failed]. This type of rerun executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
-
-This rerun failed tests option reruns failed tests from the _same_ commit, not from subsequent commits.
+If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests will run a new workflow, which will appear within your original pipeline. The rerun is created from the _same_ commit as the failed workkflow, not from subsequent commits.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
+
+Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:workflows#rerunning-a-workflows-failed-jobs[rerun your workflow from failed]. Rerun from failed executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
+
+Set up your test jobs to use `circleci tests run` to make the rerun failed tests available.
 
 [#prerequisites]
 == Prerequisites
 
-* Your testing job in the workflow is configured to xref:collect-test-data#[upload test results] to CircleCI. `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#tests-run-examples[JUnit XML output].
-* The testing job uses `circleci tests run` (see below for details) to execute tests.
+In order to use the rerun failed tests feature, your job must meet the following requirements:
+
+* Your testing job must be configured to xref:collect-test-data#[upload test results] to CircleCI using the xref:configuration-reference#storetestresults[`store_test_results` step].
+
+* `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#tests-run-examples[JUnit XML output].
+
+* The testing job must use `circleci tests run` to execute tests. The next section provides instructions to get this set up, and then there are some examples for popular test frameworks.
 +
-NOTE: If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag  (see below for instructions).
+If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag.
 
 [#quickstart]
 == Quickstart
+
+To use the rerun failed tests feature, run your tests using the `circleci tests run` command. The basic structure of your testing command should be:
+
+* Create a directory for your results
+* Glob your test files
+* Make your test files available at standard input (stdin)
+* Run your tests using the `circleci tests run` command. Your tests should be run using the `--command` flag, using xargs to get the tests from stdin.
+* If you want to use intelligent test splitting, use the `--split-by=` flag.
+
+[,yml]
+----
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.7.12
+    steps:
+      - run:
+          name: Run tests
+          command: |
+            mkdir test-results
+            TEST_FILES=$(circleci tests glob "**/test_*.py")
+            echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose
+      - store_test_results:
+          path: test-results
+----
+
+For a list of options for the `circleci tests run` command, see the xref:parallelism-faster-jobs#the-tests-run-command[parallelism and test splitting page].
+
+The next section provides a more detailed example of migrating from `circleci tests split` to `circleci tests run` to access the rerun failed tests feature.
+
+== Getting started
+This section is intended to show how to configure your pipelines to enable the use of the rerun failed tests feature. The following two sections show a _before_ and _after_ version of a job configured to run pytest tests. This shows how to get from an existing configuration using `circleci tests split` to using `circleci tests run`, which is a requirement for using the rerun failed tests feature. Your starting point may be different, you might not already be using `circleci tests split`, in which case you can refer to the _after_ example to see how to configure your job to use `circleci tests run`.
+
+The example includes the use of xref:parallelism-faster-jobs#[intelligent test splitting] to optimize testing time, but at the end there is also an example of the configuration with parallelism and test splitting removed.
 
 [#example-config-file-before]
 === Before: example `.circleci/config.yml` file
 
 ```yaml
- - run:
-    name: Run tests
-    command: |
-      mkdir test-results
-      TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings)
-      pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.7.12
+    parallelism: 4 #use parallelism and test splitting to run tests across parallel execution environments
+    steps:
+      - run:
+          name: Run tests
+          command: |
+            mkdir test-results
+            TEST_FILES=$(circleci tests glob "**/test_*.py" | circleci tests split --split-by=timings)
+            pytest -o junit_family=legacy --junitxml=test-results/junit.xml $TEST_FILES
 
-- store_test_results:
-    path: test-results
+      - store_test_results:
+          path: test-results
 ```
 
-This example snippet is from a CircleCI configuration file that:
+This example snippet is from a CircleCI configuration file that runs the following:
 
-. Executes Python test files that end in `.py`,
-. Splits tests by previous timing results (you can follow xref:test-splitting-tutorial#[this tutorial] on intelligent test splitting),
-. Stores the test results in a new directory called `test-results`, and
-. Uploads those test results to CircleCI.
+* Executes Python test files that end in `.py`.
+* Splits tests by previous timing results (you can follow xref:test-splitting-tutorial#[this tutorial] on intelligent test splitting).
+* Stores the test results in a new directory called `test-results`.
+* Uploads test results to CircleCI using `store_test_results`.
 
-NOTE: `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute. Not included in this snippet is the config key to set parallelism (read the xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information).
+NOTE: `-o junit_family=legacy` is present to ensure that the test results being generated contain the `file` attribute.
 
 [#example-config-file-after]
 === After: example `.circleci/config.yml` file
 
-In the snippet below, the example has been updated to use the `circleci tests run` command to allow for rerunning only failed tests.
+In the snippet below, the previous example has been updated to use the `circleci tests run` command to allow for rerunning only failed tests.
 
 ```yaml
- - run:
-    name: Run tests
-    command: |
-      mkdir test-results
-      TEST_FILES=$(circleci tests glob "**/test_*.py")
-      echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings optional, only use if you are using CircleCI's test splitting
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.7.12
+    parallelism: 4 #use parallelism and test splitting to run tests across parallel execution environments
+    steps:
+      - run:
+          name: Run tests
+          command: |
+            mkdir test-results
+            TEST_FILES=$(circleci tests glob "**/test_*.py")
+            echo "$TEST_FILES" | circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings #--split-by=timings optional, only use if you are using CircleCI's test splitting
 
- - store_test_results:
-    path: test-results
+      - store_test_results:
+          path: test-results
 ```
+
+This example snippet, which has been altered to use `circleci tests run`, runs the following:
+
+* Make a directory called `test-results` to store your test results.
 
 * `TEST_FILES=$(circleci tests glob "**/test_*.py")`
 +
@@ -87,9 +141,11 @@ Pass the list of test files to the `circleci tests run` command as standard inpu
 * `circleci tests run --command="xargs pytest -o junit_family=legacy --junitxml=test-results/junit.xml" --verbose --split-by=timings`
 ** Invoke `circleci tests run` and specify the original command (`pytest`) used to run tests as part of the `--command=` parameter. **This is required**. `xargs` must be present as well.
 ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
-** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`. Note that this is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
+** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`.
++
+NOTE: This is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
 
-NOTE: You can specify the timing type similar to `circleci tests split --split-by=timings --timings-type=` using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (`name` splits by test name) to `--timings-type=` as a flag to `circleci tests run`.
+You can specify the timing type similar to how you can when using `circleci tests split --split-by=timings --timings-type=`, using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (splits by test name) to `--timings-type=` as a flag to `circleci tests run`.
 
 [#verify-the-configuration]
 ==== Verify the configuration
