@@ -61,6 +61,7 @@ sectionTags:
     - "#jobs-in-workflow"
     - "#job-name-in-workflow"
     - "#requires"
+    - "#upstream"
     - "#name"
     - "#context"
     - "#type"
@@ -129,6 +130,7 @@ sectionTags:
     - "#jobs-in-workflow"
     - "#job-name-in-workflow"
     - "#requires"
+    - "#upstream"
     - "#name"
     - "#context"
     - "#type"
@@ -202,6 +204,7 @@ sectionTags:
     - "#jobs-in-workflow"
     - "#job-name-in-workflow"
     - "#requires"
+    - "#upstream"
     - "#name"
     - "#context"
     - "#type"
@@ -810,6 +813,7 @@ Reserved parameter-names:
 
 * `name`
 * `requires`
+* `upstream`
 * `context`
 * `type`
 * `filters`
@@ -2593,7 +2597,7 @@ Refer to the xref:workflows#[Workflows] for more examples and conceptual informa
 [#jobs-in-workflow]
 ==== *`jobs`*
 
-A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
+A job can have the keys `requires`, `upstream`, `name`, `context`, `type`, and `filters`.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2630,6 +2634,55 @@ Jobs are run concurrently by default, so you must explicitly require any depende
 | List
 | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
 |===
+
+'''
+
+[#upstream]
+====== *`upstream`*
+
+Jobs are run concurrently by default, so you must explicitly require any upstream dependencies by their job name if you need some jobs to run sequentially. Note: overrides `requires`
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `upstream`
+| N
+| List
+| A list of jobs that must complete for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the upstream option. However, if all dependencies of a job are filtered, then that job will not be executed either.
+|===
+
+'''
+
+[#job-name-in-upstream]
+====== *<``job_name``>*
+
+Job name of upstream dependencies that should run before the job
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `*<``job_name``>*`
+| N
+| List
+| A list of statuses (`success`, `failed` , and/or `canceled`). The current job will start execution only if the upstream job's status is one of the listed statuses.
+|===
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - build
+      - test:
+          upstream:
+            build:
+            - success
+            - failed
+----
 
 '''
 
