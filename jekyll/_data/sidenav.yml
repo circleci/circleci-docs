@@ -546,7 +546,7 @@ en:
         children:
           - name: SSO overview
             link: authentication/sso-overview
-          - name: SSO Setup
+          - name: SSO setup
             link: authentication/set-up-sso
           - name: Sign in to an SSO-enabled org
             link: authentication/sign-in-to-an-sso-enabled-organization
