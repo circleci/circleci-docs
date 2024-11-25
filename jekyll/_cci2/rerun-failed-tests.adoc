@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-Use the rerun failed tests feature to only rerun a subset of tests instead of rerunning the entire test suite when a transient test failure arises.
+Use rerun failed tests to only rerun a subset of tests, instead of an entire test suite, when a transient test failure arises.
 
 [#introduction]
 == Introduction
@@ -44,8 +44,8 @@ To use the rerun failed tests feature, run your tests using the `circleci tests 
 * Create a directory for your results
 * Glob your test files
 * Make your test files available at standard input (stdin)
-* Run your tests using the `circleci tests run` command. Your tests should be run using the `--command` flag, using xargs to get the tests from stdin.
-* If you want to use intelligent test splitting, use the `--split-by=` flag.
+* Run tests with `circleci tests run`. Your tests should be run with the `--command` flag, using `xargs` to get the tests from stdin.
+* If you want to use intelligent test splitting, use the `--split-by=` flag as shown in the examples on the xref:parallelism-faster-jobs#[Parallelism and test splitting page].
 
 [,yml]
 ----
@@ -64,14 +64,14 @@ jobs:
           path: test-results
 ----
 
-For a list of options for the `circleci tests run` command, see the xref:parallelism-faster-jobs#the-tests-run-command[parallelism and test splitting page].
+For a list of options for the `circleci tests run` command, see the xref:parallelism-faster-jobs#the-tests-run-command[parallelism and test splitting page]. You can also access the CLI help for `circleci tests run` by running `circleci tests run --help` in a CircleCI job.
 
 The next section provides a more detailed example of migrating from `circleci tests split` to `circleci tests run` to access the rerun failed tests feature.
 
 == Migrate from `circleci tests split` to `circleci tests run`
 This section is intended to show how to configure your pipelines to enable the use of the rerun failed tests feature. The following two sections show a _before_ and _after_ version of a job configured to run pytest tests. This shows how to get from an existing configuration using `circleci tests split` to using `circleci tests run`, which is a requirement for using the rerun failed tests feature. Your starting point may be different, you might not already be using `circleci tests split`, in which case you can refer to the _after_ example to see how to configure your job to use `circleci tests run`.
 
-The example includes the use of xref:parallelism-faster-jobs#[intelligent test splitting] to optimize testing time, but at the end there is also an example of the configuration with parallelism and test splitting removed.
+The example used in this section includes the use of xref:parallelism-faster-jobs#[intelligent test splitting] to optimize testing time. Test splitting and parallelism are not required to use the rerun failed tests feature.
 
 [#example-config-file-before]
 === Before: example `.circleci/config.yml` file
@@ -476,37 +476,15 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 
 . Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:test-splitting-tutorial#[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
 
-[#output-test-files-only]
-=== Output test files only
-
-If your testing set-up on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to receive the file names, output the file names, and save the file names to a temporary location.  You can then subsequently invoke your test runner using the outputted file names.
-
-Example:
-
-```yaml
- - run:
-    command: |
-      circleci tests glob "src/**/*js" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
-      [ -s tmp/files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
-
- - run:
-    name: Run tests
-    command: |
-      mkdir test-results
-      ... #pass files.txt into your test command
-
- - store_test_results:
-    path: test-results
-```
-
-The snippet above will write the list of test file names to `files.txt`.  On a non-rerun, this list will be all of the test file names.  On a "rerun", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).  You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.  If using parallelism, CircleCI spins up the same number of containers/VMs as the parallelism level that is set in `.circleci/config.yml`. However, not all parallel containers/VMs will execute tests.  For the parallel containers/VMs that will not run tests, `files.txt` may not be created.  The `halt` command ensures that in the case where a parallel run is not executing tests, the parallel run is stopped.
-
 [#configure-a-job-running-django-tests]
 === Configure a job running Django tests
 
-Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this, get the list of test filenames first, change the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
+Django takes as input test filenames with a format that uses dots (`.`), however, it outputs JUnit XML in a format that uses slashes `/`.  To account for this, get the list of test filenames first, change the filenames to be separated by dots `.` instead of slashes `/`, and pass the filenames into the test command.
 
-```
+Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
+
+[,yml]
+----
 - run:
     name: get tests
     command: |
@@ -526,9 +504,41 @@ Django takes as input test filenames with a format that uses dots ("."), however
 
 - store_test_results:
     path: test-results
-```
+----
 
-. Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
+[#output-test-files-only]
+=== Output test files only
+
+If your testing setup on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to receive the file names, output the file names, and save the file names to a temporary location.  You can then subsequently invoke your test runner using the generated file names.
+
+Example:
+
+[,yml]
+----
+ - run:
+    command: |
+      circleci tests glob "src/**/*js" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
+      [ -s tmp/files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
+
+ - run:
+    name: Run tests
+    command: |
+      mkdir test-results
+      ... #pass files.txt into your test command
+
+ - store_test_results:
+    path: test-results
+----
+
+* The snippet above will write the list of test file names to `files.txt`.
+
+* On a non-rerun, this list will be all of the test file names.
+
+* On a "rerun", the list will be a subset of file names (the test file names that had at least 1 test failure in the previous run).
+
+* You can pass the list of test file names from `files.txt` into, for example, your custom `makefile`.
+
+* If using parallelism, CircleCI spins up the same number of containers/VMs as the parallelism level that is set in `.circleci/config.yml`. However, not all parallel containers/VMs will execute tests.  For the parallel containers/VMs that will not run tests, `files.txt` may not be created.  The `halt` command ensures that in the case where a parallel run is not executing tests, the parallel run is stopped.
 
 [#known-limitations]
 == Known limitations
