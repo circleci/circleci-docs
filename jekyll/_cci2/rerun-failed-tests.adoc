@@ -15,11 +15,11 @@ Use the rerun failed tests feature to only rerun a subset of tests instead of re
 [#introduction]
 == Introduction
 
-If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests will run a new workflow, which will appear within your original pipeline. The rerun is created from the _same_ commit as the failed workkflow, not from subsequent commits.
+If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workkflow, not from subsequent commits.
 
 image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
-Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:workflows#rerunning-a-workflows-failed-jobs[rerun your workflow from failed]. Rerun from failed executes *all tests* from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
+Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:workflows#rerunning-a-workflows-failed-jobs[rerun your workflow from failed]. Rerun from failed executes *all tests*, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
 
 Set up your test jobs to use `circleci tests run` to make the rerun failed tests available.
 
@@ -32,7 +32,7 @@ In order to use the rerun failed tests feature, your job must meet the following
 
 * `file` or `classname` attributes **must be present** in the xref:use-the-circleci-cli-to-split-tests#tests-run-examples[JUnit XML output].
 
-* The testing job must use `circleci tests run` to execute tests. The next section provides instructions to get this set up, and then there are some examples for popular test frameworks.
+* The testing job must use `circleci tests run` to execute tests. The next sections provide instructions to get this set up followed by examples for popular test frameworks.
 +
 If your current job is using xref:test-splitting-tutorial#[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag.
 
@@ -68,7 +68,7 @@ For a list of options for the `circleci tests run` command, see the xref:paralle
 
 The next section provides a more detailed example of migrating from `circleci tests split` to `circleci tests run` to access the rerun failed tests feature.
 
-== Getting started
+== Migrate from `circleci tests split` to `circleci tests run`
 This section is intended to show how to configure your pipelines to enable the use of the rerun failed tests feature. The following two sections show a _before_ and _after_ version of a job configured to run pytest tests. This shows how to get from an existing configuration using `circleci tests split` to using `circleci tests run`, which is a requirement for using the rerun failed tests feature. Your starting point may be different, you might not already be using `circleci tests split`, in which case you can refer to the _after_ example to see how to configure your job to use `circleci tests run`.
 
 The example includes the use of xref:parallelism-faster-jobs#[intelligent test splitting] to optimize testing time, but at the end there is also an example of the configuration with parallelism and test splitting removed.
@@ -143,9 +143,10 @@ Pass the list of test files to the `circleci tests run` command as standard inpu
 ** `--verbose` is an optional parameter for `circleci tests run` which enables more verbose debugging messages.
 ** *Optional*: `--split-by=timings` enables intelligent test splitting by timing for `circleci tests run`.
 +
-NOTE: This is not required in order to use `circleci tests run`. If your testing job is not using CircleCI's test splitting, omit this parameter.  For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
+NOTE: The `--split-by=timings` flag is not a requirement of using `circleci tests run`. If your testing job is not using CircleCI's test splitting, you can safely omit this parameter.
 
-You can specify the timing type similar to how you can when using `circleci tests split --split-by=timings --timings-type=`, using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (splits by test name) to `--timings-type=` as a flag to `circleci tests run`.
+You can specify the timing type similar to how you can when using `circleci tests split --split-by=timings --timings-type=`, using a `--timings-type=` flag.  You can pass `file`, `classname`, or `name` (splits by test name) to `--timings-type=` as a flag to `circleci tests run`. For `pytest`, `--timings-type=name` is the most straightforward to integrate with the way that `pytest` outputs its JUnit XML out-of-the-box.
+
 
 [#verify-the-configuration]
 ==== Verify the configuration
@@ -165,9 +166,9 @@ INFO[2023-05-18T22:09:08Z] starting execution
 DEBUG[2023-05-18T22:09:08Z] Received: ****
 ```
 
-If you see `rerunning failed tests` present in the step's output, the functionality is configured properly.  You'll also see output that shows the total number of failed tests from the original job run, the total number of
+If you see `rerunning failed tests` present in the step's output, the functionality is configured correctly.  You will also see output that shows the total number of failed tests from the original job run.
 
-The job should only rerun tests that are from a `classname` of `file` that had at least one test failure when the btn:[Rerun failed tests] button is clicked. If you are seeing different behavior, comment on this https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+The job should only rerun tests that are from a `classname` of `file` that had at least one test failure when the btn:[Rerun failed tests] button was selected. If you are seeing different behavior, comment on this link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
