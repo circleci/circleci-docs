@@ -191,11 +191,11 @@ Below is an example of a complete configuration with a job that configures a pro
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.5
+  aws-cli: circleci/aws-cli@5.1.1
 
 jobs:
   aws-example:
-   environment:
+    environment:
       AWS_REGION: us-west-1
     docker:
       - image: cimg/aws:2022.06
@@ -203,12 +203,12 @@ jobs:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: AWS_REGION
+          role_arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
+          region: AWS_REGION
           # optional parameters
-          profile-name: "OIDC-PROFILE"
-          role-session-name: "example-session"
-          session-duration: "1800"
+          profile_name: "OIDC-PROFILE"
+          role_session_name: "example-session"
+          session_duration: "1800"
       - run:
         name: Log-into-AWS-ECR
         command: |
