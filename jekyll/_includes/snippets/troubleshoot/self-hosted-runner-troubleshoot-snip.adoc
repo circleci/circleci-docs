@@ -144,7 +144,7 @@ agent:
     KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP: true
 ```
 
-NOTE: when `` is set to true, then task pods may dangle until they are manually cleaned or until garbage collection deletes these pods. By default, garbage collection removes resources after they have lived for 5 hours and 5 mins. You may tweak these settings however in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L161-L175[container-agent values.yaml].
+NOTE: When `` is set to true, then task pods may dangle until they are manually cleaned or until garbage collection deletes these pods. By default, garbage collection removes resources after they have lived for 5 hours and 5 mins. You may tweak these settings in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L161-L175[container-agent values.yaml].
 
 [#machine-runner]
 == Machine runner
