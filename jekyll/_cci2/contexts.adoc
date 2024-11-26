@@ -205,7 +205,7 @@ Addition and deletion of environment variables from a restricted context is limi
 [#project-restrictions]
 == Project restrictions
 
-CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only link:{{site.baseurl}}/gitlab-integration#about-roles-and-permissions[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
+CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:gitlab-integration#roles-and-permissions[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
 NOTE: API support for project restricted contexts is coming soon.
 
@@ -362,36 +362,7 @@ Any errors evaluating an expression will _fail closed_ and prevent use of the co
 
 The operators you can use are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the example above.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| Operator type | Operators | Description
-
-| Logical
-|`and`, `or`
-| These are short-circuiting boolean operators.
-
-| Equality
-| `==`, `!=`
-| String, numeric, and boolean equality. If the operands are of different types then `==` will evaluate `false`, and `!=` will evaluate `true`.
-
-| Equality
-| `starts-with`
-| String prefix equality, `"hello world" starts-with "hello"` evaluates as `true`. It is an error to use a non-string type as an operand.
-
-| Numeric comparison
-| `>=`, `>`, `<=`, `<`
-| Numeric comparisons. It is an error to use a non-numeric type as an operand.
-
-| Negation
-| `not`
-a| Boolean negation.
-
-Note that `not` has very high precedence and so binds very tightly. Use sub-expressions to apply `not` to more complex expressions. For example, with `foo` being `true` and `bar` being `false`:
-
-  * `not foo and bar` evaluates to `false`
-  * `not (foo and bar)` evaluates to `true`
-|===
+include::../_includes/partials/using-expressions/operators.adoc[]
 
 === Precedence
 The following table shows operator precedence table, from weakest to strongest binding.
@@ -487,7 +458,7 @@ where the values are:
 [#context-management-with-the-cli]
 == Context management with the CLI
 
-NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
+NOTE: Before using the CLI ensure you have xref:local-cli#configure-the-cli[configured the CLI] with a token.
 
 You can use the link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI] to manage contexts, as an alternative to the web app and the API. With the CLI, you can execute several link:https://circleci-public.github.io/circleci-cli/circleci_context.html[context-oriented commands].
 
@@ -528,7 +499,7 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 [.tab.addEnvVar.CLI]
 --
-NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
+NOTE: Before using the CLI ensure you have xref:local-cli#configure-the-cli[configured the CLI] with a token.
 
 To create an environment variable using our CLI, perform the following steps:
 
@@ -561,7 +532,7 @@ Removing an environment variable from a context deletes the environment variable
 
 [.tab.removeEnvVar.CLI]
 --
-NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
+NOTE: Before using the CLI ensure you have xref:local-cli#configure-the-cli[configured the CLI] with a token.
 
 To remove an environment variable from a context using the CLI, perform the following steps:
 
@@ -605,7 +576,7 @@ Context environment variables can be rotated using CircleCI's CLI or API.
 
 [.tab.rotateEnvVar.CLI]
 --
-NOTE: Before using the CLI ensure you have xref:local-cli#configuring-the-cli[configured the CLI] with a token.
+NOTE: Before using the CLI ensure you have xref:local-cli#configure-the-cli[configured the CLI] with a token.
 
 To rotate an environment variable using the CLI, perform the following steps:
 

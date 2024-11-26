@@ -19,12 +19,12 @@ You can use the macOS execution environment to run your xref:jobs-steps#[jobs] i
 jobs:
   build:
     macos:
-      xcode: 14.2.0
-    resource_class: macos.m1.medium.gen1
+      xcode: 15.4.0
+    resource_class: m2pro.medium
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 14.2.0 installed
+      # with Xcode 15.4.0 installed
       - run: xcodebuild -version
 ----
 
@@ -46,8 +46,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "14.2.0"
-    resource_class: macos.m1.medium.gen1
+      xcode: "15.4.0"
+    resource_class: m2pro.medium
 ----
 
 [#view-resource-usage]
@@ -208,7 +208,7 @@ To update CocoaPods to the latest stable version, simply update the Ruby gem wit
 sudo gem install cocoapods
 ----
 
-A further recommendation is to check your link:http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
+A further recommendation is to check your link:https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
 
 WARNING: The previous S3 mirror provided by CircleCI for the CocoaPods Spec repository is no longer being maintained or updated since the release of CocoaPods 1.8. It will remain available to prevent existing jobs breaking, however, switching to the CDN method described above is recommended.
 
@@ -248,7 +248,7 @@ The following common test tools are known to work well on CircleCI:
 * link:https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/01-introduction.html[XCTest]
 * link:https://github.com/kiwi-bdd/Kiwi[Kiwi]
 * link:https://github.com/kif-framework/KIF[KIF]
-* link:http://appium.io/[Appium]
+* link:https://appium.io/[Appium]
 
 [#react-native-projects]
 === React Native projects

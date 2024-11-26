@@ -33,6 +33,8 @@ NOTE: **Deploy to Kubernetes?** Refer to our xref:release/releases-overview#[Rel
 Here are the core concepts you need to get a deployment set up:
 
 * **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require.
++
+NOTE: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:release/configure-release-markers#[Release markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -91,6 +93,7 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 
 Use the following how-to guides to deal with common use cases:
 
+* For examples of deploying to Kubernetes, see the guides in the link:https://github.com/CircleCI-Public/cd-config-examples/blob/main/docs/cci_deploy/deployment_helm.md[Continuous deployment config examples] repo.
 * <<deploy-to-amazon-sagemaker#,Deploy to Amazon SageMaker>>
 * <<deploy-android-applications#,Deploy Android applications>>
 * <<deploy-to-artifactory#,Deploy to Artifactory>>

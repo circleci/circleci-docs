@@ -628,7 +628,7 @@ Executors define the execution environment in which the steps of a job will be r
 | `windows`
 | Y ^(1)^
 | Map
-| <<windows,Windows executor>> currently working with orbs. Check out link:https://circleci.com/developer/orbs/orb/circleci/windows[the orb].
+| <<windows-execution-environment,Windows executor>> currently working with orbs. Check out link:https://circleci.com/developer/orbs/orb/circleci/windows[the orb].
 
 | `shell`
 | N
@@ -688,6 +688,11 @@ Each job consists of the job's name as a key and a map as a value. A name should
 |===
 | Key | Required | Type | Description
 
+| `type`
+| N
+| String
+| Job type, can be `build`, `release` or `approval`. If not specified, defaults to `build`.
+
 | `docker`
 | Y ^(1)^
 | List
@@ -711,7 +716,7 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | `parameters`
 | N
 | Map
-| <<parameters,Parameters>> for making a `job` explicitly configurable in a `workflow`.
+| <<parameters-job,Parameters>> for making a `job` explicitly configurable in a `workflow`.
 
 | `steps`
 | Y
@@ -745,6 +750,17 @@ Each job consists of the job's name as a key and a map as a value. A name should
 |===
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
+
+'''
+
+[#job-type]
+==== `type`
+
+Configure a job type. Options are `release`, `approval`, `build` (default). If a type is not specified, the job defaults to a `build` type.
+
+Jobs with the `release` type are used to xref:/release/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a release in the CircleCI releases UI. For full details, see the xref:/release/releases-overview#[Releases overview] page.
+
+The `approval` type is used to configure a manual approval step. No `job` configuration is required or allowed for an `approval` type job. The `approval` type is most commonly configured within a workflow rather than under the top-level `jobs` key. Only `approval` type jobs can have their `type` configured under `workflows`. See <<type,type under workflows section>> for full details.
 
 '''
 
@@ -869,7 +885,7 @@ For a xref:glossary#primary-container[primary container], (the first container i
 This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the link:using-docker#[Using the Docker Execution Environment] page.
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
 
 '''
 
@@ -1255,7 +1271,7 @@ jobs:
   build:
     macos:
       xcode: "15.4.0"
-    resource_class: macos.m1.medium.gen1
+    resource_class: m2pro.medium
     steps:
       ... // other config
 ----
@@ -1745,7 +1761,7 @@ While this improves performance in most cases, if a downstream step requires tho
 ----
 ====
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1945,7 +1961,7 @@ Example:
 [#restorecache]
 ===== *`restore_cache`*
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<save_cache,`save_cache` step>>. Learn more in xref:caching#[the caching documentation].
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<savecache,`save_cache` step>>. Learn more in xref:caching#[the caching documentation].
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1997,7 +2013,7 @@ steps:
 
 In this case cache `v1-myapp-cache-new` will be restored because it's the most recent match with `v1-myapp-cache` prefix even if the first key (`v1-myapp-cache`) has exact match.
 
-For more information on key formatting, see the `key` section of <<save_cache,`save_cache` step>>.
+For more information on key formatting, see the `key` section of <<savecache,`save_cache` step>>.
 
 When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
@@ -2385,7 +2401,7 @@ workflows:
 
 NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
 
-CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines[Scheduled pipelines] page.
+CAUTION: The scheduled workflows feature is set to be deprecated. Using *scheduled pipelines* rather than scheduled workflows offers several benefits. Visit the scheduled pipelines xref:migrate-scheduled-workflows-to-scheduled-pipelines#[migration guide] to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the xref:scheduled-pipelines#[Scheduled pipelines] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
@@ -2420,7 +2436,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | `cron`
 | Y
 | String
-| See the link:http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
+| See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
 |===
 
 [,yml]
@@ -2478,7 +2494,7 @@ workflows:
 [#schedule-branches]
 ====== *`branches`*
 
-The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:workflows#using-contexts-and-filtering-in-your-workflows[workflow] for the `main` branch.
+The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:workflows#using-filters-in-your-workflows[workflow] for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the *entire* string.
 
@@ -2534,7 +2550,7 @@ workflows:
 [#using-when-in-workflows]
 ==== *Using `when` in workflows*
 
-NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
+NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration. Workflows are always run unless there is a when or unless filter that prevents the workflow from being run. If you want a workflow to run in every pipeline, do not add a when or unless filter.
 
 You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements>> to determine whether or not to run that workflow.
 
@@ -2684,6 +2700,11 @@ An approval job can have any name. In the example above the approval job is name
 
 [#jobfilters]
 ====== *`filters`*
+Filter job execution within a workflow based on the following:
+
+* Branch
+* Tag
+* Expression-based condition
 
 Job filters can have the keys `branches` or `tags`.
 
@@ -2697,10 +2718,10 @@ NOTE: Workflows will ignore job-level branching. If you use job-level branching 
 | `filters`
 | N
 | Map
-| A map defining rules for execution on specific branches
+| A map or string to define rules for job execution. Branch and tag filters require a map. Expression-based filters require a string.
 |===
 
-The following is an example of how the CircleCI documentation uses a regex to filter running a workflow for building PDF documentation:
+The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
 
 [,yaml]
 ----
@@ -2712,19 +2733,128 @@ workflows:
       - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
           filters:
             branches:
-              only: /server\/.*/
+              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
 ----
 
-The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
+You can read more about using regular expressions in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
 
-You can read more about using regex in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
+'''
+
+====== Expression-based job filters
+Expression-based job filters allow you to conditionally run jobs based on the following:
+
+* xref:variables#pipeline-values[Pipeline values]
+* xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline parameters]
+
+An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run.
+
+Using expression-based job filters is one way to optimize your pipelines to lower costs, decrease time to feedback, or run specific jobs based on the context of the source of change.
+
+[,yml]
+----
+workflows:
+  deploy:
+    jobs:
+      - init-service
+      - build-service-image:
+          requires:
+            - init-service
+      - dry-run-service:
+          requires:
+            - init-service
+          filters: pipeline.git.branch != "main" and pipeline.git.branch != "canary"
+      - publish-service:
+          requires:
+            - build-service-image
+            - test-service
+          filters: pipeline.git.branch == "main" or pipeline.git.tag starts-with "release"
+      - deploy-service:
+          context:
+            - org-global
+          requires:
+            - publish-service
+          filters: pipeline.git.branch == "main" and pipeline.git.commit.subject starts-with "DEPLOY:"
+----
+
+'''
+
+**Examples**
+
+Only run the job on the project's `main` branch:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main"
+----
+
+Only run the job on the project's `main` branch, or branches starting with `integration-test`:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
+----
+
+Only run the job on the `main` branch, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
+----
+
+Use pipeline parameters and the pipeline value `pipeline.git.branch` to run a job only on specific branches **or** when triggered via the API with a pipeline parameter set to true:
+
+[source,yml]
+----
+version: 2.1
+
+parameters:
+  run-storybook-tests:
+    type: boolean
+    default: false
+
+...
+# jobs configuration ommitted for brevity
+
+workflows:
+  build:
+    jobs:
+      - setup
+      - storybook-tests:
+          requires:
+            - setup
+          filters: |
+            pipeline.parameters.run-storybook-tests
+            or pipeline.git.branch == "dry-run-deploy"
+            or pipeline.git.branch starts-with "deploy"
+----
+
+You can use the API to trigger a pipeline with a pipeline parameter set to true:
+
+[source,yml]
+----
+curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "content-type: application/json" \
+  --data {
+  "definition_id": "<pipeline-definition-id>",
+  "config": {"branch": "<your-branch-name>"},
+  "checkout": {"branch": "<your-branch-name>"},
+  "parameters": {"run-storybook-tests": "true"}
+  }
+----
+
+**Operators**
+
+The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the examples above.
+
+include::../_includes/partials/using-expressions/operators.adoc[]
 
 '''
 
 [#branches]
 ====== *`branches`*
 
-Branches can have the keys `only` and `ignore`, which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
+The branches filter can have the keys `only` and `ignore`, which map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
 
 * Any branches that match `only` will run the job.
 * Any branches that match `ignore` will not run the job.
@@ -2739,17 +2869,17 @@ Branches can have the keys `only` and `ignore`, which either map to a single str
 | `branches`
 | N
 | Map
-| A map defining rules for execution on specific branches
+| A map defining rules for execution on specific branches.
 
 | `only`
 | N
-| String, or List of Strings
-| Either a single branch specifier, or a list of branch specifiers
+| String, or list of strings
+| Either a single branch specifier, or a list of branch specifiers.
 
 | `ignore`
 | N
-| String, or List of Strings
-| Either a single branch specifier, or a list of branch specifiers
+| String, or list of strings
+| Either a single branch specifier, or a list of branch specifiers.
 |===
 
 [source,yaml]

@@ -1,12 +1,12 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Installation reference
 :page-layout: classic-docs
-:page-description: Reference documentation for installing CircleCI server v4.6.
+:page-description: Reference documentation for installing CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:
@@ -190,6 +190,16 @@ for the audit-log-service deployment.
 
 |audit_log_service.resources.limits.memory |string |`+"3584Mi"+` |Memory
 limit for the audit-log-service deployment.
+
+|authentication_service.auth_api.replicas |int |`+1+` |Number of
+replicas to deploy for the authentication-service auth api deployment.
+
+|authentication_service.auth_api.resources.limits.cpu |int |`+2+` |CPU
+limit for the authentication-service auth api deployment.
+
+|authentication_service.auth_api.resources.limits.memory |string
+|`+"512Mi"+` |Memory limit for the authentication-service auth api
+deployment.
 
 |authentication_service.login_api.replicas |int |`+1+` |Number of
 replicas to deploy for the authentication-service login api deployment.
@@ -385,13 +395,15 @@ for the feature-flags-api deployment.
 |feature_flags_api.resources.limits.memory |string |`+"512Mi"+` |Memory
 limit for the feature-flags-api deployment.
 
+|frontend.jvmHeapSize |string |`+"3g"+` |
+
 |frontend.replicas |int |`+1+` |Number of replicas to deploy for the
 frontend deployment.
 
 |frontend.resources.limits.cpu |string |`+"2000m"+` |CPU limit for the
 frontend deployment.
 
-|frontend.resources.limits.memory |string |`+"2Gi"+` |Memory limit for
+|frontend.resources.limits.memory |string |`+"3Gi"+` |Memory limit for
 the frontend deployment.
 
 |github |object
@@ -450,7 +462,7 @@ registry to pull all images from, defaults to "`cciserver.azurecr.io`".
 
 |global.domainName |string |`+""+` |Domain name of your CircleCI install
 
-|global.imagePullSecrets[0].name |string |`+"regcred"+` |
+|global.imagePullSecrets[0] |string |`+"regcred"+` |
 
 |global.license |string |`+""+` |License (2 Options) For your CircleCI
 Installation +
@@ -563,6 +575,12 @@ for the legacy-notifier deployment.
 |legacy_notifier.resources.limits.memory |string |`+"2Gi"+` |Memory
 limit for the legacy-notifier deployment.
 
+|machine_provisioner.agent_base_url |string
+|`+"https://circleci-binary-releases.s3.amazonaws.com/machine-provisioner"+`
+|Location of the machine-provisioner agent. When air-gapped, the
+machine-provisioner agent will need to be hosted within the air-gap and
+this value updated
+
 |machine_provisioner.agent_download_timeout_seconds |int |`+10+`
 |Timeout when attempting to download task-agent or docker-agent (remote
 docker) in machine-agent
@@ -615,12 +633,6 @@ deploy for the machine-provisioner-leader deployment.
 |machine_provisioner.leader.resources.limits.memory |string |`+"512Mi"+`
 |Memory limit for the machine-provisioner-leader deployment
 
-|machine_provisioner.machine_agent_base_url |string
-|`+"https://circleci-binary-releases.s3.amazonaws.com/machine-provisioner"+`
-|Location of the machine-provisioner agent. When air-gapped, the
-machine-provisioner agent will need to be hosted within the air-gap and
-this value updated
-
 |machine_provisioner.machine_agent_download_timeout_seconds |int |`+10+`
 |Timeout when attempting to download machine-agent onto a VM
 
@@ -669,6 +681,14 @@ replicas to deploy for the machine-provisioner-provisioner deployment.
 |machine_provisioner.provisioner.resources.limits.memory |string
 |`+"512Mi"+` |Memory limit for the machine-provisioner-leader deployment
 
+|machine_provisioner.terminatePendingLinuxAfter |string |`+"6m"+` |Linux
+pending machine timeout. Machine instances will be terminted if they
+take longer than this to start
+
+|machine_provisioner.terminatePendingWindowsAfter |string |`+"6m"+`
+|Windows pending machine timeout. Machine instances will be terminted if
+they take longer than this to start
+
 |mongodb.architecture |string |`+"standalone"+` |
 
 |mongodb.auth.database |string |`+"admin"+` |
@@ -707,7 +727,9 @@ externalized MongoDB instance.
 
 |mongodb.options |string |`+""+` |
 
-|mongodb.persistence.size |string |`+"8Gi"+` |
+|mongodb.persistence.size |string |`+"8Gi"+` |To increase PVC size,
+follow this guide:
+https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |mongodb.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"datadir"+` |
@@ -739,8 +761,9 @@ your frontend domain to the new loadbalancer. You will also need to add
 `+service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>+` to
 the `+nginx.annotations+` block.
 
-|nginx.image.repository |string |`+"nginx"+` |The Docker image
-repository for NGINX. Note this repository is not managed by CircleCI.
+|nginx.image.repository |string |`+"nginxinc/nginx-unprivileged"+` |The
+Docker image repository for NGINX. Note this repository is not managed
+by CircleCI.
 
 |nginx.image.tag |string |`+"1.27.0"+` |Nginx has been tested against
 this specific version tag; edit this value at your own risk.
@@ -851,7 +874,7 @@ eg: registry.example.com/organization/repository
 
 |nomad.server.pdb.minAvailable |int |`+2+` |
 
-|nomad.server.replicas |int |`+3+` |
+|nomad.server.replicas |int |`+5+` |
 
 |nomad.server.rpc.mTLS |object
 |`+{"CACertificate":"","certificate":"","privateKey":""}+` |Nomad mTLS
@@ -899,7 +922,7 @@ Leave the `+service_account+` field as its default, and set the
 identities.
 
 |object_storage.s3 |object
-|`+{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}+`
+|`+{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","partition":"aws","presigned":true,"region":"us-east-1","secretKey":"","storageRole":""}+`
 |S3 Configuration for Object Storage. Authentication methods: AWS
 Access/Secret Key, and IRSA Role
 
@@ -917,7 +940,7 @@ set region: "`your-aws-region`".
 |object_storage.s3.endpoint |string
 |`+"https://s3.us-east-1.amazonaws.com"+` |API endpoint for S3. If in
 AWS us-west-2, for example, this would be the regional endpoint
-http://s3.us-west-2.amazonaws.com. If using S3 compatible storage,
+https://s3.us-west-2.amazonaws.com. If using S3 compatible storage,
 specify the API endpoint of your object storage server
 
 |object_storage.s3.presigned |bool |`+true+` |When true object storage
@@ -1048,7 +1071,9 @@ with your externalized postgres instance
 
 |postgresql.primary.labels.layer |string |`+"data"+` |
 
-|postgresql.primary.persistence.existingClaim |string |`+""+` |
+|postgresql.primary.persistence.existingClaim |string |`+""+` |To
+increase PVC size, follow this guide:
+https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |postgresql.primary.persistence.size |string |`+"8Gi"+` |
 
@@ -1106,6 +1131,12 @@ RabbitMQ instance
 |rabbitmq.management_gui_port |int |`+15672+` |When `+internal: true+`,
 this value is '`15672`' else port of external rabbitmq instance
 
+|rabbitmq.persistence.existingClaim |string |`+""+` |To increase PVC
+size, follow this guide:
+https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+
+|rabbitmq.persistence.size |string |`+"8Gi"+` |
+
 |rabbitmq.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"data"+` |
 
@@ -1136,7 +1167,7 @@ this value is '`15672`' else port of external rabbitmq instance
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/latest/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1151,7 +1182,7 @@ https://circleci.com/docs/server/latest/operator/expanding-internal-database-vol
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/latest/operator/expanding-internal-database-volumes
+https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1373,12 +1404,6 @@ web-ui deployment.
 
 |web_ui.resources.limits.memory |string |`+"256Mi"+` |Memory limit
 configuration for the web-ui deployment
-
-|web_ui_404.replicas |int |`+1+` |Number of replicas to deploy for the
-web-ui-404 deployment.
-
-|web_ui_404.resources.limits.memory |string |`+"256Mi"+` |Memory limit
-configuration for the web-ui-404 deployment
 
 |web_ui_authentication.replicas |int |`+1+` |Number of replicas to
 deploy for the web-ui-authentication deployment.

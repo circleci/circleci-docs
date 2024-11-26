@@ -14,6 +14,18 @@
 | 12GB
 | icon:check[]
 | icon:times[]
+
+| `m2pro.medium`
+| 4 @ 3.49 GHz
+| 8GB
+| icon:check[]
+| icon:times[]
+
+| `m2pro.large`
+| 8 @ 3.49 GHz
+| 16GB
+| icon:check[]
+| icon:times[]
 |===
 
 [WARNING]

@@ -20,7 +20,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 [#concurrency]
 == Concurrency
 
-In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resource_class[resource classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
+In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[resource classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
 
 See the xref:concurrency#[Concurrency] page for more information.
 
@@ -339,7 +339,7 @@ workflows:
 
 The primary container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. Further images can be added to spin up secondary/service containers.
 
-For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the xref:building-docker-images#accessing-the-remote-docker-environment[Running Docker commands] page.
+For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the xref:building-docker-images#[Running Docker commands] page.
 
 For more information, see the xref:executor-intro#[Execution environments overview] page.
 
@@ -410,7 +410,7 @@ See the xref:jobs-steps#[Jobs and steps] page for more information.
 [#orbs]
 == Orbs
 
-Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools.
+Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools.
 
 The illustration in the <<configuration,Configuration>> section showing an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with link:https://circleci.com/developer/orbs/orb/circleci/maven[the Maven orb]. Here, the orb sets up a default executor that can execute steps with Maven and run a common job (`maven/test`).
 
@@ -425,7 +425,7 @@ See xref:orb-concepts#[Using orbs] for details on how to use orbs in your config
 
 The more tests your project involves, the longer it takes for them to complete on a single machine. Using _test splitting_ and _parallelism_, you can spread your tests across a specified number of separate executors.
 
-Test suites are conventionally defined at the xref:jobs-steps#sample-configuration-with-concurrent-jobs[job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job. and you can use the `circleci tests` commands to split your test suite to run across your parallel executors.
+Test suites are conventionally defined at the xref:jobs-steps#[job] level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job. and you can use the `circleci tests` commands to split your test suite to run across your parallel executors.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`.
 
@@ -544,14 +544,29 @@ jobs:
 See the xref:jobs-steps#[Jobs and steps] page for more information.
 
 [#user-types]
-== User types
+== User roles
 
-CircleCI has various user types with permissions inherited from VCS accounts.
+CircleCI roles are set up differently depending on how you xref:version-control-system-integration-overview#[integrate your code].
+
+TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+=== GitHub App, GitLab and Bitbucket Data Center users
+Roles are set at the organization and project level and are separate to permissions and roles set in the version control system in which your code is stored. The available roles are:
+
+* Admin
+* Contributor
+* Viewer
+
+For an overview of organization and project role permissions, see the xref:roles-and-permissions-overview#organization-role-permissions-matrix[Roles and permissions overview] page.
+
+See the xref:manage-roles-and-permissions#[Manage roles and permissions] page for steps to add, remove, and change org and project level roles. You can also manages roles and permissions in xref:manage-groups#[groups].
+
+=== GitHub OAuth app and Bitbucket Cloud users
+CircleCI has various user roles with permissions inherited from VCS accounts.
 
 * The _Organization Administrator_ is a permission level inherited from your VCS:
  ** GitHub: *Owner* and following at least one project building on CircleCI.
  ** Bitbucket: *Admin* and following at least one project building on CircleCI.
- ** GitLab: *Admin* and following at least one project building on CircleCI.
 * The _Project Administrator_ is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project.
 * A _User_ is an individual user within an organization, inherited from your VCS.
 * A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to an org in the VCS to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.

@@ -31,7 +31,7 @@ As an example, the AWS S3 orb includes a _command_ to copy a file or object to a
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@x.y.z
+  aws-s3: circleci/aws-s3@4.1.0
 
 jobs:
   build:
@@ -53,7 +53,7 @@ See the [AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#com
 ### Executors
 {: #executors }
 
-Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/configuration-reference/#docker--machine--macos--windows-executor):
+Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/configuration-reference/#executor-job):
 
 - Docker
 - macOS

@@ -1,12 +1,12 @@
 ---
 contentTags:
   platform:
-  - Server v4.6
+  - Server v4.7
   - Server Admin
 ---
 = Installing server behind a proxy
 :page-layout: classic-docs
-:page-description: Learn how to install CircleCI server v4.6 behind a proxy.
+:page-description: Learn how to install CircleCI server v4.7 behind a proxy.
 :page-liquid:
 :icons: font
 :toc: macro
@@ -14,7 +14,7 @@ contentTags:
 
 Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
 
-Configuring a proxy happens during xref:phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
+Configuring a proxy happens during phase 2, core services (xref:phase-2-aws-core-services#m-installing-behind-a-proxy[AWS], xref:phase-2-gcp-core-services#m-installing-behind-a-proxy[GCP]).
 
 [#known-limitations]
 == Known limitations

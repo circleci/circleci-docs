@@ -45,12 +45,12 @@ It is possible to edit the webhooks in GitHub to restrict events that trigger a 
 
 Refer to the link:https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
 
-Refer to the CircleCI documentation on xref:workflows#using-contexts-and-filtering-in-your-workflows[Workflow filters] for information on how to build tag pushes.
+Refer to the CircleCI documentation on xref:workflows#using-filters-in-your-workflows[Workflow filters] for information on how to build tag pushes.
 
 [#permissions-overview]
 == Permissions overview
 
-CircleCI requests the following permissions from GitHub, defined in the link:http://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
+CircleCI requests the following permissions from GitHub, defined in the link:https://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
 
 **Read Permission**
 
@@ -314,6 +314,19 @@ After access is granted, CircleCI should behave normally again.
 ## Rename organizations and repositories
 
 If you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+
+[#using-github-app-functionality]
+== Using GitHub App functionality alongside the GitHub OAuth app
+
+xref:github-apps-integration#[CircleCI’s GitHub App integration] offers increased control over which resources in your VCS CircleCI can access, and lets CircleCI access those resources in a more secure manner. Specifically:
+
+- You can choose to only allow the CircleCI GitHub App access to specific repositories within your GitHub organization.
+- The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
+- The CircleCI GitHub App uses short-lived tokens when accessing your resources.
+
+Some existing and future functionality on CircleCI, such as triggering a pipeline via a xref:webhooks#custom-webhooks[custom webhook], will only be available when using the more secure GitHub App integration. Despite only being available when using the GitHub App, this functionality **is still usable by organizations that currently integrate with CircleCI’s GitHub OAuth App**. The GitHub App and OAuth app **can co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:github-apps-integration#currently-not-supported[not yet available] to the GitHub App integration (such as xref:scheduled-pipelines#[scheduled pipelines]) or needing to set up and migrate to a new organization.
+
+Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
 
 [#next-steps]
 == Next steps

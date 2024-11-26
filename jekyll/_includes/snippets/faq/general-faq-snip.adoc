@@ -10,7 +10,7 @@ See the CircleCI xref:security#[Security policy] for more details.
 
 Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the link:https://circleci.com/developer/images[CircleCI Developer Hub] and the xref:circleci-images#[CircleCI images guide].
 
-For the `machine` executor, see the xref:configuration-reference#available-linux-machine-images[available machine images] list.
+For the `machine` executor, see the xref:configuration-reference#available-linux-machine-images-cloud[available machine images] list.
 
 For an introduction to execution environments and images, see the xref:executor-intro#[Introduction to execution environments].
 

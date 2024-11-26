@@ -35,7 +35,7 @@ It is possible to edit the webhooks in Bitbucket Cloud to restrict events that t
 
 Refer to the link:https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian Manage Webhooks document] for details.
 
-Refer to the CircleCI documentation on xref:workflows#using-contexts-and-filtering-in-your-workflows[Workflow filters] for information on how to build tag pushes.
+Refer to the CircleCI documentation on xref:workflows#using-filters-in-your-workflows[Workflow filters] for information on how to build tag pushes.
 
 NOTE: **Bitbucket personal orgs:** CircleCI expects that your personal/default organization matches your Bitbucket Cloud username. Bitbucket Cloud supports renaming your personal workspace to differ from your username, however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, make sure its name matches your username.
 

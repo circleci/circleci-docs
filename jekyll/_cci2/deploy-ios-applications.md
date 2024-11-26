@@ -134,12 +134,12 @@ app_identifier "com.example.HelloWorld"
 
 If you need to use different credentials for App Store Connect and the Apple Developer Portal, check the [Fastlane Appfile documentation](https://docs.fastlane.tools/advanced/Appfile/) for more details.
 
-Once this is configured, you just need to call [`app_store_connect_api_key`](http://docs.fastlane.tools/actions/app_store_connect_api_key/#app_store_connect_api_key) in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
+Once this is configured, you just need to call [`app_store_connect_api_key`](https://docs.fastlane.tools/actions/app_store_connect_api_key/#app_store_connect_api_key) in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
 
 ### 1. Deploy to the App Store
 {: #deploy-to-the-app-store }
 
-The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The [`deliver` action](http://docs.fastlane.tools/actions/deliver/#deliver/) provided by Fastlane is a powerful tool that automates the App Store submission process.
+The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The [`deliver` action](https://docs.fastlane.tools/actions/deliver/#deliver/) provided by Fastlane is a powerful tool that automates the App Store submission process.
 
 Deliver also allows various options such as automatic uploading of metadata and screenshots (which can be generated with the [`snapshot`](https://docs.fastlane.tools/actions/snapshot/) and [frameit](https://docs.fastlane.tools/actions/frameit/) actions). For further configuration, refer to the Fastlane [documentation for `deliver`](https://docs.fastlane.tools/actions/deliver/).
 

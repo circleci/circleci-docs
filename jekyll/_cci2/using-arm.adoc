@@ -49,7 +49,7 @@ jobs:
 [#available-resource-classes]
 == Available resource classes
 
-The following Arm resources are available part of the xref:configuration-reference#machine-executor-linux[`machine` executor]:
+The following Arm resources are available part of the xref:configuration-reference#available-linux-machine-images-cloud[`machine` executor]:
 
 {% include snippets/arm-resource-table.adoc %}
 
@@ -98,17 +98,9 @@ For a full list of machine executor images, see the link:https://circleci.com/de
 [#limitations]
 == Limitations
 
-* Some orbs that include an executable may *not* be compatible with Arm at
-this time. If you run into issues with orbs on Arm, you can link:https://github.com/CircleCI-Public/arm-preview-docs/issues[open an issue].
-* We currently do not provide support for 32-bit Arm architectures. Only 64-bit
-`arm64` architectures are supported at this time.
-* There may be up to 2 minutes of spin-up time before your job actually starts
-running. This time will decrease as more customers start using Arm resources.
-* If there is software you require that is not available in the image, you can
-link:https://github.com/CircleCI-Public/arm-preview-docs/issues[open an issue] to
-let us know.
-* In CircleCI server, Arm resources are only available when using the EC2 provider
-for VM service. This is because there are no Arm instances available in GCP.
+* Only 64-bit `arm64` architectures are supported.
+* In CircleCI server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. This is because there are no Arm instances available in GCP.
+* If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
 
 [#m1-mac-support]
 === M1 Mac support
