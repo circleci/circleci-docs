@@ -100,8 +100,6 @@ workflows:
 
 ワークスペースを使用してビルド ジョブとデプロイ ジョブの間でデータを受け渡す実際の例については、CircleCI ドキュメントをビルドするように構成された link:https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml[`config.yml`] を参照してください。
 
-ワークスペース、キャッシュ、およびアーティファクトの使用に関する概念的な情報については、ブログ記事「link:https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)]」を参照してください。
-
 [#workspaces-and-self-hosted-runner]
 == ワークスペースストレージのカスタマイズ
 
