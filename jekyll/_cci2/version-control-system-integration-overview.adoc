@@ -57,7 +57,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"] ^2^
+| icon:thumbs-up[role="circle-green"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -66,7 +66,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"] ^2^
+| icon:thumbs-up[role="circle-green"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -75,7 +75,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"] ^2^
+| icon:thumbs-up[role="circle-green"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -84,7 +84,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^, ^2^
+| icon:thumbs-up[role="circle-green"] ^1^, ^2^
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
 | icon:thumbs-down[role="circle-red"] ^1^
@@ -114,7 +114,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"] ^2^
+| icon:thumbs-up[role="circle-green"] ^2^
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
@@ -129,7 +129,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-down[role="circle-red"]
 
 | link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
-| icon:thumbs-down[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
@@ -138,7 +138,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | icon:thumbs-up[role="circle-green"]
 
 | xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
-| icon:thumbs-down[role="circle-green"]
+| icon:thumbs-up[role="circle-green"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"]
