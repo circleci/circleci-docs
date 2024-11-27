@@ -1,1 +1,15 @@
-NOTE: This feature is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, and an overview of feature support, see the xref:version-control-system-integration-overview#feature-support-for-each-integration-type[VCS integration overview] page.
+[NOTE]
+====
+This feature **is supported** for orgs that use OAuth authentication. Organization homepage URLs for OAuth authenticated orgs are structured as follows:
+
+* `app.circleci.com/organization/github/<your-org-name>`
+* `app.circleci.com/organization/bitbucket/<your-org-name>`
+
+This feature is **not supported** if your Organization homepage URL is in the following format:
+
+* `circleci/54R3kM5RtdFE7v3sa4nWAX`.
+
+The `54R3kM5RtdFE7v3sa4nWAX` portion of the URL is a unique identifier for your organization.
+
+For an overview of feature support, see the xref:version-control-system-integration-overview#feature-support-for-each-integration-type[VCS integration overview] page.
+====
