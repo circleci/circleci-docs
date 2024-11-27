@@ -2550,9 +2550,9 @@ workflows:
 [#using-when-in-workflows]
 ==== *Using `when` in workflows*
 
-NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
+NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration. Workflows are always run unless there is a when or unless filter that prevents the workflow from being run. If you want a workflow to run in every pipeline, do not add a when or unless filter.
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements>> to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements,logic statement>> to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 

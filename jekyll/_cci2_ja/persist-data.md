@@ -174,4 +174,3 @@ IP アドレスの範囲機能のデータ使用量に関するご質問につ�
 - [アーティファクト]({{site.baseurl}}/ja/artifacts)
 - [IP アドレスの範囲機能]({{site.baseurl}}/ja/ip-ranges/)
 - [最適化の概要]({{site.baseurl}}/ja/optimizations)
-- [ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント](https://circleci.com/ja/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)
