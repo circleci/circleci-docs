@@ -256,7 +256,7 @@ The table below shows the permissions associated with each CircleCI organization
 |
 |
 
-^| View trigger
+^| View triggers
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -266,7 +266,7 @@ The table below shows the permissions associated with each CircleCI organization
 ^| icon:check-circle[]
 ^|
 
-^| Edit trigger
+^| Edit triggers
 ^| icon:check-circle[]
 ^| 
 ^|
@@ -276,12 +276,12 @@ The table below shows the permissions associated with each CircleCI organization
 |
 |
 
-^| View pipeline
+^| View pipelines
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Edit pipeline
+^| Edit pipelines
 ^| icon:check-circle[]
 ^| 
 ^|
@@ -456,12 +456,12 @@ The table below shows the permissions associated with each CircleCI project role
 |
 |
 
-^| View pipeline
+^| View pipelines
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Edit pipeline
+^| Edit pipelines
 ^| icon:check-circle[]
 ^| 
 ^|
