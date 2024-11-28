@@ -72,6 +72,14 @@ The `checkout` key is required under `steps` to checkout your code. The `run` ke
 
 In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under steps. For a full list of step options see the xref:configuration-reference#steps[Steps key] section of the Configuration Reference.
 
+== Access jobs and steps in the CircleCI app
+
+A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, timing information, test results, artifacts and resource usage information through several tabs (1).
+
+The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members. You can also use the search functionality to find specific lines of output (2).
+
+image::/docs/assets/img/docs/pipelines-job-step-test-artifact.png[Job tab options in the CircleCI web app]
+
 [#passing-parameters-to-jobs]
 == Passing parameters to jobs
 
