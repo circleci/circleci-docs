@@ -54,7 +54,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
-| icon:thumbs-up[role="circle-green"]
+| icon:thumbs-up[role="circle-green"] [.circle-green.small]#Supported#
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-down[role="circle-red"]
 | icon:thumbs-up[role="circle-green"] ^2^
