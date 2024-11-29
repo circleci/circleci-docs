@@ -112,12 +112,8 @@ Currently there is no pre-population of caches because this optimization has not
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-- **[React](https://github.com/facebook/react)** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools).
-- **[React Native](https://github.com/facebook/react-native/)** - Build native mobile apps using JavaScript and React.
 - **[Flow](https://github.com/facebook/flow/)** - Adds static typing to JavaScript to improve developer productivity and code quality.
 - **[Storybook](https://github.com/storybookjs/storybook)** - Interactive UI component dev & test: React, React Native, Vue, Angular, Ember.
-- **[Electron](https://github.com/electron/electron)** - Build cross-platform desktop apps with JavaScript, HTML, and CSS.
-- **[Angular](https://github.com/angular/angular)** - Framework for building browser and desktop web applications.
 - **[Apollo](https://github.com/apollographql)** - A community building flexible open source tools for GraphQL.
 - **[PyTorch](https://github.com/pytorch/pytorch)** - Data manipulation and Machine Learning platform.
 - **[Calypso](https://github.com/Automattic/wp-calypso)** - The next generation webapp powering WordPress.com.
