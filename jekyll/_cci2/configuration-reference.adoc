@@ -2628,14 +2628,14 @@ Jobs are run concurrently by default, so you must explicitly require any depende
 | `requires`
 | N
 | List
-| A list of jobs that must succeed or attain a specified status for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
+| A list of jobs that must succeed or attain a specified status for the job to start. *Note*: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
 
- Possible values:
- - Job name (a required job that must succeed for the job to start)
- - Map of job name to status (a required job that must attain the specified status for the job to start)
- - Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start)
+ Possible types of `requires` items: + 
+ * Job name (a required job that must succeed for the job to start) +           
+ * Map of job name to status (a required job that must attain the specified status for the job to start) + 
+ * Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start)
 
- The possible status values are: `success`, `failed` and `canceled`.
+ The possible *status* values are: `success`, `failed` and `canceled`.
 |===
 
 [,yml]
