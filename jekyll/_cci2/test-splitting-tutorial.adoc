@@ -95,7 +95,7 @@ To get started, you need to get the sample app building as a project on CircleCI
 
 . You will be prompted to select your config.yml file. In the window, select the "Fast: Take me to a config.yml template that I can edit" option. Select btn:[Set Up Project].
 
-. You will then see a list of sample configurations. Scroll down within the window until you see **Node (Advanced)**, then select btn:[Select].
+. You will then see a list of sample configurations. Scroll down within the window until you see **Node (Advanced)**, then choose btn:[Select].
 +
 image::test-splitting-sample-configs.png[Sample config for Node]
 
