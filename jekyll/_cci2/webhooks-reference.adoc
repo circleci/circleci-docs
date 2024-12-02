@@ -128,7 +128,7 @@ The following data about the job associated with the webhook event is provided:
 
 | `stopped_at`
 | no
-| When the job reached a terminal state (if applicable)                                                        |
+| When the job reached a terminal state (if applicable)
 |===
 
 [#workflow]
