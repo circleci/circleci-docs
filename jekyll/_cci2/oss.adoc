@@ -1,0 +1,120 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Build open source projects
+:description: Best practices for building open source projects
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+This document provides tips and best practices for building your open source project on CircleCI.
+
+== Credits for open source projects
+
+See the xref:credits#open-source-credit-usage[Using Credits] page for up-to-date information on free credits available for open source projects
+
+[#security]
+== Security
+
+While open source can be a liberating practice, take care not to liberate sensitive information.
+
+* If your repository is public, your CircleCI project and its build logs are also public. Pay attention to the information you choose to print.
+* Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in <<pass-secrets-to-builds-from-forked-pull-requests,forked PRs>>
+unless explicitly enabled.
+
+[#features-and-settings-for-open-source-projects]
+== Features and settings for open source projects
+
+The following features and settings can be useful for open source projects.
+
+[#private-environment-variables]
+=== Private environment variables
+
+Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
+
+For more information, see the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable] document.
+
+[#only-build-pull-requests]
+=== Only build pull requests
+
+NOTE: The "Only build pull requests" feature is not currently supported for GitHub App projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
+
+To change this setting, go to the menu:Project Settings[Advanced] of your project and set the *Only build pull requests* option to _On_.
+
+The ability to override the *Only build pull requests* setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
+
+Override the *Only build pull requests* setting by utilizing the API and following the steps outlined in this link:https://support.circleci.com/hc/en-us/articles/15222074173723-How-to-allowlist-additional-branches-for-Only-Build-Pull-Requests[support article].
+
+Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
+
+NOTE: CircleCI will build all commits from your project's _default branch and tags_ regardless of any setting.
+
+[#build-pull-requests-from-forked-repositories]
+=== Build pull requests from forked repositories
+
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+
+Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
+
+By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the menu:Project Settings[Advanced] of your project and set the *Build forked pull requests* option to _On_.
+
+If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCI, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
+
+[#pass-secrets-to-builds-from-forked-pull-requests]
+=== Pass secrets to builds from forked pull requests
+
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+
+Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
+
+By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
+
+* <<private-environment-variables,Environment variables>> set through the application.
+* xref:github-integration#deploy-keys-and-user-keys[Deployment keys and user keys].
+* Passphraseless private SSH keys you have xref:add-ssh-key#[added to CircleCI] to access arbitrary hosts during a build.
+* xref:deploy-to-aws#[AWS permissions] and configuration files.
+
+Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
+
+If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ be generated if you have this setting turned on. This prevents your token data being shared with forked builds unless you require it. If you do choose to use OIDC with open source projects by enabling the *Pass secrets to builds from forked pull requests* option, you *must* check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require. For more information on OIDC, see the xref:openid-connect-tokens#[Using OpenID Connect tokens in jobs] page.
+
+If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the *Pass secrets to builds from forked pull requests* option:
+
+. Navigate to the menu:Project Settings[Advanced] page in the CircleCI web app for your project.
+. Set the *Pass secrets to builds from forked pull requests* option to _On_.
+
+[#caching]
+=== Caching
+
+Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub
+repository-id of the originator of the fork PR to identify the cache.
+
+* PRs from the same fork repo will share a cache. For example, PRs from the
+main repo share a cache with the main repo branches (in particular the
+`main` branch).
+* Two PRs in different fork repos will have different caches. That means
+that a PR from a fork will not share a cache with the main repo `main` branch.
+* enabling the <<pass-secrets-to-builds-from-forked-pull-requests,passing of secrets to build from forked pull requests>>
+will enable cache sharing between the original repo and all forked builds.
+
+Currently there is no pre-population of caches because this optimization has not made it to the top of the priority list yet.
+
+[#example-open-source-projects]
+== Example open source projects
+
+Following are a few examples of projects (big and small) that build on CircleCI:
+
+* *https://github.com/facebook/flow/[Flow]* - Adds static typing to JavaScript to improve developer productivity and code quality.
+* *https://github.com/storybookjs/storybook[Storybook]* - Interactive UI component develop and test: React, React Native, Vue, Angular, Ember.
+* *https://github.com/apollographql[Apollo]* - A community building flexible open source tools for GraphQL.
+* *https://github.com/Automattic/wp-calypso[Calypso]* - The next generation web app powering WordPress.com.
+* *https://github.com/fastlane/fastlane[Fastlane]* - A build automatically tool for Android and iOS.
+
+== See also
+
+Refer to the xref:example-configs#[Examples] document for more public and open source project configuration links organized by CircleCI features and by programming language.
