@@ -14,4 +14,6 @@ contentTags:
 
 This page describes errors and troubleshooting methods for pipelines and scheduled pipelines.
 
+== Troubleshooting
+
 include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
