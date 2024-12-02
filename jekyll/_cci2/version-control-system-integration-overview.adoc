@@ -17,8 +17,6 @@ When you create a CircleCI project you will select a code repository to connect.
 
 link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated with code repositories hosted on the following VCS providers:
 
-
-
 * GitHub.com
 * GitHub Enterprise Cloud
 * GitLab
@@ -36,7 +34,10 @@ link:https://circleci.com/pricing/server/[CircleCI server] supports the followin
 
 == Feature support for each integration type
 
-The following tables show feature support per VCS for **CircleCI cloud**, along with feature support for **CircleCI server**.
+The following tables show feature support per VCS for **CircleCI cloud**, along with feature support for **CircleCI server**:
+
+* Features that are supported for a VCS integration type are indicated with [.circle-green]#**Yes**#.
+* Features that are not supported are indicated with [.circle-red]#**No**#.
 
 [NOTE]
 ====
@@ -54,52 +55,54 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes** ^2^#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | Reduced permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes** ^2^#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes** ^2^#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:set-up-multiple-configuration-files-for-a-project#[Set up multiple configuration files for a project]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^
-| icon:thumbs-down[role="circle-red"] ^1^
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No** ^1^#
+| [.circle-red]#**No** ^1^#
+| [.circle-green]#**Yes** ^1,2^#
+| [.circle-red]#**No** ^1^#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No** ^1^#
 
 | xref:enable-checks#[GitHub Checks]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 |===
 
 ^1^ _Possible using xref:dynamic-config#[dynamic configuration]._
+
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 
 === Pipeline triggers and integrations
 
@@ -109,52 +112,54 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | xref:webhooks#custom-webhooks[Custom _inbound_ webhook triggers]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes** ^2^#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:scheduled-pipelines#[Scheduled pipelines]
-| icon:thumbs-down[role="circle-red"] ^2^
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-red]#**No**# ^1^
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:webhooks#outbound-webhooks[Outbound webhooks]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 |===
 
-^2^ _One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
+^1^ _One alternative is to use a xref:webhooks#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
+
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 
 === Core capabilities
 
@@ -163,112 +168,112 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 |===
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:artifacts#[Artifact storage]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:vs-code-extension-overview#test-run-your-config-from-vs-code[Test run config from VS Code]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:dynamic-config#[Dynamic configuration]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:rerun-failed-tests#[Rerun failed tests]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | xref:orb-intro#[Orbs]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:parallelism-faster-jobs#[Test splitting and parallelism]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:docker-layer-caching#[Docker layer caching]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:ssh-access-jobs#[Debug with SSH]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:skip-build#auto-cancel[Auto-cancel redundant workflows]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
-| In-app config viewing and editing
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| xref:config-editor#[In-app config viewing and editing]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:insights-tests#[Test insights]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:oss#only-build-pull-requests[Only build pull requests]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 |===
 
@@ -279,49 +284,49 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 |===
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:openid-connect-tokens#[OpenID Connect tokens]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:config-policy-management-overview#[Config policies]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:audit-logs#[Audit logs]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | xref:contexts#security-goup-restrictions[Security group context restriction]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:contexts#expression-restrictions[Expression context restriction]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 |===
 
 === Open source support
@@ -331,31 +336,31 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 |===
 | Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
 | xref:oss#[OSS support]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:oss#build-pull-requests-from-forked-repositories[Build pull requests from forked repositories]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:oss#pass-secrets-to-builds-from-forked-pull-requests[Pass secrets to builds from forked pull requests]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-up[role="circle-green"]
-| icon:thumbs-down[role="circle-red"]
-| icon:thumbs-up[role="circle-green"]
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 |===
 
