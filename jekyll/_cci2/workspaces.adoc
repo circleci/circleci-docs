@@ -101,8 +101,6 @@ workflows:
 
 For a live example of using workspaces to pass data between build and deploy jobs, see the link:https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml[`.circleci/config.yml`] that is configured to build the CircleCI documentation.
 
-For additional conceptual information on using workspaces, caching, and artifacts, refer to the link:https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces] blog post.
-
 [#workspaces-and-self-hosted-runner]
 == Workspace storage customization
 

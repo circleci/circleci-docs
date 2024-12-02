@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI is committed to supporting four minor versions of the software. This means a minor version will receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation.
+CircleCI is committed to supporting two minor versions of the software. This means a minor version will be released twice yearly and receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation. Patch releases will continue to be monthly as needed. 
 
 [#semantic-versioning]
 == Semantic versioning
@@ -26,7 +26,7 @@ Additional labels for pre-release and build metadata are available as extensions
 
 [#release-schedule]
 == Release schedule
-We release monthly patch fixes for bugs and security concerns. We will have quarterly new feature releases. All releases will be posted to the change log. To stay up to date with the most recent releases, subscribe to the link:https://circleci.com/server/changelog/[change log].
+We release monthly patch fixes for bugs and security concerns. We will have twice yearly new minor (feature) releases. All releases will be posted to the change log. To stay up to date with the most recent releases, subscribe to the link:https://circleci.com/server/changelog/[change log].
 
 [#end-of-support]
 == End of support

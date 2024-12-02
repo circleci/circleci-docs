@@ -268,22 +268,22 @@ The table below shows the permissions associated with each CircleCI organization
 
 ^| Edit triggers
 ^| icon:check-circle[]
-^| icon:check-circle[]
+^| 
 ^|
 
-| *Config sources*
+| *Pipelines*
 |
 |
 |
 
-^| View config sources
+^| View pipelines
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Edit config sources
+^| Edit pipelines
 ^| icon:check-circle[]
-^| icon:check-circle[]
+^| 
 ^|
 
 | *Releases*
@@ -451,19 +451,19 @@ The table below shows the permissions associated with each CircleCI project role
 ^|
 ^|
 
-| *Config sources*
+| *Pipelines*
 |
 |
 |
 
-^| View config sources
+^| View pipelines
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Edit config sources
+^| Edit pipelines
 ^| icon:check-circle[]
-^|
+^| 
 ^|
 
 | *Releases*
