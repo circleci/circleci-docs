@@ -196,7 +196,7 @@ You cannot currently manage the connection with GitHub outside of the project se
 [#scheduled-pipelines]
 === Scheduled pipelines
 
-The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. As an alternative, use a xref:webhooks/#custom-webhooks[custom webhook] or the xref:triggers-overview/#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. As an alternative, use a xref:webhooks#custom-webhooks[custom webhook] or the xref:triggers-overview/#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
 
 [#build-forked-pull-requests]
 === Build forked pull requests
