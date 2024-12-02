@@ -69,7 +69,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes** ^2^#
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
@@ -85,9 +85,9 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 | [.circle-red]#**No** ^1^#
-| [.circle-green]#**Yes** ^1^, ^2^#
+| [.circle-green]#**Yes** ^1,2^#
 | [.circle-red]#**No** ^1^#
-| [.circle-red]#**No** ^1^#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 
 | xref:enable-checks#[GitHub Checks]
@@ -135,7 +135,7 @@ GitHub can be integrated into your CircleCI org in one of two ways, via the GitH
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
