@@ -42,7 +42,7 @@ For more information, see the xref:set-environment-variable#set-an-environment-v
 
 include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-CAUTION: If your CircleCI account is authenticated via GitHub OAuth, and you have set up GitHub App pipelines, the "Only build pull request" setting will not work for your GitHub App pipelines but will work as expected for your GitHub OAuth pipelines.
+CAUTION: If your CircleCI account is authenticated via GitHub OAuth, and you have xref:github-integration#using-github-app-functionality[set up GitHub App pipelines], the "Only build pull request" setting will not work for your GitHub App pipelines but will work as expected for your GitHub OAuth pipelines.
 
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 

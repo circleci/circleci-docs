@@ -7,9 +7,7 @@ This feature **is supported** for orgs that use OAuth authentication. Organizati
 
 This feature is **not supported** if your Organization homepage URL is in the following format:
 
-* `circleci/54R3kM5RtdFE7v3sa4nWAX`.
-
-The `54R3kM5RtdFE7v3sa4nWAX` portion of the URL is a unique identifier for your organization.
+* `app.circleci.com/organization/circleci/<UID>`.
 
 For an overview of feature support, see the xref:version-control-system-integration-overview#feature-support-for-each-integration-type[VCS integration overview] page.
 ====
