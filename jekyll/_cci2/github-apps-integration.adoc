@@ -193,12 +193,12 @@ The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently su
 [#build-forked-pull-requests]
 === Build forked pull requests
 
-The Build forked pull requests feature is not currently supported for GitHub App projects..
+The Build forked pull requests feature is not currently supported for GitHub App pipelines.
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
 
-Passing secrets to forked pull requests is not currently supported for GitHub App projects.
+Passing secrets to forked pull requests is not currently supported for GitHub App pipelines.
 
 [#stop-building]
 === Stop building
@@ -219,7 +219,7 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 [#test-insights]
 === Test Insights
 
-xref:insights-tests#[Test Insights] is currently not supported for GitHub App integrations.
+xref:insights-tests#[Test Insights] is currently not supported for orgs authenticated with the CircleCI GitHub App. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
 
 [#only-build-pull-requests]
 === Only build pull requests
