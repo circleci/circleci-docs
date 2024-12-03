@@ -1,0 +1,76 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Test Insights
+:page-description: Analyze your test performance using test Insights.
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+
+[#overview]
+== Overview
+
+Use CircleCI test Insights to analyze your test performance within the most recent executions and identify opportunities for test optimization. To access test insights, select the *Tests* tab on the *Workflow Insights* page.
+
+The next sections go over what test insights are available.
+
+[#performance-summary]
+=== Performance summary
+
+The summary section displays test suite performance across your most recent 100 runs. You can view the following:
+
+* Average test per run
+* Number of all flaky tests detected
+* Failure counts
+* Slow run times in test suite
+
+image::{{site.baseurl}}/assets/img/docs/test-insights-performance-summary.png[Performance summary example]
+
+[#most-recent-runs]
+=== Most recent runs
+
+The most recent runs chart displays the most recent 100 executions of the test suite. You can hover over each bar to review the following:
+
+* Test count
+* Skipped tests
+* Success rate of tests
+
+image::test-insights-recent-runs.png[Recent runs example]
+
+[#flaky-tests]
+=== Flaky tests
+
+Flaky tests are tests that fail non-deterministically; they pass and fail due to some state external to the repository. As a result, flaky tests introduce uncertainty to a project's build state.
+
+Test Insights detects flaky tests. Flaky tests are identified as tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and show the same behavior on re-runs. Flaky tests are labeled `FLAKY` throughout the CircleCI app to help you identify them.
+
+image::test-insights-flaky.png[Flakey tests Insights example]
+
+[#most-failed-tests]
+=== Most failed tests
+
+You can view the 100 tests with the lowest success rates in their most recent pipeline executions. The table provides the following:
+
+* Test name
+* Associated job
+* Run time
+* Success rate
+
+image::test-insights-failed.png[Most failed tests examples]
+
+[#slowest-tests]
+=== Slowest tests
+
+You can view the 100 tests with the longest run times in their most recent pipeline executions. The table provides the following:
+
+* Test name
+* Associated job
+* Run time
+* Success rate
+
+image::test-insights-slowest.png[Slowest tests example]

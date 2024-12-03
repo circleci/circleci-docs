@@ -168,7 +168,7 @@ You can add or delete pipelines and triggers for your project. For details see t
 
 * You can optionally choose to enable the auto-cancel xref:skip-build#auto-cancel[redundant workflows setting]
 * You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
-* At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
+* At this time, the **Free and Open Source** setting is not currently supported for Bitbucket Data Center, but there are plans to make this available in the future.
 
 [#ssh-keys]
 === Additional SSH keys

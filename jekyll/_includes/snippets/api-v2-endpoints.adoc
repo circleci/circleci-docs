@@ -1,4 +1,3 @@
-* Authentication
 * Context
 * Insights
 * User
@@ -6,5 +5,8 @@
 * Job
 * Workflow
 * Webhook
+* OIDC Token Management
+* Policy Management
 * Project
+* Usage
 * Schedule
