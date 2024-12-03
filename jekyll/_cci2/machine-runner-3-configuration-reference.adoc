@@ -217,7 +217,7 @@ runner:
 
 `$CIRCLECI_RUNNER_MODE`
 
-This parameter allows you to specify whether you want to terminate this self-hosted runner instance upon completion of a job (`single-task`), or to continuously poll for new available jobs (`continuous`).
+This parameter allows you to specify whether you want to terminate this self-hosted runner process upon completion of a job (`single-task`), or to continuously poll for new available jobs (`continuous`).
 
 The possible values are:
 
@@ -231,6 +231,25 @@ Example:
 ```yaml
 runner:
   mode: continuous
+```
+
+When using `single-task` mode, the expected behaviour is that the runner process will while the machine instance will continue. However you may find it useful to terminate the machine instance itself.
+You can do this on linux based machines by adding the following to the systemd unit file:
+
+```yaml
+ExecStopPost=shutdown now -h
+Restart=no
+User=root
+```
+
+However to avoid running as root we recommend stepping down the circleci user using `runner.command_prefix` as in our xref:https://circleci.com/docs/machine-runner-3-configuration-reference/#runner-command-prefix[example above].
+
+Example:
+
+```yaml
+runner:
+  command_prefix: ["sudo", "-niHu", "circleci", "--"]
+  mode: single-task
 ```
 
 [#runner-max-run-time]
