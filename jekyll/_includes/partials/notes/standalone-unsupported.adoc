@@ -2,8 +2,8 @@
 ====
 This feature **is supported** for orgs that use OAuth authentication. Organization homepage URLs for OAuth authenticated orgs are structured as follows:
 
-* `app.circleci.com/organization/github/<your-org-name>`
-* `app.circleci.com/organization/bitbucket/<your-org-name>`
+* `app.circleci.com/organization/github/<your-org-name>` or `app.circleci.com/organization/gh/<your-org-name>`
+* `app.circleci.com/organization/bitbucket/<your-org-name>` or `app.circleci.com/organization/bb/<your-org-name>`
 
 This feature is **not supported** if your Organization homepage URL is in the following format:
 
