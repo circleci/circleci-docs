@@ -95,7 +95,7 @@ For information on viewing your storage usage, and calculating your monthly stor
 [#test-insights]
 == Test Insights
 
-NOTE: The test Insights feature is not currently supported for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 See the xref:insights-tests#[Test Insights] page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
@@ -581,7 +581,7 @@ After adding pytest to your project, you can produce and upload the test results
 [#maven-surefire-plugin-for-java-junit-results]
 === Maven Surefire Plugin for Java JUnit Results
 
-If you are building a link:https://maven.apache.org/[Maven] based project, you are more than likely using the link:https://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire plugin] to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
+If you are building a link:https://maven.apache.org/[Maven] based project, you are more than likely using the link:https://maven.apache.org/surefire/maven-surefire-plugin/[Maven Surefire plugin] to generate test reports in XML format. Add the following to the `.circleci/config.yml` file in your project to collect reports.
 
 [,yml]
 ----
@@ -599,7 +599,7 @@ If you are building a link:https://maven.apache.org/[Maven] based project, you a
 [#gradle-junit-test-results]
 === Gradle JUnit test results
 
-If you are building a Java or Groovy based project with link:https://gradle.org/[Gradle], test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
+If you are building a Java or Groovy based project with link:https://gradle.org/[Gradle], test reports are automatically generated in XML format. Add the following to the `.circleci/config.yml` file in your project to collect reports.
 
 [,yml]
 ----

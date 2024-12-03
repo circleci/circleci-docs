@@ -39,13 +39,7 @@ The following tables show feature support per VCS for **CircleCI cloud**, along 
 * Features that are supported for a VCS integration type are indicated with [.circle-green]#**Yes**#.
 * Features that are not supported are indicated with [.circle-red]#**No**#.
 
-[NOTE]
-====
-GitHub can be integrated into your CircleCI org in one of two ways, via the GitHub App or GitHub OAuth. To see which integration type you have, navigate to CircleCI web app, select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
-
-* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
-* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
-====
+include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
 
 === Code checkout and repository integration
 
