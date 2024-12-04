@@ -36,10 +36,12 @@ Set up pipelines to define the code to checkout and the config to use. Set up tr
 
 === Pipelines
 
-Pipelines define units of work that can be run within your projects.
-Each pipeline is defined by two key characteristics:
+Pipelines define units of work that can be run within your projects. Each pipeline is defined by two key characteristics:
 
-* A configuration file, which is stored in a repository referred to as config source, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used.
+* A configuration file, which is stored in a repository referred to as config source, at a path of your choosing. The default config source location is `.circleci/config.yml`.
++
+TIP: For GitHub App and Bitbucket Data Center pipelines you can choose any file path with extension `*.yml`.
+
 * A checkout source, which determines which repository will be checked out when running a xref:configuration-reference#checkout[checkout step]. This model allows your CircleCI config to be stored in a different repository from your code.
 
 A project can have one or more pipelines, and each pipeline can be associated with zero or more triggers.
@@ -51,6 +53,8 @@ image::project-settings-pipelines.png[Pipelines page in project settings]
 ==== Add or edit a pipeline
 
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a pipeline is already set up.
+
+NOTE: **Using GitLab?** The options described here are for setting up a GitHub App pipeine. The options you see will vary from this description.
 
 image::add-pipeline.png[Add a pipeline]
 
