@@ -3,7 +3,6 @@ contentTags:
   platform:
   - Cloud
   - Server v4.x
-  - Server v3.x
 ---
 = Pipelines overview
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
@@ -29,7 +28,11 @@ image::/docs/assets/img/docs/pipelines-dashboard.png[Screenshot of the pipelines
 
 == Pipelines and triggers
 
-Set up pipelines and triggers to define when and how pipelines are automatically triggered for a project. These triggers may be from external services (custom webhooks), or from commits or tags on a version control system.
+NOTE: The pipeline and trigger features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:version-control-system-integration-overview[VCS integration overview] page.
+
+NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available
+
+Set up pipelines to define the code to checkout and the config to use. Set up triggers to define when and how pipelines are automatically triggered for a project. Triggers may be from external services (custom webhooks), from commits or tags on a version control system, or set up to run on a schedule.
 
 === Pipelines
 
