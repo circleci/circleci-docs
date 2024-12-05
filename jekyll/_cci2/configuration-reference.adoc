@@ -2652,7 +2652,7 @@ workflows:
           requires:
             - build
             - test
-     - notify-build-canceled:
+      - notify-build-canceled:
           requires:
             - build: canceled
       - cleanup:
