@@ -34,9 +34,11 @@ image::pipeline-id.png[Screenshot showing the location on the pipeline ID]
 
 NOTE: The pipeline and trigger features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:version-control-system-integration-overview[VCS integration overview] page.
 
-NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available
+NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available.
 
-Set up pipelines to define the code to checkout and the config to use. Set up triggers to define when and how pipelines are automatically triggered for a project. Triggers may be from external services (custom webhooks), from commits or tags on a version control system, or set up to run on a schedule.
+Set up pipelines to define the code to checkout and the config to use for your project CI/CD..
+
+Set up triggers to define when and how a pipeline is triggered for a project. Triggers may be from external services (custom webhooks), from commits or tags on a version control system, or set up to run on a schedule.
 
 === Pipelines
 
@@ -77,14 +79,16 @@ To add or edit a pipeline, follow these steps:
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
-** Under Integration select the platform that matches where your project is set up (for example, GitHub App).  If you integrate with  xref:github-integration#[CircleCI's GitHub OAuth App]) you can select GitHub App here to install the App into your org and access xref:github-integration#using-github-app-functionality[improved security and new features].
+** Under Integration select the platform that matches where your project is set up (for example, GitHub App).
++
+NOTE: If you integrate with xref:github-integration#[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:github-integration#using-github-app-functionality[improved security and new features].
 +
 NOTE: For GitLab Self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:gitlab-integration#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
 ** Authorize your connection if this is not already showing with a icon:check-circle[]
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
-** Under Build Assets, select a checkout Source for this pipeline. This is the repository that will be checked out when a xref:configuration-reference#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the field Config Source.
+** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a xref:configuration-reference#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the Config Source.
 . Select btn:[Save].
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. This is described in the following section.
@@ -107,6 +111,8 @@ To add a trigger for a pipeline, follow these steps:
 --
 
 Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[Triggers overview] page.
+
+NOTE: Custom webhooks are available for GitHub App pipelines only. This includes GitHub App pipelines set up within a xref:github-integration#using-github-app-functionality[GitHub OAuth org].
 
 To add a trigger for a custom webhook, follow these steps:
 
@@ -189,6 +195,8 @@ For steps to add a trigger for a pipeline using Bitbucket Data Center, see the x
 
 [.tab.trigger.Scheduled]
 --
+include::../_includes/partials/notes/standalone-unsupported.adoc[Unsupported for GitHub App, GitLab, Bitbucket Data Center orgs]
+
 include::../_includes/partials/pipelines-and-triggers/scheduled-pipeline-setup.adoc[Setting up a scheduled pipeline using the CircleCI web app]
 --
 
