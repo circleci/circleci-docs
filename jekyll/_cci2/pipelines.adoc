@@ -32,7 +32,7 @@ image::pipeline-id.png[Screenshot showing the location on the pipeline ID]
 
 == Pipelines and triggers
 
-NOTE: The pipeline and trigger features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:version-control-system-integration-overview[VCS integration overview] page.
+NOTE: The pipeline and trigger features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:version-control-system-integration-overview#[VCS integration overview] page.
 
 NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available.
 
