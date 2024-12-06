@@ -242,7 +242,7 @@ Restart=no
 User=root
 ```
 
-However to avoid running as root we recommend stepping down the `circleci` user using `runner.command_prefix` as in our xref:https://circleci.com/docs/machine-runner-3-configuration-reference/#runner-command-prefix[example above].
+However to avoid running as root we recommend stepping down the `circleci` user using `runner.command_prefix` as in our <<runner-command-prefix,example above>>.
 
 Example:
 
