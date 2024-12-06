@@ -26,7 +26,7 @@ Your pipelines dashboard displays recently-triggered pipelines for your organiza
 
 image::pipelines-dashboard.png[Screenshot of the pipelines dashboard in the CircleCI app]
 
-The number next to the project name on the dashboard is a count of the number of pipelines that have been triggered for the project. This is the _pipeline ID_.
+From the pipelines dashboard you can find the _pipeline ID_. The pipeline ID is a unique ID for a pipeline that has been triggered. You can use the pipeline ID to access pipeline information via the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/getPipelineValuesById[API].
 
 image::pipeline-id.png[Screenshot showing the location on the pipeline ID]
 
