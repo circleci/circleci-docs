@@ -445,10 +445,10 @@ markdownlint-cli2-formatter-json@0.0.8:
   resolved "https://registry.yarnpkg.com/markdownlint-cli2-formatter-json/-/markdownlint-cli2-formatter-json-0.0.8.tgz#7b2746f3dea6d58c7a398a8564e1e880f21d36f2"
   integrity sha512-1NDSZT4kMe7x4Og1xzWA2ZtPgKSKQkILlFHGC9yGwLFvYNHMKPHUdOUsza4lh+A+wuvyA27Xw6OKC3xZEjR53w==
 
-markdownlint-cli2@0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/markdownlint-cli2/-/markdownlint-cli2-0.15.0.tgz#649edd80d59343c2e2493db2f6a31f1de3d72bb4"
-  integrity sha512-4P/lnxQxU2R5lywRJs4b2ajm8z65CW8qqR1bTIcdQ5EG+nZpC6HJlJUnmIR5ee+uecUkoMroazxWcLB7etSmrg==
+markdownlint-cli2@0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/markdownlint-cli2/-/markdownlint-cli2-0.16.0.tgz#95c599e28aff8e4286fbf08003e7fc1282ec0cac"
+  integrity sha512-oy5dJdOxGMKSwrlouxdEGf6N4O2Iz8oJ4/HO2Ix67o4vTK1AQNGjZUNwTIzfa5x+XbJ++dfgR1gLfILajsW+1Q==
   dependencies:
     globby "14.0.2"
     js-yaml "4.1.0"
