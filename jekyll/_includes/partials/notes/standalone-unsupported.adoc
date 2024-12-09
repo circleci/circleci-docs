@@ -1,13 +1,15 @@
 [NOTE]
 ====
-This feature **is supported** for orgs that use OAuth authentication. Organization homepage URLs for OAuth authenticated orgs are structured as follows:
+This feature **is supported** for orgs that use OAuth authentication.
 
-* `app.circleci.com/organization/github/<your-org-name>` or `app.circleci.com/organization/gh/<your-org-name>`
-* `app.circleci.com/organization/bitbucket/<your-org-name>` or `app.circleci.com/organization/bb/<your-org-name>`
+Check your Organization slug at menu:Organization settings[Overview]. OAuth authenticated orgs are structured as follows:
+
+* `github/<your-org-name>` or `gh/<your-org-name>`
+* `bitbucket/<your-org-name>` or `bb/<your-org-name>`
 
 This feature is **not supported** if your Organization homepage URL is in the following format:
 
-* `app.circleci.com/organization/circleci/<UID>`.
+* `circleci/<UID>`.
 
 For an overview of feature support, see the xref:version-control-system-integration-overview#feature-support-for-each-integration-type[VCS integration overview] page.
 ====
