@@ -91,6 +91,7 @@ To add a trigger for a pipeline, follow these steps:
 
 [.tab.trigger.Custom_webhook]
 --
+NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
 
 Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[Triggers overview] page.
 
