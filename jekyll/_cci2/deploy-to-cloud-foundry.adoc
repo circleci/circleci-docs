@@ -3,8 +3,7 @@ description: This is document provides examples of deploying to Cloud Foundry.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Deploy to Cloud Foundry
 :page-layout: classic-docs

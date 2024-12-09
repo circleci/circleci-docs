@@ -3,7 +3,7 @@ description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
+  - Server v4+
 ---
 = Config policies overview
 :page-layout: classic-docs

@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server 3.x
+  - Server v4+
 ---
 = Migrate from TeamCity
 :page-layout: classic-docs

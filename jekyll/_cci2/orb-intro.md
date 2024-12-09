@@ -5,8 +5,7 @@ description: "Starting point for using CircleCI orbs"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 Use orbs to:

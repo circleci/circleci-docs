@@ -3,7 +3,6 @@ categories: [platforms]
 contentTags:
   platform:
   - Cloud
-  - Server v3.x
 ---
 = Deploy Android applications
 :page-layout: classic-docs
@@ -170,7 +169,7 @@ You need to convert your keystore to base64 to safely access it in CircleCI. You
 $ base64 your_key_store
 ```
 
-Save the output somewhere easily accessible for the next step.
+Save the output. You will need it in the next step.
 
 [#set-env-vars]
 === b. Set environment variables

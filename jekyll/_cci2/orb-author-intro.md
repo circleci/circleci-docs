@@ -5,8 +5,7 @@ description: "Starting point for how to author an orb"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 ## Quick start

@@ -1,9 +1,9 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server Admin
+contentTags:
+  platform:
+    - Cloud
+    - Server v4+
+    - Server Admin
 ---
 = Security overview
 :page-layout: classic-docs

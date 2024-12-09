@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Pipelines overview
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.

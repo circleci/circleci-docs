@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Avoiding and debugging Java memory errors
 :page-description: How to avoid and debug Java memory errors on CircleCI.

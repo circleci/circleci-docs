@@ -3,8 +3,7 @@ description: How-to guide for using the CLI to split tests across parallel compu
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Use the CircleCI CLI to split tests
 :page-layout: classic-docs

@@ -3,8 +3,7 @@ description: "A guide to the various ways to manage pipeline triggering in Circl
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 document-type:
 - Conceptual
 ---

@@ -1,8 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
   - Server Admin
 ---
 = Security

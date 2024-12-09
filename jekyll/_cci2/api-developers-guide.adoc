@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = CircleCI API developer's guide
 :page-description: API guide for internal and external CircleCI developers

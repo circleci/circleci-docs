@@ -3,8 +3,7 @@ description: This is document provides examples of deploying to Google Cloud Pla
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 =  Deploy to Google Cloud Platform
 :page-layout: classic-docs

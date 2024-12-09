@@ -3,8 +3,7 @@ readtime: false
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 sectionTags:
   config-version-2:
     - "#version"
