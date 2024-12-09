@@ -83,7 +83,7 @@ Example output:
 [#define-the-contexts-allowed-for-a-project]
 == Define the contexts allowed for a project
 
-There are many reasons why you may want to allow specific projects the use of only certain contexts. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys.
+You may want to allow specific projects the use of only certain contexts. For example, you might want to only allow contexts that have EKS-related deployment keys to projects architected to be deployed on EKS using those keys.
 
 To achieve this, use the xref:config-policy-reference#contexts-allowed-by-project-ids[`contexts_allowed_by_project_ids`] helper to create a policy to apply this restriction. This helper function accepts project IDs and context names, and prevents the usage of contexts that are **not** in the allow-list for all specified projects.
 

@@ -42,7 +42,7 @@ cd circleci-demo-go
 circleci local execute build
 ```
 
-The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and Postgres Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
+The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and PostgreSQL Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
 
 [#limitations-of-running-jobs-locally]
 == Limitations of running jobs locally

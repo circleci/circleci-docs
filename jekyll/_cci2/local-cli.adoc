@@ -27,7 +27,7 @@ This page covers the installation and usage of the CircleCI CLI. The expectation
 [#installation]
 == Installation
 
-There are multiple installation options for the CircleCI CLI.
+Install the CircleCI CLI using one of the methods described below.
 
 NOTE: If you have previously installed CLI prior to October 2018, you may need to do an extra one-time step to switch to the new CLI. See the <<updating-the-legacy-cli,upgrade instructions>>.
 
@@ -90,7 +90,7 @@ By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` dire
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | sudo bash
 ----
 
-You can also install to an alternate location by defining the `DESTDIR` environment variable when invoking bash:
+You can also install to an alternate location by defining the `DESTDIR` environment variable when invoking Bash:
 
 [,shell]
 ----

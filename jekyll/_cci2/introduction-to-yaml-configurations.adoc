@@ -39,7 +39,7 @@ Next, your configuration needs a job to run, and an execution environment for th
 - GPU
 - Arm
 
-There are some limitations depending on the execution environment in your configuration. Visit the <<executor-intro#,Introduction to Execution Environments>> page to get started in that section of our documentation, which has extensive information on each execution environment.
+Some limitations exist depending on the execution environment in your configuration. Visit the <<executor-intro#,Introduction to Execution Environments>> page to get started and find information on each execution environment.
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 

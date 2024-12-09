@@ -65,7 +65,7 @@ jobs:
 
 === 2. Split and run tests
 
-There are two commands that you can use to split your tests. We recommend using `circleci tests run` as this enables you to also take advantage of the xref:rerun-failed-tests#[rerun failed tests] feature. The examples in this section use the `circleci tests run` command.
+Two commands are available for you to split your tests. We recommend using `circleci tests run` as this enables you to also take advantage of the xref:rerun-failed-tests#[rerun failed tests] feature. The examples in this section use the `circleci tests run` command.
 
 Alternatively, you can see `circleci tests split` examples <<tests-split-examples,here>>
 
@@ -111,7 +111,7 @@ jobs:
           path: ~/rspec
 ```
 +
-** `--format RspecJunitFormater` must come after any other `--format` rspec argument
+** `--format RspecJunitFormater` must come after any other `--format` RSpec argument
 ** Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 ** Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
 
@@ -143,7 +143,7 @@ jobs:
 [#cypress-tests]
 ===== Cypress
 
-. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[cypress-circleci-reporter] (this is a 3rd party tool that is not maintained by CircleCI).  You can install the tool in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
+. Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter`] (this is a 3rd party tool that is not maintained by CircleCI).  You can install the tool in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
 +
 ```yaml
   #add required reporters (or add to package.json)
@@ -186,7 +186,7 @@ jobs:
 ** Cypress may output a warning: `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
 
 [#javascript-typescript-jest-tests]
-===== Javascript/Typescript (Jest)
+===== JavaScript/TypeScript (Jest)
 
 . Install the `jest-junit` dependency. You can add this step in your `.circleci/config.yml`:
 +
@@ -367,7 +367,7 @@ jobs:
 
 * Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-* Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[phpunit-finder] which is a third party tool that is not supported by CircleCI, use at your own risk.
+* Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk.
 
 [#configure-django-tests]
 ===== Django

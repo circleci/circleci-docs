@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 ---
-= Self-hosted runner Concepts
+= Self-hosted runner concepts
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Conceptual Overview for CircleCI's self-hosted runner.
@@ -24,7 +24,7 @@ Resource classes help you identify a pool of self-hosted runners, which allow yo
 
 Optionally, you can give your resource class a description.
 
-Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+NOTE: If you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].
 
 [#task-agent]
 == Task-agent
@@ -65,4 +65,4 @@ CircleCI's self-hosted runners are xref:/runner-faqs.adoc#can-jobs-on-forks-of-m
 * Exposing access to the machine's network environment
 * Persisting unwanted or dangerous data on the machine
 
-NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].

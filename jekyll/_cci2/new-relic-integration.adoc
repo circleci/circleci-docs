@@ -22,18 +22,18 @@ The link:https://newrelic.com/instant-observability/circleci[New Relic CircleCI 
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to New Relic. For more information, refer to the New Relic CircleCI link:https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/[installation docs].
 
-. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
+. Log in to the link:https://app.circleci.com/projects)[CircleCI web app].
 
-. Access one of your CircleCI projects
+. Access one of your CircleCI projects.
 
-. Open **Project settings**
+. Open **Project settings**.
 
-. In the project settings sidebar, click **Webhooks**
+. In the project settings sidebar, select **Webhooks**.
 
-. Click **Add webhook**
+. Select **Add webhook**.
 
 . Complete the following fields:
-** **Webhook name**: give your webhook an easily identifiable name, for example, `New Relic CI Visibility`
+** **Webhook name**: give your webhook an identifiable name, for example, `New Relic CI Visibility`
 ** **Receiver URL**: Use New Relic's **Logs endpoint**. Use the region you set for your New Relic account.
 +
 Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key)[retrieve from the UI or API].
@@ -44,6 +44,6 @@ Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:h
 ** **Events**: Select **Workflow Completed** or **Job Completed**, depending on the type of event you want to trigger the logpush
 ** Enable the check: **Certificate verifications**
 
-. Click **Add Webhook** to save the new webhook.
+. Select **Add Webhook** to save the new webhook.
 
 . If you have set up your receiving API or third-party service, click **Test ping event** to create a test event.

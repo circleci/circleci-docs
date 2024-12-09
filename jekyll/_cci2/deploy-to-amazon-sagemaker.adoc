@@ -44,11 +44,11 @@ image::deploy/add-release-environment.png[Screenshot showing option to add a new
 . In the popup, select **Amazon SageMaker** from the "Environment" dropdown. Give your new environment a name, and click btn:[Create Environment]
 +
 image::deploy/create-new-environment.png[Screenshot showing new release environment popup]
-. Click on your new environment name to enter the environment view
-. Click btn:[Create New Token]
+. Select your new environment name to enter the environment view.
+. Select btn:[Create New Token].
 +
 image::deploy/release-create-new-token.png[Screenshot showing create new token button]
-. Click btn:[Create Token]. Be sure to save this token, you will create an environment variable later to store it.
+. Select btn:[Create Token]. Be sure to save this token, you will create an environment variable later to store it.
 
 [#set-up-amazon-sagemaker-access]
 == 2. Set up Amazon SageMaker access
@@ -67,16 +67,16 @@ image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console
 . Enter your "Provider URL". This will be `\https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
 +
 {% include snippets/find-organization-id.adoc %}
-. Click **Get Thumbprint**
-. For "Audience" enter your organization ID
-. Click btn:[Add Provider]
+. Select **Get Thumbprint**.
+. For "Audience" enter your organization ID.
+. Select btn:[Add Provider].
 
 [#policy]
 === b. Policy
 
 . From your AWS management console, navigate to menu:IAM[Policies]
-. Click btn:[Create Policy]
-. Click btn:[JSON] to select the JSON policy editor and then copy in the following permissions. We have organized the permissions into two groups. OrbPermissions and S3Access statements are used for the deployment of the model to the endpoints. The S3AccessTrainModel and SageMakerTrainModel statements are needed if you want to train the demo model we provide.
+. Select btn:[Create Policy].
+. Select btn:[JSON] to select the JSON policy editor and then copy in the following permissions. We have organized the permissions into two groups. OrbPermissions and S3Access statements are used for the deployment of the model to the endpoints. The S3AccessTrainModel and SageMakerTrainModel statements are needed if you want to train the demo model we provide.
 +
 NOTE: Update the S3 bucket information to match your setup. Create a bucket if one does not yet exist.
 +
@@ -151,7 +151,7 @@ NOTE: Update the S3 bucket information to match your setup. Create a bucket if o
 === c. Role
 
 . From your AWS management console, navigate to menu:IAM[Roles]
-. Click **Create Role**
+. Select **Create Role**.
 . Select **Web Identity** and then select the CircleCI provider you created above, and under Audience, select your org ID
 . Use the search function to find the policy you created above by name, select it and click btn:[Next]
 . Give your Role a name, and then scroll to the Trust policy section. Set up the Trust relationship between the Role and the CircleCI OIDC Provider. Here is an example Policy. Remember to replace the placeholders `<CIRCLECI-ORG-ID>` and `<CIRCLECI-PROJECT-ID>` with your values.
@@ -185,7 +185,7 @@ NOTE: Update the S3 bucket information to match your setup. Create a bucket if o
 }
 ----
 
-. Click btn:[Create Role]
+. Select btn:[Create Role].
 . Select your role from the list and copy the Role ARN, you will need this in the next section.
 +
 image::deploy/role-arn.png[Screenshot showing location of Role ARN]
@@ -198,10 +198,10 @@ The CircleCI Amazon SageMaker orb requires some environment variables to functio
 * `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:release/releases-overview#[CircleCI releases]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
 * `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
 
-. From the CircleCI web app, click **Dashboard** in the sidebar
-. Use the project filter dropp-down to choose your project
-. Click btn:[Project Settings] and then choose **Environment Variables**
-. Click btn:[Add Environment Variable] button to enter a name and value of the new environment variable.
+. From the CircleCI web app, click **Dashboard** in the sidebar.
+. Use the project filter dropp-down to choose your project.
+. Select btn:[Project Settings] and then choose **Environment Variables**.
+. Select btn:[Add Environment Variable] button to enter a name and value of the new environment variable.
 +
 image::deploy/add-env-var.png[Screenshot showing add environment variable popup]
 . Repeat step four for the second environment variable
@@ -262,7 +262,7 @@ The sample app used in this how-to guide uses a model commonly found in AWS docu
 
 Assuming you are using our example repository, follow these steps to build a new model package version:
 
-. There is a workflow (`model-train`) configured to run on the branch `model-train`. Checkout the `model-train` branch, and push it up to GitHub
+. A workflow (`model-train`) is configured to run on the branch `model-train`. Checkout the `model-train` branch, and push it up to GitHub
 . The `model-train` workflow will make a new model package version in the model registry. If the model package doesn't already exist, it will create it.
 
 Every time you run this workflow by pushing to the `model-train` branch, anew model version is created.
@@ -292,7 +292,7 @@ Let's break down the `deploy-model-through-to-prod workflow`. Our first job is `
 * `name` controls the name of this job visible in the Workflow graph in the CircleCI web app.
 * `filters` allows you to control what branch the job runs on.
 
-Next, we need to create the endpoint configuraiton, this happens in the job `aws-sagemaker/create_endpoint_configuration`:
+Next, we need to create the endpoint configuration, this happens in the job `aws-sagemaker/create_endpoint_configuration`:
 
 [,yaml]
 ----
@@ -349,11 +349,11 @@ image::deploy/job-approval.png[Approval job]
 [#check-in-on-your-release]
 == 7. Check in on your release
 
-The CircleCI release UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate easily to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
+The CircleCI release UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
 
 image::deploy/sagemaker-releases.png[Releases dashboard]
 
-Click on the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
+Aelect the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
 
 image::deploy/sagemaker-component-view.png[Releases component view]
 

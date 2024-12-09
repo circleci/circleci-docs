@@ -16,7 +16,7 @@ In this how-to guide, you will learn how to configure CircleCI to publish to the
 [#introduction]
 == Introduction
 
-Setting up CircleCI to publish packages to the npm registry makes it easy for project collaborators to release new package versions in a consistent and predictable way.
+Setting up CircleCI to publish packages to the npm registry enabling project collaborators to release new package versions in a consistent and predictable way.
 
 [#obtain-the-npm-authToken]
 == 1. Get the npm `authToken`
