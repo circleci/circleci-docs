@@ -3,8 +3,7 @@ description: This is document provides examples of deploying to Firebase.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Deploy to Firebase
 :page-layout: classic-docs

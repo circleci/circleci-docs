@@ -3,8 +3,7 @@ layout: classic-docs
 contentTags:
   platform:
     - Cloud
-    - Server v4.x
-    - Server v3.x
+    - Server v4+
 ---
 = Dynamic configuration overview
 :description: A guide to using CircleCI's dynamic configuration features

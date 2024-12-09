@@ -2,7 +2,6 @@
 contentTags:
   platform:
   - Cloud
-  - Server v3.x
 ---
 = Introduction to CircleCI migration
 :page-layout: classic-docs

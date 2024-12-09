@@ -5,8 +5,7 @@ description: "This document describes how to use the official CircleCI pre-built
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.

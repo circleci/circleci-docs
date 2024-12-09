@@ -5,8 +5,7 @@ description: "How to assign scoped tokens for using the CircleCI API"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 To use the CircleCI API or view details about your pipelines, you will need API tokens

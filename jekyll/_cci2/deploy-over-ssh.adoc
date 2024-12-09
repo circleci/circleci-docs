@@ -3,8 +3,7 @@ description: This is document provides examples of deploying over SSH.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Deploy over SSH
 :page-layout: classic-docs
@@ -27,13 +26,13 @@ Add the SSH key for the target to which you are deploying (these instructions ar
 
 . Scroll down to the **Additional SSH Keys** section.
 
-. Click the **Add SSH Key** button.
+. Select **Add SSH Key**.
 
 . In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
 
 . In the **Private Key** field, paste the SSH key you are adding.
 
-. Click the **Add SSH Key** button.
+. Select **Add SSH Key**.
 
 For additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
 

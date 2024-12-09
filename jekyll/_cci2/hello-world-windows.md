@@ -5,8 +5,7 @@ description: "First Windows project on CircleCI"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/getting-started/).

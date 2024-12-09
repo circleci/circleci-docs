@@ -21,7 +21,7 @@ CircleCI supports testing macOS apps on the following:
 * Fastlane
 * macOS permissions orb
 
-By setting up automated macOS app testing on CircleCI, you can easily test your app against different versions of macOS and add automation to your development pipeline.
+By setting up automated macOS app testing on CircleCI, you can test your app against different versions of macOS and add automation to your development pipeline.
 
 [#concepts]
 == Concepts
@@ -30,7 +30,7 @@ To test a macOS app, the Xcode Runner requires the ability to take control of th
 
 Apple does not provide an alternative command line tool for granting permissions, but there is a workaround. By manually modifying the permissions database, we can insert new permissions which will allow Xcode Helper to interact with apps. This file, called `TCC.db`, is responsible for holding information about the permissions that have been requested and granted, or denied, for each app.
 
-There are two unique `TCC.db` files in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime.
+Two unique `TCC.db` files are in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime.
 
 While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
@@ -41,7 +41,7 @@ While adding permissions can be manually written in your CircleCI config with `s
 
 Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
 
-For more information, please see the xref:using-macos#supported-xcode-versions[Supported Xcode versions] list.
+For more information, see the xref:using-macos#supported-xcode-versions[Supported Xcode versions] list.
 
 If you are interested in Xcode Cross Compilation, visit the xref:using-macos#xcode-cross-compilation[Using macOS] page.
 
@@ -86,7 +86,7 @@ workflows:
 [#configuring-fastlane]
 === Configuring Fastlane
 
-Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Please note that when using Fastlane, depending on the actions in your configuration, you may need to setup a 2-factor Authentication (2FA).
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Note that when using Fastlane, depending on the actions in your configuration, you may need to setup a 2-factor Authentication (2FA).
 
 See the link:https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication[Fastlane docs] for more information.
 
@@ -114,12 +114,12 @@ A fully configured sample project can be found link:https://github.com/CircleCI-
 [#working-with-the-macos-orb]
 == Working with the macOS Orb
 
-The `TCC.db` file is simply an SQLite database, so this makes it easy to inject new permissions, or modify existing ones, during a job.
+The `TCC.db` file is an SQLite database, so this makes it straight forward to inject new permissions, or modify existing ones, during a job.
 
 While it can be written to manually with `sqlite3` commands, we encourage the use of the link:https://circleci.com/developer/orbs/orb/circleci/macos[macOS orb] to simplify this. The examples in this section are all based on using the orb.
 
 [#listing-current-permissions]
-=== Listing Current Permissions
+=== Listing current permissions
 
 To list the currently defined permissions in both the user and system database, call the `list-permissions` command provided by the orb, such as in this example:
 

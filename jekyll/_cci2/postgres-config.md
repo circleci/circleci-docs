@@ -5,8 +5,7 @@ description: "See example database config.yml files using PostgreSQL/Rails and M
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.

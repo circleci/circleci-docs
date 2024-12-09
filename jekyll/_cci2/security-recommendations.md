@@ -1,8 +1,11 @@
 ---
 layout: classic-docs
 title: "Secure secrets handling"
-category: [administration]
 description: "Learn how to handle secrets securely with CircleCI."
+contentTags:
+  platform:
+    - Cloud
+    - Server v4+
 ---
 
 Many builds must reference secret values entrusted to CircleCI. CircleCI understands that security is critical to every organization’s success. In addition to the work CircleCI does to keep your secrets safe, there are a few things you can do to help protect secrets at the boundary between CircleCI’s systems and yours.

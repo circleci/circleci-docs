@@ -8,8 +8,7 @@ order: 1
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 * TOC

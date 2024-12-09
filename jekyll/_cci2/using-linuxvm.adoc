@@ -1,5 +1,10 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
 = Using the Linux VM execution environment
-:contentTags: {"platform"=>["Cloud", "Server v4.x", "Server v3.x"]}
 :description: Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor.
 :experimental:
 :icons: font

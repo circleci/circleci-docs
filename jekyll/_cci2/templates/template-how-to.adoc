@@ -3,8 +3,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 // The page title for a how-to guide should be concise yet descriptive. It immediately tells the reader at a glance what will be accomplished.
 = Page title
@@ -67,7 +66,7 @@ Sometimes, there may be topics to know or tasks to complete that are _helpful_ i
 [#carry-out-the-task]
 == 1. Carry out the task
 
-The main body of the guide should be broken into logical steps, with headings for each step. The steps should guide the reader through using the feature. 
+The main body of the guide should be broken into logical steps, with headings for each step. The steps should guide the reader through using the feature.
 
 Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
 
@@ -81,7 +80,7 @@ In a how-to guide, you might walk the reader through an example scenario. Exampl
 Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
 
 * If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:../manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
-* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests]) 
+* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests])
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 

@@ -2,8 +2,8 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
+
 ---
 = Generate code coverage metrics
 :page-description: Generate code coverage metrics for different languages.

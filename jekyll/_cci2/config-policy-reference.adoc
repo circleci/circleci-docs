@@ -3,7 +3,7 @@ description: Open preview of config policies for CircleCI. Reference page for fu
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
+  - Server v4+
 ---
 = Config policy reference
 :page-layout: classic-docs

@@ -86,7 +86,7 @@ The `setup_circle_ci` Fastlane action must be in the `before_all` block to perfo
 
 * Create a new temporary keychain for use with Fastlane Match (see the code signing section for more details).
 * Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
-* Set up log and test result paths to be easily collectible.
+* Set up log and test result paths to be collectible.
 
 [#example-configuration-for-using-fastlane-on-circleci]
 === Example configuration for using Fastlane on CircleCI

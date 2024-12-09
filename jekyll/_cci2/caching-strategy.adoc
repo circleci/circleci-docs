@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Caching strategies
 :page-description: A guide to the various caching strategies available for managing dependency caches in CircleCI.
@@ -95,7 +94,7 @@ If you find that a cache is not restored, see link:https://support.circleci.com/
 [#cache-unused-or-superfluous-dependencies]
 === Cache unused or superfluous dependencies
 
-Depending on what language and package management system you are using, you may be able to leverage tools that clear or "`prune`" unnecessary dependencies.
+Depending on what language and package management system you are using, you may be able to leverage tools that clear or _prune_ unnecessary dependencies.
 
 For example, the node-prune package removes unnecessary files (Markdown, TypeScript files, etc.) from `node_modules`.
 

@@ -8,8 +8,7 @@ order: 1
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.

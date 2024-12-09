@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Storing build artifacts
 :page-description: Example of uploading artifacts created during a build

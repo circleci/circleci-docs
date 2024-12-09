@@ -3,8 +3,7 @@ description: "A how to guide for using matrix jobs to simplify your CircleCI con
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 document-type:
 - How-to
 ---

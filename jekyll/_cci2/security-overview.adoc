@@ -1,9 +1,9 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server Admin
+contentTags:
+  platform:
+    - Cloud
+    - Server v4+
+    - Server Admin
 ---
 = Security overview
 :page-layout: classic-docs
@@ -30,7 +30,7 @@ Follow the advice in xref:security-recommendations#[Secure secrets handling] whe
 
 Use xref:contexts/#restrict-a-context[restricted contexts] with teams to share environment variables with a select security group.
 
-If your project is **open source and public**, please make note of whether or not you want to share environment variables.
+If your project is **open source and public**, make note of whether or not you want to share environment variables.
 
 On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our xref:oss/#security[Open Source projects document].
 

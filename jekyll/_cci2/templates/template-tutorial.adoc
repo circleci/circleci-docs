@@ -3,8 +3,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Page title
 :page-layout: classic-docs
@@ -111,7 +110,7 @@ xref:../about-circleci#learn-more[About CircleCI]
 [#code-examples]
 === d. Code examples
 
-Use asciidoc source blocks for code:
+Use Asciidoc source blocks for code:
 
 [source,yaml]
 ----

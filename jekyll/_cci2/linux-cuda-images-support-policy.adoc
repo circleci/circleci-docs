@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = CircleCI Linux CUDA images support policy
 :page-layout: classic-docs
@@ -27,7 +26,7 @@ The CircleCI CUDA images are based on our Linux VM machine images for the purpos
 
 We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release.
 
-This is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
+The release policy is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
 
 [#tagging]
 == Tagging

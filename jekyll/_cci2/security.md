@@ -1,9 +1,12 @@
 ---
 layout: classic-docs
 title: "How CircleCI handles security"
-category: [administration]
 description: "An overview of security measures taken at CircleCI."
---- 
+contentTags:
+  platform:
+    - Cloud
+    - Server v4+
+---
 
 This document outlines security initiatives taken by CircleCI.
 

@@ -5,8 +5,7 @@ description: "Set up CI/CD for a Go project on CircleCI using orbs"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="go" demo_url_slug="go" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}

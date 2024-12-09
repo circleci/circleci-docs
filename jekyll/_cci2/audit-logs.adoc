@@ -1,11 +1,11 @@
 ---
-description: "This document describes the ways CircleCI customers can access their audit logs."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
 ---
 = Audit logs
+:page-description: "This document describes the ways CircleCI customers can access their audit logs."
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -20,7 +20,7 @@ If you have administrator permissions for your organization, you can access the 
 . Select **Organization Settings** in the web app sidebar.
 . Select **Security** from the menu.
 . Scroll down to the **Audit Log** section and specify a date range.
-. Click **Request audit logs** to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
+. Select **Request audit logs** to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
 
 NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 

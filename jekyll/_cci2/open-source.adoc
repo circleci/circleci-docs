@@ -3,7 +3,7 @@ readtime: false
 contentTags:
   platform:
   - Cloud
-  - Server
+  - Server v4+
 ---
 = Open source acknowledgments
 :page-layout: classic-docs

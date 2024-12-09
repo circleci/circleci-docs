@@ -6,8 +6,7 @@ description: "Conceptual Overview for Orbs"
 categories: [getting-started]
 verison:
 - Cloud
-- Server v4.x
-- Server v3.x
+- Server v4+
 ---
 
 * TOC

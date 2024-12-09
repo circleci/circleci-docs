@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Using shell scripts
 :page-description: Best practices for using shell scripts for use in CircleCI configuration
@@ -23,7 +22,7 @@ Configuring CircleCI often requires writing shell scripts. While shell scripting
 [#use-shellcheck]
 === Use ShellCheck
 
-link:https://github.com/koalaman/shellcheck[ShellCheck] is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
+link:https://github.com/koalaman/shellcheck[ShellCheck] is a shell script static analysis tool that gives warnings and suggestions for Bash/sh shell scripts.
 
 Use the link:https://circleci.com/developer/orbs/orb/circleci/shellcheck[ShellCheck orb] for the simplest way to add ShellCheck to your configuration (remember to replace `x.y.z` with a valid version):
 
@@ -108,7 +107,7 @@ You must set SECRET_ENV_VAR!
 [#set-error-flags]
 === Set error flags
 
-There are several error flags you can set to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
+Several error flags are available to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
 
 [,shell]
 ----
