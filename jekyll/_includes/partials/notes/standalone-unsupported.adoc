@@ -7,7 +7,7 @@ Check your Organization slug at menu:Organization settings[Overview]. OAuth auth
 * `github/<your-org-name>` or `gh/<your-org-name>`
 * `bitbucket/<your-org-name>` or `bb/<your-org-name>`
 
-This feature is **not supported** if your Organization homepage URL is in the following format:
+This feature is **not supported** if your organization slug is in the following format:
 
 * `circleci/<UID>`.
 
