@@ -4,7 +4,6 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
 ---
 // The page title for a how-to guide should be concise yet descriptive. It immediately tells the reader at a glance what will be accomplished.
 = Page title

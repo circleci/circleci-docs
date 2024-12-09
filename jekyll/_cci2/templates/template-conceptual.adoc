@@ -4,7 +4,6 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
 ---
 = Page title
 :page-layout: classic-docs
