@@ -177,7 +177,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 
 | xref:dynamic-config#[Dynamic configuration]
 | [.circle-green]#**Yes**#
