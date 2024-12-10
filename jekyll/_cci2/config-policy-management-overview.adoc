@@ -13,6 +13,8 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
+NOTE: You must be an organization admin in order to create and manage config policies
+
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
 [#introduction]
