@@ -2,8 +2,8 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
+
 ---
 = Using the CircleCI in-app configuration editor
 :page-description: Docs page on In-app configuration editor use and features

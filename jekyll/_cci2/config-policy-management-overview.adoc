@@ -3,7 +3,7 @@ description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
+  - Server v4+
 ---
 = Config policies overview
 :page-layout: classic-docs
@@ -173,13 +173,13 @@ In OPA, rules can produce any type of output. At CircleCI, rules that produce vi
 * String array
 * Map of string to string
 
-This is because rule violations must produce error messages that individual contributors and SecOps can act upon.
+This restriction is in place so that rule violations produce error messages that individual contributors and SecOps can act upon.
 Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
 
 [#evaluation]
 ===== Evaluation
 
-This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
+Evaluation is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
 
 [source,rego]
 ----
@@ -426,7 +426,7 @@ workflows:
 
 In the above example, the policy is bypassed and will **not trigger**. The policy inspects `jobs` and does not find a `resource_class == "large"`.
 
-This is problematic because once the configuration is compiled, the job `test` will have a `resource_class == "large"`.
+This example is problematic because once the configuration is compiled, the job `test` will have a `resource_class == "large"`.
 
 Another way this policy could be unintentionally bypassed is by using parameters. Consider the following configuration, which uses a parameter to set the resource class for an executor:
 
