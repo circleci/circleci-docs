@@ -2,16 +2,15 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4+
 ---
 = Deploy to Amazon SageMaker
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A short page description goes here
+:page-description: A guide to configuring deployments to Amazon SageMaker and monitoring in the CircleCI releases UI.
 :icons: font
 :experimental:
 
-NOTE: CircleCI releases is currently in **open preview**. During open preview release features are available for free. Charges will be associated with release features once they are generally available. The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is also in **open preview**. No charges will be associated with using the orb.
+NOTE: The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is in **open preview**.
 
 This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. It uses the sample repository link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] as a reference, but you can adapt every step to your requirements. Through this guide, you will learn how to orchestrate model deployment to endpoints across different environments, as well as track and manage your releases in the CircleCI release UI.
 
