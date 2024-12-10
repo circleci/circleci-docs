@@ -47,9 +47,9 @@ If the entrypoint specified for the image is invalid, the task will fail with an
 could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
 ```
 
-There is a difference between how container runner and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint,Adding an entrypoint>>). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
+Container runner and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>> in different ways. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint,Adding an entrypoint>>). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
 
-**Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+NOTE: Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
 
 Specify an entrypoint using the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> documentation to mitigate this error.
 You can set the entrypoint explicitly as described in <<custom-images#adding-an-entrypoint,Using custom built Docker images>>.
@@ -103,16 +103,16 @@ You can check the logs for any of the previous runs using the command `kubectl l
 
 We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the connection to the links on our FAQ includes a section about the xref:runner-faqs/#what-connectivity-is-required[connectivity required for CircleCI’s self-hosted runners].
 
-- **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within your link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[values.yaml] or within your xref:container-runner/#resource-class-configuration-custom-pod[config.yaml].
+- **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[your `values.yaml`] or within xref:container-runner/#resource-class-configuration-custom-pod[your `config.yaml`].
 
-There are also external tools for monitoring resource usage on the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation].
+Refer to the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation] for details of external resource monitoring tools.
 
 [#task-agent-appears-not-running]
 === Task agent appears not running
 
 The task pod may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
 
-The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in the link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[values.yaml] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runners's Helm chart].
+The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[the `values.yaml`] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runners's Helm chart].
 
 In the example below we have set the liveness probe to allow a 2.5 minute startup time before probing(`initialDelaySecond`) and 2.5 minutes of failures before the liveness probe fails (the probe will wait 30 seconds between each probe and allow for 5 failure responses before failing the probe) and the task pod is terminated.
 
@@ -130,6 +130,21 @@ agent:
               failureThreshold: 5
 ```
 In the event that the liveness probe fails or the task pod terminates, there is a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[prestop hook], which attempts to kill any existing task agent by its provided PID. This is to ensure there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
+
+[#view-the-log-of-a-failed-task-pod]
+=== View the logs of a failed task pod
+
+When a task pod fails, it is cleaned up by the container-agent almost immediately. However, sometimes you may want the pod to stick around longer so that you may review the logs and diagnose the failure. You can disable task pod deletion by adding the environment variable `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP=true` to your container-agent `values.yaml`.
+
+example:
+
+```yaml
+agent:
+  environment:
+    KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP: true
+```
+
+NOTE: When `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP` is set to true, then task pods may dangle until they are manually cleaned or until garbage collection deletes these pods. By default, garbage collection removes resources after they have lived for 5 hours and 5 mins. You may tweak these settings in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L161-L175[container-agent `values.yaml`].
 
 [#machine-runner]
 == Machine runner

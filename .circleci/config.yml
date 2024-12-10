@@ -3,7 +3,7 @@ version: 2.1 # Set the CI version.
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
-  ruby: circleci/ruby@2.3.0
+  ruby: circleci/ruby@2.3.1
   node: circleci/node@6.3.0
   md-proofer: hubci/md-proofer@0.1.1
   vale: circleci/vale@1.1.1
@@ -175,7 +175,7 @@ jobs:
           name: Build API 1.x documentation with Slate
           command: ./scripts/build_api_docs.sh -v1
       - run:
-          name: Build API 2.x documentation with Redoc
+          name: Build API 2.x documentation with Redocly
           command: ./scripts/build_api_docs.sh -v2
       - persist_to_workspace:
           root: *workspace_root

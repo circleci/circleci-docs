@@ -39,7 +39,7 @@ Next, add a new pipeline in your CircleCI project settings.
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
 . Select **Pipelines** in the sidebar
 +
-. Select btn:[Add Pipeline] (or btn:[Set Up Pipeline] for GitHub OAuth app integrations)
+. Select btn:[Add Pipeline]
 . Complete the required form fields:
 ** Give your pipeline a descriptive name
 ** Ensure **GitHub App** is selected under **Pipeline**

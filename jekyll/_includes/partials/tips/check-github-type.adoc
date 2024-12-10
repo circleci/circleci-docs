@@ -1,0 +1,15 @@
+[TIP]
+====
+**Check your project slug to discover which GitHub integration you have set up:**
+
+. Head to the link:https://app.circleci.com/home[CircleCI web app] and select your org from the cards on your user homepage.
+
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+
+. Select the ellipsis menu (icon:ellipsis-h[ellipsis]) next to your project and select **Project Settings**. The project slug is listed on the project settings homepage.
+
+* **GitHub App**: Project slug starts with `circleci` followed by UUIDs. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU/4nYdoKGkb6RXn7JGt8SQtg`).
+* **GitHub OAuth app**: Project slug is human readable. For example, `github/circleci/circleci-demo-workflows`.
+
+For more information about the differences, see the xref:version-control-system-integration-overview#[VCS integration overview].
+====

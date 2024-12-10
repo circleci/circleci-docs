@@ -1761,7 +1761,7 @@ While this improves performance in most cases, if a downstream step requires tho
 ----
 ====
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2550,9 +2550,9 @@ workflows:
 [#using-when-in-workflows]
 ==== *Using `when` in workflows*
 
-NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration.
+NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration. Workflows are always run unless there is a when or unless filter that prevents the workflow from being run. If you want a workflow to run in every pipeline, do not add a when or unless filter.
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements>> to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements,logic statement>> to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -2628,8 +2628,40 @@ Jobs are run concurrently by default, so you must explicitly require any depende
 | `requires`
 | N
 | List
-| A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
+a| A list of jobs that must succeed or attain a specified status for the job to start. *Note*: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
+
+Possible types of `requires` items:
+
+* Job name (a required job that must succeed for the job to start) +
+* Map of job name to status (a required job that must attain the specified status for the job to start) +
+* Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start)
+
+The possible *status* values are: `success`, `failed` and `canceled`.
 |===
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - build
+            - test
+      - notify-build-canceled:
+          requires:
+            - build: canceled
+      - cleanup:
+          requires:
+            - deploy:
+              - failed
+              - canceled
+
+----
 
 '''
 
@@ -2700,6 +2732,11 @@ An approval job can have any name. In the example above the approval job is name
 
 [#jobfilters]
 ====== *`filters`*
+Filter job execution within a workflow based on the following:
+
+* Branch
+* Tag
+* Expression-based condition
 
 Job filters can have the keys `branches` or `tags`.
 
@@ -2713,10 +2750,10 @@ NOTE: Workflows will ignore job-level branching. If you use job-level branching 
 | `filters`
 | N
 | Map
-| A map defining rules for execution on specific branches
+| A map or string to define rules for job execution. Branch and tag filters require a map. Expression-based filters require a string.
 |===
 
-The following is an example of how the CircleCI documentation uses a regex to filter running a workflow for building PDF documentation:
+The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
 
 [,yaml]
 ----
@@ -2728,19 +2765,128 @@ workflows:
       - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
           filters:
             branches:
-              only: /server\/.*/
+              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
 ----
 
-The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
+You can read more about using regular expressions in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
 
-You can read more about using regex in your config in the xref:workflows#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
+'''
+
+====== Expression-based job filters
+Expression-based job filters allow you to conditionally run jobs based on the following:
+
+* xref:variables#pipeline-values[Pipeline values]
+* xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline parameters]
+
+An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run.
+
+Using expression-based job filters is one way to optimize your pipelines to lower costs, decrease time to feedback, or run specific jobs based on the context of the source of change.
+
+[,yml]
+----
+workflows:
+  deploy:
+    jobs:
+      - init-service
+      - build-service-image:
+          requires:
+            - init-service
+      - dry-run-service:
+          requires:
+            - init-service
+          filters: pipeline.git.branch != "main" and pipeline.git.branch != "canary"
+      - publish-service:
+          requires:
+            - build-service-image
+            - test-service
+          filters: pipeline.git.branch == "main" or pipeline.git.tag starts-with "release"
+      - deploy-service:
+          context:
+            - org-global
+          requires:
+            - publish-service
+          filters: pipeline.git.branch == "main" and pipeline.git.commit.subject starts-with "DEPLOY:"
+----
+
+'''
+
+**Examples**
+
+Only run the job on the project's `main` branch:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main"
+----
+
+Only run the job on the project's `main` branch, or branches starting with `integration-test`:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
+----
+
+Only run the job on the `main` branch, and disallow use with pipelines xref:vs-code-extension-overview#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
+
+[source,yml]
+----
+filters: pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
+----
+
+Use pipeline parameters and the pipeline value `pipeline.git.branch` to run a job only on specific branches **or** when triggered via the API with a pipeline parameter set to true:
+
+[source,yml]
+----
+version: 2.1
+
+parameters:
+  run-storybook-tests:
+    type: boolean
+    default: false
+
+...
+# jobs configuration ommitted for brevity
+
+workflows:
+  build:
+    jobs:
+      - setup
+      - storybook-tests:
+          requires:
+            - setup
+          filters: |
+            pipeline.parameters.run-storybook-tests
+            or pipeline.git.branch == "dry-run-deploy"
+            or pipeline.git.branch starts-with "deploy"
+----
+
+You can use the API to trigger a pipeline with a pipeline parameter set to true:
+
+[source,yml]
+----
+curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "content-type: application/json" \
+  --data {
+  "definition_id": "<pipeline-definition-id>",
+  "config": {"branch": "<your-branch-name>"},
+  "checkout": {"branch": "<your-branch-name>"},
+  "parameters": {"run-storybook-tests": "true"}
+  }
+----
+
+**Operators**
+
+The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the examples above.
+
+include::../_includes/partials/using-expressions/operators.adoc[]
 
 '''
 
 [#branches]
 ====== *`branches`*
 
-Branches can have the keys `only` and `ignore`, which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
+The branches filter can have the keys `only` and `ignore`, which map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
 
 * Any branches that match `only` will run the job.
 * Any branches that match `ignore` will not run the job.
@@ -2755,17 +2901,17 @@ Branches can have the keys `only` and `ignore`, which either map to a single str
 | `branches`
 | N
 | Map
-| A map defining rules for execution on specific branches
+| A map defining rules for execution on specific branches.
 
 | `only`
 | N
-| String, or List of Strings
-| Either a single branch specifier, or a list of branch specifiers
+| String, or list of strings
+| Either a single branch specifier, or a list of branch specifiers.
 
 | `ignore`
 | N
-| String, or List of Strings
-| Either a single branch specifier, or a list of branch specifiers
+| String, or list of strings
+| Either a single branch specifier, or a list of branch specifiers.
 |===
 
 [source,yaml]

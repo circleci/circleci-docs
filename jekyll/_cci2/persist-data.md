@@ -170,4 +170,3 @@ Billing for storage can be minimized by evaluating your storage needs and settin
 - [Artifacts](/docs/artifacts)
 - [IP Ranges](/docs/ip-ranges/)
 - [Optimizations Overview](/docs/optimizations)
-- [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)

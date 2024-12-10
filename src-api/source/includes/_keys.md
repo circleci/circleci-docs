@@ -36,7 +36,7 @@ curl -X POST --header "Content-Type: application/json" -d '{"type":"github-user-
   }
 ```
 
-**`POST` Request**: Creates a new checkout key. This API request is only usable with a user API token.
+**`POST` Request**: Creates a new checkout key. This API request is only usable with a user API token. Organizations using GitHub OAuth with SAML SSO may require [an additional authorization step](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) to use the key.
 
 Parameter | Description
 ------- | -------------

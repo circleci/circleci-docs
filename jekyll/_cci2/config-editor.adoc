@@ -12,7 +12,7 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-NOTE: The in-app config editor is not currently available outside the project creation process for xref:gitlab-integration#[GitLab] or xref:github-apps-integration#[GitHub App] integrations.
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:local-cli#[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 
@@ -24,7 +24,6 @@ The benefits of using the CircleCI configuration editor include:
 * Auto-complete suggestions
 * Configuration tooltips specific to CircleCI configuration syntax
 * Education of CircleCI concepts
-* Easily accessible CircleCI documentation
 
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
@@ -34,8 +33,6 @@ In the link:https://app.circleci.com/[CircleCI web UI], select a pipeline in the
 To access the CircleCI configuration editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen. Once you select a branch, the btn:[Edit Config] button will become enabled, and you can access the configuration editor.
 
 image::{{site.baseurl}}/assets/img/docs/config-editor-all-branches.png[Configuration Editor Access]
-
-There are a few other ways to access configuration files throughout the web UI. If you are setting up a project through the *Set Up Project* button, you will see a *Fast* option, which will bring you to a default configuration file to edit (to be used if your repository does not already have a configuration file).
 
 In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 

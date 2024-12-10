@@ -10,17 +10,9 @@ contentTags:
 :icons: font
 :experimental:
 
-[NOTE]
-====
-**GitHub authorization with CircleCI is changing**. Starting August 2023 when you authorize your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app, select **Dashboard** from the sidebar, and inspect the URL in your browser:
-
-* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
-* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
-
-For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
-====
-
 If your CircleCI organization is authenticated with GitHub through the **GitHub App**, the content on this page is for you.
+
+include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
 
 This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
 
@@ -68,7 +60,8 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[
 ====
 Editing an existing CircleCI configuration within the web app is not currently available. All further changes to the configuration should be made in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
 
-Manually triggering a pipeline from the CircleCI web app is not available at this time.
+If you would like to manually trigger a pipeline from the CircleCI web app, see the link:https://circleci.com/docs/triggers-overview/#run-a-pipeline-from-the-circleci-web-app[Triggers page].
+
 ====
 
 [#project-settings]
@@ -179,10 +172,6 @@ If one of these pieces of functionality is especially critical to you, link:http
 
 The following sections are features of CircleCI which are not currently supported. These features are planned for future releases.
 
-[#manual-trigger-pipeline-option]
-=== Manual trigger pipeline option
-The ability to manually trigger a pipeline from the web app is not currently supported for GitHub App projects.
-
 [#restrict-a-context-to-a-security-group]
 === Restrict a context to a security group
 The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
@@ -196,20 +185,20 @@ The in-app config editor is currently **only** available for GitHub App accounts
 
 You cannot currently manage the connection with GitHub outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitHub identity as part of their user profile's account integration settings.
 
-[#scheudled-pipelines]
+[#scheduled-pipelines]
 === Scheduled pipelines
 
-The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. One alternative is to use a xref:webhooks/#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool.
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. As an alternative, use a xref:webhooks#custom-webhooks[custom webhook] or the xref:triggers-overview/#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
 
 [#build-forked-pull-requests]
 === Build forked pull requests
 
-The Build forked pull requests feature is not currently supported.
+The Build forked pull requests feature is not currently supported for GitHub App pipelines.
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
 
-Passing secrets to forked pull requests is not currently supported.
+Passing secrets to forked pull requests is not currently supported for GitHub App pipelines.
 
 [#stop-building]
 === Stop building
@@ -230,12 +219,12 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 [#test-insights]
 === Test Insights
 
-xref:insights-tests#[Test Insights] is currently not supported.
+xref:insights-tests#[Test Insights] is currently not supported for orgs authenticated with the CircleCI GitHub App. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
 
 [#only-build-pull-requests]
 === Only build pull requests
 
-The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations
+The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations.
 
 [#github-checks]
 === GitHub checks

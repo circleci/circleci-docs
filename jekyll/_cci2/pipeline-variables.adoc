@@ -29,7 +29,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 For a full list of values and built-in environment variables, see the xref:variables#[Project values and variables] guide.
 
-NOTE: For GitHub users, refer to the xref:github-apps-integration#[GitHub App integration] or xref:github-integration#[GitHub OAuth app integration] guides to check which integration type applies to you.
+include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
 
 include::../_includes/snippets/pipeline-values.adoc[]
 
@@ -106,14 +106,18 @@ The `parameters` key passed in this `POST` request is *NOT* secret.
 
 The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.
 
+CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"
   }
-}' https://circleci.com/api/v2/project/:project_slug/pipeline
+}' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
+
+include::../_includes/partials/tips/find-project-slug.adoc[]
 
 Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
@@ -124,9 +128,9 @@ In addition to using the API, you can also trigger a pipeline with parameters fr
 
 . Use the project filter to select the desired project.
 . Use the branch filter to select the branch on which you want to run the new pipeline.
-. Click the *Trigger Pipeline* button (towards the top right corner of the page).
+. Select *Trigger Pipeline* (towards the top right corner of the page).
 . Use the *Add Parameters* dropdown to specify the type, name, and value of your desired parameters.
-. Click *Trigger Pipeline*.
+. Select *Trigger Pipeline*.
 
 Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
 
