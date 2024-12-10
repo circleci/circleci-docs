@@ -104,11 +104,11 @@ logging:
 
 `$CIRCLECI_RUNNER_TASK_AGENT_DIRECTORY`
 
-This parameter accepts the path to the directory of the `circleci-runner` task agent binary and defaults to `~/.local/bin`.
+This parameter accepts the path to the directory of the `circleci-runner` task agent binary and defaults to `~/.local/libexec/circleci`.
 
 ```yaml
 runner:
-  task_agent_directory: "~/.local/bin"
+  task_agent_directory: "~/.local/libexec/circleci"
 ```
 
 
