@@ -24,9 +24,15 @@ The following 3rd-party open source components are used in the CircleCI release 
 include::release-agent.csv[]
 |===
 --
+
 [.tab.oss-ack.GOAT]
+--
+The following 3rd-party open source components are used in the CircleCI General Orchestration Agent (GOAT). GOAT is an agent used by self-hosted container runners for managing the container environment. For more information, see the xref:/container-runner#[Container Runner docs].
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even,format=csv]
 |===
 include::runner-init.csv[]
 |===
 --
-The following 3rd-party open source components are used in the CircleCI General Orchestration Agent (GOAT). GOAT is an agent used by self-hosted container runners for managing the container environment. For more information, see the xref:/container-runner#[Container Runner docs].
+
