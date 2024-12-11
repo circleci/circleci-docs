@@ -278,6 +278,8 @@ Follow these steps to set an expression restriction on a context:
 
 [.tab.set-expression-restriction.API]
 --
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
 . You are going to need your organization ID. In the link:https://app.circleci.com/[CircleCI web app] select **Organization Settings** in the sidebar and copy your "Organization ID" somewhere safe.
 . To get the ID for your context, list your contexts, as follows, substituting your organization ID:
