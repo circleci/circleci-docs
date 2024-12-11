@@ -1,0 +1,142 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Introduction to CircleCI migration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
+:icons: font
+:experimental:
+
+TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
+
+[#why-migrate-to-circleci]
+== Why migrate to CircleCI?
+
+CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization since the company's founding over a decade ago. On top of the features you would expect from any CI/CD tool, what sets CircleCI apart are the following productivity-boosting features:
+
+. **Advanced Caching** - On top of xref:caching#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:docker-layer-caching#[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
+. **SSH Into Builds** - CircleCI offers the ability to xref:ssh-access-jobs#[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
+. **Resource Classes** - You can use various different xref:optimizations#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
+. **Test Parallelism** - CircleCI's platform provides not only xref:concurrency#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:parallelism-faster-jobs#how-test-splitting-works[splitting workloads] between different containers.
+
+https://circleci.com/signup/[Sign up for a free account today].
+
+[#project-migration-methodology]
+== Project migration methodology
+
+Projects can be migrated to CircleCI using the following phases, which are expanded upon in the sections below:
+
+- <<assessment-phase>>
+- <<planning-phase>>
+- <<preparation-phase>>
+- <<testing-phase>>
+- <<migration-phase>>
+
+[#migration-timelines]
+=== Migration timelines
+
+If you are migrating a simple project in which you just need to run a few scripts and tests, the timeline would be roughly:
+
+-   1 project: < 1 week
+-   5 projects: ~3 weeks
+-   10 projects: ~1 month
+
+For complex projects with a large-scale test suite migration and large workflows, the migration timeline for completing all phases would be roughly:
+
+-   1 project: ~5 weeks
+-   5 projects: ~4 months
+-   10 projects: ~9 months+
+
+[#assessment-phase]
+== Assessment phase
+
+Take stock of the current landscape, and understand the differences between CircleCI functionality and that of your current CI tool.
+
+Some things consider during this phase:
+
+- xref:orb-intro#[Orbs] as an alternative to, for example, Jenkins Plugins
+- CircleCI YAML xref:configuration-reference#[Configuration Reference]
+- xref:executor-intro#[Execution Environments]
+- xref:collect-test-data#[Testing]
+
+[#planning-phase]
+==  Planning phase
+
+Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:first-steps#[Sign Up and Try CircleCI] page.
+
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the server installation guides (xref:server/latest/installation/phase-1-aws-prerequisites#[AWS Prerequisites] and xref:server/latest/installation/phase-1-gcp-prerequisites#[GCP Prerequisites]).
+
+[#preparation-phase]
+== Preparation phase
+
+[#prep-your-team]
+=== Prep your team
+
+With your plan and estimated timelines in place, start socializing the details of your migration with stakeholders, and teams who will be impacted, so your users can get started smoothly with minimal disruption to their work. It is best to establish a communications cadence for when, and how often, you will be communicating updates so teams are informed and prepared for the change.
+
+[#build-your-runbook-and-timeline]
+=== Build your runbook and timeline
+
+Put together a runbook or step-by-step checklist to cover:
+
+* What needs to happen when
+* Supporting instructions
+* List of owners for each task
+* How long each step will take
+
+Document which steps are dependent on each other, and which have the potential to become blockers. At the end of your runbook, include a mitigation plan with owners in case you need to roll anything back.
+
+[#testing-phase]
+== Testing phase
+
+In this phase you will:
+
+* Do a test run and make sure everything is in order
+* Figure out how long the migration will take
+* Uncover any issues before the production migration
+
+[#test-migration]
+=== Test migration
+
+Do a migration of a smaller, non-mission-critical project as a first step to minimize impact and build confidence in the migration process.
+
+[#user-acceptance-testing]
+=== User acceptance testing
+
+Part of the test migration is conducting User Acceptance Testing (UAT) so your end users can ensure that the project works on CircleCI as expected. Through this process you can uncover any issues that will impact your end users and help your teams prepare to work with CircleCI.
+
+[#communicate-your-plan]
+=== Communicate your plan
+
+With final timelines and owners in place, communicate the official plan to your organization. Things to include in your communications are:
+
+-   When the migration will occur
+-   Details of downtime users can expect
+-   Ask end users to avoid changing anything during the transition
+-   Detail what will happen to the current CI solution after migrating, for example, will it still be accessible or readable?
+-  Details of what CircleCI onboarding materials are available
+
+Keep in mind that there may be issues that occur during the migration that you need to troubleshoot, so call out an adjustment period to your end users to get everything cleaned up and working as planned.
+
+[#migration-phase]
+== Migration phase
+
+In this phase you will resolve any last-minute issues, run your project migration, and move your users and data over to CircleCI. Be sure you have completed the plan, prep and test phases before beginning this phase.
+
+[#next-steps]
+== Next steps
+
+In the following sections we provide helpful guides and tips for migrating your CI/CD pipelines to CircleCI.
+
+* <<migrating-from-aws#,Migrate from AWS>>
+* <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
+* <<migrating-from-buildkite#,Migrate from Buildkite>>
+* <<migrating-from-gitlab#,Migrate from GitLab>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
+* <<migrating-from-jenkins#,Migrate from Jenkins>>
+* <<migrating-from-teamcity#,Migrate from TeamCity>>
+* <<migrating-from-travis#,Migrate from Travis CI>>
+

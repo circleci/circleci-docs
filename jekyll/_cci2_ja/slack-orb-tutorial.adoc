@@ -1,0 +1,322 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= Slack Orb を使用した Slack の通知設定
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "Learn how to get started with the CircleCI Slack orb"
+:icons: font
+:toc: macro
+:toc-title:
+
+このガイドでは、CircleCI Slack Orb について説明します。
+
+[#introduction]
+== Slack Orb の概要
+
+Orb は、再利用が可能な設定要素をまとめた共有可能なオープンソースパッケージです。 Orb を使うと、設定が簡単になり、サードパーティアプリとの連携がサポートされ、時間を節約することができます。
+
+CircleCI で最も広く利用されている Orb は Slack Orb です。 Slack Orb は、すべての CI/CD パイプラインにイベントベースの通知を実装できます。 ビルトインのメッセージテンプレート、またはブラウザ上で表示確認ができる Slack の Block Kit Builder を使って、組織のニーズに合わせて通知を作成およびカスタマイズすることができます。
+
+このチュートリアルでは、以下について説明します。
+
+* Slack Orb を使って `config.yml` ファイルを作成する方法
+* Slack の認証情報をコンテキストに保存する方法
+* テンプレートを使って成功および失敗したビルドのアラートを作成する方法
+* 特定のチャンネル、チーム、人々にアラートを送信する方法
+* Slack Block Kit Builder を利用して独自のカスタムアラートを作成する方法
+
+このチュートリアルに沿って実行するには、以下を準備する必要があります。
+
+* GitHub、Bitbucket、GitLabのいずれかに接続された CircleCI アカウント（link:https://circleci.com/ja/signup/[無料登録]）。
+* https://slack.com/intl/ja-jp/[Slack のワークスペース]（会社のワークスペースを使用したくない場合は、テスト用にご自身のワークスペースを作成することも可能です。）
+* Slack 通知を統合したい CircleCI でフォローしているプロジェクト。 プロジェクトをフォローする方法については、xref:getting-started#[クイックスタートガイド]を参照してください。
+
+[#create-your-config-file]
+== 1. config.yml ファイルを作成する
+
+まだ作成していない場合は、リポジトリのルートに `.circleci` フォルダーを作成します。 この `.circleci` フォルダー内に `config.yml` ファイルを作成します。
+
+以下のサンプルコードは、`config.yml` ファイルに Slack の通知を設定するために必要な基本的なコードを示しています。 全体をコピペするか、個々の要素を取り出してプロジェクトの `config.yml` ファイルに組み込んでください：
+
+[source,yaml]
+----
+version: 2.1
+orbs:
+  slack: circleci/slack@4.9.3
+jobs:
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
+workflows:
+  send-notification:
+    jobs:
+      - notify
+----
+
+このサンプルコードの主な要素について説明します。
+
+* *1 行目:* ご使用の設定（コンフィグ）ファイルのバージョンです。 `2.1` が最新のバージョンです。
+* *2-3 行目:* Orb スタンザです。 使用しているのは `slack: circleci/slack@4.9.3` Orb です。
+* *5-7 行目*: これは `notify` と呼ばれるジョブで、基本的な Docker コンテナで実行されます。
+* *8-9 行目*: こちらは Slack orbで動作するために `slack/notify` と呼ばなければならないステップです。
+* *10-24 行目:* このカスタムブロックには Slack Block Kit Builder からの基本的な通知が含まれます。 お分かりのように、JSON 形式です。 ステップ 3 では、より高度なテンプレートを使用します。
+* *25 行目:*  `event: always` パラメーターは、この通知が _すべて_ のイベントタイプにトリガーされていることを意味します。 ステップ 3 では、各イベント毎に異なる通知を使用します。
+* *30 行目:* ここでは、Slack の認証情報をステップ 2 で保存する CircleCI コンテキストを参照します。
+
+`config.yml` 基本ファイルの設定が完了しました。CircleCI と Slack を接続できます。
+
+IMPORTANT: この時点でお客様の `config.yml` をコミットし、パイプラインをトリガーすると、ビルドが失敗します。 これは次のステップで Slack 認証情報を追加する必要があるためです。
+
+[#connect-circleci-with-slack]
+== 2. CircleCI と Slack の接続
+
+次に、CircleCI と Slack の接続方法をステップでご紹介します。
+
+* Slack から API トークンを取得する
+* コンテキストを作成し、CircleCI に認証情報を保存する
+* 通知を受け取るようパイプラインをトリガーする
+
+[#authenticate-your-application]
+=== a.  アプリケーションの認証
+
+Slack Orb は、CircleCI 上でジョブの一部として実行するアプリケーションです。 通知を受け取る前に、アプリケーションを認証する必要があります。
+
+==== i. Slack アプリの作成
+
+. https://api.slack.com/apps[Slack API ウェブサイトの *Your Apps*] に行き、緑色の *Create an App* をクリックします。
++
+image::slack-orb-create-app.png[Create a Slack app]
+. *From scratch* を選択します。
++
+image::slack-orb-from-scratch.png[Choose From scratch]
+. アプリに「`CircleCI`」などの名前をつけ、使用する Slack ワークスペースを選択します。 このワークスペースは、後で変更することはできません。
++
+image::slack-orb-name-app.png[Name your Slack app]
+. 緑色の **Create App** ボタンをクリックします。
+
+[#set-your-app-permissions]
+==== ii. アプリの権限を設定する
+
+. Basic Information のページで、_Add features and functionality_ の下にある **Permissions** を探します。
++
+image::slack-orb-permissions.png[Slack app Permissions]
+. _OAuth & Permissions_ のページで、**Scopes** までスクロールダウンします。 ここで Slack アプリの権限を作成します。
++
+image::slack-orb-add-scope.png[Add an OAuth Scope]
+. **Bot Token Scopes** の下にある **Add an OAuth Scope** をクリックします。
+. Slack Orb には、チャットメッセージを投稿する権限やファイルをアップロードする権限が必要なため、以下のスコープを作成します。
+* chat:write
+* chat:write.public
+* files:write
++
+image::slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
+
+TIP: Slack の通知をプライベートチェンネルで受け取るには、そのチャンネルに Slack アプリを追加する必要があります。 チャンネルを開き、上部右端にあるチャンネルメンバーの写真をクリックし、*Integrations* タブをクリックします。 ここから、アプリが追加できます。
+
+[#install-your-app]
+==== iii. アプリをインストールする
+
+. スコープを作成したら、ページの一番上に移動し、**Install to Workspace** ボタンをクリックします。
++
+image::slack-orb-install-workspace.png[Install to Workspace]
+. アプリに Slack ワークスペースにアクセスする権限を付与するか尋ねられます。
++
+image::slack-orb-allow.png[Allow access]
+. 三角ボタンをクリックして権限を再確認し、緑色の **Allow** ボタンをクリックします。
+. *Bot User OAuth Token* が表示されます。 このトークンをクリップボードにコピーし、CircleCI に追加できるようにしておきます。 トークンを公開してしまわないよう、注意してください。
++
+image::slack-orb-copy-token.png[Copy OAuth Token]
+
+[#creating-a-context]
+=== b.  コンテキストを作成する
+
+CircleCI では、コンテキストを使用すると、環境変数を保護しプロジェクト間で共有することができます。 Slack の認証情報を使ってコンテキストを作成すると、お客様とチームはそれを再利用することができます。
+
+CircleCI で以下を行う：
+
+. **Organization Settings** ページをクリックします。
++
+image::slack-orb-organization-settings.png[Organization Settings]
+. Contextの下にある青い *Create Context* ボタンをクリックし、`slack-secrets`（上記の `config.yml` ファイルで指定された名前）などのユニークな名前を追加します。
++
+image::slack-orb-create-context.png[Create Context]
+. 青色の **Create Context** ボタンをクリックします。
+. 今作成したコンテキスト名をクリックします。
+. 青色の *Add Environment Variable* ボタンをクリックし、最初のキーと値のペアを入力します。
+* Environment Variable Name は、`SLACK_ACCESS_TOKEN` です。
+* 値は、Slack Bot User OAuth Access Token です。
++
+image::slack-orb-environment-variable.png[Add Environment Variable]
+. **Add Environment Variable** ボタンをクリックして保存します。
+. **Add Environment Variable**  ボタンをもう一度クリックします。
+* Environment Variable Name は、`SLACK_DEFAULT_CHANNEL` です。
+* 値は、通知を投稿するためのデフォルトの Slack チャンネルの ID です。 この設定は個々のジョブにオーバーライドできます。
++
+TIP: Slack チャンネルの ID を取得するには、Slack でそのチャンネルを右クリックし、**Copy Link** を選択します。 ID は URL の最後に表示され、 C034R26AM36 のような形式になります。
++
+image::slack-orb-copy-link.png[Copy Slack channel link]
+. 以下のように、`slack-secrets` コンテキストを `notify` ジョブに含めます。
++
+[source,yaml]
+----
+workflows:
+  send-notification:
+    jobs:
+      - notify:
+          context: slack-secrets
+----
+
+NOTE: このコンテキストは他のジョブやプロジェクトでも再利用できます。
+
+[#trigger-an-alert]
+=== c.  アラートのトリガー
+
+. `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。 これは CircleCI パイプラインをトリガーし、Slack orb とお客様の認証情報を使用します。
++
+緑色の **Success** バッジが表示され、`notify` ジョブの横に緑色のチェックマークが表示されます。
++
+image::slack-orb-success.png[Success]
+. お客様のジョブの上でクリックし、何が起きたのかを確認します。 Slack に送信されたメッセージの本文が表示されます。
+. ここで Slack ワークスペースを開きます。 先程指定したデフォルトのチャンネルに、CircleCI パイプラインがトリガーしたアラートが表示されているはずです。
++
+image::slack-orb-text-notification.png[Slack text notification]
+
+これは基本的なアラートですが、既に多くのことを達成しました。
+
+* Slack Orb を使って `.circleci/config.yml` ファイルを作成しました
+* Slack に関連付けられている環境変数を保存するコンテキストを作成しました
+* Slack アプリを作成しました
+
+[#use-message-templates]
+== 3. メッセージテンプレートを使用する
+
+Slack Orb には、CircleCI の各種イベントをチャンネルに通知するために使用できる通知テンプレートがいくつか含まれています：
+
+* `basic_success_1` - ジョブが成功した _pass_ イベント。
+* `basic_fail_1` - _fail_ イベントで、ジョブが失敗した場合。
+* `success_tagged_deploy_1` - デプロイが成功した場合。
+* `basic_on_hold_1` - 承認待ちの保留中のジョブ。
+
+ジョブでこれらのテンプレートを使用するには、`event` パラメーターと `template` パラメーターを  `config.yml` ファイルの `steps` の下に含めます。 例えば下記のようにします。
+
+[source,yaml]
+----
+jobs:
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+- slack/notify:
+	  event: fail
+	  template: basic_fail_1
+- slack/notify:
+	  event: pass
+	  template: success_tagged_deploy_1
+----
+
+* *7 行目* では、次の行のテンプレートが失敗したイベントに使われるよう指定します。
+* *8 行目* では、使用するテンプレート、ここでは `basic_fail_1` を指定します。
+* *9 行目* では、次の行のテンプレートが成功したイベントに使われるよう指定します。
+* *10 行目* では、使用するテンプレート、ここでは `basic_success_1` を指定します。
+
+ステップ 1 では汎用アラートを使用しましたが、ジョブが成功したか失敗したかに応じて異なるステップが追加されました。 Slack Orb により、適切なステップがトリガーされます。
+
+更新した `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。 パイプラインが完了すると、Slack チャンネルにより詳細なアラートが表示されます。
+
+image::slack-orb-deployment-successful.png[Deployment Successful alert]
+
+[#including-additional-parameters]
+=== a.  追加パラメーターを含める
+
+失敗したジョブについて、メンションすることで特定の人やチームに知らせることができます。
+
+[source,yaml]
+----
+- slack/notify:
+	event: fail
+	mentions: '@EngineeringTeam'
+	template: basic_fail_1
+----
+
+複数のチャンネルに通知するには、ID を引用符で囲み、カンマで区切ります。
+
+[source,yaml]
+----
+- slack/notify:
+    channel: 'ABCXYZ, ZXCBN'
+    event: fail
+    template: basic_fail_1
+
+----
+
+アラートを特定のブランチに限定するには、`branch_pattern` パラメータを追加します：
+
+[source,yaml]
+----
+ - slack/notify:
+      branch_pattern: main
+      event: fail
+      template: basic_fail_1
+----
+
+これは、フィーチャーブランチのアラートを受信しない場合に便利です。
+
+[#use-the-slack-block-kit-builder]
+=== b.  Slack Block Kit Builder を使用する
+
+通知を更にカスタマイズするには、 https://api.slack.com/block-kit/building[Slack Block Kit Builder] を使用します。 このフレームワークを使用すると、イメージ、フォームフィールド、およびその他の対話型の要素を使用して、高度な通知を作成できます。
+
+ブロック（JSONオブジェクト）を作成したら、それをコピーして `config.yml` ファイルの `custom` パラメータ内に貼り付けます：
+
+[source,yaml]
+----
+- slack/notify:
+    event: always
+    custom: | # your custom notification goes here
+      {
+        "blocks": [
+          {
+            "type": "section",
+            "fields": [
+              {
+                "type": "plain_text",
+                "text": "*This is a text notification*",
+                "emoji": true
+              }
+            ]
+          }
+        ]
+      }
+
+----
+
+[#conclusion]
+== まとめ
+
+今回のチュートリアルでは、Slack チャンネルに CircleCI の通知を送信するように Slack orb を設定しました。 また、基本的な通知を作成し、Slack アプリを作成・認証し、テンプレートも使用しました。
+
+その他の設定オプションについては、 https://circleci.com/ja/developer/orbs/orb/circleci/slack[Slack Orb のドキュメント] を参照してください。 また、 https://circleci.com/ja/developer/orbs[Orb レジストリ]でもその他のたくさんの Orb を参照していただけます。 

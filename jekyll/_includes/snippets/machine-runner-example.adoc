@@ -1,0 +1,30 @@
+[#machine-runner-configuration-example]
+== Machine runner configuration example
+
+Once you have installed configuration runner, select btn:[Continue] in the CircleCI web app and you will be presented with an example configuration snippet showing a job configured to use your new self-hosted runner resource class.
+
+image::runner/container-runner-config-example.png[Runner set up, copy code to config file]
+
+The fields you must set for a specific job to run using your machine runners are:
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+Simple example of how you could set up a job:
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
+    jobs:
+      - runner
+jobs:
+  runner:
+    machine: true
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+```
+
+The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.

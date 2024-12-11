@@ -1,0 +1,76 @@
+NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-mongodb>>
+
+When a CircleCI server instance deployed, MongoDB is deployed internally by default via its helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
+
+CAUTION: This process requires downtime.
+
+==== 1. Disable the application
+
+Disable the CircleCI server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
+
+Scale down your application layer pods:
+
+[source,shell]
+----
+namespace=<your-server-namespace>
+kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
+----
+
+Running `kubectl -n "$namespace" get pods` will show most of your pods scaling to down, leaving your database pods running, including Mongo.
+
+==== 2. Validate access to your external MongoDB from within the cluster (optional)
+
+. Confirm that pods within your CircleCI server cluster can access your external MongoDB. You can do this from within your internal MongoDB pod:
++
+[source,shell]
+----
+MONGO_POD="mongodb-0"
+kubectl exec -it -n "$namespace" "$MONGO_POD" -- bash
+----
+
+. While still connected to the pod run the following:
++
+[source,shell]
+----
+mongo --username <username> --password --authenticationDatabase admin --host <external-mongodb-host> --port <external-mongodb-port>
+----
+
+You should be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
+
+TIP: You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+
+==== 3. Generate export of your internal MongoDB
+
+. Retrieve your internal MongoDB credentials:
++
+[source,shell]
+----
+MONGO_POD="mongodb-0"
+MONGODB_USERNAME="root"
+MONGODB_PASSWORD=$(kubectl -n "$namespace" get secrets mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
+----
+
+. Create a backup directory in your MongoDB pod:
++
+[source,shell]
+----
+kubectl -n "$namespace" exec "$MONGO_POD" -- mkdir -p /tmp/backups/
+----
+
+. Generate a MongoDB database dump to the backup directory you just created:
++
+[source,shell]
+----
+kubectl -n "$namespace" exec -it "$MONGO_POD" -- bash -c "mongodump -u '$MONGODB_USERNAME' -p '$MONGODB_PASSWORD' --authenticationDatabase admin --db=circle_ghe --out=/tmp/backups/"
+----
+
+==== 4. Restore your data in your external MongoDB
+
+Use the generated MongoDB backup to restore the data to your external MongoDB:
+
+[source,shell]
+----
+kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --host <external-mongodb-host> --port <external-mongodb-port> --authenticationDatabase admin /tmp/backups/circle_ghe;
+----
+
+Now your external MongoDB will have your CircleCI server data. In the next section you will update CircleCI server to point to your external MongoDB.

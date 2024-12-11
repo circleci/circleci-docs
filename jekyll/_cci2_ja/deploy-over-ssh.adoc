@@ -1,0 +1,70 @@
+---
+
+description: このドキュメントでは、SSH 経由でデプロイするためのコード例を紹介します。
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= SSH 経由でのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このノウハウガイドでは、SSH経由でアプリケーションをデプロイするためのCircleCIの設定方法について説明します。
+
+[# add-ssh-key-target]
+== 1.  ターゲットのSSHキーを追加
+
+まずは、デプロイ先のSSHキーを追加します（この手順は、クラウド、Server v3.x、Server v4.x の場合です）。
+
+. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` でキーを生成します。 詳しくは、link:https://www.ssh.com/ssh/keygen/[Secure Shell ドキュメント]を参照してください。
+. CircleCI アプリケーションで、 [**Project Settings (プロジェクトの設定)**] ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
+. [**Project Settings (プロジェクトの設定)**] で、 [**SSH Keys (SSH キー)**] をクリックします (画面左側のメニュー)。
+. スクロールし、 [**Additional SSH Keys (追加 SSH キー)**] のセクションに移動します。
+. **Add SSH Key** ボタンをクリックします
+. [**Hostname (ホスト名)**] フィールドにキーに関連付けるホスト名を入力します (例: `git.heroku.com`)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
+. [**Private Key (プライベート キー)**] フィールドに登録する SSH キーを貼り付けます。
+. **Add SSH Key** ボタンをクリックします
+
+詳しくは、xref:add-ssh-key#[CircleCI に SSH キーを登録] ガイドをご覧ください。
+
+[#ssh-username-and-hostname]
+== 2.  SSHのユーザー名とホスト名を追加
+
+ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、 xref:set-environment-variable#set-an-environment-variable-in-a-project[プロジェクトでの環境変数の設定]をご確認ください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+
+[#create-deploy-job]
+== 3.  デプロイジョブの作成
+
+`.circleci/config.yml` で `deploy` ジョブを作成し、main ブランチをデプロイするためのコマンドを追加します。
+
+```yaml
+version: 2.1
+
+jobs:
+    build:
+    #...
+    deploy:
+    machine:
+        enabled: true
+    steps:
+        - run:
+            name: Deploy Over SSH
+            command: |
+            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+
+workflows:
+    build-and-deploy:
+    jobs:
+        - build
+        - deploy:
+            requires:
+            - build # only deploy once build job has completed
+            filters:
+            branches:
+                only: main # only deploy on the main branch
+```

@@ -1,0 +1,1 @@
+[シークレットのマスキング]({{ site.baseurl }}/ja/contexts/#secrets-masking)を活用するには、環境変数は[プロジェクトレベル]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)で、または[コンテキスト]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-context)内で設定することをお勧めします。

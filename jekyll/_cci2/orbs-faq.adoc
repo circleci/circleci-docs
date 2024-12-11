@@ -1,0 +1,26 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Orbs FAQ
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This page answers the most frequently asked questions about orbs.
+:icons: font
+:experimental:
+
+This document describes various questions and technical issues that you may find helpful when working with orbs.
+
+[#orb-faqs]
+== FAQS
+
+include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+
+[#see-also]
+== See also
+
+- xref:orb-concepts#[Orbs concepts] for high-level information about CircleCI orbs.
+- xref:creating-orbs#[Orb publishing process] for information about orbs that you may use in your workflows and jobs.
+- xref:reusing-config#[Orbs reference] for examples of reusable orbs, commands, parameters, and executors.

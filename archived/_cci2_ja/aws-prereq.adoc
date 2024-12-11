@@ -1,0 +1,104 @@
+---
+description: "このページでは、Terraform  を使って AWS に CircleCI Server v2 をインストールするための前提条件を説明します。"
+contentTags:
+  platform:
+  - Server v2.x
+---
+= インストールの前提条件
+:page-layout: classic-docs
+:page-liquid:
+:source-highlighter: rouge
+:rouge-linenums-mode: inline
+:icons: font
+:toc: macro
+:toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+CircleCI は、Terraform を使って CircleCI Server v2.x をインストールするインフラの一部を自動化しているため、まず Terraform をインストールする必要があります。
+
+* https://www.terraform.io/downloads.html[Terraform のダウンロード]で、お使いのアーキテクチャ用のパッケージを選択してください。
+
+インストール手順を開始する前に、以下の情報を準備してください。
+
+* CircleCI ライセンス ファイル (`.rli`): ライセンスについては https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート]にお問い合わせいただき、最高のパフォーマンスを得るために、専用インスタンスでジョブを実行するためのクラスタ対応ライセンスをリクエストしてください。
+* AWS アクセス キー ID とシークレット アクセスキー
+* https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html[AWS EC2 SSH キーペア]の名前
+* https://docs.aws.amazon.com/general/latest/gr/rande.html[AWS リージョン]、例えば `us-west-2`
+* AWS Virtual Private Cloud (VPC) ID および AWS サブネット ID。 アカウントがデフォルトのVPC を使用するように設定されている場合、デフォルトの VPC ID は「Account Attributes」に記載されており、AWS マネジメントコンソールからEC2 ダッシュボードページで確認できます。
+* VPC の [`enableDnsSupport`] を`true`に設定し、Amazon が提供する IP アドレス169.254.169.253 の DNSサーバー、または VPC IPv4 ネットワーク範囲のベース+2の予約 IP アドレスへのクエリが成功するようにします。 詳しい情報については、Amazon Web サービスのドキュメントにある https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-updating[VPC での DNS の使用]を参照してください。
+
+== プライベート サブネットの要件
+
+AWS 上の非公開サブネットを CircleCI で使用するには、次の追加設定が必要です。
+
+- ビルダーボックス用の非公開サブネットは、添付のルートテーブルにより、インターネットへのアウトバウンドトラフィック用に設定された https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html[NATゲートウェイ] または https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Internet_Gateway.html[インターネットゲートウェイ] で設定する必要があります。
++
+CAUTION: サブネットは、 アドレスが枯渇することが*決してないよう*十分な大きさが必要です。
+
+- https://aws.amazon.com/blogs/aws/new-vpc-endpoint-for-amazon-s3/[S3 用 VPC エンドポイント] を有効にする必要があります。 S3 用 VPC エンドポイントを有効にすると、CircleCI およびサブネット内の他のノードに対する S3 の操作性が大幅に向上します。
+- 高負荷のネットワーク操作に対しては NAT インスタンスを適切に強化します。  デプロイの仕様によっては、Docker および外部ネットワーク リソースを使用した高度並列ビルドによって NAT インスタンスが制約を受けるおそれがあります。  不適切な NAT によってネットワーク操作やキャッシュ操作が低速化するおそれがあります。
+- https://github.com[github.com] と連携する場合、ネットワークのアクセス制御リスト (ACL) で GitHub Webhook のポート80 および 443 が許可されていることを確認します。 GitHub と統合する場合は、CircleCI をパブリック サブネット内に準備するか、パブリック ロードバランサーを使用して github.com トラフィックを転送するように設定します。
+- See the <<overview#services-machine, Services Machine>> section of our overview for more information on the specific ports that need to be accessible to instances in your CircleCI installation.
+
+// Check whether the ACL needs to be more open so the services/build can download build images
+
+== 事前準備
+インストールを開始する前に、以下の情報とポリシーを確認してください。
+
+* ネットワーク プロキシを使用する場合は、インストールを開始する前に、お客様のアカウントチームに連絡してください。
+* Services 用に 1つ、Nomad クライアントの最初のセット用に 1つ、少なくとも 2つの AWS インスタンスのプロビジョニングを行います。 ベストプラクティスとして、Services と Nomad クライアントの両方のインスタンスに、8つの vCPU と 32 GB の RAM を備えた `m4.2xlarge` インスタンスを使用することをお勧めします。
+* AWS インスタンスには、Docker コンテナをプルし、ライセンスを確認するために、アウトバウンドアクセスが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
+* Terraform を使用して必要な AWS エンティティをプロビジョニングするには、次の権限を持つ IAM ユーザーが必要です (IAM ユーザーの作成については、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html[AWS ガイダンス] を参照してください）。
++
+[source,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:*"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::circleci-*",
+                "arn:aws:s3:::circleci-*/*",
+                "arn:aws:s3:::*"
+            ]
+        },
+        {
+            "Action": [
+                "autoscaling:*",
+                "sqs:*",
+                "iam:*",
+                "ec2:StartInstances",
+                "ec2:RunInstances",
+                "ec2:TerminateInstances",
+                "ec2:Describe*",
+                "ec2:CreateTags",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkAcls",
+                "ec2:DescribeSecurityGroups",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "cloudwatch:*",
+                "autoscaling:DescribeAutoScalingGroups",
+                "iam:GetUser"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+----

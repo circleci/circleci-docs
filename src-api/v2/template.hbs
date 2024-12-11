@@ -7,21 +7,64 @@
   <!-- needed for adaptive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="This document page describes the resources that make up the CircleCI API v2.">
+  <link rel="alternate" href="https://circleci.com/docs/api/v2/" hreflang="en-us">
+  <!-- Hotjar Tracking Code for www.circleci.com -->
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:413720,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
   <style>
     body {
       padding: 0;
       margin: 0;
     }
+
+    .side-section-cta {
+      position: absolute;
+      right: 0;
+      top: 32px;
+      width: 400px;
+      min-height: 100px;
+      z-index: 1;
+      width: calc((100% - 260px) * 0.4);
+      background: #11171A;
+      display: flex;
+      padding: 32px;
+      line-height: 1.5;
+      box-sizing: border-box;
+      color: #efefef;
+      font-family: 'Roboto';
+      font-size: 14px;
+    }
+
+    @media(max-width: 1200px) {
+      .side-section-cta {
+        display: none;
+      }
+    }
+
   </style>
   {{{redocHead}}}
-  {{#unless disableGoogleFont}}<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">{{/unless}}
+  {{#unless disableGoogleFont}}
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+  {{/unless}}
 
-  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9HDVK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W9HDVK');</script>
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W9HDVK" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-W9HDVK');</script>
 </head>
 
 <body>
   {{{redocHTML}}}
+  <div class="side-section-cta">
+    Scroll down for code samples, example requests and responses. Above each snippet you can change the language / framework used to make the request.
+  </div>
 </body>
 
 </html>

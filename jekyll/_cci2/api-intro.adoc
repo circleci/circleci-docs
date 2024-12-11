@@ -1,0 +1,55 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= API v2 introduction
+:description: Introduction to the CircleCI API
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+The CircleCI API may be used to make API calls to interact with your pipelines, projects and orgs, including retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. There are currently two supported API versions:
+
+* link:https://circleci.com/docs/api/v1/[API v1.1 Reference]
+* link:https://circleci.com/docs/api/v2/[API v2 Reference]
+
+API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users migrate their scripts to API v2 stable endpoints as soon as possible.
+
+CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
+
+To get started with the API v2, see the xref:api-developers-guide#[API developers guide].
+
+[#changes-in-endpoints]
+== Changes in endpoints
+
+The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
+
+For a complete list of all API v2 endpoints, refer to the https://circleci.com/docs/api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+
+[#deprecated-endpoints]
+=== Deprecated endpoints
+
+With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Endpoint | Description
+
+| `POST /project/:vcs-type/:username/:project`
+| This endpoint allowed users to trigger a new build.
+
+| `POST /project/:vcs-type/:username/:project/build`
+| This endpoint enabled users to trigger a new build by project.
+
+| `GET /recent-builds`
+| This endpoint enabled users to retrieve an array of recent builds.
+|===
+
+[#next-steps]
+== Next steps
+
+* Review the xref:api-developers-guide#[API Developer's Guide] for a detailed walkthrough on authenticating as well as example API requests.

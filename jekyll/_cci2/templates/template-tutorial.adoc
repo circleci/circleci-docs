@@ -1,0 +1,166 @@
+---
+# These platform content tags control the tags that appear at the top of the docs page. Use them to show the reader which CircleCI platforms support the feature or task you are writing about
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Page title
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A short page description goes here
+:icons: font
+:experimental:
+
+////
+Some notes on attributes
+
+:page-liquid: - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
+
+:icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
+
+:experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
+
+////
+
+This template will help you create a new **tutorial**. A tutorial should guide users who are new to a feature through getting set up and using the feature, and point them to further reading for alternative use cases and options. To help decide whether content should be a tutorial or a how-to guide, see the link:https://diataxis.fr/tutorials-how-to/[Diataxis website].
+
+Content templates help you to:
+
+* Develop new content quickly
+* Ensure your page conforms to the style guide
+
+To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-tutorial.adoc?plain=1[here]. There is additional detail in the comments.
+
+The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
+
+Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
+
+[#introduction]
+== Introduction
+
+Use the introduction to explain what the reader is going to achieve through following the tutorial. Link back to the _conceptual_ page that accompanies the tutorial, to illustrate this here is a link to the xref:template-conceptual#[template for conceptual pages]. If possible provide a demo or example. The tutorial should ideally be written to accompany a public/open source example that any reader can use, but the tutorial should also be able to accommodate a reader’s own project.
+
+[#prerequisites]
+== Prerequisites
+
+If available and/or relevant, list what the reader must have in place in order for the document to be meaningful and helpful. This might include:
+
+* Tools
+* Skills/knowledge
+* Permissions
+* Dependencies
+
+NOTE: Prerequisites might not be the same for every user, or it might not be possible to outline every prerequisite given the different systems/environments that different orgs/teams/users may use.
+
+Prerequisites may include things like:
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A code repository you want to build on CircleCI.
+
+== 1. The first step
+
+The main body of the tutorial should be broken into logical steps with headings for each step. The steps should guide the reader through setting up and using the feature. Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
+
+[#this-is-a-subsection-title]
+=== a. This is a subsection title
+
+Subsections can be used to break steps into logical sub-parts as needed, and should be numbered using lowercase letters.
+
+Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
+
+* Item 1
+* Item 2
+* Item 3
+
+[#using-tables]
+=== b. Using tables
+
+This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Header text column 1
+|Header text column 2
+|Header text column 3
+
+|Text for row 1 column 1
+|Text for row 1 column 2
+|Text for row 1 column 3
+|===
+
+For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
+
+[#links-and-cross-references]
+=== c. Links and cross references
+
+To link out to content outside of the docs use a link:
+
+link:https://circleci.com/[CircleCI website]
+
+To link to another page within the docs use a cross reference:
+
+xref:../about-circleci#[About CircleCI]
+
+Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
+
+xref:../about-circleci#learn-more[About CircleCI]
+
+[#code-examples]
+=== d. Code examples
+
+Use Asciidoc source blocks for code:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Step
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+      - run:
+          name: The Second Step
+          command: |
+            ls -al
+            echo '^^^The files in your repo^^^'
+----
+
+[#banners]
+=== e. Banners
+
+In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+
+NOTE: **Need to add a note?** This is how to do it
+
+CAUTION: **Need to add a caution?** This is how to do it
+
+WARNING: **Need to add a warning?** This is how to do it
+
+We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
+
+For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+[#the-second-step]
+== 2. The second step
+
+Each main step in the tutorial should be under its own level 2 (`==`) heading, using the numbered list format.
+
+[#conclusion]
+== Conclusion
+
+End the tutoral with a conclusion section that summarizes what was covered.
+
+[#next-steps]
+== Next steps
+
+// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
+* xref:../benefits-of-circleci#[Benefits of CircleCI]
+* xref:../concepts#[CircleCI concepts]

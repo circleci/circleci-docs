@@ -1,0 +1,165 @@
+---
+description: "このドキュメントでは、CircleCI Server v2.19. の機能や注意事項についてまとめています。 アップグレードの要件、注意事項、ベストプラクティス、および既知の問題をご確認ください。"
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
+---
+= CircleCI Server v2.19.x の新機能
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このドキュメントでは、CircleCI Server v2.19 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、 https://circleci.com/ja/server/changelog[更新履歴]でご確認ください。 For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration, upgrade guide>>.
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+## アップグレードの要件
+
+WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、 https://circleci.com/docs/customizations/#service-configuration-overrides[カスタマイズガイド] を参照してください。
+
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important, this guide>> to update your nomad launch configuration.
+
+WARNING: If you are upgrading from pre v2.18.x, and have at any time changed your CircleCI organization name, there is a <<updating-server#org-rename-script, script>> that *must* be run before starting the upgrade process. v2.18.x を既に実行している場合は、このスクリプトは既に実行されています。
+
+## 注意事項とベストプラクティス
+
+* サービスマシンには最低 32 GB の RAM が必要になりました。
+* v2.18 では Redis の設定を一部変更しました。 Redis を外部処理化している場合は、設定を更新する必要があります。 2.18 以前のバージョンから 2.19 にアップグレードする場合は、担当のカスタマーサクセスマネージャーまでお問い合わせください。
+* 対応する Postgres バージョンを変更したため、postgreSQL v9.5.16 以降が必要です。 PostgreSQL を外部処理化している場合は、バージョン 2.17.x で更新してから、2.19 にアップグレードしてください。
+* ジョブでタグを使ってチェックアウトする方法が変更されました。 ブランチタグが、`CIRCLE_TAG` または `+refs/heads/tag/path` により参照されるようになりました (例: `git checkout --force "$CIRCLE_TAG"` または `git fetch --force origin '+refs/heads/master:refs/remotes/origin/master'`)。
+
+## 既知の問題
+
+* ストレージドライバーの設定で `NONE` が選択されている静的な (AWS 以外の) 環境では、テストはファイル名およびファイルサイズによってのみ分割できます。 タイミングデータによってテストを分割しようとすると、静的インスタンスは自動的にファイル名で分割します。
+
+* *インストール環境に HTTP プロキシを使用している場合は、v2.19.02 以降のバージョンにアップグレードしてください*。 ジョブステップのログや Docker コマンドのカスタマイズに関する既知の問題により、2.19.2 以前のバージョンでは CircleCI Server の HTTP プロキシ設定との互換性がありません。
+
+* CircleCI Server に最初にアクセスしたユーザーに、管理者アクセス権が付与されます。 現在、LDAP 認証を使用しているとこれが実行できないという既知の問題があります。 回避するにはhttps://circleci.com/docs/authentication#grant-admin-access-to-user[こちらのガイド]に従ってください。
+
+* ネットワーク設定をデフォルトから変更している場合、SSH を使用したビルドの検査が可能であることの確認に以下のステップの実行が必要な場合があります。
+** Nomad クライアントマシンの場合は、 `/etc/circleci/public-ipv4`を作成します。
+** このファイルには、Nomad クライアントのパブリック IP アドレス (該当するアドレスがある場合)、 またはプライベート IP アドレスを記載してください。
++
+TIP: CircleCI Server 環境における SSH 再実行についての詳細は、https://circleci.com/docs/ssh-server/[CircleCI Serverでの SSH 再実行のアーキテクチャ]ガイドを参照してください。
+
+* 下記記載の暗号スイートの変更により、v2.19.02 よりクラシックロードバランサは使用できなくなりました。 https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[クラシックロードバランサ]からのリクエストは受け付けなくなったため、https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[ネットワークロードバランサー (NLB)] または https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[アプリケーションロードバランサ (ALB)] に移行する必要があります。
+
+## v2 19.15 の新機能
+
+* ルート認証局 (CA) の古いトラストストアを削除しました。
+* 各種のセキュリティ脆弱性を修正しました。
+
+## v2 19.14 の新機能
+
+* exim イメージのセキュリティパッチ。
+* 廃止予定のチーム用 GitHub API エンドポイントが置き換えられました。
+
+## v2 19.13 の新機能
+
+* 各種セキュリティおよび脆弱性対応パッチ
+
+## v2 19.12 の新機能
+
+* 自動スケーリングにおけるバージョン 1.0 用ビルダーの正しいシャットダウンを行うためのサポートを削除
+  ** これにより Python 2 のセキュリティ脆弱性による影響が軽減されます。
+
+## v2 19.11 の新機能
+
+* 一つの設定ファイルで 50 エイリアスまでしか使えなかったバグを修正しました。
+
+## v2 19.10 の新機能
+
+* go -git で「git checkout」 が 失敗する原因となっていたバグを修正しました。
+* picard dispatcher の YAML パーサーのバグを修正し、 `config-str` が 50 以上の YAML エイリアスを保有できるようになりました。
+* S3 保持ポリシーにより古いジョブのテスト結果が削除されるバグを修正しました。
+* 「順序が正しくない」コミットステータスに陥る可能性が減少しました。
+* 全体的なセキュリティーのアップデート
+
+## v2 19.09 の新機能
+
+* Docker Executor の認証パスワードで、英数字以外の文字をより適切に処理できるようになりました。 `auth`キーの下の https://circleci.com/docs/ja/private-images/#docker-executor[Docker ID パスワードフィールド] で、 `~` と `?` の使用を妨げていたバグが修正されました。
+* 全体的なセキュリティーのアップデート
+
+## v2 19.08 の新機能
+
+* 静的なインストール環境においてストレージドライバーの設定で`NONE`が選択されている場合に、並列実行に失敗する原因となっていたバグを修正しました。
+
+## V2 19.07 の新機能
+
+* Docker Executor の中国地域 ECR イメージへの認証を妨げていたバグを修正しました。
+
+* `fileserverd` サービスの起動から再帰的な `chown` を削除しました。 これにより、使用量が多いインスタンスでは、起動プロセスに時間がかかったり、起動がブロックされる場合がありました。
+
+## v2 19.06 の新機能
+
+* ワークフローのステータスが GitHub で誤った順序で表示される原因となっていたバグが修正されました。
+
+* CPU の使用と遅延を大幅に低減する、`workflows-conductor` のパフォーマンスが向上しました。
+
+* IAM ユーザーを介して `us-east-1` 以外の S3 ストレージ領域を使用できない原因となっていたバグを修正しました。
+
+* SMTP パスワードのフォーマットタイプが修正され、セットアップ時にマスキングされるようになりました。
+
+## v2 19.05 の新機能
+
+* サービスマシンがクラッシュした場合や VM サービスインスタンスが手動で終了した場合に、VM データベースを誤った状態するバグを修正しました。
+
+## v2 19.04 の新機能
+
+* サービスマシンのログが作成される前にバンドル作成がタイムアウトする原因となっていたバグを修正し、Replicated のログのみを残しました。
+
+* `circle.s3.connection_pool.*` の下の S3 接続プールメトリクスがテスト結果サービスに追加され、このサービスに関する問題のデバッグがしやすくなりました。
+
+* ワークフローサービスの不足していた環境変数が追加されました。 これらの環境変数がなかったことにより、ワークフローが実行されるたびに過剰なスタックトレースが発生していました。 しかしこの修正により、ログのローテーションが過剰になります。
+
+* GitHub ステータスの更新に失敗する原因となっていたバグを修正しました。 プロジェクトに壊れた認証トークンを使用するユーザーがいる場合に、このこのバグが発生するお客様がいました。
+
+## v2 19.03 の新機能
+
+* GitHub.com API の廃止されたエンドポイント`GET applications/%s/tokens/%s`を削除しました。
+
+* サーバー環境において分散トレーシングがデフォルトで有効化されました。 トレーシング機能は、サポートバンドルでサーバー問題の解決能力の向上に使用されます。 サンプリングレートのトレースオプションは、Replicated の管理コンソールに表示されますが、CircleCI サポートから要求された場合のみ、デフォルトから変更してください。
+
+* ストレージドライバーを "none" (S3 以外) に設定すると、`restore_cache` が動作しない問題が修正されました。
+
+* AWS AssumeRole がサブフォルダにあると、`output_processor`サービスが AWS AssumeRole を使用できない問題が修正されました。 この問題は、サブフォルダの使用が強制されるセキュリティポリシーを持つお客様に影響を与えていました。また、アーティファクトを保存できない、またはタイミングベースのテスト分割を使用できないという現象もありました。
+
+* `vm-service`、`domain-service`、`permissions-service`  `federations-service`の各サービスで、`JVM_HEAP_SIZE`  環境変数を使用して JVM ヒープサイズを変更できるようになりました。
+
+## v2 19.02 の新機能
+
+* LDAP のログインフローにおいて、`GET` パラメーターとして送信するのではなく、匿名フォームを使って LDAP 認証状態を `POST` するようになりました。  以前は、LDAP を使ってユーザーを認証すると、ユーザー名とパスワードが`GET`リクエスト内のクエリパラメーターの一部としてプレーンテキストに送信されていました。 リクエストが HTTPS を介して行われると、リクエストログなどにユーザ名とパスワードが残っていましたが、 現在は修正されました。
+
+* Optimizely と Zendesk がサーバーのリリースイメージから削除されました。
+
+* `CIRCLE_ADMIN_SERVER_HTTP_THREADS` や `CIRCLE_PUBLIC_FACING_SERVER_HTTP_THREADS`を高すぎる値に設定すると、フロントエンドコンテナの起動が妨げられる問題が修正されました。
+
+* Due to changes in the GitHub API we have removed the use of `?client_id=x&client_secret=y` for GitHub, and GHE versions 2.17 and later.
+
+* DLC を使用すると VM のスピンアップに断続的に失敗する原因となっていた問題が修正されました。
+
+* Docker コンテナのプロキシ設定のカスタマイズを妨げていた問題が修正されました。 詳細は、https://circleci.com/docs/proxy/#nomad-client-proxy-setup[Nomad クライアントのプロキシ]とhttps://circleci.com/docs/customizations/#service-configuration-overrides[サービス設定のオーバーライド]に関するガイドを参照してください。
+
+* ジョブコンテナでプロキシ設定が使われていると、成功したビルドのジョブステップが記録されないバグが修正されました。
+
+* 過去の TLS バージョン 1.0 および 1.1 を削除し、1.2 および 1.3 TLS を有効にし、以下の暗号スイートを指定しました
+**  ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384
+
+* 一部のサービスで Telegraf メトリックが出力されない `statsd` の設定における問題が修正されました。
+
+## v2 19.01 の新機能
+
+* ライブラリの依存関係においてスキーマが変更されたため、一部のお客様のアップグレードを妨げていたバグが修正されました。
+
+* ビルドエージェントのロジックが変更されたため、一部のお客様が SSH 経由でビルドを検査できないというバグが修正されました。
+
+## v2.19 の新機能
+
+* リソースクラスをカスタマイズして、設定するジョブの https://circleci.com/docs/optimizations#resource-class[CPU/RAM オプション] を開発者に提供できるようになりました。 詳細については、https://circleci.com/docs/customizations#resource-classes[CircleCI Server v2.19 でリソースクラスをカスタマイズする方法]を参照してください。
+
+* AWS 上での CircleCI Server を、https://github.com/circleci/enterprise-setup#configuration[GovCloud 上で動作するように設定できるようになりました]。
+
+* RabbitMQ サーバーの実行に使用されていたイメージをアップデートし、脆弱性が修正されました。

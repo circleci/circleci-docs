@@ -147,9 +147,9 @@ project:
       "build_time_millis" : 23505,
       "username" : "circleci",
       "reponame" : "mongofinil",
-      "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+      "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
       "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-      "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+      "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
       "retry_of" : null, // build_num of the build this is a retry of
       "previous" : { // previous build
         "status" : "failed",
@@ -184,9 +184,9 @@ recent_builds:
       "build_time_millis" : 23505,
       "username" : "circleci",
       "reponame" : "mongofinil",
-      "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+      "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
       "outcome" : "failed", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-      "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+      "status" : "failed", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
       "retry_of" : null, // build_num of the build this is a retry of
       "previous" : { // previous build
         "status" : "failed",
@@ -216,9 +216,9 @@ build:
       "build_time_millis" : 23505,
       "username" : "circleci",
       "reponame" : "mongofinil",
-      "lifecycle" : "finished", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+      "lifecycle" : "finished", // :queued, :not_run, :not_running, :running or :finished
       "outcome" : "success", // :canceled, :infrastructure_fail, :timedout, :failed, :no_tests or :success
-      "status" : "success", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+      "status" : "success", // :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running, :failed, :queued, :not_running, :no_tests, :fixed, :success
       "retry_of" : null, // build_num of the build this is a retry of
       "steps" : [ {
         "name" : "configure the build",
@@ -311,7 +311,7 @@ artifacts_latest:
     } ]
 
 retry_build:
-  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry"
+  url: "/api/v1.1/project/:vcs-type/:org_name/:project/:build_num/retry"
   description: "Retries the build, returns a summary of the new build."
   method: "POST"
   response: |
@@ -467,7 +467,7 @@ project_branch:
       "committer_date": "2014-04-17T08:41:40Z",
       "start_time": null,
       "stop_time": null,
-      "lifecycle": "not_running", // :queued, :scheduled, :not_run, :not_running, :running or :finished
+      "lifecycle": "not_running", // :queued, :not_run, :not_running, :running or :finished
       "user": {
         "email": "arohner@gmail.com",
         "name": "Allen Rohner",
@@ -531,10 +531,12 @@ list_checkout_keys:
   url: "/api/v1.1/project/:vcs-type/:username/:project/checkout-key"
   method: "GET"
   description: "Lists the checkout keys for :project"
+  params:
+  - {name: "digest", description: "Fingerprint digest. Optional; 'md5' by default. Pass 'sha256' to return SHA-256 key fingerprint.", example: "sha256"}
   response: |
     [{"public_key": "ssh-rsa...",
       "type": "deploy-key", // can be "deploy-key" or "github-user-key"
-      "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+      "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f", // md5 or sha256
       "preferred": true,
       "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
       }]

@@ -1,0 +1,11 @@
+[#split-config-into-different-files]
+=== `.circleci/config.yml` を複数のファイルに分割することはできますか？
+
+`.circleci/config.yml` を複数のファイルに分割する機能は今のところ提供していません。 詳細については、link:https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files[サポートの記事]を参照してください。
+
+設定ファイルの分割機能は提供していませんが、CircleCI ではダイナミックコンフィグ機能を提供しています。この機能により、特定のパイプラインやパスに基づき設定ファイルを作成することができます。 詳細は、xref:dynamic-config#[ダイナミックコンフィグ]を参照して下さい。
+
+[#build-forked-prs-using-pipelines]
+=== パイプラインを使ってフォークされた PR をトリガーできますか？
+
+CircleCI link:https://circleci.com/docs/api/v2/index.html[API v2] を使って、フォークされたリポジトリからパイプラインをトリガーし PR をビルドできます。 しかしデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 この機能を有効にするには、Web アプリで 「Project Settings プロジェクト設定」> 「Advanced」 に移動します。  詳細については、link:https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2[サポートの記事]を参照してください。

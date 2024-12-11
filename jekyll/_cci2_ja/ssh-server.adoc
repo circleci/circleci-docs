@@ -1,8 +1,9 @@
 ---
-description: ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 また、CircleCI Server 上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認ください。
-version:
-- Server v2.x
-- サーバー管理者
+description: "ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 また、CircleCI Server 上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認ください。"
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
 ---
 = サーバーにおける SSH での再実行のアーキテクチャ
 :page-layout: classic-docs
@@ -10,7 +11,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-
 
 ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 記載されている情報は、システム管理者が CircleCI Server をカスタマイズする際の検討材料として提供しています。 また、CircleCI サーバー上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認いただけます。
 
@@ -21,7 +21,7 @@ For an overview of the purpose of SSH reruns in CircleCI, see the <<ssh-access-j
 
 デフォルトから、メタデータのエンドポイントをブロックしたり、パブリック IP を不適切に変更するようなネットワークのカスタマイズを行った場合、`/etc/circleci/public-ipv4`にファイルを作成することにより、上書きすることができます。 このファイルは、通常は起動スクリプトを使って各 Nomad クライアント上で作成し、接続時に使用する IP アドレスを入力する必要があります。 以下のスクリプト例では、 AWS のメタデータのインスタンスのプライベート IP を使用しています。
 
-```sh
+```shell
 #!/bin/sh
 PRIVATE_IP="$(curl http://169.254.169.254/latest/meta-data/local-ipv4)"
 mkdir -p /etc/circleci

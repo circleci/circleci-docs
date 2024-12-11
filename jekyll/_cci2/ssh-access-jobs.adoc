@@ -1,0 +1,174 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Debug with SSH
+:page-description: How to access a build container using SSH on CircleCI
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+Troubleshoot problems in a job using *Rerun job with SSH*. Using this feature you can inspect log files, running processes, and directory paths.
+
+[#introduction]
+== Introduction
+
+CircleCI gives you the option to access all jobs via SSH. Read our https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/[blog post] on debugging CI/CD pipelines with SSH.
+
+When you log in with SSH, you are running an *interactive* login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (for example, `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
+
+Note that a _default_ CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but fail in non-interactive mode.
+
+[#steps]
+== Steps
+
+NOTE: The steps described in this section apply to all CircleCI accounts. If you are using Bitbucket Cloud, or your account is integrated through the GitHub OAuth app, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer.
+
+. If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or VM that is running your job.
+
+. Navigate to the job view for the job you want to rerun.
+.. From the CircleCI web app link:https://app.circleci.com/pipelines/[dashboard], select your project from the dropdown menu
+.. Expand the workflow that contains your job
++
+image::jobs-list.png[Expand workflow to see the list of jobs]
+.. Select the job name to enter the job view
+. To start a job with SSH enabled, select the *Rerun job with SSH* option from the *Rerun* dropdown menu.
++
+The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
++
+image::rerun-job-with-ssh.png[Screenshot showing rerun job with SSH option]
+
+. To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
++
+NOTE: After clicking btn:[Rerun Job With SSH] you may notice that your job did not populate the Enable SSH step. This could indicate that you have not added an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings].
++
+image::rerun-job-connect.png[Screenshot showing rerun job with SSH option]
+
+. Run the connection command given in the job output and follow the instructions to SSH into the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
+
+If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `+ssh -p <remote_ip> -- powershell.exe+`.
+
+The job virtual machine (VM) will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it). After you SSH into the job, the connection will remain open for *one hour* for customers on the Free Plan, or *two hours* for all other customers.
+
+If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the job output.
+
+If you rerun a workflow that contains a job which was previously re-run with SSH, the new workflow will be run with SSH enabled for that job, even after SSH capability has been link:https://support.circleci.com/hc/en-us/articles/13936711308827-Disable-re-run-job-with-SSH-[disabled at the project level].
+
+[#debugging-permission-denied-publickey]
+== Debugging: `permission denied (publickey)`
+
+If you run into permission issues trying to SSH to your job, try the following in the sections below.
+
+[#ensure-authentication-with-githubbitbucket]
+=== Ensure authentication with GitHub/Bitbucket
+
+A single command can be used to test that your keys are set up as expected.
+
+For GitHub, run:
+
+[,bash]
+----
+ssh git@github.com
+----
+
+Or, for Bitbucket, run:
+
+[,bash]
+----
+ssh -Tv git@bitbucket.org
+----
+
+You should see both the following in the output:
+
+[,bash]
+----
+$ Hi :username! You've successfully authenticated...
+----
+
+[,bash]
+----
+$ logged in as :username.
+----
+
+If you _do not_ see output like above, you can try troubleshooting with the following:
+
+* https://help.github.com/articles/error-permission-denied-publickey[Troubleshooting your SSH keys with GitHub]
+* https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html[Troubleshooting your SSH keys with Bitbucket]
+
+[#ensure-authenticating-as-the-correct-user]
+=== Ensure authenticating as the correct user
+
+The user that triggered the rerun is the user that is required to authenticate. You will need to make sure that your username is in the 'Enable SSH' step.
+
+If you have multiple accounts, double-check that you are authenticated as the right one. In order to SSH into a CircleCI build, the username must be one which has access to the project being built.
+
+If you are authenticating as the wrong user, you can try to resolve this by offering a different SSH key with `ssh -i`. See the next section for guidance on confirming which key is being offered.
+
+[#ensure-the-correct-key-is-offered-to-circleci]
+=== Ensure the correct key is offered to CircleCI
+
+If you have verified that you can authenticate as the correct user, but you are still getting "Permission denied" from CircleCI, you may be offering the wrong credentials to CircleCI.
+
+Check which key is being offered that authenticates you, by running:
+
+[,bash]
+----
+$ ssh -v git@github.com
+----
+
+Or,
+
+[,bash]
+----
+$ ssh -v git@bitbucket.com
+----
+
+In the output, look for a sequence like this:
+
+[,bash]
+----
+debug1: Offering public key: /Users/me/.ssh/id_ed25519_github
+<...>
+debug1: Authentication succeeded (publickey).
+----
+
+This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the one which your VCS accepted.
+
+Next, run the SSH command for your CircleCI job, but add the `-v` flag. In the output, look for one or more lines like this:
+
+[,bash]
+----
+debug1: Offering public key: ...
+----
+
+Make sure that the key which your VCS accepted (in our example, `/Users/me/.ssh/id_ed25519_github`) was also offered to CircleCI.
+
+If it was not offered, you can specify it via the `-i` command-line argument to SSH. For example:
+
+[,bash]
+----
+$ ssh -i /Users/me/.ssh/id_ed25519_github -p 64784 54.224.97.243
+----
+
+When you add the `-v` flag, you can also run multiple options in verbose mode to get more details, for example:
+
+[,bash]
+----
+$ ssh -vv git@github.com
+----
+
+or the maximum of
+
+[,bash]
+----
+$ ssh -vvv git@github.com
+----
+
+[#see-also]
+== See also
+
+* xref:github-integration#[GitHub integration]
+* xref:bitbucket-integration#[Bitbucket integration]

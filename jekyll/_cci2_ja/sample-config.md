@@ -1,50 +1,50 @@
 ---
 layout: classic-docs
-title: "config.yml のサンプル ファイル"
-short-title: "config.yml のサンプル ファイル"
-description: "config.yml のサンプル ファイル"
-categories:
-  - 移行
-order: 2
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+title: "config.yml のサンプルファイル"
+description: "config.yml のサンプルファイル"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 suggested:
-  - 
-    title: Using dynamic config
-    link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
-    title: How to create a webhook
-    link: https://circleci.com/blog/using-circleci-webhooks/
-  - 
-    title: Automate your releases
+  -
+    title: ダイナミックコンフィグの使用
+    link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
+  -
+    title: Webhook の作成方法
+    link: https://circleci.com/ja/blog/create-customizable-experiences-with-circleci-webhooks/
+  -
+    title: リリースの自動化
     link: https://circleci.com/blog/automating-your-releases-with-circleci-and-the-github-cli-orb/
-  - 
-    title: Customize your Slack notifications
+  -
+    title: Slack 通知のカスタマイズ
     link: https://support.circleci.com/hc/en-us/articles/360052728991-How-to-customize-your-Slack-messages-when-using-CircleCI-s-Slack-Orb
-  - 
-    title: Validate your config using local CLI
-    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
-  - 
-    title: Deploy with approval-based workflows
+  -
+    title: ローカル CLI を使用した設定のバリデーション
+    link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
+  -
+    title: 承認ベースのワークフローを使ったデプロイ
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
-[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) のサンプル ファイルをご紹介します。
+[`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) のサンプルファイルをご紹介します。
 
-* 目次
-{:toc}
+CircleCI では **Visual Studio Code の拡張機能**を作成しました。一連の便利な機能により、Web アプリと Visual Studio Code 間のコンテキストの切り替え作業を減らすことができます。
 
-## シンプルな設定ファイル サンプル
+VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
+
+CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードできます。
+
+## シンプルな設定ファイルサンプル
 {: #simple-configuration-examples }
 
 ### 同時実行ワークフロー
 {: #concurrent-workflow }
 
-上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 同時実行、順序化、およびワークフローの手動承認機能を使ったジョブの実行のオーケストレーションの詳細は、[ワークフロー]({{ site.baseurl }}/ja/workflows)のドキュメントを参照してください。
 
-次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
+下記設定ファイルサンプルのワークフロービューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 {:.tab.basic-concurrent.Cloud}
 ```yaml
@@ -150,7 +150,7 @@ workflows:
 ### 順次実行ワークフロー
 {: #sequential-workflow }
 
-上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
 
 次の図に、ジョブを 1 つずつ順番に実行する以下の設定ファイル サンプルのワークフロー ビューを示します。![順次実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
@@ -262,7 +262,7 @@ workflows:
 ### 承認ジョブ
 {: #approval-job }
 
-以下に、ジョブの順次実行ワークフローの設定ファイル サンプルを示します。 ここでは、まず `build` ジョブを実行し、`build` ジョブの完了後 `test` ジョブを実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+以下に、ジョブの順次実行ワークフローの設定ファイル サンプルを示します。 ここでは、まず `build` ジョブを実行し、`build` ジョブの完了後 `test` ジョブを実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
 
 次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 この図は 3 部構成であり、アプリで hold ステップをクリックすると表示される承認ポップアップと、`hold` ジョブが承認され `deploy` ジョブが実行された後のワークフロー ビューも示されています。
 
@@ -465,7 +465,7 @@ jobs:
 
   test:
     docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -486,7 +486,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
             sudo apt update
             sudo apt install mongodb-org
-            mongo localhost --eval 'db.serverStatus()'
+            mongo localhost --eval "db.serverStatus()"
       - run:
           name: Test
           command: npm test
@@ -561,7 +561,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
             sudo apt update
             sudo apt install mongodb-org
-            mongo localhost --eval 'db.serverStatus()'
+            mongo localhost --eval "db.serverStatus()"
       - run:
           name: Test
           command: npm test
@@ -596,7 +596,7 @@ jobs:
     working_directory: ~/mern-starter
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
-      - image: circleci/node:14.17.3-buster
+      - image: cimg/node:16.13.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -621,7 +621,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:14.17.3-buster
+      - image: cimg/node:16.13.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -658,7 +658,7 @@ workflows:
 ```
 {% endraw %}
 
-This example shows a sequential workflow with the `test` job configured to run only on the main branch. ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+上記は、`test` ジョブが main ブランチでのみ実行されるよう設定された順次実行ワークフローの例です。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
 
 ## ファンイン・ファンアウト ワークフローの設定例
 {: #sample-configuration-with-fan-infan-out-workflow }
@@ -731,14 +731,17 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -771,14 +774,14 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
@@ -875,14 +878,17 @@ jobs:
 
     build-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -915,14 +921,15 @@ jobs:
 
     deploy-docker-image:
         machine:
-            image: ubuntu-1604:202004-01
+            image: ubuntu-2004:current
         steps:
             - attach_workspace:
                   at: .
+
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
@@ -966,11 +973,11 @@ version: 2.0
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -984,11 +991,11 @@ jobs:
 
   bundle_dependencies:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -1006,11 +1013,11 @@ jobs:
 
   rake_test:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -1028,11 +1035,11 @@ jobs:
 
   precompile_assets:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:3.1.0-node
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/postgres:9.4.12-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -1095,7 +1102,7 @@ workflows:
 ## 複数の Executor タイプを利用する設定例
 {: #sample-configuration-with-multiple-executor-types }
 
-1 つのワークフローのなかで、複数の [Executor タイプ](https://circleci.com/docs/2.0/executor-types/)を利用できます。
+1 つのワークフローのなかで、複数の [Executor タイプ]({{site.baseurl}}/ja/executor-intro/)を利用できます。
 
 `Example-1` では、Linux、Windows、macOS のそれぞれでプロジェクトのビルドおよびテストを行っています。
 
@@ -1203,7 +1210,7 @@ jobs:
 
   build-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 14.2.0
     parameters:
       label:
         type: string
@@ -1293,19 +1300,19 @@ jobs:
             $ProgressPreference = "SilentlyContinue"
             Expand-Archive .\\<< parameters.label >>.zip .
       - run:
-          name: 実行可能ファイルのテスト
+          name: Test executable
           command: .\\<< parameters.label >>\bin\iperf3.exe -v
       - run:
-          name: サーバーとして実行
+          name: Run as a server
           command: .\\<< parameters.label >>\bin\iperf3.exe -s
           background: true
       - run:
-          name: クライアントとして実行
+          name: Run as a client
           command: .\\<< parameters.label >>\bin\iperf3.exe -c localhost -R
 
   test-macos:
     macos:
-      xcode: 11.5.0
+      xcode: 14.2.0
     parameters:
       label:
         type: string
@@ -1336,9 +1343,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: コンピューティングのバージョン番号
+          name: Compute version number
           command: |
-            echo "export IPERF3_BUILD_VERSION=\"<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}\"" | tee -a $BASH_ENV
+            echo 'export IPERF3_BUILD_VERSION="<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"' | tee -a "$BASH_ENV"
       - github-release/release:
           tag: v$IPERF3_BUILD_VERSION
           title: $IPERF3_BUILD_VERSION
@@ -1379,7 +1386,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 11.3.0
+      xcode: 14.2.0
     steps:
       - checkout
       - run:
@@ -1437,6 +1444,6 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-* このページのサンプルで扱った各コンセプトの詳細については、[コンセプトに関するページ]({{ site.baseurl }}/2.0/concepts/#configuration)および[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows/)を参照してください。
-* 個々の構成キーの詳細については、[設定ファイルのリファレンス ページ]({{ site.baseurl }}/2.0/configuration-reference/)を参照してください。
-* CircleCI を使用するパブリック プロジェクトの一覧については、「[パブリック リポジトリの例]({{ site.baseurl }}/2.0/example-configs/)」を参照してください。
+* このページのサンプルで扱った各コンセプトの詳細については、[コンセプトに関するページ]({{ site.baseurl }}/ja/concepts/#configuration)および[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows/)を参照してください。
+* 個々の設定キーの詳細については、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
+* CircleCI を使用するパブリックプロジェクトの一覧については、[パブリックリポジトリの例]({{ site.baseurl }}/ja/example-configs/) を参照してください。

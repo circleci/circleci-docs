@@ -1,208 +1,176 @@
 ---
 layout: classic-docs
-title: "データの永続化"
-description: "CircleCI でデータを永続化する方法"
-version:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+title: "データの永続化の概要"
+description: "CircleCI でデータを永続化する方法の紹介"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-ここでは、 CircleCI ビルド内外でデータを永続化する様々な方法を概説します。 ジョブ間およびジョブの内外にデータを移動したり、データを保持して後で使用するには複数の方法があります。 適切なタスクに適切な機能を使用することで、ビルドが高速化し、再現性と効率が向上します。
+ここでは、 CircleCI ビルド内外でデータを永続化する様々な方法を概説します。 ジョブ間およびジョブの内外にデータを移動したり、データを永続化して後で使用するには複数の方法があります。 適切なタスクに適切な機能を使用することで、ビルドが高速化し、再現性と効率が向上します。
+
+アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
+
+| 型        | 用途                                                           | 例                                                                                                                                             |
+| -------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| アーティファクト | 長期アーティファクトを保存します。                                            | **[Job (ジョブ)]** ページの [Artifacts (アーティファクト)] タブから参照できます。 `tmp/circle-artifacts.<hash>/container` などのディレクトリの下に格納されています。                   |
+| ワークスペース  | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                         |
+| キャッシュ    | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。   `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
+{: class="table table-striped"}
 
 * 目次
 {:toc}
 
-## キャッシュの活用方法
-{: #caching-strategies }
+## キャッシュ
+{: #caching }
 
-![キャッシュのデータ フロー]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
+キャッシュにより、異なるビルドにおける同じジョブのデータが永続化され、高コストなフェッチ操作のデータを以前のジョブから再利用することができます。 ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。
 
-**save_cache ステップで作成されたキャッシュは、最長 15 日間保存されます。**
+### 依存関係のキャッシュ
+{: #caching-dependencies }
 
-Caching persists data between the same job in different builds, allowing you to reuse the data from expensive fetch operations from previous jobs. ジョブを一回実行すると、その後のインスタンスでは同じ処理をやり直す必要がないため、実行が高速化されます（キャッシュが無効になっていない場合）。
+キャッシュ戦略の主な例としては、Yarn、Bundler、Pip などの依存関係管理ツールと共に使用することが挙げられます。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
 
-わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を復元することで、yarn install などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係をダウンロードするだけで済むようになります。
+キャッシュはプロジェクト内でグローバルなため、 1 つのブランチに保存されたキャッシュは、他のブランチで実行されるジョブで使用されます。 キャッシュは、ブランチ間での共有に適したデータにのみ使用してください。
 
-キャッシュは、プロジェクト内でグローバルに配置されます。 1 つのブランチに保存されたキャッシュが他のブランチで実行されるジョブでも使用されるため、キャッシュはブランチ間での共有に適したデータに対してのみ使用してください。
+* 競合状態、キャッシュの管理、有効期限、キャッシュキーの使用など依存関係のキャッシュに関する詳細は、[依存関係のキャッシュ]({{site.baseurl}}/ja/caching/)をご覧ください。
 
-詳細については、[依存関係のキャッシュガイド]({{site.baseurl}}/ja/2.0/caching/)を参照してください。
+### キャッシュの最適化
+{: #cache-optimization }
 
-## ワークスペースの使用
-{: #using-workspaces }
+ネットワークとストレージの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。 たとえば、データ使用量を減らしたい場合、各データの使用量を保持する価値があるかどうかを検討してください。 キャッシュの場合、比較検討が非常に簡単にできます。 キャッシュによる開発 / コンピューティング時間の節約は、ダウンロードとアップロードのコストを上回っていますか？
 
-![Workspace のデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+キャッシュ戦略の最適化には、不必要なワークフローの再実行の回避、ジョブの統合、有意義なワークフロー実行順序の作成、キャッシュの削除が含まれます。
 
-**ワークスペースは最長で15日間保存されます。**
+* キャッシュの詳細や一部の依存関係のキャッシュ、キャッシュのトレードオフ、複数のキャッシュの使用などその他のキャッシュ戦略に関する情報は、[キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy/) をご覧ください。
 
-ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 ダウンストリーム ジョブで必要に応じてこのワークスペースを使用したり、レイヤーをさらに追加することができます。
+## ワークスペース
+{: #workspaces }
 
-ワークスペースは異なるパイプラインの実行において共有されません パイプラインの実行後にワークスペースにアクセスできるのは、ワークフローが 15 日以内に再実行された場合のみです。
+ワークスペースは、ワークフローが進むにつれてデータをダウンストリームジョブに転送するために使用されます。 ジョブ内でワークスペースが宣言されていると、ファイルやディレクトリを追加することができます。 追加するたびにワークスペースのファイルシステム内に新しいレイヤーが作成されます。 ダウンストリームジョブで必要に応じてこのワークスペースを使用したり、レイヤーをさらに追加することができます。
 
-ワークスペースを使用してワークフロー全体のデータを保持する方法の詳細については、[ワークフローガイド]({{site.baseurl}}/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs)をご覧ください。 [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
+### ワークスペースの最適化
+{: #workspace-optimization }
 
-## アーティファクトの使用
-{: #using-artifacts }
+ワークスペースの使用量が多く、減らしたい場合は、`config.yml ` ファイル内の `persist_to_workspace` コマンドを検索し、ワークスペースを使用しているすべてのジョブを探し、パス内のすべてのアイテムが必要かどうかを検討してください。
 
-![アーティファクトのデータ フロー]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
+また、失敗したビルドを再実行するためだけにワークスペースを使用している場合もあります。 ビルドが成功したら、そのワークスペースは不要になります。 保存期間を例えば 1 日に設定した方が、プロジェクトに適している場合があります。 ワークスペースのストレージ保存期間を短くし、ストレージに不要なデータを保存しないことにより、コストを削減できます。
 
-**アーティファクトは最長で 30 日間保存されます。**
+* ワークスペースの最適化、設定、有効期限に関する詳細は、[ワークスペースの使用]({{site.baseurl}}/ja/workspaces/)をご覧ください。
+* ワークフローの詳細については、[ワークフロー]({{site.baseurl}}/ja/workflows/)を参照してください。
+* [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
+
+## アーティファクト
+{: #artifacts }
 
 アーティファクトは、パイプラインの出力を長期保存するために使用されます。 たとえば Java プロジェクトを使用している場合、ビルドにより多くの場合、コードの` .jar `ファイルが生成されます。 このコードはテストによって検証されます。 ビルドやテストプロセスがすべて成功した場合は、プロセスの出力（` .jar `）をアーティファクトとして保存できます。 この `jar `ファイルは、ファイルを作成したワークフローの終了後も長期間アーティファクトシステムからダウンロードできます。
 
 プロジェクトをパッケージ化する必要がある場合は、`.apk` ファイルが Google Play にアップロードされる Android アプリを使用して、アーティファクトとして保存することをお勧めします。 多くのユーザーがアーティファクトを Amazon S3 や Artifactory などの全社的な保存先にアップロードしています。
 
-アーティファクトを使用してジョブの完了後にデータを保持する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/ja/2.0/artifacts/)を参照してください。
+### アーティファクトの最適化
+{: #artifact-optimization }
 
-## ネットワークとストレージ使用の管理
-{: #managing-network-and-storage-use }
+アーティファクトは、ビルドの失敗をトラブルシュートするのに役立ちます。 問題が解決し、ビルドに成功したら、アーティファクトの役目はほぼ終了です。 保存期間を例えば 1 日に設定すると、ビルドのトラブルシューティングを行い、かつストレージに不要なデータを保存しないことによりコストを削減することができます。
 
-The information below describes how your network and storage usage is accumulating, and should help you find ways to optimize and implement cost saving measures.
+アーティファクトを長期間保存する必要がある場合は、実行しようとしている内容に応じて様々な最適化オプションがあります。 どのプロジェクトもそれぞれ異なりますが、ネットワークとストレージの使用量の削減には以下のアクションをお試し下さい。
 
-**NOTE:** Your overall **Network Transfer** amount is not representative of your billable usage. Only certain actions will result in network egress, which in turn results in billable usage. Details of these actions are described below.
+- `store_artifacts` が不必要なファイルをアップロードしていないか確認する。
+- 並列実行を使用している場合は、同じアーティファクトがないか確認する。
+- 最低限のコストでテキストのアーティファクトを圧縮する。
+- UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードする。
+- フィルタを外し、失敗したテストまたは成功したテストのみをアップロードする。
+- 1つのブランチにのみアーティファクトをアップロードする。
+- 大きなアーティファクトは、独自のバケットに無料でアップロードする。
 
-### ストレージとネットワーク転送の概要
-{: #overview-of-storage-and-network-transfer }
+アーティファクトの最適化に関する詳細やアーティファクトを使用してジョブの完了後にデータを永続化する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/ja/artifacts/)を参照してください。
 
-ジョブ内でデータを保持するための操作には、ネットワークとストレージの使用が発生します。関連するアクションは次のとおりです。
+## ネットワークとストレージの使用状況の管理
+{: #managing-network-and-storage-usage }
 
-* キャッシュのアップロードとダウンロード
-* ワークスペースのアップロードとダウンロード
+最適化により実現できるのは、ビルドの高速化や効率化の向上だけではありません。 最適化により、コストの削減も可能です。 以下では、ネットワークとストレージの使用量がどのように蓄積されるかを説明しています。最適化やコスト削減方法の検討にお役立てください。
+
+ネットワークとストレージの使用量を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)を開いて以下のステップを実行します。
+
+1. アプリのサイドバーから **Plan** を選択します。
+2. **Plan Usage** を選択します。
+3. **Network** または **Storage** のどちらか表示したいタブを選択します。
+
+この Network タブおよび Storage タブから請求期間毎の使用量の詳細を見ることができます。  使用量は、ストレージオブジェクトタイプ  (キャッシュ、アーティファクト、ワークスペース) 別にも分けられます。
+
+CircleCI Web アプリで分かる範囲以上のご質問がある場合は、**アカウント / 請求** チケットをオープンして[サポート](https://support.circleci.com/hc/ja/requests/new)にご連絡下さい。
+
+### ストレージとネットワーク通信の概要
+{: #overview-of-network-and-storage-transfer }
+
+ジョブ内でデータを永続化するための操作には、ストレージの使用が発生しますが、すべてのストレージの使用に料金が発生するわけではありません。 ストレージ使用が発生する関連アクション:
+
+* キャッシュのアップロード
+* ワークスペースのアップロード
 * アーティファクトのアップロード
-* テスト結果のアップロード
 
-上記のアクションを行うジョブを決定するには、プロジェクトの `config.yml `ファイルで次のコマンドを検索します。
+上記のアクションを行うジョブを決定するには、プロジェクトの`.circleci/config.yml` ファイルで次のコマンドを検索します。
 
 * `save_cache`
-* `restore_cache`
 * `persist_to_workspace`
 * `store_artifacts`
-* `store_test_results`
 
-すべてのネットワーク転送にはネットワークの使用が発生します。関連するアクションは次のとおりです。
+ストレージとネットワーク通信の使用状況の詳細は、**Plan > Plan Usage** 画面で確認できます。 この画面では以下の内容を確認できます。
 
-* キャッシュとワークスペースのセルフホストランナーへの復元
-* アーティファクトのダウンロード
-* CircleCI 外のジョブからのデータプッシュ
+- 課金対象となるネットワーク通信量 (画面の一番上の表に表示)
+- 個々のプロジェクトのネットワークとストレージの使用量 (Project タブに表示)
+- ストレージのデータとアクティビティ (Network タブに表示)
+- ストレージ総量のデータ (Storage タブに表示)
 
-ストレージとネットワーク転送の使用状況の詳細は、プラン > プランの使用状況画面で確認できます。 On this screen you can find:
+請求の対象となる**ネットワーク通信**は、**キャッシュとワークスペースのセルフホストランナーへのリストア**により発生したトラッフィックのみです。
 
-* Total network and storage usage (table at the top of the screen)
-* Network and storage usage for individual projects (Projects tab)
-* Storage data activity (Objects tab)
-* Total storage volume data (Storage tab)
 
-個々のステップのストレージおよびネットワーク転送の使用方法の詳細については、以下のジョブページのステップ出力を参照してください。
+個々のステップのストレージおよびネットワーク通信の使用方法の詳細については、下記の**ジョブ**ページのステップ出力を参照してください。
 
-![save-cache-job-output]( {{ site.baseurl }}/assets/img/docs/job-output-save-cache.png)
+![ジョブでキャッシュを保存した場合の出力]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
 
-### How to calculate an approximation of your monthly costs
-{: #how-to-calculate-an-approximation-of-your-monthly-costs}
+### ストレージ使用量のカスタマイズ
+{: #custom-storage-usage }
 
-Charges apply when an organization has network egress beyond the included GB allotment for storage and network usage.
+有料プランをご利用中のお客様は、[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペース、キャッシュ、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 各オブジェクトタイプ毎にスライダーを調節して、カスタムのストレージ期間を設定することができます。 デフォルトでは、保存期間はアーティファクトの場合は 30 日間、キャッシュやワークスペースの場合は 15 日間です。 この日数はストレージの最大保存期間でもあります。 アーティファクトの最大保存期間は 30 日間、キャッシュとワークスペースの最大保存期間は 15 日間です。
 
-#### ストレージ
-{: #storage }
-{:.no_toc}
+各オブジェクトタイプで希望のストレージ保存期間が決まったら、**Save Changes** ボタンをクリックします。その設定は即座に新しく作成されたすべてのワークスペース、キャッシュ、アーティファクトに適用されます。 別の保存期間で保存されている以前作成したオブジェクトに対しては、作成時に設定された保存期間が維持されます。
 
-Usage is charged in real time and held for a specific time period: workspaces and caches are held for 15 days, while artifacts and test results are held for 30 days.
+**Reset to Default Values** ボタンにより、オブジェクトタイプのデフォルトのストレージ保存期間 (アーティファクトは 30 日間、キャッシュとワークスペースは 15 日間) をリセットすることができます。
 
-To calculate monthly storage costs from your daily usage, click on the Storage tab to see if your organization has accrued any overages beyond the GB-monthly allotment (your network egress). Your overage GB-Months can be multiplied by 420 credits to estimate the total monthly costs.
+組織の誰でもカスタムの使用量の制御を見ることはできますが、保存期間を変更できるのは管理者のみです。
 
-![storage-usage-overage]( {{ site.baseurl }}/assets/img/docs/storage-usage-overage.png)
+![ストレージのコントロール UI 画面]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
 
-#### ネットワーク
-{: #network }
-{:.no_toc}
+請求期間の終わりにデータを保存すると、使用状況の制御で設定した保存期間に関係なく、そのデータは新しい請求期間の開始時にリストアされます。 たとえば、請求期間の 25 日目に 10 日間の保存期間の設定でキャッシュを保存した場合に　30日目にそのキャッシュに何も変更がなかった場合、新しいキャッシュがビルドされ、新たに 10 日間の保存期間保存されます。
 
-To calculate monthly network costs from your usage, click on the Objects tab to see if your organization has accrued any overages (your network egress). Your overage GB can be multiplied by 420 credits to estimate the total monthly costs.
+### ストレージ料金とネットワーク料金の概算方法
+{: #how-to-calculate-an-approximation-of-network-and-storage-costs}
 
-The GB allotment only applies to outbound traffic from CircleCI. Traffic within CircleCI is unlimited.
+**注:** Performance プランのお客様の場合、外向きの通信とストレージに対する課金は、2022 年 5 月 1 日より有効になり、お客様の請求日に基づいて請求されます (変更される場合があります)。 CircleCI では現在、ネットワークとストレージの使用状況を管理するための変数と制御機能を追加しており、**2022 年 4 月 1 日**よりご利用いただける予定です。 ここで記載されている内容は、2022 年 5 月 1 日にこれらの追加変更が有効になって以降適用されます。 現在の使用状況を確認するには、[CircleCI Web アプリ](https://app.circleci.com/)から、**Plan > Plan Usage** に移動してください。
+{: class="alert alert-info" }
 
-![network-usage-overage]( {{ site.baseurl }}/assets/img/docs/network-usage-overage.png)
+プランに含まれているネットワークの使用 GB を超える量のランナーネットワーク通信を使用した場合、課金されます。 ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 クラウドホスティングの Executor のみを使用している場合は、ネットワーク料金は適用されません。
 
-### How to optimize your storage and network transfer use
-{: #how-to-optimize-your-storage-and-network-transfer-use }
+ストレージ料金は、プランに含まれているストレージの GB を超えるアーティファクト、ワークスペース、キャッシュを保存する場合に適用されます。
 
-ストレージとネットワークの使用を最大限に活用するために設定を最適化する一般的な方法は複数あります。
+お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/ja/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/ja/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
 
-For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept.
+IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問]({{site.baseurl}}/ja/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
 
-In the cases of caches and workspaces this can be quite easy to compare - does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+### ネットワーク通信の過剰な使用を減らす
+{: #reducing-excess-use-of-network-egress-and-storage }
 
-See below for examples of storage and network optimization opportunities through reducing artifact, cache, and workspace traffic.
+セルフホストランナーへのネットワーク通信の使用量は、 CircleCI が提供する組み込みのキャッシュ/ワークスペースではなく、永続ボリュームなどのカスタマイズされたローカルストレージを使用することにより減らせます。
 
-#### アップロードされているアーティファクトの確認
-{: #check-which-artifacts-are-being-uploaded }
+ご自身のストレージのニーズを評価し、[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクト、ワークスペース、キャッシュ、のストレージ保存期間をカスタマイズすることによりストレージに対する課金を最小限にすることができます。
 
-Often we see that the `store_artifacts` step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
-
-ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 You can use the `CIRCLE_NODE_INDEX` environment variable in a run step to change the behavior of scripts depending on the parallel task run.
-
-#### 大きなアーティファクトのアップロード
-{: #uploading-large-artifacts }
-
-テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。
-
-UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
-
-If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
-
-大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
-
-#### 未使用または余分な依存関係のキャッシュ
-{: #caching-unused-or-superfluous-dependencies }
-
-ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。
-
-For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from `node_modules`.
-
-#### キャッシュ使用率の最適化
-{: #optimizing-cache-usage }
-
-If you notice your cache usage is high and would like to reduce it:
-
-* Search for the `save_cache` and `restore_cache` commands in your `config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
-* Narrow the scope of a cache from a large directory to a smaller subset of specific files.
-* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/2.0/caching/#further-notes-on-using-keys-and-templates):
-
-{% raw %}
-```sh
-       - save_cache:
-         key: brew-{{epoch}}
-         paths:
-           - /Users/distiller/Library/Caches/Homebrew
-           - /usr/local/Homebrew
-```
-{% endraw %}
-
-上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. この方法では結局コストもかかり、時間も短縮できません。 Instead pick a cache `key` like the following:
-
-{% raw %}
-```sh
-     - save_cache:
-         key: brew-{{checksum “Brewfile”}}
-         paths:
-           - /Users/distiller/Library/Caches/Homebrew
-           - /usr/local/Homebrew
-```
-{% endraw %}
-
-This will only change if the list of requested dependencies has changed. これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
-
-キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
-
-アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
-
-#### ワークスペースの使用率の最適化
-{: #optimizing-workspace-usage }
-
-If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
-
-#### ネットワーク転送の過剰な使用を減らす
-{: #reducing-excess-use-of-network-egress }
-
-If you would like to try to reduce the amount of network egress that is contributing to network usage, you can try a few things:
-
-* Runner の場合は、 AWS US-East-1 にクラウドベースのランナーをデプロイします。
-* アーティファクトを 1 度ダウンロードし、ご自身のサイトに保存して処理を追加します。
+## 関連項目
+{: #see-also }
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/artifacts)
+- [IP アドレスの範囲機能]({{site.baseurl}}/ja/ip-ranges/)
+- [最適化の概要]({{site.baseurl}}/ja/optimizations)

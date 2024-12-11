@@ -3,19 +3,23 @@
 ## List Checkout Keys
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key -H "Circle-Token: <circle-token>"
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key?digest=sha256 -H "Circle-Token: <circle-token>"
 ```
 
 ```json
 [{"public_key": "ssh-rsa...",
   "type": "deploy-key", // can be "deploy-key" or "github-user-key"
-  "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+  "fingerprint": "AddwN379YO1pnTyrOqALUZmo6XU4zJ2RLuOZslrl7c4",
   "preferred": true,
   "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
   }]
 ```
 
 **`GET` Request**: Returns an array of checkout keys for `:project.`
+
+Parameter | Description
+------- | -------------
+digest | Fingerprint digest. Optional; 'md5' by default. Pass 'sha256' to return SHA-256 key fingerprint.
 
 ## New Checkout Key
 
@@ -32,7 +36,7 @@ curl -X POST --header "Content-Type: application/json" -d '{"type":"github-user-
   }
 ```
 
-**`POST` Request**: Creates a new checkout key. This API request is only usable with a user API token.
+**`POST` Request**: Creates a new checkout key. This API request is only usable with a user API token. Organizations using GitHub OAuth with SAML SSO may require [an additional authorization step](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on#authorizing-an-ssh-key) to use the key.
 
 Parameter | Description
 ------- | -------------
@@ -54,11 +58,11 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout
   }
 ```
 
-**`GET` Request**: Returns an individual checkout key.
+**`GET` Request**: Returns an individual checkout key. Supply fingerprint as a path parameter. Fingerprint can be of type md5 or sha256. sha256 fingerprints should be URL-encoded.
 
 ## Delete Checkout Key
 
-**`DELETE` Request:** Deletes the checkout key.
+**`DELETE` Request:** Deletes a checkout key by fingerprint. Supply fingerprint as a path parameter. Fingerprint can be of type md5 or sha256. sha256 fingerprints should be URL-encoded.
 
 ```sh
 curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint -H "Circle-Token: <circle-token>"
@@ -90,7 +94,7 @@ curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fing
 # no response expected
 ```
 
-**`DELETE` Request:** Deletes an SSH key from the system.
+**`DELETE` Request:** Deletes an SSH key from the system by fingerprint. Supply `fingerprint` in request body. Fingerprint can be of type md5 or sha256.
 
 
 ## Heroku Keys

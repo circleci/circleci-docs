@@ -1,0 +1,158 @@
+---
+contentTags:
+  platform:
+  - Server v4.7
+  - Server Admin
+---
+= Phase 2 - Configure object storage
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to configure object storage through MinIO to run CircleCI server v4.7 in an air-gapped environment.
+:icons: font
+:experimental:
+:toc: macro
+:toc-title:
+
+pass:[<!-- vale off -->]
+[#create-buckets-in-minio]
+== 1. Create buckets in MinIO
+CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
+
+image::./minio/minio_install_0.png[Create a bucket in MinIO]
+
+[#creates-data-bucket]
+=== a. Create a `circleci-data` bucket.
+Create a new bucket in MinIO named `circleci-data`.
+
+NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
+
+image::./minio/minio_created_buckets.png[Buckets created in MinIO]
+
+[#configure-data-bucket]
+=== b. Configure the `circleci-data` bucket
+In the settings for the `circleci-data` bucket, change the access policy to `public`.
+
+image::./minio/minio_modify_access_policy.png[Setting `circleci-data` bucket access policy to public]
+
+[#copy-build-agent]
+== 2. Copy the CircleCI build agent
+Follow the steps in this section to copy the pinned CircleCI build agent into MinIO within your air-gapped environment.
+
+[#retrieve-pinned-agent-version]
+=== a. Extract the pinned agent version from the Helm chart
+Fetch the `circleci-server` Helm chart and extract the pinned agent version from it. Set this to the environment variable `$CIRCLE_AGENT_VERSION` so that it can be referenced in later steps.
+
+[source,bash]
+----
+# Fetch the Helm chart for inspection. Replace `<version>` with the full version of CircleCI server.
+helm fetch oci://cciserver.azurecr.io/circleci-server --version <version> --untar
+
+# Set `$CIRCLE_AGENT_VERSION` to the value of `circleci/picard` in `images.yaml`.
+export CIRCLE_AGENT_VERSION=$(grep 'circleci/picard:' ./circleci-server/images.yaml | cut -d' ' -f2)
+
+# Verify `$CIRCLE_AGENT_VERSION` is set. The value should be similar in form to `1.0.217358-0b5336a7`.
+echo $CIRCLE_AGENT_VERSION
+----
+
+[#copy-release-txt]
+=== b. Create a release.txt file and copy to MinIO
+Create a `release.txt` file with the value of `$CIRCLE_AGENT_VERSION`. Copy this file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
+
+[#retrieve-pinned-agent-bin]
+=== c. Retrieve the pinned agent binary
+Retrieve and download the pinned `circleci-agent` release and checksums from the CircleCI binary releases public bucket.
+
+[,bash]
+----
+# Download circleci-agent
+curl -O --compressed https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/linux/amd64/circleci-agent
+
+# Download checksums
+curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE_AGENT_VERSION/checksums.txt
+----
+
+[#create-release-dir]
+=== d. Create a release directory in the `circleci-data` bucket
+Using the version specified by `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In the following examples, a directory is created at the root of `circleci-data` in MinIO with the name `$CIRCLE_AGENT_VERSION`. Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
+
+image::./minio/minio_create_release_dir.png[Creating a directory in the `circleci-data` bucket]
+
+[#upload-checksums-file]
+=== e. Upload the checksums.txt file to the newly created directory.
+Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in MinIO nested under the newly created release directory (step d).
+
+[,shell]
+----
+# The structure of the directory should now look like this.
+# Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
+$CIRCLE_AGENT_VERSION/
+└── checksums.txt
+----
+
+image::./minio/minio_upload_checksums.png[Uploading `checksums.txt` into the release directory]
+
+[#create-new-subdirs]
+=== f. Create two new subdirectories in the release directory
+Within the release directory (step d), create two new nested subdirectories, first `linux`, and then within it, `amd64`.
+
+[,shell]
+----
+# The structure of the directory of the bucket should look like this:
+$CIRCLE_AGENT_VERSION/
+├── checksums.txt
+└── linux/
+    └── amd64/
+----
+
+image::./minio/minio_create_linux_dir.png[Creating a Linux dir]
+
+image::./minio/minio_create_amd_dir.png[Creating an AMD dir]
+
+[#copy-build-agent-bin]
+=== g. Copy the downloaded `circleci-agent` file
+Copy the downloaded `circleci-agent` file (step c) to your virtual environment, and place it in the amd64 directory you just created.
+
+[,shell]
+----
+# The final structure of the bucket should look similar to this:
+CIRCLE_AGENT_VERSION/
+├── checksums.txt
+└── linux/
+    └── amd64/
+        └── circleci-agent
+----
+
+image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
+
+[#copy-other-miscellaneous-files]
+== 3. Copy other miscellaneous files
+Follow the steps in this section to copy the required files into MinIO within your air-gapped environment.
+
+[#copy-canary-txt-file]
+=== a. Copy canary.txt file
+Download the `canary.txt` file required by distributor.
+
+[,bash]
+----
+# Download canary.txt
+curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.txt
+----
+
+Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
+
+[#copy-candidate-txt-file]
+=== b. Copy candidate.txt file
+Download the `candidate.txt` file required by `runner_admin`.
+
+[,bash]
+----
+# Download candidate.txt
+curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/candidate.txt
+----
+
+Copy this `candidate.txt` file to the root directory of the `circleci-data` bucket.
+
+[#next-steps]
+== Next steps
+
+Once the steps on this page are complete, go to the xref:phase-3-install-circleci-server#[Phase 3 - Install CircleCI server] guide.

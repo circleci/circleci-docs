@@ -1,0 +1,227 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Avoiding and debugging Java memory errors
+:page-description: How to avoid and debug Java memory errors on CircleCI.
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+How to avoid and debug Java memory errors on CircleCI.
+
+[#overview]
+== Overview
+
+The link:https://en.wikipedia.org/wiki/Java_virtual_machine[Java Virtual Machine] (JVM) provides a portable execution environment for Java-based applications.
+Without any memory limits, the JVM pre-allocates a fraction of
+the total memory available in the system.
+CircleCI runs container based builds on large machines with lots of memory.
+Each container has a smaller memory limit than the total amount available
+on the machine.
+
+By default, Java's is configured so that it will use:
+
+* More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
+* Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
+
+As of link:https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor[June 3rd 2020]
+these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
+detect the number of CPUs and amount of RAM available to the job.
+
+For older versions of Java, This can lead to the JVM seeing a large amount of memory and CPUs
+being available to it, and trying to use more than is allocated to the container. This pre-allocation can produce
+Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail. Usually you will
+see a `137` exit code, which means the process has been ``SIGKILL``ed by the OOM killer (`137 = 128 + "kill -9"`).
+
+You can see how much memory your container is allocated, and how much it has used, by looking at the following files:
+
+----
+/sys/fs/cgroup/memory/memory.limit_in_bytes
+/sys/fs/cgroup/memory/memory.max_usage_in_bytes
+----
+
+[#usecontainersupport]
+== `UseContainerSupport`
+
+Recent versions of Java (JDK 8u191, and JDK 10 and up) include
+a flag `UseContainerSupport` which defaults on. This flag enables
+the JVM to use the cgroup memory constraints available to the container,
+rather than the much larger amount of memory on the machine.
+Under Docker and other container runtimes, this will let the JVM more accurately
+detect memory constraints, and set a default memory usage within those constraints.
+You can use the `MaxRAMPercentage` flag to customise the fraction of available RAM that is used,
+for example, `-XX:MaxRAMPercentage=90.0`.
+
+[#manual-memory-limits]
+== Manual memory limits
+
+Even with cgroup support, the JVM can still use too much memory, for example, if it executes a worker process pool.
+To prevent the JVM from pre-allocating too much memory, declare memory limits
+<<using-java-environment-variables-to-set-memory-limits,using Java environment variables>>.
+To debug OOM errors,
+look for the <<debugging-java-oom-errors,appropriate exit code>>.
+
+[#using-java-environment-variables-to-set-memory-limits]
+== Using Java environment variables to set memory limits
+
+You can set several Java environment variables
+to manage JVM memory usage.
+These variables have similar names
+and interact with each other in complicated ways.
+
+The table below shows these environment variables,
+along with the precedence levels they take
+when using different build tools.
+The lower the number,
+the higher the precedence level,
+with 0 being the highest.
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein
+
+| <<javaoptions,`_JAVA_OPTIONS`>>
+| 0
+| 0
+| 0
+| 0
+| 0
+
+| <<javatooloptions,`JAVA_TOOL_OPTIONS`>>
+| 2
+| 3
+| 2
+| 2
+| 2
+
+| <<javaopts,`JAVA_OPTS`>>
+| no
+| 2
+| no
+| 1
+| no
+
+| <<jvmopts,`JVM_OPTS`>>
+| *
+| no
+| no
+| no
+| *
+
+| <<leinjvmopts,`LEIN_JVM_OPTS`>>
+| no
+| no
+| no
+| no
+| 1
+
+| <<gradleopts,`GRADLE_OPTS`>>
+| no
+| 1
+| no
+| no
+| no
+
+| <<mavenopts,`MAVEN_OPTS`>>
+| no
+| no
+| 1
+| no
+| no
+
+| CLI arguments
+| 1
+| no
+| no
+| no
+| no
+|===
+
+The above environment variables are listed below,
+along with details on why to choose one over another.
+
+[#javaoptions]
+=== `_JAVA_OPTIONS`
+
+This environment variable takes precedence over all others.
+It is read directly by the JVM
+and overwrites all other Java environment variables,
+including command-line arguments.
+Because of this power,
+consider using a more specific Java environment variable.
+
+NOTE: `_JAVA_OPTIONS` is exclusive to Oracle.
+If you are using a different runtime,
+ensure that you check the name of this variable.
+For example,
+if you are using the IBM Java runtime,
+then you would use `IBM_JAVA_OPTIONS`.
+
+[#javatooloptions]
+=== `JAVA_TOOL_OPTIONS`
+
+This environment variable is link:https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions[a safe choice]
+for setting Java memory limits.
+`JAVA_TOOL_OPTIONS` can be read by all Java virtual machines,
+and you can override it
+with command-line arguments
+or more specific environment variables.
+
+[#javaopts]
+=== `JAVA_OPTS`
+
+This environment variable is not read by the JVM.
+Instead, several Java-based tools and languages use it
+to pass memory limits to the JVM.
+
+[#jvmopts]
+=== `JVM_OPTS`
+
+This environment variable is exclusive to Clojure.
+`lein` uses `JVM_OPTS`
+to pass memory limits to the JVM.
+
+NOTE: `JVM_OPTS` does not affect the memory of `lein` itself, nor can it directly pass memory limits to Java. To affect `lein`'s available memory, use `LEIN_JVM_OPTS`. To directly pass memory limits to Java, use <<javaoptions,`_JAVA_OPTIONS`>> or <<javatooloptions,`JAVA_TOOL_OPTIONS`>>.
+
+[#leinjvmopts]
+=== `LEIN_JVM_OPTS`
+
+This environment variable is exclusive to `lein`.
+
+[#gradleopts]
+=== `GRADLE_OPTS`
+
+See the Gradle documentation for link:https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory[memory settings].
+
+This environment variable is exclusive to Gradle projects.
+Use it
+to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
+
+[#mavenopts]
+=== `MAVEN_OPTS`
+
+See the Maven documentation for link:https://maven.apache.org/configure.html[memory settings].
+
+This environment variable is exclusive to Apache Maven projects.
+Use it
+to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
+
+[#debugging-java-oom-errors]
+== Debugging Java OOM errors
+
+Unfortunately, debugging Java OOM errors often comes down to finding an `exit
+code 137` in your error output.
+
+Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to
+completely build, while small enough that other processes can share the remaining memory of your CircleCI
+build container.
+
+Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the link:https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor[cgroup visibility change] made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
+
+If you are still consistently hitting memory limits,
+consider xref:configuration-reference#resourceclass[increasing your job's RAM allocation].

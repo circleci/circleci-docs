@@ -1,0 +1,731 @@
+---
+description: Open preview of config policies for CircleCI. Learn about testing your policies.
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Test config policies
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
+
+Follow the how-to guides on this page to write and set up tests for your config policies.
+
+[NOTE]
+====
+**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+[source,shell]
+----
+circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
+----
+====
+
+This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policies overview] and xref:create-and-manage-config-policies#[Create and manage config policies] pages.
+
+[#prerequisites]
+== Prerequisites
+
+The instructions on this page assume you have followed and completed the xref:create-and-manage-config-policies#create-a-policy[Create a policy] guide, through which you will have done the following:
+
+* Enabled config policies for your organization
+* Created a simple policy to check CircleCI config versions within your org. You will have the following file structure: `./config-policies/version.rego`
+
+[#write-a-policy-test]
+== Write a policy test
+
+In this section you will add a test for your existing `version.rego` policy to test how the policy will operate in practice, and check that the _decisions_ it will provide are valid.
+
+. Create a policy test file in your `./config-policies` directory. This file will contain a series of _expectations_ for the policy. Create the file: `./config-policies/version_test.yaml`.
+
+. Copy the following into the new `version_test.yaml` file you just made:
++
+[source,yaml]
+----
+# Top level tests must have keys prefixed with `test_`
+test_version_check:
+  # Create the input snippet that will be run against the policy. In the context of config policies, the input corresponds
+  # to CircleCI's config.yml
+  input:
+    version: 2.1
+  # Specify the decision we expect to get from the policy. Fields we expect to be empty can be omitted.
+  decision: &root # optionally you can use a yaml anchor to reuse this decision as a base in subcases below.
+    status: PASS
+    enabled_rules: [check_version]
+
+  # It is totally valid to write more tests at the top level with keys prefixed with `test_`, however it is often practical
+  # to create subcases hierarchically using the cases field.
+  cases: # subcases do not need to begin with `test_`
+    absent_version:
+      # the subcase input will be *merged* into the parent input
+      input:
+        version: null
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be defined
+
+    version_wrong_type:
+      input:
+        version: two
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be a number
+
+    inferior_version:
+      input:
+        version: 1.0
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be at least 2.1 but got 1
+----
+
+. Run the `test` command against your `config-policies` directory:
++
+[source,shell]
+----
+circleci policy test ./config-policies
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    config-policies    0.001s
+
+4/4 tests passed (0.001s)
+----
++
+NOTE: If you already have multiple policies in your `./config-policies` directory, more than just the `version.rego` file, you will probably see a different output, possibly including failures.
+
+. To see the tests that ran individually, you can also run with the `--verbose` or `-v` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_version_check                       0.000s
+ok    test_version_check/absent_version        0.000s
+ok    test_version_check/inferior_version      0.000s
+ok    test_version_check/version_wrong_type    0.000s
+ok    config-policies                          0.001s
+
+4/4 tests passed (0.001s)
+----
+
+. To run a specific test you can provide a regular expression to the `--run` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "absent_version$"
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_version_check/absent_version    0.000s
+ok    config-policies                      0.000s
+
+1/1 tests passed (0.000s)
+----
+
+. To better understand how the test was executed, including which input and metadata the test was run against, and the raw OPA evaluation, you can pass the `--debug` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "absent_version$" --debug
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_version_check/absent_version    0.000s
+---- Debug Test Context ----
+decision:
+    enabled_rules:
+        - check_version
+    hard_failures:
+        - reason: version must be defined
+          rule: check_version
+    status: HARD_FAIL
+evaluation:
+    meta: null
+    org:
+        check_version: version must be defined
+        enable_rule:
+            - check_version
+        hard_fail:
+            - check_version
+        policy_name:
+            - example
+input: {}
+meta: null
+---- End of Test Context ---
+ok    config-policies    0.000s
+
+1/1 tests passed (0.000s)
+----
+
+. To get the test output in JSON format, use the `--format` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --format=json
+----
++
+Expected output:
++
+[source,json]
+----
+[
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check",
+    "Elapsed": "306.467µs",
+    "ElapsedMS": 0
+  },
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/absent_version",
+    "Elapsed": "94.728µs",
+    "ElapsedMS": 0
+  },
+  {
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/inferior_version",
+    "Elapsed": "360.223µs",
+    "ElapsedMS": 0
+  },
+  {
+    "Passed": true,
+    "Group": "config-policies",
+    "Name": "test_version_check/version_wrong_type",
+    "Elapsed": "209.058µs",
+    "ElapsedMS": 0
+  }
+]
+----
+
+. To get the test output in JUnit XML format, use the `--format` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --format=junit
+----
++
+Expected output:
++
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="root" tests="4" failures="0" errors="0" time="0.002">
+        <testsuite tests="4" failures="0" time="0.002" name="config-policies" timestamp="">
+                <properties></properties>
+                <testcase classname="config-policies" name="test_version_check" time="0.001"></testcase>
+                <testcase classname="config-policies" name="test_version_check/absent_version" time="0.000"></testcase>
+                <testcase classname="config-policies" name="test_version_check/inferior_version" time="0.000"></testcase>
+                <testcase classname="config-policies" name="test_version_check/version_wrong_type" time="0.001"></testcase>
+        </testsuite>
+</testsuites>
+----
+
+[#add-another-policy-and-test]
+== Add another policy and test
+Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker], writing tests for that policy, and running those tests.
+
+. Inside your `config-policies` directory, create a Rego file for a new policy, call it: `docker.rego`.
+. Copy the following policy definition into `docker.rego`:
++
+[source,rego]
+----
+# org level policy
+package org
+
+# needed to use keyworks like `in`.
+import future.keywords
+
+# Unique name identifying this policy in our bundle.
+policy_name["docker"]
+
+# Constant semver string we will be using for comparison checks.
+minimum_remote_docker_version := "20.10.11"
+
+# Mark the rule as enabled. This causes circleci to take this rule into account when making decisions.
+# Also mark this rule as a hard violation level rule. This will stop offending builds from running in production.
+enable_hard["check_min_remote_docker_version"]
+
+check_min_remote_docker_version[reason] {
+	some job_name, job_info in input.jobs
+	some step in job_info.steps
+
+	version := step.setup_remote_docker.version
+
+	semver.compare(version, minimum_remote_docker_version) == -1
+
+	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
+}
+----
+
+. Create a policy test file for the policy. Create the file: `./config-policies/docker_test.yaml`.
+. Copy the following into the new `docker_test.yaml` file you just made:
++
+[source,yaml]
+----
+# Top level tests must have keys prefixed with `test_`
+test_minimum_remote_docker_version:
+  # Create the input snippet that will be run against the policy. In the context of config policies, the input corresponds
+  # to CircleCI's config.yml
+  input:
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+
+  # Specify the decision we expect to get from the policy. Fields we expect to be empty can be omitted.
+  decision: &root_decision # optionally you can use a yaml anchor to reuse this decision as a base in subcases below.
+    status: PASS
+    enabled_rules:
+      - check_min_remote_docker_version
+
+  # It is totally valid to write more tests at the top level with keys prefixed with `test_`, however it is often practical
+  # to create subcases hierarchically using the cases field.
+  cases: # subcases do not need to begin with `test_`
+    greater:
+      # the subcase input will be *merged* into the parent input
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 21.0.0
+      # We specify the new expectation for the decision. In this case it is the same as the parent case.
+      decision: *root_decision
+
+    # here we finally write the case where it fails
+    lesser:
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 20.0.0
+      # this test expectation is based off of the root_decison anchor but overrides it with values we expect.
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_min_remote_docker_version
+            reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+----
+
+. Run the `test` command against the `config-policies` directory containing two policies and tests:
++
+[source,shell]
+----
+circleci policy test ./config-policies
+----
++
+Expected output. The tests have started to fail:
++
+[source,shell]
+----
+FAIL    test_minimum_remote_docker_version    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+-    "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+-    "status": "HARD_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/greater    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+-    "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+-    "status": "HARD_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/lesser    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+     "hard_failures": [
+        {"reason":"job \"example\": remote docker version \"20.0.0\" is less than minimum required \"20.10.11\"","rule":"check_min_remote_docker_version"},
+-      {"reason":"version must be defined","rule":"check_version"}
+     ],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "status": "PASS"
+   }
+FAIL    test_version_check/absent_version    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check/inferior_version    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be at least 2.1 but got 1","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check/version_wrong_type    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be a number","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+fail    config-policies    0.002s
+
+0/7 tests passed (0.002s)
+Error: unsuccessful run
+----
+
+Adding a new policy to the bundle added a new rule, which led to the failures. The decision in two ways:
+
+- A new rule was added to the `enabled_rules` field
+- A new `soft_failure` occurs because not all of the tests specify the configuration `version` as it is not needed for the Docker version policy.
+
+The following section introduces policy file structure best practices for managing your policies, to avoid this problem.
+
+[#manage-policy-test-file-structure]
+== Manage policy test file structure
+
+When the `circleci policy test` command is pointed at a folder, for example `./config-policies`, it will pick up every `*_test.yaml` file in that folder, and run those tests against the policy **rooted** at that folder.
+
+It is best-practice to use a file structure that allows you to write stable tests for individual policies, as well as tests for the full policy bundle, as follows:
+
+[source,shell]
+----
+├── config-policies/
+│   ├── policy_test.yaml
+│   ├── policy1/
+│   │   ├── policy1.rego
+│   │   ├── policy1_test.yaml
+│   ├── policy2/
+│   │   ├── policy2.rego
+│   │   ├── policy2_test.yaml
+----
+
+It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subdirectory with its tests. This way each subdirectory will run with a sub-bundle and the tests defined within it.
+
+. Update the file structure:
++
+[source,shell]
+----
+├── config-policies/
+│   ├── docker/
+│   │   ├── docker.rego
+│   │   ├── docker_test.yaml
+│   ├──version/
+│   │   ├── version.rego
+│   │   ├── version_test.yaml
+----
+
+. Run all tests including those in subdirectories by appending `/...` to the test path:
++
+[source,shell]
+----
+circleci policy test ./config-policies/...
+----
++
+Expected output. Tests are passing again:
++
+[source,shell]
+----
+?     config-policies            no tests
+ok    config-policies/docker     0.000s
+ok    config-policies/version    0.000s
+
+7/7 tests passed (0.001s)
+----
+
+. To build more confidence, best practice is to create a top level test that will use the entire policy bundle, similar to an integration or end-to-end test.
+. Create a new test file: `./config-policies/policy_test.yaml`
+. Copy the following into your `policy_test.yaml` file:
++
+[source,yaml]
+----
+test_policy:
+  input:
+    version: 2.1
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+  decision: &root_decision
+    status: PASS
+    enabled_rules:
+      - check_min_remote_docker_version
+      - check_version
+  cases:
+    bad_remote_docker:
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 1.0.0
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_min_remote_docker_version
+            reason: 'job "example": remote docker version "1.0.0" is less than minimum required "20.10.11"'
+
+    bad_version:
+      input:
+        version: 1.0
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be at least 2.1 but got 1
+
+test_break_all_rules:
+  input:
+    version: 1.0
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.0.0
+  decision:
+    <<: *root_decision
+    status: HARD_FAIL
+    hard_failures:
+      - rule: check_min_remote_docker_version
+        reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+      - rule: check_version
+        reason: version must be at least 2.1 but got 1
+----
+
+. Run the full set of tests again in verbose mode:
++
+[source,shell]
+----
+circleci policy test ./config-policies/...
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    config-policies            0.001s
+ok    config-policies/docker     0.001s
+ok    config-policies/version    0.001s
+
+11/11 tests passed (0.003s)
+----
+
+[#use-metadata-with-tests]
+== Use metadata with tests
+
+Metadata can be specified similarly to `input` using the `meta` key when writing tests.
+
+As an example, suppose we want to exclude certain projects from the version rule above.
+
+. We can disable a rule for a specific project by using the `project_id`. Modify the `enable_rule` statement in the `version.rego` file, as follows:
++
+[source.rego]
+----
+exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
+
+enable_rule["check_version"] { data.meta.project_id != exempt_project }
+----
+
+. Add a test for this to the `version_test.yaml` file. First specify metadata to test the exemption. Add the following to the end of the file:
++
+[source,yaml]
+----
+test_version_check:
+  input:
+    version: 2.1
+  meta:
+    project_id: some_project_id
+  decision: &root
+    status: PASS
+    enabled_rules: [check_version]
+----
+
+. Add a case to `version_test.yaml` to test you get a PASS when using the exempt project ID:
++
+[source,yaml]
+----
+  cases:
+    exempt_project:
+      meta:
+        project_id: a944e13e-8217-11ed-8222-cb68ef03c1c6
+
+      # For this decision we expect no enabled rules
+      decision:
+        status: PASS
+----
+
+. Run the tests again to see the results:
++
+[source,shell]
+----
+circleci policy test ./config-policies/version -v
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_version_check                       0.000s
+ok    test_version_check/absent_version        0.000s
+ok    test_version_check/exempt_project        0.000s
+ok    test_version_check/inferior_version      0.000s
+ok    test_version_check/version_wrong_type    0.000s
+ok    config-policies/version                  0.000s
+
+5/5 tests passed (0.000s)
+----
+
+NOTE: Modifying the version policy will also affect the top level tests, so the `meta` element will also need to be added to `policy_test.yaml`.
+
+[#opa-tests]
+== OPA tests
+
+OPA also has a way of specifying tests directly within a rego document. Read more about it in the link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA docs].
+
+OPA evaluates rules that start with `test_` and expects the output to be truthy. The `circleci policy test` command runs the OPA tests and reports them as `<opa.tests>`.
+
+To illustrate this, the following steps show how to create a _helper_ function including some OPA tests, and run the `circleci tests` command to see the results of those tests.
+
+. Create a directory for helper functions, if you haven't already:
++
+[source,shell]
+----
+mkdir ./config-policies/helpers
+----
+
+. Create a file for the helper function: `./config-policies/helpers/job_name.rego`.
+
+. Copy the following into `job_name.rego`. This helper takes a job value and returns the job name. The OPA tests can be included at the end of the file too:
++
+[source.rego]
+----
+package org
+
+import future.keywords
+
+policy_name["job_helper_example"]
+
+get_job_name(job) :=
+  job if is_string(job)
+  else := name {
+    is_object(job)
+    count(job) == 1
+    some name, _ in job
+  }
+
+test_get_job_name_string = get_job_name("test-name") == "test-name"
+test_get_job_name_object = get_job_name({"test-name": {}}) == "test-name"
+test_get_job_name_number = value { not get_job_name(42); value = true }
+----
++
+[NOTE]
+====
+In a workflow, job names can either be specified as a string or as objects with one key. The following declares a workflow called main, that has two jobs. The first test is specified as a string literal, and the second, `publish` is an object with the key `publish` that requires the job `test`.
+
+[source,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - test
+      - publish:
+          requires:
+            - test
+
+----
+====
+
+. Run `circleci policy test` to see how any OPA tests that the policy contains are run:
++
+[source,shell]
+----
+circleci policy test ./config-policies/helpers
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    <opa.tests>         0.001s
+?     config-policies/helpers    no tests
+
+3/3 tests passed (0.001s)
+----
+
+. Run in verbose mode to see the OPA tests that were run by name:
++
+[source,shell]
+----
+circleci policy test ./config-policies/helpers -v
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    data.org.test_get_job_name_string    0.000s
+ok    data.org.test_get_job_name_object    0.000s
+ok    data.org.test_get_job_name_number    0.000s
+ok    <opa.tests>                          0.001s
+?     config-policies/helpers                     no tests
+
+3/3 tests passed (0.001s)
+----

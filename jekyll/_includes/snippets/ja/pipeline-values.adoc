@@ -1,0 +1,88 @@
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|変数
+|VCS
+|タイプ
+|値
+
+|`pipeline.id` |GitHub, Bitbucket |文字列 |パイプラインを表す、link:https://en.wikipedia.org/wiki/Universally_unique_identifier[グローバルに一意のID]。
+
+|`pipeline.number` |GitHub, Bitbucket |整数 |パイプラインを表す、プロジェクトで一意の整数の ID.
+
+|`pipeline.project.git_url` |GitHub, Bitbucket |文字列 |現在のプロジェクトがホストされている URL 。 例: `https://github.com/circleci/circleci-docs`
+
+|`pipeline.project.type` |GitHub, Bitbucket |文字列 |小文字の VCS プロバイダ名。 例: “github”、“bitbucket”
+
+|`pipeline.git.tag` |GitHub, Bitbucket |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。
+
+|`pipeline.git.branch` |GitHub, Bitbucket |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。
+
+|`pipeline.git.revision` |GitHub, Bitbucket |文字列 |現在ビルドしている長い git SHA（４０文字）
+
+|`pipeline.git.base_revision` |GitHub, Bitbucket |文字列 |現在ビルドしているものより前のビルドの長い git SHA (40 文字) 注:  多くの場合、`pipeline.git.base_revision` は、現在実行しているパイプラインより前のパイプラインを実行する SHA ですが、いくつか注意事項があります。 ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
+
+|`pipeline.trigger_source` |GitHub, Bitbucket |文字列 |パイプラインをトリガーするソース、現在の値は `webhook`、`api`、`scheduled_pipeline` です。
+
+|`pipeline.schedule.name` |GitHub, Bitbucket |文字列 |パイプラインのスケジュール実行の場合はスケジュール名です。 他のソースがこのパイプラインをトリガーすると、値は空の文字列になります。
+
+|`pipeline.schedule.id` |GitHub, Bitbucket |文字列 |パイプラインのスケジュール実行の場合は当該スケジュールの一意の ID です。 他のソースがこのパイプラインをトリガーすると、値は空の文字列になります。
+
+|`pipeline.trigger_parameters.circleci.trigger_id` |GitLab | |イベントを受信したトリガーの ID
+
+|`pipeline.trigger_parameters.circleci.config_source_id` |GitLab | |設定ソースの ID
+
+|`pipeline.trigger_parameters.circleci.trigger_type` |GitLab | |GitLab
+
+|`pipeline.trigger_parameters.circleci.event_time` |GitLab | |CircleCI のイベント受信のタイムスタンプ
+
+|`pipeline.trigger_parameters.circleci.event_type` |GitLab | |push、pull request、manual など
+
+|`pipeline.trigger_parameters.circleci.project_id` |GitLab | |CircleCI のプロジェクト ID
+
+|`pipeline.trigger_parameters.circleci.actor_id` |GitLab | |CircleCI のユーザー ID
+
+|`pipeline.trigger_parameters.gitlab.type` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.project_id` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.ref` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.checkout_sha` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.user_id` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.user_name` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.user_username` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.user_avatar` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.repo_name` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.repo_url` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.web_url` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.commit_sha` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.commit_title` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.commit_message` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.commit_timestamp` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.commit_author_name` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.commit_author_email` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.total_commits_count` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.branch` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.default_branch` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.x_gitlab_event_id` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+
+|`pipeline.trigger_parameters.gitlab.is_fork_merge_request` |GitLab | |GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhook] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
+|===

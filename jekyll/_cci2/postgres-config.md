@@ -1,32 +1,27 @@
 ---
 layout: classic-docs
 title: "Database Configuration Examples"
-short-title: "Database Configuration Examples"
 description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
-order: 35
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
 ---
 
-This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
+This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
 
-* TOC
-{:toc}
+{% include snippets/docker-auth.md %}
 
 ## Example CircleCI configuration for a rails app with structure.sql
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
 If you are migrating a Rails app configured with a `structure.sql` file make
 sure that `psql` is installed in your PATH and has the proper permissions, as
-follows, because the circleci/ruby:2.4.1-node image does not have psql installed
+follows, because the cimg/ruby:3.0-node image does not have psql installed
 by default and uses `pg` gem for database access.
 
-{% raw %}
-
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
@@ -34,10 +29,7 @@ jobs:
     # Primary container image where all commands run
 
     docker:
-      - image: circleci/ruby:2.4.1-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/ruby:2.6-node
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -45,12 +37,9 @@ jobs:
 
     # Service container image available at `host: localhost`
 
-      - image: circleci/postgres:9.6.2-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/postgres:14.0
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
 
     steps:
@@ -59,7 +48,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
             - rails-demo-
 
       # Bundle install dependencies
@@ -71,7 +60,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
 
@@ -90,15 +79,13 @@ jobs:
           path: /tmp/test-results
 ```
 
-{% endraw %}
-
 **Note:** An alternative is to build your own image by extending the current image,
 installing the needed packages, committing, and pushing it to Docker Hub or the
 registry of your choosing.
 
 ### Example environment setup
 {: #example-environment-setup }
-{:.no_toc}
+
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
@@ -108,26 +95,20 @@ You must declare your database configuration explicitly because multiple pre-bui
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/appName
     docker:
-      - image: ruby:2.3.1-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/ruby:2.6
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
+      # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
-      - image: postgres:9.6-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/postgres:14.0
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
@@ -150,25 +131,17 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 ## Example go app with postgresql
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
-
-{% raw %}
+The following configuration example is taken from the CircleCI [Go demo app](https://github.com/CircleCI-Public/circleci-demo-go).
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.12
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: circleci/postgres:9.6-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
+      - image: cimg/go:1.12
+      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
+      - image: cimg/postgres:14.0
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -182,7 +155,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
+            - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
 
       - run:
           name: Get dependencies
@@ -212,7 +185,7 @@ jobs:
       - run: make
 
       - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
+          key: go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
           paths:
             - "/go/pkg/mod"
 
@@ -237,26 +210,20 @@ jobs:
           path: /tmp/test-results
 ```
 
-{% endraw %}
-
 ## Example mysql project.
 {: #example-mysql-project }
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
 ```yaml
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: circleci/mysql:8.0.4
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/php:8.1-browsers # The primary container where steps are run
+      - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -283,7 +250,6 @@ jobs:
             mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
             mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build
@@ -386,4 +352,4 @@ workflows:
 {: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+Refer to the [Configuring Databases]({{ site.baseurl }}/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

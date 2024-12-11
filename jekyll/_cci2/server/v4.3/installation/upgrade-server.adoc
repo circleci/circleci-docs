@@ -1,0 +1,160 @@
+---
+contentTags:
+  platform:
+    - Server v4.3
+    - Server Admin
+noindex: true
+---
+= Upgrade server
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "This document lists the steps required to upgrade a CircleCI server v4.3 installation."
+:icons: font
+:toc: macro
+:toc-title:
+
+This page describes the steps needed to upgrade your CircleCI server installation to v4.3.
+
+This upgrade to v4.3 is a disruptive process and downtime is expected. A successful deployment will update the web app.
+
+[#path]
+== Upgrade paths
+
+We recommend that you **do not** skip releases when upgrading, however some patch releases can be skipped. Your upgrade path will depend on your current version, and the currently available version releases.
+
+When upgrading from one minor version to the next, ensure your upgrade path includes the last patch release for your current minor version.
+
+To see some common upgrade path options, see link:https://support.circleci.com/hc/en-us/articles/15819961443483-Server-4-x-Upgrade-Path[this support article].
+
+[#notes]
+== Notes on changes in v4.3
+
+Note the following significant changes in server v4.3.
+
+[#dlc]
+=== Docker layer caching (or DLC)
+
+* Old DLC volumes will not be carried over and need to be wiped manually
+* Projects that stop using DLC will not delete final DLC cache without manual intervention
+* DLC now runs through S3 and GCS instead of SSD Volumes
+* If AWS S3 is used for xref:phase-1-prerequisites#s3-storage[object storage], the use of Docker layer caching (DLC) requires link:https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html[versioning to be enabled] on the bucket.
+
+[#machine]
+=== Machine jobs
+
+* Machine jobs will now run through _machine provisioner_
+* When migrating `vm-gc` will need to clean up all machines left running before it is removed. All other `vm-service` related pods can be removed during migration first. If this is not followed, `vm-service` machines will not be cleaned up without manual intervention. This can alternatively be done by manually cleaning up remaining VMs before starting machine provisioner.
+* Machine and remote Docker jobs no longer flow through Nomad, and they run completely in a single machine. Nomad is **not** required to run machine jobs.
+* If deploying in a specific zone need to specify subnetwork for GCP
+* IAM users have changed names to end with `machine-provisioner` instead of `vm-service` so some users might need to be altered.
+
+[#docker-jobs]
+=== Docker jobs
+
+* Run through Nomad, but are orchestrated through `docker-provisioner`
+
+[#storage]
+=== Storage
+
+* Excluding DLC, historical artifacts will continue to be supported in the new execution system with no user changes
+
+[#postgresql]
+=== PostgreSQL
+
+* The PostgreSQL image will be updated during this release, which will cause a short downtime.
+
+[#workflows-conductor]
+=== Workflows conductor
+
+* A `workflows-conductor` data migration will run as a job in the background after your upgrade. The migration processes projects in batches of 1000 and sleeps for 60 seconds before starting another. Processing time for a batch depends on the MongoDB and PostgreSQL data stores, but in our production environment, a batch of 1000 projects took around 6 seconds.
+* Ensure that your CircleCI server v4.3 installation is left running until after the migration has completed. You can confirm that the migration has completed by checking the logs of `workflows-conductor-event-consumer`. There will be a `starting next-build-seq-migration` log message with `project_count=0`
+
+[#vault]
+=== Vault
+
+* We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here], and includes a convenience script to move existing secrets. You should complete the migration to Tink on your v4.2.x installation before backing up your server installation in preparation for upgrading to v4.3. Customers that do not perform this step may have issues restoring Vault from backup in v4.3.
+
+
+[#prerequisites]
+== Prerequisites
+
+* Ensure you have access to the Kubernetes cluster in which server is installed.
+* Ensure you have migrated from Vault to Tink on your 4.2.x instance as link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here].
+* Ensure you have set up xref:../operator/backup-and-restore#[Backup and Restore].
+* Ensure there is a recent backup. For more information, see the xref:../operator/backup-and-restore#creating-backups[Backup and Restore] guide.
+
+[#upgrade-steps]
+== Upgrade steps
+
+NOTE: This upgrade is a disruptive process and downtime is expected. Do not attempt to run jobs during this upgrade.
+
+. Ensure your cluster is running a compatible Kubernetes version for this release (1.26 - 1.29).
+
+. Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
+
+. Rename the `vm_service` block in your `values.yml` file to `machine_provisioner`. This block will use the same values as `vm_service` with the followed exceptions:
+** On AWS, tags are no longer formatted as an array and are instead in dictionary format, for example:
++
+[source,yaml]
+----
+machine_provisioner:
+  providers:
+    ec2:
+      ...
+      tags:
+        tag1: "value1"
+        tag2: "value2"
+----
+
+** On GCP, zones are now entered as an array, for example:
++
+[source,yaml]
+----
+machine_provisioner:
+  providers:
+    gcp:
+      ...
+      zones:
+        - <gcp-zone1>
+        - <gcp-zone2>
+----
+
+. Update vm-service IAM Policy (machine-provisioner requires slightly different permissions). See the xref:phase-3-execution-environments#set-up-authentication[Set up authentication] page for more details.
+
+. Update the vm-service trust policy. The current policy is directed at the `vm-service` service account. Change this to `machine-provisioner` as below:
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "<OIDC_PROVIDER_ARN>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:machine-provisioner"
+        }
+      }
+    }
+
+  ]
+}
+----
+
+. Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
++
+[source,shell]
+helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+. Perform the upgrade:
++
+[source,shell]
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+. Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
+
+. Remove port 2376 from your `vm-service` security group as it is no longer needed.

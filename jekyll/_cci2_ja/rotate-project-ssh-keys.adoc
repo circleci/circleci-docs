@@ -1,0 +1,138 @@
+---
+
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+  vcs:
+    - github
+    - bitbucket
+    - gitlab
+sectionTags:
+  github:
+    - "#github-projects"
+    - "#rotate-a-deploy-key-github"
+    - "#rotate-a-user-key-github"
+    - "#rotate-an-additional-SSH-key-github"
+  bitbucket:
+    - "#bitbucket-projects"
+    - "#rotate-a-deploy-key-bitbucket"
+    - "#rotate-a-user-key-bitbucket"
+    - "#rotate-an-additional-SSH-key-bitbucket"
+  gitlab:
+    - "#gitlab-projects"
+    - "#rotate-an-SSH-key-gitlab"
+    - "#rotate-an-additional-SSH-key-gitlab"
+---
+= プロジェクトの SSH キーをローテーションする
+:page-layout: classic-docs
+:page-liquid:
+:page-description: プロジェクトの SSH キーをローテーションする方法の詳細をガイドする方法。
+:icons: font
+:toc: macro
+
+:toc-title:
+:experimental:
+
+プロジェクトSSHキーの使用を取り消すには、以下の手順でキーペアをローテーションしてください。 サポートされているバージョンコントロールシステム（VCS）ごとに、手順を用意しましたのでご参照ください。
+
+プロジェクトSSHキーを使用する場合、CircleCIはプライベートキーを保持しており、ターゲットシステム（VCS、マシン、または他のSSHベースのシステムなど）は、認証システムを介しプライベートキーと一致するパブリックキーを持っています。 SSHキーをローテーションするには、プライベートキーとパブリックキーの両方を削除する必要があります。
+
+[#github-projects]
+== GitHubプロジェクト
+
+プロジェクト設定**（Project Settings）> SSHキー（SSH Keys）**からプロジェクトに設定された SSH キーをご確認いただけます。
+
+[#rotate-a-deploy-key-github]
+=== デプロイキーをローテーションする
+
+. ローテーションするため、フィンガープリントを含めた現在のキー情報をメモしておきます。 また、キーネームをクリックすると、関連する GitHub ページが開き、パブリックキーのリストをご確認いただけます。
+. Xをクリックして、デプロイキーを削除します。
+. デプロイキーの追加（**Add Deploy Key**） をクリックして、新しいデプロイキーを追加します。
+. GitHub のリポジトリプロジェクト設定に移動し、一致するパブリックキーを削除します。 GitHubのURLは通常、 `https://github.com/<org>/<project>/settings/keys`です。ステップ1でキーネームをクリックした場合は、すでにそのページが開いている可能性があります。 キーはCircleCIという名前になっています。 ローテーション前に作成された `CircleCI `というタイトルのキーは削除することが推奨されます。 古いキーが削除されると、新しいパブリックSSHキーが自動的に追加されます。（キーが表示されない場合は、ページを更新してください。）
+
+[#rotate-a-user-key-github]
+=== ユーザーキーをローテーションする
+
+プロジェクトにユーザーキーを設定している場合は、以下の手順に従ってください。
+
+. ローテーションするため、フィンガープリントを含めた現在のキー情報をメモしておきます。 また、キーネームをクリックすると、関連する GitHub ページが開き、パブリックキーのリストをご確認いただけます。
+. **X**をクリックして、ユーザーキーを削除します。
+. ユーザーキーの追加（**Add User Key**） をクリックし、新しいユーザーキーを追加します。
+. GitHub のユーザー設定に移動して、一致するパブリックキーを削除します。 GitHubのURLは通常、`https://github.com/settings/keys` です。ステップ1でキーネームをクリックした場合は、すでにそのページが開いている可能性があります。 キーはCircleCIという名前になっています。ローテーション前に作成された`CircleCI`というタイトルのキーは削除することが推奨されます。 古いキーが削除されると、新しいパブリックSSHキーが自動的に追加されます。（キーが表示されない場合は、ページを更新してください。）
+
+CAUTION: ユーザーキーネームにはプロジェクト名が含まれますが、オーガニゼーション内のものより多くのプロジェクトにアクセスできる場合があります。
+
+NOTE: オーガニゼーションSSOを使用する場合、現在どのオーガニゼーションが認証されているかメモをしておいてください 新しく作成したキーにアクセスする場合は、再認証が必要です。
+
+[#rotate-an-additional-SSH-key-github]
+=== 追加のSSHキーをローテーションする
+
+プロジェクトで追加のSSHキーを使用している場合は、以下の手順に従ってください。
+
+. どのターゲットシステムで使われているかを把握するため、またフィンガープリントを記録しておくために、既存のキーをメモしてください。 ターゲットはVCS、マシン、または他のSSHベースのシステムである可能性があります。
+. **X** をクリックして、SSHキーを削除します。
+. OpenSSH（`ssh-keygen -t ed25519 -C "your_email@example.com"`）などを使い、キーを手動で再作成します。 手順はGitHubのドキュメントに記載されています。
+. 追加SSHキー（Additional SSH Keys）セクションのSSHキーを追加（ **Add SSH Key **）をクリックして、CircleCIに新しいキーを追加します。 ホスト名は、削除した古いキーと同じもので大丈夫です。 上の手順で作成したプライベートキーに貼り付け、再度SSHキーを追加（**Add SSH Key**）をクリックし確定します。
+. 古いキーを使用するための認証をターゲットシステムから削除します。 通常、パブリックキーはターゲットシステムで認証されるため、ターゲットシステムによって設定が異なります。
+. 新しいキーを使用するためのターゲットシステムを許可します。
+
+
+[#bitbucket-projects]
+== Bitbucketプロジェクト
+
+プロジェクト設定（**Project Settings**）> SSHキー（**SSH Keys**）からプロジェクトに設定された SSH キーをご確認いただけます。
+
+[#rotate-a-deploy-key-bitbucket]
+=== デプロイキーをローテーションする
+
+. ローテーションするため、現在のキーの情報をメモしておきます。
+. **X** をクリックして、デプロイキーを削除します。
+. デプロイキーの追加（**Add Deploy Key**）をクリックして、新しいデプロイキーを追加します。
+. Bitbucket のプロジェクト管理者のアクセスキー設定に移動して、一致するパブリックキーを削除します。 Bitbucket の URL は通常`https://bitbucket.org/<org>/<project>/admin/access-keys/` です。 キーは `CircleCI` という名前になっています。 フィンガープリントのハッシュは表示されないので、ローテーション前に作成された`CircleCI` というタイトルのキーは削除することが推奨されます。 古いキーが削除されると、新しいパブリックSSHキーが自動的に追加されます。（キーが表示されない場合は、ページを更新してください。）
+
+[#rotate-a-user-key-bitbucket]
+=== ユーザーキーをローテーションする
+
+. ローテーションするため、現在のキー情報をメモしておきます。
+. **X** をクリックして、ユーザーキーを削除します。
+. xref:bitbucket-integration/#create-a-bitbucket-user-key[Bitbucketのユーザーキーを作成する手順]に従って、新しいユーザーキーを追加してください。
+. Bitbucketのユーザーアカウント設定に移動し、一致するパブリックキーを削除してください。 BitbucketのURLは、通常、`https://bitbucket.org/account/settings/ssh-keys/` です。 ユーザーがキーに名前を付けるため、キーネームに`CircleCI`という文字列が含まれているかどうかはCircleCIにはわかりません。 ローテーション前に作成されたキーは削除することが推奨されます。
+
+[#rotate-an-additional-SSH-key-bitbucket]
+=== 追加のSSHキーをローテーションする
+
+. どのターゲットシステムで使われているかを把握するため、またフィンガープリントを記録しておくために、既存のキーのホストネームをメモしてください。 ターゲットはVCS、マシン、または他のSSHベースのシステムである可能性があります。
+. **X **をクリックして、SSHキーを削除します。
+. OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`) などを使い、キーを手動で再作成します。 手順はlink:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[BitBucket のドキュメント]に記載されています。
+. 追加SSHキー（Additional SSH Keys）セクションのSSHキーを追加（**Add SSH Key**）をクリックして、CircleCIに新しいキーを追加します。 ホスト名は、削除した古いキーと同じもので大丈夫です。 上の手順で作成したプライベートキーに貼り付け、再度SSHキーを追加（**Add SSH Key**）をクリックし確定します。
+. 古いキーを使用するための認証をターゲットシステムから削除します。 通常、パブリックキーはターゲットシステムで認証されるため、ターゲットシステムによって設定が異なります。
+. 新しいキーを使用するためのターゲットシステムを許可します。
+
+[#gitlab-projects]
+== GitLabプロジェクト
+
+プロジェクト設定**（Project Settings）> SSHキー（SSH Keys）**からプロジェクトに設定された SSH キーをご確認いただけます。 GitLab  と CircleCI の連携では、デプロイキーやユーザーキーは使用しません。
+
+[#rotate-an-SSH-key-gitlab]
+=== SSHキーをローテーションする
+
+. 既存のキーとフィンガープリントをメモして、ターゲットシステム（通常 `gitlab.com`）と合わせられるようにします。
+. **X** をクリックして、SSHキーを削除します。
+. OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`) などを使い、キーを手動で再作成します。 手順はlink:https://docs.gitlab.com/ee/user/ssh.html[GitLabのドキュメント]に記載されています。
+. SSHキーを追加（**Add SSH Key**）をクリックしてプライベートキーを追加します。 キーに`gitlab.com` という名前をつけることが推奨されます。 上のステップで作成したプライベートキーを貼り付け、SSHキーを追加（**Add SSH Key**）をもう一度クリックして確定します。
+. **設定（Settings） >レポジトリ （Repository）**を開き、GitLabプロジェクトのリポジトリに関する設定から**デプロイキー（Deploy keys）**のセクションを展開します。 キーは `circleci-pipeline-triggers` という名前になっていますので、フィンガープリントと一致させてください。 ローテーション前に作成されたキーは削除することが推奨されます。
+. 新しいキーを追加してください。 一貫性を保つために、タイトルセクションの `circleci-pipeline-triggers` にキーの名前を付けることをお勧めいたします。 パブリックキーを貼り付け、**キーの追加（Add key）** をクリックして確定します。
+
+[#rotate-an-additional-SSH-key-gitlab]
+=== 追加の SSH キーをローテーションする
+
+GitLab に紐づかないSSH キーを追加で使っている場合は以下の手順に従ってください。
+
+. どのターゲットシステムで使われているかを把握するため、またフィンガープリントを記録しておくために、既存のキーのホストネームをメモしてください。 ターゲットはVCS、マシン、または他のSSHベースのシステムである可能性があります。
+. **X** をクリックして、SSHキーを削除します。
+. OpenSSH  (`ssh-keygen -t ed25519 -C "your_email@example.com"`) などを使い、キーを手動で再作成します。 手順は link:https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair[GitLabのドキュメント]に記載されています。
+. 追加SSHキー（Additional SSH Keys）セクションの SSHキーを追加（**Add SSH Key**）をクリックして、CircleCI に新しいキーを追加してください。 ホスト名は、削除した古いキーと同じもので大丈夫です。 上の手順で作成したプライベートキーに貼り付け、再度SSHキーを追加（**Add SSH Key**）をクリックし確定します。
+. 古いキーを使用するための認証をターゲットシステムから削除します。 通常、パブリックキーはターゲットシステムで認証されるため、ターゲットシステムによって設定が異なります。
+. 新しいキーを使用するためのターゲットシステムを許可します。

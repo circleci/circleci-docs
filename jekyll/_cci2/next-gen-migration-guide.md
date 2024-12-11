@@ -4,15 +4,11 @@ title: "Migrating to next-gen Convenience Images"
 short-title: "Migrating to next-gen Convenience Images"
 description: "A guide for migrating from using legacy images to next-gen images."
 order: 30
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
 ---
-
-* TOC
-{:toc}
-
 
 ## Overview
 {: #overview }
@@ -21,8 +17,15 @@ In 2020 CircleCI introduced the next generation (next-gen) of convenience images
 
 Moving from a legacy to next-gen image requires a change to the namespace. All legacy images have a Docker namespace of `circleci`, while next-gen images have a Docker namespace of `cimg`. For example, migrating from the legacy Ruby or Python image to the respective next-gen image can be done as follows:
 
-* `circleci/ruby:2.3.0` -> `cimg/ruby:2.3.0`
-* `circleci/python:3.8.4` -> `cimg/python:3.8.4`
+```diff
+- circleci/ruby:2.7.4
++ cimg/ruby:2.7.4
+```
+
+```diff
+- circleci/python:3.8.4
++ cimg/python:3.8.4
+```
 
 ## Changes
 {: #changes }
@@ -78,10 +81,10 @@ With the base image, at least two LTS releases and non-EOL’d standard releases
 {: #troubleshooting }
 
 When migrating to a next-gen image, there might be some software issues. Common issues include:
-* A library you were using now has a different version. 
+* A library you were using now has a different version.
 * An apt package is no longer pre-installed. In this scenario simply install that package using:
 
-```bash
+```shell
 sudo apt-get update && sudo apt-get install -y <the-package>
 ```
 

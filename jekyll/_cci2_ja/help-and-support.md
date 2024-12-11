@@ -1,11 +1,8 @@
 ---
 layout: classic-docs
-title: "ヘルプとサポート"
-short-title: "ヘルプとサポート"
-description: "利用可能なサポート オプションの一覧"
-categories:
-  - reference
-order: 3
+title: ヘルプとサポート
+short-title: ヘルプとサポート
+description: 利用可能なサポート オプションの一覧
 ---
 
 ドキュメントの内容に不備・不足があり、 誠に申し訳ありません。
@@ -21,4 +18,3 @@ CircleCI のドキュメント サイトでは、以下の 2 つの方法で、�
 {: #make-a-pull-request }
 
 CircleCI のドキュメント リポジトリでは、具体的な編集内容のご提案もお待ちしております。 [こちらのガイド](https://github.com/circleci/circleci-docs/blob/master/CONTRIBUTING.md#pull-requests)に従ってドキュメントの変更や追加をご提案ください。
-

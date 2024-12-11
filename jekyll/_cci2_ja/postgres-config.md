@@ -1,26 +1,20 @@
 ---
 layout: classic-docs
 title: "データベースの設定例"
-short-title: "データベースの設定例"
-description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
-order: 35
-version:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+description: "structure.sql を使用した Rails アプリ、PostgreSQL を使用した Go アプリ、MySQL プロジェクト用の PostgreSQL/Rails や MySQL/Ruby を使ったデータベースの config.yml ファイルの設定例を紹介します。"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
-
-* 目次
-{:toc}
+このドキュメントでは、PostgreSQL/Rails および MySQL/Ruby を使用したデータベースの [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの設定例を紹介します。
 
 ## structure.sql を使用した Rails アプリケーション用の CircleCI 設定例
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
-`structure.sql` ファイルを使用して設定した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、以下のように適切な権限が設定されていることを確認してください。これは、circleci/ruby:2.4.1-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
-
-{% raw %}
+`structure.sql` ファイルを使用して設定した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、cimg/ruby:3.0-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
 
 ```yaml
 version: 2
@@ -28,67 +22,66 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # すべてのコマンドを実行するプライマリコンテナのイメージです。
+    # Primary container image where all commands run
+
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: cimg/ruby:2.6-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # [host: localhost]にあるサービスコンテナイメージです。
+    # Service container image available at `host: localhost`
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
 
     steps:
       - checkout
 
-      # バンドルキャッシュを復元します。
+      # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
             - rails-demo-
 
-      # 依存関係をバンドルインストールします。
+      # Bundle install dependencies
       - run:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # バンドルキャッシュを保存します。
+      # Store bundle cache
       - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
 
       - run:
-          name: データベースのセットアップ
+          name: Database Setup
           command: |
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
       - run:
-          name: 並列 RSpec
+          name: Parallel RSpec
           command: bin/rails test
 
-      # アーティファクトを保存します。
+      # Save artifacts
       - store_test_results:
           path: /tmp/test-results
 ```
 
-{% endraw %}
-
-**注意:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker ハブなどのレジストリにプッシュしてください。
+**注:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker ハブなどのレジストリにプッシュしてください。
 
 ### 環境のセットアップ例
 {: #example-environment-setup }
@@ -107,32 +100,31 @@ jobs:
   build:
     working_directory: ~/appName
     docker:
-      - image: ruby:2.3.1-jessie
+      - image: cimg/ruby:2.6
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # 以下の例では公式のPostgres 9.6 イメージを使用していますが、 いくつかの機能強化とカスタマイズが加えられた
-      # circleci/postgres:9.6 も使用可能です。 どちらのイメージも使用できます。
-      
-      - image: postgres:9.6-jessie
+      # The following example uses the official postgres 9.6 image, you may also use cimg/postgres:9.6
+      # which includes a few enhancements and modifications. どちらのイメージも使用できます。
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
     steps:
       - checkout
       - run:
-          name: Ruby の依存関係をインストール
+          name: Install Ruby Dependencies
           command: bundle install
       - run:
-          name: データベースのセットアップ
+          name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
             bundle exec rake db:migrate
@@ -145,22 +137,20 @@ jobs:
 ## Go アプリケーションと PostgreSQL の設定例
 {: #example-go-app-with-postgresql }
 
-以下の設定例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)を参照してください。
-
-{% raw %}
+以下の設定例に関する詳しい説明や、アプリケーションのパブリックコードリポジトリについては、[Go 言語ガイド](https://github.com/CircleCI-Public/circleci-demo-go)を参照してください。
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go イメージは: https://hub.docker.com/r/circleci/golang/をご覧ください。
-      - image: circleci/golang:1.12
+      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
+      - image: cimg/go:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL イメージはt: https://hub.docker.com/r/circleci/postgres/をご覧ください。
-      - image: circleci/postgres:9.6-alpine
+      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
+      - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -177,28 +167,28 @@ jobs:
 
       - restore_cache:
           keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
+            - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
 
       - run:
-          name: 依存関係の取得
+          name: Get dependencies
           command: |
             go get -v
 
       - run:
-          name: Get go-junit-report を取得してCircleCI でテストのタイミングを設定する
+          name: Get go-junit-report for setting up test timings on CircleCI
           command: |
             go get github.com/jstemmer/go-junit-report
-            # go.mod からgo-junit-report を削除します。　
+            # Remove go-junit-report from go.mod
             go mod tidy
 
-      #  Postgres が準備できるまで待機し、その後処理します。
+      #  Wait for Postgres to be ready before proceeding
       - run:
-          name: Postgres が準備できるまで待機
+          name: Waiting for Postgres to be ready
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          name: ユニットテストの実行
-          environment: # データベース URL 用の環境変数と移行ファイルへのパスを指定します。
+          name: Run unit tests
+          environment: # environment variables for the database url and path to migration files
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: |
@@ -207,12 +197,12 @@ jobs:
       - run: make
 
       - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
+          key: go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
           paths:
             - "/go/pkg/mod"
 
       - run:
-          name: サービスの開始
+          name: Start service
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
@@ -220,7 +210,7 @@ jobs:
           background: true
 
       - run:
-          name: サービスが稼働しているかどうかの確認
+          name: Validate service is working
           command: |
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
@@ -232,23 +222,24 @@ jobs:
           path: /tmp/test-results
 ```
 
-{% endraw %}
-
 ## MYSQL プロジェクトの例
 {: #example-mysql-project }
 
-以下の例では、PHP コンテナと共に、MYSQL をセカンダリ コンテナとしてセットアップしています。
+以下の例では、PHP コンテナと共に、MYSQL をセカンダリコンテナとしてセットアップしています。
 
+{:.tab.mysql_example.Cloud}
 ```yaml
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # ステップを実行するプライマリコンテナです。
+      - image: cimg/php:8.1-browsers # ステップが実行されるプライマリコンテナ
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
-      - image: circleci/mysql:8.0.4
+      - image: cimg/mysql:8.0
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
@@ -261,7 +252,105 @@ jobs:
     steps:
       - checkout
       - run:
-      # プライマリコンテナは MYSQL ではないので、準備ができるまでスリープコマンドを実行します。
+      # プライマリコンテナは MySQL ではないので、準備ができるまでスリープコマンドを実行します。
+          name: MySQL が準備できるまで待機
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: MySQL CLI のインストール; ダミー データのインポート; サンプル クエリの実行
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+```
+
+{:.tab.mysql_example.Server_3}
+```yaml
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.3
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.1-browsers # ステップが実行されるプライマリコンテナ
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+      - image: cimg/mysql:8.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
+    steps:
+      - checkout
+      - run:
+      # プライマリコンテナは MySQL ではないので、準備ができるまでスリープコマンドを実行します。
+          name: MySQL が準備できるまで待機
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: MySQL CLI のインストール; ダミー データのインポート; サンプル クエリの実行
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+```
+
+{:.tab.mysql_example.Server_2}
+```yaml
+# Legacy convenience images (i.e. images in the `circleci/` Docker namespace)
+# will be deprecated starting Dec. 31, 2021. Next-gen convenience images with
+# browser testing require the use of the CircleCI browser-tools orb, available
+# with config version 2.1.
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cimg/php:7.1 # The primary container where steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/mysql:8.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
+    steps:
+      - checkout
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: MySQL が準備できるまで待機
           command: |
             for i in `seq 1 10`;
@@ -314,4 +403,4 @@ VALUES (
 {: #see-also }
 
 
-サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を、[データベースの設定]({{ site.baseurl }}/ja/2.0/databases/)で紹介しています。
+サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を、[データベースの設定]({{ site.baseurl }}/ja/databases/)で紹介しています。

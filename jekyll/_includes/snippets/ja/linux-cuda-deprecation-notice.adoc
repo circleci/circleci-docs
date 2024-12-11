@@ -1,0 +1,1 @@
+NOTE: Linux CUDA イメージの一部は、本日 2023 年 7 月 11 日をもって非推奨となり、2023 年 9 月 30 日をもって永久に利用できなくなります。影響を受けるイメージのリスト、ブラウンアウトのスケジュール、および移行手順については、リンク:https://discuss.circleci.com/t/linux-cuda-deprecation-and-image-policy/48568[Discuss post]を参照してください。

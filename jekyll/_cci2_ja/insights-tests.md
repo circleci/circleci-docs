@@ -1,67 +1,68 @@
 ---
 layout: classic-docs
-title: "テスト インサイト"
-short-title: "テスト インサイトの使用"
-description: "テスト インサイトの使用"
-version:
-  - Cloud
+title: "テストインサイト"
+short-title: "テストインサイトの使用"
+description: "テストインサイトの使用"
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ## 概要
 {: #overview }
 
-Using CircleCI test insights, you are able to analyze your test performance within the most recent executions and identify opportunities for test optimization. To access test insights, select the **Tests** tab on the **Workflow Insights** page.
+CircleCI テストインサイトを使用すると、直近で実行したテストのパフォーマンスを分析し、最適化が必要なテストを把握することができます。 テストインサイトを使用するには、**ワークフローのインサイト**のページで **Tests** タブを選択します。
 
-The next sections go over what test insights are available.
+下記ではご利用いただけるテストインサイト機能について説明します。
 
 ### パフォーマンスの概要
 {: #performance-summary }
 
-The summary section displays test suite performance across your most recent 100 runs. You can view the following:
-- average test per run
-- number of all flaky tests detected
-- failure counts
-- slow run times in test suite
+サマリーグラフには、直近 100 回のワークフロー実行のテストパフォーマンスが表示されます。 以下の項目が確認できます。
+- １回の実行における平均テスト回数
+- 検出された結果が不安定なテストの数
+- 失敗した数
+- テストスイートにおける実行数
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-performance-summary.png)
+![パフォーマンスサマリーの例]({{ site.baseurl }}/assets/img/docs/test-insights-performance-summary.png)
 
-### Most Recent Runs
+### 直近の実行
 {: #most-recent-runs }
 
-The most recent runs chart displays the most recent 100 executions of the test suite. You can hover over each bar to review the following:
-- test count
-- skipped tests
-- success rate of tests
+最新のランチャートには、直近 100 回のテストスイートの実行が表示されます。 各棒グラフにカーソルを合わせると、以下の項目が確認できます。
+- テストの回数
+- スキップされたテスト
+- テストの成功率
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-recent-runs.png)
+![直近の実行例]({{ site.baseurl }}/assets/img/docs/test-insights-recent-runs.png)
 
-### Flaky Tests
+### 結果が不安定なテスト
 {: #flaky-tests }
 
-Flaky tests are tests that fail non-deterministically; they pass and fail due to some state external to the repository. As a result, flaky tests introduce uncertainty to a project’s build state.
+結果が不安定なテストとは、非確定的に失敗するテストのことで、リポジトリの外部の状態によって成功したり失敗したりします。 結果として、プロジェクトのビルド状態に不確実性が生じます。
 
-Test insights detect flaky tests by identifying tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and demonstrate the same behavior on re-runs. Additionally, these types of tests are labeled “FLAKY” throughout the CircleCI app making them easy to identify and fix.
+テストインサイトは、失敗し、14 日間以内に同じコミットに渡されたテストを特定し、結果が不安定なテストを検出します。 確定的なテストは、リポジトリの状態に依存し、再実行においても同じ動作を行います。 更に、このようなテストは、 CircleCI アプリケーション全体で「不安定」というラベルが付けられているため、簡単に特定し、修正できます。
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-flaky.png)
+![結果が不安定なテストのインサイト例]({{ site.baseurl }}/assets/img/docs/test-insights-flaky.png)
 
-### Most Failed Tests
+### 失敗の多いテスト
 {: #most-failed-tests }
 
-You can view the 100 tests with the lowest success rates in their most recent pipeline executions. The table provides the following:
-- test name
-- associated job
-- run time
-- success rate
+直近のパイプライン実行のうち、成功率が低いテスト上位 100 個を確認できます。 以下の項目が表示されます。
+- テスト名
+- 関連付けられているジョブ
+- 実行時間
+- 成功率
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-failed.png)
+![失敗の多いテストの例]({{ site.baseurl }}/assets/img/docs/test-insights-failed.png)
 
-### Slowest Tests
+### 実行速度の遅いテスト
 {: #slowest-tests }
 
-You can view the 100 tests with the longest run times in their most recent pipeline executions. The table provides the following:
-- test name
-- associated job
-- run time
-- success rate
+直近のパイプライン実行のうち、実行速度が遅いテスト上位 100 個を確認できます。 以下の項目が表示されます。
+- テスト名
+- 関連付けられているジョブ
+- 実行時間
+- 成功率
 
-![]({{ site.baseurl }}/assets/img/docs/test-insights-slowest.png)
+![実行速度の遅いテストの例]({{ site.baseurl }}/assets/img/docs/test-insights-slowest.png)
