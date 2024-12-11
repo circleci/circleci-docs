@@ -2,7 +2,7 @@
 contentTags:
   platform:
     - Cloud
-    - Server
+    - Server v4+
 ---
 = Testing LLM-enabled applications through evaluations
 :description: Docs page on setting up LLM evaluations in your CI/CD pipeline

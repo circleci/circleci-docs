@@ -5,8 +5,7 @@ description: How to publish packages to Packagecloud using CircleCI.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 In this how-to guide, you will learn how to configure CircleCI to publish packages to Packagecloud.
