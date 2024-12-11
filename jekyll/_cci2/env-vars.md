@@ -6,8 +6,7 @@ description: Introduction to environment variables in CircleCI
 contentTags:
   platform:
     - Cloud
-    - Server v4.x
-    - Server v3.x
+    - Server v4+
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/

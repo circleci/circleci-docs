@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server 4.x
-  - Server 3.x
+  - Server v4+
 ---
 = Authorize Google Cloud SDK
 :description: How to authorize the Google Cloud SDK

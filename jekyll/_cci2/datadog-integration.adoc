@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Datadog integration
 :page-layout: classic-docs
@@ -32,7 +31,7 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 . In the project settings sidebar, click **Webhooks**
 
-. Click **Add webhook**
+. Select **Add webhook**
 
 . Complete the following fields:
 ** **Webhook name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
@@ -40,7 +39,7 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 ** **Events**: Select **Workflow Completed** and **Job Completed**.
 ** Enable the check: **Certificate verifications**.
 
-. Click **Add Webhook** to save the new webhook.
+. Select **Add Webhook** to save the new webhook.
 
 [#visualize-pipeline-data-in-datadog]
 === Visualize pipeline data in Datadog
