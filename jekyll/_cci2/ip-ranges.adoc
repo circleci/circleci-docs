@@ -57,6 +57,28 @@ workflows:
       - build
 ----
 
+[#example-configuration]
+== Example configuration file using IP ranges using pipeline parameters. 
+
+Parameter support enables more conditional logic on when IP ranges is enabled. 
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    circleci_ip_ranges: << pipeline.parameters.ip_ranges >>
+    docker:
+      - image: cimg/ruby:3.2.2
+    steps:
+      - run: echo “Hello World”
+workflows:
+  build-workflow:
+    jobs:
+      - build
+----
+
 [#list-of-ip-address-ranges]
 == List of IP address ranges associated with feature
 
@@ -106,6 +128,12 @@ These are the IP address ranges for core services (used to trigger jobs, exchang
 
 [#list-of-ip-address-ranges-changelog]
 === List of IP address ranges changelog
+
+==== 2024-11-05
+
+* Added support for parameters.
+
+Use parameters like << pipeline.parameters.ip_ranges >> to determine if IP ranges should be enabled.
 
 ==== 2021-08-23
 
