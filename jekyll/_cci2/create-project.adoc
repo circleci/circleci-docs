@@ -31,6 +31,8 @@ On the **Organization Home** page, check which option you see:
 [#create-a-project]
 === Create a project
 
+NOTE: If you have integrate your code with the xref:github-apps-integration#[CircleCI GitHub App], xref:gitlab-integration#[GitLab], or xref:bitbucket-data-center-integration#[Bitbucket Data Center], the steps in this section apply to you.
+
 Choose steps to follow below, depending on where your code is stored:
 
 [.tab.create-project.GitHub_App]
@@ -215,7 +217,7 @@ CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. Yo
 [#set-up-a-project]
 === Set up a project
 
-NOTE: If you authenticated CircleCI with either the xref:github-integration#[GitHub OAuth app], or xref:bitbucket-integration#[Bitbucket Cloud], the steps in this section apply to you.
+NOTE: If you authenticated CircleCI with either the xref:github-integration#[GitHub OAuth app] or xref:bitbucket-integration#[Bitbucket Cloud], or if you use CircleCI server, the steps in this section apply to you.
 
 Follow these steps to  set up a new project in CircleCI:
 
