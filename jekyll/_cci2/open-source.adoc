@@ -36,3 +36,13 @@ include::runner-init.csv[]
 |===
 --
 
+[.tab.oss-ack.CircleCI_Runner]
+--
+The following 3rd-party open source components are used in the CircleCI self-hosted runner. The CircleCI runner is a utility used to run CirlceCI jobs on self hosted infrastructure. For more information, see the xref:runner-overview#[self-hosted runner overview docs].
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even,format=csv]
+|===
+include::circleci-runner.csv[]
+|===
+--
