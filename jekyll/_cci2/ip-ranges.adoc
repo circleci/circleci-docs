@@ -57,14 +57,19 @@ workflows:
       - build
 ----
 
-[#example-configuration]
-== Example configuration file using IP ranges using pipeline parameters. 
+[#example-configuration-pipeline-parameters]
+== Example configuration file using IP ranges with pipeline parameters.
 
-Parameter support enables more conditional logic on when IP ranges is enabled. 
+Use conditional logic to control when IP ranges is enabled with pipeline parameters.
 
 [,yaml]
 ----
 version: 2.1
+
+parameters:
+  ip_ranges:
+    type: boolean
+    default: false
 
 jobs:
   build:
@@ -160,7 +165,7 @@ To query these, you can use any DNS resolver. Here is an example using `dig` wit
 dig all.knownips.circleci.com A +short
 ----
 
-Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. *30 days notice* will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes. 
+Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. *30 days notice* will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
 
 [#pricing]
 == Pricing
