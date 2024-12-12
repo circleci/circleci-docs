@@ -236,7 +236,7 @@ runner:
 When using `single-task` mode, the runner process will restart while the machine instance will continue. However, you may find it useful to terminate the machine instance itself.
 You can do this on Linux based machines by adding the following to the systemd unit file:
 
-```yaml
+```bash
 ExecStopPost=shutdown now -h
 Restart=no
 User=root
