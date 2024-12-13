@@ -5,8 +5,7 @@ description: "Best practices and considerations when migrating your executor fro
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This document contains some general guidelines and considerations to

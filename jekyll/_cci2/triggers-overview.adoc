@@ -3,8 +3,7 @@ description: "A guide to the various ways to manage pipeline triggering in Circl
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 document-type:
 - Conceptual
 ---
@@ -127,6 +126,8 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 
 [#trigger-a-pipeline-from-a-custom-webhook]
 == Trigger a pipeline from a custom webhook
+
+NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
 
 Follow these steps to set up and test a custom webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
 
