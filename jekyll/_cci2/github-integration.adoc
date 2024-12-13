@@ -308,17 +308,42 @@ After access is granted, CircleCI should behave normally again.
 If you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#using-github-app-functionality]
-== Using GitHub App functionality alongside the GitHub OAuth app
+== Using GitHub App functionality alongside the GitHub OAuth App
 
-xref:github-apps-integration#[CircleCI’s GitHub App integration] offers increased control over which resources in your VCS CircleCI can access, and lets CircleCI access those resources in a more secure manner. Specifically:
+Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration#[CircleCI’s GitHub App integration].
+
+Until October 2024, the CircleCI GitHub App Integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integratie with CircleCI's GitHub OAuth App.**
+The GitHub App and OAuth app **co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:github-apps-integration#currently-not-supported[not yet available] to either of the two integrations (such as xref:scheduled-pipelines#[scheduled pipelines]) or needing to set up and migrate to a new organization.
+
+Some key functionality enabled through the GitHub App integration is:
+
+- The option to have **multiple pipelines in the same project**, each defined in its own YAML file
+- The possibility to set up your pipelines so that the the **config file and the application code are stored in different repositories**
+- A **more flexible trigger system**, with each pipeline having any number of VCS or non-VCS triggers. This includes:
+    - **Non-repo based triggers**: xref:webhooks#custom-webhooks[Custom webhooks] enable triggering builds from any system that can emit webhook events. Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
+    - **Cross-repo triggers**: events in one repository can trigger builds on one or many other repositories
+    - [Coming soon] **More GitHub events as triggers**: Pipelines can be set up to run on events different than “push”, with more powerful customization of trigger conditions. 
+
+[#installing-github-app-alongside-github-oauth-app]
+### Installing GitHub App alongside the GitHub OAuth App
+
+Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
+
+To get started, go to Project Settings for one of your projects, select the "Pipelines" tab, and link:https://circleci.com/docs/pipelines/#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating yoru first pipeline will be installing your GitHub App and connecting to it.
+Once you will have set up your first pipeline, you will be able to add triggers to it through the **Project Settings > Triggers** page.
+
+NOTE: only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
+
+[#github-app-integration]
+### The GitHub App integration
+
+Compared to the GitHub OAuth App, the xref:github-apps-integration#[CircleCI’s GitHub App integration] offers increased control over which resources in your VCS CircleCI can access, and lets CircleCI access those resources in a more secure manner. Specifically:
 
 - You can choose to only allow the CircleCI GitHub App access to specific repositories within your GitHub organization.
 - The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
 - The CircleCI GitHub App uses short-lived tokens when accessing your resources.
 
-Some existing and future functionality on CircleCI, such as triggering a pipeline via a xref:webhooks#custom-webhooks[custom webhook], will only be available when using the more secure GitHub App integration. Despite only being available when using the GitHub App, this functionality **is still usable by organizations that currently integrate with CircleCI’s GitHub OAuth App**. The GitHub App and OAuth app **can co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:github-apps-integration#currently-not-supported[not yet available] to the GitHub App integration (such as xref:scheduled-pipelines#[scheduled pipelines]) or needing to set up and migrate to a new organization.
 
-Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
 
 [#next-steps]
 == Next steps
