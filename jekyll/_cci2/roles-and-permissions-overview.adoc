@@ -42,79 +42,79 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| Create namespace
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| Manage namespace
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View org settings
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage org settings
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View org access
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage org access
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View org credentials
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| View org policies
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage org policies
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View org connections
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage org connections
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| Manage org credentials
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View org audit logs
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View plan
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Manage plan
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Insights*
 |
@@ -122,9 +122,9 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View org insights
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 | *Runner*
 |
@@ -132,14 +132,14 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View runners
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage runners
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Projects*
 |
@@ -147,19 +147,19 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View projects
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Create projects
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Manage project settings
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Contexts*
 |
@@ -167,24 +167,24 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View contexts
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Use contexts
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Edit context variables
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Manage contexts
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 | *Orbs*
 |
@@ -192,24 +192,24 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| Create/update orb
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View private orb
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Publish development orb
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Publish orb
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Webhooks*
 |
@@ -217,24 +217,24 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View org webhooks
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Manage org webhooks
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View project webhooks
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Manage project webhooks
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Schedule*
 |
@@ -242,14 +242,14 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View schedule
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Edit schedule
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Triggers*
 |
@@ -257,19 +257,19 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View triggers
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Trigger re-run via the CircleCI web app
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Edit triggers
-^| icon:check-circle[]
-^| 
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Pipelines*
 |
@@ -277,14 +277,14 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| View pipelines
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Edit pipelines
-^| icon:check-circle[]
-^| 
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Releases*
 |
@@ -292,44 +292,44 @@ The table below shows the permissions associated with each CircleCI organization
 |
 
 ^| Create environment integration
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Delete environment integration
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| View environment integration
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Create environment integration token
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Revoke environment integration token
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| List environment integration token
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| View components
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| View releases
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 |===
 
@@ -357,24 +357,24 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| View projects
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| View project access
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| View project credentials
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage project
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Webhooks*
 |
@@ -382,14 +382,14 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| View project webhooks
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Manage project webhooks
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Schedule*
 |
@@ -397,14 +397,14 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| View schedule
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Edit schedule
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Triggers*
 |
@@ -412,19 +412,19 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| View triggers
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Trigger build
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Edit triggers
-^| icon:check-circle[]
-^|
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Contexts*
 |
@@ -432,24 +432,24 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| View contexts
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Use contexts
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Edit context variables
-^|
-^|
-^|
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 ^| Manage contexts
-^|
-^|
-^|
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Pipelines*
 |
@@ -457,14 +457,14 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| View pipelines
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
 
 ^| Edit pipelines
-^| icon:check-circle[]
-^| 
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 
 | *Releases*
 |
@@ -472,34 +472,34 @@ The table below shows the permissions associated with each CircleCI project role
 |
 
 ^| Restore component version
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Restart component
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Scale component
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Cancel release
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Promote release steps
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 ^| Retry release
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 
 |===
 
