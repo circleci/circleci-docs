@@ -280,7 +280,7 @@ You can read more about these settings and how to configure them in the link:htt
 
 NOTE: If you enable these restrictions on an organization for which CircleCI has been running builds, CircleCI will stop receiving push event hooks from GitHub, and will not build new pushes. API calls will also be denied, causing, for instance, re-builds of old builds to fail the source checkout. To get CircleCI working again, you will need to grant access to the CircleCI application.
 
-[#how-to-re-enable-circlecip-for-a-github-organization]
+[#how-to-re-enable-circleci-for-a-github-organization]
 === How to re-enable CircleCI for a GitHub organization
 
 This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to link:https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings], and in the **Organization access** section, you will have the option to request access if you are not an admin, or grant access if you are an admin.
@@ -312,7 +312,7 @@ If you would like to rename your organization or repository, follow the xref:ren
 
 Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration#[CircleCI’s GitHub App integration].
 
-Until October 2024, the CircleCI GitHub App Integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integratie with CircleCI's GitHub OAuth App.**
+Until October 2024, the CircleCI GitHub App Integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integrate with CircleCI's GitHub OAuth App.**
 The GitHub App and OAuth app **co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:github-apps-integration#currently-not-supported[not yet available] to either of the two integrations (such as xref:scheduled-pipelines#[scheduled pipelines]) or needing to set up and migrate to a new organization.
 
 Some key functionality enabled through the GitHub App integration is:
@@ -329,7 +329,7 @@ Some key functionality enabled through the GitHub App integration is:
 
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
 
-To get started, go to Project Settings for one of your projects, select the "Pipelines" tab, and link:https://circleci.com/docs/pipelines/#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating yoru first pipeline will be installing your GitHub App and connecting to it.
+To get started, go to Project Settings for one of your projects, select the "Pipelines" tab, and link:https://circleci.com/docs/pipelines/#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating your first pipeline will be installing your GitHub App and connecting to it.
 Once you will have set up your first pipeline, you will be able to add triggers to it through the **Project Settings > Triggers** page.
 
 NOTE: only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
