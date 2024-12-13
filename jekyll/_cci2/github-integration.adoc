@@ -343,8 +343,6 @@ Compared to the GitHub OAuth App, the xref:github-apps-integration#[CircleCI’s
 - The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
 - The CircleCI GitHub App uses short-lived tokens when accessing your resources.
 
-
-
 [#next-steps]
 == Next steps
 - xref:config-intro#[Configuration tutorial]
