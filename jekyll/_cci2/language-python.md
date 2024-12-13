@@ -5,8 +5,7 @@ description: "Continuous integration with Python on CircleCI"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
@@ -172,7 +171,7 @@ jobs:
             - .
 
   deploy: # this can be any name you choose
-    executor: python/default
+    executor: heroku/default
     steps:
       - attach_workspace:
           at: ~/project
