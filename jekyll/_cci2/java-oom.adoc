@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Avoiding and debugging Java memory errors
 :page-description: How to avoid and debug Java memory errors on CircleCI.
@@ -169,7 +168,7 @@ then you would use `IBM_JAVA_OPTIONS`.
 This environment variable is link:https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions[a safe choice]
 for setting Java memory limits.
 `JAVA_TOOL_OPTIONS` can be read by all Java virtual machines,
-and you can easily override it
+and you can override it
 with command-line arguments
 or more specific environment variables.
 

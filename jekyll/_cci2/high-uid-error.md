@@ -5,8 +5,7 @@ description: "Debugging 'Container ID XXX cannot be mapped to a host ID' error w
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 When starting a container,
@@ -60,7 +59,7 @@ To fix this error,
 you must update the files' UID/GID
 and re-create the image.
 
-If you are not the image maintainer, 
+If you are not the image maintainer,
 it is not your responsibility.
 Contact the image maintainer
 and report the error.

@@ -13,7 +13,7 @@ contentTags:
 [#overview]
 == Overview
 
-This document outlines the CircleCI Xcode image release, update, and deprecation policy. By having a defined Xcode image policy, we ensure that we are able to continue releasing new images quickly and easily, including beta images.
+This document outlines the CircleCI Xcode image release, update, and deprecation policy. By having a defined Xcode image policy, we are able to continue releasing new images quickly, including beta images.
 
 You will find the most up to date information on these images on the link:https://circleci.com/developer/machine/image/xcode[CircleCI Developer Hub] Xcode machine image page.
 
@@ -90,14 +90,14 @@ When Xcode `13.2.1` was released, we removed the previous patch version, `13.2.0
 
 We aim to make beta Xcode versions available on the macOS executor as soon as we can, to allow developers to test their apps ahead of the next stable Xcode release.
 
-Unlike our stable images (which are frozen once released and do not change), once a new beta image is released it will overwrite the previous beta image until an RC/Stable image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please take into consideration that it will change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling which are beyond our control. We do not recommend using beta images for production pipelines.
+Unlike our stable images (which are frozen once released and do not change), once a new beta image is released it will overwrite the previous beta image until an RC/Stable image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, you should take into consideration that it will change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling which are beyond our control. We do not recommend using beta images for production pipelines.
 
-To read about our customer support policy regarding beta images, please check out this link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
+To read about our customer support policy regarding beta images, check out this link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
 
 [#xcode-image-releases]
 == Xcode image releases
 
-We closely track and monitor Apple's Xcode releases and always aim to release new images as quickly as possible. Typically we aim to support a new Xcode image within a couple of days, however please note that this is not an SLA. We can not, and do not, provide an official SLA turnaround time for new Xcode images.
+We closely track and monitor Apple's Xcode releases and always aim to release new images as quickly as possible. Typically we aim to support a new Xcode image within a couple of days, however note that this is not an SLA. We can not, and do not, provide an official SLA turnaround time for new Xcode images.
 
 New images are always announced on our link:https://discuss.circleci.com/c/announcements/39[Discuss site] along with release notes, and will be added to the table of xref:using-macos#supported-xcode-versions[Xcode versions in the documentation].
 
@@ -106,7 +106,7 @@ New images are always announced on our link:https://discuss.circleci.com/c/annou
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version reasonably up to date with the latest version available. Generally our images can be up to 2 minor/patch versions behind the latest stable version.
 
-We aim to keep the macOS version aligned across our different macOS executors (for example, Intel and M1 platforms), however this may not always be the case. Please check the xref:testing-ios#supported-xcode-versions[Software Manifest] file for the image for the most accurate information.
+We aim to keep the macOS version aligned across our different macOS executors (for example, Intel and M1 platforms), however this may not always be the case. Check the xref:testing-ios#supported-xcode-versions[Software Manifest] file for the image for the most accurate information.
 
 When a new major version of macOS (for example, `12.0` or `13.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple's own release cycle, but will always be announced on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum].
 

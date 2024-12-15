@@ -5,8 +5,7 @@ description: "Listing of available Docker images maintained by CircleCI"
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 
