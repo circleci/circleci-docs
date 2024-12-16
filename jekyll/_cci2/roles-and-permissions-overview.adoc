@@ -32,14 +32,14 @@ The table below shows the permissions associated with each CircleCI organization
 3+^| ORGANIZATION ROLES
 
 |
+| 
+| 
+| 
+
+| *Organization*
 | *Admin*
 | *Contributor*
 | *Viewer*
-
-| *Organization*
-|
-|
-|
 
 ^| Create namespace
 ^| [.circle-green]#**Yes**#
@@ -117,9 +117,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Insights*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View org insights
 ^| [.circle-green]#**Yes**#
@@ -127,9 +127,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 
 | *Runner*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View runners
 ^| [.circle-green]#**Yes**#
@@ -142,9 +142,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Projects*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View projects
 ^| [.circle-green]#**Yes**#
@@ -162,9 +162,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Contexts*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View contexts
 ^| [.circle-green]#**Yes**#
@@ -187,9 +187,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Orbs*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| Create/update orb
 ^| [.circle-green]#**Yes**#
@@ -212,9 +212,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Webhooks*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View org webhooks
 ^| [.circle-green]#**Yes**#
@@ -237,9 +237,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Schedule*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View schedule
 ^| [.circle-green]#**Yes**#
@@ -252,9 +252,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Triggers*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View triggers
 ^| [.circle-green]#**Yes**#
@@ -272,9 +272,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Pipelines*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View pipelines
 ^| [.circle-green]#**Yes**#
@@ -287,9 +287,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 
 | *Releases*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| Create environment integration
 ^| [.circle-green]#**Yes**#
@@ -347,14 +347,14 @@ The table below shows the permissions associated with each CircleCI project role
 3+^| PROJECT ROLES
 
 |
+| 
+| 
+| 
+
+| *Projects*
 | *Admin*
 | *Contributor*
 | *Viewer*
-
-| *Projects*
-|
-|
-|
 
 ^| View projects
 ^| [.circle-green]#**Yes**#
@@ -377,9 +377,9 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 | *Webhooks*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View project webhooks
 ^| [.circle-green]#**Yes**#
@@ -392,9 +392,9 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 | *Schedule*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View schedule
 ^| [.circle-green]#**Yes**#
@@ -407,9 +407,9 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 | *Triggers*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View triggers
 ^| [.circle-green]#**Yes**#
@@ -427,9 +427,9 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 | *Contexts*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View contexts
 ^| [.circle-green]#**Yes**#
@@ -452,9 +452,9 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 | *Pipelines*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| View pipelines
 ^| [.circle-green]#**Yes**#
@@ -467,9 +467,9 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 | *Releases*
-|
-|
-|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
 ^| Restore component version
 ^| [.circle-green]#**Yes**#
