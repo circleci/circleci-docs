@@ -310,7 +310,7 @@ If you would like to rename your organization or repository, follow the xref:ren
 [#using-github-app-functionality]
 == Using GitHub App functionality alongside the GitHub OAuth App
 
-Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration#[CircleCI’s GitHub App integration].
+Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration#[CircleCI GitHub App integration].
 
 Until October 2024, the CircleCI GitHub App integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integrate with CircleCI's GitHub OAuth app.**
 The GitHub App and OAuth app **co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:github-apps-integration#currently-not-supported[not yet available] to either of the two integrations (such as xref:scheduled-pipelines#[scheduled pipelines]) or needing to set up and migrate to a new organization.
