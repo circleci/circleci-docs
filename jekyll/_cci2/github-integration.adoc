@@ -314,7 +314,7 @@ Some existing and future functionality on CircleCI can only be enabled through t
 
 Until October 2024, the CircleCI GitHub App integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integrate with CircleCI GitHub OAuth app.**
 
-The GitHub App and OAuth app **co-exist side-by-side in the same organization** without needing to sacrifice any functionality that is xref:version-control-system-integration-overview#feature-support-for-each-integration-type[not yet available to either of the two integrations] or needing to migrate to a new organization.
+The GitHub App and OAuth app can **co-exist side-by-side in the same organization** without the need to sacrifice functionality that is xref:version-control-system-integration-overview#feature-support-for-each-integration-type[not yet available to either integration], or migrate to a new organization.
 
 Key functionality enabled through the GitHub App integration includes the following:
 
