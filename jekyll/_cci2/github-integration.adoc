@@ -319,11 +319,11 @@ The GitHub App and OAuth app **co-exist side-by-side in the same organization** 
 Key functionality enabled through the GitHub App integration includes the following:
 
 * The option to have **multiple pipelines in the same project**, each defined in its own YAML file.
-* The possibility to set up your pipelines so that the the **config file and the application code are stored in different repositories**. Refer to the link:https://circleci.com/changelog/unlocking-any-cross-repo-pipeline-and-trigger-setups-including-central/[changelog entry] for more information.
+* The possibility to set up your pipelines so that the **config file and the application code are stored in different repositories**. Refer to the link:https://circleci.com/changelog/unlocking-any-cross-repo-pipeline-and-trigger-setups-including-central/[changelog entry] for more information.
 * A **more flexible trigger system**, with each pipeline having any number of VCS or non-VCS triggers. This includes:
 ** **Non-repo based triggers**: xref:webhooks#custom-webhooks[Custom webhooks] enable triggering builds from any system that can emit webhook events. Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
 ** **Cross-repo triggers**: Events in one repository can trigger builds on one or many other repositories. 
-** [Coming soon] **More GitHub events as triggers**: Pipelines can be set up to run on events other than “push”, with more powerful customization of trigger conditions. 
+** [Coming soon] **More GitHub events as triggers**: Pipelines can be set up to run on events other than "push", with more powerful customization of trigger conditions. 
 
 [#installing-github-app-alongside-github-oauth-app]
 ### Installing GitHub App alongside the GitHub OAuth app
