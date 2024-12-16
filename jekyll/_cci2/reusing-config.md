@@ -140,8 +140,8 @@ commands:
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](https://yaml.org/type/bool.html):
 
-* True: `y` `yes` `true` `on`
-* False: `n` `no` `false` `off`
+* True: `yes` `true` `on`
+* False: `no` `false` `off`
 
 Capitalized and uppercase versions of the above values are also valid.
 
