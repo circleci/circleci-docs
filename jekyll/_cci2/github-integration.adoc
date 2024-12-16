@@ -330,7 +330,7 @@ Key functionality enabled through the GitHub App integration includes the follow
 
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
 
-To get started, go to Project Settings for one of your projects, select the "Pipelines" tab, and link:https://circleci.com/docs/pipelines/#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating your first pipeline will be installing the CircleCI GitHub App and connecting to it.
+To get started, go to menu:Project Settings[Pipelines] for one of your projects and link:https://circleci.com/docs/pipelines/#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating your first pipeline will be installing the CircleCI GitHub App and connecting to it.
 Once you have set up your first pipeline, you will be able to add triggers to it through the menu:Project Settings[Triggers] page.
 
 NOTE: Only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
