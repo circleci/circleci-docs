@@ -8,10 +8,10 @@
 | Release Notes
 
 | `16.2.0`
-| Xcode 16.2 RC (16C5031c)
+| Xcode 16.2 GA (16C5032a)
 | 14.6.1
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15164/manifest.txt[Installed software]
-| link:https://discuss.circleci.com/t/xcode-16-2-rc-released/52462[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15180/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-16-2-ga-released/52486[Release Notes]
 
 | `16.1.0`
 | Xcode 16.1 (16B40)
