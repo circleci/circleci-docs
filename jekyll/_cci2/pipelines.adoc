@@ -35,7 +35,7 @@ NOTE: The pipeline and trigger features available to you depend on how your code
 
 NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available.
 
-Set up pipelines to define the code to checkout and the config to use for your project CI/CD..
+Set up pipelines to define the various CI/CD "units" that make up your project.
 
 Set up triggers to define when and how each of your pipelines should be run. Triggers may be from external services (custom webhooks), from commits or tags on a version control system, or set up to run on a schedule.
 
@@ -80,10 +80,10 @@ To add or edit a pipeline, follow these steps:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Under Integration select the platform that matches where your project is set up (for example, GitHub App).
 +
-NOTE: If you integrate with xref:github-integration#[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:github-integration#using-github-app-functionality[improved security and new features]. This is a one-time step which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
+NOTE: If you integrate with xref:github-integration#[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:github-integration#using-github-app-functionality[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
 +
 NOTE: For GitLab Self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:gitlab-integration#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
-** Authorize your connection if this is not already showing with a icon:check-circle[]
+** Authorize your connection if this is not already showing with a check mark (icon:check-circle[]).
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
