@@ -171,7 +171,7 @@ jobs:
             - .
 
   deploy: # this can be any name you choose
-    executor: python/default
+    executor: heroku/default
     steps:
       - attach_workspace:
           at: ~/project
