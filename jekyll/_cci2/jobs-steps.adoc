@@ -46,7 +46,7 @@ jobs:
 
 The job property name can be anything you like with the following restrictions:
 
-* Must be unique within the jobs stanza.
+* Must be unique within the `jobs` stanza.
 * Only ASCII alphabet characters, underscores, and dashes.
 * No spaces.
 
@@ -112,7 +112,7 @@ workflows:
 
 Orbs are packages or reusable configuration that you can use in your projects. Orbs usually contain commands that you can use in your jobs, as well as whole jobs that you can schedule in your workflows.
 
-Take the link:https://circleci.com/developer/orbs/orb/circleci/slack[Slack orb] as an example. This orb provides a job called link:https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification[`on-hold`], which you can use in your workflows. This job pauses the workflow to require manual approval, and sends a slack notification. To use this job, reference it in your workflow (see line 10):
+Take the link:https://circleci.com/developer/orbs/orb/circleci/slack[Slack orb] as an example. This orb provides a job called link:https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification[`on-hold`], which you can use in your workflows. This job pauses the workflow to require manual approval, and sends a Slack notification. To use this job, reference it in your workflow (see line 10):
 
 [,yml]
 ----
@@ -142,7 +142,7 @@ workflows:
 [#using-a-command-from-an-orb-in-a-job]
 == Using a command from an orb in a job
 
-Using the link:https://circleci.com/developer/orbs/orb/circleci/slack[Slack orb] as an example again, this orb includes a command called `notify`, which is used to notify a specified slack channel. You can reference this command in your job as follows (see line 16):
+Using the link:https://circleci.com/developer/orbs/orb/circleci/slack[Slack orb] as an example again, this orb includes a command called `notify`, which is used to notify a specified Slack channel. You can reference this command in your job as follows (see line 16):
 
 This example also uses the link:https://circleci.com/developer/orbs/orb/circleci/node[Node orb].
 
