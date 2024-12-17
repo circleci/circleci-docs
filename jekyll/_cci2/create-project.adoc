@@ -48,13 +48,7 @@ image::create-project/create-project-button.png[Create a project]
 +
 image::create-project/what-project.png[Screenshot showing options to choose what you want to do in your project]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
-+
-image::create-project/choose-a-repo.png[Choose a repository window with option to add another VCS]
-+
-NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect.
-
-. Follow the in-app prompts to give your project a name.
+. On the Enter project details screen, give your project a descriptive name and then select btn:[Next].
 +
 [TIP]
 ====
@@ -64,8 +58,32 @@ NOTE: **First GitHub project?** If this is the first GitHub project you are crea
 * 3-40 characters long
 * Contain only letters, numbers, or the following characters `" - _ . : ! & + [ ] " ;`
 ====
++
+image::create-project/enter-project-details.png[Screenshot showing options to enter project details]
 
-. If a CircleCI config file exists in your repository already you will be redirected to the pipelines page. Otherwise, CircleCI automatically generates a custom configuration file based on the programming languages and frameworks detected in your selected repository. If CircleCI is unable to generate a custom configuration file, a fallback template is used. Select btn:[Commit and Run].
+. Now you will set up your first pipeline for your project. Pipelines orchestrate executable commands and scripts for your CI/CD processes. The first step is to name your pipeline. Use a name that describes the purpose of the pipeline, for example, `build-and-test`. Then select btn:[Next].
++
+image::create-project/set-up-a-pipeline.png[Screenshot showing options to set up your pipeline]
+
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
++
+image::create-project/choose-a-repo-github.png[Choose a repository window with option to add another VCS]
++
+NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. This is a one-time action that can be done by an organization administrator or someone who has admin access to a repository in your org.
+
+. In this next step CircleCI will prepare a config file for you, **unless your repo already contains a CircleCI config file**. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
++
+image::create-project/set-up-your-config.png[Screenshot showing options to set up your config file]
+
+. Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:pipelines#triggers[add more triggers] at this point too.
++
+image::create-project/set-up-your-triggers.png[Screenshot showing options to set up your triggers]
+
+. Next you can review everything you have just set up, then select btn:[Commit config and run], for btn:[Finish setup] if you already have a config file in your repo.
++
+image::create-project/review-and-finish-setup.png[Screenshot showing options to review and commit your config]
+
+Once your project is created you will land on your pipelines page.
 --
 
 [.tab.create-project.GitLab_Cloud]
