@@ -13,6 +13,8 @@ contentTags:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
+NOTE: You must be an organization admin in order to create and manage config policies
+
 This reference page lists a selection of _helpers_, or CircleCI-specific functions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
 The `circle-policy-agent` package includes built-in functions for common config policy
