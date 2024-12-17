@@ -198,13 +198,13 @@ In the following sections, we will discuss these customization options in greate
 
 Image match types govern how images are matched for container customization. The types include:
 
-. *Exact:* For exact matching, the image string must be an exact match. For example, `cimg/redis:6.2.6` only matches the `cimg/redis:6.2.6` image.
+* *Exact:* For exact matching, the image string must be an exact match. For example, `cimg/redis:6.2.6` only matches the `cimg/redis:6.2.6` image.
 
-. *Prefix:* For prefix matching, the image string matches all images with a common prefix. For example, `cimg/redis:` will match any `cimg/redis` image regardless of the tag.
+* *Prefix:* For prefix matching, the image string matches all images with a common prefix. For example, `cimg/redis:` will match any `cimg/redis` image regardless of the tag.
 
-. *Pattern:* For pattern matching, a Go-based regex pattern is used to match images. For example, `cimg/(redis|postgres):.*` matches any `redis` or `postgres` image from the `cimg` repository regardless of the tag. Refer to the link:https://golang.org/pkg/regexp/syntax/[Golang regex syntax] and link:https://regex101.com/[regex101.com] to test your regular expressions.
+* *Pattern:* For pattern matching, a Go-based regex pattern is used to match images. For example, `cimg/(redis|postgres):.*` matches any `redis` or `postgres` image from the `cimg` repository regardless of the tag. Refer to the link:https://golang.org/pkg/regexp/syntax/[Golang regex syntax] and link:https://regex101.com/[regex101.com] to test your regular expressions.
 
-. *Default:* The `Default` match type applies when an image did not match any of the other image match types. It sets a single specification for all such service containers.
+* *Default:* The `Default` match type applies when an image did not match any of the other image match types. It sets a single specification for all such service containers.
 
 ===== Order of precedence
 
@@ -280,11 +280,11 @@ This feature is called “unsafe retries” for a reason. Unlike automatic retri
 
 The following sequence shows how unsafe retires work:
 
-1. If a pod fails or gets evicted during runtime, container runner will release the task.
-2. All resources managed by container runner for the task, such as the Kubernetes pod and secret, are cleaned up and deleted.
-3. The released task then becomes available for reclaim by any container runner instance configured for the same resource class.
-4. Once reclaimed, the task is restarted completely from scratch, including previously run steps.
-5. A task can be retried up to 3 times before it is deemed to have permanently failed.
+. If a pod fails or gets evicted during runtime, container runner will release the task.
+. All resources managed by container runner for the task, such as the Kubernetes pod and secret, are cleaned up and deleted.
+. The released task then becomes available for reclaim by any container runner instance configured for the same resource class.
+. Once reclaimed, the task is restarted completely from scratch, including previously run steps.
+. A task can be retried up to 3 times before it is deemed to have permanently failed.
 
 To enable unsafe retries, set the `enableUnsafeRetries` flag in the <<resource-class-configuration-custom-pod,resource class configuration>> for each resource class. The following example shows two resource class definitions. Unsafe retries is enabled for the first, for spot instances, but not for the second resource class:
 [source,yaml]
@@ -368,6 +368,7 @@ Container runner needs the following Kubernetes permissions:
 ** Create
 ** Delete
 * Events
+** List
 ** Watch
 * Nodes
 ** Get

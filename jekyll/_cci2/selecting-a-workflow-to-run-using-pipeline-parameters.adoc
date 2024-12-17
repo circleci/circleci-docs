@@ -3,8 +3,7 @@ description: "A how-to guide for selecting a workflow to run using pipeline para
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 document-type:
 - How-to
 ---
@@ -67,6 +66,8 @@ The `action` parameter will default to `build` on pushes to the project. Below i
 
 In this example, the workflow named `report` would run. Remember to substitute <<api-developers-guide#getting-started-with-the-api,`project-slug`>> with your values.
 
+CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+
 [source,shell]
 ----
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -75,6 +76,8 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -H "Circle-Token: API_KEY" \
   -d '{ "parameters": { "action": report } }'
 ----
+
+include::../_includes/partials/tips/find-project-slug.adoc[]
 
 [#next-steps]
 == Next steps

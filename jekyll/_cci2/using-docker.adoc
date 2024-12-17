@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Using the Docker execution environment
 :page-description: Learn how to configure a your jobs to run in the Docker execution environment
@@ -115,7 +114,7 @@ Docker also has built-in image caching and enables you to build, run, and publis
 * Your application is self-sufficient.
 * Your application requires additional services to be tested.
 * Your application is distributed as a Docker image (requires using xref:building-docker-images#[Remote Docker]).
-* You want to use `docker-compose` (requires using xref:building-docker-images#[Remote Docker]).
+* You want to use `docker compose` (requires using xref:building-docker-images#[Remote Docker]).
 
 Choosing Docker limits your runs to what is possible from within a Docker container (including our xref:building-docker-images#[Remote Docker] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
 

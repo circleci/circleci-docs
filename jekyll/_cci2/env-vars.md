@@ -6,8 +6,7 @@ description: Introduction to environment variables in CircleCI
 contentTags:
   platform:
     - Cloud
-    - Server v4.x
-    - Server v3.x
+    - Server v4+
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -43,7 +42,7 @@ Private environment variables enable you to store secrets safely, even when your
 ## Environment variable usage options
 {: #environment-variable-usage-options }
 
-CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable must be a letter.
+CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable name must be an alpha character or an underscore, **not** a digit.
 
 ### Order of precedence
 {: #order-of-precedence }

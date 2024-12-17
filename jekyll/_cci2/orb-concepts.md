@@ -6,8 +6,7 @@ description: "Conceptual Overview for Orbs"
 categories: [getting-started]
 verison:
 - Cloud
-- Server v4.x
-- Server v3.x
+- Server v4+
 ---
 
 * TOC
@@ -31,7 +30,7 @@ As an example, the AWS S3 orb includes a _command_ to copy a file or object to a
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@x.y.z
+  aws-s3: circleci/aws-s3@4.1.0
 
 jobs:
   build:

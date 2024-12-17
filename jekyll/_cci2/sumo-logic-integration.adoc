@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Sumo Logic integration
 :page-layout: classic-docs
@@ -60,7 +59,7 @@ NOTE: This dashboard receives data through the link:https://circleci.com/develop
 To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
 
 [#configure-webhooks]
-=== Configure Webhooks
+=== Configure webhooks
 
 [#step-1-configure-hosted-collector]
 ==== 1. Configure hosted collector
@@ -68,34 +67,34 @@ To begin collecting and visualizing data with Sumo Logic, first configure Circle
 Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[Configuring a Hosted Collector].
 
 [#step-2-add-an-http-source]
-==== 2. Add an HTTP Source
+==== 2. Add an HTTP source
 
 To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
 
 When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
 
 [#step-3-configure-project-webhooks]
-==== 3. Configure Project Webhooks
+==== 3. Configure project webhooks
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to Sumo Logic.
 
-. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
+. Log in to the link:https://app.circleci.com/projects[CircleCI web app].
 
-. Access one of your CircleCI projects
+. Access one of your CircleCI projects.
 
-. Open **Project settings**
+. Open **Project settings**.
 
-. In the project settings sidebar, click **Webhooks**
+. In the project settings sidebar, click **Webhooks**.
 
-. Click **Add webhook**
+. Select **Add webhook**.
 
 . Complete the following fields:
 ** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
-** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section
+** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section.
 ** **Events**: Select **Workflow Completed** and **Job Completed**.
 ** Enable the check: **Certificate verifications**.
 
-. Click **Add Webhook** to save the new webhook.
+. Select **Add Webhook** to save the new webhook.
 
 [#install-the-circleci-app-for-sumo-logic]
 === Install the CircleCI App for Sumo Logic
@@ -110,7 +109,7 @@ Now that you have set up collection, install the Sumo Logic App for CircleCI to 
 *** Choose **Source Category**, and select a source category from the list
 *** Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
 ** **Advanced**. Select the location in the library (the default is the personal folder in the library), or click **New Folder** to add a new folder
-. Click **Add to Library**
+. Select **Add to Library**.
 
 Once the app is installed, it will appear in your personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically.
 

@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Pipelines overview
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
@@ -12,45 +11,61 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-CircleCI pipelines are the highest-level unit of work, and they are described by a configuration file, for example, `.circleci/config.yml`. _Triggers_ can be set up to automate when a pipeline will be triggered. Pipelines coordinate the execution of workflows and jobs to build, test, and deploy your code. Workflows can be conditional, based on xref:workflows#using-filters-in-your-workflows[filters], xref:workflows#workflows-configuration-examples[job requirements], and xref:selecting-a-workflow-to-run-using-pipeline-parameters#[pipeline parameters].
+CircleCI pipelines are the highest-level unit of work in your CI/CD process. Defined by a configuration file (typically `.circleci/config.yml`), pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
 
-Pipelines include your workflows, which coordinate your jobs. Pipelines have a fixed, linear lifecycle, and are associated with a specific actor. Pipelines trigger when a change is pushed to a project that has a CircleCI configuration file included, and can also be scheduled, triggered manually through the CircleCI app, or using the API.
+Pipelines can be triggered in the following ways:
 
-== Dashboard
-When visiting your CircleCI dashboard, you are shown a list of recently-triggered pipelines for your organization.
+* Automatically: Git events, scheduled events, custom webhooks
+* Manually: CircleCI app or API
 
-image::/docs/assets/img/docs/pipelines-dashboard.png[Screenshot of the pipelines dashboard in the CircleCI app]
+Pipelines provide a flexible framework for creating conditional workflows based on xref:workflows#using-filters-in-your-workflows[filters], xref:workflows#workflows-configuration-examples[job requirements], and xref:selecting-a-workflow-to-run-using-pipeline-parameters#[pipeline parameters], allowing you to customize your CI/CD process to fit your project's needs.
 
-[#pipeline-architecture]
-== Pipeline architecture
+== Pipelines dashboard
+Your pipelines dashboard displays recently-triggered pipelines for your organization. Use the various filters to find the pipelines you need. Click through to xref:jobs-steps#access-jobs-and-steps-in-the-circleci-app[view workflow maps and individual job steps]. Use the quick controls on the right of the screen to rerun and cancel workflows.
 
-A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results, and artifacts through several tabs.
+image::pipelines-dashboard.png[Screenshot of the pipelines dashboard in the CircleCI app]
 
-image::/docs/assets/img/docs/pipelines-job-step-test-artifact.png[Job tab options in the CircleCI web app]
+From the pipelines dashboard you can find the _pipeline ID_. The pipeline ID is a unique ID for a pipeline that has been triggered. You can use the pipeline ID to access pipeline information via the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/getPipelineValuesById[API].
 
-The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members.
-
-image::/docs/assets/img/docs/pipelines-job-output.png[Download and share job step output]
+image::pipeline-id.png[Screenshot showing the location on the pipeline ID]
 
 == Pipelines and triggers
 
-NOTE: The information in this section on pipelines and triggers applies to accounts integrated with the xref:github-apps-integration#[CircleCI GitHub App], xref:gitlab-integration#[GitLab] or xref:bitbucket-data-center-integration#[Bitbucket Data Center]. There are two GitHub integration types, either OAuth or through the GitHub App. To find out which GitHub integration type you have refer to the xref:github-apps-integration#[GitHub App integration] page.
+NOTE: The pipeline and trigger features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:version-control-system-integration-overview#[VCS integration overview] page.
 
-Set up pipelines and triggers to define when and how pipelines are automatically triggered for a project. These triggers may be from external services (custom webhooks), or from commits or tags on a version control system.
+NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available.
+
+Set up pipelines to define the various CI/CD "units" that make up your project.
+
+Set up triggers to define when and how each of your pipelines should be run. Triggers may be from external services (custom webhooks), from commits or tags on a version control system, or set up to run on a schedule.
 
 === Pipelines
 
-Pipelines define units of work that can be run within your projects. Each pipeline defines a config source, which points to the location of a CircleCI configuration file. The config source can be set up to be used when _triggering_ a pipeline. Pipelines can be associated with one or more triggers.
+A pipeline defines a unit of work that can be run within your projects. Each pipeline is defined by two key characteristics:
 
-A project can have one or more pipelines. The default config source location is `.circleci/config.yml`. If you authenticated through the GitHub App, you can set this location to _any_ path to a `*.yml` file.
+* A config source, which is a configuration file stored in a repository. The default config source location is `.circleci/config.yml` within the same repositry as your code.
++
+TIP: For GitHub App and Bitbucket Data Center pipelines you can choose any file path (with extension `*.yml`) in any repository.
 
-When you create a project in CircleCI and connect it to a repository, a pipeline is set up for you automatically, and connected to a config source. The connected configuration file is either a file you commit yourself or one generated by CircleCI based on the code in your project.
+* A checkout source, which determines which repository will be checked out when running a xref:configuration-reference#checkout[checkout step].
++
+TIP: This model allows your CircleCI config to be stored in a different repository from your code. This is currently supported for GitHub App and Bitbucket Data Center pipelines.
+
+A project can have one or more pipelines, and each pipeline can be associated with zero or more triggers.
+
+When you create a project in CircleCI and follow the in-app project creation flow to connect it to a repository, a first pipeline is set up for you automatically. The config file used for your first pipeline is either a file you commit yourself or one generated by CircleCI based on the code in your project. You can identify the type (GitHub App, GitHub OAuth) of a pipeline using the badges in the Config Source column on the menu:Project Settings[Pipelines] page.
+
+Each pipeline has a _Definition ID_. This is a UUID for the pipeline, which can be used to refer to a specific pipeline when triggering it xref:triggers-overview#run-a-pipeline-using-the-api[via the API].
 
 image::project-settings-pipelines.png[Pipelines page in project settings]
 
 ==== Add or edit a pipeline
 
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a pipeline is already set up.
+
+NOTE: GitHub and Bitbucket OAuth pipelines are created automatically when setting up a project and they cannot be edited.
+
+The steps and options described in this section are for setting up a GitHub App pipeline. If you are setting up a pipeline for a different version control system the options you see may vary but the process is mostly the same.
 
 image::add-pipeline.png[Add a pipeline]
 
@@ -60,16 +75,19 @@ To add or edit a pipeline, follow these steps:
 . Select the ellipsis next to your project (icon:ellipsis-h[]) and choose **Project Settings**.
 . Select **Pipelines** in the sidebar.
 +
-TIP: If you do not see **Pipelines** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
-** Under Config Source select the platform that matches where your project is set up (for example, GitHub App).
+** Under Integration select the platform that matches where your project is set up (for example, GitHub App).
++
+NOTE: If you integrate with xref:github-integration#[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:github-integration#using-github-app-functionality[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
 +
 NOTE: For GitLab Self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:gitlab-integration#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
-** Authorize your connection if this is not already showing with a icon:check-circle[]
-** Select your repository
-** Enter the path to your configuration file relative to the root of your repository. For example, `.circleci/config.yml`. If you are integrated through the GitHub App, you can enter any path to a `.yml` file, and the file can have any name you choose.
+** Authorize your connection if this is not already showing with a check mark (icon:check-circle[]).
+** Define where the config file for this pipeline is stored:
+*** Select a repository from the dropdown.
+*** Enter the path to the config file.
+** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a xref:configuration-reference#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the Config Source.
 . Select btn:[Save].
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. This is described in the following section.
@@ -78,7 +96,9 @@ Once you have set up a pipeline you need to set up a trigger to connect it to. T
 
 TIP: If you created a project xref:create-project#[in the CircleCI web app] you will find a trigger is already set up.
 
-Triggers are rules to define that a pipeline should be run on a given event. A project can have one or more triggers, which are associated with events from a source of change. The most common type of trigger is a VCS event, for example a push to a branch on a GitHub repository, but any system that can emit outbound webhooks can also be set up as a trigger. A trigger can have only one pipeline but a pipeline can have multiple triggers.
+NOTE: GitHub and Bitbucket OAuth triggers are created automatically when setting up a project and they cannot be edited. The only trigger you can create and edit for an OAuth pipeline is a xref:scheduled-pipelines#[scheduled pipeline trigger].
+
+Triggers are configurable rules that determine when to automatically run a pipeline based on specific events and conditions. A project can have one or more triggers, which are associated with events from a source of change. The most common type of trigger is a VCS event, for example a push to a branch on a GitHub repository, but any system that can emit outbound webhooks can also be set up as a trigger. A trigger can have only one pipeline but a pipeline can have multiple triggers.
 
 A trigger kicks off a pipeline to run the workflows defined in your connected config source.
 
@@ -88,8 +108,11 @@ To add a trigger for a pipeline, follow these steps:
 
 [.tab.trigger.Custom_webhook]
 --
+NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
 
 Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[Triggers overview] page.
+
+NOTE: Custom webhook triggers can only be associated with GitHub App pipelines. You can check if you have a GitHub App pipeline by going to menu:Project Settings[Pipelines] and checking if any of your pipelines have a `GitHub App` badge in the Config Source column. If needed, create a new pipeline by selecting btn:[Add pipeline].
 
 To add a trigger for a custom webhook, follow these steps:
 
@@ -98,27 +121,28 @@ To add a trigger for a custom webhook, follow these steps:
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
 
-[.tab.trigger.GitHub]
+[.tab.trigger.GitHub_App]
 --
 
 When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
 
-image::{{site.baseurl}}/assets/img/docs/add-trigger.png[Add a trigger]
+image::add-trigger.png[Add a trigger]
 
 To add a trigger for a pipeline, follow these steps:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
-+
-TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Trigger].
 . Select the same location in the "Connect to" dropdown menu that you selected for your pipeline (for example, GitHub App).
 . Select btn:[Next].
 . Complete the form fields and options:
 ** Give your trigger a descriptive name.
 ** Authorize your connection if this is not already showing with a icon:check-circle[].
+** Select the Trigger source repository
 ** Choose your pipeline from the "Choose pipeline to run" menu.
+** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
+** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
 . Select btn:[Save].
 
 To verify your trigger is set up correctly, trigger an event from your repository.
@@ -163,6 +187,51 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-tr
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 --
+
+[.tab.trigger.Bitbucket_Data_Center]
+--
+For steps to add a trigger for a pipeline using Bitbucket Data Center, see the xref:bitbucket-data-center-integration#[Bitbucket Data Center] page.
+--
+
+[.tab.trigger.Scheduled]
+--
+include::../_includes/partials/notes/standalone-unsupported.adoc[Unsupported for GitHub App, GitLab, Bitbucket Data Center orgs]
+
+include::../_includes/partials/pipelines-and-triggers/scheduled-pipeline-setup.adoc[Setting up a scheduled pipeline using the CircleCI web app]
+--
+
+== Pipeline parameters
+
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
+
+The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
+
+```yml
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "current"
+  workingdir:
+    type: string
+    default: "~/main"
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:<< pipeline.parameters.image-tag >>
+    environment:
+      IMAGETAG: << pipeline.parameters.image-tag >>
+    working_directory: << pipeline.parameters.workingdir >>
+    steps:
+      - run: echo "Image tag used was ${IMAGETAG}"
+      - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
+```
+
+A pipeline can be triggered with specific `parameter` values using the API v2 or via the CircleCI web app.
+
+See the xref:pipeline-variables#[Pipeline values and parameters] page for more information.
 
 [#visual-studio-code-extension]
 == VS Code extension

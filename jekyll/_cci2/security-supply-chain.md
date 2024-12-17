@@ -2,6 +2,10 @@
 layout: classic-docs
 title: "Protecting against supply chain attacks"
 description: "Protecting against supply chain attacks on CircleCI"
+contentTags:
+  platform:
+    - Cloud
+    - Server v4+
 ---
 
 ## Overview

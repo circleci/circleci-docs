@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Configuration introduction
 :page-layout: classic-docs
@@ -316,7 +315,7 @@ To approve the job, click the thumbs up icon to the right of the _Hold-for-Appro
 
 Now you will see a tick in the Actions column and your jobs should complete.
 
-Click on the _Now-Complete_ job, then the _Approval Complete_ step. You should see the output of your command: `The work is now complete`.
+Select the _Now-Complete_ job, then the _Approval Complete_ step. You should see the output of your command: `The work is now complete`.
 
 image::config-approval-complete.png[Approval complete]
 

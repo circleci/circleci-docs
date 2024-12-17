@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server 3.x
+  - Server v4+
 ---
 = Migrate from GitHub Actions
 :page-layout: classic-docs
@@ -243,9 +243,13 @@ jobs:
           webhook: # WEBHOOK
 ----
 
-2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/configuration-reference/#the-when-attribute[basic conditions on steps] (for example, `on_success` [default], +
-`on_success`, `on_failure`) as well as https://circleci.com/docs/configuration-reference/#the-when-step[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
-currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
+2+a| Using conditional steps in the workflow. CircleCI offers the following:
+
+* xref:configuration-reference#the-when-attribute[Basic conditions on steps, using the `when` attribute] (for example, `on_success` [default], +
+`always`, `on_failure`).
+* https://circleci.com/docs/configuration-reference/#the-when-step[Conditional steps] based on parameters.
+* https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[Conditional jobs].
+* Conditional, parameterized xref:workflows#use-conditional-logic-in-workflows[workflows].
 
 a|
 [source, yaml]

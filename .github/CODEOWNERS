@@ -1,1 +1,11 @@
 * @circleci/docs @circleci/docs-friends @circleci/experience @circleci/product-mgmt-product-experience
+
+# removed owners to allow Renovate auto-merge
+Gemfile
+src-api/Gemfile
+.circleci/config.yml
+docker-compose-yml
+Dockerfile
+package.json
+src-api/package.json
+.ruby-version

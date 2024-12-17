@@ -2,7 +2,7 @@
 contentTags:
   platform:
     - Cloud
-    - Server
+    - Server v4+
 ---
 = Testing LLM-enabled applications through evaluations
 :description: Docs page on setting up LLM evaluations in your CI/CD pipeline
@@ -154,4 +154,6 @@ To store your LLM provider credentials, follow these steps:
 image::llmops/create-context.png[Project Settings > LLMOPS: Create Context Modal Window in CircleCI]
 image::llmops/openai-context.png[Project Settings > LLMOPS: View contexts in CircleCI]
 
+== Next steps
 
+* Follow our how to guide to xref:automate-llm-evaluation-testing-with-the-circleci-evals-orb#[automate LLM evaluation testing with the CircleCI evals orb].

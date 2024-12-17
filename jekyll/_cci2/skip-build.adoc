@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Skip CI and cancel workflows
 :page-layout: classic-docs
@@ -93,8 +92,8 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* Your project's default branch (usually `main`) will never auto-cancel workflows.
-* Auto-cancel affect pipelines triggered by pushes to a VCS or via the API.
+* Pushing to a default branch (usually `main`) will never auto-cancel workflows.
+* Auto-cancel affects pipelines triggered by pushes to a VCS or via the API.
 * Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel

@@ -3,8 +3,7 @@ description: This is document provides examples of deploying to Cloud Foundry.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Deploy to Cloud Foundry
 :page-layout: classic-docs
@@ -17,7 +16,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Clou
 [#introduction]
 == Introduction
 
-This pages provides a configuration for deployment to Cloud Foundry. CircleCI has developed a CloudFoundry orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
+This pages provides a configuration for deployment to Cloud Foundry. CircleCI has developed a Cloud Foundry orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with Cloud Foundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == Deploy to Cloud Foundry with the Cloud Foundry orb
@@ -74,7 +73,7 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
 [#dark-deployment]
 === 2. Dark deployment
 
-This is the first step in a link:https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html[Blue-Green] deployment, pushing the application to non-production routes.
+This example is the first step in a link:https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html[Blue-Green] deployment, pushing the application to non-production routes.
 
 ```yaml
       - run:
