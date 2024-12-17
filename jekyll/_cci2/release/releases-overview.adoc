@@ -128,33 +128,39 @@ Select **Releases** in the CircleCI web app sidebar to enter the releases dashbo
 
 === Filter and group components and environments with labels
 
-Add labels to your components and environments to provide teams with a way to filter and group content in the releases UI. Once a label is added, you can use this to filter multiple components and/or environments in the UI so you can focus on the content relevant to your team.
+Add labels to your components and environments to provide teams with a way to filter and group content in the releases UI. Once a label is added, you can use this to filter your view to focus on the content relevant to your team.
 
-Labels are composed of two values separated by a colon, for example, `team:my-team-name`. To specify multiple labels to a component or environment, separate with a comma. For example, `team:my-team-name, role:web`. You can add up to 20 labels to a component or environment.
+Labels are composed of two values separated by a colon, for example, `team:my-team-name`. To specify multiple labels for a component or environment, you can separate them with a comma. For example, `team:my-team-name, role:web`. You can add up to 20 labels to a component or environment.
 
 ==== Use labels to filter components and environments
 
 Once you have added labels to your components and environments, you can use them to filter your view in the releases UI. In the timeline, environments, or components view, select a filter to reduce the content in the tab to only your selection. You can also use the label filter dropdown menu at the top of the page.
 
-==== Add or edit labels for a component
+==== Add or edit labels
+
+To add or edit labels follow the steps below.
+
+image::../../img/docs/releases/edit-labels.png[Screenshot showing the location of the add/edit labels button]
+
+===== Component labels
 
 To add or edit labels for a component, follow these steps:
 
 . Select btn:[Releases] in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Components** tab.
-. Select your component by name. You can use the filter at the top of the page to help.
-. You are now on the component details page. Select the **Component settings** button.
-. Click on the edit button next to **Labels** to add or remove labels.
+. Select the cog icon (icon:cog[]) for your component. You can use the filter at the top of the page to help find the component you want.
+. You are now on the component settings page. Select the edit button (icon:pencil[]) in the labels panel.
+. Enter or edit your label(s) and select btn:[Done].
 
-==== Add or edit labels for an environment
+===== Environment labels
 
 To add or edit labels for an environment, follow these steps:
 
 . Select btn:[Releases] in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Environments** tab.
-. Select your environment by name.
-. You are now on the environment details page. Select the **Environment Integration Settings** button.
-. Click on the edit button next to **Labels** to add or remove labels.
+. Select the cog icon (icon:cog[]) for your environment.
+. You are now on the environment settings page. Select the edit button (icon:pencil[]) in the labels panel.
+. Enter or edit your label(s) and select btn:[Done].
 
 === View all releases for an environment
 
