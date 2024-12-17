@@ -16,13 +16,14 @@ contentTags:
 
 Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience.
 With CircleCI, you can deploy to virtually any target.
-CircleCI can also be configured to integrate with other services for:
+
+You can also configure CircleCI to integrate with other services for:
 
 * QA and testing
 * Feature management
 * Deployment strategies such as blue-green or canary deployment
 
-Quickly customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
+Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
 NOTE: **Deploy to Kubernetes?** Refer to our xref:release/releases-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
 
@@ -33,7 +34,7 @@ Here are the core concepts you need to get a deployment set up:
 
 * **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
-NOTE: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:release/configure-release-markers#[Release markers] guide to learn more.
+TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:release/configure-release-markers#[Release markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -43,7 +44,7 @@ Environment variables can be:
 ***  Add project-level <<add-ssh-key#,SSH keys>>
 
 * **Manual approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job in your workflow.
-A manual approval button will then be available from the workflows map in the CircleCI web app.
+This job will create a manual approval button visible in the CircleCI web app workflows map.
 
 If you need to restrict connections, consider enabling xref:ip-ranges#[IP ranges] for your deployment job.
 
@@ -53,7 +54,6 @@ If you need to restrict connections, consider enabling xref:ip-ranges#[IP ranges
 <<orb-intro#,Orbs>> are packages of reusable configuration.
 For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
 Orbs are available for many common deployment targets.
-Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry].
 
 For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza:
 
@@ -75,12 +75,14 @@ workflows:
 
 Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider <<orb-author-intro#,authoring one>>!
+
 [#using-images-to-simplify-deployment]
 == Using images to simplify deployment
 
 CircleCI provides maintained Docker images (convenience images) that contain the tools required for common deployment scenarios.
 Convenience images provide fast spin-up times, reliability, and stability.
-Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] to learn more about each of the deploy convenience images:
+Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] to learn more about each convenience image:
 
 - link:https://circleci.com/developer/images/image/cimg/deploy[`cimg/deploy`]
 - link:https://circleci.com/developer/images/image/cimg/aws[`cimg/aws`]
@@ -88,9 +90,9 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 - link:https://circleci.com/developer/images/image/cimg/gcp[`cimg/gcp`]
 
 [#next-steps]
-== Next steps
+== Handling common deployment scenarios
 
-Use the following how-to guides to deal with common use cases:
+Use the following how-to guides to manage common deployment use cases:
 
 * For examples of deploying to Kubernetes, see the guides in the link:https://github.com/CircleCI-Public/cd-config-examples/blob/main/docs/cci_deploy/deployment_helm.md[Continuous deployment config examples] repo.
 * <<deploy-to-amazon-sagemaker#,Deploy to Amazon SageMaker>>
@@ -112,4 +114,3 @@ Use the following how-to guides to deal with common use cases:
 * <<publish-packages-to-packagecloud#,Publish packages to Packagecloud>>
 
 Go to the link:https://circleci.com/developer/orbs[orbs registry] to simplify your configuration by using an orb for your deployment target.
-If the orb you need has not been created yet, consider <<orb-author-intro#,authoring one>>!
