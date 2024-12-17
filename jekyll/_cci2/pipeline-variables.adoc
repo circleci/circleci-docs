@@ -93,6 +93,8 @@ jobs:
 [#passing-parameters-when-triggering-pipelines-via-the-api]
 === Passing parameters when triggering pipelines via the API
 
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to link:https://circleci.com/docs/api/v2/#trigger-a-new-pipeline[trigger a pipeline]. This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 The API limits the number of parameters that can be passed:
