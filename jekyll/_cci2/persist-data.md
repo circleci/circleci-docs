@@ -5,8 +5,7 @@ description: "A introductory guide to the various ways to persist data in Circle
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. There are a number of ways to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
@@ -170,4 +169,3 @@ Billing for storage can be minimized by evaluating your storage needs and settin
 - [Artifacts](/docs/artifacts)
 - [IP Ranges](/docs/ip-ranges/)
 - [Optimizations Overview](/docs/optimizations)
-- [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)

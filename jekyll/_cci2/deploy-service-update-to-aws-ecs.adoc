@@ -3,8 +3,7 @@ description: A how to guide for deploying changes to AWS ECS using CircleCI orbs
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 document-type:
 - How-to
 ---
@@ -36,7 +35,7 @@ NOTE: the `CIRCLE_SHA1` variable used in this example is built-in, so it is alwa
 [#specify-a-version]
 == 2. Specify a version
 
-Every CircleCI `config.yml`` starts with the version key. This key is used to issue warnings about breaking changes.
+Every CircleCI `config.yml` starts with the version key. This key is used to issue warnings about breaking changes.
 
 [source,yaml]
 ----
@@ -53,9 +52,9 @@ In this example you will need to use three orbs in your configuration. Add them 
 [source,yaml]
 ----
 orbs:
-  aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
-  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+  aws-ecr: circleci/aws-ecr@9.3.5 # use the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@6.0.0 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@5.1.1 # use the AWS CLI orb
 ----
 
 TIP: When using orbs, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your project.
@@ -76,20 +75,20 @@ workflows:
 
 To configure an link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS service update] to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible:
 
-* The `build-and-push-image` job from the ECR orb to build and push an updated image to ECR
-* The `deploy-service-update` from the ECS orb to deploy your service update
+* The `build_and_push_image` job from the ECR orb to build and push an updated image to ECR
+* The `deploy_service_update` from the ECS orb to deploy your service update
 
 [source,yaml]
 ----
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image: # orb built-in job
+      - aws-ecr/build_and_push_image: # orb built-in job
           repo: '${MY_APP_PREFIX}'
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update: # orb built-in job
+      - aws-ecs/deploy_service_update: # orb built-in job
           requires:
-            - aws-ecr/build-and-push-image
+            - aws-ecr/build_and_push_image
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
@@ -110,9 +109,9 @@ jobs:
     steps:
       - aws-cli/install
       - aws-cli/setup:
-          aws-access-key-id: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_DEFAULT_REGION
-          aws-secret-access-key: AWS_DEFAULT_REGION
+          aws_access_key_id: AWS_SECRET_ACCESS_KEY
+          region: AWS_DEFAULT_REGION
+          aws_secret_access_key: AWS_DEFAULT_REGION
       - run:
           name: Get last task definition
           command: >
@@ -122,10 +121,10 @@ jobs:
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
             "$BASH_ENV"
-      - aws-ecs/verify-revision-is-deployed:
+      - aws-ecs/verify_revision_is_deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
-          task-definition-arn: '${TASK_DEFINITION_ARN}'
+          task_definition_arn: '${TASK_DEFINITION_ARN}'
 ----
 
 This section illustrates how you can use the orb to install and configure the AWS CLI, retrieve the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[task definition] that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb.
@@ -140,18 +139,18 @@ Now that we have our verification job, `verify-deployment`, we can add it to our
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image: # orb built-in job
+      - aws-ecr/build_and_push_image: # orb built-in job
           repo: '${MY_APP_PREFIX}'
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update: # orb built-in job
+      - aws-ecs/deploy_service_update: # orb built-in job
           requires:
-            - aws-ecr/build-and-push-image
+            - aws-ecr/build_and_push_image
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
-            - aws-ecs/deploy-service-update
+            - aws-ecs/deploy_service_update
 ----
 
 [#full-config]
@@ -162,9 +161,9 @@ workflows:
 version: 2.1 # 2.1 config required to use orbs
 
 orbs:
-  aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
-  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+  aws-ecr: circleci/aws-ecr@9.3.5 # use the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@6.0.0 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@5.1.1 # use the AWS CLI orb
 
 jobs:
   verify-deployment:
@@ -172,9 +171,9 @@ jobs:
     steps:
       - aws-cli/install
       - aws-cli/setup:
-          aws-access-key-id: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_DEFAULT_REGION
-          aws-secret-access-key: AWS_DEFAULT_REGION
+          aws_access_key_id: AWS_SECRET_ACCESS_KEY
+          region: AWS_DEFAULT_REGION
+          aws_secret_access_key: AWS_DEFAULT_REGION
       - run:
           name: Get last task definition
           command: >
@@ -184,26 +183,26 @@ jobs:
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
             "$BASH_ENV"
-      - aws-ecs/verify-revision-is-deployed:
+      - aws-ecs/verify_revision_is_deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
-          task-definition-arn: '${TASK_DEFINITION_ARN}'
+          task_definition_arn: '${TASK_DEFINITION_ARN}'
 
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image: # orb built-in job
+      - aws-ecr/build_and_push_image: # orb built-in job
           repo: '${MY_APP_PREFIX}'
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update: # orb built-in job
+      - aws-ecs/deploy_service_update: # orb built-in job
           requires:
-            - aws-ecr/build-and-push-image
+            - aws-ecr/build_and_push_image
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
-            - aws-ecs/deploy-service-update
+            - aws-ecs/deploy_service_update
 ----
 
 [#next-steps]

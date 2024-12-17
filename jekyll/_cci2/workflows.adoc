@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Workflow orchestration
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
@@ -268,6 +267,8 @@ NOTE: Scheduled workflows are not available for projects integrated through the 
 
 NOTE: *The deprecation of the scheduled workflows feature is postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work for us to do to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
+CAUTION: The scheduled workflows feature does not support xref:dynamic-config#[Dynamic configuration]. If you use dynamic configuration you will need to use xref:scheduled-pipelines#[Scheduled pipelines] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+
 By default, a workflow runs on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
 
 Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling a workflow is an alternative to building on every commit. You can _schedule_ a workflow to run at a certain time for a specific branch or branches. Consider scheduling workflows that are resource-intensive or that generate reports on a schedule rather than on every commit.
@@ -400,6 +401,8 @@ The `test1` and `test2` jobs have access to environment variables stored in the 
 == Use conditional logic in workflows
 
 You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a xref:configuration-reference#logic-statements[logic statement] to determine whether or not to run that workflow.
+
+Workflows are always run unless there is a `when` or `unless` filter that prevents the workflow from being run. If you want a workflow to run in **every** pipeline, do **not** add a when or unless filter.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 

@@ -3,8 +3,7 @@ description: Reference page for webhooks payloads
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Webhooks reference
 :page-layout: classic-docs
@@ -128,7 +127,7 @@ The following data about the job associated with the webhook event is provided:
 
 | `stopped_at`
 | no
-| When the job reached a terminal state (if applicable)                                                        |
+| When the job reached a terminal state (if applicable)
 |===
 
 [#workflow]

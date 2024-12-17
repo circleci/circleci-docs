@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Storing build artifacts
 :page-description: Example of uploading artifacts created during a build
@@ -166,6 +165,26 @@ Similarly, if you want to download the _latest_ artifacts of a build, replace th
 [,shell]
 ----
 curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts
+----
+
+If you need to download all artifacts from a workflow at the same time you can use the following method. You will need your workflow ID.  Copy your workflow ID from the end of the URL when viewing the workflow page in the CircleCI web app:
+
+[,shell]
+----
+# Set an environment variable for your API token.
+export CIRCLE_TOKEN=':your_token'
+
+# `curl` retrieve the list of jobs in the workflow,
+# then `jq` lists from the result and filter the job identifiers,
+# then `xargs`/`curl` generates the jobs URLs including the jobs identifiers,
+# then the result is piped into `grep` to extract the URLs,
+# finally, `wget` is used to download the artifacts to the current directory in your terminal.
+
+curl --silent --request GET --url https://circleci.com/api/v2/workflow/:workflow_id/job --header "Circle-Token: $CIRCLE_TOKEN" \
+  | jq '.items[].job_number' \
+  | xargs -I {} curl --silent --request GET --url 'https://circleci.com/api/v2/project/:vcs/:org/:project/{}/artifacts' --header "Circle-Token: $CIRCLE_TOKEN" \
+  | grep -o -E 'https://([^"]*)' \
+  | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --no-verbose --input-file -
 ----
 
 You can read more about using CircleCI's API to interact with artifacts in our link:https://circleci.com/docs/api/v1/#artifacts[API reference guide].

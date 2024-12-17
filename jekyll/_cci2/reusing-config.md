@@ -8,8 +8,7 @@ order: 1
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
@@ -68,7 +67,7 @@ Key Name | Description | Default value
 ---|---|---
 description | Optional. Used to generate documentation for your orb. | N/A
 type | Required. See **Parameter Types** in the section below for details. | N/A
-default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A
+default | The default value for the parameter. Required for pipeline parameters. For all other parameters, if not present, the parameter is implied to be required. | N/A
 {: class="table table-striped"}
 
 ### Parameter types
@@ -514,7 +513,7 @@ To invoke this `sync` command in your 2.1 `.circleci/config.yml` file, see the f
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0
+  aws-s3: circleci/aws-s3@4.1.0
 
 jobs:
   deploy2s3:
@@ -524,7 +523,6 @@ jobs:
       - aws-s3/sync:
           from: .
           to: "s3://mybucket_uri"
-          overwrite: true
 
 workflows:
   build-test-deploy:
@@ -538,8 +536,8 @@ Defining a `build` job:
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@0.1.2
-  aws-s3: circleci/aws-s3@1.0.0
+  aws-cli: circleci/aws-cli@5.1.1
+  aws-s3: circleci/aws-s3@4.1.0
 
 jobs:
   build:
@@ -550,7 +548,6 @@ jobs:
       - aws-s3/sync:
           from: bucket
           to: "s3://my-s3-bucket-name/prefix"
-          overwrite: true
       - aws-s3/copy:
           from: bucket/build_asset.txt
           to: "s3://my-s3-bucket-name"

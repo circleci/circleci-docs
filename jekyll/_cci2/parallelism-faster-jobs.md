@@ -5,8 +5,7 @@ description: A guide for test splitting and running tests across parallel comput
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 Use parallelism and test splitting to:
