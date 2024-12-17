@@ -72,8 +72,8 @@ classpath
 classpath?
 CLI
 [Cc]lojure
-[Cc]loud
-Cloud Foundry
+[Cc]loud\b
+\bCloud\sFoundry\b
 CocoaPods
 Codecov
 CodeDeploy
@@ -286,7 +286,7 @@ unencrypted
 unittest
 [Uu]nfollow[ing]?
 unformatted
-untrusted
+[Uu]ntrusted
 URI
 URLEncoder
 UUID

@@ -3,7 +3,7 @@ description: Learn about developing your config policies.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
+  - Server v4+
 ---
 = Use the CircleCI CLI for config and policy development
 :page-layout: classic-docs

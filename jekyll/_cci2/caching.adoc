@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Caching dependencies
 :page-description: This document is a guide to caching dependencies in CircleCI pipelines.
@@ -218,14 +217,14 @@ Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: `+{Job1, Job
 
 In a run of the workflow, Job3 may use the cache written by Job1 _or_ Job2. Since caches are immutable, this would be whichever job saved its cache first.
 
-This is usually undesirable, because the results are not deterministic. Part of the result depends on chance.
+A caching scenario like this is usually undesirable, because the results are not deterministic. Part of the result depends on chance.
 
 You can make this workflow deterministic by changing the job dependencies. For example, make Job1 and Job2 write to different caches, and Job3 loads from only one. Or ensure there can be only one ordering: `+Job1 -> Job2 -> Job3+`.
 
 [#caching-race-condition-example-2]
 === Caching race condition example 2
 
-There are more complex cases where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`.
+A more complex caching example could be using a dynamic key, for example, {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restoring using a partial key match, for example, `node-cache-`.
 
 A race condition is still possible, but the details may change. For instance, the downstream job uses the cache from the upstream job that ran last.
 
@@ -234,7 +233,7 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 [#using-caching-in-monorepos]
 == Using caching in monorepos
 
-There are many different approaches to utilizing caching in monorepos. The following approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo.
+The following example is one approach to managing a shared cache based on multiple files in different parts of your monorepo.
 
 [#creating-and-building-a-concatenated-package-lock-file]
 === Creating and building a concatenated `package-lock` file
