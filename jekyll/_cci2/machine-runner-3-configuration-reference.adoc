@@ -59,7 +59,7 @@ The URL will be pointing to `https://runner.circleci.com` by default. It should 
 
 `$CIRCLECI_RUNNER_LOGGING_LEVEL`
 
-This sets the logging level for the `circleci-runner` service. The logging level defaults to `info`.
+This sets the logging level for the `circleci-runner` service. The available logging levels are `debug`, `info`, `warn`, and `error`. By default, the logging level is set to `info`.
 
 Example:
 
@@ -74,7 +74,12 @@ logging:
 
 `$CIRCLECI_RUNNER_LOGGING_FORMAT`
 
-This sets the logging format for the `circleci-runner` service used for stderr and file logging. The logging format defaults to `color`.
+This sets the logging format for the `circleci-runner` service used for stderr and file logging. The available formats are:
+
+- `color`: The default logging format, with color.
+- `text`: Disables color but maintains standard logging output.
+- `json`: Outputs logs in JSON format.
+- `none`: Disables logging entirely.
 
 Example:
 
