@@ -140,6 +140,7 @@ Once you have added labels to your components and environments, you can use them
 
 To add or edit labels follow the steps below.
 
+.Add and Edit environment and component labels
 image::../../img/docs/releases/edit-labels.png[Screenshot showing the location of the add/edit labels button]
 
 ===== Component labels
