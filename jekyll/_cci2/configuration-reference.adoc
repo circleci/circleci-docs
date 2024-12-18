@@ -2861,6 +2861,8 @@ workflows:
 
 You can use the API to trigger a pipeline with a pipeline parameter set to true:
 
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 [source,yml]
 ----
 curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run \
