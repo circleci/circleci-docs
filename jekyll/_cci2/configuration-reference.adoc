@@ -788,7 +788,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.09
+      - image: cimg/base:2024.12
     environment:
       FOO: bar
     parallelism: 3
@@ -1005,10 +1005,10 @@ Example:
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-2004:current # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+      image: ubuntu-2004:current # recommended linux image
 
     steps:
-        # Commands run in a Linux virtual machine environment
+      # Commands run in a Linux virtual machine environment
 ----
 --
 
@@ -1071,7 +1071,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: android:2022.09.1
+      image: android:2024.11.1
 ----
 
 The Android image can also be accessed using the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
@@ -1201,7 +1201,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.09
+      - image: cimg/base:2024.12
     resource_class: xlarge
     steps:
       ... // other config
@@ -1235,7 +1235,7 @@ Example:
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202010-01 # recommended linux image
+      image: ubuntu-2004:2024.01.2 # recommended linux image
     resource_class: large
     steps:
       ... // other config
@@ -1305,8 +1305,8 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
+      - checkout
+      - run: Write-Host 'Hello, Windows'
 ----
 --
 
@@ -1322,8 +1322,8 @@ jobs:
       image: windows-default
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
+      - checkout
+      - run: Write-Host 'Hello, Windows'
 ----
 --
 
@@ -1393,7 +1393,7 @@ Example:
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2004:2024.01.2
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -1678,7 +1678,7 @@ Here is an example where `halt` is used to avoid running a job on the `develop` 
 
 [,yml]
 ----
-run: |
+- run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
     fi
@@ -1722,7 +1722,7 @@ jobs: # conditional steps may also be defined in `commands:`
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2004:2024.11.1
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -1810,7 +1810,7 @@ Allows Docker commands to be run locally. See xref:building-docker-images#[Runni
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.06
+      - image: cimg/base:2024.06
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
@@ -2289,7 +2289,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:17.2.0
+      - image: cimg/node:20.18.1
     environment:
       IMAGETAG: latest
     working_directory: ~/main
@@ -2787,6 +2787,7 @@ workflows:
   deploy:
     jobs:
       - init-service
+      - test-service
       - build-service-image:
           requires:
             - init-service
@@ -2804,7 +2805,7 @@ workflows:
             - org-global
           requires:
             - publish-service
-          filters: pipeline.git.branch == "main" and pipeline.git.commit.subject starts-with "DEPLOY:"
+          filters: pipeline.git.branch == "main" and pipeline.parameters.my-custom-param starts-with "DEPLOY:"
 ----
 
 '''
@@ -2829,7 +2830,7 @@ Only run the job on the `main` branch, and disallow use with pipelines xref:vs-c
 
 [source,yml]
 ----
-filters: pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
+filters: pipeline.git.branch == "main" and not (pipeline.trigger_source starts-with "api")
 ----
 
 Use pipeline parameters and the pipeline value `pipeline.git.branch` to run a job only on specific branches **or** when triggered via the API with a pipeline parameter set to true:
@@ -3042,19 +3043,19 @@ workflows:
     jobs:
       - build:
           name: build-macos-0.1
-          version: 0.1
+          version: "0.1"
           platform: macos
       - build:
           name: build-macos-0.2
-          version: 0.2
+          version: "0.2"
           platform: macos
       - build:
           name: build-macos-0.3
-          version: 0.3
+          version: "0.3"
           platform: macos
       - build:
           name: build-windows-0.1
-          version: 0.1
+          version: "0.1"
           platform: windows
       - ...
 ----
@@ -3090,7 +3091,7 @@ The matrix above would expand into 8 jobs: every combination of the parameters
 [#dependencies-and-matrix-jobs]
 ====== Dependencies and matrix jobs
 
-To `require` an entire matrix (every job within the matrix), use its `alias`.
+To require an entire matrix (every job within the matrix), use its `alias`.
 The `alias` defaults to the name of the job being invoked.
 
 [,yaml]
@@ -3143,18 +3144,18 @@ workflows:
     jobs:
       - build:
           name: build-v0.1
-          version: 0.1
+          version: "0.1"
       - build:
           name: build-v0.2
-          version: 0.2
+          version: "0.2"
       - deploy:
           name: deploy-v0.1
-          version: 0.1
+          version: "0.1"
           requires:
             - build-v0.1
       - deploy:
           name: deploy-v0.2
-          version: 0.2
+          version: "0.2"
           requires:
             - build-v0.2
 ----
@@ -3179,7 +3180,7 @@ version: 2.1
 jobs:
   bar:
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2004:2024.05.1
     steps:
       - checkout
       - run:
@@ -3317,12 +3318,12 @@ workflows:
 version: 2.1
 
 executors:
-  linux-13:
+  linux-22:
     docker:
-      - image: cimg/node:13.13
+      - image: cimg/node:22.4
   macos: &macos-executor
     macos:
-      xcode: 14.2.0
+      xcode: 15.0.1
 
 jobs:
   test:
@@ -3346,7 +3347,7 @@ workflows:
     jobs:
       - test:
           os: macos
-          node-version: "13.13.0"
+          node-version: "22.4"
 ----
 
 '''
@@ -3364,19 +3365,19 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
+      - image: ubuntu:23.04
 
-      - image: mongo:2.6.8
+      - image: mongo:6.0.14
         command: [mongod, --smallfiles]
 
-      - image: postgres:14.2
+      - image: postgres:14.12
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 
-      - image: rabbitmq:3.5.4
+      - image: rabbitmq:3.12.12
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -3432,7 +3433,7 @@ jobs:
 
   deploy-stage:
     docker:
-      - image: ubuntu:14.04
+      - image: ubuntu:23.04
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -3441,7 +3442,7 @@ jobs:
 
   deploy-prod:
     docker:
-      - image: ubuntu:14.04
+      - image: ubuntu:23.04
     working_directory: /tmp/my-project
     steps:
       - run:
