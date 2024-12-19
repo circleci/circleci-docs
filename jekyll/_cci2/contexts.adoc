@@ -202,7 +202,7 @@ Addition and deletion of environment variables from a restricted context is limi
 [#project-restrictions]
 == Project restrictions
 
-CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:gitlab-integration#roles-and-permissions[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
+CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:roles-and-permissions-overview#[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
 NOTE: API support for project restricted contexts is coming soon.
 
