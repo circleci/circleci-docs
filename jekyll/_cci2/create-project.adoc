@@ -31,7 +31,7 @@ On the **Organization Home** page, check which option you see:
 [#create-a-project]
 === Create a project
 
-NOTE: If you have integrate your code with the xref:github-apps-integration#[CircleCI GitHub App], xref:gitlab-integration#[GitLab], or xref:bitbucket-data-center-integration#[Bitbucket Data Center], the steps in this section apply to you.
+NOTE: If you have integrated your code with the xref:github-apps-integration#[CircleCI GitHub App], xref:gitlab-integration#[GitLab], or xref:bitbucket-data-center-integration#[Bitbucket Data Center], the steps in this section apply to you.
 
 Choose steps to follow below, depending on where your code is stored:
 
