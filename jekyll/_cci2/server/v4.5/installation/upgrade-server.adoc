@@ -20,6 +20,8 @@ This page describes the steps needed to upgrade your CircleCI server installatio
 [#path]
 == Upgrade paths
 
+TIP: Our general recommendation is not to skip releases when upgrading. However, we validated that **you can seamlessly upgrade directly from server 4.5 to server 4.7**. While future version skips may not be tested by CircleCI, this ensures a clear path to adopt server 4.7 and stay on a newly supported version.
+
 We recommend that you **do not** skip releases when upgrading, however some patch releases can be skipped. Your upgrade path will depend on your current version, and the currently available version releases.
 
 When upgrading from one minor version to the next, ensure your upgrade path includes the last patch release for your current minor version.
