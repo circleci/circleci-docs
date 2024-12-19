@@ -41,13 +41,15 @@ Follow these steps to create a new project in CircleCI:
 
 include::../_includes/partials/create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
+. Choose a repo to connect to your project.
 +
-image::create-project/choose-a-repo-github.png[Choose a repository window with option to add another VCS]
+If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
 +
 NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. This is a one-time action that can be done by an organization administrator or someone who has admin access to a repository in your org.
++
+image::create-project/choose-a-repo-github.png[Choose a repository window with option to add another VCS]
 
-. In this next step CircleCI will prepare a config file for you, **unless your repo already contains a CircleCI config file**. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
+. In this next step CircleCI will prepare a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
 +
 image::create-project/set-up-your-config.png[Screenshot showing options to set up your config file]
 
@@ -55,7 +57,7 @@ image::create-project/set-up-your-config.png[Screenshot showing options to set u
 +
 image::create-project/set-up-your-triggers.png[Screenshot showing options to set up your triggers]
 
-. Next you can review everything you have just set up, then select btn:[Commit config and run], for btn:[Finish setup] if you already have a config file in your repo.
+. Next you can review everything you have just set up, then select btn:[Commit config and run], or btn:[Finish setup] if you already have a config file in your repo.
 +
 image::create-project/review-and-finish-setup.png[Screenshot showing options to review and commit your config]
 
@@ -170,21 +172,25 @@ image::create-project/set-up-a-project.png[Set up a project button]
 +
 [TIP]
 ====
-**Can't see your project?** Select the dark blue section at the top of the window to navigate to your user homepage and select an organization.
+**Can't see your project?** Select the CircleCI logo at the top of the window to navigate to your user homepage and select an organization.
 
 image::create-project/user-home-page.png[Select Organization]
 ====
 
 . Choose a `config.yml` option in the modal. You can choose from the following:
-** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the <<config-intro#,Configuration Introduction>>.
+** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the <<config-intro#,Configuration Introduction>>. You will also need to specify a branch.
 ** **Faster**: Commit a starter CI pipeline to a new `circleci-project-setup` branch of your repository.
-** View, edit and commit a template `config.yml`.
+** **Fast**: View, edit, and commit a template `config.yml`.
 
 . Select **Set Up Project**.
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output in the CircleCI dashboard.
 
-To make changes to your pipeline, either edit the `.circleci/config.yml` file in your repository, or select the ellipsis next your project in the Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file. You can also access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
+To make changes to your pipeline, choose one of the following:
+
+* Edit the config file in your repository,
+* Select the ellipsis (icon:ellipsis-h[]) next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
+* Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
 
 image::create-project/configuration-file.png[Edit Configuration File]
 
