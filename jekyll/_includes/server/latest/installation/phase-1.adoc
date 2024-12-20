@@ -127,7 +127,7 @@ The application uses a large number of resources. Depending on your usage, your 
 | Kubernetes Version
 
 | 4.7.x
-| 1.26 - 1.29
+| 1.26 - 1.31
 |===
 
 [#minimum-permissions-requirments]
