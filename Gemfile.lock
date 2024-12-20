@@ -166,7 +166,7 @@ GEM
     rouge (3.30.0)
     ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.5)
-    rugged (1.0.1)
+    rugged (1.6.3)
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -206,6 +206,7 @@ DEPENDENCIES
   pronto
   pronto-markdownlint
   rake
+  rugged (= 1.6.3)
 
 RUBY VERSION
    ruby 3.1.3p185
