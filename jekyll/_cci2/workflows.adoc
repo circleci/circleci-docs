@@ -107,6 +107,52 @@ Define job dependencies using the `requires` key. A job must wait until all upst
 
 See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml[Sample Sequential Workflow config] for a full example.
 
+[#flexible-job-dependency]
+==== Flexible job dependency
+
+Using `requires`, you can build complex dependency maps and fan in/out scenarios.
+
+This example shows a workflow with four sequential jobs. Each job waits until the "required" job attains a specified status.
+
+This configuration snippet is an example of a workflow configured for flexible sequential jobs:
+
+[source,yaml]
+----
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+      - release:
+          requires:
+            - deploy
+      - rollback:
+          requires:
+            - release:
+              - failed
+              - canceled
+----
+
+A job must wait until all upstream jobs in the dependency graph have attained either of the statuses specified under the corresponding `requires` key. In this example, the `deploy` job runs when the `build` job completes successfully:
+
+* The `rollback` job waits for the `release` job, and only runs if the `release` job fails or is canceled.
+* The `release` job waits for the `deploy` job, and only runs if the `deploy` job is successful.
+* The `deploy` job waits for the `build` job, and only runs if the `build` job is successful.
+
+
+
+.Workflow execution when the `release` job is successful
+image::/docs/assets/img/docs/workflow-using-requires-example-1.png[Flexible Job Execution Workflow - Example 1]
+
+.Workflow execution when the `release` job fails:
+image::/docs/assets/img/docs/workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
+
+
+TIP: Refer to the xref:configuration-reference#requires[Requires] section of the configuration reference.
+
+
 [#fan-outfan-in-workflow]
 === Fan-out/fan-in workflow
 
