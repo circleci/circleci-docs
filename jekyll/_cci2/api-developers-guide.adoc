@@ -13,6 +13,8 @@ contentTags:
 
 This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 [#api-categories]
 == API categories
 
