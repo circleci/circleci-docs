@@ -70,7 +70,7 @@ Follow these steps to create a new project in CircleCI:
 
 include::../_includes/partials/create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab Cloud] to authorise access to your GitLab repositories.
 +
 image::create-project/choose-a-repo-gitlab.png[Choose a repository window with option to add another VCS]
 +
@@ -102,7 +102,7 @@ Follow these steps to create a new project in CircleCI:
 
 include::../_includes/partials/create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from your GitLab self-managed instance. Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab self-managed] to access repositories from your GitLab self-managed instance. Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
 +
 image::create-project/choose-a-repo-gitlab.png[Choose a repository window with option to add another VCS]
 +
