@@ -157,6 +157,8 @@ image::create-project/authorize-bitbucket-data-center.png[Choose a repository wi
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 
+Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers at menu:Project settings[Triggers]. For more information, see the xref:pipelines#triggers[Pipelines overview].
+
 [#set-up-a-project]
 === Set up a project
 
