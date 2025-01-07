@@ -111,6 +111,7 @@ workflows:
     jobs:
       - vale/lint:
           reference_branch: master
+          base_dir: ~/project
 
   build-deploy:
     when:
