@@ -9,7 +9,12 @@ contentTags:
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-liquid:
 
-This quickstart guide takes you through connecting an existing project to CircleCI, using the in-app config editor, and inviting team members to collaborate on your new project.
+This quickstart guide takes you through the following:
+
+* Create a project, connecting some existing code to CircleCI.
+* Inviting team members to collaborate on your new project.
+* Use the VS Code extention to debug and extend your config.
+* SSH into a build to debug your project.
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
 
