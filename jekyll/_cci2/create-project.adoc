@@ -47,18 +47,22 @@ If you do not see your repo listed, select btn:[Add] to access repositories from
 +
 NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. This is a one-time action that can be done by an organization administrator or someone who has admin access to a repository in your org.
 +
+.Choose a repo to connect your code to your project
 image::create-project/choose-a-repo-github.png[Choose a repository window with option to add another VCS]
 
 . In this next step CircleCI will prepare a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
 +
+.Set up your CircleCI config file
 image::create-project/set-up-your-config.png[Screenshot showing options to set up your config file]
 
 . Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:pipelines#triggers[add more triggers] at this point too.
 +
+.Set up triggers for your pipeline
 image::create-project/set-up-your-triggers.png[Screenshot showing options to set up your triggers]
 
 . Next you can review everything you have just set up, then select btn:[Commit config and run], or btn:[Finish setup] if you already have a config file in your repo.
 +
+.Review and finish setup
 image::create-project/review-and-finish-setup.png[Screenshot showing options to review and commit your config]
 
 Once your project is created you will land on your pipelines page.
@@ -72,12 +76,16 @@ include::../_includes/partials/create-project/steps-up-to-pipeline.adoc[Insert s
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab Cloud] to authorise access to your GitLab repositories.
 +
+Choose a repo to connect your code to your project
++
+.Choose a repo to connect your code to your project
 image::create-project/choose-a-repo-gitlab.png[Choose a repository window with option to add another VCS]
 +
 NOTE: **First GitLab project?** If you are creating the first GitLab project for your org, you will be redirected to GitLab to authorise the integration. This is a one-time action that can be done by an organization administrator or someone who has admin access to a repository in your org.
 
 . In the Create New Project window, ensure you have the right repo selected in the dropdown. If you have a CircleCI config file already available in your repo, CircleCI will detect it. If not you can select an option for adding one:
 +
+.Set up a new GitLab project
 image::create-project/create-new-gitlab-project.png[Create new project window]
 +
 ** **Fastest:** Use a config file that already exists in your repository.
@@ -90,9 +98,11 @@ image::create-project/create-new-gitlab-project.png[Create new project window]
 
 ** Select btn:[Commit and Run] to commit your custom configuration file on a new branch called `circleci-project-setup`.
 +
+.Use a generated config file
 image::create-project/generated-config-commit-and-run.png[Window showing generated config and options to commit and run or use an existing config]
 ** Select btn:[Use Existing Config] for the option to download the generated config and instructions to commit this or another CircleCI configuration file to your repository directly. The select btn:[Start Building].
 +
+.Instructions for using an existing config file
 image::create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
 --
 
@@ -104,12 +114,15 @@ include::../_includes/partials/create-project/steps-up-to-pipeline.adoc[Insert s
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab self-managed] to access repositories from your GitLab self-managed instance. Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
 +
+.Choose a repo to connect your code to your project
 image::create-project/choose-a-repo-gitlab.png[Choose a repository window with option to add another VCS]
 +
+.Authorize GitLab self-managed
 image::create-project/authorize-gitlab-self-managed.png[Option to authorize a new VCS integration]
 
 . In the Create New Project window, you have some options:
 +
+.Set up your new GitLab self-managed project
 image::create-project/create-new-gitlab-self-managed-project.png[Create new project window]
 +
 [NOTE]
@@ -146,6 +159,7 @@ include::../_includes/partials/create-project/steps-up-to-pipeline.adoc[Insert s
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center]
 +
+.Access Bitbucket data center repos
 image::create-project/authorize-bitbucket-data-center.png[Choose a repository window with option to add another VCS]
 
 . Next, follow the steps on the xref:bitbucket-data-center-integration#integrate-a-project-with-circleci[Bitbucket integration setup] page to set up the following:
@@ -169,6 +183,7 @@ Follow these steps to  set up a new project in CircleCI:
 . In the CircleCI web app, select **Organization Home** in the sidebar.
 . Select btn:[Set up a project].
 +
+.Set up a project
 image::create-project/set-up-a-project.png[Set up a project button]
 . Find your project in the list and select btn:[Set Up Project].
 +
@@ -176,6 +191,7 @@ image::create-project/set-up-a-project.png[Set up a project button]
 ====
 **Can't see your project?** Select the CircleCI logo at the top of the window to navigate to your user homepage and select an organization.
 
+.Access your user homepage
 image::create-project/user-home-page.png[Select Organization]
 ====
 
@@ -194,6 +210,7 @@ To make changes to your pipeline, choose one of the following:
 * Select the ellipsis (icon:ellipsis-h[]) next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
 * Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
 
+.Access and edit a config file
 image::create-project/configuration-file.png[Edit Configuration File]
 
 [#see-also]
