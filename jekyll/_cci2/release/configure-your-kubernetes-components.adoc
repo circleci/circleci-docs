@@ -117,7 +117,7 @@ jobs:
       ...
       (existing deployment commands)
       ...
-      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=<some-version-name> <my-service-release>
+      - run: circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=<some-version-name> <my-service-release>
 ----
 +
 Substitute the placeholders above based on your application's details:
@@ -166,7 +166,7 @@ jobs:
     executor: some-executor
     steps:
       - ./deploy.sh
-      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=some-version-name my-service-release
+      - run: circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=some-version-name my-service-release
   release-my-service:
     type: release
     plan_name: my-service-release
