@@ -1,0 +1,9 @@
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Define the new schedule by filling out the form, then select **Save Trigger**.
+
+The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables that you declare at the top level of a configuration.
+
+If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows] page for examples.

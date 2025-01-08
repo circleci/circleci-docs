@@ -140,6 +140,8 @@ When CircleCI runs a job, a link to the core dump file appears in the *Artifacts
 [#downloading-all-artifacts-for-a-build-on-circleci]
 == Downloading all artifacts for a build on CircleCI
 
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 To download your artifacts with `curl`, follow the steps below.
 
 . xref:managing-api-tokens#creating-a-personal-api-token[Create a personal API token] and copy it to a clipboard.

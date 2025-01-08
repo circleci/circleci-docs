@@ -6,7 +6,7 @@ orbs:
   ruby: circleci/ruby@2.3.1
   node: circleci/node@6.3.0
   md-proofer: hubci/md-proofer@0.1.1
-  vale: circleci/vale@1.1.1
+  vale: circleci/vale@1.2.0
 
 # This is using the new Scheduled Pipeline feature.
 # Right now (10/2021) there is no UI to configure it, so if you need to
@@ -111,7 +111,6 @@ workflows:
     jobs:
       - vale/lint:
           reference_branch: master
-          base_dir: ~/project/jekyll/_cci2/
 
   build-deploy:
     when:
