@@ -45,7 +45,7 @@ jobs:
       ...
       (existing deployment commands)
       ...
-      - circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
+      - run: circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
 ----
 
 Substitute the placeholders above based on your application's details:

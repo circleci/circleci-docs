@@ -47,7 +47,7 @@ CircleCI may be configured to deploy code to various environments, including (bu
 * Android
 * iOS
 
-The link:https://circleci.com/developer/orbs[orbs registry] contains packages of reusable configuration that can be used for common deployment targets. Orbs simplify and streamline your configuration.
+The link:https://circleci.com/developer/orbs[orbs registry] contains packages of reusable configuration for common deployment targets. Orbs simplify and streamline your configuration.
 
 Other cloud service deployments can be scripted using SSH, or by installing the API client of the service with your job configuration.
 
