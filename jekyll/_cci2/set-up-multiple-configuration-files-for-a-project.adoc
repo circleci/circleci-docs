@@ -67,3 +67,11 @@ Next, create a trigger for your pipeline.
 == Conclusion
 
 You have now successfully set up multiple configuration files for your project on CircleCI. Each configuration file will trigger a separate pipeline on the configured trigger events. Push a commit to your code to test this out. You should see both pipelines trigger in the CircleCI web app Pipelines page.
+
+[#troubleshooting]
+== Troubleshooting
+
+[#"No suitable user credential could be found for user"]
+=== "No suitable user credential could be found for user"
+
+If you are seeing a "No suitable user credential could be found for user" when triggering a pipeline from the CircleCI web app, navigate to Project Settings > Pipelines > Add Pipeline > "Authorize" and then attempt to run the pipeline again by clicking "Trigger Pipeline".

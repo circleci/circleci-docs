@@ -59,7 +59,7 @@ The URL will be pointing to `https://runner.circleci.com` by default. It should 
 
 `$CIRCLECI_RUNNER_LOGGING_LEVEL`
 
-This sets the logging level for the `circleci-runner` service. The logging level defaults to `info`.
+This sets the logging level for the `circleci-runner` service. The available logging levels are `debug`, `info`, `warn`, and `error`. By default, the logging level is set to `info`.
 
 Example:
 
@@ -74,7 +74,12 @@ logging:
 
 `$CIRCLECI_RUNNER_LOGGING_FORMAT`
 
-This sets the logging format for the `circleci-runner` service used for stderr and file logging. The logging format defaults to `color`.
+This sets the logging format for the `circleci-runner` service used for stderr and file logging. The available formats are:
+
+- `color`: The default logging format, with color.
+- `text`: Disables color but maintains standard logging output.
+- `json`: Outputs logs in JSON format.
+- `none`: Disables logging entirely.
 
 Example:
 
@@ -159,7 +164,7 @@ runner:
 
 `$CIRCLECI_RUNNER_WORK_DIR`
 
-This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task-agent will need permissions to write to the directory. If the directory does not exist, then the task-agent will need permissions to create the directory. If installing multiple launch-agents on the same machine, each launch-agent will need a unique working directory.
+This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task-agent will need permissions to write to the directory. If the directory does not exist, then the task-agent will need permissions to create the directory.
 
 NOTE: These directories will not be removed automatically, see `cleanup_working_directory` to configure cleanup of directory.
 
