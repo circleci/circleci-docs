@@ -337,7 +337,7 @@ run:
 
 . **Create Google Play API key**
 +
-Finally, you need to create your Google Play API key from your `api.json` You have already saved the value with an environment variable `$GOOGLE_PLAY_KEY`, so you can refer to this variable and write the api.json file at runtime, instead of uploading it to a remote repository.
+Finally, you need to create your Google Play API key from your `api.json` You have already saved the value with an environment variable `$GOOGLE_PLAY_KEY`, so you can refer to this variable and write the `api.json` file at runtime, instead of uploading it to a remote repository.
 +
 Add the following command to the job:
 +
