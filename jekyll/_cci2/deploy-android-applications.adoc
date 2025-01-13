@@ -245,19 +245,19 @@ The following snippet an example with each parameter set as its default value.
 workflows:
   deploy:
     jobs:
-      - android/deploy-to-play-store:
+      - android/deploy_to_play_store:
                 executor:
-                  name: android/android-docker
-                  tag: "2022.0.7"
-                base64-keystore: BASE64_KEYSTORE
-                release-key-alias: RELEASE_KEY_ALIAS
-                release-key-password: RELEASE_KEY_PASSWORD
-                release-keystore: ./keystore
-                release-store-password: RELEASE_STORE_PASSWORD
-                keystore-properties-working-directory: '.'
-                google-play-key: GOOGLE_PLAY_KEY
-                lane-name: deploy
-                fastlane-working-directory: '.'
+                  name: android/android_docker
+                  tag: "2024.11.1"
+                base64_keystore: BASE64_KEYSTORE
+                release_key_alias: RELEASE_KEY_ALIAS
+                release_key_password: RELEASE_KEY_PASSWORD
+                release_keystore: ./keystore
+                release_store_password: RELEASE_STORE_PASSWORD
+                keystore_properties_working_directory: '.'
+                google_play_key: GOOGLE_PLAY_KEY
+                lane_name: deploy
+                fastlane_working_directory: '.'
 ```
 
 NOTE: The executor has no default value and must be set in the configuration.
@@ -267,10 +267,10 @@ NOTE: The executor has no default value and must be set in the configuration.
 --
 To run each command individually in a job, you will need to add the following commands to your job:
 
-- `decode-keystore`
-- `create-keystore-properties`
-- `create-google-play-key`
-- `fastlane-deploy`
+- `decode_key`
+- `create_keystore_properties`
+- `create_google_play_key`
+- `fastlane_deploy`
 
 Additionally, you need to run either `npm install` or `yarn install` using the Node orb.
 
@@ -280,12 +280,12 @@ Below is an example configuration of this approach:
 
 ```yaml
 orbs:
-  android: circleci/android@2.1.2
+  android: circleci/android@3.0.2
   node: circleci/node@5.0.2
 jobs:
   test-fastlane:
       docker:
-        - image: cimg/android:2022.07
+        - image: cimg/android:2024.11.1
       resource_class: large
       steps:
         - checkout
@@ -293,15 +293,15 @@ jobs:
             install-yarn: false
             node-version: "16.13.0"
         - run: npm install
-        - android/decode-keystore:
-            keystore-location: android/app/keystore
-        - android/create-keystore-properties:
-            working-directory: android
-        - android/create-google-play-key:
-            working-directory: android
-        - android/fastlane-deploy:
-            working-directory: android
-            lane-name: internal
+        - android/decode_keystore:
+            keystore_location: android/app/keystore
+        - android/create_keystore_properties:
+            working_directory: android
+        - android/create_google_play_key:
+            working_directory: android
+        - android/fastlane_deploy:
+            working_directory: android
+            lane_name: internal
 ```
 --
 
