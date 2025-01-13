@@ -48,10 +48,9 @@ TIP: If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can
 
 . Select **Run Pipeline** and you will see your new pipeline running in the web app.
 
-=== Troubleshooting: "No suitable user credential could be found for user"
+NOTE: You may need to Authorize the connection to your GitHub account to continue, if you haven't yet.
 
-If you are seeing "No suitable user credential could be found for user" when triggering a pipeline from the CircleCI web app, navigate to menu:Project Settings[Pipelines > Add Pipeline > Authorize] and then attempt to run the pipeline again by selecting btn:[Trigger Pipeline].
-
+// @Rosie, is it worth adding an image here?
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
