@@ -40,7 +40,7 @@ We have moved away from Vault to Tink for encryption. The process for migration 
 [#upgrade-steps]
 == Upgrade steps
 
-. Ensure your cluster is running a compatible Kubernetes version for this release (1.26 - 1.29).
+. Ensure your cluster is running a compatible Kubernetes version for this release ({kubernetesversions}).
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 
