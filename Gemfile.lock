@@ -127,11 +127,11 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.7)
+    mini_portile2 (2.8.8)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.1.1)
-    nokogiri (1.16.7)
+    nokogiri (1.18.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octokit (4.20.0)
@@ -202,7 +202,7 @@ DEPENDENCIES
   jekyll-sitemap
   kramdown-parser-gfm
   liquid-c (~> 4.0.1)
-  nokogiri (~> 1.16.5)
+  nokogiri (~> 1.18.0)
   pronto
   pronto-markdownlint
   rake
