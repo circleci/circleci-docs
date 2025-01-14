@@ -48,7 +48,7 @@ TIP: If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can
 
 . Select **Run Pipeline** and you will see your new pipeline running in the web app.
 
-NOTE: You may need to Authorize the connection to your GitHub account to continue, if you haven't yet.
+NOTE: If your GitHub user account connection to CircleCI is not yet authorized, you will need to select btn:[Authorize] in the trigger pipeline modal to connect and continue.
 
 // @Rosie, is it worth adding an image here?
 
