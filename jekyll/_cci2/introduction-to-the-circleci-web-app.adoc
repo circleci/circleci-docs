@@ -181,8 +181,6 @@ The following settings are available in the project settings page. If you do not
 
 **VS Code Integration**: Provides information and a link to organization settings to enable the xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature, which is currently in open-preview for some customers.
 
-**Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
-
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
 **Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
