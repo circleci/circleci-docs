@@ -9,7 +9,7 @@ contentTags:
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-liquid:
 
-This quickstart guide takes you through the following:
+This quickstart provides a guided tour through setting up a project and, collaborating, and then a few tools to iterate on and debug your build configuration. The following sections cover the following:
 
 * Create a project, connecting some existing code to CircleCI.
 * Inviting team members to collaborate on your new project.
@@ -20,7 +20,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 == Prerequisites
 
-* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A CircleCI account. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
 pass:[<!-- vale off -->]
@@ -29,7 +29,7 @@ pass:[<!-- vale off -->]
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
 
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, view the pipeline, and see it pass. {% endcapture %}
+{% capture content %} Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app. {% endcapture %}
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
 
@@ -53,52 +53,55 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.tab.quickstart1.GitHub_App]
 --
 ++++
-{% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
-Don’t see these options? Use the org selector in the top left corner to find the correct organization.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. Create a project</div>
+    <p>In the <a  href="https://app.circleci.com/home">CircleCI web app</a> select your org, then select <strong>Create Project</strong>, then follow the instructions in the app.
+Don’t see these options? Select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.</p>
+  </div>
 
-{%- capture select-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Create a project" />
+  </div>
+</div>
 
-{% include two-up.html title="1. Create a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. Set up a pipeline</div>
+    <p>Follow the in-app instructions to set up your pipelinem including connecting your code, preparing a config file and reviewing triggers. For a more detailed look at this process see the <a  href="https://circleci.com/docs/create-project">Create a project</a> guide.</p>
+  </div>
+
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/setup-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
+
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. Commit and run</div>
+    <p>Once you have gone through the pipeline setup process in the app you have everything you need to commit your config (unless you have a config in your repo already) and build. Review your project details and select <strong>Commit config and run</strong>.
+  </div>
+
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/commit-and-run.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
 
 
-{% capture content %}
-Give your project a name, check the options, then click <strong>Create Project</strong>. A <code>config.yml</code> file is generated for you based on the languages and frameworks used in your project.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">4. Congratulations 🎉</div>
+    <p>You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.</p>
+    </div>
 
-{%- capture configure-your-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/generating-config.png
-{%- endcapture -%}
-
-{% include two-up.html title="2. Generate config" content=content imageURL=configure-your-project imageAlt="Config Editor" %}
-
-
-{% capture content %}
-Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>. At this point you can also choose <strong>Review configuration file</strong> if you would rather check or make changes to the config file before committing.
-{% endcapture %}
-
-{%- capture commit-run-github -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-github-app.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. Commit and run your config" content=content imageURL=commit-run-github imageAlt="Commit a config" %}
-
-
-{% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
-
-{%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
-{%- endcapture -%}
-
-{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
 ++++
 --
 
-[.tab.quickstart1.GitLab]
+[.tab.quickstart1.GitLab_&_Bitbucket_Data_Center]
 --
 ++++
 {% capture content %}
@@ -157,7 +160,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 ++++
 --
 
-[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket]
+[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket_Cloud]
 --
 ++++
 {% capture content %}
