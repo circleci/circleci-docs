@@ -48,6 +48,9 @@ TIP: If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can
 
 . Select **Run Pipeline** and you will see your new pipeline running in the web app.
 
+NOTE: If your GitHub user account connection to CircleCI is not yet authorized, you will need to select btn:[Authorize] in the trigger pipeline modal to connect and continue.
+
+// @Rosie, is it worth adding an image here?
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
@@ -109,7 +112,7 @@ curl -X POST https://circleci.com/api/v2/project/<project-slug>/pipeline/run \
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details, VCS can be `gh` or `bb`:
 +
-NOTE: If you are using CircleCI cloud, <your-circleci-hostname> should be `circleci.com`.
+NOTE: If you are using CircleCI cloud, `<your-circleci-hostname>` should be `circleci.com`.
 +
 [source,shell]
 ----

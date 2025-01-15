@@ -107,6 +107,7 @@ Define job dependencies using the `requires` key. A job must wait until all upst
 
 See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml[Sample Sequential Workflow config] for a full example.
 
+
 [#fan-outfan-in-workflow]
 === Fan-out/fan-in workflow
 
@@ -149,6 +150,49 @@ workflows:
 In this example, as soon as the `build` job finishes successfully, all four acceptance test jobs start. The `deploy` job waits for all four acceptance test jobs to succeed before it starts.
 
 See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan-in-fan-out[Sample Fan-in/Fan-out Workflow config] for a full example.
+
+[#flexible-job-dependency]
+=== Flexible job dependency
+
+Using `requires`, you can build complex dependency maps and fan in/out scenarios.
+
+The following example is a configuration snippet of a workflow with four sequential jobs. Each job waits until the "required" job attains a specified status:
+
+[source,yaml]
+----
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+      - release:
+          requires:
+            - deploy
+      - rollback:
+          requires:
+            - release:
+              - failed
+              - canceled
+----
+
+A job must wait until all upstream jobs in the dependency graph have attained either of the statuses specified under the corresponding `requires` key. In this example, the following dependencies are configured:
+
+* The `rollback` job waits for the `release` job, and only runs if the `release` job fails or is canceled.
+* The `release` job waits for the `deploy` job, and only runs if the `deploy` job is successful.
+* The `deploy` job waits for the `build` job, and only runs if the `build` job is successful.
+
+
+
+.Workflow execution when the `release` job is successful
+image::/docs/assets/img/docs/workflow-using-requires-example-1.png[Flexible Job Execution Workflow - Example 1]
+
+.Workflow execution when the `release` job fails:
+image::/docs/assets/img/docs/workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
+
+
+TIP: Refer to the xref:configuration-reference#requires[Requires] section of the configuration reference.
 
 [#holding-a-workflow-for-a-manual-approval]
 == Hold a workflow for a manual approval
