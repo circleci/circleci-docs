@@ -225,19 +225,19 @@ You can set up your configuration with the link:https://circleci.com/developer/o
 [#configuration-with-android-orb]
 === a. Set up configuration with the Android orb
 
-Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the `deploy-to-play-store` job from the orb, or run each command individually in a job.
+Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the `deploy_to_play_store` job from the orb, or run each command individually in a job.
 
 [.tab.configAndroidOrb.Use_the_deploy-to-play-store_job]
 --
-To deploy using the deploy-to-play-store job you just need to add a `android/deploy-to-play-store` job to your list of jobs in your workflow.
+To deploy using the `deploy_to_play_store` job you just need to add a `android/deploy_to_play_store` job to your list of jobs in your workflow.
 
 If you set your environment variables as shown earlier in this tutorial, then you should not need to set the following parameters, as the default values take the same environment value names:
 
-- `base64-keystore`
-- `release-key-alias`
-- `release-key-password`
-- `release-store-password`
-- `google-play-key`
+- `base64_keystore`
+- `release_key_alias`
+- `release_key_password`
+- `release_store_password`
+- `google_play_key`
 
 The following snippet an example with each parameter set as its default value.
 
