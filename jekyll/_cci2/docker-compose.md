@@ -21,7 +21,7 @@ If you want to use Docker Compose to manage a multi-container setup with a Docke
 ## Using Docker Compose with docker executor
 {: #using-docker-compose-with-docker-executor }
 
-Using the `docker` execution environment combined with `setup_remote_docker` provides a remote engine similar to the one created with running Docker commands and the machine execution environment, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a Docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
+Using the `docker` execution environment combined with `setup_remote_docker` enables you to run Docker commands similarly to how you run Docker commands in a machine execution environment. However, volume mounting and port forwarding do **not** work the same way when using the `docker` execution environment. When using the `docker` execution environment with `setup_remote_docker`, a job's commands are executed in a container that has access to an external Docker daemon. Therefore, to use the Docker CLI or Docker Compose, you must move data around. Mounting can typically be solved by making content available in a Docker volume. It is possible to load data into a Docker volume by using `docker cp` to get the data from the CLI host into a location running on the Docker host.
 
 ## Install Docker Compose
 

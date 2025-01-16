@@ -91,7 +91,7 @@ If you were using the release agent prior to version `1.2.0` you were using `app
 
 Support for the old labels will be dropped in one of the next releases.
 
-After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and rollouts managed through Helm.
+After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
 ====
 
 Once you have updated your Deployment or Rollout, check the CircleCI releases dashboard and you should see your release in the timeline view.
@@ -117,7 +117,7 @@ jobs:
       ...
       (existing deployment commands)
       ...
-      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=<some-version-name> <my-service-release>
+      - run: circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=<some-version-name> <my-service-release>
 ----
 +
 Substitute the placeholders above based on your application's details:
@@ -166,7 +166,7 @@ jobs:
     executor: some-executor
     steps:
       - ./deploy.sh
-      - circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=some-version-name my-service-release
+      - run: circleci run release plan --environment-name=some-environment-name --component-name=some-component-name --target-version=some-version-name my-service-release
   release-my-service:
     type: release
     plan_name: my-service-release
