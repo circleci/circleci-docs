@@ -125,8 +125,69 @@ CIRCLE_AGENT_VERSION/
 
 image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 
+[#copy-other-agents]
+== 3. Copy other agents
+
+In a similar manner to `circleci-agent` from step 2, we also need to copy `docker-agent` and `machine-agent` to the `circleci-data` bucket.
+
+[#download-docker-agent]
+=== a. Download docker agent
+
+[source,bash]
+----
+# Set `DOCKER_AGENT_VERSION` using the value of `circleci/docker-agent` from `images.yaml`
+export DOCKER_AGENT_VERSION=$(grep 'circleci/docker-agent:' ./circleci-server/images.yaml | cut -d' ' -f2)
+
+# Download the Docker agent
+curl -O --compressed https://circleci-binary-releases.s3.amazonaws.com/docker-agent/$DOCKER_AGENT_VERSION/linux/amd64/docker-agent
+
+# Download the checksums
+curl -O https://circleci-binary-releases.s3.amazonaws.com/docker-agent/$DOCKER_AGENT_VERSION/checksums.txt
+----
+
+[#download-machine-agent]
+=== b. Download machine agent
+
+[source,bash]
+----
+# Set `MACHINE_AGENT_VERSION` using the value of `circleci/machine-agent` from `images.yaml`
+export MACHINE_AGENT_VERSION=$(grep 'circleci/machine-agent:' ./circleci-server/images.yaml | cut -d' ' -f2)
+
+# Download the Machine agent
+curl -O --compressed https://circleci-binary-releases.s3.amazonaws.com/machine-agent/$MACHINE_AGENT_VERSION/linux/amd64/machine-agent
+
+# Download the checksums
+curl -O https://circleci-binary-releases.s3.amazonaws.com/machine-agent/$MACHINE_AGENT_VERSION/checksums.txt
+----
+
+
+[#copy-agents]
+=== c. Copy the downloaded agents
+
+Copy the downloaded `docker-agent` and `machine-agent` files (from steps a and b) to your virtual environment, and create a directory structure as follows:
+
+[,shell]
+----
+# The final structure should look like this:
+docker-agent/
+├── release.txt # contains the value of $DOCKER_AGENT_VERSION
+└── $DOCKER_AGENT_VERSION/ # not a literal string, but the value of release.txt
+    ├── checksums.txt
+    └── linux/
+        └── amd64/
+            └── docker-agent
+machine-agent/
+├── release.txt # contains the value of $MACHINE_AGENT_VERSION
+└── MACHINE_AGENT_VERSION/ # not a literal string, but the value of release.txt
+    ├── checksums.txt
+    └── linux/
+        └── amd64/
+            └── machine-agent
+----
+
+
 [#copy-other-miscellaneous-files]
-== 3. Copy other miscellaneous files
+== 4. Copy other miscellaneous files
 Follow the steps in this section to copy the required files into MinIO within your air-gapped environment.
 
 [#copy-canary-txt-file]
