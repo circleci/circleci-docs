@@ -153,7 +153,7 @@ Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config
 You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
 
 {%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline.png
 {%- endcapture -%}
 
 {% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
@@ -163,48 +163,39 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 [.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket_Cloud]
 --
 ++++
-{% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Find your repository, and click <strong>Set Up Project</strong>.
-Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. Set up a project</div>
+    <p>In the <a  href="https://app.circleci.com/home">CircleCI web app</a> select your org, then select <strong>Set up a Project</strong>, then select <strong>Set up Project</strong> next to your project in the list.
+Don’t see these options? Select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.</p>
+  </div>
 
-{%- capture select-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/set-up-project.png" alt="Create a project" />
+  </div>
+</div>
 
-{% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. Select a config.yml</div>
+    <p>In the “Select your config.yml file” modal, select <b>Faster</b>, then click <b>Set Up Project</b>.</p>
+  </div>
 
-{% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
-{% endcapture %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/select-config.png" alt="Create a project" />
+  </div>
+</div>
 
-{%- capture select-config -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
-{%- endcapture -%}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. Congratulations 🎉</div>
+    <p>You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.</p>
+    </div>
 
-{% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
-
-{% capture content %}
-You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. <b>Click Commit and Run.</b>
-<br>
-<br>
-This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
-{% endcapture %}
-
-{%- capture CCI-config-editor -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor-2.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
-
-{% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
-
-{%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
-{%- endcapture -%}
-
-{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
 ++++
 --
 
