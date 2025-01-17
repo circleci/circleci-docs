@@ -21,6 +21,8 @@ group :jekyll_plugins do
 end
 
 group :test, :development do
+  # Remove when https://github.com/prontolabs/pronto/issues/447 is fixed.
+  gem 'rugged', '1.6.3'
   gem 'pronto'
   gem 'pronto-markdownlint'
 end
