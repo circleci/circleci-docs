@@ -55,7 +55,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 14.2.0
+      xcode: 15.4.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -72,7 +72,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 14.2.0
+      xcode: 15.4.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
