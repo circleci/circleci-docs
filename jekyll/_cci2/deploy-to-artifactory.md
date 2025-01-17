@@ -59,16 +59,16 @@ If you would like to upload JAR files use the following example:
 
 ```yml
 command: |
-            ./jf mvnc \
-              --server-id-resolve <server_id> \
-              --server-id-deploy <server_id> \
-              --repo-resolve-releases libs-release \
-              --repo-resolve-snapshots libs-snapshot \
-              --repo-deploy-releases release-candidates \
-              --repo-deploy-snapshots snapshots \
-              --include-patterns "*.jar, *.pom, *.xml"
+  ./jf mvnc \
+    --server-id-resolve <server_id> \
+    --server-id-deploy <server_id> \
+    --repo-resolve-releases libs-release \
+    --repo-resolve-snapshots libs-snapshot \
+    --repo-deploy-releases release-candidates \
+    --repo-deploy-snapshots snapshots \
+    --include-patterns "*.jar, *.pom, *.xml"
 
-              /.jf mvn clean install
+  ./jf mvn clean install
 ```
 
 ### 4. Upload WAR files (optional)
@@ -78,16 +78,16 @@ If you would like to upload WAR files use the following example:
 
 ```yml
 command: |
-            ./jf mvnc \
-              --server-id-resolve <server_id> \
-              --server-id-deploy <server_id> \
-              --repo-resolve-releases libs-release \
-              --repo-resolve-snapshots libs-snapshot \
-              --repo-deploy-releases release-candidates \
-              --repo-deploy-snapshots snapshots \
-              --include-patterns "*.war"
+  ./jf mvnc \
+    --server-id-resolve <server_id> \
+    --server-id-deploy <server_id> \
+    --repo-resolve-releases libs-release \
+    --repo-resolve-snapshots libs-snapshot \
+    --repo-deploy-releases release-candidates \
+    --repo-deploy-snapshots snapshots \
+    --include-patterns "*.war"
 
-              /.jf mvn clean install
+  ./jf mvn clean install
 ```
 
 ## Full configuration example
