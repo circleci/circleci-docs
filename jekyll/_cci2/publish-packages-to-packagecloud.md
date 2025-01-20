@@ -111,6 +111,7 @@ This job will retrieve the project code, install its dependencies and run any te
 jobs:
   test:
     <<: *defaults
+
     steps:
       - checkout
 
@@ -145,16 +146,20 @@ jobs:
 ...
   deploy:
     <<: *defaults
+
     steps:
       - attach_workspace:
           at: ~/repo
+
       - run:
           name: Set registry URL
           command: npm set registry https://packagecloud.io/example-user/example-repo/npm/
+
       - run:
           name: Authenticate with registry
           command: echo "//packagecloud.io/example-user/example-repo/npm/:_authToken=$PACKAGECLOUD_TOKEN" > ~/repo/.npmrc
-      - run:
+
+- run:
           name: Publish package
           command: npm publish
 ```
@@ -173,32 +178,30 @@ The full `.circleci/config.yml` should look something like this:
 
 ```yaml
 version: 2.1
+
 defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: cimg/node:19.0.1
+
 jobs:
   test:
     <<: *defaults
     steps:
       - checkout
-
       - restore_cache:
           keys:
           - v1-dependencies-.
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run: npm install
       - run:
           name: Run tests
           command: npm test
-
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-
-
       - persist_to_workspace:
           root: ~/repo
           paths: .
@@ -216,6 +219,7 @@ jobs:
       - run:
           name: Publish package
           command: npm publish
+
 workflows:
   test-deploy:
     jobs:
