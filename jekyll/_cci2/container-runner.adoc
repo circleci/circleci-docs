@@ -465,7 +465,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-* A third-party tool like Buildah or kaniko
+* A third-party tool like Sysbox or kaniko
 * Machine runner installed with Docker installed on it
 * CircleCI-hosted compute
 
@@ -475,88 +475,29 @@ While jobs that run with container-agent cannot use CircleCI's <<building-docker
 
 You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
 
-Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
-
-```yaml
-docker:
-  - image: quay.io/buildah/stable:v1.27.0
-```
-
-[#using-the-buildah-image]
-=== Using the Buildah image
-
-Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
-
-To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running Helm commands for your container-agent deployment. Then run:
-
-```
-kubectl create -f fuse-device-plugin-k8s-1.16.yml
-```
-
-You can confirm that this has been configured correctly by running `kubectl get daemonset -n kube-system` and confirming that `fuse-device-plugin-daemonset` is present and ready.
-
-Once this device has been added, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>>:
+Another option is to use a tool called link:https://github.com/nestybox/sysbox[Sysbox] which must first be link:https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-k8s.md[installed on your kuberenetes cluster]. 
+Once installed, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>> and apply the changes:
 
 ```yaml
 resourceClasses:
  <namespace>/<resourceClass>:
   token: <token>
-   spec:
-    containers:
-     - resources:
-        limits:
-         github.com/fuse: 1
+  metadata:
+    annotations:
+      io.kubernetes.cri-o.userns-mode: "auto:size=65536"
+  spec:
+    runtimeClassName: sysbox-runc
+    ...
 ```
 
-This will now let you run Buildah commands with container agent jobs and build containers:
+With sysbox installed and the runtime class updated in your container-agent resource class configuration, you may now use Sysbox in your `.circleci/config.yml` syntax. example:
 
 ```yaml
-  docker-image:
-    docker:
-      - image: quay.io/buildah/stable
-    resource_class: <namespace>/<resourceClass>
-    steps:
-      - checkout
-      - run:
-          name: sanity-test
-          command: |
-            buildah version
-      - run:
-          name: Building-a-container
-          command: |
-            buildah bud -f ./Dockerfile -t myimage:0.1
-            buildah push myimage:tag
+docker:
+  - image: registry.nestybox.com/nestybox/ubuntu-bionic-systemd-docker
+    entrypoint: ["dockerd"]
+    command: ["--host=unix:///var/run/docker.sock"]
 ```
-
-[#using-buildah-with-custom-images]
-=== Using Buildah with custom images
-
-You can also build your own custom image and include the installation of Buildah in your Dockerfile:
-
-```
-sudo yum install buildah
-```
-
-If you plan to use a CircleCI link:https://circleci.com/developer/images[convenience image], ensure you add the repository for installation to your job's `steps`:
-
-```
-sudo apt-get update
-sudo apt-get install -y wget ca-certificates gnupg2
-VERSION_ID=$(lsb_release -r | cut -f2)
-echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel-kubic-libcontainers-stable.list
-curl -Ls https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_$VERSION_ID/Release.key | sudo apt-key add -
-sudo apt-get update
-sudo apt install buildah -y
-```
-
-Additionally, set the isolation variable to default to `chroot`:
-
-```
-# Default to isolate the filesystem with chroot.
-ENV BUILDAH_ISOLATION=chroot
-```
-
-You can then follow the same instructions as <<#using-the-buildah-image,Using the Buildah image>> above to add the fuse device plugin to the container-agent deployment and update your `.circleci/config.yml` file to use your custom images and build container images in those jobs.
 
 [#limitations]
 == Limitations
@@ -565,6 +506,7 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 * Only Kubernetes container environments are supported at this time.
 * <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:configuration-reference#oidc[Configuration Reference].
+* Sysbox requires an Ubuntu based image with containerd.
 
 [#faqs]
 == FAQs
