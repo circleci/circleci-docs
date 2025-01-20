@@ -231,10 +231,6 @@ The Only Build Pull Requests option (usually available in menu:Project Settings[
 
 xref:enable-checks#[GitHub checks] are currently not supported.
 
-[#rerun-workflow-from-failed-commit-status]
-=== Known limitation: commit status when using "rerun workflow from failed"
-When using the "rerun from failed" functionality, there is currently a known limitation where the commit status reported to GitHub is set to "Pending" for jobs that were not re-run.
-
 [#next-steps]
 == Next steps
 - xref:config-intro#[Configuration tutorial]
