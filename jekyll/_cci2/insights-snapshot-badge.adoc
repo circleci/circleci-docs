@@ -1,0 +1,13 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Insights snapshot badge
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Generate a badge that displays Insights metrics for a project.
+:icons: font
+:experimental:
+
+NOTE: The Insights snapshot badge feature is set to be deprecated. Further details will be posted here when available.
