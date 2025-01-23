@@ -2559,14 +2559,9 @@ The example configuration below uses a pipeline parameter, `run_integration_test
 ----
 version: 2.1
 
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
 workflows:
   integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
+    when: pipeline.git.branch == "main"
     jobs:
       - mytestjob
 
@@ -2574,16 +2569,8 @@ jobs:
 ...
 ----
 
-This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
 
-[,json]
-----
-{
-    "parameters": {
-        "run_integration_tests": true
-    }
-}
-----
 
 Refer to the xref:workflows#[Workflows] for more examples and conceptual information.
 
