@@ -62,7 +62,7 @@ image:user_settings.png[User settings]
 
 == Organization homepage and navigation
 
-After selecting an organization you will find yourself on the organization homepage. The organization home page gives you an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
+After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI server. The organization home page gives you an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
 
 image::org-homepage.png[Organization homepage]
 
