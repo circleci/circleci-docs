@@ -9,13 +9,18 @@ contentTags:
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
 :page-liquid:
 
-This quickstart guide takes you through connecting an existing project to CircleCI, using the in-app config editor, and inviting team members to collaborate on your new project.
+This quickstart provides a guided tour through setting up a project, collaborating, and tools to iterate on and debug your build configuration. The following sections cover the following:
+
+* Create a project, connecting some existing code to CircleCI.
+* Inviting team members to collaborate on your new project.
+* Use the VS Code extention to debug and extend your config.
+* SSH into a build to debug your project.
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
 
 == Prerequisites
 
-* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A CircleCI account. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
 pass:[<!-- vale off -->]
@@ -24,7 +29,7 @@ pass:[<!-- vale off -->]
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
 
-{% capture content %} Connect your new code repository, commit a CircleCI configuration file to a new branch, view the pipeline, and see it pass. {% endcapture %}
+{% capture content %} Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app. {% endcapture %}
 
 {% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
 
@@ -48,52 +53,55 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.tab.quickstart1.GitHub_App]
 --
 ++++
-{% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
-Don’t see these options? Use the org selector in the top left corner to find the correct organization.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. Create a project</div>
+    <p>In the <a  href="https://app.circleci.com/home">CircleCI web app</a> select your org, then select <strong>Create Project</strong>, then follow the instructions in the app.
+Don’t see these options? Select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.</p>
+  </div>
 
-{%- capture select-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Create a project" />
+  </div>
+</div>
 
-{% include two-up.html title="1. Create a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. Set up a pipeline</div>
+    <p>Follow the in-app instructions to set up your pipelinem including connecting your code, preparing a config file and reviewing triggers. For a more detailed look at this process see the <a  href="https://circleci.com/docs/create-project">Create a project</a> guide.</p>
+  </div>
+
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/setup-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
+
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. Commit and run</div>
+    <p>Once you have gone through the pipeline setup process in the app you have everything you need to commit your config (unless you have a config in your repo already) and build. Review your project details and select <strong>Commit config and run</strong>.
+  </div>
+
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/commit-and-run.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
 
 
-{% capture content %}
-Give your project a name, check the options, then click <strong>Create Project</strong>. A <code>config.yml</code> file is generated for you based on the languages and frameworks used in your project.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">4. Congratulations 🎉</div>
+    <p>You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.</p>
+    </div>
 
-{%- capture configure-your-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/generating-config.png
-{%- endcapture -%}
-
-{% include two-up.html title="2. Generate config" content=content imageURL=configure-your-project imageAlt="Config Editor" %}
-
-
-{% capture content %}
-Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>. At this point you can also choose <strong>Review configuration file</strong> if you would rather check or make changes to the config file before committing.
-{% endcapture %}
-
-{%- capture commit-run-github -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-github-app.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. Commit and run your config" content=content imageURL=commit-run-github imageAlt="Commit a config" %}
-
-
-{% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
-
-{%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
-{%- endcapture -%}
-
-{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
 ++++
 --
 
-[.tab.quickstart1.GitLab]
+[.tab.quickstart1.GitLab_&_Bitbucket_Data_Center]
 --
 ++++
 {% capture content %}
@@ -145,62 +153,56 @@ Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config
 You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
 
 {%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline-gitlab.png
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline.png
 {%- endcapture -%}
 
 {% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
 ++++
 --
 
-[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket]
+[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket_Cloud]
 --
 ++++
-{% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Find your repository, and click <strong>Set Up Project</strong>.
-Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. Set up a project</div>
+    <p>In the <a  href="https://app.circleci.com/home">CircleCI web app</a> select your org, then select <strong>Set up a Project</strong>, then select <strong>Set up Project</strong> next to your project in the list.
+Don’t see these options? Select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.</p>
+  </div>
 
-{%- capture select-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/set-up-project.png" alt="Create a project" />
+  </div>
+</div>
 
-{% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. Select a config.yml</div>
+    <p>In the “Select your config.yml file” modal, select <b>Faster</b>, then click <b>Set Up Project</b>.</p>
+  </div>
 
-{% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
-{% endcapture %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/select-config.png" alt="Create a project" />
+  </div>
+</div>
 
-{%- capture select-config -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
-{%- endcapture -%}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. Congratulations 🎉</div>
+    <p>You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.</p>
+    </div>
 
-{% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
-
-{% capture content %}
-You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. <b>Click Commit and Run.</b>
-<br>
-<br>
-This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>circleci-project-setup</code>.
-{% endcapture %}
-
-{%- capture CCI-config-editor -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor-2.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
-
-{% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
-
-{%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
-{%- endcapture -%}
-
-{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
+  </div>
+</div>
 ++++
 --
 
 ++++
+
+
+
 {% capture content %} Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster. {% endcapture %}
 
 {%- capture header-banner-2 -%}
@@ -209,85 +211,73 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 
 {% include getting-started-section-header.html title="2. Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
-{% capture content %}
-Select the green <b>Success</b> button to see details about a <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. The workflow expands to show all jobs that ran.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. So, what just happened?</div>
+    <p>Expand your workflow and select a job to view the steps that ran. Use the tabs along the top to access test results, timing data, artifacts, and resource usage metrics.</p>
+  </div>
 
-{%- capture what-just-happened -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/what-just-happened.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/steps.png" alt="Exand the workflow and select a job to view steps" />
+  </div>
+</div>
 
-{% include two-up.html title="1. So, what just happened?" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. View step output</div>
+    <p>Exand any step to view the build output. You can search, share or download the output for collaboration and debugging. If a step fails, use the <a href="https://circleci.com/docs/intelligent-summaries">Explain this error</a> button for help.</p>
+  </div>
 
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/expand-step.png" alt="Expand a step to view the output." />
+  </div>
+</div>
 
-{% capture content %}
-Select a job to enter the job view and see all the steps that ran.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. Invite teammates</div>
+    <p>Invite teammates to collaborate on your projects. Navigate to <strong>Organization Settings > People</strong> to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.</p>
+  </div>
 
-{%- capture view-results -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/view-results.png
-{%- endcapture -%}
-
-{% include two-up.html title="2. View your results" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
-
-{% capture content %}
-Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code. Invite team members using the <strong>Add team members</strong> link next to your project name on the dashboard. If you do not see this option, ensure you have a project selected.
-{% endcapture %}
-
-{%- capture collab-with-team -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/collab-with-team.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. Collaborate with teammates" content=content imageURL=collab-with-team imageAlt="Add Team Members" %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/invite.png" alt="Invite teammates to collaborate. Generate invites from your organizaiton settings." />
+  </div>
+</div>
+++++
 
 ++++
-////
-++++
 
-{% capture content %}  Break your pipeline to see how errors are surfaced, then explore advanced config options. {% endcapture %}
+{% capture content %}  Discover CircleCI features to help debug and configure your builds. {% endcapture %}
 
 {%- capture header-banner-3 -%}
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="3. Explore" id="next" content=content imagePath=header-banner-3 %}
+{% include getting-started-section-header.html title="3. Debug and iterate" id="next" content=content imagePath=header-banner-3 %}
 
-{% capture content %}
-Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS. On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click the ••• buttons to view your configuration file. Make any change and save it. You should see a new pipeline run and likely fail. This is a primary benefit of CircleCI: identifying failures early.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. Rerun with SSH</div>
+    <p>To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the <a href="https://circleci.com/docs/ssh-access-jobs/">Debug with SSH</a> page.</p>
+  </div>
 
-{%- capture break-your-build -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/break-your-build.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/ssh-rerun.png" alt="Rerun a job with SSH to directly access the build environment." />
+  </div>
+</div>
 
-{% include two-up.html title="1. Break your build" content=content imageURL=break-your-build imageAlt="Failed Job in Pipeline" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. VS Code extention</div>
+    <p>Using the <a href="https://circleci.com/docs/vs-code-extension-overview/">CircleCI VS Code extention</a>, validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.</p>
+  </div>
 
-{% capture content %}
-In your Dashboard, click into the <b>say-hello-world</b> workflow. Can you find the four steps that ran? Hint: step 1 is <b>Spin up environment</b>.
-<br>
-<br>
-A <a class="no-external-icon" href="https://circleci.com/docs/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
-{% endcapture %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/validate-config.png" alt="Rerun a job with SSH to directly access the build environment." />
+  </div>
+</div>
 
-{%- capture explore-workflows -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/explore-workflows.png
-{%- endcapture -%}
-
-{% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
-
-{% capture content %}
-On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
-{% endcapture %}
-
-{%- capture SSH-into-build -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/SSH-into-build.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
 ++++
-
-That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or link:https://support.circleci.com/hc/en-us[ask for help].
-////
 
 pass:[<!-- vale on -->]
 
