@@ -26,3 +26,5 @@ group :test, :development do
 end
 
 gem "base64", "~> 0.2.0"
+
+gem "faraday-retry", "~> 2.2"
