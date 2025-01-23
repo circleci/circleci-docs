@@ -133,7 +133,7 @@ machine_provisioner:
   enabled: false
 ----
 
-NOTE: When following these instructions to simply re-host agents in a partially air-gapped environment, you can configure the machine provisioner for MinIO as follows:
+When following these instructions to simply re-host agents in a partially air-gapped environment, you can configure the machine provisioner for MinIO as follows:
 
 [source, yaml]
 ----
