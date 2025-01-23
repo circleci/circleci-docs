@@ -24,3 +24,5 @@ group :test, :development do
   gem 'pronto'
   gem 'pronto-markdownlint'
 end
+
+gem "base64", "~> 0.2.0"
