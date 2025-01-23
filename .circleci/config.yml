@@ -46,7 +46,7 @@ commands:
         default: ""
     steps:
       - restore_cache:
-          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-v2-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
           command:
@@ -56,9 +56,10 @@ commands:
             fi
             #cmake is needed fo rugged, a gem dependency
             sudo apt-get update && sudo apt-get install -y cmake
-            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+            bundle config set path 'vendor/bundle'
+            bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
-          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-v2-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
           paths:
             - "vendor/bundle"
             - "<< parameters.dir >>/vendor/bundle"
