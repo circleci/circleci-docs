@@ -46,7 +46,7 @@ commands:
         default: ""
     steps:
       - restore_cache:
-          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-v2-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
           command:
@@ -56,9 +56,10 @@ commands:
             fi
             #cmake is needed fo rugged, a gem dependency
             sudo apt-get update && sudo apt-get install -y cmake
-            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+            bundle config set path 'vendor/bundle'
+            bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
-          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-v2-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
           paths:
             - "vendor/bundle"
             - "<< parameters.dir >>/vendor/bundle"
@@ -150,7 +151,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
-      tag: '3.1.3-browsers'
+      tag: '3.3.6-browsers'
     steps:
       - checkout
       - *attach_workspace
@@ -186,7 +187,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '3.1.3-browsers'
+      tag: '3.3.6-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -260,7 +261,7 @@ jobs:
   reindex-search:
     executor:
       name: ruby/default
-      tag: '3.1.3-browsers'
+      tag: '3.3.6-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
