@@ -214,13 +214,42 @@ commands:
 #### Executor
 {: #executor }
 
-Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
+Use an `executor` parameter type to allow the invoker of a job to decide which executor to use to run the job.
+
+The following example uses parameters:
+
+* The `executor` parameter to allow the invoker of a job to decide which executor to use to run the job: `ubuntu`, `xenial`, `bionic`.
+* For the `ubuntu` executor:
+  * A string parameter is used to set the image to use.
+  * A boolean parameter is used to enable/disable [Docker layer caching](/docs/docker-layer-caching).
+  * An enum parameter is used to choose a [resource class](/docs/configuration-reference#linuxvm-execution-environment).
+
+* For the `xenial` executor:
+  * A string parameter is used to set an environment variable.
 
 {% raw %}
 ```yaml
 version: 2.1
 
 executors:
+  ubuntu:
+    parameters:
+      image:
+        type: string
+        default: ubuntu-2404:current
+        description: Specifies the machine image to use for the executor
+      docker_layer_caching:
+        type: boolean
+        default: false
+        description: Enables Docker layer caching during builds
+      resource_class:
+        type: enum
+        enum: ["medium", "large", "xlarge", "2xlarge", "2xlarge+"]
+        description: Specifies the resource class for the executor
+    machine:
+      image: << parameters.image >>
+      docker_layer_caching: << parameters.docker_layer_caching >>
+    resource_class: << parameters.resource_class >>
   xenial:
     parameters:
       some-value:
@@ -239,6 +268,7 @@ jobs:
     parameters:
       e:
         type: executor
+        default: ubuntu
     executor: << parameters.e >>
     steps:
       - run: some-tests
@@ -247,11 +277,17 @@ workflows:
   workflow:
     jobs:
       - test:
-          e: bionic
+          e: bionic # Choose to run the test job on the bionic executor
       - test:
           e:
-            name: xenial
+            name: xenial # Choose to run the test job on the xenial executor
             some-value: foobar
+      - test:
+          e:
+            name: ubuntu # Choose to run the test job on the ubuntu executor
+            docker_layer_caching: true # Enable Docker layer caching
+            resource_class: medium # Set the resource class to medium
+            image: ubuntu-2404:edge # Set the image to use
 ```
 {% endraw %}
 
