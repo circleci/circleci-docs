@@ -93,7 +93,7 @@ distributor:
   launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
 ----
 
-Update the runner_admin section of the `values.yaml` file to point `external.launch_agent_base_url` to the `circleci-data` bucket.
+Update the `runner_admin` section of the `values.yaml` file to point `external.launch_agent_base_url` to the `circleci-data` bucket.
 
 [source, yaml]
 ----
