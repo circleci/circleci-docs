@@ -130,7 +130,7 @@ When following these instructions to simply re-host agents in a partially air-ga
 [source, yaml]
 ----
 machine_provisioner:
-  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/machine-agent
+  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/machine-provisioner
 ----
 
 [#configure-docker-provisioner]
@@ -141,7 +141,7 @@ Update the `docker_provisioner` section of the `values.yaml` file to point `agen
 [source, yaml]
 ----
 docker_provisioner:
-  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/docker-agent
+  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/docker-provisioner
 ----
 
 
