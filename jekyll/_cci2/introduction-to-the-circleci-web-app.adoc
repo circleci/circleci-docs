@@ -23,7 +23,7 @@ Inside the application, you will find the features including the following:
 * Releases UI viewing and managing your releases.
 * Self-hosted runner setup and management.
 
-This page is not an exaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
+This page is not an exhaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
 NOTE: Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for xref:github-apps-integration#[GitHub App], xref:gitlab-integration#[GitLab] and xref:bitbucket-data-center-integration#[Bitbucket Data Center] projects. For an overview of feature availability for each integration type, see the xref:version-control-system-integration-overview#[VCS integration overview] page.
 
@@ -171,7 +171,7 @@ The following settings are available in the project settings page. If you do not
 
 **Environment Variables**: Add or import environment variables to your jobs to keep sensitive data out of your repository.
 
-**SSH Keys**: See information related to your SSH keys, or set up new SSH keys. CircleCI uses deploy and user keys. There is an option to add additional SSH keys.
+**SSH Keys**: See information related to your SSH keys, or set up new or additional SSH keys. CircleCI uses deploy and user keys.
 
 **API Permissions**: Allows you to create API tokens, as well as revoke project-specific API tokens.
 
@@ -224,13 +224,13 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Policies**: Provides a list of all policies that have been set up for your organization. For more information on config policies, see the xref:config-policy-management-overview#[Config policy management overview].
 
-**Advanced**: Enable/disable the use of xref:intelligent-summaries#[intelligent summaries] for contextual help with buiild failures. Some orgs have the option to allow xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[triggering pipelines with unversioned config] from VS Code.
+**Advanced**: Enable/disable the use of xref:intelligent-summaries#[intelligent summaries] for contextual help with build failures. Some orgs have the option to allow xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[triggering pipelines with unversioned config] from VS Code.
 
 **Orbs**: View a list of all the orbs authored by your organization.
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
-**Releases**: Find links to set up release markers or release moniotoring for your projects. Enable/disable autodetected releses, which allowes CircleCI to automatically detect releases in your projects and create release markers for you.
+**Releases**: Find links to set up release markers or release monitoring for your projects. Enable/disable autodetected releases, which allows CircleCI to automatically detect releases in your projects and create release markers for you.
 
 **Integrations**: Set up integrations with self-hosted version control systems.
 
