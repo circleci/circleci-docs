@@ -159,6 +159,7 @@ IP
 Java
 JavaScript
 [Jj]est
+JFrog
 Jira
 jq\b
 [JU|ju]nit
