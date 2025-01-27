@@ -164,7 +164,8 @@ JavaScript
 JFrog
 Jira
 jq\b
-[JU|ju]nit
+\bJUnit\b
+junit
 JRuby
 JVM
 kaniko
@@ -259,6 +260,7 @@ SDK
 Selenium
 SemVer
 Server Plan
+\b[Ss]hellchecking\b
 \b[Ss]ingle sign-on\b
 SLAs?
 [Ss]ignup
