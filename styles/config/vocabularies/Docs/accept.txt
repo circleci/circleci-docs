@@ -146,6 +146,7 @@ Gzip
 HashiCorp
 [Hh]eadspace
 Helm
+Heredoc
 Heroku
 Homebrew
 [Hh]ostname
