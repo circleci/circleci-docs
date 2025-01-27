@@ -57,7 +57,9 @@ Bitbucket
 Braintrust
 BrowserStack
 Buildah
+\bBuildKit\b
 Buildkite
+Buildx
 Bundler
 Capistrano
 Certbot
