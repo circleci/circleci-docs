@@ -332,8 +332,6 @@ images!
 
 === {{ image[1].name }}
 
-{: # {\{image1name}} }
-
 *Resources:*
 
 * https://hub.docker.com/r/circleci/{{ image[0] }}[Docker Hub] - where this image is hosted as well as some useful instructions.
@@ -344,7 +342,7 @@ images!
 
 *Recent Tags:*
 
-See https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated[the tag list for circleci/{{ image[0\] }} on Docker Hub].
+See https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated[the tag list for circleci/{{ image[0] }} on Docker Hub].
 
 '''
 
