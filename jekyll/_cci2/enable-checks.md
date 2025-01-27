@@ -12,9 +12,6 @@ contentTags:
 ## Introduction
 {: #introduction }
 
-The GitHub Checks feature is not currently supported for projects that have integrated with the CircleCI GitHub App. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the [GitHub App integration](/docs/github-apps-integration/) page.
-{: class="alert alert-info" }
-
 This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to GitHub user interface. **The GitHub checks integration feature is not currently available on CircleCI server**.
 
 GitHub Checks provides you with workflow status messages and gives the option to rerun workflows from the GitHub Checks page.
@@ -64,7 +61,7 @@ CircleCI reports the status of workflows and all corresponding jobs under the Ch
 
 After a rerun is initiated, CircleCI reruns the workflows from the start and reports the status in the Checks tab. To navigate to the CircleCI app from GitHub, click the **View more details on CircleCI Checks** link.
 
-Your project will stop receiving job level status after GitHub Checks is turned on. You can re-enable this in the GitHub Status updates section of the **Project Settings** > **Advanced Settings** page in the CircleCI app.
+Your project will continue receiving job level status after GitHub Checks is turned on. You can disable this in the GitHub Status updates section of the **Project Settings** > **Advanced Settings** page in the CircleCI app.
 {: class="alert alert-info" }
 
 ## Disable GitHub Checks for a project
@@ -87,7 +84,10 @@ To disable the GitHub Checks integration, navigate to the **Organization Setting
 2. Select VCS.
 3. Click the Manage GitHub Checks button.
 4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
+5. Confirm that GitHub status updates have been enabled on your projects so you will see job level status within PRs in GitHub. Go to the CircleCI app and navigate to **Project Settings** > **Advanced Settings** and confirm that the setting `GitHub Status Updates` is set to `on`.
 
+GitHub OAuth integrations will automatically re-enable job level status when the GitHub Checks integration is uninstalled. CircleCI GitHub App integrations will not disable or re-enable job level status automatically.
+{: class="alert alert-info" }
 
 ## Troubleshoot GitHub Checks waiting for status in GitHub
 {: #troubleshoot-github-checks-waiting-for-status-in-github }
