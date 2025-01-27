@@ -20,9 +20,9 @@ Docker layer caching (DLC) is beneficial if building Docker images is a regular 
 
 DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent job runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the less time your image-building jobs will take to run.
 
-DLC can be used with both the `machine` executor and in a link:/docs/building-docker-images/[remote Docker environment] (`setup_remote_docker`).
+DLC can be used with both the `machine` executor and in a xref:building-docker-images#[remote Docker environment] (`setup_remote_docker`).
 
-DLC is charged at 200 credits per job run. For more information about DLC charges, see the link:/docs/credits/#charge-for-docker-layer-caching[FAQ].
+DLC is charged at 200 credits per job run. For more information about DLC charges, see the xref:credits#charge-for-docker-layer-caching[FAQ].
 
 [#quickstart]
 == Quickstart
@@ -30,7 +30,7 @@ DLC is charged at 200 credits per job run. For more information about DLC charge
 [#remote-docker-environment]
 === Remote Docker environment
 
-To use DLC with the Docker execution environment, you will need to configure your job to run in a link:/docs/building-docker-images/[Remote Docker Environment]. To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your link:/docs/configuration-reference/[`.circleci/config.yml`] file:
+To use DLC with the Docker execution environment, you will need to configure your job to run in a xref:building-docker-images#[Remote Docker Environment]. To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your xref:configuration-reference#[`.circleci/config.yml`] file:
 
 [,yaml]
 ----
@@ -50,7 +50,7 @@ jobs:
 [#machine-executor]
 === Machine executor
 
-DLC can be used when building Docker images using the link:/docs/configuration-reference/#machine[`machine` executor]. Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key:
+DLC can be used when building Docker images using the xref:configuration-reference#machine[`machine` executor]. Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key:
 
 [,yml]
 ----
@@ -93,14 +93,14 @@ jobs:
       - run: docker build .
 ----
 
-NOTE: DLC has *no* effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the link:/docs/using-docker/[`docker` executor] and appear in the *Spin up Environment* step on your jobs pages.
+NOTE: DLC has *no* effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the xref:using-docker#[`docker` executor] and appear in the *Spin up Environment* step on your jobs pages.
 
 [#buildx-builder-instances]
 === Buildx builder instances
 
-When using Buildx builder instances with DLC, it is important to https://docs.docker.com/engine/reference/commandline/buildx_create/#name[name your builders]. Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you do not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
+When using Buildx builder instances with DLC, it is important to link:https://docs.docker.com/engine/reference/commandline/buildx_create/#name[name your builders]. Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you do not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
 
-If you store Docker build artifacts in a Docker volume, managed by the BuildKit inside Buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/build cache, but Buildx builders do have some in-built pruning. For more information, see the https://docs.docker.com/build/cache/garbage-collection/#default-policies[Docker docs].
+If you store Docker build artifacts in a Docker volume, managed by the BuildKit inside Buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/build cache, but Buildx builders do have some in-built pruning. For more information, see the link:https://docs.docker.com/build/cache/garbage-collection/#default-policies[Docker docs].
 
 [#how-dlc-works]
 == How DLC works
