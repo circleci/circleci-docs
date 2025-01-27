@@ -183,6 +183,7 @@ To add BATS to your orb, follow these steps:
 . Add the https://circleci.com/developer/orbs/orb/circleci/bats#usage-run-bats-tests[bats] orb to your `config.yml` file.
 . Add the `bats/run` job to the pre-publishing jobs in the `config.yml` file.
 
+[,yaml]
 ----
 workflows:
   lint-pack:
