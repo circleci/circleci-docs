@@ -256,6 +256,7 @@ SSO
 \bSauce Labs\b
 \bScale Plan\b
 SDK
+seccomp
 [Ss]ecrets?
 Selenium
 SemVer
@@ -263,6 +264,7 @@ Server Plan
 \b[Ss]hellchecking\b
 \b[Ss]ingle sign-on\b
 SLAs?
+Slanger
 [Ss]ignup
 SKUs?
 [Ss]nap
