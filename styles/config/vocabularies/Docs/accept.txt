@@ -132,6 +132,7 @@ GCP
 geckodriver
 Gemfile
 GitHub
+\bGitHub Checks\b
 \bGitLab self-managed\b
 GKE
 \bGoogle Cloud\b
