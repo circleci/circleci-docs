@@ -59,7 +59,7 @@ The URL will be pointing to `https://runner.circleci.com` by default. It should 
 
 `$CIRCLECI_RUNNER_LOGGING_LEVEL`
 
-This sets the logging level for the `circleci-runner` service. The logging level defaults to `info`.
+This sets the logging level for the `circleci-runner` service. The available logging levels are `debug`, `info`, `warn`, and `error`. By default, the logging level is set to `info`.
 
 Example:
 
@@ -74,7 +74,12 @@ logging:
 
 `$CIRCLECI_RUNNER_LOGGING_FORMAT`
 
-This sets the logging format for the `circleci-runner` service used for stderr and file logging. The logging format defaults to `color`.
+This sets the logging format for the `circleci-runner` service used for stderr and file logging. The available formats are:
+
+- `color`: The default logging format, with color.
+- `text`: Disables color but maintains standard logging output.
+- `json`: Outputs logs in JSON format.
+- `none`: Disables logging entirely.
 
 Example:
 
@@ -104,11 +109,11 @@ logging:
 
 `$CIRCLECI_RUNNER_TASK_AGENT_DIRECTORY`
 
-This parameter accepts the path to the directory of the `circleci-runner` task agent binary and defaults to `~/.local/bin`.
+This parameter accepts the path to the directory of the `circleci-runner` task agent binary and defaults to `~/.local/libexec/circleci`.
 
 ```yaml
 runner:
-  task_agent_directory: "~/.local/bin"
+  task_agent_directory: "~/.local/libexec/circleci"
 ```
 
 
@@ -159,7 +164,7 @@ runner:
 
 `$CIRCLECI_RUNNER_WORK_DIR`
 
-This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task-agent will need permissions to write to the directory. If the directory does not exist, then the task-agent will need permissions to create the directory. If installing multiple launch-agents on the same machine, each launch-agent will need a unique working directory.
+This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task-agent will need permissions to write to the directory. If the directory does not exist, then the task-agent will need permissions to create the directory.
 
 NOTE: These directories will not be removed automatically, see `cleanup_working_directory` to configure cleanup of directory.
 
@@ -217,7 +222,7 @@ runner:
 
 `$CIRCLECI_RUNNER_MODE`
 
-This parameter allows you to specify whether you want to terminate this self-hosted runner instance upon completion of a job (`single-task`), or to continuously poll for new available jobs (`continuous`).
+This parameter allows you to specify whether you want to terminate this self-hosted runner process upon completion of a job (`single-task`), or to continuously poll for new available jobs (`continuous`).
 
 The possible values are:
 
@@ -231,6 +236,25 @@ Example:
 ```yaml
 runner:
   mode: continuous
+```
+
+When using `single-task` mode, the runner process will restart while the machine instance will continue. However, you may find it useful to terminate the machine instance itself.
+You can do this on Linux based machines by adding the following to the systemd unit file:
+
+```bash
+ExecStopPost=shutdown now -h
+Restart=no
+User=root
+```
+
+However to avoid running as root we recommend stepping down the `circleci` user using `runner.command_prefix` as in our <<runner-command-prefix,example above>>.
+
+Example:
+
+```yaml
+runner:
+  command_prefix: ["sudo", "-niHu", "circleci", "--"]
+  mode: single-task
 ```
 
 [#runner-max-run-time]

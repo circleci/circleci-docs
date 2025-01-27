@@ -12,7 +12,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: Scheduled pipelines are not currently available for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
@@ -46,14 +46,7 @@ To get started with scheduled pipelines, you have the option of using the API, o
 [#use-project-settings]
 === Use project settings in the web app
 
-. In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and elect **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
-. Navigate to **Triggers**.
-. To create a new schedule, select **Add Trigger**.
-. Define the new schedule by filling out the form, then select **Save Trigger**.
-
-The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables that you declare at the top level of a configuration.
-
-If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows] page for examples.
+include::../_includes/partials/pipelines-and-triggers/scheduled-pipeline-setup.adoc[Setting up a scheduled pipeline using the CircleCI web app]
 
 [#use-the-api]
 === Use the API
@@ -82,6 +75,8 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
     }
 }'
 ```
+
+include::../_includes/partials/tips/find-project-slug.adoc[]
 
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs]. Also see the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 

@@ -3,8 +3,7 @@ readtime: false
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 sectionTags:
   config-version-2:
     - "#version"
@@ -789,7 +788,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.09
+      - image: cimg/base:2024.12
     environment:
       FOO: bar
     parallelism: 3
@@ -882,7 +881,7 @@ Configured by `docker` key which takes a list of maps:
 |===
 
 For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
-This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+This behavior occurs because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
@@ -1006,10 +1005,10 @@ Example:
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-2004:current # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+      image: ubuntu-2004:current # recommended linux image
 
     steps:
-        # Commands run in a Linux virtual machine environment
+      # Commands run in a Linux virtual machine environment
 ----
 --
 
@@ -1072,7 +1071,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: android:2022.09.1
+      image: android:2024.11.1
 ----
 
 The Android image can also be accessed using the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
@@ -1202,7 +1201,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.09
+      - image: cimg/base:2024.12
     resource_class: xlarge
     steps:
       ... // other config
@@ -1236,7 +1235,7 @@ Example:
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202010-01 # recommended linux image
+      image: ubuntu-2004:2024.01.2 # recommended linux image
     resource_class: large
     steps:
       ... // other config
@@ -1306,8 +1305,8 @@ jobs:
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
+      - checkout
+      - run: Write-Host 'Hello, Windows'
 ----
 --
 
@@ -1323,8 +1322,8 @@ jobs:
       image: windows-default
     steps:
       # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
+      - checkout
+      - run: Write-Host 'Hello, Windows'
 ----
 --
 
@@ -1394,7 +1393,7 @@ Example:
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2004:2024.01.2
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -1483,7 +1482,7 @@ Each built-in step is described in detail below.
 [#run]
 ===== *`run`*
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any `dotfiles` as part of the command.
 
 NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:migrate-from-deploy-to-run#[Migrate from deploy to run].
 
@@ -1587,7 +1586,7 @@ So if in the previous example `mkdir` failed to create a directory and returned 
 `-o pipefail`
 
 ____
-If pipefail is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
+If `pipefail` is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 ____
 
 For example:
@@ -1654,7 +1653,7 @@ Adding the `when` attribute to a job step allows you to override this default be
 
 The default value of `on_success` means that the step will run only if all of the previous steps have been successful (returned exit code 0).
 
-A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
+A value of `always` means that the step will run regardless of the exit status of previous steps. This behaviour is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts.
 
@@ -1679,7 +1678,7 @@ Here is an example where `halt` is used to avoid running a job on the `develop` 
 
 [,yml]
 ----
-run: |
+- run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
     fi
@@ -1723,7 +1722,7 @@ jobs: # conditional steps may also be defined in `commands:`
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2004:2024.11.1
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -1811,7 +1810,7 @@ Allows Docker commands to be run locally. See xref:building-docker-images#[Runni
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.06
+      - image: cimg/base:2024.06
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
@@ -2105,7 +2104,7 @@ It is also possible to store test results as build artifacts. For steps, refer t
 | `path`
 | Y
 | String
-| Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML test metadata files, or to a single test file.
+| Path (absolute, or relative to your `working_directory`) to directory containing `JUnit` XML test metadata files, or to a single test file.
 |===
 
 Example:
@@ -2290,7 +2289,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:17.2.0
+      - image: cimg/node:20.18.1
     environment:
       IMAGETAG: latest
     working_directory: ~/main
@@ -2436,7 +2435,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | `cron`
 | Y
 | String
-| See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
+| See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[`crontab` man page].
 |===
 
 [,yml]
@@ -2560,14 +2559,9 @@ The example configuration below uses a pipeline parameter, `run_integration_test
 ----
 version: 2.1
 
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
 workflows:
   integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
+    when: pipeline.git.branch == "main"
     jobs:
       - mytestjob
 
@@ -2575,16 +2569,8 @@ jobs:
 ...
 ----
 
-This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
 
-[,json]
-----
-{
-    "parameters": {
-        "run_integration_tests": true
-    }
-}
-----
 
 Refer to the xref:workflows#[Workflows] for more examples and conceptual information.
 
@@ -2628,8 +2614,40 @@ Jobs are run concurrently by default, so you must explicitly require any depende
 | `requires`
 | N
 | List
-| A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
+a| A list of jobs that must succeed or attain a specified status for the job to start. *Note*: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
+
+Possible types of `requires` items:
+
+* Job name (a required job that must succeed for the job to start) +
+* Map of job name to status (a required job that must attain the specified status for the job to start) +
+* Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start)
+
+The possible *status* values are: `success`, `failed` and `canceled`.
 |===
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - build
+            - test
+      - notify-build-canceled:
+          requires:
+            - build: canceled
+      - cleanup:
+          requires:
+            - deploy:
+              - failed
+              - canceled
+
+----
 
 '''
 
@@ -2756,6 +2774,7 @@ workflows:
   deploy:
     jobs:
       - init-service
+      - test-service
       - build-service-image:
           requires:
             - init-service
@@ -2773,7 +2792,7 @@ workflows:
             - org-global
           requires:
             - publish-service
-          filters: pipeline.git.branch == "main" and pipeline.git.commit.subject starts-with "DEPLOY:"
+          filters: pipeline.git.branch == "main" and pipeline.parameters.my-custom-param starts-with "DEPLOY:"
 ----
 
 '''
@@ -2798,7 +2817,7 @@ Only run the job on the `main` branch, and disallow use with pipelines xref:vs-c
 
 [source,yml]
 ----
-filters: pipeline.git.branch == "main" and not (pipeline.config_source starts-with "api")
+filters: pipeline.git.branch == "main" and not (pipeline.trigger_source starts-with "api")
 ----
 
 Use pipeline parameters and the pipeline value `pipeline.git.branch` to run a job only on specific branches **or** when triggered via the API with a pipeline parameter set to true:
@@ -2829,6 +2848,8 @@ workflows:
 ----
 
 You can use the API to trigger a pipeline with a pipeline parameter set to true:
+
+include::../_includes/partials/notes/server-api-examples.adoc[]
 
 [source,yml]
 ----
@@ -3009,19 +3030,19 @@ workflows:
     jobs:
       - build:
           name: build-macos-0.1
-          version: 0.1
+          version: "0.1"
           platform: macos
       - build:
           name: build-macos-0.2
-          version: 0.2
+          version: "0.2"
           platform: macos
       - build:
           name: build-macos-0.3
-          version: 0.3
+          version: "0.3"
           platform: macos
       - build:
           name: build-windows-0.1
-          version: 0.1
+          version: "0.1"
           platform: windows
       - ...
 ----
@@ -3057,7 +3078,7 @@ The matrix above would expand into 8 jobs: every combination of the parameters
 [#dependencies-and-matrix-jobs]
 ====== Dependencies and matrix jobs
 
-To `require` an entire matrix (every job within the matrix), use its `alias`.
+To require an entire matrix (every job within the matrix), use its `alias`.
 The `alias` defaults to the name of the job being invoked.
 
 [,yaml]
@@ -3110,18 +3131,18 @@ workflows:
     jobs:
       - build:
           name: build-v0.1
-          version: 0.1
+          version: "0.1"
       - build:
           name: build-v0.2
-          version: 0.2
+          version: "0.2"
       - deploy:
           name: deploy-v0.1
-          version: 0.1
+          version: "0.1"
           requires:
             - build-v0.1
       - deploy:
           name: deploy-v0.2
-          version: 0.2
+          version: "0.2"
           requires:
             - build-v0.2
 ----
@@ -3137,7 +3158,7 @@ Every job invocation in a workflow may optionally accept two special arguments: 
 
 Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
+Pre and post steps allow you to execute steps in a given job without modifying the job. For example, to run custom setup steps before job execution.
 
 [,yaml]
 ----
@@ -3146,7 +3167,7 @@ version: 2.1
 jobs:
   bar:
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2004:2024.05.1
     steps:
       - checkout
       - run:
@@ -3284,12 +3305,12 @@ workflows:
 version: 2.1
 
 executors:
-  linux-13:
+  linux-22:
     docker:
-      - image: cimg/node:13.13
+      - image: cimg/node:22.4
   macos: &macos-executor
     macos:
-      xcode: 14.2.0
+      xcode: 15.0.1
 
 jobs:
   test:
@@ -3313,7 +3334,7 @@ workflows:
     jobs:
       - test:
           os: macos
-          node-version: "13.13.0"
+          node-version: "22.4"
 ----
 
 '''
@@ -3331,19 +3352,19 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
+      - image: ubuntu:23.04
 
-      - image: mongo:2.6.8
+      - image: mongo:6.0.14
         command: [mongod, --smallfiles]
 
-      - image: postgres:14.2
+      - image: postgres:14.12
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: user
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 
-      - image: rabbitmq:3.5.4
+      - image: rabbitmq:3.12.12
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -3399,7 +3420,7 @@ jobs:
 
   deploy-stage:
     docker:
-      - image: ubuntu:14.04
+      - image: ubuntu:23.04
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -3408,7 +3429,7 @@ jobs:
 
   deploy-prod:
     docker:
-      - image: ubuntu:14.04
+      - image: ubuntu:23.04
     working_directory: /tmp/my-project
     steps:
       - run:

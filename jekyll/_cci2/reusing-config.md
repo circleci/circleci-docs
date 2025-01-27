@@ -8,8 +8,7 @@ order: 1
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
@@ -141,8 +140,8 @@ commands:
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](https://yaml.org/type/bool.html):
 
-* True: `y` `yes` `true` `on`
-* False: `n` `no` `false` `off`
+* True: `yes` `true` `on`
+* False: `no` `false` `off`
 
 Capitalized and uppercase versions of the above values are also valid.
 

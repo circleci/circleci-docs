@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = CircleCI API developer's guide
 :page-description: API guide for internal and external CircleCI developers
@@ -12,7 +11,9 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-This guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
+This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
+
+include::../_includes/partials/notes/server-api-examples.adoc[]
 
 [#api-categories]
 == API categories
@@ -91,73 +92,23 @@ curl --header "Circle-Token: $CIRCLE_TOKEN" \
 [#getting-started-with-the-api]
 == Getting started with the API
 
-[#github-and-bitbucket-projects]
-=== GitHub OAuth and Bitbucket Cloud projects
+To interact with CircleCI projects via the API v2 you will use the project slug. The project slug is a unique identifier for a project.
 
-[NOTE]
-====
-*GitHub authorization with CircleCI is changing*. Starting August 2023 when you authorize your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
+To find your project slug, follow these steps:
 
-This style of URL indicates you authenticated with the *GitHub App*: `+https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg+`
+. In the CircleCI web app, select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the icon:ellipsis-h[ellipsis] next to your project and select **Project Settings**.
+. The project slug is listed on the project settings homepage. Use the copy button to copy the slug to your clipboard.
 
-This style of URL indicates you authenticated with the *GitHub OAuth app*: `+https://app.circleci.com/github/<your GitHub username>+`
+The `project_slug` is also included in the response payload when looking up a link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/getPipelineById[pipeline] or link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[workflow] by ID. The project slug can then be used to get information about the project.
 
-If you authenticated with the *GitHub OAuth app*, this section is relevant to you. For *GitHub App*, refer to the <<gitlab-saas-support-projects,following section>>.
-====
+=== GitHub OAuth and Bitbucket Cloud
+If your integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
 
-If you want to pull information from CircleCI about a GitHub OAuth app repository `\https://github.com/CircleCI-Public/circleci-cli` you can refer to it in API calls as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+=== GitHub App, GitLab and Bitbucket Data Center
 
-For the VCS type, you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
-
-With this API, CircleCI introduces a string representation of the triplet called the `project_slug`, which takes the following form:
-
-[,shell]
-----
-:vcs_type/:org_name/:repo_name
-----
-
-The `project_slug` is also included in the response payload when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project.
-
-image::{{ site.baseurl }}/assets/img/docs/api-structure.png[API structure]
-
-For GitHub and Bitbucket Cloud projects, `project_slug` is currently usable as a human-readable identifier for a given project. For <<gitlab-saas-support-projects,GitHub App, GitLab and Bitbucket Data Center projects>>, the slug format has been changed.
-
-[#gitlab-saas-support-projects]
-=== GitHub App, GitLab and Bitbucket Data Center projects
-
-[NOTE]
-====
-*GitHub authorization with CircleCI is changing*. Starting August 2023 when you authorize your CircleCI account with GitHub, you may find this will be done through our GitHub App, rather than the GitHub OAuth app. You can see which account type you have by heading to the CircleCI web app and inspecting the URL in your browser:
-
-This style of URL indicates you authenticated with the *GitHub App*: `+https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg+`
-
-This style of URL indicates you authenticated with the *GitHub OAuth app*: `+https://app.circleci.com/github/<your GitHub username>+`
-
-If you authenticated with the *GitHub OAuth app*, this section is relevant to you. For *GitHub App*, refer to the <<gitlab-saas-support-projects,following section>>.
-====
-
-For GitHub App and GitLab projects, organization as well as project names do not serve as identifiers, and are not part of project slug. These projects currently use a new slug format:
-
-[,shell]
-----
-circleci/:slug-remainder
-----
-
-The project slug can be found by navigating to your project in the CircleCI web app and taking the "triplet" string from the browser address bar.
-
-image::{{ site.baseurl }}/assets/img/docs/standalone-project-slug.png[GitLab project slug available in address in the web app]
-
-In API requests, the project slug must be passed as a whole. For example:
-
-[,shell]
-----
-curl --header "Circle-Token: $CIRCLE_TOKEN" \
-  --header "Accept: application/json"    \
-  --header "Content-Type: application/json" \
-  https://circleci.com/api/v2/project/circleci/:slug-remainder
-----
-
-The project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
+For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up org and project identifiers as opaque , for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. The project slug should not be parsed to retrieve the project or organization ID. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
 
 [#rate-limits]
 == Rate limits
@@ -168,7 +119,7 @@ As the author of an API integration with CircleCI, your integration should expec
 
 For HTTP APIs, when a request is throttled, you will receive link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429[HTTP status code 429]. If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
 
-In most cases, the HTTP 429 response code will be accompanied by the ;link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After[Retry-After HTTP header]. When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
+In most cases, the HTTP 429 response code will be accompanied by the link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After[Retry-After HTTP header]. When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
 To understand the current limit, you can inspect other headers that describe the API limits. These will vary slightly depending on the API call you are making, as different services will impose different limits. The following headers are possible:
 
@@ -184,52 +135,70 @@ NOTE: As we transition some APIs from one rate limit system to another, a differ
 [#example-end-to-end-api-request]
 == Example end-to-end API request
 
-The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a demo repository called "hello-world"; however, you can use a pre-existing repository to follow along if you choose.
+The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a demo repository called `hello-world`. Alternatively, you can use a pre-existing repository to follow along if you choose.
 
 Many of the API calls make use of the `+{project-slug}+` triplet, described <<getting-started-with-the-api,above>>.
+
+You will get a list of pipelines for your project using link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listPipelinesForProject[GET /project/{project-slug}/pipeline].
 
 [#prerequisites]
 === Prerequisites
 
-* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. *GitHub App, GitLab and Bitbucket Data Center users:* Note the <<gitlab-saas-support-projects,change in the definition>> for the project slug references in the examples and use cases on the rest of this document.
-* Completion of the CircleCI xref:getting-started#[onboarding].
+* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI.
 
 [#steps]
 === Steps
 
-. On your VCS provider, create a repository. The repository for this example will be called `hello-world`.
-. Onboard your new Project on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Projects[your project > Set Up Project].
- After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `.circleci/config.yml` contains the following:
+. In your VCS, create a repository (or use an existing one if you prefer). The repository for this how-to guide will be called `hello-world`. Create a README for your repository so that it is not empty.
+. Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:create-project#[Create a project] guide for steps.
++
+After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
 +
 [,yaml]
 ----
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/configuration-reference
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-# Declare a dependency on the node orb
-  node: circleci/node@4.7.0
-# Orchestrate or schedule a set of jobs
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
+jobs:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
+    docker:
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
+    # Add steps to the job
+    # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-# Name the workflow "test_my_app"
-  test_my_app:
-# Run the node/test job in its own container
+  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - node/test
+      - say-hello
 ----
 
-. Add an API token from the link:https://circleci.com/account/api[Personal API Tokens page]. Be sure to write down and store your API token in a secure place once you generate it.
-. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
+. Add an API token to your account from the link:https://circleci.com/account/api[Personal API Tokens page]. Be sure to save your API token in a secure place once you generate it.
+. Find your project slug from the <<getting-started-with-the-api,project settings overview page>>.
+. Now you are ready to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Note that in the example below, the values within curly braces (`{}`) need to be replaced with your values.
 +
 [,shell]
 ----
- # First: set your CircleCI token as an environment variable
- export CIRCLE_TOKEN={your_api_token}
+# First: set your CircleCI token as an environment variable
+export CIRCLE_TOKEN={your_api_token}
 
- curl --header "Circle-Token: $CIRCLE_TOKEN" \
-   --header "Accept: application/json"    \
-   --header "Content-Type: application/json" \
-   https://circleci.com/api/v2/project/{project-slug}/pipeline
+curl -X GET https://circleci.com/api/v2/project/{project-slug}/pipeline
+  --header "Accept: application/json"    \
+  --header "Content-Type: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 +
 You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
@@ -267,7 +236,9 @@ You will likely receive a long string of unformatted JSON. After formatting, it 
    }
 ----
 
-. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
+. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet triggers a pipeline via `curl` without any body parameters:
++
+CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 +
 [,shell]
 ----
@@ -350,18 +321,20 @@ Before trying any of the API calls in this section, make sure you have a persona
 [#get-project-details]
 === Get project details
 
-You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (VCS) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `+project/{project-slug}+` endpoint by passing the `project-slug` parameter.
+You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (VCS) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `+project/{project-slug}+` endpoint.
 
 [#get-project-steps]
 ==== Steps
 
-Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `+/project/{project-slug}+` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
+Make a GET request to the `+/project/{project-slug}+` endpoint to return detailed information about a specific project.
 
 NOTE: Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 
-To return project details, perform the following steps:
+To return project details, follow these steps:
 
-. For this GET API call, under the `parameters` key, define the `project_slug` (`\<vcs_type\>/\<org_name\>/\<repo_name\>`) parameter you want returned in the JSON payload in your `curl` request as follows:
+. Find your project slug from the <<getting-started-with-the-api,project settings overview page>>.
+
+. Run the following `curl` request, substituting your project slug:
 +
 [,shell]
 ----
@@ -371,7 +344,7 @@ curl -X GET https://circleci.com/api/v2/project/{project_slug} \
   --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 
-. After passing the `project-slug` parameter and making the API request, you will receive unformatted JSON text similar to the example shown below.
+. You will receive unformatted JSON. Once formatted it should look similar to the example shown below:
 +
 [,json]
 ----
@@ -399,13 +372,18 @@ Retrieving job information can be very useful when you want information about ho
 [#get-job-details-steps]
 ==== Steps
 
-Of the several jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `+GET /project/{project_slug}/job/{job-number}+` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+The `+GET /project/{project_slug}/job/{job-number}+` endpoint enables you to return detailed information about a specific job.
 
 NOTE: Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 
 To return job details, perform the following steps:
 
-. For this GET API call, under the `parameters` key, define the `project_slug` and `job_number` parameters you want returned in the JSON payload in your `curl` request as follows:
+. Find your project slug from the <<getting-started-with-the-api,project settings overview page>>.
+
+#TODO: create tip for finding build/job number#
+. Find your job number
+
+. Run the following `curl` request:
 +
 [,shell]
 ----

@@ -6,8 +6,7 @@ description: "Conceptual Overview for Orbs"
 categories: [getting-started]
 verison:
 - Cloud
-- Server v4.x
-- Server v3.x
+- Server v4+
 ---
 
 * TOC
@@ -214,10 +213,10 @@ Production orbs are immutable and can be found on the [Orb Registry](https://cir
 
 Development orbs are temporary overwrite-able orb tag versions, useful for rapid development and testing prior to deploying a semver deployed production change.
 
+- A Development orb can only be published if the orb has an initial semver deployed production version
 - Development orbs are mutable, can be overwritten, and automatically expire 90 days after they are published
 - Version string must begin with `dev:` followed by any string, for example, `<namespace>/<orb>@dev:my-feature-branch`
 - Development orbs may be published by any member of the namespace organization
-- Will not appear on the Orb Registry
 - Open source, released under [MIT license](https://circleci.com/developer/orbs/licensing).
 - Available via CircleCI CLI (if the development tag name is known)
 

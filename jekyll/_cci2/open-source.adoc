@@ -3,7 +3,7 @@ readtime: false
 contentTags:
   platform:
   - Cloud
-  - Server
+  - Server v4+
 ---
 = Open source acknowledgments
 :page-layout: classic-docs
@@ -22,5 +22,27 @@ The following 3rd-party open source components are used in the CircleCI release 
 [cols=2*, options="header", stripes=even,format=csv]
 |===
 include::release-agent.csv[]
+|===
+--
+
+[.tab.oss-ack.GOAT]
+--
+The following 3rd-party open source components are used in the CircleCI General Orchestration Agent (GOAT). GOAT is an agent used by self-hosted container runners for managing the container environment. For more information, see the xref:container-runner#[Container Runner docs].
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even,format=csv]
+|===
+include::runner-init.csv[]
+|===
+--
+
+[.tab.oss-ack.CircleCI_Runner]
+--
+The following 3rd-party open source components are used in the CircleCI self-hosted runner. The CircleCI runner is a utility used to run CirlceCI jobs on self-hosted infrastructure. For more information, see the xref:runner-overview#[self-hosted runner overview docs].
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even,format=csv]
+|===
+include::circleci-runner.csv[]
 |===
 --

@@ -1,0 +1,7 @@
+Name,License
+gotest.tools/v3,Apache-2.0
+github.com/google/go-cmp,BSD-3-Clause
+github.com/alecthomas/kong,MIT
+github.com/gin-gonic/gin,MIT
+github.com/goccy/go-json,MIT
+github.com/hashicorp/go-reap,MPL-2.0

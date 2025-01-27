@@ -5,7 +5,6 @@ description: Definitions for the metrics in CircleCI Insights, Insights dashboar
 contentTags:
   platform:
   - Cloud
-  - Server v3.x
 ---
 
 ## Overview

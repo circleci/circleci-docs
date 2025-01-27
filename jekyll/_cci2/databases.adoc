@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
+  - Server v4+
 ---
 = Configure databases
 :page-description: This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
@@ -108,7 +108,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ----
 
 [#using-dockerize-to-wait-for-dependencies]
-=== Using Dockerize to wait for dependencies
+=== Using dockerize to wait for dependencies
 
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
 Following is an example of how to do this in your CircleCI config file:

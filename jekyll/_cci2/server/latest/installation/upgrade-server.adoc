@@ -17,6 +17,8 @@ This page describes the steps needed to upgrade your CircleCI server installatio
 [#path]
 == Upgrade paths
 
+TIP: Our general recommendation is not to skip releases when upgrading. However, we validated that **you can seamlessly upgrade directly from server 4.3, 4.4, 4.5 and 4.6 to server 4.7**. While future version skips may not be tested by CircleCI, this ensures a clear path to adopt server 4.7 and stay on a newly supported version.
+
 We recommend that you **do not** skip releases when upgrading, however some patch releases can be skipped. Your upgrade path will depend on your current version, and the currently available version releases.
 
 When upgrading from one minor version to the next, ensure your upgrade path includes the last patch release for your current minor version.
@@ -38,7 +40,7 @@ We have moved away from Vault to Tink for encryption. The process for migration 
 [#upgrade-steps]
 == Upgrade steps
 
-. Ensure your cluster is running a compatible Kubernetes version for this release (1.26 - 1.29).
+. Ensure your cluster is running a compatible Kubernetes version for this release ({kubernetesversions}).
 
 . Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
 

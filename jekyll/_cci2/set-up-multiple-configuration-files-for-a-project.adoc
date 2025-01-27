@@ -67,3 +67,4 @@ Next, create a trigger for your pipeline.
 == Conclusion
 
 You have now successfully set up multiple configuration files for your project on CircleCI. Each configuration file will trigger a separate pipeline on the configured trigger events. Push a commit to your code to test this out. You should see both pipelines trigger in the CircleCI web app Pipelines page.
+

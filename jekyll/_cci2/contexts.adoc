@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Using contexts
 :page-description: Secured, cross-project resources
@@ -129,8 +128,8 @@ version: 2.1
 # Jobs declaration for build, test and deploy not displayed
 
 workflows:
-  jobs:
-    build-test-deploy:
+  build-test-deploy:
+    jobs:
       - build
       - test:
           context: my-restricted-context
@@ -167,9 +166,7 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
-You must be an organization administrator to complete the following task.
-
-NOTE: Restricting a context to a security group is supported for orgs integrated through the GitHub OAuth app and **not supported** for orgs that integrate with xref:github-apps-integration#[CircleCI's GitHub App], xref:gitlab-integration#[GitLab], or Bitbucket.
+CAUTION: To use security group context restrictions you must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app.
 
 . Navigate to menu:Organization Settings[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
 . Select *Create Context* if you wish to use a new context, or select the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
@@ -205,7 +202,7 @@ Addition and deletion of environment variables from a restricted context is limi
 [#project-restrictions]
 == Project restrictions
 
-CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:gitlab-integration#roles-and-permissions[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
+CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:roles-and-permissions-overview#[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
 NOTE: API support for project restricted contexts is coming soon.
 
@@ -281,6 +278,8 @@ Follow these steps to set an expression restriction on a context:
 
 [.tab.set-expression-restriction.API]
 --
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
 . You are going to need your organization ID. In the link:https://app.circleci.com/[CircleCI web app] select **Organization Settings** in the sidebar and copy your "Organization ID" somewhere safe.
 . To get the ID for your context, list your contexts, as follows, substituting your organization ID:
