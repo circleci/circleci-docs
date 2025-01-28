@@ -1,0 +1,9 @@
+workflows:
+  nightly-run-workflow:
+  # run workflow only when the nightly_build pipeline is triggered
+    when: pipeline.parameters.my_param == true or pipeline.git.tag == "release"
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
