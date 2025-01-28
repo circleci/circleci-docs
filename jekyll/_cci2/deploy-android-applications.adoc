@@ -229,7 +229,7 @@ Using the Android orb gives you two options for deploying to the Google Play Sto
 
 [.tab.configAndroidOrb.Use_the_deploy-to-play-store_job]
 --
-To deploy using the `deploy-to-play-store job you just need to add a `android/deploy_to_play_store` job to your list of jobs in your workflow.
+To deploy using the `deploy-to-play-store` job you just need to add an `android/deploy_to_play_store` job to your list of jobs in your workflow.
 =======
 
 If you set your environment variables as shown earlier in this tutorial, then you should not need to set the following parameters, as the default values take the same environment value names:

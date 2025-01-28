@@ -269,7 +269,7 @@ Every time you run this workflow by pushing to the `model-train` branch, anew mo
 [#using-tables]
 == 6. Use the orb
 
-Let's break down the `deploy-model-through-to-prod workflow`. Our first job is `aws-sagemaker/create_model`. This job creates a model from your latest Model Package in the registry. This will be what we then deploy to the inference endpoints. In general, `create-model` just needs to be called one time at the beginning of your workflow:
+Let's break down the `deploy-model-through-to-prod` workflow. Our first job is `aws-sagemaker/create_model`. This job creates a model from your latest Model Package in the registry. This will be what we then deploy to the inference endpoints. In general, `create-model` just needs to be called one time at the beginning of your workflow:
 
 [,yaml]
 ----
