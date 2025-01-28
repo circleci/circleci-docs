@@ -490,7 +490,7 @@ resourceClasses:
     ...
 ```
 
-With sysbox installed and the runtime class updated in your container-agent resource class configuration, you may now use Sysbox in your `.circleci/config.yml` syntax. example:
+With sysbox installed and the runtime class updated in your container-agent resource class configuration, you may now use Sysbox in your CircleCI config, for example:
 
 ```yaml
 docker:
