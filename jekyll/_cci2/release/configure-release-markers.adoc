@@ -32,7 +32,7 @@ Before adding a release marker step to your workflow, you will need to create a 
 
 == 2. Update configuration
 
-Next you will update your CircleCI configuration file. Add a `circleci run log release` command to your deployment job. This tells CircleCI to log the release marker in the Releases UI.
+Next you will update your CircleCI configuration file. Add a `circleci run release log` command to your deployment job. This tells CircleCI to log the release marker in the Releases UI.
 
 Add a `log release` step at the end of your _deployment_ job, for example:
 

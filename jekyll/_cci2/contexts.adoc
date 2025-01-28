@@ -128,8 +128,8 @@ version: 2.1
 # Jobs declaration for build, test and deploy not displayed
 
 workflows:
-  jobs:
-    build-test-deploy:
+  build-test-deploy:
+    jobs:
       - build
       - test:
           context: my-restricted-context
