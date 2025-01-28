@@ -102,7 +102,7 @@ DNS
 Docker
 Docker\sHub
 Dockerfiles?
-[Dd]otfile
+[Dd]otfiles?
 [Ee]nablement
 EKS
 Elixir
@@ -156,7 +156,8 @@ JavaScript
 [Jj]est
 Jira
 jq\b
-[JU|ju]nit
+\bJUnit\b
+junit
 JVM
 kaniko
 [Kk]aocha
@@ -276,7 +277,7 @@ TLS
 [Tt]olerations
 [Tt]oolchains?
 [Tt]ruthy
-trx2junit
+\btrx2junit\b
 TypeScript
 Ubuntu
 UI
