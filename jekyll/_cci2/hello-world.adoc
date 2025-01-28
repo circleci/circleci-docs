@@ -37,7 +37,7 @@ These examples adds a job called `hello-job` that prints `hello world` to the co
 
 [.tab.hellocloud.Docker]
 --
-The job `hello-job` spins up a container running a link:/docs/circleci-images/#nodejs[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
+The job `hello-job` spins up a container running a link:/docs/circleci-images/#node-js[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
 
 [source,yaml]
 ----
@@ -197,7 +197,7 @@ These examples add a job called `hello-job` that prints `hello world` to the con
 
 [.tab.helloserver4.Docker]
 --
-The job `hello-job` spins up a container running a link:/docs/circleci-images/#nodejs[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
+The job `hello-job` spins up a container running a link:/docs/circleci-images/#node-js[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
 
 [source,yaml]
 ----
