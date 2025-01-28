@@ -476,7 +476,7 @@ While jobs that run with container-agent cannot use CircleCI's <<building-docker
 You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
 
 Another option is to use a tool called link:https://github.com/nestybox/sysbox[Sysbox] which must first be link:https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-k8s.md[installed on your Kuberenetes cluster]. 
-Once installed, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>> and apply the changes:
+Once installed, update the container-agent <<resource-class-configuration-custom-pod,resource class configuration>> and apply the changes:
 
 ```yaml
 resourceClasses:
