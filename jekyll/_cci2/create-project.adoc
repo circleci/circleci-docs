@@ -28,6 +28,8 @@ On the **Organization Home** page, check which option you see:
 * If you see a btn:[Set up a project] button, follow steps to <<set-up-a-project>> below.
 * If you see a btn:[Create Project] button, follow steps to <<create-a-project>> below.
 
+NOTE: Using CircleCI server? Use the <<set-up-a-project>> steps below. Rather than Organization Home you will see Dashboard in the web app sidebar.
+
 [#create-a-project]
 === Create a project
 
@@ -180,7 +182,7 @@ NOTE: If you authenticated CircleCI with either the xref:github-integration#[Git
 
 Follow these steps to  set up a new project in CircleCI:
 
-. In the CircleCI web app, select **Organization Home** in the sidebar.
+. In the CircleCI web app, select **Organization Home** in the sidebar. The equivalent option in CircleCI server is **Dashboard**
 . Select btn:[Set up a project].
 +
 .Set up a project
