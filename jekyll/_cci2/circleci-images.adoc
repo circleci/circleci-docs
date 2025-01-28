@@ -206,7 +206,7 @@ CircleCI maintains legacy images for the languages below.
 * <<elixir,Elixir>>
 * <<go-golang,Go (Golang)>>
 * <<jruby,JRuby>>
-* <<nodejs,Node.js>>
+* <<nodejs,Node-js>>
 * <<openjdk,OpenJDK (Java)>>
 * <<php,PHP>>
 * <<python,Python>>

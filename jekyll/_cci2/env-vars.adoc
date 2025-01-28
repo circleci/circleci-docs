@@ -48,7 +48,7 @@ Environment variables are used according to a specific precedence order, as foll
 
 . Environment variables declared xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[inside a shell command] in a `run` step, for example `FOO=bar make install`.
 . Environment variables declared with the `environment` key xref:set-environment-variable#set-an-environment-variable-in-a-step[for a `run` step].
-. Environment variables set with the `environment` key link:set-environment-variable#set-an-environment-variable-in-a-job[for a job].
+. Environment variables set with the `environment` key xref:set-environment-variable#set-an-environment-variable-in-a-job[for a job].
 . Special CircleCI environment variables defined in the xref:variables#built-in-environment-variables[CircleCI Built-in environment variables] document.
 . Context environment variables (assuming the user has access to the context). See the xref:contexts#[Contexts] documentation for more information.
 . xref:set-environment-variable#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
