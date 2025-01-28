@@ -23,6 +23,7 @@
 [Ww]alkthrough
 [Aa]ctions
 ACR
+Aeternity
 [Aa]ir-gapped
 Airtable
 /bAmazon SageMaker/b
@@ -31,10 +32,13 @@ Android
 AMI
 APIs?
 \b[Aa]pp\b
+Appfile
 Appium
+\bApp Store Connect\b
 Arm
 Artifactory
 [Aa]rchitected
+Arweave
 Asciidoctor
 Atlassian
 [Aa]utodetected
@@ -49,13 +53,17 @@ backoff
 [Bb]anlist?
 Bash
 Behat
+Bioconda
 Bitbucket
 \bBitbucket Cloud\b
 [Bb]lobless
+[Bb]lockchain
 Braintrust
 BrowserStack
 Buildah
+\bBuildKit\b
 Buildkite
+Buildx
 Bundler
 Capistrano
 Certbot
@@ -78,6 +86,7 @@ CocoaPods
 Codecov
 CodeDeploy
 Coinbase
+\bConda\b
 [Cc]onfigs?\b
 ConfigMap
 /b[Cc]ontainer [Rr]egistry/b
@@ -102,6 +111,7 @@ DNS
 Docker
 Docker\sHub
 Dockerfiles?
+dockerize
 [Dd]otfiles?
 [Ee]nablement
 EKS
@@ -119,6 +129,7 @@ Fastlane
 /bFastlane Match/b
 filename
 framebuffer
+frameit
 \bFree Plan\b
 [Ff]ormatters?
 Gbps
@@ -126,6 +137,7 @@ GCP
 geckodriver
 Gemfile
 GitHub
+\bGitHub Checks\b
 \bGitLab self-managed\b
 GKE
 \bGoogle Cloud\b
@@ -140,6 +152,7 @@ Gzip
 HashiCorp
 [Hh]eadspace
 Helm
+Heredoc
 Heroku
 Homebrew
 [Hh]ostname
@@ -150,14 +163,17 @@ IAM
 IdP
 [Ii]nsights
 invocated
+iOS
 IP
 Java
 JavaScript
 [Jj]est
+JFrog
 Jira
 jq\b
 \bJUnit\b
 junit
+JRuby
 JVM
 kaniko
 [Kk]aocha
@@ -199,7 +215,7 @@ OOM
 OPA
 \bOpenID Connect\b
 orgs?
-Packagecloud
+[Pp]ackagecloud
 [Pp]arameterization
 \bPerformance Plan\b
 PHP
@@ -247,12 +263,15 @@ SSO
 \bSauce Labs\b
 \bScale Plan\b
 SDK
+seccomp
 [Ss]ecrets?
 Selenium
 SemVer
 Server Plan
+\b[Ss]hellchecking\b
 \b[Ss]ingle sign-on\b
 SLAs?
+Slanger
 [Ss]ignup
 SKUs?
 [Ss]nap
@@ -272,6 +291,7 @@ Telegraf
 templated
 [Tt]emplatizable
 Terraform
+TestFairy
 Tink
 TLS
 [Tt]olerations

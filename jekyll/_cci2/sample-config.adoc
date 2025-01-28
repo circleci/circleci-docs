@@ -1,48 +1,51 @@
 ---
-layout: classic-docs
-title: "Sample config.yml Files"
-description: "Sample config.yml File"
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
+= Sample config.yml Files
+:description: Sample config.yml File
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
 
-This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the [Configuration reference](/docs/configuration-reference/) page.
+This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:configuration-reference#[Configuration reference] page.
 
 If you would like to get set up quickly, see our language-specific quickstart guides:
 
-* [Node](/docs/language-javascript/)
-* [Python](/docs/language-python/)
-* [Go](/docs/language-go/)
+* xref:language-javascript#[Node]
+* xref:language-python#[Python]
+* xref:language-go#[Go]
 
-## Tools for editing configuration files
-{: tools-for-editing-configuration-files }
+== Tools for editing configuration files
 
-CircleCI has created an [extension for Visual Studio Code](/docs/vs-code-extension-overview/) that reduces context switching between the web app and VS Code through a set of helpful features.
+CircleCI has created an xref:vs-code-extension-overview#[extension for Visual Studio Code] that reduces context switching between the web app and VS Code through a set of helpful features.
 
 The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
 
-The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=circleci.circleci).
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace].
 
-## Simple configuration examples
-{: #simple-configuration-examples }
+[#simple-configuration-examples]
+== Simple configuration examples
 
-{% include snippets/docker-auth.md %}
+{% include snippets/docker-auth.adoc %}
 
-### Concurrent workflow
-{: #concurrent-workflow }
+[#concurrent-workflow]
+=== Concurrent workflow
 
 The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
-* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [Developer Hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+* Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[Developer Hub convenience images] page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example:
 
-![Concurrent Workflow Graph]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
+image::{{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png[Concurrent Workflow Graph]
 
-```yaml
+[,yaml]
+----
 version: 2.1
 
 # Define the jobs we want to run for this project
@@ -66,21 +69,22 @@ workflows:
     jobs:
       - build
       - test
-```
+----
 
-### Sequential workflow
-{: #sequential-workflow }
+[#sequential-workflow]
+=== Sequential workflow
 
-The configuration example below shows a sequential workflow where the `build` job runs, and then the `test` job runs once `build` has completed. This is achieved by using the [`requires` key](/docs/configuration-reference/#requires), and specifying the `test` job "requires" the `build` job in order to run. Both jobs are run in Docker containers using the base image provided by CircleCI.
+The configuration example below shows a sequential workflow where the `build` job runs, and then the `test` job runs once `build` has completed. Configure sequential workflows using the xref:configuration-reference#requires[`requires` key], and specifying the `test` job "requires" the `build` job in order to run. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
-* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+* Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
 
-![Sequential Workflow Graph]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
+image::{{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png[Sequential Workflow Graph]
 
-```yaml
+[,yaml]
+----
 version: 2.1
 
 # Define the jobs we want to run for this project
@@ -106,14 +110,15 @@ workflows:
       - test:
           requires:
             - build
-```
+----
 
-### Approval job
-{: #approval-job }
+[#approval-job]
+=== Approval job
 
-The example below shows a sequential workflow with an [approval job](/docs/configuration-reference/#type). Use an approval job to require manual approval before downstream jobs may proceed.
+The example below shows a sequential workflow with an xref:configuration-reference#type[approval job]. Use an approval job to require manual approval before downstream jobs may proceed.
 
-```yaml
+[,yaml]
+----
 version: 2.1
 
 executors: # Define an executor
@@ -153,14 +158,14 @@ workflows:
       - deploy:
           requires:
             - hold
-```
+----
 
 The workflow runs as follows:
 
-1. `build` job runs
-1. `test` job runs
-1. `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app
-1. Once `hold` job is approved the `deploy` job runs
+. `build` job runs
+. `test` job runs
+. `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app
+. Once `hold` job is approved the `deploy` job runs
 
 An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration devise.
 
@@ -170,14 +175,15 @@ The image below shows the workflow view for the following configuration example.
 * The "Needs Approval" popup that appears when you click on a hold job
 * The workflow view again once the `hold` job has been approved and the `deploy` job has run
 
-![Approval Workflow Graph]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+image::{{ site.baseurl }}/assets/img/docs/approval-workflow-map.png[Approval Workflow Graph]
 
-* Refer to the [Workflows](/docs/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the [developer hub convenience images](https://circleci.com/developer/images?imageType=docker) page to find out about available Docker images for running your jobs.
+* Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
 
-### Hello world
+=== Hello world
 
-```yml
+[,yml]
+----
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
@@ -209,10 +215,10 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - say-hello
-```
+----
 
-## Sample configuration with sequential workflow and secondary Docker container
-{: #sample-configuration-with-sequential-workflow }
+[#sample-configuration-with-sequential-workflow]
+== Sample configuration with sequential workflow and secondary Docker container
 
 Following is a sample `.circleci/config.yml` file using the following configuration features:
 
@@ -222,7 +228,8 @@ Following is a sample `.circleci/config.yml` file using the following configurat
 * Workspaces
 * Storing artifacts
 
-```yaml
+[,yaml]
+----
 version: 2.1
 
 orbs:
@@ -287,19 +294,21 @@ workflows:
       - test:
           requires:
             - build
-```
+----
 
-This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the [Workflows]({{ site.baseurl }}/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
-## Sample configuration with fan-in/fan-out workflow
-{: #sample-configuration-with-fan-infan-out-workflow }
+[#sample-configuration-with-fan-infan-out-workflow]
+== Sample configuration with fan-in/fan-out workflow
+
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
-![Fan-in-out]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
+image::{{ site.baseurl }}/assets/img/docs/fan-in-out-example.png[Fan-in-out]
 
-{:.tab.fan-in-out.Cloud}
 {% raw %}
-```yaml
+
+[,yaml]
+----
 version: 2.1
 
 orbs:
@@ -431,23 +440,26 @@ workflows:
                   requires:
                       - build-docker-image
                       - test
-```
+----
+
 {% endraw %}
 
-**Note:** a job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
+NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
-## Sample configuration with multiple executor types
-{: #sample-configuration-with-multiple-executor-types }
+[#sample-configuration-with-multiple-executor-types]
+== Sample configuration with multiple executor types
 
-It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/)
+It is possible to use multiple xref:executor-intro#[executor types]
 in the same workflow.
 
 In `Example-1` each push will build and test the project on Linux, Windows and macOS.
 
-In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools (link:https://github.com/realm/SwiftLint[SwiftLint] and link:https://github.com/danger/danger[Danger]) will be run in Docker.
 
-{:.tab.multiple-executors.Example-1}
-```yaml
+[tab.multiple-executors.Example_1]
+--
+[,yaml]
+----
 version: 2.1
 
 orbs:
@@ -707,11 +719,15 @@ workflows:
           filters:
             branches:
               only: main
-```
+----
 
-{:.tab.multiple-executors.Example-2}
 {% raw %}
-```yaml
+--
+
+[tab.multiple-executors.Example_2]
+--
+[,yaml]
+----
 version: 2.1
 
 jobs:
@@ -762,12 +778,14 @@ workflows:
       - swiftlint
       - danger
       - build-and-test
-```
+----
+
 {% endraw %}
+--
 
-## See also
-{: #see-also }
+[#see-also]
+== See also
 
-* See the [Concepts document]({{ site.baseurl }}/concepts/#configuration) and [Workflows]({{ site.baseurl }}/workflows/) for more details of the concepts covered in this example.
-* See the [Configuration Reference]({{ site.baseurl }}/configuration-reference/) document for full details of each individual configuration key.
-* See the [Example Public Repos]({{ site.baseurl }}/example-configs/) document for a list of public projects that use CircleCI.
+* See the xref:concepts#configuration[Concepts document] and xref:workflows#[Workflows] for more details of the concepts covered in this example.
+* See the xref:configuration-reference#[Configuration Reference] document for full details of each individual configuration key.
+* See the xref:example-configs#[Example Public Repos] document for a list of public projects that use CircleCI.
