@@ -112,7 +112,7 @@ Docker
 Docker\sHub
 Dockerfiles?
 dockerize
-[Dd]otfile
+[Dd]otfiles?
 [Ee]nablement
 EKS
 Elixir
@@ -297,7 +297,7 @@ TLS
 [Tt]olerations
 [Tt]oolchains?
 [Tt]ruthy
-trx2junit
+\btrx2junit\b
 TypeScript
 Ubuntu
 UI
