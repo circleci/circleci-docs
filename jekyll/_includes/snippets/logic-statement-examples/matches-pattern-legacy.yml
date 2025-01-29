@@ -1,0 +1,11 @@
+workflows:
+  my-workflow:
+    when:
+      and:
+        - not:
+            matches:
+              pattern: "^main$"
+              value: << pipeline.git.branch >>
+        - or:
+            - equal: [ canary, << pipeline.git.tag >> ]
+            - << pipeline.parameters.deploy-canary >>
