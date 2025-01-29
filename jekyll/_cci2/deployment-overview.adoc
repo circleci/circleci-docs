@@ -62,10 +62,13 @@ version: 2.1
 
 orbs:
   aws-code-deploy: circleci/aws-code-deploy@x.y
+  aws-cli: circleci/aws-cli@x.z
 workflows:
   deploy_application:
     jobs:
       - aws-code-deploy/deploy:
+          auth:
+            - aws-cli/setup
           application-name: myApplication
           bundle-bucket: myApplicationS3Bucket
           bundle-key: myS3BucketKey
