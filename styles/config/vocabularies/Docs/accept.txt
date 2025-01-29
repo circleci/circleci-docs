@@ -49,6 +49,7 @@ AWS
 AWS Certificate Manager
 AWS\sECR
 Azure
+Azure Container Registry
 backoff
 [Bb]anlist?
 Bash
@@ -210,6 +211,7 @@ npm
 \bnyc\b
 OAuth
 OIDC
+OIDC Identity Provider 
 Okta
 OOM
 OPA
