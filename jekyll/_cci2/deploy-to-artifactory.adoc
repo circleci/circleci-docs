@@ -75,7 +75,7 @@ command: |
     --include-patterns "*.jar, *.pom, *.xml"
 
   ./jf mvn clean install
-```
+----
 
 
 [#upload-war-files]
@@ -96,7 +96,7 @@ command: |
     --include-patterns "*.war"
 
   ./jf mvn clean install
-```
+----
 
 [#full-configuration-example]
 == Full configuration example
