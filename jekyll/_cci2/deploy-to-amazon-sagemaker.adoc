@@ -208,7 +208,7 @@ image::deploy/add-env-var.png[Screenshot showing add environment variable popup]
 [#set-up-config]
 == 4. Set up your CircleCI configuration
 
-Take a look at the `.circleci/config.yml` for the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples/blob/main/.circleci/config.yml[sample project]. There is a block of pipeline parameters at the top. You need to update the defaults with your values.
+Take a look at the `.circleci/config.yml` for the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples/blob/main/.circleci/config.yml[sample project]. In the block of pipeline parameters at the top, you need to update the defaults with your values.
 
 [source,yaml]
 ----
@@ -349,7 +349,7 @@ The CircleCI release UI offers you a single pane of glass to monitor all your de
 
 image::deploy/sagemaker-releases.png[Releases dashboard]
 
-Aelect the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
+Select the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
 
 image::deploy/sagemaker-component-view.png[Releases component view]
 
