@@ -292,6 +292,7 @@ templated
 [Tt]emplatizable
 Terraform
 TestFairy
+\btime windows\b
 Tink
 TLS
 [Tt]olerations
