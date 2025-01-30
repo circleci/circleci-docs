@@ -51,7 +51,7 @@ the status of the skipped builds will not be reported even though the checks wil
 1. In the CircleCI app sidebar, select **Organization Settings**.
 2. Select **VCS**.
 3. Select **Manage GitHub Checks**.
-![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/screen_github_checks_new_ui.png)
+![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/github-checks.png)
 4. Select the repositories that should use checks and select **Save**.
 
 After installation completes, the Checks tab on the GitHub PR view will be populated with workflow status information, and from here you can rerun workflows or navigate to the CircleCI app to view further information.
@@ -73,20 +73,18 @@ To disable the GitHub Checks integration, navigate to the **Organization Setting
 
 1. Select **Organization Settings** in the CircleCI sidebar.
 2. Select **VCS**.
-3. Select **Manage GitHub Checks**. The Update CircleCI Checks repository access page appears.
+3. Select **Manage GitHub Checks**. The Update CircleCI Checks repository access page appears. ![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/github-checks.png)
 4. Deselect the repository to uninstall the Checks integration. Select **Save**. If you are removing GitHub checks from the only repo you have it installed on, you will need to either suspend or uninstall CircleCI Checks.
-5. Confirm that GitHub status updates have been enabled on your project so you will see job level status within PRs in GitHub. To do this, go to the CircleCI app and navigate to **Project Settings** > **Advanced Settings** and confirm that the setting `GitHub Status Updates` is set to `on`.
-
-![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/screen_github_checks_disable_new_ui.png)
+5. Confirm that GitHub status updates have been enabled on your project so you will see job level status within PRs in GitHub. To do this, go to the CircleCI app and navigate to **Project Settings** > **Advanced Settings** and confirm that the setting `GitHub Status Updates` is set to `on`. ![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/github-status-updates.png)
 
 ## Uninstall Checks for the organization
 {: #uninstall-checks-for-the-organization }
 
 1. Select **Organization Settings** in the CircleCI sidebar.
 2. Select **VCS**.
-3. Select **Manage GitHub Checks**.
+3. Select **Manage GitHub Checks**.![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/github-checks.png)
 4. Scroll down and select the Uninstall button to uninstall the GitHub Checks app.
-5. Confirm that GitHub status updates have been enabled on your projects so you will see job level status within PRs in GitHub. To do this, go to the CircleCI app and navigate to **Project Settings** > **Advanced Settings** and confirm that the setting `GitHub Status Updates` is set to `on`.
+5. Confirm that GitHub status updates have been enabled on your projects so you will see job level status within PRs in GitHub. To do this, go to the CircleCI app and navigate to **Project Settings** > **Advanced Settings** and confirm that the setting `GitHub Status Updates` is set to `on`.![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/github-status-updates.png)
 
 GitHub OAuth integrations will automatically re-enable job level status when the GitHub Checks integration is uninstalled. CircleCI GitHub App integrations will not disable or re-enable job level status automatically.
 {: class="alert alert-info" }
