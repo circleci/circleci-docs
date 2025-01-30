@@ -52,7 +52,7 @@ the status of the skipped builds will not be reported even though the checks wil
 2. Select **VCS**.
 3. Select **Manage GitHub Checks**.
 ![CircleCI VCS Settings Page]({{site.baseurl}}/assets/img/docs/github-checks.png)
-4. Select the repositories that should use checks and select **Save**.
+4. You are now in the GitHub CircleCI Checks App settings page. Select the repositories that should use checks and select **Save**.
 
 After installation completes, the Checks tab on the GitHub PR view will be populated with workflow status information, and from here you can rerun workflows or navigate to the CircleCI app to view further information.
 
