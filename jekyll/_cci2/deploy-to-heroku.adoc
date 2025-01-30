@@ -18,7 +18,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Hero
 
 link:https://www.heroku.com/[Heroku] is a popular platform for hosting applications in the cloud. To configure CircleCI to deploy your application to Heroku, follow the steps below.
 
-== Deploy with the Heroku orb
+== Using the Heroku orb
 
 [#create-account]
 === 1. Create an account
@@ -54,7 +54,7 @@ workflows:
 
 For more detailed information about these Heroku orbs, refer to the link:https://circleci.com/developer/orbs/orb/circleci/heroku[CircleCI Heroku Orb].
 
-== Heroku deployment with 2.0 configuration
+== Deploy without the Heroku orb
 
 [#create-account-2]
 === 1. Create an account
@@ -85,7 +85,7 @@ jobs:
       - image: <docker-image-name-tag>
     steps:
       - checkout
-    # build job ommitted for brevity
+      # Additional steps ommitted for brevity
   deploy:
     docker:
       - image: <docker-image-name-tag>

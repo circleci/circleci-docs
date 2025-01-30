@@ -45,7 +45,7 @@ workflows:
 ```
 
 [#deployment-to-gke-with-2-configuration]
-== Deployment to GKE with 2.0 configuration
+== Deployment to GKE without orbs
 
 In the following example, if the `build-job` passes and the current branch is `main`, CircleCI runs the deployment job.
 
