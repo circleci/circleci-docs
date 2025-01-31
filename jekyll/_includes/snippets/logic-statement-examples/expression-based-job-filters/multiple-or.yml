@@ -1,0 +1,21 @@
+version: 2.1
+
+parameters:
+  run-storybook-tests:
+    type: boolean
+    default: false
+
+...
+# jobs configuration ommitted for brevity
+
+workflows:
+  build:
+    jobs:
+      - setup
+      - storybook-tests:
+          requires:
+            - setup
+          filters: |
+            pipeline.parameters.run-storybook-tests
+            or pipeline.git.branch == "dry-run-deploy"
+            or pipeline.git.branch starts-with "deploy"
