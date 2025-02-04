@@ -31,8 +31,8 @@ GitHub does not currently provide a granular way for you to rerun workflows. Whe
 GitHub Checks should not be confused with GitHub status updates:
 
 * GitHub Checks are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
-  * GitHub Checks from OAuth integrations have the same name as the workflow.
-  * GitHub Checks from GitHub App integrations names are a combination of workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in **Project Settings** > **Pipelines** page in the CircleCI app.
+  * GitHub Checks from OAuth integrations have the same name as the associated workflow.
+  * GitHub Checks from GitHub App integrations are named using a combination of the workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in the **Project Settings** > **Pipelines** page in the CircleCI web app.
 * GitHub status updates are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_.
 
 If both these features are enabled, in a GitHub PR view the Checks tab will show **workflow status** and the Checks section in the PR conversation view will show **job status**.
