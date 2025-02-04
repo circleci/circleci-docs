@@ -126,16 +126,18 @@ en:
             link: skip-build
           - name: Pipeline values and parameters
             link: pipeline-variables
-      - name: Schedule
-        children:
-          - name: Scheduled pipelines
-            link: scheduled-pipelines
       - name: Trigger
         children:
           - name: Triggers overview
             link: triggers-overview
+          - name: GitHub App trigger options
+            link: github-app-trigger-options
           - name: Webhook integration
             link: webhooks
+      - name: Schedule
+        children:
+          - name: Scheduled pipelines
+            link: scheduled-pipelines
       - name: How-to guides
         children:
           - name: Set up multiple configuration files for a project

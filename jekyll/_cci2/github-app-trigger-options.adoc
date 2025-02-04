@@ -10,11 +10,31 @@ contentTags:
 :icons: font
 :experimental:
 
-When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that correspond to link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub app events]. When you set up a pipeline in CircleCI a default trigger is created for you automatically. This default trigger is the "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event].
+When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that correspond to link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub app events]. When you set up a pipeline in CircleCI, a default trigger is created for you automatically. This default trigger is the "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event].
 
-You can create additional triggers for any GitHub App pipeline, either during the pipeline creation process of after (menu:Project settings[Triggers]) to trigger the pipeline on other specific events, such as non-push events, for example a pull request being opened (and other pull request actions), or more refined push events, for example, pushes to a default branch, or pushes to a tag.
+NOTE: No pipelines are triggered on push events when a branch or tag are deleted.
 
-GitHub App triggers provide an additional layer of control to help you define which pipelines are triggered by which events. GitHub App triggers add to the tools CircleCI provides to help control the work done under specific circumstances, such as using logic to configure when workflows and jobs are run.
+You can create additional triggers for any GitHub App pipeline, either during the pipeline creation process, of after (menu:Project settings[Triggers]) to trigger the pipeline on other specific events, such as non-push events, for example a pull request being opened (and other pull request actions), or more refined push events, for example, pushes to a default branch, or pushes to a tag.
+
+== Introduction
+
+GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. The following preset trigger options are available:
+
+* *All pushes*: Trigger your pipeline on all pushes to your repo. All pushes corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. No pipelines are triggered on push events when a branch or tag are deleted. No pipeline is triggered when a branch is created.
+* *Tag pushes*:
+* *Pushes to default branch*:
+* *PR opened or pushed to, default branch pushes, tag pushes*:
+* *PR opened*:
+* *PR merged*:
+* *PR marked ready for review*:
+* *"run-ci" label added to PR*:
+
+Other orchestration tools are available from within your pipeline configuration, as follows:
+
+* Use filters to control when a workflow will run.
+* Use filters to control when a job will run.
+* Use requires to control dependencies within workflows.
+* Use filters in steps to control what work is done within a job.
 
 [#prerequisites]
 == Prerequisites
@@ -23,122 +43,38 @@ GitHub App triggers provide an additional layer of control to help you define wh
 * Your CircleCI account must be linked to a GitHub account, either via xref:github-integration#[GitHub OAuth] or via the xref:github-apps-integration#[CircleCI GitHub App].
 * If you have a GitHub OAuth account with CircleCI, you will need to install the CircleCI GitHub App into your organization and create at least one GitHub App pipeline to use the GitHub App trigger options described in this guide.
 
-// The section headings in which you outline the steps should be in an active voice
-[#carry-out-the-task]
-== 1. Carry out the task
+== Trigger how-to guides
 
-The main body of the guide should be broken into logical steps, with headings for each step. The steps should guide the reader through using the feature.
+=== Select a GitHub App trigger option
 
-Write the section headings with an active voice to show what will be done. The reader should ideally be able to read the page table of contents and understand what they will achieve and how.
+#TODO add steps to set up a trigger, include steps for both OAuth and App#
 
+=== Trigger a pipeline when a PR is marked ready for review
 
+You may wish to only build your project, run tests, and other work when a pull request is ready to be taken out of its draft state, when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that is triggered when a pull request is marked ready for review, as follows:
 
-In a how-to guide, you might walk the reader through an example scenario. Examples should be based on real-world use cases as much as possible and address business objectives.
+#TODO steps to select PR marked ready for review#
 
-[#this-is-a-subsection-title]
-=== 1. This is a subsection title
+=== Trigger a pipeline when a branch has an open PR
 
-Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
+You may wish to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
 
-* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:../manage-contexts-with-config-policies#[Manage contexts with config policies] guide)
-* Otherwise, consider using lowercase letters. (As an example, see xref:../use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests])
+#TODO steps to build when there is an open PR#
 
-Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
+=== Trigger a pipeline when a label is added to a PR
 
-* Item 1
-* Item 2
-* Item 3
+You may wish to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
 
-[#using-tables]
-=== 2. Using tables
+#ToDO add steps to set up a trigger when label added#
 
-This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+=== Trigger a pipeline when a PR is opened
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-|Header text column 1
-|Header text column 2
-|Header text column 3
+Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
 
-|Text for row 1 column 1
-|Text for row 1 column 2
-|Text for row 1 column 3
-|===
+#TODO steps to trigger on a PR being opened#
 
-For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
+=== Trigger a pipeline when a PR is merged
 
-[#links-and-cross-references]
-=== 3. Links and cross references
+You may wish to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged, as follows:
 
-To link out to content outside of the docs use a link:
-
-link:https://circleci.com/[CircleCI website]
-
-To link to another page within the docs use a cross reference:
-
-xref:../about-circleci#[About CircleCI]
-
-Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
-
-xref:../about-circleci#learn-more[About CircleCI]
-
-[#code-examples]
-=== 4. Code examples
-
-Whenever possible, the how-to guide should provide examples that cover our users' link:https://circleci.com/blog/devops-language-trends-2023[most widely used languages and frameworks], unless the guide itself is specific to a particular language, platform, or framework.
-
-Use AsciiDoc source blocks for code examples:
-
-[source,yaml]
-----
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - checkout
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-      - run:
-          name: The Second Step
-          command: |
-            ls -al
-            echo '^^^The files in your repo^^^'
-----
-
-[#banners]
-=== 5. Banners
-
-In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
-
-NOTE: **Need to add a note?** This is how to do it
-
-CAUTION: **Need to add a caution?** This is how to do it
-
-WARNING: **Need to add a warning?** This is how to do it
-
-We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
-
-For more information, see xref:../style/formatting/#using-notes-tips-cautions-warnings[the CircleCI style guide].
-
-[#the-second-step]
-== 2. The second step
-
-Each main step in the how-to guide should be under its own level 2 (`==`) heading, using the numbered list format.
-
-[#conclusion]
-== Conclusion
-
-End the guide with a conclusion section that summarizes what was covered.
-
-[#next-steps]
-== Next steps
-
-// Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:../benefits-of-circleci#[Benefits of CircleCI]
-* xref:../concepts#[CircleCI concepts]
+#TODO Add steps to trigger on a PR being merged#
