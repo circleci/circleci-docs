@@ -27,7 +27,7 @@ The v4.3 release introduces upgraded execution architecture. Previously, VM serv
 ** Distributing load across availability zones through round-robining
 ** Sending a percentage of traffic to a different zone
 ** Instance type fallbacks based on deficits and success
-* In order to improve the performance of artifact hosting, downloading artifacts now require tools to honour redirect requests for the artifact's URL. 
+* In order to improve the performance of artifact hosting, downloading artifacts now requires tools to honor redirect requests for the artifact's URL. 
 
 [#upgrade]
 == Upgrade
