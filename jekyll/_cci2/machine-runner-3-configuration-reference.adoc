@@ -94,7 +94,7 @@ logging:
 
 `$CIRCLECI_RUNNER_LOGGING_FILE`
 
-This controls the file where the machine runner and task-agent logs will go. See xref:runner-concepts.adoc#task-agent[Runner concepts] for more information on task-agent.
+This controls the file where the machine runner and task-agent logs will go. See xref:runner-concepts#task-agent[Runner concepts] for more information on task-agent.
 
 Example:
 
