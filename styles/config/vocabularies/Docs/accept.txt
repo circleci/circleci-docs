@@ -119,6 +119,7 @@ dockerize
 EKS
 Elixir
 endraw
+[Ee]num
 \bEnvoy Gateway\b
 EOL
 ESLint
@@ -297,6 +298,7 @@ templated
 [Tt]emplatizable
 Terraform
 TestFairy
+\btime windows\b
 Tink
 TLS
 [Tt]olerations
