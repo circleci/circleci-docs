@@ -94,7 +94,7 @@ logging:
 
 `$CIRCLECI_RUNNER_LOGGING_FILE`
 
-This controls the file where the machine runner launch-agent and task-agent logs will go. See xref:runner-concepts.adoc#task-agent[Runner concepts] for more information on launch-agents and task-agents.
+This controls the file where the machine runner and task-agent logs will go. See xref:runner-concepts#task-agent[Runner concepts] for more information on task-agent.
 
 Example:
 
@@ -109,7 +109,7 @@ logging:
 
 `$CIRCLECI_RUNNER_TASK_AGENT_DIRECTORY`
 
-This parameter accepts the path to the directory of the `circleci-runner` task agent binary and defaults to `~/.local/libexec/circleci`.
+This parameter specifies the directory path where the task-agent binary is downloaded and executed by machine runner, defaulting to `~/.local/libexec/circleci`.
 
 ```yaml
 runner:
