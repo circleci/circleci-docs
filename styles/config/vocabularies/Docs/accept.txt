@@ -117,6 +117,7 @@ dockerize
 EKS
 Elixir
 endraw
+[Ee]num
 \bEnvoy Gateway\b
 EOL
 ESLint
