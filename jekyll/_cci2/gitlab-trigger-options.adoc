@@ -1,0 +1,12 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= GitLab trigger options
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A guide to the options available for triggering GitLab pipelines
+:icons: font
+:experimental:
+
