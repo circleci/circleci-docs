@@ -25,7 +25,7 @@ Once your project is set up you can create additional pipelines and triggers (me
 
 == Supported trigger events
 
-GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App triggers using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
+GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App trigger rules using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
 
 * *All pushes*: Trigger your pipeline on all pushes to your repo. All pushes corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. No pipelines are triggered on push events when a branch or tag are deleted. No pipeline is triggered when a branch is created.
 * *Tag pushes*: Trigger a pipeline on pushes to tags only.
