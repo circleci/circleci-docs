@@ -30,6 +30,7 @@ Airtable
 Android
 [Aa]llowlist?
 AMI
+AMIs?
 APIs?
 \b[Aa]pp\b
 Appfile
@@ -231,7 +232,10 @@ PostgreSQL
 PowerShell
 [Pp]re
 [Pp]reallocate
+[Pp]reallocated?
+[Pp]reallocation
 [Pp]reemptions?
+[Pp]rescaling
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
