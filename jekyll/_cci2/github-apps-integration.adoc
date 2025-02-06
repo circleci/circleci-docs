@@ -229,9 +229,9 @@ xref:insights-tests#[Test Insights] is currently not supported for orgs authenti
 
 
 [#github-checks]
-=== GitHub checks
+=== GitHub Checks
 
-xref:enable-checks#[GitHub checks] are currently not supported.
+xref:enable-checks#[GitHub Checks] are currently not supported.
 
 [#next-steps]
 == Next steps
