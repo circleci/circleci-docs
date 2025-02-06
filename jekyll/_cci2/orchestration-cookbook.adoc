@@ -16,7 +16,7 @@ This cookbook contains "recipes" for common pipeline, workflow and job execution
 
 === Goal
 
-You may wish to only build your project, run tests, and other work when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
+You may wish to run a specific set of more credit-consuming tests only when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
 
 === Steps
 
