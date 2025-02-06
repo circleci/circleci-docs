@@ -112,7 +112,7 @@ en:
     children:
       - name: Orchestrate
         children:
-          - name: Pipelines overview
+          - name: Pipelines and triggers overview
             link: pipelines
           - name: Jobs and steps
             link: jobs-steps
@@ -126,18 +126,24 @@ en:
             link: skip-build
           - name: Pipeline values and parameters
             link: pipeline-variables
+      - name: Trigger
+        children:
+          - name: Trigger a pipeline
+            link: triggers-overview
+          - name: GitHub App trigger options
+            link: github-app-trigger-options
+          - name: GitLab trigger options
+            link: gitlab-trigger-options
+          - name: Webhook integration
+            link: webhooks
       - name: Schedule
         children:
           - name: Scheduled pipelines
             link: scheduled-pipelines
-      - name: Trigger
-        children:
-          - name: Triggers overview
-            link: triggers-overview
-          - name: Webhook integration
-            link: webhooks
       - name: How-to guides
         children:
+          - name: Orchestration cookbook
+            link: orchestration-cookbook
           - name: Set up multiple configuration files for a project
             link: set-up-multiple-configuration-files-for-a-project
           - name: Notify a Slack channel of a paused workflow

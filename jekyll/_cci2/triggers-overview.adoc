@@ -7,7 +7,7 @@ contentTags:
 document-type:
 - Conceptual
 ---
-= Triggers overview
+= Trigger a pipeline
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
