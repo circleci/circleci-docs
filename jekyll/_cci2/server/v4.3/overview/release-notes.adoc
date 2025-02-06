@@ -27,7 +27,7 @@ The v4.3 release introduces upgraded execution architecture. Previously, VM serv
 ** Distributing load across availability zones through round-robining
 ** Sending a percentage of traffic to a different zone
 ** Instance type fallbacks based on deficits and success
-* In order to improve the performance of artifact hosting, downloading artifacts now requires tools to honor redirect requests for the artifact's URL.
+* The artifact paths have changed to improve download performance. The new path will now be `<server-domain>/output/job/<job-id>/artifacts/0/home/circleci/artifacts/<artifact-file>`
 
 [#upgrade]
 == Upgrade
