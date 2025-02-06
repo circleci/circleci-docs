@@ -46,7 +46,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
 | [.circle-green]#**Yes**#
@@ -85,7 +85,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No** ^1^#
 
 | xref:enable-checks#[GitHub Checks]
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
@@ -103,7 +103,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | xref:webhooks#custom-webhooks[Custom _inbound_ webhook triggers]
 | [.circle-green]#**Yes**#
@@ -160,7 +160,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:artifacts#[Artifact storage]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -276,7 +276,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:openid-connect-tokens#[OpenID Connect tokens]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -328,7 +328,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
 | xref:oss#[OSS support]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
