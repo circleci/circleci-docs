@@ -97,6 +97,11 @@ You can add or delete pipelines for your project. For details see the xref:pipel
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
 
+[#only-build-pull-requests]
+=== Only build pull requests
+
+Select the appropriate xref:github-app-trigger-options/#supported-trigger-events[option under the "Run on" menu] in your trigger settings.
+
 [#organization-settings]
 == Organization settings
 
@@ -221,10 +226,6 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 
 xref:insights-tests#[Test Insights] is currently not supported for orgs authenticated with the CircleCI GitHub App. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
 
-[#only-build-pull-requests]
-=== Only build pull requests
-
-The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations.
 
 [#github-checks]
 === GitHub checks
