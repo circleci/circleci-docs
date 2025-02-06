@@ -31,7 +31,7 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *Tag pushes*: Trigger a pipeline on pushes to tags only.
 * *Pushes to default branch*: Trigger a pipeline on pushes to the default branch only.
 * *PR opened or pushed to, default branch pushes, tag pushes*: Trigger a pipeline on pushes to a branch for which there is an open Pull Request (PR), when a PR is opened, pushes to any tag, and pushes to the default branch.
-* *PR opened*: Trigger a pipeline when a PR is opened only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs for the pull request opened event].
+* *PR opened*: Trigger a pipeline when a PR is opened. This applies also if the pipeline has been opened in draft. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs for the pull request opened event].
 * *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
