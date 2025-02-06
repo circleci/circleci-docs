@@ -31,7 +31,9 @@ image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
-* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines.
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
++
+include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 == Trigger a pipeline when a PR is merged
 
@@ -51,7 +53,9 @@ image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
-* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines.
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
++
+include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 
 == Run a workflow only when a pull request is opened
@@ -76,7 +80,9 @@ workflows:
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines.
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
++
+include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 // == Trigger a pipeline when a branch has an open PR
 

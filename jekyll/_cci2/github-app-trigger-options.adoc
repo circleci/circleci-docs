@@ -6,24 +6,33 @@ contentTags:
 = GitHub App trigger options
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A guide to the options available for triggering GitHub App pipelines
+:page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
 :icons: font
 :experimental:
 
-When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties.
+When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties. Using GitHub App trigger options you can trigger pipeline on non-push events.
 
 == Introduction
 
-When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first "default" trigger is an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. You can also set up additional triggers for your project during setup, or later in your menu:Project settings[Triggers].
+When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first trigger is, by default, an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. If you have a GitHub App account with CircleCI, you will see trigger rule options when creating a project in the CircleCI web app, and you have the option to change the trigger rule for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Triggers].
 
-Once your project is set up you can create additional pipelines and triggers (menu:Project settings[Triggers]). You can configure your triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag.
+.Trigger rule options during project creation
+image::triggers/create-project-run-on.png[Create a project trigger and access trigger options]
 
-== Scope of push event support
+Once your project is set up you can create additional pipelines and triggers (menu:Project settings[Triggers]). You can configure your triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag. For a full list see <<supported-trigger-events>>.
 
-* Pipelines are not triggered on branch or tag deletion push events, even when you have the "All push" trigger option selected.
-* Pipelines are not triggered when a new branch is created if there are no new commits on the branch.
+.Trigger rule options under Project settings
+image::triggers/run-on-open.png[Set a rule for a project trigger]
 
 == Supported trigger events
+
+[NOTE]
+====
+Regardless of your chosen trigger rule, CircleCI will never trigger a pipeline for the following:
+
+* On branch or tag deletion push events.
+* When a new branch is created if there are no new commits on the branch.
+====
 
 GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App trigger rules using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
 
@@ -71,12 +80,21 @@ Config orchestration tools are available from within your pipelines are as follo
 ** Expand the "Run on" menu and select "PR Opened", this means that the pipeline will trigger on the `pull_request` GitHub even with the `opened` action (See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
 +
 .Run on trigger options for GitHub App triggers
-image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+image::triggers/run-on-open-focus.png[Run on trigger options for GitHub App triggers]
 ** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
 ** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
 . Select btn:[Save].
 
 To verify your trigger is set up correctly, trigger an event (open a PR) from your repository.
+
+== FAQs
+
+=== Can I combine multiple trigger rule options?
+
+No, different trigger rules cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger rule.
+
+For example, by having one trigger with trigger rule "PR opened" and a second trigger with trigger rule "PR merged", your pipeline will run whenever a PR is opened or merged.
+
 
 == Next steps
 

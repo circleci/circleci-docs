@@ -21,7 +21,7 @@ Pipelines can be triggered in the following ways:
 Pipelines provide a flexible framework for creating conditional workflows based on xref:workflows#using-filters-in-your-workflows[filters], xref:workflows#workflows-configuration-examples[job requirements], and xref:selecting-a-workflow-to-run-using-pipeline-parameters#[pipeline parameters], allowing you to customize your CI/CD process to fit your project's needs.
 
 == Pipelines dashboard
-Your pipelines dashboard displays recently-triggered pipelines for your organization. Use the various filters to find the pipelines you need. Navigate to xref:jobs-steps#access-jobs-and-steps-in-the-circleci-app[view workflow maps and individual job steps]. Use the quick controls on the right of the screen to rerun and cancel workflows.
+Your pipelines dashboard displays recently-triggered pipelines for your organization. Use the various filters to find the pipelines you need. Select workflow and job names to xref:jobs-steps#access-jobs-and-steps-in-the-circleci-app[view workflow maps and individual job steps]. Use the quick controls on the right of the screen to rerun and cancel workflows.
 
 image::pipelines-dashboard.png[Screenshot of the pipelines dashboard in the CircleCI app]
 
