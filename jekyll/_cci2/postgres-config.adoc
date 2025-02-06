@@ -1,26 +1,30 @@
 ---
-layout: classic-docs
-title: "Database Configuration Examples"
-description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
+= Database configuration examples
+:page-description: See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project.
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
 
-This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
+This document provides example database xref:databases#[config.yml] files using PostgreSQL/Rails and MySQL/Ruby.
 
-{% include snippets/docker-auth.md %}
+include::../_includes/snippets/docker-auth.adoc[]
 
-## Example CircleCI configuration for a rails app with structure.sql
-{: #example-circleci-configuration-for-a-rails-app-with-structuresql }
+[#example-circleci-configuration-for-a-rails-app-with-structuresql]
+== Example CircleCI configuration for a rails app with structure.sql
 
 If you are migrating a Rails app configured with a `structure.sql` file make
 sure that `psql` is installed in your PATH and has the proper permissions, as
-follows, because the cimg/ruby:3.0-node image does not have psql installed
+follows, because the `cimg/ruby:3.0-node` image does not have `psql` installed
 by default and uses `pg` gem for database access.
 
-```yaml
+[,yaml]
+----
 version: 2.1
 jobs:
   build:
@@ -77,24 +81,22 @@ jobs:
       # Save artifacts
       - store_test_results:
           path: /tmp/test-results
-```
+----
 
-**Note:** An alternative is to build your own image by extending the current image,
-installing the needed packages, committing, and pushing it to Docker Hub or the
-registry of your choosing.
+NOTE: An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
 
-### Example environment setup
-{: #example-environment-setup }
-
+[#example-environment-setup]
+=== Example environment setup
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
-1.	DATABASE_URL environment variable, if set
-2.	The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).
+. DATABASE_URL environment variable, if set
+. The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).
 
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
-```yaml
+[,yaml]
+----
 version: 2.1
 jobs:
   build:
@@ -124,16 +126,17 @@ jobs:
             bundle exec rake db:migrate
         environment:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
-```
+----
 
 This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
 
-## Example go app with postgresql
-{: #example-go-app-with-postgresql }
+[#example-go-app-with-postgresql]
+== Example go app with PostgreSQL
 
-The following configuration example is taken from the CircleCI [Go demo app](https://github.com/CircleCI-Public/circleci-demo-go).
+The following configuration example is taken from the CircleCI link:https://github.com/CircleCI-Public/circleci-demo-go[Go demo app].
 
-```yaml
+[,yaml]
+----
 version: 2.1
 jobs:
   build:
@@ -208,14 +211,15 @@ jobs:
 
       - store_test_results:
           path: /tmp/test-results
-```
+----
 
-## Example mysql project.
-{: #example-mysql-project }
+[#example-mysql-project]
+== Example MYSQL project.
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
-```yaml
+[,yaml]
+----
 version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.3
@@ -253,16 +257,17 @@ workflows:
   build-deploy:
     jobs:
       - build
-```
+----
 
 While it is possible to make MySQL as your primary and only container, this example
-does not. As a more practical use case, the example uses a PHP docker image as
+does not. As a more practical use case, the example uses a PHP Docker image as
 its primary container, and will wait until MySQL is up and running before performing any `run` commands
 involving the DB.
 
 Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at, `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
 
-```sql
+[,sql]
+----
 DROP TABLE IF EXISTS `Persons`;
 
 CREATE TABLE Persons (
@@ -281,11 +286,9 @@ VALUES (
 	"123 Bar Street",
 	"FooBazBar City"
 );
-```
+----
 
+[#see-also]
+== See also
 
-## See also
-{: #see-also }
-
-
-Refer to the [Configuring Databases]({{ site.baseurl }}/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+Refer to the xref:databases#[Configuring Databases] document for a walkthrough of conceptual information about using service images and database testing steps.

@@ -53,7 +53,7 @@ Use the orb's `sync` command to deploy. Note the use of workflows to deploy only
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@3.1.1 # use the AWS S3 orb in your configuration
+  aws-s3: circleci/aws-s3@4.1.0 # use the AWS S3 orb in your configuration
 
 workflows: # Define a Workflow running the build job, then the deploy job
   build-deploy: # Make a workflow to build and deploy your project
@@ -161,8 +161,8 @@ Using the `build_and_push_image` job (shown below) requires the following enviro
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@9.3.6 # Use the AWS ECR orb in your configuration
-  aws-cli: circleci/aws-cli@5.1.1 # Use the AWS CLI orb in your configuration
+  aws-ecr: circleci/aws-ecr@9.3.7 # Use the AWS ECR orb in your configuration
+  aws-cli: circleci/aws-cli@5.1.2 # Use the AWS CLI orb in your configuration
 
 workflows:
   build_and_push_image:
@@ -190,9 +190,9 @@ Using the `build-and-push-image` job (shown below) requires the following enviro
 ```yaml
 version: '2.1'
 orbs:
-  aws-cli: circleci/aws-cli@5.1.0
-  aws-ecr: circleci/aws-ecr@9.3.4
-  aws-ecs: circleci/aws-ecs@6.0.0
+  aws-cli: circleci/aws-cli@5.1.2
+  aws-ecr: circleci/aws-ecr@9.3.7
+  aws-ecs: circleci/aws-ecs@6.0.2
 workflows:
   build-and-deploy:
     jobs:
