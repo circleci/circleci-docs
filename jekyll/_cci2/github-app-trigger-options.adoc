@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= GitHub App trigger event options
+= GitHub App trigger options
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
@@ -14,27 +14,27 @@ When you create a trigger for a GitHub App pipeline, you can choose from a set o
 
 == Introduction
 
-When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first trigger is, by default, an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. If you have a GitHub App account with CircleCI, you will see trigger rule options when creating a project in the CircleCI web app, and you have the option to change the trigger rule for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Triggers].
+When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first trigger is, by default, an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. If you have a GitHub App account with CircleCI, you will see trigger options when creating a project in the CircleCI web app, and you have the option to change the trigger options for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Triggers].
 
-.Trigger rule options during project creation
+.Trigger options during project creation
 image::triggers/create-project-run-on.png[Create a project trigger and access trigger options]
 
 Once your project is set up you can create additional pipelines and triggers (menu:Project settings[Triggers]). You can configure your triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag. For a full list see <<supported-trigger-events>>.
 
-.Trigger rule options under Project settings
-image::triggers/run-on-open.png[Set a rule for a project trigger]
+.Trigger options under Project settings
+image::triggers/run-on-open.png[Set a trigger option for a project trigger]
 
-== Supported trigger events
+== Supported trigger options
 
 [NOTE]
 ====
-Regardless of your chosen trigger rule, CircleCI will never trigger a pipeline for the following:
+Regardless of your chosen trigger option, CircleCI will never trigger a pipeline for the following:
 
 * On branch or tag deletion push events.
 * When a new branch is created if there are no new commits on the branch.
 ====
 
-GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App trigger rules using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
+GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App trigger options using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
 
 * *All pushes*: Trigger your pipeline on all pushes to your repo. All pushes corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. No pipelines are triggered on push events when a branch or tag are deleted. No pipeline is triggered when a branch is created.
 * *Tag pushes*: Trigger a pipeline on pushes to tags only.
@@ -114,12 +114,11 @@ To verify your trigger is set up correctly, trigger an event (open a PR) from yo
 
 == FAQs
 
-=== Can I combine multiple trigger rule options?
+=== Can I combine multiple trigger options?
 
-No, different trigger rules cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger rule.
+No, different trigger event options cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger event option.
 
-For example, by having one trigger with trigger rule "PR opened" and a second trigger with trigger rule "PR merged", your pipeline will run whenever a PR is opened or merged.
-
+For example, by having one trigger with the trigger option "PR opened" and a second trigger with the trigger option "PR merged", your pipeline will trigger whenever a PR is opened or merged.
 
 == Next steps
 
