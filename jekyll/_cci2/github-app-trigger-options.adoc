@@ -10,71 +10,74 @@ contentTags:
 :icons: font
 :experimental:
 
-When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that correspond to link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub app events]. When you set up a pipeline in CircleCI, a default trigger is created for you automatically. This default trigger is the "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event].
-
-NOTE: No pipelines are triggered on push events when a branch or tag are deleted.
-
-You can create additional triggers for any GitHub App pipeline, either during the pipeline creation process, of after (menu:Project settings[Triggers]) to trigger the pipeline on other specific events, such as non-push events, for example a pull request being opened (and other pull request actions), or more refined push events, for example, pushes to a default branch, or pushes to a tag.
+When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that correspond to link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub app events].
 
 == Introduction
 
-GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. The following preset trigger options are available:
+When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first "default" trigger is an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. You can also set up additional triggers for your project during setup, or later in your menu:Project settings[Triggers].
+
+Once your project is set up you can create additional pipelines and triggers (menu:Project settings[Triggers]). You can configure your triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag.
+
+== Scope of push event support
+
+* Pipelines are not triggered on branch or tag deletion push events, even when you have the "All push" trigger option selected.
+* Pipelines are not triggered when a new branch is created if there are no new commits on the branch.
+
+== Supported trigger events
+
+GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App triggers using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
 
 * *All pushes*: Trigger your pipeline on all pushes to your repo. All pushes corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. No pipelines are triggered on push events when a branch or tag are deleted. No pipeline is triggered when a branch is created.
 * *Tag pushes*: Trigger a pipeline on pushes to tags only.
 * *Pushes to default branch*: Trigger a pipeline on pushes to the default branch only.
-* *PR opened or pushed to, default branch pushes, tag pushes*: Trigger a pipeline on pushes to a branch for which there is an open PR, when a PR is opened, pushes to any tag, and pushes to the default branch.
-* *PR opened*: Trigger a pipeline when a PR is opened only.
-* *PR merged*: Trigger a pipeline when a PR is merged only
-* *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review.
-* *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR.
+* *PR opened or pushed to, default branch pushes, tag pushes*: Trigger a pipeline on pushes to a branch for which there is an open Pull Request (PR), when a PR is opened, pushes to any tag, and pushes to the default branch.
+* *PR opened*: Trigger a pipeline when a PR is opened only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs for the pull request opened event].
+* *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
+* *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
+* *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
 
-Other orchestration tools are available from within your pipeline configuration, as follows:
+Two GitHub app pipeline values are available for all pipelines. You can use these values to further configure the workflows and jobs that run on specific events:
 
-* Use filters to control when a workflow will run.
-* Use filters to control when a job will run.
-* Use requires to control dependencies within workflows.
-* Use filters in steps to control what work is done within a job.
+* `pipeline.event.name`
+* `pipeline.event.action`
 
-[#prerequisites]
-== Prerequisites
+Config orchestration tools are available from within your pipelines are as follows:
+
+* Use filters to control xref:configuration-reference#using-when-in-workflows[when a workflow will run].
+* Use filters to control xref:configuration-reference#expression-based-job-filters[when a job will run].
+* Use requires to control xref:configuration-reference#requires[job dependencies within workflows].
+* Use filters in steps to control what xref:configuration-reference#the-when-step[work is done within a job].
+
+== Quickstart: Create a trigger to initiate a pipeline when a PR is opened
+
+=== Prerequisites
 
 * A CircleCI account. You can sign up for free at link:https://circleci.com/signup/[circleci.com].
 * Your CircleCI account must be linked to a GitHub account, either via xref:github-integration#[GitHub OAuth] or via the xref:github-apps-integration#[CircleCI GitHub App].
-* If you have a GitHub OAuth account with CircleCI, you will need to install the CircleCI GitHub App into your organization and create at least one GitHub App pipeline to use the GitHub App trigger options described in this guide.
+* A GitHub App pipeline that you want to trigger when a PR is opened. You can find steps on the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
 
-== Trigger how-to guides
+=== Steps
 
-=== Select a GitHub App trigger option
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Select GitHub App in the "Trigger type" menu and select btn:[Next].
+. Complete the form fields and options:
+** Authorize your connection if this is not already showing with a icon:check-circle[].
+** Give your trigger a descriptive name.
+** Select the trigger source repository.
+** Choose your pipeline from the "Choose pipeline to run" menu.
+** Expand the "Run on" menu and select "PR Opened", this means that the pipeline will trigger on the `pull_request` GitHub even with the `opened` action (See the xref:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
++
+.Run on trigger options for GitHub App triggers
+image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
+** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
+. Select btn:[Save].
 
-#TODO add steps to set up a trigger, include steps for both OAuth and App#
+To verify your trigger is set up correctly, trigger an event (open a PR) from your repository.
 
-=== Trigger a pipeline when a PR is marked ready for review
+== Next steps
 
-You may wish to only build your project, run tests, and other work when a pull request is ready to be taken out of its draft state, when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that is triggered when a pull request is marked ready for review, as follows:
-
-#TODO steps to select PR marked ready for review#
-
-=== Trigger a pipeline when a branch has an open PR
-
-You may wish to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
-
-#TODO steps to build when there is an open PR#
-
-=== Trigger a pipeline when a label is added to a PR
-
-You may wish to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
-
-#ToDO add steps to set up a trigger when label added#
-
-=== Trigger a pipeline when a PR is opened
-
-Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
-
-#TODO steps to trigger on a PR being opened#
-
-=== Trigger a pipeline when a PR is merged
-
-You may wish to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged, as follows:
-
-#TODO Add steps to trigger on a PR being merged#
+For more examples of using GitHub App trigger options, see the xref:orchestration-cookbook[Orchestration cookbook].

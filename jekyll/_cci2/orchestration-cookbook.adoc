@@ -1,0 +1,97 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Orchestration cookbook
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A cookbook of common pipeline, workflow and job execution goals and patterns
+:icons: font
+:experimental:
+
+This cookbook contains "recipes" for common pipeline, workflow and job execution goals and patterns.
+
+== Trigger a pipeline when a PR is marked ready for review
+
+=== Goal
+
+You may wish to only build your project, run tests, and other work when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
+
+=== Steps
+
+. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
++
+.Add pipeline options for GitHub App
+image::add-pipeline.png[Add pipeline options for GitHub App]
+. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines#add-a-trigger[Pipelines and triggers overview] page.
++
+.Run on trigger options for GitHub App triggers
+image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+
+=== Notes
+
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines.
+
+== Trigger a pipeline when a PR is merged
+
+=== Goal
+
+You may wish to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
+
+=== Steps
+. Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
++
+.Add pipeline options for GitHub App
+image::add-pipeline.png[Add pipeline options for GitHub App]
+. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines#add-a-trigger[Pipelines and triggers overview] page.
++
+.Run on trigger options for GitHub App triggers
+image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+
+=== Notes
+
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines.
+
+
+== Run a workflow only when a pull request is opened
+
+=== Goal
+You may wish to configure a workflow in your pipeline that will only run on a pipeline that is triggered when a pull request is opened. To do this you can use a workflow filter.
+
+=== Steps
+
+. Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
++
+[,yml]
+----
+workflows:
+  workflow-pr-open:
+    # Only run this workflow when a PR is opened
+    when: pipeline.event.name == pull_request and pipeline.event.action == opened
+    jobs:
+      - my-job-1
+      - my-job-2
+----
+
+=== Notes
+
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines.
+
+// == Trigger a pipeline when a branch has an open PR
+
+// You may wish to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
+
+// #TODO steps to build when there is an open PR#
+
+// == Trigger a pipeline when a label is added to a PR
+
+// You may wish to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
+
+// #ToDO add steps to set up a trigger when label added#
+
+// == Trigger a pipeline when a PR is opened
+
+// Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
+
+// #TODO steps to trigger on a PR being opened#

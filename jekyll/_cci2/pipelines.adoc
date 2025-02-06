@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 ---
-= Pipelines overview
+= Pipelines and triggers overview
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
 :experimental:
 :icons: font
@@ -106,6 +106,33 @@ A trigger kicks off a pipeline to run the workflows defined in your connected co
 
 To add a trigger for a pipeline, follow these steps:
 
+[.tab.trigger.GitHub_App]
+--
+
+When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
+
+image::triggers/add-trigger-github.png[Add a trigger]
+
+To add a trigger for a pipeline, follow these steps:
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Select GitHub App in the "Trigger type" menu and select btn:[Next].
+. Complete the form fields and options:
+** Authorize your connection if this is not already showing with a icon:check-circle[].
+** Give your trigger a descriptive name.
+** Select the trigger source repository.
+** Choose your pipeline from the "Choose pipeline to run" menu.
+** Select a "Run on" option. This setting determines the type of event that will trigger the pipeline. For full details of the available option, see the xref:github-app-trigger-options#[GitHub App trigger options] page.
+** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
+** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
+. Select btn:[Save].
+
+To verify your trigger is set up correctly, trigger an event from your repository.
+--
+
 [.tab.trigger.Custom_webhook]
 --
 NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
@@ -119,33 +146,6 @@ To add a trigger for a custom webhook, follow these steps:
 {% include snippets/custom-webhook-setup.adoc %}
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
---
-
-[.tab.trigger.GitHub_App]
---
-
-When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
-
-image::add-trigger.png[Add a trigger]
-
-To add a trigger for a pipeline, follow these steps:
-
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
-. Select **Triggers** in the sidebar.
-. Select btn:[Add Trigger].
-. Select the same location in the "Connect to" dropdown menu that you selected for your pipeline (for example, GitHub App).
-. Select btn:[Next].
-. Complete the form fields and options:
-** Give your trigger a descriptive name.
-** Authorize your connection if this is not already showing with a icon:check-circle[].
-** Select the Trigger source repository
-** Choose your pipeline from the "Choose pipeline to run" menu.
-** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
-** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
-. Select btn:[Save].
-
-To verify your trigger is set up correctly, trigger an event from your repository.
 --
 
 [.tab.trigger.GitLab]
@@ -174,18 +174,12 @@ TIP: If you do not see **Triggers** in the sidebar, your project is integrated u
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
 ** Select your repository from the dropdown menu. This should match the repository your pipeline is connected to (not required for custom webhooks).
 ** Choose your pipeline from the "Choose config to run" menu.
-** (Optional) You can configure <<trigger-filters,trigger filters>>.
+** (Optional) You can configure trigger filters to configure the event types that will trigger the pipeline. For more information, see the xref:gitlab-trigger-options#[GitLab trigger options] page.
 . Select btn:[Save]
 +
 CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. The webhook is set up automatically by CircleCI. This is a known issue and will be fixed.
 
 To verify your trigger is set up correctly, trigger an event from your repository.
-
-[#trigger-filters]**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
-
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
-
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 --
 
 [.tab.trigger.Bitbucket_Data_Center]

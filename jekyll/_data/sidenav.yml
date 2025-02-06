@@ -112,7 +112,7 @@ en:
     children:
       - name: Orchestrate
         children:
-          - name: Pipelines overview
+          - name: Pipelines and triggers overview
             link: pipelines
           - name: Jobs and steps
             link: jobs-steps
@@ -142,6 +142,8 @@ en:
             link: scheduled-pipelines
       - name: How-to guides
         children:
+          - name: Orchestration cookbook
+            link: orchestration-cookbook
           - name: Set up multiple configuration files for a project
             link: set-up-multiple-configuration-files-for-a-project
           - name: Notify a Slack channel of a paused workflow
