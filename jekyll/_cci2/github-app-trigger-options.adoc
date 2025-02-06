@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= GitHub App trigger options
+= GitHub App trigger event options
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
@@ -45,10 +45,35 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
 
-Two GitHub app pipeline values are available for all pipelines. You can use these values to further configure the workflows and jobs that run on specific events:
+Two pipeline values are available for all GitHub App pipelines for you to use to further configure the workflows and jobs to run on specific events:
 
 * `pipeline.event.name`
 * `pipeline.event.action`
+
+The available GitHub App options for these values are listed in the following table:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Trigger type
+|`pipeline.event.name`
+|`pipeline.event.action`
+
+|GitHub push
+|`push`
+|`push`
+
+|GitHub pull request
+|`pull_request`
+a| * `opened`
+* `synchronize`
+* `reopened`
+* `closed`
+* `ready_for_review`
+* `labeled`
+
+|===
+
 
 Config orchestration tools are available from within your pipelines are as follows:
 
