@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that correspond to link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events].
+When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties.
 
 == Introduction
 
