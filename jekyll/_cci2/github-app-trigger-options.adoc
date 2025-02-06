@@ -1,0 +1,125 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= GitHub App trigger options
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
+:icons: font
+:experimental:
+
+When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties. Using GitHub App trigger options you can trigger pipeline on non-push events.
+
+== Introduction
+
+When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first trigger is, by default, an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. If you have a GitHub App account with CircleCI, you will see trigger options when creating a project in the CircleCI web app, and you have the option to change the trigger options for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Triggers].
+
+.Trigger options during project creation
+image::triggers/create-project-run-on.png[Create a project trigger and access trigger options]
+
+Once your project is set up you can create additional pipelines and triggers (menu:Project settings[Triggers]). You can configure your triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag. For a full list see <<supported-trigger-options>>.
+
+.Trigger options under Project settings
+image::triggers/run-on-open.png[Set a trigger option for a project trigger]
+
+== Supported trigger options
+
+[NOTE]
+====
+Regardless of your chosen trigger option, CircleCI will never trigger a pipeline for the following:
+
+* On branch or tag deletion push events.
+* When a new branch is created if there are no new commits on the branch.
+====
+
+GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App trigger options using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
+
+* *All pushes*: Trigger your pipeline on all pushes to your repo. All pushes corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. No pipelines are triggered on push events when a branch or tag are deleted. No pipeline is triggered when a branch is created.
+* *Tag pushes*: Trigger a pipeline on pushes to tags only.
+* *Pushes to default branch*: Trigger a pipeline on pushes to the default branch only.
+* *PR opened or pushed to, default branch pushes, tag pushes*: Trigger a pipeline on pushes to a branch for which there is an open Pull Request (PR), when a PR is opened, pushes to any tag, and pushes to the default branch.
+* *PR opened*: Trigger a pipeline when a PR is opened. This applies also if the pipeline has been opened in draft. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs for the pull request opened event].
+* *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
+* *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
+* *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
+
+Two pipeline values are available for all GitHub App pipelines for you to use to further configure the workflows and jobs to run on specific events:
+
+* `pipeline.event.name`
+* `pipeline.event.action`
+
+The available GitHub App options for these values are listed in the following table:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Trigger type
+|`pipeline.event.name`
+|`pipeline.event.action`
+
+|GitHub push
+|`push`
+|`push`
+
+|GitHub pull request
+|`pull_request`
+a| * `opened`
+* `synchronize`
+* `reopened`
+* `closed`
+* `ready_for_review`
+* `labeled`
+
+|===
+
+
+Config orchestration tools are available from within your pipelines are as follows:
+
+* Use filters to control xref:configuration-reference#using-when-in-workflows[when a workflow will run].
+* Use filters to control xref:configuration-reference#expression-based-job-filters[when a job will run].
+* Use requires to control xref:configuration-reference#requires[job dependencies within workflows].
+* Use filters in steps to control what xref:configuration-reference#the-when-step[work is done within a job].
+
+== Quickstart: Create a trigger to initiate a pipeline when a PR is opened
+
+=== Prerequisites
+
+* A CircleCI account. You can sign up for free at link:https://circleci.com/signup/[circleci.com].
+* Your CircleCI account must be linked to a GitHub account, either via xref:github-integration#[GitHub OAuth] or via the xref:github-apps-integration#[CircleCI GitHub App].
+* A GitHub App pipeline that you want to trigger when a PR is opened. You can find steps on the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
+
+=== Steps
+
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Select GitHub App in the "Trigger type" menu and select btn:[Next].
+. Complete the form fields and options:
+** Authorize your connection if this is not already showing with a icon:check-circle[].
+** Give your trigger a descriptive name.
+** Select the trigger source repository.
+** Choose your pipeline from the "Choose pipeline to run" menu.
+** Expand the "Run on" menu and select "PR Opened", this means that the pipeline will trigger on the `pull_request` GitHub even with the `opened` action (See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
++
+.Run on trigger options for GitHub App triggers
+image::triggers/run-on-open-focus.png[Run on trigger options for GitHub App triggers]
+** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
+** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
+. Select btn:[Save].
+
+To verify your trigger is set up correctly, trigger an event (open a PR) from your repository.
+
+== FAQs
+
+=== Can I combine multiple trigger options?
+
+No, different trigger event options cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger event option.
+
+For example, by having one trigger with the trigger option "PR opened" and a second trigger with the trigger option "PR merged", your pipeline will trigger whenever a PR is opened or merged.
+
+== Next steps
+
+For more examples of using GitHub App trigger options, see the xref:orchestration-cookbook#[Orchestration cookbook].
