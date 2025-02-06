@@ -34,6 +34,7 @@ When you create a new organization, you will be guided to start creating project
 . After installing the GitHub App, you will select a repository to use for your project's first pipeline.
 . CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
 . If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`).
+. You can then choose a trigger event option out of the dropdown list.
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
 
@@ -52,7 +53,7 @@ When you choose btn:[Commit and Run], as described above, a pipeline is triggere
 
 If you choose to review the configuration file in the config editor first, the pipeline is triggered after you save the `.circleci/config.yml` by clicking the btn:[Commit and Run] button.
 
-Each time you push changes to your GitHub repository, a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
+Upon xref:github-app-trigger-options/#supported-trigger-events[the event you selected under the "Run on" menu], a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
