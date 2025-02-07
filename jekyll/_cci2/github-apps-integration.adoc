@@ -32,7 +32,7 @@ When you create a new organization, you will be guided to start creating project
 
 . The first project you create will prompt you to install the CircleCI GitHub App in a GitHub organization.
 . After installing the GitHub App, you will select a repository to use for your project's first pipeline.
-. CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline. 
+. CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
 . You can then choose a trigger event option out of the dropdown list.
 . Finally, you can review your setup.
 . If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`) when you click the btn:[Commit config and run] button.
@@ -52,7 +52,7 @@ image::github-app-configuration-page.png[Create a project]
 
 When you click btn:[Commit config and run], as described above, a pipeline is triggered. You will see the pipeline running when you are taken to the CircleCI dashboard.
 
-When the event you selected under the "Run on" menu occurs (see the xref:github-app-trigger-options/#supported-trigger-options[GitHub event trigger options] page, for a full list of options), a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
+When the event you selected under the "Run on" menu occurs (see the xref:github-trigger-event-options/#supported-trigger-options[GitHub event trigger options] page, for a full list of options), a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
@@ -100,7 +100,7 @@ You can add or delete pipelines for your project. For details see the xref:pipel
 [#only-build-pull-requests]
 === Only build pull requests
 
-In your trigger settings, select the "PR opened or pushed to, default branch pushes, tag pushes" option under the "Run on" menu. For a full list of GitHub event trigger options, see the xref:github-app-trigger-options/#supported-trigger-options[GitHub event trigger options] page.
+In your trigger settings, select the "PR opened or pushed to, default branch pushes, tag pushes" option under the "Run on" menu. For a full list of GitHub event trigger options, see the xref:github-trigger-event-options/#supported-trigger-options[GitHub event trigger options] page.
 
 image::triggers/run-on-open.png[Run on trigger menu options]
 
