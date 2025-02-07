@@ -53,7 +53,7 @@ When you choose btn:[Commit and Run], as described above, a pipeline is triggere
 
 If you choose to review the configuration file in the config editor first, the pipeline is triggered after you save the `.circleci/config.yml` by clicking the btn:[Commit and Run] button.
 
-Upon xref:github-app-trigger-options/#supported-trigger-events[the event you selected under the "Run on" menu], a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
+Upon xref:github-app-trigger-options/#supported-trigger-options[the event you selected under the "Run on" menu], a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
@@ -101,7 +101,7 @@ You can add or delete pipelines for your project. For details see the xref:pipel
 [#only-build-pull-requests]
 === Only build pull requests
 
-Select the appropriate xref:github-app-trigger-options/#supported-trigger-events[option under the "Run on" menu] in your trigger settings.
+In your trigger settings, select the `PR opened or pushed to, default branch pushes, tag pushes` xref:github-app-trigger-options/#supported-trigger-events[option under the "Run on" menu].
 
 [#organization-settings]
 == Organization settings
