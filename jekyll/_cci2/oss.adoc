@@ -48,7 +48,7 @@ NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Cente
 . Edit an existing GitHub App trigger or add a new GitHub App trigger.
 . In the "Run on" dropdown list, select the "PR opened or pushed to, default branch pushes, tag pushes" option.
 
-image::triggers/run-on-open-focus.png[Set a trigger option for a project trigger]
+image::triggers/run-on-open-focus.png[Trigger options for a project trigger]
 --
 
 [.tab.create-project.GitHub_OAuth]
@@ -62,6 +62,9 @@ The ability to override the *Only build pull requests* setting is also supported
 Override the *Only build pull requests* setting by utilizing the API and following the steps outlined in this link:https://support.circleci.com/hc/en-us/articles/15222074173723-How-to-allowlist-additional-branches-for-Only-Build-Pull-Requests[support article].
 
 Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
+
+image::project-settings-advanced.png[Project Settings > Advanced]
+
 
 NOTE: CircleCI will build all commits from your project's _default branch and tags_ regardless of any setting.
 --
