@@ -40,10 +40,19 @@ For more information, see the xref:set-environment-variable#set-an-environment-v
 [#only-build-pull-requests]
 === Only build pull requests
 
-include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
 
-CAUTION: If your CircleCI account is authenticated via GitHub OAuth, and you have xref:github-integration#using-github-app-functionality[set up GitHub App pipelines], the "Only build pull request" setting will not work for your GitHub App pipelines but will work as expected for your GitHub OAuth pipelines.
+[.tab.create-project.GitHub_App]
+--
+. Go to the menu:Project Settings[Triggers] of your project.
+. Edit an existing GitHub App trigger or add a new GitHub App trigger.
+. In the "Run on" dropdown list, select the "PR opened or pushed to, default branch pushes, tag pushes" option.
 
+image::triggers/run-on-open-focus.png[Set a trigger option for a project trigger]
+--
+
+[.tab.create-project.GitHub_OAuth]
+--
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 
 To change this setting, go to the menu:Project Settings[Advanced] of your project and set the *Only build pull requests* option to _On_.
@@ -55,6 +64,25 @@ Override the *Only build pull requests* setting by utilizing the API and followi
 Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
 
 NOTE: CircleCI will build all commits from your project's _default branch and tags_ regardless of any setting.
+--
+
+[.tab.create-project.GitLab_Cloud]
+--
+. Go to the menu:Project Settings[Triggers] of your project.
+. Edit an existing GitLab trigger or add a new GitLab trigger.
+. In the "Filters" section, select the "Only Build Merge Requests" option.
+
+image::gl-ga/gitlab-ga-project-settings-edit-trigger.png[Set the "Only Build Merge Requests" option]
+--
+
+[.tab.create-project.GitLab_self-managed]
+--
+. Go to the menu:Project Settings[Triggers] of your project.
+. Edit an existing GitLab trigger or add a new GitLab trigger.
+. In the "Filters" section, select the "Only Build Merge Requests" option.
+
+image::gl-ga/gitlab-ga-project-settings-edit-trigger.png[Set the "Only Build Merge Requests" option]
+--
 
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
