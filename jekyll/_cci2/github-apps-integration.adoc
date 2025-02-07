@@ -32,8 +32,10 @@ When you create a new organization, you will be guided to start creating project
 
 . The first project you create will prompt you to install the CircleCI GitHub App in a GitHub organization.
 . After installing the GitHub App, you will select a repository to use for your project's first pipeline.
-. CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
-. If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`).
+. CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline. 
+. You can then choose a trigger event option out of the dropdown list.
+. Finally, you can review your setup.
+. If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`) when you click the btn:[Commit config and run] button.
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started#[Quickstart guide], our xref:hello-world#[Hello world] examples, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
 
@@ -48,11 +50,9 @@ image::github-app-configuration-page.png[Create a project]
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
-When you choose btn:[Commit and Run], as described above, a pipeline is triggered. You will see the pipeline running when you are taken to the CircleCI dashboard.
+When you click btn:[Commit config and run], as described above, a pipeline is triggered. You will see the pipeline running when you are taken to the CircleCI dashboard.
 
-If you choose to review the configuration file in the config editor first, the pipeline is triggered after you save the `.circleci/config.yml` by clicking the btn:[Commit and Run] button.
-
-Each time you push changes to your GitHub repository, a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
+When the event you selected under the "Run on" menu occurs (see the xref:github-app-trigger-options/#supported-trigger-options[GitHub event trigger options] page, for a full list of options), a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
@@ -96,6 +96,13 @@ You can add or delete pipelines for your project. For details see the xref:pipel
 === Advanced
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
+
+[#only-build-pull-requests]
+=== Only build pull requests
+
+In your trigger settings, select the "PR opened or pushed to, default branch pushes, tag pushes" option under the "Run on" menu. For a full list of GitHub event trigger options, see the xref:github-app-trigger-options/#supported-trigger-options[GitHub event trigger options] page.
+
+image::triggers/run-on-open.png[Run on trigger menu options]
 
 [#organization-settings]
 == Organization settings
@@ -220,11 +227,6 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 === Test Insights
 
 xref:insights-tests#[Test Insights] is currently not supported for orgs authenticated with the CircleCI GitHub App. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
-
-[#only-build-pull-requests]
-=== Only build pull requests
-
-The Only Build Pull Requests option (usually available in menu:Project Settings[Advanced] or within trigger setup options) is not currently supported for GitHub App integrations.
 
 [#next-steps]
 == Next steps
