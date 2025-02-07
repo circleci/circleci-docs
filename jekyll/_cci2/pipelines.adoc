@@ -125,7 +125,7 @@ To add a trigger for a pipeline, follow these steps:
 ** Give your trigger a descriptive name.
 ** Select the trigger source repository.
 ** Choose your pipeline from the "Choose pipeline to run" menu.
-** Select a "Run on" option. This setting determines the type of event that will trigger the pipeline. For full details of the available option, see the xref:github-app-trigger-options#[GitHub App trigger options] page.
+** Select a "Run on" option. This setting determines the type of event that will trigger the pipeline. For full details of the available option, see the xref:github-event-trigger-options#[GitHub event trigger options] page.
 ** If prompted, enter a Config branch. This is the name of the branch that should be used to fetch your config file when a pipeline is triggered. This field is only required if your config is stored in a repository that is not the source of your trigger.
 ** If prompted, enter a Checkout branch. This is the name of the branch that should be used to check out your code when a link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] is run. This field is only required if your chosen pipeline's Checkout source repository is not the source of your trigger.
 . Select btn:[Save].
