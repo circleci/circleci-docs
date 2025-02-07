@@ -16,9 +16,17 @@ document-type:
 Pipelines are triggered in response to actions or scheduled to run at specific times and frequencies. Each method of triggering a pipeline is described below.
 
 [#run-a-pipeline-on-commit-to-your-code-repository]
-== Trigger a pipeline on push to your code repository
+== Trigger a pipeline on a repo event
 
-Once a project is hooked up to CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. Once the commit is pushed the running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
+Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use.
+
+[tab.event-trigger.GitHub]
+--
+--
+
+#Add tabs for all VCS and discuss both GitHubs in the one tab#
+
+Once the commit is pushed the running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
 
 .Pipeline running and visible on the dashboard
 image::pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
