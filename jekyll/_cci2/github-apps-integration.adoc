@@ -101,7 +101,7 @@ You can add or delete pipelines for your project. For details see the xref:pipel
 [#only-build-pull-requests]
 === Only build pull requests
 
-In your trigger settings, select the `PR opened or pushed to, default branch pushes, tag pushes` xref:github-app-trigger-options/#supported-trigger-events[option under the "Run on" menu].
+In your trigger settings, select the `PR opened or pushed to, default branch pushes, tag pushes` xref:github-app-trigger-options/#supported-trigger-options[option under the "Run on" menu].
 
 [#organization-settings]
 == Organization settings
