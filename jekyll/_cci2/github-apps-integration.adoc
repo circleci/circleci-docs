@@ -227,12 +227,6 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 
 xref:insights-tests#[Test Insights] is currently not supported for orgs authenticated with the CircleCI GitHub App. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
 
-
-[#github-checks]
-=== GitHub Checks
-
-xref:enable-checks#[GitHub Checks] are currently not supported.
-
 [#next-steps]
 == Next steps
 - xref:config-intro#[Configuration tutorial]
