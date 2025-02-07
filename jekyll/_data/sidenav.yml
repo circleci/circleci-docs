@@ -130,8 +130,8 @@ en:
         children:
           - name: Trigger a pipeline
             link: triggers-overview
-          - name: GitHub event trigger options
-            link: github-event-trigger-options
+          - name: GitHub trigger event options
+            link: github-trigger-event-options
           - name: GitLab trigger options
             link: gitlab-trigger-options
           - name: Webhook integration
