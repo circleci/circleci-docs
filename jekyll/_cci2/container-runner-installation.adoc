@@ -115,7 +115,7 @@ link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway He
 +
 [source,shell]
 ----
-helm install eg oci://docker.io/envoyproxy/gateway-helm --version <version> -n envoy-gateway-system --create-namespace
+helm install eg oci://docker.io/envoyproxy/gateway-helm --version latest -n envoy-gateway-system --create-namespace
 ----
 . Finally, wait for Envoy Gateway to become available:
 +
@@ -131,7 +131,6 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 +
 [source,yaml]
 ----
-agent:
   ssh:
     enabled: true
 ----
@@ -142,14 +141,14 @@ For a full list of SSH configuration options, refer to the link:https://github.c
 +
 [source,shell]
 ----
-helm upgrade --wait --timeout=5m <release-name> container-agent/container-agent -n <namespace> -f values.yaml
+helm upgrade --wait --timeout=5m container-agent container-agent/container-agent -n circleci -f values.yaml
 ----
 
 . Wait for the SSH link:https://gateway-api.sigs.k8s.io/api-types/gateway/#gateway[Gateway] to be programmed:
 +
 [source,shell]
 ----
-kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n <namespace>
+kubectl wait gateway --timeout=5m --all --for=condition=Programmed -n circleci
 ----
 +
 Container runner is now ready for rerunning jobs with SSH.
