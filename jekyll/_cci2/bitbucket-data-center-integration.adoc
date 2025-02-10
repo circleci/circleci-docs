@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 This page walks you through integrating a Bitbucket Data Center project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your Bitbucket Data Center project. CircleCI features that are in development for Bitbucket Data Center projects are detailed in the <<coming-soon>> section.
 

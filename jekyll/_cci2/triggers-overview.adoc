@@ -42,6 +42,8 @@ TIP: If your org uses the **GitHub OAuth** integration, you can install the GitH
 
 [tab.event-trigger.GitLab]
 --
+NOTE: The available GitLab trigger options are the same for GitLab Cloud and self-managed.
+
 When you create a GitLab project in CircleCI you can set up multiple pipelines and triggers. The default trigger option is to build on every push to your repo. Select from a list or configure a combination of trigger options to control when each pipeline will trigger. You can choose from a selection of supported GitLab events. For a full list of options, see the xref:gitlab-trigger-options#[GitLab trigger options] page.
 --
 
@@ -52,7 +54,7 @@ Once your Bitbucket Cloud project is set up in CircleCI, a pipeline is triggered
 
 [tab.event-trigger.BitBucket_Data_Center]
 --
-When you in create a Bitbucket Data Center project on CircleCI, you will create a pipeline and trigger. Your pipeline will trigger on every push to your repo for branches that include your CircleCI config file.
+include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 --
 
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
