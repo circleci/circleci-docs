@@ -18,15 +18,44 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 [#run-a-pipeline-on-commit-to-your-code-repository]
 == Trigger a pipeline on a repo event
 
-Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use.
+Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:pipelines#add-a-trigger[Pipelines and triggers] page.
 
 [tab.event-trigger.GitHub]
 --
+include::../_includes/partials/tips/check-github-type-org.adoc[]
+
+Using the CircleCI **GitHub App**, you can set up multiple pipelines for a project. For each pipeline you have a selection of trigger event options including push events and non-push events, for example, PR opened/Pr merged/PR marked ready for review. For a full list of options, see the xref:github-trigger-event-options#[GitHub trigger event options] page.
+
+To access trigger options for a pipeline, follow these steps:
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+. Select **Triggers** in the sidebar.
+. Select the pencil (icon:pencil[pencil icon]) edit icon next to the trigger you want to update.,
+. Use the "Run on" menu to select a trigger event option.
++
+image::triggers/run-on-open.png[Trigger "Run on" menu open]
+
+If you only use the **GitHub OAuth** integration, once a project is set up in CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. One exception to this is if you use the "Only build pull requests" option. For more information on "Only build pull requests", see the xref:oss#[Build open source projects] page.
+
+TIP: If your org uses the **GitHub OAuth** integration, you can install the GitHub App into your org to set up GitHub App pipelines and access the trigger options described above. An org admin must take the one-time action of installing the CircleCI GitHub App to enable this functionality. For more information, see the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub OAuth integration overview].
 --
 
-#Add tabs for all VCS and discuss both GitHubs in the one tab#
+[tab.event-trigger.GitLab]
+--
+When you create a GitLab project in CircleCI you can set up multiple pipelines and triggers. The default trigger option is to build on every push to your repo. Select from a list or configure a combination of trigger options to control when each pipeline will trigger. You can choose from a selection of supported GitLab events. For a full list of options, see the xref:gitlab-trigger-options#[GitLab trigger options] page.
+--
 
-Once the commit is pushed the running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
+[tab.event-trigger.BitBucket_Cloud]
+--
+Once your Bitbucket Cloud project is set up in CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. One exception to this is if you use the "Only build pull requests" option. For more information on "Only build pull requests", see the xref:oss#[Build open source projects] page.
+--
+
+[tab.event-trigger.BitBucket_Data_Center]
+--
+When you in create a Bitbucket Data Center project on CircleCI, you will create a pipeline and trigger. Your pipeline will trigger on every push to your repo for branches that include your CircleCI config file.
+--
+
+Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
 
 .Pipeline running and visible on the dashboard
 image::pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
