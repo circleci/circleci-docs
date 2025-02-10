@@ -4,7 +4,7 @@ version: 2.1 # Set the CI version.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
   ruby: circleci/ruby@2.4.0
-  node: circleci/node@7.0.0
+  node: circleci/node@7.1.0
   md-proofer: hubci/md-proofer@0.1.1
   vale: circleci/vale@1.2.0
 
