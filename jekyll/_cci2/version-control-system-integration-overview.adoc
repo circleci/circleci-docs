@@ -141,6 +141,15 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
+| Trigger pipelines on non-push events
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**# ^3^
+| [.circle-green]#**Yes**# ^3^
+| [.circle-green]#**Yes**# ^4^
+| [.circle-green]#**Yes**# ^4^
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
 | xref:webhooks#outbound-webhooks[Outbound webhooks]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -154,6 +163,10 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 ^1^ _One alternative is to use a xref:webhooks#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
+
+^3^ _For GitLab Cloud and GitLab self-managed projects, you can choose to trigger pipelines upon the creation of merge requests, by selecting the "Only Build Merge Requests" trigger filter._
+
+^4^ _For GitHub OAuth and Bitbucket Cloud projects, you can choose to trigger pipelines upon the creation of pull requests, by enabling the *Only build pull requests* option on the menu:Project Settings[Advanced] page of your project._
 
 === Core capabilities
 
