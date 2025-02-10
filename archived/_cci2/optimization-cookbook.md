@@ -69,7 +69,7 @@ Typically, performing setup once, and then performing `fan out` steps, is a trad
 - The test jobs started dependencies (Redis, Cassandra, and PostgreSQL) with `docker-compose`, which required the use of the machine executor. This added an additional **30-60** second startup time compared to the docker executors.
 - Because the base image from the build job contained only runtime dependencies, a docker image had to be built, extending the base to add dependencies for testing. This added  about **70** seconds.
 
-As you can see, there is a a significant amount of time being spent setting up the tests, without any actual tests being performed. In fact, this approach required 6.5 minutes before the actual tests were run, which took another 6.5 minutes.
+As you can see, there is a significant amount of time being spent setting up the tests, without any actual tests being performed. In fact, this approach required 6.5 minutes before the actual tests were run, which took another 6.5 minutes.
 
 ### Test preparation optimization
 {: #test-preparation-optimization }
@@ -132,7 +132,7 @@ jobs:
       - run: go test
 ```
 
-To split these tests, using timing data, we first intoduce parallelism to spin up a number (10 in this case) of identical test environments. Then use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
+To split these tests, using timing data, we first introduce parallelism to spin up a number (10 in this case) of identical test environments. Then use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
 
 ```yaml
 jobs:

@@ -82,7 +82,7 @@ export HTTP_PROXY=http://<userid>:<password>@<proxy-ip>:<port>
 export HTTPS_PROXY=https://<userid>:<password>@<proxy-ip>:<port>
 ```
 
-NOTE: The above is not handled by by our enterprise-setup script and will need to be added to the user data for the Services Machine startup or done manually.
+NOTE: The above is not handled by our enterprise-setup script and will need to be added to the user data for the Services Machine startup or done manually.
 
 // not quite clear what is meant by this note... what's user data in this context?
 // If the customer wants to apply the above setting automatically, they need to add them into ServiceBox's user data.

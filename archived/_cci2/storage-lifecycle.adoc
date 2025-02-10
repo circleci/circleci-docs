@@ -76,7 +76,7 @@ ifndef::pdf[NOTE: Scroll table to the right to view all content.]
 [discrete]
 === `audit-logs`
 
-This is where audit logs are saved. Deleting this folder and files under this fodler has no impact on future operation of CircleCI, but deleted logs will be definitely lost and cannot be recovered.
+This is where audit logs are saved. Deleting this folder and files under this folder has no impact on future operation of CircleCI, but deleted logs will be definitely lost and cannot be recovered.
 
 [discrete]
 === `code-signing-keys`

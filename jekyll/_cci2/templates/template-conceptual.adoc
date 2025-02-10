@@ -59,7 +59,7 @@ Alternatively, if a separate guide doesn't exist yet, provide some numbered step
 
 . Provide some steps here
 . To get started with this feature
-. Inlcude a step for every action
+. Include a step for every action
 . Try not to skip steps or assume readers will know, for example, which button to click
 
 [#how-the-feature-works]

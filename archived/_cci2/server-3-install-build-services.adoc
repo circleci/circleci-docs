@@ -321,7 +321,7 @@ ifndef::env-aws[]
 
 ===== GCP
 . Create a service account for Nomad Autoscaler
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. You may reference the examples in the link for more details. If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service account and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. You may reference the examples in the link for more details. If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
   * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload identities]
 . Set Nomad Autoscaler to `enabled`
 . Set Maximum Node Count*
@@ -692,7 +692,7 @@ We recommend you create a unique service account used exclusively by VM Service.
 ```shell
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ```
-NOTE: If your are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
+NOTE: If you are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
 
 . *Get the service account email address*
 +

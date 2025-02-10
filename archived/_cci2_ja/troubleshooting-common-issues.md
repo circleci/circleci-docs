@@ -249,7 +249,7 @@ This usually occurs due to a bad [command]({{site.baseurl}}/configuration-refere
 
 このエラー メッセージの原因は、セカンダリ サービス コンテナがクラッシュしたか、予期せず終了したことです。 これは、CircleCI が Docker デーモンから PID を取得できず、エラーが発生して終了したことを意味します。
 
-コンテナを正常にスピンアップするには、コマンドとエントリポイントが正しいことを確認してください。 This can be be tested locally by using the [CircleCI CLI]({{site.baseurl}}/local-cli/#run-a-job-in-a-container-on-your-machine) to run the job locally and ensure Docker spins up all containers successfully. エラーを解決するには、お使いの設定ファイルで定義している Docker イメージのドキュメントを参照して、スピンアップ時に使用できるコマンドを確認してください。
+コンテナを正常にスピンアップするには、コマンドとエントリポイントが正しいことを確認してください。 This can be tested locally by using the [CircleCI CLI]({{site.baseurl}}/local-cli/#run-a-job-in-a-container-on-your-machine) to run the job locally and ensure Docker spins up all containers successfully. エラーを解決するには、お使いの設定ファイルで定義している Docker イメージのドキュメントを参照して、スピンアップ時に使用できるコマンドを確認してください。
 
 </details>
 
@@ -890,7 +890,7 @@ If you receive an error telling you that you do not have permissions to create a
 
 This is a somewhat common pitfall that many users run into when the move into a CI environment.
 
-The key thing to remember is that the builds run as the `distiller` user on MacOS builds and typically `ubunutu` on Linux builds. These users only have write permissions in their `$HOME` folders and places like `/tmp`. This is not unique to CI, this is true by default in almost all Linux/Unix environments.
+The key thing to remember is that the builds run as the `distiller` user on MacOS builds and typically `ubuntu` on Linux builds. These users only have write permissions in their `$HOME` folders and places like `/tmp`. This is not unique to CI, this is true by default in almost all Linux/Unix environments.
 
 To confirm which user your build runs as you can run the `whoami` command as a part of your build process.
 

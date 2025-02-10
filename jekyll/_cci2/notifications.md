@@ -134,7 +134,7 @@ jobs:
     steps:
       - checkout
       - irc/notify:
-          server: <IRC-server-to-connect-to> # default: IRC_SERVER environment varible.
+          server: <IRC-server-to-connect-to> # default: IRC_SERVER environment variable.
           port: <6667> # default: 6667 if left blank.
           channel: <the IRC server to post in> # required parameter
           nick: <Your IRC nickname> # default: `circleci-bot`

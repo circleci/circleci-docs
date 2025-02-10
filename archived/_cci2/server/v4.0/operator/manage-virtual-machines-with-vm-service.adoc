@@ -24,7 +24,7 @@ The following configuration options are for the VM provider: either AWS or GCP.
 === AWS
 There is a section in your `values.yaml` file that configures VM Service to work with AWS EC2. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
-The informaiton in this section describes post-installation configuration options for VM service.
+The information in this section describes post-installation configuration options for VM service.
 
 [#windows-image-aws]
 ==== Windows image
@@ -182,7 +182,7 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 === GCP
 There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
-The informaiton in this section describes post-installation configuration options for VM service.
+The information in this section describes post-installation configuration options for VM service.
 
 [#windows-image-gcp]
 ==== Windows image

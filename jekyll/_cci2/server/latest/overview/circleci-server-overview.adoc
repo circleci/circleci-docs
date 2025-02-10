@@ -410,7 +410,7 @@ CircleCI server can be installed using cloud resources (GCP or AWS), locally, an
 
 * Cloud installation guides for xref:../installation/phase-1-aws-prerequisites#[AWS] and xref:../installation/phase-1-gcp-prerequisites#[GCP]. Follow the sections for your chosen cloud provider.
 * xref:../installation/phase-1-aws-prerequisites#[Local] installation. Notes are provided in the main installation guide to show which sections are optional, or different, for local installations.
-* xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped] installation guide. This guide is designed to be used along-side key sections of the main installation guides for xref:../installation/phase-1-aws-prerequisites#[AWS] and xref:../installation/phase-1-gcp-prerequisites#[GCP].
+* xref:../air-gapped-installation/phase-1-prerequisites#[Air-gapped] installation guide. This guide is designed to be used alongside key sections of the main installation guides for xref:../installation/phase-1-aws-prerequisites#[AWS] and xref:../installation/phase-1-gcp-prerequisites#[GCP].
 
 ifndef::pdf[]
 

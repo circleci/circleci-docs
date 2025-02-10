@@ -13,7 +13,7 @@ This quickstart provides a guided tour through setting up a project, collaborati
 
 * Create a project, connecting some existing code to CircleCI.
 * Inviting team members to collaborate on your new project.
-* Use the VS Code extention to debug and extend your config.
+* Use the VS Code extension to debug and extend your config.
 * SSH into a build to debug your project.
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
@@ -268,8 +268,8 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 
 <div class="include-two-up">
   <div class="left-side">
-    <div class="section-heading">2. VS Code extention</div>
-    <p>Using the <a href="https://circleci.com/docs/vs-code-extension-overview/">CircleCI VS Code extention</a>, validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.</p>
+    <div class="section-heading">2. VS Code extension</div>
+    <p>Using the <a href="https://circleci.com/docs/vs-code-extension-overview/">CircleCI VS Code extension</a>, validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.</p>
   </div>
 
   <div class="right-side">

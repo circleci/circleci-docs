@@ -658,7 +658,7 @@ A working `.circleci/config.yml` section might look like this:
 [#kaocha]
 === Kaocha
 
-Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
+Assuming that you are already using kaocha as your test runner, do these things to produce and store test results:
 
 Add the `kaocha-junit-xml` plugin to your dependencies
 

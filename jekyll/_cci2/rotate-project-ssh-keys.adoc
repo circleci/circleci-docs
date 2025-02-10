@@ -97,7 +97,7 @@ Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
 . Take note of the current key information to rotate.
 . Delete the user key by clicking the **X**.
 . Add a new user key following the xref:bitbucket-integration/#create-a-bitbucket-user-key[Create a Bitbucket user key] instructions.
-. Go to Bitbucket’s user account settings to delete the matching public key. The Bitbucket URL is typically `https://bitbucket.org/account/settings/ssh-keys/`. The user names the keys, therefore, CircleCI does not know if the key name contains the string `CircleCI`. It is recommended to remove any key created before the rotation.
+. Go to Bitbucket’s user account settings to delete the matching public key. The Bitbucket URL is typically `https://bitbucket.org/account/settings/ssh-keys/`. The usernames the keys, therefore, CircleCI does not know if the key name contains the string `CircleCI`. It is recommended to remove any key created before the rotation.
 
 [#rotate-an-additional-SSH-key-bitbucket]
 === Rotate an additional SSH key

@@ -19,7 +19,7 @@ You can also take advantage of this runtime-based test splitting in custom steps
 
 If you're using inferred test steps for Ruby or Python then CircleCI
 automatically collects test metadata, though for RSpec, Minitest, and Django
-you'll need to do some configuration to to enable the formatters:
+you'll need to do some configuration to enable the formatters:
 
 ### For RSpec:
 

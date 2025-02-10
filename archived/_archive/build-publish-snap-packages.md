@@ -129,7 +129,7 @@ Utilize CircleCI `workspaces` to move a generated snap file between jobs when ne
 ...
 ```
 
-Below is a complete example of how a snap package could be built on CircleCI. This same process is used the build the Snap pakcage for the [CircleCI Local CLI][local-cli-repo].
+Below is a complete example of how a snap package could be built on CircleCI. This same process is used the build the Snap package for the [CircleCI Local CLI][local-cli-repo].
 
 
 ## Full example config

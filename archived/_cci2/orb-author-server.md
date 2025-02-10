@@ -347,4 +347,4 @@ For more information on how to use the `circleci orb` command, see the CLI [docu
 ## Next steps
 {: #next-steps }
 
-* Find out about managing orbs for server in the [Managing Orbs]({{site.baseurl}}/2.0/server-3-operator-orbs/) guide guide.
+* Find out about managing orbs for server in the [Managing Orbs]({{site.baseurl}}/2.0/server-3-operator-orbs/) guide.

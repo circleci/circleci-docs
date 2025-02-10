@@ -78,7 +78,7 @@ For an AWS install of CircleCI Server, the recommended instance type for Nomad c
 
 NOTE: Currently, Nomad Clients only support x86_64 architecture.
 
-You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m5.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will researve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run.
+You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m5.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will reserve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run.
 
 === Recommendations for Heavy Usage
 

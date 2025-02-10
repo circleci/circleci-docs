@@ -60,7 +60,7 @@ This document provides a summary of features and product notes for the release o
 
 - Replicated was updated to version 2.29.0 in this release which requires Docker 17.12.1. Follow the instructions below before upgrading to CircleCI v2.16.
 
-### Prequisites for updating Replicated
+### Prerequisites for updating Replicated
 {: #prequisites-for-updating-replicated }
 
 - Your installation is Ubuntu 14.04-based

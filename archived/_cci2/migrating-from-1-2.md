@@ -97,7 +97,7 @@ The `config-translation` endpoint can help you quickly get started with converti
      ```
      If you do not have a `checkout` step, you must add this step to your `config.yml` file.
 
-7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) document for details.
+7. (Optional) Add  the `add_ssh_keys` step with fingerprint to enable SSH into builds, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) document for details.
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 

@@ -28,7 +28,7 @@ When writing in asciidoc the following _admonitions_ are available: note, tip, i
 * `tip`: Use to add some guidance on how to carry out a step or how to act on some advice contained within the section.
 * `important`: This admonition type is not used often in CircleCI docs. Consider whether one of the ofther options is a better fit before using.
 * `caution`: Use to make the reader aware they need to be careful when acting on some advice.
-* `warning`: Use to indicate that there are dangers or consequenses associated with some information or steps.
+* `warning`: Use to indicate that there are dangers or consequences associated with some information or steps.
 
 [#admonition-syntax]
 === Admonition syntax

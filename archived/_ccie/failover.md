@@ -110,7 +110,7 @@ $ circleci-backup /tmp/backup-2016-04-13_1
 $ # the tarball will be present in `/tmp/backup-2016-04-13_1/circleci-data-export.tar.bz2
 ```
 
-NOTE: The script assume that you have enough disk space (including for scratch temp purposes) at the directory.  If space is scarse, consider attaching an additional volume.
+NOTE: The script assume that you have enough disk space (including for scratch temp purposes) at the directory.  If space is scarce, consider attaching an additional volume.
 
 ### Restore
 
@@ -149,7 +149,7 @@ $ aws ec2 register-image --name "CircleCI-restore-$(date '+%s')"  --description 
 
 Now you can start the AMI.  If you are using Terraform or CloudFormation you can substitute the image-id of the services box with the one you just created.  If you used the manual process, then you need to create the Services box with the same SecurityGroups.
 
-NOTE: After restore occurrs, if CircleCI doesn't launch automatically you may need to go to the administrative console at https://ccie.example.com:8800/ (replacing "ccie.example.com" with the appropriate hostname) and start the app manually.  We are adding automation for this step, but older versions may require manual intervention.
+NOTE: After restore occurs, if CircleCI doesn't launch automatically you may need to go to the administrative console at https://ccie.example.com:8800/ (replacing "ccie.example.com" with the appropriate hostname) and start the app manually.  We are adding automation for this step, but older versions may require manual intervention.
 
 #### Restore from a tarball
 
@@ -166,7 +166,7 @@ $ circleci-restore ./backup.tar.bz2
 The script assumes running on a clean install (or a clean AMI).  If you are
 running with a running CircleCI instance, the existing data will be moved to
 `/data/circleci-restore-*` directory.  You can delete the directory if the
-restore is successful and you confirmed that you didn't unintentionally droped
+restore is successful and you confirmed that you didn't unintentionally dropped
 data.
 
 ## 2b. Recovery procedure: Cold Fail-over [Advanced Topic]

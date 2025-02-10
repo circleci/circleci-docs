@@ -122,7 +122,7 @@ In addition to using the API, you can also trigger a pipeline with parameters fr
 4. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
 5. Click **Trigger Pipeline**.
 
-Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in **Project Settings > Triggers**. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the the pipeline will fail with the error `Unexpected argument(s)`.
+Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in **Project Settings > Triggers**. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
 
 ## Configuration processing stages
 {: #configuration-processing-stages }

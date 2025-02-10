@@ -172,7 +172,7 @@ lxc.mount.entry = /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
 
 7.) `CIRCLE_LXC_RUN_ARGUMENTS="$(cat lxc_config.txt)"`
 
-8.) Run `echo "$CIRCLE_LXC_RUN_ARGUMENTS"` to ensure that you outputs looks like like 
+8.) Run `echo "$CIRCLE_LXC_RUN_ARGUMENTS"` to ensure that you outputs looks like 
 
 ```
 lxc.cgroup.devices.allow = c 195:* rwm

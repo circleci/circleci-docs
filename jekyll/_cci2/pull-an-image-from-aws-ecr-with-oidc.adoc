@@ -72,7 +72,7 @@ If you followed the xref:openid-connect-tokens#set-up-aws[Set up AWS instruction
 }
 ----
 
-. Navigate back to the the **Add Permissions** page and refresh to find your new policy, and carry on following the AWS instructions to complete the role creation.
+. Navigate back to the **Add Permissions** page and refresh to find your new policy, and carry on following the AWS instructions to complete the role creation.
 
 [#update-circleci-config-yml-to-pull-image]
 == 2. Update `.circleci/config.yml` to pull image

@@ -191,7 +191,7 @@ Have available the following resources before beginning manual installation of t
   | TCP      | 4647       | vpc     |
   {: class="table table-striped"}
 * 1.0 Builders - No changes, the same process as for the CCIE 1.0 <https://circleci.com/docs/enterprise/aws-manual/>
-* 2.0 Builders - Instance type should be at least `m4.xlarge` or `m4.4xlarge` installated with the following Terraform script: <https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf>.
+* 2.0 Builders - Instance type should be at least `m4.xlarge` or `m4.4xlarge` installed with the following Terraform script: <https://github.com/circleci/enterprise-setup/blob/ccie2/nomad-cluster.tf>.
 
 ### Manual Installation Steps
 

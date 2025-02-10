@@ -119,7 +119,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19.03
 
-* Removed the use of the depecated GitHub.com API endpoint `GET applications/%s/tokens/%s`.
+* Removed the use of the deprecated GitHub.com API endpoint `GET applications/%s/tokens/%s`.
 
 * Distributed tracing is now enabled by default for Server installations. Traces are used in CircleCI support bundles to improve our ability to troubleshoot Server issues. Options for the tracing sampling rate are displayed in the Replicated Management Console, but should only be changed from the default if requested by CircleCI Support.
 
@@ -141,7 +141,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 * Fixed an issue that was causing intermittent failures to spin up VMs with DLC in use.
 
-* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
+* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more information.
 
 * Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
 

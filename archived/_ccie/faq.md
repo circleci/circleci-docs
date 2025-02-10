@@ -22,7 +22,7 @@ The first user who logs in to the CircleCI application will automatically be des
 
 #### How can I retrieve the passphrase and private IP address if it is lost?
 
-SSH into into the services box, and run the following:
+SSH into the services box, and run the following:
 
 ```
 $ # To get the passphrase

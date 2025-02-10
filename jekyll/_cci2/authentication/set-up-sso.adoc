@@ -15,7 +15,7 @@ for further details. Submit feedback on our link:https://circleci.canny.io/ident
 
 == Setup SAML SSO
 
-To set up SAML SSO, you must have the _Organization Admin_ role. For informaiton on roles and permissions, see the xref:../roles-and-permissions-overview#[Roles and permissions overview].
+To set up SAML SSO, you must have the _Organization Admin_ role. For information on roles and permissions, see the xref:../roles-and-permissions-overview#[Roles and permissions overview].
 
 === Access Setup Parameters in CircleCI
 
