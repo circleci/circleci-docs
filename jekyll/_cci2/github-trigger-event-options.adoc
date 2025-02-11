@@ -14,7 +14,17 @@ When you create a trigger for a GitHub App pipeline, you can choose from a set o
 
 == Introduction
 
-CircleCI projects have pipelines (the work to do when building your project) and triggers (when and how to initiate a pipeline). Configure triggers under menu:Project settings[Triggers]. You can configure triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag. For a full list see <<supported-trigger-options>>.
+CircleCI projects have pipelines and trigger.
+
+* Pipelines define the various CI/CD 'units' of work that make up your project.
+* Triggers define when and how to initiate a pipeline.
+
+Configure triggers under menu:Project settings[Triggers]. You can configure triggers to initiate pipelines on a variety of events
+
+* Non-push events, for example, a pull request being opened
+* Push events, for example, only pushes to a default branch, or pushes to a tag.
+
+For a full list see <<supported-trigger-options>>.
 
 .Trigger options under Project settings
 image::triggers/run-on-open.png[Set a trigger option for a project trigger]
