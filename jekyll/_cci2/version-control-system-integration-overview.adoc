@@ -24,7 +24,7 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * Bitbucket Cloud
 * Bitbucket Data Center
 +
-{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
