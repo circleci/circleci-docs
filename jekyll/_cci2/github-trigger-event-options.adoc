@@ -45,7 +45,7 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
 
-[Note] 
+[NOTE] 
 ====
 Due to a bug, repeated pull request events of the same type do not result in build if he associated commit SHA has not changed. Let's take as an example a trigger configured with the option "PR marked ready for review": marking a PR as ready for review, then converting it to draft, then marking it as ready for review again will lead to only one pipeline to be triggered, not two. We are working to resolve this issue.
 ====
