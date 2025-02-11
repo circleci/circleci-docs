@@ -47,6 +47,11 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 
 [Note] 
 ====
+Due to a bug, repeated pull request events of the same type do not result in build if he associated commit SHA has not changed. Let's take as an example a trigger configured with the option "PR marked ready for review": marking a PR as ready for review, then converting it to draft, then marking it as ready for review again will lead to only one pipeline to be triggered, not two. We are working to resolve this issue.
+====
+
+[Note] 
+====
 We plan to expand the available events and conditions to choose from. Let us know what additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form], so we can prioritize adding them next.
 ====
 
