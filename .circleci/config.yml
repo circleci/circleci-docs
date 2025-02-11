@@ -150,7 +150,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
-      tag: '3.1.4-browsers'
+      tag: '3.2.2-browsers'
     steps:
       - checkout
       - *attach_workspace
@@ -186,7 +186,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '3.1.3-browsers'
+      tag: '3.2.2-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
