@@ -103,11 +103,7 @@ commands:
 workflows:
 
   lint:
-    unless:
-      or:
-        - equal: [ master, << pipeline.git.branch >> ]
-        - equal: [ preview, << pipeline.git.branch >> ]
-        - << pipeline.parameters.run-schedule >>
+    when: pipeline.event.name == "pull_request" and pipeline.event.action == "ready_for_review"
     jobs:
       - vale/lint:
           reference_branch: master
