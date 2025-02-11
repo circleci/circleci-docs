@@ -68,7 +68,7 @@ Enabling SAML protection on a GitHub org can cause changes to CircleCI’s setti
 * GitHub Checks, from the GitHub website, select menu:Organization Settings[VCS > GitHub Checks]
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
 
-For more information on GitHub Checks and GitHub status updates, see the xref:enable-checks#github-check-and-github-status-updates[Enabling GitHub checks].
+For more information on GitHub Checks and GitHub status updates, see the xref:enable-checks#github-check-and-github-status-updates[Enabling GitHub Checks].
 
 [#connect-a-github-account]
 == Connect a GitHub account
@@ -322,7 +322,7 @@ Key functionality enabled through the GitHub App integration includes the follow
 * The possibility to set up your pipelines so that the **config file and the application code are stored in different repositories**. Refer to the link:https://circleci.com/changelog/unlocking-any-cross-repo-pipeline-and-trigger-setups-including-central/[changelog entry] for more information.
 * A **more flexible trigger system**, with each pipeline having any number of VCS or non-VCS triggers. This includes:
 ** **Non-repo based triggers**: xref:webhooks#custom-webhooks[Custom webhooks] enable triggering builds from any system that can emit webhook events. Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
-** **Cross-repo triggers**: Events in one repository can trigger builds on one or many other repositories. 
+** **Cross-repo triggers**: Events in one repository can trigger builds on one or many other repositories.
 ** **More GitHub events as triggers**: Pipelines can be set up to run on events other than "push", including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:github-trigger-event-options#[GitHub trigger event options] page.
 
 [#installing-github-app-alongside-github-oauth-app]
