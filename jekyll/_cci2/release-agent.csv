@@ -1,6 +1,6 @@
 name,licenses
 github.com/argoproj/argo-rollouts,"Apache-2.0"
-github.com/cenkalti/backoff/v4,"MIT"
+github.com/cenkalti/backoff/v5,"MIT"
 github.com/circleci/ex,"MIT"
 github.com/containerd/containerd,"Apache-2.0"
 github.com/emicklei/go-restful/v3,"MIT"
