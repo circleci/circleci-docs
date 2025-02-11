@@ -52,7 +52,7 @@ Due to a bug, repeated pull request events of the same type do not result in a b
 
 [NOTE] 
 ====
-We plan to expand the available events and conditions to choose from. Let us know what additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form], so we can prioritize adding them next.
+*Help us prioritize additional trigger options?* We are working to expand the available events and conditions for you to choose from. Let us know which additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form].
 ====
 
 Two pipeline values are available for all GitHub App pipelines for you to use to further configure the workflows and jobs to run on specific events:
