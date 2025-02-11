@@ -103,7 +103,7 @@ en:
       - name: Webhooks reference
         link: webhooks-reference
       - name: Frequently asked questions
-        link: FAQ
+        link: faq
       - name: Troubleshoot
         link: troubleshoot
 
