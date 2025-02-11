@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-You can use multiple configuration files in a CircleCI project and set up separate triggers for each one. Each configuration triggers a separate pipeline on a trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.
+You can use multiple configuration files in a CircleCI project and set up separate pipelines and triggers for each one. Each trigger can be configures to initiate a separate pipeline on the specified trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.
 
 [#prerequisites]
 == Prerequisites
@@ -29,23 +29,25 @@ In the GitHub repository for your project add a new CircleCI configuration file 
 
 As your repository is set up as a project in CircleCI, a `config.yml` file will exist already. If you do not see `.circleci/config.yml`, check which branch you are on. You may have set this up on a non-default branch during the set up process.
 
-Each configuration file will trigger a separate pipeline so it is important that each configuration file is complete with all necessary elements for the pipeline, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
+Each configuration file can be set up with a pipeline and trigger so it is important that each configuration file is complete with all necessary elements for the pipeline, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
 
 == 2. Set up a pipeline
 
 Next, add a new pipeline in your CircleCI project settings.
 
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and select **Project Settings**
-. Select **Pipelines** in the sidebar
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+. Select **Pipelines** in the sidebar.
 +
-. Select btn:[Add Pipeline]
+. Select btn:[Add Pipeline].
 . Complete the required form fields:
-** Give your pipeline a descriptive name
-** Ensure **GitHub App** is selected under **Pipeline**
-** If you see a btn:[Connect] button, select it and follow instructions to install the GitHub App for your org.
-** Select the same repository as the project you are building
+** Give your pipeline a descriptive name.
+** Ensure **GitHub App** is selected under **Integration**.
+** If you see a btn:[Connect] button, select it and follow instructions to install the GitHub App for your org. You will need to be an org admin to install the GitHub App.
+** Select the same repository as the project you are building under **Config Source**. Specify where your config file is located under **Config File Path**.
+** Under **Build Assets** select your code source under **Checkout Source** -- this is the code that will be checked out when using the xref:configuration-reference#checkout[`checkout` step] in your config file.
 . Select btn:[Save]
++
+image::add-pipeline.png[Add a pipeline page in CircleCI app]
 
 [#create-a-new-trigger]
 == 3. Create a new trigger
@@ -54,14 +56,29 @@ Next, create a trigger for your pipeline.
 
 . Following from the previous step, select **Triggers** in the sidebar
 +
-. Select btn:[Add Trigger]
-. Select **GitHub App** in the dropdown menu
-. Select btn:[Next]
+. Select btn:[Add Trigger].
+. Select **GitHub App** in the dropdown menu.
+. Select btn:[Next].
 . Complete the required form fields:
-** Give your trigger a descriptive name
-** Select your project repository from the dropdown
-** Choose your new pipeline from the "Choose config to run" menu
+** Give your trigger a descriptive name.
+** Select your project repository from the dropdown.
+** Choose your new pipeline from the "Choose config to run" menu.
+** Choose a trigger event options from the "Run on" menu.
++
+[TIP]
+====
+Using multiple pipelines and triggers, you can build  different pipelines for different events, For example, you could have:
+
+- A `build-test` pipeline that runs on every push. Select "All pushes".
+- A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
+- A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
+
+For a full list, see the xref:github-trigger-event-options#[GitHub trigger event options] page.
+====
+
 . Select btn:[Save]
++
+image::triggers/run-on-open.png[Triggers page with Run on menu open]
 
 [#conclusion]
 == Conclusion
