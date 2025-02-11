@@ -141,7 +141,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| Trigger pipelines on non-push events
+| xref:triggers-overview/#run-a-pipeline-on-commit-to-your-code-repository[Trigger pipelines on non-push events]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes** ^3^#
 | [.circle-green]#**Yes** ^3^#
