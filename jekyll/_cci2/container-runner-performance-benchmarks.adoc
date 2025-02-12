@@ -26,6 +26,59 @@ By publishing our benchmarks we can make measurable improvements to the performa
 
 NOTE: Benchmarks were performed on a GKE (Google) cluster with 5 dedicated E2-medium nodes. The `cos_containerd` image was used with GKE version 1.29.4 and no autoscaling.
 
+The tables below detail the aggregation of results from testing the link:https://circleci.com/changelog/runner-release-3-1-0/[3.1 self-hosted runner] (GOAT) compared to the same tests run with the 3.0 self-hosted runner. Version 3.1 introduced a major re-architecture of container runner to address performance, stability, and reliability. For more technical background on 3.1, refer to the link:https://github.com/circleci/runner-init?tab=readme-ov-file#background[runner-init project's README].
+
+Distilling the differences between GOAT and the 3.0 self-hosted runner, there is a net improvement across all four categories, with the most notable being the reduction in queue times. The 3.0 self-hosted runners also demonstrated a minor but notable decrease in failed runs, showing an improvement when run under stress.
+
++
+[.tab.runner_version.goat]
+--
+[.table.table-striped]
+[cols=13, options="header", width="100%"]
+|=====================================================================================================================================================================================================================================================================================
+3+|                                               2+| Failure Rate                             2+| Average Run Time                                2+| Max Run Time                               2+| Average Queue Time                               2+| Max Queue Time
+h| Total Tasks h| Max Concurrency h| Replica Count h| Failure Rate (Goat) h| Failure Rate (3.0) h| Average Run Time (Goat)  h| Improvement From 3.0 h| Max Run Time (Goat) h| Improvement From 3.0 h| Average Queue Time (Goat) h| Improvement From 3.0 h| Max Queue Time (Goat) h| Improvement From 3.0
+| 20            | 20               | 1              | 0.0%                 | 0.0%                | 934.8                     | 10%                   | 11196.8              | -350%                 | 5173.3                     | 50%                   | 12792.5                | 50%
+| 20            | 20               | 2              | 20.0%                | 0.0%                | 955.6                     | -10%                  | 2602.0               | -10%                  | 4074.2                     | 50%                   | 10249.9                | 50%
+| 20            | 20               | 3              | 30.0%                | 0.0%                | 914.0                     | 0%                    | 2546.8               | -10%                  | 4037.3                     | 50%                   | 9850.8                 | 50%
+| 20            | 40               | 1              | 10.0%                | 0.6%                | 1046.7                    | -20%                  | 3784.8               | 20%                   | 4926.4                     | 60%                   | 12303.0                | 50%
+| 20            | 40               | 2              | 20.0%                | 0.0%                | 899.4                     | 20%                   | 9896.0               | -260%                 | 4546.5                     | 50%                   | 10972.2                | 50%
+| 20            | 40               | 3              | 30.0%                | 0.0%                | 934.3                     | -10%                  | 2285.8               | 10%                   | 3914.5                     | 50%                   | 9070.2                 | 50%
+| 20            | 80               | 1              | 10.0%                | 0.0%                | 930.0                     | -20%                  | 3156.4               | -40%                  | 4358.7                     | 60%                   | 11504.0                | 50%
+| 20            | 80               | 2              | 20.0%                | 0.0%                | 892.3                     | 0%                    | 2864.5               | 0%                    | 4164.0                     | 50%                   | 10028.6                | 40%
+| 20            | 80               | 3              | 30.0%                | 0.0%                | 975.5                     | -10%                  | 2551.2               | 10%                   | 3862.6                     | 50%                   | 9389.4                 | 50%
+| 40            | 20               | 1              | 10.0%                | 0.0%                | 857.0                     | 0%                    | 3685.0               | -20%                  | 8345.5                     | 50%                   | 28749.8                | 40%
+| 40            | 20               | 2              | 20.0%                | 0.6%                | 1332.7                    | -10%                  | 4023.9               | 10%                   | 5199.1                     | 70%                   | 14260.5                | 60%
+| 40            | 20               | 3              | 30.0%                | 0.9%                | 1415.6                    | -30%                  | 4421.7               | 0%                    | 5571.4                     | 60%                   | 15838.6                | 50%
+| 40            | 40               | 1              | 10.0%                | 0.3%                | 1875.5                    | -50%                  | 9882.1               | 30%                   | 7290.1                     | 60%                   | 22519.5                | 50%
+| 40            | 40               | 2              | 20.0%                | 0.3%                | 1088.4                    | -10%                  | 3786.4               | -10%                  | 5639.7                     | 60%                   | 16400.2                | 60%
+| 40            | 40               | 3              | 30.0%                | 0.0%                | 1357.3                    | -10%                  | 4259.0               | 0%                    | 5657.6                     | 60%                   | 15374.1                | 50%
+| 40            | 80               | 1              | 10.0%                | 0.0%                | 910.6                     | 0%                    | 2673.0               | 10%                   | 7457.9                     | 60%                   | 23214.5                | 50%
+| 40            | 80               | 2              | 20.0%                | 0.6%                | 1393.7                    | -10%                  | 5733.2               | 30%                   | 5582.0                     | 60%                   | 16533.2                | 60%
+| 40            | 80               | 3              | 30.0%                | 0.0%                | 1347.5                    | -20%                  | 3954.9               | 0%                    | 6279.2                     | 50%                   | 15712.4                | 50%
+| 80            | 20               | 1              | 10.0%                | 0.1%                | 855.0                     | 10%                   | 2718.1               | 20%                   | 16916.3                    | 40%                   | 64214.3                | 30%
+| 80            | 20               | 2              | 20.0%                | 0.3%                | 1259.3                    | 30%                   | 4594.2               | 60%                   | 9396.9                     | 60%                   | 32960.3                | 50%
+| 80            | 20               | 3              | 30.0%                | 0.4%                | 2123.9                    | 0%                    | 9011.4               | 10%                   | 8371.7                     | 60%                   | 28033.0                | 60%
+| 80            | 40               | 1              | 10.0%                | 0.0%                | 1651.7                    | -60%                  | 10064.1              | -60%                  | 15135.1                    | 50%                   | 59203.1                | 30%
+| 80            | 40               | 2              | 20.0%                | 0.3%                | 1960.8                    | 20%                   | 8564.9               | 10%                   | 9610.8                     | 60%                   | 30498.3                | 50%
+| 80            | 40               | 3              | 30.0%                | 0.3%                | 2781.8                    | -30%                  | 9568.8               | 10%                   | 9575.0                     | 60%                   | 28208.7                | 50%
+| 80            | 80               | 1              | 10.0%                | 0.1%                | 959.0                     | 50%                   | 2922.2               | 80%                   | 13394.6                    | 60%                   | 44709.2                | 50%
+| 80            | 80               | 2              | 20.0%                | 0.3%                | 1519.4                    | 10%                   | 5510.7               | 20%                   | 9007.4                     | 60%                   | 28765.2                | 60%
+| 80            | 80               | 3              | 30.0%                | 0.1%                | 2344.5                    | 10%                   | 9807.7               | 40%                   | 8877.2                     | 60%                   | 30428.8                | 60%
+| 128           | 20               | 1              | 10.0%                | 0.1%                | 896.8                     | 10%                   | 4684.8               | 0%                    | 27022.6                    | 30%                   | 106310.2               | 30%
+| 128           | 20               | 2              | 20.0%                | 0.6%                | 1098.0                    | 40%                   | 5088.5               | 70%                   | 14267.1                    | 50%                   | 54209.6                | 50%
+| 128           | 20               | 3              | 30.0%                | 0.5%                | 1892.9                    | 30%                   | 8988.9               | 40%                   | 12016.8                    | 60%                   | 44082.4                | 60%
+| 128           | 40               | 1              | 10.0%                | 0.1%                | 1449.0                    | 30%                   | 10143.9              | 40%                   | 25313.2                    | 40%                   | 105958.6               | 20%
+| 128           | 40               | 2              | 20.0%                | 0.2%                | 1520.5                    | 50%                   | 9324.9               | 50%                   | 13568.4                    | 60%                   | 51927.7                | 50%
+| 128           | 40               | 3              | 30.0%                | 0.1%                | 4103.5                    | 40%                   | 18628.1              | 40%                   | 13484.4                    | 70%                   | 48213.4                | 50%
+| 128           | 80               | 1              | 10.1%                | 0.3%                | 956.5                     | 50%                   | 3444.1               | 70%                   | 23486.7                    | 50%                   | 93787.0                | 30%
+| 128           | 80               | 2              | 20.0%                | 0.3%                | 1670.3                    | 60%                   | 8305.1               | 70%                   | 12316.0                    | 70%                   | 44018.8                | 60%
+| 128           | 80               | 3              | 30.0%                | 0.9%                | 3914.9                    | 20%                   | 19014.0              | 30%                   | 15326.8                    | 60%                   | 63039.7                | 60%
+|=====================================================================================================================================================================================================================================================================================
+--
++
+[.tab.runner_version.self-hosted_runner_3.0]
+--
 [.table.table-striped]
 [cols="9", options="header", width="100%"]
 |========================================================================================================================================
@@ -70,7 +123,20 @@ NOTE: Benchmarks were performed on a GKE (Google) cluster with 5 dedicated E2-me
 |            |                |              |           | *Minimum*        | 1721           | 15072            | 18269        | 2259
 |            |                |              |           | *Max*            | 6413           | 113833           | 207405       | 31100
 |========================================================================================================================================
+--
 
+In summary, the average improvements of version 3.1 are as follows:
+
+[.table.table-striped]
+[cols="4", options="header", width="100%"]
+|==================================================================
+| Average Run Time | Max Run Time | Average Queue Time | Max Queue Time
+| 5%               | 1%           | 56%                | 49%
+|==================================================================
+
+There are some instances where version 3.1 showed lower performance than the 3.0 self-hosted runner. In these cases, the differences are on the order of milliseconds and can often be attributed to cluster, network, and compute conditions. While some differences may appear extreme, they are often outliers in the 95th (or higher) percentile. The table above is the result of repeating the experiment four times for each row. When these extremes are considered in the context of the rest of the experiments, the net result is still positive for run times.
+
+In queuing, where the most dramatic performance increase is observed, the results are much more consistent and are less influenced by external factors such as remote API calls.
 
 [#runner-configuration-recommendations]
 == Runner configuration recommendations
