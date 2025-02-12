@@ -54,7 +54,7 @@ include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Ins
 image::triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
 --
 
-[.tab.create-project.GitHub_OAuth]
+[.tab.create-project.GitHub_OAuth_/_Bitbucket_Cloud]
 --
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 
@@ -84,7 +84,7 @@ include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Ins
 
 . In the navigation menu of the *Project Settings* page, click *Triggers*.
 . Edit an existing GitLab trigger or add a new GitLab trigger.
-. In the *Filters* section, select the *Only Build Merge Requests* option.
+. In the *Filters* section, select *Only Build Merge Requests*.
 
 image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only Build Merge Requests option]
 --
@@ -96,32 +96,9 @@ include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Ins
 
 . In the navigation menu of the *Project Settings* page, click *Triggers*.
 . Edit an existing GitLab Self-Managed trigger or add a new GitLab Self-Managed trigger.
-. In the *Filters* section, select the *Only Build Merge Requests* option.
+. In the *Filters* section, select *Only Build Merge Requests*.
 
 image::triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option]
---
-
-[.tab.create-project.Bitbucket_Cloud]
---
-By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
-
-The default behavior can be modified as follows:
-
-include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
-. In the navigation menu of the *Project Settings* page, click *Advanced*
-. Enable the *Only build pull requests* option.
-
-image::triggers/advanced-only-build-prs.png[Enable the Only build pull requests option]
-
-The ability to override the *Only build pull requests* setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
-
-Override the *Only build pull requests* setting by utilizing the API and following the steps outlined in this link:https://support.circleci.com/hc/en-us/articles/15222074173723-How-to-allowlist-additional-branches-for-Only-Build-Pull-Requests[support article].
-
-Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
-
-
-
-NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
 --
 
 
