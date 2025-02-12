@@ -31,7 +31,7 @@ For a full list, see the xref:github-trigger-event-options#[GitHub trigger event
 
 To use multiple pipelines and configs for a project in CircleCI, you will need to meet the following prerequisites:
 
-* A CircleCI account connected to your code in GitHub. You can link:https://circleci.com/signup/[sign up for free]. Any of CircleCI's GitHub integrations are supported, read our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204/1[community forum] for background on how this functionality can be used with an org integrated CircleCI's GitHub OAuth App. To use multiple pipelines for a project you will use the xref:github-app-integration#[CircleCI GitHub App integration].
+* A CircleCI account connected to your code in GitHub. You can link:https://circleci.com/signup/[sign up for free]. Any of CircleCI's GitHub integrations are supported, read our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204/1[community forum] for background on how this functionality can be used with an org integrated CircleCI's GitHub OAuth App. To use multiple pipelines for a project you will use the xref:github-apps-integration#[CircleCI GitHub App integration].
 * A project set up in CircleCI that you want to configure with multiple, distinct pipelines defined with different configuration files. See the xref:create-project#[Create a project in CircleCI] page for steps to get your project set up in CircleCI.
 
 [#add-additional-config-file]
