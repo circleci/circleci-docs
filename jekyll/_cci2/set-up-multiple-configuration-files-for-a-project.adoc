@@ -10,7 +10,9 @@ contentTags:
 :icons: font
 :experimental:
 
-You can use multiple configuration files in a CircleCI project and set up separate, multiple pipelines and triggers for each one. Each trigger can be configures to initiate a separate pipeline on the specified trigger event. If your existing configuration file is getting too large to manage, consider splitting it into multiple files.
+A CircleCI project can have any number of pipelines, each defined in a separate configuration file. The configuration files can all be stored in the same repo, or even in different repos if you wish. 
+Each pipeline can be configured to run on one or many specific trigger events.
+If your existing configuration file is getting too large to manage, and it includes several unrelated workflows, consider splitting it into multiple files.
 
 [#prerequisites]
 == Prerequisites
