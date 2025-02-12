@@ -6,7 +6,7 @@ contentTags:
 = Set up multiple configuration files for a project
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A step by step guide for setting up multiple configuration files as multiple pipelines and triggers for a project in CircleCI.
+:page-description: A step by step guide for setting up multiple pipelines, each defined in a separate configuration file, in a CircleCI project.
 :icons: font
 :experimental:
 
