@@ -10,32 +10,46 @@ contentTags:
 :icons: font
 :experimental:
 
-A CircleCI project can have any number of pipelines, each defined in a separate configuration file. The configuration files can all be stored in the same repo, or even in different repos if you wish. 
+A CircleCI project integrated with GitHub can have one or more pipelines, each defined by a separate configuration file. CircleCI configuration files can be stored in the same repo as your code, or even in different repos if you wish.
+
 Each pipeline can be configured to run on one or many specific trigger events.
-If your existing configuration file is getting too large to manage, and it includes several unrelated workflows, consider splitting it into multiple files.
+
+If your existing configuration file is getting too large to manage, and it includes several unrelated workflows, consider splitting it into more than one file.
+
+Using multiple pipelines and triggers, you can build different pipelines for different events, For example, you could have:
+
+- A `build-test` pipeline that runs on every push. Select "All pushes".
+- A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
+- A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
+
+image::triggers/run-on-open.png[Triggers page with Run on menu open]
+
+For a full list, see the xref:github-trigger-event-options#[GitHub trigger event options] page.
 
 [#prerequisites]
 == Prerequisites
 
-To use multiple configuration files for a project in CircleCI, you will need to meet the following prerequisites:
+To use multiple pipelines and configs for a project in CircleCI, you will need to meet the following prerequisites:
 
-* A CircleCI account connected to your code in GitHub.  You can link:https://circleci.com/signup/[sign up for free]. Any of CircleCI's GitHub integrations are supported, read our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204/1[community forum] for background on how this functionality can be used with an org integrated CircleCI's GitHub OAuth App.
-* A project set up in CircleCI that you want to configure with multiple configuration files. See the xref:create-project#[Create a project in CircleCI] page for steps.
+* A CircleCI account connected to your code in GitHub. You can link:https://circleci.com/signup/[sign up for free]. Any of CircleCI's GitHub integrations are supported, read our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204/1[community forum] for background on how this functionality can be used with an org integrated CircleCI's GitHub OAuth App. To use multiple pipelines for a project you will use the xref:github-app-integration#[CircleCI GitHub App integration].
+* A project set up in CircleCI that you want to configure with multiple, distinct pipelines defined with different configuration files. See the xref:create-project#[Create a project in CircleCI] page for steps to get your project set up in CircleCI.
 
 [#add-additional-config-file]
-== 1. Add an additional configuration file to your project repository
+== 1. Add additional configuration files to your project repository
 
-NOTE: **Splitting up an existing configuration?** If you are following these steps because you have an existing project building on CircleCI and you want to split your configuration into multiple files, you can create a new file in the `.circleci/` directory and move over some parts of your existing configuration file to your new YAML files.
+To use more than one configuration for your project you will create more than one pipeline. You can set up separate triggers for each pipeline. Each pipeline is defined by a YAML config file.
 
-In the GitHub repository for your project add a new CircleCI configuration file in the `.circleci/` directory. Your new configuration file must use the `.yml` extension but can have any name. Add your required configuration to the file and commit it to your repository.
+In this first step, create the configs you need to build your project. Config files can be stored anywhere you choose within your GitHub org. This can be in the same repo, or a different repo. Your configuration files can have any name you choose, but must have the `.yml` extension.
 
-As your repository is set up as a project in CircleCI, a `config.yml` file will exist already. If you do not see `.circleci/config.yml`, check which branch you are on. You may have set this up on a non-default branch during the set up process.
+If your project is already set up in CircleCI, a configuration file will likely exist already. If you do not see a `.circleci` directory containing a YAML config, check which branch you are on. You may have set this up on a non-default branch during the set up process.
 
-Each configuration file can be set up with a pipeline and trigger so it is important that each configuration file is complete with all necessary elements for the pipeline, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
+Each of your configuration files represents the full set of commands necessary for a pipeline to execute so it should be complete with all necessary elements, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
+
+NOTE: **Splitting up an existing configuration?** If you are following these steps because you have an existing project building on CircleCI and you want to split your configuration into multiple files, you can create the config files you need and move over parts of your existing configuration file to your new YAML files.
 
 == 2. Set up a pipeline
 
-Next, add a new pipeline in your CircleCI project settings.
+Next, add a new pipeline for each config you have. Create and edit pipeline in your menu:Project Settings[Pipelines].
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
 . Select **Pipelines** in the sidebar.
@@ -54,7 +68,7 @@ image::add-pipeline.png[Add a pipeline page in CircleCI app]
 [#create-a-new-trigger]
 == 3. Create a new trigger
 
-Next, create a trigger for your pipeline.
+Next, create a trigger for each pipeline you have created for your project. Alternatively, you can trigger a pipeline of your choosing manually xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[via the web app].
 
 . Following from the previous step, select **Triggers** in the sidebar
 +
@@ -85,5 +99,5 @@ image::triggers/run-on-open.png[Triggers page with Run on menu open]
 [#conclusion]
 == Conclusion
 
-You have now successfully set up multiple configuration files for your project on CircleCI. Each configuration file will trigger a separate pipeline on the configured trigger events. Push a commit to your code to test this out. You should see both pipelines trigger in the CircleCI web app Pipelines page.
+You should now have more than one CircleCI config file for your project, each config connected to a separate pipeline, and each pipeline connected to a trigger, as required.
 
