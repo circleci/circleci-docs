@@ -95,7 +95,7 @@ image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only Build Merge
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
 . In the navigation menu of the *Project Settings* page, click *Triggers*.
-. Edit an existing GitLab Self-Managed trigger or add a new GitLab Self-Managed trigger.
+. Edit an existing GitLab self-managed trigger or add a new GitLab self-managed trigger.
 . In the *Filters* section, select *Only Build Merge Requests*.
 
 image::triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option]
