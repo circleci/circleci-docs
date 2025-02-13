@@ -47,7 +47,7 @@ NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Cente
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
-. In the navigation menu of the *Project Settings* page, click *Triggers*.
+. In the sidebar, click *Triggers*.
 . Edit an existing GitHub App trigger or add a new GitHub App trigger.
 . In the *Run on* dropdown list, select *PR opened or pushed to, default branch pushes, tag pushes*.
 
@@ -61,7 +61,7 @@ By default, CircleCI builds every commit from every branch. This behavior may be
 The default behavior can be modified as follows:
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
-. In the navigation menu of the *Project Settings* page, click *Advanced*
+. In the sidebar, click *Advanced*
 . Enable the *Only build pull requests* option.
 
 image::triggers/advanced-only-build-prs.png[Enable the Only build pull requests option]
@@ -82,7 +82,7 @@ NOTE: CircleCI will always build all commits from your project's _default branch
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
-. In the navigation menu of the *Project Settings* page, click *Triggers*.
+. In the sidebar, click *Triggers*.
 . Edit an existing GitLab trigger or add a new GitLab trigger.
 . In the *Filters* section, select *Only Build Merge Requests*.
 
@@ -94,7 +94,7 @@ image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only Build Merge
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
-. In the navigation menu of the *Project Settings* page, click *Triggers*.
+. In the sidebar, click *Triggers*.
 . Edit an existing GitLab self-managed trigger or add a new GitLab self-managed trigger.
 . In the *Filters* section, select *Only Build Merge Requests*.
 
