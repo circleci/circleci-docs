@@ -134,7 +134,7 @@ In summary, the average improvements of version 3.1 are as follows:
 | 5%               | 1%           | 56%                | 49%
 |==================================================================
 
-There are some instances where version 3.1 showed lower performance than the 3.0 self-hosted runner. In these cases, the differences are on the order of milliseconds and can often be attributed to cluster, network, and compute conditions. While some differences may appear extreme, they are often outliers in the 95th (or higher) percentile. The table above is the result of repeating the experiment four times for each row. When these extremes are considered in the context of the rest of the experiments, the net result is still positive for run times.
+In some instances, version 3.1 showed lower performance than the 3.0 self-hosted runner. In these cases, the differences are on the order of milliseconds and can often be attributed to cluster, network, and compute conditions. While some differences may appear extreme, they are often outliers in the 95th (or higher) percentile. The table above is the result of repeating the experiment four times for each row. When these extremes are considered in the context of the rest of the experiments, the net result is still positive for run times.
 
 In queuing, where the most dramatic performance increase is observed, the results are much more consistent and are less influenced by external factors such as remote API calls.
 
@@ -159,23 +159,23 @@ This configuration makes a slight trade off in stability, a slightly higher rate
 * 1 replica of container agent
 * 20 concurrent tasks per replica
 
-This configuration trades off throughput for higher stability, with minimal infrastructure failures. This is the default configuration for the container agent Helm chart.
+This configuration trades off throughput for higher stability, with minimal infrastructure failures. Note this is the default configuration for the container agent Helm chart.
 
 When tuning a cluster for performance there are three main variables to consider: container agent replica count, maximum concurrent tasks per replica, and node pool configuration.
 
 [#container-agent-replica-count]
 == Container agent replica count
-The more replicas of container agent, the faster tasks will get claimed, as each replica runs its own collection of claiming loops. This is beneficial if you have sudden large backlogs of tasks to run, as tasks will be able to be claimed more quickly, and have a pod spec submitted to the Kubernetes cluster for scheduling. It is worth considering that the more replicas used (and more tasks that are able to launch concurrently) the greater the strain on the K8s control plane, and the more prone you will be to task start failures. CircleCI container runners will attempt to reschedule a task up to three times before declaring an infrastructure failure.
+The more replicas of container agent, the faster tasks will get claimed, as each replica runs its own collection of claiming loops. Having more replicas is beneficial if you have sudden large backlogs of tasks to run, as tasks will be able to be claimed more quickly, and have a pod spec submitted to the Kubernetes cluster for scheduling. It is worth considering that the more replicas used (and more tasks that are able to launch concurrently) the greater the strain on the K8s control plane, and the more prone you will be to task start failures. CircleCI container runners will attempt to reschedule a task up to three times before declaring an infrastructure failure.
 
 [#maximum-concurrent-tasks-per-replica]
 == Maximum concurrent tasks per replica
-This number in particular is very sensitive to node types and counts. The more tasks that are attempted to launch in a short window, the higher the strain on the Kubernetes cluster's control plane, as well as the individual Kubelets, which are responsible for the pods and containers on a specific node. As node power and count increase, the impact of concurrent tasks on a cluster decreases. The lower the number of maximum concurrent tasks, the greater the reliability of tasks successfully starting and not experiencing an infrastructure failure.
+This number in particular is very sensitive to node types and counts. The more tasks that are attempted to launch in a short window, the higher the strain on the Kubernetes cluster's control plane, as well as the individual kubelets, which are responsible for the pods and containers on a specific node. As node power and count increase, the impact of concurrent tasks on a cluster decreases. The lower the number of maximum concurrent tasks, the greater the reliability of tasks successfully starting and not experiencing an infrastructure failure.
 
 The likelihood of an infrastructure failure for a task decreases as node count and resources are increased, particularly CPU.
 
 [#node-types-and-count]
 == Node types and count
-The recommendations already presented are based on the reference cluster configuration. As a node pool grows, or is set to an instance type with greater resources, task execution becomes more reliable. When sizing a cluster, you should add headspace beyond that expected for an individual task. The Kubelet and container driver share the same resources as the pods on the node, and the more resource starved they become the more prone to long queue times and infrastructure failures tasks become. The more distributed pods are able to be scheduled the less pressure and backlog are applied to the individual Kubelets and container engines, resulting in shorter queueing times.
+The recommendations already presented are based on the reference cluster configuration. As a node pool grows, or is set to an instance type with greater resources, task execution becomes more reliable. When sizing a cluster, you should add headspace beyond that expected for an individual task. The kubelet and container driver share the same resources as the pods on the node, and the more resource starved they become the more prone to long queue times and infrastructure failures tasks become. The more distributed pods are able to be scheduled the less pressure and backlog are applied to the individual kubelets and container engines, resulting in shorter queueing times.
 
 
 [#troubleshooting]
