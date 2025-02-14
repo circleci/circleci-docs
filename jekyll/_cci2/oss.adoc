@@ -81,7 +81,7 @@ NOTE: CircleCI will always build all commits from your project's _default branch
 [.tab.create-project.GitLab]
 --
 
-NOTE: Although the Add/Edit Trigger pages in GitLab Cloud and GitLab self-managed slightly differ, the following steps will work for both.
+NOTE: Although the Add/Edit Trigger pages in GitLab Cloud and GitLab self-managed slightly differ, the following steps apply to both integrations.
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
