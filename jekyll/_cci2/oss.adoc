@@ -40,6 +40,10 @@ For more information, see the xref:set-environment-variable#set-an-environment-v
 [#only-build-pull-requests]
 === Only build pull requests
 
+Open source projects have significantly more commits than private projects, so building every commit from every branch might be excessive and costly (both in terms of time and credits usage).
+
+You can modify this behaviour by restricting builds to branches that have pull requests.
+
 NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
 
 [.tab.create-project.GitHub_App]
@@ -56,9 +60,6 @@ image::triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requ
 
 [.tab.create-project.GitHub_OAuth_/_Bitbucket_Cloud]
 --
-By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
-
-The default behavior can be modified as follows:
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 . In the sidebar, click *Advanced*
