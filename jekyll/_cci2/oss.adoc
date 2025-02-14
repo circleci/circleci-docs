@@ -78,8 +78,10 @@ Enabling *Only build pull requests* may result in duplicate builds. You can find
 NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
 --
 
-[.tab.create-project.GitLab_Cloud]
+[.tab.create-project.GitLab]
 --
+
+NOTE: Although the Add/Edit Trigger pages in GitLab Cloud and GitLab self-managed slightly differ, the following steps will work for both.
 
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
@@ -87,19 +89,11 @@ include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Ins
 . Edit an existing GitLab trigger or add a new GitLab trigger.
 . In the *Filters* section, select *Only Build Merge Requests*.
 
-image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only Build Merge Requests option]
---
+.Trigger page for GitLab Cloud
+image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab Cloud trigger]
 
-[.tab.create-project.GitLab_self-managed]
---
-
-include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
-
-. In the sidebar, click *Triggers*.
-. Edit an existing GitLab self-managed trigger or add a new GitLab self-managed trigger.
-. In the *Filters* section, select *Only Build Merge Requests*.
-
-image::triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option]
+.Trigger page for GitLab self-managed
+image::triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab self-managed trigger]
 --
 
 
