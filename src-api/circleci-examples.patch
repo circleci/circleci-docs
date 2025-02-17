@@ -1,0 +1,4930 @@
+diff --git a/openapi.json b/openapi.json
+--- a/openapi.json
++++ b/openapi.json
+@@ -1,1 +1,47 @@
+         "/context": {
+             "get": {
+                 "description": "List all contexts for an owner.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/context": {
+             "post": {
+                 "description": "Creates a new context.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/context'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/context""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/context/{context-id}": {
+             "delete": {
+                 "description": "",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context/$context_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/context/{context-id}": {
+             "get": {
+                 "description": "Returns basic information about a context.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context/$context_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/context/{context-id}/environment-variable": {
+             "get": {
+                 "description": "List information about environment variables in a context, not including their values.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}/environment-variable'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context/$context_id/environment-variable""
++                    }
++                ]
+             }
+@@ -1,1 +1,55 @@
+         "/context/{context-id}/environment-variable/{env-var-name}": {
+             "put": {
+                 "description": "Create or update an environment variable within a context. Returns information about the environment variable, not including its value.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+env_var_name = 'example-env_var_name'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}/environment-variable/{env_var_name}'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.put(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PUT \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/context/$context_id/environment-variable/$env_var_name""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/context/{context-id}/environment-variable/{env-var-name}": {
+             "delete": {
+                 "description": "Delete an environment variable from a context.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+env_var_name = 'example-env_var_name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}/environment-variable/{env_var_name}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context/$context_id/environment-variable/$env_var_name""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/insights/pages/{project-slug}/summary": {
+             "get": {
+                 "description": "Get summary metrics and trends for a project at workflow and branch level.
+             Workflow runs going back at most 90 days are included in the aggregation window.
+             Trends are only supported upto last 30 days.
+             Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/pages/{project_slug}/summary'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/pages/$project_slug/summary""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/insights/time-series/{project-slug}/workflows/{workflow-name}/jobs": {
+             "get": {
+                 "description": "Get timeseries data for all jobs within a workflow. Hourly granularity data is only retained for 48 hours while daily granularity data is retained for 90 days.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+workflow_name = 'example-workflow_name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/time-series/{project_slug}/workflows/{workflow_name}/jobs'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/time-series/$project_slug/workflows/$workflow_name/jobs""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/insights/{org-slug}/summary": {
+             "get": {
+                 "description": "Gets aggregated summary metrics with trends for the entire org.
+              Also gets aggregated metrics and trends for each project belonging to the org.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+org_slug = 'example-org_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{org_slug}/summary'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$org_slug/summary""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/insights/{project-slug}/branches": {
+             "get": {
+                 "description": "Get a list of all branches for a specified project. The list will only contain branches currently available within Insights. The maximum number of branches returned by this endpoint is 5,000.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/branches'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/branches""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/insights/{project-slug}/flaky-tests": {
+             "get": {
+                 "description": "Get a list of flaky tests for a given project. Flaky tests are branch agnostic.
+             A flaky test is a test that passed and failed in the same commit.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/flaky-tests'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/flaky-tests""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/insights/{project-slug}/workflows": {
+             "get": {
+                 "description": "Get summary metrics for a project's workflows.  Workflow runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours.  Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/workflows'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/workflows""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/insights/{project-slug}/workflows/{workflow-name}": {
+             "get": {
+                 "description": "Get recent runs of a workflow. Runs going back at most 90 days are returned. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+workflow_name = 'example-workflow_name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/workflows/{workflow_name}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/workflows/$workflow_name""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/insights/{project-slug}/workflows/{workflow-name}/jobs": {
+             "get": {
+                 "description": "Get summary metrics for a project workflow's jobs. Job runs going back at most 90 days are included in the aggregation window. Metrics are refreshed daily, and thus may not include executions from the last 24 hours. Please note that Insights is not a financial reporting tool and should not be used for precise credit reporting.  Credit reporting from Insights does not use the same source of truth as the billing information that is found in the Plan Overview page in the CircleCI UI, nor does the underlying data have the same data accuracy guarantees as the billing information in the CircleCI UI.  This may lead to discrepancies between credits reported from Insights and the billing information in the Plan Overview page of the CircleCI UI.  For precise credit reporting, always use the Plan Overview page in the CircleCI UI.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+workflow_name = 'example-workflow_name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/workflows/{workflow_name}/jobs'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/workflows/$workflow_name/jobs""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/insights/{project-slug}/workflows/{workflow-name}/summary": {
+             "get": {
+                 "description": "Get the metrics and trends for a particular workflow on a single branch or all branches",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+workflow_name = 'example-workflow_name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/workflows/{workflow_name}/summary'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/workflows/$workflow_name/summary""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/insights/{project-slug}/workflows/{workflow-name}/test-metrics": {
+             "get": {
+                 "description": "Get test metrics for a project's workflows. Currently tests metrics are calculated based on 10 most recent workflow runs.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+workflow_name = 'example-workflow_name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/insights/{project_slug}/workflows/{workflow_name}/test-metrics'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/insights/$project_slug/workflows/$workflow_name/test-metrics""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/jobs/{job-id}/cancel": {
+             "post": {
+                 "description": "Cancel job with a given job ID.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+job_id = 'example-job_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/jobs/{job_id}/cancel'
+
+try:
+    response = requests.post(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/jobs/$job_id/cancel""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/me": {
+             "get": {
+                 "description": "Provides information about the user that is currently signed in.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/me'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/me""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/me/collaborations": {
+             "get": {
+                 "description": "Provides the set of organizations of which a user is a member or a collaborator.
+
+The set of organizations that a user can collaborate on is composed of:
+
+* Organizations that the current user belongs to across VCS types (e.g. BitBucket, GitHub)
+* The parent organization of repository that the user can collaborate on, but is not necessarily a member of
+* The organization of the current user's account",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/me/collaborations'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/me/collaborations""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/pipeline": {
+             "get": {
+                 "description": "Returns all pipelines for the most recently built projects (max 250) you follow in an organization.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/pipeline'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/pipeline""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/pipeline/continue": {
+             "post": {
+                 "description": "Continue a pipeline from the setup phase. For information on using pipeline parameters with dynamic configuration, see the [Pipeline values and parameters](https://circleci.com/docs/pipeline-variables/#pipeline-parameters-and-dynamic-configuration) docs.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/pipeline/continue'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/pipeline/continue""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/pipeline/{pipeline-id}": {
+             "get": {
+                 "description": "Returns a pipeline by the pipeline ID.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+pipeline_id = 'example-pipeline_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/pipeline/{pipeline_id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/pipeline/$pipeline_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/pipeline/{pipeline-id}/config": {
+             "get": {
+                 "description": "Returns a pipeline's configuration by ID.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+pipeline_id = 'example-pipeline_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/pipeline/{pipeline_id}/config'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/pipeline/$pipeline_id/config""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/pipeline/{pipeline-id}/values": {
+             "get": {
+                 "description": "Returns a map of pipeline values by pipeline ID. For more information see the [pipeline values reference page](https://circleci.com/docs/variables/#pipeline-values).",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+pipeline_id = 'example-pipeline_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/pipeline/{pipeline_id}/values'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/pipeline/$pipeline_id/values""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/pipeline/{pipeline-id}/workflow": {
+             "get": {
+                 "description": "Returns a paginated list of workflows by pipeline ID.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+pipeline_id = 'example-pipeline_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/pipeline/{pipeline_id}/workflow'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/pipeline/$pipeline_id/workflow""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/project/{project-slug}": {
+             "get": {
+                 "description": "Retrieves a project by project slug.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/project/{project-slug}/checkout-key": {
+             "post": {
+                 "description": "Not available to projects that use GitLab or GitHub App. Creates a new checkout key. This API request is only usable with a user API token.
+                           Please ensure that you have authorized your account with GitHub before creating user keys.
+                           This is necessary to give CircleCI the permission to create a user key associated with
+                           your GitHub user account. You can find this page by visiting Project Settings > Checkout SSH Keys",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/checkout-key'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/project/$project_slug/checkout-key""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/project/{project-slug}/checkout-key": {
+             "get": {
+                 "description": "Returns a sequence of checkout keys for `:project`.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/checkout-key'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/checkout-key""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/checkout-key/{fingerprint}": {
+             "delete": {
+                 "description": "Deletes the checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+fingerprint = 'example-fingerprint'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/checkout-key/{fingerprint}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/checkout-key/$fingerprint""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/checkout-key/{fingerprint}": {
+             "get": {
+                 "description": "Returns an individual checkout key via md5 or sha256 fingerprint. sha256 keys should be url-encoded.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+fingerprint = 'example-fingerprint'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/checkout-key/{fingerprint}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/checkout-key/$fingerprint""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/project/{project-slug}/envvar": {
+             "post": {
+                 "description": "Creates a new environment variable.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/envvar'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/project/$project_slug/envvar""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/project/{project-slug}/envvar": {
+             "get": {
+                 "description": "Returns four 'x' characters, in addition to the last four ASCII characters of the value, consistent with the display of environment variable values on the CircleCI website.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/envvar'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/envvar""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/envvar/{name}": {
+             "get": {
+                 "description": "Returns the masked value of environment variable :name.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+name = 'example-name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/envvar/{name}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/envvar/$name""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/envvar/{name}": {
+             "delete": {
+                 "description": "Deletes the environment variable named :name.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+name = 'example-name'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/envvar/{name}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/envvar/$name""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/job/{job-number}": {
+             "get": {
+                 "description": "Returns job details.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+job_number = 'example-job_number'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/job/{job_number}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/job/$job_number""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/job/{job-number}/cancel": {
+             "post": {
+                 "description": "Cancel job with a given job number.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+job_number = 'example-job_number'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/job/{job_number}/cancel'
+
+try:
+    response = requests.post(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/job/$job_number/cancel""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/project/{project-slug}/pipeline": {
+             "post": {
+                 "description": "Not available to projects that use GitLab or GitHub App. Triggers a new pipeline on the project. **GitHub App users should use the [new Trigger Pipeline API](#tag/Pipeline/operation/triggerPipelineRun)**.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/pipeline'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/project/$project_slug/pipeline""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/project/{project-slug}/pipeline": {
+             "get": {
+                 "description": "Returns all pipelines for this project.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/pipeline'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/pipeline""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/project/{project-slug}/pipeline/mine": {
+             "get": {
+                 "description": "Returns a sequence of all pipelines for this project triggered by the user.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/pipeline/mine'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/pipeline/mine""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/pipeline/{pipeline-number}": {
+             "get": {
+                 "description": "Returns a pipeline by the pipeline number.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+pipeline_number = 'example-pipeline_number'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/pipeline/{pipeline_number}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/pipeline/$pipeline_number""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/project/{project-slug}/schedule": {
+             "get": {
+                 "description": "Returns all schedules for this project.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/schedule'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/schedule""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/project/{project-slug}/schedule": {
+             "post": {
+                 "description": "Not yet available to projects that use GitLab or GitHub App. Creates a schedule and returns the created schedule.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/schedule'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/project/$project_slug/schedule""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/{job-number}/artifacts": {
+             "get": {
+                 "description": "Returns a job's artifacts.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+job_number = 'example-job_number'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/{job_number}/artifacts'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/$job_number/artifacts""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/project/{project-slug}/{job-number}/tests": {
+             "get": {
+                 "description": "Get test metadata for a build. In the rare case where there is more than 250MB of test data on the job, no results will be returned.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+project_slug = 'example-project_slug'
+job_number = 'example-job_number'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{project_slug}/{job_number}/tests'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$project_slug/$job_number/tests""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/schedule/{schedule-id}": {
+             "get": {
+                 "description": "Get a schedule by id.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+schedule_id = 'example-schedule_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/schedule/{schedule_id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/schedule/$schedule_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/schedule/{schedule-id}": {
+             "delete": {
+                 "description": "Not yet available to projects that use GitLab or GitHub App. Deletes the schedule by id.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+schedule_id = 'example-schedule_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/schedule/{schedule_id}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/schedule/$schedule_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/schedule/{schedule-id}": {
+             "patch": {
+                 "description": "Not yet available to projects that use GitLab or GitHub App. Updates a schedule and returns the updated schedule.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+schedule_id = 'example-schedule_id'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/schedule/{schedule_id}'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.patch(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PATCH \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/schedule/$schedule_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/user/{id}": {
+             "get": {
+                 "description": "Provides information about the user with the given ID.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+id = 'example-id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/user/{id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/user/$id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/webhook": {
+             "get": {
+                 "description": "Get a list of outbound webhooks that match the given scope-type and scope-id",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/webhook'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/webhook""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/webhook": {
+             "post": {
+                 "description": "Creates an outbound webhook.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/webhook'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/webhook""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/webhook/{webhook-id}": {
+             "put": {
+                 "description": "Updates an outbound webhook.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+webhook_id = 'example-webhook_id'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/webhook/{webhook_id}'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.put(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PUT \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/webhook/$webhook_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/webhook/{webhook-id}": {
+             "get": {
+                 "description": "Get an outbound webhook by id.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+webhook_id = 'example-webhook_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/webhook/{webhook_id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/webhook/$webhook_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/webhook/{webhook-id}": {
+             "delete": {
+                 "description": "Deletes an outbound webhook",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+webhook_id = 'example-webhook_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/webhook/{webhook_id}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/webhook/$webhook_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/workflow/{id}": {
+             "get": {
+                 "description": "Returns summary fields of a workflow by ID.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+id = 'example-id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/workflow/{id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/workflow/$id""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/workflow/{id}/approve/{approval_request_id}": {
+             "post": {
+                 "description": "Approves a pending approval job in a workflow.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+id = 'example-id'
+approval_request_id = 'example-approval_request_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/workflow/{id}/approve/{approval_request_id}'
+
+try:
+    response = requests.post(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/workflow/$id/approve/$approval_request_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/workflow/{id}/cancel": {
+             "post": {
+                 "description": "Cancels a running workflow.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+id = 'example-id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/workflow/{id}/cancel'
+
+try:
+    response = requests.post(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/workflow/$id/cancel""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/workflow/{id}/job": {
+             "get": {
+                 "description": "Returns a sequence of jobs for a workflow.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+id = 'example-id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/workflow/{id}/job'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/workflow/$id/job""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/workflow/{id}/rerun": {
+             "post": {
+                 "description": "Reruns a workflow.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+id = 'example-id'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/workflow/{id}/rerun'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/workflow/$id/rerun""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/org/{orgID}/oidc-custom-claims": {
+             "delete": {
+                 "description": "Deletes org-level custom claims of OIDC identity tokens",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+orgID = 'example-orgID'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/org/{orgID}/oidc-custom-claims'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/org/$orgID/oidc-custom-claims""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/org/{orgID}/oidc-custom-claims": {
+             "get": {
+                 "description": "Fetches org-level custom claims of OIDC identity tokens",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+orgID = 'example-orgID'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/org/{orgID}/oidc-custom-claims'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/org/$orgID/oidc-custom-claims""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/org/{orgID}/oidc-custom-claims": {
+             "patch": {
+                 "description": "Creates/Updates org-level custom claims of OIDC identity tokens",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+orgID = 'example-orgID'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/org/{orgID}/oidc-custom-claims'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.patch(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PATCH \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/org/$orgID/oidc-custom-claims""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/org/{orgID}/project/{projectID}/oidc-custom-claims": {
+             "delete": {
+                 "description": "Deletes project-level custom claims of OIDC identity tokens",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+orgID = 'example-orgID'
+projectID = 'example-projectID'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/org/{orgID}/project/{projectID}/oidc-custom-claims'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/org/$orgID/project/$projectID/oidc-custom-claims""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/org/{orgID}/project/{projectID}/oidc-custom-claims": {
+             "get": {
+                 "description": "Fetches project-level custom claims of OIDC identity tokens",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+orgID = 'example-orgID'
+projectID = 'example-projectID'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/org/{orgID}/project/{projectID}/oidc-custom-claims'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/org/$orgID/project/$projectID/oidc-custom-claims""
++                    }
++                ]
+             }
+@@ -1,1 +1,55 @@
+         "/org/{orgID}/project/{projectID}/oidc-custom-claims": {
+             "patch": {
+                 "description": "Creates/Updates project-level custom claims of OIDC identity tokens",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+orgID = 'example-orgID'
+projectID = 'example-projectID'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/org/{orgID}/project/{projectID}/oidc-custom-claims'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.patch(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PATCH \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/org/$orgID/project/$projectID/oidc-custom-claims""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/owner/{ownerID}/context/{context}/decision": {
+             "get": {
+                 "description": "This endpoint will return a list of decision audit logs that were made using this owner's policies.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/decision'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/decision""
++                    }
++                ]
+             }
+@@ -1,1 +1,55 @@
+         "/owner/{ownerID}/context/{context}/decision": {
+             "post": {
+                 "description": "This endpoint will evaluate input data (config+metadata) against owner's stored policies and return a decision.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/decision'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/decision""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/owner/{ownerID}/context/{context}/decision/settings": {
+             "get": {
+                 "description": "This endpoint retrieves the current decision settings (eg enable/disable policy evaluation)",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/decision/settings'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/decision/settings""
++                    }
++                ]
+             }
+@@ -1,1 +1,55 @@
+         "/owner/{ownerID}/context/{context}/decision/settings": {
+             "patch": {
+                 "description": "This endpoint allows modifying decision settings (eg enable/disable policy evaluation)",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/decision/settings'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.patch(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PATCH \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/decision/settings""
++                    }
++                ]
+             }
+@@ -1,1 +1,49 @@
+         "/owner/{ownerID}/context/{context}/decision/{decisionID}": {
+             "get": {
+                 "description": "This endpoint will retrieve a decision for a given decision log ID",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+decisionID = 'example-decisionID'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/decision/{decisionID}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/decision/$decisionID""
++                    }
++                ]
+             }
+@@ -1,1 +1,49 @@
+         "/owner/{ownerID}/context/{context}/decision/{decisionID}/policy-bundle": {
+             "get": {
+                 "description": "This endpoint will retrieve a policy bundle for a given decision log ID",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+decisionID = 'example-decisionID'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/decision/{decisionID}/policy-bundle'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/decision/$decisionID/policy-bundle""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/owner/{ownerID}/context/{context}/policy-bundle": {
+             "get": {
+                 "description": "This endpoint will retrieve a policy bundle",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/policy-bundle'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/policy-bundle""
++                    }
++                ]
+             }
+@@ -1,1 +1,55 @@
+         "/owner/{ownerID}/context/{context}/policy-bundle": {
+             "post": {
+                 "description": "This endpoint replaces the current policy bundle with the provided policy bundle",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/policy-bundle'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/policy-bundle""
++                    }
++                ]
+             }
+@@ -1,1 +1,49 @@
+         "/owner/{ownerID}/context/{context}/policy-bundle/{policyName}": {
+             "get": {
+                 "description": "This endpoint will retrieve a policy document.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+ownerID = 'example-ownerID'
+context = 'example-context'
+policyName = 'example-policyName'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/owner/{ownerID}/context/{context}/policy-bundle/{policyName}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/owner/$ownerID/context/$context/policy-bundle/$policyName""
++                    }
++                ]
+             }
+@@ -1,1 +1,47 @@
+         "/context/{context_id}/restrictions": {
+             "get": {
+                 "description": "[__EXPERIMENTAL__] Gets a list of project restrictions associated with a context.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}/restrictions'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context/$context_id/restrictions""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/context/{context_id}/restrictions": {
+             "post": {
+                 "description": "[__EXPERIMENTAL__] Creates project restriction on a context.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}/restrictions'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/context/$context_id/restrictions""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/context/{context_id}/restrictions/{restriction_id}": {
+             "delete": {
+                 "description": "[__EXPERIMENTAL__] Deletes a project restriction on a context.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+context_id = 'example-context_id'
+restriction_id = 'example-restriction_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/context/{context_id}/restrictions/{restriction_id}'
+
+try:
+    response = requests.delete(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X DELETE \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/context/$context_id/restrictions/$restriction_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,49 @@
+         "/project/{provider}/{organization}/{project}": {
+             "post": {
+                 "description": "[__EXPERIMENTAL__]  Creates a new CircleCI project, and returns a list of the default advanced settings. Can only be called on a repo with a main branch and an existing config.yml file. Not yet available to projects that use GitLab or GitHub App.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+provider = 'example-provider'
+organization = 'example-organization'
+project = 'example-project'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{provider}/{organization}/{project}'
+
+try:
+    response = requests.post(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$provider/$organization/$project""
++                    }
++                ]
+             }
+@@ -1,1 +1,49 @@
+         "/project/{provider}/{organization}/{project}/settings": {
+             "get": {
+                 "description": "[__EXPERIMENTAL__] Returns a list of the advanced settings for a CircleCI project, whether enabled (true) or not (false).",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+provider = 'example-provider'
+organization = 'example-organization'
+project = 'example-project'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/project/{provider}/{organization}/{project}/settings'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/project/$provider/$organization/$project/settings""
++                    }
++                ]
+             }
+@@ -1,1 +1,56 @@
+         "/project/{provider}/{organization}/{project}/settings": {
+             "patch": {
+                 "description": "[__EXPERIMENTAL__] Updates one or more of the advanced settings for a CircleCI project.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+provider = 'example-provider'
+organization = 'example-organization'
+project = 'example-project'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/project/{provider}/{organization}/{project}/settings'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.patch(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X PATCH \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/project/$provider/$organization/$project/settings""
++                    }
++                ]
+             }
+@@ -1,1 +1,54 @@
+         "/organizations/{org_id}/usage_export_job": {
+             "post": {
+                 "description": "Submits a request to create a usage export for an organization.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+org_id = 'example-org_id'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/organizations/{org_id}/usage_export_job'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/organizations/$org_id/usage_export_job""
++                    }
++                ]
+             }
+@@ -1,1 +1,48 @@
+         "/organizations/{org_id}/usage_export_job/{usage_export_job_id}": {
+             "get": {
+                 "description": "Gets a usage export for an organization.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+org_id = 'example-org_id'
+usage_export_job_id = 'example-usage_export_job_id'
+
+headers = {
+    'Circle-Token': circle_token
+}
+
+url = f'https://circleci.com/api/v2/organizations/{org_id}/usage_export_job/{usage_export_job_id}'
+
+try:
+    response = requests.get(
+        url,
+        headers=headers
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X GET \
+     -H "Circle-Token: $CIRCLE_TOKEN" \ \
+     \
+     "https://circleci.com/api/v2/organizations/$org_id/usage_export_job/$usage_export_job_id""
++                    }
++                ]
+             }
+@@ -1,1 +1,56 @@
+         "/project/{provider}/{organization}/{project}/pipeline/run": {
+             "post": {
+                 "description": "Trigger a pipeline given a pipeline definition ID. Supports all integrations except GitLab.",
++                "x-codeSamples": [
++                    {
++                        "lang": "Go",
++                        "source": "package main
+# ... [rest of the Go template]
+"
++                    },
++                    {
++                        "lang": "NodeJS",
++                        "source": "// ... [Node.js template code]"
++                    },
++                    {
++                        "lang": "Python",
++                        "source": "import os
+import requests
+from typing import Dict
+
+# Get token from environment
+circle_token = os.getenv('CIRCLE_TOKEN')
+if not circle_token:
+    raise ValueError('CIRCLE_TOKEN environment variable is required')
+
+provider = 'example-provider'
+organization = 'example-organization'
+project = 'example-project'
+
+headers = {
+    'Circle-Token': circle_token,
+    'Content-Type': 'application/json'
+}
+
+url = f'https://circleci.com/api/v2/project/{provider}/{organization}/{project}/pipeline/run'
+payload = {
+    'example': 'data'
+}
+try:
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+    response.raise_for_status()
+    data = response.json()
+except requests.exceptions.RequestException as e:
+    print(f"Error making request: {e}")
+    raise"
++                    },
++                    {
++                        "lang": "Shell",
++                        "source": "# Export your CircleCI token as an environment variable
+export CIRCLE_TOKEN="your-token"
+
+curl -X POST \
+     -H "Circle-Token: $CIRCLE_TOKEN" \
+     -H "Content-Type: application/json"  \
+     -d '{
+       "example": "data"
+     }' \
+     "https://circleci.com/api/v2/project/$provider/$organization/$project/pipeline/run""
++                    }
++                ]
+             }

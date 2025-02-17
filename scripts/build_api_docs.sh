@@ -22,12 +22,16 @@ build_api_v2() {
     cd src-api;
     echo "Fetching OpenAPI spec."
     curl https://circleci.com/api/v2/openapi.json > openapi.json
-    echo "Adding code samples to openapi.json spec."
-    ./node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl" --input=openapi.json  > openapi-with-examples.json
-    echo "Merging in JSON patches to correct and augment the OpenAPI spec."
-    jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-patched.json
+    # echo "Adding code samples to openapi.json spec."
+    # ./node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl" --input=openapi.json  > openapi-with-examples.json
+    # echo "Merging in JSON patches to correct and augment the OpenAPI spec."
+    # jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-patched.json
+    echo "Run python script to generate examples"
+    python3 generate_examples.py
+    echo "Patch openapi < spec with examples we just created"
+    patch openapi.json  circleci-examples.patch
     echo Bundle api docs and remove unused components
-    npx redocly bundle openapi-patched.json --remove-unused-components --output openapi-final.json
+    npx redocly bundle openapi.json --remove-unused-components --output openapi-final.json
     echo "Lint API docs"
     npx redocly lint openapi-final.json
     echo "Build docs with redocly cli."
