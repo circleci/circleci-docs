@@ -40,13 +40,32 @@ For more information, see the xref:set-environment-variable#set-an-environment-v
 [#only-build-pull-requests]
 === Only build pull requests
 
-include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+Open source projects have significantly more commits than private projects, so building every commit from every branch might be excessive and costly (both in terms of time and credits usage).
 
-CAUTION: If your CircleCI account is authenticated via GitHub OAuth, and you have xref:github-integration#using-github-app-functionality[set up GitHub App pipelines], the "Only build pull request" setting will not work for your GitHub App pipelines but will work as expected for your GitHub OAuth pipelines.
+You can modify this behaviour by restricting builds to branches that have pull requests.
 
-By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
+NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
 
-To change this setting, go to the menu:Project Settings[Advanced] of your project and set the *Only build pull requests* option to _On_.
+[.tab.create-project.GitHub_App]
+--
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+
+. In the sidebar, click *Triggers*.
+. Edit an existing GitHub App trigger or add a new GitHub App trigger.
+. In the *Run on* dropdown list, select *PR opened or pushed to, default branch pushes, tag pushes*.
+
+image::triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
+--
+
+[.tab.create-project.GitHub_OAuth_/_Bitbucket_Cloud]
+--
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+. In the sidebar, click *Advanced*
+. Enable the *Only build pull requests* option.
+
+image::triggers/advanced-only-build-prs.png[Enable the Only build pull requests option]
 
 The ability to override the *Only build pull requests* setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
 
@@ -54,7 +73,29 @@ Override the *Only build pull requests* setting by utilizing the API and followi
 
 Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
 
-NOTE: CircleCI will build all commits from your project's _default branch and tags_ regardless of any setting.
+
+
+NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
+--
+
+[.tab.create-project.GitLab]
+--
+
+NOTE: Although the Add/Edit Trigger pages in GitLab Cloud and GitLab self-managed slightly differ, the following steps apply to both integrations.
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+
+. In the sidebar, click *Triggers*.
+. Edit an existing GitLab trigger or add a new GitLab trigger.
+. In the *Filters* section, select *Only Build Merge Requests*.
+
+.Trigger page for GitLab Cloud
+image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab Cloud trigger]
+
+.Trigger page for GitLab self-managed
+image::triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab self-managed trigger]
+--
+
 
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
