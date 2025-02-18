@@ -28,7 +28,7 @@ NOTE: Benchmarks were performed on a GKE (Google) cluster with 5 dedicated E2-me
 
 The tables below detail the aggregation of results from testing the link:https://circleci.com/changelog/runner-release-3-1-0/[3.1 self-hosted runner] (GOAT) compared to the same tests run with the 3.0 self-hosted runner. Version 3.1 introduced a major re-architecture of container runner to address performance, stability, and reliability. For more technical background on 3.1, refer to the link:https://github.com/circleci/runner-init?tab=readme-ov-file#background[runner-init project's README].
 
-Distilling the differences between GOAT and the 3.0 self-hosted runner, there is a net improvement across all four categories, with the most notable being the reduction in queue times. The 3.0 self-hosted runners also demonstrated a minor but notable decrease in failed runs, showing an improvement when run under stress.
+Distilling the differences between GOAT and the 3.0 self-hosted runner, there is a net improvement across all four categories, with the most notable being the reduction in queue times. GOAT also demonstrated a minor but notable decrease in failed runs, showing an improvement when run under stress.
 
 [.tab.runner_version.goat]
 --
@@ -562,7 +562,7 @@ h| Improvement From 3.0
 |===
 --
 
-[.tab.runner_version.self-hosted_runner_3.0]
+[.tab.runner_version.version_3.0]
 --
 [.table.table-striped]
 [cols="9", options="header", width="100%"]
@@ -610,7 +610,7 @@ h| Improvement From 3.0
 |===
 --
 
-In summary, the average improvements of version 3.1 are as follows:
+In summary, the average improvements of GOAT are as follows:
 
 [.table.table-striped]
 [cols="4", options="header", width="100%"]
@@ -619,7 +619,7 @@ In summary, the average improvements of version 3.1 are as follows:
 | 5%               | 1%           | 56%                | 49%
 |===
 
-In some instances, version 3.1 showed lower performance than the 3.0 self-hosted runner. In these cases, the differences are on the order of milliseconds and can often be attributed to cluster, network, and compute conditions. While some differences may appear extreme, they are often outliers in the 95th (or higher) percentile. The table above is the result of repeating the experiment four times for each row. When these extremes are considered in the context of the rest of the experiments, the net result is still positive for run times.
+In some instances, GOAT showed lower performance than the 3.0 self-hosted runner. In these cases, the differences are on the order of milliseconds and can often be attributed to cluster, network, and compute conditions. While some differences may appear extreme, they are often outliers in the 95th (or higher) percentile. The table above is the result of repeating the experiment four times for each row. When these extremes are considered in the context of the rest of the experiments, the net result is still positive for run times.
 
 In queuing, where the most dramatic performance increase is observed, the results are much more consistent and are less influenced by external factors such as remote API calls.
 
