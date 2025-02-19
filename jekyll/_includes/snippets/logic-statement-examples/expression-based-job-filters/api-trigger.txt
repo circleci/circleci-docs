@@ -1,0 +1,9 @@
+curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/pipeline/run \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "content-type: application/json" \
+  --data {
+  "definition_id": "<pipeline-definition-id>",
+  "config": {"branch": "<your-branch-name>"},
+  "checkout": {"branch": "<your-branch-name>"},
+  "parameters": {"run-storybook-tests": "true"}
+  }
