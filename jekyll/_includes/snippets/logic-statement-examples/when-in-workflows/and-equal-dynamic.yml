@@ -1,6 +1,6 @@
 workflows:
   nightly-run-workflow:
-  # run workflow only when the nightly_build pipeline is triggered
+# The "nightly-run-workflow" workflow only runs when the trigger is a scheduled pipeline AND the name of that trigger is "nightly_build"
     when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "nightly_build"
     jobs:
       - build
