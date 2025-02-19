@@ -10,3 +10,4 @@ workflows:
     when: << pipeline.parameters.run_integration_tests >>
     jobs:
       - mytestjob
+# The "integration_tests" workflow only runs if the pipeline parameter "run_integration_tests" is true.

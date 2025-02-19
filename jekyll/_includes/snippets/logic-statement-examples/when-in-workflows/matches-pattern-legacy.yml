@@ -9,3 +9,5 @@ workflows:
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
             - << pipeline.parameters.deploy-canary >>
+# The "my-workflow" workflow only runs if the branch name is not "main" 
+# AND either the pipeline is triggered by a tag named "canary" OR the pipeline parameter "deploy-canary" is true.

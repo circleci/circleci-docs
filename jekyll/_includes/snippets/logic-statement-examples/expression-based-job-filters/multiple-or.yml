@@ -15,7 +15,9 @@ workflows:
       - storybook-tests:
           requires:
             - setup
+# The "storybook-tests" job only runs if the "setup" job completes successfully
           filters: |
             pipeline.parameters.run-storybook-tests
             or pipeline.git.branch == "dry-run-deploy"
             or pipeline.git.branch starts-with "deploy"
+# AND if either the "run-storybook-test"s pipeline parameter is true OR the branch name is "dry-run-deploy" OR the branch name starts with "deploy".

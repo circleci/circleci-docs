@@ -4,3 +4,4 @@ workflows:
       or:
         - equal: [ main, << pipeline.git.branch >> ]
         - equal: [ staging, << pipeline.git.branch >> ]
+# The "my-workflow" workflow only runs if the branch name is "main" OR "staging".
