@@ -30,7 +30,7 @@ Adding one of these tags skips pipeline execution for all the commits included i
 
 === The skip CI process
 
-When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this infomation to decide not to build your project.
+When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this information to decide not to build your project.
 
 The skip process is different depending on your VCS integration, as follows:
 

@@ -493,7 +493,7 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM service
 
-VM service is used to configure virtual machines for jobs that run in Linux VM, Windows amd Arm VM execution environments, and those that are configured to use link:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+VM service is used to configure virtual machines for jobs that run in Linux VM, Windows and Arm VM execution environments, and those that are configured to use link:/docs/configuration-reference/#setupremotedocker[remote Docker]. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
 NOTE: Once you have completed the server installation process you can further configure VM service, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
 
@@ -581,7 +581,7 @@ There are two ways to authenticate CircleCI with your cloud provider: IAM Roles 
 --
 The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
 
-. *Create indentity provider*
+. *Create identity provider*
 +
 Create an IAM OIDC identity provider for your EKS Cluster:
 +
@@ -1015,7 +1015,7 @@ We recommend you create a unique service account used exclusively by VM Service.
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ----
 +
-NOTE: If your are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
+NOTE: If you are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
 
 . *Get the service account email address*
 +
@@ -1042,7 +1042,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *Enable Workload Identity for Service Account or get JSON key file*
 +
-Choose one of the following options, depending on whether your are using Workload Identity.
+Choose one of the following options, depending on whether you are using Workload Identity.
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --

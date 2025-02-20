@@ -78,7 +78,7 @@ Some notes on the examples below:
 
 * For a full list of options when using this command, see the xref:parallelism-faster-jobs#the-tests-run-command[test splitting overview] page.
 * Each example below includes a parallelism level of four, that is, four identical execution environments will be created to split your tests across. You can choose a parallelism level to suit your project.
-* Each example below shows configuing your tests to be split by timing data. This is the recommended way to split tests, but other options include splitting by name or by file size. Read more about these options in the xref:parallelism-faster-jobs#introduction[Test splitting and parallelism overview].
+* Each example below shows configuring your tests to be split by timing data. This is the recommended way to split tests, but other options include splitting by name or by file size. Read more about these options in the xref:parallelism-faster-jobs#introduction[Test splitting and parallelism overview].
 * On each successful run of a test suite, CircleCI saves timing data from the directory specified by the path in the xref:configuration-reference#storetestresults[`store_test_results` step]. This timing data consists of how long each test took to complete per file name or class name. The available timing data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 * If no timing data is found, you will receive a message: `Error auto-detecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 * If you do not use `store_test_results`, there will be no timing data available to split your tests.

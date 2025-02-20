@@ -290,7 +290,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 === 2. Update policy with your details
 
 . Replace `<project-ID>` with the ID for the project you want to restrict:
-** In the CircleCI web app, select **Projects** from the sidebar, and click the elipsis (`...`) next to your project. Select **Project Settings** to locate the Project ID.
+** In the CircleCI web app, select **Projects** from the sidebar, and click the ellipsis (`...`) next to your project. Select **Project Settings** to locate the Project ID.
 
 . Replace `<context-1>` with the name of the context you want to block the use of. You can add multiple contexts as an array, or stick with one for now.
 ** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
@@ -387,7 +387,7 @@ In the following steps you will replace `<project-ID-1>` and `<context-1>` (and 
 === 2. Update policy with your details
 
 . Replace `<project-ID-1>` with the ID for the first project you want to add to the allow-list. You can add multiple project IDs as an array, or stick with one for now:
-** In the CircleCI web app, select **Projects** from the sidebar, and click the elipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
+** In the CircleCI web app, select **Projects** from the sidebar, and click the ellipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
 
 . Replace `<context-1>` with the name of the first context you want to restrict the use of. You can add multiple contexts as an array, or stick with one for now.
 ** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.

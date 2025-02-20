@@ -682,11 +682,11 @@ replicas to deploy for the machine-provisioner-provisioner deployment.
 |`+"512Mi"+` |Memory limit for the machine-provisioner-leader deployment
 
 |machine_provisioner.terminatePendingLinuxAfter |string |`+"6m"+` |Linux
-pending machine timeout. Machine instances will be terminted if they
+pending machine timeout. Machine instances will be terminated if they
 take longer than this to start
 
 |machine_provisioner.terminatePendingWindowsAfter |string |`+"6m"+`
-|Windows pending machine timeout. Machine instances will be terminted if
+|Windows pending machine timeout. Machine instances will be terminated if
 they take longer than this to start
 
 |mongodb.architecture |string |`+"standalone"+` |

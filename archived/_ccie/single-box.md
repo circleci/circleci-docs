@@ -82,7 +82,7 @@ for specific instructions.
 <li>(Optional) To enable developers to SSH into builds for debugging purposes, open ports 64535-65535 for Custom TCP.
 </li>
 
-<li>After the VM is lauched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process.
+<li>After the VM is launched, go to the public or private IP address or hostname for the VM and click Get Started to complete the rest of the guided installation process.
 </li> 
 
 <li>Choose an SSL certificate option. By default, all machines in a CircleCI Enterprise installation verify SSL certificates for the GitHub Enterprise instance. If you're using a self-signed cert,

@@ -122,7 +122,7 @@ This procedure uses the `awscli` to enable CircleCI-installed AWS instances acce
      {: class="table table-striped"}
 
 
-6. Place the Builder instaces in a security group with the following attributes:
+6. Place the Builder instances in a security group with the following attributes:
 
 - Whitelist all traffic from/to builder boxes and service box
 - Whitelist ports 22, 80, 443, 64535-65535 for users.  The high ports are used for the SSH feature, so that users can `ssh` into the build containers.

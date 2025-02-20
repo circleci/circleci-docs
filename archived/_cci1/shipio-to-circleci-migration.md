@@ -13,7 +13,7 @@ Coming from Ship.io? You've come to the right place, we'll help you get started.
 For iOS projects, please [contact support](https://support.circleci.com/hc/en-us) with the name of your GitHub user or organization for access to the iOS build system. Once you've been enabled,
 
 1. Add your project on the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard.
-2. Turn on the "Build iOS project" setting through the **Project Settings > Build Settings > Build Environment** page of your your project.
+2. Turn on the "Build iOS project" setting through the **Project Settings > Build Settings > Build Environment** page of your project.
 3. Push a new commit to start a build on the iOS build system.
 
 ## Getting Started with Android
@@ -112,7 +112,7 @@ test:
 ```
 ### Run scripts
 You can specify which scripts to run in your [circle.yml]( {{ site.baseurl }}/1.0/configuration/).
-The following .yml snippit would trigger script.sh to run during each build.
+The following .yml snippet would trigger script.sh to run during each build.
 
 ```
 machine:

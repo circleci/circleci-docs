@@ -195,7 +195,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-The `circleci tests split` command has been superceded by `circleci tests run` as this command also gives you access to the [rerun failed tests](/docs/rerun-failed-tests/) options.
+The `circleci tests split` command has been superseded by `circleci tests run` as this command also gives you access to the [rerun failed tests](/docs/rerun-failed-tests/) options.
 
 Integrating with some [third party tools](#other-ways-to-split-tests) might still require you to use `circleci tests split`. For usage steps see, [Use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests/#tests-split-examples).
 

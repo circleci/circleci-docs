@@ -41,7 +41,7 @@ Alternatively you can SSH into the services machine and stop the CircleCI applic
 replicatedctl app stop
 ```
 +
-You can check the status using the followng:
+You can check the status using the following:
 +
 ```shell
 replicatedctl app status inspect

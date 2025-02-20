@@ -216,7 +216,7 @@ The latest version of Scala available on 12.04 is:
 - `{{ version }}`
 {% endfor %}
 
-You can find the version available on our [14.04 buld image here](https://circleci.com/docs/1.0/build-image-trusty/).
+You can find the version available on our [14.04 build image here](https://circleci.com/docs/1.0/build-image-trusty/).
 
 ### Clojure
 

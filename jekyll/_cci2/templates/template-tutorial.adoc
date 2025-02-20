@@ -156,7 +156,7 @@ Each main step in the tutorial should be under its own level 2 (`==`) heading, u
 [#conclusion]
 == Conclusion
 
-End the tutoral with a conclusion section that summarizes what was covered.
+End the tutorial with a conclusion section that summarizes what was covered.
 
 [#next-steps]
 == Next steps

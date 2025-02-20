@@ -18,7 +18,7 @@ Continuous Deployment easy.
 
 Tell CircleCI about your deployment requirements in the `deployment`
 section of your [circle.yml]( {{ site.baseurl }}/1.0/configuration/) file.
-Within this section, you can can define custom deployment steps for each
+Within this section, you can define custom deployment steps for each
 branch, directing CircleCI to use specific deployment tools or custom scripts.
 Deployment commands are triggered only after a successful build.
 

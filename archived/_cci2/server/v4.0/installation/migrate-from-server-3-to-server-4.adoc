@@ -164,7 +164,7 @@ Below are the changes you should expect to see in `helm-diff` output:
 * GitHub checksum is added as annotation
 * Secret and annotation for `distributor-*` deployments are deleted
 * Upstream chart `postgresql` is updated
-* Upsteam charts will be recreated (delete and create):
+* Upstream charts will be recreated (delete and create):
 ** Prometheus (circleci-server-kube-state-metrics, node-exporter, prometheus-server)
 ** MongoDB
 ** RabbitMQ

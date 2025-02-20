@@ -183,7 +183,7 @@ curl -L -H "Circle-Token: <circle-token>" https://132-55688803-gh.circle-artifac
 ```
 
 **Notes:**
-- Make sure your HTTP client is configured to follow follow redirects as the artifact URLs can respond with
+- Make sure your HTTP client is configured to follow redirects as the artifact URLs can respond with
 an HTTP `3xx` status code (the `-L` switch in `curl` will achieve this).
 - `:token` is an API token with 'view-builds' scope.
 

@@ -1018,7 +1018,7 @@ We recommend you create a unique service account used exclusively by VM Service.
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ----
 +
-NOTE: If your are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
+NOTE: If you are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
 
 . *Get the service account email address*
 +
@@ -1045,7 +1045,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *Enable Workload Identity for Service Account or get JSON key file*
 +
-Choose one of the following options, depending on whether your are using Workload Identity.
+Choose one of the following options, depending on whether you are using Workload Identity.
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
