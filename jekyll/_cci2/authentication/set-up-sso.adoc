@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview#prerequisites-and-limitations[Prerequisites and Limitations]
+NOTE: SAML **Single Sign-On (SSO)** for CircleCI is available for Scale Plan customers. See xref:sso-overview#prerequisites-and-limitations[Prerequisites and Limitations]
 for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
 
 == Setup SAML SSO
