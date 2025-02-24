@@ -238,6 +238,8 @@ PowerShell
 [Pp]reallocate
 [Pp]reallocated?
 [Pp]reallocation
+[Pp]reconfigur
+[Pp]reconfigured
 [Pp]reemptions?
 [Pp]rescaling
 [Pp]rox[ying|ied]
@@ -282,6 +284,7 @@ Selenium
 SemVer
 Server Plan
 \b[Ss]hellchecking\b
+[Ss]harded
 \b[Ss]ingle sign-on\b
 SLAs?
 Slanger
@@ -317,6 +320,7 @@ TypeScript
 Ubuntu
 UI
 UIDs?
+[Uu]int
 [Uu]ncheck
 [Uu]nchecked
 [Uu]ndeploy
