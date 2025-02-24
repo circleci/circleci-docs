@@ -234,6 +234,8 @@ PowerShell
 [Pp]reallocate
 [Pp]reallocated?
 [Pp]reallocation
+[Pp]reconfigur
+[Pp]reconfigured
 [Pp]reemptions?
 [Pp]rescaling
 [Pp]rox[ying|ied]
