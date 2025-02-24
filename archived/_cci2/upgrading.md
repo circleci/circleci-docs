@@ -4,7 +4,7 @@ title: "Upgrading from CircleCI 1.0 Server Installation to 2.0"
 category: [administration]
 order: 11
 description: "How to upgrade from CircleCI 1.0 Server to CircleCI 2.0"
-verison:
+version:
 - Server v2.x
 - Server Admin
 ---

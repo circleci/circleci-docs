@@ -1231,7 +1231,7 @@ jobs:
             make install
             # Postruns
             cd $IPERF3_MAKE_PREFIX/bin
-            # Copy linked OpenSSL libraris to the current directory
+            # Copy linked OpenSSL libraries to the current directory
             # and tell the linker to refer to them
             otool -L iperf3 | grep openssl | awk '{ print $1 }' | while read dylib
             do

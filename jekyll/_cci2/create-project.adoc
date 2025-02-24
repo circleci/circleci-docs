@@ -210,7 +210,7 @@ To make changes to your pipeline, choose one of the following:
 
 * Edit the config file in your repository,
 * Select the ellipsis (icon:ellipsis-h[]) next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
-* Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
+* Access the configuration editor using the btn:[Edit Config] button from a Pipelines page when you have a project and branch selected.
 
 .Access and edit a config file
 image::create-project/configuration-file.png[Edit Configuration File]

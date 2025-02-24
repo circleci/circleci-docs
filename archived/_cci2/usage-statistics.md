@@ -69,7 +69,7 @@ The following sections provide information about the usage statistics CircleCI w
 
 ## Accessing usage data
 {: #accessing-usage-data }
-If you would like programatic access to this data in order to better understand your users you may run this command from the Services VM.
+If you would like programmatic access to this data in order to better understand your users you may run this command from the Services VM.
 
 `docker exec usage-stats /src/builds/extract`
 

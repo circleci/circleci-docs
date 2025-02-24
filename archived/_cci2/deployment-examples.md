@@ -41,7 +41,7 @@ For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, r
 {: #using-the-aws-s3-orb }
 {:.no_toc}
 
-For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/developer/orbs/orb/circleci/aws-s3) page. This section details the use of the AWS S3 orb and `version: 2.1` config for simple deployment, below we will look at the same example without orbs and using using `version: 2` config.
+For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/developer/orbs/orb/circleci/aws-s3) page. This section details the use of the AWS S3 orb and `version: 2.1` config for simple deployment, below we will look at the same example without orbs and using `version: 2` config.
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
@@ -572,7 +572,7 @@ In the following example, if the `build-job` passes and the current branch is `m
 version: 2
 
 jobs:
-  # build job ommitted for brevity
+  # build job omitted for brevity
   deploy-job:
     docker:
       - image: <docker-image-name-tag>

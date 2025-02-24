@@ -59,7 +59,7 @@ workflows:
       # This job uses the Android machine image by default
       - android/run-ui-tests:
           # Use pre-steps and post-steps if necessary
-          # to execute custom steps before and afer any of the built-in steps
+          # to execute custom steps before and after any of the built-in steps
           system-image: system-images;android-29;default;x86
 ```
 

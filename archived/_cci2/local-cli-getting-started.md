@@ -61,7 +61,7 @@ hub create
 
 Then follow any prompts regarding logins / authorizing the HUB CLI.
 
-If you aren't using Hub, head over to GitHub, login, and [create a new respository](https://github.com/new). Follow the instructions to commit and push to the remote. These instructions generally looks like this:
+If you aren't using Hub, head over to GitHub, login, and [create a new repository](https://github.com/new). Follow the instructions to commit and push to the remote. These instructions generally looks like this:
 
 ```shell
 git remote add origin git@github.com:<YOUR_USERNAME>/foo_ci.git
@@ -121,7 +121,7 @@ jobs:
       - run: echo "Hello World"
 ```
 
-Now let's validate your config to ensure it's useable. In the root of your project, run the following command:
+Now let's validate your config to ensure it's usable. In the root of your project, run the following command:
 
 ```shell
 circleci config validate

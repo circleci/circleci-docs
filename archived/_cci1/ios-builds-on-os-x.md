@@ -405,7 +405,7 @@ We have seen cases where some of the Ruby gems used during the build would produ
 
 ### Inconsistent Timeouts During Test Runs
 
-If you are seeing your UI tests time out in some of the builds, please try using both the raw `xcodebuild` command and the `xctool` command command we suggest [here](#build-commands). Sometimes the issue would only be present with one of these tools but not the other.
+If you are seeing your UI tests time out in some of the builds, please try using both the raw `xcodebuild` command and the `xctool` command we suggest [here](#build-commands). Sometimes the issue would only be present with one of these tools but not the other.
 
 ### Errors While Installing Code Signing Certificates
 

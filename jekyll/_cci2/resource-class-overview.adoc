@@ -21,7 +21,7 @@ Use resource classes to:
 [#introduction]
 == Introduction
 
-The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution evironment.
+The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution environment.
 
 The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 

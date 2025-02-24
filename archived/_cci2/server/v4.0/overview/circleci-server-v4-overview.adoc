@@ -188,7 +188,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | distributor-*
 | App Core
-| Responsible for accepting build requests and destributing the job to appropriate queues.
+| Responsible for accepting build requests and distributing the job to appropriate queues.
 |
 |
 
@@ -309,7 +309,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | webhook-service
 | App Core
-| Service reponsible for all webhooks, including management of state and handling events.
+| Service responsible for all webhooks, including management of state and handling events.
 |
 |
 

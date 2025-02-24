@@ -24,7 +24,7 @@ program, and configure your local Google Cloud SDK environment. It's pre-install
 [Google Developers Console](https://console.developers.google.com/), enable the
 **Google Cloud Testing API** and **Cloud Tool Results API** for the project under test. To enable these
 APIs, type these API names into the search box at the top of the console, and
-then click **Enable API** on the on the overview page for that API.
+then click **Enable API** on the overview page for that API.
 
 ## Set up Your Repository With CircleCI
 If you're not yet a CircleCI user, you can follow our
