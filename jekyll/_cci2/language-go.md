@@ -8,8 +8,6 @@ contentTags:
   - Server v4+
 ---
 
-{% include snippets/language-guided-tour-cards.md lang="go" demo_url_slug="go" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
-
 ## Overview
 {: #overview-new }
 
