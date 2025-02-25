@@ -89,7 +89,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**# ^4^
+| [.circle-green]#**Yes** ^4^#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
