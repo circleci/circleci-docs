@@ -208,7 +208,7 @@ manpage
 MFEs?
 minitest
 [Mm]ultiline
-namespace
+[Nn]amespaces?
 \bNew Relic\b
 nginx
 [Nn]ode
