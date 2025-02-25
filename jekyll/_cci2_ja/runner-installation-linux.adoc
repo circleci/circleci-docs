@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - クラウド
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.7
 ---
 = マシンランナーの Linux へのインストール
 :page-layout: classic-docs
@@ -26,7 +25,7 @@ contentTags:
 {% include snippets/runner/ja/terms.adoc %}
 
 [#create-namespace-and-resource-class]
-== 1. ネームスペースとリソースクラスの作成 
+== 1. ネームスペースとリソースクラスの作成
 
 [.tab.machine-runner.Web_app_installation]
 --

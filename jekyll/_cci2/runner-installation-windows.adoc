@@ -1,7 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.0 - v4.6
+  - Server v4.0 - v4.7
 ---
 = Machine runner installation on Windows
 :page-layout: classic-docs
