@@ -107,7 +107,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 
-^3^ _When Github Checks are enabled we automatically disable Github status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
+^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
 
 ^4^ _BitBucket Cloud status updates can be enabled and disabled via project settings._
 
