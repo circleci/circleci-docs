@@ -160,7 +160,7 @@ If the context is restricted with a group other than `All members`, you must be 
 
 NOTE: If a _deleted_ context is used in a job, the job will fail and show an error.
 
-[#security-goup-restrictions]
+[#security-group-restrictions]
 == Security group restrictions
 
 [#restrict-a-context-to-a-security-group-or-groups]
