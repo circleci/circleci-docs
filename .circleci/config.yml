@@ -1,5 +1,9 @@
 version: 2.1 # Set the CI version.
 
+executors:
+  runner:
+    machine: true
+    resource_class: domparfitt/test
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
@@ -109,6 +113,7 @@ workflows:
         - equal: [ preview, << pipeline.git.branch >> ]
         - << pipeline.parameters.run-schedule >>
     jobs:
+      - say-hello
       - vale/lint:
           reference_branch: master
 
@@ -144,9 +149,14 @@ workflows:
     when: << pipeline.parameters.run-schedule >>
     jobs:
       - trigger-deploy
-
 jobs:
-
+  say-hello:
+    executor: runner
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace.
     executor:
       name: ruby/default
