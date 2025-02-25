@@ -1,9 +1,5 @@
 version: 2.1 # Set the CI version.
 
-executors:
-  runner:
-    resource_class: circleci-runner/rhel8-amd64
-    machine: true
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
@@ -151,7 +147,8 @@ workflows:
       - trigger-deploy
 jobs:
   say-hello:
-    executor: runner
+    executor: ruby/default
+    tag: '3.1.3-browsers'
     steps:
       - checkout
       - run:
