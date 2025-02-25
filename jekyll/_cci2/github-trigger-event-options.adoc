@@ -14,23 +14,39 @@ When you create a trigger for a GitHub App pipeline, you can choose from a set o
 
 == Introduction
 
-When you set up a project in CircleCI you will also set up your first pipeline and trigger. This first trigger is, by default, an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event]. If you have a GitHub App account with CircleCI, you will see trigger options when creating a project in the CircleCI web app, and you have the option to change the trigger options for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Triggers].
+CircleCI projects have pipelines and trigger.
+
+* Pipelines define the various CI/CD 'units' of work that make up your project.
+* Triggers define when and how to initiate a pipeline.
+
+Configure triggers under menu:Project settings[Triggers]. You can configure triggers to initiate pipelines on a variety of events. This page focuses on events from GitHub, but you can find the full list of events that can trigger a pipeline on the xref:triggers-overview#[Trigger a pipeline] page.
+
+For a full list of GitHub trigger event options, see <<supported-trigger-options>>.
+
+.Trigger options under Project settings
+image::triggers/run-on-open.png[Set a trigger option for a project trigger]
+
+When you create or set up a project in CircleCI you will set up your first pipeline and trigger. This first trigger is, by default, an "all push" trigger, which corresponds to the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub App push event].
+
+include::../_includes/partials/tips/check-github-type-org.adoc[]
+
+If your CircleCI organization is integrated with GitHub only through the **GitHub App** (see tip above), you will see trigger options when creating a project in the CircleCI web app, and you have the option to change the trigger options for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Triggers].
 
 .Trigger options during project creation
 image::triggers/create-project-run-on.png[Create a project trigger and access trigger options]
 
-Once your project is set up you can create additional pipelines and triggers (menu:Project settings[Triggers]). You can configure your triggers to initiate pipelines on a variety of events, including non-push events, for example, a pull request being opened, or refined push events, for example, only pushes to a default branch, or pushes to a tag. For a full list see <<supported-trigger-options>>.
-
-.Trigger options under Project settings
-image::triggers/run-on-open.png[Set a trigger option for a project trigger]
+If your CircleCI org is integrated via **GitHub OAuth** (see tip above), an org admin can install the CircleCI GitHub App to enable the full range of GitHub trigger events, as well as all other functionality enabled by the GitHub App. Installing the CircleCI GitHub App is a one-time action. For more information, see the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub OAuth integration overview].
 
 == Supported trigger options
 
 [NOTE]
 ====
-Regardless of your chosen trigger option, CircleCI will never trigger a pipeline for the following:
+Regardless of your chosen trigger option, CircleCI will **never** trigger a pipeline for the following:
 
 * On branch or tag deletion push events.
+
+GitHub App pipelines are also never triggered on the following:
+
 * When a new branch is created if there are no new commits on the branch.
 ====
 
@@ -44,11 +60,6 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
-
-[NOTE] 
-====
-Due to a bug, repeated pull request events of the same type do not result in a build if the associated commit SHA has not changed. As an example, consider a trigger configured with the option "PR marked ready for review". Marking a PR as ready for review, then converting it to draft, then marking it as ready for review again will lead to only one pipeline to be triggered, not two. We are working to resolve this issue.
-====
 
 [NOTE] 
 ====

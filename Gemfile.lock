@@ -66,7 +66,7 @@ GEM
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (1.0.2)
-    ffi (1.17.0)
+    ffi (1.17.1)
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
       fiber-storage
@@ -77,7 +77,7 @@ GEM
       httparty (>= 0.14.0)
       terminal-table (>= 1.5.1)
     hashery (2.1.2)
-    html-proofer (5.0.9)
+    html-proofer (5.0.10)
       addressable (~> 2.3)
       async (~> 2.1)
       nokogiri (~> 1.13)
@@ -96,7 +96,7 @@ GEM
     httpclient (2.8.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    io-event (1.6.5)
+    io-event (1.6.7)
     jekyll-algolia (1.7.1)
       algolia_html_extractor (~> 2.6)
       algoliasearch (~> 1.26)
@@ -114,7 +114,7 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.7.2)
+    json (2.7.6)
     kramdown (2.4.0)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -131,7 +131,7 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.1.1)
-    nokogiri (1.18.2)
+    nokogiri (1.18.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octokit (4.20.0)
@@ -202,7 +202,7 @@ DEPENDENCIES
   jekyll-sitemap
   kramdown-parser-gfm
   liquid-c (~> 4.0.1)
-  nokogiri (~> 1.18.0)
+  nokogiri (~> 1.18.3)
   pronto
   pronto-markdownlint
   rake
