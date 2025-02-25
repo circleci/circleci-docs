@@ -84,7 +84,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 
-| xref:status-updates#[Status Updates] 
+| xref:enable-checks#github-check-and-github-status-updates[Status Updates]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
