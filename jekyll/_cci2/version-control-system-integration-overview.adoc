@@ -109,7 +109,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 
 ^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
 
-^4^ _BitBucket Cloud status updates can be enabled and disabled via project settings._
+^4^ _Bitbucket Cloud status updates can be enabled and disabled via project settings._
 
 
 === Pipeline triggers and integrations
