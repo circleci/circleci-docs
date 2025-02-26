@@ -10,9 +10,6 @@ contentTags:
 
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI.
 
-* TOC
-{:toc}
-
 ## Quick start
 {: #quick-start }
 

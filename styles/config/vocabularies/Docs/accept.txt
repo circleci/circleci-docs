@@ -175,6 +175,7 @@ iOS
 IP
 Java
 JavaScript
+Jenkins
 [Jj]est
 JFrog
 Jira
@@ -206,7 +207,9 @@ macOS
 \bMac\b
 manpage
 MFEs?
+[Mm]iddleware
 minitest
+[Mm]ultithreading
 [Mm]ultiline
 [Nn]amespaces?
 \bNew Relic\b
