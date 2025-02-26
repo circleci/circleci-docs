@@ -1,4 +1,4 @@
-* @circleci/docs @circleci/docs-friends @circleci/experience @circleci/product-mgmt-product-experience
+* @circleci/docs @circleci/docs-friends @circleci/lifecycle @circleci/product-mgmt-product-experience
 
 # removed owners to allow Renovate auto-merge
 Gemfile
