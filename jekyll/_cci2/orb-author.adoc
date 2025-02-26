@@ -19,7 +19,7 @@ This orb authoring guide assumes you have read the xref:orb-intro#[Introduction 
 Whether you are writing your first orb or getting ready for production level, we recommend using our <<orb-development-kit>> to get started. Alternatively, as orbs are packages of xref:reusing-config#[reusable configuration], they can be written xref:orb-author-validate-publish#[manually], as singular `yaml` files, and published using our xref:local-cli#installation[CircleCI orb CLI].
 
 [#orb-development-kit]
-== Orb Development Kit
+== Orb development kit
 
 The orb development kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
 
