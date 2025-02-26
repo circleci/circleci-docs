@@ -113,6 +113,7 @@ Debian
 deduplicate
 deduplicated
 DevOps
+[Dd]iscoverability
 Django
 DLC
 DNS

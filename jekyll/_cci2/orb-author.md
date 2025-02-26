@@ -11,9 +11,6 @@ contentTags:
   - Server v4+
 ---
 
-* TOC
-{:toc}
-
 ## Introduction
 {: #introduction }
 
