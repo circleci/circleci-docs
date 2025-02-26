@@ -5,14 +5,11 @@ contentTags:
     - Cloud
 ---
 = Enabling GitHub Checks
-:categories: ["getting-started"]
-:platform: Cloud
-:description: How to enable GitHub Checks for CircleCI
+:page-description: How to enable GitHub Checks for CircleCI
 :experimental:
 :icons: font
 :page-layout: classic-docs
 :page-liquid:
-:short-title: Enabling GitHub Checks
 
 [#introduction]
 == Introduction
