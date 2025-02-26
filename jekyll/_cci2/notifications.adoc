@@ -117,7 +117,7 @@ workflows:
           context: slack-secrets
 ----
 
-See link:slack-orb-tutorial#[Using the Slack Orb] for a full tutorial with examples.
+See xref:slack-orb-tutorial#[Using the Slack Orb] for a full tutorial with examples.
 
 CircleCI's Slack orb can be used for other types of notification, including notifying a Slack channel of a pending approval. For more information and to view usage examples, see the link:https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb page].
 

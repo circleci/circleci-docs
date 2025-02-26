@@ -26,6 +26,7 @@ circleci namespace create <name> --org-id <your-organization-id>
 == 2. Create your orb
 
 Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published.
+
 To create a xref:orb-intro#public-or-private[public] orb:
 
 [,shell]
@@ -33,7 +34,7 @@ To create a xref:orb-intro#public-or-private[public] orb:
 circleci orb create <my-namespace>/<my-orb-name>
 ----
 
-To create a link:orb-intro#public-or-private[private] orb:
+To create a xref:orb-intro#public-or-private[private] orb:
 
 [,shell]
 ----
