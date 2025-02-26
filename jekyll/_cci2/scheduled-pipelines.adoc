@@ -1,6 +1,4 @@
 ---
-layout: classic-docs
-short-title: Scheduled Pipelines
 contentTags:
   platform:
   - Cloud
