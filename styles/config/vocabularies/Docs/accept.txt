@@ -92,6 +92,8 @@ CocoaPods
 Codecov
 CodeDeploy
 Coinbase
+[Cc]oncurrency
+[Cc]oncurrencies
 \bConda\b
 [Cc]onfigs?\b
 ConfigMap
@@ -310,7 +312,9 @@ systemd
 TCPRoute
 TeamCity
 Telegraf
-templated
+[Tt]emplated
+[Tt]emplatize
+[Tt]emplatized
 [Tt]emplatizable
 Terraform
 TestFairy
@@ -319,6 +323,7 @@ Tink
 TLS
 [Tt]olerations
 [Tt]oolchains?
+Travis CI
 [Tt]ruthy
 \btrx2junit\b
 TypeScript
