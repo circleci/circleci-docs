@@ -48,9 +48,9 @@ Using SSO for authentication can result in improved security and user experience
 
 SSO for CircleCI currently has the following limitations:
 
-* SSO for CircleCI is supported for organizations using integrations through GitHub App, GitLab, and Bitbucket Data Center. SSO is not supported for organizations that integrate their code through the GitHub OAuth app or Bitbucket Cloud. See the xref:../version-control-system-integration-overview#[VCS integration overview] for more information on integration.
-* SSO requires all users to log into CircleCI with an email and password before authenticating with SSO into an organization. The email used to log in to CircleCI does *not* need to match the email used to authenticate with the IdP.
+* SSO requires all users to log into CircleCI either with an email and password or using social logins like GitHub, Bitbucket prior to the SSO login. The email used to log in to CircleCI does *not* need to match the email used to authenticate with the IdP.
 * CircleCI supports SSO using one domain per organization.
+* When the user logs in using social logins like GitHub or Bitbucket, then they need to authorize SSO in the VCS org along with SSO setup in CircleCI.
 * Personal API tokens will not work against your organization after SSO is enabled. As a result **the following features are unavailable when using SSO**:
 ** The CircleCI VS Code plugin will **not** work against your organization after SSO is enabled.
 ** The CircleCI CLI will **not** work against your organization after SSO is enabled.
