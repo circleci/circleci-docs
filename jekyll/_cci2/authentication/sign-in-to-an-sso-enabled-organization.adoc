@@ -18,7 +18,7 @@ for further details. Submit feedback on our link:https://circleci.canny.io/ident
 
 To join a CircleCI organization that has SSO enabled you must first have an active CircleCI account that you log into with an email and password or with social logins like GitHub or Bitbucket. For more information on creating a CircleCI account, see the xref:../first-steps#[Sign up and try] page.
 
-NOTE: If you use a OAuth/social login to join CircleCI, it is important to SSO authorize in GitHub/Bitbucket as well as in CircleCI.
+NOTE: If you use OAuth/social login to join CircleCI, it is important to SSO authorize in GitHub/Bitbucket as well as in CircleCI.
 
 Once you have a CircleCI account you can join an SSO-enabled CircleCI organization in one of the following ways:
 
