@@ -7,7 +7,7 @@ contentTags:
 ---
 = Buildkite からの移行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、Buildkite から CircleCI に移行する方法をわかりやすく解説します。
 :icons: font
 :toc: macro
@@ -65,7 +65,7 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 [#configuration-comparison]
 == 設定の比較
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

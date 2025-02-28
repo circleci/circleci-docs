@@ -5,7 +5,7 @@ contentTags:
 ---
 = GitHub App integration overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to integrate GitHub with CircleCI to manage your GitHub CI/CD pipelines.
 :icons: font
 :experimental:

@@ -15,7 +15,7 @@ sectionTags:
 ---
 = Hello world
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Get started with CircleCI by printing Hello World in any execution environment.
 :icons: font
 
@@ -28,7 +28,7 @@ This page provides configuration examples to get started with a basic pipeline u
 * A code repository you want to build on CircleCI.
 * Follow the xref:create-project#[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#echo-hello-world-cloud]
 == Echo hello world

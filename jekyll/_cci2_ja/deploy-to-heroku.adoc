@@ -9,7 +9,7 @@ contentTags:
 ---
 = Heroku へのデプロイ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -31,14 +31,16 @@ Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[He
 [#create-env-vars]
 === 2.  環境変数の作成
 
-Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
+Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。
+
+include::../_includes/snippets/ja/env-var-or-context.adoc[]
 
 [#deploy-with-orb]
 === 3.  Heroku Orb を使用したデプロイ
 
 link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。 `deploy-via-git` により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Orb レジストリ] の Heroku Orb ページを参照してください。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -67,7 +69,7 @@ Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[He
 [#create-env-vars-2]
 === 2.  環境変数の作成
 
-Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
+Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 include::../_includes/snippets/ja/xcode-silicon-vm.adoc[]
 
 [#create-deploy-job]
 === 3.  デプロイジョブの作成

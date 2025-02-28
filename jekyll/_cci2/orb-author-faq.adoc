@@ -6,7 +6,7 @@ contentTags:
 ---
 = Orb author FAQ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :page-description: This page answers the most frequently asked questions by orb authors.
 :experimental:

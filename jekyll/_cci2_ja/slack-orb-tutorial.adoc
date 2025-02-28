@@ -8,7 +8,7 @@ contentTags:
 ---
 = Slack Orb を使用した Slack の通知設定
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: "Learn how to get started with the CircleCI Slack orb"
 :icons: font
 :toc: macro
@@ -319,4 +319,4 @@ image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
 今回のチュートリアルでは、Slack チャンネルに CircleCI の通知を送信するように Slack orb を設定しました。 また、基本的な通知を作成し、Slack アプリを作成・認証し、テンプレートも使用しました。
 
-その他の設定オプションについては、 https://circleci.com/ja/developer/orbs/orb/circleci/slack[Slack Orb のドキュメント] を参照してください。 また、 https://circleci.com/ja/developer/orbs[Orb レジストリ]でもその他のたくさんの Orb を参照していただけます。 
+その他の設定オプションについては、 https://circleci.com/ja/developer/orbs/orb/circleci/slack[Slack Orb のドキュメント] を参照してください。 また、 https://circleci.com/ja/developer/orbs[Orb レジストリ]でもその他のたくさんの Orb を参照していただけます。

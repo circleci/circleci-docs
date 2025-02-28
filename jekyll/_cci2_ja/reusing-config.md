@@ -199,7 +199,7 @@ commands:
 
 以下の `enum` 型の宣言は、デフォルト値が列挙リスト内に宣言されていないため、無効です。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -211,7 +211,7 @@ commands:
         default: "windows" # カンマ区切り列挙リストに含まれていないデフォルト値の宣言は無効です。
         enum: ["darwin", "linux"]
 ```
- {% endraw %}
+
 
 #### Executor 型
 {: #executor }
@@ -219,7 +219,7 @@ commands:
 
 `executor` パラメーター型を使用すると、ジョブの呼び出し元が実行する Executor を決定できるようになります。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -262,7 +262,7 @@ workflows:
             name: xenial
             some-value: foobar
 ```
-{% endraw %}
+
 
 #### ステップ型
 {: #steps }
@@ -270,7 +270,7 @@ workflows:
 
 ステップ型パラメーターは、ジョブまたはコマンドに、定義済みのステップとユーザー定義のステップを混在させる必要がある場合に使用します。 コマンドまたはジョブの呼び出しに渡すステップは、パラメーターとして渡す場合、提供されるステップが 1 つだけでも必ずシーケンスとして定義します。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -286,11 +286,11 @@ commands:
       - steps: << parameters.after-deps >>
       - run: make test
 ```
-{% endraw %}
+
 
 以下の例では、パラメーターとして渡すステップに対し、ジョブの `steps` で `steps` 宣言の値を指定しています。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -315,11 +315,11 @@ jobs:
             - run: echo "The dependencies are installed"
             - run: echo "And now I'm going to run the tests"
 ```
-{% endraw %}
+
 
 上記は以下のとおり解決されます。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 steps:
@@ -328,7 +328,7 @@ steps:
   - run: echo "And now I'm going to run the tests"
   - run: make test
 ```
-{% endraw %}
+
 
 #### 環境変数名型
 {: #environment-variable-name }
@@ -338,7 +338,7 @@ steps:
 
 以下の例は、再利用可能な `build` ジョブで AWS S3 にデプロイする場合の `env_var_name` パラメーター型の使用方法を示しています。 この例では、`AWS_ACCESS_KEY` および `AWS_SECRET_KEY` 環境変数に `access-key` および `secret-key` パラメーターを指定して使用しています。 したがって、`s3cmd` を実行するデプロイ ジョブがある場合、必要な認証を使用しつつもカスタム バケットにデプロイする再利用可能コマンドを作成することが可能です。
 
-{% raw %}
+
 
 パラメーターを使わない `config.yml` ファイルは次のとおりです。
 ```yaml
@@ -397,7 +397,7 @@ workflows:
           secret-key: BIN_BAZ
           command: ls s3://some/where
 ```
-{% endraw %}
+
 
 ## 再利用可能なコマンドの作成
 {: #authoring-reusable-commands }
@@ -829,7 +829,7 @@ jobs:
 
 `config.yml` でパラメーター化されたジョブを定義して呼び出す例
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -851,7 +851,7 @@ workflows:
       - sayhello:# パラメーター化されたジョブを呼び出します。
           saywhat: Everyone
 ```
-{% endraw %}
+
 
 **注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が付与されます。 以下に例を示します。
 
@@ -983,7 +983,7 @@ jobs:
     machine: true
     steps:
       - say:
-          # コマンド "say" の "saywhat" パラメーターには 
+          # コマンド "say" の "saywhat" パラメーターには
           # デフォルト値が定義されていないため
           # 手動で渡す必要があります。
           saywhat: << parameters.saywhat >>

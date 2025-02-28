@@ -5,7 +5,7 @@ contentTags:
 ---
 = GitHub OAuth app integration overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document provides an overview of using GitHub and GitHub Enterprise with CircleCI.
 :icons: font
 :experimental:

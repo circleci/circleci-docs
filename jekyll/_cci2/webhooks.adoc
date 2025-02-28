@@ -8,7 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-description: Use webhooks to integrate with third-party services and subscribe to CircleCI events
 :icons: font
-:page-liquid:
+
 :experimental:
 
 A webhook allows you to connect a platform (for example, CircleCI, an API you create yourself, or a third party service) to a stream of future _events_.
@@ -31,7 +31,7 @@ This section presents some use cases for CircleCI custom webhooks.
 
 Follow these steps to set up and test a custom webhook trigger. Trigger from anywhere that can emit a webhook or run a curl command:
 
-{% include snippets/custom-webhook-setup.adoc %}
+include::../_includes/snippets/custom-webhook-setup.adoc[]
 
 . You can now test your custom webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +
@@ -63,7 +63,7 @@ When a change is made to Project A, we want the full Project A configuration to 
 
 Navigate to Project B in the CircleCI web app and set up a custom webhook by following these steps:
 
-{% include snippets/custom-webhook-setup.adoc %}
+include::../_includes/snippets/custom-webhook-setup.adoc[]
 
 ==== 2. Configure Project A to trigger Project B
 

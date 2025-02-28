@@ -7,7 +7,7 @@ contentTags:
 = スタートガイド
 :page-layout: classic-docs
 :page-description: CircleCI を使用してはじめてビルドを成功させるためのチュートリアル
-:page-liquid:
+
 
 このスタートガイドのチュートリアルでは、既存のプロジェクトをCircleCIに接続し、アプリ内の設定エディタを使用し、新しいプロジェクトにチームメンバーを招待して共同作業を行う方法を説明します。
 

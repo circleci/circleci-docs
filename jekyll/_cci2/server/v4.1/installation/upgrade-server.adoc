@@ -7,7 +7,7 @@ noindex: true
 ---
 = Upgrade server v4.x
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: "This document lists the steps required to upgrade a CircleCI server v4.1 installation."
 :icons: font
 :experimental:

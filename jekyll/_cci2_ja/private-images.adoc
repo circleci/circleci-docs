@@ -5,7 +5,7 @@ contentTags:
 ---
 = Docker の認証付きプルの使用
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法についてわかりやすく皆様に説明します。
 :icons: font
 :toc: macro

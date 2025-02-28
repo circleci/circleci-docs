@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This page describes how to create and use custom Docker images with CircleCI.
 
@@ -196,7 +196,7 @@ jobs:
       - image: circleci/cci-demo-docker-primary:0.0.1
 ----
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 If you have any questions, head over to our https://discuss.circleci.com/[community forum].
 

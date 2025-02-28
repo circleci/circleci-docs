@@ -5,7 +5,7 @@ contentTags:
 ---
 = Manual install - configure your Kubernetes components
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
 :icons: font
 :experimental:
@@ -192,13 +192,13 @@ CAUTION: This option is only available when using Helm to configure your Kuberne
 
 By default the built-in logic for Kubernetes Deployments or Argo Rollouts is used for the restore version feature. If you manage your component with Helm, you can choose to use the Helm rollback strategy instead. To do so, add the `circleci.com/helm-revision-number` annotation to the Kubernetes object metadata in your Helm chart template:
 
-{% raw %}
+
 [,yaml]
 ----
 annotations:
   circleci.com/helm-revision-number: {{ .Release.Revision | quote }}
 ----
-{% endraw %}
+
 
 [#operation-timeout]
 === b. Custom operation timeout

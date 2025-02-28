@@ -7,7 +7,7 @@ contentTags:
 ---
 = Use the CircleCI CLI for config and policy development
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

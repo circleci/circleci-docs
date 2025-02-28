@@ -6,7 +6,7 @@ contentTags:
 ---
 = Create a project in CircleCI
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: "Learn how to create a project in CircleCI."
 :icons: font
 :experimental:

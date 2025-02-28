@@ -6,7 +6,7 @@ contentTags:
 ---
 = AWS ECR から OIDC でイメージをプルする方法
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、OIDC 認証を使って AWS ECR からイメージをプルする方法を詳しく皆様にご紹介します。
 :icons: font
 :toc: macro

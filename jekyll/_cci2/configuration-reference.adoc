@@ -423,7 +423,7 @@ suggested:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
 
@@ -1265,21 +1265,21 @@ jobs:
 [#x86]
 ====== x86
 
-{% include snippets/docker-resource-table.adoc %}
+include::../_includes/snippets/docker-resource-table.adoc[]
 
 [#arm]
 ====== Arm
 
 *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
 
-{% include snippets/docker-arm-resource-table.adoc %}
+include::../_includes/snippets/docker-arm-resource-table.adoc[]
 
 '''
 
 [#linuxvm-execution-environment]
 ===== LinuxVM execution environment
 
-{% include snippets/machine-resource-table.adoc %}
+include::../_includes/snippets/machine-resource-table.adoc[]
 
 Example:
 
@@ -1315,7 +1315,7 @@ jobs:
 [#macos-execution-environment]
 ===== macOS execution environment
 
-{% include snippets/macos-resource-table.adoc %}
+include::../_includes/snippets/macos-resource-table.adoc[]
 
 *Example*
 
@@ -1342,7 +1342,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 [#windows-execution-environment]
 ===== Windows execution environment
 
-{% include snippets/windows-resource-table.adoc %}
+include::../_includes/snippets/windows-resource-table.adoc[]
 
 Example:
 
@@ -1387,7 +1387,7 @@ jobs:
 [#gpu-execution-environment-linux]
 ===== GPU execution environment (Linux)
 
-{% include snippets/gpu-linux-resource-table.adoc %}
+include::../_includes/snippets/gpu-linux-resource-table.adoc[]
 
 Example:
 
@@ -1412,7 +1412,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 [#gpu-execution-environment-windows]
 ===== GPU execution-environment (Windows)
 
-{% include snippets/gpu-windows-resource-table.adoc %}
+include::../_includes/snippets/gpu-windows-resource-table.adoc[]
 
 Example:
 
@@ -1437,7 +1437,7 @@ jobs:
 [#arm-execution-environment-linux]
 ===== Arm VM execution-environment
 
-{% include snippets/arm-resource-table.adoc %}
+include::../_includes/snippets/arm-resource-table.adoc[]
 
 Example:
 
@@ -1940,28 +1940,28 @@ When storing a new cache, the `key` value may contain special, templated, values
 |===
 | Template | Description
 
-| {% raw %}`{{ .Branch }}`{% endraw %}
+| `{{ .Branch }}`
 | The VCS branch currently being built.
 
-| {% raw %}`{{ .BuildNum }}`{% endraw %}
+| `{{ .BuildNum }}`
 | The CircleCI build number for this build.
 
-| {% raw %}`{{ .Revision }}`{% endraw %}
+| `{{ .Revision }}`
 | The VCS revision currently being built.
 
-| {% raw %}`{{ .CheckoutKey }}`{% endraw %}
+| `{{ .CheckoutKey }}`
 | The SSH key used to checkout the repository.
 
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}
+| `{{ .Environment.variableName }}`
 | The environment variable `variableName` (supports any environment variable xref:env-vars#[exported by CircleCI] or added to a specific xref:contexts#[context]--not any arbitrary environment variable).
 
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}
+| `{{ checksum "filename" }}`
 | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repository and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It is important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 
-| {% raw %}`{{ epoch }}`{% endraw %}
+| `{{ epoch }}`
 | The current time in seconds since the UNIX epoch.
 
-| {% raw %}`{{ arch }}`{% endraw %}
+| `{{ arch }}`
 | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 |===
 
@@ -1969,9 +1969,9 @@ During step execution, the templates above will be replaced by runtime values an
 
 Template examples:
 
-* {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
-* {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
-* {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
+* `myapp-{{ checksum "package-lock.json" }}` - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+* `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - same as the previous one, but each branch will generate separate cache
+* `myapp-{{ epoch }}` - every run of a job will generate a separate cache
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 
@@ -1979,7 +1979,7 @@ NOTE: Given the immutability of caches, it might be helpful to start all your ca
 
 Example:
 
-{% raw %}
+
 
 [,yml]
 ----
@@ -1989,9 +1989,9 @@ Example:
       - /home/ubuntu/.m2
 ----
 
-{% endraw %}
 
-{% raw %}
+
+
 
 [,yml]
 ----
@@ -2002,7 +2002,7 @@ Example:
       - node_modules/workspace-c
 ----
 
-{% endraw %}
+
 
 [NOTE]
 ====
@@ -2075,7 +2075,7 @@ A path is not required here because the cache will be restored to the location f
 
 Example:
 
-{% raw %}
+
 
 [,yml]
 ----
@@ -2094,7 +2094,7 @@ Example:
       - /foo
 ----
 
-{% endraw %}
+
 
 '''
 
@@ -3397,9 +3397,9 @@ workflows:
 [#example-full-configuration]
 == Example full configuration
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -3514,4 +3514,4 @@ workflows:
               only: main
 ----
 
-{% endraw %}
+

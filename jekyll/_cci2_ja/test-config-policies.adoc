@@ -7,7 +7,7 @@ contentTags:
 = 設定ファイルのポリシーのテスト - オープンプレビュー
 :page-layout: classic-docs
 :page-description: 説明を参照してください： CircleCI の設定ポリシーのオープンプレビュー。 設定ファイルのポリシーに関して学びましょう。
-:page-liquid:
+
 :icons: font
 :toc: macro
 

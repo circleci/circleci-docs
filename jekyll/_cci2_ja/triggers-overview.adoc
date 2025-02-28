@@ -11,7 +11,7 @@ document-type:
 ---
 = トリガーの概要
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:

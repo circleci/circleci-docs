@@ -5,7 +5,7 @@ contentTags:
 ---
 = Machine runner configuration reference
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

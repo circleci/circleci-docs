@@ -8,7 +8,7 @@ noindex: true
 = Expanding internal database volumes
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:

@@ -63,7 +63,7 @@ CircleCI で同じ結果を得るために必要な構成をサンプル リポ�
 ```yaml
 language: node_js
 services: mongodb
-before_install: 
+before_install:
   - npm i -g npm@5
 node_js:
   - "5"
@@ -76,7 +76,7 @@ CI 環境をさらに制御する必要があるときには、*フック*を使
 
 CircleCI で同じ結果を得るために必要な構成をサンプル リポジトリから以下に抜粋します。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -116,7 +116,7 @@ jobs:
           name: test
           command: npm test
 ```
-{% endraw %}
+
 
 上記の構成では、特に*言語*を必要としていません。 また、ユーザーは任意の数の `step` を指定して実行でき、ステップの順序にも制約はありません。 Docker を利用することで、特定のバージョンの Node.js と MongoDB が各 `command` で使用可能になります。
 

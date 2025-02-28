@@ -6,7 +6,7 @@ contentTags:
 ---
 = ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
 :icons: font
 :toc: macro

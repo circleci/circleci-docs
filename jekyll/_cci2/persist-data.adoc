@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. Use artifacts, workspaces and caches to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
 

@@ -8,7 +8,7 @@ contentTags:
 ---
 = CircleCI API を使った環境変数の挿入
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: API を使って環境変数の値を挿入する方法
 :icons: font
 :toc: macro

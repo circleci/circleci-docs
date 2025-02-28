@@ -7,7 +7,7 @@ noindex: true
 ---
 = Backup and restore
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document outlines recommendations for how to back up and restore your CircleCI server v4.1 instance data and state.
 :icons: font
 :experimental:

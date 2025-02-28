@@ -146,7 +146,7 @@ workflows:
 circleci config process .circleci/config.yml
 ```
 ```yml
-{% raw %}
+
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
 version: 2
 jobs:
@@ -225,7 +225,7 @@ workflows:
 #   example-workflow:
 #       jobs:
 #         - node/test
-{% endraw %}
+
 ```
 
 ## 5. Orb のパブリッシュ

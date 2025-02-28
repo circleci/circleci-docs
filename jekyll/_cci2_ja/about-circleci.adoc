@@ -8,7 +8,7 @@ contentTags:
 ---
 = CircleCI について
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このページでは、CircleCI を利用してソフトウェアやアプリケーション開発の自動化実現方法のご紹介に関して詳しく説明しています。CircleCI は、ソフトウェア開発のビルド、テスト、デプロイを全て自動化します。
 :icons: font
 :toc: macro

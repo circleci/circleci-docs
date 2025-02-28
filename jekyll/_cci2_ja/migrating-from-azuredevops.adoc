@@ -7,7 +7,7 @@ contentTags:
 ---
 = Azure DevOps からの移行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、Azure DevOps から CircleCI に移行する方法についてわかりやすくご紹介しています。
 :icons: font
 :toc: macro
@@ -73,7 +73,7 @@ Azure DevOps Pipelines と CircleCI の設定は異なります。 ビルドス�
 [#configuration-comparison]
 == 設定の比較
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

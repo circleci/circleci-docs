@@ -7,7 +7,7 @@ contentTags:
 ---
 = CircleCI Server プラン
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes the Server plan available to developers on CircleCI.
 :icons: font
 :toc: macro
@@ -39,13 +39,13 @@ link:https://app.circleci.com/[CircleCI Web アプリ]では、アーティフ�
 [#additional-support-options]
 === サポートオプションの追加
 
-拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Server プランでは、 link:https://discuss.circleci.com/tag/ja-%E6%97%A5%E6%9C%AC%E8%AA%9E[コミュニティフォーラム]、 link:https://support.circleci.com/hc/ja[サポートポータル]、および 
+拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Server プランでは、 link:https://discuss.circleci.com/tag/ja-%E6%97%A5%E6%9C%AC%E8%AA%9E[コミュニティフォーラム]、 link:https://support.circleci.com/hc/ja[サポートポータル]、および
  link:https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
 [#circleci-features]
 == CircleCI の機能
 
-上記のアップグレード機能に加え、Server プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
+上記のアップグレード機能に加え、Server プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は
 link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/ja/features-of-circleci.adoc %}
+include::../_includes/snippets/ja/features-of-circleci.adoc[]

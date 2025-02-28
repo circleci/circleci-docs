@@ -6,7 +6,7 @@ contentTags:
 ---
 = Add additional SSH keys to CircleCI
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How to add additional SSH keys to CircleCI
 :icons: font
 :experimental:

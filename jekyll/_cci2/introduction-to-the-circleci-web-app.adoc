@@ -6,7 +6,7 @@ contentTags:
 ---
 = Introduction to the CircleCI Web App
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes the basic features and settings available in the CircleCI web app.
 :icons: font
 :experimental:

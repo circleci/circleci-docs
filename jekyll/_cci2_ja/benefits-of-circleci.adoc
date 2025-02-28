@@ -8,7 +8,7 @@ contentTags:
 ---
 = CircleCI のメリット
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CI/CD 用に CircleCI を導入するメリット
 :icons: font
 :toc: macro

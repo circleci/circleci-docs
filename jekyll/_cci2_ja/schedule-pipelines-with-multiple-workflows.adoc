@@ -8,7 +8,7 @@ contentTags:
 ---
 = 複数のワークフローを使ったパイプラインのスケジュール実行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: 複数のワークフローにおけるパイプラインのスケジュール実行の条件を設定する方法を説明します。
 :icons: font
 :toc: macro
@@ -54,7 +54,7 @@ nightly-run-workflow:
 
 スケジュールがトリガーされる時に *実行しない* ワークフローのフィルタリングを追加することもできます。
 
-{% raw %}
+
 
 ```yaml
 version: 2.1
@@ -80,7 +80,7 @@ nightly-run-workflow:
 ...
 ```
 
-{% endraw %}
+
 
 パイプライン値の全リストは、xref:pipeline-variables/#pipeline-values[パイプラインの値とパラメーター] でご確認ください。
 

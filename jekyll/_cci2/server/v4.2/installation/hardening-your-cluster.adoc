@@ -7,7 +7,7 @@ noindex: true
 ---
 = Hardening your cluster
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
 :icons: font
 :toc: macro

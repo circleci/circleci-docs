@@ -9,7 +9,7 @@ document-type:
 ---
 = Using matrix jobs
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 
@@ -20,7 +20,7 @@ Matrix jobs provide a way to run a job multiple times with arguments. Arguments 
 
 In the following example, the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job, different parameters are passed to set both the OS and the Node.js version:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [source,yaml]
 ----

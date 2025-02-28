@@ -6,7 +6,7 @@ contentTags:
 ---
 = Orbs FAQ
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This page answers the most frequently asked questions about orbs.
 :icons: font
 :experimental:

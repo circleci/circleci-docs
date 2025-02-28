@@ -7,7 +7,7 @@ noindex: true
 ---
 = Operator overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.3.
 :icons: font
 :toc: macro

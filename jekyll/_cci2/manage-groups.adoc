@@ -5,7 +5,7 @@ contentTags:
 ---
 = Manage groups
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How-to guides for setting up and assigning groups in CircleCI to manage roles and permissions across projects.
 :icons: font
 :experimental:

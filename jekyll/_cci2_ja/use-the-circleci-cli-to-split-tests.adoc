@@ -9,7 +9,7 @@ contentTags:
 ---
 = CircleCI CLI を使用したテスト分割
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:

@@ -6,7 +6,7 @@ contentTags:
 ---
 = Test splitting to speed up your pipelines
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn to split and run tests in parallel in CircleCI.
 :icons: font
 :experimental:
@@ -46,7 +46,7 @@ When you set up the project in CircleCI later in this tutorial, you'll select th
 
 The following is a copy of the `.circleci/config.yml` template that you will *edit* later.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [source,yaml]
 ----

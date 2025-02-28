@@ -7,7 +7,7 @@ contentTags:
 ---
 = 設定ファイルのポリシーの作成と管理
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -53,7 +53,7 @@ circleci policy settings --enabled=false --owner-id <your-organization-ID>
 }
 ----
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 [#create-a-policy]
 == 組織のポリシー評価を有効・無効にする

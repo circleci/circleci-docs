@@ -7,7 +7,7 @@ contentTags:
 ---
 = Config policies for self-hosted runner
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 
@@ -47,7 +47,7 @@ Example output:
 }
 ----
 +
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 [#create-your-policy]
 == 1. Create your policy

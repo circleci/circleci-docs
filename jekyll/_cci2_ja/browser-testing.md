@@ -70,7 +70,7 @@ LambdaTest は、ローカルに保存された Web ページのクロスブラ�
 
 CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 この Orb を使用することで Lambda tunnel をすばやくセットアップし、テストのステップを定義できます。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -83,7 +83,7 @@ jobs:
     steps:
       - <your-test-steps>
 ```
-{% endraw %}
+
 
 ## Sauce Labs
 {: #sauce-labs }
@@ -98,7 +98,7 @@ JavaScript を使用して Web アプリケーションをテストしている�
 1. CircleCI プロジェクトに `SAUCE_USERNAME` と `SAUCE_ACCESS_KEY` を [環境変数]({{site.baseurl}}/ja/env-vars/)として追加します。
 2. CircleCI プロジェクトの `config.yml` を saucectl-run Orb を含むよう変更し、この Orb をワークフロー内でジョブとして定義します。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -123,7 +123,7 @@ workflows:
     jobs:
       - test-cypress
 ```
-{% endraw %}
+
 
 ## BrowserStack と Appium
 {: #browserstack-and-appium }
@@ -139,7 +139,7 @@ JavaScript エンドツーエンド テストに使用できるブラウザー �
 
 このプロセスを簡素化するために、CircleCI 承認済み Orb を使用して、結果を Cypress ダッシュボードにポストせずにすべての Cypress テストを実行するなどのさまざまなテストを実行することができます。 以下に例示する CircleCI 承認済み Orb では、結果がダッシュボードにパブリッシュされずに、すべての Cypress テストが実行されます。
 
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -152,7 +152,7 @@ workflows:
       - cypress/run:
           no-workspace: true
 ```
-{% endraw %}
+
 
 設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)を参照してください。
 

@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI server v4.7 release notes
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Details of the new features included in each CircleCI server v4.7 release.
 :icons: font
 :toc: macro

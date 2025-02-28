@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 

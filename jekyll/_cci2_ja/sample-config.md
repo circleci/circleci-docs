@@ -587,7 +587,7 @@ workflows:
 ```
 
 {:.tab.complex-sequential.Server_2}
-{% raw %}
+
 ```yaml
 version: 2
 
@@ -656,7 +656,7 @@ workflows:
             branches:
               only: main
 ```
-{% endraw %}
+
 
 上記は、`test` ジョブが main ブランチでのみ実行されるよう設定された順次実行ワークフローの例です。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
 
@@ -671,7 +671,7 @@ Cloud の `2.1` 設定ファイル サンプルの詳細については、次の
 ![ファンイン・ファンアウト]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
 
 {:.tab.fan-in-our.Server}
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -815,10 +815,10 @@ workflows:
                       - build-docker-image
                       - test
 ```
-{% endraw %}
+
 
 {:.tab.fan-in-out.Server_3}
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -963,10 +963,10 @@ workflows:
                       - build-docker-image
                       - test
 ```
-{% endraw %}
+
 
 {:.tab.fan-in-out.Server_2}
-{% raw %}
+
 ```yaml
 version: 2.0
 
@@ -1095,7 +1095,7 @@ workflows:
             - rake_test
             - precompile_assets
 ```
-{% endraw %}
+
 
 **注:** ジョブを実行できるのは、そのジョブの依存関係が満たされているときのみなので、事前に実行される上流ジョブすべての依存関係が必要になります。 そのため、`requires:` キーのブロックで、直近の依存関係のみを指定する必要があります。
 
@@ -1379,7 +1379,7 @@ workflows:
 ```
 
 {:.tab.multiple-executors.Example-2}
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -1438,7 +1438,7 @@ workflows:
       - danger
       - build-and-test
 ```
-{% endraw %}
+
 
 ## 関連項目
 {: #see-also }

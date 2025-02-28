@@ -5,7 +5,7 @@ contentTags:
 ---
 = Prevent unregistered users from spending credits
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: A how to guide to configuring your org so that unregistered users will not be able to perform actions that spend credits
 :icons: font
 :experimental:

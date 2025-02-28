@@ -8,7 +8,7 @@ contentTags:
 :page-description: Example webhooks use-case with webhooks
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 :experimental:
 
 This document describes how you might use webhooks with a third party

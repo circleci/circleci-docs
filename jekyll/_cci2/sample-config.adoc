@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:configuration-reference#[Configuration reference] page.
 
@@ -30,7 +30,7 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#simple-configuration-examples]
 == Simple configuration examples
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#concurrent-workflow]
 === Concurrent workflow
@@ -305,7 +305,7 @@ Below are two sample configurations for a Fan-in/Fan-out workflow.
 
 image::{{ site.baseurl }}/assets/img/docs/fan-in-out-example.png[Fan-in-out]
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -442,7 +442,7 @@ workflows:
                       - test
 ----
 
-{% endraw %}
+
 
 NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
@@ -721,7 +721,7 @@ workflows:
               only: main
 ----
 
-{% raw %}
+
 --
 
 [tab.multiple-executors.Example_2]
@@ -780,7 +780,7 @@ workflows:
       - build-and-test
 ----
 
-{% endraw %}
+
 --
 
 [#see-also]

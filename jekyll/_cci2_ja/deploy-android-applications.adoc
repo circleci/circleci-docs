@@ -8,7 +8,7 @@ contentTags:
 ---
 = Android アプリのデプロイ
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI で Android アプリをデプロイする方法
 :icons: font
 :toc: macro
@@ -217,7 +217,7 @@ releaseStorePassword=YourKeyStorePassword
 ```
 ====
 
-次は、キーストアの暗号化を解除し、`keystore.properties` を生成し、Google Play API キーを作成するように 
+次は、キーストアの暗号化を解除し、`keystore.properties` を生成し、Google Play API キーを作成するように
  `.circleci/config.yml` を設定する必要があります。
 
 まだ作成していない場合は、プロジェクトのリポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーに `config.yml` ファイルを作成します。

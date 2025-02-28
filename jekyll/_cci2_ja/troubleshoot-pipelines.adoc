@@ -8,7 +8,7 @@ contentTags:
 ---
 = パイプラインのトラブル対応
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、パイプラインとすケージュルされたパイプラインのトラブルシューティングガイドをわかりやすくご紹介します。
 :icons: font
 :toc: macro

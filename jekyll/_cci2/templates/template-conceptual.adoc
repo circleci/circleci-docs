@@ -7,7 +7,7 @@ contentTags:
 ---
 = Page title
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: A short page description goes here
 :icons: font
 :experimental:
@@ -15,7 +15,7 @@ contentTags:
 ////
 Some notes on attributes
 
-:page-liquid: - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
+ - ensures that all liquid tags are processed before rendering the content. More info here: https://github.com/asciidoctor/jekyll-asciidoc/blob/89b8f55f5312e4a0f1bca496bd9217d53d5b21dd/docs/modules/ROOT/pages/liquid.adoc
 
 :icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
 

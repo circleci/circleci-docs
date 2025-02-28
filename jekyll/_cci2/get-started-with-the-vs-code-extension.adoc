@@ -5,7 +5,7 @@ contentTags:
 ---
 = Get started with the VS Code extension
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: A quickstart tutorial for the CircleCI VS Code extension.
 :icons: font
 :experimental:

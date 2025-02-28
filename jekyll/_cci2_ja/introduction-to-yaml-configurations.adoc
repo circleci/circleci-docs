@@ -8,7 +8,7 @@ contentTags:
 ---
 = YAML 設定ファイルの概要
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: YAML で書かれた CircleCI 設定ファイルの概要
 :icons: font
 :toc: macro
@@ -46,7 +46,7 @@ version: 2.1
 
 下記の `.circleci/config.yml` では、Docker 実行環境をジョブ `build` に追加します。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 ```yaml
 # CircleCI configuration file

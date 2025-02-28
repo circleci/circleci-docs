@@ -10,7 +10,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 [#introduction]
 == Introduction
@@ -96,7 +96,7 @@ Note the following distinctions between artifacts, caches and workspaces:
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -144,7 +144,7 @@ workflows:
             - build2
 ----
 
-{% endraw %}
+
 
 See the xref:artifacts#[Storing build artifacts] page for more information.
 
@@ -155,7 +155,7 @@ A cache stores a file or directory of files such as dependencies or source code 
 
 If you need to clear your cache, refer to the xref:caching#clearing-cache[Caching dependencies] page for more information.
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -195,7 +195,7 @@ workflows:
             - build1
 ----
 
-{% endraw %}
+
 
 For more information see the xref:caching#[Caching dependencies] and xref:caching-strategy#[Caching strategies] pages.
 
@@ -254,7 +254,7 @@ image::{{site.baseurl}}/assets/img/docs/executor_types.png[Illustration of a Cir
 
 An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the <<images,images>> section).
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [.tab.executors.Cloud]
 [,yaml]
@@ -348,7 +348,7 @@ An image is a packaged system that includes instructions for creating a running 
 
 The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:circleci-images#[convenience images] for popular languages on Docker Hub.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 The *machine executor* spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the xref:configuration-reference#machine[Using machine] page.
 
@@ -450,7 +450,7 @@ A CircleCI pipeline is the full set of processes you run when you trigger work o
 
 Pipelines represent methods for interacting with your configuration:
 
-{% include snippets/pipelines-benefits.adoc %}
+include::../_includes/snippets/pipelines-benefits.adoc[]
 
 See the xref:pipelines#[Pipelines overview] page for more information.
 
@@ -578,9 +578,9 @@ image::/docs/assets/img/docs/workflow_detail_newui.png[Workflows illustration cl
 
 The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -633,7 +633,7 @@ workflows:
            # run build2 and build3 concurrently to save time.
 ----
 
-{% endraw %}
+
 
 See the xref:workflows#[Using workflows] page for more information.
 

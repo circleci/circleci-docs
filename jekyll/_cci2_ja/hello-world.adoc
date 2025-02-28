@@ -17,7 +17,7 @@ sectionTags:
 ---
 = Hello World
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Hello World を任意の実行環境から出力することから CircleCI の利用を始めます。
 :icons: font
 
@@ -25,7 +25,7 @@ sectionTags:
 
 すでに CircleCI に "プラグイン" するリポジトリをお持ちの場合は、設定ファイルのコミットを含め、すべて CircleCI Web アプリ内で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 [#echo-hello-world-cloud]
 == Server v4.x での Echo hello world

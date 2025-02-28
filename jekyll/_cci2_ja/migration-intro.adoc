@@ -7,7 +7,7 @@ contentTags:
 ---
 = CircleCI への移行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、CI/CD パイプラインを CircleCI に移行するために必要な手順を概説します。
 :icons: font
 :toc: macro

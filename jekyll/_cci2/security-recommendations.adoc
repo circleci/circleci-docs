@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 Many builds must reference secret values entrusted to CircleCI. CircleCI understands that security is critical to every organization's success. In addition to the work CircleCI does to keep your secrets safe, there are a few things you can do to help protect secrets at the boundary between CircleCI's systems and yours.
 

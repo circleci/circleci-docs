@@ -6,7 +6,7 @@ contentTags:
 = CircleCI Xcode image release, update, and deprecation policy
 :page-layout: classic-docs
 :page-description: CircleCI Xcode Image Release, Update and Deprecation Policy
-:page-liquid:
+
 :icons: font
 :experimental:
 

@@ -5,7 +5,7 @@ contentTags:
 ---
 = CircleCI Windows images support policy
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI Windows images release, update, and deprecation policy
 :icons: font
 :experimental:

@@ -5,7 +5,7 @@ contentTags:
 ---
 = Sign up and try CircleCI
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: First step for using CircleCI.
 :icons: font
 :experimental:

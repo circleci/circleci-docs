@@ -6,7 +6,7 @@ contentTags:
 ---
 = Upgrade MongoDB
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server v4.6.
 :icons: font
 :toc: macro

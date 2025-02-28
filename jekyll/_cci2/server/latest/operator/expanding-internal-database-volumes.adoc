@@ -8,7 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-description: Expanding internal database volumes for CircleCI server v4.7.
 :imagesdir: ../assets/img/docs/
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:

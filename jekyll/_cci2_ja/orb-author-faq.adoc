@@ -8,7 +8,7 @@ contentTags:
 ---
 = Orb の作成に関するよくあるご質問
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: よく寄せられるご質問や技術的な問題など、Orb の作成に役立つ情報をまとめました。
 :toc: macro
 

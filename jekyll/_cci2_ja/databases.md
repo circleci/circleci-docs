@@ -39,7 +39,7 @@ CircleCI の [CircleCI Developer Hub](https://circleci.com/developer/images) に
 
 ```
 
-{% raw %}
+
 
 ```yml
 version: 2.1
@@ -79,7 +79,7 @@ jobs:
           -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
 ```
 
-{% endraw %}
+
 
 `steps` では最初に `checkout` が実行され、その後 Postgres クライアントツールがインストールされます。 `cimg/postgres:14.0` イメージでは、クライアント固有のデータベースアダプターはインストールされません。 たとえば、Python で PostgreSQL データベースとやり取りするために `psychopg2` のインストールが必要になる場合があります。 イメージの一覧は、[ビルド済み CircleCI サービスイメージ]({{ site.baseurl }}/ja/circleci-images/#next-gen-service-images) のページをご確認ください。
 

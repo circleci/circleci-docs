@@ -7,7 +7,7 @@ contentTags:
 ---
 = Webhooks reference
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

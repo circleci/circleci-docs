@@ -6,7 +6,7 @@ contentTags:
 ---
 = コンフィグファイルポリシーを使ったコンテキストの管理
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: コンフィグファイルポリシーを使ってコンテキストの使用を管理する方法について説明します。
 :icons: font
 :toc: macro
@@ -60,7 +60,7 @@ circleci policy settings --enabled=true --owner-id <your-organization-ID>
 }
 ----
 +
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 * 作業を開始する前に「xref:create-and-manage-config-policies#create-a-policy[ポリシーを作成する]」と「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」に目を通しておくことをお勧めします。 ポリシーの保存と作成には、組織内のリポジトリを使用するのがベストプラクティスです。 この方法の詳細と、ポリシー作成用のパイプラインのセットアップ方法については、「xref:create-and-manage-config-policies#manage-policies-with-your-vcs[VCS を使ったポリシーの管理]」をご覧ください。
 * このページの例を使用するには、シークレットの保存用にコンテキストを使用する必要があります。 詳細については「xref:contexts#[コンテキストの使用]」を参照してください。
 

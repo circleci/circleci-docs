@@ -7,7 +7,7 @@ contentTags:
 ---
 = Deploy to Azure Container Registry
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 
@@ -18,7 +18,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Azur
 
 This page describes a simple deployment to the Azure Container Registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
 
-{% include snippets/env-var-or-context.adoc %}
+include::../_includes/snippets/env-var-or-context.adoc[].adoc %}
 
 In addition to the orb described below, CircleCI has created an Azure convenience image focusing on link:https://circleci.com/developer/images/image/cimg/azure[deployment: `cimg/azure`].
 
@@ -45,7 +45,7 @@ For service principal logins use:
 
 Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines

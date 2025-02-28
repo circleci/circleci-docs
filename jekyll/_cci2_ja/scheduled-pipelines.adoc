@@ -8,7 +8,7 @@ contentTags:
 ---
 = パイプラインのスケジュール実行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI プロジェクトでパイプラインをスケジュール実行する方法を説明します。
 :icons: font
 :toc: macro

@@ -7,7 +7,7 @@ contentTags:
 :page-layout: classic-docs
 :icons: font
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
-:page-liquid:
+
 
 This quickstart provides a guided tour through setting up a project, collaborating, and tools to iterate on and debug your build configuration. The following sections cover the following:
 

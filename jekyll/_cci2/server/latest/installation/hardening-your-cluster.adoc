@@ -6,7 +6,7 @@ contentTags:
 ---
 = Hardening your cluster
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.7.
 :icons: font
 :toc: macro

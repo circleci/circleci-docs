@@ -6,7 +6,7 @@ contentTags:
 ---
 = Backup and restore
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document outlines recommendations for how to back up and restore your CircleCI server v4.7 instance data and state.
 :icons: font
 :toc: macro

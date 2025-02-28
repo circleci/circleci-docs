@@ -8,7 +8,7 @@ contentTags:
 ---
 = CircleCI 上のプロジェクトのビルドを停止する
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI アカウントからプロジェクトを削除する方法
 :icons: font
 :toc: macro

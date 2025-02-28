@@ -11,7 +11,7 @@ document-type:
 ---
 = パイプラインのパラメーターを使って実行するワークフローを選択する方法
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

@@ -6,7 +6,7 @@ contentTags:
 ---
 = GitLab との連携
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、GitLab CI と CircleCI の連携方法についてわかりやすく説明します。
 :icons: font
 :toc: macro

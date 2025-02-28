@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This tutorial explains how to install and authorize the link:https://cloud.google.com/sdk/[Google Cloud SDK] in your primary container.
 

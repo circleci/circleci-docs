@@ -50,7 +50,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+            - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
       # Bundle install dependencies
@@ -62,7 +62,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-demo-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -167,7 +167,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
+            - go-mod-v1-{{ checksum "go.sum" }}
 
       - run:
           name: Get dependencies
@@ -197,7 +197,7 @@ jobs:
       - run: make
 
       - save_cache:
-          key: go-mod-v1-{% raw %}{{ checksum "go.sum" }}{% endraw %}
+          key: go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
 

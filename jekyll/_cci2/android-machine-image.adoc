@@ -6,7 +6,6 @@ contentTags:
 ---
 = Android images with the machine executor
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Using the Android image on the machine executor
 :icons: font
 :experimental:
@@ -36,7 +35,7 @@ Below you will find several examples demonstrating the use of the Android machin
 
 The below sample uses the Android orb to run a single job.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 # .circleci/config.yaml
@@ -63,7 +62,7 @@ workflows:
 
 This example shows how you can use more granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 # .circleci/config.yml
@@ -110,8 +109,6 @@ workflows:
 
 The following is an example of using the Android machine image, _without_ using the `circleci/android` link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps are similar to what is run when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[`run-ui-tests` job] of the orb.
 
-
-{% raw %}
 ```yaml
 # .circleci/config.yml
 version: 2.1
@@ -186,7 +183,6 @@ workflows:
     jobs:
       - build
 ```
-{% endraw %}
 
 [#using-the-android-image-on-server-v3x]
 === Using the Android image on server
@@ -210,7 +206,7 @@ It is also possible to use the Android orb, as shown above, for cloud. Your serv
 
 This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 # .circleci/config.yml

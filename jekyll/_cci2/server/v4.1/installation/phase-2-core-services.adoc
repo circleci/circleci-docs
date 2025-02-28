@@ -7,7 +7,7 @@ noindex: true
 ---
 = Phase 2 - core services
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Find the steps and prerequisites for installing CircleCI server v4.1.
 :icons: font
 :experimental:

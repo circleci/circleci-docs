@@ -7,7 +7,7 @@ contentTags:
 ---
 = Deploy over SSH
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

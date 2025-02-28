@@ -5,7 +5,7 @@ contentTags:
 ---
 = Insights snapshot badge
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Generate a badge that displays Insights metrics for a project.
 :icons: font
 :experimental:

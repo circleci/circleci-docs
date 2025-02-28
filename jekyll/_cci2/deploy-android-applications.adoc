@@ -6,7 +6,7 @@ contentTags:
 ---
 = Deploy Android applications
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn to deploy Android apps through CircleCI.
 :icons: font
 :experimental:

@@ -11,7 +11,7 @@ document-type:
 ---
 = マトリックスジョブの使用
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -24,7 +24,7 @@ document-type:
 
 以下の例では、2 つのバージョンの Node.js. を使って Linux Docker コンテナ、Linux VM、macOS 環境で `test` ジョブが 実行されます。 `test` ジョブの各実行において OS と Node.js の両方のバージョンを設定するために異なるパラメーターが渡されます。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 [source,yaml]
 ----

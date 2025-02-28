@@ -6,7 +6,7 @@ contentTags:
 ---
 = Phase 5 - Test your installation
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How to test your CircleCI server v4.6 installation in an air-gapped environment.
 :icons: font
 :toc: macro

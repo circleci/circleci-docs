@@ -7,7 +7,7 @@ contentTags:
 ---
 = サーバーにおける SSH での再実行のアーキテクチャ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:

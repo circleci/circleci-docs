@@ -6,7 +6,7 @@ contentTags:
 ---
 = Usage data collection
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn about CircleCI server v4.6 usage data collection for the purpose of improving our product and services.
 :icons: font
 :toc: macro

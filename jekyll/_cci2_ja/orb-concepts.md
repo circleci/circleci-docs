@@ -86,7 +86,7 @@ parameters:
 ```
 
 {:.tab.executor.Ruby-Docker}
-{% raw %}
+
 ```yaml
 description: >
   使用する Ruby のバージョンを選択。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
@@ -108,7 +108,7 @@ parameters:
     type: string
     type: string
 ```
-{% endraw %}
+
 
 例えば、 [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) では、パラメータ化された Docker ベースの Executor が提供されており、これを介して Docker タグを設定することができます。 これは、Node Orb の [テストジョブ](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing)と一緒に使用することで、すべてのバージョンの Node.js に対してアプリケーションをテストする簡単な方法です。
 

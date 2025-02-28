@@ -9,7 +9,7 @@ contentTags:
 = プロジェクトの値と変数
 :description: CircleCI プロジェクトで使用する定義済みの値のリスト
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

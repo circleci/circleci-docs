@@ -8,7 +8,7 @@ contentTags:
 ---
 = Orb に関するよくあるご質問
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このページでは、Orb に関するよくあるご質問をご紹介しています。
 :icons: font
 :toc: macro

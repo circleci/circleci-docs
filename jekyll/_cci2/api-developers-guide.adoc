@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
@@ -20,7 +19,7 @@ include::../_includes/partials/notes/server-api-examples.adoc[]
 
 The current categories of API v2 endpoints are:
 
-{% include snippets/api-v2-endpoints.adoc %}
+include::../_includes/snippets/api-v2-endpoints.adoc[]
 
 NOTE: Currently, xref:managing-api-tokens#creating-a-personal-api-token[Personal API tokens] are the only supported tokens on API v2. xref:managing-api-tokens#creating-a-project-api-token[Project tokens] are not currently supported on API v2.
 

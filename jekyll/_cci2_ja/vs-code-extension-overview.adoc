@@ -6,7 +6,7 @@ contentTags:
 ---
 = VS Code 拡張機能の概要
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: パイプライン、ワークフロー、ジョブの管理に役立つ CircleCI 用 VS Code 拡張機能を紹介します。
 :icons: font
 :toc: macro

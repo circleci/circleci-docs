@@ -5,7 +5,7 @@ contentTags:
 ---
 = Sign in to an SSO-enabled organization
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Instructions outlining how to sign in as an SSO user
 :icons: font
 :experimental:

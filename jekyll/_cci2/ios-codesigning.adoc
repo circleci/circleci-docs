@@ -8,7 +8,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This document describes the guidelines for setting up code signing
 for your iOS project on CircleCI.

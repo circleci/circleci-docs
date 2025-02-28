@@ -5,7 +5,7 @@ version:
 ---
 = Fail fast - DEPRECATED
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: A new way to tighten your feedback loop when running tests on CircleCI.
 :icons: font
 :experimental:

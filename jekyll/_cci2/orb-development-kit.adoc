@@ -6,7 +6,7 @@ contentTags:
 ---
 = Orb development kit
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :page-description: How to use CircleCI's orb development kit.
 :experimental:

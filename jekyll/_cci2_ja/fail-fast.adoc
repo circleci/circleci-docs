@@ -6,7 +6,7 @@ version:
 ---
 = フェイルファスト - オープンプレビュー
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI でのテスト実行時にフィードバックループのスピードを高められる新機能の紹介をこちらのドキュメントで公開しています。
 :icons: font
 :toc: macro

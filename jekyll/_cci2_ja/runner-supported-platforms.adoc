@@ -7,7 +7,7 @@ contentTags:
 ---
 = 利用可能な CircleCI セルフホストランナープラットフォーム
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: ランナーに対応するプラットフォームについての情報
 :icons: font
 :toc: macro

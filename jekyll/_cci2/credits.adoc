@@ -7,7 +7,7 @@ contentTags:
 = Using credits
 :description: Learn about the CircleCI credits-based plan system.
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

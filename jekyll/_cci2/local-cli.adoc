@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 The https://circleci-public.github.io/circleci-cli/[CircleCI command line interface (CLI)] brings CircleCI's advanced and powerful tools to your terminal.
 

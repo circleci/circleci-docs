@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 CircleCI pipelines are the highest-level unit of work in your CI/CD process. Defined by a configuration file (typically `.circleci/config.yml`), pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
 
@@ -143,7 +143,7 @@ NOTE: Custom webhook triggers can only be associated with GitHub App pipelines. 
 
 To add a trigger for a custom webhook, follow these steps:
 
-{% include snippets/custom-webhook-setup.adoc %}
+include::../_includes/snippets/custom-webhook-setup.adoc[]
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --

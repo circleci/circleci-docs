@@ -8,7 +8,7 @@ contentTags:
 ---
 = リソースクラスの概要
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI のリソースクラスの概要
 :icons: font
 :toc: macro

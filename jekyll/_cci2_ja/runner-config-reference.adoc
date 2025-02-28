@@ -7,7 +7,7 @@ contentTags:
 ---
 = マシンランナーの設定ファイルのリファレンス
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -126,7 +126,7 @@ runner:
 === runner.cleanup_working_directory
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
-CircleCI では、分かりやすいディレクトリを使用することを推奨していますが、パスに `%s` を指定することも可能です。 この値は各ジョブでは別の値に置き換えられます。 これは環境変数 `$CIRCLE_WORKING_DIRECTORY` の下で、ジョブの実行時にのみ分かる置き換えです。 
+CircleCI では、分かりやすいディレクトリを使用することを推奨していますが、パスに `%s` を指定することも可能です。 この値は各ジョブでは別の値に置き換えられます。 これは環境変数 `$CIRCLE_WORKING_DIRECTORY` の下で、ジョブの実行時にのみ分かる置き換えです。
 
 コード例
 

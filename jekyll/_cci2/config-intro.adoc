@@ -6,7 +6,7 @@ contentTags:
 ---
 = Configuration introduction
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: "Learn how to get started with the CircleCI config.yml file."
 :icons: font
 :experimental:
@@ -36,7 +36,7 @@ CircleCI provides an on-demand shell to run commands. In this first example, you
 . If you have not done so already, <<first-steps#,sign up with CircleCI>> and then either create or set up a new project. You can follow the steps to connect a code repository in our xref:getting-started#[Quickstart guide].
 . Once you have created or set up your project in CircleCI, go to the `.circleci/config.yml` file and replace its contents with the following code:
 +
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 +
 [source,yaml]
 ----

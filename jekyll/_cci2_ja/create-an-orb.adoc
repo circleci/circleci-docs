@@ -8,7 +8,7 @@ contentTags:
 ---
 = CircleCI Orb の作成
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Orb 開発キットで Orb を作成する方法をチュートリアル形式で説明します。
 :icons: font
 :toc: macro

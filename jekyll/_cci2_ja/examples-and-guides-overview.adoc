@@ -8,7 +8,7 @@ contentTags:
 ---
 = サンプルとガイドの概要
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: サンプルを使った CircleCI 学習リソース
 :icons: font
 :toc: macro
@@ -26,7 +26,7 @@ Docker コンテナや Linux VM のような特定の実行環境でパイプラ
 
 さまざまな言語でデモアプリケーションを作成しているので、サンプルを使って学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリックリポジトリを公開しています。
 
-{% include snippets/ja/language-guides.adoc %}
+include::../_includes/snippets/ja/language-guides.adoc[]
 
 [#platforms]
 == プラットフォームガイド

@@ -7,7 +7,7 @@ contentTags:
 = Project values and variables
 :description: A list of all built-in variables for your CircleCI projects.
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

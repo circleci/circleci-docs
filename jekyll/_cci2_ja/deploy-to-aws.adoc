@@ -9,7 +9,7 @@ contentTags:
 ---
 = AWS へのデプロイ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -50,7 +50,7 @@ link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#acces
 
 Orb の `sync` コマンドを使ってデプロイします。 `build` ジョブが終了し、現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -108,7 +108,7 @@ link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI に
 
 link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[AWS CLI を使用] して、アプリケーションを S3 にデプロイするか、他の AWS 操作を実行します。 build ジョブが終了し、現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -156,7 +156,7 @@ AWS ECR Orb を使うと、最小限の設定で AWS へのログイン、ビル
 
 下記のように `build-and-push-image` ジョブを使う場合は、環境変数 `AWS_ECR_ACCOUNT_URL`、`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、`AWS_DEFAULT_REGION` を設定する必要があります。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -182,7 +182,7 @@ link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr[AWS ECR] Orb �
 
 下記のように `build-and-push-image` ジョブを使う場合は、環境変数 `AWS_ECR_ACCOUNT_URL`、`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、`AWS_DEFAULT_REGION` を設定する必要があります。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -213,7 +213,7 @@ workflows:
 
 link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] Orb を使用すると、AWS CodeDeploy を通じてデプロイを実行できます。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1 # use 2.1 to make use of orbs and pipelines

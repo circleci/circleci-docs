@@ -11,7 +11,7 @@ document-type:
 ---
 = サービスの更新を AWS ECS にデプロイする方法
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -129,7 +129,7 @@ jobs:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
- 
+
 No context
 ----
 

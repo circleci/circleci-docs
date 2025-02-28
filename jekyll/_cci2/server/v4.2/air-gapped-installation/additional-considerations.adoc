@@ -7,7 +7,7 @@ noindex: true
 ---
 = Additional considerations
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server
 :icons: font
 :toc: macro

@@ -6,7 +6,7 @@ contentTags:
 ---
 = Phase 2 GCP - core services
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Installation guide for CircleCI server v4.7 core services.
 :icons: font
 :toc: macro

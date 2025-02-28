@@ -5,7 +5,7 @@ contentTags:
 ---
 = Set up SSO
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Tutorial outlining how to set up SSO for an organization
 :icons: font
 :experimental:

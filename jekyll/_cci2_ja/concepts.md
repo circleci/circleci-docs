@@ -94,7 +94,7 @@ Java アプリケーション例を用いてさまざまな設定要素を紹介
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -139,13 +139,13 @@ jobs:
 ```
 
 
-{% endraw %}
+
 
 {:.tab.cache.Server_3}
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -190,13 +190,13 @@ jobs:
 ```
 
 
-{% endraw %}
+
 
 {:.tab.cache.Server_2}
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -241,7 +241,7 @@ jobs:
 ```
 
 
-{% endraw %}
+
 
 
 
@@ -263,7 +263,7 @@ jobs:
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -299,13 +299,13 @@ jobs:
 ```
 
 
-{% endraw %}
+
 
 {:.tab.workspace.Server_3}
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -341,13 +341,13 @@ jobs:
 ```
 
 
-{% endraw %}
+
 
 {:.tab.workspace.Server_2}
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -382,7 +382,7 @@ jobs:
 ```
 
 
-{% endraw %}
+
 
 アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
 
@@ -798,7 +798,7 @@ jobs:
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -870,13 +870,13 @@ workflows:
 ```
 
 
-{% endraw %}
+
 
 {:.tab.workflows-example.Server_3}
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -948,13 +948,13 @@ workflows:
 ```
 
 
-{% endraw %}
+
 
 {:.tab.workflows-example.Server_2}
 
 
 
-{% raw %}
+
 
 
 ```yaml
@@ -1027,7 +1027,7 @@ workflows:
 ```
 
 
-{% endraw %}
+
 
 
 

@@ -7,7 +7,7 @@ contentTags:
 ---
 = コンテナランナーのリファレンスガイド
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -145,7 +145,7 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |この特定の `container-agent` インスタンスに割り当てる名前 (できれば一意の名前)。 この名前は、CircleCI UI の Runner Inventory ページに表示されます。 指定しない場合は、デプロイの名前がデフォルトで設定されます。
 |`container-agent` (デプロイの名前)
 
-|agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要* 
+|agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要*
 |リソースクラスタスクの設定。 上記の "<<resource-class-configuration-custom-pod,リソースクラスの設定>>" を参照してください。
 |{}
 
@@ -408,7 +408,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
 
-Kaniko を使ったコンテナイメージのビルドの成功例については、 
+Kaniko を使ったコンテナイメージのビルドの成功例については、
 link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[コミュニティフォーラムについて] を参照してください。
 
 もう一つのオプションは、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
@@ -444,7 +444,7 @@ resourceClasses:
          github.com/fuse: 1
 ```
 
-これで、コンテナエージェントジョブで Buildah コマンドを実行し、コンテナをビルドできるようになります。 
+これで、コンテナエージェントジョブで Buildah コマンドを実行し、コンテナをビルドできるようになります。
 
 ```yaml
   docker-image:

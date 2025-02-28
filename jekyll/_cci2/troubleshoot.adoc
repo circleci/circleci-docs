@@ -6,7 +6,7 @@ contentTags:
 ---
 = Troubleshoot
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Troubleshoot CircleCI and various setups and integrations.
 :icons: font
 :experimental:
@@ -40,4 +40,4 @@ include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip
 
 == Releases
 
-{% include snippets/troubleshoot/releases-troubleshoot.adoc %}
+include::../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]

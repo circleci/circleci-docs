@@ -8,7 +8,7 @@ noindex: true
 = Phase 3 - execution environments
 :page-layout: classic-docs
 :page-description: Learn how to configure execution environments for CircleCI server v4.1.
-:page-liquid:
+
 :icons: font
 :experimental:
 

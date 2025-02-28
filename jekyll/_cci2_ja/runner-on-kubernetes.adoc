@@ -8,7 +8,7 @@ contentTags:
 ---
 = Kubernetes への CircleCI のセルフホストランナーのインストール
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このインストールガイドに沿って Kubernetes クラスタに CircleCI セルフホストランナーを設定してください。
 :icons: font
 :toc: macro

@@ -8,7 +8,7 @@ contentTags:
 ---
 = Stop building a project on CircleCI
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to remove a project from your CircleCI account
 :icons: font
 :experimental:
