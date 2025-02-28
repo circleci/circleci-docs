@@ -7,7 +7,7 @@ noindex: true
 ---
 = Managing load balancers
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Use this guide to make the frontend load balancer private.
 :icons: font
 :experimental:

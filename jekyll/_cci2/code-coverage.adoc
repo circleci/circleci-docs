@@ -10,7 +10,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 [#introduction]
 == Introduction
@@ -27,7 +27,7 @@ image::{{site.baseurl}}/assets/img/docs/artifacts.png[Artifacts tab in the web a
 [#language-specific-code-coverage-options]
 == Language-specific code coverage options
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#ruby]
 === Ruby

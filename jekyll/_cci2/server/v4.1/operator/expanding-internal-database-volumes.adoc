@@ -9,7 +9,7 @@ noindex: true
 :page-layout: classic-docs
 :page-description: This document describes how to expand the internal database volumes for CircleCI server v4.1.
 :imagesdir: ../assets/img/docs/
-:page-liquid:
+
 :icons: font
 :experimental:
 

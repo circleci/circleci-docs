@@ -7,7 +7,7 @@ contentTags:
 ---
 = Security overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document provides an introduction to security features at CircleCI.
 :icons: font
 :experimental:

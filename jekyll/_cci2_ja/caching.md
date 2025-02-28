@@ -78,7 +78,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 2 つのキーを用いた例は下記の通りです。
 
-{% raw %}
+
 ```yaml
     steps:
       - restore_cache:
@@ -89,11 +89,11 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
             # 任意のブランチから使用される、最も新しく生成されたキャッシュを検索します
             - v1-npm-deps-
 ```
-{% endraw %}
+
 
 2 つ目のキーは最初のキーよりも特定度が低いため、現在の状態と最も新しく生成されたキャッシュとの間に差がある可能性が高くなります。 依存関係ツールを実行すると、古い依存関係が検出されて更新されます。 これを**部分キャッシュ リストア**と言います。
 
-`keys:` リストのすべての行は _1 つのキャッシュ_を管理します (各行が固有のキャッシュに**対応しているわけではありません**)。 この例でリストされているキー {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュのリストアが必要になると CircleCI は、まず (最も特定度の高い) 最初のキーに基づいてキャッシュを検証し、次に他のキーを順に調べ、他のキャッシュキーに変更があるかどうかを確認します。
+`keys:` リストのすべての行は _1 つのキャッシュ_を管理します (各行が固有のキャッシュに**対応しているわけではありません**)。 この例でリストされているキー (`v1-npm-deps-{{ checksum "package-lock.json" }}` および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュのリストアが必要になると CircleCI は、まず (最も特定度の高い) 最初のキーに基づいてキャッシュを検証し、次に他のキーを順に調べ、他のキャッシュキーに変更があるかどうかを確認します。
 
 最初のキーにより、 `package-lock.json` ファイルのチェックサムが文字列 `v1-nPM-deps-` に連結されます。 コミットでこのファイルが変更された場合は、新しいキャッシュキーが調べられます。
 
@@ -108,7 +108,7 @@ Yarn 2.x のリリースには [Zero Installs](https://yarnpkg.com/features/zero
 
 Yarn 2.x を Zero Installs を _使わずに_ 使用している場合は、次のように設定します。
 
-{% raw %}
+
 ```yaml
 #...
       - restore_cache:
@@ -126,11 +126,11 @@ Yarn 2.x を Zero Installs を _使わずに_ 使用している場合は、次�
             - .yarn/unplugged
 #...
 ```
-{% endraw %}
+
 
 Yarn 1.x をご使用の場合は、次のように設定します。
 
-{% raw %}
+
 ```yaml
 #...
       - restore_cache:
@@ -147,7 +147,7 @@ Yarn 1.x をご使用の場合は、次のように設定します。
             - ~/.cache/yarn
 #...
 ```
-{% endraw %}
+
 
 ## キャッシュとオープンソース
 {: #caching-and-open-source }
@@ -172,7 +172,7 @@ Yarn 1.x をご使用の場合は、次のように設定します。
 `pip` の依存関係のキャッシュ例
 
 {:.tab.dependencies.Cloud}
-{% raw %}
+
 ```yaml
 version: 2.1
 jobs:
@@ -191,10 +191,10 @@ jobs:
           paths:
             - "venv"
 ```
-{% endraw %}
+
 
 {:.tab.dependencies.Server_3}
-{% raw %}
+
 ```yaml
 version: 2.1
 jobs:
@@ -213,10 +213,10 @@ jobs:
           paths:
             - "venv"
 ```
-{% endraw %}
+
 
 {:.tab.dependencies.Server_2}
-{% raw %}
+
 ```yaml
 version: 2
 jobs:
@@ -235,7 +235,7 @@ jobs:
           paths:
             - "venv"
 ```
-{% endraw %}
+
 
 キャッシュ `key` で `checksum` の使用を記述します。 これを使用すると、特定の依存関係管理ファイル (`package.json`、`requirements.txt` など) に _変更_ があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/ja/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
 
@@ -260,7 +260,7 @@ jobs:
 ### キャッシュの競合状態の例 2
 {: #caching-race-condition-example-2 }
 
-{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用してリストアを行うような、より複雑なジョブのケースもあります。
+`node-cache-{{ checksum "package-lock.json" }}` のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用してリストアを行うような、より複雑なジョブのケースもあります。
 
 この場合でも競合状態になる可能性はありますが、詳細はケースによって異なります。 たとえば、ダウンストリームジョブでは、最後に実行されたアップストリームジョブのキャッシュが使用されるようなケースです。
 
@@ -276,7 +276,7 @@ jobs:
 
 1. カスタムコマンドを設定ファイルに追加します。
 
-      {% raw %}
+
       ```yaml
       commands:
         create_concatenated_package_lock:
@@ -289,11 +289,11 @@ jobs:
                 name: Combine package-lock.json files to single file
                 command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
       ```
-      {% endraw %}
+
 
 2. ビルド時にカスタムコマンドを使用して、連結 `package-lock` ファイルを生成します。
 
-      {% raw %}
+
       ```yaml
           steps:
             - checkout
@@ -305,7 +305,7 @@ jobs:
                   - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
                   - v3-deps
       ```
-      {% endraw %}
+
 
 ## キャッシュの管理
 {: #managing-caches }
@@ -346,7 +346,7 @@ jobs:
 各キャッシュ キーは、1 つのデータキャッシュに対応する*ユーザー定義*の文字列です。 **動的な値**を挿入してキャッシュキーを作成することができます。 これは**テンプレート**と呼ばれます。 キャッシュキー内の中かっこで囲まれている部分がテンプレートです。 以下を例に考えてみましょう。
 
 ```shell
-{% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
+myapp-{{ checksum "package-lock.json" }}
 ```
 
 上の例の出力は、このキーを表す一意の文字列です。 ここでは、[チェックサム](https://ja.wikipedia.org/wiki/チェックサム)を使用して、`package-lock.json` の内容を表す一意の文字列を作成しています。
@@ -365,21 +365,21 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 以下は、さまざまな目的に合わせたキャッシュ戦略の例です。
 
- * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %}: `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。 このプロジェクトの別々のブランチで同じキャッシュキーが生成されます。
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %}: `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。 このプロジェクトの別々のブランチで異なるキャッシュキーが生成されます。
- * {% raw %}`myapp-{{ epoch }}`{% endraw %}: ビルドごとに異なるキャッシュキーを生成します。
+ * `myapp-{{ checksum "package-lock.json" }}`: `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。 このプロジェクトの別々のブランチで同じキャッシュキーが生成されます。
+ * `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`: `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。 このプロジェクトの別々のブランチで異なるキャッシュキーが生成されます。
+ * `myapp-{{ epoch }}`: ビルドごとに異なるキャッシュキーを生成します。
 
 ステップの実行中に、上のテンプレートが実行時の値に置き換えられ、その置換後の文字列が `key` として使用されます。 CirlceCI のキャッシュ`キー`で利用可能なテンプレートを下記の表にまとめました。
 
 | テンプレート                                                            | 説明                                                                                                                                                                                                                                                                                                                                                                |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}{:.env_var}       | filename で指定したファイルの内容の SHA256 ハッシュを Base64 エンコードした値。ファイルが変更されると、新しいキャッシュ キーが生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 `restore_cache` から `save_cache` までの間にファイルの内容が変更されないようにすることが重要です。ファイルの内容が変更された場合、`restore_cache` のタイミングで使用されるファイルとは異なるキャッシュキーの下でキャッシュが保存されます。 |
-| {% raw %}`{{ .Branch }}`{% endraw %}                              | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                                                 |
-| {% raw %}`{{ .BuildNum }}`{% endraw %}                            | このビルドの CircleCI ジョブ番号。                                                                                                                                                                                                                                                                                                                                            |
-| {% raw %}`{{ .Revision }}`{% endraw %}                            | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/env-vars/)、または特定の[コンテキスト]({{site.baseurl}}/ja/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                                                                                    |
-| {% raw %}`{{ epoch }}`{% endraw %}                                | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や UNIX エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                                            |
-| {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/ja/faq/#which-cpu-architectures-does-circleci-support)を参照してください。                                                                                            |
+| `{{ checksum "filename" }}`{:.env_var}       | filename で指定したファイルの内容の SHA256 ハッシュを Base64 エンコードした値。ファイルが変更されると、新しいキャッシュ キーが生成されます。 ここで指定できるのはリポジトリでコミットされているファイルに限られるため、 `package-lock.json` や `pom.xml`、もしくは `project.clj` などの依存関係を定義しているマニフェストファイルを使うことも検討してください。 `restore_cache` から `save_cache` までの間にファイルの内容が変更されないようにすることが重要です。ファイルの内容が変更された場合、`restore_cache` のタイミングで使用されるファイルとは異なるキャッシュキーの下でキャッシュが保存されます。 |
+| `{{ .Branch }}`                              | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                                                 |
+| `{{ .BuildNum }}`                            | このビルドの CircleCI ジョブ番号。                                                                                                                                                                                                                                                                                                                                            |
+| `{{ .Revision }}`                            | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                |
+| `{{ .Environment.variableName }}`{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/env-vars/)、または特定の[コンテキスト]({{site.baseurl}}/ja/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                                                                                    |
+| `{{ epoch }}`                                | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や UNIX エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                                            |
+| `{{ arch }}`                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/ja/faq/#which-cpu-architectures-does-circleci-support)を参照してください。                                                                                            |
 {: class="table table-striped"}
 
 ### キーとテンプレートの使用に関する補足説明
@@ -387,8 +387,8 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 {:.no_toc}
 
 - キャッシュキーの最大文字数は 900 文字です。 キャッシュキーの文字数が これより長くなると、キャッシュは保存されません。
-- キャッシュに一意の識別子を定義するときは、{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。
-- キャッシュ変数には、ビルドで使用している場合は、[パラメーターの使用">パラメーター]({{site.baseurl}}/ja/reusing-config/#using-parameters-in-executors)も使用できます。 たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} などです。
+- キャッシュに一意の識別子を定義するときは、`{{ epoch }}` などの特定度の高いテンプレート キーを過度に使用しないように注意してください。 `{{ .Branch }}` や `{{ checksum "filename" }}` といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。
+- キャッシュ変数には、ビルドで使用している場合は、[パラメーターの使用">パラメーター]({{site.baseurl}}/ja/reusing-config/#using-parameters-in-executors)も使用できます。 たとえば、`v1-deps-<< parameters.varname >>` などです。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。
 
 ## キャッシュの保存およびリストアの例
@@ -401,7 +401,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 **警告:** この例は、ソリューションの_候補_ではありますが、お客様の個別のニーズには適さず、ストレージコストが増加する可能性があります。
 {: class="alert alert-warning"}
 
-{% raw %}
+
 
 ```yaml
     docker:
@@ -464,14 +464,14 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
       - run: bundle exec cucumber
 ```
 
-{% endraw %}
+
 
 ## ソースのキャッシュ
 {: #source-caching }
 
 git リポジトリをキャッシュすると `checkout` ステップにかかる時間を短縮できる場合があります。これは特に、大規模なプロジェクトで有効です。 ソースコードのキャッシュ方法は下記を参考にしてください。
 
-{% raw %}
+
 
 ```yaml
     steps:
@@ -489,13 +489,13 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
             - ".git"
 ```
 
-{% endraw %}
+
 
 この例では、`restore_cache` は最初に現在の git リビジョンからキャッシュ ヒットを探し、次に現在のブランチからキャッシュ ヒットを探します。最後に、すべてのブランチとリビジョンからキャッシュ ヒットを探します。 `keys` リストが検出されると、最初に一致するキーからキャッシュがリストアされます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
 ソースコードの更新が頻繁に行われるようなら、指定するファイルをさらに絞り込むと良いでしょう。 そうすることで、現在のブランチや git のリビジョンの変更が頻繁に行われる場合でも、より細やかなソースコードのキャッシュ管理を実現できます。
 
-最も限定的な `restore_cache` オプション({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}) を指定した場合でも、ソースのキャッシュはきわめて有効です。たとえば、同じ git リビジョンに対してビルドを繰り返す場合 ([API トリガーのビルド](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) や、ワークフローを使用する場合です。ワークフローを使用するときには、ソースをキャッシュしないと、ワークフローのジョブごとに同じリポジトリを 1 回ずつ `checkout` しなければならなくなるためです。
+最も限定的な `restore_cache` オプション(`source-v1-{{ .Branch }}-{{ .Revision }}`) を指定した場合でも、ソースのキャッシュはきわめて有効です。たとえば、同じ git リビジョンに対してビルドを繰り返す場合 ([API トリガーのビルド](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) や、ワークフローを使用する場合です。ワークフローを使用するときには、ソースをキャッシュしないと、ワークフローのジョブごとに同じリポジトリを 1 回ずつ `checkout` しなければならなくなるためです。
 
 とはいえ、ソースのキャッシュを使用する場合と使用しない場合のビルド時間を比較した方が良い場合もあります。 `restore_cache`よりも`git clone`の方が高速な場合も多々あります。
 

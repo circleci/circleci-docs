@@ -6,7 +6,7 @@ contentTags:
 ---
 = Configuring external services
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes how to configure the following external services for use with a CircleCI server v4.6 installation
 :icons: font
 :toc: macro

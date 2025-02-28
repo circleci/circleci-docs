@@ -9,7 +9,7 @@ document-type:
 ---
 = Trigger a pipeline
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 
@@ -173,7 +173,7 @@ NOTE: Custom webhooks are available for projects integrated via the GitHub App. 
 
 Follow these steps to set up and test a custom webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
 
-{% include snippets/custom-webhook-setup.adoc %}
+include::../_includes/snippets/custom-webhook-setup.adoc[]
 
 . You can now test your custom webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +

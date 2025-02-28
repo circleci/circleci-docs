@@ -8,7 +8,7 @@ contentTags:
 ---
 = CircleCI でのプロジェクトの作成
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI でプロジェクトを作成する方法
 :icons: font
 :toc: macro

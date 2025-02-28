@@ -5,7 +5,7 @@ contentTags:
 ---
 = Migrate scheduled workflows to scheduled pipelines
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Migrate scheduled workflows to scheduled pipelines
 :icons: font
 :experimental:

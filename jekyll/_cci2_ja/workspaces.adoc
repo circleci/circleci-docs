@@ -8,7 +8,7 @@ contentTags:
 = ワークスペースによるジョブ間のデータ共有
 :page-layout: classic-docs
 :page-description: ここではワークスペースを使ってデータをワークフローのダウンストリームジョブで共有する方法を説明します。
-:page-liquid:
+
 :icons: font
 :experimental:
 

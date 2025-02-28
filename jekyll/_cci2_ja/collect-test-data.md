@@ -200,7 +200,7 @@ Mocha のテストランナーで JUnit テストを出力するには、[mocha-
 
 以下は、[marcospgp](https://github.com/marcospgp) から提供された、Mocha と nyc の組み合わせに使用できるサンプルの全文です。
 
-{% raw %}
+
 ```yml
 version: 2
 jobs:
@@ -292,7 +292,7 @@ jobs:
                 path: ./coverage/lcov.info
                 prefix: tests
 ```
-{% endraw %}
+
 
 ### Karma
 {: #karma }

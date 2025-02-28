@@ -8,7 +8,7 @@ contentTags:
 ---
 = テスト分割によるパイプラインの高速化
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI でテストを分割し、実行する方法について説明します。
 :icons: font
 :toc: macro
@@ -50,7 +50,7 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 
 下記は、後で編集を行う `.circleci/config.yml` テンプレートのコピーです。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 [source,yaml]
 ----
@@ -162,7 +162,7 @@ parallelism: 5
 +
 NOTE: `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 +
-実際には、これらの CircleCI CLI コマンドにより、まだテストは実行されません。そのためには `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数 
+実際には、これらの CircleCI CLI コマンドにより、まだテストは実行されません。そのためには `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数
  `$TEST` に保存されます。
 .. `Test application` コマンドの後に、新しく以下のように `run` コマンドを追加します。
 +

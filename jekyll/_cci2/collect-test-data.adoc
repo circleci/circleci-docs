@@ -40,7 +40,7 @@ sectionTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 [#introduction]
 == Introduction
@@ -297,7 +297,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 
 Following is an example for Mocha with nyc, contributed by link:https://github.com/marcospgp[marcospgp].
 
-{% raw %}
+
 
 [,yml]
 ----
@@ -387,7 +387,7 @@ jobs:
           prefix: tests
 ----
 
-{% endraw %}
+
 
 [#karma]
 === Karma

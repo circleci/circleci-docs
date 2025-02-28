@@ -10,7 +10,7 @@ contentTags:
 = パイプラインの値とパラメーター
 :experimental:
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、パイプラインの値とパラメーターを使用して、再利用可能なパイプラインの設定方法をご紹介します。
 :icons: font
 :toc: macro

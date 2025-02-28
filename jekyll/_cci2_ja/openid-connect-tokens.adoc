@@ -6,7 +6,7 @@ contentTags:
 ---
 = ジョブでの OpenID Connect トークンの使用
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
 :icons: font
 :toc: macro
@@ -123,7 +123,7 @@ AWS アカウントが CircleCI の OpenID Connect トークンを信頼する�
 ** **Provider URL** を求められたら、`\https://oidc.circleci.com/org/<your-organization-id>` と入力します。`organization_id` には、CircleCI の組織 ID を入力します。
 ** **Audience**： 組織 ID を入力してください
 +
-{% include snippets/ja/find-organization-id.adoc %}
+include::../_includes/snippets/ja/find-organization-id.adoc[]
 . IDプロバイダを作成すると、ADWコンソールの上部にバナーが表示され、**Assign role** というオプションが表示されます。 このボタンをクリックして新しいロールを作成するか、AWSドキュメントの https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[ウェブ ID または OpenID Connect フェデレーション用のロールの作成]セクションを参照して、 また、以下のものが必要になります：
 ** 先ほど作成した **Identity Provider**。
 ** **Audience** は、先ほど入力した「組織 ID」のみを選択します。

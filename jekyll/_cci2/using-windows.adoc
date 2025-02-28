@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
@@ -108,7 +108,7 @@ workflows:
 [#available-resource-classes]
 == Available resource classes
 
-{% include snippets/windows-resource-table.adoc %}
+include::../_includes/snippets/windows-resource-table.adoc[]
 
 [.tab.windowsresourceblock.Cloud_with_orb]
 --
@@ -171,7 +171,7 @@ jobs:
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/snippets/resource-class-view.adoc[]
 
 [#windows-machine-executor-images]
 == Windows machine executor images

@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI Linux CUDA images support policy
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI Linux CUDA images release, update, and deprecation policy
 :icons: font
 :toc: macro

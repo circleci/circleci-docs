@@ -5,7 +5,7 @@ contentTags:
 ---
 = Roles and permissions
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
 :icons: font
 :experimental:
@@ -32,9 +32,9 @@ The table below shows the permissions associated with each CircleCI organization
 3+^| ORGANIZATION ROLES
 
 |
-| 
-| 
-| 
+|
+|
+|
 
 | *Organization*
 | *Admin*
@@ -347,9 +347,9 @@ The table below shows the permissions associated with each CircleCI project role
 3+^| PROJECT ROLES
 
 |
-| 
-| 
-| 
+|
+|
+|
 
 | *Projects*
 | *Admin*

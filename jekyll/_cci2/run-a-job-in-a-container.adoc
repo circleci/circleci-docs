@@ -6,7 +6,7 @@ contentTags:
 ---
 = Run a job in a container on your machine with Docker
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to run a job in a container on your machine with Docker.
 :icons: font
 :experimental:

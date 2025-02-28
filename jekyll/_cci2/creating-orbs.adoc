@@ -8,7 +8,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This guide covers the steps required to publish an orb.
 

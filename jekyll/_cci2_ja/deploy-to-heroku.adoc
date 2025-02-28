@@ -9,7 +9,7 @@ contentTags:
 ---
 = Heroku へのデプロイ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -38,7 +38,7 @@ Heroku アプリケーションの名前と Heroku API キーを、それぞれ�
 
 link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。 `deploy-via-git` により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Orb レジストリ] の Heroku Orb ページを参照してください。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1

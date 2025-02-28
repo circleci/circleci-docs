@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 Use Docker layer caching (DLC) to reduce Docker image build times on CircleCI. DLC is available on all CircleCI plans.
 

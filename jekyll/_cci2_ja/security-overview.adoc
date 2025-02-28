@@ -9,7 +9,7 @@ contentTags:
 ---
 = セキュリティの概要
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このページでは、CircleCI のセキュリティ機能について説明します。
 :icons: font
 :toc: macro

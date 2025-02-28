@@ -8,7 +8,7 @@ contentTags:
 ---
 = Docker での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、CircleCI セルフホストランナーの Docker へのインストール手順をわかりやすくご紹介しています。
 :icons: font
 :toc: macro
@@ -30,7 +30,7 @@ contentTags:
 [#runner-terms]
 === ランナー条件
 
-{% include snippets/runner/ja/terms.adoc %}
+include::../_includes/snippets/runner/ja/terms.adoc[]
 
 [#machine-runner-prerequsites]
 === 前提条件

@@ -7,7 +7,7 @@ docs@circleci.com
 :toc:
 :toc-title: 目次
 :icons: font
-:page-liquid:
+
 :source-highlighter: rouge
 :pagenums:
 :idprefix:

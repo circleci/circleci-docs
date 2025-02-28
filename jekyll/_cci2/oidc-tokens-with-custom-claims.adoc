@@ -6,7 +6,7 @@ contentTags:
 ---
 = OIDC tokens with custom claims
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn about the capabilities to customize claims in OIDC tokens.
 :icons: font
 :experimental:

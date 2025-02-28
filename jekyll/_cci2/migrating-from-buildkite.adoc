@@ -6,7 +6,7 @@ contentTags:
 ---
 = Migrate from Buildkite
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: An overview of how to migrate from Buildkite to CircleCI.
 :icons: font
 :experimental:
@@ -64,7 +64,7 @@ The Buildkite and CircleCI configurations will be different. It may be helpful t
 [#configuration-comparison]
 == Configuration comparison
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

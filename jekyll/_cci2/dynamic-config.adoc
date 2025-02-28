@@ -8,7 +8,7 @@ contentTags:
 = Dynamic configuration overview
 :description: A guide to using CircleCI's dynamic configuration features
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

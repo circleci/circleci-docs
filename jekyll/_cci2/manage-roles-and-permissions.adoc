@@ -5,7 +5,7 @@ contentTags:
 ---
 = Manage roles and permissions
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How-to guides for managing roles and permissions in CircleCI.
 :icons: font
 :experimental:

@@ -6,13 +6,13 @@ contentTags:
 ---
 = Application lifecycle
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn about CircleCI server v4.7 semantic versioning and release schedules.
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI is committed to supporting two minor versions of the software. This means a minor version will be released twice yearly and receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation. Patch releases will continue to be monthly as needed. 
+CircleCI is committed to supporting two minor versions of the software. This means a minor version will be released twice yearly and receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation. Patch releases will continue to be monthly as needed.
 
 [#semantic-versioning]
 == Semantic versioning

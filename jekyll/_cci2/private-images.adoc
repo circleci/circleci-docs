@@ -5,7 +5,7 @@ contentTags:
 ---
 = Using Docker authenticated pulls
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes how to authenticate with your Docker registry provider to pull images.
 :icons: font
 :experimental:

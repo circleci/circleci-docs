@@ -8,7 +8,7 @@ contentTags:
 ---
 = Machine executor による Android イメージ
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Machine Executor での Android イメージの使用
 :icons: font
 :toc: macro
@@ -41,7 +41,7 @@ machine Executor] を通じてアクセスできます。 Android マシンイ�
 
 以下の例では、Android Orb を使用して 1 つのジョブを実行します。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 # .circleci/config.yaml
@@ -64,7 +64,7 @@ workflows:
 
 この例では、より細かな Orb コマンドを使用して、link:https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-test[start-emulator-and-run-tests] コマンドの処理を実現する方法を示しています。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 # .circleci/config.yml
@@ -110,7 +110,7 @@ workflows:
 
 以下の例では、circleci/android link:https://circleci.com/developer/ja/orbs/orb/circleci/android[Orb] なしで Android マシン イメージを使用しています。  以下のステップは、Orb の link:https://circleci.com/developer/ja/orbs/orb/circleci/android#jobs-run-ui-tests[run-ui-tests] ジョブを使用して実行する処理に類似しています。
 
-{% raw %}
+
 
 ```yaml
 # .circleci/config.yml
@@ -187,7 +187,7 @@ workflows:
       - build
 ```
 
-{% endraw %}
+
 
 [#using-the-android-image-on-server-v3x]
 === CircleCI Server v3.x での Android イメージの使用
@@ -211,7 +211,7 @@ jobs:
 
 この例では、きめ細かな Orb コマンドを使用して、link:https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] コマンドの機能を実現する方法を示しています。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 # .circleci/config.yml

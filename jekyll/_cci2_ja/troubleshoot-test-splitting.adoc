@@ -8,7 +8,7 @@ contentTags:
 ---
 = テスト分割のトラブルシューティング
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI テスト分割の実行におけるトラブルシューティングに役立つヒントと一般的なエラーをこのドキュメントでわかりやすく説明します。
 :icons: font
 :toc: macro

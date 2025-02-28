@@ -5,7 +5,7 @@ contentTags:
 ---
 = Free Plan
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes the Free Plan available to developers on CircleCI.
 :icons: font
 :experimental:
@@ -29,7 +29,7 @@ Below are the features you can use on the Free Plan. Refer to the link:https://c
 
 A wide array of resource classes on Docker, Arm, Linux, Windows, and macOS are available. To view examples, or find more information about these executors, refer to the xref:executor-intro#[Execution environments overview] page.
 
-{% include snippets/features-of-circleci.adoc %}
+include::../_includes/snippets/features-of-circleci.adoc[]
 
 === Releases
 

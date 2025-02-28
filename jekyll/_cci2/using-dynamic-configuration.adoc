@@ -9,7 +9,7 @@ contentTags:
 ---
 = Using dynamic configuration
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

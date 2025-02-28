@@ -8,7 +8,7 @@ contentTags:
 ---
 = CLI を使ったセルフホストランナーのインストール
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
 :icons: font
 :toc: macro

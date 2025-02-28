@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI's self-hosted runner overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :icons: font
 :experimental:

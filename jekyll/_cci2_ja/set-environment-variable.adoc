@@ -8,7 +8,7 @@ contentTags:
 ---
 = 環境変数の設定
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、CircleCI パイプラインで使用するための環境変数の設定方法を詳しく皆様にご紹介しています。
 :icons: font
 :toc: macro
@@ -17,7 +17,7 @@ contentTags:
 
 CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 [#set-an-environment-variable-in-a-shell-command]
 == シェルコマンドでの環境変数の設定

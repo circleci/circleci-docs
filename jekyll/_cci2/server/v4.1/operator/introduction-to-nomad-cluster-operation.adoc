@@ -7,7 +7,7 @@ noindex: true
 ---
 = Introduction to Nomad cluster operation
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI v4.1 installation.
 :icons: font
 :experimental:

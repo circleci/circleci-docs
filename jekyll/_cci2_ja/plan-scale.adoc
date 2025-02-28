@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI Scale プラン
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes the Scale plan available to developers on CircleCI.
 :icons: font
 :toc: macro
@@ -63,7 +63,7 @@ link:https://app.circleci.com/[CircleCI Web アプリ]では、アーティフ�
 [#circleci-features]
 == CircleCI の機能
 
-上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は 
+上記のアップグレード機能に加え、Scale プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は
 link:https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については link:https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。
 
-{% include snippets/ja/features-of-circleci.adoc %}
+include::../_includes/snippets/ja/features-of-circleci.adoc[]

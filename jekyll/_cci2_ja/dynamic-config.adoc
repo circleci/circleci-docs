@@ -10,7 +10,7 @@ contentTags:
 = ダイナミックコンフィグ
 :description: セットアップワークフローによるダイナミックコンフィグの使用方法に関する開発者向けページ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

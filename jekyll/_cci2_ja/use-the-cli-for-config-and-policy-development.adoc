@@ -7,7 +7,7 @@ contentTags:
 ---
 = CLIを使った設定ファイルとポリシー開発 - オープンプレビュー
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

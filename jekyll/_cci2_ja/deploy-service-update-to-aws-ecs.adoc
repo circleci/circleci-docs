@@ -11,7 +11,7 @@ document-type:
 ---
 = サービスの更新を AWS ECS にデプロイする方法
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

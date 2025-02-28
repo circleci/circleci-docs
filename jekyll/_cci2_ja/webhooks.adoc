@@ -9,7 +9,7 @@ contentTags:
 :page-layout: classic-docs
 :page-description: Webhook を使って CircleCI のイベントを受け取る
 :icons: font
-:page-liquid:
+
 :experimental:
 
 [#overview]

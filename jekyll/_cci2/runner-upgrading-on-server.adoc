@@ -5,7 +5,7 @@ contentTags:
 ---
 = Upgrading the CircleCI's self-hosted runner on server
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

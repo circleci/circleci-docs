@@ -8,7 +8,7 @@ contentTags:
 ---
 = deploy から run への移行
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: 廃止予定の deploy ステップから run への移行方法
 :icons: font
 :toc: macro

@@ -7,7 +7,7 @@ noindex: true
 ---
 = Manage virtual machines with VM Service
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI server v4.1 VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :experimental:

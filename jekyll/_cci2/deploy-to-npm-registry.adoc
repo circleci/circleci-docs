@@ -7,7 +7,7 @@ contentTags:
 ---
 = Publish to npm registry
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

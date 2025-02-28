@@ -6,7 +6,7 @@ contentTags:
 ---
 = Troubleshoot test splitting
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :icons: font
 :experimental:

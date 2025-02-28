@@ -6,7 +6,7 @@ contentTags:
 ---
 = GitHub との連携ガイド
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このページでは、CircleCI で GitHub と GitHub Enterprise を使用する方法についてわかりやすく説明します。
 :icons: font
 :toc: macro

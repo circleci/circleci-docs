@@ -6,7 +6,7 @@ contentTags:
 ---
 = Manage contexts with config policies
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to manage the use of contexts with config policies.
 :icons: font
 :experimental:
@@ -74,7 +74,7 @@ Example output:
 }
 ----
 +
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 * It is recommended to run through the xref:create-and-manage-config-policies#create-a-policy[Create a policy] and xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS] guides first. Best practice is to use a repository within your organization to store and develop your policies. The xref:create-and-manage-config-policies#manage-policies-with-your-vcs[Manage policies with your VCS] guide walks through setting this up and setting up a pipeline for policy development.
 

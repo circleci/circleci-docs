@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI remote Docker images support policy
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI remote Docker images release, update, and deprecation policy
 :icons: font
 :experimental:

@@ -5,7 +5,7 @@ contentTags:
 ---
 = VS Code extension overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn about how the CircleCI VS Code extension can help you manage your pipelines, workflows and jobs.
 :icons: font
 :experimental:

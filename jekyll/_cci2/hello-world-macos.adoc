@@ -8,7 +8,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This document describes how to get started with CI/CD using a *macOS execution environment* on CircleCI.
 If you need to learn the basics of CircleCI, see the xref:getting-started#[getting started guide].

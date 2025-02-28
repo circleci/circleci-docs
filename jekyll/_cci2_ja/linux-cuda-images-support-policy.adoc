@@ -7,7 +7,7 @@ contentTags:
 ---
 = CircleCI Linux CUDAイメージサポートポリシー
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI Linux CUDAイメージのリリース、アップデート、非推奨ポリシーをこのドキュメントで説明しています。
 :icons: font
 :toc: macro

@@ -7,7 +7,7 @@ noindex: true
 ---
 = Phase 5 - Test your installation
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How to test your CircleCI server installation in an air-gapped environment.
 :icons: font
 :toc: macro

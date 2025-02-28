@@ -7,7 +7,7 @@ contentTags:
 = iOS アプリケーションを macOS上でテストする
 :page-layout: classic-docs
 :page-description: macOS 上の iOS アプリケーションのテスト
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -281,7 +281,7 @@ gem 'cocoapods', '= 1.3.0'
 
 次に、Bundler を使用してインストールします。
 
-{% raw %}
+
 
 [source,yaml]
 ----
@@ -295,7 +295,7 @@ steps:
         - vendor/bundle
 ----
 
-{% endraw %}
+
 
 また、コマンドにプレフィックス `bundle exec` を付加しておくと、確実に使用できるようになります。
 

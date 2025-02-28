@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 To use the CircleCI API or view details about your pipelines, you will need API tokens with the appropriate permissions. This document describes the types of API tokens available, as well as how to create and delete them.
 

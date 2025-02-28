@@ -9,7 +9,7 @@ contentTags:
 :page-layout: classic-docs
 :page-description: List and acknowledgements for open-source projects and libraries that are used in CircleCI products and services.
 :icons: font
-:page-liquid:
+
 :experimental:
 
 This page provides the details of 3rd-party open source components used in CircleCI products.

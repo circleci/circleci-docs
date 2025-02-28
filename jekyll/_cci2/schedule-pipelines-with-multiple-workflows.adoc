@@ -5,7 +5,7 @@ contentTags:
 ---
 = Schedule pipelines with multiple workflows
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: "Learn how to set conditionals for scheduled pipelines in multiple workflows."
 :icons: font
 :experimental:
@@ -48,7 +48,7 @@ Note that in the above example, the second `equal` under `when` is not strictly 
 
 You may also add filtering for workflows that should *not* run when a schedule is triggered:
 
-{% raw %}
+
 ```yaml
 version: 2.1
 ...
@@ -72,7 +72,7 @@ nightly-run-workflow:
    - deploy
 ...
 ```
-{% endraw %}
+
 
 For a full list of pipeline values, visit the xref:pipeline-variables/#pipeline-values[Pipeline values and parameters] page.
 

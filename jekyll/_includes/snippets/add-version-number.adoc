@@ -1,1 +1,1 @@
-_Make sure to replace any placeholder versions in the example._
+_Check the link:https://circleci.com/developer/orbs[orb registry] to find the latest orb versions and examples._

@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
 
@@ -477,7 +477,7 @@ circleci context create --org-id <org-id> <context-name> [flags]
 
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 [#environment-variable-usage]
 == Environment variable usage
@@ -608,7 +608,7 @@ Note that the CLI will prompt you to input the new secret value, rather than acc
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plain text secret as a string.
 --
 
-{% include snippets/secrets-masking.adoc %}
+include::../_includes/snippets/secrets-masking.adoc[]
 
 [#see-also]
 == See also

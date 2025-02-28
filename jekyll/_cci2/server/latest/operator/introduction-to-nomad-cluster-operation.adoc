@@ -6,7 +6,7 @@ contentTags:
 ---
 = Introduction to Nomad cluster operation
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI server v4.7 installation.
 :icons: font
 :toc: macro

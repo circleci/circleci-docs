@@ -9,7 +9,7 @@ contentTags:
 ---
 = Azure Container Registry へのデプロイ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -37,7 +37,7 @@ Azure ACR Orb とすべてのオプションの詳細については、 link:htt
 
 Orb の `build-and-push-image` ジョブを使ってイメージをビルドし、ACR にデプロイします。 現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines

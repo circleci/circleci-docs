@@ -9,7 +9,7 @@ document-type:
 ---
 = Notify a Slack channel of a paused workflow
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

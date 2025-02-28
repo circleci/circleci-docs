@@ -5,7 +5,7 @@ contentTags:
 ---
 = Troubleshoot self-hosted runner
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Errors and troubleshooting methods for container and machine runners.
 :icons: font
 :experimental:

@@ -6,7 +6,7 @@ contentTags:
 ---
 = クラウド上の CircleCI マシンランナーの更新
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このページでは、Linux、Windows、macOS で CircleCI マシンランナーを手動で更新する方法をわかりやすくご紹介しています。
 :icons: font
 :toc: macro:

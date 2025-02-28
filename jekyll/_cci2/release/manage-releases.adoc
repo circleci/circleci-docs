@@ -5,7 +5,7 @@ contentTags:
 ---
 = Manage releases
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How to guide for managing releases from the CircleCI web app
 :icons: font
 :experimental:

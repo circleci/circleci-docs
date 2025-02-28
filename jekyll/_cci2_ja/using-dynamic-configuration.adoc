@@ -9,7 +9,7 @@ document-type:
 ---
 = ダイナミックコンフィグの使用
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

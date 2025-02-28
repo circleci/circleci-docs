@@ -8,7 +8,7 @@ contentTags:
 :page-layout: classic-docs
 :page-description: Learn about ways to optimize your CircleCI pipelines
 :icons: font
-:page-liquid:
+
 :toc: macro
 :toc-title:
 :experimental:

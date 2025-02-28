@@ -10,7 +10,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 {% include snippets/linux-cuda-deprecation-notice.adoc %}
 
@@ -86,15 +86,15 @@ jobs:
       - run: nvidia-smi
 ----
 
-{% include snippets/gpu-linux-resource-table.adoc %}
+include::../_includes/snippets/gpu-linux-resource-table.adoc[]
 
 === Windows GPU
 
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
-{% include snippets/gpu-windows-resource-table.adoc %}
+include::../_includes/snippets/gpu-windows-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/snippets/resource-class-view.adoc[]

@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for further inspection.
 
@@ -43,7 +42,7 @@ If you need to restrict the connections allowed in your jobs, consider enabling 
 
 To upload artifacts created during builds, use the following example:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----

@@ -7,7 +7,7 @@ contentTags:
 ---
 = TeamCity からの移行
 :page-layout: classic-docs
-:page-liquid:
+
 :description: TeamCity から CircleCI に移行する方法を解説します。
 :source-highlighter: pygments.rb
 :icons: font

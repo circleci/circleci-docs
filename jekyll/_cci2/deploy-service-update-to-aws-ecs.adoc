@@ -9,7 +9,7 @@ document-type:
 ---
 = Deploy service update to AWS ECS
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

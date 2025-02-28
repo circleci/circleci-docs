@@ -7,7 +7,7 @@ noindex: true
 ---
 = CircleCI server v4.2 FAQ
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Find answers about the CircleCI server v4.2 data retention policy, what control is granted over Nomad certificates
 :icons: font
 :toc: macro

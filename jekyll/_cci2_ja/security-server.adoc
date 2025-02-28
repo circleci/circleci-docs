@@ -7,7 +7,7 @@ contentTags:
 ---
 = セキュリティ
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは CircleCI に組み込まれているセキュリティー機能と関連するインテグレーションの概要について説明します。
 :icons: font
 :toc: macro

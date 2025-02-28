@@ -5,7 +5,7 @@ contentTags:
 ---
 = Pull an image from AWS ECR with OIDC
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Learn how to pull an image from AWS ECR using OIDC authentication
 :icons: font
 :experimental:

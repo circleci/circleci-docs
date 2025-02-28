@@ -6,7 +6,7 @@ contentTags:
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
-:page-liquid:
+
 :experimental:
 :page-description: A guide to installing CircleCI server v4.7 in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font

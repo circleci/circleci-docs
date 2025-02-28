@@ -5,7 +5,7 @@ contentTags:
 ---
 = Performance Plan
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document describes the Performance Plan available to developers on CircleCI.
 :icons: font
 :experimental:
@@ -71,4 +71,4 @@ NOTE: For details on cancelling a Performance Plan, refer to the xref:faq#cancel
 == CircleCI features
 In addition to the upgraded features listed above, the Performance Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 
-{% include snippets/features-of-circleci.adoc %}
+include::../_includes/snippets/features-of-circleci.adoc[]

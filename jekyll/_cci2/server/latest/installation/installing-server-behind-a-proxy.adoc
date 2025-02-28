@@ -7,7 +7,7 @@ contentTags:
 = Installing server behind a proxy
 :page-layout: classic-docs
 :page-description: Learn how to install CircleCI server v4.7 behind a proxy.
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:

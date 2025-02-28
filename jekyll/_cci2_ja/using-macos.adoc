@@ -7,7 +7,7 @@ contentTags:
 = macOS 実行環境の利用ガイド
 :page-layout: classic-docs
 :page-description: このページでは、macOS 実行環境で実行するジョブの設定方法についてわかりやすく解説しています。
-:page-liquid:
+
 :icons: font
 :toc: macro
 

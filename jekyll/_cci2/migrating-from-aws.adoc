@@ -6,7 +6,7 @@ contentTags:
 ---
 = Migrate from AWS
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :experimental:
@@ -64,7 +64,7 @@ The AWS CodeBuild and CircleCI configurations will be different. It may be helpf
 [#configuration-comparison]
 == Configuration comparison
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

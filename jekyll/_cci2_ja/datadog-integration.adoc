@@ -8,7 +8,7 @@ contentTags:
 ---
 = Datadog との連携
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、Datadog との連携により、CircleCI のすべてのジョブの分析データを追跡し、可視化する方法について説明します。
 :icons: font
 :toc: macro

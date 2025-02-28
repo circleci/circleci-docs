@@ -5,7 +5,7 @@ contentTags:
 ---
 = Machine runner installation on Windows
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Windows.
 :icons: font
 :experimental:
@@ -35,7 +35,7 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-{% include snippets/runner/terms.adoc %}
+include::../_includes/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class

@@ -9,7 +9,7 @@ document-type:
 ---
 = Selecting a workflow to run using pipeline parameters
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 

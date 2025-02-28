@@ -7,7 +7,7 @@ contentTags:
 ---
 = Introduction to YAML configuration
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: "Overview of CircleCI configuration written in YAML"
 :icons: font
 :experimental:
@@ -43,7 +43,7 @@ Some limitations exist depending on the execution environment in your configurat
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 ```yaml
 # CircleCI configuration file

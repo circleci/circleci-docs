@@ -6,7 +6,7 @@ contentTags:
 ---
 = Phase 4 - Configure Nomad clients
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How to configure Nomad clients to run with CircleCI server v4.6 in an air-gapped environment.
 :icons: font
 :toc: macro

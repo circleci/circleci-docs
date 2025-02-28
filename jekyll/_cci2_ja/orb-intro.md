@@ -103,7 +103,7 @@ workflows:
 ```
 
 {:.tab.nodeTest.Without-Orbs}
-{% raw %}
+
 ```yaml
 version: 2.1
 
@@ -133,7 +133,7 @@ workflows:
       - test
 
 ```
-{% endraw %}
+
 
 ## Orb レジストリ
 {: #the-orb-registry }

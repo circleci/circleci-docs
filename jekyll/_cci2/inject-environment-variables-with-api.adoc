@@ -6,7 +6,7 @@ contentTags:
 ---
 = Inject environment variables with the CircleCI API
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: How to inject env var values using the API.
 :icons: font
 :experimental:

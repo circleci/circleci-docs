@@ -6,7 +6,7 @@ contentTags:
 ---
 = CircleCI overview
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: An overview of CircleCI, continuous integration and continuous delivery
 :icons: font
 :experimental:

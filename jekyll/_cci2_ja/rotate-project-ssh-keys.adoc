@@ -27,7 +27,7 @@ sectionTags:
 ---
 = プロジェクトの SSH キーをローテーションする
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: プロジェクトの SSH キーをローテーションする方法の詳細をガイドする方法。
 :icons: font
 :toc: macro

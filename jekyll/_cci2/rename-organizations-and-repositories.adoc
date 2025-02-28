@@ -5,7 +5,7 @@ contentTags:
 ---
 = Rename organizations and repositories
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This how-to guide goes over changing the names of organizations and repositories.
 :icons: font
 :experimental:

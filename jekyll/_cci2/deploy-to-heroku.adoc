@@ -7,7 +7,7 @@ contentTags:
 ---
 = Deploy to Heroku
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 
@@ -28,14 +28,16 @@ Create a Heroku account and follow the link:https://devcenter.heroku.com/start[G
 [#create-env-vars]
 === 2. Create environment variables
 
-Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
+Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+
+include::../_includes/snippets/env-var-or-context.adoc[].adoc %}
 
 [#deploy-with-orb]
 === 3. Deploy with the Heroku orb
 
 Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your configuration simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -64,7 +66,9 @@ Create a Heroku account and follow the link:https://devcenter.heroku.com/start[G
 [#create-env-vars-2]
 === 2. Create environment variables
 
-Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
+Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+
+include::../_includes/snippets/env-var-or-context.adoc[].adoc %}
 
 [#create-deploy-job]
 === 3. Create deploy job

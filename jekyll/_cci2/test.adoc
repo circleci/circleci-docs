@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 [#introduction]
 == Introduction
@@ -25,7 +25,7 @@ To automatically run your test suites in a project pipeline, you will add config
 
 A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----

@@ -6,7 +6,7 @@ contentTags:
 ---
 = Migrate from deploy to run
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: A how-to guide on how to migrage from the deprecated deploy step to run.
 :icons: font
 :experimental:

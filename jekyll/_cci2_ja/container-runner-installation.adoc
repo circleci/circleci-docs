@@ -6,7 +6,7 @@ contentTags:
 ---
 = コンテナランナーのインストール (Kubernetes)
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI コンテナランナーのインストール手順
 :icons: font
 :toc: macro
@@ -26,7 +26,7 @@ CircleCI のコンテナランナーをインストールする方法につい�
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
 
-{% include snippets/runner/ja/terms.adoc %}
+include::../_includes/snippets/runner/ja/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. ネームスペースとリソースクラスの作成

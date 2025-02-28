@@ -8,7 +8,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI.
 

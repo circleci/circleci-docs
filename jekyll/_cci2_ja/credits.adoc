@@ -8,7 +8,7 @@ contentTags:
 = クレジットの使用
 :description: CircleCI クレジットベースプランシステムについて.
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 

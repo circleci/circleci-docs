@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This page provides an overview of CircleCI jobs and steps.
 
@@ -84,7 +84,7 @@ image::/docs/assets/img/docs/pipelines-job-step-test-artifact.png[Job tab option
 
 Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is xref:configuration-reference#matrix[matrix jobs]. Below is a basic example of passing a parameter to a job when it is run.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yml]
 ----

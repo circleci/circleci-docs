@@ -9,7 +9,7 @@ document-type:
 ---
 = Using branch filters
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :experimental:
 
@@ -20,7 +20,7 @@ Branch filtering has previously only been available for workflows, but with comp
 
 The following example shows using the <<pipeline-variables#pipeline-values,pipeline value>> `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 ```yaml
 version: 2.1

@@ -6,7 +6,7 @@ contentTags:
 ---
 = Machine runner 3.0 manual installation for Windows
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Instructions on how to manually install CircleCI's self-hosted machine runner 3.0 on Windows.
 :icons: font
 :machine:
@@ -26,7 +26,7 @@ This page describes how to manually install CircleCI's machine runner 3.0 on Win
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-{% include snippets/runner/terms.adoc %}
+include::../_includes/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class

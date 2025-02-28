@@ -9,7 +9,7 @@ contentTags:
 ---
 = Cloud Foundry へのデプロイ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 :toc-title:
@@ -24,7 +24,7 @@ contentTags:
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == 2.1 の設定を使用した Cloud Foundry へのデプロイ
 
-{% include snippets/ja/add-version-number.adoc %}
+include::../_includes/snippets/ja/add-version-number.adoc[]
 
 ```yaml
 version: 2.1

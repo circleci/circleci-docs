@@ -6,7 +6,7 @@ contentTags:
 ---
 = Managing orbs
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.6.
 :icons: font
 :toc: macro

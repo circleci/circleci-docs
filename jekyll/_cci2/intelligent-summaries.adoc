@@ -5,7 +5,7 @@ contentTags:
 ---
 = Intelligent summaries
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: An overview of the intelligent summaries feature, an AI enabled helper feature in CircleCI that provides help with build failures
 :icons: font
 :experimental:

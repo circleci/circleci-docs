@@ -6,7 +6,7 @@ contentTags:
 ---
 = Install machine runner 3.0 on Docker
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on Docker.
 :icons: font
 :experimental:
@@ -40,7 +40,7 @@ The number of containers running in parallel on the host is constrained by the h
 [#self-hosted-runner-terms-agreement]
 === Self-hosted runner terms agreement
 
-{% include snippets/runner/terms.adoc %}
+include::../_includes/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 === 1. Create namespace and resource class
@@ -109,7 +109,7 @@ docker stop <container-name>; docker rm <container-name>;
 
 NOTE: In machine runner 3.0, the environment variable name prefix has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
 
-To migrate from launch agent to machine runner 3.0 on Docker, stop and remove the launch agent containers and replace them with machine runner 3.0 containers, using the commands described above. 
+To migrate from launch agent to machine runner 3.0 on Docker, stop and remove the launch agent containers and replace them with machine runner 3.0 containers, using the commands described above.
 
 {% include snippets/machine-runner-example.adoc %}
 

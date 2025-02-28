@@ -11,7 +11,7 @@ document-type:
 ---
 = ブランチフィルターの使用
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -24,7 +24,7 @@ document-type:
 
 以下の例では、 <<pipeline-variables#pipeline-values,パイプラインの値>> `pipeline.git.branch` を使って `when` (いつ) ステップを実行するかを制御する方法を紹介します。 この例では、メインブランチにコミットされた場合のみ `run: echo "I am on main"` ステップを実行します。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 ```yaml
 version: 2.1

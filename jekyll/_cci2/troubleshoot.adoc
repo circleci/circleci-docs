@@ -6,7 +6,7 @@ contentTags:
 ---
 = Troubleshoot
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Troubleshoot CircleCI and various setups and integrations.
 :icons: font
 :experimental:

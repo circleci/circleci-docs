@@ -8,7 +8,7 @@ version:
 ---
 = 監査ログ
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -23,7 +23,7 @@ CircleCI **serverのお客様**、および**パフォーマンス、スケー�
 
 . Web アプリのサイドバーで**「Organization Settings」**を選択します。
 . メニューから「**Security**」を選択します。
-. 
+.
 **「Audit Log」**セクションまでスクロールダウンし、日付範囲を指定します。
 . 「**Request audit logs**］をクリックして、監査ログをCSVファイルとしてダウンロードします。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
 

@@ -9,7 +9,7 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
+
 
 This page contains some general guidelines and considerations to make when moving from the Docker executor to machine, or vice versa.
 

@@ -5,7 +5,7 @@ contentTags:
 ---
 = Set up CircleCI releases
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: Tutorial outlining how to set up CircleCI releases, covering creating an environment integration, installing the release agent and creating components.
 :icons: font
 :experimental:

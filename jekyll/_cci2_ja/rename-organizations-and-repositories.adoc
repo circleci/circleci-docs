@@ -6,7 +6,7 @@ version:
 ---
 = 組織名とリポジトリ名の変更
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このページでは、組織名やリポジトリ名を変更する方法を紹介します。
 :icons: font
 :toc: macro

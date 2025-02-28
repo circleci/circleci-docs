@@ -20,7 +20,7 @@ Docker 実行環境を使用して Docker コンテナで[ジョブ]({{site.base
 
 コンテナをスピンアップするには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルで Docker イメージを指定します。 ジョブのステップはすべてこのコンテナで実行されます。
 
-{% include snippets/ja/docker-auth.adoc %}
+include::../_includes/ja/snippets/docker-auth.adoc[]
 
 ```yaml
 jobs:

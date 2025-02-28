@@ -5,7 +5,7 @@ contentTags:
 ---
 = GitHub trigger event options
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
 :icons: font
 :experimental:
@@ -61,7 +61,7 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
 
-[NOTE] 
+[NOTE]
 ====
 *Help us prioritize additional trigger options?* We are working to expand the available events and conditions for you to choose from. Let us know which additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form].
 ====

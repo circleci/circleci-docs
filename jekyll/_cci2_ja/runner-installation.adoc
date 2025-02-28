@@ -6,7 +6,7 @@ contentTags:
 ---
 = Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI セルフホストランナーをコンテナソリューションとして、または Linux、 macOS、Windows にインストールする際に役立つリソースを紹介します。
 :icons: font
 :toc: macro

@@ -6,7 +6,7 @@ contentTags:
 ---
 = Security
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
 :experimental:

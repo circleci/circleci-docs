@@ -7,7 +7,7 @@ contentTags:
 ---
 = 設定ファイルのポリシー管理機能の概要
 :page-layout: classic-docs
-:page-liquid:
+
 :icons: font
 :toc: macro
 
@@ -110,7 +110,7 @@ ok    policies    0.001s
 3/3 tests passed (0.001s)
 ----
 
-{% include snippets/ja/find-organization-id.adoc %}
+include::../_includes/snippets/ja/find-organization-id.adoc[]
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == CLI を使用したコンフィグファイルのポリシー管理

@@ -6,7 +6,7 @@ contentTags:
 ---
 = マシンランナーの macOS へのインストール
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、CircleCI セルフホストランナーを macOS にインストールする方法を説明します。
 :icons: font
 :toc: macro
@@ -23,7 +23,7 @@ contentTags:
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
 
-{% include snippets/runner/ja/terms.adoc %}
+include::../_includes/snippets/runner/ja/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. ネームスペースとリソースクラスの作成

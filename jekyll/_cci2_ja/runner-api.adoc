@@ -7,7 +7,7 @@ contentTags:
 ---
 = CircleCI セルフホストランナー API
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 :icons: font
 :toc: macro

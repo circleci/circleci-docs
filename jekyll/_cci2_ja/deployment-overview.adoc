@@ -8,7 +8,7 @@ contentTags:
 ---
 = デプロイの概要
 :page-layout: classic-docs
-:page-liquid:
+
 :page-description: CircleCI のデプロイに関する基本事項を説明します。
 :icons: font
 :toc: macro
