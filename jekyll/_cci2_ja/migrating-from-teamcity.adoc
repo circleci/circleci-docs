@@ -296,7 +296,7 @@ TeamCity では、定義されたランナータイプ (Visual Studio、Maven、
 
 また、この柔軟性により、ステップをあらゆる言語、フレームワーク、ツールに適用できます。 たとえば、 https://circleci.com/docs/ja/language-ruby/[Rails プロジェクト] で Ruby コンテナを使用して `bundler` コマンドを実行できます。 https://circleci.com/docs/ja/language-javascript/[Node.js プロジェクト] で Node コンテナと `npm` コマンドを実行することも可能です。 様々な言語やフレームワークの例については、 <<examples-and-guides-overview#,サンプルとガイドの概要>> をご覧ください。
 
-{% include snippets/ja/docker-auth.md %}
+{% include snippets/ja/docker-auth.adoc %}
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
