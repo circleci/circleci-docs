@@ -14,8 +14,7 @@ contentTags:
 
 This page describes how to install CircleCI's container runner.
 
-// {% include snippets/runner-platform-prerequisites.adoc %}
-
+// include::../_includes/snippets/runner-platform-prerequisites.adoc[]
 [#prerequisites]
 == Prerequisites
 
@@ -31,11 +30,11 @@ include::../_includes/runner/terms.adoc[]
 
 [.tab.container-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.container-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 --
 
 [#container-runner-installation]

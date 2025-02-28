@@ -31,7 +31,9 @@ Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[He
 [#create-env-vars]
 === 2.  環境変数の作成
 
-Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
+Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。
+
+include::../_includes/snippets/ja/env-var-or-context.adoc[]
 
 [#deploy-with-orb]
 === 3.  Heroku Orb を使用したデプロイ
@@ -67,7 +69,7 @@ Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[He
 [#create-env-vars-2]
 === 2.  環境変数の作成
 
-Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
+Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 include::../_includes/snippets/ja/xcode-silicon-vm.adoc[]
 
 [#create-deploy-job]
 === 3.  デプロイジョブの作成

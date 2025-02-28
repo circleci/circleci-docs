@@ -50,11 +50,11 @@ include::../_includes/runner/terms.adoc[]
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 --
 
@@ -62,14 +62,14 @@ include::../_includes/runner/terms.adoc[]
 == 2. Install CircleCI runner
 [.tab.machine-runner-package-installation.debian]
 --
-{% include snippets/runner/machine-runner-deb-package-install.adoc %}
+include::../_includes/snippets/runner/machine-runner-deb-package-install.adoc[]
 --
 [.tab.machine-runner-package-installation.rpm]
 --
-{% include snippets/runner/machine-runner-rpm-package-install.adoc %}
+include::../_includes/snippets/runner/machine-runner-rpm-package-install.adoc[]
 --
 
-{% include snippets/machine-runner-example.adoc %}
+include::../_includes/snippets/machine-runner-example.adoc[]
 
 [#troubleshooting]
 == Troubleshooting

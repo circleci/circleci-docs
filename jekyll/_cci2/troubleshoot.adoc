@@ -40,4 +40,4 @@ include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip
 
 == Releases
 
-{% include snippets/troubleshoot/releases-troubleshoot.adoc %}
+include::../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]

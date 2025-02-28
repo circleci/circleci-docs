@@ -49,18 +49,18 @@ include::../_includes/runner/terms.adoc[]
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 --
 
 [#download-the-launch-agent-script]
 == 2. Download launch-agent script and install binary
 
-{% include snippets/runner/launch-agent-download.adoc %}
+include::../_includes/snippets/runner/launch-agent-download.adoc[]
 
 [#create-the-circleci-user-and-working-directory]
 == 3. Create `circleci` user and working directory
@@ -177,7 +177,7 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
-{% include snippets/machine-runner-example.adoc %}
+include::../_includes/snippets/machine-runner-example.adoc[]
 
 The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 

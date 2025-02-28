@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-{% include snippets/linux-cuda-deprecation-notice.adoc %}
+include::../_includes/snippets/linux-cuda-deprecation-notice.adoc[]
 
 [#overview]
 == Overview

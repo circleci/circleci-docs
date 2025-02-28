@@ -28,7 +28,7 @@ xref:ios-codesigning#[iOSコード署名プロジェクトと] xref:hello-world-
 [#supported-xcode-versions-silicon]
 === Apple Silicon の Xcode 対応バージョン
 
-{% include snippets/ja/xcode-silicon-vm.adoc %}
+include::../_includes/snippets/ja/xcode-silicon-vm.adoc[]
 
 [#getting-started]
 == はじめよう

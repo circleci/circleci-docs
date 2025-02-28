@@ -40,7 +40,8 @@ firebase login:ci
 [#add-token-to-project-env-vars]
 == 3.  プロジェクトの環境変数にトークンを追加
 
-生成されたトークンを CircleCI プロジェクトの環境変数に `$FIREBASE_DEPLOY_TOKEN` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
+生成されたトークンを CircleCI プロジェクトの環境変数に `$FIREBASE_DEPLOY_TOKEN` として追加します。
+include::../_includes/snippets/ja/env-var-or-context.adoc[]
 
 [#deploy-example]
 == デプロイの例

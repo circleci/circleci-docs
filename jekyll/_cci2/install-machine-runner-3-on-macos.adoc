@@ -41,11 +41,11 @@ include::../_includes/runner/terms.adoc[]
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 --
 
@@ -203,7 +203,7 @@ launchctl print user/$(id -u)/com.circleci.runner
 ----
 --
 
-{% include snippets/machine-runner-example.adoc %}
+include::../_includes/snippets/machine-runner-example.adoc[]
 
 [#stop-macos-machine-runner]
 == Stop macOS machine runner 3.0

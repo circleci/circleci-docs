@@ -36,7 +36,7 @@ jobs:
 [#supported-xcode-versions-silicon]
 === Apple Silicon の Xcode 対応バージョン
 
-{% include snippets/ja/xcode-silicon-vm.adoc %}
+include::../_includes/snippets/ja/xcode-silicon-vm.adoc[]
 
 [#available-resource-classes]
 == 利用可能なリソースクラス

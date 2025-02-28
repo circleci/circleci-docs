@@ -207,7 +207,7 @@ To view all commands run for a component, follow these steps:
 
 We test the versions listed here. Older versions may work but are not guaranteed.
 
-{% include snippets/release/supported-versions.adoc %}
+include::../_includes/snippets/release/supported-versions.adoc[]
 
 [#labels-and-annotations]
 === Labels and annotations
@@ -398,7 +398,7 @@ We are working on updates to:
 [#troubleshooting]
 == Troubleshooting
 
-{% include snippets/troubleshoot/releases-troubleshoot.adoc %}
+include::../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]
 
 [#next-steps]
 == Next steps

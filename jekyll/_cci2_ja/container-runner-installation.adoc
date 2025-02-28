@@ -16,12 +16,11 @@ contentTags:
 
 CircleCI のコンテナランナーをインストールする方法についてこのドキュメントでわかりやすく説明します。
 
-// {% include snippets/runner-platform-prerequisites.adoc %}
-
+// include::../_includes/snippets/runner-platform-prerequisites.adoc[]
 [#prerequisites]
 == 前提条件
 
-{% include snippets/runner/ja/container-runner-prereq.adoc %}
+include::../_includes/snippets/runner/ja/container-runner-prereq.adoc[]
 
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件

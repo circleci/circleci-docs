@@ -45,11 +45,11 @@ The number of containers running in parallel on the host is constrained by the h
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 --
 

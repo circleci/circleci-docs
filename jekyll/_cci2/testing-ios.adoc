@@ -25,7 +25,7 @@ Refer to xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-m
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-{% include snippets/xcode-silicon-vm.adoc %}
+include::../_includes/snippets/xcode-silicon-vm.adoc[]
 
 [#getting-started]
 == Getting started

@@ -21,7 +21,7 @@ contentTags:
 
 このページでは、CircleCI ACR Orb と `version 2.1` の設定を使った Azure Container Registry (ACR) への簡単なデプロイについて説明します。
 
-{% include snippets/ja/env-var-or-context.adoc %}
+include::../_includes/snippets/ja/env-var-or-context.adoc[]
 
 上記の Orb に加えて、デプロイに焦点をあてた Azure CircleCI イメージ link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure] を作成しました。
 

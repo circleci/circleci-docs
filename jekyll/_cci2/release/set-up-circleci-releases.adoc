@@ -36,7 +36,7 @@ Before setting up your environment integration with CircleCI, run through the fo
 
 The following versions of Kubernetes, Helm, and Argo Rollouts have been tested and proven to work. Older versions may work but are not guaranteed:
 
-{% include snippets/release/supported-versions.adoc %}
+include::../_includes/snippets/release/supported-versions.adoc[]
 
 == Set up releases
 

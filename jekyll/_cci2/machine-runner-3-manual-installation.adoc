@@ -55,7 +55,7 @@ include::../_includes/runner/terms.adoc[]
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 [#download-circleci-runner]
 
