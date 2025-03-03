@@ -418,7 +418,7 @@ jobs:
       - run:
           command: |
             circleci tests glob "src/**/*js" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
-            [ -s tmp/files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
+            [ -s files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
 
       - run:
           name: Run tests
