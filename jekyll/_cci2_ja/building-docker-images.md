@@ -223,7 +223,7 @@ services:
 
 次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
 
-
+{% raw %}
 ```yml
 # CircleCI キャッシュから bundler-data コンテナにデータを挿入します。
 
@@ -259,7 +259,7 @@ services:
     paths:
       - ~/bundler-cache
 ```
-
+{% endraw %}
 
 ### リモート Docker 環境へのアクセス
 {: #accessing-the-remote-docker-environment }
