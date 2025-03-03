@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:configuration-reference#[Configuration reference] page.
 
@@ -30,7 +29,7 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#simple-configuration-examples]
 == Simple configuration examples
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#concurrent-workflow]
 === Concurrent workflow
@@ -42,7 +41,7 @@ The configuration example below shows a concurrent workflow in which the `build`
 
 This image shows the workflow view for the following configuration example:
 
-image::{{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png[Concurrent Workflow Graph]
+image::concurrent-workflow-map.png[Concurrent Workflow Graph]
 
 [,yaml]
 ----
@@ -81,7 +80,7 @@ The configuration example below shows a sequential workflow where the `build` jo
 
 This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
 
-image::{{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png[Sequential Workflow Graph]
+image::sequential-workflow-map.png[Sequential Workflow Graph]
 
 [,yaml]
 ----
@@ -175,7 +174,7 @@ The image below shows the workflow view for the following configuration example.
 * The "Needs Approval" popup that appears when you click on a hold job
 * The workflow view again once the `hold` job has been approved and the `deploy` job has run
 
-image::{{ site.baseurl }}/assets/img/docs/approval-workflow-map.png[Approval Workflow Graph]
+image::approval-workflow-map.png[Approval Workflow Graph]
 
 * Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
@@ -303,9 +302,7 @@ This example shows a sequential workflow with the `test` job configured to run o
 
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
-image::{{ site.baseurl }}/assets/img/docs/fan-in-out-example.png[Fan-in-out]
-
-{% raw %}
+image::fan-in-out-example.png[Fan-in-out]
 
 [,yaml]
 ----
@@ -441,8 +438,6 @@ workflows:
                       - build-docker-image
                       - test
 ----
-
-{% endraw %}
 
 NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
@@ -720,8 +715,6 @@ workflows:
             branches:
               only: main
 ----
-
-{% raw %}
 --
 
 [tab.multiple-executors.Example_2]
@@ -779,8 +772,6 @@ workflows:
       - danger
       - build-and-test
 ----
-
-{% endraw %}
 --
 
 [#see-also]
