@@ -1278,7 +1278,7 @@ include::../_includes/snippets/docker-arm-resource-table.adoc[]
 [#linuxvm-execution-environment]
 ===== LinuxVM execution environment
 
-includ::../_includes/snippets/machine-resource-table.adoc[]
+include::../_includes/snippets/machine-resource-table.adoc[]
 
 Example:
 
