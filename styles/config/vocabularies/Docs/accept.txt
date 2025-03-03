@@ -108,7 +108,7 @@ Cypress
 Datacenter
 \b[Dd]ata [Cc]enter\b
 Datadog
-datastore
+[Dd]atastores?
 Debian
 deduplicate
 deduplicated
