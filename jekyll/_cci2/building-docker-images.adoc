@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Use the remote Docker environment to build Docker images within the Docker execution environment.
 
@@ -22,7 +21,7 @@ NOTE: The _remote_ in "remote Docker" is a legacy term from when remote Docker u
 
 To build Docker images (for example, using `docker` or `docker compose` commands) when using the Docker execution environment, you must use the `setup_remote_docker` key in your job:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -39,7 +38,7 @@ Using `setup_remote_docker` for a job means that all Docker commands execute loc
 
 In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label, as follows:
 
-image::{{ site.baseurl }}/assets/img/docs/remote-docker-label.png[Remote Docker label]
+image::remote-docker-label.png[Remote Docker label]
 
 CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor _is_ a Docker container. If your job uses a VM rather than a container (for example, your executor is `machine`) you do *not* need to use the `setup_remote_docker` key. For an example, see <<run-docker-commands-using-the-machine-executor,Run Docker commands using the `machine` executor>>.
 
@@ -129,7 +128,7 @@ To optionally specify a Docker version, you can set it as a `version` attribute 
           version: edge
 ----
 
-CircleCI supports the tags listed below for remote Docker, as per our link:{{site.baseurl}}/remote-docker-images-support-policy/#tagging[Remote Docker tagging policy].
+CircleCI supports the tags listed below for remote Docker, as per our xref:remote-docker-images-support-policy#tagging[Remote Docker tagging policy].
 
 For *x86* and *Arm* architecture, the following tags are available:
 

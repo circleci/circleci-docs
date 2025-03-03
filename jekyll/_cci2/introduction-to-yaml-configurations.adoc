@@ -7,7 +7,6 @@ contentTags:
 ---
 = Introduction to YAML configuration
 :page-layout: classic-docs
-:page-liquid:
 :page-description: "Overview of CircleCI configuration written in YAML"
 :icons: font
 :experimental:
@@ -43,7 +42,7 @@ Some limitations exist depending on the execution environment in your configurat
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 ```yaml
 # CircleCI configuration file
@@ -135,7 +134,7 @@ If you use VS Code, you might find the official xref:vs-code-extension-overview#
 
 The extension provides real-time syntax highlighting and validation, improved navigation through go-to-definition and go-to-reference commands, usage hints and autocomplete suggestions.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+image::vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
 
 Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from VS Code, and be notified of workflow status changes.
 The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
@@ -148,7 +147,7 @@ Below are some fun examples of other YAML syntax that might become handy as you 
 [#multi-line-strings]
 === Multi-line strings
 
-If the value is a multi-line string, use the `>` character, followed by any number of lines. This is especially useful for lengthy commands.
+If the value is a multi-line string, use the `>` character, followed by any number of lines. This method is especially useful for lengthy commands.
 
 ```yaml
 haiku: >

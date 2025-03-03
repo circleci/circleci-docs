@@ -3,14 +3,12 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
 ---
 = Generate code coverage metrics
 :page-description: Generate code coverage metrics for different languages.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#introduction]
 == Introduction
@@ -22,12 +20,12 @@ CircleCI provides different options for code coverage reporting using built-in C
 
 You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports are stored as build artifacts where they can be viewed or downloaded. See our xref:artifacts#[build artifacts] guide for more information on downloading coverage reports stored in your artifacts.
 
-image::{{site.baseurl}}/assets/img/docs/artifacts.png[Artifacts tab in the web app]
+image::artifacts.png[Artifacts tab in the web app]
 
 [#language-specific-code-coverage-options]
 == Language-specific code coverage options
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#ruby]
 === Ruby
