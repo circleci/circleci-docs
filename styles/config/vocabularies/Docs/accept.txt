@@ -263,6 +263,7 @@ RDoc
 \bReact Native\b
 READMEs?
 \bReality Check\b
+Rego
 ReplicaSet
 [Rr]epos?
 [Rr]eprovision
