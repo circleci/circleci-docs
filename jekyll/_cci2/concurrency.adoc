@@ -3,11 +3,9 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
 ---
 = Concurrency
 :page-layout: classic-docs
-
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
 :icons: font
 :experimental:

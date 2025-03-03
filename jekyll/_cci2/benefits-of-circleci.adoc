@@ -6,7 +6,6 @@ contentTags:
 ---
 = Benefits of CircleCI
 :page-layout: classic-docs
-
 :page-description: Benefits of choosing CircleCI for CI/CD
 :icons: font
 :experimental:

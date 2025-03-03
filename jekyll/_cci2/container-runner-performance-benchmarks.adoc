@@ -6,7 +6,6 @@ contentTags:
 ---
 = Container runner performance benchmarks
 :page-layout: classic-docs
-
 :page-description: Performance benchmarks and tuning.
 :icons: font
 :experimental:

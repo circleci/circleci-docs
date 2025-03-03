@@ -1,13 +1,12 @@
 ---
-description: This is document provides examples of deploying over SSH.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Deploy over SSH
+:page-description: This is document provides examples of deploying over SSH.
 :page-layout: classic-docs
-
 :icons: font
 :experimental:
 

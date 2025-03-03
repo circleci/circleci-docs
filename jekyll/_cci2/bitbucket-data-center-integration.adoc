@@ -5,7 +5,6 @@ contentTags:
 ---
 = Bitbucket Data Center integration overview
 :page-layout: classic-docs
-
 :page-description: Learn how to integrate Bitbucket Data Center with CircleCI to manage your pipelines with our.
 :icons: font
 :experimental:

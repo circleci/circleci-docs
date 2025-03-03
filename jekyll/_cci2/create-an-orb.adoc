@@ -6,7 +6,6 @@ contentTags:
 ---
 = Create an orb
 :page-layout: classic-docs
-
 :page-description: Tutorial showing how to create an orb using the orb development kit.
 :icons: font
 :experimental:

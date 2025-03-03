@@ -6,7 +6,6 @@ contentTags:
 ---
 = CircleCI convenience images support policy
 :page-layout: classic-docs
-
 :page-description: CircleCI Convenience Images release, update, and deprecation policy
 :icons: font
 :experimental:

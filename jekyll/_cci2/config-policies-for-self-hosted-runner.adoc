@@ -1,13 +1,12 @@
 ---
-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Config policies for self-hosted runner
+:page-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
 :page-layout: classic-docs
-
 :icons: font
 :experimental:
 

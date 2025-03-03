@@ -6,7 +6,6 @@ contentTags:
 ---
 = Deploy Android applications
 :page-layout: classic-docs
-
 :page-description: Learn to deploy Android apps through CircleCI.
 :icons: font
 :experimental:
@@ -46,7 +45,7 @@ Navigate to your `fastlane` directory and open `Fastfile`. This file is used to 
 
 The Fastfile already comes with a `playstore` lane that generates a release build and deploys it to the Play Store. You will modify this lane. In the Fastfile, update the `playstore` lane like so:
 
-```
+```shell
 lane :playstore do
     gradle(task: "bundle")
     upload_to_play_store(
@@ -68,7 +67,7 @@ To prepare your app for deployment, you will need to add a release signing confi
 
 Add the following `signingConfigs` snippet to your app-module `build.gradle` file:
 
-```
+```shell
 android {
   signingConfigs {
         release {
@@ -89,7 +88,7 @@ NOTE: For this tutorial, you will be generating a `keystore` and `keystore.prope
 
 Update the `buildTypes` section of your `build.gradle` file:
 
-```
+```shell
 buildTypes {
     release {
         signingConfig signingConfigs.release
@@ -105,7 +104,7 @@ With this, you have configured the app to use a specific keystore. Next, you wil
 
 Add the following snippet just before the `android` section of your app-module `build.gradle` file:
 
-```
+```shell
 ext.versionMajor = 1
 ext.versionMinor = 0
 ext.versionPatch = 1
@@ -144,7 +143,7 @@ Note that you will need to update at least one parameter of the version for ever
 
 Update the following properties in the `defaultConfig` section of the `build.gradle` file:
 
-```
+```shell
 defaultConfig {
     versionName generateVersionName()
     versionCode generateVersionCode()
@@ -189,7 +188,7 @@ Open your Android project in the link:https://app.circleci.com/[CircleCI web app
 
 Add the following snippet to your `build.gradle` file. This allows you to import your keystore properties from a `keystore.properties` that will be generated at runtime.
 
-```
+```shell
 def keyStorePropertiesFile = rootProject.file("keystore.properties")
 def keyStoreProperties = new Properties()
 keyStoreProperties.load(new FileInputStream(keyStorePropertiesFile))
@@ -205,7 +204,7 @@ You can also create a `keystore.properties` file in your project directory for l
 
 Use the following snippet to create this file:
 
-```
+```shell
 releaseKeyAlias=YourKeyAlias
 releaseKeyPassword=YourKeyPassword
 releaseKeyStore=YourKeyStorePath

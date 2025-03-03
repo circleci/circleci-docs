@@ -3,7 +3,6 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
 ---
 = Using the CircleCI in-app configuration editor
 :page-description: Docs page on In-app configuration editor use and features
@@ -48,17 +47,17 @@ image::{{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png[Auto-com
 
 At the bottom of the editor, you will see tabs for *Linter*, *Docs*, and the name of your workflow (in this case *Sample*).
 
-The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
+The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). You can also toggle to view the YAML as JSON within the validation bar.
 
 The docs tab will link out to some helpful documentation relating to configuration files.
 
 The workflow tab will show you all the jobs in the workflow, and link out to the individual job's *Job* view in the web UI.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-docs.png[Suggested Docs]
+image::config-editor-docs.png[Suggested Docs]
 
 When hovering over a key-value pair in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-tooltips.png[Tooltips]
+image::config-editor-tooltips.png[Tooltips]
 
 [#save-and-run]
 == Save and run
@@ -67,7 +66,7 @@ Once your changes are made and your configuration is valid, you may commit to yo
 
 If you are not making changes on your main branch, you will need to open a pull request on your VCS to save the changes to your main branch when you are ready.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png[Save and run]
+image::config-editor-commit-and-run.png[Save and run]
 
 [#visual-studio-code-extension]
 == VS Code extension

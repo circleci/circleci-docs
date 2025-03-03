@@ -1,5 +1,4 @@
 ---
-description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
@@ -7,7 +6,7 @@ contentTags:
 ---
 = Config policies overview
 :page-layout: classic-docs
-
+:page-description: Config policies for CircleCI project configurations.
 :icons: font
 :experimental:
 

@@ -6,7 +6,6 @@ contentTags:
 ---
 = Machine runner 3.0 configuration reference
 :page-layout: classic-docs
-
 :icons: font
 :experimental:
 

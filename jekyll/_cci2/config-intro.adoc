@@ -6,7 +6,6 @@ contentTags:
 ---
 = Configuration introduction
 :page-layout: classic-docs
-
 :page-description: "Learn how to get started with the CircleCI config.yml file."
 :icons: font
 :experimental:

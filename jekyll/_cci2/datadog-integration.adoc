@@ -6,7 +6,6 @@ contentTags:
 ---
 = Datadog integration
 :page-layout: classic-docs
-
 :page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Datadog.
 :icons: font
 :toc: macro
