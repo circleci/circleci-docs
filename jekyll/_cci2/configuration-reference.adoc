@@ -2654,6 +2654,48 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 A job name that exists in your `config.yml`.
 
 '''
+====== `serial-group`
+
+The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control serialization of jobs across an organization, not just within projects and pipelines.
+
+The value of the `serial-group` key is a string that is used to group jobs together to run one after another. The key must meet the following requirements:
+
+* Must be less than or equal to (≤) 512 characters, once compiled.
+* Must not be blank.
+
+You can use pipeline values and parameters in the `serial-group` key.
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `serial-group`
+| N
+| String
+| A string that is used across an org to group jobs together to run one after another. Can include pipeline values and parameters. Use this same serial group across multiple pipelines to control serialization.
+|===
+
+*Example:*
+
+[,yml]
+----
+# Creating multiple pipelines at the same time with the below config will results in
+# all pipelines running test and build but only a single pipeline will run deploy at a time.
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - build
+      - deploy:
+          serial-group: << pipeline.project.slug >>/deploy-group
+          requires:
+            - test
+            - build
+----
+
+'''
 
 [#requires]
 ====== *`requires`*
