@@ -5,7 +5,6 @@ contentTags:
 ---
 = CircleCI's machine runner installation with Docker
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Docker.
 :icons: font
 :experimental:
@@ -26,7 +25,7 @@ CAUTION: The instructions below are not supported for Cloud customers.
 [#runner-terms]
 === Runner terms
 
-{% include snippets/runner/terms.adoc %}
+include::../_includes/snippets/runner/terms.adoc[]
 
 [#machine-runner-prerequsites]
 === Prerequisites
@@ -45,11 +44,11 @@ The number of containers running in parallel on the host is constrained by the h
 
 [.tab.machine-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 --
 

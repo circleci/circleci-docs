@@ -6,7 +6,6 @@ contentTags:
 = Using the macOS execution environment
 :page-layout: classic-docs
 :page-description: "Learn how to configure a your jobs to run in the macOS execution environment."
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -34,12 +33,12 @@ jobs:
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-{% include snippets/xcode-silicon-vm.adoc %}
+include::../_includes/snippets/xcode-silicon-vm.adoc[]
 
 [#available-resource-classes]
 == Available resource classes
 
-{% include snippets/macos-resource-table.adoc %}
+include::../_includes/snippets/macos-resource-table.adoc[]
 
 [source,yaml]
 ----
@@ -53,7 +52,7 @@ jobs:
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/snippets/resource-class-view.adoc[]
 
 [#using-the-macos-executor]
 == Image update cycle for the macOS executor

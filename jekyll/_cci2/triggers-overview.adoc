@@ -1,5 +1,4 @@
 ---
-description: "A guide to the various ways to manage pipeline triggering in CircleCI"
 contentTags:
   platform:
   - Cloud
@@ -8,8 +7,8 @@ document-type:
 - Conceptual
 ---
 = Trigger a pipeline
+:page-description: "A guide to the various ways to manage pipeline triggering in CircleCI"
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -173,7 +172,7 @@ NOTE: Custom webhooks are available for projects integrated via the GitHub App. 
 
 Follow these steps to set up and test a custom webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
 
-{% include snippets/custom-webhook-setup.adoc %}
+include::../_includes/snippets/custom-webhook-setup.adoc[]
 
 . You can now test your custom webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +
@@ -195,7 +194,7 @@ Trigger pipelines from VS Code to iterate on your CircleCI config without commit
 
 For full details, see the xref:vs-code-extension-overview#test-run-your-config-from-vs-code[VS Code extension overview].
 
-image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
+image::vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
 
 [#schedule-a-pipeline]
 == Schedule a pipeline

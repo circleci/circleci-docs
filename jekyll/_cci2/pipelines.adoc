@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 CircleCI pipelines are the highest-level unit of work in your CI/CD process. Defined by a configuration file (typically `.circleci/config.yml`), pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
 
@@ -143,7 +142,7 @@ NOTE: Custom webhook triggers can only be associated with GitHub App pipelines. 
 
 To add a trigger for a custom webhook, follow these steps:
 
-{% include snippets/custom-webhook-setup.adoc %}
+include::../_includes/snippets/custom-webhook-setup.adoc[]
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
@@ -155,7 +154,7 @@ When a trigger is created, CircleCI registers a webhook with GitLab. Push events
 
 In addition to a pipeline, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repository. You can view webhooks for a project in GitLab at menu:Settings[Webhooks].
 
-image::{{site.baseurl}}/assets/img/docs/add-trigger.png[Add a trigger]
+image::add-trigger.png[Add a trigger]
 
 To add a trigger for a pipeline, follow these steps:
 
