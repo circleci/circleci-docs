@@ -1,13 +1,12 @@
 workflows:
   my-workflow:
+# The "my-workflow" workflow only runs if the branch is not "main" AND either the pipeline is triggered by a tag named "canary" OR the pipeline parameter "deploy-canary" is true.
     when:
       and:
         - not:
             matches:
               pattern: "^main$"
               value: << pipeline.git.branch >>
-  # The "my-workflow" workflow only runs if the branch is not "main"
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
             - << pipeline.parameters.deploy-canary >>
-  # AND either the pipeline is triggered by a tag named "canary" OR the pipeline parameter "deploy-canary" is true.
