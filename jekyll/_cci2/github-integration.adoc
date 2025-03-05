@@ -328,6 +328,14 @@ Key functionality enabled through the GitHub App integration includes the follow
 [#installing-github-app-alongside-github-oauth-app]
 ### Installing GitHub App alongside the GitHub OAuth app
 
+[CAUTION]
+====
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. To prevent this behavior, make sure to disable the GitHub OAuth trigger. To do so:
+
+. Navigate to the GitHub repository associated with the project.
+. Go to "Settings", then "Webhooks".
+. Locate the CircleCI webhook (`https://circleci.com/hooks/github`) and click "Delete".
+====
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
 
 To get started, go to menu:Project Settings[Pipelines] for one of your projects and xref:pipelines#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating your first pipeline will be installing the CircleCI GitHub App and connecting to it.
