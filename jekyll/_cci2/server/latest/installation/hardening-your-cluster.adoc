@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Hardening your cluster
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.7.
+:page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.8.
 :icons: font
 :toc: macro
 :toc-title:
@@ -282,5 +282,5 @@ When hardening an installation where the machine provisioner uses public IP addr
 
 ifndef::pdf[]
 ## Next steps
-* xref:../operator/operator-overview#[Server v4.7 Operator Overview]
+* xref:../operator/operator-overview#[server v4.8 Operator Overview]
 endif::[]

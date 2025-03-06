@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Phase 1 AWS - Prerequisites
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.7 application.
+:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.8 application.
 :icons: font
 :toc: macro
 :toc-title:

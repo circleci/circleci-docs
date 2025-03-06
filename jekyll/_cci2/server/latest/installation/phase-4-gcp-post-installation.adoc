@@ -1,12 +1,12 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Phase 4 GCP - post installation
 :page-layout: classic-docs
-:page-description: CircleCI server v4.7 post installation steps
+:page-description: CircleCI server v4.8 post installation steps
 :icons: font
 :toc: macro
 :toc-title:

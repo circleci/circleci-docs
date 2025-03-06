@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-    - Server v4.7
+    - Server v4.8
     - Server Admin
 ---
 = Managing user accounts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides information to help CircleCI server v4.7 operators manage user accounts.
+:page-description: This section provides information to help CircleCI server v4.8 operators manage user accounts.
 :icons: font
 :toc: macro
 :toc-title:
