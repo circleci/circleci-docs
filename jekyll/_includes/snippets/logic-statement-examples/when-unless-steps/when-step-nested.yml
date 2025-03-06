@@ -22,18 +22,15 @@ jobs:
       - checkout
       - when:
           condition:
-            or:
-              - and:
-                - or:
-                    - and:
-                        - equal: [ main, << pipeline.git.branch >> ]
-                        - equal: [ false, << pipeline.parameters.param1 >> ]
-                    - not: << pipeline.parameters.param3 >>
-                - or:
-                    - equal: [ false, << pipeline.parameters.param3 >> ]
-                    - or: [ << pipeline.parameters.param1 >>, << pipeline.parameters.param2 >> ]  
-              - equal: [ true, << pipeline.parameters.param4 >> ]
-
-
+            and:
+              - or:
+                - and:
+                  - equal: [ main, << pipeline.git.branch >> ]
+                  - equal: [ false, << pipeline.parameters.param1 >> ]
+                - not: << pipeline.parameters.param3 >>
+              - or:
+                - equal: [ false, << pipeline.parameters.param3 >> ]
+                - or: [ << pipeline.parameters.param1 >>, << pipeline.parameters.param2 >> ]  
+# This step will run if the above condition evaluates as true. The output of the nested logic statement will depend on the values of the pipeline parameters.
           steps:
-            - run: echo "param 4 is true OR the other nested conditions are true"
+            - run: echo "This step runs if the above conditions evaluate as true"
