@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
 
@@ -57,12 +56,12 @@ You can view the list of available images xref:configuration-reference#available
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes
 
-{% include snippets/machine-resource-table.adoc %}
+include::../_includes/snippets/machine-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/snippets/resource-class-view.adoc[]
 
 [#pre-installed-software]
 == Pre-installed software

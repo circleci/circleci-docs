@@ -10,9 +10,8 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
-{% include snippets/linux-cuda-deprecation-notice.adoc %}
+include::../_includes/snippets/linux-cuda-deprecation-notice.adoc[]
 
 You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to NVIDIA GPUs for specialized workloads.
 
@@ -86,15 +85,15 @@ jobs:
       - run: nvidia-smi
 ----
 
-{% include snippets/gpu-linux-resource-table.adoc %}
+include::../_includes/snippets/gpu-linux-resource-table.adoc[]
 
 === Windows GPU
 
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
-{% include snippets/gpu-windows-resource-table.adoc %}
+include::../_includes/snippets/gpu-windows-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/snippets/resource-class-view.adoc[]
