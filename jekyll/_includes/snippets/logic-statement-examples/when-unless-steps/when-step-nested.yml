@@ -31,6 +31,6 @@ jobs:
               - or:
                 - equal: [ false, << pipeline.parameters.param3 >> ]
                 - or: [ << pipeline.parameters.param1 >>, << pipeline.parameters.param2 >> ]  
-# This step will run if the above condition evaluates as true. The output of the nested logic statement will depend on the values of the pipeline parameters.
+# The output of the nested logic statement will depend on the values of the pipeline parameters. This step will only run if the condition evaluates as true.
           steps:
-            - run: echo "This step runs if the above conditions evaluate as true"
+            - run: echo "The condition evaluated as true"
