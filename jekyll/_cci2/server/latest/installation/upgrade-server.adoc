@@ -1,18 +1,18 @@
 ---
 contentTags:
   platform:
-    - Server v4.7
+    - Server v4.8
     - Server Admin
 ---
 = Upgrade server
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "This document lists the steps required to upgrade a CircleCI server v4.7 installation."
+:page-description: "This document lists the steps required to upgrade a CircleCI server v4.8 installation."
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes the steps needed to upgrade your CircleCI server installation to v4.7.
+This page describes the steps needed to upgrade your CircleCI server installation to v4.8.
 
 [#path]
 == Upgrade paths
@@ -28,7 +28,7 @@ To see some common upgrade path options, see link:https://support.circleci.com/h
 [#recommendations]
 == Recommendations
 
-We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.7. Customers that do not perform this step may have issues restoring Vault from backup in v4.7.
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.8. Customers that do not perform this step may have issues restoring Vault from backup in v4.8.
 
 [#prerequisites]
 == Prerequisites
@@ -47,11 +47,11 @@ We have moved away from Vault to Tink for encryption. The process for migration 
 . Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
 +
 [source,shell,subs=attributes+]
-helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Perform the upgrade:
 +
 [source,shell,subs=attributes+]
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
