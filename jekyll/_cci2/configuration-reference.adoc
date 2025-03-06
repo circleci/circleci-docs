@@ -2656,12 +2656,15 @@ A job name that exists in your `config.yml`.
 '''
 ====== `serial-group`
 
-The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control serialization of jobs across an organization, not just within projects and pipelines.
+The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control the orchestration of jobs across an organization, not just within projects and pipelines.
+
+The `serial-group` key is configurable per job. It is not possible to configure the key for a group of jobs at this time.
 
 The value of the `serial-group` key is a string that is used to group jobs together to run one after another. The key must meet the following requirements:
 
 * Must be less than or equal to (≤) 512 characters, once compiled.
 * Must not be blank.
+* Must consist of alphanumeric characters plus, `.`, `-`, `_`, `/`.
 
 You can use pipeline values and parameters in the `serial-group` key.
 
