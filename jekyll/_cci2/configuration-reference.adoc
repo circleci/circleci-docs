@@ -2676,7 +2676,7 @@ You can use pipeline values and parameters in the `serial-group` key.
 | `serial-group`
 | N
 | String
-| A string that is used across an org to group jobs together to run one after another. Can include pipeline values and parameters. Use this same serial group across multiple pipelines to control serialization.
+| A string that is used across an org to group jobs together to run one after another. Can include pipeline values and parameters. Use this same serial group across multiple pipelines to control the orchestration of jobs across an organization.
 |===
 
 *Example:*
