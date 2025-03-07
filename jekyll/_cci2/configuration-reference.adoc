@@ -2666,7 +2666,23 @@ The value of the `serial-group` key is a string that is used to group jobs toget
 * Must not be blank.
 * Must consist of alphanumeric characters plus, `.`, `-`, `_`, `/`.
 
-You can use pipeline values and parameters in the `serial-group` key.
+Note the following features of serial groups:
+
+* You can use pipeline values and parameters in the `serial-group` key.
+* Serial groups will wait for five hours. After this jobs waiting in the group will be cancelled. This does not affect the standard limits that apply to a <<jobs,job's runtime>>.
+
+[CAUTION]
+====
+*Pipeline order protection in serial groups*
+
+Jobs in a serial group follow an order protection mechanism, as follows:
+
+* Jobs start in the order they join the queue, but are _accepted_ based on pipeline number.
+* If a group is waiting/running and another job in the same project attempts to join the queue with a lower pipeline number, the job is skipped.
+* This immediate skip process exists to maintain order integrity, which is a safety process to avoid unexpected work in a build, for example, a deployment job running a previous version unexpectedly.
+
+If there are no serial groups waiting/running, a pipeline with a lower number can start, such as restoring back to a previous pipeline via a rerun workflow.
+====
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
