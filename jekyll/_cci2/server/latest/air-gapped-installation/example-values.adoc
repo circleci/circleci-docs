@@ -73,7 +73,6 @@ object_storage:
 # Distributor using CircleCI Agent in Minio
 distributor:
   agent_base_url: http://minio.internal.example.com:9000/circleci-data
-  launch_agent_base_url: http://minio.internal.example.com:9000/circleci-data
 
 # Nomad
 nomad:

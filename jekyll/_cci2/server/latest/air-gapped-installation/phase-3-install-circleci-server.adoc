@@ -83,22 +83,12 @@ NOTE: Update the endpoint protocol to `http` or `https` depending on your MinIO 
 
 
 === d. Configure MinIO build agent
-In the distributor section of the `values.yaml` file, point `agent_base_url` and `launch_agent_base_url` to the `circleci-data` bucket you created in your MinIO installation.
+In the distributor section of the `values.yaml` file, point `agent_base_url` to the `circleci-data` bucket you created in your MinIO installation.
 
 [source, yaml]
 ----
 distributor:
   agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
-  launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
-----
-
-Update the `runner_admin` section of the `values.yaml` file to point `external.launch_agent_base_url` to the `circleci-data` bucket.
-
-[source, yaml]
-----
-runner_admin:
-  external:
-    launch_agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
 ----
 
 NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
