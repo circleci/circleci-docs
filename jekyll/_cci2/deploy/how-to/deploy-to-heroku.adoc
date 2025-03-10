@@ -67,12 +67,12 @@ Create a Heroku account and follow the link:https://devcenter.heroku.com/start[G
 
 Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
-include::../_includes/snippets/env-var-or-context.adoc[]
+include::../../../_includes/snippets/env-var-or-context.adoc[]
 
 [#create-deploy-job]
 === 3. Create deploy job
 
-In your `.circleci/config.yml`, create a `deploy` job and add an xref:executor-intro#[executor type].
+In your `.circleci/config.yml`, create a `deploy` job and add an xref:../executor-intro#[executor type].
 
 [#add-steps-deploy-job]
 === 4. Add steps to your deploy job

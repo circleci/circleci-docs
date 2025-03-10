@@ -15,7 +15,7 @@ This how-to guide walks you through the steps to set up and use the Amazon SageM
 
 For further information about the orb and the releases feature see the following:
 
-* xref:/release/releases-overview#[Releases overview]
+* xref:../deploys-overview#[Releases overview]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
 * link:https://circleci.com/blog/amazon-sagemaker-deployment-orchestration/[**Blog post**: Using Amazon SageMaker orb to orchestrate model deployment across environments]
 
@@ -28,7 +28,7 @@ To follow along with this how-to guide you will need the following:
 * Basic knowledge of Amazon SageMaker
 * An AWS account with access to SageMaker
 * A SageMaker studio domain to follow along the training step, or an existing Model Package Registry if you have already trained one
-* A copy of the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples[example repository] building on CircleCI. For steps to get the project set up, see the xref:create-project#[Create a project in CircleCI] page.
+* A copy of the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples[example repository] building on CircleCI. For steps to get the project set up, see the xref:../create-project#[Create a project in CircleCI] page.
 
 [#set-up-a-circleci-release-environment]
 == 1. Set up a CircleCI release environment
@@ -54,7 +54,7 @@ image::deploy/release-create-new-token.png[Screenshot showing create new token b
 [#oidc-identity-provider]
 === a. OIDC Identity Provider
 
-In this section you will create an IAM (Identity and Access Management) Identity Provider in your AWS IAM for the CircleCI OIDC Provider. The Amazon SageMaker orb uses OIDC. You may already have this set up, in which case you can skip this section. For more information on CircleCI OIDC functionality, see the xref:openid-connect-tokens#authenticate-jobs-with-cloud-providers[Using OpenID Connect tokens in jobs] page.
+In this section you will create an IAM (Identity and Access Management) Identity Provider in your AWS IAM for the CircleCI OIDC Provider. The Amazon SageMaker orb uses OIDC. You may already have this set up, in which case you can skip this section. For more information on CircleCI OIDC functionality, see the xref:../openid-connect-tokens#authenticate-jobs-with-cloud-providers[Using OpenID Connect tokens in jobs] page.
 
 . Navigate to your AWS Management Console
 . Go to menu:IAM[Access management > Identity providers]
@@ -191,9 +191,9 @@ image::deploy/role-arn.png[Screenshot showing location of Role ARN]
 [#set-environment-variables]
 == 3. Set environment variables
 
-The CircleCI Amazon SageMaker orb requires some environment variables to function. You can store these environment variables at the project level, or you can store them using a xref:contexts#[context]. The following steps show how to add the environment variables at the project level. You need to add two environment variables, as follows:
+The CircleCI Amazon SageMaker orb requires some environment variables to function. You can store these environment variables at the project level, or you can store them using a xref:../contexts#[context]. The following steps show how to add the environment variables at the project level. You need to add two environment variables, as follows:
 
-* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:release/releases-overview#[CircleCI releases]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
+* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:../deploys-overview#[CircleCI deploys]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
 * `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
 
 . From the CircleCI web app, click **Dashboard** in the sidebar.
