@@ -17,7 +17,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Azur
 
 This page describes a simple deployment to the Azure Container Registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
 
-include::../_includes/snippets/env-var-or-context.adoc[]
+include::../../../_includes/snippets/env-var-or-context.adoc[]
 
 In addition to the orb described below, CircleCI has created an Azure convenience image focusing on link:https://circleci.com/developer/images/image/cimg/azure[deployment: `cimg/azure`].
 
@@ -44,7 +44,7 @@ For service principal logins use:
 
 Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
 
-include::../_includes/snippets/add-version-number.adoc[]
+include::../../../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
@@ -66,4 +66,4 @@ workflows:
               only: main # Only deploys when the commit is on the `main` branch
 ```
 
-If pushing to your repository is required, see the "Deployment Keys" section of the xref:../github-integration#deploy-keys-and-user-keys[GitHub] or xref:../bitbucket-integration#deploy-keys-and-user-keys[Bitbucket Cloud] instructions. Then, configure the Azure Web App to use your production branch.
+If pushing to your repository is required, see the "Deployment Keys" section of the xref:../../github-integration#deploy-keys-and-user-keys[GitHub] or xref:../../bitbucket-integration#deploy-keys-and-user-keys[Bitbucket Cloud] instructions. Then, configure the Azure Web App to use your production branch.

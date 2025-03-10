@@ -34,12 +34,12 @@ Add the SSH key for the target to which you are deploying (these instructions ar
 
 . Select **Add SSH Key**.
 
-For additional context, see the xref:../add-ssh-key#[Adding an SSH Key to CircleCI] page.
+For additional context, see the xref:../../add-ssh-key#[Adding an SSH Key to CircleCI] page.
 
 [#ssh-username-and-hostname]
 == 2. Add the SSH username and hostname
 
-Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the xref:../set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the xref:../../set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 
 [#create-deploy-job]
 == 3. Create a deploy job
