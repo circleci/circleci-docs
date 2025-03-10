@@ -19,7 +19,7 @@ Refer to the link:https://circleci.com/changelog/[CircleCI Change log] to find o
 
 To update the Kubernetes release agent you need an operational CircleCI release environment integrated with your Kubernetes cluster. Refer to the following pages for steps:
 
-* xref:set-up-circleci-releases#[Set up CircleCI releases]
+* xref:set-up-circleci-deploys#[Set up CircleCI releases]
 * xref:configure-your-kubernetes-components#[Configure your Kubernetes components]
 
 [CAUTION]

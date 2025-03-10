@@ -12,9 +12,9 @@ contentTags:
 
 This tutorial shows how to add a release marker step to your workflow config. Release markers allow you log all new releases in one place and link back to the CI/CD pipelines that caused them.
 
-Unless you opt out of the feature, CircleCI autodetects potential releases and creates release markers for you. This guide is for you if you would rather create release markers yourself. For more information see the xref:releases-overview#[Releases overview] page.
+Unless you opt out of the feature, CircleCI autodetects potential releases and creates release markers for you. This guide is for you if you would rather create release markers yourself. For more information see the xref:deploys-overview#[Releases overview] page.
 
-Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. You can use release markers independently, without installing the release agent. If you are interested in comprehensive release visibility and management features, refer to the xref:set-up-circleci-releases#[Set up CircleCI releases] guide for more information.
+Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. You can use release markers independently, without installing the release agent. If you are interested in comprehensive release visibility and management features, refer to the xref:set-up-circleci-deploys#[Set up CircleCI releases] guide for more information.
 
 == Prerequisites
 

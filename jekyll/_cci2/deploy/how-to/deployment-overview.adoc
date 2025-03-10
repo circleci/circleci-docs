@@ -25,7 +25,7 @@ You can also configure CircleCI to integrate with other services for:
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
-NOTE: **Deploy to Kubernetes?** Refer to our xref:release/releases-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
+NOTE: **Deploy to Kubernetes?** Refer to our xref:deploy/releases-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
 
 [#the-basics-of-deployment]
 == The basics of deployment
@@ -34,7 +34,7 @@ Here are the core concepts you need to get a deployment set up:
 
 * **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
-TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:release/configure-release-markers#[Release markers] guide to learn more.
+TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:deploy/configure-release-markers#[Release markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -98,22 +98,22 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 Use the following how-to guides to manage common deployment use cases:
 
 * For examples of deploying to Kubernetes, see the guides in the link:https://github.com/CircleCI-Public/cd-config-examples/blob/main/docs/cci_deploy/deployment_helm.md[Continuous deployment config examples] repo.
-* <<deploy-to-amazon-sagemaker#,Deploy to Amazon SageMaker>>
-* <<deploy-android-applications#,Deploy Android applications>>
-* <<deploy-to-artifactory#,Deploy to Artifactory>>
-* <<deploy-to-aws#,Deploy to AWS>>
-* <<deploy-service-update-to-aws-ecs#,Deploy to AWS ECS>>
-* <<ecs-ecr#,Deploy to AWS ECR/ECS>>
-* <<deploy-to-azure-container-registry#,Deploy to Azure Container Registry>>
-* <<deploy-to-capistrano#,Deploy to Capistrano>>
-* <<deploy-to-cloud-foundry#,Deploy to Cloud Foundry>>
-* <<deploy-to-firebase#,Deploy to Firebase>>
-* <<deploy-to-google-cloud-platform#,Deploy to Google Cloud Platform>>
-* <<deploy-to-heroku#,Deploy to Heroku>>
-* <<deploy-ios-applications#,Deploy iOS applications>>
-* <<deploy-to-npm-registry#,Deploy to npm registry>>
-* <<deploy-over-ssh#,Deploy over SSH>>
-* <<authorize-google-cloud-sdk#,Authorize Google Cloud SDK>>
-* <<publish-packages-to-packagecloud#,Publish packages to Packagecloud>>
+* xref:deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker]
+* xref:deploy-android-applications#[Deploy Android applications]
+* xref:deploy-to-artifactory#[Deploy to Artifactory]
+* xref:deploy-to-aws#[Deploy to AWS]
+* xref:deploy-service-update-to-aws-ecs#[Deploy to AWS ECS]
+* xref:ecs-ecr#[Deploy to AWS ECR/ECS]
+* xref:deploy-to-azure-container-registry#[Deploy to Azure Container Registry]
+* xref:deploy-to-capistrano#[Deploy to Capistrano]
+* xref:deploy-to-cloud-foundry#[Deploy to Cloud Foundry]
+* xref:deploy-to-firebase#[Deploy to Firebase]
+* xref:deploy-to-google-cloud-platform#[Deploy to Google Cloud Platform]
+* xref:deploy-to-heroku#[Deploy to Heroku]
+* xref:deploy-ios-applications#[Deploy iOS applications]
+* xref:deploy-to-npm-registry#[Deploy to npm registry]
+* xref:deploy-over-ssh#[Deploy over SSH]
+* xref:authorize-google-cloud-sdk#[Authorize Google Cloud SDK]
+* xref:publish-packages-to-packagecloud#[Publish packages to Packagecloud]
 
 Go to the link:https://circleci.com/developer/orbs[orbs registry] to simplify your configuration by using an orb for your deployment target.
