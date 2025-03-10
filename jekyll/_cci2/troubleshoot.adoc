@@ -22,9 +22,6 @@ This page offers troubleshooting suggestions for the following aspects of Circle
 | <<#pipelines,Pipelines>>
 | <<#machine-runner,Machine runner>>
 
-| <<#releases,Releases>>
-|
-
 |===
 
 == Orbs
