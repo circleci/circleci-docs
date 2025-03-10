@@ -287,7 +287,7 @@ The following table shows a complete list of labels and annotations either requi
 
 CircleCI automatically generates release markers for your deployment pipelines. Release markers provide a lightweight way to log your releases without requiring a full CircleCI releases setup. Release markers create for you a log of all releases in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Release markers log all new releases in one place and link back to the CI/CD pipelines that caused them. You can use release markers independently, without installing the release agent.
 
-=== Autodetection of releases
+=== Auto-detection of releases
 
 CircleCI looks for the word `deploy` in your job names to detect when a release may have happened and creates an autodetected release marker.
 

@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
+This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This manual installation guide is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
 
 == Prerequisites
 

@@ -28,7 +28,7 @@ If you were using the release agent prior to version `1.2.0` you were using `app
 
 Support for the old labels will be dropped in one of the next releases.
 
-After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and rollouts managed through Helm.
+After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
 ====
 
 [#update-steps]

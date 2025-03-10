@@ -54,7 +54,7 @@ Substitute the placeholders above based on your application's details:
 ** The `component-name` parameter sets the name that will be displayed in the CircleCI UI.
 ** The `target-version` parameter should match the name of the version being released.
 ** (Optional) You can provide the following parameter if required:
-*** The `namespace` param can be provided to use a value other than `default`.
+*** The `namespace` parameter can be provided to use a value other than `default`.
 
 == Conclusion
 
