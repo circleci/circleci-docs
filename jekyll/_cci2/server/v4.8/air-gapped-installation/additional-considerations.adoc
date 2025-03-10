@@ -1,0 +1,136 @@
+---
+contentTags:
+  platform:
+  - Server v4.7
+  - Server Admin
+noindex: true
+---
+= Additional considerations
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server v4.7.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#non-tls-docker-registry-installations]
+== Non-TLS Docker registry installations
+
+When configuring your air-gapped Docker registry, it is recommended to use TLS certificates to encrypt traffic. If using a non-TLS, or self-signed installation, the following additional steps will need to be taken.
+
+On machines that access the Docker registry using Docker, the Docker daemon config must be updated (located on Linux at `/etc/docker/daemon.json`).
+
+The insecure-registries section must be added to the file (if it exists), or the file must be created with the following if it does not. Make sure to include the full hostname and port of your registry, but do not include the protocol (`http://` or `https://`).
+
+[source, json]
+----
+{
+      "insecure-registries":["docker.example.internal:5000"]
+}
+----
+
+This file will need to be configured on the following machines:
+
+- All Nomad nodes in the air-gapped environment
+- Potentially all K3s (lightweight Kubernetes) nodes in the air-gapped environment, if using Docker-backed K3s
+
+In addition, on each K3s node, the following file must be configured at `/etc/rancher/k3s/registries.yaml`. Take note to include the protocol where referenced.
+
+[source, yaml]
+----
+mirrors:
+  "docker.example.internal:5000":
+    endpoint:
+      - "http://docker.example.internal:5000"
+configs:
+  "docker.example.internal:5000":
+    tls:
+      insecure_skip_verify: true
+----
+
+---
+
+
+
+[#service-type-load-balancers-k3s]
+== Service type load balancers in K3s
+
+CircleCI server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
+
+If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
+
+Once installed, the following steps need to be followed:
+
+. Create a ConfigMap resource as an address pool for MetalLB.
++
+[source, yaml]
+----
+apiVersion: "v1"
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+    protocol: layer2
+    addresses:
+      - <<k3s_internal_ip_range_start>>-<<k3s_internal_ip_range_end>>
+----
++
+The address pool can be named something other than "default", but the annotations in `values.yaml` will need to be updated. If there is only one k3s node, the address range should have the same IP repeated (for example, `10.0.0.5-10.0.0.5`).
+
+. Once this ConfigMap resource is applied to the cluster (`kubectl apply -f metallb-configmap.yaml`), update the address pool name in `values.yaml` for the Helm installation.
++
+[source, yaml]
+----
+# Additional nginx annotations
+nginx:
+  annotations:
+    # This example uses MetalLB as a k3s load balancer
+    metallb.universe.tf/allow-shared-ip: default
+----
+
+. After installing the Helm chart, the `circleci-proxy` service must be patched to use the internal IP of the desired k3s node to act as the load balancer (this IP should be in the range entered in the ConfigMap above). The example below uses the IP address `10.0.0.5`.
++
+[source, bash]
+----
+kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externalIPs":["10.0.0.5"]}}'
+----
+
+. Once complete, DNS records can be created for your server installation (`server.internal.example.com`) and (`*.server.internal.example.com)` for `10.0.0.5`.
+
+[#tls-importing]
+== Importing trusted TLS certificates
+
+When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates using two methods, as described below.
+
+NOTE: Values provided for either of these methods are supported for GitHub Enterprise certificates only. No other VCS application is supported at this time.
+
+[#configuring-the-tls-imports-value]
+=== Configuring the TLS imports value
+In the `values.yaml` file, the `tls.imports` value can be configured to include a list of `hostname:port` combinations from which to retrieve and trust TLS certificates.
+
+[source, yaml]
+----
+tls:
+  ...
+  import:
+    - github.airgap.example.com:443
+----
+
+For each `hostname:port` combination, CircleCI server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
+
+
+[#configuring-the-tls-certificates-array]
+=== Configuring the TLS certificates array
+Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file, in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
+
+[source, yaml]
+----
+tls:
+  ...
+  certificates:
+    - <<base64-encoded-public-tls-certificate-chain>>
+----
