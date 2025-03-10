@@ -218,7 +218,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. Contexts provide a mechanism for securing and sharing environment variables across projects.
 
-**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub checks.
+**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub Checks.
 
 **Security**: Allows you to set whether or not you want to allow the use of partner and community orbs, or private orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
 
