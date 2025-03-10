@@ -7,7 +7,6 @@ noindex: true
 ---
 = Configuring external services
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document describes how to configure the following external services for use with a CircleCI server v4.1 installation
 :icons: font
 :experimental:
@@ -74,7 +73,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 [#migrating-from-internal-postgres]
 === Migrating from an internal PostgreSQL to an externalized source
 
-{% include snippets/server/migrate-internal-postgres-to-external.adoc %}
+include::../../../../_includes/snippets/server/migrate-internal-postgres-to-external.adoc[]
 
 [#connecting-your-external-postgres]
 === Connecting your external PostgreSQL instance to CircleCI server
@@ -148,7 +147,7 @@ NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 [#migrating-from-internal-mongodb]
 === Migrating from an internal MongoDB to an externalized source
 
-{% include snippets/server/migrate-internal-mongo-to-external.adoc %}
+include::../../../../_includes/snippets/server/migrate-internal-mongo-to-external.adoc[]
 
 [#connecting-your-external-mongodb]
 === Connecting your external MongoDB instance to CircleCI server

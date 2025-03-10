@@ -1,13 +1,12 @@
 ---
-description: This is document provides examples of deploying to Google Cloud Platform.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 =  Deploy to Google Cloud Platform
+:page-description: This is document provides examples of deploying to Google Cloud Platform.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -25,7 +24,7 @@ In addition to the orbs described below, CircleCI has created an GCP convenience
 
 Several Google Cloud orbs are available in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry]. Use the orbs to simplify your deployments. For example, the link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) orb] has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
