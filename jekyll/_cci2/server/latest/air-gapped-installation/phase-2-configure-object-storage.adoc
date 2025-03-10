@@ -201,18 +201,6 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.
 
 Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
 
-[#copy-candidate-txt-file]
-=== b. Copy candidate.txt file
-Download the `candidate.txt` file required by `runner_admin`.
-
-[,bash]
-----
-# Download candidate.txt
-curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/candidate.txt
-----
-
-Copy this `candidate.txt` file to the root directory of the `circleci-data` bucket.
-
 [#next-steps]
 == Next steps
 

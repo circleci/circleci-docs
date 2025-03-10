@@ -1208,12 +1208,6 @@ request for the radm-cleaner deployment
 |runner_admin.cleaner.resources.requests.memory |string |`+"512M"+`
 |Memory request for the radm-cleaner deployment
 
-|runner_admin.external.launch_agent_base_url |string
-|`+"https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"+`
-|Location of the launch-agent binaries. When using an air-gapped
-environment, the launch-agent binaries will need to be hosted within the
-air gap and this value updated.
-
 |runner_admin.external.replicas |int |`+1+` |Number of replicas to
 deploy for the radm-external deployment.
 

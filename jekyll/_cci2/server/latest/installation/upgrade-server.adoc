@@ -55,3 +55,5 @@ helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n 
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
+
+. Migrate any existing machine runner instances from the launch agent to the machine runner 3.0 agent, see the xref:../../../../migrate-from-launch-agent-to-machine-runner-3-on-linux/[migration guide]. The launch agent is not supported.
