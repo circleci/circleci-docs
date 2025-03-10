@@ -2654,6 +2654,67 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 A job name that exists in your `config.yml`.
 
 '''
+====== `serial-group`
+
+The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control the orchestration of jobs across an organization, not just within projects and pipelines.
+
+The `serial-group` key is configurable per job. It is not possible to configure the key for a group of jobs at this time.
+
+The value of the `serial-group` key is a string that is used to group jobs together to run one after another. The key must meet the following requirements:
+
+* Must be less than or equal to (≤) 512 characters, once compiled.
+* Must not be blank.
+* Must consist of alphanumeric characters plus, `.`, `-`, `_`, `/`.
+
+Note the following features of serial groups:
+
+* You can use pipeline values and parameters in the `serial-group` key.
+* Serial groups will wait for five hours. After this jobs waiting in the group will be cancelled. This does not affect the standard limits that apply to a <<jobs,job's runtime>>.
+
+[CAUTION]
+====
+*Pipeline order protection in serial groups*
+
+Jobs in a serial group follow an order protection mechanism, as follows:
+
+* Jobs start in the order they join the queue, but are _accepted_ based on pipeline number.
+* If a group is waiting/running and another job in the same project attempts to join the queue with a lower pipeline number, the job is skipped.
+* This immediate skip process exists to maintain order integrity, which is a safety process to avoid unexpected work in a build, for example, a deployment job running a previous version unexpectedly.
+
+If there are no serial groups waiting/running, a pipeline with a lower number can start, such as restoring back to a previous pipeline via a rerun workflow.
+====
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `serial-group`
+| N
+| String
+| A string that is used across an org to group jobs together to run one after another. Can include pipeline values and parameters. Use this same serial group across multiple pipelines to control the orchestration of jobs across an organization.
+|===
+
+*Example:*
+
+[,yml]
+----
+# Creating multiple pipelines at the same time with the below config will results in
+# all pipelines running test and build but only a single pipeline will run deploy at a time.
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - build
+      - deploy:
+          serial-group: << pipeline.project.slug >>/deploy-group
+          requires:
+            - test
+            - build
+----
+
+'''
 
 [#requires]
 ====== *`requires`*

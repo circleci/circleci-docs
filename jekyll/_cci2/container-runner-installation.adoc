@@ -6,7 +6,6 @@ contentTags:
 ---
 = Container runner installation (Kubernetes)
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Instructions on how to install CircleCI's container runner.
 :icons: font
 :experimental:
@@ -14,28 +13,26 @@ contentTags:
 
 This page describes how to install CircleCI's container runner.
 
-// {% include snippets/runner-platform-prerequisites.adoc %}
-
 [#prerequisites]
 == Prerequisites
 
-{% include snippets/runner/container-runner-prereq.adoc %}
+include::../_includes/snippets/runner/container-runner-prereq.adoc[]
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-{% include snippets/runner/terms.adoc %}
+include::../_includes/snippets/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
 [.tab.container-runner.Web_app_installation]
 --
-{% include snippets/runner/install-with-web-app-steps.adoc %}
+include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.container-runner.CLI_installation]
 --
-{% include snippets/runner/install-with-cli-steps.adoc %}
+include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 --
 
 [#container-runner-installation]
