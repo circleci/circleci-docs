@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Set up CircleCI releases
+= Set up CircleCI deploys
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to set up CircleCI releases, covering creating an environment integration, installing the release agent and creating components.

@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Configure release markers
+= Configure deploy markers
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Tutorial outlining how to configure release markers in your workflow
