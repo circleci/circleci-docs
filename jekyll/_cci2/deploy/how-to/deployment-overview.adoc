@@ -25,33 +25,33 @@ You can also configure CircleCI to integrate with other services for:
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
-NOTE: **Deploy to Kubernetes?** Refer to our xref:deploy/releases-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
+NOTE: **Deploy to Kubernetes?** Refer to our xref:../deploys-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
 
 [#the-basics-of-deployment]
 == The basics of deployment
 
 Here are the core concepts you need to get a deployment set up:
 
-* **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require.
+* **Deployment job**: To deploy your application, add a xref:../../jobs-steps#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
-TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:deploy/configure-release-markers#[Release markers] guide to learn more.
+TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:../configure-deploy-markers#[Release markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
 ** Defined within your configuration
 ** Added to the project itself through the CircleCI web app:
-*** Add project-level <<set-environment-variable#set-an-environment-variable-in-a-project,environment variables>>
-***  Add project-level <<add-ssh-key#,SSH keys>>
+*** Add project-level xref:../../set-environment-variable#set-an-environment-variable-in-a-project[environment variables]
+***  Add project-level xref:../../add-ssh-key#[SSH keys].
 
-* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job in your workflow.
+* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a xref:../../workflows#holding-a-workflow-for-a-manual-approval[hold/approve] job in your workflow.
 This job will create a manual approval button visible in the CircleCI web app workflows map.
 
-If you need to restrict connections, consider enabling xref:ip-ranges#[IP ranges] for your deployment job.
+If you need to restrict connections, consider enabling xref:../../ip-ranges#[IP ranges] for your deployment job.
 
 [#using-orbs-to-simplify-deployment]
 == Using orbs to simplify deployment
 
-<<orb-intro#,Orbs>> are packages of reusable configuration.
+xref:../../orb-intro#[Orbs] are packages of reusable configuration.
 For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
 Orbs are available for many common deployment targets.
 
@@ -78,7 +78,7 @@ workflows:
 
 Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider <<orb-author-intro#,authoring one>>!
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:../../orb-author-intro#[authoring one]!
 
 [#using-images-to-simplify-deployment]
 == Using images to simplify deployment
