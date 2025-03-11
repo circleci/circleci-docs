@@ -9,7 +9,7 @@ contentTags:
 :icons: font
 :page-layout: classic-docs
 
-CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email are delivered on the successful completion or failure of a xref:workflows#[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:workflows#[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 [,yaml]
 ----
