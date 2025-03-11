@@ -34,7 +34,7 @@ NOTE: CircleCI occasionally makes scheduled changes to images to fix bugs or oth
 [#examples]
 === Examples
 
-Refer to the link:{{ site.baseurl }}/examples-and-guides-overview/[Examples and Guides Overview] for examples of using pre-built CircleCI Docker Images in a demo application.
+Refer to the xref:examples-and-guides-overview#[Examples and Guides Overview] for examples of using pre-built CircleCI Docker Images in a demo application.
 
 [#next-generation-convenience-images]
 == Next-generation convenience images
@@ -170,11 +170,11 @@ All images add a `circleci` user as a system user. The sections below walk throu
 Next-gen language images are convenience images for common programming languages.
 These images include relevant language tools and <<pre-installed-tools,commonly-used tools>>.
 To use a language image, list it first under the `docker` key in your configuration,
-making it the link:{{ site.baseurl }}/glossary/#primary-container[primary container] during execution.
+making it the xref:glossary#primary-container[primary container] during execution.
 
-See the https://circleci.com/developer/images?imageType=docker[Developer Hub] for a full list of next-gen images.
+See the link:https://circleci.com/developer/images?imageType=docker[Developer Hub] for a full list of next-gen images.
 
-If your language is not listed, feel free to request an image on our https://ideas.circleci.com/[Ideas
+If your language is not listed, feel free to request an image on our link:https://ideas.circleci.com/[Ideas
 Board]. First, check to see if that "idea" is
 already on CircleCI Ideas. If it is, up-vote it. If not, create it and set the
 category as "images". Finally, go and market your "idea" to friends, co-workers,
@@ -197,7 +197,7 @@ for details on which variants it supports.
 The legacy language images are convenience images for common programming languages.
 These images include both the relevant language and <<pre-installed-tools,commonly-used tools>>.
 A language image should be listed first under the `docker` key in your configuration,
-making it the link:{{ site.baseurl }}/glossary/#primary-container[primary container] during execution.
+making it the xref:glossary#primary-container[primary container] during execution.
 
 CircleCI maintains legacy images for the languages below.
 
