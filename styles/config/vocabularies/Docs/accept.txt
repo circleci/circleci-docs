@@ -75,6 +75,7 @@ Capistrano
 Certbot
 cgroup
 Chocolatey
+chruby
 CircleCI\b
 \bCircleCI cloud\b
 \bCircleCI server\b
