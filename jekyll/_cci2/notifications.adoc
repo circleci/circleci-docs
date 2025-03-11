@@ -4,12 +4,12 @@ contentTags:
   - Cloud
 ---
 = Notifications overview
-:page-description: Learn how to use get CircleCI's job status through Slack, IRC, email, and web notifications.
+:page-description: Learn how to use get CircleCI's job status through Slack, IRC and email notifications.
 :experimental:
 :icons: font
 :page-layout: classic-docs
 
-CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the successful completion or failure of a xref:workflows#[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email are delivered on the successful completion or failure of a xref:workflows#[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 [,yaml]
 ----
@@ -56,22 +56,6 @@ Email notifications appear as follows:
 image::notification-email-success.png[Example success email notification]
 
 image::notification-email-failure.png[Example failure email notification]
-
-[#enable-web-notifications]
-== Enabling web notifications
-
-Perform the following steps to enable web notifications:
-
-. Go to your link:https://app.circleci.com/settings/user/notifications[CircleCI user settings]. Enable the toggle for "Web Notifications" at the bottom of the page.
-. Your browser asks you to confirm that you want to allow notifications. Click *Allow*. See the screenshot below for additional details:
-
-image::notifications-enable-web.png[Screenshots showing how to enable web notifications in your browser]
-
-If you have previously denied CircleCI permission to send you web notifications, you need to manually enable those permissions in your browser. In Google Chrome, you can do this by clicking the lock icon in the URL bar and re-enabling the notifications toggle.
-
-image::enable-web-notifications.png[Screenshot showing how to enable web notifications in Google Chrome]
-
-Although the process is similar for other browsers, refer to their documentation for handling web notifications.
 
 [#notifications-with-orbs]
 == Sending notifications with orbs
