@@ -65,7 +65,7 @@ You may wish to configure a workflow in your pipeline that will only run on a pi
 
 === Steps
 
-. Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
+Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
 
 [,yml]
 ----
@@ -153,4 +153,36 @@ You can create complex logic statements that involve multiple parameters.
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
+----
+
+== Run a step depending on the output of a nested logic statement
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-step-nested.yml[]
+----
+
+== Run a job only on specific branches **or** when the value of a pipeline parameter is true
+
+=== Goal
+
+You may want to configure a job that will only run on specific branches or when the value of a pipeline parameter is set to `true` when the pipeline is triggered via the API.
+
+=== Steps
+
+Update your CircleCI config to include an xref:configuration-reference/#expression-based-job-filters[expression-based job filter].
+
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/multiple-or.yml[]
+----
+
+=== Notes
+
+You will need to use the API to trigger a pipeline with a pipeline parameter set to `true`:
+
+[,txt]
+----
+include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/api-trigger.txt[]
 ----
