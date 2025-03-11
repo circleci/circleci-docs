@@ -66,7 +66,7 @@ You may wish to configure a workflow in your pipeline that will only run on a pi
 === Steps
 
 . Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
-+
+
 [,yml]
 ----
 workflows:
@@ -101,3 +101,56 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 // Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
 
 // #TODO steps to trigger on a PR being opened#
+
+== Run a workflow only for specific branches
+
+=== Goal
+You may want to configure a workflow that will only run when the pipeline that is triggered on a specific branch.
+
+=== Steps
+
+Update your CircleCI config to include a workflow that you only want to run for specific branches.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
+----
+
+=== Notes
+
+You can also choose to prevent the workflow from running for specific branches.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
+----
+
+== Run a workflow depending on the value of a boolean parameter
+
+=== Goal
+You may want to configure a workflow that will only run when a boolean pipeline parameter is true.
+
+=== Steps
+
+Update your CircleCI config to include a workflow that will only run when a boolean pipeline parameter you declared is true.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
+----
+
+=== Notes
+
+You can also use the dynamic syntax to achieve the same result.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
+----
+
+You can create complex logic statements that involve multiple parameters.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
+----
