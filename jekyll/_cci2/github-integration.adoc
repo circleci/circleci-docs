@@ -335,7 +335,7 @@ Once you have set up your first pipeline, you will be able to add triggers to it
 
 NOTE: Only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
 
-Once the GitHub App is installed, it is reccomended that each user authorize the GitHub App connection. To do this, users can navigate to **Project Settings > Pipelines > Add Pipeline > connections** and clicking the **"Authorize"** button.
+Once the GitHub App is installed, it is recommend that each user authorize the GitHub App connection. To do this, users can navigate to **Project Settings > Pipelines > Add Pipeline > connections** and clicking the **"Authorize"** button.
 
 [#github-app-integration]
 ### The GitHub App integration
