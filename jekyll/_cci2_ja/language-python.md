@@ -9,8 +9,6 @@ contentTags:
     - Server v3.x
 ---
 
-{% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
-
 ## 概要
 {: #overview-new }
 

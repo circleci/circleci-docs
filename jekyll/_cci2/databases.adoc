@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This page describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
 
@@ -34,7 +33,7 @@ In the primary image, the config defines an environment variable with the `envir
 
 Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yml]
 ----
@@ -42,8 +41,6 @@ Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgre
         environment:
           POSTGRES_USER: postgres
 ----
-
-{% raw %}
 
 [,yml]
 ----
@@ -78,15 +75,13 @@ jobs:
           -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
 ----
 
-{% endraw %}
-
 The `steps` run `checkout` first, then install the PostgreSQL client tools. The `cimg/postgres:14.0` image doesn't install any client-specific database adapters. For example, for Python, you might install link:https://www.psycopg.org/[`psycopg2`] so that you can interface with the PostgreSQL database.
 
 In this example, the config installs the PostgreSQL client tools, `postgresql-client` via `apt-get`, to get access to `psql`. Installing packages in images requires administrator privileges, therefore `sudo` is used - a password is not required.
 
 Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
-NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the link:{{site.baseurl}}/variables#built-in-environment-variables[Project values and variables] document for details.
+NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the xref:variables#built-in-environment-variables[Project values and variables] document for details.
 
 When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
 

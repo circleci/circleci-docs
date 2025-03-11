@@ -84,7 +84,16 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 
-| xref:enable-checks#[GitHub Checks]
+| xref:enable-checks#github-check-and-github-status-updates[Status Updates]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes** ^4^#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| xref:enable-checks#[GitHub Checks] ^3^
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -97,6 +106,11 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 ^1^ _Possible using xref:dynamic-config#[dynamic configuration]._
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
+
+^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
+
+^4^ _Bitbucket Cloud status updates can be enabled and disabled via project settings._
+
 
 === Pipeline triggers and integrations
 

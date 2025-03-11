@@ -1,0 +1,231 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Configure a Node.js application on CircleCI
+:description: Building and Testing with JavaScript and Node.js on CircleCI
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+This quickstart guide covers integrating a Node.JS project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.JS project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
+
+[#prerequisites]
+== Prerequisites
+
+* xref:first-steps#[A CircleCI account]
+* A Node.JS project located in a supported VCS
+
+[#configuration-walkthrough]
+== Configuration walkthrough
+
+Every CircleCI project requires a configuration file called xref:configuration-reference#[`.circleci/config.yml`]. Follow the steps below to create a complete `config.yml` file.
+
+[#specify-a-version]
+=== 1. Specify a version
+
+Every CircleCI config.yml starts with the version key. This key is used to issue warnings about breaking changes.
+
+[,yaml]
+----
+version: 2.1
+----
+
+`2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
+
+[#use-the-node-orb]
+=== 2. Use the Node orb
+
+The Node.js link:https://circleci.com/developer/orbs/orb/circleci/node[orb] contains a set of prepackaged CircleCI configurations you can use to install Node.js and its package managers (npm, yarn). Best of all, packages are installed with caching by default, and support for Linux x86_64, macOS x86_64, and Arm64 is automatically included. Learn more about xref:orb-intro#[orbs].
+
+To add the orb to your config, insert:
+
+[,yaml]
+----
+orbs:
+  node: circleci/node@5.0.2
+----
+
+NOTE: When using an orb, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your specific project.
+
+[#create-jobs]
+=== 3. Create jobs
+
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the xref:jobs-steps#[Jobs and Steps] page.
+
+A common ask from developers who are getting started with CircleCI is to perform 3 basic tasks: `build`, `test` and `deploy`. This section guides you through each of the config changes needed. Because we are using the official Node orb, we can use commands that are built into the orb to keep our config simple and succinct:
+
+[#build-and-test-the-app]
+==== a. Build and test the app
+
+If you are using yarn:
+
+[,yaml]
+----
+jobs:
+  build_and_test: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn test
+          name: Run tests
+      - run:
+          command: yarn build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
+----
+
+Similarly, if you are using npm:
+
+[,yaml]
+----
+jobs:
+  build_and_test: # this can be any name you choose
+    executor: node/default # use the default executor defined within the orb
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test
+          name: Run tests
+      - run:
+          command: npm run build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+----
+
+Because we are using the Node orb, this job will install your Node packages with automated caching and best practices applied. Note that it requires a lock file.
+
+[#deploy-the-app]
+==== b. Deploy the app
+
+In this quickstart guide, we will deploy to link:https://www.heroku.com/[Heroku]. We can do this using the official Heroku orb by adding a new line into our orb section. The Heroku orb contains a set of prepackaged CircleCI configurations you can use to deploy applications to Heroku. Learn more about the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb].
+
+[,yaml]
+----
+orbs:
+  node: circleci/node@4.7.0
+  heroku: circleci/heroku@1.2.6
+----
+
+We then need to add a job to our list to take care of the deploy step:
+
+[,yaml]
+----
+jobs:
+  # ...previous job(s)...
+  deploy: # this can be any name you choose
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+----
+
+NOTE: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about xref:set-environment-variable#set-an-environment-variable-in-a-project[environment variables].
+
+[#create-a-workflow]
+=== 3. Create a workflow
+
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:configuration-reference#workflows[workflow configuration].
+
+[,yaml]
+----
+workflows:
+  build_test_deploy: # this can be any name you choose
+----
+
+[#add-jobs-to-the-workflow]
+=== 4. Add jobs to the workflow
+
+Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the xref:workflows#[Using Workflows to Orchestrate Jobs] page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+
+[,yaml]
+----
+workflows:
+  build_test_deploy: # this can be any name you choose
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
+----
+
+[#conclusion]
+=== 5. Conclusion
+
+You just set up a Node.js app to build on CircleCI. Check out your project's xref:pipelines#[pipeline page] to see how this looks when building on CircleCI.
+
+NOTE: *Deploy options?* For alternative deployment targets, search the link:https://circleci.com/developer/orbs[orb registry], where you will find integrations such as link:https://circleci.com/developer/orbs/orb/circleci/kubernetes[Kubernetes], link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS], link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke[GCP GKE], and more.
+
+[#full-configuration-file]
+== Full configuration file
+
+[,yaml]
+----
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  build_and_test:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn test
+          name: Run tests
+      - run:
+          command: yarn build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  deploy: # this can be any name you choose
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+
+workflows:
+  test_my_app:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test # only deploy if the build_and_test job has completed
+          filters:
+            branches:
+              only: main # only deploy when on main
+----
+
+[#see-also-new]
+== See also
+
+* link:https://circleci.com/blog/continuous-deployment-to-heroku/[Continuous deployment of Node apps to Heroku]
+* link:https://circleci.com/blog/cd-azure-vm/[Continuous deployment of Node.js to Azure VM]
+* link:https://support.circleci.com/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout[Troubleshoot Node.js build and test suite timeouts]
+* Tutorial: xref:test-splitting-tutorial#[Test splitting to speed up your pipelines]

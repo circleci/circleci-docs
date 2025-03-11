@@ -1,6 +1,4 @@
 ---
-layout: classic-docs
-short-title: Troubleshoot pipelines
 contentTags:
   platform:
   - Cloud

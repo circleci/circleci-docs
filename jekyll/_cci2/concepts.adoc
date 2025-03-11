@@ -3,14 +3,12 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
 ---
 = Concepts
 :description: CircleCI concepts
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#introduction]
 == Introduction
@@ -48,7 +46,7 @@ Your CircleCI configuration can be adapted to fit many different needs of your p
 
 The following illustration uses an link:https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config[example Java application] to show the various configuration elements:
 
-image::{{site.baseurl}}/assets/img/docs/config-elements.png[configuration elements]
+image::config-elements.png[configuration elements]
 
 CircleCI configurations use YAML. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for basic guidance. For a full overview of what is possible in a configuration file, see the xref:configuration-reference#[Configuration reference] page.
 
@@ -57,7 +55,7 @@ CircleCI configurations use YAML. See the xref:introduction-to-yaml-configuratio
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
 
-image::{{site.baseurl}}/assets/img/docs/contexts_cloud.png[Contexts Overview]
+image::contexts_cloud.png[Contexts Overview]
 
 See the xref:contexts#[Using contexts] page for more information.
 
@@ -66,7 +64,7 @@ See the xref:contexts#[Using contexts] page for more information.
 
 Persist data to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: artifacts, caches, and workspaces.
 
-image::{{site.baseurl}}/assets/img/docs/workspaces.png[workflow illustration]
+image::workspaces.png[workflow illustration]
 
 Note the following distinctions between artifacts, caches and workspaces:
 
@@ -95,8 +93,6 @@ Note the following distinctions between artifacts, caches and workspaces:
 === Artifacts
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -144,8 +140,6 @@ workflows:
             - build2
 ----
 
-{% endraw %}
-
 See the xref:artifacts#[Storing build artifacts] page for more information.
 
 [#caches]
@@ -154,8 +148,6 @@ See the xref:artifacts#[Storing build artifacts] page for more information.
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
 If you need to clear your cache, refer to the xref:caching#clearing-cache[Caching dependencies] page for more information.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -194,8 +186,6 @@ workflows:
           requires:
             - build1
 ----
-
-{% endraw %}
 
 For more information see the xref:caching#[Caching dependencies] and xref:caching-strategy#[Caching strategies] pages.
 
@@ -250,11 +240,11 @@ See the xref:dynamic-config#[Dynamic configuration] page for more information.
 
 Each separate job defined within your configuration runs in a unique execution environment, known as executors. An executor can be a Docker container, or a virtual machine running Linux, Windows, or macOS. In some of these instances, you can set up an environment using GPU, or Arm. CircleCI also provides a machine-based and container-based self-hosted runner solution.
 
-image::{{site.baseurl}}/assets/img/docs/executor_types.png[Illustration of a CircleCI job]
+image::executor_types.png[Illustration of a CircleCI job]
 
 An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the <<images,images>> section).
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [.tab.executors.Cloud]
 [,yaml]
@@ -348,7 +338,7 @@ An image is a packaged system that includes instructions for creating a running 
 
 The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:circleci-images#[convenience images] for popular languages on Docker Hub.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 The *machine executor* spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the xref:configuration-reference#machine[Using machine] page.
 
@@ -401,7 +391,7 @@ See the xref:circleci-images#[Images] page for more information.
 
 Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:executor-intro#docker[specify an image] to use for the primary container. For `macos` you must specify an xref:executor-intro#macos[Xcode version]. For `windows` you must use the xref:executor-intro#windows[Windows orb].
 
-image::{{site.baseurl}}/assets/img/docs/job.png[Illustration of a CircleCI job]
+image::job.png[Illustration of a CircleCI job]
 
 See the xref:jobs-steps#[Jobs and steps] page for more information.
 
@@ -414,7 +404,7 @@ The illustration in the <<configuration,Configuration>> section showing an examp
 
 // Turn this into a config snippet
 
-image::{{site.baseurl}}/assets/img/docs/config-elements-orbs.png[Configuration using Maven orb]
+image::config-elements-orbs.png[Configuration using Maven orb]
 
 See xref:orb-concepts#[Using orbs] for details on how to use orbs in your configuration and an introduction to orb design. Visit the link:https://circleci.com/developer/orbs[Orbs registry] to search for orbs to help simplify your configuration.
 
@@ -439,7 +429,7 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
-image::{{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png[Executor types with parallelism]
+image::executor_types_plus_parallelism.png[Executor types with parallelism]
 
 See xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information.
 
@@ -450,7 +440,7 @@ A CircleCI pipeline is the full set of processes you run when you trigger work o
 
 Pipelines represent methods for interacting with your configuration:
 
-{% include snippets/pipelines-benefits.adoc %}
+include::../_includes/snippets/pipelines-benefits.adoc[]
 
 See the xref:pipelines#[Pipelines overview] page for more information.
 
@@ -480,7 +470,7 @@ Select *Projects* in the CircleCI web app sidebar to enter the projects dashboar
 * _Set Up_ or _Create_ any project that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to link:/docs/notifications/[email notifications] for the project's status.
 
-image::{{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png[Project dashboard]
+image::CircleCI-2.0-setup-project-circle101_cloud.png[Project dashboard]
 
 [#resource-class]
 == Resource class
@@ -578,9 +568,7 @@ image::/docs/assets/img/docs/workflow_detail_newui.png[Workflows illustration cl
 
 The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
-{% include snippets/docker-auth.adoc %}
-
-{% raw %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -632,8 +620,6 @@ workflows:
            - build1 # wait for build1 job to complete successfully before starting
            # run build2 and build3 concurrently to save time.
 ----
-
-{% endraw %}
 
 See the xref:workflows#[Using workflows] page for more information.
 
