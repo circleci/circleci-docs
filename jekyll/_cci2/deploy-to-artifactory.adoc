@@ -149,5 +149,5 @@ workflows:
 [#see-also]
 == See also
 
-* xref:../../artifacts#[Storing and Accessing Artifacts]
+* xref:artifacts#[Storing and Accessing Artifacts]
 * link:https://circleci.com/circleci-and-jfrog/[CircleCI and JFrog]
