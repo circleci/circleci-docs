@@ -120,7 +120,7 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 * <<private-environment-variables,Environment variables>> set through the application.
 * xref:github-integration#deploy-keys-and-user-keys[Deployment keys and user keys].
 * Passphraseless private SSH keys you have xref:add-ssh-key#[added to CircleCI] to access arbitrary hosts during a build.
-* xref:deploy/how-to/deploy-to-aws#[AWS permissions] and configuration files.
+* xref:deploy/guides/deploy-to-aws#[AWS permissions] and configuration files.
 
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
