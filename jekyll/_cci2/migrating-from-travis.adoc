@@ -83,7 +83,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 
 | `deploy:`
 | xref:configuration-reference#run[`run`]
-| Use a `run` step to run needed commands for deployment. See our xref:deployment-overview#[Deployment overview page] for links to examples.
+| Use a `run` step to run needed commands for deployment. See our xref:deploy/how-to/deployment-overview#[Deployment overview page] for links to examples.
 
 | `env:`
 | xref:configuration-reference#environment[`environment`]
