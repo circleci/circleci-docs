@@ -336,9 +336,12 @@ Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the 
 . Go to menu:Settings[Webhooks].
 . Locate the CircleCI webhook (`https://circleci.com/hooks/github`) and select btn:[Delete].
 
-_Note: Deleting the OAuth webhook will prevent the xref:variables/#built-in-environment-variables[built-in environment variable] `CIRCLE_PULL_REQUEST` from being populated in all pipelines. This is a side effect we are working on, and will be resolved in the near future._
+_Note: Deleting the OAuth webhook will prevent the xref:variables/#built-in-environment-variables[built-in environment variable] `CIRCLE_PULL_REQUEST` from being populated in all pipelines. We are working on getting this side effect resolved in the near future._
 
-This action is reversible: to re-enable the OAuth trigger, go to menu:Project Settings[Overview], select “Stop building” at the bottom of the page, then select "Follow". This will create a new CircleCI webhook in your repository.
+This action is reversible. To re-enable the OAuth trigger, follow these steps:
+. Go to menu:Project Settings[Overview]
+. Select "Stop building" at the bottom of the page
+. Then, select "Follow". This will create a new CircleCI webhook in your repository.
 
 ====
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
