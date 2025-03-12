@@ -31,7 +31,7 @@ In this case, the `authToken` is `00000000-0000-0000-0000-000000000000`.
 
 [#set-npm-token]
 == 2. Set npm token
-Go to your xref:../../set-environment-variable#set-an-environment-variable-in-a-project[project settings], and set the `NPM_TOKEN` variable to the obtained `authToken`.
+Go to your xref:set-environment-variable#set-an-environment-variable-in-a-project[project settings], and set the `NPM_TOKEN` variable to the obtained `authToken`.
 
 [#configure-circleci]
 == 3. Configure CircleCI

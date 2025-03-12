@@ -373,7 +373,7 @@ en:
           - name: Deploys overview
             link: deploy/deploys-overview
           - name: Overview of deployment on CircleCI
-            link: deploy/how-to/deployment-overview
+            link: deployment-overview
       - name: Set up
         children:
           - name: Set up CircleCI deploys
@@ -391,35 +391,35 @@ en:
           - name: Update the Kubernetes deploy agent
             link: deploy/update-the-kubernetes-release-agent
           - name: Deploy to Amazon SageMaker
-            link: deploy/how-to/deploy-to-amazon-sagemaker
+            link: deploy-to-amazon-sagemaker
           - name: Deploy Android applications
-            link: deploy/how-to/deploy-android-applications
+            link: deploy-android-applications
           - name: Deploy to Artifactory
-            link: deploy/how-to/deploy-to-artifactory
+            link: deploy-to-artifactory
           - name: Deploy to AWS
-            link: deploy/how-to/deploy-to-aws
+            link: deploy-to-aws
           - name: Push image to ECR and deploy to ECS
-            link: deploy/how-to/ecs-ecr
+            link: ecs-ecr
           - name: Deploy to Azure Container Registry
-            link: deploy/how-to/deploy-to-azure-container-registry
+            link: deploy-to-azure-container-registry
           - name: Deploy to Capistrano
-            link: deploy/how-to/deploy-to-capistrano
+            link: deploy-to-capistrano
           - name: Deploy to Cloud Foundry
-            link: deploy/how-to/deploy-to-cloud-foundry
+            link: deploy-to-cloud-foundry
           - name: Deploy to Firebase
-            link: deploy/how-to/deploy-to-firebase
+            link: deploy-to-firebase
           - name: Deploy to Google Cloud Platform
-            link: deploy/how-to/deploy-to-google-cloud-platform
+            link: deploy-to-google-cloud-platform
           - name: Deploy to Heroku
-            link: deploy/how-to/deploy-to-heroku
+            link: deploy-to-heroku
           - name: Deploy iOS applications
-            link: deploy/how-to/deploy-ios-applications
+            link: deploy-ios-applications
           - name: Deploy over SSH
-            link: deploy/how-to/deploy-over-ssh
+            link: deploy-over-ssh
           - name: Publish packages to Packagecloud
-            link: deploy/how-to/publish-packages-to-packagecloud
+            link: publish-packages-to-packagecloud
           - name: Publish to NPM registry
-            link: deploy/how-to/deploy-to-npm-registry
+            link: deploy-to-npm-registry
 
 
   - name: Optimize

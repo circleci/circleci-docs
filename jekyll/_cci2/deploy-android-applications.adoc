@@ -19,12 +19,12 @@ In this how-to guide, you will learn how to automatically deploy your Android ap
 To complete this tutorial, you will need the following:
 
 - An Android project, built using link:https://gradle.org/[Gradle].
-- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:../../getting-started#[Quickstart guide] for a walkthrough.
+- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:getting-started#[Quickstart guide] for a walkthrough.
 - Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure Fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
 
 NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.
 
-This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the xref:../../orb-intro#[Orb introduction page] if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
+This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the xref:orb-intro#[Orb introduction page] if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
 
 [#configure-fastlane-for-deployment-to-google-play-store]
 == 1. Configure Fastlane for deployment to Google Play Store
@@ -174,7 +174,7 @@ Save the output. You will need it in the next step.
 [#set-env-vars]
 === b. Set environment variables
 
-Next, you need to set xref:../../env-vars#[environment variables] for deployment through CircleCI.
+Next, you need to set xref:env-vars#[environment variables] for deployment through CircleCI.
 
 Open your Android project in the link:https://app.circleci.com/[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
 

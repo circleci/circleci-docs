@@ -36,7 +36,7 @@ If you want to get started with CircleCI releases for Kubernetes right away, you
 * xref:configure-your-kubernetes-components#[Tutorial 2: Configure your Kubernetes components]
 * xref:manage-deploys#[How-to: Manage releases]
 
-To get set up with releases for Amazon SageMaker, refer to the xref:how-to/deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
+To get set up with releases for Amazon SageMaker, refer to the xref:../deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
 
 [#how-it-works]
 == How it works

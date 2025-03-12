@@ -33,3 +33,5 @@ You must be logged in to your CircleCI account in order to authenticate with SSO
 If you have authenticated with an SSO-enabled CircleCI organization previously and your session has expired, the next time you attempt to access your organization's resources, you will be redirected to your org's Identity Provider (IdP) to authenticate before being granted access once again.
 
 When your session expires, you will be prompted to re-authenticate.
+
+NOTE: Logging in via your Identity Provider (IdP) is not supported. Instead you can bookmark the SSO authentication link. The URL is `\https://circleci.com/authentication/login?f=ssovalidate&organization-id=<organization_id>`, where `organization_id` is the organization ID (a universally unique identifier) that represents your organization. You can find your CircleCI organization ID by navigating to menu:Organization Settings[Overview] in the link:https://app.circleci.com/[CircleCI web app].
