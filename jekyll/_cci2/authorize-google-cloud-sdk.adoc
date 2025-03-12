@@ -44,7 +44,7 @@ Create a service account by following Steps 1-3 of link:https://cloud.google.com
 [#add-a-key-file]
 === b. Add a key file
 
-Add the key file to CircleCI as a xref:xset-environment-variable#set-an-environment-variable-in-a-project[project environment variable]. In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
+Add the key file to CircleCI as a xref:set-environment-variable#set-an-environment-variable-in-a-project[project environment variable]. In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
 
 [#add-env-vars]
 === c. Add environment variables
