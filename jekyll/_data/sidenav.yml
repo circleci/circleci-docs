@@ -368,66 +368,59 @@ en:
   - name: Deploy
     icon: icons/sidebar/getting-started-new.svg
     children:
-      - name: Deployment
-        children:
-          - name: Deployment overview
-            link: deployment-overview
-      - name: How-to guides
-        children:
-          - name: Deploy to Amazon SageMaker
-            link: deploy-to-amazon-sagemaker
-          - name: Deploy Android applications
-            link: deploy-android-applications
-          - name: Deploy to Artifactory
-            link: deploy-to-artifactory
-          - name: Deploy to AWS
-            link: deploy-to-aws
-          - name: Push image to ECR and deploy to ECS
-            link: ecr-ecs
-          - name: Deploy to Azure Container Registry
-            link: deploy-to-azure-container-registry
-          - name: Deploy to Capistrano
-            link: deploy-to-capistrano
-          - name: Deploy to Cloud Foundry
-            link: deploy-to-cloud-foundry
-          - name: Deploy to Firebase
-            link: deploy-to-firebase
-          - name: Deploy to Google Cloud Platform
-            link: deploy-to-google-cloud-platform
-          - name: Deploy to Heroku
-            link: deploy-to-heroku
-          - name: Deploy iOS applications
-            link: deploy-ios-applications
-          - name: Deploy over SSH
-            link: deploy-over-ssh
-          - name: Publish packages to Packagecloud
-            link: publish-packages-to-packagecloud
-          - name: Publish to NPM registry
-            link: deploy-to-npm-registry
-
-  - name: Release
-    icon: icons/sidebar/release.svg
-    children:
       - name: Overview
         children:
-          - name: Releases overview
-            link: release/releases-overview
+          - name: Deploys overview
+            link: deploy/deploys-overview
+          - name: Overview of deployment on CircleCI
+            link: deploy/how-to/deployment-overview
       - name: Set up
         children:
-          - name: Set up CircleCI releases
-            link: release/set-up-circleci-releases
+          - name: Set up CircleCI deploys
+            link: deploy/set-up-circleci-deploys
           - name: Manual install - Set up the release agent
-            link: release/set-up-the-release-agent
+            link: deploy/set-up-the-release-agent
           - name: Manual install - Configure your Kubernetes components
-            link: release/configure-your-kubernetes-components
+            link: deploy/configure-your-kubernetes-components
       - name: How to
         children:
-          - name: Manage releases
-            link: release/manage-releases
-          - name: Configure release markers
-            link: release/configure-release-markers
-          - name: Update the Kubernetes release agent
-            link: release/update-the-kubernetes-release-agent
+          - name: Manage deploys
+            link: deploy/manage-deploys
+          - name: Configure deploy markers
+            link: deploy/configure-deploy-markers
+          - name: Update the Kubernetes deploy agent
+            link: deploy/update-the-kubernetes-release-agent
+          - name: Deploy to Amazon SageMaker
+            link: deploy/how-to/deploy-to-amazon-sagemaker
+          - name: Deploy Android applications
+            link: deploy/how-to/deploy-android-applications
+          - name: Deploy to Artifactory
+            link: deploy/how-to/deploy-to-artifactory
+          - name: Deploy to AWS
+            link: deploy/how-to/deploy-to-aws
+          - name: Push image to ECR and deploy to ECS
+            link: deploy/how-to/ecs-ecr
+          - name: Deploy to Azure Container Registry
+            link: deploy/how-to/deploy-to-azure-container-registry
+          - name: Deploy to Capistrano
+            link: deploy/how-to/deploy-to-capistrano
+          - name: Deploy to Cloud Foundry
+            link: deploy/how-to/deploy-to-cloud-foundry
+          - name: Deploy to Firebase
+            link: deploy/how-to/deploy-to-firebase
+          - name: Deploy to Google Cloud Platform
+            link: deploy/how-to/deploy-to-google-cloud-platform
+          - name: Deploy to Heroku
+            link: deploy/how-to/deploy-to-heroku
+          - name: Deploy iOS applications
+            link: deploy/how-to/deploy-ios-applications
+          - name: Deploy over SSH
+            link: deploy/how-to/deploy-over-ssh
+          - name: Publish packages to Packagecloud
+            link: deploy/how-to/publish-packages-to-packagecloud
+          - name: Publish to NPM registry
+            link: deploy/how-to/deploy-to-npm-registry
+
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg
