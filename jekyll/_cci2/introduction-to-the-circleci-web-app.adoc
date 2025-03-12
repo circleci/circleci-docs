@@ -74,7 +74,7 @@ From your organization home page you have access to org-level options. You can c
 
 **Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:create-project#[create/set up new projects].
 
-**Releases**: Set up environment integrations to manage releases for your projects. For full details of the releases feature, see the xref:release/releases-overview#[Release overview] page.
+**Releases**: Set up environment integrations to manage releases for your projects. For full details of the releases feature, see the xref:deploy/deploys-overview#[Deploys overview] page.
 
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights#[Using Insights] page.
 
@@ -165,7 +165,7 @@ The following settings are available in the project settings page. If you do not
 
 **Triggers**: Depending on your integration type, the triggers page shows either a list of configured xref:pipelines#pipelines-and-triggers[pipeline triggers], or, if you have access to scheduled pipelines, you can set those up here. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-**Releases**: A UI for managing and viewing releases. Setup and manage environment integrations, setup components. For full information on releases features, start with the xref:release/releases-overview#[Releases overview] page.
+**Releases**: A UI for managing and viewing releases. Setup and manage environment integrations, setup components. For full information on releases features, start with the xref:deploy/deploys-overview#[Releases overview] page.
 
 **Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
 
@@ -218,7 +218,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. Contexts provide a mechanism for securing and sharing environment variables across projects.
 
-**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub checks.
+**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub Checks.
 
 **Security**: Allows you to set whether or not you want to allow the use of partner and community orbs, or private orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
 
