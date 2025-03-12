@@ -48,7 +48,7 @@ The CLI will automatically use the `$PACKAGECLOUD_TOKEN` environment variable to
 [#use-dependency-caching]
 == 4. Use dependency caching
 
-If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for xref:caching#[Caching dependencies].
+If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for xref:../../caching#[Caching dependencies].
 
 [#push-packages-with-the-packagecloud-cli]
 == 5. Push packages with the packagecloud CLI
@@ -57,7 +57,7 @@ The build processes for package types will vary, but pushing them into a package
 
 The following is a full example `.circleci/config.yml` that will checkout a git repository, run a `make` task (this command can be anything configured to build your package), then deploy the package to a packagecloud repo.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../../../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -245,4 +245,4 @@ Packagecloud also provides a robust API to manage package repositories. You can 
 [#see-also]
 == See also
 
-* xref:artifacts#[Storing and accessing artifacts]
+* xref:../../artifacts#[Storing and accessing artifacts]
