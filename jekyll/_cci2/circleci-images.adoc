@@ -201,17 +201,17 @@ making it the xref:glossary#primary-container[primary container] during executio
 
 CircleCI maintains legacy images for the languages below.
 
-* <<android,Android>>
-* <<clojure,Clojure>>
-* <<elixir,Elixir>>
-* <<go-golang,Go (Golang)>>
-* <<jruby,JRuby>>
-* <<node-js,Node.js>>
-* <<openjdk,OpenJDK (Java)>>
-* <<php,PHP>>
-* <<python,Python>>
-* <<ruby,Ruby>>
-* <<rust,Rust>>
+* Android
+* Clojure
+* Elixir
+* Go (Golang)
+* JRuby
+* Node.js
+* OpenJDK (Java)
+* PHP
+* Python
+* Ruby
+* Rust
 
 [#language-image-variants]
 ==== Language image variants
@@ -241,13 +241,13 @@ Service images are convenience images for services like databases. These images 
 
 CircleCI maintains legacy images for the services below.
 
-* <<buildpack-deps,buildpack-deps>>
-* <<dynamodb,DynamoDB>>
-* <<mariadb,MariaDB>>
-* <<mongodb,MongoDB>>
-* <<mysql,MySQL>>
-* <<postgresql,PostgreSQL>>
-* <<redis,Redis>>
+* buildpack-deps
+* DynamoDB
+* MariaDB
+* MongoDB
+* MySQL
+* PostgreSQL
+* Redis
 
 [#service-image-variant]
 ==== Service image variant
