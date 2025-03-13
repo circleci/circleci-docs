@@ -52,7 +52,7 @@ NOTE: CircleCI will periodically poll DNS to check for the required TXT record. 
 . Once your SSO Connection is marked as **Connected**, toggle **Enforce SSO for all users** on to begin enforcement. Your SSO connection will now be marked as **Connected, enforced**
 +
 ** Existing organization members will be prompted to authenticate with your IdP the next time they attempt to access your CircleCI organization
-** New organization members must be link:{{ site.baseurl }}/manage-roles-and-permissions/#add-people-to-your-organization[invited to your organization].
+** New organization members must be xref:../manage-roles-and-permissions#add-people-to-your-organization[invited to your organization].
 ** Users must log into their email/password CircleCI account to link:{{ site.baseurl }}/authentication/sign-in-to-an-sso-enabled-organization/#authenticate-with-sso-for-an-organization[authenticate with SSO].
 
 Your organization is now using SSO to grant and deny user access. You can manage user roles by following the xref:../manage-roles-and-permissions#[manage roles and permissions] documentation.
