@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#introduction]
 == Introduction
@@ -25,7 +24,7 @@ To automatically run your test suites in a project pipeline, you will add config
 
 A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -100,7 +99,7 @@ For more detailed examples of storing test data with different testing framework
 
 When xref:parallelism-faster-jobs#[parallelism and test splitting] are enabled, CircleCI provides a bird's-eye view into the timing of each parallel run in the *Timing* tab in the *Job Details* UI.
 
-image::{{site.baseurl}}/assets/img/docs/parallel-runs-timing-tests.png[Timing tab, parallel runs]
+image::parallel-runs-timing-tests.png[Timing tab, parallel runs]
 
 The Timing tab lets you identify which steps are taking the longest amount of time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
 

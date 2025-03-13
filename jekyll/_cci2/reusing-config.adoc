@@ -9,11 +9,10 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#notes-on-reusable-configuration]
 == Notes on reusable configuration
@@ -210,8 +209,6 @@ commands:
 
 The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
-{% raw %}
-
 [,yaml]
 ----
 version: 2.1
@@ -224,8 +221,6 @@ commands:
         default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
         enum: ["darwin", "linux"]
 ----
-
-{% endraw %}
 
 [#executor]
 ==== Executor
@@ -241,8 +236,6 @@ The following example uses parameters:
  ** An enum parameter is used to choose a xref:configuration-reference#linuxvm-execution-environment[resource class].
 * For the `xenial` executor:
  ** A string parameter is used to set an environment variable.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -307,14 +300,10 @@ workflows:
             image: ubuntu-2404:edge # Set the image to use
 ----
 
-{% endraw %}
-
 [#steps]
 ==== Steps
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -333,11 +322,7 @@ commands:
       - run: make test
 ----
 
-{% endraw %}
-
 The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -366,11 +351,7 @@ jobs:
             - run: echo "And now I'm going to run the tests"
 ----
 
-{% endraw %}
-
 The above will resolve to the following:
-
-{% raw %}
 
 [,yaml]
 ----
@@ -382,16 +363,12 @@ steps:
   - run: make test
 ----
 
-{% endraw %}
-
 [#environment-variable-name]
 ==== Environment variable name
 
 The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regular expression (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to xref:env-vars#[Environment Variables].
 
 The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example uses the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. If you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
-
-{% raw %}
 
 Original `config.yml` file:
 
@@ -447,8 +424,6 @@ workflows:
           secret-key: BIN_BAZ
           command: ls s3://some/where
 ----
-
-{% endraw %}
 
 [#authoring-reusable-commands]
 == Authoring reusable commands
@@ -898,8 +873,6 @@ It is possible to invoke the same job more than once in the workflows stanza of 
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
-{% raw %}
-
 [,yaml]
 ----
 version: 2.1
@@ -923,8 +896,6 @@ workflows:
       - sayhello: # invokes the parameterized job
           saywhat: Everyone
 ----
-
-{% endraw %}
 
 When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (for example, `sayhello-1`, `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
 

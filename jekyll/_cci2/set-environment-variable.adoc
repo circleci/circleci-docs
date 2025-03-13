@@ -6,14 +6,13 @@ contentTags:
 ---
 = Set an environment variable
 :page-layout: classic-docs
-:page-liquid:
 :page-description: How to set environment variables for use in your CircleCI pipelines.
 :icons: font
 :experimental:
 
 Environment variables can be stored and configured for use in CircleCI jobs in several ways to provide variety in scope and authorization level.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command

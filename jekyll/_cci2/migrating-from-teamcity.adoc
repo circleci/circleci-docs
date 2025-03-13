@@ -6,7 +6,6 @@ contentTags:
 ---
 = Migrate from TeamCity
 :page-layout: classic-docs
-:page-liquid:
 :description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :icons: font
@@ -296,7 +295,7 @@ In TeamCity, build steps are chosen from a list of defined Runner Types (for exa
 
 Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a Node container and `npm` commands. Visit our <<examples-and-guides-overview#,Examples and Guides Overview>> for various language and framework examples.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
