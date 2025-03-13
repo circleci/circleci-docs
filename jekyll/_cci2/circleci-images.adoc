@@ -325,28 +325,103 @@ NOTE: Excluding <<language-image-variants,language image variants>> and <<servic
 service image variant>>, *for legacy images* CircleCI
 does *not* control which tags are used. These tags are chosen and maintained
 by upstream projects. Do not assume that a given tag has the same meaning across
-images!
+images.
 
-{% assign images = site.data.docker-image-tags | sort %}
-{% for image in images %}
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|Image name |Resources |Usage |Tags
 
-=== {{ image[1].name }}
+|Android
+|https://hub.docker.com/r/circleci/android[Docker Hub]
+|`- image: circleci/android:[TAG]`
+|https://hub.docker.com/r/circleci/mariadb/tags?ordering=last_updated[Tags]
 
-*Resources:*
+|buildpack-deps
+|https://hub.docker.com/r/circleci/buildpack-deps[Docker Hub]
+|`- image: circleci/buildpack-deps:[TAG]`
+|https://hub.docker.com/r/circleci/buildpack-deps/tags?ordering=last_updated[Tags]
 
-* https://hub.docker.com/r/circleci/{{ image[0] }}[Docker Hub] - where this image is hosted as well as some useful instructions.
+|Clojure
+|https://hub.docker.com/r/circleci/clojure[Docker Hub]
+|`- image: circleci/clojure:[TAG]`
+|https://hub.docker.com/r/circleci/clojure/tags?ordering=last_updated[Tags]
 
-*Usage:* Add the following under `docker:` in your config.yml:
+|DynamoDB
+|https://hub.docker.com/r/circleci/dynamodb[Docker Hub]
+|`- image: circleci/dynamodb:[TAG]`
+|https://hub.docker.com/r/circleci/dynamodb/tags?ordering=last_updated[Tags]
 
-`- image: circleci/{{ image[0] }}:[TAG]`
+|Elixir
+|https://hub.docker.com/r/circleci/elixir[Docker Hub]
+|`- image: circleci/elixir:[TAG]`
+|https://hub.docker.com/r/circleci/elixir/tags?ordering=last_updated[Tags]
 
-*Recent Tags:*
+|Go (Golang)
+|https://hub.docker.com/r/circleci/golang[Docker Hub]
+|`- image: circleci/golang:[TAG]`
+|https://hub.docker.com/r/circleci/golang/tags?ordering=last_updated[Tags]
 
-See https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated[the tag list for the {{ image[0] }} image on Docker Hub].
+|JRuby
+|https://hub.docker.com/r/circleci/jruby[Docker Hub]
+|`- image: circleci/jruby:[TAG]`
+|https://hub.docker.com/r/circleci/jruby/tags?ordering=last_updated[Tags]
 
-'''
+|MariaDB
+|https://hub.docker.com/r/circleci/mariadb[Docker Hub]
+|`- image: circleci/mariadb:[TAG]`
+|https://hub.docker.com/r/circleci/mariadb/tags?ordering=last_updated[Tags]
 
-{% endfor %}
+|MongoDB
+|https://hub.docker.com/r/circleci/mongo[Docker Hub]
+|`- image: circleci/mongo:[TAG]`
+|https://hub.docker.com/r/circleci/mongo/tags?ordering=last_updated[Tags]
+
+|MySQL
+|https://hub.docker.com/r/circleci/mysql[Docker Hub]
+|`- image: circleci/mysql:[TAG]`
+|https://hub.docker.com/r/circleci/mysql/tags?ordering=last_updated[Tags]
+
+|Node.js
+|https://hub.docker.com/r/circleci/node[Docker Hub]
+|`- image: circleci/node:[TAG]`
+|https://hub.docker.com/r/circleci/node/tags?ordering=last_updated[Tags]
+
+|OpenJDK
+|https://hub.docker.com/r/circleci/openjdk[Docker Hub]
+|`- image: circleci/openjdk:[TAG]`
+|https://hub.docker.com/r/circleci/openjdk/tags?ordering=last_updated[Tags]
+
+|PHP
+|https://hub.docker.com/r/circleci/php[Docker Hub]
+|`- image: circleci/php:[TAG]`
+|https://hub.docker.com/r/circleci/php/tags?ordering=last_updated[Tags]
+
+|PostgreSQL
+|https://hub.docker.com/r/circleci/postgres[Docker Hub]
+|`- image: circleci/postgres:[TAG]`
+|https://hub.docker.com/r/circleci/postgres/tags?ordering=last_updated[Tags]
+
+|Python
+|https://hub.docker.com/r/circleci/python[Docker Hub]
+|`- image: circleci/python:[TAG]`
+|https://hub.docker.com/r/circleci/python/tags?ordering=last_updated[Tags]
+
+|Redis
+|https://hub.docker.com/r/circleci/redis[Docker Hub]
+|`- image: circleci/redis:[TAG]`
+|https://hub.docker.com/r/circleci/redis/tags?ordering=last_updated[Tags]
+
+|Ruby
+|https://hub.docker.com/r/circleci/ruby[Docker Hub]
+|`- image: circleci/ruby:[TAG]`
+|https://hub.docker.com/r/circleci/ruby/tags?ordering=last_updated[Tags]
+
+|Rust
+|https://hub.docker.com/r/circleci/rust[Docker Hub]
+|`- image: circleci/rust:[TAG]`
+|https://hub.docker.com/r/circleci/rust/tags?ordering=last_updated[Tags]
+|===
 
 [#next-steps]
 == Next steps

@@ -38,9 +38,9 @@ pass:[<!-- vale off -->]
 
 <div class="banner-wrapper">
   <div class="icon-container">
-    <img class='vcs-icon' src="{{ site.baseurl }}/assets/img/icons/companies/github-alt.svg" alt="Github Icon" />
-    <img class='vcs-icon' src="{{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg" alt="Bitbucket Icon" />
-    <img class='vcs-icon' src="{{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg" alt="GitLab Icon" />
+    <img class='vcs-icon' src="/assets/img/icons/companies/github-alt.svg" alt="Github Icon" />
+    <img class='vcs-icon' src="/assets/img/icons/companies/bitbucket-alt.svg" alt="Bitbucket Icon" />
+    <img class='vcs-icon' src="/assets/img/icons/companies/gitlab-color.svg" alt="GitLab Icon" />
   </div>
   <div class='text-container'>
     <span>This guide assumes you have signed up and</span>
@@ -117,7 +117,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   <div class="right-side">
     <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Select Projects" />
   </div>
-</div>m
+</div>
 
 <div class="include-two-up">
   <div class="left-side">
@@ -130,37 +130,38 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   </div>
 </div>
 
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. CircleCI config editor</div>
+    You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. You can swap out this config for an alternative by clicking <strong>Change: Hello World</strong>.
+  </div>
 
-{% capture content %}
-You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. You can swap out this config for an alternative by clicking <strong>Change: Hello World</strong>.
-{% endcapture %}
+  <div class="right-side">
+    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png" alt="Config Editor" />
+  </div>
+</div>
 
-{%- capture CCI-config-editor -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png
-{%- endcapture -%}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">4. Commit your config</div>
+    Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>update-circleci-config</code>.
+  </div>
 
-{% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
+  <div class="right-side">
+    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png" alt="Commit a config" />
+  </div>
+</div>
 
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">5. Congratulations 🎉</div>
+    You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.
+  </div>
 
-{% capture content %}
-Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>update-circleci-config</code>.
-{% endcapture %}
-
-{%- capture commit-run-gitlab -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png
-{%- endcapture -%}
-
-{% include two-up.html title="4. Commit your config" content=content imageURL=commit-run-gitlab imageAlt="Commit a config" %}
-
-
-{% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
-
-{%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline.png
-{%- endcapture -%}
-
-{% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+  <div class="right-side">
+    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Passing pipeline" />
+  </div>
+</div>
 ++++
 --
 
