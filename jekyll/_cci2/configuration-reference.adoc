@@ -2849,8 +2849,6 @@ workflows:
           filters: pipeline.git.branch == "main" and pipeline.parameters.my-custom-param starts-with "DEPLOY:"
 ----
 
-'''
-
 **Examples**
 
 Only run the job on the project's `main` branch:
@@ -3334,7 +3332,7 @@ workflows:
         - equal: [ staging, << pipeline.git.branch >> ]
 ----
 
-For more examples of logic statements, see the xref:using-logic-statements#[Using Logic Statements].
+For more examples, see xref:using-logic-statements#[Using Logic Statements].
 
 
 [#example-full-configuration]
