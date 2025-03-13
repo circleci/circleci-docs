@@ -116,6 +116,17 @@ Deploy keys and user keys are the only key types that GitHub supports. Deploy ke
 
 To achieve fine-grained access to more than one repository, consider creating what GitHub calls a <<#controlling-access-via-a-machine-user,machine user>>. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
+[NOTE]
+====
+If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
+
+* GitHub will remove inactive keys if they are unused for over a year.
+* If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
+* In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
+* If your CircleCI project has no xref:introduction-to-the-circleci-web-app/#projects[followers], CircleCI will consider it disabled and remove the associated keys.
+* When you delete a CircleCI project, CircleCI will remove its associated keys.
+====
+
 [#create-additional-github-ssh-keys]
 === Create additional GitHub SSH keys
 
