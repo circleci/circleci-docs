@@ -1,7 +1,7 @@
 workflows:
   nightly-run-workflow:
-# The "nightly-run-workflow" workflow only runs if the pipeline parameter "my_param" is true OR the pipeline is triggered by a tag named "release".
-    when: pipeline.parameters.my_param == true or pipeline.git.tag == "release"
+# The "nightly-run-workflow" workflow only runs if the branch name is "main" OR "staging".
+    when: pipeline.git.branch == "main"" or pipeline.git.branch == "staging"
     jobs:
       - build
       - deploy:

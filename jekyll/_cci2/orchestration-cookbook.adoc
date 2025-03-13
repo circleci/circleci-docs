@@ -118,6 +118,14 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equ
 
 === Notes
 
+Alternatively, you can use the dynamic syntax to achieve the same result.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+
 You can also choose to prevent the workflow from running for specific branches.
 
 [,yaml]
@@ -185,4 +193,19 @@ You will need to use the API to trigger a pipeline with a pipeline parameter set
 [,txt]
 ----
 include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/api-trigger.txt[]
+----
+
+== Run a workflow only for scheduled pipelines with a specific name
+
+=== Goal
+
+In some cases, you may want to configure a workflow that will only run when a scheduled pipeline has a specific name.
+
+=== Steps
+
+Leverage the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
 ----
