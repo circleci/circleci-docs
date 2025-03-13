@@ -38,7 +38,7 @@ NOTE: When triggering via `curl`, you must use a `POST` request with `content-ty
 +
 [,shell]
 ----
-curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
+curl -X POST -H "content-type: application/json" '<your-URL>?secret=<your-secret>'
 ----
 
 See our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
