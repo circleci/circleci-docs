@@ -55,7 +55,7 @@ On the Performance Plan, you get **three components** with associated releases p
 
 * A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
 
-Start with the xref:release/releases-overview#[Releases overview] for more information on the feature.
+Start with the xref:deploy/deploys-overview#[Releases overview] for more information on the feature.
 
 [#custom-storage-retention]
 === Custom storage retention
@@ -71,4 +71,4 @@ NOTE: For details on cancelling a Performance Plan, refer to the xref:faq#cancel
 == CircleCI features
 In addition to the upgraded features listed above, the Performance Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 
-{% include snippets/features-of-circleci.adoc %}
+include::../_includes/snippets/features-of-circleci.adoc[]
