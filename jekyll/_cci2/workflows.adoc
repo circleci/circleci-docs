@@ -439,7 +439,7 @@ workflows:
 
 The `test1` and `test2` jobs have access to environment variables stored in the `org-global` context if the pipeline meets the restrictions set for the context, for example:
 
-* Was the pipeline triggered by a user who xref:contexts#security-goup-restrictions[has access] (is in the relevant org/security group etc.)?
+* Was the pipeline triggered by a user who xref:contexts#security-group-restrictions[has access] (is in the relevant org/security group etc.)?
 * Does the xref:contexts#project-restrictions[project have access] to the context? By default all projects in an organization have access to contexts set for that organization, but restrictions on project access can be configured.
 * Does the pipeline meet the requirements of any xref:contexts#expression-restrictions[expression restrictions] set up for the context?
 
