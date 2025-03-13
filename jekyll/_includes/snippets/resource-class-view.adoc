@@ -9,4 +9,4 @@ To view the compute resource usage for the duration of a job in the CircleCI web
 
 You can use these insights to decide whether to make changes to the job's configured resource class. You can also access xref:resource-class-overview#resource-class-insights[resource class Insights].
 
-image::{{site.baseurl}}/assets/img/docs/view-resource-usage.png[Resources tab]
+image::view-resource-usage.png[Resources tab]

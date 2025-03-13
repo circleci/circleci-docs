@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 CAUTION: *Legacy images with the prefix `circleci/`` were link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
 
@@ -17,7 +16,7 @@ You can use the Docker execution environment to run your xref:jobs-steps#[jobs] 
 
 Specify a Docker image in your xref:configuration-reference#[`.circleci/config.yml`] file to spin up a container. All steps in your job will be run in this container.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -92,19 +91,19 @@ jobs:
 
 For the Docker execution environment, the following resources classes are available for the x86 architecture:
 
-{% include snippets/docker-resource-table.adoc %}
+include::../_includes/snippets/docker-resource-table.adoc[]
 
 [#arm]
 === Arm
 
 The following resource classes are available for Arm with Docker:
 
-{% include snippets/docker-arm-resource-table.adoc %}
+include::../_includes/snippets/docker-arm-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/snippets/resource-class-view.adoc[]
 
 [#docker-benefits-and-limitations]
 == Docker benefits and limitations

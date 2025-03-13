@@ -22,9 +22,6 @@ This page offers troubleshooting suggestions for the following aspects of Circle
 | <<#pipelines,Pipelines>>
 | <<#machine-runner,Machine runner>>
 
-| <<#releases,Releases>>
-|
-
 |===
 
 == Orbs
@@ -38,6 +35,6 @@ include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
 // Self-hosted runner (H2s need to be in the snippet for now)
 include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
 
-== Releases
-
-{% include snippets/troubleshoot/releases-troubleshoot.adoc %}
+//== Releases
+// Removing this section until the Antora migration when the xrefs will work correctly
+//include::../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]

@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This page describes how to use some features of the CircleCI CLI.
 
@@ -144,15 +143,11 @@ A file beginning with `@` will have its contents merged into its parent folder l
 
 For example, the following structure:
 
-{% raw %}
-
 [,shell]
 ----
 cat foo/bar/@baz.yml
 \{baz: qux}
 ----
-
-{% endraw %}
 
 Maps to:
 
@@ -188,8 +183,6 @@ workflows:
 ----
 
 Processing this config file will output a YAML file like the example below. This is the expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed:
-
-{% raw %}
 
 [,yml]
 ----
@@ -257,8 +250,6 @@ workflows:
     jobs:
     - node/test
 ----
-
-{% endraw %}
 
 [#run-a-job-in-a-container-on-your-machine]
 == Run a job in a container on your machine
@@ -367,7 +358,7 @@ circleci context create --org-id <org-id> <context-name> [flags]
 
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 [#config-policy-management]
 == Config policy management

@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
 
@@ -22,7 +21,7 @@ Manage contexts on the *Organization Settings* page of the https://app.circleci.
 
 Create a context and then add environment variables to it. You can use the xref:configuration-reference#context[`context` key] in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
-image::{{site.baseurl}}/assets/img/docs/contexts_cloud.png[Contexts Overview]
+image::contexts_cloud.png[Contexts Overview]
 
 To use environment variables set within a context, the person running the workflow must be a member of the organization for which the context is set.
 
@@ -35,7 +34,7 @@ NOTE: Context names must be unique for each VCS organization. The default name f
 +
 Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
 +
-image::{{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png[Contexts]
+image::org-settings-contexts-v2.png[Contexts]
 
 . Select btn:[Create Context], add a unique name for your context and select btn:[Create Context] in the modal to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
 . You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add Environment Variable] to enter the variable name and value. Select btn:[Add Environment Variable] in the modal to finalize.
@@ -119,7 +118,7 @@ To invoke a job that uses a restricted context, a user must be a member of one o
 [#approve-jobs-that-use-restricted-contexts]
 === Approve jobs that use restricted contexts
 
-Adding an link:{{site.baseurl}}/configuration-reference/#type[approval job] to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
+Adding an xref:configuration-reference#type[approval job] to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
 
 [,yaml]
 ----
@@ -160,7 +159,7 @@ If the context is restricted with a group other than `All members`, you must be 
 
 NOTE: If a _deleted_ context is used in a job, the job will fail and show an error.
 
-[#security-goup-restrictions]
+[#security-group-restrictions]
 == Security group restrictions
 
 [#restrict-a-context-to-a-security-group-or-groups]
@@ -477,19 +476,19 @@ circleci context create --org-id <org-id> <context-name> [flags]
 
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 [#environment-variable-usage]
 == Environment variable usage
 
 Environment variables are used according to a specific precedence order, as follows:
 
-. Environment variables declared link:{{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-shell-command[inside a shell command] in a `run` step, for example `FOO=bar make install`.
-. Environment variables declared with the `environment` key link:{{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-step[for a `run` step]
-. Environment variables set with the `environment` key link:{{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-job[for a job].
-. Special CircleCI environment variables defined on the link:{{site.baseurl}}/variables#built-in-environment-variables[Project values and variables] page.
+. Environment variables declared xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[inside a shell command] in a `run` step, for example `FOO=bar make install`.
+. Environment variables declared with the `environment` key xref:set-environment-variable#set-an-environment-variable-in-a-step[for a `run` step]
+. Environment variables set with the `environment` key xref:set-environment-variable#set-an-environment-variable-in-a-job[for a job].
+. Special CircleCI environment variables defined on the xref:variables#built-in-environment-variables[Project values and variables] page.
 . Context environment variables (assuming the user has access to the context).
-. link:{{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
+. xref:set-environment-variable#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the contexts page will take precedence over variables added on the *Project Settings* page.
 
@@ -608,7 +607,7 @@ Note that the CLI will prompt you to input the new secret value, rather than acc
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plain text secret as a string.
 --
 
-{% include snippets/secrets-masking.adoc %}
+include::../_includes/snippets/secrets-masking.adoc[]
 
 [#see-also]
 == See also

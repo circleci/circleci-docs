@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for further inspection.
 
@@ -20,15 +19,15 @@ Artifacts persist data after a job is completed and may be used for storage of t
 
 For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available after the process has finished.
 
-image::{{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png[Artifacts data flow]
+image::Diagram-v3-Artifact.png[Artifacts data flow]
 
 Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
 
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or deployment tarballs, CircleCI can automatically save and link them for you.
 
-Navigate to a pipeline's *Job* page on the link:https://app.circleci.com/[CircleCI web app] to find the *Artifacts* tab. Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects. There is a 3GB `curl` file size limit.
+Navigate to a pipeline's *Job* page on the link:https://app.circleci.com/[CircleCI web app] to find the *Artifacts* tab. Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects. cURL file size is limited o 3GB.
 
-image::{{site.baseurl}}/assets/img/docs/artifacts.png[Artifacts tab screenshot]
+image::artifacts.png[Artifacts tab screenshot]
 
 By default, artifact storage duration is set to 30 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 30 days is also the maximum storage duration you can set.
 
@@ -43,7 +42,7 @@ If you need to restrict the connections allowed in your jobs, consider enabling 
 
 To upload artifacts created during builds, use the following example:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -70,7 +69,7 @@ jobs:
           path: /tmp/artifacts
 ----
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the *Artifacts* tab of the *Job* page in your browser. If you are uploading hundreds of artifacts, then consider link:https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step[compressing and uploading as a single compressed file] to accelerate this step. There is no limit on the number of `store_artifacts` steps a job can run.
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the *Artifacts* tab of the *Job* page in your browser. If you are uploading hundreds of artifacts, then consider link:https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step[compressing and uploading as a single compressed file] to accelerate this step. `store_artifacts` steps for a job are unlimited.
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
 
@@ -133,7 +132,7 @@ The `ulimit -c unlimited` removes the file size limit on core dump files. With t
 
 Finally, the core dump files are stored to the artifacts service with `store_artifacts` in the `/tmp/core_dumps` directory.
 
-image::{{ site.baseurl }}/assets/img/docs/core_dumps.png[Core dump file in Artifacts page]
+image::core_dumps.png[Core dump file in Artifacts page]
 
 When CircleCI runs a job, a link to the core dump file appears in the *Artifacts* tab of the *Job* page.
 
@@ -215,11 +214,11 @@ You can read more about using CircleCI's API to interact with artifacts in our l
 [#artifacts-and-self-hosted-runner]
 == Artifact storage customization
 
-When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+When using self-hosted runners, there is a network and storage usage limit included in your plan. Some actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
 Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
 
-You can customize storage usage retention periods for artifacts on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the link:{{site.baseurl}}/persist-data/#managing-network-and-storage-usage[Persisting Data] page.
+You can customize storage usage retention periods for artifacts on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-usage[Persisting Data] page.
 
 [#artifacts-optimization]
 == Artifacts optimization

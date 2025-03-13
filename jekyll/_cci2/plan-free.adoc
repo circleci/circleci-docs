@@ -29,7 +29,7 @@ Below are the features you can use on the Free Plan. Refer to the link:https://c
 
 A wide array of resource classes on Docker, Arm, Linux, Windows, and macOS are available. To view examples, or find more information about these executors, refer to the xref:executor-intro#[Execution environments overview] page.
 
-{% include snippets/features-of-circleci.adoc %}
+include::../_includes/snippets/features-of-circleci.adoc[]
 
 === Releases
 
@@ -41,7 +41,7 @@ On the Free Plan, you get **three components** with associated releases per mont
 
 * A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
 
-Start with the xref:release/releases-overview#[Releases overview] for more information on the feature.
+Start with the xref:deploy/deploys-overview#[Releases overview] for more information on the feature.
 
 [#support]
 === Support
