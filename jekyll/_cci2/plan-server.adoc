@@ -38,4 +38,4 @@ Additional support through expanded SLAs, an available account team, training an
 == CircleCI features
 In addition to the upgraded features listed above, the Server Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 
-{% include snippets/features-of-circleci.adoc %}
+include::../_includes/snippets/features-of-circleci.adoc[]

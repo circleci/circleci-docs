@@ -1,13 +1,12 @@
 ---
-description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Config policies overview
+:page-description: Config policies for CircleCI project configurations.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -116,7 +115,7 @@ ok    policies    0.001s
 3/3 tests passed (0.001s)
 ----
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing Rego policies using CircleCI domain-specific language

@@ -60,13 +60,9 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
+* *Pushes to open non-draft PRs*: Trigger a pipeline when there is a push to a branch with an open PR that is not in draft mode.
 
-[NOTE] 
-====
-Due to a bug, repeated pull request events of the same type do not result in a build if the associated commit SHA has not changed. As an example, consider a trigger configured with the option "PR marked ready for review". Marking a PR as ready for review, then converting it to draft, then marking it as ready for review again will lead to only one pipeline to be triggered, not two. We are working to resolve this issue.
-====
-
-[NOTE] 
+[NOTE]
 ====
 *Help us prioritize additional trigger options?* We are working to expand the available events and conditions for you to choose from. Let us know which additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form].
 ====
@@ -128,7 +124,7 @@ Config orchestration tools are available from within your pipelines are as follo
 ** Give your trigger a descriptive name.
 ** Select the trigger source repository.
 ** Choose your pipeline from the "Choose pipeline to run" menu.
-** Expand the "Run on" menu and select "PR Opened", this means that the pipeline will trigger on the `pull_request` GitHub even with the `opened` action (See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
+** Expand the "Run on" menu and select "PR Opened", this means that the pipeline will trigger on the `pull_request` GitHub event with the `opened` action (See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
 +
 .Run on trigger options for GitHub App triggers
 image::triggers/run-on-open-focus.png[Run on trigger options for GitHub App triggers]
