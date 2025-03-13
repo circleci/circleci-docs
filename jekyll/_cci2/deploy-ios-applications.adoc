@@ -112,7 +112,7 @@ To create an API Key, follow the steps outlined in the link:https://developer.ap
 
 TIP: Ensure you download the `.p8` file and store it somewhere safe. The file cannot be downloaded again once you navigate away from the App Store Connect portal.
 
-Next, a few environment variables need to be set. In your CircleCI project, navigate to *Build Settings \-> Environment Variables* and set the following:
+Next, a few environment variables need to be set. In your CircleCI project, navigate to menu:Project Settings:[Environment Variables] and set the following:
 
 * `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID
  ** Example: `6053b7fe-68a8-4acb-89be-165aa6465141`

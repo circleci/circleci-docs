@@ -181,7 +181,7 @@ The following sections are features of CircleCI which are not currently supporte
 
 [#restrict-a-context-to-a-security-group]
 === Restrict a context to a security group
-The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
+The ability to xref:contexts#security-group-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
 
 [#in-app-config-editor]
 === In-app config editor

@@ -44,7 +44,7 @@ For service principal logins use:
 
 Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
 
-include::../_includes/snippets/add-version-number.adoc[]
+include::../../../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
