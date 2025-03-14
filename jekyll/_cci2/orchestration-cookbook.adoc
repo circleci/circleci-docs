@@ -190,6 +190,8 @@ include::../_includes/snippets/logic-statement-examples/expression-based-job-fil
 
 You will need to use the API to trigger a pipeline with a pipeline parameter set to `true`:
 
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
 [,txt]
 ----
 include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/api-trigger.txt[]
