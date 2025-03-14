@@ -118,6 +118,8 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equ
 
 === Notes
 
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
 Alternatively, you can use the dynamic syntax to achieve the same result.
 
 [,yaml]
@@ -132,6 +134,8 @@ You can also choose to prevent the workflow from running for specific branches.
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
 ----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
 == Run a workflow depending on the value of a boolean parameter
 
@@ -149,6 +153,8 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolea
 
 === Notes
 
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
 You can also use the dynamic syntax to achieve the same result.
 
 [,yaml]
@@ -162,6 +168,8 @@ You can create complex logic statements that involve multiple parameters.
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
 ----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
 == Run a step depending on the output of a nested logic statement
 
@@ -188,14 +196,9 @@ include::../_includes/snippets/logic-statement-examples/expression-based-job-fil
 
 === Notes
 
-You will need to use the API to trigger a pipeline with a pipeline parameter set to `true`:
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-include::../_includes/partials/notes/server-api-examples.adoc[]
-
-[,txt]
-----
-include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/api-trigger.txt[]
-----
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
 == Run a workflow only for scheduled pipelines with a specific name
 
@@ -205,9 +208,15 @@ In some cases, you may want to configure a workflow that will only run when a sc
 
 === Steps
 
-Leverage the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
+Update your CircleCI config to leverage the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
 
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
 ----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
