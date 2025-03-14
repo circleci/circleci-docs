@@ -68,7 +68,7 @@ Using the xref:configuration-reference#storetestresults[`store_test_results` ste
 
 Access test results from the *Tests tab* when viewing a job, as shown below.
 
-image::{{site.baseurl}}/assets/img/docs/test-summary.png[store-test-results-view]
+image::test-summary.png[store-test-results-view]
 
 Below is an example of using the xref:configuration-reference#storetestresults[`store_test_results` key] in your `.circleci/config.yml`.
 

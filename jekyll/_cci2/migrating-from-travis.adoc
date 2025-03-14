@@ -180,7 +180,7 @@ MongoDB versions are made available in each `command` that gets run.
 With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml`
 checks for a dependency cache based specifically on a checksum of the
 `package-lock.json` file. You can set your cache based on any key (not just `package-lock.json`) as well as set a
-group of cache paths to defer to in the declared order. Refer to the link:{{ site.baseurl }}/caching/[caching
+group of cache paths to defer to in the declared order. Refer to the xref:caching#[caching
 dependencies document] to learn about customizing how your build
 creates and restores caches.
 

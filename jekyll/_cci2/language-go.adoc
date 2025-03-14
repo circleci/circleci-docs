@@ -146,7 +146,7 @@ workflows:
 [#conclusion]
 === 6. Conclusion
 
-You just set up a Go app to build on CircleCI, and deploy to Heroku. Check out your project's link:{{site.baseurl}}/pipelines/[pipeline page] to see how this looks when building on CircleCI.
+You just set up a Go app to build on CircleCI, and deploy to Heroku. Check out your project's xref:pipelines#[pipeline page] to see how this looks when building on CircleCI.
 
 NOTE: *Deploy options?* For alternative deployment targets, search the link:https://circleci.com/developer/orbs[orb registry], where you will find integrations such as link:https://circleci.com/developer/orbs/orb/circleci/kubernetes[Kubernetes], link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS], link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke[GCP GKE], and more.
 

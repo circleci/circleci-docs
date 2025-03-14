@@ -54,7 +54,7 @@ When you click btn:[Commit config and run], as described above, a pipeline is tr
 
 When the event you selected under the "Run on" menu occurs (see the xref:github-trigger-event-options/#supported-trigger-options[GitHub event trigger options] page, for a full list of options), a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+image::gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
 [NOTE]
 ====
@@ -181,7 +181,7 @@ The following sections are features of CircleCI which are not currently supporte
 
 [#restrict-a-context-to-a-security-group]
 === Restrict a context to a security group
-The ability to xref:contexts#security-goup-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
+The ability to xref:contexts#security-group-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
 
 [#in-app-config-editor]
 === In-app config editor

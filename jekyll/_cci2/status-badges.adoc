@@ -172,13 +172,13 @@ To create a status API token, go to the link:https://app.circleci.com/[CircleCI 
 
 If you find the default status badge too minimal, you can use the https://shields.io/[shield style]. To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
 
-image::{{site.baseurl}}/assets/img/docs/svg-passed.png[Passed `svg` version]
+image::svg-passed.png[Passed `svg` version]
 
-image::{{site.baseurl}}/assets/img/docs/svg-failed.png[Failed `svg` version]
+image::svg-failed.png[Failed `svg` version]
 
-image::{{site.baseurl}}/assets/img/docs/shield-passing.png[Passing shield version]
+image::shield-passing.png[Passing shield version]
 
-image::{{site.baseurl}}/assets/img/docs/shield-failing.png[Failing shield version]
+image::shield-failing.png[Failing shield version]
 
 [#known-issues-and-limitations]
 == Known issues and limitations

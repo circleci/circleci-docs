@@ -31,7 +31,7 @@ Use this dashboard to:
 * Monitor real-time CI performance, activity, and health, or track over time.
 * Identify opportunities for optimization.
 
-image:{{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
+image:Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
 
 Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
 
@@ -49,7 +49,7 @@ Gain insights into your pipelines with the included dashboard panels. Filter eac
 
 Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
-image:{{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png[Sumo Logic App catalogue]
+image:sumologic_app_catalog.png[Sumo Logic App catalogue]
 
 NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
 

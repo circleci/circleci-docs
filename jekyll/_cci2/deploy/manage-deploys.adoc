@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Manage releases
+= Manage deploys
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to guide for managing releases from the CircleCI web app
@@ -15,7 +15,7 @@ The steps outlined on this page guide you through the tasks required to manage y
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-circleci-releases#[Set up CircleCI releases] and xref:configure-your-kubernetes-components#[Configure your Kubernetes components] pages for more information.
+Before following the steps below, ensure the release environment has been set up and configured successfully. Refer to the xref:set-up-circleci-deploys#[Set up CircleCI releases] and xref:configure-your-kubernetes-components#[Configure your Kubernetes components] pages for more information.
 
 [#restore-version]
 == Restore version

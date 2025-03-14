@@ -44,7 +44,7 @@ Use the introduction to explain more about the feature/task, what it is for, why
 
 You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanatory information:
 
-image::{{site.baseurl}}/assets/img/docs/arch.png[Diagram that includes flow from Repository and Apps to CircleCI API, from CircleCI API to Orchestration, from Orchestration to Execution, and from Execution to Deployment.]
+image::arch.png[Diagram that includes flow from Repository and Apps to CircleCI API, from CircleCI API to Orchestration, from Orchestration to Execution, and from Execution to Deployment.]
 
 [#quickstart]
 == Quickstart
