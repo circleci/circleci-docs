@@ -173,10 +173,27 @@ include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
 == Run a step depending on the output of a nested logic statement
 
+=== Goal
+
+You may want to configure a step that will run depending on the output of a nested logic statement.
+
+=== Steps
+
+Update your CircleCI config to leverage xref:configuration-reference#the-when-step[the `when` step].
+
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-step-nested.yml[]
 ----
+
+=== Notes
+
+[CAUTION]
+====
+The logic statement can be nested to a maximum depth of 100 levels.
+====
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
 == Run a job only on specific branches **or** when the value of a pipeline parameter is true
 
