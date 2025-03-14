@@ -264,7 +264,6 @@ metadata:
   annotations:
     circleci.com/cancel-release-enabled: "false"
     circleci.com/helm-revision-number: "1"
-    circleci.com/job-number: "1"
     circleci.com/operation-timeout: 30m
     circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
   labels:
