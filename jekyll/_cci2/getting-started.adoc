@@ -27,7 +27,7 @@ pass:[<!-- vale off -->]
 ++++
 <div class='section-header-wrapper'>
   <h2 class='section-title' id="header-banner-1">1. Connect your code</h2>
-  <img class='image-banner' src="/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg" alt="header banner" />
+  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg" alt="header banner" />
   <div class='content-wrapper'>
     <span>
       Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.
@@ -38,9 +38,9 @@ pass:[<!-- vale off -->]
 
 <div class="banner-wrapper">
   <div class="icon-container">
-    <img class='vcs-icon' src="/assets/img/icons/companies/github-alt.svg" alt="Github Icon" />
-    <img class='vcs-icon' src="/assets/img/icons/companies/bitbucket-alt.svg" alt="Bitbucket Icon" />
-    <img class='vcs-icon' src="/assets/img/icons/companies/gitlab-color.svg" alt="GitLab Icon" />
+    <img class='vcs-icon' src="/docs/assets/img/icons/companies/github-alt.svg" alt="Github Icon" />
+    <img class='vcs-icon' src="/docs/assets/img/icons/companies/bitbucket-alt.svg" alt="Bitbucket Icon" />
+    <img class='vcs-icon' src="/docs/assets/img/icons/companies/gitlab-color.svg" alt="GitLab Icon" />
   </div>
   <div class='text-container'>
     <span>This guide assumes you have signed up and</span>
@@ -115,7 +115,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   </div>
 
   <div class="right-side">
-    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Select Projects" />
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Select Projects" />
   </div>
 </div>
 
@@ -126,7 +126,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   </div>
 
   <div class="right-side">
-    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/select-config-gitlab.png" alt="Choose Config"/>
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/select-config-gitlab.png" alt="Choose Config"/>
   </div>
 </div>
 
@@ -137,7 +137,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   </div>
 
   <div class="right-side">
-    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png" alt="Config Editor" />
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png" alt="Config Editor" />
   </div>
 </div>
 
@@ -148,7 +148,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   </div>
 
   <div class="right-side">
-    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png" alt="Commit a config" />
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png" alt="Commit a config" />
   </div>
 </div>
 
@@ -159,7 +159,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
   </div>
 
   <div class="right-side">
-    <img class="right-img" src="/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Passing pipeline" />
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Passing pipeline" />
   </div>
 </div>
 ++++
@@ -207,7 +207,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 ++++
 <div class='section-header-wrapper'>
   <h2 class='section-title' id="step-2">2. Dig into your first pipeline</h2>
-  <img class='image-banner' src="/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg" alt="header banner" />
+  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg" alt="header banner" />
   <div class='content-wrapper'>
     <span>
       Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster.
@@ -253,7 +253,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 ++++
 <div class='section-header-wrapper'>
   <h2 class='section-title' id="next">3. Debug and iterate</h2>
-  <img class='image-banner' src="/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg" alt="header banner" />
+  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg" alt="header banner" />
   <div class='content-wrapper'>
     <span>
       Discover CircleCI features to help debug and configure your builds.
