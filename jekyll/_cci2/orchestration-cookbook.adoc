@@ -65,8 +65,8 @@ You may wish to configure a workflow in your pipeline that will only run on a pi
 
 === Steps
 
-. Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
-+
+Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
+
 [,yml]
 ----
 workflows:
@@ -101,3 +101,139 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 // Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
 
 // #TODO steps to trigger on a PR being opened#
+
+== Run a workflow only for specific branches
+
+=== Goal
+You may want to configure a workflow that will only run when the pipeline that is triggered on a specific branch.
+
+=== Steps
+
+Update your CircleCI config to include a workflow that you only want to run for specific branches.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+Alternatively, you can use the dynamic syntax to achieve the same result.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+
+You can also choose to prevent the workflow from running for specific branches.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
+----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow depending on the value of a boolean parameter
+
+=== Goal
+You may want to configure a workflow that will only run when a boolean pipeline parameter is true.
+
+=== Steps
+
+Update your CircleCI config to include a workflow that will only run when a boolean pipeline parameter you declared is true.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+You can also use the dynamic syntax to achieve the same result.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
+----
+
+You can create complex logic statements that involve multiple parameters.
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
+----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a step depending on the output of a nested logic statement
+
+=== Goal
+
+You may want to configure a step that will run depending on the output of a nested logic statement.
+
+=== Steps
+
+Update your CircleCI config to leverage xref:configuration-reference#the-when-step[the `when` step].
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-step-nested.yml[]
+----
+
+=== Notes
+
+[CAUTION]
+====
+The logic statement can be nested to a maximum depth of 100 levels.
+====
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a job only on specific branches **or** when the value of a pipeline parameter is true
+
+=== Goal
+
+You may want to configure a job that will only run on specific branches or when the value of a pipeline parameter is set to `true` when the pipeline is triggered via the API.
+
+=== Steps
+
+Update your CircleCI config to include an xref:configuration-reference/#expression-based-job-filters[expression-based job filter].
+
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/multiple-or.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow only for scheduled pipelines with a specific name
+
+=== Goal
+
+In some cases, you may want to configure a workflow that will only run when a scheduled pipeline has a specific name.
+
+=== Steps
+
+Update your CircleCI config to leverage the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
+
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
