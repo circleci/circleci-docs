@@ -3332,8 +3332,6 @@ workflows:
         - equal: [ staging, << pipeline.git.branch >> ]
 ----
 
-For more examples, see xref:using-logic-statements#[Using Logic Statements].
-
 
 [#example-full-configuration]
 == Example full configuration
