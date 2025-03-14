@@ -63,7 +63,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 [#assign-a-project-role]
 == Assign a project role
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
+image::gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
 . In the CircleCI web app, select **Projects** in the sidebar.
 . Find your project. You can use the search box to help.
