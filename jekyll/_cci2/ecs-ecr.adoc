@@ -26,7 +26,7 @@ This guide has two phases:
 
 // You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
 
-This project includes a simple https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile[Dockerfile]. Visit the link:{{site.baseurl}}/custom-images/#creating-a-custom-image-manually[Creating a custom image manually] page for more information.
+This project includes a simple link:https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile[Dockerfile]. Visit the xref:custom-images#creating-a-custom-image-manually[Creating a custom image manually] page for more information.
 
 [#prerequisites]
 == Prerequisites
@@ -55,7 +55,7 @@ TIP: You can destroy most AWS resources by running `terraform destroy`. If any r
 [#configure-circleci-environment-variables]
 === 2. Configure CircleCI environment variables
 
-In the CircleCI application, set the following link:{{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project[project environment variables].
+In the CircleCI application, set the following xref:set-environment-variable#set-an-environment-variable-in-a-project[project environment variables].
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]

@@ -389,7 +389,7 @@ end
 
 link:https://www.testfairy.com[TestFairy] is another popular Enterprise App distribution and testing service. Fastlane has built-in support for TestFairy, making it simple to upload new builds to the service.
 
-image::{{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png[TestFairy preferences image]
+image::testfairy-open-preferences.png[TestFairy preferences image]
 
 . On the TestFairy dashboard, navigate to the Preferences page.
 . On the Preferences page, go to the API Key section and copy your API Key.
