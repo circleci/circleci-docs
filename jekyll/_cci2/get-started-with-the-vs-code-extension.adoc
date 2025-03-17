@@ -43,7 +43,7 @@ There are two ways to install the CircleCI extension:
 +
 **CircleCI server**: Make sure to check **I'm a CircleCI server customer**, then enter your self-hosted server URL.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_login.png[Log in to CircleCI from VS Code]
+image::vs_code_extension_login.png[Log in to CircleCI from VS Code]
 
 [#set-up-your-project-in-vs-code]
 == 3. Set up your project in VS Code
@@ -54,7 +54,7 @@ If no project is detected, open the extension's settings page (either through th
 
 NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects. Select your project manually from the settings page.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
+image::vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
 
 NOTE: Your manual selection will only persist if no projects are detected automatically.
 
@@ -84,7 +84,7 @@ The extension allows you to xref:ssh-access-jobs#[rerun jobs with SSH] directly 
 
 The SSH functionality uses the same key that you use for your VCS. The easiest way to configure SSH keys for the extension is to try re-running a job with SSH, by clicking on the action icon next to the job.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_rerun_job_ssh.png[Failed job with rerun with SSH icon]
+image::vs_code_extension_rerun_job_ssh.png[Failed job with rerun with SSH icon]
 
 In the Command Palette, you will be asked to select whether you want to start an SSH session in the terminal or in a remote window. The extension will then try to find your key automatically. Follow the prompts to finish configuring your SSH key.
 
@@ -94,7 +94,7 @@ To open an SSH session in a dedicated VS Code remote window, you need to install
 
 NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:github-apps-integration#[GitHub App] and xref:gitlab-integration#[GitLab] projects.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_ssh_remote_window.png[VS Code with remote development window]
+image::vs_code_extension_ssh_remote_window.png[VS Code with remote development window]
 
 [#open-a-config-file-to-test-language-support-features]
 == 7. Open a config file to test language support features
@@ -109,7 +109,7 @@ Even without taking any further action, you should see:
 * Red warnings appear if you introduce syntax errors.
 * You are able to use go-to-definition commands on the file.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper-overview-optimised.gif[Go-to definition in config]
+image::vs_code_extension_config_helper-overview-optimised.gif[Go-to definition in config]
 +
 TIP: If you do not see any syntax coloration, you might be using a VS Code theme that is not compatible with our syntax highlighting.
 

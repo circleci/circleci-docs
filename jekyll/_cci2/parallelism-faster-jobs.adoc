@@ -62,7 +62,7 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
-image::{{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png[Parallelism]
+image::executor_types_plus_parallelism.png[Parallelism]
 
 [#use-parallelism-with-self-hosted-runners]
 === Use parallelism with self-hosted runners
@@ -133,7 +133,7 @@ When using timing-based test splitting, the CLI attempts to auto detect the gran
 
 Using *timing-based* test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
 
-image::{{site.baseurl}}/assets/img/docs/test_splitting.png[Test Splitting]
+image::test_splitting.png[Test Splitting]
 
 Timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run. The most recent timings data is always used to define where splits are made.
 

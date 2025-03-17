@@ -176,11 +176,11 @@ This feature consumes 450 credits from your account for each GB of data used for
 
 IP ranges usage is visible in the *Plan Usage* section of the CircleCI app:
 
-image::{{site.baseurl}}/assets/img/docs/ip-ranges.png[Screenshot showing the location of the IP ranges feature]
+image::ip-ranges.png[Screenshot showing the location of the IP ranges feature]
 
 On the *Resources* tab within the *Job Details* UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. See more details on the CircleCI https://circleci.com/blog/network-transfer-ip-ranges/[blog]. You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
 
-image::{{site.baseurl}}/assets/img/docs/resources-network-transfer.png[Screenshot showing the approximate network transfer]
+image::resources-network-transfer.png[Screenshot showing the approximate network transfer]
 
 [#aws-and-gcp-ip-addresses]
 == AWS and GCP IP Addresses
@@ -227,4 +227,4 @@ macOS builds are automatically restricted within the IP ranges listed here. In o
 [#known-limitations]
 == Known limitations
 
-* IP ranges is currently available for the link:{{site.baseurl}}/configuration-reference/#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a link:{{site.baseurl}}/configuration-reference/#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.
+* IP ranges is currently available for the xref:configuration-reference#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a xref:configuration-reference#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this link:https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.
