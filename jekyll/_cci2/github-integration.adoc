@@ -330,7 +330,7 @@ Key functionality enabled through the GitHub App integration includes the follow
 
 [CAUTION]
 ====
-Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. To prevent this behavior, make sure to disable the GitHub OAuth trigger. To do so, follow these steps:
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by disabling the GitHub OAuth trigger. To do so, follow these steps:
 
 . Navigate to the GitHub repository associated with the project.
 . Go to menu:Settings[Webhooks].
@@ -339,6 +339,7 @@ Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the 
 _Note: Deleting the OAuth webhook will prevent the xref:variables/#built-in-environment-variables[built-in environment variable] `CIRCLE_PULL_REQUEST` from being populated in all pipelines. We are working on getting this side effect resolved in the near future._
 
 This action is reversible. To re-enable the OAuth trigger, follow these steps:
+
 . Go to menu:Project Settings[Overview]
 . Select "Stop building" at the bottom of the page
 . Then, select "Follow". This will create a new CircleCI webhook in your repository.
@@ -350,6 +351,12 @@ To get started, go to menu:Project Settings[Pipelines] for one of your projects 
 Once you have set up your first pipeline, you will be able to add triggers to it through the menu:Project Settings[Triggers] page.
 
 NOTE: Only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
+
+Once the GitHub App is installed, each user should authorize the GitHub App connection. To do this, each user should navigate to menu:Project Settings[Pipelines>Add Pipeline>Connection] and select btn:[Authorize].
+Authorizing the GitHub App ensures that users can:
+* Trigger pipelines xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app]. 
+* Run builds, if the flag xref:prevent-unregistered-users-from-spending-credits#[Prevent unregistered user spend] is set to "On". 
+* Run builds, if they require access to xref:contexts#[contexts].
 
 [#github-app-integration]
 ### The GitHub App integration
