@@ -234,4 +234,23 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equ
 
 include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+== Run a workflow when open pull requests are modified
+
+=== Goal
+
+You may want to have a workflow run when a open pull requests are updated with new commits (synchronize) or labeled.
+
+=== Steps
+
+* Update your CircleCI config to use the `pipeline.event.name` and `pipeline.event.action` xref:pipeline-variables#pipeline-values[pipeline values].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/pr-synced-or-labeled.yml[]
+----
+
+=== Notes
+
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
