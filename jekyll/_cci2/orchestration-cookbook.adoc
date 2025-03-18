@@ -65,8 +65,8 @@ You may want to configure a workflow in your pipeline that will only run on a pi
 
 === Steps
 
-Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
-
+* Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
++
 [,yml]
 ----
 workflows:
@@ -109,8 +109,8 @@ You may want to configure a workflow that will only run when the pipeline is tri
 
 === Steps
 
-Update your CircleCI config to include a workflow that you only want to run for specific branches.
-
+* Update your CircleCI config to include a workflow that will only run for specific branches.
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
@@ -144,8 +144,10 @@ You may want to configure a workflow that will only run when a boolean pipeline 
 
 === Steps
 
-Update your CircleCI config to include a workflow that will only run when a boolean pipeline parameter you declared is true.
+. Update config to declare a pipeline parameter with a deafult value of `false`
 
+. Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
@@ -179,8 +181,8 @@ You may want to configure a step that will run depending on the output of a nest
 
 === Steps
 
-Update your CircleCI config to leverage xref:configuration-reference#the-when-step[the `when` step].
-
+* Update your CircleCI config to use xref:configuration-reference#the-when-step[the `when` step].
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-step-nested.yml[]
@@ -200,9 +202,8 @@ You may want to configure a job that will only run on specific branches or when 
 
 === Steps
 
-Update your CircleCI config to include an xref:configuration-reference/#expression-based-job-filters[expression-based job filter].
-
-
+* Update your CircleCI config to include an xref:configuration-reference/#expression-based-job-filters[expression-based job filter].
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/multiple-or.yml[]
@@ -222,8 +223,8 @@ In some cases, you may want to configure a workflow that will only run when a sc
 
 === Steps
 
-Update your CircleCI config to leverage the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
-
+* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
