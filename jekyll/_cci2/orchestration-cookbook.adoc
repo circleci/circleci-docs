@@ -16,7 +16,7 @@ This cookbook contains "recipes" for common pipeline, workflow and job execution
 
 === Goal
 
-You may wish to run a specific set of more credit-consuming tests only when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
+You may want to run a specific set of more credit-consuming tests only when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
 
 === Steps
 
@@ -39,7 +39,7 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 === Goal
 
-You may wish to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
+You may want to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
 
 === Steps
 . Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
@@ -61,7 +61,7 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 == Run a workflow only when a pull request is opened
 
 === Goal
-You may wish to configure a workflow in your pipeline that will only run on a pipeline that is triggered when a pull request is opened. To do this you can use a workflow filter.
+You may want to configure a workflow in your pipeline that will only run on a pipeline that is triggered when a pull request is opened. To do this you can use a workflow filter.
 
 === Steps
 
@@ -86,13 +86,13 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 // == Trigger a pipeline when a branch has an open PR
 
-// You may wish to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
+// You may want to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
 
 // #TODO steps to build when there is an open PR#
 
 // == Trigger a pipeline when a label is added to a PR
 
-// You may wish to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
+// You may want to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
 
 // #ToDO add steps to set up a trigger when label added#
 
@@ -105,7 +105,7 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 == Run a workflow only for specific branches
 
 === Goal
-You may want to configure a workflow that will only run when the pipeline that is triggered on a specific branch.
+You may want to configure a workflow that will only run when the pipeline is triggered on a specific branch.
 
 === Steps
 
