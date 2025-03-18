@@ -3332,6 +3332,10 @@ workflows:
         - equal: [ staging, << pipeline.git.branch >> ]
 ----
 
+[#logic-statement-examples]
+=== Logic statement examples
+
+You can find usage examples on the xref:orchestration-cookbook#["Orchestration cookbook"] page.
 
 [#example-full-configuration]
 == Example full configuration
