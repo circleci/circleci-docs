@@ -1,3 +1,5 @@
-Environment variables cannot be used in logic statements. You can only use pipeline values or pipeline parameters.
+* Environment variables cannot be used in logic statements. You can only use pipeline values or pipeline parameters.
++
 Logic statements are evaluated at compilation time whereas the actual values of environment variables only become available at run time.
++
 See the link:https://support.circleci.com/hc/en-us/articles/21200178128155-Can-I-use-environment-variables-in-conditional-statements["Can I use environment variables in conditional statements?"] article for more information.

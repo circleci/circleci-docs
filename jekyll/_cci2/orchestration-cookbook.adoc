@@ -120,16 +120,16 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equ
 
 include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-* Alternatively, you can use the classic/legacy syntax to achieve the same result.
-
+* Alternatively, you can use the classic/legacy syntax to achieve the same result:
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
 ----
 
 
-* You can also choose to prevent the workflow from running for specific branches.
-
+* You can also choose to prevent the workflow from running for specific branches:
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
@@ -155,15 +155,15 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolea
 
 include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-* You can also use the shorthand syntax to achieve the same result.
-
+* You can also use the shorthand syntax to achieve the same result:
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
 ----
 
-* You can create complex logic statements that involve multiple parameters.
-
+* You can create complex logic statements that involve multiple parameters:
++
 [,yaml]
 ----
 include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
