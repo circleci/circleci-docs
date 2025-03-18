@@ -123,7 +123,7 @@ If your deploy keys or user keys appear to have been removed, it may be due to o
 * GitHub will remove inactive keys if they are unused for over a year.
 * If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
 * In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
-* If your CircleCI project has no xref:introduction-to-the-circleci-web-app/#projects[followers], CircleCI will consider it disabled and remove the associated keys.
+* If your CircleCI project has no xref:introduction-to-the-circleci-web-app#projects[followers], CircleCI will consider it disabled and remove the associated keys.
 * When you delete a CircleCI project, CircleCI will remove its associated keys.
 ====
 
