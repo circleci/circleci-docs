@@ -113,22 +113,22 @@ Update your CircleCI config to include a workflow that you only want to run for 
 
 [,yaml]
 ----
-include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
 ----
 
 === Notes
 
 include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-Alternatively, you can use the dynamic syntax to achieve the same result.
+* Alternatively, you can use the classic/legacy syntax to achieve the same result.
 
 [,yaml]
 ----
-include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
 ----
 
 
-You can also choose to prevent the workflow from running for specific branches.
+* You can also choose to prevent the workflow from running for specific branches.
 
 [,yaml]
 ----
@@ -148,21 +148,21 @@ Update your CircleCI config to include a workflow that will only run when a bool
 
 [,yaml]
 ----
-include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
 ----
 
 === Notes
 
 include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-You can also use the dynamic syntax to achieve the same result.
+* You can also use the shorthand syntax to achieve the same result.
 
 [,yaml]
 ----
-include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
 ----
 
-You can create complex logic statements that involve multiple parameters.
+* You can create complex logic statements that involve multiple parameters.
 
 [,yaml]
 ----
@@ -188,10 +188,7 @@ include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-s
 
 === Notes
 
-[CAUTION]
-====
-The logic statement can be nested to a maximum depth of 100 levels.
-====
+* The logic statement can be nested to a maximum depth of 100 levels.
 
 include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
