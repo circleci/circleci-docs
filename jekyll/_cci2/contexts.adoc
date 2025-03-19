@@ -80,6 +80,7 @@ When creating contexts and environment variables, note the following:
 * An environment variable value must have 32k or fewer characters.
 * An empty environment variable is considered valid.
 * Each context is limited to 100 environment variables.
+* Each configuration file is limited to 100 contexts.
 * Each organization is limited to 500 contexts.
 
 [#context-naming-for-circleci-server]
