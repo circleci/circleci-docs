@@ -1,0 +1,43 @@
+8933,"Couple fixes for the server release notes [ONPREM-1507] [ONPREM-1509]","2024-08-29T16:09:56Z",9,1,10
+8931,"Add change log link for server 4.6.1","2024-08-28T14:48:36Z",7,1,8
+8929,"fix broken links","2024-08-28T21:50:08Z",6,12,18
+8927,"Update Windows runner version compatibility and prerequisites [ONPREM-346]","2024-08-27T10:19:11Z",6,4,10
+8926,"Add section on job naming and restrictions","2024-08-23T16:46:59Z",30,2,32
+8925,"Remove add user to job doc","2024-08-22T22:50:54Z",0,14,14
+8924,"nuance about known_hosts","2024-08-22T23:04:36Z",7,0,7
+8922,"Improve linking to resource class info","2024-08-22T18:50:17Z",346,277,623
+8920,"Clarify one GH App org per CCI org","2024-08-21T22:33:02Z",8,0,8
+8919,"Scheduled workflows unsupported for standalone","2024-08-21T21:39:27Z",5,1,6
+8918,"UI steps for status badges","2024-08-21T07:58:08Z",21,2,23
+8917,"Remove insights snapshot badge from coming soon","2024-08-21T07:55:24Z",1,16,17
+8916,"Removes mention of opening tickets for plan-free.adoc","2024-08-20T17:44:43Z",1,1,2
+8914,"--timings-type=testname doesnt quite work as we expected","2024-08-21T10:53:31Z",7,3,10
+8913,"update troubleshooting docs","2024-08-20T13:24:33Z",24,2,26
+8912,"s/expressinos/expressions/ in  workflows.adoc","2024-08-19T10:28:02Z",1,1,2
+8911,"convert collect test data page","2024-08-15T22:04:15Z",348,222,570
+8910,"Specify last compatible CLI version for server 4.2 [ONPREM-237]","2024-08-15T14:58:04Z",2,0,2
+8909,"Minor language changes around authorization with a VCS","2024-08-15T18:28:52Z",23,23,46
+8908,"Update how-to-use-the-circleci-local-cli.adoc","2024-08-14T22:40:42Z",1,1,2
+8907,"[MAC-2315] update xcode 16.1 documentation","2024-08-14T16:20:50Z",6,0,6
+8906,"docs(pipelines): remove redundant 'for example'","2024-08-14T14:29:25Z",1,1,2
+8905,"Correct some server links","2024-08-14T14:04:57Z",22,22,44
+8904,"Fix Server version for is default branch pipeline value","2024-08-13T15:53:27Z",1,1,2
+8903,"add release notes updates for server patch releases","2024-08-12T15:33:47Z",35,3,38
+8902,"[MAC-2308] Xcode 16 Beta 5","2024-08-08T17:21:50Z",3,3,6
+8901,"PIPE-4728 Add is default branch pipeline value","2024-08-12T13:44:15Z",7,0,7
+8900,"fix: Air-gap should use :start to download assets","2024-08-09T21:18:51Z",5,5,10
+8899,"[merge when 4.6 docs are live]Update configuration-reference.adoc","2024-08-14T14:17:38Z",1,1,2
+8898,"ONPREM-1408 | updated the default s3 region details","2024-08-08T12:07:33Z",4,4,8
+8897,"Small edit to pipelines page","2024-08-14T14:24:18Z",3,3,6
+8894,"fix: use bool format for agent.ssh.enabled value","2024-08-12T12:55:09Z",2,2,4
+8893,"Pipelines","2024-08-02T18:29:20Z",61,62,123
+8892,"[ONPREM-1358] Update launch agent server versions","2024-08-01T23:06:09Z",28,34,62
+8890,"Update workspaces.adoc","2024-08-01T18:18:04Z",2,2,4
+8889,"Update images list for server 4.6 air-gap installs [ONPREM-1230]","2024-08-07T21:21:01Z",64,57,121
+8887,"M desmery add support package info","2024-08-01T12:42:31Z",29,22,51
+8876,"Bitbucket Data Center support","2024-08-14T22:14:56Z",606,324,930
+8869,"Noindex previous server docs","2024-08-02T09:50:21Z",597,391,988
+8867,"Docs for server 4.6","2024-08-13T20:04:16Z",8916,369,9285
+8852,"[REL-3221] Update docs to reflect onboarding wizard for releases","2024-08-12T13:00:47Z",211,145,356
+8851,"Update config-intro.adoc","2024-08-01T12:54:46Z",1,1,2
+8613,"Updated JFrog CLI Documentation to Use v2 Standards","2024-08-21T08:18:00Z",57,21,78
