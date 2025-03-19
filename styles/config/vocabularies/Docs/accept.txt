@@ -1,7 +1,7 @@
 .circleci/config.yml
 [Aa]uditability
 [Aa]utoscalers?
-[Bb]oolean?
+[Bb]ooleans?
 \b[Cc]onfig policies\b
 \b[Cc]onfig policy\b
 [Cc]ron
