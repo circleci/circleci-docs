@@ -15,7 +15,7 @@ noindex: true
 [#introduction]
 == Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This is a test page to show all the different components we use on a docs page. We use *bold text* and _italic text_ and `inline code`.
 
 NOTE: *Want to see a note?* This is a note.
 
@@ -24,8 +24,6 @@ TIP: *Want to see a tip?* This is a tip.
 WARNING: *Want to see a warning?* This is a warning.
 
 CAUTION: *Want to see a caution?* This is a caution.
-
-*Here is some bold text* and some _italic text_.
 
 Sometimes we have sections separated by horizontal lines, like this:
 
@@ -71,6 +69,10 @@ include::../../_includes/partials/app-navigation/steps-to-project-settings.adoc[
 |Text for row 1 column 1
 |Text for row 1 column 2
 |Text for row 1 column 3
+
+|Text for row 2 column 1
+|Text for row 2 column 2
+|Text for row 2 column 3
 |===
 
 ==== This is a code block
