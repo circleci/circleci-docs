@@ -57,7 +57,7 @@ link:https://circleci.com/developer/orbs[Orb registry].
 
 ==== This is a set of numbered steps
 
-include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+include::../../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
 
 ==== This is a table
 
