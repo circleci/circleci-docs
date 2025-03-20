@@ -6,7 +6,6 @@ contentTags:
 = Testing iOS applications on macOS
 :page-layout: classic-docs
 :page-description: Testing iOS applications on macOS.
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -25,7 +24,7 @@ Refer to xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-m
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-{% include snippets/xcode-silicon-vm.adoc %}
+include::../_includes/snippets/xcode-silicon-vm.adoc[]
 
 [#getting-started]
 == Getting started
@@ -277,8 +276,6 @@ gem 'cocoapods', '= 1.3.0'
 
 Then you can install these using Bundler:
 
-{% raw %}
-
 [source,yaml]
 ----
 steps:
@@ -290,8 +287,6 @@ steps:
       paths:
         - vendor/bundle
 ----
-
-{% endraw %}
 
 You can then ensure you are using those, by prefixing commands with `bundle exec`:
 

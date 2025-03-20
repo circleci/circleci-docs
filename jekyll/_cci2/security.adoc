@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document outlines security initiatives taken by CircleCI.
 
@@ -45,7 +44,6 @@ A few different external services and technology integration points touch Circle
 * *iOS builds* If you are paying to run iOS builds on CircleCI hardware, your source code will be downloaded to a build box on a macOS fleet where it will be compiled, and any tests will be run. Similar to CircleCI's primary build containers that you control, the iOS builds that run are sandboxed such that they cannot be accessed.
 * *Docker* If you are using Docker images, refer to the public Docker link:https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json[seccomp (security computing mode) profile] for the Docker engine. CircleCI appends the following to the Docker default `seccomp` profile:
 
-{% raw %}
 [,shell]
 ----
 [
@@ -63,5 +61,3 @@ A few different external services and technology integration points touch Circle
   }
 ]
 ----
-
-{% endraw %}

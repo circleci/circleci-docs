@@ -6,7 +6,6 @@ contentTags:
 ---
 = Examples and guides overview
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Resources for learning CircleCI using examples.
 :icons: font
 :experimental:
@@ -28,7 +27,7 @@ To get a project up and running on CircleCI, see the following quickstart guides
 
 We have created demo applications in various languages so you can learn by example. Each language listed below has an associated guide and public repository on GitHub.
 
-{% include snippets/language-guides.adoc %}
+include::../_includes/snippets/language-guides.adoc[]
 
 [#platforms]
 == Platform guides

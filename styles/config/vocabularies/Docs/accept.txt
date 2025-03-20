@@ -82,13 +82,13 @@ CircleCI\b
 \bcircleci\.com\b
 CI/CD
 CIDRs?
-classname?
-classpath
-classpath?
+[Cc]lassnames?
+[Cc]lasspaths?
 CLI
 [Cc]lojure
 [Cc]loud\b
 \bCloud Foundry\b
+CMake
 CocoaPods
 Codecov
 CodeDeploy
@@ -104,7 +104,7 @@ CPUs
 CRD
 CTest
 Cucumber
-CVE
+CVEs?
 Cypress
 Datacenter
 \b[Dd]ata [Cc]enter\b
@@ -207,7 +207,7 @@ Linux
 [Ll]iveness
 LLMs?
 LLMOps
-lockfile
+[Ll]ockfiles?
 macOS
 \bMac\b
 manpage
@@ -222,7 +222,7 @@ nginx
 [Nn]ode
 Nomad
 npm
-[NU|nu]nit
+NUnit
 \bnyc\b
 OAuth
 OIDC
