@@ -1,0 +1,111 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+noindex: true
+---
+= Test page for docs site
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A page with all components for testing the new docs site.
+:icons: font
+:experimental:
+
+[#introduction]
+== Introduction
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+NOTE: *Want to see a note?* This is a note.
+
+TIP: *Want to see a tip?* This is a tip.
+
+WARNING: *Want to see a warning?* This is a warning.
+
+CAUTION: *Want to see a caution?* This is a caution.
+
+*Here is some bold text* and some _italic text_.
+
+Sometimes we have sections separated by horizontal lines, like this:
+
+---
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+=== This is a subsection
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+.This is an image
+image::circleci-system-diagram.png[CircleCI process diagram]
+
+==== This is a bullet list
+
+* AWS S3
+* AWS EC2 Container Service (ECS)
+* Google Cloud Platform (GCP)
+* Azure Container Registry
+* Heroku
+* Firebase
+* Android
+* iOS
+
+==== This is a link
+
+link:https://circleci.com/developer/orbs[Orb registry].
+
+==== This is a set of numbered steps
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+==== This is a table
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|Header text column 1
+|Header text column 2
+|Header text column 3
+
+|Text for row 1 column 1
+|Text for row 1 column 2
+|Text for row 1 column 3
+|===
+
+==== This is a code block
+
+[,yaml]
+----
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+----
+
+==== This is a definition list
+
+*Thing one*:: Definition of thing one.
+
+*Thing two*:: Definition of thing two.
+
+*Thing three*:: Definition of thing three.
