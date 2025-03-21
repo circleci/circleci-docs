@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Phase 2 - Configure object storage
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to configure object storage through MinIO to run CircleCI server v4.7 in an air-gapped environment.
+:page-description: How to configure object storage through MinIO to run CircleCI server v4.8 in an air-gapped environment.
 :icons: font
 :experimental:
 :toc: macro
@@ -200,18 +200,6 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.
 ----
 
 Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
-
-[#copy-candidate-txt-file]
-=== b. Copy candidate.txt file
-Download the `candidate.txt` file required by `runner_admin`.
-
-[,bash]
-----
-# Download candidate.txt
-curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/candidate.txt
-----
-
-Copy this `candidate.txt` file to the root directory of the `circleci-data` bucket.
 
 [#next-steps]
 == Next steps
