@@ -16,7 +16,7 @@ This cookbook contains "recipes" for common pipeline, workflow and job execution
 
 === Goal
 
-You may wish to run a specific set of more credit-consuming tests only when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
+You may want to run a specific set of more credit-consuming tests only when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
 
 === Steps
 
@@ -39,7 +39,7 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 === Goal
 
-You may wish to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
+You may want to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
 
 === Steps
 . Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
@@ -61,11 +61,11 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 == Run a workflow only when a pull request is opened
 
 === Goal
-You may wish to configure a workflow in your pipeline that will only run on a pipeline that is triggered when a pull request is opened. To do this you can use a workflow filter.
+You may want to configure a workflow in your pipeline that will only run on a pipeline that is triggered when a pull request is opened. To do this you can use a workflow filter.
 
 === Steps
 
-. Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
+* Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
 +
 [,yml]
 ----
@@ -86,13 +86,13 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 // == Trigger a pipeline when a branch has an open PR
 
-// You may wish to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
+// You may want to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
 
 // #TODO steps to build when there is an open PR#
 
 // == Trigger a pipeline when a label is added to a PR
 
-// You may wish to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
+// You may want to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
 
 // #ToDO add steps to set up a trigger when label added#
 
@@ -101,3 +101,156 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 // Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
 
 // #TODO steps to trigger on a PR being opened#
+
+== Run a workflow only for specific branches
+
+=== Goal
+You may want to configure a workflow that will only run when the pipeline is triggered on a specific branch.
+
+=== Steps
+
+* Update your CircleCI config to include a workflow that will only run for specific branches.
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+* Alternatively, you can use the classic/legacy syntax to achieve the same result:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
+----
+
+
+* You can also choose to prevent the workflow from running for specific branches:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
+----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow depending on the value of a boolean parameter
+
+=== Goal
+You may want to configure a workflow that will only run when a boolean pipeline parameter is true.
+
+=== Steps
+
+. Update config to declare a pipeline parameter with a deafult value of `false`
+
+. Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+* You can also use the shorthand syntax to achieve the same result:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
+----
+
+* You can create complex logic statements that involve multiple parameters:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
+----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a step depending on the output of a nested logic statement
+
+=== Goal
+
+You may want to configure a step that will run depending on the output of a nested logic statement.
+
+=== Steps
+
+* Update your CircleCI config to use xref:configuration-reference#the-when-step[the `when` step].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-step-nested.yml[]
+----
+
+=== Notes
+
+* The logic statement can be nested to a maximum depth of 100 levels.
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a job only on specific branches **or** when the value of a pipeline parameter is true
+
+=== Goal
+
+You may want to configure a job that will only run on specific branches or when the value of a pipeline parameter is set to `true` when the pipeline is triggered via the API.
+
+=== Steps
+
+* Update your CircleCI config to include an xref:configuration-reference/#expression-based-job-filters[expression-based job filter].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/multiple-or.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow only for scheduled pipelines with a specific name
+
+=== Goal
+
+In some cases, you may want to configure a workflow that will only run when a scheduled pipeline has a specific name.
+
+=== Steps
+
+* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+== Run a workflow when open pull requests are modified
+
+=== Goal
+
+You may want to have a workflow run when a open pull requests are updated with new commits (synchronize) or labeled.
+
+=== Steps
+
+* Update your CircleCI config to use the `pipeline.event.name` and `pipeline.event.action` xref:pipeline-variables#pipeline-values[pipeline values].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/pr-synced-or-labeled.yml[]
+----
+
+=== Notes
+
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]

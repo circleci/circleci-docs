@@ -1,0 +1,4 @@
+workflows:
+# The "run_on_pr" workflow only runs when open pull requests are labeled or updated with new commits.
+  run_on_pr:
+    when: (pipeline.event.name == "pull_request" and pipeline.event.action == "labeled") or (pipeline.event.name == "pull_request" and pipeline.event.action == "synchronize")

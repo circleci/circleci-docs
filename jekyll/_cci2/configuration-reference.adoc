@@ -2910,8 +2910,6 @@ workflows:
           filters: pipeline.git.branch == "main" and pipeline.parameters.my-custom-param starts-with "DEPLOY:"
 ----
 
-'''
-
 **Examples**
 
 Only run the job on the project's `main` branch:
@@ -3385,11 +3383,6 @@ for its `pattern`. A full match pattern must be provided, prefix matching is not
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
-'''
-
-[#logic-statement-examples]
-=== Logic statement examples
-
 [,yaml]
 ----
 workflows:
@@ -3400,59 +3393,10 @@ workflows:
         - equal: [ staging, << pipeline.git.branch >> ]
 ----
 
-[,yaml]
-----
-workflows:
-  my-workflow:
-    when:
-      and:
-        - not:
-            matches:
-              pattern: "^main$"
-              value: << pipeline.git.branch >>
-        - or:
-            - equal: [ canary, << pipeline.git.tag >> ]
-            - << pipeline.parameters.deploy-canary >>
-----
+[#logic-statement-examples]
+=== Logic statement examples
 
-[,yaml]
-----
-version: 2.1
-
-executors:
-  linux-22:
-    docker:
-      - image: cimg/node:22.4
-  macos: &macos-executor
-    macos:
-      xcode: 15.0.1
-
-jobs:
-  test:
-    parameters:
-      os:
-        type: executor
-      node-version:
-        type: string
-    executor: << parameters.os >>
-    steps:
-      - checkout
-      - when:
-          condition:
-            equal: [ *macos-executor, << parameters.os >> ]
-          steps:
-            - run: echo << parameters.node-version >>
-      - run: echo 0
-
-workflows:
-  all-tests:
-    jobs:
-      - test:
-          os: macos
-          node-version: "22.4"
-----
-
-'''
+You can find usage examples on the xref:orchestration-cookbook#["Orchestration cookbook"] page.
 
 [#example-full-configuration]
 == Example full configuration
