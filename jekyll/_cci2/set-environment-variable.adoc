@@ -60,7 +60,7 @@ jobs:
           command: sql/docker-entrypoint.sh sql
           # Environment variable for a single command shell
           environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+            DATABASE_URL: postgresql://postgres@localhost:5432/test_db
 ```
 
 NOTE: Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
