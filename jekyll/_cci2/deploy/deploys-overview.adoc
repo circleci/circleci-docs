@@ -23,9 +23,9 @@ CircleCI deploys gives you visibility into your Kubernetes deployments within th
 
 We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
 
-* Retry deployment
-* Promote deployment
-* Cancel deployment
+* Retry rollout
+* Promote rollout
+* Cancel rollout
 
 [#quickstart]
 == Quickstart
