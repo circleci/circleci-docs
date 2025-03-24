@@ -340,6 +340,7 @@ UIDs?
 [Uu]ndeploy
 [Uu]ndeployed
 unencrypted
+[Uu]neditable
 unittest
 [Uu]nfollow
 [Uu]nfollowing
