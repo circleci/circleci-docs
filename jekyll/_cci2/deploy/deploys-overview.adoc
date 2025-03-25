@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-Visualise and control your deployments with CircleCI deploys. The CircleCI deploys dashboard and tooling currently works with deployments to Kubernetes and Amazon SageMaker.
+Visualize and control your deployments with CircleCI deploys. The CircleCI deploys dashboard supports any deployment, and the deploys management tooling works with deployments to Kubernetes and Amazon SageMaker.
 
 [#introduction]
 == Introduction
