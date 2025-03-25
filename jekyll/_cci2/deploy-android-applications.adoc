@@ -64,7 +64,7 @@ This lane will run `gradle bundle` and generate an `app-release.aab` (Android Ap
 To prepare your app for deployment, you will need to add a release signing configuration to your app-module `build.gradle` file. This enables Fastlane to use the same keystore you used in generating earlier releases of your app to also generate subsequent releases.
 
 [#add-signingconfig-snippet]
-=== a. Add signingConfigs snippet
+=== a. Add `signingConfigs` snippet
 
 Add the following `signingConfigs` snippet to your app-module `build.gradle` file:
 
@@ -140,7 +140,7 @@ In this snippet, you added variables that hold your app version values. You then
 Note that you will need to update at least one parameter of the version for every deployment. Fastlane fails if a version code is reused.
 
 [#update-defaultconfig]
-=== d. Update properties in defaultConfig
+=== d. Update properties in `defaultConfig`
 
 Update the following properties in the `defaultConfig` section of the `build.gradle` file:
 
@@ -229,7 +229,8 @@ Using the Android orb gives you two options for deploying to the Google Play Sto
 
 [.tab.configAndroidOrb.Use_the_deploy-to-play-store_job]
 --
-To deploy using the `deploy_to_play_store` job you just need to add a `android/deploy_to_play_store` job to your list of jobs in your workflow.
+To deploy using the `deploy-to-play-store` job you just need to add an `android/deploy_to_play_store` job to your list of jobs in your workflow.
+=======
 
 If you set your environment variables as shown earlier in this tutorial, then you should not need to set the following parameters, as the default values take the same environment value names:
 

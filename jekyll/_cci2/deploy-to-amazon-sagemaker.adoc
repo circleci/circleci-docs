@@ -5,7 +5,6 @@ contentTags:
 ---
 = Deploy to Amazon SageMaker
 :page-layout: classic-docs
-:page-liquid:
 :page-description: A guide to configuring deployments to Amazon SageMaker and monitoring in the CircleCI releases UI.
 :icons: font
 :experimental:
@@ -16,7 +15,7 @@ This how-to guide walks you through the steps to set up and use the Amazon SageM
 
 For further information about the orb and the releases feature see the following:
 
-* xref:/release/releases-overview#[Releases overview]
+* xref:deploy/deploys-overview#[Releases overview]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
 * link:https://circleci.com/blog/amazon-sagemaker-deployment-orchestration/[**Blog post**: Using Amazon SageMaker orb to orchestrate model deployment across environments]
 
@@ -65,7 +64,7 @@ image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console
 . Under "Provider Type", select **OpenID Connect**
 . Enter your "Provider URL". This will be `\https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
 +
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/snippets/find-organization-id.adoc[]
 . Select **Get Thumbprint**.
 . For "Audience" enter your organization ID.
 . Select btn:[Add Provider].
@@ -194,7 +193,7 @@ image::deploy/role-arn.png[Screenshot showing location of Role ARN]
 
 The CircleCI Amazon SageMaker orb requires some environment variables to function. You can store these environment variables at the project level, or you can store them using a xref:contexts#[context]. The following steps show how to add the environment variables at the project level. You need to add two environment variables, as follows:
 
-* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:release/releases-overview#[CircleCI releases]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
+* `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:deploy/deploys-overview#[CircleCI deploys]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
 * `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
 
 . From the CircleCI web app, click **Dashboard** in the sidebar.
@@ -208,7 +207,7 @@ image::deploy/add-env-var.png[Screenshot showing add environment variable popup]
 [#set-up-config]
 == 4. Set up your CircleCI configuration
 
-Take a look at the `.circleci/config.yml` for the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples/blob/main/.circleci/config.yml[sample project]. There is a block of pipeline parameters at the top. You need to update the defaults with your values.
+Take a look at the `.circleci/config.yml` for the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples/blob/main/.circleci/config.yml[sample project]. In the block of pipeline parameters at the top, you need to update the defaults with your values.
 
 [source,yaml]
 ----
@@ -269,22 +268,22 @@ Every time you run this workflow by pushing to the `model-train` branch, anew mo
 [#using-tables]
 == 6. Use the orb
 
-Let's break down the `deploy-model-through-to-prod workflow`. Our first job is `aws-sagemaker/create_model`. This job creates a model from your latest Model Package in the registry. This will be what we then deploy to the inference endpoints. In general, `create-model` just needs to be called one time at the beginning of your workflow:
+Let's break down the `deploy-model-through-to-prod` workflow. Our first job is `aws-sagemaker/create_model`. This job creates a model from your latest Model Package in the registry. This will be what we then deploy to the inference endpoints. In general, `create-model` just needs to be called one time at the beginning of your workflow:
 
 [,yaml]
 ----
-- aws-sagemaker/create_model:
-    # job name that will show in Workflow DAG
-    name: create-model
-    # s3 bucket where asset will be stored
-    bucket: << pipeline.parameters.bucket >>
-    # Name of the model in SageMaker that we will be deploying.
-    model_name: << pipeline.parameters.model_name >>
-    # We use the pipeline.id as the unique identifier for some of the configs we create
-    circle_pipeline_id: << pipeline.id >>
-    # Region where we are deploying to
-    region_name: << pipeline.parameters.region_name >>
-    filters: *main-branch-only
+      - aws-sagemaker/create_model:
+          # job name that will show in Workflow DAG
+          name: create-model
+          # s3 bucket where asset will be stored
+          bucket: << pipeline.parameters.bucket >>
+          # Name of the model in SageMaker that we will be deploying.
+          model_name: << pipeline.parameters.model_name >>
+          # We use the pipeline.id as the unique identifier for some of the configs we create
+          circle_pipeline_id: << pipeline.id >>
+          # Region where we are deploying to
+          region_name: << pipeline.parameters.region_name >>
+          filters: *main-branch-only
 ----
 
 * Aside from `name` and `filters`, all other parameters are passed in from our pipeline parameters.
@@ -295,17 +294,16 @@ Next, we need to create the endpoint configuration, this happens in the job `aws
 
 [,yaml]
 ----
-- aws-sagemaker/create_endpoint_configuration:
-    name: dev:create-model-endpoint-config
-    bucket: << pipeline.parameters.bucket >>
-    deploy_environment: dev
-    model_name: << pipeline.parameters.model_name >>
-    circle_pipeline_id: << pipeline.id >>
-    circle_project_id: << pipeline.parameters.project_id >>
-    region_name: << pipeline.parameters.region_name >>
-    requires:
-        - create-model
-    filters: *main-branch-only
+      - aws-sagemaker/create_endpoint_configuration:
+          name: dev:create-model-endpoint-config
+          bucket: << pipeline.parameters.bucket >>
+          model_name: << pipeline.parameters.model_name >>
+          circle_pipeline_id: << pipeline.id >>
+          circle_project_id: << pipeline.parameters.project_id >>
+          region_name: << pipeline.parameters.region_name >>
+          requires:
+              - create-model
+          filters: *main-branch-only
 ----
 
 * `deploy_environment` is an arbitrary string you can use to bucket your model releases, for example, `dev`, `staging`, `testing`, `prod`. In our example config, you can see we are only using two, `dev` and `prod`.
@@ -314,19 +312,18 @@ Next, we need to push out the updated configuration, this happens in the job `aw
 
 [,yaml]
 ----
-    - aws-sagemaker/deploy_endpoint:
-        name: dev:deploy-model-to-endpoint
-        bucket: << pipeline.parameters.bucket >>
-        deploy_environment: dev
-        model_name: << pipeline.parameters.model_name >>
-        # Description for the model. q: can we make it optional?
-        model_desc: << pipeline.parameters.model_desc >>
-        pipeline_id: << pipeline.id >>
-        # You can find this value in the Project Settings in CircleCI
-        project_id: << pipeline.parameters.project_id >>
-        region_name: << pipeline.parameters.region_name >>
-        requires:
-            - dev:create-model-endpoint-config
+      - aws-sagemaker/deploy_endpoint:
+          name: dev:deploy-model-to-endpoint
+          bucket: << pipeline.parameters.bucket >>
+          model_name: << pipeline.parameters.model_name >>
+          # Description for the model. q: can we make it optional?
+          circle_pipeline_id: << pipeline.id >>
+          circle_project_id: << pipeline.parameters.project_id >>
+          model_desc: << pipeline.parameters.model_desc >>
+          # You can find this value in the Project Settings in CircleCI
+          region_name: << pipeline.parameters.region_name >>
+          requires:
+              - dev:create-model-endpoint-config
         filters: *main-branch-only
 ----
 
@@ -336,11 +333,10 @@ Next, is an approval job. This stops the workflow from deploying to production u
 
 [,yaml]
 ----
-- promote-model-to-prod-endpoint:
-        type: approval
-    requires:
-        - dev:deploy-model-to-endpoint
-    filters: *main-branch-only
+      - promote-model-to-prod-endpoint:
+          type: approval
+          requires:
+            - dev:deploy-model-to-endpoint
 ----
 
 image::deploy/job-approval.png[Approval job]
@@ -352,7 +348,7 @@ The CircleCI release UI offers you a single pane of glass to monitor all your de
 
 image::deploy/sagemaker-releases.png[Releases dashboard]
 
-Aelect the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
+Select the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
 
 image::deploy/sagemaker-component-view.png[Releases component view]
 

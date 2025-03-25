@@ -103,7 +103,7 @@ en:
       - name: Webhooks reference
         link: webhooks-reference
       - name: Frequently asked questions
-        link: FAQ
+        link: faq
       - name: Troubleshoot
         link: troubleshoot
 
@@ -112,7 +112,7 @@ en:
     children:
       - name: Orchestrate
         children:
-          - name: Pipelines overview
+          - name: Pipelines and triggers overview
             link: pipelines
           - name: Jobs and steps
             link: jobs-steps
@@ -126,18 +126,24 @@ en:
             link: skip-build
           - name: Pipeline values and parameters
             link: pipeline-variables
+      - name: Trigger
+        children:
+          - name: Trigger a pipeline
+            link: triggers-overview
+          - name: GitHub trigger event options
+            link: github-trigger-event-options
+          - name: GitLab trigger options
+            link: gitlab-trigger-options
+          - name: Webhook integration
+            link: webhooks
       - name: Schedule
         children:
           - name: Scheduled pipelines
             link: scheduled-pipelines
-      - name: Trigger
-        children:
-          - name: Triggers overview
-            link: triggers-overview
-          - name: Webhook integration
-            link: webhooks
       - name: How-to guides
         children:
+          - name: Orchestration cookbook
+            link: orchestration-cookbook
           - name: Set up multiple configuration files for a project
             link: set-up-multiple-configuration-files-for-a-project
           - name: Notify a Slack channel of a paused workflow
@@ -362,12 +368,28 @@ en:
   - name: Deploy
     icon: icons/sidebar/getting-started-new.svg
     children:
-      - name: Deployment
+      - name: Overview
         children:
-          - name: Deployment overview
+          - name: Deploys overview
+            link: deploy/deploys-overview
+          - name: Overview of deployment on CircleCI
             link: deployment-overview
-      - name: How-to guides
+      - name: Set up
         children:
+          - name: Set up CircleCI deploys
+            link: deploy/set-up-circleci-deploys
+          - name: Manual install - Set up the release agent
+            link: deploy/set-up-the-release-agent
+          - name: Manual install - Configure your Kubernetes components
+            link: deploy/configure-your-kubernetes-components
+      - name: How to
+        children:
+          - name: Manage deploys
+            link: deploy/manage-deploys
+          - name: Configure deploy markers
+            link: deploy/configure-deploy-markers
+          - name: Update the Kubernetes deploy agent
+            link: deploy/update-the-kubernetes-release-agent
           - name: Deploy to Amazon SageMaker
             link: deploy-to-amazon-sagemaker
           - name: Deploy Android applications
@@ -377,7 +399,7 @@ en:
           - name: Deploy to AWS
             link: deploy-to-aws
           - name: Push image to ECR and deploy to ECS
-            link: ecr-ecs
+            link: ecs-ecr
           - name: Deploy to Azure Container Registry
             link: deploy-to-azure-container-registry
           - name: Deploy to Capistrano
@@ -399,29 +421,6 @@ en:
           - name: Publish to NPM registry
             link: deploy-to-npm-registry
 
-  - name: Release
-    icon: icons/sidebar/release.svg
-    children:
-      - name: Overview
-        children:
-          - name: Releases overview
-            link: release/releases-overview
-      - name: Set up
-        children:
-          - name: Set up CircleCI releases
-            link: release/set-up-circleci-releases
-          - name: Manual install - Set up the release agent
-            link: release/set-up-the-release-agent
-          - name: Manual install - Configure your Kubernetes components
-            link: release/configure-your-kubernetes-components
-      - name: How to
-        children:
-          - name: Manage releases
-            link: release/manage-releases
-          - name: Configure release markers
-            link: release/configure-release-markers
-          - name: Update the Kubernetes release agent
-            link: release/update-the-kubernetes-release-agent
 
   - name: Optimize
     icon: icons/sidebar/sparkle.svg

@@ -1,13 +1,12 @@
 ---
-description: This is document provides examples of deploying to Amazon Web Services.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Deploy to AWS
+:page-description: This is document provides examples of deploying to Amazon Web Services.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -47,13 +46,13 @@ Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.h
 
 Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@3.1.1 # use the AWS S3 orb in your configuration
+  aws-s3: circleci/aws-s3@4.1.0 # use the AWS S3 orb in your configuration
 
 workflows: # Define a Workflow running the build job, then the deploy job
   build-deploy: # Make a workflow to build and deploy your project
@@ -113,7 +112,7 @@ Install `awscli` in your primary container by following the link:https://docs.aw
 
 link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[Use the AWS CLI] to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `main`.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -155,14 +154,14 @@ The AWS ECR orb enables you to log into AWS, build, and then push a Docker image
 
 Using the `build_and_push_image` job (shown below) requires the following environment variables to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@9.3.6 # Use the AWS ECR orb in your configuration
-  aws-cli: circleci/aws-cli@5.1.1 # Use the AWS CLI orb in your configuration
+  aws-ecr: circleci/aws-ecr@9.3.7 # Use the AWS ECR orb in your configuration
+  aws-cli: circleci/aws-cli@5.1.2 # Use the AWS CLI orb in your configuration
 
 workflows:
   build_and_push_image:
@@ -185,14 +184,14 @@ Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] a
 
 Using the `build-and-push-image` job (shown below) requires the following environment variables to be set: `OIDC-USER`, `AWS__DEFAULT_REGION`, `MY_APP_PREFIX`.
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: '2.1'
 orbs:
-  aws-cli: circleci/aws-cli@5.1.0
-  aws-ecr: circleci/aws-ecr@9.3.4
-  aws-ecs: circleci/aws-ecs@6.0.0
+  aws-cli: circleci/aws-cli@5.1.2
+  aws-ecr: circleci/aws-ecr@9.3.7
+  aws-ecs: circleci/aws-ecs@6.0.2
 workflows:
   build-and-deploy:
     jobs:

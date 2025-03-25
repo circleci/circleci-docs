@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
@@ -20,7 +19,7 @@ include::../_includes/partials/notes/server-api-examples.adoc[]
 
 The current categories of API v2 endpoints are:
 
-{% include snippets/api-v2-endpoints.adoc %}
+include::../_includes/snippets/api-v2-endpoints.adoc[]
 
 NOTE: Currently, xref:managing-api-tokens#creating-a-personal-api-token[Personal API tokens] are the only supported tokens on API v2. xref:managing-api-tokens#creating-a-project-api-token[Project tokens] are not currently supported on API v2.
 
@@ -455,7 +454,7 @@ For a more detailed breakdown of each value returned in this request, refer to t
 [#download-artifacts]
 === Download artifacts
 
-The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our link:{{site.baseurl}}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci[API v1.1 guide] -- keep checking back here as this functionality will be added to API v2 in the future.
+The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our xref:artifacts#downloading-all-artifacts-for-a-build-on-circleci[API v1.1 guide] -- keep checking back here as this functionality will be added to API v2 in the future.
 
 [#download-artifacts-steps]
 ==== Steps
@@ -469,7 +468,7 @@ export CIRCLE_TOKEN={your_api_token}
 
 . Retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
 +
-image::{{ site.baseurl }}/assets/img/docs/job-number.png[Job number]
+image::job-number.png[Job number]
 
 . Next, use the `curl` command to return a list of artifacts for a specific job.
 +
@@ -519,7 +518,7 @@ NOTE: `grep` is used to locate all the URLs for downloading the job artifacts, w
 [#gather-insights]
 === Gather insights
 
-The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the link:{{site.baseurl}}/insights[Using Insights] page to learn more about insights data.
+The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the xref:insights#[Using Insights] page to learn more about insights data.
 
 The example below describes how you can return information about a single workflow containing information about metrics and credit usage.
 

@@ -10,7 +10,7 @@ contentTags:
 :icons: font
 :experimental:
 
-{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 This page walks you through integrating a Bitbucket Data Center project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your Bitbucket Data Center project. CircleCI features that are in development for Bitbucket Data Center projects are detailed in the <<coming-soon>> section.
 
@@ -45,7 +45,7 @@ Integrate with CircleCI to access features for automated software delivery:
 .. Select btn:[Set Up Integration] next to Bitbucket Data Center.
 .. In the modal, enter your Bitbucket Data Center instance URL and your known_hosts. For guidance on generating known_hosts, see <<known-hosts>>.
 +
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab Self-Managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 .. Select btn:[Set Up Integration].
 .. Select the back arrow to exit **Organization Settings**.
@@ -92,7 +92,7 @@ For help with creating a CircleCI `config.yml`, see the following pages:
 
 Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+image::gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
 Make any further changes to your CircleCI config in your Bitbucket Data Center repository. Editing an existing CircleCI configuration within the web app is not currently available.
 

@@ -19,7 +19,7 @@ A common scenario you might want to set up is to trigger a pipeline overnight. T
 
 In your desired project, navigate to **Project Settings > Triggers** to see the form for specifying a schedule for a trigger.
 
-image::{{site.baseurl}}/assets/img/docs/pipelines-scheduled-trigger-form.png[Scheduled pipelines web app form]
+image::pipelines-scheduled-trigger-form.png[Scheduled pipelines web app form]
 
 The form allows you to schedule a trigger weekly or monthly. The weekly option (shown above) allows you to select specific days of the week. The monthly option allows you to select specific days of the month's calendar. With either option, you then specify which months of the year you would like the trigger to repeat.
 

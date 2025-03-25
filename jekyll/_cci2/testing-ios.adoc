@@ -6,7 +6,6 @@ contentTags:
 = Testing iOS applications on macOS
 :page-layout: classic-docs
 :page-description: Testing iOS applications on macOS.
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -25,7 +24,7 @@ Refer to xref:ios-codesigning#[iOS code signing projects] and xref:hello-world-m
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-{% include snippets/xcode-silicon-vm.adoc %}
+include::../_includes/snippets/xcode-silicon-vm.adoc[]
 
 [#getting-started]
 == Getting started
@@ -181,7 +180,7 @@ For more information on how to get started with Fastlane Match, visit the xref:i
 
 Our Xcode images ship with multiple versions of Ruby installed. The versions we install are the latest stable versions of Ruby, according to link:https://www.ruby-lang.org/en/downloads/[Ruby-Lang.org downloads page], at the time the image is built. The versions of Ruby that are installed in each image, along with the default Ruby selected for that image, are listed in the software manifests of each container (see <<supported-xcode-versions,supported Xcode versions>>).
 
-Installing gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, CircleCI advises using one of the alternative Rubies provided by Chruby (as configured by default in all images) for jobs.
+Installing gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, CircleCI advises using one of the alternative Rubies provided by chruby (as configured by default in all images) for jobs.
 
 [#switching-rubies-with-the-macos-orb]
 === Switching Rubies with the macOS orb
@@ -277,8 +276,6 @@ gem 'cocoapods', '= 1.3.0'
 
 Then you can install these using Bundler:
 
-{% raw %}
-
 [source,yaml]
 ----
 steps:
@@ -290,8 +287,6 @@ steps:
       paths:
         - vendor/bundle
 ----
-
-{% endraw %}
 
 You can then ensure you are using those, by prefixing commands with `bundle exec`:
 
@@ -374,7 +369,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 [#configuring-deployment]
 == Configuring deployment
 
-After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the link:/docs/deploy-ios-applications/[deploying iOS apps guide].
+After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the xref:deploy-ios-applications#[deploying iOS apps guide].
 
 [#troubleshooting]
 == Troubleshooting

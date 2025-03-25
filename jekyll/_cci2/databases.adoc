@@ -1,0 +1,148 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Configure databases
+:page-description: This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
+:experimental:
+:icons: font
+:page-layout: classic-docs
+
+This page describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
+
+[#overview]
+== Introduction
+
+CircleCI provides pre-built images (Docker and VM) for languages and services, like databases, with commonly-used tools preinstalled. For a full list, see the link:https://circleci.com/developer/images[CircleCI Developer Hub].
+
+When configuring a job, the first executor you select is the primary container. The primary container is where all execution occurs. You can add additional containers to the job, these are service, or secondary containers.
+
+The example in the next section shows a xref:configuration-reference#[CircleCI configuration] file with the following:
+
+* One job named `build`.
+* Docker is selected for the execution environment.
+* The first image is the primary container where all execution occurs. The first image is the CircleCI Python image. The Python image has `pip` installed and `-browsers` for browser testing.
+* The second image specified is for a service container. The service image gives access to additional services, like databases.
+
+[#postgresql-database-testing-example]
+== PostgreSQL database testing example
+
+In the primary image, the config defines an environment variable with the `environment` key, giving it a URL. The URL tells it that it is a PostgreSQL database, so it will default to the PostgreSQL default port. This pre-built CircleCI image includes a database and a user already. The username is `postgres` and database is `circle_test`. You can begin with using that user and database without having to set it up yourself.
+
+Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
+
+include::../_includes/snippets/docker-auth.adoc[]
+
+[,yml]
+----
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: postgres
+----
+
+[,yml]
+----
+version: 2.1
+
+jobs:
+  build:
+
+    # Primary container image where all commands run
+    docker:
+      - image: cimg/python:3.10
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
+
+    # Service container image
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: postgres
+
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
+----
+
+The `steps` run `checkout` first, then install the PostgreSQL client tools. The `cimg/postgres:14.0` image doesn't install any client-specific database adapters. For example, for Python, you might install link:https://www.psycopg.org/[`psycopg2`] so that you can interface with the PostgreSQL database.
+
+In this example, the config installs the PostgreSQL client tools, `postgresql-client` via `apt-get`, to get access to `psql`. Installing packages in images requires administrator privileges, therefore `sudo` is used - a password is not required.
+
+Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
+
+NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the xref:variables#built-in-environment-variables[Project values and variables] document for details.
+
+When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
+
+[#optional-customization]
+== Optional customization
+
+This section describes additional optional configuration for further customizing your build and avoiding race conditions.
+
+[#using-binaries]
+=== Using binaries
+
+To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
+
+[,yml]
+----
+    steps:
+    # Add the Postgres 12.0 binaries to the path.
+       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
+----
+
+[#using-dockerize-to-wait-for-dependencies]
+=== Using dockerize to wait for dependencies
+
+Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
+Following is an example of how to do this in your CircleCI config file:
+
+[,yml]
+----
+version: 2.1
+jobs:
+  build:
+    working_directory: /your/workdir
+    docker:
+      - image: your/image_for_primary_container
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: your_postgres_user
+          POSTGRES_DB: your_postgres_test
+    steps:
+      - checkout
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.6.1
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+----
+
+It is possible to apply the same principle for the following databases:
+
+* MySQL: `dockerize -wait tcp://localhost:3306 -timeout 1m`
+
+* Redis: `dockerize -wait tcp://localhost:6379 -timeout 1m`
++
+Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redis-cli ping 2>/dev/null ; do sleep 1 ; done`
+
+* Other services, such as web servers: `+dockerize -wait http://localhost:80 -timeout 1m+`
+
+[#see-also]
+== See also
+
+Refer to the xref:postgres-config#[Database Configuration Examples] document for additional configuration file examples.

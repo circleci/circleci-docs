@@ -1,0 +1,782 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Sample config.yml Files
+:description: Sample config.yml File
+:experimental:
+:icons: font
+:page-layout: classic-docs
+
+This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:configuration-reference#[Configuration reference] page.
+
+If you would like to get set up quickly, see our language-specific quickstart guides:
+
+* xref:language-javascript#[Node]
+* xref:language-python#[Python]
+* xref:language-go#[Go]
+
+== Tools for editing configuration files
+
+CircleCI has created an xref:vs-code-extension-overview#[extension for Visual Studio Code] that reduces context switching between the web app and VS Code through a set of helpful features.
+
+The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
+
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace].
+
+[#simple-configuration-examples]
+== Simple configuration examples
+
+include::../_includes/snippets/docker-auth.adoc[]
+
+[#concurrent-workflow]
+=== Concurrent workflow
+
+The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
+
+* Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[Developer Hub convenience images] page to find out about available Docker images for running your jobs.
+
+This image shows the workflow view for the following configuration example:
+
+image::concurrent-workflow-map.png[Concurrent Workflow Graph]
+
+[,yaml]
+----
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+----
+
+[#sequential-workflow]
+=== Sequential workflow
+
+The configuration example below shows a sequential workflow where the `build` job runs, and then the `test` job runs once `build` has completed. Configure sequential workflows using the xref:configuration-reference#requires[`requires` key], and specifying the `test` job "requires" the `build` job in order to run. Both jobs are run in Docker containers using the base image provided by CircleCI.
+
+* Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
+
+This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
+
+image::sequential-workflow-map.png[Sequential Workflow Graph]
+
+[,yaml]
+----
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+----
+
+[#approval-job]
+=== Approval job
+
+The example below shows a sequential workflow with an xref:configuration-reference#type[approval job]. Use an approval job to require manual approval before downstream jobs may proceed.
+
+[,yaml]
+----
+version: 2.1
+
+executors: # Define an executor
+  my-executor:
+    docker:
+      - image: cimg/base:2024.01
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    executor: my-executor
+    steps:
+      - checkout
+      - run: echo "build"
+  test:
+    executor: my-executor
+    steps:
+      - checkout
+      - run: echo "test"
+  deploy:
+    executor: my-executor
+    steps:
+      - checkout
+      - run: echo "deploy"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy:
+          requires:
+            - hold
+----
+
+The workflow runs as follows:
+
+. `build` job runs
+. `test` job runs
+. `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app
+. Once `hold` job is approved the `deploy` job runs
+
+An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration devise.
+
+The image below shows the workflow view for the following configuration example. This image has three parts to show:
+
+* The workflow graph with the `hold` job paused
+* The "Needs Approval" popup that appears when you click on a hold job
+* The workflow view again once the `hold` job has been approved and the `deploy` job has run
+
+image::approval-workflow-map.png[Approval Workflow Graph]
+
+* Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
+
+=== Hello world
+
+[,yml]
+----
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
+jobs:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
+    docker:
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
+workflows:
+  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - say-hello
+----
+
+[#sample-configuration-with-sequential-workflow]
+== Sample configuration with sequential workflow and secondary Docker container
+
+Following is a sample `.circleci/config.yml` file using the following configuration features:
+
+* A sequential workflow
+* An orb
+* A secondary services container
+* Workspaces
+* Storing artifacts
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      - checkout
+      # Install the latest npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      - node/install-packages:
+          app-dir: ~/mern-starter
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    docker:
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      - image: cimg/node:current
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:4.2
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Demonstrate that Mongo DB is available as localhost
+          command: |
+            curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt update
+            sudo apt install mongodb-org
+            mongo localhost --eval "db.serverStatus()"
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+----
+
+This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the xref:workflows#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+[#sample-configuration-with-fan-infan-out-workflow]
+== Sample configuration with fan-in/fan-out workflow
+
+Below are two sample configurations for a Fan-in/Fan-out workflow.
+
+image::fan-in-out-example.png[Fan-in-out]
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+    docker: circleci/docker@1.0.1
+
+jobs:
+    prepare-dependencies:
+        docker:
+            - image: node:current-alpine
+        steps:
+            - checkout
+            - run:
+                  name: Compute version number
+                  command: echo "0.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}" | tee version.txt
+            - restore_cache:
+                  keys:
+                      - yarn-deps-{{ checksum "yarn.lock" }}
+                      - yarn-deps
+            - run:
+                  name: yarn install
+                  command: yarn install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: yarn-deps-{{ checksum "yarn.lock" }}-{{ epoch }}
+            - store_artifacts:
+                  path: yarn.lock
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-production:
+        docker:
+            - image: node:current-alpine
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Production build
+                  command: |
+                      export __BUILD_VERSION="$(cat version.txt)"
+                      yarn build
+            - store_artifacts:
+                  path: dist/server.js
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-docker-image:
+        machine:
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/build:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+
+    test:
+        docker:
+            - image: node:current-alpine
+        parallelism: 2
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Run tests
+                  command: |
+                      circleci tests glob '**/*.test.ts' | circleci tests split --split-by timings | xargs yarn test:ci
+            - store_artifacts:
+                  path: test-results
+            - store_test_results:
+                  path: test-results
+
+    deploy-docker-image:
+        machine:
+            image: ubuntu-2004:current
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/pull:
+                  images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
+            - run:
+                  name: Tag the image as latest
+                  command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: latest
+                  registry: $DOCKER_REGISTRY
+
+workflows:
+    build-test-deploy:
+        jobs:
+            - prepare-dependencies
+            - build-production:
+                  requires:
+                      - prepare-dependencies
+            - build-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-production
+            - test:
+                  requires:
+                      - prepare-dependencies
+            - deploy-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-docker-image
+                      - test
+----
+
+NOTE: A job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
+
+[#sample-configuration-with-multiple-executor-types]
+== Sample configuration with multiple executor types
+
+It is possible to use multiple xref:executor-intro#[executor types]
+in the same workflow.
+
+In `Example-1` each push will build and test the project on Linux, Windows and macOS.
+
+In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools (link:https://github.com/realm/SwiftLint[SwiftLint] and link:https://github.com/danger/danger[Danger]) will be run in Docker.
+
+[tab.multiple-executors.Example_1]
+--
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  github-release: haskell-works/github-release@1.3.3
+
+parameters:
+  src-repo-url:
+    type: string
+    default: https://github.com/esnet/iperf.git
+  branch-name:
+    type: string
+    default: "3.8.1"
+  common-build-params:
+    type: string
+    default: "--disable-shared --disable-static"
+
+jobs:
+  build-linux:
+    docker:
+      - image: archlinux/base
+    parameters:
+      label:
+        type: string
+        default: iperf3-linux
+    steps:
+      - run:
+          name: Install dependencies
+          command: pacman -Syu --noconfirm openssl git gcc make awk tar
+      - run:
+          name: Clone iperf3
+          command: git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
+      - run:
+          name: Build iperf3
+          working_directory: iperf
+          command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
+            IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
+            ./configure --prefix=$IPERF3_MAKE_PREFIX << pipeline.parameters.common-build-params >>
+            make
+            mkdir -p $IPERF3_MAKE_PREFIX
+            make install
+      - run:
+          name: Create a tarball
+          command: tar -cJf << parameters.label >>.tar.xz << parameters.label >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.tar.xz
+      - store_artifacts:
+          path: << parameters.label >>.tar.xz
+
+  build-windows:
+    machine:
+      image: windows-server-2019-vs2019:stable
+      shell: powershell.exe
+    resource_class: windows.medium
+    parameters:
+      label:
+        type: string
+        default: iperf3-cygwin64
+    steps:
+      - run:
+          name: Download Cygwin installer
+          shell: bash.exe
+          command: |
+            curl -sSJOL https://cygwin.com/setup-x86_64.exe
+      - run:
+          name: Install Cygwin and required packages
+          command: .\setup-x86_64.exe -q -s https://mirrors.kernel.org/sourceware/cygwin/ -P libssl-devel,git,gcc-core,make
+      - run:
+          name: Build iperf3 with Cygwin
+          shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
+          command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
+            IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
+            cd $CIRCLE_WORKING_DIRECTORY
+            git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
+            cd iperf
+            ./configure --prefix=$IPERF3_MAKE_PREFIX << pipeline.parameters.common-build-params >>
+            make
+            mkdir -p $IPERF3_MAKE_PREFIX
+            make install
+            cp /usr/bin/cygwin1.dll /usr/bin/cygcrypto-1.1.dll /usr/bin/cygz.dll -t $IPERF3_MAKE_PREFIX/bin
+      - run:
+          name: Create a Zip file
+          command: |
+            $ProgressPreference = "SilentlyContinue"
+            Compress-Archive .\\<< parameters.label >> .\\<< parameters.label >>.zip
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.zip
+      - store_artifacts:
+          path: << parameters.label >>.zip
+
+  build-macos:
+    macos:
+      xcode: 14.2.0
+    parameters:
+      label:
+        type: string
+        default: iperf3-macos
+    steps:
+      - run:
+          name: Clone iperf3
+          command: git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
+      - run:
+          name: Build iperf3
+          working_directory: iperf
+          command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
+            IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
+            ./configure --prefix=$IPERF3_MAKE_PREFIX --with-openssl=$(brew --prefix openssl) << pipeline.parameters.common-build-params >>
+            make
+            mkdir -p $IPERF3_MAKE_PREFIX
+            make install
+            # Postruns
+            cd $IPERF3_MAKE_PREFIX/bin
+            # Copy linked OpenSSL libraris to the current directory
+            # and tell the linker to refer to them
+            otool -L iperf3 | grep openssl | awk '{ print $1 }' | while read dylib
+            do
+              name=$(basename $dylib)
+              cp $dylib ./
+              chmod u+w $name
+              install_name_tool -change $dylib @executable_path/$name iperf3
+            done
+            # Modify libssl as well
+            otool -L libssl.1.1.dylib | grep openssl | awk '{ print $1 }' | while read dylib
+            do
+              install_name_tool -change $dylib @executable_path/$(basename $dylib) libssl.1.1.dylib
+            done
+      - run:
+          name: Create a Zip file
+          command: zip -r << parameters.label >>.zip << parameters.label >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.zip
+      - store_artifacts:
+          path: << parameters.label >>.zip
+
+  test-linux:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      label:
+        type: string
+        default: iperf3-linux
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract << parameters.label >>.tar.xz
+          command: tar -xf << parameters.label >>.tar.xz
+      - run:
+          name: Test executable
+          command: << parameters.label >>/bin/iperf3 -v
+      - run:
+          name: Run as a server
+          command: << parameters.label >>/bin/iperf3 -s
+          background: true
+      - run:
+          name: Run as a client
+          command: << parameters.label >>/bin/iperf3 -c localhost -R
+
+  test-windows:
+    machine:
+      image: windows-server-2019-vs2019:stable
+      shell: powershell.exe
+    resource_class: windows.medium
+    parameters:
+      label:
+        type: string
+        default: iperf3-cygwin64
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Extract iperf3-cygwin64.zip
+          command: |
+            $ProgressPreference = "SilentlyContinue"
+            Expand-Archive .\\<< parameters.label >>.zip .
+      - run:
+          name: Test executable
+          command: .\\<< parameters.label >>\bin\iperf3.exe -v
+      - run:
+          name: Run as a server
+          command: .\\<< parameters.label >>\bin\iperf3.exe -s
+          background: true
+      - run:
+          name: Run as a client
+          command: .\\<< parameters.label >>\bin\iperf3.exe -c localhost -R
+
+  test-macos:
+    macos:
+      xcode: 14.2.0
+    parameters:
+      label:
+        type: string
+        default: iperf3-macos
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Uninstall pre-installed OpenSSL
+          command: brew uninstall --ignore-dependencies openssl
+      - run:
+          name: Extract << parameters.label >>
+          command: unzip << parameters.label >>
+      - run:
+          name: Test executable
+          command: << parameters.label >>/bin/iperf3 -v
+      - run:
+          name: Run as a server
+          command: << parameters.label >>/bin/iperf3 -s
+          background: true
+      - run:
+          name: Run as a client
+          command: << parameters.label >>/bin/iperf3 -c localhost -R
+
+  release:
+    executor: github-release/default
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Compute version number
+          command: |
+            echo 'export IPERF3_BUILD_VERSION="<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"' | tee -a "$BASH_ENV"
+      - github-release/release:
+          tag: v$IPERF3_BUILD_VERSION
+          title: $IPERF3_BUILD_VERSION
+          artefacts-folder: .
+
+workflows:
+  build-test-release:
+    jobs:
+      - build-linux
+      - build-windows
+      - build-macos
+      - test-linux:
+          requires:
+            - build-linux
+      - test-windows:
+          requires:
+            - build-windows
+      - test-macos:
+          requires:
+            - build-macos
+      - release:
+          requires:
+            - test-linux
+            - test-windows
+            - test-macos
+          context: github
+          filters:
+            branches:
+              only: main
+----
+--
+
+[tab.multiple-executors.Example_2]
+--
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build-and-test:
+    macos:
+      xcode: 14.2.0
+    steps:
+      - checkout
+      - run:
+          name: Install CocoaPods
+          command: pod install --verbose
+      - run:
+          name: Build and run tests
+          command: fastlane scan
+          environment:
+            SCAN_DEVICE: iPhone 8
+            SCAN_SCHEME: WebTests
+      - store_test_results:
+          path: test_output/report.xml
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: scan-test-results
+      - store_artifacts:
+          path: ~/Library/Logs/scan
+          destination: scan-logs
+
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+    steps:
+      - checkout
+      - run: swiftlint lint --reporter junit | tee result.xml
+      - store_artifacts:
+          path: result.xml
+      - store_test_results:
+          path: result.xml
+
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+    steps:
+      - checkout
+      - run: danger
+
+workflows:
+  build-test-lint:
+    jobs:
+      - swiftlint
+      - danger
+      - build-and-test
+----
+--
+
+[#see-also]
+== See also
+
+* See the xref:concepts#configuration[Concepts document] and xref:workflows#[Workflows] for more details of the concepts covered in this example.
+* See the xref:configuration-reference#[Configuration Reference] document for full details of each individual configuration key.
+* See the xref:example-configs#[Example Public Repos] document for a list of public projects that use CircleCI.

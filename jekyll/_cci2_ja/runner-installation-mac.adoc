@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - クラウド
-  - Server v4.x
-  - Server v3.x
+  - Server v4.0 - v4.7
 ---
 = マシンランナーの macOS へのインストール
 :page-layout: classic-docs

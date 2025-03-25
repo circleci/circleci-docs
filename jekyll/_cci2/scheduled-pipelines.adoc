@@ -1,6 +1,4 @@
 ---
-layout: classic-docs
-short-title: Scheduled Pipelines
 contentTags:
   platform:
   - Cloud
@@ -30,7 +28,7 @@ NOTE: A scheduled pipeline can only be configured for one branch. If you need to
 [#introduction]
 == Introduction
 
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file. However, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file. However, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
 
 Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. Adding a parameter to a scheduled pipeline can be done in the web app in the triggers form while setting up a schedule. Any parameters set up in this manner must be added to your configuration file using the `parameters` key.
 

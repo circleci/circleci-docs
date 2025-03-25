@@ -423,7 +423,6 @@ suggested:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
 
@@ -690,7 +689,7 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | `type`
 | N
 | String
-| Job type, can be `build`, `release` or `approval`. If not specified, defaults to `build`.
+| Job type, can be `build`, `release`, `no-op`, or `approval`. If not specified, defaults to `build`.
 
 | `docker`
 | Y ^(1)^
@@ -755,11 +754,67 @@ Each job consists of the job's name as a key and a map as a value. A name should
 [#job-type]
 ==== `type`
 
-Configure a job type. Options are `release`, `approval`, `build` (default). If a type is not specified, the job defaults to a `build` type.
+Configure a job type. Options are `release`, `approval`, `no-op`, `build` (default).
 
-Jobs with the `release` type are used to xref:/release/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a release in the CircleCI releases UI. For full details, see the xref:/release/releases-overview#[Releases overview] page.
+If a type is not specified, the job defaults to a `build` type.
+
+**Example** of a job with a `build` type. `build` is the default type and does not need to be configured:
+
+[,yaml]
+----
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: xlarge
+    steps:
+      ... // other config
+----
+
+Jobs with the `release` type are used to xref:deploy/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a release in the CircleCI releases UI. For full details, see the xref:deploy/deploys-overview#[Releases overview] page.
+
+**Example** of a job with a `release` type:
+
+[,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: <my-service-release>
+----
+
+The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required.
+
+**Example** of a job with a `no-op` type:
+
+[,yaml]
+----
+jobs:
+  my-no-op-job:
+    type: no-op
+----
 
 The `approval` type is used to configure a manual approval step. No `job` configuration is required or allowed for an `approval` type job. The `approval` type is most commonly configured within a workflow rather than under the top-level `jobs` key. Only `approval` type jobs can have their `type` configured under `workflows`. See <<type,type under workflows section>> for full details.
+
+**Example** of a job with an `approval` type, configured under `workflows`:
+
+[,yaml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - test
+      - deploy:
+          requires:
+            - hold
+----
 
 '''
 
@@ -880,8 +935,7 @@ Configured by `docker` key which takes a list of maps:
 | Authentication for AWS Elastic Container Registry (ECR)
 |===
 
-For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
-This is because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
@@ -1210,21 +1264,21 @@ jobs:
 [#x86]
 ====== x86
 
-{% include snippets/docker-resource-table.adoc %}
+include::../_includes/snippets/docker-resource-table.adoc[]
 
 [#arm]
 ====== Arm
 
 *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
 
-{% include snippets/docker-arm-resource-table.adoc %}
+include::../_includes/snippets/docker-arm-resource-table.adoc[]
 
 '''
 
 [#linuxvm-execution-environment]
 ===== LinuxVM execution environment
 
-{% include snippets/machine-resource-table.adoc %}
+include::../_includes/snippets/machine-resource-table.adoc[]
 
 Example:
 
@@ -1260,7 +1314,7 @@ jobs:
 [#macos-execution-environment]
 ===== macOS execution environment
 
-{% include snippets/macos-resource-table.adoc %}
+include::../_includes/snippets/macos-resource-table.adoc[]
 
 *Example*
 
@@ -1287,7 +1341,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 [#windows-execution-environment]
 ===== Windows execution environment
 
-{% include snippets/windows-resource-table.adoc %}
+include::../_includes/snippets/windows-resource-table.adoc[]
 
 Example:
 
@@ -1332,7 +1386,7 @@ jobs:
 [#gpu-execution-environment-linux]
 ===== GPU execution environment (Linux)
 
-{% include snippets/gpu-linux-resource-table.adoc %}
+include::../_includes/snippets/gpu-linux-resource-table.adoc[]
 
 Example:
 
@@ -1357,7 +1411,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 [#gpu-execution-environment-windows]
 ===== GPU execution-environment (Windows)
 
-{% include snippets/gpu-windows-resource-table.adoc %}
+include::../_includes/snippets/gpu-windows-resource-table.adoc[]
 
 Example:
 
@@ -1382,7 +1436,7 @@ jobs:
 [#arm-execution-environment-linux]
 ===== Arm VM execution-environment
 
-{% include snippets/arm-resource-table.adoc %}
+include::../_includes/snippets/arm-resource-table.adoc[]
 
 Example:
 
@@ -1482,7 +1536,7 @@ Each built-in step is described in detail below.
 [#run]
 ===== *`run`*
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any `dotfiles` as part of the command.
 
 NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:migrate-from-deploy-to-run#[Migrate from deploy to run].
 
@@ -1586,7 +1640,7 @@ So if in the previous example `mkdir` failed to create a directory and returned 
 `-o pipefail`
 
 ____
-If pipefail is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
+If `pipefail` is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 ____
 
 For example:
@@ -1604,7 +1658,7 @@ If you want to avoid this behaviour, you can specify `set +o pipefail` in the co
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
-For more information, see the link:{{ site.baseurl }}/using-shell-scripts/[Using Shell Scripts] document.
+For more information, see the xref:using-shell-scripts#[Using Shell Scripts] document.
 
 '''
 
@@ -1653,7 +1707,7 @@ Adding the `when` attribute to a job step allows you to override this default be
 
 The default value of `on_success` means that the step will run only if all of the previous steps have been successful (returned exit code 0).
 
-A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
+A value of `always` means that the step will run regardless of the exit status of previous steps. `always` is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts.
 
@@ -1885,28 +1939,28 @@ When storing a new cache, the `key` value may contain special, templated, values
 |===
 | Template | Description
 
-| {% raw %}`{{ .Branch }}`{% endraw %}
+| `{{ .Branch }}`
 | The VCS branch currently being built.
 
-| {% raw %}`{{ .BuildNum }}`{% endraw %}
+| `{{ .BuildNum }}`
 | The CircleCI build number for this build.
 
-| {% raw %}`{{ .Revision }}`{% endraw %}
+| `{{ .Revision }}`
 | The VCS revision currently being built.
 
-| {% raw %}`{{ .CheckoutKey }}`{% endraw %}
+| `{{ .CheckoutKey }}`
 | The SSH key used to checkout the repository.
 
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}
+| `{{ .Environment.variableName }}`
 | The environment variable `variableName` (supports any environment variable xref:env-vars#[exported by CircleCI] or added to a specific xref:contexts#[context]--not any arbitrary environment variable).
 
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}
+| `{{ checksum "filename" }}`
 | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repository and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It is important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 
-| {% raw %}`{{ epoch }}`{% endraw %}
+| `{{ epoch }}`
 | The current time in seconds since the UNIX epoch.
 
-| {% raw %}`{{ arch }}`{% endraw %}
+| `{{ arch }}`
 | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 |===
 
@@ -1914,9 +1968,9 @@ During step execution, the templates above will be replaced by runtime values an
 
 Template examples:
 
-* {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
-* {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
-* {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
+* `myapp-{{ checksum "package-lock.json" }}` - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+* `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - same as the previous one, but each branch will generate separate cache
+* `myapp-{{ epoch }}` - every run of a job will generate a separate cache
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 
@@ -1924,7 +1978,7 @@ NOTE: Given the immutability of caches, it might be helpful to start all your ca
 
 Example:
 
-{% raw %}
+
 
 [,yml]
 ----
@@ -1934,9 +1988,9 @@ Example:
       - /home/ubuntu/.m2
 ----
 
-{% endraw %}
 
-{% raw %}
+
+
 
 [,yml]
 ----
@@ -1947,7 +2001,7 @@ Example:
       - node_modules/workspace-c
 ----
 
-{% endraw %}
+
 
 [NOTE]
 ====
@@ -2020,7 +2074,7 @@ A path is not required here because the cache will be restored to the location f
 
 Example:
 
-{% raw %}
+
 
 [,yml]
 ----
@@ -2039,7 +2093,7 @@ Example:
       - /foo
 ----
 
-{% endraw %}
+
 
 '''
 
@@ -2104,7 +2158,7 @@ It is also possible to store test results as build artifacts. For steps, refer t
 | `path`
 | Y
 | String
-| Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML test metadata files, or to a single test file.
+| Path (absolute, or relative to your `working_directory`) to directory containing `JUnit` XML test metadata files, or to a single test file.
 |===
 
 Example:
@@ -2218,7 +2272,7 @@ NOTE: Everything must be relative to the work space root directory.
 [#attachworkspace]
 ===== *`attach_workspace`*
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the link:{{site.baseurl}}/workspaces/[Using workspaces] page.
+Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the xref:workspaces#[Using workspaces] page.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2435,7 +2489,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | `cron`
 | Y
 | String
-| See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[crontab man page].
+| See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[`crontab` man page].
 |===
 
 [,yml]
@@ -2559,14 +2613,9 @@ The example configuration below uses a pipeline parameter, `run_integration_test
 ----
 version: 2.1
 
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
 workflows:
   integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
+    when: pipeline.git.branch == "main"
     jobs:
       - mytestjob
 
@@ -2574,16 +2623,8 @@ jobs:
 ...
 ----
 
-This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
 
-[,json]
-----
-{
-    "parameters": {
-        "run_integration_tests": true
-    }
-}
-----
 
 Refer to the xref:workflows#[Workflows] for more examples and conceptual information.
 
@@ -2611,6 +2652,67 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 ===== *<``job_name``>*
 
 A job name that exists in your `config.yml`.
+
+'''
+====== `serial-group`
+
+The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control the orchestration of jobs across an organization, not just within projects and pipelines.
+
+The `serial-group` key is configurable per job. It is not possible to configure the key for a group of jobs at this time.
+
+The value of the `serial-group` key is a string that is used to group jobs together to run one after another. The key must meet the following requirements:
+
+* Must be less than or equal to (≤) 512 characters, once compiled.
+* Must not be blank.
+* Must consist of alphanumeric characters plus, `.`, `-`, `_`, `/`.
+
+Note the following features of serial groups:
+
+* You can use pipeline values and parameters in the `serial-group` key.
+* Serial groups will wait for five hours. After this jobs waiting in the group will be cancelled. This does not affect the standard limits that apply to a <<jobs,job's runtime>>.
+
+[CAUTION]
+====
+*Pipeline order protection in serial groups*
+
+Jobs in a serial group follow an order protection mechanism, as follows:
+
+* Jobs start in the order they join the queue, but are _accepted_ based on pipeline number.
+* If a group is waiting/running and another job in the same project attempts to join the queue with a lower pipeline number, the job is skipped.
+* This immediate skip process exists to maintain order integrity, which is a safety process to avoid unexpected work in a build, for example, a deployment job running a previous version unexpectedly.
+
+If there are no serial groups waiting/running, a pipeline with a lower number can start, such as restoring back to a previous pipeline via a rerun workflow.
+====
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `serial-group`
+| N
+| String
+| A string that is used across an org to group jobs together to run one after another. Can include pipeline values and parameters. Use this same serial group across multiple pipelines to control the orchestration of jobs across an organization.
+|===
+
+*Example:*
+
+[,yml]
+----
+# Creating multiple pipelines at the same time with the below config will results in
+# all pipelines running test and build but only a single pipeline will run deploy at a time.
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - build
+      - deploy:
+          serial-group: << pipeline.project.slug >>/deploy-group
+          requires:
+            - test
+            - build
+----
 
 '''
 
@@ -2685,7 +2787,7 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 [#context]
 ====== *`context`*
 
-Jobs may be configured to use global environment variables set for an organization, see the link:{{ site.baseurl }}/contexts[Contexts] document for adding a context in the application settings.
+Jobs may be configured to use global environment variables set for an organization, see the xref:contexts#[Contexts] document for adding a context in the application settings.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -3171,7 +3273,7 @@ Every job invocation in a workflow may optionally accept two special arguments: 
 
 Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
+Pre and post steps allow you to execute steps in a given job without modifying the job. Pre and post steps are useful, for example, to run custom setup steps before job execution.
 
 [,yaml]
 ----
@@ -3225,12 +3327,12 @@ includes:
 | resolves to a truthy value
 | *my-alias
 
-| link:{{site.baseurl}}/pipeline-variables/#pipeline-values[Pipeline Value]
+| xref:pipeline-variables#pipeline-values[Pipeline Value]
 | None
 | resolves to a truthy value
 | `<< pipeline.git.branch >>`
 
-| link:{{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration[Pipeline Parameter]
+| xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline Parameter]
 | None
 | resolves to a truthy value
 | `<< pipeline.parameters.my-parameter >>`
@@ -3355,9 +3457,9 @@ workflows:
 [#example-full-configuration]
 == Example full configuration
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -3472,4 +3574,4 @@ workflows:
               only: main
 ----
 
-{% endraw %}
+

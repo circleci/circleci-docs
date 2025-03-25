@@ -33,7 +33,7 @@ If you have not already done so, link:https://cloud.google.com/iam/docs/service-
 
 Then, link:https://cloud.google.com/docs/authentication/provide-credentials-adc#wlif-key[create a service account key]. You may store the key file contents in your project's environment variables (in this guide, we name the project environment variable `$SA_KEY`). Refer to the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] guide for instructions. CircleCI will use this credential to authenticate with Firebase.
 
-{% include snippets/env-var-or-context.adoc %}
+include::../_includes/snippets/env-var-or-context.adoc[]
 
 NOTE: Review the link:https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys[Google IAM documentation] for best practices in managing service account keys.
 
@@ -46,11 +46,11 @@ NOTE: Review the link:https://cloud.google.com/iam/docs/best-practices-for-manag
 
 [source,yaml]
 ----
-      - run:
-          name: Deploy on Firebase
-          command: |
-            echo $SA_KEY > credentials.json
-            GOOGLE_APPLICATION_CREDENTIALS=credentials.json firebase deploy
+    - run:
+        name: Deploy on Firebase
+        command: |
+          echo $SA_KEY > credentials.json
+          GOOGLE_APPLICATION_CREDENTIALS=credentials.json firebase deploy
 ----
 
 To learn more about how Google finds application credentials, refer to the link:https://cloud.google.com/docs/authentication/application-default-credentials#GAC[documentation for Google Cloud authentication].
@@ -64,16 +64,23 @@ The following example shows how you can add a Firebase deploy job to your projec
 ----
 version: 2.1
 
-deploy-job:
-  docker:
-    - image: <docker-image-name-tag>
-  working_directory: /tmp/my-project
-  steps:
-    - run:
-        name: Deploy on Firebase
-        command: |
-          echo $SA_KEY > credentials.json
-          GOOGLE_APPLICATION_CREDENTIALS=credentials.json firebase deploy
+jobs:
+  build-job:
+    docker: # Specify executor for running build-job - this example uses a Docker container
+      - image: <docker-image-name-tag> # Specify docker image to use
+    steps:
+      # steps omitted for brevity
+
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Deploy on Firebase
+          command: |
+            echo $SA_KEY > credentials.json
+            GOOGLE_APPLICATION_CREDENTIALS=credentials.json firebase deploy
 
 workflows:
   deploy:

@@ -24,7 +24,7 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * Bitbucket Cloud
 * Bitbucket Data Center
 +
-{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
@@ -46,7 +46,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
 | [.circle-green]#**Yes**#
@@ -84,8 +84,17 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 
-| xref:enable-checks#[GitHub Checks]
-| [.circle-red]#**No**#
+| xref:enable-checks#github-check-and-github-status-updates[Status Updates]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes** ^4^#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| xref:enable-checks#[GitHub Checks] ^3^
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
@@ -98,12 +107,17 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 
+^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
+
+^4^ _Bitbucket Cloud status updates can be enabled and disabled via project settings._
+
+
 === Pipeline triggers and integrations
 
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
 | xref:webhooks#custom-webhooks[Custom _inbound_ webhook triggers]
 | [.circle-green]#**Yes**#
@@ -115,7 +129,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No**#
 
 | xref:scheduled-pipelines#[Scheduled pipelines]
-| [.circle-red]#**No**# ^1^
+| [.circle-red]#**No** ^1^#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
@@ -141,6 +155,15 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
+| xref:triggers-overview/#run-a-pipeline-on-commit-to-your-code-repository[Trigger pipelines on non-push events]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes** ^3^#
+| [.circle-green]#**Yes** ^3^#
+| [.circle-green]#**Yes** ^4^#
+| [.circle-green]#**Yes** ^4^#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
 | xref:webhooks#outbound-webhooks[Outbound webhooks]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -155,12 +178,16 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 
+^3^ _For GitLab Cloud and GitLab self-managed projects, you can choose to trigger pipelines upon the creation of merge requests, by selecting the *Only Build Merge Requests* trigger filter._
+
+^4^ _For GitHub OAuth and Bitbucket Cloud projects, you can choose to trigger pipelines upon the creation of pull requests, by enabling the *Only build pull requests* option on the menu:Project Settings[Advanced] page of your project._
+
 === Core capabilities
 
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:artifacts#[Artifact storage]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -261,7 +288,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No**#
 
 | xref:oss#only-build-pull-requests[Only build pull requests]
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -276,7 +303,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:openid-connect-tokens#[OpenID Connect tokens]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -304,7 +331,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref:contexts#security-goup-restrictions[Security group context restriction]
+| xref:contexts#security-group-restrictions[Security group context restriction]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -328,7 +355,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 [.table.table-striped]
 [cols=8*, options="header", stripes=even]
 |===
-| Feature | GitHub App | GitLab | GitLab Self-Managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
 | xref:oss#[OSS support]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#

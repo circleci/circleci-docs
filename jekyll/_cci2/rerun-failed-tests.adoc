@@ -5,7 +5,6 @@ contentTags:
 ---
 = Rerun failed tests
 :page-layout: classic-docs
-:page-liquid:
 :page-description: How to rerun only failed tests in a job and optimize credit usage.
 :icons: font
 :experimental:
@@ -15,9 +14,9 @@ Use rerun failed tests to only rerun a subset of tests, instead of an entire tes
 [#introduction]
 == Introduction
 
-If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workkflow, not from subsequent commits.
+If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workflow, not from subsequent commits.
 
-image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
+image::rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
 Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:workflows#rerunning-a-workflows-failed-jobs[rerun your workflow from failed]. Rerun from failed executes *all tests*, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
 
@@ -584,7 +583,6 @@ NOTE: The `halt` command will execute the rest of the _current_ step, regardless
 +
 To ensure that code coverage reports from the original job run are persisted to an artifact in addition to the report that is generated on a re-run, see the following example for a sample Go project:
 +
-{% raw %}
 [source,yaml]
 ----
 jobs:
@@ -634,7 +632,6 @@ workflows:
     jobs:
       - test-go
 ----
-{% endraw %}
 +
 The snippet above uses the built-in xref:caching#[`.Revision`] key to store a coverage report for the current VCS revision.  On a successful rerun, the original job run's coverage report will be restored to include the coverage from the skipped (passed) tests. It can then be used in a downstream job for aggregation or analysis.
 +

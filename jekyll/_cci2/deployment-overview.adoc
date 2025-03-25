@@ -25,25 +25,25 @@ You can also configure CircleCI to integrate with other services for:
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
-NOTE: **Deploy to Kubernetes?** Refer to our xref:release/releases-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
+NOTE: **Deploy to Kubernetes?** Refer to our xref:deploy/deploys-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
 
 [#the-basics-of-deployment]
 == The basics of deployment
 
 Here are the core concepts you need to get a deployment set up:
 
-* **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require.
+* **Deployment job**: To deploy your application, add a xref:jobs-steps#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
-TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:release/configure-release-markers#[Release markers] guide to learn more.
+TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:deploy/configure-deploy-markers#[Release markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
 ** Defined within your configuration
 ** Added to the project itself through the CircleCI web app:
-*** Add project-level <<set-environment-variable#set-an-environment-variable-in-a-project,environment variables>>
-***  Add project-level <<add-ssh-key#,SSH keys>>
+*** Add project-level xref:set-environment-variable#set-an-environment-variable-in-a-project[environment variables]
+***  Add project-level xref:add-ssh-key#[SSH keys].
 
-* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job in your workflow.
+* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a xref:workflows#holding-a-workflow-for-a-manual-approval[hold/approve] job in your workflow.
 This job will create a manual approval button visible in the CircleCI web app workflows map.
 
 If you need to restrict connections, consider enabling xref:ip-ranges#[IP ranges] for your deployment job.
@@ -51,7 +51,7 @@ If you need to restrict connections, consider enabling xref:ip-ranges#[IP ranges
 [#using-orbs-to-simplify-deployment]
 == Using orbs to simplify deployment
 
-<<orb-intro#,Orbs>> are packages of reusable configuration.
+xref:orb-intro#[Orbs] are packages of reusable configuration.
 For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
 Orbs are available for many common deployment targets.
 
@@ -62,10 +62,13 @@ version: 2.1
 
 orbs:
   aws-code-deploy: circleci/aws-code-deploy@x.y
+  aws-cli: circleci/aws-cli@x.z
 workflows:
   deploy_application:
     jobs:
       - aws-code-deploy/deploy:
+          auth:
+            - aws-cli/setup
           application-name: myApplication
           bundle-bucket: myApplicationS3Bucket
           bundle-key: myS3BucketKey
@@ -75,7 +78,7 @@ workflows:
 
 Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider <<orb-author-intro#,authoring one>>!
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:orb-author-intro#[authoring one]!
 
 [#using-images-to-simplify-deployment]
 == Using images to simplify deployment
@@ -95,22 +98,22 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 Use the following how-to guides to manage common deployment use cases:
 
 * For examples of deploying to Kubernetes, see the guides in the link:https://github.com/CircleCI-Public/cd-config-examples/blob/main/docs/cci_deploy/deployment_helm.md[Continuous deployment config examples] repo.
-* <<deploy-to-amazon-sagemaker#,Deploy to Amazon SageMaker>>
-* <<deploy-android-applications#,Deploy Android applications>>
-* <<deploy-to-artifactory#,Deploy to Artifactory>>
-* <<deploy-to-aws#,Deploy to AWS>>
-* <<deploy-service-update-to-aws-ecs#,Deploy to AWS ECS>>
-* <<ecs-ecr#,Deploy to AWS ECR/ECS>>
-* <<deploy-to-azure-container-registry#,Deploy to Azure Container Registry>>
-* <<deploy-to-capistrano#,Deploy to Capistrano>>
-* <<deploy-to-cloud-foundry#,Deploy to Cloud Foundry>>
-* <<deploy-to-firebase#,Deploy to Firebase>>
-* <<deploy-to-google-cloud-platform#,Deploy to Google Cloud Platform>>
-* <<deploy-to-heroku#,Deploy to Heroku>>
-* <<deploy-ios-applications#,Deploy iOS applications>>
-* <<deploy-to-npm-registry#,Deploy to npm registry>>
-* <<deploy-over-ssh#,Deploy over SSH>>
-* <<authorize-google-cloud-sdk#,Authorize Google Cloud SDK>>
-* <<publish-packages-to-packagecloud#,Publish packages to Packagecloud>>
+* xref:deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker]
+* xref:deploy-android-applications#[Deploy Android applications]
+* xref:deploy-to-artifactory#[Deploy to Artifactory]
+* xref:deploy-to-aws#[Deploy to AWS]
+* xref:deploy-service-update-to-aws-ecs#[Deploy to AWS ECS]
+* xref:ecs-ecr#[Deploy to AWS ECR/ECS]
+* xref:deploy-to-azure-container-registry#[Deploy to Azure Container Registry]
+* xref:deploy-to-capistrano#[Deploy to Capistrano]
+* xref:deploy-to-cloud-foundry#[Deploy to Cloud Foundry]
+* xref:deploy-to-firebase#[Deploy to Firebase]
+* xref:deploy-to-google-cloud-platform#[Deploy to Google Cloud Platform]
+* xref:deploy-to-heroku#[Deploy to Heroku]
+* xref:deploy-ios-applications#[Deploy iOS applications]
+* xref:deploy-to-npm-registry#[Deploy to npm registry]
+* xref:deploy-over-ssh#[Deploy over SSH]
+* xref:authorize-google-cloud-sdk#[Authorize Google Cloud SDK]
+* xref:publish-packages-to-packagecloud#[Publish packages to Packagecloud]
 
 Go to the link:https://circleci.com/developer/orbs[orbs registry] to simplify your configuration by using an orb for your deployment target.

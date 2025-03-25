@@ -1,13 +1,12 @@
 ---
-description: This is document provides examples of deploying to Heroku.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Deploy to Heroku
+:page-description: This is document provides examples of deploying to Heroku.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -18,7 +17,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Hero
 
 link:https://www.heroku.com/[Heroku] is a popular platform for hosting applications in the cloud. To configure CircleCI to deploy your application to Heroku, follow the steps below.
 
-== Deploy with the Heroku orb
+== Using the Heroku orb
 
 [#create-account]
 === 1. Create an account
@@ -28,14 +27,16 @@ Create a Heroku account and follow the link:https://devcenter.heroku.com/start[G
 [#create-env-vars]
 === 2. Create environment variables
 
-Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
+Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+
+include::../_includes/snippets/env-var-or-context.adoc[]
 
 [#deploy-with-orb]
 === 3. Deploy with the Heroku orb
 
 Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your configuration simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
 
-{% include snippets/add-version-number.adoc %}
+include::../_includes/snippets/add-version-number.adoc[]
 
 ```yaml
 version: 2.1
@@ -54,7 +55,7 @@ workflows:
 
 For more detailed information about these Heroku orbs, refer to the link:https://circleci.com/developer/orbs/orb/circleci/heroku[CircleCI Heroku Orb].
 
-== Heroku deployment with 2.0 configuration
+== Deploy without the Heroku orb
 
 [#create-account-2]
 === 1. Create an account
@@ -64,7 +65,9 @@ Create a Heroku account and follow the link:https://devcenter.heroku.com/start[G
 [#create-env-vars-2]
 === 2. Create environment variables
 
-Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
+Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+
+include::../_includes/snippets/env-var-or-context.adoc[]
 
 [#create-deploy-job]
 === 3. Create deploy job
@@ -85,7 +88,7 @@ jobs:
       - image: <docker-image-name-tag>
     steps:
       - checkout
-    # build job ommitted for brevity
+      # Additional steps ommitted for brevity
   deploy:
     docker:
       - image: <docker-image-name-tag>
