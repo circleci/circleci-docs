@@ -2699,19 +2699,7 @@ If there are no serial groups waiting/running, a pipeline with a lower number ca
 
 [,yml]
 ----
-# Creating multiple pipelines at the same time with the below config will results in
-# all pipelines running test and build but only a single pipeline will run deploy at a time.
-
-workflows:
-  main-workflow:
-    jobs:
-      - test
-      - build
-      - deploy:
-          serial-group: << pipeline.project.slug >>/deploy-group
-          requires:
-            - test
-            - build
+include::../_includes/snippets/orchestration-examples/serial-group.yml[]
 ----
 
 '''
