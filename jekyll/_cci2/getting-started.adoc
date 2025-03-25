@@ -13,7 +13,7 @@ This quickstart provides a guided tour through setting up a project, collaborati
 
 * Create a project, connecting some existing code to CircleCI.
 * Inviting team members to collaborate on your new project.
-* Use the VS Code extention to debug and extend your config.
+* Use the VS Code extension to debug and extend your config.
 * SSH into a build to debug your project.
 
 If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:configuration-reference#[Configuration reference].
@@ -25,27 +25,30 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 
 pass:[<!-- vale off -->]
 ++++
-{%- capture header-banner-1 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
-{%- endcapture -%}
+<div class='section-header-wrapper'>
+  <h2 class='section-title' id="header-banner-1">1. Connect your code</h2>
+  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg" alt="header banner" />
+  <div class='content-wrapper'>
+    <span>
+      Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.
+    </span>
+  </div>
+</div>
+<br />
 
-{% capture content %} Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app. {% endcapture %}
-
-{% include getting-started-section-header.html title="1. Connect your code" content=content imagePath=header-banner-1 %}
-
-{%- capture github-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
-{%- endcapture -%}
-
-{%- capture bitbucket-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
-{%- endcapture -%}
-
-{%- capture gitlab-icon -%}
-  {{ site.baseurl }}/assets/img/icons/companies/gitlab-color.svg
-{%- endcapture -%}
-
-{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon gitlabPath=gitlab-icon %}
+<div class="banner-wrapper">
+  <div class="icon-container">
+    <img class='vcs-icon' src="/docs/assets/img/icons/companies/github-alt.svg" alt="Github Icon" />
+    <img class='vcs-icon' src="/docs/assets/img/icons/companies/bitbucket-alt.svg" alt="Bitbucket Icon" />
+    <img class='vcs-icon' src="/docs/assets/img/icons/companies/gitlab-color.svg" alt="GitLab Icon" />
+  </div>
+  <div class='text-container'>
+    <span>This guide assumes you have signed up and</span>
+    <a class="no-external-icon" href="https://circleci.com/docs/first-steps/"> connected to GitHub, Bitbucket or GitLab</a>
+  </div>
+</div>
+<br />
+<br />
 ++++
 
 include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
@@ -104,59 +107,61 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 [.tab.quickstart1.GitLab_&_Bitbucket_Data_Center]
 --
 ++++
-{% capture content %}
-In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
-Don’t see these options? Use the org selector in the top left corner to find the correct organization.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">1. Create a project</div>
+    In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
+    Don’t see these options? Use the org selector in the top left corner to find the correct organization.
+  </div>
 
-{%- capture select-project -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/create-project.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Select Projects" />
+  </div>
+</div>
 
-{% include two-up.html title="1. Create a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">2. Select a config.yml</div>
+    In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then give your project a name, and click <b>Create Project</b>. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
+  </div>
 
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/select-config-gitlab.png" alt="Choose Config"/>
+  </div>
+</div>
 
-{% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then give your project a name, and click <b>Create Project</b>. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">3. CircleCI config editor</div>
+    You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. You can swap out this config for an alternative by clicking <strong>Change: Hello World</strong>.
+  </div>
 
-{%- capture select-config -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config-gitlab.png
-{%- endcapture -%}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png" alt="Config Editor" />
+  </div>
+</div>
 
-{% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">4. Commit your config</div>
+    Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>update-circleci-config</code>.
+  </div>
 
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png" alt="Commit a config" />
+  </div>
+</div>
 
-{% capture content %}
-You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. You can swap out this config for an alternative by clicking <strong>Change: Hello World</strong>.
-{% endcapture %}
+<div class="include-two-up">
+  <div class="left-side">
+    <div class="section-heading">5. Congratulations 🎉</div>
+    You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.
+  </div>
 
-{%- capture CCI-config-editor -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png
-{%- endcapture -%}
-
-{% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
-
-
-{% capture content %}
-Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>update-circleci-config</code>.
-{% endcapture %}
-
-{%- capture commit-run-gitlab -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png
-{%- endcapture -%}
-
-{% include two-up.html title="4. Commit your config" content=content imageURL=commit-run-gitlab imageAlt="Commit a config" %}
-
-
-{% capture content %}
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.{% endcapture %}
-
-{%- capture congrats-first-green-pipeline -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/pass-pipeline.png
-{%- endcapture -%}
-
-{% include two-up.html title="5. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Passing pipeline" %}
+  <div class="right-side">
+    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Passing pipeline" />
+  </div>
+</div>
 ++++
 --
 
@@ -200,16 +205,16 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 --
 
 ++++
-
-
-
-{% capture content %} Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster. {% endcapture %}
-
-{%- capture header-banner-2 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg
-{%- endcapture -%}
-
-{% include getting-started-section-header.html title="2. Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
+<div class='section-header-wrapper'>
+  <h2 class='section-title' id="step-2">2. Dig into your first pipeline</h2>
+  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg" alt="header banner" />
+  <div class='content-wrapper'>
+    <span>
+      Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster.
+    </span>
+  </div>
+</div>
+<br />
 
 <div class="include-two-up">
   <div class="left-side">
@@ -246,14 +251,16 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 ++++
 
 ++++
-
-{% capture content %}  Discover CircleCI features to help debug and configure your builds. {% endcapture %}
-
-{%- capture header-banner-3 -%}
-{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
-{%- endcapture -%}
-
-{% include getting-started-section-header.html title="3. Debug and iterate" id="next" content=content imagePath=header-banner-3 %}
+<div class='section-header-wrapper'>
+  <h2 class='section-title' id="next">3. Debug and iterate</h2>
+  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg" alt="header banner" />
+  <div class='content-wrapper'>
+    <span>
+      Discover CircleCI features to help debug and configure your builds.
+    </span>
+  </div>
+</div>
+<br />
 
 <div class="include-two-up">
   <div class="left-side">

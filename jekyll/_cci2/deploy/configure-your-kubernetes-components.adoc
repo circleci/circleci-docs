@@ -5,12 +5,11 @@ contentTags:
 ---
 = Manual install - configure your Kubernetes components
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
 :icons: font
 :experimental:
 
-The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-releases#[Set up CircleCI releases] page.
+The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
 
 [#introduction]
 == Introduction
@@ -30,7 +29,7 @@ To set up a component for your environment, you can do one of the following:
 
 Before following the steps below, ensure the following:
 
-* Set up your environment integration. Refer to the xref:set-up-circleci-releases#[Set up CircleCI releases] page.
+* Set up your environment integration. Refer to the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
 * Install the CircleCI release agent into your Kubernetes cluster. Refer to the xref:set-up-the-release-agent#[Set up the release agent] page.
 
 [#add-required-labels]
@@ -132,7 +131,7 @@ Substitute the placeholders above based on your application's details:
 ** `namespace` - Use this parameter to use a value other than `default`.
 ** `release-strategy` - Use this parameter to provide a value other than `deployment` (available options are `deployment` and `progressive`).
 +
-CAUTION: If you are using Argo Rollouts for a given component, be sure to set the `release-strategy` param to `progressive`.
+CAUTION: If you are using Argo Rollouts for a given component, be sure to set the `release-strategy` parameter to `progressive`.
 
 . Define a new job to monitor the release, referencing the `release plan` created above as part of the _deployment_ job:
 +
@@ -192,13 +191,11 @@ CAUTION: This option is only available when using Helm to configure your Kuberne
 
 By default the built-in logic for Kubernetes Deployments or Argo Rollouts is used for the restore version feature. If you manage your component with Helm, you can choose to use the Helm rollback strategy instead. To do so, add the `circleci.com/helm-revision-number` annotation to the Kubernetes object metadata in your Helm chart template:
 
-{% raw %}
 [,yaml]
 ----
 annotations:
   circleci.com/helm-revision-number: {{ .Release.Revision | quote }}
 ----
-{% endraw %}
 
 [#operation-timeout]
 === b. Custom operation timeout
@@ -264,7 +261,6 @@ metadata:
   annotations:
     circleci.com/cancel-release-enabled: "false"
     circleci.com/helm-revision-number: "1"
-    circleci.com/job-number: "1"
     circleci.com/operation-timeout: 30m
     circleci.com/project-id: 9da0c100-3295-49a4-827f-7892f3e8dc83
   labels:
@@ -294,4 +290,4 @@ spec:
 [#next-steps]
 == Next steps
 
-In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard. Next, learn how to manage your releases in the xref:manage-releases#[Manage releases] how-to guide.
+In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard. Next, learn how to manage your releases in the xref:manage-deploys#[Manage releases] how-to guide.
