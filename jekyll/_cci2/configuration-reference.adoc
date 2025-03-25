@@ -1988,7 +1988,12 @@ Template examples:
 * `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - same as the previous one, but each branch will generate separate cache
 * `myapp-{{ epoch }}` - every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation. It takes time to upload the cache to CircleCI. Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
+While choosing suitable templates for your cache `key`, keep in mind that:
+
+* Cache saving is not a free operation. See the billing section on the xref:faq#calculate-monthly-storage-and-network-costs[FAQ] page.
+* It takes time to upload the cache.
+
+Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 
 NOTE: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
