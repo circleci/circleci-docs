@@ -23,9 +23,9 @@ CircleCI deploys gives you visibility into your Kubernetes deployments within th
 
 We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
 
-* Retry rollout
-* Promote rollout
-* Cancel rollout
+* Retry Rollout
+* Promote Rollout
+* Cancel Rollout
 
 [#quickstart]
 == Quickstart
@@ -288,7 +288,7 @@ The following table shows a complete list of labels and annotations either requi
 
 == Autodetected deployments and deploy markers
 
-CircleCI automatically generates deploy markers for your deployment pipelines. Deploy markers provide a lightweight way to log your deployments without requiring a full CircleCI deploys setup. Deploy markers create for you a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them. You can use deploy markers independently, without installing the CircleCI release agent.
+CircleCI automatically generates deploy markers for your deployment pipelines. Deploy markers provide a lightweight way to log your deployments without requiring a full CircleCI deploys setup. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them. You can use deploy markers independently, without installing the CircleCI release agent.
 
 === Auto-detection of deployments
 
