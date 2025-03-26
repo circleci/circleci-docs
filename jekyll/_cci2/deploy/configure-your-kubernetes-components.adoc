@@ -5,11 +5,11 @@ contentTags:
 ---
 = Manual install - configure your Kubernetes components
 :page-layout: classic-docs
-:page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the releases dashboard.
+:page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the deploys dashboard.
 :icons: font
 :experimental:
 
-The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
+The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI deploys] page.
 
 [#introduction]
 == Introduction
@@ -20,7 +20,7 @@ To set up a component for your environment, you can do one of the following:
 
 * Follow the steps on this page.
 * Follow the in-app component setup guide, which can be found as follows:
-.. Select **Releases** in the CircleCI web app sidebar
+.. Select **Deploys** in the CircleCI web app sidebar
 .. Select the **Components** tab
 .. Select btn:[Add Component], choose your environment integration and follow the in-app guide.
 
@@ -29,13 +29,13 @@ To set up a component for your environment, you can do one of the following:
 
 Before following the steps below, ensure the following:
 
-* Set up your environment integration. Refer to the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
+* Set up your environment integration. Refer to the xref:set-up-circleci-deploys#[Set up CircleCI deploys] page.
 * Install the CircleCI release agent into your Kubernetes cluster. Refer to the xref:set-up-the-release-agent#[Set up the release agent] page.
 
 [#add-required-labels]
 == 1. Add required labels and annotation to your Deployment/Rollout
 
-To enable your release to show up on the releases UI in the CircleCI web app, add the following labels and annotation to your Kubernetes Deployment or Argo Rollout:
+To enable your deployment to show up on the deploys UI in the CircleCI web app, add the following labels and annotation to your Kubernetes Deployment or Argo Rollout:
 
 * Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Metadata.Labels`
 * Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
@@ -93,17 +93,17 @@ Support for the old labels will be dropped in one of the next releases.
 After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
 ====
 
-Once you have updated your Deployment or Rollout, check the CircleCI releases dashboard and you should see your release in the timeline view.
+Once you have updated your Deployment or Rollout, check the CircleCI deploys dashboard and you should see your deployment in the timeline view.
 
 [#link-release]
-== 2. Link release to deployment job trigger (optional)
+== 2. Link deployment to release job trigger (optional)
 
-You can link your release with the CircleCI _deployment_ job that triggered it by adding a _release_ job to your workflow. By adding a _release_ job to your deployment workflow, you can also:
+You can link your deployment with the CircleCI _deployment_ job that triggered it by adding a _release_ job to your workflow. By adding a release job to your deployment workflow, you can also:
 
 * Monitor the in-cluster release process as part of the overall deployment workflow in CircleCI, making it easier to find releases for a given pipeline.
-* Orchestrate releases across multiple environments (for example, deploy to production only after a successful release in a staging environment).
+* Orchestrate deployments across multiple environments (for example, deploy to production only after a successful deployment in a staging environment).
 
-To add a _release_ job, follow these steps:
+To add a release job, follow these steps:
 
 . Add a `plan release` step at the end of your existing _deployment_ job so CircleCI knows to expect a release to happen as an outcome of that job:
 +
@@ -180,9 +180,9 @@ workflows:
 ----
 
 [#configure-release-management]
-== 3. Configure release management (optional)
+== 3. Configure deploy management (optional)
 
-By adding annotations to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your releases dashboard, including the ability to restore, scale, and restart component versions.
+By adding annotations to your Kubernetes objects (Deployment/Rollout), you can enable additional actions on your deploys dashboard, including the ability to restore, scale, and restart component versions.
 
 [#helm-rollback]
 === a. Use Helm rollback
@@ -219,16 +219,16 @@ metadata:
 [#opt-out-ui-based-actions]
 === c. Opt out of UI-based actions
 
-All UI-based release management features are **enabled** by default, no action is required to enable them.
+All UI-based deploy management features are **enabled** by default, no action is required to enable them.
 
-If you would like to disable any release management features for a specific component, you can do so by adding any of the following annotations with the value `false` to the related Kubernetes Deployment or Argo Rollout. If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature is **enabled**.
+To disable a deploy feature for a component, add the corresponding annotation (from the list below) with the value of `false` to the related Kubernetes Deployment or Argo Rollout. If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature is **enabled**.
 
 * `circleci.com/restore-version-enabled` toggles the restore version feature on the annotated Kubernetes Deployment or Argo Rollout
 * `circleci.com/scale-component-enabled` toggles the scale component feature on the annotated Kubernetes Deployment or Argo Rollout
 * `circleci.com/restart-component-enabled` toggles the restart component feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/retry-release-enabled` toggles the retry release feature on the annotated Argo Rollout
-* `circleci.com/promote-release-enabled` toggles the promote release feature on the annotated Argo Rollout
-* `circleci.com/cancel-release-enabled` toggles the cancel release feature on the annotated Argo Rollout
+* `circleci.com/retry-release-enabled` toggles the Retry Rollout feature on the annotated Argo Rollout
+* `circleci.com/promote-release-enabled` toggles the Promote Rollout feature on the annotated Argo Rollout
+* `circleci.com/cancel-release-enabled` toggles the Cancel Rollout feature on the annotated Argo Rollout
 
 In the following example, all features are explicitly disabled for the annotated Deployment:
 
@@ -251,7 +251,7 @@ metadata:
 [#example-deployment]
 == Example deployment
 
-The following snippet shows an example deployment with all required labels and annotations. In this example the btn:[Cancel Release] option in the UI has been disabled.
+The following snippet shows an example deployment with all required labels and annotations. In this example the btn:[Cancel Rollout] option in the UI is disabled.
 
 [,yaml]
 ----
@@ -290,4 +290,4 @@ spec:
 [#next-steps]
 == Next steps
 
-In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI releases dashboard. Next, learn how to manage your releases in the xref:manage-deploys#[Manage releases] how-to guide.
+In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI deploys dashboard. Next, learn how to manage your deploys in the xref:manage-deploys#[Manage deploys] how-to guide.
