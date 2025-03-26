@@ -36,6 +36,13 @@
 | icon:check[]
 | icon:check[]
 
+| `pipeline.project.slug`
+| GitHub, BitBucket, GitLab
+| String
+| Will provide the project's URL slug, for example, `vcs/org-name/project-name`
+| icon:check[]
+| icon:check[]
+
 | `pipeline.git.tag`
 | GitHub, Bitbucket, GitLab
 | String
