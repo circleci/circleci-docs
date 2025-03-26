@@ -35,6 +35,9 @@ Sum of workflow message types over time
 ???Not sure how/why this is different from above but it is
 
 === General Service Metrics
+==== API v2 Requests Count Over Time
+V2 API responses grouped by type over time
+
 ==== Rollbar Sends by Service
 ???Rollbar erros caught by service
 
