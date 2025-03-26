@@ -1,0 +1,146 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Controlling serial execution across your organization
+:page-layout: classic-docs
+:page-liquid:
+:page-description: An overview of controlloing serial execution accross a CircleCI org.
+:icons: font
+:experimental:
+
+Serial groups enable controlled, sequential execution of CircleCI jobs across your organization to prevent conflicts when multiple jobs need to access shared resources or when operation order is critical.
+
+== Introduction
+
+Serial groups in CircleCI allow you to apply serial orchestration to jobs across your entire organization. This feature helps prevent conflicts when multiple jobs need to access shared resources or when the order of operations is critical for maintaining system integrity. By implementing serial groups, you can ensure that jobs run one after another rather than concurrently, even across different projects and workflows within your organization.
+
+Some common use cases for serial groups are as follows:
+
+* Preventing deployment conflicts when multiple teams need to deploy to the same environment.
+* Ensuring database migrations run in the correct sequence across multiple services.
+* Controlling access to limited testing resources that can only handle one job at a time.
+* Preventing race conditions in stateful systems during continuous delivery.
+* Managing sequential execution of integration tests that affect shared environments.
+* Maintaining version integrity by preventing older code from deploying after newer versions.
+
+== Quickstart
+
+Once you have identified jobs that need to run sequentially across your organization, you can set up a serial group by following these steps:
+
+. Choose a meaningful name for your serial group that represents the resource or process being controlled. Use pipeline values in your serial group name to create dynamic grouping patterns if needed.
+
+. Add the `serial-group` key to each job that should run in sequence, using the same value for all related jobs. Apply this configuration to all relevant projects across your organization that should share the same serial group:
++
+[,yml]
+----
+include::../_includes/snippets/orchestration-examples/serial-group.yml[]
+----
+
+. Run your pipelines and observe the sequential execution on the pipelines page in the CircleCI web app.
+
+== How serial groups work
+
+When you configure a job with a `serial-group` key, CircleCI's platform treats it differently from other jobs. The following sections outline what happens behind the scenes.
+
+=== Job identification and queuing
+
+CircleCI identifies jobs that belong to the same serial group by the string value you provide. When multiple jobs across your organization use identical serial group values, they enter a shared queue. This queue operates on a first-in, first-out basis but with special priority rules.
+
+=== Lock Mechanism
+
+CircleCI uses a distributed locking system to control execution order. When a job with a serial group starts, it attempts to acquire a "lock" for that specific serial group value. If no other job holds the lock, the job proceeds. If another job already holds the lock, subsequent jobs must wait in the queue.
+
+=== Pipeline number priority
+
+CircleCI uses pipeline numbers to determine execution priority. Jobs from newer pipelines (higher pipeline numbers) take precedence over jobs from older pipelines within the same project. If a job from an older pipeline tries to acquire a lock while a newer pipeline's job is waiting or running, the older job is automatically skipped.
+
+=== Job state transitions
+
+Jobs in a serial group move through several states:
+
+. First, the job enters a "queued" state.
+. Once a job acquires the lock, it transitions to a "running" state.
+. Upon completion, the job releases the lock, allowing the next job in the queue to proceed. The lock is released when the job completes, whether successfully, with failure, or by cancellation. This ensures that the queue continues to process jobs even if some jobs fail.
+
+=== Time limits
+
+To prevent indefinite waits, jobs can remain in the queue for up to five hours. After this time, CircleCI automatically cancels the waiting job and removes it from the queue.
+
+This architecture provides a robust system for coordinating work across your organization while maintaining execution order integrity and preventing deployment conflicts or race conditions in shared environments.
+
+== Troubleshooting serial groups
+
+=== Job skipped unexpectedly?
+
+If your job is skipped with a "not run" status, check the following:
+
+* Is another job from a newer pipeline (higher pipeline number) currently running or waiting in the same serial group?
+* Verify your pipeline number is not lower than a currently active pipeline using the same serial group.
+* Remember that the order protection mechanism automatically skips jobs from older pipelines to maintain queue integrity.
+
+=== Jobs not running sequentially?
+
+If jobs are running concurrently when you expected them to run in sequence, check the following:
+
+* Confirm all jobs have the same `serial-group` value, including case sensitivity.
+. Check for typos or whitespace differences in your serial group values.
+. Verify that pipeline parameters are resolving to the expected values in your `serial-group` key.
+. Ensure your serial group value meets the character requirements (alphanumeric plus `.`, `-`, `_`, `/`).
+
+=== Jobs canceled after waiting?
+
+If your jobs are being canceled after waiting in the queue, check the following:
+
+. Are any of your jobs exceeding the five-hour maximum wait time?
+. Investigate if upstream dependencies in your workflow are failing or taking too long.
+. Look for deadlock situations where jobs are waiting for each other to complete.
+
+=== Deployment order appears incorrect?
+
+If you are experiencing deployment order problems, check the following:
+
+. Review the configuration for each job in your serial group to check they are assigned the correct `serial-group` key.
+. Check the pipeline numbers of recent deployments to understand execution order.
+. Consider using more specific serial group naming conventions that include branch or environment information.
+
+=== Still experiencing resource conflicts?
+
+If you are still experiencing resource conflicts despite using serial groups, check the following:
+
+. Make your serial group values more specific by adding project or environment identifiers.
+. Verify that all projects accessing the shared resource are properly configured with the same serial group.
+. Check for jobs outside your serial group that might be accessing the same resources.
+
+== Limitations of serial groups
+
+Serial groups provide powerful orchestration capabilities, but they do have limitations. Understanding these constraints will help you plan your CI/CD strategy more effectively.
+
+=== No workflow-level configuration
+
+Serial groups can only be applied at the job level. You cannot configure an entire workflow to run as a serial group. Each job that needs serialization must have the `serial-group` key individually specified. This means you cannot wrap a collection of jobs with a single serial group declaration.
+
+=== No multiple keys in a single workflow
+
+Using identical serial group values multiple times within the same workflow can result in compilation errors. Each serial group key within a workflow should be unique to prevent conflicts in the execution order.
+
+=== No selective lock release
+
+Serial groups always release their lock upon job completion, regardless of the outcome. You cannot configure a serial group to maintain its lock if a job fails. This means you cannot prevent subsequent jobs from running if a critical job fails without implementing additional control mechanisms.
+
+=== Timeout
+
+Jobs waiting in the queue longer than five hours will be automatically canceled. This five-hour wait limit for serial groups is fixed and cannot be adjusted.
+
+=== No cross-organization serialization
+
+Serial groups work within a single organization only. You cannot use them to orchestrate jobs across different CircleCI organizations, even if they belong to the same company.
+
+=== No partial locking
+
+You cannot lock only a portion of a job's execution. The entire job is considered part of the serial group, which means you cannot have parallel sections within a serially grouped job.
+
+=== No priority adjustments
+
+The pipeline number priority system cannot be overridden. This means you cannot prioritize an older pipeline over a newer one.
