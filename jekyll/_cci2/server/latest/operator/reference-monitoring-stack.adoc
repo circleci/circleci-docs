@@ -1,0 +1,114 @@
+---
+contentTags:
+  platform:
+    - Server v4.8
+    - Server Admin
+---
+= Server Monitoring Stack Reference Helm Chart
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to deploy your own monitoring stack using our helm chart as a reference.
+:icons: font
+:toc: macro
+:toc-title:
+
+
+CircleCI server customers want to know what metrics are available for gaining insight into the performance of their builds. While we don't support or provide any tooling to provide observability into the running services and infrastructure CircleCI server operates in, we can share a sample of how observability can be set up using the most common tools via a helm chart package.
+This is however only meant to be a reference or guide on how things could be set up and is not an officially supported product. Our reference monitoring stack currently contains samples on how to set up and configure grafana, prometheus and telegraf as well as some built-in dashboards for monitoring key service level inidicators.
+
+You can find the link:https://github.com/CircleCI-Public/circleci-server-monitoring-reference?tab=readme-ov-file#server-monitoring-stack[reference monitoring stack on our public github] as well as more information on how you could configure it's setup.
+
+
+[#included-service-level-indicators]
+== Included Service Level Inidicators
+Below are a list of dashboards currently included with the reference stack
+
+=== Pipelines
+==== Max Latency of Creating Pipelines
+The latency of created pipelines and pipeline errors over time
+
+=== Workflows
+==== Workflow Messages Handled by Type
+Sum of workflow message types over time
+
+==== Number of handled messages
+???Not sure how/why this is different from above but it is
+
+=== General Service Metrics
+==== Rollbar Sends by Service
+???Rollbar erros caught by service
+
+=== Orb Service
+==== Max Latency of Compiling Config
+???what is on the y-axis here?
+???Is this the latency on requests to compile orb configs?
+
+=== Insight Monitors
+==== 5xx By Route
+5xx errors summed by route over time
+
+=== Webhook Monitors
+==== Response errors
+Webhook errors by type over time
+
+=== Legacy Notifier
+==== Workflows-System
+notification statuses summed by type
+
+==== Pipelines-System IngestionError
+Pipeline ingestion error rate
+
+=== Permissions Service
+==== Permission client calls error rate % by action excluding 4xx (expect < 0.5%)
+???
+
+==== Permission Check results ratio has changed significantly
+??? This title seems like a note
+??? there is no query here
+
+==== API Call Errors
+API error responses by status
+
+==== Failed API calls
+Why is this different from above?
+
+=== Domain Service
+==== GitHub Rate Limit Percentage
+Percentage of github requests that have been rate limited
+
+==== Timing - Providers HTTP calls, (Max, Avg)
+???
+
+=== Self Hosted Runner
+==== Runner API - 500 HTTP Responses (Internal Server Errors)
+
+==== Runner Tasks - Claims (Linear Scale)
+
+=== Execution
+==== Task Queue Depth (Previous Run Queue)
+Quequed tasks by by execution type
+??? what is previous run queue vs previous usage queue
+
+==== Job Queue Depth (previous Usage Queue)
+
+==== External API request Errors (5xx)
+
+==== Internal API request Errors (5xx)
+
+==== Back pressure
+??? what is this?
+Failed docker jobs by type?
+
+==== Receiver Handled Requests (non 2xx)
+
+==== Internal Handled Requests (non 2xx)
+
+==== Public Handled Requests (non 2xx, 3xx)
+
+==== Receiver API request Errors (5xx)
+
+==== Internal API request Errors (5xx)
+
+==== 4xx (client error) responses by status and service
+
+==== 5xx (backend error) responses by status and service
