@@ -672,7 +672,18 @@ See the xref:reusing-config#using-parameters-in-executors[Using Parameters in Ex
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see xref:sample-config#[Sample config.yml] for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger <<resourceclass>> and/or xref:parallelism-faster-jobs#[parallelism]. Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using xref:workflows#[workflows].
+Jobs have a maximum runtime based on pricing plan, as follows:
+
+* 1 hour (Free)
+* 3 hours (Performance)
+* 5 hours (Scale)
+
+If your jobs are timing out, consider the following:
+
+* A larger <<resourceclass>>.
+* Using xref:parallelism-faster-jobs#[parallelism].
+* Run some of your jobs concurrently using xref:workflows#[workflows].
+* You can upgrade your pricing plan.
 
 '''
 
@@ -935,7 +946,8 @@ Configured by `docker` key which takes a list of maps:
 | Authentication for AWS Elastic Container Registry (ECR)
 |===
 
-For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored because the primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+For a xref:glossary#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. The primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+
 A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
@@ -1181,7 +1193,7 @@ jobs:
 [#macos]
 ==== *`macos`*
 
-CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS], to allow you to build, test, and deploy apps for macOS, link:https://developer.apple.com/ios/[iOS], link:https://developer.apple.com/tvos/[tvOS] and https://developer.apple.com/watchos/[watchOS]. To run a job in a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode you would like to use.
+CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS], to allow you to build, test, and deploy apps for macOS, link:https://developer.apple.com/ios/[iOS], link:https://developer.apple.com/tvos/[tvOS] and https://developer.apple.com/watchos/[watchOS]. To run a job on a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode to use.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1536,7 +1548,7 @@ Each built-in step is described in detail below.
 [#run]
 ===== *`run`*
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any `dotfiles` as part of the command.
+The `run` step is used to invoke command-line programs. The `run` step takes either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any `dotfiles` as part of the command.
 
 NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:migrate-from-deploy-to-run#[Migrate from deploy to run].
 
@@ -1612,13 +1624,15 @@ For more information about which files are executed when Bash is invocated, link
 
 Descriptions of the `-eo pipefail` options are provided below.
 
-`-e`
+====== `-e`
 
-____
-Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
-____
+Exit immediately if any of the following exits with a non-zero status:
 
-So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
+** A pipeline (which may consist of a single simple command).
+** A subshell command enclosed in parentheses.
+** One of the commands executed as part of a command list enclosed by braces.
+
+In the previous example, `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
 
 [,yml]
 ----
@@ -1637,11 +1651,9 @@ So if in the previous example `mkdir` failed to create a directory and returned 
       make test
 ----
 
-`-o pipefail`
+====== `-o pipefail`
 
-____
 If `pipefail` is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
-____
 
 For example:
 
@@ -1705,11 +1717,13 @@ By default, CircleCI will execute job steps one at a time, in the order that the
 
 Adding the `when` attribute to a job step allows you to override this default behaviour, and selectively run or skip steps depending on the status of the job.
 
-The default value of `on_success` means that the step will run only if all of the previous steps have been successful (returned exit code 0).
+The `when` attribute accepts the following values:
 
-A value of `always` means that the step will run regardless of the exit status of previous steps. `always` is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
+`on_success`:: The step will run only if all of the previous steps have been successful (returned exit code 0). `on_success` is the default value.
 
-A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts.
+`always`:: The step will run regardless of the exit status of previous steps. `always` is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
+
+`on_fail`:: The step will run only if one of the preceding steps has failed (returns a non-zero exit code). A common use of `on_fail` is to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts.
 
 NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
 
@@ -1803,7 +1817,9 @@ workflows:
 ====
 *Blobless clones*
 
-To help improve the overall performance of code checkouts from Git source code hosts, a "blobless" strategy is being rolled out. This reduces the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
+A "blobless" strategy is being rolled out to help improve the performance of code checkouts from Git source code hosts.
+
+Blobless clones reduce the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
 
 While this improves performance in most cases, if a downstream step requires those objects to exist for scanning or comparisons, it can cause failures. To work around these potential problems, a fetch directly after a checkout will ensure the required data is available:
 
@@ -1839,7 +1855,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ----
 
-The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our xref:github-integration#establish-the-authenticity-of-an-ssh-host[integration guide] -- this guide will also be helpful if you wish to implement a custom checkout command.
+The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH. These keys are detailed further in the xref:github-integration#establish-the-authenticity-of-an-ssh-host[integration guide]. This guide is also helpful if you wish to implement a custom checkout command.
 
 CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
@@ -1972,7 +1988,12 @@ Template examples:
 * `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - same as the previous one, but each branch will generate separate cache
 * `myapp-{{ epoch }}` - every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
+While choosing suitable templates for your cache `key`, keep in mind that:
+
+* Cache saving is not a free operation. See the billing section on the xref:faq#calculate-monthly-storage-and-network-costs[FAQ] page.
+* It takes time to upload the cache.
+
+Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 
 NOTE: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
@@ -2068,7 +2089,7 @@ In this case cache `v1-myapp-cache-new` will be restored because it's the most r
 
 For more information on key formatting, see the `key` section of <<savecache,`save_cache` step>>.
 
-When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+When CircleCI encounters a list of `keys`, the cache will be restored from the first key matching an existing cache. We recommend you use a more specific key first (for example, cache for exact version of `package-lock.json`) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
@@ -2148,7 +2169,7 @@ Example:
 
 Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's *Test Summary* section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the xref:collect-test-data#[Collecting Test Data] page.
 
-It is also possible to store test results as build artifacts. For steps, refer to <<storeartifacts,the `store_artifacts` step>> section.
+You can also store test results as build artifacts. For steps, refer to <<storeartifacts,the `store_artifacts` step>> section.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2881,7 +2902,11 @@ Expression-based job filters allow you to conditionally run jobs based on the fo
 
 An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run.
 
-Using expression-based job filters is one way to optimize your pipelines to lower costs, decrease time to feedback, or run specific jobs based on the context of the source of change.
+Using expression-based job filters is one way to optimize your pipelines. Optimizations include the following:
+
+* Lower costs.
+* Decrease time to feedback.
+* Run specific jobs based on the context of the source of change.
 
 [,yml]
 ----
@@ -3042,7 +3067,7 @@ workflows:
 [#tags]
 ====== *`tags`*
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
+CircleCI does not run workflows for tags unless you explicitly specify tag filters. If a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
 Tags can have the keys `only` and `ignore`. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string. Both lightweight and annotated tags are supported.
 
@@ -3211,7 +3236,7 @@ workflows:
 This means that `another-job` will require both deploy jobs in the matrix to
 finish before it runs.
 
-Additionally, matrix jobs expose their parameter values via `<< matrix.* >>`
+Matrix jobs expose their parameter values via `<< matrix.* >>`
 which can be used to generate more complex workflows. For example, here is a
 `deploy` matrix where each job waits for its respective `build` job in another
 matrix.
