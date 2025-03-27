@@ -34,9 +34,9 @@ You can generate code for the following formats:
 
 To get the code you need to embed a status badge for your project, follow these steps:
 
-. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
-. Select your project from the tiles or list.
-. Select btn:[Project Settings].
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the ellipsis (icon:ellipsis-h[ellipsis icon]) next to your project and select **Project Settings**.
 . Select **Status Badges** from the sidebar.
 . Select a branch to show the most recent status for.
 . [Optional] If you project is private, select btn:[Add API token] and in the modal select btn:[Add API token] once again to add an API token to your project with the `status` scope.

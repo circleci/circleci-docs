@@ -32,8 +32,10 @@ See the following VCS-specific docs for additional details on creating SSH keys:
 CircleCI cannot decrypt SSH keys, therefore every new key must have an empty passphrase. The below examples are for macOS.
 
 . In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
-. In the CircleCI application, go to your project's settings by clicking the *Project Settings* button (top-right on the *Pipelines* page of the project).
-. On the *Project Settings* page, select *SSH Keys*.
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the ellipsis (icon:ellipsis-h[ellipsis icon]) next to your project and select **Project Settings**.
+. In the sidebar menu, select *SSH Keys*.
 . Scroll down to the *Additional SSH Keys* section.
 +
 If you have a GitLab integration, you will find that an additional SSH key already exists. This was created automatically by CircleCI during the project creation process. This key is used to checkout your code so it should not be removed.
