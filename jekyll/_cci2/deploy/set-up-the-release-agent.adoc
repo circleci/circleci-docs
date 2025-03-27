@@ -10,11 +10,11 @@ contentTags:
 :icons: font
 :experimental:
 
-This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This manual installation guide is an alternative to using the in-app releases set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI releases] page.
+This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This manual installation guide is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys#[Set up CircleCI deploys] page.
 
 == Prerequisites
 
-Before setting up the CircleCI release agent in your Kubernetes cluster, check you have an environment integration set up in the CircleCI web app for your deployment. See the xref:set-up-circleci-deploys#[Set up CircleCI releases] page for steps and prerequisites.
+Before setting up the CircleCI release agent in your Kubernetes cluster, check you have an environment integration set up in the CircleCI web app for your deployment. See the xref:set-up-circleci-deploys#[Set up CircleCI deploys] page for steps and prerequisites.
 
 == 1. Add the release agent into your Kubernetes cluster
 
@@ -38,7 +38,7 @@ helm repo update
 
 You will need a `CCI_INTEGRATION_TOKEN` to install the CircleCI release agent into your cluster. To create an integration token, follow these steps:
 
-. In the CircleCI web app, select **Releases** in the sidebar.
+. In the CircleCI web app, select **Deploys** in the sidebar.
 . Navigate to the **Environments** tab.
 . Select the gear icon (icon:cog[]) corresponding to the environment you just created to enter the Environment Integration Settings page.
 . Select btn:[Create Integration Token] and then btn:[Create Token]
@@ -64,7 +64,7 @@ NOTE: You can further customize the agent installation and check all available o
 
 Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated. It navigate to the environment details page, follow these steps:
 
-. Select **Releases** in the CircleCI web app sidebar.
+. Select **Deploys** in the CircleCI web app sidebar.
 . Select the **Environments** tab.
 . Select the name of your environment integration to view the environment details page.
 
