@@ -20,7 +20,7 @@ Before following the steps below, ensure the environment integration has been se
 [#restore-version]
 == Restore version
 
-The _restore version_ command restores a previously deployed version of a component.
+The btn:[Restore Version] action restores a previously deployed version of a component.
 
 image::../../img/docs/releases/restore-version.png[Screenshot showing the restore version button]
 
@@ -32,12 +32,12 @@ NOTE: The steps outlined here are to revert a deployment from the deploys dashbo
 . Select btn:[Deploys] in the CircleCI web app sidebar.
 . You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
 . Scroll to locate the version your want to restore, and select the "Restore this version" icon in the **Actions** column.
-. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then select btn:[Restore]. We recommend reverting the associated changes in your source repository as soon as possible after using this command.
+. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then select btn:[Restore]. We recommend reverting the associated changes in your source repository as soon as possible after using this action.
 
 [#restore-notes]
 === Notes
 
-To understand the _restore version_ command, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Executing the _restore version_ command from the CircleCI web app is the equivalent of using the following:
+To understand the btn:[Restore Version] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Selecting the btn:[Restore Version] action from the CircleCI web app is the equivalent of using the following:
 
 * If you are using Helm (Helm opt-in instructions are xref:configure-your-kubernetes-components#helm-rollback[here]):
 +
@@ -64,7 +64,7 @@ kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<
 [#scale-component]
 == Scale component
 
-The _scale component_ command allows you to scale up or down a currently live version of a component.
+The btn:[Scale Component] action allows you to scale up or down a currently live version of a component.
 
 image::../../img/docs/releases/scale-component.png[Screenshot showing the scale component button]
 
@@ -76,14 +76,14 @@ image::../../img/docs/releases/scale-component.png[Screenshot showing the scale 
 . Scroll to find and select your component to enter the component view.
 . Find the active version that you would like to scale and select the ellipsis menu icon (icon:ellipsis-h[]).
 . Select btn:[Scale Component].
-. Read through the notes associated with this command in the popup and to proceed type `SCALE` and select btn:[Scale].
+. Read through the notes associated with this action in the popup and to proceed type `SCALE` and select btn:[Scale].
 
 CAUTION: Any Horizontal Pod Autoscalers (HPAs) defined for this component will be deleted as a result of this action.
 
 [#scale-notes]
 === Notes
 
-To understand the _restore version_ command, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Executing the _scale component_ command is the equivalent of the following:
+To understand the btn:[Scale Component] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Selecting the btn:[Scale Component] action is the equivalent of the following:
 
 * If you are using Argo Rollouts:
 +
@@ -102,7 +102,7 @@ kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"o
 [#restart-component]
 == Restart component
 
-The _restart component_ command allows you to restart a currently live version of a component.
+The btn:[Restart Component] action allows you to restart a currently live version of a component.
 
 image::../../img/docs/releases/restart-component.png[Screenshot showing the restart component button]
 
@@ -114,12 +114,12 @@ image::../../img/docs/releases/restart-component.png[Screenshot showing the rest
 . Scroll to find and select your component to enter the component view.
 . Find the active version that you would like to restart and select the ellipsis menu icon (icon:ellipsis-h[]).
 . Select btn:[Restart Component].
-. Read the note associated with this command in the popup and to proceed type `RESTART` and select btn:[RESTART].
+. Read the note associated with this action in the popup and to proceed type `RESTART` and select btn:[RESTART].
 
 [#restart-notes]
 === Notes
 
-To understand the _restore version_ command, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Executing the _restart component_ command is the equivalent of the following:
+To understand the btn:[Restart Component] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Executing the btn:[Restart Component] action is the equivalent of the following:
 
 * If you are using Argo Rollouts:
 +
@@ -137,9 +137,9 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 
 == Retry Rollout
 
-NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
-Use the _retry Rollout_ command to retry a Rollout that has failed or been cancelled. For more information about this command, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
+Use the btn:[Retry Rollout] action to retry a Rollout that has failed or been cancelled. For more information about this action, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
 
 image::../../img/docs/releases/retry-release.png[Screenshot showing the retry release button]
 
@@ -154,7 +154,7 @@ image::../../img/docs/releases/retry-release.png[Screenshot showing the retry re
 [#retry-notes]
 === Notes
 
-Executing the _retry Rollout_ command is the equivalent to running:
+Selecting the btn:[Retry Rollout] action is the equivalent to running:
 
 [,yml]
 ----
@@ -164,9 +164,9 @@ kubectl argo rollouts retry <rollout-name> -n=<namespace>
 [#promote]
 == Promote
 
-NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts].
+NOTE: You can use these actions if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts].
 
-Use the _promote_ commands to promote a deployment that is paused at a step. You have the following options:
+Use the btn:[Promote] or btn:[Promote All] action to progress a deployment that is paused at a step. You have the following options:
 
 * Promote a single step.
 * Skip the step.
@@ -184,12 +184,12 @@ For more information on the Rollouts Promote commands see the link:https://argo-
 . Select btn:[Deploys] in the CircleCI web app sidebar.
 . You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
 . Scroll to locate the running deployment you want to promote. Select the version number to enter the deployment details page.
-. You will now see the btn:[Promote] and btn:[Promote All] options. Select btn:[Promote] to promote the deployment as required. The command is run immediately with no intermediary checks.
+. You will now see the btn:[Promote] and btn:[Promote All] options. Select btn:[Promote] to promote the deployment as required. The action is run immediately with no intermediary checks.
 
 [#promote-notes]
 === Notes
 
-Executing the _promote_ commands are equivalent to the following:
+Selecting a _Promote_ action is equivalent to the following:
 
 * Promote a single step:
 +
@@ -206,9 +206,9 @@ kubectl argo rollouts promote --full <rollout-name>
 
 == Cancel deployment
 
-Use the _cancel deployment_ command to stop a deployment from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
+Use the btn:[Cancel Deployment] action to stop a deployment from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
 
-NOTE: You can use this command if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
 image::../../img/docs/releases/cancel-release.png[Screenshot showing the cancel deployment button]
 
@@ -223,7 +223,7 @@ image::../../img/docs/releases/cancel-release.png[Screenshot showing the cancel 
 [#cancel-notes]
 === Notes
 
-Executing the _cancel deployment_ command is the equivalent to running:
+Selecting the btn:[Cancel Deployment] action is the equivalent to running:
 
 [,yml]
 ----
