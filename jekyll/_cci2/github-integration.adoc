@@ -127,6 +127,16 @@ If your deploy keys or user keys appear to have been removed, it may be due to o
 * When you delete a CircleCI project, CircleCI will remove its associated keys.
 ====
 
+[#create-a-github-user-key]
+=== Create a GitHub user key
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
+. In the sidebar menu, select *SSH Keys*.
+. Under the **User Key** section, select btn:[Authorize With GitHub].
+. After authorizing, navigate to the **SSH keys** page again, go to the **User Key** section, and select btn:[Add User Key], then btn:[Confirm User].
+
 [#create-additional-github-ssh-keys]
 === Create additional GitHub SSH keys
 
