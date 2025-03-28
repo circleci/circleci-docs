@@ -49,8 +49,9 @@ Specify your **project ID** in one of the following ways:
 
 * Manually copy the value from the project settings page:
 
-. Select **Projects** in the CircleCI web app sidebar and use the search function to find your project
-. Select the ellipsis (icon:ellipsis-h[ellipsis icon]) next to your project and select **Project Settings**
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
 . Your project ID is available to copy from the overview page
 +
 image::../../img/docs/project-id.png[Screenshot showing where to find the project ID]

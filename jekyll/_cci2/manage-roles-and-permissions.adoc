@@ -65,9 +65,9 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 image::gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
-. In the CircleCI web app, select **Projects** in the sidebar.
-. Find your project. You can use the search box to help.
-. Select the ellipsis (icon:ellipsis-h[ellipsis icon]) next to your project and select **Project Settings**.
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
 . In the sidebar menu, select **People** .
 +
 TIP: If you do not see the **People** option, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and project roles are not supported.
@@ -79,9 +79,9 @@ TIP: If you do not see the **People** option, your project is integrated using e
 [#change-a-persons-project-level-permissions]
 == Change a person's project-level permissions
 
-. In the CircleCI web app, select **Projects** in the sidebar.
-. Find your project. You can use the search box to help.
-. Select the ellipsis (...) button next to your project and select btn:[Project Settings].
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
 . Select **People** in the sidebar menu.
 +
 TIP: If you do not see the **People** option, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and project roles are not supported.
@@ -90,9 +90,9 @@ TIP: If you do not see the **People** option, your project is integrated using e
 [#remove-people-from-your-project]
 == Remove people from your project
 
-. In the CircleCI web app, select **Projects** in the sidebar.
-. Find your project. You can use the search box to help.
-. Select the ellipsis (...) button next to your project and select btn:[Project Settings].
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
 . Select **People** in the sidebar menu.
 +
 TIP: If you do not see the **People** option, your project is integrated using either xref:github-integration#[GitHub OAuth] or xref:bitbucket-integration#[Bitbucket Cloud] and project roles are not supported.

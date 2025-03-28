@@ -100,10 +100,9 @@ project repository and the certificates / keys repository to the CircleCI projec
 
 To add a user key:
 
-. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
-. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the ellipsis (icon:ellipsis-h[ellipsis icon]) next to your project and select **Project Settings**.
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
 . In the sidebar menu, select **SSH Keys**.
 . Under the **User Key** section, select btn:[Authorize With GitHub].
 . After authorizing, navigate to the **SSH keys** page again, go to the **User Key** section, and select btn:[Add User Key], then btn:[Confirm User].
