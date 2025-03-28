@@ -6,20 +6,20 @@ contentTags:
 = Update the Kubernetes release agent
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to update the Kubernetes release agent for integrations with CircleCI releases
+:page-description: How to update the Kubernetes release agent for integrations with CircleCI deploys.
 :icons: font
 :experimental:
 
-Follow the steps on this page to update the release agent installed in your Kubernetes cluster.
+Follow the steps on this page to update the CircleCI release agent installed in your Kubernetes cluster.
 
 Refer to the link:https://circleci.com/changelog/[CircleCI Change log] to find out about new release agent versioning, updates, and fixes.
 
 [#prerequisites]
 == Prerequisites
 
-To update the Kubernetes release agent you need an operational CircleCI release environment integrated with your Kubernetes cluster. Refer to the following pages for steps:
+To update the Kubernetes release agent you need an operational CircleCI environment integrated with your Kubernetes cluster. Refer to the following pages for steps:
 
-* xref:set-up-circleci-deploys#[Set up CircleCI releases]
+* xref:set-up-circleci-deploys#[Set up CircleCI deploys]
 * xref:configure-your-kubernetes-components#[Configure your Kubernetes components]
 
 [CAUTION]
