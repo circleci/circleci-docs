@@ -62,7 +62,7 @@ image:user_settings.png[User settings]
 
 == Organization homepage and navigation
 
-After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI server. The organization home page gives you an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
+After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI server. The organization homepage provides an overview of your org's projects, project health metrics, and compute and credit usage metrics for your org.
 
 image::org-homepage.png[Organization homepage]
 
@@ -70,7 +70,7 @@ TIP: Once you have selected an org, you can select the btn:[CircleCI] logo in th
 
 From your organization home page you have access to org-level options. You can create a project, select and existing project using the overview project cards, or use the sidebar navigation items to access other areas of the product. The sidebar navigation allows you to visit the following pages (some of these sections are discussed in more detail below):
 
-**Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. If a pipeline has multiple workflows there will be a grey bar on the left, and you can see the status of each workflow and expand them individually to view the status of each individual job.
+**Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. Multi-workflow pipelines display a grey bar to the left. You can see the status of each workflow and expand them individually to view the status of each job.
 
 **Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:create-project#[create/set up new projects].
 
@@ -167,7 +167,17 @@ The following settings are available in the project settings page. If you do not
 
 **Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy/deploys-overview#[Deploys overview] page.
 
-**Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
+**Advanced**: Toggle options on and off for:
+
+* VCS status updates
+* Build forked pull requests
+* Pass secrets to builds from forked pull requests
+* Only build pull requests
+* Auto-cancel redundant workflows
+* Free and open source
+* Enable dynamic config using setup workflows.
+
+More information on these settings can be found on this page, as well as in our documentation.
 
 **Environment Variables**: Add or import environment variables to your jobs to keep sensitive data out of your repository.
 
@@ -239,7 +249,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 If you have administrative privileges, the plan overview and upgrade page displays the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's xref:plan-overview#[Plan] section.
 
-Depending on which plan you have, you can also choose to share your plan, which lets any organization you belong to share and run builds on your current plan, and you can also transfer your plan to another organization.
+If you are on a paid plan, you can choose to share your plan. This allows any organization you belong to, to share and run builds on your paid-for plan. You can also transfer your plan to another organization.
 
 [#plan-usage]
 === Plan usage

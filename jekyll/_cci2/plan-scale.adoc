@@ -20,7 +20,7 @@ The Scale Plan offers several improvements over the Free and Performance Plans:
 
 [#access-to-ip-ranges]
 === Access to IP ranges
-Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution (the IP ranges feature is the same on the Performance and Scale Plan).
+Configure IP-based access to restricted environments with IP ranges. Jobs that have the IP ranges feature enabled have traffic routed through one of the defined IP address ranges during job execution. The IP ranges feature is the same on the Performance and Scale Plans.
 
 For more information about this features, refer to the xref:ip-ranges#[IP ranges] page.
 

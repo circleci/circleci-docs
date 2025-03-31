@@ -55,7 +55,7 @@ xref:orb-intro#[Orbs] are packages of reusable configuration.
 For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
 Orbs are available for many common deployment targets.
 
-For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza:
+For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line: `aws-code-deploy/deploy`. Orb jobs can be used once the orb has been invoked by adding the orbs stanza:
 
 ```yaml
 version: 2.1
