@@ -45,11 +45,11 @@ To enable your deployment to show up on the deploys UI in the CircleCI web app, 
 ====
 Specify your **project ID** in one of the following ways:
 
-* Use the `$CIRCLE_PROJECT_ID` xref:../variables#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
+*Built-in env var*: Use the `$CIRCLE_PROJECT_ID` xref:../variables#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
 
-* Manually copy the value from the project settings page:
+*Copy from project settings*: Manually copy the value from the project settings page:
 
-include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+include::../../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
 
 [start=4]
 . Your project ID is available to copy from the overview page
