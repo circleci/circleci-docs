@@ -782,7 +782,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:deploy/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a release in the CircleCI releases UI. For full details, see the xref:deploy/deploys-overview#[Releases overview] page.
+Jobs with the `release` type are used to xref:deploy/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:deploy/deploys-overview#[Deploys overview] page.
 
 **Example** of a job with a `release` type:
 

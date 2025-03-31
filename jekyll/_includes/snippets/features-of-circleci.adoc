@@ -20,3 +20,9 @@ For more detailed information about flaky tests, refer to the xref:insights-test
 Reducing the time it takes to build a Docker image is an important consideration for developers who consistently use these images in their workflows. Consider using Docker Layer Caching (DLC) if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, rather than impact the actual container used to run your job. Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster.
 
 For more information about Docker Layer Caching, refer to the xref:docker-layer-caching#[Enabling Docker Layer Caching] page.
+
+=== Deploys
+
+Visualise and control your deployments with CircleCI deploys. Deployments to Kubernetes and SageMaker are supported.
+
+Start with the xref:deploy/deploys-overview#[Deploys overview] for more information.
