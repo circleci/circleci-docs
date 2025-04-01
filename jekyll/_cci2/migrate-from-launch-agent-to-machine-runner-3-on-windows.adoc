@@ -22,7 +22,7 @@ Migrating from launch agent to machine runner 3 is a straightforward process. Th
 == 1. Uninstall launch agent
 The first step is to uninstall launch agent.
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
 . Run the following in your PowerShell:
@@ -46,7 +46,7 @@ copy "$env:ProgramFiles\CircleCI\runner-agent-config.yaml" "$desktopDir/runner-a
 [#install-machine-runner]
 == 3. Install machine runner 3
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Install-CircleCIRunner.ps1` script] from GitHub to an accessible location.
 
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 

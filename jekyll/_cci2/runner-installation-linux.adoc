@@ -203,7 +203,7 @@ sudo chmod 755 /usr/lib/systemd/system/circleci.service
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for, which defaults to 5 hours.
 
-If you want to configure the CircleCI's self-hosted runner installation to start on boot, it is important to note that machine runner will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
+When running CircleCI's self-hosted runner installation to start on boot, the machine runner will attempt to consume and start jobs as soon as it starts. It should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -219,7 +219,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (for example, proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+Unlike task-agents, which use the environment of the `circleci` user, launch-agents need to have required environment variables (for example, proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 

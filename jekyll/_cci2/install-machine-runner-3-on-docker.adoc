@@ -18,7 +18,7 @@ This page describes how to install CircleCI's machine runner 3 with the Docker e
 ====
 xref:container-runner#[Container runner] is the **recommended method** for self-hosted runner Docker installation. The instructions on this page are for a simple Docker setup using machine runner 3.
 
-Container runner is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+Container runner is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution. Container runner also h as the ability to manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 ====
 
 [#machine-approach-with-docker]
@@ -108,7 +108,7 @@ docker stop <container-name>; docker rm <container-name>;
 
 NOTE: In machine runner 3, the environment variable name prefix has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
 
-To migrate from launch agent to machine runner 3 on Docker, stop and remove the launch agent containers and replace them with machine runner 3 containers, using the commands described above.
+To migrate from launch agent to machine runner 3 on Docker, stop and remove the launch agent containers and replace them with machine runner 3 containers. The commands described above can be used to acomplish this.
 
 include::../_includes/snippets/machine-runner-example.adoc[]
 
