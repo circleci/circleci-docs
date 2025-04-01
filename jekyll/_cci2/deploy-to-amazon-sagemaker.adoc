@@ -198,6 +198,8 @@ The CircleCI Amazon SageMaker orb requires some environment variables to functio
 
 {empty} +
 
+Follow these steps to add the environment variables:
+
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
 
 [start=4]
