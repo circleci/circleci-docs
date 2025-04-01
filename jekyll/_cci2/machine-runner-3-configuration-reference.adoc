@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Machine runner 3.0 configuration reference
+= Machine runner 3 configuration reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

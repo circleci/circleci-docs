@@ -4,19 +4,19 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Migrate from launch agent to machine runner 3.0 on Windows
+= Migrate from launch agent to machine runner 3 on Windows
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Steps to migrate from using launch agent to the machine runner 3.0 preview on Windows
+:page-description: Steps to migrate from using launch agent to the machine runner 3 preview on Windows
 :icons: font
 :toc: macro
 :toc-title:
 :machine:
 :Windows:
 
-This page describes how to migrate an existing launch agent installation to machine runner 3.0. Machine runner 3.0 on Windows.
+This page describes how to migrate an existing launch agent installation to machine runner 3. Machine runner 3 on Windows.
 
-Migrating from launch agent to machine runner 3.0 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3.0 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
+Migrating from launch agent to machine runner 3 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
 
 [#uninstall-launch-agent]
 == 1. Uninstall launch agent
@@ -35,7 +35,7 @@ The first step is to uninstall launch agent.
 [#copy-current-runner-configuration]
 == 2. Copy current launch agent configuration
 
-Machine runner 3.0 is backwards compatible with the launch-agent configuration file. Using PowerShell copy the existing launch-agent config for use with the machine runner 3.0 installation.
+Machine runner 3 is backwards compatible with the launch-agent configuration file. Using PowerShell copy the existing launch-agent config for use with the machine runner 3 installation.
 
 [,powershell]
 ----
@@ -44,7 +44,7 @@ copy "$env:ProgramFiles\CircleCI\runner-agent-config.yaml" "$desktopDir/runner-a
 ----
 
 [#install-machine-runner]
-== 3. Install machine runner 3.0
+== 3. Install machine runner 3
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 
@@ -69,5 +69,5 @@ include::../_includes/snippets/machine-runner-example.adoc[]
 [#additional-resources]
 == Additional resources
 
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
-- xref:machine-runner-3-manual-installation-on-windows.adoc[Machine runner 3.0 manual installation reference]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
+- xref:machine-runner-3-manual-installation-on-windows.adoc[Machine runner 3 manual installation reference]

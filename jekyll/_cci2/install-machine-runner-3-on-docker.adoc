@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Install machine runner 3.0 on Docker
+= Install machine runner 3 on Docker
 :page-layout: classic-docs
 :page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on Docker.
 :icons: font
@@ -12,11 +12,11 @@ contentTags:
 :machine:
 :docker:
 
-This page describes how to install CircleCI's machine runner 3.0 with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner-installation#,Container runner>> page.
+This page describes how to install CircleCI's machine runner 3 with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner-installation#,Container runner>> page.
 
 [NOTE]
 ====
-xref:container-runner#[Container runner] is the **recommended method** for self-hosted runner Docker installation. The instructions on this page are for a simple Docker setup using machine runner 3.0.
+xref:container-runner#[Container runner] is the **recommended method** for self-hosted runner Docker installation. The instructions on this page are for a simple Docker setup using machine runner 3.
 
 Container runner is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 ====
@@ -46,7 +46,7 @@ include::../_includes/snippets/runner/terms.adoc[]
 
 include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
-=== 2. Create a Dockerfile that extends the machine runner 3.0 image
+=== 2. Create a Dockerfile that extends the machine runner 3 image
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
@@ -106,16 +106,16 @@ docker stop <container-name>; docker rm <container-name>;
 [#migrating-from-launch-agent]
 === Migrating from launch agent
 
-NOTE: In machine runner 3.0, the environment variable name prefix has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
+NOTE: In machine runner 3, the environment variable name prefix has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
 
-To migrate from launch agent to machine runner 3.0 on Docker, stop and remove the launch agent containers and replace them with machine runner 3.0 containers, using the commands described above.
+To migrate from launch agent to machine runner 3 on Docker, stop and remove the launch agent containers and replace them with machine runner 3 containers, using the commands described above.
 
 include::../_includes/snippets/machine-runner-example.adoc[]
 
 [#additional-resources]
 == Additional resources
 
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
-- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]

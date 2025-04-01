@@ -4,15 +4,15 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Install machine runner 3.0 on Windows
+= Install machine runner 3 on Windows
 :page-layout: classic-docs
-:page-description: Instructions on how to install CircleCI's machine runner 3.0  on Windows.
+:page-description: Instructions on how to install CircleCI's machine runner 3  on Windows.
 :icons: font
 :experimental:
 :machine:
 :windows:
 
-This page describes how to install CircleCI's machine runner 3.0 on Windows. This has been tested for Windows Server 2016, 2019, and 2022 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services (RDS) should also work.
+This page describes how to install CircleCI's machine runner 3 on Windows. This has been tested for Windows Server 2016, 2019, and 2022 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services (RDS) should also work.
 
 This page walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
@@ -104,8 +104,8 @@ Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machi
 [#additional-resources]
 == Additional resources
 
-- xref:machine-runner-3-manual-installation-on-windows.adoc[Manual installation for machine runner 3.0 on Windows]
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
-- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-manual-installation-on-windows.adoc[Manual installation for machine runner 3 on Windows]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]

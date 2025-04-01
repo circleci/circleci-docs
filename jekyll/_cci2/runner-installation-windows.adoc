@@ -11,7 +11,7 @@ contentTags:
 :machine:
 :windows:
 
-CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-windows#[machine runner 3.0 installation guide] for the recommended steps to set up Windows self-hosted runners on CircleCI cloud.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-windows#[machine runner 3 installation guide] for the recommended steps to set up Windows self-hosted runners on CircleCI cloud.
 
 This page describes how to install machine runner on Windows for **CircleCI server**. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
