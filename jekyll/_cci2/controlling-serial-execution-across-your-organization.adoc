@@ -70,6 +70,107 @@ To prevent indefinite waits, jobs can remain in the queue for up to five hours. 
 
 This architecture provides a robust system for coordinating work across your organization while maintaining execution order integrity and preventing deployment conflicts or race conditions in shared environments.
 
+== Serial Groups in the CircleCI UI
+
+When using serial groups in your CircleCI configuration, there are distinctive visual indicators when viewing your workflow graphs in the CircleCI web app.
+
+=== Identifying serial groups
+
+Serial group jobs are displayed in the CircleCI web app in workflow graphs with the following visual elements:
+
+* A job in a serial group is preceded by a block with a lock icon to show the start of the serial group. A serial group end block follows the job.
++
+TIP: Hover over the serial group start and end blocks to view additional information about the serial group status and the `serial-group` key.
++
+.Screenshot showing a job in a serial group waiting for approval
+image::serial-groups/lock-block-tooltip.png[A block with a lock icon indicated the job is part of a serial group]
+
+* Waiting jobs display a _queued_ status.
++
+.Screenshot showing a queued job in a serial group
+image::serial-groups/lock-job-queued-focus.png[A job in a serial group queueing]
+
+* The serial group start and end blocks statuses indicate the status of the jobs place in the serial group. For example if a job starts and is then cancelled while running, either manually or due to waiting beyond the time limit, the group start block shows a "Completed" status because the job did start.
+
+=== Managing serial groups
+
+From the CircleCI web app there are two ways to move a serial group along to the next job in the queue:
+
+* You can release a serial group so that the current workflow continues as normal while the next job in the serial group is allowed to run
+* You can cancel a workflow that is in a serial group. In this case all jobs in the workflow will be cancelled and the next job in the serial group will be allowed to start.
+
+Each method is described in the following sections:
+
+==== Release a serial group
+
+You can manually release a serial group from the CircleCI web app to allow queuing jobs to start. To release a serial group is to allow the next job in the queue to start. The job you are releasing from the queue will continue to run. To release a serial group, follow these steps:
+
+. In the link:https://app.circleci.com/home[CircleCI web app], select your org.
+. Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
+. Select the workflow name to view the workflow graph.
+. Select the serial group start block (with the lock icon). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
++
+image::serial-groups/serial-group-release-modal.png[Serial group release modal]
+
+[NOTE]
+====
+*Implications of releasing a serial group:*
+
+* The job that is removed from the queue when released will continue to run
+* The next job in queue will immediately start running.
+* If a workflow depends on maintaining its place in the queue throughout its execution, this may cause unexpected behavior.
+====
+
+==== Canceling a Workflow with Serial Groups
+
+You can cancel an entire workflow that contains serial group jobs:
+
+. Navigate to the Workflow view
+. Click the "Cancel Workflow" button at the top of the page
+. Confirm the cancellation when prompted
+
+[IMPORTANT]
+====
+*Implications of Canceling a Workflow:*
+
+* All jobs in the workflow will be canceled, including the serial group job
+* The serial group lock will be released for the next waiting job
+* Any work in progress within the workflow will be lost
+* Dependencies between jobs in the canceled workflow will not complete
+====
+
+=== Potential Issues to Consider
+
+[WARNING]
+====
+*When Releasing a Lock Job Only:*
+
+* Downstream jobs in the same workflow may continue running
+* This can create a split state where some operations complete while others don't
+* If multiple operations should be atomic, releasing just the lock may break that expectation
+* The workflow UI may show a mix of canceled and running jobs
+====
+
+[WARNING]
+====
+*When Canceling a Workflow:*
+
+* The entire pipeline is aborted, which may disrupt dependent processes
+* Resources used by the workflow are released immediately
+* Any jobs waiting on this serial group will start processing immediately
+* If ordering is critical, check the pipeline number of the next job in queue
+====
+
+[TIP]
+====
+Before taking either action, check which pipelines are waiting in the queue. The system protects against older pipelines running after newer ones.
+====
+
+[NOTE]
+====
+Serial group jobs do not consume build minutes while waiting in queue, only when actively running.
+====
+
 == Troubleshooting serial groups
 
 === Job skipped unexpectedly?
@@ -123,7 +224,7 @@ Serial groups can only be applied at the job level. You cannot configure an enti
 
 === No multiple keys in a single workflow
 
-Using identical serial group values multiple times within the same workflow can result in compilation errors. Each serial group key within a workflow should be unique to prevent conflicts in the execution order.
+Using identical serial group values multiple times within the same workflow can result in unexpected behaviour due to the way the jobs join the queue. Each serial group key within a workflow should be unique to prevent conflicts in the execution order.
 
 === No selective lock release
 
@@ -144,3 +245,36 @@ You cannot lock only a portion of a job's execution. The entire job is considere
 === No priority adjustments
 
 The pipeline number priority system cannot be overridden. This means you cannot prioritize an older pipeline over a newer one.
+
+
+=== Understanding Serial Group States
+
+Serial groups can appear in several states in the UI:
+
+==== Running
+When a job in a serial group is actively running, it displays:
+
+* Green progress indicator
+* Lock icon showing the group is in use
+* Any jobs using the same serial group in other pipelines will show as waiting
+
+==== Waiting
+When a job is waiting for its turn in a serial group:
+
+* The job shows as "Queued" status
+* A tooltip indicates which job is currently holding the lock
+* The job will automatically start once its turn arrives
+
+==== Skipped
+If a job is skipped due to pipeline order protection:
+
+* The job shows as "Not Run" status
+* A tooltip explains it was skipped because a newer pipeline is running
+* No action is required as this is a safety measure
+
+==== Canceled
+When a serial group job is canceled:
+
+* The job shows as "Canceled"
+* The lock is released, allowing the next job in queue to start
+* Other jobs dependent on it remain blocked
