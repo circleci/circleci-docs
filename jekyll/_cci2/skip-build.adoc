@@ -11,7 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This page describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
+This page describes how to skip or cancel work when triggering pipelines, as follows:
 
 * The CI processes can be skipped for a commit, on push to your repo.
 * Workflows can be cancelled using the auto-cancel feature.
@@ -30,7 +30,7 @@ Adding one of these tags skips pipeline execution for all the commits included i
 
 === The skip CI process
 
-When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this infomation to decide not to build your project.
+When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this information to decide not to build your project.
 
 The skip process is different depending on your VCS integration, as follows:
 
@@ -98,8 +98,7 @@ A few points to note regarding the use of the auto-cancel feature:
 
 ### Enable auto-cancel
 
-It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
-{: class="alert alert-warning"}
+CAUTION: It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
 . In the CircleCI application, go to your **Project Settings**.
 

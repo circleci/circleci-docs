@@ -9,14 +9,13 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations. Caching is project-specific, and using caching strategies helps to optimize caches for effectiveness and storage capacity.
 
 [#caching-and-self-hosted-runner]
 == Cache storage customization
 
-When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+When using self-hosted runners, there is a network and storage usage limit included in your plan. Some actions related to artifacts will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
 Retaining caches for a long period of time will have storage cost implications. It is best to determine why you are retaining caches, and how long caches need to be retained for your use case. To lower costs, consider a lower storage retention for caches, if that suits your needs.
 
@@ -44,7 +43,6 @@ You can also consider configuring your projects to rerun failed jobs rather than
 
 Having multiple directories under a single cache key increases the chance of there being a change to the cache. In the example below, there may be changes in the first two directories but no changes in the `a` or `b` directory. Saving all four directories under one cache key increases the potential storage usage. The cache restore step will also take longer than needed as all four sets of files will be restored.
 
-{% raw %}
 [,yaml]
 ----
       - save_cache:
@@ -55,7 +53,6 @@ Having multiple directories under a single cache key increases the chance of the
             - /mnt/ramdisk/apps/b/node_modules
           key: v1-node-{{ checksum "package.json" }}
 ----
-{% endraw %}
 
 [#combine-jobs-when-possible]
 === Combine jobs when possible
@@ -107,8 +104,6 @@ If you notice your cache usage is high and would like to reduce it:
 * Narrow the scope of a cache from a large directory to a smaller subset of specific files.
 * Ensure that your cache `key` is following xref:caching#further-notes-on-using-keys-and-templates[best practices]:
 +
-{% raw %}
-+
 [,yaml]
 ----
       - save_cache:
@@ -118,11 +113,7 @@ If you notice your cache usage is high and would like to reduce it:
             - /usr/local/Homebrew
 ----
 +
-{% endraw %}
-+
 Notice in the above example that best practices are not followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will cost you money, and never save you any time. Instead pick a cache `key` like the following:
-+
-{% raw %}
 +
 [,yaml]
 ----
@@ -132,8 +123,6 @@ Notice in the above example that best practices are not followed. `brew-{{ epoch
             - /Users/distiller/Library/Caches/Homebrew
             - /usr/local/Homebrew
 ----
-+
-{% endraw %}
 +
 This will change if the list of requested dependencies changes. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
 
@@ -145,8 +134,6 @@ This will change if the list of requested dependencies changes. If you find that
 
 Some dependency managers do not properly handle installing on top of partially restored dependency trees.
 
-{% raw %}
-
 [,yaml]
 ----
       - restore_cache:
@@ -156,13 +143,9 @@ Some dependency managers do not properly handle installing on top of partially r
             - gem-cache
 ----
 
-{% endraw %}
-
 In the above example, if a dependency tree is partially restored by the second or third cache keys, some dependency managers will incorrectly install on top of the outdated dependency tree.
 
 Instead of a cascading fallback, a more stable option is a single version-prefixed cache key:
-
-{% raw %}
 
 [,yaml]
 ----
@@ -171,9 +154,7 @@ Instead of a cascading fallback, a more stable option is a single version-prefix
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ----
 
-{% endraw %}
-
-Since caches are immutable, this strategy allows you to regenerate all of your caches by incrementing the version. This is useful in the following scenarios:
+Since caches are immutable, this strategy allows you to regenerate all of your caches by incrementing the version, which can be useful in the following scenarios:
 
 * When you change the version of a dependency manager like `npm`.
 * When you change the version of a language like Ruby.
@@ -190,8 +171,6 @@ Yes (with caution).
 Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 
 To prevent this behavior, add a step that cleans Bundler before restoring dependencies from cache.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -210,8 +189,6 @@ To prevent this behavior, add a step that cleans Bundler before restoring depend
           key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ----
 
-{% endraw %}
-
 [#gradle-java]
 === Gradle (Java)
 
@@ -219,8 +196,6 @@ To prevent this behavior, add a step that cleans Bundler before restoring depend
 Yes.
 
 Gradle repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are added to classpaths of generated artifacts.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -238,8 +213,6 @@ Gradle repositories are intended to be centralized, shared, and massive. Partial
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
 ----
 
-{% endraw %}
-
 [#maven-java-and-leiningen-clojure]
 === Maven (Java) and Leiningen (Clojure)
 
@@ -249,8 +222,6 @@ Yes.
 Maven repositories are intended to be centralized, shared, and massive. Partial caches can be restored without impacting which libraries are added to classpaths of generated artifacts.
 
 Since Leiningen uses Maven under the hood, it behaves in a similar way.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -267,8 +238,6 @@ Since Leiningen uses Maven under the hood, it behaves in a similar way.
           key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
 ----
 
-{% endraw %}
-
 [#npm-node]
 === `npm` (Node)
 
@@ -276,8 +245,6 @@ Since Leiningen uses Maven under the hood, it behaves in a similar way.
 Yes (with NPM5+).
 
 With NPM5+ and a lock file, you can safely use partial cache restoration.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -294,8 +261,6 @@ With NPM5+ and a lock file, you can safely use partial cache restoration.
           key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 ----
 
-{% endraw %}
-
 [#pip-python]
 === `pip` (Python)
 
@@ -303,8 +268,6 @@ With NPM5+ and a lock file, you can safely use partial cache restoration.
 Yes (with Pipenv).
 
 Pip can use files that are not explicitly specified in `requirements.txt`. Using link:https://docs.pipenv.org/[Pipenv] will include explicit versioning in a lock file.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -321,8 +284,6 @@ Pip can use files that are not explicitly specified in `requirements.txt`. Using
           key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 ----
 
-{% endraw %}
-
 [#yarn-node]
 === Yarn (Node)
 
@@ -330,8 +291,6 @@ Pip can use files that are not explicitly specified in `requirements.txt`. Using
 Yes.
 
 Yarn has always used a lock file for the reasons explained above.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -347,7 +306,6 @@ Yarn has always used a lock file for the reasons explained above.
             - ~/.cache/yarn
           key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ----
-{% endraw %}
 
 We recommend using `yarn --frozen-lockfile --cache-folder ~/.cache/yarn` for two reasons:
 
@@ -373,7 +331,7 @@ Listing multiple keys for restoring a cache increases the chances of a partial c
 
 Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock`) checksums may be a useful cache key.
 
-An alternative is to run the command `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file, you could install the dependencies within a `virtualenv` in the project root `venv` and then run the command `ls -laR venv > python_deps_checksum`.
+An alternative is to run the command `ls -laR your-deps-dir > deps_checksum` and reference it with `{{ checksum "deps_checksum" }}`. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file, you could install the dependencies within a `virtualenv` in the project root `venv` and then run the command `ls -laR venv > python_deps_checksum`.
 
 [#using-multiple-caches-for-different-languages]
 == Using multiple caches for different languages

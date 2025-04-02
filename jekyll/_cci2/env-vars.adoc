@@ -34,7 +34,7 @@ To add private keys or secrets as environment variables for use throughout your 
 
 Private environment variables enable you to store secrets safely, even when your project is public. Refer to the xref:oss#[Building open source projects] page for associated security and settings information.
 
-{% include snippets/secrets-masking.adoc %}
+include::../_includes/snippets/secrets-masking.adoc[]
 
 [#environment-variable-usage-options]
 == Environment variable usage options
