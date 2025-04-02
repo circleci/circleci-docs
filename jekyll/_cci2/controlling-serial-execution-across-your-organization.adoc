@@ -78,12 +78,12 @@ When using serial groups in your CircleCI configuration, sequential group start 
 
 Serial group jobs are displayed in the CircleCI web app in workflow graphs with the following visual elements:
 
-* A job in a serial group is preceded by a block with a lock icon to show the start of the serial group. A serial group end block follows the job.
+* A job in a serial group is preceded by a block with a key icon to show the start of the serial group. A serial group end block follows the job.
 +
 TIP: Hover over the serial group start block to view additional information about the serial group status and the `serial-group` key.
 +
 .Screenshot showing a job in a serial group waiting for approval
-image::serial-groups/lock-block-tooltip.png[A block with a lock icon indicated the job is part of a serial group]
+image::serial-groups/lock-block-tooltip.png[A block with a key icon indicated the job is part of a serial group]
 
 * Waiting jobs display a _queued_ status.
 +
@@ -118,7 +118,7 @@ You can manually release a serial group from the CircleCI web app to allow queui
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
 . Select the workflow name to view the workflow graph.
-. Select the serial group start block (with the lock icon). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
+. Select the serial group start block (with the key icon). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
 +
 image::serial-groups/serial-group-release-modal.png[Serial group release modal]
 
