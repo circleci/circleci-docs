@@ -27,91 +27,93 @@ Below are a list of dashboards currently included with the reference stack
 ==== Max Latency of Creating Pipelines
 The latency of created pipelines and pipeline errors over time
 
+==== API v2 5xx by method/route
+The rate of internal server errors by method/route
+
 === Workflows
 ==== Workflow Messages Handled by Type
 Sum of workflow message types over time
 
 ==== Number of handled messages
-???Not sure how/why this is different from above but it is
+
 
 === General Service Metrics
 ==== API v2 Requests Count Over Time
 V2 API responses grouped by type over time
 
-==== Rollbar Sends by Service
-???Rollbar erros caught by service
-
-=== Orb Service
+=== Orbs
 ==== Max Latency of Compiling Config
-???what is on the y-axis here?
-???Is this the latency on requests to compile orb configs?
+The latency on requests to compile orb configs
 
-=== Insight Monitors
+=== Insights
 ==== 5xx By Route
-5xx errors summed by route over time
+5xx errors summed by route over time on the insights API
 
-=== Webhook Monitors
+=== Webhooks
 ==== Response errors
 Webhook errors by type over time
 
-=== Legacy Notifier
+=== Notifications
 ==== Workflows-System
-notification statuses summed by type
+Notification statuses summed by type
 
 ==== Pipelines-System IngestionError
 Pipeline ingestion error rate
 
-=== Permissions Service
+=== Permissions
 ==== Permission client calls error rate % by action excluding 4xx (expect < 0.5%)
-???
-
-==== Permission Check results ratio has changed significantly
-??? This title seems like a note
-??? there is no query here
+Internal API call error rate on permissions service by request/action type
 
 ==== API Call Errors
 API error responses by status
 
 ==== Failed API calls
-Why is this different from above?
 
-=== Domain Service
+
+=== Domain
 ==== GitHub Rate Limit Percentage
 Percentage of github requests that have been rate limited
 
 ==== Timing - Providers HTTP calls, (Max, Avg)
-???
+Latency on responses from your provider (github/github enterprise)
 
 === Self Hosted Runner
 ==== Runner API - 500 HTTP Responses (Internal Server Errors)
+Internal error responses from the Runner API
 
 ==== Runner Tasks - Claims (Linear Scale)
+Successful Runner task claims
 
 === Execution
-==== Task Queue Depth (Previous Run Queue)
-Quequed tasks by by execution type
-??? what is previous run queue vs previous usage queue
+==== Task Queue Depth
+Number of tasks by by execution type, excluding runner
 
-==== Job Queue Depth (previous Usage Queue)
+==== Job Queue Depth
+Number of jobs queued
 
-==== External API request Errors (5xx)
+==== Distributor External API request Errors (5xx)
+Rate of internal error responses from the distributor external API
 
-==== Internal API request Errors (5xx)
+==== Distributor Internal API request Errors (5xx)
+Rate of internal error responses from the distributor-internal API
 
-==== Back pressure
-??? what is this?
-Failed docker jobs by type?
+==== Back Pressure
+When docker job fails to provision on a nomad client, they get a backoff error which we can use to determine that the nomad clients are over burdened. Customers can use this as an indicator of why the jobs are taking so long and if they need to scale their client cluster.
 
-==== Receiver Handled Requests (non 2xx)
+==== Machine Provisioner External API Request Errors
+Rate of error responses from the machine-provisioner external API
 
-==== Internal Handled Requests (non 2xx)
+==== Output Receiver Handled Requests (non 2xx)
+Non 2xx responses from  the output-receiver api
 
-==== Public Handled Requests (non 2xx, 3xx)
+==== Output Internal Handled Requests (non 2xx)
+Non 2xx responses from  the output-internal api
 
-==== Receiver API request Errors (5xx)
+==== Output Public Handled Requests (non 2xx, 3xx)
+Non 2xx/3xx responses from the output-public api
 
-==== Internal API request Errors (5xx)
+==== Step Receiver API request Errors (5xx)
+Internal error rate for step-receiver
 
-==== 4xx (client error) responses by status and service
-
-==== 5xx (backend error) responses by status and service
+==== Step Internal API request Errors (5xx)
+Internal error rate for the step-internal API
