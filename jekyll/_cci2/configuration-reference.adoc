@@ -1283,7 +1283,7 @@ include::../_includes/snippets/docker-resource-table.adoc[]
 
 *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
 
-include::../_includes/snippets/docker-arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-arm-resource-table.adoc[]
 
 '''
 
@@ -1353,7 +1353,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 [#windows-execution-environment]
 ===== Windows execution environment
 
-include::../_includes/snippets/windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/windows-resource-table.adoc[]
 
 Example:
 
@@ -1423,7 +1423,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 [#gpu-execution-environment-windows]
 ===== GPU execution-environment (Windows)
 
-include::../_includes/snippets/gpu-windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-windows-resource-table.adoc[]
 
 Example:
 
@@ -1448,7 +1448,7 @@ jobs:
 [#arm-execution-environment-linux]
 ===== Arm VM execution-environment
 
-include::../_includes/snippets/arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/arm-resource-table.adoc[]
 
 Example:
 
