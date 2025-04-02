@@ -124,6 +124,8 @@ en:
             link: dynamic-config
           - name: Skip CI and cancel workflows
             link: skip-build
+          - name: Controlling serial execution across your organization
+            link: controlling-serial-execution-across-your-organization
           - name: Pipeline values and parameters
             link: pipeline-variables
       - name: Trigger
