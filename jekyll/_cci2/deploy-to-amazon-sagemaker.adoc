@@ -189,9 +189,14 @@ The CircleCI Amazon SageMaker orb requires some environment variables to functio
 * `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:deploy/deploys-overview#[CircleCI deploys]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
 * `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
 
-. From the CircleCI web app, click **Dashboard** in the sidebar.
-. Use the project filter dropp-down to choose your project.
-. Select btn:[Project Settings] and then choose **Environment Variables**.
+{empty} +
+
+Follow these steps to add the environment variables:
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
+. In the sidebar menu, select **Environment Variables**.
 . Select btn:[Add Environment Variable] button to enter a name and value of the new environment variable.
 +
 image::deploy/add-env-var.png[Screenshot showing add environment variable popup]
