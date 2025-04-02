@@ -124,9 +124,9 @@ commands:
       - jq/install
       - run:
           name: Shallow Clone
-          environment:
-            WEBHOOK_BRANCH: << pipeline.trigger_parameters.webhook.body >> | jq .branch
-          command: gh repo clone << pipeline.trigger_parameters.github_app.repo_url >> . -- --depth 10 --branch "$WEBHOOK_BRANCH"
+          command: | 
+            WEBHOOK_BRANCH=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq '.branch')
+            gh repo clone << pipeline.trigger_parameters.github_app.repo_url >> . -- --depth 10 --branch "$WEBHOOK_BRANCH"
 ----
 
 == Outbound webhooks
