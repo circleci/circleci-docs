@@ -21,13 +21,19 @@ Evaluations provide insights into the performance and efficiency of applications
 
 The term _evaluation_ initially referred to a way to rate and compare AI models. Evaluation has since expanded to include application-level testing, including Retrieval Augmented Generation (RAG), function calling, and agent-based applications.
 
-The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response. There are many evaluation methodologies, such as:
+The evaluation process involves using a dataset of inputs to an LLM or application code, and a method to determine if the returned response matches the expected response. Following is a list of evaluation methodologies with descriptions of each:
 
-* LLM-assisted evaluations
-* Human evaluations
-* Intrinsic and extrinsic evaluations
-* Bias and fairness checks
-* Readability evaluations
+*LLM-assisted evaluations*:: Language models are used as automated judges to assess outputs from other models.
+
+*Human evaluations*:: Human raters directly assess model outputs through techniques like preference comparisons, Likert scales, or rubric-based scoring.
+
+*Intrinsic evaluations*:: Assess a model's inherent capabilities and linguistic properties without relying on specific applications.
+
+*Extrinsic evaluations*:: Measure a model's performance on practical downstream tasks or benchmarks to determine real-world effectiveness.
+
+*Bias and fairness checks*:: Systematically probe for and quantify a model's tendency to produce unfair, stereotyped, or discriminatory content across different demographic groups.
+
+*Readability evaluations*:: Assess how accessible and comprehensible a model's outputs are for target audiences using metrics like Flesch-Kincaid or analysis of linguistic complexity.
 
 Evaluations can cover many aspects of a model performance, including:
 
@@ -151,8 +157,8 @@ To store your LLM provider credentials, follow these steps:
 . Select btn:[Set Up] next to your chosen provider, and follow the in-app instructions.
 * When connecting an OpenAI account, you can also save the credentials for your evaluation platform, such as Braintrust and LangSmith. These credentials can then be used when setting up a pipeline that uses the CircleCI evals orb.
 
-image::llmops/create-context.png[Project Settings > LLMOPS: Create Context Modal Window in CircleCI]
-image::llmops/openai-context.png[Project Settings > LLMOPS: View contexts in CircleCI]
+image::llmops/create-context.png[Project Settings > LLMOps: Create Context Modal Window in CircleCI]
+image::llmops/openai-context.png[Project Settings > LLMOps: View contexts in CircleCI]
 
 == Next steps
 

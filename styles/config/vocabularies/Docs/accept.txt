@@ -203,6 +203,7 @@ Kubernetes
 LambdaTest
 Lein
 Leiningen
+Likert
 Linux
 [Ll]iveness
 LLMs?
