@@ -295,6 +295,7 @@ seccomp
 Selenium
 SemVer
 Server Plan
+SELinux
 \b[Ss]hellchecking\b
 [Ss]harded
 \b[Ss]ingle sign-on\b

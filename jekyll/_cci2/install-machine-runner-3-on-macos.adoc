@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Install machine runner 3.0 on macOS
+= Install machine runner 3 on macOS
 :page-layout: classic-docs
 :page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on macOS.
 :icons: font
@@ -12,7 +12,7 @@ contentTags:
 :machine:
 :macOS:
 
-This page describes how to install CircleCI's machine runner 3.0 on macOS.
+This page describes how to install CircleCI's machine runner 3 on macOS.
 
 [#prerequisites]
 == Prerequisites
@@ -115,7 +115,7 @@ api:
 mv /Library/Preferences/com.circleci.runner/launch-agent-config.yaml $HOME/Library/Preferences/com.circleci.runner/config.yaml
 ----
 
-After copying the file, you may remove the logging block to send logs to the default location for machine runner 3.0 (specified below):
+After copying the file, you may remove the logging block to send logs to the default location for machine runner 3 (specified below):
 
 [,yaml]
 ----
@@ -154,9 +154,9 @@ sudo xattr -r -d com.apple.quarantine "$(brew --prefix)/bin/circleci-runner"
 ----
 
 [#start-macos-machine-runner]
-== 4. Start macOS machine runner 3.0
+== 4. Start macOS machine runner 3
 
-To start the macOS machine runner 3.0 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
+To start the macOS machine runner 3 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
 
 [.tab.startdomain.GUI_domain]
 --
@@ -205,7 +205,7 @@ launchctl print user/$(id -u)/com.circleci.runner
 include::../_includes/snippets/machine-runner-example.adoc[]
 
 [#stop-macos-machine-runner]
-== Stop macOS machine runner 3.0
+== Stop macOS machine runner 3
 
 To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
 
@@ -227,8 +227,8 @@ launchctl disable user/$(id -u)/com.circleci.runner
 --
 
 [#uninstall-machine-runner-macos]
-== Uninstall machine runner 3.0 on macOS
-To uninstall machine runner 3.0 from your macOS device, follow these steps.
+== Uninstall machine runner 3 on macOS
+To uninstall machine runner 3 from your macOS device, follow these steps.
 
 . Stop the machine runner service by using the following command to disable it, depending on the service target used during installation:
 +
@@ -286,8 +286,8 @@ $HOME/Library/Logs/com.circleci.runner/runner.log
 [#additional-resources]
 == Additional resources
 
-- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3.0]
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
