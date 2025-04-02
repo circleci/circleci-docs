@@ -25,7 +25,7 @@ You can also configure CircleCI to integrate with other services for:
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
-NOTE: **Deploy to Kubernetes?** Refer to our xref:deploy/deploys-overview#[Releases overview] page to start managing your releases in the CircleCI web app. CircleCI releases is in open preview.
+NOTE: **Deploy to Kubernetes?** Refer to our xref:deploy/deploys-overview#[Deploys overview] page to start managing your deployments in the CircleCI web app.
 
 [#the-basics-of-deployment]
 == The basics of deployment
@@ -34,7 +34,7 @@ Here are the core concepts you need to get a deployment set up:
 
 * **Deployment job**: To deploy your application, add a xref:jobs-steps#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
-TIP: Add a release log step to your deployment job to **view a log of releases** in the CircleCI web app. See the xref:deploy/configure-deploy-markers#[Release markers] guide to learn more.
+TIP: Add a deployment log step to your deployment job to **view a log of deployments** in the CircleCI web app. See the xref:deploy/configure-deploy-markers#[Deployment markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -55,7 +55,7 @@ xref:orb-intro#[Orbs] are packages of reusable configuration.
 For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
 Orbs are available for many common deployment targets.
 
-For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza:
+For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line: `aws-code-deploy/deploy`. Orb jobs can be used once the orb has been invoked by adding the orbs stanza:
 
 ```yaml
 version: 2.1
