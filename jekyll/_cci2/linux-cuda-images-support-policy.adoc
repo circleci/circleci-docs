@@ -6,13 +6,11 @@ contentTags:
 ---
 = CircleCI Linux CUDA images support policy
 :page-layout: classic-docs
-:page-liquid:
 :page-description: CircleCI Linux CUDA images release, update, and deprecation policy
 :icons: font
-:toc: macro
-:toc-title:
+:experimental:
 
-{% include snippets/linux-cuda-deprecation-notice.adoc %}
+include::../_includes/snippets/linux-cuda-deprecation-notice.adoc[]
 
 [#overview]
 == Overview

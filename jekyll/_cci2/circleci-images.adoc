@@ -34,7 +34,7 @@ NOTE: CircleCI occasionally makes scheduled changes to images to fix bugs or oth
 [#examples]
 === Examples
 
-Refer to the link:{{ site.baseurl }}/examples-and-guides-overview/[Examples and Guides Overview] for examples of using pre-built CircleCI Docker Images in a demo application.
+Refer to the xref:examples-and-guides-overview#[Examples and Guides Overview] for examples of using pre-built CircleCI Docker Images in a demo application.
 
 [#next-generation-convenience-images]
 == Next-generation convenience images
@@ -63,7 +63,7 @@ jobs:
       - image: cimg/base:2021.04
 ----
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 `cimg/base:2021.04` is a Ubuntu-based image designed to install the bare minimum. The
 next-generation convenience images are based on this image.
@@ -170,11 +170,11 @@ All images add a `circleci` user as a system user. The sections below walk throu
 Next-gen language images are convenience images for common programming languages.
 These images include relevant language tools and <<pre-installed-tools,commonly-used tools>>.
 To use a language image, list it first under the `docker` key in your configuration,
-making it the link:{{ site.baseurl }}/glossary/#primary-container[primary container] during execution.
+making it the xref:glossary#primary-container[primary container] during execution.
 
-See the https://circleci.com/developer/images?imageType=docker[Developer Hub] for a full list of next-gen images.
+See the link:https://circleci.com/developer/images?imageType=docker[Developer Hub] for a full list of next-gen images.
 
-If your language is not listed, feel free to request an image on our https://ideas.circleci.com/[Ideas
+If your language is not listed, feel free to request an image on our link:https://ideas.circleci.com/[Ideas
 Board]. First, check to see if that "idea" is
 already on CircleCI Ideas. If it is, up-vote it. If not, create it and set the
 category as "images". Finally, go and market your "idea" to friends, co-workers,
@@ -197,21 +197,21 @@ for details on which variants it supports.
 The legacy language images are convenience images for common programming languages.
 These images include both the relevant language and <<pre-installed-tools,commonly-used tools>>.
 A language image should be listed first under the `docker` key in your configuration,
-making it the link:{{ site.baseurl }}/glossary/#primary-container[primary container] during execution.
+making it the xref:glossary#primary-container[primary container] during execution.
 
 CircleCI maintains legacy images for the languages below.
 
-* <<android,Android>>
-* <<clojure,Clojure>>
-* <<elixir,Elixir>>
-* <<go-golang,Go (Golang)>>
-* <<jruby,JRuby>>
-* <<node-js,Node.js>>
-* <<openjdk,OpenJDK (Java)>>
-* <<php,PHP>>
-* <<python,Python>>
-* <<ruby,Ruby>>
-* <<rust,Rust>>
+* Android
+* Clojure
+* Elixir
+* Go (Golang)
+* JRuby
+* Node.js
+* OpenJDK (Java)
+* PHP
+* Python
+* Ruby
+* Rust
 
 [#language-image-variants]
 ==== Language image variants
@@ -241,13 +241,13 @@ Service images are convenience images for services like databases. These images 
 
 CircleCI maintains legacy images for the services below.
 
-* <<buildpack-deps,buildpack-deps>>
-* <<dynamodb,DynamoDB>>
-* <<mariadb,MariaDB>>
-* <<mongodb,MongoDB>>
-* <<mysql,MySQL>>
-* <<postgresql,PostgreSQL>>
-* <<redis,Redis>>
+* buildpack-deps
+* DynamoDB
+* MariaDB
+* MongoDB
+* MySQL
+* PostgreSQL
+* Redis
 
 [#service-image-variant]
 ==== Service image variant
@@ -325,28 +325,103 @@ NOTE: Excluding <<language-image-variants,language image variants>> and <<servic
 service image variant>>, *for legacy images* CircleCI
 does *not* control which tags are used. These tags are chosen and maintained
 by upstream projects. Do not assume that a given tag has the same meaning across
-images!
+images.
 
-{% assign images = site.data.docker-image-tags | sort %}
-{% for image in images %}
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|Image name |Resources |Usage |Tags
 
-=== {{ image[1].name }}
+|Android
+|https://hub.docker.com/r/circleci/android[Docker Hub]
+|`- image: circleci/android:[TAG]`
+|https://hub.docker.com/r/circleci/mariadb/tags?ordering=last_updated[Tags]
 
-*Resources:*
+|buildpack-deps
+|https://hub.docker.com/r/circleci/buildpack-deps[Docker Hub]
+|`- image: circleci/buildpack-deps:[TAG]`
+|https://hub.docker.com/r/circleci/buildpack-deps/tags?ordering=last_updated[Tags]
 
-* https://hub.docker.com/r/circleci/{{ image[0] }}[Docker Hub] - where this image is hosted as well as some useful instructions.
+|Clojure
+|https://hub.docker.com/r/circleci/clojure[Docker Hub]
+|`- image: circleci/clojure:[TAG]`
+|https://hub.docker.com/r/circleci/clojure/tags?ordering=last_updated[Tags]
 
-*Usage:* Add the following under `docker:` in your config.yml:
+|DynamoDB
+|https://hub.docker.com/r/circleci/dynamodb[Docker Hub]
+|`- image: circleci/dynamodb:[TAG]`
+|https://hub.docker.com/r/circleci/dynamodb/tags?ordering=last_updated[Tags]
 
-`- image: circleci/{{ image[0] }}:[TAG]`
+|Elixir
+|https://hub.docker.com/r/circleci/elixir[Docker Hub]
+|`- image: circleci/elixir:[TAG]`
+|https://hub.docker.com/r/circleci/elixir/tags?ordering=last_updated[Tags]
 
-*Recent Tags:*
+|Go (Golang)
+|https://hub.docker.com/r/circleci/golang[Docker Hub]
+|`- image: circleci/golang:[TAG]`
+|https://hub.docker.com/r/circleci/golang/tags?ordering=last_updated[Tags]
 
-See https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated[the tag list for the {{ image[0] }} image on Docker Hub].
+|JRuby
+|https://hub.docker.com/r/circleci/jruby[Docker Hub]
+|`- image: circleci/jruby:[TAG]`
+|https://hub.docker.com/r/circleci/jruby/tags?ordering=last_updated[Tags]
 
-'''
+|MariaDB
+|https://hub.docker.com/r/circleci/mariadb[Docker Hub]
+|`- image: circleci/mariadb:[TAG]`
+|https://hub.docker.com/r/circleci/mariadb/tags?ordering=last_updated[Tags]
 
-{% endfor %}
+|MongoDB
+|https://hub.docker.com/r/circleci/mongo[Docker Hub]
+|`- image: circleci/mongo:[TAG]`
+|https://hub.docker.com/r/circleci/mongo/tags?ordering=last_updated[Tags]
+
+|MySQL
+|https://hub.docker.com/r/circleci/mysql[Docker Hub]
+|`- image: circleci/mysql:[TAG]`
+|https://hub.docker.com/r/circleci/mysql/tags?ordering=last_updated[Tags]
+
+|Node.js
+|https://hub.docker.com/r/circleci/node[Docker Hub]
+|`- image: circleci/node:[TAG]`
+|https://hub.docker.com/r/circleci/node/tags?ordering=last_updated[Tags]
+
+|OpenJDK
+|https://hub.docker.com/r/circleci/openjdk[Docker Hub]
+|`- image: circleci/openjdk:[TAG]`
+|https://hub.docker.com/r/circleci/openjdk/tags?ordering=last_updated[Tags]
+
+|PHP
+|https://hub.docker.com/r/circleci/php[Docker Hub]
+|`- image: circleci/php:[TAG]`
+|https://hub.docker.com/r/circleci/php/tags?ordering=last_updated[Tags]
+
+|PostgreSQL
+|https://hub.docker.com/r/circleci/postgres[Docker Hub]
+|`- image: circleci/postgres:[TAG]`
+|https://hub.docker.com/r/circleci/postgres/tags?ordering=last_updated[Tags]
+
+|Python
+|https://hub.docker.com/r/circleci/python[Docker Hub]
+|`- image: circleci/python:[TAG]`
+|https://hub.docker.com/r/circleci/python/tags?ordering=last_updated[Tags]
+
+|Redis
+|https://hub.docker.com/r/circleci/redis[Docker Hub]
+|`- image: circleci/redis:[TAG]`
+|https://hub.docker.com/r/circleci/redis/tags?ordering=last_updated[Tags]
+
+|Ruby
+|https://hub.docker.com/r/circleci/ruby[Docker Hub]
+|`- image: circleci/ruby:[TAG]`
+|https://hub.docker.com/r/circleci/ruby/tags?ordering=last_updated[Tags]
+
+|Rust
+|https://hub.docker.com/r/circleci/rust[Docker Hub]
+|`- image: circleci/rust:[TAG]`
+|https://hub.docker.com/r/circleci/rust/tags?ordering=last_updated[Tags]
+|===
 
 [#next-steps]
 == Next steps

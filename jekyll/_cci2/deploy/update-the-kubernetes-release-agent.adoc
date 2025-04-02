@@ -1,0 +1,51 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Update the Kubernetes release agent
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to update the Kubernetes release agent for integrations with CircleCI deploys.
+:icons: font
+:experimental:
+
+Follow the steps on this page to update the CircleCI release agent installed in your Kubernetes cluster.
+
+Refer to the link:https://circleci.com/changelog/[CircleCI Change log] to find out about new release agent versioning, updates, and fixes.
+
+[#prerequisites]
+== Prerequisites
+
+To update the Kubernetes release agent you need an operational CircleCI environment integrated with your Kubernetes cluster. Refer to the following pages for steps:
+
+* xref:set-up-circleci-deploys#[Set up CircleCI deploys]
+* xref:configure-your-kubernetes-components#[Configure your Kubernetes components]
+
+[CAUTION]
+====
+If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend to migrate to the new labels as soon as possible.
+
+Support for the old labels will be dropped in one of the next releases.
+
+After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
+====
+
+[#update-steps]
+== Update steps
+
+. Update your local Helm cache:
++
+[,shell]
+----
+helm repo update
+----
+. Upgrade to the new version:
++
+[,shell]
+----
+helm upgrade --install circleci-release-agent-system release-agent/circleci-release-agent \
+--set tokenSecret.token=[YOUR_CCI_INTEGRATION_TOKEN] --create-namespace \
+--namespace circleci-release-agent-system \
+--set managedNamespaces="{namespace1,namespace2}"
+----

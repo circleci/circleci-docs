@@ -1,0 +1,411 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Deploys overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn CircleCI deploys for visibility into Kubernetes and Amazon SageMaker deployments, how it works, and how to get set up
+:icons: font
+:experimental:
+
+Visualize and control your deployments with CircleCI deploys. The CircleCI deploys dashboard supports any deployment, and the deploys management tooling works with deployments to Kubernetes and Amazon SageMaker.
+
+[#introduction]
+== Introduction
+
+CircleCI deploys gives you visibility into your Kubernetes deployments within the CircleCI web app, as well as access to commands and visualisations for managing deployments. From the CircleCI web app, you can:
+
+* Restore version
+* Scale component
+* Restart component
+
+We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
+
+* Retry Rollout
+* Promote Rollout
+* Cancel Rollout
+
+[#quickstart]
+== Quickstart
+
+To get started with CircleCI deploys for Kubernetes right away, refer to the following guides:
+
+* xref:set-up-circleci-deploys#[Tutorial 1: Set up CircleCI deploys]
+* xref:configure-your-kubernetes-components#[Tutorial 2: Configure your Kubernetes components]
+* xref:manage-deploys#[How-to: Manage deploys]
+
+To get set up with deploys for Amazon SageMaker, refer to the xref:../deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
+
+[#how-it-works]
+== How it works
+
+CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
+
+image::../../img/docs/releases/releases-architecture.png[Diagram showing the architecture of CircleCI releases]
+
+Configure environment integrations to install the CircleCI release agent into your Kubernetes clusters. Configure the release agent to only monitor the namespaces you require.
+
+Developers can monitor deployments in the CircleCI web app, and run commands to manage those deployments from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
+
+[#releases-concepts]
+== Concepts
+
+The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploys.
+
+[#component]
+=== Component
+
+A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
+
+[#delivery]
+=== Delivery
+
+_Delivery_ is the act of packaging code changes and making them available for Deployment. Continuous delivery is the prerequisite step for continuous deployment. With some variations on the technologies being used, the delivery process creates executables from code and then makes them available to be deployed to an environment at a subsequent time.
+
+[#deployment]
+=== Deployment
+
+_Deployment_ is the act of putting a new component version into an environment, regardless of whether users and other services interact with the new version or a previous one. Depending on the deployment type, a release may happen either:
+
+* As a later task, such as switching over traffic shaping rules for a blue/green deployment.
+* As a direct consequence of the deployment, such as a standard Kubernetes rolling update.
+
+[#command]
+=== Command
+
+A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
+
+Some commands are available for all components. These are:
+
+* Restore version
+* Scale component
+* Restart component
+
+A subset of commands are available for _progressive_ deployments (when using Argo Rollouts). These are:
+
+* Retry deployment
+* Promote deployment
+* Cancel deployment
+
+[#release]
+=== Release
+
+A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services.
+
+A release can happen when an existing component is updated or when the first version for a new component is deployed.
+
+In the deploys dashboard, deployments are tagged as **Progressive** if they refer to an Argo Rollout.
+
+A deployment starts when the component version is updated, and ends when the new version has reached 100% availability, and all associated validations have been completed. In the case of a progressive deployment, this happens when the Rollout completes. In the case of a Kubernetes Deployment, this happens when the Deployment replicas are all available and ready.
+
+[#the-releases-UI]
+== The deploys UI
+
+The CircleCI deploys UI is a powerful tool for visualising, monitoring and managing your deployments. The pages included in the deploys UI are described below.
+
+[#dashboard]
+=== The dashboard
+
+image::../../img/docs/releases/dashboard.png[Screenshot showing the deploys dashboard in the CircleCI web app]
+
+Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboard. The dashboard shows the following:
+
+* **Timeline**: A timeline of deploys across your organization's components and environments. You can use the filter dropdown menus at the top of the page to select a component and/or environment. You will see live status updates, deployment trigger source, release version, deployment type (for example, _progressive_, when you are using an Argo Rollout). From here you can access the following:
+** The deployment details page for a specific release by clicking on the status badge or version number.
+** The component or environment details pages by clicking on the respective names.
+** The project dashboard for the CircleCI project associated with a deployment.
+** The job details page for the job that started the deployment.
+** The commit details page in your VCS for the commit that started the deployment.
+
+* **Environments**: List of environment integrations set up for your organization. From here you can:
+** Set up a new environment integration by selecting btn:[Create Environment Integration].
+** Access settings for each environment (icon:cog[]).
+** Access the environment details view by selecting an environment name.
+
+* **Components**: A list of components and their associated projects. From here you can:
+** Set up a new component by selecting btn:[Create Component]. From here you can select and environment that has a successful environment integration set up, and from there you can add a new component.
+** Get straight to the component's project building on CircleCI by selecting the project name.
+** Access setting for each component (icon:cog[]).
+
+=== Filter and group components and environments with labels
+
+Add labels to your components and environments to provide teams with a way to filter and group content in the deploys UI. Once a label is added, you can use this to filter your view to focus on the content relevant to your team.
+
+Labels are composed of two values separated by a colon, for example, `team:my-team-name`. To specify multiple labels for a component or environment, you can separate them with a comma. For example, `team:my-team-name, role:web`. You can add up to 20 labels to a component or environment.
+
+==== Use labels to filter components and environments
+
+Once you have added labels to your components and environments, you can use them to filter your view in the deploys UI. In the timeline, environments, or components view, select a filter to reduce the content in the tab to only your selection. You can also use the label filter dropdown menu at the top of the page.
+
+==== Add or edit labels
+
+To add or edit labels follow the steps below.
+
+.Add and Edit environment and component labels
+image::../../img/docs/releases/edit-labels.png[Screenshot showing the location of the add/edit labels button]
+
+===== Component labels
+
+To add or edit labels for a component, follow these steps:
+
+. Select *Deploys* in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Components** tab.
+. Select the cog icon (icon:cog[]) for your component. You can use the filter at the top of the page to help find the component you want.
+. You are now on the component settings page. Select the edit button (icon:pencil[]) in the labels panel.
+. Enter or edit your label(s) and select btn:[Done].
+
+===== Environment labels
+
+To add or edit labels for an environment, follow these steps:
+
+. Select *Deploys* in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Environments** tab.
+. Select the cog icon (icon:cog[]) for your environment.
+. You are now on the environment settings page. Select the edit button (icon:pencil[]) in the labels panel.
+. Enter or edit your label(s) and select btn:[Done].
+
+=== View all deployments for an environment
+
+To view all deployments for an environment, follow these steps:
+
+. Select *Deploys* in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Environments** tab.
+. Select your environment by name.
+. You are now on the environment details page. Select the **Deployments** tab to view a list of all deployments for your chosen environment.
+
+=== View all commands run for an environment
+
+To view all commands run for an environment, follow these steps:
+
+. Select *Deploys* in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Environments** tab.
+. Select your environment by name.
+. You are now on the environment details page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment.
+
+=== View all deployments for a component
+
+To view all deployments for a component, follow these steps:
+
+. Select *Deploys* in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Components** tab.
+. Select your component by name. You can use the filter at the top of the page to help.
+. You are now on the component details page. Select the **Deployments** tab to view a list of all deployments for your chosen component.
+
+=== View all commands run for a component
+
+To view all commands run for a component, follow these steps:
+
+. Select *Deploys* in the CircleCI web app sidebar.
+. You are now in the timeline view. Select the **Components** tab.
+. Select your component by name. You can use the filter at the top of the page to help.
+. You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component.
+
+[#releases-requirements]
+== Requirements
+
+[#tooling]
+=== Tooling
+
+We test the versions listed here. Older versions may work but are not guaranteed.
+
+include::../../_includes/partials/deploy/supported-versions.adoc[]
+
+[#labels-and-annotations]
+=== Labels and annotations
+
+The following table shows a complete list of labels and annotations either required or available for configuring your environment integration.
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|
+|Label/annotation
+|Value
+|Required?
+
+|`Metadata.Labels`
+|`circleci.com/component-name`
+|A name for your application
+|Yes
+
+|`Metadata.Labels`
+|`circleci.com/version`
+|Current version
+|Yes
+
+|`Spec.Template.Metadata.Labels`
+|`circleci.com/component-name`
+|See above
+| Yes
+
+|`Spec.Template.Metadata.Labels`
+|`circleci.com/version`
+|See above
+| Yes
+
+|`Metadata.Annotations`
+|`circleci.com/project-id`
+|Project ID for the CircleCI project associated with the job that deploys your component
+|Yes
+
+|`Metadata.Annotations`
+|`circleci.com/operation-timeout`
+|A link:https://pkg.go.dev/time#ParseDuration[Go duration string], for example, 5m, 10m15s
+|No. Only needed to set a custom timeout duration. This option is only available if you are using Helm to configure your Kubernetes resources.
+
+|`Metadata.Annotations`
+|`circleci.com/restore-version-enabled`
+|`false`
+|No. Only set if you want to disable the restore version feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/scale-component-enabled`
+|`false`
+|No. Only set if you want to disable the scale component feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/restart-component-enabled`
+|`false`
+|No. Only set if you want to disable the restart component feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/retry-release-enabled`
+|`false`
+|No. Only set if you want to disable the retry deployment feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/promote-release-enabled`
+|`false`
+|No. Only set if you want to disable the promote deployment feature for your component.
+
+|`Metadata.Annotations`
+|`circleci.com/cancel-release-enabled`
+|`false`
+|No. Only set if you want to disable the cancel deployment feature for your component.
+|===
+
+== Autodetected deployments and deploy markers
+
+CircleCI automatically generates deploy markers for your deployment pipelines. Deploy markers provide a lightweight way to log your deployments without requiring a full CircleCI deploys setup. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them. You can use deploy markers independently, without installing the CircleCI release agent.
+
+=== Auto-detection of deployments
+
+CircleCI looks for the word `deploy` in your job names to detect when a deployment may have happened and creates an autodetected deploy marker.
+
+When CircleCI creates a deploy marker for you automatically, we use the information available in your pipeline configuration to create the following:
+
+* **Component**: CircleCI created a component for the deployment and uses your project name to create a component name.
+* **Environment integration**: CircleCI creates an environment for you, using your job and workflow names to attempt to create a relevant name. If an environment name cannot be generated, the name will be `autogenerated`, and you can edit it later. The environment has the type `AUTODETECTED`.
+* **Version**: CircleCI uses the build number to populate the version for the purposes of displaying the deployment in the CircleCI web app.
+
+If any of the following conditions are true, CircleCI **will not** generate a deploy marker for a job even if the name contains the word `deploy`:
+
+* The job has a status other than `SUCCESS`.
+* Any of the following keywords and keyword combinations are present in the job name:
+** `dry run`
+** `skip deploy`
+** `bypass deploy`
+** `deployed`
+** `validation`
+** `validate`
+* The project related to the job has releases created via the Kubernetes release agent or manual release jobs in the last two months.
+* You have opted out of the autodetected releases feature.
+* The detected environment integration name collides with an integration you have already set up.
+
+==== Manual configuration of autodetected releases
+Some points to consider when manually configuring autodetected releases:
+
+* If you decide you would like to manually configure a release marker for an environment integration that was created as part of an autodetected release, refer to the xref:configure-deploy-markers#[Configure release markers] page to set up a release marker and a new environment integration.
+
+* If you change a component name that was originally autodetected by us, CircleCI creates a new component and the history **will not** carry over. If you do not update the component name, the history **will** carry over.
+
+* If your environment integration has an autogenerated name, you can edit the name as follows:
+.. In the link:https://circleci.com/app/home[CircleCI web app], select your organization.
+.. Select **Releases** in the sidebar.
+.. Select the **Environments** tab.
+.. Find your environment and select cog icon (icon:cog[]) to enter the environment integration settings page.
+.. Select **Edit**.
+.. Enter a new name and select btn:[Update].
+
+
+=== Opt out of autodetected releases
+If you do not want CircleCI to automatically create release marker for you, you can opt out of this feature either for a whole organization or per-project.
+
+To opt out of autodetected releases for an entire **organization**, follow these steps:
+
+. In the link:https://circleci.com/app/home[CircleCI web app], select your organization.
+. Select **Organization settings** in the sidebar.
+. Select **Releases**.
+. Toggle the "Enable automatic release marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option right.
+
+To opt out of autodetected releases for a **project**, follow these steps:
+
+. In the link:https://circleci.com/app/home[CircleCI web app], select your organization.
+. Select **Projects** in the sidebar.
+. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), select **Project Settings**.
+. Select **Releases**.
+. Toggle the "Enable automatic release marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option right.
+
+=== Manual setup of release markers
+
+If you would rather set up release markers yourself, see the xref:configure-deploy-markers#[Configure release markers] page.
+
+[#release-status]
+== Release status
+
+A release can be in one of the following states:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Status
+|Notes
+
+|RUNNING
+|The release is currently in progress.
+
+|FAILED
+|Resources have reached an unhealthy status (pods for the new version of a Kubernetes component).
+
+|SUCCESS
+|The Deployment or Rollout has all desired resources available (all pods specified by a Kubernetes Deployment or Argo Rollout).
+
+|CANCELLED
+|The release has been cancelled, either using the `cancel release` option, or by being superseded by another release.
+
+|EXPIRED
+|Release commands failed to be picked up by the release agent within the required time window.
+
+|LOGGED
+|Deployment has been logged using a deploy marker and is available in the CircleCI deployments UI.
+|===
+
+[#known-limitations]
+== Known limitations
+
+* Restarting the release agent while a deployment is ongoing will cause the release agent to lose track of the deployment status and fail to update the CircleCI services accordingly.
+* **In the CircleCI deployments UI it is currently possible for you to attempt and restore a version that does not exist**. All deployments are presented in the UI, including those outside of the scope of any version history limits you might have set. We do not currently filter out deployments for which there is no longer any data.
++
+Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
++
+If you have these limits set, you can't restore a version outside the limit. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
++
+We are working on updates to:
++
+** Indicate out-of-scope deployments.
+** Prevent you from attempting to restore unavailable deployments
+** Provide a manual way for you to mark deployments as unavailable
+
+[#troubleshooting]
+== Troubleshooting
+
+include::../../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]
+
+[#next-steps]
+== Next steps
+
+* xref:set-up-circleci-deploys#[Set up CircleCI deploys]
+* To try out CircleCI deploys for a Kubernetes deployment, visit the link:https://github.com/CircleCI-Public/cd-config-examples[Continuous delivery config examples] repo.
+

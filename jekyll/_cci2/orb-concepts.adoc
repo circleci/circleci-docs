@@ -1,0 +1,421 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Orbs concepts
+:page-description: Conceptual Overview for Orbs
+:experimental:
+:icons: font
+:page-layout: classic-docs
+
+link:https://circleci.com/orbs/[CircleCI orbs] are shareable packages of configuration elements, including the following:
+
+* xref:reusing-config#authoring-parameterized-jobs[Jobs]
+* xref:reusing-config#authoring-reusable-commands[Commands]
+* xref:reusing-config#authoring-reusable-executors[Executors].
+
+Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the xref:reusing-config#[Reusable Configuration Reference].
+
+[#orb-configuration-elements]
+== Orb configuration elements
+
+CircleCI's xref:reusing-config#[Reusable Configuration] features allow you to define parameterizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full xref:configuration-reference#[Configuration Reference] features before moving on to the xref:reusing-config#[Reusable Configuration Reference].
+
+[#commands]
+=== Commands
+
+Commands contain one or more steps in which xref:reusing-config#using-the-parameters-declaration[parameters] can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as xref:configuration-reference#checkout[checking out code], or running shell code, for example, running Bash or CLI tools. For more information see the xref:reusing-config#authoring-reusable-commands[Authoring Reusable Commands] guide.
+
+As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  aws-s3: circleci/aws-s3@4.1.0
+
+jobs:
+  build:
+    docker:
+      - image: 'cimg/python:3.6'
+    steps:
+      - checkout
+      - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
+      # using the aws-s3 orb's "copy" command.
+      - aws-s3/copy:
+          from: bucket/build_asset.txt
+          to: 's3://my-s3-bucket-name'
+
+  #... workflows , other jobs etc.
+----
+
+See the link:https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands[AWS-S3 Orb] page in the registry for more information.
+
+[#executors]
+=== Executors
+
+Executors are parameterized execution environments in which xref:orb-concepts#jobs[jobs] can be run. CircleCI provides multiple xref:configuration-reference#executor-job[executor options]:
+
+* Docker
+* macOS
+* Windows
+* Machine (Linux VM)
+
+Executors defined within orbs can be used to run jobs within your project configuration, or within the jobs defined in the orb.
+
+[#executor-definition-example]
+==== Executor definition example
+
+[.tab.executor.Node-Docker]
+--
+[,yaml]
+----
+description: >
+  Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
+  images built for CI.
+docker:
+  - image: 'cimg/node:<<parameters.tag>>'
+parameters:
+  tag:
+    default: '13.11'
+    description: >
+      Pick a specific cimg/node image version tag:
+      https://circleci.com/developer/images/image/cimg/node
+    type: string
+----
+--
+
+[.tab.executor.Ruby-Docker]
+--
+[,yaml]
+----
+description: >
+  Select the version of Ruby to use. Uses CircleCI's highly cached convenience
+  images built for CI.
+
+  Any available tag from this list can be used:
+  https://hub.docker.com/r/cimg/ruby/tags
+docker:
+  - image: 'cimg/ruby:<< parameters.tag >>'
+parameters:
+  tag:
+    default: '2.7'
+    description: The `circleci/ruby` Docker image version tag.
+    type: string
+----
+--
+
+In the link:https://circleci.com/developer/orbs/orb/circleci/node[Node orb], for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's link:https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing[test job].
+
+For more information, see the guide to xref:reusing-config#authoring-reusable-executors[Authoring Reusable Executors] and example for the xref:reusing-config#executor[`executor` parameter type]. Also, see the registry page for the link:https://circleci.com/developer/orbs/orb/circleci/node#executors-default[Node Orb].
+
+[#jobs]
+=== Jobs
+
+xref:reusing-config#authoring-parameterized-jobs[Jobs] define a collection of xref:configuration-reference#steps[steps] to be run within a given xref:orb-concepts#executors[executor], and are orchestrated using xref:workflows#[Workflows]. Jobs will also individually return their status via xref:enable-checks#[GitHub Checks].
+
+When importing an orb which has jobs, you can reference them directly from your workflows.
+
+[,yml]
+----
+version: 2.1
+
+orbs:
+  <orb>: <namespace>/<orb>@x.y #orb version
+
+workflows:
+  use-orb-job:
+    jobs:
+      - <orb>/<job-name>
+----
+
+See the xref:reusing-config#authoring-parameterized-jobs[Authoring Reusable Jobs] guide for more information, and the link:https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing[Using Node Test Job] example in the orb registry.
+
+[#usage-examples]
+=== Usage examples
+
+Using the xref:orb-development-kit#[orb development kit], adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples[src/examples] directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the link:https://circleci.com/developer/orbs[Orb Registry]. Below is a sample usage example:
+
+[,yaml]
+----
+# Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
+
+description: >
+  Sample example description.
+usage:
+  version: 2.1
+  orbs:
+    <orb-name>: <namespace>/<orb-name>@1.2.3
+  workflows:
+    use-my-orb:
+      jobs:
+        - <orb-name>/<job-name>
+----
+
+[#namespaces]
+== Namespaces
+
+A _namespace_ is a unique identifier claimed by a user or organization to group a set of orbs by author. Each user or organization can claim _one_ unique and immutable namespace. Each namespace can contain many uniquely named orbs.
+
+For example, the `circleci/rails` orb may coexist in the registry with an orb called `<other-namespace>/rails` because they are in separate namespaces.
+
+Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, contact link:https://support.circleci.com/[support].
+
+By default, created namespaces appear as "community" namespaces in the link:https://circleci.com/developer/orbs[Orb Registry].
+
+[#semantic-versioning]
+== Semantic versioning
+
+Orbs utilize the link:https://semver.org/[SemVer] release process, in which each orb update follows a standardized versioning pattern that orb authors and users should take advantage of.
+
+In Semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
+
+[,shell]
+----
+[Major].[Minor].[Patch]
+----
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| SemVer | Description
+
+| Major
+| Breaking changes.
+
+| Minor
+| Backwards compatible additional features.
+
+| Patch
+| Bug fixes.
+|===
+
+When you import an orb, you can pin it to a particular SemVer component.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Imported Version | Description
+
+| 1.2.3
+| Will match full SemVer version. No changes will be introduced.
+
+| 1.2
+| Locked to major version `1`, minor version `2`, will receive all patch updates.
+
+| 1
+| Locked to major version `1`. Will receive all minor and patch updates. Major version will not change automatically.
+
+| volatile
+| *Not Recommended* Will pull the last published version of the orb, may be useful in testing. Not a part of SemVer versioning.
+|===
+
+To avoid negatively impacting a user's CI process, orb authors should strictly adhere to SemVer versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
+
+NOTE: CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either SemVer-style version strings in x.y.z format, or a development-style version string in dev:* format.
+
+[#orb-versions-development-vs-production-vs-inline]
+== Orb versions (development vs production vs inline)
+
+[#production-orbs]
+=== Production orbs
+
+Production orbs are immutable and can be found on the link:https://circleci.com/developer/orbs[Orb Registry].
+
+* Production orbs are immutable, they cannot be deleted or edited, and updates must be provided in a new SemVer release
+* Version string must be in SemVer format, for example, `<namespace>/<orb>@1.2.3`
+* Production orbs can only be published by an owner of the namespace organization
+* Published to the Orb Registry
+* Open source, released under link:https://circleci.com/developer/orbs/licensing[MIT license]
+* Available via CircleCI CLI
+
+[#development-orbs]
+=== Development orbs
+
+Development orbs are temporary overwrite-able orb tag versions, useful for rapid development and testing prior to deploying a SemVer deployed production change.
+
+* A Development orb can only be published if the orb has an initial SemVer deployed production version
+* Development orbs are mutable, can be overwritten, and automatically expire 90 days after they are published
+* Version string must begin with `dev:` followed by any string, for example, `<namespace>/<orb>@dev:my-feature-branch`
+* Development orbs may be published by any member of the namespace organization
+* Open source, released under link:https://circleci.com/developer/orbs/licensing[MIT license].
+* Available via CircleCI CLI (if the development tag name is known)
+
+[#inline-orbs]
+=== Inline orbs
+
+Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
+
+TIP: See: xref:reusing-config#writing-inline-orbs[Writing Inline Orbs] for more information on inline orbs.
+
+* Not published to the orb service
+* No versioning
+* Exist only locally within the user's config
+* Not accessible outside of the repository
+* Not public
+* Not accessible via CircleCI CLI
+
+[#private-orbs-vs-public-orbs]
+== Private orbs vs. public orbs
+
+Orbs can be public or private:
+
+* If you prefer to publish your orb so that only those within your organization can see and use it, you should publish a *private* orb.
+* If you want to publish your orb to the link:https://circleci.com/developer/orbs[CircleCI Orb Registry] for use by anyone, create a *public* orb.
+
+Private orbs are described in more detail below.
+
+[#private-orbs]
+=== Private orbs
+
+An unlimited amount of private orbs are available on all of CircleCI's link:https://circleci.com/pricing[plans]. Using a private orb enables you to author an orb while ensuring the following:
+
+* Your orb will not appear in the link:https://circleci.com/developer/orbs[CircleCI Orb Registry] unless you have the direct URL and are authenticated with the org that created it.
+* Your orb cannot be viewed or used by someone outside of your organization.
+* Your orb cannot be used in a pipeline that does not belong to your organization.
+
+By choosing to use a private orb instead of a public orb, you also need to understand certain inherent limitations, which include:
+
+* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use one of the following options:
+ ** Paste the content of the orb into the `orbs` stanza of your configuration.
+ ** Use the `circleci config validate --org-id <your-org-id> <path/to/config.yml>` command to validate your configuration.
+* You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
+
+[#authoring-orbs]
+=== Authoring orbs
+
+Both public and private orbs can be authored in two ways:
+
+* Using the xref:orb-author-validate-publish#[manual Orb Authoring Process]
+* Using the xref:orb-development-kit#[orb development kit] (recommended)
+
+[#orb-packing]
+== Orb packing
+
+All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the xref:orb-development-kit#[orb development kit], is used to "pack" or condense the separate YAML files together.
+
+NOTE: If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the link:https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack[orb-tools/pack] job.
+
+*_Example: Orb Project Structure_*
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| type | name
+
+| Directory
+| link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/commands[commands]
+
+| Directory
+| link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples[examples]
+
+| Directory
+| link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors[executors]
+
+| Directory
+| link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/jobs[jobs]
+
+| File
+| link:https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml[@orb.yml]
+|===
+
+In order to _pack_ an orb, an xref:orb-author#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reusing-config#authoring-reusable-commands[commands], xref:reusing-config#authoring-parameterized-jobs[jobs], xref:reusing-config#authoring-reusable-executors[executors], and <<usage-examples,examples>>. Any additional files or folders will be safely ignored.
+
+Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the xref:orb-concepts#file-include-syntax[file include syntax] (`<<include(file)>>`).
+
+=== CLI command
+
+[,shell]
+----
+circleci orb pack <dir> > orb.yml
+----
+
+For orb development kit users, this step is handled automatically.
+
+[#file-include-syntax]
+== File include syntax
+
+The `file include` syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
+
+The `<<include(dir/file)>>` syntax is a special key for use with the <<orb-packing,`circleci orb pack` command>> and _will not_ work more widely on CircleCI.
+
+When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
+
+CAUTION: Included files are always referenced from the relative location of the `@orb.yml` file.
+
+[.tab.fileInclude.Command-yaml]
+--
+[,yaml]
+----
+description: A simple command that imports from a file when packed.
+steps:
+  - run:
+      name: Hello Greeting
+      command: <<include(scripts/file.sh)>>
+----
+--
+
+[.tab.fileInclude.file-sh]
+--
+[,shell]
+----
+# This is a bash file, but could really be any text-based file
+echo "Hello World"
+----
+--
+
+[.tab.fileInclude.Packed_Command-yaml]
+--
+[,yaml]
+----
+description: A simple command that imports from a file when packed.
+steps:
+  - run:
+      name: Hello Greeting
+      command: |
+        # This is a bash file, but could really be any text-based file
+        echo "Hello World"
+----
+--
+
+File inclusion is especially useful for separating your configuration's Bash logic from your YAML. Including Bash scripts will allow you to develop and test your Bash outside of your orb.
+
+View more about including Bash scripts in the xref:orb-author#scripts[Orb Author] guide.
+
+== Using orbs within your orb and register-time resolution
+
+An orbs stanza can be used inside an orb. Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
+
+For example, orb `foo/bar` is published at version 1.2.3 with an orbs stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
+
+If `biz/baz` is updated to `3.0.0`, anyone using `foo/bar@1.2.3` will not see the change from `biz/baz@3.0.0` until `foo/bar` is published at a higher version than `1.2.3`.
+
+Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+
+[,yaml]
+----
+version: 2.1
+orbs:
+  some-orb: some-ns/some-orb@volatile
+executors:
+  my-executor: some-orb/their-executor
+commands:
+  my-command: some-orb/their-command
+jobs:
+  my-job: some-orb/their-job
+  another-job:
+    executor: my-executor
+    steps:
+      - my-command:
+          param1: "hello"
+----
+
+[#see-also]
+== See also
+
+* Refer to xref:orb-intro#[Orb Introduction] for a high-level overview of CircleCI orbs.
+* Refer to xref:reusing-config#[Orbs Reference] for detailed reference information about Orbs, including descriptions of commands, jobs and executors.
+* Refer to xref:orbs-faq#[Orbs FAQs] for information on frequent issues encountered when using orbs.

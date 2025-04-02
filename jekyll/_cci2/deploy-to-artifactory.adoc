@@ -9,7 +9,6 @@ contentTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 In this how-to guide, you will learn how to upload artifacts to Artifactory in CircleCI.
 
@@ -103,7 +102,7 @@ command: |
 
 The full `.circleci/config.yml` file would look something like the following:
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/snippets/docker-auth.adoc[]
 
 [,yml]
 ----
