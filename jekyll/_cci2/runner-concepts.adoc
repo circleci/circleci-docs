@@ -44,7 +44,10 @@ The machine runner 3 replaces launch-agent on cloud and server v4.4+. Bringing i
 [#launch-agent]
 == Launch-agent
 
-The launch-agent manages gathering information required to run a task with machine runner (defined as a parallel run of a job) while also downloading and launching the task-agent process.
+The launch-agent handles the following:
+
+* Manages gathering information required to run a task with machine runner (defined as a parallel run of a job)
+* Downloading and launching the task-agent process.
 
 The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The launch-agent will run as `root`, but the task-agent will run as `circleci`.
 
@@ -53,7 +56,7 @@ Launch-agent is currently supported on Server v4.x and v3.x. Cloud users and ser
 [#self-hosted-runner-concurrency]
 == Self-hosted runner concurrency
 
-Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your organization.
+CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your organization.
 
 [#public-repositories]
 == Public repositories

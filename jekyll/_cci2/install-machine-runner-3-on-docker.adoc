@@ -108,7 +108,7 @@ docker stop <container-name>; docker rm <container-name>;
 
 NOTE: In machine runner 3, the environment variable name prefix has changed from `LAUNCH_AGENT_` to `CIRCLECI_RUNNER_`.
 
-To migrate from launch agent to machine runner 3 on Docker, stop and remove the launch agent containers and replace them with machine runner 3 containers. The commands described above can be used to acomplish this.
+To migrate from launch agent to machine runner 3 on Docker, stop and remove the launch agent containers and replace them with machine runner 3 containers. The commands described above can be used to accomplish this.
 
 include::../_includes/snippets/machine-runner-example.adoc[]
 
