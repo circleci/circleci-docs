@@ -80,7 +80,7 @@ Serial group jobs are displayed in the CircleCI web app in workflow graphs with 
 
 * A job in a serial group is preceded by a block with a lock icon to show the start of the serial group. A serial group end block follows the job.
 +
-TIP: Hover over the serial group start and end blocks to view additional information about the serial group status and the `serial-group` key.
+TIP: Hover over the serial group start block to view additional information about the serial group status and the `serial-group` key.
 +
 .Screenshot showing a job in a serial group waiting for approval
 image::serial-groups/lock-block-tooltip.png[A block with a lock icon indicated the job is part of a serial group]
