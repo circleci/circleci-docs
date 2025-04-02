@@ -2702,6 +2702,7 @@ If there are no serial groups waiting/running, a pipeline with a lower number ca
 include::../_includes/snippets/orchestration-examples/serial-group.yml[]
 ----
 
+For more information, see the xref:controlling-serial-execution-across-your-organization#[Controlling serial execution across your organization] page.
 '''
 
 [#requires]
