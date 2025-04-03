@@ -1,4 +1,4 @@
-CircleCI server v4.7 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.7 overview].
+CircleCI server {serverversion48} is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:../overview/circleci-server-overview#[CircleCI server v4.8 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -126,7 +126,7 @@ The application uses a large number of resources. Depending on your usage, your 
 | CircleCI Version
 | Kubernetes Version
 
-| 4.7.x
+| 4.8.x
 | {kubernetesversions}
 |===
 
@@ -478,7 +478,7 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 
 [#object-storage-and-permissions]
 == 7. Object storage and permissions
-CircleCI server v4.7 hosts build artifacts, test results, and other state object storage. The following storage options are supported:
+CircleCI server v4.8 hosts build artifacts, test results, and other state object storage. The following storage options are supported:
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 

@@ -1,4 +1,4 @@
-Before you begin with the CircleCI server v4.7 core services installation phase, ensure all prerequisites are met, as described in the following page:
+Before you begin with the CircleCI server v4.8 core services installation phase, ensure all prerequisites are met, as described in the following page:
 
 ifndef::env-gcp[]
 * xref:phase-1-aws-prerequisites#[Phase 1 - AWS Prerequisites]

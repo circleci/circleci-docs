@@ -1,4 +1,4 @@
-Before you begin with the CircleCI server v4.7 execution environment installation phase, ensure you have run through the following:
+Before you begin with the CircleCI server v4.8 execution environment installation phase, ensure you have run through the following:
 
 ifndef::env-aws[]
 * xref:phase-1-gcp-prerequisites#[Phase 1 GCP – Prerequisites]
