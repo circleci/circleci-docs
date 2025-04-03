@@ -3,7 +3,7 @@ version: 2.1 # Set the CI version.
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
-  ruby: circleci/ruby@2.4.0
+  ruby: circleci/ruby@2.5.2
   node: circleci/node@7.1.0
   md-proofer: hubci/md-proofer@0.1.1
   vale: circleci/vale@1.2.0
@@ -195,21 +195,10 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
-      - md-proofer/install:
-          version: "0.3.0"
-      - run:
-          name: "Test Markdown Files"
-          command: md-proofer lint jekyll/_cci2/ jekyll/_api/
-      - run:
-          name: Install dependencies for pronto gem
-          command: sudo apt-get install cmake pkg-config
       - ruby-deps
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Run markdownlint with pronto
-          command: bundle exec pronto run -f github_pr -c origin/master
       - run:
           name: Create results directory
           command: mkdir -p $JOB_RESULTS_PATH

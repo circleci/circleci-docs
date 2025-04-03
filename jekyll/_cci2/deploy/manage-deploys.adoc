@@ -1,0 +1,231 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Manage deploys
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to guide for managing deploys from the CircleCI web app.
+:icons: font
+:experimental:
+
+The steps outlined on this page guide you through the tasks required to manage your deployments from the CircleCI web app.
+
+[#prerequisites]
+== Prerequisites
+
+Before following the steps below, ensure the environment integration has been set up and configured successfully. Refer to the xref:set-up-circleci-deploys#[Set up CircleCI deploys] and xref:configure-your-kubernetes-components#[Configure your Kubernetes components] pages for more information.
+
+[#restore-version]
+== Restore version
+
+The btn:[Restore Version] action restores a previously deployed version of a component.
+
+image::../../img/docs/releases/restore-version.png[Screenshot showing the restore version button]
+
+[#restore-steps]
+=== Steps
+
+NOTE: The steps outlined here are to revert a deployment from the deploys dashboard in the CircleCI web app.
+
+. Select btn:[Deploys] in the CircleCI web app sidebar.
+. You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
+. Scroll to locate the version your want to restore, and select the "Restore this version" icon in the **Actions** column.
+. Read through the recommendations in the popup, and if you want to proceed type `RESTORE`, then select btn:[Restore]. We recommend reverting the associated changes in your source repository as soon as possible after using this action.
+
+[#restore-notes]
+=== Notes
+
+To understand the btn:[Restore Version] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Selecting the btn:[Restore Version] action from the CircleCI web app is the equivalent of using the following:
+
+* If you are using Helm (Helm opt-in instructions are xref:configure-your-kubernetes-components#helm-rollback[here]):
++
+[,shell]
+----
+helm rollback <release-name> <revision-number> -n <namespace>
+----
+* If you are using Argo Rollouts and **not** Helm:
++
+[,shell]
+----
+kubectl argo rollouts undo <rollout-name> --to-revision=<revision_number>
+----
++
+If `revision_number` is not supplied the component will be rolled back to the previous revision
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<revision-number>
+----
+
+
+[#scale-component]
+== Scale component
+
+The btn:[Scale Component] action allows you to scale up or down a currently live version of a component.
+
+image::../../img/docs/releases/scale-component.png[Screenshot showing the scale component button]
+
+[#scale-steps]
+=== Steps
+
+. Select btn:[Deploys] in the CircleCI web app sidebar.
+. Select the **Components** tab.
+. Scroll to find and select your component to enter the component view.
+. Find the active version that you would like to scale and select the ellipsis menu icon (icon:ellipsis-h[]).
+. Select btn:[Scale Component].
+. Read through the notes associated with this action in the popup and to proceed type `SCALE` and select btn:[Scale].
+
+CAUTION: Any Horizontal Pod Autoscalers (HPAs) defined for this component will be deleted as a result of this action.
+
+[#scale-notes]
+=== Notes
+
+To understand the btn:[Scale Component] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Selecting the btn:[Scale Component] action is the equivalent of the following:
+
+* If you are using Argo Rollouts:
++
+[,shell]
+----
+kubectl patch rollout <rollout_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
+----
+
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl patch deployment <deployment_name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": <number_of_replicas>}]'
+----
+
+[#restart-component]
+== Restart component
+
+The btn:[Restart Component] action allows you to restart a currently live version of a component.
+
+image::../../img/docs/releases/restart-component.png[Screenshot showing the restart component button]
+
+[#start-steps]
+=== Steps
+
+. Select btn:[Deploys] in the CircleCI web app sidebar.
+. Select the **Components** tab.
+. Scroll to find and select your component to enter the component view.
+. Find the active version that you would like to restart and select the ellipsis menu icon (icon:ellipsis-h[]).
+. Select btn:[Restart Component].
+. Read the note associated with this action in the popup and to proceed type `RESTART` and select btn:[RESTART].
+
+[#restart-notes]
+=== Notes
+
+To understand the btn:[Restart Component] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Executing the btn:[Restart Component] action is the equivalent of the following:
+
+* If you are using Argo Rollouts:
++
+[,shell]
+----
+kubectl patch rollout my-rollout -n my-namespace --type='json' -p='[{"op": "replace", "path": "/spec/restartAt", "value": <timestamp>}]'
+----
+
+* For a Kubernetes Deployment:
++
+[,shell]
+----
+kubectl rollout restart deployment/<deployment-name> -n <namespace>
+----
+
+== Retry Rollout
+
+NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+Use the btn:[Retry Rollout] action to retry a Rollout that has failed or been cancelled. For more information about this action, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
+
+image::../../img/docs/releases/retry-release.png[Screenshot showing the retry release button]
+
+[#retry-steps]
+=== Steps
+
+. Select btn:[Deploys] in the CircleCI web app sidebar.
+. You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
+. Scroll to locate the failed or cancelled deployment you want to retry. Select the version number to enter the deployment details page.
+. Select btn:[Retry Rollout].
+
+[#retry-notes]
+=== Notes
+
+Selecting the btn:[Retry Rollout] action is the equivalent to running:
+
+[,yml]
+----
+kubectl argo rollouts retry <rollout-name> -n=<namespace>
+----
+
+[#promote]
+== Promote
+
+NOTE: You can use these actions if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts].
+
+Use the btn:[Promote] or btn:[Promote All] action to progress a deployment that is paused at a step. You have the following options:
+
+* Promote a single step.
+* Skip the step.
+* btn:[Promote All] to skip all steps and complete the deployment.
+
+The btn:[Promote] and btn:[Promote All] options are visible in the step view on the deployment details page, which you can access by selecting a version number in the deploys UI.
+
+image::../../img/docs/releases/promote-options.png[Screenshot showing the promote deploy step options]
+
+For more information on the Rollouts Promote commands see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
+
+[#promote-steps]
+=== Steps
+
+. Select btn:[Deploys] in the CircleCI web app sidebar.
+. You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
+. Scroll to locate the running deployment you want to promote. Select the version number to enter the deployment details page.
+. You will now see the btn:[Promote] and btn:[Promote All] options. Select btn:[Promote] to promote the deployment as required. The action is run immediately with no intermediary checks.
+
+[#promote-notes]
+=== Notes
+
+Selecting a _Promote_ action is equivalent to the following:
+
+* Promote a single step:
++
+[,shell]
+----
+kubectl argo rollouts promote <rollout-name>
+----
+* Promote all:
++
+[,shell]
+----
+kubectl argo rollouts promote --full <rollout-name>
+----
+
+== Cancel deployment
+
+Use the btn:[Cancel Deployment] action to stop a deployment from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
+
+NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
+
+image::../../img/docs/releases/cancel-release.png[Screenshot showing the cancel deployment button]
+
+[#cancel-steps]
+=== Steps
+
+. Select btn:[Deploys] in the CircleCI web app sidebar.
+. You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
+. Scroll to locate the running deployment you want to cancel. Select the version number to enter the deployment details page.
+. Select btn:[Cancel Deployment].
+
+[#cancel-notes]
+=== Notes
+
+Selecting the btn:[Cancel Deployment] action is the equivalent to running:
+
+[,yml]
+----
+kubectl argo rollouts abort <rollout-name> -n=<namespace>
+----

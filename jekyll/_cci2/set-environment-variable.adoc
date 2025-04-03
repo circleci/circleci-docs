@@ -12,12 +12,12 @@ contentTags:
 
 Environment variables can be stored and configured for use in CircleCI jobs in several ways to provide variety in scope and authorization level.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars#parameters-and-bash-environment[using `BASH_ENV`]. This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars#parameters-and-bash-environment[using `BASH_ENV`]. This approach is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
 ```yaml
 version: 2.1
@@ -60,7 +60,7 @@ jobs:
           command: sql/docker-entrypoint.sh sql
           # Environment variable for a single command shell
           environment:
-            DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
+            DATABASE_URL: postgresql://postgres@localhost:5432/test_db
 ```
 
 NOTE: Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable

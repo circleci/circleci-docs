@@ -15,11 +15,11 @@ This guide covers the steps required to publish an orb.
 [#introduction]
 == Introduction
 
-After authoring your orb, you can publish it with a link:{{site.baseurl}}/orb-concepts/#semantic-versioning[semantically versioned] tag, and the orb will appear on the https://circleci.com/developer/orbs[Orb Registry].
+After authoring your orb, you can publish it with a xref:orb-concepts#semantic-versioning[semantically versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[Orb Registry].
 
 CAUTION: If your orb is private, it will not be searchable on the Orb Registry. However, the URL will be accessible to authenticated users of the orb.
 
-image::{{ site.baseurl }}/assets/img/docs/orb-publishing-process.png[Orb Publishing Process]
+image::orb-publishing-process.png[Orb Publishing Process]
 
 If you are publishing your orb using the xref:orb-development-kit#[orb development kit], rather than xref:orb-author-validate-publish#[manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
 
@@ -44,7 +44,7 @@ The included `config.yml` and `test-deploy.yml` files in the `./circleci` direct
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.
 Notice there are two workflows, `lint-pack` will run first and contains our linting, ShellCheck, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
 +
-image:{{site.baseurl}}/assets/img/docs/orbtools-11-checks.png[Orb test results as reported by GitHub Checks API on pull request]
+image:orbtools-11-checks.png[Orb test results as reported by GitHub Checks API on pull request]
 . *"Squash" Merge.*
 +
 When your changes are complete, we recommend (not required) link:https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits[Squash Merging] your changes into a single commit, with a link:https://www.conventionalcommits.org/[Conventional Commit Message].

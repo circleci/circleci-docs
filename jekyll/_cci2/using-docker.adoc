@@ -16,7 +16,7 @@ You can use the Docker execution environment to run your xref:jobs-steps#[jobs] 
 
 Specify a Docker image in your xref:configuration-reference#[`.circleci/config.yml`] file to spin up a container. All steps in your job will be run in this container.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -91,14 +91,14 @@ jobs:
 
 For the Docker execution environment, the following resources classes are available for the x86 architecture:
 
-include::../_includes/snippets/docker-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-resource-table.adoc[]
 
 [#arm]
 === Arm
 
 The following resource classes are available for Arm with Docker:
 
-include::../_includes/snippets/docker-arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-arm-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage

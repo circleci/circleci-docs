@@ -1,0 +1,8 @@
+workflows:
+  my-workflow:
+# The "my-workflow" workflow only runs if the branch name is not "feature".
+    when:
+    not:
+      matches:
+        pattern: "^feature$"
+        value: << pipeline.git.branch >>

@@ -51,11 +51,11 @@ Create a new, empty, link:https://github.com/new[GitHub repository]. The name of
 
 CAUTION: Ensure that the repository is completely empty. Uncheck any options such as "Add a README.md" or "Choose a license".
 
-image::{{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png[New GitHub repository]
+image::new_orb_repo_gh.png[New GitHub repository]
 
 Once complete, you should see the generated git URL. Note it down, you will need it in step 4. You can select SSH or HTTPS, whichever you can authenticate with.
 
-image::{{site.baseurl}}/assets/img/docs/github_new_quick_setup.png[Orb registry]
+image::github_new_quick_setup.png[Orb registry]
 
 CAUTION: Do not pull down the orb repository at this point. This will be completed when you run `orb init` in the next step. Pulling the repository before this can cause issues.
 

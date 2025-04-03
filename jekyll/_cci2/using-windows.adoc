@@ -107,7 +107,7 @@ workflows:
 [#available-resource-classes]
 == Available resource classes
 
-include::../_includes/snippets/windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/windows-resource-table.adoc[]
 
 [.tab.windowsresourceblock.Cloud_with_orb]
 --

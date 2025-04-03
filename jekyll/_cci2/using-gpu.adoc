@@ -85,13 +85,13 @@ jobs:
       - run: nvidia-smi
 ----
 
-include::../_includes/snippets/gpu-linux-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-linux-resource-table.adoc[]
 
 === Windows GPU
 
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
-include::../_includes/snippets/gpu-windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-windows-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage

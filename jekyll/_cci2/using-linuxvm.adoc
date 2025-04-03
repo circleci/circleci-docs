@@ -56,7 +56,7 @@ You can view the list of available images xref:configuration-reference#available
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes
 
-include::../_includes/snippets/machine-resource-table.adoc[]
+include::../_includes/partials/execution-resources/machine-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage

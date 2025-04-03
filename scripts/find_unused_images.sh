@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Set the path to your Jekyll site's content directories
-CONTENT_DIR1="../jekyll/_cci2"
-CONTENT_DIR2="../jekyll/_includes"
-CONTENT_DIR3="../jekyll/_cci2_ja"
+CONTENT_DIR1="./jekyll/_cci2"
+CONTENT_DIR2="./jekyll/_includes"
+CONTENT_DIR3="./jekyll/_cci2_ja"
 
 # Set the path to your Jekyll site's assets directory
-ASSETS_DIR="../jekyll/assets/img/docs"
+ASSETS_DIR="./jekyll/assets/img/docs"
 
 # Create an array to store all image file paths
 declare -a image_files

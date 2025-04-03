@@ -116,6 +116,17 @@ Deploy keys and user keys are the only key types that GitHub supports. Deploy ke
 
 To achieve fine-grained access to more than one repository, consider creating what GitHub calls a <<#controlling-access-via-a-machine-user,machine user>>. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
+[NOTE]
+====
+If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
+
+* GitHub will remove inactive keys if they are unused for over a year.
+* If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
+* In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
+* If your CircleCI project has no xref:introduction-to-the-circleci-web-app#projects[followers], CircleCI will consider it disabled and remove the associated keys.
+* When you delete a CircleCI project, CircleCI will remove its associated keys.
+====
+
 [#create-additional-github-ssh-keys]
 === Create additional GitHub SSH keys
 
@@ -328,12 +339,36 @@ Key functionality enabled through the GitHub App integration includes the follow
 [#installing-github-app-alongside-github-oauth-app]
 ### Installing GitHub App alongside the GitHub OAuth app
 
+[CAUTION]
+====
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by disabling the GitHub OAuth trigger. To do so, follow these steps:
+
+. Navigate to the GitHub repository associated with the project.
+. Go to menu:Settings[Webhooks].
+. Locate the CircleCI webhook (`https://circleci.com/hooks/github`) and select btn:[Delete].
+
+_Note: Deleting the OAuth webhook will prevent the xref:variables/#built-in-environment-variables[built-in environment variable] `CIRCLE_PULL_REQUEST` from being populated in all pipelines. We are working on getting this side effect resolved in the near future._
+
+This action is reversible. To re-enable the OAuth trigger, follow these steps:
+
+. Go to menu:Project Settings[Overview]
+. Select "Stop building" at the bottom of the page
+. Then, select "Follow". This will create a new CircleCI webhook in your repository.
+
+====
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
 
 To get started, go to menu:Project Settings[Pipelines] for one of your projects and xref:pipelines#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating your first pipeline will be installing the CircleCI GitHub App and connecting to it.
 Once you have set up your first pipeline, you will be able to add triggers to it through the menu:Project Settings[Triggers] page.
 
 NOTE: Only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
+
+Once the GitHub App is installed, each user should authorize the GitHub App connection. To do this, each user should navigate to menu:Project Settings[Pipelines>Add Pipeline>Connection] and select btn:[Authorize].
+Authorizing the GitHub App ensures that users can:
+
+* Trigger pipelines xref:triggers-overview#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app]. 
+* Run builds, if the flag xref:prevent-unregistered-users-from-spending-credits#[Prevent unregistered user spend] is set to "On". 
+* Run builds, if they require access to xref:contexts#[contexts].
 
 [#github-app-integration]
 ### The GitHub App integration

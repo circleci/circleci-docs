@@ -19,7 +19,18 @@ include::../_includes/partials/notes/server-api-examples.adoc[]
 
 The current categories of API v2 endpoints are:
 
-include::../_includes/snippets/api-v2-endpoints.adoc[]
+* Context
+* Insights
+* User
+* Pipeline
+* Job
+* Workflow
+* Webhook
+* OIDC Token Management
+* Policy Management
+* Project
+* Usage
+* Schedule
 
 NOTE: Currently, xref:managing-api-tokens#creating-a-personal-api-token[Personal API tokens] are the only supported tokens on API v2. xref:managing-api-tokens#creating-a-project-api-token[Project tokens] are not currently supported on API v2.
 

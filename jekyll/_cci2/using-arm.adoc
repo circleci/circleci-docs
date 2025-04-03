@@ -49,7 +49,7 @@ jobs:
 
 The following Arm resources are available part of the xref:configuration-reference#available-linux-machine-images-cloud[`machine` executor]:
 
-include::../_includes/snippets/arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/arm-resource-table.adoc[]
 
 For pricing and plans information, see the link:https://circleci.com/product/features/resource-classes/[resource class pricing overview].
 

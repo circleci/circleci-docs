@@ -331,7 +331,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref:contexts#security-goup-restrictions[Security group context restriction]
+| xref:contexts#security-group-restrictions[Security group context restriction]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#

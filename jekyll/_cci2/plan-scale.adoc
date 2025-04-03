@@ -20,7 +20,7 @@ The Scale Plan offers several improvements over the Free and Performance Plans:
 
 [#access-to-ip-ranges]
 === Access to IP ranges
-Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution (the IP ranges feature is the same on the Performance and Scale Plan).
+Configure IP-based access to restricted environments with IP ranges. Jobs that have the IP ranges feature enabled have traffic routed through one of the defined IP address ranges during job execution. The IP ranges feature is the same on the Performance and Scale Plans.
 
 For more information about this features, refer to the xref:ip-ranges#[IP ranges] page.
 
@@ -42,18 +42,6 @@ Customize the amount of active users based on your needs.
 === Unlimited self-hosted runners
 Unlimited self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
 
-=== Releases
-
-Visualise and control your deployments with CircleCI releases. Deployments to Kubernetes and SageMaker are supported.
-
-On the Scale Plan, you get **five components** with associated releases per month. Each **additional component** is **40k credits**. Each release is **250 credits**. Components with no releases are not charged.
-
-* A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit.
-
-* A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services. A release can happen when an existing component is updated or when the first version for a new component is deployed.
-
-Start with the xref:release/releases-overview#[Releases overview] for more information on the feature.
-
 [#custom-storage-retention]
 === Custom storage retention
 The link:https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
@@ -66,4 +54,4 @@ Additional support through expanded SLAs, an available account team, training an
 == CircleCI features
 In addition to the upgraded features listed above, the Scale Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 
-{% include snippets/features-of-circleci.adoc %}
+include::../_includes/partials/shared-sections/features-of-circleci.adoc[]

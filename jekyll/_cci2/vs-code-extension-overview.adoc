@@ -31,7 +31,7 @@ For installation and setup instructions, visit the VS Code link:https://marketpl
 == Pipelines panel
 The pipelines panel provides a visual interface for managing your pipelines. The panel lists your most recent pipelines, workflows, and jobs in a project, and lets you monitor their status as well as interact with them.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_pipelines-panel.png[Screenshot of side panel with pipeline information]
+image::vs_code_extension_pipelines-panel.png[Screenshot of side panel with pipeline information]
 
 For each object, you can trigger certain events on hover.
 
@@ -61,7 +61,7 @@ xref:jobs-steps#[Jobs] are nested under each workflow, and can contain tests and
 
 - View job details
 +
-image:{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
+image:vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
 
 Expanding a job also lets you:
 
@@ -78,11 +78,11 @@ Re-run jobs with SSH directly from VS Code in one of two ways:
 
 * Open the job detail page, then select the **SSH** button on the top right.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_job-details.png[Screenshot of side Panel with job details]
+image::vs_code_extension_job-details.png[Screenshot of side Panel with job details]
 
 * Or, hover over the job in the pipelines panel, and select the SSH action button next to the job name.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun options]
+image::vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun options]
 
 In both cases, you will be presented with two options:
 
@@ -100,7 +100,7 @@ If the job you want to re-run uses parallelism, you will be able to select which
 === Notifications
 You can set up notifications to warn you when a workflow in your pipelines panel has changed status.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_notification.png[Screenshot of a notification pop-up for a failed workflow]
+image::vs_code_extension_notification.png[Screenshot of a notification pop-up for a failed workflow]
 
 If you are not following a workflow in the pipelines panel, you cannot be notified about a status change event. For instance, if you have set the extension to follow only the current branch, you cannot be notified of status changes for other branches.
 
@@ -111,7 +111,7 @@ NOTE: We do not recommend enabling notifications for when a status changes to "R
 
 The status bar provides information at-a-glance about the status of the CircleCI extension, your project, and your most recent workflow.
 
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_status-bar.png[Screenshot of the status bar]
+image::vs_code_extension_status-bar.png[Screenshot of the status bar]
 
 The status bar can display the following statuses:
 
@@ -128,23 +128,23 @@ The VS Code extension also provides in-file contextual help for your CircleCI co
 
 - **Rich code navigation through "go-to-definition" and "go-to-reference" commands.** Hover over a job name or executor parameter to verify its definition or view where they are referenced elsewhere in the file. You can also explore the definition of orb-defined commands or parameters.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
+image::vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
 
 - **Contextual documentation and usage hints when hovering on specific keys.** This helps you avoid having to frequently switch to your browser to check the documentation when editing your configuration. Links to the official CircleCI docs are also provided on hover, for easier navigation.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_on-hover-documentation.png[Screenshot showing the contextual information on hover]
+image::vs_code_extension_config_helper_on-hover-documentation.png[Screenshot showing the contextual information on hover]
 
 - **Syntax validation**. This helps you identify typos, incorrect use of parameters, incomplete definitions, wrong types, invalid or deprecated machine versions, etc.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_syntax-validation.gif[Screenshot showing the syntax highlighting when an error is identified]
+image::vs_code_extension_config_helper_syntax-validation.gif[Screenshot showing the syntax highlighting when an error is identified]
 
 - **Usage warnings**. This helps you identify deprecated parameters, unused jobs or executors, or missing properties that prevent you from taking advantage of CircleCI’s full capabilities.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlighting to warn on an unused job]
+image::vs_code_extension_config_helper_usage-warning.png[Screenshot showing code highlighting to warn on an unused job]
 
 - **Auto completion**. This is available with both built-in keys and parameters as well as user-defined variables.
 +
-image::{{site.baseurl}}/assets/img/docs/vs_code_extension_config_helper_autocomplete.png[Screenshot showing two suggestions to autocomplete the line of code]
+image::vs_code_extension_config_helper_autocomplete.png[Screenshot showing two suggestions to autocomplete the line of code]
 
 [#config-validation-commands]
 === Config validation commands
@@ -179,7 +179,7 @@ You can also integrate the language server into any editor which supports the La
 
 Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
 
-image::{{site.baseurl}}/assets/img/docs/vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
+image::vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
 
 [#prerequisites]
 === Prerequisites
