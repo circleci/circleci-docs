@@ -29,7 +29,7 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#simple-configuration-examples]
 == Simple configuration examples
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#concurrent-workflow]
 === Concurrent workflow

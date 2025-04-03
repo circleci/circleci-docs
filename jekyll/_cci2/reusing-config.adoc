@@ -12,7 +12,7 @@ contentTags:
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#notes-on-reusable-configuration]
 == Notes on reusable configuration

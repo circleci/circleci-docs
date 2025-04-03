@@ -1276,7 +1276,7 @@ jobs:
 [#x86]
 ====== x86
 
-include::../_includes/snippets/docker-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-resource-table.adoc[]
 
 [#arm]
 ====== Arm
@@ -3415,7 +3415,7 @@ You can find usage examples on the xref:orchestration-cookbook#["Orchestration c
 [#example-full-configuration]
 == Example full configuration
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 
 

@@ -24,7 +24,7 @@ To automatically run your test suites in a project pipeline, you will add config
 
 A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yaml]
 ----

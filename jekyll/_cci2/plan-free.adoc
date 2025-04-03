@@ -29,7 +29,7 @@ Below are the features you can use on the Free Plan. Refer to the link:https://c
 
 A wide array of resource classes on Docker, Arm, Linux, Windows, and macOS are available. To view examples, or find more information about these executors, refer to the xref:executor-intro#[Execution environments overview] page.
 
-include::../_includes/snippets/features-of-circleci.adoc[]
+include::../_includes/partials/shared-sections/features-of-circleci.adoc[]
 
 [#support]
 === Support

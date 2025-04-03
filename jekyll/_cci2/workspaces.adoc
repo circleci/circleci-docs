@@ -46,7 +46,7 @@ If you have custom storage settings, `persist_to_workspace` will default to the 
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `.circleci/config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [source,yaml]
 ----

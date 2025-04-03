@@ -12,7 +12,7 @@ contentTags:
 
 This document provides example database xref:databases#[config.yml] files using PostgreSQL/Rails and MySQL/Ruby.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#example-circleci-configuration-for-a-rails-app-with-structuresql]
 == Example CircleCI configuration for a rails app with structure.sql
