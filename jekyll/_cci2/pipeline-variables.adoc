@@ -30,7 +30,7 @@ For a full list of values and built-in environment variables, see the xref:varia
 
 include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub integration type]
 
-include::../_includes/snippets/pipeline-values.adoc[]
+include::../_includes/partials/pipelines-and-triggers/pipeline-values.adoc[]
 
 Usage example:
 

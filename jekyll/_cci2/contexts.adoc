@@ -477,7 +477,7 @@ circleci context create --org-id <org-id> <context-name> [flags]
 
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-include::../_includes/snippets/find-organization-id.adoc[]
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [#environment-variable-usage]
 == Environment variable usage

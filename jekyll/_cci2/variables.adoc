@@ -266,7 +266,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 NOTE: For GitHub users, refer to the xref:github-apps-integration#[GitHub App integration] or xref:github-integration#[GitHub OAuth app integration] guides to check which integration type applies to you.
 
-include::../_includes/snippets/pipeline-values.adoc[]
+include::../_includes/partials/pipelines-and-triggers/pipeline-values.adoc[]
 
 For example:
 

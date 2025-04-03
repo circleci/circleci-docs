@@ -96,4 +96,4 @@ include::../_includes/partials/execution-resources/gpu-windows-resource-table.ad
 [#view-resource-usage]
 === View resource usage
 
-include::../_includes/snippets/resource-class-view.adoc[]
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
