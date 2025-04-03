@@ -37,7 +37,7 @@ The GitLab and CircleCI configurations will be different. It may be helpful to h
 [#configuration-comparison]
 == Configuration comparison
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

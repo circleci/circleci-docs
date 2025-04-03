@@ -85,7 +85,7 @@ jobs:
       - run: nvidia-smi
 ----
 
-include::../_includes/snippets/gpu-linux-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-linux-resource-table.adoc[]
 
 === Windows GPU
 
