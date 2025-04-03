@@ -1290,7 +1290,7 @@ include::../_includes/partials/execution-resources/docker-arm-resource-table.ado
 [#linuxvm-execution-environment]
 ===== LinuxVM execution environment
 
-include::../_includes/snippets/machine-resource-table.adoc[]
+include::../_includes/partials/execution-resources/machine-resource-table.adoc[]
 
 Example:
 
@@ -1326,7 +1326,7 @@ jobs:
 [#macos-execution-environment]
 ===== macOS execution environment
 
-include::../_includes/snippets/macos-resource-table.adoc[]
+include::../_includes/partials/execution-resources/macos-resource-table.adoc[]
 
 *Example*
 
@@ -1398,7 +1398,7 @@ jobs:
 [#gpu-execution-environment-linux]
 ===== GPU execution environment (Linux)
 
-include::../_includes/snippets/gpu-linux-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-linux-resource-table.adoc[]
 
 Example:
 
