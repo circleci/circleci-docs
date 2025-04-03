@@ -14,4 +14,4 @@ contentTags:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). The directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. This method was chosen to avoid unintentionally hiding content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-include::../../../../_includes/server/latest/installation/phase-3.adoc[]
+include::../../../../_includes/partials/server/latest/installation/phase-3.adoc[]
