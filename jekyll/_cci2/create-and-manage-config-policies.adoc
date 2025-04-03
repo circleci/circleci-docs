@@ -60,7 +60,7 @@ Example output:
 }
 ----
 
-include::../_includes/snippets/find-organization-id.adoc[]
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [#manage-policies-with-your-vcs]
 == Manage policies with your VCS
@@ -89,7 +89,7 @@ You can do this using a context. For more information about setting up and using
 . Select **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:local-cli#configure-the-cli[Installing the CircleCI local CLI] page). Then click **Add Environment Variable** again to complete.
 . Select **Add Environment Variable** and enter `ORG_ID` for the environment variable name, and your organization ID for the value.
 +
-include::../_includes/snippets/find-organization-id.adoc[]
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [set-up-a-config-policy-management-ci-pipeline]
 === Set up a config policies CI/CD pipeline

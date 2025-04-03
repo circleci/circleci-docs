@@ -56,7 +56,7 @@ For pricing and plans information, see the link:https://circleci.com/product/fea
 [#view-resource-usage]
 === View resource usage
 
-include::../_includes/snippets/resource-class-view.adoc[]
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
 == Images with Arm support
 

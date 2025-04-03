@@ -68,7 +68,7 @@ include::../_includes/snippets/runner/machine-runner-deb-package-install.adoc[]
 include::../_includes/snippets/runner/machine-runner-rpm-package-install.adoc[]
 --
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/snippets/runner/machine-runner-example.adoc[]
 
 [#troubleshooting]
 == Troubleshooting

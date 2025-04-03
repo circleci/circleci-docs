@@ -72,7 +72,7 @@ The installation will be output into your PowerShell interface.
 
 After your setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/snippets/runner/machine-runner-example.adoc[]
 
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps

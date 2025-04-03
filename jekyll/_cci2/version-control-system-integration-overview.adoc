@@ -7,7 +7,6 @@ contentTags:
 = Version control system integration overview
 :description: An overview guide to the version control systems you can integrate with CircleCI.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

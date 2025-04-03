@@ -176,7 +176,7 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/snippets/runner/machine-runner-example.adoc[]
 
 The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 

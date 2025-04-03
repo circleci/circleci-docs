@@ -194,7 +194,7 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/snippets/runner/machine-runner-example.adoc[]
 
 [#troubleshooting]
 == Troubleshooting
