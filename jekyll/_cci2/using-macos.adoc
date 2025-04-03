@@ -33,7 +33,7 @@ jobs:
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-include::../_includes/snippets/xcode-silicon-vm.adoc[]
+include::../_includes/partials/execution-resources/xcode-silicon-vm.adoc[]
 
 [#available-resource-classes]
 == Available resource classes

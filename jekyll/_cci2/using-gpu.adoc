@@ -11,7 +11,7 @@ contentTags:
 :icons: font
 :page-layout: classic-docs
 
-include::../_includes/snippets/linux-cuda-deprecation-notice.adoc[]
+include::../_includes/partials/execution-resources/linux-cuda-deprecation-notice.adoc[]
 
 You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to NVIDIA GPUs for specialized workloads.
 

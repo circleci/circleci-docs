@@ -608,7 +608,7 @@ Note that the CLI will prompt you to input the new secret value, rather than acc
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plain text secret as a string.
 --
 
-include::../_includes/snippets/secrets-masking.adoc[]
+include::../_includes/partials/shared-sections/secrets-masking.adoc[]
 
 [#see-also]
 == See also
