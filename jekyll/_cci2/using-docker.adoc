@@ -98,7 +98,7 @@ include::../_includes/snippets/docker-resource-table.adoc[]
 
 The following resource classes are available for Arm with Docker:
 
-include::../_includes/snippets/docker-arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-arm-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
