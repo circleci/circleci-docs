@@ -1,0 +1,121 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Self-hosted runner feature comparison
+:description: A comparison table of the features available for CircleCI runners.
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+This page offers a comparison of the features available for CircleCI Machine runner vs. CircleCI Container Runner.
+
+[#feature-comparison-matrix]
+== Comparison matrix
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|Feature
+|Description
+|Machine Runner
+|Container Runner
+
+|*Environment*
+|Where jobs run and how resources are managed
+|Full VM
+|Kubernetes Pods
+
+|*Configuration File*
+|Primary file for runner setup
+|YAML config (location depends on OS)
+|Helm `values.yaml`
+
+|*Resource Control*
+|How compute resources are allocated
+|System level
+|Kubernetes limits
+
+|*Architecture Support*
+|CPU architectures available for builds
+|Not
+specified
+|AMD64/ARM64 with `nodeSelector`
+
+|*Job Isolation*
+|How jobs are kept separate
+|VM-level
+|Container-level
+
+|*Scaling*
+|How runner capacity scales with demand
+|Manual
+|Kubernetes-based auto-scaling
+
+|*Service Containers*
+|Support for additional services in build
+|Not available
+|Extensive support with resource controls
+
+|*Operation Modes*
+|How runner handles job execution
+|Continuous or single-task
+|Container-based
+
+|*Docker Support*
+|How Docker-in-Docker is handled
+|Native
+|Requires special configuration
+
+|*Resource Cleanup*
+|How build environments are cleaned after jobs
+|Working directory cleanup
+|Container lifecycle
+|===
+
+
+[#feature-highlights]
+== Feature Highlights
+
+*Machine Runner*
+
+* Latest generation of machine-based runners
+* Full access to underlying operating system
+* Ideal for workflows requiring VM-level isolation
+* Consistent environment variables with `CIRCLECI_RUNNER_*` prefix
+* Supports SSH connectivity for debugging
+
+*Container Runner*
+
+* Kubernetes-native solution for container-based workflows
+* Fine-grained resource allocation and constraints
+* Supports service container configurations with pattern matching:
+* Advanced node selection via Kubernetes annotations
+* Custom security contexts and volume mounting
+* Support for spot instances via tolerations
+* Configurable resource limits for primary and service containers
+
+
+[#key-differences]
+== Key Differences
+
+*Machine Runner* offers full VM isolation with the newest
+configuration patterns and improved controls.
+
+*Container Runner* leverages Kubernetes for:
+* Container-based isolation
+* Better scaling capabilities
+* Advanced resource management
+* Multiple architecture support
+
+[#choose-a-runner]
+== When to Choose Each Runner
+
+*Machine Runner*: Choose for full system access, custom system
+dependencies, or when Kubernetes isn’t available.
+
+*Container Runner*: Best for cloud-native applications, teams using
+Kubernetes, and workloads that benefit from container orchestration.

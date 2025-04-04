@@ -266,6 +266,8 @@ en:
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
+          - name: Feature comparison matrix
+            link: runner-feature-matrix
       - name: Container runner
         children:
           - name: Container runner installation
