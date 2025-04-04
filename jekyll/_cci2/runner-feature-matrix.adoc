@@ -26,7 +26,7 @@ This page offers a comparison of the features available for CircleCI Machine run
 
 |*Environment*
 |Where jobs run and how resources are managed
-|Full VM
+|Full VM/bare metal
 |Kubernetes Pods
 
 |*Configuration File*
@@ -41,8 +41,7 @@ This page offers a comparison of the features available for CircleCI Machine run
 
 |*Architecture Support*
 |CPU architectures available for builds
-|Not
-specified
+|Not specified
 |AMD64/ARM64 with `nodeSelector`
 
 |*Job Isolation*
@@ -52,23 +51,23 @@ specified
 
 |*Scaling*
 |How runner capacity scales with demand
-|Manual
+|Manual/custom
 |Kubernetes-based auto-scaling
 
 |*Service Containers*
 |Support for additional services in build
-|Not available
+|Not supported
 |Extensive support with resource controls
 
-|*Operation Modes*
+|*Execution Modes*
 |How runner handles job execution
-|Continuous or single-task
-|Container-based
+|`single-task` or `continuous` 
+|Pod-based execution
 
 |*Docker Support*
 |How Docker-in-Docker is handled
-|Native
-|Requires special configuration
+|Native OS support 
+|Requires special configuration (`setup_remote_docker`)
 
 |*Resource Cleanup*
 |How build environments are cleaned after jobs
