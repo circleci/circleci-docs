@@ -105,6 +105,7 @@ This page offers a comparison of the features available for CircleCI Machine run
 configuration patterns and improved controls.
 
 *Container Runner* leverages Kubernetes for:
+
 * Container-based isolation
 * Better scaling capabilities
 * Advanced resource management
