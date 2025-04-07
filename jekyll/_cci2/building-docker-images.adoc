@@ -21,7 +21,7 @@ NOTE: The _remote_ in "remote Docker" is a legacy term from when remote Docker u
 
 To build Docker images (for example, using `docker` or `docker compose` commands) when using the Docker execution environment, you must use the `setup_remote_docker` key in your job:
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yaml]
 ----

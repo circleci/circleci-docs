@@ -133,7 +133,7 @@ root of their repository.
 
 The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yaml]
 ----

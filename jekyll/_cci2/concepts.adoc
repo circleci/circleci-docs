@@ -244,7 +244,7 @@ image::executor_types.png[Illustration of a CircleCI job]
 
 An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the <<images,images>> section).
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [.tab.executors.Cloud]
 [,yaml]
@@ -338,7 +338,7 @@ An image is a packaged system that includes instructions for creating a running 
 
 The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:circleci-images#[convenience images] for popular languages on Docker Hub.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 The *machine executor* spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the xref:configuration-reference#machine[Using machine] page.
 
@@ -440,7 +440,15 @@ A CircleCI pipeline is the full set of processes you run when you trigger work o
 
 Pipelines represent methods for interacting with your configuration:
 
-include::../_includes/snippets/pipelines-benefits.adoc[]
+* Trigger a pipeline through the API with the link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[trigger a pipeline] endpoint.
+* Use pipeline parameters to trigger xref:pipeline-variables#conditional-workflows[conditional workflows].
+* Use `version 2.1` configuration, which provides access to:
+    * xref:reusing-config#[Reusable configuration] elements, including executors, commands and jobs.
+    * Packaged reusable configuration, known as xref:orb-intro#[orbs].
+    * Improved configuration validation error messages.
+    * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when new pipelines are triggered on non-default branches.
+
+NOTE: It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
 See the xref:pipelines#[Pipelines overview] page for more information.
 
@@ -568,7 +576,7 @@ image::/docs/assets/img/docs/workflow_detail_newui.png[Workflows illustration cl
 
 The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yaml]
 ----

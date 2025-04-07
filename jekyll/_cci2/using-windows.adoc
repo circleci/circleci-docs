@@ -107,7 +107,7 @@ workflows:
 [#available-resource-classes]
 == Available resource classes
 
-include::../_includes/snippets/windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/windows-resource-table.adoc[]
 
 [.tab.windowsresourceblock.Cloud_with_orb]
 --
@@ -170,7 +170,7 @@ jobs:
 [#view-resource-usage]
 === View resource usage
 
-include::../_includes/snippets/resource-class-view.adoc[]
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
 [#windows-machine-executor-images]
 == Windows machine executor images

@@ -782,7 +782,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:deploy/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a release in the CircleCI releases UI. For full details, see the xref:deploy/deploys-overview#[Releases overview] page.
+Jobs with the `release` type are used to xref:deploy/configure-your-kubernetes-components#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:deploy/deploys-overview#[Deploys overview] page.
 
 **Example** of a job with a `release` type:
 
@@ -1276,21 +1276,21 @@ jobs:
 [#x86]
 ====== x86
 
-include::../_includes/snippets/docker-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-resource-table.adoc[]
 
 [#arm]
 ====== Arm
 
 *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
 
-include::../_includes/snippets/docker-arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/docker-arm-resource-table.adoc[]
 
 '''
 
 [#linuxvm-execution-environment]
 ===== LinuxVM execution environment
 
-include::../_includes/snippets/machine-resource-table.adoc[]
+include::../_includes/partials/execution-resources/machine-resource-table.adoc[]
 
 Example:
 
@@ -1326,7 +1326,7 @@ jobs:
 [#macos-execution-environment]
 ===== macOS execution environment
 
-include::../_includes/snippets/macos-resource-table.adoc[]
+include::../_includes/partials/execution-resources/macos-resource-table.adoc[]
 
 *Example*
 
@@ -1353,7 +1353,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 [#windows-execution-environment]
 ===== Windows execution environment
 
-include::../_includes/snippets/windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/windows-resource-table.adoc[]
 
 Example:
 
@@ -1398,7 +1398,7 @@ jobs:
 [#gpu-execution-environment-linux]
 ===== GPU execution environment (Linux)
 
-include::../_includes/snippets/gpu-linux-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-linux-resource-table.adoc[]
 
 Example:
 
@@ -1423,7 +1423,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 [#gpu-execution-environment-windows]
 ===== GPU execution-environment (Windows)
 
-include::../_includes/snippets/gpu-windows-resource-table.adoc[]
+include::../_includes/partials/execution-resources/gpu-windows-resource-table.adoc[]
 
 Example:
 
@@ -1448,7 +1448,7 @@ jobs:
 [#arm-execution-environment-linux]
 ===== Arm VM execution-environment
 
-include::../_includes/snippets/arm-resource-table.adoc[]
+include::../_includes/partials/execution-resources/arm-resource-table.adoc[]
 
 Example:
 
@@ -2720,21 +2720,10 @@ If there are no serial groups waiting/running, a pipeline with a lower number ca
 
 [,yml]
 ----
-# Creating multiple pipelines at the same time with the below config will results in
-# all pipelines running test and build but only a single pipeline will run deploy at a time.
-
-workflows:
-  main-workflow:
-    jobs:
-      - test
-      - build
-      - deploy:
-          serial-group: << pipeline.project.slug >>/deploy-group
-          requires:
-            - test
-            - build
+include::../_includes/snippets/orchestration-examples/serial-group.yml[]
 ----
 
+For more information, see the xref:controlling-serial-execution-across-your-organization#[Controlling serial execution across your organization] page.
 '''
 
 [#requires]
@@ -3426,7 +3415,7 @@ You can find usage examples on the xref:orchestration-cookbook#["Orchestration c
 [#example-full-configuration]
 == Example full configuration
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 
 

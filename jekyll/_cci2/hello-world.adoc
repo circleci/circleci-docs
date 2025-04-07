@@ -28,7 +28,7 @@ This page provides configuration examples to get started with a basic pipeline u
 * A code repository you want to build on CircleCI.
 * Follow the xref:create-project#[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#echo-hello-world-cloud]
 == Echo hello world

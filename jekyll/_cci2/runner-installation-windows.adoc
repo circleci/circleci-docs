@@ -72,11 +72,11 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill the file out with the requested information (see xref:runner-config-reference#[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/snippets/runner/machine-runner-example.adoc[]
 
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
