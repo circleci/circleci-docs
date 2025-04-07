@@ -102,7 +102,7 @@ Alternatively, use the "Get job details" endpoint to return information about a 
 [#view-resource-usage-per-job]
 === View resource usage per job
 
-include::../_includes/snippets/resource-class-view.adoc[]
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
 === Resource class Insights
 
