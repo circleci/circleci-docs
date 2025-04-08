@@ -25,7 +25,7 @@ image::artifacts.png[Artifacts tab in the web app]
 [#language-specific-code-coverage-options]
 == Language-specific code coverage options
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#ruby]
 === Ruby
