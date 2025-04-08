@@ -347,8 +347,6 @@ Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the 
 . Go to menu:Settings[Webhooks].
 . Locate the CircleCI webhook (`https://circleci.com/hooks/github`) and select btn:[Delete].
 
-_Note: Deleting the OAuth webhook will prevent the xref:variables/#built-in-environment-variables[built-in environment variable] `CIRCLE_PULL_REQUEST` from being populated in all pipelines. We are working on getting this side effect resolved in the near future._
-
 This action is reversible. To re-enable the OAuth trigger, follow these steps:
 
 . Go to menu:Project Settings[Overview]
