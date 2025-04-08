@@ -794,7 +794,7 @@ jobs:
     plan_name: <my-service-release>
 ----
 
-The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required.
+The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using no-op jobs,  see the xref:orchestration-cookbook#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration cookbook]
 
 **Example** of a job with a `no-op` type:
 
