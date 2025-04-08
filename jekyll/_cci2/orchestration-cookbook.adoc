@@ -16,7 +16,7 @@ This cookbook contains "recipes" for common pipeline, workflow and job execution
 
 === Goal
 
-You may want to run a specific set of more credit-consuming tests only when a pull request is ready to be taken out of its draft state -- when the PR is marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
+You may want to run a set of high credit-consuming tests only when a pull request is ready to be taken out of "draft" -- marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
 
 === Steps
 
@@ -144,7 +144,7 @@ You may want to configure a workflow that will only run when a boolean pipeline 
 
 === Steps
 
-. Update config to declare a pipeline parameter with a deafult value of `false`
+. Update config to declare a pipeline parameter with a default value of `false`
 
 . Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true
 +
@@ -198,7 +198,7 @@ include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
 
 === Goal
 
-You may want to configure a job that will only run on specific branches or when the value of a pipeline parameter is set to `true` when the pipeline is triggered via the API.
+You may want to configure a job that only runs on specific branches or when the value of a pipeline parameter is `true` when triggered via the API.
 
 === Steps
 
@@ -254,3 +254,250 @@ include::../_includes/snippets/logic-statement-examples/when-in-workflows/pr-syn
 * The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
 
 include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+== Use no-op jobs to create a cleaner workflow graph
+
+=== Goal
+
+You may want to organize your workflow graph to make it more readable without adding additional build time or consuming credits. Using `no-op` jobs can help create a cleaner structure for complex workflows with many dependencies.
+
+The following snippet shows how your workflow configuration might look without using a `no-op` job:
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run build
+
+  test-unit:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:unit
+
+  test-integration:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:integration
+
+  test-e2e:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:e2e
+
+  deploy:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run deploy
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test-unit:
+          requires:
+            - build
+      - test-integration:
+          requires:
+            - build
+      - test-e2e:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test-unit
+            - test-integration
+            - test-e2e
+----
+
+Notice how the `deploy` job needs to explicitly list all three test jobs in its `requires` section. As your workflow grows, this list could become longer and more difficult to maintain.
+
+Here is the workflow graph for this config:
+
+image::orchestrate-and-trigger/clean-graph-before.png[Workflow graph showing snippet without `no-op` job]
+
+=== Steps
+
+. Add a `no-op` job to your CircleCI configuration file.
++
+[,yaml]
+----
+jobs:
+  test-coordinator:
+    type: no-op
+
+  test-unit:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:unit
+
+  test-integration:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:integration
+
+  test-e2e:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:e2e
+----
+
+. Configure your workflow to use the `no-op` job as a coordinator for downstream jobs.
++
+[,yaml]
+----
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test-unit:
+          requires:
+            - build
+      - test-integration:
+          requires:
+            - build
+      - test-e2e:
+          requires:
+            - build
+      - test-coordinator:
+          requires:
+            - test-unit
+            - test-integration
+            - test-e2e
+      - deploy:
+          requires:
+            - test-coordinator
+----
+
+The workflow graph will now look like this:
+
+image::orchestrate-and-trigger/clean-graph-after.png[Workflow graph showing snippet with `no-op` job]
+
+=== Notes
+
+* The `no-op` job performs no actions and consumes no credits. This makes it an ideal structural element in your workflow.
+* This pattern is useful when you want to visually group related jobs in the CircleCI UI.
+* Using `no-op` jobs can simplify workflow management when dealing with complex dependency chains.
+* Without the `test-coordinator` job, the `deploy` job would need to list all test jobs in its `requires` section.
+
+== Simplify GitHub required status checks with no-op jobs
+
+=== Goal
+
+You may want to simplify the management of GitHub required status checks for your branch protection rules. Use a single `no-op` job as a gatekeeper that depends on all your critical checks. This approach is means you only need to manage a single required status check rather than multiple status checks in GitHub.
+
+The following snippet shows how your workflow configuration might look without using a `no-op` job:
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run lint
+
+  test:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm test
+
+  security-scan:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run security-check
+
+workflows:
+  main:
+    jobs:
+      - lint
+      - test
+      - security-scan
+----
+
+With this configuration, in GitHub you would need to set up branch protection rules for each job (`lint`, `test`, `security-scan`). You would need to update both CircleCI config and GitHub settings when adding more jobs.
+
+=== Steps
+
+. Add a `no-op` job to your CircleCI configuration file that will serve as your single required status check. In this example the no-op job is `all-tests-passed`:
++
+[,yaml]
+----
+jobs:
+  all-tests-passed:
+    type: no-op
+
+  lint:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run lint
+
+  test:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm test
+
+  security-scan:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run security-check
+----
+
+. Configure your workflow to make all critical jobs prerequisites for the `no-op` job. The `all-tests-passed` will only succeed if all its required jobs succeed.
++
+[,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - lint
+      - test
+      - security-scan
+      - all-tests-passed:
+          requires:
+            - lint
+            - test
+            - security-scan
+----
+
+. In GitHub, set up a branch protection rule to require only the `all-tests-passed` job as a required status check. See the link:https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches[GitHub docs] for more information on branch protection rules.
+
+=== Notes
+
+* This approach simplifies branch protection management in GitHub by requiring only one status check.
+* When you add new checks, you only need to update the `requires` list for your `no-op` job.
+* The `no-op` job will succeed only if all its required jobs succeed.
+* This pattern helps keep GitHub and CircleCI configurations in sync without manual updates.
