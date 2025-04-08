@@ -106,7 +106,7 @@ Now that you have set up collection, install the Sumo Logic App for CircleCI to 
 . Select *Install App*.
 . Select *Next* in the *Setup Data* section.
 . In the *Configure* section of your respective app, complete the following fields.
-    .. *Field Name*. If you already have collectors and sources setup, select the configured metadata field name (for example _sourceCategory) or specify other custom metadata (for example : _collector) along with its metadata *Field Value* .
+.. *Field Name*. If you already have collectors and sources set up, select the configured metadata field name (for example, `_sourceCategory`) or specify other custom metadata (for example, `_collector`) along with its metadata *Field Value*.
 . Select *Next*. You will be redirected to the *Preview & Done* section.
 
 
