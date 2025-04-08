@@ -101,16 +101,15 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 Now that you have set up collection, install the Sumo Logic App for CircleCI to use pre-configured searches and dashboards that provide insight into your CI/CD pipeline.
 
-. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
-. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
-. To install the app, complete the following fields:
-** **App Name**. You can retain the existing name, or enter a name of your choice for the app
-** **Data Source**. Select either of these options for the data source:
-*** Choose **Source Category**, and select a source category from the list
-*** Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
-** **Advanced**. Select the location in the library (the default is the personal folder in the library), or click **New Folder** to add a new folder
-. Select **Add to Library**.
+. Select *App Catalog*.
+. In the *Search Apps* field, run a search for your desired app, then select it.
+. Click *Install App*.
+. Click *Next* in the *Setup Data* section.
+. In the *Configure* section of your respective app, complete the following fields.
+    .. *Field Name*. If you already have collectors and sources setup, select the configured metadata field name (eg _sourcecategory) or specify other custom metadata (eg: _collector) along with its metadata *Field Value* .
+. Click *Next*. You will be redirected to the *Preview & Done* section.
 
-Once the app is installed, it will appear in your personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically.
 
-NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available immediately, but with a bit of time, you will see full graphs and maps.
+Once the app is installed, it will appear in your Installed Apps folder. Panels will start to fill automatically.
+
+NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available, but will update with full graphs and charts over time.
