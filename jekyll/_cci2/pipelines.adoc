@@ -242,7 +242,7 @@ include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
 
 == FAQs
 
-include::../_includes/snippets/faq/pipelines-faq-snip.adoc[]
+include::../_includes/partials/faq/pipelines-faq-snip.adoc[]
 
 [#next-steps]
 == Next steps
