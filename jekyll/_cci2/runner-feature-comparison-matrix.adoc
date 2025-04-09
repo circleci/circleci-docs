@@ -11,7 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This page offers a comparison of the features available for CircleCI Machine runner vs. CircleCI Container Runner.
+This page offers a comparison of the features available for CircleCI machine runner vs. CircleCI container runner.
 
 [#feature-comparison-matrix]
 == Comparison matrix
@@ -41,7 +41,7 @@ This page offers a comparison of the features available for CircleCI Machine run
 
 |*Architecture Support*
 |CPU architectures available for builds
-|Not specified
+|xref:runner-overview#available-self-hosted-runner-platforms[Depends on OS]
 |AMD64/ARM64 with `nodeSelector`
 
 |*Job Isolation*
@@ -101,10 +101,10 @@ This page offers a comparison of the features available for CircleCI Machine run
 [#key-differences]
 == Key Differences
 
-*Machine Runner* offers full VM isolation with the newest
+*Machine runner* offers full VM isolation with the newest
 configuration patterns and improved controls.
 
-*Container Runner* leverages Kubernetes for:
+*Container runner* leverages Kubernetes for:
 
 * Container-based isolation
 * Better scaling capabilities
@@ -114,8 +114,8 @@ configuration patterns and improved controls.
 [#choose-a-runner]
 == When to Choose Each Runner
 
-*Machine Runner*: Choose for full system access, custom system
+*Machine runner*: Choose for full system access, custom system
 dependencies, or when Kubernetes isn’t available.
 
-*Container Runner*: Best for cloud-native applications, teams using
+*Container runner*: Best for cloud-native applications, teams using
 Kubernetes, and workloads that benefit from container orchestration.
