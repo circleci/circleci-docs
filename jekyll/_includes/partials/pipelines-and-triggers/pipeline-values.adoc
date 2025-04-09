@@ -378,4 +378,11 @@ a|  * GitLab: push, merge request
 | icon:check[]
 | icon:times[]
 
+| `pipeline.event.context.github.pr_url`
+| GitHub App
+| String
+| The URL of the associated GitHub pull request, if one exists. If there are multiple associated pull requests, one URL is randomly chosen. This value matches env variable CIRCLE_PULL_REQUEST.
+| icon:check[]
+| icon:times[]
+
 |===
