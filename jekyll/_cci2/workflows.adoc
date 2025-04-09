@@ -314,7 +314,7 @@ NOTE: *The deprecation of the scheduled workflows feature is postponed*. Since t
 
 CAUTION: The scheduled workflows feature does not support xref:dynamic-config#[Dynamic configuration]. If you use dynamic configuration you will need to use xref:scheduled-pipelines#[Scheduled pipelines] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
 
-By default, a workflow runs on every `git push`. To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
+By default, a workflow runs on every push, or based on the event trigger/filter rules you have set up for your trigger (menu:Project settings[Triggers]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
 
 Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling a workflow is an alternative to building on every commit. You can _schedule_ a workflow to run at a certain time for a specific branch or branches. Consider scheduling workflows that are resource-intensive or that generate reports on a schedule rather than on every commit.
 
