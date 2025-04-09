@@ -166,7 +166,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | icon:check[]
 
 | `CIRCLE_PULL_REQUEST`
-| GitHub OAuth, Bitbucket Cloud
+| GitHub, Bitbucket Cloud
 | String
 | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
 | icon:check[]
