@@ -360,7 +360,7 @@ a|  * GitLab: push, merge request
 | icon:times[]
 
 | `pipeline.trigger_parameters.webhook.body`
-| Inbound webhook
+| Custom webhook
 | String
 | The body of the payload that was sent with a xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[custom webhook].
 | icon:check[]
