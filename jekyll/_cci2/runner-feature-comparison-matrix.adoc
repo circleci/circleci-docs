@@ -51,7 +51,7 @@ This page offers a comparison of the features available for CircleCI machine run
 
 |*Scaling*
 |How runner capacity scales with demand
-|Manual/custom
+|xref:runner-scaling#scaling-data[Manual/custom]
 |Kubernetes-based auto-scaling
 
 |*Service Containers*
@@ -81,22 +81,21 @@ This page offers a comparison of the features available for CircleCI machine run
 
 *Machine Runner*
 
-* Latest generation of machine-based runners
-* Full access to underlying operating system
-* Ideal for workflows requiring VM-level isolation
-* Consistent environment variables with `CIRCLECI_RUNNER_*` prefix
-* Supports SSH connectivity for debugging
+* Latest generation of machine-based runners.
+* Full access to underlying operating system.
+* Ideal for workflows requiring VM-level isolation.
+* Consistent xref:variables#built-in-environment-variables[environment variables] with `CIRCLECI_RUNNER_*` prefix.
+* Supports SSH connectivity for debugging.
 
 *Container Runner*
 
-* Kubernetes-native solution for container-based workflows
-* Fine-grained resource allocation and constraints
-* Supports service container configurations with pattern matching:
-* Advanced node selection via Kubernetes annotations
-* Custom security contexts and volume mounting
-* Support for spot instances via tolerations
-* Configurable resource limits for primary and service containers
-
+* Kubernetes-native solution for container-based workflows.
+* Fine-grained resource allocation and constraints.
+* Supports service container configurations with pattern matching.
+* Advanced node selection via Kubernetes annotations.
+* Custom security contexts and volume mounting.
+* Support for spot instances via tolerations.
+* Configurable resource limits for primary and service containers.
 
 [#key-differences]
 == Key Differences
@@ -106,16 +105,14 @@ configuration patterns and improved controls.
 
 *Container runner* leverages Kubernetes for:
 
-* Container-based isolation
-* Better scaling capabilities
-* Advanced resource management
-* Multiple architecture support
+* Container-based isolation.
+* Better scaling capabilities.
+* Advanced resource management.
+* Multiple architecture support.
 
 [#choose-a-runner]
 == When to Choose Each Runner
 
-*Machine runner*: Choose for full system access, custom system
-dependencies, or when Kubernetes isn’t available.
+*Machine runner*: Choose for full system access, custom system dependencies, or when Kubernetes is not available.
 
-*Container runner*: Best for cloud-native applications, teams using
-Kubernetes, and workloads that benefit from container orchestration.
+*Container runner*: Best for cloud-native applications, teams using Kubernetes, and workloads that benefit from container orchestration.
