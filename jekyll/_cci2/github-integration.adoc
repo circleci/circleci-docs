@@ -130,6 +130,8 @@ If your deploy keys or user keys appear to have been removed, it may be due to o
 [#create-a-github-user-key]
 === Create a GitHub user key
 
+To create a GitHub user key, follow these steps:
+
 include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
 
 [start=4]
