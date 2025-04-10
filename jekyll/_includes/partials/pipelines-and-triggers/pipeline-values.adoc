@@ -376,7 +376,7 @@ a|  * GitLab: push, merge request
 | `pipeline.event.action`
 | GitHub App
 | String
-| The action associated with the event. This value is always the same as `pipeline.event.name`, except for [GitHub events](https://docs.github.com/en/webhooks/webhook-events-and-payloads) that have an `action` property, e.g. [pull_request](https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request). Possible values: `custom_webhook`, `api`, `push`, `opened`, `synchronize`, `reopened`, `closed`, `ready_for_review`, `labeled`. xref:github-trigger-event-options/#supported-trigger-options[Read more about trigger event options].
+| The action associated with the event. This value is always the same as `pipeline.event.name`, except for link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub events] that have an `action` property, e.g. link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull_request]. Possible values: `custom_webhook`, `api`, `push`, `opened`, `synchronize`, `reopened`, `closed`, `ready_for_review`, `labeled`. xref:github-trigger-event-options/#supported-trigger-options[Read more about trigger event options].
 | icon:check[]
 | icon:times[]
 
