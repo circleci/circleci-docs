@@ -102,7 +102,7 @@ command: |
 
 The full `.circleci/config.yml` file would look something like the following:
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yml]
 ----

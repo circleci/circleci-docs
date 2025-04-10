@@ -142,7 +142,7 @@ NOTE: Custom webhook triggers can only be associated with GitHub App pipelines. 
 
 To add a trigger for a custom webhook, follow these steps:
 
-include::../_includes/snippets/custom-webhook-setup.adoc[]
+include::../_includes/partials/pipelines-and-triggers/custom-webhook-setup.adoc[]
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
@@ -238,11 +238,11 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#troubleshooting]
 == Troubleshooting
 
-include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
+include::../_includes/partials/troubleshoot/pipelines-troubleshoot-snip.adoc[]
 
 == FAQs
 
-include::../_includes/snippets/faq/pipelines-faq-snip.adoc[]
+include::../_includes/partials/faq/pipelines-faq-snip.adoc[]
 
 [#next-steps]
 == Next steps

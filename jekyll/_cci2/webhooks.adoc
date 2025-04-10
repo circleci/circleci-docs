@@ -30,7 +30,7 @@ This section presents some use cases for CircleCI custom webhooks.
 
 Follow these steps to set up and test a custom webhook trigger. Trigger from anywhere that can emit a webhook or run a curl command:
 
-include::../_includes/snippets/custom-webhook-setup.adoc[]
+include::../_includes/partials/pipelines-and-triggers/custom-webhook-setup.adoc[]
 
 . You can now test your custom webhook trigger with `curl`. To trigger your pipeline, copy and paste the following sample request and replace `<your-URL>` and `<your-secret>` with the URL and secret that you generated in the previous step:
 +
@@ -62,7 +62,7 @@ When a change is made to Project A, we want the full Project A configuration to 
 
 Navigate to Project B in the CircleCI web app and set up a custom webhook by following these steps:
 
-include::../_includes/snippets/custom-webhook-setup.adoc[]
+include::../_includes/partials/pipelines-and-triggers/custom-webhook-setup.adoc[]
 
 ==== 2. Configure Project A to trigger Project B
 
@@ -124,9 +124,9 @@ commands:
       - jq/install
       - run:
           name: Shallow Clone
-          environment:
-            WEBHOOK_BRANCH: << pipeline.trigger_parameters.webhook.body >> | jq .branch
-          command: gh repo clone << pipeline.trigger_parameters.github_app.repo_url >> . -- --depth 10 --branch "$WEBHOOK_BRANCH"
+          command: |
+            WEBHOOK_BRANCH=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq '.branch')
+            gh repo clone << pipeline.trigger_parameters.github_app.repo_url >> . -- --depth 10 --branch "$WEBHOOK_BRANCH"
 ----
 
 == Outbound webhooks

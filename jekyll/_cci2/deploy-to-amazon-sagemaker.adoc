@@ -5,17 +5,17 @@ contentTags:
 ---
 = Deploy to Amazon SageMaker
 :page-layout: classic-docs
-:page-description: A guide to configuring deployments to Amazon SageMaker and monitoring in the CircleCI releases UI.
+:page-description: A guide to configuring deployments to Amazon SageMaker and monitoring in the CircleCI deploys UI.
 :icons: font
 :experimental:
 
 NOTE: The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is in **open preview**.
 
-This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. It uses the sample repository link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] as a reference, but you can adapt every step to your requirements. Through this guide, you will learn how to orchestrate model deployment to endpoints across different environments, as well as track and manage your releases in the CircleCI release UI.
+This how-to guide walks you through the steps to set up and use the Amazon SageMaker orb to deploy and release models to SageMaker. It uses the sample repository link:https://github.com/CircleCI-Public/sagemaker-deploy-examples#[example project repository] as a reference, but you can adapt every step to your requirements. Through this guide, you will learn how to orchestrate model deployment to endpoints across different environments, as well as track and manage your deployments in the CircleCI deploys UI.
 
-For further information about the orb and the releases feature see the following:
+For further information about the orb and the CircleCI deploys feature see the following:
 
-* xref:deploy/deploys-overview#[Releases overview]
+* xref:deploy/deploys-overview#[Deploys overview]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[Amazon SageMaker orb]
 * link:https://circleci.com/blog/amazon-sagemaker-deployment-orchestration/[**Blog post**: Using Amazon SageMaker orb to orchestrate model deployment across environments]
 
@@ -31,22 +31,15 @@ To follow along with this how-to guide you will need the following:
 * A copy of the link:https://github.com/CircleCI-Public/sagemaker-deploy-examples[example repository] building on CircleCI. For steps to get the project set up, see the xref:create-project#[Create a project in CircleCI] page.
 
 [#set-up-a-circleci-release-environment]
-== 1. Set up a CircleCI release environment
+== 1. Set up a CircleCI environment integration
 
-First, set up a release environment to monitor your releases from the CircleCI web app, and access options to manage promotions and rollbacks.
+First, set up an environment integration to monitor your deployments from the CircleCI web app, and access options to manage promotions and rollbacks.
 
-. In the CircleCI web app, select **Releases** from the sidebar
-. If this is your first release environment, you will see an option to btn:[Add Release Environment]. If not, Click btn:[Configure Environments] in the top right corner, and then click btn:[Configure New Environment]
+. In the CircleCI web app, select **Deploys** from the sidebar
+. If this is your first environment integration, you will see an option to btn:[Create your first environment integration]. If not, select the "Environments" tab, and then select btn:[Create Environment Integration]
 +
-image::deploy/add-release-environment.png[Screenshot showing option to add a new release environment]
-. In the popup, select **Amazon SageMaker** from the "Environment" dropdown. Give your new environment a name, and click btn:[Create Environment]
-+
-image::deploy/create-new-environment.png[Screenshot showing new release environment popup]
-. Select your new environment name to enter the environment view.
-. Select btn:[Create New Token].
-+
-image::deploy/release-create-new-token.png[Screenshot showing create new token button]
-. Select btn:[Create Token]. Be sure to save this token, you will create an environment variable later to store it.
+image::deploy/add-release-environment.png[Screenshot showing option to add a new environment integration]
+. In the popup, select **Amazon SageMaker** from the "Type" dropdown. Follow the instructions on screen to generate and save a token.
 
 [#set-up-amazon-sagemaker-access]
 == 2. Set up Amazon SageMaker access
@@ -64,7 +57,7 @@ image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console
 . Under "Provider Type", select **OpenID Connect**
 . Enter your "Provider URL". This will be `\https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
 +
-include::../_includes/snippets/find-organization-id.adoc[]
+include::../_includes/partials/notes/find-organization-id.adoc[]
 . Select **Get Thumbprint**.
 . For "Audience" enter your organization ID.
 . Select btn:[Add Provider].
@@ -196,9 +189,14 @@ The CircleCI Amazon SageMaker orb requires some environment variables to functio
 * `CCI_RELEASE_INTEGRATION_TOKEN`: The orb connects your deployment to SageMaker with xref:deploy/deploys-overview#[CircleCI deploys]. This gives you visibility into the Endpoint Configuration Updates, and what is currently active.
 * `SAGEMAKER_EXECUTION_ROLE_ARN`: This is the AWS IAM Role you configured with the necessary SageMaker permissions, and the OIDC Trust relationship.
 
-. From the CircleCI web app, click **Dashboard** in the sidebar.
-. Use the project filter dropp-down to choose your project.
-. Select btn:[Project Settings] and then choose **Environment Variables**.
+{empty} +
+
+Follow these steps to add the environment variables:
+
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
+. In the sidebar menu, select **Environment Variables**.
 . Select btn:[Add Environment Variable] button to enter a name and value of the new environment variable.
 +
 image::deploy/add-env-var.png[Screenshot showing add environment variable popup]
@@ -342,19 +340,16 @@ Next, is an approval job. This stops the workflow from deploying to production u
 image::deploy/job-approval.png[Approval job]
 
 [#check-in-on-your-release]
-== 7. Check in on your release
+== 7. Check in on your deployment
 
-The CircleCI release UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate to the SageMaker console. If you navigate to the releases dashboard by clicking **Releases** in the web app sidebar, you should now see something along the lines of the image below:
+The CircleCI deploys UI offers you a single pane of glass to monitor all your deployments across environments. You can view deployment progress in real time, see what versions are currently deployed, and navigate to the SageMaker console. If you navigate to the deploys dashboard by clicking **Deploys** in the web app sidebar, you should now see something along the lines of the image below:
 
-image::deploy/sagemaker-releases.png[Releases dashboard]
+image::deploy/sagemaker-releases.png[Deploys dashboard]
 
 Select the component name to view details about the component, including the number of instances deployed. From this interface, you can navigate to Amazon SageMaker for live information on your endpoint.
 
-image::deploy/sagemaker-component-view.png[Releases component view]
+image::deploy/sagemaker-component-view.png[Deploys component view]
 
-Select the version to see the version details page for version being released. Clicking on specific versions lets you monitor release progress in real-time.
+Select the version to see the details page for the version being deployed. Clicking on a specific version lets you monitor deployment progress in real-time.
 
-image::deploy/wait-for-availability.png[Releases version view]
-
-[#conclusion]
-== Conclusion
+image::deploy/wait-for-availability.png[Deploys version view]

@@ -195,7 +195,7 @@ jobs:
       - image: circleci/cci-demo-docker-primary:0.0.1
 ----
 
-include::../_includes/snippets/docker-auth.adoc[]
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 If you have any questions, head over to our https://discuss.circleci.com/[community forum].
 
