@@ -348,6 +348,10 @@ To opt out of automatic deploy detection for a **project**, follow these steps:
 . Select **Deploys**.
 . Toggle the "Enable automatic deploy marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option to the right.
 
+=== Retention Policy
+
+Automatically detected deploys are retained for 30 days.
+
 === Manual deploy marker setup
 
 If you would rather set up deploy markers yourself, see the xref:configure-deploy-markers#[Configure deploy markers] page.
@@ -401,7 +405,7 @@ We are working on updates to:
 [#troubleshooting]
 == Troubleshooting
 
-include::../../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]
+include::../../_includes/partials/troubleshoot/releases-troubleshoot.adoc[]
 
 [#next-steps]
 == Next steps
