@@ -366,4 +366,25 @@ a|  * GitLab: push, merge request
 | icon:check[]
 | icon:times[]
 
+| `pipeline.event.name`
+| GitHub App
+| String
+| The name of the event that triggered the pipeline. Possible values: `custom_webhook`, `api`, `push`, `pull_request`.
+| icon:check[]
+| icon:times[]
+
+| `pipeline.event.action`
+| GitHub App
+| String
+| The action associated with the event. This value is always the same as `pipeline.event.name`, except for link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub events] that have an `action` property, for example link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull_request]. Possible values: `custom_webhook`, `api`, `push`, `opened`, `synchronize`, `reopened`, `closed`, `ready_for_review`, `labeled`. xref:github-trigger-event-options/#supported-trigger-options[Read more about trigger event options].
+| icon:check[]
+| icon:times[]
+
+| `pipeline.event.context.github.pr_url`
+| GitHub App
+| String
+| The URL of the associated GitHub pull request, if one exists. If there are multiple associated pull requests, one URL is randomly chosen. This value matches env variable CIRCLE_PULL_REQUEST.
+| icon:check[]
+| icon:times[]
+
 |===
