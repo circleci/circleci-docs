@@ -72,7 +72,7 @@ You may want to configure a workflow in your pipeline that will only run on a pi
 workflows:
   workflow-pr-open:
     # Only run this workflow when a PR is opened
-    when: pipeline.event.name == pull_request and pipeline.event.action == opened
+    when: pipeline.event.name == "pull_request" and pipeline.event.action == "opened"
     jobs:
       - my-job-1
       - my-job-2
