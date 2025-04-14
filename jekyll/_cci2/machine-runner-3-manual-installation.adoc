@@ -4,22 +4,22 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Machine runner 3.0 manual installation
+= Machine runner 3 manual installation
 :page-layout: classic-docs
-:page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3.0 on macOS and Linux.
+:page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3 on macOS and Linux.
 :icons: font
 :experimental:
 :machine:
 :macOS:
 :linux:
 
-This page describes how to manually start CircleCI's machine runner 3.0 on macOS and Linux.
+This page describes how to manually start CircleCI's machine runner 3 on macOS and Linux.
 
-CAUTION: We recommend installing and using CircleCI machine runner 3.0 with xref:install-machine-runner-3-on-macos.adoc[the Homebrew package] on macOS and xref:install-machine-runner-3-on-linux.adoc[the Linux packages] on Linux. The manual method described on this page is an optional alternative.
+CAUTION: We recommend installing and using CircleCI machine runner 3 with xref:install-machine-runner-3-on-macos.adoc[the Homebrew package] on macOS and xref:install-machine-runner-3-on-linux.adoc[the Linux packages] on Linux. The manual method described on this page is an optional alternative.
 
 CAUTION: Only a single machine runner per machine instance is supported by CircleCI
 
-WARNING: If you follow this manual installation method, CircleCI machine runner 3.0 will not automatically update.
+WARNING: If you follow this manual installation method, CircleCI machine runner 3 will not automatically update.
 
 [#prerequisites]
 == Prerequisites
@@ -136,8 +136,8 @@ $HOME/circleci-runner machine --config $HOME/circleci-runner-config.yaml
 [#additional-resources]
 == Additional resources
 
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
-- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3.0 macOS Homebrew installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
