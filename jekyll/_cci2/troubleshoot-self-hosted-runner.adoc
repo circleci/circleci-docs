@@ -12,4 +12,4 @@ contentTags:
 
 This page describes errors and troubleshooting methods for container and machine runners.
 
-include::../_includes/snippets/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
+include::../_includes/partials/troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
