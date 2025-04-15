@@ -16,23 +16,23 @@ This page describes how to install CircleCI's container runner.
 [#prerequisites]
 == Prerequisites
 
-include::../_includes/snippets/runner/container-runner-prereq.adoc[]
+include::../_includes/partials/runner/container-runner-prereq.adoc[]
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
 [.tab.container-runner.Web_app_installation]
 --
-include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.container-runner.CLI_installation]
 --
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 --
 
 [#container-runner-installation]
