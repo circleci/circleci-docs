@@ -480,6 +480,18 @@ This example prevents the workflow `integration_tests` from running unless the `
 }
 ----
 
+For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook#[Orchestration cookbook].
+
+[TIP]
+====
+If you want to conditionally run workflows based on the type of event that triggers your pipeline, you can also consider splitting your workflows into separate YAML files and leveraging the different GitHub trigger event options.
+
+For further details see the following guides:
+
+* xref:set-up-multiple-configuration-files-for-a-project#[Set up multiple configuration files for a project]
+* xref:github-trigger-event-options#[GitHub trigger event options]
+====
+
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
 
