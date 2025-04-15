@@ -397,7 +397,7 @@ a|  * GitLab: push, merge request
 | `pipeline.event.github.pull_request.head.ref`
 | GitHub App
 | String
-| Only populated for pipelines triggered xref:github-trigger-event-options/#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`). It contains the name of the *base* branch of the PR - that is the branch containing the changes to be merged. 
+| Only populated for pipelines triggered xref:github-trigger-event-options/#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`). It contains the name of the *head* branch of the PR - that is the branch containing the changes to be merged. 
 | icon:check[]
 | icon:times[]
 
