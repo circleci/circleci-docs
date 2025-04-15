@@ -140,7 +140,7 @@ Notifications of a change to this list will be sent out by email to all customer
 
 Pricing is calculated based on the data usage of jobs opted into the IP ranges feature. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline. Data used to pull in the Docker image to the container before the job starts executing does _not incur usage costs_ for jobs with IP ranges enabled.
 
-This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
+Enabling IP ranges consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 IP ranges usage is visible in the *Plan Usage* section of the CircleCI app:
 
