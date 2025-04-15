@@ -96,6 +96,13 @@ a| * `opened`
 
 |===
 
+All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull request events] also have the following xref:variables/#pipeline-values[pipeline values] are also populated:
+* `pipeline.event.github.pull_request.base.ref`: the name of the *base* (or target) branch of the PR - that is the branch that will receive the changes.
+* `pipeline.event.github.pull_request.head.ref`: the name of the *head* branch of the PR - that is the branch containing the changes to be merged.
+* `pipeline.event.github.pull_request.draft`: a boolean value indicating whether the pull request is a draft
+* `pipeline.event.github.pull_request.title`: the title of the pull request
+* `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request
+These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[this page].
 
 Config orchestration tools are available from within your pipelines are as follows:
 
