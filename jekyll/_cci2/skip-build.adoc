@@ -32,19 +32,13 @@ Adding one of these tags skips pipeline execution for all the commits included i
 
 When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this information to decide not to build your project.
 
-The skip process is different depending on your VCS integration, as follows:
+A skipped pipeline will not show on the pipelines page, and no pipeline will be returned for a skipped commit using the API.
 
-* xref:github-apps-integration#[GitHub App]: A skipped pipeline will not show on the pipelines page, and no pipeline will be returned for a skipped commit using the API.
-
-* GitHub OAuth, GitLab, Bitbucket: A skipped pipeline will show in the CircleCI web app pipelines page with a status of NOT RUN. A pipeline will be returned for the skipped commit using the API with a status of `created` but the workflows and jobs will be `not run`.
-
-NOTE: **GitLab known issue**: If you skip a commit using GitLab a pipeline will appear to be running indefinitely in the GitLab UI but the pipeline is not triggered in CircleCI.
 
 === Scope
 
 A few points to note regarding the scope of the `ci skip` feature:
 
-* The pipeline and workflows will still exist for these commits but no jobs will be run.
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
