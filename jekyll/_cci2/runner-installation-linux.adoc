@@ -41,25 +41,25 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --
-include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 --
 
 [#download-the-launch-agent-script]
 == 2. Download launch-agent script and install binary
 
-include::../_includes/snippets/runner/launch-agent-download.adoc[]
+include::../_includes/partials/runner/launch-agent-download.adoc[]
 
 [#create-the-circleci-user-and-working-directory]
 == 3. Create `circleci` user and working directory
@@ -176,7 +176,7 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
-include::../_includes/snippets/runner/machine-runner-example.adoc[]
+include::../_includes/partials/runner/machine-runner-example.adoc[]
 
 The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 

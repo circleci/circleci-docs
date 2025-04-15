@@ -49,12 +49,12 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 [#download-circleci-runner]
 
