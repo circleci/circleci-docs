@@ -120,27 +120,6 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 
 NOTE: Jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature.
 
-[#list-of-ip-address-ranges-changelog]
-=== List of IP address ranges changelog
-
-==== 2024-11-05
-
-* Added support for parameters.
-
-Use parameters like << pipeline.parameters.ip_ranges >> to determine if IP ranges should be enabled.
-
-==== 2021-08-23
-
-* Added new items to the list of IP address ranges for core services.
-
-The machine-consumable lists have also been updated to reflect the new IP address ranges.
-
-==== 2022-04-06
-
-* Added and removed new IP addresses as part of enabling Docker pulls to go through the list of IP addresses.
-
-The machine-consumable lists have also been updated to reflect the new IP address ranges.
-
 *Machine-consumable lists can be found by querying the DNS A records below:*
 
 * IP address ranges _for jobs_: `jobs.knownips.circleci.com`.
@@ -210,7 +189,7 @@ An exhaustive list of IP addresses that CircleCI's traffic may come can be found
 * link:https://ip-ranges.amazonaws.com/ip-ranges.json[AWS]: CircleCI uses the _us-east-1_ and _us-east-2_ regions.
 * link:https://www.gstatic.com/ipranges/cloud.json[GCP]: CircleCI uses the _us-east1_ and _us-central1_ regions.
 
-CircleCI _does not recommend_ configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI's machines. CircleCI can _not guarantee_ that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
+CircleCI _does not recommend_ configuring an IP-based firewall using the AWS or GCP IP addresses. The vast majority are not CircleCI's machines. CircleCI can _not guarantee_ that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
 
 [#circleci-macos-cloud]
 === CircleCI macOS cloud
