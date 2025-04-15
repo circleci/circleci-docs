@@ -25,12 +25,12 @@ This page describes how to manually install CircleCI's machine runner 3.0 on Win
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 [#download-machine-runner]
 == 2. Download the CircleCI machine runner
