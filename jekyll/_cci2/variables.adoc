@@ -93,7 +93,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job.
 | icon:check[]
-| icon:times[]
+| icon:check[] from v4.4
 
 | `CIRCLE_OIDC_TOKEN_V2`
 | GitHub, Bitbucket, GitLab
