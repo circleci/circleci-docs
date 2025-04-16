@@ -160,6 +160,7 @@ GKE
 \bGoogle Play Store\b
 GPU
 Gradle
+Grafana
 Gzip
 HashiCorp
 [Hh]eadspace

@@ -800,6 +800,8 @@ en:
             link: server/latest/operator/managing-build-artifacts
           - name: Usage data collection
             link: server/latest/operator/usage-data-collection
+          - name: Monitoring stack reference Helm chart
+            link: server/latest/operator/monitoring-stack-reference-helm-chart
           - name: CircleCI server security features
             link: server/latest/operator/circleci-server-security-features
           - name: Application lifecycle

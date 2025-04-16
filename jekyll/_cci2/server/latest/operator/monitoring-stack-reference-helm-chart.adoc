@@ -1,0 +1,21 @@
+---
+contentTags:
+  platform:
+    - Server v4.8
+    - Server Admin
+---
+= Monitoring stack reference Helm chart
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to deploy your own monitoring stack using our Helm chart as a reference.
+:icons: font
+:toc: macro
+:toc-title:
+
+
+You may want to access metrics to gain insight into the performance of builds on your CircleCI server installation. This page provides a sample to show how observability can be set up using the most common tools via a Helm chart package.
+
+CircleCI does not support or provide any tooling to provide observability into the running services and infrastructure that CircleCI server operates in.
+This guide is provided as a reference on how you could  set up observability and is not an officially supported product. Our reference monitoring stack currently contains samples on how to set up and configure Grafana, Prometheus, and Telegraf, as well as some built-in dashboards for monitoring key service level indicators.
+
+You can find the link:https://github.com/CircleCI-Public/circleci-server-monitoring-reference?tab=readme-ov-file#server-monitoring-stack[reference monitoring stack on our public GitHub], as well as more information on how you could configure this setup. You will also find information on link:https://github.com/CircleCI-Public/circleci-server-monitoring-reference?tab=readme-ov-file#modifying-or-adding-grafana-dashboards[adding to or editing the existing dashboards].
