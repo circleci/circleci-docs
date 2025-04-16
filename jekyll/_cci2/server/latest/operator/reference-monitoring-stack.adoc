@@ -7,7 +7,7 @@ contentTags:
 = Server monitoring stack reference Helm chart
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to deploy your own monitoring stack using our helm chart as a reference.
+:page-description: Learn how to deploy your own monitoring stack using our Helm chart as a reference.
 :icons: font
 :toc: macro
 :toc-title:
