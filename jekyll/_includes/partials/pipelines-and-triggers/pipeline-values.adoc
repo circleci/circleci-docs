@@ -29,6 +29,13 @@
 | icon:check[]
 | icon:check[]
 
+| `pipeline.project.slug`
+| GitHub, Bitbucket, GitLab
+| String
+| The unique URL slug for the project. For example, `gh/circleci/circleci-docs`.
+| icon:check[]
+| icon:check[]
+
 | `pipeline.project.type`
 | GitHub, Bitbucket, GitLab
 | String
