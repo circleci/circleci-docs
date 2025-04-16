@@ -13,7 +13,9 @@ contentTags:
 :toc-title:
 
 
-CircleCI server customers want to know what metrics are available for gaining insight into the performance of their builds. While we don't support or provide any tooling to provide observability into the running services and infrastructure CircleCI server operates in, we can share a sample of how observability can be set up using the most common tools via a helm chart package.
+You may want to access metrics to gain insight into the performance of builds on your CircleCI server installation. This page provides a sample to show how observability can be set up using the most common tools via a Helm chart package.
+
+CircleCI does not support or provide any tooling to provide observability into the running services and infrastructure that CircleCI server operates in.
 This is however only meant to be a reference or guide on how things could be set up and is not an officially supported product. Our reference monitoring stack currently contains samples on how to set up and configure grafana, prometheus and telegraf as well as some built-in dashboards for monitoring key service level inidicators.
 
 You can find the link:https://github.com/CircleCI-Public/circleci-server-monitoring-reference?tab=readme-ov-file#server-monitoring-stack[reference monitoring stack on our public github] as well as more information on how you could configure it's setup. You may also find information on link:https://github.com/CircleCI-Public/circleci-server-monitoring-reference?tab=readme-ov-file#modifying-or-adding-grafana-dashboards[adding to or editing the existing dashboards] here.
