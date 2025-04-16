@@ -64,7 +64,7 @@ workflows:
 [#example-configuration-pipeline-parameters]
 === Example configuration file using IP ranges with pipeline parameters.
 
-Use conditional logic to control when IP ranges is enabled with pipeline parameters. You can set the pipeline parameter `pipeline.parameters.ip_ranges` to `true` to enable IP ranges for the `build` job. FOr more information on triggering pipelines with pipeline parameters, see the xref:triggers-overview#[Trigger a pipeline] page.
+Use conditional logic to control when IP ranges is enabled with pipeline parameters. You can set the pipeline parameter `pipeline.parameters.ip_ranges` to `true` to enable IP ranges for the `build` job. For more information on triggering pipelines with pipeline parameters, see the xref:triggers-overview#[Trigger a pipeline] page.
 
 [,yaml]
 ----
@@ -189,7 +189,7 @@ An exhaustive list of IP addresses that CircleCI's traffic may come can be found
 * link:https://ip-ranges.amazonaws.com/ip-ranges.json[AWS]: CircleCI uses the _us-east-1_ and _us-east-2_ regions.
 * link:https://www.gstatic.com/ipranges/cloud.json[GCP]: CircleCI uses the _us-east1_ and _us-central1_ regions.
 
-CircleCI _does not recommend_ configuring an IP-based firewall using the AWS or GCP IP addresses. The vast majority are not CircleCI's machines. CircleCI can _not guarantee_ that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
+CAUTION: CircleCI _does not recommend_ configuring an IP-based firewall using the AWS or GCP IP addresses. The vast majority are not CircleCI's machines. CircleCI can _not guarantee_ that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
 
 [#circleci-macos-cloud]
 === CircleCI macOS cloud
