@@ -4,7 +4,7 @@ contentTags:
     - Server v4.8
     - Server Admin
 ---
-= Server Monitoring Stack Reference Helm Chart
+= Server monitoring stack reference Helm chart
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to deploy your own monitoring stack using our helm chart as a reference.
