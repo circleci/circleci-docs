@@ -16,9 +16,9 @@ This page is a reference for all built-in values available for use in your Circl
 [#built-in-environment-variables]
 == Built-in environment variables
 
-The following built-in environment variables are available for CircleCI projects. A few environment variables are available for GitHub OAuth and Bitbucket Cloud projects that have been deprecated for GitLab, GitHub App and Bitbucket Data Center support. If you must continue to use those as environment variables in your GitLab pipelines, refer to the workaround described after the list below.
+The following built-in environment variables are available for CircleCI projects. Some environment variables are available for GitHub OAuth and Bitbucket Cloud projects that have been deprecated for GitLab, GitHub App and Bitbucket Data Center support. If you must continue to use those as environment variables in your GitLab pipelines, refer to the workaround described after the list below.
 
-Environment variables are scoped at the job level. They can be used within the context of a job but do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
+Environment variables are scoped at the job level and can be used within the context of a job. Environment variables do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
 
 NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step to export the new environment variables using `BASH_ENV`. For more details, see xref:set-environment-variable#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
 
@@ -140,7 +140,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | `CIRCLE_PREVIOUS_BUILD_NUM`
 | GitHub, Bitbucket, GitLab
 | Integer
-| The largest job number in a given branch that is less than the current job number. **Note**: The variable is not always set, and is not deterministic. It is also not set on runner executors. This variable is likely to be deprecated, and CircleCI recommends users to avoid using it.
+| The largest job number in a given branch that is less than the current job number. **Note**: The variable is not always set, and is not deterministic. It is also not set on runner executors. This variable will be deprecated and is not recommended for use.
 | icon:check[]
 | icon:check[]
 
