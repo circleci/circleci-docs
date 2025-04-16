@@ -107,14 +107,14 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | String
 | A unique identifier for the CircleCI organization.
 | icon:check[]
-| icon:times[]
+| icon:check[]
 
 | `CIRCLE_PIPELINE_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | A unique identifier for the current pipeline.
 | icon:check[]
-| icon:times[]
+| icon:check[]
 
 | `CIRCLE_PR_NUMBER`
 | GitHub OAuth, Bitbucket Cloud
@@ -149,7 +149,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | String
 | A unique identifier for the current project.
 | icon:check[]
-| icon:times[]
+| icon:check[]
 
 | `CIRCLE_PROJECT_REPONAME`
 | GitHub, GitLab, Bitbucket
