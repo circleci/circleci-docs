@@ -97,7 +97,7 @@ You can combine several contexts for a single job by adding them to the context 
 == Restrict a context
 
 
-NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted. Only GitHub OAuth app accounts support security group restrictions, including GitHub App pipelines on GitHub OAuth connected organisations. To find out which GitHub account type you have, refer to the xref:github-integration#[GitHub OAuth integration] page.
+NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contexts to be restricted. Only GitHub OAuth app accounts support security group restrictions, including GitHub App pipelines on GitHub OAuth connected organizations. To find out which GitHub account type you have, refer to the xref:github-integration#using-github-app-functionality[GitHub OAuth integration] page. Restricting contexts for custom webhook triggers is not currently supported.
 
 CircleCI enables you to restrict contexts at run time in the following ways:
 
