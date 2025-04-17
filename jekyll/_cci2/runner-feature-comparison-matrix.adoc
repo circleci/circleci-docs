@@ -67,7 +67,7 @@ This page offers a comparison of the features available for CircleCI machine run
 |*Docker Support*
 |How Docker-in-Docker is handled
 |Native OS support 
-|Requires special configuration (`setup_remote_docker`)
+|Possible xref:container-runner#building-container-images[with third-party tools]
 
 |*Resource Cleanup*
 |How build environments are cleaned after jobs
@@ -96,6 +96,7 @@ This page offers a comparison of the features available for CircleCI machine run
 * Custom security contexts and volume mounting.
 * Support for spot instances via tolerations.
 * Configurable resource limits for primary and service containers.
+* Supports SSH connectivity for debugging - xref:container-runner-installation#enable-rerun-job-with-ssh[Open preview].
 
 [#key-differences]
 == Key Differences
