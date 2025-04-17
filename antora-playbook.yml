@@ -1,0 +1,24 @@
+site:
+  title: CircleCI Documentation
+  url: https://circleci.com/docs
+  robots: allow
+content:
+  sources:
+  - url: .
+    start_paths:
+    - docs/root
+    - docs/about
+    - docs/contributors
+    - docs/guides
+    - docs/orbs
+    - docs/reference
+    - docs/server-admin
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+output:
+  dir: ./build
+  clean: true
+  destinations:
+  - provider: fs 

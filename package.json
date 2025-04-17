@@ -1,0 +1,21 @@
+{
+  "name": "circleci-docs-static",
+  "version": "1.0.0",
+  "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
+  "scripts": {
+    "start:dev": "gulp",
+    "build:docs": "antora antora-playbook.yml --log-failure-level=warn"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/circleci/circleci-docs-static.git"
+  },
+  "license": "",
+  "type": "commonjs",
+  "devDependencies": {
+    "@antora/cli": "3.1.10",
+    "@antora/site-generator": "3.1.10",
+    "browser-sync": "^3.0.4",
+    "gulp": "^5.0.0"
+  }
+}

@@ -1,0 +1,185 @@
+version: 2.1
+
+parameters:
+  cleanup_preview_branch:
+    type: string
+    default: ""
+
+orbs:
+  aws-cli: circleci/aws-cli@5.2.0
+
+executors:
+  node_executor:
+    docker:
+      - image: cimg/node:22.12
+    working_directory: ~/project
+
+  ruby_executor:
+    docker:
+      - image: cimg/ruby:3.1
+    working_directory: ~/project
+
+commands:
+  aws-setup:
+    steps:
+      - aws-cli/setup:
+          aws_access_key_id: ${AWS_ACCESS_KEY_ID}
+          aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+          region: ${AWS_REGION}
+
+  sanitize-branch:
+    steps:
+      - run:
+          name: Sanitize Branch Name
+          command: |
+            if [ -n "<< pipeline.parameters.cleanup_preview_branch >>" ]; then
+              BRANCH_TO_USE="<< pipeline.parameters.cleanup_preview_branch >>"
+              echo "[INFO] Using provided branch param: ${BRANCH_TO_USE}"
+            else
+              BRANCH_TO_USE="${CIRCLE_BRANCH}"
+              echo "[INFO] Using current branch: ${BRANCH_TO_USE}"
+            fi
+            
+            # Replace forward-slashes and spaces with double underscore
+            SANITIZED_BRANCH=$(echo "${BRANCH_TO_USE}" | tr '/ ' '__')
+            echo "[INFO] Sanitized branch: ${SANITIZED_BRANCH}"
+            echo "export SANITIZED_BRANCH=${SANITIZED_BRANCH}" >> $BASH_ENV
+            source $BASH_ENV
+  
+  notify_error:
+    parameters:
+      message:
+        type: string
+    steps:
+      - run:
+          name: Log Error
+          when: on_fail
+          command: |
+            echo "[ERROR] << parameters.message >>"
+
+jobs:
+  build:
+    executor: node_executor
+    steps:
+      - checkout
+      - run:
+          name: Install Node Dependencies
+          command: |
+            set -e
+            echo "[INFO] Installing Node dependencies..."
+            npm ci
+      - run:
+          name: Build the Documentation Site with Antora
+          command: |
+            set -e
+            echo "[INFO] Starting Antora build..."
+            npm run build:docs
+            echo "[INFO] Antora build completed."
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+      - notify_error:
+          message: "Build job failed for branch ${CIRCLE_BRANCH}"
+
+  
+  validate:
+    executor: ruby_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install HTML Proofer
+          command: |
+            set -e
+            echo "[INFO] Installing HTML Proofer gem..."
+            sudo gem install html-proofer
+      - run:
+          name: Run HTML Proofer Validation
+          command: |
+            set -e
+            echo "[INFO] Validating built site with HTML Proofer..."
+            htmlproofer ./build --checks html --ignore-urls "/#.*/" --ignore-empty-alt
+      - notify_error:
+          message: "Validation job failed for branch ${CIRCLE_BRANCH}"
+
+
+  deploy-preview:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-setup
+      - sanitize-branch
+      - run:
+          name: Deploy Preview Site to S3
+          command: |
+            set -e
+            echo "[INFO] Deploying preview site for branch: ${SANITIZED_BRANCH}"
+            aws s3 sync build s3://docs-site-preview/${SANITIZED_BRANCH}/ --delete --endpoint-url ${S3_ENDPOINT}
+      - notify_error:
+          message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
+
+
+  cleanup-preview:
+    executor: node_executor
+    steps:
+      - aws-setup
+      - sanitize-branch
+      - run:
+          name: Remove Preview Site from S3
+          command: |
+            set -e
+            echo "[INFO] Removing preview site for branch: ${SANITIZED_BRANCH}"
+            aws s3 rm s3://docs-site-preview/${SANITIZED_BRANCH}/ --recursive --endpoint-url ${S3_ENDPOINT}
+      - notify_error:
+          message: "Cleanup preview job failed for branch ${CIRCLE_BRANCH}"
+
+
+  deploy-production:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-setup
+      - run:
+          name: Deploy Production Site to S3
+          command: |
+            set -e
+            echo "[INFO] Deploying production site..."
+            aws s3 sync build s3://docs-site/ --delete --endpoint-url ${S3_ENDPOINT}
+      - notify_error:
+          message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
+
+
+workflows:
+  build_validate_and_deploy:
+    when:
+      equal: ["", << pipeline.parameters.cleanup_preview_branch >>]
+    jobs:
+      - build
+      - validate:
+          requires: [build]
+      - cleanup-preview:
+          filters:
+            branches:
+              ignore: main
+          context: docs-site
+      - deploy-preview:
+          requires: [validate]
+          filters:
+            branches:
+              ignore: main
+          context: docs-site
+      - deploy-production:
+          requires: [validate]
+          filters:
+            branches:
+              only: main
+          context: docs-site
+
+  cleanup:
+    when: pipeline.parameters.cleanup_preview_branch != ""
+    jobs:
+      - cleanup-preview:
+          context: docs-site

@@ -1,0 +1,5 @@
+name: server-admin
+title: Server Administration
+version: ~
+nav:
+- modules/ROOT/nav.adoc

@@ -1,0 +1,77 @@
+name: Trigger CircleCI Cleanup on PR Close
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  call-circleci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Required Secrets
+        run: |
+          missing_secrets=()
+          [[ -z "${{ secrets.CIRCLECI_TOKEN }}" ]] && missing_secrets+=("CIRCLECI_TOKEN")
+          [[ -z "${{ secrets.CIRCLECI_WEBHOOK_URL }}" ]] && missing_secrets+=("CIRCLECI_WEBHOOK_URL") 
+          [[ -z "${{ secrets.CIRCLECI_PIPELINE_ID }}" ]] && missing_secrets+=("CIRCLECI_PIPELINE_ID")
+          
+          if [[ ${#missing_secrets[@]} -gt 0 ]]; then
+            echo "::error::Missing required secrets: ${missing_secrets[*]}"
+            exit 1
+          fi
+
+      - name: Trigger CircleCI Cleanup
+        env:
+          CIRCLECI_TOKEN: ${{ secrets.CIRCLECI_TOKEN }}
+          CIRCLECI_WEBHOOK_URL: ${{ secrets.CIRCLECI_WEBHOOK_URL }}
+          CIRCLECI_PIPELINE_ID: ${{ secrets.CIRCLECI_PIPELINE_ID }}
+        run: |
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          echo "Branch name to clean up: $BRANCH_NAME"
+          
+          JSON_BODY='{
+            "definition_id": "'"$CIRCLECI_PIPELINE_ID"'",
+            "checkout": { "branch": "'"$BRANCH_NAME"'" },
+            "config": {"branch": "'"$BRANCH_NAME"'"},
+            "parameters": {
+              "cleanup_preview_branch": "'"$BRANCH_NAME"'"
+            }
+          }'
+          
+          echo "Request JSON payload:"
+          echo "$JSON_BODY"
+          
+          echo "Sending request to CircleCI webhook..."
+          
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          SUCCESS=false
+          
+          while [[ $RETRY_COUNT -lt $MAX_RETRIES && $SUCCESS == false ]]; do
+            RESPONSE=$(curl -s -w "\n%{http_code}" -X POST $CIRCLECI_WEBHOOK_URL \
+              -H "Circle-Token: $CIRCLECI_TOKEN" \
+              -H 'Content-Type: application/json' \
+              -d "$JSON_BODY" \
+              --connect-timeout 10 \
+              --max-time 30)
+            
+            HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+            RESPONSE_BODY=$(echo "$RESPONSE" | sed '$ d')
+            
+            if [[ $HTTP_STATUS -ge 200 && $HTTP_STATUS -lt 300 ]]; then
+              echo "CircleCI cleanup request sent successfully (HTTP $HTTP_STATUS)"
+              echo "Response: $RESPONSE_BODY"
+              SUCCESS=true
+            else
+              RETRY_COUNT=$((RETRY_COUNT+1))
+              if [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; then
+                echo "Request failed with HTTP status $HTTP_STATUS. Retrying in 5 seconds... ($RETRY_COUNT/$MAX_RETRIES)"
+                echo "Response: $RESPONSE_BODY"
+                sleep 5
+              else
+                echo "::error::Failed to trigger CircleCI cleanup after $MAX_RETRIES attempts (HTTP $HTTP_STATUS)"
+                echo "Response: $RESPONSE_BODY"
+                exit 1
+              fi
+            fi
+          done

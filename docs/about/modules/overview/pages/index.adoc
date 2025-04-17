@@ -1,0 +1,10 @@
+= Overview of CircleCI
+
+CircleCI is a continuous integration and delivery platform that automates development workflows.
+
+Key features include:
+
+* Fast builds
+* Parallelism
+* Docker support
+* Customizable workflows

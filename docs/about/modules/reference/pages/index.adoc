@@ -1,0 +1,8 @@
+= CircleCI Reference Guide
+
+This section provides detailed information on:
+
+* Configuration syntax
+* Environment variables
+* Orbs
+* API endpoints

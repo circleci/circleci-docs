@@ -1,0 +1,8 @@
+= About CircleCI
+
+Welcome to the CircleCI documentation.
+
+Explore the following sections:
+
+* xref:overview:index.adoc[Overview]
+* xref:reference:index.adoc[Reference]
