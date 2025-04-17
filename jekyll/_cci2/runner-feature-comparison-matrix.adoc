@@ -99,7 +99,7 @@ This page offers a comparison of the features available for CircleCI machine run
 * Supports SSH connectivity for debugging - xref:container-runner-installation#enable-rerun-job-with-ssh[Open preview].
 
 [#key-differences]
-== Key Differences
+== Key differences
 
 *Machine runner* offers full VM isolation with the newest
 configuration patterns and improved controls.
@@ -112,7 +112,7 @@ configuration patterns and improved controls.
 * Multiple architecture support.
 
 [#choose-a-runner]
-== When to Choose Each Runner
+== When to choose each runner
 
 *Machine runner*: Choose for full system access, custom system dependencies, or when Kubernetes is not available.
 
