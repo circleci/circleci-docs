@@ -25,7 +25,7 @@ CAUTION: The instructions below are not supported for Cloud customers.
 [#runner-terms]
 === Runner terms
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#machine-runner-prerequsites]
 === Prerequisites
@@ -44,11 +44,11 @@ The number of containers running in parallel on the host is constrained by the h
 
 [.tab.machine-runner.Web_app_installation]
 --
-include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 --
 
