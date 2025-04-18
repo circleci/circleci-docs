@@ -64,6 +64,11 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 
 [NOTE]
 ====
+**Forked pull requests** never trigger GitHub App pipelines.
+====
+
+[NOTE]
+====
 *Help us prioritize additional trigger options?* We are working to expand the available events and conditions for you to choose from. Let us know which additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form].
 ====
 
