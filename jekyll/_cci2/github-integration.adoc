@@ -102,9 +102,10 @@ Once disconnected, you will be redirected to the CircleCI login page. To reconne
 
 **What is a deploy key?**
 
-When you add a new project, CircleCI creates a deployment key on GitHub for your project. A deploy key is an SSH key-pair, one public, one private. GitHub stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+When you add a new project, CircleCI creates a deployment key on GitHub for your project. A deploy key is an SSH key-pair, one public, one private. GitHub stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only. In order to set up a project on CircleCI, you will need to link:https://support.circleci.com/hc/en-us/articles/36222961831067-Unable-to-Set-Up-New-Projects-in-New-GitHub-Organizations/[enable deploy keys in your GitHub Organization Settings].
 
 If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
+
 
 **What is a user key?**
 
