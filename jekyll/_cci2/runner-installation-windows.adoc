@@ -34,18 +34,18 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --
-include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 --
 
@@ -54,7 +54,7 @@ include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 
 NOTE: If you are installing the Windows machine runner for CircleCI cloud, skip ahead to the xref:#installation-steps[next step].
 
-include::../_includes/snippets/runner/launch-agent-download.adoc[]
+include::../_includes/partials/runner/launch-agent-download.adoc[]
 
 [#installation-steps]
 == 3. Machine runner installation on Windows
@@ -72,11 +72,11 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill the file out with the requested information (see xref:runner-config-reference#[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/partials/runner/machine-runner-example.adoc[]
 
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
