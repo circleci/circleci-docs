@@ -62,6 +62,8 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
 * *Pushes to open non-draft PRs*: Trigger a pipeline when there is a push to a branch with an open PR that is not in draft mode.
 
+NOTE: **Forked pull requests** never trigger GitHub App pipelines.
+
 [NOTE]
 ====
 *Help us prioritize additional trigger options?* We are working to expand the available events and conditions for you to choose from. Let us know which additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form].
