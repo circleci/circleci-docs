@@ -29,7 +29,7 @@ Execution environments in CircleCI server are resourced in the following ways:
 == 1. Nomad clients
 Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad server) and run (through Nomad clients) CircleCI jobs.
 
-Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
+Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) can be installed within the cluster or externally. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
 NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:../air-gapped-installation/phase-4-configure-nomad-clients#[Air-gapped] docs on setting up Nomad clients.
 
