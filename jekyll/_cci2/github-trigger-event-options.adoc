@@ -104,7 +104,7 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
 
-These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[this page].
+These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[the GitHub docs].
 
 Config orchestration tools are available from within your pipelines are as follows:
 
