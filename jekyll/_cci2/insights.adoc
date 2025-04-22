@@ -66,7 +66,6 @@ Select the *Jobs* tab next to *Overview* to view the following cumulative data o
 * Duration (95th percentile)
 * Total runs
 * Success rate
-* Compute usage (average and max for CPU and RAM)
 
 [#see-also]
 == See also
