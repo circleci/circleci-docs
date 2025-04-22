@@ -39,13 +39,13 @@ commands:
               BRANCH_TO_USE="${CIRCLE_BRANCH}"
               echo "[INFO] Using current branch: ${BRANCH_TO_USE}"
             fi
-            
+
             # Replace forward-slashes and spaces with double underscore
             SANITIZED_BRANCH=$(echo "${BRANCH_TO_USE}" | tr '/ ' '__')
             echo "[INFO] Sanitized branch: ${SANITIZED_BRANCH}"
             echo "export SANITIZED_BRANCH=${SANITIZED_BRANCH}" >> $BASH_ENV
             source $BASH_ENV
-  
+
   notify_error:
     parameters:
       message:
@@ -75,6 +75,20 @@ jobs:
             echo "[INFO] Starting Antora build..."
             npm run build:docs
             echo "[INFO] Antora build completed."
+      - run:
+          name: Create ZIP Archive of Build
+          command: |
+            set -e
+            echo "[INFO] Creating zip archive of build directory..."
+            zip -r build.zip build/
+      - store_artifacts:
+          path: build.zip
+          destination: preview-site.zip
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+            - build.zip
       - persist_to_workspace:
           root: .
           paths:
@@ -82,7 +96,7 @@ jobs:
       - notify_error:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
-  
+
   validate:
     executor: ruby_executor
     steps:
@@ -109,31 +123,54 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - aws-setup
       - sanitize-branch
       - run:
-          name: Deploy Preview Site to S3
+          name: Install GitHub CLI
           command: |
             set -e
-            echo "[INFO] Deploying preview site for branch: ${SANITIZED_BRANCH}"
-            aws s3 sync build s3://docs-site-preview/${SANITIZED_BRANCH}/ --delete --endpoint-url ${S3_ENDPOINT}
+            echo "[INFO] Installing GitHub CLI..."
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh
+      - run:
+          name: Upload Preview ZIP to GitHub Release and Comment
+          command: |
+            set -e
+
+            if [[ -n "${CIRCLE_PULL_REQUEST}" ]]; then
+              PR_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | sed 's|.*/pull/||')
+              REPO_PATH="circleci/circleci-docs-static"
+              TAG="pr-${SANITIZED_BRANCH}"
+
+              echo "[INFO] Creating release for PR #${PR_NUMBER} - branch ${SANITIZED_BRANCH} in ${REPO_PATH}"
+
+              # Check if release already exists (if re-run)
+              if gh release view "${TAG}" -R "${REPO_PATH}" > /dev/null 2>&1; then
+                echo "[INFO] Release already exists. Replacing..."
+                gh release delete "${TAG}" -R "${REPO_PATH}" --yes
+              fi
+
+              # Create new release and upload ZIP
+              gh release create "${TAG}" build.zip \
+                --repo "${REPO_PATH}" \
+                --title "Preview for PR #${PR_NUMBER}" \
+                --notes "ZIP artifact for documentation preview." \
+                --prerelease
+
+              DOWNLOAD_URL="https://github.com/${REPO_PATH}/releases/tag/${TAG}/build.zip"
+
+              # Comment on the PR with release link
+              gh pr comment "${PR_NUMBER}" -R "${REPO_PATH}" -b "## Preview Documentation
+
+              📦 ZIP preview available here: [Preview Build Assets](${DOWNLOAD_URL})
+
+              Build: ${CIRCLE_BUILD_NUM} | Commit: ${CIRCLE_SHA1}"
+            else
+              echo "[INFO] Not a PR build, skipping preview release."
+            fi
       - notify_error:
           message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
-
-
-  cleanup-preview:
-    executor: node_executor
-    steps:
-      - aws-setup
-      - sanitize-branch
-      - run:
-          name: Remove Preview Site from S3
-          command: |
-            set -e
-            echo "[INFO] Removing preview site for branch: ${SANITIZED_BRANCH}"
-            aws s3 rm s3://docs-site-preview/${SANITIZED_BRANCH}/ --recursive --endpoint-url ${S3_ENDPOINT}
-      - notify_error:
-          message: "Cleanup preview job failed for branch ${CIRCLE_BRANCH}"
 
 
   deploy-production:
@@ -147,9 +184,50 @@ jobs:
           command: |
             set -e
             echo "[INFO] Deploying production site..."
-            aws s3 sync build s3://docs-site/ --delete --endpoint-url ${S3_ENDPOINT}
+            aws s3 sync build s3://${DOCS_BUILD_BUCKET}/ --delete --endpoint-url ${S3_ENDPOINT}
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
+
+  cleanup-preview:
+    executor: node_executor
+    steps:
+      - sanitize-branch
+      - run:
+          name: Install GitHub CLI
+          command: |
+            set -e
+            echo "[INFO] Installing GitHub CLI..."
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh
+      - run:
+          name: Delete GitHub Release and Tag
+          command: |
+            set -e
+            BRANCH="<< pipeline.parameters.cleanup_preview_branch >>"
+            REPO_PATH="circleci/circleci-docs-static"
+
+            # Extract TAG
+            TAG="pr-${SANITIZED_BRANCH}"
+
+            echo "[INFO] Cleaning up GitHub Release for ${TAG} in ${REPO_PATH}"
+
+            # Delete the release if it exists
+            if gh release view "${TAG}" -R "${REPO_PATH}" > /dev/null 2>&1; then
+              gh release delete "${TAG}" -R "${REPO_PATH}" --yes
+              echo "[INFO] Release '${TAG}' deleted."
+            else
+              echo "[WARN] Release '${TAG}' not found."
+            fi
+
+            # Delete the tag if it exists
+            if gh api -X GET "repos/${REPO_PATH}/git/refs/tags/${TAG}" > /dev/null 2>&1; then
+              gh tag delete "${TAG}" -R "${REPO_PATH}" --yes
+              echo "[INFO] Tag '${TAG}' deleted."
+            else
+              echo "[WARN] Tag '${TAG}' not found."
+            fi
 
 
 workflows:
@@ -160,11 +238,6 @@ workflows:
       - build
       - validate:
           requires: [build]
-      - cleanup-preview:
-          filters:
-            branches:
-              ignore: main
-          context: docs-site
       - deploy-preview:
           requires: [validate]
           filters:
@@ -177,8 +250,7 @@ workflows:
             branches:
               only: main
           context: docs-site
-
-  cleanup:
+  cleanup_preview:
     when: pipeline.parameters.cleanup_preview_branch != ""
     jobs:
       - cleanup-preview:
