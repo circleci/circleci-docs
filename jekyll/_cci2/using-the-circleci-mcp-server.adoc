@@ -59,9 +59,13 @@ Before installing the CircleCI MCP server, ensure you have the following:
 
 === Automatic installation via Smithery
 
-#?? In what circumstances might people want to do this rather than install manually in their IDE etc?#
-
 You can install the CircleCI MCP server via Smithery, which is a hub for MCP servers. For more information, see the link:https://smithery.ai/docs[Smithery docs].
+
+You might want to install via Smithery in the following circumstances:
+
+* To manage several MCP servers or prefer a centralized installation approach for all developers.
+* If you do not want to touch IDE settings, or for quick testing purposes.
+* Install as part of a standard list of MCP servers with configuration managed locally via smithery across a team.
 
 To install via Smithery, use the following command:
 
@@ -124,12 +128,12 @@ For guidance on using an MCP server in Claude Code, see the link:https://docs.an
 
 After installing Claude Code, run the following command, substituting your CircleCI personal API token:
 
-#?? Do we need to add the base URL here for server users?#
-
 [source,bash]
 ----
-claude mcp add circleci-mcp-server -e CIRCLECI_TOKEN=your-circleci-token -- npx -y @circleci/mcp-server-circleci
+claude mcp add circleci-mcp-server -e CIRCLECI_TOKEN=your-circleci-token -e CIRCLECI_BASE_URL=https://circleci.com -- npx -y @circleci/mcp-server-circleci
 ----
+
+NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
 
 === VS Code
 
@@ -271,6 +275,22 @@ Your team wastes time with unreliable tests:
 . The MCP server analyzes test history to identify problematic tests.
 . Your assistant explains the issues and suggests improvements to you.
 . You fix the tests and improve the reliability of your pipeline.
+
+== Troubleshooting
+
+For general MCP server troubleshooting steps, see the link:https://modelcontextprotocol.io/docs/tools/debugging[Model Context Protocol docs].
+
+=== Installation issues
+If you experience issues installing the CircleCI MCP server, consider the following troubleshooting steps:
+
+* Ensure your personal API token is valid and has the necessary permissions.
+* If you are using CircleCI server, check that the CircleCI base URL is correct.
+
+=== Not seeing an up-to-date list of tools?
+
+After new tools are released, you may need to restart your MCP server to access them. Reload your IDE window to ensure the CircleCI MCP server loads the most recently released tools and capabilities.
+
+
 
 == Additional resources
 
