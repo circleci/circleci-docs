@@ -16,9 +16,10 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 
 Execution environments in CircleCI server are resourced in the following ways:
 
-* HashiCorp Nomad is used for scheduling jobs and running Docker jobs
-** Nomad Server is installed and configured within your Kubernetes cluster and is used for scheduling jobs
-** Nomad Clients are installed outside your Kubernetes cluster and are used for running jobs that are configured to use the Docker execution environment. CircleCI provides sample Terraform modules for you to reference and use to streamline the installation process if you are installing within AWS or GCP. Installing in this way also enables the use of the Nomad Autoscaler
+* HashiCorp Nomad is used for scheduling jobs and running Docker jobs.
+** Nomad Servers can either be installed and configured within your Kubernetes cluster, or outside of your cluster within it's own VMs. Nomad Servers are used for scheduling jobs.
+** Nomad Clients are installed outside your Kubernetes cluster and are used for running jobs that are configured to use the Docker execution environment. 
+** CircleCI provides sample Terraform modules for you to reference and use to streamline the installation process if you are installing within AWS or GCP. Installing in this way also enables the use of the Nomad Autoscaler.
 
 * <<machine-provisioner,Machine provisioner>> is used in AWS/GCP installations to provision resources and run jobs that are configured to use the `machine` execution environment, including Linux and Windows VMs, including Arm resources, if your server installation is within AWS. If you install outside AWS or GCP (that is, a local installation) you will use self-hosted runners to run VM-configured jobs.
 
@@ -28,7 +29,7 @@ Execution environments in CircleCI server are resourced in the following ways:
 == 1. Nomad clients
 Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad server) and run (through Nomad clients) CircleCI jobs.
 
-Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
+Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) can be installed within the cluster or externally. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
 NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:../air-gapped-installation/phase-4-configure-nomad-clients#[Air-gapped] docs on setting up Nomad clients.
 
@@ -288,10 +289,30 @@ endif::env-aws[]
 [#nomad-servers]
 == 2. Nomad servers
 
-Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad Servers.
+In the previous section you would have successfully deployed your Nomad clients and have the IAM resources provisioned. Now you can deploy and configure the Nomad Servers.
+
+[#where-to-deploy-nomad-servers]
+=== a. Where to deploy nomad servers
+Nomad servers are by default deployed within your CircleCI server cluster, however they may be deployed externally. As with the Nomad clients, you can use the terraform module CircleCI provides to deploy your Nomad servers or as a guide for how such a deployment might look.
+If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to step b below. 
+If you wish to deploy your Nomad servers externally, then you will need to do the following:
+
+* update your terraform by setting the variable `nomad_server_enabled` to `true`.
+* run `terraform apply` to apply your changes. This will deploy nomad servers with the default configurations to the existing infrastucture your created when setting up the nomad clients earlier. For a full list of the nomad server options, please refer to the `variables.tf` in out link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
+* Update the nomad block in your helm `values.yaml` with the following:
+
+[source,yaml]
+----
+nomad:
+  server:
+    internal: false
+    serverHostname: <your nomad server domain or load-balancer>
+----
+* Once the above is complete, you can skip ahead to d.
+
 
 [#nomad-gossip-encryption-key]
-=== a. Nomad gossip encryption key
+=== b. Nomad gossip encryption key
 
 Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage Kubernetes Secrets, there are two options:
 
@@ -325,7 +346,7 @@ CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automat
 --
 
 [#nomad-mtls]
-=== b. Nomad mTLS
+=== c. Nomad mTLS
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
 
@@ -368,7 +389,7 @@ nomad:
 --
 
 [#nomad-autoscaler]
-=== c. Nomad Autoscaler
+=== d. Nomad Autoscaler
 
 If you have enabled Nomad Autoscaler, also include the following section under `nomad`:
 
@@ -436,7 +457,7 @@ nomad:
 // Stop hiding from AWS page
 endif::env-aws[]
 
-=== d. Helm upgrade
+=== e. Helm upgrade
 
 Apply the changes made to your `values.yaml` file:
 
@@ -447,7 +468,7 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 ----
 
 [#nomad-clients-validation]
-=== e. Nomad clients validation
+=== f. Nomad clients validation
 
 CircleCI has created a project called link:https://github.com/circleci/realitycheck[Reality Check] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of Reality Check will move from red (fail) to green (pass).
 
