@@ -11,7 +11,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:22.12
+      - image: cimg/node:22.14
     working_directory: ~/project
 
   ruby_executor:
