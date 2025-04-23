@@ -21,7 +21,7 @@ This integration helps you diagnose and fix build failures faster. Your AI assis
 
 The CircleCI MCP server provides the following benefits:
 
-* You can diagnose build failures without leaving your IDE.
+* Diagnose build failures without leaving your IDE.
 * Receive structured information your AI assistant can understand.
 * Fix issues faster through natural language requests.
 * Identify and resolve flaky tests that slow down your team.
@@ -175,24 +175,32 @@ NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are 
 }
 ----
 
-== Supported features
+== Using the CircleCI MCP server
 
-The supported features section outlines the abilities that the CircleCI MCP server currently supports. Each feature is described below along with usage examples.
+Once you have installed the CircleCI MCP server, you can use it to diagnose build failures, fix issues, and manage CI pipelines through natural language commands.
+
+Your agent chat facility (which will be different for each AI coding assistant) will have access to the tools that the CircleCI MCP server supports. The supported tools are described in the next section.
+
+*Example*: Using Cursor IDE, once you have installed the CircleCI MCP server, you will see the new CircleCI-specific tools available to the AI assistant listed under menu:Cursor Settings[MCP]. The Cursor settings view is shown in the following screenshot:
+
+.CircleCI MCP server in Cursor IDE settings
+image::mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
+
+== Supported tools
+
+The supported tools section outlines the abilities that the CircleCI MCP server currently supports. Each tool is described below along with usage examples.
 
 === Build failure logs (`get_build_failure_logs`)
 
 This tool retrieves detailed failure logs from CircleCI builds and presents them in a structured format.
 
-*Using CircleCI URLs:*
+* *Using CircleCI URLs*
+** Provide a failed job or pipeline URL directly. For example: `Get logs from https://app.circleci.com/pipelines/github/org/repo/123`
 
-* Provide a failed job or pipeline URL directly.
-* Example: `Get logs from https://app.circleci.com/pipelines/github/org/repo/123`
-
-*Using Local Project Context:*
-
-* Works from your local workspace without manual searching.
-* The server reads your Git remote and active branch automatically.
-* Example: "Find the latest failed pipeline on my current branch."
+* *Using local project context*
+** Works from your local workspace without manual searching.
+** The server reads your Git remote and active branch automatically.
+** Example: "Find the latest failed pipeline on my current branch."
 
 The tool returns formatted logs including:
 
@@ -204,16 +212,14 @@ The tool returns formatted logs including:
 
 This tool identifies unreliable tests in your CircleCI project by analyzing your test execution history. It leverages CircleCI's built-in flaky test detection to find patterns of instability.
 
-*Using CircleCI Project URL:*
+* *Using CircleCI project URL*
+** Provide the project URL directly from CircleCI.
+** Example: `Find flaky tests in https://app.circleci.com/pipelines/vcs/org/repo`
 
-* Provide the project URL directly from CircleCI.
-* Example: `Find flaky tests in https://app.circleci.com/pipelines/vcs/org/repo`
-
-*Using Local Project Context:*
-
-* Works from your local workspace without manual searching.
-* The server reads your Git remote information automatically.
-* Example: "Find flaky tests in my current project."
+* *Using Local Project Context*
+** Works from your local workspace without manual searching.
+** The server reads your Git remote information automatically.
+** Example: `Find flaky tests in my current project`.
 
 The tool returns structured information including:
 
@@ -225,10 +231,9 @@ The tool returns structured information including:
 
 This tool assists with CircleCI configuration tasks and provides guidance for improving your setup.
 
-*Validate CircleCI Config:*
-
-* Checks your `.circleci/config.yml` for syntax and semantic errors.
-* Example: "Validate my CircleCI config."
+* *Validate CircleCI Config:*
+** Checks your `.circleci/config.yml` for syntax and semantic errors.
+** Example: `Validate my CircleCI config`.
 
 The tool provides:
 
