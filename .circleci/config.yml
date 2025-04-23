@@ -62,6 +62,9 @@ jobs:
     executor: node_executor
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:Plac654CPBty6yA26H7QMKCqM0yD1XWds7UwNqOYzJU"
       - run:
           name: Install Node Dependencies
           command: |
