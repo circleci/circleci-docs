@@ -16,7 +16,7 @@ executors:
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:3.1
+      - image: cimg/ruby:3.4
     working_directory: ~/project
 
 commands:
