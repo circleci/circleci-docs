@@ -30,7 +30,7 @@ cd "$UI_DIR"
 
 # Install dependencies
 echo "Installing npm dependencies in UI module..."
-npm install
+npm ci
 
 # Run gulp bundle
 echo "Building UI bundle..."
