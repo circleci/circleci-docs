@@ -1,4 +1,4 @@
 [submodule "ui"]
 	path = ui
 	url = git@github.com:circleci/antora-ui-default.git
-	branch = DOCSS-1716
+	branch = main

@@ -243,15 +243,15 @@ workflows:
           filters:
             branches:
               ignore: main
-          context: docs-site
+          context: circleci-docs-static
       - deploy-production:
           requires: [validate]
           filters:
             branches:
               only: main
-          context: docs-site
+          context: circleci-docs-static
   cleanup_preview:
     when: pipeline.parameters.cleanup_preview_branch != ""
     jobs:
       - cleanup-preview:
-          context: docs-site
+          context: circleci-docs-static
