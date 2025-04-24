@@ -17,7 +17,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 Execution environments in CircleCI server are resourced in the following ways:
 
 * HashiCorp Nomad is used for scheduling jobs and running Docker jobs.
-** Nomad Servers can either be installed and configured within your Kubernetes cluster, or outside of your cluster within it's own VMs. Nomad Servers are used for scheduling jobs.
+** Nomad Servers can either be installed and configured within your Kubernetes cluster, or outside of your cluster within their own VMs. Nomad Servers are used for scheduling jobs.
 ** Nomad Clients are installed outside your Kubernetes cluster and are used for running jobs that are configured to use the Docker execution environment. 
 ** CircleCI provides sample Terraform modules for you to reference and use to streamline the installation process if you are installing within AWS or GCP. Installing in this way also enables the use of the Nomad Autoscaler.
 
