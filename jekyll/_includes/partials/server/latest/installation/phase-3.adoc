@@ -297,10 +297,10 @@ Nomad Servers are by default deployed within your CircleCI server cluster. Howev
 * If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to <<nomad-gossip-encryption-key>> below. 
 * If you wish to deploy your Nomad servers externally, follow these steps:
 
-* update your terraform by setting the variable `nomad_server_enabled` to `true`.
-* run `terraform apply` to apply your changes. This will deploy nomad servers with the default configurations to the existing infrastucture your created when setting up the nomad clients earlier. For a full list of the nomad server options, please refer to the `variables.tf` in out link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
-* Update the nomad block in your helm `values.yaml` with the following:
-
+.. Update your Terraform by setting the variable `nomad_server_enabled` to `true`.
+.. Run `terraform apply` to apply your changes. This will deploy Nomad Servers with the default configurations to the existing infrastructure you created when setting up the Nomad clients earlier. For a full list of the Nomad Server options, refer to the `variables.tf` in our link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
+.. Update the `nomad` block in your helm `values.yaml` with the following:
++
 [source,yaml]
 ----
 nomad:
@@ -308,7 +308,7 @@ nomad:
     internal: false
     serverHostname: <your nomad server domain or load-balancer>
 ----
-* Once the above is complete, you can skip ahead to d.
+.. Once the above is complete, you can skip ahead to <<nomad-autoscaler>>.
 
 
 [#nomad-gossip-encryption-key]
