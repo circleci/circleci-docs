@@ -293,7 +293,7 @@ In the previous section you deployed your Nomad clients and have the IAM resourc
 
 [#where-to-deploy-nomad-servers]
 === a. Where to deploy nomad servers
-Nomad servers are by default deployed within your CircleCI server cluster, however they may be deployed externally. As with the Nomad clients, you can use the terraform module CircleCI provides to deploy your Nomad servers or as a guide for how such a deployment might look.
+Nomad Servers are by default deployed within your CircleCI server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
 If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to step b below. 
 If you wish to deploy your Nomad servers externally, then you will need to do the following:
 
