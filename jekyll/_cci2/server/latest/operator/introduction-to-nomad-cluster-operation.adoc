@@ -135,7 +135,7 @@ The script should use the commands in the section above to do the following:
 As of server 4.8, Nomad servers may now be deployed externally to your kubernetes cluster hosting CircleCI server. This is optional and can improve the stability of the Nomad servers. If you have already have a CircleCI server instance with internal nomad servers, you may switch to external nomads quite easily.
 
 . Stop all builds on your CircleCI server instance.
-. Then you may follow our installation instructions for deploying Nomad Servers on either xref:../installation/phase-3-aws-execution-environments.adoc#nomad-servers[AWS] or xref:../installation/phase-3-gcp-execution-environments.adoc#nomad-servers[GCP].
+. Follow our installation instructions for deploying Nomad Servers on either xref:../installation/phase-3-aws-execution-environments#nomad-servers[AWS] or xref:../installation/phase-3-gcp-execution-environments#nomad-servers[GCP].
 
 ifndef::pdf[]
 [#next-steps]
