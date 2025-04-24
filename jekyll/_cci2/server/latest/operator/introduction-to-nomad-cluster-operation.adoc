@@ -94,6 +94,29 @@ Complete the following steps to get logs from the allocation of the specified jo
 . Get the allocation ID of the job with `nomad status <job-id>` command.
 . Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
 
+[#accessing-the-nomad-web-ui]
+=== Accessing the Nomad Web UI
+
+Nomad provides a web UI for inspecting your Nomad cluster. If you are using an internalized Nomad deployment, which is the default setup with CircleCI server, follow the instructions in this section to temporarily access the UI for troubleshooting purposes. For a more permanent solution, consider externalizing Nomad and consult the official Nomad documentation for setting up routing.
+
+. Nomad binds to its Pod IP. To port-forward to the Nomad service, you need to set up a lightweight tunneling mechanism within the cluster as follows:
++
+[source,bash]
+----
+export NOMAD_IP=$(kubectl get svc nomad-server -o jsonpath='{.spec.clusterIP}' -n <server-namespace>)
+
+kubectl run nomad-tunnel --rm -it --image=alpine --restart=Never -n <server-namespace> -- /bin/sh -c "apk add --no-cache socat && socat TCP-LISTEN:4646,fork,reuseaddr TCP:$NOMAD_IP:4646"
+----
+
+. In another terminal, run the following command to set up port forwarding:
++
+[source,bash]
+----
+kubectl port-forward pod/nomad-tunnel 4646:4646 -n <server-namespace>
+----
+
+. Navigate to `http://localhost:4646/ui` in your browser to access the Nomad UI. For more information on utilizing the Nomad UI, refer to the link:https://developer.hashicorp.com/nomad/tutorials/web-ui[Nomad documentation].
+
 [#shutting-down-a-nomad-client]
 === Shutting down a Nomad client
 
