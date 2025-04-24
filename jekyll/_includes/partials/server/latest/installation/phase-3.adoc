@@ -295,7 +295,7 @@ In the previous section you deployed your Nomad clients and have the IAM resourc
 === a. Where to deploy nomad servers
 Nomad Servers are by default deployed within your CircleCI server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
 * If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to <<nomad-gossip-encryption-key>> below. 
-If you wish to deploy your Nomad servers externally, then you will need to do the following:
+* If you wish to deploy your Nomad servers externally, follow these steps:
 
 * update your terraform by setting the variable `nomad_server_enabled` to `true`.
 * run `terraform apply` to apply your changes. This will deploy nomad servers with the default configurations to the existing infrastucture your created when setting up the nomad clients earlier. For a full list of the nomad server options, please refer to the `variables.tf` in out link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
