@@ -289,7 +289,7 @@ endif::env-aws[]
 [#nomad-servers]
 == 2. Nomad servers
 
-In the previous section you would have successfully deployed your Nomad clients and have the IAM resources provisioned. Now you can deploy and configure the Nomad Servers.
+In the previous section you deployed your Nomad clients and have the IAM resources provisioned. Now you can deploy and configure the Nomad Servers.
 
 [#where-to-deploy-nomad-servers]
 === a. Where to deploy nomad servers
