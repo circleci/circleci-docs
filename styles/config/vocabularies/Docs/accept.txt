@@ -88,6 +88,7 @@ CLI
 [Cc]lojure
 [Cc]loud\b
 \bCloud Foundry\b
+Claude Code
 CMake
 CocoaPods
 Codecov
@@ -213,6 +214,7 @@ LLMOps
 macOS
 \bMac\b
 manpage
+MCP server
 MFEs?
 [Mm]iddleware
 minitest
