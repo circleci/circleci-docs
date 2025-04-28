@@ -686,6 +686,8 @@ en:
     children:
       - name: AI features
         children:
+          - name: Using the CircleCI MCP Server
+            link: using-the-circleci-mcp-server
           - name: Intelligent summaries
             link: intelligent-summaries
       - name: CLI
