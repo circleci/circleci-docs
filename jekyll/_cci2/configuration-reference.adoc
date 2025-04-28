@@ -4,408 +4,6 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-sectionTags:
-  config-version-2:
-    - "#version"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-cloud"
-    - "#available-linux-machine-images-server"
-    - "#available-linux-gpu-images"
-    - "#available-windows-machine-images-cloud"
-    - "#available-windows-gpu-image"
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner"
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#macos-server" # Server-specific - v3 and v4
-    - "#windows-execution-environment"
-    - "#gpu-execution-environment-linux"
-    - "#gpu-execution-environment-windows"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#workflows"
-    - "#workflow-version" # 2.0 config version only
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#example-full-configuration"
-  config-version-2.1:
-    - "#version"
-    - "#setup" # only 2.1 config
-    - "#commands" # only 2.1 config
-    - "#parameters-pipeline" # only 2.1 config
-    - "#executors" # only 2.1 config
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-cloud"
-    - "#available-linux-machine-images-server"
-    - "#available-linux-gpu-images"
-    - "#available-windows-machine-images-cloud"
-    - "#available-windows-gpu-image"
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner"
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#windows-execution-environment"
-    - "#gpu-execution-environment-linux"
-    - "#gpu-execution-environment-windows"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" # 2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#circleciipranges" # I think only 2.1 and not supported on server
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  cloud:
-    - "#version"
-    - "#setup"
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-cloud"
-    - "#available-linux-gpu-images" # Not available on server
-    - "#available-windows-machine-images-cloud"
-    - "#available-windows-gpu-image" # Not available on server
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner"
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#windows-execution-environment"
-    - "#gpu-execution-environment-linux"
-    - "#gpu-execution-environment-windows"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" #2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#circleciipranges" # only 2.1 and not supported on server
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  server-v4:
-    - "#version"
-    - "#setup" # Not available on server 2
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-server" # Server-specific - all server versions
-    - "#available-windows-machine-images-server" # Server-specific - all server versions
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner" # not available for server v2
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#macos-server" # Server-specific - v3 and v4
-    - "#windows-execution-environment"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" #2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  server-v3:
-    - "#version"
-    - "#setup"
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-server" # Server-specific - all server versions
-    - "#available-windows-machine-images-server" # Server-specific - all server versions
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner" # not available for server v2
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#macos-server" # Server-specific - v3 and v4
-    - "#windows-execution-environment"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" #2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  server-v2:
-    - "#version"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-server" # Server-specific - all server versions
-    - "#available-windows-machine-images-server" # Server-specific - all server versions
-    - "#branches-deprecated"
-    - "#resourceclass" # not available for server v2
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#windows-execution-environment"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#workflows"
-    - "#workflow-version" #2.0 config version only
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#example-full-configuration"
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -433,6 +31,8 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 [#version]
 == *`version`*
 
+The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
@@ -444,12 +44,19 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 | `2`, `2.0`, or `2.1` See the xref:reusing-config#[Reusable configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 |===
 
-The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+Example:
+
+[,yaml]
+----
+version: 2.1
+----
 
 '''
 
 [#setup]
 == *`setup`*
+
+The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -462,7 +69,14 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | Designates the `config.yaml` for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
 |===
 
-The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
+Example:
+
+[,yaml]
+----
+version: 2.1
+
+setup: true
+----
 
 '''
 
@@ -470,6 +84,8 @@ The `setup` field enables you to conditionally trigger configurations from outsi
 == *`orbs`*
 
 NOTE: The `orbs` key is supported in `version: 2.1` configuration
+
+Use the `orbs` key to reference or define reusable configuration blocks (orbs) for use in your configuration.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -531,7 +147,7 @@ Public orbs are listed in the https://circleci.com/developer/orbs[Orb Registry].
 
 NOTE: The `commands` key is supported in `version: 2.1` configuration
 
-A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the xref:reusing-config#[Reusable Config Reference Guide].
+A `command` defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the xref:reusing-config#[Reusable Config Reference Guide].
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -558,6 +174,8 @@ Example:
 
 [,yaml]
 ----
+version: 2.1
+
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -576,7 +194,7 @@ commands:
 
 NOTE: The pipeline `parameters` key is supported in `version: 2.1` configuration
 
-Pipeline parameters declared for use in the configuration. See xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline Values and Parameters] for usage details.
+Use the `parameters` key at the top level of your config to declare _pipeline parameters_ for use in the configuration. See xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline Values and Parameters] for usage details.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -589,6 +207,21 @@ Pipeline parameters declared for use in the configuration. See xref:pipeline-var
 | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See xref:reusing-config#parameter-syntax[Parameter Syntax] for details.
 |===
 
+Example:
+
+This example declares a pipeline parameter named `image-tag` with a type of `string` and a default value of `current`.
+
+[,yaml]
+----
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "current"
+----
+
+Once you have declared a pipeline parameter, you can pass a pipelines parameter value when triggering a pipeline via the API or from the CircleCI web app.
 '''
 
 [#executors]
@@ -685,6 +318,21 @@ If your jobs are timing out, consider the following:
 * Run some of your jobs concurrently using xref:workflows#[workflows].
 * You can upgrade your pricing plan.
 
+Example:
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: xlarge
+    steps:
+      ... // other config
+----
+
 '''
 
 [#job-name]
@@ -760,6 +408,16 @@ Each job consists of the job's name as a key and a map as a value. A name should
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
 
+Example:
+
+In this example the job name is `my-job`.
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+----
 '''
 
 [#job-type]
