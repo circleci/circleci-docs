@@ -10,8 +10,29 @@ contentTags:
 :icons: font
 :experimental:
 
-GitLab **Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
+GitLab **Trigger filters** allow you to determine when a trigger should start a build based on the parameters provided by GitLab's webhook.
 
-image::gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
+CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the custom filter option. For example, a custom filter would allow you to only build on a specific branch or user.
 
-image::gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
+== Introduction
+
+CircleCI projects have pipelines and triggers.
+
+* Pipelines define the various CI/CD 'units' of work that make up your project.
+* Triggers define when and how to start a pipeline.
+
+== Trigger options
+
+Configure triggers under menu:Project settings[Triggers]. You can configure triggers to start pipelines on either:
+
+* Commit pushes **and** merge requests
+* Merge requests *only*
+* Events that match custom filters
+
+.Trigger options under Project settings
+image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Trigger details]
+
+Select the *Customize Trigger Filters* option to define your own custom rules.
+
+.Custom Trigger Filters
+image::triggers/gitlab-trigger-customize-edit.png[Custom trigger filters]
