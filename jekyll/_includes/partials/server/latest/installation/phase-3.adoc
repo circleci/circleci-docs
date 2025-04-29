@@ -298,7 +298,13 @@ Nomad Servers are by default deployed within your CircleCI server cluster. Howev
 * If you wish to deploy your Nomad servers externally, follow these steps:
 
 .. Update your Terraform by setting the variable `nomad_server_enabled` to `true`.
-.. Run `terraform apply` to apply your changes. This will deploy Nomad Servers with the default configurations to the existing infrastructure you created when setting up the Nomad clients earlier. For a full list of the Nomad Server options, refer to the `variables.tf` in our link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
+.. Run `terraform apply` to apply your changes. This will deploy Nomad Servers with the default configurations to the existing infrastructure you created when setting up the Nomad clients earlier. For a full list of the Nomad Server options, refer to the `variables.tf` in our 
+ifndef::env-aws[]
+link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
+endif::env-aws[]
+ifndef::env-gcp[]
+link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-gcp/variables.tf[public repository].
+endif::env-gcp[]
 .. Update the `nomad` block in your helm `values.yaml` with the following:
 +
 [source,yaml]
