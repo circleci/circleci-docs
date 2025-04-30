@@ -144,6 +144,13 @@ The script should use the commands in the section above to do the following:
 . Monitor running jobs on the instance and wait for them to finish.
 . Terminate the instance.
 
+[#externalize-servers]
+== Externalize your Nomad Servers
+From server v4.8, Nomad Servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI server. Externalization of Nomad Servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI server instance with _internal_ Nomad Servers, the process to switch to external Nomad Servers is as follows:
+
+. Stop all builds on your CircleCI server instance.
+. Follow our installation instructions for deploying Nomad Servers on either xref:../installation/phase-3-aws-execution-environments#nomad-servers[AWS] or xref:../installation/phase-3-gcp-execution-environments#nomad-servers[GCP].
+
 ifndef::pdf[]
 [#next-steps]
 == Next steps
