@@ -23,16 +23,40 @@ CircleCI projects have pipelines and triggers.
 
 == Trigger options
 
-Configure triggers under menu:Project settings[Triggers]. You can configure triggers to start pipelines on either:
-
-* Commit pushes **and** merge requests
-* Merge requests *only*
-* Events that match custom filters
+Configure triggers under menu:Project settings[Triggers]. You can select one of the following filters:
 
 .Trigger options under Project settings
 image::triggers/gitlab-cloud-trigger-filter-only-mr.png[Trigger details]
 
-Select the *Customize Trigger Filters* option to define your own custom rules.
+* **Build Push and Merge Requests**: pipelines start when you push commits to the repository, regardless of whether the branch you push commits to has an open merge request.
+* **Only Merge Requests**: pipelines start **only** if you push commits to a branch that has an open merge request.
+* **Customize Trigger Filters**: pipelines start when the event matches the custom filters.
+
+== Custom trigger filters
 
 .Custom Trigger Filters
 image::triggers/gitlab-trigger-customize-edit.png[Custom trigger filters]
+
+Each filter follows a specific format:
+
+1. Parameter name
+2. Logical operator
+3. Parameter value
+
+TIP: You can use the btn:[Add Filter] button to configure multiple filters. All configured filters will have an `and` or an `or` relationship.
+
+=== Available parameters
+
+* **EventType**: the type of event that occurred in GitLab. It can either be `Push`, `Merge Request`, or `Tag Push`.
+* **Branch**: the name of the branch or a regular expression to match against the branch name.
+* **Tag**: the name of the tag or a regular expression to match against the tag name.
+* **Is Fork Merge Request**: whether the merge request is a fork merge request. The value can either be `true` or `false`.
+
+=== Available logical operators
+
+* `= (equals)`
+* `!= (not equals)`
+* `matches (regex)``
+* `not matches (regex)``
+
+
