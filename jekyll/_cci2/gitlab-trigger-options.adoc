@@ -39,9 +39,9 @@ image::triggers/gitlab-trigger-customize-edit.png[Custom trigger filters]
 
 Each filter follows a specific format:
 
-1. Parameter name
-2. Logical operator
-3. Parameter value
+1. Parameter name.
+2. Logical operator.
+3. Parameter value.
 
 TIP: You can use the btn:[Add Filter] button to configure multiple filters. All configured filters will have an `and` or an `or` relationship.
 
@@ -56,7 +56,7 @@ TIP: You can use the btn:[Add Filter] button to configure multiple filters. All 
 
 * `= (equals)`
 * `!= (not equals)`
-* `matches (regex)``
-* `not matches (regex)``
+* `matches (regex)`
+* `not matches (regex)`
 
 
