@@ -1,3 +1,7 @@
 * xref:index.adoc[Guides]
 ** xref:first-steps:index.adoc[First Steps]
+*** xref:first-steps:sign-up-and-try.adoc[Sign up and try CircleCI]
+*** xref:first-steps:invite-your-team.adoc[Invite your team]
+** xref:integration:index.adoc[Integration]
+*** xref:integration:github-apps-integration.adoc[GitHub App integration]
 ** xref:tutorials:index.adoc[Tutorials]
