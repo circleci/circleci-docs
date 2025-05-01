@@ -157,7 +157,7 @@ workflows:
 [#dynamic-config-faqs]
 == FAQs
 
-include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
+include::../_includes/partials/faq/dynamic-configuration-faq-snip.adoc[]
 
 [#what-to-read-next]
 == Next steps

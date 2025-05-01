@@ -266,6 +266,8 @@ en:
             link: runner-overview
           - name: Self-hosted runner concepts
             link: runner-concepts
+          - name: Runner feature comparison matrix
+            link: runner-feature-comparison-matrix
       - name: Container runner
         children:
           - name: Container runner installation
@@ -684,6 +686,8 @@ en:
     children:
       - name: AI features
         children:
+          - name: Using the CircleCI MCP Server
+            link: using-the-circleci-mcp-server
           - name: Intelligent summaries
             link: intelligent-summaries
       - name: CLI

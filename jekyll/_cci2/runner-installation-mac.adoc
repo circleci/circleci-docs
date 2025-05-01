@@ -34,18 +34,18 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --
-include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 --
 
@@ -53,7 +53,7 @@ include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
 [#download-the-launch-agent-script]
 == 2. Download launch-agent script and install binary
 
-include::../_includes/snippets/runner/launch-agent-download.adoc[]
+include::../_includes/partials/runner/launch-agent-download.adoc[]
 
 [#create-a-circleci-self-hosted-runner-configuration]
 == 3. Create self-hosted runner configuration
@@ -194,7 +194,7 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.
 
-include::../_includes/snippets/runner/machine-runner-example.adoc[]
+include::../_includes/partials/runner/machine-runner-example.adoc[]
 
 [#troubleshooting]
 == Troubleshooting

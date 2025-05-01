@@ -405,7 +405,7 @@ We are working on updates to:
 [#troubleshooting]
 == Troubleshooting
 
-include::../../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]
+include::../../_includes/partials/troubleshoot/releases-troubleshoot.adoc[]
 
 [#next-steps]
 == Next steps

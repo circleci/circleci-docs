@@ -14,4 +14,4 @@ This page describes errors and troubleshooting methods for pipelines and schedul
 
 == Troubleshooting
 
-include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]
+include::../_includes/partials/troubleshoot/pipelines-troubleshoot-snip.adoc[]
