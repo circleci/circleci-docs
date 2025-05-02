@@ -43,7 +43,11 @@ Each filter follows a specific format:
 2. Logical operator.
 3. Parameter value.
 
-TIP: You can use the btn:[Add Filter] button to configure multiple filters. All configured filters will have an `and` or an `or` relationship.
+[TIP]
+====
+Use the btn:[Add Filter] button to configure multiple filters. +
+Then specify the `and` or `or` relationship between all configured filters.
+====
 
 === Available parameters
 
