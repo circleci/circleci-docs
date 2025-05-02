@@ -2,6 +2,8 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: test
 ---
 = Testing iOS applications on macOS
 :page-layout: classic-docs

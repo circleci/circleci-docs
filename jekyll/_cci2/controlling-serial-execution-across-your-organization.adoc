@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: orchestrate-trigger
 ---
 = Controlling serial execution across your organization
 :page-layout: classic-docs
-:page-liquid:
 :page-description: An overview of controlloing serial execution accross a CircleCI org.
 :icons: font
 :experimental:

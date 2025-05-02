@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: orchestrate-trigger
 ---
 = GitHub trigger event options
 :page-layout: classic-docs
-:page-liquid:
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
 :icons: font
 :experimental:

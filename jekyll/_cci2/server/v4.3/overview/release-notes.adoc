@@ -4,10 +4,11 @@ contentTags:
     - Server v4.3
     - Server Admin
 noindex: true
+component: server-admin
+module: overview
 ---
 = CircleCI server v4.3 release notes
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Details of the new features included in each CircleCI server v4.3 release.
 :icons: font
 :toc: macro

@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Server v4+
   - Server Admin
+component: guides
+module: security
 ---
 = How CircleCI handles security
 :page-description: An overview of security measures taken at CircleCI.

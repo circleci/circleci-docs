@@ -2,13 +2,14 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: insights
 ---
 = Test Insights
 :page-description: Analyze your test performance using test Insights.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 

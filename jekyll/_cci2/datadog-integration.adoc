@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: integration
 ---
 = Datadog integration
-:page-layout: classic-docs
-:page-liquid:
-:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Datadog.
+:page-description: Learn how to integrate CircleCI with Datadog for monitoring and observability.
+:experimental:
 :icons: font
-:toc: macro
+:page-layout: classic-docs
 
 This page describes how to connect Insights data with link:https://www.datadoghq.com/[Datadog].
 

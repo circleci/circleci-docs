@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: orbs
+module: use
 ---
 = Orbs overview
 :page-description: Starting point for using CircleCI orbs

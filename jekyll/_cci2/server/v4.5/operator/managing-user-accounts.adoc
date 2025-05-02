@@ -4,10 +4,11 @@ contentTags:
     - Server v4.5
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Managing user accounts
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This section provides information to help CircleCI server v4.5 operators manage user accounts.
 :icons: font
 :toc: macro

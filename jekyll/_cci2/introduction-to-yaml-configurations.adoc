@@ -1,9 +1,10 @@
 ---
-categories: [configuration]
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: getting-started
 ---
 = Introduction to YAML configuration
 :page-layout: classic-docs

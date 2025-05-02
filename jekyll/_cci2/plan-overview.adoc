@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: plans-pricing
 ---
 = CircleCI plan overview
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document is an introduction to the plans CircleCI offers to developers.
 :icons: font
 :experimental:

@@ -1,13 +1,14 @@
 ---
-description: Details of CircleCI's container runner
 contentTags:
   platform:
   - Cloud
   - Server v4.3+
+component: guides
+module: execution-runner
 ---
 = Container runner reference
+:page-description: Details of CircleCI's container runner
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

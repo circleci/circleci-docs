@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: getting-started
 ---
 = Create a project in CircleCI
 :page-layout: classic-docs
-:page-liquid:
 :page-description: "Learn how to create a project in CircleCI."
 :icons: font
 :experimental:

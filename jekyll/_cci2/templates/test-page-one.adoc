@@ -4,10 +4,11 @@ contentTags:
   - Cloud
   - Server v4+
 noindex: true
+component: contributing
+module: templates
 ---
 = Test page for docs site
 :page-layout: classic-docs
-:page-liquid:
 :page-description: A page with all components for testing the new docs site.
 :icons: font
 :experimental:

@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server
+component: guides
+module: integration
 ---
 = Version control system integration overview
 :description: An overview guide to the version control systems you can integrate with CircleCI.

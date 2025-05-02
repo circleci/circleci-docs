@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Deploy to Azure Container Registry
 :page-description: This is document provides examples of deploying to Azure Container Registry.

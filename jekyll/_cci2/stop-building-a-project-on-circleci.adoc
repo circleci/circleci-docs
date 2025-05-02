@@ -3,12 +3,11 @@ contentTags:
   platform:
     - Cloud
     - Server v4+
-  doc-type:
-    - how-to
+component: guides
+module: security
 ---
 = Stop building a project on CircleCI
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn how to remove a project from your CircleCI account
 :icons: font
 :experimental:
@@ -34,12 +33,12 @@ NOTE: If you want to start building this project again, just go to the **Project
 [#remove-a-project-from-circleci]
 == Delete a project from CircleCI
 
-If you want to remove a project from your CircleCI account, follow the steps below. Deleting a project will remove the complete build history. Only organization admins and project admins can delete projects. 
+If you want to remove a project from your CircleCI account, follow the steps below. Deleting a project will remove the complete build history. Only organization admins and project admins can delete projects.
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select the organization associated with the project you want to remove.
 . Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
 . Select **Project Settings** (or the ellipsis next to your project (icon:ellipsis-h[]) and then select **Project Settings**).
-. Scroll to the bottom of the Overview page and select **Delete Project** and reconfirm your choice in the popup.  
+. Scroll to the bottom of the Overview page and select **Delete Project** and reconfirm your choice in the popup.
 
 
 If you encounter an error, open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request. For more information on submitting support requests, see this https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[support article].

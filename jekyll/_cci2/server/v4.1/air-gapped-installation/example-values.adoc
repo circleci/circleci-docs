@@ -4,10 +4,11 @@ contentTags:
   - Server v4.1
   - Server Admin
 noindex: true
+component: server-admin
+module: air-gapped-installation
 ---
 = Example `values.yaml`
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI server v4.1.
 :icons: font
 :experimental:

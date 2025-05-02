@@ -4,10 +4,11 @@ contentTags:
   - Server v4.3
   - Server Admin
 noindex: true
+component: server-admin
+module: air-gapped-installation
 ---
 = Phase 5 - Test your installation
 :page-layout: classic-docs
-:page-liquid:
 :page-description: How to test your CircleCI server v4.3 installation in an air-gapped environment.
 :icons: font
 :toc: macro

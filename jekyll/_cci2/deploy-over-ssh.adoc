@@ -1,15 +1,16 @@
 ---
-description: This is document provides examples of deploying over SSH.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Deploy over SSH
-:page-layout: classic-docs
-:page-liquid:
-:icons: font
+:page-description: Learn how to deploy your application over SSH using CircleCI.
 :experimental:
+:icons: font
+:page-layout: classic-docs
 
 In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
 

@@ -4,10 +4,11 @@ contentTags:
   - Server v4.4
   - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = CircleCI server security features
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
 :toc: macro

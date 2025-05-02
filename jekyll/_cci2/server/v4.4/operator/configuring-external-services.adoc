@@ -4,6 +4,8 @@ contentTags:
     - Server v4.4
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Configuring external services
 :page-layout: classic-docs

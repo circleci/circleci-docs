@@ -4,11 +4,12 @@ contentTags:
   - Server v4.3
   - Server Admin
 noindex: true
+component: server-admin
+module: installation
 ---
 = Installing server behind a proxy
 :page-layout: classic-docs
 :page-description: Learn how to install CircleCI server v4.3 behind a proxy.
-:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:

@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Convenience images
 :page-description: Listing of available Docker images maintained by CircleCI
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 CAUTION: *Legacy images with the prefix `circleci/` were https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
 

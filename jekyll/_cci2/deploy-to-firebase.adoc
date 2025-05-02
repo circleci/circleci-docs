@@ -1,13 +1,14 @@
 ---
-description: This is document provides examples of deploying to Firebase.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Deploy to Firebase
+:page-description: This is document provides examples of deploying to Firebase.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

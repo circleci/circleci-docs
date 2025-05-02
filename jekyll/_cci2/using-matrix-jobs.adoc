@@ -3,8 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-document-type:
-- How-to
+component: guides
+module: orchestrate-trigger
 ---
 = Using matrix jobs
 :page-description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."

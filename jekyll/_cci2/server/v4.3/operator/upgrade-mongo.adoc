@@ -4,10 +4,11 @@ contentTags:
     - Server v4.3
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Upgrade MongoDB
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server v4.3.
 :icons: font
 :toc: macro

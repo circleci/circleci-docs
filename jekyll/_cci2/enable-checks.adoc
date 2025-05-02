@@ -1,15 +1,15 @@
 ---
-layout: classic-docs
 contentTags:
   platform:
     - Cloud
+component: guides
+module: integration
 ---
 = Enabling GitHub Checks
 :page-description: How to enable GitHub Checks for CircleCI
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#introduction]
 == Introduction

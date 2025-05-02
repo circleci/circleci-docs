@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 =  Deploy to Google Cloud Platform
 :page-description: This is document provides examples of deploying to Google Cloud Platform.

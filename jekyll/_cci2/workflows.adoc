@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: orchestrate-trigger
 ---
 = Workflow orchestration
 :page-description: Learn about using CircleCI workflows to orchestrate jobs

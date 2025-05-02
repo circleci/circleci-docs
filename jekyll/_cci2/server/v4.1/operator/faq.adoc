@@ -4,10 +4,11 @@ contentTags:
     - Server v4.1
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = CircleCI server v4.x FAQ
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Find answers about the CircleCI server v4.1 data retention policy, what control is granted over Nomad certificates
 :icons: font
 :experimental:

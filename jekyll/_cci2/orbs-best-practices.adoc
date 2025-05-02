@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: orbs
+module: author
 ---
 = Orbs authoring best practices
 :page-description: A reference guide to best practices for developing orbs.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#general]
 == General

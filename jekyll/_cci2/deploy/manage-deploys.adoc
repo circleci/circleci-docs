@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: deploy
 ---
 = Manage deploys
 :page-layout: classic-docs
-:page-liquid:
 :page-description: How to guide for managing deploys from the CircleCI web app.
 :icons: font
 :experimental:

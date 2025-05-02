@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-runner
 ---
 = CircleCI's self-hosted runner installation on Kubernetes
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
 :icons: font
 :experimental:

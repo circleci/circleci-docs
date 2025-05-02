@@ -1,16 +1,16 @@
 ---
-layout: classic-docs
 contentTags:
   platform:
     - Cloud
     - Server v4+
+component: guides
+module: deploy
 ---
 = Push image to AWS ECR and deploy to AWS ECS
-:description: How to use CircleCI to deploy to AWS ECS from ECR
+:page-description: How to use CircleCI to deploy to AWS ECS from ECR
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
 

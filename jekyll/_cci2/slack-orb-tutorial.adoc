@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: getting-started
 ---
 = Use the Slack orb to set up notifications
 :page-layout: classic-docs
-:page-liquid:
 :page-description: "Learn how to get started with the CircleCI Slack orb"
 :icons: font
 :experimental:

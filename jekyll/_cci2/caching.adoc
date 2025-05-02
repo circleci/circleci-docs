@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: optimize
 ---
 = Caching dependencies
 :page-description: This document is a guide to caching dependencies in CircleCI pipelines.

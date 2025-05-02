@@ -3,11 +3,12 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-runner
 ---
 = Self-hosted runner feature comparison
 :description: A comparison table of the features available for CircleCI runners.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -61,12 +62,12 @@ This page offers a comparison of the features available for CircleCI machine run
 
 |*Execution Modes*
 |How runner handles job execution
-|`single-task` or `continuous` 
+|`single-task` or `continuous`
 |Pod-based execution
 
 |*Docker Support*
 |How Docker-in-Docker is handled
-|Native OS support 
+|Native OS support
 |Possible xref:container-runner#building-container-images[with third-party tools]
 
 |*Resource Cleanup*

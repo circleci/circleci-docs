@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: permissions-authentication
 ---
 = Single sign-on (SSO) overview
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Introduction to CircleCI SAML SSO
 :icons: font
 :experimental:

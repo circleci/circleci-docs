@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: orbs
+module: author
 ---
 = Manual orb authoring process
 :page-description: Authoring simple orbs manually without the orb development kit.

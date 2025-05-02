@@ -3,12 +3,13 @@ contentTags:
   platform:
   - Server v4.6
   - Server Admin
+component: server-admin
+module: operator
 ---
 = Expanding internal database volumes
 :page-layout: classic-docs
 :page-description: Expanding internal database volumes for CircleCI server v4.6.
 :imagesdir: ../assets/img/docs/
-:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:

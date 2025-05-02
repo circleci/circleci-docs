@@ -1,5 +1,7 @@
 ---
 toc: false
+component: contributing
+module: style
 ---
 = Headings
 :page-layout: classic-docs
@@ -12,7 +14,7 @@ toc: false
 
 * Try not to have a heading with no paragraph text to accompany it. Add at least an overview or intro to what comes next.
 
-* All headings are in sentence case. This means only the first word and proper nouns are capitalized. 
+* All headings are in sentence case. This means only the first word and proper nouns are capitalized.
 ** **Good:** CircleCI docs style guide +
 ** **Bad:** CircleCI Docs Style Guide
 

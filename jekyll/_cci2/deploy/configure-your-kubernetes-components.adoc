@@ -2,6 +2,8 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: deploy
 ---
 = Manual install - configure your Kubernetes components
 :page-layout: classic-docs

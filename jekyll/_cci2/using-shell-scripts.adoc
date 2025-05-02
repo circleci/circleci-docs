@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: orchestrate-trigger
 ---
 = Using shell scripts
 :page-description: Best practices for using shell scripts for use in CircleCI configuration
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#overview]
 == Overview

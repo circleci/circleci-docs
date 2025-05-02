@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: security
 ---
 = Protecting against supply chain attacks
 :description: Protecting against supply chain attacks on CircleCI
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#overview]
 == Overview

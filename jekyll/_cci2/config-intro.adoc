@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: getting-started
 ---
 = Configuration introduction
 :page-layout: classic-docs

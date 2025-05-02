@@ -1,13 +1,14 @@
 ---
-description: Learn about developing your config policies.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: config-policies
 ---
 = Use the CircleCI CLI for config and policy development
+:page-description: Learn about developing your config policies using the CLI.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

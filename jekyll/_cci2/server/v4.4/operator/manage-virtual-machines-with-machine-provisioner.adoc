@@ -4,10 +4,11 @@ contentTags:
   - Server v4.4
   - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Manage virtual machines with machine provisioner
 :page-layout: classic-docs
-:page-liquid:
 :page-description: CircleCI server v4.4’s machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :toc: macro

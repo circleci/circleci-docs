@@ -4,10 +4,11 @@ contentTags:
     - Server v4.4
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Managing orbs
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.4.
 :icons: font
 :toc: macro

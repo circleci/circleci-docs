@@ -2,11 +2,12 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: security
 ---
 = Rename organizations and repositories
 :page-layout: classic-docs
-:page-liquid:
-:page-description: This how-to guide goes over changing the names of organizations and repositories.
+:page-description: Learn how to rename organizations and repositories in CircleCI.
 :icons: font
 :experimental:
 

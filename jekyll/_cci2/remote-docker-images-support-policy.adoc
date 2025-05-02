@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = CircleCI remote Docker images support policy
 :page-layout: classic-docs
-:page-liquid:
 :page-description: CircleCI remote Docker images release, update, and deprecation policy
 :icons: font
 :experimental:

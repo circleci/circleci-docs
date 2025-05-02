@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Server v4+
+component: guides
+module: plans-pricing
 ---
 = Server Plan
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document describes the Server Plan available to developers on CircleCI.
 :icons: font
 :experimental:

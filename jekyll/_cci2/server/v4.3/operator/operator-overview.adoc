@@ -4,10 +4,11 @@ contentTags:
     - Server v4.3
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Operator overview
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.3.
 :icons: font
 :toc: macro

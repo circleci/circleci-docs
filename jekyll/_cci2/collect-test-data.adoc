@@ -3,37 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
-sectionTags:
-  javascript:
-    - "#jest"
-    - "#mocha-for-node"
-    - "#mocha-with-nyc"
-    - "#karma"
-    - "#ava-for-node"
-    - "#eslint"
-  ruby:
-    - "#rspec"
-    - "#minitest"
-  python:
-    - "#pytest"
-    - "#unittest"
-  java:
-    - "#maven-surefire-plugin-for-java-junit-results"
-    - "#gradle-junit-test-results"
-  php:
-    - "#phpunit"
-  dot-net:
-    - "#trx2junit-for-visual-studio-net-core-tests"
-  clojure:
-    - "#kaocha"
-    - "#test2junit-for-clojure-tests"
-  playwright:
-    - "#playwright"
-  cypress:
-    - "#cypress"
-  webdriverio:
-    - "#webdriverio"
+component: guides
+module: test
 ---
 = Collect test data
 :description: A guide to collecting test data in your CircleCI projects.

@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Publish packages to Packagecloud
 :description: How to publish packages to Packagecloud using CircleCI.

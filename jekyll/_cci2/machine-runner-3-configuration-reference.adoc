@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4.4+
+component: guides
+module: execution-runner
 ---
 = Machine runner 3.0 configuration reference
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

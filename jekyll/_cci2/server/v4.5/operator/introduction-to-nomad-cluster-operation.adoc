@@ -4,10 +4,11 @@ contentTags:
     - Server v4.5
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Introduction to Nomad cluster operation
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 :icons: font
 :toc: macro

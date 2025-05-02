@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Debugging container ID cannot be mapped to host ID error
 :page-description: Debugging 'Container ID XXX cannot be mapped to a host ID' error when starting a container
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 When starting a container, you may see this error message:
 

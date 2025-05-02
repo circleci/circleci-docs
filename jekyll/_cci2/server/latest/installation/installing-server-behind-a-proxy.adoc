@@ -3,11 +3,12 @@ contentTags:
   platform:
   - Server v4.7
   - Server Admin
+component: server-admin
+module: installation
 ---
 = Installing server behind a proxy
 :page-layout: classic-docs
 :page-description: Learn how to install CircleCI server v4.7 behind a proxy.
-:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:

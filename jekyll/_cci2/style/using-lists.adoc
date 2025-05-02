@@ -1,5 +1,7 @@
 ---
 toc: false
+component: contributing
+module: style
 ---
 = Using lists
 :page-layout: classic-docs

@@ -4,6 +4,8 @@ contentTags:
   - Server v4.5
   - Server Admin
 noindex: true
+component: server-admin
+module: installation
 ---
 = Installation reference
 :page-layout: classic-docs

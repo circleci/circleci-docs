@@ -4,10 +4,11 @@ contentTags:
   - Server v4.5
   - Server Admin
 noindex: true
+component: server-admin
+module: installation
 ---
 = Phase 3 - execution environments
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :toc: macro
 :toc-title:

@@ -1,13 +1,14 @@
 ---
-description: This is document provides examples of deploying to Cloud Foundry.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Deploy to Cloud Foundry
+:page-description: This is document provides examples of deploying to Cloud Foundry.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

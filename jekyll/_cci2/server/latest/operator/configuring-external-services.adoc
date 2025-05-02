@@ -3,6 +3,8 @@ contentTags:
   platform:
     - Server v4.7
     - Server Admin
+component: server-admin
+module: operator
 ---
 = Configuring external services
 :page-layout: classic-docs

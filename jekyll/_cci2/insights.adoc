@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: insights
 ---
 = Using Insights
 :page-description: Viewing the status of repos and test performance
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#overview]
 == Overview

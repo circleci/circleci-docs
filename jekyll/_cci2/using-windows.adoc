@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Using the Windows execution environment
 :page-description: Learn how to configure a your jobs to run in the Windows execution environment.

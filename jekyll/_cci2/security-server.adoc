@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Server v4+
   - Server Admin
+component: server-admin
+module: operator
 ---
 = Security
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document outlines security features built into CircleCI and related integrations.
 :icons: font
 :experimental:

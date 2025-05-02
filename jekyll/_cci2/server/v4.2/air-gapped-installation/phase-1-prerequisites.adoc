@@ -4,10 +4,11 @@ contentTags:
     - Server v4.2
     - Server Admin
 noindex: true
+component: server-admin
+module: air-gapped-installation
 ---
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
-:page-liquid:
 :page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font
 :toc: macro

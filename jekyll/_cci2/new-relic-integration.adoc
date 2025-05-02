@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: integration
 ---
 = New Relic integration
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with New Relic.
 :icons: font
 :toc: macro

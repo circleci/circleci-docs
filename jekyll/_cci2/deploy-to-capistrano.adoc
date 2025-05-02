@@ -1,13 +1,14 @@
 ---
-description: This is document provides examples of deploying to Capistrano.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Deploy to Capistrano
+:page-description: This is document provides examples of deploying to Capistrano.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-runner
 ---
 = CircleCI's self-hosted runner API
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
 :experimental:

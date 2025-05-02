@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4.4+
+component: guides
+module: execution-runner
 ---
 = Install machine runner 3.0 on macOS
 :page-layout: classic-docs

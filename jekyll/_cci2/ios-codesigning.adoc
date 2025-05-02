@@ -2,13 +2,14 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: execution-managed
 ---
 = Set up code signing for iOS projects
 :page-description: How to set up code signing for an iOS app
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document describes the guidelines for setting up code signing
 for your iOS project on CircleCI.

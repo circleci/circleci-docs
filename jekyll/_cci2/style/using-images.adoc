@@ -1,3 +1,7 @@
+---
+component: contributing
+module: style
+---
 = Using images
 :page-layout: classic-docs
 :icons: font

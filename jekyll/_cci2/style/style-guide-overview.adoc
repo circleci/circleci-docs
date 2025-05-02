@@ -3,6 +3,8 @@ description: "Style guide for contributions to CircleCI docs."
 permalink: style/
 page-type: index
 toc: false
+component: contributing
+module: style
 ---
 = Style guide overview
 :page-layout: classic-docs

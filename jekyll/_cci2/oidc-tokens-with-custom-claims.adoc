@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4.4+
+component: guides
+module: permissions-authentication
 ---
 = OIDC tokens with custom claims
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn about the capabilities to customize claims in OIDC tokens.
 :icons: font
 :experimental:

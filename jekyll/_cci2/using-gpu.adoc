@@ -2,8 +2,8 @@
 contentTags:
   platform:
   - Cloud
-  plan:
-  - Scale
+component: guides
+module: execution-managed
 ---
 = Using the GPU execution environment
 :page-description: Learn how to configure a your jobs to run in the GPU execution environment.

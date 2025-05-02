@@ -3,29 +3,11 @@ contentTags:
   platform:
     - Cloud
     - Server v4+
-  vcs:
-    - github
-    - bitbucket
-    - gitlab
-sectionTags:
-  github:
-    - "#github-projects"
-    - "#rotate-a-deploy-key-github"
-    - "#rotate-a-user-key-github"
-    - "#rotate-an-additional-SSH-key-github"
-  bitbucket:
-    - "#bitbucket-projects"
-    - "#rotate-a-deploy-key-bitbucket"
-    - "#rotate-a-user-key-bitbucket"
-    - "#rotate-an-additional-SSH-key-bitbucket"
-  gitlab:
-    - "#gitlab-projects"
-    - "#rotate-an-SSH-key-gitlab"
-    - "#rotate-an-additional-SSH-key-gitlab"
+component: guides
+module: security
 ---
 = Rotate project SSH keys
 :page-layout: classic-docs
-:page-liquid:
 :page-description: How to rotate your project SSH keys.
 :icons: font
 :experimental:

@@ -4,10 +4,11 @@ contentTags:
   - Server v4.2
   - Server Admin
 noindex: true
+component: server-admin
+module: installation
 ---
 = Hardening your cluster
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
 :icons: font
 :toc: macro

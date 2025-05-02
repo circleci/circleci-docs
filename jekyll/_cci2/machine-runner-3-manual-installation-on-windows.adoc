@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4.4+
+component: guides
+module: execution-runner
 ---
 = Machine runner 3.0 manual installation for Windows
 :page-layout: classic-docs

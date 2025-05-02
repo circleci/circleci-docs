@@ -4,10 +4,11 @@ contentTags:
     - Server v4.5
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = User authentication
 :page-layout: classic-docs
-:page-liquid:
 :page-description: CircleCI server v4.5 currently supports OAuth through GitHub or GitHub Enterprise.
 :icons: font
 :toc: macro

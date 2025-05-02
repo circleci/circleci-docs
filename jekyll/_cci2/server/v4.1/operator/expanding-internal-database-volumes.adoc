@@ -4,12 +4,13 @@ contentTags:
   - Server v4.1
   - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Expanding internal database volumes
 :page-layout: classic-docs
 :page-description: This document describes how to expand the internal database volumes for CircleCI server v4.1.
 :imagesdir: ../assets/img/docs/
-:page-liquid:
 :icons: font
 :experimental:
 

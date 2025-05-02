@@ -4,10 +4,11 @@ contentTags:
   - Server v4.4
   - Server Admin
 noindex: true
+component: server-admin
+module: installation
 ---
 = Phase 2 - core services
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Installation guide for CircleCI server v4.4 core services.
 :icons: font
 :toc: macro

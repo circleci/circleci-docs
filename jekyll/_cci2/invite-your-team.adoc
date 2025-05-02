@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: getting-started
 ---
 = Join teammates on CircleCI
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Add your team to your CircleCI organization
 :icons: font
 :experimental:

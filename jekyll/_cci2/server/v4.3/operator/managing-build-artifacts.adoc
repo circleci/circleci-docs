@@ -4,10 +4,11 @@ contentTags:
     - Server v4.3
     - Server Admin
 noindex: true
+component: server-admin
+module: operator
 ---
 = Managing build artifacts
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn how build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
 :icons: font
 :toc: macro
