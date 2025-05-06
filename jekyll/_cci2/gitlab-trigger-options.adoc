@@ -55,13 +55,13 @@ Then specify the `and` or `or` relationship between all configured filters.
 * **EventType**: The type of event that occurred in GitLab. This can either be `Push`, `Merge Request`, or `Tag Push`.
 * **Branch**: The name of the branch or a regular expression to match against the branch name.
 * **Tag**: The name of the tag or a regular expression to match against the tag name.
-* **Is Fork Merge Request**: whether the merge request is a fork merge request. The value can either be `true` or `false`.
+* **Is Fork Merge Request**: Whether the merge request is a fork merge request. The value can either be `true` or `false`.
 
 === Available logical operators
 
-* = (equals)
-* != (not equals)
-* matches (regex)
-* not matches (regex)
+* `=` (equals)
+* `!=` (not equals)
+* `matches` (regex)
+* `not matches` (regex)
 
 
