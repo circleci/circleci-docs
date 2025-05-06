@@ -40,9 +40,9 @@ image::triggers/gitlab-trigger-customize-edit.png[Custom trigger filters]
 
 Each filter follows a specific format:
 
-1. Parameter name.
-2. Logical operator.
-3. Parameter value.
+* Parameter name.
+* Logical operator.
+* Parameter value.
 
 [TIP]
 ====
