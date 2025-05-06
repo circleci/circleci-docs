@@ -47,22 +47,22 @@ CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor
 
 CircleCI runs remote Docker environments using **Linux or Arm machine resource classes**, depending on the resource class you assign to the Docker executor.
 
-=== x86 Architecture
+=== x86 architecture
 
 - A remote Docker environment uses a **Linux VM machine** resource class that corresponds to the Docker executor class.
 - **Exceptions**:
   - `small` maps to `medium` (Linux VM)
   - `medium+` maps to `large` (Linux VM)
 
-=== Arm Architecture
+=== Arm architecture
 
 - Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-=== Mapping: Docker Executor ➜ Remote Docker (Linux/Arm Machine)
+=== Mapping: Docker executor ➜ Remote Docker (Linux/Arm Machine)
 
-==== x86 Architecture
+==== x86 architecture
 
-| Docker Executor Resource Class | Remote Docker (Linux Machine) Resource Class |
+| Docker resource class | Remote Docker (Linux Machine) resource class |
 |-------------------------------|----------------------------------------------|
 | `small`                      | `medium` (Linux VM)                          |
 | `medium`                     | `medium` (Linux VM)                          |
@@ -71,9 +71,9 @@ CircleCI runs remote Docker environments using **Linux or Arm machine resource c
 | `xlarge`                     | `xlarge` (Linux VM)                          |
 | `2xlarge`                    | `2xlarge` (Linux VM)                         |
 
-==== Arm Architecture
+==== Arm architecture
 
-| Docker Executor Resource Class | Remote Docker (Arm Machine) Resource Class |
+| Docker resource Class | Remote Docker (Arm Machine) resource class |
 |-------------------------------|--------------------------------------------|
 | `arm.medium`                 | `arm.medium` (Arm VM)                      |
 | `arm.large`                  | `arm.large` (Arm VM)                       |
