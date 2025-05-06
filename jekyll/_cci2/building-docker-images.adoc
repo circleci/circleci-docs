@@ -45,25 +45,43 @@ CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor
 [#specifications]
 == Specifications
 
-The resource class used for the remote Docker environment is determined by how you configure the primary container for the job. The sections below show how Docker and remote Docker environments correlate.
+CircleCI runs remote Docker environments using **Linux or Arm machine resource classes**, depending on the resource class you assign to the Docker executor.
 
-For specification, credit, and pricing information for all resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource class product page].
+=== x86 Architecture
 
-=== x86
-For *x86* architecture, the equivalent Linux VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also. Exceptions to this are as follows:
+- A remote Docker environment uses a **Linux VM machine** resource class that corresponds to the Docker executor class.
+- **Exceptions**:
+  - `small` maps to `medium` (Linux VM)
+  - `medium+` maps to `large` (Linux VM)
 
-* If you use the `small` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `medium`.
-* If you use the `medium+` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `large`.
+=== Arm Architecture
 
-For a full list of available Linux VM resource classes see the xref:configuration-reference#linuxvm-execution-environment[Configuration Reference].
+- Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-=== Arm
+=== Mapping: Docker Executor ➜ Remote Docker (Linux/Arm Machine)
 
-TIP: *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
+==== x86 Architecture
 
-For *Arm* architecture the equivalent Arm VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also.
+| Docker Executor Resource Class | Remote Docker (Linux Machine) Resource Class |
+|-------------------------------|----------------------------------------------|
+| `small`                      | `medium` (Linux VM)                          |
+| `medium`                     | `medium` (Linux VM)                          |
+| `medium+`                    | `large` (Linux VM)                           |
+| `large`                      | `large` (Linux VM)                           |
+| `xlarge`                     | `xlarge` (Linux VM)                          |
+| `2xlarge`                    | `2xlarge` (Linux VM)                         |
 
-For a full list of available Arm VM resource classes see the xref:configuration-reference#arm-execution-environment-linux[Configuration Reference].
+==== Arm Architecture
+
+| Docker Executor Resource Class | Remote Docker (Arm Machine) Resource Class |
+|-------------------------------|--------------------------------------------|
+| `arm.medium`                 | `arm.medium` (Arm VM)                      |
+| `arm.large`                  | `arm.large` (Arm VM)                       |
+| `arm.xlarge`                 | `arm.xlarge` (Arm VM)                      |
+| `arm.2xlarge`                | `arm.2xlarge` (Arm VM)                     |
+
+- Full list of resource classes: link:https://circleci.com/docs/configuration-reference/#resourceclass[Configuration Reference]
+- Full specifications and pricing: link:https://circleci.com/pricing/price-list/[CircleCI Pricing]
 
 === CircleCI server
 For CircleCI server installations, contact the systems administrator for specifications.
