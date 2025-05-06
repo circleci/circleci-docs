@@ -11,7 +11,7 @@ contentTags:
 :machine:
 :windows:
 
-CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-windows#[machine runner 3.0 installation guide] for the recommended steps to set up Windows self-hosted runners on CircleCI cloud.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-windows#[machine runner 3 installation guide] for the recommended steps to set up Windows self-hosted runners on CircleCI cloud.
 
 This page describes how to install machine runner on Windows for **CircleCI server**. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
@@ -59,7 +59,7 @@ include::../_includes/partials/runner/launch-agent-download.adoc[]
 [#installation-steps]
 == 3. Machine runner installation on Windows
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/blob/main/windows-install/Install-CircleCIRunner.ps1[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/blob/main/windows-install/Install-CircleCIRunner.ps1[`Install-CircleCIRunner.ps1` script] from GitHub to an accessible location.
 
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
@@ -83,7 +83,7 @@ include::../_includes/partials/runner/machine-runner-example.adoc[]
 
 Uninstalling machine runners will prepare the system for installation again.
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
 . Run the following in your PowerShell:
@@ -95,7 +95,7 @@ Uninstalling machine runners will prepare the system for installation again.
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Continuous mode vs. single task mode for Windows self-hosted runners
 
-By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
+By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. Single task mode is the **recommended mode** for Windows machine runners.
 
 A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.
 
