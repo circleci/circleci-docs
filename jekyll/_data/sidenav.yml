@@ -553,6 +553,10 @@ en:
             link: authentication/set-up-sso
           - name: Sign in to an SSO-enabled org
             link: authentication/sign-in-to-an-sso-enabled-organization
+      - name: Multi-Factor Authentication (MFA)
+        children:
+          - name: MFA overview
+            link: authentication/mfa
       - name: OIDC tokens
         children:
           - name: Use OpenID Connect tokens in jobs
