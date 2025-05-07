@@ -492,6 +492,20 @@ workflows:
 
 A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the xref:env-vars#[Environment variables] page.
 
+*Example* to show settings an environmenta variable names `FOO` with a value of `bar` for use in a job.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2022.04-20.04
+    environment:
+      FOO: bar
+----
+
 '''
 
 [#parallelism]
@@ -540,6 +554,29 @@ Reserved parameter-names:
 
 See xref:reusing-config#parameter-syntax[Parameter Syntax] for definition details.
 
+*Example* to show using a job parameter to set the parallelism for a job when a workflow is run.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    parameters:
+      my-parameter:
+        type: integer
+        default: 1
+    parallelism: << parameters.p >>
+    docker:
+      - image: cimg/base:2023.11
+    steps:
+      - checkout
+workflows:
+  workflow:
+    jobs:
+      - build:
+          my-parameter: 2
+----
+
 '''
 
 [#executor-job]
@@ -556,7 +593,7 @@ Learn more about execution environments and executors in the xref:executor-intro
 [#docker]
 ==== `docker`
 
-Configured by `docker` key which takes a list of maps:
+Configure a job to use the Docker execution environment using the  `docker` key which takes a list of maps:
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -609,6 +646,24 @@ For a xref:glossary#primary-container[primary container], (the first container i
 A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
 
 '''
 
@@ -700,7 +755,7 @@ jobs:
 [#machine]
 ==== *`machine`*
 
-NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+NOTE: *Using CircleCI cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
 
 The machine executor is configured using the `machine` key, which takes a map:
 
@@ -720,7 +775,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | Set this to `true` to enable xref:docker-layer-caching#[Docker layer caching].
 |===
 
-Example:
+*Example:*
 
 [.tab.machine.Cloud]
 --
@@ -939,8 +994,6 @@ include::../_includes/partials/execution-resources/docker-resource-table.adoc[]
 [#arm]
 ====== Arm
 
-*Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
-
 include::../_includes/partials/execution-resources/docker-arm-resource-table.adoc[]
 
 '''
@@ -1004,7 +1057,7 @@ jobs:
 [#macos-server]
 ===== macOS execution environment on server
 
-If you are working on CircleCI server v3.1 and up, you can access the macOS execution environment using xref:runner-overview#[self-hosted runner].
+If you are working on CircleCI server you can access the macOS execution environment using xref:runner-overview#[self-hosted runner].
 
 '''
 
