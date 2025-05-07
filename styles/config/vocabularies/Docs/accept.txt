@@ -1,4 +1,5 @@
 .circleci/config.yml
+[Aa]gentless
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
@@ -298,6 +299,7 @@ seccomp
 Selenium
 SemVer
 Server Plan
+SELinux
 \b[Ss]hellchecking\b
 [Ss]harded
 \b[Ss]ingle sign-on\b
