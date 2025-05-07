@@ -4,7 +4,7 @@ contentTags:
     - Server v4.4
     - Server Admin
 noindex: true
-component: server-admin
+component: server-admin-4.4
 module: operator
 ---
 = Managing orbs

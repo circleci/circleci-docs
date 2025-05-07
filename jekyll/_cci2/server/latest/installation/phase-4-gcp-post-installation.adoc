@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Server v4.7
   - Server Admin
-component: server-admin
+component: server-admin-latest
 module: installation
 ---
 = Phase 4 GCP - post installation
