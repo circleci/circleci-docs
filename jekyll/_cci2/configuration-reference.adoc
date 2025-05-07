@@ -2679,7 +2679,7 @@ A job name that exists in your `config.yml`.
 [#override-with]
 ====== *`override-with`*
 
-The `override-with` key is used to override the job configuration with a job in the referenced orb.
+The `override-with` key is used to override the job configuration with a job from the referenced orb.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -2689,7 +2689,7 @@ The `override-with` key is used to override the job configuration with a job in 
 | `override-with`
 | N
 | String
-| The orb job name to override the configuration with. (Both URL-based and registry orbs are supported)
+| The orb job name that will be used to override the existing job configuration. (Both URL-based and registry orbs are supported)
 |===
 
 *Example:*
@@ -2699,9 +2699,9 @@ The `override-with` key is used to override the job configuration with a job in 
 include::../_includes/snippets/orchestration-examples/override-with.yml[]
 ----
 
-In the example above, the _test_ job in the workflow is being overriden with the orb job _my-orb/my-test_. The _my-orb/my-test_ might be defined with a different resource class or execution steps. 
+In the example above, the `test` job in the workflow is being overriden with the orb job `my-orb/my-test`. The `my-orb/my-test` job might be defined with a different resource class or execution steps. 
 
-If the _my-orb/my-test_ job is not defined inside the orb, the _test_ job will compile using the local job definition.
+If the `my-orb/my-test` job is not defined inside the orb, the `test` job will compile using the local job definition.
 
 '''
 [#serial-group]
