@@ -1,1 +1,2 @@
 = Welcome to CircleCI Documentation
+:page-layout: home

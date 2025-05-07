@@ -1,0 +1,36 @@
+[#error-message-uncertified-orbs]
+=== Why do I receive an error message when trying to use an uncertified orb?
+
+To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
+
+NOTE: Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, are not certified.
+
+[#build-error-when-testing-locally]
+=== Why do I get the following error when testing locally?
+
+Command:
+```bash
+circleci build -c .circleci/jobs.yml --job test
+```
+Error:
+```bash
+Error:
+You attempted to run a local build with version 2.1 of configuration.
+```
+
+To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
+
+[#errors-claiming-namespace-or-publishing-orbs]
+=== I receive an error when attempting to claim a namespace or publish a production orb.
+
+You may not be an organization owner/admin.
+
+Organizations can only claim a single namespace. In order to claim a namespace for an organization the authenticating user must have owner/admin privileges within the organization.
+
+If you do not have the required permission level you might see an error similar to below:
+
+```shell
+Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
+```
+
+Read more in the xref:orb-author-intro#permissions-matrix[Orb CLI permissions matrix].

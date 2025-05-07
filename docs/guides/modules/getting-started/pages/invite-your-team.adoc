@@ -1,0 +1,71 @@
+= Join teammates on CircleCI
+:page-description: Add your team to your CircleCI organization
+:icons: font
+:experimental:
+
+#NEED AN ATTRIBUTE TO SHOW THIS IS FOR CLOUD ONLY#
+
+After setting up an organization in CircleCI, ensure your whole team get access.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+
+[#find-your-team]
+== Find your team
+
+After creating an account, you can join an existing CircleCI organization using the **Find Your Team** dropdown menu in the **Join Your Teammates** card on the link:https://app.circleci.com/home/[homepage].
+
+To join an organization, there are three options:
+
+* <<join-via-invite,Join via an invite>>
+* <<join-via-github,Search via GitHub>>
+* <<join-via-bitbucket,Search via Bitbucket Cloud>>
+
+These options are also available at any time using the **Join Organization** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are outlined in the following sections.
+
+[#join-via-invite]
+=== Join an existing CircleCI organization via an invite
+
+. Reach out to your organization admin to request an invite
+. Your organization admin will need to follow the steps below in the <<invite-teammates>> section to send you an email invite. Once you receive your invitation, follow the link to log in and join your organization
+
+[#join-via-github]
+=== Join an existing CircleCI organization with a GitHub OAuth app integration
+
+. Select "Search via GitHub" from the **Find Your Team** dropdown
+. Authorize the GitHub OAuth app for read access to your GitHub organization membership
+. After authorization, you will be redirected to CircleCI where we will list all matching CircleCI organizations that you are eligible to join. Select btn:[Join Organizations] to successfully complete joining these organizations in CircleCI.
++
+NOTE: If you do not see the organization you would like to join listed, you will need to receive an invite to join from an organization admin. Reach out to your admin to request an invite, and send them a link to this help doc for reference.
+
+[#join-via-bitbucket]
+=== Join an existing CircleCI organization with a Bitbucket Cloud integration
+
+. Select "Search via Bitbucket" from the **Find Your Team** dropdown to be redirected to Bitbucket Cloud.
+. Enter your Bitbucket Cloud credentials to authorize CircleCI to your Bitbucket Cloud account.
+. After authorization, you will be redirected back to CircleCI and will be added to your organization.
+
+[#invite-teammates]
+== Invite teammates to join your organization
+
+The steps in this section show how an org admin can invite teammates to join their organization.
+
+[.tab.invite.GitHub_App_/_GitLab_/_Bitbucket_Data_Center]
+--
+include::ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
+
+. In the CircleCI web app, select your org from the org cards on your user homepage.
+. Navigate to menu:Organization Settings[People], then select btn:[Invite].
+. To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
+. Once they join your org, you can then also assign each team member a role on an individual project level.
+--
+
+[.tab.invite.GitHub_OAuth_/_Bitbucket_Cloud]
+--
+. In the CircleCI web app, select your org from the org cards on your user homepage.
+. Select *Organization Setting* from the sidebar and select *People*.
+. Select btn:[Copy Invite Link] -- an invite message is now copied to your clipboard.
+. Past the invite message to your teammates via email or whatever method you prefer.
+--

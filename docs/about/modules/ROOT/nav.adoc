@@ -1,3 +1,0 @@
-* xref:index.adoc[About CircleCI]
-** xref:overview:index.adoc[Overview]
-** xref:reference:index.adoc[Reference]

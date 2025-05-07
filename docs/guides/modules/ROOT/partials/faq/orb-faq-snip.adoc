@@ -1,0 +1,30 @@
+[#can-orbs-be-private]
+=== Can orbs be made private?
+
+xref:orb-intro#public-or-private[Private orbs] are available on any of our link:https://circleci.com/pricing[current plans].
+
+[#difference-between-commands-and-jobs]
+=== What is the difference between commands and jobs?
+
+Both xref:reusing-config#the-commands-key[commands] and xref:reusing-config#authoring-parameterized-jobs[jobs] are elements that can be used within orbs.
+
+_Commands_ contain one or many xref:configuration-reference#steps[steps], which contain the logic of the orb. Commands generally execute some shell code (bash).
+
+_Jobs_ are a definition of what steps/commands to run and the xref:reusing-config#the-executors-key[executor] to run them in. _Jobs_ invoke commands, and are orchestrated using xref:workflows#workflows-configuration-examples[workflows].
+
+[#orbs-on-private-installation-server]
+=== Can orbs be used on a private installation of CircleCI server?
+
+Orbs can be used with installations of CircleCI server. For information on importing and using orbs for server, see the xref:/server/v4.3/operator/managing-orbs#[CircleCI server managing orbs] page.
+
+[#report-an-issue-with-a-public-orb]
+=== How can I report a bug or issue with a public orb?
+
+All public orbs are open source projects. Issues, bug reports, or even pull requests can be made against the orb's git repository. Public orb authors may opt to include a link to the git repo on the orb registry. If the git repo link is unavailable, contact support and we will attempt to contact the author. Alternatively, consider forking the orb and publishing your own version.
+
+[#how-to-use-the-latest-version-of-an-orb]
+=== How do I use the latest version of an orb?
+
+Orbs use semantic versioning, meaning if you set the _major_ version (example: `3`), you will receive all _minor_ and _patch_ updates, where if you statically set the version (example: `3.0.0`), no updates will apply, this is the most deterministic and recommended method.
+
+WARNING: NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. This is not recommended as breaking changes are expected.

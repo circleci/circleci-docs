@@ -7,12 +7,11 @@ content:
   - url: .
     start_paths:
     - docs/root
-    - docs/about
-    - docs/contributors
     - docs/guides
-    - docs/orbs
     - docs/reference
+    - docs/orbs
     - docs/server-admin
+    - docs/contributors
 ui:
   bundle:
     url: ./ui-bundle.zip
@@ -20,4 +19,4 @@ output:
   dir: ./build
   clean: true
   destinations:
-  - provider: fs 
+  - provider: fs

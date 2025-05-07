@@ -5,7 +5,7 @@
 
 #NEED ATTRIBUTE FOR CLOUD ONLY#
 
-xref:first-steps:invite-your-team.adoc[Invite your team]
+xref:getting-started:invite-your-team.adoc[Invite your team]
 
 If your CircleCI organization is authenticated with GitHub through the **GitHub App**, the content on this page is for you.
 
@@ -80,7 +80,7 @@ You can add or delete pipelines for your project.
 
 In your trigger settings, select the "PR opened or pushed to, default branch pushes, tag pushes" option under the "Run on" menu.
 
-image::triggers/run-on-open.png[Run on trigger menu options]
+image::guides:ROOT:triggers/run-on-open.png[Run on trigger menu options]
 
 [#organization-settings]
 == Organization settings
@@ -136,7 +136,7 @@ NOTE: You can install the CircleCI GitHub App into the same GitHub organization 
 . Perform a test push of code to your repository to ensure that a pipeline is triggered and is working as expected in your **new** CircleCI organization.
 . Assuming the repository you connected is also connected to your previous CircleCI organization, CircleCI will start pipelines when a push event happens to the repository in both the old and new organizations. If your test from step 8 above was successful, go to **Project Settings** in your organization connected to the GitHub OAuth App (your "old" org), scroll down and select btn:[Stop Building].  This will ensure that push events to your repository only trigger pipelines in the project connected to your GitHub App organization.
 . Repeat steps 6-9 by selecting menu:Projects[Create a Project] for each project that you had set up in your previous organization.
-. Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on xref:first-steps:invite-your-team.adoc[this page].
+. Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on xref:getting-started:invite-your-team.adoc[this page].
 . If you are on a **paid** pricing plan and followed step 6:
 .. Navigate back to the "old" organization and select menu:Plan[Share and Transfer].
 .. Select the icon:times[delete icon] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.

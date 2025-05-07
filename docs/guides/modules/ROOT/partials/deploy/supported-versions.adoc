@@ -1,0 +1,19 @@
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|Tool
+|Tested versions
+
+|Kubernetes
+a| 1.29.0 +
+1.28.0 +
+1.27.0
+
+|Helm
+a| 3.12.0 +
+3.11.0
+
+|Argo Rollouts (optional)
+a| 1.6.0 +
+1.5.0
+|===
