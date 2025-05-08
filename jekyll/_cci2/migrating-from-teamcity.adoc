@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: migrate
 ---
 = Migrate from TeamCity
 :page-layout: classic-docs

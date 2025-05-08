@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: orbs
+module: author
 ---
 = Orbs concepts
 :page-description: Conceptual Overview for Orbs

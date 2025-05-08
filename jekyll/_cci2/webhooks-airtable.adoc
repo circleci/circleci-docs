@@ -1,14 +1,14 @@
 ---
-description: Reference page for webhooks payloads
 contentTags:
   platform:
   - Cloud
+component: guides
+module: integration
 ---
 = CircleCI webhooks with Airtable
-:page-description: Example webhooks use-case with webhooks
+:page-description: How to guide for setting up webhooks with Airtable
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 :experimental:
 
 This document describes how you might use webhooks with a third party

@@ -1,13 +1,14 @@
 ---
-description: Reference page for webhooks payloads
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: reference
+module: ROOT
 ---
 = Webhooks reference
+:page-description: Reference page for webhooks payloads
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: toolkit
 ---
 = CircleCI API developer's guide
 :page-description: API guide for internal and external CircleCI developers

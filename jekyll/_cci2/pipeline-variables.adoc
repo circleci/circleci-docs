@@ -1,14 +1,14 @@
 ---
-categories: [getting-started]
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: orchestrate-trigger
 ---
 = Pipeline values and parameters
 :experimental:
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document describes the Free Plan available to developers on CircleCI.
 :icons: font
 :experimental:

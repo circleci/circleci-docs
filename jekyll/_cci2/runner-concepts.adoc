@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-runner
 ---
 = Self-hosted runner concepts
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Conceptual Overview for CircleCI's self-hosted runner.
 :icons: font
 :experimental:

@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Using the Linux VM execution environment
 :description: Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor.

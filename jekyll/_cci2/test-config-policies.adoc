@@ -1,13 +1,14 @@
 ---
-description: Open preview of config policies for CircleCI. Learn about testing your policies.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: config-policies
 ---
 = Test config policies
+:page-description: Open preview of config policies for CircleCI. Learn about testing your policies.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

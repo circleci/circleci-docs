@@ -1,14 +1,15 @@
 ---
 contentTags:
   platform:
-   - Cloud
+  - Cloud
+component: guides
+module: security
 ---
 = Restrict your pipeline traffic to specific IP ranges
 :page-description: Enable CircleCI jobs to go through a set of well-defined IP address ranges
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Enable CircleCI jobs to go through a set of well-defined IP address ranges. This can be useful if you are interacting with systems that are _not_ public, for example:
 

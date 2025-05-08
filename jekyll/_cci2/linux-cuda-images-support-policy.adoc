@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = CircleCI Linux CUDA images support policy
 :page-layout: classic-docs

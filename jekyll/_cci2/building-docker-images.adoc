@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Run Docker commands
 :page-description: How to build Docker images using the Docker execution environment

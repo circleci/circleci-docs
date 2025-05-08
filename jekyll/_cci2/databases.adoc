@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: orchestrate-trigger
 ---
 = Configure databases
 :page-description: This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.

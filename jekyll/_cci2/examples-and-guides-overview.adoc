@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: toolkit
 ---
 = Examples and guides overview
 :page-layout: classic-docs
