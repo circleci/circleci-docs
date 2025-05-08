@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-component: contributing
+component: contributors
 module: templates
 ---
 = Page title

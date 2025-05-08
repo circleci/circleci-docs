@@ -1,5 +1,5 @@
 ---
-component: contributing
+component: contributors
 module: style
 ---
 = Style and voice

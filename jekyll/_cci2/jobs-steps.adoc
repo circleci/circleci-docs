@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 component: guides
-module: orchestrate
+module: orchestrate-trigger
 ---
 = Jobs and steps
 :page-description: Description of CircleCI jobs and steps.

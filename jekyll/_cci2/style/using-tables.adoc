@@ -1,6 +1,6 @@
 ---
 toc: false
-component: contributing
+component: contributors
 module: style
 ---
 = Using tables
