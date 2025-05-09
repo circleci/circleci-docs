@@ -54,13 +54,13 @@ TIP: You can also use this method to trigger one pipeline from another within th
 
 When a change is made to Project A, we want the full Project A configuration to be run, and then the Project B pipeline should be triggered. To achieve this, follow these steps:
 
-==== 1. Set up a custom webhook for Project B
+==== 1. Set up a custom webhook trigger in Project B
 
 Navigate to Project B in the CircleCI web app and set up a custom webhook by following these steps:
 
 include::../_includes/partials/pipelines-and-triggers/custom-webhook-setup.adoc[]
 
-==== 2. Configure Project A to trigger Project B
+==== 2. Configure Project A to trigger a pipeline in Project B
 
 Navigate to Project A in the CircleCI web app and set up an environment variable. The value of the environment variable will be the secret from the custom webhook you just set up for Project B.
 
