@@ -10,14 +10,13 @@ contentTags:
 :icons: font
 :experimental:
 
-A webhook allows you to connect a platform (for example, CircleCI, an API you create yourself, or a third party service) to a stream of future _events_.
 
 Setting up an **outbound webhook** on CircleCI enables your third party service to receive information (referred to as _events_) from CircleCI, as they happen. This can help you avoid polling the API or manually checking the CircleCI web application for desired information.
 
 === Introduction
 Use outbound webhooks to integrate your CircleCI builds with external services.
 
-For example, you could use <<outbound-webhooks>> to:
+For example, you could use outbound webhooks to:
 
 * Build a custom dashboard to visualize or analyze workflow/job events.
 * Send data to incident management tools (such as link:https://www.pagerduty.com[PagerDuty]).
