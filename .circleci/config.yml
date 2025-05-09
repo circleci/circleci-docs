@@ -154,9 +154,6 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
-      - node/install:
-          install-yarn: true
-          node-version: '18.17.0'
       - run:
           name: "Create landing folder for API doc output"
           command: |
