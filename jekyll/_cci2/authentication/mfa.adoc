@@ -69,3 +69,25 @@ It is also possible to intentionally regenerate your MFA recovery code. To do th
 image::../../img/docs/authentication/mfa-regenerate-recovery-code.png[Password and authentication page with regenerate recovery code button]
 
 image::../../img/docs/authentication/mfa-display-recovery-code.png[Password and authentication page displaying new recovery code]
+
+[#faqs]
+== FAQs
+
+=== I have lost access to the device which has my authenticator app. What should I do now?
+
+We strongly recommend that you save your recovery code somewhere secure, for this reason. If you have lost access to your second authentication factor,
+you can use the recovery code to authenticate. Then you can add a new MFA factor and delete the one which you can no longer access.
+
+=== I have a new phone and don't want to lose my MFA factor. What should I do?
+
+If you have a new phone or MFA device, check the documentation of the authenticator app you are using for advice on how to transfer codes. Many
+authenticator apps support transferring codes to a new device.
+
+=== Can I use the same authenticator app for multiple accounts?
+
+Yes, most authenticator apps support multiple accounts. You should check the documentation of your authenticator application to confirm.
+
+=== My authenticator codes have stopped working when I try to use them. What should I do?
+
+If your authenticator codes are not working, this can be an indicator that your authenticator app is out of sync. First check that the time on your device is up-to-date.
+If the authenticator app you are using does not automatically sync time, check whether there is a setting to re-sync it. If you continue to have issues and are unable to use the OTP to authenticate, you may use your recovery code to authenticate instead. You can then remove and re-add the MFA factor.
