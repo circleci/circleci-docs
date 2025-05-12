@@ -505,6 +505,45 @@ gem 'minitest-ci'
      path: test/reports
 ```
 
+[#configure-a-job-running-codeception-tests]
+=== Configure a job running Codeception tests
+
+Codeception doesn't support providing paths to multiple files in a single `codecept run` command execution directly. We can circumvent this by creating a dynamic group. Add the following to your `codeception.yml` file:
+
+[,yml]
+----
+groups:
+    circleci: tests/_output/circleci
+----
+
+In your `.circleci/config.yml` file, we can use `circleci tests glob` to get the Cest files from the path we need. `circleci tests run` will then sift through the Cest files and put the necessary ones into `tests/_output/circleci` file. Before running the tests with the `circleci` group, we ensure the `tests/_output/circleci` file exists. The `--xml` option is required for the rerun tests feature to work. The `--html` option is optional, but useful for easy debugging through artifacts.
+
+[,yml]
+----
+jobs:
+  my_test_job:
+    parallelism: 2
+    docker:
+      - image: codeception/codeception:5.1.2
+    steps:
+      - checkout
+      - run:
+          name: Run the acceptance tests
+          command: |
+            circleci tests glob ${CIRCLE_WORKING_DIRECTORY}/tests/Acceptance/**/*Cest.php | circleci tests run --command="xargs -I{} echo {} >> tests/_output/circleci" --verbose --split-by=timings
+            if [ -f tests/_output/circleci ]; then
+              codecept run -g circleci --xml --html
+            else
+              exit 0
+            fi
+      - store_test_results:
+          name: Store test results (junit xml file).
+          path: tests/_output
+      - store_artifacts:
+          name: Store test results (html and image files).
+          path: tests/_output
+----
+
 [#output-test-files-only]
 === Output test files only
 
